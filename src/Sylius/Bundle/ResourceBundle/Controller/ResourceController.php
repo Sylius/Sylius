@@ -133,6 +133,20 @@ class ResourceController extends FOSRestController
 
         $repository = $this->getRepository();
 
+        if ($this->config->hasFilterForm()) {
+            $defaults = $this->config->getFilterFormDefaults();
+            $filterForm = $this->getFilterForm($defaults, $this->config->getFilterFormOptions());
+            $filterForm->handleRequest($request);
+            if (!$filterForm->isSubmitted() && !empty($defaults)) {
+                $filterForm->submit($defaults);
+            }
+            if ($filterForm->isValid()) {
+                $criteria = array_merge($criteria, $filterForm->getData());
+            } elseif ($this->config->isApiRequest()) {
+                return $this->handleView($this->view($filterForm, 400));
+            }
+        }
+
         if ($this->config->isPaginated()) {
             $resources = $this->resourceResolver->getResource(
                 $repository,
@@ -159,12 +173,18 @@ class ResourceController extends FOSRestController
             );
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData($resources)
-        ;
+        $view = $this->view()
+                     ->setTemplate($this->config->getTemplate('index.html'));
+        if ($this->config->isApiRequest()) {
+            $view->setTemplateVar($this->config->getPluralResourceName())
+                 ->setData($resources);
+        } else {
+            $data = array($this->config->getPluralResourceName() => $resources);
+            if ($this->config->hasFilterForm()) {
+                $data['form'] = $filterForm->createView();
+            }
+            $view->setData($data);
+        }
 
         return $this->handleView($view);
     }
@@ -403,6 +423,29 @@ class ResourceController extends FOSRestController
         }
 
         return $this->createForm($type, $resource);
+    }
+
+    /**
+     * @param array $data
+     * @param array $options
+     *
+     * @return FormInterface
+     */
+    public function getFilterForm(array $data = null, array $options = array())
+    {
+        return $this->container->get('form.factory')->createNamed(
+            'criteria',
+            $this->config->getFilterFormType(),
+            $data,
+            array_merge($options, array(
+                'method' => 'GET',
+                'action' => $this->generateUrl(
+                    $this->config->getRedirectRoute('index'),
+                    $this->config->getRedirectParameters()
+                ),
+                'csrf_protection' => false
+            ))
+        );
     }
 
     /**

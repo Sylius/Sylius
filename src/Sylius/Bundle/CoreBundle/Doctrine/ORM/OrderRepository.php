@@ -139,13 +139,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         if (!empty($criteria['totalFrom'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte('o.total', ':totalFrom'))
-                ->setParameter('totalFrom', $criteria['totalFrom'] * 100)
+                ->setParameter('totalFrom', $criteria['totalFrom'])
             ;
         }
         if (!empty($criteria['totalTo'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('o.total', ':totalTo'))
-                ->setParameter('totalTo', $criteria['totalTo'] * 100)
+                ->setParameter('totalTo', $criteria['totalTo'])
             ;
         }
         if (!empty($criteria['createdAtFrom'])) {
@@ -371,6 +371,20 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->fetchAll();
     }
 
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
+            ->andWhere($this->getAlias().'.state = :state')
+            ->setParameter('expiresAt', $expiresAt)
+            ->setParameter('state', $state)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     protected function getQueryBuilderBetweenDatesGroupByDate(\DateTime $from, \DateTime $to, $groupBy = 'Date(date)')
     {
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
@@ -384,20 +398,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->groupBy($groupBy)
             ->orderBy($groupBy)
         ;
-    }
-
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
-    {
-        $queryBuilder = $this->getQueryBuilder();
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
-            ->andWhere($this->getAlias().'.state = :state')
-            ->setParameter('expiresAt', $expiresAt)
-            ->setParameter('state', $state)
-        ;
-
-        return $queryBuilder->getQuery()->getResult();
     }
 
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
