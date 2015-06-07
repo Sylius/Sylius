@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class HomepageController extends Controller
+class HomepageController extends WebController
 {
     /**
      * Store front page.
@@ -28,6 +28,6 @@ class HomepageController extends Controller
      */
     public function mainAction()
     {
-        return $this->render('SyliusWebBundle:Frontend/Homepage:main.html.twig');
+        return $this->render($this->getTemplate('frontend_homepage'));
     }
 }

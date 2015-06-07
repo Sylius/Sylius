@@ -26,10 +26,17 @@ class SyliusWebExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('twig.xml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        foreach ($config['templates'] as $name => $template) {
+            $container->setParameter(sprintf('sylius.template.%s', $name), $template);
+        }
     }
 }

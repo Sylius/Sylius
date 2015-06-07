@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\SecurityContext;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SecurityController extends Controller
+class SecurityController extends WebController
 {
     /**
      * Target action for _switch_user=_exit, redirects admin back to impersonated user
@@ -48,7 +48,9 @@ class SecurityController extends Controller
             throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));
         }
 
-        return $this->redirect($this->generateUrl('sylius_backend_customer_show', array('id' => $user->getCustomer()->getId())));
+        return $this->redirect(
+            $this->generateUrl('sylius_backend_customer_show', array('id' => $user->getCustomer()->getId()))
+        );
     }
 
     /**
@@ -79,7 +81,7 @@ class SecurityController extends Controller
             ->generateCsrfToken('authenticate')
         ;
 
-        return $this->render('SyliusWebBundle:Backend/Security:login.html.twig', array(
+        return $this->render($this->getTemplate('backend_login'), array(
             'last_username' => $lastUsername,
             'error'         => $error,
             'token'         => $csrfToken,

@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Backend dashboard controller.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DashboardController extends Controller
+class DashboardController extends WebController
 {
     /**
      * Backend dashboard display action.
@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $customerRepository  = $this->get('sylius.repository.customer');
         $userRepository  = $this->get('sylius.repository.user');
 
-        return $this->render('SyliusWebBundle:Backend/Dashboard:main.html.twig', array(
+        return $this->render($this->getTemplate('backend_dashboard'), array(
             'orders_count'        => $orderRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
             'orders'              => $orderRepository->findBy(array(), array('updatedAt' => 'desc'), 5),
             'customers'           => $customerRepository->findBy(array(), array('id' => 'desc'), 5),

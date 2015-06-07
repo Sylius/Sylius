@@ -13,12 +13,14 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -27,16 +29,18 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class AddressController extends FOSRestController
+class AddressController extends WebController
 {
     /**
      * Get collection of customer's addresses.
+     *
+     * @return Response
      */
     public function indexAction()
     {
         $view = $this
             ->view()
-            ->setTemplate('SyliusWebBundle:Frontend/Account:Address/index.html.twig')
+            ->setTemplate($this->getTemplate('frontend_address_index'))
             ->setData(array(
                 'customer'  => $this->getCustomer(),
                 'addresses' => $this->getCustomer()->getAddresses(),
@@ -48,6 +52,10 @@ class AddressController extends FOSRestController
 
     /**
      * Create new customer address.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
@@ -69,7 +77,7 @@ class AddressController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate('SyliusWebBundle:Frontend/Account:Address/create.html.twig')
+            ->setTemplate($this->getTemplate('frontend_address_create'))
             ->setData(array(
                 'customer' => $this->getCustomer(),
                 'form' => $form->createView()
@@ -81,9 +89,14 @@ class AddressController extends FOSRestController
 
     /**
      * Update existing user address.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request)
     {
+        $id = $request->get('id');
         $customer = $this->getCustomer();
         $address = $this->findUserAddressOr404($id);
         $form = $this->getAddressForm($address);
@@ -100,7 +113,7 @@ class AddressController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate('SyliusWebBundle:Frontend/Account:Address/update.html.twig')
+            ->setTemplate($this->getTemplate('frontend_address_update'))
             ->setData(array(
                 'customer'    => $this->getCustomer(),
                 'address' => $address,
@@ -113,6 +126,10 @@ class AddressController extends FOSRestController
 
     /**
      * Delete user address.
+     *
+     * @param $id
+     *
+     * @return RedirectResponse
      */
     public function deleteAction($id)
     {
@@ -165,12 +182,6 @@ class AddressController extends FOSRestController
         return $this->redirectToIndex();
     }
 
-    protected function addFlash($type, $message)
-    {
-        $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
-    }
-
     /**
      * @param AddressInterface $address
      *
@@ -197,11 +208,6 @@ class AddressController extends FOSRestController
         return $this->get('sylius.repository.address');
     }
 
-    protected function redirectToIndex()
-    {
-        return $this->redirect($this->generateUrl('sylius_account_address_index'));
-    }
-
     /**
      * Accesses address or throws 403/404
      *
@@ -223,13 +229,5 @@ class AddressController extends FOSRestController
         }
 
         return $address;
-    }
-
-    /**
-     * @return CustomerInterface
-     */
-    protected function getCustomer()
-    {
-        return $this->get('sylius.context.customer')->getCustomer();
     }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -47,12 +48,33 @@ class CustomerController extends ResourceController
         }
 
         return $this->render(
-            'SyliusWebBundle:Frontend/Account:Profile/edit.html.twig',
+            $this->getTemplate('frontend_profile_edit'),
             array(
                 $this->config->getResourceName() => $customer,
                 'form'                           => $form->createView(),
             )
         );
+    }
+
+    /**
+     * Returns a template name based on bundle's configuration.
+     *
+     * @param string $name Template name
+     *
+     * @param null|string $default Optional default value if no template found with that name.
+     *
+     * @return string Template path
+     */
+    protected function getTemplate($name, $default = null) {
+        try {
+            return $this->container->getParameter(sprintf('sylius.template.%s', $name));
+        } catch (InvalidArgumentException $e) {
+            if (null !== $default) {
+                return $default;
+            }
+
+            throw $e;
+        }
     }
 
     /**
