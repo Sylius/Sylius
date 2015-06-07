@@ -158,9 +158,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
 
         foreach ($criteria as $property => $value) {
-            $queryBuilder
-                ->field($property)->equals($value)
-            ;
+            if ('' !== $value) {
+                $queryBuilder->field($property)->equals(new \MongoRegex('/' . $value . '/i'));
+            }
         }
     }
 
