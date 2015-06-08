@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
@@ -43,10 +44,13 @@ class TaxonomySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_calls_translation_to_string(TaxonomyTranslation $translation)
+    function it_calls_translation_to_string(TaxonomyTranslation $translation, Taxon $root)
     {
+        $this->setRoot($root);
+
         $translation->getLocale()->willReturn('en_US');
         $translation->setTranslatable($this)->shouldBeCalled();
+        $translation->getName()->shouldBeCalled();
 
         $this->addTranslation($translation);
         $translation->__toString()->shouldBeCalled();
@@ -65,13 +69,16 @@ class TaxonomySpec extends ObjectBehavior
         $this->getRoot()->shouldReturn($taxon);
     }
 
-    function it_is_unnamed_by_default()
+    function it_is_unnamed_by_default(Taxon $root)
     {
+        $this->setRoot($root);
+
         $this->getName()->shouldReturn(null);
     }
 
     function its_name_is_mutable(Taxon $taxon)
     {
+        $taxon->setName(null)->shouldBeCalled();
         $taxon->setName('Brand')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
 
@@ -86,6 +93,7 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_also_sets_name_on_the_root_taxon(Taxon $taxon)
     {
+        $taxon->setName(null)->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
 
@@ -122,5 +130,18 @@ class TaxonomySpec extends ObjectBehavior
 
         $root->removeChild($taxon)->shouldBeCalled();
         $this->removeTaxon($taxon);
+    }
+
+    function it_also_sets_translation_on_root_taxon(Taxon $taxon, TaxonomyTranslation $translation)
+    {
+        $translation->getName()->willReturn('New');
+        $translation->getLocale()->shouldBeCalled();
+        $translation->setTranslatable($this)->shouldBeCalled();
+        $taxon->setName('New')->shouldBeCalled();
+        $taxon->setTaxonomy($this)->shouldBeCalled();
+
+        $this->setRoot($taxon);
+
+        $this->addTranslation($translation);
     }
 }
