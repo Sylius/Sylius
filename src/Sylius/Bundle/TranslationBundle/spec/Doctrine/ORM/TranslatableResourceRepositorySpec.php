@@ -29,7 +29,7 @@ require_once __DIR__.'/../../../../ResourceBundle/spec/Fixture/Entity/Translatab
  */
 class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
+    public function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\TranslatableFoo';
 
@@ -66,17 +66,17 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($entityManager, $class);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
     }
 
-    function it_implements_Sylius_translatable_repository_interface()
+    public function it_implements_Sylius_translatable_repository_interface()
     {
         $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
+    public function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
     {
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $localeProvider->getFallbackLocale()->willReturn('en_US');
@@ -87,7 +87,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
     }
 
-    function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
         $translatableFields = array('foo');
 
@@ -107,17 +107,17 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
             if (in_array($property, $translatableFields)) {
                 $expr
-                    ->eq('translation.'.$property, ':translation_'.$property)
+                    ->eq('translation.'.$property, ':'.$property)
                     ->shouldBeCalled()
                     ->willReturn('o.'.$property.' = :'.$value)
                 ;
 
                 $queryBuilder
-                    ->setParameter('translation_'.$property, $value)
+                    ->setParameter($property, $value)
                     ->shouldBeCalled()
                     ->willReturn($queryBuilder)
                 ;
-            }else{
+            } else {
                 $expr
                     ->eq('o.'.$property, ':'.$property)
                     ->shouldBeCalled()
@@ -153,7 +153,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
     {
         $translatableFields = array('foo');
 
@@ -173,17 +173,17 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
             if (in_array($property, $translatableFields)) {
                 $expr
-                    ->eq('translation.'.$property, ':translation_'.$property)
+                    ->eq('translation.'.$property, ':'.$property)
                     ->shouldBeCalled()
                     ->willReturn('o.'.$property.' = :'.$value)
                 ;
 
                 $queryBuilder
-                    ->setParameter('translation_'.$property, $value)
+                    ->setParameter($property, $value)
                     ->shouldBeCalled()
                     ->willReturn($queryBuilder)
                 ;
-            }else{
+            } else {
                 $expr
                     ->eq('o.'.$property, ':'.$property)
                     ->shouldBeCalled()
@@ -219,7 +219,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
     {
         $translatableFields = array('foo');
 
@@ -264,12 +264,12 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_returns_null_if_there_are_no_resources()
+    public function it_returns_null_if_there_are_no_resources()
     {
         $this->findAll()->shouldReturn(null);
     }
 
-    function it_creates_Pagerfanta_paginator()
+    public function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()

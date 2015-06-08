@@ -81,18 +81,18 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param array $criteria
-     * @param array $orderBy
+     * @param array $sorting
      * @param int   $limit
      * @param int   $offset
      *
      * @return array
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
+        $this->applySorting($queryBuilder, $sorting);
 
         if (null !== $limit) {
             $queryBuilder->setMaxResults($limit);
@@ -111,12 +111,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
+    public function createPaginator(array $criteria = array(), array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -161,22 +161,18 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
     {
-        if (null === $criteria) {
-            return;
-        }
-
         foreach ($criteria as $property => $value) {
-            $property = $this->getPropertyName($property);
+            $name = $this->getPropertyName($property);
             if (null === $value) {
-                $queryBuilder->andWhere($queryBuilder->expr()->isNull($property));
+                $queryBuilder->andWhere($queryBuilder->expr()->isNull($name));
             } elseif (is_array($value)) {
-                $queryBuilder->andWhere($queryBuilder->expr()->in($property, $value));
+                $queryBuilder->andWhere($queryBuilder->expr()->in($name, $value));
             } elseif ('' !== $value) {
                 $parameter = str_replace('.', '_', $property);
                 $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq($property, ':'.$parameter))
+                    ->andWhere($queryBuilder->expr()->eq($name, ':'.$parameter))
                     ->setParameter($parameter, $value)
                 ;
             }
@@ -187,12 +183,8 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
     {
-        if (null === $sorting) {
-            return;
-        }
-
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
                 $queryBuilder->addOrderBy($this->getPropertyName($property), $order);
@@ -214,6 +206,9 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         return $name;
     }
 
+    /**
+     * @return string
+     */
     protected function getAlias()
     {
         return 'o';

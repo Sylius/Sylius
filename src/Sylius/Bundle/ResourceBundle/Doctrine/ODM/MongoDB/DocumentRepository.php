@@ -35,7 +35,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      *
      * @return object
      */
@@ -79,19 +79,19 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param array   $criteria
-     * @param array   $orderBy
-     * @param integer $limit
-     * @param integer $offset
+     * @param array $criteria
+     * @param array $sorting
+     * @param int   $limit
+     * @param int   $offset
      *
      * @return array
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
+        $this->applySorting($queryBuilder, $sorting);
 
         if (null !== $limit) {
             $queryBuilder->limit($limit);
@@ -110,12 +110,12 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = array(), array $sortBy = null)
+    public function createPaginator(array $criteria = array(), array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sortBy);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -148,33 +148,21 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
+     * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
     {
-        if (null === $criteria) {
-            return;
-        }
-
         foreach ($criteria as $property => $value) {
-            $queryBuilder
-                ->field($property)->equals($value)
-            ;
+            $queryBuilder->field($property)->equals($value);
         }
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $sorting
+     * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
     {
-        if (null === $sorting) {
-            return;
-        }
-
         foreach ($sorting as $property => $order) {
             $queryBuilder->sort($property, $order);
         }
