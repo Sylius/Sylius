@@ -32,7 +32,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
     }
 
@@ -104,7 +104,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
         $optionTranslationClasses = $optionClasses['translation'];
         $optionValueClasses = $config[$optionValueAlias];
 
-        $variantFormType = new Definition($variantClasses['form']);
+        $variantFormType = new Definition($variantClasses['form']['default']);
         $variantFormType
             ->setArguments(array($variantClasses['model'], '%sylius.validation_group.'.$variantAlias.'%', $variable))
             ->addTag('form.type', array('alias' => 'sylius_'.$variantAlias))
@@ -128,7 +128,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$variantAlias.'_match', $variantMatchFormType);
 
-        $optionFormType = new Definition($optionClasses['form']);
+        $optionFormType = new Definition($optionClasses['form']['default']);
         $optionFormType
             ->setArguments(array($optionClasses['model'], '%sylius.validation_group.'.$optionAlias.'%', $variable))
             ->addTag('form.type', array('alias' => 'sylius_'.$optionAlias))
@@ -156,7 +156,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$optionAlias.'_choice', $optionChoiceFormType);
 
-        $optionValueFormType = new Definition($optionValueClasses['form']);
+        $optionValueFormType = new Definition($optionValueClasses['form']['default']);
         $optionValueFormType
             ->setArguments(array($optionValueClasses['model'], '%sylius.validation_group.'.$optionValueAlias.'%', $variable))
             ->addTag('form.type', array('alias' => 'sylius_'.$optionValueAlias))
