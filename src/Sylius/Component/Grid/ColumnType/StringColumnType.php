@@ -26,7 +26,7 @@ class StringColumnType extends AbstractColumnType
     {
         $value = $this->getPropertyAccessor()->getValue($data, isset($options['path']) ? $options['path'] : $name);
 
-        return $value;
+        return is_string($value)  ? htmlspecialchars($value) : $value;
     }
 
     /**
