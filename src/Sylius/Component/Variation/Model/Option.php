@@ -216,12 +216,4 @@ class Option extends AbstractTranslatable implements OptionInterface
 
         return $this;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }
