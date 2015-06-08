@@ -21,11 +21,4 @@ use Sylius\Component\Archetype\Model\Archetype as BaseArchetype;
  */
 class Archetype extends BaseArchetype implements ArchetypeInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }

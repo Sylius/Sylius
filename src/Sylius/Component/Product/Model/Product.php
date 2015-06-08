@@ -555,12 +555,4 @@ class Product extends AbstractTranslatable implements ProductInterface
 
         return $this;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }
