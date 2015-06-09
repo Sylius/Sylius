@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\VariationBundle\Form\EventListener\BuildVariantFormListener;
+use Sylius\Bundle\VariationBundle\Form\EventListener\BuildVariantFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -57,7 +57,7 @@ class VariantType extends AbstractResourceType
         ;
 
         if (!$options['master']) {
-            $builder->addEventSubscriber(new BuildVariantFormListener($this->variableName, $builder->getFormFactory()));
+            $builder->addEventSubscriber(new BuildVariantFormSubscriber($this->variableName, $builder->getFormFactory()));
         }
     }
 

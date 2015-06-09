@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildVariantFormListener implements EventSubscriberInterface
+class BuildVariantFormSubscriber implements EventSubscriberInterface
 {
     /**
      * Variable object name.
@@ -77,7 +77,7 @@ class BuildVariantFormListener implements EventSubscriberInterface
         // If the object has options, lets add this configuration field.
         if ($variable->hasOptions()) {
             $form->add($this->factory->createNamed('options', sprintf('sylius_%s_option_value_collection', $this->variableName), $variant->getOptions(), array(
-                'options'         => $variable->getOptions(),
+                'options' => $variable->getOptions(),
                 'auto_initialize' => false
             )));
         }
