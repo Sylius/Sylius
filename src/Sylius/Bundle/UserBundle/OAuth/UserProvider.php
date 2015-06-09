@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProviderAbstract as BaseUserProvider;
+use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;

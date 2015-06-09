@@ -27,4 +27,4 @@ assetic:
 
 doctrine:
     dbal:
-        dbname: %sylius.database.name%_test
+        dbname: %sylius.database.name%_dev

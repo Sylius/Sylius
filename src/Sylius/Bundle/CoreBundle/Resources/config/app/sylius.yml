@@ -100,7 +100,8 @@ sylius_variation:
             variant:
                 model: Sylius\Component\Core\Model\ProductVariant
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
-                form: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_taxation:
     classes:

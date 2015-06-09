@@ -45,7 +45,7 @@
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
-        <parameter key="sylius.listener.user_last_login.class">Sylius\Bundle\UserBundle\EventListener\UserLastLoginListener</parameter>
+        <parameter key="sylius.listener.user_last_login.class">Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber</parameter>
         <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
