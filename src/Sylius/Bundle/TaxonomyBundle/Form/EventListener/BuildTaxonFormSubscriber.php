@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildTaxonFormListener implements EventSubscriberInterface
+class BuildTaxonFormSubscriber implements EventSubscriberInterface
 {
     /**
      * Form factory.
@@ -48,7 +48,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postBind'
+            FormEvents::POST_SUBMIT  => 'postSubmit'
         );
     }
 
@@ -80,7 +80,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function postBind(FormEvent $event)
+    public function postSubmit(FormEvent $event)
     {
         $taxon = $event->getData();
 
