@@ -29,7 +29,7 @@ class VariantChoiceType extends AbstractType
 
     public function __construct($variableName)
     {
-      $this->variableName = $variableName;
+        $this->variableName = $variableName;
     }
 
     /**
@@ -55,13 +55,13 @@ class VariantChoiceType extends AbstractType
             ->setDefaults(array(
                 'multiple'    => false,
                 'expanded'    => true,
-                'choice_list' => $choiceList
+                'choice_list' => $choiceList,
             ))
             ->setRequired(array(
-                'variable'
+                'variable',
             ))
             ->setAllowedTypes(array(
-                'variable' => array('Sylius\Component\Variation\Model\VariableInterface')
+                'variable' => array('Sylius\Component\Variation\Model\VariableInterface'),
             ))
         ;
     }

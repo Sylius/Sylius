@@ -49,7 +49,7 @@ class OptionValueType extends AbstractResourceType
     {
         $builder
             ->add('value', 'text', array(
-                'label' => 'sylius.form.option_value.value'
+                'label' => 'sylius.form.option_value.value',
             ))
         ;
     }

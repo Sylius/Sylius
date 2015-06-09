@@ -29,7 +29,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $variables;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $variables
      */
@@ -44,7 +44,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'loadClassMetadata'
+            'loadClassMetadata',
         );
     }
 
@@ -76,7 +76,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'fieldName' => 'values',
                 'targetEntity' => $class['option_value']['model'],
                 'mappedBy' => 'option',
-                'cascade' => array('all')
+                'cascade' => array('all'),
             );
 
             $metadata->mapOneToMany($mapping);
@@ -101,8 +101,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'name' => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
+                    'onDelete' => 'CASCADE',
+                )),
             );
 
             $metadata->mapManyToOne($mapping);
@@ -127,8 +127,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'name'                 => $variable.'_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
+                    'onDelete'             => 'CASCADE',
+                )),
             ));
 
             $metadata->mapManyToMany(array(
@@ -142,16 +142,16 @@ class LoadMetadataSubscriber implements EventSubscriber
                         'referencedColumnName' => 'id',
                         'unique'               => false,
                         'nullable'             => false,
-                        'onDelete'             => 'CASCADE'
+                        'onDelete'             => 'CASCADE',
                     )),
                     'inverseJoinColumns' => array(array(
                         'name'                 => 'option_value_id',
                         'referencedColumnName' => 'id',
                         'unique'               => false,
                         'nullable'             => false,
-                        'onDelete'             => 'CASCADE'
-                    ))
-                )
+                        'onDelete'             => 'CASCADE',
+                    )),
+                ),
             ));
         }
     }
