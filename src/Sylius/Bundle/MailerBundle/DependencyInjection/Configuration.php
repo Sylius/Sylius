@@ -107,6 +107,7 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @param ArrayNodeDefinition $node
+     *
      * @return ArrayNodeDefinition
      */
     protected function addEmailsSection(ArrayNodeDefinition $node)
