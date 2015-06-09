@@ -31,7 +31,7 @@ class TaxonType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_taxon_translation',
-                'label'    => 'sylius.form.taxon.name'
+                'label'    => 'sylius.form.taxon.name',
             ))
             ->addEventSubscriber(new BuildTaxonFormSubscriber($builder->getFormFactory()))
         ;

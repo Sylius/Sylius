@@ -48,7 +48,7 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
+            FormEvents::POST_SUBMIT  => 'postSubmit',
         );
     }
 
@@ -92,7 +92,7 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Get the closure to filter taxon collection
+     * Get the closure to filter taxon collection.
      *
      * @param TaxonInterface $taxon
      *
