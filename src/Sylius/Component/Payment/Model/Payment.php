@@ -102,7 +102,7 @@ class Payment implements PaymentInterface
      */
     public function getMethod()
     {
-      return $this->method;
+        return $this->method;
     }
 
     /**

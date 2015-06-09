@@ -146,6 +146,10 @@ sylius_payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
+        payment_method:
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
+            form:
+                choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
         dummy: Test
         offline: Offline
