@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildPriceableFormListenerSpec extends ObjectBehavior
+class BuildPriceableFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $calculatorRegistry,
@@ -36,7 +36,7 @@ class BuildPriceableFormListenerSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormListener');
+        $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber');
     }
 
     function it_should_be_event_subscriber()
