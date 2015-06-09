@@ -59,13 +59,13 @@ class OptionValueChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
-                'choice_list' => $choiceList
+                'choice_list' => $choiceList,
             ))
             ->setRequired(array(
-                'option'
+                'option',
             ))
             ->addAllowedTypes(array(
-                'option' => 'Sylius\Component\Variation\Model\OptionInterface'
+                'option' => 'Sylius\Component\Variation\Model\OptionInterface',
             ))
         ;
     }

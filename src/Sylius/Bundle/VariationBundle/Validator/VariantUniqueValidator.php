@@ -58,7 +58,7 @@ class VariantUniqueValidator extends ConstraintValidator
 
         if (null !== $conflictualVariant && $conflictualVariant !== $variant) {
             $this->context->addViolationAt($constraint->property, $constraint->message, array(
-                '%property%' => $constraint->property
+                '%property%' => $constraint->property,
             ));
         }
     }

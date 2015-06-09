@@ -145,7 +145,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
         $container->setDefinition('sylius.form.type.'.$optionTranslationAlias, $optionTranslationFormType);
 
         $choiceTypeClasses = array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\VariationBundle\Form\Type\OptionEntityChoiceType'
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\VariationBundle\Form\Type\OptionEntityChoiceType',
         );
 
         $optionChoiceFormType = new Definition($choiceTypeClasses[$driver]);

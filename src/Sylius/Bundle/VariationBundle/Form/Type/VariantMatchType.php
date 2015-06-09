@@ -50,7 +50,7 @@ class VariantMatchType extends AbstractType
             $builder->add(Urlizer::urlize($option->getName()), sprintf('sylius_%s_option_value_choice', $this->variableName), array(
                 'label'         => $option->getPresentation(),
                 'option'        => $option,
-                'property_path' => '['.$i.']'
+                'property_path' => '['.$i.']',
             ));
         }
 
@@ -64,10 +64,10 @@ class VariantMatchType extends AbstractType
     {
         $resolver
             ->setRequired(array(
-                'variable'
+                'variable',
             ))
             ->setAllowedTypes(array(
-                'variable' => 'Sylius\Component\Variation\Model\VariableInterface'
+                'variable' => 'Sylius\Component\Variation\Model\VariableInterface',
             ))
         ;
     }

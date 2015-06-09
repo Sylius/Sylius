@@ -78,7 +78,7 @@ class BuildVariantFormSubscriber implements EventSubscriberInterface
         if ($variable->hasOptions()) {
             $form->add($this->factory->createNamed('options', sprintf('sylius_%s_option_value_collection', $this->variableName), $variant->getOptions(), array(
                 'options' => $variable->getOptions(),
-                'auto_initialize' => false
+                'auto_initialize' => false,
             )));
         }
     }
