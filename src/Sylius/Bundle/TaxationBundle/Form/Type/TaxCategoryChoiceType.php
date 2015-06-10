@@ -45,7 +45,7 @@ abstract class TaxCategoryChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->className
+                'class' => $this->className,
             ))
         ;
     }

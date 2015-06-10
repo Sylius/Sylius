@@ -67,11 +67,11 @@ class TaxonSelectionType extends AbstractType
         $builder->addModelTransformer(new $options['model_transformer']['class']($taxonomies, $options['model_transformer']['save_objects']));
 
         foreach ($taxonomies as $taxonomy) {
-            /** @var $taxonomy TaxonomyInterface */
+            /* @var $taxonomy TaxonomyInterface */
             $builder->add($taxonomy->getId(), 'choice', array(
                 'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy)),
                 'multiple'    => $options['multiple'],
-                'label'       => /** @Ignore */ $taxonomy->getName()
+                'label'       => /* @Ignore */ $taxonomy->getName(),
             ));
         }
     }

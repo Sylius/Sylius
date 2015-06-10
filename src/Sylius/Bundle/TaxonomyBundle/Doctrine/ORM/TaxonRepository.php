@@ -39,7 +39,7 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
         return $this->getQueryBuilder()
             ->where('translation.permalink = :permalink')
             ->setParameter('permalink', $permalink)
-            ->orderBy($this->getAlias() . '.left')
+            ->orderBy($this->getAlias().'.left')
             ->getQuery()
             ->getOneOrNullResult();
     }
