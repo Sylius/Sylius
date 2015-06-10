@@ -109,7 +109,8 @@ sylius_taxation:
     classes:
         tax_rate:
             model: Sylius\Component\Core\Model\TaxRate
-            form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
     classes:
