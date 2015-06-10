@@ -52,7 +52,7 @@ class FlatRateConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
         ;
     }
@@ -64,7 +64,7 @@ class FlatRateConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => null,
+                'data_class' => null,
                 'validation_groups' => $this->validationGroups,
             ))
         ;

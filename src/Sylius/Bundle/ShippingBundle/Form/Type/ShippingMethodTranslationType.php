@@ -28,7 +28,7 @@ class ShippingMethodTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.shipping_method.name'
+                'label' => 'sylius.form.shipping_method.name',
             ))
         ;
     }

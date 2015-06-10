@@ -52,21 +52,21 @@ class FlexibleRateConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
             ->add('additional_item_cost', 'sylius_money', array(
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_cost',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
             ->add('additional_item_limit', 'integer', array(
                 'required' => false,
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_limit',
                 'constraints' => array(
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
         ;
     }
@@ -78,7 +78,7 @@ class FlexibleRateConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => null,
+                'data_class' => null,
                 'validation_groups' => $this->validationGroups,
             ))
         ;

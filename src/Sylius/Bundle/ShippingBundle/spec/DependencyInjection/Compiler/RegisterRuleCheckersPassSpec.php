@@ -14,7 +14,7 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass');
     }
 
-    function it_is_a_coplier_pass()
+    function it_is_a_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }

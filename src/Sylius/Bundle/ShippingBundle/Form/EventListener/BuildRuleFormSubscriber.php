@@ -49,7 +49,7 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT   => 'preSubmit',
         );
     }
 
@@ -86,7 +86,7 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormInterface $form
      * @param $ruleType
-     * @param array $data
+     * @param array         $data
      */
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
     {

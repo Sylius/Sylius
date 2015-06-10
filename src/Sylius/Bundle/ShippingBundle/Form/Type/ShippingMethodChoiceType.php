@@ -57,8 +57,11 @@ class ShippingMethodChoiceType extends AbstractType
      * @param CalculatorRegistryInterface $calculators
      * @param Repositoryinterface         $repository
      */
-    public function __construct(MethodsResolverInterface $resolver, CalculatorRegistryInterface $calculators, RepositoryInterface $repository)
-    {
+    public function __construct(
+        MethodsResolverInterface $resolver,
+        CalculatorRegistryInterface $calculators,
+        RepositoryInterface $repository
+    ) {
         $this->resolver = $resolver;
         $this->calculators = $calculators;
         $this->repository = $repository;
@@ -95,14 +98,14 @@ class ShippingMethodChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList,
-                'criteria'    => array()
+                'criteria'    => array(),
             ))
             ->setOptional(array(
                 'subject',
             ))
             ->setAllowedTypes(array(
                 'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-                'criteria' => array('array')
+                'criteria' => array('array'),
             ))
         ;
     }
