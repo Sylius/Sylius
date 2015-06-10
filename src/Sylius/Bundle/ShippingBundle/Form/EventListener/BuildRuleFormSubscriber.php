@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class BuildRuleFormListener implements EventSubscriberInterface
+class BuildRuleFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var RuleCheckerRegistryInterface
@@ -42,14 +42,20 @@ class BuildRuleFormListener implements EventSubscriberInterface
         $this->factory = $factory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preSubmit'
         );
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function preSetData(FormEvent $event)
     {
         $rule = $event->getData();
@@ -62,7 +68,10 @@ class BuildRuleFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($form, $rule->getType(), $rule->getConfiguration());
     }
 
-    public function preBind(FormEvent $event)
+    /**
+     * @param FormEvent $event
+     */
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
         $form = $event->getForm();
@@ -74,6 +83,11 @@ class BuildRuleFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($form, $data['type']);
     }
 
+    /**
+     * @param FormInterface $form
+     * @param $ruleType
+     * @param array $data
+     */
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
     {
         $checker = $this->checkerRegistry->getChecker($ruleType);

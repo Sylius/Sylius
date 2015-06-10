@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildShippingMethodFormListener implements EventSubscriberInterface
+class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
 {
     /**
      * It hold registry of all calculators.
@@ -59,7 +59,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preSubmit'
         );
     }
 
@@ -84,7 +84,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
 
