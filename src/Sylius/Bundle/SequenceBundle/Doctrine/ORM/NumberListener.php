@@ -17,6 +17,7 @@ use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 use Sylius\Component\Sequence\Registry\NonExistingGeneratorException;
 use Sylius\Component\Sequence\SyliusSequenceEvents;
@@ -24,7 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Doctrine event listener
+ * Doctrine event listener.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -80,7 +81,7 @@ class NumberListener
 
     /**
      * Enable this listener for the given entity
-     * This will apply the number generator when this entity will be flushed
+     * This will apply the number generator when this entity will be flushed.
      *
      * @param SequenceSubjectInterface $subject
      */
@@ -95,7 +96,7 @@ class NumberListener
     }
 
     /**
-     * Apply generator to all enabled entities
+     * Apply generator to all enabled entities.
      *
      * @param PreFlushEventArgs $args
      *
@@ -130,6 +131,12 @@ class NumberListener
         }
     }
 
+    /**
+     * @param string                 $type
+     * @param EntityManagerInterface $em
+     *
+     * @return SequenceInterface
+     */
     protected function getSequence($type, EntityManagerInterface $em)
     {
         if (isset($this->sequences[$type])) {
