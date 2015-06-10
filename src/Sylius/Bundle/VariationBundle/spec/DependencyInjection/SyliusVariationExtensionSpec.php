@@ -43,14 +43,6 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
             )
         );
 
-        $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
-        $variantFormType
-            ->setArguments(array('Some\App\Product\Entity\ProductVariant', '%sylius.validation_group.product_variant%', 'product'))
-            ->addTag('form.type', array('alias' => 'sylius_product_variant'))
-        ;
-
-        $container->setDefinition('sylius.form.type.product_variant', $variantFormType)->shouldBeCalled();
-
         $variantChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantChoiceType');
         $variantChoiceFormType
             ->setArguments(array('product'))
@@ -66,48 +58,6 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
         ;
 
         $container->setDefinition('sylius.form.type.product_variant_match', $variantMatchFormType)->shouldBeCalled();
-
-        $optionFormType = new Definition('Some\App\Product\Form\OptionType');
-        $optionFormType
-            ->setArguments(array('Some\App\Product\Entity\Option',
-                '%sylius.validation_group.product_option%',
-                'product'
-            ))
-            ->addTag('form.type', array('alias' => 'sylius_product_option'))
-        ;
-
-        $container->setDefinition('sylius.form.type.product_option', $optionFormType)->shouldBeCalled();
-
-        $optionTranslationFormType = new Definition('Some\App\Product\Form\OptionTranslationType');
-        $optionTranslationFormType
-            ->setArguments(array('Some\App\Product\Entity\OptionTranslation',
-                '%sylius.validation_group.product_option_translation%',
-                'product'
-            ))
-            ->addTag('form.type', array('alias' => 'sylius_product_option_translation'))
-        ;
-
-        $container->setDefinition('sylius.form.type.product_option_translation', $optionTranslationFormType)->shouldBeCalled();
-
-        $optionChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionEntityChoiceType');
-        $optionChoiceFormType
-            ->setArguments(array('product', 'Some\App\Product\Entity\Option'))
-            ->addTag('form.type', array('alias' => 'sylius_product_option_choice'));
-        ;
-
-        $container->setDefinition('sylius.form.type.product_option_choice', $optionChoiceFormType)->shouldBeCalled();
-
-        $optionValueFormType = new Definition('Some\App\Product\Form\OptionValueType');
-        $optionValueFormType
-            ->setArguments(array(
-                'Some\App\Product\Entity\OptionValue',
-                '%sylius.validation_group.product_option_value%',
-                'product'
-            ))
-            ->addTag('form.type', array('alias' => 'sylius_product_option_value'))
-        ;
-
-        $container->setDefinition('sylius.form.type.product_option_value', $optionValueFormType)->shouldBeCalled();
 
         $optionValueChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionValueChoiceType');
         $optionValueChoiceFormType
@@ -205,18 +155,21 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                             'default' => 'Some\App\Product\Form\OptionTranslationType',
                         )
                     ),
+                    'variable' => 'product',
                 ),
                 'product_option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
                     'form' =>  array(
                         'default' => 'Some\App\Product\Form\OptionValueType',
                     ),
+                    'variable' => 'product',
                 ),
                 'product_variant' => array(
                     'model' => 'Some\App\Product\Entity\ProductVariant',
                     'form' => array(
                         'default' =>  'Some\App\Product\Form\ProductVariantType',
                     ),
+                    'variable' => 'product',
                 ),
             ),
             'validation_groups' => array(

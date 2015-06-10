@@ -28,7 +28,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder, VariableInterface $variable, OptionInterface $option)
     {
-        $variable->getOptions()->shouldBeCalled()->willReturn([$option]);
+        $variable->getOptions()->shouldBeCalled()->willReturn(array($option));
         $option->getName()->shouldBeCalled()->willReturn('option_name');
         $option->getPresentation()->shouldBeCalled()->willReturn('option_presentation');
 

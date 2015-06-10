@@ -15,7 +15,6 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository;
-use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -26,8 +25,13 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    function let(CustomerRepository $customerRepository, UserRepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
-    {
+    function let(
+        CustomerRepository $customerRepository,
+        UserRepositoryInterface $userRepository,
+        RepositoryInterface $oauthRepository,
+        ObjectManager $userManager,
+        CanonicalizerInterface $canonicalizer
+    ) {
         $this->beConstructedWith($customerRepository, $userRepository, $oauthRepository, $userManager, $canonicalizer);
     }
 

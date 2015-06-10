@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-abstract class UserProvider implements UserProviderInterface
+abstract class AbstractUserProvider implements UserProviderInterface
 {
     /**
      * @var string

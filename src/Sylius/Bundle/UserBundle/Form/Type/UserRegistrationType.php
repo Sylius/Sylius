@@ -13,7 +13,6 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

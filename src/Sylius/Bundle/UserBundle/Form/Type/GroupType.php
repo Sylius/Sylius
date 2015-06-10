@@ -24,7 +24,7 @@ class GroupType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('name', 'text', array(

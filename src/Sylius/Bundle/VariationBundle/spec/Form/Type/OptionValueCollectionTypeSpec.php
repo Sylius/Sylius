@@ -36,7 +36,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         ))->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'options' => [$option]
+            'options' => array($option)
         ));
     }
 
