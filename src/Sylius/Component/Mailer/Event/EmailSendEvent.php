@@ -12,7 +12,6 @@
 namespace Sylius\Component\Mailer\Event;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -51,8 +50,7 @@ class EmailSendEvent extends Event
         EmailInterface $email,
         array $data,
         array $recipients = array()
-    )
-    {
+    ) {
         $this->message = $message;
         $this->email = $email;
         $this->data = $data;
