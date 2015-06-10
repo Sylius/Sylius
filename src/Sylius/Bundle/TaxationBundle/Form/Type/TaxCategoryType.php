@@ -28,11 +28,11 @@ class TaxCategoryType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.tax_category.name'
+                'label' => 'sylius.form.tax_category.name',
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.tax_category.description'
+                'label'    => 'sylius.form.tax_category.description',
             ))
         ;
     }

@@ -37,8 +37,8 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         Taxonomy $taxonomy,
         Taxon $taxon
     ) {
-        $taxonomyRepository->findAll()->shouldBeCalled()->willReturn([$taxonomy]);
-        $taxonRepository->getTaxonsAsList($taxonomy)->shouldBeCalled()->willReturn([$taxon]);
+        $taxonomyRepository->findAll()->shouldBeCalled()->willReturn(array($taxonomy));
+        $taxonRepository->getTaxonsAsList($taxonomy)->shouldBeCalled()->willReturn(array($taxon));
 
         $taxonomy->getId()->shouldBeCalled()->willreturn(12);
         $taxonomy->getName()->shouldBeCalled()->willReturn('taxonomy name');
