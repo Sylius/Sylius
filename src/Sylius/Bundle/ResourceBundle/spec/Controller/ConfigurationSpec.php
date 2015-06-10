@@ -321,7 +321,7 @@ class ConfigurationSpec extends ObjectBehavior
     {
         $sorting = array('property' => 'desc');
         $overriddenSorting = array('other_property' => 'asc');
-        $combinedSorting = array('property' => 'desc', 'other_property' => 'asc');
+        $combinedSorting = array('other_property' => 'asc', 'property' => 'desc');
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', array())->willReturn($sorting);
@@ -330,7 +330,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting()->shouldReturn($combinedSorting);
 
         $defaultSorting = array('foo' => 'bar');
-        $combinedDefaultSorting = array('property' => 'desc', 'foo' => 'bar', 'other_property' => 'asc');
+        $combinedDefaultSorting = array('other_property' => 'asc', 'property' => 'desc', 'foo' => 'bar');
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn($sorting);
