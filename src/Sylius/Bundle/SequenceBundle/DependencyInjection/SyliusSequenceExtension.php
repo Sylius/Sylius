@@ -26,7 +26,7 @@ class SyliusSequenceExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list ($config) = $this->configure(
+        list($config) = $this->configure(
             $config,
             new Configuration(),
             $container,
