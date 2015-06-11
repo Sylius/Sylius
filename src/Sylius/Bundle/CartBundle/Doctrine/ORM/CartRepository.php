@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Doctrine\ORM;
 
-use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
+use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Order\Model\OrderInterface;
 
