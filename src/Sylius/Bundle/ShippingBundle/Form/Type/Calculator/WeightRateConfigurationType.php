@@ -52,21 +52,21 @@ class WeightRateConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
             ->add('variable', 'sylius_money', array(
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
             ->add('division', 'number', array(
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.division',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
         ;
     }
@@ -78,7 +78,7 @@ class WeightRateConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => null,
+                'data_class' => null,
                 'validation_groups' => $this->validationGroups,
             ))
         ;
