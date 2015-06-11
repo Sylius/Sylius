@@ -43,7 +43,7 @@ class PermissionType extends AbstractResourceType
 
             if (null === $permission || null === $permission->getId()) {
                 $form->add('code', 'text', array(
-                    'label' => 'sylius.form.permission.code'
+                    'label' => 'sylius.form.permission.code',
                 ));
             } else {
                 $form->add('code', 'text', array(
@@ -57,7 +57,6 @@ class PermissionType extends AbstractResourceType
                 $form->remove('parent');
             }
         });
-
     }
 
     /**

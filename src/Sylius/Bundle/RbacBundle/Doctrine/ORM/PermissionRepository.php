@@ -34,7 +34,6 @@ class PermissionRepository extends EntityRepository implements PermissionReposit
             ->andWhere($queryBuilder->expr()->gt('o.left', $permission->getLeft()))
             ->getQuery()
             ->execute()
-            ;
+        ;
     }
-
 }

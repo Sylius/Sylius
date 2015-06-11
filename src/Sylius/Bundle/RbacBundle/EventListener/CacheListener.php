@@ -19,7 +19,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CacheListener 
+class CacheListener
 {
     /**
      * @var ClearableCache

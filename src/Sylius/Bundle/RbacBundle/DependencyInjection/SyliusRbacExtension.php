@@ -64,8 +64,8 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
 
         $container->prependExtensionConfig('doctrine_cache', array(
             'providers' => array(
-                'sylius_rbac' => '%sylius.cache%'
-            )
+                'sylius_rbac' => '%sylius.cache%',
+            ),
         ));
     }
 }
