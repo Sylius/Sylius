@@ -23,6 +23,9 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  */
 class TableRenderer implements RendererInterface
 {
+    /**
+     * @var EngineInterface
+     */
     private $templating;
 
     public function __construct(EngineInterface $templating)
@@ -30,6 +33,9 @@ class TableRenderer implements RendererInterface
         $this->templating = $templating;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render(ReportInterface $report, Data $data)
     {
         if (null !== $data->getData()) {
@@ -44,15 +50,18 @@ class TableRenderer implements RendererInterface
 
             return $this->templating->renderResponse($rendererConfiguration["template"], array(
                 'data' => $data,
-                'configuration' => $rendererConfiguration
+                'configuration' => $rendererConfiguration,
             ));
         }
 
         return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array(
-            'report' => $report
+            'report' => $report,
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return DefaultRenderers::TABLE;

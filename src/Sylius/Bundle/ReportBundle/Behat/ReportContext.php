@@ -15,7 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 /**
- * ReportContext for ReportBundle scenarios
+ * ReportContext for ReportBundle scenarios.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -28,24 +28,54 @@ class ReportContext extends DefaultContext
     public function thereAreReports(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('report');
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsReport($data['name'], $data['description'], $data["code"], $data['renderer'], $data["renderer_configuration"], $data["data_fetcher"], $data["data_fetcher_configuration"], false);
+            $this->thereIsReport(
+                $data['name'],
+                $data['description'],
+                $data["code"],
+                $data['renderer'],
+                $data["renderer_configuration"],
+                $data["data_fetcher"],
+                $data["data_fetcher_configuration"],
+                false
+            );
         }
 
         $manager->flush();
     }
-    
-    public function thereIsReport($name, $description, $code, $rendererType, $rendererConfiguration, $dataFetcherType, $dataFetcherConfiguration, $flush = true)
-    {
+
+    /**
+     * Create a report.
+     *
+     * @param string $name
+     * @param string $description
+     * @param string $code
+     * @param string $rendererType
+     * @param mixed  $rendererConfiguration
+     * @param string $dataFetcherType
+     * @param mixed  $dataFetcherConfiguration
+     * @param bool   $flush
+     *
+     * @return mixed
+     */
+    public function thereIsReport(
+        $name,
+        $description,
+        $code,
+        $rendererType,
+        $rendererConfiguration,
+        $dataFetcherType,
+        $dataFetcherConfiguration,
+        $flush = true
+    ) {
         $repository = $this->getRepository('report');
 
         $report = $repository->createNew();
         $report->setName($name);
         $report->setDescription($description);
         $report->setCode($code);
-        
+
         $report->setRenderer($rendererType);
         $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));
 
