@@ -25,7 +25,7 @@ use Symfony\Component\Validator\ValidatorInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Fran Moreno <franmomu@gmail.com>
  */
-class CartListenerSpec extends ObjectBehavior
+class CartSubscriberSpec extends ObjectBehavior
 {
     function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
@@ -34,7 +34,7 @@ class CartListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartListener');
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartSubscriber');
     }
 
     function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)

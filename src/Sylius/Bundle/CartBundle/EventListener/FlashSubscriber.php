@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class FlashListener implements EventSubscriberInterface
+class FlashSubscriber implements EventSubscriberInterface
 {
     /**
      * @var string[]
@@ -39,6 +39,36 @@ class FlashListener implements EventSubscriberInterface
      */
     private $translator;
 
+    /**
+     * @param SessionInterface    $session
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
+    {
+        $this->session = $session;
+        $this->translator = $translator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
+            SyliusCartEvents::CART_CLEAR_COMPLETED  => 'addSuccessFlash',
+            SyliusCartEvents::CART_SAVE_COMPLETED   => 'addSuccessFlash',
+
+            SyliusCartEvents::ITEM_ADD_COMPLETED    => 'addSuccessFlash',
+            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
+
+            SyliusCartEvents::ITEM_ADD_ERROR        => 'addErrorFlash',
+            SyliusCartEvents::ITEM_REMOVE_ERROR     => 'addErrorFlash',
+        );
+    }
+
+    /**
+     * @return $this
+     */
     public function setMessages()
     {
         $this->messages = array(
@@ -56,41 +86,31 @@ class FlashListener implements EventSubscriberInterface
     }
 
     /**
-     * @param SessionInterface    $session
-     * @param TranslatorInterface $translator
+     * @param FlashEvent $event
      */
-    public function __construct(SessionInterface $session, TranslatorInterface $translator)
-    {
-        $this->session = $session;
-        $this->translator = $translator;
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return array(
-            SyliusCartEvents::CART_CLEAR_COMPLETED  => 'addSuccessFlash',
-            SyliusCartEvents::CART_SAVE_COMPLETED   => 'addSuccessFlash',
-
-            SyliusCartEvents::ITEM_ADD_COMPLETED    => 'addSuccessFlash',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
-
-            SyliusCartEvents::ITEM_ADD_ERROR        => 'addErrorFlash',
-            SyliusCartEvents::ITEM_REMOVE_ERROR     => 'addErrorFlash',
-        );
-    }
-
     public function addErrorFlash(FlashEvent $event)
     {
         $this->addFlash('error', $event->getMessage(), $event->getName());
     }
 
+    /**
+     * @param FlashEvent $event
+     */
     public function addSuccessFlash(FlashEvent $event)
     {
         $this->addFlash('success', $event->getMessage(), $event->getName());
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     * @param string $eventName
+     */
     private function addFlash($type, $message, $eventName)
     {
-        $this->session->getBag('flashes')->add($type, $message ?: $this->translator->trans($this->messages[$eventName], array(), 'flashes'));
+        $this->session->getBag('flashes')->add(
+            $type,
+            $message ?: $this->translator->trans($this->messages[$eventName], array(), 'flashes')
+        );
     }
 }
