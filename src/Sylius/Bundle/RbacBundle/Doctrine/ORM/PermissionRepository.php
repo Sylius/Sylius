@@ -36,5 +36,4 @@ class PermissionRepository extends EntityRepository implements PermissionReposit
             ->execute()
         ;
     }
-
 }

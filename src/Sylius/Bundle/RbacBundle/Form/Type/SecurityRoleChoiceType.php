@@ -42,7 +42,7 @@ class SecurityRoleChoiceType extends AbstractType
         $resolver->setDefaults(array(
             'choices' => $this->roles,
             'multiple' => true,
-            'expanded' => true
+            'expanded' => true,
         ));
     }
 

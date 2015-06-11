@@ -13,7 +13,6 @@ namespace Sylius\Bundle\RbacBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Rbac\Authorization\TestAuthorizationChecker;
 
 class RbacContext extends DefaultContext
 {
@@ -59,7 +58,6 @@ class RbacContext extends DefaultContext
 
         $manager->flush();
     }
-
 
     /**
      * @Given there is following role hierarchy:
