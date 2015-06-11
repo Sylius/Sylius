@@ -229,6 +229,19 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
+    function it_should_return_default_page_size_if_not_allowed_paginate_size(Parameters $parameters)
+    {
+        $allowedPaginate = array(10, 20, 30);
+
+        $parameters->get('paginate', 10)->willReturn(10000);
+        $parameters->get('allowed_paginate',  Argument::any())->willReturn($allowedPaginate);
+        $this->getPaginationMaxPerPage()->shouldReturn(10);
+
+        $parameters->get('paginate', 10)->willReturn(15);
+        $parameters->get('allowed_paginate',  Argument::any())->willReturn($allowedPaginate);
+        $this->getPaginationMaxPerPage()->shouldReturn(10);
+    }
+
     function it_checks_if_the_resource_is_filterable(Parameters $parameters)
     {
         $parameters->get('filterable', Argument::any())->willReturn(true);

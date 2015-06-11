@@ -273,7 +273,12 @@ class Configuration
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->parameters->get('paginate', $this->settings['default_page_size']);
+        $paginate = (int)$this->parameters->get('paginate', $this->settings['default_page_size']);
+        $allowedPaginate = $this->parameters->get('allowed_paginate', $this->settings['allowed_paginate']);
+
+        return in_array($paginate, $allowedPaginate)
+            ? $paginate
+            : $this->settings['default_page_size'];
     }
 
     public function isFilterable()
