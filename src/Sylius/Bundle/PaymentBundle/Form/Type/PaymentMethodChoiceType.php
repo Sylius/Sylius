@@ -32,12 +32,12 @@ class PaymentMethodChoiceType extends ResourceChoiceType
         parent::setDefaultOptions($resolver);
 
         $queryBuilder = function (Options $options) {
-            $reposiotryOptions = array(
+            $repositoryOptions = array(
                 'disabled' => $options['disabled'],
             );
 
-            return function (PaymentMethodRepositoryInterface $repository) use ($reposiotryOptions) {
-                return $repository->getQueryBuidlerForChoiceType($reposiotryOptions);
+            return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
+                return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
             };
         };
 
