@@ -42,7 +42,6 @@
 
     <services>
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
-            <argument type="service" id="sylius.controller.parameters_parser" />
             <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">

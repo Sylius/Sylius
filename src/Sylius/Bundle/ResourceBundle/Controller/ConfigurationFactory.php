@@ -19,12 +19,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 class ConfigurationFactory
 {
     /**
-     * @var ParametersParser
-     */
-    protected $parametersParser;
-
-    /**
-     * Default Settings
+     * Default Settings.
      *
      * @var array
      */
@@ -33,13 +28,11 @@ class ConfigurationFactory
     /**
      * Constructor.
      *
-     * @param ParametersParser $parametersParser
-     * @param array            $settings
+     * @param array $settings
      */
-    public function __construct(ParametersParser $parametersParser, array $settings)
+    public function __construct(array $settings)
     {
         $this->settings = $settings;
-        $this->parametersParser = $parametersParser;
     }
 
     /**
@@ -55,7 +48,6 @@ class ConfigurationFactory
     public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
         return new Configuration(
-            $this->parametersParser,
             $bundlePrefix,
             $resourceName,
             $templateNamespace,
