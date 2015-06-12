@@ -201,7 +201,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return null;
+            return;
         }
 
         return '#'.$redirect['hash'];
@@ -268,12 +268,14 @@ class Configuration
 
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', $this->settings['default_page_size']);
+        return (bool) $this->getPaginationMaxPerPage();
     }
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->parameters->get('paginate', $this->settings['default_page_size']);
+        $default = $this->parameters->get('paginate', $this->settings['default_page_size']);
+
+        return $this->request->get('paginate', $default);
     }
 
     public function isFilterable()
