@@ -111,7 +111,7 @@ class RedirectHandler
 
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
-                $parameters[$key] = $this->process($value, $resource);
+                $parameters[$key] = $this->resolveResourceParameters($value, $resource);
             }
 
             if (is_string($value) && 0 === strpos($value, 'resource.')) {

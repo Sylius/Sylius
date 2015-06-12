@@ -227,7 +227,7 @@ class Configuration
      *
      * @return array
      */
-    public function getRedirectParameters($resource = null)
+    public function getRedirectParameters()
     {
         $redirect = $this->parameters->get('redirect');
 
@@ -294,7 +294,7 @@ class Configuration
             $sorting = $this->getRequestParameter('sorting');
             foreach ($defaultSorting as $key => $value) {
                 //do not override request parameters by $defaultSorting values
-                if (!isset($sorting[$key])){
+                if (!isset($sorting[$key])) {
                     $sorting[$key] = $value;
                 }
             }
