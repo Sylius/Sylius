@@ -12,12 +12,10 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractExtension;
 use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Resource system extension.
@@ -25,7 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends Extension
+class SyliusResourceExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -35,11 +33,12 @@ class SyliusResourceExtension extends Extension
         $processor = new Processor();
         $config    = $processor->processConfiguration(new Configuration(), $config);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
-        $loader->load('storage.xml');
-        $loader->load('routing.xml');
-        $loader->load('twig.xml');
+        $this->loadServiceDefinitions($container, array(
+            'services.xml',
+            'storage.xml',
+            'routing.xml',
+            'twig.xml',
+        ));
 
         $classes = isset($config['resources']) ? $config['resources'] : array();
 

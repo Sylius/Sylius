@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services',
+        'services.xml',
     );
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -20,10 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SyliusUserExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
-        'services',
-        'form',
-        'templating',
-        'twig',
+        'services.xml',
     );
 
     /**
@@ -31,7 +28,7 @@ class SyliusUserExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
