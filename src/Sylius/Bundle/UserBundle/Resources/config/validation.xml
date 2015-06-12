@@ -19,7 +19,7 @@
     <class name="Sylius\Component\User\Model\Customer">
         <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
             <option name="message">sylius.customer.email.registered</option>
-            <option name="groups">guest</option>
+            <option name="groups">sylius_guest</option>
         </constraint>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="message">sylius.customer.email.unique</option>
@@ -29,27 +29,27 @@
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.customer.first_name.not_blank</option>
-                <option name="groups">sylius</option>
+                <option name="groups">sylius_profile</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="minMessage">sylius.customer.first_name.min</option>
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.customer.first_name.max</option>
-                <option name="groups">sylius</option>
+                <option name="groups">sylius_profile</option>
             </constraint>
         </property>
         <property name="lastName">
             <constraint name="NotBlank">
                 <option name="message">sylius.customer.last_name.not_blank</option>
-                <option name="groups">sylius</option>
+                <option name="groups">sylius_profile</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="minMessage">sylius.customer.last_name.min</option>
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.customer.last_name.max</option>
-                <option name="groups">sylius</option>
+                <option name="groups">sylius_profile</option>
             </constraint>
         </property>
         <property name="email">
@@ -57,7 +57,7 @@
                 <option name="message">sylius.customer.email.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
-                    <value>guest</value>
+                    <value>sylius_guest</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -67,14 +67,14 @@
                 <option name="maxMessage">sylius.customer.email.max</option>
                 <option name="groups">
                     <value>sylius</value>
-                    <value>guest</value>
+                    <value>sylius_guest</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="message">sylius.customer.email.invalid</option>
                 <option name="groups">
                     <value>sylius</value>
-                    <value>guest</value>
+                    <value>sylius_guest</value>
                 </option>
             </constraint>
         </property>
@@ -84,8 +84,8 @@
         <property name="plainPassword">
             <constraint name="NotBlank">
                 <option name="groups">
-                    <value>registration</value>
-                    <value>user_create</value>
+                    <value>sylius_registration</value>
+                    <value>sylius_user_create</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -94,8 +94,8 @@
                 <option name="max">254</option>
                 <option name="maxMessage">sylius.user.password.max</option>
                 <option name="groups">
-                    <value>registration</value>
-                    <value>user_create</value>
+                    <value>sylius_registration</value>
+                    <value>sylius_user_create</value>
                 </option>
             </constraint>
         </property>
