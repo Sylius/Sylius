@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ReportBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Report\Renderer\RendererInterface;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Form;
@@ -24,11 +24,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class BuildReportRendererFormListenerSpec extends ObjectBehavior
+class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener');
+        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber');
     }
 
     function it_implements_data_fetcher_interface()
@@ -36,12 +36,12 @@ class BuildReportRendererFormListenerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function let(ServiceRegistryInterface $rendererRegistry, FormFactoryInterface $factory, RendererInterface $renderer)
+    function let(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
     {
-        $rendererRegistry->get('test_renderer')->willReturn($renderer);
-        $renderer->getType()->willReturn('test_type');
+        $dataFecherRegistry->get('test_data_fetcher')->willReturn($dataFetcher);
+        $dataFetcher->getType()->willReturn('test_type');
 
-        $this->beConstructedWith($rendererRegistry, $factory);
+        $this->beConstructedWith($dataFecherRegistry, $factory);
     }
 
     function it_adds_configuration_fields_in_pre_set_data(
@@ -51,15 +51,15 @@ class BuildReportRendererFormListenerSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-        $report->getRenderer()->willReturn('test_renderer');
-        $report->getRendererConfiguration()->willReturn(array());
+        $report->getDataFetcher()->willReturn('test_data_fetcher');
+        $report->getDataFetcherConfiguration()->willReturn(array());
 
         $event->getData()->willReturn($report);
         $event->getForm()->willReturn($form);
 
         $factory->createNamed(
-            'rendererConfiguration',
-            'sylius_renderer_test_type',
+            'dataFetcherConfiguration',
+            'sylius_data_fetcher_test_type',
             Argument::cetera()
         )->willReturn($field);
 
@@ -74,14 +74,14 @@ class BuildReportRendererFormListenerSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-        $data = array('renderer' => 'test_renderer');
+        $data = array('dataFetcher' => 'test_data_fetcher');
 
         $event->getData()->willReturn($data);
         $event->getForm()->willReturn($form);
 
         $factory->createNamed(
-            'rendererConfiguration',
-            'sylius_renderer_test_type',
+            'dataFetcherConfiguration',
+            'sylius_data_fetcher_test_type',
             Argument::cetera()
         )->willReturn($field);
 

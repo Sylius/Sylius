@@ -15,7 +15,7 @@ use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 
 /**
- * Abstract class to provide time periods logic
+ * Abstract class to provide time periods logic.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -25,6 +25,9 @@ abstract class TimePeriod implements DataFetcherInterface
     const PERIOD_MONTH  = 'month';
     const PERIOD_YEAR   = 'year';
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getPeriodChoices()
     {
         return array(
@@ -85,19 +88,38 @@ abstract class TimePeriod implements DataFetcherInterface
 
     /**
      * Method responsible for providing raw data to fetch.
+     * It returns the configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by).
      *
-     * @param Array configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by)
+     * @param Array
      */
     abstract protected function getData(array $configuration = array());
 
-    private function setExtraConfiguration(array &$configuration, $interval, $periodFormat, $presentationFormat, $groupBy)
-    {
+    /**
+     * @param array  $configuration
+     * @param string $interval
+     * @param string $periodFormat
+     * @param string $presentationFormat
+     * @param array  $groupBy
+     */
+    private function setExtraConfiguration(
+        array &$configuration,
+        $interval,
+        $periodFormat,
+        $presentationFormat,
+        array $groupBy
+    ) {
         $configuration['interval'] = $interval;
         $configuration['periodFormat'] = $periodFormat;
         $configuration['presentationFormat'] = $presentationFormat;
         $configuration['groupBy'] = $groupBy;
     }
 
+    /**
+     * @param array $fetched
+     * @param array $configuration
+     *
+     * @return array
+     */
     private function fillEmptyRecodrs(array $fetched, array $configuration)
     {
         $date = $configuration['start'];
