@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 class CartRepositorySpec extends ObjectBehavior
@@ -23,8 +24,13 @@ class CartRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository');
     }
 
-    function it_finds_expired_cart($em, QueryBuilder $builder, AbstractQuery $query, Expr $expr)
-    {
+    function it_finds_expired_cart(
+        $em,
+        QueryBuilder $builder,
+        AbstractQuery $query,
+        Expr $expr,
+        CartInterface $cart
+    ) {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
 
         $builder->expr()->shouldBeCalled()->willReturn($expr);
@@ -41,8 +47,8 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getResult()->shouldBeCalled();
+        $query->getResult()->shouldBeCalled()->willReturn(array($cart));
 
-        $this->findExpiredCarts();
+        $this->findExpiredCarts()->shouldReturn(array($cart));
     }
 }
