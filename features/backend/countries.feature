@@ -12,10 +12,10 @@ Feature: Countries and provinces
         And there is default channel configured
         And I am logged in as administrator
         And there are following countries:
-            | name    | provinces                       |
-            | France  | Lyon, Toulouse, Rennes, Nancy   |
-            | China   |                                 |
-            | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
+            | isoName | provinces                       |
+            | FR      | Lyon, Toulouse, Rennes, Nancy   |
+            | CN      |                                 |
+            | UA      | Kiev, Odessa, Cherkasy, Kharkiv |
 
     Scenario: Seeing index of all countries
         Given I am on the dashboard page
@@ -46,23 +46,9 @@ Feature: Countries and provinces
           And I follow "Create country"
          Then I should be on the country creation page
 
-    Scenario: Submitting form without name filled
-        Given I am on the country creation page
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country name."
-
-    Scenario: Country ISO code is required
-        Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country ISO code."
-
     Scenario: Creating new country
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "PL" from "ISO name"
           And I press "Create"
          Then I should be on the page of country "Poland"
           And I should see "Country has been successfully created."
@@ -70,8 +56,7 @@ Feature: Countries and provinces
     @javascript
     Scenario: Creating new country with provinces
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "PL" from "ISO name"
           And I click "Add province"
           And I click "Add province"
           And I fill in the 1st province with "Lubusz"
@@ -82,13 +67,13 @@ Feature: Countries and provinces
           And "Lubusz" should appear on the page
 
     Scenario: Created countries appear in the list
-        Given I created country "Poland"
+        Given I created country "PL"
          When I go to the country index page
          Then I should see 4 countries in the list
           And I should see country with name "Poland" in that list
 
     Scenario: Accessing the country editing form
-        Given I am on the page of country "France"
+        Given I am on the page of country "FR"
          When I follow "edit"
          Then I should be editing country "France"
 
@@ -99,8 +84,7 @@ Feature: Countries and provinces
 
     Scenario: Updating the country and province
         Given I am editing country "Ukraine"
-         When I fill in "Name" with "Russia"
-          And I fill in "ISO name" with "RU"
+         When I select "RU" from "ISO name"
           And I fill in province name with "Volgograd"
           And I press "Save changes"
          Then I should be on the page of country "Russia"
@@ -109,8 +93,7 @@ Feature: Countries and provinces
     @javascript
     Scenario: Updating the country and removing province
       Given I am editing country "Ukraine"
-       When I fill in "Name" with "Russia"
-        And I fill in "ISO name" with "RU"
+       When I select "RU" from "ISO name"
         And I remove all the provinces
         And I press "Save changes"
        Then I should see "Country has been successfully updated."
