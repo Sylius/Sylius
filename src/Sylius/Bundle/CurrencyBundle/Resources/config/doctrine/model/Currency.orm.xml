@@ -22,7 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" length="3" />
+        <field name="code" column="code" type="string" length="3" unique="true"/>
         <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
         <field name="enabled" column="enabled" type="boolean" />
 
