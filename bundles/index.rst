@@ -11,6 +11,7 @@ Symfony2 Ecommerce Bundles
     SyliusFlowBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index
+    SyliusMailerBundle/index
     SyliusOmnipayBundle/index
     SyliusOrderBundle/index
     SyliusProductBundle/index
