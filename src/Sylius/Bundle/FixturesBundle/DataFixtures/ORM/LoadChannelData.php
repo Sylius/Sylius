@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LoadChannelsData extends DataFixture
+class LoadChannelData extends DataFixture
 {
     /**
      * {@inheritdoc}

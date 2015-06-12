@@ -100,7 +100,7 @@ class LoadProductOptionData extends DataFixture
             $option->addValue($value);
         }
 
-        $this->setReference('Sylius.Option.' . $name, $option);
+        $this->setReference('Sylius.Option.'.$name, $option);
 
         return $option;
     }

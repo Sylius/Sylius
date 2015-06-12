@@ -36,7 +36,7 @@ class LoadOrdersData extends DataFixture
             'WEB-UK',
             'WEB-DE',
             'WEB-US',
-            'MOBILE'
+            'MOBILE',
         );
 
         for ($i = 1; $i <= 50; $i++) {
@@ -93,7 +93,6 @@ class LoadOrdersData extends DataFixture
     {
         return 7;
     }
-
 
     /**
      * @param OrderInterface $order

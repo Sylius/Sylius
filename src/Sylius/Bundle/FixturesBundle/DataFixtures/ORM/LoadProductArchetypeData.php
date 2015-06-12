@@ -55,7 +55,7 @@ class LoadProductArchetypeData extends DataFixture
      * Create archetype.
      *
      * @param string $code
-     * @param array $nameTranslations
+     * @param array  $nameTranslations
      * @param array  $options
      * @param array  $properties
      *
