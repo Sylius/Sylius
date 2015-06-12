@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 

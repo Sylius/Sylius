@@ -22,18 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class RendererChoiceType extends AbstractType
 {
     /**
-     * Renderers
-     *
      * @var array
      */
     protected $renderers;
 
-    /**
-     * Constructor
-     *
-     * @param array $renderers
-     */
-    public function __construct($renderers)
+    public function __construct(array $renderers)
     {
         $this->renderers = $renderers;
     }

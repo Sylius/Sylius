@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -28,12 +28,22 @@ class SyliusVariationExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
+
+        foreach ($config['classes'] as $name => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+            $formDefinition->addArgument($parameters['variable']);
+
+            if (isset($parameters['translation'])) {
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition->addArgument($parameters['variable']);
+            }
+        }
     }
 
     /**
@@ -50,9 +60,10 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
             foreach ($parameters as $resource => $classes) {
                 $convertedConfig[$variable.'_'.$resource] = $classes;
+                $convertedConfig[$variable.'_'.$resource]['variable'] = $variable;
             }
 
-            $this->createvariableServices($container, $config['driver'], $variable, $convertedConfig);
+            $this->createvariableServices($container, $variable);
 
             if (!isset($config['validation_groups'][$variable]['variant'])) {
                 $config['validation_groups'][$variable]['variant'] = array('sylius');
@@ -88,29 +99,13 @@ class SyliusVariationExtension extends AbstractResourceExtension
      * Create services for every variable object.
      *
      * @param ContainerBuilder $container
-     * @param string           $driver
      * @param string           $variable
-     * @param array            $config
      */
-    private function createVariableServices(ContainerBuilder $container, $driver, $variable, array $config)
+    private function createVariableServices(ContainerBuilder $container, $variable)
     {
         $variantAlias = $variable.'_variant';
-        $optionAlias = $variable.'_option';
-        $optionTranslationAlias = $variable.'_option_translation';
         $optionValueAlias = $variable.'_option_value';
 
-        $variantClasses = $config[$variantAlias];
-        $optionClasses = $config[$optionAlias];
-        $optionTranslationClasses = $optionClasses['translation'];
-        $optionValueClasses = $config[$optionValueAlias];
-
-        $variantFormType = new Definition($variantClasses['form']);
-        $variantFormType
-            ->setArguments(array($variantClasses['model'], '%sylius.validation_group.'.$variantAlias.'%', $variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$variantAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$variantAlias, $variantFormType);
 
         $variantChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantChoiceType');
         $variantChoiceFormType
@@ -128,41 +123,6 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$variantAlias.'_match', $variantMatchFormType);
 
-        $optionFormType = new Definition($optionClasses['form']);
-        $optionFormType
-            ->setArguments(array($optionClasses['model'], '%sylius.validation_group.'.$optionAlias.'%', $variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$optionAlias, $optionFormType);
-
-        $optionTranslationFormType = new Definition($optionTranslationClasses['form']['default']);
-        $optionTranslationFormType
-            ->setArguments(array($optionTranslationClasses['model'], '%sylius.validation_group.'.$optionTranslationAlias.'%', $variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionTranslationAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$optionTranslationAlias, $optionTranslationFormType);
-
-        $choiceTypeClasses = array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\VariationBundle\Form\Type\OptionEntityChoiceType'
-        );
-
-        $optionChoiceFormType = new Definition($choiceTypeClasses[$driver]);
-        $optionChoiceFormType
-            ->setArguments(array($variable, $optionClasses['model']))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionAlias.'_choice'))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$optionAlias.'_choice', $optionChoiceFormType);
-
-        $optionValueFormType = new Definition($optionValueClasses['form']);
-        $optionValueFormType
-            ->setArguments(array($optionValueClasses['model'], '%sylius.validation_group.'.$optionValueAlias.'%', $variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionValueAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$optionValueAlias, $optionValueFormType);
 
         $optionValueChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionValueChoiceType');
         $optionValueChoiceFormType

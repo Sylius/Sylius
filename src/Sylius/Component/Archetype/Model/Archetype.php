@@ -290,12 +290,4 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
 
         return $this;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }

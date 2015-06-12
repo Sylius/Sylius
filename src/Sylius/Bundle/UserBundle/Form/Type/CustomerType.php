@@ -29,7 +29,7 @@ class CustomerType extends CustomerProfileType
             ->add('groups', 'sylius_group_choice', array(
                 'label'    => 'sylius.form.customer.groups',
                 'multiple' => true,
-                'required' => false
+                'required' => false,
             ))
             ->add('user', 'sylius_user')
         ;

@@ -13,8 +13,6 @@ namespace Sylius\Bundle\MailerBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Mailer\Model\ProvinceInterface;
-use Sylius\Component\Mailer\Model\ZoneInterface;
 
 class MailerContext extends DefaultContext
 {

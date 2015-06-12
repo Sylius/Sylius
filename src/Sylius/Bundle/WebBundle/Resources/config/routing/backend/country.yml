@@ -10,6 +10,8 @@ sylius_backend_country_index:
             template: SyliusWebBundle:Backend/Country:index.html.twig
             sortable: true
             paginate: 50
+            sorting:
+                name: asc
 
 sylius_backend_country_create:
     path: /new

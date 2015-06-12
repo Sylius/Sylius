@@ -28,7 +28,6 @@
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
 
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
-        <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodEntityType</parameter>
 
         <parameter key="sylius.form.type.customer_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\CustomerFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>

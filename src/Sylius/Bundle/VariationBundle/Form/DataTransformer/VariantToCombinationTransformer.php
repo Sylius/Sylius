@@ -90,6 +90,6 @@ class VariantToCombinationTransformer implements DataTransformerInterface
             return $variant;
         }
 
-        return null;
+        return;
     }
 }

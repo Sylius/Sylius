@@ -21,6 +21,10 @@
         <field name="namespace" column="namespace" type="string" />
         <field name="name" column="name" type="string" />
         <field name="value" column="value" type="object" nullable="true" />
+
+        <unique-constraints>
+            <unique-constraint columns="namespace,name" name="name_idx" />
+        </unique-constraints>
     </mapped-superclass>
 
 </doctrine-mapping>

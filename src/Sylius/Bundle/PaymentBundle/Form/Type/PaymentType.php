@@ -29,10 +29,10 @@ class PaymentType extends AbstractResourceType
     {
         $builder
             ->add('method', 'sylius_payment_method_choice', array(
-                'label' => 'sylius.form.payment.method'
+                'label' => 'sylius.form.payment.method',
             ))
             ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.payment.amount'
+                'label' => 'sylius.form.payment.amount',
             ))
             ->add('state', 'choice', array(
                 'label'   => 'sylius.form.payment.state.header',
@@ -46,7 +46,7 @@ class PaymentType extends AbstractResourceType
                     PaymentInterface::STATE_CANCELLED  => 'sylius.form.payment.state.cancelled',
                     PaymentInterface::STATE_REFUNDED   => 'sylius.form.payment.state.refunded',
                     PaymentInterface::STATE_UNKNOWN    => 'sylius.form.payment.state.unknown',
-                )
+                ),
             ))
         ;
     }

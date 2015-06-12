@@ -45,7 +45,7 @@ class ReportController extends ResourceController
         return $this->render($this->config->getTemplate('show.html'), array(
             'report' => $report,
             'form' => $configurationForm->createView(),
-            'configuration' => $configurationForm->getData()
+            'configuration' => $configurationForm->getData(),
         ));
     }
 

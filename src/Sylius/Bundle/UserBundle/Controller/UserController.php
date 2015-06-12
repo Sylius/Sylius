@@ -154,8 +154,8 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param  Request          $request
-     * @param  UserInterface    $user
+     * @param Request       $request
+     * @param UserInterface $user
      *
      * @return RedirectResponse
      */
@@ -208,8 +208,8 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param  UserInterface    $user
-     * @param  string           $newPassword
+     * @param UserInterface $user
+     * @param string        $newPassword
      *
      * @return RedirectResponse
      */
@@ -233,8 +233,9 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param UserInterface     $user
-     * @param string            $newPassword
+     * @param UserInterface $user
+     * @param string        $newPassword
+     *
      * @return RedirectResponse
      */
     protected function handleChangePassword(UserInterface $user, $newPassword)

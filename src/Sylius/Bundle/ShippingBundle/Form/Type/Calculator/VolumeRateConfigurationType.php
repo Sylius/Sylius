@@ -52,14 +52,14 @@ class VolumeRateConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                )
+                ),
             ))
             ->add('division', 'number', array(
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.division',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
         ;
     }
@@ -71,7 +71,7 @@ class VolumeRateConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => null,
+                'data_class' => null,
                 'validation_groups' => $this->validationGroups,
             ))
         ;

@@ -42,7 +42,7 @@ class CustomerRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('firstName', 'text', array(
@@ -71,7 +71,7 @@ class CustomerRegistrationType extends AbstractResourceType
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true
+            'cascade_validation' => true,
         ));
     }
 

@@ -359,12 +359,4 @@ class Product extends BaseProduct implements ProductInterface
         $this->translate()->setShortDescription($shortDescription);
         return $this;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }

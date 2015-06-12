@@ -28,20 +28,20 @@ class TaxRateType extends AbstractResourceType
     {
         $builder
             ->add('category', 'sylius_tax_category_choice', array(
-                'label' => 'sylius.form.tax_rate.category'
+                'label' => 'sylius.form.tax_rate.category',
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.tax_rate.name'
+                'label' => 'sylius.form.tax_rate.name',
             ))
             ->add('amount', 'percent', array(
                 'label' => 'sylius.form.tax_rate.amount',
-                'precision' => 3
+                'precision' => 3,
             ))
             ->add('includedInPrice', 'checkbox', array(
-                'label' => 'sylius.form.tax_rate.included_in_price'
+                'label' => 'sylius.form.tax_rate.included_in_price',
             ))
             ->add('calculator', 'sylius_tax_calculator_choice', array(
-                'label' => 'sylius.form.tax_rate.calculator'
+                'label' => 'sylius.form.tax_rate.calculator',
             ))
         ;
     }

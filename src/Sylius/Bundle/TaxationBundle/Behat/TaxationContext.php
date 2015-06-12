@@ -55,9 +55,9 @@ class TaxationContext extends DefaultContext
     {
         /* @var $settingsManager SettingsManagerInterface */
         $settingsManager = $this->getService('sylius.settings.manager');
-        $settings = $settingsManager->loadSettings('taxation');
+        $settings = $settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $this->findOneByName('zone', $zone));
 
-        $settingsManager->saveSettings('taxation', $settings);
+        $settingsManager->saveSettings('sylius_taxation', $settings);
     }
 }

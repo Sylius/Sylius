@@ -27,7 +27,7 @@ class RbacInitializer
     private $permissionRepository;
 
     private $permissionsByCode = array(
-        'root' => null
+        'root' => null,
     );
 
     private $roles;

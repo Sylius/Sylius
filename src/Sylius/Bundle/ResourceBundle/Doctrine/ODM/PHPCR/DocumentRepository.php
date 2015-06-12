@@ -38,12 +38,12 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
+    public function createPaginator(array $criteria = array(), array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -68,15 +68,10 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
+     * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
     {
-        if (null === $criteria) {
-            return;
-        }
-
         foreach ($criteria as $property => $value) {
             if (!empty($value)) {
                 $queryBuilder
@@ -90,15 +85,10 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $sorting
+     * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
     {
-        if (null === $sorting) {
-            return;
-        }
-
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
                 $queryBuilder->orderBy()->{$order}()->field('o.'.$property);
@@ -122,6 +112,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $name;
     }
 
+    /**
+     * @return string
+     */
     protected function getAlias()
     {
         return 'o';

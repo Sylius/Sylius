@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ReportBundle\Form\Type;
 
-use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormListener;
-use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener;
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber;
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +28,7 @@ use Symfony\Component\Form\FormView;
 class ReportType extends AbstractResourceType
 {
     /**
-     * Renderer registry
+     * Renderer registry.
      *
      * @var ServiceRegistryInterface
      */
@@ -65,8 +65,8 @@ class ReportType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildReportDataFetcherFormListener($this->dataFetcherRegistry, $builder->getFormFactory()))
-            ->addEventSubscriber(new BuildReportRendererFormListener($this->rendererRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildReportDataFetcherFormSubscriber($this->dataFetcherRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildReportRendererFormSubscriber($this->rendererRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.report.name',
                 'required' => true,
@@ -83,7 +83,7 @@ class ReportType extends AbstractResourceType
                 'label'    => 'sylius.form.report.data_fetcher',
             ))
             ->add('renderer', 'sylius_renderer_choice', array(
-                'label' => 'sylius.form.report.renderer.label'
+                'label' => 'sylius.form.report.renderer.label',
             ))
         ;
 

@@ -47,11 +47,11 @@ class SettingsFormFactorySpec extends ObjectBehavior
         FormBuilder $formBuilder,
         Form $form
     ) {
-        $schemaRegistry->getSchema('general')->willReturn($schema);
+        $schemaRegistry->getSchema('sylius_general')->willReturn($schema);
         $formFactory->createBuilder('form', null, array('data_class' => null))->willReturn($formBuilder);
         $schema->buildForm($formBuilder)->shouldBeCalled()->willReturn($formBuilder);
         $formBuilder->getForm()->willReturn($form);
 
-        $this->create('general')->shouldReturn($form);
+        $this->create('sylius_general')->shouldReturn($form);
     }
 }

@@ -37,8 +37,8 @@ class UserDeleteListener
     protected $session;
 
     /**
-     * @param SecurityContextInterface  $securityContext
-     * @param SessionInterface $session
+     * @param SecurityContextInterface $securityContext
+     * @param SessionInterface         $session
      */
     public function __construct(SecurityContextInterface $securityContext, SessionInterface $session)
     {

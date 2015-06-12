@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\UserBundle;
 
 /**
- * Contains all events thrown in the SyliusUserBundle
+ * Contains all events thrown in the SyliusUserBundle.
  */
 final class UserEvents
 {

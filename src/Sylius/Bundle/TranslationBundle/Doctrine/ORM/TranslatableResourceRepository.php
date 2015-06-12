@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
@@ -43,7 +42,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
 
         $queryBuilder
             ->addSelect('translation')
-            ->leftJoin($this->getAlias() . '.translations', 'translation')
+            ->leftJoin($this->getAlias().'.translations', 'translation')
         ;
 
         return $queryBuilder;
@@ -58,7 +57,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
 
         $queryBuilder
             ->addSelect('translation')
-            ->leftJoin($this->getAlias() . '.translations', 'translation')
+            ->leftJoin($this->getAlias().'.translations', 'translation')
         ;
 
         return $queryBuilder;
@@ -102,42 +101,14 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
+     * {@inheritdoc}
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    protected function getPropertyName($name)
     {
-        if (null === $criteria) {
-            return;
+        if (in_array($name, $this->translatableFields)) {
+            return 'translation.'.$name;
         }
 
-        foreach ($criteria as $property => $value) {
-            if (in_array($property, $this->translatableFields)) {
-                $property = 'translation.'.$property;
-                if (null === $value) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->isNull($property));
-                } elseif (is_array($value)) {
-                    $queryBuilder->andWhere($queryBuilder->expr()->in($property, $value));
-                } elseif ('' !== $value) {
-                    $parameter = str_replace('.', '_', $property);
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($property, ':'.$parameter))
-                        ->setParameter($parameter, $value);
-                }
-            } else {
-                if (null === $value) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
-                } elseif (is_array($value)) {
-                    $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
-                } elseif ('' !== $value) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':'.$property))
-                        ->setParameter($property, $value);
-                }
-            }
-        }
+        return parent::getPropertyName($name);
     }
 }

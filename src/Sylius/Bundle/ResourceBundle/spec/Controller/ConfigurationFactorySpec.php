@@ -20,7 +20,10 @@ class ConfigurationFactorySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('paginate' => 10));
+        $this->beConstructedWith(
+            '\Sylius\Bundle\ResourceBundle\Controller\Configuration',
+            array('paginate' => 10)
+        );
     }
 
     function it_is_initializable()

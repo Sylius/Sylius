@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Form\Model;
 
 /**
- * Model class for email validation
+ * Model class for email validation.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
-use Sylius\Component\Mailer\Event\EmailEvent;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
@@ -48,11 +47,11 @@ class TwigAdapter extends AbstractAdapter
         if (null !== $email->getTemplate()) {
             $data = $this->twig->mergeGlobals($data);
 
+            /** @var \Twig_Template $template */
             $template = $this->twig->loadTemplate($email->getTemplate());
 
             $subject = $template->renderBlock('subject', $data);
             $body = $template->renderBlock('body', $data);
-
         } else {
             $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
 
@@ -63,8 +62,11 @@ class TwigAdapter extends AbstractAdapter
             $body = $bodyTemplate->render($data);
         }
 
-        /** @var EmailEvent $event */
-        $event = $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_RENDER, new EmailRenderEvent(new RenderedEmail($subject, $body)));
+        /** @var EmailRenderEvent $event */
+        $event = $this->dispatcher->dispatch(
+            SyliusMailerEvents::EMAIL_PRE_RENDER,
+            new EmailRenderEvent(new RenderedEmail($subject, $body))
+        );
 
         return $event->getRenderedEmail();
     }

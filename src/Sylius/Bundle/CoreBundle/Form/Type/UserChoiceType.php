@@ -45,7 +45,7 @@ abstract class UserChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->className
+                'class' => $this->className,
             ))
         ;
     }

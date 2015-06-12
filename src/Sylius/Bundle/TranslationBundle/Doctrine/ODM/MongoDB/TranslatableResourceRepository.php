@@ -69,9 +69,7 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
+     * {inheritdoc}.
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
@@ -80,19 +78,43 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
         }
 
         foreach ($criteria as $property => $value) {
-            if (in_array($property, $this->translatableFields)) {
-                $property = 'translations.'.$this->localeProvider->getCurrentLocale().'.'.$property;
-            }
-
             if (is_array($value)) {
                 $queryBuilder
-                    ->field($property)->in($value)
+                    ->field($this->getPropertyName($property))->in($value)
                 ;
             } elseif ('' !== $value) {
                 $queryBuilder
-                    ->field($property)->equals($value)
+                    ->field($this->getPropertyName($property))->equals($value)
                 ;
             }
         }
+    }
+
+    /**
+     * {inheritdoc}.
+     */
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    {
+        if (null === $sorting) {
+            return;
+        }
+
+        foreach ($sorting as $property => $order) {
+            $queryBuilder->sort($this->getPropertyName($property), $order);
+        }
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function getPropertyName($name)
+    {
+        if (in_array($name, $this->translatableFields)) {
+            return 'translations.'.$this->localeProvider->getCurrentLocale().'.'.$name;
+        }
+
+        return $name;
     }
 }

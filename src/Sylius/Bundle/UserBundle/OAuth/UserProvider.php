@@ -54,8 +54,13 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param ObjectManager           $userManager
      * @param CanonicalizerInterface  $canonicalizer
      */
-    public function __construct(RepositoryInterface $customerRepository, UserRepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
-    {
+    public function __construct(
+        RepositoryInterface $customerRepository,
+        UserRepositoryInterface $userRepository,
+        RepositoryInterface $oauthRepository,
+        ObjectManager $userManager,
+        CanonicalizerInterface $canonicalizer
+    ) {
         parent::__construct($userRepository, $canonicalizer);
         $this->customerRepository = $customerRepository;
         $this->oauthRepository = $oauthRepository;
@@ -96,7 +101,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * Ad-hoc creation of user
+     * Ad-hoc creation of user.
      *
      * @param UserResponseInterface $response
      *
@@ -126,7 +131,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * Attach OAuth sign-in provider account to existing user
+     * Attach OAuth sign-in provider account to existing user.
      *
      * @param UserInterface         $user
      * @param UserResponseInterface $response

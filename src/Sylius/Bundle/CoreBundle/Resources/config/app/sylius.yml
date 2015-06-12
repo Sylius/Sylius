@@ -62,10 +62,12 @@ sylius_taxonomy:
     classes:
         taxonomy:
             model: Sylius\Component\Core\Model\Taxonomy
-            form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
         taxon:
             model: Sylius\Component\Core\Model\Taxon
-            form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
 sylius_product:
     classes:
@@ -100,13 +102,15 @@ sylius_variation:
             variant:
                 model: Sylius\Component\Core\Model\ProductVariant
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
-                form: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_taxation:
     classes:
         tax_rate:
             model: Sylius\Component\Core\Model\TaxRate
-            form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
     classes:
@@ -117,7 +121,8 @@ sylius_shipping:
             model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
             model: Sylius\Component\Core\Model\ShippingMethod
-            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
 sylius_promotion:
     classes:
@@ -146,6 +151,10 @@ sylius_payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
+        payment_method:
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
+            form:
+                choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
         dummy: Test
         offline: Offline
@@ -172,10 +181,12 @@ sylius_order:
             model: Sylius\Component\Core\Model\Order
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
-            form: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
 
 sylius_sequence:
     generators:

@@ -20,7 +20,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class TranslatableFoo extends AbstractTranslatable
 {
-    protected function getTranslationClass(){
+    public static function getTranslationClass()
+    {
         return  'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
     }
 }

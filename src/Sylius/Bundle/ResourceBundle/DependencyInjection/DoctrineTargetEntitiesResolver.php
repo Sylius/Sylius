@@ -52,6 +52,7 @@ class DoctrineTargetEntitiesResolver
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     private function getInterface(ContainerBuilder $container, $key)
@@ -74,6 +75,7 @@ class DoctrineTargetEntitiesResolver
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     private function getClass(ContainerBuilder $container, $key)

@@ -29,13 +29,13 @@ class CurrencyType extends AbstractResourceType
     {
         $builder
             ->add('code', 'currency', array(
-                'label' => 'sylius.form.currency.code'
+                'label' => 'sylius.form.currency.code',
             ))
             ->add('exchangeRate', 'number', array(
-                'label' => 'sylius.form.currency.exchange_rate'
+                'label' => 'sylius.form.currency.exchange_rate',
             ))
             ->add('enabled', 'checkbox', array(
-                'label' => 'sylius.form.currency.enabled'
+                'label' => 'sylius.form.currency.enabled',
             ))
         ;
     }

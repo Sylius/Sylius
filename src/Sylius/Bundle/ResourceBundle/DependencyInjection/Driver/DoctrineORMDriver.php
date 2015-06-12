@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -40,7 +41,9 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
         $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
 
         $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = $translatable ?'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository' : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+        $repositoryClass = $translatable
+            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository'
+            : new Parameter('sylius.orm.repository.class');
 
         if ($this->container->hasParameter($repositoryKey)) {
             $repositoryClass = $this->container->getParameter($repositoryKey);

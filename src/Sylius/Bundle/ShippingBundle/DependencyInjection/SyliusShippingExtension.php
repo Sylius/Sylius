@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Shipping extension.
@@ -30,7 +31,14 @@ class SyliusShippingExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
+
+        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
+        $shippingMethod->addArgument(new Reference('sylius.shipping_calculator_registry'));
+        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
+
+        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method_rule');
+        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
     }
 }

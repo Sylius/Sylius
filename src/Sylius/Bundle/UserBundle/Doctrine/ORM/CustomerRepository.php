@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 
@@ -50,7 +51,7 @@ class CustomerRepository extends EntityRepository
      * @param array $sorting
      * @param bool  $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {

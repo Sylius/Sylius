@@ -40,15 +40,15 @@ class SecurityIdentityProvider implements CurrentIdentityProviderInterface
     public function getIdentity()
     {
         if (null === $token = $this->securityContext->getToken()) {
-            return null;
+            return;
         }
 
         if ($token instanceof AnonymousToken) {
-            return null;
+            return;
         }
 
         if (null === $user = $token->getUser()) {
-            return null;
+            return;
         }
 
         if (!$user instanceof IdentityInterface) {
