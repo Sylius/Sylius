@@ -106,6 +106,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
+        $parameters->set('paginate', Argument::type('integer'))->shouldBeCalled();
 
         $parameterBag->get('_route_params', array())->willReturn(array());
 
@@ -147,6 +148,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
+        $parameters->set('paginate', Argument::type('integer'))->shouldBeCalled();
 
         $parameterBag->get('_route_params', array())->willReturn(array());
 
@@ -191,7 +193,8 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
-
+        $parameters->set('paginate', Argument::type('integer'))->shouldBeCalled();
+        
         $parameterBag->get('_route_params', array())->willReturn(array());
 
         $this->onKernelController($event);
