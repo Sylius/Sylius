@@ -111,6 +111,7 @@ class FrontendMenuBuilder extends MenuBuilder
                 'class' => 'nav nav-pills'
             )
         ));
+        $menu->setCurrentUri($this->request->getRequestUri());
 
         if ($this->cartProvider->hasCart()) {
             $cart = $this->cartProvider->getCart();
@@ -234,6 +235,7 @@ class FrontendMenuBuilder extends MenuBuilder
                 'class' => 'nav'
             )
         ));
+        $menu->setCurrentUri($this->request->getRequestUri());
 
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav nav-list'),
@@ -299,6 +301,7 @@ class FrontendMenuBuilder extends MenuBuilder
                 'class' => 'nav'
             )
         ));
+        $menu->setCurrentUri($this->request->getRequestUri());
 
         $child = $menu->addChild($this->translate('sylius.account.title'), array(
             'childrenAttributes' => array('class' => 'nav nav-list'),
