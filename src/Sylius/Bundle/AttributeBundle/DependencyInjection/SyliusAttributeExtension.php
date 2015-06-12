@@ -28,11 +28,21 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        $config = $this->configure(
             $config, new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
+
+        foreach ($config['classes'] as $name => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+            $formDefinition->addArgument($parameters['subject']);
+
+            if (isset($parameters['translation'])) {
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition->addArgument($parameters['subject']);
+            }
+        }
     }
 
     /**
@@ -49,9 +59,8 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
             foreach ($parameters as $resource => $classes) {
                 $convertedConfig[$subject.'_'.$resource] = $classes;
+                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
             }
-
-            $this->createSubjectServices($container, $config['driver'], $subject, $convertedConfig);
 
             if (!isset($config['validation_groups'][$subject]['attribute'])) {
                 $config['validation_groups'][$subject]['attribute'] = array('sylius');
@@ -78,64 +87,5 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $config['validation_groups'] = $convertedConfig;
 
         return parent::process($config, $container);
-    }
-
-    /**
-     * Create services for every subject.
-     *
-     * @param ContainerBuilder $container
-     * @param string           $driver
-     * @param string           $subject
-     * @param array            $config
-     */
-    private function createSubjectServices(ContainerBuilder $container, $driver, $subject, array $config)
-    {
-        $attributeAlias = $subject.'_attribute';
-        $attributeTranslationAlias = $subject.'_attribute_translation';
-        $attributeValueAlias = $subject.'_attribute_value';
-
-        $attributeClasses = $config[$attributeAlias];
-        $attributeTranslationClasses = $attributeClasses['translation'];
-        $attributeValueClasses = $config[$attributeValueAlias];
-
-        $attributeFormType = new Definition($attributeClasses['form']);
-        $attributeFormType
-            ->setArguments(array($attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%', $subject))
-            ->addTag('form.type', array('alias' => 'sylius_'.$attributeAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$attributeAlias, $attributeFormType);
-
-        $attributeFormTranslationType = new Definition($attributeTranslationClasses['form']['default']);
-        $attributeFormTranslationType
-            ->setArguments(array($attributeTranslationClasses['model'], '%sylius.validation_group.'.$attributeTranslationAlias.'%', $subject))
-            ->addTag('form.type', array('alias' => 'sylius_'.$attributeTranslationAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$attributeTranslationAlias, $attributeFormTranslationType);
-
-        $choiceTypeClasses = array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\AttributeBundle\Form\Type\AttributeEntityChoiceType'
-        );
-
-        $attributeChoiceFormType = new Definition($choiceTypeClasses[$driver]);
-        $attributeChoiceFormType
-            ->setArguments(array($subject, $attributeClasses['model']))
-            ->addTag('form.type', array('alias' => 'sylius_'.$attributeAlias.'_choice'))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$attributeAlias.'_choice', $attributeChoiceFormType);
-
-        $attributeValueFormType = new Definition($attributeValueClasses['form']);
-        $attributeValueFormType
-            ->setArguments(array(
-                $attributeValueClasses['model'],
-                '%sylius.validation_group.'.$attributeValueAlias.'%',
-                $subject
-            ))
-            ->addTag('form.type', array('alias' => 'sylius_'.$attributeValueAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$attributeValueAlias, $attributeValueFormType);
     }
 }
