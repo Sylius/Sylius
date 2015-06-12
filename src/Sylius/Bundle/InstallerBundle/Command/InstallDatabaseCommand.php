@@ -77,8 +77,6 @@ EOT
                     $commands['doctrine:schema:drop'] = array('--force' => true);
                     $commands[] = 'doctrine:schema:create';
                 }
-            } else {
-                $commands[] = 'doctrine:schema:create';
             }
         }
 

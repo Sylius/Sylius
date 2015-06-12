@@ -277,6 +277,12 @@ EOT
         }
 
         foreach ($channels as $code) {
+            $output->writeln(sprintf('Adding <info>%s</info>.', $code));
+
+            if (null !== $channelRepository->findOneByCode($code)) {
+                continue;
+            }
+
             /** @var ChannelInterface $channel */
             $channel = $channelRepository->createNew();
             $channel->setUrl(null);
