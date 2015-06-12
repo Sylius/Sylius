@@ -44,7 +44,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->willReturn($builder)
         ;
 
