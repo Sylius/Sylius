@@ -4,7 +4,7 @@ namespace Sylius\Bundle\FlowBundle\Tests\Validator;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
-use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\PhpEngine;
@@ -43,7 +43,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $process->addStep('foo', new TestStep());
+        $process->addStep('foo', new TestStepAbstract());
 
         $process->setValidator(new ProcessValidator('An error occurred.', null, function () {
             return false;
@@ -55,7 +55,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class TestStep extends ControllerStep
+class TestStepAbstract extends AbstractControllerStep
 {
     public function displayAction(ProcessContextInterface $context)
     {

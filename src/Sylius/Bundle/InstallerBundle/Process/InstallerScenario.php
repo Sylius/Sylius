@@ -23,10 +23,10 @@ class InstallerScenario extends ContainerAware implements ProcessScenarioInterfa
     public function build(ProcessBuilderInterface $builder)
     {
         $builder
-            ->add('welcome', new Step\WelcomeStep())
-            ->add('check', new Step\CheckStep())
-            ->add('configure', new Step\ConfigureStep())
-            ->add('setup', new Step\SetupStep())
+            ->add('welcome', new Step\WelcomeStepAbstract())
+            ->add('check', new Step\CheckStepAbstract())
+            ->add('configure', new Step\ConfigureStepAbstract())
+            ->add('setup', new Step\SetupStepAbstract())
             ->setRedirect('sylius_homepage')
         ;
     }

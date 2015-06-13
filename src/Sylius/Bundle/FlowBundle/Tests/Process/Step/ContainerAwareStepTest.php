@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractContainerAwareAbstractStep;
 
 /**
  * ContainerAwareStepTest test.
@@ -28,14 +28,14 @@ class ContainerAwareStepTest extends \PHPUnit_Framework_TestCase
     public function shouldInjectContainerBySetter()
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $step = new TestContainerAwareStep();
+        $step = new TestAbstractContainerAwareStep();
         $step->setContainer($container);
 
         $this->assertSame($step->getContainer(), $container);
     }
 }
 
-class TestContainerAwareStep extends ContainerAwareStep
+class TestAbstractContainerAwareStep extends AbstractContainerAwareAbstractStep
 {
     /**
      * Just for check if container setter works

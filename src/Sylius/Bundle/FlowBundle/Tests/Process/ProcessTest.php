@@ -13,7 +13,7 @@ namespace Sylius\Bundle\FlowBundle\Tests\Process;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
-use Sylius\Bundle\FlowBundle\Process\Step\Step;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
@@ -31,9 +31,9 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $process->addStep('foo', new TestStep());
-        $process->addStep('bar', new TestStep());
-        $process->addStep('foobar', new TestStep());
+        $process->addStep('foo', new TestAbstractStep());
+        $process->addStep('bar', new TestAbstractStep());
+        $process->addStep('foobar', new TestAbstractStep());
 
         $correctOrder = array('foo', 'bar', 'foobar');
 
@@ -54,9 +54,9 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process = new Process();
 
         $process->setSteps(array(
-            'foo' => new TestStep(),
-            'bar' => new TestStep(),
-            'foobar' => new TestStep()
+            'foo' => new TestAbstractStep(),
+            'bar' => new TestAbstractStep(),
+            'foobar' => new TestAbstractStep()
         ));
 
         $correctOrder = array('foo', 'bar', 'foobar');
@@ -78,13 +78,13 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process = new Process();
 
         $process->setSteps(array(
-            'foo' => new TestStep(),
-            'bar' => new TestStep(),
-            'foobar' => new TestStep()
+            'foo' => new TestAbstractStep(),
+            'bar' => new TestAbstractStep(),
+            'foobar' => new TestAbstractStep()
         ));
 
         $process->removeStep('bar');
-        $process->addStep('bar', new TestStep());
+        $process->addStep('bar', new TestAbstractStep());
 
         $correctOrder = array('foo', 'foobar', 'bar');
 
@@ -103,7 +103,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     public function shouldAddStep()
     {
         $process = new Process();
-        $step1 = new TestStep();
+        $step1 = new TestAbstractStep();
         $process->addStep('foo', $step1);
 
         $steps = $process->getSteps();
@@ -117,7 +117,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     public function shouldRemoveStep()
     {
         $process = new Process();
-        $process->addStep('foo', new TestStep());
+        $process->addStep('foo', new TestAbstractStep());
         $process->removeStep('foo');
 
         $this->assertCount(0, $process->getSteps());
@@ -140,7 +140,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     public function shouldSetSteps()
     {
         $process = new Process();
-        $step1 = new TestStep();
+        $step1 = new TestAbstractStep();
         $process->setSteps(array('foo' => $step1));
 
         $steps = $process->getSteps();
@@ -155,8 +155,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $process->addStep('foo', new TestStep());
-        $process->addStep('foo', new TestStep());
+        $process->addStep('foo', new TestAbstractStep());
+        $process->addStep('foo', new TestAbstractStep());
     }
 
     /**
@@ -166,8 +166,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->setSteps(array(
             'foo' => $step1,
@@ -185,8 +185,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->addStep('foo', $step1);
         $process->addStep('bar', $step2);
@@ -212,8 +212,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->setSteps(array(
             'foo' => $step1,
@@ -231,8 +231,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->addStep('foo', $step1);
         $process->addStep('bar', $step2);
@@ -259,8 +259,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->addStep('foo', $step1);
         $process->addStep('bar', $step2);
@@ -276,8 +276,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         $process = new Process();
 
-        $step1 = new TestStep();
-        $step2 = new TestStep();
+        $step1 = new TestAbstractStep();
+        $step2 = new TestAbstractStep();
 
         $process->addStep('foo', $step1);
         $process->addStep('bar', $step2);
@@ -331,26 +331,26 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                array(new TestStep(), new TestStep()),
+                array(new TestAbstractStep(), new TestAbstractStep()),
                 2
             ),
             array(
-                array('abc' => new TestStep(), 'abc' => new TestStep()),
+                array('abc' => new TestAbstractStep(), 'abc' => new TestAbstractStep()),
                 1
             ),
             array(
-                array('abc' => new TestStep()),
+                array('abc' => new TestAbstractStep()),
                 1
             ),
             array(
-                array('abc' => new TestStep(), 'zzz' => new TestStep(), 'yyy' => new TestStep()),
+                array('abc' => new TestAbstractStep(), 'zzz' => new TestAbstractStep(), 'yyy' => new TestAbstractStep()),
                 3
             ),
         );
     }
 }
 
-class TestStep extends Step
+class TestAbstractStep extends AbstractStep
 {
     public function displayAction(ProcessContextInterface $context)
     {

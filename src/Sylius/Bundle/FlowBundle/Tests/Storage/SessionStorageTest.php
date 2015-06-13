@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Storage;
 
-use Sylius\Bundle\FlowBundle\Storage\SessionStorage;
+use Sylius\Bundle\FlowBundle\Storage\SessionAbstractStorage;
 
 /**
  * SessionStorage test.
@@ -35,7 +35,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
             ->with('mydomain/test')
             ->will($this->returnValue('my-value'));
 
-        $sessionStorage = new SessionStorage($this->getSession($sessionBag));
+        $sessionStorage = new SessionAbstractStorage($this->getSession($sessionBag));
         $sessionStorage->initialize('mydomain');
         $sessionStorage->set('test', 'my-value');
 
@@ -54,7 +54,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
             ->with('mydomain/test')
             ->will($this->returnValue(true));
 
-        $sessionStorage = new SessionStorage($this->getSession($sessionBag));
+        $sessionStorage = new SessionAbstractStorage($this->getSession($sessionBag));
         $sessionStorage->initialize('mydomain');
 
         $this->assertTrue($sessionStorage->has('test'));
@@ -71,7 +71,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->with('mydomain/test');
 
-        $sessionStorage = new SessionStorage($this->getSession($sessionBag));
+        $sessionStorage = new SessionAbstractStorage($this->getSession($sessionBag));
         $sessionStorage->initialize('mydomain');
 
         $sessionStorage->remove('test');
@@ -88,7 +88,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->with('mydomain');
 
-        $sessionStorage = new SessionStorage($this->getSession($sessionBag));
+        $sessionStorage = new SessionAbstractStorage($this->getSession($sessionBag));
         $sessionStorage->initialize('mydomain');
 
         $sessionStorage->clear();

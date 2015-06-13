@@ -12,14 +12,13 @@
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Step class which extends the base Symfony2 controller.
+ * Base step class.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class ControllerStep extends Controller implements StepInterface
+abstract class AbstractStep implements StepInterface
 {
     /**
      * Step name in current scenario.
