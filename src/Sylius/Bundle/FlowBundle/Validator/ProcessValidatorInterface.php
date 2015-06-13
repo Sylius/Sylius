@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Interface for process validation
+ * Interface for process validation.
  *
  * @author Zach Badgett <zach.badgett@gmail.com>
  * @author Saša Stamenković <umpirsky@gmail.com>

@@ -30,49 +30,49 @@ class ProcessSpec extends ObjectBehavior
 
     function its_forward_route_is_mutable()
     {
-        $this->setForwardRoute('forward_route')->shouldReturn($this);
+        $this->setForwardRoute('forward_route');
         $this->getForwardRoute()->shouldReturn('forward_route');
     }
 
     function its_forward_route_params_is_mutable()
     {
-        $this->setForwardRouteParams(array('name' => 'value'))->shouldReturn($this);
+        $this->setForwardRouteParams(array('name' => 'value'));
         $this->getForwardRouteParams()->shouldReturn(array('name' => 'value'));
     }
 
     function its_display_route_is_mutable()
     {
-        $this->setDisplayRoute('display_route')->shouldReturn($this);
+        $this->setDisplayRoute('display_route');
         $this->getDisplayRoute()->shouldReturn('display_route');
     }
 
     function its_display_params_is_mutable()
     {
-        $this->setDisplayRouteParams(array('name' => 'value'))->shouldReturn($this);
+        $this->setDisplayRouteParams(array('name' => 'value'));
         $this->getDisplayRouteParams()->shouldReturn(array('name' => 'value'));
     }
 
     function its_redirect_params_is_mutable()
     {
-        $this->setRedirectParams(array('name' => 'value'))->shouldReturn($this);
+        $this->setRedirectParams(array('name' => 'value'));
         $this->getRedirectParams()->shouldReturn(array('name' => 'value'));
     }
 
     function its_redirect_is_mutable()
     {
-        $this->setRedirect('redirect')->shouldReturn($this);
+        $this->setRedirect('redirect');
         $this->getRedirect()->shouldReturn('redirect');
     }
 
     function its_scenario_is_mutable()
     {
-        $this->setScenarioAlias('scenarioAlias')->shouldReturn($this);
+        $this->setScenarioAlias('scenarioAlias');
         $this->getScenarioAlias()->shouldReturn('scenarioAlias');
     }
 
     function its_validator_is_mutable(ProcessValidatorInterface $validator)
     {
-        $this->setValidator($validator)->shouldReturn($this);
+        $this->setValidator($validator);
         $this->getValidator()->shouldReturn($validator);
     }
 
@@ -80,10 +80,10 @@ class ProcessSpec extends ObjectBehavior
     {
         $step->getName()->shouldBeCalled()->willReturn('name');
         $secondStep->getName()->shouldBeCalled()->willReturn('other_name');
-        $this->setSteps(array('name' => $step))->shouldReturn($this);
+        $this->setSteps(array('name' => $step));
 
-        $this->addStep('other_name', $secondStep)->shouldReturn($this);
-        $this->removeStep('name')->shouldReturn($this);
+        $this->addStep('other_name', $secondStep);
+        $this->removeStep('name');
 
         $this->getSteps()->shouldReturn(array('other_name' => $secondStep));
         $this->getOrderedSteps()->shouldReturn(array($secondStep));

@@ -24,7 +24,7 @@ class SessionStorageSpec extends ObjectBehavior
 
         $this->beConstructedWith($session);
 
-        $this->initialize('domain')->shouldReturn($this);
+        $this->initialize('domain');
     }
 
     function it_is_initializable()
@@ -38,7 +38,7 @@ class SessionStorageSpec extends ObjectBehavior
     {
         $bag->set('domain/message_key', 'message_value')->shouldBeCalled();
 
-        $this->set('message_key', 'message_value')->shouldReturn($this);
+        $this->set('message_key', 'message_value');
     }
 
     function it_has_message($bag)
@@ -59,13 +59,13 @@ class SessionStorageSpec extends ObjectBehavior
     {
         $bag->remove('domain/message_key')->shouldBeCalled();
 
-        $this->remove('message_key')->shouldReturn($this);
+        $this->remove('message_key');
     }
 
     function it_removes_all_messages($bag)
     {
         $bag->remove('domain/message_key')->shouldBeCalled();
 
-        $this->remove('message_key')->shouldReturn($this);
+        $this->remove('message_key');
     }
 }

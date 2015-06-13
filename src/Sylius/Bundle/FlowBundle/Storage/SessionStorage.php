@@ -51,8 +51,6 @@ class SessionStorage extends AbstractStorage
     public function set($key, $value)
     {
         $this->getBag()->set($this->resolveKey($key), $value);
-
-        return $this;
     }
 
     /**
@@ -69,8 +67,6 @@ class SessionStorage extends AbstractStorage
     public function remove($key)
     {
         $this->getBag()->remove($this->resolveKey($key));
-
-        return $this;
     }
 
     /**
@@ -79,8 +75,6 @@ class SessionStorage extends AbstractStorage
     public function clear()
     {
         $this->getBag()->remove($this->domain);
-
-        return $this;
     }
 
     /**

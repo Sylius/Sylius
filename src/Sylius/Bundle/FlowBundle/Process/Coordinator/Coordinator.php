@@ -228,7 +228,7 @@ class Coordinator implements CoordinatorInterface
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array_merge(
-                $process->getDisplayRouteParams(), 
+                $process->getDisplayRouteParams(),
                 array('stepName' => $step->getName()),
                 $queryParameters ? $queryParameters->all() : array()
             ));
