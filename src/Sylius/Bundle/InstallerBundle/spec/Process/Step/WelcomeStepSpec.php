@@ -17,6 +17,6 @@ class WelcomeStepSpec extends ObjectBehavior
 {
     function it_is_a_process_step()
     {
-        $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Step\ControllerStep');
+        $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep');
     }
 }

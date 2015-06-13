@@ -22,6 +22,8 @@ interface StorageInterface
      * Initializes storage for given domain.
      *
      * @param string $domain
+     *
+     * @return $this
      */
     public function initialize($domain);
 
@@ -49,6 +51,8 @@ interface StorageInterface
      *
      * @param string $key   A unique key
      * @param string $value The value to storage
+     *
+     * @return $this
      */
     public function set($key, $value);
 
@@ -56,11 +60,15 @@ interface StorageInterface
      * Removes a value from the storage.
      *
      * @param string $key A unique key
+     *
+     * @return $this
      */
     public function remove($key);
 
     /**
      * Clears all values from current domain.
+     *
+     * @return $this
      */
     public function clear();
 }

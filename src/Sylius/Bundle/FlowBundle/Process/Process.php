@@ -103,6 +103,8 @@ class Process implements ProcessInterface
     public function setScenarioAlias($scenarioAlias)
     {
         $this->scenarioAlias = $scenarioAlias;
+
+        return $this;
     }
 
     /**
@@ -121,6 +123,8 @@ class Process implements ProcessInterface
         foreach ($steps as $name => $step) {
             $this->addStep($name, $step);
         }
+
+        return $this;
     }
 
     /**
@@ -193,6 +197,8 @@ class Process implements ProcessInterface
         }
 
         $this->steps[$name] = $this->orderedSteps[] = $step;
+
+        return $this;
     }
 
     /**
@@ -208,6 +214,8 @@ class Process implements ProcessInterface
 
         unset($this->steps[$name], $this->orderedSteps[$index]);
         $this->orderedSteps = array_values($this->orderedSteps); //keep sequential index intact
+
+        return $this;
     }
 
     /**
@@ -232,6 +240,8 @@ class Process implements ProcessInterface
     public function setDisplayRoute($route)
     {
         $this->displayRoute = $route;
+
+        return $this;
     }
 
     /**
@@ -248,6 +258,8 @@ class Process implements ProcessInterface
     public function setDisplayRouteParams(array $params)
     {
         $this->displayRouteParams = $params;
+
+        return $this;
     }
 
     /**
@@ -264,6 +276,8 @@ class Process implements ProcessInterface
     public function setForwardRoute($route)
     {
         $this->forwardRoute = $route;
+
+        return $this;
     }
 
     /**
@@ -280,6 +294,8 @@ class Process implements ProcessInterface
     public function setForwardRouteParams(array $params)
     {
         $this->forwardRouteParams = $params;
+
+        return $this;
     }
 
     /**
@@ -296,6 +312,8 @@ class Process implements ProcessInterface
     public function setRedirect($redirect)
     {
         $this->redirect = $redirect;
+
+        return $this;
     }
 
     /**
@@ -312,6 +330,8 @@ class Process implements ProcessInterface
     public function setRedirectParams(array $params)
     {
         $this->redirectParams = $params;
+
+        return $this;
     }
 
     /**
@@ -328,5 +348,7 @@ class Process implements ProcessInterface
     public function setValidator(ProcessValidatorInterface $validator)
     {
         $this->validator = $validator;
+
+        return $this;
     }
 }

@@ -31,5 +31,7 @@ abstract class AbstractStorage implements StorageInterface
     public function initialize($domain)
     {
         $this->domain = $domain;
+
+        return $this;
     }
 }

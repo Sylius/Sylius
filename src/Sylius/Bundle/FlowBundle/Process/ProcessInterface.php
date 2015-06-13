@@ -32,6 +32,8 @@ interface ProcessInterface
      * Set scenario alias.
      *
      * @param string $scenarioAlias
+     *
+     * @return $this
      */
     public function setScenarioAlias($scenarioAlias);
 
@@ -47,6 +49,8 @@ interface ProcessInterface
      * Set steps.
      *
      * @param StepInterface[] $steps
+     *
+     * @return $this
      */
     public function setSteps(array $steps);
 
@@ -76,6 +80,8 @@ interface ProcessInterface
      *
      * @param string        $name
      * @param StepInterface $step
+     *
+     * @return $this
      */
     public function addStep($name, StepInterface $step);
 
@@ -83,6 +89,8 @@ interface ProcessInterface
      * Remove step.
      *
      * @param string $name
+     *
+     * @return $this
      */
     public function removeStep($name);
 
@@ -113,6 +121,8 @@ interface ProcessInterface
      * Set validator.
      *
      * @param ProcessValidatorInterface $validator
+     *
+     * @return $this
      */
     public function setValidator(ProcessValidatorInterface $validator);
 
@@ -127,6 +137,8 @@ interface ProcessInterface
      * Set redirection after complete.
      *
      * @param string $redirect
+     *
+     * @return $this
      */
     public function setRedirect($redirect);
 
@@ -141,6 +153,8 @@ interface ProcessInterface
      * Set redirection route params after complete.
      *
      * @param array $params
+     *
+     * @return $this
      */
     public function setRedirectParams(array $params);
 
@@ -155,6 +169,8 @@ interface ProcessInterface
      * Set display route.
      *
      * @param string $route
+     *
+     * @return $this
      */
     public function setDisplayRoute($route);
 
@@ -169,6 +185,8 @@ interface ProcessInterface
      * Set additional display route params.
      *
      * @param array $params
+     *
+     * @return $this
      */
     public function setDisplayRouteParams(array $params);
 
@@ -183,6 +201,8 @@ interface ProcessInterface
      * Set forward route.
      *
      * @param string $route
+     *
+     * @return $this
      */
     public function setForwardRoute($route);
 
@@ -197,6 +217,8 @@ interface ProcessInterface
      * Set additional forward route params.
      *
      * @param array $params
+     *
+     * @return $this
      */
     public function setForwardRouteParams(array $params);
 
