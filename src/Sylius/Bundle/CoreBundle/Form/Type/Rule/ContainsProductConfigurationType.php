@@ -46,9 +46,8 @@ class ContainsProductConfigurationType extends AbstractType
         $variantRepository = $this->variantRepository;
 
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
-                'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $variantRepository->getClassName(),
+            ->add('variant', 'sylius_product_variant_choice', array(
+                'label' => 'sylius.form.action.add_product_configuration.variant',
                 'query_builder' => function () use ($variantRepository) {
                     return $variantRepository->getFormQueryBuilder();
                 },

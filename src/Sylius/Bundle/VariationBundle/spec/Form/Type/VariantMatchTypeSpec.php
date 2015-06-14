@@ -70,6 +70,6 @@ class VariantMatchTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_varibale_name_variant_match');
+        $this->getName()->shouldReturn('sylius_varibale_name_variant_selection_match');
     }
 }
