@@ -26,10 +26,10 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
      */
     public function findMatchingHostname($hostname)
     {
-        $queryBuilder = $this->createQueryBuilder('channel');
+        $queryBuilder = $this->getQueryBuilder();
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->like('channel.url', ':hostname'))
+            ->andWhere($queryBuilder->expr()->like('o.url', ':hostname'))
             ->setParameter('hostname', '%'.$hostname.'%')
         ;
 

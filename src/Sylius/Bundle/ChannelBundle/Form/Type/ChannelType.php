@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,10 +28,10 @@ class ChannelType extends AbstractResourceType
     {
         $builder
             ->add('code', 'text', array(
-                'label'    => 'sylius.form.channel.code'
+                'label'    => 'sylius.form.channel.code',
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.channel.name'
+                'label' => 'sylius.form.channel.name',
             ))
             ->add('description', 'text', array(
                 'label'    => 'sylius.form.channel.description',

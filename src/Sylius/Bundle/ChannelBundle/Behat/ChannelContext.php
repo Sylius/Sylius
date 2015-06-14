@@ -144,7 +144,7 @@ class ChannelContext extends DefaultContext
         if ($localeCodes) {
             $localeCodes = array_map('trim', explode(',', $localeCodes));
             $locales = $this->getRepository('locale')->findBy(array('code' => $localeCodes));
-            foreach($locales as $locale) {
+            foreach ($locales as $locale) {
                 $channel->addLocale($locale);
             }
         }
