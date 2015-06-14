@@ -28,7 +28,7 @@ class LoadZonesData extends DataFixture
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'GB'
+        'GB',
     );
 
     /**

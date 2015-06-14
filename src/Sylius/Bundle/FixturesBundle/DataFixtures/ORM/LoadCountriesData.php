@@ -74,7 +74,7 @@ class LoadCountriesData extends DataFixture
         'WA' => 'Washington',
         'WV' => 'West Virginia',
         'WI' => 'Wisconsin',
-        'WY' => 'Wyoming'
+        'WY' => 'Wyoming',
     );
 
     /**

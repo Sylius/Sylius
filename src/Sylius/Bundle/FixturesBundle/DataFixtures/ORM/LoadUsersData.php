@@ -96,7 +96,7 @@ class LoadUsersData extends DataFixture
     protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
-        
+
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
         $customer = $this->getCustomerRepository()->createNew();

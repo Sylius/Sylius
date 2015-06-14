@@ -156,5 +156,4 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
 
         return $address;
     }
-
 }

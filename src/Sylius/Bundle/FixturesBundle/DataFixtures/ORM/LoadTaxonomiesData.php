@@ -16,7 +16,6 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
-
 /**
  * Default taxonomies to play with Sylius.
  *
