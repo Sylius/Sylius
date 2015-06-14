@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class MenuTypeSpec extends ObjectBehavior
+class StaticContentTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -27,20 +27,20 @@ class MenuTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ContentBundle\Form\Type\MenuType');
+        $this->shouldHaveType('Sylius\Bundle\ContentBundle\Form\Type\StaticContentType');
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
-        $builder ->add('parent', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('label', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('children', 'collection', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('uri', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('route', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('display', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('displayChildren', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('publishable', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('id', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('parent', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('locale', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('title', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('routes', 'collection', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('menuNodes', 'collection', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('body', 'textarea', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('publishStartDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('publishEndDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
 
@@ -49,6 +49,6 @@ class MenuTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_menu');
+        $this->getName()->shouldReturn('sylius_static_content');
     }
 }

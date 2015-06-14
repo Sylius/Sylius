@@ -34,6 +34,7 @@ suites:
     AddressingBundle  : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
     AttributeBundle   : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
     CartBundle        : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle, src_path: src/Sylius/Bundle/CartBundle }
+    ContentBundle     : { namespace: Sylius\Bundle\ContentBundle, psr4_prefix: Sylius\Bundle\ContentBundle, spec_path: src/Sylius/Bundle/ContentBundle, src_path: src/Sylius/Bundle/ContentBundle }
     ChannelBundle        : { namespace: Sylius\Bundle\ChannelBundle, psr4_prefix: Sylius\Bundle\ChannelBundle, spec_path: src/Sylius/Bundle/ChannelBundle, src_path: src/Sylius/Bundle/ChannelBundle }
     CoreBundle        : { namespace: Sylius\Bundle\CoreBundle, psr4_prefix: Sylius\Bundle\CoreBundle, spec_path: src/Sylius/Bundle/CoreBundle, src_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle    : { namespace: Sylius\Bundle\CurrencyBundle, psr4_prefix: Sylius\Bundle\CurrencyBundle , spec_path: src/Sylius/Bundle/CurrencyBundle, src_path: src/Sylius/Bundle/CurrencyBundle }

@@ -39,7 +39,7 @@ class StringBlockType extends AbstractResourceType
             ))
             ->add('publishable', null, array(
                 'label' => 'sylius.form.string_block.publishable'
-                ))
+            ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'sylius.form.string_block.publish_start_date',
                 'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
