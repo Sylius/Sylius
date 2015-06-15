@@ -59,10 +59,6 @@ class EmailProvider implements EmailProviderInterface
             $email = $this->getEmailFromConfiguration($code);
         }
 
-        if (null === $email) {
-            throw new \InvalidArgumentException(sprintf('Email with code "%s" does not exist!', $code));
-        }
-
         return $email;
     }
 
