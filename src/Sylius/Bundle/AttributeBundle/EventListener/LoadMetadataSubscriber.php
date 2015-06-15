@@ -29,7 +29,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $subjects;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $subjects
      */
@@ -44,7 +44,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'loadClassMetadata'
+            'loadClassMetadata',
         );
     }
 
@@ -71,8 +71,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'name'                 => $subject.'_id',
                     'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
                     'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
+                    'onDelete'             => 'CASCADE',
+                )),
             );
 
             $this->mapManyToOne($metadata, $subjectMapping);
@@ -86,8 +86,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
                     'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
+                    'onDelete'             => 'CASCADE',
+                )),
             );
 
             $this->mapManyToOne($metadata, $attributeMapping);

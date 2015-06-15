@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Bundle\AttributeBundle\EventListener;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -51,8 +53,15 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }
 
-    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
-    {
+    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory
+    ) {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
 
@@ -61,8 +70,24 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
-    {
+    function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory,
+        ClassMetadataInfo $classMetadataInfo
+    ) {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+        $classMetadataInfo->fieldMappings = array(
+            'id' => array(
+                'columnName' => 'id'
+            )
+        );
+        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
+        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
+
+        $eventArgs->getClassMetadata()->willReturn($metadata);
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
 

@@ -65,7 +65,7 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
 
         if (array_key_exists('type', $data) && AttributeTypes::CHOICE === $data['type'] && !empty($data['choices'])) {
             $data['configuration'] = array(
-                'choices' => $data['choices']
+                'choices' => $data['choices'],
             );
         }
 

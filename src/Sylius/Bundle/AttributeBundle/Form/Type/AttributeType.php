@@ -40,7 +40,7 @@ class AttributeType extends AbstractResourceType
      */
     public function __construct($dataClass, array $validationGroups, $subjectName)
     {
-       parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
     }
@@ -52,15 +52,15 @@ class AttributeType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.attribute.name'
+                'label' => 'sylius.form.attribute.name',
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
-                'label' => 'sylius.form.attribute.presentation'
+                'label' => 'sylius.form.attribute.presentation',
             ))
             ->add('type', 'choice', array(
                 'choices' => AttributeTypes::getChoices(),
-                'label' => 'sylius.form.attribute.type'
+                'label' => 'sylius.form.attribute.type',
             ))
             ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory()))
         ;
