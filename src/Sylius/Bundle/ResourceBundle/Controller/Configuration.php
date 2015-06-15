@@ -201,7 +201,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return null;
+            return;
         }
 
         return '#'.$redirect['hash'];
