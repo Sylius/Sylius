@@ -13,7 +13,7 @@ sylius_web:
 
 create:
     resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
-    
+
 create_image:
     resource: "@CmfCreateBundle/Resources/config/routing/image.xml"
 
