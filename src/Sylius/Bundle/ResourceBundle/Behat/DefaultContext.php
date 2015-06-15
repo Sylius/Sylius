@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,6 +27,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
 {
+    /**
+     * @var string
+     */
+    protected $applicationName = 'sylius';
+
     /**
      * Faker.
      *
@@ -50,9 +56,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected $kernel;
 
-    public function __construct()
+    public function __construct($applicationName = null)
     {
         $this->faker = FakerFactory::create();
+
+        if (null !== $applicationName) {
+            $this->applicationName = $applicationName;
+        }
     }
 
     /**
@@ -111,7 +121,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getRepository($resource)
     {
-        return $this->getService('sylius.repository.'.$resource);
+        return $this->getService($this->applicationName.'.repository.'.$resource);
     }
 
     /**
@@ -191,7 +201,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * Generate page url.
      * This method uses simple convention where page argument is prefixed
-     * with "sylius_" and used as route name passed to router generate method.
+     * with the application name and used as route name passed to router generate method.
      *
      * @param object|string $page
      * @param array         $parameters
@@ -208,11 +218,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {
-            $route = 'sylius_'.$route;
+            $route = $this->applicationName.'_'.$route;
         }
 
         if (null === $routes->get($route)) {
-            $route = str_replace('sylius_', 'sylius_backend_', $route);
+            $route = str_replace($this->applicationName.'_', $this->applicationName.'_backend_', $route);
         }
 
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
@@ -265,6 +275,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * Presses button with specified id|name|title|alt|value.
+     *
+     * @param string $button
+     *
+     * @throws ElementNotFoundException
      */
     protected function pressButton($button)
     {
@@ -273,6 +287,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * Clicks link with specified id|title|alt|text.
+     *
+     * @param string $link
+     *
+     * @throws ElementNotFoundException
      */
     protected function clickLink($link)
     {
@@ -281,18 +299,34 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * Fills in form field with specified id|name|label|value.
+     *
+     * @param string $field
+     * @param string $value
+     *
+     * @throws ElementNotFoundException
      */
     protected function fillField($field, $value)
     {
-        $this->getSession()->getPage()->fillField($this->fixStepArgument($field), $this->fixStepArgument($value));
+        $this->getSession()->getPage()->fillField(
+            $this->fixStepArgument($field),
+            $this->fixStepArgument($value)
+        );
     }
 
     /**
      * Selects option in select field with specified id|name|label|value.
+     *
+     * @param string $select
+     * @param string $option
+     *
+     * @throws ElementNotFoundException
      */
-    public function selectOption($select, $option)
+    protected function selectOption($select, $option)
     {
-        $this->getSession()->getPage()->selectFieldOption($this->fixStepArgument($select), $this->fixStepArgument($option));
+        $this->getSession()->getPage()->selectFieldOption(
+            $this->fixStepArgument($select),
+            $this->fixStepArgument($option)
+        );
     }
 
     /**

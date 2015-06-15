@@ -16,7 +16,7 @@ default:
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -31,7 +31,7 @@ default:
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\AddressingBundle\Behat\FormContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -73,7 +73,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\ContactBundle\Behat\ContactContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -87,7 +87,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -124,7 +124,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -136,7 +136,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -161,7 +161,7 @@ default:
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -175,7 +175,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -204,7 +204,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
@@ -220,7 +220,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
@@ -264,7 +264,7 @@ default:
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
@@ -280,7 +280,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -293,7 +293,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -324,7 +324,7 @@ default:
                 - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
@@ -340,7 +340,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -357,7 +357,7 @@ default:
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -375,7 +375,7 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
@@ -387,7 +387,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
                 - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
@@ -405,7 +405,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MailerBundle\Behat\MailerContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -419,7 +419,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
