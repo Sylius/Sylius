@@ -98,6 +98,11 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Country">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">isoName</option>
+            <option name="message">sylius.country.iso_name.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="isoName">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.iso_name.not_blank</option>
