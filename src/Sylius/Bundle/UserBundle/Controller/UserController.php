@@ -82,9 +82,9 @@ class UserController extends ResourceController
         return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
-    public function resetPasswordAction(Request $request)
+    public function resetPasswordAction(Request $request, $token)
     {
-        $user = $this->findUserByToken($request);
+        $user = $this->findUserByToken($token);
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
