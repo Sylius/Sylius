@@ -42,11 +42,7 @@ class DateExtensionSpec extends ObjectBehavior
 
     function it_should_configure_the_resolver(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'format' => Argument::any(),
-            'language' => \Locale::getDefault(),
-            'leading_zero' => false,
-        ))->shouldBeCalled();
+        $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
         $resolver->setOptional(array(
             'placeholder',
