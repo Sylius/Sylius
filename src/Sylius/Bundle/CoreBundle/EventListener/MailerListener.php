@@ -71,8 +71,10 @@ class MailerListener
                 'Sylius\Component\Shipping\Model\ShipmentInterface'
             );
         }
+
+        /** @var OrderInterface $order */
         $order = $shipment->getOrder();
-        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getEmail()), array(
+        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getCustomer()->getEmail()), array(
             'shipment' => $shipment,
             'order' => $order
         ));
