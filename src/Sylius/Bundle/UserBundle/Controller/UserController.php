@@ -88,7 +88,7 @@ class UserController extends ResourceController
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
-            return $this->handleExpiredToken($request, $user);
+            return $this->handleExpiredToken($token, $user);
         }
 
         $changePassword = new ChangePassword();
@@ -154,12 +154,12 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request       $request
+     * @param string        $token
      * @param UserInterface $user
      *
      * @return RedirectResponse
      */
-    protected function handleExpiredToken(Request $request, UserInterface $user)
+    protected function handleExpiredToken($token, UserInterface $user)
     {
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
@@ -172,11 +172,7 @@ class UserController extends ResourceController
 
         $this->addFlash('error', 'sylius.user.password.token_expired');
 
-        $url = $this->generateUrl('sylius_user_request_password_reset_token');
-
-        if (is_numeric($request->get('token'))) {
-            $url = $this->generateUrl('sylius_user_request_password_reset_pin');
-        }
+        $url = $this->generateResetPasswordRequestUrl($token);
 
         return new RedirectResponse($url);
     }
@@ -278,5 +274,19 @@ class UserController extends ResourceController
         }
 
         return $user;
+    }
+
+    /**
+     * @param $token
+     *
+     * @return string
+     */
+    protected function generateResetPasswordRequestUrl($token)
+    {
+        if (is_numeric($token)) {
+            return $this->generateUrl('sylius_user_request_password_reset_pin');
+        }
+
+        return $this->generateUrl('sylius_user_request_password_reset_token');
     }
 }
