@@ -83,7 +83,7 @@
         <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%" />
 
         <!-- Offline -->
-        <service id="sylius.payum.offline.action.capture_payment" class="%sylius.payum.offline.action.capture_payment.class%" public="false">
+        <service id="sylius.payum.offline.action.capture_payment" class="%sylius.payum.offline.action.capture_payment.class%">
             <tag name="payum.action" factory="offline" />
         </service>
     </services>
