@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services.xml',
+        'services.xml'
     );
 
     /**
@@ -36,7 +36,7 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
     }
 
