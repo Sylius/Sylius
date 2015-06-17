@@ -28,7 +28,7 @@ class ClientType extends AbstractResourceType
     {
         $builder
             ->add('secret', 'text', array(
-                'label' => 'sylius.form.api_client.secret'
+                'label' => 'sylius.form.api_client.secret',
             ))
         ;
     }
