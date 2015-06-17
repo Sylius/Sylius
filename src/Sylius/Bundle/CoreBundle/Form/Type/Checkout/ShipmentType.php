@@ -52,6 +52,7 @@ class ShipmentType extends AbstractType
                 $shipment = $event->getData();
 
                 $form->add('method', 'sylius_shipping_method_choice', array(
+                    'data_class'  => 'Sylius\Component\Shipping\Model\ShippingMethodInterface',
                     'label'       => 'sylius.form.checkout.shipping_method',
                     'subject'     => $shipment,
                     'criteria'    => $criteria,
