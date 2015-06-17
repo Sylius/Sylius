@@ -11,20 +11,18 @@
 
 namespace Sylius\Bundle\ApiBundle\Model;
 
-use FOS\OAuthServerBundle\Entity\Client as BaseClient;
+use FOS\OAuthServerBundle\Entity\ClientManager as BaseClientManager;
 
 /**
- * API client model.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Client extends BaseClient
+class ClientManager extends BaseClientManager
 {
     /**
      * {@inheritdoc}
      */
-    public function getPublicId()
+    public function findClientByPublicId($publicId)
     {
-        return $this->getRandomId();
+        return $this->findClientBy(array('randomId'  => $publicId));
     }
 }
