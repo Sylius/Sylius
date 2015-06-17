@@ -46,18 +46,18 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
         $variantChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantChoiceType');
         $variantChoiceFormType
             ->setArguments(array('product'))
-            ->addTag('form.type', array('alias' => 'sylius_product_variant_choice'))
+            ->addTag('form.type', array('alias' => 'sylius_product_variant_selection_choice'))
         ;
 
-        $container->setDefinition('sylius.form.type.product_variant_choice', $variantChoiceFormType)->shouldBeCalled();
+        $container->setDefinition('sylius.form.type.product_variant_selection_choice', $variantChoiceFormType)->shouldBeCalled();
 
         $variantMatchFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantMatchType');
         $variantMatchFormType
             ->setArguments(array('product'))
-            ->addTag('form.type', array('alias' => 'sylius_product_variant_match'))
+            ->addTag('form.type', array('alias' => 'sylius_product_variant_selection_match'))
         ;
 
-        $container->setDefinition('sylius.form.type.product_variant_match', $variantMatchFormType)->shouldBeCalled();
+        $container->setDefinition('sylius.form.type.product_variant_selection_match', $variantMatchFormType)->shouldBeCalled();
 
         $optionValueChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionValueChoiceType');
         $optionValueChoiceFormType

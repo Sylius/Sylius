@@ -77,6 +77,6 @@ class VariantMatchType extends AbstractType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_variant_match', $this->variableName);
+        return sprintf('sylius_%s_variant_selection_match', $this->variableName);
     }
 }

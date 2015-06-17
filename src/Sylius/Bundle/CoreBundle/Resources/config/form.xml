@@ -136,7 +136,6 @@
             <tag name="form.type" alias="sylius_promotion_rule_customer_loyalty_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
-            <argument>%sylius.model.country.class%</argument>
             <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>

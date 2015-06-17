@@ -110,18 +110,18 @@ class SyliusVariationExtension extends AbstractResourceExtension
         $variantChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantChoiceType');
         $variantChoiceFormType
             ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => sprintf('sylius_%s_choice', $variantAlias)))
+            ->addTag('form.type', array('alias' => sprintf('sylius_%s_selection_choice', $variantAlias)))
         ;
 
-        $container->setDefinition('sylius.form.type.'.$variantAlias.'_choice', $variantChoiceFormType);
+        $container->setDefinition('sylius.form.type.'.$variantAlias.'_selection_choice', $variantChoiceFormType);
 
         $variantMatchFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\VariantMatchType');
         $variantMatchFormType
             ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => sprintf('sylius_%s_match', $variantAlias)))
+            ->addTag('form.type', array('alias' => sprintf('sylius_%s_selection_match', $variantAlias)))
         ;
 
-        $container->setDefinition('sylius.form.type.'.$variantAlias.'_match', $variantMatchFormType);
+        $container->setDefinition('sylius.form.type.'.$variantAlias.'_selection_match', $variantMatchFormType);
 
 
         $optionValueChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionValueChoiceType');

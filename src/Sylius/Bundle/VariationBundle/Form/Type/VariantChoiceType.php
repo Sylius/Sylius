@@ -79,6 +79,6 @@ class VariantChoiceType extends AbstractType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_variant_choice', $this->variableName);
+        return sprintf('sylius_%s_variant_selection_choice', $this->variableName);
     }
 }

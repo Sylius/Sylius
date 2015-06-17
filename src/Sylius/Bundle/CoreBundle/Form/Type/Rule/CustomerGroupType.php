@@ -50,22 +50,18 @@ class CustomerGroupType extends AbstractType
         $groupRepository = $this->groupRepository;
 
         $builder
-            ->add(
-                'groups',
-                'sylius_entity_to_identifier',
-                array(
-                    'label' => 'sylius.form.action.customer_group',
-                    'property' => 'name',
-                    'class' => $groupRepository->getClassName(),
-                    'query_builder' => function () use ($groupRepository) {
-                        return $groupRepository->getFormQueryBuilder();
-                    },
-                    'constraints' => array(
-                        new NotBlank(),
-                        new Type(array('type' => 'numeric')),
-                    ),
-                )
-            );
+            ->add('groups', 'sylius_group_choice', array(
+                'label' => 'sylius.form.action.customer_group',
+                'property' => 'name',
+                'query_builder' => function () use ($groupRepository) {
+                    return $groupRepository->getFormQueryBuilder();
+                },
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                ),
+            ))
+        ;
     }
 
     /**
