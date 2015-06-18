@@ -77,8 +77,7 @@ class TaxationProcessor implements TaxationProcessorInterface
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
-    )
-    {
+    ) {
         $this->adjustmentRepository = $adjustmentRepository;
         $this->calculator = $calculator;
         $this->taxRateResolver = $taxRateResolver;
