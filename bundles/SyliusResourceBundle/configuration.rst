@@ -16,22 +16,22 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
 
     sylius_resource:
         resources:
-            my_app.entity_key:
+            my_app.entity_name:
                 driver: doctrine/orm
                 object_manager: default
                 templates: App:User
                 classes:
                     model: MyApp\Entity\EntityName
-                    interface: MyApp\Entity\EntityKeyInterface
+                    interface: MyApp\Entity\EntityNameInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
-            my_app.other_entity_key:
+            my_app.document_name:
                 driver: doctrine/odm
-                manager: other_manager
+                manager: default
                 templates: App:User
                 classes:
-                    model: MyApp\Entity\OtherEntitName
-                    interface: MyApp\Document\OtherEntityKeyInterface
+                    model: MyApp\Document\DocumentName
+                    interface: MyApp\Document\DocumentNameInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
 
