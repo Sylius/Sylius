@@ -20,7 +20,7 @@
         <parameter key="sylius.form.type.zone_type_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType</parameter>
         <parameter key="sylius.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
 
-        <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener</parameter>
+        <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber</parameter>
 
         <parameter key="sylius.zone_matcher.class">Sylius\Component\Addressing\Matcher\ZoneMatcher</parameter>
 
