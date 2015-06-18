@@ -31,8 +31,8 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
 
     function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator)
     {
-        $container->hasDefinition('sylius.tax_calculator')->shouldBeCalled()->willReturn(true);
-        $container->getDefinition('sylius.tax_calculator')->shouldBeCalled()->willReturn($calculator);
+        $container->hasDefinition('sylius.registry.tax_calculator')->shouldBeCalled()->willReturn(true);
+        $container->getDefinition('sylius.registry.tax_calculator')->shouldBeCalled()->willReturn($calculator);
 
         $container->findTaggedServiceIds('sylius.tax_calculator')->shouldBeCalled()->willReturn(array(
             'calculator_id' => array(
@@ -43,7 +43,7 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
         ));
 
         $calculator->addMethodCall(
-            'registerCalculator',
+            'register',
             Argument::type('array')
         )->shouldBeCalled();
 
