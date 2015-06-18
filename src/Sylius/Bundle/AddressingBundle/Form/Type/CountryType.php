@@ -30,17 +30,17 @@ class CountryType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_country_translation',
-                'label'    => 'sylius.form.country.name'
+                'label'    => 'sylius.form.country.name',
             ))
             ->add('isoName', 'text', array(
-                'label' => 'sylius.form.country.iso_name'
+                'label' => 'sylius.form.country.iso_name',
             ))
             ->add('provinces', 'collection', array(
                 'type' => 'sylius_province',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'button_add_label' => 'sylius.country.add_province'
+                'button_add_label' => 'sylius.country.add_province',
             ))
         ;
     }

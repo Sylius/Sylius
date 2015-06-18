@@ -171,7 +171,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
     {
         $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
             'property_path'   => '['.$name.']',
-            'auto_initialize' => false
+            'auto_initialize' => false,
         ), $this->options)));
     }
 

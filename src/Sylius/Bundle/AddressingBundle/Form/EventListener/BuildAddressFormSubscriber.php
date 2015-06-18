@@ -55,7 +55,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT   => 'preSubmit',
         );
     }
 
@@ -79,7 +79,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         if ($country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
                 'country' => $country,
-                'auto_initialize' => false
+                'auto_initialize' => false,
             )));
         }
     }
@@ -104,7 +104,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         if ($country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
                 'country'  => $country,
-                'auto_initialize' => false
+                'auto_initialize' => false,
             )));
         }
     }

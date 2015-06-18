@@ -54,11 +54,11 @@ class ProvinceController extends ResourceController
         $form = $this->createProvinceChoiceForm($country);
 
         $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ));
 
         return new JsonResponse(array(
-            'content' => $content
+            'content' => $content,
         ));
     }
 
@@ -115,7 +115,7 @@ class ProvinceController extends ResourceController
         return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
             'country'     => $country,
             'label'       => 'sylius.form.address.province',
-            'empty_value' => 'sylius.form.province.select'
+            'empty_value' => 'sylius.form.province.select',
         ));
     }
 }
