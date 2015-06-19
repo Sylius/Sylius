@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Constraint to require an address to be shippable
+ * Constraint to require an address to be shippable.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */

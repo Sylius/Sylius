@@ -28,7 +28,7 @@ class CountryTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.country.name'
+                'label' => 'sylius.form.country.name',
             ))
         ;
     }

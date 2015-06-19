@@ -41,14 +41,14 @@ class SyliusAddressingExtension extends AbstractResourceExtension
         $container
             ->getDefinition('sylius.form.type.province_choice')
             ->setArguments(array(
-                new Reference('sylius.repository.province')
+                new Reference('sylius.repository.province'),
             ))
         ;
 
         $container
             ->getDefinition('sylius.form.type.province_choice')
             ->setArguments(array(
-                new Reference('sylius.repository.province')
+                new Reference('sylius.repository.province'),
             ))
         ;
 

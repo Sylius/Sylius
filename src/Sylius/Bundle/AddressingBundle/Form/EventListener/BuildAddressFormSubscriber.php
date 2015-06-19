@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildAddressFormListener implements EventSubscriberInterface
+class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectRepository
@@ -55,7 +55,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preSubmit',
         );
     }
 
@@ -78,7 +78,8 @@ class BuildAddressFormListener implements EventSubscriberInterface
 
         if ($country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
-                'country' => $country, 'auto_initialize' => false
+                'country' => $country,
+                'auto_initialize' => false,
             )));
         }
     }
@@ -88,7 +89,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
         if (!is_array($data) || !array_key_exists('country', $data)) {
@@ -102,7 +103,8 @@ class BuildAddressFormListener implements EventSubscriberInterface
 
         if ($country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
-                'country'  => $country, 'auto_initialize' => false
+                'country'  => $country,
+                'auto_initialize' => false,
             )));
         }
     }
