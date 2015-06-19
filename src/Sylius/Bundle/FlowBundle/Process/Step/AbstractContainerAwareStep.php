@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class ContainerAwareStep extends Step implements ContainerAwareInterface
+abstract class AbstractContainerAwareStep extends AbstractStep implements ContainerAwareInterface
 {
     /**
      * Container.

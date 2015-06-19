@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class CheckoutStep extends ControllerStep
+abstract class CheckoutStep extends AbstractControllerStep
 {
     /**
      * Get cart provider.

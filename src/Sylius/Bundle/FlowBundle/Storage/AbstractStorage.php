@@ -16,7 +16,7 @@ namespace Sylius\Bundle\FlowBundle\Storage;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class Storage implements StorageInterface
+abstract class AbstractStorage implements StorageInterface
 {
     /**
      * Storage domain.
@@ -31,5 +31,7 @@ abstract class Storage implements StorageInterface
     public function initialize($domain)
     {
         $this->domain = $domain;
+
+        return $this;
     }
 }

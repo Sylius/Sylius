@@ -21,8 +21,17 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
  */
 class ProcessValidator implements ProcessValidatorInterface
 {
+    /**
+     * @var string|null
+     */
     protected $message;
+    /**
+     * @var string|null
+     */
     protected $stepName;
+    /**
+     * @var callable
+     */
     protected $validation;
 
     public function __construct($message = null, $stepName = null, \Closure $validation = null)
@@ -69,7 +78,7 @@ class ProcessValidator implements ProcessValidatorInterface
     }
 
     /**
-     * Set validation
+     * Set validation.
      *
      * @param callable $validation
      *
@@ -83,7 +92,7 @@ class ProcessValidator implements ProcessValidatorInterface
     }
 
     /**
-     * Get validation
+     * Get validation.
      *
      * @return callable
      */

@@ -148,6 +148,12 @@ class Coordinator implements CoordinatorInterface
         return $this->processStepResult($process, $step->forwardAction($this->context));
     }
 
+    /**
+     * @param ProcessInterface $process
+     * @param $result
+     *
+     * @return RedirectResponse
+     */
     public function processStepResult(ProcessInterface $process, $result)
     {
         if ($result instanceof Response || $result instanceof View) {
@@ -166,7 +172,9 @@ class Coordinator implements CoordinatorInterface
             if ($this->context->isLastStep()) {
                 $this->context->close();
 
-                return new RedirectResponse($this->router->generate($process->getRedirect(), $process->getRedirectParams()));
+                return new RedirectResponse(
+                    $this->router->generate($process->getRedirect(), $process->getRedirectParams())
+                );
             }
 
             // Handle default linear behaviour.
@@ -182,7 +190,9 @@ class Coordinator implements CoordinatorInterface
     public function registerScenario($alias, ProcessScenarioInterface $scenario)
     {
         if (isset($this->scenarios[$alias])) {
-            throw new InvalidArgumentException(sprintf('Process scenario with alias "%s" is already registered', $alias));
+            throw new InvalidArgumentException(
+                sprintf('Process scenario with alias "%s" is already registered', $alias)
+            );
         }
 
         $this->scenarios[$alias] = $scenario;
@@ -209,13 +219,16 @@ class Coordinator implements CoordinatorInterface
      *
      * @return RedirectResponse
      */
-    protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step, ParameterBag $queryParameters = null)
-    {
+    protected function redirectToStepDisplayAction(
+        ProcessInterface $process,
+        StepInterface $step,
+        ParameterBag $queryParameters = null
+    ) {
         $this->context->addStepToHistory($step->getName());
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array_merge(
-                $process->getDisplayRouteParams(), 
+                $process->getDisplayRouteParams(),
                 array('stepName' => $step->getName()),
                 $queryParameters ? $queryParameters->all() : array()
             ));
@@ -233,7 +246,9 @@ class Coordinator implements CoordinatorInterface
             $routeParameters = array_merge($queryParameters->all(), $routeParameters);
         }
 
-        return new RedirectResponse($this->router->generate('sylius_flow_display', $routeParameters));
+        return new RedirectResponse(
+            $this->router->generate('sylius_flow_display', $routeParameters)
+        );
     }
 
     /**
