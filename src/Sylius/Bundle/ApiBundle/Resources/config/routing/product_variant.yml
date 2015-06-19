@@ -27,9 +27,8 @@ sylius_api_product_variant_update:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             criteria:
-                id:      $id
-                product: $productId
-                master:  false
+                object: $productId
+                master: false
 
 sylius_api_product_variant_delete:
     path: /{id}
@@ -38,9 +37,8 @@ sylius_api_product_variant_delete:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
             criteria:
-                id:      $id
-                product: $productId
-                master:  false
+                object: $productId
+                master: false
 
 sylius_api_product_variant_show:
     path: /{id}
@@ -49,6 +47,5 @@ sylius_api_product_variant_show:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
             criteria:
-                id:      $id
-                product: $productId
-                master:  false
+                object: $productId
+                master: false
