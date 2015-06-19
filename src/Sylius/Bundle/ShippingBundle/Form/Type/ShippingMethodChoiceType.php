@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -41,7 +42,7 @@ class ShippingMethodChoiceType extends AbstractType
     protected $resolver;
 
     /**
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistry
      */
     protected $calculators;
 
@@ -53,13 +54,13 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * Constructor.
      *
-     * @param MethodsResolverInterface    $resolver
-     * @param CalculatorRegistryInterface $calculators
-     * @param Repositoryinterface         $repository
+     * @param MethodsResolverInterface $resolver
+     * @param ServiceRegistry          $calculators
+     * @param Repositoryinterface      $repository
      */
     public function __construct(
         MethodsResolverInterface $resolver,
-        CalculatorRegistryInterface $calculators,
+        ServiceRegistry $calculators,
         RepositoryInterface $repository
     ) {
         $this->resolver = $resolver;
