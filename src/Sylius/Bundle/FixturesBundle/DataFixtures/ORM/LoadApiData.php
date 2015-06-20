@@ -30,6 +30,9 @@ class LoadApiData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $rbacInitializer = $this->get('sylius.rbac.initializer');
+        $rbacInitializer->initialize();
+
         // create user with API role
         $user = $this->createUser(
             'api@example.com',
