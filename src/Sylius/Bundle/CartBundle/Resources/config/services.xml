@@ -24,8 +24,8 @@
 
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
 
-        <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
-        <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
+        <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartSubscriber</parameter>
+        <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashSubscriber</parameter>
         <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>

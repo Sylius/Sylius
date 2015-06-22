@@ -24,7 +24,7 @@ use Symfony\Component\Validator\ValidatorInterface;
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class CartListener implements EventSubscriberInterface
+class CartSubscriber implements EventSubscriberInterface
 {
     /**
      * Cart manager.
@@ -54,13 +54,19 @@ class CartListener implements EventSubscriberInterface
      * @param ValidatorInterface    $validator
      * @param CartProviderInterface $cartProvider
      */
-    public function __construct(ObjectManager $cartManager, ValidatorInterface $validator, CartProviderInterface $cartProvider)
-    {
+    public function __construct(
+        ObjectManager $cartManager,
+        ValidatorInterface $validator,
+        CartProviderInterface $cartProvider
+    ) {
         $this->cartManager  = $cartManager;
         $this->validator    = $validator;
         $this->cartProvider = $cartProvider;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -71,18 +77,27 @@ class CartListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param CartItemEvent $event
+     */
     public function addItem(CartItemEvent $event)
     {
         $cart = $event->getCart();
         $cart->addItem($event->getItem());
     }
 
+    /**
+     * @param CartItemEvent $event
+     */
     public function removeItem(CartItemEvent $event)
     {
         $cart = $event->getCart();
         $cart->removeItem($event->getItem());
     }
 
+    /**
+     * @param CartEvent $event
+     */
     public function clearCart(CartEvent $event)
     {
         $this->cartManager->remove($event->getCart());
@@ -90,6 +105,9 @@ class CartListener implements EventSubscriberInterface
         $this->cartProvider->abandonCart();
     }
 
+    /**
+     * @param CartEvent $event
+     */
     public function saveCart(CartEvent $event)
     {
         $cart  = $event->getCart();

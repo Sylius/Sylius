@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class FlashListenerSpec extends ObjectBehavior
+class FlashSubscriberSpec extends ObjectBehavior
 {
     function let(SessionInterface $session, TranslatorInterface $translator)
     {
@@ -31,7 +31,7 @@ class FlashListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\FlashListener');
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\FlashSubscriber');
     }
 
     function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
