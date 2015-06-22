@@ -3,7 +3,7 @@ winzou_state_machine:
         class:         %sylius.model.payment.class%
         property_path: state
         graph:         sylius_payment
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             new:        ~
             unknown:    ~
