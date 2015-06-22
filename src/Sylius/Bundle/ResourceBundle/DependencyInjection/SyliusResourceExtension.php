@@ -46,11 +46,11 @@ class SyliusResourceExtension extends AbstractExtension
 
         $this->createResourceServices($classes, $container);
 
-        $configClasses = array();
+        $configClasses = array('default' => $this->getClassesFromConfig($classes));
 
         if ($container->hasParameter('sylius.config.classes')) {
             $configClasses = array_merge_recursive(
-                array('default' => $classes),
+                $configClasses,
                 $container->getParameter('sylius.config.classes')
             );
         }
@@ -95,5 +95,20 @@ class SyliusResourceExtension extends AbstractExtension
                 )->load($config['classes']['translation']);
             }
         }
+    }
+
+    /**
+     * @param array $configs
+     * @return array
+     */
+    private function getClassesFromConfig($configs)
+    {
+        $classes = array();
+
+        foreach ($configs as $config) {
+            $classes[] = $config['classes'];
+        }
+
+        return $classes;
     }
 }
