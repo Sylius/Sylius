@@ -59,7 +59,6 @@ EOT
             'doctrine:fixtures:load'       => array('--no-interaction' => true),
             'doctrine:phpcr:fixtures:load' => array('--no-interaction' => true),
             'sylius:search:index',
-            'sylius:rbac:initialize'
         );
 
         $this->runCommands($commands, $input, $output);

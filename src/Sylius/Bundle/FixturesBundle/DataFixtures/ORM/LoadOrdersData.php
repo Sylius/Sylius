@@ -91,7 +91,7 @@ class LoadOrdersData extends DataFixture
      */
     public function getOrder()
     {
-        return 7;
+        return 60;
     }
 
     /**

@@ -29,9 +29,6 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $rbacInitializer = $this->get('sylius.rbac.initializer');
-        $rbacInitializer->initialize();
-
         $user = $this->createUser(
             'sylius@example.com',
             'sylius',
@@ -81,7 +78,7 @@ class LoadUsersData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 20;
     }
 
     /**

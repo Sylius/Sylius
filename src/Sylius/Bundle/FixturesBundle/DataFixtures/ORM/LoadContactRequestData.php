@@ -48,6 +48,6 @@ class LoadContactRequestData extends DataFixture
      */
     public function getOrder()
     {
-        return 2;
+        return 20;
     }
 }

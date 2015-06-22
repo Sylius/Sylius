@@ -80,7 +80,7 @@ class LoadProductsData extends DataFixture
      */
     public function getOrder()
     {
-        return 6;
+        return 50;
     }
 
     /**

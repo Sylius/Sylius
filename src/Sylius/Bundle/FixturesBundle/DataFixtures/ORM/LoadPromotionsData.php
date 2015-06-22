@@ -73,7 +73,7 @@ class LoadPromotionsData extends DataFixture
      */
     public function getOrder()
     {
-        return 6;
+        return 20;
     }
 
     /**
