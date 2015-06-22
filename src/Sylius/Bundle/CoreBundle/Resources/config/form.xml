@@ -82,7 +82,7 @@
         <service id="sylius.checkout_form.guest" class="%sylius.checkout_form.guest.class%">
             <argument>%sylius.model.customer.class%</argument>
             <argument type="collection">
-                <argument>sylius_guest</argument>
+                <argument>sylius_customer_guest</argument>
             </argument>
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" alias="sylius_checkout_guest" />
