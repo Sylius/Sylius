@@ -49,7 +49,7 @@ class PaymentStep extends CheckoutStep
 
         $form = $this->createCheckoutPaymentForm($order);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $this->getManager()->persist($order);

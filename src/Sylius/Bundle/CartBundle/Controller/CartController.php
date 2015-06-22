@@ -67,7 +67,7 @@ class CartController extends Controller
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $event = new CartEvent($cart);
             $event->isFresh(true);
 

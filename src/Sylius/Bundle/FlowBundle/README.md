@@ -85,7 +85,7 @@ class DeliveryStep extends ContainerAwareStep
         $request = $context->getRequest();
         $form = $this->createAddressForm();
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $context->getStorage()->set('delivery.address', $form->getData());
             $context->complete(); // Complete step, user will be redirected to next step.
 

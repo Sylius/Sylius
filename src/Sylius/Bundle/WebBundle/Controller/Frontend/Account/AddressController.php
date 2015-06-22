@@ -55,7 +55,7 @@ class AddressController extends FOSRestController
         $address = $this->getAddressRepository()->createNew();
         $form = $this->getAddressForm($address);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $customer->addAddress($address);
 
             $manager = $this->getCustomerManager();
@@ -88,7 +88,7 @@ class AddressController extends FOSRestController
         $address = $this->findUserAddressOr404($id);
         $form = $this->getAddressForm($address);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $manager = $this->getCustomerManager();
             $manager->persist($customer);
             $manager->flush();

@@ -41,7 +41,7 @@ class SetupStep extends AbstractControllerStep
         $form = $this->createForm('sylius_setup');
         $em = $this->getDoctrine()->getManager();
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $params = $this->get('doctrine')->getConnection()->getParams();
             $dbname = $params['dbname'];
             unset($params['dbname']);
