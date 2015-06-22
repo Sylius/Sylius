@@ -73,8 +73,8 @@ abstract class Kernel extends BaseKernel
 
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
-            new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),

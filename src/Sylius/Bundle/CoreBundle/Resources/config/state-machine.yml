@@ -3,7 +3,7 @@ winzou_state_machine:
         class:         %sylius.model.order.class%
         property_path: checkoutState
         graph:         sylius_order_checkout
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             cart: ~
             addressing: ~
@@ -32,7 +32,7 @@ winzou_state_machine:
         class:         %sylius.model.order.class%
         property_path: shippingState
         graph:         sylius_order_shipping
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             checkout:          ~
             onhold:            ~
@@ -66,7 +66,7 @@ winzou_state_machine:
         class:         %sylius.model.order.class%
         property_path: paymentState
         graph:         sylius_order_payment
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             new:        ~
             pending:    ~

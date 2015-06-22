@@ -3,7 +3,7 @@ winzou_state_machine:
         class:         %sylius.model.order.class%
         property_path: state
         graph:         sylius_order
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             cart:        ~
             cart_locked: ~
