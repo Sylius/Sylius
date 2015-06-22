@@ -11,17 +11,17 @@ sylius_api_payment_index:
             filterable: true
             sortable:   true
 
-#sylius_api_payment_create:
-#    path: /
-#    methods: [POST]
-#    defaults:
-#        _controller: sylius.controller.payment:createAction
+sylius_api_payment_create:
+   path: /
+   methods: [POST]
+   defaults:
+       _controller: sylius.controller.payment:createAction
 
-#sylius_api_payment_update:
-#    path: /{id}
-#    methods: [PUT, PATCH]
-#    defaults:
-#        _controller: sylius.controller.payment:updateAction
+sylius_api_payment_update:
+   path: /{id}
+   methods: [PUT, PATCH]
+   defaults:
+       _controller: sylius.controller.payment:updateAction
 
 sylius_api_payment_delete:
     path: /{id}
