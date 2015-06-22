@@ -13,6 +13,8 @@ namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * Inventory extension.
@@ -20,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends AbstractResourceExtension
+class SyliusInventoryExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'services.xml',
@@ -68,5 +70,18 @@ class SyliusInventoryExtension extends AbstractResourceExtension
                 );
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('winzou_state_machine')) {
+            throw new \RuntimeException('winzouStateMachineBundle must be registered!');
+        }
+        $parser = new Parser();
+        $config = $parser->parse(file_get_contents($this->getDefinitionPath($container).'/state-machine.yml'));
+        $container->prependExtensionConfig('winzou_state_machine', $config['winzou_state_machine']);
     }
 }

@@ -14,13 +14,15 @@ namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * Payments extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPaymentExtension extends AbstractResourceExtension
+class SyliusPaymentExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -46,5 +48,18 @@ class SyliusPaymentExtension extends AbstractResourceExtension
             ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
             ->addArgument(new Reference('sylius.repository.payment'))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('winzou_state_machine')) {
+            throw new \RuntimeException('winzouStateMachineBundle must be registered!');
+        }
+        $parser = new Parser();
+        $config = $parser->parse(file_get_contents($this->getDefinitionPath($container).'/state-machine.yml'));
+        $container->prependExtensionConfig('winzou_state_machine', $config['winzou_state_machine']);
     }
 }

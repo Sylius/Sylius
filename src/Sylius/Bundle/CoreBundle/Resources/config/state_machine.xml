@@ -11,8 +11,8 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
@@ -23,6 +23,8 @@
         <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
         <parameter key="sylius.callback.promotion_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\PromotionUsageCallback</parameter>
         <parameter key="sylius.callback.order_shipment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderShipmentCallback</parameter>
+
+        <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
     </parameters>
 
     <services>
