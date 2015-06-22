@@ -46,7 +46,7 @@ class SettingsController extends FOSRestController
             ->create($namespace, $settings, $isApiRequest ? array('csrf_protection' => false) : array())
         ;
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $messageType = 'success';
             try {
                 $manager->saveSettings($namespace, $form->getData());

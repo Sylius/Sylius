@@ -35,7 +35,7 @@ class ConfigureStep extends AbstractControllerStep
         $request = $this->getRequest();
         $form = $this->createConfigurationForm();
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $this->get('sylius.installer.yaml_persister')->dump($form->getData());
 
             return $this->complete();
