@@ -78,7 +78,7 @@ abstract class ApiTestCase extends BaseWebTestCase
 
             $diff = new \Diff($expectedResponse, $actualResponse, array());
 
-            $renderer = new \Diff_Renderer_Text_Unified;
+            $renderer = new \Diff_Renderer_Text_Unified();
             echo $diff->render($renderer);
         }
 
