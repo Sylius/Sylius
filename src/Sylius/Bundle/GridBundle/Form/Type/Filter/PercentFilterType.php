@@ -11,10 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
-use Sylius\Component\Grid\Filter\NumberFilter;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Percent filter type.

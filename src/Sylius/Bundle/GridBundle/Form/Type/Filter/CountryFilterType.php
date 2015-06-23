@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
-use Sylius\Component\Grid\Filter\StringFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -41,10 +40,10 @@ class CountryFilterType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'multiple'   => false
+                'multiple'   => false,
             ))
             ->setAllowedTypes(array(
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
             ))
         ;
     }

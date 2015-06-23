@@ -22,8 +22,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- *
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class GridExtension extends \Twig_Extension
@@ -46,10 +44,13 @@ class GridExtension extends \Twig_Extension
     /**
      * @param FormFactoryInterface    $formFactory
      * @param ColumnRendererInterface $columnRenderer
-     * @param ParmaetersParser        $parametersParser
+     * @param ParametersParser        $parametersParser
      */
-    public function __construct(FormFactoryInterface $formFactory, ColumnRendererInterface $columnRenderer, ParametersParser $parametersParser)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        ColumnRendererInterface $columnRenderer,
+        ParametersParser $parametersParser
+    ) {
         $this->formFactory = $formFactory;
         $this->columnRenderer = $columnRenderer;
         $this->parametersParser = $parametersParser;
@@ -62,24 +63,24 @@ class GridExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('sylius_grid_render', array($this, 'render'), array(
-                'is_safe'           => array('html'),
-                'needs_environment' => true
+                'is_safe' => array('html'),
+                'needs_environment' => true,
             )),
             new \Twig_SimpleFunction('sylius_grid_render_header', array($this, 'renderHeader'), array(
-                'is_safe'           => array('html'),
-                'needs_environment' => true
+                'is_safe' => array('html'),
+                'needs_environment' => true,
             )),
             new \Twig_SimpleFunction('sylius_grid_render_value', array($this, 'renderValue'), array(
-                'is_safe'           => array('html'),
-                'needs_environment' => true
+                'is_safe' => array('html'),
+                'needs_environment' => true,
             )),
             new \Twig_SimpleFunction('sylius_grid_render_action', array($this, 'renderAction'), array(
-                'is_safe'           => array('html'),
-                'needs_environment' => true
+                'is_safe' => array('html'),
+                'needs_environment' => true,
             )),
             new \Twig_SimpleFunction('sylius_grid_render_filter_form', array($this, 'renderFilterForm'), array(
-                'is_safe'           => array('html'),
-                'needs_environment' => true
+                'is_safe' => array('html'),
+                'needs_environment' => true,
             )),
         );
     }
@@ -87,10 +88,16 @@ class GridExtension extends \Twig_Extension
     /**
      * @param \Twig_Environment $twig
      * @param GridView          $gridView
+     * @param Configuration     $configuration
+     *
+     * @return string
      */
     public function render(\Twig_Environment $twig, GridView $gridView, Configuration $configuration)
     {
-        return $twig->render('SyliusGridBundle::_grid.html.twig', array('grid' => $gridView, 'configuration' => $configuration));
+        return $twig->render('SyliusGridBundle::_grid.html.twig', array(
+            'grid' => $gridView,
+            'configuration' => $configuration,
+        ));
     }
 
     /**
@@ -137,10 +144,16 @@ class GridExtension extends \Twig_Extension
      * @param GridView          $gridView
      * @param Action            $actionDefinition
      * @param Request           $request
-     * @param $object
+     * @param mixed             $object
+     *
+     * @return string
      */
-    public function renderAction(\Twig_Environment $twig, GridView $gridView, Action $actionDefinition, Request $request, $object = null)
-    {
+    public function renderAction(
+        \Twig_Environment $twig,
+        GridView $gridView,
+        Action $actionDefinition,
+        Request $request, $object = null
+    ) {
         $options = $actionDefinition->getOptions();
 
         $parameters = isset($options['parameters']) ? $options['parameters'] : array();
@@ -161,20 +174,30 @@ class GridExtension extends \Twig_Extension
      * @param \Twig_Environment $twig
      * @param Request           $request
      * @param GridView          $gridView
+     *
+     * @return string
      */
     public function renderFilterForm(\Twig_Environment $twig, Request $request, GridView $gridView)
     {
         $gridDefinition = $gridView->getDefinition();
-        $filterFormBuilder = $this->formFactory->createNamedBuilder('filters', 'form', array(), array('csrf_protection' => false));
+        $filterFormBuilder = $this->formFactory->createNamedBuilder('filters', 'form', array(), array(
+            'csrf_protection' => false,
+        ));
 
         foreach ($gridDefinition->getFilters() as $field => $filterDefinition) {
-            $filterFormBuilder->add($field, sprintf('sylius_filter_%s', $filterDefinition->getType()), $filterDefinition->getOptions());
+            $filterFormBuilder->add(
+                $field,
+                sprintf('sylius_filter_%s', $filterDefinition->getType()), $filterDefinition->getOptions()
+            );
         }
 
         $form = $filterFormBuilder->getForm();
         $form->submit($request);
 
-        return $twig->render('SyliusGridBundle::_filterForm.html.twig', array('form' => $form->createView(), 'grid' => $gridView));
+        return $twig->render('SyliusGridBundle::_filterForm.html.twig', array(
+            'form' => $form->createView(),
+            'grid' => $gridView, )
+        );
     }
 
     /**

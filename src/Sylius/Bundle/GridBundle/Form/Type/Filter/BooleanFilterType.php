@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
 use Sylius\Component\Grid\Filter\BooleanFilter;
-use Sylius\Component\Grid\Filter\StringFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -32,7 +31,7 @@ class BooleanFilterType extends AbstractType
         $builder
             ->add('value', 'choice', array(
                 'required' => false,
-                'choices'  => array(BooleanFilter::TRUE => 'Yes', BooleanFilter::FALSE => 'No')
+                'choices'  => array(BooleanFilter::TRUE => 'Yes', BooleanFilter::FALSE => 'No'),
             ))
         ;
     }
@@ -44,7 +43,7 @@ class BooleanFilterType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

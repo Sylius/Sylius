@@ -34,7 +34,7 @@ class RegisterColumnTypesPass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.registry.grid_column_type');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_column_type') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
+            if (!isset($attributes[0]['type'])) {
                 throw new \InvalidArgumentException('Tagged grid column type needs to have `type` attribute.');
             }
 
