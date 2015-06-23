@@ -20,25 +20,29 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterColumnTypesPass implements CompilerPassInterface
+class RegisterColumnTypesPass extends AbstractRegisterServicePass
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    protected function getRegistryIdentifier()
     {
-        if (!$container->hasDefinition('sylius.registry.grid_column_type')) {
-            return;
-        }
+        return 'sylius.registry.grid_column_type';
+    }
 
-        $registry = $container->getDefinition('sylius.registry.grid_column_type');
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTagName()
+    {
+        return 'sylius.grid_column_type';
+    }
 
-        foreach ($container->findTaggedServiceIds('sylius.grid_column_type') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
-                throw new \InvalidArgumentException('Tagged grid column type needs to have `type` attribute.');
-            }
-
-            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
-        }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getIdentifierAttribute()
+    {
+        return 'type';
     }
 }
