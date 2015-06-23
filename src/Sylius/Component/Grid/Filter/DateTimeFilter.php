@@ -60,7 +60,6 @@ class DateTimeFilter implements FilterInterface
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */

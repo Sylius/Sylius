@@ -71,10 +71,11 @@ class Parameters
     }
 
     /**
-     * Get parameter value
+     * Get parameter value.
      *
      * @param string $key
      * @param mixed  $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -94,7 +95,7 @@ class Parameters
     }
 
     /**
-     * Merge parameter value by key
+     * Merge parameter value by key.
      *
      * @param string $key
      * @param mixed  $value
@@ -114,6 +115,7 @@ class Parameters
      * Returns true if the parameter is defined.
      *
      * @param string $key The key
+     *
      * @return Boolean true if the parameter exists, false otherwise
      */
     public function has($key)

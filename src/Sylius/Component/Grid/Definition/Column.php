@@ -45,7 +45,7 @@ class Column
      * @param string $name
      * @param string $type
      * @param string $label
-     * @param bool $sortable
+     * @param bool   $sortable
      */
     public function __construct($name, $type, $label = null, $sortable = true, $options = array())
     {
@@ -58,7 +58,9 @@ class Column
 
     /**
      * @param string $name
-     * @param array $configuration
+     * @param array  $configuration
+     *
+     * @return $this
      */
     public static function createFromArray($name, array $configuration)
     {

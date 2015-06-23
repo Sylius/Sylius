@@ -55,18 +55,17 @@ class BooleanColumnType extends TwigColumnType
     {
         $resolver
             ->setOptional(array(
-                'path'
+                'path',
             ))
             ->setDefaults(array(
                 'template' => $this->defaultTemplate,
             ))
             ->setAllowedTypes(array(
                 'template' => array('string'),
-                'path'     => array('string')
+                'path'     => array('string'),
             ))
         ;
     }
-
 
     /**
      * {@inheritdoc}

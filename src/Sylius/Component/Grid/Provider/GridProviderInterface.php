@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Grid\Provider;
 
+use Sylius\Component\Grid\Definition\Grid;
+
 /**
  * @author Paweł Jędrzejewski <pawel@svaluelius.org>
  */

@@ -47,19 +47,18 @@ class EntityFilter implements FilterInterface
     {
         $resolver
             ->setDefaults(array(
-                'multiple' => false
+                'multiple' => false,
             ))
             ->setOptional(array(
                 'field',
-                'class'
+                'class',
             ))
             ->setAllowedTypes(array(
                 'field'    => array('string'),
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
             ))
         ;
     }
-
 
     /**
      * {@inheritdoc}

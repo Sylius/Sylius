@@ -21,8 +21,9 @@ use Sylius\Component\Grid\Parameters;
 interface FiltersApplicatorInterface
 {
     /**
+     * @param Grid                $grid
      * @param DataSourceInterface $dataSource
-     *
+     * @param Parameters          $parameters
      * @param $data
      */
     public function apply(Grid $grid, DataSourceInterface $dataSource, Parameters $parameters);

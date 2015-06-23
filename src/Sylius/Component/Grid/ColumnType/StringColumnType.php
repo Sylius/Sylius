@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Grid\ColumnType;
 
-use Sylius\Component\Grid\Definition\Grid;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -37,11 +36,11 @@ class StringColumnType extends AbstractColumnType
         $resolver
             ->setOptional(array(
                 'path',
-                'sort'
+                'sort',
             ))
             ->setAllowedTypes(array(
                 'path' => array('string'),
-                'sort' => array('string')
+                'sort' => array('string'),
             ))
         ;
     }
