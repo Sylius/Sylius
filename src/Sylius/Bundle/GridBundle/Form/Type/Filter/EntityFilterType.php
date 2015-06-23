@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
-use Sylius\Component\Grid\Filter\StringFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -32,7 +31,7 @@ class EntityFilterType extends AbstractType
             ->add('entity', 'entity', array(
                 'required' => false,
                 'class'    => $options['class'],
-                'multiple' => $options['multiple']
+                'multiple' => $options['multiple'],
             ))
         ;
     }
@@ -48,11 +47,11 @@ class EntityFilterType extends AbstractType
                 'multiple'   => false,
             ))
             ->setRequired(array(
-                'class'
+                'class',
             ))
             ->setAllowedTypes(array(
                 'class'    => array('string'),
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
             ))
         ;
     }

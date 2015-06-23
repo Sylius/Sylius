@@ -29,7 +29,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * @param QueryBuilder $queryBuilder
      */
-    function __construct(QueryBuilder $queryBuilder)
+    public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
     }
@@ -98,56 +98,91 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         $this->queryBuilder->andWhere($this->getFieldName($field).' < :'.$field)->setParameter($field, $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function lessThanOrEqual($field, $value)
     {
         $this->queryBuilder->andWhere($this->getFieldName($field).' =< :'.$field)->setParameter($field, $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function greaterThan($field, $value)
     {
         $this->queryBuilder->andWhere($this->getFieldName($field).' > :'.$field)->setParameter($field, $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function greaterThanOrEqual($field, $value)
     {
         $this->queryBuilder->andWhere($this->getFieldName($field).' => :%s'.$field)->setParameter($field, $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function in($field, array $values)
     {
         return $this->queryBuilder->expr()->in($this->getFieldName($field), $values);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function notIn($field, array $values)
     {
         return $this->queryBuilder->expr()->notIn($this->getFieldName($field), $values);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isNull($field)
     {
         return $this->queryBuilder->expr()->isNull($this->getFieldName($field));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isNotNull($field)
     {
         return $this->queryBuilder->expr()->isNotNull($this->getFieldName($field));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function like($field, $pattern)
     {
         return $this->queryBuilder->expr()->like($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function notLike($field, $pattern)
     {
         return $this->queryBuilder->expr()->notLike($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function orderBy($field, $direction)
     {
         return $this->queryBuilder->orderBy($this->getFieldName($field), $direction);
     }
 
+    /**
+     * @param string $field
+     *
+     * @return string
+     */
     private function getFieldName($field)
     {
         if (false === strpos($field, '.')) {

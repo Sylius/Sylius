@@ -39,7 +39,7 @@ class NumberFilterType extends AbstractType
                     NumberFilter::TYPE_NOT_EQUAL             => '!=',
                     NumberFilter::TYPE_EMPTY                 => 'empty',
                     NumberFilter::TYPE_NOT_EMPTY             => 'not_empty',
-                )
+                ),
             ))
             ->add('value', 'number', array('required' => false))
         ;
@@ -52,7 +52,7 @@ class NumberFilterType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

@@ -34,8 +34,8 @@ class DateFilterType extends AbstractType
                     DateFilter::TYPE_BETWEEN     => 'between',
                     DateFilter::TYPE_NOT_BETWEEN => 'not_between',
                     DateFilter::TYPE_MORE_THAN   => 'more_than',
-                    DateFilter::TYPE_LESS_THAN   => 'less_than'
-                )
+                    DateFilter::TYPE_LESS_THAN   => 'less_than',
+                ),
             ))
             ->add('from', 'date', array('required' => false))
             ->add('to', 'date', array('required' => false))
@@ -52,10 +52,10 @@ class DateFilterType extends AbstractType
                 'data_class' => null,
             ))
             ->setOptional(array(
-                'field'
+                'field',
             ))
             ->setAllowedTypes(array(
-                'field' => array('string')
+                'field' => array('string'),
             ))
         ;
     }

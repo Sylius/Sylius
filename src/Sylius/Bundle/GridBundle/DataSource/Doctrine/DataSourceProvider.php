@@ -32,7 +32,7 @@ class DataSourceProvider implements DataSourceProviderInterface
     /**
      * @param ContainerInterface $container
      */
-    function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }

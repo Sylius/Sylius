@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
-use Sylius\Component\Grid\Filter\StringFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -32,7 +31,7 @@ class ChoiceFilterType extends AbstractType
             ->add('value', 'choice', array(
                 'required' => false,
                 'choices'  => $options['choices'],
-                'multiple' => $options['multiple']
+                'multiple' => $options['multiple'],
             ))
         ;
     }
@@ -45,14 +44,14 @@ class ChoiceFilterType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'multiple'   => false
+                'multiple'   => false,
             ))
             ->setRequired(array(
-                'choices'
+                'choices',
             ))
             ->setAllowedTypes(array(
                 'choices'  => array('array'),
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
             ))
         ;
     }

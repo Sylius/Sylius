@@ -39,8 +39,8 @@ class StringFilterType extends AbstractType
                     StringFilter::TYPE_STARTS_WITH  => 'starts_with',
                     StringFilter::TYPE_ENDS_WITH    => 'ends_with',
                     StringFilter::TYPE_IN           => 'in',
-                    StringFilter::TYPE_NOT_IN       => 'not_in'
-                )
+                    StringFilter::TYPE_NOT_IN       => 'not_in',
+                ),
             ))
             ->add('value', 'text', array('required' => false))
         ;
@@ -53,13 +53,13 @@ class StringFilterType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
             ->setOptional(array(
-                'fields'
+                'fields',
             ))
             ->setAllowedTypes(array(
-                'fields' => array('array')
+                'fields' => array('array'),
             ))
         ;
     }

@@ -14,9 +14,9 @@ namespace Sylius\Bundle\GridBundle\DataSource\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\GridBundle\DataSource\Doctrine\ORM\ExpressionBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Grid\DataSource\DataSourceInterface;
+use Sylius\Component\Grid\DataSource\ExpressionBuilderInterface;
 
 /**
  * Doctrine DataSource.
@@ -36,9 +36,11 @@ class DataSource implements DataSourceInterface
     private $expressionBuilder;
 
     /**
-     * @param EntityRepository
+     * @param EntityRepository $repository
+     * @param string|null      $method
+     * @param array            $arguments
      */
-    function __construct(EntityRepository $repository, $method = null, $arguments = array())
+    public function __construct(EntityRepository $repository, $method = null, $arguments = array())
     {
         if (null === $method) {
             $queryBuilder = $repository->createQueryBuilder('o');

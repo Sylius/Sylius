@@ -34,7 +34,7 @@ class RegisterFiltersPass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.registry.grid_filter');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_filter') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
+            if (!isset($attributes[0]['type'])) {
                 throw new \InvalidArgumentException('Tagged grid filters needs to have `type` attribute.');
             }
 
