@@ -41,7 +41,7 @@ class LoadChannelData extends DataFixture
      */
     public function getOrder()
     {
-        return 5;
+        return 40;
     }
 
     /**
