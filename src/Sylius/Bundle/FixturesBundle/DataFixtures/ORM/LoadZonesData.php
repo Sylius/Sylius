@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadZonesData extends DataFixture
 {
-    private $euCountries = array(
+    protected $euCountries = array(
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
