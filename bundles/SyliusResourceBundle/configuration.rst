@@ -27,7 +27,7 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
                     repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
             my_app.document_name:
                 driver: doctrine/odm
-                manager: default
+                object_manager: default
                 templates: App:User
                 classes:
                     model: MyApp\Document\DocumentName
