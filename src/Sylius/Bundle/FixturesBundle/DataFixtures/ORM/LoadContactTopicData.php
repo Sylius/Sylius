@@ -18,6 +18,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
  * Default contact topic fixtures.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class LoadContactTopicData extends DataFixture
 {
@@ -30,6 +31,8 @@ class LoadContactTopicData extends DataFixture
 
         for ($i = 0; $i < 5; $i++) {
             $contactTopic = $contactTopicRepository->createNew();
+            $contactTopic->setCurrentLocale($this->defaultLocale);
+            $contactTopic->setFallbackLocale($this->defaultLocale);
 
             $contactTopic->setTitle($this->faker->sentence());
 

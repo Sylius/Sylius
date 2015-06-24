@@ -15,16 +15,8 @@ namespace Sylius\Component\Contact\Model;
  * Interface for the model representing a contact topic.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface TopicInterface
+interface TopicInterface extends TopicTranslationInterface
 {
-    /**
-     * @return string
-     */
-    public function getTitle();
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title);
 }

@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Sylius contact topic form type.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class TopicType extends AbstractResourceType
 {
@@ -27,8 +28,9 @@ class TopicType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.contact_topic.title'
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => 'sylius_contact_topic_translation',
+                'label'    => 'sylius.form.contact_topic.title',
             ))
         ;
     }
