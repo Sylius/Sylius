@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_static_content_index:
-    pattern: /
+    path:    /
     methods: [GET]
     defaults:
         _controller: sylius.controller.static_content:indexAction
@@ -11,7 +11,7 @@ sylius_backend_static_content_index:
             sortable: true
 
 sylius_backend_static_content_create:
-    pattern: /new
+    path:    /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.static_content:createAction
@@ -20,7 +20,7 @@ sylius_backend_static_content_create:
             redirect: sylius_backend_static_content_index
 
 sylius_backend_static_content_update:
-    pattern: /{id}/edit
+    path:    /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.static_content:updateAction
@@ -34,7 +34,7 @@ sylius_backend_static_content_update:
         id: ".+"
 
 sylius_backend_static_content_delete:
-    pattern: /{id}/delete
+    path:    /{id}/delete
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.static_content:deleteAction
