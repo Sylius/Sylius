@@ -68,6 +68,8 @@ Finally, you need to register your custom pass with the container
 .. code-block:: php
 
     namespace App\Bundle\MyBundle;
+    
+    use App\Bundle\MyBundle\DependencyInjection\Compiler\RegisterCalculatorServicePass;
 
     class AppMyBundleBundle extends Bundle
     {
@@ -75,6 +77,6 @@ Finally, you need to register your custom pass with the container
         {
             parent::build($container);
 
-            $container->addCompilerPass(new RegisterServicePass());
+            $container->addCompilerPass(new RegisterCalculatorServicePass());
         }
     }
