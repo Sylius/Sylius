@@ -93,20 +93,6 @@ class Order implements OrderInterface
     protected $total = 0;
 
     /**
-     * Whether order was confirmed.
-     *
-     * @var bool
-     */
-    protected $confirmed = true;
-
-    /**
-     * Confirmation token.
-     *
-     * @var string
-     */
-    protected $confirmationToken;
-
-    /**
      * Creation time.
      *
      * @var \DateTime
