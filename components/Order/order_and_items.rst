@@ -27,10 +27,6 @@ Order is constructed with the following attributes:
 +-------------------+-----------------------------------------+-----------------------+
 | total             | Order grand total                       | integer               |
 +-------------------+-----------------------------------------+-----------------------+
-| confirmed         | Boolean indicator of order confirmation | boolean               |
-+-------------------+-----------------------------------------+-----------------------+
-| confirmationToken | Random string for order confirmation    | string                |
-+-------------------+-----------------------------------------+-----------------------+
 | createdAt         | Date when order was created             | \DateTime             |
 +-------------------+-----------------------------------------+-----------------------+
 | updatedAt         | Date of last change                     | \DateTime             |
@@ -52,22 +48,6 @@ The number is mutable, so you can change it by calling ``->setNumber('E001')`` o
     $order->getNumber();
 
     $order->setNumber('E001');
-
-Confirmation Status
--------------------
-
-To check whether the order is confirmed or not, you can use the ``isConfirmed()`` method, which returns a *true/false* value.
-
-To change that status, you can use the confirmation setter, ``setConfirmed(false)``. All orders are confirmed by default.
-Order can contain a confirmation token, accessible by the appropriate getter and setter.
-
-.. code-block:: php
-
-    <?php
-
-    if ($order->isConfirmed()) {
-        echo 'This one is confirmed, great!';
-    }
 
 Order Totals
 ------------
