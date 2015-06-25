@@ -122,9 +122,21 @@ class ConfigurationSpec extends ObjectBehavior
     {
         $this->getTemplateName('index.html')->shouldReturn('SyliusWebBundle:Product:index.html.twig');
         $this->getTemplateName('show.html')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
+        $this->getTemplateName('show.pdf')->shouldReturn('SyliusWebBundle:Product:show.pdf.twig');
         $this->getTemplateName('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
         $this->getTemplateName('update.html')->shouldReturn('SyliusWebBundle:Product:update.html.twig');
         $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
+    }
+
+    function it_generates_template_names_based_on_request_format(Request $request)
+    {
+        $this->setRequest($request);
+
+        $request->getRequestFormat()->willReturn('html');
+        $this->getTemplateName('show')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
+
+        $request->getRequestFormat()->willReturn('pdf');
+        $this->getTemplateName('show')->shouldReturn('SyliusWebBundle:Product:show.pdf.twig');
     }
 
     function it_generates_view_template(Parameters $parameters)
