@@ -57,10 +57,11 @@ $ php app/console doctrine:database:create --env=test
 $ php app/console doctrine:schema:create --env=test
 ```
 
-You can run Behat using the following command:
+You can run Behat using the following commands:
 
 ```bash
-$ bin/behat
+$ bin/behat # In order to run tests which don't need JS support
+$ bin/behat -p javascript # In order to run tests which need JS support
 ```
 
 Troubleshooting
