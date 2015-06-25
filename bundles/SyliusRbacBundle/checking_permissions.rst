@@ -29,6 +29,6 @@ In Templates
 .. code-block:: twig
 
     {% if sylius_is_granted('your.permission.code') %}
-        {{ product.price %}
+        {{ product.price }}
     {% endif %}
 
