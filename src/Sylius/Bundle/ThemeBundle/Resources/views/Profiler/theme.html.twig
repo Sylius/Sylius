@@ -10,11 +10,11 @@
         </div>
         <div class="sf-toolbar-info">
             <div class="sf-toolbar-info-piece">
-                <b>Sorted by priority (highest first)</b>
+                <b>Sorted by priority</b>
                 <ul>
                     {% for theme in collector.usedThemes %}
                         <li>
-                            <strong>[{{ collector.themesPriorities[theme.logicalName]|default('-') }}]</strong> {{ theme.name }} <small>({{ theme.logicalName }})</small>
+                            {{ theme.name }} <small>({{ theme.logicalName }})</small>
                         </li>
                     {% endfor %}
                 </ul>
@@ -36,12 +36,10 @@
 {% block panel %}
     <h2>Used themes ({{ collector.usedThemes|length }})</h2>
     {% set themes = collector.usedThemes %}
-    {% set priority = true %}
     {{ block('table') }}
 
     <h2>All themes ({{ collector.allThemes|length }})</h2>
     {% set themes = collector.allThemes %}
-    {% set priority = false %}
     {{ block('table') }}
 {% endblock %}
 
@@ -50,7 +48,6 @@
         <tr>
             <th>Name</th>
             <th>Logical name</th>
-            {% if priority %}<th>Priority</th>{% endif %}
             <th>Path</th>
             <th>Description</th>
         </tr>
@@ -58,7 +55,6 @@
             <tr>
                 <td>{{ theme.name }}</td>
                 <td>{{ theme.logicalName }}</td>
-                {% if priority %}<td>{{ collector.themesPriorities[theme.logicalName]|default('-') }}</td>{% endif %}
                 <td>{{ theme.path }}</td>
                 <td>{{ theme.description }}</td>
             </tr>

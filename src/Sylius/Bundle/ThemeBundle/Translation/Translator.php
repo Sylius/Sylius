@@ -82,7 +82,7 @@ class Translator extends BaseTranslator
             $domain,
             $locale,
             null,
-            $this->themeContext->getThemesSortedByPriorityInDescendingOrder()
+            $this->themeContext->getThemes()
         );
     }
 
@@ -97,7 +97,7 @@ class Translator extends BaseTranslator
             $domain,
             $locale,
             $number,
-            $this->themeContext->getThemesSortedByPriorityInDescendingOrder()
+            $this->themeContext->getThemes()
         );
     }
 

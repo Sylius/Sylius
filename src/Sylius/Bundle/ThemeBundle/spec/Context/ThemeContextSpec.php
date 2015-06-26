@@ -6,6 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContext;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
 
 /**
  * @mixin ThemeContext
@@ -14,6 +15,11 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  */
 class ThemeContextSpec extends ObjectBehavior
 {
+    function let(ThemeDependenciesResolverInterface $themeDependenciesResolver)
+    {
+        $this->beConstructedWith($themeDependenciesResolver);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Context\ThemeContext');
@@ -24,107 +30,45 @@ class ThemeContextSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface');
     }
 
-    function it_has_themes(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
+    function it_has_themes(ThemeInterface $theme)
     {
-        $firstTheme->getLogicalName()->willReturn("foo/bar1");
-        $secondTheme->getLogicalName()->willReturn("foo/bar2");
+        $theme->getLogicalName()->willReturn("foo/bar1");
+        $theme->getParents()->willReturn([]);
 
         $this->getThemes()->shouldHaveCount(0);
 
-        $this->hasTheme($firstTheme)->shouldReturn(false);
-        $this->hasTheme($secondTheme)->shouldReturn(false);
-
-        $this->addTheme($firstTheme);
-
+        $this->setTheme($theme);
         $this->getThemes()->shouldHaveCount(1);
-        $this->hasTheme($firstTheme)->shouldReturn(true);
-        $this->hasTheme($secondTheme)->shouldReturn(false);
 
-        $this->removeTheme($firstTheme);
-
+        $this->removeAllThemes();
         $this->getThemes()->shouldHaveCount(0);
-        $this->hasTheme($firstTheme)->shouldReturn(false);
-        $this->hasTheme($secondTheme)->shouldReturn(false);
     }
 
-    function it_does_not_allow_to_add_theme_twice(ThemeInterface $theme)
+    function it_overrides_themes_when_new_one_is_set(ThemeInterface $theme)
     {
         $theme->getLogicalName()->willReturn("foo/bar");
+        $theme->getParents()->willReturn([]);
 
-        $this->addTheme($theme);
-        $this->addTheme($theme);
+        $this->setTheme($theme);
+        $this->setTheme($theme);
 
         $this->getThemes()->shouldHaveCount(1);
     }
 
-    function it_lists_themes_sorted_by_priority_in_ascending_order(
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme,
-        ThemeInterface $thirdTheme,
-        ThemeInterface $fourthTheme
-    ) {
-        $firstTheme->getLogicalName()->willReturn("foo/bar1");
-        $secondTheme->getLogicalName()->willReturn("foo/bar2");
-        $thirdTheme->getLogicalName()->willReturn("foo/bar3");
-        $fourthTheme->getLogicalName()->willReturn("foo/bar4");
-
-        $this->addTheme($firstTheme);
-        $this->addTheme($secondTheme, -5);
-        $this->addTheme($thirdTheme, 5);
-        $this->addTheme($fourthTheme);
-
-        $this->getThemesSortedByPriorityInAscendingOrder()->shouldReturn([
-            "foo/bar2" => $secondTheme,
-            "foo/bar4" => $fourthTheme,
-            "foo/bar1" => $firstTheme,
-            "foo/bar3" => $thirdTheme,
-        ]);
-    }
-
-    function it_lists_themes_sorted_by_priority_in_descending_order(
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme,
-        ThemeInterface $thirdTheme,
-        ThemeInterface $fourthTheme
-    ) {
-        $firstTheme->getLogicalName()->willReturn("foo/bar1");
-        $secondTheme->getLogicalName()->willReturn("foo/bar2");
-        $thirdTheme->getLogicalName()->willReturn("foo/bar3");
-        $fourthTheme->getLogicalName()->willReturn("foo/bar4");
-
-        $this->addTheme($firstTheme);
-        $this->addTheme($secondTheme, -5);
-        $this->addTheme($thirdTheme, 5);
-        $this->addTheme($fourthTheme);
-
-        $this->getThemesSortedByPriorityInDescendingOrder()->shouldReturn([
-            "foo/bar3" => $thirdTheme,
-            "foo/bar1" => $firstTheme,
-            "foo/bar4" => $fourthTheme,
-            "foo/bar2" => $secondTheme,
-        ]);
-    }
-
-    function it_shows_theme_priority(ThemeInterface $theme)
-    {
-        $theme->getLogicalName()->willReturn("foo/bar");
-
-        $this->addTheme($theme, 10);
-
-        $this->getThemePriority("foo/bar")->shouldReturn(10);
-    }
-
-    function it_shows_themes_priority(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
+    function it_adds_theme_parents_to_context_while_setting_theme(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
         $firstTheme->getLogicalName()->willReturn("foo/bar1");
+        $firstTheme->getParents()->willReturn([$secondTheme]);
+
         $secondTheme->getLogicalName()->willReturn("foo/bar2");
+        $secondTheme->getParents()->willReturn([]);
 
-        $this->addTheme($firstTheme, 5);
-        $this->addTheme($secondTheme, 50);
+        $this->setTheme($firstTheme);
 
-        $this->getThemesPriorities()->shouldReturn([
-            "foo/bar1" => 5,
-            "foo/bar2" => 50
+        $this->getThemes()->shouldHaveCount(2);
+        $this->getThemes()->shouldReturn([
+            "foo/bar1" => $firstTheme,
+            "foo/bar2" => $secondTheme,
         ]);
     }
 }

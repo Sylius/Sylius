@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\ThemeBundle\Context;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -12,88 +13,39 @@ class ThemeContext implements ThemeContextInterface
     /**
      * @var ThemeInterface[]
      */
-    private $themes = [];
+    protected $themes;
 
     /**
-     * Keys are logical names of themes, values are priorities.
-     *
-     * @var array
+     * @var ThemeDependenciesResolverInterface
      */
-    private $themesPriorities = [];
+    protected $themeDependenciesResolver;
+
+    /**
+     * @param ThemeDependenciesResolverInterface $themeDependenciesResolver
+     */
+    public function __construct(ThemeDependenciesResolverInterface $themeDependenciesResolver)
+    {
+        $this->themeDependenciesResolver = $themeDependenciesResolver;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTheme(ThemeInterface $theme)
+    {
+        $this->themeDependenciesResolver->resolveDependencies($theme);
+
+        $this->themes = [$theme->getLogicalName() => $theme];
+
+        $this->addThemeDependencies($theme);
+    }
 
     /**
      * {@inheritdoc}
      */
     public function getThemes()
     {
-        return $this->themes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTheme($logicalName)
-    {
-        return isset($this->themes[$logicalName]) ? $this->themes[$logicalName] : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemePriority($logicalName)
-    {
-        return isset($this->themesPriorities[$logicalName]) ? $this->themesPriorities[$logicalName] : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemesPriorities()
-    {
-        return $this->themesPriorities;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemesSortedByPriorityInAscendingOrder()
-    {
-        return array_reverse($this->getThemesSortedByPriorityInDescendingOrder());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemesSortedByPriorityInDescendingOrder()
-    {
-        $themes = [];
-
-        $themesPriority = $this->themesPriorities;
-        arsort($themesPriority);
-
-        foreach ($themesPriority as $logicalName => $priority) {
-            $themes[$logicalName] = $this->getTheme($logicalName);
-        }
-
-        return $themes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addTheme(ThemeInterface $theme, $priority = 0)
-    {
-        $this->themes[$theme->getLogicalName()] = $theme;
-        $this->themesPriorities[$theme->getLogicalName()] = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTheme(ThemeInterface $theme)
-    {
-        unset($this->themes[$theme->getLogicalName()]);
-        unset($this->themesPriorities[$theme->getLogicalName()]);
+        return $this->themes ?: [];
     }
 
     /**
@@ -102,14 +54,19 @@ class ThemeContext implements ThemeContextInterface
     public function removeAllThemes()
     {
         $this->themes = [];
-        $this->themesPriorities = [];
     }
 
     /**
-     * {@inheritdoc}
+     * Adds theme dependencies to context.
+     *
+     * @param ThemeInterface $theme
      */
-    public function hasTheme(ThemeInterface $theme)
+    protected function addThemeDependencies(ThemeInterface $theme)
     {
-        return isset($this->themes[$theme->getLogicalName()]);
+        foreach ($theme->getParents() as $parent) {
+            $this->themes[$parent->getLogicalName()] = $parent;
+
+            $this->addThemeDependencies($parent);
+        }
     }
 }

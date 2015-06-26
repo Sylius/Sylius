@@ -98,7 +98,7 @@ class TemplateLocator implements FileLocatorInterface
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
 
-        $themes = $this->themeContext->getThemesSortedByPriorityInDescendingOrder();
+        $themes = $this->themeContext->getThemes();
 
         $templatePath = $this->locateTemplateUsingThemes($template, $themes);
 

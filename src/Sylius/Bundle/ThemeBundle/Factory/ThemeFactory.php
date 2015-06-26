@@ -38,8 +38,12 @@ class ThemeFactory implements ThemeFactoryInterface
                 'logical_name',
             ])
             ->setDefined([
-                'description'
+                'description',
             ])
+            ->setDefaults([
+                'parents' => [],
+            ])
+            ->setAllowedTypes('parents', 'array')
         ;
     }
 
@@ -64,5 +68,4 @@ class ThemeFactory implements ThemeFactoryInterface
 
         return $theme;
     }
-
 }

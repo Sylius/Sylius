@@ -24,6 +24,7 @@
         <parameter key="sylius.factory.theme.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
         <parameter key="sylius.repository.theme.class">Sylius\Bundle\ThemeBundle\Repository\ThemeRepository</parameter>
         <parameter key="sylius.data_collector.theme.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
+        <parameter key="sylius.dependencies_resolver.theme.class">Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolver</parameter>
 
         <parameter key="sylius.theme.asset.assets_installer.class">Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller</parameter>
         <parameter key="sylius.theme.asset.path_resolver.class">Sylius\Bundle\ThemeBundle\Asset\PathResolver</parameter>
@@ -37,7 +38,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.context.theme" class="%sylius.context.theme.class%" />
+        <service id="sylius.dependencies_resolver.theme" class="%sylius.dependencies_resolver.theme.class%">
+            <argument type="service" id="sylius.repository.theme" />
+        </service>
+
+        <service id="sylius.context.theme" class="%sylius.context.theme.class%">
+            <argument type="service" id="sylius.dependencies_resolver.theme" />
+        </service>
 
         <service id="sylius.locator.theme" class="%sylius.locator.theme.class%">
             <argument type="collection">

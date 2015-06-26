@@ -46,7 +46,7 @@ class PathPackage extends BasePathPackage
         }
 
         $assetPath = $path;
-        foreach ($this->themeContext->getThemesSortedByPriorityInDescendingOrder() as $theme) {
+        foreach ($this->themeContext->getThemes() as $theme) {
             $availableAssetPath = $this->pathResolver->resolve($path, $theme);
 
             if (file_exists($availableAssetPath)) {

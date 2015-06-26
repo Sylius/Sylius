@@ -27,6 +27,11 @@ class Theme implements ThemeInterface
      */
     private $path;
 
+    /**
+     * @var ThemeInterface[]
+     */
+    private $parents = [];
+
     public function __toString()
     {
         return $this->getLogicalName();
@@ -94,6 +99,36 @@ class Theme implements ThemeInterface
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setParents(array $parents)
+    {
+        foreach ($parents as $parent) {
+            if ($parent instanceof ThemeInterface) {
+                $this->parents[$parent->getLogicalName()] = $parent;
+            } else {
+                $this->parents[$parent] = null;
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParents()
+    {
+        return $this->parents;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParentsNames()
+    {
+        return array_keys($this->parents);
     }
 
     /**

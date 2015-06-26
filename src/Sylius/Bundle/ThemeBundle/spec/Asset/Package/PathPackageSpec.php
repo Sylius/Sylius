@@ -40,7 +40,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
     {
         $path = 'bundles/sample/asset.js';
 
-        $themeContext->getThemesSortedByPriorityInDescendingOrder()->shouldBeCalled()->willReturn([]);
+        $themeContext->getThemes()->shouldBeCalled()->willReturn([]);
         $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
 
         $this->getUrl($path)->shouldReturn($this->getBasePath() . $path);
@@ -54,7 +54,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
     ) {
         $path = 'bundles/sample/asset_not_included_in_any_themes.js';
 
-        $themeContext->getThemesSortedByPriorityInDescendingOrder()->shouldBeCalled()->willReturn([$theme]);
+        $themeContext->getThemes()->shouldBeCalled()->willReturn([$theme]);
         $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn('/this/file/does/not/exist');
         $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
 
@@ -71,7 +71,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
 
         $firstThemeAssetPath = 'bundles/sample/asset_sample_theme.js';
 
-        $themeContext->getThemesSortedByPriorityInDescendingOrder()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
+        $themeContext->getThemes()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
         $pathResolver->resolve($path, $firstTheme)->shouldBeCalled()->willReturn($firstThemeAssetPath);
         $versionStrategy->applyVersion($firstThemeAssetPath)->shouldBeCalled()->willReturn($firstThemeAssetPath);
 
@@ -89,7 +89,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
         $firstThemeAssetPath = 'bundles/sample/asset2_sample_theme.js';
         $secondThemeAssetPath = 'bundles/sample/asset2_second_sample_theme.js';
 
-        $themeContext->getThemesSortedByPriorityInDescendingOrder()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
+        $themeContext->getThemes()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
         $pathResolver->resolve($path, $firstTheme)->shouldBeCalled()->willReturn($firstThemeAssetPath);
         $pathResolver->resolve($path, $secondTheme)->shouldBeCalled()->willReturn($secondThemeAssetPath);
         $versionStrategy->applyVersion($secondThemeAssetPath)->shouldBeCalled()->willReturn($secondThemeAssetPath);

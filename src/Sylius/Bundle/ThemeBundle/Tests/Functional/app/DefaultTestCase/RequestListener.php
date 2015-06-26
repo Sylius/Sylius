@@ -35,12 +35,6 @@ class RequestListener
             return;
         }
 
-        $this->themeContext->addTheme(
-            $this->themeRepository->findByLogicalName('sylius/second-test-theme')
-        );
-
-        $this->themeContext->addTheme(
-            $this->themeRepository->findByLogicalName('sylius/first-test-theme'), 10
-        );
+        $this->themeContext->setTheme($this->themeRepository->findByLogicalName('sylius/first-test-theme'));
     }
 }

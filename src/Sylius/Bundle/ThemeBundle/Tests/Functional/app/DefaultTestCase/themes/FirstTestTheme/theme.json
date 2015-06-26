@@ -1,4 +1,7 @@
 {
   "name": "First Test Theme",
-  "logical_name": "sylius/first-test-theme"
+  "logical_name": "sylius/first-test-theme",
+  "parents": [
+    "sylius/second-test-theme"
+  ]
 }

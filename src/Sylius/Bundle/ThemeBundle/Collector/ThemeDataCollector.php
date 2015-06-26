@@ -35,11 +35,6 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     private $themeContext;
 
     /**
-     * @var integer[]
-     */
-    private $themesPriorities;
-
-    /**
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
      */
@@ -66,20 +61,11 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * @return integer[]
-     */
-    public function getThemesPriorities()
-    {
-        return $this->themesPriorities;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->usedThemes = $this->themeContext->getThemesSortedByPriorityInDescendingOrder();
-        $this->themesPriorities = $this->themeContext->getThemesPriorities();
+        $this->usedThemes = $this->themeContext->getThemes();
         $this->allThemes = $this->themeRepository->findAll();
     }
 
@@ -88,7 +74,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize([$this->usedThemes, $this->allThemes, $this->themesPriorities]);
+        return serialize([$this->usedThemes, $this->allThemes]);
     }
 
     /**
@@ -96,7 +82,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->usedThemes, $this->allThemes, $this->themesPriorities) = unserialize($serialized);
+        list($this->usedThemes, $this->allThemes) = unserialize($serialized);
     }
 
     /**

@@ -48,6 +48,21 @@ interface ThemeInterface
     public function getPath();
 
     /**
+     * @param ThemeInterface[]|string[] $parents
+     */
+    public function setParents(array $parents);
+
+    /**
+     * @return ThemeInterface[]
+     */
+    public function getParents();
+
+    /**
+     * @return string[]
+     */
+    public function getParentsNames();
+
+    /**
      * @return string
      */
     public function getHashCode();

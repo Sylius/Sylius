@@ -72,8 +72,7 @@ class TemplatePathsCacheWarmer extends CacheWarmer
             $templates[$template->getLogicalName()] = $this->locator->locate($template);
 
             foreach ($themes as $theme) {
-                $this->themeContext->removeAllThemes();
-                $this->themeContext->addTheme($theme);
+                $this->themeContext->setTheme($theme);
 
                 $path = $this->locator->locate($template);
 
