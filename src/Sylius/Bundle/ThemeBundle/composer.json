@@ -21,12 +21,11 @@
     ],
     "require": {
         "php":                      ">=5.4",
-
-        "sylius/resource-bundle":   "0.14.*@dev",
         "symfony/framework-bundle": "~2.7"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
+        "phpunit/phpunit": "~2.7",
         "twig/twig":       "~1.0"
     },
     "config": {
