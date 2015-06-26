@@ -67,7 +67,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
     private function findTranslationsDirs(ContainerBuilder $container)
     {
         /** @var ThemeRepositoryInterface $themeRepository */
-        $themeRepository = $container->get('sylius.repository.theme');
+        $themeRepository = $container->get('sylius.theme.repository');
         $themes = $themeRepository->findAll();
 
         $dirs = [];

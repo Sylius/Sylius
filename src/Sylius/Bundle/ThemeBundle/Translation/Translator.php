@@ -46,8 +46,8 @@ class Translator extends BaseTranslator
     {
         $this->selector = $selector;
 
-        $this->themeRepository = $container->get('sylius.repository.theme');
-        $this->themeContext = $container->get('sylius.context.theme');
+        $this->themeRepository = $container->get('sylius.theme.repository');
+        $this->themeContext = $container->get('sylius.theme.context');
         $this->resourcesToThemes = new ArrayCollection();
 
         parent::__construct($container, $selector, $loaderIds, $options);

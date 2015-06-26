@@ -17,7 +17,7 @@ class DebugThemeCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:debug:theme')
+            ->setName('sylius:theme:debug')
             ->setDescription('Shows list of detected themes.')
         ;
     }
@@ -30,7 +30,7 @@ class DebugThemeCommand extends ContainerAwareCommand
     private function showSuccessfullyLoadedThemes(OutputInterface $output)
     {
         /** @var ThemeInterface[] $themes */
-        $themes = $this->getContainer()->get('sylius.repository.theme')->findAll();
+        $themes = $this->getContainer()->get('sylius.theme.repository')->findAll();
 
         if (empty($themes)) {
             $output->writeln("<error>There are no themes.</error>");

@@ -16,13 +16,13 @@ class ThemeCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('sylius.repository.theme');
+        $definition = $container->findDefinition('sylius.theme.repository');
 
-        $loader = $container->get('sylius.loader.theme');
+        $loader = $container->get('sylius.theme.loader');
 
         $serializedThemes = [];
         try {
-            $themeFiles = $container->get('sylius.locator.theme')->locate('theme.json', null, false);
+            $themeFiles = $container->get('sylius.theme.locator')->locate('theme.json', null, false);
             foreach ($themeFiles as $themeFile) {
                 $serializedThemes[] = serialize($loader->load($themeFile));
                 $container->addResource(new FileResource($themeFile));

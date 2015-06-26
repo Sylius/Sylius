@@ -29,7 +29,7 @@ class ThemeTranslationCompilerPassSpec extends FixtureAwareObjectBehavior
 
     function it_does_nothing_if_there_is_no_theme(ContainerBuilder $containerBuilder, ThemeRepositoryInterface $themeRepository)
     {
-        $containerBuilder->get("sylius.repository.theme")->shouldBeCalled()->willReturn($themeRepository);
+        $containerBuilder->get("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepository);
         $themeRepository->findAll()->shouldBeCalled()->willReturn([]);
 
         $this->process($containerBuilder);
@@ -41,7 +41,7 @@ class ThemeTranslationCompilerPassSpec extends FixtureAwareObjectBehavior
         ThemeInterface $firstTheme, ThemeInterface $secondTheme,
         Definition $translatorDefinition
     ) {
-        $containerBuilder->get("sylius.repository.theme")->shouldBeCalled()->willReturn($themeRepository);
+        $containerBuilder->get("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepository);
         $themeRepository->findAll()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
 
         $firstTheme->getPath()->shouldBeCalled()->willReturn($this->getFirstThemePath());

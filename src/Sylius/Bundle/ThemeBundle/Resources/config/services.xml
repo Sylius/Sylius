@@ -17,36 +17,30 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.theme.class">Sylius\Bundle\ThemeBundle\Model\Theme</parameter>
-        <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\ThemeContext</parameter>
-        <parameter key="sylius.locator.theme.class">Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator</parameter>
-        <parameter key="sylius.loader.theme.class">Sylius\Bundle\ThemeBundle\Loader\JsonThemeLoader</parameter>
-        <parameter key="sylius.factory.theme.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
-        <parameter key="sylius.repository.theme.class">Sylius\Bundle\ThemeBundle\Repository\ThemeRepository</parameter>
-        <parameter key="sylius.data_collector.theme.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
-        <parameter key="sylius.dependencies_resolver.theme.class">Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolver</parameter>
-
+        <parameter key="sylius.theme.model.class">Sylius\Bundle\ThemeBundle\Model\Theme</parameter>
+        <parameter key="sylius.theme.context.class">Sylius\Bundle\ThemeBundle\Context\ThemeContext</parameter>
+        <parameter key="sylius.theme.locator.class">Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator</parameter>
+        <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\JsonThemeLoader</parameter>
+        <parameter key="sylius.theme.factory.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
+        <parameter key="sylius.theme.repository.class">Sylius\Bundle\ThemeBundle\Repository\ThemeRepository</parameter>
+        <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
+        <parameter key="sylius.theme.dependencies_resolver.class">Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolver</parameter>
         <parameter key="sylius.theme.asset.assets_installer.class">Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller</parameter>
         <parameter key="sylius.theme.asset.path_resolver.class">Sylius\Bundle\ThemeBundle\Asset\PathResolver</parameter>
 
+        <!-- Overrided services -->
         <parameter key="sylius.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
         <parameter key="sylius.templating.cache_warmer.template_paths.class">Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer</parameter>
-
         <parameter key="sylius.assets.path_package.class">Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage</parameter>
-
         <parameter key="translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.dependencies_resolver.theme" class="%sylius.dependencies_resolver.theme.class%">
-            <argument type="service" id="sylius.repository.theme" />
+        <service id="sylius.theme.context" class="%sylius.theme.context.class%">
+            <argument type="service" id="sylius.theme.dependencies_resolver" />
         </service>
 
-        <service id="sylius.context.theme" class="%sylius.context.theme.class%">
-            <argument type="service" id="sylius.dependencies_resolver.theme" />
-        </service>
-
-        <service id="sylius.locator.theme" class="%sylius.locator.theme.class%">
+        <service id="sylius.theme.locator" class="%sylius.theme.locator.class%">
             <argument type="collection">
                 <argument>%kernel.root_dir%</argument>
                 <!--<argument>%kernel.root_dir%/../src</argument>-->
@@ -54,36 +48,41 @@
             </argument>
         </service>
 
-        <service id="sylius.loader.theme" class="%sylius.loader.theme.class%">
-            <argument type="service" id="sylius.factory.theme" />
+        <service id="sylius.theme.loader" class="%sylius.theme.loader.class%">
+            <argument type="service" id="sylius.theme.factory" />
         </service>
 
-        <service id="sylius.factory.theme" class="%sylius.factory.theme.class%">
-            <argument>%sylius.model.theme.class%</argument>
+        <service id="sylius.theme.factory" class="%sylius.theme.factory.class%">
+            <argument>%sylius.theme.model.class%</argument>
             <argument type="service" id="property_accessor" />
         </service>
 
-        <service id="sylius.repository.theme" class="%sylius.repository.theme.class%" />
+        <service id="sylius.theme.repository" class="%sylius.theme.repository.class%" />
 
-        <service id="sylius.data_collector.theme" class="%sylius.data_collector.theme.class%" public="false">
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.context.theme" />
+        <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">
+            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.theme.context" />
             <tag name="data_collector" template="SyliusThemeBundle:Profiler:theme" id="sylius_theme" />
+        </service>
+
+        <service id="sylius.theme.dependencies_resolver" class="%sylius.theme.dependencies_resolver.class%">
+            <argument type="service" id="sylius.theme.repository" />
         </service>
 
         <service id="sylius.theme.asset.assets_installer" class="%sylius.theme.asset.assets_installer.class%">
             <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
-            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.theme.repository" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
         </service>
 
         <service id="sylius.theme.asset.path_resolver" class="%sylius.theme.asset.path_resolver.class%" public="false" />
 
+        <!-- Overrided services -->
         <service id="templating.locator" class="%sylius.templating.locator.class%" public="false">
             <argument type="service" id="kernel" />
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.theme.context" />
             <argument>%kernel.root_dir%</argument>
             <argument>%kernel.cache_dir%</argument>
         </service>
@@ -92,14 +91,14 @@
             <tag name="kernel.cache_warmer" priority="20" />
             <argument type="service" id="templating.finder" />
             <argument type="service" id="templating.locator" />
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.theme.context" />
         </service>
 
         <service id="assets.path_package" class="%sylius.assets.path_package.class%" abstract="true">
             <argument /> <!-- base path -->
             <argument type="service" /> <!-- version strategy -->
-            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.context" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
             <argument type="service" id="assets.context" />
         </service>
