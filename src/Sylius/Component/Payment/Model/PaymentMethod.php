@@ -61,6 +61,18 @@ class PaymentMethod implements PaymentMethodInterface
     protected $environment;
 
     /**
+     * FeeCalculator name
+     *
+     * @var string
+     */
+    protected $feeCalculator;
+
+    /**
+     * @var array
+     */
+    protected $feeCalculatorConfiguration;
+
+    /**
      * Creation date.
      *
      * @var \DateTime
@@ -184,6 +196,42 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeeCalculator()
+    {
+        return $this->feeCalculator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFeeCalculator($feeCalculator)
+    {
+        $this->feeCalculator = $feeCalculator;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeeCalculatorConfiguration()
+    {
+        return $this->feeCalculatorConfiguration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration)
+    {
+        $this->feeCalculatorConfiguration = $feeCalculatorConfiguration;
 
         return $this;
     }
