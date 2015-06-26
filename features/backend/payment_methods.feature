@@ -39,6 +39,7 @@ Feature: Payment methods
     Scenario: Creating new payment method with flexible rate
         Given I am on the payment method creation page
          When I fill in "Name" with "Google Checkout"
+          And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the payment method index page
           And I should see "Payment method has been successfully created."
@@ -47,6 +48,7 @@ Feature: Payment methods
         Given I am on the payment method creation page
          When I fill in "Name" with "Google Checkout"
           And I fill in "Description" with "Flexible checkout by Google!"
+          And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the payment method index page
           And I should see "Payment method has been successfully created."
@@ -54,6 +56,7 @@ Feature: Payment methods
     Scenario: Created methods appear in the list
         Given I am on the payment method creation page
          When I fill in "Name" with "PayU"
+          And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the payment method index page
           And I should see payment method with name "PayU" in the list
@@ -66,6 +69,7 @@ Feature: Payment methods
     Scenario: Updating the payment method
         Given I am editing payment method "PayPal"
          When I fill in "Name" with "PayPal PRO"
+          And I fill in "Amount" with "10"
           And I press "Save changes"
          Then I should be on the payment method index page
           And I should see payment method with name "PayPal PRO" in the list

@@ -22,10 +22,10 @@ Feature: Checkout Payment
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name        | gateway    | enabled |
-            | Credit Card | stripe     | yes     |
-            | PayPal      | paypal     | yes     |
-            | PayPal PRO  | paypal_pro | no      |
+            | name        | gateway    | enabled | calculator | calculator_configuration |
+            | Credit Card | stripe     | yes     | fixed      | amount: 0.10             |
+            | PayPal      | paypal     | yes     | fixed      | amount: 0.50             |
+            | PayPal PRO  | paypal_pro | no      | percent    | amount: 10               |
           And all products assigned to "DEFAULT-WEB" channel
           And channel "DEFAULT-WEB" has following configuration:
             | taxonomy | payment                           | shipping    |
@@ -45,10 +45,20 @@ Feature: Checkout Payment
         Given I press "Continue"
          Then I should be on the checkout payment step
           And I should see "PayPal"
+          And I should see "€0.50"
           But I should not see "PayPal PRO"
+          And I should not see "10%"
 
     Scenario: Selecting one of payment methods
         Given I press "Continue"
          When I select the "PayPal" radio button
           And I press "Continue"
          Then I should be on the checkout finalize step
+
+    Scenario: Showing payment fee charge
+        Given I press "Continue"
+         When I select the "PayPal" radio button
+          And I press "Continue"
+         Then I should be on the checkout finalize step
+          And "Payment total: €0.50" should appear on the page
+          And "Total: €71.49" should appear on the page
