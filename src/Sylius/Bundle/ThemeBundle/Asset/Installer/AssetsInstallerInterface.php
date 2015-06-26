@@ -1,9 +1,9 @@
 <?php
+
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Sylius\Bundle\ThemeBundle\Command\Model\SymlinkMask;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -11,17 +11,29 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 interface AssetsInstallerInterface
 {
     /**
-     * TODO
+     * Constant used as parameter and returned in installAssets() methods.
+     *
+     * @see AssetsInstallerInterface::installAssets()
+     * @see AssetsInstallerInterface::installBundleAssets()
+     * @see AssetsInstallerInterface::installDirAssets()
      */
     const HARD_COPY = 0;
 
     /**
-     * TODO
+     * Constant used as parameter and returned in installAssets() methods.
+     *
+     * @see AssetsInstallerInterface::installAssets()
+     * @see AssetsInstallerInterface::installBundleAssets()
+     * @see AssetsInstallerInterface::installDirAssets()
      */
     const SYMLINK = 1;
 
     /**
-     * TODO
+     * Constant used as parameter and returned in installAssets() methods.
+     *
+     * @see AssetsInstallerInterface::installAssets()
+     * @see AssetsInstallerInterface::installBundleAssets()
+     * @see AssetsInstallerInterface::installDirAssets()
      */
     const RELATIVE_SYMLINK = 2;
 

@@ -134,7 +134,8 @@ class Translator extends BaseTranslator
         $translatedMessage = $catalogue ? $catalogue->get($id, $domain) : $id;
 
         if (null !== $number) {
-            $translatedMessage = $this->selector->choose($translatedMessage, $number, $catalogue->getLocale());
+            $locale = $catalogue ? $catalogue->getLocale() : $locale;
+            $translatedMessage = $this->selector->choose($translatedMessage, $number, $locale);
         }
 
         return strtr($translatedMessage, $parameters);

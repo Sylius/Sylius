@@ -5,7 +5,6 @@ namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Templating\TemplateReference;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
