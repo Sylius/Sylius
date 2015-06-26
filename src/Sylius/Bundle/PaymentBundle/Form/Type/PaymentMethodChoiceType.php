@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -49,4 +50,11 @@ class PaymentMethodChoiceType extends ResourceChoiceType
         ;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'sylius_payment_method_choice';
+    }
 }

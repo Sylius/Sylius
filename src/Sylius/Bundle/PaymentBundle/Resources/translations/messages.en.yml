@@ -13,6 +13,7 @@ sylius:
         payment:
             amount: Payment amount
             method: Payment method
+            fee_calculator: Fee calculator
             state:
                 header: Payment state
                 checkout: Checkout

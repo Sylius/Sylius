@@ -18,12 +18,29 @@
 
     <parameters>
         <parameter key="sylius.form.type.payment_gateway_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentGatewayChoiceType</parameter>
+
+        <parameter key="sylius.registry.fee_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.form.type.payment_method.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType</parameter>
+        <parameter key="sylius.form.type.fee_calculator_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FeeCalculatorChoiceType</parameter>
+        <parameter key="sylius.form.type.fee_calculator.fixed.class">Sylius\Component\Payment\Calculator\FixedFeeCalculator</parameter>
     </parameters>
 
     <services>
         <service id="sylius.form.type.payment_gateway_choice" class="%sylius.form.type.payment_gateway_choice.class%">
             <argument>%sylius.payment_gateways%</argument>
             <tag name="form.type" alias="sylius_payment_gateway_choice" />
+        </service>
+
+        <service id="sylius.registry.payment.fee_calculator" class="%sylius.registry.fee_calculator.class%">
+            <argument>Sylius\Component\Payment\Calculator\FeeCalculatorInterface</argument>
+        </service>
+
+        <service id="sylius.form.type.fee_calculator_choice" class="%sylius.form.type.fee_calculator_choice.class%">
+            <argument>%sylius.payment.fee_calculators%</argument>
+            <tag name="form.type" alias="sylius_fee_calculator_choice" />
+        </service>
+        <service id="sylius.form.type.fee_calculator.fixed" class="%sylius.form.type.fee_calculator.fixed.class%">
+            <tag name="sylius.payment.fee_calculator" calculator="fixed" label="Fixed fee" />
         </service>
     </services>
 

@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Payment\Calculator;
+
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**

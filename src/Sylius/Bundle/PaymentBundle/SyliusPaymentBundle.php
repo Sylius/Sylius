@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\PaymentBundle;
 
+use Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterFeeCalculatorsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Payments component for Symfony2 applications.
@@ -29,6 +31,16 @@ class SyliusPaymentBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterFeeCalculatorsPass());
     }
 
     /**

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Payments extension.
@@ -34,5 +35,10 @@ class SyliusPaymentExtension extends AbstractResourceExtension
         );
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
+
+        $container
+            ->getDefinition('sylius.form.type.payment_method')
+            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
+        ;
     }
 }

@@ -11,13 +11,17 @@
 
 namespace Sylius\Component\Payment\Calculator;
 
+use Sylius\Component\Payment\Model\PaymentInterface;
+
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
-class DefaultFeeCalculators
+interface DelegatingFeeCalculatorInterface
 {
     /**
-     * Fixed fee calculator for payment
+     * @param PaymentInterface $payment
+     *
+     * @return integer
      */
-    const FIXED_FEE = "fixed_fee";
+    public function calculate(PaymentInterface $payment);
 }
