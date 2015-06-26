@@ -31,6 +31,8 @@ class TranslationTest extends ThemeBundleTestCase
             ['app/Resources/translations: app/Resources/translations'],
             ['THEME/BUNDLE_NAME/translations: THEME/BUNDLE_NAME/translations'],
             ['THEME/translations: THEME/translations'],
+            ['PARENT_THEME/BUNDLE_NAME/translations: PARENT_THEME/BUNDLE_NAME/translations'],
+            ['PARENT_THEME/translations: PARENT_THEME/translations'],
         ];
     }
 }
