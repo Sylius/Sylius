@@ -34,11 +34,23 @@ class CustomerController extends ResourceController
         $form     = $this->getForm($customer);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($customer);
+            try {
+                $this->domainManager->update($customer);
+            } catch (DomainException $e) {
+                if (!$this->config->isApiRequest()) {
+                    $this->flashHelper->setFlash(
+                        $e->getType(),
+                        $e->getMessage(),
+                        $e->getParameters()
+                    );
+                }
+            }
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($customer, 204));
             }
+
+            $this->flashHelper->setFlash('success', 'update');
 
             return $this->redirectHandler->redirectTo($customer);
         }

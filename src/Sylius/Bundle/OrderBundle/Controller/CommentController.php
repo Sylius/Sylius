@@ -39,7 +39,16 @@ class CommentController extends ResourceController
             $resource->setOrder($order);
             $resource->setAuthor($this->getUser()->getEmail());
 
-            $this->domainManager->create($resource);
+            try {
+                $this->domainManager->create($resource);
+                $this->flashHelper->setFlash('success', 'create');
+            } catch (DomainException $e) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
 
             return $this->redirect($this->generateUrl('sylius_backend_order_show', array('id' => $order->getId())));
         }

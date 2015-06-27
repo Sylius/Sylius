@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Sylius\Bundle\ResourceBundle\Exception\DomainException;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -94,8 +95,7 @@ class ResourceController extends FOSRestController
             $this->domainManager = new DomainManager(
                 $container->get($this->config->getServiceName('manager')),
                 $container->get('event_dispatcher'),
-                $this->config,
-                !$this->config->isApiRequest() ? $this->flashHelper : null
+                $this->config
             );
         }
     }
@@ -182,19 +182,27 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $resource = $this->domainManager->create($form->getData());
-
-            if ($this->config->isApiRequest()) {
-                if ($resource instanceof ResourceEvent) {
-                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            try {
+                $resource = $this->domainManager->create($form->getData());
+            } catch (DomainException $e) {
+                if ($this->config->isApiRequest()) {
+                    throw new HttpException($e->getCode(), $e->getMessage());
                 }
 
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+
+                return $this->redirectHandler->redirectToIndex();
+            }
+
+            if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 201));
             }
 
-            if ($resource instanceof ResourceEvent) {
-                return $this->redirectHandler->redirectToIndex();
-            }
+            $this->flashHelper->setFlash('success', 'create');
 
             return $this->redirectHandler->redirectTo($resource);
         }
@@ -228,19 +236,27 @@ class ResourceController extends FOSRestController
         $form     = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
-
-            if ($this->config->isApiRequest()) {
-                if ($resource instanceof ResourceEvent) {
-                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            try {
+                $this->domainManager->update($resource);
+            } catch (DomainException $e) {
+                if ($this->config->isApiRequest()) {
+                    throw new HttpException($e->getCode(), $e->getMessage());
                 }
 
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+
+                return $this->redirectHandler->redirectToIndex();
+            }
+
+            if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 204));
             }
 
-            if ($resource instanceof ResourceEvent) {
-                return $this->redirectHandler->redirectToIndex();
-            }
+            $this->flashHelper->setFlash('success', 'update');
 
             return $this->redirectHandler->redirectTo($resource);
         }
@@ -270,15 +286,27 @@ class ResourceController extends FOSRestController
     {
         $this->isGrantedOr403('delete');
 
-        $resource = $this->domainManager->delete($this->findOr404($request));
-
-        if ($this->config->isApiRequest()) {
-            if ($resource instanceof ResourceEvent) {
-                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+        try {
+            $this->domainManager->delete($this->findOr404($request));
+        } catch (DomainException $e) {
+            if ($this->config->isApiRequest()) {
+                throw new HttpException($e->getCode(), $e->getMessage());
             }
 
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+
+            return $this->redirectHandler->redirectToIndex();
+        }
+
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
         }
+
+        $this->flashHelper->setFlash('success', 'delete');
 
         return $this->redirectHandler->redirectToIndex();
     }
@@ -294,11 +322,27 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404($request);
         $resource->setDeletedAt(null);
 
-        $this->domainManager->update($resource, 'restore_deleted');
+        try {
+            $this->domainManager->update($resource);
+        } catch (DomainException $e) {
+            if ($this->config->isApiRequest()) {
+                throw new HttpException($e->getCode(), $e->getMessage());
+            }
+
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+
+            return $this->redirectHandler->redirectToIndex();
+        }
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
         }
+
+        $this->flashHelper->setFlash('success', 'restore_deleted');
 
         return $this->redirectHandler->redirectTo($resource);
     }
@@ -316,15 +360,27 @@ class ResourceController extends FOSRestController
         $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $repository->revert($resource, $version);
 
-        $this->domainManager->update($resource, 'revert');
-
-        if ($this->config->isApiRequest()) {
-            if ($resource instanceof ResourceEvent) {
-                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+        try {
+            $this->domainManager->update($resource);
+        } catch (DomainException $e) {
+            if ($this->config->isApiRequest()) {
+                throw new HttpException($e->getCode(), $e->getMessage());
             }
 
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+
+            return $this->redirectHandler->redirectToIndex();
+        }
+
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($resource, 204));
         }
+
+        $this->flashHelper->setFlash('success', 'revert');
 
         return $this->redirectHandler->redirectTo($resource);
     }
@@ -359,15 +415,27 @@ class ResourceController extends FOSRestController
 
         $stateMachine->apply($transition);
 
-        $this->domainManager->update($resource);
-
-        if ($this->config->isApiRequest()) {
-            if ($resource instanceof ResourceEvent) {
-                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+        try {
+            $this->domainManager->update($resource);
+        } catch (DomainException $e) {
+            if ($this->config->isApiRequest()) {
+                throw new HttpException($e->getCode(), $e->getMessage());
             }
 
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+
+            return $this->redirectHandler->redirectToReferer();
+        }
+
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($resource, 204));
         }
+
+        $this->flashHelper->setFlash('success', 'update');
 
         return $this->redirectHandler->redirectToReferer();
     }
@@ -459,15 +527,27 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
 
-        $this->domainManager->move($resource, $movement);
-
-        if ($this->config->isApiRequest()) {
-            if ($resource instanceof ResourceEvent) {
-                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+        try {
+            $this->domainManager->move($resource, $movement);
+        } catch (DomainException $e) {
+            if ($this->config->isApiRequest()) {
+                throw new HttpException($e->getCode(), $e->getMessage());
             }
 
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+
+            return $this->redirectHandler->redirectToReferer();
+        }
+
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($resource, 204));
         }
+
+        $this->flashHelper->setFlash('success', 'move');
 
         return $this->redirectHandler->redirectToIndex();
     }

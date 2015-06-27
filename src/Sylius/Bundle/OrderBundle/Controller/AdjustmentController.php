@@ -49,7 +49,16 @@ class AdjustmentController extends ResourceController
             }
         }
 
-        $this->domainManager->update($order);
+        try {
+            $this->domainManager->update($order);
+            $this->flashHelper->setFlash('success', 'update');
+        } catch (DomainException $e) {
+            $this->flashHelper->setFlash(
+                $e->getType(),
+                $e->getMessage(),
+                $e->getParameters()
+            );
+        }
 
         return $this->redirectHandler->redirectTo($order);
     }
