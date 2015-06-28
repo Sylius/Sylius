@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class DebugThemeCommand extends ContainerAwareCommand
+class SyliusThemeDebugCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
