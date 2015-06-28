@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -153,51 +154,37 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     protected function doInstallAssets($originDir, $targetDir, $symlink, $relativeSymlink)
     {
-        $finder = new Finder();
-        $finder->sortByName()->ignoreDotFiles(false)->in($originDir);
 
-        $theme = $this->themeRepository->findByPath($originDir);
-
-        $this->filesystem->mkdir($targetDir);
-
-        /** @var SplFileInfo[] $finder */
-        foreach ($finder as $file) {
-            if ($file->isDir()) {
-                $this->filesystem->mkdir($targetDir . '/' . $file->getRelativePathname());
-                continue;
-            }
-
-            $targetFile = $targetDir . '/' . $file->getRelativePathname();
-            if (null !== $theme) {
-                $targetFile = $this->pathResolver->resolve($targetFile, $theme);
-            }
-
-            $originFile = $file->getPathname();
-            if ($relativeSymlink) {
-                $originFile = rtrim($this->filesystem->makePathRelative($originFile, realpath(dirname($targetFile))), '/');
-            }
-
-            $this->doInstallAsset($originFile, $targetFile, $symlink);
+        if (null !== $theme = $this->themeRepository->findByPath($originDir)) {
+            $this->doInstallThemedBundleAssets($theme, $originDir, $targetDir, $symlink, $relativeSymlink);
+            return;
         }
+
+        $this->doInstallVanillaBundleAssets($originDir, $targetDir, $symlink, $relativeSymlink);
     }
 
     /**
-     * @param string $originFile
-     * @param string $targetFile
+     * @param string $origin
+     * @param string $target
      * @param boolean $symlink
      *
      * @throws IOException When failed to make symbolic link, if requested.
      */
-    protected function doInstallAsset($originFile, $targetFile, $symlink)
+    protected function doInstallAsset($origin, $target, $symlink)
     {
         if ($symlink) {
-            $this->filesystem->symlink($originFile, $targetFile);
+            $this->filesystem->symlink($origin, $target);
 
-            if (!file_exists($targetFile)) {
+            if (!file_exists($target)) {
                 throw new IOException('Symbolic link is broken');
             }
         } else {
-            $this->filesystem->copy($originFile, $targetFile);
+            if (is_dir($origin)) {
+                $this->filesystem->mkdir($target, 0777);
+                $this->filesystem->mirror($origin, $target, Finder::create()->ignoreDotFiles(false)->in($origin));
+            } else {
+                $this->filesystem->copy($origin, $target);
+            }
         }
     }
 
@@ -223,5 +210,53 @@ class AssetsInstaller implements AssetsInstallerInterface
         }
 
         return $sources;
+    }
+
+    /**
+     * @param ThemeInterface $theme
+     * @param string $originDir
+     * @param string $targetDir
+     * @param boolean $symlink
+     * @param boolean $relativeSymlink
+     */
+    protected function doInstallThemedBundleAssets(ThemeInterface $theme, $originDir, $targetDir, $symlink, $relativeSymlink)
+    {
+        $finder = new Finder();
+        $finder->sortByName()->ignoreDotFiles(false)->in($originDir);
+
+        /** @var SplFileInfo[] $finder */
+        foreach ($finder as $file) {
+            if ($file->isDir()) {
+                $this->filesystem->mkdir($targetDir . '/' . $file->getRelativePathname());
+                continue;
+            }
+
+            $targetFile = $targetDir . '/' . $file->getRelativePathname();
+            $targetFile = $this->pathResolver->resolve($targetFile, $theme);
+
+            $this->filesystem->mkdir(dirname($targetFile));
+
+            $originFile = $file->getPathname();
+            if ($relativeSymlink) {
+                $originFile = rtrim($this->filesystem->makePathRelative($originFile, realpath(dirname($targetFile))), '/');
+            }
+
+            $this->doInstallAsset($originFile, $targetFile, $symlink);
+        }
+    }
+
+    /**
+     * @param string $originDir
+     * @param string $targetDir
+     * @param boolean $symlink
+     * @param boolean $relativeSymlink
+     */
+    protected function doInstallVanillaBundleAssets($originDir, $targetDir, $symlink, $relativeSymlink)
+    {
+        if ($relativeSymlink) {
+            $this->filesystem->makePathRelative($originDir, realpath($targetDir));
+        }
+
+        $this->doInstallAsset($originDir, $targetDir, $symlink);
     }
 }
