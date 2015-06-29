@@ -36,6 +36,24 @@ class ChannelContext extends DefaultContext
     }
 
     /**
+     * @Given /^channel "([^""]*)" has following products assigned:$/
+     */
+    public function channelHasFollowingProductsAssigned($code, TableNode $table)
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->getRepository('channel')->findOneBy(array('code' => $code));
+
+        foreach ($table->getHash() as $product) {
+            /** @var ProductInterface $product */
+            $product = $this->getRepository('product')->findOneBy(array('name' => $product));
+
+            $product->addChannel($channel);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @Given /^all promotions assigned to "([^""]*)" channel$/
      */
     public function assignChannelToPromotions($code)

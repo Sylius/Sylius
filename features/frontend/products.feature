@@ -6,7 +6,6 @@ Feature: Products
 
     Background:
         Given there is default currency configured
-        And there is default channel configured
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -21,16 +20,28 @@ Feature: Products
             | Sylius Tee       | 12.99 | PHP T-Shirts |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |
-        And all products assigned to "DEFAULT-WEB" channel
-        And channel "DEFAULT-WEB" has following configuration:
+        And there are following channels configured:
+            | code   | name       | currencies | locales             | url          |
+            | WEB-US | mystore.us | EUR, GBP   | en_US               |              |
+            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost    |
+        And channel "WEB-EU" has following configuration:
             | taxonomy |
             | Category |
+        And channel "WEB-EU" has following products assigned:
+            | product         |
+            | Super T-Shirt   |
+            | Symfony T-Shirt |
+        And channel "WEB-US" has following products assigned:
+            | product          |
+            | Sylius Tee       |
+            | Black T-Shirt    |
+            | Doctrine T-Shirt |
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
         When I follow "T-Shirts"
-        Then I should see there 2 products
-        And I should see "Black T-Shirt"
+        Then I should see there 1 products
+        And I should see "Super T-Shirt"
 
     Scenario: Empty index of products
         Given there are no products
@@ -43,3 +54,8 @@ Feature: Products
         And I follow "PHP T-Shirts"
         When I click "Symfony T-Shirt"
         Then I should be on the product page for "Symfony T-Shirt"
+
+    Scenario: Display only products for current channel
+        Given I am on the store homepage
+        Then I should see "Super T-Shirt"
+        But I should not see "Black T-Shirt"

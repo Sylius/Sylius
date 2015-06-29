@@ -149,13 +149,14 @@ class ProductRepository extends BaseProductRepository
     /**
      * Find X recently added products.
      *
-     * @param int $limit
+     * @param int              $limit
+     * @param ChannelInterface $channel
      *
      * @return ProductInterface[]
      */
-    public function findLatest($limit = 10)
+    public function findLatest($limit = 10, ChannelInterface $channel)
     {
-        return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
+        return $this->findBy(array('channels' => array($channel)), array('createdAt' => 'desc'), $limit);
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
