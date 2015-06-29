@@ -65,3 +65,6 @@ parameters:
 
     sylius.order.allow_guest_order: false
     sylius.order.pending.duration: 3 hours
+
+    wkhtmltopdf.bin_path: /usr/bin/wkhtmltopdf
+    wkhtmltoimage.bin_path: /usr/bin/wkhtmltoimage
