@@ -42,11 +42,11 @@ liip_imagine:
 knp_snappy:
     pdf:
         enabled:    true
-        binary:     /usr/bin/wkhtmltopdf
+        binary:     %wkhtmltopdf.bin_path%
         options:    []
     image:
         enabled:    true
-        binary:     /usr/bin/wkhtmltoimage
+        binary:     %wkhtmltoimage.bin_path%
         options:    []
 
 sonata_block:
