@@ -36,65 +36,31 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
         $this->shouldImplement('Symfony\Component\Asset\PackageInterface');
     }
 
-    function it_returns_vanilla_url_if_there_are_no_themes(ThemeContextInterface $themeContext, VersionStrategyInterface $versionStrategy)
+    function it_returns_vanilla_url_if_there_are_no_active_themes(ThemeContextInterface $themeContext, VersionStrategyInterface $versionStrategy)
     {
         $path = 'bundles/sample/asset.js';
 
-        $themeContext->getThemes()->shouldBeCalled()->willReturn([]);
+        $themeContext->getTheme()->shouldBeCalled()->willReturn(null);
         $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
 
         $this->getUrl($path)->shouldReturn($this->getBasePath() . $path);
     }
 
-    function it_returns_vanilla_url_if_asset_does_not_exist_in_any_theme(
+    function it_returns_modified_url_if_there_is_active_theme(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $pathResolver,
         ThemeInterface $theme
     ) {
-        $path = 'bundles/sample/asset_not_included_in_any_themes.js';
-
-        $themeContext->getThemes()->shouldBeCalled()->willReturn([$theme]);
-        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn('/this/file/does/not/exist');
-        $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
-
-        $this->getUrl($path)->shouldReturn($this->getBasePath() . $path);
-    }
-
-    function it_returns_modified_url_if_asset_exists_in_given_themes(
-        ThemeContextInterface $themeContext,
-        VersionStrategyInterface $versionStrategy,
-        PathResolverInterface $pathResolver,
-        ThemeInterface $firstTheme, ThemeInterface $secondTheme
-    ) {
         $path = 'bundles/sample/asset.js';
 
-        $firstThemeAssetPath = 'bundles/sample/asset_sample_theme.js';
+        $themeAssetPath = 'bundles/theme/foo/bar/sample/asset.js';
 
-        $themeContext->getThemes()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
-        $pathResolver->resolve($path, $firstTheme)->shouldBeCalled()->willReturn($firstThemeAssetPath);
-        $versionStrategy->applyVersion($firstThemeAssetPath)->shouldBeCalled()->willReturn($firstThemeAssetPath);
+        $themeContext->getTheme()->shouldBeCalled()->willReturn($theme);
+        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themeAssetPath);
+        $versionStrategy->applyVersion($themeAssetPath)->shouldBeCalled()->willReturn($themeAssetPath);
 
-        $this->getUrl($path)->shouldReturn($this->getBasePath() . $firstThemeAssetPath);
-    }
-
-    function it_returns_modified_url_if_asset_exists_in_one_of_given_themes(
-        ThemeContextInterface $themeContext,
-        VersionStrategyInterface $versionStrategy,
-        PathResolverInterface $pathResolver,
-        ThemeInterface $firstTheme, ThemeInterface $secondTheme
-    ) {
-        $path = 'bundles/sample/asset2.js';
-
-        $firstThemeAssetPath = 'bundles/sample/asset2_sample_theme.js';
-        $secondThemeAssetPath = 'bundles/sample/asset2_second_sample_theme.js';
-
-        $themeContext->getThemes()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
-        $pathResolver->resolve($path, $firstTheme)->shouldBeCalled()->willReturn($firstThemeAssetPath);
-        $pathResolver->resolve($path, $secondTheme)->shouldBeCalled()->willReturn($secondThemeAssetPath);
-        $versionStrategy->applyVersion($secondThemeAssetPath)->shouldBeCalled()->willReturn($secondThemeAssetPath);
-
-        $this->getUrl($path)->shouldReturn($this->getBasePath() . $secondThemeAssetPath);
+        $this->getUrl($path)->shouldReturn($this->getBasePath() . $themeAssetPath);
     }
 
     /**

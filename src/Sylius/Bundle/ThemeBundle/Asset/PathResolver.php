@@ -14,9 +14,6 @@ class PathResolver implements PathResolverInterface
      */
     public function resolve($path, ThemeInterface $theme)
     {
-        $dirname = dirname($path);
-        $basename = basename($path);
-
-        return $dirname . '-' . $theme->getHashCode() . DIRECTORY_SEPARATOR . $basename;
+        return str_replace('bundles/', 'bundles/_theme/' . $theme->getLogicalName() . '/', $path);
     }
 }

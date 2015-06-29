@@ -26,28 +26,22 @@ class ThemeDependenciesResolver implements ThemeDependenciesResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolveDependencies(ThemeInterface $theme)
+    public function getDependencies(ThemeInterface $theme)
     {
         $parents = [];
         $parentsNames = $theme->getParentsNames();
         foreach ($parentsNames as $parentName) {
-            $lastException = null;
+            $parent = $this->themeRepository->findByLogicalName($parentName);
 
-            try {
-                if (null !== $parent = $this->themeRepository->findByLogicalName($parentName)) {
-                    $this->resolveDependencies($parent);
-                    $parents[] = $parent;
-                    continue;
-                }
-            } catch (\InvalidArgumentException $e) {
-                $lastException = $e;
+            if (null === $parent) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Theme "%s" not found (required by theme "%s")!', $parentName, $theme->getLogicalName()
+                ), 0);
             }
 
-            throw new \InvalidArgumentException(sprintf(
-                'Theme "%s" not found (required by theme "%s")!', $parentName, $theme->getLogicalName()
-            ), 0, $lastException);
+            $parents = array_merge($parents, [$parent], $this->getDependencies($parent));
         }
 
-        $theme->setParents($parents);
+        return $parents;
     }
 }

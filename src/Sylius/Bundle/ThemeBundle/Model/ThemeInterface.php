@@ -48,14 +48,9 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * @param ThemeInterface[]|string[] $parents
+     * @param string[] $parentsNames
      */
-    public function setParents(array $parents);
-
-    /**
-     * @return ThemeInterface[]
-     */
-    public function getParents();
+    public function setParentsNames(array $parentsNames);
 
     /**
      * @return string[]

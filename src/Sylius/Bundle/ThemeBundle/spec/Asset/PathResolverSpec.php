@@ -23,17 +23,15 @@ class PathResolverSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface');
     }
 
-    function it_returns_modified_path(ThemeInterface $theme)
+    function it_returns_modified_path_if_its_referencing_bundle_asset(ThemeInterface $theme)
     {
-        $theme->getHashCode()->shouldBeCalled()->willReturn("HASHCODE");
+        $theme->getLogicalName()->shouldBeCalled()->willReturn("sylius/test-theme");
 
-        $this->resolve('/long/path/asset.min.js', $theme)->shouldReturn('/long/path-HASHCODE/asset.min.js');
+        $this->resolve('bundles/asset.min.js', $theme)->shouldReturn('bundles/_theme/sylius/test-theme/asset.min.js');
     }
 
-    function it_changes_only_last_dirname(ThemeInterface $theme)
+    function it_does_not_change_path_if_its_not_referencing_bundle_asset(ThemeInterface $theme)
     {
-        $theme->getHashCode()->shouldBeCalled()->willReturn("HASHCODE");
-
-        $this->resolve('/long.path/asset.min.js', $theme)->shouldReturn('/long.path-HASHCODE/asset.min.js');
+        $this->resolve('/long.path/asset.min.js', $theme)->shouldReturn('/long.path/asset.min.js');
     }
 }

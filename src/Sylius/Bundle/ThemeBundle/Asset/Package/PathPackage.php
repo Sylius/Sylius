@@ -45,16 +45,11 @@ class PathPackage extends BasePathPackage
             return $path;
         }
 
-        $assetPath = $path;
-        foreach ($this->themeContext->getThemes() as $theme) {
-            $availableAssetPath = $this->pathResolver->resolve($path, $theme);
-
-            if (file_exists($availableAssetPath)) {
-                $assetPath = $availableAssetPath;
-                break;
-            }
+        $theme = $this->themeContext->getTheme();
+        if (null !== $theme) {
+            $path = $this->pathResolver->resolve($path, $theme);
         }
 
-        return $this->getBasePath() . ltrim($this->getVersionStrategy()->applyVersion($assetPath), '/');
+        return $this->getBasePath() . ltrim($this->getVersionStrategy()->applyVersion($path), '/');
     }
 }

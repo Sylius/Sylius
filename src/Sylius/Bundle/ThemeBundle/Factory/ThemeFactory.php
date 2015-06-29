@@ -59,6 +59,8 @@ class ThemeFactory implements ThemeFactoryInterface
 
         foreach ($themeData as $attributeKey => $attributeValue)
         {
+            $attributeKey = $this->normalizeAttributeKey($attributeKey);
+
             try {
                 $this->propertyAccessor->setValue($theme, $attributeKey, $attributeValue);
             } catch (NoSuchPropertyException $exception) {
@@ -67,5 +69,19 @@ class ThemeFactory implements ThemeFactoryInterface
         }
 
         return $theme;
+    }
+
+    /**
+     * @param string $attributeKey
+     *
+     * @return string
+     */
+    protected function normalizeAttributeKey($attributeKey)
+    {
+        if ('parents' === $attributeKey) {
+            $attributeKey = 'parentsNames';
+        }
+
+        return $attributeKey;
     }
 }

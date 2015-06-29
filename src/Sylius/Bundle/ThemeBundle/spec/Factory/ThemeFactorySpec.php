@@ -40,7 +40,7 @@ class ThemeFactorySpec extends ObjectBehavior
 
         $propertyAccessor->setValue(Argument::any(), 'name', 'Foo bar')->shouldBeCalled();
         $propertyAccessor->setValue(Argument::any(), 'logical_name', 'foo/bar')->shouldBeCalled();
-        $propertyAccessor->setValue(Argument::any(), 'parents', [])->shouldBeCalled();
+        $propertyAccessor->setValue(Argument::any(), 'parentsNames', [])->shouldBeCalled();
 
         $this->createFromArray($data)->shouldHaveType($themeClassName);
     }

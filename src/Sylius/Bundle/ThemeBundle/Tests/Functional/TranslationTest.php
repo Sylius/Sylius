@@ -8,31 +8,32 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 class TranslationTest extends ThemeBundleTestCase
 {
     /**
-     * @dataProvider getTranslationsLines
-     *
      * @param string $contents
      */
-    public function testTranslations($contents)
+    public function testTranslations()
     {
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/template/:Translation:translationsTest.txt.twig');
-        $this->assertContains($contents, $crawler->text());
+
+        foreach ($this->getTranslationsLines() as $expectedContent) {
+            $this->assertContains($expectedContent, $crawler->text());
+        }
     }
 
     /**
      * @return array
      */
-    public function getTranslationsLines()
+    protected function getTranslationsLines()
     {
         return [
-            ['BUNDLE/Resources/translations: BUNDLE/Resources/translations'],
-            ['app/Resources/BUNDLE_NAME/translations: app/Resources/BUNDLE_NAME/translations'],
-            ['app/Resources/translations: app/Resources/translations'],
-            ['THEME/BUNDLE_NAME/translations: THEME/BUNDLE_NAME/translations'],
-            ['THEME/translations: THEME/translations'],
-            ['PARENT_THEME/BUNDLE_NAME/translations: PARENT_THEME/BUNDLE_NAME/translations'],
-            ['PARENT_THEME/translations: PARENT_THEME/translations'],
+            'BUNDLE/Resources/translations: BUNDLE/Resources/translations',
+            'app/Resources/BUNDLE_NAME/translations: app/Resources/BUNDLE_NAME/translations',
+            'app/Resources/translations: app/Resources/translations',
+            'THEME/BUNDLE_NAME/translations: THEME/BUNDLE_NAME/translations',
+            'THEME/translations: THEME/translations',
+            'PARENT_THEME/BUNDLE_NAME/translations: PARENT_THEME/BUNDLE_NAME/translations',
+            'PARENT_THEME/translations: PARENT_THEME/translations',
         ];
     }
 }

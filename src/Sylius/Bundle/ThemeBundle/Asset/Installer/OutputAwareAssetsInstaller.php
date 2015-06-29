@@ -44,7 +44,7 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
      */
     public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask)
     {
-        $sources = $this->findAssetsPathsForBundle($bundle);
+        $sources = $this->findAssetsPaths($bundle);
 
         if (empty($sources)) {
             return $symlinkMask;

@@ -16,6 +16,11 @@ class ThemeContext implements ThemeContextInterface
     protected $themes;
 
     /**
+     * @var boolean
+     */
+    protected $areDependenciesResolved = true;
+
+    /**
      * @var ThemeDependenciesResolverInterface
      */
     protected $themeDependenciesResolver;
@@ -33,11 +38,16 @@ class ThemeContext implements ThemeContextInterface
      */
     public function setTheme(ThemeInterface $theme)
     {
-        $this->themeDependenciesResolver->resolveDependencies($theme);
+        $this->themes = [$theme];
+        $this->areDependenciesResolved = false;
+    }
 
-        $this->themes = [$theme->getLogicalName() => $theme];
-
-        $this->addThemeDependencies($theme);
+    /**
+     * {@inheritdoc}
+     */
+    public function getTheme()
+    {
+        return !empty($this->themes) ? $this->themes[0] : null;
     }
 
     /**
@@ -45,28 +55,35 @@ class ThemeContext implements ThemeContextInterface
      */
     public function getThemes()
     {
-        return $this->themes ?: [];
+        if (empty($this->themes)) {
+            return [];
+        }
+
+        $this->ensureDependenciesAreResolved();
+
+        return $this->themes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeAllThemes()
+    public function clear()
     {
         $this->themes = [];
     }
 
     /**
-     * Adds theme dependencies to context.
-     *
-     * @param ThemeInterface $theme
+     * Resolves main theme dependencies if they aren't resolved yet.
      */
-    protected function addThemeDependencies(ThemeInterface $theme)
+    protected function ensureDependenciesAreResolved()
     {
-        foreach ($theme->getParents() as $parent) {
-            $this->themes[$parent->getLogicalName()] = $parent;
+        if (false === $this->areDependenciesResolved) {
+            $this->themes = array_merge(
+                $this->themes,
+                $this->themeDependenciesResolver->getDependencies($this->themes[0])
+            );
 
-            $this->addThemeDependencies($parent);
+            $this->areDependenciesResolved = true;
         }
     }
 }

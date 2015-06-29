@@ -67,7 +67,7 @@ class TemplatePathsCacheWarmer extends CacheWarmer
 
         /** @var TemplateReferenceInterface $template */
         foreach ($this->finder->findAllTemplates() as $template) {
-            $this->themeContext->removeAllThemes();
+            $this->themeContext->clear();
             
             $templates[$template->getLogicalName()] = $this->locator->locate($template);
 

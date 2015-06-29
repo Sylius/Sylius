@@ -40,10 +40,7 @@ class ThemeDependenciesResolverSpec extends ObjectBehavior
         $themeRepository->findByLogicalName("foo/bar1")->willReturn($firstTheme);
         $themeRepository->findByLogicalName("foo/bar2")->willReturn($secondTheme);
 
-        $firstTheme->setParents([$secondTheme])->shouldBeCalled();
-        $secondTheme->setParents([])->shouldBeCalled();
-
-        $this->resolveDependencies($firstTheme);
+        $this->getDependencies($firstTheme)->shouldReturn([$secondTheme]);
     }
 
 }

@@ -12,7 +12,9 @@ interface ThemeDependenciesResolverInterface
     /**
      * @param ThemeInterface $theme
      *
-     * @throws \InvalidArgumentException If dependency could not be resolved.
+     * @return ThemeInterface[]
+     *
+     * @throws \InvalidArgumentException If dependencies could not be resolved.
      */
-    public function resolveDependencies(ThemeInterface $theme);
+    public function getDependencies(ThemeInterface $theme);
 }

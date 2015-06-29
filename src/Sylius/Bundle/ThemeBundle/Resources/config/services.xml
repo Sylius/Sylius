@@ -73,6 +73,7 @@
             <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.theme.dependencies_resolver" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
         </service>
 
