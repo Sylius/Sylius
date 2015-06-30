@@ -78,12 +78,14 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'attribute_id', // or `product_attribute_id` ?
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 ))
             ),
         );
@@ -99,12 +101,14 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 ))
             ),
         );
