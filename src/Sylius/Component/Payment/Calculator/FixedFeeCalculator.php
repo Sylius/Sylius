@@ -31,6 +31,6 @@ class FixedFeeCalculator implements FeeCalculatorInterface
      */
     public function getType()
     {
-        return 'fixed_fee';
+        return 'fixed';
     }
 }

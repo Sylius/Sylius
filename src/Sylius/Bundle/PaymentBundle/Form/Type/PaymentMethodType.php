@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
+use Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * Payment method form type.
@@ -70,7 +73,33 @@ class PaymentMethodType extends AbstractResourceType
             ->add('feeCalculator', 'sylius_fee_calculator_choice', array(
                 'label' => 'sylius.form.payment.fee_calculator',
             ))
+            ->addEventSubscriber(new BuildPaymentMethodFeeCalculatorFormSubscriber($this->feeCalculatorRegistry, $builder->getFormFactory()))
         ;
+
+        $feeCalculatorsConfigurations = array();
+        foreach ($this->feeCalculatorRegistry->all() as $type => $feeCalculator) {
+            $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
+
+            try {
+                $feeCalculatorsConfigurations[$type] = $builder->create('feeCalculatorConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $exception) {
+                continue;
+            }
+        }
+
+        $builder->setAttribute('feeCalculatorsConfigurations', $feeCalculatorsConfigurations);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['feeCalculatorsConfigurations'] = array();
+
+        foreach ($form->getConfig()->getAttribute('feeCalculatorsConfigurations') as $type => $feeCalculatorConfiguration) {
+            $view->vars['feeCalculatorsConfigurations'][$type] = $feeCalculatorConfiguration->createView($view);
+        }
     }
 
     /**

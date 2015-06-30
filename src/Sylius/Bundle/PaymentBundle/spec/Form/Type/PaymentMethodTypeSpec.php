@@ -13,17 +13,19 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PaymentMethodTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(ServiceRegistryInterface $feeCalculatorRegistry)
     {
-        $this->beConstructedWith('PaymentMethod', array('sylius'));
+        $this->beConstructedWith('PaymentMethod', array('sylius'), $feeCalculatorRegistry);
     }
 
     function it_is_a_form_type()
@@ -34,23 +36,33 @@ class PaymentMethodTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('name', 'text', Argument::type('array'))
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
-            ->add('description', 'textarea', Argument::any())
+            ->add('description', 'textarea', Argument::type('array'))
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
-            ->add('enabled', 'checkbox', Argument::any())
+            ->add('enabled', 'checkbox', Argument::type('array'))
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
-            ->add('gateway', 'sylius_payment_gateway_choice', Argument::any())
+            ->add('gateway', 'sylius_payment_gateway_choice', Argument::type('array'))
             ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
+            ->add('feeCalculator', 'sylius_fee_calculator_choice', Argument::type('array'))
+            ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $this->buildForm($builder, array());

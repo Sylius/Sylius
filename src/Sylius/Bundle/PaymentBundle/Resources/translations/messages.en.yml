@@ -31,3 +31,6 @@ sylius:
             enabled: Enabled?
             gateway: Gateway
             name: Name
+            fee_calculator:
+                fixed:
+                    amount: Amount

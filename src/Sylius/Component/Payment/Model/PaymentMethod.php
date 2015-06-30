@@ -65,12 +65,12 @@ class PaymentMethod implements PaymentMethodInterface
      *
      * @var string
      */
-    protected $feeCalculator;
+    protected $feeCalculator = 'fixed';
 
     /**
      * @var array
      */
-    protected $feeCalculatorConfiguration;
+    protected $feeCalculatorConfiguration = array('amount' => 0);
 
     /**
      * Creation date.
