@@ -57,6 +57,8 @@ sylius_content:
     classes:
         static_content:
             repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+            form:
+                choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
 sylius_taxonomy:
     classes:
