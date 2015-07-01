@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -33,8 +36,15 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
-    {
+    function it_builds_form_with_proper_fields(
+        $feeCalculatorRegistry,
+        FeeCalculatorInterface $feeCalculatorTest,
+        Form $form,
+        FormBuilder $builder,
+        FormFactoryInterface $formFactory
+    ) {
+        $builder->getFormFactory()->willReturn($formFactory)->shouldBeCalled();
+
         $builder
             ->add('name', 'text', Argument::type('array'))
             ->willReturn($builder)
@@ -64,6 +74,19 @@ class PaymentMethodTypeSpec extends ObjectBehavior
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
+
+        $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber'))
+            ->shouldBeCalled()
+        ;
+
+        $feeCalculatorRegistry->all()->willReturn(array('test' => $feeCalculatorTest))->shouldBeCalled();
+
+        $feeCalculatorTest->getType()->willReturn('test')->shouldBeCalled();
+        $builder->create('feeCalculatorConfiguration', 'sylius_fee_calculator_test')->willReturn($builder)->shouldBeCalled();
+        $builder->getForm()->willReturn($form)->shouldBeCalled();
+
+        $builder->setAttribute('feeCalculatorsConfigurations', array('test' => $form))->willReturn($builder)->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }

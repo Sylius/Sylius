@@ -83,11 +83,11 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
     {
         $data = $event->getData();
 
-        if (empty($data) || !array_key_exists('fee_calculator', $data)) {
+        if (empty($data) || !array_key_exists('feeCalculator', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($event->getForm(), $data['fee_calculator']);
+        $this->addConfigurationFields($event->getForm(), $data['feeCalculator']);
     }
 
     /**
@@ -99,6 +99,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
     {
         $feeCalculator = $this->feeCalculatorRegistry->get($feeCalculatorType);
         $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
+
 
         try {
             $configurationField = $this->factory->createNamed(

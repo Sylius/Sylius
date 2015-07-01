@@ -26,6 +26,9 @@
 
         <parameter key="sylius.form.type.payment.fee_calculator.fixed.class">Sylius\Component\Payment\Calculator\FixedFeeCalculator</parameter>
         <parameter key="sylius.form.type.payment.fee_calculator.fixed_configuration.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.payment.fee_calculator.percent.class">Sylius\Component\Payment\Calculator\PercentFeeCalculator</parameter>
+        <parameter key="sylius.form.type.payment.fee_calculator.percent_configuration.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\PercentFeeCalculatorConfigurationType</parameter>
     </parameters>
 
     <services>
@@ -49,6 +52,13 @@
         <service id="sylius.form.type.payment.fee_calculator.fixed_configuration" class="%sylius.form.type.payment.fee_calculator.fixed_configuration.class%">
             <argument type="service" id="sylius.context.currency" />
             <tag name="form.type" alias="sylius_fee_calculator_fixed" />
+        </service>
+
+        <service id="sylius.form.type.payment.fee_calculator.percent" class="%sylius.form.type.payment.fee_calculator.percent.class%">
+            <tag name="sylius.payment.fee_calculator" calculator="percent" label="Percent fee" />
+        </service>
+        <service id="sylius.form.type.payment.fee_calculator.percent_configuration" class="%sylius.form.type.payment.fee_calculator.percent_configuration.class%">
+            <tag name="form.type" alias="sylius_fee_calculator_percent" />
         </service>
     </services>
 

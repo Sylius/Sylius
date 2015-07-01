@@ -12,30 +12,32 @@
 namespace spec\Sylius\Component\Payment\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class FixedFeeCalculatorSpec extends ObjectBehavior
+class PercentFeeCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Calculator\FixedFeeCalculator');
+        $this->shouldHaveType('Sylius\Component\Payment\Calculator\PercentFeeCalculator');
     }
 
-    function it_implements_sylius_fee_calculator_interface()
+    function it_implement_fee_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
     }
 
-    function it_calculates_fee(PaymentInterface $payment)
+    function it_calculates_fee_for_given_payment_with_given_configuration(PaymentInterface $payment)
     {
-        $this->calculate($payment, array('amount' => 15))->shouldReturn(15);
+        $payment->getAmount()->willReturn(1000);
+
+        $this->calculate($payment, array('percent' => 20))->shouldReturn(200.00);
     }
 
     function it_has_type()
     {
-        $this->getType()->shouldReturn('fixed');
+        $this->getType()->shouldReturn('percent');
     }
 }

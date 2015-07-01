@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Payment\Model;
+use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
 
 /**
  * Payments method model.
@@ -65,12 +66,12 @@ class PaymentMethod implements PaymentMethodInterface
      *
      * @var string
      */
-    protected $feeCalculator = 'fixed';
+    protected $feeCalculator = DefaultFeeCalculators::FIXED;
 
     /**
      * @var array
      */
-    protected $feeCalculatorConfiguration = array('amount' => 0);
+    protected $feeCalculatorConfiguration;
 
     /**
      * Creation date.

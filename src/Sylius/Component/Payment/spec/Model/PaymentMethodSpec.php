@@ -105,10 +105,12 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_fee_calculator_is_mutable(FeeCalculatorInterface $feeCalculator)
+    function its_fee_calculator_is_mutable()
     {
-        $this->setFeeCalculator($feeCalculator);
-        $this->getFeeCalculator()->shouldReturn($feeCalculator);
+        $this->getFeeCalculator()->shouldReturn('fixed');
+
+        $this->setFeeCalculator('test_calculator');
+        $this->getFeeCalculator()->shouldReturn('test_calculator');
     }
 
     function its_fee_calculator_configuration_is_mutable()

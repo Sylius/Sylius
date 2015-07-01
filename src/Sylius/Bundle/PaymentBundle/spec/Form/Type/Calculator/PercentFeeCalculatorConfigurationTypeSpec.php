@@ -12,22 +12,16 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
+class PercentFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 {
-    function let(CurrencyContext $currencyContext)
-    {
-        $this->beConstructedWith($currencyContext);
-    }
-
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\PercentFeeCalculatorConfigurationType');
     }
 
     function it_is_abstract_type_object()
@@ -35,14 +29,11 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form($currencyContext, FormBuilderInterface $builder)
+    function it_builds_form(FormBuilderInterface $builder)
     {
-        $currencyContext->getCurrency()->willReturn('USD')->shouldBeCalled();
-
         $builder
-            ->add('amount', 'money', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
-                'currency' => 'USD',
+            ->add('percent', 'number', array(
+                'label'    => 'sylius.form.payment_method.fee_calculator.percent.percent',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -53,6 +44,6 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_fee_calculator_fixed');
+        $this->getName()->shouldReturn('sylius_fee_calculator_percent');
     }
 }

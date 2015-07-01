@@ -34,3 +34,5 @@ sylius:
             fee_calculator:
                 fixed:
                     amount: Amount
+                percent:
+                    percent: %

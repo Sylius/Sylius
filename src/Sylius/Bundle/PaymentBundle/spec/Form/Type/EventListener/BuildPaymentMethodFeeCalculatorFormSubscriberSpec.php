@@ -97,7 +97,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         PaymentMethodInterface $paymentMethod
     ) {
-        $event->getData()->willReturn(array('fee_calculator' => 'test'))->shouldBeCalled();
+        $event->getData()->willReturn(array('feeCalculator' => 'test'))->shouldBeCalled();
         $event->getForm()->willReturn($form)->shouldBeCalled();
 
         $paymentMethod->getFeeCalculator()->willReturn('test');
