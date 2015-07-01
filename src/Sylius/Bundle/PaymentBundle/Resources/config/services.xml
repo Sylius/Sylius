@@ -24,6 +24,8 @@
 
         <parameter key="sylius.form.type.fee_calculator_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FeeCalculatorChoiceType</parameter>
 
+        <parameter key="sylius.payment.delegating_fee_calculator.class">Sylius\Component\Payment\Calculator\DelegatingFeeCalculator</parameter>
+
         <parameter key="sylius.form.type.payment.fee_calculator.fixed.class">Sylius\Component\Payment\Calculator\FixedFeeCalculator</parameter>
         <parameter key="sylius.form.type.payment.fee_calculator.fixed_configuration.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType</parameter>
 
@@ -39,6 +41,10 @@
 
         <service id="sylius.registry.payment.fee_calculator" class="%sylius.registry.fee_calculator.class%">
             <argument>Sylius\Component\Payment\Calculator\FeeCalculatorInterface</argument>
+        </service>
+
+        <service id="sylius.payment.delegating_fee_calculator" class="%sylius.payment.delegating_fee_calculator.class%">
+            <argument type="service" id="sylius.registry.payment.fee_calculator" />
         </service>
 
         <service id="sylius.form.type.fee_calculator_choice" class="%sylius.form.type.fee_calculator_choice.class%">

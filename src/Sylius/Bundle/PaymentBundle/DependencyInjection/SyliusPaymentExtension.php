@@ -40,5 +40,11 @@ class SyliusPaymentExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.payment_method')
             ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
         ;
+
+        $container
+            ->getDefinition('sylius.form.type.payment_method_choice')
+            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
+            ->addArgument(new Reference('sylius.repository.payment'))
+        ;
     }
 }

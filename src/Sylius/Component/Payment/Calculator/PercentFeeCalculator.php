@@ -22,7 +22,7 @@ class PercentFeeCalculator implements FeeCalculatorInterface
      */
     public function calculate(PaymentInterface $payment, array $configuration)
     {
-        return ((int) $configuration['percent'])/100 * $payment->getAmount();
+        return (int) round(($configuration['percent'])/100 * $payment->getAmount());
     }
 
     /**
