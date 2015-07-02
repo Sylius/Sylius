@@ -52,7 +52,7 @@ class OptionValueChoiceType extends AbstractType
                 'value',
                 array(),
                 null,
-                null,
+                'id',
                 PropertyAccess::createPropertyAccessor()
             );
         };
