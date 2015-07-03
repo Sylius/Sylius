@@ -34,7 +34,6 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
         $methodsResolver = $this->resolver;
         $repository = $this->repository;
 
-
         $choiceList = function (Options $options) use ($methodsResolver, $repository) {
             if (isset($options['subject'])) {
                 $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
@@ -53,7 +52,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 $methods = $filteredMethods;
             }
 
-            return new ObjectChoiceList($methods);
+            return new ObjectChoiceList($methods, null, array(), null, 'id');
         };
 
         $resolver

@@ -51,6 +51,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
         $taxonomy->getId()->shouldBeCalled()->willreturn(12);
         $taxonomy->getName()->shouldBeCalled()->willReturn('taxonomy name');
+        $taxon->getId()->shouldBeCalled();
         $taxon->__toString()->shouldBeCalled()->willReturn('taxon name');
 
         $builder->addModelTransformer(Argument::any())->shouldBeCalled();

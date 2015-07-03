@@ -92,7 +92,7 @@ class ShippingMethodChoiceType extends AbstractType
                 $methods = $repository->findBy($options['criteria']);
             }
 
-            return new ObjectChoiceList($methods);
+            return new ObjectChoiceList($methods, null, array(), null, 'id');
         };
 
         $resolver

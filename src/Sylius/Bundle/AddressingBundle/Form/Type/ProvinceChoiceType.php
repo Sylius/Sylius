@@ -50,10 +50,10 @@ class ProvinceChoiceType extends AbstractType
 
         $choiceList = function (Options $options) use ($repository) {
             if (null === $options['country']) {
-                return new ObjectChoiceList($repository->findAll());
+                return new ObjectChoiceList($repository->findAll(), null, array(), null, 'id');
             }
 
-            return new ObjectChoiceList($options['country']->getProvinces());
+            return new ObjectChoiceList($options['country']->getProvinces(), null, array(), null, 'id');
         };
 
         $resolver

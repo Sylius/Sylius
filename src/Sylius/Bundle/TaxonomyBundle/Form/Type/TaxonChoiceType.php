@@ -73,7 +73,7 @@ class TaxonChoiceType extends AbstractType
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons);
+            return new ObjectChoiceList($taxons, null, array(), null, 'id');
         };
 
         $resolver
