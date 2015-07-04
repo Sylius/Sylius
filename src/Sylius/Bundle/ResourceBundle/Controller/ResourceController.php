@@ -382,10 +382,11 @@ class ResourceController extends FOSRestController
 
     /**
      * @param object|null $resource
+     * @param array       $options
      *
      * @return FormInterface
      */
-    public function getForm($resource = null)
+    public function getForm($resource = null, array $options = array())
     {
         $type = $this->config->getFormType();
 
@@ -399,10 +400,10 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, array_merge($options, array('csrf_protection' => false)));
         }
 
-        return $this->createForm($type, $resource);
+        return $this->createForm($type, $resource, $options);
     }
 
     /**
