@@ -105,7 +105,7 @@ jms_serializer:
     metadata:
         directories:
             sylius-user:
-                namespace_prefix: "Sylius\\Bundle\\UserBundle"
+                namespace_prefix: "Sylius\\Component\\User"
                 path: "@SyliusUserBundle/Resources/config/serializer"
             sylius-addressing:
                 namespace_prefix: "Sylius\\Component\\Addressing"
