@@ -8,9 +8,12 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'sylius.block.id'|trans }}</th>
-                <th>{{ sylius_resource_sort('body', 'sylius.block.body'|trans) }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.updated_at'|trans) }}</th>
+                <th>{{ 'sylius.block.string.id'|trans }}</th>
+                <th>{{ sylius_resource_sort('body', 'sylius.block.string.body'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishable', 'sylius.block.string.publishable'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishStartDate', 'sylius.block.string.start_date'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishEndDate', 'sylius.block.string.end_date'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.string.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -19,6 +22,13 @@
             <tr id="{{ block.id }}">
                 <td><i>{{ block.id }}</i></td>
                 <td>{{ block.body }}</td>
+                <td>
+                    <span class="label label-{{ block.publishable ? 'success' : 'default'}}">
+                        {{ block.publishable ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                    </span>
+                </td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
                 <td>{{ block.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">

@@ -78,4 +78,16 @@ class LocaleProviderSpec extends ObjectBehavior
     {
         $this->getDefaultLocale()->shouldReturn('en');
     }
+
+    function it_checks_if_the_locale_is_available(
+        RepositoryInterface $repository,
+        LocaleInterface $locale
+    ) {
+        $repository->findBy(Argument::any())->willReturn(array($locale));
+
+        $locale->getCode()->willReturn('en');
+
+        $this->isLocaleAvailable('en')->shouldReturn(true);
+        $this->isLocaleAvailable('fr')->shouldReturn(false);
+    }
 }

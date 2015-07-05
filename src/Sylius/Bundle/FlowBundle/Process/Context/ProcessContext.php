@@ -280,7 +280,7 @@ class ProcessContext implements ProcessContextInterface
         $history = $this->getStepHistory();
 
         while ($top = end($history)) {
-            if ($top != $this->currentStep->getName()) {
+            if ($top !== $this->currentStep->getName()) {
                 array_pop($history);
             } else {
                 break;
@@ -292,6 +292,14 @@ class ProcessContext implements ProcessContextInterface
         }
 
         $this->setStepHistory($history);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNextStepByName($stepName)
+    {
+        $this->nextStep = $this->process->getStepByName($stepName);
     }
 
     /**
@@ -309,20 +317,10 @@ class ProcessContext implements ProcessContextInterface
     /**
      * Calculates progress based on current step index.
      *
-     * @param integer $currentStepIndex
+     * @param int $currentStepIndex
      */
     protected function calculateProgress($currentStepIndex)
     {
-        $totalSteps = $this->process->countSteps();
-
-        $this->progress = floor(($currentStepIndex + 1) / $totalSteps * 100);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setNextStepByName($stepName)
-    {
-        $this->nextStep = $this->process->getStepByName($stepName);
+        $this->progress = floor(($currentStepIndex + 1) / $this->process->countSteps() * 100);
     }
 }

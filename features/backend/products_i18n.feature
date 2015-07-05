@@ -6,6 +6,7 @@ Feature: Products
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And I am logged in as administrator
         And there are following locales configured:
             | code  | enabled |

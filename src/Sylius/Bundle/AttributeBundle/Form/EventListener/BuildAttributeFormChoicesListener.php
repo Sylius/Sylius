@@ -61,13 +61,13 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
     public function buildConfiguration(FormEvent $event)
     {
         $data = $event->getData();
-        $choices = array();
+        $data['configuration'] = array();
 
         if (array_key_exists('type', $data) && AttributeTypes::CHOICE === $data['type'] && !empty($data['choices'])) {
-            $choices = $data['choices'];
+            $data['configuration'] = array(
+                'choices' => $data['choices'],
+            );
         }
-
-        $data['configuration'] = $choices;
 
         if (!$event->getForm()->has('configuration')) {
             $event->getForm()->add(
@@ -95,27 +95,24 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
             return;
         }
 
-        $type = $attribute->getType();
+        $data = null;
+        $config = $attribute->getConfiguration();
 
-        if (null === $type || AttributeTypes::CHOICE === $type) {
-            $data = null;
-            $config = $attribute->getConfiguration();
-
-            if (!empty($config['choices'])) {
-                $data = $config['choices'];
-            }
-
-            $event->getForm()->add(
-                $this->factory->createNamed('choices', 'collection', null, array(
-                    'type'              => 'text',
-                    'allow_add'         => true,
-                    'allow_delete'      => true,
-                    'by_reference'      => false,
-                    'auto_initialize'   => false,
-                    'mapped'            => false,
-                    'data'              => $data,
-                )
-            ));
+        if (!empty($config['choices'])) {
+            $data = $config['choices'];
         }
+
+        $event->getForm()->add(
+            $this->factory->createNamed('choices', 'collection', null, array(
+                'label'             => 'sylius.form.attribute.choices',
+                'type'              => 'text',
+                'allow_add'         => true,
+                'allow_delete'      => true,
+                'by_reference'      => false,
+                'auto_initialize'   => false,
+                'mapped'            => false,
+                'data'              => $data,
+            )
+        ));
     }
 }

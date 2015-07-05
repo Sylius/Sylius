@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 
 /**
- * Renderer configuration form type
+ * Renderer configuration form type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

@@ -50,3 +50,6 @@ sylius_contact:
 sylius_search:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/search.yml
     prefix: /search
+
+sylius_user:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/user.yml

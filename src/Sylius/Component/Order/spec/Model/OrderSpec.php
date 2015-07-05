@@ -229,6 +229,13 @@ class OrderSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
+    function it_has_fluent_interface_for_totals_calculation()
+    {
+        $this->calculateItemsTotal()->shouldReturn($this);
+        $this->calculateAdjustmentsTotal()->shouldReturn($this);
+        $this->calculateTotal()->shouldReturn($this);
+    }
+
     function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
@@ -417,11 +424,5 @@ class OrderSpec extends ObjectBehavior
         $this->clearAdjustments();
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
-    }
-
-    function it_should_allow_defining_email()
-    {
-        $this->setEmail('example@example.com');
-        $this->getEmail()->shouldReturn('example@example.com');
     }
 }

@@ -207,7 +207,6 @@ class Email implements EmailInterface
         $this->senderAddress = $senderAddress;
     }
 
-
     /**
      * {@inheritdoc}
      */

@@ -48,14 +48,14 @@ class LoadProductArchetypeData extends DataFixture
      */
     public function getOrder()
     {
-        return 4;
+        return 30;
     }
 
     /**
      * Create archetype.
      *
      * @param string $code
-     * @param array $nameTranslations
+     * @param array  $nameTranslations
      * @param array  $options
      * @param array  $properties
      *

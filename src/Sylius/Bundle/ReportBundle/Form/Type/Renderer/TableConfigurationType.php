@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Renderer configuration form type
+ * Renderer configuration form type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

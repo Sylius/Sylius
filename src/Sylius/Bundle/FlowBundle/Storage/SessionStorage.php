@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SessionStorage extends Storage
+class SessionStorage extends AbstractStorage
 {
     /**
      * Session.

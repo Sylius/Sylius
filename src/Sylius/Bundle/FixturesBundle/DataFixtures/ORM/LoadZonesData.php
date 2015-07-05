@@ -28,7 +28,7 @@ class LoadZonesData extends DataFixture
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'GB'
+        'GB',
     );
 
     /**
@@ -49,9 +49,9 @@ class LoadZonesData extends DataFixture
         $manager->flush();
 
         $settingsManager = $this->get('sylius.settings.manager');
-        $settings = $settingsManager->loadSettings('taxation');
+        $settings = $settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $eu);
-        $settingsManager->saveSettings('taxation', $settings);
+        $settingsManager->saveSettings('sylius_taxation', $settings);
     }
 
     /**
@@ -59,7 +59,7 @@ class LoadZonesData extends DataFixture
      */
     public function getOrder()
     {
-        return 2;
+        return 20;
     }
 
     /**

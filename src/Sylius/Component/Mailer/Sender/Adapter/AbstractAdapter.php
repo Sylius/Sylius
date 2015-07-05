@@ -11,23 +11,28 @@
 
 namespace Sylius\Component\Mailer\Sender\Adapter;
 
-use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-abstract class AbstractAdapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**
-     * @var DefaultSettingsProviderInterface
+     * @var EventDispatcherInterface
      */
-    protected $defaultSettingsProvider;
+    protected $dispatcher;
 
     /**
-     * @param DefaultSettingsProviderInterface $defaultSettingsProvider
+     * @param  EventDispatcherInterface $dispatcher
+     *
+     * @return $this
      */
-    public function __construct(DefaultSettingsProviderInterface $defaultSettingsProvider)
+    public function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
-        $this->defaultSettingsProvider = $defaultSettingsProvider;
+        $this->dispatcher = $dispatcher;
+
+        return $this;
     }
 }

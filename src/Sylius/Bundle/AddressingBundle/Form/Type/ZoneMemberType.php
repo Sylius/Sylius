@@ -29,7 +29,7 @@ abstract class ZoneMemberType extends AbstractResourceType
         $builder
             ->add('_type', 'hidden', array(
                 'data'   => $this->getName(),
-                'mapped' => false
+                'mapped' => false,
             ))
         ;
     }

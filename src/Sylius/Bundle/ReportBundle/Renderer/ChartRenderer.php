@@ -30,6 +30,9 @@ class ChartRenderer implements RendererInterface
     const PIE_CHART        = 'pie';
     const DOUGHNUT_CHART   = 'doughnut';
 
+    /**
+     * @var EngineInterface
+     */
     private $templating;
 
     public function __construct(EngineInterface $templating)
@@ -37,6 +40,9 @@ class ChartRenderer implements RendererInterface
         $this->templating = $templating;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render(ReportInterface $report, Data $data)
     {
         if (null !== $data->getData()) {
@@ -50,20 +56,26 @@ class ChartRenderer implements RendererInterface
 
             return $this->templating->renderResponse($rendererConfiguration["template"], array(
                 'data' => $rendererData,
-                'configuration' => $rendererConfiguration
+                'configuration' => $rendererConfiguration,
             ));
         }
 
         return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array(
-            'report' => $report
+            'report' => $report,
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return DefaultRenderers::CHART;
     }
 
+    /**
+     * @return array
+     */
     public static function getChartTypes()
     {
         return array(

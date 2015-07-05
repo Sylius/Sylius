@@ -9,3 +9,6 @@ sylius:
             delete: Your address has been successfully deleted.
             set_as_billing: Your billing address has been changed.
             set_as_shipping: Your shipping address has been changed.
+        password:
+            change_success: The password has been changed
+            invalid: Wrong current password

@@ -52,9 +52,6 @@ class SyliusCoreBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Core\Model\UserInterface'                => 'sylius.model.user.class',
-            'Sylius\Component\Core\Model\UserOAuthInterface'           => 'sylius.model.user_oauth.class',
-            'Sylius\Component\Core\Model\GroupInterface'               => 'sylius.model.group.class',
             'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
         );
     }

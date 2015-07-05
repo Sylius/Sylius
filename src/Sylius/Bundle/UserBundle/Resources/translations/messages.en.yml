@@ -1,0 +1,28 @@
+sylius:
+    user:
+        password:
+            reset:
+                header: Reset password
+                button: Reset
+    form:
+        group:
+            name: Name
+            roles: Roles
+        user:
+            email: Email
+            enabled: Enabled
+            password:
+                label: Password
+                confirmation: Verification
+            remember_me: Remember me
+            shipping_address: Shipping address
+        customer:
+            first_name: First name
+            groups: Groups
+            last_name: Last name
+            email: Email
+            birthday: Birthday
+            billing_address: Billing address
+            different_billing_address: Use different address for billing?
+        user_filter:
+            query: Search

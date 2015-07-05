@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -65,9 +66,19 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
             );
         }
 
+        $repositoryDefinition = $this->getRepositoryDefinition($classes);
+        $reflection = new \ReflectionClass($repositoryDefinition->getClass());
+
+        $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
+
+        if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
+            $repositoryDefinition->addMethodCall('setLocaleProvider', array(new Reference('sylius.translation.locale_provider')));
+            $repositoryDefinition->addMethodCall('setTranslatableFields', array($classes['translation']['mapping']['fields']));
+        }
+
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
-            $this->getRepositoryDefinition($classes)
+            $repositoryDefinition
         );
 
         $this->setManagerAlias();
@@ -101,7 +112,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected function getConfigurationDefinition()
     {
-        $definition = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $definition = new Definition(new Parameter('sylius.controller.configuration.class'));
         $definition
             ->setFactoryService('sylius.controller.configuration_factory')
             ->setFactoryMethod('createConfiguration')

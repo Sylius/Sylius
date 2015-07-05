@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -22,6 +23,22 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class PaymentStepType extends AbstractResourceType
 {
+    /**
+     * @var ChannelContextInterface
+     */
+    protected $channelContext;
+
+    /**
+     * @param string                  $dataClass
+     * @param array                   $validationGroups
+     * @param ChannelContextInterface $channelContext
+     */
+    public function __construct($dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
+    {
+        parent::__construct($dataClass, $validationGroups);
+        $this->channelContext = $channelContext;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +52,7 @@ class PaymentStepType extends AbstractResourceType
                 'label'         => 'sylius.form.checkout.payment_method',
                 'expanded'      => true,
                 'property_path' => 'lastPayment.method',
+                'channel'       => $this->channelContext->getChannel(),
                 'constraints'   => array(
                     $notBlank
                 )

@@ -16,7 +16,6 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
-
 /**
  * Default taxonomies to play with Sylius.
  *
@@ -31,21 +30,21 @@ class LoadTaxonomiesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createTaxonomy(
-            array($this->defaultLocale => 'Category', 'es' => 'Categoria'),
+            array($this->defaultLocale => 'Category', 'es_ES' => 'Categoria'),
             array(
-                array($this->defaultLocale => 'T-Shirts', 'es' => 'Camisetas'),
-                array($this->defaultLocale => 'Stickers', 'es' => 'Pegatinas'),
-                array($this->defaultLocale => 'Mugs', 'es' => 'Tazas'),
-                array($this->defaultLocale => 'Books', 'es' => 'Libros'),
+                array($this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas'),
+                array($this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas'),
+                array($this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas'),
+                array($this->defaultLocale => 'Books', 'es_ES' => 'Libros'),
             )));
 
         $manager->persist($this->createTaxonomy(
-            array($this->defaultLocale => 'Brand', 'es' => 'Marca'),
+            array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'),
             array(
-                array($this->defaultLocale => 'SuperTees', 'es' => 'SuperCamisetas'),
-                array($this->defaultLocale => 'Stickypicky', 'es' => 'Pegapicky'),
-                array($this->defaultLocale => 'Mugland', 'es' => 'Mundotaza'),
-                array($this->defaultLocale => 'Bookmania', 'es' => 'Libromania'),
+                array($this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas'),
+                array($this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky'),
+                array($this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza'),
+                array($this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania'),
             )));
 
         $manager->flush();
@@ -56,7 +55,7 @@ class LoadTaxonomiesData extends DataFixture
      */
     public function getOrder()
     {
-        return 5;
+        return 10;
     }
 
     /**
@@ -77,9 +76,11 @@ class LoadTaxonomiesData extends DataFixture
 
         foreach ($taxonomyName as $locale => $name) {
             $taxonomy->setCurrentLocale($locale);
+            $taxonomy->setFallbackLocale($locale);
             $taxonomy->setName($name);
-            if ($this->defaultLocale == $locale) {
-                $this->setReference('Sylius.Taxonomy.' . $name, $taxonomy);
+
+            if ($this->defaultLocale === $locale) {
+                $this->setReference('Sylius.Taxonomy.'.$name, $taxonomy);
             }
         }
 
@@ -88,11 +89,12 @@ class LoadTaxonomiesData extends DataFixture
             $taxon = $this->getTaxonRepository()->createNew();
             foreach ($taxonArray as $locale => $taxonName) {
                 $taxon->setCurrentLocale($locale);
+                $taxon->setFallbackLocale($locale);
                 $taxon->setName($taxonName);
                 $taxon->setDescription($this->fakers[$locale]->paragraph);
 
-                if ($this->defaultLocale == $locale) {
-                    $this->setReference('Sylius.Taxon.' . $taxonName, $taxon);
+                if ($this->defaultLocale === $locale) {
+                    $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
                 }
             }
             $taxonomy->addTaxon($taxon);

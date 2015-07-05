@@ -73,20 +73,20 @@ class TaxonChoiceType extends AbstractType
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons);
+            return new ObjectChoiceList($taxons, null, array(), null, 'id');
         };
 
         $resolver
             ->setDefaults(array(
-                'choice_list' => $choiceList
+                'choice_list' => $choiceList,
             ))
             ->setRequired(array(
                 'taxonomy',
-                'filter'
+                'filter',
             ))
             ->setAllowedTypes(array(
                 'taxonomy' => array('Sylius\Component\Taxonomy\Model\TaxonomyInterface'),
-                'filter' => array('\Closure', 'null')
+                'filter' => array('\Closure', 'null'),
             ))
         ;
     }

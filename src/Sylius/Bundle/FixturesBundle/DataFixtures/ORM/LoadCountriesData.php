@@ -74,7 +74,7 @@ class LoadCountriesData extends DataFixture
         'WA' => 'Washington',
         'WV' => 'West Virginia',
         'WI' => 'Wisconsin',
-        'WY' => 'Wyoming'
+        'WY' => 'Wyoming',
     );
 
     /**
@@ -86,7 +86,7 @@ class LoadCountriesData extends DataFixture
         $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
 
         if (Intl::isExtensionLoaded()) {
-            $localisedCountries = array('es' => Intl::getRegionBundle()->getCountryNames('es'));
+            $localisedCountries = array('es_ES' => Intl::getRegionBundle()->getCountryNames('es_ES'));
         } else {
             $localisedCountries = array();
         }
@@ -121,7 +121,7 @@ class LoadCountriesData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 
     /**

@@ -113,6 +113,8 @@ interface ProcessInterface
      * Set validator.
      *
      * @param ProcessValidatorInterface $validator
+     *
+     * @return $this
      */
     public function setValidator(ProcessValidatorInterface $validator);
 

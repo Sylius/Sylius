@@ -1,0 +1,154 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.breadcrumb.customer.index'|trans }}</a></li>
+    <li>{{ customer.fullName }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {% if customer.user is not null and customer.user.id is not sameas(app.user.id) and not customer.deleted %}
+        {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
+        {% endif %}
+        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
+        {% if not customer.deleted %}
+            {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+            {% if customer.user is null %}
+                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, false) }}
+            {% elseif customer.user.id is not sameas(app.user.id) %}
+                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, false) }}
+            {% endif %}
+        {% endif %}
+    </div>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.customer.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.customer.general_info'|trans({'%fullName%': customer.fullName}) }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>{{ 'sylius.customer.id'|trans }}</strong></td>
+                <td>{{ customer.id }}</td>
+            </tr>
+            {% if customer.firstName %}
+                <tr>
+                    <td><strong>{{ 'sylius.customer.first_name'|trans }}</strong></td>
+                    <td>{{ customer.firstName }}</td>
+                </tr>
+            {% endif %}
+            {% if customer.lastName %}
+                <tr>
+                    <td><strong>{{ 'sylius.customer.last_name'|trans }}</strong></td>
+                    <td>{{ customer.lastName }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
+                <td>
+                {% if customer.user is not null %}
+                    {{ customer.user.username }}
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.customer.email'|trans }}</strong></td>
+                <td>{{ customer.email }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
+                <td>
+                    {% if customer.user is not null %}
+                        <span class="label label-{{ customer.user.enabled ? 'success' : 'danger'}}">
+                            {{ customer.user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% if customer.user is not null and customer.user.lastLogin %}
+                <tr>
+                    <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
+                    <td>{{ customer.user.lastLogin|date }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td><strong>{{ 'sylius.customer.groups'|trans }}</strong></td>
+                <td>
+                    {% if customer.groups|length > 0 %}
+                        <ul>
+                            {% for group in customer.groups %}
+                                <li>{{ group.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="label label-info">
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.customer.no_groups'|trans }}
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.user.oauth.provider'|trans }}</th>
+                    <th>{{ 'sylius.user.oauth.identifier'|trans }}</th>
+                    <th>{{ 'sylius.user.oauth.access_token'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if customer.user is not null %}
+            {% for oauth in customer.user.oauthAccounts %}
+                <tr>
+                    <td>{{ oauth.provider }}</td>
+                    <td>{{ oauth.identifier }}</td>
+                    <td>{{ oauth.accessToken|default('<em>unknown</em>')|raw }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">{{ 'sylius.user.oauth.none'|trans }}</td>
+                </tr>
+            {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    {% if customer.shippingAddress %}
+        <div class="col-md-6">
+            <h4>{{ 'sylius.customer.shipping_address'|trans }}</h4>
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': customer.shippingAddress } %}
+        </div>
+    {% endif %}
+    {% if customer.billingAddress %}
+        <div class="col-md-6">
+            <h4>{{ 'sylius.customer.billing_address'|trans }}</h4>
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': customer.billingAddress } %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        {% render(url('sylius_backend_order_by_customer', app.request.query.all|merge({id: customer.id}) )) %}
+    </div>
+</div>
+
+{% endblock %}

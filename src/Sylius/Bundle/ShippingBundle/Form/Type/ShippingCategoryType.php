@@ -28,11 +28,11 @@ class ShippingCategoryType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.shipping_category.name'
+                'label' => 'sylius.form.shipping_category.name',
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label' => 'sylius.form.shipping_category.description'
+                'label' => 'sylius.form.shipping_category.description',
             ))
         ;
     }

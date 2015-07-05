@@ -13,7 +13,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -33,9 +32,19 @@ class LoadOrdersData extends DataFixture
         $orderRepository = $this->getOrderRepository();
         $orderItemRepository = $this->getOrderItemRepository();
 
+        $channels = array(
+            'WEB-UK',
+            'WEB-DE',
+            'WEB-US',
+            'MOBILE',
+        );
+
         for ($i = 1; $i <= 50; $i++) {
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
+            $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
+
+            $order->setChannel($channel);
 
             for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
@@ -43,7 +52,7 @@ class LoadOrdersData extends DataFixture
                 /* @var $item OrderItemInterface */
                 $item = $orderItemRepository->createNew();
                 $item->setVariant($variant);
-                $item->setUnitPrice(1500);
+                $item->setUnitPrice($variant->getPrice());
                 $item->setQuantity(rand(1, 5));
 
                 $order->addItem($item);
@@ -61,15 +70,12 @@ class LoadOrdersData extends DataFixture
             $order->calculateTotal();
             $order->complete();
 
-            if ($i < 4) {
-                $order->setUser($this->getReference('Sylius.User-Administrator'));
-
-                $this->createPayment($order, PaymentInterface::STATE_COMPLETED);
-            } else {
-                $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
-
-                $this->createPayment($order);
+            $paymentState = PaymentInterface::STATE_COMPLETED;
+            if (rand(1, 10) < 5) {
+                $paymentState = PaymentInterface::STATE_NEW;
             }
+            $order->setCustomer($this->getReference('Sylius.Customer-'.rand(1, 15)));
+            $this->createPayment($order, $paymentState);
 
             $order->setCompletedAt($this->faker->dateTimeThisDecade);
             $this->setReference('Sylius.Order-'.$i, $order);
@@ -85,33 +91,7 @@ class LoadOrdersData extends DataFixture
      */
     public function getOrder()
     {
-        return 7;
-    }
-
-    /**
-     * @return AddressInterface
-     */
-    protected function createAddress()
-    {
-        /* @var $address AddressInterface */
-        $address = $this->getAddressRepository()->createNew();
-        $address->setFirstname($this->faker->firstName);
-        $address->setLastname($this->faker->lastName);
-        $address->setCity($this->faker->city);
-        $address->setStreet($this->faker->streetAddress);
-        $address->setPostcode($this->faker->postcode);
-
-        do {
-            $isoName = $this->faker->countryCode;
-        } while ('UK' === $isoName);
-
-        $country  = $this->getReference('Sylius.Country.'.$isoName);
-        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
-
-        $address->setCountry($country);
-        $address->setProvince($province);
-
-        return $address;
+        return 60;
     }
 
     /**
@@ -123,7 +103,7 @@ class LoadOrdersData extends DataFixture
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
         $payment->setOrder($order);
-        $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
+        $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState(null === $state ? $this->getPaymentState() : $state);

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -35,7 +36,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
@@ -86,7 +87,13 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Currency\Model\Currency')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\CurrencyBundle\Controller\CurrencyController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType')->end()
+                                ->arrayNode('form')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType')->end()
+                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType')->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

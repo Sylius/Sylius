@@ -29,7 +29,7 @@ class PropertyAccessor extends BasePropertyAccessor
     /**
      * @var PropertyAccessorInterface[]
      */
-    protected $customAccessors;
+    protected $customAccessors = array();
 
     /**
      * @param PropertyAccessorInterface[] $customAccessors

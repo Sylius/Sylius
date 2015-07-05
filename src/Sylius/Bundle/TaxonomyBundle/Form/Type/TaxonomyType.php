@@ -30,7 +30,7 @@ class TaxonomyType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_taxonomy_translation',
-                'label'    => 'sylius.form.taxonomy.name'
+                'label'    => 'sylius.form.taxonomy.name',
             ))
         ;
     }

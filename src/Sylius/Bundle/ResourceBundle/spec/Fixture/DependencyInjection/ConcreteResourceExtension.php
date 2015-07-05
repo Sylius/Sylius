@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 
 /**
  * @author Aleksey Bannov <a.s.bannov@gmail.com>

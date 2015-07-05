@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 
 /**
  * Default product repository.
@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductRepository extends TranslatableEntityRepository
+class ProductRepository extends TranslatableResourceRepository
 {
     /**
      * {@inheritdoc}

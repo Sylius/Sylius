@@ -1,0 +1,48 @@
+{
+    "name": "sylius/channel-bundle",
+    "type": "symfony-bundle",
+    "description": "Currencies and channel formatting engine bundle for Symfony2.",
+    "keywords": ["cash", "currency", "channel", "currencies"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/channel":           "0.15.*@dev",
+        "sylius/resource-bundle":   "0.15.*@dev",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "twig/twig":       "~1.0",
+        "symfony/form":    "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ChannelBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}

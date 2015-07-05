@@ -47,7 +47,7 @@ class RoleType extends AbstractResourceType
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'label'    => 'sylius.form.role.permissions'
+                'label'    => 'sylius.form.role.permissions',
             ))
         ;
 
@@ -57,7 +57,7 @@ class RoleType extends AbstractResourceType
 
             if (null === $role || null === $role->getId()) {
                 $form->add('code', 'text', array(
-                    'label' => 'sylius.form.role.code'
+                    'label' => 'sylius.form.role.code',
                 ));
             } else {
                 $form->add('code', 'text', array(

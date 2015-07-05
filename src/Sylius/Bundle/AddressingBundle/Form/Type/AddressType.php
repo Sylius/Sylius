@@ -51,31 +51,31 @@ class AddressType extends AbstractResourceType
         $builder
             ->addEventSubscriber($this->eventListener)
             ->add('firstName', 'text', array(
-                'label' => 'sylius.form.address.first_name'
+                'label' => 'sylius.form.address.first_name',
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius.form.address.last_name'
+                'label' => 'sylius.form.address.last_name',
             ))
             ->add('phoneNumber', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.address.phone_number'
+                'label'    => 'sylius.form.address.phone_number',
             ))
             ->add('company', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.address.company'
+                'label'    => 'sylius.form.address.company',
             ))
             ->add('country', 'sylius_country_choice', array(
                 'label' => 'sylius.form.address.country',
-                'empty_value' => 'sylius.form.country.select'
+                'empty_value' => 'sylius.form.country.select',
             ))
             ->add('street', 'text', array(
-                'label' => 'sylius.form.address.street'
+                'label' => 'sylius.form.address.street',
             ))
             ->add('city', 'text', array(
-                'label' => 'sylius.form.address.city'
+                'label' => 'sylius.form.address.city',
             ))
             ->add('postcode', 'text', array(
-                'label' => 'sylius.form.address.postcode'
+                'label' => 'sylius.form.address.postcode',
             ))
         ;
     }
@@ -98,10 +98,10 @@ class AddressType extends AbstractResourceType
 
                     return $validationGroups;
                 },
-                'shippable'         => false
+                'shippable'         => false,
             ))
             ->setAllowedTypes(array(
-                'shippable' => 'bool'
+                'shippable' => 'bool',
             ))
         ;
     }

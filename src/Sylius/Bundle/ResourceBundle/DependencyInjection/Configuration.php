@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -52,7 +53,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                             ->scalarNode('object_manager')->defaultValue('default')->end()
                             ->scalarNode('templates')->cannotBeEmpty()->end()
                             ->arrayNode('classes')
@@ -61,21 +62,20 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->end()
                                     ->scalarNode('interface')->end()
-                                    ->arrayNode('translatable')
-                                        ->children()
-                                            ->scalarNode('targetEntity')->end()
-                                            ->arrayNode('translatable_fields')
-                                                ->prototype('scalar')->end()
-                                            ->end()
-                                            ->scalarNode('field')->end()
-                                            ->scalarNode('currentLocale')->end()
-                                            ->scalarNode('fallbackLocale')->end()
-                                        ->end()
-                                    ->end()
                                     ->arrayNode('translation')
                                         ->children()
-                                            ->scalarNode('field')->end()
-                                            ->scalarNode('locale')->end()
+                                            ->scalarNode('model')->isRequired()->end()
+                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                            ->scalarNode('repository')->end()
+                                            ->scalarNode('interface')->end()
+                                            ->arrayNode('mapping')
+                                                ->isRequired()
+                                                ->children()
+                                                    ->arrayNode('fields')
+                                                        ->prototype('scalar')
+                                                    ->end()
+                                                ->end()
+                                            ->end()
                                         ->end()
                                     ->end()
                                 ->end()

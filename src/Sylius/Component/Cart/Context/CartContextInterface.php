@@ -22,7 +22,7 @@ use Sylius\Component\Cart\Model\CartInterface;
 interface CartContextInterface
 {
     // Key used to store the cart in storage.
-    const STORAGE_KEY = '_sylius.cart_id';
+    const STORAGE_KEY = '_sylius_cart_id';
 
     /**
      * Get the currently active cart.

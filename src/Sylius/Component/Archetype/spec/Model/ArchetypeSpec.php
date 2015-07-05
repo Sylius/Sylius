@@ -24,6 +24,12 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class ArchetypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Archetype\Model\Archetype');

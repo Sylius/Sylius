@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% set settings = sylius_settings_all('general') %}
+{% set settings = sylius_settings_all('sylius_general') %}
 <html>
     <head>
         <title>
@@ -34,6 +34,9 @@
         <![endif]-->
     </head>
     <body>
+    {% if settings.tracking_code %}
+        {{ settings.tracking_code|raw }}
+    {% endif %}
         {# javascripts... #}
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -103,7 +106,6 @@
                 {% endblock %}
             </div>
             <div class="col-md-9">
-                {{ sonata_block_render({'name': '/cms/blocks/slideshow-test'}) }}
                 {% block content %}
                 {% endblock %}
             </div>

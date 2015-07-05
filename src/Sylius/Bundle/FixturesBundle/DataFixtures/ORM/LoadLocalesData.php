@@ -23,6 +23,7 @@ class LoadLocalesData extends DataFixture
 {
     private $locales = array(
         'en_US' => true,
+        'en_GB' => true,
         'es_ES' => true,
         'de_DE' => true,
         'it_IT' => false,
@@ -56,6 +57,6 @@ class LoadLocalesData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }

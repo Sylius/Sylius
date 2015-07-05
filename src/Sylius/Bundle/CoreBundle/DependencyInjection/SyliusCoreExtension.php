@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -32,6 +31,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_addressing',
         'sylius_api',
         'sylius_attribute',
+        'sylius_channel',
         'sylius_contact',
         'sylius_currency',
         'sylius_inventory',
@@ -49,19 +49,21 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_mailer',
         'sylius_taxation',
         'sylius_taxonomy',
+        'sylius_user',
         'sylius_variation',
         'sylius_translation',
         'sylius_rbac',
     );
 
     protected $configFiles = array(
-        'services',
-        'controller',
-        'form',
-        'api_form',
-        'templating',
-        'twig',
-        'reports'
+        'services.xml',
+        'controller.xml',
+        'form.xml',
+        'api_form.xml',
+        'templating.xml',
+        'twig.xml',
+        'reports.xml',
+        'mailer.xml',
     );
 
     /**
@@ -69,14 +71,14 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config, $loader) = $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
         );
 
-        $loader->load(sprintf('state_machine.%s', $this->configFormat));
+        $this->loadServiceDefinitions($container, 'state_machine.xml');
 
         $this->loadCheckoutConfiguration($config['checkout'], $container);
 

@@ -21,7 +21,8 @@ class OptionSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->setCurrentLocale('en');
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
     }
 
     function it_is_initializable()

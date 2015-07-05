@@ -27,8 +27,8 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/resource-bundle":   "0.14.*@dev",
-        "sylius/sequence":          "0.14.*@dev"
+        "sylius/resource-bundle":   "0.15.*@dev",
+        "sylius/sequence":          "0.15.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
@@ -44,7 +44,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.15-dev"
         }
     }
 }

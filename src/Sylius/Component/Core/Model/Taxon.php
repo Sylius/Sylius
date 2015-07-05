@@ -152,4 +152,12 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     {
         $this->products = $products;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTranslationClass()
+    {
+        return 'Sylius\Component\Taxonomy\Model\TaxonTranslation';
+    }
 }

@@ -1,5 +1,5 @@
 cmf_core:
-    publish_workflow: false
+    publish_workflow: true
 
 cmf_block:
     persistence:

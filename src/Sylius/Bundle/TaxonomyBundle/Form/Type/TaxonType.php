@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -31,9 +31,9 @@ class TaxonType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_taxon_translation',
-                'label'    => 'sylius.form.taxon.name'
+                'label'    => 'sylius.form.taxon.name',
             ))
-            ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
+            ->addEventSubscriber(new BuildTaxonFormSubscriber($builder->getFormFactory()))
         ;
     }
 

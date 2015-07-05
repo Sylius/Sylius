@@ -20,4 +20,11 @@ use FOS\OAuthServerBundle\Entity\Client as BaseClient;
  */
 class Client extends BaseClient
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getPublicId()
+    {
+        return $this->getRandomId();
+    }
 }

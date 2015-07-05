@@ -56,7 +56,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $this->setCustomRepositoryClasses($metadata);
+        $this->process($metadata);
 
         if (!$metadata->isMappedSuperclass) {
             $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
@@ -65,13 +65,23 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function setCustomRepositoryClasses(ClassMetadataInfo $metadata)
+    private function process(ClassMetadataInfo $metadata)
     {
-        foreach ($this->classes as $class) {
-            if (array_key_exists('model', $class) && $class['model'] === $metadata->getName()) {
-                $metadata->isMappedSuperclass = false;
-                if (array_key_exists('repository', $class)) {
-                    $metadata->setCustomRepositoryClass($class['repository']);
+        foreach ($this->classes as $application => $classes) {
+            foreach ($classes as $class) {
+                if (isset($class['model']) && $class['model'] === $metadata->getName()) {
+                    $metadata->isMappedSuperclass = false;
+
+                    if (isset($class['repository'])) {
+                        $metadata->setCustomRepositoryClass($class['repository']);
+                    }
+                } else if (isset($class['translation']['model'])
+                    && $class['translation']['model'] === $metadata->getName()) {
+                    $metadata->isMappedSuperclass = false;
+
+                    if (isset($class['translation']['repository'])) {
+                        $metadata->setCustomRepositoryClass($class['translation']['repository']);
+                    }
                 }
             }
         }

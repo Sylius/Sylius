@@ -23,7 +23,7 @@ interface PaymentsSubjectInterface
     public function getPayments();
 
     /**
-     * Check if order has any payments
+     * Check if order has any payments.
      *
      * @return bool
      */

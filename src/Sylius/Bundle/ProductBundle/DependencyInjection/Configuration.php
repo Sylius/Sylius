@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,7 +38,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;
 
@@ -98,28 +99,27 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('choice')->end()
                                     ->end()
                                 ->end()
-                                ->arrayNode('translatable')
+                                ->arrayNode('translation')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('targetEntity')->defaultValue('Sylius\Component\Product\Model\ProductTranslation')->end()
-                                        ->arrayNode('translatable_fields')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\ProductTranslation')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                        ->scalarNode('repository')->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType')->end()
+                                            ->end()
                                         ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('product_translation')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\ProductTranslation')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType')->end()
+                                        ->arrayNode('mapping')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->arrayNode('fields')
+                                                    ->prototype('scalar')->end()
+                                                    ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                                ->end()
+                                            ->end()
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

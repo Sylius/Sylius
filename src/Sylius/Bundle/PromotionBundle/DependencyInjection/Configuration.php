@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -33,7 +34,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;
 
@@ -74,7 +75,7 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
-                        ->arrayNode('promotion_rule_user_loyalty_configuration')
+                        ->arrayNode('promotion_rule_customer_loyalty_configuration')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
@@ -94,7 +95,7 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
-                        ->arrayNode('promotion_rule_user_group_configuration')
+                        ->arrayNode('promotion_rule_customer_group_configuration')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()

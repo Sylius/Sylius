@@ -50,8 +50,8 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    public static function getTranslationClass()
     {
-        return parent::getTranslationEntityClass();
+        return 'Sylius\Component\Shipping\Model\ShippingMethodTranslation';
     }
 }

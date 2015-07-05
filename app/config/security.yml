@@ -3,17 +3,17 @@
 
 security:
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
+        sylius_user_provider:
+            id: sylius.user_provider.name_or_email
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        Sylius\Component\User\Model\UserInterface: sha512
     firewalls:
         administration:
             switch_user: true
             context:     user
             pattern:     /administration/.*
             form_login:
-                provider:     fos_userbundle
+                provider:     sylius_user_provider
                 login_path:   /administration/login
                 check_path:   /administration/login-check
                 failure_path: /administration/login
@@ -36,7 +36,7 @@ security:
             context:     user
             pattern:     /.*
             form_login:
-                provider: fos_userbundle
+                provider: sylius_user_provider
                 login_path: /login
                 check_path: /login_check
                 failure_path: /login
@@ -54,8 +54,8 @@ security:
                     amazon:   "/login/check-amazon"
                     facebook: "/login/check-facebook"
                     google:   "/login/check-google"
-                login_path:   /connect
-                failure_path: /connect
+                login_path:   /login
+                failure_path: /login
                 oauth_user_provider:
                     service: sylius.oauth.user_provider
             logout: true

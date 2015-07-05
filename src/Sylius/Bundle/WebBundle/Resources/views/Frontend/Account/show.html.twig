@@ -1,0 +1,19 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %} 
+    
+    <h4>{{ 'sylius.account.home.welcome'|trans }}</h4>
+    <br>
+
+    <div class="row">
+        <div class="col-md-7">{{ 'sylius.account.home.outline'|trans }} </div>
+        <div class="col-md-5">
+            <strong>{{ user.customer.lastName|upper }} {{ user.customer.firstName }}</strong><br><br>
+            {{ 'sylius.account.home.id'|trans }} {{ user.id }} <br>
+            {{ 'sylius.account.home.email'|trans }} {{ user.customer.email }}<br>
+            {{ 'sylius.account.home.since'|trans }} {{ user.createdAt|date() }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -35,7 +35,7 @@ class LoadContactTopicData extends DataFixture
 
             $manager->persist($contactTopic);
 
-            $this->setReference('Sylius.ContactTopic.' . $i, $contactTopic);
+            $this->setReference('Sylius.ContactTopic.'.$i, $contactTopic);
         }
 
         $manager->flush();
@@ -46,6 +46,6 @@ class LoadContactTopicData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }

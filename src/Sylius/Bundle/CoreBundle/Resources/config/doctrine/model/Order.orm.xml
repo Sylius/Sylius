@@ -15,6 +15,10 @@
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
 
+        <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>
@@ -56,8 +60,11 @@
             </cascade>
         </one-to-many>
 
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="orders">
-            <join-column name="user_id" referenced-column-name="id" nullable="true" />
+        <many-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="orders">
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">

@@ -50,11 +50,11 @@ class OptionType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.option.name'
+                'label' => 'sylius.form.option.name',
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_option_translation', $this->variableName),
-                'label'    => 'sylius.form.option.presentation'
+                'label'    => 'sylius.form.option.presentation',
             ))
             ->add('values', 'collection', array(
                 'type' => sprintf('sylius_%s_option_value', $this->variableName),
@@ -62,7 +62,7 @@ class OptionType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => false,
-                'button_add_label' => 'sylius.form.option_value.add_value'
+                'button_add_label' => 'sylius.form.option_value.add_value',
             ))
         ;
     }

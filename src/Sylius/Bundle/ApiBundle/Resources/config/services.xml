@@ -15,12 +15,14 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.oauth_server.client_manager.class">Sylius\Bundle\ApiBundle\Model\ClientManager</parameter>
+    </parameters>
 
     <services>
-        <service id="sylius.form.type.api_client" class="%sylius.form.type.api_client.class%">
-            <argument>%sylius.model.api_client.class%</argument>
-            <argument>%sylius.validation_group.api_client%</argument>
-            <tag name="form.type" alias="sylius_api_client" />
+        <service id="sylius.oauth_server.client_manager" class="%sylius.oauth_server.client_manager.class%">
+            <argument type="service" id="fos_oauth_server.entity_manager" />
+            <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
     </services>
 

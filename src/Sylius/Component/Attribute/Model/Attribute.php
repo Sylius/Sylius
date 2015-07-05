@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Model for object attributes.
@@ -50,6 +52,13 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $configuration = array();
 
     /**
+     * All values associated with this attribute.
+     *
+     * @var AttributeValueInterface[]|Collection
+     */
+    protected $values;
+
+    /**
      * Creation time.
      *
      * @var \DateTime
@@ -66,6 +75,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function __construct()
     {
         parent::__construct();
+        $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -160,6 +170,14 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * {@inheritdoc}
      */
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -191,13 +209,5 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationEntityClass()
-    {
-        return get_class().'Translation';
     }
 }

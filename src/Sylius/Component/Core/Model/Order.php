@@ -14,25 +14,34 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-
 
 /**
  * Order entity.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Order extends Cart implements OrderInterface
 {
     /**
-     * User.
+     * Customer.
      *
-     * @var UserInterface
+     * @var BaseCustomerInterface
      */
-    protected $user;
+    protected $customer;
+
+    /**
+     * Channel.
+     *
+     * @var ChannelInterface
+     */
+    protected $channel;
 
     /**
      * Order shipping address.
@@ -70,6 +79,13 @@ class Order extends Cart implements OrderInterface
     protected $currency;
 
     /**
+     * Exchange rate at the time of order completion.
+     *
+     * @var float
+     */
+    protected $exchangeRate = 1.0;
+
+    /**
      * Promotion coupons.
      *
      * @var Collection|BaseCouponInterface[]
@@ -81,7 +97,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var string
      */
-    protected $checkoutState = OrderInterface::CHECKOUT_STATE_CART;
+    protected $checkoutState = OrderInterface::STATE_CART;
 
     /**
      * Order payment state.
@@ -101,7 +117,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotions applied
      *
-     * @var Collection|PromotionInterface[]
+     * @var Collection|BasePromotionInterface[]
      */
     protected $promotions;
 
@@ -121,22 +137,46 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getCustomer()
     {
-        return $this->user;
+        return $this->customer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user = null)
+    public function setCustomer(BaseCustomerInterface $customer = null)
     {
-        $this->user = $user;
-        if (null !== $this->user) {
-            $this->email = $this->user->getEmail();
-        }
+        $this->customer = $customer;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setChannel(BaseChannelInterface $channel = null)
+    {
+        $this->channel = $channel;
+
+        return $this;
+    }
+
+    public function getUser()
+    {
+        if (null === $this->customer) {
+            return null;
+        }
+
+        return $this->customer->getUser();
     }
 
     /**
@@ -449,6 +489,24 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getExchangeRate()
+    {
+        return $this->exchangeRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExchangeRate($exchangeRate)
+    {
+        $this->exchangeRate = (float) $exchangeRate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingState()
     {
         return $this->shippingState;
@@ -514,7 +572,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(PromotionInterface $promotion)
+    public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
     }
@@ -522,7 +580,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(PromotionInterface $promotion)
+    public function addPromotion(BasePromotionInterface $promotion)
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -534,7 +592,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(PromotionInterface $promotion)
+    public function removePromotion(BasePromotionInterface $promotion)
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);

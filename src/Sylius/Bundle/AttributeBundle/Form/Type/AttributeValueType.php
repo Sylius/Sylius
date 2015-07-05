@@ -13,7 +13,6 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeValueFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Product\Model\AttributeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -52,16 +51,13 @@ class AttributeValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName))
-            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory()))
+            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName),
+            ))
+            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->subjectName))
         ;
 
-        $prototypes = array();
-        foreach ($this->getAttributes($builder) as $attribute) {
-            $prototypes[] = $builder->create('value', $attribute->getType(), $attribute->getConfiguration())->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
+        $this->buildAttributeValuePrototypes($builder);
     }
 
     /**
@@ -85,14 +81,22 @@ class AttributeValueType extends AbstractResourceType
     }
 
     /**
-     * Get attributes
+     * Build attribute values' prototypes.
      *
      * @param FormBuilderInterface $builder
-     *
-     * @return AttributeInterface[]
      */
-    private function getAttributes(FormBuilderInterface $builder)
+    protected function buildAttributeValuePrototypes($builder)
     {
-        return $builder->get('attribute')->getOption('choice_list')->getChoices();
+        $attributes = $builder->get('attribute')->getOption('choice_list')->getChoices();
+
+        $prototypes = array();
+        foreach ($attributes as $attribute) {
+            $config = array_merge(array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName),
+            ), $attribute->getConfiguration());
+            $prototypes[] = $builder->create('value', $attribute->getType(), $config)->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
     }
 }

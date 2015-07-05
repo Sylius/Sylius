@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -35,7 +36,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('authorization_checker')->defaultValue('sylius.authorization_checker.default')->end()
                 ->scalarNode('identity_provider')->defaultValue('sylius.authorization_identity_provider.security')->end()
                 ->scalarNode('permission_map')->defaultValue('sylius.permission_map.cached')->end()
@@ -138,6 +139,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('roles')
+                    ->useAttributeAsKey('id')
                     ->prototype('array')
                         ->children()
                             ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
@@ -155,7 +157,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('roles_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
-                        ->performNoDeepMerging()
                         ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
@@ -178,6 +179,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('permissions')
+                    ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
                     ->defaultValue(array())
                 ->end()

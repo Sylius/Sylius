@@ -48,7 +48,9 @@ class RuleTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->addEventSubscriber(Argument::any())
+            ->addEventSubscriber(
+                Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber')
+            )
             ->willReturn($builder)
         ;
 
@@ -75,7 +77,7 @@ class RuleTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener'))
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber'))
             ->willReturn($builder)
         ;
 

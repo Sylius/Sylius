@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -32,7 +32,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension');
     }
 
     function it_should_not_create_definition_if_dont_configured(ContainerBuilder $container)

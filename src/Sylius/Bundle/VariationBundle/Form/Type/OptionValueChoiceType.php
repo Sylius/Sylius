@@ -47,18 +47,25 @@ class OptionValueChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['option']->getValues(), 'value', array(), null, null, PropertyAccess::createPropertyAccessor());
+            return new ObjectChoiceList(
+                $options['option']->getValues(),
+                'value',
+                array(),
+                null,
+                'id',
+                PropertyAccess::createPropertyAccessor()
+            );
         };
 
         $resolver
             ->setDefaults(array(
-                'choice_list' => $choiceList
+                'choice_list' => $choiceList,
             ))
             ->setRequired(array(
-                'option'
+                'option',
             ))
             ->addAllowedTypes(array(
-                'option' => 'Sylius\Component\Variation\Model\OptionInterface'
+                'option' => 'Sylius\Component\Variation\Model\OptionInterface',
             ))
         ;
     }

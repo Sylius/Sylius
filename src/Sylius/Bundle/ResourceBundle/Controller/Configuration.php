@@ -302,7 +302,15 @@ class Configuration
         $defaultSorting = array_merge($this->parameters->get('sorting', array()), $sorting);
 
         if ($this->isSortable()) {
-            return $this->getRequestParameter('sorting', $defaultSorting);
+            $sorting = $this->getRequestParameter('sorting');
+            foreach ($defaultSorting as $key => $value) {
+                //do not override request parameters by $defaultSorting values
+                if (!isset($sorting[$key])){
+                    $sorting[$key] = $value;
+                }
+            }
+
+            return $sorting;
         }
 
         return $defaultSorting;
@@ -316,14 +324,18 @@ class Configuration
         );
     }
 
-    public function getMethod($default)
+    public function getRepositoryMethod($default)
     {
-        return $this->parameters->get('method', $default);
+        $repository = $this->parameters->get('repository', array('method' => $default));
+
+        return is_array($repository) ? $repository['method'] : $repository;
     }
 
-    public function getArguments(array $default = array())
+    public function getRepositoryArguments(array $default = array())
     {
-        return $this->parameters->get('arguments', $default);
+        $repository = $this->parameters->get('repository', array());
+
+        return isset($repository['arguments']) ? $repository['arguments'] : $default;
     }
 
     public function getFactoryMethod($default)

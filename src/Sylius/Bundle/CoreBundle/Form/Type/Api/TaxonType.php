@@ -36,10 +36,9 @@ class TaxonType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.taxon.description'
             ))
-            ->add('parent', 'entity', array(
+            ->add('parent', 'sylius_taxon_choice', array(
                 'required' => false,
-                'label' => 'sylius.form.taxon.parent',
-                'class' => 'Sylius\Component\Core\Model\Taxon'
+                'label' => 'sylius.form.taxon.parent'
             ))
             ->add(
                 'file',

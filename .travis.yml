@@ -1,22 +1,39 @@
 language: php
 
+sudo: false
+
 php:
     - 5.3
     - 5.4
     - 5.5
+    - 5.6
+    - 7.0
 
 env:
     - TEST_SUITE=1
     - TEST_SUITE=2
+    
+matrix:
+    allow_failures:
+        - php: 7.0
+    include:
+        - php: 5.3
+          env: TEST_SUITE=1 COMPOSER_FLAGS="--prefer-lowest"
+        - php: 5.3
+          env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
 
-services: mongodb
+services:
+    - mongodb
+    
+addons:
+    apt:
+        packages:
+            - apache2
+            - wkhtmltopdf
+            - xvfb
 
-before_install:
-    - sudo apt-get update
-    - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-
-install:
-    - sudo apt-get install -y --force-yes php5-curl php5-intl wkhtmltopdf
+#install:
+#   - sudo apt-get install -y --force-yes php5-curl php5-intl wkhtmltopdf
 #   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl wkhtmltopdf
 #   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
 #   - sudo /etc/init.d/apache2 restart
@@ -32,7 +49,7 @@ before_script:
     - composer install --prefer-source --no-interaction
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
-    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction
+    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction $COMPOSER_FLAGS
 
     - app/console doctrine:database:create --env=test
     - app/console doctrine:schema:create --env=test

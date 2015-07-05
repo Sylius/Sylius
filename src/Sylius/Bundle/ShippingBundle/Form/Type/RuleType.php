@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -38,9 +38,9 @@ class RuleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildRuleFormSubscriber($this->checkerRegistry, $builder->getFormFactory()))
             ->add('type', 'sylius_shipping_rule_choice', array(
-                'label' => 'sylius.form.rule.type'
+                'label' => 'sylius.form.rule.type',
             ))
         ;
     }

@@ -51,9 +51,9 @@ class MoneyExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function formatAmount($amount, $currency = null)
+    public function formatAmount($amount, $currency = null, $locale = null)
     {
-        return $this->helper->formatAmount($amount, $currency);
+        return $this->helper->formatAmount($amount, $currency, false, $locale);
     }
 
     /**

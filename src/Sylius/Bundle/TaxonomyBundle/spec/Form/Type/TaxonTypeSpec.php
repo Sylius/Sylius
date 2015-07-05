@@ -46,7 +46,7 @@ class TaxonTypeSpec extends ObjectBehavior
 
         $builder
             ->addEventSubscriber(
-                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener')
+                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber')
             )
             ->willReturn($builder)
         ;

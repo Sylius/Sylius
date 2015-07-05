@@ -41,8 +41,12 @@ EOT
     {
         $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
 
+        if ($input->getOption('no-interaction')) {
+            return 0;
+        }
+
         if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? (y/N)</question> ', false)) {
-            return;
+            return 0;
         }
 
         $output->writeln('Loading sample data...');
@@ -54,7 +58,7 @@ EOT
         $commands = array(
             'doctrine:fixtures:load'       => array('--no-interaction' => true),
             'doctrine:phpcr:fixtures:load' => array('--no-interaction' => true),
-            'sylius:search:index'
+            'sylius:search:index',
         );
 
         $this->runCommands($commands, $input, $output);

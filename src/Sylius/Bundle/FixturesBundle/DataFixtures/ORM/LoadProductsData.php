@@ -33,6 +33,13 @@ class LoadProductsData extends DataFixture
      */
     private $totalVariants = 0;
 
+    private  $channels = array(
+        'WEB-UK',
+        'WEB-DE',
+        'WEB-US',
+        'MOBILE',
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -73,7 +80,7 @@ class LoadProductsData extends DataFixture
      */
     public function getOrder()
     {
-        return 6;
+        return 50;
     }
 
     /**
@@ -89,14 +96,15 @@ class LoadProductsData extends DataFixture
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
 
         $translatedNames = array(
-            $this->defaultLocale =>sprintf('T-Shirt "%s"', $this->faker->word),
-            'es' => sprintf('Camiseta "%s"', $this->fakers['es']->word),
+            $this->defaultLocale => sprintf('T-Shirt "%s"', $this->faker->word),
+            'es_ES' => sprintf('Camiseta "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
         $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
@@ -138,14 +146,14 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Sticker "%s"', $this->faker->word),
-            'es' => sprintf('Pegatina "%s"', $this->fakers['es']->word),
+            'es_ES' => sprintf('Pegatina "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
-
 
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Stickers', 'Stickypicky'));
         $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
@@ -182,11 +190,12 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Mug "%s"', $this->faker->word),
-            'es' => sprintf('Taza "%s"', $this->fakers['es']->word),
+            'es_ES' => sprintf('Taza "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
         $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
@@ -221,11 +230,12 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author),
-            'es' => sprintf('Libro "%s" de "%s"', ucfirst($this->fakers['es']->word), $author)
+            'es_ES' => sprintf('Libro "%s" de "%s"', ucfirst($this->fakers['es_ES']->word), $author),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product, $isbn);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
         $product->setArchetype($this->getReference('Sylius.Archetype.book'));
@@ -310,7 +320,7 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Add product to given taxons.
+     * Adds taxons to given product.
      *
      * @param ProductInterface $product
      * @param array            $taxonNames
@@ -324,6 +334,19 @@ class LoadProductsData extends DataFixture
         }
 
         $product->setTaxons($taxons);
+    }
+
+    /**
+     * Set channels.
+     *
+     * @param ProductInterface $product
+     * @param array            $channelCodes
+     */
+    protected function setChannels(ProductInterface $product, array $channelCodes)
+    {
+        foreach ($channelCodes as $code) {
+            $product->addChannel($this->getReference('Sylius.Channel.'.$code));
+        }
     }
 
     /**
@@ -382,6 +405,7 @@ class LoadProductsData extends DataFixture
     {
         foreach ($translatedNames as $locale => $name) {
             $product->setCurrentLocale($locale);
+            $product->setFallbackLocale($locale);
 
             $product->setName($name);
             $product->setDescription($this->fakers[$locale]->paragraph);

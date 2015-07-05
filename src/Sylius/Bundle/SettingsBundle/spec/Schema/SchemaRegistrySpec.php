@@ -36,24 +36,24 @@ class SchemaRegistrySpec extends ObjectBehavior
 
     function it_should_register_schema_properly(SchemaInterface $schema)
     {
-        $this->hasSchema('general')->shouldReturn(false);
-        $this->registerSchema('general', $schema);
-        $this->hasSchema('general')->shouldReturn(true);
+        $this->hasSchema('sylius_general')->shouldReturn(false);
+        $this->registerSchema('sylius_general', $schema);
+        $this->hasSchema('sylius_general')->shouldReturn(true);
     }
 
     function it_should_unregister_schema_properly(SchemaInterface $schema)
     {
-        $this->registerSchema('general', $schema);
-        $this->hasSchema('general')->shouldReturn(true);
+        $this->registerSchema('sylius_general', $schema);
+        $this->hasSchema('sylius_general')->shouldReturn(true);
 
-        $this->unregisterSchema('general');
-        $this->hasSchema('general')->shouldReturn(false);
+        $this->unregisterSchema('sylius_general');
+        $this->hasSchema('sylius_general')->shouldReturn(false);
     }
 
     function it_should_retrieve_registered_schema_by_namespace(SchemaInterface $schema)
     {
-        $this->registerSchema('general', $schema);
-        $this->getSchema('general')->shouldReturn($schema);
+        $this->registerSchema('sylius_general', $schema);
+        $this->getSchema('sylius_general')->shouldReturn($schema);
     }
 
     function it_should_complain_if_trying_to_retrieve_non_existing_schema()

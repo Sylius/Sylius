@@ -19,14 +19,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 abstract class AbstractTranslatable implements TranslatableInterface
 {
     /**
-     * Translations
+     * Translations.
      *
      * @var TranslationInterface[]
      */
     protected $translations;
 
     /**
-     * Current locale
+     * Current locale.
      *
      * @var string
      */
@@ -35,12 +35,12 @@ abstract class AbstractTranslatable implements TranslatableInterface
     /**
      * Cache current translation. Useful in Doctrine 2.4+
      *
-     * @var string
+     * @var TranslationInterface
      */
     protected $currentTranslation;
 
     /**
-     * Fallback locale
+     * Fallback locale.
      *
      * @var string
      */
@@ -98,9 +98,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * @param string $currentLocale
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setCurrentLocale($currentLocale)
     {
@@ -118,29 +116,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * @param TranslationInterface $currentTranslation
-     *
-     * @return $this
-     */
-    public function setCurrentTranslation(TranslationInterface $currentTranslation)
-    {
-        $this->currentTranslation = $currentTranslation;
-
-        return $this;
-    }
-
-    /**
-     * @return TranslationInterface
-     */
-    public function getCurrentTranslation()
-    {
-        return $this->currentTranslation;
-    }
-
-    /**
-     * @param string $fallbackLocale
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setFallbackLocale($fallbackLocale)
     {
@@ -158,34 +134,30 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Translation helper method
-     *
-     * @param string $locale
-     *
-     * @return TranslationInterface
-     *
-     * @throws \RuntimeException
+     * {@inheritdoc}
      */
     public function translate($locale = null)
     {
+        $locale = $locale ?: $this->currentLocale;
         if (null === $locale) {
-            $locale = $this->currentLocale;
+            throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
-        if (!$locale) {
-            throw new \RuntimeException('No locale has been set and currentLocale is empty');
-        }
-
-        if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
+        if ($this->currentTranslation && $locale === $this->currentTranslation->getLocale()) {
             return $this->currentTranslation;
         }
 
-        // TODO Throw exception? Get default translation?
         if (!$translation = $this->translations->get($locale)) {
+            if (null === $this->fallbackLocale) {
+                throw new \RuntimeException('No fallback locale has been set.');
+            }
+
             if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
-                $className = $this->getTranslationEntityClass();
+                $className = $this->getTranslationClass();
+
                 $translation = new $className();
                 $translation->setLocale($locale);
+
                 $this->addTranslation($translation);
             } else {
                 $translation = clone $fallbackTranslation;
@@ -198,9 +170,12 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Return translation entity class
+     * Return translation model class.
      *
      * @return string
      */
-    abstract protected function getTranslationEntityClass();
+    public static function getTranslationClass()
+    {
+        return get_called_class().'Translation';
+    }
 }

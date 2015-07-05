@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * Looks in database and then configuration array.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class EmailProvider implements EmailProviderInterface
 {
@@ -48,11 +49,7 @@ class EmailProvider implements EmailProviderInterface
     }
 
     /**
-     * @param string $code
-     *
-     * @return object|EmailInterface
-     *
-     * @throw \InvalidArgumentException
+     * {@inheritdoc}
      */
     public function getEmail($code)
     {
@@ -74,7 +71,7 @@ class EmailProvider implements EmailProviderInterface
      *
      * @return EmailInterface
      */
-    private function getEmailFromConfiguration($code)
+    protected function getEmailFromConfiguration($code)
     {
         if (!isset($this->configuration[$code])) {
             throw new \InvalidArgumentException(sprintf('Email with code "%s" does not exist!', $code));

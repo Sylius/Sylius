@@ -27,7 +27,7 @@ class DoctrineTargetEntitiesResolver
     public function resolve(ContainerBuilder $container, array $interfaces)
     {
         if (!$container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')) {
-            throw new \RuntimeException('Cannot find Doctrine RTEL');
+            throw new \RuntimeException('Cannot find Doctrine Target Entity Resolver Listener.');
         }
 
         $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
@@ -52,6 +52,7 @@ class DoctrineTargetEntitiesResolver
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     private function getInterface(ContainerBuilder $container, $key)
@@ -74,6 +75,7 @@ class DoctrineTargetEntitiesResolver
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     private function getClass(ContainerBuilder $container, $key)

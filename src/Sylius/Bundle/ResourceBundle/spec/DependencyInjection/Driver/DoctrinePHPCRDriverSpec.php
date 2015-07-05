@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -47,17 +48,18 @@ class DoctrinePHPCRDriverSpec extends ObjectBehavior
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
+        $alias = new Alias('doctrine_phpcr.odm.default_document_manager');
         $container->setAlias(
             'prefix.manager.resource',
-            Argument::type('Symfony\Component\DependencyInjection\Alias')
+            $alias
         )->shouldBeCalled();
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
-            'model' => 'Sylius\Model',
+            'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
             'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Repository',
+            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
     }
 }

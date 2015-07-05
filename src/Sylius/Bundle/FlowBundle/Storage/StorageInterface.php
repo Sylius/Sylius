@@ -22,6 +22,8 @@ interface StorageInterface
      * Initializes storage for given domain.
      *
      * @param string $domain
+     *
+     * @return $this
      */
     public function initialize($domain);
 

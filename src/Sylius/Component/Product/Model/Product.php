@@ -543,18 +543,16 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 
-        return $this;
-    }
+        if(null === $deletedAt) {
+            foreach($this->variants as $variant) {
+                $variant->setDeletedAt(null);
+            }
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationEntityClass()
-    {
-        return get_class().'Translation';
+        return $this;
     }
 }

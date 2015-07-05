@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -26,7 +27,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('currency_storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
@@ -50,29 +51,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('user')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\User')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CoreBundle\Controller\UserController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\UserType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('user_oauth')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\UserOAuth')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('group')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\Group')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\GroupType')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('product_variant_image')
                             ->addDefaultsIfNotSet()
                             ->children()

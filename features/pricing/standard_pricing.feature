@@ -6,6 +6,7 @@ Feature: Standard pricing
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -25,6 +26,10 @@ Feature: Standard pricing
             | name        | price | taxons       | tax category  |
             | PHP Top     | 49.99 | PHP T-Shirts | Taxable Goods |
             | Symfony Tee | 69.00 | PHP T-Shirts | Taxable Goods |
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Flat price is calculated for products
         Given I am on the store homepage

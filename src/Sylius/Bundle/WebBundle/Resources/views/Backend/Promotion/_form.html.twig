@@ -7,6 +7,14 @@
         {{ form_row(form.endsAt) }}
         {{ form_row(form.couponBased) }}
         {{ form_row(form.exclusive) }}
+        <div class="form-group">
+        {{ form_errors(form.channels) }}
+        {{ form_label(form.channels) }}
+        {% for channelForm in form.channels %}
+            {{ form_row(channelForm) }}
+        {% endfor %}
+        </div>
+
         {{ form_widget(form._token) }}
     </div>
     <div class="row">

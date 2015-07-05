@@ -19,7 +19,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="availableOn" column="available_on" type="datetime">
+        <field name="availableOn" column="available_on" type="datetime" nullable="true">
             <gedmo:versioned />
         </field>
 

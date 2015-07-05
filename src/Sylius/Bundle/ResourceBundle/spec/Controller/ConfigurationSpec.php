@@ -321,7 +321,7 @@ class ConfigurationSpec extends ObjectBehavior
     {
         $sorting = array('property' => 'desc');
         $overriddenSorting = array('other_property' => 'asc');
-        $combinedSorting = array('property' => 'desc', 'other_property' => 'asc');
+        $combinedSorting = array('other_property' => 'asc', 'property' => 'desc');
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', array())->willReturn($sorting);
@@ -330,7 +330,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting()->shouldReturn($combinedSorting);
 
         $defaultSorting = array('foo' => 'bar');
-        $combinedDefaultSorting = array('property' => 'desc', 'foo' => 'bar', 'other_property' => 'asc');
+        $combinedDefaultSorting = array('other_property' => 'asc', 'property' => 'desc', 'foo' => 'bar');
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn($sorting);
@@ -345,27 +345,26 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting(array('sort' => 'default'))->shouldReturn(array('sort' => 'request'));
     }
 
-    function it_has_method_parameter(Parameters $parameters)
+    function it_has_repository_method_parameter(Parameters $parameters)
     {
-        $parameters->get('method', 'myMethod')->willReturn('myMethod');
-        $this->getMethod('myMethod')->shouldReturn('myMethod');
+        $parameters->get('repository', array('method' => 'myDefaultMethod'))
+            ->willReturn(array('method' => 'myDefaultMethod'));
+        $this->getRepositoryMethod('myDefaultMethod')->shouldReturn('myDefaultMethod');
 
-        $parameters->get('method', 'findBy')->willReturn('findBy');
-        $this->getMethod('findBy')->shouldReturn('findBy');
+        $parameters->get('repository', array('method' => 'myDefaultMethod'))
+            ->willReturn('myMethod');
+        $this->getRepositoryMethod('myDefaultMethod')->shouldReturn('myMethod');
     }
 
-    function it_has_arguments_parameter(Parameters $parameters)
+    function it_has_repository_arguments_parameter(Parameters $parameters)
     {
-        $defaultArguments = array('property' => 'value');
-        $parameters->get('arguments', array())->willReturn(array());
-        $this->getArguments()->shouldReturn(array());
+        $defaultArguments = array('arguments' => 'value');
+        $parameters->get('repository', array())->willReturn($defaultArguments);
+        $this->getRepositoryArguments($defaultArguments)->shouldReturn('value');
 
-        $parameters->get('arguments', $defaultArguments)->willReturn($defaultArguments);
-        $this->getArguments($defaultArguments)->shouldReturn($defaultArguments);
-
-        $arguments = array('property' => 'myValue');
-        $parameters->get('arguments', $defaultArguments)->willReturn($arguments);
-        $this->getArguments($defaultArguments)->shouldReturn($arguments);
+        $arguments = array('arguments' => 'myValue');
+        $parameters->get('repository', array())->willReturn($arguments);
+        $this->getRepositoryArguments($defaultArguments)->shouldReturn('myValue');
     }
 
     function it_has_factory_method_parameter(Parameters $parameters)

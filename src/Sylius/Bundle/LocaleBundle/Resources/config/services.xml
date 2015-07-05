@@ -18,17 +18,11 @@
 
     <parameters>
         <parameter key="sylius.locale_provider.class">Sylius\Bundle\LocaleBundle\Provider\LocaleProvider</parameter>
-        <parameter key="sylius.event_listener.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
+        <parameter key="sylius.event_subscriber.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleSubscriber</parameter>
         <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
-            <argument>%sylius.model.locale.class%</argument>
-            <argument>%sylius.validation_group.locale%</argument>
-            <tag name="form.type" alias="sylius_locale" />
-        </service>
-
         <service id="sylius.context.locale" class="%sylius.context.locale.class%">
             <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.locale%</argument>
@@ -39,7 +33,7 @@
             <argument>%sylius.locale%</argument>
         </service>
 
-        <service id="sylius.event_listener.locale" class="%sylius.event_listener.locale.class%">
+        <service id="sylius.event_subscriber.locale" class="%sylius.event_subscriber.locale.class%">
             <argument type="service" id="sylius.context.locale" />
 
             <tag name="kernel.event_subscriber" />

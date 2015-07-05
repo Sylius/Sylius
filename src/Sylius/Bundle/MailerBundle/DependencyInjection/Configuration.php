@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -22,6 +23,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -35,8 +37,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('adapter')->defaultValue('sylius.email_sender.adapter.twig_swiftmailer')->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.swiftmailer')->end()
+                ->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.twig')->end()
             ->end()
         ;
 
@@ -104,6 +107,7 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @param ArrayNodeDefinition $node
+     *
      * @return ArrayNodeDefinition
      */
     protected function addEmailsSection(ArrayNodeDefinition $node)

@@ -15,16 +15,15 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Sylius\Component\User\Context\CustomerContextInterface;
 
 class RestrictedZoneCheckerSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext, ZoneMatcherInterface $zoneMatcher)
+    function let(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
-        $this->beConstructedWith($securityContext, $zoneMatcher);
+        $this->beConstructedWith($customerContext, $zoneMatcher);
     }
 
     function it_is_initializable()
@@ -37,78 +36,66 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface');
     }
 
-    function it_is_not_restricted_if_user_is_not_authenticated(ProductInterface $product, $securityContext)
+    function it_is_not_restricted_if_customer_is_not_authenticated(ProductInterface $product, $customerContext)
     {
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(false);
+        $customerContext->getCustomer()->shouldBeCalled()->willReturn(null);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_user_have_no_shipping_address(
+    function it_is_not_restricted_if_customer_have_no_shipping_address(
         ProductInterface $product,
-        $securityContext,
-        TokenInterface $token,
-        UserInterface $user
+        $customerContext,
+        CustomerInterface $customer
     ) {
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getShippingAddress()->shouldBeCalled()->willReturn(null);
+        $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
+        $customer->getShippingAddress()->shouldBeCalled()->willReturn(null);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
     function it_is_not_restricted_if_product_have_no_restricted_zone(
         ProductInterface $product,
-        $securityContext,
-        TokenInterface $token,
-        UserInterface $user,
+        $customerContext,
+        CustomerInterface $customer,
         AddressInterface $address,
         ProductInterface $product
     ) {
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getShippingAddress()->shouldBeCalled()->willReturn($address);
+        $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
+        $customer->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $product->getRestrictedZone()->shouldBeCalled()->willReturn(null);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_zone_matcher_does_not_match_users_shipping_address(
+    function it_is_not_restricted_if_zone_matcher_does_not_match_customers_shipping_address(
         ProductInterface $product,
-        $securityContext,
+        $customerContext,
         $zoneMatcher,
-        TokenInterface $token,
-        UserInterface $user,
+        CustomerInterface $customer,
         AddressInterface $address,
         ProductInterface $product,
         ZoneInterface $zone
     ) {
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getShippingAddress()->shouldBeCalled()->willReturn($address);
+        $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
+        $customer->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $product->getRestrictedZone()->shouldBeCalled()->willReturn($zone);
         $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn(array());
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_restricted_if_zone_matcher_match_users_shipping_address(
+    function it_is_restricted_if_zone_matcher_match_customers_shipping_address(
         ProductInterface $product,
-        $securityContext,
+        $customerContext,
         $zoneMatcher,
-        TokenInterface $token,
-        UserInterface$user,
+        CustomerInterface $customer,
         AddressInterface $address,
         ProductInterface $product,
         ZoneInterface $zone
     ) {
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getShippingAddress()->shouldBeCalled()->willReturn($address);
+        $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
+        $customer->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $product->getRestrictedZone()->shouldBeCalled()->willReturn($zone);
         $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn(array($zone));
 

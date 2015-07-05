@@ -7,8 +7,9 @@ sylius_api_order_item_index:
     defaults:
         _controller: sylius.controller.order_item:indexAction
         _sylius:
-            method: findByOrder
-            arguments: [$orderId]
+            repository:
+                method: findByOrder
+                arguments: [$orderId]
             paginate: $limit
             sortable: true
             sorting:

@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\InstallerBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
@@ -84,6 +83,8 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /**
      * @param OutputInterface $output
      * @param int $length
+     *
+     * @return ProgressHelper
      */
     protected function createProgressBar(OutputInterface $output, $length = 10)
     {
@@ -135,7 +136,12 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param OutputInterface $output
      * @param string $question
+     * @param array $constraints
+     * @param mixed $default
+     *
+     * @return mixed
      */
     protected function ask(OutputInterface $output, $question, array $constraints = array(), $default = null)
     {
@@ -143,6 +149,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
         do {
             $value = $dialog->ask($output, sprintf('<question>%s</question> ', $question), $default);
+            // do not validate value if no constraints were given
+            if (empty($constraints)) {
+                return $value;
+            }
             $valid = 0 === count($errors = $this->validate($value, $constraints));
 
             if (!$valid) {
@@ -167,6 +177,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param OutputInterface $output
      * @param ConstraintViolationList $errors
      */
     protected function writeErrors(OutputInterface $output, ConstraintViolationList $errors)

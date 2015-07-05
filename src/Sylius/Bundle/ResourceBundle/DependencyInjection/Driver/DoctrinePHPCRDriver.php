@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -34,7 +35,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository';
+        $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
         if (isset($classes['repository'])) {
             $repositoryClass  = $classes['repository'];
@@ -54,7 +55,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
      */
     protected function getManagerServiceKey()
     {
-        return sprintf('doctrine_phpcr.odm.%_document_manager', $this->managerName);
+        return sprintf('doctrine_phpcr.odm.%s_document_manager', $this->managerName);
     }
 
     /**

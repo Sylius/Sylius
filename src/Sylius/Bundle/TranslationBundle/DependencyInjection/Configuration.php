@@ -32,39 +32,11 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
             ->end()
         ;
-
-        $this->addMappingDefaults($rootNode);
 
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addMappingDefaults(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-            ->arrayNode('default_mapping')
-                ->addDefaultsIfNotSet()
-                ->children()
-                    ->arrayNode('translatable')
-                        ->children()
-                            ->scalarNode('field')->defaultValue('translations')->end()
-                            ->scalarNode('currentLocale')->defaultValue('currentLocale')->end()
-                            ->scalarNode('fallbackLocale')->defaultValue('fallbackLocale')->end()
-                        ->end()
-                    ->end()
-                    ->arrayNode('translation')
-                        ->children()
-                            ->scalarNode('field')->defaultValue('translatable')->end()
-                            ->scalarNode('locale')->defaultValue('locale')->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 }

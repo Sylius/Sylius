@@ -33,6 +33,11 @@ Feature: Checkout shipping
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
           And there is default currency configured
+          And there is default channel configured
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment | shipping                                      |
+            | Category | Dummy   | DHL Express, FedEx, FedEx Premium, UPS Ground |
           And I am logged in user
           And I added product "PHP Top" to cart
 

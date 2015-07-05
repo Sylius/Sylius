@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -29,12 +29,22 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
+
+        foreach ($config['classes'] as $name => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+            $formDefinition->addArgument($parameters['subject']);
+
+            if (isset($parameters['translation'])) {
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition->addArgument($parameters['subject']);
+            }
+        }
     }
 
     /**
@@ -51,12 +61,16 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
             foreach ($parameters as $resource => $classes) {
                 $convertedConfig[$subject.'_'.$resource] = $classes;
+                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
             }
 
-            $this->createSubjectServices($container, $config['driver'], $subject, $convertedConfig);
+            $this->createSubjectServices($container, $subject);
 
             if (!isset($config['validation_groups'][$subject]['archetype'])) {
                 $config['validation_groups'][$subject]['archetype'] = array('sylius');
+            }
+            if (!isset($config['validation_groups'][$subject]['archetype_translation'])) {
+                $config['validation_groups'][$subject]['archetype_translation'] = array('sylius');
             }
         }
 
@@ -72,42 +86,16 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      * Create services for every subject.
      *
      * @param ContainerBuilder $container
-     * @param string           $driver
      * @param string           $subject
-     * @param array            $config
      */
-    private function createSubjectServices(ContainerBuilder $container, $driver, $subject, array $config)
+    private function createSubjectServices(ContainerBuilder $container, $subject)
     {
-        $archetypeAlias = $subject.'_archetype';
-
-        $archetypeClasses = $config[$archetypeAlias];
-
-        $archetypeFormType = new Definition($archetypeClasses['form']);
-        $archetypeFormType
-            ->setArguments(array($archetypeClasses['model'], '%sylius.validation_group.'.$archetypeAlias.'%', $subject))
-            ->addTag('form.type', array('alias' => 'sylius_'.$archetypeAlias))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$archetypeAlias, $archetypeFormType);
-
-        $choiceTypeClasses = array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeEntityChoiceType'
-        );
-
-        $archetypeChoiceFormType = new Definition($choiceTypeClasses[$driver]);
-        $archetypeChoiceFormType
-            ->setArguments(array($subject, $archetypeClasses['model']))
-            ->addTag('form.type', array('alias' => 'sylius_'.$archetypeAlias.'_choice'))
-        ;
-
-        $container->setDefinition('sylius.form.type.'.$archetypeAlias.'_choice', $archetypeChoiceFormType);
-
-        $builder = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
-        $builder
+        $builderDefintion = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
+        $builderDefintion
             ->setArguments(array(new Reference(sprintf('sylius.repository.%s_attribute_value', $subject))))
         ;
 
-        $container->setDefinition('sylius.builder.'.$archetypeAlias, $builder);
+        $container->setDefinition('sylius.builder.'.$subject.'_archetype', $builderDefintion);
     }
 
     /**

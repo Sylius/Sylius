@@ -26,14 +26,14 @@
         <parameter key="sylius.currency_importer.open_exchange_rates.class">Sylius\Component\Currency\Importer\OpenExchangeRatesImporter</parameter>
 
         <parameter key="sylius.form.type_extension.money.class">Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension</parameter>
+        <parameter key="sylius.form.type.currency_code_choice.class">Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType</parameter>
         <parameter key="sylius.form.type.currency_choice.class">Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
-            <argument>%sylius.model.currency.class%</argument>
-            <argument>%sylius.validation_group.currency%</argument>
-            <tag name="form.type" alias="sylius_currency" />
+        <service id="sylius.form.type.currency_code_choice" class="%sylius.form.type.currency_code_choice.class%">
+            <argument type="service" id="sylius.currency_provider" />
+            <tag name="form.type" alias="sylius_currency_code_choice" />
         </service>
 
         <service id="sylius.form.type_extension.money" class="%sylius.form.type_extension.money.class%">
@@ -57,6 +57,9 @@
         <service id="sylius.currency_importer.european_central_bank" class="%sylius.currency_importer.european_central_bank.class%">
             <argument type="service" id="sylius.manager.currency" />
             <argument type="service" id="sylius.repository.currency" />
+            <argument type="collection">
+                <argument key="base_currency">%sylius.currency_importer.ecb.base_currency%</argument>
+            </argument>
         </service>
         <service id="sylius.currency_importer.ecb" alias="sylius.currency_importer.european_central_bank" />
 
@@ -64,15 +67,10 @@
             <argument type="service" id="sylius.manager.currency" />
             <argument type="service" id="sylius.repository.currency" />
             <argument type="collection">
-                <argument>%sylius.currency_importer.open_exchange_rates%</argument>
+                <argument key="app_id">%sylius.currency_importer.open_exchange_rates%</argument>
             </argument>
         </service>
         <service id="sylius.currency_importer.oer" alias="sylius.currency_importer.open_exchange_rates" />
-
-        <service id="sylius.form.type.currency_choice" class="%sylius.form.type.currency_choice.class%">
-            <argument type="service" id="sylius.currency_provider" />
-            <tag name="form.type" alias="sylius_currency_choice" />
-        </service>
     </services>
 
 </container>

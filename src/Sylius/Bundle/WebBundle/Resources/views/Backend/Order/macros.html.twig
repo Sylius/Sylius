@@ -1,10 +1,10 @@
-{% macro list(orders, user) %}
+{% macro list(orders, customer) %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
-{% set router_paramters = user is not null ? {'id' : user.id} : {} %}
+{% set router_paramters = customer is not null ? {'id' : customer.id} : {} %}
 
 {% if orders|length > 0 %}
 <table id="orders" class="table">
@@ -12,10 +12,11 @@
         <tr>
             <th></th>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.order.created_at'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('channel', 'sylius.order.channel'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('number', 'sylius.order.number'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('paymentState', 'sylius.order.payment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('shippingState', 'sylius.order.shipment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('user.lastName', 'sylius.order.user'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('customer.lastName', 'sylius.order.customer'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('total', 'sylius.order.total'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th></th>
         </tr>
@@ -25,6 +26,9 @@
         <tr id="{{ order.id }}" {% if order.deleted %} class="danger"{% endif %}>
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|date }}</td>
+            <td>
+                <span {%- if order.channel.color -%} style="color: {{ order.channel.color }};"{%- endif -%}>{{ order.channel.code }}</span>
+            </td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">
                     <strong>#{{ order.number }}</strong>
@@ -37,14 +41,7 @@
                 {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
             <td>
-                {% if order.user %}
-                    <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
-                {% else %}
-                    <p>
-                        {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
-                        <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
-                    </p>
-                {% endif %}
+                <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">{{ order.customer.email }}</a></p>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
@@ -63,8 +60,8 @@
     </tbody>
 </table>
 {% else %}
-    {% if user is not null %}
-        {{ alerts.info('sylius.user.order.no_results'|trans) }}
+    {% if customer is not null %}
+        {{ alerts.info('sylius.customer.order.no_results'|trans) }}
     {% else %}
         {{ alerts.info('sylius.order.no_results'|trans) }}
     {% endif %}
@@ -84,7 +81,7 @@
         <tr>
             <th>{{ 'sylius.order.number'|trans }}</th>
             <th>{{ 'sylius.order.payment_state'|trans }}</th>
-            <th>{{ 'sylius.order.user'|trans }}</th>
+            <th>{{ 'sylius.order.customer'|trans }}</th>
             <th>{{ 'sylius.order.total'|trans }}</th>
         </tr>
     </thead>
@@ -100,15 +97,10 @@
                 {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
             </td>
             <td style="width: 20%">
-                {% if order.user %}
-                    {{ order.user.fullname }}<br>
-                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                        {{ order.user.email }}
-                    </a>
-                {% else %}
-                    {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}
-                    <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
-                {% endif %}
+                {{ order.customer.fullname }}<br>
+                <a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">
+                    {{ order.customer.email }}
+                </a>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
         </tr>

@@ -58,8 +58,8 @@ class ReportTypeSpec extends ObjectBehavior
         $builder->add('renderer', 'sylius_renderer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('dataFetcher', 'sylius_data_fetcher_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener'))->shouldBeCalled()->willReturn($builder);
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormListener'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber'))->shouldBeCalled()->willReturn($builder);
 
         $renderer->getType()->willReturn('test_renderer');
         $rendererRegistry->all()->willReturn(array('test_renderer' => $renderer));

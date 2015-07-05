@@ -1,0 +1,85 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    imagine_block:
+        name:
+            not_blank: Please enter imagine block name.
+        label:
+            not_blank: Please enter imagine block label.
+        filter:
+            not_blank: Please enter imagine block filter.
+        image:
+            not_blank: Please choose imagine block image.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    menu:
+        name:
+            not_blank: Please enter menu name.
+        label:
+            not_blank: Please enter menu label.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    menu_node:
+        name:
+            not_blank: Please enter menu node name.
+        label:
+            not_blank: Please enter menu node label.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    route:
+        name:
+            not_blank: Please enter route name.
+        content:
+            not_blank: Please enter route content.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    slideshow_block:
+        name:
+            not_blank: Please enter slideshow name.
+        title:
+            not_blank: Please enter slideshow title.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    simple_block:
+        name:
+            not_blank: Please enter simple block name.
+        title:
+            not_blank: Please enter simple block title.
+        body:
+            not_blank: Please enter simple block body.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    string_block:
+        name:
+            not_blank: Please enter simple block name.
+        body:
+            not_blank: Please enter simple block body.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    static_content:
+        name:
+            not_blank: Please enter static content name.
+        title:
+            not_blank: Please enter static content title.
+        body:
+            not_blank: Please enter static content body.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+            

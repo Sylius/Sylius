@@ -6,6 +6,7 @@ Feature: Checkout security
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -16,8 +17,8 @@ Feature: Checkout security
             | PHP Top       | 5.99  | PHP T-Shirts |
           And there are following users:
             | email            | password | enabled |
-            | john@example.com | foo      | yes     |
-            | rick@example.com | bar      | yes     |
+            | john@example.com | foo1     | yes     |
+            | rick@example.com | bar1     | yes     |
           And the following zones are defined:
             | name  | type    | members        |
             | UK    | country | United Kingdom |
@@ -27,6 +28,10 @@ Feature: Checkout security
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment | shipping    |
+            | Category | Dummy   | DHL Express |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 
@@ -41,27 +46,27 @@ Feature: Checkout security
     Scenario: Signing in during the checkout
          When I fill in the following:
             | Email    | john@example.com |
-            | Password | foo              |
+            | Password | foo1             |
           And I press "Login"
          Then I should be redirected to the checkout addressing step
 
     Scenario: Creating account during the checkout
          When I fill in the following:
-            | fos_user_registration_form_email                | mike@example.com |
-            | fos_user_registration_form_plainPassword_first  | mikepass         |
-            | fos_user_registration_form_plainPassword_second | mikepass         |
-            | fos_user_registration_form_firstName            | Mike             |
-            | fos_user_registration_form_lastName             | Small            |
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
          Then I should be redirected to the checkout addressing step
 
     Scenario: Creating account during the whole checkout
          When I fill in the following:
-            | fos_user_registration_form_email                | mike@example.com |
-            | fos_user_registration_form_plainPassword_first  | mikepass         |
-            | fos_user_registration_form_plainPassword_second | mikepass         |
-            | fos_user_registration_form_firstName            | Mike             |
-            | fos_user_registration_form_lastName             | Small            |
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
           And I fill in the shipping address to United Kingdom
           And I press "Continue"
@@ -75,10 +80,20 @@ Feature: Checkout security
 
     Scenario: Creating account without first and last name
          When I fill in the following:
-            | fos_user_registration_form_email                | mike@example.com |
-            | fos_user_registration_form_plainPassword_first  | mikepass         |
-            | fos_user_registration_form_plainPassword_second | mikepass         |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
          Then I should be on the checkout security forward step
           And I should see "Please enter your first name"
           And I should see "Please enter your last name"
+
+    Scenario: Creating account without email
+         When I fill in the following:
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
+          And I press "Register"
+         Then I should be on the checkout security forward step
+          And I should see "Please enter your email"

@@ -49,7 +49,7 @@ class OptionTranslationType extends AbstractResourceType
     {
         $builder
             ->add('presentation', 'text', array(
-                'label' => 'sylius.form.option.presentation'
+                'label' => 'sylius.form.option.presentation',
             ))
         ;
     }

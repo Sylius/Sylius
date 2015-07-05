@@ -6,6 +6,7 @@
 [![Build status...](https://img.shields.io/travis/Sylius/Sylius/master.svg)](http://travis-ci.org/Sylius/Sylius)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
 [![HHVM Status](https://img.shields.io/hhvm/Sylius/Sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
+[![Dependency Status](https://www.versioneye.com/php/sylius:sylius/0.13.0/badge.svg)](https://www.versioneye.com/php/sylius:sylius/0.13.0)
 
 Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfony2**](http://symfony.com) framework.
 
@@ -25,7 +26,7 @@ Quick Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius:v0.13.0
+$ php composer.phar create-project sylius/sylius:v0.14.0
 $ cd sylius
 $ php app/console sylius:install
 ```
@@ -56,10 +57,11 @@ $ php app/console doctrine:database:create --env=test
 $ php app/console doctrine:schema:create --env=test
 ```
 
-You can run Behat using the following command:
+You can run Behat using the following commands:
 
 ```bash
-$ bin/behat
+$ bin/behat # In order to run tests which don't need JS support
+$ bin/behat -p javascript # In order to run tests which need JS support
 ```
 
 Troubleshooting

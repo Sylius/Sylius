@@ -11,12 +11,18 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
+        <parameter key="sylius.phpcr_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository</parameter>
+
+        <parameter key="sylius.controller.class">Sylius\Bundle\ResourceBundle\Controller\ResourceController</parameter>
+        <parameter key="sylius.controller.configuration.class">Sylius\Bundle\ResourceBundle\Controller\Configuration</parameter>
         <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
@@ -25,6 +31,7 @@
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
         <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
+        <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
@@ -41,14 +48,15 @@
     <services>
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
+            <argument>%sylius.controller.configuration.class%</argument>
             <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
-            <argument type="service" id="sylius.expresssion_language" />
+            <argument type="service" id="sylius.expression_language" />
         </service>
         <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
 
-        <service id="sylius.expresssion_language" class="%sylius.expression_language.class%">
+        <service id="sylius.expression_language" class="%sylius.expression_language.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -70,11 +78,12 @@
         </service>
 
         <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
-            <argument /> <!-- Argument set by compiler pass -->
+            <argument type="service" id="doctrine" />
             <tag name="form.type" alias="entity_hidden" />
         </service>
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
-        <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
+        <service id="sylius.form.extension.collection"
+                 class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
         </service>
     </services>

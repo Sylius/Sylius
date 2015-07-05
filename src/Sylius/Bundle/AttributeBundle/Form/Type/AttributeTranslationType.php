@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Attribute Translation type.
 
+ *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AttributeTranslationType extends AbstractResourceType
@@ -39,7 +38,7 @@ class AttributeTranslationType extends AbstractResourceType
      */
     public function __construct($dataClass, array $validationGroups, $subjectName)
     {
-       parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
     }
@@ -51,7 +50,7 @@ class AttributeTranslationType extends AbstractResourceType
     {
         $builder
             ->add('presentation', 'text', array(
-                'label' => 'sylius.form.attribute.presentation'
+                'label' => 'sylius.form.attribute.presentation',
             ))
         ;
     }

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -24,8 +24,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services',
-        'controller'
+        'services.xml'
     );
 
     /**
@@ -37,7 +36,7 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
     }
 
@@ -62,7 +61,8 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
 
             'service'             => array(
-                'user_provider' => 'fos_user.user_provider.username'
+                'user_provider'  => 'sylius.user_provider.name_or_email',
+                'client_manager' => 'sylius.oauth_server.client_manager',
             ),
         ));
     }

@@ -27,7 +27,7 @@ class ZoneMemberZoneType extends ZoneMemberType
     {
         $builder
             ->add('zone', 'sylius_zone_choice', array(
-                'label' => 'sylius.form.zone_member_zone.zone'
+                'label' => 'sylius.form.zone_member_zone.zone',
             ))
         ;
 

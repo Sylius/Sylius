@@ -56,7 +56,7 @@ class AttributeValueTypeSpec extends ObjectBehavior
         ;
 
         $attribute->getType()->willReturn('checkbox')->shouldBeCalled();
-        $attribute->getConfiguration()->willReturn(array('label' => 'Some label'))->shouldBeCalled();
+        $attribute->getConfiguration()->willReturn(array('label' => 'sylius.form.attribute.server_attribute_value.value'))->shouldBeCalled();
 
         $choiceList
             ->getChoices()
@@ -71,7 +71,7 @@ class AttributeValueTypeSpec extends ObjectBehavior
             ->willReturn($fieldBuilder)
         ;
         $builder
-            ->create('value', 'checkbox', array('label' => 'Some label'))
+            ->create('value', 'checkbox', array('label' => 'sylius.form.attribute.server_attribute_value.value'))
             ->shouldBeCalled()
             ->willReturn($fieldBuilder)
         ;

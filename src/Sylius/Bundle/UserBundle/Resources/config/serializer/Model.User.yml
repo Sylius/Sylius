@@ -1,0 +1,26 @@
+Sylius\Component\User\Model\User:
+    exclusion_policy: ALL
+    xml_root_name: sylius_user
+    properties:
+        id:
+            expose: true
+            type: int
+        username:
+            expose: true
+            type: string
+        usernameCanonical:
+            expose: true
+            type: string
+        enabled:
+            expose: true
+            type: boolean
+        roles:
+            expose: true
+            type: array
+        virtual_properties:
+            getEmail:
+                serialized_name: email
+                type: string
+            getEmailCanonical:
+                serialized_name: emailCanonical
+                type: string

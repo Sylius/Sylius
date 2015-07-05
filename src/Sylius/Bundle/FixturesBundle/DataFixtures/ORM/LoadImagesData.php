@@ -13,7 +13,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Sylius\Component\Core\Model\ProductVariantImage;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -52,6 +51,6 @@ class LoadImagesData extends DataFixture
      */
     public function getOrder()
     {
-        return 5;
+        return 10;
     }
 }

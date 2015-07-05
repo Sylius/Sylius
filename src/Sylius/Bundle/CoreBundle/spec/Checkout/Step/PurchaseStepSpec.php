@@ -45,7 +45,6 @@ class PurchaseStepSpec extends ObjectBehavior
         HttpRequestVerifierInterface $httpRequestVerifier,
         TokenInterface $token,
         Request $request,
-        RequestStack $requestStack,
         CartProviderInterface $cartProvider,
         RegistryInterface $payum,
         PaymentInterface $payment,
@@ -57,7 +56,6 @@ class PurchaseStepSpec extends ObjectBehavior
         TranslatorInterface $translator,
         FactoryInterface $factory
     ) {
-        $requestStack->getCurrentRequest()->willReturn($request);
         $session->getFlashBag()->willReturn($flashBag);
         $doctrine->getManager()->willReturn($objectManager);
         $token->getPaymentName()->willReturn('aPaymentName');
@@ -66,8 +64,6 @@ class PurchaseStepSpec extends ObjectBehavior
         $httpRequestVerifier->invalidate($token)->willReturn(null);
 
         $container->get('payum.security.http_request_verifier')->willReturn($httpRequestVerifier);
-        $container->get('request')->willReturn($request);
-        $container->get('request_stack')->willReturn($requestStack);
         $container->get('sylius.cart_provider')->willReturn($cartProvider);
         $container->get('payum')->willReturn($payum);
         $container->get('event_dispatcher')->willReturn($eventDispatcher);
@@ -93,12 +89,15 @@ class PurchaseStepSpec extends ObjectBehavior
     }
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+        Request $request,
         $factory,
         ProcessContextInterface $context,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $sm
     ) {
+        $context->getRequest()->willReturn($request);
+
         $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_NEW);
@@ -145,12 +144,15 @@ class PurchaseStepSpec extends ObjectBehavior
     }
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+        Request $request,
         $factory,
         ProcessContextInterface $context,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $sm
     ) {
+        $context->getRequest()->willReturn($request);
+
         $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_COMPLETED);

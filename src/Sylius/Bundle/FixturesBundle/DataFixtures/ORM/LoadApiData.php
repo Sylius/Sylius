@@ -37,6 +37,7 @@ class LoadApiData extends DataFixture
             true,
             array('ROLE_API')
         );
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
         $manager->persist($user);
         $manager->flush();
@@ -70,16 +71,24 @@ class LoadApiData extends DataFixture
      */
     protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
     {
+        $canonicalizer = $this->get('sylius.user.canonicalizer');
+
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
+        $customer = $this->getCustomerRepository()->createNew();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setCurrency($currency);
+        $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);
+        $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
+        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
         $user->setRoles($roles);
-        $user->setCurrency($currency);
         $user->setEnabled($enabled);
+
+        $this->get('sylius.user.password_updater')->updatePassword($user);
 
         return $user;
     }
@@ -97,6 +106,6 @@ class LoadApiData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 20;
     }
 }

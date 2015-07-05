@@ -10,7 +10,7 @@
             <th>{{ 'sylius.promotion.id' | trans }}</th>
             <th>{{ 'sylius.promotion_coupon.code' | trans }}</th>
             <th>{{ 'sylius.promotion.usage_limit' | trans }}</th>
-            <th>{{ 'sylius.promotion_coupon.per_user_usage_limit' | trans }}</th>
+            <th>{{ 'sylius.promotion_coupon.per_customer_usage_limit' | trans }}</th>
             <th>{{ 'sylius.promotion.used' | trans }}</th>
             <th>{{ 'sylius.promotion_coupon.expires_at' | trans }}</th>
             <th>
@@ -33,7 +33,7 @@
             </td>
             <td>
                 <span class="label label-info">
-                    {{ promotion_coupon.perUserUsageLimit|default('sylius.no'|trans) }}
+                    {{ promotion_coupon.perCustomerUsageLimit|default('sylius.no'|trans) }}
                 </span>
             </td>
             <td>

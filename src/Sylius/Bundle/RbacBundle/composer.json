@@ -22,8 +22,8 @@
     "require": {
         "php":                             ">=5.3.3",
 
-        "sylius/rbac":                     "0.14.*@dev",
-        "sylius/resource-bundle":          "0.14.*@dev",
+        "sylius/rbac":                     "0.15.*@dev",
+        "sylius/resource-bundle":          "0.15.*@dev",
         "symfony/framework-bundle":        "~2.3",
         "doctrine/doctrine-cache-bundle":  "~1.0"
     },
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.15-dev"
         }
     }
 }

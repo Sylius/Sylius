@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\InstallerBundle\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 
-class CheckStep extends ControllerStep
+class CheckStep extends AbstractControllerStep
 {
     /**
      * {@inheritdoc}

@@ -40,9 +40,9 @@ class SecurityRoleChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'choices'  => $this->roles,
+            'choices' => $this->roles,
             'multiple' => true,
-            'expanded' => true
+            'expanded' => true,
         ));
     }
 

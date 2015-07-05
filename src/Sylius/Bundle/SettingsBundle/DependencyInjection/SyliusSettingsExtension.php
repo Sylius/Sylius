@@ -11,20 +11,21 @@
 
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Settings extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusSettingsExtension extends AbstractResourceExtension
+class SyliusSettingsExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services',
-        'templating',
-        'twig',
+        'services.xml',
+        'templating.xml',
+        'twig.xml',
     );
 
     /**
@@ -32,7 +33,7 @@ class SyliusSettingsExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
@@ -49,11 +50,25 @@ class SyliusSettingsExtension extends AbstractResourceExtension
         if (isset($parameterClasses['repository'])) {
             $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
         }
+    }
 
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('doctrine_cache')) {
+            throw new \RuntimeException('DoctrineCacheBundle must be registered!');
+        }
+        
+        if (!$container->hasParameter('sylius.cache')) {
+            $container->setParameter('sylius.cache', array('type' => 'file_system'));
         }
 
-        $container->setParameter('sylius.config.classes', $classes);
+        $container->prependExtensionConfig('doctrine_cache', array(
+            'providers' => array(
+                'sylius_settings' => '%sylius.cache%'
+            )
+        ));
     }
 }

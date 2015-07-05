@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ContentBundle\Form\Type;
 
+use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,11 +23,62 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ImagineBlockType extends AbstractResourceType
 {
     /**
+     * @var string
+     */
+    protected $dataClass = null;
+
+    /**
+     * @var string[]
+     */
+    protected $validationGroups = array();
+
+    /**
+     * @var FilterConfiguration
+     */
+    protected $filterConfiguration;
+
+    /**
+     * ImagineBlockType constructor.
+     *
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param FilterConfiguration $filterConfiguration
+     */
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        FilterConfiguration $filterConfiguration
+    ) {
+        $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
+        $this->filterConfiguration = $filterConfiguration;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
+        $filters = array();
+
+        foreach (array_keys($this->filterConfiguration->all()) as $filter) {
+            $filters[$filter] = sprintf('sylius.form.imagine_block.filter.%s', $filter);
+        }
+
         $builder
+            ->add('publishable', null, array(
+                'label' => 'sylius.form.imagine_block.publishable'
+                ))
+            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.imagine_block.publish_start_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
+            ))
+            ->add('publishEndDate', 'datetime', array(
+                'label' => 'sylius.form.imagine_block.publish_end_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
+            ))
             ->add('parentDocument', null, array(
                 'label' => 'sylius.form.imagine_block.parent'
             ))
@@ -34,20 +86,21 @@ class ImagineBlockType extends AbstractResourceType
                 'label' => 'sylius.form.imagine_block.internal_name'
             ))
             ->add('label', 'text', array(
+                'label' => 'sylius.form.imagine_block.label',
                 'required' => false
             ))
             ->add('linkUrl', 'text', array(
+                'label' => 'sylius.form.imagine_block.link_url',
                 'required' => false
             ))
             ->add('filter', 'choice', array(
-                'choices' => array(
-                        'slideshow_small'  => 'sylius.form.imagine_block.slideshow_small',
-                        'slideshow_medium' => 'sylius.form.imagine_block.slideshow_medium',
-                        'slideshow_large'  => 'sylius.form.imagine_block.slideshow_large',
-                ),
-                'required' => false
+                'choices' => $filters,
+                'label' => 'sylius.form.imagine_block.filter',
+                'required' => false,
             ))
             ->add('image', 'cmf_media_image', array(
+                'label' => 'sylius.form.imagine_block.image',
+                'attr' => array('class' => 'imagine-thumbnail'),
                 'required' => false
             ))
         ;

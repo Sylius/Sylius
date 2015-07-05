@@ -16,8 +16,10 @@ namespace Sylius\Bundle\CoreBundle\Mailer;
  */
 class Emails 
 {
-    const ORDER_CONFIRMATION = 'order_confirmation';
-    const ORDER_COMMENT      = 'order_comment';
+    const ORDER_CONFIRMATION    = 'order_confirmation';
+    const ORDER_COMMENT         = 'order_comment';
 
-    const USER_CONFIRMATION  = 'user_confirmation';
+    const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
+
+    const USER_CONFIRMATION     = 'user_confirmation';
 }

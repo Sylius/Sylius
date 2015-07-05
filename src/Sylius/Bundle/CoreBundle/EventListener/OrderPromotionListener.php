@@ -100,7 +100,7 @@ class OrderPromotionListener
 
     /**
      * Handle coupons added by the user in his cart.
-     * TODO: maybe replace this with a unified FlashListener.
+     * TODO: maybe replace this with a unified FlashSubscriber.
      *
      * @param GenericEvent $event
      */

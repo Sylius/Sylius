@@ -35,7 +35,7 @@ class LoadContactRequestData extends DataFixture
             $contactRequest->setLastName($this->faker->lastName());
             $contactRequest->setEmail($this->faker->email());
             $contactRequest->setMessage($this->faker->paragraph());
-            $contactRequest->setTopic($this->getReference('Sylius.ContactTopic.' . rand(0, 4)));
+            $contactRequest->setTopic($this->getReference('Sylius.ContactTopic.'.rand(0, 4)));
 
             $manager->persist($contactRequest);
         }
@@ -48,6 +48,6 @@ class LoadContactRequestData extends DataFixture
      */
     public function getOrder()
     {
-        return 2;
+        return 20;
     }
 }

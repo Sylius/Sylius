@@ -93,20 +93,6 @@ class Order implements OrderInterface
     protected $total = 0;
 
     /**
-     * Whether order was confirmed.
-     *
-     * @var bool
-     */
-    protected $confirmed = true;
-
-    /**
-     * Confirmation token.
-     *
-     * @var string
-     */
-    protected $confirmationToken;
-
-    /**
      * Creation time.
      *
      * @var \DateTime
@@ -135,13 +121,6 @@ class Order implements OrderInterface
     protected $state = OrderInterface::STATE_CART;
 
     /**
-     * Customer email.
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -159,24 +138,6 @@ class Order implements OrderInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -463,6 +424,8 @@ class Order implements OrderInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+
+        return $this;
     }
 
     /**
@@ -592,7 +555,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

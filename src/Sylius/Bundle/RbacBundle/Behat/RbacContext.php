@@ -13,7 +13,6 @@ namespace Sylius\Bundle\RbacBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Rbac\Authorization\TestAuthorizationChecker;
 
 class RbacContext extends DefaultContext
 {
@@ -59,7 +58,6 @@ class RbacContext extends DefaultContext
 
         $manager->flush();
     }
-
 
     /**
      * @Given there is following role hierarchy:
@@ -137,10 +135,10 @@ class RbacContext extends DefaultContext
     public function authorizationChecksAreEnabled()
     {
         $settingsManager = $this->getService('sylius.settings.manager');
-        $settings = $settingsManager->loadSettings('security');
+        $settings = $settingsManager->loadSettings('sylius_security');
 
         $settings->set('enabled', true);
 
-        $settingsManager->saveSettings('security', $settings);
+        $settingsManager->saveSettings('sylius_security', $settings);
     }
 }

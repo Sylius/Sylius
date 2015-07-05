@@ -13,59 +13,94 @@ namespace Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
+use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+/**
+ * Core currency context, which is aware of multiple channels.
+ *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
 class CurrencyContext extends BaseCurrencyContext
 {
+    const STORAGE_KEY = '_sylius.currency.%s';
+
     protected $securityContext;
     protected $settingsManager;
-    protected $userManager;
+    protected $customerManager;
+    protected $channelContext;
 
+    /**
+     * @param StorageInterface         $storage
+     * @param SettingsManagerInterface $settingsManager
+     * @param ObjectManager            $customerManager
+     * @param ChannelContextInterface  $channelContext
+     */
     public function __construct(
         StorageInterface $storage,
-        SecurityContextInterface $securityContext,
+        CustomerContextInterface $customerContext,
         SettingsManagerInterface $settingsManager,
-        ObjectManager $userManager
+        ObjectManager $customerManager,
+        ChannelContextInterface $channelContext
     ) {
-        $this->securityContext = $securityContext;
+        $this->customerContext = $customerContext;
         $this->settingsManager = $settingsManager;
-        $this->userManager = $userManager;
+        $this->customerManager = $customerManager;
+        $this->channelContext = $channelContext;
 
         parent::__construct($storage, $this->getDefaultCurrency());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultCurrency()
     {
-        return $this->settingsManager->loadSettings('general')->get('currency');
+        return $this->settingsManager->loadSettings('sylius_general')->get('currency');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrency()
     {
-        if ((null !== $user = $this->getUser()) && null !== $user->getCurrency()) {
-            return $user->getCurrency();
+        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrency()) {
+            return $customer->getCurrency();
         }
 
-        return parent::getCurrency();
+        $channel = $this->channelContext->getChannel();
+
+        return $this->storage->getData($this->getStorageKey($channel->getCode()), $this->defaultCurrency);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCurrency($currency)
     {
-        if (null === $user = $this->getUser()) {
-            return parent::setCurrency($currency);
+        if (null === $customer = $this->customerContext->getCustomer()) {
+            $channel = $this->channelContext->getChannel();
+
+            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
         }
 
-        $user->setCurrency($currency);
+        $customer->setCurrency($currency);
 
-        $this->userManager->persist($user);
-        $this->userManager->flush();
+        $this->customerManager->persist($customer);
+        $this->customerManager->flush();
     }
 
-    protected function getUser()
+    /**
+     * Get storage key for channel with given code.
+     *
+     * @param string $channelCode
+     * @return string
+     */
+    private function getStorageKey($channelCode)
     {
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->securityContext->getToken()->getUser();
-        }
+        return sprintf(self::STORAGE_KEY, $channelCode);
     }
 }

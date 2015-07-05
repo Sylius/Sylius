@@ -16,6 +16,16 @@ use Sylius\Component\Report\Model\ReportInterface;
 
 interface RendererInterface
 {
+    /**
+     * @param ReportInterface $report
+     * @param Data $data
+     *
+     * @return string
+     */
     public function render(ReportInterface $report, Data $data);
+
+    /**
+     * @return string
+     */
     public function getType();
 }

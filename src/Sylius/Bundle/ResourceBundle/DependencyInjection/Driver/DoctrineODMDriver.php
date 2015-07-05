@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -34,7 +35,13 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
+        $reflection = new \ReflectionClass($classes['model']);
+        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
+
+        $repositoryClass = $translatable
+            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository'
+            : new Parameter('sylius.mongodb_odm.repository.class');
 
         if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
@@ -53,12 +60,6 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
             $this->getClassMetadataDefinition($classes['model']),
         ));
 
-        if (isset($classes['translatable']['translatable_fields'])) {
-            // TODO add only to if instance of translatable repository?
-            $definition->addMethodCall('setTranslatableFields', array($classes['translatable']['translatable_fields']));
-            $definition->addMethodCall('setLocaleContext', array(new Reference('sylius.context.locale')));
-        }
-
         return $definition;
     }
 
@@ -67,7 +68,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getManagerServiceKey()
     {
-        return sprintf('doctrine.odm.mongodb.%_document_manager', $this->managerName);
+        return sprintf('doctrine_mongodb.odm.%s_document_manager', $this->managerName);
     }
 
     /**

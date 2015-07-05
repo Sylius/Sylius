@@ -52,22 +52,22 @@ class MenuNodeType extends AbstractResourceType
                 'label'    => 'sylius.form.menu_node_block.link_type',
             ))
             ->add('publishable', null, array(
-                'required' => false,
-                'label'    => 'sylius.form.menu_node_block.publishable',
+                'label' => 'sylius.form.menu_node_block.publishable'
+                ))
+            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.menu_node_block.publish_start_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
-            ->add('publishStartDate', 'text', array(
-                'attr'      => array('class'=> 'datepicker'),
-                'required'  => false,
-                'label'     => 'sylius.form.menu_node_block.publish_start_date',
-            ))
-            ->add('publishEndDate', 'text', array(
-                'required' => false,
-                'label'    => 'sylius.form.menu_node_block.publish_end_date',
+            ->add('publishEndDate', 'datetime', array(
+                'label' => 'sylius.form.menu_node_block.publish_end_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
             ->add('route', null, array(
                 'label' => 'sylius.form.menu_node_block.route'
             ))
-            ->add('content', 'sylius_content_choice', array(
+            ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.menu_node_block.content',
              ))
             ->add('uri', null, array(

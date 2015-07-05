@@ -45,11 +45,10 @@ class LocaleProvider implements LocaleProviderInterface
     public function __construct(RepositoryInterface $localeRepository, $defaultLocale)
     {
         if (empty($defaultLocale)) {
-            throw new \Exception('Default locale is required!');
+            throw new \InvalidArgumentException('Default locale is required!');
         }
 
         $this->localeRepository = $localeRepository;
-
         $this->defaultLocale = $defaultLocale;
     }
 
@@ -59,6 +58,14 @@ class LocaleProvider implements LocaleProviderInterface
     public function getAvailableLocales()
     {
         return $this->localeRepository->findBy(array('enabled' => true));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocaleAvailable($locale)
+    {
+        return in_array($locale, $this->getLocales());
     }
 
     /**

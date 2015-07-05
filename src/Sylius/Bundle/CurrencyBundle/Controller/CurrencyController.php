@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CurrencyBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Currency\Context\CurrencyContext;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,6 +21,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CurrencyController extends ResourceController
 {
+    /**
+     * @param Request $request
+     * @param string  $currency
+     *
+     * @return RedirectResponse
+     */
     public function changeAction(Request $request, $currency)
     {
         $this->getCurrencyContext()->setCurrency($currency);
@@ -26,6 +34,9 @@ class CurrencyController extends ResourceController
         return $this->redirect($request->headers->get('referer'));
     }
 
+    /**
+     * @return CurrencyContext
+     */
     protected function getCurrencyContext()
     {
         return $this->get('sylius.context.currency');

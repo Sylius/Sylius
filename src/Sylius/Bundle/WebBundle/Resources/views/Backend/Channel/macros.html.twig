@@ -1,0 +1,40 @@
+{% macro list(channels) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if channels|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('code', 'sylius.channel.code'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.channel.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('url', 'sylius.channel.url'|trans) }}</th>
+            <th>{{ sylius_resource_sort('enabled', 'sylius.channel.enabled'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.channel.updated_at'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for channel in channels %}
+        <tr id="{{ channel.id }}">
+            <td>{{ channel.code }}</td>
+            <td>{{ channel.name }}</td>
+            <td>{{ channel.url }}</td>
+            <td>{{ channel.enabled }}</td>
+            <td>{{ channel.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_channel_update', {'id': channel.id})) }}
+                    {{ buttons.delete(path('sylius_backend_channel_delete', {'id': channel.id})) }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.channel.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}
