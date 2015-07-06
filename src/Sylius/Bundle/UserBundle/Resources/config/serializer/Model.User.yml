@@ -17,10 +17,10 @@ Sylius\Component\User\Model\User:
         roles:
             expose: true
             type: array
-        virtual_properties:
-            getEmail:
-                serialized_name: email
-                type: string
-            getEmailCanonical:
-                serialized_name: emailCanonical
-                type: string
+    virtual_properties:
+        getEmail:
+            serialized_name: email
+            type: string
+        getEmailCanonical:
+            serialized_name: email_canonical
+            type: string
