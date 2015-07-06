@@ -24,7 +24,7 @@ class PermissionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Permission', array('sylius'));
+        $this->beConstructedWith('Permission', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -65,7 +65,8 @@ class PermissionTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class'        => 'Permission',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

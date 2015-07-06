@@ -10,7 +10,7 @@ class ClientTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Client', array('sylius'));
+        $this->beConstructedWith('Client', array('sylius'), 'messages');
     }
 
     function it_is_initializable()

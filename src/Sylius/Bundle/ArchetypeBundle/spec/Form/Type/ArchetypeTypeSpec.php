@@ -23,7 +23,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Archetype', array('sylius'), 'book');
+        $this->beConstructedWith('Archetype', array('sylius'), 'messages', 'book');
     }
 
     function it_is_initializable()
@@ -71,7 +71,8 @@ class ArchetypeTypeSpec extends ObjectBehavior
         $resolver->setDefaults(
             array(
                 'data_class' => 'Archetype',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

@@ -34,11 +34,12 @@ class ZoneType extends AbstractResourceType
      *
      * @param string   $dataClass
      * @param string[] $validationGroups
+     * @param string   $translationDomain
      * @param string[] $scopeChoices
      */
-    public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
+    public function __construct($dataClass, array $validationGroups, $translationType, array $scopeChoices = array())
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationType);
 
         $this->scopeChoices = $scopeChoices;
     }

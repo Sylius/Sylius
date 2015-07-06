@@ -22,7 +22,7 @@ class ShipmentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Shipment', array('sylius'));
+        $this->beConstructedWith('Shipment', array('sylius'), 'messages');
     }
 
     function it_is_a_form()

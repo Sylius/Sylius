@@ -24,7 +24,7 @@ class TaxonomyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -53,6 +53,7 @@ class TaxonomyTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Taxonomy',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

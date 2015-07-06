@@ -30,13 +30,20 @@ abstract class AbstractResourceType extends AbstractType
     protected $validationGroups = array();
 
     /**
+     * @var string
+     */
+    protected $translationDomain = null;
+
+    /**
      * @param string   $dataClass        FQCN
      * @param string[] $validationGroups
+     * @param string   $translationDomain
      */
-    public function __construct($dataClass, array $validationGroups = array())
+    public function __construct($dataClass, array $validationGroups = array(), $translationDomain = 'messages')
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
+        $this->translationDomain = $translationDomain;
     }
 
     /**
@@ -47,6 +54,7 @@ abstract class AbstractResourceType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
+            'translation_domain' => $this->translationDomain,
         ));
     }
 }

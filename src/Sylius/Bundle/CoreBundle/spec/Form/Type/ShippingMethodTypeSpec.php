@@ -19,7 +19,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('ShippingMethod', array('sylius'), 'messages', $calculatorRegistry, $checkerRegistry);
     }
 
     function it_should_be_initializable()

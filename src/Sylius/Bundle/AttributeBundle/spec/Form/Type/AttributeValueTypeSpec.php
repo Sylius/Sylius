@@ -26,7 +26,7 @@ class AttributeValueTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('AttributeValue', array('sylius'), 'server');
+        $this->beConstructedWith('AttributeValue', array('sylius'), 'messages', 'server');
     }
 
     function it_is_initializable()
@@ -84,7 +84,11 @@ class AttributeValueTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'AttributeValue', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(array(
+            'data_class' => 'AttributeValue',
+            'validation_groups' => array('sylius'),
+            'translation_domain' => 'messages',
+        ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

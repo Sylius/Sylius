@@ -36,11 +36,12 @@ class AttributeValueType extends AbstractResourceType
      *
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $translationDomain
      * @param string $subjectName
      */
-    public function __construct($dataClass, array $validationGroups, $subjectName)
+    public function __construct($dataClass, array $validationGroups, $translationDomain, $subjectName)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->subjectName = $subjectName;
     }

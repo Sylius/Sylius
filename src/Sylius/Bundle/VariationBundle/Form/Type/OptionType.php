@@ -34,11 +34,12 @@ class OptionType extends AbstractResourceType
      *
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $translationDomain
      * @param string $variableName
      */
-    public function __construct($dataClass, array $validationGroups, $variableName)
+    public function __construct($dataClass, array $validationGroups, $translationDomain, $variableName)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->variableName = $variableName;
     }

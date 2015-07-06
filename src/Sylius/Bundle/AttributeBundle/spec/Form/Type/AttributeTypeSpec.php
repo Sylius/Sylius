@@ -27,7 +27,7 @@ class AttributeTypeSpec extends ObjectBehavior
 {
     function let(FormBuilder $builder, FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith('Attribute', array('sylius'), 'server');
+        $this->beConstructedWith('Attribute', array('sylius'), 'messages', 'server');
 
         $builder->getFormFactory()->willReturn($formFactory);
     }
@@ -76,7 +76,11 @@ class AttributeTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Attribute', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(array(
+            'data_class' => 'Attribute',
+            'validation_groups' => array('sylius'),
+            'translation_domain' => 'messages',
+        ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

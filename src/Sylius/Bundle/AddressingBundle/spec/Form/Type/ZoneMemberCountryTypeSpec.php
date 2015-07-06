@@ -23,7 +23,7 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ZoneMember', array('sylius'));
+        $this->beConstructedWith('ZoneMember', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -65,7 +65,8 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'ZoneMember',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
+                    'translation_domain' => 'messages',
                 )
             )
             ->shouldBeCalled();

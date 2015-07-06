@@ -23,7 +23,7 @@ class OrderItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('OrderItem', array('sylius'));
+        $this->beConstructedWith('OrderItem', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -57,6 +57,7 @@ class OrderItemTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'OrderItem',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

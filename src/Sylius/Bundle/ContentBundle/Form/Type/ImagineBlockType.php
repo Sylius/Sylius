@@ -23,16 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ImagineBlockType extends AbstractResourceType
 {
     /**
-     * @var string
-     */
-    protected $dataClass = null;
-
-    /**
-     * @var string[]
-     */
-    protected $validationGroups = array();
-
-    /**
      * @var FilterConfiguration
      */
     protected $filterConfiguration;
@@ -41,16 +31,18 @@ class ImagineBlockType extends AbstractResourceType
      * ImagineBlockType constructor.
      *
      * @param string $dataClass
-     * @param array $validationGroups
+     * @param array  $validationGroups
+     * @param string $translationDomain
      * @param FilterConfiguration $filterConfiguration
      */
     public function __construct(
         $dataClass,
         array $validationGroups,
+        $translationDomain,
         FilterConfiguration $filterConfiguration
     ) {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
+
         $this->filterConfiguration = $filterConfiguration;
     }
 

@@ -17,7 +17,7 @@ class TaxRateTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxRate', array());
+        $this->beConstructedWith('TaxRate', array('sylius'));
     }
 
     function it_should_be_initializable()

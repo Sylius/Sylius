@@ -23,7 +23,7 @@ class TaxCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxCategory', array('sylius'));
+        $this->beConstructedWith('TaxCategory', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -63,6 +63,7 @@ class TaxCategoryTypeSpec extends ObjectBehavior
                 array(
                     'data_class'        => 'TaxCategory',
                     'validation_groups' => array('sylius'),
+                    'translation_domain' => 'messages',
                 )
             )
             ->shouldBeCalled();

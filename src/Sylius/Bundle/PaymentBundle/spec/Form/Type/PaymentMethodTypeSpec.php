@@ -28,7 +28,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $feeCalculatorRegistry)
     {
-        $this->beConstructedWith('PaymentMethod', array('sylius'), $feeCalculatorRegistry);
+        $this->beConstructedWith('PaymentMethod', array('sylius'), 'messages', $feeCalculatorRegistry);
     }
 
     function it_is_a_form_type()
@@ -97,6 +97,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'PaymentMethod',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

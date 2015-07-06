@@ -25,9 +25,15 @@ class RuleType extends AbstractResourceType
 {
     protected $checkerRegistry;
 
-    public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry)
+    /**
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param string $translationDomain
+     * @param RuleCheckerRegistryInterface $checkerRegistry
+     */
+    public function __construct($dataClass, array $validationGroups, $translationDomain, RuleCheckerRegistryInterface $checkerRegistry)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->checkerRegistry = $checkerRegistry;
     }

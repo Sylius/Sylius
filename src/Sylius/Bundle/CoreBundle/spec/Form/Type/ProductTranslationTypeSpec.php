@@ -22,7 +22,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ProductTranslation', array(), 'sylius');
+        $this->beConstructedWith('ProductTranslation', array('sylius'), 'messages');
     }
 
     function it_is_initializable()

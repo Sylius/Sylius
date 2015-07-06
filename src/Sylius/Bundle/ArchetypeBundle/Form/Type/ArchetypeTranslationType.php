@@ -29,11 +29,12 @@ class ArchetypeTranslationType extends AbstractResourceType
     /**
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $translationDomain
      * @param string $subject
      */
-    function __construct($dataClass, array $validationGroups, $subject)
+    function __construct($dataClass, array $validationGroups, $translationDomain, $subject)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->subject = $subject;
     }

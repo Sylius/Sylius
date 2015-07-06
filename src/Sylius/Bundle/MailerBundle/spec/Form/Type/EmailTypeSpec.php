@@ -23,7 +23,7 @@ class EmailTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Email', array('sylius'));
+        $this->beConstructedWith('Email', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -81,7 +81,8 @@ class EmailTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Email',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

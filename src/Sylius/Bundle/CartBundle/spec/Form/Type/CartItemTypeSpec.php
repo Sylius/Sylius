@@ -23,7 +23,7 @@ class CartItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CartItem', array('sylius'));
+        $this->beConstructedWith('CartItem', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -53,6 +53,7 @@ class CartItemTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'CartItem',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

@@ -24,7 +24,7 @@ class TopicTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Contact', array('sylius'));
+        $this->beConstructedWith('Contact', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -52,7 +52,8 @@ class TopicTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Contact',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

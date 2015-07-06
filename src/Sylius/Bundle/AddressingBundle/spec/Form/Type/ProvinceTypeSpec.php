@@ -23,7 +23,7 @@ class ProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Province', array('sylius'));
+        $this->beConstructedWith('Province', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -57,7 +57,8 @@ class ProvinceTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
+                    'translation_domain' => 'messages',
                 )
             )
             ->shouldBeCalled();

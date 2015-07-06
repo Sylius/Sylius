@@ -50,6 +50,7 @@ class OrderTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Order',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

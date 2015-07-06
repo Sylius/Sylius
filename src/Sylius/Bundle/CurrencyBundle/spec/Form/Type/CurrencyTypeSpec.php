@@ -23,7 +23,7 @@ class CurrencyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Currency', array('sylius'));
+        $this->beConstructedWith('Currency', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -62,6 +62,7 @@ class CurrencyTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class' => 'Currency',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

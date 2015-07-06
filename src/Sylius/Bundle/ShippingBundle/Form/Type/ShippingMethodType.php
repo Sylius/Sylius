@@ -46,13 +46,14 @@ class ShippingMethodType extends AbstractResourceType
      * Constructor.
      *
      * @param string                       $dataClass
-     * @param array                        $validationGroups
+     * @param string[]                     $validationGroups
+     * @param string                       $translationDomain
      * @param CalculatorRegistryInterface  $calculatorRegistry
      * @param RuleCheckerRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, $translationDomain, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->calculatorRegistry = $calculatorRegistry;
         $this->checkerRegistry = $checkerRegistry;

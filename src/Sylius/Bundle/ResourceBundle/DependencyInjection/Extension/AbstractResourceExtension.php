@@ -186,6 +186,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
                     $definition->setArguments(array(
                         $serviceClasses['model'],
                         $validationGroups,
+                        $this->applicationName,
                     ));
                 }
                 $definition->addTag('form.type', array('alias' => $alias));

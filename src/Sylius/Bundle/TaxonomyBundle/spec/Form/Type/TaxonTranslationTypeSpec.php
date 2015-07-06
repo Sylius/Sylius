@@ -24,7 +24,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxonTranslation', array('sylius'));
+        $this->beConstructedWith('TaxonTranslation', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -67,6 +67,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'TaxonTranslation',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;
