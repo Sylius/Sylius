@@ -36,9 +36,10 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder, OptionInterface $option)
     {
+        $option->getId()->shouldBeCalled()->willReturn(3);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
 
-        $builder->add('0', 'sylius_varibale_name_option_value_choice', array(
+        $builder->add('3', 'sylius_varibale_name_option_value_choice', array(
             'label'         => 'option_name',
             'option'        => $option,
             'property_path' => '[0]'
