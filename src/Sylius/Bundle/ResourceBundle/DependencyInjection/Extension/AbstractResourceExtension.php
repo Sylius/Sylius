@@ -176,9 +176,16 @@ abstract class AbstractResourceExtension extends AbstractExtension
                         $alias,
                     ));
                 } else {
+                    $validationGroupsParameterName = sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix);
+                    $validationGroups = array('Default');
+
+                    if ($container->hasParameter($validationGroupsParameterName)) {
+                        $validationGroups = new Parameter($validationGroupsParameterName);
+                    }
+
                     $definition->setArguments(array(
                         $serviceClasses['model'],
-                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix)),
+                        $validationGroups,
                     ));
                 }
                 $definition->addTag('form.type', array('alias' => $alias));

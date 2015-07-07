@@ -100,6 +100,8 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     {
         $this->mockDefaultBehavior($container);
 
+        $container->hasParameter('sylius.validation_group.resource')->willReturn(false);
+
         $container
             ->setDefinition(
                 'sylius.form.type.resource',
@@ -129,6 +131,9 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     function it_should_create_multiple_form_definition(ContainerBuilder $container)
     {
         $this->mockDefaultBehavior($container);
+
+        $container->hasParameter('sylius.validation_group.resource')->willReturn(false);
+        $container->hasParameter('sylius.validation_group.resource_other')->willReturn(false);
 
         $container->setDefinition(
             'sylius.form.type.resource',
@@ -162,6 +167,31 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         );
     }
 
+    function it_should_register_validation_group(ContainerBuilder $container)
+    {
+        $this->mockDefaultBehavior($container);
+
+        $container->setParameter(
+            'sylius.validation_group.resource',
+            array('group')
+        )
+            ->shouldBeCalled();
+
+        $this->configure(
+            array(
+                'sylius' => array(
+                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'validation_groups' => array(
+                        'resource' => array('group')
+                    ),
+                )
+            ),
+            new Configuration(),
+            $container,
+            AbstractResourceExtension::CONFIGURE_VALIDATORS
+        );
+    }
+
     protected function mockDefaultBehavior($container)
     {
         $container->hasParameter('sylius.config.classes')->willReturn(false);
@@ -189,23 +219,34 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-            ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
             ->end()
             ->children()
-            ->arrayNode('classes')
-            ->addDefaultsIfNotSet()
+                ->arrayNode('classes')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('resource')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Model')->end()
+                                ->arrayNode('form')
+                                    ->prototype('scalar')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
             ->children()
-            ->arrayNode('resource')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('model')->defaultValue('Sylius\Model')->end()
-            ->arrayNode('form')
-            ->prototype('scalar')->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('resource')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
