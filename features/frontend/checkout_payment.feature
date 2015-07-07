@@ -23,8 +23,8 @@ Feature: Checkout Payment
             | UK   | DHL Express |
           And the following payment methods exist:
             | name        | gateway    | enabled | calculator | calculator_configuration |
-            | Credit Card | stripe     | yes     | fixed      | amount: 0.10             |
-            | PayPal      | paypal     | yes     | fixed      | amount: 0.50             |
+            | Credit Card | stripe     | yes     | fixed      | amount: 10               |
+            | PayPal      | paypal     | yes     | fixed      | amount: 50               |
             | PayPal PRO  | paypal_pro | no      | percent    | amount: 10               |
           And all products assigned to "DEFAULT-WEB" channel
           And channel "DEFAULT-WEB" has following configuration:
@@ -47,7 +47,7 @@ Feature: Checkout Payment
           And I should see "PayPal"
           And I should see "€0.50"
           But I should not see "PayPal PRO"
-          And I should not see "10%"
+          And I should not see "€3.1"
 
     Scenario: Selecting one of payment methods
         Given I press "Continue"
@@ -61,4 +61,4 @@ Feature: Checkout Payment
           And I press "Continue"
          Then I should be on the checkout finalize step
           And "Payment total: €0.50" should appear on the page
-          And "Total: €71.49" should appear on the page
+          And "Total: €31.49" should appear on the page

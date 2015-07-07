@@ -40,7 +40,7 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
         $currencyContext->getCurrency()->willReturn('USD')->shouldBeCalled();
 
         $builder
-            ->add('amount', 'money', array(
+            ->add('amount', 'sylius_money', array(
                 'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
                 'currency' => 'USD',
             ))

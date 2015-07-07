@@ -90,7 +90,6 @@ class PaymentMethodChoiceType extends ResourceChoiceType
     {
         $paymentCosts = array();
 
-        /** @var PaymentInterface $payment */
         $payment = $view->parent->vars['value']->getPayments()->last();
 
         foreach ($view->vars['choices'] as $choiceView) {
@@ -100,7 +99,6 @@ class PaymentMethodChoiceType extends ResourceChoiceType
                 throw new UnexpectedTypeException($method, 'Sylius\Component\Payment\Model\PaymentMethodInterface');
             }
 
-            /** @var FeeCalculatorInterface $feeCalculator */
             $feeCalculator = $this->feeCalculatorRegistry->get($method->getFeeCalculator());
             $payment->setMethod($method);
 

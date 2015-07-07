@@ -100,7 +100,6 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
         $feeCalculator = $this->feeCalculatorRegistry->get($feeCalculatorType);
         $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
 
-
         try {
             $configurationField = $this->factory->createNamed(
                 'feeCalculatorConfiguration',

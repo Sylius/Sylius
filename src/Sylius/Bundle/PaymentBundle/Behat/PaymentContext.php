@@ -32,6 +32,8 @@ class PaymentContext extends DefaultContext
             $method = $repository->createNew();
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
+            $method->setFeeCalculator($data['calculator']);
+            $method->setFeeCalculatorConfiguration($this->getConfiguration($data['calculator_configuration']));
 
             $enabled = true;
 

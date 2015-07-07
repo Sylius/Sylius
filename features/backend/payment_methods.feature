@@ -9,9 +9,9 @@ Feature: Payment methods
           And there is default channel configured
           And I am logged in as administrator
           And the following payment methods exist:
-            | name        | gateway |
-            | Credit Card | stripe  |
-            | PayPal      | paypal  |
+            | name        | gateway | calculator | calculator_configuration |
+            | Credit Card | stripe  | fixed      | amount: 10               |
+            | PayPal      | paypal  | percent    | amount: 5                |
 
     Scenario: Seeing index of all payment methods
         Given I am on the dashboard page
@@ -69,7 +69,7 @@ Feature: Payment methods
     Scenario: Updating the payment method
         Given I am editing payment method "PayPal"
          When I fill in "Name" with "PayPal PRO"
-          And I fill in "Amount" with "10"
+          And I fill in "%" with "10"
           And I press "Save changes"
          Then I should be on the payment method index page
           And I should see payment method with name "PayPal PRO" in the list
