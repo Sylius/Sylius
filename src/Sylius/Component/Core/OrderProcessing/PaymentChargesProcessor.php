@@ -51,11 +51,11 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     {
         $order->removeAdjustments(AdjustmentInterface::PAYMENT_ADJUSTMENT);
 
+        $order->calculateTotal();
+
         foreach ($order->getPayments() as $payment) {
             $this->addAdjustmentIfForNotCancelled($order, $payment);
         }
-
-        $order->calculateTotal();
     }
 
     /**

@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Payment\Model;
+
 use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
 
 /**

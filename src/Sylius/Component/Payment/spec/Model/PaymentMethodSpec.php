@@ -24,7 +24,7 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Payment\Model\PaymentMethod');
     }
 
-    function it_implements_Sylius_payment_method_interface()
+    function it_implements_sylius_payment_method_interface()
     {
         $this->shouldImplement('Sylius\Component\Payment\Model\PaymentMethodInterface');
     }

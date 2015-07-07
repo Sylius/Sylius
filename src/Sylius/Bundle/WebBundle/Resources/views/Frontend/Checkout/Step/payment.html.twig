@@ -12,11 +12,7 @@
 {{ form_errors(form) }}
 
 <fieldset>
-    {% for paymentMethodForm in form.paymentMethod %}
-
-        {{ form_row(paymentMethodForm) }}
-
-    {% endfor %}
+    {{ form_row(form.paymentMethod) }}
 </fieldset>
 
 {{ form_widget(form._token) }}
