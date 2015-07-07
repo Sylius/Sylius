@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -44,7 +45,7 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
         $delegatingFeeCalculator,
         AdjustmentInterface $adjustment,
         OrderInterface $order,
-        PaymentInterface $payment,
+        PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod
     ) {
         $order->removeAdjustments('payment')->shouldBeCalled();

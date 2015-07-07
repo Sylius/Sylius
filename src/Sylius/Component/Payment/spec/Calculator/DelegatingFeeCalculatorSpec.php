@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Payment\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -38,7 +38,7 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
     }
 
     function it_delegates_calculation_to_proper_calculator(
-        PaymentInterface $payment,
+        PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod,
         FeeCalculatorInterface $feeCalculator,
         $serviceRegistry
@@ -55,7 +55,7 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
         $this->calculate($payment)->shouldReturn(150);
     }
 
-    function it_throws_exception_if_passed_payment_has_no_payment_method_defined(PaymentInterface $payment)
+    function it_throws_exception_if_passed_payment_has_no_payment_method_defined(PaymentSubjectInterface $payment)
     {
         $payment->getMethod()->willReturn(null);
 

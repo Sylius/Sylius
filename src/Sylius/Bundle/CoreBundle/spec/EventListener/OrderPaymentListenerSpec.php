@@ -94,4 +94,13 @@ class OrderPaymentListenerSpec extends ObjectBehavior
 
         $this->updateOrderPayment($event);
     }
+
+    function it_processes_order_payment_charges($paymentChargesProcessor, GenericEvent $event, OrderInterface $order)
+    {
+        $event->getSubject()->willReturn($order);
+
+        $paymentChargesProcessor->applyPaymentCharges($order)->shouldBeCalled();
+
+        $this->processOrderPaymentCharges($event);
+    }
 }

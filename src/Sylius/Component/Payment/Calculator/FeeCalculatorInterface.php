@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Calculator;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
@@ -19,12 +19,12 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 interface FeeCalculatorInterface
 {
     /**
-     * @param PaymentInterface $payment
+     * @param PaymentSubjectInterface $payment
      * @param array $configuration
      *
      * @return integer
      */
-    public function calculate(PaymentInterface $payment, array $configuration);
+    public function calculate(PaymentSubjectInterface $payment, array $configuration);
 
     /**
      * @return string

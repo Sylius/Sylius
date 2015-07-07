@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -50,7 +51,6 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     public function applyPaymentCharges(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::PAYMENT_ADJUSTMENT);
-
         $order->calculateTotal();
 
         foreach ($order->getPayments() as $payment) {
@@ -60,9 +60,9 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
 
     /**
      * @param OrderInterface   $order
-     * @param PaymentInterface $payment
+     * @param PaymentSubjectInterface $payment
      */
-    private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentInterface $payment)
+    private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentSubjectInterface $payment)
     {
         if (PaymentInterface::STATE_CANCELLED !== $payment->getState())
         {
@@ -71,11 +71,11 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     }
 
     /**
-     * @param PaymentInterface $payment
+     * @param PaymentSubjectInterface $payment
      *
      * @return AdjustmentInterface
      */
-    private function prepareAdjustmentForOrder(PaymentInterface $payment)
+    private function prepareAdjustmentForOrder(PaymentSubjectInterface $payment)
     {
         $adjustment = $this->adjustmentRepository->createNew();
         $adjustment->setLabel(AdjustmentInterface::PAYMENT_ADJUSTMENT);

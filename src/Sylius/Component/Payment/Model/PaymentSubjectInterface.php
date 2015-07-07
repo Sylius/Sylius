@@ -29,4 +29,11 @@ interface PaymentSubjectInterface
      * @return integer
      */
     public function getAmount();
+
+    /**
+     * Get payment state
+     *
+     * @return string
+     */
+    public function getState();
 }

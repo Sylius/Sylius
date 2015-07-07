@@ -10,7 +10,8 @@
  */
 
 namespace Sylius\Component\Payment\Calculator;
-use Sylius\Component\Payment\Model\PaymentInterface;
+
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
@@ -20,7 +21,7 @@ class PercentFeeCalculator implements FeeCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(PaymentInterface $payment, array $configuration)
+    public function calculate(PaymentSubjectInterface $payment, array $configuration)
     {
         return (int) round(($configuration['percent'])/100 * $payment->getAmount());
     }

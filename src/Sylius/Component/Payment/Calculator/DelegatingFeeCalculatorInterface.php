@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Calculator;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
@@ -19,9 +19,9 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 interface DelegatingFeeCalculatorInterface
 {
     /**
-     * @param PaymentInterface $payment
+     * @param PaymentSubjectInterface $payment
      *
-     * @return integer
+     * @return int
      */
-    public function calculate(PaymentInterface $payment);
+    public function calculate(PaymentSubjectInterface $payment);
 }

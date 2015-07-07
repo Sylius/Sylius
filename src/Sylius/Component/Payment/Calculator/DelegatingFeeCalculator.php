@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Calculator;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -37,7 +37,7 @@ class DelegatingFeeCalculator implements DelegatingFeeCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(PaymentInterface $payment)
+    public function calculate(PaymentSubjectInterface $payment)
     {
         if (null === $payment->getMethod()) {
             throw new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured.");

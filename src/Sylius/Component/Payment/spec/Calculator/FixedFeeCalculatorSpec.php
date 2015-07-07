@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Payment\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -29,7 +29,7 @@ class FixedFeeCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
     }
 
-    function it_calculates_fee(PaymentInterface $payment)
+    function it_calculates_fee(PaymentSubjectInterface $payment)
     {
         $this->calculate($payment, array('amount' => 15))->shouldReturn(15);
     }
