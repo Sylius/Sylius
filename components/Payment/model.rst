@@ -91,30 +91,34 @@ The following payment types are available :
 
 .. note::
 
-    This model implements ``PaymentInterface``.
+    This model implements ``PaymentInterface`` and ``PaymentSubjectInterface``.
 
 PaymentMethod
 -------------
 
 Every method of payment is represented by **PaymentMethod** instance and has following properties:
 
-+-----------------+--------------------------------------------+------------+
-| Method          | Description                                | Type       |
-+=================+============================================+============+
-| name            | Payments method name                       | string     |
-+-----------------+--------------------------------------------+------------+
-| type            | Enable or disable the payments method      | boolean    |
-+-----------------+--------------------------------------------+------------+
-| description     | Payment method description                 | string     |
-+-----------------+--------------------------------------------+------------+
-| gateway         | Payment gateway to use                     | string     |
-+-----------------+--------------------------------------------+------------+
-| environment     | Required app environment                   | string     |
-+-----------------+--------------------------------------------+------------+
-| createdAt       | Date of creation                           | \DateTime  |
-+-----------------+--------------------------------------------+------------+
-| updatedAt       | Date of the last update                    | \DateTime  |
-+-----------------+--------------------------------------------+------------+
++------------------------------+--------------------------------------------+------------+
+| Method                       | Description                                | Type       |
++==============================+============================================+============+
+| name                         | Payments method name                       | string     |
++------------------------------+--------------------------------------------+------------+
+| type                         | Enable or disable the payments method      | boolean    |
++------------------------------+--------------------------------------------+------------+
+| description                  | Payment method description                 | string     |
++------------------------------+--------------------------------------------+------------+
+| gateway                      | Payment gateway to use                     | string     |
++------------------------------+--------------------------------------------+------------+
+| environment                  | Required app environment                   | string     |
++------------------------------+--------------------------------------------+------------+
+| feeCalculator                | Calculator for additional fee costs        | string     |
++------------------------------+--------------------------------------------+------------+
+| feeCalculatorConfiguration   | Fee calculator configuration               | array      |
++------------------------------+--------------------------------------------+------------+
+| createdAt                    | Date of creation                           | \DateTime  |
++------------------------------+--------------------------------------------+------------+
+| updatedAt                    | Date of the last update                    | \DateTime  |
++------------------------------+--------------------------------------------+------------+
 
 .. note::
 
@@ -137,4 +141,19 @@ To characterize an object with payment, the object class needs to implement the 
 | removePayment(PaymentInterface $payment)  | Remove a payment                                                    | Void                       |
 +-------------------------------------------+---------------------------------------------------------------------+----------------------------+
 | hasPayment(PaymentInterface $payment)     | Check if the payment subject has certain payment                    | Boolean                    |
++-------------------------------------------+---------------------------------------------------------------------+----------------------------+
+
+PaymentSubjectInterface
+-----------------------
+
+To characterize an object, that can by used to fee calculation, the object class needs to implement ``PaymentSubjectInterface``.
+
++-------------------------------------------+---------------------------------------------------------------------+----------------------------+
+| Method                                    | Description                                                         | Return value               |
++===========================================+=====================================================================+============================+
+| getMethod()                               | Get payment method associated with this object                      | PaymentMethodInterface     |
++-------------------------------------------+---------------------------------------------------------------------+----------------------------+
+| getAmount()                               | Get amount of money for this payment                                | integer                    |
++-------------------------------------------+---------------------------------------------------------------------+----------------------------+
+| getState()                                | Get this payment state                                              | string                     |
 +-------------------------------------------+---------------------------------------------------------------------+----------------------------+
