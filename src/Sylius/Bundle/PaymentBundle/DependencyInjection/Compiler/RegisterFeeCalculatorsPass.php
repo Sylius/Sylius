@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -20,6 +21,18 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RegisterFeeCalculatorsPass implements CompilerPassInterface
 {
+    /**
+     * Array of registered fee calculators
+     *
+     * @var array
+     */
+    private $calculators = array();
+
+    /**
+     * @var Definition
+     */
+    private $registry;
+
     /**
      * {@inheritdoc}
      */
@@ -29,20 +42,30 @@ class RegisterFeeCalculatorsPass implements CompilerPassInterface
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.payment.fee_calculator');
-        $calculators = array();
+        $this->registry = $container->getDefinition('sylius.registry.payment.fee_calculator');
 
         foreach ($container->findTaggedServiceIds('sylius.payment.fee_calculator') as $id => $attributes) {
-            if (!isset($attributes[0]['calculator']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged fee calculators needs to have `fee_calculator` and `label` attributes.');
-            }
-
-            $name = $attributes[0]['calculator'];
-            $calculators[$name] = $attributes[0]['label'];
-
-            $registry->addMethodCall('register', array($name, new Reference($id)));
+            $this->fillCalculatorsArray($id, $attributes);
         }
 
-        $container->setParameter('sylius.payment.fee_calculators', $calculators);
+        $container->setParameter('sylius.payment.fee_calculators', $this->calculators);
+    }
+
+    /**
+     * @param integer $id
+     * @param array   $attributes
+     *
+     * @throws \InvalidArgumentException if fee calculator is improperly tagged
+     */
+    private function fillCalculatorsArray($id, array $attributes)
+    {
+        if (!isset($attributes[0]['calculator']) || !isset($attributes[0]['label'])) {
+            throw new \InvalidArgumentException('Tagged fee calculators needs to have `fee_calculator` and `label` attributes.');
+        }
+
+        $name = $attributes[0]['calculator'];
+        $this->calculators[$name] = $attributes[0]['label'];
+
+        $this->registry->addMethodCall('register', array($name, new Reference($id)));
     }
 }

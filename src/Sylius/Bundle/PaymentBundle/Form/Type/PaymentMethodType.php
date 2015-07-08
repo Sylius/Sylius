@@ -76,18 +76,7 @@ class PaymentMethodType extends AbstractResourceType
             ->addEventSubscriber(new BuildPaymentMethodFeeCalculatorFormSubscriber($this->feeCalculatorRegistry, $builder->getFormFactory()))
         ;
 
-        $feeCalculatorsConfigurations = array();
-        foreach ($this->feeCalculatorRegistry->all() as $type => $feeCalculator) {
-            $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
-
-            try {
-                $feeCalculatorsConfigurations[$type] = $builder->create('feeCalculatorConfiguration', $formType)->getForm();
-            } catch (\InvalidArgumentException $exception) {
-                continue;
-            }
-        }
-
-        $builder->setAttribute('feeCalculatorsConfigurations', $feeCalculatorsConfigurations);
+        $this->setBuilderFeeCalculatorsConfigurationsAttribute($builder);
     }
 
     /**
@@ -100,6 +89,26 @@ class PaymentMethodType extends AbstractResourceType
         foreach ($form->getConfig()->getAttribute('feeCalculatorsConfigurations') as $type => $feeCalculatorConfiguration) {
             $view->vars['feeCalculatorsConfigurations'][$type] = $feeCalculatorConfiguration->createView($view);
         }
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     */
+    private function setBuilderFeeCalculatorsConfigurationsAttribute(FormBuilderInterface $builder)
+    {
+        $feeCalculatorsConfigurations = array();
+
+        foreach ($this->feeCalculatorRegistry->all() as $type => $feeCalculator) {
+            $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
+
+            try {
+                $feeCalculatorsConfigurations[$type] = $builder->create('feeCalculatorConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $exception) {
+                continue;
+            }
+        }
+
+        $builder->setAttribute('feeCalculatorsConfigurations', $feeCalculatorsConfigurations);
     }
 
     /**

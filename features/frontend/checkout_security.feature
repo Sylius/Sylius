@@ -26,8 +26,8 @@ Feature: Checkout security
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name  | gateway | enabled |
-            | Dummy | dummy   | yes     |
+            | name  | gateway | enabled | calculator | calculator_configuration |
+            | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And all products assigned to "DEFAULT-WEB" channel
           And channel "DEFAULT-WEB" has following configuration:
             | taxonomy | payment | shipping    |
