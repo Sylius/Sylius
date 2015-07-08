@@ -383,4 +383,15 @@ class Configuration
     {
         return $this->parameters->get('permission', $default);
     }
+
+    public function isHeaderRedirection()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (!is_array($redirect) || !isset($redirect['header'])) {
+            return false;
+        }
+
+        return (bool) $redirect['header'];
+    }
 }
