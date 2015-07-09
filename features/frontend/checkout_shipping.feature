@@ -31,7 +31,7 @@ Feature: Checkout shipping
             | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
             | name  | gateway | enabled | calculator | calculator_configuration |
-            | Dummy | dummy   | yes     | fixed      | amount: 0.00             |
+            | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And there is default currency configured
           And there is default channel configured
           And all products assigned to "DEFAULT-WEB" channel

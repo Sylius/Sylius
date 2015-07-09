@@ -11,7 +11,7 @@ Feature: Payment methods
           And the following payment methods exist:
             | name        | gateway | calculator | calculator_configuration |
             | Credit Card | stripe  | fixed      | amount: 10               |
-            | PayPal      | paypal  | percent    | amount: 5                |
+            | PayPal      | paypal  | percent    | percent: 5               |
 
     Scenario: Seeing index of all payment methods
         Given I am on the dashboard page
