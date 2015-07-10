@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * This file is part of the Sylius package.
  *
@@ -14,25 +15,18 @@ namespace spec\Sylius\Component\Contact\Model;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicSpec extends ObjectBehavior
+class TopicTranslationSpec extends ObjectBehavior
 {
-    public function let()
-    {
-        $this->setCurrentLocale('en_US');
-        $this->setFallbackLocale('en_US');
-    }
-
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Contact\Model\Topic');
+        $this->shouldHaveType('Sylius\Component\Contact\Model\TopicTranslation');
     }
 
-    function it_implements_Sylius_contact_topic_interface()
+    function it_implements_Sylius_topic_translation_interface()
     {
-        $this->shouldImplement('Sylius\Component\Contact\Model\TopicInterface');
+        $this->shouldImplement('Sylius\Component\Contact\Model\TopicTranslationInterface');
     }
 
     function it_has_no_id_by_default()

@@ -16,9 +16,12 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Contact\Model\Topic" table="sylius_contact_topic">
+    <mapped-superclass name="Sylius\Component\Contact\Model\TopicTranslation" table="sylius_contact_topic_translation">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
+        <field name="title" column="title" type="string" />
     </mapped-superclass>
+
 </doctrine-mapping>
