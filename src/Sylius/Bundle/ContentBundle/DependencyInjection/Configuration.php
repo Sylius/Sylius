@@ -281,7 +281,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\ContentBundle\Form\Type\StaticContentType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType')->end()
+                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType')->end()
                                     ->end()
                                 ->end()
                             ->end()
