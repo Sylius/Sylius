@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('identity_provider')->defaultValue('sylius.authorization_identity_provider.security')->end()
                 ->scalarNode('permission_map')->defaultValue('sylius.permission_map.cached')->end()
                 ->arrayNode('security_roles')
+                    ->useAttributeAsKey('id')
                     ->prototype('scalar')
                     ->defaultValue(array())
                 ->end()
