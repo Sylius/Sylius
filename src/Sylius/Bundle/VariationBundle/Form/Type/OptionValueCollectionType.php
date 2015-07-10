@@ -63,7 +63,7 @@ class OptionValueCollectionType extends AbstractType
                 throw new InvalidConfigurationException('Each object passed as option list must implement "Sylius\Component\Variation\Model\OptionInterface"');
             }
 
-            $builder->add((string) $i, sprintf('sylius_%s_option_value_choice', $this->variableName), array(
+            $builder->add((string) $option->getId(), sprintf('sylius_%s_option_value_choice', $this->variableName), array(
                 'label'         => $option->getName(),
                 'option'        => $option,
                 'property_path' => '['.$i.']',
