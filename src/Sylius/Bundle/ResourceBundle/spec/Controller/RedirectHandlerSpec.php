@@ -27,6 +27,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $config->getRedirectRoute('show')->willReturn('my_route');
         $router->generate('my_route', array())->willReturn('http://myurl.com');
         $config->getRedirectHash()->willReturn(null);
+        $config->isHeaderRedirection()->willReturn(false);
 
         $this->redirectTo('resource')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
@@ -37,6 +38,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $config->getRedirectParameters()->willReturn(array());
         $router->generate('my_route', array())->willReturn('http://myurl.com');
         $config->getRedirectHash()->willReturn(null);
+        $config->isHeaderRedirection()->willReturn(false);
 
         $this->redirectToIndex()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
@@ -52,6 +54,7 @@ class RedirectHandlerSpec extends ObjectBehavior
     function it_redirects($config)
     {
         $config->getRedirectHash()->willReturn(null);
+        $config->isHeaderRedirection()->willReturn(false);
         $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
@@ -63,7 +66,16 @@ class RedirectHandlerSpec extends ObjectBehavior
         $config->getRequest()->willreturn($request);
         $config->getRedirectHash()->willReturn(null);
         $config->getRedirectReferer()->willreturn('http://myurl.com');
+        $config->isHeaderRedirection()->willReturn(false);
 
         $this->redirectToReferer()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+    }
+
+    function it_redirects_with_header($config)
+    {
+        $config->getRedirectHash()->willReturn(null);
+        $config->isHeaderRedirection()->willReturn(true);
+
+        $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\Response');
     }
 }
