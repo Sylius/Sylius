@@ -104,7 +104,7 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="sylius.channel_aware_locale_provider" />
             <argument type="service" id="sylius.authorization_checker" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
