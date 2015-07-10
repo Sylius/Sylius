@@ -52,13 +52,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     protected $enabled = true;
 
     /**
-     * Name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Calculator name.
      *
      * @var string
