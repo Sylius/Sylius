@@ -81,7 +81,11 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
             return;
         }
 
-        $options = array('label' => $attributeValue->getName(), 'auto_initialize' => false);
+        $options = array(
+            'label' => $attributeValue->getName(),
+            'auto_initialize' => false,
+            'property_path' => 'realValue'
+        );
 
         if (is_array($attributeValue->getConfiguration())) {
             $options = array_merge($options, $attributeValue->getConfiguration());

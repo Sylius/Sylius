@@ -120,6 +120,28 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
+    public function getRealValue()
+    {
+        if ($this->attribute && AttributeTypes::CHECKBOX === $this->attribute->getType()) {
+            return (Boolean) $this->value;
+        }
+
+        return $this->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRealValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($value)
     {
         $this->value = $value;
