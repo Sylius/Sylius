@@ -89,9 +89,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
 
         $this->verifyValue($attributeValue);
 
-        // If we're editing the attribute value, let's just render the value field, not full selection.
         $form
-            ->remove('attribute')
             ->add($this->factory->createNamed('value', $attributeValue->getType(), null, $options))
         ;
     }
