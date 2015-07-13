@@ -69,6 +69,8 @@ You can have different payment methods using the same gateway, like PayPal or St
 * gateway
 * configuration
 * environment
+* feeCalculator
+* feeCalculatorConfiguration
 * createdAt
 * updatedAt
 
