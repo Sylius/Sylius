@@ -25,7 +25,7 @@
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
     {% else %}
-        {{ buttons.patch(path('sylius_backend_product_delete_revert', {'id': product.id}), 'sylius.product.delete_revert', null, 'btn btn-primary') }}
+        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.product.delete_restore', null, 'btn btn-primary') }}
     {% endif %}
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
