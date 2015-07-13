@@ -12,9 +12,11 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -150,7 +152,9 @@ class DomainManager
     /**
      * @param object $resource
      *
-     * @return object|ResourceEvent|null
+     * @return null|object|ResourceEvent
+     *
+     * @throws \Exception
      */
     public function delete($resource)
     {
@@ -169,8 +173,25 @@ class DomainManager
             return $event;
         }
 
-        $this->manager->remove($resource);
-        $this->manager->flush();
+        try {
+            $this->manager->remove($resource);
+            $this->manager->flush();
+        } catch(ForeignKeyConstraintViolationException $exception) {
+
+            // A foreign-key constraint violation when deleting
+            if (1451 === $exception->getErrorCode()) {
+                $this->flashHelper->setFlash('error', 'delete');
+
+                $event = new ResourceEvent($resource);
+                $event->setErrorCode(400);
+                $event->setMessageType(ResourceEvent::TYPE_ERROR);
+                $event->setMessage('This entity cannot be deleted because it\'s used in other places');
+
+                return $event;
+            }
+
+            throw $exception;
+        }
 
         if (null !== $this->flashHelper) {
             $this->flashHelper->setFlash('success', 'delete');
