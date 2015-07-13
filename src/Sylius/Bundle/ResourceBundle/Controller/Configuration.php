@@ -392,6 +392,10 @@ class Configuration
             return false;
         }
 
+        if ('xhr' === $redirect['header']) {
+            return $this->getRequest()->isXmlHttpRequest();
+        }
+
         return (bool) $redirect['header'];
     }
 }
