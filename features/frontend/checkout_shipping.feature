@@ -30,8 +30,8 @@ Feature: Checkout shipping
             | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
             | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
-            | name  | gateway | enabled |
-            | Dummy | dummy   | yes     |
+            | name  | gateway | enabled | calculator | calculator_configuration |
+            | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And there is default currency configured
           And there is default channel configured
           And all products assigned to "DEFAULT-WEB" channel

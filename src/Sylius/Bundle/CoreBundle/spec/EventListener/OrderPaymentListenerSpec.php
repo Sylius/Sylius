@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentChargesProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -26,9 +27,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPaymentListenerSpec extends ObjectBehavior
 {
-    function let(PaymentProcessorInterface $processor, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
+    function let(PaymentProcessorInterface $processor, PaymentChargesProcessorInterface $paymentChargesProcessor, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
     {
-        $this->beConstructedWith($processor, $dispatcher, $factory);
+        $this->beConstructedWith($processor, $paymentChargesProcessor, $dispatcher, $factory);
     }
 
     function it_is_initializable()
@@ -92,5 +93,14 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $payment->setCurrency('USD')->shouldBeCalled();
 
         $this->updateOrderPayment($event);
+    }
+
+    function it_processes_order_payment_charges($paymentChargesProcessor, GenericEvent $event, OrderInterface $order)
+    {
+        $event->getSubject()->willReturn($order);
+
+        $paymentChargesProcessor->applyPaymentCharges($order)->shouldBeCalled();
+
+        $this->processOrderPaymentCharges($event);
     }
 }

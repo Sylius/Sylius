@@ -89,4 +89,24 @@ interface PaymentMethodInterface extends TimestampableInterface
      * @param string $environment
      */
     public function setEnvironment($environment);
+
+    /**
+     * @return string
+     */
+    public function getFeeCalculator();
+
+    /**
+     * @param string $feeCalculator
+     */
+    public function setFeeCalculator($feeCalculator);
+
+    /**
+     * @return array
+     */
+    public function getFeeCalculatorConfiguration();
+
+    /**
+     * @param array $feeCalculatorConfiguration
+     */
+    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration);
 }

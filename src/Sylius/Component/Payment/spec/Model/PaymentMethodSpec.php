@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,7 +24,7 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Payment\Model\PaymentMethod');
     }
 
-    function it_implements_Sylius_payment_method_interface()
+    function it_implements_sylius_payment_method_interface()
     {
         $this->shouldImplement('Sylius\Component\Payment\Model\PaymentMethodInterface');
     }
@@ -102,5 +103,19 @@ class PaymentMethodSpec extends ObjectBehavior
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_fee_calculator_is_mutable()
+    {
+        $this->getFeeCalculator()->shouldReturn('fixed');
+
+        $this->setFeeCalculator('test_calculator');
+        $this->getFeeCalculator()->shouldReturn('test_calculator');
+    }
+
+    function its_fee_calculator_configuration_is_mutable()
+    {
+        $this->setFeeCalculatorConfiguration(array('amount' => 10));
+        $this->getFeeCalculatorConfiguration()->shouldReturn(array('amount' => 10));
     }
 }

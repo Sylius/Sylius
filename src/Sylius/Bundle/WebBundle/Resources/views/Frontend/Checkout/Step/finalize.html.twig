@@ -3,6 +3,7 @@
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+{% set paymentAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PAYMENT_ADJUSTMENT') %}
 
 {% block content %}
 <div class="page-header">
@@ -103,6 +104,23 @@
                 </td>
             </tr>
         {% endif %}
+        <tr>
+            <td colspan="4">
+                <p><strong>{{ 'sylius.checkout.finalize.order.payment_charges'|trans }}</strong></p>
+                <ul>
+                    {% for adjustment in order.adjustments(paymentAdjustment) %}
+                        <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price }} </li>
+                    {% else %}
+                        <li><span class="label label-info">{{ 'sylius.checkout.finalize.order.no_payment_charges'|trans }}</span></li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td colspan="2">
+                <span class="pull-right">
+                <strong>{{ 'sylius.checkout.finalize.order.payment_total'|trans }}</strong>: {{ order.adjustmentsTotal(paymentAdjustment)|sylius_price }}
+                </span>
+            </td>
+        </tr>
         <tr style="background-color: #f1f1f1;">
             <td colspan="6">
                 <span class="pull-right">

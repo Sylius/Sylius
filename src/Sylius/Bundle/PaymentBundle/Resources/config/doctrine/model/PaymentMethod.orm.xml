@@ -24,6 +24,8 @@
         <field name="gateway" column="gateway" type="string" />
         <field name="environment" column="environment" type="string" nullable="true" />
         <field name="enabled" column="is_enabled" type="boolean" />
+        <field name="feeCalculator" column="fee_calculator" nullable="true" type="string" />
+        <field name="feeCalculatorConfiguration" column="fee_calculator_configuration" type="array" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
