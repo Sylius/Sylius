@@ -22,7 +22,7 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShipmentTracking', array('sylius'));
+        $this->beConstructedWith('ShipmentTracking', array('sylius'), 'messages');
     }
 
     function it_is_initializable()

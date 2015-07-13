@@ -23,7 +23,7 @@ class CouponTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Coupon', array('sylius'));
+        $this->beConstructedWith('Coupon', array('sylius'), 'messages');
     }
 
     function it_should_be_initializable()
@@ -62,6 +62,7 @@ class CouponTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Coupon',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

@@ -24,7 +24,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Product', array('sylius'));
+        $this->beConstructedWith('Product', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -65,7 +65,8 @@ class ProductTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Product',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

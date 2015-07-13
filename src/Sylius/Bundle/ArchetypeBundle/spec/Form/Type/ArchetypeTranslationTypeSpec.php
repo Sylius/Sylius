@@ -10,7 +10,7 @@ class ArchetypeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ArchetypeTranslation', array('sylius'), 'subject');
+        $this->beConstructedWith('ArchetypeTranslation', array('sylius'), 'messages', 'subject');
     }
 
     function it_is_initializable()

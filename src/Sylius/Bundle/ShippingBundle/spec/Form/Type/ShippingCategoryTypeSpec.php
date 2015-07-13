@@ -23,7 +23,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShippingCategory', array('sylius'));
+        $this->beConstructedWith('ShippingCategory', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -57,6 +57,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'ShippingCategory',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

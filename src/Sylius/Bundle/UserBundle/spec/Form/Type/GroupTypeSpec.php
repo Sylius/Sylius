@@ -19,7 +19,7 @@ class GroupTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Group', array('sylius'));
+        $this->beConstructedWith('Group', array('sylius'), 'messages');
     }
 
     function it_is_initializable()

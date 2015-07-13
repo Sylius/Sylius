@@ -23,7 +23,7 @@ class ChannelTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Channel', array('sylius'));
+        $this->beConstructedWith('Channel', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -79,7 +79,11 @@ class ChannelTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Channel', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(array(
+            'data_class' => 'Channel',
+            'validation_groups' => array('sylius'),
+            'translation_domain' => 'messages',
+        ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

@@ -22,7 +22,7 @@ class PaymentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Payment', array('sylius'));
+        $this->beConstructedWith('Payment', array('sylius'), 'messages');
     }
 
     function it_is_initializable()

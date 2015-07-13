@@ -31,11 +31,12 @@ class PaymentStepType extends AbstractResourceType
     /**
      * @param string                  $dataClass
      * @param array                   $validationGroups
+     * @param string                  $translationDomain
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct($dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
+    public function __construct($dataClass, array $validationGroups = array(), $translationDomain, ChannelContextInterface $channelContext)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
         $this->channelContext = $channelContext;
     }
 

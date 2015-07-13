@@ -24,7 +24,7 @@ class OptionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Option', array(), 'server');
+        $this->beConstructedWith('Option', array('sylius'), 'messages', 'server');
     }
 
     function it_is_initializable()
@@ -62,7 +62,8 @@ class OptionTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Option',
-                'validation_groups' => array()
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

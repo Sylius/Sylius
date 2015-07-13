@@ -23,7 +23,7 @@ class ImagineBlockTypeSpec extends ObjectBehavior
 {
     function let(FilterConfiguration $filterConfiguration)
     {
-        $this->beConstructedWith('My\Resource\Model', array('validation_group'), $filterConfiguration);
+        $this->beConstructedWith('My\Resource\Model', array('validation_group'), 'messages', $filterConfiguration);
     }
 
     function it_is_initializable()

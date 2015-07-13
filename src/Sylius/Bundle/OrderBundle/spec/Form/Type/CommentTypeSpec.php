@@ -50,6 +50,7 @@ class CommentTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Comment',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

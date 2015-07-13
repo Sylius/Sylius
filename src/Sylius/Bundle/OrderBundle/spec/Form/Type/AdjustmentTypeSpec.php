@@ -62,6 +62,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Adjustment',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

@@ -21,7 +21,7 @@ class VariantTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Variant', array(), 'server');
+        $this->beConstructedWith('Variant', array('sylius'), 'messages', 'server');
     }
 
     function it_is_initializable()
@@ -39,7 +39,8 @@ class VariantTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Variant',
-                'validation_groups' => array()
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

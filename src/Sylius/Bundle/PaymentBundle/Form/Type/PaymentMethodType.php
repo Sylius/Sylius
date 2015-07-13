@@ -38,14 +38,16 @@ class PaymentMethodType extends AbstractResourceType
      *
      * @param string                   $dataClass
      * @param array                    $validationGroups
+     * @param string                   $translationDomain
      * @param ServiceRegistryInterface $feeCalculatorRegistry
      */
     public function __construct(
         $dataClass,
         array $validationGroups,
+        $translationDomain,
         ServiceRegistryInterface $feeCalculatorRegistry
     ) {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->feeCalculatorRegistry = $feeCalculatorRegistry;
     }

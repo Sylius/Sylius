@@ -23,7 +23,7 @@ class CreditCardTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CreditCard', array('sylius'));
+        $this->beConstructedWith('CreditCard', array('sylius'), 'messages');
     }
 
     function it_is_a_form_type()
@@ -72,6 +72,7 @@ class CreditCardTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'CreditCard',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

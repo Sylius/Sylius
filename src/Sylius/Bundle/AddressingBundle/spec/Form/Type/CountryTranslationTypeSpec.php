@@ -23,7 +23,7 @@ class CountryTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CountryTranslation', array('sylius'));
+        $this->beConstructedWith('CountryTranslation', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -57,7 +57,8 @@ class CountryTranslationTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'CountryTranslation',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
+                    'translation_domain' => 'messages',
                 )
             )
             ->shouldBeCalled();

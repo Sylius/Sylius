@@ -31,11 +31,12 @@ class GuestType extends AbstractResourceType
     /**
      * @param string              $dataClass
      * @param array               $validationGroups
+     * @param string              $translationDomain
      * @param RepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
+    public function __construct($dataClass, array $validationGroups = array(), $translationDomain, RepositoryInterface $customerRepository)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
         $this->customerRepository = $customerRepository;
     }
     /**

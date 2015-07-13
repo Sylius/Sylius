@@ -34,11 +34,12 @@ class AddressType extends AbstractResourceType
      *
      * @param string                   $dataClass
      * @param string[]                 $validationGroups
+     * @param string                       $translationDomain
      * @param EventSubscriberInterface $eventListener
      */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventListener)
+    public function __construct($dataClass, array $validationGroups, $translationDomain, EventSubscriberInterface $eventListener)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups, $translationDomain);
 
         $this->eventListener = $eventListener;
     }

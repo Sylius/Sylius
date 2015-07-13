@@ -25,7 +25,7 @@ class RuleTypeSpec extends ObjectBehavior
 {
     function let(RuleCheckerRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
+        $this->beConstructedWith('Rule', array('sylius'), 'messages', $checkerRegistry);
     }
 
     function it_is_initializable()
@@ -90,6 +90,7 @@ class RuleTypeSpec extends ObjectBehavior
             ->setDefaults(array(
                 'data_class'        => 'Rule',
                 'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled()
         ;

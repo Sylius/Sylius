@@ -27,7 +27,7 @@ class ActionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $actionRegistry)
     {
-        $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
+        $this->beConstructedWith('Action', array('sylius'), 'messages', $actionRegistry);
     }
 
     function it_is_initializabled()
@@ -64,6 +64,7 @@ class ActionTypeSpec extends ObjectBehavior
         $resolver->setDefaults(array(
             'data_class' => 'Action',
             'validation_groups' => array('sylius'),
+            'translation_domain' => 'messages',
         ))->shouldBeCalled();
 
         $resolver->setOptional(array('configuration_type'))->shouldBeCalled();

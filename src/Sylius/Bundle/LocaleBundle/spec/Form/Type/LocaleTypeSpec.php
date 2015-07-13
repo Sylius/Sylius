@@ -23,7 +23,7 @@ class LocaleTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Locale', array('sylius'));
+        $this->beConstructedWith('Locale', array('sylius'), 'messages');
     }
 
     function it_is_initializable()
@@ -56,7 +56,8 @@ class LocaleTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Locale',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
+                'translation_domain' => 'messages',
             ))
             ->shouldBeCalled();
 

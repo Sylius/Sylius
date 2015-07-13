@@ -52,6 +52,7 @@ class UserType extends AbstractResourceType
 
                 return $groups;
             },
+            'translation_domain' => $this->translationDomain
         ));
     }
 
