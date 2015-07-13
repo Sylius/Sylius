@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -110,27 +111,45 @@ class InventoryHandler implements InventoryHandlerInterface
         }
     }
 
+    public function shipShipment(ShipmentInterface $shipment)
+    {
+        /** @var array $shippedItem An array of ArrayCollection that store InventoryUnit */
+        $shippedCollection = [];
+
+        foreach ($shipment->getItems() as $unit) {
+            $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+            $variant = $unit->getOrderItem()->getVariant();
+
+            if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
+                // Release on hold item if possible
+                if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
+                    $this->inventoryOperator->release($variant, 1);
+                }
+
+                // Sell & decrease stock
+                $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
+
+                // Group units by variant, so it decrease stocks all together later
+                if (!isset($shippedCollection[$variant->getId()])) {
+                    $shippedCollection[$variant->getId()] = new ArrayCollection();
+                }
+
+                $shippedCollection[$variant->getId()]->add($unit);
+            }
+        }
+
+        foreach ($shippedCollection as $collection) {
+            $this->inventoryOperator->decrease($collection);
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
     public function updateInventory(OrderInterface $order)
     {
-        foreach ($order->getItems() as $item) {
-            $units = $item->getInventoryUnits();
-            $quantity = 0;
-
-            foreach ($units as $unit) {
-                $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
-                if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
-                    if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
-                        $quantity++;
-                    }
-                    $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
-                }
-            }
-
-            $this->inventoryOperator->release($item->getVariant(), $quantity);
-            $this->inventoryOperator->decrease($units);
+        foreach ($order->getShipments() as $shipment) {
+            $this->shipShipment($shipment);
         }
     }
 
