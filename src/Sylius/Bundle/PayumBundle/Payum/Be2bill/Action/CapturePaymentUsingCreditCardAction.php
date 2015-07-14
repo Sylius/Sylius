@@ -11,12 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
-use Payum\Core\Exception\LogicException;
 use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
