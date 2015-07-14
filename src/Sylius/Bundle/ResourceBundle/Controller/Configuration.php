@@ -251,6 +251,27 @@ class Configuration
         return $parameters;
     }
 
+    public function getTargetRoute($default = null)
+    {
+        $target = $this->parameters->get('target', array('route' => $default));
+
+        return is_array($target) ? $target['route'] : $target;
+    }
+
+    public function getTargetParameters(array $default = array())
+    {
+        $target = $this->parameters->get('target', array());
+
+        return isset($target['parameters']) ? $target['parameters'] : $default;
+    }
+
+    public function getTargetMethod($default = null)
+    {
+        $target = $this->parameters->get('target', array());
+
+        return isset($target['method']) ? $target['method'] : $default;
+    }
+
     public function isLimited()
     {
         return (bool) $this->parameters->get('limit', $this->settings['limit']);

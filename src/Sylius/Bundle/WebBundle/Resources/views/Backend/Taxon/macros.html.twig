@@ -38,9 +38,19 @@
     </td>
     <td>
         <div class="pull-right">
-        {{ buttons.generic(path('sylius_backend_taxon_product_index', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'sylius.browse_products'|trans) }}
-        {{ buttons.edit(path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
-        {{ buttons.delete(path('sylius_backend_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
+            {#<form action="{{ path('sylius_backend_taxon_new', {'taxonomyId': taxonomy.id}) }}" method="post"
+                              class="delete-action-form" novalidate>
+                            <input type="hidden" name="sylius_taxon[parent]" value="{{ taxon.id }}">
+                            <input type="hidden" name="sylius_taxon[_token]" value="{{ }}">
+                            <button class="btn btn-{{ button|default('success') }}" type="submit">
+                                <i class="glyphicon glyphicon-plus-sign"></i>
+                                <span>{{ 'sylius.taxon.create_child'|trans }}</span>
+                            </button>
+                        </form>#}
+            {{ buttons.create(path('sylius_backend_taxon_new', {'taxonomyId': taxonomy.id, 'sylius_taxon': {'parent': taxon.id, '_token': csrf_token("sylius_taxon")}}), 'sylius.taxon.create_child'|trans) }}
+            {{ buttons.generic(path('sylius_backend_taxon_product_index', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'sylius.browse_products'|trans) }}
+            {{ buttons.edit(path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
+            {{ buttons.delete(path('sylius_backend_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
         </div>
     </td>
 </tr>

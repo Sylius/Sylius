@@ -1,9 +1,22 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 #
-sylius_backend_taxon_create:
+sylius_backend_taxon_new:
     path: /new
     methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxon:newAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxon:create.html.twig
+            redirect:
+                route: sylius_backend_taxonomy_show
+                parameters: {'id': $taxonomyId}
+            target:
+                route: sylius_backend_taxon_create
+
+sylius_backend_taxon_create:
+    path: /
+    methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
         _sylius:

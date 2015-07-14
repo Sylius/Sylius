@@ -19,9 +19,8 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_taxon_update', {'taxonomyId': taxon.taxonomy.id, 'id': taxon.id}) }}" method="post"  class="form-horizontal" {{ form_enctype(form) }}novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
-    {{ update() }}
-</form>
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': ''}}) }}
+{% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
+{{ update() }}
+{{ form_end(form) }}
 {% endblock %}
