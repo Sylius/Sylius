@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -98,7 +97,7 @@ EOT
             } while ($exists);
 
             $user->setEmail($email);
-            $user->setPlainPassword($this->ask($output, 'Choose password:', array(new NotBlank())));
+            $user->setPlainPassword($this->askHidden($output, 'Choose password:', array(new NotBlank())));
         }
 
         $user->setEnabled(true);
