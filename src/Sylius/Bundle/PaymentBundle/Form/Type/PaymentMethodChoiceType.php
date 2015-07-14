@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -88,6 +89,10 @@ class PaymentMethodChoiceType extends ResourceChoiceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        if (!$parent = $view->parent->vars['value'] instanceof Order) {
+            return;
+        }
+
         $paymentCosts = array();
 
         $payment = $view->parent->vars['value']->getPayments()->last();
