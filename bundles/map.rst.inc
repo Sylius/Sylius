@@ -19,4 +19,5 @@
 * :doc:`/bundles/SyliusShippingBundle/index`
 * :doc:`/bundles/SyliusTaxationBundle/index`
 * :doc:`/bundles/SyliusTaxonomyBundle/index`
+* :doc:`/bundles/SyliusThemeBundle/index`
 * :doc:`/bundles/SyliusVariationBundle/index`
