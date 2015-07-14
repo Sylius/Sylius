@@ -24,7 +24,10 @@ sylius_money:
     currency: %sylius.currency%
     locale: %sylius.locale%
 
-sylius_locale: ~
+sylius_locale:
+    classes:
+        locale:
+            controller: Sylius\Bundle\CoreBundle\Controller\LocaleController
 
 sylius_currency: ~
 

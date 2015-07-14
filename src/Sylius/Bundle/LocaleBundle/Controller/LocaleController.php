@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
-use Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Locale\Context\LocaleContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * Locale controller.
@@ -53,7 +53,7 @@ class LocaleController extends ResourceController
     }
 
     /**
-     * @return LocaleContext
+     * @return LocaleContextInterface
      */
     protected function getLocaleContext()
     {
@@ -61,7 +61,7 @@ class LocaleController extends ResourceController
     }
 
     /**
-     * @return ChannelAwareLocaleProvider
+     * @return LocaleProviderInterface
      */
     protected function getLocaleProvider()
     {
