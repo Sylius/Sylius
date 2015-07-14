@@ -30,7 +30,7 @@ class ThemeBundleTestCase extends WebTestCase
      */
     protected function getClient()
     {
-        $client = $this->createClient(array('test_case' => self::TEST_CASE, 'root_config' => 'config.yml'));
+        $client = $this->createClient(['test_case' => self::TEST_CASE, 'root_config' => 'config.yml']);
         try {
             $client->insulate();
         } catch (\RuntimeException $e) {

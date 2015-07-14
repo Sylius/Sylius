@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\DependencyInjection\Config\CustomConfig;
 
 class TestBundle extends Bundle
 {

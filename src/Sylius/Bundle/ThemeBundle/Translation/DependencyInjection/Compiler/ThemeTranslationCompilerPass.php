@@ -32,7 +32,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
             $container->addResource(new DirectoryResource($dir));
         }
 
-        $files = array();
+        $files = [];
         $finder = Finder::create()
             ->files()
             ->filter(function (SplFileInfo $file) {
@@ -45,7 +45,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
         foreach ($finder as $file) {
             $locale = explode('.', $file->getBasename(), 3)[1];
             if (!isset($files[$locale])) {
-                $files[$locale] = array();
+                $files[$locale] = [];
             }
 
             $files[$locale][] = (string) $file;
@@ -53,7 +53,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
 
         $options = array_merge_recursive(
             $translator->getArgument(3),
-            array('resource_files' => $files)
+            ['resource_files' => $files]
         );
 
         $translator->replaceArgument(3, $options);

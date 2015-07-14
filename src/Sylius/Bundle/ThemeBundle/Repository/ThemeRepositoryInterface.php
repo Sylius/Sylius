@@ -3,7 +3,6 @@
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

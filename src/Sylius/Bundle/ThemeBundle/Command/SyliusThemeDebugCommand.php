@@ -5,7 +5,6 @@ namespace Sylius\Bundle\ThemeBundle\Command;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,6 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class SyliusThemeDebugCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -22,12 +24,10 @@ class SyliusThemeDebugCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->showSuccessfullyLoadedThemes($output);
-    }
-
-    private function showSuccessfullyLoadedThemes(OutputInterface $output)
     {
         /** @var ThemeInterface[] $themes */
         $themes = $this->getContainer()->get('sylius.theme.repository')->findAll();

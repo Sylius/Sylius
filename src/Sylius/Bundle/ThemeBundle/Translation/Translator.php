@@ -42,7 +42,7 @@ class Translator extends BaseTranslator
     /**
      * {@inheritdoc}
      */
-    public function __construct(ContainerInterface $container, MessageSelector $selector, $loaderIds = array(), array $options = array())
+    public function __construct(ContainerInterface $container, MessageSelector $selector, $loaderIds = [], array $options = [])
     {
         $this->selector = $selector;
 
@@ -74,7 +74,7 @@ class Translator extends BaseTranslator
     /**
      * {@inheritdoc}
      */
-    public function trans($id, array $parameters = array(), $domain = null, $locale = null)
+    public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
         return $this->doTranslate(
             $id,
@@ -89,7 +89,7 @@ class Translator extends BaseTranslator
     /**
      * {@inheritdoc}
      */
-    public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null)
+    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
         return $this->doTranslate(
             $id,
@@ -112,7 +112,7 @@ class Translator extends BaseTranslator
      *
      * @return null|MessageCatalogueInterface
      */
-    protected function doTranslate($id, array $parameters, $domain, $locale, $number, array $themes = array())
+    protected function doTranslate($id, array $parameters, $domain, $locale, $number, array $themes = [])
     {
         $id = (string) $id;
         $domain = $domain ?: 'messages';

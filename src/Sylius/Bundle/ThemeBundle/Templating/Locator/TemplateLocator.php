@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -17,11 +18,6 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 class TemplateLocator implements FileLocatorInterface
 {
     /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    /**
      * @var ThemeRepositoryInterface
      */
     private $themeRepository;
@@ -32,9 +28,14 @@ class TemplateLocator implements FileLocatorInterface
     private $themeContext;
 
     /**
-     * @var string
+     * @var ResourceLocatorInterface
      */
-    private $appDir;
+    private $bundleResourceLocator;
+
+    /**
+     * @var ResourceLocatorInterface
+     */
+    private $applicationResourceLocator;
 
     /**
      * @var array
@@ -42,38 +43,23 @@ class TemplateLocator implements FileLocatorInterface
     private $cache;
 
     /**
-     * @var array
-     */
-    private $paths = [
-        'bundle_template' => [
-            '%theme_path%/%bundle_name%/%override_path%',
-            '%app_path%/Resources/%bundle_name%/%override_path%',
-            '%bundle_path%/Resources/%override_path%',
-        ],
-        'app_template' => [
-            '%theme_path%/%override_path%',
-            '%app_path%/Resources/%override_path%',
-        ],
-    ];
-
-    /**
-     * @param KernelInterface $kernel
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
-     * @param string $appDir
+     * @param ResourceLocatorInterface $bundleResourceLocator
+     * @param ResourceLocatorInterface $applicationResourceLocator
      * @param string $cacheDir The cache path
      */
     public function __construct(
-        KernelInterface $kernel,
         ThemeRepositoryInterface $themeRepository,
         ThemeContextInterface $themeContext,
-        $appDir,
+        ResourceLocatorInterface $bundleResourceLocator,
+        ResourceLocatorInterface $applicationResourceLocator,
         $cacheDir = null
     ) {
-        $this->kernel = $kernel;
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
-        $this->appDir = $appDir;
+        $this->bundleResourceLocator = $bundleResourceLocator;
+        $this->applicationResourceLocator = $applicationResourceLocator;
 
         if (null !== $cacheDir && is_file($cache = $cacheDir . '/templates.php')) {
             $this->cache = require $cache;
@@ -128,9 +114,9 @@ class TemplateLocator implements FileLocatorInterface
 
         if (0 === strpos($template->getPath(), '@')) {
             return $this->locateBundleTemplateUsingThemes($template, $themes);
-        } else {
-            return $this->locateAppTemplateUsingThemes($template, $themes);
         }
+
+        return $this->locateAppTemplateUsingThemes($template, $themes);
     }
 
     /**
@@ -141,55 +127,9 @@ class TemplateLocator implements FileLocatorInterface
      */
     protected function locateBundleTemplateUsingThemes(TemplateReferenceInterface $template, array $themes)
     {
-        $name = $template->getPath();
+        $cacheKey = $this->getCacheKey($template, $this->themeContext->getTheme());
 
-        if (false !== strpos($name, '..')) {
-            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
-        }
-
-        $bundleName = substr($name, 1);
-        $templatePath = '';
-        if (false !== strpos($bundleName, '/')) {
-            list($bundleName, $templatePath) = explode('/', $bundleName, 2);
-        }
-        if (0 !== strpos($templatePath, 'Resources')) {
-            throw new \RuntimeException('Template files have to be in Resources.');
-        }
-
-        $resourceBundle = null;
-        $bundles = $this->kernel->getBundle($bundleName, false);
-
-        $parameters = [
-            '%app_path%' => $this->appDir,
-            '%override_path%' => substr($templatePath, strlen('Resources/')),
-        ];
-
-        foreach ($this->paths['bundle_template'] as $path) {
-            foreach ($bundles as $bundle) {
-                $parameters = array_merge($parameters, [
-                    '%bundle_name%' => $bundle->getName(),
-                    '%bundle_path%' => $bundle->getPath(),
-                ]);
-
-                if (false === strpos($path, '%theme_path%')) {
-                    if (null !== $checkedPath = $this->checkPath($path, $parameters, $template)) {
-                        return $checkedPath;
-                    }
-                } else {
-                    foreach ($themes as $theme) {
-                        $themeParameters = array_merge($parameters, [
-                            '%theme_path%' => $theme->getPath(),
-                        ]);
-
-                        if (null !== $checkedPath = $this->checkPath($path, $themeParameters, $template, $theme)) {
-                            return $checkedPath;
-                        }
-                    }
-                }
-            }
-        }
-
-        return null;
+        return $this->cache[$cacheKey] = $this->bundleResourceLocator->locateResource($template->getPath(), $themes);
     }
 
     /**
@@ -200,56 +140,17 @@ class TemplateLocator implements FileLocatorInterface
      */
     protected function locateAppTemplateUsingThemes(TemplateReferenceInterface $template, array $themes = [])
     {
-        $parameters = [
-            '%app_path%' => $this->appDir,
-            '%override_path%' => $template->getPath(),
-        ];
+        $cacheKey = $this->getCacheKey($template, $this->themeContext->getTheme());
 
-        foreach ($this->paths['app_template'] as $path) {
-            if (false === strpos($path, '%theme_path%')) {
-                if (null !== $checkedPath = $this->checkPath($path, $parameters, $template)) {
-                    return $checkedPath;
-                }
-            } else {
-                foreach ($themes as $theme) {
-                    $themeParameters = array_merge($parameters, [
-                        '%theme_path%' => $theme->getPath(),
-                    ]);
-
-                    if (null !== $checkedPath = $this->checkPath($path, $themeParameters, $template, $theme)) {
-                        return $checkedPath;
-                    }
-                }
-            }
-        }
-
-        return null;
+        return $this->cache[$cacheKey] = $this->applicationResourceLocator->locateResource($template->getPath(), $themes);
     }
 
     /**
-     * @param string $path
-     * @param array $parameters
      * @param TemplateReferenceInterface $template
-     * @param ThemeInterface $theme
-     * @return null|string
+     * @param ThemeInterface|null $theme
+     *
+     * @return string
      */
-    protected function checkPath($path, $parameters, TemplateReferenceInterface $template, ThemeInterface $theme = null)
-    {
-        $key = $this->getCacheKey($template, $theme);
-
-        if (isset($this->cache[$key])) {
-            return $this->cache[$key];
-        }
-
-        $path = strtr($path, $parameters);
-
-        if (file_exists($path)) {
-            return $this->cache[$key] = $path;
-        }
-
-        return null;
-    }
-
     private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme = null)
     {
         $key = $template->getLogicalName();
@@ -261,6 +162,12 @@ class TemplateLocator implements FileLocatorInterface
         return $key;
     }
 
+    /**
+     * @param TemplateReferenceInterface $template
+     * @param ThemeInterface|null $theme
+     *
+     * @return null
+     */
     private function getCache(TemplateReferenceInterface $template, ThemeInterface $theme = null)
     {
         $key = $this->getCacheKey($template, $theme);

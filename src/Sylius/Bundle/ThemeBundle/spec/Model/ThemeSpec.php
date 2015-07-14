@@ -4,7 +4,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @mixin Theme

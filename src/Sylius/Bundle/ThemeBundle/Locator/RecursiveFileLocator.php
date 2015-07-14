@@ -1,6 +1,7 @@
 <?php
 
 namespace Sylius\Bundle\ThemeBundle\Locator;
+
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -58,14 +59,12 @@ class RecursiveFileLocator implements FileLocatorInterface
         ;
 
         /** @var SplFileInfo $file */
-        if (true === $first) {
-            if (null !== $file = $finder->getIterator()->current()) {
-                return $file->getPathname();
-            }
-        } else {
-            foreach ($finder as $file) {
-                $filepaths[] = $file->getPathname();
-            }
+        if ($first && null !== $file = $finder->getIterator()->current()) {
+            return $file->getPathname();
+        }
+
+        foreach ($finder as $file) {
+            $filepaths[] = $file->getPathname();
         }
 
         if (!$filepaths) {
@@ -76,20 +75,18 @@ class RecursiveFileLocator implements FileLocatorInterface
     }
 
     /**
-     * Returns whether the file path is an absolute path.
+     * @param string $path
      *
-     * @param string $file A file path
-     *
-     * @return bool
+     * @return boolean
      */
-    private function isAbsolutePath($file)
+    private function isAbsolutePath($path)
     {
-        if ($file[0] === '/' || $file[0] === '\\'
-            || (strlen($file) > 3 && ctype_alpha($file[0])
-                && $file[1] === ':'
-                && ($file[2] === '\\' || $file[2] === '/')
+        if ($path[0] === '/' || $path[0] === '\\'
+            || (strlen($path) > 3 && ctype_alpha($path[0])
+                && $path[1] === ':'
+                && ($path[2] === '\\' || $path[2] === '/')
             )
-            || null !== parse_url($file, PHP_URL_SCHEME)
+            || null !== parse_url($path, PHP_URL_SCHEME)
         ) {
             return true;
         }

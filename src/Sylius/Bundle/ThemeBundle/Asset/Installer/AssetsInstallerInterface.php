@@ -2,7 +2,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
-use Sylius\Bundle\ThemeBundle\Command\Model\SymlinkMask;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**

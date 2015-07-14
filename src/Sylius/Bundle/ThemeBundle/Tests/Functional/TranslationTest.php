@@ -7,9 +7,6 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
  */
 class TranslationTest extends ThemeBundleTestCase
 {
-    /**
-     * @param string $contents
-     */
     public function testTranslations()
     {
         $client = $this->getClient();

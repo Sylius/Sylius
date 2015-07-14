@@ -22,12 +22,19 @@ class RequestListener
      */
     private $themeContext;
 
+    /**
+     * @param ThemeRepositoryInterface $themeRepository
+     * @param ThemeContextInterface $themeContext
+     */
     public function __construct(ThemeRepositoryInterface $themeRepository, ThemeContextInterface $themeContext)
     {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
     }
 
+    /**
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {

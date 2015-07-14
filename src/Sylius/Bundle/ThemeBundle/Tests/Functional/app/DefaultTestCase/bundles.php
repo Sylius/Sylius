@@ -1,14 +1,10 @@
 <?php
 
-use Sylius\Bundle\ThemeBundle\SyliusThemeBundle;
-use Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle\TestBundle;
-
-return array(
+return [
     new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
     new Symfony\Bundle\TwigBundle\TwigBundle(),
-    new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
-    new TestBundle(),
+    new Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle\TestBundle(),
 
-    new SyliusThemeBundle(),
-);
+    new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+];

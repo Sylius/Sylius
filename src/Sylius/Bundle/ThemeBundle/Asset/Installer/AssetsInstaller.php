@@ -3,10 +3,8 @@
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
-use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolver;
 use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -211,19 +209,11 @@ class AssetsInstaller implements AssetsInstallerInterface
     protected function doInstallAsset($origin, $target, $symlink)
     {
         if ($symlink) {
-            $this->filesystem->symlink($origin, $target);
-
-            if (!file_exists($target)) {
-                throw new IOException('Symbolic link is broken');
-            }
-        } else {
-            if (is_dir($origin)) {
-                $this->filesystem->mkdir($target, 0777);
-                $this->filesystem->mirror($origin, $target, Finder::create()->ignoreDotFiles(false)->in($origin));
-            } else {
-                $this->filesystem->copy($origin, $target);
-            }
+            $this->doSymlinkAsset($origin, $target);
+            return;
         }
+
+        $this->doCopyAsset($origin, $target);
     }
 
     /**
@@ -249,5 +239,34 @@ class AssetsInstaller implements AssetsInstallerInterface
         }
 
         return $sources;
+    }
+
+    /**
+     * @param $origin
+     * @param $target
+     */
+    private function doSymlinkAsset($origin, $target)
+    {
+        $this->filesystem->symlink($origin, $target);
+
+        if (!file_exists($target)) {
+            throw new IOException('Symbolic link is broken');
+        }
+    }
+
+    /**
+     * @param $origin
+     * @param $target
+     */
+    private function doCopyAsset($origin, $target)
+    {
+        if (is_dir($origin)) {
+            $this->filesystem->mkdir($target, 0777);
+            $this->filesystem->mirror($origin, $target, Finder::create()->ignoreDotFiles(false)->in($origin));
+
+            return;
+        }
+
+        $this->filesystem->copy($origin, $target);
     }
 }

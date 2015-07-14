@@ -12,6 +12,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ThemeCompilerPass implements CompilerPassInterface
 {
     /**
+     * Adds serialized themes to theme repository.
+     *
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)

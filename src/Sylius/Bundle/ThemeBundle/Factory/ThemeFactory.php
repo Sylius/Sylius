@@ -4,7 +4,6 @@ namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -61,11 +60,7 @@ class ThemeFactory implements ThemeFactoryInterface
         {
             $attributeKey = $this->normalizeAttributeKey($attributeKey);
 
-            try {
-                $this->propertyAccessor->setValue($theme, $attributeKey, $attributeValue);
-            } catch (NoSuchPropertyException $exception) {
-                // Ignore properties that does not exist in given theme model.
-            }
+            $this->propertyAccessor->setValue($theme, $attributeKey, $attributeValue);
         }
 
         return $theme;

@@ -29,11 +29,7 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
     public function installAssets($targetDir, $symlinkMask)
     {
         if ($this->hasOutput()) {
-            if (AssetsInstallerInterface::HARD_COPY !== $symlinkMask) {
-                $this->output->writeln('Trying to install assets as <comment>symbolic links</comment>.');
-            } else {
-                $this->output->writeln('Installing assets as <comment>hard copies</comment>.');
-            }
+            $this->output->writeln($this->provideExpectationComment($symlinkMask));
         }
 
         return parent::installAssets($targetDir, $symlinkMask);
@@ -99,5 +95,19 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
         }
 
         return 'Something gone bad, can\'t provide the result of assets installing!';
+    }
+
+    /**
+     * @param integer $symlinkMask
+     *
+     * @return string
+     */
+    private function provideExpectationComment($symlinkMask)
+    {
+        if (AssetsInstallerInterface::HARD_COPY === $symlinkMask) {
+            return 'Installing assets as <comment>hard copies</comment>.';
+        }
+
+        return 'Trying to install assets as <comment>symbolic links</comment>.';
     }
 }
