@@ -109,11 +109,14 @@ class ResourceController extends FOSRestController
     {
         $this->isGrantedOr403('show');
 
+        $resource = $this->findOr404($request);
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
             ->setTemplateVar($this->config->getResourceName())
-            ->setData($this->findOr404($request))
+            ->setData($resource)
+            ->setTemplateData($this->getTemplateData($resource, 'show'))
         ;
 
         return $this->handleView($view);
@@ -164,6 +167,7 @@ class ResourceController extends FOSRestController
             ->setTemplate($this->config->getTemplate('index.html'))
             ->setTemplateVar($this->config->getPluralResourceName())
             ->setData($resources)
+            ->setTemplateData($this->getTemplateData($resources, 'index'))
         ;
 
         return $this->handleView($view);
@@ -210,6 +214,7 @@ class ResourceController extends FOSRestController
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
             ))
+            ->setTemplateData($this->getTemplateData($resource, 'create'))
         ;
 
         return $this->handleView($view);
@@ -256,6 +261,7 @@ class ResourceController extends FOSRestController
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
             ))
+            ->setTemplateData($this->getTemplateData($resource, 'update'))
         ;
 
         return $this->handleView($view);
@@ -507,5 +513,10 @@ class ResourceController extends FOSRestController
                 throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
             }
         }
+    }
+
+    protected function getTemplateData($resource, $action = 'show')
+    {
+        return array();
     }
 }
