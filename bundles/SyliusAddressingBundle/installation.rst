@@ -39,6 +39,7 @@ Don't worry, everything was automatically installed via Composer.
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
+            new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
@@ -61,7 +62,15 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_addressing:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
-And configure doctrine extensions which are used in assortment bundle:
+You should also configure *SyliusTranslationBundle*, as *SyliusAddressingBundle* is dependant on it:
+
+.. code-block:: yaml
+
+    sylius_translation:
+        driver: doctrine/orm
+        default_locale: en
+
+As well as doctrine extensions which are used in assortment bundle:
 
 .. code-block:: yaml
 
