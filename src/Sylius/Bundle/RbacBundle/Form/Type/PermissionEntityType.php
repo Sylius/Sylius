@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 /**
  * RBAC Permission choice form type.
  *
@@ -24,7 +25,7 @@ class PermissionEntityType extends ResourceChoiceType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'query_builder' => function (EntityRepository $repository) {

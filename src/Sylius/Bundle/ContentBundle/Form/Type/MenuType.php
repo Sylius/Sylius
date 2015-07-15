@@ -89,7 +89,7 @@ class MenuType extends AbstractResourceType
             'cascade_validation' => true,
         ));
 
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
     }
 
     /**

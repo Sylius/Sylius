@@ -22,6 +22,12 @@ Version
 Use Symfony 2.7
 
 
+Compatibility
+-------------
+
+With Symfony 3.0
+
+
 Launch in your browser
 -------------
 

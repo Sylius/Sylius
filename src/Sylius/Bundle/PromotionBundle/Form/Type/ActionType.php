@@ -48,7 +48,7 @@ class ActionType extends AbstractConfigurationType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,

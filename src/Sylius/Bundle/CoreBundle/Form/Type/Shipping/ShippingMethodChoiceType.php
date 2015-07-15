@@ -29,7 +29,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $methodsResolver = $this->resolver;
         $repository = $this->repository;

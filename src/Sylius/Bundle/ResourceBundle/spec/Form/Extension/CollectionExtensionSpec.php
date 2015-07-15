@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Sylius currency choices type.
@@ -38,7 +38,7 @@ class CurrencyCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choices = null;
 

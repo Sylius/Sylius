@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>

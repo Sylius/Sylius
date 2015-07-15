@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResourceChoiceTypeSpec extends ObjectBehavior
 {

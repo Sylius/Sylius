@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
@@ -22,7 +22,7 @@ use Sylius\Component\Order\Model\OrderInterface;
  */
 class OrderStateChoiceType extends AbstractType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'choices' => array(

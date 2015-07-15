@@ -15,7 +15,7 @@ use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Variant match form type.
@@ -60,7 +60,7 @@ class VariantMatchType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setRequired(array(

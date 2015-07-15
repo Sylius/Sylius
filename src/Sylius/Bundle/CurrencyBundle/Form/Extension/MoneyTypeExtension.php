@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Extension;
 
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Sylius money form extension.
@@ -42,7 +42,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

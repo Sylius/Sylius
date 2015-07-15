@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 /**
  * Payment method choice type for document/entity/phpcr_document choice form types.
  *
@@ -61,7 +62,7 @@ class PaymentMethodChoiceType extends ResourceChoiceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $queryBuilder = function (Options $options) {
             $repositoryOptions = array(

@@ -48,7 +48,7 @@ class OrderItemType extends BaseOrderItemType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'variant_data_class' => 'Sylius\Component\Core\Model\ProductVariant',

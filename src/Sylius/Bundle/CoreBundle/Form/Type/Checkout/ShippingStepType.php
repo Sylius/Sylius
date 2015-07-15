@@ -16,6 +16,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 /**
  * Checkout shipping step form type.
  *
@@ -57,7 +58,7 @@ class ShippingStepType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver
             ->setOptional(array(

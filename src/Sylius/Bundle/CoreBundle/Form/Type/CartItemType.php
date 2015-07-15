@@ -51,7 +51,7 @@ class CartItemType extends BaseCartItemType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver
             ->setOptional(array(

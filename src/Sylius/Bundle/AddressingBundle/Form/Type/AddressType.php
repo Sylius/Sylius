@@ -85,7 +85,7 @@ class AddressType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $validationGroups = $this->validationGroups;
 

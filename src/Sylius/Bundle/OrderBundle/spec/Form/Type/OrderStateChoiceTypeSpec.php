@@ -4,7 +4,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OrderStateChoiceTypeSpec extends ObjectBehavior
 {

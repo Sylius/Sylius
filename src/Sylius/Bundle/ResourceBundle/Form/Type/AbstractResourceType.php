@@ -12,7 +12,10 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -40,9 +43,20 @@ abstract class AbstractResourceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,
