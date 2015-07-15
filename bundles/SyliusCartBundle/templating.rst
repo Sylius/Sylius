@@ -20,6 +20,7 @@ adding items to cart. In this simple example we allow to provide the quantity of
 
     <form action="{{ path('sylius_cart_item_add', {'productId': product.id}) }}" method="post">
         {{ form_row(form.quantity)}}
+        {{ form_widget(form._token) }}
         <input type="submit" value="Add to cart">
     </form>
 
