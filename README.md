@@ -16,6 +16,19 @@ Sylius is constructed from fully decoupled components (bundles in Symfony2 gloss
 
 We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
 
+Version
+-------------
+
+Use Symfony 2.7
+
+
+Launch in your browser
+-------------
+
+```bash
+php app/console server:start
+```
+
 Documentation
 -------------
 
@@ -102,3 +115,10 @@ Authors
 
 Sylius was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
 See the list of [contributors](https://github.com/Sylius/Sylius/contributors).
+
+Sylius in this branch is contibuted by Boyer Julien
+
+PHPcs-Fixer
+-------------
+
+Use this tool to fix most issues in this code to follow the PHP coding standards as defined in the PSR-1 and PSR-2 documents.

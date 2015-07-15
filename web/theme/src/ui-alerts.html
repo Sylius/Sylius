@@ -1,0 +1,1108 @@
+
+<!DOCTYPE html>
+<!--
+
+TABLE OF CONTENTS.
+
+Use search to find needed section.
+
+===================================================================
+
+|  1. $BODY                        |  Body                        |
+|  2. $MAIN_NAVIGATION             |  Main navigation             |
+|  3. $NAVBAR_ICON_BUTTONS         |  Navbar Icon Buttons         |
+|  4. $MAIN_MENU                   |  Main menu                   |
+|  5. $ALERTS                      |  Alerts                      |
+|  6. $DARK_ALERTS                 |  Dark alerts                 |
+|  7. $PAGE_ALERTS                 |  Page alerts                 |
+|  8. $PAGE_DARK_ALERTS            |  Page dark alerts            |
+|  9. $JQUERY_GROWL_NOTIFICATIONS  |  jQuery Growl notifications  |
+|  10. $TOOLTIPS                   |  Tooltips                    |
+|  11. $COLORFUL_TOOLTIPS          |  Colorful tooltips           |
+|  12. $POPOVERS                   |  Popovers                    |
+|  13. $COLORFUL_POPOVERS          |  Colorful popovers           |
+
+===================================================================
+
+-->
+
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Alerts &amp; Tooltips - UI Elements - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+	<style>
+		.buttons-with-margins .btn {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+	
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'      - Sets text direction to right-to-left
+	* 'main-menu-right'    - Places the main menu on the right side
+	* 'no-main-menu'       - Hides the main menu
+	* 'main-navbar-fixed'  - Fixes the main navigation
+	* 'main-menu-fixed'    - Fixes the main menu
+	* 'main-menu-animated' - Animate main menu
+-->
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];</script>
+<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<div id="main-wrapper">
+
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+	Main navigation
+-->
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+			<!-- Main navbar header -->
+			<div class="navbar-header">
+
+				<!-- Logo -->
+				<a href="index.html" class="navbar-brand">
+					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+					PixelAdmin
+				</a>
+
+				<!-- Main navbar toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+			</div> <!-- / .navbar-header -->
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First item</a></li>
+								<li><a href="#">Second item</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Third item</a></li>
+							</ul>
+						</li>
+					</ul> <!-- / .navbar-nav -->
+
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+							Navbar Icon Buttons
+
+							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+							Classes:
+							* 'nav-icon-btn-info'
+							* 'nav-icon-btn-success'
+							* 'nav-icon-btn-warning'
+							* 'nav-icon-btn-danger' 
+-->
+							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">5</span>
+									<i class="nav-icon fa fa-bullhorn"></i>
+									<span class="small-screen-text">Notifications</span>
+								</a>
+
+								<!-- NOTIFICATIONS -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-notifications').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+									<div class="notifications-list" id="main-navbar-notifications">
+
+										<div class="notification">
+											<div class="notification-title text-danger">SYSTEM</div>
+											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-info">STORE</div>
+											<div class="notification-description">You have <strong>9</strong> new orders.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-truck bg-info"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-default">CRON DAEMON</div>
+											<div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-clock-o bg-default"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-success">SYSTEM</div>
+											<div class="notification-description">Server <strong>up</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-success"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-warning">SYSTEM</div>
+											<div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-warning"></div>
+										</div> <!-- / .notification -->
+
+									</div> <!-- / .notifications-list -->
+									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+							<li class="nav-icon-btn nav-icon-btn-success dropdown">
+								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">10</span>
+									<i class="nav-icon fa fa-envelope"></i>
+									<span class="small-screen-text">Income messages</span>
+								</a>
+
+								<!-- MESSAGES -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-messages').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+									<div class="messages-list" id="main-navbar-messages">
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+									</div> <!-- / .messages-list -->
+									<a href="#" class="messages-link">MORE MESSAGES</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="Search">
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/demo/avatars/1.jpg">
+									<span>John Doe</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
+									<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+									<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+								</ul>
+							</li>
+						</ul> <!-- / .navbar-nav -->
+					</div> <!-- / .right -->
+				</div>
+			</div> <!-- / #main-navbar-collapse -->
+		</div> <!-- / .navbar-inner -->
+	</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+<!-- 4. $MAIN_MENU =================================================================================
+
+		Main menu
+		
+		Notes:
+		* to make the menu item active, add a class 'active' to the <li>
+		  example: <li class="active">...</li>
+		* multilevel submenu example:
+			<li class="mm-dropdown">
+			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+			  <ul>
+				<li>...</li>
+				<li class="mm-dropdown">
+				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+				  <ul>
+					<li>...</li>
+					...
+				  </ul>
+				</li>
+				...
+			  </ul>
+			</li>
+-->
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">
+			<div class="menu-content top" id="menu-content-demo">
+				<!-- Menu custom content demo
+					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+					 Javascript: html/assets/demo/demo.js
+				 -->
+				<div>
+					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+
+					<img src="assets/demo/avatars/1.jpg" alt="" class="">
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+					</div>
+					<a href="#" class="close">&times;</a>
+				</div>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">Layouts</span><span class="label label-warning">Updated</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="layouts-grid.html"><span class="mm-text">Grid</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="layouts-main-menu.html"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">Main menu</span><span class="label label-warning">Updated</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="stat-panels.html"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Stat panels</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="menu-icon fa fa-flask"></i><span class="mm-text">Widgets</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text">Form components</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text">Tables</span></a>
+				</li>
+				<li>
+					<a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text">Charts</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text">Pages</span><span class="label label-success">16</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text">Complete UI</span></a>
+				</li>
+				<li>
+					<a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text">Color Builder</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-sitemap"></i><span class="mm-text">Menu levels</span><span class="badge badge-primary">6</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span><span class="label label-info">21</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+								</li>
+								<li class="mm-dropdown">
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+									<ul>
+										<li class="mm-dropdown">
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+											<ul>
+												<li>
+													<a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul> <!-- / .navigation -->
+			<div class="menu-content">
+				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+			</div>
+		</div> <!-- / #main-menu-inner -->
+	</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
+
+
+	<div id="content-wrapper">
+
+		<div class="page-header">
+			<h1><span class="text-light-gray">UI Elements / </span>Alerts &amp; Tooltips</h1>
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-sm-6">
+				
+<!-- 5. $ALERTS ====================================================================================
+
+				Alerts
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Alerts</span>
+					</div>
+					<div class="panel-body">
+						<div class="alert">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Warning!</strong> Best check yo self, you're not looking too good.
+						</div>
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Oh snap!</strong> Change a few things up and try submitting again.
+						</div>
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Well done!</strong> You successfully read this important alert message.
+						</div>
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+						</div>
+					</div>
+				</div>
+<!-- /5. $ALERTS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 6. $DARK_ALERTS ===============================================================================
+
+				Dark alerts
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Dark alerts</span>
+					</div>
+					<div class="panel-body">
+						<div class="alert alert-dark">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Warning!</strong> Best check yo self, you're not looking too good.
+						</div>
+						<div class="alert alert-danger alert-dark">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Oh snap!</strong> Change a few things up and try submitting again.
+						</div>
+						<div class="alert alert-success alert-dark">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Well done!</strong> You successfully read this important alert message.
+						</div>
+						<div class="alert alert-info alert-dark">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+						</div>
+					</div>
+				</div>
+<!-- /6. $DARK_ALERTS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+
+<!-- 7. $PAGE_ALERTS ===============================================================================
+
+				Page alerts
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#page-alerts-demo').on('click', 'button', function () {
+							var $this = $(this);
+							// Go to the top
+							$('html,body').animate({ scrollTop: 0 }, 500);
+							// Wait while page is scrolling
+							setTimeout(function () {
+								if ($this.hasClass('page-alerts-clear-btn')) {
+									PixelAdmin.plugins.alerts.clear(
+										true, // animate
+										'pa_page_alerts_default' // namespace
+									);
+								} else {
+									var options = {
+										type: $this.attr('data-type'),
+										namespace: 'pa_page_alerts_default'
+									};
+									if ($this.hasClass('auto-close-alert'))
+										options['auto_close'] = 3; // seconds
+									PixelAdmin.plugins.alerts.add($this.attr('data-text'), options);
+								}
+							}, 800);
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Page alerts</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="page-alerts-demo">
+						<button data-type="warning" data-text="<strong>Warning!</strong> Best check yo self, you're not looking too good." class="btn btn-small btn-warning">Add warning</button>&nbsp;&nbsp;
+						<button data-type="danger" data-text="<strong>Oh snap!</strong> Change a few things up and try submitting again." class="btn btn-small btn-danger">Add error</button>&nbsp;&nbsp;
+						<button data-type="success" data-text="<strong>Well done!</strong> You successfully read this important alert message." class="btn btn-small btn-success">Add success</button>&nbsp;&nbsp;
+						<button data-type="info" data-text="<strong>Heads up!</strong> This alert needs your attention, but it's not super important." class="btn btn-small btn-info">Add info</button>&nbsp;&nbsp;
+						<button data-type="warning" data-text="<strong>Warning!</strong> Best check yo self, you're not looking too good." class="btn btn-small btn-primary auto-close-alert">Auto closing alert</button>&nbsp;&nbsp;
+						<button class="btn btn-small page-alerts-clear-btn">Clear alerts</button>
+					</div>
+				</div>
+<!-- /7. $PAGE_ALERTS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 8. $PAGE_DARK_ALERTS ==========================================================================
+
+				Page dark alerts
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#page-alerts-dark-demo').on('click', 'button', function () {
+							var $this = $(this);
+							// Go to the top
+							$('html,body').animate({ scrollTop: 0 }, 500);
+							// Wait while page is scrolling
+							setTimeout(function () {
+								if ($this.hasClass('page-alerts-clear-btn')) {
+									PixelAdmin.plugins.alerts.clear(
+										true, // animate
+										'pa_page_alerts_dark' // namespace
+									);
+								} else {
+									var options = {
+										type: $this.attr('data-type'),
+										namespace: 'pa_page_alerts_dark',
+										classes: 'alert-dark' // add custom classes
+									};
+									if ($this.hasClass('auto-close-alert'))
+										options['auto_close'] = 3; // seconds
+									PixelAdmin.plugins.alerts.add($this.attr('data-text'), options);
+								}
+							}, 800);
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Page dark alerts</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="page-alerts-dark-demo">
+						<button data-type="warning" data-text="<strong>Warning!</strong> Best check yo self, you're not looking too good." class="btn btn-small btn-warning">Add warning</button>&nbsp;&nbsp;
+						<button data-type="danger"  data-text="<strong>Oh snap!</strong> Change a few things up and try submitting again." class="btn btn-small btn-danger">Add error</button>&nbsp;&nbsp;
+						<button data-type="success" data-text="<strong>Well done!</strong> You successfully read this important alert message." class="btn btn-small btn-success">Add success</button>&nbsp;&nbsp;
+						<button data-type="info"    data-text="<strong>Heads up!</strong> This alert needs your attention, but it's not super important." class="btn btn-small btn-info">Add info</button>&nbsp;&nbsp;
+						<button data-type="warning" data-text="<strong>Warning!</strong> Best check yo self, you're not looking too good." class="btn btn-small btn-primary auto-close-alert">Auto closing alert</button>&nbsp;&nbsp;
+						<button class="btn btn-small page-alerts-clear-btn">Clear alerts</button>
+					</div>
+				</div>
+<!-- /8. $PAGE_DARK_ALERTS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+
+<!-- 9. $JQUERY_GROWL_NOTIFICATIONS ================================================================
+
+				jQuery Growl notifications
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#jq-growl-default').click(function () {
+							$.growl({ title: "Growl", message: "The kitten is awake!" });
+						});
+						$('#jq-growl-error').click(function () {
+							$.growl.error({ message: "The kitten is attacking!" });
+						});
+						$('#jq-growl-notice').click(function () {
+							$.growl.notice({ message: "The kitten is cute!" });
+						});
+						$('#jq-growl-warning').click(function () {
+							$.growl.warning({ message: "The kitten is ugly!" });
+						});
+						$('#jq-growl-small').click(function () {
+							$.growl({ title: "Growl", message: "The kitten is awake!", size: 'small' });
+						});
+						$('#jq-growl-large').click(function () {
+							$.growl({ title: "Growl", message: "The kitten is awake!", size: 'large' });
+						});
+						$('#jq-growl-static').click(function () {
+							$.growl({ title: "Growl", message: "The kitten is awake!", duration: 9999*9999 });
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Growl notifications</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button id="jq-growl-default" class="btn">Default</button>&nbsp;&nbsp;&nbsp;
+						<button id="jq-growl-error" class="btn btn-danger">Error</button>&nbsp;&nbsp;&nbsp;
+						<button id="jq-growl-notice" class="btn btn-success">Notice</button>&nbsp;&nbsp;&nbsp;
+						<button id="jq-growl-warning" class="btn btn-warning">Warning</button>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+
+						<button id="jq-growl-small" class="btn">Small</button>&nbsp;&nbsp;&nbsp;
+						<button id="jq-growl-large" class="btn">Large</button>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+
+						<button id="jq-growl-static" class="btn">Static</button>&nbsp;&nbsp;&nbsp;
+					</div>
+				</div>
+<!-- /9. $PAGE_DARK_ALERTS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				
+<!-- 10. $TOOLTIPS =================================================================================
+
+				Tooltips
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#tooltips-demo button').tooltip();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Tooltips</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="tooltips-demo">
+
+						<!-- On the left -->
+						<button type="button" class="btn" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Tooltip on left</button>&nbsp;&nbsp;
+
+						<!-- On the top -->
+						<button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">Tooltip on top</button>&nbsp;&nbsp;
+
+						<!-- On the bottom -->
+						<button type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Tooltip on bottom</button>&nbsp;&nbsp;
+
+						<!-- On the right -->
+						<button type="button" class="btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Tooltip on right</button>
+
+					</div>
+				</div>
+<!-- /10. $TOOLTIPS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 11. $COLORFUL_TOOLTIPS ========================================================================
+
+				Colorful tooltips
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#c-tooltips-demo button').tooltip();
+					});
+				</script>
+				<!-- Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Colorful tooltips</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="c-tooltips-demo">
+
+						<!-- Success -->
+						<button type="button" class="btn btn-success tooltip-success" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Success Tooltip</button>&nbsp;&nbsp;
+
+						<!-- Danger -->
+						<button type="button" class="btn btn-danger tooltip-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">Danger Tooltip</button>&nbsp;&nbsp;
+
+						<!-- Warning -->
+						<button type="button" class="btn btn-warning tooltip-warning" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Warning Tooltip</button>&nbsp;&nbsp;
+
+						<!-- Info -->
+						<button type="button" class="btn btn-info tooltip-info" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Info Tooltip</button>
+
+					</div>
+				</div>
+<!-- /11. $COLORFUL_TOOLTIPS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				
+<!-- 12. $POPOVERS =================================================================================
+
+				Popovers
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#popovers-demo button').popover();
+					});
+				</script>
+				<!-- Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Popovers</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="popovers-demo">
+
+						<!-- On the right -->
+						<button type="button" class="btn" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title" data-original-title="" title="">
+							Popover on right
+						</button>&nbsp;&nbsp;
+
+						<!-- On the top -->
+						<button type="button" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title" data-original-title="" title="">
+							Popover on top
+						</button>&nbsp;&nbsp;
+
+						<!-- On the bottom -->
+						<button type="button" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+						sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title" data-original-title="" title="">
+							Popover on bottom
+						</button>&nbsp;&nbsp;
+
+						<!-- On the left -->
+						<button type="button" class="btn" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title" data-original-title="" title="">
+							Popover on left
+						</button>&nbsp;&nbsp;
+
+						<!-- Without title -->
+						<button type="button" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="">
+							Without title
+						</button>
+
+					</div>
+				</div>
+<!-- /12. $POPOVERS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 13. $COLORFUL_POPOVERS ========================================================================
+
+				Colorful popovers
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#s-popovers-demo button').popover();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Colorful popovers</span>
+					</div>
+					<div class="panel-body buttons-with-margins" id="s-popovers-demo">
+
+						<!-- Light popovers -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Success -->
+								<button type="button" class="btn btn-success popover-success" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Success default" data-original-title="" title="">
+									Success
+								</button>&nbsp;&nbsp;
+
+								<!-- Danger -->
+								<button type="button" class="btn btn-danger popover-danger" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Danger default" data-original-title="" title="">
+									Danger
+								</button>&nbsp;&nbsp;
+
+								<!-- Warning -->
+								<button type="button" class="btn btn-warning popover-warning" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+								sagittis lacus vel augue laoreet rutrum faucibus." data-title="Warning default" data-original-title="" title="">
+									Warning
+								</button>&nbsp;&nbsp;
+
+								<!-- Info -->
+								<button type="button" class="btn btn-info popover-info" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Info default" data-original-title="" title="">
+									Info
+								</button>
+							</div>
+						</div>
+						<!-- / Light popovers -->
+
+						<!-- Dark popovers -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Success -->
+								<button type="button" class="btn btn-success popover-success popover-dark" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Success dark" data-original-title="" title="">
+									Success dark
+								</button>&nbsp;&nbsp;
+
+								<!-- Danger -->
+								<button type="button" class="btn btn-danger popover-danger popover-dark" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Danger dark" data-original-title="" title="">
+									Danger dark
+								</button>&nbsp;&nbsp;
+
+								<!-- Warning -->
+								<button type="button" class="btn btn-warning popover-warning popover-dark" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+								sagittis lacus vel augue laoreet rutrum faucibus." data-title="Warning dark" data-original-title="" title="">
+									Warning dark
+								</button>&nbsp;&nbsp;
+
+								<!-- Info -->
+								<button type="button" class="btn btn-info popover-info popover-dark" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Info dark" data-original-title="" title="">
+									Info dark
+								</button>
+							</div>
+						</div>
+						<!-- / Dark popovers -->
+
+						<!-- Light colorful popovers -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Success -->
+								<button type="button" class="btn btn-success popover-success popover-colorful" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Success default - Colorful" data-original-title="" title="">
+									Success - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Danger -->
+								<button type="button" class="btn btn-danger popover-danger popover-colorful" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Danger default - Colorful" data-original-title="" title="">
+									Danger - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Warning -->
+								<button type="button" class="btn btn-warning popover-warning popover-colorful" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+								sagittis lacus vel augue laoreet rutrum faucibus." data-title="Warning default - Colorful" data-original-title="" title="">
+									Warning - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Info -->
+								<button type="button" class="btn btn-info popover-info popover-colorful" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Info default - Colorful" data-original-title="" title="">
+									Info - Colorful
+								</button>
+							</div>
+						</div>
+						<!-- / Light colorful popovers -->
+
+						<!-- Dark colorful popovers -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Success -->
+								<button type="button" class="btn btn-success popover-success popover-dark popover-colorful" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Success dark - Colorful" data-original-title="" title="">
+									Success dark - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Danger -->
+								<button type="button" class="btn btn-danger popover-danger popover-dark popover-colorful" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Danger dark - Colorful" data-original-title="" title="">
+									Danger dark - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Warning -->
+								<button type="button" class="btn btn-warning popover-warning popover-dark popover-colorful" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+								sagittis lacus vel augue laoreet rutrum faucibus." data-title="Warning dark - Colorful" data-original-title="" title="">
+									Warning dark - Colorful
+								</button>&nbsp;&nbsp;
+
+								<!-- Info -->
+								<button type="button" class="btn btn-info popover-info popover-dark popover-colorful" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Info dark - Colorful" data-original-title="" title="">
+									Info dark - Colorful
+								</button>
+							</div>
+						</div>
+						<!-- / Dark colorful popovers -->
+
+					</div>
+				</div>
+<!-- /13. $COLORFUL_POPOVERS -->
+
+			</div>
+		</div>
+	</div> <!-- / #content-wrapper -->
+	<div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+
+<!-- Get jQuery from Google CDN -->
+<!--[if !IE]> -->
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+<![endif]-->
+
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.min.js"></script>
+<script src="assets/javascripts/pixel-admin.min.js"></script>
+
+<script type="text/javascript">
+	init.push(function () {
+		// Javascript code here
+	})
+	window.PixelAdmin.start(init);
+</script>
+
+</body>
+</html>

@@ -2,546 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c9e8d23-84b7-4a78-90b1-888b3071ec42" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Renderer/Adapter/AbstractAdapter.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Renderer/Adapter/AbstractAdapter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Adapter/AbstractAdapter.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Adapter/AbstractAdapter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/AbstractGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/AbstractGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/Importer/AbstractImporter.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/Importer/AbstractImporter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Translation/Model/AbstractTranslatable.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Translation/Model/AbstractTranslatable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Translation/spec/Model/AbstractTranslatableSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Translation/spec/Model/AbstractTranslatableSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Translation/Model/AbstractTranslation.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Translation/Model/AbstractTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Translation/spec/Model/AbstractTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Translation/spec/Model/AbstractTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Action.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Action.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/ActionInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/ActionInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/ActionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/ActionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Adapter/AdapterInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Adapter/AdapterInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/AddProductAction.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/AddProductAction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/AddProductActionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/AddProductActionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/AddressSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/AddressSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/AddressTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/AddressTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/AdjustableInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/AdjustableInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Adjustment.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Adjustment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/AdjustmentInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/AdjustmentInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/AdjustmentSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/AdjustmentSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Builder/ArchetypeBuilderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Builder/ArchetypeBuilderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Builder/ArchetypeBuilderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Builder/ArchetypeBuilderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Model/ArchetypeInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Model/ArchetypeInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Model/ArchetypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Model/ArchetypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ArchetypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ArchetypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Model/ArchetypeTranslation.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/Model/ArchetypeTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Model/ArchetypeTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Archetype/spec/Model/ArchetypeTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ArchetypeTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ArchetypeTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/EventListener/ArchetypeUpdateListener.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/EventListener/ArchetypeUpdateListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/EventListener/ArchetypeUpdateListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/EventListener/ArchetypeUpdateListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/AttributeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/AttributeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeTranslationInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeTranslationInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/Model/AttributeTranslationInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/Model/AttributeTranslationInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/Form/Type/AttributeTranslationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/Form/Type/AttributeTranslationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTranslationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeTypes.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeTypes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeValue.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/Model/AttributeValue.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeValueSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Attribute/spec/Model/AttributeValueSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/AttributeValueSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/AttributeValueSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeValueTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeValueTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Authentication/AuthenticationUtils.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Authentication/AuthenticationUtils.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/AuthorizationChecker.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/AuthorizationChecker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/AuthorizationCheckerInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/AuthorizationCheckerInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/AuthorizationCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/AuthorizationCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Checker/AvailabilityCheckerInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Checker/AvailabilityCheckerInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Checker/AvailabilityCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Checker/AvailabilityCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/BackordersHandler.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/BackordersHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/BackordersHandlerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/BackordersHandlerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/EventListener/BuildAddressFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/EventListener/BuildAddressFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/EventListener/BuildAddressFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/EventListener/BuildAddressFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/Form/EventListener/BuildAttributeFormChoicesListener.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/Form/EventListener/BuildAttributeFormChoicesListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/EventListener/BuildAttributeFormChoicesListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/EventListener/BuildAttributeFormChoicesListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/EventListener/BuildAttributeValueFormListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/EventListener/BuildAttributeValueFormListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/EventListener/BuildPriceableFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/EventListener/BuildPriceableFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/EventListener/BuildPriceableFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/EventListener/BuildPriceableFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/EventListener/BuildReportDataFetcherFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/EventListener/BuildReportDataFetcherFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/EventListener/BuildReportDataFetcherFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/EventListener/BuildReportDataFetcherFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/EventListener/BuildReportRendererFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/EventListener/BuildReportRendererFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/EventListener/BuildReportRendererFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/EventListener/BuildReportRendererFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/EventListener/BuildRuleFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/EventListener/BuildRuleFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/EventListener/BuildRuleFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/EventListener/BuildRuleFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/EventListener/BuildShippingMethodFormSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/EventListener/BuildShippingMethodFormSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/EventListener/BuildShippingMethodFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/EventListener/BuildShippingMethodFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/EventListener/BuildVariantFormSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/EventListener/BuildVariantFormSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/CachedPermissionMap.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/CachedPermissionMap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/CachedPermissionMapSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/CachedPermissionMapSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/CalculatorChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/CalculatorChoiceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/CalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/CalculatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/CalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/CalculatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/Calculators.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/Calculators.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Canonicalizer/CanonicalizerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Canonicalizer/CanonicalizerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/Event/CartEvent.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/Event/CartEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Model/CartItemSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Model/CartItemSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/Provider/CartProviderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/Provider/CartProviderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/Repository/CartRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/Repository/CartRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Model/CartSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Model/CartSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Sylius/Component/Variation/SetBuilder/CartesianSetBuilderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Sylius/Component/Variation/SetBuilder/CartesianSetBuilderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Channel/Model/Channel.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Channel/Model/Channel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Currency/ChannelAwareCurrencyProvider.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Currency/ChannelAwareCurrencyProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Pricing/ChannelBasedCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Pricing/ChannelBasedCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Channel/Repository/ChannelRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Channel/Repository/ChannelRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Channel/ChannelResolver.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Channel/ChannelResolver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Channel/spec/Sylius/Component/Channel/Model/ChannelSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Channel/spec/Sylius/Component/Channel/Model/ChannelSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Channel/Model/ChannelsAwareInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Channel/Model/ChannelsAwareInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/ChartConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/ChartConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Renderer/ChartRenderer.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Renderer/ChartRenderer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Renderer/ChartRendererSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Renderer/ChartRendererSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/CommentSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/CommentSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/DependencyInjection/Configuration.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/DependencyInjection/Configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Behat/ContactContext.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Behat/ContactContext.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/CountrySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/CountrySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/CountryTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/CountryTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/CountryTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/CountryTranslationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/CountryType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/CountryType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/CountryTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/CountryTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Coupon.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Coupon.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Coupon.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Coupon.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Generator/CouponGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Generator/CouponGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Generator/CouponGeneratorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Generator/CouponGeneratorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/CouponInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/CouponInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/CouponSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/CouponSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/CouponSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/CouponSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/CreditCard.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/CreditCard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/CreditCardInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/CreditCardInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/CreditCardSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/CreditCardSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/Model/CurrenciesAwareInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/Model/CurrenciesAwareInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/Model/Currency.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/Model/Currency.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Context/CurrencyContextSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Context/CurrencyContextSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/Converter/CurrencyConverterInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/Converter/CurrencyConverterInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Converter/CurrencyConverterSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Converter/CurrencyConverterSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Provider/CurrencyProviderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Provider/CurrencyProviderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Model/CurrencySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Currency/spec/Model/CurrencySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Customer.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Customer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/Customer.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/Customer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Checker/CustomerGroupRuleChecker.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Checker/CustomerGroupRuleChecker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/CustomerInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/CustomerInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/CustomerLoyaltyRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/CustomerLoyaltyRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/CustomerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/CustomerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/CustomerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/CustomerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/Data.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/Data.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DataFetcherInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DataFetcherInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Calculator/DefaultCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Calculator/DefaultCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/DefaultCalculators.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/DefaultCalculators.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DefaultDataFetchers.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DefaultDataFetchers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/DefaultFeeCalculators.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/DefaultFeeCalculators.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DefaultRenderers.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DefaultRenderers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/DelegatingCalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Calculator/DelegatingCalculatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/DelegatingCalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/DelegatingCalculatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/DelegatingCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/DelegatingCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Calculator/DelegatingCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Calculator/DelegatingCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DelegatingDataFetcher.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DelegatingDataFetcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DelegatingDataFetcherInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/DataFetcher/DelegatingDataFetcherInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/DelegatingFeeCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/DelegatingFeeCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/DelegatingFeeCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/DelegatingFeeCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DelegatingRenderer.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DelegatingRenderer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DelegatingRendererInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/DelegatingRendererInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Storage/spec/Storage/DoctrineCacheStorageSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Storage/spec/Storage/DoctrineCacheStorageSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Finder/ElasticsearchFinderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Finder/ElasticsearchFinderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/ElasticsearchIndexer.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/ElasticsearchIndexer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Indexer/ElasticsearchIndexerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Indexer/ElasticsearchIndexerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Model/Email.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Model/Email.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Provider/EmailProviderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Provider/EmailProviderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Event/EmailSendEvent.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Event/EmailSendEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Model/EmailSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Model/EmailSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Form/Type/EmailTemplateChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Form/Type/EmailTemplateChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/Form/Type/EmailType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/Form/Type/EmailType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Form/Type/EmailTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Form/Type/EmailTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/ExistingRuleCheckerExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/ExistingRuleCheckerExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/ExistingServiceExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/ExistingServiceExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/FeeCalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/FeeCalculatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/FixedDiscountActionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/FixedDiscountActionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/FixedFeeCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/FixedFeeCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/Event/FlashEvent.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/Event/FlashEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlatRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlatRateCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlatRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlatRateCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlatRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlatRateConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlexibleRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlexibleRateCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlexibleRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlexibleRateCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlexibleRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlexibleRateConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Behat/FormContext.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Behat/FormContext.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/GeneratorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/GeneratorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Registry/GeneratorRegistry.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Registry/GeneratorRegistry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Pricing/GroupBasedCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Pricing/GroupBasedCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/GroupInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/GroupInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/GroupSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/GroupSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/HashGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/HashGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Repository/HashSubjectRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Repository/HashSubjectRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Identity.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Identity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/IdentityInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/IdentityInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Image.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Image.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ImageSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ImageSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Uploader/ImageUploaderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Uploader/ImageUploaderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/ImportExchangeRateCommandSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/ImportExchangeRateCommandSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Command/IndexCommand.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Command/IndexCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/IndexerInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/IndexerInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Generator/InstructionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Generator/InstructionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/InsufficientStockException.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/InsufficientStockException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/InsufficientStockExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/InsufficientStockExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Driver/InvalidDriverExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Driver/InvalidDriverExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/InventoryHandler.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/InventoryHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/InventoryHandlerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/InventoryHandlerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/InventoryOperatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/InventoryOperatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/InventoryOperatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/InventoryOperatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/InventoryUnit.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/InventoryUnit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Factory/InventoryUnitFactory.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Factory/InventoryUnitFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Factory/InventoryUnitFactorySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Factory/InventoryUnitFactorySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Model/InventoryUnitInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Model/InventoryUnitInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/InventoryUnitSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/InventoryUnitSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Model/InventoryUnitSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Model/InventoryUnitSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/InventoryUnitTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/InventoryUnitTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Rule/ItemCountConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Rule/ItemCountConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Rule/ItemCountConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Rule/ItemCountConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/ItemCountRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/ItemCountRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/ItemCountRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/ItemCountRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Resolver/ItemResolvingExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/spec/Resolver/ItemResolvingExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/ItemTotalRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/ItemTotalRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/EventListener/LoadMetadataSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/EventListener/LoadMetadataSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/EventListener/LoadMetadataSubscriber.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/EventListener/LoadMetadataSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/EventListener/LoadMetadataSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/EventListener/LoadMetadataSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/EventListener/LoadMetadataSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/EventListener/LoadMetadataSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/Model/Locale.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/Model/Locale.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Context/LocaleContextSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Context/LocaleContextSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Twig/LocaleExtensionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Twig/LocaleExtensionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Helper/LocaleHelperSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Helper/LocaleHelperSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Templating/Helper/LocaleHelperSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Templating/Helper/LocaleHelperSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/Provider/LocaleProvider.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/Provider/LocaleProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Provider/LocaleProviderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Provider/LocaleProviderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Provider/LocaleProviderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Provider/LocaleProviderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Model/LocaleSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/spec/Model/LocaleSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/EventListener/LocaleSubscriberSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/EventListener/LocaleSubscriberSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/Form/Type/LocaleType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/Form/Type/LocaleType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Form/Type/LocaleTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/spec/Form/Type/LocaleTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Locale/Model/LocalesAwareInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Locale/Model/LocalesAwareInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Resolver/MethodsResolverSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Resolver/MethodsResolverSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/NonExistingRuleCheckerExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/NonExistingRuleCheckerExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/NonExistingServiceExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/NonExistingServiceExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/NoopInventoryOperator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Operator/NoopInventoryOperator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/NoopInventoryOperatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/spec/Operator/NoopInventoryOperatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/NthOrderRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/NthOrderRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SequenceBundle/Doctrine/ORM/NumberListener.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SequenceBundle/Doctrine/ORM/NumberListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SequenceBundle/spec/Doctrine/ORM/NumberListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SequenceBundle/spec/Doctrine/ORM/NumberListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/Model/OptionInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/Model/OptionInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/Model/OptionTranslationInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/Model/OptionTranslationInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionTranslationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/OptionType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/OptionType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/OptionValueCollectionType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/OptionValueCollectionType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueCollectionTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueCollectionTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionValueSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/OptionValueSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/OptionValueTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Order.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Order.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderCheckoutTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderCheckoutTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/OrderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Model/OrderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderItem.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderItem.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/OrderItemSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/OrderItemSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/Repository/OrderRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/Repository/OrderRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderShippingStates.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/OrderShippingStates.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/OrderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/OrderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/OrderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/spec/Model/OrderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/OrderTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/OrderTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Originator/Originator/Originator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Originator/Originator/Originator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Finder/OrmFinderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Finder/OrmFinderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/OrmIndexer.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Indexer/OrmIndexer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Indexer/OrmIndexerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Indexer/OrmIndexerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Listener/OrmListener.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Listener/OrmListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Listener/OrmListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Listener/OrmListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Security/PasswordUpdaterSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Security/PasswordUpdaterSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/Payment.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/Payment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/PaymentChargesProcessor.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/PaymentChargesProcessor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/PaymentChargesProcessorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/PaymentChargesProcessorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentMethod.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentMethod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/PaymentMethodSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/PaymentMethodSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/PaymentProcessor.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/PaymentProcessor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/PaymentProcessorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/PaymentProcessorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/PaymentSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Model/PaymentSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentSubjectInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Model/PaymentSubjectInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/PaymentTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/PaymentTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/PerItemRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/PerItemRateCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/PerItemRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/PerItemRateCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/PerItemRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/PerItemRateConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/PercentFeeCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/Calculator/PercentFeeCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/PercentFeeCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Payment/spec/Calculator/PercentFeeCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/PercentageDiscountAction.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/PercentageDiscountAction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/PercentageDiscountActionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Action/PercentageDiscountActionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/Permission.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/Permission.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/PermissionInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/PermissionInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/PermissionMap.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/PermissionMap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/PermissionMapInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Authorization/PermissionMapInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/PermissionMapSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Authorization/PermissionMapSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Provider/PermissionProviderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Provider/PermissionProviderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Model/PermissionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Model/PermissionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/PermissionsResolver.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/PermissionsResolver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/PinGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/PinGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Model/PriceableInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/Model/PriceableInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Extension/PriceableTypeExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Extension/PriceableTypeExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Extension/PriceableTypeExtensionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Extension/PriceableTypeExtensionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Twig/PricingExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Twig/PricingExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Twig/PricingExtensionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Twig/PricingExtensionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Templating/Helper/PricingHelper.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Templating/Helper/PricingHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Templating/Helper/PricingHelperSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Templating/Helper/PricingHelperSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Product.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/Model/Product.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/Model/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/Accessor/ProductAccessor.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/Accessor/ProductAccessor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/Builder/ProductBuilder.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/Builder/ProductBuilder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/Builder/ProductBuilderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/Builder/ProductBuilderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Builder/ProductBuilderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Builder/ProductBuilderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Behat/ProductContext.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Behat/ProductContext.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Controller/ProductController.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Controller/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ProductSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ProductSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductTranslation.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ProductTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Product/spec/Model/ProductTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/ProductTranslationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/ProductTranslationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/ProductType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/ProductType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Form/Type/ProductTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Form/Type/ProductTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Validator/Constraint/ProductUniqueSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Validator/Constraint/ProductUniqueSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Validator/ProductUniqueValidator.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Validator/ProductUniqueValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Validator/ProductUniqueValidatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/spec/Validator/ProductUniqueValidatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductVariant.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductVariant.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductVariantImageSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductVariantImageSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductVariantInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/ProductVariantInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductVariantSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ProductVariantSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Promotion.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/Promotion.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Promotion.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Promotion.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Action/PromotionActionInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Action/PromotionActionInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Action/PromotionApplicatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Action/PromotionApplicatorInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Action/PromotionApplicatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Action/PromotionApplicatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionCountableSubjectInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionCountableSubjectInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/PromotionEligibilityCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/PromotionEligibilityCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/PromotionEligibilityCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Checker/PromotionEligibilityCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Processor/PromotionProcessorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Processor/PromotionProcessorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/PromotionRuleInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Model/PromotionRuleInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/PromotionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/PromotionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionSubjectInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/PromotionSubjectInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Accessor/PropertyAccessor.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Accessor/PropertyAccessor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ProvinceAddressConstraintSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ProvinceAddressConstraintSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ProvinceAddressConstraintValidatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ProvinceAddressConstraintValidatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Controller/ProvinceController.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Controller/ProvinceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ProvinceSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ProvinceSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RecursivePermissionIterator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RecursivePermissionIterator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RecursiveRoleIterator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RecursiveRoleIterator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/DependencyInjection/Compiler/RegisterCalculatorsPassSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/DependencyInjection/Compiler/RegisterCalculatorsPassSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/DependencyInjection/Compiler/RegisterDataFetcherPassSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/DependencyInjection/Compiler/RegisterDataFetcherPassSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/DependencyInjection/Compiler/RegisterRenderersPassSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/DependencyInjection/Compiler/RegisterRenderersPassSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/DependencyInjection/Compiler/RegisterRuleCheckersPassSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/DependencyInjection/Compiler/RegisterRuleCheckersPassSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Renderer/RenderedEmail.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Renderer/RenderedEmail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/RendererChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/RendererChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/RendererInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/Renderer/RendererInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Report/Model/Report.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Report/Model/Report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Behat/ReportContext.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Behat/ReportContext.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/Type/ReportType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/Type/ReportType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/ReportTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/ReportTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/Repository/RepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/Repository/RepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Contact/Model/Request.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Contact/Model/Request.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Request/RequestHandler.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Request/RequestHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/RequestSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/RequestSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Form/Type/RequestType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Form/Type/RequestType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/RequestTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/RequestTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/EventListener/ResizeZoneMemberCollectionListener.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/EventListener/ResizeZoneMemberCollectionListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/EventListener/ResizeZoneMemberCollectionListenerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/EventListener/ResizeZoneMemberCollectionListenerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/Event/ResourceEvent.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/Event/ResourceEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Event/ResourceEventSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Event/ResourceEventSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/Role.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/Role.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/RoleInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Model/RoleInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Model/RoleSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/spec/Model/RoleSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RolesResolverInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Rbac/Resolver/RolesResolverInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Rule.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/Rule.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/RuleCheckerRegistrySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/Registry/RuleCheckerRegistrySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/RuleChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/RuleChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/RuleInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Model/RuleInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/RuleInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/RuleInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/RuleSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/spec/Model/RuleSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/RuleSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/RuleSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/RuleTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/RuleTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Controller/SearchController.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Controller/SearchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Twig/SearchElementExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Twig/SearchElementExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchIndex.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchIndex.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchIndexInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchIndexInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/ORM/SearchIndexRepositorySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/ORM/SearchIndexRepositorySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Entity/SearchIndexSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Entity/SearchIndexSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchLog.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchLogInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/Model/SearchLogInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Entity/SearchLogSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Entity/SearchLogSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Query/SearchStringQuerySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Query/SearchStringQuerySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Sender.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/Sender/Sender.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Sender/SenderSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/spec/Sender/SenderSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/Sequence.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/Sequence.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/SequenceInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/SequenceInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/SequenceSubjectInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Model/SequenceSubjectInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/SequentialGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/Number/SequentialGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Sequence/spec/Number/SequentialGeneratorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Sequence/spec/Number/SequentialGeneratorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/ServiceRegistrySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Registry/spec/Registry/ServiceRegistrySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Storage/spec/Storage/SessionStorageSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Storage/spec/Storage/SessionStorageSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/SetBuilder/SetBuilderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/SetBuilder/SetBuilderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Controller/ShipmentController.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Controller/ShipmentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/ShipmentFactory.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/ShipmentFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/ShipmentFactorySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/ShipmentFactorySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShipmentInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShipmentInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShipmentItemSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShipmentItemSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/ShipmentItemTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/ShipmentItemTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Processor/ShipmentProcessorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Processor/ShipmentProcessorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ShipmentSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ShipmentSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShipmentSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShipmentSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShipmentTrackingType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShipmentTrackingType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShipmentTrackingTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShipmentTrackingTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/ShipmentTransitions.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/ShipmentTransitions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShipmentType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShipmentType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShipmentTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShipmentTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ShippableAddressConstraintSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ShippableAddressConstraintSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Validator/Constraints/ShippableAddressConstraintValidator.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Validator/Constraints/ShippableAddressConstraintValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ShippableAddressConstraintValidatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Validator/Constraints/ShippableAddressConstraintValidatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippableInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippableInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingCategorySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingCategorySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingCategoryTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingCategoryTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/ShippingChargesProcessorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/ShippingChargesProcessorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/ShippingCountryRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/ShippingCountryRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/ShippingDiscountAction.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Promotion/Action/ShippingDiscountAction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethod.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShippingMethodChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShippingMethodChoiceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityChecker.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityChecker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/ShippingMethodEligibilityCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Checker/ShippingMethodEligibilityCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethodInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethodInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ShippingMethodSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/ShippingMethodSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingMethodSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingMethodSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethodTranslationInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingMethodTranslationInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingMethodTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Model/ShippingMethodTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodTranslationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShippingMethodType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/ShippingMethodType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/ShippingMethodTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingSubjectInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Model/ShippingSubjectInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/spec/Calculator/StandardCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/spec/Calculator/StandardCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/StateMachine/StateMachine.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/StateMachine/StateMachine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/StateMachine/StateMachineInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/StateMachine/StateMachineInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/StateResolver.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/OrderProcessing/StateResolver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/StateResolverSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/OrderProcessing/StateResolverSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Model/StockableInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/Model/StockableInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/SyliusAddressingBundle.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/SyliusAddressingBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/DependencyInjection/SyliusAttributeExtensionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/DependencyInjection/SyliusAttributeExtensionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Cart/SyliusCartEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Cart/SyliusCartEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/SyliusCheckoutEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/SyliusCheckoutEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/SyliusContactBundle.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/SyliusContactBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Mailer/SyliusMailerEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Mailer/SyliusMailerEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/DependencyInjection/SyliusMailerExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/DependencyInjection/SyliusMailerExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Order/SyliusOrderEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Order/SyliusOrderEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/DependencyInjection/SyliusPricingExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/DependencyInjection/SyliusPricingExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/SyliusProductBundle.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/SyliusProductBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/DependencyInjection/SyliusProductExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/DependencyInjection/SyliusProductExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/SyliusPromotionEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/SyliusPromotionEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/SyliusSearchBundle.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/SyliusSearchBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/DependencyInjection/SyliusSearchExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/DependencyInjection/SyliusSearchExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/SyliusShippingBundle.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/SyliusShippingBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Inventory/SyliusStockableEvents.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Inventory/SyliusStockableEvents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/DependencyInjection/SyliusVariationExtension.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/DependencyInjection/SyliusVariationExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/DependencyInjection/SyliusVariationExtensionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/DependencyInjection/SyliusVariationExtensionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/TableConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/TableConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Renderer/TableRenderer.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Renderer/TableRenderer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Renderer/TableRendererSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Renderer/TableRendererSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Model/TaxCategorySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Model/TaxCategorySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Resolver/TaxRateResolverSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Resolver/TaxRateResolverSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxRateSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxRateSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Model/TaxRateSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxation/spec/Model/TaxRateSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Query/TaxonQuerySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/SearchBundle/spec/Query/TaxonQuerySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxonSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxonSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/Model/TaxonTranslationInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/Model/TaxonTranslationInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/TaxonomyRuleCheckerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Promotion/Checker/TaxonomyRuleCheckerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxonomySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/TaxonomySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonomySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonomySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonomyTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/spec/Model/TaxonomyTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/DataFetcher/TimePeriod.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/DataFetcher/TimePeriod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/TokenGenerator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/Generator/TokenGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/TokenProvider.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/TokenProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Security/TokenProviderInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Security/TokenProviderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/TopicSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/TopicSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/TopicTranslationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Contact/spec/Model/TopicTranslationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/TopicTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/TopicTranslationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Form/Type/TopicType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/Form/Type/TopicType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/TopicTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/TopicTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Renderer/Adapter/TwigAdapterSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/MailerBundle/spec/Renderer/Adapter/TwigAdapterSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/UndefinedShippingMethodExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/UndefinedShippingMethodExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Driver/UnknownDriverExceptionSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Resource/spec/Driver/UnknownDriverExceptionSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Exception/UnsupportedTypeException.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Promotion/Exception/UnsupportedTypeException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/UpdateExchangeRateCommandSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/UpdateExchangeRateCommandSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/User.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/UserInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/UserInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Model/UserOAuth.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Model/UserOAuth.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/UserOAuthSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/UserOAuthSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/Repository/UserRepositoryInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/Repository/UserRepositoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/UserSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/spec/Model/UserSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/UserSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/User/spec/Model/UserSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/ChoiceList/VariantChoiceListSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/ChoiceList/VariantChoiceListSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantChoiceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/Constraint/VariantCombinationSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/Constraint/VariantCombinationSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/VariantCombinationValidatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/VariantCombinationValidatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Controller/VariantController.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Controller/VariantController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Sylius/Component/Variation/Generator/VariantGeneratorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Sylius/Component/Variation/Generator/VariantGeneratorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantMatchType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantMatchType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantMatchTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantMatchTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/VariantSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Variation/spec/Model/VariantSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/DataTransformer/VariantToCombinationTransformer.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/DataTransformer/VariantToCombinationTransformer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/DataTransformer/VariantToCombinationTransformerSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/DataTransformer/VariantToCombinationTransformerSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/VariantType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/Form/Type/VariantType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/Constraint/VariantUniqueSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/Constraint/VariantUniqueSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/VariantUniqueValidatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Validator/VariantUniqueValidatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Pricing/spec/Calculator/VolumeBasedCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Pricing/spec/Calculator/VolumeBasedCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumeBasedConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumeBasedConfigurationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumeBasedConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumeBasedConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumePriceConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumePriceConfigurationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumePriceConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumePriceConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/VolumeRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/VolumeRateCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/VolumeRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/VolumeRateConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/WeightRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/WeightRateCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/WeightRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/WeightRateCalculatorSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/WeightRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/WeightRateConfigurationTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Core/Pricing/ZoneBasedCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Core/Pricing/ZoneBasedCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/Matcher/ZoneMatcher.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/Matcher/ZoneMatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Matcher/ZoneMatcherSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Matcher/ZoneMatcherSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberCollectionTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberCollectionTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberCountrySpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberCountrySpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCountryType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCountryType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberCountryTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberCountryTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberProvinceSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberProvinceSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberProvinceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberProvinceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberZoneSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneMemberZoneSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberZoneTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberZoneTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Addressing/spec/Model/ZoneSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeChoiceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/translations/menu.fr.yml" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/translations/menu.fr.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Sylius.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -563,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CurrencyController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/Controller/CurrencyController.php">
+      <file leaf-file-name="layout.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/views/Backend/layout.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.2972259">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -583,6 +46,9 @@
       <list>
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/translations/menu.fr.yml" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/views/Backend/layout.html.twig" />
       </list>
     </option>
   </component>
@@ -598,10 +64,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="126" />
-    <option name="y" value="64" />
-    <option name="width" value="1400" />
-    <option name="height" value="836" />
+    <option name="x" value="53" />
+    <option name="y" value="24" />
+    <option name="width" value="1547" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -626,6 +92,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -654,6 +122,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="theme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -683,30 +183,8 @@
               <option name="myItemId" value="Bundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Sylius" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sylius" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sylius" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CurrencyBundle" />
+              <option name="myItemId" value="WebBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -732,11 +210,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="CurrencyBundle" />
+              <option name="myItemId" value="WebBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -762,27 +244,88 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="CurrencyBundle" />
+              <option name="myItemId" value="WebBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/theme/src" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -799,10 +342,16 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="ff0ab974-7812-4d0d-a4e7-0aa514001c8d" server_name="Sylius">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
   </component>
@@ -820,27 +369,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="126" y="64" width="1400" height="836" extended-state="0" />
-    <editor active="true" />
+    <frame x="53" y="24" width="1547" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31311882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22624435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -859,18 +408,69 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/Form/Type/CurrencyCodeChoiceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14644352">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/ImportExchangeRateCommandSpec.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58158994">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/Controller/CurrencyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6066946">
+          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Kernel/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41841003">
-          <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+        <state vertical-scroll-proportion="-0.61087865">
+          <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48117155">
+          <caret line="30" column="58" selection-start-line="30" selection-start-column="58" selection-end-line="30" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31556803">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74898785">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -883,34 +483,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+    <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74898785">
-          <caret line="37" column="25" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.49790794">
+          <caret line="172" column="6" selection-start-line="151" selection-start-column="4" selection-end-line="172" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/Form/Type/CurrencyCodeChoiceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14644352">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/spec/Command/ImportExchangeRateCommandSpec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58158994">
-          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/Controller/CurrencyController.php">
+    <entry file="file://$PROJECT_DIR$/app/check.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/ResourceBundle/Resources/translations/messages.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/translations/messages.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.446215">
+          <caret line="452" column="4" selection-start-line="452" selection-start-column="4" selection-end-line="452" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/translations/menu.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0996016">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21854305">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/WebBundle/Resources/views/Backend/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2972259">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="24" />
           <folding />
         </state>
       </provider>

@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  menu:
+    index_header: En-tête
   backend:
     menu:
       main:
@@ -23,7 +25,7 @@ sylius:
         products: Produits
         promotions: Promotions
         properties: Configurer les propriétés
-        archetypes: archetypes de produits
+        archetypes: Eventail de produits
         sales: Commandes
         shipments: Expéditions
         shipping_categories: "Catégories d'expédition"
@@ -36,6 +38,17 @@ sylius:
         users: Utilisateurs
         zones: Zones
       sidebar:
+        report: Statistiques
+        emails: Emails
+        customers: Clients
+        roles: Roles
+        permission: Permission
+        permissions: Permissions
+        support: Support
+        contacts_requests: Contacts
+        contact_topics: Sujets
+        marketing: Marketing
+        attributes: Attributs
         assortment: Assortiment
         blocks: Blocs
         configuration: Configuration
@@ -58,7 +71,7 @@ sylius:
         products: Produits
         promotions: Promotions
         properties: Configurer les propriétés
-        archetypes: archetypes de produits
+        archetypes: Eventail de produits
         sales: Commandes
         shipments: Expéditions
         shipping_categories: "Catégories d'expédition"

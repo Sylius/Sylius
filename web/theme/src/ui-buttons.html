@@ -1,0 +1,1220 @@
+
+<!DOCTYPE html>
+<!--
+
+TABLE OF CONTENTS.
+
+Use search to find needed section.
+
+============================================================
+
+|  1. $BODY                     |  Body                    |
+|  2. $MAIN_NAVIGATION          |  Main navigation         |
+|  3. $NAVBAR_ICON_BUTTONS      |  Navbar Icon Buttons     |
+|  4. $MAIN_MENU                |  Main menu               |
+|  5. $DEFAULT_BUTTONS          |  Default buttons         |
+|  6. $ROUNDED_BUTTONS          |  Rounded buttons         |
+|  7. $FLAT_BUTTONS             |  Flat buttons            |
+|  8. $BUTTONS_WITH_LABELS      |  Buttons with labels     |
+|  9. $BUTTON_DROPDOWNS         |  Button dropdowns        |
+|  10. $SPLIT_BUTTON_DROPDOWNS  |  Split button dropdowns  |
+|  11. $BOOTSTRAP_BUTTONS       |  Bootstrap buttons       |
+|  12. $BUTTON_SIZES            |  Button sizes            |
+|  13. $OUTLINE_BUTTONS         |  Outline buttons         |
+|  14. $DISABLED_BUTTONS        |  Disabled buttons        |
+|  15. $BUTTON_GROUPS           |  Button groups           |
+
+============================================================
+
+-->
+
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Buttons - UI Elements - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+	<style>
+		.buttons-with-margins .btn {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+	
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'      - Sets text direction to right-to-left
+	* 'main-menu-right'    - Places the main menu on the right side
+	* 'no-main-menu'       - Hides the main menu
+	* 'main-navbar-fixed'  - Fixes the main navigation
+	* 'main-menu-fixed'    - Fixes the main menu
+	* 'main-menu-animated' - Animate main menu
+-->
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];</script>
+<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<div id="main-wrapper">
+
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+	Main navigation
+-->
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+			<!-- Main navbar header -->
+			<div class="navbar-header">
+
+				<!-- Logo -->
+				<a href="index.html" class="navbar-brand">
+					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+					PixelAdmin
+				</a>
+
+				<!-- Main navbar toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+			</div> <!-- / .navbar-header -->
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First item</a></li>
+								<li><a href="#">Second item</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Third item</a></li>
+							</ul>
+						</li>
+					</ul> <!-- / .navbar-nav -->
+
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+							Navbar Icon Buttons
+
+							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+							Classes:
+							* 'nav-icon-btn-info'
+							* 'nav-icon-btn-success'
+							* 'nav-icon-btn-warning'
+							* 'nav-icon-btn-danger' 
+-->
+							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">5</span>
+									<i class="nav-icon fa fa-bullhorn"></i>
+									<span class="small-screen-text">Notifications</span>
+								</a>
+
+								<!-- NOTIFICATIONS -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-notifications').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+									<div class="notifications-list" id="main-navbar-notifications">
+
+										<div class="notification">
+											<div class="notification-title text-danger">SYSTEM</div>
+											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-info">STORE</div>
+											<div class="notification-description">You have <strong>9</strong> new orders.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-truck bg-info"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-default">CRON DAEMON</div>
+											<div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-clock-o bg-default"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-success">SYSTEM</div>
+											<div class="notification-description">Server <strong>up</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-success"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-warning">SYSTEM</div>
+											<div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-warning"></div>
+										</div> <!-- / .notification -->
+
+									</div> <!-- / .notifications-list -->
+									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+							<li class="nav-icon-btn nav-icon-btn-success dropdown">
+								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">10</span>
+									<i class="nav-icon fa fa-envelope"></i>
+									<span class="small-screen-text">Income messages</span>
+								</a>
+
+								<!-- MESSAGES -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-messages').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+									<div class="messages-list" id="main-navbar-messages">
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+									</div> <!-- / .messages-list -->
+									<a href="#" class="messages-link">MORE MESSAGES</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="Search">
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/demo/avatars/1.jpg">
+									<span>John Doe</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
+									<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+									<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+								</ul>
+							</li>
+						</ul> <!-- / .navbar-nav -->
+					</div> <!-- / .right -->
+				</div>
+			</div> <!-- / #main-navbar-collapse -->
+		</div> <!-- / .navbar-inner -->
+	</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+<!-- 4. $MAIN_MENU =================================================================================
+
+		Main menu
+		
+		Notes:
+		* to make the menu item active, add a class 'active' to the <li>
+		  example: <li class="active">...</li>
+		* multilevel submenu example:
+			<li class="mm-dropdown">
+			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+			  <ul>
+				<li>...</li>
+				<li class="mm-dropdown">
+				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+				  <ul>
+					<li>...</li>
+					...
+				  </ul>
+				</li>
+				...
+			  </ul>
+			</li>
+-->
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">
+			<div class="menu-content top" id="menu-content-demo">
+				<!-- Menu custom content demo
+					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+					 Javascript: html/assets/demo/demo.js
+				 -->
+				<div>
+					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+
+					<img src="assets/demo/avatars/1.jpg" alt="" class="">
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+					</div>
+					<a href="#" class="close">&times;</a>
+				</div>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">Layouts</span><span class="label label-warning">Updated</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="layouts-grid.html"><span class="mm-text">Grid</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="layouts-main-menu.html"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">Main menu</span><span class="label label-warning">Updated</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="stat-panels.html"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Stat panels</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="menu-icon fa fa-flask"></i><span class="mm-text">Widgets</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text">Form components</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text">Tables</span></a>
+				</li>
+				<li>
+					<a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text">Charts</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text">Pages</span><span class="label label-success">16</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text">Complete UI</span></a>
+				</li>
+				<li>
+					<a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text">Color Builder</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-sitemap"></i><span class="mm-text">Menu levels</span><span class="badge badge-primary">6</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span><span class="label label-info">21</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+								</li>
+								<li class="mm-dropdown">
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+									<ul>
+										<li class="mm-dropdown">
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+											<ul>
+												<li>
+													<a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul> <!-- / .navigation -->
+			<div class="menu-content">
+				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+			</div>
+		</div> <!-- / #main-menu-inner -->
+	</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
+
+
+	<div id="content-wrapper">
+
+		<div class="page-header">
+			<h1><span class="text-light-gray">UI Elements / </span>Buttons</h1>
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-sm-6">
+
+<!-- 5. $DEFAULT_BUTTONS ===========================================================================
+
+				Default buttons
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Default buttons</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button class="btn">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger">Danger</button>
+					</div>
+				</div>
+<!-- /5. $DEFAULT_BUTTONS -->
+
+<!-- 6. $ROUNDED_BUTTONS ===========================================================================
+
+				Rounded buttons
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Rounded buttons</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button class="btn btn-rounded">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-rounded">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-rounded">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-rounded">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-rounded">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-rounded">Danger</button>
+					</div>
+				</div>
+<!-- /6. $ROUNDED_BUTTONS -->
+
+<!-- 7. $FLAT_BUTTONS ==============================================================================
+
+				Flat buttons
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Flat buttons</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button class="btn btn-flat">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-flat">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-flat">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-flat">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-flat">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-flat">Danger</button>
+					</div>
+				</div>
+<!-- /7. $FLAT_BUTTONS -->
+
+<!-- 8. $BUTTONS_WITH_LABELS =======================================================================
+
+				Buttons with labels
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Buttons with labels</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+
+						<!-- Default buttons -->
+						<button class="btn btn-lg btn-labeled"><span class="btn-label icon fa fa-camera-retro"></span>Large</button>&nbsp;&nbsp;
+						<button class="btn btn-labeled btn-primary"><span class="btn-label icon fa fa-camera-retro"></span>Default</button>&nbsp;&nbsp;
+						<button class="btn btn-sm btn-labeled btn-success"><span class="btn-label icon fa fa-camera-retro"></span>Small</button>&nbsp;&nbsp;
+						<button class="btn btn-xs btn-labeled btn-danger"><span class="btn-label icon fa fa-camera-retro"></span>Extra small</button>
+
+						<br><br>
+
+						<!-- Outline buttons -->
+						<button class="btn btn-outline btn-lg btn-labeled"><span class="btn-label icon fa fa-camera-retro"></span>Large</button>&nbsp;&nbsp;
+						<button class="btn btn-outline btn-labeled btn-primary"><span class="btn-label icon fa fa-camera-retro"></span>Default</button>&nbsp;&nbsp;
+						<button class="btn btn-outline btn-sm btn-labeled btn-success"><span class="btn-label icon fa fa-camera-retro"></span>Small</button>&nbsp;&nbsp;
+						<button class="btn btn-outline btn-xs btn-labeled btn-danger"><span class="btn-label icon fa fa-camera-retro"></span>Extra small</button>
+
+						<br><br>
+
+						<!-- Flat buttons -->
+						<button class="btn btn-flat btn-lg btn-labeled"><span class="btn-label icon fa fa-camera-retro"></span>Large</button>&nbsp;&nbsp;
+						<button class="btn btn-flat btn-labeled btn-primary"><span class="btn-label icon fa fa-camera-retro"></span>Default</button>&nbsp;&nbsp;
+						<button class="btn btn-flat btn-sm btn-labeled btn-success"><span class="btn-label icon fa fa-camera-retro"></span>Small</button>&nbsp;&nbsp;
+						<button class="btn btn-flat btn-xs btn-labeled btn-danger"><span class="btn-label icon fa fa-camera-retro"></span>Extra small</button>
+
+						<br><br>
+
+						<!-- Rounded buttons -->
+						<button class="btn btn-rounded btn-lg btn-labeled"><span class="btn-label icon fa fa-camera-retro"></span>Large</button>&nbsp;&nbsp;
+						<button class="btn btn-rounded btn-labeled btn-primary"><span class="btn-label icon fa fa-camera-retro"></span>Default</button>&nbsp;&nbsp;
+						<button class="btn btn-rounded btn-sm btn-labeled btn-success"><span class="btn-label icon fa fa-camera-retro"></span>Small</button>&nbsp;&nbsp;
+						<button class="btn btn-rounded btn-xs btn-labeled btn-danger"><span class="btn-label icon fa fa-camera-retro"></span>Extra small</button>
+
+						<br><br>
+
+						<!-- Block buttons -->
+						<button class="btn btn-labeled btn-block"><span class="btn-label">Text label</span>Block button</button>
+
+					</div>
+				</div>
+<!-- /8. $BUTTONS_WITH_LABELS -->
+
+<!-- 9. $BUTTON_DROPDOWNS ==========================================================================
+
+				Button dropdowns
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Button dropdowns</span>
+					</div>
+					<div class="panel-body">
+
+						<!-- Large -->
+						<div class="btn-group">
+							<button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown">Large&nbsp;<i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Default -->
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Default&nbsp;<i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Small -->
+						<div class="btn-group">
+							<button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown">Small&nbsp;<i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Extra small -->
+						<div class="btn-group">
+							<button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown">Extra small&nbsp;<i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+					</div>
+				</div>
+<!-- /9. $BUTTON_DROPDOWNS -->
+
+<!-- 10. $SPLIT_BUTTON_DROPDOWNS ===================================================================
+
+				Split button dropdowns
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Split button dropdowns</span>
+					</div>
+					<div class="panel-body">
+
+						<!-- Large -->
+						<div class="btn-group btn-group-lg">
+							<button type="button" class="btn">Large</button>
+							<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated linka></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Default -->
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary">Default</button>
+							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Small -->
+						<div class="btn-group btn-group-sm">
+							<button type="button" class="btn btn-danger">Small</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+
+						<!-- Extra small -->
+						<div class="btn-group btn-group-xs">
+							<button type="button" class="btn btn-success">Extra small</button>
+							<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>&nbsp;&nbsp;
+					</div>
+				</div>
+<!-- /10. $SPLIT_BUTTON_DROPDOWNS -->
+
+<!-- 11. $BOOTSTRAP_BUTTONS ========================================================================
+
+				Bootstrap buttons
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#loading-example-btn').click(function () {
+							var btn = $(this);
+							btn.button('loading');
+							setTimeout(function () {
+								btn.button('reset');
+							}, 1500);
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Bootstrap buttons</span>
+					</div>
+					<div class="panel-body no-padding-t">
+						
+						<!-- State buttons -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">STATE BUTTONS</h6>
+						<button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">Loading state</button>
+
+						<hr class="panel-wide">
+
+						<!-- Single toggle buttons -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">SINGLE TOGGLE BUTTONS</h6>
+						<button type="button" class="btn btn-danger" data-toggle="button">Single toggle</button>
+
+						<hr class="panel-wide">
+
+						<!-- Checkbox buttons -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">CHECKBOX BUTTONS</h6>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-info">
+								<input type="checkbox"> Option 1
+							</label>
+							<label class="btn btn-info">
+								<input type="checkbox"> Option 2
+							</label>
+							<label class="btn btn-info">
+								<input type="checkbox"> Option 3
+							</label>
+						</div> <!-- / .btn-group -->
+
+						<hr class="panel-wide">
+
+						<!-- Radio buttons -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">RADIO BUTTONS</h6>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-success">
+								<input type="radio" name="options" id="option1"> Option 1
+							</label>
+							<label class="btn btn-success">
+								<input type="radio" name="options" id="option2"> Option 2
+							</label>
+							<label class="btn btn-success">
+								<input type="radio" name="options" id="option3"> Option 3
+							</label>
+						</div> <!-- / .btn-group -->
+					</div>
+				</div>
+<!-- /11. $BOOTSTRAP_BUTTONS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 12. $BUTTON_SIZES =============================================================================
+
+				Button sizes
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Button sizes</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button class="btn btn-lg">Large</button> &nbsp;&nbsp;
+						<button class="btn btn-primary">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-sm">Small</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-xs">Extra small</button>
+					</div>
+				</div>
+<!-- /12. $BUTTON_SIZES -->
+
+<!-- 13. $OUTLINE_BUTTONS ==========================================================================
+
+				Outline buttons
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#outline-switcher').switcher({
+							on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+							off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+						});
+						$('#outline-switcher').on($('html').hasClass('ie8') ? "propertychange" : "change", function () {
+							var $panel = $(this).parents('.panel');
+							if ($(this).is(':checked')) {
+								$panel.addClass('panel-danger panel-dark panel-body-colorful');
+								$panel.find('.panel-body .btn').addClass('dark');
+							} else {
+								$panel.removeClass('panel-danger panel-dark panel-body-colorful');
+								$panel.find('.panel-body .btn').removeClass('dark');
+							}
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Outline buttons</span>
+						<div class="panel-heading-controls">
+							<span class="panel-heading-text" style="font-size:11px;font-weight:600;">DARK&nbsp;&nbsp;</span>
+							<input type="checkbox" data-class="switcher-sm" id="outline-switcher">
+						</div> <!-- / .panel-heading-controls -->
+					</div>
+					<div class="panel-body buttons-with-margins">
+
+						<!-- Default -->
+						<button class="btn btn-lg btn-outline">Large</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-sm btn-outline">Small</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-xs btn-outline">Extra small</button>
+
+						<br>
+
+						<!-- Rounded -->
+						<button class="btn btn-lg btn-outline btn-rounded">Large</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline btn-rounded">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-sm btn-outline btn-rounded">Small</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-xs btn-outline btn-rounded">Extra small</button>
+
+						<br>
+
+						<!-- Flat -->
+						<button class="btn btn-lg btn-outline btn-flat">Large</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline btn-flat">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-sm btn-outline btn-flat">Small</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-xs btn-outline btn-flat">Extra small</button>
+
+						<br>
+
+						<!-- Flat rounded -->
+						<button class="btn btn-lg btn-outline btn-flat btn-rounded">Large</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline btn-flat btn-rounded">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-sm btn-outline btn-flat btn-rounded">Small</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-xs btn-outline btn-flat btn-rounded">Extra small</button>
+					</div>
+				</div>
+<!-- /13. $OUTLINE_BUTTONS -->
+
+<!-- 14. $DISABLED_BUTTONS =========================================================================
+
+				Disabled buttons
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Disabled buttons</span>
+					</div>
+					<div class="panel-body buttons-with-margins">
+						<button class="btn disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-rounded disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-rounded disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-rounded disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-rounded disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-rounded disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-rounded disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-outline disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-outline disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-outline disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-outline disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-outline disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-outline btn-rounded disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-outline btn-rounded disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-outline btn-rounded disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-outline btn-rounded disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-outline btn-rounded disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-outline btn-rounded disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-flat disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-flat disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-flat disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-flat disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-flat disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-flat disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-flat btn-rounded disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-flat btn-rounded disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-flat btn-rounded disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-flat btn-rounded disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-flat btn-rounded disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-flat btn-rounded disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-flat btn-outline disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-flat btn-outline disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-flat btn-outline disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-flat btn-outline disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-flat btn-outline disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-flat btn-outline disabled">Danger</button>
+
+						<br>
+
+						<button class="btn btn-flat btn-outline btn-rounded disabled">Default</button> &nbsp;&nbsp;
+						<button class="btn btn-primary btn-flat btn-outline btn-rounded disabled">Primary</button> &nbsp;&nbsp;
+						<button class="btn btn-info btn-flat btn-outline btn-rounded disabled">Info</button> &nbsp;&nbsp;
+						<button class="btn btn-success btn-flat btn-outline btn-rounded disabled">Success</button> &nbsp;&nbsp;
+						<button class="btn btn-warning btn-flat btn-outline btn-rounded disabled">Warning</button> &nbsp;&nbsp;
+						<button class="btn btn-danger btn-flat btn-outline btn-rounded disabled">Danger</button>
+					</div>
+				</div>
+<!-- /14. $DISABLED_BUTTONS -->
+
+<!-- 15. $BUTTON_GROUPS ============================================================================
+
+				Button groups
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Button groups</span>
+					</div>
+					<div class="panel-body">
+
+						<!-- Default button group -->
+						<div class="btn-group">
+							<button type="button" class="btn">Left</button>
+							<button type="button" class="btn">Middle</button>
+							<button type="button" class="btn">Right</button>
+							<div class="btn-group">
+								<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;<i class="fa fa-caret-down"></i></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Dropdown link</a></li>
+									<li><a href="#">Dropdown link</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<br><br>
+
+						<!-- Outlined button group -->
+						<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">
+								<button type="button" class="btn btn-outline">Left</button>
+								<button type="button" class="btn btn-outline">Middle</button>
+								<button type="button" class="btn btn-outline">Right</button>
+								<div class="btn-group">
+									<button type="button" class="btn btn-outline dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;<i class="fa fa-caret-down"></i></button>
+									<ul class="dropdown-menu">
+										<li><a href="#">Dropdown link</a></li>
+										<li><a href="#">Dropdown link</a></li>
+									</ul>
+								</div>
+							</div> <!-- / .btn-group -->
+						</div>
+
+						<br>
+
+						<!-- Large button group -->
+						<div class="btn-group btn-group-lg">
+							<button type="button" class="btn btn-primary">Left</button>
+							<button type="button" class="btn btn-primary">Middle</button>
+							<button type="button" class="btn btn-primary">Right</button>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;<i class="fa fa-caret-down"></i></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Dropdown link</a></li>
+									<li><a href="#">Dropdown link</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<br><br>
+
+						<!-- Small button group -->
+						<div class="btn-group btn-group-sm">
+							<button type="button" class="btn btn-success">Left</button>
+							<button type="button" class="btn btn-success">Middle</button>
+							<button type="button" class="btn btn-success">Right</button>
+							<div class="btn-group">
+								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;<i class="fa fa-caret-down"></i></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Dropdown link</a></li>
+									<li><a href="#">Dropdown link</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<br><br>
+
+						<!-- Extra small button group -->
+						<div class="btn-group btn-group-xs">
+							<button type="button" class="btn btn-info">Left</button>
+							<button type="button" class="btn btn-info">Middle</button>
+							<button type="button" class="btn btn-info">Right</button>
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;<i class="fa fa-caret-down"></i></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Dropdown link</a></li>
+									<li><a href="#">Dropdown link</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<br><br>
+
+						<!-- Justified button group -->
+						<div class="btn-group btn-group-justified">
+							<a href="#" class="btn">Left</a>
+							<a href="#" class="btn">Middle</a>
+							<a href="#" class="btn">Right</a>
+						</div>
+
+						<br>
+
+						<!-- Toolbar -->
+						<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">
+								<button type="button" class="btn">1</button>
+								<button type="button" class="btn">2</button>
+								<button type="button" class="btn">3</button>
+								<button type="button" class="btn">4</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn">5</button>
+								<button type="button" class="btn">6</button>
+								<button type="button" class="btn">7</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn">8</button>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- /15. $BUTTON_GROUPS -->
+
+			</div>
+		</div>
+	</div> <!-- / #content-wrapper -->
+	<div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+
+<!-- Get jQuery from Google CDN -->
+<!--[if !IE]> -->
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+<![endif]-->
+
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.min.js"></script>
+<script src="assets/javascripts/pixel-admin.min.js"></script>
+
+<script type="text/javascript">
+	init.push(function () {
+		// Javascript code here
+	})
+	window.PixelAdmin.start(init);
+</script>
+
+</body>
+</html>
