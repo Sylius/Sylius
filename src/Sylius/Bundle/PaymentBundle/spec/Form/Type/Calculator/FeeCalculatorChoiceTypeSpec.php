@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

@@ -26,6 +26,8 @@ class YamlPersister
     public function parse()
     {
         $data = Yaml::parse($this->file);
+        $data = Yaml::parse(file_get_contents($this->file));
+
         $parameters = array();
 
         foreach ($data['parameters'] as $key => $value) {

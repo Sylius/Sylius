@@ -19,7 +19,7 @@ use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonSelectionTypeSpec extends ObjectBehavior
 {

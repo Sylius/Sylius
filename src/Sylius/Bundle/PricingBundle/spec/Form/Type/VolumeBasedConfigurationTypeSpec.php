@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PricingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
 {

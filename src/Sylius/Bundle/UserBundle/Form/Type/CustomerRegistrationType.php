@@ -16,7 +16,7 @@ use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener
 use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -66,7 +66,7 @@ class CustomerRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VariantChoiceTypeSpec extends ObjectBehavior
 {

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>

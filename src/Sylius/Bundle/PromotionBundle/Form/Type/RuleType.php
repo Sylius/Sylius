@@ -15,7 +15,7 @@ use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Promotion rule form type.
@@ -46,7 +46,7 @@ class RuleType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 

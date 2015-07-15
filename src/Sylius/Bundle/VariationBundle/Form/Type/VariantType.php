@@ -14,7 +14,7 @@ namespace Sylius\Bundle\VariationBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\VariationBundle\Form\EventListener\BuildVariantFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Variant form type.
@@ -64,7 +64,7 @@ class VariantType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 

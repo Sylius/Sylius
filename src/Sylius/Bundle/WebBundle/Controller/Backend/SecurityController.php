@@ -61,6 +61,10 @@ class SecurityController extends Controller
         $session = $request->getSession();
         $error = null;
 
+        /**
+         * Process Security ith Session, Toke, Roles...
+         */
+
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {

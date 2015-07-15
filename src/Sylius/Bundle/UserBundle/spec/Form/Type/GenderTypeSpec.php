@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GenderTypeSpec extends ObjectBehavior
 {

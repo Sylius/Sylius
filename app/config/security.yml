@@ -2,11 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 security:
+
+    # Providers
     providers:
         sylius_user_provider:
             id: sylius.user_provider.name_or_email
+
+    # Encoding diggests
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
+
+    # Firewalls
     firewalls:
         administration:
             switch_user: true
@@ -32,7 +38,7 @@ security:
             anonymous:  true
 
         main:
-            switch_user: { role: ROLE_SYLIUS_ADMIN }
+            switch_user: { role: ROLE_SYLIUS_ADMIN } #For Super Admin...
             context:     user
             pattern:     /.*
             form_login:
@@ -42,7 +48,7 @@ security:
                 failure_path: /login
                 default_target_path: /
                 use_forward:  false
-                use_referer: true
+                use_referer: true # Redirect last pages after
             remember_me:
                 key: %sylius.secret%
                 name: APP_REMEMBER_ME
@@ -69,6 +75,8 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
+    # Access Control to bind roles & firewalls
     access_control:
         - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
