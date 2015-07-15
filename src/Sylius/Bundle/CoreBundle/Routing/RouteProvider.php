@@ -134,9 +134,14 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             ) {
                 $value = substr($path, strlen($this->routeConfigs[$className]['prefix']));
                 $value = trim($value, '/');
+
+                if (empty($value)) {
+                    continue;
+                }
+
                 $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $value));
 
-                if (!$entity) {
+                if (null === $entity) {
                     continue;
                 }
 
