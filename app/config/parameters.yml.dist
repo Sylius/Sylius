@@ -11,7 +11,10 @@ parameters:
     sylius.mailer.host:               127.0.0.1
     sylius.mailer.port:               ~
     sylius.mailer.user:               ~
+    sylius.mailer.auth:               ~
+    sylius.mailer.auth_mode:               ~
     sylius.mailer.password:           ~
+    sylius.mailer.protocol:           ~œ
 
     sylius.secret:                    EDITME
 
