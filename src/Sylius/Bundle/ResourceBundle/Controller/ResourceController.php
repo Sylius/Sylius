@@ -381,6 +381,17 @@ class ResourceController extends FOSRestController
     }
 
     /**
+     * Use to compatible with Symfony 3.0
+     * @return Request
+     */
+    public function getRequest(){
+
+        $request = Request::createFromGlobals();
+
+        return $request;
+    }
+
+    /**
      * @param object|null $resource
      * @param array       $options
      *
