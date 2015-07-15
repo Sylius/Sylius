@@ -39,7 +39,8 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmail();
 
     /**
-     * @param  string $email
+     * @param string $email
+     *
      * @return self
      */
     public function setEmail($email);
@@ -52,7 +53,8 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmailCanonical();
 
     /**
-     * @param  string $emailCanonical
+     * @param string $emailCanonical
+     *
      * @return self
      */
     public function setEmailCanonical($emailCanonical);
@@ -114,7 +116,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     /**
      * Sets the enabled flag of the user.
      *
-     * @param boolean $boolean
+     * @param bool $boolean
      *
      * @return self
      */
@@ -123,7 +125,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     /**
      * Sets the locking status of the user.
      *
-     * @param boolean $boolean
+     * @param bool $boolean
      *
      * @return self
      */
@@ -155,7 +157,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      *
      * @param \DateInterval $ttl Requests older than this time interval will be considered expired
      *
-     * @return boolean true if the user's password request is non expired, false otherwise
+     * @return bool true if the user's password request is non expired, false otherwise
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
@@ -167,7 +169,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getLastLogin();
 
     /**
-     * Sets the last login time
+     * Sets the last login time.
      *
      * @param \DateTime $time
      *
@@ -185,7 +187,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      *
      * @param string $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role);
 

@@ -51,7 +51,7 @@ class Currency implements CurrencyInterface
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

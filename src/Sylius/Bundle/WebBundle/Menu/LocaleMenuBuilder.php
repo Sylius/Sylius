@@ -66,8 +66,8 @@ class LocaleMenuBuilder extends MenuBuilder
         $locales = $this->localeProvider->getAvailableLocales();
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
+                'class' => 'nav nav-pills',
+            ),
         ));
 
         if (1 === count($locales)) {

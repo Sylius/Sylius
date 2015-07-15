@@ -21,7 +21,7 @@ interface PromotionCountableSubjectInterface extends PromotionSubjectInterface
     /**
      * Count promotion subjects.
      *
-     * @return integer
+     * @return int
      */
     public function getPromotionSubjectCount();
 }

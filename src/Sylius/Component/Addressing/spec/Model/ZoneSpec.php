@@ -21,67 +21,67 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
  */
 class ZoneSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Addressing\Model\Zone');
     }
 
-    function it_implements_Sylius_zone_interface()
+    public function it_implements_Sylius_zone_interface()
     {
         $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Yugoslavia');
         $this->getName()->shouldReturn('Yugoslavia');
     }
 
-    function it_has_no_type_by_default()
+    public function it_has_no_type_by_default()
     {
         $this->getType()->shouldReturn(null);
     }
 
-    function its_type_is_mutable()
+    public function its_type_is_mutable()
     {
         $this->setType('country');
         $this->getType()->shouldReturn('country');
     }
 
-    function it_initializes_members_collection_by_default()
+    public function it_initializes_members_collection_by_default()
     {
         $this->getMembers()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_has_no_members_by_default()
+    public function it_has_no_members_by_default()
     {
         $this->hasMembers()->shouldReturn(false);
     }
 
-    function its_members_are_mutable(Collection $members)
+    public function its_members_are_mutable(Collection $members)
     {
         $this->setMembers($members);
         $this->getMembers()->shouldReturn($members);
     }
 
-    function it_adds_member(ZoneMemberInterface $member)
+    public function it_adds_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);
         $this->hasMembers()->shouldReturn(true);
         $this->hasMember($member)->shouldReturn(true);
     }
 
-    function it_removes_member(ZoneMemberInterface $member)
+    public function it_removes_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);
         $this->hasMember($member)->shouldReturn(true);
@@ -90,18 +90,18 @@ class ZoneSpec extends ObjectBehavior
         $this->hasMember($member)->shouldReturn(false);
     }
 
-    function it_has_no_scope_by_default()
+    public function it_has_no_scope_by_default()
     {
         $this->getScope()->shouldReturn(null);
     }
 
-    function its_scope_is_mutable()
+    public function its_scope_is_mutable()
     {
         $this->setScope('shipping');
         $this->getScope()->shouldReturn('shipping');
     }
 
-    function it_has_fluent_interface(ZoneMemberInterface $member, Collection $members)
+    public function it_has_fluent_interface(ZoneMemberInterface $member, Collection $members)
     {
         $this->setName('Yugoslavia')->shouldReturn($this);
         $this->setMembers($members)->shouldReturn($this);

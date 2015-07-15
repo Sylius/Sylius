@@ -32,7 +32,7 @@ class ArchetypeType extends AbstractResourceType
      * @param array  $validationGroups
      * @param string $subject
      */
-    function __construct($dataClass, array $validationGroups, $subject)
+    public function __construct($dataClass, array $validationGroups, $subject)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -46,26 +46,26 @@ class ArchetypeType extends AbstractResourceType
     {
         $builder
             ->add('code', 'text', array(
-                'label' => 'sylius.form.archetype.code'
+                'label' => 'sylius.form.archetype.code',
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_archetype_translation', $this->subject),
-                'label'    => 'sylius.form.archetype.name'
+                'label' => 'sylius.form.archetype.name',
             ))
             ->add('parent', sprintf('sylius_%s_archetype_choice', $this->subject), array(
                 'required' => false,
                 'label' => 'sylius.form.archetype.parent',
-                'property' => 'name'
+                'property' => 'name',
             ))
             ->add('attributes', sprintf('sylius_%s_attribute_choice', $this->subject), array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.archetype.attributes'
+                'label' => 'sylius.form.archetype.attributes',
             ))
             ->add('options', sprintf('sylius_%s_option_choice', $this->subject), array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.archetype.options'
+                'label' => 'sylius.form.archetype.options',
             ))
         ;
     }

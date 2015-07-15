@@ -23,22 +23,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UpdateExchangeRateCommandSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Command\UpdateExchangeRateCommand');
     }
 
-    function it_is_a_command()
+    public function it_is_a_command()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius:currency:update');
     }
 
-    function it_updates_a_avaivalble_exchange_rate(
+    public function it_updates_a_avaivalble_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,
@@ -66,7 +66,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
         $this->run($input, $output);
     }
 
-    function it_updates_all_exchange_rate(
+    public function it_updates_all_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,

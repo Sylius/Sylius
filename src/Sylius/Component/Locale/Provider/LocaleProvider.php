@@ -30,7 +30,7 @@ class LocaleProvider implements LocaleProviderInterface
     protected $localeRepository;
 
     /**
-     * Default locale
+     * Default locale.
      *
      * @var string
      */

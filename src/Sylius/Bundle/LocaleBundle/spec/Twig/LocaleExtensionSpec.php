@@ -19,17 +19,17 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
  */
 class LocaleExtensionSpec extends ObjectBehavior
 {
-    function let(LocaleHelper $helper)
+    public function let(LocaleHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Twig\LocaleExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

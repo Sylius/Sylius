@@ -25,17 +25,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class UserAutoLoginListenerSpec extends ObjectBehavior
 {
-    function let(UserLoginInterface $loginManager)
+    public function let(UserLoginInterface $loginManager)
     {
         $this->beConstructedWith($loginManager);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener');
     }
 
-    function it_logs_user_in($loginManager, GenericEvent $event, CustomerInterface $customer, UserInterface $user)
+    public function it_logs_user_in($loginManager, GenericEvent $event, CustomerInterface $customer, UserInterface $user)
     {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -45,7 +45,7 @@ class UserAutoLoginListenerSpec extends ObjectBehavior
         $this->login($event);
     }
 
-    function it_does_not_log_user_in_if_customer_does_not_have_assigned_user($loginManager, GenericEvent $event, CustomerInterface $customer)
+    public function it_does_not_log_user_in_if_customer_does_not_have_assigned_user($loginManager, GenericEvent $event, CustomerInterface $customer)
     {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
@@ -55,7 +55,7 @@ class UserAutoLoginListenerSpec extends ObjectBehavior
         $this->login($event);
     }
 
-    function it_logs_in_user_implementation_only(GenericEvent $event)
+    public function it_logs_in_user_implementation_only(GenericEvent $event)
     {
         $customer = '';
         $event->getSubject()->willReturn($customer);

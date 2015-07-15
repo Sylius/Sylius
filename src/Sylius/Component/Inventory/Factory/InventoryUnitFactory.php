@@ -51,7 +51,7 @@ class InventoryUnitFactory implements InventoryUnitFactoryInterface
 
         $units = new ArrayCollection();
 
-        for ($i = 0; $i < $quantity; $i++) {
+        for ($i = 0; $i < $quantity; ++$i) {
             $inventoryUnit = $this->repository->createNew();
             $inventoryUnit->setStockable($stockable);
             $inventoryUnit->setInventoryState($state);

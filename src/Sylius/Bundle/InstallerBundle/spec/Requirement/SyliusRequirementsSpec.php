@@ -16,22 +16,22 @@ use Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection;
 
 class SyliusRequirementsSpec extends ObjectBehavior
 {
-    function let(RequirementCollection $requirementCollection)
+    public function let(RequirementCollection $requirementCollection)
     {
         $this->beConstructedWith(array($requirementCollection));
     }
 
-    function it_is_a_iterator_aggregate()
+    public function it_is_a_iterator_aggregate()
     {
         $this->shouldBeAnInstanceOf('IteratorAggregate');
     }
 
-    function it_gets_iterator()
+    public function it_gets_iterator()
     {
         $this->getIterator()->shouldHaveType('ArrayIterator');
     }
 
-    function its_add_should_have_fluent_interface($requirementCollection)
+    public function its_add_should_have_fluent_interface($requirementCollection)
     {
         $this->add($requirementCollection)->shouldHaveType('Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements');
     }

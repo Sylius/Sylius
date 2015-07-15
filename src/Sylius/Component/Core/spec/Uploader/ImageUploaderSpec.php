@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, ImageInterface $image)
+    public function let(Filesystem $filesystem, ImageInterface $image)
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
@@ -29,17 +29,17 @@ class ImageUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($filesystem);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Uploader\ImageUploader');
     }
 
-    function it_is_Sylius_image_uploader()
+    public function it_is_Sylius_image_uploader()
     {
         $this->shouldImplement('Sylius\Component\Core\Uploader\ImageUploaderInterface');
     }
 
-    function it_uploads_image($filesystem, $image)
+    public function it_uploads_image($filesystem, $image)
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');

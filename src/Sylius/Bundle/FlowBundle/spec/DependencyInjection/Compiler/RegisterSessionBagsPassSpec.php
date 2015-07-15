@@ -18,17 +18,17 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class RegisterSessionBagsPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterSessionBagsPass');
     }
 
-    function it_is_compiler_pass()
+    public function it_is_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes(ContainerBuilder $container, Definition $session)
+    public function it_processes(ContainerBuilder $container, Definition $session)
     {
         $container->getDefinition('session')->shouldBeCalled()->willreturn($session);
         $session->addMethodCall('registerBag', Argument::type('array'))->shouldBeCalled();

@@ -23,12 +23,12 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver');
     }
 
-    function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
+    public function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
     {
         $resolverDefinition->hasTag('doctrine.event_listener')
             ->shouldBeCalled()
@@ -64,15 +64,15 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array(),
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'sylius.resource.interface' => 'sylius.resource.model'
+            'sylius.resource.interface' => 'sylius.resource.model',
         ));
     }
 
-    function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
+    public function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
     {
         $resolverDefinition->hasTag('doctrine.event_listener')
             ->shouldBeCalled()
@@ -100,11 +100,11 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array(),
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
+            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo',
         ));
     }
 }

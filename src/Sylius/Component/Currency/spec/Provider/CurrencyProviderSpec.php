@@ -20,22 +20,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CurrencyProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $currencyRepository)
+    public function let(RepositoryInterface $currencyRepository)
     {
         $this->beConstructedWith($currencyRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Currency\Provider\CurrencyProvider');
     }
 
-    function it_implements_Sylius_currency_provider_interface()
+    public function it_implements_Sylius_currency_provider_interface()
     {
         $this->shouldImplement('Sylius\Component\Currency\Provider\CurrencyProviderInterface');
     }
 
-    function it_returns_all_enabled_currencies(CurrencyInterface $currency, $currencyRepository)
+    public function it_returns_all_enabled_currencies(CurrencyInterface $currency, $currencyRepository)
     {
         $currencyRepository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($currency));
 

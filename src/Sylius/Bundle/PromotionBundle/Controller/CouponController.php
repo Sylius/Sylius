@@ -28,6 +28,7 @@ class CouponController extends ResourceController
      * @param Request $request
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function generateAction(Request $request)
@@ -59,7 +60,7 @@ class CouponController extends ResourceController
             ->setTemplate($this->config->getTemplate('generate.html'))
             ->setData(array(
                 'promotion' => $promotion,
-                'form'      => $form->createView()
+                'form' => $form->createView(),
             ))
         ;
 

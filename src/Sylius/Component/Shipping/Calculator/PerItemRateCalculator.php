@@ -26,7 +26,7 @@ class PerItemRateCalculator extends Calculator
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return (int)($configuration['amount'] * $subject->getShippingItemCount());
+        return (int) ($configuration['amount'] * $subject->getShippingItemCount());
     }
 
     /**
@@ -52,10 +52,10 @@ class PerItemRateCalculator extends Calculator
     {
         $resolver
             ->setRequired(array(
-                'amount'
+                'amount',
             ))
             ->setAllowedTypes(array(
-                'amount' => array('numeric')
+                'amount' => array('numeric'),
             ))
         ;
     }

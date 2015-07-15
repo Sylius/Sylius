@@ -20,28 +20,28 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 {
-    function let(CurrencyContext $currencyContext)
+    public function let(CurrencyContext $currencyContext)
     {
         $this->beConstructedWith($currencyContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType');
     }
 
-    function it_is_abstract_type_object()
+    public function it_is_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form($currencyContext, FormBuilderInterface $builder)
+    public function it_builds_form($currencyContext, FormBuilderInterface $builder)
     {
         $currencyContext->getCurrency()->willReturn('USD')->shouldBeCalled();
 
         $builder
             ->add('amount', 'sylius_money', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
+                'label' => 'sylius.form.payment_method.fee_calculator.fixed.amount',
                 'currency' => 'USD',
             ))
             ->willReturn($builder)
@@ -51,7 +51,7 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_fee_calculator_fixed');
     }

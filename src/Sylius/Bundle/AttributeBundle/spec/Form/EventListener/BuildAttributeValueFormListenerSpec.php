@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildAttributeValueFormListenerSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    public function let(FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($formFactory, 'server');
     }
 
-    function it_subscribes_to_pre_set_data_event()
+    public function it_subscribes_to_pre_set_data_event()
     {
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildForm'));
     }
 
-    function it_builds_form_with_attribute_and_value_when_new_product_attribute(
+    public function it_builds_form_with_attribute_and_value_when_new_product_attribute(
         FormEvent $event,
         Form $form,
         Form $valueField,
@@ -48,7 +48,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    function it_builds_value_field_base_on_product_attribute(
+    public function it_builds_value_field_base_on_product_attribute(
         FormEvent $event,
         Form $form,
         AttributeValueInterface $productAttribute,
@@ -70,7 +70,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    function it_builds_options_base_on_product_attribute(
+    public function it_builds_options_base_on_product_attribute(
         FormEvent $event,
         Form $form,
         AttributeValueInterface $productAttribute,
@@ -81,9 +81,9 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $productAttribute->getValue()->willReturn(array());
         $productAttribute->getConfiguration()->willReturn(array(
             'choices' => array(
-                'red'  => 'Red',
-                'blue' => 'Blue'
-            )
+                'red' => 'Red',
+                'blue' => 'Blue',
+            ),
         ));
         $productAttribute->getName()->willReturn('My name');
 

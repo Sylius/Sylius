@@ -21,17 +21,17 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 class TaxonRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository');
     }
 
-    function it_finds_taxon_as_a_list($em, TaxonomyInterface $taxonomy, QueryBuilder $builder, AbstractQuery $query)
+    public function it_finds_taxon_as_a_list($em, TaxonomyInterface $taxonomy, QueryBuilder $builder, AbstractQuery $query)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
@@ -49,7 +49,7 @@ class TaxonRepositorySpec extends ObjectBehavior
         $this->getTaxonsAsList($taxonomy);
     }
 
-    function it_finds_one_taxon_by_permalink($em, QueryBuilder $builder, AbstractQuery $query)
+    public function it_finds_one_taxon_by_permalink($em, QueryBuilder $builder, AbstractQuery $query)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);

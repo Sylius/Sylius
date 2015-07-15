@@ -120,36 +120,36 @@ class LoadMetadataSubscriber implements EventSubscriber
             }
 
             $metadata->mapManyToOne(array(
-                'fieldName'    => 'object',
+                'fieldName' => 'object',
                 'targetEntity' => $class['variable'],
-                'inversedBy'   => 'variants',
-                'joinColumns'  => array(array(
-                    'name'                 => $variable.'_id',
+                'inversedBy' => 'variants',
+                'joinColumns' => array(array(
+                    'name' => $variable.'_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
                 )),
             ));
 
             $metadata->mapManyToMany(array(
-                'fieldName'    => 'options',
-                'type'         => ClassMetadataInfo::MANY_TO_MANY,
+                'fieldName' => 'options',
+                'type' => ClassMetadataInfo::MANY_TO_MANY,
                 'targetEntity' => $class['option_value']['model'],
-                'joinTable'    => array(
-                    'name'               => sprintf('sylius_%s_variant_option_value', $variable),
-                    'joinColumns'        => array(array(
-                        'name'                 => 'variant_id',
+                'joinTable' => array(
+                    'name' => sprintf('sylius_%s_variant_option_value', $variable),
+                    'joinColumns' => array(array(
+                        'name' => 'variant_id',
                         'referencedColumnName' => 'id',
-                        'unique'               => false,
-                        'nullable'             => false,
-                        'onDelete'             => 'CASCADE',
+                        'unique' => false,
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE',
                     )),
                     'inverseJoinColumns' => array(array(
-                        'name'                 => 'option_value_id',
+                        'name' => 'option_value_id',
                         'referencedColumnName' => 'id',
-                        'unique'               => false,
-                        'nullable'             => false,
-                        'onDelete'             => 'CASCADE',
+                        'unique' => false,
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE',
                     )),
                 ),
             ));

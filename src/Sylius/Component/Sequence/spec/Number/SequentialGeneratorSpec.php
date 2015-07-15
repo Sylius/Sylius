@@ -21,12 +21,12 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  */
 class SequentialGeneratorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Sequence\Number\SequentialGenerator');
     }
 
-    function it_generates_000001_number_for_first_subject(
+    public function it_generates_000001_number_for_first_subject(
         SequenceSubjectInterface $subject,
         SequenceInterface $sequence
     ) {
@@ -41,7 +41,7 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->generate($subject, $sequence);
     }
 
-    function it_generates_a_correct_number_for_following_subjects(
+    public function it_generates_a_correct_number_for_following_subjects(
         SequenceSubjectInterface $subject,
         SequenceInterface $sequence
     ) {
@@ -56,7 +56,7 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->generate($subject, $sequence);
     }
 
-    function it_starts_at_start_number_if_specified(SequenceSubjectInterface $subject, SequenceInterface $sequence)
+    public function it_starts_at_start_number_if_specified(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $this->beConstructedWith(6, 123);
 
@@ -71,7 +71,7 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->generate($subject, $sequence);
     }
 
-    function it_leaves_existing_numbers_alone(SequenceSubjectInterface $subject, SequenceInterface $sequence)
+    public function it_leaves_existing_numbers_alone(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $subject->getNumber()->willReturn('123');
         $subject->setNumber(Argument::any())->shouldNotBeCalled();

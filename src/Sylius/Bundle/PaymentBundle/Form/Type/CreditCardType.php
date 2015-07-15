@@ -28,7 +28,7 @@ class CreditCardType extends AbstractResourceType
     {
         $builder
             ->add('type', 'choice', array(
-                'label'    => 'sylius.form.credit_card.type',
+                'label' => 'sylius.form.credit_card.type',
                 'expanded' => true,
               ))
               ->add('cardholderName', 'text', array(
@@ -41,12 +41,12 @@ class CreditCardType extends AbstractResourceType
                   'label' => 'sylius.form.credit_card.security_code',
               ))
               ->add('expiryMonth', 'choice', array(
-                  'label'   => 'sylius.form.credit_card.expiry_month',
+                  'label' => 'sylius.form.credit_card.expiry_month',
                   'choices' => $this->getMonthChoices(),
               ))
               ->add('expiryYear', 'choice', array(
-                  'label'   => 'sylius.form.credit_card.expiry_year',
-                  'choices' =>  $this->getViableYears(),
+                  'label' => 'sylius.form.credit_card.expiry_year',
+                  'choices' => $this->getViableYears(),
               ))
         ;
     }
@@ -67,9 +67,9 @@ class CreditCardType extends AbstractResourceType
     private function getViableYears()
     {
         $yearChoices = array();
-        $currentYear = (int) date("Y");
+        $currentYear = (int) date('Y');
 
-        for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 20; ++$i) {
             $yearChoices[$currentYear + $i] = $currentYear + $i;
         }
 

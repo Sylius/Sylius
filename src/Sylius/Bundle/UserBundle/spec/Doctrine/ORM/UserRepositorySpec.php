@@ -30,17 +30,17 @@ class UserRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository');
     }
 
-    function it_is_a_repository()
+    public function it_is_a_repository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_create_paginator(
+    public function it_create_paginator(
         $em,
         $collection,
         QueryBuilder $builder,
@@ -76,14 +76,14 @@ class UserRepositorySpec extends ObjectBehavior
         $this->createFilterPaginator(
             array(
                 'enabled' => true,
-                'query' => 'arnaud'
+                'query' => 'arnaud',
             ),
             array('name' => 'asc'),
             true
         )->shouldHaveType('Pagerfanta\Pagerfanta');
     }
 
-    function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    public function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
     {
         $collection->disable('softdeleteable')->shouldBeCalled();
 
@@ -106,7 +106,7 @@ class UserRepositorySpec extends ObjectBehavior
         $this->findForDetailsPage(10);
     }
 
-    function it_counts_user_user_repository(
+    public function it_counts_user_user_repository(
         $em,
         QueryBuilder $builder,
         \DateTime $from,
@@ -135,7 +135,7 @@ class UserRepositorySpec extends ObjectBehavior
         $this->countBetweenDates($from, $to, 'status');
     }
 
-    function it_finds_one_by_email(
+    public function it_finds_one_by_email(
         $collection,
         $em,
         QueryBuilder $builder,

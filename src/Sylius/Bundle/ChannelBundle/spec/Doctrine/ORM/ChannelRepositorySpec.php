@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -25,23 +24,23 @@ use Doctrine\ORM\QueryBuilder;
  */
 class ChannelRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository');
     }
 
-    function it_is_arepository()
+    public function it_is_arepository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
         $this->shouldImplement('Sylius\Component\Channel\Repository\ChannelRepositoryInterface');
     }
 
-    function it_finds_by_host_name($em, QueryBuilder $builder, AbstractQuery $query, Expr $expr)
+    public function it_finds_by_host_name($em, QueryBuilder $builder, AbstractQuery $query, Expr $expr)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->expr()->shouldBeCalled()->willReturn($expr);

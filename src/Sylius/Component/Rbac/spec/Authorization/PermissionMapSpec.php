@@ -23,22 +23,22 @@ use Sylius\Component\Rbac\Resolver\PermissionsResolverInterface;
  */
 class PermissionMapSpec extends ObjectBehavior
 {
-    function let(PermissionProviderInterface $permissionProvider, PermissionsResolverInterface $permissionResolver)
+    public function let(PermissionProviderInterface $permissionProvider, PermissionsResolverInterface $permissionResolver)
     {
         $this->beConstructedWith($permissionProvider, $permissionResolver);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMap');
     }
 
-    function it_is_a_permission_map()
+    public function it_is_a_permission_map()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
     }
 
-    function it_uses_permissions_resolver_to_obtain_whole_tree_of_permissions(
+    public function it_uses_permissions_resolver_to_obtain_whole_tree_of_permissions(
         $permissionResolver,
         RoleInterface $role,
         PermissionInterface $permission1,
@@ -49,7 +49,7 @@ class PermissionMapSpec extends ObjectBehavior
         $this->getPermissions($role)->shouldReturn(array($permission1, $permission2));
     }
 
-    function it_checks_if_role_has_permission_with_given_code(
+    public function it_checks_if_role_has_permission_with_given_code(
         $permissionProvider,
         $permissionResolver,
         RoleInterface $role,

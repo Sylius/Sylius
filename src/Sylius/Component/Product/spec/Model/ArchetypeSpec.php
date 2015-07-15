@@ -21,39 +21,39 @@ use Sylius\Component\Product\Model\ArchetypeInterface;
  */
 class ArchetypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\Archetype');
     }
 
-    function it_implements_Sylius_product_archetype_interface()
+    public function it_implements_Sylius_product_archetype_interface()
     {
         $this->shouldImplement('Sylius\Component\Product\Model\ArchetypeInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_initializes_attribute_collection_by_default()
+    public function it_initializes_attribute_collection_by_default()
     {
         $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function its_attribute_collection_is_mutable(Collection $attributes)
+    public function its_attribute_collection_is_mutable(Collection $attributes)
     {
         $this->setAttributes($attributes);
         $this->getAttributes()->shouldReturn($attributes);
     }
 
-    function it_adds_attribute(AttributeInterface $attribute)
+    public function it_adds_attribute(AttributeInterface $attribute)
     {
         $this->addAttribute($attribute);
         $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_removes_attribute(AttributeInterface $attribute)
+    public function it_removes_attribute(AttributeInterface $attribute)
     {
         $this->addAttribute($attribute);
         $this->hasAttribute($attribute)->shouldReturn(true);
@@ -62,12 +62,12 @@ class ArchetypeSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -75,12 +75,12 @@ class ArchetypeSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -88,19 +88,19 @@ class ArchetypeSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_parent_by_default()
+    public function it_has_no_parent_by_default()
     {
         $this->hasParent()->shouldReturn(false);
     }
 
-    function its_parent_is_mutable(ArchetypeInterface $parent)
+    public function its_parent_is_mutable(ArchetypeInterface $parent)
     {
         $this->setParent($parent);
         $this->getParent()->shouldReturn($parent);
         $this->hasParent()->shouldReturn(true);
     }
 
-    function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
+    public function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
     {
         $date = new \DateTime();
 

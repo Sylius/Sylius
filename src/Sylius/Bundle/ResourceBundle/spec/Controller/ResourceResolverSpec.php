@@ -13,17 +13,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ResourceResolverSpec extends ObjectBehavior
 {
-    function let(Configuration $configuration)
+    public function let(Configuration $configuration)
     {
         $this->beConstructedWith($configuration);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceResolver');
     }
 
-    function it_calls_proper_method_with_arguments_based_on_configuration(
+    public function it_calls_proper_method_with_arguments_based_on_configuration(
         RepositoryInterface $repository,
         $configuration
     ) {

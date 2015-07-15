@@ -20,22 +20,22 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class PaymentTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Payment', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\PaymentType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    public function it_builds_form(FormBuilderInterface $builder)
     {
         $builder->add('method', 'sylius_payment_method_choice', Argument::type('array'))->willReturn($builder);
         $builder->add('amount', 'sylius_money', Argument::type('array'))->willReturn($builder);
@@ -44,7 +44,7 @@ class PaymentTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_payment');
     }

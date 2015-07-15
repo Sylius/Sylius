@@ -19,34 +19,34 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class FeeCalculatorChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array());
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FeeCalculatorChoiceType');
     }
 
-    function it_is_abstract_type_object()
+    public function it_is_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_sets_default_options(OptionsResolverInterface $resolver)
+    public function it_sets_default_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('choices' => array()))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_parent()
+    public function it_has_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_fee_calculator_choice');
     }

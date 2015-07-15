@@ -24,7 +24,7 @@ interface PromotionSubjectInterface
     /**
      * Get total of promotion subject.
      *
-     * @return integer
+     * @return int
      */
     public function getPromotionSubjectTotal();
 

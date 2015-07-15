@@ -34,20 +34,22 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
     /**
      * {@inheritdoc}
      * This generates a 3 by 7 by 7 digit number (much like amazon's order identifier)
-     * e.g. 105-3958356-3707476
+     * e.g. 105-3958356-3707476.
      */
     protected function generateNumber($index, SequenceSubjectInterface $order)
     {
         do {
-            $number = $this->generateSegment(3) . '-' . $this->generateSegment(7) . '-' . $this->generateSegment(7);
+            $number = $this->generateSegment(3).'-'.$this->generateSegment(7).'-'.$this->generateSegment(7);
         } while ($this->subjectRepository->isNumberUsed($number));
 
         return $number;
     }
 
     /**
-     * Generates a randomized segment
-     * @param  int    $length
+     * Generates a randomized segment.
+     *
+     * @param int $length
+     *
      * @return string Random characters
      */
     protected function generateSegment($length)

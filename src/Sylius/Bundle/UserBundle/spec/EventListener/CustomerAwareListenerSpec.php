@@ -24,17 +24,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class CustomerAwareListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener');
     }
 
-    function let(CustomerContextInterface $customerContext)
+    public function let(CustomerContextInterface $customerContext)
     {
         $this->beConstructedWith($customerContext);
     }
 
-    function it_throws_exception_when_object_is_not_customer(GenericEvent $event, \stdClass $object)
+    public function it_throws_exception_when_object_is_not_customer(GenericEvent $event, \stdClass $object)
     {
         $event->getSubject()->willReturn($object);
 
@@ -44,7 +44,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_when_context_doesnt_have_customer(
+    public function it_does_nothing_when_context_doesnt_have_customer(
         $customerContext,
         GenericEvent $event,
         CustomerAwareInterface $resource
@@ -57,7 +57,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $this->setCustomer($event);
     }
 
-    function it_sets_customer_on_a_resource(
+    public function it_sets_customer_on_a_resource(
         $customerContext,
         GenericEvent $event,
         CustomerAwareInterface $resource,
@@ -71,7 +71,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $this->setCustomer($event);
     }
 
-    function it_sets_customer_on_a_cart(
+    public function it_sets_customer_on_a_cart(
         $customerContext,
         CartEvent $event,
         CustomerAwareInterface $cart,

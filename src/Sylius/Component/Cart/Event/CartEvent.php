@@ -49,7 +49,7 @@ class CartEvent extends ResourceEvent
 
     /**
      * Notice the event listeners to refresh/recalculate cart
-     * information's
+     * information's.
      *
      * @param null|Boolean $fresh
      *

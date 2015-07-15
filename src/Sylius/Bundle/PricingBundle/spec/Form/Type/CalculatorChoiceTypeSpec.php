@@ -12,41 +12,40 @@
 namespace spec\Sylius\Bundle\PricingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('standard' => 'Standard'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType');
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'choices' => array('standard' => 'Standard')
+            'choices' => array('standard' => 'Standard'),
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_parent()
+    public function it_has_a_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_price_calculator_choice');
     }

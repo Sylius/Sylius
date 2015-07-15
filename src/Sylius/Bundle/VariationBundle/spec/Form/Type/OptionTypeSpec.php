@@ -22,22 +22,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class OptionTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Option', array(), 'server');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Form\Type\OptionType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -57,19 +57,19 @@ class OptionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Option',
-                'validation_groups' => array()
+                'validation_groups' => array(),
             ))
             ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_server_option');
     }

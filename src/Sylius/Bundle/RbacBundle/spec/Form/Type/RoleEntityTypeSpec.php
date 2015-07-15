@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RoleEntityTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Role', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'name');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Form\Type\RoleEntityType');
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType');
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setNormalizers(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);

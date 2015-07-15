@@ -45,9 +45,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var array
      */
     protected $actions = array(
-        'viewing'  => 'show',
+        'viewing' => 'show',
         'creation' => 'create',
-        'editing'  => 'update',
+        'editing' => 'update',
         'building' => 'build',
     );
 
@@ -214,7 +214,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             return $this->generateUrl($page, $parameters);
         }
 
-        $route  = str_replace(' ', '_', trim($page));
+        $route = str_replace(' ', '_', trim($page));
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {

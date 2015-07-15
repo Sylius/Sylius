@@ -19,17 +19,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DateExtensionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension');
     }
 
-    function it_should_extends_abstract_type_extension()
+    public function it_should_extends_abstract_type_extension()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
     }
 
-    function it_should_build_the_view_by_default(FormView $view, FormInterface $form)
+    public function it_should_build_the_view_by_default(FormView $view, FormInterface $form)
     {
         $this->buildView($view, $form, array(
             'widget' => 'single_text',
@@ -40,7 +40,7 @@ class DateExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_configure_the_resolver(OptionsResolverInterface $resolver)
+    public function it_should_configure_the_resolver(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
@@ -59,7 +59,7 @@ class DateExtensionSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_extended_type()
+    public function it_has_extended_type()
     {
         $this->getExtendedType()->shouldReturn('date');
     }

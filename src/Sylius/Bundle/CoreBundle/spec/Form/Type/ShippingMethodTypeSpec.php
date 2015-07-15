@@ -17,22 +17,22 @@ use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    function let(CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function let(CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_extend_Sylius_shipping_method_form_type()
+    public function it_should_extend_Sylius_shipping_method_form_type()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType');
     }

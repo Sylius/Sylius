@@ -19,29 +19,29 @@ use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
  */
 class SchemaRegistrySpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry');
     }
 
-    function it_should_be_a_Sylius_settings_schema_registry()
+    public function it_should_be_a_Sylius_settings_schema_registry()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface');
     }
 
-    function it_should_initialize_schemas_array_by_default()
+    public function it_should_initialize_schemas_array_by_default()
     {
         $this->getSchemas()->shouldReturn(array());
     }
 
-    function it_should_register_schema_properly(SchemaInterface $schema)
+    public function it_should_register_schema_properly(SchemaInterface $schema)
     {
         $this->hasSchema('sylius_general')->shouldReturn(false);
         $this->registerSchema('sylius_general', $schema);
         $this->hasSchema('sylius_general')->shouldReturn(true);
     }
 
-    function it_should_unregister_schema_properly(SchemaInterface $schema)
+    public function it_should_unregister_schema_properly(SchemaInterface $schema)
     {
         $this->registerSchema('sylius_general', $schema);
         $this->hasSchema('sylius_general')->shouldReturn(true);
@@ -50,13 +50,13 @@ class SchemaRegistrySpec extends ObjectBehavior
         $this->hasSchema('sylius_general')->shouldReturn(false);
     }
 
-    function it_should_retrieve_registered_schema_by_namespace(SchemaInterface $schema)
+    public function it_should_retrieve_registered_schema_by_namespace(SchemaInterface $schema)
     {
         $this->registerSchema('sylius_general', $schema);
         $this->getSchema('sylius_general')->shouldReturn($schema);
     }
 
-    function it_should_complain_if_trying_to_retrieve_non_existing_schema()
+    public function it_should_complain_if_trying_to_retrieve_non_existing_schema()
     {
         $this
             ->shouldThrow('InvalidArgumentException')

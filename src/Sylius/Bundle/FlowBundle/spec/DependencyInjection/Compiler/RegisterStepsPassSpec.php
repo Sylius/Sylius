@@ -18,25 +18,25 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class RegisterStepsPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterStepsPass');
     }
 
-    function it_is_compiler_pass()
+    public function it_is_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes(ContainerBuilder $container, Definition $coordinator)
+    public function it_processes(ContainerBuilder $container, Definition $coordinator)
     {
         $container->getDefinition('sylius.process.builder')->shouldBeCalled()->willreturn($coordinator);
         $container->findTaggedServiceIds('sylius.process.step')->shouldBeCalled()->willreturn(array(
             'id' => array(
                 array(
-                    'alias' => 'alias'
-                )
-            )
+                    'alias' => 'alias',
+                ),
+            ),
         ));
 
         $coordinator->addMethodCall('registerStep', Argument::type('array'))->shouldBeCalled();

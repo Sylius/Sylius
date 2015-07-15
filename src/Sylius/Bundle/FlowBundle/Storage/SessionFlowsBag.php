@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 class SessionFlowsBag extends NamespacedAttributeBag
 {
     const STORAGE_KEY = 'sylius.flow.bag';
-    const NAME        = 'sylius.flow.bag';
+    const NAME = 'sylius.flow.bag';
 
     /**
      * Constructor.

@@ -15,12 +15,12 @@ use PhpSpec\ObjectBehavior;
 
 class PaymentSecurityTokenSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken');
     }
 
-    function it_implements_payum_token_interface()
+    public function it_implements_payum_token_interface()
     {
         $this->shouldHaveType('Payum\Core\Security\TokenInterface');
     }

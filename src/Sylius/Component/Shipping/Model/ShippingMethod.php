@@ -40,7 +40,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * The one of 3 requirement variants.
      *
-     * @var integer
+     * @var int
      */
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
@@ -316,8 +316,8 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     {
         return array(
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 'At least 1 item have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All items have to match method category',
         );
     }
 }

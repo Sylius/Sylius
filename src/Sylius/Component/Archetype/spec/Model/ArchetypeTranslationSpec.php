@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Archetype\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 
 /**
@@ -21,33 +20,33 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
  */
 class ArchetypeTranslationSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Archetype\Model\ArchetypeTranslation');
     }
 
-    function it_is_an_Archetype()
+    public function it_is_an_Archetype()
     {
         $this->shouldImplement('Sylius\Component\Archetype\Model\ArchetypeTranslationInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('T-Shirt size');
         $this->getName()->shouldReturn('T-Shirt size');
     }
 
-    function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
+    public function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
     {
         $date = new \DateTime();
 

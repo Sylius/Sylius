@@ -12,10 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
@@ -28,22 +25,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RuleCollectionTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry)
+    public function let(ServiceRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializabled()
+    public function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleCollectionType');
     }
 
-    function it_is_configuration_collection_type()
+    public function it_is_configuration_collection_type()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
     }
 
-    function it_builds_prototypes(
+    public function it_builds_prototypes(
         FormBuilderInterface $builder,
         FormBuilderInterface $prototype,
         FormInterface $form,
@@ -66,7 +63,7 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_builds_view(
+    public function it_builds_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
@@ -80,7 +77,7 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    function it_should_have_default_option(OptionsResolverInterface $resolver)
+    public function it_should_have_default_option(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -93,12 +90,12 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_should_have_parent()
+    public function it_should_have_parent()
     {
         $this->getParent()->shouldReturn('collection');
     }
 
-    function it_should_have_name()
+    public function it_should_have_name()
     {
         $this->getName()->shouldReturn('sylius_promotion_rule_collection');
     }

@@ -26,7 +26,6 @@ use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -40,7 +39,7 @@ require_once __DIR__.'/../../Fixture/RequestStack.php';
 
 class PurchaseStepSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ContainerInterface $container,
         HttpRequestVerifierInterface $httpRequestVerifier,
         TokenInterface $token,
@@ -78,17 +77,17 @@ class PurchaseStepSpec extends ObjectBehavior
         $this->setContainer($container);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Checkout\Step\PurchaseStep');
     }
 
-    function it_extends_checkout_step()
+    public function it_extends_checkout_step()
     {
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep');
     }
 
-    function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+    public function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         Request $request,
         $factory,
         ProcessContextInterface $context,
@@ -143,7 +142,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
-    function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+    public function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         Request $request,
         $factory,
         ProcessContextInterface $context,

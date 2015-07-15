@@ -29,7 +29,7 @@ abstract class AbstractImporter implements ImporterInterface
 
     public function __construct(ObjectManager $manager, RepositoryInterface $repository, array $options = array())
     {
-        $this->manager    = $manager;
+        $this->manager = $manager;
         $this->repository = $repository;
 
         $this->configure($options);

@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Extracts Security Errors from Request
+ * Extracts Security Errors from Request.
  *
  * @author Boris Vujicic <boris.vujicic@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -73,6 +73,7 @@ class AuthenticationUtils
 
     /**
      * @return Request
+     *
      * @throws \LogicException
      */
     private function getRequest()

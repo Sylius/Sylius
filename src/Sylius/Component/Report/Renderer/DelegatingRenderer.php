@@ -28,7 +28,7 @@ class DelegatingRenderer implements DelegatingRendererInterface
     protected $registry;
 
     /**
-     * Contructor
+     * Contructor.
      *
      * @param ServiceRegistryInterface $registry
      */

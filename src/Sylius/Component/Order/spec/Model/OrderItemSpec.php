@@ -21,38 +21,38 @@ use Sylius\Component\Order\Model\OrderItemInterface;
  */
 class OrderItemSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
     }
 
-    function it_implements_Sylius_order_item_interface()
+    public function it_implements_Sylius_order_item_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\OrderItemInterface');
     }
 
-    function it_implements_Sylius_adjustable_interface()
+    public function it_implements_Sylius_adjustable_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_belong_to_an_order_by_default()
+    public function it_does_not_belong_to_an_order_by_default()
     {
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_an_order(OrderInterface $order)
+    public function it_allows_assigning_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    function it_allows_detaching_itself_from_an_order(OrderInterface $order)
+    public function it_allows_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
@@ -61,23 +61,23 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_has_quantity_equal_to_1_by_default()
+    public function it_has_quantity_equal_to_1_by_default()
     {
         $this->getQuantity()->shouldReturn(1);
     }
 
-    function its_quantity_is_mutable()
+    public function its_quantity_is_mutable()
     {
         $this->setQuantity(8);
         $this->getQuantity()->shouldReturn(8);
     }
 
-    function it_has_unit_price_equal_to_0_by_default()
+    public function it_has_unit_price_equal_to_0_by_default()
     {
         $this->getUnitPrice()->shouldReturn(0);
     }
 
-    function its_unit_price_should_accept_only_integer()
+    public function its_unit_price_should_accept_only_integer()
     {
         $this->setUnitPrice(4498)->getUnitPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
@@ -87,12 +87,12 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(new \stdClass());
     }
 
-    function it_has_total_equal_to_0_by_default()
+    public function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
     }
 
-    function its_total_should_accept_only_integer()
+    public function its_total_should_accept_only_integer()
     {
         $this->setTotal(4498)->getTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
@@ -102,7 +102,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
     }
 
-    function it_throws_exception_when_quantity_is_less_than_1()
+    public function it_throws_exception_when_quantity_is_less_than_1()
     {
         $this
             ->shouldThrow(new \OutOfRangeException('Quantity must be greater than 0.'))
@@ -110,12 +110,12 @@ class OrderItemSpec extends ObjectBehavior
         ;
     }
 
-    function it_initializes_adjustments_collection_by_default()
+    public function it_initializes_adjustments_collection_by_default()
     {
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
+    public function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -124,7 +124,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
-    function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
+    public function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
@@ -140,26 +140,26 @@ class OrderItemSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
+    public function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $adjustment->isLocked()->willReturn(true);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
-    function it_has_fluent_interface_for_totals_calculation()
+    public function it_has_fluent_interface_for_totals_calculation()
     {
         $this->calculateAdjustmentsTotal()->shouldReturn($this);
         $this->calculateTotal()->shouldReturn($this);
     }
 
-    function its_total_is_mutable()
+    public function its_total_is_mutable()
     {
         $this->setTotal(5999);
         $this->getTotal()->shouldReturn(5999);
     }
 
-    function it_calculates_correct_total_based_on_quantity_and_unit_price()
+    public function it_calculates_correct_total_based_on_quantity_and_unit_price()
     {
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
@@ -169,7 +169,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(19487);
     }
 
-    function it_calculates_correct_total_based_on_adjustments(AdjustmentInterface $adjustment)
+    public function it_calculates_correct_total_based_on_adjustments(AdjustmentInterface $adjustment)
     {
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
@@ -185,7 +185,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(18487);
     }
 
-    function it_ignores_neutral_adjustments_when_calculating_total(
+    public function it_ignores_neutral_adjustments_when_calculating_total(
         AdjustmentInterface $adjustment,
         AdjustmentInterface $neutralAdjustment
     ) {
@@ -207,7 +207,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(18487);
     }
 
-    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(AdjustmentInterface $adjustment)
+    public function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(AdjustmentInterface $adjustment)
     {
         $this->setQuantity(1);
         $this->setUnitPrice(1500);
@@ -223,13 +223,13 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_ignores_merging_same_items()
+    public function it_ignores_merging_same_items()
     {
         $this->merge($this);
         $this->getQuantity()->shouldReturn(1);
     }
 
-    function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)
+    public function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)
     {
         $this->setQuantity(3);
 
@@ -240,7 +240,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getQuantity()->shouldReturn(10);
     }
 
-    function it_merges_a_known_equal_item_without_calling_equals(OrderItemInterface $item)
+    public function it_merges_a_known_equal_item_without_calling_equals(OrderItemInterface $item)
     {
         $this->setQuantity(3);
 
@@ -251,7 +251,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getQuantity()->shouldReturn(10);
     }
 
-    function it_throws_exception_when_merging_unequal_item(OrderItemInterface $item)
+    public function it_throws_exception_when_merging_unequal_item(OrderItemInterface $item)
     {
         $item->equals($this)->willReturn(false);
 

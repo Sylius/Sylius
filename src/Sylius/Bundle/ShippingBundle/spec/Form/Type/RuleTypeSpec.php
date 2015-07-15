@@ -23,22 +23,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RuleTypeSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $checkerRegistry)
+    public function let(RuleCheckerRegistryInterface $checkerRegistry)
     {
         $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\RuleType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_rule_choice_field(
+    public function it_should_build_form_with_rule_choice_field(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -62,7 +62,7 @@ class RuleTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_add_rule_event_subscriber(
+    public function it_should_add_rule_event_subscriber(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -84,11 +84,11 @@ class RuleTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Rule',
+                'data_class' => 'Rule',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

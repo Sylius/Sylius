@@ -28,7 +28,7 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
  */
 class InventoryHandlerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         InventoryOperatorInterface $inventoryOperator,
         InventoryUnitFactory $inventoryUnitFactory,
         FactoryInterface $factory
@@ -36,17 +36,17 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($inventoryOperator, $inventoryUnitFactory, $factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\InventoryHandler');
     }
 
-    function it_implements_Sylius_inventory_handler_interface()
+    public function it_implements_Sylius_inventory_handler_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface');
     }
 
-    function it_creates_inventory_units_via_the_factory(
+    public function it_creates_inventory_units_via_the_factory(
         $inventoryUnitFactory,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -68,7 +68,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($item);
     }
 
-    function it_creates_only_missing_inventory_units_via_the_factory(
+    public function it_creates_only_missing_inventory_units_via_the_factory(
         $inventoryUnitFactory,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -92,7 +92,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($item);
     }
 
-    function it_holds_the_variant_stock_via_inventory_operator(
+    public function it_holds_the_variant_stock_via_inventory_operator(
         $inventoryOperator,
         $factory,
         OrderInterface $order,
@@ -122,7 +122,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->holdInventory($order);
     }
 
-    function it_releases_the_variant_stock_via_inventory_operator(
+    public function it_releases_the_variant_stock_via_inventory_operator(
         $inventoryOperator,
         $factory,
         OrderInterface $order,
@@ -152,7 +152,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->releaseInventory($order);
     }
 
-    function it_decreases_the_variant_stock_via_inventory_operator(
+    public function it_decreases_the_variant_stock_via_inventory_operator(
         $inventoryOperator,
         $factory,
         OrderInterface $order,

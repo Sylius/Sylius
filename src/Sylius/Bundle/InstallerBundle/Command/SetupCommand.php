@@ -53,7 +53,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return int
@@ -227,7 +227,7 @@ EOT
                 $codes = $this->ask($output, '<question>To which countries you are going to sell your goods?</question> ', array(), 'US');
                 $countries = explode(',', $codes);
             }
-            
+
             $valid = true;
 
             foreach ($countries as $code) {

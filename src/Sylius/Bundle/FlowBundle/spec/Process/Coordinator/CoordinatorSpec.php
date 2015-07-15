@@ -18,17 +18,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CoordinatorSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
+    public function let(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
     {
         $this->beConstructedWith($router, $builder, $context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator');
     }
 
-    function it_is_process_builder()
+    public function it_is_process_builder()
     {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface');
     }

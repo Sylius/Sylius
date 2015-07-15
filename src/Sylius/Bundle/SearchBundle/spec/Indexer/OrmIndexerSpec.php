@@ -13,30 +13,28 @@ namespace spec\Sylius\Bundle\SearchBundle\Indexer;
 
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class OrmIndexerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         $config,
         ModelToElasticaAutoTransformer $transformer
-    )
-    {
+    ) {
         $this->beConstructedWith(
-            (Array)$config,
+            (Array) $config,
             $transformer
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Indexer\OrmIndexer');
     }
 
-    function it_implements_the_indexer_interface_interface()
+    public function it_implements_the_indexer_interface_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SearchBundle\Indexer\IndexerInterface');
     }

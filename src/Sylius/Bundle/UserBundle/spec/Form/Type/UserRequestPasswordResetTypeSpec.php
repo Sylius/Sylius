@@ -20,22 +20,22 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class UserRequestPasswordResetTypeSpec extends ObjectBehavior
 {
-    function it_extends_abstract_type()
+    public function it_extends_abstract_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_user_request_password_reset');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    public function it_builds_form(FormBuilderInterface $builder)
     {
         $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
 

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,24 +27,24 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->beConstructedWith($ordersRepository);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker');
     }
 
-    function it_should_be_Sylius_rule_checker()
+    public function it_should_be_Sylius_rule_checker()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
-    function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
+    public function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
     {
         $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_zero(
+    public function it_should_recognize_subject_as_not_eligible_if_nth_order_is_zero(
         OrderInterface $subject,
         CustomerInterface $customer,
         $ordersRepository
@@ -57,7 +56,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         OrderInterface $subject,
         CustomerInterface $customer,
         $ordersRepository
@@ -69,7 +68,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
         OrderInterface $subject,
         CustomerInterface $customer,
         $ordersRepository
@@ -81,7 +80,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
         OrderInterface $subject,
         CustomerInterface $customer,
         $ordersRepository

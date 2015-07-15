@@ -85,10 +85,10 @@ class DateExtension extends AbstractTypeExtension
     }
 
     /**
-     * Get the datepicker date pattern
+     * Get the datepicker date pattern.
      *
-     * @param string  $formPattern
-     * @param boolean $leadingZero
+     * @param string $formPattern
+     * @param bool   $leadingZero
      *
      * @return string
      */
@@ -108,7 +108,7 @@ class DateExtension extends AbstractTypeExtension
     }
 
     /**
-     * Replace the search string with the replacement string
+     * Replace the search string with the replacement string.
      *
      * @param string $search
      * @param string $replace

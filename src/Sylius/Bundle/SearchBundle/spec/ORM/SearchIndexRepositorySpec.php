@@ -12,25 +12,20 @@
 namespace spec\Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
 class SearchIndexRepositorySpec extends ObjectBehavior
 {
-
-    function let(
+    public function let(
         EntityManager $em,
         BaseProductRepository $productRepository
-    )
-    {
+    ) {
         $this->beConstructedWith($em, $productRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository');
     }
-
 }

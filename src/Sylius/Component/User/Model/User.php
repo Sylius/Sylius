@@ -44,12 +44,12 @@ class User implements UserInterface
     protected $usernameCanonical;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled = false;
 
     /**
-     * The salt to use for hashing
+     * The salt to use for hashing.
      *
      * @var string
      */
@@ -75,7 +75,7 @@ class User implements UserInterface
     protected $lastLogin;
 
     /**
-     * Random string sent to the user email address in order to verify it
+     * Random string sent to the user email address in order to verify it.
      *
      * @var string
      */
@@ -87,7 +87,7 @@ class User implements UserInterface
     protected $passwordRequestedAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $locked = false;
 
@@ -102,7 +102,8 @@ class User implements UserInterface
     protected $credentialsExpireAt;
 
     /**
-     * We need at least one role to be able to authenticate
+     * We need at least one role to be able to authenticate.
+     *
      * @var array
      */
     protected $roles = array(UserInterface::DEFAULT_ROLE);
@@ -515,7 +516,7 @@ class User implements UserInterface
     public function getOAuthAccount($provider)
     {
         if ($this->oauthAccounts->isEmpty()) {
-            return null;
+            return;
         }
 
         $filtered = $this->oauthAccounts->filter(function (UserOAuthInterface $oauth) use ($provider) {
@@ -523,7 +524,7 @@ class User implements UserInterface
         });
 
         if ($filtered->isEmpty()) {
-            return null;
+            return;
         }
 
         return $filtered->current();

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ConfigurationSpec extends ObjectBehavior
 {
-    function let(Request $request, Parameters $parameters, ParametersParser $parser)
+    public function let(Request $request, Parameters $parameters, ParametersParser $parser)
     {
         $this->beConstructedWith(
             $parser,
@@ -41,57 +41,57 @@ class ConfigurationSpec extends ObjectBehavior
         $this->setParameters($parameters);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }
 
-    function it_has_parameters()
+    public function it_has_parameters()
     {
         $this->getParameters()->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
     }
 
-    function its_parameter_is_mutable(Parameters $parameters)
+    public function its_parameter_is_mutable(Parameters $parameters)
     {
         $this->setParameters($parameters);
     }
 
-    function it_has_request()
+    public function it_has_request()
     {
         $this->getRequest()->shouldHaveType('Symfony\Component\HttpFoundation\Request');
     }
 
-    function its_request_is_mutable(Request $request)
+    public function its_request_is_mutable(Request $request)
     {
         $this->setRequest($request);
     }
 
-    function it_returns_assigned_bundle_prefix()
+    public function it_returns_assigned_bundle_prefix()
     {
         $this->getBundlePrefix()->shouldReturn('sylius');
     }
 
-    function it_returns_assigned_resource_name()
+    public function it_returns_assigned_resource_name()
     {
         $this->getResourceName()->shouldReturn('product');
     }
 
-    function it_returns_plural_resource_name()
+    public function it_returns_plural_resource_name()
     {
         $this->getPluralResourceName()->shouldReturn('products');
     }
 
-    function it_returns_assigned_template_namespace()
+    public function it_returns_assigned_template_namespace()
     {
         $this->getTemplateNamespace()->shouldReturn('SyliusWebBundle:Product');
     }
 
-    function it_returns_assigned_templating_engine()
+    public function it_returns_assigned_templating_engine()
     {
         $this->getTemplatingEngine()->shouldReturn('twig');
     }
 
-    function its_api_request_when_format_is_not_html(Request $request)
+    public function its_api_request_when_format_is_not_html(Request $request)
     {
         $this->setRequest($request);
 
@@ -105,20 +105,20 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isApiRequest()->shouldReturn(true);
     }
 
-    function it_generates_service_names()
+    public function it_generates_service_names()
     {
         $this->getServiceName('manager')->shouldReturn('sylius.manager.product');
         $this->getServiceName('repository')->shouldReturn('sylius.repository.product');
         $this->getServiceName('controller')->shouldReturn('sylius.controller.product');
     }
 
-    function it_generates_event_names()
+    public function it_generates_event_names()
     {
         $this->getEventName('create')->shouldReturn('sylius.product.create');
         $this->getEventName('created')->shouldReturn('sylius.product.created');
     }
 
-    function it_generates_template_names()
+    public function it_generates_template_names()
     {
         $this->getTemplateName('index.html')->shouldReturn('SyliusWebBundle:Product:index.html.twig');
         $this->getTemplateName('show.html')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
@@ -127,7 +127,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
     }
 
-    function it_generates_view_template(Parameters $parameters)
+    public function it_generates_view_template(Parameters $parameters)
     {
         $parameters->get('template', 'SyliusWebBundle:Product:create.html.twig')
             ->willReturn('SyliusWebBundle:Product:create.html.twig');
@@ -138,7 +138,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getTemplate('create.html')->shouldReturn('MyBundleWebBundle:Product:create.html.twig');
     }
 
-    function it_generates_form_type(Parameters $parameters)
+    public function it_generates_form_type(Parameters $parameters)
     {
         $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
         $this->getFormType()->shouldReturn('sylius_product');
@@ -147,14 +147,14 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFormType()->shouldReturn('sylius_variant');
     }
 
-    function it_generates_route_names()
+    public function it_generates_route_names()
     {
         $this->getRouteName('index')->shouldReturn('sylius_product_index');
         $this->getRouteName('show')->shouldReturn('sylius_product_show');
         $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
     }
 
-    function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag)
+    public function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag)
     {
         $request->headers = $bag;
         $bag->get('referer')->willReturn('http://myurl.com');
@@ -162,7 +162,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRedirectReferer()->shouldReturn('http://myurl.com');
     }
 
-    function it_generates_redirect_route(Parameters $parameters)
+    public function it_generates_redirect_route(Parameters $parameters)
     {
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
@@ -174,7 +174,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRedirectRoute('custom')->shouldReturn('myRoute');
     }
 
-    function it_returns_array_as_redirect_parameters(Parameters $parameters, ParametersParser $parser)
+    public function it_returns_array_as_redirect_parameters(Parameters $parameters, ParametersParser $parser)
     {
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectParameters()->shouldReturn(array());
@@ -191,7 +191,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRedirectParameters('resource')->shouldReturn($params);
     }
 
-    function it_checks_limit_is_enable(Parameters $parameters)
+    public function it_checks_limit_is_enable(Parameters $parameters)
     {
         $parameters->get('limit', Argument::any())->willReturn(10);
         $this->isLimited()->shouldReturn(true);
@@ -200,7 +200,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isLimited()->shouldReturn(false);
     }
 
-    function it_has_limit_parameter(Parameters $parameters)
+    public function it_has_limit_parameter(Parameters $parameters)
     {
         $parameters->get('limit', false)->willReturn(true);
         $parameters->get('limit', 10)->willReturn(10);
@@ -211,7 +211,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getLimit()->shouldReturn(null);
     }
 
-    function it_checks_paginate_is_enable(Parameters $parameters)
+    public function it_checks_paginate_is_enable(Parameters $parameters)
     {
         $parameters->get('paginate', Argument::any())->willReturn(10);
         $this->isPaginated()->shouldReturn(true);
@@ -220,7 +220,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_has_paginate_parameter(Parameters $parameters)
+    public function it_has_paginate_parameter(Parameters $parameters)
     {
         $parameters->get('paginate', 10)->willReturn(20);
         $this->getPaginationMaxPerPage()->shouldReturn(20);
@@ -229,7 +229,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
-    function it_checks_if_the_resource_is_filterable(Parameters $parameters)
+    public function it_checks_if_the_resource_is_filterable(Parameters $parameters)
     {
         $parameters->get('filterable', Argument::any())->willReturn(true);
         $this->isFilterable()->shouldReturn(true);
@@ -238,7 +238,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isFilterable()->shouldReturn(false);
     }
 
-    function it_has_no_filterable_parameter(Parameters $parameters)
+    public function it_has_no_filterable_parameter(Parameters $parameters)
     {
         $defaultCriteria = array('property' => 'myValue');
 
@@ -249,7 +249,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getCriteria($defaultCriteria)->shouldHaveCount(1);
     }
 
-    function it_has_criteria_parameter(Parameters $parameters, Request $request)
+    public function it_has_criteria_parameter(Parameters $parameters, Request $request)
     {
         $criteria = array('property' => 'myNewValue');
 
@@ -259,7 +259,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getCriteria()->shouldReturn($criteria);
     }
 
-    function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request)
+    public function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request)
     {
         $criteria = array('property' => 'myValue');
         $overriddenCriteria = array('other_property' => 'myNewValue');
@@ -287,7 +287,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getCriteria(array('filter' => 'default'))->shouldReturn(array('filter' => 'request'));
     }
 
-    function it_checks_if_the_resource_is_sortable(Parameters $parameters)
+    public function it_checks_if_the_resource_is_sortable(Parameters $parameters)
     {
         $parameters->get('sortable', Argument::any())->willReturn(true);
         $this->isSortable()->shouldReturn(true);
@@ -296,7 +296,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isSortable()->shouldReturn(false);
     }
 
-    function it_has_sorting_parameter(Parameters $parameters, Request $request)
+    public function it_has_sorting_parameter(Parameters $parameters, Request $request)
     {
         $sorting = array('property' => 'asc');
 
@@ -306,7 +306,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting()->shouldReturn($sorting);
     }
 
-    function it_has_no_sortable_parameter(Parameters $parameters)
+    public function it_has_no_sortable_parameter(Parameters $parameters)
     {
         $defaultSorting = array('property' => 'desc');
 
@@ -317,7 +317,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting($defaultSorting)->shouldHaveCount(1);
     }
 
-    function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request)
+    public function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request)
     {
         $sorting = array('property' => 'desc');
         $overriddenSorting = array('other_property' => 'asc');
@@ -345,7 +345,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getSorting(array('sort' => 'default'))->shouldReturn(array('sort' => 'request'));
     }
 
-    function it_has_repository_method_parameter(Parameters $parameters)
+    public function it_has_repository_method_parameter(Parameters $parameters)
     {
         $parameters->get('repository', array('method' => 'myDefaultMethod'))
             ->willReturn(array('method' => 'myDefaultMethod'));
@@ -356,7 +356,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRepositoryMethod('myDefaultMethod')->shouldReturn('myMethod');
     }
 
-    function it_has_repository_arguments_parameter(Parameters $parameters)
+    public function it_has_repository_arguments_parameter(Parameters $parameters)
     {
         $defaultArguments = array('arguments' => 'value');
         $parameters->get('repository', array())->willReturn($defaultArguments);
@@ -367,7 +367,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRepositoryArguments($defaultArguments)->shouldReturn('myValue');
     }
 
-    function it_has_factory_method_parameter(Parameters $parameters)
+    public function it_has_factory_method_parameter(Parameters $parameters)
     {
         $parameters->get('factory', array('method' => 'myDefaultMethod'))
             ->willReturn(array('method' => 'myDefaultMethod'));
@@ -378,7 +378,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFactoryMethod('myDefaultMethod')->shouldReturn('myMethod');
     }
 
-    function it_has_factory_arguments_parameter(Parameters $parameters)
+    public function it_has_factory_arguments_parameter(Parameters $parameters)
     {
         $defaultArguments = array('arguments' => 'value');
         $parameters->get('factory', array())->willReturn($defaultArguments);
@@ -389,7 +389,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFactoryArguments($defaultArguments)->shouldReturn('myValue');
     }
 
-    function it_has_flash_message_parameter(Parameters $parameters)
+    public function it_has_flash_message_parameter(Parameters $parameters)
     {
         $parameters->get('flash', 'sylius.product.message')->willReturn('sylius.product.message');
         $this->getFlashMessage('message')->shouldReturn('sylius.product.message');
@@ -398,7 +398,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFlashMessage('flash')->shouldReturn('sylius.product.myMessage');
     }
 
-    function it_has_sortable_position_parameter(Parameters $parameters)
+    public function it_has_sortable_position_parameter(Parameters $parameters)
     {
         $parameters->get('sortable_position', 'position')->willReturn('position');
         $this->getSortablePosition()->shouldReturn('position');

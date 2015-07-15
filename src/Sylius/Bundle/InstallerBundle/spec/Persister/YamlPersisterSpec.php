@@ -16,12 +16,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class YamlPersisterSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith($this->getTmpFileName());
     }
 
-    function it_dumps_configuration()
+    public function it_dumps_configuration()
     {
         $this->dump(array('database' => array('user' => 'root')));
 
@@ -35,7 +35,7 @@ class YamlPersisterSpec extends ObjectBehavior
         return sys_get_temp_dir().DIRECTORY_SEPARATOR.'parameters.yml';
     }
 
-    function letgo()
+    public function letgo()
     {
         unlink($this->getTmpFileName());
     }

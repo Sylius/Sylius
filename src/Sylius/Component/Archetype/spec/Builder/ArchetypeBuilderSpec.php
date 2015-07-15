@@ -26,22 +26,22 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class ArchetypeBuilderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeValueRepository)
+    public function let(RepositoryInterface $attributeValueRepository)
     {
         $this->beConstructedWith($attributeValueRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
     }
 
-    function it_is_an_Archetype_Builder()
+    public function it_is_an_Archetype_Builder()
     {
         $this->shouldImplement('Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface');
     }
 
-    function it_does_not_build_the_subject_if_it_has_no_archetype(ArchetypeSubjectInterface $subject)
+    public function it_does_not_build_the_subject_if_it_has_no_archetype(ArchetypeSubjectInterface $subject)
     {
         $subject->getArchetype()->willReturn(null);
 
@@ -51,7 +51,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $this->build($subject);
     }
 
-    function it_assigns_archetype_attributes_and_options_to_the_subject(
+    public function it_assigns_archetype_attributes_and_options_to_the_subject(
         $attributeValueRepository,
         ArchetypeInterface $archetype,
         ArchetypeSubjectInterface $subject,
@@ -75,7 +75,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $this->build($subject);
     }
 
-    function it_creates_new_values_only_for_non_existing_attributes(
+    public function it_creates_new_values_only_for_non_existing_attributes(
         $attributeValueRepository,
         ArchetypeInterface $archetype,
         ArchetypeSubjectInterface $subject,

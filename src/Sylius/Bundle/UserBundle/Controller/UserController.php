@@ -63,7 +63,7 @@ class UserController extends ResourceController
         return $this->render(
             'SyliusWebBundle:Frontend/Account:changePassword.html.twig',
             array(
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
             )
         );
     }
@@ -133,7 +133,7 @@ class UserController extends ResourceController
         return $this->render(
             'SyliusWebBundle:Frontend/Account:requestPasswordReset.html.twig',
             array(
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
             )
         );
     }

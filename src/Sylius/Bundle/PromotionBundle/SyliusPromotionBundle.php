@@ -51,10 +51,10 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Promotion\Model\PromotionInterface'        => 'sylius.model.promotion.class',
-            'Sylius\Component\Promotion\Model\CouponInterface'           => 'sylius.model.promotion_coupon.class',
-            'Sylius\Component\Promotion\Model\RuleInterface'             => 'sylius.model.promotion_rule.class',
-            'Sylius\Component\Promotion\Model\ActionInterface'           => 'sylius.model.promotion_action.class',
+            'Sylius\Component\Promotion\Model\PromotionInterface' => 'sylius.model.promotion.class',
+            'Sylius\Component\Promotion\Model\CouponInterface' => 'sylius.model.promotion_coupon.class',
+            'Sylius\Component\Promotion\Model\RuleInterface' => 'sylius.model.promotion_rule.class',
+            'Sylius\Component\Promotion\Model\ActionInterface' => 'sylius.model.promotion_action.class',
             'Sylius\Component\Promotion\Model\PromotionSubjectInterface' => 'sylius.model.promotion_subject.class',
         );
     }

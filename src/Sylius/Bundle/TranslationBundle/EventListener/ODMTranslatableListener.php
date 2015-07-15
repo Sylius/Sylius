@@ -16,7 +16,6 @@ use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -46,7 +45,7 @@ class ODMTranslatableListener implements EventSubscriber
     private $mappings;
 
     /**
-     * @param array $mappings
+     * @param array  $mappings
      * @param string $fallbackLocale
      */
     public function __construct(array $mappings, $fallbackLocale)
@@ -77,14 +76,14 @@ class ODMTranslatableListener implements EventSubscriber
     }
 
     /**
-     * Add mapping to translatable entities
+     * Add mapping to translatable entities.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection    = $classMetadata->reflClass;
+        $reflection = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
@@ -100,7 +99,7 @@ class ODMTranslatableListener implements EventSubscriber
     }
 
     /**
-     * Add mapping data to a translatable entity
+     * Add mapping data to a translatable entity.
      *
      * @param ClassMetadata $metadata
      */
@@ -118,14 +117,14 @@ class ODMTranslatableListener implements EventSubscriber
         $mapping = $config['translation']['mapping'];
 
         $metadata->mapManyEmbedded(array(
-            'fieldName'      => $mapping['translatable']['translations'],
+            'fieldName' => $mapping['translatable']['translations'],
             'targetDocument' => $config['translation']['model'],
-            'strategy'       => 'set'
+            'strategy' => 'set',
         ));
     }
 
     /**
-     * Add mapping data to a translation entity
+     * Add mapping data to a translation entity.
      *
      * @param ClassMetadata $metadata
      */
@@ -148,25 +147,25 @@ class ODMTranslatableListener implements EventSubscriber
         if (!$metadata->hasField($mapping['translation']['locale'])) {
             $metadata->mapField(array(
                 'fieldName' => $mapping['translation']['locale'],
-                'type'      => 'string',
+                'type' => 'string',
             ));
         }
 
         // Map unique index.
         $keys = array(
             $mapping['translation']['translatable'] => 1,
-            $mapping['translation']['locale'] => 1
+            $mapping['translation']['locale'] => 1,
         );
 
         if (!$this->hasUniqueIndex($metadata, $keys)) {
             $metadata->addIndex($keys, array(
-                'unique' => true
+                'unique' => true,
             ));
         }
     }
 
     /**
-     * Load translations
+     * Load translations.
      *
      * @param LifecycleEventArgs $args
      */

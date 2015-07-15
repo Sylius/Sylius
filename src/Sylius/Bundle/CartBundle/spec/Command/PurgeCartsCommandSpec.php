@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\CartBundle\Command;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Cart\Purger\PurgerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class PurgeCartsCommandSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Command\PurgeCartsCommand');
     }

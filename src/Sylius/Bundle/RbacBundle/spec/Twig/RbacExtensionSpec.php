@@ -19,17 +19,17 @@ use Sylius\Bundle\RbacBundle\Templating\Helper\RbacHelper;
  */
 class RbacExtensionSpec extends ObjectBehavior
 {
-    function let(RbacHelper $helper)
+    public function let(RbacHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Twig\RbacExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

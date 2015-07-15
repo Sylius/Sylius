@@ -25,22 +25,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ActionTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $actionRegistry)
+    public function let(ServiceRegistryInterface $actionRegistry)
     {
         $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
     }
 
-    function it_is_initializabled()
+    public function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionType');
     }
 
-    function it_is_configuration_form_type()
+    public function it_is_configuration_form_type()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType');
     }
 
-    function it_builds_form(
+    public function it_builds_form(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -55,11 +55,11 @@ class ActionTypeSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'configuration_type' => 'configuration_form_type'
+            'configuration_type' => 'configuration_form_type',
         ));
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Action',
@@ -72,7 +72,7 @@ class ActionTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_promotion_action');
     }

@@ -44,9 +44,9 @@ class ExpiredOrdersReleaser implements ReleaserInterface
 
     public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
-        $this->manager    = $manager;
+        $this->manager = $manager;
         $this->repository = $repository;
-        $this->factory    = $factory;
+        $this->factory = $factory;
     }
 
     /**

@@ -21,22 +21,22 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class InventoryChangeListenerSpec extends ObjectBehavior
 {
-    function let(BackordersHandlerInterface $backordersHandler)
+    public function let(BackordersHandlerInterface $backordersHandler)
     {
         $this->beConstructedWith($backordersHandler);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener');
     }
 
-    function it_implements_Sylius_inventory_change_listener_interface()
+    public function it_implements_Sylius_inventory_change_listener_interface()
     {
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface');
     }
 
-    function it_fills_backorders_on_inventory_change(
+    public function it_fills_backorders_on_inventory_change(
         $backordersHandler,
         GenericEvent $event,
         StockableInterface $stockable)

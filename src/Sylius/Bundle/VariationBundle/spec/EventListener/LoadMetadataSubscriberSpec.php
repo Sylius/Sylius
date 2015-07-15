@@ -21,7 +21,7 @@ use Prophecy\Argument;
  */
 class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array(
             'product' => array(
@@ -39,22 +39,22 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\EventListener\LoadMetadataSubscriber');
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    public function it_is_a_Doctrine_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    public function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }
 
-    function it_does_not_add_mapping_if_the_class_is_not_a_configured_for_a_variation_set(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_does_not_add_mapping_if_the_class_is_not_a_configured_for_a_variation_set(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
@@ -66,7 +66,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_associations_from_the_variant_model_to_the_variable_object_model_and_the_option_value_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_maps_associations_from_the_variant_model_to_the_variable_object_model_and_the_option_value_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Variant');
@@ -79,8 +79,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'product_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $optionsMapping = array(
@@ -94,16 +94,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
+                    'onDelete' => 'CASCADE',
                 )),
                 'inverseJoinColumns' => array(array(
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
+                    'onDelete' => 'CASCADE',
+                )),
+            ),
         );
 
         $metadata->mapManyToOne($objectMapping)->shouldBeCalled();
@@ -117,8 +117,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
@@ -127,7 +127,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_one_to_many_association_from_the_option_model_to_the_option_value_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_maps_one_to_many_association_from_the_option_model_to_the_option_value_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Option');
@@ -136,7 +136,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'fieldName' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\OptionValue',
             'mappedBy' => 'option',
-            'cascade' => array('all')
+            'cascade' => array('all'),
         );
 
         $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
@@ -147,7 +147,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_many_to_one_association_from_the_option_value_model_to_the_option_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_maps_many_to_one_association_from_the_option_value_model_to_the_option_model(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\OptionValue');
@@ -160,8 +160,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $nonApplicableOptionsMapping = array(
@@ -175,16 +175,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
+                    'onDelete' => 'CASCADE',
                 )),
                 'inverseJoinColumns' => array(array(
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
+                    'onDelete' => 'CASCADE',
+                )),
+            ),
         );
 
         $metadata->mapManyToOne($optionMapping)->shouldBeCalled();

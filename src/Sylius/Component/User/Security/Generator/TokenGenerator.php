@@ -35,5 +35,4 @@ class TokenGenerator implements GeneratorInterface
 
         return substr($hash, $startPosition, $length);
     }
-
 }

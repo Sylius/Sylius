@@ -16,17 +16,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProcessBuilderSpec extends ObjectBehavior
 {
-    function let(ContainerInterface $container)
+    public function let(ContainerInterface $container)
     {
         $this->beConstructedWith($container);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder');
     }
 
-    function it_is_process_builder()
+    public function it_is_process_builder()
     {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface');
     }

@@ -76,7 +76,7 @@ class MailerListener
         $order = $shipment->getOrder();
         $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getCustomer()->getEmail()), array(
             'shipment' => $shipment,
-            'order' => $order
+            'order' => $order,
         ));
     }
 
@@ -127,7 +127,7 @@ class MailerListener
             $email = $order->getCustomer()->getEmail();
 
             $this->emailSender->send(Emails::ORDER_COMMENT, array($email), array(
-                'order'   => $order,
+                'order' => $order,
                 'comment' => $comment,
             ));
         }

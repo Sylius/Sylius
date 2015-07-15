@@ -35,7 +35,7 @@ class NumberOfOrdersType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => NumberOfOrdersDataFetcher::getPeriodChoices(),
+                'choices' => NumberOfOrdersDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
@@ -47,8 +47,8 @@ class NumberOfOrdersType extends AbstractType
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_data_fetcher_number_of_orders';

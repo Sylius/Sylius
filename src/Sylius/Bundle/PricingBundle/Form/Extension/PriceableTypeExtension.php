@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\Extension;
 
-use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -73,7 +72,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
         $builder
             ->addEventSubscriber($this->formSubscriber)
             ->add('pricingCalculator', 'sylius_price_calculator_choice', array(
-                'label' => 'sylius.form.priceable.calculator'
+                'label' => 'sylius.form.priceable.calculator',
             ))
         ;
 

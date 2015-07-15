@@ -23,17 +23,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class PasswordUpdaterListenerSpec extends ObjectBehavior
 {
-    function let(PasswordUpdaterInterface $passwordUpdater)
+    public function let(PasswordUpdaterInterface $passwordUpdater)
     {
         $this->beConstructedWith($passwordUpdater);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener');
     }
 
-    function it_updates_password_for_generic_event($passwordUpdater, GenericEvent $event, UserInterface $user)
+    public function it_updates_password_for_generic_event($passwordUpdater, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
@@ -44,7 +44,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->genericEventUpdater($event);
     }
 
-    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only($passwordUpdater, GenericEvent $event, UserInterface $user)
+    public function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only($passwordUpdater, GenericEvent $event, UserInterface $user)
     {
         $user = '';
         $event->getSubject()->willReturn($user);
@@ -52,7 +52,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
             ->duringGenericEventUpdater($event);
     }
 
-    function it_updates_password_on_pre_persist_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
+    public function it_updates_password_on_pre_persist_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
     {
         $event->getEntity()->willReturn($user);
 
@@ -63,7 +63,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_updates_password_on_pre_update_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
+    public function it_updates_password_on_pre_update_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
     {
         $event->getEntity()->willReturn($user);
 
@@ -74,7 +74,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->preUpdate($event);
     }
 
-    function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
+    public function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
     {
         $user = '';
         $event->getEntity()->willReturn($user);
@@ -82,7 +82,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
+    public function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
     {
         $user = '';
         $event->getEntity()->willReturn($user);

@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  */
 class PromotionProcessorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         PromotionRepositoryInterface $repository,
         PromotionEligibilityCheckerInterface $checker,
         PromotionApplicatorInterface $applicator
@@ -31,24 +31,23 @@ class PromotionProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($repository, $checker, $applicator);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Processor\PromotionProcessor');
     }
 
-    function it_should_be_Sylius_promotion_processor()
+    public function it_should_be_Sylius_promotion_processor()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Processor\PromotionProcessorInterface');
     }
 
-    function it_should_not_apply_promotions_that_are_not_eligible(
+    public function it_should_not_apply_promotions_that_are_not_eligible(
         $repository,
         $checker,
         $applicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn(array());
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
@@ -58,7 +57,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $this->process($subject);
     }
 
-    function it_should_apply_promotions_that_are_eligible(
+    public function it_should_apply_promotions_that_are_eligible(
         $repository,
         $checker,
         $applicator,
@@ -74,7 +73,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $this->process($subject);
     }
 
-    function it_should_apply_only_exclusive_promotion(
+    public function it_should_apply_only_exclusive_promotion(
         $repository,
         $checker,
         $applicator,
@@ -95,7 +94,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $this->process($subject);
     }
 
-    function it_should_revert_promotions_that_are_not_eligible_anymore(
+    public function it_should_revert_promotions_that_are_not_eligible_anymore(
         $repository,
         $checker,
         $applicator,

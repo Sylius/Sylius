@@ -22,55 +22,55 @@ use Sylius\Component\Order\Model\OrderItemInterface;
  */
 class OrderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
-    function it_implements_Sylius_order_interface()
+    public function it_implements_Sylius_order_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
     }
 
-    function it_implements_Sylius_adjustable_interface()
+    public function it_implements_Sylius_adjustable_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
     }
 
-    function it_implements_Sylius_timestampable_interface()
+    public function it_implements_Sylius_timestampable_interface()
     {
         $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_is_not_completed_by_default()
+    public function it_is_not_completed_by_default()
     {
         $this->shouldNotBeCompleted();
     }
 
-    function it_can_be_completed()
+    public function it_can_be_completed()
     {
         $this->complete();
         $this->shouldBeCompleted();
     }
 
-    function it_is_completed_when_completion_date_is_set()
+    public function it_is_completed_when_completion_date_is_set()
     {
         $this->shouldNotBeCompleted();
         $this->setCompletedAt(new \DateTime('2 days ago'));
         $this->shouldBeCompleted();
     }
 
-    function it_has_no_completion_date_by_default()
+    public function it_has_no_completion_date_by_default()
     {
         $this->getCompletedAt()->shouldReturn(null);
     }
 
-    function its_completion_date_is_mutable()
+    public function its_completion_date_is_mutable()
     {
         $date = new \DateTime('1 hour ago');
 
@@ -78,28 +78,28 @@ class OrderSpec extends ObjectBehavior
         $this->getCompletedAt()->shouldReturn($date);
     }
 
-    function it_has_no_number_by_default()
+    public function it_has_no_number_by_default()
     {
         $this->getNumber()->shouldReturn(null);
     }
 
-    function its_number_is_mutable()
+    public function its_number_is_mutable()
     {
         $this->setNumber('001351');
         $this->getNumber()->shouldReturn('001351');
     }
 
-    function it_creates_items_collection_by_default()
+    public function it_creates_items_collection_by_default()
     {
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
-    function it_creates_identities_collection_by_default()
+    public function it_creates_identities_collection_by_default()
     {
         $this->getIdentities()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
-    function it_adds_identities_properly(IdentityInterface $identity)
+    public function it_adds_identities_properly(IdentityInterface $identity)
     {
         $this->hasIdentity($identity)->shouldReturn(false);
 
@@ -107,7 +107,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasIdentity($identity)->shouldReturn(true);
     }
 
-    function it_adds_items_properly(OrderItemInterface $item)
+    public function it_adds_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -115,7 +115,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasItem($item)->shouldReturn(true);
     }
 
-    function it_removes_identities_properly(IdentityInterface $identity)
+    public function it_removes_identities_properly(IdentityInterface $identity)
     {
         $this->hasIdentity($identity)->shouldReturn(false);
 
@@ -126,7 +126,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasIdentity($identity)->shouldReturn(false);
     }
 
-    function it_removes_items_properly(OrderItemInterface $item)
+    public function it_removes_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -137,7 +137,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasItem($item)->shouldReturn(false);
     }
 
-    function it_has_fluent_interface_for_items_management(OrderItemInterface $item)
+    public function it_has_fluent_interface_for_items_management(OrderItemInterface $item)
     {
         $this->addItem($item)->shouldReturn($this);
         $this->removeItem($item)->shouldReturn($this);
@@ -145,12 +145,12 @@ class OrderSpec extends ObjectBehavior
         $this->clearItems()->shouldReturn($this);
     }
 
-    function it_has_items_total_equal_to_0_by_default()
+    public function it_has_items_total_equal_to_0_by_default()
     {
         $this->getItemsTotal()->shouldReturn(0);
     }
 
-    function its_items_total_should_accept_only_integer()
+    public function its_items_total_should_accept_only_integer()
     {
         $this->setItemsTotal(4498)->getItemsTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(44.98 * 100);
@@ -160,7 +160,7 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(new \stdClass());
     }
 
-    function it_calculates_correct_items_total(
+    public function it_calculates_correct_items_total(
         OrderItemInterface $item1,
         OrderItemInterface $item2,
         OrderItemInterface $item3
@@ -192,12 +192,12 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(75249);
     }
 
-    function it_creates_adjustments_collection_by_default()
+    public function it_creates_adjustments_collection_by_default()
     {
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
+    public function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -206,7 +206,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
-    function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
+    public function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
@@ -222,26 +222,26 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
+    public function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $adjustment->isLocked()->willReturn(true);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
-    function it_has_fluent_interface_for_totals_calculation()
+    public function it_has_fluent_interface_for_totals_calculation()
     {
         $this->calculateItemsTotal()->shouldReturn($this);
         $this->calculateAdjustmentsTotal()->shouldReturn($this);
         $this->calculateTotal()->shouldReturn($this);
     }
 
-    function it_has_adjustments_total_equal_to_0_by_default()
+    public function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
+    public function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
     {
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->getAmount()->willReturn(-4999);
@@ -266,12 +266,12 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustmentsTotal()->shouldReturn(6930);
     }
 
-    function it_has_total_equal_to_0_by_default()
+    public function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
     }
 
-    function its_total_should_accept_only_integer()
+    public function its_total_should_accept_only_integer()
     {
         $this->setTotal(4498)->getTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
@@ -281,7 +281,7 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
     }
 
-    function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
+    public function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -315,7 +315,7 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
-    function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
+    public function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -349,7 +349,7 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(70000);
     }
 
-    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
+    public function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
     {
         $item->calculateTotal()->shouldBeCalled();
 
@@ -374,23 +374,23 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function it_is_empty_by_default()
+    public function it_is_empty_by_default()
     {
         $this->countItems()->shouldReturn(0);
         $this->shouldBeEmpty();
     }
 
-    function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface$item2)
+    public function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface$item2)
     {
         $item1->setOrder($this)->shouldBeCalled();
 
@@ -406,7 +406,7 @@ class OrderSpec extends ObjectBehavior
         $this->countItems()->shouldReturn(1);
     }
 
-    function it_should_be_able_to_clear_items(OrderItemInterface $item)
+    public function it_should_be_able_to_clear_items(OrderItemInterface $item)
     {
         $this->shouldBeEmpty();
         $this->addItem($item);
@@ -415,7 +415,7 @@ class OrderSpec extends ObjectBehavior
         $this->shouldBeEmpty();
     }
 
-    function it_should_be_able_to_clear_adjustments(AdjustmentInterface $adjustment)
+    public function it_should_be_able_to_clear_adjustments(AdjustmentInterface $adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
         $this->addAdjustment($adjustment);

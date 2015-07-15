@@ -19,35 +19,35 @@ namespace Sylius\Component\Promotion\Model;
 class Rule implements RuleInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * Type
+     * Type.
      *
      * @var string
      */
     protected $type;
 
     /**
-     * Configuration
+     * Configuration.
      *
      * @var array
      */
     protected $configuration;
 
     /**
-     * Associated promotion
+     * Associated promotion.
      *
      * @var PromotionInterface
      */
     protected $promotion;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -55,9 +55,9 @@ class Rule implements RuleInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

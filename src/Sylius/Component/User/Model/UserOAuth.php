@@ -43,7 +43,7 @@ class UserOAuth implements UserOAuthInterface
     protected $user;
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {

@@ -20,22 +20,22 @@ use Symfony\Component\Form\FormBuilder;
  */
 class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('sylius'));
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
+    public function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
     {
         $builder
             ->add('amount', 'sylius_money', Argument::any())

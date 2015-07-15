@@ -27,7 +27,7 @@ class GenderType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => array(
-                CustomerInterface::UNKNOWN_GENDER  => ' ',
+                CustomerInterface::UNKNOWN_GENDER => ' ',
                 CustomerInterface::MALE_GENDER => 'sylius.gender.male',
                 CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
             ),

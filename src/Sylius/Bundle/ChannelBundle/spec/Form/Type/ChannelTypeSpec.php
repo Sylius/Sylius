@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ChannelTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Channel', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Form\Type\ChannelType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    public function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('code', 'text', Argument::any())
@@ -77,14 +77,14 @@ class ChannelTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'Channel', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_channel');
     }

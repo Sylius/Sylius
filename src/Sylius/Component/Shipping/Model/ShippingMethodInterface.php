@@ -24,8 +24,8 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
-    const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
-    const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
+    const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+    const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
      * Get shipping category, if any.
@@ -49,14 +49,14 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
      *
-     * @return integer
+     * @return int
      */
     public function getCategoryRequirement();
 
     /**
      * Set the requirement.
      *
-     * @param integer $categoryRequirement
+     * @param int $categoryRequirement
      */
     public function setCategoryRequirement($categoryRequirement);
 

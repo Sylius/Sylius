@@ -19,32 +19,32 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class MoneyTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('PLN');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\Type\MoneyType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_money_type_as_parent()
+    public function it_has_money_type_as_parent()
     {
         $this->getParent()->shouldReturn('money');
     }
 
-    function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'currency' => 'PLN',
-                'divisor' => 100)
+                'divisor' => 100, )
             )
             ->shouldBeCalled();
 

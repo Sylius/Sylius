@@ -18,18 +18,18 @@ use PhpSpec\ObjectBehavior;
  */
 class ChangePasswordSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\ChangePassword');
     }
 
-    function it_has_current_password()
+    public function it_has_current_password()
     {
         $this->setCurrentPassword('testPassword');
         $this->getCurrentPassword()->shouldReturn('testPassword');
     }
 
-    function it_has_new_password()
+    public function it_has_new_password()
     {
         $this->setNewPassword('testPassword');
         $this->getNewPassword()->shouldReturn('testPassword');

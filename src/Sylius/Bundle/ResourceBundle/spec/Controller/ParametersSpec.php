@@ -12,41 +12,40 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 class ParametersSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
     }
 
-    function its_parameters_is_mutable()
+    public function its_parameters_is_mutable()
     {
         $this->replace(array());
     }
 
-    function it_has_parameters()
+    public function it_has_parameters()
     {
         $this->replace(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
 
         $this->all()->shouldReturn(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
     }
 
-    function it_get_parameter()
+    public function it_get_parameter()
     {
         $this->replace(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
 
         $this->get('criteria')->shouldReturn('criteria');

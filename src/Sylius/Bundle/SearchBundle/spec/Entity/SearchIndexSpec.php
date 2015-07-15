@@ -18,39 +18,38 @@ use PhpSpec\ObjectBehavior;
  */
 class SearchIndexSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Model\SearchIndex');
     }
 
-    function its_item_id_is_mutable()
+    public function its_item_id_is_mutable()
     {
         $this->setItemId(20);
         $this->getItemId()->shouldReturn(20);
     }
 
-    function its_entity_is_mutable()
+    public function its_entity_is_mutable()
     {
         $this->setEntity('Sylius\Component\Core\Model\Product');
         $this->getEntity()->shouldReturn('Sylius\Component\Core\Model\Product');
     }
 
-    function its_value_is_mutable()
+    public function its_value_is_mutable()
     {
         $this->setValue('black t-shirt');
         $this->getValue()->shouldReturn('black t-shirt');
     }
 
-    function its_tags_is_mutable()
+    public function its_tags_is_mutable()
     {
         $this->setTags('a:4:{s:6:"taxons";a:0:{}s:5:"price";i:5400;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}');
         $this->getTags()->shouldReturn('a:4:{s:6:"taxons";a:0:{}s:5:"price";i:5400;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}');
     }
 
-    function its_created_at_is_mutable()
+    public function its_created_at_is_mutable()
     {
         $this->setCreatedAt('2014-08-08 15:53:07');
         $this->getCreatedAt()->shouldReturn('2014-08-08 15:53:07');
     }
-
 }

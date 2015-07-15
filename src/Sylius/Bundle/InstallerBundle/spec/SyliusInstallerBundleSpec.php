@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class SyliusInstallerBundleSpec extends ObjectBehavior
 {
-    function it_is_a_bundle()
+    public function it_is_a_bundle()
     {
         $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
     }

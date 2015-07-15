@@ -17,7 +17,7 @@ namespace Sylius\Component\User\Security;
 interface TokenProviderInterface
 {
     /**
-     * Generates unique token for user request password reset
+     * Generates unique token for user request password reset.
      */
     public function generateUniqueToken();
 }

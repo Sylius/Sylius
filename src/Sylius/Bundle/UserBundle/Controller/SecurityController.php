@@ -30,9 +30,9 @@ class SecurityController extends Controller
         $form = $this->get('form.factory')->createNamed('', 'sylius_user_security_login');
 
         return $this->renderLogin(array(
-            'form'          => $form->createView(),
+            'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ));
     }
 

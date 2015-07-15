@@ -21,7 +21,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 

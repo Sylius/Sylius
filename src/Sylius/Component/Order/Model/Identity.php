@@ -33,14 +33,12 @@ class Identity implements IdentityInterface
     protected $order;
 
     /**
-     * Identity name, for instance "ebay id"
-     *
+     * Identity name, for instance "ebay id".
      */
     protected $name;
 
     /**
-     * Identity value, for instance "2342343242"
-     *
+     * Identity value, for instance "2342343242".
      */
     protected $value;
 

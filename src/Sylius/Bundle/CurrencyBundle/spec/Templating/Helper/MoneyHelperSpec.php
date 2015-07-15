@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 /**
@@ -20,12 +19,12 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
  */
 class MoneyHelperSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext)
+    public function let(CurrencyContextInterface $currencyContext)
     {
         $this->beConstructedWith('fr_FR', $currencyContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper');
     }

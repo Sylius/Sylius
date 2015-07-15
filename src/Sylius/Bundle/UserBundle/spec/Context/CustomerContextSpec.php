@@ -22,17 +22,17 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class CustomerContextSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext)
+    public function let(SecurityContextInterface $securityContext)
     {
         $this->beConstructedWith($securityContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Context\CustomerContext');
     }
 
-    function it_gets_customer_from_currently_logged_user($securityContext, TokenInterface $token, UserInterface $user, CustomerInterface $customer)
+    public function it_gets_customer_from_currently_logged_user($securityContext, TokenInterface $token, UserInterface $user, CustomerInterface $customer)
     {
         $securityContext->getToken()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
@@ -42,7 +42,7 @@ class CustomerContextSpec extends ObjectBehavior
         $this->getCustomer()->shouldReturn($customer);
     }
 
-    function it_returns_null_if_user_is_not_logged_in($securityContext)
+    public function it_returns_null_if_user_is_not_logged_in($securityContext)
     {
         $securityContext->getToken()->willReturn(null);
 

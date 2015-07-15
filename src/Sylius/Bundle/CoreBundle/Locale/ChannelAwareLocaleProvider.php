@@ -40,7 +40,7 @@ class ChannelAwareLocaleProvider extends LocaleProvider
     public function __construct(ChannelContextInterface $channelContext, $defaultLocale)
     {
         $this->channelContext = $channelContext;
-        $this->defaultLocale  = $defaultLocale;
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**
@@ -48,7 +48,7 @@ class ChannelAwareLocaleProvider extends LocaleProvider
      */
     public function getAvailableLocales()
     {
-        $currentChannel =  $this->channelContext->getChannel();
+        $currentChannel = $this->channelContext->getChannel();
 
         return $currentChannel->getLocales()->filter(function (LocaleInterface $locale) {
             return $locale->isEnabled();

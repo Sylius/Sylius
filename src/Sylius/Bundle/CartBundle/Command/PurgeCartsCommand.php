@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to purge expired carts
+ * Command to purge expired carts.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */

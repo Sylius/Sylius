@@ -33,7 +33,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     protected $currentLocale;
 
     /**
-     * Cache current translation. Useful in Doctrine 2.4+
+     * Cache current translation. Useful in Doctrine 2.4+.
      *
      * @var TranslationInterface
      */

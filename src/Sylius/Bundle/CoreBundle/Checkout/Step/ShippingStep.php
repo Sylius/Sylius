@@ -78,8 +78,8 @@ class ShippingStep extends CheckoutStep
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'order'   => $order,
-            'form'    => $form->createView(),
+            'order' => $order,
+            'form' => $form->createView(),
             'context' => $context,
         ));
     }
@@ -98,7 +98,7 @@ class ShippingStep extends CheckoutStep
                     return $zone->getId();
                 }, $this->zones) : null,
                 'enabled' => true,
-            )
+            ),
         ));
     }
 }

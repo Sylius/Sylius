@@ -14,17 +14,17 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 class CartRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository');
     }
 
-    function it_finds_expired_cart(
+    public function it_finds_expired_cart(
         $em,
         QueryBuilder $builder,
         AbstractQuery $query,

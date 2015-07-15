@@ -63,14 +63,14 @@ class CreditCard implements CreditCardInterface
     /**
      * Expiry month number.
      *
-     * @var integer
+     * @var int
      */
     protected $expiryMonth;
 
     /**
      * Expiry year number.
      *
-     * @var integer
+     * @var int
      */
     protected $expiryYear;
 

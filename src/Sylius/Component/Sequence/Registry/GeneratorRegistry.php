@@ -16,14 +16,14 @@ use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Sequence\Number\GeneratorInterface;
 
 /**
- * Registry for generators
+ * Registry for generators.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class GeneratorRegistry extends ServiceRegistry
 {
     /**
-     * Return the generator used for the given entity
+     * Return the generator used for the given entity.
      *
      * @param object $entity
      *

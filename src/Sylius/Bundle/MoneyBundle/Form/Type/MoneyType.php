@@ -74,7 +74,7 @@ class MoneyType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'currency' => $this->currency,
-                'divisor'  => 100
+                'divisor' => 100,
             ))
         ;
     }

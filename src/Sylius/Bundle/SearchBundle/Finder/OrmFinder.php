@@ -22,7 +22,7 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 /**
- * OrmFinder
+ * OrmFinder.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -30,12 +30,12 @@ class OrmFinder extends AbstractFinder
 {
     public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger, ChannelContextInterface $channelContext)
     {
-        $this->searchRepository  = $searchRepository;
-        $this->config            = $config;
+        $this->searchRepository = $searchRepository;
+        $this->config = $config;
         $this->productRepository = $productRepository;
-        $this->em                = $em;
-        $this->queryLogger       = $queryLogger;
-        $this->channelContext    = $channelContext;
+        $this->em = $em;
+        $this->queryLogger = $queryLogger;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -80,7 +80,7 @@ class OrmFinder extends AbstractFinder
 
         $ids = array();
         $pages = $paginator->getNbPages();
-        for ($i = 1; $i <= $pages; $i++) {
+        for ($i = 1; $i <= $pages; ++$i) {
             $paginator->setCurrentPage($i);
             foreach ($paginator->getIterator() as $product) {
                 $ids[] = $product->getId();
@@ -97,7 +97,7 @@ class OrmFinder extends AbstractFinder
         $indexedItems = $queryBuilder->getQuery()->getResult();
 
         // TODO: Need to configure / refactor this default!
-        $entityName = "Product";
+        $entityName = 'Product';
 
         $facetsArray = array();
 
@@ -139,7 +139,7 @@ class OrmFinder extends AbstractFinder
         foreach ($this->query($query->getSearchTerm(), $this->em) as $modelClass => $modelIdsToTags) {
             $modelIds = array_keys($modelIdsToTags);
 
-            if(isset($modelIdsForChannel[$modelClass])) {
+            if (isset($modelIdsForChannel[$modelClass])) {
                 $modelIds = array_intersect($modelIds, $modelIdsForChannel[$modelClass]);
             }
 
@@ -203,11 +203,10 @@ class OrmFinder extends AbstractFinder
         }
 
         return array($facetFilteredIds, $idsFromAllFacets);
-
     }
 
     /**
-     * Returns an array with the new calculated facets
+     * Returns an array with the new calculated facets.
      *
      * @param $result
      * @param $facetFilteredIds
@@ -236,7 +235,7 @@ class OrmFinder extends AbstractFinder
     }
 
     /**
-     * Builds facets
+     * Builds facets.
      *
      * @param $idsFromOtherFacets
      * @param $facets
@@ -326,7 +325,7 @@ class OrmFinder extends AbstractFinder
     }
 
     /**
-     * Tag based filtering
+     * Tag based filtering.
      *
      * @param array $ids
      * @param array $filters
@@ -359,7 +358,7 @@ class OrmFinder extends AbstractFinder
                 if ($separateFilter[$key] && $tags[strtolower($key)]) {
                     // range filtering
                     if (is_numeric($tags[strtolower($key)])) {
-                        $range = explode("|", $separateFilter[$key]);
+                        $range = explode('|', $separateFilter[$key]);
                         if ($tags[strtolower($key)] >= $range[0] && $tags[strtolower($key)] <= $range[1]) {
                             $result[] = $facet['itemId'];
                         }
@@ -387,7 +386,7 @@ class OrmFinder extends AbstractFinder
     }
 
     /**
-     * The fulltext database query
+     * The fulltext database query.
      *
      * @param string        $searchTerm
      * @param EntityManager $em
@@ -414,7 +413,7 @@ class OrmFinder extends AbstractFinder
     }
 
     /**
-     * This functions unsets the configured filters based on the facet groups
+     * This functions unsets the configured filters based on the facet groups.
      *
      * @param $filterSetName
      */

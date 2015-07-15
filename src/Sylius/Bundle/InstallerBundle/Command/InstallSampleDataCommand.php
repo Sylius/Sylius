@@ -56,7 +56,7 @@ EOT
         $doctrineConfiguration->setSQLLogger(null);
 
         $commands = array(
-            'doctrine:fixtures:load'       => array('--no-interaction' => true),
+            'doctrine:fixtures:load' => array('--no-interaction' => true),
             'doctrine:phpcr:fixtures:load' => array('--no-interaction' => true),
             'sylius:search:index',
         );

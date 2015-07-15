@@ -22,7 +22,7 @@ use Sylius\Component\User\Model\UserInterface;
 interface UserRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Finds user by email
+     * Finds user by email.
      *
      * @param string $email
      *

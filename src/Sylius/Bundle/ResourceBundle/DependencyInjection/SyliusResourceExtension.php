@@ -31,7 +31,7 @@ class SyliusResourceExtension extends AbstractExtension
     public function load(array $config, ContainerBuilder $container)
     {
         $processor = new Processor();
-        $config    = $processor->processConfiguration(new Configuration(), $config);
+        $config = $processor->processConfiguration(new Configuration(), $config);
 
         $this->loadServiceDefinitions($container, array(
             'services.xml',

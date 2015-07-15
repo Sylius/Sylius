@@ -18,22 +18,22 @@ use PhpSpec\ObjectBehavior;
  */
 class ExistingServiceExceptionSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('foo');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Registry\ExistingServiceException');
     }
 
-    function it_is_an_exception()
+    public function it_is_an_exception()
     {
         $this->shouldHaveType('Exception');
     }
 
-    function it_is_an_invalid_argument_exception()
+    public function it_is_an_invalid_argument_exception()
     {
         $this->shouldHaveType('InvalidArgumentException');
     }

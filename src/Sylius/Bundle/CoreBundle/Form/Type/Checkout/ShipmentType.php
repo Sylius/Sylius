@@ -41,7 +41,7 @@ class ShipmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $criteria = $options['criteria'];
-        $channel  = $options['channel'];
+        $channel = $options['channel'];
 
         $notBlank = new NotBlank(array('groups' => array('sylius')));
         $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
@@ -52,17 +52,16 @@ class ShipmentType extends AbstractType
                 $shipment = $event->getData();
 
                 $form->add('method', 'sylius_shipping_method_choice', array(
-                    'label'       => 'sylius.form.checkout.shipping_method',
-                    'subject'     => $shipment,
-                    'criteria'    => $criteria,
-                    'channel'     => $channel,
-                    'expanded'    => true,
+                    'label' => 'sylius.form.checkout.shipping_method',
+                    'subject' => $shipment,
+                    'criteria' => $criteria,
+                    'channel' => $channel,
+                    'expanded' => true,
                     'constraints' => array(
-                        $notBlank
-                    )
+                        $notBlank,
+                    ),
                 ));
             });
-        ;
     }
 
     /**
@@ -72,15 +71,15 @@ class ShipmentType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class' => $this->dataClass,
             ))
             ->setOptional(array(
                 'criteria',
-                'channel'
+                'channel',
             ))
             ->setAllowedTypes(array(
-                'criteria'   => array('array'),
-                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+                'criteria' => array('array'),
+                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
             ))
         ;
     }

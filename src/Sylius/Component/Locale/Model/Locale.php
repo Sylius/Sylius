@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Locale\Model;
 
-use \Locale as Language;
+use Locale as Language;
 
 /**
  * Locale model.
@@ -21,9 +21,9 @@ use \Locale as Language;
 class Locale implements LocaleInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -42,14 +42,14 @@ class Locale implements LocaleInterface
     protected $enabled = true;
 
     /**
-     * Creation date
+     * Creation date.
      *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
+     * Update date.
      *
      * @var \DateTime
      */
@@ -66,9 +66,9 @@ class Locale implements LocaleInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

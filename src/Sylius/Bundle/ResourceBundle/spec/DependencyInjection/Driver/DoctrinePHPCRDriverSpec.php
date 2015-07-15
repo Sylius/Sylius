@@ -21,22 +21,22 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class DoctrinePHPCRDriverSpec extends ObjectBehavior
 {
-    function let(ContainerBuilder $container)
+    public function let(ContainerBuilder $container)
     {
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrinePHPCRDriver');
     }
 
-    function it_should_implement_database_interface()
+    public function it_should_implement_database_interface()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverInterface');
     }
 
-    function it_should_create_definition(ContainerBuilder $container)
+    public function it_should_create_definition(ContainerBuilder $container)
     {
         $container->setDefinition(
             'prefix.controller.resource',

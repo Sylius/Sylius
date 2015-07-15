@@ -39,14 +39,14 @@ class LoadOrdersData extends DataFixture
             'MOBILE',
         );
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; ++$i) {
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
             $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
 
             $order->setChannel($channel);
 
-            for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
+            for ($j = 0, $items = rand(3, 6); $j <= $items; ++$j) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */

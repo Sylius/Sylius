@@ -12,56 +12,55 @@
 namespace spec\Sylius\Bundle\FlowBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 class ProcessValidatorSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
-        $this->beConstructedWith('message', 'step_name', function(){});
+        $this->beConstructedWith('message', 'step_name', function () {});
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Validator\ProcessValidator');
     }
 
-    function it_is_process_validator()
+    public function it_is_process_validator()
     {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface');
     }
 
-    function its_step_name_is_mutable()
+    public function its_step_name_is_mutable()
     {
         $this->setStepName('step_name')->shouldReturn($this);
         $this->getStepName()->shouldReturn('step_name');
     }
 
-    function its_message_is_mutable()
+    public function its_message_is_mutable()
     {
         $this->setMessage('message')->shouldReturn($this);
         $this->getMessage()->shouldReturn('message');
     }
 
-    function its_validation_is_mutable()
+    public function its_validation_is_mutable()
     {
-        $closure = function(){};
+        $closure = function () {};
 
         $this->setValidation($closure)->shouldReturn($this);
         $this->getValidation()->shouldReturn($closure);
     }
 
-    function it_calls_validation_closure()
+    public function it_calls_validation_closure()
     {
-        $this->setValidation(function() {
+        $this->setValidation(function () {
             return true;
         });
 
         $this->isValid()->shouldReturn(true);
     }
 
-    function it_has_response(StepInterface $step)
+    public function it_has_response(StepInterface $step)
     {
         $this->setStepName('step_name');
         $step->proceed('step_name')->shouldBeCalled();

@@ -19,21 +19,21 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class PercentFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\PercentFeeCalculatorConfigurationType');
     }
 
-    function it_is_abstract_type_object()
+    public function it_is_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    public function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
             ->add('percent', 'number', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.percent.percent',
+                'label' => 'sylius.form.payment_method.fee_calculator.percent.percent',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -42,7 +42,7 @@ class PercentFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_fee_calculator_percent');
     }

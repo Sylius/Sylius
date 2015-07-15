@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
@@ -23,30 +22,30 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $factory)
+    public function let(FormFactoryInterface $factory)
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber');
     }
 
-    function it_is_a_subscriber()
+    public function it_is_a_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subscribes_to_event()
+    public function it_subscribes_to_event()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
+            FormEvents::POST_SUBMIT => 'postSubmit',
         ));
     }
 
-    function it_adds_a_parent_form(
+    public function it_adds_a_parent_form(
         $factory,
         FormEvent $event,
         FormInterface $form,
@@ -63,11 +62,11 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
         $taxon->getParent()->shouldBeCalled()->willReturn($parent);
 
         $factory->createNamed('parent', 'sylius_taxon_choice', $parent, array(
-            'taxonomy'        => $taxonomy,
-            'filter'          => null,
-            'required'        => false,
-            'label'           => 'sylius.form.taxon.parent',
-            'empty_value'     => '---',
+            'taxonomy' => $taxonomy,
+            'filter' => null,
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'empty_value' => '---',
             'auto_initialize' => false,
         ))->shouldBeCalled()->willReturn($parentForm);
 
@@ -76,7 +75,7 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_sets_parent_to_the_taxon(
+    public function it_sets_parent_to_the_taxon(
         FormEvent $event,
         TaxonInterface $taxon,
         TaxonomyInterface $taxonomy,

@@ -22,17 +22,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class UserReloaderListenerSpec extends ObjectBehavior
 {
-    function let(UserReloaderInterface $userReloader)
+    public function let(UserReloaderInterface $userReloader)
     {
         $this->beConstructedWith($userReloader);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserReloaderListener');
     }
 
-    function it_reloads_user($userReloader, GenericEvent $event, UserInterface $user)
+    public function it_reloads_user($userReloader, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
@@ -41,7 +41,7 @@ class UserReloaderListenerSpec extends ObjectBehavior
         $this->reloadUser($event);
     }
 
-    function it_throw_exception_for_other_implementations_then_user_interface($userReloader, GenericEvent $event, UserInterface $user)
+    public function it_throw_exception_for_other_implementations_then_user_interface($userReloader, GenericEvent $event, UserInterface $user)
     {
         $user = '';
         $event->getSubject()->willReturn($user);

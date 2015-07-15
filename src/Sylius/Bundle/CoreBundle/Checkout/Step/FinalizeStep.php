@@ -52,7 +52,7 @@ class FinalizeStep extends CheckoutStep
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'context' => $context,
-            'order'   => $order
+            'order' => $order,
         ));
     }
 

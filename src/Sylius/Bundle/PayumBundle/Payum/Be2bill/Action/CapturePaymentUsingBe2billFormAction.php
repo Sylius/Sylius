@@ -29,7 +29,7 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
     protected $httpRequest;
 
     /**
-     * Define the Symfony Request
+     * Define the Symfony Request.
      *
      * @param Request $request
      */

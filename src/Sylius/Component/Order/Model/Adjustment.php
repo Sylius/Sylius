@@ -132,7 +132,7 @@ class Adjustment implements AdjustmentInterface
             return $this->orderItem;
         }
 
-        return null;
+        return;
     }
 
     /**

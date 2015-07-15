@@ -23,24 +23,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PromotionTypeSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $checkerRegistry,
         ServiceRegistryInterface $actionRegistry
     ) {
         $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\PromotionType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    public function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::type('array'))
@@ -90,11 +90,11 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Promotion',
+                'data_class' => 'Promotion',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
@@ -103,7 +103,7 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_promotion');
     }

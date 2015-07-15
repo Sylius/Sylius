@@ -18,12 +18,12 @@ use PhpSpec\ObjectBehavior;
  */
 class ItemResolvingExceptionSpec  extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Cart\Resolver\ItemResolvingException');
     }
 
-    function it_is_an_invalid_argument_exception()
+    public function it_is_an_invalid_argument_exception()
     {
         $this->shouldHaveType('\InvalidArgumentException');
     }

@@ -20,27 +20,27 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CustomerTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Sylius\Component\User\Model\Customer', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\CustomerType');
     }
 
-    function it_extends_abstract_resource_type()
+    public function it_extends_abstract_resource_type()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_customer');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    public function it_builds_form(FormBuilderInterface $builder)
     {
         $builder->add('firstName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);

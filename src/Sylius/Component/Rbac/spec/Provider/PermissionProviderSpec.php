@@ -21,29 +21,29 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PermissionProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $permissionRepository)
+    public function let(RepositoryInterface $permissionRepository)
     {
         $this->beConstructedWith($permissionRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Provider\PermissionProvider');
     }
 
-    function it_implements_Sylius_Rbac_permission_provider_interface()
+    public function it_implements_Sylius_Rbac_permission_provider_interface()
     {
         $this->shouldImplement('Sylius\Component\Rbac\Provider\PermissionProviderInterface');
     }
 
-    function it_looks_for_permission_via_repository($permissionRepository, PermissionInterface $permission)
+    public function it_looks_for_permission_via_repository($permissionRepository, PermissionInterface $permission)
     {
         $permissionRepository->findOneBy(array('code' => 'can_dance_on_the_table'))->shouldBeCalled()->willReturn($permission);
 
         $this->getPermission('can_dance_on_the_table')->shouldReturn($permission);
     }
 
-    function it_throws_an_exception_when_permission_does_not_exist($permissionRepository)
+    public function it_throws_an_exception_when_permission_does_not_exist($permissionRepository)
     {
         $permissionRepository->findOneBy(array('code' => 'can_dance_on_the_fridge'))->shouldBeCalled()->willReturn(null);
 

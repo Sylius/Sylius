@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 {
-    function let(CurrencyProviderInterface $currencyProvider)
+    public function let(CurrencyProviderInterface $currencyProvider)
     {
         $this->beConstructedWith($currencyProvider);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(
+    public function it_should_define_assigned_data_class_and_validation_groups(
         $currencyProvider,
         OptionsResolverInterface $resolver,
         Currency $currency
@@ -54,12 +54,12 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_currency_code_choice');
     }
 
-    function it_has_a_parent()
+    public function it_has_a_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }

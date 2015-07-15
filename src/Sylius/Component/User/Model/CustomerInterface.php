@@ -33,7 +33,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getId();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasUser();
 
@@ -43,7 +43,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getEmail();
 
     /**
-     * @param  string $email
+     * @param string $email
+     *
      * @return self
      */
     public function setEmail($email);
@@ -56,7 +57,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getEmailCanonical();
 
     /**
-     * @param  string $emailCanonical
+     * @param string $emailCanonical
+     *
      * @return self
      */
     public function setEmailCanonical($emailCanonical);
@@ -74,7 +76,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getFirstName();
 
     /**
-     * @param  string $firstName
+     * @param string $firstName
+     *
      * @return self
      */
     public function setFirstName($firstName);
@@ -85,7 +88,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getLastName();
 
     /**
-     * @param  string $lastName
+     * @param string $lastName
+     *
      * @return self
      */
     public function setLastName($lastName);
@@ -96,7 +100,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getBirthday();
 
     /**
-     * @param  \DateTime $birthday
+     * @param \DateTime $birthday
+     *
      * @return self
      */
     public function setBirthday(\DateTime $birthday = null);
@@ -107,7 +112,8 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getGender();
 
     /**
-     * @param  int  $gender
+     * @param int $gender
+     *
      * @return self
      */
     public function setGender($gender);

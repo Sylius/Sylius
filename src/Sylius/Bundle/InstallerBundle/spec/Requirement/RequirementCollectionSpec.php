@@ -16,27 +16,27 @@ use Sylius\Bundle\InstallerBundle\Requirement\Requirement;
 
 class RequirementCollectionSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('PHP version and settings');
     }
 
-    function it_is_a_iterator_aggregate()
+    public function it_is_a_iterator_aggregate()
     {
         $this->shouldBeAnInstanceOf('IteratorAggregate');
     }
 
-    function it_gets_label()
+    public function it_gets_label()
     {
         $this->getLabel()->shouldReturn('PHP version and settings');
     }
 
-    function it_gets_iterator()
+    public function it_gets_iterator()
     {
         $this->getIterator()->shouldHaveType('ArrayIterator');
     }
 
-    function its_add_should_have_fluent_interface(Requirement $requirement)
+    public function its_add_should_have_fluent_interface(Requirement $requirement)
     {
         $this->add($requirement)->shouldHaveType('Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection');
     }

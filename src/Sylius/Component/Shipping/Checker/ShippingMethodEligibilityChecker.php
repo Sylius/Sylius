@@ -60,7 +60,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
     }
 
     /**
-     * Returns whether the subject satisfies the category requirement configured in the method
+     * Returns whether the subject satisfies the category requirement configured in the method.
      *
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface  $method
@@ -75,9 +75,9 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
 
         $numMatches = $numShippables = 0;
         foreach ($subject->getShippables() as $shippable) {
-            $numShippables++;
+            ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
-                $numMatches++;
+                ++$numMatches;
             }
         }
 

@@ -29,52 +29,51 @@ class MenuNodeType extends AbstractResourceType
         $builder
             ->add('name', 'text', array(
                 'required' => true,
-                'label' => 'sylius.form.menu_node_block.internal_name'
+                'label' => 'sylius.form.menu_node_block.internal_name',
             ))
             ->add('label', 'text', array(
                 'required' => true,
-                'label' => 'sylius.form.menu_node_block.label'
+                'label' => 'sylius.form.menu_node_block.label',
             ))
             ->add('display', null, array(
-                'label' => 'sylius.form.menu_node_block.display'
+                'label' => 'sylius.form.menu_node_block.display',
             ))
             ->add('displayChildren', null, array(
-                'label' => 'sylius.form.menu_node_block.display_children'
+                'label' => 'sylius.form.menu_node_block.display_children',
             ))
             ->add('linkType', 'choice', array(
                 'required' => false,
-                'choices' => array (
+                'choices' => array(
                         'auto' => 'auto',
                         'uri' => 'sylius.form.menu_node_block.uri',
                         'route' => 'route',
-                        'content' => 'sylius.form.menu_node_block.content'
+                        'content' => 'sylius.form.menu_node_block.content',
                 ),
-                'label'    => 'sylius.form.menu_node_block.link_type',
+                'label' => 'sylius.form.menu_node_block.link_type',
             ))
             ->add('publishable', null, array(
-                'label' => 'sylius.form.menu_node_block.publishable'
+                'label' => 'sylius.form.menu_node_block.publishable',
                 ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'sylius.form.menu_node_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
                 'label' => 'sylius.form.menu_node_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
             ->add('route', null, array(
-                'label' => 'sylius.form.menu_node_block.route'
+                'label' => 'sylius.form.menu_node_block.route',
             ))
             ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.menu_node_block.content',
              ))
             ->add('uri', null, array(
-                'label' => 'sylius.form.menu_node_block.uri'
+                'label' => 'sylius.form.menu_node_block.uri',
             ))
         ;
-
     }
 
     /**

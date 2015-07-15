@@ -16,36 +16,36 @@ use PhpSpec\ObjectBehavior;
 
 class DoctrineCacheStorageSpec extends ObjectBehavior
 {
-    function let(Cache $cache)
+    public function let(Cache $cache)
     {
         $this->beConstructedWith($cache);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Storage\DoctrineCacheStorage');
     }
 
-    function it_implements_Sylius_storage_interface()
+    public function it_implements_Sylius_storage_interface()
     {
         $this->shouldImplement('Sylius\Component\Storage\StorageInterface');
     }
 
-    function it_gets_default_data_if_no_record_was_found($cache)
+    public function it_gets_default_data_if_no_record_was_found($cache)
     {
         $cache->fetch('key')->willReturn(null);
 
         $this->getData('key', 'default')->shouldReturn('default');
     }
 
-    function it_gets_data_if_found($cache)
+    public function it_gets_data_if_found($cache)
     {
         $cache->fetch('key')->willReturn('data');
 
         $this->getData('key', 'default')->shouldReturn('data');
     }
 
-    function it_sets_data($cache)
+    public function it_sets_data($cache)
     {
         $cache->save('key', 'data')->shouldBeCalled();
 

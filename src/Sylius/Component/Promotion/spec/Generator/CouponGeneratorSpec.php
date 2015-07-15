@@ -25,22 +25,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, EntityManagerInterface $manager)
+    public function let(RepositoryInterface $repository, EntityManagerInterface $manager)
     {
         $this->beConstructedWith($repository, $manager);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Generator\CouponGenerator');
     }
 
-    function it_should_implement_Sylius_promotion_coupon_generator_interface()
+    public function it_should_implement_Sylius_promotion_coupon_generator_interface()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Generator\CouponGeneratorInterface');
     }
 
-    function it_should_generate_coupons_according_to_instruction(
+    public function it_should_generate_coupons_according_to_instruction(
         $repository,
         $manager,
         FilterCollection $filters,

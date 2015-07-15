@@ -17,14 +17,14 @@ namespace Sylius\Component\Report\DataFetcher;
 class Data
 {
     /**
-     * array of labels
+     * array of labels.
      *
      * @var array
      */
     private $labels;
 
     /**
-     * array of data
+     * array of data.
      *
      * @var array
      */

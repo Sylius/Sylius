@@ -74,7 +74,7 @@ abstract class ApiTestCase extends BaseWebTestCase
             echo $matcher->getError();
 
             $expectedResponse = explode(PHP_EOL, (string) $expectedResponse);
-            $actualResponse   = explode(PHP_EOL, (string) $actualResponse);
+            $actualResponse = explode(PHP_EOL, (string) $actualResponse);
 
             $diff = new \Diff($expectedResponse, $actualResponse, array());
 

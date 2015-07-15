@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 
 /**
- * ElasticSearch indexer
+ * ElasticSearch indexer.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -45,7 +45,7 @@ class ElasticsearchIndexer implements IndexerInterface
      */
     public function populate(EntityManager $em = null)
     {
-        $process = new Process(sprintf("%s/console fos:elastica:populate --env=%s", $this->kernel->getRootDir(), $this->kernel->getEnvironment()));
+        $process = new Process(sprintf('%s/console fos:elastica:populate --env=%s', $this->kernel->getRootDir(), $this->kernel->getEnvironment()));
         $process->run();
 
         if (!$process->isSuccessful()) {

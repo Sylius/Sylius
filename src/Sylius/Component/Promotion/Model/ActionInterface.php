@@ -18,46 +18,46 @@ namespace Sylius\Component\Promotion\Model;
  */
 interface ActionInterface
 {
-    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
+    const TYPE_FIXED_DISCOUNT = 'fixed_discount';
     const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
     public function getType();
 
     /**
-     * Set type
+     * Set type.
      *
      * @param $type
      */
     public function setType($type);
 
     /**
-     * Get configuration
+     * Get configuration.
      *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set configuration
+     * Set configuration.
      *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
 
     /**
-     * Get promotion
+     * Get promotion.
      *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set promotion
+     * Set promotion.
      *
      * @param PromotionInterface $promotion
      */

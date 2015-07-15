@@ -21,22 +21,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProcessContextSpec extends ObjectBehavior
 {
-    function let(StorageInterface $storage)
+    public function let(StorageInterface $storage)
     {
         $this->beConstructedWith($storage);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Context\ProcessContext');
     }
 
-    function it_is_a_process_context()
+    public function it_is_a_process_context()
     {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
     }
 
-    function it_initializes(
+    public function it_initializes(
         $storage,
         ProcessInterface $process,
         StepInterface $currentStep,
@@ -55,8 +55,7 @@ class ProcessContextSpec extends ObjectBehavior
         $this->getPreviousStep()->shouldReturn($previousStep);
     }
 
-
-    function it_is_valid(
+    public function it_is_valid(
         $storage,
         ProcessInterface $process,
         StepInterface $currentStep,
@@ -94,8 +93,7 @@ class ProcessContextSpec extends ObjectBehavior
         $this->isValid()->shouldReturn(false);
     }
 
-
-    function it_checks_if_it_is_the_first_step(
+    public function it_checks_if_it_is_the_first_step(
         $storage,
         ProcessInterface $process,
         StepInterface $firstStep,
@@ -111,7 +109,7 @@ class ProcessContextSpec extends ObjectBehavior
         $this->isFirstStep()->shouldReturn(true);
     }
 
-    function it_checks_if_it_is_the_last_step(
+    public function it_checks_if_it_is_the_last_step(
         $storage,
         ProcessInterface $process,
         StepInterface $firstStep,
@@ -127,7 +125,7 @@ class ProcessContextSpec extends ObjectBehavior
         $this->isLastStep()->shouldReturn(true);
     }
 
-    function it_closes_the_storage(
+    public function it_closes_the_storage(
         $storage,
         ProcessInterface $process,
         StepInterface $firstStep,
@@ -145,19 +143,19 @@ class ProcessContextSpec extends ObjectBehavior
         $this->close();
     }
 
-    function its_request_is_mutable(Request $request)
+    public function its_request_is_mutable(Request $request)
     {
         $this->setRequest($request);
         $this->getRequest()->shouldReturn($request);
     }
 
-    function its_storage_is_mutable(StorageInterface $storage)
+    public function its_storage_is_mutable(StorageInterface $storage)
     {
         $this->setStorage($storage);
         $this->getStorage()->shouldReturn($storage);
     }
 
-    function its_step_history_is_mutable($storage)
+    public function its_step_history_is_mutable($storage)
     {
         $storage->set('history', array('step_one'))->shouldBeCalled();
         $storage->get('history', array())->willReturn(array('step_one'));
@@ -168,7 +166,7 @@ class ProcessContextSpec extends ObjectBehavior
         $this->addStepToHistory('step_two');
     }
 
-    function it_rewind_history(
+    public function it_rewind_history(
         $storage,
         ProcessInterface $process,
         StepInterface $currentStep,
@@ -182,7 +180,7 @@ class ProcessContextSpec extends ObjectBehavior
         $process->countSteps()->shouldBeCalled()->willReturn(2);
         $this->initialize($process, $currentStep);
 
-        $storage->get("history", array())->shouldBeCalled()->willreturn(array("step_one", "step_two", "step_three"));
+        $storage->get('history', array())->shouldBeCalled()->willreturn(array('step_one', 'step_two', 'step_three'));
         $storage->set('history', array('step_one', 'step_two'))->shouldBeCalled();
 
         $this->rewindHistory();

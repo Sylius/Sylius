@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildRuleFormSubscriberSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $registry,
         RuleCheckerInterface $checker,
         FormFactoryInterface $factory
@@ -38,17 +38,17 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($registry, $factory);
     }
 
-    function it_is_initializabled()
+    public function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber');
     }
 
-    function it_is_configuration_subscriber()
+    public function it_is_configuration_subscriber()
     {
         $this->shouldImplement('Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber');
     }
 
-    function it_subscribes_evetns()
+    public function it_subscribes_evetns()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -57,7 +57,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_adds_configuration_fields_in_pre_set_data(
+    public function it_adds_configuration_fields_in_pre_set_data(
         $factory,
         FormEvent $event,
         RuleInterface $rule,
@@ -76,7 +76,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_fields_in_pre_submit_data(
+    public function it_adds_configuration_fields_in_pre_submit_data(
         $factory,
         FormEvent $event,
         RuleInterface $rule,
@@ -84,8 +84,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         Form $field
     ) {
         $event->getForm()->willReturn($form);
-        $event->getData()->willReturn(array('type' =>RuleInterface::TYPE_ITEM_TOTAL));
-
+        $event->getData()->willReturn(array('type' => RuleInterface::TYPE_ITEM_TOTAL));
 
         $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
@@ -93,7 +92,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_sets_type_in_post_set_data(
+    public function it_sets_type_in_post_set_data(
         FormEvent $event,
         RuleInterface $rule,
         Form $form

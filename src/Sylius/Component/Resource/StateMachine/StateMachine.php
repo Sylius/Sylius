@@ -14,7 +14,7 @@ namespace Sylius\Component\Resource\StateMachine;
 use SM\StateMachine\StateMachine as BaseStateMachine;
 
 /**
- * Sylius State Machine
+ * Sylius State Machine.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
@@ -32,7 +32,7 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -47,6 +47,6 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 }

@@ -23,11 +23,11 @@ interface InventoryUnitInterface extends TimestampableInterface
     /**
      * Default states.
      */
-    const STATE_CHECKOUT    = 'checkout';
-    const STATE_ONHOLD      = 'onhold';
-    const STATE_SOLD        = 'sold';
+    const STATE_CHECKOUT = 'checkout';
+    const STATE_ONHOLD = 'onhold';
+    const STATE_SOLD = 'sold';
     const STATE_BACKORDERED = 'backordered';
-    const STATE_RETURNED    = 'returned';
+    const STATE_RETURNED = 'returned';
 
     /**
      * Get related stockable object.
@@ -51,7 +51,7 @@ interface InventoryUnitInterface extends TimestampableInterface
     public function getSku();
 
     /**
-     * Get displayed inventory name
+     * Get displayed inventory name.
      *
      * @return string
      */

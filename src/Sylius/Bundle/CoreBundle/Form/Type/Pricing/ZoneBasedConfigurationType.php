@@ -47,7 +47,7 @@ class ZoneBasedConfigurationType extends AbstractType
         foreach ($zones as $zone) {
             $builder
                 ->add($zone->getId(), 'sylius_money', array(
-                    'label'    => $zone->getName(),
+                    'label' => $zone->getName(),
                     'required' => false,
                 ))
             ;
@@ -62,7 +62,7 @@ class ZoneBasedConfigurationType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'scope'      => null
+                'scope' => null,
             ))
         ;
     }

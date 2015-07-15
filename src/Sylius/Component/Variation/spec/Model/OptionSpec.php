@@ -25,55 +25,55 @@ class OptionSpec extends ObjectBehavior
         $this->setFallbackLocale('en_US');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Variation\Model\Option');
     }
 
-    function it_implement_Sylius_option_interface()
+    public function it_implement_Sylius_option_interface()
     {
         $this->shouldImplement('Sylius\Component\Variation\Model\OptionInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    public function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_name_by_default()
+    public function it_should_not_have_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    public function its_name_should_be_mutable()
     {
         $this->setName('T-Shirt size');
         $this->getName()->shouldReturn('T-Shirt size');
     }
 
-    function it_returns_name_when_converted_to_string()
+    public function it_returns_name_when_converted_to_string()
     {
         $this->setName('T-Shirt color');
         $this->__toString()->shouldReturn('T-Shirt color');
     }
 
-    function it_should_not_have_presentation_by_default()
+    public function it_should_not_have_presentation_by_default()
     {
         $this->getPresentation()->shouldReturn(null);
     }
 
-    function its_presentation_should_be_mutable()
+    public function its_presentation_should_be_mutable()
     {
         $this->setPresentation('Size');
         $this->getPresentation()->shouldReturn('Size');
     }
 
-    function it_should_initialize_values_collection_by_default()
+    public function it_should_initialize_values_collection_by_default()
     {
         $this->getValues()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_should_add_value(OptionValueInterface $value)
+    public function it_should_add_value(OptionValueInterface $value)
     {
         $value->setOption($this)->shouldBeCalled();
 
@@ -81,7 +81,7 @@ class OptionSpec extends ObjectBehavior
         $this->hasValue($value)->shouldReturn(true);
     }
 
-    function it_should_remove_value(OptionValueInterface $value)
+    public function it_should_remove_value(OptionValueInterface $value)
     {
         $value->setOption($this)->shouldBeCalled();
 
@@ -94,12 +94,12 @@ class OptionSpec extends ObjectBehavior
         $this->hasValue($value)->shouldReturn(false);
     }
 
-    function it_should_initialize_creation_date_by_default()
+    public function it_should_initialize_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function it_should_not_have_last_update_date_by_default()
+    public function it_should_not_have_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }

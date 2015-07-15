@@ -20,17 +20,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class MoneyTypeExtensionSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext)
+    public function let(CurrencyContextInterface $currencyContext)
     {
         $this->beConstructedWith($currencyContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension');
     }
 
-    function it_has_options($currencyContext, OptionsResolverInterface $resolver)
+    public function it_has_options($currencyContext, OptionsResolverInterface $resolver)
     {
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('EUR');
         $resolver->setDefaults(array('currency' => 'EUR'))->shouldBeCalled();
@@ -38,7 +38,7 @@ class MoneyTypeExtensionSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_extends_a_form_type()
+    public function it_extends_a_form_type()
     {
         $this->getExtendedType()->shouldReturn('sylius_money');
     }

@@ -67,7 +67,7 @@ class ZoneMemberCollectionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'allow_add'    => true,
+            'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
         ));

@@ -21,39 +21,39 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PerItemRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType');
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('amount', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => null,
-            'validation_groups' => array('sylius')
+            'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_shipping_calculator_per_item_rate_configuration');
     }

@@ -14,18 +14,17 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener');
     }
 
-    function it_update_username_on_pre_persit(
+    public function it_update_username_on_pre_persit(
         LifecycleEventArgs $event,
         UserInterface $user,
         CustomerInterface $customer
@@ -41,7 +40,7 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_update_username_on_pre_update(
+    public function it_update_username_on_pre_update(
         LifecycleEventArgs $event,
         UserInterface $user,
         CustomerInterface $customer,

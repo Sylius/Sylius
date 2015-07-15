@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,17 +10,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RedirectHandlerSpec extends ObjectBehavior
 {
-    function let(Configuration $config, RouterInterface $router)
+    public function let(Configuration $config, RouterInterface $router)
     {
         $this->beConstructedWith($config, $router);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RedirectHandler');
     }
 
-    function it_redirects_to_resource($config, $router)
+    public function it_redirects_to_resource($config, $router)
     {
         $config->getRedirectParameters('resource')->willReturn(array());
         $config->getRedirectRoute('show')->willReturn('my_route');
@@ -32,7 +31,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectTo('resource')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirecst_to_index($config, $router)
+    public function it_redirecst_to_index($config, $router)
     {
         $config->getRedirectRoute('index')->willReturn('my_route');
         $config->getRedirectParameters()->willReturn(array());
@@ -43,7 +42,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectToIndex()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirects_to_route($router)
+    public function it_redirects_to_route($router)
     {
         $router->generate('my_route', array('my_parameter' => 'value'))->willReturn('http://myurl.com');
 
@@ -51,14 +50,14 @@ class RedirectHandlerSpec extends ObjectBehavior
             ->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirects($config)
+    public function it_redirects($config)
     {
         $config->getRedirectHash()->willReturn(null);
         $config->isHeaderRedirection()->willReturn(false);
         $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirect_to_referer($config, Request $request, ParameterBag $bag)
+    public function it_redirect_to_referer($config, Request $request, ParameterBag $bag)
     {
         $request->headers = $bag;
 
@@ -71,7 +70,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectToReferer()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirects_with_header($config)
+    public function it_redirects_with_header($config)
     {
         $config->getRedirectHash()->willReturn(null);
         $config->isHeaderRedirection()->willReturn(true);

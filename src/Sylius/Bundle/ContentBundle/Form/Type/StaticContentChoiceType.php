@@ -34,5 +34,4 @@ class StaticContentChoiceType extends ResourceChoiceType
             )
         );
     }
-
 }

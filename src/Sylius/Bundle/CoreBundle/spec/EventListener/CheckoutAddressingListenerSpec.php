@@ -18,18 +18,18 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
 /**
- * Automatic set customer's default addressing
-*
+ * Automatic set customer's default addressing.
+ *
  * @author Liverbool <nukboon@gmail.com>
  */
 class CheckoutAddressingListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener');
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
+    public function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
     {
         $event->getSubject()->willReturn($invalidSubject);
 
@@ -39,7 +39,7 @@ class CheckoutAddressingListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_when_context_doesnt_have_customer(GenericEvent $event, OrderInterface $order)
+    public function it_does_nothing_when_context_doesnt_have_customer(GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 
@@ -48,7 +48,7 @@ class CheckoutAddressingListenerSpec extends ObjectBehavior
         $this->setCustomerAddressing($event);
     }
 
-    function it_sets_customer_default_addressing_from_order(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
+    public function it_sets_customer_default_addressing_from_order(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 
@@ -65,7 +65,7 @@ class CheckoutAddressingListenerSpec extends ObjectBehavior
         $this->setCustomerAddressing($event);
     }
 
-    function it_does_not_set_customer_addressing_when_customer_already_have_default_addresses(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
+    public function it_does_not_set_customer_addressing_when_customer_already_have_default_addresses(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 

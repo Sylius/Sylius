@@ -25,29 +25,29 @@ use Sylius\Component\Variation\Model\VariantInterface;
  */
 class VariantGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder)
+    public function let(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder)
     {
         $this->beConstructedWith($variantRepository, $setBuilder);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Variation\Generator\VariantGenerator');
     }
 
-    function it_is_a_Sylius_variant_generator()
+    public function it_is_a_Sylius_variant_generator()
     {
         $this->shouldImplement('Sylius\Component\Variation\Generator\VariantGeneratorInterface');
     }
 
-    function it_cannot_generate_variants_for_an_object_without_options(VariableInterface $variable)
+    public function it_cannot_generate_variants_for_an_object_without_options(VariableInterface $variable)
     {
         $variable->hasOptions()->willReturn(false);
 
         $this->shouldThrow('InvalidArgumentException')->duringGenerate($variable);
     }
 
-    function it_generates_variants_for_every_value_of_an_objects_single_option(
+    public function it_generates_variants_for_every_value_of_an_objects_single_option(
         VariableInterface $productVariable,
         RepositoryInterface $variantRepository,
         SetBuilderInterface $setBuilder,
@@ -83,7 +83,7 @@ class VariantGeneratorSpec extends ObjectBehavior
         $this->generate($productVariable);
     }
 
-    function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
+    public function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
         VariableInterface $productVariable,
         RepositoryInterface $variantRepository,
         SetBuilderInterface $setBuilder,
@@ -108,7 +108,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $setBuilder->build(array(
             array('black1', 'white2', 'red3'),
-            array('small4', 'medium5', 'large6')
+            array('small4', 'medium5', 'large6'),
         ))->willReturn(array(
             array('black1', 'small4'),
             array('black1', 'medium5'),

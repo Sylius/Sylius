@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\Rule;
@@ -23,30 +22,30 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildRuleFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
+    public function let(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($checkerRegistry, $factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber');
     }
 
-    function it_is_a_subscriber()
+    public function it_is_a_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subscribes_to_event()
+    public function it_subscribes_to_event()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         ));
     }
 
-    function it_adds_configuration_field_on_pre_set_data(
+    public function it_adds_configuration_field_on_pre_set_data(
         $checkerRegistry,
         $factory,
         FormEvent $event,
@@ -77,7 +76,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_field_on_post_submit(
+    public function it_adds_configuration_field_on_post_submit(
         $checkerRegistry,
         $factory,
         FormEvent $event,

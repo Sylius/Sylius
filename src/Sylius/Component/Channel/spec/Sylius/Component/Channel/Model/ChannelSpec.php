@@ -12,75 +12,74 @@
 namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Model\ChannelInterface;
 
 class ChannelSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Channel\Model\Channel');
     }
 
-    function it_implements_Sylius_channel_interface()
+    public function it_implements_Sylius_channel_interface()
     {
         $this->shouldImplement('Sylius\Component\Channel\Model\ChannelInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_code_by_default()
+    public function it_has_no_code_by_default()
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable()
+    public function its_code_is_mutable()
     {
         $this->setCode('mobile');
         $this->getCode()->shouldReturn('mobile');
     }
 
-    function it_is_unnamed_by_default()
+    public function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Mobile Store');
         $this->getName()->shouldReturn('Mobile Store');
     }
 
-    function it_has_no_color_by_default()
+    public function it_has_no_color_by_default()
     {
         $this->getColor()->shouldReturn(null);
     }
 
-    function its_color_is_mutable()
+    public function its_color_is_mutable()
     {
         $this->setColor('#1abb9c');
         $this->getColor()->shouldReturn('#1abb9c');
     }
 
-    function it_is_enabled_by_default()
+    public function it_is_enabled_by_default()
     {
         $this->shouldBeEnabled();
     }
 
-    function it_can_be_disabled()
+    public function it_can_be_disabled()
     {
         $this->setEnabled(false);
         $this->shouldNotBeEnabled();
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -88,12 +87,12 @@ class ChannelSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 

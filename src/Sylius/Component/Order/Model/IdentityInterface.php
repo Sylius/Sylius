@@ -19,14 +19,14 @@ namespace Sylius\Component\Order\Model;
 interface IdentityInterface
 {
     /**
-     * Get identity name
+     * Get identity name.
      *
      * @return string $name
      */
     public function getName();
 
     /**
-     * Get identity value
+     * Get identity value.
      *
      * @return string $value
      */
@@ -40,9 +40,10 @@ interface IdentityInterface
     public function setName($name);
 
     /**
-     * Set identity value
+     * Set identity value.
      *
      * @param string $value
+     *
      * @return OrderInterface
      */
     public function setValue($value);
@@ -60,5 +61,4 @@ interface IdentityInterface
      * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order = null);
-
 }

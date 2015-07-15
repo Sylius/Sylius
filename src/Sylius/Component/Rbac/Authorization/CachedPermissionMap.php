@@ -38,8 +38,8 @@ class CachedPermissionMap implements PermissionMapInterface
 
     /**
      * @param PermissionMapInterface $map
-     * @param Cache $cache
-     * @param int $ttl
+     * @param Cache                  $cache
+     * @param int                    $ttl
      */
     public function __construct(PermissionMapInterface $map, Cache $cache, $ttl = null)
     {

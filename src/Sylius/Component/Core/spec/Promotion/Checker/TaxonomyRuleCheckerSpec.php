@@ -23,17 +23,17 @@ use Sylius\Component\Core\Model\Taxon;
  */
 class TaxonomyRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker');
     }
 
-    function it_should_be_sylius_rule_checker()
+    public function it_should_be_sylius_rule_checker()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
-    function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_matched(
+    public function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
         Taxon $taxon,
@@ -52,7 +52,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_product_taxonomy_is_not_matched(
+    public function it_should_recognize_subject_as_not_eligible_if_product_taxonomy_is_not_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
         Taxon $taxon,
@@ -71,7 +71,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_not_matched_and_exclude_is_set(
+    public function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_not_matched_and_exclude_is_set(
         OrderInterface $subject,
         OrderItemInterface $item,
         Taxon $taxon,
@@ -90,7 +90,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_product_taxonomy_is_matched_and_exclude_is_set(
+    public function it_should_recognize_subject_as_not_eligible_if_product_taxonomy_is_matched_and_exclude_is_set(
         OrderInterface $subject,
         OrderItemInterface $item,
         Taxon $taxon,

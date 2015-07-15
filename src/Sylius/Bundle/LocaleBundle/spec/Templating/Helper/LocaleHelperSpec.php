@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
@@ -20,29 +19,29 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
  */
 class LocaleHelperSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext)
+    public function let(LocaleContextInterface $localeContext)
     {
         $this->beConstructedWith($localeContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper');
     }
 
-    function it_is_a_helper()
+    public function it_is_a_helper()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_has_locale($localeContext)
+    public function it_has_locale($localeContext)
     {
         $localeContext->getLocale()->shouldBeCalled()->willReturn('fr_FR');
 
         $this->getLocale()->shouldReturn('fr_FR');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_locale');
     }

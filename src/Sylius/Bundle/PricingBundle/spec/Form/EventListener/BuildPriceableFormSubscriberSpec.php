@@ -20,31 +20,29 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 
-;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildPriceableFormSubscriberSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $calculatorRegistry,
         FormFactoryInterface $factory
     ) {
         $this->beConstructedWith($calculatorRegistry, $factory);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber');
     }
 
-    function it_should_be_event_subscriber()
+    public function it_should_be_event_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_should_add_configuration_fields_in_pre_set_data(
+    public function it_should_add_configuration_fields_in_pre_set_data(
         $calculatorRegistry,
         CalculatorInterface $calculator,
         $factory,

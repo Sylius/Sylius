@@ -60,7 +60,7 @@ EOT
             Kernel::ENV_DEV => '/app_dev.php',
             Kernel::ENV_TEST => '/app_test.php',
             Kernel::ENV_STAGING => '/app_staging.php',
-            Kernel::ENV_PROD => '/'
+            Kernel::ENV_PROD => '/',
         );
 
         $output->writeln('<info>Sylius has been successfully installed.</info>');

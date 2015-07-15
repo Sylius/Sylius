@@ -18,7 +18,7 @@ use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
 use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 
 /**
- * Orm Indexer
+ * Orm Indexer.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -52,7 +52,7 @@ class OrmIndexer implements IndexerInterface
      */
     public function __construct(array $config, ModelToElasticaAutoTransformer $transformer)
     {
-        $this->config      = $config;
+        $this->config = $config;
         $this->transformer = $transformer;
     }
 
@@ -241,8 +241,8 @@ class OrmIndexer implements IndexerInterface
         // TODO maybe I can use the property accessor here
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
-            $func = 'get' . ucfirst($field);
-            $content .= $element->$func() . self::SPACER;
+            $func = 'get'.ucfirst($field);
+            $content .= $element->$func().self::SPACER;
         }
 
         return $content;

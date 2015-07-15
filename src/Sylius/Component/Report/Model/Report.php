@@ -18,11 +18,10 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-
 class Report implements ReportInterface
 {
     /**
-     *@var integer
+     *@var int
      */
     private $id;
 
@@ -70,7 +69,7 @@ class Report implements ReportInterface
     /**
      * Gets the value of id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

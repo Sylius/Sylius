@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -19,12 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ParametersParserSpec extends ObjectBehavior
 {
-    function let(ExpressionLanguage $expression)
+    public function let(ExpressionLanguage $expression)
     {
         $this->beConstructedWith($expression);
     }
 
-    function it_should_parse_parameters(Request $request)
+    public function it_should_parse_parameters(Request $request)
     {
         $request->get('criteria')->willReturn('New criteria');
         $request->get('sorting')->willReturn('New sorting');
@@ -32,7 +33,7 @@ class ParametersParserSpec extends ObjectBehavior
         $this->parse(
             array(
                 'criteria' => '$criteria',
-                'sortable' => '$sorting'
+                'sortable' => '$sorting',
             ),
             $request
         )->shouldReturn(array(
@@ -43,11 +44,11 @@ class ParametersParserSpec extends ObjectBehavior
             array(
                 'criteria' => 'criteria',
                 'sortable' => 'sorting',
-            )
+            ),
         ));
     }
 
-    function it_should_parse_complex_parameters(Request $request)
+    public function it_should_parse_complex_parameters(Request $request)
     {
         $request->get('enable')->willReturn(true);
         $request->get('sorting')->willReturn('New sorting');
@@ -55,9 +56,9 @@ class ParametersParserSpec extends ObjectBehavior
         $this->parse(
             array(
                 'criteria' => array(
-                    'enable' => '$enable'
+                    'enable' => '$enable',
                 ),
-                'sortable' => '$sorting'
+                'sortable' => '$sorting',
             ),
             $request
         )->shouldReturn(array(
@@ -72,7 +73,7 @@ class ParametersParserSpec extends ObjectBehavior
                         'enable' => 'enable',
                     ),
                     'sortable' => 'sorting',
-                )
+                ),
             ));
     }
 }

@@ -21,16 +21,16 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface PaymentInterface extends TimestampableInterface
 {
     // Payment states.
-    const STATE_NEW        = 'new';
-    const STATE_PENDING    = 'pending';
+    const STATE_NEW = 'new';
+    const STATE_PENDING = 'pending';
     const STATE_PROCESSING = 'processing';
-    const STATE_COMPLETED  = 'completed';
+    const STATE_COMPLETED = 'completed';
     const STATE_AUTHORIZED = 'authorized';
-    const STATE_FAILED     = 'failed';
-    const STATE_CANCELLED  = 'cancelled';
-    const STATE_VOID       = 'void';
-    const STATE_REFUNDED   = 'refunded';
-    const STATE_UNKNOWN    = 'unknown';
+    const STATE_FAILED = 'failed';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_VOID = 'void';
+    const STATE_REFUNDED = 'refunded';
+    const STATE_UNKNOWN = 'unknown';
 
     /**
      * Get payment method associated with this payment.
@@ -99,14 +99,14 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
      * Set amount.
      *
-     * @param integer $amount
+     * @param int $amount
      *
      * @return PaymentInterface
      */

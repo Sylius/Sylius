@@ -19,17 +19,17 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
  */
 class CurrencyExtensionSpec extends ObjectBehavior
 {
-    function let(CurrencyHelper $helper)
+    public function let(CurrencyHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

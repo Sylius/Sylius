@@ -14,39 +14,38 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResourceChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_country_choice');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_a_parent_type_for_orm_driver()
+    public function it_has_a_parent_type_for_orm_driver()
     {
         $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
 
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_has_a_parent_type_for_mongodb_odm_driver()
+    public function it_has_a_parent_type_for_mongodb_odm_driver()
     {
         $this->beConstructedWith(
             'CountryModel',
@@ -57,7 +56,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('document');
     }
 
-    function it_has_a_parent_type_for_phpcr_odm_driver()
+    public function it_has_a_parent_type_for_phpcr_odm_driver()
     {
         $this->beConstructedWith(
             'CountryModel',
@@ -68,7 +67,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('phpcr_document');
     }
 
-    function it_defines_resource_options(OptionsResolverInterface $resolver)
+    public function it_defines_resource_options(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

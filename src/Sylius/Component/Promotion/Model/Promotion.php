@@ -22,105 +22,105 @@ use Doctrine\Common\Collections\Collection;
 class Promotion implements PromotionInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     protected $description;
 
     /**
-     * When exclusive, promotion with top priority will be applied
+     * When exclusive, promotion with top priority will be applied.
      *
-     * @var integer
+     * @var int
      */
     protected $priority = 0;
 
     /**
-     * Cannot be applied together with other promotions
+     * Cannot be applied together with other promotions.
      *
-     * @var boolean
+     * @var bool
      */
     protected $exclusive = false;
 
     /**
-     * Usage limit
+     * Usage limit.
      *
-     * @var integer
+     * @var int
      */
     protected $usageLimit;
 
     /**
-     * Number of times this coupon has been used
+     * Number of times this coupon has been used.
      *
-     * @var integer
+     * @var int
      */
     protected $used = 0;
 
     /**
-     * Start date
+     * Start date.
      *
      * @var \DateTime
      */
     protected $startsAt;
 
     /**
-     * End date
+     * End date.
      *
      * @var \DateTime
      */
     protected $endsAt;
 
     /**
-     * Whether this promotion is triggered by a coupon
+     * Whether this promotion is triggered by a coupon.
      *
      * @var Boolean
      */
     protected $couponBased = false;
 
     /**
-     * Associated coupons
+     * Associated coupons.
      *
      * @var Collection|CouponInterface[]
      */
     protected $coupons;
 
     /**
-     * Associated rules
+     * Associated rules.
      *
      * @var Collection|RuleInterface[]
      */
     protected $rules;
 
     /**
-     * Associated actions
+     * Associated actions.
      *
      * @var Collection|ActionInterface[]
      */
     protected $actions;
 
     /**
-     * Last time updated
+     * Last time updated.
      *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * Creation date
+     * Creation date.
      *
      * @var \DateTime
      */
@@ -134,7 +134,7 @@ class Promotion implements PromotionInterface
     protected $deletedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -145,7 +145,7 @@ class Promotion implements PromotionInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -265,7 +265,7 @@ class Promotion implements PromotionInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
+        ++$this->used;
 
         return $this;
     }

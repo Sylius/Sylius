@@ -20,17 +20,17 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class StringBlockTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('My\Resource\Model', array('validation_group'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ContentBundle\Form\Type\StringBlockType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('parentDocument', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
@@ -42,7 +42,7 @@ class StringBlockTypeSpec extends ObjectBehavior
         $this->buildForm($builder);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_string_block');
     }

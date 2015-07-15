@@ -26,28 +26,28 @@ interface ShippingSubjectInterface
     /**
      * Get the total weight of shipped goods.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingWeight();
 
     /**
      * Get the total volume of shipped goods.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingVolume();
 
     /**
      * Get the total amount of shipped goods.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingItemCount();
 
     /**
      * Get the total value of shipped goods.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingItemTotal();
 

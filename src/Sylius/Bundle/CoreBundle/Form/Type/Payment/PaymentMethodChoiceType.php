@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Payment method choice type
+ * Payment method choice type.
  *
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
@@ -44,7 +44,7 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
         $resolver
             ->setDefaults(array(
                 'query_builder' => $queryBuilder,
-                'channel' => null
+                'channel' => null,
             ))
             ->setAllowedTypes(array(
                 'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),

@@ -47,7 +47,7 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * Convert amount to target currency.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
      *
      * @return string
@@ -60,7 +60,7 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * Convert and format amount.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
      *
      * @return string

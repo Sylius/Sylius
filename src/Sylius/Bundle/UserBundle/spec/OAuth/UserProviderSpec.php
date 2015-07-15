@@ -25,7 +25,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CustomerRepository $customerRepository,
         UserRepositoryInterface $userRepository,
         RepositoryInterface $oauthRepository,
@@ -35,22 +35,22 @@ class UserProviderSpec extends ObjectBehavior
         $this->beConstructedWith($customerRepository, $userRepository, $oauthRepository, $userManager, $canonicalizer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\OAuth\UserProvider');
     }
 
-    function it_implements_Hwi_oauth_aware_user_provider_interface()
+    public function it_implements_Hwi_oauth_aware_user_provider_interface()
     {
         $this->shouldImplement('HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface');
     }
 
-    function it_implements_account_connector_interface()
+    public function it_implements_account_connector_interface()
     {
         $this->shouldImplement('HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface');
     }
 
-    function it_should_connect_oauth_account_with_given_user(
+    public function it_should_connect_oauth_account_with_given_user(
         $userManager,
         $oauthRepository,
         UserInterface $user,
@@ -79,7 +79,7 @@ class UserProviderSpec extends ObjectBehavior
         $this->connect($user, $response);
     }
 
-    function it_should_return_user_if_relation_exists(
+    public function it_should_return_user_if_relation_exists(
         $oauthRepository,
         UserInterface $user,
         UserOAuthInterface $oauth,
@@ -97,7 +97,7 @@ class UserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    function it_should_update_user_when_he_was_found_by_email(
+    public function it_should_update_user_when_he_was_found_by_email(
         $userManager,
         $userRepository,
         $oauthRepository,
@@ -130,7 +130,7 @@ class UserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    function it_should_create_new_user_when_none_was_found(
+    public function it_should_create_new_user_when_none_was_found(
         $userManager,
         $customerRepository,
         $userRepository,

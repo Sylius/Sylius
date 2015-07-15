@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds form section
+     * Adds form section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -56,7 +56,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds filter section
+     * Adds filter section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -125,7 +125,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds driver section
+     * Adds driver section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -145,7 +145,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds query logger section
+     * Adds query logger section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -167,7 +167,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds indexes section
+     * Adds indexes section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -193,7 +193,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds custom accessors section
+     * Adds custom accessors section.
      *
      * @param ArrayNodeDefinition $node
      */

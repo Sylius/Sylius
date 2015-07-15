@@ -14,19 +14,19 @@ namespace Sylius\Component\Report\DataFetcher;
 use Sylius\Component\Report\Model\ReportInterface;
 
 /**
-* Delegating data fetcher.
-*
-* @author Łukasz Chruściel <lchrusciel@gmail.com>
-*/
+ * Delegating data fetcher.
+ *
+ * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ */
 interface DelegatingDataFetcherInterface
 {
     /**
-    * Fetch data for given config.
-    *
-    * @param ReportInterface $report
-    * @param array $configuration
-    *
-    * @return array
-    */
+     * Fetch data for given config.
+     *
+     * @param ReportInterface $report
+     * @param array           $configuration
+     *
+     * @return array
+     */
     public function fetch(ReportInterface $report, array $configuration = array());
 }

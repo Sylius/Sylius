@@ -58,11 +58,11 @@ class AddressType extends AbstractResourceType
             ))
             ->add('phoneNumber', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.address.phone_number',
+                'label' => 'sylius.form.address.phone_number',
             ))
             ->add('company', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.address.company',
+                'label' => 'sylius.form.address.company',
             ))
             ->add('country', 'sylius_country_choice', array(
                 'label' => 'sylius.form.address.country',
@@ -98,7 +98,7 @@ class AddressType extends AbstractResourceType
 
                     return $validationGroups;
                 },
-                'shippable'         => false,
+                'shippable' => false,
             ))
             ->setAllowedTypes(array(
                 'shippable' => 'bool',

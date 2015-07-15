@@ -42,9 +42,9 @@ class SettingsEvent extends GenericEvent
     /**
      * Constructor.
      *
-     * @param string $namespace
+     * @param string   $namespace
      * @param Settings $settings
-     * @param array $parameters
+     * @param array    $parameters
      */
     public function __construct($namespace, Settings $settings, array $parameters)
     {

@@ -16,17 +16,17 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper;
 
 class RestrictedZoneExtensionSpec extends ObjectBehavior
 {
-    function let(RestrictedZoneHelper $helper)
+    public function let(RestrictedZoneHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

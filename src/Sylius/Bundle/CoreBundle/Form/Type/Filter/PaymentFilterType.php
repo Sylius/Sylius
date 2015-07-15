@@ -29,35 +29,35 @@ class PaymentFilterType extends AbstractType
         $builder
             ->add('number', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_filter.number',
-                'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.number'
-                )
+                'label' => 'sylius.form.payment_filter.number',
+                'attr' => array(
+                    'placeholder' => 'sylius.form.payment_filter.number',
+                ),
             ))
             ->add('billingAddress', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_filter.billing_address',
-                'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.billing_address'
-                )
+                'label' => 'sylius.form.payment_filter.billing_address',
+                'attr' => array(
+                    'placeholder' => 'sylius.form.payment_filter.billing_address',
+                ),
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_filter.created_at_from',
-                'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.created_at_from'
-                )
+                'label' => 'sylius.form.payment_filter.created_at_from',
+                'attr' => array(
+                    'placeholder' => 'sylius.form.payment_filter.created_at_from',
+                ),
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_filter.created_at_to',
-                'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.created_at_to'
-                )
+                'label' => 'sylius.form.payment_filter.created_at_to',
+                'attr' => array(
+                    'placeholder' => 'sylius.form.payment_filter.created_at_to',
+                ),
             ))
             ->add('channel', 'sylius_channel_choice', array(
-                'required'    => false,
-                'empty_value' => 'sylius.form.payment_filter.channel'
+                'required' => false,
+                'empty_value' => 'sylius.form.payment_filter.channel',
             ))
         ;
     }

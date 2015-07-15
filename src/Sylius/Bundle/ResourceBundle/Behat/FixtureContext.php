@@ -149,7 +149,7 @@ class FixtureContext extends DefaultContext
      * Persist and flush $entity.
      *
      * @param object $entity
-     * @param bool $flush
+     * @param bool   $flush
      *
      * @return mixed
      */

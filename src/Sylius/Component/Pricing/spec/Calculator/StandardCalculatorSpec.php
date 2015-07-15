@@ -20,24 +20,24 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  */
 class StandardCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Pricing\Calculator\StandardCalculator');
     }
 
-    function it_implements_Sylius_pricing_calculator_interface()
+    public function it_implements_Sylius_pricing_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
     }
 
-    function it_returns_the_default_price_stored_on_the_priceable_object(PriceableInterface $priceable)
+    public function it_returns_the_default_price_stored_on_the_priceable_object(PriceableInterface $priceable)
     {
         $priceable->getPrice()->willReturn(1299);
 
         $this->calculate($priceable, array())->shouldReturn(1299);
     }
 
-    function it_has_valid_type()
+    public function it_has_valid_type()
     {
         $this->getType()->shouldReturn(Calculators::STANDARD);
     }

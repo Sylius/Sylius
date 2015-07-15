@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -108,9 +107,10 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         $validationConfig = array();
         foreach ($config['validation_groups'] as $subject => $parameters) {
             foreach ($parameters as $resource => $validationGroups) {
-                $validationConfig[$subject . '_' . $resource] = $validationGroups;
+                $validationConfig[$subject.'_'.$resource] = $validationGroups;
             }
         }
+
         return $validationConfig;
     }
 }

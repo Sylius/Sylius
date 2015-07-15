@@ -59,21 +59,21 @@ class SettingsManager implements SettingsManagerInterface
     protected $cache;
 
     /**
-     * Runtime cache for resolved parameters
+     * Runtime cache for resolved parameters.
      *
      * @var Settings[]
      */
     protected $resolvedSettings = array();
 
     /**
-     * Validator instance
+     * Validator instance.
      *
      * @var ValidatorInterface
      */
     protected $validator;
 
     /**
-     * Event dispatcher
+     * Event dispatcher.
      *
      * @var EventDispatcherInterface
      */
@@ -82,11 +82,11 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * Constructor.
      *
-     * @param SchemaRegistryInterface $schemaRegistry
-     * @param ObjectManager $parameterManager
-     * @param RepositoryInterface $parameterRepository
-     * @param Cache $cache
-     * @param ValidatorInterface $validator
+     * @param SchemaRegistryInterface  $schemaRegistry
+     * @param ObjectManager            $parameterManager
+     * @param RepositoryInterface      $parameterRepository
+     * @param Cache                    $cache
+     * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
@@ -133,6 +133,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)

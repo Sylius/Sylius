@@ -24,17 +24,17 @@ use Sylius\Component\Core\Model\ShipmentInterface;
  */
 class StateResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\StateResolver');
     }
 
-    function it_implements_Sylius_order_state_resolver_interface()
+    public function it_implements_Sylius_order_state_resolver_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\StateResolverInterface');
     }
 
-    function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
+    public function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(true);
 
@@ -42,7 +42,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_shipped_if_all_shipments_delivered(
+    public function it_marks_order_as_shipped_if_all_shipments_delivered(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
@@ -57,7 +57,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_partially_shipped_if_not_all_shipments_delivered(
+    public function it_marks_order_as_partially_shipped_if_not_all_shipments_delivered(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
@@ -72,7 +72,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_returned_if_all_shipments_were_returned(
+    public function it_marks_order_as_returned_if_all_shipments_were_returned(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
@@ -87,7 +87,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_completed_if_fully_paid(
+    public function it_marks_order_as_completed_if_fully_paid(
         OrderInterface $order
     ) {
         $payment1 = new Payment();
@@ -103,7 +103,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_completed_if_fully_paid_multiple_payments(
+    public function it_marks_order_as_completed_if_fully_paid_multiple_payments(
         OrderInterface $order
     ) {
         $payment1 = new Payment();
@@ -122,7 +122,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
+    public function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
     {
         $payment1 = new Payment();
         $payment1->setAmount(6000);
@@ -140,7 +140,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_new_if_no_payment_is_in_process(OrderInterface $order)
+    public function it_marks_order_as_new_if_no_payment_is_in_process(OrderInterface $order)
     {
         $payment1 = new Payment();
         $payment1->setAmount(6000);

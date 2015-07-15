@@ -18,17 +18,17 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 class PaymentStatusActionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction');
     }
 
-    function it_extends_payum_payment_aware_action()
+    public function it_extends_payum_payment_aware_action()
     {
         $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
-    function it_should_support_status_request_with_order_model(
+    public function it_should_support_status_request_with_order_model(
         PaymentInterface $payment,
         GetStatusInterface $statusRequest
     ) {
@@ -37,20 +37,20 @@ class PaymentStatusActionSpec extends ObjectBehavior
         $this->supports($statusRequest)->shouldReturn(true);
     }
 
-    function it_should_not_support_status_request_with_no_order_model(
+    public function it_should_not_support_status_request_with_no_order_model(
         GetStatusInterface $statusRequest
-    )  {
+    ) {
         $statusRequest->getModel()->willReturn('foo');
 
         $this->supports($statusRequest)->shouldReturn(false);
     }
 
-    function it_should_not_support_any_no_status_requests()
+    public function it_should_not_support_any_no_status_requests()
     {
         $this->supports('foo')->shouldReturn(false);
     }
 
-    function it_throws_exception_if_executing_not_supported_request()
+    public function it_throws_exception_if_executing_not_supported_request()
     {
         $notSupportedRequest = 'foo';
 
@@ -60,7 +60,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_mark_new_if_order_have_empty_payment_details(
+    public function it_should_mark_new_if_order_have_empty_payment_details(
         PaymentInterface $payment,
         GetStatusInterface $statusRequest
     ) {
@@ -72,7 +72,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
         $this->execute($statusRequest);
     }
 
-    function it_should_do_status_subrequest_with_payment_details_as_model(
+    public function it_should_do_status_subrequest_with_payment_details_as_model(
         PaymentInterface $payment,
         GetStatusInterface $statusRequest,
         PayumPaymentInterface $payment

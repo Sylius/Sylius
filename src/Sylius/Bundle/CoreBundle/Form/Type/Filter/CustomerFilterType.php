@@ -26,9 +26,9 @@ class CustomerFilterType extends AbstractType
         $builder
             ->add('query', 'text', array(
                 'label' => 'sylius.form.customer_filter.query',
-                'attr'  => array(
-                    'placeholder' => 'sylius.form.customer_filter.query'
-                )
+                'attr' => array(
+                    'placeholder' => 'sylius.form.customer_filter.query',
+                ),
             ))
         ;
     }

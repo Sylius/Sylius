@@ -67,10 +67,10 @@ abstract class MenuBuilder
     /**
      * Constructor.
      *
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface              $factory
+     * @param SecurityContextInterface      $securityContext
+     * @param TranslatorInterface           $translator
+     * @param EventDispatcherInterface      $eventDispatcher
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
@@ -88,7 +88,7 @@ abstract class MenuBuilder
     }
 
     /**
-     * Sets the request the service
+     * Sets the request the service.
      *
      * @param Request $request
      */
@@ -107,6 +107,6 @@ abstract class MenuBuilder
      */
     protected function translate($label, $parameters = array())
     {
-        return $this->translator->trans(/** @Ignore */ $label, $parameters, 'menu');
+        return $this->translator->trans(/* @Ignore */ $label, $parameters, 'menu');
     }
 }

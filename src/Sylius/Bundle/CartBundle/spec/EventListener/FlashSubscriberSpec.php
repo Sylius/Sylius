@@ -24,19 +24,19 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class FlashSubscriberSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, TranslatorInterface $translator)
+    public function let(SessionInterface $session, TranslatorInterface $translator)
     {
         $this->beConstructedWith($session, $translator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\FlashSubscriber');
     }
 
-    function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
+    public function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an error message";
+        $message = 'This is an error message';
 
         $event
             ->getMessage()
@@ -61,9 +61,9 @@ class FlashSubscriberSpec extends ObjectBehavior
         $this->addErrorFlash($event);
     }
 
-    function it_should_add_a_custom_success_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
+    public function it_should_add_a_custom_success_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an success message";
+        $message = 'This is an success message';
 
         $event
             ->getMessage()
@@ -88,7 +88,7 @@ class FlashSubscriberSpec extends ObjectBehavior
         $this->addSuccessFlash($event);
     }
 
-    function it_should_have_a_default_error_flash_message_for_event_name(
+    public function it_should_have_a_default_error_flash_message_for_event_name(
         $session,
         $translator,
         FlashEvent $event,
@@ -124,7 +124,7 @@ class FlashSubscriberSpec extends ObjectBehavior
         $this->addErrorFlash($event);
     }
 
-    function it_should_have_a_default_success_flash_message_for_event_name(
+    public function it_should_have_a_default_success_flash_message_for_event_name(
         $session,
         $translator,
         FlashEvent $event,

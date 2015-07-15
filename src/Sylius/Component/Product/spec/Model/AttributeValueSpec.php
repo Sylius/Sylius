@@ -19,33 +19,33 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class AttributeValueSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\AttributeValue');
     }
 
-    function it_extends_Sylius_attribute_value_model()
+    public function it_extends_Sylius_attribute_value_model()
     {
         $this->shouldHaveType('Sylius\Component\Attribute\Model\AttributeValue');
     }
 
-    function it_implements_Sylius_product_attribute_value_interface()
+    public function it_implements_Sylius_product_attribute_value_interface()
     {
         $this->shouldImplement('Sylius\Component\Product\Model\AttributeValueInterface');
     }
 
-    function it_does_not_belong_to_a_product_by_default()
+    public function it_does_not_belong_to_a_product_by_default()
     {
         $this->getProduct()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_a_product(ProductInterface $product)
+    public function it_allows_assigning_itself_to_a_product(ProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
     }
 
-    function it_allows_detaching_itself_from_a_product(ProductInterface $product)
+    public function it_allows_detaching_itself_from_a_product(ProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);

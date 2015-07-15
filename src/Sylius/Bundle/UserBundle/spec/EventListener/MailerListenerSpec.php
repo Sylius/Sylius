@@ -22,17 +22,17 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
  */
 class MailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender)
+    public function let(SenderInterface $sender)
     {
         $this->beConstructedWith($sender);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\MailerListener');
     }
 
-    function it_send_password_reset_token_mail($sender, GenericEvent $event, UserInterface $user)
+    public function it_send_password_reset_token_mail($sender, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
@@ -43,7 +43,7 @@ class MailerListenerSpec extends ObjectBehavior
         $this->sendResetPasswordTokenEmail($event);
     }
 
-    function it_send_password_reset_pin_mail($sender, GenericEvent $event, UserInterface $user)
+    public function it_send_password_reset_pin_mail($sender, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 

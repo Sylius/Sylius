@@ -106,7 +106,7 @@ class CheckoutController extends FOSRestController
             foreach ($order->getShipments() as $key => $shipment) {
                 $shipments[] = array(
                     'shipment' => $shipment,
-                    'methods'  => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
+                    'methods' => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
                 );
             }
 
@@ -275,7 +275,7 @@ class CheckoutController extends FOSRestController
                     return $zone->getId();
                 }, $zones) : null,
                 'enabled' => true,
-            )
+            ),
         ));
     }
 

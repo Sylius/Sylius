@@ -21,17 +21,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EntityHiddenTypeSpec extends ObjectBehavior
 {
-    function let(ManagerRegistry $manager)
+    public function let(ManagerRegistry $manager)
     {
         $this->beConstructedWith($manager);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType');
     }
 
-    function it_build_a_form($manager, FormBuilderInterface $builder, ObjectRepository $repository)
+    public function it_build_a_form($manager, FormBuilderInterface $builder, ObjectRepository $repository)
     {
         $manager->getRepository('data_class')->willReturn($repository);
 
@@ -49,7 +49,7 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'identifier' => 'id',
@@ -58,12 +58,12 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getParent()->shouldReturn('hidden');
     }
 
-    function it_has_a_parent()
+    public function it_has_a_parent()
     {
         $this->getName()->shouldReturn('entity_hidden');
     }

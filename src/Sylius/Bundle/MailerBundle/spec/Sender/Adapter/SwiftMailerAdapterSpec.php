@@ -20,22 +20,22 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SwiftMailerAdapterSpec extends ObjectBehavior
 {
-    function let(\Swift_Mailer $mailer)
+    public function let(\Swift_Mailer $mailer)
     {
         $this->beConstructedWith($mailer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter');
     }
 
-    function it_is_an_adapter()
+    public function it_is_an_adapter()
     {
         $this->shouldHaveType('Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter');
     }
 
-    function it_sends_an_email(
+    public function it_sends_an_email(
         $mailer,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail,

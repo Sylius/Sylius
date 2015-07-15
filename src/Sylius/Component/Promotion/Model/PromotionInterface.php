@@ -22,121 +22,121 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface PromotionInterface extends TimestampableInterface
 {
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
     public function getDescription();
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
     public function setDescription($description);
 
     /**
-     * Get priority
+     * Get priority.
      *
-     * @return integer
+     * @return int
      */
     public function getPriority();
 
     /**
-     * Set priority
+     * Set priority.
      *
-     * @param integer $priority
+     * @param int $priority
      *
      * @return PromotionInterface
      */
     public function setPriority($priority);
 
     /**
-     * Is exclusive
+     * Is exclusive.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExclusive();
 
     /**
-     * Set exclusive
+     * Set exclusive.
      *
-     * @param boolean $exclusive
+     * @param bool $exclusive
      *
      * @return PromotionInterface
      */
     public function setExclusive($exclusive);
 
     /**
-     * Get usage limit
+     * Get usage limit.
      *
-     * @return integer
+     * @return int
      */
     public function getUsageLimit();
 
     /**
-     * Set usage limit
+     * Set usage limit.
      *
-     * @param integer $usageLimit
+     * @param int $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
     /**
-     * Get usage
+     * Get usage.
      *
-     * @return integer
+     * @return int
      */
     public function getUsed();
 
     /**
-     * Set usage
+     * Set usage.
      *
-     * @param integer $used
+     * @param int $used
      */
     public function setUsed($used);
 
     /**
-     * Increment usage
+     * Increment usage.
      */
     public function incrementUsed();
 
     /**
-     * Get start date
+     * Get start date.
      *
      * @return \DateTime
      */
     public function getStartsAt();
 
     /**
-     * Set start date
+     * Set start date.
      *
      * @param \DateTime $startsAt
      */
     public function setStartsAt(\DateTime $startsAt = null);
 
     /**
-     * Get end date
+     * Get end date.
      *
      * @return \DateTime
      */
     public function getEndsAt();
 
     /**
-     * Set end date
+     * Set end date.
      *
      * @param \DateTime $endsAt
      */

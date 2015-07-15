@@ -18,33 +18,33 @@ use PhpSpec\ObjectBehavior;
  */
 class TaxonomyTranslationSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Taxonomy\Model\TaxonomyTranslation');
     }
 
-    function it_implements_Sylius_taxonomy_interface()
+    public function it_implements_Sylius_taxonomy_interface()
     {
         $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonomyTranslationInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_is_unnamed_by_default()
+    public function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Brand');
         $this->getName()->shouldReturn('Brand');
     }
 
-    function it_returns_name_when_converted_to_string()
+    public function it_returns_name_when_converted_to_string()
     {
         $this->setName('Brand');
         $this->__toString()->shouldReturn('Brand');

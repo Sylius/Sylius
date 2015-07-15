@@ -19,8 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SearchStringQuerySpec extends ObjectBehavior
 {
-
-    function let()
+    public function let()
     {
         $request = new Request();
         $request->query->set('q', 'search term');
@@ -30,7 +29,7 @@ class SearchStringQuerySpec extends ObjectBehavior
         $this->beConstructedWith($request, true);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Query\SearchStringQuery');
     }
@@ -54,5 +53,4 @@ class SearchStringQuerySpec extends ObjectBehavior
     {
         $this->isDropdownFilterEnabled()->shouldReturn(true);
     }
-
-} 
+}

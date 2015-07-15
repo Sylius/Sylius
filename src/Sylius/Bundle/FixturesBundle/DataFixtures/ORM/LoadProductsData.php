@@ -29,11 +29,11 @@ class LoadProductsData extends DataFixture
     /**
      * Total variants created.
      *
-     * @var integer
+     * @var int
      */
     private $totalVariants = 0;
 
-    private  $channels = array(
+    private $channels = array(
         'WEB-UK',
         'WEB-DE',
         'WEB-US',
@@ -46,7 +46,7 @@ class LoadProductsData extends DataFixture
     public function load(ObjectManager $manager)
     {
         // T-Shirts...
-        for ($i = 1; $i <= 120; $i++) {
+        for ($i = 1; $i <= 120; ++$i) {
             switch (rand(0, 3)) {
                 case 0:
                     $manager->persist($this->createTShirt($i));
@@ -86,7 +86,7 @@ class LoadProductsData extends DataFixture
     /**
      * Creates t-shirt product.
      *
-     * @param integer $i
+     * @param int $i
      *
      * @return ProductInterface
      */
@@ -134,7 +134,7 @@ class LoadProductsData extends DataFixture
     /**
      * Create sticker product.
      *
-     * @param integer $i
+     * @param int $i
      *
      * @return ProductInterface
      */
@@ -178,7 +178,7 @@ class LoadProductsData extends DataFixture
     /**
      * Create mug product.
      *
-     * @param integer $i
+     * @param int $i
      *
      * @return ProductInterface
      */
@@ -215,7 +215,7 @@ class LoadProductsData extends DataFixture
     /**
      * Create book product.
      *
-     * @param integer $i
+     * @param int $i
      *
      * @return ProductInterface
      */
@@ -364,7 +364,7 @@ class LoadProductsData extends DataFixture
     /**
      * Get unique SKU.
      *
-     * @param integer $length
+     * @param int $length
      *
      * @return string
      */

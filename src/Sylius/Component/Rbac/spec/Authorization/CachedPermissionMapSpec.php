@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
-use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -23,29 +22,29 @@ use Sylius\Component\Rbac\Model\RoleInterface;
  */
 class CachedPermissionMapSpec extends ObjectBehavior
 {
-    function let(PermissionMapInterface $map, Cache $cache)
+    public function let(PermissionMapInterface $map, Cache $cache)
     {
         $this->beConstructedWith($map, $cache);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Authorization\CachedPermissionMap');
     }
 
-    function it_is_a_permission_map()
+    public function it_is_a_permission_map()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
     }
 
-    function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)
+    public function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)
     {
         $map->getPermissions($role)->shouldBeCalled()->willReturn($permissions);
 
         $this->getPermissions($role)->shouldReturn($permissions);
     }
 
-    function it_checks_if_permission_is_in_the_cached_array($cache, RoleInterface $role)
+    public function it_checks_if_permission_is_in_the_cached_array($cache, RoleInterface $role)
     {
         $role->getCode()->shouldBeCalled()->willReturn('catalog_manager');
 

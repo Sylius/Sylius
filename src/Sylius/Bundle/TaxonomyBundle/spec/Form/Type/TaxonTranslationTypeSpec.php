@@ -22,22 +22,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonTranslationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('TaxonTranslation', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(
+    public function it_builds_form_with_proper_fields(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -61,11 +61,11 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'TaxonTranslation',
+                'data_class' => 'TaxonTranslation',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

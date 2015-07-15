@@ -42,8 +42,8 @@ class ArchetypeUpdateListener
 
     /**
      * @param ArchetypeBuilderInterface $builder
-     * @param ObjectRepository $productRepository
-     * @param ObjectManager $productManager
+     * @param ObjectRepository          $productRepository
+     * @param ObjectManager             $productManager
      */
     public function __construct(ArchetypeBuilderInterface $builder, ObjectRepository $productRepository, ObjectManager $productManager)
     {

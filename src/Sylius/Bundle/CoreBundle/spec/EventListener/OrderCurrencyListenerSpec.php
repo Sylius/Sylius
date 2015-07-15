@@ -18,21 +18,20 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 class OrderCurrencyListenerSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext)
+    public function let(CurrencyContextInterface $currencyContext)
     {
         $this->beConstructedWith($currencyContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener');
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(
+    public function it_throws_exception_if_event_has_non_order_subject(
         CartEvent $event,
         \stdClass $invalidSubject
-    )
-    {
+    ) {
         $event->getCart()->willReturn($invalidSubject);
 
         $this
@@ -41,7 +40,7 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_sets_currency_on_order($currencyContext, CartEvent $event, OrderInterface $order)
+    public function it_sets_currency_on_order($currencyContext, CartEvent $event, OrderInterface $order)
     {
         $event->getCart()->willReturn($order);
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');

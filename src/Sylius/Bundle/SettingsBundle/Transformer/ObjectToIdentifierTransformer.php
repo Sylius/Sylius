@@ -27,7 +27,7 @@ class ObjectToIdentifierTransformer extends BaseTransformer implements Parameter
     public function transform($value)
     {
         if (!is_object($value)) {
-            return null;
+            return;
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -41,7 +41,7 @@ class ObjectToIdentifierTransformer extends BaseTransformer implements Parameter
     public function reverseTransform($value)
     {
         if (empty($value)) {
-            return null;
+            return;
         }
 
         return $this->repository->findOneBy(array($this->identifier => $value));

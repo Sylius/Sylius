@@ -37,7 +37,7 @@ class PropertyAccessor extends BasePropertyAccessor
     public function __construct($customAccessors = array())
     {
         foreach ($customAccessors as $customAccessorClass) {
-            $this->customAccessors[] = new $customAccessorClass;
+            $this->customAccessors[] = new $customAccessorClass();
         }
     }
 
@@ -53,7 +53,7 @@ class PropertyAccessor extends BasePropertyAccessor
 
             return parent::getValue($objectOrArray, $propertyPath);
         } catch (Exception\NoSuchPropertyException $e) {
-            return null;
+            return;
         }
     }
 }

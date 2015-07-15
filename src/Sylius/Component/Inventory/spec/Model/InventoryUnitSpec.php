@@ -20,57 +20,57 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  */
 class InventoryUnitSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
-    function it_implements_Sylius_inventory_unit_interface()
+    public function it_implements_Sylius_inventory_unit_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Model\InventoryUnitInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_defined_stockable_subject_by_default()
+    public function it_has_no_defined_stockable_subject_by_default()
     {
         $this->getStockable()->shouldReturn(null);
     }
 
-    function it_allows_defining_stockable_subject(StockableInterface $stockable)
+    public function it_allows_defining_stockable_subject(StockableInterface $stockable)
     {
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);
     }
 
-    function it_has_checkout_state_by_default()
+    public function it_has_checkout_state_by_default()
     {
         $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_CHECKOUT);
     }
 
-    function its_state_is_mutable()
+    public function its_state_is_mutable()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
         $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_BACKORDERED);
     }
 
-    function it_is_sold_if_its_state_says_so()
+    public function it_is_sold_if_its_state_says_so()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldBeSold();
     }
 
-    function it_is_backordered_if_its_state_says_so()
+    public function it_is_backordered_if_its_state_says_so()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
         $this->shouldBeBackordered();
     }
 
-    function it_returns_its_stockable_name(StockableInterface $stockable)
+    public function it_returns_its_stockable_name(StockableInterface $stockable)
     {
         $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
         $this->setStockable($stockable);
@@ -78,7 +78,7 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
     }
 
-    function it_returns_its_stockable_sku(StockableInterface $stockable)
+    public function it_returns_its_stockable_sku(StockableInterface $stockable)
     {
         $stockable->getSku()->willReturn('IPHONE5');
         $this->setStockable($stockable);
@@ -86,12 +86,12 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getSku()->shouldReturn('IPHONE5');
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime('last year');
 
@@ -99,12 +99,12 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime('last year');
 

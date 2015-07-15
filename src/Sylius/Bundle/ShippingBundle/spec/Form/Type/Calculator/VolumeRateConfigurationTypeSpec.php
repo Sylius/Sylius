@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class VolumeRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType');
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('amount', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
         $builder->add('division', 'number', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
@@ -44,7 +44,7 @@ class VolumeRateConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => array('sylius'),
@@ -54,7 +54,7 @@ class VolumeRateConfigurationTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_shipping_calculator_volume_rate_configuration');
     }

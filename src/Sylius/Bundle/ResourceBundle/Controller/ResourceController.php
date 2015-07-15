@@ -208,7 +208,7 @@ class ResourceController extends FOSRestController
             ->setTemplate($this->config->getTemplate('create.html'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
+                'form' => $form->createView(),
             ))
         ;
 
@@ -225,7 +225,7 @@ class ResourceController extends FOSRestController
         $this->isGrantedOr403('update');
 
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $form = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
@@ -254,7 +254,7 @@ class ResourceController extends FOSRestController
             ->setTemplate($this->config->getTemplate('update.html'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
+                'form' => $form->createView(),
             ))
         ;
 
@@ -311,8 +311,8 @@ class ResourceController extends FOSRestController
      */
     public function revertAction(Request $request, $version)
     {
-        $resource   = $this->findOr404($request);
-        $em         = $this->get('doctrine.orm.entity_manager');
+        $resource = $this->findOr404($request);
+        $em = $this->get('doctrine.orm.entity_manager');
         $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $repository->revert($resource, $version);
 
@@ -439,6 +439,7 @@ class ResourceController extends FOSRestController
                 )
             );
         }
+
         return $resource;
     }
 
@@ -452,7 +453,7 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param integer $movement
+     * @param int     $movement
      *
      * @return RedirectResponse
      */

@@ -46,7 +46,7 @@ class MoneyExtension extends \Twig_Extension
     /**
      * Format the money amount to nice display form.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
      *
      * @return string

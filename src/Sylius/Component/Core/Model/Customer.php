@@ -47,8 +47,8 @@ class Customer extends BaseCustomer implements CustomerInterface
     public function __construct()
     {
         parent::__construct();
-        $this->orders     = new ArrayCollection();
-        $this->addresses  = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
     }
 
     /**

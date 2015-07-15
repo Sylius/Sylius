@@ -19,33 +19,33 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class OptionValueSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Variation\Model\OptionValue');
     }
 
-    function it_is_a_Sylius_product_option_value()
+    public function it_is_a_Sylius_product_option_value()
     {
         $this->shouldImplement('Sylius\Component\Variation\Model\OptionValueInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    public function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_belong_to_an_option_by_default()
+    public function it_should_not_belong_to_an_option_by_default()
     {
         $this->getOption()->shouldReturn(null);
     }
 
-    function it_should_allow_assigning_itself_to_an_option(OptionInterface $option)
+    public function it_should_allow_assigning_itself_to_an_option(OptionInterface $option)
     {
         $this->setOption($option);
         $this->getOption()->shouldReturn($option);
     }
 
-    function it_should_allow_detaching_itself_from_an_option(OptionInterface $option)
+    public function it_should_allow_detaching_itself_from_an_option(OptionInterface $option)
     {
         $this->setOption($option);
         $this->getOption()->shouldReturn($option);
@@ -54,24 +54,24 @@ class OptionValueSpec extends ObjectBehavior
         $this->getOption()->shouldReturn(null);
     }
 
-    function it_should_not_have_value_by_default()
+    public function it_should_not_have_value_by_default()
     {
         $this->getValue()->shouldReturn(null);
     }
 
-    function its_value_should_be_mutable()
+    public function its_value_should_be_mutable()
     {
         $this->setValue('XXL');
         $this->getValue()->shouldReturn('XXL');
     }
 
-    function it_returns_its_value_when_converted_to_string()
+    public function it_returns_its_value_when_converted_to_string()
     {
         $this->setValue('S');
         $this->__toString()->shouldReturn('S');
     }
 
-    function it_throws_exception_when_trying_to_get_name_without_option_being_assigned()
+    public function it_throws_exception_when_trying_to_get_name_without_option_being_assigned()
     {
         $this
             ->shouldThrow('BadMethodCallException')
@@ -79,7 +79,7 @@ class OptionValueSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_its_option_name(OptionInterface $option)
+    public function it_returns_its_option_name(OptionInterface $option)
     {
         $option->getName()->willReturn('T-Shirt size');
         $this->setOption($option);
@@ -87,7 +87,7 @@ class OptionValueSpec extends ObjectBehavior
         $this->getName()->shouldReturn('T-Shirt size');
     }
 
-    function it_throws_exception_when_trying_to_get_presentation_without_option_being_assigned()
+    public function it_throws_exception_when_trying_to_get_presentation_without_option_being_assigned()
     {
         $this
             ->shouldThrow('BadMethodCallException')
@@ -95,7 +95,7 @@ class OptionValueSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_its_option_presentation(OptionInterface $option)
+    public function it_returns_its_option_presentation(OptionInterface $option)
     {
         $option->getPresentation()->willReturn('Size');
         $this->setOption($option);

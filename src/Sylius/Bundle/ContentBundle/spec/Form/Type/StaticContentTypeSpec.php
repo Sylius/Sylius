@@ -20,17 +20,17 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class StaticContentTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('My\Resource\Model', array('validation_group'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ContentBundle\Form\Type\StaticContentType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('publishable', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('id', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
@@ -47,7 +47,7 @@ class StaticContentTypeSpec extends ObjectBehavior
         $this->buildForm($builder);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_static_content');
     }

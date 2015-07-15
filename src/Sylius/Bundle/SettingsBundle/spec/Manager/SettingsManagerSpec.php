@@ -24,24 +24,23 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class SettingsManagerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SchemaRegistryInterface $registry,
         Cache $cache,
         ObjectManager $manager,
         RepositoryInterface $repository,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->beConstructedWith($registry, $manager, $repository, $cache, $validator, $eventDispatcher);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Manager\SettingsManager');
     }
 
-    function it_should_be_a_Sylius_settings_manager()
+    public function it_should_be_a_Sylius_settings_manager()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
     }

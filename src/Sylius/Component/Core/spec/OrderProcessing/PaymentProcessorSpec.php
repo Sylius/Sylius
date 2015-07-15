@@ -22,22 +22,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PaymentProcessorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
+    public function let(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
     {
         $this->beConstructedWith($paymentRepository, $paymentManager);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\PaymentProcessor');
     }
 
-    function it_implements_payment_processor_interface()
+    public function it_implements_payment_processor_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface');
     }
 
-    function it_creates_payment(
+    public function it_creates_payment(
         $paymentRepository,
         OrderInterface $order,
         PaymentInterface $payment
@@ -56,7 +56,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         $this->createPayment($order)->shouldReturn($payment);
     }
 
-    function it_sets_not_started_payments_as_cancelled_while_creating_payment(
+    public function it_sets_not_started_payments_as_cancelled_while_creating_payment(
         $paymentManager,
         $paymentRepository,
         OrderInterface $order,

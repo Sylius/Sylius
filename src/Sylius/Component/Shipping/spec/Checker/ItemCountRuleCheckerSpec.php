@@ -19,24 +19,24 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class ItemCountRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Checker\ItemCountRuleChecker');
     }
 
-    function it_is_Sylius_rule_checker()
+    public function it_is_Sylius_rule_checker()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Checker\RuleCheckerInterface');
     }
 
-    function it_should_recognize_empty_subject_as_not_eligible(ShippingSubjectInterface $subject)
+    public function it_should_recognize_empty_subject_as_not_eligible(ShippingSubjectInterface $subject)
     {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(0);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(
         ShippingSubjectInterface $subject
     ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(7);
@@ -44,7 +44,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(
+    public function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(
         ShippingSubjectInterface $subject
     ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(12);
@@ -52,7 +52,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(
+    public function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(
         ShippingSubjectInterface $subject
     ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(10);
@@ -61,7 +61,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('count' => 10, 'equal' => true))->shouldReturn(true);
     }
 
-    function it_returns_item_count_configuration_form_type()
+    public function it_returns_item_count_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_shipping_rule_item_count_configuration');
     }

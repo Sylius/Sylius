@@ -26,17 +26,17 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber');
     }
 
-    function it_implements_data_fetcher_interface()
+    public function it_implements_data_fetcher_interface()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function let(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
+    public function let(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
     {
         $dataFecherRegistry->get('test_data_fetcher')->willReturn($dataFetcher);
         $dataFetcher->getType()->willReturn('test_type');
@@ -44,7 +44,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($dataFecherRegistry, $factory);
     }
 
-    function it_adds_configuration_fields_in_pre_set_data(
+    public function it_adds_configuration_fields_in_pre_set_data(
         $factory,
         ReportInterface $report,
         FormEvent $event,
@@ -68,7 +68,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_fields_in_pre_bind(
+    public function it_adds_configuration_fields_in_pre_bind(
         $factory,
         FormEvent $event,
         Form $form,
@@ -90,7 +90,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         $this->preBind($event);
     }
 
-    function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_report(FormEvent $event)
+    public function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_report(FormEvent $event)
     {
         $report = '';
         $event->getData()->willReturn($report);

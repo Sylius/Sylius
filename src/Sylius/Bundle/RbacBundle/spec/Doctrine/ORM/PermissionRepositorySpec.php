@@ -25,17 +25,17 @@ use Doctrine\ORM\QueryBuilder;
  */
 class PermissionRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Doctrine\ORM\PermissionRepository');
     }
 
-    function it_gets_chield_permission(
+    public function it_gets_chield_permission(
         $em,
         $builder,
         PermissionInterface $permission,

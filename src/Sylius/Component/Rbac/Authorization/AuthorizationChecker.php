@@ -14,7 +14,6 @@ namespace Sylius\Component\Rbac\Authorization;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Default authorization checker.
@@ -40,15 +39,14 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
 
     /**
      * @param CurrentIdentityProviderInterface $currentIdentityProvider
-     * @param PermissionMapInterface $permissionMap
-     * @param RolesResolverInterface $rolesResolver
+     * @param PermissionMapInterface           $permissionMap
+     * @param RolesResolverInterface           $rolesResolver
      */
     public function __construct(
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->currentIdentityProvider = $currentIdentityProvider;
         $this->permissionMap = $permissionMap;
         $this->rolesResolver = $rolesResolver;

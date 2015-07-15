@@ -29,17 +29,17 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository');
     }
 
-    function it_is_a_repository()
+    public function it_is_a_repository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    public function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
     {
         $collection->disable('softdeleteable')->shouldBeCalled();
 
@@ -54,13 +54,12 @@ class CustomerRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
 
-
         $collection->enable('softdeleteable')->shouldBeCalled();
 
         $this->findForDetailsPage(1);
     }
 
-    function it_creates_paginator(
+    public function it_creates_paginator(
         $em,
         $collection,
         QueryBuilder $builder,
@@ -96,7 +95,7 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->createFilterPaginator(
             array(
                 'enabled' => true,
-                'query' => 'arnaud'
+                'query' => 'arnaud',
             ),
             array('name' => 'asc'),
             true

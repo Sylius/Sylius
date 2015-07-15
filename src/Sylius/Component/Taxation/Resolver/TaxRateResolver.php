@@ -31,7 +31,7 @@ class TaxRateResolver implements TaxRateResolverInterface
     /**
      * Tax rate repository.
      *
-     * @var RepositoryInterface $taxRateRepository
+     * @var RepositoryInterface
      */
     public function __construct(RepositoryInterface $taxRateRepository)
     {
@@ -44,7 +44,7 @@ class TaxRateResolver implements TaxRateResolverInterface
     public function resolve(TaxableInterface $taxable, array $criteria = array())
     {
         if (null === $category = $taxable->getTaxCategory()) {
-            return null;
+            return;
         }
 
         $criteria = array_merge(array('category' => $category), $criteria);

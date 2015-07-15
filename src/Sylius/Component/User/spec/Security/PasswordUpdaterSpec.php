@@ -18,8 +18,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class PasswordUpdaterSpec extends ObjectBehavior
 {
     public function let(EncoderFactoryInterface $encoderFactory)

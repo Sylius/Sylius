@@ -40,7 +40,7 @@ class DelegatingFeeCalculator implements DelegatingFeeCalculatorInterface
     public function calculate(PaymentSubjectInterface $payment)
     {
         if (null === $payment->getMethod()) {
-            throw new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured.");
+            throw new \InvalidArgumentException('Cannot calculate fee for payment without payment method configured.');
         }
 
         /** @var FeeCalculatorInterface $feeCalculator */

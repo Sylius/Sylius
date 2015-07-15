@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 class SecurityController extends Controller
 {
     /**
-     * Target action for _switch_user=_exit, redirects admin back to impersonated user
+     * Target action for _switch_user=_exit, redirects admin back to impersonated user.
      *
      * @param string $username
      *
@@ -81,8 +81,8 @@ class SecurityController extends Controller
 
         return $this->render('SyliusWebBundle:Backend/Security:login.html.twig', array(
             'last_username' => $lastUsername,
-            'error'         => $error,
-            'token'         => $csrfToken,
+            'error' => $error,
+            'token' => $csrfToken,
         ));
     }
 

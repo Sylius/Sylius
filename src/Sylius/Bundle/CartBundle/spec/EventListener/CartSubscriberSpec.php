@@ -27,17 +27,17 @@ use Symfony\Component\Validator\ValidatorInterface;
  */
 class CartSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
+    public function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
         $this->beConstructedWith($manager, $validator, $provider);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartSubscriber');
     }
 
-    function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
+    public function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
     {
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
@@ -46,7 +46,7 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->addItem($event);
     }
 
-    function it_should_remove_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
+    public function it_should_remove_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
     {
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
@@ -55,7 +55,7 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->removeItem($event);
     }
 
-    function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
+    public function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
     {
         $event->getCart()->willReturn($cart);
         $manager->remove($cart)->shouldBeCalled();
@@ -65,7 +65,7 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->clearCart($event);
     }
 
-    function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
+    public function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
     {
         $event->getCart()->willReturn($cart);
         $manager->persist($cart)->shouldBeCalled();
@@ -75,7 +75,7 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->saveCart($event);
     }
 
-    function it_should_not_save_an_invalid_cart(
+    public function it_should_not_save_an_invalid_cart(
         $manager,
         $provider,
         $validator,

@@ -21,32 +21,32 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
  */
 class UsernameProviderSpec extends ObjectBehavior
 {
-    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    public function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
         $this->beConstructedWith($userRepository, $canonicalizer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Provider\UsernameProvider');
     }
 
-    function it_implements_symfony_user_provider_interface()
+    public function it_implements_symfony_user_provider_interface()
     {
         $this->shouldImplement('Symfony\Component\Security\Core\User\UserProviderInterface');
     }
 
-    function it_should_extend_user_provider()
+    public function it_should_extend_user_provider()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Provider\AbstractUserProvider');
     }
 
-    function it_supports_sylius_user_model()
+    public function it_supports_sylius_user_model()
     {
         $this->supportsClass('Sylius\Component\User\Model\UserInterface')->shouldReturn(true);
     }
 
-    function it_loads_user_by_user_name($userRepository, $canonicalizer, User $user)
+    public function it_loads_user_by_user_name($userRepository, $canonicalizer, User $user)
     {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
@@ -55,7 +55,7 @@ class UsernameProviderSpec extends ObjectBehavior
         $this->loadUserByUsername('testUser')->shouldReturn($user);
     }
 
-    function it_updates_user_by_user_name($userRepository, User $user)
+    public function it_updates_user_by_user_name($userRepository, User $user)
     {
         $userRepository->find(1)->willReturn($user);
 

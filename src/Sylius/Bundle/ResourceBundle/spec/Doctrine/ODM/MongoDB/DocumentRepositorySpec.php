@@ -24,7 +24,7 @@ use PhpSpec\ObjectBehavior;
  */
 class DocumentRepositorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         DocumentManager $documentManager,
         UnitOfWork $unitOfWork,
         ClassMetadata $class,
@@ -40,17 +40,17 @@ class DocumentRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($documentManager, $unitOfWork, $class);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository');
     }
 
-    function it_implements_Sylius_repository_interface()
+    public function it_implements_Sylius_repository_interface()
     {
         $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
-    function it_creates_Pagerfanta_paginator()
+    public function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()

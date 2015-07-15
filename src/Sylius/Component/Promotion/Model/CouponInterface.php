@@ -22,75 +22,75 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
 {
     /**
-     * Get code
+     * Get code.
      *
      * @return string
      */
     public function getCode();
 
     /**
-     * Set code
+     * Set code.
      *
      * @param string $code
      */
     public function setCode($code);
 
     /**
-     * Get usage limit
+     * Get usage limit.
      *
-     * @return integer
+     * @return int
      */
     public function getUsageLimit();
 
     /**
-     * Set usage limit
+     * Set usage limit.
      *
-     * @param integer $usageLimit
+     * @param int $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
     /**
-     * Get number of times this coupon has been used
+     * Get number of times this coupon has been used.
      *
-     * @return integer
+     * @return int
      */
     public function getUsed();
 
     /**
-     * Set number of times this coupon has been used
+     * Set number of times this coupon has been used.
      *
-     * @param integer $used
+     * @param int $used
      */
     public function setUsed($used);
 
     /**
-     * Increment usage
+     * Increment usage.
      */
     public function incrementUsed();
 
     /**
-     * Get associated promotion
+     * Get associated promotion.
      *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set the associated promotion
+     * Set the associated promotion.
      *
      * @param PromotionInterface $promotion
      */
     public function setPromotion(PromotionInterface $promotion = null);
 
     /**
-     * Get the expiration date
+     * Get the expiration date.
      *
      * @return \DateTime
      */
     public function getExpiresAt();
 
     /**
-     * Set the expiration date
+     * Set the expiration date.
      *
      * @param \DateTime $expiresAt
      */

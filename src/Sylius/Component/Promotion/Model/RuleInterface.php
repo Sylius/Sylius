@@ -22,42 +22,42 @@ interface RuleInterface
     const TYPE_ITEM_COUNT = 'item_count';
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
     public function getType();
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      */
     public function setType($type);
 
     /**
-     * Get configuration
+     * Get configuration.
      *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set configuration
+     * Set configuration.
      *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
 
     /**
-     * Get associated promotion
+     * Get associated promotion.
      *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set associated promotion
+     * Set associated promotion.
      *
      * @param PromotionInterface $promotion
      */

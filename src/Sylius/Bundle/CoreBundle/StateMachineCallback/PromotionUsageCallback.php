@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Increments promotion usage when a promotion is used by an order
+ * Increments promotion usage when a promotion is used by an order.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */

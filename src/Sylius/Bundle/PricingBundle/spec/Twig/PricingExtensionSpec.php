@@ -19,17 +19,17 @@ use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
  */
 class PricingExtensionSpec extends ObjectBehavior
 {
-    function let(PricingHelper $helper)
+    public function let(PricingHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Twig\PricingExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

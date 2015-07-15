@@ -12,22 +12,21 @@
 namespace spec\Sylius\Bundle\FlowBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag;
 
 class SessionFlowsBagSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag');
     }
 
-    function it_is_a_namespace_attribute_bag()
+    public function it_is_a_namespace_attribute_bag()
     {
         $this->shouldHaveType('Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag');
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn(SessionFlowsBag::NAME);
     }

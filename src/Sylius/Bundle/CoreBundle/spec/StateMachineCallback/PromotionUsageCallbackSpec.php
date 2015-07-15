@@ -17,12 +17,12 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 
 class PromotionUsageCallbackSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\PromotionUsageCallback');
     }
 
-    function it_increments_promotion_usage_if_promotion_was_used(
+    public function it_increments_promotion_usage_if_promotion_was_used(
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
@@ -33,7 +33,7 @@ class PromotionUsageCallbackSpec extends ObjectBehavior
         $this->incrementPromotionUsage($order);
     }
 
-    function it_decrements_promotion_usage_if_promotion_was_used(
+    public function it_decrements_promotion_usage_if_promotion_was_used(
         OrderInterface $order,
         PromotionInterface $promotion
     ) {

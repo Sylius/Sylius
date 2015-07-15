@@ -30,76 +30,76 @@ class ProductSpec extends ObjectBehavior
         $this->setFallbackLocale('en_US');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\Product');
     }
 
-    function it_implements_Sylius_product_interface()
+    public function it_implements_Sylius_product_interface()
     {
         $this->shouldImplement('Sylius\Component\Product\Model\ProductInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_belong_to_any_archetype_by_default()
+    public function it_does_not_belong_to_any_archetype_by_default()
     {
         $this->getArchetype()->shouldReturn(null);
     }
 
-    function it_can_belong_to_a_product_archetype(ArchetypeInterface $archetype)
+    public function it_can_belong_to_a_product_archetype(ArchetypeInterface $archetype)
     {
         $this->setArchetype($archetype);
         $this->getArchetype()->shouldReturn($archetype);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Super product');
         $this->getName()->shouldReturn('Super product');
     }
 
-    function it_has_no_slug_by_default()
+    public function it_has_no_slug_by_default()
     {
         $this->getSlug()->shouldReturn(null);
     }
 
-    function its_slug_is_mutable()
+    public function its_slug_is_mutable()
     {
         $this->setSlug('super-product');
         $this->getSlug()->shouldReturn('super-product');
     }
 
-    function it_has_no_description_by_default()
+    public function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    public function its_description_is_mutable()
     {
         $this->setDescription('This product is super cool because...');
         $this->getDescription()->shouldReturn('This product is super cool because...');
     }
 
-    function it_initializes_availability_date_by_default()
+    public function it_initializes_availability_date_by_default()
     {
         $this->getAvailableOn()->shouldHaveType('DateTime');
     }
 
-    function it_is_available_by_default()
+    public function it_is_available_by_default()
     {
         $this->shouldBeAvailable();
     }
 
-    function its_availability_date_is_mutable()
+    public function its_availability_date_is_mutable()
     {
         $availableOn = new \DateTime('yesterday');
 
@@ -107,7 +107,7 @@ class ProductSpec extends ObjectBehavior
         $this->getAvailableOn()->shouldReturn($availableOn);
     }
 
-    function it_is_available_only_if_availability_date_is_in_past()
+    public function it_is_available_only_if_availability_date_is_in_past()
     {
         $availableOn = new \DateTime('yesterday');
 
@@ -120,12 +120,12 @@ class ProductSpec extends ObjectBehavior
         $this->shouldNotBeAvailable();
     }
 
-    function it_initializes_attribute_collection_by_default()
+    public function it_initializes_attribute_collection_by_default()
     {
         $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_attribute(AttributeValueInterface $attribute)
+    public function it_adds_attribute(AttributeValueInterface $attribute)
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -133,7 +133,7 @@ class ProductSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_removes_attribute(AttributeValueInterface $attribute)
+    public function it_removes_attribute(AttributeValueInterface $attribute)
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -146,12 +146,12 @@ class ProductSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
-    function it_should_not_have_master_variant_by_default()
+    public function it_should_not_have_master_variant_by_default()
     {
         $this->getMasterVariant()->shouldReturn(null);
     }
 
-    function its_master_variant_should_be_mutable_and_define_given_variant_as_master(VariantInterface $variant)
+    public function its_master_variant_should_be_mutable_and_define_given_variant_as_master(VariantInterface $variant)
     {
         $variant->setProduct($this)->shouldBeCalled();
         $variant->setMaster(true)->shouldBeCalled();
@@ -159,7 +159,7 @@ class ProductSpec extends ObjectBehavior
         $this->setMasterVariant($variant);
     }
 
-    function it_should_not_add_master_variant_twice_to_collection(VariantInterface $variant)
+    public function it_should_not_add_master_variant_twice_to_collection(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(true);
         $variant->isDeleted()->willReturn(false);
@@ -173,12 +173,12 @@ class ProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(false);
     }
 
-    function its_hasVariants_should_return_false_if_no_variants_defined()
+    public function its_hasVariants_should_return_false_if_no_variants_defined()
     {
         $this->hasVariants()->shouldReturn(false);
     }
 
-    function its_hasVariants_should_return_true_only_if_any_variants_defined(VariantInterface $variant)
+    public function its_hasVariants_should_return_true_only_if_any_variants_defined(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(false);
         $variant->isDeleted()->willReturn(false);
@@ -189,40 +189,40 @@ class ProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(true);
     }
 
-    function it_should_initialize_variants_collection_by_default()
+    public function it_should_initialize_variants_collection_by_default()
     {
         $this->getVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_should_initialize_option_collection_by_default()
+    public function it_should_initialize_option_collection_by_default()
     {
         $this->getOptions()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function its_hasOptions_should_return_false_if_no_options_defined()
+    public function its_hasOptions_should_return_false_if_no_options_defined()
     {
         $this->hasOptions()->shouldReturn(false);
     }
 
-    function its_hasOptions_should_return_true_only_if_any_options_defined(OptionInterface $option)
+    public function its_hasOptions_should_return_true_only_if_any_options_defined(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOptions()->shouldReturn(true);
     }
 
-    function its_options_collection_should_be_mutable(Collection $options)
+    public function its_options_collection_should_be_mutable(Collection $options)
     {
         $this->setOptions($options);
         $this->getOptions()->shouldReturn($options);
     }
 
-    function it_should_add_option_properly(OptionInterface $option)
+    public function it_should_add_option_properly(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
     }
 
-    function it_should_remove_option_properly(OptionInterface $option)
+    public function it_should_remove_option_properly(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
@@ -231,12 +231,12 @@ class ProductSpec extends ObjectBehavior
         $this->hasOption($option)->shouldReturn(false);
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime('last year');
 
@@ -244,12 +244,12 @@ class ProductSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime('last year');
 
@@ -257,17 +257,17 @@ class ProductSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_deletion_date_by_default()
+    public function it_has_no_deletion_date_by_default()
     {
         $this->getDeletedAt()->shouldReturn(null);
     }
 
-    function it_is_not_be_deleted_by_default()
+    public function it_is_not_be_deleted_by_default()
     {
         $this->shouldNotBeDeleted();
     }
 
-    function its_deletion_date_is_mutable()
+    public function its_deletion_date_is_mutable()
     {
         $deletedAt = new \DateTime();
 
@@ -275,7 +275,7 @@ class ProductSpec extends ObjectBehavior
         $this->getDeletedAt()->shouldReturn($deletedAt);
     }
 
-    function it_is_deleted_only_if_deletion_date_is_in_past()
+    public function it_is_deleted_only_if_deletion_date_is_in_past()
     {
         $deletedAt = new \DateTime('yesterday');
 
@@ -288,7 +288,7 @@ class ProductSpec extends ObjectBehavior
         $this->shouldNotBeDeleted();
     }
 
-    function it_has_fluent_interface()
+    public function it_has_fluent_interface()
     {
         $date = new \DateTime();
 

@@ -20,17 +20,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ObjectToIdentifierTypeSpec extends ObjectBehavior
 {
-    function let(ManagerRegistry $manager)
+    public function let(ManagerRegistry $manager)
     {
         $this->beConstructedWith($manager, 'name');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType');
     }
 
-    function it_build_a_form($manager, FormBuilderInterface $builder, ObjectRepository $repository)
+    public function it_build_a_form($manager, FormBuilderInterface $builder, ObjectRepository $repository)
     {
         $manager->getRepository('class')->willReturn($repository);
 
@@ -44,25 +44,25 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'identifier' => 'id'
+            'identifier' => 'id',
         ))->willReturn($resolver);
 
         $resolver->setAllowedTypes(array(
-            'identifier' => array('string')
+            'identifier' => array('string'),
         ))->willReturn($resolver);
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_has_a_parent()
+    public function it_has_a_parent()
     {
         $this->getName()->shouldReturn('name');
     }

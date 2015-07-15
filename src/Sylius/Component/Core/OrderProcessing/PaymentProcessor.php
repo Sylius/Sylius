@@ -32,7 +32,7 @@ class PaymentProcessor implements PaymentProcessorInterface
     protected $paymentRepository;
 
     /**
-     * Payment Manager
+     * Payment Manager.
      *
      * @var ObjectManager
      */

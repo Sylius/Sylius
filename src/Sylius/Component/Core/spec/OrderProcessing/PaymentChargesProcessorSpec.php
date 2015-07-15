@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
@@ -25,22 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PaymentChargesProcessorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
+    public function let(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
     {
         $this->beConstructedWith($adjustmentRepository, $delegatingFeeCalculator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\PaymentChargesProcessor');
     }
 
-    function it_implements_payment_charges_processor_interface()
+    public function it_implements_payment_charges_processor_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\PaymentChargesProcessorInterface');
     }
 
-    function it_applies_payment_charges(
+    public function it_applies_payment_charges(
         $adjustmentRepository,
         $delegatingFeeCalculator,
         AdjustmentInterface $adjustment,

@@ -27,30 +27,30 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    public function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($countryRepository, $factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber');
     }
 
-    function it_is_a_subscriber()
+    public function it_is_a_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subsribesto_event()
+    public function it_subsribesto_event()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         ));
     }
 
-    function it_adds_or_removes_provinces_on_pre_set_data(
+    public function it_adds_or_removes_provinces_on_pre_set_data(
         $factory,
         FormEvent $event,
         FormInterface $form,
@@ -75,7 +75,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_or_removes_provinces_on_pre_submit(
+    public function it_adds_or_removes_provinces_on_pre_submit(
         $factory,
         $countryRepository,
         FormEvent $event,
@@ -86,7 +86,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn(array(
-            'country' => 'France'
+            'country' => 'France',
         ));
 
         $countryRepository->find('France')->shouldBeCalled()->willReturn($country);

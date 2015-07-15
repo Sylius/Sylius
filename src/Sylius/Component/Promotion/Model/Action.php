@@ -19,37 +19,37 @@ namespace Sylius\Component\Promotion\Model;
 class Action implements ActionInterface
 {
     /**
-     * The id of this action
+     * The id of this action.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * The type of this action
+     * The type of this action.
      *
      * @var string
      */
     protected $type;
 
     /**
-     * The configuration of this action
+     * The configuration of this action.
      *
      * @var array
      */
     protected $configuration = array();
 
     /**
-     * The promotion associated with this action
+     * The promotion associated with this action.
      *
      * @var PromotionInterface
      */
     protected $promotion;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

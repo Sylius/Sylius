@@ -36,7 +36,7 @@ class TokenProvider implements TokenProviderInterface
     private $generator;
 
     /**
-     * @var integer
+     * @var int
      */
     private $tokenLength;
 

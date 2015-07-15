@@ -18,37 +18,37 @@ use PhpSpec\ObjectBehavior;
  */
 class CommentSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\Comment');
     }
 
-    function it_implements_Sylius_comment_interface()
+    public function it_implements_Sylius_comment_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\CommentInterface');
     }
 
-    function it_implements_Sylius_timestampable_interface()
+    public function it_implements_Sylius_timestampable_interface()
     {
         $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_order_by_default()
+    public function it_has_no_order_by_default()
     {
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_has_no_state_by_default()
+    public function it_has_no_state_by_default()
     {
         $this->getState()->shouldReturn(null);
     }
 
-    function its_comment_is_mutable()
+    public function its_comment_is_mutable()
     {
         $this->setComment('001351');
         $this->getComment()->shouldReturn('001351');

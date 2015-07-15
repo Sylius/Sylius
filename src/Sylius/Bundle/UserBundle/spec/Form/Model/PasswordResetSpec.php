@@ -18,12 +18,12 @@ use PhpSpec\ObjectBehavior;
  */
 class PasswordResetSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\PasswordReset');
     }
 
-    function it_has_email()
+    public function it_has_email()
     {
         $this->setEmail('test@example.com');
         $this->getEmail()->shouldReturn('test@example.com');

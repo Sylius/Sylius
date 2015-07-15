@@ -20,39 +20,39 @@ use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
  */
 class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $repository)
+    public function let(ObjectRepository $repository)
     {
         $this->beConstructedWith($repository, 'name');
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
     }
 
-    function it_should_implement_parameter_transformer_interface()
+    public function it_should_implement_parameter_transformer_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
     }
 
-    function it_should_return_null_when_null_transformed()
+    public function it_should_return_null_when_null_transformed()
     {
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_should_transform_object_into_its_identifier(ParameterInterface $object)
+    public function it_should_transform_object_into_its_identifier(ParameterInterface $object)
     {
         $object->getName()->willReturn('name');
 
         $this->transform($object)->shouldReturn('name');
     }
 
-    function it_should_return_null_when_null_reverse_transformed()
+    public function it_should_return_null_when_null_reverse_transformed()
     {
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_should_find_object_when_identifier_reverse_transformed(
+    public function it_should_find_object_when_identifier_reverse_transformed(
         $repository,
         ParameterInterface $object
     ) {
@@ -61,7 +61,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform('foo')->shouldReturn($object);
     }
 
-    function it_should_null_when_object_not_found_on_reverse_transform($repository)
+    public function it_should_null_when_object_not_found_on_reverse_transform($repository)
     {
         $repository->findOneBy(array('name' => 'baz'))->shouldBeCalled()->willReturn(null);
 

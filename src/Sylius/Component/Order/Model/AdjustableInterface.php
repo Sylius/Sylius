@@ -48,7 +48,7 @@ interface AdjustableInterface
      *
      * @param null|string $type
      *
-     * @return integer
+     * @return int
      */
     public function getAdjustmentsTotal($type = null);
 

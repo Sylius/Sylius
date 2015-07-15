@@ -20,29 +20,29 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  */
 class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Taxation\Calculator\DelegatingCalculator');
     }
 
-    function it_should_be_a_Sylius_tax_calculator()
+    public function it_should_be_a_Sylius_tax_calculator()
     {
         $this->shouldImplement('Sylius\Component\Taxation\Calculator\CalculatorInterface');
     }
 
-    function it_should_initialize_calculators_array_by_default()
+    public function it_should_initialize_calculators_array_by_default()
     {
         $this->getCalculators()->shouldReturn(array());
     }
 
-    function it_should_register_calculator_properly(CalculatorInterface $calculator)
+    public function it_should_register_calculator_properly(CalculatorInterface $calculator)
     {
         $this->hasCalculator('default')->shouldReturn(false);
         $this->registerCalculator('default', $calculator);
         $this->hasCalculator('default')->shouldReturn(true);
     }
 
-    function it_should_unregister_calculator_properly(CalculatorInterface $calculator)
+    public function it_should_unregister_calculator_properly(CalculatorInterface $calculator)
     {
         $this->registerCalculator('default', $calculator);
         $this->hasCalculator('default')->shouldReturn(true);
@@ -51,13 +51,13 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $this->hasCalculator('default')->shouldReturn(false);
     }
 
-    function it_should_retrieve_registered_calculator_by_name(CalculatorInterface $calculator)
+    public function it_should_retrieve_registered_calculator_by_name(CalculatorInterface $calculator)
     {
         $this->registerCalculator('default', $calculator);
         $this->getCalculator('default')->shouldReturn($calculator);
     }
 
-    function it_should_complain_if_trying_to_retrieve_non_existing_calculator()
+    public function it_should_complain_if_trying_to_retrieve_non_existing_calculator()
     {
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -65,11 +65,10 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_delegate_calculation_to_a_correct_calculator(
+    public function it_should_delegate_calculation_to_a_correct_calculator(
         TaxRateInterface $rate,
         CalculatorInterface $calculator
-    )
-    {
+    ) {
         $this->registerCalculator('default', $calculator);
         $rate->getCalculator()->willReturn('default');
 
@@ -78,7 +77,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $this->calculate(100, $rate)->shouldReturn(23);
     }
 
-    function it_should_complain_if_correct_calculator_doesnt_exist_for_given_rate(
+    public function it_should_complain_if_correct_calculator_doesnt_exist_for_given_rate(
         TaxRateInterface $rate,
         CalculatorInterface $calculator
     ) {

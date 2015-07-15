@@ -34,20 +34,20 @@ class RoleType extends AbstractResourceType
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.role.description',
+                'label' => 'sylius.form.role.description',
             ))
             ->add('securityRoles', 'sylius_security_role_choice', array(
                 'required' => false,
-                'label'    => 'sylius.form.role.security_roles',
+                'label' => 'sylius.form.role.security_roles',
             ))
             ->add('parent', 'sylius_role_choice', array(
-                'label'    => 'sylius.form.role.parent',
+                'label' => 'sylius.form.role.parent',
             ))
             ->add('permissions', 'sylius_permission_choice', array(
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'label'    => 'sylius.form.role.permissions',
+                'label' => 'sylius.form.role.permissions',
             ))
         ;
 
@@ -61,7 +61,7 @@ class RoleType extends AbstractResourceType
                 ));
             } else {
                 $form->add('code', 'text', array(
-                    'label'    => 'sylius.form.role.code',
+                    'label' => 'sylius.form.role.code',
                     'disabled' => true,
 
                 ));

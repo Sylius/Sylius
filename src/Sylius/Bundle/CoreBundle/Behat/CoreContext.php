@@ -77,8 +77,8 @@ class CoreContext extends DefaultContext
     public function thereAreOrders(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $finite  = $this->getService('sm.factory');
-        $orderRepository   = $this->getRepository('order');
+        $finite = $this->getService('sm.factory');
+        $orderRepository = $this->getRepository('order');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
         /** @var $paymentMethod PaymentMethodInterface */
@@ -149,7 +149,6 @@ class CoreContext extends DefaultContext
             $order->addItem($item);
         }
 
-
         $order->calculateTotal();
         $order->complete();
 
@@ -177,7 +176,7 @@ class CoreContext extends DefaultContext
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false,
                 array(),
-                isset($data['created at']) ? new \DateTime($data["created at"]) : null
+                isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
         }
 
@@ -297,9 +296,9 @@ class CoreContext extends DefaultContext
             }
 
             $configuration[] = array(
-                'min'   => $min,
-                'max'   => $max,
-                'price' => (int) ($data['price'] * 100)
+                'min' => $min,
+                'max' => $max,
+                'price' => (int) ($data['price'] * 100),
             );
         }
 
@@ -487,7 +486,7 @@ class CoreContext extends DefaultContext
     }
 
     /**
-     * @param  string $address
+     * @param string $address
      *
      * @return array
      */
@@ -655,7 +654,7 @@ class CoreContext extends DefaultContext
     }
 
     /**
-     * @param  string $role
+     * @param string $role
      *
      * @return RoleInterface
      */

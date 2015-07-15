@@ -34,7 +34,7 @@ interface CalculatorInterface
      * @param ShippingSubjectInterface $subject
      * @param array                    $configuration
      *
-     * @return integer
+     * @return int
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration);
 

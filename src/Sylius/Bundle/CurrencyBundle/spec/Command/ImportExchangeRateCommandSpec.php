@@ -15,29 +15,28 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Currency\Importer\ImporterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImportExchangeRateCommandSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Command\ImportExchangeRateCommand');
     }
 
-    function it_is_a_command()
+    public function it_is_a_command()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius:currency:import');
     }
 
-    function it_updates_a_avaivalble_exchange_rate(
+    public function it_updates_a_avaivalble_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,

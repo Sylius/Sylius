@@ -19,17 +19,17 @@ use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
  */
 class CartExtensionSpec extends ObjectBehavior
 {
-    function let(CartHelper $helper)
+    public function let(CartHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Twig\CartExtension');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

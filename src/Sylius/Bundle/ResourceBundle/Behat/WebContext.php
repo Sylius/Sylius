@@ -40,7 +40,6 @@ class WebContext extends DefaultContext
         }
     }
 
-
     /**
      * @Given /^I am on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
      * @Given /^I go to the page of ([^""]*) with ([^""]*) "([^""]*)"$/
@@ -286,7 +285,7 @@ class WebContext extends DefaultContext
         $this->assertSession()->elementExists('css', '#confirmation-modal');
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")', $button));
 
         $this->getSession()->wait(100);
 
@@ -304,7 +303,7 @@ class WebContext extends DefaultContext
      */
     public function iWait($time)
     {
-        $this->getSession()->wait($time*1000);
+        $this->getSession()->wait($time * 1000);
     }
 
     /**
@@ -318,7 +317,7 @@ class WebContext extends DefaultContext
     /**
      * Assert that given code equals the current one.
      *
-     * @param integer $code
+     * @param int $code
      */
     protected function assertStatusCodeEquals($code)
     {

@@ -21,7 +21,7 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 class ChannelBasedCalculator extends AbstractCalculator implements CalculatorInterface
 {
     protected $parameterName = 'channel';
-    protected $className     = 'Sylius\Component\Core\Model\ChannelInterface';
+    protected $className = 'Sylius\Component\Core\Model\ChannelInterface';
 
     /**
      * {@inheritdoc}

@@ -13,23 +13,23 @@ use Doctrine\ORM\EntityManager;
 
 class OrderRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository');
     }
 
-    function it_is_repository()
+    public function it_is_repository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
         $this->shouldImplement('Sylius\Component\Order\Repository\OrderRepositoryInterface');
     }
 
-    function it_finds_recent_orders(
+    public function it_finds_recent_orders(
         $em,
         QueryBuilder $builder,
         AbstractQuery $query,
@@ -58,7 +58,7 @@ class OrderRepositorySpec extends ObjectBehavior
         $this->findRecentOrders(10);
     }
 
-    function it_checks_is_the_number_is_used($em, QueryBuilder $builder, AbstractQuery $query)
+    public function it_checks_is_the_number_is_used($em, QueryBuilder $builder, AbstractQuery $query)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);

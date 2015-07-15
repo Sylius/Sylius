@@ -20,36 +20,34 @@ use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
  */
 class OrmListenerSpec extends ObjectBehavior
 {
-
-    function let(OrmIndexer $ormIndexer)
+    public function let(OrmIndexer $ormIndexer)
     {
         $this->beConstructedWith($ormIndexer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Listener\OrmListener');
     }
 
-    function it_populates_the_insertion_array(LifecycleEventArgs $args)
+    public function it_populates_the_insertion_array(LifecycleEventArgs $args)
     {
         $this->postPersist($args);
 
         $this->scheduledForInsertion->shouldBeArray();
     }
 
-    function it_populates_the_update_array(LifecycleEventArgs $args)
+    public function it_populates_the_update_array(LifecycleEventArgs $args)
     {
         $this->postUpdate($args);
 
         $this->scheduledForInsertion->shouldBeArray();
     }
 
-    function it_populates_the_delete_array(LifecycleEventArgs $args)
+    public function it_populates_the_delete_array(LifecycleEventArgs $args)
     {
         $this->preRemove($args);
 
         $this->scheduledForDeletion->shouldBeArray();
     }
-
-} 
+}

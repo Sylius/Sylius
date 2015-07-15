@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to purge expired pending orders
+ * Command to purge expired pending orders.
  *
  * @author Ka-Yue Yeung <kayuey@gmail.com>
  */

@@ -610,7 +610,6 @@ class Order implements OrderInterface
         return $this->items->isEmpty();
     }
 
-
     /**
      * {@inheritdoc}
      */

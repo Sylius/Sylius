@@ -20,17 +20,17 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  */
 class VolumeBasedCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Pricing\Calculator\VolumeBasedCalculator');
     }
 
-    function it_implements_Sylius_pricing_calculator_interface()
+    public function it_implements_Sylius_pricing_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
     }
 
-    function it_assumes_quantity_is_1_if_not_provided_in_context(PriceableInterface $priceable)
+    public function it_assumes_quantity_is_1_if_not_provided_in_context(PriceableInterface $priceable)
     {
         $configuration = array(
             array('min' => 0,  'max' => 9,  'price' => 1699),
@@ -41,7 +41,7 @@ class VolumeBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration)->shouldReturn(1699);
     }
 
-    function it_returns_the_price_based_on_the_quantity(PriceableInterface $priceable)
+    public function it_returns_the_price_based_on_the_quantity(PriceableInterface $priceable)
     {
         $configuration = array(
             array('min' => 0,  'max' => 9,  'price' => 1699),
@@ -53,7 +53,7 @@ class VolumeBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, array('quantity' => 5))->shouldReturn(1699);
     }
 
-    function it_returns_the_correct_price_for_highest_quantity_range(PriceableInterface $priceable)
+    public function it_returns_the_correct_price_for_highest_quantity_range(PriceableInterface $priceable)
     {
         $configuration = array(
             array('min' => 0,  'max' => 9,    'price' => 1699),
@@ -66,7 +66,7 @@ class VolumeBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, array('quantity' => 600))->shouldReturn(1099);
     }
 
-    function it_has_valid_type()
+    public function it_has_valid_type()
     {
         $this->getType()->shouldReturn(Calculators::VOLUME_BASED);
     }

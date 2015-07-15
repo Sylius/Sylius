@@ -21,27 +21,27 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class UserTypeSpec extends ObjectBehavior
 {
-    function let(CanonicalizerInterface $canonicalizer)
+    public function let(CanonicalizerInterface $canonicalizer)
     {
         $this->beConstructedWith('Sylius\Component\Core\Model\User', array('sylius'), $canonicalizer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\UserType');
     }
 
-    function it_extends_user_type_from_user_bundle()
+    public function it_extends_user_type_from_user_bundle()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserType');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_user');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    public function it_builds_form(FormBuilderInterface $builder)
     {
         $builder->add('plainPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('enabled', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);

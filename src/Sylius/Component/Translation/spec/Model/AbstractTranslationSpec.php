@@ -9,23 +9,23 @@ use Sylius\Component\Translation\Model\AbstractTranslation;
 
 class AbstractTranslationSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beAnInstanceOf('spec\Sylius\Component\Translation\Model\ConcreteTranslation');
     }
 
-    function it_is_a_translation()
+    public function it_is_a_translation()
     {
         $this->shouldImplement('Sylius\Component\Translation\Model\TranslationInterface');
     }
 
-    function its_translatable_is_mutabale(TranslatableInterface $translatable)
+    public function its_translatable_is_mutabale(TranslatableInterface $translatable)
     {
         $this->setTranslatable($translatable)->shouldReturn($this);
         $this->getTranslatable()->shouldReturn($translatable);
     }
 
-    function its_detaches_from_its_translatable_correctly(
+    public function its_detaches_from_its_translatable_correctly(
         TranslatableInterface $translatable1,
         TranslatableInterface $translatable2
     ) {
@@ -37,7 +37,7 @@ class AbstractTranslationSpec extends ObjectBehavior
         $this->setTranslatable($translatable2);
     }
 
-    function its_locale_is_mutable()
+    public function its_locale_is_mutable()
     {
         $this->setLocale('en')->shouldReturn($this);
         $this->getLocale()->shouldReturn('en');

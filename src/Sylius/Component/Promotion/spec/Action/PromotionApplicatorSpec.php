@@ -23,22 +23,22 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class PromotionApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry)
+    public function let(ServiceRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Action\PromotionApplicator');
     }
 
-    function it_should_be_Sylius_promotion_applicator()
+    public function it_should_be_Sylius_promotion_applicator()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
     }
 
-    function it_should_execute_all_actions_registered(
+    public function it_should_execute_all_actions_registered(
         ServiceRegistryInterface $registry,
         PromotionActionInterface $action,
         PromotionSubjectInterface $subject,
@@ -59,7 +59,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
         $this->apply($subject, $promotion);
     }
 
-    function it_should_revert_all_actions_registered(
+    public function it_should_revert_all_actions_registered(
         ServiceRegistryInterface $registry,
         PromotionActionInterface $action,
         PromotionSubjectInterface $subject,

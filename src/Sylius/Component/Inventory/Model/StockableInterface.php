@@ -50,28 +50,28 @@ interface StockableInterface
     /**
      * Get stock on hold.
      *
-     * @return integer
+     * @return int
      */
     public function getOnHold();
 
     /**
      * Set stock on hold.
      *
-     * @param integer
+     * @param int
      */
     public function setOnHold($onHold);
 
     /**
      * Get stock on hand.
      *
-     * @return integer
+     * @return int
      */
     public function getOnHand();
 
     /**
      * Set stock on hand.
      *
-     * @param integer $onHand
+     * @param int $onHand
      */
     public function setOnHand($onHand);
 }

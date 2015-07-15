@@ -17,7 +17,7 @@ namespace Sylius\Component\Report\DataFetcher;
 interface DataFetcherInterface
 {
     /**
-     * Fetching data from data base
+     * Fetching data from data base.
      *
      * @param array $configuration
      *

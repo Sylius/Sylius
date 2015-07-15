@@ -17,12 +17,12 @@ use Sylius\Component\Promotion\Model\CouponInterface;
 
 class CouponUsageCallbackSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback');
     }
 
-    function it_increments_coupon_usage_if_coupon_was_set(
+    public function it_increments_coupon_usage_if_coupon_was_set(
         OrderInterface $order,
         CouponInterface $coupon
     ) {

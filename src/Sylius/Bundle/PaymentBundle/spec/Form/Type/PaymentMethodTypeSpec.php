@@ -26,17 +26,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PaymentMethodTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $feeCalculatorRegistry)
+    public function let(ServiceRegistryInterface $feeCalculatorRegistry)
     {
         $this->beConstructedWith('PaymentMethod', array('sylius'), $feeCalculatorRegistry);
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(
+    public function it_builds_form_with_proper_fields(
         $feeCalculatorRegistry,
         FeeCalculatorInterface $feeCalculatorTest,
         Form $form,
@@ -91,11 +91,11 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'PaymentMethod',
+                'data_class' => 'PaymentMethod',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
@@ -104,7 +104,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_payment_method');
     }

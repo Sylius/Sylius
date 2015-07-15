@@ -60,15 +60,15 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
         if (!$container->hasExtension('doctrine_cache')) {
             throw new \RuntimeException('DoctrineCacheBundle must be registered!');
         }
-        
+
         if (!$container->hasParameter('sylius.cache')) {
             $container->setParameter('sylius.cache', array('type' => 'file_system'));
         }
 
         $container->prependExtensionConfig('doctrine_cache', array(
             'providers' => array(
-                'sylius_settings' => '%sylius.cache%'
-            )
+                'sylius_settings' => '%sylius.cache%',
+            ),
         ));
     }
 }

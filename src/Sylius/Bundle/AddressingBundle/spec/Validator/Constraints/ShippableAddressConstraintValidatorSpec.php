@@ -17,7 +17,6 @@ use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstrai
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
@@ -25,20 +24,20 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  */
 class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator');
     }
 
-    function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
+    public function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
         $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
             '',
-            $constraint
+            $constraint,
         ));
     }
 
-    function it_does_not_add_violation(
+    public function it_does_not_add_violation(
         AddressInterface $address,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
@@ -55,7 +54,7 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_adds_violation_because_address_is_shippable(
+    public function it_adds_violation_because_address_is_shippable(
         AddressInterface $address,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
@@ -64,7 +63,7 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
         $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('other_property_path')
+            $this->createViolation('other_property_path'),
         )));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();

@@ -26,17 +26,17 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber');
     }
 
-    function it_implements_data_fetcher_interface()
+    public function it_implements_data_fetcher_interface()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function let(ServiceRegistryInterface $rendererRegistry, FormFactoryInterface $factory, RendererInterface $renderer)
+    public function let(ServiceRegistryInterface $rendererRegistry, FormFactoryInterface $factory, RendererInterface $renderer)
     {
         $rendererRegistry->get('test_renderer')->willReturn($renderer);
         $renderer->getType()->willReturn('test_type');
@@ -44,7 +44,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($rendererRegistry, $factory);
     }
 
-    function it_adds_configuration_fields_in_pre_set_data(
+    public function it_adds_configuration_fields_in_pre_set_data(
         $factory,
         ReportInterface $report,
         FormEvent $event,
@@ -68,7 +68,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_fields_in_pre_bind(
+    public function it_adds_configuration_fields_in_pre_bind(
         $factory,
         FormEvent $event,
         Form $form,
@@ -90,7 +90,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         $this->preBind($event);
     }
 
-    function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_report(FormEvent $event)
+    public function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_report(FormEvent $event)
     {
         $report = '';
         $event->getData()->willReturn($report);

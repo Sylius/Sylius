@@ -24,22 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
+    public function let(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
     {
         $this->beConstructedWith($adjustmentRepository, $originator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\FixedDiscountAction');
     }
 
-    function it_implements_Sylius_promotion_action_interface()
+    public function it_implements_Sylius_promotion_action_interface()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
-    function it_applies_fixed_discount_as_promotion_adjustment(
+    public function it_applies_fixed_discount_as_promotion_adjustment(
         $adjustmentRepository,
         $originator,
         OrderInterface $order,

@@ -322,7 +322,7 @@ class Product extends AbstractTranslatable implements ProductInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -336,7 +336,7 @@ class Product extends AbstractTranslatable implements ProductInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -547,8 +547,8 @@ class Product extends AbstractTranslatable implements ProductInterface
     {
         $this->deletedAt = $deletedAt;
 
-        if(null === $deletedAt) {
-            foreach($this->variants as $variant) {
+        if (null === $deletedAt) {
+            foreach ($this->variants as $variant) {
                 $variant->setDeletedAt(null);
             }
         }

@@ -19,17 +19,17 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
  */
 class MoneyExtensionSpec extends ObjectBehavior
 {
-    function let(MoneyHelper $helper)
+    public function let(MoneyHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Twig\MoneyExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

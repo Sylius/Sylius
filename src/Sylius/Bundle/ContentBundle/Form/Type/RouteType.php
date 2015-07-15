@@ -28,16 +28,15 @@ class RouteType extends AbstractResourceType
     {
         $builder
             ->add('name', null, array(
-                'label' => 'sylius.form.route.name'
+                'label' => 'sylius.form.route.name',
             ))
             ->add('parent', null, array(
-                'label' => 'sylius.form.route.parent'
+                'label' => 'sylius.form.route.parent',
             ))
             ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.route.content',
             ))
         ;
-
     }
 
     /**

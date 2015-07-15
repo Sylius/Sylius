@@ -41,7 +41,7 @@ class GroupBasedConfigurationType extends AbstractType
         foreach ($this->groupRepository->findAll() as $group) {
             $builder
                 ->add($group->getId(), 'sylius_money', array(
-                    'label'    => $group->getName(),
+                    'label' => $group->getName(),
                     'required' => false,
                 ))
             ;
@@ -55,7 +55,7 @@ class GroupBasedConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

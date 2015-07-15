@@ -21,17 +21,17 @@ use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
  */
 class ShipmentStatesCallbackSpec extends ObjectBehavior
 {
-    function let(ShipmentProcessorInterface $processor)
+    public function let(ShipmentProcessorInterface $processor)
     {
         $this->beConstructedWith($processor);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\ShipmentStatesCallback');
     }
 
-    function it_updates_order_shipment_states_to_backordered(
+    public function it_updates_order_shipment_states_to_backordered(
         ShipmentInterface $shipment,
         OrderInterface $order
     ) {
@@ -41,7 +41,7 @@ class ShipmentStatesCallbackSpec extends ObjectBehavior
         $this->updateOrderShipmentStates($order, 'backorder');
     }
 
-    function it_updates_order_shipment_states_to_other_if_order_is_not_be_backordered(
+    public function it_updates_order_shipment_states_to_other_if_order_is_not_be_backordered(
         ShipmentInterface $shipment,
         OrderInterface $order
     ) {

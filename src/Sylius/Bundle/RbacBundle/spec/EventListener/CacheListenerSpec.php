@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\RbacBundle\EventListener;
 use Doctrine\Common\Cache\ClearableCache;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
@@ -23,17 +22,17 @@ use Sylius\Component\Rbac\Model\RoleInterface;
  */
 class CacheListenerSpec extends ObjectBehavior
 {
-    function let(ClearableCache $cache)
+    public function let(ClearableCache $cache)
     {
         $this->beConstructedWith($cache);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\EventListener\CacheListener');
     }
 
-    function it_clears_the_cache_after_persisting_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
+    public function it_clears_the_cache_after_persisting_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
     {
         $args->getObject()->shouldBeCalled()->willReturn($role);
         $cache->deleteAll()->shouldBeCalled();
@@ -41,7 +40,7 @@ class CacheListenerSpec extends ObjectBehavior
         $this->postPersist($args);
     }
 
-    function it_clears_the_cache_on_post_after_removing_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
+    public function it_clears_the_cache_on_post_after_removing_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
     {
         $args->getObject()->shouldBeCalled()->willReturn($role);
         $cache->deleteAll()->shouldBeCalled();
@@ -49,7 +48,7 @@ class CacheListenerSpec extends ObjectBehavior
         $this->postRemove($args);
     }
 
-    function it_clears_the_cache_after_persisting_a_permission(
+    public function it_clears_the_cache_after_persisting_a_permission(
         $cache,
         LifecycleEventArgs $args,
         PermissionInterface $permission
@@ -60,7 +59,7 @@ class CacheListenerSpec extends ObjectBehavior
         $this->postPersist($args);
     }
 
-    function it_clears_the_cache_on_post_after_removing_a_permission(
+    public function it_clears_the_cache_on_post_after_removing_a_permission(
         $cache,
         LifecycleEventArgs $args,
         PermissionInterface $permission

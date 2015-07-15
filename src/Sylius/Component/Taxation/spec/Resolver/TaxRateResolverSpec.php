@@ -22,22 +22,22 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  */
 class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository)
+    public function let(RepositoryInterface $taxRateRepository)
     {
         $this->beConstructedWith($taxRateRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRateResolver');
     }
 
-    function it_implements_Sylius_tax_rate_resolver_interface()
+    public function it_implements_Sylius_tax_rate_resolver_interface()
     {
         $this->shouldImplement('Sylius\Component\Taxation\Resolver\TaxRateResolverInterface');
     }
 
-    function it_returns_tax_rate_for_given_taxable_category(
+    public function it_returns_tax_rate_for_given_taxable_category(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
@@ -49,7 +49,7 @@ class TaxRateResolverSpec extends ObjectBehavior
         $this->resolve($taxable)->shouldReturn($taxRate);
     }
 
-    function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
+    public function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory
@@ -60,7 +60,7 @@ class TaxRateResolverSpec extends ObjectBehavior
         $this->resolve($taxable)->shouldReturn(null);
     }
 
-    function it_returns_null_if_taxable_does_not_belong_to_any_category(
+    public function it_returns_null_if_taxable_does_not_belong_to_any_category(
         TaxableInterface $taxable
     ) {
         $taxable->getTaxCategory()->willReturn(null);

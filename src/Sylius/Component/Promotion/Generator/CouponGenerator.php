@@ -43,7 +43,7 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
-        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
+        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
             $coupon = $this->repository->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());

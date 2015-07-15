@@ -19,42 +19,42 @@ namespace Sylius\Component\Promotion\Model;
 class Coupon implements CouponInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * Coupon code
+     * Coupon code.
      *
      * @var string
      */
     protected $code;
 
     /**
-     * Usage limit
+     * Usage limit.
      *
-     * @var integer
+     * @var int
      */
     protected $usageLimit;
 
     /**
-     * Number of times used
+     * Number of times used.
      *
-     * @var integer
+     * @var int
      */
     protected $used = 0;
 
     /**
-     * Associated promotion
+     * Associated promotion.
      *
      * @var PromotionInterface
      */
     protected $promotion;
 
     /**
-     * Expiration date
+     * Expiration date.
      *
      * @var \DateTime
      */
@@ -82,9 +82,9 @@ class Coupon implements CouponInterface
     protected $deletedAt;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -150,7 +150,7 @@ class Coupon implements CouponInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
+        ++$this->used;
 
         return $this;
     }
@@ -252,7 +252,6 @@ class Coupon implements CouponInterface
 
         return $this;
     }
-
 
     /**
      * {@inheritdoc}

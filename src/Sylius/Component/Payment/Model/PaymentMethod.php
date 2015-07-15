@@ -63,7 +63,7 @@ class PaymentMethod implements PaymentMethodInterface
     protected $environment;
 
     /**
-     * FeeCalculator name
+     * FeeCalculator name.
      *
      * @var string
      */

@@ -24,7 +24,7 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $dispatcher;
 
     /**
-     * @param  EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface $dispatcher
      *
      * @return $this
      */

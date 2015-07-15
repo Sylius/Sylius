@@ -25,22 +25,22 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $registry)
+    public function let(RuleCheckerRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker');
     }
 
-    function it_implements_Sylius_shipping_method_eligibility_checker_interface()
+    public function it_implements_Sylius_shipping_method_eligibility_checker_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface');
     }
 
-    function it_returns_true_if_all_checkers_approve_shipping_method(
+    public function it_returns_true_if_all_checkers_approve_shipping_method(
         $registry,
         RuleCheckerInterface $checker,
         ShippingSubjectInterface $subject,
@@ -61,7 +61,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    function it_returns_false_if_any_checker_disapproves_shipping_method(
+    public function it_returns_false_if_any_checker_disapproves_shipping_method(
         $registry,
         RuleCheckerInterface $checker,
         ShippingSubjectInterface $subject,
@@ -82,7 +82,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(false);
     }
 
-    function it_approves_category_requirement_if_categories_match(
+    public function it_approves_category_requirement_if_categories_match(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
@@ -97,7 +97,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    function it_approves_category_requirement_if_no_category_is_required(
+    public function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod
     ) {
@@ -106,7 +106,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    function it_denies_category_requirement_if_categories_dont_match(
+    public function it_denies_category_requirement_if_categories_dont_match(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,

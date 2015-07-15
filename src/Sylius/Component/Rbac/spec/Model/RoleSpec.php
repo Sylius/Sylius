@@ -19,63 +19,63 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
  */
 class RoleSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Model\Role');
     }
 
-    function it_implements_Sylius_Rbac_role_interface()
+    public function it_implements_Sylius_Rbac_role_interface()
     {
         $this->shouldImplement('Sylius\Component\Rbac\Model\RoleInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_code_by_default()
+    public function it_has_no_code_by_default()
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable()
+    public function its_code_is_mutable()
     {
         $this->setCode('catalog_manager');
         $this->getCode()->shouldReturn('catalog_manager');
     }
 
-    function it_is_unnamed_by_default()
+    public function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function it_can_have_a_name()
+    public function it_can_have_a_name()
     {
         $this->setName('Catalog Manager');
         $this->getName()->shouldReturn('Catalog Manager');
     }
 
-    function it_does_not_have_any_permissions_by_default()
+    public function it_does_not_have_any_permissions_by_default()
     {
         $this->getPermissions()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
     }
 
-    function it_can_have_specific_permissions(PermissionInterface $permission)
+    public function it_can_have_specific_permissions(PermissionInterface $permission)
     {
         $this->hasPermission($permission)->shouldReturn(false);
         $this->addPermission($permission);
         $this->hasPermission($permission)->shouldReturn(true);
     }
 
-    function it_can_remove_permissions(PermissionInterface $permission)
+    public function it_can_remove_permissions(PermissionInterface $permission)
     {
         $this->addPermission($permission);
         $this->removePermission($permission);
         $this->hasPermission($permission)->shouldReturn(false);
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -83,12 +83,12 @@ class RoleSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 

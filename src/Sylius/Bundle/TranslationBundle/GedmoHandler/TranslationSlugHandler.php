@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -50,21 +51,21 @@ class TranslationSlugHandler implements SlugHandlerInterface
     private $suffix;
 
     /**
-     * True if node is being inserted
+     * True if node is being inserted.
      *
      * @var bool
      */
     private $isInsert = false;
 
     /**
-     * Transliterated parent slug
+     * Transliterated parent slug.
      *
      * @var string
      */
     private $parentSlug;
 
     /**
-     * Used path separator
+     * Used path separator.
      *
      * @var string
      */
@@ -114,16 +115,15 @@ class TranslationSlugHandler implements SlugHandlerInterface
 
         $wrapped = AbstractWrapper::wrap($relation, $this->om);
         if ($parent = $wrapped->getPropertyValue($options['relationParentRelationField'])) {
-
-            $translation = call_user_func_array(array($parent,$options['translate']), array($locale));
+            $translation = call_user_func_array(array($parent, $options['translate']), array($locale));
 
             $this->parentSlug = $translation->$options['parentFieldMethod']();
 
             // if needed, remove suffix from parentSlug, so we can use it to prepend it to our slug
-            if(isset($options['suffix'])) {
+            if (isset($options['suffix'])) {
                 $suffix = $options['suffix'];
 
-                if(substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
+                if (substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
                     $this->parentSlug = substr_replace($this->parentSlug, '', -1 * strlen($suffix));
                 }
             }

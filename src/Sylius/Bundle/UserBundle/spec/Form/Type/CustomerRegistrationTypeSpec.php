@@ -19,22 +19,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $customerRepository)
+    public function let(RepositoryInterface $customerRepository)
     {
         $this->beConstructedWith('Customer', array('sylius'), $customerRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType');
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('firstName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
@@ -51,18 +51,18 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $this->buildForm($builder);
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Customer',
             'validation_groups' => array('sylius'),
-            'cascade_validation' => true
+            'cascade_validation' => true,
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_customer_registration');
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -18,7 +19,7 @@ use Sylius\Component\Translation\Model\AbstractTranslation;
 class ArchetypeTranslation extends AbstractTranslation implements ArchetypeTranslationInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 

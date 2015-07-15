@@ -25,25 +25,24 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RepositoryInterface $adjustmentRepository,
         DelegatingCalculatorInterface $calculator
-    )
-    {
+    ) {
         $this->beConstructedWith($adjustmentRepository, $calculator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor');
     }
 
-    function it_implements_Sylius_shipping_charges_processor_interface()
+    public function it_implements_Sylius_shipping_charges_processor_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface');
     }
 
-    function it_removes_existing_shipping_adjustments(OrderInterface $order)
+    public function it_removes_existing_shipping_adjustments(OrderInterface $order)
     {
         $order->getShipments()->willReturn(array());
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
@@ -53,7 +52,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->applyShippingCharges($order);
     }
 
-    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
+    public function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(array());
@@ -64,7 +63,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->applyShippingCharges($order);
     }
 
-    function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
+    public function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
         $adjustmentRepository,
         $calculator,
         AdjustmentInterface $adjustment,

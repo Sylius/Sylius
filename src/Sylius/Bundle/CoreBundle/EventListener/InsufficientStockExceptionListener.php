@@ -50,7 +50,7 @@ class InsufficientStockExceptionListener
                 'sylius.checkout.out_of_stock',
                 array(
                     '%quantity%' => $e->getStockable()->getOnHand(),
-                    '%name%'     => $e->getStockable()->getInventoryName(),
+                    '%name%' => $e->getStockable()->getInventoryName(),
                 ),
                 'flashes'
             )

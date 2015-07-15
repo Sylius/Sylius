@@ -16,7 +16,7 @@ use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * Sales total data fetcher
+ * Sales total data fetcher.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

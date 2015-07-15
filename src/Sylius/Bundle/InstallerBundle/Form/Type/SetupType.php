@@ -32,25 +32,25 @@ class SetupType extends AbstractType
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
-                'label' => 'sylius.form.setup.username'
+                'label' => 'sylius.form.setup.username',
             ))
             ->add('plain_password', 'password', array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
-                'label' => 'sylius.form.setup.plain_password'
+                'label' => 'sylius.form.setup.plain_password',
             ))
             ->add('email', 'email', array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                     new Assert\Email(),
                 ),
-                'label' => 'sylius.form.setup.email'
+                'label' => 'sylius.form.setup.email',
             ))
             ->add('load_fixtures', 'checkbox', array(
                 'required' => false,
-                'mapped'   => false,
-                'label'    => 'sylius.form.setup.load_fixtures'
+                'mapped' => false,
+                'label' => 'sylius.form.setup.load_fixtures',
             ))
         ;
     }
@@ -59,7 +59,7 @@ class SetupType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class' => $this->dataClass,
             ))
         ;
     }

@@ -21,17 +21,17 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
  */
 class ImagineBlockTypeSpec extends ObjectBehavior
 {
-    function let(FilterConfiguration $filterConfiguration)
+    public function let(FilterConfiguration $filterConfiguration)
     {
         $this->beConstructedWith('My\Resource\Model', array('validation_group'), $filterConfiguration);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ContentBundle\Form\Type\ImagineBlockType');
     }
 
-    function it_builds_a_form($filterConfiguration, FormBuilderInterface $builder)
+    public function it_builds_a_form($filterConfiguration, FormBuilderInterface $builder)
     {
         $filterConfiguration->all()->shouldBeCalled()->willReturn(array('filter' => ''));
 
@@ -48,7 +48,7 @@ class ImagineBlockTypeSpec extends ObjectBehavior
         $this->buildForm($builder);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_imagine_block');
     }

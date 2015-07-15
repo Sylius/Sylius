@@ -17,22 +17,22 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 
 class InventoryHelperSpec extends ObjectBehavior
 {
-    function let(AvailabilityCheckerInterface $checker)
+    public function let(AvailabilityCheckerInterface $checker)
     {
         $this->beConstructedWith($checker);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_delegates_the_stock_availability_checking_to_the_checker(
+    public function it_delegates_the_stock_availability_checking_to_the_checker(
         $checker,
         StockableInterface $stockable
     ) {
@@ -41,7 +41,7 @@ class InventoryHelperSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_delegates_the_stock_sufficiency_checking_to_the_checker(
+    public function it_delegates_the_stock_sufficiency_checking_to_the_checker(
         $checker,
         StockableInterface $stockable
     ) {

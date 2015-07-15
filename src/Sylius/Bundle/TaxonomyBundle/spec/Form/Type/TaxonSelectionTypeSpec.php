@@ -23,22 +23,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TaxonSelectionTypeSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
+    public function let(RepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
     {
         $this->beConstructedWith($taxonomyRepository, $taxonRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonSelectionType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_a_form(
+    public function it_builds_a_form(
         $taxonomyRepository,
         $taxonRepository,
         FormBuilderInterface $builder,
@@ -67,18 +67,18 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'         => null,
-            'multiple'           => true,
-            'render_label'       => false,
-            'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+            'data_class' => null,
+            'multiple' => true,
+            'render_label' => false,
+            'model_transformer' => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
         ))->shouldBeCalled();
 
         $resolver->setNormalizers(Argument::withKey('model_transformer'))->shouldBeCalled();
@@ -86,7 +86,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_taxon_selection');
     }

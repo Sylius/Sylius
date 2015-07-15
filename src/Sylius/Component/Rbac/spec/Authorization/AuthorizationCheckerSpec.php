@@ -17,7 +17,6 @@ use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
 
 /**
@@ -25,33 +24,32 @@ use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
  */
 class AuthorizationCheckerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->beConstructedWith($currentIdentityProvider, $permissionMap, $rolesResolver);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Authorization\AuthorizationChecker');
     }
 
-    function it_implements_Sylius_Rbac_authorization_checker_interface()
+    public function it_implements_Sylius_Rbac_authorization_checker_interface()
     {
         $this->shouldImplement('Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface');
     }
 
-    function it_obtains_the_current_identity_and_returns_false_if_none_available($currentIdentityProvider)
+    public function it_obtains_the_current_identity_and_returns_false_if_none_available($currentIdentityProvider)
     {
         $currentIdentityProvider->getIdentity()->shouldBeCalled()->willReturn(null);
 
         $this->isGranted('edit_product')->shouldReturn(false);
     }
 
-    function it_returns_false_if_none_of_current_identity_roles_has_permission(
+    public function it_returns_false_if_none_of_current_identity_roles_has_permission(
         $currentIdentityProvider,
         IdentityInterface $identity,
         $permissionMap,
@@ -68,7 +66,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
         $this->isGranted('can_close_store')->shouldReturn(false);
     }
 
-    function it_returns_true_if_any_of_current_identity_roles_has_permission(
+    public function it_returns_true_if_any_of_current_identity_roles_has_permission(
         $currentIdentityProvider,
         IdentityInterface $identity,
         $permissionMap,

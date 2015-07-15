@@ -35,7 +35,7 @@ class SalesTotalType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => SalesTotalDataFetcher::getPeriodChoices(),
+                'choices' => SalesTotalDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
@@ -47,8 +47,8 @@ class SalesTotalType extends AbstractType
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_data_fetcher_sales_total';

@@ -21,35 +21,35 @@ interface ShippableInterface
     /**
      * Get the weight of an item.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingWeight();
 
     /**
      * Get the volume of an item.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingVolume();
 
     /**
      * Get the width of an item.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingWidth();
 
     /**
      * Get the height of an item.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingHeight();
 
     /**
      * Get the depth of an item.
      *
-     * @return integer
+     * @return int
      */
     public function getShippingDepth();
 

@@ -29,7 +29,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $subjects;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $subjects
      */
@@ -66,7 +66,6 @@ class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata
      * @param array                           $class
@@ -75,23 +74,23 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapAttributes(ClassMetadataInfo $metadata, array $class, $subject)
     {
         $attributeMapping = array(
-            'fieldName'    => 'attributes',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+            'fieldName' => 'attributes',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['attribute'],
-            'joinTable'    => array(
+            'joinTable' => array(
                 'name' => sprintf('sylius_%s_archetype_attribute', $subject),
-                'joinColumns'   => array(array(
-                    'name'                 => 'archetype_id',
+                'joinColumns' => array(array(
+                    'name' => 'archetype_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
+                    'nullable' => false,
+                    'unique' => false,
                 )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
+                'inverseJoinColumns' => array(array(
+                    'name' => 'attribute_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                ))
+                    'nullable' => false,
+                    'unique' => false,
+                )),
             ),
         );
 
@@ -106,23 +105,23 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapVariations(ClassMetadataInfo $metadata, array $class, $subject)
     {
         $optionMapping = array(
-            'fieldName'    => 'options',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+            'fieldName' => 'options',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['option'],
-            'joinTable'    => array(
+            'joinTable' => array(
                 'name' => sprintf('sylius_%s_archetype_option', $subject),
-                'joinColumns'   => array(array(
-                    'name'                 => sprintf('%s_archetype_id', $subject),
+                'joinColumns' => array(array(
+                    'name' => sprintf('%s_archetype_id', $subject),
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
+                    'nullable' => false,
+                    'unique' => false,
                 )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'option_id',
+                'inverseJoinColumns' => array(array(
+                    'name' => 'option_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                ))
+                    'nullable' => false,
+                    'unique' => false,
+                )),
             ),
         );
 
@@ -136,14 +135,14 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapParent(ClassMetadataInfo $metadata, array $class)
     {
         $parentMapping = array(
-            'fieldName'    => 'parent',
-            'type'         => ClassMetadataInfo::MANY_TO_ONE,
+            'fieldName' => 'parent',
+            'type' => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => $class['archetype']['model'],
-            'joinColumn'   => array(
-                'name'                 => 'parent_id',
+            'joinColumn' => array(
+                'name' => 'parent_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => true,
-                'onDelete'             => 'SET NULL'
+                'nullable' => true,
+                'onDelete' => 'SET NULL',
             ),
         );
 

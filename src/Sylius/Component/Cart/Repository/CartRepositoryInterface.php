@@ -22,7 +22,7 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 interface CartRepositoryInterface extends OrderRepositoryInterface
 {
     /**
-     * Get expired carts
+     * Get expired carts.
      *
      * @return CartInterface[]
      */

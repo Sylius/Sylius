@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Shipping\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -25,22 +24,22 @@ use Sylius\Component\Shipping\ShipmentTransitions;
  */
 class ShipmentProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    public function let(FactoryInterface $factory)
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Processor\ShipmentProcessor');
     }
 
-    function it_implements_Sylius_shipment_processor_interface()
+    public function it_implements_Sylius_shipment_processor_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Processor\ShipmentProcessorInterface');
     }
 
-    function it_updates_shipment_states(
+    public function it_updates_shipment_states(
         $factory,
         ShipmentInterface $shipment,
         StateMachineInterface $sm
@@ -52,7 +51,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $this->updateShipmentStates(array($shipment), 'transition');
     }
 
-    function it_updates_item_states(
+    public function it_updates_item_states(
         $factory,
         ShipmentItemInterface $item,
         StateMachineInterface $sm

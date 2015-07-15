@@ -339,7 +339,7 @@ class Product extends BaseProduct implements ProductInterface
     {
         return array(
             self::VARIANT_SELECTION_CHOICE => 'Variant choice',
-            self::VARIANT_SELECTION_MATCH  => 'Options matching',
+            self::VARIANT_SELECTION_MATCH => 'Options matching',
         );
     }
 
@@ -357,6 +357,7 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
+
         return $this;
     }
 }

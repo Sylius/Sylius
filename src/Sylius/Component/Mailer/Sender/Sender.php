@@ -57,10 +57,10 @@ class Sender implements SenderInterface
         EmailProviderInterface $provider,
         DefaultSettingsProviderInterface $defaultSettingsProvider
     ) {
-        $this->senderAdapter            = $senderAdapter;
-        $this->rendererAdapter          = $rendererAdapter;
-        $this->provider                 = $provider;
-        $this->defaultSettingsProvider  = $defaultSettingsProvider;
+        $this->senderAdapter = $senderAdapter;
+        $this->rendererAdapter = $rendererAdapter;
+        $this->provider = $provider;
+        $this->defaultSettingsProvider = $defaultSettingsProvider;
     }
 
     /**

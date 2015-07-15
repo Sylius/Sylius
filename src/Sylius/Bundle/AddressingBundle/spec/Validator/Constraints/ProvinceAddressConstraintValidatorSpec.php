@@ -25,20 +25,20 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  */
 class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator');
     }
 
-    function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
+    public function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
         $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
             '',
-            $constraint
+            $constraint,
         ));
     }
 
-    function it_does_not_add_violation_because_a_violation_exists(
+    public function it_does_not_add_violation_because_a_violation_exists(
         AddressInterface $address,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
@@ -47,7 +47,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
         $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('property_path')
+            $this->createViolation('property_path'),
         )));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
@@ -55,7 +55,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_adds_violation_because_address_has_not_province(
+    public function it_adds_violation_because_address_has_not_province(
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
@@ -68,7 +68,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
         $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('other_property_path')
+            $this->createViolation('other_property_path'),
         )));
 
         $context->addViolation(Argument::any())->shouldBeCalled();

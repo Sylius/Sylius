@@ -30,18 +30,18 @@ class OrderType extends BaseOrderType
         $builder
             ->add('user', 'sylius_user_choice', array(
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
             ->add('currency', 'sylius_currency_code_choice', array(
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
             ->add('channel', 'sylius_channel_choice', array(
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
         ;
     }

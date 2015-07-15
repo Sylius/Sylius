@@ -53,7 +53,7 @@ class WeightRateCalculator extends Calculator
         $resolver
             ->setDefaults(array(
                 'division' => 1,
-                'fixed'    => 0,
+                'fixed' => 0,
             ))
             ->setRequired(array(
                 'variable',
@@ -63,7 +63,7 @@ class WeightRateCalculator extends Calculator
             ->setAllowedTypes(array(
                 'variable' => array('numeric'),
                 'division' => array('numeric'),
-                'fixed'    => array('numeric'),
+                'fixed' => array('numeric'),
             ))
         ;
     }

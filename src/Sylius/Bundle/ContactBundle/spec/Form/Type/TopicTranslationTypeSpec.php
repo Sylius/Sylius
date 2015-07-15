@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TopicTranslationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('ContactTranslation', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('title', 'text', Argument::any())
@@ -46,13 +46,13 @@ class TopicTranslationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'ContactTranslation',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'ContactTranslation',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();
@@ -60,7 +60,7 @@ class TopicTranslationTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_contact_topic_translation');
     }

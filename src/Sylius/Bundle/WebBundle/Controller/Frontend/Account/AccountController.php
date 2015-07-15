@@ -35,7 +35,7 @@ class AccountController extends Controller
         }
 
         return $this->render('SyliusWebBundle:Frontend/Account:show.html.twig', array(
-            'user' => $user
+            'user' => $user,
         ));
     }
 }

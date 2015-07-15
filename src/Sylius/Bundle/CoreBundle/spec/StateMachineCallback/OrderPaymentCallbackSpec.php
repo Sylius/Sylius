@@ -25,17 +25,17 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
  */
 class OrderPaymentCallbackSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    public function let(FactoryInterface $factory)
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback');
     }
 
-    function it_dispatches_event_on_payment_update_and_will_update_order_state(
+    public function it_dispatches_event_on_payment_update_and_will_update_order_state(
         $factory,
         PaymentInterface $payment,
         OrderInterface $order,
@@ -53,7 +53,7 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
         $this->updateOrderOnPayment($payment);
     }
 
-    function it_dispatches_event_on_payment_update(
+    public function it_dispatches_event_on_payment_update(
         $factory,
         PaymentInterface $payment,
         OrderInterface $order,

@@ -35,7 +35,7 @@ abstract class AbstractExtension extends Extension
     protected $configDirectory = '/../Resources/config';
 
     /**
-     * Load the services service definitions
+     * Load the services service definitions.
      *
      * @param ContainerBuilder $containerBuilder
      * @param string|array     $files
@@ -65,7 +65,7 @@ abstract class AbstractExtension extends Extension
     }
 
     /**
-     * Load the driver service definitions
+     * Load the driver service definitions.
      *
      * @param ContainerBuilder $containerBuilder
      */
@@ -86,7 +86,7 @@ abstract class AbstractExtension extends Extension
         ;
 
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
+            /* @var SplFileInfo $file */
             $this->loadServiceDefinitions($containerBuilder, sprintf('driver/%s/%s', $lib, $file->getFilename()));
         }
     }
@@ -111,7 +111,7 @@ abstract class AbstractExtension extends Extension
     }
 
     /**
-     * Register extra loaders
+     * Register extra loaders.
      *
      * @param ContainerBuilder $containerBuilder
      *

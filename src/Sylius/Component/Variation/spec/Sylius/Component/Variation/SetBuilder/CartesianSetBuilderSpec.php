@@ -19,31 +19,31 @@ use Prophecy\Argument;
  */
 class CartesianSetBuilderSpec extends ObjectBehavior
 {
-    function it_is_a_set_builder()
+    public function it_is_a_set_builder()
     {
         $this->shouldImplement('Sylius\Component\Variation\SetBuilder\SetBuilderInterface');
     }
 
-    function it_requires_an_array_of_set_tuples_to_build_from()
+    public function it_requires_an_array_of_set_tuples_to_build_from()
     {
         $tupleSetNotInArray = array('a', 'b', 'c');
 
         $this->shouldThrow('InvalidArgumentException')->duringBuild($tupleSetNotInArray, Argument::any());
     }
 
-    function it_requires_at_least_one_set_tuple()
+    public function it_requires_at_least_one_set_tuple()
     {
         $this->shouldThrow('InvalidArgumentException')->duringBuild(array(), Argument::any());
     }
 
-    function it_returns_the_same_set_as_the_Cartesian_product_when_only_one_was_given()
+    public function it_returns_the_same_set_as_the_Cartesian_product_when_only_one_was_given()
     {
         $set = array('a', 'b', 'c');
 
         $this->build(array($set), false)->shouldReturn($set);
     }
 
-    function it_builds_the_Cartesian_product_set_from_two_sets()
+    public function it_builds_the_Cartesian_product_set_from_two_sets()
     {
         $setA = array('a', 'b', 'c');
         $setB = array('1', '2', '3');
@@ -63,7 +63,7 @@ class CartesianSetBuilderSpec extends ObjectBehavior
         ));
     }
 
-    function it_builds_the_Cartesian_product_set_from_more_than_two_sets()
+    public function it_builds_the_Cartesian_product_set_from_more_than_two_sets()
     {
         $setA = array('a', 'b', 'c');
         $setB = array('1', '2', '3');

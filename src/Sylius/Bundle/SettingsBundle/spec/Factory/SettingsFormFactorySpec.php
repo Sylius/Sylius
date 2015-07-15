@@ -23,24 +23,24 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class SettingsFormFactorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SchemaRegistryInterface $schemaRegistry,
         FormFactoryInterface $formFactory
     ) {
         $this->beConstructedWith($schemaRegistry, $formFactory);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory');
     }
 
-    function it_should_implement_settings_form_factory_interface()
+    public function it_should_implement_settings_form_factory_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface');
     }
 
-    function it_should_create_a_form_for_given_schema_namespace(
+    public function it_should_create_a_form_for_given_schema_namespace(
         $schemaRegistry,
         SchemaInterface $schema,
         $formFactory,

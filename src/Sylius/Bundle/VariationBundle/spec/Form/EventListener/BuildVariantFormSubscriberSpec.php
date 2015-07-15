@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -24,24 +23,24 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildVariantFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $factory)
+    public function let(FormFactoryInterface $factory)
     {
         $this->beConstructedWith('variable_name', $factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Form\EventListener\BuildVariantFormSubscriber');
     }
 
-    function it_sucscriber_event()
+    public function it_sucscriber_event()
     {
         $this::getSubscribedEvents()->shouldReturn(
             array(FormEvents::PRE_SET_DATA => 'preSetData')
         );
     }
 
-    function it_adds_options_on_pre_set_data_event(
+    public function it_adds_options_on_pre_set_data_event(
         $factory,
         FormEvent $event,
         FormInterface $form,
@@ -65,7 +64,7 @@ class BuildVariantFormSubscriberSpec extends ObjectBehavior
             array($optionValue),
             array(
                 'options' => array($options),
-                'auto_initialize' => false
+                'auto_initialize' => false,
             )
         )->shouldBeCalled()->willReturn($optionsForm);
 

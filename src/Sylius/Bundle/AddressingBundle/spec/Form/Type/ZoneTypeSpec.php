@@ -22,27 +22,27 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ZoneTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Zone', array('sylius'), array('shipping', 'pricing'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_zone');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -67,13 +67,13 @@ class ZoneTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'Zone',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'Zone',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled()

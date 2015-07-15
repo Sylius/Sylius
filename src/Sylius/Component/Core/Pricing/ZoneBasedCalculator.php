@@ -21,7 +21,7 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 class ZoneBasedCalculator extends AbstractCalculator implements CalculatorInterface
 {
     protected $parameterName = 'zones';
-    protected $className     = 'Sylius\Component\Addressing\Model\ZoneInterface';
+    protected $className = 'Sylius\Component\Addressing\Model\ZoneInterface';
 
     /**
      * {@inheritdoc}

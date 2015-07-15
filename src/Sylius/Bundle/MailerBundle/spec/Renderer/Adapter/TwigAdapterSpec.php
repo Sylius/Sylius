@@ -21,22 +21,22 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TwigAdapterSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig)
+    public function let(\Twig_Environment $twig)
     {
         $this->beConstructedWith($twig);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MailerBundle\Renderer\Adapter\TwigAdapter');
     }
 
-    function it_is_an_adapter()
+    public function it_is_an_adapter()
     {
         $this->shouldHaveType('Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter');
     }
 
-    function it_renders_an_email(
+    public function it_renders_an_email(
         $twig,
         EmailInterface $email,
         \Twig_Template $template,
@@ -64,7 +64,7 @@ class TwigAdapterSpec extends ObjectBehavior
         $this->render($email, array())->shouldReturn($renderedEmail);
     }
 
-    function it_creates_and_renders_an_email(
+    public function it_creates_and_renders_an_email(
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,
         EmailRenderEvent $event,

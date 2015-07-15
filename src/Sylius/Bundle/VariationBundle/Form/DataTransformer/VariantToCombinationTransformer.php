@@ -63,7 +63,7 @@ class VariantToCombinationTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (null === $value || '' === $value) {
-            return null;
+            return;
         }
 
         if (!is_array($value) && !$value instanceof \Traversable && !$value instanceof \ArrayAccess) {

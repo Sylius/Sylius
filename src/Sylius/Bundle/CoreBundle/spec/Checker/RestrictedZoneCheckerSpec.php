@@ -21,29 +21,29 @@ use Sylius\Component\User\Context\CustomerContextInterface;
 
 class RestrictedZoneCheckerSpec extends ObjectBehavior
 {
-    function let(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
+    public function let(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->beConstructedWith($customerContext, $zoneMatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker');
     }
 
-    function it_implements_Sylius_cart_item_resolver_interface()
+    public function it_implements_Sylius_cart_item_resolver_interface()
     {
         $this->shouldImplement('Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface');
     }
 
-    function it_is_not_restricted_if_customer_is_not_authenticated(ProductInterface $product, $customerContext)
+    public function it_is_not_restricted_if_customer_is_not_authenticated(ProductInterface $product, $customerContext)
     {
         $customerContext->getCustomer()->shouldBeCalled()->willReturn(null);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_customer_have_no_shipping_address(
+    public function it_is_not_restricted_if_customer_have_no_shipping_address(
         ProductInterface $product,
         $customerContext,
         CustomerInterface $customer
@@ -54,7 +54,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_product_have_no_restricted_zone(
+    public function it_is_not_restricted_if_product_have_no_restricted_zone(
         ProductInterface $product,
         $customerContext,
         CustomerInterface $customer,
@@ -68,7 +68,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_zone_matcher_does_not_match_customers_shipping_address(
+    public function it_is_not_restricted_if_zone_matcher_does_not_match_customers_shipping_address(
         ProductInterface $product,
         $customerContext,
         $zoneMatcher,
@@ -85,7 +85,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_restricted_if_zone_matcher_match_customers_shipping_address(
+    public function it_is_restricted_if_zone_matcher_match_customers_shipping_address(
         ProductInterface $product,
         $customerContext,
         $zoneMatcher,

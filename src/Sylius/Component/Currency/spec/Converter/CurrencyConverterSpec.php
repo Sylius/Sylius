@@ -18,22 +18,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $currencyRepository)
+    public function let(RepositoryInterface $currencyRepository)
     {
         $this->beConstructedWith($currencyRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Currency\Converter\CurrencyConverter');
     }
 
-    function it_implements_Sylius_currency_converter_interface()
+    public function it_implements_Sylius_currency_converter_interface()
     {
         $this->shouldImplement('Sylius\Component\Currency\Converter\CurrencyConverterInterface');
     }
 
-    function it_converts_to_any_currency(CurrencyInterface $currency, $currencyRepository)
+    public function it_converts_to_any_currency(CurrencyInterface $currency, $currencyRepository)
     {
         $currencyRepository->findOneBy(array('code' => 'USD'))->shouldBeCalled()->willReturn($currency);
         $currency->getExchangeRate()->shouldBeCalled()->willReturn(1.30);
@@ -41,7 +41,7 @@ class CurrencyConverterSpec extends ObjectBehavior
         $this->convert(6555, 'USD')->shouldReturn(8522);
     }
 
-    function it_throws_exception_if_currency_is_not_found($currencyRepository)
+    public function it_throws_exception_if_currency_is_not_found($currencyRepository)
     {
         $currencyRepository->findOneBy(array('code' => 'EUR'))->shouldBeCalled()->willReturn(null);
 

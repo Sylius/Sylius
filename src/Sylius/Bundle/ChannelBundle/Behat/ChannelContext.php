@@ -74,7 +74,7 @@ class ChannelContext extends DefaultContext
      */
     public function setupDefaultChannel()
     {
-        $this->thereIsChannel('DEFAULT-WEB', "Default", "localhost", "en_US", "EUR");
+        $this->thereIsChannel('DEFAULT-WEB', 'Default', 'localhost', 'en_US', 'EUR');
     }
 
     /**
@@ -122,7 +122,7 @@ class ChannelContext extends DefaultContext
     /**
      * @Given /^There is channel "([^""]*)" named "([^""]*)" for url "([^""]*)"$/
      */
-    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = "EUR", $shippingMethods = null, $paymentMethos = null, $flush = true)
+    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = 'EUR', $shippingMethods = null, $paymentMethos = null, $flush = true)
     {
         /* @var $channel ChannelInterface */
         $channel = $this->getRepository('channel')->createNew();

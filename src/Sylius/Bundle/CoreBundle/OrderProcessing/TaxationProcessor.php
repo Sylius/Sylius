@@ -77,8 +77,7 @@ class TaxationProcessor implements TaxationProcessorInterface
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
-    )
-    {
+    ) {
         $this->adjustmentRepository = $adjustmentRepository;
         $this->calculator = $calculator;
         $this->taxRateResolver = $taxRateResolver;
@@ -139,8 +138,8 @@ class TaxationProcessor implements TaxationProcessorInterface
             $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
 
             $taxes[$description] = array(
-                'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
-                'included' => $rate->isIncludedInPrice()
+                'amount' => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
+                'included' => $rate->isIncludedInPrice(),
             );
         }
 

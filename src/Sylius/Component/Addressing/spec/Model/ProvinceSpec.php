@@ -19,38 +19,38 @@ use Sylius\Component\Addressing\Model\CountryInterface;
  */
 class ProvinceSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Addressing\Model\Province');
     }
 
-    function it_implements_Sylius_country_province_interface()
+    public function it_implements_Sylius_country_province_interface()
     {
         $this->shouldImplement('Sylius\Component\Addressing\Model\ProvinceInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Texas');
         $this->getName()->shouldReturn('Texas');
     }
 
-    function it_does_not_belong_to_country_by_default()
+    public function it_does_not_belong_to_country_by_default()
     {
         $this->getCountry()->shouldReturn(null);
     }
 
-    function it_allows_to_attach_itself_to_a_country(CountryInterface $country)
+    public function it_allows_to_attach_itself_to_a_country(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);

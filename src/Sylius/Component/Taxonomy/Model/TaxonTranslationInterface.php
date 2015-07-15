@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
@@ -48,8 +47,8 @@ interface TaxonTranslationInterface extends SlugAwareInterface
      * @param string $permalink
      */
     public function setPermalink($permalink);
-    
-    /**
+
+/**
      * Get description.
      *
      * @return string

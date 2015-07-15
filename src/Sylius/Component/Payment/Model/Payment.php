@@ -44,7 +44,7 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     /**
      * Amount.
      *
-     * @var integer
+     * @var int
      */
     protected $amount = 0;
 
@@ -140,7 +140,7 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
             return $this->creditCard;
         }
 
-        return null;
+        return;
     }
 
     /**

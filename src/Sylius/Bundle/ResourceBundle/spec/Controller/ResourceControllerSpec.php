@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
-
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Configuration;
@@ -23,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ResourceControllerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         Configuration $configuration,
         ContainerInterface $container,
         RouterInterface $router,
@@ -47,17 +46,17 @@ class ResourceControllerSpec extends ObjectBehavior
         $this->setContainer($container);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
 
-    function it_is_a_controller()
+    public function it_is_a_controller()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
     }
 
-    function it_gets_form_from_class_name(
+    public function it_gets_form_from_class_name(
         Configuration $configuration,
         FormFactoryInterface $formFactory,
         FormInterface $form

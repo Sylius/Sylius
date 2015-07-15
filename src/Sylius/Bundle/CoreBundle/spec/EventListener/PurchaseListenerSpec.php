@@ -23,7 +23,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CartProviderInterface $cartProvider,
         UrlGeneratorInterface $router,
         SessionInterface $session,
@@ -39,12 +39,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $router->generate('sylius_checkout_payment')->willReturn('/payment');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\PurchaseListener');
     }
 
-    function it_should_abandon_cart_if_payment_status_success(
+    public function it_should_abandon_cart_if_payment_status_success(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -58,7 +58,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_success_flash_message_if_payment_status_success(
+    public function it_should_set_success_flash_message_if_payment_status_success(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -71,12 +71,12 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.success')
         ;
-        $flashBag->add('success','translated.sylius.checkout.success')->shouldBeCalled();
+        $flashBag->add('success', 'translated.sylius.checkout.success')->shouldBeCalled();
 
         $this->addFlash($event);
     }
 
-    function it_should_abandon_cart_if_payment_status_pending(
+    public function it_should_abandon_cart_if_payment_status_pending(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -90,7 +90,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_pending(
+    public function it_should_set_notice_flash_message_if_payment_status_pending(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -103,12 +103,12 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
 
-    function it_should_abandon_cart_if_payment_status_processing(
+    public function it_should_abandon_cart_if_payment_status_processing(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -122,7 +122,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_processing(
+    public function it_should_set_notice_flash_message_if_payment_status_processing(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -135,12 +135,12 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_canceled(
+    public function it_should_not_abandon_cart_if_payment_status_canceled(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -154,7 +154,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_canceled(
+    public function it_should_set_notice_flash_message_if_payment_status_canceled(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -167,12 +167,12 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.canceled')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.canceled')->shouldBeCalled();
 
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_failed(
+    public function it_should_not_abandon_cart_if_payment_status_failed(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -186,7 +186,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_error_flash_message_if_payment_status_failed(
+    public function it_should_set_error_flash_message_if_payment_status_failed(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -199,12 +199,12 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.failed')
         ;
-        $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.failed')->shouldBeCalled();
 
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_unknown(
+    public function it_should_not_abandon_cart_if_payment_status_unknown(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
@@ -218,7 +218,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_error_flash_message_if_payment_status_unknown(
+    public function it_should_set_error_flash_message_if_payment_status_unknown(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
@@ -231,7 +231,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.unknown')
         ;
-        $flashBag->add('error','translated.sylius.checkout.unknown')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.unknown')->shouldBeCalled();
 
         $this->addFlash($event);
     }

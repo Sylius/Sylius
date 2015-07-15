@@ -30,7 +30,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class NumberListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $registry,
         EventManager $eventManager,
         EventDispatcherInterface $eventDispatcher
@@ -43,7 +43,7 @@ class NumberListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_enable_listener_on_specific_entity(SequenceSubjectInterface $subject, $eventManager)
+    public function it_enable_listener_on_specific_entity(SequenceSubjectInterface $subject, $eventManager)
     {
         $eventManager->addEventListener(
             Events::preFlush,
@@ -53,7 +53,7 @@ class NumberListenerSpec extends ObjectBehavior
         $this->enableEntity($subject);
     }
 
-    function it_applies_generator(
+    public function it_applies_generator(
         PreFlushEventArgs $args,
         EntityManager $entityManager,
         SequenceSubjectInterface $entity,
@@ -89,4 +89,4 @@ class NumberListenerSpec extends ObjectBehavior
 
         $this->preFlush($args);
     }
-} 
+}

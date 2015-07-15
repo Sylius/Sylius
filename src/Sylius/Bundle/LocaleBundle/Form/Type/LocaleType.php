@@ -32,7 +32,7 @@ class LocaleType extends AbstractResourceType
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.locale.enabled',
+                'label' => 'sylius.form.locale.enabled',
             ))
         ;
     }

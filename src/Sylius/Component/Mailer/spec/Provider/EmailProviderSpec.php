@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Mailer\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -21,49 +20,49 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class EmailProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    public function let(RepositoryInterface $repository)
     {
         $emails = array(
             'user_confirmation' => array(
-                'enabled'  => false,
-                'subject'  => 'Hello test!',
+                'enabled' => false,
+                'subject' => 'Hello test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
-                    'name'    => 'John Doe',
-                    'address' => 'john@doe.com'
-                )
+                'sender' => array(
+                    'name' => 'John Doe',
+                    'address' => 'john@doe.com',
+                ),
             ),
             'order_cancelled' => array(
-                'enabled'  => false,
-                'subject'  => 'Hi test!',
+                'enabled' => false,
+                'subject' => 'Hi test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
-                    'name'    => 'Rick Doe',
-                    'address' => 'john@doe.com'
-                )
-            )
+                'sender' => array(
+                    'name' => 'Rick Doe',
+                    'address' => 'john@doe.com',
+                ),
+            ),
         );
         $this->beConstructedWith($repository, $emails);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Mailer\Provider\EmailProvider');
     }
 
-    function it_implements_Sylius_email_provider_interface()
+    public function it_implements_Sylius_email_provider_interface()
     {
         $this->shouldImplement('Sylius\Component\Mailer\Provider\EmailProviderInterface');
     }
 
-    function it_looks_for_an_email_via_repository($repository, EmailInterface $email)
+    public function it_looks_for_an_email_via_repository($repository, EmailInterface $email)
     {
         $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn($email);
 
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_looks_for_email_in_configuration($repository, EmailInterface $email)
+    public function it_looks_for_email_in_configuration($repository, EmailInterface $email)
     {
         $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn(null);
         $repository->createNew()->shouldBeCalled()->willReturn($email);
@@ -78,7 +77,7 @@ class EmailProviderSpec extends ObjectBehavior
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_complains_if_email_does_not_exist($repository)
+    public function it_complains_if_email_does_not_exist($repository)
     {
         $repository->findOneBy(array('code' => 'foo'))->shouldBeCalled()->willReturn(null);
 

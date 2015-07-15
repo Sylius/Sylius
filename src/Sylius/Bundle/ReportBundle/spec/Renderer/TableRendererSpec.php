@@ -24,22 +24,22 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  */
 class TableRendererSpec extends ObjectBehavior
 {
-    function let(EngineInterface $templating)
+    public function let(EngineInterface $templating)
     {
         $this->beConstructedWith($templating);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Renderer\TableRenderer');
     }
 
-    function it_should_implement_renderer_interface()
+    public function it_should_implement_renderer_interface()
     {
         $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
     }
 
-    function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
+    public function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
     {
         $reportData->getLabels()->willReturn(array('month', 'user_total'));
         $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
@@ -61,7 +61,7 @@ class TableRendererSpec extends ObjectBehavior
         $this->render($report, $reportData)->shouldReturn($response);
     }
 
-    function it_has_type()
+    public function it_has_type()
     {
         $this->getType()->shouldReturn(DefaultRenderers::TABLE);
     }

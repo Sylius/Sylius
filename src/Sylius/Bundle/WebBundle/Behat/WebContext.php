@@ -378,9 +378,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      * @Then I should not see :button button near :user in :table table
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
-    {   
-        $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
-        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
+    {
+        $this->assertSession()->elementExists('css', '#'.$table." tr[data-customer='$customer']");
+        $this->assertSession()->elementNotExists('css', '#'.$table." tr[data-customer='$customer'] form input[value=".strtoupper($button).']');
     }
 
     /**
@@ -530,7 +530,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
 
         foreach ($table->getRows() as $i => $value) {
             $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
-            $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
+            $this->fillField(sprintf('sylius_option[values][%d][value]', $i + $count), $value[0]);
         }
     }
 
@@ -580,7 +580,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
         $column = null;
@@ -603,23 +603,23 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $this->clickLink('Show deleted');
     }
-    
-    /**
+
+/**
      * @Then I should see table of :id sorted by lastName
      */
     public function iShouldSeeTableSortedByLastName($id)
     {
         $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
         $allSurnames = array();
-        
-        foreach ($allNames as $name){
+
+        foreach ($allNames as $name) {
             $spacePosition = strpos($name->getText(), ' ');
             $surname = substr($name->getText(), $spacePosition + 1);
             $allSurnames[] .= $surname;
         }
-        
+
         sort($allSurnames);
-        
+
         $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
     }
 
@@ -645,7 +645,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $pageMapping = array(
             'my orders history' => 'sylius_account_order_index',
-            'my address book'   => 'sylius_account_address_index'
+            'my address book' => 'sylius_account_address_index',
         );
 
         $this->getSession()->visit($this->generatePageUrl($pageMapping[$page]));

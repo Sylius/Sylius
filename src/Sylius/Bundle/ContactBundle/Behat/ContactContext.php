@@ -67,5 +67,4 @@ class ContactContext extends DefaultContext
 
         $manager->flush();
     }
-
 }

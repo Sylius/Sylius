@@ -64,7 +64,7 @@ class Channel implements ChannelInterface
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

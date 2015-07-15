@@ -19,17 +19,17 @@ use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
  */
 class InventoryExtensionSpec extends ObjectBehavior
 {
-    function let(InventoryHelper $helper)
+    public function let(InventoryHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Twig\InventoryExtension');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

@@ -31,7 +31,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     protected $channels;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

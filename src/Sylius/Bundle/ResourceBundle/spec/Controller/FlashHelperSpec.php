@@ -11,17 +11,17 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class FlashHelperSpec extends ObjectBehavior
 {
-    function let(Configuration $config, TranslatorInterface $translator, SessionInterface $session)
+    public function let(Configuration $config, TranslatorInterface $translator, SessionInterface $session)
     {
         $this->beConstructedWith($config, $translator, $session);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\FlashHelper');
     }
 
-    function it_has_flash_translated_messages($config, $session, $translator, FlashBag $flashBag)
+    public function it_has_flash_translated_messages($config, $session, $translator, FlashBag $flashBag)
     {
         $config->getResourceName()->willReturn('product');
         $config->getFlashMessage('create')->willReturn('product.translation.key');
@@ -34,7 +34,7 @@ class FlashHelperSpec extends ObjectBehavior
         $this->setFlash('success', 'create')->shouldReturn($this);
     }
 
-    function it_has_flash_messages($config, $session, $translator, FlashBag $flashBag)
+    public function it_has_flash_messages($config, $session, $translator, FlashBag $flashBag)
     {
         $config->getResourceName()->willReturn('product');
         $config->getFlashMessage('create')->willReturn('product.translation.key');

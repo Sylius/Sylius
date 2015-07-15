@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Class SyliusSearchExtension
+ * Class SyliusSearchExtension.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

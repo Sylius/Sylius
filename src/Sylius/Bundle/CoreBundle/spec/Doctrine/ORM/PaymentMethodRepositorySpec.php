@@ -18,18 +18,18 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository');
     }
 
-    function it_is_a_repository()
+    public function it_is_a_repository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
         $this->shouldImplement('Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface');
     }
 
-    function it_creates_query_builder_for_the_payment_method(
+    public function it_creates_query_builder_for_the_payment_method(
         $em,
         QueryBuilder $builder,
         ChannelInterface $channel,

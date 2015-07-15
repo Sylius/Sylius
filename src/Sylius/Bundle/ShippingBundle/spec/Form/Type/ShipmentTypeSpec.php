@@ -20,32 +20,32 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
  */
 class ShipmentTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Shipment', array('sylius'));
     }
 
-    function it_is_a_form()
+    public function it_is_a_form()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType');
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    public function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('state', 'choice', Argument::withKey('choices'))->shouldBeCalled()->willreturn($builder);
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
         $this->buildForm($builder, array(
-            'multiple' => true
+            'multiple' => true,
         ));
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_shipment');
     }

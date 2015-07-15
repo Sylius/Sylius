@@ -23,14 +23,14 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  */
 interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
 {
-    const STATE_CART        = 'cart';
+    const STATE_CART = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
-    const STATE_PENDING     = 'pending';
-    const STATE_CONFIRMED   = 'confirmed';
-    const STATE_SHIPPED     = 'shipped';
-    const STATE_ABANDONED   = 'abandoned';
-    const STATE_CANCELLED   = 'cancelled';
-    const STATE_RETURNED    = 'returned';
+    const STATE_PENDING = 'pending';
+    const STATE_CONFIRMED = 'confirmed';
+    const STATE_SHIPPED = 'shipped';
+    const STATE_ABANDONED = 'abandoned';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_RETURNED = 'returned';
 
     /**
      * Has the order been completed by user and can be handled.
@@ -75,7 +75,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Returns number of order items.
      *
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -105,7 +105,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Get items total.
      *
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
@@ -118,14 +118,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Get order total.
      *
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
      * Set total.
      *
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -145,7 +145,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Returns total quantity of items in cart.
      *
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 
@@ -176,9 +176,10 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function setState($state);
 
     /**
-     * Add an identity to this order.  Eg. external identity to refer to an ebay order id
+     * Add an identity to this order.  Eg. external identity to refer to an ebay order id.
      *
      * @param IdentityInterface $identity
+     *
      * @return mixed
      */
     public function addIdentity(IdentityInterface $identity);

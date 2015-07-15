@@ -52,7 +52,7 @@ class VariantType extends AbstractResourceType
         $builder
             ->add('presentation', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.variant.presentation',
+                'label' => 'sylius.form.variant.presentation',
             ))
         ;
 

@@ -23,29 +23,29 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class SecurityIdentityProviderSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext)
+    public function let(SecurityContextInterface $securityContext)
     {
         $this->beConstructedWith($securityContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Provider\SecurityIdentityProvider');
     }
 
-    function it_is_a_rbac_identity_provider()
+    public function it_is_a_rbac_identity_provider()
     {
         $this->shouldHaveType('Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface');
     }
 
-    function it_returns_null_if_user_is_not_logged_in($securityContext)
+    public function it_returns_null_if_user_is_not_logged_in($securityContext)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn(null);
 
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_null_if_token_exists_but_still_no_authenticated_user($securityContext, TokenInterface $token)
+    public function it_returns_null_if_token_exists_but_still_no_authenticated_user($securityContext, TokenInterface $token)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn(null);
@@ -53,14 +53,14 @@ class SecurityIdentityProviderSpec extends ObjectBehavior
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_null_if_token_exists_but_its_an_anonymous_user($securityContext, AnonymousToken $token)
+    public function it_returns_null_if_token_exists_but_its_an_anonymous_user($securityContext, AnonymousToken $token)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
 
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_the_authenticated_user($securityContext, TokenInterface $token, IdentityInterface $user)
+    public function it_returns_the_authenticated_user($securityContext, TokenInterface $token, IdentityInterface $user)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -68,7 +68,7 @@ class SecurityIdentityProviderSpec extends ObjectBehavior
         $this->getIdentity()->shouldReturn($user);
     }
 
-    function it_throws_exception_if_user_does_not_implement_identity_interface($securityContext, TokenInterface $token, UserInterface $user)
+    public function it_throws_exception_if_user_does_not_implement_identity_interface($securityContext, TokenInterface $token, UserInterface $user)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);

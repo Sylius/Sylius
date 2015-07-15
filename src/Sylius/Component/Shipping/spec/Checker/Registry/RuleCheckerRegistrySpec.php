@@ -20,29 +20,29 @@ use Sylius\Component\Shipping\Model\RuleInterface;
  */
 class RuleCheckerRegistrySpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry');
     }
 
-    function it_is_Sylius_rule_checker_registry()
+    public function it_is_Sylius_rule_checker_registry()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface');
     }
 
-    function it_should_initialize_checkers_array_by_default()
+    public function it_should_initialize_checkers_array_by_default()
     {
         $this->getCheckers()->shouldReturn(array());
     }
 
-    function it_should_register_checker_under_given_type(RuleCheckerInterface $checker)
+    public function it_should_register_checker_under_given_type(RuleCheckerInterface $checker)
     {
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(false);
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(true);
     }
 
-    function it_should_complain_if_trying_to_register_checker_with_taken_name(RuleCheckerInterface $checker)
+    public function it_should_complain_if_trying_to_register_checker_with_taken_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
 
@@ -52,7 +52,7 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_should_unregister_checker_with_given_name(RuleCheckerInterface $checker)
+    public function it_should_unregister_checker_with_given_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(true);
@@ -61,13 +61,13 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(false);
     }
 
-    function it_should_retrieve_registered_checker_by_name(RuleCheckerInterface $checker)
+    public function it_should_retrieve_registered_checker_by_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn($checker);
     }
 
-    function it_should_complain_if_trying_to_retrieve_non_existing_checker()
+    public function it_should_complain_if_trying_to_retrieve_non_existing_checker()
     {
         $this
             ->shouldThrow('Sylius\Component\Shipping\Checker\Registry\NonExistingRuleCheckerException')

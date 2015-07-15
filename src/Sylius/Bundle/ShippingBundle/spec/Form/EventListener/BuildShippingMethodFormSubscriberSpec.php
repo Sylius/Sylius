@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
@@ -24,34 +23,34 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
-    function let(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    public function let(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($calculatorRegistry, $factory);
     }
-    
-    function it_is_initializable()
+
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber');
     }
 
-    function it_is_a_subscriber()
+    public function it_is_a_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subscribes_to_event()
+    public function it_subscribes_to_event()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         ));
     }
 
-    function it_adds_configuration_field_on_pre_set_data(
+    public function it_adds_configuration_field_on_pre_set_data(
         $calculatorRegistry,
         $factory,
-        FormEvent $event, 
-        FormInterface $form, 
+        FormEvent $event,
+        FormInterface $form,
         ShippingMethod $shippingMethod,
         FormInterface $formConfiguration,
         CalculatorInterface $calculator
@@ -75,11 +74,11 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         )->shouldBeCalled()->willreturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();
-        
+
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_field_on_post_submit(
+    public function it_adds_configuration_field_on_post_submit(
         $calculatorRegistry,
         $factory,
         FormEvent $event,

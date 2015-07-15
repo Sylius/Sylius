@@ -19,24 +19,24 @@ use Sylius\Component\Payment\Model\PaymentSubjectInterface;
  */
 class PercentFeeCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Payment\Calculator\PercentFeeCalculator');
     }
 
-    function it_implement_fee_calculator_interface()
+    public function it_implement_fee_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
     }
 
-    function it_calculates_fee_for_given_payment_with_given_configuration(PaymentSubjectInterface $payment)
+    public function it_calculates_fee_for_given_payment_with_given_configuration(PaymentSubjectInterface $payment)
     {
         $payment->getAmount()->willReturn(1000);
 
         $this->calculate($payment, array('percent' => 20))->shouldReturn(200);
     }
 
-    function it_has_type()
+    public function it_has_type()
     {
         $this->getType()->shouldReturn('percent');
     }

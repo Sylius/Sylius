@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildActionFormSubscriberSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $registry,
         PromotionActionInterface $action,
         FormFactoryInterface $factory
@@ -37,17 +37,17 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($registry, $factory);
     }
 
-    function it_is_initializabled()
+    public function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber');
     }
 
-    function it_is_configuration_subscriber()
+    public function it_is_configuration_subscriber()
     {
         $this->shouldImplement('Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber');
     }
 
-    function it_subscribes_evetns()
+    public function it_subscribes_evetns()
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -56,7 +56,7 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_adds_configuration_fields_in_pre_set_data(
+    public function it_adds_configuration_fields_in_pre_set_data(
         $factory,
         FormEvent $event,
         ActionInterface $action,
@@ -79,7 +79,7 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_configuration_fields_in_pre_submit_data(
+    public function it_adds_configuration_fields_in_pre_submit_data(
         $factory,
         FormEvent $event,
         ActionInterface $action,
@@ -87,8 +87,7 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         Form $field
     ) {
         $event->getForm()->willReturn($form);
-        $event->getData()->willReturn(array('type' =>ActionInterface::TYPE_FIXED_DISCOUNT));
-
+        $event->getData()->willReturn(array('type' => ActionInterface::TYPE_FIXED_DISCOUNT));
 
         $factory->createNamed(
             'configuration',
@@ -101,7 +100,7 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_sets_type_in_post_set_data(
+    public function it_sets_type_in_post_set_data(
         FormEvent $event,
         ActionInterface $action,
         Form $form

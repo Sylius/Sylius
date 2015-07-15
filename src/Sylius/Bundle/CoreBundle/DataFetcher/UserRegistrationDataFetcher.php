@@ -7,7 +7,7 @@ use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * User registration data fetcher
+ * User registration data fetcher.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

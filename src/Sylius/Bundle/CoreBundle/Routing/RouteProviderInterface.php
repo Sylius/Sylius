@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -11,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Routing;
 
 use Symfony\Cmf\Component\Routing\RouteProviderInterface as BaseRouteProviderInterface;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -19,7 +19,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 interface RouteProviderInterface extends BaseRouteProviderInterface
 {
     /**
-     * This method is called from a compiler pass
+     * This method is called from a compiler pass.
      *
      * @param string $class
      * @param string $id

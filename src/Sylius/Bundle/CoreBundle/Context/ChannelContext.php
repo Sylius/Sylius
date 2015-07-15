@@ -17,7 +17,6 @@ use Sylius\Component\Core\Channel\ChannelResolverInterface;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-
 /**
  * Core channel context, which is aware of multiple channels.
  *
@@ -46,6 +45,7 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
         if (null === $this->channel) {
             $this->channel = $this->channelResolver->resolve();
         }
+
         return $this->channel;
     }
 

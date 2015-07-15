@@ -21,22 +21,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class InventoryUnitFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    public function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Factory\InventoryUnitFactory');
     }
 
-    function it_implements_Sylius_inventory_unit_factory_interface()
+    public function it_implements_Sylius_inventory_unit_factory_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface');
     }
 
-    function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
+    public function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
     {
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -44,7 +44,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_inventory_units(
+    public function it_creates_inventory_units(
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,

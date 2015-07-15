@@ -21,16 +21,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
-    function let() {
+    public function let()
+    {
         $this->beConstructedWith('ShippingMethodTranslation', array('sylius'));
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder
@@ -41,11 +42,11 @@ class ShippingMethodTranslationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'ShippingMethodTranslation',
+                'data_class' => 'ShippingMethodTranslation',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

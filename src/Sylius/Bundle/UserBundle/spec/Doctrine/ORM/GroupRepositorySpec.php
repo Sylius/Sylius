@@ -24,17 +24,17 @@ class GroupRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($em, $classMetadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository');
     }
 
-    function it_is_a_repository()
+    public function it_is_a_repository()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_has_a_form_query_buidler($em, QueryBuilder $builder)
+    public function it_has_a_form_query_buidler($em, QueryBuilder $builder)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);

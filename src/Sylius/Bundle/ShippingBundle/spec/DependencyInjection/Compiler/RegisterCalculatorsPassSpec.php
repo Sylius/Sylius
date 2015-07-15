@@ -18,17 +18,17 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class RegisterCalculatorsPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass');
     }
 
-    function it_is_a_compiler_pass()
+    public function it_is_a_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator)
+    public function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator)
     {
         $container->hasDefinition('sylius.shipping_calculator_registry')->shouldBeCalled()->willReturn(true);
         $container->getDefinition('sylius.shipping_calculator_registry')->shouldBeCalled()->willReturn($calculator);
@@ -38,8 +38,8 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
                 array(
                     'calculator' => 'calculator_name',
                     'label' => 'calculator_label',
-                )
-            )
+                ),
+            ),
         ));
 
         $calculator->addMethodCall(

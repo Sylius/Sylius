@@ -26,12 +26,12 @@ interface PaymentSubjectInterface
     /**
      * Get amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
-     * Get payment state
+     * Get payment state.
      *
      * @return string
      */

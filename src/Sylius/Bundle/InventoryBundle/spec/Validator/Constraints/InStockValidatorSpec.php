@@ -20,22 +20,22 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class InStockValidatorSpec extends ObjectBehavior
 {
-    function let(AvailabilityCheckerInterface $availabilityChecker)
+    public function let(AvailabilityCheckerInterface $availabilityChecker)
     {
         $this->beConstructedWith($availabilityChecker);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator');
     }
 
-    function it_is_a_constraint_validator()
+    public function it_is_a_constraint_validator()
     {
         $this->shouldHaveType('Symfony\Component\Validator\ConstraintValidator');
     }
 
-    function it_should_not_add_violation_if_there_is_no_stockable(
+    public function it_should_not_add_violation_if_there_is_no_stockable(
         PropertyAccessor $propertyAccessor,
         InventoryUnitInterface $inventoryUnit
     ) {
@@ -46,7 +46,7 @@ class InStockValidatorSpec extends ObjectBehavior
         $this->validate($inventoryUnit, $constraint);
     }
 
-    function it_should_not_add_violation_if_there_is_no_quantity(
+    public function it_should_not_add_violation_if_there_is_no_quantity(
         PropertyAccessor $propertyAccessor,
         InventoryUnitInterface $inventoryUnit,
         StockableInterface $stockable
@@ -59,7 +59,7 @@ class InStockValidatorSpec extends ObjectBehavior
         $this->validate($inventoryUnit, $constraint);
     }
 
-    function it_should_not_add_violation_if_stock_is_sufficient(
+    public function it_should_not_add_violation_if_stock_is_sufficient(
         PropertyAccessor $propertyAccessor,
         InventoryUnitInterface $inventoryUnit,
         StockableInterface $stockable,

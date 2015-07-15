@@ -22,7 +22,7 @@ namespace Sylius\Component\User\Model;
 interface GroupInterface
 {
     /**
-     * @return integer
+     * @return int
      */
     public function getId();
 

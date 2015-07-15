@@ -19,34 +19,34 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class WeightRateCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Calculator\WeightRateCalculator');
     }
 
-    function it_should_implement_Sylius_shipping_calculator_interface()
+    public function it_should_implement_Sylius_shipping_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
     }
 
-    function it_is_configurable()
+    public function it_is_configurable()
     {
         $this->shouldBeConfigurable();
     }
 
-    function it_returns_weight_rate_configuration_form_type()
+    public function it_returns_weight_rate_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_weight_rate_configuration');
     }
 
-    function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShippingSubjectInterface $subject)
+    public function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShippingSubjectInterface $subject)
     {
         $subject->getShippingWeight()->willReturn(10);
 
-        $this->calculate($subject, array('fixed' => 200, 'variable' => 500, 'division' => 1))->shouldReturn(200 + 500*10);
+        $this->calculate($subject, array('fixed' => 200, 'variable' => 500, 'division' => 1))->shouldReturn(200 + 500 * 10);
     }
 
-    function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
+    public function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
     {
         $subject->getShippingWeight()->willReturn(10);
 

@@ -18,27 +18,27 @@ use PhpSpec\ObjectBehavior;
  */
 class ProductTranslationSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\ProductTranslation');
     }
 
-    function it_implements_Sylius_core_product_interface()
+    public function it_implements_Sylius_core_product_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\Model\ProductTranslationInterface');
     }
 
-    function it_extends_Sylius_product_model()
+    public function it_extends_Sylius_product_model()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\ProductTranslation');
     }
 
-    function it_does_not_have_short_description_by_default()
+    public function it_does_not_have_short_description_by_default()
     {
         $this->getShortDescription()->shouldReturn(null);
     }
 
-    function its_short_description_is_mutable()
+    public function its_short_description_is_mutable()
     {
         $this->setShortDescription('Amazing product...');
         $this->getShortDescription()->shouldReturn('Amazing product...');

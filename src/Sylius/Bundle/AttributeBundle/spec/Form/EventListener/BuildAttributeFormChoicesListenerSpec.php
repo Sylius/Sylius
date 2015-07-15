@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -24,20 +23,20 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    public function let(FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_subscribes_to_pre_set_data_and_pre_submit_events()
+    public function it_subscribes_to_pre_set_data_and_pre_submit_events()
     {
         self::getSubscribedEvents()->shouldReturn(array(
             'form.pre_set_data' => 'buildChoices',
-            'form.pre_bind'     => 'buildConfiguration',
+            'form.pre_bind' => 'buildConfiguration',
         ));
     }
 
-    function it_does_no_not_build_choices_collection_for_null(
+    public function it_does_no_not_build_choices_collection_for_null(
         FormEvent $event,
         Form $form,
         $formFactory
@@ -54,7 +53,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_builds_choices_collection_for_choice_attribute(
+    public function it_builds_choices_collection_for_choice_attribute(
         FormEvent $event,
         Form $form,
         AttributeInterface $attribute,
@@ -68,14 +67,14 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
-                'label'             => 'sylius.form.attribute.choices',
-                'type'              => 'text',
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
-                'mapped'            => false,
-                'data'              => null,
+                'label' => 'sylius.form.attribute.choices',
+                'type' => 'text',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
+                'mapped' => false,
+                'data' => null,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()
@@ -85,7 +84,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_build_configuration_collection_type(
+    public function it_build_configuration_collection_type(
         FormEvent $event,
         Form $form,
         Form $collectionField,
@@ -97,10 +96,10 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('configuration', 'collection', null, array(
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()

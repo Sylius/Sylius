@@ -25,7 +25,7 @@ interface DelegatingCalculatorInterface
      *
      * @param ShippingSubjectInterface $subject
      *
-     * @return integer
+     * @return int
      */
     public function calculate(ShippingSubjectInterface $subject);
 }

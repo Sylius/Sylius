@@ -34,7 +34,7 @@ class CartBlamerListener
     private $cartProvider;
 
     /**
-     * @param ObjectManager $cartManager
+     * @param ObjectManager         $cartManager
      * @param CartProviderInterface $cartProvider
      */
     public function __construct(ObjectManager $cartManager, CartProviderInterface $cartProvider)

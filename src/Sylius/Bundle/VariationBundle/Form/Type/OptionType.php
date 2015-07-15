@@ -54,7 +54,7 @@ class OptionType extends AbstractResourceType
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_option_translation', $this->variableName),
-                'label'    => 'sylius.form.option.presentation',
+                'label' => 'sylius.form.option.presentation',
             ))
             ->add('values', 'collection', array(
                 'type' => sprintf('sylius_%s_option_value', $this->variableName),

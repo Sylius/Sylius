@@ -14,7 +14,6 @@ namespace Sylius\Component\Core\Repository;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
@@ -53,7 +52,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * Gets revenue group by date
-     * between particular dates
+     * between particular dates.
      *
      * @param array $configuration
      *
@@ -63,7 +62,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * Gets number of orders group by date
-     * between particular dates
+     * between particular dates.
      * 
      * @param array $configuration
      *

@@ -60,8 +60,8 @@ class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareIn
         parent::__construct($factory);
 
         $this->paymentRepository = $paymentRepository;
-        $this->objectManager     = $objectManager;
-        $this->identifier        = $identifier;
+        $this->objectManager = $objectManager;
+        $this->identifier = $identifier;
     }
 
     /**

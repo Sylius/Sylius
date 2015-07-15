@@ -21,17 +21,17 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterFeeCalculatorsPass');
     }
 
-    function it_implements_compiler_pass_interface()
+    public function it_implements_compiler_pass_interface()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes_with_given_container(ContainerBuilder $container, Definition $feeCalculatorDefinition)
+    public function it_processes_with_given_container(ContainerBuilder $container, Definition $feeCalculatorDefinition)
     {
         $container->hasDefinition('sylius.registry.payment.fee_calculator')->willReturn(true)->shouldBeCalled();
         $container->getDefinition('sylius.registry.payment.fee_calculator')->willReturn($feeCalculatorDefinition)->shouldBeCalled();
@@ -49,7 +49,7 @@ class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_does_not_process_if_container_has_no_proper_definition(ContainerBuilder $container)
+    public function it_does_not_process_if_container_has_no_proper_definition(ContainerBuilder $container)
     {
         $container->hasDefinition('sylius.registry.payment.fee_calculator')->willReturn(false)->shouldBeCalled();
         $container->getDefinition('sylius.registry.payment.fee_calculator')->shouldNotBeCalled();
@@ -57,7 +57,7 @@ class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_throws_exception_if_any_fee_calculator_has_improper_attributes(ContainerBuilder $container, Definition $feeCalculatorDefinition)
+    public function it_throws_exception_if_any_fee_calculator_has_improper_attributes(ContainerBuilder $container, Definition $feeCalculatorDefinition)
     {
         $container->hasDefinition('sylius.registry.payment.fee_calculator')->willReturn(true)->shouldBeCalled();
         $container->getDefinition('sylius.registry.payment.fee_calculator')->willReturn($feeCalculatorDefinition)->shouldBeCalled();

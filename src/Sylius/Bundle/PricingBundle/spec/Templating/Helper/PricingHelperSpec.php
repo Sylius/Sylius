@@ -19,17 +19,17 @@ use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
  */
 class PricingHelperSpec extends ObjectBehavior
 {
-    function let(DelegatingCalculatorInterface $calculator)
+    public function let(DelegatingCalculatorInterface $calculator)
     {
         $this->beConstructedWith($calculator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper');
     }
 
-    function it_is_a_templating_helper()
+    public function it_is_a_templating_helper()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }

@@ -54,7 +54,7 @@ class ZoneType extends AbstractResourceType
             ))
             ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
-                'label'            => false,
+                'label' => false,
                 'button_add_label' => 'sylius.zone.add_member',
             ))
         ;
@@ -62,10 +62,10 @@ class ZoneType extends AbstractResourceType
         if (!empty($this->scopeChoices)) {
             $builder
                 ->add('scope', 'choice', array(
-                    'label'       => 'sylius.form.zone.scope',
+                    'label' => 'sylius.form.zone.scope',
                     'empty_value' => 'sylius.form.zone.select_scope',
-                    'required'    => false,
-                    'choices'     => $this->scopeChoices,
+                    'required' => false,
+                    'choices' => $this->scopeChoices,
                 ))
             ;
         }

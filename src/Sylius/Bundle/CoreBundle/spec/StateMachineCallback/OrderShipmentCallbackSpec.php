@@ -24,17 +24,17 @@ use Sylius\Component\Shipping\ShipmentTransitions;
  */
 class OrderShipmentCallbackSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    public function let(FactoryInterface $factory)
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\OrderShipmentCallback');
     }
 
-    function it_updates_order_state(
+    public function it_updates_order_state(
         $factory,
         ShipmentInterface $shipment,
         OrderInterface $order,
@@ -53,7 +53,7 @@ class OrderShipmentCallbackSpec extends ObjectBehavior
         $this->updateOrderShippingState($order);
     }
 
-    function it_does_not_update_order_state_if_one_shipment_is_not_shipped(
+    public function it_does_not_update_order_state_if_one_shipment_is_not_shipped(
         $factory,
         ShipmentInterface $shipment,
         OrderInterface $order,

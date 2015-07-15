@@ -19,22 +19,22 @@ use Sylius\Component\Shipping\Model\RuleInterface;
  */
 class NonExistingRuleCheckerExceptionSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(RuleInterface::TYPE_ITEM_TOTAL);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Checker\Registry\NonExistingRuleCheckerException');
     }
 
-    function it_is_an_exception()
+    public function it_is_an_exception()
     {
         $this->shouldHaveType('Exception');
     }
 
-    function it_is_a_invalid_argument_exception()
+    public function it_is_a_invalid_argument_exception()
     {
         $this->shouldHaveType('InvalidArgumentException');
     }

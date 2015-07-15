@@ -25,22 +25,22 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $feeCalculatorRegistry, FormFactoryInterface $factory)
+    public function let(ServiceRegistryInterface $feeCalculatorRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($feeCalculatorRegistry, $factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber');
     }
 
-    function it_implements_event_subscriber_interface()
+    public function it_implements_event_subscriber_interface()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_pre_sets_data(
+    public function it_pre_sets_data(
         $factory,
         $feeCalculatorRegistry,
         FeeCalculatorInterface $feeCalculator,
@@ -74,21 +74,21 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_does_not_process_if_event_has_no_data_while_pre_set(FormEvent $event)
+    public function it_does_not_process_if_event_has_no_data_while_pre_set(FormEvent $event)
     {
         $event->getData()->willReturn(null)->shouldBeCalled();
 
         $this->preSetData($event)->shouldReturn(null);
     }
 
-    function it_throws_exception_if_event_data_is_not_payment_method_object_while_pre_set(FormEvent $event)
+    public function it_throws_exception_if_event_data_is_not_payment_method_object_while_pre_set(FormEvent $event)
     {
         $event->getData()->willReturn('badObject')->shouldBeCalled();
 
         $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Payment\Model\PaymentMethodInterface'))->during('preSetData', array($event));
     }
 
-    function it_is_triggered_pre_bind(
+    public function it_is_triggered_pre_bind(
         $factory,
         $feeCalculatorRegistry,
         FeeCalculatorInterface $feeCalculator,
@@ -122,7 +122,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
         $this->preBind($event);
     }
 
-    function it_does_not_process_if_event_data_is_empty_or_has_no_fee_calculator_field_while_pre_bind(FormEvent $event)
+    public function it_does_not_process_if_event_data_is_empty_or_has_no_fee_calculator_field_while_pre_bind(FormEvent $event)
     {
         $event->getData()->willReturn(array())->shouldBeCalled();
 

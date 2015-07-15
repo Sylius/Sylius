@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ResourceExtensionSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router, Parameters $parameters)
+    public function let(RouterInterface $router, Parameters $parameters)
     {
         $this->beConstructedWith(
             $router,
@@ -39,28 +38,28 @@ class ResourceExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Twig\ResourceExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }
 
-    function it_should_fetch_request(GetResponseEvent $event)
+    public function it_should_fetch_request(GetResponseEvent $event)
     {
         $this->fetchRequest($event);
     }
 
-    function it_should_define_twig_function()
+    public function it_should_define_twig_function()
     {
         $this->getFunctions()->shouldBeArray();
         $this->getFunctions()->shouldHaveCount(2);
     }
 
-    function it_should_render_a_sorting_link(
+    public function it_should_render_a_sorting_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -89,7 +88,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
     }
 
-    function it_should_default_to_the_property_as_the_label(
+    public function it_should_default_to_the_property_as_the_label(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -118,7 +117,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName');
     }
 
-    function it_should_render_a_sorting_desc_link(
+    public function it_should_render_a_sorting_desc_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -148,7 +147,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_asc_link(
+    public function it_should_render_a_sorting_asc_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -177,7 +176,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'otherName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_link_with_custom_options(
+    public function it_should_render_a_sorting_link_with_custom_options(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -212,9 +211,9 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_not_render_sorting_link_when_not_sortable(
-        Request $request, 
-        GetResponseEvent $event, 
+    public function it_should_not_render_sorting_link_when_not_sortable(
+        Request $request,
+        GetResponseEvent $event,
         \Twig_Environment $twig,
         $parameters
     ) {
@@ -231,7 +230,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName')->shouldReturn('fieldName');
     }
 
-    function it_should_default_to_the_property_as_the_label_when_not_sortable(
+    public function it_should_default_to_the_property_as_the_label_when_not_sortable(
         Request $request,
         GetResponseEvent $event,
         \Twig_Environment $twig,
@@ -250,7 +249,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName')->shouldReturn('propertyName');
     }
 
-    function it_should_render_a_paginate_select(
+    public function it_should_render_a_paginate_select(
         Request $request,
         GetResponseEvent $event,
         Pagerfanta $paginator,
@@ -280,7 +279,7 @@ class ResourceExtensionSpec extends ObjectBehavior
                     'paginate' => $limit,
                     '_sylius' => array('paginate' => '$paginate'),
                 )
-            )->willReturn('?paginate=' . $limit);
+            )->willReturn('?paginate='.$limit);
         }
 
         $twig->render('SyliusResourceBundle:Twig:paginate.html.twig', array(
@@ -295,7 +294,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderPaginateSelect($twig, $paginator, array(10, 20));
     }
 
-    function it_should_render_a_paginate_select_with_custom_options(
+    public function it_should_render_a_paginate_select_with_custom_options(
         Request $request,
         GetResponseEvent $event,
         Pagerfanta $paginator,
@@ -326,7 +325,7 @@ class ResourceExtensionSpec extends ObjectBehavior
                     'paginate' => $limit,
                     '_sylius' => array('paginate' => '$paginate'),
                 )
-            )->willReturn('?paginate=' . $limit . '&params=value');
+            )->willReturn('?paginate='.$limit.'&params=value');
         }
 
         $twig->render('SyliusResourceBundle:Twig:newpaginate.html.twig', array(
@@ -345,7 +344,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_have_a_name()
+    public function it_should_have_a_name()
     {
         $this->getName()->shouldReturn('sylius_resource');
     }

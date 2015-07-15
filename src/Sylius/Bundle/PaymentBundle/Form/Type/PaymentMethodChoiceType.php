@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -73,12 +71,12 @@ class PaymentMethodChoiceType extends ResourceChoiceType
             return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
                 return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
             };
-        };;
+        };
 
         $resolver
             ->setDefaults(array(
                 'query_builder' => $queryBuilder,
-                'disabled'      => false,
+                'disabled' => false,
             ))
         ;
     }

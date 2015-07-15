@@ -61,14 +61,14 @@ class PaymentMethodType extends AbstractResourceType
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_method.description',
+                'label' => 'sylius.form.payment_method.description',
             ))
             ->add('gateway', 'sylius_payment_gateway_choice', array(
                 'label' => 'sylius.form.payment_method.gateway',
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_method.enabled',
+                'label' => 'sylius.form.payment_method.enabled',
             ))
             ->add('feeCalculator', 'sylius_fee_calculator_choice', array(
                 'label' => 'sylius.form.payment.fee_calculator',

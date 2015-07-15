@@ -21,17 +21,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderInventoryListenerSpec extends ObjectBehavior
 {
-    function let(InventoryHandlerInterface $inventoryHandler)
+    public function let(InventoryHandlerInterface $inventoryHandler)
     {
         $this->beConstructedWith($inventoryHandler);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
 
-    function it_creates_inventory_units(
+    public function it_creates_inventory_units(
             InventoryHandlerInterface $inventoryHandler,
             GenericEvent $event,
             OrderItemInterface $item

@@ -15,22 +15,22 @@ use PhpSpec\ObjectBehavior;
 
 class ProductVariantTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Variant', array(), 'product');
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_extend_Sylius_variant_form_type()
+    public function it_should_extend_Sylius_variant_form_type()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Form\Type\VariantType');
     }

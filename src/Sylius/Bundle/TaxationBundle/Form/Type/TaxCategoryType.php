@@ -32,7 +32,7 @@ class TaxCategoryType extends AbstractResourceType
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.tax_category.description',
+                'label' => 'sylius.form.tax_category.description',
             ))
         ;
     }

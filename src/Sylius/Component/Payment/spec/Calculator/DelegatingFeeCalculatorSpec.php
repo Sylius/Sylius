@@ -22,22 +22,22 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class DelegatingFeeCalculatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $serviceRegistry)
+    public function let(ServiceRegistryInterface $serviceRegistry)
     {
         $this->beConstructedWith($serviceRegistry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Payment\Calculator\DelegatingFeeCalculator');
     }
 
-    function it_implements_delegating_fee_calculator_interface()
+    public function it_implements_delegating_fee_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface');
     }
 
-    function it_delegates_calculation_to_proper_calculator(
+    public function it_delegates_calculation_to_proper_calculator(
         PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod,
         FeeCalculatorInterface $feeCalculator,
@@ -55,10 +55,10 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
         $this->calculate($payment)->shouldReturn(150);
     }
 
-    function it_throws_exception_if_passed_payment_has_no_payment_method_defined(PaymentSubjectInterface $payment)
+    public function it_throws_exception_if_passed_payment_has_no_payment_method_defined(PaymentSubjectInterface $payment)
     {
         $payment->getMethod()->willReturn(null);
 
-        $this->shouldThrow(new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured."))->during("calculate", array($payment));
+        $this->shouldThrow(new \InvalidArgumentException('Cannot calculate fee for payment without payment method configured.'))->during('calculate', array($payment));
     }
 }

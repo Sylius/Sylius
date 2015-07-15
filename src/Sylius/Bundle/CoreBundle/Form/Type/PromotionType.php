@@ -30,9 +30,9 @@ class PromotionType extends BasePromotionType
 
         $builder
             ->add('channels', 'sylius_channel_choice', array(
-                'multiple'    => true,
-                'expanded'    => true,
-                'label'       => 'sylius.form.promotion.channels',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.promotion.channels',
             ))
         ;
     }

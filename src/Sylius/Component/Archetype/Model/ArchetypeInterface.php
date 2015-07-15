@@ -26,14 +26,14 @@ use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
  */
 interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslationInterface
 {
-     /**
+    /**
      * Get id.
      *
      * @return int
      */
     public function getId();
-    
-    /**
+
+/**
      * Returns all prototype attributes.
      *
      * @return Collection|BaseAttributeInterface[]
@@ -103,12 +103,12 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      *
      * @param BaseOptionInterface $option
      *
-     * @return boolean
+     * @return bool
      */
     public function hasOption(BaseOptionInterface $option);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasParent();
 
@@ -121,8 +121,8 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      * @return null|ArchetypeInterface
      */
     public function getParent();
-    
-    /**
+
+/**
      * Get code.
      *
      * @return string

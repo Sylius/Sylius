@@ -39,7 +39,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     protected $inventoryUnits;
 
     /**
-     * Promotions applied
+     * Promotions applied.
      *
      * @var Collection|BasePromotionInterface[]
      */

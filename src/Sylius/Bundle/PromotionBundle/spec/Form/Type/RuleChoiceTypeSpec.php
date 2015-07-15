@@ -22,25 +22,25 @@ class RuleChoiceTypeSpec extends ObjectBehavior
 {
     private $choices = array(
         RuleInterface::TYPE_ITEM_TOTAL => 'Order total',
-        RuleInterface::TYPE_ITEM_COUNT => 'Order items count'
+        RuleInterface::TYPE_ITEM_COUNT => 'Order items count',
     );
 
-    function let()
+    public function let()
     {
         $this->beConstructedWith($this->choices);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleChoiceType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_set_rule_types_to_choose_from(OptionsResolverInterface $resolver)
+    public function it_should_set_rule_types_to_choose_from(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('choices' => $this->choices))->shouldBeCalled();
 

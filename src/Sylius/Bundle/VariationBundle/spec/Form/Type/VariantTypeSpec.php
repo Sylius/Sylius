@@ -19,40 +19,40 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class VariantTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Variant', array(), 'server');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Form\Type\VariantType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Variant',
-                'validation_groups' => array()
+                'validation_groups' => array(),
             ))
             ->shouldBeCalled();
 
         $resolver
             ->setDefaults(array(
-                'master' => false
+                'master' => false,
             ))
             ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_server_variant');
     }

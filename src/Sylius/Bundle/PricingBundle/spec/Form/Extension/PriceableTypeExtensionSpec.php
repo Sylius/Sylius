@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormView;
 
 class PriceableTypeExtensionSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $calculatorRegistry, EventSubscriberInterface $subscriber)
+    public function let(ServiceRegistryInterface $calculatorRegistry, EventSubscriberInterface $subscriber)
     {
         $this->beConstructedWith('pricing_form', $calculatorRegistry, $subscriber);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension');
     }
 
-    function it_builds_form(
+    public function it_builds_form(
         $calculatorRegistry,
         $subscriber,
         FormBuilderInterface $builder,
@@ -58,7 +58,7 @@ class PriceableTypeExtensionSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_builds_view(FormView $view, FormInterface $form, FormConfigInterface $formConfig)
+    public function it_builds_view(FormView $view, FormInterface $form, FormConfigInterface $formConfig)
     {
         $form->getConfig()->shouldBeCalled()->willReturn($formConfig);
         $formConfig->getAttribute('prototypes')->shouldBeCalled()->willReturn(array('type' => $form));
@@ -68,7 +68,7 @@ class PriceableTypeExtensionSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    function it_extends_a_form_type()
+    public function it_extends_a_form_type()
     {
         $this->getExtendedType()->shouldReturn('pricing_form');
     }

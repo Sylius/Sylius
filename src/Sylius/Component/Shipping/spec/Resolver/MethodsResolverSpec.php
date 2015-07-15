@@ -22,24 +22,24 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class MethodsResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectRepository $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Resolver\MethodsResolver');
     }
 
-    function it_implements_Sylius_shipping_methods_resolver_interface()
+    public function it_implements_Sylius_shipping_methods_resolver_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Resolver\MethodsResolverInterface');
     }
 
-    function it_returns_all_methods_eligible_for_given_subject(
+    public function it_returns_all_methods_eligible_for_given_subject(
         $methodRepository,
         $eligibilityChecker,
         ShippingSubjectInterface $subject,
@@ -57,7 +57,7 @@ class MethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($subject)->shouldReturn(array($method1, $method2));
     }
 
-    function it_filters_the_methods_pool_by_given_criteria(
+    public function it_filters_the_methods_pool_by_given_criteria(
         $methodRepository,
         $eligibilityChecker,
         ShippingSubjectInterface $subject,

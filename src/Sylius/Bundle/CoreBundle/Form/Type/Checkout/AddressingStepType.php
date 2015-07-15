@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -67,9 +66,9 @@ class AddressingStepType extends AbstractResourceType
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
             ->add('billingAddress', 'sylius_address')
             ->add('differentBillingAddress', 'checkbox', array(
-                'mapped'   => false,
+                'mapped' => false,
                 'required' => false,
-                'label'    => 'sylius.form.checkout.addressing.different_billing_address'
+                'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ))
         ;
     }
@@ -84,7 +83,7 @@ class AddressingStepType extends AbstractResourceType
         $resolver
             ->setDefaults(array(
                 'customer' => null,
-                'cascade_validation' => true
+                'cascade_validation' => true,
             ))
         ;
     }

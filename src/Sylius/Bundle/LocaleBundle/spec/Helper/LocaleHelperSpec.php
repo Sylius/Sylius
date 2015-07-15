@@ -19,22 +19,22 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
  */
 class LocaleHelperSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext)
+    public function let(LocaleContextInterface $localeContext)
     {
         $this->beConstructedWith($localeContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_returns_the_currently_selected_locale_via_context($localeContext)
+    public function it_returns_the_currently_selected_locale_via_context($localeContext)
     {
         $localeContext->getLocale()->willReturn('fr_FR');
 

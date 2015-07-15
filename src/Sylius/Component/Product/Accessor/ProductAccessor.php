@@ -16,7 +16,7 @@ use Symfony\Component\PropertyAccess\Exception;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
- * Product Accessor
+ * Product Accessor.
  *
  * This class uses the property accessor to dynamically translate getters to values.
  * In case of sylius it extends the default functionality to include options and attributes.

@@ -18,22 +18,22 @@ use PhpSpec\ObjectBehavior;
  */
 class SyliusMoneyTransformerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\DataTransformer\SyliusMoneyTransformer');
     }
 
-    function it_extends_money_to_localized_string_transformer_class()
+    public function it_extends_money_to_localized_string_transformer_class()
     {
         $this->shouldHaveType('Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer');
     }
 
-    function it_returns_null_if_empty_string_given()
+    public function it_returns_null_if_empty_string_given()
     {
         $this->reverseTransform('')->shouldReturn(null);
     }
 
-    function it_converts_string_to_an_integer()
+    public function it_converts_string_to_an_integer()
     {
         $this->beConstructedWith(null, null, null, 100);
         $this->reverseTransform('4.10')->shouldReturn(410);

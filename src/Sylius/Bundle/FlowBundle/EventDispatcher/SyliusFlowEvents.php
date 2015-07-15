@@ -19,6 +19,6 @@ namespace Sylius\Bundle\FlowBundle\EventDispatcher;
 final class SyliusFlowEvents
 {
     const PROCESS_START = 'sylius.process.start';
-    const STEP_DISPLAY  = 'sylius.step.display';
-    const STEP_FORWARD  = 'sylius.step.forward';
+    const STEP_DISPLAY = 'sylius.step.display';
+    const STEP_FORWARD = 'sylius.step.forward';
 }

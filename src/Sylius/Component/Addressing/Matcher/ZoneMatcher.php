@@ -74,7 +74,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -142,7 +142,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Gets all zones
+     * Gets all zones.
      *
      * @param string|null $scope
      *

@@ -15,27 +15,27 @@ use PhpSpec\ObjectBehavior;
 
 class ZoneTypeChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith();
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_zone_type_choice');
     }
 
-    function it_has_a_parent_type()
+    public function it_has_a_parent_type()
     {
         $this->getParent()->shouldReturn('choice');
     }

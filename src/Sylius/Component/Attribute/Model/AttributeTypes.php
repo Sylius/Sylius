@@ -18,22 +18,22 @@ namespace Sylius\Component\Attribute\Model;
  */
 class AttributeTypes
 {
-    const CHECKBOX   = 'checkbox';
-    const CHOICE     = 'choice';
-    const MONEY      = 'money';
-    const NUMBER     = 'number';
+    const CHECKBOX = 'checkbox';
+    const CHOICE = 'choice';
+    const MONEY = 'money';
+    const NUMBER = 'number';
     const PERCENTAGE = 'percent';
-    const TEXT       = 'text';
+    const TEXT = 'text';
 
     public static function getChoices()
     {
         return array(
-            self::CHECKBOX   => 'Checkbox',
-            self::CHOICE     => 'Choice',
-            self::MONEY      => 'Money',
-            self::NUMBER     => 'Number',
+            self::CHECKBOX => 'Checkbox',
+            self::CHOICE => 'Choice',
+            self::MONEY => 'Money',
+            self::NUMBER => 'Number',
             self::PERCENTAGE => 'Percentage',
-            self::TEXT       => 'Text',
+            self::TEXT => 'Text',
         );
     }
 }

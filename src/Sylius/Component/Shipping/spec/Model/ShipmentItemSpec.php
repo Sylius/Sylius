@@ -20,33 +20,33 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
  */
 class ShipmentItemSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Model\ShipmentItem');
     }
 
-    function it_implements_Sylius_shipment_item_interface()
+    public function it_implements_Sylius_shipment_item_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentItemInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_belong_to_shipment_by_default()
+    public function it_does_not_belong_to_shipment_by_default()
     {
         $this->getShipment()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_shipment(ShipmentInterface $shipment)
+    public function it_allows_assigning_itself_to_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    function it_allows_detaching_itself_from_shipment(ShipmentInterface $shipment)
+    public function it_allows_detaching_itself_from_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
@@ -55,34 +55,34 @@ class ShipmentItemSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
-    function it_has_no_shippable_defined_by_default()
+    public function it_has_no_shippable_defined_by_default()
     {
         $this->getShippable()->shouldReturn(null);
     }
 
-    function it_allows_defining_shippable(ShippableInterface $shippable)
+    public function it_allows_defining_shippable(ShippableInterface $shippable)
     {
         $this->setShippable($shippable);
         $this->getShippable()->shouldReturn($shippable);
     }
 
-    function it_has_ready_state_by_default()
+    public function it_has_ready_state_by_default()
     {
         $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_READY);
     }
 
-    function its_state_is_mutable()
+    public function its_state_is_mutable()
     {
         $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
         $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -90,12 +90,12 @@ class ShipmentItemSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 

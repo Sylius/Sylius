@@ -39,7 +39,7 @@ class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface
 
     /**
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param SettingsManagerInterface $settingsManager
+     * @param SettingsManagerInterface      $settingsManager
      */
     public function __construct(AuthorizationCheckerInterface $authorizationChecker, SettingsManagerInterface $settingsManager)
     {

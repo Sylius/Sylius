@@ -28,25 +28,25 @@ class ChannelType extends AbstractResourceType
     {
         $builder
             ->add('code', 'text', array(
-                'label'    => 'sylius.form.channel.code',
+                'label' => 'sylius.form.channel.code',
             ))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.channel.name',
             ))
             ->add('description', 'text', array(
-                'label'    => 'sylius.form.channel.description',
+                'label' => 'sylius.form.channel.description',
                 'required' => false,
             ))
             ->add('enabled', 'checkbox', array(
-                'label'    => 'sylius.form.channel.enabled',
+                'label' => 'sylius.form.channel.enabled',
                 'required' => false,
             ))
             ->add('url', 'text', array(
-                'label'    => 'sylius.form.channel.url',
+                'label' => 'sylius.form.channel.url',
                 'required' => false,
             ))
             ->add('color', 'text', array(
-                'label'    => 'sylius.form.channel.color',
+                'label' => 'sylius.form.channel.color',
                 'required' => false,
             ))
         ;

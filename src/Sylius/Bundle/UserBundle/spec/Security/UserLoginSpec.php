@@ -16,7 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
@@ -26,22 +25,22 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
  */
 class UserLoginSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
+    public function let(SecurityContextInterface $securityContext, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
     {
         $this->beConstructedWith($securityContext, $userChecker, $eventDispatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Security\UserLogin');
     }
 
-    function it_implements_user_login_interface()
+    public function it_implements_user_login_interface()
     {
         $this->shouldImplement('Sylius\Bundle\UserBundle\Security\UserLoginInterface');
     }
 
-    function it_throws_exception_and_does_not_log_user_in_when_user_check_will_throw_exception($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
+    public function it_throws_exception_and_does_not_log_user_in_when_user_check_will_throw_exception($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
     {
         $user->getRoles()->willReturn(array('ROLE_TEST'));
         $userChecker->checkPreAuth($user)->willThrow('Symfony\Component\Security\Core\Exception\DisabledException');
@@ -52,7 +51,7 @@ class UserLoginSpec extends ObjectBehavior
         $this->shouldThrow('Symfony\Component\Security\Core\Exception\DisabledException')->during('login', array($user));
     }
 
-    function it_logs_user_in($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
+    public function it_logs_user_in($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
     {
         $user->getRoles()->willReturn(array('ROLE_TEST'));
 

@@ -27,9 +27,9 @@ class UserResetPasswordType extends AbstractType
     {
         $builder
             ->add('newPassword', 'repeated', array(
-                'type'            => 'password',
-                'first_options'   => array('label' => 'sylius.form.user.password.label'),
-                'second_options'  => array('label' => 'sylius.form.user.password.confirmation'),
+                'type' => 'password',
+                'first_options' => array('label' => 'sylius.form.user.password.label'),
+                'second_options' => array('label' => 'sylius.form.user.password.confirmation'),
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ))
         ;

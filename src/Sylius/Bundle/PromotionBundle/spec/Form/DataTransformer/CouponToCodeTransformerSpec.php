@@ -21,24 +21,24 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 class CouponToCodeTransformerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectRepository $couponRepository,
         EventDispatcher $dispatcher
     ) {
         $this->beConstructedWith($couponRepository, $dispatcher);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer');
     }
 
-    function it_should_return_empty_string_if_null_transormed()
+    public function it_should_return_empty_string_if_null_transormed()
     {
         $this->transform(null)->shouldReturn('');
     }
 
-    function it_should_complain_if_not_Sylius_coupon_transformed()
+    public function it_should_complain_if_not_Sylius_coupon_transformed()
     {
         $this
             ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
@@ -46,19 +46,19 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_transform_coupon_into_its_code(CouponInterface $coupon)
+    public function it_should_transform_coupon_into_its_code(CouponInterface $coupon)
     {
         $coupon->getCode()->willReturn('C123');
 
         $this->transform($coupon)->shouldReturn('C123');
     }
 
-    function it_should_return_null_if_empty_string_reverse_transformed()
+    public function it_should_return_null_if_empty_string_reverse_transformed()
     {
         $this->reverseTransform('')->shouldReturn(null);
     }
 
-    function it_should_return_null_if_coupon_not_found_on_reverse_transform($couponRepository)
+    public function it_should_return_null_if_coupon_not_found_on_reverse_transform($couponRepository)
     {
         $couponRepository
             ->findOneBy(array('code' => 'FREEIPHONE5'))
@@ -69,7 +69,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         $this->reverseTransform('FREEIPHONE5')->shouldReturn(null);
     }
 
-    function it_should_return_coupon_if_found_on_reverse_transform(
+    public function it_should_return_coupon_if_found_on_reverse_transform(
         ObjectRepository$couponRepository,
         CouponInterface $coupon
     ) {

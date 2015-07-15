@@ -19,9 +19,9 @@ namespace Sylius\Component\Mailer\Model;
 class Email implements EmailInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -65,14 +65,14 @@ class Email implements EmailInterface
     protected $senderAddress;
 
     /**
-     * Creation date
+     * Creation date.
      *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
+     * Update date.
      *
      * @var \DateTime
      */
@@ -84,9 +84,9 @@ class Email implements EmailInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

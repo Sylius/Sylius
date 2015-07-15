@@ -28,7 +28,7 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectManager $objectManager,
         FactoryInterface $factory,
         PaymentInterface $payment
@@ -37,17 +37,17 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->setPayment($payment);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Paypal\Action\NotifyOrderAction');
     }
 
-    function it_extends_payum_payment_aware_action()
+    public function it_extends_payum_payment_aware_action()
     {
         $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
-    function it_should_supports_secured_notify_request_with_order_model(
+    public function it_should_supports_secured_notify_request_with_order_model(
         Notify $request,
         PaymentModelInterface $payment,
         TokenInterface $token
@@ -58,27 +58,27 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->supports($request)->shouldReturn(true);
     }
 
-    function it_should_support_only_model_aware_request(ModelAwareInterface $request)
+    public function it_should_support_only_model_aware_request(ModelAwareInterface $request)
     {
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_notify_request_with_not_payment_model(
+    public function it_should_not_support_notify_request_with_not_payment_model(
         Notify $request,
         TokenInterface $token
     ) {
-        $request->getModel()->willReturn(new \stdClass);
+        $request->getModel()->willReturn(new \stdClass());
         $request->getToken()->willReturn($token);
 
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_anything_not_model_request()
+    public function it_should_not_support_anything_not_model_request()
     {
-        $this->supports(new \stdClass)->shouldReturn(false);
+        $this->supports(new \stdClass())->shouldReturn(false);
     }
 
-    function it_throws_exception_if_executing_not_supported_request()
+    public function it_throws_exception_if_executing_not_supported_request()
     {
         $this
             ->shouldThrow('Payum\Core\Exception\RequestNotSupportedException')
@@ -86,7 +86,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         ;
     }
 
-    function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+    public function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         $factory,
         Notify $request,
         OrderInterface $order,
@@ -120,7 +120,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->execute($request);
     }
 
-    function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+    public function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         $factory,
         Notify $request,
         OrderInterface $order,

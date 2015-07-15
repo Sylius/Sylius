@@ -40,7 +40,7 @@ interface ProductInterface extends
      *             User selects the values and we match them to variant.
      */
     const VARIANT_SELECTION_CHOICE = 'choice';
-    const VARIANT_SELECTION_MATCH  = 'match';
+    const VARIANT_SELECTION_MATCH = 'match';
 
     /**
      * Get product SKU.

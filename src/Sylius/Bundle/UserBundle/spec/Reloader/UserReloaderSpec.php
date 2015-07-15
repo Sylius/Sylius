@@ -20,22 +20,22 @@ use PhpSpec\ObjectBehavior;
  */
 class UserReloaderSpec extends ObjectBehavior
 {
-    function let(ObjectManager $objectManager)
+    public function let(ObjectManager $objectManager)
     {
         $this->beConstructedWith($objectManager);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Reloader\UserReloader');
     }
 
-    function it_implements_user_reloader_interface()
+    public function it_implements_user_reloader_interface()
     {
         $this->shouldImplement('Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface');
     }
 
-    function it_reloads_user($objectManager, UserInterface $user)
+    public function it_reloads_user($objectManager, UserInterface $user)
     {
         $objectManager->refresh($user)->shouldBeCalled();
 

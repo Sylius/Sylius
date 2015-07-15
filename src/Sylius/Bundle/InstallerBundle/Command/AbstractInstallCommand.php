@@ -58,7 +58,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isDebug()
     {
@@ -66,8 +66,8 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array $headers
-     * @param array $rows
+     * @param array           $headers
+     * @param array           $rows
      * @param OutputInterface $output
      */
     protected function renderTable(array $headers, array $rows, OutputInterface $output)
@@ -82,7 +82,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param OutputInterface $output
-     * @param int $length
+     * @param int             $length
      *
      * @return ProgressHelper
      */
@@ -99,10 +99,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array $commands
-     * @param InputInterface $input
+     * @param array           $commands
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @param boolean $displayProgress
+     * @param bool            $displayProgress
      */
     protected function runCommands(array $commands, InputInterface $input, OutputInterface $output, $displayProgress = true)
     {
@@ -137,9 +137,9 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param OutputInterface $output
-     * @param string $question
-     * @param array $constraints
-     * @param mixed $default
+     * @param string          $question
+     * @param array           $constraints
+     * @param mixed           $default
      *
      * @return mixed
      */
@@ -169,7 +169,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param mixed $value
      * @param array $constraints
      *
-     * @return boolean
+     * @return bool
      */
     protected function validate($value, array $constraints = array())
     {
@@ -177,7 +177,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param OutputInterface $output
+     * @param OutputInterface         $output
      * @param ConstraintViolationList $errors
      */
     protected function writeErrors(OutputInterface $output, ConstraintViolationList $errors)

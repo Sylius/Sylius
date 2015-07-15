@@ -22,22 +22,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PermissionTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Permission', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Form\Type\PermissionType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    public function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('description', 'textarea', Argument::any())
@@ -60,12 +60,12 @@ class PermissionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Permission',
-                'validation_groups' => array('sylius')
+                'data_class' => 'Permission',
+                'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
         ;
@@ -73,7 +73,7 @@ class PermissionTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_permission');
     }

@@ -28,7 +28,7 @@ class LoadContactRequestData extends DataFixture
     {
         $contactRequestRepository = $this->getContactRequestRepository();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $contactRequest = $contactRequestRepository->createNew();
 
             $contactRequest->setFirstName($this->faker->firstName());

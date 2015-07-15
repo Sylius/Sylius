@@ -48,7 +48,7 @@ class AddProductAction implements PromotionActionInterface
      */
     public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemRepository = $itemRepository;
         $this->variantRepository = $variantRepository;
     }
 
@@ -110,7 +110,7 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Create promotion item
+     * Create promotion item.
      *
      * @param array $configuration
      *

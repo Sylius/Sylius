@@ -27,7 +27,7 @@ class ShipmentTrackingType extends AbstractResourceType
         $builder
             ->add('tracking', 'text', array(
                 'label' => 'sylius.form.shipment.tracking_code',
-                'attr'  => array(
+                'attr' => array(
                     'placeholder' => 'sylius.form.shipment.tracking_code',
                 ),
             ))

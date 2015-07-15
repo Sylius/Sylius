@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ProductBuilderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ProductInterface $product,
         ObjectManager $productManager,
         RepositoryInterface $productRepository,
@@ -42,12 +42,12 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->create('Black GitHub Mug')->shouldReturn($this);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Builder\ProductBuilder');
     }
 
-    function it_adds_attribute_to_product_if_already_exists(
+    public function it_adds_attribute_to_product_if_already_exists(
         $attributeRepository,
         $attributeValueRepository,
         $product,
@@ -65,7 +65,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->addAttribute('collection', 2013)->shouldReturn($this);
     }
 
-    function it_creates_attribute_if_it_does_not_exist(
+    public function it_creates_attribute_if_it_does_not_exist(
         $attributeRepository,
         $attributeValueRepository,
         $productManager,
@@ -92,7 +92,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->addAttribute('collection', 2013)->shouldReturn($this);
     }
 
-    function it_saves_product($productManager, $product)
+    public function it_saves_product($productManager, $product)
     {
         $productManager->persist($product)->shouldBeCalled();
         $productManager->flush()->shouldBeCalled();
@@ -100,7 +100,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->save()->shouldReturn($product);
     }
 
-    function it_saves_product_without_flushing_if_needed($productManager, $product)
+    public function it_saves_product_without_flushing_if_needed($productManager, $product)
     {
         $productManager->persist($product)->shouldBeCalled();
         $productManager->flush()->shouldNotBeCalled();
@@ -108,7 +108,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->save(false)->shouldReturn($product);
     }
 
-    function it_proxies_undefined_methods_to_product($product)
+    public function it_proxies_undefined_methods_to_product($product)
     {
         $name = 'Black GitHub Mug';
         $description = "Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids";
@@ -120,7 +120,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->setDescription($description)->shouldReturn($this);
     }
 
-    function it_throws_exception_when_product_method_is_not_defined()
+    public function it_throws_exception_when_product_method_is_not_defined()
     {
         $this->shouldThrow(new \BadMethodCallException('Product has no "getFoo()" method.'))->during('getFoo');
     }

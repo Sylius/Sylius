@@ -19,22 +19,22 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  */
 class InsufficientStockExceptionSpec extends ObjectBehavior
 {
-    function let(StockableInterface $stockable)
+    public function let(StockableInterface $stockable)
     {
         $this->beConstructedWith($stockable, 10);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\InsufficientStockException');
     }
 
-    function it_is_an_uderflow_exception()
+    public function it_is_an_uderflow_exception()
     {
         $this->shouldHaveType('\UnderflowException');
     }
 
-    function it_returns_its_stockable()
+    public function it_returns_its_stockable()
     {
         $this->getStockable()->shouldHaveType('Sylius\Component\Inventory\Model\StockableInterface');
     }

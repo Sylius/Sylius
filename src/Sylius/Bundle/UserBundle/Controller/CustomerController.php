@@ -31,7 +31,7 @@ class CustomerController extends ResourceController
     {
         $this->validateAccess();
         $customer = $this->getCustomer();
-        $form     = $this->getForm($customer);
+        $form = $this->getForm($customer);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($customer);
@@ -51,7 +51,7 @@ class CustomerController extends ResourceController
             'SyliusWebBundle:Frontend/Account:Profile/edit.html.twig',
             array(
                 $this->config->getResourceName() => $customer,
-                'form'                           => $form->createView(),
+                'form' => $form->createView(),
             )
         );
     }

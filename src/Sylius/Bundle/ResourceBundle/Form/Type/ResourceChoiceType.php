@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Extending Doctrine document/entity/phpcr_document choice form types
+ * Extending Doctrine document/entity/phpcr_document choice form types.
  *
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
  */
@@ -92,6 +92,7 @@ class ResourceChoiceType extends AbstractType
      * @param string $driver
      *
      * @return string
+     *
      * @throws UnknownDriverException
      */
     protected function getFormTypeForDriver($driver)

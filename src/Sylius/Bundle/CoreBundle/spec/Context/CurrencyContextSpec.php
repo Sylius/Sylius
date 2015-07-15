@@ -18,18 +18,13 @@ use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         StorageInterface $storage,
         CustomerContextInterface $customerContext,
         SettingsManagerInterface $settingsManager,
@@ -43,22 +38,22 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->beConstructedWith($storage, $customerContext, $settingsManager, $customerManager, $channelContext);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Context\CurrencyContext');
     }
 
-    function it_extends_Sylius_currency_context()
+    public function it_extends_Sylius_currency_context()
     {
         $this->shouldHaveType('Sylius\Component\Currency\Context\CurrencyContext');
     }
 
-    function it_gets_default_currency()
+    public function it_gets_default_currency()
     {
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session_if_there_is_no_customer(
+    public function it_gets_currency_from_session_if_there_is_no_customer(
         $customerContext,
         $storage,
         ChannelInterface $channel,
@@ -74,7 +69,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    function it_gets_currency_from_customer(
+    public function it_gets_currency_from_customer(
         CustomerInterface $customer,
         $customerContext
     ) {
@@ -84,7 +79,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
-    function it_sets_currency_to_session_if_there_is_no_customer(
+    public function it_sets_currency_to_session_if_there_is_no_customer(
         $customerContext,
         $storage,
         ChannelInterface $channel,
@@ -100,7 +95,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->setCurrency('PLN');
     }
 
-    function it_sets_currency_to_customer(
+    public function it_sets_currency_to_customer(
         CustomerInterface $customer,
         $customerContext,
         ChannelInterface $channel,

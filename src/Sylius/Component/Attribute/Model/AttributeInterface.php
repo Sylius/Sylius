@@ -27,8 +27,8 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      * @return int
      */
     public function getId();
-    
-    /**
+
+/**
      * Get internal name.
      *
      * @return string

@@ -41,7 +41,7 @@ class FlexibleRateCalculator extends Calculator
             $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
         }
 
-        return (int)($firstItemCost + ($additionalItems * $additionalItemCost));
+        return (int) ($firstItemCost + ($additionalItems * $additionalItemCost));
     }
 
     /**
@@ -71,12 +71,12 @@ class FlexibleRateCalculator extends Calculator
             ))
             ->setRequired(array(
                 'first_item_cost',
-                'additional_item_cost'
+                'additional_item_cost',
             ))
             ->setAllowedTypes(array(
-                'first_item_cost'       => array('numeric'),
-                'additional_item_cost'  => array('numeric'),
-                'additional_item_limit' => array('integer')
+                'first_item_cost' => array('numeric'),
+                'additional_item_cost' => array('numeric'),
+                'additional_item_limit' => array('integer'),
             ))
         ;
     }

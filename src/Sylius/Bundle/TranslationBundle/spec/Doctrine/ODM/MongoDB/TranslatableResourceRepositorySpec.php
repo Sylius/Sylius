@@ -17,7 +17,6 @@ use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\Query\Query;
 use Doctrine\ODM\MongoDB\UnitOfWork;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';
@@ -29,7 +28,7 @@ require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/Trans
  */
 class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         DocumentManager $documentManager,
         UnitOfWork $unitOfWork,
         ClassMetadata $class,
@@ -51,17 +50,17 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($documentManager, $unitOfWork, $class);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository');
     }
 
-    function it_implements_Sylius_repository_interface()
+    public function it_implements_Sylius_repository_interface()
     {
         $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
+    public function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
     {
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $localeProvider->getFallbackLocale()->willReturn('en_US');
@@ -72,7 +71,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
     }
 
-    function it_applies_criteria_when_finding_one($queryBuilder, LocaleProviderInterface $localeProvider)
+    public function it_applies_criteria_when_finding_one($queryBuilder, LocaleProviderInterface $localeProvider)
     {
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
@@ -88,7 +87,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
             $queryBuilder
@@ -107,7 +106,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by($queryBuilder, LocaleProviderInterface $localeProvider)
+    public function it_applies_criteria_when_finding_by($queryBuilder, LocaleProviderInterface $localeProvider)
     {
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
@@ -123,7 +122,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
             $queryBuilder
@@ -142,7 +141,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by_array($queryBuilder, LocaleProviderInterface $localeProvider)
+    public function it_applies_criteria_when_finding_by_array($queryBuilder, LocaleProviderInterface $localeProvider)
     {
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
@@ -172,12 +171,12 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_returns_null_if_there_are_no_resources()
+    public function it_returns_null_if_there_are_no_resources()
     {
         $this->findAll()->shouldReturn(null);
     }
 
-    function it_creates_Pagerfanta_paginator()
+    public function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()
