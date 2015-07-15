@@ -84,3 +84,7 @@ swiftmailer:
     port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
+    encryption: %sylius.mailer.protocol%
+    auth_mode: %sylius.mailer.auth%
+    port: %sylius.mailer.port%
+

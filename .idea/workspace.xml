@@ -18,12 +18,14 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTranslationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTranslationTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeValueTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/spec/Form/Type/AttributeValueTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/Calculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/Calculator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/CalculatorChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/CalculatorChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/CalculatorChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/CalculatorChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/TaxationBundle/Form/Type/CalculatorChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/TaxationBundle/Form/Type/CalculatorChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/TaxationBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/TaxationBundle/spec/Form/Type/CalculatorChoiceTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/CalculatorInterface.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/CalculatorInterface.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/CartItemType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/CartItemType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CartBundle/spec/Form/Type/CartItemTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CartBundle/spec/Form/Type/CartItemTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CartBundle/spec/Form/Type/CartTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CartBundle/spec/Form/Type/CartTypeSpec.php" />
@@ -58,8 +60,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/Form/Type/Calculator/FeeCalculatorChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/Form/Type/Calculator/FeeCalculatorChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/spec/Form/Type/Calculator/FeeCalculatorChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/spec/Form/Type/Calculator/FeeCalculatorChoiceTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/Form/Type/Action/FixedDiscountConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/Form/Type/Action/FixedDiscountConfigurationType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlatRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlatRateCalculator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlatRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlatRateCalculatorSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/FlatRateConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/FlatRateConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlatRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlatRateConfigurationTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlexibleRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/FlexibleRateCalculator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlexibleRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/FlexibleRateCalculatorSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/FlexibleRateConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/FlexibleRateConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlexibleRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/FlexibleRateConfigurationTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/UserBundle/Form/Type/GenderType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/UserBundle/Form/Type/GenderType.php" />
@@ -96,6 +102,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Payment/PaymentMethodChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Payment/PaymentMethodChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentMethodChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentMethodChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/spec/Form/Type/PaymentMethodTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/spec/Form/Type/PaymentMethodTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/PerItemRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/PerItemRateCalculator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/PerItemRateCalculatorSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/spec/Calculator/PerItemRateCalculatorSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/PerItemRateConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/PerItemRateConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/PerItemRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/PerItemRateConfigurationTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/Form/Type/Action/PercentageDiscountConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/Form/Type/Action/PercentageDiscountConfigurationType.php" />
@@ -107,7 +115,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/spec/Form/Type/PromotionTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/spec/Form/Type/PromotionTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ProvinceTypeSpec.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/Type/Renderer/RendererChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/Form/Type/Renderer/RendererChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/RendererChoiceTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ReportBundle/spec/Form/Type/Renderer/RendererChoiceTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/RequestTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ContactBundle/spec/Form/Type/RequestTypeSpec.php" />
@@ -165,8 +172,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/spec/Form/Type/VariantTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumeBasedConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/Form/Type/VolumeBasedConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumeBasedConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/PricingBundle/spec/Form/Type/VolumeBasedConfigurationTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/VolumeRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/VolumeRateCalculator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/VolumeRateConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/VolumeRateConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/VolumeRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/VolumeRateConfigurationTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/WeightRateCalculator.php" afterPath="$PROJECT_DIR$/src/Sylius/Component/Shipping/Calculator/WeightRateCalculator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/WeightRateConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/Form/Type/Calculator/WeightRateConfigurationType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/WeightRateConfigurationTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/spec/Form/Type/Calculator/WeightRateConfigurationTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Pricing/ZoneBasedConfigurationType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Pricing/ZoneBasedConfigurationType.php" />
@@ -177,6 +186,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberZoneTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneMemberZoneTypeSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeSpec.php" afterPath="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/ZoneTypeSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Sylius.iws" />
@@ -199,98 +210,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PermissionEntityType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/RbacBundle/Form/Type/PermissionEntityType.php">
+      <file leaf-file-name="TaxonChoiceType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/TaxonomyBundle/Form/Type/TaxonChoiceType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.25">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.875">
+              <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
               <folding>
-                <element signature="e#265#299#0#PHP" expanded="true" />
+                <element signature="e#269#335#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProvinceChoiceType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php">
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.375">
-              <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+            <state vertical-scroll-proportion="-26.0">
+              <caret line="88" column="29" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ZoneMemberCollectionType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php">
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.375">
-              <caret line="67" column="52" selection-start-line="67" selection-start-column="52" selection-end-line="67" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.1434263">
+              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZoneTypeChoiceType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.375">
-              <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CountryTranslationTypeSpec.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/spec/Form/Type/CountryTranslationTypeSpec.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.5">
-              <caret line="64" column="15" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/ListType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.375">
-              <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserChoiceType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/UserChoiceType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.75">
-              <caret line="44" column="52" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddProductConfigurationType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/AddProductConfigurationType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.625">
-              <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
-              <folding>
-                <element signature="e#272#343#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShippingDiscountConfigurationType.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/ShippingDiscountConfigurationType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4556213">
-              <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
-              <folding>
-                <element signature="e#272#312#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -316,9 +263,7 @@
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/InstallerBundle/Process/Step/ConfigureStep.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Controller/ProvinceController.php" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/ResourceBundle/Form/Type/AbstractResourceType.php" />
-        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/ContentBundle/Form/Type/MenuType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/ContentBundle/Form/Type/StaticContentChoiceType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/CartItemType.php" />
@@ -334,13 +279,18 @@
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/RbacBundle/Form/Type/PermissionEntityType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/RbacBundle/Form/Type/RoleEntityType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/VariationBundle/Form/Type/VariantType.php" />
-        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" />
-        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php" />
-        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/ListType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/UserChoiceType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/AddProductConfigurationType.php" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/ShippingDiscountConfigurationType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Checkout/ShipmentType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/DataFetcher/DataFetcherChoiceType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
       </list>
     </option>
   </component>
@@ -434,8 +384,26 @@
               <option name="myItemId" value="Sylius" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Component" />
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,6 +422,180 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Type" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Type" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaxonomyBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -482,6 +624,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sylius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -548,11 +708,11 @@
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30940595" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30940595" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2029735" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26179704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -582,41 +742,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/InstallerBundle/Persister/YamlPersister.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Api/OrderType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Api/ProductType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Filter/ProductFilterType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.375">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Api/OrderItemType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/SettingsBundle/Form/Factory/SettingsFormFactoryInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -760,30 +885,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/ResourceBundle/Form/Type/AbstractResourceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.416667">
-          <caret line="47" column="36" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="36" />
-          <folding>
-            <element signature="e#269#309#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/ContentBundle/Form/Type/MenuType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.625">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#268#332#0#PHP" expanded="true" />
+            <element signature="e#268#332#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -793,7 +900,7 @@
         <state vertical-scroll-proportion="-4.25">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#268#330#0#PHP" expanded="true" />
+            <element signature="e#268#330#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -803,7 +910,7 @@
         <state vertical-scroll-proportion="-6.25">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#265#337#0#PHP" expanded="true" />
+            <element signature="e#265#337#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,7 +920,7 @@
         <state vertical-scroll-proportion="-4.875">
           <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
           <folding>
-            <element signature="e#274#338#0#PHP" expanded="true" />
+            <element signature="e#274#338#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -823,7 +930,7 @@
         <state vertical-scroll-proportion="-26.875">
           <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
           <folding>
-            <element signature="e#265#340#0#PHP" expanded="true" />
+            <element signature="e#265#340#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -833,7 +940,7 @@
         <state vertical-scroll-proportion="-6.875">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#274#338#0#PHP" expanded="true" />
+            <element signature="e#274#338#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -843,7 +950,7 @@
         <state vertical-scroll-proportion="-6.875">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#273#370#0#PHP" expanded="true" />
+            <element signature="e#273#370#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -861,7 +968,7 @@
         <state vertical-scroll-proportion="-10.625">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#268#330#0#PHP" expanded="true" />
+            <element signature="e#268#330#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -871,7 +978,7 @@
         <state vertical-scroll-proportion="-6.875">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#270#349#0#PHP" expanded="true" />
+            <element signature="e#270#349#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -881,7 +988,7 @@
         <state vertical-scroll-proportion="-6.875">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#270#347#0#PHP" expanded="true" />
+            <element signature="e#270#347#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -891,7 +998,7 @@
         <state vertical-scroll-proportion="-5.625">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#275#339#0#PHP" expanded="true" />
+            <element signature="e#275#339#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -901,7 +1008,7 @@
         <state vertical-scroll-proportion="-6.25">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#265#299#0#PHP" expanded="true" />
+            <element signature="e#265#299#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -911,17 +1018,7 @@
         <state vertical-scroll-proportion="-38.75">
           <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
           <folding>
-            <element signature="e#270#334#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.666667">
-          <caret line="87" column="8" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
-          <folding>
-            <element signature="e#271#335#0#PHP" expanded="true" />
+            <element signature="e#270#334#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -931,32 +1028,8 @@
         <state vertical-scroll-proportion="-11.25">
           <caret line="25" column="29" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
-            <element signature="e#265#299#0#PHP" expanded="true" />
+            <element signature="e#265#299#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.375">
-          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.375">
-          <caret line="67" column="52" selection-start-line="67" selection-start-column="52" selection-end-line="67" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.375">
-          <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +1044,7 @@
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/ListType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.375">
-          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
+          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -979,28 +1052,122 @@
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/UserChoiceType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.75">
-          <caret line="44" column="52" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="52" />
+          <caret line="43" column="52" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/AddProductConfigurationType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.625">
-          <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
+        <state vertical-scroll-proportion="-9.0">
+          <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
           <folding>
-            <element signature="e#272#343#0#PHP" expanded="true" />
+            <element signature="e#272#343#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Action/ShippingDiscountConfigurationType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4556213">
-          <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+        <state vertical-scroll-proportion="-8.375">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="e#272#312#0#PHP" expanded="true" />
+            <element signature="e#272#312#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/Checkout/ShipmentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.625">
+          <caret line="69" column="52" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/Form/Type/DataFetcher/DataFetcherChoiceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceChoiceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneMemberCollectionType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneTypeChoiceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="118" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/Form/Type/AddressType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.666667">
+          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
+          <folding>
+            <element signature="e#271#335#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/ResourceBundle/Form/Type/AbstractResourceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.125">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding>
+            <element signature="e#269#309#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/TaxonomyBundle/spec/Form/Type/TaxonChoiceTypeSpec.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9114927">
+          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sylius/Bundle/TaxonomyBundle/Form/Type/TaxonChoiceType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.875">
+          <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
+          <folding>
+            <element signature="e#269#335#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.0">
+          <caret line="88" column="29" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1434263">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
