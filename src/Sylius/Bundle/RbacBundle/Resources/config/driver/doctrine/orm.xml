@@ -29,6 +29,7 @@
     <services>
         <service id="sylius.listener.rbac_cache" class="%sylius.listener.rbac_cache.class%">
             <tag name="doctrine.event_listener" event="postPersist" />
+            <tag name="doctrine.event_listener" event="postUpdate" />
             <tag name="doctrine.event_listener" event="postRemove" />
             <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
         </service>
