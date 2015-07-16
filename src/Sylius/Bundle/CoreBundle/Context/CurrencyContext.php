@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class CurrencyContext extends BaseCurrencyContext
 {
-    const STORAGE_KEY = '_sylius.currency.%s';
+    const STORAGE_KEY = '_sylius_currency_%s';
 
     protected $securityContext;
     protected $settingsManager;

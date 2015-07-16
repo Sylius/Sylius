@@ -20,7 +20,7 @@ use Sylius\Component\Storage\StorageInterface;
  */
 class LocaleContext implements LocaleContextInterface
 {
-    const STORAGE_KEY = '_sylius.locale.%s';
+    const STORAGE_KEY = '_sylius_locale_%s';
 
     /**
      * @var ChannelContextInterface
