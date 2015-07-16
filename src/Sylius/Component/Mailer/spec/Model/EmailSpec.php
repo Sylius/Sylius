@@ -41,6 +41,32 @@ class EmailSpec extends ObjectBehavior
         $this->getCode()->shouldReturn('bar');
     }
 
+    function its_subject_is_mutable()
+    {
+        $this->setSubject('foo');
+        $this->getSubject()->shouldReturn('foo');
+    }
+    function its_content_is_mutable()
+    {
+        $this->setContent('foo content');
+        $this->getContent()->shouldReturn('foo content');
+    }
+    function its_template_is_mutable()
+    {
+        $this->setContent('template.html.twig');
+        $this->getContent()->shouldReturn('template.html.twig');
+    }
+    function its_sender_name_is_mutable()
+    {
+        $this->setSenderName('Example');
+        $this->getSenderName()->shouldReturn('Example');
+    }
+    function its_sender_address_is_mutable()
+    {
+        $this->setSenderAddress('no-reply@example.com');
+        $this->getSenderAddress()->shouldReturn('no-reply@example.com');
+    }
+
     function it_is_enabled_by_default()
     {
         $this->shouldBeEnabled();
