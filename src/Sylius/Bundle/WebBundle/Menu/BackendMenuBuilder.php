@@ -66,6 +66,77 @@ class BackendMenuBuilder extends MenuBuilder
     }
 
     /**
+     * Builds backend top menu.
+     *
+     * @return ItemInterface
+     */
+    public function createTopMenu()
+    {
+        $menu = $this->factory->createItem('root', array(
+            'childrenAttributes' => array(
+                'class' => 'nav navbar-nav',
+            ),
+        ));
+
+        $menu->setCurrentUri($this->request->getRequestUri());
+
+        $childOptions = array(
+            'attributes' => array('class' => 'dropdown'),
+            'childrenAttributes' => array('class' => 'dropdown-menu'),
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-plus', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#'),
+        );
+
+        $menu->addChild('dashboard', array(
+            'route' => 'sylius_backend_dashboard',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-home'),
+        ))->setLabel($this->translate('sylius.backend.menu.main.dashboard'));
+
+        if ($this->authorizationChecker->isGranted('sylius.taxonomy.index')) {
+
+            $menu->addChild('taxonomies', array(
+                'route' => 'sylius_backend_taxonomy_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-folder-close'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxonomies', 'main')));
+        }
+
+        if ($this->authorizationChecker->isGranted('sylius.product.index')) {
+            $menu->addChild('products', array(
+                'route' => 'sylius_backend_product_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.products', 'main')));
+        }
+
+        if ($this->authorizationChecker->isGranted('sylius.static_content.index')) {
+            $menu->addChild('Pages', array(
+                'route' => 'sylius_backend_static_content_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-file'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.pages', 'sidebar')));
+        }
+
+        if ($this->authorizationChecker->isGranted('sylius.order.index')) {
+            $menu->addChild('orders', array(
+                'route' => 'sylius_backend_order_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.orders', 'sidebar')));
+        }
+
+        if ($this->authorizationChecker->isGranted('sylius.promotion.index')) {
+            $menu->addChild('promotions', array(
+                'route' => 'sylius_backend_promotion_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-bullhorn'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.promotions', 'sidebar')));
+        }
+
+
+
+        $this->addMoreMenu($menu, $childOptions, 'main');
+
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_TOPMENU, new MenuBuilderEvent($this->factory, $menu));
+
+        return $menu;
+    }
+
+    /**
      * Builds backend sidebar menu.
      *
      * @return ItemInterface
@@ -97,6 +168,52 @@ class BackendMenuBuilder extends MenuBuilder
 
         return $menu;
     }
+
+    /**
+     * Add more menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addMoreMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('more', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.more', $section)))
+        ;
+
+        $child->addChild('inventory', array(
+            'route' => 'sylius_backend_inventory_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-tasks'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stockables', $section)));
+
+        $child->addChild('options', array(
+            'route' => 'sylius_backend_product_option_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-th'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.options', $section)));
+
+        $child->addChild('product_attributes', array(
+            'route' => 'sylius_backend_product_attribute_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-list-alt'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.attributes', $section)));
+
+        $child->addChild('Slideshow', array(
+            'route' => 'sylius_backend_slideshow_block_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-film'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.slideshow', $section)));
+
+        $child->addChild('contact_requests', array(
+            'route' => 'sylius_backend_contact_request_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.contact_requests', $section)));
+
+        if (!$child->hasChildren()) {
+            $menu->removeChild('more');
+        }
+    }
+
+
 
     /**
      * Add assortment menu.

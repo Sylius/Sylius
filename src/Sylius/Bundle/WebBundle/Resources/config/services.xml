@@ -138,6 +138,12 @@
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.main" />
         </service>
+
+        <service id="sylius.menu.backend.topmenu" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createTopMenu" scope="request">
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="sylius.backend.topmenu" />
+        </service>
+
         <service id="sylius.menu.backend.sidebar" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createSidebarMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.sidebar" />

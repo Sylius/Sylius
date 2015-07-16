@@ -6,12 +6,20 @@ sylius:
     index_header: En-tête
   backend:
     menu:
+      topmenu:
+        sales: Ventes
+        content: Contenus
       main:
+        attributes: Attributs de produits
+        slideshow: Diaporamas
+        emails: E-mails
+        contact_requests: Contact
+        more: Plus
         assortment: Assortiment
         configuration: Configuration
         countries: Pays
         customer: Clients
-        dashboard: Tableau de bord
+        dashboard: Accueil
         exchange_rates: Taux de change
         general_settings: Configuration générale
         homepage: Votre boutique
@@ -34,7 +42,7 @@ sylius:
         tax_categories: Catégories de taxes
         tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
-        taxonomies: Catégorisation
+        taxonomies: Catégories
         users: Utilisateurs
         zones: Zones
       sidebar:
@@ -55,7 +63,7 @@ sylius:
         content: Contenu
         countries: Pays
         customer: Clients
-        dashboard: Tableau de bord
+        dashboard: Accueil
         exchange_rates: Taux de change
         general_settings: Configuration générale
         groups: Groupes
@@ -80,7 +88,7 @@ sylius:
         tax_categories: Catégories de taxes
         tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
-        taxonomies: Catégorisation
+        taxonomies: Catégories
         users: Utilisateurs
         zones: Zones
   frontend:

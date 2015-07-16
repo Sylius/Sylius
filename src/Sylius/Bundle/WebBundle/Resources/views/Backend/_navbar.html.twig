@@ -1,30 +1,251 @@
-<div id="navbar" class="navbar navbar-inverse">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{ path('sylius_backend_dashboard') }}"><img src="{{ asset('bundles/syliusweb/img/logo.png') }}" class="pull-left" /> <span class="hidden-xs hidden-sm pull-left">{{ 'sylius.go_to_dashboard'|trans }}</span></a>
-    </div>
-    <div class="visible-xs visible-sm">
-        <div class="collapse navbar-collapse">
-            {{ knp_menu_render('sylius.backend.main', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
-        </div>
-    </div>
-    <div class="hidden-xs hidden-sm pull-right">
-        <p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'%name%': app.user.customer.fullname})|raw }}</p>
+{#<div id="navbar" class="navbar navbar-inverse">#}
+    {#<div class="navbar-header">#}
+        {#<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">#}
+            {#<span class="icon-bar"></span>#}
+            {#<span class="icon-bar"></span>#}
+            {#<span class="icon-bar"></span>#}
+        {#</button>#}
+        {#<a class="navbar-brand" href="{{ path('sylius_backend_dashboard') }}"><img src="{{ asset('bundles/syliusweb/img/logo.png') }}" class="pull-left" /> <span class="hidden-xs hidden-sm pull-left">{{ 'sylius.go_to_dashboard'|trans }}</span></a>#}
+    {#</div>#}
+    {#<div class="visible-xs visible-sm">#}
+        {#<div class="collapse navbar-collapse">#}
+            {#{{ knp_menu_render('sylius.backend.main', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="hidden-xs hidden-sm pull-right">#}
+        {#<p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'%name%': app.user.customer.fullname})|raw }}</p>#}
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle navbar-widget" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-chevron-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ path('sylius_homepage') }}"><i class="glyphicon glyphicon-home"></i> {{ 'sylius.backend.menu.main.homepage'|trans({}, 'menu') }}</a></li>
-                    <li><a href="{{ path('sylius_user_security_logout') }}"><i class="glyphicon glyphicon-off"></i> {{ 'sylius.backend.logout'|trans }}</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
+        {#<ul class="nav navbar-nav navbar-right">#}
+            {#<li class="dropdown">#}
+                {#<a href="#" class="dropdown-toggle navbar-widget" data-toggle="dropdown">#}
+                    {#<i class="glyphicon glyphicon-chevron-down"></i>#}
+                {#</a>#}
+                {#<ul class="dropdown-menu">#}
+                    {#<li><a href="{{ path('sylius_homepage') }}"><i class="glyphicon glyphicon-home"></i> {{ 'sylius.backend.menu.main.homepage'|trans({}, 'menu') }}</a></li>#}
+                    {#<li><a href="{{ path('sylius_user_security_logout') }}"><i class="glyphicon glyphicon-off"></i> {{ 'sylius.backend.logout'|trans }}</a></li>#}
+                {#</ul>#}
+            {#</li>#}
+        {#</ul>#}
+    {#</div>#}
+{#</div>#}
+
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+    Main navigation
+-->
+<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+    <!-- Main menu toggle -->
+    <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+
+    <div class="navbar-inner">
+        <!-- Main navbar header -->
+        <div class="navbar-header">
+
+            <!-- Logo -->
+            <a href="{{ path('sylius_backend_dashboard') }}" class="navbar-brand">
+                <img class="pull-left"  style="  width: 25px;" src="{{ asset('bundles/syliusweb/img/logo.png') }}"  />
+            </a>
+
+            <!-- Main navbar toggle -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+        </div> <!-- / .navbar-header -->
+
+        <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+            <div>
+                {{ knp_menu_render('sylius.backend.topmenu', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
+
+                {#<ul class="nav navbar-nav">#}
+                    {#<li id="menu_home" class="{% if app.request.attributes.get('_route') == "store_backend_index" %} active {% endif %}">#}
+                        {#<a href="{{ path('sylius_homepage') }}"><i class="fa fa-home"></i> Home</a>#}
+                    {#</li>#}
+                    {#<li id="menu_boutique" class="{% if app.request.attributes.get('_route') == "store_backend_jeweler_myaccount" %} active {% endif %}">#}
+                        {#<a href=""><i class="fa fa-user"></i> Ma Boutique</a>#}
+                    {#</li>#}
+                    {#<li  id="menu_bijoux" class="{% if app.request.attributes.get('_route') == "store_backend_product_list" %} active {% endif %}">#}
+                        {#<a href=""><i class="fa fa-th"></i> Bijoux</a>#}
+                    {#</li>#}
+                    {#<li  id="menu_categories" class="{% if app.request.attributes.get('_route') == "store_backend_category_list" %} active {% endif %}">#}
+                        {#<a href=""><i class="fa fa-list-ul"></i> Categories</a>#}
+                    {#</li>#}
+                    {#<li  id="menu_commandes" class="{% if app.request.attributes.get('_route') == "store_backend_order_list" %} active {% endif %}">#}
+                        {#<a href=""><i class="fa fa-shopping-cart"></i> Commandes</a>#}
+                    {#</li>#}
+                    {#<li class="dropdown">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-plus"></i> Plus <span class="caret"></span></a>#}
+                        {#<ul class="dropdown-menu" role="menu">#}
+                            {#<li  id="menu_pages" class="{% if app.request.attributes.get('_route') == "store_backend_cms_list" %} active {% endif %}">#}
+                                {#<a href=""><i class="fa fa-pencil"></i> Pages</a>#}
+                            {#</li>#}
+                            {#<li  id="menu_fournisseurs" class="{% if app.request.attributes.get('_route') == "store_backend_supplier_list" %} active {% endif %}">#}
+                                {#<a href=""><i class="fa fa-truck"></i> Fournisseurs</a>#}
+                            {#</li>#}
+                            {#<li  id="menu_slider" class="{% if app.request.attributes.get('_route') == "store_backend_slider_list" %} active {% endif %}">#}
+                                {#<a href=""><i class="fa fa-video-camera"></i> Slider</a>#}
+                            {#</li>#}
+                            {#<li  id="menu_slider" class="{% if app.request.attributes.get('_route') == "store_backend_tag_list" %} active {% endif %}">#}
+                                {#<a href=""><i class="fa fa-tags"></i> Mots-clefs</a>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+
+
+                {#</ul> <!-- / .navbar-nav -->#}
+
+                <div class="right clearfix">
+                    <ul class="nav navbar-nav pull-right right-navbar-nav">
+
+                        <li class="nav-icon-btn nav-icon-btn-danger dropdown">
+                            <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="label">{{ app.session.get('product')|length }}</span>
+                                <i class="nav-icon fa fa-bullhorn"></i>
+                                <span class="small-screen-text">Notifications</span>
+                            </a>
+
+                            <!-- Javascript -->
+                            <script>
+                                init.push(function () {
+                                    $('#main-navbar-notifications').slimScroll({ height: 250 });
+                                });
+                            </script>
+                            <!-- / Javascript -->
+
+                            <div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+                                <div class="notifications-list" id="main-navbar-notifications" style="overflow: hidden; width: auto; height: 250px;">
+
+                                    {#{% if app.session.get('product') is not empty %}#}
+                                        {#{% for alert in  app.session.get('product') %}#}
+                                            {#<div class="notification">#}
+                                                {#<div class="notification-title text-{{ alert.criticity }}">Produit</div>#}
+                                                {#<div class="notification-description">{{ alert.message }}</div>#}
+                                                {#<div class="notification-ago">{{ alert.date|date('d/m/Y') }}</div>#}
+                                                {#<div class="notification-icon fa fa-warning bg-{{ alert.criticity }}"></div>#}
+                                            {#</div>#}
+                                        {#{% else %}#}
+                                            {#<div class="alert alert-block alert-warning">#}
+                                                {#Vous avez aucune notification#}
+                                            {#</div>#}
+                                        {#{% endfor %}#}
+                                    {#{% endif %}#}
+
+
+                                </div>
+                            </div> <!-- / .dropdown-menu -->
+
+
+
+                        </li>
+
+
+                        <li class="nav-icon-btn nav-icon-btn-success dropdown">
+                            <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="label">5</span>
+                                <i class="nav-icon fa fa-envelope"></i>
+                                <span class="small-screen-text">Messages reçus</span>
+                            </a>
+
+                            <!-- MESSAGES -->
+
+                            <!-- Javascript -->
+                            <script>
+                                init.push(function () {
+                                    $('#main-navbar-messages').slimScroll({ height: 250 });
+                                });
+                            </script>
+                            <!-- / Javascript -->
+
+                            <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+                                <div class="messages-list" id="main-navbar-messages" style="overflow: hidden; width: auto; height: 250px;">
+
+
+                                    {#{% for message in messages %}#}
+                                        {#<div class="message">#}
+                                            {#<a href="#" class="message-subject">{{ message.content }}.</a>#}
+                                            {#<div class="message-description">#}
+                                                {#de <a href="#">{{ message.user.email }}</a>#}
+                                                {#&nbsp;&nbsp;·&nbsp;&nbsp;#}
+                                                {#{{ message.dateCreated|date('d/m/Y') }}#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#{% else %}#}
+                                        {#<div class="alert alert-block alert-warning">#}
+                                            {#Vous avez aucun message#}
+                                        {#</div>#}
+                                    {#{% endfor %}#}
+
+
+                                </div> <!-- / .messages-list -->
+                                <a href="" class="messages-link">Tous les messages</a>
+                            </div> <!-- / .dropdown-menu -->
+                        </li>
+
+                        <li class="nav-icon-btn nav-icon-btn-success dropdown">
+                            <a href="#orders" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="label">3</span>
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                <span class="small-screen-text">Commandes reçus</span>
+                            </a>
+
+                            <!-- MESSAGES -->
+
+                            <!-- Javascript -->
+                            <script>
+                                init.push(function () {
+                                    $('#main-navbar-orders').slimScroll({ height: 250 });
+                                });
+                            </script>
+                            <!-- / Javascript -->
+
+                            <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+                                <div class="messages-list" id="main-navbar-orders" style="overflow: hidden; width: auto; height: 250px;">
+
+
+                                    {#{% for order in orders %}#}
+                                        {#<div class="message">#}
+                                            {#<a href="#" class="message-subject">{{ order.address }}.</a>#}
+                                            {#<div class="message-description">#}
+                                                {#de <a href="#">{{ order.total }} €</a>#}
+                                                {#&nbsp;&nbsp;·&nbsp;&nbsp;#}
+                                                {#{{ order.dateCreated|date('d/m/Y') }}#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#{% else %}#}
+                                        {#<div class="alert alert-block alert-warning">#}
+                                            {#Vous avez aucune commande#}
+                                        {#</div>#}
+                                    {#{% endfor %}#}
+
+
+                                </div> <!-- / .messages-list -->
+                                <a href="" class="messages-link">Toutes les commandes</a>
+                            </div> <!-- / .dropdown-menu -->
+                        </li>
+
+                        {#{{ render(controller('StoreBackendBundle:Layout:mymessages')) }}#}
+
+                        {#{{ render(controller('StoreBackendBundle:Layout:myorders')) }}#}
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                {% if app.user.image is defined and app.user.image is not empty %}
+                                    <img src="{{ asset('uploads/profil/' ~ app.user.id ~ "/" ~ app.user.image) }}" alt="" class="">
+                                {% endif %}
+
+                                <span>{{ app.user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href=""><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;Ma Boutique</a></li>
+                                <li><a href=""><i class="dropdown-icon fa fa-envelope"></i>&nbsp;&nbsp;Mes Messages</a></li>
+                                <li><a href=""><i class="dropdown-icon fa fa-gears"></i>&nbsp;&nbsp;Mes Paramètres</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ path('sylius_user_security_logout') }}"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul> <!-- / .navbar-nav -->
+                </div> <!-- / .right -->
+            </div>
+        </div> <!-- / #main-navbar-collapse -->
+    </div> <!-- / .navbar-inner -->
+</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->

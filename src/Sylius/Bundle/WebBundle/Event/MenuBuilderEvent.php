@@ -24,6 +24,7 @@ class MenuBuilderEvent extends Event
 {
     const BACKEND_MAIN = 'sylius.menu_builder.backend.main';
     const BACKEND_SIDEBAR = 'sylius.menu_builder.backend.sidebar';
+    const BACKEND_TOPMENU = 'sylius.menu_builder.backend.topmenu';
 
     /**
      * @var FactoryInterface

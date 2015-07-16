@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+
+
+
 <html>
     <head>
         <title>
@@ -6,86 +13,118 @@
                 {{ 'sylius.meta.backend_title'|trans }}
             {% endblock %}
         </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
         <meta charset="UTF-8">
+        <!-- Open Sans font from Google CDN -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
+        {# Stylesheets #}
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />
-            {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
-                'bundles/syliusweb/css/blueimp-gallery.css'
-                'bundles/syliusweb/css/select2.css'
-                'bundles/syliusweb/css/datepicker3.css'
-                'bundles/syliusweb/css/backend.css'
-                'bundles/syliusresource/css/form-collection.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-            {% endstylesheets %}
+            <link href="{{ asset('assets/backend/stylesheets/pixel-admin.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/widgets.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/rtl.min.css') }} " rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/themes.min.css') }}" rel="stylesheet" type="text/css">
+
+            {#{% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'#}
+                {#'bundles/syliusweb/css/backend.css'#}
+            {#%}#}
+            {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />#}
+            {#{% endstylesheets %}#}
+
         {% endblock %}
+
+        {#{% block stylesheets %}#}
+            {#<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />#}
+            {#{% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'#}
+                {#'bundles/syliusweb/css/blueimp-gallery.css'#}
+                {#'bundles/syliusweb/css/select2.css'#}
+                {#'bundles/syliusweb/css/datepicker3.css'#}
+                {#'bundles/syliusweb/css/backend.css'#}
+                {#'bundles/syliusresource/css/form-collection.css'#}
+            {#%}#}
+                {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />#}
+            {#{% endstylesheets %}#}
+        {#{% endblock %}#}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body class="theme-default main-menu-animated">
+
+    {#ini.push() initialize all jquery modules #}
+    <script>var init = [];</script>
+    <div id="main-wrapper">
+
         {% include 'SyliusWebBundle:Backend:_navbar.html.twig' %}
-        <div class="row main-container">
-            <div class="col-md-1 col-lg-2 hidden-sm hidden-xs">
-                {% block sidebar %}
-                <div id="sidebar">
-                    <div class="sidebar-nav">
-                        {{ knp_menu_render('sylius.backend.sidebar', {'template': 'SyliusWebBundle::menu.html.twig', 'currentClass': 'active'}) }}
+
+        {% include 'SyliusWebBundle:Backend:_sidebar.html.twig' %}
+
+        {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
+
+
+        <div id="content-wrapper">
+
+                    <div id="topbar">
+                        {% block topbar %}
+                        {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
+                        {% endblock %}
+                    </div>
+
+                    <div id="content">
+
+                        {% block content %}
+                        {% endblock %}
+
+                        <hr>
+
+                        {# Gallery modal #}
+                        {% include 'SyliusWebBundle::gallery.html.twig' %}
+
+                        {# Confirmation modal #}
+                        {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
+
+                        <footer>
+                            <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
+                        </footer>
                     </div>
                 </div>
-                {% endblock %}
-            </div>
-
-            <div class="col-md-11 col-lg-10">
-                <div id="topbar">
-                    {% block topbar %}
-                    {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
-                    {% endblock %}
-                </div>
-
-                <div id="content">
-                    {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
-
-                    {% block content %}
-                    {% endblock %}
-
-                    <hr>
-
-                    {# Gallery modal #}
-                    {% include 'SyliusWebBundle::gallery.html.twig' %}
-
-                    {# Confirmation modal #}
-                    {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
-
-                    <footer>
-                        <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
-                    </footer>
-                </div>
-            </div>
         </div>
+
+
+    <div id="main-menu-bg"></div>
+
+    </div>
 
         {# javascripts... #}
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
             <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-            {% javascripts output='assets/compiled/backend.js'
-                'bundles/syliusreport/js/chart.js'
-                'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'
-                'bundles/syliusweb/js/confirm-modal.js'
-                'bundles/syliusweb/js/form-collection.js'
-                'bundles/syliusweb/js/form-spinner.js'
-                'bundles/syliusweb/js/select2.js'
-                'bundles/syliusweb/js/bootstrap-datepicker.js'
-                'bundles/syliusweb/js/backend.js'
-                'bundles/syliusresource/js/form-collection.js'
-            %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+            <script src="{{ asset('assets/backend/javascripts/pixel-admin.min.js') }}"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/hinclude/0.9.5/hinclude.min.js"></script>
+            <script type="text/javascript">
+                init.push(function () {
+
+                    $('form').on("submit", function (event) {
+                        $(this).find('button:last').attr('disabled', 'disabled');
+                        $(this).find('button:last').text('Sending...');
+                    });
+                    $("select").select2();
+                    $("input[type='date']").attr('type','text').mask("99/99/9999");
+                    $('input[type="file"]').pixelFileInput({ placeholder: 'Empty files...' });
+                    $('div.alert-success').delay(3000).slideUp('slow');
+                });
+                window.PixelAdmin.start(init);
+
+            </script>
+
+            {#{% javascripts output='assets/compiled/backend.js'#}
+                {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+            {#{% endjavascripts %}#}
         {% endblock %}
     </body>
 </html>

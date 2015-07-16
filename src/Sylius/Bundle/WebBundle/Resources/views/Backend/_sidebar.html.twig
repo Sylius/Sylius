@@ -1,0 +1,49 @@
+
+<div id="main-menu" role="navigation">
+    <div id="main-menu-inner">
+        <div class="menu-content top" id="menu-content-demo">
+            <div>
+                <div class="text-bg"><span class="text-slim">Bienvenue,</span> <span class="text-semibold">{{ app.user.username }}</span></div>
+
+                {% if app.user.image is defined and app.user.image is not empty %}
+                    <img src="{{ asset('uploads/profil/' ~ app.user.id ~ "/" ~ app.user.image) }}" alt="" class="">
+                {% endif %}
+                <div class="btn-group">
+                    <a href="" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+                    <a href="" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                    <a href="" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+                    <a href="" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                </div>
+            </div>
+        </div>
+        <ul class="navigation">
+            <li class="{% if app.request.attributes.get('_route') == "store_backend_index" %} active {% endif %}">
+                <a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Acceuil</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-sign-in"></i><span class="mm-text">Ma Boutique</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-bookmark"></i><span class="mm-text">Mes Produits</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-gavel"></i><span class="mm-text">Mes Conditions</span></a>
+            </li>
+
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-random"></i><span class="mm-text">Mes Commandes</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-money"></i><span class="mm-text">Mes Promotions</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="menu-icon fa fa-comment"></i><span class="mm-text">Mes Discussions</span></a>
+            </li>
+
+        </ul> <!-- / .navigation -->
+        <div class="menu-content">
+            <a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark"><i class="fa fa-plus"></i> Créer un produit</a>
+        </div>
+    </div> <!-- / #main-menu-inner -->
+</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
