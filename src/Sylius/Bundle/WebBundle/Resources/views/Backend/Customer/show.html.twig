@@ -147,7 +147,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        {% render(url('sylius_backend_order_by_customer', app.request.query.all|merge({id: customer.id}) )) %}
+        {{   render(url('sylius_backend_order_by_customer', app.request.query.all|merge({id: customer.id}) )) }}
     </div>
 </div>
 

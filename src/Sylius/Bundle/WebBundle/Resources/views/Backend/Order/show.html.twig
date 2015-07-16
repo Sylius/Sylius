@@ -298,7 +298,7 @@
         </form>
     {% elseif 1 == order.shipments|length and constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_CONFIRMED') == order.state and constant('Sylius\\Component\\Payment\\Model\\PaymentInterface::STATE_COMPLETED') == order.paymentState %}
         <form action="{{ path('sylius_backend_shipment_ship', {'id': order.shipments.current.id}) }}" method="post">
-            {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
+            {{  render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) }}
         </form>
     {% endif %}
     </div>
