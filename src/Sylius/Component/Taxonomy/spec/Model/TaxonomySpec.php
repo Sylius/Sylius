@@ -70,11 +70,22 @@ class TaxonomySpec extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
+    function it_delegates_current_and_fallback_locale_to_root_taxon(Taxon $taxon)
+    {
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
+        $taxon->setTaxonomy($this)->shouldBeCalled();
+
+        $this->setRoot($taxon);
+
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function its_name_is_mutable(Taxon $taxon)
     {
         $taxon->setName('Brand')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
-
         $taxon->setCurrentLocale('en_US')->shouldBeCalled();
         $taxon->setFallbackLocale('en_US')->shouldBeCalled();
 
@@ -86,11 +97,10 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_also_sets_name_on_the_root_taxon(Taxon $taxon)
     {
-        $taxon->setName('Category')->shouldBeCalled();
-        $taxon->setTaxonomy($this)->shouldBeCalled();
-
         $taxon->setCurrentLocale('en_US')->shouldBeCalled();
         $taxon->setFallbackLocale('en_US')->shouldBeCalled();
+        $taxon->setName('Category')->shouldBeCalled();
+        $taxon->setTaxonomy($this)->shouldBeCalled();
 
         $this->setRoot($taxon);
 
