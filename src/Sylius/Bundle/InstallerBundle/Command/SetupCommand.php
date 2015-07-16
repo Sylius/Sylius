@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\Extension;
 
-use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

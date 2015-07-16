@@ -72,7 +72,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * @var array
      */
-    protected $feeCalculatorConfiguration;
+    protected $feeCalculatorConfiguration = array();
 
     /**
      * Creation date.
@@ -126,8 +126,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (Boolean) $enabled;
-
-        return $this;
     }
 
     /**
@@ -144,8 +142,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -162,8 +158,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -180,8 +174,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setGateway($gateway)
     {
         $this->gateway = $gateway;
-
-        return $this;
     }
 
     /**
@@ -198,8 +190,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
-
-        return $this;
     }
 
     /**
@@ -216,8 +206,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setFeeCalculator($feeCalculator)
     {
         $this->feeCalculator = $feeCalculator;
-
-        return $this;
     }
 
     /**
@@ -234,8 +222,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration)
     {
         $this->feeCalculatorConfiguration = $feeCalculatorConfiguration;
-
-        return $this;
     }
 
     /**
@@ -252,8 +238,6 @@ class PaymentMethod implements PaymentMethodInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -270,7 +254,5 @@ class PaymentMethod implements PaymentMethodInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
