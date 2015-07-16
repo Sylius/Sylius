@@ -23,12 +23,11 @@ class AppKernel extends Kernel
      */
     public function registerBundles()
     {
-        $bundles = array(
-            // Put here your own bundles!
-        );
+        $bundles[] = new Sylius\BackendBundle\SyliusBackendBundle();
 
         if (in_array($this->environment, array('dev', 'test'))) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return array_merge(parent::registerBundles(), $bundles);

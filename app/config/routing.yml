@@ -1,3 +1,5 @@
+
+
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
@@ -48,3 +50,13 @@ facebook_login:
 
 google_login:
     path: /login/check-google
+
+
+
+
+# App
+# (c) JUlien Boyer
+
+sylius_backend:
+    resource: "@SyliusBackendBundle/Resources/config/routing.yml"
+    prefix:   /administration

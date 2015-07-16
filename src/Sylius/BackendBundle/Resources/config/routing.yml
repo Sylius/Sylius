@@ -1,0 +1,3 @@
+sylius_backend_home:
+    path:     /home
+    defaults: { _controller: SyliusBackendBundle:Default:index }
