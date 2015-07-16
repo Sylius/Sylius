@@ -11,6 +11,10 @@
 </ol>
 {% endblock %}
 
+{% block titlepage %}
+    <i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;{{ 'sylius.breadcrumb.product.index'|trans }}
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
@@ -23,7 +27,6 @@
             <a href="{{ path('sylius_backend_product_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
         {% endif %}
     </div>
-    <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
 </div>
 
 {{   render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) }}

@@ -64,6 +64,7 @@ sylius:
     success: Succès
     warning: Avertissement
   backend:
+    search: Rechercher
     alert:
       info: Information
     dashboard:
@@ -323,6 +324,7 @@ sylius:
   manage: Gérer
   meta:
     backend_title: Tableau de bord
+    commandes: Tableau de bord
     frontend_description: Sylius est une solution de boutique e-commerce en PHP, basée sur le framework Symfony2
     frontend_keywords: sylius, e-commerce, symfony2, boutique, panier, commande
     frontend_title: Sylius, boutique e-commerce pour Symfony2

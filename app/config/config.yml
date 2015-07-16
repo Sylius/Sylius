@@ -88,3 +88,85 @@ swiftmailer:
     auth_mode: %sylius.mailer.auth%
     port: %sylius.mailer.port%
 
+
+fos_elastica:
+     clients:
+         elasticsearch:
+            servers:
+                - { host: 10.0.0.100, port: 9200, logger: true }
+                - { host: 10.0.0.101, port: 9200, logger: true }
+           #for clustering you need to define the logger because of the https://github.com/FriendsOfSymfony/FOSElasticaBundle/issues/543
+
+     indexes:
+         sylius:
+             client: elasticsearch
+             finder: ~
+             settings:
+                 analysis:
+                     filters:
+                         search_filter: # the small drop down menu on the side of the search field
+                             enabled: true
+                             taxonomy: category # possible values are the high level taxons (category, brand for sylius)
+                         facet_groups: # possible facet groups, you assign them in a finder object
+                             search_set:
+                                 values: [taxons, price, made_of, color]
+                             categories_set:
+                                 values: [price, made_of, color]
+                             all_set:
+                                 values: [taxons, price, made_of]
+                         facets: # possible facets, as long as a model exposes attributes, options or getters with the given name, it will be used as a facet
+                             taxons:
+                                 display_name: 'Basic categories'
+                                 type: terms
+                                 value: ~
+                             price:
+                                 display_name: 'Available prices'
+                                 type: range
+                                 values:
+                                     - { from: 0, to: 2000}
+                                     - { from: 2001, to: 5000}
+                                     - { from: 5001, to: 10000}
+                             made_of:
+                                 display_name: 'Material'
+                                 type: terms
+                                 value: ~
+                             color:
+                                 display_name: 'Available colors'
+                                 type: terms
+                                 value: ~
+             types:
+                 product:
+                     mappings:
+                         name:
+                             type: string
+                             analyzer: my_analyzer
+                         description: ~
+                         slug: ~
+                         color: ~
+                         price:
+                            type: integer
+                         channels:
+                            type: string
+                            index: not_analyzed
+                         taxons:
+                            type: string
+                            index: not_analyzed
+                         size: ~
+                         author: ~
+                         made_of:
+                            type: string
+                            index: not_analyzed
+
+                     persistence:
+                         driver: orm
+                         model: Sylius\Component\Core\Model\Product
+                         model_to_elastica_transformer:
+                            service: sylius.search.transformers.model.product
+                         provider: ~
+                         listener: ~
+                         finder: ~
+
+                 search_log:
+                    mappings:
+                        search_term: ~
+                        ip_address: ~

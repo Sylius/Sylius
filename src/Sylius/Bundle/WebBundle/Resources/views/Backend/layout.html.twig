@@ -4,8 +4,6 @@
 <!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
 
-
-
 <html>
     <head>
         <title>
@@ -56,6 +54,38 @@
                         {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
                         {% endblock %}
                     </div>
+
+            <div class="page-header">
+
+                <div class="row">
+                    <!-- Page header, center on small screens -->
+                    <h1 class="col-xs-12 col-sm-4 text-center text-left-sm">
+                        {% block titlepage %}
+                            <i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;{{ 'sylius.backend.dashboard.header'|trans }}
+                        {% endblock %}
+                    </h1>
+
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="row">
+                            <hr class="visible-xs no-grid-gutter-h">
+                            <!-- "Create project" button, width=auto on desktops -->
+                            <div class="pull-right col-xs-12 col-sm-auto"><a href="#" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-search"></span>{{ 'sylius.backend.search'|trans }}</a></div>
+
+                            <!-- Margin -->
+                            <div class="visible-xs clearfix form-group-margin"></div>
+
+                            <!-- Search field -->
+                            <form action="" class="pull-right col-xs-12 col-sm-6">
+                                <div class="input-group no-margin">
+                                    <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                                    <input type="text" placeholder="{{ 'sylius.backend.search'|trans }}" class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
                     <div id="content">
 

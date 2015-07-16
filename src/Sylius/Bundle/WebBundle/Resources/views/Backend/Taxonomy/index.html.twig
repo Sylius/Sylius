@@ -4,6 +4,10 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Taxonomy:macros.html.twig' import list %}
 
+{% block titlepage %}
+    <i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;{{ 'sylius.breadcrumb.assortment'|trans }}
+{% endblock %}
+
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
@@ -17,7 +21,6 @@
         {{ buttons.create(path('sylius_backend_taxonomy_create'), 'sylius.taxonomy.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.taxonomy.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(taxonomies) }}
