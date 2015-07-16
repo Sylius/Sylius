@@ -22,6 +22,11 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
  */
 class CountrySpec extends ObjectBehavior
 {
+    function let()
+    {
+        \Locale::setDefault('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Addressing\Model\Country');
