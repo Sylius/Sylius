@@ -57,9 +57,9 @@ class CartItemType extends BaseCartItemType
             ->setOptional(array(
                 'product',
             ))
-            ->setAllowedTypes(array(
-                'product' => array('Sylius\Component\Core\Model\ProductInterface'),
-            ))
+            ->setAllowedTypes(
+                'product' , array('Sylius\Component\Core\Model\ProductInterface')
+            )
         ;
     }
 }

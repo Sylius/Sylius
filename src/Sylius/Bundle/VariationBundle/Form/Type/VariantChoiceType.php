@@ -60,9 +60,9 @@ class VariantChoiceType extends AbstractType
             ->setRequired(array(
                 'variable',
             ))
-            ->setAllowedTypes(array(
-                'variable' => array('Sylius\Component\Variation\Model\VariableInterface'),
-            ))
+            ->setAllowedTypes(
+                'variable', array('Sylius\Component\Variation\Model\VariableInterface')
+            )
         ;
     }
 

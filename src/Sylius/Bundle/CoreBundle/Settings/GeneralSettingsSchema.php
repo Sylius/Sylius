@@ -52,14 +52,25 @@ class GeneralSettingsSchema implements SchemaInterface
                 'currency' => 'USD',
                 'tracking_code' => '',
             ), $this->defaults))
-            ->setAllowedTypes(array(
-                'title' => array('string'),
-                'meta_keywords' => array('string'),
-                'meta_description' => array('string'),
-                'locale' => array('string'),
-                'currency' => array('string'),
-                'tracking_code' => array('null', 'string'),
-            ))
+            ->setAllowedTypes(
+                'title' , array('string')
+            )
+            ->setAllowedTypes(
+                'meta_keywords', array('string')
+            )
+            ->setAllowedTypes(
+                'meta_description', array('string')
+            )
+            ->setAllowedTypes(
+                'locale', array('string')
+            )
+            ->setAllowedTypes(
+                'currency', array('string')
+            )
+            ->setAllowedTypes(
+                'tracking_code', array('null', 'string')
+            )
+
         ;
     }
 

@@ -56,9 +56,9 @@ class FlatRateCalculator extends Calculator
             ->setRequired(array(
                 'amount',
             ))
-            ->setAllowedTypes(array(
-                'amount' => array('numeric'),
-            ))
+            ->setAllowedTypes(
+                'amount', array('numeric')
+            )
         ;
     }
 }

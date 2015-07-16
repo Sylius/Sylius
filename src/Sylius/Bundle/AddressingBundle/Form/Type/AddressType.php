@@ -79,6 +79,7 @@ class AddressType extends AbstractResourceType
                 'label' => 'sylius.form.address.postcode',
             ))
         ;
+
     }
 
     /**
@@ -86,6 +87,7 @@ class AddressType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
         parent::configureOptions($resolver);
 
         $validationGroups = $this->validationGroups;
@@ -101,9 +103,9 @@ class AddressType extends AbstractResourceType
                 },
                 'shippable' => false,
             ))
-            ->setAllowedTypes(array(
-                'shippable' => 'bool',
-            ))
+            ->setAllowedTypes(
+                'shippable' , 'bool'
+            )
         ;
     }
 

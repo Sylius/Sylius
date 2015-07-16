@@ -103,11 +103,12 @@ class ShippingMethodChoiceType extends AbstractType
             ->setOptional(array(
                 'subject',
             ))
-            ->setAllowedTypes(array(
-                'subject' => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-                'criteria' => array('array'),
-            ))
-        ;
+            ->setAllowedTypes(
+                'subject', array('Sylius\Component\Shipping\Model\ShippingSubjectInterface')
+            )
+            ->setAllowedTypes(
+                'criteria', array('array')
+            );
     }
 
     /**

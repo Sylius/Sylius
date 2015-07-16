@@ -46,9 +46,9 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
                 'query_builder' => $queryBuilder,
                 'channel' => null,
             ))
-            ->setAllowedTypes(array(
-                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
-            ))
+            ->setAllowedTypes(
+                'channel' , array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+            )
         ;
     }
 }

@@ -84,10 +84,12 @@ class TaxonChoiceType extends AbstractType
                 'taxonomy',
                 'filter',
             ))
-            ->setAllowedTypes(array(
-                'taxonomy' => array('Sylius\Component\Taxonomy\Model\TaxonomyInterface'),
-                'filter' => array('\Closure', 'null'),
-            ))
+            ->setAllowedTypes(
+                'taxonomy' , array('Sylius\Component\Taxonomy\Model\TaxonomyInterface')
+            )
+            ->setAllowedTypes(
+                'filter' , array('\Closure', 'null')
+            )
         ;
     }
 

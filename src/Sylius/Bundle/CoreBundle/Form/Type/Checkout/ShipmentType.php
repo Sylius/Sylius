@@ -77,10 +77,12 @@ class ShipmentType extends AbstractType
                 'criteria',
                 'channel',
             ))
-            ->setAllowedTypes(array(
-                'criteria' => array('array'),
-                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
-            ))
+            ->setAllowedTypes(
+                'criteria' , array('array')
+            )
+            ->setAllowedTypes(
+                'channel' , array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+            )
         ;
     }
 

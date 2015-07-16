@@ -66,9 +66,9 @@ class VariantMatchType extends AbstractType
             ->setRequired(array(
                 'variable',
             ))
-            ->setAllowedTypes(array(
-                'variable' => 'Sylius\Component\Variation\Model\VariableInterface',
-            ))
+            ->setAllowedTypes(
+                'variable', 'Sylius\Component\Variation\Model\VariableInterface'
+            )
         ;
     }
 

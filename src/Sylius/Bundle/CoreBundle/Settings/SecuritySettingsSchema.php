@@ -31,9 +31,9 @@ class SecuritySettingsSchema implements SchemaInterface
             ->setDefaults(array(
                 'enabled' => false,
             ))
-            ->setAllowedTypes(array(
-                'enabled' => array('bool'),
-            ))
+            ->setAllowedTypes(
+                'enabled', array('bool')
+            )
         ;
     }
 

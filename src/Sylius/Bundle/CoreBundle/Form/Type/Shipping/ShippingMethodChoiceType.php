@@ -61,9 +61,9 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 'criteria' => array(),
                 'channel' => null,
             ))
-            ->setAllowedTypes(array(
-                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
-            ))
+            ->setAllowedTypes(
+                'channel' , array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+            )
         ;
     }
 }

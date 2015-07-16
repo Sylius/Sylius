@@ -69,11 +69,17 @@ class DateExtension extends AbstractTypeExtension
             'leading_zero',
         ));
 
-        $resolver->setAllowedTypes(array(
-            'placeholder' => array('string'),
-            'language' => array('string'),
-            'leading_zero' => array('bool'),
-        ));
+        $resolver->setAllowedTypes(
+            'placeholder', array('string')
+
+        );
+        $resolver->setAllowedTypes(
+             'language', array('string')
+
+        );
+       $resolver->setAllowedTypes(
+           'leading_zero', array('bool')
+       );
     }
 
     /**
