@@ -70,6 +70,7 @@ sylius:
       chart_order_count: Nombre de commandes
       chart_order_total: Valeur de la commande
       header: Tableau de bord
+      keyfigure: Chiffres-Clefs
       orders: Commandes la semaine dernière
       revenue: Ventes de la semaine dernière
       subheader: "Vue d'ensemble de votre magasin"
@@ -96,6 +97,7 @@ sylius:
     update_header: Modifier le bloc de contenu
     updated_at: Dernière mise à jour
   breadcrumb:
+    dashboard: Index
     assortment: Assortiment
     block:
       index: Blocs de contenu

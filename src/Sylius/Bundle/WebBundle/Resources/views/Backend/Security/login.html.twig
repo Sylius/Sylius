@@ -1,43 +1,61 @@
-<!DOCTYPE html>
+{% extends "SyliusWebBundle:Backend:layout_simple.html.twig" %}
 
-<html>
-    <head>
-        <title>
-            {% block title %}
-                {{ 'sylius.meta.backend_title'|trans }}
-            {% endblock %}
-        </title>
-        <meta charset="UTF-8">
 
-        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-        <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+{% block content %}
 
-        {% block stylesheets %}
-            {% stylesheets output='assets/compiled/backend_login.css' filter='cssrewrite'
-                '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
-                '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
-                'bundles/syliusweb/css/backend.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-            {% endstylesheets %}
-        {% endblock %}
-    </head>
-    <body class="signin">
-        <form method="post" action="{{ path('sylius_backend_security_login_check') }}" class="form-signin">
-            <img src="{{ asset('bundles/syliusweb/img/swan.png') }}" class="swan" />
+    <script type="text/javascript">
+        var init = [];
+        init.push(function () {
+            $("#signin-form_id").validate({
+                ignore: '.ignore, .select2-input',
+                focusInvalid: false,
+                rules: {
+                    '_username': {
+                        required: true,
+                        minlength: 4
+                    },
+                    '_password': {
+                        required: true,
+                        minlength: 4
+                    }
+                },
+                messages: {
+                    '_username': "Vous devez mettre un login valide",
+                    '_password': "Vous devez mettre mot de passe valide"
+                }
+            });
+        });
+        window.PixelAdmin.start(init);
+    </script>
 
-            {% if error %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div>
-            {% endif %}
+    <h1 class="form-header">Connectez vous avec votre compte</h1>
 
-            <input type="text" name="_username" class="form-control input-lg" placeholder="{{ 'sylius.email'|trans }}"><br>
-            <input type="password" name="_password" class="form-control input-lg" placeholder="{{ 'sylius.password'|trans }}">
-            <hr>
-            <button class="btn btn-block btn-lg btn-success" type="submit">{{ 'sylius.login'|trans }}</button>
-        </form>
-    </body>
-</html>
+    <form id="signin-form_id" method="post" action="{{ path('sylius_backend_security_login_check') }}" class="panel">
+
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <input type="text" name="_username" id="username_id" class="form-control input-lg" placeholder="{{ 'sylius.email'|trans }}"><br>
+        </div>
+
+        <div class="form-group signin-password">
+            <input type="password" name="_password" id="password_id" class="form-control input-lg" placeholder="{{ 'sylius.password'|trans }}">
+            <a href="#" class="forgot">Forgot?</a>
+        </div>
+
+        <hr>
+        <button class="btn btn-primary btn-block btn-lg" type="submit"><i class="fa fa-power-off"></i> {{ 'sylius.login'|trans }}</button>
+    </form>
+
+    <div class="signin-with">
+        <div class="header">ou avec les réseaux sociaux</div>
+        <a href="index.html" class="btn btn-lg btn-facebook rounded"><i class="fa fa-facebook"></i></a>&nbsp;&nbsp;
+        <a href="index.html" class="btn btn-lg btn-info rounded"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;
+        <a href="index.html" class="btn btn-lg btn-danger rounded"><i class="fa fa-google-plus"></i></a>
+    </div>
+
+{% endblock %}

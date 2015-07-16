@@ -19,35 +19,17 @@
         <meta charset="UTF-8">
         <!-- Open Sans font from Google CDN -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
         {# Stylesheets #}
         {% block stylesheets %}
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />
+            <link href="{{ asset('assets/backend/stylesheets/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('assets/backend/stylesheets/pixel-admin.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('assets/backend/stylesheets/widgets.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('assets/backend/stylesheets/rtl.min.css') }} " rel="stylesheet" type="text/css">
             <link href="{{ asset('assets/backend/stylesheets/themes.min.css') }}" rel="stylesheet" type="text/css">
-
-            {#{% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'#}
-                {#'bundles/syliusweb/css/backend.css'#}
-            {#%}#}
-            {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />#}
-            {#{% endstylesheets %}#}
-
         {% endblock %}
 
-        {#{% block stylesheets %}#}
-            {#<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />#}
-            {#{% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'#}
-                {#'bundles/syliusweb/css/blueimp-gallery.css'#}
-                {#'bundles/syliusweb/css/select2.css'#}
-                {#'bundles/syliusweb/css/datepicker3.css'#}
-                {#'bundles/syliusweb/css/backend.css'#}
-                {#'bundles/syliusresource/css/form-collection.css'#}
-            {#%}#}
-                {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />#}
-            {#{% endstylesheets %}#}
-        {#{% endblock %}#}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
         <!--[if lt IE 9]>

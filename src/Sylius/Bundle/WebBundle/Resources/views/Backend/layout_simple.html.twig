@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]>
+<html class="ie8"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+
+
+<html>
+<head>
+    <title>
+        {% block title %}
+            {{ 'sylius.meta.backend_title'|trans }}
+        {% endblock %}
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta charset="UTF-8">
+    <!-- Open Sans font from Google CDN -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin"
+          rel="stylesheet" type="text/css">
+
+    {# Stylesheets #}
+    {% block stylesheets %}
+        <link href="{{ asset('assets/backend/stylesheets/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/stylesheets/pixel-admin.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/stylesheets/widgets.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/stylesheets/rtl.min.css') }} " rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/stylesheets/themes.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/backend/stylesheets/pages.min.css') }}" rel="stylesheet" type="text/css">
+
+    {% endblock %}
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body class="theme-default page-signin-alt">
+
+{#ini.push() initialize all jquery modules #}
+<script>var init = [];</script>
+{% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
+
+{#ini.push() tableau pour pousser tout le jquery#}
+<script>var init = [];</script>
+<div class="signin-header">
+    <a href="" class="logo">
+        <strong>Sylius</strong>
+    </a> <!-- / .logo -->
+</div>
+
+<div class="signin-container">
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+{# javascripts... #}
+{% block javascripts %}
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/backend/javascripts/pixel-admin.min.js') }}"></script>
+    <script type="text/javascript">
+        init.push(function () {
+        });
+        window.PixelAdmin.start(init);
+    </script>
+
+    {#{% javascripts output='assets/compiled/backend.js'#}
+    {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+    {#{% endjavascripts %}#}
+{% endblock %}
+</body>
+</html>
