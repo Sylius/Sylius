@@ -64,11 +64,11 @@ class ResourceChoiceType extends AbstractType
             ->setDefaults(array(
                 'class' => null,
             ))
-            ->setNormalizer(
-                'class',  function () use ($className) {
+            ->setNormalizers(array(
+                'class' => function () use ($className) {
                     return $className;
-                }
-            )
+                },
+            ))
         ;
     }
 

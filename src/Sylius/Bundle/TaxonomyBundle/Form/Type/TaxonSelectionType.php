@@ -90,8 +90,8 @@ class TaxonSelectionType extends AbstractType
             ))
         ;
 
-        $resolver->setNormalizer(
-            'model_transformer', function (Options $options, $value) {
+        $resolver->setNormalizers(array(
+            'model_transformer' => function (Options $options, $value) {
                 if (!is_array($value)) {
                     $value = array(
                         'class' => $value,
@@ -107,8 +107,8 @@ class TaxonSelectionType extends AbstractType
                 }
 
                 return $value;
-            }
-        );
+            },
+        ));
     }
 
     /**
