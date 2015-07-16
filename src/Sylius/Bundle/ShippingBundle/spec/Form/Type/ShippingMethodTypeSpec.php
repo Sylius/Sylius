@@ -20,7 +20,7 @@ use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -186,7 +186,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

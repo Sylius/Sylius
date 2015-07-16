@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityHiddenTypeSpec extends ObjectBehavior
 {
@@ -49,7 +49,7 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         ));
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'identifier' => 'id',

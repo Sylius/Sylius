@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\RbacBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -36,7 +36,7 @@ class RoleEntityTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType');
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setNormalizers(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);

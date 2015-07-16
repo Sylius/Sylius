@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,7 +34,7 @@ class VariantTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

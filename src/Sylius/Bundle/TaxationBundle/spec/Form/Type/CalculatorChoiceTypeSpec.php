@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\TaxationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
@@ -44,7 +44,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('choice');
     }
 
-    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(

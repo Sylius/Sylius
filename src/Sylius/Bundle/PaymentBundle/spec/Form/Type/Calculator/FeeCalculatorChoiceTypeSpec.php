@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -34,7 +34,7 @@ class FeeCalculatorChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_sets_default_options(OptionsResolverInterface $resolver)
+    public function it_sets_default_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array('choices' => array()))->shouldBeCalled();
 

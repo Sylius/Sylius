@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GenderTypeSpec extends ObjectBehavior
 {
@@ -27,7 +27,7 @@ class GenderTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'choices' => array(

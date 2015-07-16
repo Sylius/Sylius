@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Shipping charges calculator.
@@ -48,7 +48,7 @@ interface CalculatorInterface
     /**
      * Define the configuration.
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setConfiguration(OptionsResolverInterface $resolver);
+    public function setConfiguration(OptionsResolver $resolver);
 }

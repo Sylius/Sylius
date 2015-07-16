@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -34,7 +34,7 @@ class PaymentGatewayChoiceTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'choices' => array('offline' => 'Offline'),

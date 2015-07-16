@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Calculator which charges a one rate for first item and other for next items.
@@ -63,7 +63,7 @@ class FlexibleRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

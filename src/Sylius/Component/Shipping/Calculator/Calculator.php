@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Base calculator.
@@ -39,7 +39,7 @@ abstract class Calculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolver $resolver)
     {
         // Nothing to do here...
     }

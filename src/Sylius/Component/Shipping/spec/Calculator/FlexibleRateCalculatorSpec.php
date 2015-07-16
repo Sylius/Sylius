@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -36,7 +36,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
     }
 
     public function it_has_required_first_and_additional_items_cost_with_limit_configuration_options(
-        OptionsResolverInterface $resolver
+        OptionsResolver $resolver
     ) {
         $resolver->setDefaults(array('additional_item_limit' => 0))
             ->shouldBeCalled()

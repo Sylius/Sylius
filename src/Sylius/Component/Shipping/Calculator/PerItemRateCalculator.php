@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Calculator which charges a flat rate per item.
@@ -48,7 +48,7 @@ class PerItemRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolver $resolver)
     {
         $resolver
             ->setRequired(array(

@@ -4,7 +4,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderStateChoiceTypeSpec extends ObjectBehavior
 {
@@ -18,7 +18,7 @@ class OrderStateChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_has_option(OptionsResolverInterface $resolver)
+    public function it_has_option(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'choices' => array(

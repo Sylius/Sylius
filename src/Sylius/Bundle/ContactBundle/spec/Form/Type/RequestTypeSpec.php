@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ContactBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -66,7 +66,7 @@ class RequestTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

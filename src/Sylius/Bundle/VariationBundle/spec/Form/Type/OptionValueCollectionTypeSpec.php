@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OptionValueCollectionTypeSpec extends ObjectBehavior
 {
@@ -49,7 +49,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         ));
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'options' => null,

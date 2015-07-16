@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -34,7 +34,7 @@ class CollectionExtensionSpec extends ObjectBehavior
         $this->getExtendedType()->shouldReturn('collection');
     }
 
-    public function it_should_have_default_option(OptionsResolverInterface $resolver)
+    public function it_should_have_default_option(OptionsResolver $resolver)
     {
         $resolver->setDefined(array(
             'button_add_label',

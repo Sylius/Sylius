@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,7 +35,7 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
         $this->shouldBeConfigurable();
     }
 
-    public function it_has_required_amount_configuration_options(OptionsResolverInterface $resolver)
+    public function it_has_required_amount_configuration_options(OptionsResolver $resolver)
     {
         $resolver->setRequired(array('amount'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes(array('amount' => array('numeric')))->shouldBeCalled()->willReturn($resolver);

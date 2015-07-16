@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
@@ -45,7 +45,7 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_has_options(OptionsResolverInterface $resolver)
+    public function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => null,

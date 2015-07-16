@@ -17,7 +17,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -81,7 +81,7 @@ class AttributeValueTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'AttributeValue', 'validation_groups' => array('sylius')))->shouldBeCalled();
 

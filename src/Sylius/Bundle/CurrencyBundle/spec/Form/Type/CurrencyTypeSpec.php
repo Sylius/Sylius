@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -56,7 +56,7 @@ class CurrencyTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

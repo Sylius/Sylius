@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -77,7 +77,7 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    public function it_should_have_default_option(OptionsResolverInterface $resolver)
+    public function it_should_have_default_option(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
