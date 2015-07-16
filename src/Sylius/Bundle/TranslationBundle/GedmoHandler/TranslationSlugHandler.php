@@ -190,7 +190,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     public function transliterate($text, $separator, $object)
     {
-        if ('' !== $this->parentSlug) {
+        if (!empty($this->parentSlug)) {
             $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
         } else {
             // if no parentSlug, apply our prefix
