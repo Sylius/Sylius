@@ -249,7 +249,6 @@ EOT
             }
 
             $country = $countryRepository->createNew();
-            $country->setName($name);
             $country->setIsoName($code);
 
             $countryManager->persist($country);
