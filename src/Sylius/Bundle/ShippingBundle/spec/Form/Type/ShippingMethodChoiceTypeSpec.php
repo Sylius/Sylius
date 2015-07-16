@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
@@ -56,7 +56,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
     public function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'subject',
         ))->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes(array(

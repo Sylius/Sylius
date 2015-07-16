@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType as BaseShippingMethodType;
 
 /**
@@ -62,7 +62,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 'channel' => null,
             ))
             ->setAllowedTypes(
-                'channel' , array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+                'channel', array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
             )
         ;
     }

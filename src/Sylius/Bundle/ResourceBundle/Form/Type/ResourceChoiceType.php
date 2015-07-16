@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Extending Doctrine document/entity/phpcr_document choice form types.
@@ -64,11 +64,11 @@ class ResourceChoiceType extends AbstractType
             ->setDefaults(array(
                 'class' => null,
             ))
-            ->setNormalizers(array(
-                'class' => function () use ($className) {
+            ->setNormalizer(
+                'class',  function () use ($className) {
                     return $className;
-                },
-            ))
+                }
+            )
         ;
     }
 

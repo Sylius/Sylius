@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Renderer choice type.

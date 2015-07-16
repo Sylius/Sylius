@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Taxon choice form form.
@@ -85,10 +85,10 @@ class TaxonChoiceType extends AbstractType
                 'filter',
             ))
             ->setAllowedTypes(
-                'taxonomy' , array('Sylius\Component\Taxonomy\Model\TaxonomyInterface')
+                'taxonomy', array('Sylius\Component\Taxonomy\Model\TaxonomyInterface')
             )
             ->setAllowedTypes(
-                'filter' , array('\Closure', 'null')
+                'filter', array('\Closure', 'null')
             )
         ;
     }

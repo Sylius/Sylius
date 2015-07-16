@@ -33,7 +33,7 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      */
     public function getId();
 
-/**
+    /**
      * Returns all prototype attributes.
      *
      * @return Collection|BaseAttributeInterface[]
@@ -122,7 +122,7 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      */
     public function getParent();
 
-/**
+    /**
      * Get code.
      *
      * @return string

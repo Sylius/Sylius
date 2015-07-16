@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class VariantMatchTypeSpec extends ObjectBehavior
 {

@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateExtension extends AbstractTypeExtension
 {
@@ -63,7 +63,7 @@ class DateExtension extends AbstractTypeExtension
             'leading_zero' => false,
         ));
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'placeholder',
             'language',
             'leading_zero',
@@ -77,7 +77,7 @@ class DateExtension extends AbstractTypeExtension
              'language', array('string')
 
         );
-       $resolver->setAllowedTypes(
+        $resolver->setAllowedTypes(
            'leading_zero', array('bool')
        );
     }

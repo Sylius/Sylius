@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Extension;
 
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Sylius money form extension.

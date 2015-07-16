@@ -380,18 +380,17 @@ class ResourceController extends FOSRestController
         return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
     }
 
-
     /**
      * Shortcut to return the request service.
      *
      * @return Request
+     *
      * @deprecated since version 2.4, to be removed in 3.0.
      *             Ask Symfony to inject the Request object into your controller
      *             method instead by type hinting it in the method's signature.
      */
     public function getRequest()
     {
-
         return $this->container->get('request_stack')->getCurrentRequest();
     }
 

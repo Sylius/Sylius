@@ -61,7 +61,7 @@ class SecurityController extends Controller
         $session = $request->getSession();
         $error = null;
 
-        /**
+        /*
          * Process Security ith Session, Toke, Roles...
          */
 

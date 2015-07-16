@@ -29,7 +29,6 @@ class ProductController extends ResourceController
     {
         $product = parent::createNew();
 
-
         $code = $this->getRequest()->query->get('archetype');
 
         if (null === $code) {

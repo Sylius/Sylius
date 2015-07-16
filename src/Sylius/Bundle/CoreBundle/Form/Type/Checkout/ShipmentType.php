@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -73,15 +73,15 @@ class ShipmentType extends AbstractType
             ->setDefaults(array(
                 'data_class' => $this->dataClass,
             ))
-            ->setOptional(array(
+            ->setDefined(array(
                 'criteria',
                 'channel',
             ))
             ->setAllowedTypes(
-                'criteria' , array('array')
+                'criteria', array('array')
             )
             ->setAllowedTypes(
-                'channel' , array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+                'channel', array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
             )
         ;
     }

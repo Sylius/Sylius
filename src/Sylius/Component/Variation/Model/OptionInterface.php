@@ -31,7 +31,7 @@ interface OptionInterface extends TimestampableInterface, OptionTranslationInter
      */
     public function getId();
 
-/**
+    /**
      * Get internal name.
      *
      * It is used only in backend so you can easily

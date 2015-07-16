@@ -53,7 +53,7 @@ class GeneralSettingsSchema implements SchemaInterface
                 'tracking_code' => '',
             ), $this->defaults))
             ->setAllowedTypes(
-                'title' , array('string')
+                'title', array('string')
             )
             ->setAllowedTypes(
                 'meta_keywords', array('string')

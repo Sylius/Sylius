@@ -16,7 +16,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Address form type.
@@ -79,7 +78,6 @@ class AddressType extends AbstractResourceType
                 'label' => 'sylius.form.address.postcode',
             ))
         ;
-
     }
 
     /**
@@ -87,7 +85,6 @@ class AddressType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-
         parent::configureOptions($resolver);
 
         $validationGroups = $this->validationGroups;
@@ -104,7 +101,7 @@ class AddressType extends AbstractResourceType
                 'shippable' => false,
             ))
             ->setAllowedTypes(
-                'shippable' , 'bool'
+                'shippable', 'bool'
             )
         ;
     }

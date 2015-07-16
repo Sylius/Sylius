@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -66,7 +66,7 @@ class ActionTypeSpec extends ObjectBehavior
             'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
-        $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
+        $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

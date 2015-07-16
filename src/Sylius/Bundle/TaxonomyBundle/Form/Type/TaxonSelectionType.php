@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Taxon selection form.
@@ -90,8 +90,8 @@ class TaxonSelectionType extends AbstractType
             ))
         ;
 
-        $resolver->setNormalizers(array(
-            'model_transformer' => function (Options $options, $value) {
+        $resolver->setNormalizer(
+            'model_transformer', function (Options $options, $value) {
                 if (!is_array($value)) {
                     $value = array(
                         'class' => $value,
@@ -107,8 +107,8 @@ class TaxonSelectionType extends AbstractType
                 }
 
                 return $value;
-            },
-        ));
+            }
+        );
     }
 
     /**

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Core;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -39,7 +39,7 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'configuration_type',
         ));
     }

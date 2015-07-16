@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType as BaseCartItemType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver; use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * We extend the item form type a bit, to add a variant select field
@@ -54,11 +54,11 @@ class CartItemType extends BaseCartItemType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setOptional(array(
+            ->setDefined(array(
                 'product',
             ))
             ->setAllowedTypes(
-                'product' , array('Sylius\Component\Core\Model\ProductInterface')
+                'product', array('Sylius\Component\Core\Model\ProductInterface')
             )
         ;
     }

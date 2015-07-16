@@ -604,7 +604,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->clickLink('Show deleted');
     }
 
-/**
+    /**
      * @Then I should see table of :id sorted by lastName
      */
     public function iShouldSeeTableSortedByLastName($id)
