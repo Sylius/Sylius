@@ -137,6 +137,18 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param OutputInterface $output
+     * @param string          $question
+     * @param array           $constraints
+     *
+     * @return mixed
+     */
+    protected function askHidden(OutputInterface $output, $question, array $constraints = array())
+    {
+        return $this->proceedAskRequest($output, $question, $constraints, null, true);
+    }
+
+    /**
+     * @param OutputInterface $output
      * @param string $question
      * @param array $constraints
      * @param mixed $default
@@ -145,24 +157,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function ask(OutputInterface $output, $question, array $constraints = array(), $default = null)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
-
-        do {
-            $value = $dialog->ask($output, sprintf('<question>%s</question> ', $question), $default);
-            // do not validate value if no constraints were given
-            if (empty($constraints)) {
-                return $value;
-            }
-            $valid = 0 === count($errors = $this->validate($value, $constraints));
-
-            if (!$valid) {
-                foreach ($errors as $error) {
-                    $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
-                }
-            }
-        } while (!$valid);
-
-        return $value;
+        return $this->proceedAskRequest($output, $question, $constraints, $default);
     }
 
     /**
@@ -185,5 +180,53 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         foreach ($errors as $error) {
             $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
         }
+    }
+
+    /**
+     * @param OutputInterface $output
+     * @param string          $question
+     * @param array           $constraints
+     * @param string          $default
+     * @param boolean         $hidden
+     *
+     * @return mixed
+     */
+    private function proceedAskRequest(OutputInterface $output, $question, array $constraints = array(), $default = null, $hidden = false)
+    {
+        do {
+            $value = $this->getAnswerFromDialog($output, $question, $default, $hidden);
+            // do not validate value if no constraints were given
+            if (empty($constraints)) {
+                return $value;
+            }
+            $valid = 0 === count($errors = $this->validate($value, $constraints));
+
+            if (!$valid) {
+                foreach ($errors as $error) {
+                    $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+                }
+            }
+        } while (!$valid);
+
+        return $value;
+    }
+
+    /**
+     * @param OutputInterface $output
+     * @param string $question
+     * @param string|null $default
+     * @param boolean $hidden
+     *
+     * @return string
+     */
+    private function getAnswerFromDialog(OutputInterface $output, $question, $default = null, $hidden)
+    {
+        $dialog = $this->getHelperSet()->get('dialog');
+
+        if (!$hidden) {
+            return $dialog->ask($output, sprintf('<question>%s</question> ', $question), $default);
+        }
+
+        return $dialog->askHiddenResponse($output, sprintf('<question>%s</question> ', $question));
     }
 }

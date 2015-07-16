@@ -97,7 +97,7 @@ EOT
             } while ($exists);
 
             $user->setEmail($email);
-            $user->setPlainPassword($this->ask($output, 'Choose password:', array(new NotBlank())));
+            $user->setPlainPassword($this->askHidden($output, 'Choose password:', array(new NotBlank())));
         }
 
         $user->setEnabled(true);
