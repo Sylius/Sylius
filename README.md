@@ -30,7 +30,7 @@ With Symfony 3.0
 
 New Backend Theme
 -------------
-![alt tag](https://raw.github.com/Symfomany/Sylius/theme/1.png)
+![alt tag](https://raw.githubusercontent.com/Symfomany/Sylius/master/theme/1.png)
 
 
 
