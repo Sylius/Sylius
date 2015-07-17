@@ -119,37 +119,6 @@ Feature: Products
         And "Product has been successfully created." should appear on the page
         And I should see "Cotton"
 
-    @javascript
-    Scenario: Creating product with boolean attribute
-        Given I am on the product creation page
-        When I fill in the following:
-            | Name        | Manchester United tee   |
-            | Description | Interesting description |
-            | Price       | 59.99                   |
-        And go to "Attributes" tab
-        And I click "Add attribute"
-        And I select "T-Shirt fare trade" from "Attribute"
-        And I check "Value"
-        When I press "Create"
-        Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
-
-    @javascript
-    Scenario: Creating product with attributes to choose
-        Given I am on the product creation page
-        When I fill in the following:
-            | Name        | Manchester United tee   |
-            | Description | Interesting description |
-            | Price       | 59.99                   |
-        And go to "Attributes" tab
-        And I click "Add attribute"
-        And I select "Color" from "Attribute"
-        And I select "red" from "Value"
-        When I press "Create"
-        Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
-
-    @javascript
     Scenario: Creating product with number attribute
         Given I am on the product creation page
         When I fill in the following:

@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+if [ -f $SYLIUS_CACHE_DIR/composer-mongodb.lock ]; then
+    cp $SYLIUS_CACHE_DIR/composer-mongodb.lock composer.lock
+else
+    composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
+    composer require jmikola/geojson="~1.0" --no-update
+    composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction
+    cp composer.lock $SYLIUS_CACHE_DIR/composer-mongodb.lock
+fi
