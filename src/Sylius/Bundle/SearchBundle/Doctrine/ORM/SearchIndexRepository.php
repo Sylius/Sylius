@@ -111,9 +111,12 @@ class SearchIndexRepository extends EntityRepository
             ;
 
             foreach ($queryBuilder->getQuery()->getResult() as $object) {
-                $results[] = $object;
+                $pos = array_search($object->getId(), $ids);
+                $results[$pos] = $object;
             }
         }
+        
+        ksort($results);
 
         return $results;
     }
