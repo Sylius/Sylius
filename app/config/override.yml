@@ -1,0 +1,13 @@
+
+# Configuration
+sylius_web:
+    driver: doctrine/orm
+    classes:
+        backend:
+            dashboard:
+                controller: Sylius\BackendBundle\Controller\DashboardController
+
+#Overide services
+parameters:
+    sylius.controller.backend.dashboard.class: Sylius\BackendBundle\Controller\MainController
+

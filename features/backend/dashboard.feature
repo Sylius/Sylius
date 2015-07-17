@@ -2,7 +2,7 @@
 Feature: Store dashboard
     In order to have an overview of my business
     As a store owner
-    I need to be able to see sales info in backend dashboard
+    I need to be able to see all informations in backend dashboard
 
     Background:
         Given there is default currency configured

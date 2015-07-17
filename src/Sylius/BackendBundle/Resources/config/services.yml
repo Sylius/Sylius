@@ -1,4 +1,4 @@
 services:
-#    sylius_backend.example:
-#        class: Sylius\BackendBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+#    sylius.repository.statistic:
+#        class: Sylius\BackendBundle\Repository\StatisticRepository
+#        arguments: [ "@doctrine.orm.entity_manager" ]

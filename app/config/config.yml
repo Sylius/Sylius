@@ -6,6 +6,7 @@ imports:
     - { resource: security.yml }
     - { resource: migrations.yml }    
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
+    - { resource: override.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -89,6 +90,7 @@ swiftmailer:
     port: %sylius.mailer.port%
 
 
+#FOS Configuration
 fos_elastica:
      clients:
          elasticsearch:

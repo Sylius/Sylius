@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ 'sylius.meta.backend_title'|trans }}
+            {% endblock %}
+        </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+        <meta charset="UTF-8">
+        <!-- Open Sans font from Google CDN -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+        {# Stylesheets #}
+        {% block stylesheets %}
+            <link href="{{ asset('assets/backend/stylesheets/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/pixel-admin.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/widgets.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/rtl.min.css') }} " rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/backend/stylesheets/themes.min.css') }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-default main-menu-animated">
+
+    {#ini.push() initialize all jquery modules #}
+    <script>var init = [];</script>
+    <div id="main-wrapper">
+
+        {% include 'SyliusWebBundle:Backend:_navbar.html.twig' %}
+
+        {% include 'SyliusWebBundle:Backend:_sidebar.html.twig' %}
+
+        {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
+
+        <div id="content-wrapper">
+
+                    <div id="topbar">
+                        {% block topbar %}
+                        {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
+                        {% endblock %}
+                    </div>
+
+            <div class="page-header">
+
+                <div class="row">
+                    <!-- Page header, center on small screens -->
+                    <h1 class="col-xs-12 col-sm-4 text-center text-left-sm">
+                        {% block titlepage %}
+                            <i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;{{ 'sylius.backend.dashboard.header'|trans }}
+                        {% endblock %}
+                    </h1>
+
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="row">
+                            <hr class="visible-xs no-grid-gutter-h">
+                            <!-- "Create project" button, width=auto on desktops -->
+                            <div class="pull-right col-xs-12 col-sm-auto"><a href="#" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-search"></span>{{ 'sylius.backend.search'|trans }}</a></div>
+
+                            <!-- Margin -->
+                            <div class="visible-xs clearfix form-group-margin"></div>
+
+                            <!-- Search field -->
+                            <form action="" class="pull-right col-xs-12 col-sm-6">
+                                <div class="input-group no-margin">
+                                    <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                                    <input type="text" placeholder="{{ 'sylius.backend.search'|trans }}" class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+                    <div id="content">
+
+                        {% block content %}
+                        {% endblock %}
+
+                        <hr>
+
+                        {# Gallery modal #}
+                        {% include 'SyliusWebBundle::gallery.html.twig' %}
+
+                        {# Confirmation modal #}
+                        {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
+
+                        <footer>
+                            <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
+                        </footer>
+                    </div>
+                </div>
+        </div>
+
+
+    <div id="main-menu-bg"></div>
+
+    </div>
+
+        {# javascripts... #}
+        {% block javascripts %}
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+            <script src="{{ asset('assets/backend/javascripts/pixel-admin.min.js') }}"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/hinclude/0.9.5/hinclude.min.js"></script>
+            <script type="text/javascript">
+                init.push(function () {
+
+                    $('form').on("submit", function (event) {
+                        $(this).find('button:last').attr('disabled', 'disabled');
+                        $(this).find('button:last').text('Sending...');
+                    });
+                    $("select").select2();
+                    $("input[type='date']").attr('type','text').mask("99/99/9999");
+                    $('input[type="file"]').pixelFileInput({ placeholder: 'Empty files...' });
+                    $('div.alert-success').delay(3000).slideUp('slow');
+                });
+                window.PixelAdmin.start(init);
+
+            </script>
+
+            {#{% javascripts output='assets/compiled/backend.js'#}
+                {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+            {#{% endjavascripts %}#}
+        {% endblock %}
+    </body>
+</html>
