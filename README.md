@@ -33,6 +33,7 @@ New Backend Theme
 ![alt tag](https://raw.githubusercontent.com/Symfomany/Sylius/master/theme/1.png)
 ![alt tag](https://raw.githubusercontent.com/Symfomany/Sylius/master/theme/2.png)
 ![alt tag](https://raw.githubusercontent.com/Symfomany/Sylius/master/theme/3.png)
+![alt tag](https://raw.githubusercontent.com/Symfomany/Sylius/master/theme/4.png)
 
 
 

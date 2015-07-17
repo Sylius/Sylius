@@ -1,0 +1,181 @@
+body {
+	/*background:#EDEEF0;*/
+	background:#fff;
+}
+
+::selection {
+ color:#fff;
+ background:#34bc8a;
+}
+::-moz-selection {
+ color:#fff;
+ background:#34bc8a;
+}
+::-webkit-selection {
+ color:#fff;
+ background:#34bc8a;
+}
+a:hover, a:focus {
+	color:#3bca95;
+}
+.search-full, .search-input {
+	background: #34bc8a;
+}
+.search-close {
+	color: #34bc8a;
+}
+.btn-primary, .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
+	background-color: #3bca95;
+	color: #FFFFFF;
+}
+.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+	background:  #2c88c5;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #42daa2;
+	border-color: #42daa2;
+	color: #FFFFFF;
+}
+.navbar-top {
+	background:#33b585;
+}
+.navbar-tshop {
+	background:#3bca95;
+}
+.site-color {
+	color:#3bca95 !important;
+}
+.navbar-nav > li > a {
+	color:#fff;
+}
+.nav > li.active, .nav > li > a:hover, .nav > li > a:focus, .nav > li:hover > a {
+	background:#34bc8a;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
+	background:#34bc8a;
+}
+.dropdown-menu {
+	border-top: solid #34bc8a;
+}
+.search-box:hover .form-control {
+	background:#3bca95;
+}
+.search-box:hover .btn-nobg {
+	color:#3bca95;
+}
+.searchInputBox .search-btn {
+	color:#fff;
+}
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background:rgba(59, 202, 149, 0.7) !important;
+}
+.action-control a:hover, .action-control a.active {
+	color:#fff;
+	background:#34bc8a;
+}
+.product:hover, .featuredImgLook2 .inner:hover {
+	border: 1px solid #3bca95;
+}
+.subCategoryList .thumbnail:hover {
+	border: 1px solid #3bca95;
+}
+.pager2 a {
+	border: 1px solid #3bca95;
+}
+.pager2 a.selected {
+	background:#3bca95;
+}
+.btn-discover, .btn-site, .newsLatterBox .btn {
+	background: #3bca95;
+}
+.btn-discover:hover, .btn-site:hover, .newsLatterBox .btn:hover {
+	background: #34bc8a;
+}
+.full {
+	width:100%;
+}
+.footer a:hover {
+	color:#3bca95;
+}
+.footer {
+/*border-top: solid 3px #3bca95;*/
+}
+.modal-header {
+	background: #3bca95;
+}
+.form-control:focus {
+	border-color: #3bca95;
+}
+.new-product {
+	background:rgba(59, 202, 149, 0.95) !important;
+}
+#pager a.cycle-pager-active {
+	background:rgba(59, 202, 149, 0.5);
+}
+/* tree menu */
+
+
+.nav.tree > li.active, .nav.tree > li > a:hover, .nav.tree > li > a:focus, .nav.tree > li:hover > a {
+	background:none;
+	color:#34bc8a;
+}
+.nav.tree .open-tree > a, .nav.tree .open-tree > a:hover, .nav.tree .open-tree > a:focus {
+	background:none;
+	font-weight:bold;
+	color:#34bc8a;
+}
+.panel-default > .panel-heading {
+	border-top: 4px solid #3bca95;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+	background:#BFC9CA;
+}
+.nav-tabs {
+	border-bottom: 3px solid #BFC9CA;
+}
+.socialIcon a:hover {
+	background:#3bca95;
+}
+.cart-actions button, .cart-actions .wishlist {
+	background: none repeat scroll 0 0 #3bca95;
+	border: 2px solid #34bc8a;
+}
+.cart-actions button:hover {
+	background:#fff;
+	color:#34bc8a;
+	border:solid 2px #3bca95;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, sp-current:visited {
+	border: 2px solid #3bca95 !important;
+}
+.promo-1 {
+	background: none repeat scroll 0 0 #34bc8a;
+}
+ @media (max-width: 767px) {
+ .miniCartFooter {
+ background:#34bc8a !important;
+}
+}
+#pager2 span.cycle-pager-active {
+}
+#pager2 span.cycle-pager-active {
+	background: #34bc8a !important;
+}
+#pager2 span {
+	border: 2px solid #34bc8a
+}
+.orderStep li.active a {
+	background: #3bca95;
+}
+.orderStep li.active a:after {
+	border-top-color: #3bca95 !important;
+}
+.orderStep li a {
+	background:  #2c88c5;
+}
+darkcoilor {
+	background:#2c88c5;
+}
+citecolor {
+	color:#3bca95 !important;
+}

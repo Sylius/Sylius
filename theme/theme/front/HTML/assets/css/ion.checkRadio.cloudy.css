@@ -1,0 +1,51 @@
+/* Ion.CheckRadio, Cloudy Skin
+// Version 1.0.0
+// by Denis Ineshin | ionden.com
+// ===================================================================================================================*/
+
+/* =====================================================================================================================
+// Skin details */
+
+.icr__radio, .icr__checkbox {
+    background: url(../../images/icr-cloudy-skin.png) no-repeat;
+}
+
+.icr {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px; line-height: 15px;
+    margin: 0 25px 10px 0;
+    color: #555;
+}
+    .icr__text {
+        padding: 2px 0 0 22px;
+    }
+
+
+    .icr__checkbox {
+        width: 18px; height: 18px;
+        background-position: 0 0;
+    }
+    .icr.enabled:hover .icr__checkbox {
+        background-position: -50px 0;
+    }
+    .icr.checked .icr__checkbox {
+        background-position: -100px 0;
+    }
+    .icr.enabled.checked:hover .icr__checkbox {
+        background-position: -150px 0;
+    }
+
+
+    .icr__radio {
+        width: 18px; height: 18px;
+        background-position: 0 -50px;
+    }
+    .icr.enabled:hover .icr__radio {
+        background-position: -50px -50px;
+    }
+    .icr.checked .icr__radio {
+        background-position: -100px -50px;;
+    }
+    .icr.enabled.checked:hover .icr__radio {
+        background-position: -150px -50px;;
+    }

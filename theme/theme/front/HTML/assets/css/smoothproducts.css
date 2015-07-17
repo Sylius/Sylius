@@ -1,0 +1,90 @@
+html, body {
+    height:100%: width:100%;
+}
+
+ .sp-wrap {
+    display:none;
+    line-height:0;
+    font-size:0;
+    background:#eee;
+    position:relative;
+    margin:0 25px 15px 0;
+    border: 1px solid #E4E4E4;
+    float:left;
+}
+.sp-large {
+    position:relative;
+    overflow:hidden;
+}
+.sp-large a img {
+    max-width:100%;
+    height:auto;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+}
+.sp-large a {
+    display:inline-block;
+}
+.sp-thumbs {
+    width:100%;
+    text-align:left;
+}
+.sp-thumbs img {
+    width:50px;
+    height:50px;
+}
+.sp-thumbs a:link, .sp-thumbs a:visited {
+    border:2px solid #eee;
+    display:inline-block;
+	float:right;
+	margin-right:5px;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current {
+    border:2px solid #222 ;
+}
+.sp-zoom {
+    position:absolute;
+    left:0;
+    top:0;
+    cursor:zoom;
+    cursor: -webkit-zoom-out;
+    cursor: -moz-zoom-out;
+    display:none;
+}
+
+
+/*** CUSTOM THUMBNAIL || PRODUCT STYLE 3 **/
+
+.productThumb {
+	border-top: 1px solid #dddddd;
+    padding-top: 10px;
+}
+
+.productThumb .sp-thumbs {
+    bottom: auto !important;
+    position: relative;
+    right: 0 !important;
+    text-align: left;
+    width: 100% !important;
+    z-index: 70;
+}
+.productThumb .sp-thumbs img {
+    width:50px;
+    height:50px;
+}
+.productThumb .sp-thumbs a:link, .productThumb .sp-thumbs a:visited {
+    border:2px solid #eee;
+    display:inline-block;
+	float:left;
+	margin-right:5px;
+}
+.productThumb .sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, .productThumb .sp-thumbs a {
+    border:2px solid #222 ;
+	margin-right:10px !important;
+}
+
+ .style3 .sp-large {
+    border: 1px solid #dddddd;
+    max-width: 100% !important;
+
+}

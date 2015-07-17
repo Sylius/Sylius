@@ -1,0 +1,26 @@
+TSHOP
+Version 1.1
+
+-------------------------------
+6 June 2014
+-------------------------------
+
+1. Fixed bug # scrolling issue in chrome and safari.
+2. Updated Style.css and script.js
+
+
+Version 1.2
+
+-------------------------------
+20 August 2014
+-------------------------------
+1. Bootstrap 3.2.0
+2. Awesome 4.1.0
+3. Added 3 New Home Pages Version
+4. Added Category Product List View Page
+5. Added Add to Wish list Button in products
+6. Added Custom Thumbnails functionality for Product Details Page
+7. Fixed bug for category Price range Input field overflow issue.
+8. Updated Typography, Buttons and UI
+8. Updated Documentation
+

@@ -1,0 +1,180 @@
+body {
+	/*background:#EDEEF0;*/
+	background:#fff;
+}
+
+::selection {
+ color:#fff;
+ background:#1ABC9C;
+}
+::-moz-selection {
+ color:#fff;
+ background:#1ABC9C;
+}
+.site-color {
+	color:#1abc9c !important;
+}
+a:hover, a:focus {
+	color:#1abc9c;
+}
+.search-full, .search-input {
+	background: #1abc9c;
+}
+.search-close {
+	color: #2980b9;
+}
+.searchInputBox .search-btn {
+	color:#fff;
+}
+.btn-primary, .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
+	background-color: #1ABC9C;
+	color: #FFFFFF;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #48C9B0;
+	border-color: #48C9B0;
+	color: #FFFFFF;
+}
+.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+	background:  #16A085;
+}
+.navbar-tshop {
+	background:#1abc9c;
+}
+.navbar-top {
+	background:#15a488;
+}
+.navbar-nav > li > a {
+	color:#fff;
+}
+.nav > li.active, .nav > li > a:hover, .nav > li > a:focus, .nav > li:hover > a {
+	background:#16a085;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
+	background:#16a085;
+}
+.dropdown-menu {
+	border-top: solid #16a085;
+}
+.search-box:hover .form-control {
+	background:#1abc9c;
+}
+.search-box:hover .btn-nobg {
+	color:#1abc9c;
+}
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background:rgba(26, 188, 156, 0.7) !important;
+}
+.action-control a:hover, .action-control a.active {
+	color:#fff;
+	background:#16a085;
+}
+.product:hover, .featuredImgLook2 .inner:hover {
+	border: 1px solid #1abc9c;
+}
+.subCategoryList .thumbnail:hover {
+	border: 1px solid #1abc9c;
+}
+.pager2 a {
+	border: 1px solid #1abc9c;
+}
+.pager2 a.selected {
+	background:#1abc9c;
+}
+.btn-site, .newsLatterBox .btn {
+	background: #1abc9c;
+}
+.btn-discover:hover, .btn-site:hover, .newsLatterBox .btn:hover {
+	background: #16a085;
+}
+.full {
+	width:100%;
+}
+.footer a:hover {
+	color:#1abc9c;
+}
+.footer {
+/*border-top: solid 3px #1abc9c;*/
+}
+.modal-header {
+	background: #1abc9c;
+}
+.form-control:focus {
+	border-color: #1abc9c;
+}
+.new-product {
+	background:rgba(26, 188, 156, 0.95) !important;
+}
+#pager a.cycle-pager-active {
+	background:rgba(26, 188, 156, 0.5);
+}
+/* tree menu */
+
+
+.nav.tree > li.active, .nav.tree > li > a:hover, .nav.tree > li > a:focus, .nav.tree > li:hover > a {
+	background:none;
+	color:#2c3e50;
+}
+.nav.tree .open-tree > a, .nav.tree .open-tree > a:hover, .nav.tree .open-tree > a:focus {
+	background:none;
+	font-weight:bold;
+	color:#2c3e50;
+}
+.panel-default > .panel-heading {
+	border-top: 4px solid #1abc9c;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+	background:#BFC9CA;
+}
+.nav-tabs {
+	border-bottom: 3px solid #BFC9CA;
+}
+.socialIcon a:hover {
+	background:#1abc9c;
+}
+.cart-actions button, .cart-actions .wishlist {
+	background: none repeat scroll 0 0 #1abc9c;
+	border: 2px solid #16a085;
+}
+.cart-actions button:hover {
+	background:#fff;
+	color:#2c3e50;
+	border:solid 2px #1abc9c;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, sp-current:visited {
+	border: 2px solid #1abc9c !important;
+}
+.promo-1 {
+	background: none repeat scroll 0 0 #16a085;
+}
+ @media (max-width: 767px) {
+ .miniCartFooter {
+ background:#16a085 !important;
+}
+}
+#pager2 span.cycle-pager-active {
+}
+#pager2 span.cycle-pager-active {
+	background: #16a085 !important;
+}
+#pager2 span {
+	border: 2px solid #16a085
+}
+.orderStep li.active a {
+	background: #1abc9c;
+}
+.orderStep li.active a:after {
+	border-top-color: #1abc9c !important;
+}
+.orderStep li a {
+	background:  #1abc9c;
+}
+darkcoilor {
+	background:#15a488;
+}
+citecolor {
+	color:#1abc9c !important;
+}
+citecolor:hover {
+	color:#1abc9c !important;
+}

@@ -1,0 +1,1367 @@
+
+<!DOCTYPE html>
+<!--
+
+TABLE OF CONTENTS.
+
+Use search to find needed section.
+
+=====================================================
+
+|  1. $BODY                 |  Body                 |
+|  2. $MAIN_NAVIGATION      |  Main navigation      |
+|  3. $NAVBAR_ICON_BUTTONS  |  Navbar Icon Buttons  |
+|  4. $MAIN_MENU            |  Main menu            |
+|  5. $DEFAULT_TABS         |  Default tabs         |
+|  6. $SIMPLE_TABS          |  Simple tabs          |
+|  7. $DEFAULT_PILLS        |  Default pills        |
+|  8. $TAB_SIZES            |  Tab sizes            |
+|  9. $JUSTIFIED_TABS       |  Justified tabs       |
+|  10. $STACKED_PILLS       |  Stacked pills        |
+|  11. $BOOTSTRAP_TAB_DROP  |  Stacked pills        |
+|  12. $DEFAULT_ACCORDIONS  |  Default accordions   |
+|  13. $ACCORDION_COLORS    |  Accordion colors     |
+
+=====================================================
+
+-->
+
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Tabs &amp; Accordions - UI Elements - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+	
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'      - Sets text direction to right-to-left
+	* 'main-menu-right'    - Places the main menu on the right side
+	* 'no-main-menu'       - Hides the main menu
+	* 'main-navbar-fixed'  - Fixes the main navigation
+	* 'main-menu-fixed'    - Fixes the main menu
+	* 'main-menu-animated' - Animate main menu
+-->
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];</script>
+<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<div id="main-wrapper">
+
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+	Main navigation
+-->
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+			<!-- Main navbar header -->
+			<div class="navbar-header">
+
+				<!-- Logo -->
+				<a href="index.html" class="navbar-brand">
+					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+					PixelAdmin
+				</a>
+
+				<!-- Main navbar toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+			</div> <!-- / .navbar-header -->
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First item</a></li>
+								<li><a href="#">Second item</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Third item</a></li>
+							</ul>
+						</li>
+					</ul> <!-- / .navbar-nav -->
+
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+							Navbar Icon Buttons
+
+							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+							Classes:
+							* 'nav-icon-btn-info'
+							* 'nav-icon-btn-success'
+							* 'nav-icon-btn-warning'
+							* 'nav-icon-btn-danger' 
+-->
+							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">5</span>
+									<i class="nav-icon fa fa-bullhorn"></i>
+									<span class="small-screen-text">Notifications</span>
+								</a>
+
+								<!-- NOTIFICATIONS -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-notifications').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+									<div class="notifications-list" id="main-navbar-notifications">
+
+										<div class="notification">
+											<div class="notification-title text-danger">SYSTEM</div>
+											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-info">STORE</div>
+											<div class="notification-description">You have <strong>9</strong> new orders.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-truck bg-info"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-default">CRON DAEMON</div>
+											<div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-clock-o bg-default"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-success">SYSTEM</div>
+											<div class="notification-description">Server <strong>up</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-success"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-warning">SYSTEM</div>
+											<div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-warning"></div>
+										</div> <!-- / .notification -->
+
+									</div> <!-- / .notifications-list -->
+									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+							<li class="nav-icon-btn nav-icon-btn-success dropdown">
+								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">10</span>
+									<i class="nav-icon fa fa-envelope"></i>
+									<span class="small-screen-text">Income messages</span>
+								</a>
+
+								<!-- MESSAGES -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-messages').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+									<div class="messages-list" id="main-navbar-messages">
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+									</div> <!-- / .messages-list -->
+									<a href="#" class="messages-link">MORE MESSAGES</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="Search">
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/demo/avatars/1.jpg">
+									<span>John Doe</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
+									<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+									<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+								</ul>
+							</li>
+						</ul> <!-- / .navbar-nav -->
+					</div> <!-- / .right -->
+				</div>
+			</div> <!-- / #main-navbar-collapse -->
+		</div> <!-- / .navbar-inner -->
+	</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+<!-- 4. $MAIN_MENU =================================================================================
+
+		Main menu
+		
+		Notes:
+		* to make the menu item active, add a class 'active' to the <li>
+		  example: <li class="active">...</li>
+		* multilevel submenu example:
+			<li class="mm-dropdown">
+			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+			  <ul>
+				<li>...</li>
+				<li class="mm-dropdown">
+				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+				  <ul>
+					<li>...</li>
+					...
+				  </ul>
+				</li>
+				...
+			  </ul>
+			</li>
+-->
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">
+			<div class="menu-content top" id="menu-content-demo">
+				<!-- Menu custom content demo
+					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+					 Javascript: html/assets/demo/demo.js
+				 -->
+				<div>
+					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+
+					<img src="assets/demo/avatars/1.jpg" alt="" class="">
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+					</div>
+					<a href="#" class="close">&times;</a>
+				</div>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">Layouts</span><span class="label label-warning">Updated</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="layouts-grid.html"><span class="mm-text">Grid</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="layouts-main-menu.html"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">Main menu</span><span class="label label-warning">Updated</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="stat-panels.html"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Stat panels</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="menu-icon fa fa-flask"></i><span class="mm-text">Widgets</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text">Form components</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text">Tables</span></a>
+				</li>
+				<li>
+					<a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text">Charts</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text">Pages</span><span class="label label-success">16</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text">Complete UI</span></a>
+				</li>
+				<li>
+					<a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text">Color Builder</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-sitemap"></i><span class="mm-text">Menu levels</span><span class="badge badge-primary">6</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span><span class="label label-info">21</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+								</li>
+								<li class="mm-dropdown">
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+									<ul>
+										<li class="mm-dropdown">
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+											<ul>
+												<li>
+													<a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul> <!-- / .navigation -->
+			<div class="menu-content">
+				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+			</div>
+		</div> <!-- / #main-menu-inner -->
+	</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
+
+
+	<div id="content-wrapper">
+
+		<div class="page-header">
+			<h1><span class="text-light-gray">UI Elements / </span>Tabs &amp; Accordions</h1>
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-sm-6">
+
+<!-- 5. $DEFAULT_TABS ==============================================================================
+
+				Default tabs
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Default tabs</span>
+					</div>
+					<div class="panel-body">
+						<ul id="uidemo-tabs-default-demo" class="nav nav-tabs">
+							<li class="active">
+								<a href="#uidemo-tabs-default-demo-home" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li class="">
+								<a href="#uidemo-tabs-default-demo-profile" data-toggle="tab">Profile <span class="badge badge-primary">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#uidemo-tabs-default-demo-dropdown1" data-toggle="tab">@fat</a></li>
+									<li><a href="#uidemo-tabs-default-demo-dropdown2" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul>
+
+						<div class="tab-content tab-content-bordered">
+							<div class="tab-pane fade active in" id="uidemo-tabs-default-demo-home">
+								<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+							</div> <!-- / .tab-pane -->
+							<div class="tab-pane fade" id="uidemo-tabs-default-demo-profile">
+								<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+							</div> <!-- / .tab-pane -->
+							<div class="tab-pane fade" id="uidemo-tabs-default-demo-dropdown1">
+								<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+							</div> <!-- / .tab-pane -->
+							<div class="tab-pane fade" id="uidemo-tabs-default-demo-dropdown2">
+								<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+							</div> <!-- / .tab-pane -->
+						</div> <!-- / .tab-content -->
+					</div>
+				</div>
+<!-- /5. $DEFAULT_TABS -->
+
+<!-- 6. $SIMPLE_TABS ===============================================================================
+
+				Simple tabs
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Simple tabs</span>
+					</div>
+					<div class="panel-body">
+						<!-- Default tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Default tabs -->
+
+						<!-- Small tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple nav-tabs-sm" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Small tabs -->
+
+						<!-- Extra small tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple nav-tabs-xs" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-warning">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-danger">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Extra small tabs -->
+					</div>
+				</div>
+<!-- /6. $SIMPLE_TABS -->
+
+<!-- 7. $DEFAULT_PILLS =============================================================================
+
+				Default pills
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Default pills</span>
+					</div>
+					<div class="panel-body">
+						<ul class="nav nav-pills">
+							<li class="active"><a href="#">Home<span class="label label-warning">14</span></a></li>
+							<li><a href="#">Help<span class="badge badge-danger">16</span></a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul> <!-- / .dropdown-menu -->
+							</li> <!-- / .dropdown -->
+						</ul>
+					</div>
+				</div>
+<!-- /7. $DEFAULT_PILLS -->
+
+			</div>
+			<div class="col-sm-6">
+
+<!-- 8. $TAB_SIZES =================================================================================
+
+				Tab sizes
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Tab sizes</span>
+					</div>
+					<div class="panel-body">
+						<!-- Small tabs -->
+						<ul class="nav nav-tabs nav-tabs-sm">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Small tabs -->
+
+						<!-- Extra small tabs -->
+						<ul class="nav nav-tabs nav-tabs-xs" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-warning">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-danger">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Extra small tabs -->
+					</div>
+				</div>
+<!-- /8. $TAB_SIZES -->
+
+<!-- 9. $JUSTIFIED_TABS ============================================================================
+
+				Justified tabs
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Justified tabs</span>
+					</div>
+					<div class="panel-body">
+
+						<!-- Default tabs ============================================================== -->
+
+						<ul class="nav nav-tabs nav-justified">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li class="">
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+
+						<!-- Small tabs -->
+						<ul class="nav nav-tabs nav-tabs-sm nav-justified" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Small tabs -->
+
+						<!-- Extra small tabs -->
+						<ul class="nav nav-tabs nav-tabs-xs nav-justified" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-warning">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-danger">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Extra small tabs -->
+
+						<!-- Simple tabs ============================================================== -->
+
+						<ul class="nav nav-tabs nav-tabs-simple nav-justified" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+
+						<!-- Small tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple nav-tabs-sm nav-justified" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-info">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+						<!-- / Small tabs -->
+
+						<!-- Extra small tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple nav-tabs-xs nav-justified" style="margin-top: 20px">
+							<li class="active">
+								<a href="#" data-toggle="tab">Home <span class="label label-warning">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Profile <span class="badge badge-danger">12</span></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="tab">@fat</a></li>
+									<li><a href="#" data-toggle="tab">@mdo</a></li>
+								</ul>
+							</li> <!-- / .dropdown -->
+						</ul> <!-- / .nav -->
+					</div>
+				</div>
+<!-- /9. $JUSTIFIED_TABS -->
+
+<!-- 10. $STACKED_PILLS ============================================================================
+
+				Stacked pills
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Stacked pills</span>
+					</div>
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="#">Home<span class="label label-warning">14</span></a></li>
+							<li><a href="#">Help<span class="badge badge-danger">16</span></a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									Dropdown&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul> <!-- / .dropdown-menu -->
+							</li> <!-- / .dropdown -->
+						</ul>
+					</div>
+				</div>
+<!-- /10. $STACKED_PILLS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+
+<!-- 11. $BOOTSTRAP_TAB_DROP =======================================================================
+
+				Stacked pills
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('ul.bs-tabdrop-example').tabdrop();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Bootstrap Tab Drop</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://www.eyecon.ro/bootstrap-tabdrop/" target="_blank">http://www.eyecon.ro/bootstrap-tabdrop/</a></div>
+						<div class="row">
+							<div class="col-sm-6">
+
+								<!-- Tabs -->
+								<ul class="nav nav-tabs bs-tabdrop-example">
+									<li class="active"><a href="#bs-tabdrop-tab1" data-toggle="tab">Section 1</a></li>
+									<li><a href="#bs-tabdrop-tab2" data-toggle="tab">Section 2</a></li>
+									<li><a href="#bs-tabdrop-tab3" data-toggle="tab">Section 3</a></li>
+									<li><a href="#bs-tabdrop-tab4" data-toggle="tab">Section 4</a></li>
+									<li><a href="#bs-tabdrop-tab5" data-toggle="tab">Section 5</a></li>
+									<li><a href="#bs-tabdrop-tab6" data-toggle="tab">Section 6</a></li>
+									<li><a href="#bs-tabdrop-tab7" data-toggle="tab">Section 7</a></li>
+									<li><a href="#bs-tabdrop-tab8" data-toggle="tab">Section 8</a></li>
+									<li><a href="#bs-tabdrop-tab9" data-toggle="tab">Section 9</a></li>
+									<li><a href="#bs-tabdrop-tab10" data-toggle="tab">Section 10</a></li>
+									<li><a href="#bs-tabdrop-tab11" data-toggle="tab">Section 11</a></li>
+									<li><a href="#bs-tabdrop-tab12" data-toggle="tab">Section 12</a></li>
+								</ul>
+								<div class="tab-content tab-content-bordered">
+									<div class="tab-pane active" id="bs-tabdrop-tab1">
+										<p>I'm in Section 1.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab2">
+										<p>Howdy, I'm in Section 2.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab3">
+										<p>Howdy, I'm in Section 3.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab4">
+										<p>Howdy, I'm in Section 4.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab5">
+										<p>Howdy, I'm in Section 5.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab6">
+										<p>Howdy, I'm in Section 6.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab7">
+										<p>Howdy, I'm in Section 7.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab8">
+										<p>Howdy, I'm in Section 8.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab9">
+										<p>Howdy, I'm in Section 9.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab10">
+										<p>Howdy, I'm in Section 10.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab11">
+										<p>Howdy, I'm in Section 11.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-tab12">
+										<p>Howdy, I'm in Section 12.</p>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-sm-6">
+
+								<!-- Pills -->
+								<ul class="nav nav-pills bs-tabdrop-example">
+									<li class="active"><a href="#bs-tabdrop-pill1" data-toggle="tab">Section 1</a></li>
+									<li><a href="#bs-tabdrop-pill2" data-toggle="tab">Section 2</a></li>
+									<li><a href="#bs-tabdrop-pill3" data-toggle="tab">Section 3</a></li>
+									<li><a href="#bs-tabdrop-pill4" data-toggle="tab">Section 4</a></li>
+									<li><a href="#bs-tabdrop-pill5" data-toggle="tab">Section 5</a></li>
+									<li><a href="#bs-tabdrop-pill6" data-toggle="tab">Section 6</a></li>
+									<li><a href="#bs-tabdrop-pill7" data-toggle="tab">Section 7</a></li>
+									<li><a href="#bs-tabdrop-pill8" data-toggle="tab">Section 8</a></li>
+									<li><a href="#bs-tabdrop-pill9" data-toggle="tab">Section 9</a></li>
+									<li><a href="#bs-tabdrop-pill10" data-toggle="tab">Section 10</a></li>
+									<li><a href="#bs-tabdrop-pill11" data-toggle="tab">Section 11</a></li>
+									<li><a href="#bs-tabdrop-pill12" data-toggle="tab">Section 12</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="bs-tabdrop-pill1">
+										<p>I'm in Section 1.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill2">
+										<p>Howdy, I'm in Section 2.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill3">
+										<p>Howdy, I'm in Section 3.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill4">
+										<p>Howdy, I'm in Section 4.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill5">
+										<p>Howdy, I'm in Section 5.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill6">
+										<p>Howdy, I'm in Section 6.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill7">
+										<p>Howdy, I'm in Section 7.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill8">
+										<p>Howdy, I'm in Section 8.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill9">
+										<p>Howdy, I'm in Section 9.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill10">
+										<p>Howdy, I'm in Section 10.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill11">
+										<p>Howdy, I'm in Section 11.</p>
+									</div>
+									<div class="tab-pane" id="bs-tabdrop-pill12">
+										<p>Howdy, I'm in Section 12.</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- /11. $BOOTSTRAP_TAB_DROP -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				
+<!-- 12. $DEFAULT_ACCORDIONS =======================================================================
+
+				Default accordions
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Default accordions</span>
+					</div>
+					<div class="panel-body">
+
+						<div class="panel-group" id="accordion-example">
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-example" href="#collapseOne">
+										Collapsible Group Item #1
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseOne" class="panel-collapse in">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-example" href="#collapseTwo">
+										Collapsible Group Item #2
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseTwo" class="panel-collapse collapse">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-example" href="#collapseThree">
+										Collapsible Group Item #3
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseThree" class="panel-collapse collapse">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+						</div> <!-- / .panel-group -->
+
+					</div>
+				</div>
+<!-- /12. $DEFAULT_ACCORDIONS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				
+<!-- 13. $ACCORDION_COLORS =========================================================================
+
+				Accordion colors
+-->
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Accordion colors</span>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-6">
+
+								<!-- Success -->
+								<div class="panel-group panel-group-success" id="accordion-success-example">
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-success-example" href="#collapseOne-success">
+												Collapsible Group Item #1
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseOne-success" class="panel-collapse in">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-success-example" href="#collapseTwo-success">
+												Collapsible Group Item #2
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseTwo-success" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-success-example" href="#collapseThree-success">
+												Collapsible Group Item #3
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseThree-success" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+								</div> <!-- / .panel-group -->
+								<!-- / Success -->
+
+							</div>
+							<div class="col-sm-6">
+
+								<!-- Danger -->
+								<div class="panel-group panel-group-danger" id="accordion-danger-example">
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-danger-example" href="#collapseOne-danger">
+												Collapsible Group Item #1
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseOne-danger" class="panel-collapse in">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-danger-example" href="#collapseTwo-danger">
+												Collapsible Group Item #2
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseTwo-danger" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-danger-example" href="#collapseThree-danger">
+												Collapsible Group Item #3
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseThree-danger" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+								</div> <!-- / .panel-group -->
+								<!-- / Danger -->
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+
+								<!-- Warning -->
+								<div class="panel-group panel-group-warning" id="accordion-warning-example">
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-warning-example" href="#collapseOne-warning">
+												Collapsible Group Item #1
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseOne-warning" class="panel-collapse in">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-warning-example" href="#collapseTwo-warning">
+												Collapsible Group Item #2
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseTwo-warning" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-warning-example" href="#collapseThree-warning">
+												Collapsible Group Item #3
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseThree-warning" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+								</div> <!-- / .panel-group -->
+								<!-- / Warning -->
+
+							</div>
+							<div class="col-sm-6">
+
+								<!-- Info -->
+								<div class="panel-group panel-group-info" id="accordion-info-example">
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-info-example" href="#collapseOne-info">
+												Collapsible Group Item #1
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseOne-info" class="panel-collapse in">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-info-example" href="#collapseTwo-info">
+												Collapsible Group Item #2
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseTwo-info" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+
+									<div class="panel">
+										<div class="panel-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-info-example" href="#collapseThree-info">
+												Collapsible Group Item #3
+											</a>
+										</div> <!-- / .panel-heading -->
+										<div id="collapseThree-info" class="panel-collapse collapse">
+											<div class="panel-body">
+												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+											</div> <!-- / .panel-body -->
+										</div> <!-- / .collapse -->
+									</div> <!-- / .panel -->
+								</div> <!-- / .panel-group -->
+								<!-- / Info -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- /13. $ACCORDION_COLORS -->
+
+			</div>
+		</div>
+	</div> <!-- / #content-wrapper -->
+	<div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+
+<!-- Get jQuery from Google CDN -->
+<!--[if !IE]> -->
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+<![endif]-->
+
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.min.js"></script>
+<script src="assets/javascripts/pixel-admin.min.js"></script>
+
+<script type="text/javascript">
+	init.push(function () {
+		// Javascript code here
+	})
+	window.PixelAdmin.start(init);
+</script>
+
+</body>
+</html>

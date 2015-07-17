@@ -58,7 +58,7 @@
                         <ul class="list-group no-margin">
                             <!-- Without left and right borders, extra small horizontal padding, without background, no border radius -->
                             <li class="list-group-item no-border-hr padding-xs-hr no-bg no-border-radius">
-                                Produits <span class="label label-pa-purple pull-right">34</span>
+                                Produits <span class="label label-pa-purple pull-right">{{ products_count|default(0) }}</span>
                             </li> <!-- / .list-group-item -->
                             <!-- Without left and right borders, extra small horizontal padding, without background -->
                             <li class="list-group-item no-border-hr padding-xs-hr no-bg">
@@ -66,7 +66,7 @@
                             </li> <!-- / .list-group-item -->
                             <!-- Without left and right borders, without bottom border, extra small horizontal padding, without background -->
                             <li class="list-group-item no-border-hr no-border-b padding-xs-hr no-bg">
-                                Commandes <span class="label label-success pull-right">12</span>
+                                Commandes <span class="label label-success pull-right">{{ orders_count|default(0) }}</span>
                             </li> <!-- / .list-group-item -->
                             <li class="list-group-item no-border-hr no-border-b padding-xs-hr no-bg">
                                 Pages <span class="label label-success pull-right">12</span>
@@ -124,7 +124,7 @@
                             <!-- Bordered, without top border, without horizontal padding -->
                             <div class="stat-cell bordered no-border-t no-padding-hr">
                                 <div class="pie-chart" data-percent="43" id="easy-pie-chart-1">
-                                    <div class="pie-chart-label">12.3TB</div>
+                                    <div class="pie-chart-label">43%</div>
                                 </div>
                             </div>
                         </div> <!-- /.stat-row -->
@@ -141,8 +141,8 @@
                         <div class="stat-row">
                             <!-- Bordered, without top border, without horizontal padding -->
                             <div class="stat-cell bordered no-border-t no-padding-hr">
-                                <div class="pie-chart" data-percent="93" id="easy-pie-chart-2">
-                                    <div class="pie-chart-label">93%</div>
+                                <div class="pie-chart" data-percent="78" id="easy-pie-chart-2">
+                                    <div class="pie-chart-label">78%</div>
                                 </div>
                             </div>
                         </div> <!-- /.stat-row -->
@@ -159,8 +159,8 @@
                         <div class="stat-row">
                             <!-- Bordered, without top border, without horizontal padding -->
                             <div class="stat-cell bordered no-border-t no-padding-hr">
-                                <div class="pie-chart" data-percent="75" id="easy-pie-chart-3">
-                                    <div class="pie-chart-label">12GB</div>
+                                <div class="pie-chart" data-percent="55" id="easy-pie-chart-3">
+                                    <div class="pie-chart-label">55%</div>
                                 </div>
                             </div>
                         </div> <!-- /.stat-row -->
@@ -270,6 +270,90 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel widget-messages-alt">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="panel-title-icon fa fa-users"></i>Derniers cients</span>
+                </div> <!-- / .panel-heading -->
+                <div class="panel-body padding-sm">
+                    <div class="table-info">
+                        <table id="customers" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for customer in customers %}
+                                <tr>
+                                    <td>{{ customer.id }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.firstName }}</td>
+                                    <td>{{ customer.lastName }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+ <div class="col-md-6">
+
+            <div class="panel widget-messages-alt">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="panel-title-icon fa fa-refresh"></i>Dernieres commandes</span>
+                </div> <!-- / .panel-heading -->
+                <div class="panel-body padding-sm">
+                    <div class="table-warning">
+
+                        <table id="orders" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Client</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Etat</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.total }}</td>
+                                    <td>{{ order.createdAt|date('d/m/Y H:i:s') }}</td>
+                                    <td>{{ order.state }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
     <div class="row">
         <div class="col-md-6">
 

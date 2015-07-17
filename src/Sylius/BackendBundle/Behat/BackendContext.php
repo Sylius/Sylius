@@ -27,7 +27,7 @@ class BackendContext extends DefaultContext
     public function iAmOnDashboard()
     {
         // Get session and visiting homepage
-        $this->getSession()->visit($this->generateUrl('sylius_homepage'));
+        $this->getSession()->visit($this->generateUrl('sylius_backend_index'));
 
         $page = $this->getSession()->getCurrentUrl();
 //        $page = $this->getSession()->getPage()->getContent();

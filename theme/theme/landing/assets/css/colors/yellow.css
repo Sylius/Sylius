@@ -1,0 +1,74 @@
+/****** Color *****/
+body a,
+#header .navbar-nav > li.active > a,
+#header .navbar-nav > li.active:before,
+#portfolio .og-expander .container .details .fa-external-link,
+#portfolio .og-expander .container .details .social li a:hover,
+#contact .info .social .icon:hover,
+.btn.btn-default:hover,
+.btn.btn-default:focus,
+#blog .articles .article h3 a:hover,
+#blog .addComment form .btn:hover,
+.video .parallax:hover .content .icon,
+#footer .social .icon:hover {
+  color: #f0d647;
+}
+body a:hover,
+body a:active,
+body a:focus {
+  color: #d9ba12;
+}
+/****** Background *****/
+#features .i .icon .c .fill,
+#portfolio .filter li.active a,
+#portfolio .og-expander .container .details .og-close:hover,
+#pricing .i.active .wrap,
+.modal-header .close:hover,
+#header .navbar-toggle,
+.pagination .active>a,
+.pagination .active>span,
+.pagination .active>a:hover,
+.pagination .active>span:hover,
+.pagination .active>a:focus,
+.pagination .active>span:focus,
+section header .dotted-break span,
+section header .dotted-break span:before,
+section header .dotted-break span:after,
+#blog .btn,
+#team .i:hover .c,
+#team .i h4,
+#pricing .i.active .wrap .c .btn,
+#pricing .i .wrap .c .btn:hover,
+#contact form .btn:hover {
+  background: #f0d647;
+}
+#portfolio .i .c .wrap .info,
+#blog .articles .article .c .wrap .info {
+  background: rgba(240, 214, 71, 0.8);
+}
+#blog .btn:hover {
+	background: #d9ba12;
+}
+/****** Border color *****/
+#portfolio .filter li.active a,
+#portfolio .filter li:hover a,
+.borderedHover:before,
+.borderedHover:after,
+#portfolio .og-expander .container .details .social li a:hover,
+#pricing .i.active .wrap,
+#pricing .i.active .wrap .c,
+.form-control:focus,
+#contact form .btn:hover,
+.btn.btn-default:hover,
+.btn.btn-default:focus,
+.pagination .active>a,
+.pagination .active>span,
+.pagination .active>a:hover,
+.pagination .active>span:hover,
+.pagination .active>a:focus,
+.pagination .active>span:focus,
+#blog .addComment form .form-control:focus,
+#blog .addComment form .btn:hover,
+.video .parallax:hover .content .icon {
+  border-color: #f0d647;
+}

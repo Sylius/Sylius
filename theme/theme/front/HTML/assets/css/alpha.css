@@ -1,0 +1,104 @@
+/*
+Made By Tanim Ahmed
+*/
+
+
+.alpha10 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.1);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+	zoom: 1;
+}
+.alpha10:nth-child(n) {
+	filter: none;
+}
+.alpha20 {
+ background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.2);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
+	zoom: 1;
+}
+.alpha20:nth-child(n) {
+	filter: none;
+}
+
+.alpha30 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.3);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000);
+	zoom: 1;
+}
+.alpha30:nth-child(n) {
+	filter: none;
+}
+
+.alpha40 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.4);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000,endColorstr=#66000000);
+	zoom: 1;
+}
+.alpha40:nth-child(n) {
+	filter: none;
+}
+
+.alpha50 {
+ background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.5);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+	zoom: 1;
+}
+.alpha50:nth-child(n) {
+	filter: none;
+}
+
+
+.alpha60 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.6);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
+	zoom: 1;
+}
+.alpha60:nth-child(n) {
+	filter: none;
+}
+
+.alpha70 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.7);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+	zoom: 1;
+}
+.alpha70:nth-child(n) {
+	filter: none;
+}
+
+.alpha80 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.8);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000,endColorstr=#cc000000);
+	zoom: 1;
+}
+.alpha80:nth-child(n) {
+	filter: none;
+}
+
+
+.alpha90 {
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.9);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5000000,endColorstr=#e5000000);
+	zoom: 1;
+}
+.alpha90:nth-child(n) {
+	filter: none;
+}

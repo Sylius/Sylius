@@ -1,0 +1,56 @@
+@blue: #369eef;
+@red: #f03f51;
+@green: #8dcd47;
+@violet: #8e67f1;
+@mint: #38c5a2;
+@pink: #f156b2;
+@orange: #f59c32;
+@yellow: #f8de4f;
+
+.options {
+	position: fixed;
+	top: 300px;
+	left: -220px;
+	width: 220px;
+	padding: 20px;
+	color: #000;
+	background: #f7f7f7;
+	font-size: 14px;
+	font-weight: 400;
+	z-index: 9999;
+	line-height: normal;
+
+	.more {
+		cursor: pointer;
+		width: 50px;
+		height: 50px;
+		background: #f7f7f7;
+		position: absolute;
+		right: -50px;
+		top: 10px;
+		font-size: 30px;
+		line-height: 48px;
+		text-align: center;
+	}
+
+	p {
+		line-height: normal;
+	}
+
+	.colors {
+		a {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+
+			&.blue {background: @blue;}
+			&.red {background: @red;}
+			&.green {background: @green;}
+			&.violet {background: @violet;}
+			&.mint {background: @mint;}
+			&.pink {background: @pink;}
+			&.orange {background: @orange;}
+			&.yellow {background: @yellow;}
+		}
+	}
+}

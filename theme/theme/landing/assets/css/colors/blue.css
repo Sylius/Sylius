@@ -1,0 +1,63 @@
+/****** Color *****/
+body a,
+#header .navbar-nav > li.active > a,
+#header .navbar-nav > li.active:before,
+#portfolio .og-expander .container .details .fa-external-link,
+#portfolio .og-expander .container .details .social li a:hover,
+#contact form .btn:hover,
+#contact .info .social .icon:hover,
+.btn.btn-default:hover,
+.btn.btn-default:focus,
+#blog .articles .article h3 a:hover,
+#blog .addComment form .btn:hover,
+.video .parallax:hover .content .icon {
+  color: #369eef;
+}
+body a:hover,
+body a:active,
+body a:focus {
+  color: #1078c9;
+}
+/****** Background *****/
+#features .i .icon .c .fill,
+#portfolio .filter li.active a,
+#portfolio .og-expander .container .details .og-close:hover,
+#pricing .i.active .wrap,
+.modal-header .close:hover,
+#header .navbar-toggle,
+.pagination .active>a,
+.pagination .active>span,
+.pagination .active>a:hover,
+.pagination .active>span:hover,
+.pagination .active>a:focus,
+.pagination .active>span:focus {
+  background: #369eef;
+}
+#portfolio .i .c .wrap .info,
+#team .i .c .wrap .info,
+#blog .articles .article .c .wrap .info {
+  background: rgba(54, 158, 239, 0.8);
+}
+/****** Border color *****/
+#portfolio .filter li.active a,
+#portfolio .filter li:hover a,
+.borderedHover:before,
+.borderedHover:after,
+#portfolio .og-expander .container .details .social li a:hover,
+#pricing .i.active .wrap,
+#pricing .i.active .wrap .c,
+.form-control:focus,
+#contact form .btn:hover,
+.btn.btn-default:hover,
+.btn.btn-default:focus,
+.pagination .active>a,
+.pagination .active>span,
+.pagination .active>a:hover,
+.pagination .active>span:hover,
+.pagination .active>a:focus,
+.pagination .active>span:focus,
+#blog .addComment form .form-control:focus,
+#blog .addComment form .btn:hover,
+.video .parallax:hover .content .icon {
+  border-color: #369eef;
+}

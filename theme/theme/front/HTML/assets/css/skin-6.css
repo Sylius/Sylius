@@ -1,0 +1,181 @@
+body {
+	/*background:#EDEEF0;*/
+	background:#fff;
+}
+
+::selection {
+ color:#fff;
+ background:#2c3e50;
+}
+::-moz-selection {
+ color:#fff;
+ background:#2c3e50;
+}
+::-webkit-selection {
+ color:#fff;
+ background:#2c3e50;
+}
+a:hover, a:focus {
+	color:#34495e;
+}
+.search-full, .search-input {
+	background: #2c3e50;
+}
+.search-close {
+	color: #2c3e50;
+}
+.btn-primary, .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
+	background-color: #34495e;
+	color: #FFFFFF;
+}
+.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+	background:  #2c88c5;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #4a6989;
+	border-color: #4a6989;
+	color: #FFFFFF;
+}
+.navbar-top {
+	background:#283949;
+}
+.navbar-tshop {
+	background:#34495e;
+}
+.site-color {
+	color:#34495e !important;
+}
+.navbar-nav > li > a {
+	color:#fff;
+}
+.nav > li.active, .nav > li > a:hover, .nav > li > a:focus, .nav > li:hover > a {
+	background:#2c3e50;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
+	background:#2c3e50;
+}
+.dropdown-menu {
+	border-top: solid #2c3e50;
+}
+.search-box:hover .form-control {
+	background:#34495e;
+}
+.search-box:hover .btn-nobg {
+	color:#34495e;
+}
+.searchInputBox .search-btn {
+	color:#fff;
+}
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background:rgba(52, 73, 94, 0.7) !important;
+}
+.action-control a:hover, .action-control a.active {
+	color:#fff;
+	background:#2c3e50;
+}
+.product:hover, .featuredImgLook2 .inner:hover {
+	border: 1px solid #34495e;
+}
+.subCategoryList .thumbnail:hover {
+	border: 1px solid #34495e;
+}
+.pager2 a {
+	border: 1px solid #34495e;
+}
+.pager2 a.selected {
+	background:#34495e;
+}
+.btn-site, .newsLatterBox .btn {
+	background: #34495e;
+}
+.btn-discover:hover, .btn-site:hover, .newsLatterBox .btn:hover {
+	background: #2c3e50;
+}
+.full {
+	width:100%;
+}
+.footer a:hover {
+	color:#34495e;
+}
+.footer {
+/*border-top: solid 3px #34495e;*/
+}
+.modal-header {
+	background: #34495e;
+}
+.form-control:focus {
+	border-color: #34495e;
+}
+.new-product {
+	background:rgba(52, 73, 94, 0.95) !important;
+}
+#pager a.cycle-pager-active {
+	background:rgba(52, 73, 94, 0.5);
+}
+/* tree menu */
+
+
+.nav.tree > li.active, .nav.tree > li > a:hover, .nav.tree > li > a:focus, .nav.tree > li:hover > a {
+	background:none;
+	color:#2c3e50;
+}
+.nav.tree .open-tree > a, .nav.tree .open-tree > a:hover, .nav.tree .open-tree > a:focus {
+	background:none;
+	font-weight:bold;
+	color:#2c3e50;
+}
+.panel-default > .panel-heading {
+	border-top: 4px solid #34495e;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+	background:#BFC9CA;
+}
+.nav-tabs {
+	border-bottom: 3px solid #BFC9CA;
+}
+.socialIcon a:hover {
+	background:#34495e;
+}
+.cart-actions button, .cart-actions .wishlist {
+	background: none repeat scroll 0 0 #34495e;
+	border: 2px solid #2c3e50;
+}
+.cart-actions button:hover {
+	background:#fff;
+	color:#2c3e50;
+	border:solid 2px #34495e;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, sp-current:visited {
+	border: 2px solid #34495e !important;
+}
+.promo-1 {
+	background: none repeat scroll 0 0 #2c3e50;
+}
+ @media (max-width: 767px) {
+ .miniCartFooter {
+ background:#2c3e50 !important;
+}
+}
+#pager2 span.cycle-pager-active {
+}
+#pager2 span.cycle-pager-active {
+	background: #2c3e50 !important;
+}
+#pager2 span {
+	border: 2px solid #2c3e50
+}
+.orderStep li.active a {
+	background: #34495e;
+}
+.orderStep li.active a:after {
+	border-top-color: #34495e !important;
+}
+.orderStep li a {
+	background:  #2c88c5;
+}
+darkcoilor {
+	background:#2c88c5;
+}
+citecolor {
+	color:#34495e !important;
+}

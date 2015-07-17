@@ -1,0 +1,1751 @@
+
+<!DOCTYPE html>
+<!--
+
+TABLE OF CONTENTS.
+
+Use search to find needed section.
+
+=========================================================================
+
+|  1. $BODY                           |  Body                           |
+|  2. $MAIN_NAVIGATION                |  Main navigation                |
+|  3. $NAVBAR_ICON_BUTTONS            |  Navbar Icon Buttons            |
+|  4. $MAIN_MENU                      |  Main menu                      |
+|  5. $SWITCHERS                      |  Switchers                      |
+|  6. $STYLED_CHECKBOXES_AND_RADIOS   |  Styled checkboxes and radios   |
+|  7. $JQUERY_CHARACTER_LIMIT         |  jQuery Character limit         |
+|  8. $JQUERY_EXPANDING_INPUTS        |  jQuery Expanding inputs        |
+|  9. $JQUERY_SELECT2                 |  jQuery Select2                 |
+|  10. $MASKED_INPUTS                 |  Masked inputs                  |
+|  11. $STYLED_FILE_INPUTS            |  Styled file inputs             |
+|  12. $JQUERY_AUTORESIZING_TEXTAREA  |  jQuery Autoresizing Textarea   |
+|  13. $JQUERY_KNOB                   |  jQuery Knob                    |
+|  14. $DROPZONEJS_FILE_UPLOADS       |  Dropzone.js file uploads       |
+|  15. $BOOTSTRAP_X_EDITABLE          |  Bootstrap X-Editable           |
+
+=========================================================================
+
+-->
+
+
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Advanced - Form components - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+	<style>
+		#switcher-examples .switcher {
+			vertical-align: middle;
+		}
+	</style>
+
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+	
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'      - Sets text direction to right-to-left
+	* 'main-menu-right'    - Places the main menu on the right side
+	* 'no-main-menu'       - Hides the main menu
+	* 'main-navbar-fixed'  - Fixes the main navigation
+	* 'main-menu-fixed'    - Fixes the main menu
+	* 'main-menu-animated' - Animate main menu
+-->
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];</script>
+<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<div id="main-wrapper">
+
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+	Main navigation
+-->
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+			<!-- Main navbar header -->
+			<div class="navbar-header">
+
+				<!-- Logo -->
+				<a href="index.html" class="navbar-brand">
+					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+					PixelAdmin
+				</a>
+
+				<!-- Main navbar toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+			</div> <!-- / .navbar-header -->
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First item</a></li>
+								<li><a href="#">Second item</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Third item</a></li>
+							</ul>
+						</li>
+					</ul> <!-- / .navbar-nav -->
+
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+							Navbar Icon Buttons
+
+							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+							Classes:
+							* 'nav-icon-btn-info'
+							* 'nav-icon-btn-success'
+							* 'nav-icon-btn-warning'
+							* 'nav-icon-btn-danger' 
+-->
+							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">5</span>
+									<i class="nav-icon fa fa-bullhorn"></i>
+									<span class="small-screen-text">Notifications</span>
+								</a>
+
+								<!-- NOTIFICATIONS -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-notifications').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+									<div class="notifications-list" id="main-navbar-notifications">
+
+										<div class="notification">
+											<div class="notification-title text-danger">SYSTEM</div>
+											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-info">STORE</div>
+											<div class="notification-description">You have <strong>9</strong> new orders.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-truck bg-info"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-default">CRON DAEMON</div>
+											<div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-clock-o bg-default"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-success">SYSTEM</div>
+											<div class="notification-description">Server <strong>up</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-success"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-warning">SYSTEM</div>
+											<div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-warning"></div>
+										</div> <!-- / .notification -->
+
+									</div> <!-- / .notifications-list -->
+									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+							<li class="nav-icon-btn nav-icon-btn-success dropdown">
+								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">10</span>
+									<i class="nav-icon fa fa-envelope"></i>
+									<span class="small-screen-text">Income messages</span>
+								</a>
+
+								<!-- MESSAGES -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-messages').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+									<div class="messages-list" id="main-navbar-messages">
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+									</div> <!-- / .messages-list -->
+									<a href="#" class="messages-link">MORE MESSAGES</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="Search">
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/demo/avatars/1.jpg">
+									<span>John Doe</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
+									<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+									<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+								</ul>
+							</li>
+						</ul> <!-- / .navbar-nav -->
+					</div> <!-- / .right -->
+				</div>
+			</div> <!-- / #main-navbar-collapse -->
+		</div> <!-- / .navbar-inner -->
+	</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+<!-- 4. $MAIN_MENU =================================================================================
+
+		Main menu
+		
+		Notes:
+		* to make the menu item active, add a class 'active' to the <li>
+		  example: <li class="active">...</li>
+		* multilevel submenu example:
+			<li class="mm-dropdown">
+			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+			  <ul>
+				<li>...</li>
+				<li class="mm-dropdown">
+				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+				  <ul>
+					<li>...</li>
+					...
+				  </ul>
+				</li>
+				...
+			  </ul>
+			</li>
+-->
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">
+			<div class="menu-content top" id="menu-content-demo">
+				<!-- Menu custom content demo
+					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+					 Javascript: html/assets/demo/demo.js
+				 -->
+				<div>
+					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+
+					<img src="assets/demo/avatars/1.jpg" alt="" class="">
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+					</div>
+					<a href="#" class="close">&times;</a>
+				</div>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">Layouts</span><span class="label label-warning">Updated</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="layouts-grid.html"><span class="mm-text">Grid</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="layouts-main-menu.html"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">Main menu</span><span class="label label-warning">Updated</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="stat-panels.html"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Stat panels</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="menu-icon fa fa-flask"></i><span class="mm-text">Widgets</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text">Form components</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text">Tables</span></a>
+				</li>
+				<li>
+					<a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text">Charts</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text">Pages</span><span class="label label-success">16</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text">Complete UI</span></a>
+				</li>
+				<li>
+					<a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text">Color Builder</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-sitemap"></i><span class="mm-text">Menu levels</span><span class="badge badge-primary">6</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span><span class="label label-info">21</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+								</li>
+								<li class="mm-dropdown">
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+									<ul>
+										<li class="mm-dropdown">
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+											<ul>
+												<li>
+													<a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul> <!-- / .navigation -->
+			<div class="menu-content">
+				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+			</div>
+		</div> <!-- / #main-menu-inner -->
+	</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
+
+	<div id="content-wrapper">
+
+		<div class="page-header">
+			<h1><span class="text-light-gray">Form components / </span>Advanced</h1>
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-md-6">
+
+<!-- 5. $SWITCHERS =================================================================================
+
+				Switchers
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#switcher-example-1').switcher();
+
+						$('#switcher-example-2').switcher({
+							theme: 'square',
+							on_state_content: '<span class="fa fa-check"></span>',
+							off_state_content: '<span class="fa fa-times"></span>'
+						});
+
+						$('#switcher-example-3').switcher({
+							theme: 'modern'
+						});
+
+						// Colors
+						$('#switchers-colors-default > input').switcher();
+						$('#switchers-colors-square > input').switcher({ theme: 'square' });
+						$('#switchers-colors-modern > input').switcher({ theme: 'modern' });
+
+						// Sizes
+						$('#switchers-sizes .switcher-example-default').switcher();
+						$('#switchers-sizes .switcher-example-square').switcher({ theme: 'square' });
+						$('#switchers-sizes .switcher-example-modern').switcher({ theme: 'modern' });
+
+						// Disabled state
+						$('#switcher-disabled-default').switcher();
+						$('#switcher-disabled-square').switcher({ theme: 'square' });
+						$('#switcher-disabled-modern').switcher({ theme: 'modern' });
+
+						$('#switcher-enable-all').click(function () {
+							$('#switchers-disabled input').switcher('enable');
+						});
+
+						$('#switcher-disable-all').click(function () {
+							$('#switchers-disabled input').switcher('disable');
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Switchers</span>
+					</div>
+					<div class="panel-body" id="switcher-examples">
+						<div>
+							<input type="checkbox" id="switcher-example-1">&nbsp;&nbsp;
+							<input type="checkbox" id="switcher-example-2" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" id="switcher-example-3">
+						</div>
+
+						<hr class="panel-wide">
+					
+						<!-- Colors -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">COLORS</h6>
+
+						<div id="switchers-colors-default" class="form-group-margin">
+							<input type="checkbox" data-class="switcher-primary" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-success" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-warning" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-danger" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-info" checked="checked">
+						</div>
+						<div id="switchers-colors-square" class="form-group-margin">
+							<input type="checkbox" data-class="switcher-primary" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-success" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-warning" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-danger" checked="checked">&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-info" checked="checked">
+						</div>
+						<div id="switchers-colors-modern">
+							<input type="checkbox" data-class="switcher-primary" checked="checked">&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-success" checked="checked">&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-warning" checked="checked">&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-danger" checked="checked">&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" data-class="switcher-info" checked="checked">
+						</div>
+
+						<hr class="panel-wide">
+					
+						<!-- Sizes -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">SIZES</h6>
+
+						<div id="switchers-sizes">
+							<div class="form-group-margin">
+								<input type="checkbox" data-class="switcher-lg" class="switcher-example-default">&nbsp;&nbsp;
+								<input type="checkbox" data-class="switcher-lg" class="switcher-example-square">&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" data-class="switcher-lg" class="switcher-example-modern">
+							</div>
+							<div class="form-group-margin">
+								<input type="checkbox" class="switcher-example-default">&nbsp;&nbsp;
+								<input type="checkbox" class="switcher-example-square">&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="switcher-example-modern">
+							</div>
+							<div>
+								<input type="checkbox" data-class="switcher-sm" class="switcher-example-default">&nbsp;&nbsp;
+								<input type="checkbox" data-class="switcher-sm" class="switcher-example-square">&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" data-class="switcher-sm" class="switcher-example-modern">
+							</div>
+						</div>
+
+						<hr class="panel-wide">
+					
+						<!-- Disabled state -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">DISABLED STATE</h6>
+
+						<div id="switchers-disabled">
+							<div class="form-group-margin">
+								<input type="checkbox" id="switcher-disabled-default" disabled="disabled">&nbsp;&nbsp;
+								<input type="checkbox" id="switcher-disabled-square" checked="checked" disabled="disabled">&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" id="switcher-disabled-modern" disabled="disabled">
+							</div>
+							<div>
+								<button class="btn btn-success btn-sm" id="switcher-enable-all">Enable</button>&nbsp;&nbsp;
+								<button class="btn btn-danger btn-sm" id="switcher-disable-all">Disable</button>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- /5. $SWITCHERS -->
+
+<!-- 6. $STYLED_CHECKBOXES_AND_RADIOS ==============================================================
+
+				Styled checkboxes and radios
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#styled-ch-btn').on('click', function () {
+							var $c = $(this).parent().find('input[type="checkbox"]');
+							$c.each(function () {
+								var $p  = $(this).parent(),
+								    $el = $(this).detach().addClass('px'),
+								    t   = $p.text().trim();
+								    
+								$p.html('');
+								$p.append($el);
+								$p.append($('<span class="lbl">' + t + '</span>'));
+							});
+							$(this).remove();
+						});
+
+						$('#styled-r-btn').on('click', function () {
+							var $r = $(this).parent().find('input[type="radio"]');
+							$r.each(function () {
+								var $p  = $(this).parent(),
+								    $el = $(this).detach().addClass('px'),
+								    t   = $p.text().trim();
+								    
+								$p.html('');
+								$p.append($el);
+								$p.append($('<span class="lbl">' + t + '</span>'));
+							});
+							$(this).remove();
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Styled checkboxeds and radios</span>
+					</div>
+					<div class="panel-body no-padding-t">
+
+						<!-- Checkboxes -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">CHECKBOXES</h6>
+
+						<!-- Checkbox styling -->
+						<p>
+							<label class="checkbox-inline">
+								<input type="checkbox" class="px">
+								<span class="lbl">One</span>
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" class="px" checked="checked">
+								<span class="lbl">Two</span>
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" class="px">
+								<span class="lbl">Three</span>
+							</label>
+						</p>
+						<hr>
+						<!-- Checkbox styling on button click -->
+						<p>
+							<label class="checkbox-inline"><input type="checkbox"> One</label>
+							<label class="checkbox-inline"><input type="checkbox" checked="checked"> Two</label>
+							<label class="checkbox-inline"><input type="checkbox"> Three</label>
+							<br><br>
+							<button class="btn btn-xs" id="styled-ch-btn">Add some magic</button>
+						</p>
+
+						<hr class="panel-wide">
+					
+						<!-- Radios -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">RADIOS</h6>
+
+						<!-- Radio styling -->
+						<p>
+							<label class="radio">
+								<input type="radio" name="styled-r1" class="px">
+								<span class="lbl">One</span>
+							</label>
+							<label class="radio">
+								<input type="radio" name="styled-r1" class="px" checked="checked">
+								<span class="lbl">Two</span>
+							</label>
+							<label class="radio">
+								<input type="radio" name="styled-r1" class="px">
+								<span class="lbl">Three</span>
+							</label>
+						</p>
+						<hr>
+						<!-- Radio styling on button click -->
+						<p>
+							<label class="radio"><input type="radio" name="styled-r2"> One</label>
+							<label class="radio"><input type="radio" name="styled-r2" checked="checked"> Two</label>
+							<label class="radio"><input type="radio" name="styled-r2"> Three</label>
+							<button class="btn btn-xs" id="styled-r-btn">Add some magic</button>
+						</p>
+
+						<hr class="panel-wide">
+
+						<div class="note">
+							Also you can create single checkbox/radio without text label (see source code).
+						</div>
+
+						<p>
+							<label class="px-single"><input type="checkbox" name="" value="" class="px"><span class="lbl"></span></label>
+							&nbsp;&nbsp;&nbsp;
+							<label class="px-single"><input type="checkbox" name="" value="" class="px"><span class="lbl"></span></label>
+							&nbsp;&nbsp;&nbsp;
+							<label class="px-single"><input type="checkbox" name="" value="" class="px"><span class="lbl"></span></label>
+						</p>
+
+						<div>
+							<label class="px-single"><input type="radio" name="single-radio" value="" class="px"><span class="lbl"></span></label>
+							&nbsp;&nbsp;&nbsp;
+							<label class="px-single"><input type="radio" name="single-radio" value="" class="px"><span class="lbl"></span></label>
+							&nbsp;&nbsp;&nbsp;
+							<label class="px-single"><input type="radio" name="single-radio" value="" class="px"><span class="lbl"></span></label>
+
+						</div>
+
+					</div>
+				</div>
+<!-- /6. $STYLED_CHECKBOXEDS_AND_RADIOS -->
+
+<!-- 7. $JQUERY_CHARACTER_LIMIT ====================================================================
+
+				jQuery Character limit
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$("#character-limit-input").limiter(20, { label: '#character-limit-input-label' });
+						$("#character-limit-textarea").limiter(100, { label: '#character-limit-textarea-label' });
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Character limit</span>
+					</div>
+					<div class="panel-body">
+						<input type="text" id="character-limit-input" class="form-control">
+						<div id="character-limit-input-label" class="limiter-label form-group-margin">Characters left: <span class="limiter-count"></span></div>
+
+						<textarea id="character-limit-textarea" rows="3" class="form-control"></textarea>
+						<div id="character-limit-textarea-label" class="limiter-label">Characters left: <span class="limiter-count"></span></div>
+					</div>
+				</div>
+<!-- /7. $JQUERY_CHARACTER_LIMIT -->
+
+<!-- 8. $JQUERY_EXPANDING_INPUTS ===================================================================
+
+				jQuery Expanding inputs
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$("#jq-expanding-input").expandingInput({
+							target: 'input[type="text"]',
+							hidden_content: '> div',
+							placeholder: 'Input example'
+						});
+						$("#jq-expanding-textarea").expandingInput({
+							target: 'textarea',
+							hidden_content: '> div',
+							placeholder: 'Textarea example'
+						});
+
+						// Sizes
+
+						$("#jq-expanding-input-sm").expandingInput({
+							target: 'input[type="text"]',
+							hidden_content: '> div',
+							placeholder: 'Small input'
+						});
+						$("#jq-expanding-input-default").expandingInput({
+							target: 'input[type="text"]',
+							hidden_content: '> div',
+							placeholder: 'Default input'
+						});
+						$("#jq-expanding-input-lg").expandingInput({
+							target: 'input[type="text"]',
+							hidden_content: '> div',
+							placeholder: 'Large input'
+						});
+
+						// Callbacks
+
+						$("#jq-expanding-input-callbacks").expandingInput({
+							target: 'textarea',
+							hidden_content: '> div',
+							placeholder: 'Resize textarea on expand',
+							onBeforeExpand: function () {
+								console.log('onBeforeExpand callback');
+							},
+							onAfterExpand: function () {
+								console.log('onAfterExpand callback');
+								this.$target.attr('rows', 4);
+							}
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Expanding inputs</span>
+					</div>
+					<div class="panel-body">
+
+						<div id="jq-expanding-input" class="form-group-margin">
+							<input type="text" class="form-control">
+							<div class="expanding-input-hidden" style="margin-top: 10px;">
+								<label class="checkbox-inline"><input type="checkbox"> Checkbox</label>
+								<button class="btn btn-primary pull-right">Post comment</button>
+							</div>
+						</div>
+
+						<div id="jq-expanding-textarea">
+							<textarea rows="3" class="form-control"></textarea>
+							<div class="expanding-input-hidden" style="margin-top: 10px;">
+								<label class="checkbox-inline"><input type="checkbox"> Checkbox</label>
+								<button class="btn btn-primary pull-right">Post comment</button>
+							</div>
+						</div>
+
+						<hr class="panel-wide">
+					
+						<!-- Sizes -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">SIZES</h6>
+
+						<div id="jq-expanding-input-sm" class="form-group-margin">
+							<input type="text" class="form-control input-sm">
+							<div class="expanding-input-hidden">Hidden content</div>
+						</div>
+						<div id="jq-expanding-input-default" class="form-group-margin">
+							<input type="text" class="form-control">
+							<div class="expanding-input-hidden">Hidden content</div>
+						</div>
+						<div id="jq-expanding-input-lg">
+							<input type="text" class="form-control input-lg">
+							<div class="expanding-input-hidden">Hidden content</div>
+						</div>
+
+						<hr class="panel-wide">
+					
+						<!-- Callbacks -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">CALLBACKS</h6>
+
+						<div id="jq-expanding-input-callbacks">
+							<textarea rows="1" class="form-control"></textarea>
+							<div class="expanding-input-hidden" style="margin-top: 10px;">
+								<button class="btn btn-primary pull-right">Post comment</button>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- /8. $JQUERY_EXPANDING_INPUTS -->
+
+			</div>
+			<div class="col-md-6">
+
+<!-- 9. $JQUERY_SELECT2 ============================================================================
+
+				jQuery Select2
+-->
+				<!-- Javascript -->
+				<script>
+					function movieFormatResult(movie) {
+						var markup = "<table class='movie-result'><tr>";
+						if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
+							markup += "<td class='movie-image' style='vertical-align: top'><img src='" + movie.posters.thumbnail + "' style='max-width: 60px; display: inline-block; margin-right: 10px; margin-left: 10px;' /></td>";
+						}
+						markup += "<td class='movie-info'><div class='movie-title' style='font-weight: 600; color: #000; margin-bottom: 6px;'>" + movie.title + "</div>";
+						if (movie.critics_consensus !== undefined) {
+							markup += "<div class='movie-synopsis'>" + movie.critics_consensus + "</div>";
+						}
+						else if (movie.synopsis !== undefined) {
+							markup += "<div class='movie-synopsis'>" + movie.synopsis + "</div>";
+						}
+						markup += "</td></tr></table>";
+						return markup;
+					}
+
+					function movieFormatSelection(movie) {
+						return movie.title;
+					}
+
+					init.push(function () {
+						// Single select
+						$("#jquery-select2-example").select2({
+							allowClear: true,
+							placeholder: "Select a State"
+						});
+
+						// Multiselect
+						$("#jquery-select2-multiple").select2({
+							placeholder: "Select a State"
+						});
+
+						// External source
+						$("#jquery-select2-external").select2({
+							placeholder: "Search for a movie",
+							minimumInputLength: 1,
+							ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+								url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+								dataType: 'jsonp',
+								data: function (term, page) {
+									return {
+										q: term, // search term
+										page_limit: 10,
+										apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+									};
+								},
+								results: function (data, page) { // parse the results into the format expected by Select2.
+									// since we are using custom formatting functions we do not need to alter remote JSON data
+									return {results: data.movies};
+								}
+							},
+							initSelection: function(element, callback) {
+								// the input tag has a value attribute preloaded that points to a preselected movie's id
+								// this function resolves that id attribute to an object that select2 can render
+								// using its formatResult renderer - that way the movie name is shown preselected
+								var id=$(element).val();
+								if (id!=="") {
+									$.ajax("http://api.rottentomatoes.com/api/public/v1.0/movies/"+id+".json", {
+										data: {
+											apikey: "ju6z9mjyajq2djue3gbvv26t"
+										},
+										dataType: "jsonp"
+									}).done(function(data) { callback(data); });
+								}
+							},
+							formatResult: movieFormatResult, // omitted for brevity, see the source of this page
+							formatSelection: movieFormatSelection,  // omitted for brevity, see the source of this page
+							dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+							escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+						});
+
+						// Disabled state
+						$(".select2-disabled-examples select").select2({ placeholder: 'Select option...' });
+
+						// Colors
+						$(".select2-colors-examples select").select2();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Select2</span>
+					</div>
+					<div class="panel-body select2-disabled-examples select2-colors-examples">
+						<div class="note note-info">More info and examples at <a href="http://ivaynberg.github.io/select2/" target="_blank">http://ivaynberg.github.io/select2/</a></div>
+
+						<select id="jquery-select2-example" class="form-control">
+							<option></option>
+							<optgroup label="Alaskan/Hawaiian Time Zone">
+								<option value="AK">Alaska</option>
+								<option value="HI">Hawaii</option>
+							</optgroup>
+							<optgroup label="Pacific Time Zone">
+								<option value="CA">California</option>
+								<option value="NV">Nevada</option>
+								<option value="OR">Oregon</option>
+								<option value="WA">Washington</option>
+							</optgroup>
+							<optgroup label="Mountain Time Zone">
+								<option value="AZ">Arizona</option>
+								<option value="CO">Colorado</option>
+								<option value="ID">Idaho</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NM">New Mexico</option>
+								<option value="ND">North Dakota</option>
+								<option value="UT">Utah</option>
+								<option value="WY">Wyoming</option>
+							</optgroup>
+							<optgroup label="Central Time Zone">
+								<option value="AL">Alabama</option>
+								<option value="AR">Arkansas</option>
+								<option value="IL">Illinois</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="OK">Oklahoma</option>
+								<option value="SD">South Dakota</option>
+								<option value="TX">Texas</option>
+								<option value="TN">Tennessee</option>
+								<option value="WI">Wisconsin</option>
+							</optgroup>
+							<optgroup label="Eastern Time Zone">
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="IN">Indiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="OH">Ohio</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WV">West Virginia</option>
+							</optgroup>
+						</select>
+
+						<hr class="panel-wide">
+						
+						<!-- Multiselect -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">MULTISELECT</h6>
+
+						<select multiple="multiple" id="jquery-select2-multiple" class="form-control">
+							<optgroup label="Alaskan/Hawaiian Time Zone">
+								<option value="AK">Alaska</option>
+								<option value="HI">Hawaii</option>
+							</optgroup>
+							<optgroup label="Pacific Time Zone">
+								<option value="CA">California</option>
+								<option value="NV">Nevada</option>
+								<option value="OR">Oregon</option>
+								<option value="WA">Washington</option>
+							</optgroup>
+							<optgroup label="Mountain Time Zone">
+								<option value="AZ">Arizona</option>
+								<option value="CO">Colorado</option>
+								<option value="ID">Idaho</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NM">New Mexico</option>
+								<option value="ND">North Dakota</option>
+								<option value="UT">Utah</option>
+								<option value="WY">Wyoming</option>
+							</optgroup>
+							<optgroup label="Central Time Zone">
+								<option value="AL">Alabama</option>
+								<option value="AR">Arkansas</option>
+								<option value="IL">Illinois</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="OK">Oklahoma</option>
+								<option value="SD">South Dakota</option>
+								<option value="TX">Texas</option>
+								<option value="TN">Tennessee</option>
+								<option value="WI">Wisconsin</option>
+							</optgroup>
+							<optgroup label="Eastern Time Zone">
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="IN">Indiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="OH">Ohio</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WV">West Virginia</option>
+							</optgroup>
+						</select>
+						
+						<hr class="panel-wide">
+						
+						<!-- External source -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">EXTERNAL SOURCE</h6>
+
+						<input type="text" id="jquery-select2-external" class="form-control">
+
+						<hr class="panel-wide">
+						
+						<!-- Disabled state -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">DISABLED STATE</h6>
+
+						<select class="form-control" disabled="disabled">
+							<option></option>
+							<option value="1">First option</option>
+							<option value="2">Second option</option>
+							<option value="3">Third option</option>
+							<option value="4">Fourth option</option>
+							<option value="5">Fourth option</option>
+						</select>
+
+						<br>
+
+						<select class="form-control" disabled="disabled">
+							<option value="1">First option</option>
+							<option value="2">Second option</option>
+							<option value="3" selected="selected">Third option</option>
+							<option value="4">Fourth option</option>
+							<option value="5">Fourth option</option>
+						</select>
+
+						<br>
+
+						<select multiple="multiple" class="form-control" disabled="disabled">
+							<option></option>
+							<option value="1">First option</option>
+							<option value="2">Second option</option>
+							<option value="3">Third option</option>
+							<option value="4">Fourth option</option>
+							<option value="5">Fourth option</option>
+						</select>
+
+						<br>
+
+						<select multiple="multiple" class="form-control" disabled="disabled">
+							<option value="1">First option</option>
+							<option value="2">Second option</option>
+							<option value="3" selected="selected">Third option</option>
+							<option value="4" selected="selected">Fourth option</option>
+							<option value="5">Fourth option</option>
+						</select>
+
+						<br>
+
+						<select class="form-control">
+							<option></option>
+							<option value="1">First option</option>
+							<option value="2">Second option</option>
+							<option value="3" disabled="disabled">Disabled option</option>
+							<option value="4">Fourth option</option>
+							<option value="5">Fourth option</option>
+						</select>
+
+						<hr class="panel-wide">
+						
+						<!-- Colors -->
+						<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">COLORS</h6>
+
+						<!-- Primary -->
+						<div class="select2-primary">
+							<select multiple="multiple" class="form-control">
+								<option value="1" selected="selected">First option</option>
+								<option value="2">Second option</option>
+								<option value="3" selected="selected">Third option</option>
+								<option value="4" selected="selected">Fourth option</option>
+								<option value="5">Fifth option</option>
+							</select>
+						</div>
+						<br>
+
+						<!-- Success -->
+						<div class="select2-success">
+							<select multiple="multiple" class="form-control">
+								<option value="1" selected="selected">First option</option>
+								<option value="2">Second option</option>
+								<option value="3" selected="selected">Third option</option>
+								<option value="4" selected="selected">Fourth option</option>
+								<option value="5">Fifth option</option>
+							</select>
+						</div>
+						<br>
+
+						<!-- Warning -->
+						<div class="select2-warning">
+							<select multiple="multiple" class="form-control">
+								<option value="1" selected="selected">First option</option>
+								<option value="2">Second option</option>
+								<option value="3" selected="selected">Third option</option>
+								<option value="4" selected="selected">Fourth option</option>
+								<option value="5">Fifth option</option>
+							</select>
+						</div>
+						<br>
+
+						<!-- Danger -->
+						<div class="select2-danger">
+							<select multiple="multiple" class="form-control">
+								<option value="1" selected="selected">First option</option>
+								<option value="2">Second option</option>
+								<option value="3" selected="selected">Third option</option>
+								<option value="4" selected="selected">Fourth option</option>
+								<option value="5">Fifth option</option>
+							</select>
+						</div>
+						<br>
+
+						<!-- Info -->
+						<div class="select2-info">
+							<select multiple="multiple" class="form-control">
+								<option value="1" selected="selected">First option</option>
+								<option value="2">Second option</option>
+								<option value="3" selected="selected">Third option</option>
+								<option value="4" selected="selected">Fourth option</option>
+								<option value="5">Fifth option</option>
+							</select>
+						</div>
+					</div>
+				</div>
+<!-- /9. $JQUERY_SELECT2 -->
+
+<!-- 10. $MASKED_INPUTS ============================================================================
+
+				Masked inputs
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$("#masked-inputs-examples-date").mask("99/99/9999");
+						$("#masked-inputs-examples-phone").mask("(999) 999-9999");
+						$("#masked-inputs-examples-ssn").mask("999-99-9999");
+						$("#masked-inputs-examples-product-key").mask("a*-999-a999", {
+							placeholder: " ",
+							completed: function(){
+								alert("You typed the following: " + this.val());
+							}
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Masked inputs</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://digitalbush.com/projects/masked-input-plugin/" target="_blank">http://digitalbush.com/projects/masked-input-plugin/</a></div>
+
+						<input type="text" placeholder="Date: 99/99/9999" class="form-control form-group-margin" id="masked-inputs-examples-date">
+						<input type="text" placeholder="SSN: 999-99-9999" class="form-control form-group-margin" id="masked-inputs-examples-ssn">
+						<input type="text" placeholder="Phone: (999) 999-9999" class="form-control form-group-margin" id="masked-inputs-examples-phone">
+						<input type="text" placeholder="Product Key: a*-999-a999" class="form-control" id="masked-inputs-examples-product-key">
+					</div>
+				</div>
+<!-- /10. $MASKED_INPUTS -->
+
+<!-- 11. $STYLED_FILE_INPUTS ==============================================================================
+
+				Styled file inputs
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$('#styled-finputs-example').pixelFileInput({ placeholder: 'No file selected...' });
+					})
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Styled file inputs</span>
+					</div>
+					<div class="panel-body">
+						<input type="file" id="styled-finputs-example">
+					</div>
+				</div>
+<!-- /11. $STYLED_FILE_INPUTS -->
+
+<!-- 12. $JQUERY_AUTORESIZING_TEXTAREA =============================================================
+
+				jQuery Autoresizing Textarea
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$("#jq-autoresizing-textarea-example").autosize();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Autoresizing Textarea</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://www.jacklmoore.com/autosize/" target="_blank">http://www.jacklmoore.com/autosize/</a></div>
+
+						<textarea id="jq-autoresizing-textarea-example" rows="3" class="form-control"></textarea>
+					</div>
+				</div>
+<!-- /12. $JQUERY_AUTORESIZING_TEXTAREA -->
+
+<!-- 13. $JQUERY_KNOB ==============================================================================
+
+				jQuery Knob
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$(".knob-input-example").knob();
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery Knob</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://anthonyterrien.com/knob/" target="_blank">http://anthonyterrien.com/knob/</a></div>
+
+						<div style="display: inline-block">
+							<input type="text" value="75" class="knob-input-example" data-width="80" data-height="80" data-fgColor="#6597ea" data-thickness=".2" data-angleOffset="180">
+						</div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<div style="display: inline-block">
+							<input type="text" value="75" class="knob-input-example" data-width="80" data-height="80" data-displayPrevious="true" data-thickness=".2" data-min="-100" data-angleOffset="-125" data-angleArc="250" data-linecap="round" data-fgColor="#5ebd5e">
+						</div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<div style="display: inline-block">
+							<input type="text" value="75" class="knob-input-example" data-width="100" data-height="100" data-thickness=".25" data-cursor="true" data-fgColor="#e5635f">
+						</div>
+					</div>
+				</div>
+<!-- /13. $JQUERY_KNOB -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				
+<!-- 14. $DROPZONEJS_FILE_UPLOADS ==================================================================
+
+				Dropzone.js file uploads
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						$("#dropzonejs-example").dropzone({
+							url: "//dummy.html",
+							paramName: "file", // The name that will be used to transfer the file
+							maxFilesize: 0.5, // MB
+
+							addRemoveLinks : true,
+							dictResponseError: "Can't upload file!",
+							autoProcessQueue: false,
+							thumbnailWidth: 138,
+							thumbnailHeight: 120,
+
+							previewTemplate: '<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size">File size: <span data-dz-size></span></div><div class="dz-thumbnail-wrapper"><div class="dz-thumbnail"><img data-dz-thumbnail><span class="dz-nopreview">No preview</span><div class="dz-success-mark"><i class="fa fa-check-circle-o"></i></div><div class="dz-error-mark"><i class="fa fa-times-circle-o"></i></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div></div></div><div class="progress progress-striped active"><div class="progress-bar progress-bar-success" data-dz-uploadprogress></div></div></div>',
+
+							resize: function(file) {
+								var info = { srcX: 0, srcY: 0, srcWidth: file.width, srcHeight: file.height },
+									srcRatio = file.width / file.height;
+								if (file.height > this.options.thumbnailHeight || file.width > this.options.thumbnailWidth) {
+									info.trgHeight = this.options.thumbnailHeight;
+									info.trgWidth = info.trgHeight * srcRatio;
+									if (info.trgWidth > this.options.thumbnailWidth) {
+										info.trgWidth = this.options.thumbnailWidth;
+										info.trgHeight = info.trgWidth / srcRatio;
+									}
+								} else {
+									info.trgHeight = file.height;
+									info.trgWidth = file.width;
+								}
+								return info;
+							}
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Dropzone.js file uploads</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://www.dropzonejs.com" target="_blank">http://www.dropzonejs.com</a></div>
+
+						<div id="dropzonejs-example" class="dropzone-box">
+							<div class="dz-default dz-message">
+								<i class="fa fa-cloud-upload"></i>
+								Drop files in here<br><span class="dz-text-small">or click to pick manually</span>
+							</div>
+							<form action="//dummy.html">
+								<div class="fallback">
+									<input name="file" type="file" multiple="" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+<!-- /14. $DROPZONEJS_FILE_UPLOADS -->
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+
+<!-- 15. $BOOTSTRAP_X_EDITABLE =====================================================================
+
+				Bootstrap X-Editable
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {			
+						$('#bs-x-editable-username').editable({
+							type: 'text',
+							name: 'username',
+							title: 'Enter username'
+						});
+						
+						$('#bs-x-editable-firstname').editable({
+							validate: function(value) {
+								if($.trim(value) == '') return 'This field is required';
+							}
+						});
+
+						$('#bs-x-editable-sex').editable({
+							prepend: "not selected",
+							source: [
+								{value: 1, text: 'Male'},
+								{value: 2, text: 'Female'}
+							],
+							display: function(value, sourceData) {
+								var colors = {"": "gray", 1: "green", 2: "blue"},
+									elem = $.grep(sourceData, function(o){return o.value == value;});
+
+								if(elem.length) {
+									$(this).text(elem[0].text).css("color", colors[value]);
+								} else {
+									$(this).empty();
+								}
+							}
+						});
+
+						$('#bs-x-editable-vacation').editable({
+							datepicker: {
+								todayBtn: 'linked'
+							}
+						});
+
+						$('#bs-x-editable-dob').editable();
+
+						$('#bs-x-editable-event').editable({
+							combodate: {
+								firstItem: 'name'
+							}
+						});
+
+						$('#bs-x-editable-comments').editable({
+							showbuttons: 'bottom'
+						});
+
+						$('#bs-x-editable-state2').editable({
+							value: 'California',
+							typeahead: {
+								name: 'state',
+								local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+							}
+						});
+
+						$('#bs-x-editable-fruits').editable({
+							limit: 3,
+							source: [
+								{value: 1, text: 'banana'},
+								{value: 2, text: 'peach'},
+								{value: 3, text: 'apple'},
+								{value: 4, text: 'watermelon'},
+								{value: 5, text: 'orange'}
+							]
+						});
+
+						$('#bs-x-editable-tags').editable({
+							select2: {
+								tags: ['html', 'javascript', 'css', 'ajax'],
+								tokenSeparators: [",", " "]
+							}
+						});
+
+						var countries = [];
+						$.each({"BD": "Bangladesh", "BE": "Belgium", "BF": "Burkina Faso", "BG": "Bulgaria", "BA": "Bosnia and Herzegovina", "BB": "Barbados", "WF": "Wallis and Futuna", "BL": "Saint Bartelemey", "BM": "Bermuda", "BN": "Brunei Darussalam", "BO": "Bolivia", "BH": "Bahrain", "BI": "Burundi", "BJ": "Benin", "BT": "Bhutan", "JM": "Jamaica", "BV": "Bouvet Island", "BW": "Botswana", "WS": "Samoa", "BR": "Brazil", "BS": "Bahamas", "JE": "Jersey", "BY": "Belarus", "O1": "Other Country", "LV": "Latvia", "RW": "Rwanda", "RS": "Serbia", "TL": "Timor-Leste", "RE": "Reunion", "LU": "Luxembourg", "TJ": "Tajikistan", "RO": "Romania", "PG": "Papua New Guinea", "GW": "Guinea-Bissau", "GU": "Guam", "GT": "Guatemala", "GS": "South Georgia and the South Sandwich Islands", "GR": "Greece", "GQ": "Equatorial Guinea", "GP": "Guadeloupe", "JP": "Japan", "GY": "Guyana", "GG": "Guernsey", "GF": "French Guiana", "GE": "Georgia", "GD": "Grenada", "GB": "United Kingdom", "GA": "Gabon", "SV": "El Salvador", "GN": "Guinea", "GM": "Gambia", "GL": "Greenland", "GI": "Gibraltar", "GH": "Ghana", "OM": "Oman", "TN": "Tunisia", "JO": "Jordan", "HR": "Croatia", "HT": "Haiti", "HU": "Hungary", "HK": "Hong Kong", "HN": "Honduras", "HM": "Heard Island and McDonald Islands", "VE": "Venezuela", "PR": "Puerto Rico", "PS": "Palestinian Territory", "PW": "Palau", "PT": "Portugal", "SJ": "Svalbard and Jan Mayen", "PY": "Paraguay", "IQ": "Iraq", "PA": "Panama", "PF": "French Polynesia", "BZ": "Belize", "PE": "Peru", "PK": "Pakistan", "PH": "Philippines", "PN": "Pitcairn", "TM": "Turkmenistan", "PL": "Poland", "PM": "Saint Pierre and Miquelon", "ZM": "Zambia", "EH": "Western Sahara", "RU": "Russian Federation", "EE": "Estonia", "EG": "Egypt", "TK": "Tokelau", "ZA": "South Africa", "EC": "Ecuador", "IT": "Italy", "VN": "Vietnam", "SB": "Solomon Islands", "EU": "Europe", "ET": "Ethiopia", "SO": "Somalia", "ZW": "Zimbabwe", "SA": "Saudi Arabia", "ES": "Spain", "ER": "Eritrea", "ME": "Montenegro", "MD": "Moldova, Republic of", "MG": "Madagascar", "MF": "Saint Martin", "MA": "Morocco", "MC": "Monaco", "UZ": "Uzbekistan", "MM": "Myanmar", "ML": "Mali", "MO": "Macao", "MN": "Mongolia", "MH": "Marshall Islands", "MK": "Macedonia", "MU": "Mauritius", "MT": "Malta", "MW": "Malawi", "MV": "Maldives", "MQ": "Martinique", "MP": "Northern Mariana Islands", "MS": "Montserrat", "MR": "Mauritania", "IM": "Isle of Man", "UG": "Uganda", "TZ": "Tanzania, United Republic of", "MY": "Malaysia", "MX": "Mexico", "IL": "Israel", "FR": "France", "IO": "British Indian Ocean Territory", "FX": "France, Metropolitan", "SH": "Saint Helena", "FI": "Finland", "FJ": "Fiji", "FK": "Falkland Islands (Malvinas)", "FM": "Micronesia, Federated States of", "FO": "Faroe Islands", "NI": "Nicaragua", "NL": "Netherlands", "NO": "Norway", "NA": "Namibia", "VU": "Vanuatu", "NC": "New Caledonia", "NE": "Niger", "NF": "Norfolk Island", "NG": "Nigeria", "NZ": "New Zealand", "NP": "Nepal", "NR": "Nauru", "NU": "Niue", "CK": "Cook Islands", "CI": "Cote d'Ivoire", "CH": "Switzerland", "CO": "Colombia", "CN": "China", "CM": "Cameroon", "CL": "Chile", "CC": "Cocos (Keeling) Islands", "CA": "Canada", "CG": "Congo", "CF": "Central African Republic", "CD": "Congo, The Democratic Republic of the", "CZ": "Czech Republic", "CY": "Cyprus", "CX": "Christmas Island", "CR": "Costa Rica", "CV": "Cape Verde", "CU": "Cuba", "SZ": "Swaziland", "SY": "Syrian Arab Republic", "KG": "Kyrgyzstan", "KE": "Kenya", "SR": "Suriname", "KI": "Kiribati", "KH": "Cambodia", "KN": "Saint Kitts and Nevis", "KM": "Comoros", "ST": "Sao Tome and Principe", "SK": "Slovakia", "KR": "Korea, Republic of", "SI": "Slovenia", "KP": "Korea, Democratic People's Republic of", "KW": "Kuwait", "SN": "Senegal", "SM": "San Marino", "SL": "Sierra Leone", "SC": "Seychelles", "KZ": "Kazakhstan", "KY": "Cayman Islands", "SG": "Singapore", "SE": "Sweden", "SD": "Sudan", "DO": "Dominican Republic", "DM": "Dominica", "DJ": "Djibouti", "DK": "Denmark", "VG": "Virgin Islands, British", "DE": "Germany", "YE": "Yemen", "DZ": "Algeria", "US": "United States", "UY": "Uruguay", "YT": "Mayotte", "UM": "United States Minor Outlying Islands", "LB": "Lebanon", "LC": "Saint Lucia", "LA": "Lao People's Democratic Republic", "TV": "Tuvalu", "TW": "Taiwan", "TT": "Trinidad and Tobago", "TR": "Turkey", "LK": "Sri Lanka", "LI": "Liechtenstein", "A1": "Anonymous Proxy", "TO": "Tonga", "LT": "Lithuania", "A2": "Satellite Provider", "LR": "Liberia", "LS": "Lesotho", "TH": "Thailand", "TF": "French Southern Territories", "TG": "Togo", "TD": "Chad", "TC": "Turks and Caicos Islands", "LY": "Libyan Arab Jamahiriya", "VA": "Holy See (Vatican City State)", "VC": "Saint Vincent and the Grenadines", "AE": "United Arab Emirates", "AD": "Andorra", "AG": "Antigua and Barbuda", "AF": "Afghanistan", "AI": "Anguilla", "VI": "Virgin Islands, U.S.", "IS": "Iceland", "IR": "Iran, Islamic Republic of", "AM": "Armenia", "AL": "Albania", "AO": "Angola", "AN": "Netherlands Antilles", "AQ": "Antarctica", "AP": "Asia/Pacific Region", "AS": "American Samoa", "AR": "Argentina", "AU": "Australia", "AT": "Austria", "AW": "Aruba", "IN": "India", "AX": "Aland Islands", "AZ": "Azerbaijan", "IE": "Ireland", "ID": "Indonesia", "UA": "Ukraine", "QA": "Qatar", "MZ": "Mozambique"}, function(k, v) {
+							countries.push({id: k, text: v});
+						});
+
+						$('#bs-x-editable-country').editable({
+							source: countries,
+							select2: {
+								width: 200,
+								placeholder: 'Select country',
+								allowClear: true
+							}
+						});
+
+						$('#bs-x-editable-address').editable({
+							value: {
+								city: "Moscow",
+								street: "Lenina",
+								building: "12"
+							},
+							validate: function(value) {
+								if(value.city == '') return 'city is required!';
+							},
+							display: function(value) {
+								if(!value) {
+									$(this).empty();
+									return;
+								}
+								var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
+								$(this).html(html); 
+							}
+						});
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Bootstrap X-Editable</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">More info and examples at <a href="http://vitalets.github.io/x-editable/" target="_blank">http://vitalets.github.io/x-editable/</a></div>
+
+						<table id="user" class="table table-bordered table-striped" style="clear: both">
+							<tbody>
+								<tr>
+									<td width="35%">Simple text field</td>
+									<td width="65%"><a href="#" id="bs-x-editable-username" data-type="text" data-pk="1" data-title="Enter username">superuser</a></td>
+								</tr>
+								<tr>
+									<td>Empty text field, required</td>
+									<td><a href="#" id="bs-x-editable-firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname"></a></td>
+								</tr>
+								<tr>
+									<td>Select, local array, custom display</td>
+									<td><a href="#" id="bs-x-editable-sex" data-type="select" data-pk="1" data-value="" data-title="Select sex"></a></td>
+								</tr>
+								<tr>
+									<td>Datepicker</td>
+									<td><a href="#" id="bs-x-editable-vacation" data-type="date" data-viewformat="dd.mm.yyyy" data-pk="1" data-placement="right" data-title="When you want vacation to start?">25.02.2013</a></td>
+								</tr>
+								<tr>
+									<td>Combodate (date)</td>
+									<td><a href="#" id="bs-x-editable-dob" data-type="combodate" data-value="1984-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1"  data-title="Select Date of birth"></a></td>
+								</tr>
+								<tr>
+									<td>Combodate (datetime)</td>
+									<td><a href="#" id="bs-x-editable-event" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="YYYY-MM-DD HH:mm" data-viewformat="MMM D, YYYY, HH:mm" data-pk="1"  data-title="Setup event date and time"></a></td>
+								</tr>
+								<tr>
+									<td>Textarea, buttons below. Submit by <i>ctrl+enter</i></td>
+									<td><a href="#" id="bs-x-editable-comments" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-title="Enter comments">awesome user!</a></td>
+								</tr>
+								<tr>
+									<td>Twitter typeahead.js</td>
+									<td><a href="#" id="bs-x-editable-state2" data-type="typeaheadjs" data-pk="1" data-placement="right" data-title="Start typing State.."></a></td>
+								</tr>
+								<tr>
+									<td>Checklist</td>
+									<td><a href="#" id="bs-x-editable-fruits" data-type="checklist" data-value="2,3" data-title="Select fruits"></a></td>
+								</tr>
+
+								<tr>
+									<td>Select2 (tags mode)</td>
+									<td><a href="#" id="bs-x-editable-tags" data-type="select2" data-pk="1" data-title="Enter tags">html, javascript</a></td>
+								</tr>
+								<tr>
+									<td>Select2 (dropdown mode)</td>
+									<td><a href="#" id="bs-x-editable-country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country"></a></td>
+								</tr>
+								
+								<tr>
+									<td>Custom input, several fields</td>
+									<td><a href="#" id="bs-x-editable-address" data-type="address" data-pk="1" data-title="Please, fill address"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!-- /15. $BOOTSTRAP_X_EDITABLE -->
+
+			</div>
+		</div>
+
+	</div> <!-- / #content-wrapper -->
+	<div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+
+<!-- Get jQuery from Google CDN -->
+<!--[if !IE]> -->
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+<![endif]-->
+
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.min.js"></script>
+<script src="assets/javascripts/pixel-admin.min.js"></script>
+
+<!-- Used for X-Editable demo only. You can remove this lines -->
+	<script src="assets/javascripts/jquery.mockjax.js"></script>
+	<script src="assets/javascripts/demo-mock.js"></script>
+<!---->
+
+<script type="text/javascript">
+	init.push(function () {
+		// Javascript code here
+	})
+	window.PixelAdmin.start(init);
+</script>
+
+</body>
+</html>

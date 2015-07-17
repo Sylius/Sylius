@@ -28,11 +28,11 @@ Feature: Store dashboard
     Scenario: Viewing the dashboard logged in root
        Given I am on the dashboard
         Then I should see "Tableau de bord"
-#
-#    Scenario: Viewing recent orders
-#        Given I am on the dashboard page
-#         Then I should see 2 orders in the list
-#
-#    Scenario: Viewing recent customers
-#        Given I am on the dashboard page
-#         Then I should see 3 customers in the list
+
+    Scenario: Viewing recent orders
+        Given I am on the dashboard page
+         Then I should see 2 orders in the list
+
+    Scenario: Viewing recent customers
+        Given I am on the dashboard page
+         Then I should see 3 customers in the list

@@ -1,0 +1,1664 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Color builder - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+	<style>
+		#colors-block {
+			background: #272822;
+			margin: 0 0 20px 0;
+			border-top: 1px solid #23241e;
+		}
+		#colors-block .header {
+			color: #aaa;
+			display: block;
+			text-transform: uppercase;
+			font-size: 11px;
+			font-weight: 600;
+			margin: -15px -15px 0 -15px;
+		}
+		#colors-block .header,
+		#colors-block .right > div {
+			padding: 15px;
+		}
+		#colorpicker {
+			display: block;
+			width: 204px;
+			border-right: 1px solid #333;
+			padding: 15px;
+			float: left;
+			position: relative;
+			height: 340px;
+		}
+		#colorpicker .header {
+			text-align: center;
+		}
+		#colorpicker input {
+			text-align: center !important;
+			margin-bottom: 10px;
+		}
+		#colors-block input {
+			padding-left: 12px !important;
+			border: none;
+			color: #888;
+			background: rgba(255, 255, 255, .05);
+		}
+		#colorpicker-preview {
+			position: absolute;
+			border-radius: 2px;
+			width: 24px;
+			height: 24px;
+			margin: 4px 0 0 4px;
+			z-index: 3;
+		}
+		#colors-block .right {
+			overflow: hidden;
+			float: none;
+		}
+		.colors-paste-code {
+			display: block;
+			font-size: 12px;
+			margin-bottom: 5px;
+			margin-top: -5px;
+			color: #888;
+		}
+		#colors-block code {
+			display: block !important;
+			color: #f9f2f4;
+			background: #c7254e;
+		}
+		#colors-list span {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			border-radius: 999999px;
+			cursor: pointer;
+		}
+	</style>
+
+	<style id="builder-page-style"></style>
+
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+	
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'      - Sets text direction to right-to-left
+	* 'main-menu-right'    - Places the main menu on the right side
+	* 'no-main-menu'       - Hides the main menu
+	* 'main-navbar-fixed'  - Fixes the main navigation
+	* 'main-menu-fixed'    - Fixes the main menu
+	* 'main-menu-animated' - Animate main menu
+-->
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];</script>
+<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<div id="main-wrapper">
+
+<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+	Main navigation
+-->
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+			<!-- Main navbar header -->
+			<div class="navbar-header">
+
+				<!-- Logo -->
+				<a href="index.html" class="navbar-brand">
+					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+					PixelAdmin
+				</a>
+
+				<!-- Main navbar toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+			</div> <!-- / .navbar-header -->
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">First item</a></li>
+								<li><a href="#">Second item</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Third item</a></li>
+							</ul>
+						</li>
+					</ul> <!-- / .navbar-nav -->
+
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+							Navbar Icon Buttons
+
+							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+							Classes:
+							* 'nav-icon-btn-info'
+							* 'nav-icon-btn-success'
+							* 'nav-icon-btn-warning'
+							* 'nav-icon-btn-danger' 
+-->
+							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">5</span>
+									<i class="nav-icon fa fa-bullhorn"></i>
+									<span class="small-screen-text">Notifications</span>
+								</a>
+
+								<!-- NOTIFICATIONS -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-notifications').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+									<div class="notifications-list" id="main-navbar-notifications">
+
+										<div class="notification">
+											<div class="notification-title text-danger">SYSTEM</div>
+											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-info">STORE</div>
+											<div class="notification-description">You have <strong>9</strong> new orders.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-truck bg-info"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-default">CRON DAEMON</div>
+											<div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-clock-o bg-default"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-success">SYSTEM</div>
+											<div class="notification-description">Server <strong>up</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-success"></div>
+										</div> <!-- / .notification -->
+
+										<div class="notification">
+											<div class="notification-title text-warning">SYSTEM</div>
+											<div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+											<div class="notification-ago">12h ago</div>
+											<div class="notification-icon fa fa-hdd-o bg-warning"></div>
+										</div> <!-- / .notification -->
+
+									</div> <!-- / .notifications-list -->
+									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+							<li class="nav-icon-btn nav-icon-btn-success dropdown">
+								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="label">10</span>
+									<i class="nav-icon fa fa-envelope"></i>
+									<span class="small-screen-text">Income messages</span>
+								</a>
+
+								<!-- MESSAGES -->
+								
+								<!-- Javascript -->
+								<script>
+									init.push(function () {
+										$('#main-navbar-messages').slimScroll({ height: 250 });
+									});
+								</script>
+								<!-- / Javascript -->
+
+								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+									<div class="messages-list" id="main-navbar-messages">
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Michelle Bortz</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Timothy Owens</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+											<div class="message-description">
+												from <a href="#">Denise Steiner</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+										<div class="message">
+											<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+											<div class="message-description">
+												from <a href="#">Robert Jang</a>
+												&nbsp;&nbsp;·&nbsp;&nbsp;
+												2h ago
+											</div>
+										</div> <!-- / .message -->
+
+									</div> <!-- / .messages-list -->
+									<a href="#" class="messages-link">MORE MESSAGES</a>
+								</div> <!-- / .dropdown-menu -->
+							</li>
+<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="Search">
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/demo/avatars/1.jpg">
+									<span>John Doe</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
+									<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+									<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+								</ul>
+							</li>
+						</ul> <!-- / .navbar-nav -->
+					</div> <!-- / .right -->
+				</div>
+			</div> <!-- / #main-navbar-collapse -->
+		</div> <!-- / .navbar-inner -->
+	</div> <!-- / #main-navbar -->
+<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+<!-- 4. $MAIN_MENU =================================================================================
+
+		Main menu
+		
+		Notes:
+		* to make the menu item active, add a class 'active' to the <li>
+		  example: <li class="active">...</li>
+		* multilevel submenu example:
+			<li class="mm-dropdown">
+			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+			  <ul>
+				<li>...</li>
+				<li class="mm-dropdown">
+				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+				  <ul>
+					<li>...</li>
+					...
+				  </ul>
+				</li>
+				...
+			  </ul>
+			</li>
+-->
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">
+			<div class="menu-content top" id="menu-content-demo">
+				<!-- Menu custom content demo
+					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+					 Javascript: html/assets/demo/demo.js
+				 -->
+				<div>
+					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+
+					<img src="assets/demo/avatars/1.jpg" alt="" class="">
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+					</div>
+					<a href="#" class="close">&times;</a>
+				</div>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">Layouts</span><span class="label label-warning">Updated</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="layouts-grid.html"><span class="mm-text">Grid</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="layouts-main-menu.html"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">Main menu</span><span class="label label-warning">Updated</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="stat-panels.html"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Stat panels</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="menu-icon fa fa-flask"></i><span class="mm-text">Widgets</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text">Form components</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text">Tables</span></a>
+				</li>
+				<li>
+					<a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text">Charts</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text">Pages</span><span class="label label-success">16</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+								</li>
+								<li>
+									<a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text">Complete UI</span></a>
+				</li>
+				<li>
+					<a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text">Color Builder</span></a>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-sitemap"></i><span class="mm-text">Menu levels</span><span class="badge badge-primary">6</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span><span class="label label-info">21</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+							<ul>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+								</li>
+								<li class="mm-dropdown">
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+									<ul>
+										<li class="mm-dropdown">
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+											<ul>
+												<li>
+													<a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul> <!-- / .navigation -->
+			<div class="menu-content">
+				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+			</div>
+		</div> <!-- / #main-menu-inner -->
+	</div> <!-- / #main-menu -->
+<!-- /4. $MAIN_MENU -->
+
+
+	<div id="content-wrapper">
+		<!--[if lt IE 9]>
+		<div class="alert alert-danger alert-page">This page is not working on IE8.</div>
+		<![endif]-->
+
+		<div class="page-header">
+			<h1><i class="fa fa-tint page-header-icon"></i>&nbsp;&nbsp;Color Builder</h1>
+		</div> <!-- / .page-header -->
+
+		<div id="colors-block" class="clearfix no-grid-gutter-h" style="margin-top:-26px;margin-bottom: 26px;">
+			<div id="colorpicker">
+				<span class="header">Choose color</span>
+				<div id="colorpicker-preview"></div>
+				<input type="text" class="form-control" id="g-color-input">
+			</div>
+			<div class="right">
+				<div style="border-bottom: 1px solid #333;">
+					<span class="header">Enter color name</span>
+					<input type="text" class="form-control" id="g-name-input">
+				</div>
+				<div style="border-bottom: 1px solid #333;" class="less">
+					<span class="colors-paste-code">Insert this code into the colors.less file:</span>
+					<code>//</code>
+				</div>
+				<div style="border-bottom: 1px solid #333;" class="scss">
+					<span class="colors-paste-code">Insert this code into the _colors.scss file:</span>
+					<code>//</code>
+				</div>
+				<div>
+					<span class="header">Predefined colors</span>
+					<div id="colors-list">
+						<span style="background: #857198;" data-color="#857198" data-name="pa-purple"></span>&nbsp;&nbsp;&nbsp;
+						<span style="background: #a5cd7d;" data-color="#a5cd7d" data-name="light-green"></span>&nbsp;&nbsp;&nbsp;
+						<span style="background: #39393d;" data-color="#39393d" data-name="dark-gray"></span>
+					</div>
+				</div>
+			</div>
+		</div> <!-- / #colors-block -->
+
+		<!-- colorGeneratorDemo -->
+
+		<div class="row">
+			<div class="col-md-6">
+
+				<style>
+					#cg-bg-demo > div {
+						padding: 15px;
+						text-align: center;
+					}
+				</style>
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Background colors</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br" id="cg-bg-demo">
+						<!-- Default background -->
+						<div class="bg-colorGeneratorDemo">Default</div>
+
+						<!-- Darken background -->
+						<div class="bg-colorGeneratorDemo darken">Darken</div>
+
+						<!-- Darker background -->
+						<div class="bg-colorGeneratorDemo darker">Darker</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Buttons</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<!-- Default buttons -->
+						<button class="btn btn-lg btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Outline buttons -->
+						<button class="btn btn-lg btn-outline btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-outline btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-outline btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-outline btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Flat buttons -->
+						<button class="btn btn-lg btn-flat btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-flat btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-flat btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-flat btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Flat outline buttons -->
+						<button class="btn btn-lg btn-flat btn-outline btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-flat btn-outline btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-flat btn-outline btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-flat btn-outline btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Rounded buttons -->
+						<button class="btn btn-lg btn-rounded btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-rounded btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-rounded btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-rounded btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Rounded outline buttons -->
+						<button class="btn btn-lg btn-outline btn-rounded btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-outline btn-rounded btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-outline btn-rounded btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-outline btn-rounded btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Rounded flat buttons -->
+						<button class="btn btn-lg btn-flat btn-rounded btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-flat btn-rounded btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-flat btn-rounded btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-flat btn-rounded btn-colorGeneratorDemo">Extra small</button>
+
+						<br><br>
+
+						<!-- Rounded flat outline buttons -->
+						<button class="btn btn-lg btn-flat btn-outline btn-rounded btn-colorGeneratorDemo">Large</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-flat btn-outline btn-rounded btn-colorGeneratorDemo">Default</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-sm btn-flat btn-outline btn-rounded btn-colorGeneratorDemo">Small</button>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-flat btn-outline btn-rounded btn-colorGeneratorDemo">Extra small</button>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Tabs</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<!-- Default tabs -->
+						<ul class="nav nav-tabs nav-tabs-colorGeneratorDemo">
+							<li class="active">
+								<a href="#" data-toggle="tab">One <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Two <span class="badge badge-info">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Three</a>
+							</li>
+						</ul>
+
+						<br>
+
+						<!-- Simple tabs -->
+						<ul class="nav nav-tabs nav-tabs-simple nav-tabs-colorGeneratorDemo">
+							<li class="active">
+								<a href="#" data-toggle="tab">One <span class="label label-success">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Two <span class="badge badge-info">12</span></a>
+							</li>
+							<li>
+								<a href="#" data-toggle="tab">Three</a>
+							</li>
+						</ul>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Pills</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<ul class="nav nav-pills nav-pills-colorGeneratorDemo">
+							<li class="active"><a href="#">One <span class="label label-warning">14</span></a></li>
+							<li><a href="#">Two <span class="badge badge-danger">16</span></a></li>
+							<li><a href="#">Three</a></li>
+						</ul>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">List group</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="list-group list-group-colorGeneratorDemo">
+							<a href="#" class="list-group-item">Cras justo odio<span class="badge badge-success">14</span></a>
+							<a href="#" class="list-group-item active">Dapibus ac facilisis in<span class="badge badge-danger">2</span></a>
+							<a href="#" class="list-group-item">Morbi leo risus</a>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Dark panel</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-darkv panel-body-colorful panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title"><i class="panel-title-icon fa fa-flask"></i>Panel header</span>
+							</div>
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with pagination</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<ul class="pagination pagination-xs">
+										<li><a href="#">«</a></li>
+										<li class="active"><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">»</a></li>
+									</ul> <!-- / .pagination -->
+							</div> <!-- / .panel-heading -->
+							</div>
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with pager</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<ul class="pager pager-xs">
+										<li class="disabled"><a href="#">← Older</a></li>
+										<li><a href="#">Newer →</a></li>
+									</ul>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with select box</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<select class="form-control input-sm">
+										<option value="1">Option 1</option>
+										<option value="2">Option 2</option>
+										<option value="3">Option 3</option>
+									</select>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with icon</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<div class="panel-heading-icon"><i class="fa fa-inbox"></i></div>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with progress bar</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls" style="width: 30%">
+									<div class="progress progress-striped active" style="width: 100%">
+										<div class="progress-bar progress-bar-danger" style="width: 60%;"></div>
+									</div>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Popovers</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br" id="popovers-demo">
+						<script> init.push(function () { $('#popovers-demo button').popover(); }); </script>
+
+						<!-- Dark popover -->
+						<button type="button" class="btn popover-dark popover-colorGeneratorDemo" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title">
+							Dark popover
+						</button>
+
+						&nbsp;&nbsp;&nbsp;
+
+						<!-- Dark colorful popover -->
+						<button type="button" class="btn popover-dark popover-colorful popover-colorGeneratorDemo" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-title="Popover title">
+							Dark colorful popover
+						</button>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+				
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Tooltips</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br" id="tooltips-demo">
+						<script> init.push(function () { $('#tooltips-demo button').tooltip(); }); </script>
+
+						<button type="button" class="btn tooltip-colorGeneratorDemo" data-toggle="tooltip" title="Tooltip text">Hover to open tooltip</button>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Switchers</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br replace-entities" style="vertical-align: top;">
+						<script>
+							init.push(function () {
+								$('#switchers-demo-default').switcher();
+								$('#switchers-demo-square').switcher({ theme: 'square' });
+								$('#switchers-demo-modern').switcher({ theme: 'modern' });
+							});
+						</script>
+
+						<!-- Default theme -->
+						<input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-default">
+						&nbsp;&nbsp;&nbsp;
+
+						<!-- Square theme -->
+						<input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-square">
+						&nbsp;&nbsp;&nbsp;
+
+						<!-- Modern theme -->
+						<input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-modern">
+					</div> <!-- / .panel-body -->
+					<div class="panel-source-code" style="display: none;">
+						&lt;script&gt;
+							init.push(function () {
+								$('#switchers-demo-default').switcher();
+								$('#switchers-demo-square').switcher({ theme: 'square' });
+								$('#switchers-demo-modern').switcher({ theme: 'modern' });
+							});
+						&lt;/script&gt;
+
+						<!-- Default theme -->
+						&lt;input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-default"&gt;
+
+
+						<!-- Square theme -->
+						&lt;input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-square"&gt;
+
+
+						<!-- Modern theme -->
+						&lt;input type="checkbox" data-class="switcher-colorGeneratorDemo" checked="checked" id="switchers-demo-modern"&gt;
+					</div>
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">jQuery UI Slider</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br replace-entities" style="vertical-align: top;">
+						<script>
+							init.push(function () {
+								$('#ui-slider-demo').slider({
+								  'range': 'min',
+								  'min': 0,
+								  'max': 100,
+								  'value': 60
+								});
+							});
+						</script>
+
+						<div id="ui-slider-demo" class="ui-slider-colorGeneratorDemo"></div>
+					</div> <!-- / .panel-body -->
+					<div class="panel-source-code" style="display: none;">
+						&lt;script&gt;
+							init.push(function () {
+								$('#ui-slider-demo').slider({
+								  'range': 'min',
+								  'min': 0,
+								  'max': 100,
+								  'value': 60
+								});
+							});
+						&lt;/script&gt;
+
+						&lt;div id="ui-slider-demo" class="ui-slider-colorGeneratorDemo"&gt;&lt;/div&gt;
+					</div>
+				</div> <!-- / .panel -->
+			</div>
+			<div class="col-md-6">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Text color</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="text-colorGeneratorDemo">Colored text</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Labels, badges and tags</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<!-- Label -->
+						<a href="#" class="label label-colorGeneratorDemo">Label</a>&nbsp;&nbsp;&nbsp;
+
+						<!-- Badge -->
+						<a href="#" class="label label-colorGeneratorDemo">Badge</a>&nbsp;&nbsp;&nbsp;
+
+						<!-- Tag -->
+						<a href="#" class="label label-tag label-colorGeneratorDemo">Tag</a>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Alert</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="alert alert-colorGeneratorDemo">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							Some alert text here.
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Progress Bars</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<!-- Default progress bar -->
+						<div class="progress">
+							<div class="progress-bar progress-bar-colorGeneratorDemo" style="width: 60%;"></div>
+						</div>
+
+						<!-- Striped progress bar -->
+						<div class="progress progress-striped">
+							<div class="progress-bar progress-bar-colorGeneratorDemo" style="width: 60%;"></div>
+						</div>
+
+						<!-- Striped animated progress bar -->
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-colorGeneratorDemo" style="width: 60%;"></div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Dropdown</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<ul class="dropdown-menu dropdown-menu-colorGeneratorDemo" style="display: block; position: relative;">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+						</ul>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Table</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="table-colorGeneratorDemo">
+							<div class="table-header">
+								<div class="table-caption">
+									Table Caption
+								</div>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Username</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>Thornton</td>
+										<td>@fat</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+								  </tr>
+								</tbody>
+							</table>
+							<div class="table-footer">
+								Footer
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title"><i class="panel-title-icon fa fa-flask"></i>Panel header</span>
+							</div>
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with tabs</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<ul class="nav nav-tabs nav-tabs-xs">
+									<li class="active">
+										<a href="#" data-toggle="tab">Home</a>
+									</li>
+									<li>
+										<a href="#" data-toggle="tab">Profile</a>
+									</li>
+									<li>
+										<a href="#" data-toggle="tab">More</a>
+									</li>
+								</ul> <!-- / .nav -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with labels and badges</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<span class="label label-tag label-success">Tag</span>
+									<span class="label label-danger">Label</span>
+									<span class="badge badge-info">Badge</span>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="alert alert-page alert-success alert-dark">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>Well done!</strong> You successfully read this important alert message.
+							</div> <!-- / .alert -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with buttons</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<button class="btn btn-xs btn-success btn-outline dark"><span class="fa fa-refresh"></span>&nbsp;&nbsp;Refresh</button>
+									<button class="btn btn-xs btn-danger btn-outline dark"><span class="fa fa-paperclip"></span></button>
+									<div class="btn-group btn-group-xs">
+										<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><span class="fa fa-cog"></span>&nbsp;<span class="fa fa-caret-down"></span></button>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a href="#">Action</a></li>
+											<li><a href="#">Another action</a></li>
+											<li><a href="#">Something else here</a></li>
+											<li class="divider"></li>
+											<li class="dropdown-header">Some header</li>
+											<li><a href="#">Separated link</a></li>
+										</ul> <!-- / .dropdown-menu -->
+									</div> <!-- / .btn-group -->
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with text</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+									<button class="btn btn-xs btn-outline dark">Button</button>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with input group</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls" style="width:30%">
+									<form action="">
+										<div class="input-group input-group-sm">
+											<input type="text" class="form-control" placeholder="Search..." name="s">
+											<span class="input-group-btn">
+												<button class="btn" type="submit">
+													<span class="fa fa-search"></span>
+												</button>
+											</span>
+										</div> <!-- / .input-group -->
+									</form>
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Panel with switcher</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<script>init.push(function () { $('#panel-switcher').switcher(); })</script>
+
+						<div class="panel panel-dark panel-colorGeneratorDemo">
+							<div class="panel-heading">
+								<span class="panel-title">Panel header</span>
+								<div class="panel-heading-controls">
+									<input type="checkbox" data-class="switcher-sm" id="panel-switcher" checked="checked">
+								</div> <!-- / .panel-heading-controls -->
+							</div> <!-- / .panel-heading -->
+							<div class="panel-body">
+								Panel body content
+							</div>
+						</div>
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Accordion</span>
+						<div class="panel-heading-controls"><button class="btn btn-xs disabled cg-code">Show code</button></div>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body remove-spaces remove-br">
+						<div id="accordion-demo" class="panel-group panel-group-colorGeneratorDemo">
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-demo" href="#collapseOne">
+										Collapsible Group Item #1
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseOne" class="panel-collapse in">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-demo" href="#collapseTwo">
+										Collapsible Group Item #2
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseTwo" class="panel-collapse collapse">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+
+							<div class="panel">
+								<div class="panel-heading">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-demo" href="#collapseThree">
+										Collapsible Group Item #3
+									</a>
+								</div> <!-- / .panel-heading -->
+								<div id="collapseThree" class="panel-collapse collapse">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+									</div> <!-- / .panel-body -->
+								</div> <!-- / .collapse -->
+							</div> <!-- / .panel -->
+						</div> <!-- / .panel-group -->
+					</div> <!-- / .panel-body -->
+				</div> <!-- / .panel -->
+			</div>
+		</div>
+	</div> <!-- / #content-wrapper -->
+	<div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+
+
+<div id="cg-modal" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
+	<div class="modal-dialog" style="width: 90%;margin-left:auto;margin-right:auto">
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 class="modal-title" id="mySmallModalLabel"></h4>
+			</div>
+			<div class="modal-body">
+				<div id="cg-modal-codeMirror"></div>
+			</div>
+		</div> <!-- / .modal-content -->
+	</div> <!-- / .modal-dialog -->
+</div> <!-- / .modal -->
+
+<!-- Get jQuery from Google CDN -->
+<!--[if !IE]> -->
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+<![endif]-->
+
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.min.js"></script>
+<script src="assets/javascripts/pixel-admin.min.js"></script>
+
+<!-- jQuery UI extras (includes datepicker and tooltips) -->
+<!-- <script src="assets/javascripts/jquery-ui-extras.min.js"></script> -->
+
+<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js)-->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+<script type="text/javascript">
+	var timestamp = new Date().getTime(),
+	    less_sources = [
+	        'assets/demo/less/bootstrap-variables.less?t=' + timestamp,
+	        'assets/demo/less/bootstrap-mixins.less?t=' + timestamp,
+	        'assets/demo/less/variables.less?t=' + timestamp,
+	        'assets/demo/less/mixins.less?t=' + timestamp,
+	        'assets/demo/less/colors.less?t=' + timestamp
+	    ],
+	    less_code   = '',
+	    less_parser = null,
+	    $style      = null,
+	    cur_name    = null,
+	    cur_color   = null,
+	    $modal      = null,
+	    code_mirror = null;
+
+	var initialize_builder = function (callback) {
+		$style = $('#builder-page-style');
+		$modal = $('#cg-modal').modal('hide');
+		code_mirror = CodeMirror(document.getElementById("cg-modal-codeMirror"), {
+			lineNumbers: true,
+			mode: "text/html",
+			theme: 'monokai',
+			readOnly: true,
+			electricChars: true
+		});
+		load_less_js(function () {
+			less_parser = new(less.Parser);
+			load_less_sources(function () {
+				callback();
+			})
+		});
+	}
+
+	var load_less_js = function (callback) {
+		$.getScript('assets/demo/less-1.7.0.js', callback);
+	}
+
+	var load_less_sources = function (callback) {
+		if (less_sources.length == 0) return callback();
+		var file = less_sources.shift();
+		$.get(file, function(data) {
+			less_code = less_code + data;
+			load_less_sources(callback);
+		});
+	}
+
+	var compile_less = function (source, callback) {
+		less_parser.parse(less_code + source, function (err, tree) {
+			if (err) {
+				return alert(err);
+			}
+			callback(tree.toCSS());
+		});
+	}
+
+	var validate_color_regex    = /^#[0-9a-f]{3}([0-9a-f]{3})?$/i,
+		validate_name_regex     = /[^0-9a-z\-]/g,
+		validate_drepeats_regex = /\-+/g,
+		validate_dashes_regex   = /^\-|\-$/g,
+	    validate_inputs         = function () {
+	    	var color_valid = false,
+	    	    name_valid  = false,
+				color = $('#g-color-input').val().trim(),
+				name  = $('#g-name-input').val().trim().toLowerCase().replace(validate_name_regex, '').replace(validate_drepeats_regex, '-').replace(validate_dashes_regex, '');
+			
+			if (color.length && color[0] != ('#')) color = '#' + color;
+			if (validate_color_regex.test(color)) {
+				$('#colorpicker-preview').css('background', color);
+				color_valid = true;
+			} else {
+				$('#colorpicker-preview').css('background', 'none');
+			}
+
+			if (name.length) {
+				$('#g-name-input').val(name);
+				name_valid = true;
+			}
+
+			if (color_valid && name_valid) {
+				$('#colors-block .less code').text('.generate-color(' + name + ', ' + color + ');');
+				$('#colors-block .scss code').text('@inclide generate-color(' + name + ', ' + color + ');');
+				if (name != cur_name) {
+					cur_name = name;
+				}
+				if (cur_color != color) {
+					cur_color = color;
+					compile_less(less_code + '.generate-color(colorGeneratorDemo, ' + color + ');', function (result) {
+						$style.text(result);
+					});
+				}
+				$('.cg-code').removeClass('disabled');
+			} else {
+				$('#colors-block .less code').text('//');
+				$('#colors-block .scss code').text('//');
+				$('.cg-code').addClass('disabled');
+			}
+		}
+
+	init.push(function () {
+		if ($('html').hasClass('ie8')) return;
+		initialize_builder(function () {
+
+			$('#g-name-input').on('change', validate_inputs);
+
+			$('#colors-list').on('click', 'span', function () {
+				$('#g-name-input').val($(this).attr('data-name'));
+				$('#g-color-input').minicolors('value', $(this).attr('data-color'));
+			});
+
+			$('#g-color-input').minicolors({
+				theme: 'bootstrap',
+				inline: true,
+				change: validate_inputs
+			});
+
+			$('#colors-list span').first().click();
+		});
+
+		$('body').on('click', '.cg-code', function () {
+			if ($(this).hasClass('disabled')) return;
+			$panel = $(this).parents('.panel')
+			$modal.find('.modal-title').text($panel.find('.panel-title').text());
+
+			var $panel_body = $panel.find('.panel-body'),
+			    code        = null;
+
+			if ($panel.find('.panel-source-code').length) {
+				code = $panel.find('.panel-source-code').html();
+			} else {
+				code = $panel_body.html();
+			}
+
+			if ($panel_body.hasClass('remove-spaces')) {
+				code = code.replace(/\&nbsp\;/g, '');
+			}
+			if ($panel_body.hasClass('remove-br')) {
+				code = code.replace(/\t+?(\<br\>)+/g, '');
+			}
+			if ($panel_body.hasClass('replace-entities')) {
+				code = code.replace(/\&lt\;/g, '<').replace(/\&gt\;/g, '>');
+			}
+
+			code_mirror.setValue(code.replace(/colorGeneratorDemo/g, cur_name));
+
+			var last = code_mirror.lineCount(); 
+			code_mirror.operation(function() { 
+				for (var i = 0; i < last; ++i) code_mirror.indentLine(i); 
+			});
+
+			$modal.modal('show');
+		});
+
+		$modal.on('shown.bs.modal', function () {
+			code_mirror.refresh();
+		});
+	});
+
+	
+
+	window.PixelAdmin.start(init);
+</script>
+
+</body>
+</html>

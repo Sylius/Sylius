@@ -1,0 +1,57 @@
+.options {
+  position: fixed;
+  top: 300px;
+  left: -220px;
+  width: 220px;
+  padding: 20px;
+  color: #000;
+  background: #f7f7f7;
+  font-size: 14px;
+  font-weight: 400;
+  z-index: 9999;
+  line-height: normal;
+}
+.options .more {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background: #f7f7f7;
+  position: absolute;
+  right: -50px;
+  top: 10px;
+  font-size: 30px;
+  line-height: 48px;
+  text-align: center;
+}
+.options p {
+  line-height: normal;
+}
+.options .colors a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.options .colors a.blue {
+  background: #369eef;
+}
+.options .colors a.red {
+  background: #f03f51;
+}
+.options .colors a.green {
+  background: #8dcd47;
+}
+.options .colors a.violet {
+  background: #8e67f1;
+}
+.options .colors a.mint {
+  background: #38c5a2;
+}
+.options .colors a.pink {
+  background: #f156b2;
+}
+.options .colors a.orange {
+  background: #f59c32;
+}
+.options .colors a.yellow {
+  background: #f8de4f;
+}

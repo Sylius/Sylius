@@ -1,0 +1,181 @@
+body {
+	/*background:#EDEEF0;*/
+	background:#fff;
+}
+
+::selection {
+ color:#fff;
+ background:#F26663;
+}
+::-moz-selection {
+ color:#fff;
+ background:#F26663;
+}
+::-webkit-selection {
+ color:#fff;
+ background:#F26663;
+}
+a:hover, a:focus {
+	color:#F17370;
+}
+.search-full, .search-input {
+	background: #F26663;
+}
+.search-close {
+	color: #F26663;
+}
+.btn-primary, .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
+	background-color: #F17370;
+	color: #FFFFFF;
+}
+.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+	background:  #F26663;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #f78684;
+	border-color: #f78684;
+	color: #FFFFFF;
+}
+.navbar-top {
+	background:#eb6663;
+}
+.navbar-tshop {
+	background:#F17370;
+}
+.site-color {
+	color:#F17370 !important;
+}
+.navbar-nav > li > a {
+	color:#fff;
+}
+.nav > li.active, .nav > li > a:hover, .nav > li > a:focus, .nav > li:hover > a {
+	background:#F26663;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
+	background:#F26663;
+}
+.dropdown-menu {
+	border-top: solid #F26663;
+}
+.search-box:hover .form-control {
+	background:#F17370;
+}
+.search-box:hover .btn-nobg {
+	color:#F17370;
+}
+.searchInputBox .search-btn {
+	color:#fff;
+}
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background:rgba(149, 165, 166, 0.7) !important;
+}
+.action-control a:hover, .action-control a.active {
+	color:#fff;
+	background:#F26663;
+}
+.product:hover, .featuredImgLook2 .inner:hover {
+	border: 1px solid #F17370;
+}
+.subCategoryList .thumbnail:hover {
+	border: 1px solid #F17370;
+}
+.pager2 a {
+	border: 1px solid #F17370;
+}
+.pager2 a.selected {
+	background:#F17370;
+}
+.btn-site, .newsLatterBox .btn {
+	background: #F17370;
+}
+.btn-discover:hover, .btn-site:hover, .newsLatterBox .btn:hover {
+	background: #F26663;
+}
+.full {
+	width:100%;
+}
+.footer a:hover {
+	color:#F17370;
+}
+.footer {
+/*border-top: solid 3px #F17370;*/
+}
+.modal-header {
+	background: #F17370;
+}
+.form-control:focus {
+	border-color: #F17370;
+}
+.new-product {
+	background:rgba(149, 165, 166, 0.95) !important;
+}
+#pager a.cycle-pager-active {
+	background:rgba(149, 165, 166, 0.5);
+}
+/* tree menu */
+
+
+.nav.tree > li.active, .nav.tree > li > a:hover, .nav.tree > li > a:focus, .nav.tree > li:hover > a {
+	background:none;
+	color:#F26663;
+}
+.nav.tree .open-tree > a, .nav.tree .open-tree > a:hover, .nav.tree .open-tree > a:focus {
+	background:none;
+	font-weight:bold;
+	color:#F26663;
+}
+.panel-default > .panel-heading {
+	border-top: 4px solid #F17370;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+	background:#BFC9CA;
+}
+.nav-tabs {
+	border-bottom: 3px solid #BFC9CA;
+}
+.socialIcon a:hover {
+	background:#F17370;
+}
+.cart-actions button, .cart-actions .wishlist {
+	background: none repeat scroll 0 0 #F17370;
+	border: 2px solid #F26663;
+}
+.cart-actions button:hover {
+	background:#fff;
+	color:#F26663;
+	border:solid 2px #F17370;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, sp-current:visited {
+	border: 2px solid #F17370 !important;
+}
+.promo-1 {
+	background: none repeat scroll 0 0 #F26663;
+}
+ @media (max-width: 767px) {
+ .miniCartFooter {
+ background:#F26663 !important;
+}
+}
+#pager2 span.cycle-pager-active {
+}
+#pager2 span.cycle-pager-active {
+	background: #F26663 !important;
+}
+#pager2 span {
+	border: 2px solid #F26663
+}
+.orderStep li.active a {
+	background: #F17370;
+}
+.orderStep li.active a:after {
+	border-top-color: #F17370 !important;
+}
+.orderStep li a {
+	background:  #F26663;
+}
+darkcoilor {
+	background:#F26663;
+}
+citecolor {
+	color:#F17370 !important;
+}
