@@ -398,6 +398,9 @@ default:
                 tags: "@security"
 
     extensions:
+        Lakion\Behat\MinkDebugExtension:
+            directory: travis/build-output
+            clean_start: false
         Behat\MinkExtension:
             sessions:
                 default:
@@ -410,13 +413,21 @@ default:
 
 javascript:
     extensions:
+        Lakion\Behat\MinkDebugExtension:
+            screenshot: true
         Behat\MinkExtension:
-            base_url: # enter your base url here
-            sessions:
-                javascript:
-                    selenium2: ~
-            browser_name: firefox
-            show_auto:    false
+            base_url: http://localhost:8080/
+            selenium2:
+                capabilities:
+                    browserName: chrome
+                    browser: chrome
+                    version: ""
+                    chrome:
+                        switches:
+                            - "start-fullscreen"
+                            - "no-sandbox"
+            browser_name: chrome
+            show_auto: false
 
     gherkin:
         filters:

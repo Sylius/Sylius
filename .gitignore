@@ -22,3 +22,6 @@ vendor
 
 deploy/deploy.rb
 deploy/stages/*.rb
+
+travis/build-output/*
+!travis/build-output/.gitkeep

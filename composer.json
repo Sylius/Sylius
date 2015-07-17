@@ -84,7 +84,8 @@
         "behat/mink":                           "~1.6",
         "coduo/php-matcher":                    "~1.0",
         "phpspec/phpspec":                      "~2.1",
-        "phpunit/phpunit":                      "~4.1"
+        "phpunit/phpunit":                      "~4.1",
+        "lakion/mink-debug-extension":          "^1.0.1"
     },
     "replace": {
         "sylius/addressing":         "self.version",

@@ -1,0 +1,12 @@
+#!/bin/bash
+bin/behat --strict -f progress -p javascript -s channels
+bin/behat --strict -f progress -p javascript -s users
+bin/behat --strict -f progress -p javascript -s taxonomies
+bin/behat --strict -f progress -p javascript -s taxation
+bin/behat --strict -f progress -p javascript -s shipping
+bin/behat --strict -f progress -p javascript -s promotions
+bin/behat --strict -f progress -p javascript -s products
+bin/behat --strict -f progress -p javascript -s payments
+bin/behat --strict -f progress -p javascript -s orders
+bin/behat --strict -f progress -p javascript -s addressing
+bin/behat --strict -f progress -p javascript -s account

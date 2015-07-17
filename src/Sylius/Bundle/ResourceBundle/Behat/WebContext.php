@@ -518,4 +518,22 @@ class WebContext extends DefaultContext
 
         $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
     }
+
+    /**
+     * @param NodeElement $modalContainer
+     *
+     * @throws \Exception
+     */
+    protected function waitForModalToAppear($modalContainer)
+    {
+        $i = 0;
+        while (false === strpos($modalContainer->getAttribute('class'), 'in')) {
+            if (10 === $i) {
+                throw new \Exception('The confirmation modal was not opened...');
+            }
+
+            $this->getSession()->wait(100);
+            ++$i;
+        }
+    }
 }
