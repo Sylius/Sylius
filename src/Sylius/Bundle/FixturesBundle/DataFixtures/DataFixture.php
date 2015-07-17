@@ -11,15 +11,19 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Base data fixture.
@@ -144,11 +148,11 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $address->setStreet($this->faker->streetAddress);
         $address->setPostcode($this->faker->postcode);
 
-        do {
-            $isoName = $this->faker->countryCode;
-        } while ('UK' === $isoName);
+        /** @var CountryInterface $country */
+        $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
+        $isoName = array_rand($countries);
+        $country = $this->getReference("Sylius.Country." . $isoName);
 
-        $country  = $this->getReference('Sylius.Country.'.$isoName);
         $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
 
         $address->setCountry($country);
