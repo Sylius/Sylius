@@ -27,7 +27,7 @@ class AddressingContext extends DefaultContext
     {
         foreach ($table->getHash() as $data) {
             $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
-            $this->thereisCountry($data['name'], $provinces, false);
+            $this->thereisCountry($data['isoName'], $provinces, false);
         }
 
         $this->getEntityManager()->flush();
@@ -37,13 +37,12 @@ class AddressingContext extends DefaultContext
      * @Given /^I created country "([^""]*)"$/
      * @Given /^there is country "([^""]*)"$/
      */
-    public function thereIsCountry($name, $provinces = null, $flush = true)
+    public function thereIsCountry($isoName, $provinces = null, $flush = true)
     {
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
             $country = $this->getRepository('country')->createNew();
-            $country->setName(trim($name));
-            $country->setIsoName(substr($name, 0, 3));
+            $country->setIsoName(trim($isoName));
 
             if (null !== $provinces) {
                 $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
@@ -134,23 +133,5 @@ class AddressingContext extends DefaultContext
         $this->getEntityManager()->persist($province);
 
         return $province;
-    }
-
-    /**
-     * @Given the following country translations exist
-     */
-    public function theFollowingCountryTranslationsExist(TableNode $table)
-    {
-        $manager = $this->getEntityManager();
-
-        foreach ($table->getHash() as $data) {
-            $countryTranslation = $this->findOneByName('country_translation', $data['country']);
-            $country = $countryTranslation->getTranslatable();
-            $country
-                ->setCurrentLocale($data['locale'])
-                ->setName($data['name']);
-        }
-
-        $manager->flush();
     }
 }

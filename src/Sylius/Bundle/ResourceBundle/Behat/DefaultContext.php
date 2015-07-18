@@ -174,7 +174,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
             switch ($key) {
                 case 'country':
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('name' => trim($value)))->getId();
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => trim($value)))->getId();
                     break;
 
                 case 'taxons':
