@@ -4,7 +4,7 @@
     {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.translations, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.type, {'attr': {'class': 'input-lg'}}) }}
-    <div id="sylius_form_choice_container" class="hide">
+    <div id="sylius_form_choice_container">
         {% if form.choices is defined %}
             {{ form_row(form.choices) }}
         {% endif %}
