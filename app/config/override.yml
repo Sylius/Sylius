@@ -11,3 +11,10 @@ sylius_web:
 parameters:
     sylius.controller.backend.dashboard.class: Sylius\BackendBundle\Controller\MainController
 
+
+sylius_product:
+    classes:
+        product:
+            repository: Sylius\BackendBundle\Repository\ProductRepository
+
+

@@ -92,7 +92,6 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.backend.menu.main.dashboard'));
 
         if ($this->authorizationChecker->isGranted('sylius.taxonomy.index')) {
-
             $menu->addChild('taxonomies', array(
                 'route' => 'sylius_backend_taxonomy_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-folder-close'),
@@ -126,8 +125,6 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-bullhorn'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.promotions', 'sidebar')));
         }
-
-
 
         $this->addMoreMenu($menu, $childOptions, 'main');
 
@@ -212,8 +209,6 @@ class BackendMenuBuilder extends MenuBuilder
             $menu->removeChild('more');
         }
     }
-
-
 
     /**
      * Add assortment menu.

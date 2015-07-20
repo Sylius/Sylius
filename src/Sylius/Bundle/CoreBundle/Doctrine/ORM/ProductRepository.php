@@ -23,43 +23,9 @@ use Sylius\Component\Core\Model\TaxonInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Julien Boyer <julien@meetserious.com>
  */
 class ProductRepository extends BaseProductRepository
 {
-
-    /**
-     * Get count product available
-     * @param bool|false $excluded
-     * @return int $exluded: SofDeleteable enabled|disabled
-     *
-     */
-    public function countProducts($excluded = false, $availableOn = null)
-    {
-        if(!$availableOn){
-            $availableOn =  new \DateTime('midnight');
-        }
-
-        if($excluded === true){
-            $this->_em->getFilters()->enable('softdeleteable');
-        }else{
-            $this->_em->getFilters()->disable('softdeleteable');
-        }
-
-        $queryBuilder = $this->createQueryBuilder('p');
-
-        $queryBuilder
-            ->select('count(p.id)')
-            ->where('p.availableOn <= :available')
-            ->setParameter('available', $availableOn);
-
-        return (int) $queryBuilder
-            ->getQuery()
-            ->getSingleScalarResult()
-            ;
-    }
-
-
     /**
      * Create paginator for products categorized under given taxon.
      *

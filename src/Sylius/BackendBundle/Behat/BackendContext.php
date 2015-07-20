@@ -20,7 +20,6 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
  */
 class BackendContext extends DefaultContext
 {
-
     /**
      * @Given /^I am on the dashboard$/
      */
@@ -34,7 +33,5 @@ class BackendContext extends DefaultContext
 
         dump($page);
 //        exit();
-
     }
-
 }

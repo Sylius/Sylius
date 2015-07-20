@@ -5972,12 +5972,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "23a19588e770d1e86f3bbae3f34f93463ef1e927"
+                "reference": "b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/23a19588e770d1e86f3bbae3f34f93463ef1e927",
-                "reference": "23a19588e770d1e86f3bbae3f34f93463ef1e927",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7",
+                "reference": "b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7",
                 "shasum": ""
             },
             "require": {
@@ -6011,7 +6011,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2015-07-16 13:50:47"
+            "time": "2015-07-17 18:09:01"
         },
         {
             "name": "sonata-project/block-bundle",

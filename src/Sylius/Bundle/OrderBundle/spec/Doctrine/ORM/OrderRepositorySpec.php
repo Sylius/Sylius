@@ -36,6 +36,7 @@ class OrderRepositorySpec extends ObjectBehavior
         FilterCollection $filterCollection,
         Expr $expr
     ) {
+
         $em->getFilters()->willReturn($filterCollection);
         $filterCollection->disable('softdeleteable')->shouldBeCalled();
 

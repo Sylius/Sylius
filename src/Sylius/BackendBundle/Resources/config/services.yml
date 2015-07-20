@@ -1,4 +1,4 @@
 services:
-#    sylius.repository.statistic:
-#        class: Sylius\BackendBundle\Repository\StatisticRepository
+#    sylius.repository.product:
+#        class: Sylius\BackendBundle\Repository\ProductRepository
 #        arguments: [ "@doctrine.orm.entity_manager" ]

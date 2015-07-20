@@ -8,26 +8,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class MainController
- * Main actions
- * @package Sylius\BackendBundle\Controller
+ * Main actions.
  */
 class MainController extends Controller
 {
-
+    
     /**
-     * Dashboard page
+     * Dashboard page.
+     *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function mainAction(Request $request)
     {
-
         $orderRepository = $this->get('sylius.repository.order');
         $customerRepository = $this->get('sylius.repository.customer');
         $productRepository = $this->get('sylius.repository.product');
         $userRepository = $this->get('sylius.repository.user');
-
-//        exit(dump($productRepository->countProducts()));
 
         return $this->render('SyliusBackendBundle:Main:index.html.twig', array(
             'orders_count' => $orderRepository->countBetweenDates(new \DateTime('100 year ago'), new \DateTime()),
@@ -44,4 +42,6 @@ class MainController extends Controller
                 new \DateTime(), OrderInterface::STATE_PENDING),
         ));
     }
+
+
 }
