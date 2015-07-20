@@ -22,6 +22,7 @@ use Faker\Generator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,6 +59,8 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     public function __construct($applicationName = null)
     {
+        \Locale::setDefault('en');
+
         $this->faker = FakerFactory::create();
 
         if (null !== $applicationName) {
@@ -174,7 +177,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
             switch ($key) {
                 case 'country':
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => trim($value)))->getId();
+                    $isoName = $this->getCountryCodeByEnglishCountryName(trim($value));
+
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))->getId();
                     break;
 
                 case 'taxons':
@@ -339,5 +344,26 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function fixStepArgument($argument)
     {
         return str_replace('\\"', '"', $argument);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException If name is not found in country code registry.
+     */
+    protected function getCountryCodeByEnglishCountryName($name)
+    {
+        $names = Intl::getRegionBundle()->getCountryNames('en');
+        $isoName = array_search(trim($name), $names);
+
+        if (null === $isoName) {
+            throw new \InvalidArgumentException(sprintf(
+                'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
+            ));
+        }
+
+        return $isoName;
     }
 }

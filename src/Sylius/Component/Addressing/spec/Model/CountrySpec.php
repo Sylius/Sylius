@@ -67,7 +67,6 @@ class CountrySpec extends ObjectBehavior
         $this->getIsoName()->shouldReturn(null);
     }
 
-
     function its_iso_name_is_mutable()
     {
         $this->setIsoName('MX');
@@ -100,6 +99,7 @@ class CountrySpec extends ObjectBehavior
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
+
         $this->removeProvince($province);
         $this->hasProvince($province)->shouldReturn(false);
     }

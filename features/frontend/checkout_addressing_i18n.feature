@@ -16,7 +16,7 @@ Feature: Checkout addressing in preferred language
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | USA                     |
+            | USA          | country | United States           |
           And there are following countries:
             | name           |
             | USA            |
@@ -34,9 +34,6 @@ Feature: Checkout addressing in preferred language
             | code  | enabled |
             | en_US | yes     |
             | de_DE | yes     |
-        And the following country translations exist
-            | country | name | locale |
-            | Germany    | Deutschland     | de   |
 
     Scenario: Seeing country in preferred language
         Given I am not logged in

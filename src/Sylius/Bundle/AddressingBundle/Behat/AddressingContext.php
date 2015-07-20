@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Intl\Intl;
 
 class AddressingContext extends DefaultContext
 {
@@ -27,7 +28,7 @@ class AddressingContext extends DefaultContext
     {
         foreach ($table->getHash() as $data) {
             $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
-            $this->thereisCountry($data['isoName'], $provinces, false);
+            $this->thereisCountry($data['name'], $provinces, false);
         }
 
         $this->getEntityManager()->flush();
@@ -37,8 +38,10 @@ class AddressingContext extends DefaultContext
      * @Given /^I created country "([^""]*)"$/
      * @Given /^there is country "([^""]*)"$/
      */
-    public function thereIsCountry($isoName, $provinces = null, $flush = true)
+    public function thereIsCountry($name, $provinces = null, $flush = true)
     {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
         /* @var $country CountryInterface */
         if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
             $country = $this->getRepository('country')->createNew();

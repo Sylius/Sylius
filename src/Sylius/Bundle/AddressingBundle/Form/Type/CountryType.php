@@ -30,7 +30,7 @@ class CountryType extends AbstractResourceType
     {
         $builder
             ->add('isoName', 'country', array(
-                'label' => 'sylius.form.country.iso_name',
+                'label' => 'sylius.form.country.name',
             ))
             ->add('provinces', 'collection', array(
                 'type' => 'sylius_province',

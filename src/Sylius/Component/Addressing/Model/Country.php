@@ -25,17 +25,17 @@ use Symfony\Component\Intl\Intl;
 class Country implements CountryInterface
 {
     /**
-     * Country id.
-     *
      * @var mixed
      */
     protected $id;
+
     /**
      * Country name in ISO format.
      *
      * @var string
      */
     protected $isoName;
+
     /**
      * @var Collection|ProvinceInterface[]
      */
