@@ -18,7 +18,7 @@ use Sylius\Component\Storage\StorageInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleContext implements LocaleContextInterface
+class LocaleContext
 {
     const STORAGE_KEY = '_sylius_locale_%s';
 
