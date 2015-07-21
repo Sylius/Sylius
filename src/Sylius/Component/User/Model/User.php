@@ -672,6 +672,6 @@ class User implements UserInterface
      */
     protected function hasExpired($date)
     {
-        return (null !== $date) && ((new \DateTime()) >= $date);
+        return (null !== $date) && (new \DateTime() >= $date);
     }
 }
