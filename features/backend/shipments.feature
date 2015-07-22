@@ -12,7 +12,7 @@ Feature: Shipments
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
             | UK + Poland  | country | United Kingdom, Poland        |
-            | USA          | country | USA                           |
+            | USA          | country | United States                 |
           And there are following tax categories:
             | name    |
             | General |

@@ -18,8 +18,9 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface CountryInterface extends CountryTranslationInterface
+interface CountryInterface
 {
     public function getId();
 
@@ -36,6 +37,15 @@ interface CountryInterface extends CountryTranslationInterface
      * @param string $isoName
      */
     public function setIsoName($isoName);
+
+    /**
+     * Get country name.
+     *
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getName($locale = null);
 
     /**
      * @return Collection|ProvinceInterface[]

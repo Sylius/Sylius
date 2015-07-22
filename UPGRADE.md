@@ -28,7 +28,6 @@ https://github.com/Sylius/Sylius/pull/2717
  * In the checkout we depend on Customer not User
  * In templates in many places we use Customer instead of User entity now
 
-
 ## API client
 
 https://github.com/Sylius/Sylius/pull/2887
@@ -47,6 +46,13 @@ client_id: mpO5ZJ35hx
 **Remember to update your API clients using Sylius!**
 
 Related discussion https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/328.
+
+## Translating country names using Symfony's Intl component
+
+[Removed `CountryTranslation`, using `Intl` Symfony component instead to provide translated country names based on ISO country code.](https://github.com/Sylius/Sylius/pull/3035)
+
+#### Database upgrade
+ * Execute migration script to migrate your data into the new model schema
 
 # From 0.9.0 to 0.10.x
 
