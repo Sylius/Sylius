@@ -103,7 +103,7 @@ or use directly a class.
             _controller: app.controller.user:createAction
             _sylius:
                 template: App:Backend/User:create.html.twig
-                form: App\Byndle\Form\UserType
+                form: App\Bundle\Form\UserType
 
 Using custom factory method
 ---------------------------
