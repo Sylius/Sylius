@@ -38,7 +38,7 @@ class CartRepositorySpec extends ObjectBehavior
         $expr->eq('o.state', ':state')->shouldBeCalled()->willReturn($expr);
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(null, 'o', null)->shouldBeCalled()->willReturn($builder);
         $builder->leftJoin('o.items', 'item')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
@@ -49,6 +49,8 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getResult()->shouldBeCalled()->willReturn(array($cart));
 
+
         $this->findExpiredCarts()->shouldReturn(array($cart));
+
     }
 }

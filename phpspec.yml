@@ -36,7 +36,7 @@ suites:
 #    ApiBundle         : { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }
 #    AttributeBundle   : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
 #    ArchetypeBundle   : { namespace: Sylius\Bundle\ArchetypeBundle, psr4_prefix: Sylius\Bundle\ArchetypeBundle, spec_path: src/Sylius/Bundle/ArchetypeBundle, src_path: src/Sylius/Bundle/ArchetypeBundle }
-#    CartBundle        : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle, src_path: src/Sylius/Bundle/CartBundle }
+    CartBundle        : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle, src_path: src/Sylius/Bundle/CartBundle }
 #    ContentBundle     : { namespace: Sylius\Bundle\ContentBundle, psr4_prefix: Sylius\Bundle\ContentBundle, spec_path: src/Sylius/Bundle/ContentBundle, src_path: src/Sylius/Bundle/ContentBundle }
 #    ChannelBundle     : { namespace: Sylius\Bundle\ChannelBundle, psr4_prefix: Sylius\Bundle\ChannelBundle, spec_path: src/Sylius/Bundle/ChannelBundle, src_path: src/Sylius/Bundle/ChannelBundle }
 #    CoreBundle        : { namespace: Sylius\Bundle\CoreBundle, psr4_prefix: Sylius\Bundle\CoreBundle, spec_path: src/Sylius/Bundle/CoreBundle, src_path: src/Sylius/Bundle/CoreBundle }
@@ -66,4 +66,4 @@ suites:
 #    MailerBundle      : { namespace: Sylius\Bundle\MailerBundle, psr4_prefix: Sylius\Bundle\MailerBundle, spec_path: src/Sylius/Bundle/MailerBundle, src_path: src/Sylius/Bundle/MailerBundle }
 #    RbacBundle        : { namespace: Sylius\Bundle\RbacBundle, psr4_prefix: Sylius\Bundle\RbacBundle, spec_path: src/Sylius/Bundle/RbacBundle, src_path: src/Sylius/Bundle/RbacBundle }
 #    UserBundle        : { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
-    BackendBundle     : { namespace: Sylius\BackendBundle, psr4_prefix: Sylius\BackendBundle, spec_path: src/Sylius/BackendBundle, src_path: src/Sylius/BackendBundle }
+#    BackendBundle     : { namespace: Sylius\BackendBundle, psr4_prefix: Sylius\BackendBundle, spec_path: src/Sylius/BackendBundle, src_path: src/Sylius/BackendBundle }

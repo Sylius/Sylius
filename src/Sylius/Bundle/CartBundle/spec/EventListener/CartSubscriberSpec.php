@@ -39,8 +39,8 @@ class CartSubscriberSpec extends ObjectBehavior
 
     public function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
     {
-        $event->getCart()->willReturn($cart);
-        $event->getItem()->willReturn($cartItem);
+        $event->getCart()->willReturn($cart)->shouldBeCalled();
+        $event->getItem()->willReturn($cartItem)->shouldBeCalled();
         $cart->addItem($cartItem)->shouldBeCalled();
 
         $this->addItem($event);

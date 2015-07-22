@@ -12,8 +12,6 @@ use \Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepos
 class ProductRepository extends BaseProductRepository
 {
 
-
-
     public function countProducts($excluded = false, $availableOn = null)
     {
 
