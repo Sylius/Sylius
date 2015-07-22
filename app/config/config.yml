@@ -80,14 +80,14 @@ doctrine_phpcr:
         auto_generate_proxy_classes: %kernel.debug%
 
 swiftmailer:
-    transport: %sylius.mailer.transport%
+#    transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
     port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
-    encryption: %sylius.mailer.protocol%
-    auth_mode: %sylius.mailer.auth%
-    port: %sylius.mailer.port%
+#    encryption: %sylius.mailer.protocol%
+#    auth_mode: %sylius.mailer.auth%
+#    port: %sylius.mailer.port%
 
 
 #FOS Configuration

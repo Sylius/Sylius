@@ -2,7 +2,6 @@
 
 namespace Sylius\BackendBundle\Controller;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
