@@ -11,17 +11,16 @@ class ProductRepository extends BaseProductRepository
 {
     public function countProducts($excluded = false, $availableOn = null)
     {
-        $this->_em->getFilters()->enable('softdeleteable');
 
         if (!$availableOn) {
             $availableOn = new \DateTime('midnight');
         }
 
-//        if ($excluded === true) {
-//            $this->_em->getFilters()->enable('softdeleteable');
-//        } else {
-//            $this->_em->getFilters()->disable('softdeleteable');
-//        }
+        if ($excluded === true) {
+            $this->_em->getFilters()->enable('softdeleteable');
+        } else {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         $queryBuilder = $this->getQueryBuilder();
 

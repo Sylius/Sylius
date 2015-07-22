@@ -52,8 +52,6 @@ google_login:
     path: /login/check-google
 
 
-
-
 # App
 # (c) JUlien Boyer
 
