@@ -26,7 +26,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 class ElasticsearchFinder extends AbstractFinder
 {
     /**
-     * TODO: maybe this should go to configuration, you can use setResultSetSize on the finder object for now.
      *
      * @var int
      */
@@ -62,7 +61,6 @@ class ElasticsearchFinder extends AbstractFinder
     /**
      * {@inheritdoc}
      *
-     * TODO: a simple if does the job for now, in future this should move to a
      * chain of responsibility pattern or something similar.
      */
     public function find(Query $queryObject)

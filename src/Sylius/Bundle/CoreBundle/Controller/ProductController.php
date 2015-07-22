@@ -209,7 +209,6 @@ class ProductController extends BaseProductController
         ));
     }
 
-    // @todo refactor this when PRs about API & search get merged
     public function searchAction(Request $request)
     {
         if (!$request->query->has('criteria')) {

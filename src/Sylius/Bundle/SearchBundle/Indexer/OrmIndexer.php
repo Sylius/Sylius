@@ -238,7 +238,6 @@ class OrmIndexer implements IndexerInterface
      */
     public function compileSearchableContent(array $fields, $element)
     {
-        // TODO maybe I can use the property accessor here
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
             $func = 'get'.ucfirst($field);

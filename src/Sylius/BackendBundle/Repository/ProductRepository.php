@@ -2,19 +2,15 @@
 
 namespace Sylius\BackendBundle\Repository;
 
-use \Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
-
-
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
 /**
  * Class ProductRepository.
  */
 class ProductRepository extends BaseProductRepository
 {
-
     public function countProducts($excluded = false, $availableOn = null)
     {
-
         $this->_em->getFilters()->enable('softdeleteable');
 
         if (!$availableOn) {
@@ -39,8 +35,6 @@ class ProductRepository extends BaseProductRepository
             ->getSingleScalarResult()
             ;
     }
-
-
 
     /**
      * {@inheritdoc}

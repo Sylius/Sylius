@@ -14,11 +14,11 @@
         </testsuite>
     </testsuites>
 
-    <!--
+
     <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
+        <server name="KERNEL_DIR" value="/usr/share/nginx/Sylius/app/" />
     </php>
-    -->
+
 
     <filter>
         <whitelist>

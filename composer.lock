@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "998b39a0ce516b061dc3c854ccdb01a4",
+    "hash": "f5a2f7df7e2a5c99541a3c47bd0052ef",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -5972,12 +5972,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7"
+                "reference": "b8760cafb87fe964b10c7bfb334db31291c3288f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7",
-                "reference": "b9dffa0be47a3b2b2d7dbb99650eb62adcf78cd7",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/b8760cafb87fe964b10c7bfb334db31291c3288f",
+                "reference": "b8760cafb87fe964b10c7bfb334db31291c3288f",
                 "shasum": ""
             },
             "require": {
@@ -6011,7 +6011,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2015-07-17 18:09:01"
+            "time": "2015-07-22 07:51:54"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -7167,65 +7167,6 @@
                 "framework"
             ],
             "time": "2015-07-13 19:27:49"
-        },
-        {
-            "name": "symfony/var-dumper",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "5e92464760ae3330c424ea69672f40ce0eed4298"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/5e92464760ae3330c424ea69672f40ce0eed4298",
-                "reference": "5e92464760ae3330c424ea69672f40ce0eed4298",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.8|~3.0"
-            },
-            "suggest": {
-                "ext-symfony_debug": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "Resources/functions/dump.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Component\\VarDumper\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony mechanism for exploring and dumping PHP variables",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "debug",
-                "dump"
-            ],
-            "time": "2015-07-02 15:20:21"
         },
         {
             "name": "true/punycode",
@@ -9352,7 +9293,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "doctrine/migrations": 20,
-        "symfony/var-dumper": 20,
         "sensio/generator-bundle": 20
     },
     "prefer-stable": true,

@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MainController extends Controller
 {
-    
     /**
      * Dashboard page.
      *
@@ -42,6 +41,4 @@ class MainController extends Controller
                 new \DateTime(), OrderInterface::STATE_PENDING),
         ));
     }
-
-
 }
