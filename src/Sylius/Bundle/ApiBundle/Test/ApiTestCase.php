@@ -99,7 +99,18 @@ abstract class ApiTestCase extends BaseWebTestCase
 
     protected static function getKernelClass()
     {
-        $dir = static::getPhpUnitXmlDir();
+        if (isset($_SERVER['KERNEL_DIR'])) {
+            $dir = $_SERVER['KERNEL_DIR'];
+
+            if (!is_dir($dir)) {
+                $phpUnitDir = static::getPhpUnitXmlDir();
+                if (is_dir("$phpUnitDir/$dir")) {
+                    $dir = "$phpUnitDir/$dir";
+                }
+            }
+        } else {
+            $dir = static::getPhpUnitXmlDir();
+        }
 
         $finder = new Finder();
         $finder->name('CliKernel.php')->depth(0)->in($dir);

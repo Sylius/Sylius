@@ -23,7 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class SyliusArchetypeExtension extends AbstractResourceExtension
 {
-
     /**
      * {@inheritdoc}
      */

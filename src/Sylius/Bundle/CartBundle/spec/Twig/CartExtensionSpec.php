@@ -51,8 +51,8 @@ class CartExtensionSpec extends ObjectBehavior
         $helper->getItemFormView([])->shouldBeCalled();
 
 
-        $result  = $this->getItemFormView([]);
-        $result->shouldReturnAnInstanceOf('Symfony\Component\Form\FormView');
+        $this->getItemFormView([
+        ])->shouldReturnAnInstanceOf('Symfony\Component\Form\FormView');
     }
 
     public function it_get_name(

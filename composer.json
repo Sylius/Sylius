@@ -75,7 +75,6 @@
         "white-october/pagerfanta-bundle":      "~1.0",
         "willdurand/hateoas-bundle":            "~0.4",
         "winzou/state-machine-bundle":          "~0.2",
-        "symfony/var-dumper": "^3.0@dev",
         "sensio/generator-bundle": "^3.0@dev"
     },
     "require-dev": {
@@ -183,7 +182,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "~0.16"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

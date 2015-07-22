@@ -41,6 +41,7 @@ class OrmFinder extends AbstractFinder
     /**
      * {@inheritdoc}
      *
+     * TODO: a simple if does the job for now, in future this should move to a
      * chain of responsibility pattern or something similar.
      */
     public function find(Query $queryObject)
@@ -95,6 +96,7 @@ class OrmFinder extends AbstractFinder
             ->setParameter('ids', $ids);
         $indexedItems = $queryBuilder->getQuery()->getResult();
 
+        // TODO: Need to configure / refactor this default!
         $entityName = 'Product';
 
         $facetsArray = array();
@@ -142,6 +144,7 @@ class OrmFinder extends AbstractFinder
             }
 
             //filter the ids if searchParam is not all
+            // TODO: Will refactor pre-search filtering into a service based on the finder configuration
             if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
                 $preFilteredModelIds = $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam());
                 if (isset($preFilteredModelIds[$modelClass])) {

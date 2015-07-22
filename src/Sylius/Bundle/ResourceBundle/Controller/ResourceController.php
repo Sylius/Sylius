@@ -65,17 +65,17 @@ class ResourceController extends FOSRestController
      */
     protected $stateMachineGraph;
 
-    protected function __construct(Configuration $config)
+    public function __construct(Configuration $config)
     {
         $this->config = $config;
     }
 
-    protected function getConfiguration()
+    public function getConfiguration()
     {
         return $this->config;
     }
 
-    protected function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null)
     {
         parent::setContainer($container);
 
@@ -389,7 +389,7 @@ class ResourceController extends FOSRestController
      *             Ask Symfony to inject the Request object into your controller
      *             method instead by type hinting it in the method's signature.
      */
-    protected function getRequest()
+    public function getRequest()
     {
         return $this->container->get('request_stack')->getCurrentRequest();
     }
@@ -400,7 +400,7 @@ class ResourceController extends FOSRestController
      *
      * @return FormInterface
      */
-    protected function getForm($resource = null, array $options = array())
+    public function getForm($resource = null, array $options = array())
     {
         $type = $this->config->getFormType();
 
@@ -428,7 +428,7 @@ class ResourceController extends FOSRestController
      *
      * @throws NotFoundHttpException
      */
-    protected function findOr404(Request $request, array $criteria = array())
+    public function findOr404(Request $request, array $criteria = array())
     {
         if ($request->get('slug')) {
             $default = array('slug' => $request->get('slug'));
@@ -460,7 +460,7 @@ class ResourceController extends FOSRestController
     /**
      * @return RepositoryInterface
      */
-    protected function getRepository()
+    public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
     }

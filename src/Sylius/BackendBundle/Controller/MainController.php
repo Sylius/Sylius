@@ -29,6 +29,9 @@ class MainController extends Controller
             'products_count' => $productRepository->countProducts(),
             'orders' => $orderRepository->findBy(array(), array('updatedAt' => 'desc'), 5),
             'customers' => $customerRepository->findBy(array(), array('id' => 'desc'), 5),
+            'sales' => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
         ));
     }
+
+
 }
