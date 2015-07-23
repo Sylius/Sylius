@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "998b39a0ce516b061dc3c854ccdb01a4",
+    "hash": "ae3ba9d4292cc246cdf98436f4ab8b91",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -7169,65 +7169,6 @@
             "time": "2015-07-13 19:27:49"
         },
         {
-            "name": "symfony/var-dumper",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "5e92464760ae3330c424ea69672f40ce0eed4298"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/5e92464760ae3330c424ea69672f40ce0eed4298",
-                "reference": "5e92464760ae3330c424ea69672f40ce0eed4298",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.8|~3.0"
-            },
-            "suggest": {
-                "ext-symfony_debug": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "Resources/functions/dump.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Component\\VarDumper\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony mechanism for exploring and dumping PHP variables",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "debug",
-                "dump"
-            ],
-            "time": "2015-07-02 15:20:21"
-        },
-        {
             "name": "true/punycode",
             "version": "2.0.0",
             "source": {
@@ -9352,7 +9293,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "doctrine/migrations": 20,
-        "symfony/var-dumper": 20,
         "sensio/generator-bundle": 20
     },
     "prefer-stable": true,

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MainController extends Controller
 {
+
     /**
      * Dashboard page.
      *
