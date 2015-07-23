@@ -73,7 +73,6 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
         if (!$resource instanceof TranslatableInterface) {
             throw new \InvalidArgumentException('Resource must implement TranslatableInterface.');
         }
-
         $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
         $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
 

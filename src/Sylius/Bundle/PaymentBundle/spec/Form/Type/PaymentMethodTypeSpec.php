@@ -46,16 +46,9 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($formFactory)->shouldBeCalled();
 
         $builder
-            ->add('name', 'text', Argument::type('array'))
-            ->willReturn($builder)
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->shouldBeCalled()
-        ;
-
-        $builder
-            ->add('description', 'textarea', Argument::type('array'))
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
+            ->willReturn($builder);
 
         $builder
             ->add('enabled', 'checkbox', Argument::type('array'))
