@@ -18,6 +18,8 @@ sylius:
             csv:
                 delimiter: Delimiter
                 enclosure: Enclosure
+            user_orm:
+                date_format: Date format
         reader:
             name: Reader
             batch_size: Rows number

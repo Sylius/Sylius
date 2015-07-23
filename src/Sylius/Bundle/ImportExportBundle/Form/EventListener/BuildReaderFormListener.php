@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
 use Sylius\Component\ImportExport\Model\ExportProfileInterface;
+use Sylius\Component\ImportExport\Model\ProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,6 +26,7 @@ use Symfony\Component\Form\FormInterface;
  * if selected profile requires one.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class BuildReaderFormListener implements EventSubscriberInterface
 {
@@ -65,17 +67,17 @@ class BuildReaderFormListener implements EventSubscriberInterface
      */
     public function preSetData(FormEvent $event)
     {
-        $exportProfiler = $event->getData();
+        $profiler = $event->getData();
 
-        if (null === $exportProfiler) {
+        if (null === $profiler) {
             return;
         }
 
-        if (!$exportProfiler instanceof ExportProfileInterface) {
-            throw new UnexpectedTypeException($exportProfiler, 'Sylius\Component\ImportExport\Model\ExportProfileInterface');
+        if (!$profiler instanceof ProfileInterface) {
+            throw new UnexpectedTypeException($profiler, 'Sylius\Component\ImportExport\Model\ProfileInterface');
         }
 
-        $this->addConfigurationFields($event->getForm(), $exportProfiler->getReader(), $exportProfiler->getReaderConfiguration());
+        $this->addConfigurationFields($event->getForm(), $profiler->getReader(), $profiler->getReaderConfiguration());
     }
 
     /**
@@ -94,13 +96,13 @@ class BuildReaderFormListener implements EventSubscriberInterface
 
     /**
      * @param FormInterface $form
-     * @param $exporterType
-     * @param array $configuration
+     * @param string        $type
+     * @param array         $configuration
      */
-    protected function addConfigurationFields(FormInterface $form, $exporterType, array $configuration = array())
+    protected function addConfigurationFields(FormInterface $form, $type, array $configuration = array())
     {
-        $exporter = $this->readerRegistry->get($exporterType);
-        $formType = sprintf('sylius_%s_reader', $exporter->getType());
+        $reader = $this->readerRegistry->get($type);
+        $formType = sprintf('sylius_%s_reader', $reader->getType());
         try {
             $configurationField = $this->factory->createNamed(
                 'readerConfiguration',

@@ -55,9 +55,9 @@ abstract class AbstractDoctrineWriter implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function write(array $items, array $configuration, Logger $logger)
+    public function write(array $rawUsers, array $configuration, Logger $logger)
     {
-        foreach ($items as $item) {
+        foreach ($rawUsers as $item) {
             try {
                 $item = $this->process($item);
             } catch (Exception $e) {

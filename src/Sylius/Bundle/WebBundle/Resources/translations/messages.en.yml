@@ -495,6 +495,7 @@ sylius:
             headline: Welcome to Sylius
             subheadline: Modern ecommerce for Symfony2
     import_job:
+        general_info: General info
         created_at: Created at
         end_time: End time
         header: Job
@@ -506,6 +507,7 @@ sylius:
         start_time: Start time
         status: status
         updated_at: Updated at
+        metadata: Job metadata
     import_profile:
         code: Code
         create: Create profile
@@ -525,6 +527,7 @@ sylius:
         updated_at: Last update
         writer: Writer
         writer_configuration: Writer configuration
+        show: Show import profile
     inventory_unit:
         created_at: Created
         inventory_state: Inventory state

@@ -11,17 +11,12 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessor;
 use Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessorInterface;
-use Sylius\Component\ImportExport\Converter\DateConverter;
 use Sylius\Component\ImportExport\Model\JobInterface;
 
 /**
@@ -31,10 +26,10 @@ class UserReaderSpec extends ObjectBehavior
 {
     function let(
         UserProcessorInterface $userProcessor,
-        ManagerRegistry $doctrineRegistry
+        EntityRepository $userRepository
     )
     {
-        $this->beConstructedWith($userProcessor, $doctrineRegistry);
+        $this->beConstructedWith($userProcessor, $userRepository);
     }
 
     function it_is_initializable()
@@ -58,13 +53,11 @@ class UserReaderSpec extends ObjectBehavior
     }
 
     function it_reads_data(
-        $doctrineRegistry,
+        $userRepository,
         $userProcessor,
         AbstractQuery $query,
         \DateTime $dateTime,
-        EntityRepository $repository,
         LoggerInterface $logger,
-        ObjectManager $manager,
         QueryBuilder $queryBuilder
     )
     {
@@ -81,12 +74,10 @@ class UserReaderSpec extends ObjectBehavior
                 'field' => 'value',
             ),
         );
+        $userRepository->createQueryBuilder('user')->willReturn($queryBuilder)->shouldBeCalled();
 
-        $doctrineRegistry->getManager()->willReturn($manager)->shouldBeCalled();
-        $manager->getRepository('Sylius/ExampleBundle/Model/Example')->willReturn($repository)->shouldBeCalled();
-
-        $repository->createQueryBuilder('o')->willReturn($queryBuilder)->shouldBeCalled();
-
+        $queryBuilder->addSelect('customer')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->leftJoin('user.customer', 'customer')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setFirstResult(0)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setMaxResults(2)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->getQuery()->shouldBeCalled()->willReturn($query);
@@ -103,7 +94,7 @@ class UserReaderSpec extends ObjectBehavior
 
         $configuration = array(
             'batch_size'  => '2',
-            'class'       => 'Sylius/ExampleBundle/Model/Example',
+            'class'       => 'Sylius\Component\Core\Model\User',
             'date_format' => 'Y-m-d H:i:s',
         );
 
@@ -111,19 +102,16 @@ class UserReaderSpec extends ObjectBehavior
     }
 
     function it_returns_null_if_no_data_was_read(
-        $doctrineRegistry,
+        $userRepository,
         AbstractQuery $query,
-        EntityRepository $repository,
         LoggerInterface $logger,
-        ObjectManager $manager,
         QueryBuilder $queryBuilder
     )
     {
-        $doctrineRegistry->getManager()->willReturn($manager)->shouldBeCalled();
-        $manager->getRepository('Sylius/ExampleBundle/Model/Example')->willReturn($repository)->shouldBeCalled();
+        $userRepository->createQueryBuilder('user')->willReturn($queryBuilder)->shouldBeCalled();
 
-        $repository->createQueryBuilder('o')->willReturn($queryBuilder)->shouldBeCalled();
-
+        $queryBuilder->addSelect('customer')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->leftJoin('user.customer', 'customer')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setFirstResult(0)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setMaxResults(2)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->getQuery()->shouldBeCalled()->willReturn($query);
@@ -131,7 +119,6 @@ class UserReaderSpec extends ObjectBehavior
 
         $configuration = array(
             'batch_size' => '2',
-            'class' => 'Sylius/ExampleBundle/Model/Example',
             'date_format' => 'Y-m-d H:i:s',
         );
 
@@ -142,19 +129,5 @@ class UserReaderSpec extends ObjectBehavior
     {
         $job->addMetadata(array('result_code' => 0));
         $this->finalize($job);
-    }
-
-    function it_throws_invalid_argument_exception_if_reader_fetch_wrong_repository(
-        $doctrineRegistry,
-        ObjectRepository $repository,
-        LoggerInterface $logger,
-        ObjectManager $manager
-    )
-    {
-        $doctrineRegistry->getManager()->willReturn($manager)->shouldBeCalled();
-        $manager->getRepository('Sylius/ExampleBundle/Model/Example')->willReturn($repository)->shouldBeCalled();
-
-        $this->shouldThrow(new \InvalidArgumentException('Repository gotten from manager has to be instance of Doctrine\ORM\EntityRepository'))
-            ->duringRead(array('class' => 'Sylius/ExampleBundle/Model/Example'), $logger);
     }
 }

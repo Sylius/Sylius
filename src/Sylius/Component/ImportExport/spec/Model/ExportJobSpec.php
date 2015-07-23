@@ -25,7 +25,7 @@ class ExportJobSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\ExportJob');
     }
 
-    public function it_is_job_object()
+    public function it_extends_job()
     {
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\Job');
     }

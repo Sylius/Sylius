@@ -37,19 +37,23 @@ class UserProcessorSpec extends ObjectBehavior
 
     function it_process_array_of_users_to_writers_friendly_form(
         $dateConverter,
+        \DateTime $birthdayDate,
+        \DateTime $createdAtDate,
+        \DateTime $credentialsExpireAtDate,
+        \DateTime $customerCreatedAtDate,
+        \DateTime $customerDeletedAtDate,
+        \DateTime $customerUpdatedAtDate,
+        \DateTime $deletedAtDate,
+        \DateTime $expiresAtDate,
         \DateTime $lastLoginDate,
         \DateTime $passwordRequestedAtDate,
-        \DateTime $expiresAtDate,
-        \DateTime $credentialsExpireAtDate,
-        \DateTime $createdAtDate,
-        \DateTime $updatedAtDate,
-        \DateTime $deletedAtDate
+        \DateTime $updatedAtDate
     )
     {
         $usersToConvert = array(
             array(
-                'username' => 'John',
-                'usernameCanonical' => 'John',
+                'username' => 'john.doe@example.com',
+                'usernameCanonical' => 'john.doe@example.com',
                 'enabled' => 1,
                 'salt' => 'salt',
                 'password' => 'password',
@@ -62,6 +66,19 @@ class UserProcessorSpec extends ObjectBehavior
                 'roles' => array(
                     'ROLE_ADMIN'
                 ),
+                'customer' => array(
+                    'email' => 'john.doe@example.com',
+                    'emailCanonical' => 'john.doe@example.com',
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'birthday' => $birthdayDate,
+                    'gender' => 'u',
+                    'createdAt' => $customerCreatedAtDate,
+                    'updatedAt' => $customerUpdatedAtDate,
+                    'deletedAt' => $customerDeletedAtDate,
+                    'id' => 20,
+                    'currency' => 'EUR',
+                ),
                 'createdAt' => $createdAtDate,
                 'updatedAt' => $updatedAtDate,
                 'deletedAt' => $deletedAtDate,
@@ -71,8 +88,8 @@ class UserProcessorSpec extends ObjectBehavior
 
         $outputUsers = array(
             array(
-                'username' => 'John',
-                'usernameCanonical' => 'John',
+                'username' => 'john.doe@example.com',
+                'usernameCanonical' => 'john.doe@example.com',
                 'enabled' => 1,
                 'salt' => 'salt',
                 'password' => 'password',
@@ -87,6 +104,17 @@ class UserProcessorSpec extends ObjectBehavior
                 'updatedAt' => 'converted',
                 'deletedAt' => 'converted',
                 'id' => 1,
+                'customerEmail' => 'john.doe@example.com',
+                'customerEmailCanonical' => 'john.doe@example.com',
+                'customerFirstName' => 'John',
+                'customerLastName' => 'Doe',
+                'customerBirthday' => 'converted',
+                'customerGender' => 'u',
+                'customerCreatedAt' => 'converted',
+                'customerUpdatedAt' => 'converted',
+                'customerDeletedAt' => 'converted',
+                'customerId' => 20,
+                'customerCurrency' => 'EUR',
             ),
         );
 

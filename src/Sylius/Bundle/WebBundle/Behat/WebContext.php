@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Bundle\ResourceBundle\Behat\WebContext as BaseWebContext;

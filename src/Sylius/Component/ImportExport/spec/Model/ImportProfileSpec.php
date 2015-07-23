@@ -24,7 +24,17 @@ class ImportProfileSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\ImportProfile');
     }
 
-    public function it_is_profile_object()
+    public function it_implements_import_profile_interface()
+    {
+        $this->shouldImplement('Sylius\Component\ImportExport\Model\ImportProfileInterface');
+    }
+
+    public function it_implements_profile_interface()
+    {
+        $this->shouldImplement('Sylius\Component\ImportExport\Model\ProfileInterface');
+    }
+
+    public function it_extends_profile()
     {
         $this->shouldHaveType('Sylius\Component\ImportExport\Model\Profile');
     }

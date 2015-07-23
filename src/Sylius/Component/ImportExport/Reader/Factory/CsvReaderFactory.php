@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\ImportExport\Reader\Factory;
+
 use EasyCSV\Reader;
 
 class CsvReaderFactory implements CsvReaderFactoryInterface
@@ -22,5 +23,7 @@ class CsvReaderFactory implements CsvReaderFactoryInterface
         $csvReader = new Reader($configuration['file'], 'r', $configuration["headers"]);
         $csvReader->setDelimiter($configuration['delimiter']);
         $csvReader->setEnclosure($configuration['enclosure']);
+
+        return $csvReader;
     }
 }

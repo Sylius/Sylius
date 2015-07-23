@@ -6,8 +6,8 @@ Feature: Export jobs
 
     Background:
         Given there are following export profiles configured:
-            | name               | description | code        | reader   | reader_configuration                                  | writer       | writer_configuration                                |
-            | UsersExportProfile | Lorem ipsum | user_export | user_orm | Rows number:10, batch_size:10,date_format:Y-m-d H:i:s | csv_writer   | Delimiter:;,Enclosure:",File path:\tmp\output.csv   |
+            | name               | description | code        | reader   | reader_configuration                                  | writer       | writer_configuration                              |
+            | UsersExportProfile | Lorem ipsum | user_export | user_orm | Rows number:10, batch_size:10,date_format:Y-m-d H:i:s | csv_writer   | Delimiter:;,Enclosure:",File path:\tmp\output.csv |
         And there are following export jobs set:
             | status    | start_time          | end_time            | created_at          | updated_at          | export_profile    | 
             | completed | 2010-01-02 01:00:00 | 2010-01-02 01:00:01 | 2010-01-02 01:00:00 | 2010-01-02 01:00:01 | user_export       |
@@ -19,7 +19,6 @@ Feature: Export jobs
             | martha@foo.com | yes      | 2010-01-02 13:00:00 |
             | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
         And I am logged in as administrator
-
 
     Scenario: Seeing set export jobs for given export profile
         Given I am on the export profile index page

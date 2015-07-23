@@ -22,13 +22,13 @@ interface WriterInterface
     /**
      * Writes $items with given $configuration.
      *
-     * @param array           $items
+     * @param array           $rawUsers
      * @param array           $configuration
      * @param LoggerInterface $logger
      *
      * @return mixed
      */
-    public function write(array $items, array $configuration, LoggerInterface $logger);
+    public function write(array $rawUsers, array $configuration, LoggerInterface $logger);
 
     /**
      * Finalize job, add meta data.
@@ -49,7 +49,7 @@ interface WriterInterface
     public function getResultCode();
 
     /**
-    * @return Type of data
+    * @return string Type of data
     */
     public function getType();
 }

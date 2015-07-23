@@ -89,11 +89,11 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         $this->preBind($event);
     }
 
-    function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_export_profiler(FormEvent $event)
+    function it_does_not_allow_to_configure_fields_in_pre_set_data_for_class_which_does_not_implement_profile_interface(FormEvent $event)
     {
         $report = '';
         $event->getData()->willReturn($report);
-        $this->shouldThrow(new UnexpectedTypeException($report, 'Sylius\Component\ImportExport\Model\ExportProfileInterface'))
+        $this->shouldThrow(new UnexpectedTypeException($report, 'Sylius\Component\ImportExport\Model\ProfileInterface'))
         ->duringPreSetData($event);
     }
 }

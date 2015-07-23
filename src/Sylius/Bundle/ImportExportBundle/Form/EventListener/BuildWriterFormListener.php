@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
 use Sylius\Component\ImportExport\Model\ExportProfileInterface;
+use Sylius\Component\ImportExport\Model\ProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -55,17 +56,17 @@ class BuildWriterFormListener implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event)
     {
-        $exportProfiler = $event->getData();
+        $profiler = $event->getData();
 
-        if (null === $exportProfiler) {
+        if (null === $profiler) {
             return;
         }
 
-        if (!$exportProfiler instanceof ExportProfileInterface) {
-            throw new UnexpectedTypeException($exportProfiler, 'Sylius\Component\ImportExport\Model\ExportProfileInterface');
+        if (!$profiler instanceof ProfileInterface) {
+            throw new UnexpectedTypeException($profiler, 'Sylius\Component\ImportExport\Model\ProfileInterface');
         }
 
-        $this->addConfigurationFields($event->getForm(), $exportProfiler->getWriter(), $exportProfiler->getWriterConfiguration());
+        $this->addConfigurationFields($event->getForm(), $profiler->getWriter(), $profiler->getWriterConfiguration());
     }
 
     public function preBind(FormEvent $event)
@@ -79,10 +80,10 @@ class BuildWriterFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($event->getForm(), $data['writer']);
     }
 
-    protected function addConfigurationFields(FormInterface $form, $exporterType, array $configuration = array())
+    protected function addConfigurationFields(FormInterface $form, $type, array $configuration = array())
     {
-        $exporter = $this->writerRegistry->get($exporterType);
-        $formType = sprintf('sylius_%s_writer', $exporter->getType());
+        $writer = $this->writerRegistry->get($type);
+        $formType = sprintf('sylius_%s_writer', $writer->getType());
         try {
             $configurationField = $this->factory->createNamed(
                 'writerConfiguration',

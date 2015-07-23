@@ -20,4 +20,15 @@ class DateConverter implements DateConverterInterface
     {
         return $date->format($format);
     }
+    
+    /**
+     * @param string $stringDate
+     * @param string $format
+     *
+     * @return \DateTime
+     */
+    public function toDateTime($stringDate, $format)
+    {
+        return \DateTime::createFromFormat($format, $stringDate);
+    }
 }

@@ -25,21 +25,32 @@ class ImportDataCommand extends ContainerAwareCommand
     {
         $this
             ->setName('sylius:import')
-            ->setDescription('Command for importing data based on given data.')
+            ->setDescription('Command for importing data based on given import profile.')
             ->addArgument(
-                'file',
+                'code',
                 InputArgument::REQUIRED,
-                'Path to file that will be imported.'
+                'Code of import profile.'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filePath = $input->getArgument('file');
-        
-        $reader = new CsvReader();
-        $reader->setConfiguration(array('file' => $filePath, 'delimiter' => ';', 'enclosure' => '*', 'headers' => false));
-        print_r($reader->read());
+        $importProfile = $this->getContainer()->get('sylius.repository.import_profile')->findOneBy(
+            array(
+                'code' => $input->getArgument('code'),
+            ));
+
+        if ($importProfile === null) {
+            throw new \InvalidArgumentException('There is no import profile with given code.');
+        }
+
+        $logger = $this->getContainer()->get('logger');
+        $streamHandlerFactory = $this->getContainer()->get('sylius.import.stream_handler.factory');
+        $logger->pushHandler($streamHandlerFactory->create('import_profile_'.$importProfile->getId()));
+
+        $this->getContainer()->get('sylius.import_export.importer')->import($importProfile, $logger);
+
+        $output->write('Command executed successfully!');
     }
 }

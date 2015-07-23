@@ -21,7 +21,6 @@ use Symfony\Component\Console\Input\InputArgument;
 */
 class ExportDataCommand extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
@@ -50,5 +49,7 @@ class ExportDataCommand extends ContainerAwareCommand
         $logger->pushHandler($streamHandlerFactory->create('export_profile_'.$exportProfile->getId()));
 
         $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile, $logger);
+
+        $output->write('Command executed successfully!');
     }
 }

@@ -35,4 +35,11 @@ class DateConverterSpec extends ObjectBehavior
 
         $this->toString($date, $format)->shouldReturn('2012-07-08 11:14:15');
     }
+
+    function it_converts_string_to_dates()
+    {
+        $date = new \DateTime('2012-07-08 11:14:15');
+
+        $this->toDateTime('2012-07-08 11:14:15', 'Y-m-d H:i:s')->shouldBeLike($date);
+    }
 }

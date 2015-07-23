@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type\Import\Writer;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormBuilderInterface;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReaderTypeSpec extends ObjectBehavior
+class UserWriterTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Export\Reader\UserReaderType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Import\Writer\UserWriterType');
     }
 
     function it_should_be_abstract_resource_type_object()
@@ -33,7 +33,6 @@ class UserReaderTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
-        $builder->add('batch_size', 'number', Argument::any())->willReturn($builder);
         $builder->add('date_format', 'text', Argument::any())->willReturn($builder);
 
         $this->buildForm($builder, array());
@@ -41,6 +40,6 @@ class UserReaderTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_user_orm_reader');
+        $this->getName()->shouldReturn('sylius_user_orm_writer');
     }
 }

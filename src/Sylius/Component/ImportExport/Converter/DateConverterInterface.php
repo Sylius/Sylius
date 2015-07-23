@@ -25,4 +25,12 @@ interface DateConverterInterface
      * @return string
      */
     public function toString(\DateTime $date, $format);
+
+    /**
+     * @param string $stringDate
+     * @param string $format
+     *
+     * @return \DateTime
+     */
+    public function toDateTime($stringDate, $format);
 }

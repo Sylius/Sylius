@@ -30,7 +30,7 @@ class XlsWriter implements WriterInterface
      */
     protected $logger;
 
-    public function write(array $items)
+    public function write(array $rawUsers)
     {
     }
 

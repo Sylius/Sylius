@@ -18,6 +18,7 @@ use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessorInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Reader\ReaderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -25,9 +26,9 @@ use Sylius\Component\ImportExport\Reader\ReaderInterface;
 class UserReader implements ReaderInterface
 {
     /**
-     * @var ManagerRegistry
+     * @var EntityRepository
      */
-    private $doctrineRegistry;
+    private $userRepository;
 
     /**
      * @var UserProcessorInterface
@@ -41,15 +42,15 @@ class UserReader implements ReaderInterface
 
     /**
      * @param UserProcessorInterface $userProcessor
-     * @param ManagerRegistry        $doctrineRegistry
+     * @param EntityRepository       $userRepository
      */
     public function __construct(
         UserProcessorInterface $userProcessor,
-        ManagerRegistry $doctrineRegistry
+        EntityRepository $userRepository
     )
     {
         $this->userProcessor = $userProcessor;
-        $this->doctrineRegistry = $doctrineRegistry;
+        $this->userRepository = $userRepository;
         $this->metadata['result_code'] = 0;
         $this->metadata['offset'] = 0;
     }
@@ -75,19 +76,12 @@ class UserReader implements ReaderInterface
      */
     public function read(array $configuration, LoggerInterface $logger)
     {
-        $manager = $this->doctrineRegistry->getManager();
-        $repository = $manager->getRepository($configuration['class']);
-
-        if (!$repository instanceof EntityRepository) {
-            throw new \InvalidArgumentException(
-                'Repository gotten from manager has to be instance of Doctrine\ORM\EntityRepository'
-            );
-        }
-
-        $read = $this->readFromRepository($configuration, $repository);
+        $read = $this->readFromRepository($configuration);
         $this->metadata['offset'] += $configuration['batch_size'];
 
-        if (empty($read)) return null;
+        if (empty($read)) {
+            return null;
+        }
 
         return $this->userProcessor->convert($read, $configuration['date_format']);
     }
@@ -101,18 +95,18 @@ class UserReader implements ReaderInterface
     }
 
     /**
-     * @param array            $configuration
-     * @param EntityRepository $repository
+     * @param array $configuration
      *
      * @return array
      */
-    private function readFromRepository(array $configuration, $repository)
+    private function readFromRepository(array $configuration)
     {
-        $query = $repository->createQueryBuilder('o')
+        return $this->userRepository->createQueryBuilder('user')
+            ->addSelect('customer')
+            ->leftJoin('user.customer', 'customer')
             ->setFirstResult($this->metadata['offset'])
             ->setMaxResults($configuration['batch_size'])
-            ->getQuery();
-
-        return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
+            ->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 }

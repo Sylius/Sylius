@@ -23,7 +23,7 @@
         <parameter key="sylius.import_export.data_provider.class">Sylius\Component\ImportExport\Provider\CurrentDateProvider</parameter>
 
         <!-- Date Converter -->
-        <parameter key="sylius.import_export.data_converter.class">Sylius\Component\ImportExport\Converter\DateConverter</parameter>
+        <parameter key="sylius.import_export.date_converter.class">Sylius\Component\ImportExport\Converter\DateConverter</parameter>
 
         <!-- StreamHandlerFactory -->
         <parameter key="sylius.import_export.logger.factory.class">Sylius\Component\ImportExport\Logger\Factory\StreamHandlerFactory</parameter>
@@ -77,7 +77,7 @@
         </service>
 
         <!-- DateConverter-->
-        <service id="sylius.import_export.data_converter" class="%sylius.import_export.data_converter.class%" />
+        <service id="sylius.import_export.date_converter" class="%sylius.import_export.date_converter.class%" />
 
         <!-- StreamHandlerFactory -->
         <service id="sylius.import_export.factory.logger" class="%sylius.import_export.logger.factory.class%">

@@ -66,7 +66,7 @@ class CsvWriter implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function write(array $items, array $configuration, LoggerInterface $logger)
+    public function write(array $rawUsers, array $configuration, LoggerInterface $logger)
     {
         if (!$this->running) {
             $this->csvWriter = $this->csvWriterFactory->create($configuration);
@@ -74,17 +74,17 @@ class CsvWriter implements WriterInterface
             $this->metadata['row'] = 0;
         }
 
-        if (!isset($items[0])) {
+        if (!isset($rawUsers[0])) {
             return;
         }
 
         if (!$this->isHeaderSet) {
-            $this->csvWriter->writeRow(array_keys($items[0]));
+            $this->csvWriter->writeRow(array_keys($rawUsers[0]));
             $this->isHeaderSet = true;
         }
 
-        $this->csvWriter->writeFromArray($items);
-        $this->metadata['row'] += sizeof($items);
+        $this->csvWriter->writeFromArray($rawUsers);
+        $this->metadata['row'] += sizeof($rawUsers);
     }
 
     /**

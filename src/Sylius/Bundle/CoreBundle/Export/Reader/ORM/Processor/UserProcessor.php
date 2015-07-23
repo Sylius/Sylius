@@ -18,11 +18,15 @@ class UserProcessor implements UserProcessorInterface
     /**
      * @var array
      */
-    private static $USER_DATETIME_KEYS = array(
+    private static $userDateTimeKeys = array(
         'lastLogin',
         'passwordRequestedAt',
         'expiresAt',
         'credentialsExpireAt',
+        'customerCreatedAt',
+        'customerBirthday',
+        'customerUpdatedAt',
+        'customerDeletedAt',
         'createdAt',
         'updatedAt',
         'deletedAt',
@@ -50,6 +54,8 @@ class UserProcessor implements UserProcessorInterface
     public function convert(array $users, $format)
     {
         foreach ($users as $key => $user) {
+            $user = array_merge($users[$key], $this->addCustomerPrefix($users[$key]['customer']));
+            unset($user['customer']);
             $users[$key] = $this->convertDates($user, $format);
             $users[$key]['roles'] = json_encode($user['roles']);
         }
@@ -65,10 +71,27 @@ class UserProcessor implements UserProcessorInterface
      */
     private function convertDates(array $user, $format)
     {
-        foreach ($this::$USER_DATETIME_KEYS as $key) {
-            $user[$key] = $this->dateConverter->toString($user[$key], $format);
+        foreach ($this::$userDateTimeKeys as $key) {
+            if (null !== $user[$key]) {
+                $user[$key] = $this->dateConverter->toString($user[$key], $format);
+            }
         }
 
         return $user;
+    }
+
+    /**
+     * @param array $customer
+     *
+     * @return array
+     */
+    private function addCustomerPrefix(array $customer)
+    {
+        $resultArray = array();
+        foreach ($customer as $key => $value) {
+            $resultArray['customer'.ucfirst($key)] = $value;
+        }
+
+        return $resultArray;
     }
 }
