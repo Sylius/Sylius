@@ -47,4 +47,24 @@ class PaymentContext extends DefaultContext
 
         $manager->flush();
     }
+
+    /**
+     * @Given the payment method translations exist:
+     */
+    public function thePaymentMethodTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $paymentMethodTranslation = $this->findOneByName('payment_method_translation', $data['payment method']);
+
+            $paymentMethod = $paymentMethodTranslation->getTranslatable();
+            $paymentMethod->setCurrentLocale($data['locale']);
+            $paymentMethod->setFallbackLocale($data['locale']);
+
+            $paymentMethod->setName($data['name']);
+        }
+
+        $manager->flush();
+    }
 }

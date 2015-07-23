@@ -29,7 +29,7 @@ Feature: Payment methods
           And I follow "Create payment method"
          Then I should be on the payment method creation page
 
-    Scenario: Submitting invalid form without name
+    Scenario: Submitting form without specifying the required values
         Given I am on the payment method creation page
          When I press "Create"
          Then I should still be on the payment method creation page
