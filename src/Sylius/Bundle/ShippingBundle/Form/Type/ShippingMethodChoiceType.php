@@ -97,6 +97,7 @@ class ShippingMethodChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
+                'data_class' => 'Sylius\Component\Shipping\Model\ShippingMethodInterface',
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
             ))
