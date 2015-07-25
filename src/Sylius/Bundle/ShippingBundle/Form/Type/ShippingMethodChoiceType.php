@@ -74,6 +74,8 @@ class ShippingMethodChoiceType extends AbstractType
     {
         if ($options['multiple']) {
             $builder->addModelTransformer(new CollectionToArrayTransformer());
+        } else {
+            $builder->addModelTransformer(new ObjectToIdentifierTransformer($this->repository));
         }
     }
 
@@ -97,7 +99,6 @@ class ShippingMethodChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
-                'data_class' => 'Sylius\Component\Shipping\Model\ShippingMethodInterface',
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
             ))
