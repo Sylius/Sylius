@@ -49,7 +49,7 @@
         "payum/omnipay-bridge":                 "~0.14.0",
         "payum/payum":                          "~0.14.0",
         "payum/payum-bundle":                   "~0.14.2",
-        "sensio/distribution-bundle":           "~2.3",
+        "sensio/distribution-bundle":           "~3.0",
         "stof/doctrine-extensions-bundle":      "~1.1",
         "swiftmailer/swiftmailer":              "~5.0",
         "symfony-cmf/block-bundle":             "~1.2",
