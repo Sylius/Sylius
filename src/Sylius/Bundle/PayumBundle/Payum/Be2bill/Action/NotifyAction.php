@@ -101,7 +101,7 @@ class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareIn
         $payment = $this->paymentRepository->findOneBy(array($this->identifier => $details['ORDERID']));
 
         if (null === $payment) {
-            throw new BadRequestHttpException('Paymenet cannot be retrieved.');
+            throw new BadRequestHttpException('Payment cannot be retrieved.');
         }
 
         if ((int) $details['AMOUNT'] !== $payment->getAmount()) {
