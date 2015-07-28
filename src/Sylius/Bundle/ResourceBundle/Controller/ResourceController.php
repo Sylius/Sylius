@@ -288,6 +288,26 @@ class ResourceController extends FOSRestController
      *
      * @return RedirectResponse
      */
+    public function enableAction(Request $request)
+    {
+        return $this->toggle($request, true);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function disableAction(Request $request)
+    {
+        return $this->toggle($request, false);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function restoreAction(Request $request)
     {
         $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
@@ -463,6 +483,32 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404($request);
 
         $this->domainManager->move($resource, $movement);
+
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
+
+        return $this->redirectHandler->redirectToIndex();
+    }
+
+    /**
+     * @param Request $request
+     * @param boolean $enabled
+     *
+     * @return RedirectResponse|Response
+     */
+    protected function toggle(Request $request, $enabled)
+    {
+        $this->isGrantedOr403('update');
+
+        $resource = $this->findOr404($request);
+        $resource->setEnabled($enabled);
+
+        $this->domainManager->update($resource, $enabled ? 'enable' : 'disable');
 
         if ($this->config->isApiRequest()) {
             if ($resource instanceof ResourceEvent) {

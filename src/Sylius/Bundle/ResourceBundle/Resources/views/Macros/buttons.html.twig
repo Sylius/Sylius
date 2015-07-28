@@ -60,3 +60,21 @@
     </button>
 </form>
 {% endmacro %}
+
+{% macro enable(url, message, icon, button) %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PATCH">
+    <button class="btn btn-{{ button|default('success') }}" type="submit">
+        <i class="glyphicon glyphicon-{{ icon|default('ok') }}"></i> <span>{{ message is empty ? 'sylius.enable'|trans : message }}</span>
+    </button>
+</form>
+{% endmacro %}
+
+{% macro disable(url, message, icon, button) %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PATCH">
+    <button class="btn btn-{{ button|default('danger') }}" type="submit">
+        <i class="glyphicon glyphicon-{{ icon|default('remove') }}"></i> <span>{{ message is empty ? 'sylius.disable'|trans : message }}</span>
+    </button>
+</form>
+{% endmacro %}
