@@ -345,6 +345,7 @@ sylius:
         no_results: There are no countries configured.
         show_header: Country details
         update_header: Editing country
+        enabled: Enabled
     email:
         create: Add new Email
         create_header: Adding new Email
@@ -1059,3 +1060,5 @@ sylius:
     gender:
         male: Male
         female: Female
+    enable: Enable
+    disable: Disable
