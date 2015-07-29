@@ -292,6 +292,8 @@ class ResourceController extends FOSRestController
     {
         $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
         $resource = $this->findOr404($request);
+        $this->get('doctrine')->getManager()->getFilters()->enable('softdeleteable');
+        
         $resource->setDeletedAt(null);
 
         $this->domainManager->update($resource, 'restore_deleted');
