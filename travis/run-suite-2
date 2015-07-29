@@ -26,8 +26,6 @@ bin/behat --suite=promotions features/frontend/cart_promotions_usage_limit.featu
 bin/behat --suite=settings -fprogress || EXIT_STATUS=$?
 bin/behat --suite=shipping -fprogress || EXIT_STATUS=$?
 bin/behat --suite=taxation -fprogress || EXIT_STATUS=$?
-bin/behat --suite=taxonomies -fprogress || EXIT_STATUS=$?
-bin/behat --suite=users -fprogress || EXIT_STATUS=$?
 bin/behat --suite=search -fprogress || EXIT_STATUS=$?
 
 #bin/behat --stop-on-failure --suite=javascript || EXIT_STATUS=$?
