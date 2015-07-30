@@ -12,11 +12,12 @@
 namespace Sylius\Component\Locale\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface LocaleInterface extends TimestampableInterface
+interface LocaleInterface extends TimestampableInterface, ToggleableInterface
 {
     /**
      * @return string
@@ -29,12 +30,9 @@ interface LocaleInterface extends TimestampableInterface
     public function setCode($code);
 
     /**
-     * @return boolean
+     * @param string|null $locale
+     *
+     * @return string
      */
-    public function isEnabled();
-
-    /**
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled);
+    public function getName($locale = null);
 }
