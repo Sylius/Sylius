@@ -50,7 +50,7 @@ class Locale implements LocaleInterface
 
     public function __toString()
     {
-        return Intl::getLanguageBundle()->getLanguageName($this->code);
+        return $this->getName();
     }
 
     /**
@@ -80,6 +80,14 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
+    public function getName($locale = null)
+    {
+        return Intl::getLocaleBundle()->getLocaleName($this->code, $locale);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEnabled()
     {
         return $this->enabled;
@@ -91,6 +99,22 @@ class Locale implements LocaleInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (boolean) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 
     /**
