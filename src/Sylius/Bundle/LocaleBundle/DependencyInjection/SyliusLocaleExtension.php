@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Locale extension.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class SyliusLocaleExtension extends AbstractResourceExtension

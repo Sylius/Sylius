@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Locale type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleType extends AbstractResourceType
