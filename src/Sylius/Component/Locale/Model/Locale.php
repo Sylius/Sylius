@@ -11,46 +11,34 @@
 
 namespace Sylius\Component\Locale\Model;
 
-use \Locale as Language;
+use Symfony\Component\Intl\Intl;
 
 /**
- * Locale model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Locale implements LocaleInterface
 {
     /**
-     * Id
-     *
      * @var integer
      */
     protected $id;
 
     /**
-     * Code.
-     *
      * @var string
      */
     protected $code;
 
     /**
-     * Activation status.
-     *
-     * @var Boolean
+     * @var boolean
      */
     protected $enabled = true;
 
     /**
-     * Creation date
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -62,12 +50,10 @@ class Locale implements LocaleInterface
 
     public function __toString()
     {
-        return Language::getDisplayName($this->code);
+        return Intl::getLanguageBundle()->getLanguageName($this->code);
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -89,8 +75,6 @@ class Locale implements LocaleInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -106,7 +90,7 @@ class Locale implements LocaleInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (boolean) $enabled;
     }
 
     /**
@@ -123,8 +107,6 @@ class Locale implements LocaleInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -141,7 +123,5 @@ class Locale implements LocaleInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

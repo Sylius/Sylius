@@ -19,8 +19,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
- * Locale controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleController extends ResourceController
