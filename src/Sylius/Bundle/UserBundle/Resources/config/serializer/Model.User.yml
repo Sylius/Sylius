@@ -4,7 +4,7 @@ Sylius\Component\User\Model\User:
     properties:
         id:
             expose: true
-            type: int
+            type: integer
         username:
             expose: true
             type: string
