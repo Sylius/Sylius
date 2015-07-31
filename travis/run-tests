@@ -1,0 +1,25 @@
+#!/bin/bash
+
+EXIT_STATUS=0
+
+IFS=$'\n'
+
+echo "Date and time (before running tests): `date`"
+
+for command in `cat $(dirname "$0")/suites/suite-$1`
+do
+    if [ `echo "$command" | grep "^\s*#"` ]
+    then
+        continue
+    fi
+
+    echo "----------------------------------------------------------------------------"
+    echo "Date and time: `date`"
+    echo "Running: $command"
+    echo "$command" | xargs -0 /bin/bash -c || EXIT_STATUS=$?
+    echo ""
+done
+
+echo "Date and time (after running tests): `date`"
+
+exit $EXIT_STATUS
