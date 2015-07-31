@@ -16,12 +16,12 @@ use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chruscie@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chruscie@lakion.com>
+ */
 interface JobRunnerInterface
 {
     /**
-     * Create import job
+     * Create import job.
      *
      * @param ProfileInterface $profile
      * @param LoggerInterface  $logger
@@ -35,12 +35,10 @@ interface JobRunnerInterface
      * @param ProfileInterface $profile
      * @param LoggerInterface  $logger
      * @param JobInterface     $job
-     *
-     * @return void
      */
     public function run(ProfileInterface $profile, LoggerInterface $logger, JobInterface $job);
     /**
-     * End import job
+     * End import job.
      *
      * @param JobInterface    $job
      * @param LoggerInterface $logger

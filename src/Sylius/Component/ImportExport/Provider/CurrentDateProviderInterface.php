@@ -8,7 +8,7 @@ namespace Sylius\Component\ImportExport\Provider;
 interface CurrentDateProviderInterface
 {
     /**
-     * Provides current date based on given timezone
+     * Provides current date based on given timezone.
      *
      * @return \DateTime
      */

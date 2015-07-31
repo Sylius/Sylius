@@ -22,7 +22,7 @@ use Sylius\Component\ImportExport\Reader\Factory\CsvReaderFactoryInterface;
 class CsvReader implements ReaderInterface
 {
     /**
-     * Is EasySCV\Reader initialized
+     * Is EasySCV\Reader initialized.
      *
      * @var boolean
      */
@@ -42,6 +42,7 @@ class CsvReader implements ReaderInterface
 
     /**
      * CsvReader constructor.
+     *
      * @param CsvReaderFactoryInterface $csvReaderFactory
      */
     public function __construct(CsvReaderFactoryInterface $csvReaderFactory)

@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Csv writer type
+ * Csv writer type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

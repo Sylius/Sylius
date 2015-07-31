@@ -21,7 +21,8 @@ class StreamHandlerFactory implements StreamHandlerFactoryInterface
 
     /**
      * StreamHandlerFactory constructor.
-     * @param string $filePath
+     *
+     * @param string                       $filePath
      * @param CurrentDateProviderInterface $currentDateProvider
      */
     public function __construct($filePath, CurrentDateProviderInterface $currentDateProvider)

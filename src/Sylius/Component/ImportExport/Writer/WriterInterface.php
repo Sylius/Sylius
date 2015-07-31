@@ -42,14 +42,14 @@ interface WriterInterface
      * Return code of error if any.
      * = 0 - no error
      * > 0 - exception
-     * < 0 - fatal error
-     * 
+     * < 0 - fatal error.
+     *
      * @return int
      */
     public function getResultCode();
 
     /**
-    * @return string Type of data
-    */
+     * @return string Type of data
+     */
     public function getType();
 }

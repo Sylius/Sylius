@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
-use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;

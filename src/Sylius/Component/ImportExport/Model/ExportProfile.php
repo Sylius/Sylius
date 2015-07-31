@@ -22,7 +22,7 @@ class ExportProfile extends Profile implements ExportProfileInterface
     const DEFAULT_READER = 'user_orm';
     const DEFAULT_WRITER = 'csv_writer';
 
-    function __construct()
+    public function __construct()
     {
         $this->reader = ExportProfile::DEFAULT_READER;
         $this->readerConfiguration = array();

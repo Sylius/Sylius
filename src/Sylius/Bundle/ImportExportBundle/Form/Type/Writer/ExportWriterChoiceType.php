@@ -23,14 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ExportWriterChoiceType extends AbstractType
 {
     /**
-     * Writers
+     * Writers.
      *
      * @var array
      */
     protected $writers;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $writers
      */

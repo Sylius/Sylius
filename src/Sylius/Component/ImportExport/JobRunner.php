@@ -21,8 +21,8 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chruscie@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chruscie@lakion.com>
+ */
 abstract class JobRunner implements JobRunnerInterface
 {
     /**
@@ -59,8 +59,7 @@ abstract class JobRunner implements JobRunnerInterface
         RepositoryInterface $jobRepository,
         ServiceRegistryInterface $readerRegistry,
         ServiceRegistryInterface $writerRegistry
-    )
-    {
+    ) {
         $this->dateProvider = $dateProvider;
         $this->readerRegistry = $readerRegistry;
         $this->writerRegistry = $writerRegistry;
@@ -103,7 +102,7 @@ abstract class JobRunner implements JobRunnerInterface
         $this->entityManager->persist($job);
         $this->entityManager->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -154,8 +153,6 @@ abstract class JobRunner implements JobRunnerInterface
      * @param LoggerInterface $logger
      * @param integer         $profileId
      * @param string          $type
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */

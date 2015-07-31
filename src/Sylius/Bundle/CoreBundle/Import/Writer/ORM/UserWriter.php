@@ -57,8 +57,7 @@ class UserWriter implements WriterInterface
         UserRepositoryInterface $userRepository,
         RepositoryInterface $customerRepository,
         ObjectManager $entityManager
-    )
-    {
+    ) {
         $this->userProcessor = $userProcessor;
         $this->userRepository = $userRepository;
         $this->customerRepository = $customerRepository;

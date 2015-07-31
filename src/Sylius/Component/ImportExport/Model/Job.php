@@ -63,7 +63,7 @@ abstract class Job implements JobInterface
     protected $metadata = array();
 
     /**
-     * Job status
+     * Job status.
      */
     const COMPLETED = 'completed';
     const ERROR     = 'completed with error';
@@ -177,7 +177,7 @@ abstract class Job implements JobInterface
 
         return $this;
     }
-    
+
     /**
      * @return ProfileInterface
      */

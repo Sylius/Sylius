@@ -20,7 +20,7 @@ interface DateConverterInterface
      * Converts given \DateTime into string with following format.
      *
      * @param \DateTime $date
-     * @param string $format
+     * @param string    $format
      *
      * @return string
      */

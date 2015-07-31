@@ -24,7 +24,7 @@ class XlsWriter implements WriterInterface
     private $configuration;
 
     /**
-     * Work logger
+     * Work logger.
      *
      * @var Logger
      */

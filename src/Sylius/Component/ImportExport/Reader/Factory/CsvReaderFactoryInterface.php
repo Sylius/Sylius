@@ -10,8 +10,8 @@
  */
 
 namespace Sylius\Component\ImportExport\Reader\Factory;
-use EasyCSV\Reader;
 
+use EasyCSV\Reader;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -19,7 +19,7 @@ use EasyCSV\Reader;
 interface CsvReaderFactoryInterface
 {
     /**
-     * Creates Reader instance
+     * Creates Reader instance.
      *
      * @param array $configuration
      *

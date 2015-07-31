@@ -25,7 +25,7 @@ use Symfony\Component\Process\Process;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 /**
- * ImportExportContext for ImportExport scenarios
+ * ImportExportContext for ImportExport scenarios.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -175,7 +175,7 @@ class ImportExportContext extends DefaultContext
         $this->process->setTimeout($seconds);
         try {
             $this->process->mustRun();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->processOutput = $e->getMessage();
         }
     }
@@ -201,7 +201,7 @@ class ImportExportContext extends DefaultContext
     {
         $lineCount = count(file($this->filePath)) - 1;
 
-        if ((int)$rowsNumber !== $lineCount) {
+        if ((int) $rowsNumber !== $lineCount) {
             $errorMessage = sprintf('File contains %s instead of %s lines', $lineCount, $rowsNumber);
 
             throw new \Exception($errorMessage);
@@ -239,7 +239,9 @@ class ImportExportContext extends DefaultContext
      */
     public function theCommandShouldFinishUnsuccessfully()
     {
-        if ($this->process->isSuccessful()) throw new \Exception('Command finish successfully!');
+        if ($this->process->isSuccessful()) {
+            throw new \Exception('Command finish successfully!');
+        }
     }
 
     /**
@@ -250,7 +252,7 @@ class ImportExportContext extends DefaultContext
         $repository = $this->getRepository($profileType.'_job');
         $numberOfJobsInDatabase = count($repository->findBy(array('status' => $jobStatus)));
 
-        if ((int)$numberOfJobs !== $numberOfJobsInDatabase) {
+        if ((int) $numberOfJobs !== $numberOfJobsInDatabase) {
             $executionMessage = sprintf('Expected was %d jobs with status "%s" in database, but %d was found',
                 $numberOfJobs,
                 $jobStatus,
@@ -320,7 +322,6 @@ class ImportExportContext extends DefaultContext
         $tr->clickLink($button);
     }
 
-
     /**
      * @Then I should be on the import jobs index page for profile with code :code
      */
@@ -381,7 +382,7 @@ class ImportExportContext extends DefaultContext
         $repository = $this->getRepository('user');
 
         $numberOfUsersInDatabase = count($repository->findAll());
-        if ((int) $numberOfUsers !== $numberOfUsersInDatabase){
+        if ((int) $numberOfUsers !== $numberOfUsersInDatabase) {
             $message = sprintf(
                 '%s users was expected to be found, but %s was found in a database',
                 $numberOfUsers,
@@ -416,7 +417,7 @@ class ImportExportContext extends DefaultContext
             throw new \Exception('Job or profile was not set. Make "Export job for export profile " " should be created" before you use this step.');
         }
 
-        $path = sprintf('sylius_backend_%s_job_show' ,$this->type);
+        $path = sprintf('sylius_backend_%s_job_show', $this->type);
 
         $this->getSession()->visit($this->generatePageUrl($path,
             array(
@@ -462,9 +463,9 @@ class ImportExportContext extends DefaultContext
         $writer,
         $writerConfiguration,
         $flush = true
-    )
-    {
+    ) {
         $repository = $this->getRepository('import_profile');
+
         return $this->createProfileInDatabase($repository, $description, $code, $reader, $readerConfiguration, $writer, $writerConfiguration, $name, $flush);
     }
 
@@ -489,9 +490,9 @@ class ImportExportContext extends DefaultContext
         $writer,
         $writerConfiguration,
         $flush = true
-    )
-    {
+    ) {
         $repository = $this->getRepository('export_profile');
+
         return $this->createProfileInDatabase($repository, $description, $code, $reader, $readerConfiguration, $writer, $writerConfiguration, $name, $flush);
     }
 

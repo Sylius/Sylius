@@ -27,21 +27,21 @@ use Symfony\Component\Form\FormView;
 class ImportProfileType extends AbstractResourceType
 {
     /**
-     * Reader registry
+     * Reader registry.
      *
      * @var ServiceRegistryInterface
      */
     protected $readerRegistry;
 
     /**
-     * Writer registry
+     * Writer registry.
      *
      * @var ServiceRegistryInterface
      */
     protected $writerRegistry;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ServiceRegistryInterface $readerRegistry
      * @param ServiceRegistryInterface $writerRegistry

@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Xls writer type
+ * Xls writer type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

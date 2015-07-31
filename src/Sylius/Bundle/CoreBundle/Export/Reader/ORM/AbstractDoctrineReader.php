@@ -43,8 +43,7 @@ abstract class AbstractDoctrineReader implements ReaderInterface
      */
     public function read(array $configuration, Logger $logger)
     {
-        if (!$this->running)
-        {
+        if (!$this->running) {
             $this->running = true;
             $this->results = new \ArrayIterator($this->getQuery()->execute());
             $this->batchSize = $configuration['batch_size'];
@@ -71,14 +70,14 @@ abstract class AbstractDoctrineReader implements ReaderInterface
      *
      * @return array
      */
-    protected abstract function process($result);
+    abstract protected function process($result);
 
     /**
-     * Provides list of all suited objects
+     * Provides list of all suited objects.
      *
      * @return mixed
      */
-    protected abstract function getQuery();
+    abstract protected function getQuery();
 
     /**
      * {@inheritdoc}

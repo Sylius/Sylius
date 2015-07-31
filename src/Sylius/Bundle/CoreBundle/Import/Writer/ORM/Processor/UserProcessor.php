@@ -87,7 +87,7 @@ class UserProcessor implements UserProcessorInterface
      */
     private function restoreCustomerArray(array $user)
     {
-        $customersKeys = array_filter(array_keys($user), function($key) {
+        $customersKeys = array_filter(array_keys($user), function ($key) {
             return false !== strpos($key, 'customer');
         });
 

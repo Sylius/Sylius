@@ -16,7 +16,7 @@ use EasyCSV\Writer;
 interface CsvWriterFactoryInterface
 {
     /**
-     * Creates Writer instance
+     * Creates Writer instance.
      *
      * @param array $configuration
      *

@@ -17,8 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
-* @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
-*/
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
 class ExportDataCommand extends ContainerAwareCommand
 {
     protected function configure()

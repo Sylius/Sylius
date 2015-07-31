@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
-use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -42,8 +41,9 @@ class BuildReaderFormListener implements EventSubscriberInterface
 
     /**
      * Constructor.
+     *
      * @param ServiceRegistryInterface $readerRegistry
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface     $factory
      */
     public function __construct(ServiceRegistryInterface $readerRegistry, FormFactoryInterface $factory)
     {

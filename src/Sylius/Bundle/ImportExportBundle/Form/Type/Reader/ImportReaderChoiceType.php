@@ -22,14 +22,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ImportReaderChoiceType extends AbstractType
 {
     /**
-     * Writers
+     * Writers.
      *
      * @var array
      */
     protected $readers;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $readers
      */

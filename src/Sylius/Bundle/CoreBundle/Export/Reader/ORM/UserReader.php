@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessorInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Reader\ReaderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -47,8 +45,7 @@ class UserReader implements ReaderInterface
     public function __construct(
         UserProcessorInterface $userProcessor,
         EntityRepository $userRepository
-    )
-    {
+    ) {
         $this->userProcessor = $userProcessor;
         $this->userRepository = $userRepository;
         $this->metadata['result_code'] = 0;
@@ -62,7 +59,7 @@ class UserReader implements ReaderInterface
     {
         return 'user_orm';
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -80,12 +77,12 @@ class UserReader implements ReaderInterface
         $this->metadata['offset'] += $configuration['batch_size'];
 
         if (empty($read)) {
-            return null;
+            return;
         }
 
         return $this->userProcessor->convert($read, $configuration['date_format']);
     }
-    
+
     /**
      * {@inheritdoc}
      */

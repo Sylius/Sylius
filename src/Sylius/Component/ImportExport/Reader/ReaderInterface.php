@@ -31,7 +31,7 @@ interface ReaderInterface
     public function read(array $configuration, LoggerInterface $logger);
     /**
      * Finalize job, add meta data to it.
-     * 
+     *
      * @param JobInterface $job
      */
     public function finalize(JobInterface $job);
@@ -41,7 +41,7 @@ interface ReaderInterface
      * = 0 - no error
      * > 0 - exception
      * < 0 - fatal error
-     * 
+     *
      * @return int
      */
     public function getResultCode();

@@ -23,7 +23,7 @@ use Sylius\Component\ImportExport\Writer\Factory\CsvWriterFactoryInterface;
 class CsvWriter implements WriterInterface
 {
     /**
-     * Is EasySCV\Writer initialized
+     * Is EasySCV\Writer initialized.
      *
      * @var boolean
      */
@@ -54,7 +54,7 @@ class CsvWriter implements WriterInterface
     private $csvWriterFactory;
 
     /**
-     * @param Filesystem $filesystem
+     * @param Filesystem                $filesystem
      * @param CsvWriterFactoryInterface $csvWriterFactory
      */
     public function __construct(Filesystem $filesystem, CsvWriterFactoryInterface $csvWriterFactory)

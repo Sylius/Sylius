@@ -11,7 +11,7 @@ class CurrentDateProvider implements CurrentDateProviderInterface
      * @var string
      */
     private $timezone;
-    
+
     /**
      * Constructor.
      *
@@ -21,7 +21,7 @@ class CurrentDateProvider implements CurrentDateProviderInterface
     {
         $this->timezone = $timezone;
     }
-    
+
     /**
      * {@inheritdoc}
      */

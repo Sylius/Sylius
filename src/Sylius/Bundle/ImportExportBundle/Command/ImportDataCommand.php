@@ -17,8 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
-* @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class ImportDataCommand extends ContainerAwareCommand
 {
     protected function configure()

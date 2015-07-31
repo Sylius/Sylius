@@ -19,10 +19,10 @@ use Sylius\Component\ImportExport\JobInterface;
 class ExportJobController extends ResourceController
 {
     /**
-     * Download exported file
+     * Download exported file.
      *
      * @param Request $request
-     * @param string $fileName
+     * @param string  $fileName
      *
      * @return Response
      */
@@ -36,13 +36,12 @@ class ExportJobController extends ResourceController
             200,
             array(
                 'Content-Type'        => $filesystem->getAdapter()->mimeType($fileName),
-                'Content-Disposition' => 'attachment; filename="' . $fileName . '.' . $fileInfo->getExtension()
+                'Content-Disposition' => 'attachment; filename="'.$fileName.'.'.$fileInfo->getExtension(),
             )
         );
     }
 
     public function checkJobStatusAction(JobInterface $job)
     {
-        
     }
 }

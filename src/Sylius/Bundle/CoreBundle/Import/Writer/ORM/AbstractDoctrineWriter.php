@@ -79,16 +79,17 @@ abstract class AbstractDoctrineWriter implements WriterInterface
      *
      * @param array  $result
      * @param Logger $logger
+     *
      * @return mixed
      */
-    protected abstract function process(array $result, Logger $logger);
+    abstract protected function process(array $result, Logger $logger);
 
     /**
      * {@inheritdoc}
      */
     public function finalize(JobInterface $job, array $config)
     {
-        $job->addMetadata('result_code',$this->resultCode);
+        $job->addMetadata('result_code', $this->resultCode);
     }
 
     /**

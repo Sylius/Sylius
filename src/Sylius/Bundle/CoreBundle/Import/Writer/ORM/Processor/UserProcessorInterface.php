@@ -17,7 +17,7 @@ namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM\Processor;
 interface UserProcessorInterface
 {
     /**
-     * @param array $flatArray
+     * @param array  $flatArray
      * @param string $format
      *
      * @return array

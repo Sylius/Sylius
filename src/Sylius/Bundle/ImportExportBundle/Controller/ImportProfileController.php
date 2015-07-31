@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ImportExportBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
 
 /**
