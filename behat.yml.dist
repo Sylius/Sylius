@@ -140,6 +140,7 @@ default:
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
+                - Sylius\Bundle\LocaleBundle\Behat\LocaleContext
             filters:
                 tags: "@localization"
 

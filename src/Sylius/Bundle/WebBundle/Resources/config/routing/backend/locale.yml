@@ -21,20 +21,18 @@ sylius_backend_locale_create:
             template: SyliusWebBundle:Backend/Locale:create.html.twig
             redirect: sylius_backend_locale_index
 
-sylius_backend_locale_update:
-    path: /{id}/edit
-    methods: [GET, PUT]
+sylius_backend_locale_enable:
+    path: /{id}/enable
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.locale:updateAction
+        _controller: sylius.controller.locale:enableAction
         _sylius:
-            template: SyliusWebBundle:Backend/Locale:update.html.twig
             redirect: sylius_backend_locale_index
-
-sylius_backend_locale_delete:
-    path: /{id}/delete
-    methods: [DELETE]
+            
+sylius_backend_locale_disable:
+    path: /{id}/disable
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.locale:deleteAction
+        _controller: sylius.controller.locale:disableAction
         _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_locale_index
