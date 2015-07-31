@@ -19,15 +19,15 @@ Feature: Locale selection
     Scenario: Only enabled locales are visible to the user
         Given I am on the store homepage
          Then I should see 3 available locales
-          And I should browse the store in English
+          And I should browse the store in "English (United States)"
 
     Scenario: Changing the locale in storefront
         Given I am on the store homepage
-         When I change the locale to Polish
-         Then I should browse the store in Polish
+         When I change the locale to "Polish (Poland)"
+         Then I should browse the store in "Polish (Poland)"
 
     Scenario: Switching the locale as a logged in customer
         Given I am logged in user
           And I am on the store homepage
-         When I change the locale to German
-         Then I should browse the store in German
+         When I change the locale to "German (Germany)"
+         Then I should browse the store in "German (Germany)"

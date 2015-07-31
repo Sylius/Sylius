@@ -462,6 +462,8 @@ sylius:
         sku: SKU
         updated_at: Last update
     locale:
+        id: ID
+        name: Name
         code: Code
         create: Create locale
         create_header: Adding new locale

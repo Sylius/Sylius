@@ -467,4 +467,25 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         return $isoName;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException If name is not found in locale code registry.
+     */
+    protected function getLocaleCodeByEnglishLocaleName($name)
+    {
+        $names = Intl::getLocaleBundle()->getLocaleNames('en');
+        $code = array_search(trim($name), $names);
+
+        if (null === $code) {
+            throw new \InvalidArgumentException(sprintf(
+                'Locale "%s" not found! Available names: %s.', $name, join(', ', $names)
+            ));
+        }
+
+        return $code;
+    }
 }

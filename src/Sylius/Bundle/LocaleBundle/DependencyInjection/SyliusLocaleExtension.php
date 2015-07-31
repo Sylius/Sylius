@@ -40,5 +40,10 @@ class SyliusLocaleExtension extends AbstractResourceExtension
 
         $definition = $container->findDefinition('sylius.context.locale');
         $definition->replaceArgument(0, new Reference($config['storage']));
+
+        $container
+            ->getDefinition('sylius.form.type.locale_choice')
+            ->addArgument(new Reference('sylius.repository.locale'))
+        ;
     }
 }

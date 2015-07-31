@@ -430,7 +430,16 @@ class CoreContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $locale = $repository->createNew();
-            $locale->setCode($data['code']);
+
+            if (isset($data['code'])) {
+                $locale->setCode($data['code']);
+            } elseif (isset($data['name'])) {
+                $code = $this->getLocaleCodeByEnglishLocaleName($data['name']);
+
+                $locale->setCode($code);
+            } else {
+                throw new \InvalidArgumentException("Locale definition should have either code or name");
+            }
 
             if (isset($data['enabled'])) {
                 $locale->setEnabled('yes' === $data['enabled']);
