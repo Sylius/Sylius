@@ -373,7 +373,7 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function isDeleted()
     {
-        return (null !== $this->deletedAt) && ((new \DateTime()) >= $this->deletedAt);
+        return (null !== $this->deletedAt) && (new \DateTime() >= $this->deletedAt);
     }
 
     public function __toString()
