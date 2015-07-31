@@ -15,6 +15,7 @@
     <div class="page-header">
             <div class="actions-menu">
                 {{ buttons.generic(path('sylius_backend_import_job_index', { 'profileId': import_profile.id }), 'sylius.import_profile.jobs'|trans, 'align-justify') }}
+                {{ buttons.show(path("sylius_backend_import_profile_import", { "code": import_profile.code }), 'sylius.import_profile.import'|trans) }}
                 {{ buttons.manage(path('sylius_backend_import_profile_index'), 'sylius.import_profile.manage'|trans) }}
                 {{ buttons.edit(path('sylius_backend_import_profile_update', {'id': import_profile.id})) }}
                 {{ buttons.delete(path('sylius_backend_import_profile_delete', {'id': import_profile.id}), null, false, false) }}

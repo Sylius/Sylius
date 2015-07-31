@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\ImportExport\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -34,4 +36,9 @@ interface ProfileInterface
     public function setReaderConfiguration(array $readerConfiguration);
     public function addJob(JobInterface $job);
     public function removeJob(JobInterface $job);
+    public function getJobs();
+    public function setJobs(Collection $jobs);
+    public function clearJobs();
+    public function countJobs();
+    public function hasJob(JobInterface $job);
 }

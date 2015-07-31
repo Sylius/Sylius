@@ -18,6 +18,7 @@ use Sylius\Component\ImportExport\Model\ExportJobInterface;
 use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\ImportExport\Model\ImportJobInterface;
 use Sylius\Component\ImportExport\Model\ImportProfileInterface;
+use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Process\Process;
@@ -42,6 +43,18 @@ class ImportExportContext extends DefaultContext
      * @var string
      */
     private $filePath;
+    /**
+     * @var JobInterface
+     */
+    private $job;
+    /**
+     * @var ProfileInterface
+     */
+    private $profile;
+    /**
+     * @var string
+     */
+    private $type;
 
     /**
      */
@@ -376,6 +389,55 @@ class ImportExportContext extends DefaultContext
             );
 
             throw new \Exception($message);
+        }
+    }
+
+    /**
+     * @Then Export job for export profile :exportProfile should be created
+     */
+    public function exportJobForThisExportProfileShouldBeCreated($exportProfileName)
+    {
+        $this->profile = $this->getRepository('export_profile')->findOneBy(array('name' => $exportProfileName));
+        $this->filePath = $this->profile->getWriterConfiguration()['file'];
+        $this->job = $this->profile->getJobs()->current();
+        $this->type = 'export';
+
+        if (false === $this->job) {
+            throw new \Exception('Export job has not been created');
+        }
+    }
+
+    /**
+     * @Then I should be on its details page
+     */
+    public function iShouldBeOnItsDetailsPage()
+    {
+        if (null === $this->job || null === $this->profile) {
+            throw new \Exception('Job or profile was not set. Make "Export job for export profile " " should be created" before you use this step.');
+        }
+
+        $path = sprintf('sylius_backend_%s_job_show' ,$this->type);
+
+        $this->getSession()->visit($this->generatePageUrl($path,
+            array(
+                'profileId' => $this->profile->getId(),
+                'id' => $this->job->getId(),
+            )
+        ));
+    }
+
+    /**
+     * @Then Import job for import profile :importProfileName should be created
+     */
+    public function importJobForImportProfileShouldBeCreated($importProfileName)
+    {
+        $this->profile = $this->getRepository('import_profile')->findOneBy(array('name' => $importProfileName));
+        $this->filePath = $this->profile->getReaderConfiguration()['file'];
+        $this->job = $this->profile->getJobs()->current();
+        $this->type = 'import';
+
+        if (false === $this->job) {
+            throw new \Exception('Import job has not been created');
         }
     }
 

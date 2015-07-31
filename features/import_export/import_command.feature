@@ -20,7 +20,7 @@ Feature: Import command
     @scenarioWithFile
     Scenario: Running import command
          When The file at path "/tmp/user.csv" exists
-          And I run "sylius:import user_import" command in less then "300" seconds
+          And I run "sylius:import user_import" command in less then "30" seconds
          Then the command should finish successfully
           And I should see "Command executed successfully!" in terminal
           And I should have 4 users in a database

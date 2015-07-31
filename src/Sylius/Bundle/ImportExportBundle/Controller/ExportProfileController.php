@@ -14,14 +14,39 @@ namespace Sylius\Bundle\ImportExportBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Process\Process;
 
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class ExportProfileController extends ResourceController
 {
-    public function exportAction(Request $request, $code)
+    /**
+     * @param string $code
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function exportAction($code)
     {
-//        $process = new Proces($this->container->getParameter('kernel.root_dir').'/console sylius:export test');
-//        $process->run();
+        $processPath = sprintf('%s/console sylius:export %s --env %s',
+            $this->getParameter('kernel.root_dir'),
+            $code,
+            $this->getParameter('kernel.environment'));
 
-        return $this->redirect($this->generateUrl('sylius_backend_export_job_index', array('profileId' => $this->container->get('sylius.repository.export_profile')->findOneByCode($code)->getId())));
+        $process = new Process($processPath);
+        $process->mustRun();
+
+        $exportProfile = $this->container->get('sylius.repository.export_profile')->findOneByCode($code);
+        $exportJob = $exportProfile->getJobs()->last();
+
+        return $this->redirect(
+            $this->generateUrl(
+                'sylius_backend_export_job_show',
+                array(
+                    'profileId' => $exportProfile->getId(),
+                    'id' => $exportJob->getId(),
+                )
+            )
+        );
     }
 }

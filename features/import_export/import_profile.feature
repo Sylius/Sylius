@@ -6,15 +6,15 @@ Feature: Import profiles
 
     Background:
         Given there are following import profiles configured:
-            | name                 | description | code           | reader        | reader configuration                              | writer      | writer configuration |
-            | UsersImportProfile   | Lorem ipsum | user_import    | csv_reader    | Delimiter:;,Enclosure:",File path:\tmp\output.csv | user_orm    | Rows number:10       |
+            | name                 | description | code           | reader        | reader configuration                                | writer      | writer configuration    |
+            | UsersImportProfile   | Lorem ipsum | user_import    | csv_reader    | Delimiter:;,Enclosure:",File:/tmp/user.csv,Batch:15 | user_orm    | date_format:Y-m-d H:i:s |
         And there is default currency configured
         And there is default channel configured
         And I am logged in as administrator
 
     Scenario: Seeing created import profile at the list
         Given I am on the dashboard page
-         When I follow "Import"
+         When I follow "Import Profile"
          Then I should see 1 import profiles in the list
 
     Scenario: Adding new import profile with default options
@@ -116,3 +116,17 @@ Feature: Import profiles
          Then I should be on the import profile index page
           And I should see "Import profile has been successfully deleted."
           And I should see "There are no profiles to display."
+
+    @scenarioWithFile
+    Scenario: Executing import from browser
+        Given I am on the page of import profile "UsersImportProfile"
+          And there are following users put into a file "/tmp/user.csv":
+            | email          | enabled  | created_at          |
+            | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
+            | martha@foo.com | yes      | 2010-01-02 13:00:00 |
+            | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
+         When I follow "Import"
+         Then Import job for import profile "UsersImportProfile" should be created
+          And I should be on its details page
+          And I should see "completed"
+          And I should have 4 users in a database

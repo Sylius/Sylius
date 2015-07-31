@@ -274,7 +274,7 @@ abstract class Profile implements ProfileInterface
         }
 
         foreach ($this->jobs as $existingJob) {
-            if ($job->equals($existingJob)) {
+            if ($job === $existingJob) {
                 $existingJob->merge($job, false);
 
                 return $this;
@@ -293,7 +293,6 @@ abstract class Profile implements ProfileInterface
     public function removeJob(JobInterface $job)
     {
         if ($this->hasJob($job)) {
-            $job->setProfile(null);
             $this->jobs->removeElement($job);
         }
 

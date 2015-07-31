@@ -15,7 +15,8 @@ sylius:
                 dashboard: Dashboard
                 currencies: Currencies
                 dashboard: Dashboard
-                export: Export
+                export: Export Profiles
+                import: Import Profiles
                 general_settings: General settings
                 groups: Groups
                 homepage: Your store
@@ -60,11 +61,11 @@ sylius:
                 customer: Customers
                 currencies: Currencies
                 dashboard: Dashboard
-                export: Export
+                export: Export Profiles
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend
-                import: Import
+                import: Import Profiles
                 import_export: Import/Export
                 locales: Locales
                 new_order: Add new order

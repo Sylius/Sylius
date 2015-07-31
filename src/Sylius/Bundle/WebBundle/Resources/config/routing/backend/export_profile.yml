@@ -1,6 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_backend_export_job:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/export_job.yml
+    prefix: /jobs
+
 sylius_backend_export_profile_index:
     path: /
     methods: [GET]

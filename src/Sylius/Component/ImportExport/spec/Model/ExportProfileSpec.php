@@ -11,7 +11,10 @@
 
 namespace spec\Sylius\Component\ImportExport\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\ImportExport\Model\ExportJobInterface;
+use Sylius\Component\ImportExport\Model\JobInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -81,5 +84,37 @@ class ExportProfileSpec extends ObjectBehavior
         $readerConfiguration = array('config1' => 'First field of configuration', 'config2' => 'Second field of configuration');
         $this->setReaderConfiguration($readerConfiguration);
         $this->getReaderConfiguration()->shouldReturn($readerConfiguration);
+    }
+
+    public function it_has_jobs(Collection $jobsCollection)
+    {
+        $this->setJobs($jobsCollection);
+        $this->getJobs()->shouldReturn($jobsCollection);
+    }
+
+    public function it_adds_job(ExportJobInterface $exportJob)
+    {
+        $this->addJob($exportJob);
+        $this->shouldHaveJob($exportJob);
+    }
+
+    public function it_counts_job(ExportJobInterface $exportJob)
+    {
+        $this->addJob($exportJob);
+        $this->countJobs()->shouldReturn(1);
+    }
+
+    public function it_clears_job(ExportJobInterface $exportJob)
+    {
+        $this->addJob($exportJob);
+        $this->clearJobs();
+        $this->countJobs()->shouldReturn(0);
+    }
+
+    public function it_removes_job(ExportJobInterface $exportJob)
+    {
+        $this->addJob($exportJob);
+        $this->removeJob($exportJob);
+        $this->shouldNotHaveJob($exportJob);
     }
 }

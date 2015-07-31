@@ -13,10 +13,39 @@ namespace Sylius\Bundle\ImportExportBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Process\Process;
 
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class ImportProfileController extends ResourceController
 {
-    public function importAction(Request $request)
+    /**
+     * @param string $code
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function importAction($code)
     {
+        $processPath = sprintf('%s/console sylius:import %s --env %s',
+            $this->getParameter('kernel.root_dir'),
+            $code,
+            $this->getParameter('kernel.environment'));
+
+        $process = new Process($processPath);
+        $process->mustRun();
+
+        $importProfile = $this->container->get('sylius.repository.import_profile')->findOneByCode($code);
+        $importJob = $importProfile->getJobs()->last();
+
+        return $this->redirect(
+            $this->generateUrl(
+                'sylius_backend_import_job_show',
+                array(
+                    'profileId' => $importProfile->getId(),
+                    'id' => $importJob->getId(),
+                )
+            )
+        );
     }
 }

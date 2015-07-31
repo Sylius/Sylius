@@ -19,7 +19,7 @@ Feature: Export profiles
 
     Scenario: Seeing created export profile at the list
         Given I am on the dashboard page
-         When I follow "Export"
+         When I follow "Export Profile"
          Then I should see 1 export profile in the list
 
     Scenario: Adding new export profile with default options
@@ -132,3 +132,13 @@ Feature: Export profiles
          Then I should be on the export profile index page
           And I should see "Export profile has been successfully deleted."
           And I should see "There are no profiles to display. "
+
+    @scenarioWithFile
+    Scenario: Executing export from browser
+        Given I am on the page of export profile "UsersExportProfile"
+         When I follow "Export"
+         Then Export job for export profile "UsersExportProfile" should be created
+          And I should be on its details page
+          And I should see "completed"
+          And the file data should be valid
+          And this file should contains 4 rows
