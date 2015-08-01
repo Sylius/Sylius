@@ -34,7 +34,11 @@ class ExportProfileController extends ResourceController
         $process = new Process($processPath);
         $process->mustRun();
 
-        $exportProfile = $this->container->get('sylius.repository.export_profile')->findOneByCode($code);
+        $exportProfile = $this->container->get('sylius.repository.export_profile')->findOneBy(
+            array(
+                'code' => $code,
+            )
+        );
         $exportJob = $exportProfile->getJobs()->last();
 
         return $this->redirect(

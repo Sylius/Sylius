@@ -25,9 +25,8 @@ use Symfony\Component\Process\Process;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 /**
- * ImportExportContext for ImportExport scenarios.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ImportExportContext extends DefaultContext
 {
@@ -35,28 +34,34 @@ class ImportExportContext extends DefaultContext
      * @var Process
      */
     private $process;
+
     /**
      * @var string
      */
     private $processOutput;
+
     /**
      * @var string
      */
     private $filePath;
+
     /**
      * @var JobInterface
      */
     private $job;
+
     /**
      * @var ProfileInterface
      */
     private $profile;
+
     /**
      * @var string
      */
     private $type;
 
     /**
+     * @param string|null $applicationName
      */
     public function __construct($applicationName = null)
     {
@@ -64,7 +69,9 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @AfterScenario @scenarioWithFile
+     * @AfterScenario @using_file
+     *
+     * @param AfterScenarioScope $scope
      */
     public function unlinkFile(AfterScenarioScope $scope)
     {
@@ -75,7 +82,6 @@ class ImportExportContext extends DefaultContext
 
     /**
      * @Given there are following export profiles configured:
-     * @And there are following export profiles configured:
      */
     public function thereAreExportProfiles(TableNode $table)
     {
@@ -100,12 +106,10 @@ class ImportExportContext extends DefaultContext
 
     /**
      * @Given there are following import profiles configured:
-     * @And there are following import profiles configured:
      */
     public function thereAreImportProfiles(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('import_profile');
 
         foreach ($table->getHash() as $data) {
             $this->thereIsImportProfile(
@@ -124,8 +128,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Given there are following export jobs set:
-     * @And there are following export jobs set:
+     * @Given there are following export jobs:
      */
     public function thereAreExportJobs(TableNode $table)
     {
@@ -139,31 +142,23 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Given I am on the export jobs index page for profile with code :code
      * @Then I should be on the export jobs index page for profile with code :code
      */
     public function iShouldBeOnTheExportJobsIndexPageForProfileWithCode($code)
     {
         $exportProfile = $this->findOneBy('export_profile', array('code' => $code));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_export_job_index', array('profileId' => $exportProfile->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_export_job_index', array('profileId' => $exportProfile->getId())));
     }
 
     /**
-     * @When I press :button near :number export job
-     * @When I click :button near :number export job
+     * @Given I am on the export jobs index page for profile with code :code
      */
-    public function iPressNearExportJob($button, $number)
+    public function iAmOnTheExportJobsIndexPageForProfileWithCode($code)
     {
-        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:nth-child(%s)', $number));
+        $exportProfile = $this->findOneBy('export_profile', array('code' => $code));
 
-        $locator = sprintf('button:contains("%s")', $button);
-
-        if ($tr->has('css', $locator)) {
-            $tr->find('css', $locator)->press();
-        } else {
-            $tr->clickLink($button);
-        }
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_export_job_index', array('profileId' => $exportProfile->getId())));
     }
 
     /**
@@ -181,7 +176,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then I should find :filePath file
+     * @Then the file :filePath should exist
      * @When The file at path :filePath exists
      */
     public function iShouldFindFile($filePath)
@@ -189,15 +184,14 @@ class ImportExportContext extends DefaultContext
         $this->filePath = $filePath;
 
         if (!file_exists($filePath)) {
-            $errorMessage = sprintf('File at path %s does not exist', $filePath);
-            throw new \Exception($errorMessage);
+            throw new \Exception(sprintf('File at path %s does not exist', $filePath));
         }
     }
 
     /**
-     * @Then this file should contains :rowsNumber rows
+     * @Then this file should contain :rowsNumber rows
      */
-    public function andThisFileShouldContainsRows($rowsNumber)
+    public function thisFileShouldContainsRows($rowsNumber)
     {
         $lineCount = count(file($this->filePath)) - 1;
 
@@ -219,7 +213,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then I should see :message error in terminal
+     * @Then I should see :message error in a terminal
      */
     public function iShouldSeeErrorInTerminal($message)
     {
@@ -227,7 +221,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then I should see :message in terminal
+     * @Then I should see :message in a terminal
      */
     public function iShouldSeeInTerminal($message)
     {
@@ -245,7 +239,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then I should find :numberOfJobs :jobType job for this :profileType profile in database
+     * @Then I should find :numberOfJobs :jobStatus job for this :profileType profile in database
      */
     public function iShouldFindJobForThisProfileInDatabase($numberOfJobs, $jobStatus, $profileType)
     {
@@ -264,7 +258,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then I should see  :message in error message
+     * @Then I should see :message in error message
      */
     public function iShouldFindInErrorMessage($message)
     {
@@ -279,7 +273,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Given there are following import jobs set:
+     * @Given there are following import jobs:
      */
     public function thereAreFollowingImportJobsSet(TableNode $table)
     {
@@ -294,7 +288,6 @@ class ImportExportContext extends DefaultContext
 
     /**
      * @Given I am on the import jobs index page for profile with code :code
-     * @And I am on the import jobs index page for profile with code :code
      */
     public function iAmOnTheImportJobsIndexPageForProfileWithCode($code)
     {
@@ -304,36 +297,17 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Given I press :button near :value import job
-     * @Given I click :button near :value import job
-     */
-    public function iPressNearImportJob($button, $value)
-    {
-        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:nth-child(%s)', $value));
-
-        $locator = sprintf('button:contains("%s")', $button);
-
-        if ($tr->has('css', $locator)) {
-            $tr->find('css', $locator)->press();
-
-            return;
-        }
-
-        $tr->clickLink($button);
-    }
-
-    /**
      * @Then I should be on the import jobs index page for profile with code :code
      */
     public function iShouldBeOnTheImportJobsIndexPageForProfileWithCode($code)
     {
         $importProfile = $this->findOneBy('import_profile', array('code' => $code));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_import_job_index', array('profileId' => $importProfile->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_import_job_index', array('profileId' => $importProfile->getId())));
     }
 
     /**
-     * @Given there are following users put into a file :path:
+     * @Given there are following users in a file :path:
      */
     public function thereAreFollowingUsersPutIntoAFile($path, TableNode $table)
     {
@@ -358,7 +332,7 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @Then the file data should be valid
+     * @Then this file data should be valid
      */
     public function theFileDataShouldBeValid()
     {

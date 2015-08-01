@@ -19,8 +19,7 @@
     <tbody>
     {% for export_job in export_jobs %}
         <tr id="{{ export_job.id }}">
-            <td>{{ export_job.id }}</td>
-            <td>{{ export_job.profile.id }}</td>
+            <td>{{ export_job.profile.code }}</td>
             <td>{{ export_job.status }}</td>
             <td>{{ export_job.startTime|date('d/m/Y H:i:s') }}</td>
             <td>{{ export_job.endTime|date('d/m/Y H:i:s') }}</td>

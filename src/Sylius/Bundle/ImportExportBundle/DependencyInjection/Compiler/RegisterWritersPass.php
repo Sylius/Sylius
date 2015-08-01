@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -33,33 +34,49 @@ class RegisterWritersPass implements CompilerPassInterface
         }
 
         $exporterRegistry = $container->getDefinition('sylius.registry.export.writer');
+        $taggedExportWriters = $container->findTaggedServiceIds('sylius.export.writer');
+
+        $container->setParameter('sylius.export.writers', $this->registerWriters($taggedExportWriters, $exporterRegistry));
+
         $importerRegistry = $container->getDefinition('sylius.registry.import.writer');
+        $taggedImportWriters = $container->findTaggedServiceIds('sylius.import.writer');
 
-        $exportWriter = array();
-        $importWriter = array();
+        $container->setParameter('sylius.import.writers', $this->registerWriters($taggedImportWriters, $importerRegistry));
+    }
 
-        foreach ($container->findTaggedServiceIds('sylius.export.writer') as $id => $attributes) {
-            if (!isset($attributes[0]['writer']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.');
-            }
+    /**
+     * @param array      $taggedWriters
+     * @param Definition $registry
+     *
+     * @return array
+     */
+    private function registerWriters(array $taggedWriters, $registry)
+    {
+        $writers = array();
 
-            $name = $attributes[0]['writer'];
-            $exportWriter[$name] = $attributes[0]['label'];
-
-            $exporterRegistry->addMethodCall('register', array($name, new Reference($id)));
-        }
-        $container->setParameter('sylius.export.writers', $exportWriter);
-
-        foreach ($container->findTaggedServiceIds('sylius.import.writer') as $id => $attributes) {
-            if (!isset($attributes[0]['writer']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.');
-            }
+        foreach ($taggedWriters as $id => $attributes) {
+            $this->checkAttributeCorrectness($attributes);
 
             $name = $attributes[0]['writer'];
-            $importWriter[$name] = $attributes[0]['label'];
+            $writers[$name] = $attributes[0]['label'];
 
-            $importerRegistry->addMethodCall('register', array($name, new Reference($id)));
+            $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-        $container->setParameter('sylius.import.writers', $importWriter);
+
+        return $writers;
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return null
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function checkAttributeCorrectness(array $attributes)
+    {
+        if (!isset($attributes[0]['writer']) || !isset($attributes[0]['label'])) {
+            throw new \InvalidArgumentException('Tagged writers needs to have `writer` and `label` attributes.');
+        }
     }
 }

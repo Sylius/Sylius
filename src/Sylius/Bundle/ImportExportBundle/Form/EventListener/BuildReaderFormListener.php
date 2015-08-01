@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ImportExportBundle\Form\EventListener;
 
 use Sylius\Component\ImportExport\Model\ProfileInterface;
+use Sylius\Component\ImportExport\Reader\ReaderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -21,9 +22,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * This listener adds configuration form to an export profile,
- * if selected profile requires one.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -40,8 +38,6 @@ class BuildReaderFormListener implements EventSubscriberInterface
     private $factory;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $readerRegistry
      * @param FormFactoryInterface     $factory
      */
@@ -52,7 +48,7 @@ class BuildReaderFormListener implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
@@ -64,6 +60,8 @@ class BuildReaderFormListener implements EventSubscriberInterface
 
     /**
      * @param FormEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
     public function preSetData(FormEvent $event)
     {
@@ -101,7 +99,7 @@ class BuildReaderFormListener implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $type, array $configuration = array())
     {
-        $reader = $this->readerRegistry->get($type);
+        $reader = $this->getReader($type);
         $formType = sprintf('sylius_%s_reader', $reader->getType());
         try {
             $configurationField = $this->factory->createNamed(
@@ -114,5 +112,21 @@ class BuildReaderFormListener implements EventSubscriberInterface
             return;
         }
         $form->add($configurationField);
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return ReaderInterface
+     */
+    protected function getReader($type)
+    {
+        if (null === $type) {
+            $registry = $this->readerRegistry->all();
+
+            return reset($registry);
+        }
+
+        return $this->readerRegistry->get($type);
     }
 }

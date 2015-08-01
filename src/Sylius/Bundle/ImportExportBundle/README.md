@@ -1,4 +1,4 @@
-SyliusImportExportBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusImportExportBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShippingBundle)
+SyliusImportExportBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusImportExportBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusImportExportBundle)
 ====================
 
 Import/Export component for [**Symfony2**](http://symfony.com) ecommerce applications.
@@ -29,17 +29,6 @@ Contributing
 
 All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Mailing lists
--------------
-
-### Users
-
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
-
 Sylius twitter account
 ----------------------
 
@@ -68,7 +57,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusShippingBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusImportExportBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

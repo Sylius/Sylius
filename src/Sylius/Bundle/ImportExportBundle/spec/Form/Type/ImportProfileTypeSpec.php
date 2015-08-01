@@ -101,7 +101,7 @@ class ImportProfileTypeSpec extends ObjectBehavior
         $form->getConfig()->willReturn($config);
 
         $formUser->createView($view)->shouldBeCalled();
-       // $formCsv->createView($view)->shouldBeCalled();
+        $formCsv->createView($view)->shouldBeCalled();
 
        $this->buildView($view, $form, array());
     }

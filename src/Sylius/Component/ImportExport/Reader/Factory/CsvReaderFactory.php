@@ -13,6 +13,9 @@ namespace Sylius\Component\ImportExport\Reader\Factory;
 
 use EasyCSV\Reader;
 
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class CsvReaderFactory implements CsvReaderFactoryInterface
 {
     /**
@@ -20,10 +23,29 @@ class CsvReaderFactory implements CsvReaderFactoryInterface
      */
     public function create(array $configuration)
     {
+        $this->validateConfiguration($configuration);
+
         $csvReader = new Reader($configuration['file'], 'r', $configuration["headers"]);
         $csvReader->setDelimiter($configuration['delimiter']);
         $csvReader->setEnclosure($configuration['enclosure']);
 
         return $csvReader;
+    }
+
+    /**
+     * @param array $configuration
+     *
+     * @throw \InvalidArgumentException
+     */
+    private function validateConfiguration(array $configuration)
+    {
+        if (
+            !isset($configuration['file']) ||
+            !isset($configuration['headers']) ||
+            !isset($configuration['delimiter']) ||
+            !isset($configuration['enclosure'])
+        ) {
+            throw new \InvalidArgumentException('The fields: file, headers, delimiter, enclosure has to be set');
+        }
     }
 }

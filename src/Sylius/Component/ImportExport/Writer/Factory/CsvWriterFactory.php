@@ -23,10 +23,28 @@ class CsvWriterFactory implements CsvWriterFactoryInterface
      */
     public function create(array $configuration)
     {
+        $this->validateConfiguration($configuration);
+
         $csvWriter = new Writer($configuration['file'], 'w');
         $csvWriter->setDelimiter($configuration['delimiter']);
         $csvWriter->setEnclosure($configuration['enclosure']);
 
         return $csvWriter;
+    }
+
+    /**
+     * @param array $configuration
+     *
+     * @throw \InvalidArgumentException
+     */
+    private function validateConfiguration(array $configuration)
+    {
+        if (
+            !isset($configuration['file']) ||
+            !isset($configuration['delimiter']) ||
+            !isset($configuration['enclosure'])
+        ) {
+            throw new \InvalidArgumentException('The fields: file, delimiter, enclosure has to be set');
+        }
     }
 }

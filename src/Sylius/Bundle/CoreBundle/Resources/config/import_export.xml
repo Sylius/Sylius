@@ -17,28 +17,25 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd"> 
     <parameters>    
         <!-- Readers -->
-        <parameter key="sylius.export.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
+        <parameter key="sylius.export.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\ImportExport\Reader\ORM\UserReader</parameter>
 
-        <!-- Readers processors -->
-        <parameter key="sylius.export.doctrine_orm.user_processor.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessor</parameter>
+        <!-- Processors -->
+        <parameter key="sylius.import_export.user_processor.class">Sylius\Bundle\CoreBundle\ImportExport\Processor\UserProcessor</parameter>
 
         <!-- Readers form type-->
-        <parameter key="sylius.form.type.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\Form\Type\Export\Reader\UserReaderType</parameter>
+        <parameter key="sylius.form.type.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\Form\Type\ImportExport\Reader\UserReaderType</parameter>
 
         <!-- Writers -->
-        <parameter key="sylius.import.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\UserWriter</parameter>
-
-        <!-- Writers processors -->
-        <parameter key="sylius.import.doctrine_orm.user_processor.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\Processor\UserProcessor</parameter>
+        <parameter key="sylius.import.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\ImportExport\Writer\ORM\UserWriter</parameter>
 
         <!-- Writer form types-->
-        <parameter key="sylius.form.type.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\Form\Type\Import\Writer\UserWriterType</parameter>
+        <parameter key="sylius.form.type.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\Form\Type\ImportExport\Writer\UserWriterType</parameter>
     </parameters>
 
     <services>
         <!-- Export reader -->
         <service id="sylius.export.doctrine_orm.user.reader" class="%sylius.export.doctrine_orm.user.reader.class%">
-            <argument type="service" id="sylius.export.doctrine_orm.user_processor" />
+            <argument type="service" id="sylius.import_export.user_processor" />
             <argument type="service" id="sylius.repository.user" />
             <tag name="sylius.export.reader" reader="user_orm" label="User doctrine reader" />
         </service>
@@ -50,14 +47,14 @@
             <tag name="form.type" alias="sylius_user_orm_reader" />
         </service>
 
-        <!-- Readers processors -->
-        <service id="sylius.export.doctrine_orm.user_processor" class="%sylius.export.doctrine_orm.user_processor.class%">
+        <!-- Processors -->
+        <service id="sylius.import_export.user_processor" class="%sylius.import_export.user_processor.class%">
             <argument type="service" id="sylius.import_export.date_converter" />
         </service>
 
         <!-- Import writer -->
         <service id="sylius.import.doctrine_orm.user.writer" class="%sylius.import.doctrine_orm.user.writer.class%">
-            <argument type="service" id="sylius.import.doctrine_orm.user_processor" />
+            <argument type="service" id="sylius.import_export.user_processor" />
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
@@ -69,11 +66,6 @@
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>
             <tag name="form.type" alias="sylius_user_orm_writer" />
-        </service>
-
-        <!-- Writer processors -->
-        <service id="sylius.import.doctrine_orm.user_processor" class="%sylius.import.doctrine_orm.user_processor.class%">
-            <argument type="service" id="sylius.import_export.date_converter" />
         </service>
 
     </services>

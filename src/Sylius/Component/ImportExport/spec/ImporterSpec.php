@@ -84,7 +84,6 @@ class ImporterSpec extends ObjectBehavior
         $importJob->getStartTime()->willReturn($dateTime1);
         $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $importJob->setProfile($importProfile)->shouldBeCalled();
-        $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
         $importJob->setEndTime($dateTime2)->shouldBeCalled();
         $importJob->getEndTime()->willReturn($dateTime2);
 
@@ -137,7 +136,6 @@ class ImporterSpec extends ObjectBehavior
          $importJob->getStartTime()->willReturn($dateTime1);
          $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
          $importJob->setProfile($importProfile)->shouldBeCalled();
-         $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
          $importJob->setEndTime($dateTime2)->shouldBeCalled();
          $importJob->getEndTime()->willReturn($dateTime2);
 
@@ -181,7 +179,6 @@ class ImporterSpec extends ObjectBehavior
         $importJob->getStartTime()->willReturn($dateTime1);
         $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $importJob->setProfile($importProfile)->shouldBeCalled();
-        $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
         $importJob->setEndTime($dateTime2)->shouldBeCalled();
         $importJob->getEndTime()->willReturn($dateTime2);
 

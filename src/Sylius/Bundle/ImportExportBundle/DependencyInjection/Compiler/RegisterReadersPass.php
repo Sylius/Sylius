@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ImportExportBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -33,33 +34,49 @@ class RegisterReadersPass implements CompilerPassInterface
         }
 
         $exporterRegistry = $container->getDefinition('sylius.registry.export.reader');
+        $taggedExportReaders = $container->findTaggedServiceIds('sylius.export.reader');
+
+        $container->setParameter('sylius.export.readers', $this->registerReaders($taggedExportReaders, $exporterRegistry));
+
         $importerRegistry = $container->getDefinition('sylius.registry.import.reader');
+        $taggedImportReaders = $container->findTaggedServiceIds('sylius.import.reader');
 
-        $exportReaders = array();
-        $importReaders = array();
+        $container->setParameter('sylius.import.readers', $this->registerReaders($taggedImportReaders, $importerRegistry));
+    }
 
-        foreach ($container->findTaggedServiceIds('sylius.export.reader') as $id => $attributes) {
-            if (!isset($attributes[0]['reader']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged readers needs to have `reader` and `label` attributes.');
-            }
+    /**
+     * @param array      $container
+     * @param Definition $registry
+     *
+     * @return array
+     */
+    private function registerReaders(array $taggedReaders, $registry)
+    {
+        $readers = array();
 
-            $name = $attributes[0]['reader'];
-            $exportReaders[$name] = $attributes[0]['label'];
-
-            $exporterRegistry->addMethodCall('register', array($name, new Reference($id)));
-        }
-        $container->setParameter('sylius.export.readers', $exportReaders);
-
-        foreach ($container->findTaggedServiceIds('sylius.import.reader') as $id => $attributes) {
-            if (!isset($attributes[0]['reader']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged readers needs to have `reader` and `label` attributes.');
-            }
+        foreach ($taggedReaders as $id => $attributes) {
+            $this->checkAttributeCorrectness($attributes);
 
             $name = $attributes[0]['reader'];
-            $importReaders[$name] = $attributes[0]['label'];
+            $readers[$name] = $attributes[0]['label'];
 
-            $importerRegistry->addMethodCall('register', array($name, new Reference($id)));
+            $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-        $container->setParameter('sylius.import.readers', $importReaders);
+
+        return $readers;
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return null
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function checkAttributeCorrectness(array $attributes)
+    {
+        if (!isset($attributes[0]['reader']) || !isset($attributes[0]['label'])) {
+            throw new \InvalidArgumentException('Tagged readers needs to have `reader` and `label` attributes.');
+        }
     }
 }

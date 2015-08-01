@@ -33,10 +33,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ 'sylius.export_profile.id'|trans }}</td>
-                        <td>{{ export_profile.id }}</td>
-                    </tr>
-                    <tr>
                         <td>{{ 'sylius.export_profile.name'|trans }}</td>
                         <td>{{ export_profile.name }}</td>
                     </tr>
@@ -84,15 +80,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-    // <script type="text/javascript">
-    //     $(document).ready(function(){
-    //         $("#export").on({'click' : function(){
-    //             $.ajax({
-    //                 url: '{{ path("sylius_backend_export_profile_export", { "code": export_profile.code }) }}',
-    //                 type: 'POST'
-    //             });
-    //             console.log("heere");
-    //         }}); 
-    //     });
-    // </script>
 {% endblock %}

@@ -20,8 +20,6 @@ use Sylius\Component\ImportExport\Model\ImportProfileInterface;
 interface ImporterInterface
 {
     /**
-     * Imports data base on a given import profile.
-     *
      * @param ImportProfileInterface $importer
      * @param LoggerInterface        $logger
      */

@@ -42,6 +42,7 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
         ReaderInterface $reader)
     {
         $readerRegistry->get('test_reader')->willReturn($reader);
+        $readerRegistry->all()->willReturn(array($reader));
         $reader->getType()->willReturn('test_type');
         $this->beConstructedWith($readerRegistry, $factory);
     }
@@ -87,6 +88,28 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
 
         $form->add($field)->shouldBeCalled();
         $this->preBind($event);
+    }
+
+    function it_adds_configuration_fields_in_pre_set_data_without_reader_configured(
+        $factory,
+        ExportProfileInterface $exportProfiler,
+        FormEvent $event,
+        Form $form,
+        Form $field)
+    {
+        $exportProfiler->getReader()->willReturn();
+        $exportProfiler->getReaderConfiguration()->willReturn(array());
+
+        $event->getData()->willReturn($exportProfiler);
+        $event->getForm()->willReturn($form);
+
+        $factory->createNamed(
+            'readerConfiguration',
+            'sylius_test_type_reader',
+            Argument::cetera()
+            )->willReturn($field);
+        $form->add($field)->shouldBeCalled();
+        $this->preSetData($event);
     }
 
     function it_does_not_allow_to_configure_fields_in_pre_set_data_for_class_which_does_not_implement_profile_interface(FormEvent $event)

@@ -20,8 +20,6 @@ use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 interface ExporterInterface
 {
     /**
-     * Export data based on given export profile.
-     *
      * @param ExportProfileInterface $exportProfile
      * @param LoggerInterface        $logger
      */

@@ -1,8 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Component\ImportExport\Logger\Factory;
 
-use Sylius\Component\ImportExport\Logger\Model\StreamHandler;
+use Monolog\Handler\StreamHandler;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -10,8 +19,6 @@ use Sylius\Component\ImportExport\Logger\Model\StreamHandler;
 interface StreamHandlerFactoryInterface
 {
     /**
-     * Creates new StreamHandler object.
-     *
      * @param string $profileName
      *
      * @return StreamHandler

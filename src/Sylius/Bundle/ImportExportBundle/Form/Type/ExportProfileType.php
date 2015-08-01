@@ -20,35 +20,33 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Export profile form type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
 class ExportProfileType extends AbstractResourceType
 {
     /**
-     * Reader registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $readerRegistry;
 
     /**
-     * Writer registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $writerRegistry;
 
     /**
-     * Constructor.
-     *
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
      * @param ServiceRegistryInterface $readerRegistry
      * @param ServiceRegistryInterface $writerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        ServiceRegistryInterface $readerRegistry,
+        ServiceRegistryInterface $writerRegistry
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->readerRegistry = $readerRegistry;
@@ -83,38 +81,10 @@ class ExportProfileType extends AbstractResourceType
             ))
         ;
 
-        $prototypes = array(
-            'readers' => array(),
-            'writers' => array(),
+        $prototypes = array_merge(
+            $this->setPrototypesForType('reader', $builder, $this->readerRegistry->all()),
+            $this->setPrototypesForType('writer', $builder, $this->writerRegistry->all())
         );
-
-        foreach ($this->readerRegistry->all() as $type => $reader) {
-            $formType = sprintf('sylius_%s_reader', $reader->getType());
-
-            if (!$formType) {
-                continue;
-            }
-
-            try {
-                $prototypes['readers'][$type] = $builder->create('readerConfiguration', $formType)->getForm();
-            } catch (\InvalidArgumentException $e) {
-                continue;
-            }
-        }
-
-        foreach ($this->writerRegistry->all() as $type => $writer) {
-            $formType = sprintf('sylius_%s_writer', $writer->getType());
-
-            if (!$formType) {
-                continue;
-            }
-
-            try {
-                $prototypes['writers'][$type] = $builder->create('writerConfiguration', $formType)->getForm();
-            } catch (\InvalidArgumentException $e) {
-                continue;
-            }
-        }
 
         $builder->setAttribute('prototypes', $prototypes);
     }
@@ -139,5 +109,33 @@ class ExportProfileType extends AbstractResourceType
     public function getName()
     {
         return 'sylius_export_profile';
+    }
+
+    /**
+     * @param string               $prototypesType
+     * @param FormBuilderInterface $builder
+     * @param array                $registeredTypes
+     *
+     * @return array
+     */
+    private function setPrototypesForType($prototypesType, FormBuilderInterface $builder, array $registeredTypes)
+    {
+        $prototype = array();
+
+        foreach ($registeredTypes as $type => $reader) {
+            $formType = sprintf('sylius_%s_%s', $reader->getType(), $prototypesType);
+
+            if (!$formType) {
+                continue;
+            }
+
+            try {
+                $prototype[$prototypesType.'s'][$type] = $builder->create($prototypesType.'Configuration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
+
+        return $prototype;
     }
 }

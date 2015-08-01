@@ -21,6 +21,9 @@ use Symfony\Component\Console\Input\InputArgument;
  */
 class ExportDataCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -34,6 +37,9 @@ class ExportDataCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->findOneBy(

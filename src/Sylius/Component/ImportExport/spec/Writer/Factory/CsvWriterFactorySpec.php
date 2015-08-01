@@ -27,4 +27,23 @@ class CsvWriterFactorySpec extends ObjectBehavior
     {
         $this->shouldImplement('Sylius\Component\ImportExport\Writer\Factory\CsvWriterFactoryInterface');
     }
+
+    function it_throws_invalid_argument_exception_if_any_argument_is_not_set()
+    {
+        $this->shouldThrow(new \InvalidArgumentException('The fields: file, delimiter, enclosure has to be set'))->duringCreate(array(
+            'headers' => 'headers',
+            'delimiter' => 'delimiter',
+            'enclosure' => 'enclosure',
+        ));
+        $this->shouldThrow(new \InvalidArgumentException('The fields: file, delimiter, enclosure has to be set'))->duringCreate(array(
+            'file' => 'file',
+            'headers' => 'headers',
+            'enclosure' => 'enclosure',
+        ));
+        $this->shouldThrow(new \InvalidArgumentException('The fields: file, delimiter, enclosure has to be set'))->duringCreate(array(
+            'file' => 'file',
+            'headers' => 'headers',
+            'delimiter' => 'delimiter',
+        ));
+    }
 }

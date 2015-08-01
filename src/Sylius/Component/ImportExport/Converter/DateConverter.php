@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\ImportExport\Converter;
 
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class DateConverter implements DateConverterInterface
 {
     /**
@@ -22,13 +25,15 @@ class DateConverter implements DateConverterInterface
     }
 
     /**
-     * @param string $stringDate
-     * @param string $format
-     *
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function toDateTime($stringDate, $format)
     {
-        return \DateTime::createFromFormat($format, $stringDate);
+        ;
+        if (false === ($date = \DateTime::createFromFormat($format, $stringDate))) {
+            throw new \InvalidArgumentException('Given format is invalid.');
+        }
+
+        return $date;
     }
 }

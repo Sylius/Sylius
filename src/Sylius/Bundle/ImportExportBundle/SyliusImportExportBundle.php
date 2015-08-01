@@ -25,6 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class SyliusImportExportBundle extends AbstractResourceBundle
 {

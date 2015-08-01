@@ -18,6 +18,15 @@ namespace Sylius\Component\ImportExport\Model;
 abstract class Job implements JobInterface
 {
     /**
+     * Job status.
+     */
+    const CREATED   = 'created';
+    const COMPLETED = 'completed';
+    const ERROR     = 'completed with error';
+    const FAILED    = 'failed';
+    const RUNNING   = 'running';
+
+    /**
      * @var integer
      */
     protected $id;
@@ -25,7 +34,7 @@ abstract class Job implements JobInterface
     /**
      * @var string
      */
-    protected $status;
+    protected $status = self::CREATED;
 
     /**
      * @var \DateTime
@@ -62,16 +71,14 @@ abstract class Job implements JobInterface
      */
     protected $metadata = array();
 
-    /**
-     * Job status.
-     */
-    const COMPLETED = 'completed';
-    const ERROR     = 'completed with error';
-    const FAILED    = 'failed';
-    const RUNNING   = 'running';
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime('now');
+        $this->updatedAt = new \DateTime('now');
+    }
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -79,7 +86,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -87,19 +94,15 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param string $status
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getStartTime()
     {
@@ -107,19 +110,15 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param \DateTime $startTime
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setStartTime(\DateTime $startTime)
     {
         $this->startTime = $startTime;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getEndTime()
     {
@@ -127,59 +126,14 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param \DateTime $endTime
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setEndTime(\DateTime $endTime)
     {
         $this->endTime = $endTime;
-
-        return $this;
     }
-
     /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return ProfileInterface
+     * {@inheritdoc}
      */
     public function getProfile()
     {
@@ -187,19 +141,15 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param ProfileInterface $profile
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setProfile(ProfileInterface $profile)
     {
         $this->profile = $profile;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFilePath()
     {
@@ -207,15 +157,11 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param string $filePath
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setFilePath($filePath)
     {
         $this->filePath = $filePath;
-
-        return $this;
     }
 
     /**
@@ -227,9 +173,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of metadata.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getMetadata()
     {
@@ -237,26 +181,50 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setMetadata(array $metadata)
     {
         $this->metadata = $metadata;
-
-        return $this;
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function addMetadata(array $metadata)
     {
         $this->metadata = array_merge($this->metadata, $metadata);
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

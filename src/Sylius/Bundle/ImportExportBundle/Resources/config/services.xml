@@ -55,6 +55,9 @@
         <parameter key="sylius.filesystem_factory.class">Knp\Bundle\GaufretteBundle\FilesystemMap</parameter>
         <parameter key="sylius.filesystem">Gaufrette\Filesystem</parameter>
         <parameter key="sylius.filesystem.exporter">export</parameter>
+
+        <!-- Validator -->
+        <parameter key="validator.valid.datetime_format.class">Sylius\Bundle\ImportExportBundle\Validator\DateTimeFormatValidator</parameter>
     </parameters>
 
     <services>
@@ -150,6 +153,11 @@
         <service id="sylius.import.stream_handler.factory" class="%sylius.import.stream_handler.factory.class%">
             <argument>%sylius.importexport.logPath%</argument>
             <argument type="service" id="sylius.import_export.data_provider" />
+        </service>
+
+        <!-- Validators -->
+        <service id="validator.valid.datetime_format" class="%validator.valid.datetime_format.class%">
+            <tag name="validator.constraint_validator" alias="datetime_format_validator" />
         </service>
     </services>
 

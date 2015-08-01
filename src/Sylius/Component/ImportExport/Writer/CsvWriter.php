@@ -19,12 +19,11 @@ use Sylius\Component\ImportExport\Writer\Factory\CsvWriterFactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CsvWriter implements WriterInterface
 {
     /**
-     * Is EasySCV\Writer initialized.
-     *
      * @var boolean
      */
     private $running = false;

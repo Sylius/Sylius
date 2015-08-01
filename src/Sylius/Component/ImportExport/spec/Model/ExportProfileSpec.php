@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\ImportExport\Model;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\ImportExport\Model\ExportJobInterface;
-use Sylius\Component\ImportExport\Model\JobInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -79,7 +78,7 @@ class ExportProfileSpec extends ObjectBehavior
         $this->getReader()->shouldReturn('testReader');
     }
 
-    public function it_has_Reader_configuration()
+    public function it_has_reader_configuration()
     {
         $readerConfiguration = array('config1' => 'First field of configuration', 'config2' => 'Second field of configuration');
         $this->setReaderConfiguration($readerConfiguration);

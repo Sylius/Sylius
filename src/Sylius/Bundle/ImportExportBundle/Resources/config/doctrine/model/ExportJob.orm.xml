@@ -30,12 +30,12 @@
             <gedmo:timestampable on="update"/>
         </field>
 
+        <field name="filePath" column="file_path" type="string" nullable="true" />
+        <field name="metadata" column="metadata" type="array" nullable="true" />
+
         <many-to-one field="profile" target-entity="Sylius\Component\ImportExport\Model\ExportProfileInterface" inversed-by="jobs">
             <join-column name="profile_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-
-        <field name="filePath" column="file_path" type="string" nullable="true" />
-        <field name="metadata" column="metadata" type="array" nullable="true" />
     </mapped-superclass>
     
 </doctrine-mapping>

@@ -15,23 +15,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Writer choice choice type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
 class ExportWriterChoiceType extends AbstractType
 {
     /**
-     * Writers.
-     *
      * @var array
      */
     protected $writers;
 
     /**
-     * Constructor.
-     *
      * @param array $writers
      */
     public function __construct(array $writers)
@@ -39,6 +33,9 @@ class ExportWriterChoiceType extends AbstractType
         $this->writers = $writers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -48,11 +45,16 @@ class ExportWriterChoiceType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
     }
 
+    /**{@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_export_writer_choice';

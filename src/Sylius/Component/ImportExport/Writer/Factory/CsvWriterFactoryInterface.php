@@ -13,6 +13,9 @@ namespace Sylius\Component\ImportExport\Writer\Factory;
 
 use EasyCSV\Writer;
 
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 interface CsvWriterFactoryInterface
 {
     /**

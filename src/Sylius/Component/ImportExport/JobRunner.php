@@ -94,7 +94,6 @@ abstract class JobRunner implements JobRunnerInterface
      */
     public function end(JobInterface $job, LoggerInterface $logger, $status)
     {
-        $job->setUpdatedAt($this->dateProvider->getCurrentDate());
         $job->setEndTime($this->dateProvider->getCurrentDate());
         $job->setStatus($status);
         $logger->info(sprintf("Job: %d; EndTime: %s", $job->getId(), $job->getEndTime()->format('Y-m-d H:i:s')));
@@ -119,7 +118,6 @@ abstract class JobRunner implements JobRunnerInterface
 
         $writer->finalize($job, $profile->getWriterConfiguration());
         $reader->finalize($job);
-
         $jobStatus = Job::COMPLETED;
 
         if ($reader->getResultCode() !== 0 || $writer->getResultCode() !== 0) {

@@ -131,7 +131,7 @@ default:
             filters:
                 tags: "@inventory"
 
-        importexport:
+        import_export:
             contexts:
                 - Sylius\Bundle\ImportExportBundle\Behat\ImportExportContext
                 - Behat\MinkExtension\Context\MinkContext
@@ -145,7 +145,7 @@ default:
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
-                tags: "@importexport && ~@javascript"
+                tags: "@import_export && ~@javascript"
 
         localization:
             contexts:

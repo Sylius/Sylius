@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Csv writer type.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CsvWriterType extends AbstractType
@@ -45,7 +43,6 @@ class CsvWriterType extends AbstractType
             ))
             ->add('file', 'text', array(
                 'label'    => 'sylius.form.writer.file',
-                'required' => true,
                 'constraints' => array(
                     new NotBlank(array('groups' => array('sylius'))),
                 ),

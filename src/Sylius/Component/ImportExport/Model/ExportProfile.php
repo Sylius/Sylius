@@ -19,15 +19,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ExportProfile extends Profile implements ExportProfileInterface
 {
-    const DEFAULT_READER = 'user_orm';
-    const DEFAULT_WRITER = 'csv_writer';
-
     public function __construct()
     {
-        $this->reader = ExportProfile::DEFAULT_READER;
-        $this->readerConfiguration = array();
-        $this->writer = ExportProfile::DEFAULT_WRITER;
-        $this->writerConfiguration = array();
         $this->jobs = new ArrayCollection();
     }
 }

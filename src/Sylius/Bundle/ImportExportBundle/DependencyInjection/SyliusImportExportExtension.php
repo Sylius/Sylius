@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Import/Export extension.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */

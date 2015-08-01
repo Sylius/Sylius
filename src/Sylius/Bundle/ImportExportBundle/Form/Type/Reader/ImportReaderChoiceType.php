@@ -15,22 +15,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Reader choice choice type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ImportReaderChoiceType extends AbstractType
 {
     /**
-     * Writers.
-     *
      * @var array
      */
     protected $readers;
 
     /**
-     * Constructor.
-     *
      * @param array $readers
      */
     public function __construct(array $readers)
@@ -38,6 +32,9 @@ class ImportReaderChoiceType extends AbstractType
         $this->readers = $readers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -47,11 +44,17 @@ class ImportReaderChoiceType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_import_reader_choice';

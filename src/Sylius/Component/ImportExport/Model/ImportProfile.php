@@ -18,15 +18,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ImportProfile extends Profile implements ImportProfileInterface
 {
-    const DEFAULT_READER = 'csv_reader';
-    const DEFAULT_WRITER = 'user_orm';
-
     public function __construct()
     {
-        $this->reader = ImportProfile::DEFAULT_READER;
-        $this->readerConfiguration = array();
-        $this->writer = ImportProfile::DEFAULT_WRITER;
-        $this->writerConfiguration = array();
         $this->jobs = new ArrayCollection();
     }
 }

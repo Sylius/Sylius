@@ -42,6 +42,7 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         WriterInterface $writer)
     {
         $writerRegistry->get('test_writer')->willReturn($writer);
+        $writerRegistry->all()->willReturn(array($writer));
         $writer->getType()->willReturn('test_type');
         $this->beConstructedWith($writerRegistry, $factory);
     }
@@ -88,6 +89,29 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         $form->add($field)->shouldBeCalled();
         $this->preBind($event);
     }
+
+    function it_adds_configuration_fields_in_pre_set_data_without_writer_configured(
+        $factory,
+        ExportProfileInterface $exportProfiler,
+        FormEvent $event,
+        Form $form,
+        Form $field)
+    {
+        $exportProfiler->getWriter()->willReturn();
+        $exportProfiler->getWriterConfiguration()->willReturn(array());
+
+        $event->getData()->willReturn($exportProfiler);
+        $event->getForm()->willReturn($form);
+
+        $factory->createNamed(
+            'writerConfiguration',
+            'sylius_test_type_writer',
+            Argument::cetera()
+        )->willReturn($field);
+        $form->add($field)->shouldBeCalled();
+        $this->preSetData($event);
+    }
+
 
     function it_does_not_allow_to_configure_fields_in_pre_set_data_for_class_which_does_not_implement_profile_interface(FormEvent $event)
     {

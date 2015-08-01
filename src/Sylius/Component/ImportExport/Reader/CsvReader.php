@@ -22,8 +22,6 @@ use Sylius\Component\ImportExport\Reader\Factory\CsvReaderFactoryInterface;
 class CsvReader implements ReaderInterface
 {
     /**
-     * Is EasySCV\Reader initialized.
-     *
      * @var boolean
      */
     private $running = false;
@@ -41,8 +39,6 @@ class CsvReader implements ReaderInterface
     private $csvReaderFactory;
 
     /**
-     * CsvReader constructor.
-     *
      * @param CsvReaderFactoryInterface $csvReaderFactory
      */
     public function __construct(CsvReaderFactoryInterface $csvReaderFactory)
@@ -62,7 +58,7 @@ class CsvReader implements ReaderInterface
 
         $data = array();
 
-        for ($i = 0; $i < $configuration['batch']; $i++) {
+        for ($i = 0; $i < (int) $configuration['batch']; $i++) {
             $row = $this->csvReader->getRow();
 
             if (false === $row) {

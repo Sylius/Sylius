@@ -19,8 +19,7 @@
     <tbody>
     {% for import_job in import_jobs %}
         <tr id="{{ import_job.id }}">
-            <td>{{ import_job.id }}</td>
-            <td>{{ import_job.profile.id }}</td>
+            <td>{{ import_job.profile.code }}</td>
             <td>{{ import_job.status }}</td>
             <td>{{ import_job.startTime|date }}</td>
             <td>{{ import_job.endTime|date }}</td>

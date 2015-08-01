@@ -17,8 +17,6 @@ namespace Sylius\Component\ImportExport\Converter;
 interface DateConverterInterface
 {
     /**
-     * Converts given \DateTime into string with following format.
-     *
      * @param \DateTime $date
      * @param string    $format
      *

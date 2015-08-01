@@ -19,9 +19,16 @@ knp_gaufrette:
             local:
                 directory:  %kernel.root_dir%/../web/media/image
                 create:     true
+        exported_files:
+            local:
+                directory:  %sylius.filesystem.export%
+                create:    true
     filesystems:
         sylius_image:
             adapter: %sylius.uploader.filesystem%
+        export:
+            adapter: exported_files
+            alias: export
 
 liip_imagine:
     loaders:

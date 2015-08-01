@@ -49,7 +49,7 @@ sylius_backend_import_profile_show:
             template: SyliusWebBundle:Backend/ImportProfile:show.html.twig
 
 sylius_backend_import_profile_import:
-    path: /export/{code}
+    path: /import/{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.import_profile:importAction

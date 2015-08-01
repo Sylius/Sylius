@@ -21,6 +21,9 @@ use Symfony\Component\Console\Input\InputArgument;
  */
 class ImportDataCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -34,6 +37,9 @@ class ImportDataCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $importProfile = $this->getContainer()->get('sylius.repository.import_profile')->findOneBy(

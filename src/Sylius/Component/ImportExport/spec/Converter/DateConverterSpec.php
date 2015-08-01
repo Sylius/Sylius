@@ -42,4 +42,9 @@ class DateConverterSpec extends ObjectBehavior
 
         $this->toDateTime('2012-07-08 11:14:15', 'Y-m-d H:i:s')->shouldBeLike($date);
     }
+
+    function it_throws_invalid_argument_exception_when_wrong_format_is_given()
+    {
+        $this->shouldThrow(new \InvalidArgumentException('Given format is invalid.'))->duringToDateTime('2012-07-08 11:14:15', 'INVALID');
+    }
 }

@@ -172,27 +172,4 @@ class ProductRepository extends BaseProductRepository
 
         parent::applyCriteria($queryBuilder, $criteria);
     }
-    
-    /**
-     * Find product by sku.
-     *
-     * @param int $limit
-     *
-     * @return ProductInterface[]
-     */
-    public function findOneBySku($sku)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->leftJoin('o.variants', 'variant')
-            ->andWhere('variant.sku = :sku')
-            ->setParameter('sku', $sku)
-        ;
-
-        return $result = $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
 }

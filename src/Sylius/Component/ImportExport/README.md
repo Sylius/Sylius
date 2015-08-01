@@ -1,4 +1,4 @@
-ImportExport Component [![Build status...](https://secure.travis-ci.org/Sylius/Report.png?branch=master)](http://travis-ci.org/Sylius/Report)
+ImportExport Component [![Build status...](https://secure.travis-ci.org/Sylius/ImportExport.png?branch=master)](http://travis-ci.org/Sylius/ImportExport)
 =================
 
 
@@ -10,7 +10,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Report/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/ImportExport/index.html).
 
 Contributing
 ------------
@@ -37,10 +37,10 @@ If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Report/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/ImportExport/blob/master/LICENSE).
 
 Authors
 -------
 
 The component was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Report/contributors).
+See the list of [contributors](https://github.com/Sylius/ImportExport/contributors).

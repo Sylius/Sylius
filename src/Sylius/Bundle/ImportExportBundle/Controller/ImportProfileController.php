@@ -34,7 +34,9 @@ class ImportProfileController extends ResourceController
         $process = new Process($processPath);
         $process->mustRun();
 
-        $importProfile = $this->container->get('sylius.repository.import_profile')->findOneByCode($code);
+        $importProfile = $this->container->get('sylius.repository.import_profile')->findOneBy(array(
+            'code' => $code,
+        ));
         $importJob = $importProfile->getJobs()->last();
 
         return $this->redirect(

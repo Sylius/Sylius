@@ -95,7 +95,6 @@ class ExporterSpec extends ObjectBehavior
          $exportJob->getStartTime()->willReturn($dateTime1);
          $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
          $exportJob->setProfile($exportProfile)->shouldBeCalled();
-         $exportJob->setUpdatedAt($dateTime2)->shouldBeCalled();
          $exportJob->setEndTime($dateTime2)->shouldBeCalled();
          $exportJob->getEndTime()->willReturn($dateTime2);
 
@@ -148,7 +147,6 @@ class ExporterSpec extends ObjectBehavior
         $exportJob->getStartTime()->willReturn($dateTime1);
         $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $exportJob->setProfile($exportProfile)->shouldBeCalled();
-        $exportJob->setUpdatedAt($dateTime2)->shouldBeCalled();
         $exportJob->setEndTime($dateTime2)->shouldBeCalled();
         $exportJob->getEndTime()->willReturn($dateTime2);
 
@@ -192,7 +190,6 @@ class ExporterSpec extends ObjectBehavior
         $exportJob->getStartTime()->willReturn($dateTime1);
         $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $exportJob->setProfile($exportProfile)->shouldBeCalled();
-        $exportJob->setUpdatedAt($dateTime2)->shouldBeCalled();
         $exportJob->setEndTime($dateTime2)->shouldBeCalled();
         $exportJob->getEndTime()->willReturn($dateTime2);
 

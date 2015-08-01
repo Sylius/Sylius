@@ -48,6 +48,13 @@ class ImportJobSpec extends ObjectBehavior
         $this->getStartTime()->shouldReturn($startTime);
     }
 
+    public function it_has_created_at_and_updated_at_from_beginning()
+    {
+        $dateTime = new \DateTime('now');
+        $this->getCreatedAt()->shouldBeLike($dateTime);
+        $this->getUpdatedAt()->shouldBeLike($dateTime);
+    }
+
     function it_has_end_time()
     {
         $endTime = new \DateTime('2015-01-01');

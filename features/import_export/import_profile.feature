@@ -1,4 +1,4 @@
-@importexport
+@import_export
 Feature: Import profiles
     In order to import data from my store 
     As a store owner
@@ -46,7 +46,6 @@ Feature: Import profiles
           And I press "Create"
          Then I should be on the page of import profile "ImportProfile2"
           And I should see "Import profile has been successfully created."
-          And I should see "1000"
           And I should see "1000"
           And I should see "Y.m.d"
 
@@ -100,8 +99,8 @@ Feature: Import profiles
           And I fill in "File path" with "\tmp\output2.csv"
           And I press "Save changes"
          Then I should see "Import profile has been successfully updated."
-          And "UsersImportProfile2" should appear on the page
-          And "Lorem ipsum dolor" should appear on the page
+          And I should see "UsersImportProfile2"
+          And I should see "Lorem ipsum dolor"
 
     Scenario: Deleting import profile from index page
         Given I am on the import profile index page
@@ -117,10 +116,10 @@ Feature: Import profiles
           And I should see "Import profile has been successfully deleted."
           And I should see "There are no profiles to display."
 
-    @scenarioWithFile
+    @using_file
     Scenario: Executing import from browser
         Given I am on the page of import profile "UsersImportProfile"
-          And there are following users put into a file "/tmp/user.csv":
+          And there are following users in a file "/tmp/user.csv":
             | email          | enabled  | created_at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
             | martha@foo.com | yes      | 2010-01-02 13:00:00 |

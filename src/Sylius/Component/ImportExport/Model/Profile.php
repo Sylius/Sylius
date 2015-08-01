@@ -47,7 +47,7 @@ abstract class Profile implements ProfileInterface
     /**
      * @var array
      */
-    protected $writerConfiguration;
+    protected $writerConfiguration = array();
 
     /**
      * @var string
@@ -57,19 +57,17 @@ abstract class Profile implements ProfileInterface
     /**
      * @var array
      */
-    protected $readerConfiguration;
+    protected $readerConfiguration = array();
 
     /**
-     * Jobs of profile.
+     * Profile jobs.
      *
      * @var Collection|JobInterface[]
      */
     protected $jobs;
 
     /**
-     * Gets the value of id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -77,9 +75,7 @@ abstract class Profile implements ProfileInterface
     }
 
     /**
-     * Gets the value of name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -87,23 +83,15 @@ abstract class Profile implements ProfileInterface
     }
 
     /**
-     * Sets the value of name.
-     *
-     * @param string $name the name
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Gets the value of code.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -111,23 +99,15 @@ abstract class Profile implements ProfileInterface
     }
 
     /**
-     * Sets the value of code.
-     *
-     * @param string $code the code
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * Gets the value of description.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -135,17 +115,11 @@ abstract class Profile implements ProfileInterface
     }
 
     /**
-     * Sets the value of description.
-     *
-     * @param string $description the description
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -162,8 +136,6 @@ abstract class Profile implements ProfileInterface
     public function setWriter($writer)
     {
         $this->writer = $writer;
-
-        return $this;
     }
 
     /**
@@ -180,8 +152,6 @@ abstract class Profile implements ProfileInterface
     public function setWriterConfiguration(array $writerConfiguration)
     {
         $this->writerConfiguration = $writerConfiguration;
-
-        return $this;
     }
 
     /**
@@ -198,8 +168,6 @@ abstract class Profile implements ProfileInterface
     public function setReader($reader)
     {
         $this->reader = $reader;
-
-        return $this;
     }
 
     /**
@@ -216,8 +184,6 @@ abstract class Profile implements ProfileInterface
     public function setReaderConfiguration(array $readerConfiguration)
     {
         $this->readerConfiguration = $readerConfiguration;
-
-        return $this;
     }
 
     /**
@@ -234,8 +200,6 @@ abstract class Profile implements ProfileInterface
     public function setJobs(Collection $jobs)
     {
         $this->jobs = $jobs;
-
-        return $this;
     }
 
     /**
@@ -244,8 +208,6 @@ abstract class Profile implements ProfileInterface
     public function clearJobs()
     {
         $this->jobs->clear();
-
-        return $this;
     }
 
     /**
@@ -270,21 +232,19 @@ abstract class Profile implements ProfileInterface
     public function addJob(JobInterface $job)
     {
         if ($this->hasJob($job)) {
-            return $this;
+            return;
         }
 
         foreach ($this->jobs as $existingJob) {
             if ($job === $existingJob) {
                 $existingJob->merge($job, false);
 
-                return $this;
+                return;
             }
         }
 
         $job->setProfile($this);
         $this->jobs->add($job);
-
-        return $this;
     }
 
     /**
@@ -295,7 +255,5 @@ abstract class Profile implements ProfileInterface
         if ($this->hasJob($job)) {
             $this->jobs->removeElement($job);
         }
-
-        return $this;
     }
 }

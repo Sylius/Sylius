@@ -15,11 +15,6 @@
             "email":    "lukasz.chrusciel@lakion.com"
         },
         {
-            "name":     "Bartosz Siejka",
-            "homepage": "http://bsiejka.com",
-            "email":    "bartosz.siejka@lakion.com"
-        },
-        {
             "name":     "Mateusz Zalewski",
             "email":    "mateusz.zalewski@lakion.com"
         },
@@ -57,7 +52,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }
