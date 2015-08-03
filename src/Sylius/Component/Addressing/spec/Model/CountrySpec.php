@@ -16,6 +16,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
+ * @mixin \Sylius\Component\Addressing\Model\Country
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -35,6 +37,11 @@ class CountrySpec extends ObjectBehavior
     function it_implements_Sylius_country_interface()
     {
         $this->shouldImplement('Sylius\Component\Addressing\Model\CountryInterface');
+    }
+
+    function it_is_toggleable()
+    {
+        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
     }
 
     function it_has_no_id_by_default()
@@ -120,14 +127,35 @@ class CountrySpec extends ObjectBehavior
         $this->removeProvince($province);
     }
 
-    function it_has_fluent_interface(
-        ProvinceInterface $province,
-        Collection $provinces
-    ) {
-        $this->setIsoName('PL')->shouldReturn($this);
+    function it_is_enabled_by_default()
+    {
+        $this->isEnabled()->shouldReturn(true);
+    }
 
-        $this->setProvinces($provinces)->shouldReturn($this);
-        $this->addProvince($province)->shouldReturn($this);
-        $this->removeProvince($province)->shouldReturn($this);
+    function it_can_be_disabled()
+    {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+    }
+
+    function it_can_be_enabled()
+    {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->enable();
+        $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_can_set_enabled_value()
+    {
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
     }
 }

@@ -64,7 +64,7 @@
         {% set class = 'label-danger' %}
     {% endif %}
 {% endif %}
-<span class="label {{ class }}">{{ label|trans }}</span>
+<span class="label {{ class }}">{{ label|trans|upper }}</span>
 {% endmacro %}
 
 {% macro payment_form(payment) %}

@@ -12,35 +12,28 @@
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
- * Country interface.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface CountryInterface
+interface CountryInterface extends ToggleableInterface
 {
     public function getId();
 
     /**
-     * Get country ISO name.
-     *
      * @return string
      */
     public function getIsoName();
 
     /**
-     * Set country ISO name.
-     *
      * @param string $isoName
      */
     public function setIsoName($isoName);
 
     /**
-     * Get country name.
-     *
      * @param string $locale
      *
      * @return string

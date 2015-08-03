@@ -16,8 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Default country model.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -30,7 +28,7 @@ class Country implements CountryInterface
     protected $id;
 
     /**
-     * Country name in ISO format.
+     * Country code ISO 3166-1 alpha-2.
      *
      * @var string
      */
@@ -40,6 +38,11 @@ class Country implements CountryInterface
      * @var Collection|ProvinceInterface[]
      */
     protected $provinces;
+
+    /**
+     * @var boolean
+     */
+    protected $enabled = true;
 
     public function __construct()
     {
@@ -81,8 +84,6 @@ class Country implements CountryInterface
     public function setIsoName($isoName)
     {
         $this->isoName = $isoName;
-
-        return $this;
     }
 
     /**
@@ -99,8 +100,6 @@ class Country implements CountryInterface
     public function setProvinces(Collection $provinces)
     {
         $this->provinces = $provinces;
-
-        return $this;
     }
 
     /**
@@ -120,8 +119,6 @@ class Country implements CountryInterface
             $this->provinces->add($province);
             $province->setCountry($this);
         }
-
-        return $this;
     }
 
     /**
@@ -133,8 +130,6 @@ class Country implements CountryInterface
             $this->provinces->removeElement($province);
             $province->setCountry(null);
         }
-
-        return $this;
     }
 
     /**
@@ -143,5 +138,37 @@ class Country implements CountryInterface
     public function hasProvince(ProvinceInterface $province)
     {
         return $this->provinces->contains($province);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (boolean) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }
