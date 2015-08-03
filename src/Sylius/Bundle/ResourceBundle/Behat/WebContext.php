@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
@@ -223,27 +225,37 @@ class WebContext extends DefaultContext
     /**
      * For example: I should see product with name "Wine X" in that list.
      *
-     * @Then /^I should see [\w\s]+ with [\w\s]+ "([^""]*)" in (that|the) list$/
+     * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
      */
-    public function iShouldSeeResourceWithValueInThatList($value)
+    public function iShouldSeeResourceWithValueInThatList($columnName, $value)
     {
-        $this->assertSession()->elementTextContains('css', 'table', $value);
+        $tableNode = new TableNode(array(
+            array(trim($columnName)),
+            array(trim($value)),
+        ));
+
+        $this->iShouldSeeTheFollowingRow($tableNode);
     }
 
     /**
      * For example: I should not see product with name "Wine X" in that list.
      *
-     * @Then /^I should not see [\w\s]+ with [\w\s]+ "([^""]*)" in (that|the) list$/
+     * @Then /^I should not see [\w\s]+ with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
      */
-    public function iShouldNotSeeResourceWithValueInThatList($value)
+    public function iShouldNotSeeResourceWithValueInThatList($columnName, $value)
     {
-        $this->assertSession()->elementTextNotContains('css', 'table', $value);
+        $tableNode = new TableNode(array(
+            array(trim($columnName)),
+            array(trim($value)),
+        ));
+
+        $this->iShouldNotSeeTheFollowingRow($tableNode);
     }
 
     /**
      * For example: I should see 10 products in that list.
      *
-     * @Then /^I should see (\d+) ([^""]*) in (that|the) list$/
+     * @Then /^I should see (\d+) ([^""]*) in (?:that|the) list$/
      */
     public function iShouldSeeThatMuchResourcesInTheList($amount, $type)
     {
@@ -313,6 +325,92 @@ class WebContext extends DefaultContext
     public function iShouldHaveMyAccessDenied()
     {
         $this->assertStatusCodeEquals(403);
+    }
+
+    /**
+     * @Then /^I should see enabled [\w\s]+ with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
+     */
+    public function iShouldSeeResourceInTheListAsEnabled($columnName, $value)
+    {
+        $tableNode = new TableNode(array(
+            array(trim($columnName), 'Enabled'),
+            array(trim($value), 'YES')
+        ));
+
+        $this->iShouldSeeTheFollowingRow($tableNode);
+    }
+
+    /**
+     * @Then /^I should see disabled [\w\s]+ with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
+     */
+    public function iShouldSeeResourceInTheListAsDisabled($columnName, $value)
+    {
+        $tableNode = new TableNode(array(
+            array(trim($columnName), 'Enabled'),
+            array(trim($value), 'NO')
+        ));
+
+        $this->iShouldSeeTheFollowingRow($tableNode);
+    }
+
+    /**
+     * @Then /^I should see the following (?:row|rows):$/
+     */
+    public function iShouldSeeTheFollowingRow(TableNode $tableNode)
+    {
+        $table = $this->assertSession()->elementExists('css', 'table');
+
+        foreach ($tableNode->getHash() as $fields) {
+            if (null === $this->getRowWithFields($table, $fields)) {
+                throw new \Exception('Table with given fields was not found!');
+            }
+        }
+    }
+
+    /**
+     * @Then /^I should not see the following (?:row|rows):$/
+     */
+    public function iShouldNotSeeTheFollowingRow(TableNode $tableNode)
+    {
+        $table = $this->assertSession()->elementExists('css', 'table');
+
+        foreach ($tableNode->getHash() as $fields) {
+            if (null !== $this->getRowWithFields($table, $fields)) {
+                throw new \Exception('Table with given fields was found!');
+            }
+        }
+    }
+
+    /**
+     * @Then /^I should see ([\w\s]+) "([^""]*)" as available choice$/
+     */
+    public function iShouldSeeSelectWithOption($fieldName, $fieldOption)
+    {
+        /** @var NodeElement $select */
+        $select = $this->assertSession()->fieldExists($fieldName);
+
+        $selector = sprintf('option:contains("%s")', $fieldOption);
+        $option = $select->find('css', $selector);
+
+        if (null === $option) {
+            throw new \Exception(sprintf('Option "%s" was not found!', $fieldOption));
+        }
+    }
+
+    /**
+     * @Then /^I should not see ([\w\s]+) "([^""]*)" as available choice$/
+     */
+    public function iShouldNotSeeSelectWithOption($fieldName, $fieldOption)
+    {
+        /** @var NodeElement $select */
+        $select = $this->assertSession()->fieldExists(ucfirst($fieldName));
+
+        $selector = sprintf('option:contains("%s")', $fieldOption);
+        $option = $select->find('css', $selector);
+
+        if (null !== $option) {
+            throw new \Exception(sprintf('Option "%s" was found!', $fieldOption));
+        }
     }
 
     /**
