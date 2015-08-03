@@ -52,9 +52,6 @@
 
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
 
-        <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
-            <argument type="service" id="sylius.repository.product_attribute_value" />
-        </service>
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
