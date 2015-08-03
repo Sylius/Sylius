@@ -63,7 +63,6 @@ class SyliusProductBundle extends AbstractResourceBundle
             'Sylius\Component\Product\Model\OptionInterface'               => 'sylius.model.product_option.class',
             'Sylius\Component\Product\Model\OptionValueInterface'          => 'sylius.model.product_option_value.class',
             'Sylius\Component\Product\Model\ArchetypeInterface'            => 'sylius.model.product_archetype.class',
-            'Sylius\Component\Product\Model\PrototypeInterface'            => 'sylius.model.product_prototype.class',
             'Sylius\Component\Product\Model\AssociationTypeInterface'      => 'sylius.model.association_type.class'
         );
     }

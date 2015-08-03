@@ -67,11 +67,6 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product_association" />
         </service>
-        <service id="sylius.form.type.product_prototype" class="%sylius.form.type.product_prototype.class%">
-            <argument>%sylius.model.product_prototype.class%</argument>
-            <argument>%sylius.validation_group.product_prototype%</argument>
-            <tag name="form.type" alias="sylius_product_prototype" />
-        </service>
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />
@@ -81,9 +76,6 @@
 
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
 
-        <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
-            <argument type="service" id="sylius.repository.product_attribute_value" />
-        </service>
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
