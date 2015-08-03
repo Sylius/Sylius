@@ -9,24 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\Model;
+namespace Sylius\Component\Review\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * ReviewInterface
- *
  * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 interface ReviewInterface extends TimestampableInterface
 {
-    const MODERATION_STATUS_UNMODERATED = 'new';
+    const MODERATION_STATUS_NEW      = 'new';
     const MODERATION_STATUS_APPROVED = 'approved';
     const MODERATION_STATUS_REJECTED = 'rejected';
 
     /**
-     * @param  string          $title
-     * @return ReviewInterface
+     * @param string $title
      */
     public function setTitle($title);
 
@@ -36,8 +35,7 @@ interface ReviewInterface extends TimestampableInterface
     public function getTitle();
 
     /**
-     * @param  integer         $rating
-     * @return ReviewInterface
+     * @param integer $rating
      */
     public function setRating($rating);
 
@@ -47,8 +45,7 @@ interface ReviewInterface extends TimestampableInterface
     public function getRating();
 
     /**
-     * @param  string          $comment
-     * @return ReviewInterface
+     * @param string $comment
      */
     public function setComment($comment);
 
@@ -58,27 +55,32 @@ interface ReviewInterface extends TimestampableInterface
     public function getComment();
 
     /**
-     * @param  string          $moderationStatus
-     * @return ReviewInterface
+     * @param string $email
      */
-    public function setModerationStatus($moderationStatus);
+    public function setAuthorEmail($email);
 
     /**
      * @return string
      */
-    public function getModerationStatus();
+    public function getAuthorEmail();
 
     /**
-     * Set GuestReviewer.
-     *
-     * @param GuestReviewerInterface $guestReviewer
+     * @param string $status
      */
-    public function setGuestReviewer(GuestReviewerInterface $guestReviewer);
+    public function setStatus($status);
 
     /**
-     * Get GuestReviewer.
-     *
-     * @return GuestReviewerInterface
+     * @return string
      */
-    public function getGuestReviewer();
+    public function getStatus();
+
+    /**
+     * @return ProductInterface
+     */
+    public function getProduct();
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function setProduct(ProductInterface $product);
 }

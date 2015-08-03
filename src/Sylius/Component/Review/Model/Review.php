@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\Model;
+namespace Sylius\Component\Review\Model;
+
+use Sylius\Component\Core\Model\ProductInterface;
 
 /**
- * Review
- *
  * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Review implements ReviewInterface
 {
@@ -39,6 +40,21 @@ class Review implements ReviewInterface
     protected $comment;
 
     /**
+     * @var string
+     */
+    protected $authorEmail;
+
+    /**
+     * @var string
+     */
+    protected $status;
+
+    /**
+     * @var ProductInterface
+     */
+    protected $product;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -49,22 +65,12 @@ class Review implements ReviewInterface
     protected $updatedAt;
 
     /**
-     * @var string
-     */
-    protected $moderationStatus;
-
-    /**
-     * @var integer
-     */
-    protected $guestReviewer;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->moderationStatus = ReviewInterface::MODERATION_STATUS_UNMODERATED;
+        $this->moderationStatus = ReviewInterface::MODERATION_STATUS_NEW;
     }
 
     /**
@@ -81,8 +87,6 @@ class Review implements ReviewInterface
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
@@ -99,8 +103,6 @@ class Review implements ReviewInterface
     public function setRating($rating)
     {
         $this->rating = $rating;
-
-        return $this;
     }
 
     /**
@@ -117,8 +119,6 @@ class Review implements ReviewInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
-
-        return $this;
     }
 
     /**
@@ -130,13 +130,59 @@ class Review implements ReviewInterface
     }
 
     /**
+     * @param string $email
+     */
+    public function setAuthorEmail($email)
+    {
+        $this->authorEmail = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorEmail()
+    {
+        return $this->authorEmail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProduct(ProductInterface $product)
+    {
+        $this->product = $product;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -153,8 +199,6 @@ class Review implements ReviewInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -163,41 +207,5 @@ class Review implements ReviewInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setModerationStatus($moderationStatus)
-    {
-        $this->moderationStatus = $moderationStatus;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getModerationStatus()
-    {
-        return $this->moderationStatus;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getGuestReviewer()
-    {
-        return $this->guestReviewer;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setGuestReviewer(GuestReviewerInterface $guestReviewer)
-    {
-        $this->guestReviewer = $guestReviewer;
-
-        return $this;
     }
 }

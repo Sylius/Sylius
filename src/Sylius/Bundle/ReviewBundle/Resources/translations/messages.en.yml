@@ -11,13 +11,8 @@ sylius:
                 label: Title
             comment:
                 label: Comment
-            moderation_status:
-                label: Moderation Status
-                unmoderated: Unmoderated
+            status:
+                label: Status
+                new: New
                 accepted: Accepted
                 rejected: Rejected
-        guest_reviewer:
-            name:
-                label: Your Name
-            email:
-                label: Your Email

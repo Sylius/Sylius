@@ -16,52 +16,62 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * ReviewType
- *
  * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ReviewType extends AbstractType
 {
-    protected $dataClass;
-
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $ratingRange = range(1, $options['rating_steps']);
-
         $builder
             ->add('rating', 'choice', array(
-                'choices' => array_combine($ratingRange, $ratingRange),
-                'empty_value' => 'sylius.form.review.rating.empty_value',
-                'label' => 'sylius.form.review.rating.label'
+                'choices' => $this->createRatingList($options['rating_steps']),
+                'label' => 'sylius.form.review.rating.label',
+                'expanded' => true,
+                'multiple' => false,
             ))
             ->add('title', 'text', array(
                 'label' => 'sylius.form.review.title.label'
             ))
             ->add('comment', 'textarea', array(
                 'label' => 'sylius.form.review.comment.label'
-            ));
-
-        if ($options['allow_guest']) {
-            $builder->add('guest_reviewer', 'sylius_guest_reviewer');
-        }
+            ))
+        ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'rating_steps' => 5,
-            'data_class' => $this->dataClass,
-            'allow_guest' => false
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_review';
+    }
+
+    /**
+     * @param integer $maxRate
+     *
+     * @return array
+     */
+    private function createRatingList($maxRate)
+    {
+        $ratings = array();
+        for ($i = 1; $i <= $maxRate; $i++) {
+            $ratings[$i] = $i;
+        }
+
+        return $ratings;
     }
 }
