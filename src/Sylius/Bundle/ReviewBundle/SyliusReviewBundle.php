@@ -11,42 +11,39 @@
 
 namespace Sylius\Bundle\ReviewBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 
-class SyliusReviewBundle extends Bundle
+/**
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
+class SyliusReviewBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported database drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getModelInterfaces()
     {
-        $interfaces = array(
-            'Sylius\Bundle\ReviewBundle\Model\ReviewInterface' => 'sylius.model.review.class',
-            'Sylius\Bundle\ReviewBundle\Model\GuestReviewerInterface' => 'sylius.model.guest_reviewer.class',
+        return array(
+            'Sylius\Component\Review\Model\ReviewInterface' => 'sylius.model.review.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_review', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\ReviewBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_review.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Review\Model';
     }
 }
