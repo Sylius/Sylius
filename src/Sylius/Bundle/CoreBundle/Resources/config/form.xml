@@ -26,6 +26,7 @@
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
+        <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
 
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
 
@@ -107,6 +108,14 @@
                 <argument>sylius</argument>
             </argument>
             <tag name="form.type" alias="sylius_advanced_order" />
+        </service>
+        <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
+            <argument>%sylius.model.country.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type" alias="sylius_country" />
         </service>
 
         <!-- filters -->
