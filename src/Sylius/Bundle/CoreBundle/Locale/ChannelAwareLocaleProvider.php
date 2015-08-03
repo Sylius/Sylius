@@ -11,36 +11,34 @@
 
 namespace Sylius\Bundle\CoreBundle\Locale;
 
-use Sylius\Bundle\LocaleBundle\Provider\LocaleProvider;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
  * Locale provider, which returns locales enabled for this channel.
  *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelAwareLocaleProvider extends LocaleProvider
+class ChannelAwareLocaleProvider implements LocaleProviderInterface
 {
     /**
-     * Channel context.
-     *
      * @var ChannelContextInterface
      */
     protected $channelContext;
 
     /**
-     * @var string
+     * @var string[]|null
      */
-    protected $defaultLocale;
+    protected $localesCodes = null;
 
     /**
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct(ChannelContextInterface $channelContext, $defaultLocale)
+    public function __construct(ChannelContextInterface $channelContext)
     {
         $this->channelContext = $channelContext;
-        $this->defaultLocale  = $defaultLocale;
     }
 
     /**
@@ -48,10 +46,38 @@ class ChannelAwareLocaleProvider extends LocaleProvider
      */
     public function getAvailableLocales()
     {
-        $currentChannel =  $this->channelContext->getChannel();
+        if (null === $this->localesCodes) {
+            $this->localesCodes = $this->getEnabledLocalesCodes();
+        }
 
-        return $currentChannel->getLocales()->filter(function (LocaleInterface $locale) {
-            return $locale->isEnabled();
-        })->toArray();
+        return $this->localesCodes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocaleAvailable($locale)
+    {
+        return in_array($locale, $this->getAvailableLocales());
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getEnabledLocalesCodes()
+    {
+        $localesCodes = array();
+
+        /** @var LocaleInterface[] $locales */
+        $locales = $this->channelContext->getChannel()->getLocales();
+        foreach ($locales as $locale) {
+            if (!$locale->isEnabled()) {
+                continue;
+            }
+
+            $localesCodes[] = $locale->getCode();
+        }
+
+        return $localesCodes;
     }
 }

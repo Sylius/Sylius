@@ -157,6 +157,6 @@ jms_serializer:
                 path: "@SyliusVariationBundle/Resources/config/serializer"
 
 a2lix_translation_form:
-    locale_provider: sylius.locale_provider
+    locale_provider: sylius.a2lix_locale_provider
     manager_registry: doctrine
     templating: "A2lixTranslationFormBundle::default.html.twig"

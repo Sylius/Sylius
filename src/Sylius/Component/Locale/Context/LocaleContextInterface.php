@@ -19,27 +19,18 @@ namespace Sylius\Component\Locale\Context;
  */
 interface LocaleContextInterface
 {
-    // Key used to store the locale in storage.
-    const STORAGE_KEY = '_sylius_locale';
-
     /**
-     * Get the default locale.
-     *
      * @return string
      */
     public function getDefaultLocale();
 
     /**
-     * Get the currently active locale.
-     *
      * @return string
      */
-    public function getLocale();
+    public function getCurrentLocale();
 
     /**
-     * Set the currently active locale.
-     *
      * @param string $locale
      */
-    public function setLocale($locale);
+    public function setCurrentLocale($locale);
 }

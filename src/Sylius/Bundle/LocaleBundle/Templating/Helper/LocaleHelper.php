@@ -24,19 +24,20 @@ class LocaleHelper extends Helper
      */
     private $localeContext;
 
+    /**
+     * @param LocaleContextInterface $localeContext
+     */
     public function __construct(LocaleContextInterface $localeContext)
     {
         $this->localeContext = $localeContext;
     }
 
     /**
-     * Get currently used locale.
-     *
      * @return string
      */
-    public function getLocale()
+    public function getCurrentLocale()
     {
-        return $this->localeContext->getLocale();
+        return $this->localeContext->getCurrentLocale();
     }
 
     /**

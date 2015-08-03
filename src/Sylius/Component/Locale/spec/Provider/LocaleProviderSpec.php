@@ -17,14 +17,17 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin \Sylius\Component\Locale\Provider\LocaleProvider
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class LocaleProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(RepositoryInterface $localeRepository)
     {
-        $this->beConstructedWith($repository, 'en');
+        $this->beConstructedWith($localeRepository);
     }
 
     function it_is_initializable()
@@ -32,62 +35,37 @@ class LocaleProviderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Locale\Provider\LocaleProvider');
     }
 
-    function it_implements_Sylius_locale_provider_interface()
+    function it_is_Sylius_locale_provider()
     {
         $this->shouldImplement('Sylius\Component\Locale\Provider\LocaleProviderInterface');
     }
 
-    function it_validates_a_null_default_locale_is_given(RepositoryInterface $repository)
-    {
-        $this->shouldThrow('Exception')->during('__construct', array($repository, null));
-    }
-
-    function it_validates_an_empty_default_locale_is_given(RepositoryInterface $repository)
-    {
-        $this->shouldThrow('Exception')->during('__construct', array($repository, ''));
-    }
-
-    function it_has_required_locales()
-    {
-        $this->getRequiredLocales()->shouldReturn(array('en'));
-    }
-
-    function it_returns_all_enabled_locales(LocaleInterface $locale, RepositoryInterface $repository)
-    {
-        $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($locale));
-
-        $this->getAvailableLocales()->shouldReturn(array($locale));
-    }
-
-    function it_returns_correct_locales(
-        RepositoryInterface $repository,
-        LocaleInterface $locale1,
-        LocaleInterface $locale2
-    )
-    {
-        $locales = array($locale1, $locale2);
-        $repository->findBy(Argument::any())->willReturn($locales);
-
-        $locale1->getCode()->willReturn('en');
-        $locale2->getCode()->willReturn('de');
-
-        $this->getLocales()->shouldReturn(array('en', 'de'));
-    }
-
-    function it_returns_correct_default_locale()
-    {
-        $this->getDefaultLocale()->shouldReturn('en');
-    }
-
-    function it_checks_if_the_locale_is_available(
-        RepositoryInterface $repository,
-        LocaleInterface $locale
+    function it_returns_available_locales_codes(
+        RepositoryInterface $localeRepository,
+        LocaleInterface $firstLocale,
+        LocaleInterface $secondLocale
     ) {
-        $repository->findBy(Argument::any())->willReturn(array($locale));
+        $locales = array($firstLocale, $secondLocale);
+        $localeRepository->findBy(array('enabled' => true))->willReturn($locales);
 
-        $locale->getCode()->willReturn('en');
+        $firstLocale->getCode()->willReturn('en_US');
+        $secondLocale->getCode()->willReturn('pl_PL');
 
-        $this->isLocaleAvailable('en')->shouldReturn(true);
-        $this->isLocaleAvailable('fr')->shouldReturn(false);
+        $this->getAvailableLocales()->shouldReturn(array('en_US', 'pl_PL'));
+    }
+
+    function it_checks_if_the_locale_code_is_available(
+        RepositoryInterface $localeRepository,
+        LocaleInterface $firstLocale,
+        LocaleInterface $secondLocale
+    ) {
+        $locales = array($firstLocale, $secondLocale);
+        $localeRepository->findBy(array('enabled' => true))->willReturn($locales);
+
+        $firstLocale->getCode()->willReturn('en_US');
+        $secondLocale->getCode()->willReturn('pl_PL');
+
+        $this->isLocaleAvailable('en_US')->shouldReturn(true);
+        $this->isLocaleAvailable('de_DE')->shouldReturn(false);
     }
 }
