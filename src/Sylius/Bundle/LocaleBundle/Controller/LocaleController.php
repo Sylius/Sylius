@@ -38,7 +38,7 @@ class LocaleController extends ResourceController
             $locale = $this->getLocaleContext()->getDefaultLocale();
         }
 
-        $this->getLocaleContext()->setLocale($locale);
+        $this->getLocaleContext()->setCurrentLocale($locale);
 
         if ($this->config->isApiRequest()) {
             $view = $this
