@@ -13,7 +13,6 @@ bin/behat -s products -f progress features/backend/product_options.feature
 bin/behat -s products -f progress features/backend/product_archetypes.feature
 bin/behat -s products -f progress features/backend/product_taxonomies.feature
 bin/behat -s products -f progress features/backend/product_variants.feature
-bin/behat -s products -f progress features/backend/products.feature
 bin/behat -s products -f progress features/backend/products_filter.feature
 bin/behat -s products -f progress features/frontend/products.feature
 
