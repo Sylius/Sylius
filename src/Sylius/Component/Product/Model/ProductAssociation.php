@@ -11,12 +11,15 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Sylius\Component\Association\Model\AbstractAssociation;
+use Sylius\Component\Association\Model\AssociationInterface;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
+
 /**
- * ProductAssociation model.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductAssociation extends Association
+class ProductAssociation extends AbstractAssociation implements AssociationInterface
 {
     /**
      * @var ProductInterface
@@ -25,26 +28,29 @@ class ProductAssociation extends Association
 
     /**
      * @param ProductInterface $product
-     * @param AssociationType $type
+     * @param AssociationTypeInterface $type
      */
-    public function __construct(ProductInterface $product, AssociationType $type)
+    public function __construct(ProductInterface $product, AssociationTypeInterface $type)
     {
         parent::__construct($type);
         $this->product = $product;
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return ProductInterface
      */
-    final public function getAssociatedObject()
+    public function getAssociatedObject()
     {
         return $this->product;
     }
 
-    final public function setAssociatedObject(ProductInterface $product)
+    /**
+     * @param ProductInterface $product
+     */
+    public function setAssociatedObject(ProductInterface $product)
     {
         $this->product = $product;
-
-        return $this;
     }
 }

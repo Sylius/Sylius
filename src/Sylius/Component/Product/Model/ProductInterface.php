@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
+use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -79,16 +80,17 @@ interface ProductInterface extends
     public function setMetaDescription($metaDescription);
 
     /**
-     * Add association to product
-     *
-     * @param Association $association
+     * @param AssociationInterface $association
      */
-    public function addAssociation(Association $association);
+    public function addAssociation(AssociationInterface $association);
 
     /**
-     * Get associations
-     *
-     * @param Association[] $association
+     * @param AssociationInterface[] $association
      */
     public function getAssociations();
+
+    /**
+     * @param AssociationInterface $association
+     */
+    public function removeAssociation(AssociationInterface $association);
 }

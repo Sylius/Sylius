@@ -9,26 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Product\Model;
+namespace spec\Sylius\Component\Association\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class AssociationTypeSpec extends ObjectBehavior
 {
-    function let()
+
+    function it_is_initializable()
     {
-        $this->beConstructedWith('Cross sell');
+        $this->shouldHaveType('Sylius\Component\Association\Model\AssociationType');
+    }
+
+    function it_implements_association_type_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Association\Model\AssociationTypeInterface');
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldBe('Cross sell');
-    }
-
-    function it_needs_to_have_mutable_name_sadly()
-    {
-        $this->setName('Changed name')->shouldBe($this);
+        $this->setName('Changed name');
         $this->getName()->shouldBe('Changed name');
     }
 

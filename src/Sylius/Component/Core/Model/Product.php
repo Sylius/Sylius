@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
@@ -69,6 +70,11 @@ class Product extends BaseProduct implements ProductInterface
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
+
+    /**
+     * @var Collection|AssociationInterface[]
+     */
+    protected $associations;
 
     /**
      * Constructor.

@@ -9,40 +9,42 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Model;
+namespace Sylius\Component\Association\Model;
 
 /**
- * Abstract association class
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-abstract class Association
+abstract class AbstractAssociation implements AssociationInterface
 {
     /**
-     * @var mixed $id
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var AssociationTypeInterface
      */
-    private $type;
+    protected $type;
 
     /**
      * @var \DateTime
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var \DateTime
      */
-    private $deletedAt;
+    protected $deletedAt;
 
+    /**
+     * @param AssociationTypeInterface $type
+     */
     public function __construct(AssociationTypeInterface $type)
     {
         $this->type = $type;
@@ -50,33 +52,40 @@ abstract class Association
         $this->updatedAt = new \DateTime();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @return AssociationType
+     * {@inheritdoc}
      */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setType(AssociationTypeInterface $type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isDeleted()
     {
         return (boolean) $this->deletedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     abstract public function getAssociatedObject();
 } 

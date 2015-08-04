@@ -13,9 +13,13 @@ namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\AssociationType;
+use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Component\Product\Model\ProductInterface;
 
+/**
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class ProductAssociationSpec extends ObjectBehavior
 {
     function let(ProductInterface $product, AssociationType $associationType)
@@ -23,13 +27,29 @@ class ProductAssociationSpec extends ObjectBehavior
         $this->beConstructedWith($product, $associationType);
     }
 
-    function it_is_association()
+    function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Association');
+        $this->shouldHaveType('Sylius\Component\Product\Model\ProductAssociation');
     }
 
-    function it_allows_to_get_associated_product(ProductInterface $product)
+    function it_extends_abstract_association()
     {
-        $this->getAssociatedObject()->shouldBe($product);
+        $this->shouldHaveType('Sylius\Component\Association\Model\AbstractAssociation');
+    }
+
+    function it_implements_association_interface()
+    {
+        $this->shouldHaveType('Sylius\Component\Association\Model\AssociationInterface');
+    }
+
+    function it_has_associated_object($product)
+    {
+        $this->getAssociatedObject()->shouldReturn($product);
+    }
+
+    function its_associated_object_is_mutable(ProductInterface $newProduct)
+    {
+        $this->setAssociatedObject($newProduct);
+        $this->getAssociatedObject()->shouldReturn($newProduct);
     }
 }

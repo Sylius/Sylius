@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Model;
+namespace Sylius\Component\Association\Model;
 
 /**
- * AssociationType model.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class AssociationType implements AssociationTypeInterface
 {
     /**
-     * @var mixed
+     * @var int
      */
     protected $id;
 
@@ -46,33 +45,50 @@ class AssociationType implements AssociationTypeInterface
     /**
      * @param string $name
      */
-    public function __construct($name)
+    public function __construct()
     {
-        $this->setName($name);
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
+    {
+        $this->validateName($name);
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return boolean
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function validateName($name)
     {
         if (null === $name || !trim(str_replace(array("\n", "\t"), '', $name))) {
             throw new \InvalidArgumentException('Association type name cannot be empty.');
         }
-        $this->name = $name;
 
-        return $this;
-    }
-
-    public function getId()
-    {
-        return $this->id;
+        return true;
     }
 }

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\Association;
 use Sylius\Component\Product\Model\AttributeValueInterface;
@@ -304,29 +305,18 @@ class ProductSpec extends ObjectBehavior
         $this->setDeletedAt($date)->shouldReturn($this);
     }
 
-    function it_allows_to_add_assoication(Association $association1, Association $association2)
+    function it_adds_association(AssociationInterface $association)
     {
-        $this
-            ->addAssociation($association1)
-            ->addAssociation($association2)
-        ;
+        $this->addAssociation($association);
 
-        $this->getAssociations()->shouldReturn(array(
-            $association1,
-            $association2
-        ));
+        $this->getAssociations()->shouldReturn(array($association));
     }
 
-    function it_allows_to_remove_assoication(Association $association1, Association $association2)
+    function it_allows_to_remove_association(AssociationInterface $association)
     {
-        $this
-            ->addAssociation($association1)
-            ->addAssociation($association2)
-            ->removeAssociation($association2)
-        ;
+        $this->addAssociation($association);
+        $this->removeAssociation($association);
 
-        $this->getAssociations()->shouldReturn(array(
-            $association1
-        ));
+        $this->getAssociations()->shouldReturn(array());
     }
 }
