@@ -29,11 +29,11 @@ Feature: Countries and provinces
          Then I should be on the country index page
           And I should see country with name "China" in the list
 
-    Scenario: ISO codes are listed in the index
+    Scenario: ISO names are listed in the index
         Given I am on the dashboard page
          When I follow "Countries"
          Then I should be on the country index page
-          And I should see country with iso code "FR" in the list
+          And I should see country with ISO name "FR" in the list
 
     Scenario: Seeing empty index of countries
         Given there are no countries

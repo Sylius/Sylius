@@ -19,7 +19,7 @@ Feature: Currency management
         When I follow "Currencies"
         Then I should be on the currency index page
         And I should see 4 currencies in the list
-        And I should see currency with rate "0.73986" in the list
+        And I should see currency with exchange rate "0.73986" in the list
 
     Scenario: Seeing empty index of currencies
         Given there are no currencies
@@ -56,7 +56,7 @@ Feature: Currency management
         And I fill in "Exchange rate" with "0.76498"
         And I press "Save changes"
         Then I should be on the currency index page
-        And I should see currency with rate "0.76498" in the list
+        And I should see currency with exchange rate "0.76498" in the list
 
     Scenario: Deleting a currency
         Given I am on the currency index page
