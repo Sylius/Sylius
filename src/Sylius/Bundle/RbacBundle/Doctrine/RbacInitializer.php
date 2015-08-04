@@ -133,19 +133,27 @@ class RbacInitializer
                 $role->setName($data['name']);
                 $role->setDescription($data['description']);
                 $role->setParent($root);
-
-                foreach ($data['permissions'] as $permission) {
-                    $role->addPermission($this->permissionsByCode[$permission]);
-                }
-
-                $role->setSecurityRoles($data['security_roles']);
-
-                $this->roleManager->persist($role);
-
                 if ($output) {
                     $output->writeln(sprintf('Adding role "<comment>%s</comment>". (<info>%s</info>)', $data['name'], $code));
                 }
             }
+
+            foreach ($data['permissions'] as $permission) {
+                if (!$role->hasPermission($this->permissionsByCode[$permission])) {
+                    $role->addPermission($this->permissionsByCode[$permission]);
+                    if ($output) {
+                        $output->writeln(sprintf('Adding role:permission <info>%s</info>:<comment>%s</comment>',
+                            $role->getCode(),
+                            $permission
+                        ));
+                    }
+                }
+            }
+
+            $role->setSecurityRoles($data['security_roles']);
+
+            $this->roleManager->persist($role);
+
 
             $rolesByCode[$code] = $role;
         }
