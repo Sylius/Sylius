@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
@@ -56,14 +57,26 @@ class Product extends BaseProduct implements ProductInterface
      */
     protected $mainTaxon;
 
+    /**
+     * @var Collection|ReviewInterface[]
+     */
+    protected $reviews;
+
+    /**
+     * @var float
+     */
+    protected $averageRating;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
+        $this->averageRating = 0;
     }
 
     /**
@@ -353,5 +366,53 @@ class Product extends BaseProduct implements ProductInterface
     public function setMainTaxon(TaxonInterface $mainTaxon = null)
     {
         $this->mainTaxon = $mainTaxon;
+    }
+
+    /**
+     * @return Collection|ReviewInterface[]
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param Collection $reviews
+     */
+    public function setReviews(Collection $reviews)
+    {
+        $this->reviews = $reviews;
+    }
+
+    /**
+     * @param ReviewInterface $review
+     */
+    public function addReview(ReviewInterface $review)
+    {
+        $this->reviews->add($review);
+    }
+
+    /**
+     * @param ReviewInterface $review
+     */
+    public function removeReview(ReviewInterface $review)
+    {
+        $this->reviews->remove($review);
+    }
+
+    /**
+     * @param float $averageRating
+     */
+    public function setAverageRating($averageRating)
+    {
+        $this->averageRating = $averageRating;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
     }
 }

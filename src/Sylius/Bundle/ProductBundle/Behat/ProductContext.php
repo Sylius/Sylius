@@ -94,6 +94,10 @@ class ProductContext extends DefaultContext
                 $this->configureProductPricingCalculator($product, $data);
             }
 
+            if (isset($data['average_rating'])) {
+                $product->setAverageRating($data['average_rating']);
+            }
+
             $manager->persist($product);
         }
 

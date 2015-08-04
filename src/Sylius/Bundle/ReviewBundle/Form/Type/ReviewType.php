@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -19,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewType extends AbstractType
+class ReviewType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -29,17 +30,23 @@ class ReviewType extends AbstractType
         $builder
             ->add('rating', 'choice', array(
                 'choices' => $this->createRatingList($options['rating_steps']),
-                'label' => 'sylius.form.review.rating.label',
+                'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ))
+            ->add('author', 'text', array(
+                'label' => 'sylius.form.review.author',
+                'required' => false,
+            ))
             ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title.label'
+                'label' => 'sylius.form.review.title',
             ))
             ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment.label'
+                'label' => 'sylius.form.review.comment',
             ))
         ;
+
+        $builder->get('author')->addModelTransformer(new ReviewAuthorTransformer());
     }
 
     /**
@@ -48,7 +55,8 @@ class ReviewType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'rating_steps' => 5,
+            'rating_steps'      => 5,
+            'validation_groups' => $this->validationGroups,
         ));
     }
 

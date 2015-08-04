@@ -20,6 +20,7 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Product" table="sylius_product">
 
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
+        <field name="averageRating" column="average_rating" type="float" nullable="false" />
 
         <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
@@ -55,6 +56,12 @@
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+
+        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="product">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <gedmo:loggable />
     </mapped-superclass>

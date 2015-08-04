@@ -101,8 +101,8 @@ class WebContext extends DefaultContext
     }
 
     /**
-     * @Then /^I should be on the page of ([^""(w)]*) "([^""]*)"$/
-     * @Then /^I should still be on the page of ([^""(w)]*) "([^""]*)"$/
+     * @Then /^I should be on the page of ([^""]*) "([^""]*)"$/
+     * @Then /^I should still be on the page of ([^""]*) "([^""]*)"$/
      */
     public function iShouldBeOnTheResourcePageByName($type, $name)
     {
@@ -131,7 +131,7 @@ class WebContext extends DefaultContext
     }
 
     /**
-     * @Given /^I am (building|viewing|editing) ([^""(w)]*) "([^""]*)"$/
+     * @Given /^I am (building|viewing|editing) ([^""]*) "([^""]*)"$/
      */
     public function iAmDoingSomethingWithResourceByName($action, $type, $name)
     {

@@ -248,6 +248,8 @@ sylius:
             index: Reports
         role:
             index: Roles
+        review:
+            index: Reviews
         route:
             index: Routes
         sales: Sales
@@ -782,6 +784,9 @@ sylius:
         options: Options
         original_price: Original price
         price: Retail price
+        attributes: Attributes
+        rating: Rating
+        restricted_zone: Restricted zone
         remove_attribute: Remove attribute
         restricted_zone: Restricted zone
         shipping_category: Shipping category

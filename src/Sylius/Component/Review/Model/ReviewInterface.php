@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Review\Model;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -20,9 +21,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ReviewInterface extends TimestampableInterface
 {
-    const MODERATION_STATUS_NEW      = 'new';
-    const MODERATION_STATUS_APPROVED = 'approved';
-    const MODERATION_STATUS_REJECTED = 'rejected';
+    const STATUS_NEW      = 'new';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_REJECTED = 'rejected';
 
     /**
      * @param string $title
@@ -55,14 +56,14 @@ interface ReviewInterface extends TimestampableInterface
     public function getComment();
 
     /**
-     * @param string $email
+     * @param CustomerInterface $customer
      */
-    public function setAuthorEmail($email);
+    public function setAuthor(CustomerInterface $customer = null);
 
     /**
-     * @return string
+     * @return CustomerInterface
      */
-    public function getAuthorEmail();
+    public function getAuthor();
 
     /**
      * @param string $status
