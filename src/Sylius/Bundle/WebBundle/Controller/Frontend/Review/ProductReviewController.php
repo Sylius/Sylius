@@ -12,7 +12,13 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Review;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -20,12 +26,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Justin Hilles <justin@1011i.com>
  * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ProductReviewController extends ResourceController
 {
     /**
-     * Overrides parent to filter reviews by related product
-     *
      * {@inheritdoc}
      */
     public function indexAction(Request $request)
@@ -40,34 +45,61 @@ class ProductReviewController extends ResourceController
     }
 
     /**
-     * Overrides parent to customize form
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function getForm($resource = null)
+    public function createAction(Request $request)
     {
-        $product = $this->findProductOr404();
+        $this->isGrantedOr403('create');
 
-        if ($resource) {
-            $resource->setProduct($product);
+        $resource = $this->createNew();
+        $form = $this->getForm($resource);
 
-            if ($user = $this->getUser()) {
-                $resource->setUser($user);
-            }
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('create.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $resource,
+                'form'                           => $form->createView(),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function createWithAjaxAction(Request $request)
+    {
+        $resource = $this->createNew();
+        $form = $this->getForm($resource);
+
+        if (!$this->createResourceIfValid($request, $form)) {
+            return new JsonResponse($this->getDeepErrors($form));
         }
 
-        return $this->createForm($this->getConfiguration()->getFormType(), $resource, array(
-            'action' => $this->generateUrl('sylius_review_product', array('slug' => $product->getSlug())),
-            'allow_guest' => true
-        ));
+        return new JsonResponse('success');
     }
 
-    public function redirectTo($resource)
+    /**
+     * {@inheritdoc}
+     */
+    public function createNew()
     {
-        $product = $resource->getProduct();
+        $review = parent::createNew();
+        $review->setProduct($this->findProductOr404());
 
-        return $this->redirect($this->generateUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        return $review;
     }
 
-    protected function findProductOr404()
+    /**
+     * @return ProductInterface
+     */
+    private function findProductOr404()
     {
         $slug = $this->getRequest()->get('slug');
 
@@ -76,5 +108,56 @@ class ProductReviewController extends ResourceController
         }
 
         return $product;
+    }
+
+    /**
+     * @param Request $request
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
+    private function createResourceIfValid(Request $request, FormInterface $form)
+    {
+        if ($form->submit($request)->isValid()) {
+            $this->domainManager->create($form->getData());
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param FormInterface $form
+     *
+     * @return array
+     */
+    private function getDeepErrors(FormInterface $form)
+    {
+        $errors = array();
+
+        foreach ($form as $child) {
+            if ($child->isSubmitted() && $child->isValid()) {
+                continue;
+            }
+            $errors[$child->getName()] = $this->getChildErrorsAsArray($child->getErrors());
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param array $errors
+     *
+     * @return array
+     */
+    private function getChildErrorsAsArray(array $errors)
+    {
+        $childErrors = array();
+        foreach ($errors as $error) {
+            $childErrors[] = $error->getMessage();
+        }
+
+        return $childErrors;
     }
 }

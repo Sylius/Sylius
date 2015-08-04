@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
@@ -27,14 +28,40 @@ class ReviewAdminType extends ReviewType
     {
         parent::buildForm($builder, $options);
 
-        $builder->remove('rating');
-        $builder->add('status', 'choice', array(
-            'choices' => array(
-                ReviewInterface::MODERATION_STATUS_NEW => 'sylius.form.review.status.new',
-                ReviewInterface::MODERATION_STATUS_APPROVED => 'sylius.form.review.status.approved',
-                ReviewInterface::MODERATION_STATUS_REJECTED => 'sylius.form.review.status.rejected'
-            ),
-            'label' => 'sylius.form.review.status.label'
+        $builder->get('author')->resetModelTransformers();
+
+        $builder
+            ->remove('author')
+            ->add('author', 'entity', array(
+                'class' => 'Sylius\Component\Core\Model\Customer',
+                'label' => 'sylius.form.review.author',
+                'property' => 'email',
+            ))
+            ->add('status', 'choice', array(
+                'choices' => array(
+                    ReviewInterface::STATUS_NEW      => 'sylius.form.review.status.new',
+                    ReviewInterface::STATUS_APPROVED => 'sylius.form.review.status.approved',
+                    ReviewInterface::STATUS_REJECTED => 'sylius.form.review.status.rejected'
+                ),
+                'label' => 'sylius.form.review.status.label'
+            ))
+            ->add('product', 'entity', array(
+                'class'    => 'Sylius\Component\Core\Model\Product',
+                'label'    => 'sylius.form.review.product',
+                'property' => 'name',
+            ))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'rating_steps'      => 5,
+            'data_class'        => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
         ));
     }
 

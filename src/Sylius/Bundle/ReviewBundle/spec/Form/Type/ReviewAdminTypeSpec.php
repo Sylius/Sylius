@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -34,7 +35,7 @@ class ReviewAdminTypeSpec extends ObjectBehavior
         $builder
             ->add('rating', 'choice', array(
                 'choices' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-                'label' => 'sylius.form.review.rating.label',
+                'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ))
@@ -43,8 +44,17 @@ class ReviewAdminTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('author', 'text', array(
+                'label'    => 'sylius.form.review.author',
+                'required' => false,
+            ))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
             ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title.label'
+                'label' => 'sylius.form.review.title'
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -52,14 +62,24 @@ class ReviewAdminTypeSpec extends ObjectBehavior
 
         $builder
             ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment.label'
+                'label' => 'sylius.form.review.comment'
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
+        $builder->get('author')->willReturn($builder)->shouldBeCalled();
+        $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer'))->willReturn($builder)->shouldBeCalled();
+
+        $builder->resetModelTransformers()->shouldBeCalled();
+        $builder->remove('author')->willReturn($builder)->shouldBeCalled();
+
         $builder
-            ->remove('rating')
+            ->add('author', 'entity', array(
+                'class'    => 'Sylius\Component\Core\Model\Customer',
+                'label'    => 'sylius.form.review.author',
+                'property' => 'email',
+            ))
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
@@ -72,6 +92,16 @@ class ReviewAdminTypeSpec extends ObjectBehavior
                     'rejected' => 'sylius.form.review.status.rejected'
                 ),
                 'label' => 'sylius.form.review.status.label'
+            ))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
+            ->add('product', 'entity', array(
+                'class'    => 'Sylius\Component\Core\Model\Product',
+                'label'    => 'sylius.form.review.product',
+                'property' => 'name',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()

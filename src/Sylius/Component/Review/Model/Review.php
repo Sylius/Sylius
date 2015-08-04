@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Review\Model;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
@@ -40,9 +41,9 @@ class Review implements ReviewInterface
     protected $comment;
 
     /**
-     * @var string
+     * @var CustomerInterface
      */
-    protected $authorEmail;
+    protected $author;
 
     /**
      * @var string
@@ -70,7 +71,7 @@ class Review implements ReviewInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->moderationStatus = ReviewInterface::MODERATION_STATUS_NEW;
+        $this->status = ReviewInterface::STATUS_NEW;
     }
 
     /**
@@ -130,19 +131,19 @@ class Review implements ReviewInterface
     }
 
     /**
-     * @param string $email
+     * @param CustomerInterface $customer
      */
-    public function setAuthorEmail($email)
+    public function setAuthor(CustomerInterface $customer = null)
     {
-        $this->authorEmail = $email;
+        $this->author = $customer;
     }
 
     /**
-     * @return string
+     * @return CustomerInterface
      */
-    public function getAuthorEmail()
+    public function getAuthor()
     {
-        return $this->authorEmail;
+        return $this->author;
     }
 
     /**

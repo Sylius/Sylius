@@ -11,12 +11,15 @@ sylius_partial_product_review_list:
             sorting:
                 createdAt: desc
             filterable: true
-            criteria: { 'moderationStatus': 'approved', 'product': $product }
+            criteria: { 'product': $product }
             template: 'SyliusWebBundle:Frontend/Review:_list.html.twig'
+            permission: false
 
 sylius_partial_product_review_form:
     pattern: /{slug}/new
+    methods: [GET]
     defaults:
         _controller: sylius.controller.frontend.review:createAction
         _sylius:
             template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
+            permission: false

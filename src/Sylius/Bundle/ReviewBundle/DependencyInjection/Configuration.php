@@ -47,8 +47,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addValidationGroupsSection(ArrayNodeDefinition $node)
@@ -60,6 +58,10 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('review')
                             ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius', 'sylius_review'))
+                        ->end()
+                        ->arrayNode('review_admin')
+                            ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
@@ -69,8 +71,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
@@ -84,9 +84,15 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\\Component\\Review\\Model\\Review')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ReviewBundle\\Controller\\ReviewController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\ReviewBundle\\Form\\Type\\ReviewType')->end()
+                                ->arrayNode('form')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('default')->defaultValue('Sylius\\Bundle\\ReviewBundle\\Form\\Type\\ReviewType')->end()
+                                        ->scalarNode('admin')->defaultValue('Sylius\\Bundle\\ReviewBundle\\Form\\Type\\ReviewAdminType')->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

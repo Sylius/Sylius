@@ -49,9 +49,13 @@
             </call>
         </service>
         <service id="sylius.controller.frontend.review" class="%sylius.controller.frontend.review.class%">
-            <argument>sylius</argument>
-            <argument>review</argument>
-            <argument>SyliusReviewBundle:Review</argument>
+            <argument type="service">
+                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
+                    <argument>sylius</argument>
+                    <argument>review</argument>
+                    <argument>SyliusReviewBundle:Review</argument>
+                </service>
+            </argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Review\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
@@ -47,10 +48,10 @@ class ReviewSpec extends ObjectBehavior
         $this->getComment()->shouldReturn('Lorem ipsum dolor');
     }
 
-    function it_has_author_email()
+    function it_has_author(CustomerInterface $customer)
     {
-        $this->setAuthorEmail('john.doe@example.com');
-        $this->getAuthorEmail()->shouldReturn('john.doe@example.com');
+        $this->setAuthor($customer);
+        $this->getAuthor()->shouldReturn($customer);
     }
 
     function it_has_status()

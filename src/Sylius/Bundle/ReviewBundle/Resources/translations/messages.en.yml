@@ -2,17 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    review:
+        header: Product reviews
+        no_results: There are no reviews for this product.
     form:
         review:
-            rating:
-                label: Overall Rating
-                empty_value: Select a rating
-            title:
-                label: Title
-            comment:
-                label: Comment
+            header: Add a review
+            rating: Rating
+            title: Title
+            comment: Comment
+            author: Author
             status:
                 label: Status
                 new: New
-                accepted: Accepted
+                approved: Approved
                 rejected: Rejected
+            submit: Submit
+            product: Product

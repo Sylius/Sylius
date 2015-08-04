@@ -1,7 +1,7 @@
 {% macro moderation_label(review) %}
 {% spaceless %}
     {% set statusLabels = { 'new': 'default', 'approved': 'success', 'rejected': 'danger' } %}
-    {{ statusLabels[review.moderationStatus] }}
+    {{ statusLabels[review.status] }}
 {% endspaceless %}
 {% endmacro %}
 
@@ -19,7 +19,8 @@
                 <th>Product</th>
                 <th>Status</th>
                 <th>Rating</th>
-                <th>Created At</th>
+                <th>Author</th>
+                <th>Created at</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,8 +29,9 @@
             <tr>
                 <td>{{ review.id }}</td>
                 <td>{{ review.product.name }}</td>
-                <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.moderationStatus }}</label></td>
+                <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.status }}</label></td>
                 <td><label class="label label-default">{{ review.rating }}</label></td>
+                <td><a href="{{ path('sylius_backend_customer_show', { 'id': review.author.id }) }}">{{ review.author.email }}</a></td>
                 <td>{{ review.createdAt|date }}</td>
                 <td>
                     <div class="pull-right">

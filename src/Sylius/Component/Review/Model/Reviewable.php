@@ -19,11 +19,6 @@ use Doctrine\Common\Collections\Collection;
 interface Reviewable
 {
     /**
-     * @return float
-     */
-    public function getAverageRating();
-
-    /**
      * @return Collection|ReviewInterface[]
      */
     public function getReviews();
@@ -42,4 +37,14 @@ interface Reviewable
      * @param ReviewInterface $review
      */
     public function removeReview(ReviewInterface $review);
+
+    /**
+     * @param float $averageRating
+     */
+    public function setAverageRating($averageRating);
+
+    /**
+     * @return float
+     */
+    public function getAverageRating();
 }

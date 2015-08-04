@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -35,7 +36,7 @@ class ReviewTypeSpec extends ObjectBehavior
         $builder
             ->add('rating', 'choice', array(
                 'choices' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-                'label' => 'sylius.form.review.rating.label',
+                'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ))
@@ -44,8 +45,17 @@ class ReviewTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('author', 'text', array(
+                'label' => 'sylius.form.review.author',
+                'required' => false,
+            ))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
             ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title.label'
+                'label' => 'sylius.form.review.title'
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -53,11 +63,14 @@ class ReviewTypeSpec extends ObjectBehavior
 
         $builder
             ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment.label'
+                'label' => 'sylius.form.review.comment'
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
+
+        $builder->get('author')->willReturn($builder)->shouldBeCalled();
+        $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer'))->willReturn($builder)->shouldBeCalled();
 
         $this->buildForm($builder, array('rating_steps' => 5));
     }

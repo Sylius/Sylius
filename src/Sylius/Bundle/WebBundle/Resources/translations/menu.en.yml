@@ -72,6 +72,7 @@ sylius:
                 products: Products
                 promotions: Promotions
                 report: Reports
+                reviews: Reviews
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders
