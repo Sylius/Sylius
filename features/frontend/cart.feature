@@ -66,7 +66,7 @@ Feature: Cart
           And I click "PHP Top"
          When I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see item with unit price "€5.99" in the list
+          And I should see item with price "€5.99" in the list
 
     Scenario: Correct cart total is displayed after adding the item
         Given I am on the store homepage
