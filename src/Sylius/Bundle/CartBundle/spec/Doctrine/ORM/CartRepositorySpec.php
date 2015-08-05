@@ -38,7 +38,7 @@ class CartRepositorySpec extends ObjectBehavior
         $expr->eq('o.state', ':state')->shouldBeCalled()->willReturn($expr);
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->leftJoin('o.items', 'item')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
