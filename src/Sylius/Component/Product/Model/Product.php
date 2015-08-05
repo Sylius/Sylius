@@ -14,7 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
-use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -57,13 +56,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $attributes;
 
     /**
-     * Product options.
-     *
-     * @var Collection|Association[]
-     */
-    protected $associations;
-
-    /**
      * Product variants.
      *
      * @var Collection|BaseVariantInterface[]
@@ -74,6 +66,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var Collection|BaseOptionInterface[]
      */
     protected $options;
+
+    /**
+     * @var Collection|AssociationInterface[]
+     */
+    protected $associations;
 
     public function __construct()
     {

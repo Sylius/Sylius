@@ -14,15 +14,14 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
     xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Component\Product\Model\Association" table="sylius_association" inheritance-type="SINGLE_TABLE"
-            repository-class="Sylius\Bundle\ProductBundle\Doctrine\ORM\AssociationRepository">
-        <discriminator-column name="association_to" type="string" />
-        <discriminator-map>
-            <discriminator-mapping value="association" class="Sylius\Component\Product\Model\Association" />
-        </discriminator-map>
+    <mapped-superclass name="Sylius\Component\Association\Model\AssociationType" table="sylius_association_type">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
+        <field name="name" column="name" type="string">
+            <gedmo:versioned />
+        </field>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -32,13 +31,8 @@
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
-        <many-to-one field="type" target-entity="Sylius\Component\Product\Model\AssociationTypeInterface">
-            <join-column name="type_id" referenced-column-name="id" />
-        </many-to-one>
-
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />
-    </entity>
-
+    </mapped-superclass>
 
 </doctrine-mapping>

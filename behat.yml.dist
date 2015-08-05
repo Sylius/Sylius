@@ -220,8 +220,7 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
-                - Sylius\Bundle\ProductBundle\Behat\ProductAssociationContext
-                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\AssociationBundle\Behat\ProductAssociationContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext

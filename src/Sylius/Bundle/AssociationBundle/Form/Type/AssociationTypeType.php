@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Form\Type;
+namespace Sylius\Bundle\AssociationBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Association type form type.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class AssociationTypeType extends AbstractResourceType

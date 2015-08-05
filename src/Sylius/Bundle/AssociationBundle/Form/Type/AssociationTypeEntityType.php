@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Form\Type;
+namespace Sylius\Bundle\AssociationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Association type entity form type.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class AssociationTypeEntityType extends AbstractType
@@ -26,6 +24,9 @@ class AssociationTypeEntityType extends AbstractType
      */
     private $className;
 
+    /**
+     * @param string $className
+     */
     public function __construct($className)
     {
         $this->className = $className;

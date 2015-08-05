@@ -1,5 +1,5 @@
 {
-    "name": "sylius/archetype",
+    "name": "sylius/association",
     "type": "library",
     "description": "Component for creating product associations for up or cross selling",
     "keywords": ["shop", "ecommerce", "association", "feature"],

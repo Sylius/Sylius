@@ -9,19 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Behat;
+namespace Sylius\Bundle\AssociationBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Product\Model\AssociationType;
+use Sylius\Component\Association\Model\AssociationType;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAssociation;
+use Sylius\Component\Product\Model\ProductInterface;
 
+/**
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ */
 class ProductAssociationContext extends DefaultContext
 {
+    /**
+     * @var ProductInterface
+     */
     private $currentProduct;
 
     /**
-     * @When I create :arg1 association type
+     * @When I create :typeName association type
      */
     public function iCreateAssociationType($typeName)
     {
@@ -31,7 +39,7 @@ class ProductAssociationContext extends DefaultContext
     }
 
     /**
-     * @Then I should be able to add :arg1 associations to every product
+     * @Then I should be able to add :typeName associations to every product
      */
     public function iShouldBeAbleToAddAssociationsToEveryProduct($typeName)
     {
@@ -43,7 +51,7 @@ class ProductAssociationContext extends DefaultContext
             ->getOneOrNullResult()
        ;
         $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $typeName));
-        if (!$associationType) {
+        if (!$associationType instanceof AssociationTypeInterface) {
             throw new \InvalidArgumentException(sprintf('Association Type %s does not exists and it should', $typeName));
         }
 
@@ -68,22 +76,23 @@ class ProductAssociationContext extends DefaultContext
     public function thereAreFollowingAssociationTypes(TableNode $table)
     {
         foreach ($table->getHash() as $row) {
-            $associationType = new AssociationType($row['name']);
+            $associationType = new AssociationType();
+            $associationType->setName($row['name']);
             $this->getEntityManager()->persist($associationType);
         }
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given I want to assign new association for :arg1 product
+     * @Given I want to assign new association for :productName product
      */
     public function iWantToAssignNewAssociationForProduct($productName)
     {
-        $this->currentProduct = $this->getRepository('Product')->findOneBy(['name' => $productName]);
+        $this->currentProduct = $this->getRepository('Product')->findOneBy(array('name' => $productName));
     }
 
     /**
-     * @When I select :arg1 product as :arg2 association
+     * @When I select :associatedProductName product as :associationTypeName association
      */
     public function iSelectProductAsAssociation($associatedProductName, $associationTypeName)
     {
@@ -91,8 +100,8 @@ class ProductAssociationContext extends DefaultContext
             throw new \RuntimeException('Current product have to be set first. Please run \'I want to assign new association for "<product name>" product\' first');
         }
 
-        $associatedProduct = $this->getRepository('Product')->findOneBy(['name' => $associatedProductName]);
-        $associationType = $this->getRepository('AssociationType')->findOneBy(['name' => $associationTypeName]);
+        $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProductName));
+        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationTypeName));
 
         $this->currentProduct->addAssociation(new ProductAssociation($associatedProduct, $associationType));
 
@@ -101,13 +110,13 @@ class ProductAssociationContext extends DefaultContext
     }
 
     /**
-     * @Then I should see that :arg1 is connected with :arg2 by :arg3 association
+     * @Then I should see that :product is connected with :associatedProduct by :associationType association
      */
-    public function iShouldSeeThatIsConnectedWithByAssociation($productName, $associatedProductName, $associationTypeName)
+    public function iShouldSeeThatIsConnectedWithByAssociation($product, $associatedProduct, $associationType)
     {
-        $product = $this->getRepository('Product')->findOneBy(array('name' => $productName));
-        $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProductName));
-        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationTypeName));
+        $product = $this->getRepository('Product')->findOneBy(array('name' => $product));
+        $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProduct));
+        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationType));
 
         $this->getSession()->visit($this->generateUrl('sylius_backend_product_update', array('id' => $product->getId())));
         $this->assertSession()->fieldValueEquals('sylius_product[associations][0][type]', $associationType->getId());

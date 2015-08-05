@@ -1,0 +1,60 @@
+{
+    "name": "sylius/association-bundle",
+    "type": "symfony-bundle",
+    "description": "Products association for your Symfony2 applications.",
+    "keywords": ["shop", "ecommerce", "products", "product", "assortment", "association"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Paweł Jędrzejewski",
+          "homepage": "http://pjedrzejewski.com"
+        },
+        {
+          "name": "Leszek Prabucki",
+          "email": "leszek.prabucki@gmail.com"
+        },
+        {
+          "name": "Łukasz Chruściel",
+          "email": "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.3",
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/resource-bundle":          "0.15.*@dev",
+        "sylius/archetype":                "0.15.*@dev",
+        "sylius/attribute-bundle":         "0.15.*@dev",
+        "sylius/variation-bundle":         "0.15.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.0",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
