@@ -1,0 +1,43 @@
+{
+    "name": "sylius/seo-bundle",
+    "type": "symfony-bundle",
+    "description": "Seo management for Symfony2 projects.",
+    "keywords": ["seo"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "~5.5",
+        "sylius/seo": "0.15.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\SeoBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\SeoBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}
