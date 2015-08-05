@@ -48,7 +48,7 @@ class ChannelRepositorySpec extends ObjectBehavior
         $expr->like('o.url', ':hostname')->shouldBeCalled()->willReturn($expr);
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('hostname', '%host%')->shouldBeCalled()->willReturn($builder);
 
