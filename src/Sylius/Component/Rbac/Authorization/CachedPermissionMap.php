@@ -21,6 +21,8 @@ use Sylius\Component\Rbac\Model\RoleInterface;
  */
 class CachedPermissionMap implements PermissionMapInterface
 {
+    const DEFAULT_TTL = 60;
+
     /**
      * @var PermissionMapInterface
      */
@@ -41,7 +43,7 @@ class CachedPermissionMap implements PermissionMapInterface
      * @param Cache $cache
      * @param int $ttl
      */
-    public function __construct(PermissionMapInterface $map, Cache $cache, $ttl = null)
+    public function __construct(PermissionMapInterface $map, Cache $cache, $ttl = self::DEFAULT_TTL)
     {
         $this->map = $map;
         $this->cache = $cache;
