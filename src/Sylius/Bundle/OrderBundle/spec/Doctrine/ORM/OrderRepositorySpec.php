@@ -45,7 +45,7 @@ class OrderRepositorySpec extends ObjectBehavior
         $expr->isNotNull('o.completedAt')->willReturn($expr);
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->leftJoin('o.items', 'item')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
@@ -62,7 +62,7 @@ class OrderRepositorySpec extends ObjectBehavior
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->select('COUNT(o.id)')->shouldBeCalled()->willReturn($builder);
         $builder->where('o.number = :number')->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('number', 10)->shouldBeCalled()->willReturn($builder);
