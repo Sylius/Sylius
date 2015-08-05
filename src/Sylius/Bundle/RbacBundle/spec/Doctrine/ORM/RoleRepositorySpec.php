@@ -52,7 +52,7 @@ class RoleRepositorySpec extends ObjectBehavior
 
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->where(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
 

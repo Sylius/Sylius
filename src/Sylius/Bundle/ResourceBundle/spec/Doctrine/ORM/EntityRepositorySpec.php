@@ -42,7 +42,7 @@ class EntityRepositorySpec extends ObjectBehavior
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
-            ->from(Argument::any(), Argument::any())
+            ->from(Argument::any(), Argument::any(), Argument::cetera())
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
