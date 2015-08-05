@@ -43,6 +43,12 @@
             <gedmo:versioned />
         </many-to-many>
 
+        <one-to-many field="customizationValues" mapped-by="subjectInstance" target-entity="Sylius\Component\Customization\Model\CustomizationValueInterface">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
+use Sylius\Component\Customization\Model\CustomizationValueInterface;
 
 /**
  * Order item model.
@@ -45,12 +46,20 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     protected $promotions;
 
+    /*
+     * Customization values.
+     *
+     * @var Collection|CustomizationValueInterface[]
+     */
+    protected $customizationValues;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->inventoryUnits = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->customizationValues = new ArrayCollection;
     }
 
     /**
@@ -86,6 +95,9 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         return parent::equals($item) || ($item instanceof self
             && $item->getVariant() === $this->variant
+            && $item->getUnitPrice() === $this->getUnitPrice()
+            && $item->getCustomizationSubject()->getCustomizations()->isEmpty()
+            && $this->getCustomizationSubject()->getCustomizations()->isEmpty()
         );
     }
 
@@ -175,5 +187,83 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomizationValues()
+    {
+        return $this->customizationValues;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCustomizationValues(ArrayCollection $customizationValues)
+    {
+        foreach ($customizationValues as $customizationValue) {
+            $customizationValue->setSubjectInstance($this);
+        }
+
+        $this->customizationValues = $customizationValues;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCustomizationValue(CustomizationValueInterface $customizationValue)
+    {
+        if (!$this->hasCustomizationValue($customizationValue)) {
+            $customizationValue->setSubjectInstance($this);
+            $this->customizationValues->add($customizationValue);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCustomizationValue(CustomizationValueInterface $customizationValue)
+    {
+        if ($this->hasCustomizationValue($customizationValue)) {
+            $customizationValue->setSubjectInstance(null);
+            $this->customizationValues->removeElement($customizationValue);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCustomizationValue(CustomizationValueInterface $customizationValue)
+    {
+        return $this->customizationValues->contains($customizationValue);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomizationValueByName($name)
+    {
+        foreach ($this->customizationValues as $customizationValue) {
+            if ($name === $customizationValue->getCustomization()->getName()) {
+                return $customizationValue;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomizationSubject()
+    {
+        return $this->getProduct();
     }
 }

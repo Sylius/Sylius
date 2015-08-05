@@ -749,6 +749,7 @@ sylius:
             attributes: Attributes
             channels: Channels
             pricing: Pricing
+            customizations: Customizations
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
@@ -805,6 +806,15 @@ sylius:
     promotion_rule:
         configuration: Configuration
         type: Type
+    customization:
+        create: Create customization
+        create_header: New product customization
+        index_header: Product customizations
+        manage: Manage customizations
+        name: name
+        no_results: There are no customization configured.
+        update_header: Editing customization
+        updated_at: last update
     product_attribute:
         add_choice: Add choice
         create: Create product attribute

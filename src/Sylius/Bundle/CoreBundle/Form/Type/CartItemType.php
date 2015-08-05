@@ -14,6 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType as BaseCartItemType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -40,6 +42,21 @@ class CartItemType extends BaseCartItemType
                 'variable'  => $options['product']
             ));
         }
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
+            $item = $event->getData();
+
+            if (null === $item) {
+                return;
+            }
+
+            $product = isset($options['product']) ? $options['product'] : $item->getProduct();
+
+            $event->getForm()->add('customizationValues', 'sylius_customization_values', array(
+                'subjectInstance' => $item,
+                'customizations'  => $product->getCustomizations()
+            ));
+        });
     }
 
     /**

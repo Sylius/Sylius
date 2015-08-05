@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+
+    <mapped-superclass name="Sylius\Component\Customization\Model\CustomizationValue" table="sylius_customization_value">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="value" column="value" type="string" />
+        
+        <many-to-one field="customization" target-entity="Sylius\Component\Customization\Model\CustomizationInterface">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+        
+        <many-to-one field="subjectInstance" inversed-by="customizationValues" target-entity="Sylius\Component\Customization\Model\CustomizationSubjectInstanceInterface">
+            <join-column name="subject_instance_id" referenced-column-name="id" nullable="false" unique="false" />
+        </many-to-one>
+    </mapped-superclass>
+
+</doctrine-mapping>

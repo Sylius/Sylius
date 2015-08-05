@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customization\Model\CustomizationSubjectInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
@@ -29,7 +30,8 @@ interface ProductInterface extends
     BaseProductInterface,
     TaxableInterface,
     TaxonsAwareInterface,
-    ChannelsAwareInterface
+    ChannelsAwareInterface,
+    CustomizationSubjectInterface
 {
     /*
      * Variant selection methods.

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customization\Model\CustomizationInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
@@ -71,6 +72,13 @@ class Product extends BaseProduct implements ProductInterface
     protected $channels;
 
     /**
+     * Customizations
+     *
+     * @var Collection|CustomizationInterface[]
+     */
+    protected $customizations;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -80,6 +88,7 @@ class Product extends BaseProduct implements ProductInterface
         $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
+        $this->customizations = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }
@@ -300,8 +309,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setChannels(Collection $channels)
     {
         $this->channels = $channels;
-
-        return $this;
     }
 
     /**
@@ -322,6 +329,8 @@ class Product extends BaseProduct implements ProductInterface
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }
+
+        return $this;
     }
 
     /**
@@ -330,6 +339,46 @@ class Product extends BaseProduct implements ProductInterface
     public function hasChannel(BaseChannelInterface $channel)
     {
         return $this->channels->contains($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomizations()
+    {
+        return $this->customizations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCustomization(CustomizationInterface $customization)
+    {
+        if (!$this->hasCustomization($customization)) {
+            $this->customizations->add($customization);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCustomization(CustomizationInterface $customization)
+    {
+        return $this->customizations->contains($customization);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCustomization(CustomizationInterface $customization)
+    {
+        if ($this->hasCustomization($customization)) {
+            $this->customizations->removeElement($customization);
+        }
+
+        return $this;
     }
 
     /**

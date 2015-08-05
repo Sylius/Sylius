@@ -288,6 +288,13 @@ sylius_mailer:
             subject: sylius.emails.user.password_reset.subject
             template: SyliusWebBundle:Email:passwordReset.html.twig
 
+sylius_customization:
+    classes:
+        customization_subject:
+            model: %sylius.model.product.class%
+        customization_subject_instance:
+            model: %sylius.model.order_item.class%
+
 sylius_rbac:
     classes:
         role:
@@ -605,6 +612,13 @@ sylius_rbac:
         sylius.accounts: Manage user accounts
         sylius.taxes: Manage taxes
         sylius.support: Manage customer support
+
+        sylius.manage.customization: Manage customizations
+        sylius.customization.show: Show customization
+        sylius.customization.index: List customizations
+        sylius.customization.create: Create customization
+        sylius.customization.update: Edit customization
+        sylius.customization.delete: Delete customization
     permissions_hierarchy:
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
@@ -647,8 +661,9 @@ sylius_rbac:
         sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
+        sylius.manage.customization: [sylius.customization.show, sylius.customization.index, sylius.customization.create, sylius.customization.update, sylius.customization.delete]
 
-        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
+        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.customization]
         sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]

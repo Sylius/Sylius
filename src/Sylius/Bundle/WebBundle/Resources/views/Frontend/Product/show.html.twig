@@ -110,6 +110,9 @@
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
             {{ form_widget(form._token) }}
+            {% if product.customizations|length > 0 %}
+                {{ form_widget(form.customizationValues) }}
+            {% endif %}
             <br>
             <br>
             {% if sylius_is_restricted(product) %}
