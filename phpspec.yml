@@ -2,6 +2,7 @@ suites:
     Addressing        : { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing, src_path: src/Sylius/Component/Addressing }
     Attribute         : { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute, src_path: src/Sylius/Component/Attribute }
     Archetype         : { namespace: Sylius\Component\Archetype, psr4_prefix: Sylius\Component\Archetype, spec_path: src/Sylius/Component/Archetype, src_path: src/Sylius/Component/Archetype }
+    Association       : { namespace: Sylius\Component\Association, psr4_prefix: Sylius\Component\Association, spec_path: src/Sylius/Component/Association, src_path: src/Sylius/Component/Association }
     Cart              : { namespace: Sylius\Component\Cart, psr4_prefix: Sylius\Component\Cart, spec_path: src/Sylius/Component/Cart, src_path: src/Sylius/Component/Cart }
     Channel           : { namespace: Sylius\Component\Channel, psr4_prefix: Sylius\Component\Channel, spec_path: src/Sylius/Component/Channel, src_path: src/Sylius/Component/Channel }
     Core              : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core, src_path: src/Sylius/Component/Core }
@@ -35,6 +36,7 @@ suites:
     AddressingBundle  : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
     ApiBundle         : { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }
     AttributeBundle   : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
+    AssociationBundle : { namespace: Sylius\Bundle\AssociationBundle, psr4_prefix: Sylius\Bundle\AssociationBundle, spec_path: src/Sylius/Bundle/AssociationBundle, src_path: src/Sylius/Bundle/AssociationBundle }
     ArchetypeBundle   : { namespace: Sylius\Bundle\ArchetypeBundle, psr4_prefix: Sylius\Bundle\ArchetypeBundle, spec_path: src/Sylius/Bundle/ArchetypeBundle, src_path: src/Sylius/Bundle/ArchetypeBundle }
     CartBundle        : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle, src_path: src/Sylius/Bundle/CartBundle }
     ContentBundle     : { namespace: Sylius\Bundle\ContentBundle, psr4_prefix: Sylius\Bundle\ContentBundle, spec_path: src/Sylius/Bundle/ContentBundle, src_path: src/Sylius/Bundle/ContentBundle }

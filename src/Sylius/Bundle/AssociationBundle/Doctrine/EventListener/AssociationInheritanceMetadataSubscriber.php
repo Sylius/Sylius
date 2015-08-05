@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\EventListener;
+namespace Sylius\Bundle\AssociationBundle\Doctrine\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
@@ -21,14 +21,17 @@ use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
  */
 class AssociationInheritanceMetadataSubscriber implements EventSubscriber
 {
-    const ASSOCIATION_CLASS_NAME = 'Sylius\Component\Product\Model\Association';
+    const ASSOCIATION_CLASS_NAME = 'Sylius\Component\Association\Model\Association';
 
     /**
      * @var array
      */
     private $discriminatorMap = array();
 
-    public function __construct($discriminatorMap)
+    /**
+     * @param array $discriminatorMap
+     */
+    public function __construct(array $discriminatorMap)
     {
         $this->discriminatorMap = $discriminatorMap;
     }
@@ -41,17 +44,17 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
         return array('loadClassMetadata');
     }
 
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    /**
+     * @param LoadClassMetadataEventArgs $eventArguments
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments)
     {
-        /**
-         * @var \Doctrine\ORM\Mapping\ClassMetadata|\Doctrine\ODM\MongoDB\Mapping\ClassMetadata $metadata
-         */
-        $metadata = $eventArgs->getClassMetadata();
+        $classMetadata = $eventArguments->getClassMetadata();
 
-        if ($metadata->getName() !== self::ASSOCIATION_CLASS_NAME) {
+        if ($classMetadata->getName() !== self::ASSOCIATION_CLASS_NAME) {
             return;
         }
 
-        $metadata->setDiscriminatorMap($this->discriminatorMap);
+        $classMetadata->setDiscriminatorMap($this->discriminatorMap);
     }
 }

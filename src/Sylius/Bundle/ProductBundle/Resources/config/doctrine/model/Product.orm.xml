@@ -41,7 +41,7 @@
             <gedmo:versioned />
         </one-to-many>
 
-        <many-to-many field="associations" target-entity="Sylius\Component\Product\Model\Association">
+        <many-to-many field="associations" target-entity="Sylius\Component\Association\Model\AbstractAssociation">
             <join-table name="sylius_product_associations">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" />

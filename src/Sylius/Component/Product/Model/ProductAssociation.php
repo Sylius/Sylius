@@ -12,7 +12,6 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Association\Model\AbstractAssociation;
-use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationTypeInterface;
 
 /**
@@ -34,6 +33,24 @@ class ProductAssociation extends AbstractAssociation implements AssociationInter
     {
         parent::__construct($type);
         $this->product = $product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
+            'Sylius\Component\Product\Model\ProductInterface'              => 'sylius.model.product.class',
+            'Sylius\Component\Product\Model\ProductTranslationInterface'   => 'sylius.model.product_translation.class',
+            'Sylius\Component\Product\Model\AttributeInterface'            => 'sylius.model.product_attribute.class',
+            'Sylius\Component\Product\Model\AttributeTranslationInterface' => 'sylius.model.product_attribute_translation.class',
+            'Sylius\Component\Product\Model\AttributeValueInterface'       => 'sylius.model.product_attribute_value.class',
+            'Sylius\Component\Product\Model\VariantInterface'              => 'sylius.model.product_variant.class',
+            'Sylius\Component\Product\Model\OptionInterface'               => 'sylius.model.product_option.class',
+            'Sylius\Component\Product\Model\OptionValueInterface'          => 'sylius.model.product_option_value.class',
+            'Sylius\Component\Product\Model\ArchetypeInterface'            => 'sylius.model.product_archetype.class',
+        );
     }
 
     /**

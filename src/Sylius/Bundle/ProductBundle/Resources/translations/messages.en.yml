@@ -1,11 +1,6 @@
 --- 
 sylius: 
-    form: 
-        association: 
-            product: "Associated Product"
-            type: "Association Type"
-        association_type: 
-            name: Name
+    form:
         product: 
             attributes: Attributes
             description: Description

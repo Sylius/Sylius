@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.doctrine.association_inheritance_subscriber.class">Sylius\Bundle\AssociationBundle\Doctrine\EventListener\AssociationInheritanceMetadataSubscriber</parameter>
+
+        <parameter key="sylius.form.type.association_type_choice.class">Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeEntityType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.association_type" class="%sylius.form.type.association_type.class%">
+            <argument>%sylius.model.association_type.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_association_type" />
+        </service>
+        <service id="sylius.form.type.association_type_choice" class="%sylius.form.type.association_type_choice.class%">
+            <argument>%sylius.model.association_type.class%</argument>
+            <tag name="form.type" alias="sylius_association_type_choice" />
+        </service>
+        <service id="sylius.doctrine.association_inheritance_subscriber" class="%sylius.doctrine.association_inheritance_subscriber.class%">
+            <argument>%sylius.association.discriminator_map%</argument>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+    </services>
+</container>

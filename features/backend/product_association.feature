@@ -44,18 +44,18 @@ Feature: Product association
 
         Scenario: Create association type
              Given I want to create new association type
-             When I create "Cross sell" association type
-             Then I should be able to add "Cross sell" associations to every product
+              When I create "Cross sell" association type
+              Then I should be able to add "Cross sell" associations to every product
 
         Scenario Outline: Associate product with others products
             Given there are following association types:
-                | name             |
+                | name       |
                 | Cross sell |
-                | Upsell         |
-                | Different    |
-            And I want to assign new association for "<Product name>" product
-            When I select "<Associated product name>" product as "<Association type>" association
-            Then I should see that "<Product name>" is connected with "<Associated product name>" by "<Association type>" association
+                | Upsell     |
+                | Different  |
+              And I want to assign new association for "<Product name>" product
+             When I select "<Associated product name>" product as "<Association type>" association
+             Then I should see that "<Product name>" is connected with "<Associated product name>" by "<Association type>" association
 
             Examples:
                 | Product name  | Associated product name | Association type |
