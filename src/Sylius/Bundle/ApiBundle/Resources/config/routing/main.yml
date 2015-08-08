@@ -96,3 +96,7 @@ sylius_api_zone:
 sylius_api_user:
     resource: @SyliusApiBundle/Resources/config/routing/user.yml
     prefix: /users
+
+sylius_api_setting:
+    resource: @SyliusApiBundle/Resources/config/routing/setting.yml
+    prefix: /settings
