@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_setting_show:
+    path: /{namespace}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.settings:showAction
+
+sylius_api_setting_update:
+    path: /{namespace}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.settings:updateAction
