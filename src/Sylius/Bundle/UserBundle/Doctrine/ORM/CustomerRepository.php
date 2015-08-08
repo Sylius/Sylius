@@ -63,14 +63,22 @@ class CustomerRepository extends EntityRepository
         }
 
         if (isset($criteria['query'])) {
-            $queryBuilder
-                ->where($queryBuilder->expr()->like($this->getPropertyName('emailCanonical'), ':query'))
-                ->orWhere($queryBuilder->expr()->like($this->getPropertyName('firstName'), ':query'))
-                ->orWhere($queryBuilder->expr()->like($this->getPropertyName('lastName'), ':query'))
-                ->orWhere($queryBuilder->expr()->like('user.username', ':query'))
-                ->setParameter('query', '%'.$criteria['query'].'%')
-            ;
+            // Every tokenized search term should appear in at least one of the searchable fields,
+            // for the entity to be included in the filtered results.
+            $queryParts = preg_split('/\s+/', $criteria['query']);
+            for($i=0; $i<count($queryParts); $i++) {
+                $queryBuilder->andWhere(
+                    $queryBuilder->expr()->orX(
+                        $queryBuilder->expr()->like($this->getPropertyName('emailCanonical'), ":query$i"),
+                        $queryBuilder->expr()->like($this->getPropertyName('firstName'), ":query$i"),
+                        $queryBuilder->expr()->like($this->getPropertyName('lastName'), ":query$i"),
+                        $queryBuilder->expr()->like('user.username', ":query$i")
+                    )
+                )
+                ->setParameter("query$i", '%'.$queryParts[$i].'%');
+            }
         }
+
         if (isset($criteria['enabled'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->eq('user.enabled', ':enabled'))
