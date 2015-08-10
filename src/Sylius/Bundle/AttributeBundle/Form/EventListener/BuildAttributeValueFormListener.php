@@ -33,7 +33,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
      *
      * @var FormFactoryInterface
      */
-    private $factory;
+    protected $factory;
 
     /**
      * Attributes subject name.
@@ -99,7 +99,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
      *
      * @param AttributeValueInterface $attributeValue
      */
-    private function verifyValue(AttributeValueInterface $attributeValue)
+    protected function verifyValue(AttributeValueInterface $attributeValue)
     {
         switch ($attributeValue->getType()) {
 
