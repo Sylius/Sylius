@@ -31,7 +31,7 @@ class SyliusResourceExtension extends AbstractExtension
     public function load(array $config, ContainerBuilder $container)
     {
         $processor = new Processor();
-        $config    = $processor->processConfiguration(new Configuration(), $config);
+        $config = $processor->processConfiguration(new Configuration(), $config);
 
         $this->loadServiceDefinitions($container, array(
             'services.xml',
@@ -41,13 +41,13 @@ class SyliusResourceExtension extends AbstractExtension
         ));
 
         $classes = isset($config['resources']) ? $config['resources'] : array();
-
         $container->setParameter('sylius.resource.settings', $config['settings']);
+        $container->setParameter('sylius_resource.router.api.config', $config['router']['api']);
+        $container->setParameter('sylius_resource.router.generic.config', $config['router']['generic']);
 
         $this->createResourceServices($classes, $container);
 
         $configClasses = array();
-
         if ($container->hasParameter('sylius.config.classes')) {
             $configClasses = array_merge_recursive(
                 array('default' => $classes),
