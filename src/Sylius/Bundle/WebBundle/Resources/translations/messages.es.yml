@@ -10,15 +10,15 @@ sylius:
       action:
         billing: Establecer como dirección de facturación por defecto
         create: Crear una nueva dirección
-        delete: sylius.account.address.action.delete
+        delete: Borrar dirección
         edit: Editar
         shipping: Establecer como dirección de envío por defecto
-      create: sylius.account.address.create
+      create: Crear nueva dirección
       default:
-        billing: sylius.account.address.default.billing
-        no_billing: sylius.account.address.default.no_billing
-        no_shipping: sylius.account.address.default.no_shipping
-        shipping: sylius.account.address.default.shipping
+        billing: Dirección de facturación por defecto
+        no_billing: Sin dirección de facturación por defecto
+        no_shipping: Sin dirección de envío por defecto
+        shipping: Dirección de envío por defecto
       empty: sylius.account.address.empty
       list: sylius.account.address.list
       update: sylius.account.address.update
@@ -76,6 +76,7 @@ sylius:
     logout: Cerrar sesión
     quick_links:
       add_product: Nuevo producto
+      customers: Clientes
       orders: Pedidos
       products: Productos
       users: Usuarios
@@ -99,16 +100,17 @@ sylius:
     assortment: Varios
     block:
       index: Bloques de contenido
-    build: sylius.breadcrumb.build
+    build: Construir
     configuration: Configuración
     country:
       index: Paises
     customers: Clientes
+    dashboard: Panel de control
     edit: Editar
     exchange_rate:
       index: Tipos de cambio
     general_settings: Configuración general
-    generate: sylius.breadcrumb.generate
+    generate: Generar
     group:
       index: Grupos
     inventory:
@@ -131,7 +133,7 @@ sylius:
     promotion:
       index: Promociones
     promotion_coupon:
-      index: sylius.breadcrumb.promotion_coupon.index
+      index: Índice
     property:
       index: Propiedades de producto
     archetype:
@@ -236,6 +238,32 @@ sylius:
     update_header: Editar país
   create: Crear
   created_at: Creando el
+  customer:
+    billing_address: Dirección de facturación
+    create: Crear cliente
+    create_header: Nuevo cliente
+    email: E-Mail
+    filter:
+      all: Ver todos los clientes
+      registered: Ver clientes registrados
+      unconfirmed: Ver cuentas no confirmadas
+    general_info: Información general del cliente "%fullName%"
+    first_name: Nombre
+    id: ID
+    index_header: Clientes <small>lista de todos los clientes en almacén</small>
+    last_name: Apellidos
+    manage: Administrar clientes
+    no_results: No hay clientes que mostrar.
+    order:
+      no_results: No hay pedidos de este cliente que mostrar.
+    orders: Pedidos del cliente
+    recent_header: Clientes recientes
+    creation_date: Fecha de creación
+    shipping_address: Dirección de envío
+    show_header: Detalles del cliente
+    update_header: Editando cliente
+    groups: Grupos
+    no_groups: No hay grupos para este cliente que mostrar.
   delete: Borrar
   deleted: Eliminado
   edit: editar
@@ -277,6 +305,7 @@ sylius:
     previous: Anterior
     slideshow: Presentación
   generate: Generar
+  go_to_dashboard: Ir al panel de control
   group:
     create: Crear grupo
     create_header: Añadiendo nuevos grupos de usuarios
@@ -340,26 +369,57 @@ sylius:
     updated_at: Última actualización
     values: Valores
   order:
+    adjustments:
+      manage: Administrar ajustes
+      label: Etiqueta
+      description: Descripción
+      amount: Cantidad
+      locked: ¿Bloqueado?
+      lock: Bloquear
+      unlock: Desbloquear
+      lock_all: Bloquear todos los ajustes
+      unlock_all: Desbloquear todos los ajustes
     billing_address: Dirección de facturación
+    channel: Canal
+    comment:
+      header: Comentarios de pedido
+      comment: Comentario
+      author: Autor
+      created_at: Creado en
+      notify: Notificar
+      state: Estado
+      customer:
+        notified: Cliente notificado
+        not_notified: Cliente no notificado
+      no_comment: Sin comentarios
     create: Añadir pedido
     create_header: Nuevo pedido
     created_at: Fecha de creación
+    customer: Cliente
+    currency: Moneda
+    details: Detalles de pedido
     general_info: Información general
+    guest: Cliente invitado
     id: ID
     index_header: Pedidos actuales
+    immutable_warning: Los pedidos ya enviados no se pueden modificar.
     inventory_tracking: Control de inventario
+    items: Items
     items_total: Total
     manage: Gestionar pedidos
     no_items: Este pedido no contiene productos
+    no_promotion: No se usaron cupones.
     no_results: No tiene pedidos nuevos
     no_shipments: No hay envíos para este pedido
     no_shipping_charges: Sin cargos de envío aplicados
     no_taxes: Sin impuestos
     number: Número
+    order_state: Estado de pedido
     payment: Pago
     payment_state: Estado del pago
     payment_states:
       balance_due: Saldo
+    promotion_coupons: Cupones
     promotion_total: Total de Promoción
     recent_header: Pedidos recientes
     shipment_state: Estado del envio
@@ -375,11 +435,16 @@ sylius:
     shipping_charges: Cargos de envío
     shipping_total: Total de envío
     show_header: Mostrar orden
+    state: Estado
     state:
       cart_locked: Carrito cerrado
       checkout: Completar pedido
       order_confimed: Pedido confirmado
       ordered: Solicitado
+      shipped: Enviado
+      abandoned: Abandonado
+      cancelled: Cancelado
+      returned: Devuelto
     tax_total: Total de impuestos
     taxes: Impuestos
     total: Total
@@ -569,6 +634,21 @@ sylius:
   province:
     provinces: Provincias
   remember_me: recuerdame
+  report:
+    create: Crear informe
+    create_header: Crear nuevo informe
+    no_results: No hay informes
+    show_header: Detalles de informe
+    details: Detalles
+    id: id
+    name: Nombre
+    code: Código
+    description: Descripción
+    manage: Administrar
+    update_header: Editar informe
+    index_header: Informes
+    no_data: No hay datos de informes
+    no_report: No hay informes que mostrar
   save_changes: Guardar cambios
   search: Búsqueda
   settings:
