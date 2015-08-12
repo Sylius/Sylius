@@ -34,11 +34,12 @@ class SummaryLargeImageCardSpec extends ObjectBehavior
 
     function it_is_serializable()
     {
-        $this->setTitle('Lorem ipsum');
+        $that = new SummaryLargeImageCard();
+        $that->setTitle('Lorem ipsum');
 
-        $that = unserialize(serialize($this));
+        $that = unserialize(serialize($that));
 
-        $that->getTitle()->shouldReturn('Lorem ipsum');
+        \PHPUnit_Framework_Assert::assertEquals('Lorem ipsum', $that->getTitle());
     }
 
     function it_is_mergable_with_same_class_object()

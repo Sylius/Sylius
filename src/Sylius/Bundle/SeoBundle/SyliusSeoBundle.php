@@ -13,12 +13,24 @@ namespace Sylius\Bundle\SeoBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\SeoBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class SyliusSeoBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new MetadataRendererCompilerPass());
+    }
+
     /**
      * {@inheritdoc}
      */
