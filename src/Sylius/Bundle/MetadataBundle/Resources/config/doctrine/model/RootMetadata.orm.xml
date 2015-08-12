@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <mapped-superclass name="Sylius\Component\Metadata\Model\RootMetadata" table="sylius_metadata">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="key" column="key" type="string" unique="true" />
+
+        <field name="metadata" column="metadata" type="array" />
+
+        <one-to-many field="children" target-entity="Sylius\Component\Metadata\Model\RootMetadata" mapped-by="parent" />
+
+        <many-to-one field="parent" target-entity="Sylius\Component\Metadata\Model\RootMetadata" inversed-by="children">
+            <join-column name="parent_id" referenced-column-name="id" />
+        </many-to-one>
+    </mapped-superclass>
+
+</doctrine-mapping>
