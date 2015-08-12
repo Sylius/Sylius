@@ -39,7 +39,7 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'method')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->where('method.enabled = true')->shouldBeCalled()->willReturn($builder);
 
         $this->getQueryBuidlerForChoiceType(array(
@@ -51,7 +51,7 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'method')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
 
         $this->getQueryBuidlerForChoiceType(array(
             'disabled' => true
