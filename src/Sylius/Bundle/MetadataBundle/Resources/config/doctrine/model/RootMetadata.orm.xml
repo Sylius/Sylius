@@ -18,15 +18,9 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="key" column="key" type="string" unique="true" />
+        <field name="key" column="`key`" type="string" unique="true" />
 
-        <field name="metadata" column="metadata" type="array" />
-
-        <one-to-many field="children" target-entity="Sylius\Component\Metadata\Model\RootMetadata" mapped-by="parent" />
-
-        <many-to-one field="parent" target-entity="Sylius\Component\Metadata\Model\RootMetadata" inversed-by="children">
-            <join-column name="parent_id" referenced-column-name="id" />
-        </many-to-one>
+        <field name="metadata" column="metadata" type="object" />
     </mapped-superclass>
 
 </doctrine-mapping>

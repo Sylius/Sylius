@@ -13,12 +13,26 @@ namespace Sylius\Bundle\MetadataBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataHierarchyProviderCompilerPass;
+use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class SyliusMetadataBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new MetadataRendererCompilerPass());
+        $container->addCompilerPass(new MetadataHierarchyProviderCompilerPass());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,7 +50,7 @@ class SyliusMetadataBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Metadata\Model\RootMetadataInterface' => 'sylius.model.root_metadata.class',
+            'Sylius\Component\Metadata\Model\RootMetadataInterface' => 'sylius.model.metadata.class',
         );
     }
 

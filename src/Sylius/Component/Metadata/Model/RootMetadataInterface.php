@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Metadata\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -42,34 +40,4 @@ interface RootMetadataInterface
      * @return MetadataInterface
      */
     public function getMetadata();
-
-    /**
-     * @param RootMetadataInterface $rootMetadata
-     */
-    public function setParent(RootMetadataInterface $rootMetadata);
-
-    /**
-     * @return RootMetadataInterface|null
-     */
-    public function getParent();
-
-    /**
-     * @return boolean
-     */
-    public function hasParent();
-
-    /**
-     * @param RootMetadataInterface $rootMetadata
-     */
-    public function addChild(RootMetadataInterface $rootMetadata);
-
-    /**
-     * @param RootMetadataInterface $rootMetadata
-     */
-    public function removeChild(RootMetadataInterface $rootMetadata);
-
-    /**
-     * @return Collection|RootMetadataInterface[]
-     */
-    public function getChildren();
 }
