@@ -62,7 +62,6 @@ before_script:
     - if [ $TEST_SUITE = "javascript" ]; then app/console assetic:dump --env=test; fi
 
 script:
-    - if [ $TEST_SUITE = "javascript" ]; then travis/prepare-to-javascript-tests; fi
     - travis/run-tests $TEST_SUITE
 
 after_failure:

@@ -354,15 +354,13 @@ class WebContext extends DefaultContext
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
         $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->waitForModalToAppear($modalContainer);
 
         $primaryButton->press();
+
+        $this->waitForModalToDisappear($modalContainer);
+
+        $this->getSession()->wait(100);
     }
 
     /**
@@ -530,6 +528,24 @@ class WebContext extends DefaultContext
         while (false === strpos($modalContainer->getAttribute('class'), 'in')) {
             if (10 === $i) {
                 throw new \Exception('The confirmation modal was not opened...');
+            }
+
+            $this->getSession()->wait(100);
+            ++$i;
+        }
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     *
+     * @throws \Exception
+     */
+    protected function waitForModalToDisappear($modalContainer)
+    {
+        $i = 0;
+        while (false !== strpos($modalContainer->getAttribute('class'), 'in')) {
+            if (10 === $i) {
+                throw new \Exception('The confirmation modal was not closed...');
             }
 
             $this->getSession()->wait(100);
