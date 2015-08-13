@@ -13,25 +13,22 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Symfony\Component\Intl\Intl;
 
 /**
- * Default country model.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class Country extends AbstractTranslatable implements CountryInterface
+class Country implements CountryInterface
 {
     /**
-     * Country id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Country name in ISO format.
+     * Country code ISO 3166-1 alpha-2.
      *
      * @var string
      */
@@ -42,16 +39,19 @@ class Country extends AbstractTranslatable implements CountryInterface
      */
     protected $provinces;
 
+    /**
+     * @var boolean
+     */
+    protected $enabled = true;
+
     public function __construct()
     {
-        parent::__construct();
-
         $this->provinces = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->translate()->__toString();
+        return $this->getName();
     }
 
     /**
@@ -65,19 +65,9 @@ class Country extends AbstractTranslatable implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName($locale = null)
     {
-        return $this->translate()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->translate()->setName($name);
-
-        return $this;
+        return Intl::getRegionBundle()->getCountryName($this->isoName, $locale);
     }
 
     /**
@@ -94,8 +84,6 @@ class Country extends AbstractTranslatable implements CountryInterface
     public function setIsoName($isoName)
     {
         $this->isoName = $isoName;
-
-        return $this;
     }
 
     /**
@@ -112,8 +100,6 @@ class Country extends AbstractTranslatable implements CountryInterface
     public function setProvinces(Collection $provinces)
     {
         $this->provinces = $provinces;
-
-        return $this;
     }
 
     /**
@@ -133,8 +119,6 @@ class Country extends AbstractTranslatable implements CountryInterface
             $this->provinces->add($province);
             $province->setCountry($this);
         }
-
-        return $this;
     }
 
     /**
@@ -146,8 +130,6 @@ class Country extends AbstractTranslatable implements CountryInterface
             $this->provinces->removeElement($province);
             $province->setCountry(null);
         }
-
-        return $this;
     }
 
     /**
@@ -156,5 +138,37 @@ class Country extends AbstractTranslatable implements CountryInterface
     public function hasProvince(ProvinceInterface $province)
     {
         return $this->provinces->contains($province);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (boolean) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }

@@ -16,15 +16,17 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
+ * @mixin \Sylius\Component\Addressing\Model\Country
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class CountrySpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
-        $this->setCurrentLocale('en_US');
-        $this->setFallbackLocale('en_US');
+        \Locale::setDefault('en');
     }
 
     function it_is_initializable()
@@ -37,26 +39,34 @@ class CountrySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Addressing\Model\CountryInterface');
     }
 
+    function it_is_toggleable()
+    {
+        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+    }
+
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    function it_has_a_name()
     {
-        $this->getName()->shouldReturn(null);
-    }
+        $this->setIsoName('VE');
+        $this->getName()->shouldBeString();
+        $this->getName('es')->shouldReturn('Venezuela');
 
-    function its_name_is_mutable()
-    {
-        $this->setName('United States');
-        $this->getName()->shouldReturn('United States');
+        $this->setIsoName('US');
+        $this->getName('es')->shouldReturn('Estados Unidos');
+        $this->getName('en')->shouldReturn('United States');
     }
 
     function it_returns_name_when_converted_to_string()
     {
-        $this->setName('Spain');
-        $this->__toString()->shouldReturn('Spain');
+        $this->setIsoName('VE');
+        $this->__toString()->shouldReturn('Venezuela');
+
+        $this->setIsoName('CO');
+        $this->__toString()->shouldReturn('Colombia');
     }
 
     function it_has_no_iso_name_by_default()
@@ -104,7 +114,6 @@ class CountrySpec extends ObjectBehavior
     function it_sets_country_on_added_province(ProvinceInterface $province)
     {
         $province->setCountry($this)->shouldBeCalled();
-
         $this->addProvince($province);
     }
 
@@ -118,15 +127,35 @@ class CountrySpec extends ObjectBehavior
         $this->removeProvince($province);
     }
 
-    function it_has_fluent_interface(
-        ProvinceInterface $province,
-        Collection $provinces
-    ) {
-        $this->setName('Poland')->shouldReturn($this);
-        $this->setIsoName('PL')->shouldReturn($this);
+    function it_is_enabled_by_default()
+    {
+        $this->isEnabled()->shouldReturn(true);
+    }
 
-        $this->setProvinces($provinces)->shouldReturn($this);
-        $this->addProvince($province)->shouldReturn($this);
-        $this->removeProvince($province)->shouldReturn($this);
+    function it_can_be_disabled()
+    {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+    }
+
+    function it_can_be_enabled()
+    {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->enable();
+        $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_can_set_enabled_value()
+    {
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
     }
 }

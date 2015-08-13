@@ -16,10 +16,10 @@ Feature: Checkout shipping
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | USA                     |
+            | USA          | country | United States           |
           And there are following countries:
             | name           |
-            | USA            |
+            | United States  |
             | United Kingdom |
             | Poland         |
             | Germany        |
@@ -61,7 +61,7 @@ Feature: Checkout shipping
 
     Scenario: Listing methods for another zone
         Given I go to the checkout start page
-          And I fill in the shipping address to USA
+          And I fill in the shipping address to United States
          When I press "Continue"
          Then I should be on the checkout shipping step
           And I should not see "DHL Express"
@@ -70,7 +70,7 @@ Feature: Checkout shipping
 
     Scenario: Selecting one of shipping methods
         Given I go to the checkout start page
-          And I fill in the shipping address to USA
+          And I fill in the shipping address to United States
           And I press "Continue"
          When I select the "FedEx" radio button
           And I press "Continue"
@@ -78,14 +78,14 @@ Feature: Checkout shipping
 
     Scenario: Trying to continue without selecting any method
         Given I go to the checkout start page
-          And I fill in the shipping address to USA
+          And I fill in the shipping address to United States
           And I press "Continue"
          When I press "Continue"
          Then I should see "Please select shipping method."
 
     Scenario: Shipping costs affect the order total
         Given I go to the checkout start page
-          And I fill in the shipping address to USA
+          And I fill in the shipping address to United States
           And I press "Continue"
           And I select the "FedEx" radio button
           And I press "Continue"

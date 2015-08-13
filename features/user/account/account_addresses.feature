@@ -9,17 +9,18 @@ Feature: User account addresses page
           And there is default channel configured
           And I am logged in user
           And the following countries exist:
-            | name    |
-            | Germany |
-            | Austria |
-            | Poland  |
-            | Finland |
-            | USA     |
+            | name          | enabled |
+            | Germany       | yes     |
+            | Austria       | yes     |
+            | Poland        | yes     |
+            | Finland       | yes     |
+            | United States | yes     |
+            | Ukraine       | no      |
           And the following addresses exist:
             | user               | address                                               |
             | sylius@example.com | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany |
             | sylius@example.com | Jan Kowalski, Fun-Straße 1, 90032, Vienna, Austria    |
-            | sylius@example.com | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland        |
+            | sylius@example.com | Jan Kowalski, Wawel 5, 31-001, Kraków, Poland         |
           And I am on my account addresses page
 
     Scenario: Viewing my account addresses page
@@ -34,9 +35,9 @@ Feature: User account addresses page
 
     Scenario: Viewing only my addresses
         Given the following addresses exist:
-            | user                      | address                                                         |
-            | ianmurdock@example.com    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA |
-            | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland  |
+            | user                      | address                                                                   |
+            | ianmurdock@example.com    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, United States |
+            | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland            |
          Then I should see 3 addresses in the list
 
     Scenario: Accessing the creation address page
@@ -110,3 +111,15 @@ Feature: User account addresses page
        Then I should not see "No default shipping address"
         And I should see a "#defaultShippingAddress" element near "POLAND"
         And I should see "Your shipping address has been changed."
+
+    Scenario: Showing only enabled countries
+       When I am on my account address creation page
+       Then I should not see "Ukraine" in the countries list
+
+    Scenario: Trying to create a new address with country that is no longer available
+      Given I am on my account address creation page
+        And I fill in the users account address to Germany
+       When store owner set country "Germany" as disabled
+        And I press "Create"
+       Then I should be on my account address creation page
+        And I should see 1 validation errors
