@@ -67,4 +67,4 @@ Feature: Shipping categories
           And I click "delete" from the confirmation modal
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully deleted."
-          And I should not see shipping category with name "Regular" in that list
+          And I should not see shipping category with name "Heavy" in that list
