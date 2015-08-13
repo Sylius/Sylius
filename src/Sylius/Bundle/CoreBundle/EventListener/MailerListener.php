@@ -42,49 +42,6 @@ class MailerListener
      *
      * @throws UnexpectedTypeException
      */
-    public function sendOrderConfirmationEmail(GenericEvent $event)
-    {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
-        }
-
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, array($order->getCustomer()->getEmail()), array('order' => $order));
-    }
-
-    /**
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
-     */
-    public function sendShipmentConfirmationEmail(GenericEvent $event)
-    {
-        $shipment = $event->getSubject();
-
-        if (!$shipment instanceof ShipmentInterface) {
-            throw new UnexpectedTypeException(
-                $shipment,
-                'Sylius\Component\Shipping\Model\ShipmentInterface'
-            );
-        }
-
-        /** @var OrderInterface $order */
-        $order = $shipment->getOrder();
-        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getCustomer()->getEmail()), array(
-            'shipment' => $shipment,
-            'order' => $order
-        ));
-    }
-
-    /**
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
-     */
     public function sendUserConfirmationEmail(GenericEvent $event)
     {
         $customer = $event->getSubject();

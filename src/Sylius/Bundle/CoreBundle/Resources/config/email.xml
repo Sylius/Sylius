@@ -18,16 +18,24 @@
 
     <parameters>
         <parameter key="sylius.listener.mailer.class">Sylius\Bundle\CoreBundle\EventListener\MailerListener</parameter>
+        <parameter key="sylius.email_manager.order.class">Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager</parameter>
+        <parameter key="sylius.email_manager.shipment.class">Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager</parameter>
     </parameters>
 
     <services>
         <service id="sylius.listener.mailer" class="%sylius.listener.mailer.class%">
             <argument type="service" id="sylius.email_sender" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.complete" method="sendOrderConfirmationEmail" />
-            <tag name="kernel.event_listener" event="sylius.shipment.post_update" method="sendShipmentConfirmationEmail" />
             <tag name="kernel.event_listener" event="sylius.customer.post_create" method="sendUserConfirmationEmail" />
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserConfirmationEmail" />
             <tag name="kernel.event_listener" event="sylius.comment.post_create" method="sendOrderCommentEmail" />
+        </service>
+
+        <service id="sylius.email_manager.order" class="%sylius.email_manager.order.class%">
+            <argument type="service" id="sylius.email_sender" />
+        </service>
+
+        <service id="sylius.email_manager.shipment" class="%sylius.email_manager.shipment.class%">
+            <argument type="service" id="sylius.email_sender" />
         </service>
     </services>
 

@@ -119,7 +119,10 @@ winzou_state_machine:
                     on:   'confirm'
                     do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
                     args: ['object']
-
+                sylius_order_confirmation_email:
+                    on:   ['confirm']
+                    do:   [@sylius.email_manager.order, 'sendConfirmationEmail']
+                    args: ['object']
                 sylius_release_inventory:
                     on:   'release'
                     do:   [@sylius.order_processing.inventory_handler, 'releaseInventory']
@@ -164,3 +167,7 @@ winzou_state_machine:
                     to:   'shipped'
                     do:   [@sylius.callback.order_shipment, 'updateOrderShippingState']
                     args: ['object.getOrder()']
+                sylius_shipping_confirmation_email:
+                    to:   'shipped'
+                    do:   [@sylius.email_manager.shipment, 'sendConfirmationEmail']
+                    args: ['object']
