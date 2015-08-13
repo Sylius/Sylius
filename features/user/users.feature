@@ -142,13 +142,6 @@ Feature: Customers management
           And I click "delete" from the confirmation modal
          Then I should be on the customer index page
           And I should see "Customer has been successfully deleted."
-
-    @javascript
-    Scenario: Deleted customer disappears from the list
-        Given I am on the page of customer with email "rick@foo.com"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the customer index page
           And I should not see customer with email "rick@foo.com" in that list
 
     @javascript
