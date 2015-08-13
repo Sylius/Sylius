@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\ResourceBundle\Exception\DomainException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -36,11 +37,6 @@ class DomainManager
     private $eventDispatcher;
 
     /**
-     * @var null|FlashHelper
-     */
-    private $flashHelper;
-
-    /**
      * @var Configuration
      */
     private $config;
@@ -48,19 +44,19 @@ class DomainManager
     public function __construct(
         ObjectManager $manager,
         EventDispatcherInterface $eventDispatcher,
-        Configuration $config,
-        FlashHelper $flashHelper = null
+        Configuration $config
     ) {
         $this->manager = $manager;
         $this->eventDispatcher = $eventDispatcher;
         $this->config = $config;
-        $this->flashHelper = $flashHelper;
     }
 
     /**
      * @param object $resource
      *
-     * @return object|ResourceEvent|null
+     * @return object
+     *
+     * @throws DomainException
      */
     public function create($resource)
     {
@@ -68,23 +64,11 @@ class DomainManager
         $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            if (null !== $this->flashHelper) {
-                $this->flashHelper->setFlash(
-                    $event->getMessageType(),
-                    $event->getMessage(),
-                    $event->getMessageParameters()
-                );
-            }
-
-            return $event;
+            throw new DomainException($event->getMessageType(), $event->getMessage(), $event->getErrorCode(), $event->getMessageParameters());
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-
-        if (null !== $this->flashHelper) {
-            $this->flashHelper->setFlash('success', 'create');
-        }
 
         $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 
@@ -93,33 +77,22 @@ class DomainManager
 
     /**
      * @param object $resource
-     * @param string $flash
      *
-     * @return object|ResourceEvent|null
+     * @return object
+     *
+     * @throws DomainException
      */
-    public function update($resource, $flash = 'update')
+    public function update($resource)
     {
         $eventName = $this->config->getEvent('update');
         $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            if (null !== $this->flashHelper) {
-                $this->flashHelper->setFlash(
-                    $event->getMessageType(),
-                    $event->getMessage(),
-                    $event->getMessageParameters()
-                );
-            }
-
-            return $event;
+            throw new DomainException($event->getMessageType(), $event->getMessage(), $event->getErrorCode(), $event->getMessageParameters());
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-
-        if (null !== $this->flashHelper) {
-            $this->flashHelper->setFlash('success', $flash);
-        }
 
         $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 
@@ -144,13 +117,15 @@ class DomainManager
             $accessor->getValue($resource, $position) + $movement
         );
 
-        return $this->update($resource, 'move');
+        return $this->update($resource);
     }
 
     /**
      * @param object $resource
      *
-     * @return object|ResourceEvent|null
+     * @return object
+     *
+     * @throws DomainException
      */
     public function delete($resource)
     {
@@ -158,23 +133,11 @@ class DomainManager
         $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            if (null !== $this->flashHelper) {
-                $this->flashHelper->setFlash(
-                    $event->getMessageType(),
-                    $event->getMessage(),
-                    $event->getMessageParameters()
-                );
-            }
-
-            return $event;
+            throw new DomainException($event->getMessageType(), $event->getMessage(), $event->getErrorCode(), $event->getMessageParameters());
         }
 
         $this->manager->remove($resource);
         $this->manager->flush();
-
-        if (null !== $this->flashHelper) {
-            $this->flashHelper->setFlash('success', 'delete');
-        }
 
         $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 

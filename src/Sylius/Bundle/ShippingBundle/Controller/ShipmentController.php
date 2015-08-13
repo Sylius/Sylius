@@ -29,9 +29,16 @@ class ShipmentController extends ResourceController
                 ->apply(ShipmentTransitions::SYLIUS_SHIP)
             ;
 
-            $this->domainManager->update($shipment);
-
-            $this->flashHelper->setFlash('success', 'sylius.shipment.ship.success');
+            try {
+                $this->domainManager->update($shipment);
+                $this->flashHelper->setFlash('success', 'sylius.shipment.ship.success');
+            } catch (DomainException $e) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
 
             return $this->redirectHandler->redirectTo($shipment);
         }

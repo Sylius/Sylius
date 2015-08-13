@@ -164,7 +164,17 @@ class UserController extends ResourceController
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
 
-        $this->domainManager->update($user);
+        try {
+            $this->domainManager->update($user);
+        } catch (DomainException $e) {
+            if (!$this->config->isApiRequest()) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
+        }
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 400));
@@ -189,7 +199,17 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->domainManager->update($user);
+        try {
+            $this->domainManager->update($user);
+        } catch (DomainException $e) {
+            if (!$this->config->isApiRequest()) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
+        }
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
@@ -215,7 +235,17 @@ class UserController extends ResourceController
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
 
-        $this->domainManager->update($user);
+        try {
+            $this->domainManager->update($user);
+        } catch (DomainException $e) {
+            if (!$this->config->isApiRequest()) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
+        }
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
@@ -238,7 +268,17 @@ class UserController extends ResourceController
     {
         $user->setPlainPassword($newPassword);
 
-        $this->domainManager->update($user);
+        try {
+            $this->domainManager->update($user);
+        } catch (DomainException $e) {
+            if (!$this->config->isApiRequest()) {
+                $this->flashHelper->setFlash(
+                    $e->getType(),
+                    $e->getMessage(),
+                    $e->getParameters()
+                );
+            }
+        }
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
