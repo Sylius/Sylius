@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
@@ -33,15 +34,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected $applicationName = 'sylius';
 
     /**
-     * Faker.
-     *
      * @var Generator
      */
     protected $faker;
 
     /**
-     * Actions.
-     *
      * @var array
      */
     protected $actions = array(
@@ -74,8 +71,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Find one resource by name.
-     *
      * @param string $type
      * @param string $name
      *
@@ -87,8 +82,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Find one resource by criteria.
-     *
      * @param string $type
      * @param array  $criteria
      *
@@ -113,20 +106,16 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Get repository by resource name.
-     *
-     * @param string $resource
+     * @param string $resourceName
      *
      * @return RepositoryInterface
      */
-    protected function getRepository($resource)
+    protected function getRepository($resourceName)
     {
-        return $this->getService($this->applicationName.'.repository.'.$resource);
+        return $this->getService($this->applicationName.'.repository.'.$resourceName);
     }
 
     /**
-     * Get entity manager.
-     *
      * @return ObjectManager
      */
     protected function getEntityManager()
@@ -135,8 +124,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Returns Container instance.
-     *
      * @return ContainerInterface
      */
     protected function getContainer()
@@ -145,8 +132,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Get service by id.
-     *
      * @param string $id
      *
      * @return object
@@ -234,7 +219,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * Get current user instance.
      *
-     * @return null|UserInterface
+     * @return UserInterface|null
      *
      * @throws \Exception
      */
@@ -250,8 +235,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Get security context.
-     *
      * @return SecurityContextInterface
      */
     protected function getSecurityContext()
@@ -260,8 +243,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Generate url.
-     *
      * @param string  $route
      * @param array   $parameters
      * @param Boolean $absolute
@@ -339,5 +320,125 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function fixStepArgument($argument)
     {
         return str_replace('\\"', '"', $argument);
+    }
+
+    /**
+     * @param NodeElement $table
+     * @param string $columnName
+     *
+     * @return integer
+     *
+     * @throws \Exception If column was not found
+     */
+    protected function getColumnIndex(NodeElement $table, $columnName)
+    {
+        $rows = $table->findAll('css', 'tr');
+
+        if (!isset($rows[0])) {
+            throw new \Exception("There are no rows!");
+        }
+
+        /** @var NodeElement $firstRow */
+        $firstRow = $rows[0];
+        $columns = $firstRow->findAll('css', 'th,td');
+        foreach ($columns as $index => $column) {
+            /** @var NodeElement $column */
+            if (0 === stripos($column->getText(), $columnName)) {
+                return $index;
+            }
+        }
+
+        throw new \Exception(sprintf('Column with name "%s" not found!', $columnName));
+    }
+
+    /**
+     * @param NodeElement $table
+     * @param array $fields
+     *
+     * @return NodeElement|null
+     *
+     * @throws \Exception If column was not found
+     */
+    protected function getRowWithFields(NodeElement $table, array $fields)
+    {
+        $foundRows = $this->getRowsWithFields($table, $fields, true);
+
+        if (empty($foundRows)) {
+            return null;
+        }
+
+        return current($foundRows);
+    }
+
+    /**
+     * @param NodeElement $table
+     * @param array $fields
+     * @param boolean $onlyFirstOccurence
+     *
+     * @return NodeElement[]
+     *
+     * @throws \Exception If columns or rows were not found
+     */
+    protected function getRowsWithFields(NodeElement $table, array $fields, $onlyFirstOccurence = false)
+    {
+        $rows = $table->findAll('css', 'tr');
+
+        if (!isset($rows[0])) {
+            throw new \Exception("There are no rows!");
+        }
+
+        $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
+
+        $foundRows = array();
+
+        /** @var NodeElement[] $rows */
+        $rows = $table->findAll('css', 'tr');
+        foreach ($rows as $row) {
+            $found = true;
+
+            /** @var NodeElement[] $columns */
+            $columns = $row->findAll('css', 'th,td');
+            foreach ($fields as $index => $searchedValue) {
+                if (!isset($columns[$index])) {
+                    throw new \InvalidArgumentException(sprintf('There is no column with index %d', $index));
+                }
+
+                if (0 !== stripos(trim($columns[$index]->getText()), trim($searchedValue))) {
+                    $found = false;
+
+                    break;
+                }
+            }
+
+            if ($found) {
+                $foundRows[] = $row;
+
+                if ($onlyFirstOccurence) {
+                    break;
+                }
+            }
+        }
+
+        return $foundRows;
+    }
+
+    /**
+     * @param NodeElement $table
+     * @param string[] $fields
+     *
+     * @return string[]
+     *
+     * @throws \Exception
+     */
+    protected function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
+    {
+        $replacedFields = array();
+        foreach ($fields as $columnName => $expectedValue) {
+            $columnIndex = $this->getColumnIndex($table, $columnName);
+
+            $replacedFields[$columnIndex] = $expectedValue;
+        }
+
+        return $replacedFields;
     }
 }

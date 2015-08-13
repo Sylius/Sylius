@@ -57,4 +57,4 @@ Feature: Currency selection
         And I change the currency to "GBP"
         And I added product "PHP Top" to cart, with quantity "1"
         When I go to the cart summary page
-        Then I should see item with unit price "£6.83" in the list
+        Then I should see item with price "£6.83" in the list
