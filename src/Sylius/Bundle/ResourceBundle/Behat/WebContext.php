@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -472,6 +473,10 @@ class WebContext extends DefaultContext
      */
     protected function assertStatusCodeEquals($code)
     {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
         $this->assertSession()->statusCodeEquals($code);
     }
 
