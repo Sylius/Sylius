@@ -71,7 +71,7 @@ Feature: Product options
             | MONSTER mug |
         And I press "Create"
         Then I should be on the product option index page
-        And I should see option with value "Normal mug" in that list
+        And I should see option with value containing "Normal mug" in that list
 
     @javascript
     Scenario: Adding values to existing option
@@ -82,7 +82,7 @@ Feature: Product options
         And I press "Save changes"
         Then I should be on the product option index page
         And "Option has been successfully updated." should appear on the page
-        And I should see option with value "XXL" in the list
+        And I should see option with value containing "XXL" in the list
 
     Scenario: Created options appear in the list
         Given I created option "Hat size" with values "S, M, L"
