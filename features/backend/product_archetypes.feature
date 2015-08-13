@@ -112,4 +112,5 @@ Feature: Product archetypes
         When I click "delete" near "T-Shirt"
         And I click "delete" from the confirmation modal
         Then I should be on the product archetype index page
-        And I should see "There are no archetypes defined"
+        And I should see "Archetype has been successfully deleted"
+        And I should not see archetype with name "T-Shirt" in the list
