@@ -963,7 +963,7 @@ sylius:
         billing_address: Billing address
         create: create customer
         create_header: New customer
-        email: E-Mail
+        email: Email
         filter:
             all: Show all customers
             registered: Show registered customers

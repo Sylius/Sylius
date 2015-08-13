@@ -352,7 +352,7 @@ class WebContext extends DefaultContext
         $this->assertSession()->elementExists('css', '#confirmation-modal');
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")', $button));
 
         $this->waitForModalToAppear($modalContainer);
 
