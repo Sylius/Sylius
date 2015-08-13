@@ -38,6 +38,6 @@ class MoneyHelper extends BaseMoneyHelper
      */
     protected function getDefaultLocale()
     {
-        return $this->localeContext->getLocale();
+        return $this->localeContext->getCurrentLocale();
     }
 }

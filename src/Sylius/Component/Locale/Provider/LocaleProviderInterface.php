@@ -14,8 +14,6 @@ namespace Sylius\Component\Locale\Provider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
- * This service returns all the available locales.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface LocaleProviderInterface

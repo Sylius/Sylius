@@ -37,9 +37,9 @@ class LocaleHelperSpec extends ObjectBehavior
 
     function it_has_locale($localeContext)
     {
-        $localeContext->getLocale()->shouldBeCalled()->willReturn('fr_FR');
+        $localeContext->getCurrentLocale()->shouldBeCalled()->willReturn('fr_FR');
 
-        $this->getLocale()->shouldReturn('fr_FR');
+        $this->getCurrentLocale()->shouldReturn('fr_FR');
     }
 
     function it_has_name()

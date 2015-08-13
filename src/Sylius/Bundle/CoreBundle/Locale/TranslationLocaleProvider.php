@@ -37,7 +37,7 @@ class TranslationLocaleProvider implements LocaleProviderInterface
      */
     public function getCurrentLocale()
     {
-        return $this->localeContext->getLocale();
+        return $this->localeContext->getCurrentLocale();
     }
 
     /**

@@ -14,8 +14,6 @@ namespace Sylius\Bundle\LocaleBundle\Twig;
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
 
 /**
- * Sylius locale Twig helper.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class LocaleExtension extends \Twig_Extension
@@ -39,18 +37,16 @@ class LocaleExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFunction('sylius_locale', array($this, 'getLocale')),
+            new \Twig_SimpleFunction('sylius_locale', array($this, 'getCurrentLocale')),
         );
     }
 
     /**
-     * Get currently selected locale code.
-     *
      * @return string
      */
-    public function getLocale()
+    public function getCurrentLocale()
     {
-        return $this->helper->getLocale();
+        return $this->helper->getCurrentLocale();
     }
 
     /**

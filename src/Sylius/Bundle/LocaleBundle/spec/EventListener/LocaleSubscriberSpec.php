@@ -44,7 +44,7 @@ class LocaleSubscriberSpec extends ObjectBehavior
 
     function it_set_the_locale_to_the_request($localeContext, GetResponseEvent $event, Request $request)
     {
-        $localeContext->getLocale()->willReturn('fr_FR');
+        $localeContext->getCurrentLocale()->willReturn('fr_FR');
         $event->getRequest()->willReturn($request);
         $request->hasPreviousSession()->shouldBeCalled()->willReturn(true);
         $request->setLocale('fr_FR')->shouldBeCalled();
@@ -54,7 +54,7 @@ class LocaleSubscriberSpec extends ObjectBehavior
 
     function it_set_the_default_locale_to_the_request($localeContext, GetResponseEvent $event, Request $request)
     {
-        $localeContext->getLocale()->willReturn(null);
+        $localeContext->getCurrentLocale()->willReturn(null);
         $localeContext->getDefaultLocale()->willReturn('fr_FR');
         $event->getRequest()->willReturn($request);
         $request->hasPreviousSession()->shouldBeCalled()->willReturn(true);
@@ -65,7 +65,7 @@ class LocaleSubscriberSpec extends ObjectBehavior
 
     function it_do_not_set_the_locale_because_the_session_is_not_started($localeContext, GetResponseEvent $event, Request $request)
     {
-        $localeContext->getLocale()->willReturn('fr_FR');
+        $localeContext->getCurrentLocale()->willReturn('fr_FR');
         $event->getRequest()->willReturn($request);
         $request->hasPreviousSession()->shouldBeCalled()->willReturn(false);
 

@@ -49,7 +49,7 @@ class LocaleSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $request->setLocale($this->localeContext->getLocale() ?: $this->localeContext->getDefaultLocale());
+        $request->setLocale($this->localeContext->getCurrentLocale() ?: $this->localeContext->getDefaultLocale());
     }
 
     public static function getSubscribedEvents()
