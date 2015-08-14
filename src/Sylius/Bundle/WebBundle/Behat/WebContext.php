@@ -430,14 +430,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBrowseTheStoreInLocale($name)
     {
+        $text = 'Welcome to Sylius';
+
         switch ($name) {
-            case 'English':
-                $text = 'Welcome to Sylius';
-            break;
             case 'Polish':
+            case 'Polish (Poland)':
                 $text = 'Witaj w Sylius';
             break;
             case 'German':
+            case 'German (Germany)':
                 $text = 'Englisch';
             break;
         }

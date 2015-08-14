@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Locale type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleType extends AbstractResourceType
@@ -28,11 +26,7 @@ class LocaleType extends AbstractResourceType
     {
         $builder
             ->add('code', 'locale', array(
-                'label' => 'sylius.form.locale.code',
-            ))
-            ->add('enabled', 'checkbox', array(
-                'required' => false,
-                'label'    => 'sylius.form.locale.enabled',
+                'label' => 'sylius.form.locale.name',
             ))
         ;
     }
