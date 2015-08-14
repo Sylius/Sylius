@@ -5,7 +5,7 @@ Feature: Locale selection
     I want to to select my language in the storefront
 
     Background:
-          And there are following locales configured:
+        Given there are following locales configured:
             | code  | enabled |
             | de_DE | yes     |
             | en_US | yes     |
