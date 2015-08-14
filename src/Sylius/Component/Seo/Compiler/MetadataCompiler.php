@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Seo\Compiler;
 
-use Sylius\Component\Seo\Model\RootMetadataInterface;
+use Sylius\Component\Seo\Model\MetadataInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -21,14 +21,13 @@ class MetadataCompiler implements MetadataCompilerInterface
     /**
      * {@inheritdoc}
      */
-    public function compile(RootMetadataInterface $rootMetadata)
+    public function compile(MetadataInterface $metadata, array $parents = [])
     {
-        $compiledMetadata = clone $rootMetadata->getMetadata();
+        $compiledMetadata = clone $metadata;
 
-        while ($rootMetadata->hasParent()) {
-            $rootMetadata = $rootMetadata->getParent();
-
-            $compiledMetadata->merge($rootMetadata->getMetadata());
+        /** @var MetadataInterface[] $parents */
+        foreach ($parents as $parent) {
+            $compiledMetadata->merge($parent);
         }
 
         return $compiledMetadata;

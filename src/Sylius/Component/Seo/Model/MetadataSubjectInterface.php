@@ -17,6 +17,15 @@ namespace Sylius\Component\Seo\Model;
 interface MetadataSubjectInterface
 {
     /**
+     * Metadata class identifier is usually a class name (not FQCN), eg. "MetadataSubject".
+     *
+     * @return string
+     */
+    public function getMetadataClassIdentifier();
+
+    /**
+     * Metadata identifier is usually a class name (not FQCN) and ID joined by dash, eg. "MetadataSubject-42".
+     *
      * @return string
      */
     public function getMetadataIdentifier();

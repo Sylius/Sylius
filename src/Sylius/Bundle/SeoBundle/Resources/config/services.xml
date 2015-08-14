@@ -24,6 +24,8 @@
 
         <parameter key="sylius.metadata.renderer.class">Sylius\Component\Seo\Renderer\CompositeMetadataRenderer</parameter>
         <parameter key="sylius.metadata.renderer.twitter.class">Sylius\Component\Seo\Renderer\Twitter\GenericTwitterMetadataRenderer</parameter>
+
+        <parameter key="sylius.metadata.hierarchy_provider.class">Sylius\Component\Seo\HierarchyProvider\CompositeMetadataHierarchyProvider</parameter>
     </parameters>
 
     <services>
@@ -35,8 +37,9 @@
         </service>
 
         <service id="sylius.metadata.provider" class="%sylius.metadata.provider.class%">
-            <argument type="service" id="sylius.repository.root_metadata" />
+            <argument type="service" id="sylius.repository.metadata" />
             <argument type="service" id="sylius.metadata.compiler" />
+            <argument type="service" id="sylius.metadata.hierarchy_provider" />
         </service>
 
         <service id="sylius.metadata.twig_extension" class="%sylius.metadata.twig_extension.class%" public="false">
@@ -46,11 +49,15 @@
         </service>
 
         <service id="sylius.metadata.renderer" class="%sylius.metadata.renderer.class%">
-            <argument type="collection" />
+            <argument type="collection" /> <!-- Metadata renderers array -->
         </service>
 
         <service id="sylius.metadata.renderer.twitter" class="%sylius.metadata.renderer.twitter.class%" public="false">
             <tag name="sylius.metadata_renderer" />
+        </service>
+
+        <service id="sylius.metadata.hierarchy_provider" class="%sylius.metadata.hierarchy_provider.class%">
+            <argument type="collection" /> <!-- Metadata hierarchy provider array -->
         </service>
     </services>
 

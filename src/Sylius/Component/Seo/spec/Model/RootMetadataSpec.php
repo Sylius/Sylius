@@ -52,28 +52,4 @@ class RootMetadataSpec extends ObjectBehavior
         $this->setMetadata($metadata);
         $this->getMetadata()->shouldReturn($metadata);
     }
-
-    function it_has_parent(RootMetadataInterface $rootMetadata)
-    {
-        $this->getParent()->shouldReturn(null);
-        $this->hasParent()->shouldReturn(false);
-
-        $this->setParent($rootMetadata);
-
-        $this->getParent()->shouldReturn($rootMetadata);
-        $this->hasParent()->shouldReturn(true);
-    }
-
-    function it_has_children(RootMetadataInterface $rootMetadata)
-    {
-        $this->getChildren()->shouldHaveCount(0);
-
-        $this->addChild($rootMetadata);
-
-        $this->getChildren()->shouldHaveCount(1);
-
-        $this->removeChild($rootMetadata);
-
-        $this->getChildren()->shouldHaveCount(0);
-    }
 }

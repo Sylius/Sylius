@@ -12,7 +12,6 @@
 namespace Sylius\Component\Seo\Compiler;
 
 use Sylius\Component\Seo\Model\MetadataInterface;
-use Sylius\Component\Seo\Model\RootMetadataInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -20,9 +19,10 @@ use Sylius\Component\Seo\Model\RootMetadataInterface;
 interface MetadataCompilerInterface
 {
     /**
-     * @param RootMetadataInterface $rootMetadata
+     * @param MetadataInterface $metadata
+     * @param MetadataInterface[] $parents
      *
      * @return MetadataInterface
      */
-    public function compile(RootMetadataInterface $rootMetadata);
+    public function compile(MetadataInterface $metadata, array $parents = []);
 }

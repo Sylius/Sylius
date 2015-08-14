@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sylius\Component\Seo\Provider;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Seo\Compiler\MetadataCompilerInterface;
-use Sylius\Component\Seo\Model\MetadataInterface;
 use Sylius\Component\Seo\Model\MetadataSubjectInterface;
+use Sylius\Component\Seo\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Seo\Model\RootMetadataInterface;
 
 /**
@@ -34,13 +33,23 @@ class MetadataProvider implements MetadataProviderInterface
     protected $metadataCompiler;
 
     /**
+     * @var MetadataHierarchyProviderInterface
+     */
+    protected $metadataHierarchyProvider;
+
+    /**
      * @param RepositoryInterface $rootMetadataRepository
      * @param MetadataCompilerInterface $metadataCompiler
+     * @param MetadataHierarchyProviderInterface $metadataHierarchyProvider
      */
-    public function __construct(RepositoryInterface $rootMetadataRepository, MetadataCompilerInterface $metadataCompiler)
-    {
+    public function __construct(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider
+    ) {
         $this->rootMetadataRepository = $rootMetadataRepository;
         $this->metadataCompiler = $metadataCompiler;
+        $this->metadataHierarchyProvider = $metadataHierarchyProvider;
     }
 
     /**
@@ -48,25 +57,51 @@ class MetadataProvider implements MetadataProviderInterface
      */
     public function getMetadataBySubject(MetadataSubjectInterface $metadataSubject)
     {
-        return $this->getMetadataByKey($metadataSubject->getMetadataIdentifier());
+        $identifiers = $this->getHierarchyByMetadataSubject($metadataSubject);
+
+
+        $parents = [];
+        $baseMetadata = null;
+        foreach ($identifiers as $identifier) {
+            /** @var RootMetadataInterface $rootMetadata */
+            $rootMetadata = $this->rootMetadataRepository->findOneBy(['key' => $identifier]);
+
+            if (null === $rootMetadata) {
+                continue;
+            }
+
+            if (null === $baseMetadata) {
+                $baseMetadata = $rootMetadata->getMetadata();
+
+                continue;
+            }
+
+            $parents[] = $rootMetadata->getMetadata();
+        }
+
+        if (null === $baseMetadata) {
+            return null;
+        }
+
+        return $this->metadataCompiler->compile($baseMetadata, $parents);
     }
 
     /**
-     * @param string $key
+     * @param MetadataSubjectInterface $metadataSubject
      *
-     * @return MetadataInterface
-     *
-     * @throws \InvalidArgumentException If root metadata with given key was not found
+     * @return string[]
      */
-    protected function getMetadataByKey($key)
+    private function getHierarchyByMetadataSubject(MetadataSubjectInterface $metadataSubject)
     {
-        /** @var RootMetadataInterface $rootMetadata */
-        $rootMetadata = $this->rootMetadataRepository->findOneBy(['key' => $key]);
-
-        if (null === $rootMetadata) {
-            throw new \InvalidArgumentException(sprintf('Root metadata with key "%s" was not found!', $key));
+        if ($this->metadataHierarchyProvider->supports($metadataSubject)) {
+            $identifiers = $this->metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject);
+        } else {
+            $identifiers = [
+                $metadataSubject->getMetadataIdentifier(),
+                $metadataSubject->getMetadataClassIdentifier(),
+            ];
         }
 
-        return $this->metadataCompiler->compile($rootMetadata);
+        return $identifiers;
     }
 }

@@ -13,8 +13,10 @@
 namespace spec\Sylius\Component\Seo\Provider;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Seo\Compiler\MetadataCompilerInterface;
+use Sylius\Component\Seo\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Seo\Model\MetadataInterface;
 use Sylius\Component\Seo\Model\MetadataSubjectInterface;
 use Sylius\Component\Seo\Model\RootMetadataInterface;
@@ -26,9 +28,12 @@ use Sylius\Component\Seo\Model\RootMetadataInterface;
  */
 class MetadataProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $rootMetadataRepository, MetadataCompilerInterface $metadataCompiler)
-    {
-        $this->beConstructedWith($rootMetadataRepository, $metadataCompiler);
+    function let(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider
+    ) {
+        $this->beConstructedWith($rootMetadataRepository, $metadataCompiler, $metadataHierarchyProvider);
     }
 
     function it_is_initializable()
@@ -41,19 +46,119 @@ class MetadataProviderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Seo\Provider\MetadataProviderInterface');
     }
 
-    function it_provides_metadata_by_subject(
+    function it_provides_metadata_with_child_only_by_subject(
         RepositoryInterface $rootMetadataRepository,
         MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
         RootMetadataInterface $rootMetadata,
         MetadataInterface $metadata,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataCompiler->compile($rootMetadata)->shouldBeCalled()->willReturn($metadata);
+        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
+        $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
+            'MetadataSubject-42',
+            'MetadataSubject',
+        ]);
 
-        $rootMetadataRepository->findOneBy(['key' => 'unique_key:42'])->shouldBeCalled()->willReturn($rootMetadata);
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn($rootMetadata);
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn(null);
 
-        $metadataSubject->getMetadataIdentifier()->shouldBeCalled()->willReturn('unique_key:42');
+        $rootMetadata->getMetadata()->shouldBeCalled()->willReturn($metadata);
+
+        $metadataCompiler->compile($metadata, [])->shouldBeCalled()->willReturn($metadata);
 
         $this->getMetadataBySubject($metadataSubject)->shouldReturn($metadata);
+    }
+
+    function it_provides_metadata_with_parent_only_by_subject(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
+        RootMetadataInterface $rootMetadata,
+        MetadataInterface $metadata,
+        MetadataInterface $compiledMetadata,
+        MetadataSubjectInterface $metadataSubject
+    ) {
+        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
+        $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
+            'MetadataSubject-42',
+            'MetadataSubject',
+        ]);
+
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn($rootMetadata);
+
+        $rootMetadata->getMetadata()->shouldBeCalled()->willReturn($metadata);
+
+        $metadataCompiler->compile($metadata, [])->shouldBeCalled()->willReturn($compiledMetadata);
+
+        $this->getMetadataBySubject($metadataSubject)->shouldReturn($compiledMetadata);
+    }
+
+    function it_provides_metadata_with_both_child_and_parents_by_subject(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
+        RootMetadataInterface $rootChildMetadata,
+        RootMetadataInterface $rootParentMetadata,
+        MetadataInterface $childMetadata,
+        MetadataInterface $parentMetadata,
+        MetadataInterface $compiledMetadata,
+        MetadataSubjectInterface $metadataSubject
+    ) {
+        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
+        $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
+            'MetadataSubject-42',
+            'MetadataSubject',
+        ]);
+
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn($rootChildMetadata);
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn($rootParentMetadata);
+
+        $rootChildMetadata->getMetadata()->shouldBeCalled()->willReturn($childMetadata);
+        $rootParentMetadata->getMetadata()->shouldBeCalled()->willReturn($parentMetadata);
+
+        $metadataCompiler->compile($childMetadata, [$parentMetadata])->shouldBeCalled()->willReturn($compiledMetadata);
+
+        $this->getMetadataBySubject($metadataSubject)->shouldReturn($compiledMetadata);
+    }
+
+    function it_returns_null_if_metadata_is_not_found(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
+        MetadataSubjectInterface $metadataSubject
+    ) {
+        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
+        $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
+            'MetadataSubject-42',
+            'MetadataSubject',
+        ]);
+
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn(null);
+
+        $metadataCompiler->compile(Argument::cetera())->shouldNotBeCalled();
+
+        $this->getMetadataBySubject($metadataSubject)->shouldReturn(null);
+    }
+
+    function it_creates_default_hierarchy_if_there_is_no_suitable_hierarchy_provider(
+        RepositoryInterface $rootMetadataRepository,
+        MetadataCompilerInterface $metadataCompiler,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
+        MetadataSubjectInterface $metadataSubject
+    ) {
+        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(false);
+
+        $metadataSubject->getMetadataIdentifier()->shouldBeCalled()->willReturn('MetadataSubject-42');
+        $metadataSubject->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('MetadataSubject');
+
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled();
+        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled();
+
+        $metadataCompiler->compile(Argument::cetera());
+
+        $this->getMetadataBySubject($metadataSubject);
     }
 }
