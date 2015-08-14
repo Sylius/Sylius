@@ -98,3 +98,18 @@ Learn more
 ----------
 
 * ...
+
+Troubleshoooting
+================
+
+Sylius stores payment output inside the **details** column of the **sylius_payment** table. It can provide valuable info when debugging the payment process.
+
+PayPal Error Code 10409
+-------------------------------------------------------------------
+
+Also known as *"Checkout token was issued for a merchant account other than yours"*. You most likely changed the PayPal credentials from *config.yml* during the checkout process. Clear the cache and try again:
+
+.. code-block:: bash
+
+    app/console cache:clear
+    
