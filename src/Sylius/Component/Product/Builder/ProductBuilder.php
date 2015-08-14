@@ -92,7 +92,11 @@ class ProductBuilder implements ProductBuilderInterface
             throw new \BadMethodCallException(sprintf('Product has no "%s()" method.', $method));
         }
 
-        call_user_func_array(array($this->product, $method), $arguments);
+        $result = call_user_func_array(array($this->product, $method), $arguments);
+
+        if(substr($method,0,3) === "get") {
+            return $result;
+        }
 
         return $this;
     }
