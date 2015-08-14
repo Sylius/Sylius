@@ -207,6 +207,8 @@ sylius:
             index: Menus
         menu_node:
             index: Menu nodes
+        metadata:
+            index: Metadatas
         new: New
         option:
             index: Options
@@ -556,6 +558,14 @@ sylius:
         frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework
         frontend_keywords: Sylius, ecommerce, symfony2, shop, cart, webshop
         frontend_title: Sylius, modern ecommerce for Symfony2
+    metadata:
+        customize_header: Customizing metadata
+        show_header: Show metadata
+        id: ID
+        customize: Customize metadata
+        manage: Manage metadata
+        content: Content
+        index_metadata: Metadata
     move_down: Move down
     move_up: Move up
     na: N/A

@@ -29,6 +29,12 @@
         <service id="sylius.metadata.hierarchy_provider.product_variant" class="%sylius.metadata.hierarchy_provider.product_variant.class%" public="false">
             <tag name="sylius.metadata_hierarchy_provider" />
         </service>
+
+        <service id="sylius.form.type.metadata" class="%sylius.form.type.metadata.class%">
+            <argument>%sylius.model.metadata.class%</argument>
+            <argument>%sylius.validation_group.metadata%</argument>
+            <tag name="form.type" alias="sylius_metadata" />
+        </service>
     </services>
 
 </container>

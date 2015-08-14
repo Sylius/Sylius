@@ -29,7 +29,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Metadata\HierarchyProvider\ProductVariantHierarchyProvider');
     }
 
-    function it_implements_Sylius_Metadata_Metadata_Hierarchy_Provider_interface()
+    function it_implements_Sylius_Metadata_Hierarchy_Provider_interface()
     {
         $this->shouldImplement('Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface');
     }

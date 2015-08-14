@@ -1,0 +1,32 @@
+{% macro list(metadatas) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if metadatas|length > 0 %}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.metadata.id'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for metadata in metadatas %}
+        <tr>
+            <td><a href="{{ path('sylius_backend_metadata_show', { 'id': metadata.id }) }}">{{ metadata.id }}</a></td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.edit(path('sylius_backend_metadata_customize', { 'id': metadata.id })) }}
+                {{ buttons.delete(path('sylius_backend_metadata_delete', { 'id': metadata.id })) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.metadata.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}
