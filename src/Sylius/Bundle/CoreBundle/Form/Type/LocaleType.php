@@ -36,9 +36,9 @@ class LocaleType extends AbstractResourceType
      */
     public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $localeRepository)
     {
-        $this->localeRepository = $localeRepository;
-
         parent::__construct($dataClass, $validationGroups);
+
+        $this->localeRepository = $localeRepository;
     }
 
     /**

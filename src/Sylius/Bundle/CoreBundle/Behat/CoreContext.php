@@ -434,9 +434,7 @@ class CoreContext extends DefaultContext
             if (isset($data['code'])) {
                 $locale->setCode($data['code']);
             } elseif (isset($data['name'])) {
-                $code = $this->getLocaleCodeByEnglishLocaleName($data['name']);
-
-                $locale->setCode($code);
+                $locale->setCode($this->getLocaleCodeByEnglishLocaleName($data['name']));
             } else {
                 throw new \InvalidArgumentException("Locale definition should have either code or name");
             }
