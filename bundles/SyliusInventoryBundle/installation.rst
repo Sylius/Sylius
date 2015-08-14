@@ -213,7 +213,7 @@ Put this configuration inside your ``app/config/config.yml``.
         driver: doctrine/orm
         backorders: true
         classes:
-            unit:
+            inventory_unit:
                 model: App\AppBundle\Entity\InventoryUnit
             stockable:
                 model: App\AppBundle\Entity\Book
