@@ -95,7 +95,7 @@ sylius_archetype:
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
             archetype:
-                model: Sylius\Component\Product\Model\Archetype
+                model: Sylius\Component\Core\Model\Archetype
                 translation:
                     model: Sylius\Component\Product\Model\ArchetypeTranslation
 

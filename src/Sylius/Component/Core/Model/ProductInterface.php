@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Seo\Model\MetadataSubjectInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
@@ -29,7 +30,8 @@ interface ProductInterface extends
     BaseProductInterface,
     TaxableInterface,
     TaxonsAwareInterface,
-    ChannelsAwareInterface
+    ChannelsAwareInterface,
+    MetadataSubjectInterface
 {
     /*
      * Variant selection methods.
