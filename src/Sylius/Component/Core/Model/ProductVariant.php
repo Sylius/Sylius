@@ -146,6 +146,22 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
         return $string;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataClassIdentifier()
+    {
+        return 'ProductVariant';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataIdentifier()
+    {
+        return $this->getMetadataClassIdentifier() . '-' . $this->getId();
+    }
 
     /**
      * {@inheritdoc}

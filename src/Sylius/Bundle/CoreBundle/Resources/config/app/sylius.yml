@@ -107,7 +107,7 @@ sylius_archetype:
         product:
             archetype:
                 classes:
-                    model: Sylius\Component\Product\Model\Archetype
+                    model: Sylius\Component\Core\Model\Archetype
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
