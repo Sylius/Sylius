@@ -1,0 +1,35 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_metadata_index') }}">{{ 'sylius.breadcrumb.metadata.index'|trans }}</a></li>
+    <li>{{ metadata.key }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_metadata_index'), 'sylius.metadata.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_metadata_update', {'id': metadata.id})) }}
+        {{ buttons.delete(path('sylius_backend_metadata_delete', {'id': metadata.id}), null, false, false) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.metadata.show_header'|trans|raw }}</h1>
+</div>
+
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.metadata.key'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ metadata.key }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

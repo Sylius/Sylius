@@ -392,6 +392,13 @@ class BackendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.security_settings', $section)));
         }
 
+        if ($this->authorizationChecker->isGranted('sylius.metadata.index')) {
+            $child->addChild('metadatas', array(
+                'route'           => 'sylius_backend_metadata_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-file'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.metadatas', $section)));
+        }
+
         if ($this->authorizationChecker->isGranted('sylius.channel.index')) {
             $child->addChild('channels', array(
                 'route'           => 'sylius_backend_channel_index',
