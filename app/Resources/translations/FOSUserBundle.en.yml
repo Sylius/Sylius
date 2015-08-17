@@ -1,5 +1,0 @@
-# Form field labels
-form:
-    email: "Email"
-    password: "Password"
-    password_confirmation: "Verification"
