@@ -46,12 +46,12 @@ Feature: User registration
          Then I should see "Welcome"
           And I should see "Logout"
 
-    Scenario: Viewing orders places as guest after registration
+    Scenario: Viewing orders placed as a guest after registration
         Given I registered with email "customer@email.com" and password "sylius"
          When I display my orders history
          Then I should see 1 order in the list
 
-    Scenario: Viewing orders places as guest after registration
+    Scenario: Viewing addresses used as a guest after registration
         Given I registered with email "customer@email.com" and password "sylius"
          When I display my address book
          Then I should see 1 address in the list
