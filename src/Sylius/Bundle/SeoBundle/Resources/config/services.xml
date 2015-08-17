@@ -59,6 +59,36 @@
         <service id="sylius.metadata.hierarchy_provider" class="%sylius.metadata.hierarchy_provider.class%">
             <argument type="collection" /> <!-- Metadata hierarchy provider array -->
         </service>
+
+        <service id="sylius.form.type.page_metadata" class="%sylius.form.type.page_metadata.class%">
+            <argument>%sylius.model.page_metadata.class%</argument>
+            <argument>%sylius.validation_group.page_metadata%</argument>
+            <tag name="form.type" alias="sylius_page_metadata" />
+        </service>
+
+        <service id="sylius.form.type.twitter_summary_card" class="%sylius.form.type.twitter_summary_card.class%">
+            <argument>%sylius.model.twitter_summary_card.class%</argument>
+            <argument>%sylius.validation_group.twitter_summary_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_summary_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_summary_large_image_card" class="%sylius.form.type.twitter_summary_large_image_card.class%">
+            <argument>%sylius.model.twitter_summary_large_image_card.class%</argument>
+            <argument>%sylius.validation_group.twitter_summary_large_image_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_summary_large_image_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_player_card" class="%sylius.form.type.twitter_player_card.class%">
+            <argument>%sylius.model.twitter_player_card.class%</argument>
+            <argument>%sylius.validation_group.twitter_player_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_player_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_app_card" class="%sylius.form.type.twitter_app_card.class%">
+            <argument>%sylius.model.twitter_app_card.class%</argument>
+            <argument>%sylius.validation_group.twitter_app_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_app_card" />
+        </service>
     </services>
 
 </container>

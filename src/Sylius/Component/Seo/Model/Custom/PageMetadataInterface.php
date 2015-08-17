@@ -1,0 +1,50 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Seo\Model\Custom;
+
+use Sylius\Component\Seo\Model\MetadataInterface;
+
+/**
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
+interface PageMetadataInterface extends MetadataInterface
+{
+    /**
+     * @param string $title
+     */
+    public function setTitle($title);
+
+    /**
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description);
+
+    /**
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * @param string[] $keywords
+     */
+    public function setKeywords(array $keywords);
+
+    /**
+     * @return string[]
+     */
+    public function getKeywords();
+}
