@@ -27,9 +27,12 @@ class SecurityController extends Controller
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        $form = $this->get('form.factory')->createNamed('', 'sylius_user_security_login');
 
-        return $this->renderLogin(array(
+        $view = $request->attributes->get('_sylius[template]', 'SyliusUserBundle:Security:login.html.twig', true);
+        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
+        $form = $this->get('form.factory')->createNamed('', $formType);
+
+        return $this->renderLogin($view, array(
             'form'          => $form->createView(),
             'last_username' => $lastUsername,
             'error'         => $error,
@@ -56,12 +59,13 @@ class SecurityController extends Controller
      * Renders the login template with the given parameters. Overwrite this function in
      * an extended controller to provide additional data for the login template.
      *
-     * @param array $data
+     * @param string $view The view name
+     * @param array  $data
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function renderLogin(array $data)
+    protected function renderLogin($view, array $data)
     {
-        return $this->render('SyliusWebBundle:Frontend/User:login.html.twig', $data);
+        return $this->render($view, $data);
     }
 }
