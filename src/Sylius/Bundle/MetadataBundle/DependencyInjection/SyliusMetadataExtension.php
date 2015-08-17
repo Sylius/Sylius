@@ -13,12 +13,12 @@ namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusMetadataExtension extends AbstractResourceExtension
+class SyliusMetadataExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'services.xml',
@@ -35,5 +35,21 @@ class SyliusMetadataExtension extends AbstractResourceExtension
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('twig')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('twig', [
+            'form_themes' => [
+                'SyliusMetadataBundle:Form:dynamic_form_theme.html.twig',
+            ],
+        ]);
     }
 }

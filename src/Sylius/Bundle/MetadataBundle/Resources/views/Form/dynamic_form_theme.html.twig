@@ -1,0 +1,15 @@
+{% block sylius_dynamic_form_row %}
+    {{ form_row(form._form, { 'attr': { 'data-dynamic-form': true } }) }}
+
+    {% for prototypeName, prototype in form.vars.prototypes %}
+        <div id="{{ form._form.vars.id }}_{{ prototypeName }}" data-container="#dynamic-form-{{ name }}" data-prototype="{{ form_widget(prototype)|e }}">
+        </div>
+    {% endfor %}
+
+    <div id="dynamic-form-{{ name }}">
+        {# Render nested form (if possible) #}
+        {% if attribute(form.children, name) is defined %}
+            {{ form_row(attribute(form.children, name)) }}
+        {% endif %}
+    </div>
+{% endblock %}
