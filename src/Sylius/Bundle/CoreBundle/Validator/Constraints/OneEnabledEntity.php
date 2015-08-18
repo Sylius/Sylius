@@ -16,16 +16,13 @@ use Symfony\Component\Validator\Constraint;
 /*
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-
 class OneEnabledEntity extends Constraint
 {
-    public $em = null;
+    public $entityManager = null;
     public $message = 'Must have at least one enabled entity';
     public $repositoryMethod = 'findBy';
     public $errorPath = null;
     public $enabledPath = 'enabled';
-
-    private $service = 'sylius_one_enabled';
 
     public function getTargets()
     {
@@ -34,6 +31,6 @@ class OneEnabledEntity extends Constraint
 
     public function validatedBy()
     {
-        return $this->service;
+        return 'sylius_one_enabled';
     }
 }

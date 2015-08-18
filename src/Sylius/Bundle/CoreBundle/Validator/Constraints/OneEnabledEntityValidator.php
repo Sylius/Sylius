@@ -51,18 +51,18 @@ class OneEnabledEntityValidator extends ConstraintValidator
             return;
         }
 
-        if ($constraint->em) {
-            $em = $this->registry->getManager($constraint->em);
+        if ($constraint->entityManager) {
+            $entityManager = $this->registry->getManager($constraint->entityManager);
 
-            if (!$em) {
+            if (!$entityManager) {
                 throw new ConstraintDefinitionException(
-                    sprintf('Object manager "%s" does not exist.', $constraint->em)
+                    sprintf('Object manager "%s" does not exist.', $constraint->entityManager)
                 );
             }
         } else {
-            $em = $this->registry->getManagerForClass(get_class($entity));
+            $entityManager = $this->registry->getManagerForClass(get_class($entity));
 
-            if (!$em) {
+            if (!$entityManager) {
                 throw new ConstraintDefinitionException(
                     sprintf(
                         'Unable to find the object manager associated with an entity of class "%s".',
@@ -73,7 +73,7 @@ class OneEnabledEntityValidator extends ConstraintValidator
         }
 
         /* @var $class \Doctrine\Common\Persistence\Mapping\ClassMetadata */
-        $class = $em->getClassMetadata(get_class($entity));
+        $class = $entityManager->getClassMetadata(get_class($entity));
 
         if (!$class->hasField($constraint->enabledPath) && !$class->hasAssociation($constraint->enabledPath)) {
             throw new ConstraintDefinitionException(
@@ -83,7 +83,7 @@ class OneEnabledEntityValidator extends ConstraintValidator
 
         $criteria = array($constraint->enabledPath => true);
 
-        $repository = $em->getRepository(get_class($entity));
+        $repository = $entityManager->getRepository(get_class($entity));
         $result = $repository->{$constraint->repositoryMethod}($criteria);
 
         /* If the result is a MongoCursor, it must be advanced to the first
