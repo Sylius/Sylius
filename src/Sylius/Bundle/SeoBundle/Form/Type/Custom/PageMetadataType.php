@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SeoBundle\Form\Type\Custom;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\SeoBundle\DynamicForm\DynamicFormBuilderInterface;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -21,6 +22,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 class PageMetadataType extends AbstractResourceType
 {
     /**
+     * @var DynamicFormBuilderInterface
+     */
+    private $dynamicFormBuilder;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var DynamicFormBuilderInterface $dynamicFormBuilder
+     */
+    public function __construct($dataClass, array $validationGroups = [], DynamicFormBuilderInterface $dynamicFormBuilder)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->dynamicFormBuilder = $dynamicFormBuilder;
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -28,9 +47,27 @@ class PageMetadataType extends AbstractResourceType
         $builder
             ->add('title', 'text')
             ->add('description', 'textarea')
-            ->add('keywords', 'textarea')
+            ->add('keywords', 'text')
         ;
 
+        $this->dynamicFormBuilder->buildDynamicForm($builder, 'twitter', 'sylius_twitter_card');
+
+        $this->addKeywordsTransformer($builder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_page_metadata';
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     */
+    private function addKeywordsTransformer(FormBuilderInterface $builder)
+    {
         $builder->get('keywords')->addModelTransformer(new CallbackTransformer(
             function ($originalKeywords) {
                 if (!is_array($originalKeywords)) {
@@ -49,13 +86,5 @@ class PageMetadataType extends AbstractResourceType
                 return $keywords;
             }
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_page_metadata';
     }
 }

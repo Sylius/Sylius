@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Seo\Model\Custom;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Seo\Model\Twitter\CardInterface;
 
 /**
  * @mixin \Sylius\Component\Seo\Model\Custom\PageMetadata
@@ -52,5 +53,13 @@ class PageMetadataSpec extends ObjectBehavior
 
         $this->setKeywords(['lorem', 'ipsum']);
         $this->getKeywords()->shouldReturn(['lorem', 'ipsum']);
+    }
+
+    function it_has_Twitter(CardInterface $card)
+    {
+        $this->getTwitter()->shouldReturn(null);
+
+        $this->setTwitter($card);
+        $this->getTwitter()->shouldReturn($card);
     }
 }

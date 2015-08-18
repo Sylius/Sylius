@@ -12,6 +12,7 @@
 namespace Sylius\Component\Seo\Model\Custom;
 
 use Sylius\Component\Seo\Model\AbstractMetadata;
+use Sylius\Component\Seo\Model\Twitter\CardInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -34,14 +35,20 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     protected $keywords = [];
 
     /**
+     * @var CardInterface
+     */
+    protected $twitter;
+
+    /**
      * {@inheritdoc}
      */
     public function serialize()
     {
-        return json_encode([
+        return serialize([
             $this->title,
             $this->description,
             $this->keywords,
+            $this->twitter,
         ]);
     }
 
@@ -54,7 +61,8 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
             $this->title,
             $this->description,
             $this->keywords,
-        ) = json_decode($serialized, true);
+            $this->twitter,
+        ) = unserialize($serialized);
     }
 
 
@@ -104,5 +112,21 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     public function getKeywords()
     {
         return $this->keywords;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTwitter(CardInterface $card)
+    {
+        $this->twitter = $card;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
     }
 }

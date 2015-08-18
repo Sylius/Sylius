@@ -12,6 +12,7 @@
 namespace Sylius\Component\Seo\Model\Custom;
 
 use Sylius\Component\Seo\Model\MetadataInterface;
+use Sylius\Component\Seo\Model\Twitter\CardInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -47,4 +48,14 @@ interface PageMetadataInterface extends MetadataInterface
      * @return string[]
      */
     public function getKeywords();
+
+    /**
+     * @param CardInterface $card
+     */
+    public function setTwitter(CardInterface $card);
+
+    /**
+     * @return CardInterface|null
+     */
+    public function getTwitter();
 }

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\SeoBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\SeoBundle\DependencyInjection\Compiler\DynamicFormsChoicesMapCompilerPass;
 use Sylius\Bundle\SeoBundle\DependencyInjection\Compiler\MetadataHierarchyProviderCompilerPass;
 use Sylius\Bundle\SeoBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -31,6 +32,7 @@ class SyliusSeoBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new MetadataRendererCompilerPass());
         $container->addCompilerPass(new MetadataHierarchyProviderCompilerPass());
+        $container->addCompilerPass(new DynamicFormsChoicesMapCompilerPass());
     }
 
     /**
