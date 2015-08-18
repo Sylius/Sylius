@@ -19,7 +19,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 interface LocaleProviderInterface
 {
     /**
-     * @return LocaleInterface[]
+     * @return string[]
      */
     public function getAvailableLocales();
 

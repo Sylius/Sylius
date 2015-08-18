@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -33,6 +35,16 @@ class LocaleChoiceType extends AbstractType
     public function __construct(ObjectRepository $repository)
     {
         $this->localeRepository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
     }
 
     /**
