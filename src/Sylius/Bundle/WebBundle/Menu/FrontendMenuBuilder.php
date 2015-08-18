@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
@@ -187,6 +188,8 @@ class FrontendMenuBuilder extends MenuBuilder
             $menu->addChild('administration', $routeParams)->setLabel($this->translate('sylius.frontend.menu.main.administration'));
         }
 
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_MAIN, new MenuBuilderEvent($this->factory, $menu));
+
         return $menu;
     }
 
@@ -219,6 +222,8 @@ class FrontendMenuBuilder extends MenuBuilder
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $code))),
             ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
         }
+
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_CURRENCY, new MenuBuilderEvent($this->factory, $menu));
 
         return $menu;
     }
@@ -254,6 +259,8 @@ class FrontendMenuBuilder extends MenuBuilder
             $this->createTaxonomiesMenuNode($child, $taxonomy->getRoot());
         }
 
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_TAXONOMIES, new MenuBuilderEvent($this->factory, $menu));
+
         return $menu;
     }
 
@@ -285,6 +292,8 @@ class FrontendMenuBuilder extends MenuBuilder
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.facebook')),
             'labelAttributes' => array('icon' => 'icon-facebook-sign icon-large', 'iconOnly' => true)
         ));
+
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_SOCIAL, new MenuBuilderEvent($this->factory, $menu));
 
         return $menu;
     }
@@ -337,6 +346,8 @@ class FrontendMenuBuilder extends MenuBuilder
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.addresses')),
             'labelAttributes' => array('icon' => 'icon-envelope', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
+
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_ACCOUNT, new MenuBuilderEvent($this->factory, $menu));
 
         return $menu;
     }
