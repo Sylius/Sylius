@@ -55,6 +55,7 @@
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
+        <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelListener</parameter>
 
         <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
@@ -334,6 +335,10 @@
             <argument type="service" id="translator" />
             <argument>sylius_cart_summary</argument>
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
+        <service id="sylius.listener.channel" class="%sylius.listener.channel.class%">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
             <argument type="service" id="sylius.image_uploader" />
