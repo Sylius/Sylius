@@ -55,7 +55,7 @@ class OrderPricingListener
 
         $context = array();
         if (null !== $customer = $order->getCustomer()) {
-            $context['customer']   = $customer;
+            $context['customer'] = $customer;
             $context['groups'] = $customer->getGroups()->toArray();
         }
 
