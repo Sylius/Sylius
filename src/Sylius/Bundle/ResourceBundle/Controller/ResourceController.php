@@ -171,6 +171,39 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
+     * @return Response
+     */
+    public function newAction(Request $request)
+    {
+        $this->isGrantedOr403('create');
+
+        $resource = $this->createNew();
+        $form = $this->getForm($resource, array(
+            'method'            => $this->config->getTargetMethod('POST'),
+            'action'            => $this->generateUrl(
+                $this->config->getTargetRoute($this->config->getRouteName('create')),
+                $this->config->getTargetParameters($request->attributes->get('_route_params'))
+            ),
+            'validation_groups' => null,
+        ));
+        //set some form data from request without validation
+        if ($request->query->has($form->getName()) || $request->request->has($form->getName())) {
+            $form->submit($request->get($form->getName()));
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('create.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $resource,
+                'form'                           => $form->createView(),
+            ));
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
      *
      * @return RedirectResponse|Response
      */
@@ -179,7 +212,13 @@ class ResourceController extends FOSRestController
         $this->isGrantedOr403('create');
 
         $resource = $this->createNew();
-        $form = $this->getForm($resource);
+        $form = $this->getForm($resource, array(
+            'method'            => $this->config->getTargetMethod('POST'),
+            'action'            => $this->generateUrl(
+                $this->config->getTargetRoute($request->attributes->get('_route')),
+                $this->config->getTargetParameters($request->attributes->get('_route_params'))
+            ),
+        ));
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($form->getData());
@@ -218,6 +257,36 @@ class ResourceController extends FOSRestController
     /**
      * @param Request $request
      *
+     * @return Response
+     */
+    public function editAction(Request $request)
+    {
+        $this->isGrantedOr403('update');
+
+        $resource = $this->findOr404($request);
+        $form     = $this->getForm($resource, array(
+            'action' => $this->generateUrl(
+                $this->config->getTargetRoute($this->config->getRouteName('update')),
+                $this->config->getTargetParameters($request->attributes->get('_route_params'))
+            ),
+            'method' => $this->config->getTargetMethod('PUT'),
+        ));
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('update.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $resource,
+                'form'                           => $form->createView(),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request)
@@ -225,7 +294,13 @@ class ResourceController extends FOSRestController
         $this->isGrantedOr403('update');
 
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $form     = $this->getForm($resource, array(
+            'action' => $this->generateUrl(
+                $this->config->getTargetRoute($request->attributes->get('_route')),
+                $this->config->getTargetParameters($request->attributes->get('_route_params'))
+            ),
+            'method' => $this->config->getTargetMethod('PUT'),
+        ));
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
