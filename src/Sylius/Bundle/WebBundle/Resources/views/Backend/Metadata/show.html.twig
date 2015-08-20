@@ -2,11 +2,27 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
+{% macro dataAsList(data) %}
+    {% if data is iterable and data|length > 0 %}
+        <ul>
+            {% for key, element in data %}
+                <li>
+                    {% if key is not sameas(loop.index0) %}<b>{{ key|humanize }}:</b> {% endif %}{{ _self.dataAsList(element) }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% elseif data is not empty %}
+        {{ data }}
+    {% else %}
+        <small><i>empty</i></small>
+    {% endif %}
+{% endmacro %}
+
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_metadata_index') }}">{{ 'sylius.breadcrumb.metadata.index'|trans }}</a></li>
-    <li>{{ metadata.key }}</li>
+    <li>{{ metadata.id }}</li>
 </ol>
 {% endblock %}
 
@@ -14,8 +30,8 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_metadata_index'), 'sylius.metadata.manage'|trans) }}
-        {{ buttons.edit(path('sylius_backend_metadata_update', {'id': metadata.id})) }}
-        {{ buttons.delete(path('sylius_backend_metadata_delete', {'id': metadata.id}), null, false, false) }}
+        {{ buttons.edit(path('sylius_backend_metadata_customize', { 'id': metadata.id })) }}
+        {{ buttons.delete(path('sylius_backend_metadata_delete', { 'id': metadata.id }), null, false, false) }}
     </div>
     <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.metadata.show_header'|trans|raw }}</h1>
 </div>
@@ -23,12 +39,14 @@
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>{{ 'sylius.metadata.key'|trans }}</th>
+            <th>{{ 'sylius.metadata.id'|trans }}</th>
+            <th>{{ 'sylius.metadata.content'|trans }}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>{{ metadata.key }}</td>
+            <td>{{ metadata.id }}</td>
+            <td>{{ _self.dataAsList(metadata.metadata.toArray()) }}</td>
         </tr>
     </tbody>
 </table>

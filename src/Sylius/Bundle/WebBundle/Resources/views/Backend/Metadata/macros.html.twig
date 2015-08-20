@@ -8,19 +8,17 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.metadata.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('key', 'sylius.metadata.key'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     {% for metadata in metadatas %}
         <tr>
-            <td>{{ metadata.id }}</td>
-            <td><a href="{{ path('sylius_backend_metadata_show', {'id': metadata.id}) }}">{{ metadata.key }}</a></td>
+            <td><a href="{{ path('sylius_backend_metadata_show', { 'id': metadata.id }) }}">{{ metadata.id }}</a></td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_metadata_update', {'id': metadata.id})) }}
-                {{ buttons.delete(path('sylius_backend_metadata_delete', {'id': metadata.id})) }}
+                {{ buttons.edit(path('sylius_backend_metadata_customize', { 'id': metadata.id })) }}
+                {{ buttons.delete(path('sylius_backend_metadata_delete', { 'id': metadata.id })) }}
                 </div>
             </td>
         </tr>

@@ -14,7 +14,9 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_metadata_create'), 'sylius.metadata.create'|trans) }}
+        <a href="{{ path('sylius_backend_metadata_customize', { 'id': 'DefaultPage' }) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.customize'|trans }}</span>
+        </a>
     </div>
     <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.metadata.index_header'|trans|raw }}</h1>
 </div>

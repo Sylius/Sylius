@@ -11,24 +11,18 @@ sylius_backend_metadata_index:
             sortable: true
             paginate: 50
             sorting:
-                key: asc
+                id: asc
 
-sylius_backend_metadata_create:
-    path: /new
-    methods: [GET, POST]
+sylius_backend_metadata_customize:
+    path: /customize/{id}
+    methods: [GET, POST, PUT]
     defaults:
-        _controller: sylius.controller.metadata:createAction
+        _controller: sylius.controller.metadata:customizeAction
         _sylius:
-            template: SyliusWebBundle:Backend/Metadata:create.html.twig
-            redirect: sylius_backend_metadata_show
-
-sylius_backend_metadata_update:
-    path: /{id}/edit
-    methods: [GET, PUT]
-    defaults:
-        _controller: sylius.controller.metadata:updateAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Metadata:update.html.twig
+            factory:
+                method: createPageMetadataWithGivenId
+                arguments: [$id]
+            template: SyliusWebBundle:Backend/Metadata:customize.html.twig
             redirect: sylius_backend_metadata_show
 
 sylius_backend_metadata_delete:

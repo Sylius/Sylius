@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Seo\Model\MetadataSubjectInterface;
+use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
  * @mixin \Sylius\Component\Core\Metadata\HierarchyProvider\ProductVariantHierarchyProvider
@@ -29,9 +29,9 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Metadata\HierarchyProvider\ProductVariantHierarchyProvider');
     }
 
-    function it_implements_Sylius_Seo_Metadata_Hierarchy_Provider_interface()
+    function it_implements_Sylius_Metadata_Hierarchy_Provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Seo\HierarchyProvider\MetadataHierarchyProviderInterface');
+        $this->shouldImplement('Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface');
     }
 
     function it_supports_Sylius_Core_ProductVariant(

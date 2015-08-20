@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\SeoBundle\Form\Type\Twitter\TwitterCardType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
