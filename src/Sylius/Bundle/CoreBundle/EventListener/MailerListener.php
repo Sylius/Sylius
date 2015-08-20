@@ -13,8 +13,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -32,6 +30,9 @@ class MailerListener
      */
     protected $emailSender;
 
+    /**
+     * @param SenderInterface $emailSender
+     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;
@@ -53,14 +54,19 @@ class MailerListener
             );
         }
 
-        if (null === $user = $customer->getUser()) {
+        if (null === ($user = $customer->getUser())) {
             return;
         }
 
         if (!$user->isEnabled()) {
             return;
         }
-        $this->emailSender->send(Emails::USER_CONFIRMATION, array($customer->getEmail()), array('user' => $user));
+
+        if (null === ($email = $customer->getEmail()) || empty($email)) {
+            return;
+        }
+
+        $this->emailSender->send(Emails::USER_CONFIRMATION, array($email), array('user' => $user));
     }
 
     /**
@@ -79,14 +85,29 @@ class MailerListener
             );
         }
 
-        if ($comment->getNotifyCustomer()) {
-            $order = $comment->getOrder();
-            $email = $order->getCustomer()->getEmail();
-
-            $this->emailSender->send(Emails::ORDER_COMMENT, array($email), array(
-                'order'   => $order,
-                'comment' => $comment,
-            ));
+        if (!$comment->getNotifyCustomer()) {
+            return;
         }
+
+        if (null === $order = $comment->getOrder()) {
+            return;
+        }
+
+        if (null === $order->getCustomer()) {
+            return;
+        }
+
+        if (null === ($email = $order->getCustomer()->getEmail()) || empty($email)) {
+            return;
+        }
+
+        $this->emailSender->send(
+            Emails::ORDER_COMMENT,
+            array($email),
+            array(
+                'order' => $order,
+                'comment' => $comment,
+            )
+        );
     }
 }
