@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Seo
-        psr4_prefix: Sylius\Component\Seo
-        src_path: .

@@ -1,0 +1,42 @@
+{
+    "name": "sylius/metadata",
+    "type": "library",
+    "description": "Metadata management for PHP applications.",
+    "keywords": ["metadata"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "~5.5"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Metadata\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Metadata\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}
