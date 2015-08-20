@@ -47,9 +47,9 @@ sylius_cart_save:
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
 
-sylius_contact:
-    resource: @SyliusWebBundle/Resources/config/routing/frontend/contact.yml
-    prefix: /contact
+sylius_support:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/support.yml
+    prefix: /support
 
 sylius_search:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/search.yml

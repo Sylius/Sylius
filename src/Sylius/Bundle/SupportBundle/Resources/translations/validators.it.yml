@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  support_request:
+    first_name:
+      not_blank: Per favore inserisci il tuo nome.
+    last_name:
+      not_blank: Per favore inserisci il tuo cognome.
