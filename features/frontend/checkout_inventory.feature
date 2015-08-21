@@ -5,7 +5,8 @@ Feature: Checkout inventory
     I need to see inventory changes after checkout
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -23,10 +24,8 @@ Feature: Checkout inventory
           And the following payment methods exist:
             | name        | gateway | enabled | calculator | calculator_configuration |
             | Credit Card | dummy   | yes     | fixed      | amount: 0                |
-          And there is default currency configured
-          And there is default channel configured
-          And all products assigned to "DEFAULT-WEB" channel
-          And channel "DEFAULT-WEB" has following configuration:
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
             | taxonomy | payment       | shipping    |
             | Category | Credit Card   | DHL Express |
           And I am logged in as administrator

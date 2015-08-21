@@ -5,13 +5,12 @@ Feature: Tax categories
     I want to be able to manage tax categories
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are following tax categories:
             | name        |
             | Clothing    |
             | Electronics |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all tax categories
         Given I am on the dashboard page

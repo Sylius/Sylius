@@ -6,24 +6,23 @@ Feature: Currency selection
 
     Background:
         Given there are following taxonomies defined:
-          | name     |
-          | Category |
-        And taxonomy "Category" has following taxons:
-          | Clothing > PHP T-Shirts |
-        And the following products exist:
-          | name          | price | taxons       |
-          | PHP Top       | 5.99  | PHP T-Shirts |
-        And there are following currencies configured:
-          | code | exchange rate | enabled |
-          | EUR  | 1.00000       | yes     |
-          | USD  | 0.76496       | yes     |
-          | GBP  | 1.13986       | yes     |
-          | PLN  | 1.01447       | no      |
-      And there are following channels configured:
-        | code        | name            | currencies    | locales  | url          |
-        | DEFAULT-WEB | Default Channel | EUR, GBP, USD | en_US    | localhost    |
-      And all products assigned to "DEFAULT-WEB" channel
-
+            | name     |
+            | Category |
+          And taxonomy "Category" has following taxons:
+            | Clothing > PHP T-Shirts |
+          And the following products exist:
+            | name          | price | taxons       |
+            | PHP Top       | 5.99  | PHP T-Shirts |
+          And there are following currencies configured:
+            | code | exchange rate | enabled |
+            | EUR  | 1.00000       | yes     |
+            | USD  | 0.76496       | yes     |
+            | GBP  | 1.13986       | yes     |
+            | PLN  | 1.01447       | no      |
+          And there are following channels configured:
+            | code        | name            | currencies    | locales  | url          |
+            | DEFAULT-WEB | Default Channel | EUR, GBP, USD | en_US    | localhost    |
+          And all products are assigned to the default channel
 
     Scenario: Only enabled currencies are visible to the user
         Given I am on the store homepage

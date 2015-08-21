@@ -5,13 +5,12 @@ Feature: Taxation settings
     I want to be able to edit taxation configuration
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
             | USA          | country | United States                 |
+          And I am logged in as administrator
 
     Scenario: Accessing the settings form
         Given I am on the dashboard page

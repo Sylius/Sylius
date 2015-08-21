@@ -5,16 +5,15 @@ Feature: General settings
     I want to be able to edit general configuration
 
     Background:
-        Given there are following currencies configured:
-            | code | exchange rate | enabled |
-            | USD  | 0.76496       | yes     |
-            | GBP  | 1.16998       | no      |
-            | EUR  | 1.00000       | yes     |
-            | AUD  | 0.73986       | yes     |
-          And there is default channel configured
-          And channel "DEFAULT-WEB" has following configuration:
+        Given store has default configuration
+          And there are following currencies configured:
+            | code |
+            | EUR  |
+            | USD  |
+            | PLN  |
+          And the default channel has following configuration:
             | currencies    |
-            | USD, EUR, AUD |
+            | EUR, USD, PLN |
           And I am logged in as administrator
 
     Scenario: Accessing the settings form

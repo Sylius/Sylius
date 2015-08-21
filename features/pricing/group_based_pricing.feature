@@ -5,8 +5,7 @@ Feature: Group based pricing
     I want to configure prices per customer group
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
+        Given store has default configuration
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -38,8 +37,8 @@ Feature: Group based pricing
             | group               | price |
             | Wholesale Customers | 39.49 |
             | Retail Customers    | 45.99 |
-          And all products assigned to "DEFAULT-WEB" channel
-          And channel "DEFAULT-WEB" has following configuration:
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
             | taxonomy |
             | Category |
 

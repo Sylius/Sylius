@@ -5,9 +5,7 @@ Feature: Inventory tracking
     I want to be able to manage stock levels and availability
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are following options:
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |
@@ -18,6 +16,7 @@ Feature: Inventory tracking
             | Black T-Shirt  | 19.99 | T-Shirt size                |
             | Mug            | 5.99  |                             |
             | Sticker        | 10.00 |                             |
+          And I am logged in as administrator
 
     Scenario: Seeing index of inventory
         Given I am on the dashboard page

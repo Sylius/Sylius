@@ -5,11 +5,10 @@ Feature: Forgot password
     I need to be able to reset my password
 
     Background:
-        Given there are following users:
+        Given store has default configuration
+          And there are following users:
             | email       | password | enabled |
             | bar@foo.com | foo1     | yes     |
-        And there is default currency configured
-        And there is default channel configured
 
     Scenario: Reseting user password
         Given I am on the store homepage

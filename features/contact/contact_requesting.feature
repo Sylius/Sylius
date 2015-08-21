@@ -5,14 +5,13 @@ Feature: Contact requesting
     I want to send message to store owner
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following contact topics:
+        Given store has default configuration
+          And there are following contact topics:
             | title               |
             | Order return        |
             | Delivery            |
             | Product information |
-        And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Submitting the form without the required fields fails
         Given I am on the contact page

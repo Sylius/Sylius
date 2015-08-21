@@ -5,11 +5,10 @@ Feature: Sign in to the store
     I need to be able to log in to the store
 
     Background:
-        Given there are following users:
+        Given store has default configuration
+          And there are following users:
             | email       | password | enabled |
             | bar@foo.com | foo1     | yes     |
-        And there is default currency configured
-        And there is default channel configured
 
     Scenario: Log in with username and password
         Given I am on the store homepage

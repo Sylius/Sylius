@@ -5,9 +5,7 @@ Feature: User account addresses page
     I want to be able to add, edit or delete my shipping and billing addresses
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in user
+        Given store has default configuration
           And the following countries exist:
             | name          | enabled |
             | Germany       | yes     |
@@ -21,6 +19,7 @@ Feature: User account addresses page
             | sylius@example.com | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany |
             | sylius@example.com | Jan Kowalski, Fun-Straße 1, 90032, Vienna, Austria    |
             | sylius@example.com | Jan Kowalski, Wawel 5, 31-001, Kraków, Poland         |
+          And I am logged in user
           And I am on my account addresses page
 
     Scenario: Viewing my account addresses page

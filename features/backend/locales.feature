@@ -5,8 +5,7 @@ Feature: Managing locales
     I want to be able to configure locales
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
+        Given store has default configuration
           And there are following locales configured:
             | name                    | enabled |
             | German (Germany)        | yes     |

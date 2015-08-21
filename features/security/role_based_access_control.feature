@@ -5,34 +5,31 @@ Feature: Hierarchical Role based access control (HRBAC)
   I want to be able to allow only certain roles to access backend
 
   Background:
-    Given there is default currency configured
-    And authorization checks are enabled
-    And there are following locales configured:
-      | code  | enabled |
-      | en_US | yes     |
-    And there is following permission hierarchy:
-      | code                  | parent         | description             |
-      | sylius.catalog        |                | Manage products catalog |
-      | sylius.product.show   | sylius.catalog | View single product     |
-      | sylius.product.index  | sylius.catalog | List all products       |
-      | sylius.product.create | sylius.catalog | Add new products        |
-      | sylius.product.update | sylius.catalog | Edit products           |
-      | sylius.product.delete | sylius.catalog | Delete products         |
-      | sylius.sales          |                | Manage products sales   |
-      | sylius.order.show     | sylius.sales   | View single order       |
-      | sylius.order.index    | sylius.sales   | List all orders         |
-      | sylius.order.create   | sylius.sales   | Add new orders          |
-      | sylius.order.update   | sylius.sales   | Edit orders             |
-      | sylius.order.delete   | sylius.sales   | Delete orders           |
-    And there is following role hierarchy:
-      | code                   | parent               | name            | security roles             |
-      | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
-      | sylius.catalog_manager | sylius.administrator | Catalog Manager | ROLE_ADMINISTRATION_ACCESS |
-      | sylius.sales_manager   | sylius.administrator | Sales Manager   | ROLE_ADMINISTRATION_ACCESS |
-    And role "Catalog Manager" has the following permissions:
-      | sylius.catalog |
-    And role "Sales Manager" has the following permissions:
-      | sylius.sales |
+    Given store has default configuration
+      And authorization checks are enabled
+      And there is following permission hierarchy:
+        | code                  | parent         | description             |
+        | sylius.catalog        |                | Manage products catalog |
+        | sylius.product.show   | sylius.catalog | View single product     |
+        | sylius.product.index  | sylius.catalog | List all products       |
+        | sylius.product.create | sylius.catalog | Add new products        |
+        | sylius.product.update | sylius.catalog | Edit products           |
+        | sylius.product.delete | sylius.catalog | Delete products         |
+        | sylius.sales          |                | Manage products sales   |
+        | sylius.order.show     | sylius.sales   | View single order       |
+        | sylius.order.index    | sylius.sales   | List all orders         |
+        | sylius.order.create   | sylius.sales   | Add new orders          |
+        | sylius.order.update   | sylius.sales   | Edit orders             |
+        | sylius.order.delete   | sylius.sales   | Delete orders           |
+      And there is following role hierarchy:
+        | code                   | parent               | name            | security roles             |
+        | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
+        | sylius.catalog_manager | sylius.administrator | Catalog Manager | ROLE_ADMINISTRATION_ACCESS |
+        | sylius.sales_manager   | sylius.administrator | Sales Manager   | ROLE_ADMINISTRATION_ACCESS |
+      And role "Catalog Manager" has the following permissions:
+        | sylius.catalog |
+      And role "Sales Manager" has the following permissions:
+        | sylius.sales |
 
   Scenario: Only selected menus are visible for Sales Manager
     Given I am logged in as "Sales Manager"

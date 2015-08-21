@@ -5,25 +5,24 @@ Feature: Browsing products by taxonomies
     I want to be able to view them by category
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
             | Special  |
-        And taxonomy "Category" has following taxons:
+          And taxonomy "Category" has following taxons:
             | Clothing > T-Shirts |
             | Clothing > Shorts   |
-        And taxonomy "Special" has following taxons:
+          And taxonomy "Special" has following taxons:
             | Featured |
             | New      |
-        And the following products exist:
+          And the following products exist:
             | name          | price | taxons   |
             | Super T-Shirt | 19.99 | T-Shirts |
             | Black T-Shirt | 19.99 | T-Shirts |
             | Shorts        | 35.99 | Shorts   |
             | Bambi Shorts  | 35.00 | Shorts   |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all products for given taxonomy
         Given I am on the taxonomy index page
