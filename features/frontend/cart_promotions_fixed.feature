@@ -5,9 +5,7 @@ Feature: Checkout fixed discount promotions
     I want to apply promotion discounts during checkout
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as user "klaus@example.com"
+        Given store has default configuration
           And the following countries exist:
             | name    |
             | Germany |
@@ -34,8 +32,8 @@ Feature: Checkout fixed discount promotions
             | Shipping to Germany | Discount for orders with shipping country Germany |
             | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
             | 3rd order           | Discount for 3rd order                            |
-          And all products assigned to "DEFAULT-WEB" channel
-          And all promotions assigned to "DEFAULT-WEB" channel
+          And all products are assigned to the default channel
+          And all promotions are assigned to the default channel
           And promotion "3 items" has following rules defined:
             | type       | configuration        |
             | Item count | Count: 3,Equal: true |
@@ -49,13 +47,13 @@ Feature: Checkout fixed discount promotions
             | type           | configuration |
             | Fixed discount | Amount: 40    |
           And promotion "Shipping to Germany" has following rules defined:
-            | type       | configuration |
+            | type             | configuration |
             | Shipping country | Country: Germany |
           And promotion "Shipping to Germany" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 40    |
           And promotion "Ubuntu T-Shirts" has following rules defined:
-            | type     | configuration          |
+            | type     | configuration                      |
             | Taxonomy | Taxons: Ubuntu T-Shirts,Exclude: 0 |
           And promotion "Ubuntu T-Shirts" has following actions defined:
             | type           | configuration |
@@ -66,6 +64,7 @@ Feature: Checkout fixed discount promotions
           And promotion "3rd order" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |
+          And I am logged in as user "klaus@example.com"
 
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount

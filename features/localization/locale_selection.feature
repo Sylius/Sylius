@@ -5,13 +5,13 @@ Feature: Locale selection
     I want to to select my language in the storefront
 
     Background:
-        Given there are following locales configured:
+        Given there is default currency configured
+          And there are following locales configured:
             | code  | enabled |
             | de_DE | yes     |
             | en_US | yes     |
             | fr_FR | no      |
             | pl_PL | yes     |
-          And there is default currency configured
           And there are following channels configured:
             | code        | name            | currencies | locales                    | url       |
             | DEFAULT-WEB | Default Channel | EUR        | de_DE, en_US, fr_FR, pl_PL | localhost |

@@ -5,12 +5,7 @@ Feature: taxonomies
     I want to be able to manage taxonomies
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -21,6 +16,7 @@ Feature: taxonomies
             | Electronics > Mac > MBP  |
             | Clothing > Gloves        |
             | Clothing > Hats          |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all taxonomies
         Given I am on the dashboard page

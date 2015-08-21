@@ -5,8 +5,7 @@ Feature: User account profile edition
     I want to be able to edit my name and my email
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
+        Given store has default configuration
           And I am logged in user
           And I am on my account homepage
 

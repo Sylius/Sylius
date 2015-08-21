@@ -5,7 +5,8 @@ Feature: Cart
     I want to be able to add products to cart
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -22,15 +23,11 @@ Feature: Cart
             | Git T-Shirt   | 29.99 | T-Shirt size                | PHP T-Shirts | match              |
             | PHP Top       | 5.99  |                             | PHP T-Shirts |                    |
             | iShirt        | 18.99 |                             | T-Shirts     |                    |
-          And product "Super T-Shirt" is available in all variations
-          And product "Git T-Shirt" is available in all variations
-          And product "Black T-Shirt" is available in all variations
-          And there is default currency configured
-          And there is default channel configured
-          And channel "DEFAULT-WEB" has following configuration:
-              | taxonomy |
-              | Category |
-          And all products assigned to "DEFAULT-WEB" channel
+          And all products are available in all variations
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Seeing empty cart
         Given I am on the store homepage

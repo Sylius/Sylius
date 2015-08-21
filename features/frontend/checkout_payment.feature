@@ -5,9 +5,8 @@ Feature: Checkout Payment
     I want to be able to use checkout payment step
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -27,8 +26,8 @@ Feature: Checkout Payment
             | Credit Card PRO | stripe     | yes     | percent    | percent: 0               |
             | PayPal          | paypal     | yes     | fixed      | amount: 50               |
             | PayPal PRO      | paypal_pro | no      | percent    | percent: 10              |
-          And all products assigned to "DEFAULT-WEB" channel
-          And channel "DEFAULT-WEB" has following configuration:
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
             | taxonomy | payment                                            | shipping    |
             | Category | PayPal, PayPal PRO, Credit Card, Credit Card PRO   | DHL Express |
           And I am logged in user

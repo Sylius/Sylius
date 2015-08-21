@@ -5,9 +5,7 @@ Feature: Customers management
     I want to be able to list all customers
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are products:
             | name | price |
             | Mug  | 5.99  |
@@ -35,6 +33,7 @@ Feature: Customers management
         And order #000000002 has following items:
             | product | quantity |
             | Mug     | 3        |
+        And I am logged in as administrator
 
     Scenario: Seeing index of all customers
         Given I am on the dashboard page

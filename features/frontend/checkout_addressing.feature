@@ -5,7 +5,8 @@ Feature: Checkout addressing
     I want to proceed through addressing checkout step
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -31,9 +32,7 @@ Feature: Checkout addressing
             | zone         | name          | calculator | configuration |
             | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
             | USA          | FedEx         | Flat rate  | Amount: 6500  |
-          And there is default currency configured
-          And there is default channel configured
-          And all products assigned to "DEFAULT-WEB" channel
+          And all products are assigned to the default channel
 
     Scenario: Filling the shipping address
         Given I am logged in user

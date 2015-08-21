@@ -5,28 +5,27 @@ Feature: Checkout product promotion
     I want to apply promotion discounts during checkout
 
     Background:
-        Given the following products exist:
-          | name   | price |
-          | Lenny  | 15    |
-          | Buzz   | 500   |
-          | Potato | 200   |
-          | Etch   | 20    |
-          | Woody  | 125   |
-          | Sarge  | 25    |
-          | Ubu    | 200   |
-        And the following promotions exist:
-          | name                | description                      |
-          | Free product        | Almost free product over 100 eur |
-        And promotion "Free product" has following rules defined:
-          | type       | configuration |
-          | Item total | Amount: 100   |
-        And promotion "Free product" has following actions defined:
-          | type        | configuration                     |
-          | Add product | variant:Ubu,quantity:1,price:10 |
-        And there is default currency configured
-        And there is default channel configured
-        And all products assigned to "DEFAULT-WEB" channel
-        And all promotions assigned to "DEFAULT-WEB" channel
+        Given store has default configuration
+          And the following products exist:
+            | name   | price |
+            | Lenny  | 15    |
+            | Buzz   | 500   |
+            | Potato | 200   |
+            | Etch   | 20    |
+            | Woody  | 125   |
+            | Sarge  | 25    |
+            | Ubu    | 200   |
+          And the following promotions exist:
+            | name                | description                      |
+            | Free product        | Almost free product over 100 eur |
+          And promotion "Free product" has following rules defined:
+            | type       | configuration |
+            | Item total | Amount: 100   |
+          And promotion "Free product" has following actions defined:
+            | type        | configuration                   |
+            | Add product | variant:Ubu,quantity:1,price:10 |
+          And all products are assigned to the default channel
+          And all promotions are assigned to the default channel
 
     Scenario: Free product is not applied when the cart
               has not the required amount

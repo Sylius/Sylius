@@ -5,9 +5,7 @@ Feature: Store dashboard
     I need to be able to see sales info in backend dashboard
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
@@ -19,13 +17,14 @@ Feature: Store dashboard
             | customer          | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-        And order #000000001 has following items:
+          And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000000002 has following items:
+          And order #000000002 has following items:
             | product | quantity |
             | Mug     | 1        |
             | Sticker | 4        |
+          And I am logged in as administrator
 
     Scenario: Viewing the dashboard at website root
        Given I am on the dashboard page

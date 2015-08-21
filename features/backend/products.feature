@@ -5,44 +5,40 @@ Feature: Products
     I want to be able to manage products
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following options:
+        Given store has default configuration
+          And there are following options:
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
-        And there are following attributes:
+          And there are following attributes:
             | name               | presentation      | type     | choices   |
             | T-Shirt fabric     | T-Shirt           | text     |           |
             | T-Shirt fare trade | Faretrade product | checkbox |           |
             | Color              | color             | choice   | red, blue |
             | Size               | size              | number   |           |
-        And the following products exist:
+          And the following products exist:
             | name          | price | options                     | attributes             |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
             | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
             | Mug           | 5.99  |                             |                        |
             | Sticker       | 10.00 |                             |                        |
-        And product "Super T-Shirt" is available in all variations
-        And there are following tax categories:
+          And product "Super T-Shirt" is available in all variations
+          And there are following tax categories:
             | name        |
             | Clothing    |
             | Electronics |
             | Print       |
-        And there are following taxonomies defined:
+          And there are following taxonomies defined:
             | name     |
             | Category |
             | Special  |
-        And taxonomy "Category" has following taxons:
+          And taxonomy "Category" has following taxons:
             | Clothing > T-Shirts         |
             | Clothing > Premium T-Shirts |
-        And taxonomy "Special" has following taxons:
+          And taxonomy "Special" has following taxons:
             | Featured |
             | New      |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all products with simple prices
         Given I am on the dashboard page
@@ -222,5 +218,5 @@ Feature: Products
 
     Scenario: Accessing the product details page from list
         Given I am on the product index page
-        When I click "details" near "Mug"
+        When I click "Mug"
         Then I should be on the page of product "Mug"

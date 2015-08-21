@@ -14,20 +14,10 @@ namespace Sylius\Bundle\UserBundle\Behat;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
- * OAuth context.
- *
  * @author Fabian Kiss <fabian.kiss@ymc.ch>
  */
 class OAuthContext extends RawMinkContext
 {
-    /**
-     * @Given /^I am not logged in$/
-     */
-    public function iAmNotLoggedIn()
-    {
-        $this->getSession()->restart();
-    }
-
     /**
      * @Then /^I should see the connect with "([^""]*)" button$/
      */

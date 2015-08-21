@@ -6,32 +6,32 @@ Feature: Products
 
     Background:
         Given there is default currency configured
-        And there are following taxonomies defined:
+          And there are following taxonomies defined:
             | name     |
             | Category |
-        And taxonomy "Category" has following taxons:
+          And taxonomy "Category" has following taxons:
             | Clothing > T-Shirts     |
             | Clothing > PHP T-Shirts |
             | Clothing > Gloves       |
-        And the following products exist:
+          And the following products exist:
             | name             | price | taxons       |
             | Super T-Shirt    | 19.99 | T-Shirts     |
             | Black T-Shirt    | 18.99 | T-Shirts     |
             | Sylius Tee       | 12.99 | PHP T-Shirts |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |
-        And there are following channels configured:
+          And there are following channels configured:
             | code   | name       | currencies | locales             | url          |
             | WEB-US | mystore.us | EUR, GBP   | en_US               |              |
             | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost    |
-        And channel "WEB-EU" has following configuration:
+          And channel "WEB-EU" has following configuration:
             | taxonomy |
             | Category |
-        And channel "WEB-EU" has following products assigned:
+          And channel "WEB-EU" has following products assigned:
             | product         |
             | Super T-Shirt   |
             | Symfony T-Shirt |
-        And channel "WEB-US" has following products assigned:
+          And channel "WEB-US" has following products assigned:
             | product          |
             | Sylius Tee       |
             | Black T-Shirt    |

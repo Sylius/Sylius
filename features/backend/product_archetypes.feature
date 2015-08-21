@@ -5,13 +5,8 @@ Feature: Product archetypes
     I want to be able to create archetypes
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following options:
+        Given store has default configuration
+          And there are following options:
             | name             | presentation | values                     |
             | T-Shirt color    | Color        | Red, Blue, Green           |
             | T-Shirt size     | Size         | S, M, L                    |
@@ -19,19 +14,20 @@ Feature: Product archetypes
             | Beverage size    | Size         | Tall, Grande, Venti        |
             | Beverage milk    | Milk         | None, Whole, Skinny, Soya  |
             | Coffee variety   | Variety      | Colombian, Ethiopian       |
-        And there are following attributes:
+          And there are following attributes:
             | name                  | presentation   |
             | T-Shirt collection    | Collection     |
             | T-Shirt fabric        | T-Shirt fabric |
             | Bag material          | Material       |
             | Beverage calories     | Calories       |
             | Coffee caffeine       | Caffeine       |
-        And there is archetype "T-Shirt" with following configuration:
+          And there is archetype "T-Shirt" with following configuration:
             | options    | T-Shirt color, T-Shirt size        |
             | attributes | T-Shirt collection, T-Shirt fabric |
-        And there is archetype "Beverage" with following configuration:
+          And there is archetype "Beverage" with following configuration:
             | options    | Beverage size, Beverage milk       |
             | attributes | Beverage calories                  |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all archetypes
         Given I am on the dashboard page

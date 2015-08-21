@@ -5,9 +5,7 @@ Feature: Tax rates
     I want to be able to configure tax rates
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
@@ -23,6 +21,7 @@ Feature: Tax rates
             | Electronics | UK + Germany | UK+DE Electronics Tax | 23%    |
             | Clothing    | USA          | US Clothing Tax       | 8%     |
             | Electronics | USA          | US Electronics Tax    | 10%    |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all tax rates
         Given I am on the dashboard page

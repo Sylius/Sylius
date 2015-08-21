@@ -5,14 +5,13 @@ Feature: Managing emails
     I want to be able to configure them in backend
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following emails configured:
+        Given store has default configuration
+          And there are following emails configured:
             | code                  | subject                      | enabled |
             | user_confirmation     | Welcome!                     | yes     |
             | order_confirmation    | Thank you for your order!    | no      |
             | shipment_confirmation | Your shipment is on the way! | yes     |
-         And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Seeing index of all emails
         Given I am on the dashboard page
