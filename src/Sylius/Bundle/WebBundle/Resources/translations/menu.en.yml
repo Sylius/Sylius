@@ -92,8 +92,8 @@ sylius:
                 permissions: Permissions
                 marketing: Marketing
                 support: Support
-                support_requests: Requests
-                support_topics: Configure Topics
+                support_tickets: Tickets
+                support_categories: Configure Categories
     frontend:
         menu:
             account:

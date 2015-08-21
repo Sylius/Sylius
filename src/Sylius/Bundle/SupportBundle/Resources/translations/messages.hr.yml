@@ -3,9 +3,9 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Ime
       last_name: Prezime
       email: Email
-    support_topic:
+    support_category:
       title: Naslov

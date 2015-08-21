@@ -577,19 +577,19 @@ sylius_rbac:
         sylius.report.update: Edit report
         sylius.report.delete: Delete report
 
-        sylius.manage.support_request: Manage support_requests
-        sylius.support_request.show: Show support request
-        sylius.support_request.index: List support requests
-        sylius.support_request.create: Create support request
-        sylius.support_request.update: Edit support request
-        sylius.support_request.delete: Delete support request
+        sylius.manage.support_ticket: Manage support_tickets
+        sylius.support_ticket.show: Show support ticket
+        sylius.support_ticket.index: List support tickets
+        sylius.support_ticket.create: Create support ticket
+        sylius.support_ticket.update: Edit support ticket
+        sylius.support_ticket.delete: Delete support ticket
 
-        sylius.manage.support_topic: Manage support topics
-        sylius.support_topic.show: Show support topic
-        sylius.support_topic.index: List support topics
-        sylius.support_topic.create: Create support topic
-        sylius.support_topic.update: Edit support topic
-        sylius.support_topic.delete: Delete support topic
+        sylius.manage.support_category: Manage support categories
+        sylius.support_category.show: Show support category
+        sylius.support_category.index: List support categories
+        sylius.support_category.create: Create support category
+        sylius.support_category.update: Edit support category
+        sylius.support_category.delete: Delete support category
 
         sylius.manage.settings: Manage settings
         sylius.settings.general: Manage general settings
@@ -644,8 +644,8 @@ sylius_rbac:
         sylius.manage.slideshow: [sylius.slideshow.show, sylius.slideshow.index, sylius.slideshow.create, sylius.slideshow.update, sylius.slideshow.delete]
         sylius.manage.email: [sylius.email.show, sylius.email.index, sylius.email.create, sylius.email.update, sylius.email.delete]
         sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
-        sylius.manage.support_request: [sylius.support_request.show, sylius.support_request.index, sylius.support_request.create, sylius.support_request.update, sylius.support_request.delete]
-        sylius.manage.support_topic: [sylius.support_topic.show, sylius.support_topic.index, sylius.support_topic.create, sylius.support_topic.update, sylius.support_topic.delete]
+        sylius.manage.support_ticket: [sylius.support_ticket.show, sylius.support_ticket.index, sylius.support_ticket.create, sylius.support_ticket.update, sylius.support_ticket.delete]
+        sylius.manage.support_category: [sylius.support_category.show, sylius.support_category.index, sylius.support_category.create, sylius.support_category.update, sylius.support_category.delete]
         sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
@@ -656,7 +656,7 @@ sylius_rbac:
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.customer, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
-        sylius.support: [sylius.manage.support_request, sylius.manage.support_topic]
+        sylius.support: [sylius.manage.support_ticket, sylius.manage.support_category]
     security_roles:
         ROLE_ADMINISTRATION_ACCESS: Can access administration
         ROLE_API_ACCESS: Can access REST API

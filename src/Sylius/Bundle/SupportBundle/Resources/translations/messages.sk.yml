@@ -3,9 +3,9 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Meno
       last_name: Priezvisko
       email: Email
-    support_topic:
+    support_category:
       title: Názov

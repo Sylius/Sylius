@@ -17,54 +17,54 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 class SupportContext extends DefaultContext
 {
     /**
-     * @Given /^there are following support requests:$/
+     * @Given /^there are following support tickets:$/
      */
-    public function thereAreSupportRequests(TableNode $table)
+    public function thereAreSupportTickets(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('support_request');
-        $topicRepository = $this->getRepository('support_topic');
+        $repository = $this->getRepository('support_ticket');
+        $categoryRepository = $this->getRepository('support_category');
 
-        foreach ($repository->findAll() as $supportRequest) {
-            $manager->remove($supportRequest);
+        foreach ($repository->findAll() as $supportTicket) {
+            $manager->remove($supportTicket);
         }
 
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $newSupportRequest = $repository->createNew();
-            $newSupportRequest->setFirstName($data['firstName']);
-            $newSupportRequest->setLastName($data['lastName']);
-            $newSupportRequest->setEmail($data['email']);
-            $newSupportRequest->setMessage($data['message']);
+            $newSupportTicket = $repository->createNew();
+            $newSupportTicket->setFirstName($data['firstName']);
+            $newSupportTicket->setLastName($data['lastName']);
+            $newSupportTicket->setEmail($data['email']);
+            $newSupportTicket->setMessage($data['message']);
 
-            $newSupportRequest->setTopic($topicRepository->findOneBy(array('title' => $data['topic'])));
+            $newSupportTicket->setCategory($categoryRepository->findOneBy(array('title' => $data['category'])));
 
-            $manager->persist($newSupportRequest);
+            $manager->persist($newSupportTicket);
         }
 
         $manager->flush();
     }
 
     /**
-     * @Given /^there are following support topics:$/
+     * @Given /^there are following support categories:$/
      */
-    public function thereAreSupportTopics(TableNode $table)
+    public function thereAreSupportCategories(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('support_topic');
+        $repository = $this->getRepository('support_category');
 
-        foreach ($repository->findAll() as $supportTopic) {
-            $manager->remove($supportTopic);
+        foreach ($repository->findAll() as $supportCategory) {
+            $manager->remove($supportCategory);
         }
 
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $newSupportTopic = $repository->createNew();
-            $newSupportTopic->setTitle($data['title']);
+            $newSupportCategory = $repository->createNew();
+            $newSupportCategory->setTitle($data['title']);
 
-            $manager->persist($newSupportTopic);
+            $manager->persist($newSupportCategory);
         }
 
         $manager->flush();

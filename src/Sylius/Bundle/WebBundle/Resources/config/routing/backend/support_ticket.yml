@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_support_ticket_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.support_ticket:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportTicket:index.html.twig
+            sortable: true
+            paginate: false
+
+sylius_backend_support_ticket_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.support_ticket:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportTicket:create.html.twig
+            redirect: sylius_backend_support_ticket_index
+
+sylius_backend_support_ticket_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.support_ticket:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportTicket:update.html.twig
+            redirect: sylius_backend_support_ticket_index
+
+sylius_backend_support_ticket_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.support_ticket:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_support_ticket_index
+
+sylius_backend_support_ticket_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.support_ticket:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportTicket:show.html.twig

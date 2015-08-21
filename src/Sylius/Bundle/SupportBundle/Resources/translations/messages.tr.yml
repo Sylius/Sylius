@@ -3,9 +3,9 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Ad
       last_name: Soyad
       email: E-posta
-    support_topic:
+    support_category:
       title: Başlık

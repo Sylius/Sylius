@@ -3,5 +3,5 @@
 
 sylius:
   form:
-    support_topic:
+    support_category:
       title: Tiêu đề

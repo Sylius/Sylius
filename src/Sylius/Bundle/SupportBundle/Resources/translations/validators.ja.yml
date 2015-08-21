@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  support_request:
+  support_ticket:
     first_name:
       not_blank: 名を入力してください。
     last_name:

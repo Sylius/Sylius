@@ -3,9 +3,9 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Όνομα
       last_name: Επώνυμο
       email: Ηλεκτρονικό ταχυδρομείο
-    support_topic:
+    support_category:
       title: Τίτλος

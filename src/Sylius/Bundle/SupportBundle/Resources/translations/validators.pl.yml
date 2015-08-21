@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  support_request:
+  support_ticket:
     first_name:
       not_blank: Proszę podać swoje imię.
     last_name:

@@ -3,9 +3,9 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: ชื่อ
       last_name: นามสกุล
       email: Email
-    support_topic:
+    support_category:
       title: หัวข้อ

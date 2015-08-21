@@ -3,8 +3,8 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Nama Depan
       last_name: Nama belakang
-    support_topic:
+    support_category:
       title: Judul

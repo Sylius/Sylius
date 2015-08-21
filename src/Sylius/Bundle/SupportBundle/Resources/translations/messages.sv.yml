@@ -3,5 +3,5 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Förnamn

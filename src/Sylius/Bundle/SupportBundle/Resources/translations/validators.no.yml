@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  support_request:
+  support_ticket:
     first_name:
       not_blank: Vennligst skriv inn ditt fornavn.
       min_length: Ditt fornavn er for kort.
@@ -16,7 +16,7 @@ sylius:
       email: E-post er ugyldig.
     message:
       not_blank: Skriv inn meldingen.
-  support_topic:
+  support_category:
     title:
       not_blank: Skriv inn emnetittel.
       min_length: Tittelen er for kort.

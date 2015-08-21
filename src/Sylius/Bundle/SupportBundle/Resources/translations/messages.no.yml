@@ -3,11 +3,11 @@
 
 sylius:
   form:
-    support_request:
+    support_ticket:
       first_name: Fornavn
       last_name: Etternavn
       email: E-post
       message: Melding
-      topic: Emne
-    support_topic:
+      category: Emne
+    support_category:
       title: Tittel

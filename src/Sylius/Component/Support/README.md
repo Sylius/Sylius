@@ -1,7 +1,7 @@
 Support Component [![Build status...](https://secure.travis-ci.org/Sylius/Support.png?branch=master)](http://travis-ci.org/Sylius/Support)
 ===============
 
-Support request component for e-commerce applications.
+Support component for e-commerce applications.
 
 Sylius
 ------

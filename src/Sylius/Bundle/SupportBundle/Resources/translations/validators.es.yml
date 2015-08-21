@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  support_request:
+  support_ticket:
     first_name:
       not_blank: Por favor introduzca su nombre.
       min_length: Su nombre es demasiado corto.
@@ -16,7 +16,7 @@ sylius:
       email: Dirección de correo electrónico no válida.
     message:
       not_blank: Por favor, introduzca su mensaje.
-  support_topic:
+  support_category:
     title:
       not_blank: Por favor ingrese el título del tema.
       min_length: Su título es demasiado corto.
