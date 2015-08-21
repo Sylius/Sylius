@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius support category form type.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */

@@ -50,9 +50,4 @@ class CategoryTranslationSpec extends ObjectBehavior
         $this->setTitle('Title');
         $this->__toString()->shouldReturn('Title');
     }
-
-    function it_has_fluent_interface()
-    {
-        $this->setTitle('Title')->shouldReturn($this);
-    }
 }

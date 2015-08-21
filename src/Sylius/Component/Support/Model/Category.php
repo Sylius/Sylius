@@ -14,15 +14,13 @@ namespace Sylius\Component\Support\Model;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
- * Default contact category representation.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class Category extends AbstractTranslatable implements CategoryInterface
 {
     /**
-     * @var int
+     * @var integer
      */
     protected $id;
 
@@ -42,21 +40,22 @@ class Category extends AbstractTranslatable implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setTitle($name)
-    {
-        $this->translate()->setTitle($name);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle()
     {
         return $this->translate()->getTitle();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($name)
+    {
+        $this->translate()->setTitle($name);
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getTitle();

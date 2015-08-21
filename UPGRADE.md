@@ -3,6 +3,44 @@ UPGRADE
 
 # From 0.14.0 to 0.15.x
 
+### Support
+
+Contact component has been renamed to Support.
+ContactBundle has been renamed to SupportBundle.
+
+Model classes and interfaces have been renamed.
+
+* Request becomes Ticket.
+* Topic becomes Category.
+* TopicTranslation becomes CategoryTranslation.
+
+```bash
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ContactBundle/Sylius\\Bundle\\SupportBundle/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Contact/Sylius\\Component\\Support/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Request/Sylius\\Component\\Support\\Model\\Ticket/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\RequestInterface/Sylius\\Component\\Support\\Model\\TicketInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Topic/Sylius\\Component\\Support\\Model\\Category/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicInterface/Sylius\\Component\\Support\\Model\\CategoryInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslation/Sylius\\Component\\Support\\Model\\CategoryTranslation/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslationInterface/Sylius\\Component\\Support\\Model\\CategoryTranslationInterface/g' {} \;
+```
+
+Configuration root node has been adjusted as well.
+
+Before:
+
+```yaml
+sylius_contact:
+    driver: doctrine/orm
+```
+
+After:
+
+```yaml
+sylius_support:
+    driver: doctrine/orm
+```
+
 ## Multi Channel support
 
 https://github.com/Sylius/Sylius/pull/2752
@@ -287,45 +325,6 @@ $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Calculator/
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Checker/Sylius\\Component\\Shipping\\Checker/g' {} \;
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Resolver/Sylius\\Component\\Shipping\\Resolver/g' {} \;
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Processor/Sylius\\Component\\Shipping\\Processor/g' {} \;
-```
-```
-
-### Support
-
-Contact component has been renamed to Support.
-ContactBundle has been renamed to SupportBundle.
-
-Model classes and interfaces have been renamed.
-
-* Request becomes Ticket.
-* Topic becomes Category.
-* TopicTranslation becomes CategoryTranslation.
-
-```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ContactBundle/Sylius\\Bundle\\SupportBundle/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Contact/Sylius\\Component\\Support/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Request/Sylius\\Component\\Support\\Model\\Ticket/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\RequestInterface/Sylius\\Component\\Support\\Model\\TicketInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Topic/Sylius\\Component\\Support\\Model\\Category/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicInterface/Sylius\\Component\\Support\\Model\\CategoryInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslation/Sylius\\Component\\Support\\Model\\CategoryTranslation/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslationInterface/Sylius\\Component\\Support\\Model\\CategoryTranslationInterface/g' {} \;
-```
-
-Configuration root node has been adjusted as well.
-
-Before:
-
-```yaml
-sylius_contact:
-    driver: doctrine/orm
-```
-
-After:
-
-```yaml
-sylius_support:
-    driver: doctrine/orm
 ```
 
 ### Taxation

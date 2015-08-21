@@ -12,8 +12,6 @@
 namespace Sylius\Component\Support\Model;
 
 /**
- * Interface for the model representing a contact category.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */

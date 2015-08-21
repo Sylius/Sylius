@@ -14,12 +14,15 @@ namespace Sylius\Component\Support\Model;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Interface for the model representing a contact request.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 interface TicketInterface extends TimestampableInterface
 {
+    /**
+     * @return integer
+     */
+    public function getId();
+
     /**
      * @return string
      */

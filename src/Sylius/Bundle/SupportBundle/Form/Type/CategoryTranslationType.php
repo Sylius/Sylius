@@ -6,8 +6,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Contact category translation form type.
- *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class CategoryTranslationType extends AbstractResourceType

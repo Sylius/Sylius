@@ -12,8 +12,6 @@
 namespace Sylius\Component\Support\Model;
 
 /**
- * Default contact request representation.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Ticket implements TicketInterface
@@ -58,27 +56,17 @@ class Ticket implements TicketInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function getId()
     {
-        $this->firstName = $firstName;
-
-        return $this;
+        return $this->id;
     }
 
     /**
@@ -92,11 +80,9 @@ class Ticket implements TicketInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setFirstName($firstName)
     {
-        $this->lastName = $lastName;
-
-        return $this;
+        $this->firstName = $firstName;
     }
 
     /**
@@ -110,11 +96,9 @@ class Ticket implements TicketInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setLastName($lastName)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->lastName = $lastName;
     }
 
     /**
@@ -128,11 +112,9 @@ class Ticket implements TicketInterface
     /**
      * {@inheritdoc}
      */
-    public function setMessage($message)
+    public function setEmail($email)
     {
-        $this->message = $message;
-
-        return $this;
+        $this->email = $email;
     }
 
     /**
@@ -146,11 +128,9 @@ class Ticket implements TicketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCategory(CategoryInterface $category = null)
+    public function setMessage($message)
     {
-        $this->category = $category;
-
-        return $this;
+        $this->message = $message;
     }
 
     /**
@@ -159,6 +139,14 @@ class Ticket implements TicketInterface
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCategory(CategoryInterface $category = null)
+    {
+        $this->category = $category;
     }
 
     /**
@@ -175,8 +163,6 @@ class Ticket implements TicketInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -193,7 +179,5 @@ class Ticket implements TicketInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

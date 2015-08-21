@@ -15,8 +15,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 
 /**
- * Default support request fixtures.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class LoadSupportTicketData extends DataFixture

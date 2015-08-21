@@ -14,21 +14,16 @@ namespace Sylius\Component\Support\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Contact category translation model.
- *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class CategoryTranslation extends AbstractTranslation implements CategoryTranslationInterface
 {
     /**
-     * Category id.
-     *
-     * @var mixed
+     * @var integer
      */
     protected $id;
+
     /**
-     * Category title.
-     *
      * @var string
      */
     protected $title;
@@ -41,6 +36,9 @@ class CategoryTranslation extends AbstractTranslation implements CategoryTransla
         return $this->title;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -60,7 +58,5 @@ class CategoryTranslation extends AbstractTranslation implements CategoryTransla
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 }

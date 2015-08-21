@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius support ticket form type.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class TicketType extends AbstractResourceType

@@ -12,30 +12,22 @@
 namespace Sylius\Component\Support\Model;
 
 /**
- * Contact category translation interface.
- *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 interface CategoryTranslationInterface
 {
     /**
-     * Get id.
+     * @return integer
      */
     public function getId();
 
     /**
-     * Get category title.
-     *
      * @return string
      */
     public function getTitle();
 
     /**
-     * Set category title.
-     *
      * @param string $title
-     *
-     * @return $this
      */
     public function setTitle($title);
 }

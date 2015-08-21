@@ -17,8 +17,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
@@ -48,8 +46,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addValidationGroupsSection(ArrayNodeDefinition $node)
@@ -78,8 +74,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
