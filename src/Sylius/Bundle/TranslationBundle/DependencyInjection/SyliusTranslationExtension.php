@@ -26,9 +26,7 @@ class SyliusTranslationExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $container->setParameter('sylius.translation.default_locale', $config[1]['default_locale']);
-        $container->setAlias('sylius.translation.locale_provider', $config[1]['locale_provider']);
-
+        $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $configFiles = array(
@@ -38,6 +36,9 @@ class SyliusTranslationExtension extends Extension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
+        $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
     }
 }
 
