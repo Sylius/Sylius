@@ -26,7 +26,7 @@ Feature: Reviews
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | 0              |
         And there are following reviews:
             | title       | rating | comment               | author         | product         |
-            | Really bad  | 1      | Lorem ipsum dolor sit | bbeth@foo.com  | Symfony T-Shirt |
+            | Really bad  | 1      | Lorem ipsum dolor sit | beth@foo.com  | Symfony T-Shirt |
             | Very good   | 4      | Lorem ipsum dolor sit | martha@foo.com | Black T-Shirt   |
             | Awesome     | 5      | Lorem ipsum dolor sit | rick@foo.com   | Sylius Tee      |
         And there is default currency configured
@@ -45,7 +45,7 @@ Feature: Reviews
             | Comment | Lorem ipsum dolor |
           And I select the "5" radio button
           And I press "Create"
-         Then I should be on the page of review "Report2"
+         Then I should be on the page of review with title "New review"
           And I should see "Review has been successfully created."
           And I should see "Lorem ipsum dolor"
 
@@ -60,27 +60,27 @@ Feature: Reviews
     Scenario: Accessing review edit page from the list
         Given I am on the review index page
          When I press "edit" near "Very good"
-         Then I should be editing review with name "Very good"
+         Then I should be editing review with title "Very good"
 
     Scenario: Accessing review edit page from details page
-        Given I am on the review "Very good" page
-         When I press "Edit"
-         Then I should be editing review with name "Very good"
+        Given I am on the page of review with title "Very good"
+         When I follow "edit"
+         Then I should be editing review with title "Very good"
 
     Scenario: Updating review
-        Given I am editing review "Very good"
+        Given I am editing review with title "Very good"
          When I fill in "Title" with "Very, very good"
           And I press "Save changes"
-         Then I should be on the page of review "Very, very good"
+         Then I should be on the page of review with title "Very, very good"
 
     Scenario: Removing review from the list
         Given I am on the review index page
-         When I press "Delete" near "Awesome"
+         When I press "delete" near "Awesome"
          Then I should still be on the review index page
           And I should see "Review has been successfully deleted."
 
     Scenario: Removing review from details page
-        Given I am on the review "Awesome" page
+        Given I am on the page of review with title "Awesome"
          When I press "delete"
          Then I should be on the review index page
           And I should see "Review has been successfully deleted."

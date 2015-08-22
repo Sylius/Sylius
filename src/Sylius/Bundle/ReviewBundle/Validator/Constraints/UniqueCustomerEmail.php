@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueCustomerEmail extends Constraint
 {
-    public $message = 'This email is already registered. Please log in.';
+    public $message = 'sylius.review.author.already_exists';
 
     /**
      * {@inheritdoc}

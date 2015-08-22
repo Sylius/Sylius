@@ -19,6 +19,7 @@
     <class name="Sylius\Component\Review\Model\Review">
         <property name="title">
             <constraint name="NotBlank">
+                <option name="message">sylius.review.title.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>
@@ -26,6 +27,8 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
+                <option name="minMessage">sylius.review.title.min_length</option>
+                <option name="maxMessage">sylius.review.title.max_length</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>
@@ -33,6 +36,7 @@
         </property>
         <property name="rating">
             <constraint name="NotBlank">
+                <option name="message">sylius.review.rating.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>
@@ -40,6 +44,7 @@
         </property>
         <property name="comment">
             <constraint name="NotBlank">
+                <option name="message">sylius.review.comment.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>
