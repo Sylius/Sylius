@@ -17,6 +17,8 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /*
+ * Generic channel listener.
+ *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class ChannelListener
