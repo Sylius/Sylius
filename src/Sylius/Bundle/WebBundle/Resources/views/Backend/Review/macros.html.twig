@@ -16,7 +16,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Product</th>
+                <th>Subject</th>
+                <th>Title</th>
                 <th>Status</th>
                 <th>Rating</th>
                 <th>Author</th>
@@ -29,6 +30,7 @@
             <tr>
                 <td>{{ review.id }}</td>
                 <td>{{ review.product.name }}</td>
+                <td>{{ review.title }}</td>
                 <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.status }}</label></td>
                 <td><label class="label label-default">{{ review.rating }}</label></td>
                 <td><a href="{{ path('sylius_backend_customer_show', { 'id': review.author.id }) }}">{{ review.author.email }}</a></td>

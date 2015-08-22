@@ -31,7 +31,7 @@ class UniqueCustomerEmailSpec extends ObjectBehavior
 
     function it_has_message()
     {
-        $this->message->shouldReturn('This email is already registered. Please log in.');
+        $this->message->shouldReturn('sylius.review.author.already_exists');
     }
 
     function it_is_validate_by_unique_customer_email_validator()
