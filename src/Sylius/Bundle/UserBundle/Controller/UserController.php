@@ -238,10 +238,10 @@ class UserController extends ResourceController
     {
         $user->setPlainPassword($newPassword);
 
-        $this->domainManager->update($user);
-
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
+
+        $this->domainManager->update($user);
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
