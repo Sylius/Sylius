@@ -23,24 +23,52 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class InsufficientStockExceptionListener
 {
+    /**
+     * @var UrlGeneratorInterface
+     */
     protected $router;
+
+    /**
+     * @var SessionInterface
+     */
     protected $session;
+
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
+
+    /**
+     * @var string
+     */
     protected $redirectTo;
 
-    public function __construct(UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator, $redirectTo)
-    {
+    /**
+     * @param UrlGeneratorInterface $router
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
+     * @param string $redirectTo
+     */
+    public function __construct(
+        UrlGeneratorInterface $router,
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        $redirectTo
+    ) {
         $this->router = $router;
         $this->session = $session;
         $this->translator = $translator;
         $this->redirectTo = $redirectTo;
     }
 
+    /**
+     * @param GetResponseForExceptionEvent $event
+     */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $e = $event->getException();
+        $exception = $event->getException();
 
-        if (!$e instanceof InsufficientStockException) {
+        if (!$exception instanceof InsufficientStockException) {
             return;
         }
 
@@ -49,15 +77,15 @@ class InsufficientStockExceptionListener
             $this->translator->trans(
                 'sylius.checkout.out_of_stock',
                 array(
-                    '%quantity%' => $e->getStockable()->getOnHand(),
-                    '%name%'     => $e->getStockable()->getInventoryName(),
+                    '%quantity%' => $exception->getStockable()->getOnHand(),
+                    '%name%'     => $exception->getStockable()->getInventoryName(),
                 ),
                 'flashes'
             )
         );
 
-        $event->setResponse(new RedirectResponse(
-            $this->router->generate($this->redirectTo)
-        ));
+        $event->setResponse(
+            new RedirectResponse($this->router->generate($this->redirectTo))
+        );
     }
 }
