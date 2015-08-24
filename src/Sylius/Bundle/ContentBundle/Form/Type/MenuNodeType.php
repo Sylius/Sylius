@@ -69,6 +69,7 @@ class MenuNodeType extends AbstractResourceType
             ))
             ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.menu_node_block.content',
+                'property' => 'title',
              ))
             ->add('uri', null, array(
                 'label' => 'sylius.form.menu_node_block.uri'
