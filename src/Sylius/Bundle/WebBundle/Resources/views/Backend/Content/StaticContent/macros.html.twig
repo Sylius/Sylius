@@ -13,6 +13,7 @@
                 <th>{{ sylius_resource_sort('publishable', 'sylius.page.publishable'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishStartDate', 'sylius.page.start_date'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishEndDate', 'sylius.page.end_date'|trans) }}</th>
+                <th>{{ sylius_resource_sort('routes', 'sylius.page.routes'|trans) }}</th>                
                 <th></th>
             </tr>
         </thead>
@@ -28,6 +29,17 @@
                 </td>
                 <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
                 <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
+                <td>
+                    {% if page.routes is not empty %}
+                        <ul>
+                            {% for route in page.routes %}
+                                <li><a href="{{ path(route) }}" target="_blank">{{ route.name|striptags }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p><i class="glyphicon glyphicon-warning-sign"></i> {{ 'sylius.page.no_route'|trans }}</p>
+                        {{ buttons.create(path('sylius_backend_route_create'), 'sylius.route.create'|trans) }}
+                    {% endif %}
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_static_content_update', {'id': page.id})) }}
