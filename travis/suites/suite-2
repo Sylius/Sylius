@@ -6,6 +6,8 @@ bin/behat -s pricing -f progress
 bin/behat -s settings -f progress
 bin/behat -s shipping -f progress
 bin/behat -s taxation -f progress
+bin/behat -s i18n -f progress
+bin/behat -s channels -f progress
 
 bin/behat -s products -f progress features/backend/products.feature
 bin/behat -s products -f progress features/backend/product_attributes.feature
