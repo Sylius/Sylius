@@ -35,6 +35,7 @@ class RouteType extends AbstractResourceType
             ))
             ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.route.content',
+                'property' => 'title',
             ))
         ;
 
