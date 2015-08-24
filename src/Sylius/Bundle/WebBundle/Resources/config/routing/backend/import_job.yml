@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_import_job_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.import_job:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ImportJob:index.html.twig
+            criteria:
+                profile: $profileId
+            paginate: 25
+            sortable: true
+            sorting:
+                id: desc
+
+sylius_backend_import_job_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.import_job:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ImportJob:show.html.twig
+            criteria:
+                id: $id
+                profile: $profileId

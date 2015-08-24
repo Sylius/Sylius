@@ -9,6 +9,7 @@ suites:
     Currency          : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency, src_path: src/Sylius/Component/Currency }
     Installer         : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer, src_path: src/Sylius/Component/Installer }
     Inventory         : { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory, src_path: src/Sylius/Component/Inventory }
+    ImportExport      : { namespace: Sylius\Component\ImportExport, psr4_prefix: Sylius\Component\ImportExport, spec_path: src/Sylius/Component/ImportExport, src_path: src/Sylius/Component/ImportExport }
     Locale            : { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale, src_path: src/Sylius/Component/Locale }
     Order             : { namespace: Sylius\Component\Order, psr4_prefix: Sylius\Component\Order, spec_path: src/Sylius/Component/Order, src_path: src/Sylius/Component/Order }
     Originator        : { namespace: Sylius\Component\Originator, psr4_prefix: Sylius\Component\Originator, spec_path: src/Sylius/Component/Originator, src_path: src/Sylius/Component/Originator }
@@ -45,6 +46,7 @@ suites:
     FlowBundle        : { namespace: Sylius\Bundle\FlowBundle, psr4_prefix: Sylius\Bundle\FlowBundle, spec_path: src/Sylius/Bundle/FlowBundle, src_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle   : { namespace: Sylius\Bundle\InstallerBundle, psr4_prefix: Sylius\Bundle\InstallerBundle, spec_path: src/Sylius/Bundle/InstallerBundle, src_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle   : { namespace: Sylius\Bundle\InventoryBundle, psr4_prefix: Sylius\Bundle\InventoryBundle, spec_path: src/Sylius/Bundle/InventoryBundle, src_path: src/Sylius/Bundle/InventoryBundle }
+    ImportExportBundle: { namespace: Sylius\Bundle\ImportExportBundle, psr4_prefix: Sylius\Bundle\ImportExportBundle, spec_path: src/Sylius/Bundle/ImportExportBundle }
     LocaleBundle      : { namespace: Sylius\Bundle\LocaleBundle, psr4_prefix: Sylius\Bundle\LocaleBundle, spec_path: src/Sylius/Bundle/LocaleBundle, src_path: src/Sylius/Bundle/LocaleBundle }
     MoneyBundle       : { namespace: Sylius\Bundle\MoneyBundle, psr4_prefix: Sylius\Bundle\MoneyBundle, spec_path: src/Sylius/Bundle/MoneyBundle, src_path: src/Sylius/Bundle/MoneyBundle }
     OrderBundle       : { namespace: Sylius\Bundle\OrderBundle, psr4_prefix: Sylius\Bundle\OrderBundle, spec_path: src/Sylius/Bundle/OrderBundle, src_path: src/Sylius/Bundle/OrderBundle }

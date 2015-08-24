@@ -1,0 +1,50 @@
+{
+    "name": "sylius/import-export",
+    "type": "library",
+    "description": "Import-export system.",
+    "keywords": ["shop", "ecommerce", "import", "export"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Mateusz Zalewski",
+            "email": "mateusz.zalewski@lakion.com"
+        },
+        {
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+
+        "symfony/monolog-bundle": "~2.3",
+        "jwage/easy-csv":         "0.0.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec":         "~2.1"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\ImportExport\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\ImportExport\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.16-dev"
+        }
+    }
+}

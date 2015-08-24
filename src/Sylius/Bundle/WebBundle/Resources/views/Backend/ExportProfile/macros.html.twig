@@ -1,0 +1,44 @@
+{% macro list(export_profiles) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if export_profiles|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.export_profile.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.export_profile.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('description', 'sylius.export_profile.description'|trans) }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.export_profile.code'|trans) }}</th>
+            <th>{{ sylius_resource_sort('reader', 'sylius.export_profile.reader'|trans) }}</th>
+            <th>{{ sylius_resource_sort('writer', 'sylius.export_profile.writer'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for export_profile in export_profiles %}
+        <tr id="{{ export_profile.id }}">
+            <td>{{ export_profile.name }}</td>
+            <td>{{ export_profile.description }}</td>
+            <td>{{ export_profile.code }}</td>
+            <td>{{ export_profile.reader }}</td>
+            <td>{{ export_profile.writer }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.generic(path('sylius_backend_export_job_index', { 'profileId': export_profile.id }), 'sylius.export_profile.jobs'|trans, 'align-justify') }}
+                {{ buttons.show(path('sylius_backend_export_profile_show', {'id': export_profile.id})) }}
+                {{ buttons.edit(path('sylius_backend_export_profile_update', {'id': export_profile.id})) }}
+                {{ buttons.delete(path('sylius_backend_export_profile_delete', {'id': export_profile.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.export_profile.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

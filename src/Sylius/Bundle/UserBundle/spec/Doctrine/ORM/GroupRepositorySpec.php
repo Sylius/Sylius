@@ -38,7 +38,7 @@ class GroupRepositorySpec extends ObjectBehavior
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o')->shouldBeCalled();
+        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled();
 
         $this->getFormQueryBuilder();
     }

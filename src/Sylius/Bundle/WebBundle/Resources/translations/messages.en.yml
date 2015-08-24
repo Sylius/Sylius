@@ -192,10 +192,18 @@ sylius:
         content: Content
         currency:
             index: Currencies
+        export_profile:
+            index: Export Profile
+        export_job:
+            index: Jobs
         general_settings: General Settings
         generate: Generate
         group:
             index: Groups
+        import_profile:
+            index: Import Profile
+        import_job:
+            index: Jobs
         inventory:
             index: Inventory
         locale:
@@ -397,6 +405,39 @@ sylius:
         exchange_rate: Exchange rate
         update_header: Editing currency
         updated_at: Last update
+    export_profile:
+        code: Code
+        create: Create profile
+        create_header: New export profile
+        description: Description
+        export: Export
+        general_info: General info
+        id: ID
+        index_header: Export Profiles
+        jobs: Jobs
+        manage: Manage
+        name: Name
+        no_results: There are no profiles to display.
+        reader: Reader
+        reader_configuration: Reader configuration
+        show: Show export profile
+        update_header: Editing profile
+        updated_at: Last update
+        writer: Writer
+        writer_configuration: Writer configuration
+    export_job:
+        created_at: Created at
+        end_time: End time
+        export_profile: Export profile
+        general_info: General info
+        header: Job
+        id: ID
+        index_header: Jobs
+        manage: Manage
+        no_results: There are no jobs to display.
+        start_time: Start time
+        status: status
+        updated_at: Updated at
     filter: Filter
     form:
         cart:
@@ -453,6 +494,41 @@ sylius:
         splash:
             headline: Welcome to Sylius
             subheadline: Modern ecommerce for Symfony2
+    import_job:
+        created_at: Created at
+        end_time: End time
+        general_info: General info
+        header: Job
+        id: ID
+        import_profile: Import profile
+        index_header: Jobs
+        manage: Manage
+        metadata: Job metadata
+        no_results: There are no jobs to display.
+        start_time: Start time
+        status: status
+        updated_at: Updated at
+    import_profile:
+        code: Code
+        create: Create profile
+        create_header: New import profile
+        description: Description
+        enabled: Enabled
+        general_info: General info
+        id: ID
+        import: Import
+        index_header: Import Profiles
+        jobs: Jobs
+        manage: Manage
+        name: Name
+        no_results: There are no profiles to display.
+        reader: Reader
+        reader_configuration: Reader configuration
+        show: Show import profile
+        update_header: Editing profile
+        updated_at: Last update
+        writer: Writer
+        writer_configuration: Writer configuration
     inventory_unit:
         created_at: Created
         inventory_state: Inventory state

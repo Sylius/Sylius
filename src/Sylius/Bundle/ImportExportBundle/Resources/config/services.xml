@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+
+        <!-- Date provider -->
+        <parameter key="sylius.import_export.data_provider.class">Sylius\Component\ImportExport\Provider\CurrentDateProvider</parameter>
+
+        <!-- Date Converter -->
+        <parameter key="sylius.import_export.date_converter.class">Sylius\Component\ImportExport\Converter\DateConverter</parameter>
+
+        <!-- StreamHandlerFactory -->
+        <parameter key="sylius.import_export.logger.factory.class">Sylius\Component\ImportExport\Logger\Factory\StreamHandlerFactory</parameter>
+
+        <!-- Exporter-->
+        <parameter key="sylius.import_export.exporter.class">Sylius\Component\ImportExport\Exporter</parameter>
+        <parameter key="sylius.form.type.export_writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ExportWriterChoiceType</parameter>
+        <parameter key="sylius.form.type.export_reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ExportReaderChoiceType</parameter>
+
+        <!-- Importer-->
+        <parameter key="sylius.import_export.importer.class">Sylius\Component\ImportExport\Importer</parameter> 
+
+        <!-- ImportExport -->
+        <parameter key="sylius.form.type.service_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\ServiceChoiceType</parameter>
+
+        <!-- Writers -->
+        <parameter key="sylius.export.csv_writer.class">Sylius\Component\ImportExport\Writer\CsvWriter</parameter>
+        <parameter key="sylius.form.type.writer.csv_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\CsvWriterType</parameter>
+
+        <!-- Readers-->
+        <parameter key="sylius.import.csv_reader.class">Sylius\Component\ImportExport\Reader\CsvReader</parameter>
+        <parameter key="sylius.form.type.reader.csv.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\CsvReaderType</parameter>
+
+        <!-- Factory -->
+        <parameter key="sylius.export.csv_writer.factory.class">Sylius\Component\ImportExport\Writer\Factory\CsvWriterFactory</parameter>
+        <parameter key="sylius.import.csv_reader.factory.class">Sylius\Component\ImportExport\Reader\Factory\CsvReaderFactory</parameter>
+        <parameter key="sylius.import.stream_handler.factory.class">Sylius\Component\ImportExport\Logger\Factory\StreamHandlerFactory</parameter>
+
+        <!-- File system -->
+        <parameter key="sylius.filesystem_factory.class">Knp\Bundle\GaufretteBundle\FilesystemMap</parameter>
+        <parameter key="sylius.filesystem">Gaufrette\Filesystem</parameter>
+        <parameter key="sylius.filesystem.exporter">export</parameter>
+
+        <!-- Validator -->
+        <parameter key="validator.valid.datetime_format.class">Sylius\Bundle\ImportExportBundle\Validator\DateTimeFormatValidator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.registry.export.writer" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
+        </service>
+        <service id="sylius.registry.export.reader" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
+        </service>
+        <service id="sylius.registry.import.writer" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Writer\WriterInterface</argument>
+        </service>
+        <service id="sylius.registry.import.reader" class="%sylius.registry.class%">
+            <argument>Sylius\Component\ImportExport\Reader\ReaderInterface</argument>
+        </service>
+
+        <!-- DateProvider-->
+        <service id="sylius.import_export.data_provider" class="%sylius.import_export.data_provider.class%">
+            <argument>%sylius.import_export.timezone%</argument>
+        </service>
+
+        <!-- DateConverter-->
+        <service id="sylius.import_export.date_converter" class="%sylius.import_export.date_converter.class%" />
+
+        <!-- StreamHandlerFactory -->
+        <service id="sylius.import_export.factory.logger" class="%sylius.import_export.logger.factory.class%">
+            <argument>%sylius.import_export.log_path%</argument>
+            <argument type="service" id="sylius.import_export.data_provider" />
+        </service>
+        
+        <!-- Export Config -->
+        <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
+            <argument type="service" id="sylius.import_export.data_provider" />
+            <argument type="service" id="sylius.import_export.date_converter" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.repository.export_job" />
+            <argument type="service" id="sylius.registry.export.reader" />
+            <argument type="service" id="sylius.registry.export.writer" />
+            <argument type="service" id="sylius.import_export.factory.logger" />
+            <tag name="monolog.logger" channel="exporter" />
+        </service>
+        <service id="exporter_filesystem" class="%sylius.filesystem%" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+            <argument>%sylius.filesystem.exporter%</argument>
+        </service>
+        <service id="sylius.form.type.export_writer_choice" class="%sylius.form.type.service_choice.class%">
+            <argument>%sylius.export.writers%</argument>
+            <argument>sylius_export_writer_choice</argument>
+            <tag name="form.type" alias="sylius_export_writer_choice" />
+        </service>
+        <service id="sylius.export.csv_writer" class="%sylius.export.csv_writer.class%">
+            <argument type="service" id="exporter_filesystem" />
+            <argument type="service" id="sylius.export.csv_writer.factory" />
+            <tag name="sylius.export.writer" writer="csv_writer" label="CSV writer" />
+        </service>
+        <service id="sylius.form.type.writer.csv_type" class="%sylius.form.type.writer.csv_type.class%">
+            <tag name="form.type" alias="sylius_csv_writer" />
+        </service>
+        <service id="sylius.form.type.export_reader_choice" class="%sylius.form.type.service_choice.class%">
+            <argument>%sylius.export.readers%</argument>
+            <argument>sylius_export_reader_choice</argument>
+            <tag name="form.type" alias="sylius_export_reader_choice" />
+        </service>
+        
+        <!-- Import Config -->
+        <service id="sylius.import_export.importer" class="%sylius.import_export.importer.class%">
+            <argument type="service" id="sylius.import_export.data_provider" />
+            <argument type="service" id="sylius.import_export.date_converter" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.repository.import_job" />
+            <argument type="service" id="sylius.registry.import.reader" />
+            <argument type="service" id="sylius.registry.import.writer" />
+            <argument type="service" id="sylius.import_export.factory.logger" />
+            <tag name="monolog.logger" channel="importer" />
+        </service>
+        
+        <service id="sylius.form.type.import_writer_choice" class="%sylius.form.type.service_choice.class%">
+            <argument>%sylius.import.writers%</argument>
+            <argument>sylius_import_writer_choice</argument>
+            <tag name="form.type" alias="sylius_import_writer_choice" />
+        </service>
+        <service id="sylius.form.type.import_reader_choice" class="%sylius.form.type.service_choice.class%">
+            <argument>%sylius.import.readers%</argument>
+            <argument>sylius_import_reader_choice</argument>
+            <tag name="form.type" alias="sylius_import_reader_choice" />
+        </service>
+
+        <service id="sylius.import.csv_reader" class="%sylius.import.csv_reader.class%">
+            <argument type="service" id="sylius.import.csv_reader.factory" />
+            <tag name="sylius.import.reader" reader="csv_reader" label="CSV reader" />
+        </service>
+
+        <service id="sylius.form.type.reader.csv" class="%sylius.form.type.reader.csv.class%">
+            <tag name="form.type" alias="sylius_csv_reader" />
+        </service>
+
+        <!-- Factory -->
+        <service id="sylius.export.csv_writer.factory" class="%sylius.export.csv_writer.factory.class%" />
+        <service id="sylius.import.csv_reader.factory" class="%sylius.import.csv_reader.factory.class%" />
+        <service id="sylius.import.stream_handler.factory" class="%sylius.import.stream_handler.factory.class%">
+            <argument>%sylius.import_export.log_path%</argument>
+            <argument type="service" id="sylius.import_export.data_provider" />
+        </service>
+
+        <!-- Validators -->
+        <service id="validator.valid.datetime_format" class="%validator.valid.datetime_format.class%">
+            <tag name="validator.constraint_validator" alias="datetime_format_validator" />
+        </service>
+    </services>
+
+</container>

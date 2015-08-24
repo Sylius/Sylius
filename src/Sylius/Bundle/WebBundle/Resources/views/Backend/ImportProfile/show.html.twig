@@ -1,0 +1,78 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_import_profile_index') }}">{{ 'sylius.breadcrumb.import_profile.index'|trans }}</a></li>
+    <li>{{ import_profile.name }}</a></li>
+</ol>
+{% endblock %}
+
+{% block content %}
+    {% if import_profile|length > 0 %}
+    <div class="page-header">
+            <div class="actions-menu">
+                {{ buttons.generic(path('sylius_backend_import_job_index', { 'profileId': import_profile.id }), 'sylius.import_profile.jobs'|trans, 'align-justify') }}
+                {{ buttons.show(path("sylius_backend_import_profile_import", { "code": import_profile.code }), 'sylius.import_profile.import'|trans) }}
+                {{ buttons.manage(path('sylius_backend_import_profile_index'), 'sylius.import_profile.manage'|trans) }}
+                {{ buttons.edit(path('sylius_backend_import_profile_update', {'id': import_profile.id})) }}
+                {{ buttons.delete(path('sylius_backend_import_profile_delete', {'id': import_profile.id}), null, false, false) }}
+            </div>
+            <h1><i class="glyphicon glyphicon-cog"></i> {{ import_profile.name }}</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{ 'sylius.import_profile.general_info'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.name'|trans }}</td>
+                            <td>{{ import_profile.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.description'|trans }}</td>
+                            <td>{{ import_profile.description }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.code'|trans }}</td>
+                            <td>{{ import_profile.code }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.reader'|trans }}</td>
+                            <td>{{ import_profile.reader }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.reader_configuration'|trans }}</td>
+                            <td>
+                                {% for key,item in import_profile.readerConfiguration  %}
+                                    {{ key }} => {{ item }}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.writer'|trans }}</td>
+                            <td>{{ import_profile.writer }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'sylius.import_profile.writer_configuration'|trans }}</td>
+                            <td>
+                                {% for key,item in import_profile.writerConfiguration %}
+                                    {{ key }} => {{ item }} <br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        {{ alerts.info('sylius.import_profile.no_results'|trans) }}
+    {% endif %}
+{% endblock %}

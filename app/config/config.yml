@@ -84,3 +84,4 @@ swiftmailer:
     port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
+    spool:     { type: memory }

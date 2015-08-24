@@ -65,3 +65,16 @@ parameters:
 
     sylius.order.allow_guest_order: false
     sylius.order.pending.duration: 3 hours
+
+    sylius.uploader.filesystem: sylius_image
+    sylius.filesystem.export: %kernel.root_dir%/../web/media/exported_files
+
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin

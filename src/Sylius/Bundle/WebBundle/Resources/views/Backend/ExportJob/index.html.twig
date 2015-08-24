@@ -1,0 +1,25 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/ExportJob:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_export_profile_index') }}">{{ 'sylius.breadcrumb.export_profile.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_export_profile_show', { id: app.request.get('profileId') } ) }}">{{ app.request.get('profileId') }}</a></li>
+    <li>{{ 'sylius.breadcrumb.export_job.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.export_job.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(export_jobs) }}
+{{ list(export_jobs) }}
+{{ pagination(export_jobs) }}
+
+{% endblock %}

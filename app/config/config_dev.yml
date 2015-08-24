@@ -21,6 +21,12 @@ monolog:
         firephp:
             type:  firephp
             level: info
+        exporter:
+            type:     stream
+            channels: [exporter]
+        importer:
+            type:     stream
+            channels: [importer]
 
 assetic:
     use_controller: true

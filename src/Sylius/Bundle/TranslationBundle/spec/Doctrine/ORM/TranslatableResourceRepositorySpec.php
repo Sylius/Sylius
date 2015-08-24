@@ -44,7 +44,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->from(Argument::any(), Argument::any())
+            ->from(Argument::any(), Argument::any(), Argument::cetera())
             ->willReturn($queryBuilder)
         ;
 

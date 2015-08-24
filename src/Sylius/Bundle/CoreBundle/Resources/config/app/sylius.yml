@@ -596,6 +596,35 @@ sylius_rbac:
         sylius.settings.security: Manage security settings
         sylius.settings.taxation: Manage taxation settings
 
+        sylius.manage.import_profile: Manage imports
+        sylius.import_profile.show: Show import
+        sylius.import_profile.index: List imports
+        sylius.import_profile.create: Create import
+        sylius.import_profile.update: Edit import
+        sylius.import_profile.delete: Delete import
+
+        sylius.manage.import_job: Manage import jobs
+        sylius.import_job.show: Show import job
+        sylius.import_job.index: List import jobs
+        sylius.import_job.create: Create import job
+        sylius.import_job.update: Edit import job
+        sylius.import_job.delete: Delete import job
+
+        sylius.manage.export_profile: Manage export profiles
+        sylius.export_profile.show: Show export profile
+        sylius.export_profile.index: List export profiles
+        sylius.export_profile.create: Create export profile
+        sylius.export_profile.update: Edit export profile
+        sylius.export_profile.delete: Delete export profile
+
+        sylius.manage.export_job: Manage export jobs
+        sylius.export_job.show: Show export job
+        sylius.export_job.index: List export jobs
+        sylius.export_job.create: Create export job
+        sylius.export_job.update: Edit export job
+        sylius.export_job.delete: Delete export job
+
+        sylius.import_export: Manage import/export
         sylius.catalog: Manage products catalog
         sylius.sales: Manage sales
         sylius.shipping: Manage shipping
@@ -647,6 +676,10 @@ sylius_rbac:
         sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
+        sylius.manage.import_profile: [sylius.import_profile.show, sylius.import_profile.index, sylius.import_profile.create, sylius.import_profile.update, sylius.import_profile.delete]
+        sylius.manage.import_job: [sylius.import_job.show, sylius.import_job.index, sylius.import_job.create, sylius.import_job.update, sylius.import_job.delete]
+        sylius.manage.export_profile: [sylius.export_profile.show, sylius.export_profile.index, sylius.export_profile.create, sylius.export_profile.update, sylius.export_profile.delete]
+        sylius.manage.export_job: [sylius.export_job.show, sylius.export_job.index, sylius.export_job.create, sylius.export_job.update, sylius.export_job.delete]
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
         sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
@@ -657,6 +690,7 @@ sylius_rbac:
         sylius.accounts: [sylius.manage.customer, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
         sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
+        sylius.import_export: [sylius.manage.import_profile, sylius.manage.export_profile, sylius.manage.import_job, sylius.manage.export_job]
     security_roles:
         ROLE_ADMINISTRATION_ACCESS: Can access administration
         ROLE_API_ACCESS: Can access REST API
@@ -665,7 +699,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel, sylius.manage.import_profile, sylius.manage.export_profile, sylius.manage.import_job, sylius.manage.export_job]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager

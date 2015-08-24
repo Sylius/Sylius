@@ -39,6 +39,7 @@
         "sylius/currency-bundle":         "0.15.*@dev",
         "sylius/flow-bundle":             "0.15.*@dev",
         "sylius/inventory-bundle":        "0.15.*@dev",
+        "sylius/import-export-bundle":    "0.16.*@dev",
         "sylius/locale-bundle":           "0.15.*@dev",
         "sylius/money-bundle":            "0.15.*@dev",
         "sylius/order-bundle":            "0.15.*@dev",

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                 xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Sylius\Component\ImportExport\Model\ExportProfile" table="sylius_export_profile">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="name" column="name" type="string" nullable="false" />
+        <field name="description" column="description" type="text" nullable="true" />
+        <field name="code" column="code" type="string" nullable="false" unique="true" />
+
+        <field name="writer" column="writer" type="string" nullable="false" />
+        <field name="writerConfiguration" column="writer_configuration" type="array" />
+
+        <field name="reader" column="reader" type="string" nullable="false" />
+        <field name="readerConfiguration" column="reader_configuration" type="array" />
+
+        <one-to-many field="jobs" target-entity="Sylius\Component\ImportExport\Model\ExportJobInterface" mapped-by="profile" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+    </mapped-superclass>
+    
+</doctrine-mapping>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd"> 
+    <parameters>    
+        <!-- Readers -->
+        <parameter key="sylius.export.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\ImportExport\Reader\ORM\UserReader</parameter>
+
+        <!-- Processors -->
+        <parameter key="sylius.import_export.user_processor.class">Sylius\Bundle\CoreBundle\ImportExport\Processor\UserProcessor</parameter>
+
+        <!-- Readers form type-->
+        <parameter key="sylius.form.type.doctrine_orm.user.reader.class">Sylius\Bundle\CoreBundle\Form\Type\ImportExport\Reader\UserReaderType</parameter>
+
+        <!-- Writers -->
+        <parameter key="sylius.import.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\ImportExport\Writer\ORM\UserWriter</parameter>
+
+        <!-- Writer form types-->
+        <parameter key="sylius.form.type.doctrine_orm.user.writer.class">Sylius\Bundle\CoreBundle\Form\Type\ImportExport\Writer\UserWriterType</parameter>
+    </parameters>
+
+    <services>
+        <!-- Export reader -->
+        <service id="sylius.export.doctrine_orm.user.reader" class="%sylius.export.doctrine_orm.user.reader.class%">
+            <argument type="service" id="sylius.import_export.user_processor" />
+            <argument type="service" id="sylius.repository.user" />
+            <tag name="sylius.export.reader" reader="user_orm" label="User doctrine reader" />
+        </service>
+
+        <!-- Export reader form types-->
+        <service id="sylius.form.type.doctrine_orm.user.reader" class="%sylius.form.type.doctrine_orm.user.reader.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
+            <tag name="form.type" alias="sylius_user_orm_reader" />
+        </service>
+
+        <!-- Processors -->
+        <service id="sylius.import_export.user_processor" class="%sylius.import_export.user_processor.class%">
+            <argument type="service" id="sylius.import_export.date_converter" />
+        </service>
+
+        <!-- Import writer -->
+        <service id="sylius.import.doctrine_orm.user.writer" class="%sylius.import.doctrine_orm.user.writer.class%">
+            <argument type="service" id="sylius.import_export.user_processor" />
+            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="sylius.import.writer" writer="user_orm" label="User doctrine writer" />
+        </service>
+
+        <!-- Import writer form types-->
+        <service id="sylius.form.type.doctrine_orm.user.writer" class="%sylius.form.type.doctrine_orm.user.writer.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
+            <tag name="form.type" alias="sylius_user_orm_writer" />
+        </service>
+
+    </services>
+</container>

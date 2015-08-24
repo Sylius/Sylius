@@ -1,0 +1,40 @@
+{% form_theme form 'SyliusWebBundle:Backend/ExportProfile:_forms.html.twig' %}
+
+<fieldset>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.code) }}
+        </div>
+        <hr>
+        <div class="col-md-6">
+            {{ form_row(form.reader) }}
+            {% for name, readerConfigurationPrototype in form.vars.prototypes.readers %}
+                <div id="{{ form.reader.vars.id }}_{{ name }}" data-container="#reader.configuration" data-prototype="{{ form_widget(readerConfigurationPrototype)|e }}">
+                </div>
+            {% endfor %}
+            <div id="reader" class="configuration">
+                {% if form.readerConfiguration is defined %}
+                    {% for field in form.readerConfiguration %}
+                        {{ form_row(field) }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.writer) }}
+            {% for name, writerConfigurationPrototype in form.vars.prototypes.writers %}
+                <div id="{{ form.writer.vars.id }}_{{ name }}" data-container="#writer.configuration" data-prototype="{{ form_widget(writerConfigurationPrototype)|e }}">
+                </div>
+            {% endfor %}
+            <div id="writer" class="configuration">
+                {% if form.writerConfiguration is defined %}
+                    {% for field in form.writerConfiguration %}
+                        {{ form_row(field) }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+</fieldset>
+{{ form_row(form._token) }}

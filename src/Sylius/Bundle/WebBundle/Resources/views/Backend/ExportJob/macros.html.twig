@@ -1,0 +1,37 @@
+{% macro list(export_jobs) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if export_jobs|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.export_job.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('profile', 'sylius.export_job.export_profile'|trans) }}</th>
+            <th>{{ sylius_resource_sort('status', 'sylius.export_job.status'|trans) }}</th>
+            <th>{{ sylius_resource_sort('startTime', 'sylius.export_job.start_time'|trans) }}</th>
+            <th>{{ sylius_resource_sort('endTime', 'sylius.export_job.end_time'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for export_job in export_jobs %}
+        <tr id="{{ export_job.id }}">
+            <td>{{ export_job.profile.code }}</td>
+            <td>{{ export_job.status }}</td>
+            <td>{{ export_job.startTime|date('d/m/Y H:i:s') }}</td>
+            <td>{{ export_job.endTime|date('d/m/Y H:i:s') }}</td>
+            <td class="pull-right">
+                {{ buttons.show(path('sylius_backend_export_job_show', {'id': export_job.id, 'profileId': export_job.profile.id })) }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.export_job.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

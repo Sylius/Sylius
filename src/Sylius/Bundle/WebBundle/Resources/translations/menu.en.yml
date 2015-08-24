@@ -14,9 +14,13 @@ sylius:
                 channels: Channels
                 dashboard: Dashboard
                 currencies: Currencies
+                dashboard: Dashboard
+                export: Export Profiles
+                import: Import Profiles
                 general_settings: General settings
                 groups: Groups
                 homepage: Your store
+                import_export: Import/Export
                 locales: Locales
                 new_order: Add new order
                 new_promotion: Add new promotion
@@ -54,10 +58,15 @@ sylius:
                 channels: Channels
                 customer: Customer
                 dashboard: Dashboard
+                customer: Customers
                 currencies: Currencies
+                dashboard: Dashboard
+                export: Export Profiles
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend
+                import: Import Profiles
+                import_export: Import/Export
                 locales: Locales
                 new_order: Add new order
                 new_promotion: Add new promotion
