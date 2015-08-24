@@ -12,7 +12,7 @@
     <div class="col-md-9">
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
-        <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating }}</h3>
+        <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
     </div>
 </div>
 {% if product.images|length > 0 %}

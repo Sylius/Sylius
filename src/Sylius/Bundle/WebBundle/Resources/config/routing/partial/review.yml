@@ -11,7 +11,7 @@ sylius_partial_product_review_list:
             sorting:
                 createdAt: desc
             filterable: true
-            criteria: { 'product': $product }
+            criteria: { 'product': $product, 'status': 'accepted' }
             template: 'SyliusWebBundle:Frontend/Review:_list.html.twig'
             permission: false
 
