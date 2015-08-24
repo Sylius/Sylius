@@ -61,14 +61,6 @@ class ImportExportContext extends DefaultContext
     private $type;
 
     /**
-     * @param string|null $applicationName
-     */
-    public function __construct($applicationName = null)
-    {
-        parent::__construct($applicationName);
-    }
-
-    /**
      * @AfterScenario @using_file
      *
      * @param AfterScenarioScope $scope
@@ -417,14 +409,14 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @param string    $name
-     * @param string    $description
-     * @param string    $code
-     * @param string    $reader
-     * @param string    $readerConfiguration
-     * @param string    $writer
-     * @param string    $writerConfiguration
-     * @param bool|true $flush
+     * @param string $name
+     * @param string $description
+     * @param string $code
+     * @param string $reader
+     * @param string $readerConfiguration
+     * @param string $writer
+     * @param string $writerConfiguration
+     * @param bool   $flush
      *
      * @return ImportProfileInterface
      */
@@ -444,14 +436,14 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @param string    $name
-     * @param string    $description
-     * @param string    $code
-     * @param string    $reader
-     * @param string    $readerConfiguration
-     * @param string    $writer
-     * @param string    $writerConfiguration
-     * @param bool|true $flush
+     * @param string $name
+     * @param string $description
+     * @param string $code
+     * @param string $reader
+     * @param string $readerConfiguration
+     * @param string $writer
+     * @param string $writerConfiguration
+     * @param bool   $flush
      *
      * @return ExportProfileInterface
      */
@@ -471,13 +463,13 @@ class ImportExportContext extends DefaultContext
     }
 
     /**
-     * @param string    $status
-     * @param string    $startTime
-     * @param string    $endTime
-     * @param string    $createdAt
-     * @param string    $updatedAt
-     * @param string    $exportProfileCode
-     * @param bool|true $flush
+     * @param string $status
+     * @param string $startTime
+     * @param string $endTime
+     * @param string $createdAt
+     * @param string $updatedAt
+     * @param string $exportProfileCode
+     * @param bool   $flush
      *
      * @return ExportJobInterface
      */
@@ -485,33 +477,19 @@ class ImportExportContext extends DefaultContext
     {
         $repository = $this->getRepository('export_job');
         $exportJob = $repository->createNew();
-        $exportJob->setStatus($status);
-        $exportJob->setStartTime(new \DateTime($startTime));
-        $exportJob->setEndTime(new \DateTime($endTime));
-        $exportJob->setCreatedAt(new \DateTime($createdAt));
-        $exportJob->setUpdatedAt(new \DateTime($updatedAt));
 
         $exportProfile = $this->getRepository('export_profile')->findOneByCode($exportProfileCode);
-        $exportJob->setProfile($exportProfile);
-
-        $manager = $this->getEntityManager();
-        $manager->persist($exportJob);
-
-        if ($flush) {
-            $manager->flush();
-        }
-
-        return $exportJob;
+        return $this->addJobParameters($status, $startTime, $endTime, $createdAt, $updatedAt, $exportProfile, $flush, $exportJob);
     }
 
     /**
-     * @param string    $status
-     * @param string    $startTime
-     * @param string    $endTime
-     * @param string    $createdAt
-     * @param string    $updatedAt
-     * @param string    $importProfileCode
-     * @param bool|true $flush
+     * @param string $status
+     * @param string $startTime
+     * @param string $endTime
+     * @param string $createdAt
+     * @param string $updatedAt
+     * @param string $importProfileCode
+     * @param bool   $flush
      *
      * @return ImportJobInterface
      */
@@ -519,23 +497,9 @@ class ImportExportContext extends DefaultContext
     {
         $repository = $this->getRepository('import_job');
         $importJob = $repository->createNew();
-        $importJob->setStatus($status);
-        $importJob->setStartTime(new \DateTime($startTime));
-        $importJob->setEndTime(new \DateTime($endTime));
-        $importJob->setCreatedAt(new \DateTime($createdAt));
-        $importJob->setUpdatedAt(new \DateTime($updatedAt));
 
         $importProfile = $this->getRepository('import_profile')->findOneByCode($importProfileCode);
-        $importJob->setProfile($importProfile);
-
-        $manager = $this->getEntityManager();
-        $manager->persist($importJob);
-
-        if ($flush) {
-            $manager->flush();
-        }
-
-        return $importJob;
+        return $this->addJobParameters($status, $startTime, $endTime, $createdAt, $updatedAt, $importProfile, $flush, $importJob);
     }
 
     /**
@@ -633,5 +597,36 @@ class ImportExportContext extends DefaultContext
             'updatedAt' => '2015-07-24 09:37:51',
             'id' => 1836,
         );
+    }
+
+    /**
+     * @param string           $status
+     * @param string           $startTime
+     * @param string           $endTime
+     * @param string           $createdAt
+     * @param string           $updatedAt
+     * @param ProfileInterface $importProfileCode
+     * @param bool             $flush
+     * @param JobInterface     $importJob
+     *
+     * @return JobInterface
+     */
+    private function addJobParameters($status, $startTime, $endTime, $createdAt, $updatedAt, ProfileInterface $importProfile, $flush, JobInterface $importJob)
+    {
+        $importJob->setStatus($status);
+        $importJob->setStartTime(new \DateTime($startTime));
+        $importJob->setEndTime(new \DateTime($endTime));
+        $importJob->setCreatedAt(new \DateTime($createdAt));
+        $importJob->setUpdatedAt(new \DateTime($updatedAt));
+        $importJob->setProfile($importProfile);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($importJob);
+
+        if ($flush) {
+            $manager->flush();
+        }
+
+        return $importJob;
     }
 }

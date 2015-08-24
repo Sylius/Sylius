@@ -21,8 +21,6 @@ use Sylius\Component\ImportExport\Model\ProfileInterface;
 interface JobRunnerInterface
 {
     /**
-     * Create import job.
-     *
      * @param ProfileInterface $profile
      * @param LoggerInterface  $logger
      *
@@ -30,16 +28,12 @@ interface JobRunnerInterface
      */
     public function start(ProfileInterface $profile, LoggerInterface $logger);
     /**
-     * Create job based on a given profile and starts it.
-     *
      * @param ProfileInterface $profile
      * @param LoggerInterface  $logger
      * @param JobInterface     $job
      */
     public function run(ProfileInterface $profile, LoggerInterface $logger, JobInterface $job);
     /**
-     * End import job.
-     *
      * @param JobInterface    $job
      * @param LoggerInterface $logger
      * @param string          $jobStatus

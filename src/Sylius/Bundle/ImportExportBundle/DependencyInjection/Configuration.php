@@ -22,7 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -105,7 +105,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\ImportExportBundle\Form\Type\ImportProfileType')->end()
-                                        ->scalarNode('choice')->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -128,7 +127,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\ImportExportBundle\Form\Type\ExportProfileType')->end()
-                                        ->scalarNode('choice')->end()
                                     ->end()
                                 ->end()
                             ->end()

@@ -27,8 +27,10 @@ class RegisterReadersPassSpec extends ObjectBehavior
     }
 
     public function it_processes_with_given_container(
-        ContainerBuilder $container, Definition $exportReaderDefinition, Definition $importReaderDefinition)
-    {
+        ContainerBuilder $container,
+        Definition $exportReaderDefinition,
+        Definition $importReaderDefinition
+    ) {
         $container->hasDefinition('sylius.registry.export.reader')->willReturn(true);
         $container->getDefinition('sylius.registry.export.reader')->willReturn($exportReaderDefinition);
 

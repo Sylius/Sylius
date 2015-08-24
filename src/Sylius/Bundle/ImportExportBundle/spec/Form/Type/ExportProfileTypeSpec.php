@@ -106,6 +106,7 @@ class ExportProfileTypeSpec extends ObjectBehavior
 
         $this->buildView($view, $form, array());
     }
+
     function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_export_profile');

@@ -13,6 +13,7 @@ namespace Sylius\Component\ImportExport;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Converter\DateConverter;
 use Sylius\Component\ImportExport\Model\Job;
 use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
@@ -29,25 +30,35 @@ abstract class JobRunner implements JobRunnerInterface
      * @var ServiceRegistryInterface
      */
     protected $readerRegistry;
+
     /**
      * @var ServiceRegistryInterface
      */
     protected $writerRegistry;
+
     /**
      * @var RepositoryInterface
      */
     protected $jobRepository;
+
     /**
      * @var ObjectManager
      */
     protected $entityManager;
+
     /**
      * @var CurrentDateProviderInterface
      */
     protected $dateProvider;
 
     /**
+     * @var DateConverter
+     */
+    protected $dateConverter;
+
+    /**
      * @param CurrentDateProviderInterface $dateProvider
+     * @param DateConverter                $dateConverter
      * @param ObjectManager                $entityManager
      * @param RepositoryInterface          $jobRepository
      * @param ServiceRegistryInterface     $readerRegistry
@@ -55,12 +66,14 @@ abstract class JobRunner implements JobRunnerInterface
      */
     public function __construct(
         CurrentDateProviderInterface $dateProvider,
+        DateConverter $dateConverter,
         ObjectManager $entityManager,
         RepositoryInterface $jobRepository,
         ServiceRegistryInterface $readerRegistry,
         ServiceRegistryInterface $writerRegistry
     ) {
         $this->dateProvider = $dateProvider;
+        $this->dateConverter = $dateConverter;
         $this->readerRegistry = $readerRegistry;
         $this->writerRegistry = $writerRegistry;
         $this->jobRepository = $jobRepository;
@@ -78,7 +91,10 @@ abstract class JobRunner implements JobRunnerInterface
         $job->setStatus(Job::RUNNING);
         $job->setProfile($profile);
 
-        $logger->info(sprintf("Profile: %d; StartTime: %s", $profile->getId(), $job->getStartTime()->format('Y-m-d H:i:s')));
+        $logger->info(sprintf("Profile: %d; StartTime: %s",
+            $profile->getId(),
+            $this->dateConverter->toString($job->getStartTime(), 'Y-m-d H:i:s'))
+        );
 
         $profile->addJob($job);
 
@@ -96,7 +112,10 @@ abstract class JobRunner implements JobRunnerInterface
     {
         $job->setEndTime($this->dateProvider->getCurrentDate());
         $job->setStatus($status);
-        $logger->info(sprintf("Job: %d; EndTime: %s", $job->getId(), $job->getEndTime()->format('Y-m-d H:i:s')));
+        $logger->info(sprintf("Job: %d; EndTime: %s",
+            $job->getId(),
+            $this->dateConverter->toString($job->getEndTime(), 'Y-m-d H:i:s'))
+        );
 
         $this->entityManager->persist($job);
         $this->entityManager->flush();

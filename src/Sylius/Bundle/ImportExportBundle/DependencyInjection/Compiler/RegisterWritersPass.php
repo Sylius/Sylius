@@ -17,10 +17,10 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all writers in export profile registry service.
+ * Registers all writers in profile registry service.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class RegisterWritersPass implements CompilerPassInterface
 {

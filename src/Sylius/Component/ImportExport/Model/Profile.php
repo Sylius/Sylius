@@ -252,8 +252,6 @@ abstract class Profile implements ProfileInterface
      */
     public function removeJob(JobInterface $job)
     {
-        if ($this->hasJob($job)) {
-            $this->jobs->removeElement($job);
-        }
+        $this->jobs->removeElement($job);
     }
 }

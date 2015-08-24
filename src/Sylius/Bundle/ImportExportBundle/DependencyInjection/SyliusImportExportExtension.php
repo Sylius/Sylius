@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class SyliusImportExportExtension extends AbstractResourceExtension
 {
@@ -33,8 +33,8 @@ class SyliusImportExportExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
 
-        $container->setParameter('sylius.importexport.timezone', $config['timezone']);
-        $container->setParameter('sylius.importexport.logPath', $config['log_path']);
+        $container->setParameter('sylius.import_export.timezone', $config['timezone']);
+        $container->setParameter('sylius.import_export.log_path', $config['log_path']);
 
         $container
             ->getDefinition('sylius.form.type.export_profile')

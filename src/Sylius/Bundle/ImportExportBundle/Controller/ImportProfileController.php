@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ImportExportBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\Process\Process;
 
@@ -37,14 +38,21 @@ class ImportProfileController extends ResourceController
         $importProfile = $this->container->get('sylius.repository.import_profile')->findOneBy(array(
             'code' => $code,
         ));
-        $importJob = $importProfile->getJobs()->last();
+        if (null === $importProfile) {
+            throw new EntityNotFoundException();
+        }
+
+        $importJobs = $importProfile->getJobs();
+        if(empty($importJobs)) {
+            throw new EntityNotFoundException();
+        }
 
         return $this->redirect(
             $this->generateUrl(
                 'sylius_backend_import_job_show',
                 array(
                     'profileId' => $importProfile->getId(),
-                    'id' => $importJob->getId(),
+                    'id' => $importJobs->last()->getId(),
                 )
             )
         );

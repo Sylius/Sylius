@@ -26,7 +26,7 @@ class UserWriterTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ImportExport\Writer\UserWriterType');
     }
 
-    function it_should_be_abstract_resource_type_object()
+    function it_should_be_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }

@@ -53,8 +53,7 @@ class CsvWriterSpec extends ObjectBehavior
         $csvWriterFactory,
         LoggerInterface $logger,
         Writer $writer
-    )
-    {
+    ) {
         $data = array(array('header' => 'data1'), array('header' => 'data2'));
 
         $csvWriterFactory->create(array())->willReturn($writer);
@@ -69,8 +68,7 @@ class CsvWriterSpec extends ObjectBehavior
         \DateTime $date,
         JobInterface $exportJob,
         ProfileInterface $profile
-    )
-    {
+    ) {
         $exportJob->getProfile()->willReturn($profile);
         $exportJob->getStartTime()->willReturn($date);
         $date->format('Y_m_d_H_i_s')->willReturn('2015_06_30_16_30_00');

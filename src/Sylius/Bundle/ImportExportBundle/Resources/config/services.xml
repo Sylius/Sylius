@@ -35,8 +35,9 @@
 
         <!-- Importer-->
         <parameter key="sylius.import_export.importer.class">Sylius\Component\ImportExport\Importer</parameter> 
-        <parameter key="sylius.form.type.import_writer_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportWriterChoiceType</parameter>
-        <parameter key="sylius.form.type.import_reader_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ImportReaderChoiceType</parameter>
+
+        <!-- ImportExport -->
+        <parameter key="sylius.form.type.service_choice.class">Sylius\Bundle\ImportExportBundle\Form\Type\ServiceChoiceType</parameter>
 
         <!-- Writers -->
         <parameter key="sylius.export.csv_writer.class">Sylius\Component\ImportExport\Writer\CsvWriter</parameter>
@@ -76,7 +77,7 @@
 
         <!-- DateProvider-->
         <service id="sylius.import_export.data_provider" class="%sylius.import_export.data_provider.class%">
-            <argument>%sylius.importexport.timezone%</argument>
+            <argument>%sylius.import_export.timezone%</argument>
         </service>
 
         <!-- DateConverter-->
@@ -84,13 +85,14 @@
 
         <!-- StreamHandlerFactory -->
         <service id="sylius.import_export.factory.logger" class="%sylius.import_export.logger.factory.class%">
-            <argument>%sylius.importexport.logPath%</argument>
+            <argument>%sylius.import_export.log_path%</argument>
             <argument type="service" id="sylius.import_export.data_provider" />
         </service>
         
         <!-- Export Config -->
         <service id="sylius.import_export.exporter" class="%sylius.import_export.exporter.class%">
             <argument type="service" id="sylius.import_export.data_provider" />
+            <argument type="service" id="sylius.import_export.date_converter" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.repository.export_job" />
             <argument type="service" id="sylius.registry.export.reader" />
@@ -101,8 +103,9 @@
         <service id="exporter_filesystem" class="%sylius.filesystem%" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
             <argument>%sylius.filesystem.exporter%</argument>
         </service>
-        <service id="sylius.form.type.export_writer_choice" class="%sylius.form.type.export_writer_choice.class%">
+        <service id="sylius.form.type.export_writer_choice" class="%sylius.form.type.service_choice.class%">
             <argument>%sylius.export.writers%</argument>
+            <argument>sylius_export_writer_choice</argument>
             <tag name="form.type" alias="sylius_export_writer_choice" />
         </service>
         <service id="sylius.export.csv_writer" class="%sylius.export.csv_writer.class%">
@@ -113,14 +116,16 @@
         <service id="sylius.form.type.writer.csv_type" class="%sylius.form.type.writer.csv_type.class%">
             <tag name="form.type" alias="sylius_csv_writer" />
         </service>
-        <service id="sylius.form.type.export_reader_choice" class="%sylius.form.type.export_reader_choice.class%">
+        <service id="sylius.form.type.export_reader_choice" class="%sylius.form.type.service_choice.class%">
             <argument>%sylius.export.readers%</argument>
+            <argument>sylius_export_reader_choice</argument>
             <tag name="form.type" alias="sylius_export_reader_choice" />
         </service>
         
         <!-- Import Config -->
         <service id="sylius.import_export.importer" class="%sylius.import_export.importer.class%">
             <argument type="service" id="sylius.import_export.data_provider" />
+            <argument type="service" id="sylius.import_export.date_converter" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.repository.import_job" />
             <argument type="service" id="sylius.registry.import.reader" />
@@ -129,12 +134,14 @@
             <tag name="monolog.logger" channel="importer" />
         </service>
         
-        <service id="sylius.form.type.import_writer_choice" class="%sylius.form.type.import_writer_choice.class%">
+        <service id="sylius.form.type.import_writer_choice" class="%sylius.form.type.service_choice.class%">
             <argument>%sylius.import.writers%</argument>
+            <argument>sylius_import_writer_choice</argument>
             <tag name="form.type" alias="sylius_import_writer_choice" />
         </service>
-        <service id="sylius.form.type.import_reader_choice" class="%sylius.form.type.import_reader_choice.class%">
+        <service id="sylius.form.type.import_reader_choice" class="%sylius.form.type.service_choice.class%">
             <argument>%sylius.import.readers%</argument>
+            <argument>sylius_import_reader_choice</argument>
             <tag name="form.type" alias="sylius_import_reader_choice" />
         </service>
 
@@ -151,7 +158,7 @@
         <service id="sylius.export.csv_writer.factory" class="%sylius.export.csv_writer.factory.class%" />
         <service id="sylius.import.csv_reader.factory" class="%sylius.import.csv_reader.factory.class%" />
         <service id="sylius.import.stream_handler.factory" class="%sylius.import.stream_handler.factory.class%">
-            <argument>%sylius.importexport.logPath%</argument>
+            <argument>%sylius.import_export.log_path%</argument>
             <argument type="service" id="sylius.import_export.data_provider" />
         </service>
 

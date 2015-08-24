@@ -52,8 +52,7 @@ class CsvReaderSpec extends ObjectBehavior
         $csvReaderFactory,
         LoggerInterface $logger,
         Reader $reader
-    )
-    {
+    ) {
         $config = array(
             'reader' => 'config',
             'batch' => 2,
@@ -68,8 +67,7 @@ class CsvReaderSpec extends ObjectBehavior
         $csvReaderFactory,
         LoggerInterface $logger,
         Reader $reader
-    )
-    {
+    ) {
         $config = array(
             'reader' => 'config',
             'batch' => 2,

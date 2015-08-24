@@ -130,11 +130,7 @@ class ImportProfileType extends AbstractResourceType
                 continue;
             }
 
-            try {
-                $prototype[$prototypesType.'s'][$type] = $builder->create($prototypesType.'Configuration', $formType)->getForm();
-            } catch (\InvalidArgumentException $e) {
-                continue;
-            }
+            $prototype[$prototypesType.'s'][$type] = $builder->create($prototypesType.'Configuration', $formType)->getForm();
         }
 
         return $prototype;

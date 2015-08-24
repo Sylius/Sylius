@@ -17,6 +17,7 @@ use Monolog\Logger;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Converter\DateConverter;
 use Sylius\Component\ImportExport\Logger\Factory\StreamHandlerFactoryInterface;
 use Sylius\Component\ImportExport\Logger\ImportExportLogger;
 use Sylius\Component\ImportExport\Model\ImportJobInterface;
@@ -34,14 +35,15 @@ class ImporterSpec extends ObjectBehavior
 {
     function let(
         CurrentDateProviderInterface $dateProvider,
+        DateConverter $dateConverter,
         EntityManager $entityManager,
         RepositoryInterface $importJobRepository,
         ServiceRegistryInterface $readerRegistry,
         ServiceRegistryInterface $writerRegistry
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $dateProvider,
+            $dateConverter,
             $entityManager,
             $importJobRepository,
             $readerRegistry,
@@ -61,31 +63,29 @@ class ImporterSpec extends ObjectBehavior
 
     function it_imports_data_with_given_importer(
         $dateProvider,
+        $dateConverter,
         $importJobRepository,
         $entityManager,
         $readerRegistry,
         $writerRegistry,
-        \DateTime $dateTime1,
-        \DateTime $dateTime2,
+        \DateTime $dateTime,
         ImportJobInterface $importJob,
         ImportProfileInterface $importProfile,
         LoggerInterface $logger,
         ReaderInterface $reader,
         WriterInterface $writer
-    )
-    {
-        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+    ) {
+        $dateProvider->getCurrentDate()->willReturn($dateTime);
+        $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
         $importJobRepository->createNew()->willReturn($importJob);
         $importJob->getId()->willReturn(2);
-        $importJob->setStartTime($dateTime1)->shouldBeCalled();
-        $importJob->getStartTime()->willReturn($dateTime1);
+        $importJob->setStartTime($dateTime)->shouldBeCalled();
+        $importJob->getStartTime()->willReturn($dateTime);
         $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $importJob->setProfile($importProfile)->shouldBeCalled();
-        $importJob->setEndTime($dateTime2)->shouldBeCalled();
-        $importJob->getEndTime()->willReturn($dateTime2);
+        $importJob->setEndTime($dateTime)->shouldBeCalled();
+        $importJob->getEndTime()->willReturn($dateTime);
 
         $logger->info("Job: 2; EndTime: 2015-06-29 13:40:00")->shouldBeCalled();
         $logger->info("Profile: 1; StartTime: 2015-06-29 12:40:00")->shouldBeCalled();
@@ -117,27 +117,25 @@ class ImporterSpec extends ObjectBehavior
 
      function it_does_not_allow_to_import_data_without_reader_defined(
          $dateProvider,
+         $dateConverter,
          $importJobRepository,
          $entityManager,
-         \DateTime $dateTime1,
-         \DateTime $dateTime2,
+         \DateTime $dateTime,
          ImportJobInterface $importJob,
          ImportProfileInterface $importProfile,
          LoggerInterface $logger
-     )
-     {
-         $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-         $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-         $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+     ) {
+         $dateProvider->getCurrentDate()->willReturn($dateTime);
+         $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
          $importJobRepository->createNew()->willReturn($importJob);
          $importJob->getId()->willReturn(2);
-         $importJob->setStartTime($dateTime1)->shouldBeCalled();
-         $importJob->getStartTime()->willReturn($dateTime1);
+         $importJob->setStartTime($dateTime)->shouldBeCalled();
+         $importJob->getStartTime()->willReturn($dateTime);
          $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
          $importJob->setProfile($importProfile)->shouldBeCalled();
-         $importJob->setEndTime($dateTime2)->shouldBeCalled();
-         $importJob->getEndTime()->willReturn($dateTime2);
+         $importJob->setEndTime($dateTime)->shouldBeCalled();
+         $importJob->getEndTime()->willReturn($dateTime);
 
          $importJobRepository->createNew()->willReturn($importJob);
          $importProfile->getId()->willReturn(1);
@@ -160,27 +158,25 @@ class ImporterSpec extends ObjectBehavior
 
     function it_does_not_allow_to_import_data_without_writer_defined(
         $dateProvider,
+        $dateConverter,
         $importJobRepository,
         $entityManager,
-        \DateTime $dateTime1,
-        \DateTime $dateTime2,
+        \DateTime $dateTime,
         ImportJobInterface $importJob,
         ImportProfileInterface $importProfile,
         LoggerInterface $logger
-    )
-    {
-        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+    ) {
+        $dateProvider->getCurrentDate()->willReturn($dateTime);
+        $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
         $importJobRepository->createNew()->willReturn($importJob);
         $importJob->getId()->willReturn(2);
-        $importJob->setStartTime($dateTime1)->shouldBeCalled();
-        $importJob->getStartTime()->willReturn($dateTime1);
+        $importJob->setStartTime($dateTime)->shouldBeCalled();
+        $importJob->getStartTime()->willReturn($dateTime);
         $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $importJob->setProfile($importProfile)->shouldBeCalled();
-        $importJob->setEndTime($dateTime2)->shouldBeCalled();
-        $importJob->getEndTime()->willReturn($dateTime2);
+        $importJob->setEndTime($dateTime)->shouldBeCalled();
+        $importJob->getEndTime()->willReturn($dateTime);
 
 
         $importJobRepository->createNew()->willReturn($importJob);

@@ -27,8 +27,10 @@ class RegisterWritersPassSpec extends ObjectBehavior
     }
 
     public function it_processes_with_given_container(
-        ContainerBuilder $container, Definition $exportWriterDefinition, Definition $importWriterDefinition)
-    {
+        ContainerBuilder $container,
+        Definition $exportWriterDefinition,
+        Definition $importWriterDefinition
+    ) {
         $container->hasDefinition('sylius.registry.export.writer')->willReturn(true);
         $container->getDefinition('sylius.registry.export.writer')->willReturn($exportWriterDefinition);
 

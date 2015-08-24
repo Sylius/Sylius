@@ -26,7 +26,7 @@ interface ReaderInterface
      * @param array           $configuration
      * @param LoggerInterface $logger
      *
-     * @return array
+     * @return array|null
      */
     public function read(array $configuration, LoggerInterface $logger);
     /**

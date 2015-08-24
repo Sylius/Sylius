@@ -29,7 +29,6 @@ class DateConverter implements DateConverterInterface
      */
     public function toDateTime($stringDate, $format)
     {
-        ;
         if (false === ($date = \DateTime::createFromFormat($format, $stringDate))) {
             throw new \InvalidArgumentException('Given format is invalid.');
         }

@@ -8,9 +8,6 @@ Feature: Executing import command
         Given there are following import profiles configured:
             | name                 | description | code           | reader        | reader configuration                                | writer      | writer configuration    |
             | UsersImportProfile   | Lorem ipsum | user_import    | csv_reader    | Delimiter:;,Enclosure:",File:/tmp/user.csv,Batch:15 | user_orm    | date_format:Y-m-d H:i:s |
-        And there is default currency configured
-        And there is default channel configured
-        And I am logged in as administrator
 
     @using_file
     Scenario: Running import command
@@ -23,7 +20,7 @@ Feature: Executing import command
           And I run "sylius:import user_import" command in less then "30" seconds
          Then the command should finish successfully
           And I should see "Command executed successfully!" in a terminal
-          And I should have 4 users in a database
+          And I should have 3 users in a database
           And I should find 1 "completed" job for this "import" profile in database
 
     Scenario: Running import command without import code defined

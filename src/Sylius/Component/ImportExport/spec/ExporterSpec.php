@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Converter\DateConverter;
 use Sylius\Component\ImportExport\Logger\ImportExportLogger;
 use Sylius\Component\ImportExport\Model\ExportJobInterface;
 use Sylius\Component\ImportExport\Model\ExportProfileInterface;
@@ -32,14 +33,15 @@ class ExporterSpec extends ObjectBehavior
 {
     function let(
         CurrentDateProviderInterface $dateProvider,
+        DateConverter $dateConverter,
         EntityManager $entityManager,
         RepositoryInterface $exportJobRepository,
         ServiceRegistryInterface $readerRegistry,
         ServiceRegistryInterface $writerRegistry
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $dateProvider,
+            $dateConverter,
             $entityManager,
             $exportJobRepository,
             $readerRegistry,
@@ -72,31 +74,29 @@ class ExporterSpec extends ObjectBehavior
 
      function it_exports_data_with_given_exporter(
          $dateProvider,
+         $dateConverter,
          $exportJobRepository,
          $entityManager,
          $readerRegistry,
          $writerRegistry,
-         \DateTime $dateTime1,
-         \DateTime $dateTime2,
+         \DateTime $dateTime,
          ExportJobInterface $exportJob,
          ExportProfileInterface $exportProfile,
          LoggerInterface $logger,
          ReaderInterface $reader,
          WriterInterface $writer
-     )
-     {
-         $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-         $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-         $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+     ) {
+         $dateProvider->getCurrentDate()->willReturn($dateTime);
+         $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
          $exportJobRepository->createNew()->willReturn($exportJob);
          $exportJob->getId()->willReturn(2);
-         $exportJob->setStartTime($dateTime1)->shouldBeCalled();
-         $exportJob->getStartTime()->willReturn($dateTime1);
+         $exportJob->setStartTime($dateTime)->shouldBeCalled();
+         $exportJob->getStartTime()->willReturn($dateTime);
          $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
          $exportJob->setProfile($exportProfile)->shouldBeCalled();
-         $exportJob->setEndTime($dateTime2)->shouldBeCalled();
-         $exportJob->getEndTime()->willReturn($dateTime2);
+         $exportJob->setEndTime($dateTime)->shouldBeCalled();
+         $exportJob->getEndTime()->willReturn($dateTime);
 
          $logger->info("Job: 2; EndTime: 2015-06-29 13:40:00")->shouldBeCalled();
          $logger->info("Profile: 1; StartTime: 2015-06-29 12:40:00")->shouldBeCalled();
@@ -128,27 +128,25 @@ class ExporterSpec extends ObjectBehavior
 
     function it_does_not_allow_to_export_data_without_reader_defined(
         $dateProvider,
+        $dateConverter,
         $exportJobRepository,
         $entityManager,
-        \DateTime $dateTime1,
-        \DateTime $dateTime2,
+        \DateTime $dateTime,
         ExportJobInterface $exportJob,
         ExportProfileInterface $exportProfile,
         LoggerInterface $logger
-    )
-    {
-        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+    ) {
+        $dateProvider->getCurrentDate()->willReturn($dateTime);
+        $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportJob->getId()->willReturn(2);
-        $exportJob->setStartTime($dateTime1)->shouldBeCalled();
-        $exportJob->getStartTime()->willReturn($dateTime1);
+        $exportJob->setStartTime($dateTime)->shouldBeCalled();
+        $exportJob->getStartTime()->willReturn($dateTime);
         $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $exportJob->setProfile($exportProfile)->shouldBeCalled();
-        $exportJob->setEndTime($dateTime2)->shouldBeCalled();
-        $exportJob->getEndTime()->willReturn($dateTime2);
+        $exportJob->setEndTime($dateTime)->shouldBeCalled();
+        $exportJob->getEndTime()->willReturn($dateTime);
 
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportProfile->getId()->willReturn(1);
@@ -173,25 +171,23 @@ class ExporterSpec extends ObjectBehavior
         $dateProvider,
         $exportJobRepository,
         $entityManager,
-        \DateTime $dateTime1,
-        \DateTime $dateTime2,
+        $dateConverter,
+        \DateTime $dateTime,
         ExportJobInterface $exportJob,
         ExportProfileInterface $exportProfile,
         LoggerInterface $logger
-    )
-    {
-        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
-        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
-        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
+    ) {
+        $dateProvider->getCurrentDate()->willReturn($dateTime);
+        $dateConverter->toString($dateTime, 'Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00', '2015-06-29 13:40:00');
 
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportJob->getId()->willReturn(2);
-        $exportJob->setStartTime($dateTime1)->shouldBeCalled();
-        $exportJob->getStartTime()->willReturn($dateTime1);
+        $exportJob->setStartTime($dateTime)->shouldBeCalled();
+        $exportJob->getStartTime()->willReturn($dateTime);
         $exportJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
         $exportJob->setProfile($exportProfile)->shouldBeCalled();
-        $exportJob->setEndTime($dateTime2)->shouldBeCalled();
-        $exportJob->getEndTime()->willReturn($dateTime2);
+        $exportJob->setEndTime($dateTime)->shouldBeCalled();
+        $exportJob->getEndTime()->willReturn($dateTime);
 
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportProfile->getId()->willReturn(1);

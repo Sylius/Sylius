@@ -9,27 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ExportReaderChoiceType extends AbstractType
+class ServiceChoiceType extends AbstractType
 {
     /**
      * @var array
      */
-    protected $readers;
+    protected $services;
 
     /**
-     * @param array $readers
+     * @var string
      */
-    public function __construct(array $readers)
+    protected $name;
+
+    /**
+     * @param array  $services
+     * @param string $name
+     */
+    public function __construct(array $services, $name)
     {
-        $this->readers = $readers;
+        $this->services = $services;
+        $this->name = $name;
     }
 
     /**
@@ -39,7 +46,7 @@ class ExportReaderChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->readers,
+                'choices' => $this->services,
             ))
         ;
     }
@@ -57,6 +64,6 @@ class ExportReaderChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_export_reader_choice';
+        return $this->name;
     }
 }

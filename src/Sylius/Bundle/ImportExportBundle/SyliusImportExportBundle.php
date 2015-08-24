@@ -21,10 +21,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * Import/export component for Symfony2 applications.
  * It is used as a base for importing and exporting data.
  *
- * It is fully decoupled, so you can integrate it into your existing project.
+ * It is fully decoupled from Sylius, so you can integrate it into your existing project.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class SyliusImportExportBundle extends AbstractResourceBundle

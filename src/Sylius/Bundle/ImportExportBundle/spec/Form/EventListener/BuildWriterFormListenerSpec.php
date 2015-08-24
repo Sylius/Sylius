@@ -39,8 +39,8 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
     function let(
         ServiceRegistryInterface $writerRegistry,
         FormFactoryInterface $factory,
-        WriterInterface $writer)
-    {
+        WriterInterface $writer
+    ) {
         $writerRegistry->get('test_writer')->willReturn($writer);
         $writerRegistry->all()->willReturn(array($writer));
         $writer->getType()->willReturn('test_type');
@@ -52,8 +52,8 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         ExportProfileInterface $exportProfiler,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $exportProfiler->getWriter()->willReturn('test_writer');
         $exportProfiler->getWriterConfiguration()->willReturn(array());
 
@@ -73,8 +73,8 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         $factory,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $data = array('writer' => 'test_writer');
 
         $event->getData()->willReturn($data);
@@ -95,8 +95,8 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         ExportProfileInterface $exportProfiler,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $exportProfiler->getWriter()->willReturn();
         $exportProfiler->getWriterConfiguration()->willReturn(array());
 

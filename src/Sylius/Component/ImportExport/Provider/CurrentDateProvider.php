@@ -34,9 +34,7 @@ class CurrentDateProvider implements CurrentDateProviderInterface
      */
     public function getCurrentDate()
     {
-        $date = new \DateTime('now');
-        $timezone = new \DateTimeZone($this->timezone);
-        $date->setTimezone($timezone);
+        $date = new \DateTime('now', new \DateTimeZone($this->timezone));
 
         return $date;
     }

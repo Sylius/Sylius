@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class BuildWriterFormListener implements EventSubscriberInterface
 {
@@ -101,16 +101,14 @@ class BuildWriterFormListener implements EventSubscriberInterface
     {
         $writer = $this->getWriter($type);
         $formType = sprintf('sylius_%s_writer', $writer->getType());
-        try {
-            $configurationField = $this->factory->createNamed(
-                'writerConfiguration',
-                $formType,
-                $configuration,
-                array('auto_initialize' => false)
-            );
-        } catch (\InvalidArgumentException $e) {
-            return;
-        }
+
+        $configurationField = $this->factory->createNamed(
+            'writerConfiguration',
+            $formType,
+            $configuration,
+            array('auto_initialize' => false)
+        );
+
         $form->add($configurationField);
     }
 

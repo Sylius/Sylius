@@ -9,31 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
+namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ImportWriterChoiceTypeSpec extends ObjectBehavior
+class ServiceChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('testWriter' => 'TestWriter'));
+        $this->beConstructedWith(array('testReader' => 'TestReader'), 'sylius_import_reader_choice');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\Writer\ImportWriterChoiceType');
+        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\ServiceChoiceType');
     }
 
     function it_sets_default_options(OptionsResolverInterface $resolver)
     {
-        $writers = array('testWriter' => 'TestWriter');
-        $resolver->setDefaults(array('choices' => $writers))->shouldBeCalled();
+        $services = array('testReader' => 'TestReader');
+        $resolver->setDefaults(array('choices' => $services))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
@@ -45,6 +44,6 @@ class ImportWriterChoiceTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_import_writer_choice');
+        $this->getName()->shouldReturn('sylius_import_reader_choice');
     }
 }

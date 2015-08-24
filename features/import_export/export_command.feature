@@ -8,14 +8,11 @@ Feature:
         Given there are following export profiles configured:
           | name               | description | code        | reader   | reader_configuration                  | writer     | writer_configuration                         |
           | UsersExportProfile | Lorem ipsum | user_export | user_orm | batch_size:10,date_format:Y-m-d H:i:s | csv_writer | Delimiter:;,Enclosure:",File:/tmp/output.csv |
-        And there is default currency configured
-        And there is default channel configured
         And there are following users:
           | email          | enabled  | created_at          |
           | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
           | martha@foo.com | yes      | 2010-01-02 13:00:00 |
           | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
-        And I am logged in as administrator
 
     @using_file
     Scenario: Running export command
@@ -23,7 +20,7 @@ Feature:
         Then the command should finish successfully
         And I should see "Command executed successfully!" in a terminal
         And the file "/tmp/output.csv" should exist
-        And this file should contain 4 rows
+        And this file should contain 3 rows
         And this file data should be valid
         And I should find 1 completed job for this export profile in database
 

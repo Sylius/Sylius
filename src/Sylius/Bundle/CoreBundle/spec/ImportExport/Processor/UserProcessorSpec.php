@@ -37,17 +37,7 @@ class UserProcessorSpec extends ObjectBehavior
 
     function it_process_array_of_users_to_writers_friendly_form(
         $dateConverter,
-        \DateTime $birthdayDate,
-        \DateTime $createdAtDate,
-        \DateTime $credentialsExpireAtDate,
-        \DateTime $customerCreatedAtDate,
-        \DateTime $customerDeletedAtDate,
-        \DateTime $customerUpdatedAtDate,
-        \DateTime $deletedAtDate,
-        \DateTime $expiresAtDate,
-        \DateTime $lastLoginDate,
-        \DateTime $passwordRequestedAtDate,
-        \DateTime $updatedAtDate
+        \DateTime $date
     )
     {
         $usersToConvert = array(
@@ -57,12 +47,12 @@ class UserProcessorSpec extends ObjectBehavior
                 'enabled' => 1,
                 'salt' => 'salt',
                 'password' => 'password',
-                'lastLogin' => $lastLoginDate,
+                'lastLogin' => $date,
                 'confirmationToken' => 'confirmation',
-                'passwordRequestedAt' => $passwordRequestedAtDate,
+                'passwordRequestedAt' => $date,
                 'locked' => '',
-                'expiresAt' => $expiresAtDate,
-                'credentialsExpireAt' => $credentialsExpireAtDate,
+                'expiresAt' => $date,
+                'credentialsExpireAt' => $date,
                 'roles' => array(
                     'ROLE_ADMIN'
                 ),
@@ -71,17 +61,17 @@ class UserProcessorSpec extends ObjectBehavior
                     'emailCanonical' => 'john.doe@example.com',
                     'firstName' => 'John',
                     'lastName' => 'Doe',
-                    'birthday' => $birthdayDate,
+                    'birthday' => $date,
                     'gender' => 'u',
-                    'createdAt' => $customerCreatedAtDate,
-                    'updatedAt' => $customerUpdatedAtDate,
-                    'deletedAt' => $customerDeletedAtDate,
+                    'createdAt' => $date,
+                    'updatedAt' => $date,
+                    'deletedAt' => $date,
                     'id' => 20,
                     'currency' => 'EUR',
                 ),
-                'createdAt' => $createdAtDate,
-                'updatedAt' => $updatedAtDate,
-                'deletedAt' => $deletedAtDate,
+                'createdAt' => $date,
+                'updatedAt' => $date,
+                'deletedAt' => $date,
                 'id' => 1,
             ),
         );

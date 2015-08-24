@@ -39,8 +39,8 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
     function let(
         ServiceRegistryInterface $readerRegistry,
         FormFactoryInterface $factory,
-        ReaderInterface $reader)
-    {
+        ReaderInterface $reader
+    ) {
         $readerRegistry->get('test_reader')->willReturn($reader);
         $readerRegistry->all()->willReturn(array($reader));
         $reader->getType()->willReturn('test_type');
@@ -52,8 +52,8 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
         ExportProfileInterface $exportProfiler,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $exportProfiler->getReader()->willReturn('test_reader');
         $exportProfiler->getReaderConfiguration()->willReturn(array());
 
@@ -73,8 +73,8 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
         $factory,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $data = array('reader' => 'test_reader');
 
         $event->getData()->willReturn($data);
@@ -95,8 +95,8 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
         ExportProfileInterface $exportProfiler,
         FormEvent $event,
         Form $form,
-        Form $field)
-    {
+        Form $field
+    ) {
         $exportProfiler->getReader()->willReturn();
         $exportProfiler->getReaderConfiguration()->willReturn(array());
 

@@ -27,7 +27,7 @@ class DateTimeFormatValidator extends ConstraintValidator
         $date = new \DateTime();
         $formattedDate = $date->format($dateTimeFormat);
 
-        if ($date != date_create_from_format($dateTimeFormat, $formattedDate)) {
+        if ($date != \DateTime::createFromFormat($dateTimeFormat, $formattedDate)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('%format%', $dateTimeFormat)
                 ->addViolation();

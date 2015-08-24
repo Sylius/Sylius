@@ -101,16 +101,14 @@ class BuildReaderFormListener implements EventSubscriberInterface
     {
         $reader = $this->getReader($type);
         $formType = sprintf('sylius_%s_reader', $reader->getType());
-        try {
-            $configurationField = $this->factory->createNamed(
-                'readerConfiguration',
-                $formType,
-                $configuration,
-                array('auto_initialize' => false)
-            );
-        } catch (\InvalidArgumentException $e) {
-            return;
-        }
+
+        $configurationField = $this->factory->createNamed(
+            'readerConfiguration',
+            $formType,
+            $configuration,
+            array('auto_initialize' => false)
+        );
+
         $form->add($configurationField);
     }
 
