@@ -30,7 +30,7 @@ $ sudo easy_install -U Sphinx
 Then run the following command.
 
 ```
-$ bin/build
+$ sphinx-build -b html . build
 ```
 
 Documentation index is `build/index.html`.
