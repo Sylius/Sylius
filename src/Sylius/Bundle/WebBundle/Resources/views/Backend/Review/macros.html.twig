@@ -1,6 +1,6 @@
 {% macro moderation_label(review) %}
 {% spaceless %}
-    {% set statusLabels = { 'new': 'default', 'approved': 'success', 'rejected': 'danger' } %}
+    {% set statusLabels = { 'new': 'default', 'accepted': 'success', 'rejected': 'danger' } %}
     {{ statusLabels[review.status] }}
 {% endspaceless %}
 {% endmacro %}
@@ -40,6 +40,10 @@
                         {{ buttons.show(path('sylius_backend_review_show', {'id': review.id})) }}
                         {{ buttons.edit(path('sylius_backend_review_update', {'id': review.id})) }}
                         {{ buttons.delete(path('sylius_backend_review_delete', {'id': review.id})) }}
+                        {% if review.status == 'new' %}
+                            {{ review_macros.transition(review.id, 'accept', 'info', 'Accept', 'share') }}
+                            {{ review_macros.transition(review.id, 'reject', 'warning', 'Reject', 'remove') }}
+                        {% endif %}
                     </div>
                 </td>
             </tr>
@@ -50,4 +54,13 @@
 {{ alerts.info('There are no reviews. ') }}
 {% endif %}
 
+{% endmacro %}
+
+{% macro transition(reviewId, targetState, buttonStyle, buttonText, buttonIcon) %}
+    <form action="{{ path('sylius_backend_review_update_state', {'id': reviewId, 'transition': targetState}) }}" method="post" style="display: inline">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="btn btn-{{ buttonStyle }}" type="submit">
+            <i class="glyphicon glyphicon-{{ buttonIcon }}"></i> <span>{{ buttonText }}</span>
+        </button>
+    </form>
 {% endmacro %}

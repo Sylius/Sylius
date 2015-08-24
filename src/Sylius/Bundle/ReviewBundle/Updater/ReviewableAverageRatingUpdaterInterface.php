@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\Controller;
+namespace Sylius\Bundle\ReviewBundle\Updater;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewController extends ResourceController
+interface ReviewableAverageRatingUpdaterInterface
 {
     /**
-     * @var string
+     * @param ReviewInterface $review
      */
-    protected $stateMachineGraph = ReviewInterface::REVIEW_STATE_MACHINE_GRAPH;
+    public function update(ReviewInterface $review);
 }

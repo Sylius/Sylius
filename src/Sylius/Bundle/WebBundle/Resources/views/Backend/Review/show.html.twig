@@ -55,4 +55,9 @@
     </tbody>
 </table>
 
+{% if review.status == 'new' %}
+    {{ review_macros.transition(review.id, 'accept', 'info', 'Accept', 'share') }}
+    {{ review_macros.transition(review.id, 'reject', 'warning', 'Reject', 'remove') }}
+{% endif %}
+
 {% endblock %}

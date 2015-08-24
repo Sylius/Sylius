@@ -42,18 +42,8 @@ sylius_backend_review_show:
         _sylius:
             template: SyliusWebBundle:Backend/Review:show.html.twig
 
-sylius_backend_review_approve:
-    pattern: /{id}/approve
-    methods: [GET, PUT, POST]
+sylius_backend_review_update_state:
+    pattern: /update-state/{id}/{transition}
+    methods: [PUT]
     defaults:
-        _controller: sylius.controller.review:approveAction
-        _sylius:
-            redirect: sylius_backend_product_show
-
-sylius_backend_review_deny:
-    pattern: /{id}/deny
-    methods: [GET, PUT, POST]
-    defaults:
-        _controller: sylius.controller.review:denyAction
-        _sylius:
-            redirect: sylius_backend_product_show
+        _controller: sylius.controller.review:updateStateAction

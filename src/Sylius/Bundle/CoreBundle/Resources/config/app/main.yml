@@ -7,6 +7,7 @@ imports:
     - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusReviewBundle/Resources/config/state-machine.yml }
 
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'

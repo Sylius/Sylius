@@ -20,6 +20,10 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ReviewAdminTypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith('dataClass', array('validation_group'));
+    }
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewAdminType');
@@ -88,7 +92,7 @@ class ReviewAdminTypeSpec extends ObjectBehavior
             ->add('status', 'choice', array(
                 'choices' => array(
                     'new'      => 'sylius.form.review.status.new',
-                    'approved' => 'sylius.form.review.status.approved',
+                    'accepted' => 'sylius.form.review.status.accepted',
                     'rejected' => 'sylius.form.review.status.rejected'
                 ),
                 'label' => 'sylius.form.review.status.label'

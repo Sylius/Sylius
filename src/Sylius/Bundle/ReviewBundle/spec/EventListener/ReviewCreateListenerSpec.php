@@ -26,12 +26,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ReviewCreateListenerSpec extends ObjectBehavior
 {
-    function let(
-        AverageRatingCalculatorInterface $averageRatingCalculator,
-        CustomerContextInterface $customerContext,
-        ObjectManager $productManager
-    ) {
-        $this->beConstructedWith($averageRatingCalculator, $customerContext, $productManager);
+    function let(CustomerContextInterface $customerContext)
+    {
+        $this->beConstructedWith($customerContext);
     }
 
     function it_is_initializable()
@@ -73,30 +70,5 @@ class ReviewCreateListenerSpec extends ObjectBehavior
         $customerContext->getCustomer()->shouldNotBeCalled();
 
         $this->controlReviewAuthor($event)->shouldReturn(null);
-    }
-
-    function it_calculates_average_rating_for_newly_added_review_product(
-        $averageRatingCalculator,
-        $productManager,
-        GenericEvent $event,
-        ReviewInterface $review,
-        Reviewable $reviewSubject
-    ) {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $review->getProduct()->willReturn($reviewSubject)->shouldBeCalled();
-
-        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5)->shouldBeCalled();
-
-        $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
-        $productManager->flush($reviewSubject)->shouldBeCalled();
-
-        $this->calculateProductAverageRating($event);
-    }
-
-    function it_throws_exception_if_event_object_is_not_review_while_calculating_average_product_rating(GenericEvent $event)
-    {
-        $event->getSubject()->willReturn('badObject')->shouldBeCalled();
-
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('calculateProductAverageRating', array($event));
     }
 }

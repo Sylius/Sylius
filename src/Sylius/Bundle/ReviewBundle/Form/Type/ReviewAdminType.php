@@ -40,7 +40,7 @@ class ReviewAdminType extends ReviewType
             ->add('status', 'choice', array(
                 'choices' => array(
                     ReviewInterface::STATUS_NEW      => 'sylius.form.review.status.new',
-                    ReviewInterface::STATUS_APPROVED => 'sylius.form.review.status.approved',
+                    ReviewInterface::STATUS_ACCEPTED => 'sylius.form.review.status.accepted',
                     ReviewInterface::STATUS_REJECTED => 'sylius.form.review.status.rejected'
                 ),
                 'label' => 'sylius.form.review.status.label'

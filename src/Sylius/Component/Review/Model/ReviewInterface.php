@@ -21,8 +21,10 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ReviewInterface extends TimestampableInterface
 {
+    const REVIEW_STATE_MACHINE_GRAPH = 'sylius_review';
+
     const STATUS_NEW      = 'new';
-    const STATUS_APPROVED = 'approved';
+    const STATUS_ACCEPTED = 'accepted';
     const STATUS_REJECTED = 'rejected';
 
     /**

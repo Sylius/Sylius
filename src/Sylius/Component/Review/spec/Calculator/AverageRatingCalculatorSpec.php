@@ -46,6 +46,10 @@ class AverageRatingCalculatorSpec extends ObjectBehavior
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(true, true, false)->shouldBeCalled();
         $iterator->current()->willReturn($review1, $review2);
+
+        $review1->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
+        $review2->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
+
         $iterator->next()->shouldBeCalled();
 
         $review1->getRating()->willReturn(4);

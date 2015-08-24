@@ -21,6 +21,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ReviewTypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith('dataClass', array('validation_group'));
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType');
@@ -28,15 +33,15 @@ class ReviewTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
             ->add('rating', 'choice', array(
-                'choices' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-                'label' => 'sylius.form.review.rating',
+                'choices'  => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+                'label'    => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ))
@@ -46,7 +51,7 @@ class ReviewTypeSpec extends ObjectBehavior
 
         $builder
             ->add('author', 'text', array(
-                'label' => 'sylius.form.review.author',
+                'label'    => 'sylius.form.review.author',
                 'required' => false,
             ))
             ->willReturn($builder)
@@ -77,7 +82,12 @@ class ReviewTypeSpec extends ObjectBehavior
 
     function it_sets_default_options(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('rating_steps' => 5))->shouldBeCalled();
+        $resolver->setDefaults(
+            array(
+                'rating_steps'      => 5,
+                'validation_groups' => array('validation_group'),
+            )
+        )->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

@@ -29,28 +29,11 @@ class ReviewCreateListener
     private $customerContext;
 
     /**
-     * @var AverageRatingCalculatorInterface
+     * @param CustomerContextInterface $customerContext
      */
-    private $averageRatingCalculator;
-
-    /**
-     * @var ObjectManager
-     */
-    private $productManager;
-
-    /**
-     * @param AverageRatingCalculatorInterface $averageRatingCalculator
-     * @param CustomerContextInterface         $customerContext
-     * @param ObjectManager                    $productManager
-     */
-    public function __construct(
-        AverageRatingCalculatorInterface $averageRatingCalculator,
-        CustomerContextInterface $customerContext,
-        ObjectManager $productManager
-    ) {
+    public function __construct(CustomerContextInterface $customerContext)
+    {
         $this->customerContext = $customerContext;
-        $this->averageRatingCalculator = $averageRatingCalculator;
-        $this->productManager = $productManager;
     }
 
     /**
@@ -67,21 +50,5 @@ class ReviewCreateListener
         }
 
         $subject->setAuthor($this->customerContext->getCustomer());
-    }
-
-    /**
-     * @param GenericEvent $event
-     */
-    public function calculateProductAverageRating(GenericEvent $event)
-    {
-        if (!($subject = $event->getSubject()) instanceof ReviewInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Review\Model\ReviewInterface');
-        }
-
-        $reviewSubject = $subject->getProduct();
-        $averagePrice = $this->averageRatingCalculator->calculate($reviewSubject);
-
-        $reviewSubject->setAverageRating($averagePrice);
-        $this->productManager->flush($reviewSubject);
     }
 }
