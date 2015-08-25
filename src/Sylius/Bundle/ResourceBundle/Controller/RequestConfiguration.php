@@ -40,8 +40,9 @@ class RequestConfiguration
     protected $parameters;
 
     /**
-     * @param string $templatingEngine
-     * @param array $defaultParameters
+     * @param ResourceMetadataInterface $metadata
+     * @param Request $request
+     * @param Parameters $parameters
      */
     public function __construct(
         ResourceMetadataInterface $metadata,
@@ -75,11 +76,7 @@ class RequestConfiguration
      */
     public function getDefaultTemplate($name)
     {
-        if (!$this->metadata->hasParameter('templates')) {
-            return null;
-        }
-
-        return sprintf('%s:%s.%s', $this->metadata->getParameter('templates') ?: ':', $name, 'twig');
+        return sprintf('%s:%s.%s', $this->metadata->getParameter('templates', ':'), $name, 'twig');
     }
 
     /**

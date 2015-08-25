@@ -161,16 +161,18 @@ class ResourceController extends ContainerAware
         $this->eventDispatcher->dispatchResourceEvent(ResourceEvents::SHOW, $resource);
 
         $view = View::create($resource)
-            ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
             ->setTemplateVar($this->metadata->getResourceName())
         ;
 
         if ($configuration->isHtmlRequest()) {
-            $view->setData(array(
-                'metadata'                         => $this->metadata,
-                'resource'                         => $resource,
-                $this->metadata->getResourceName() => $resource,
-            ));
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
+                ->setData(array(
+                    'metadata'                         => $this->metadata,
+                    'resource'                         => $resource,
+                    $this->metadata->getResourceName() => $resource,
+                ))
+            ;
         }
 
         return $this->handleView($configuration, $view);
@@ -210,16 +212,18 @@ class ResourceController extends ContainerAware
         }
 
         $view = View::create($resources)
-            ->setTemplate($configuration->getTemplate('index.html'))
             ->setTemplateVar($this->metadata->getPluralResourceName())
         ;
 
-        if (!$configuration->isHtmlRequest()) {
-            $view->setData(array(
-                'metadata'                               => $this->metadata,
-                'resources'                              => $resources,
-                $this->metadata->getPluralResourceName() => $resources,
-            ));
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX.'.html'))
+                ->setData(array(
+                    'metadata'                               => $this->metadata,
+                    'resources'                              => $resources,
+                    $this->metadata->getPluralResourceName() => $resources,
+                ))
+            ;
         }
 
         return $this->handleView($configuration, $view);
@@ -265,7 +269,7 @@ class ResourceController extends ContainerAware
         }
 
         $view = View::create()
-            ->setTemplate($configuration->getTemplate('create.html'))
+            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE.'.html'))
             ->setData(array(
                 'metadata'                         => $this->metadata,
                 'resource'                         => $resource,
@@ -317,7 +321,7 @@ class ResourceController extends ContainerAware
         }
 
         $view = View::create()
-            ->setTemplate($configuration->getTemplate('create.html'))
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'))
             ->setData(array(
                 'metadata'                         => $this->metadata,
                 'resource'                         => $resource,
