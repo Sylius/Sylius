@@ -15,7 +15,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Product\Model\Product" table="sylius_product">
-        <id name="id" column="id" type="integer">
+    <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
@@ -54,6 +54,12 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+
+        <one-to-many field="reviews" target-entity="Sylius\Component\Product\Model\ProductReview" mapped-by="reviewSubject">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

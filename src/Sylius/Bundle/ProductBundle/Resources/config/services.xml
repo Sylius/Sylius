@@ -28,6 +28,7 @@
     </parameters>
 
     <services>
+        <!--Forms-->
         <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.validation_group.product%</argument>
@@ -43,6 +44,15 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product_translation" />
         </service>
+        <service id="sylius.form.type.product_review" class="Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="form.type" alias="sylius_product_review" />
+        </service>
+        <service id="sylius.form.type.product_review_admin" class="Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="form.type" alias="sylius_product_review_admin" />
+        </service>
+
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />

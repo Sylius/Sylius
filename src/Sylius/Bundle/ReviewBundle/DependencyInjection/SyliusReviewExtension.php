@@ -47,7 +47,7 @@ class SyliusReviewExtension extends AbstractResourceExtension
             $convertedConfig = array_merge($convertedConfig, $this->formatClassesConfiguration($parameters, $subject));
             $config['validation_groups'] = $this->modifyValidationGroups($config['validation_groups'], $subject);
         }
-        $container->setParameter('sylius.association.subjects', $subjects);
+        $container->setParameter('sylius.review.subjects', $subjects);
         $config['classes'] = $convertedConfig;
 
         $convertedConfig = array();

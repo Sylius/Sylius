@@ -40,8 +40,8 @@ Feature: Products
             | Black T-Shirt    |
             | Doctrine T-Shirt |
         And there are following reviews:
-            | title       | rating | comment               | author      | product         |
-            | Lorem ipsum | 5      | Lorem ipsum dolor sit | bar@foo.com | Symfony T-Shirt |
+            | title       | rating | comment               | author      | product         | subject type |
+            | Lorem ipsum | 5      | Lorem ipsum dolor sit | bar@foo.com | Symfony T-Shirt | product      |
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
@@ -97,4 +97,4 @@ Feature: Products
         And I select the "5" radio button
         And I press "Submit"
         Then I should see "Review has been successfully created."
-        And I should see 2 reviews on the list
+        And I should see 2 reviews on the reviews list

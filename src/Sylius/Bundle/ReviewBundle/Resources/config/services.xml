@@ -15,14 +15,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!--Forms-->
-        <service id="sylius.form.type.review" class="Sylius\Bundle\ReviewBundle\Form\Type\ReviewType">
-            <argument>%sylius.model.review.class%</argument>
-            <tag name="form.type" alias="sylius_review" />
-        </service>
-        <service id="sylius.form.type.review_admin" class="Sylius\Bundle\ReviewBundle\Form\Type\ReviewAdminType">
-            <argument>%sylius.model.review.class%</argument>
-            <tag name="form.type" alias="sylius_review_admin" />
+        <!--Subscribers-->
+        <service id="sylius.event_subscriber.review.load_metadata" class="Sylius\Bundle\ReviewBundle\EventListener\LoadMetadataSubscriber">
+            <argument>%sylius.review.subjects%</argument>
+            <tag name="doctrine.event_subscriber" />
         </service>
 
         <!--Validators-->
@@ -34,7 +30,7 @@
         <!--Listeners-->
         <service id="sylius.listener.review_create" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
-            <tag name="kernel.event_listener" event="sylius.review.pre_create" method="ensureReviewHasAuthor" />
+            <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
         </service>
 
         <service id="sylius.review.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />

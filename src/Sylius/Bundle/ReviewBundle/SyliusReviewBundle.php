@@ -32,16 +32,6 @@ class SyliusReviewBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\Review\Model\ReviewInterface' => 'sylius.model.review.class',
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Review\Model';

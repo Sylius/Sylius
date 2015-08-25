@@ -1,49 +1,50 @@
-sylius_backend_review_index:
+sylius_backend_product_review_index:
     pattern: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.review:indexAction
+        _controller: sylius.controller.product_review:indexAction
         _sylius:
             template: SyliusWebBundle:Backend/Review:index.html.twig
 
-sylius_backend_review_create:
+sylius_backend_product_review_create:
     pattern: /new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.review:createAction
+        _controller: sylius.controller.product_review:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Review:create.html.twig
-            redirect: sylius_backend_review_show
-            form: sylius_review_admin
+            redirect: sylius_backend_product_review_show
+            form: sylius_product_review_admin
 
-sylius_backend_review_update:
+sylius_backend_product_review_update:
     pattern: /{id}/edit
     methods: [GET, PUT, POST]
     defaults:
-        _controller: sylius.controller.review:updateAction
+        _controller: sylius.controller.product_review:updateAction
         _sylius:
-            form: sylius_review_admin
+            form: sylius_product_review_admin
             template: SyliusWebBundle:Backend/Review:update.html.twig
-            redirect: sylius_backend_review_show
+            redirect: sylius_backend_product_review_show
 
-sylius_backend_review_delete:
+sylius_backend_product_review_delete:
     pattern: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.review:deleteAction
+        _controller: sylius.controller.product_review:deleteAction
         _sylius:
-            redirect: sylius_backend_review_index
+            redirect: sylius_backend_product_review_index
 
-sylius_backend_review_show:
+sylius_backend_product_review_show:
     pattern: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.review:showAction
+        _controller: sylius.controller.product_review:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Review:show.html.twig
 
-sylius_backend_review_update_state:
+sylius_backend_product_review_update_state:
     pattern: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.review:updateStateAction
+        _controller: sylius.controller.product_review:updateStateAction
+        graph: sylius_product_review

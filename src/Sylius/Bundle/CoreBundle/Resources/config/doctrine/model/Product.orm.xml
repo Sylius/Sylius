@@ -58,12 +58,6 @@
             </join-table>
         </many-to-many>
 
-        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="reviewSubject">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
-
         <gedmo:loggable />
     </mapped-superclass>
 

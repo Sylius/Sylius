@@ -619,7 +619,7 @@ sylius:
         title: Title
         update_header: Editing redirect route
     review:
-        create: Create review
+        create: New review
         manage: Manage reviews
         no_reviews: There are no reviews.
     shipment:
