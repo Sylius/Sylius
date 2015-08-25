@@ -1,6 +1,6 @@
 winzou_state_machine:
     sylius_review:
-        class:         %sylius.model.review.class%
+        class:         # put here your review class
         property_path: status
         graph:         sylius_review
         state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine

@@ -14,14 +14,14 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_review_create'), 'sylius.review.create') }}
-        {{ buttons.manage(path('sylius_backend_review_index'), 'sylius.review.manage') }}
+        {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.review.create') }}
+        {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.review.manage') }}
     </div>
     <h1><i class="icon-th"></i> Reviews</h1>
 </div>
 
-{{ pagination(reviews) }}
-{{ list(reviews) }}
-{{ pagination(reviews) }}
+{{ pagination(product_reviews) }}
+{{ list(product_reviews) }}
+{{ pagination(product_reviews) }}
 
 {% endblock %}

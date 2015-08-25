@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\Form\Type;
+namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -19,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewAdminType extends ReviewType
+class ProductReviewAdminType extends ProductReviewType
 {
     /**
      * {@inheritdoc}
@@ -36,14 +35,6 @@ class ReviewAdminType extends ReviewType
                 'class'    => 'Sylius\Component\Core\Model\Customer',
                 'label'    => 'sylius.form.review.author',
                 'property' => 'email',
-            ))
-            ->add('status', 'choice', array(
-                'choices' => array(
-                    ReviewInterface::STATUS_NEW      => 'sylius.form.review.status.new',
-                    ReviewInterface::STATUS_ACCEPTED => 'sylius.form.review.status.accepted',
-                    ReviewInterface::STATUS_REJECTED => 'sylius.form.review.status.rejected'
-                ),
-                'label'   => 'sylius.form.review.status.label'
             ))
             ->add('reviewSubject', 'entity', array(
                 'class'    => 'Sylius\Component\Core\Model\Product',
@@ -70,6 +61,6 @@ class ReviewAdminType extends ReviewType
      */
     public function getName()
     {
-        return 'sylius_review_admin';
+        return 'sylius_product_review_admin';
     }
 }

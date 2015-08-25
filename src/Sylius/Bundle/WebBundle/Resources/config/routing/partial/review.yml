@@ -4,7 +4,7 @@
 sylius_partial_product_review_list:
     pattern: /{slug}
     defaults:
-        _controller: sylius.controller.frontend.review:indexAction
+        _controller: sylius.controller.frontend.product_review:indexAction
         _sylius:
             paginate: false
             limit: $limit
@@ -19,7 +19,7 @@ sylius_partial_product_review_form:
     pattern: /{slug}/new
     methods: [GET]
     defaults:
-        _controller: sylius.controller.frontend.review:createAction
+        _controller: sylius.controller.frontend.product_review:createAction
         _sylius:
             template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
             permission: false

@@ -654,12 +654,12 @@ sylius_rbac:
         sylius.settings.sylius_security: Manage security settings
         sylius.settings.sylius_taxation: Manage taxation settings
 
-        sylius.manage.review: Manage reviews
-        sylius.review.show: Show review
-        sylius.review.index: List reviews
-        sylius.review.create: Create review
-        sylius.review.update: Edit review
-        sylius.review.delete: Delete review
+        sylius.manage.product_review: Manage product reviews
+        sylius.product_review.show: Show product review
+        sylius.product_review.index: List product reviews
+        sylius.product_review.create: Create product review
+        sylius.product_review.update: Edit product review
+        sylius.product_review.delete: Delete product review
 
         sylius.catalog: Manage products catalog
         sylius.sales: Manage sales
@@ -712,7 +712,7 @@ sylius_rbac:
         sylius.manage.slideshow: [sylius.slideshow.show, sylius.slideshow.index, sylius.slideshow.create, sylius.slideshow.update, sylius.slideshow.delete]
         sylius.manage.email: [sylius.email.show, sylius.email.index, sylius.email.create, sylius.email.update, sylius.email.delete]
         sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
-        sylius.manage.review: [sylius.review.show, sylius.review.index, sylius.review.create, sylius.review.update, sylius.review.delete]
+        sylius.manage.product_review: [sylius.product_review.show, sylius.product_review.index, sylius.product_review.create, sylius.product_review.update, sylius.product_review.delete]
         sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.sylius_general, sylius.settings.sylius_security, sylius.settings.sylius_taxation]
@@ -811,8 +811,11 @@ sylius_user:
 sylius_review:
     classes:
         product:
-            subject: Sylius\Component\Product\Model\Product
+            subject: Sylius\Component\Core\Model\Product
             review:
                 model: Sylius\Component\Product\Model\ProductReview
+                form:
+                    default: Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType
+                    admin: Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType
             reviewer:
                 model: Sylius\Component\Core\Model\Customer

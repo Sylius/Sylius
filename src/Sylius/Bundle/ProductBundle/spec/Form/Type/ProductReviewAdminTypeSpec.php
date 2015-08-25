@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
+namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewAdminTypeSpec extends ObjectBehavior
+class ProductReviewAdminTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,12 +26,12 @@ class ReviewAdminTypeSpec extends ObjectBehavior
     }
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewAdminType');
+        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType');
     }
 
     function it_extends_review_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType');
+        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -89,19 +89,6 @@ class ReviewAdminTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('status', 'choice', array(
-                'choices' => array(
-                    'new'      => 'sylius.form.review.status.new',
-                    'accepted' => 'sylius.form.review.status.accepted',
-                    'rejected' => 'sylius.form.review.status.rejected'
-                ),
-                'label' => 'sylius.form.review.status.label'
-            ))
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
             ->add('product', 'entity', array(
                 'class'    => 'Sylius\Component\Review\Model\ReviewableInterface',
                 'label'    => 'sylius.form.review.product',
@@ -116,6 +103,6 @@ class ReviewAdminTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_review_admin');
+        $this->getName()->shouldReturn('sylius_product_review_admin');
     }
 }

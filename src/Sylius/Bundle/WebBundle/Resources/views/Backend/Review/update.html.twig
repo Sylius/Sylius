@@ -5,8 +5,8 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.review'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_review_index') }}">Reviews</a></li>
-    <li>{{ review.title }}</li>
+    <li><a href="{{ path('sylius_backend_product_review_index') }}">Reviews</a></li>
+    <li>{{ product_review.title }}</li>
     <li>Edit</li>
 </ol>
 {% endblock %}
@@ -18,7 +18,7 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_review_update', {'id': review.id}) }}" method="post" class="form-horizontal" novalidate>
+<form action="{{ path('sylius_backend_product_review_update', {'id': product_review.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/Review:_form.html.twig' %}
     {{ update() }}

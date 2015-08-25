@@ -387,7 +387,7 @@ class BackendMenuBuilder extends MenuBuilder
         ;
 
         $child->addChild('reviews', array(
-            'route' => 'sylius_backend_review_index',
+            'route' => 'sylius_backend_product_review_index',
             'labelAttributes' => array('icon' => 'icon-user'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.reviews', $section)));
     }

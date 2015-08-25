@@ -43,7 +43,9 @@ class ReviewContext extends DefaultContext
      */
     private function createReview(array $reviewHash)
     {
-        $reviewRepository = $this->getRepository('review');
+        $subjectType = (isset($reviewHash['subject type'])) ? $reviewHash['subject type'].'_' : '';
+
+        $reviewRepository = $this->getRepository($subjectType.'review');
 
         $review = $reviewRepository->createNew();
 
@@ -57,7 +59,7 @@ class ReviewContext extends DefaultContext
         $author = $this->getRepository('customer')->findOneBy(array('email' => $reviewHash['author']));
         $review->setAuthor($author);
 
-        $review->setStatus(ReviewInterface::STATUS_ACCEPTED);
+        $review->setStatus((isset($reviewHash['status']) && '' !== $reviewHash['status']) ? $reviewHash['status'] : ReviewInterface::STATUS_ACCEPTED);
 
         return $review;
     }

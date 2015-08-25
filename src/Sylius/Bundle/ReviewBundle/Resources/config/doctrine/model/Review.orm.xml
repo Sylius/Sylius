@@ -28,15 +28,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <many-to-one field="author" target-entity="Sylius\Component\Review\Model\ReviewAuthorInterface">
-            <cascade>
-                <cascade-persist />
-            </cascade>
-            <join-column name="author_id" referenced-column-name="id" />
-        </many-to-one>
-        <many-to-one field="reviewSubject" target-entity="Sylius\Component\Review\Model\ReviewableInterface" inversed-by="reviews">
-            <join-column name="review_subject_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>
