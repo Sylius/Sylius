@@ -11,11 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Factory;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,11 +27,28 @@ class ResourceFormFactory implements ResourceFormFactoryInterface
     private $formFactory;
 
     /**
-     * @param FormFactoryInterface $formFactory
+     * @var DefaultResourceFormFactoryInterface
      */
-    public function __construct(FormFactoryInterface $formFactory)
-    {
+    private $defaultResourceFormFactory;
+
+    /**
+     * @var FormRegistryInterface
+     */
+    private $formRegistry;
+
+    /**
+     * @param FormFactoryInterface                $formFactory
+     * @param DefaultResourceFormFactoryInterface $defaultResourceFormFactory
+     * @param FormRegistryInterface               $formRegistry
+     */
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        DefaultResourceFormFactoryInterface $defaultResourceFormFactory,
+        FormRegistryInterface $formRegistry
+    ) {
         $this->formFactory = $formFactory;
+        $this->defaultResourceFormFactory = $defaultResourceFormFactory;
+        $this->formRegistry = $formRegistry;
     }
 
     /**
@@ -44,6 +60,8 @@ class ResourceFormFactory implements ResourceFormFactoryInterface
 
         if (strpos($type, '\\') !== false) { // Full class name specified?
             $type = new $type();
+        } elseif (!$this->formRegistry->hasType($type)) {
+            return $this->defaultResourceFormFactory->create($configuration, $metadata);
         }
 
         if (!$configuration->isHtmlRequest()) {

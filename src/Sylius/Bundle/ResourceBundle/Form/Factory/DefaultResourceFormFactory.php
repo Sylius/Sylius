@@ -9,11 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Form;
+namespace Sylius\Bundle\ResourceBundle\Form\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Generates a form class based on a Doctrine entity.
@@ -22,24 +25,40 @@ use Symfony\Component\Form\FormFactoryInterface;
  * @author Hugo Hamon <hugo.hamon@sensio.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DefaultFormFactory
+class DefaultResourceFormFactory implements DefaultResourceFormFactoryInterface
 {
+    /**
+     * @var FormFactoryInterface
+     */
     private $formFactory;
 
-    public function __construct(FormFactoryInterface $formFactory)
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @param FormFactoryInterface $formFactory
+     * @param EntityManager        $entityManager
+     */
+    public function __construct(FormFactoryInterface $formFactory, EntityManager $entityManager)
     {
         $this->formFactory = $formFactory;
+        $this->entityManager = $entityManager;
     }
 
-    public function create($resource, EntityManager $entityManager)
+    /**
+     * {@inheritdoc}
+     */
+    public function create(RequestConfiguration $requestConfiguration, ResourceMetadataInterface $resourceMetadata)
     {
-        $metadata = $entityManager->getClassMetadata(get_class($resource));
+        $metadata = $this->entityManager->getClassMetadata($resourceMetadata->getClass('model'));
 
         if (count($metadata->identifier) > 1) {
             throw new \RuntimeException('The default form factory does not support entity classes with multiple primary keys.');
         }
 
-        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, array('csrf_protection' => false));
+        $builder = $this->getFormBuilder($requestConfiguration->isHtmlRequest(), $resourceMetadata->getClass('model'));
 
         foreach ($this->getFieldsFromMetadata($metadata) as $field => $type) {
             $options = array();
@@ -86,5 +105,20 @@ class DefaultFormFactory
         }
 
         return $fieldsMapping;
+    }
+
+    /**
+     * @param bool   $isHtmlRequest
+     * @param string $modelClassName
+     *
+     * @return FormBuilderInterface
+     */
+    private function getFormBuilder($isHtmlRequest, $modelClassName)
+    {
+        if ($isHtmlRequest) {
+            return $this->formFactory->createBuilder('form', null, array('data_class' => $modelClassName));
+        }
+
+        return $this->formFactory->createNamedBuilder('', 'form', null, array('data_class' => $modelClassName, 'csrf_protection' => false));
     }
 }

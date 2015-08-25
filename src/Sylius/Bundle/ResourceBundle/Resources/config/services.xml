@@ -29,6 +29,7 @@
         <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
+        <parameter key="sylius.controller.default_form_factory.class">Sylius\Bundle\ResourceBundle\Form\Factory\DefaultResourceFormFactory</parameter>
         <parameter key="sylius.controller.form_factory.class">Sylius\Bundle\ResourceBundle\Form\Factory\ResourceFormFactory</parameter>
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
@@ -66,8 +67,14 @@
             <argument type="service" id="sylius.expression_language" />
         </service>
         <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
+        <service id="sylius.controller.default_form_factory" class="%sylius.controller.default_form_factory.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
         <service id="sylius.controller.form_factory" class="%sylius.controller.form_factory.class%">
             <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.controller.default_form_factory" />
+            <argument type="service" id="form.registry" />
         </service>
 
         <service id="sylius.expression_language" class="%sylius.expression_language.class%">
