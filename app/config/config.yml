@@ -69,6 +69,9 @@ doctrine:
                 dql:
                     string_functions:
                         MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
+        resolve_target_entities:
+            Sylius\Component\Review\Model\ReviewAuthorInterface: Sylius\Component\Core\Model\Customer
+            Sylius\Component\Review\Model\ReviewableInterface: Sylius\Component\Core\Model\Product
 
 doctrine_phpcr:
     session:

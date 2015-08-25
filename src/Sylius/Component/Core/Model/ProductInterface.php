@@ -16,7 +16,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
-use Sylius\Component\Review\Model\Reviewable;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
@@ -29,7 +29,7 @@ interface ProductInterface extends
     TaxonsAwareInterface,
     ChannelsAwareInterface,
     MetadataSubjectInterface,
-    Reviewable
+    ReviewableInterface
 {
     /*
      * Variant selection methods.

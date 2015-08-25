@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueCustomerEmail;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\ExecutionContext;
  */
 class UniqueCustomerEmailValidatorSpec extends ObjectBehavior
 {
-    function let(EntityRepository $customerRepository, ExecutionContext $context)
+    function let(ObjectRepository $customerRepository, ExecutionContext $context)
     {
         $this->beConstructedWith($customerRepository);
         $this->initialize($context);

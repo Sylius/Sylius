@@ -39,7 +39,7 @@ class ReviewCreateListener
     /**
      * @param GenericEvent $event
      */
-    public function controlReviewAuthor(GenericEvent $event)
+    public function ensureReviewHasAuthor(GenericEvent $event)
     {
         if (!($subject = $event->getSubject()) instanceof ReviewInterface) {
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Review\Model\ReviewInterface');

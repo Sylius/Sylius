@@ -809,7 +809,10 @@ sylius_user:
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
 
 sylius_review:
-    driver: doctrine/orm
     classes:
-        review:
-            model: Sylius\Component\Review\Model\Review
+        product:
+            subject: Sylius\Component\Product\Model\Product
+            review:
+                model: Sylius\Component\Product\Model\ProductReview
+            reviewer:
+                model: Sylius\Component\Core\Model\Customer

@@ -33,8 +33,8 @@ class ReviewAdminType extends ReviewType
         $builder
             ->remove('author')
             ->add('author', 'entity', array(
-                'class' => 'Sylius\Component\Core\Model\Customer',
-                'label' => 'sylius.form.review.author',
+                'class'    => 'Sylius\Component\Core\Model\Customer',
+                'label'    => 'sylius.form.review.author',
                 'property' => 'email',
             ))
             ->add('status', 'choice', array(
@@ -43,9 +43,9 @@ class ReviewAdminType extends ReviewType
                     ReviewInterface::STATUS_ACCEPTED => 'sylius.form.review.status.accepted',
                     ReviewInterface::STATUS_REJECTED => 'sylius.form.review.status.rejected'
                 ),
-                'label' => 'sylius.form.review.status.label'
+                'label'   => 'sylius.form.review.status.label'
             ))
-            ->add('product', 'entity', array(
+            ->add('reviewSubject', 'entity', array(
                 'class'    => 'Sylius\Component\Core\Model\Product',
                 'label'    => 'sylius.form.review.product',
                 'property' => 'name',

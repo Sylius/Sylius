@@ -13,17 +13,13 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Review;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * ProductReview controller.
- *
  * @author Justin Hilles <justin@1011i.com>
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -38,7 +34,7 @@ class ProductReviewController extends ResourceController
         $product = $this->findProductOr404();
 
         $criteria = $request->query->get('criteria', array());
-        $criteria['product'] = $product;
+        $criteria['reviewSubject'] = $product;
         $request->query->set('criteria', $criteria);
 
         return parent::indexAction($request);
@@ -91,7 +87,7 @@ class ProductReviewController extends ResourceController
     public function createNew()
     {
         $review = parent::createNew();
-        $review->setProduct($this->findProductOr404());
+        $review->setReviewSubject($this->findProductOr404());
 
         return $review;
     }

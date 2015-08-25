@@ -57,7 +57,7 @@
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="product">
+        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="reviewSubject">
             <cascade>
                 <cascade-all/>
             </cascade>

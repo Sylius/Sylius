@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Review\Calculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Review\Model\Reviewable;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -35,7 +35,7 @@ class AverageRatingCalculatorSpec extends ObjectBehavior
     function it_calculates_average_price(
         ArrayCollection $reviews,
         \Iterator $iterator,
-        Reviewable $reviewable,
+        ReviewableInterface $reviewable,
         ReviewInterface $review1,
         ReviewInterface $review2
     ) {
@@ -58,7 +58,7 @@ class AverageRatingCalculatorSpec extends ObjectBehavior
         $this->calculate($reviewable)->shouldReturn(4.5);
     }
 
-    function it_returns_zero_if_given_reviewable_object_has_no_reviews(Reviewable $reviewable)
+    function it_returns_zero_if_given_reviewable_object_has_no_reviews(ReviewableInterface $reviewable)
     {
         $reviewable->getReviews()->willReturn(array())->shouldBeCalled();
 

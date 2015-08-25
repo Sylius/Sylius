@@ -16,17 +16,17 @@ use Doctrine\Common\Collections\Collection;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface Reviewable
+interface ReviewableInterface
 {
+    /**
+     * @return string
+     */
+    public function getName();
+
     /**
      * @return Collection|ReviewInterface[]
      */
     public function getReviews();
-
-    /**
-     * @param Collection $reviews
-     */
-    public function setReviews(Collection $reviews);
 
     /**
      * @param ReviewInterface $review

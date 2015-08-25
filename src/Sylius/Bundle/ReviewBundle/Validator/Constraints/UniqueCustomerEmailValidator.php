@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -26,9 +27,9 @@ class UniqueCustomerEmailValidator extends ConstraintValidator
     private $customerRepository;
 
     /**
-     * @param EntityRepository $customerRepository
+     * @param ObjectRepository $customerRepository
      */
-    public function __construct(EntityRepository $customerRepository)
+    public function __construct(ObjectRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }

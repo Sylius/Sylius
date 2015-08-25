@@ -45,7 +45,7 @@ class ReviewableAverageRatingUpdater implements ReviewableAverageRatingUpdaterIn
      */
     public function update(ReviewInterface $review)
     {
-        $reviewSubject = $review->getProduct();
+        $reviewSubject = $review->getReviewSubject();
         $averageRating = $this->averageRatingCalculator->calculate($reviewSubject);
 
         $reviewSubject->setAverageRating($averageRating);

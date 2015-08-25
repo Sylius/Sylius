@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 

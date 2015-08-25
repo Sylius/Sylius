@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
-use Sylius\Component\Review\Model\Reviewable;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -48,14 +48,14 @@ class ReviewCreateListenerSpec extends ObjectBehavior
 
         $review->setAuthor($customer)->shouldBeCalled();
 
-        $this->controlReviewAuthor($event);
+        $this->ensureReviewHasAuthor($event);
     }
 
     function it_throws_exception_if_event_object_is_not_review_while_controlling_author(GenericEvent $event)
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('controlReviewAuthor', array($event));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('ensureReviewHasAuthor', array($event));
     }
 
     function it_does_nothing_if_review_already_has_author(
@@ -69,6 +69,6 @@ class ReviewCreateListenerSpec extends ObjectBehavior
 
         $customerContext->getCustomer()->shouldNotBeCalled();
 
-        $this->controlReviewAuthor($event)->shouldReturn(null);
+        $this->ensureReviewHasAuthor($event);
     }
 }

@@ -20,7 +20,7 @@
         </id>
         <field name="title" type="string" column="title"/>
         <field name="rating" type="integer" column="rating"/>
-        <field name="comment" type="text" column="comment"/>
+        <field name="comment" type="text" column="comment" nullable="true" />
         <field name="status" type="string" column="status" length="255"/>
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -28,14 +28,14 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <many-to-one field="author" target-entity="Sylius\Component\User\Model\CustomerInterface">
+        <many-to-one field="author" target-entity="Sylius\Component\Review\Model\ReviewAuthorInterface">
             <cascade>
                 <cascade-persist />
             </cascade>
             <join-column name="author_id" referenced-column-name="id" />
         </many-to-one>
-        <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="reviews">
-            <join-column name="product_id" referenced-column-name="id" nullable="true" />
+        <many-to-one field="reviewSubject" target-entity="Sylius\Component\Review\Model\ReviewableInterface" inversed-by="reviews">
+            <join-column name="review_subject_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>
 

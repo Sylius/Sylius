@@ -42,14 +42,6 @@
                 </option>
             </constraint>
         </property>
-        <property name="comment">
-            <constraint name="NotBlank">
-                <option name="message">sylius.review.comment.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
-        </property>
         <constraint name="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueCustomerEmail" >
             <option name="groups">sylius_review</option>
         </constraint>

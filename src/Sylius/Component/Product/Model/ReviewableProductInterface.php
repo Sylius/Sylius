@@ -9,19 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Review\Calculator;
+namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Review\Model\ReviewableInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface AverageRatingCalculatorInterface
+interface ReviewableProductInterface extends ReviewableInterface
 {
-    /**
-     * @param ReviewableInterface $reviewable
-     *
-     * @return float
-     */
-    public function calculate(ReviewableInterface $reviewable);
+
 }
