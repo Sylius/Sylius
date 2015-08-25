@@ -6,5 +6,11 @@ sylius:
             email: Email
             message: Message
             category: Category
+            state:
+                header: Ticket state
+                open: Open
+                pending: Pending
+                resolved: Resolved
+                closed: Closed
         support_category:
             title: Title

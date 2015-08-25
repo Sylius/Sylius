@@ -1056,6 +1056,13 @@ sylius:
         email: Email
         message: Message
         category: Category
+        state:
+            header: State
+            open: Open
+            pending: Pending
+            resolved: Resolved
+            closed: Closed
+        created_at: Created at
         index_header: Support tickets
         no_results: There are no support tickets to display.
         update_header: Editing support ticket

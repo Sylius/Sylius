@@ -87,7 +87,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Support\Model\SupportTicket')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\SupportBundle\Controller\TicketController')->end()
                                 ->scalarNode('repository')->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()

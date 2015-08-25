@@ -56,6 +56,11 @@ class SupportTicket implements SupportTicketInterface
      */
     protected $updatedAt;
 
+    /**
+     * @var string
+     */
+    protected $state = TicketInterface::STATE_OPEN;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -179,5 +184,21 @@ class SupportTicket implements SupportTicketInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 }

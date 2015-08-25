@@ -45,3 +45,9 @@ sylius_backend_support_ticket_show:
         _controller: sylius.controller.support_ticket:showAction
         _sylius:
             template: SyliusWebBundle:Backend/SupportTicket:show.html.twig
+
+sylius_backend_support_ticket_update_state:
+    path: /update-state/{id}/{transition}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.support_ticket:updateStateAction

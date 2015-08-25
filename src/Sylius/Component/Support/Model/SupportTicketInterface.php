@@ -18,6 +18,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface SupportTicketInterface extends TimestampableInterface
 {
+    const STATE_OPEN     = 'open';
+    const STATE_PENDING  = 'pending';
+    const STATE_RESOLVED = 'resolved';
+    const STATE_CLOSED   = 'closed';
+
     /**
      * @return integer
      */
@@ -72,4 +77,14 @@ interface SupportTicketInterface extends TimestampableInterface
      * @param SupportCategoryInterface $category
      */
     public function setCategory(SupportCategoryInterface $category = null);
+
+    /**
+     * @return string
+     */
+    public function getState();
+
+    /**
+     * @param string $state
+     */
+    public function setState($state);
 }

@@ -114,4 +114,15 @@ class SupportTicketSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function it_has_open_state_by_default()
+    {
+        $this->getState()->shouldReturn(TicketInterface::STATE_OPEN);
+    }
+
+    function its_state_is_mutable()
+    {
+        $this->setState(TicketInterface::STATE_CLOSED);
+        $this->getState()->shouldReturn(TicketInterface::STATE_CLOSED);
+    }
 }

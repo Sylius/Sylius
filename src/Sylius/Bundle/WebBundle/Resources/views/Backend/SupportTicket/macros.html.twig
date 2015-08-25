@@ -2,6 +2,7 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if support_tickets|length > 0 %}
 <table class="table table-hover">
@@ -11,6 +12,7 @@
             <th>{{ sylius_resource_sort('lastName', 'sylius.support_ticket.lastName'|trans) }}</th>
             <th>{{ sylius_resource_sort('email', 'sylius.support_ticket.email'|trans) }}</th>
             <th>{{ sylius_resource_sort('category', 'sylius.support_ticket.category'|trans) }}</th>
+            <th>{{ sylius_resource_sort('state', 'sylius.support_ticket.state.header'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -21,6 +23,7 @@
             <td>{{ support_ticket.lastName }}</td>
             <td>{{ support_ticket.email }}</td>
             <td>{{ support_ticket.category }}</td>
+            <td>{{ misc.state_label(support_ticket.state, 'support_ticket') }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_support_ticket_show', {'id': support_ticket.id})) }}
