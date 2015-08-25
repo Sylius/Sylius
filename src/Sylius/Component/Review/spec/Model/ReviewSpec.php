@@ -14,6 +14,9 @@ namespace spec\Sylius\Component\Review\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewAuthorInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -48,22 +51,22 @@ class ReviewSpec extends ObjectBehavior
         $this->getComment()->shouldReturn('Lorem ipsum dolor');
     }
 
-    function it_has_author(CustomerInterface $customer)
+    function it_has_author(ReviewAuthorInterface $author)
     {
-        $this->setAuthor($customer);
-        $this->getAuthor()->shouldReturn($customer);
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
     }
 
     function it_has_status()
     {
-        $this->setStatus('new');
-        $this->getStatus()->shouldReturn('new');
+        $this->setStatus(ReviewInterface::STATUS_NEW);
+        $this->getStatus()->shouldReturn(ReviewInterface::STATUS_NEW);
     }
 
-    function it_has_product(ProductInterface $product)
+    function it_has_review_subject(ReviewableInterface $reviewSubject)
     {
-        $this->setProduct($product);
-        $this->getProduct()->shouldReturn($product);
+        $this->setReviewSubject($reviewSubject);
+        $this->getReviewSubject()->shouldReturn($reviewSubject);
     }
 
     function it_has_created_at(\DateTime $createdAt)

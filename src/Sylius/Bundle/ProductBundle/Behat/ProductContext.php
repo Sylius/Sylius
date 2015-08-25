@@ -88,8 +88,8 @@ class ProductContext extends DefaultContext
                 $product->setDeletedAt(new \DateTime());
             }
 
-            if (isset($data['average_rating'])) {
-                $product->setAverageRating($data['average_rating']);
+            if (isset($data['average rating'])) {
+                $product->setAverageRating($data['average rating']);
             }
 
             $manager->persist($product);

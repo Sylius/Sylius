@@ -59,16 +59,6 @@ class Product extends BaseProduct implements ProductInterface
      */
     protected $channels;
 
-    /**
-     * @var Collection|ReviewInterface[]
-     */
-    protected $reviews;
-
-    /**
-     * @var float
-     */
-    protected $averageRating;
-
     public function __construct()
     {
         parent::__construct();
@@ -356,53 +346,5 @@ class Product extends BaseProduct implements ProductInterface
     {
         $this->translate()->setShortDescription($shortDescription);
         return $this;
-    }
-
-    /**
-     * @return Collection|ReviewInterface[]
-     */
-    public function getReviews()
-    {
-        return $this->reviews;
-    }
-
-    /**
-     * @param Collection $reviews
-     */
-    public function setReviews(Collection $reviews)
-    {
-        $this->reviews = $reviews;
-    }
-
-    /**
-     * @param ReviewInterface $review
-     */
-    public function addReview(ReviewInterface $review)
-    {
-        $this->reviews->add($review);
-    }
-
-    /**
-     * @param ReviewInterface $review
-     */
-    public function removeReview(ReviewInterface $review)
-    {
-        $this->reviews->remove($review);
-    }
-
-    /**
-     * @param float $averageRating
-     */
-    public function setAverageRating($averageRating)
-    {
-        $this->averageRating = $averageRating;
-    }
-
-    /**
-     * @return float
-     */
-    public function getAverageRating()
-    {
-        return $this->averageRating;
     }
 }

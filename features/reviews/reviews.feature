@@ -6,10 +6,10 @@ Feature: Reviews
 
     Background:
         Given there are following users:
-            | email          | enabled  | created at          |
-            | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
-            | martha@foo.com | yes      | 2010-01-02 13:00:00 |
-            | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
+            | email          |
+            | beth@foo.com   |
+            | martha@foo.com |
+            | rick@foo.com   |
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -18,15 +18,15 @@ Feature: Reviews
             | Clothing > PHP T-Shirts |
             | Clothing > Gloves       |
         And the following products exist:
-            | name             | price | taxons       | average_rating |
+            | name             | price | taxons       | average rating |
             | Super T-Shirt    | 19.99 | T-Shirts     | 0              |
-            | Black T-Shirt    | 18.99 | T-Shirts     | 0              |
-            | Sylius Tee       | 12.99 | PHP T-Shirts | 0              |
-            | Symfony T-Shirt  | 15.00 | PHP T-Shirts | 5              |
+            | Black T-Shirt    | 18.99 | T-Shirts     | 4              |
+            | Sylius Tee       | 12.99 | PHP T-Shirts | 5              |
+            | Symfony T-Shirt  | 15.00 | PHP T-Shirts | 1              |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | 0              |
         And there are following reviews:
             | title       | rating | comment               | author         | product         |
-            | Really bad  | 1      | Lorem ipsum dolor sit | beth@foo.com  | Symfony T-Shirt |
+            | Really bad  | 1      | Lorem ipsum dolor sit | beth@foo.com   | Symfony T-Shirt |
             | Very good   | 4      | Lorem ipsum dolor sit | martha@foo.com | Black T-Shirt   |
             | Awesome     | 5      | Lorem ipsum dolor sit | rick@foo.com   | Sylius Tee      |
         And there is default currency configured
@@ -55,7 +55,6 @@ Feature: Reviews
          Then I should still be on the review creation page
           And I should see "You must check review rating."
           And I should see "Review title should not be blank."
-          And I should see "Review comment should not be blank."
 
     Scenario: Accessing review edit page from the list
         Given I am on the review index page
@@ -73,14 +72,24 @@ Feature: Reviews
           And I press "Save changes"
          Then I should be on the page of review with title "Very, very good"
 
+    @javascript
     Scenario: Removing review from the list
         Given I am on the review index page
          When I press "delete" near "Awesome"
          Then I should still be on the review index page
           And I should see "Review has been successfully deleted."
 
+    @javascript
     Scenario: Removing review from details page
         Given I am on the page of review with title "Awesome"
          When I press "delete"
          Then I should be on the review index page
           And I should see "Review has been successfully deleted."
+
+    Scenario: Showing review details
+        Given I am on the review index page
+         When I click "details" near "Awesome"
+         Then I should be on the page of review with title "Awesome"
+          And I should see "Awesome"
+          And I should see "rick@foo.com"
+          And I should see "Lorem ipsum dolor"

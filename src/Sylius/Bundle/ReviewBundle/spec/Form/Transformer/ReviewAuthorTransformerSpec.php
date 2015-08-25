@@ -67,9 +67,8 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
                 if (!$subject instanceof CustomerInterface || !$key instanceof CustomerInterface) {
                     return false;
                 }
-                return (
-                    $subject->getEmail() === $key->getEmail()
-                );
+
+                return $subject->getEmail() === $key->getEmail();
             },
         );
     }

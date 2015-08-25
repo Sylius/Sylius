@@ -103,7 +103,7 @@ class ReviewAdminTypeSpec extends ObjectBehavior
 
         $builder
             ->add('product', 'entity', array(
-                'class'    => 'Sylius\Component\Core\Model\Product',
+                'class'    => 'Sylius\Component\Review\Model\ReviewableInterface',
                 'label'    => 'sylius.form.review.product',
                 'property' => 'name',
             ))

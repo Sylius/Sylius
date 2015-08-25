@@ -618,6 +618,10 @@ sylius:
         no_results: There are no redirect routes to display.
         title: Title
         update_header: Editing redirect route
+    review:
+        create: Create review
+        manage: Manage reviews
+        no_reviews: There are no reviews.
     shipment:
         ship: Ship
         created_at: Created at

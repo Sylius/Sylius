@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Review\Model;
 
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -41,7 +38,7 @@ class Review implements ReviewInterface
     protected $comment;
 
     /**
-     * @var CustomerInterface
+     * @var ReviewAuthorInterface
      */
     protected $author;
 
@@ -51,9 +48,9 @@ class Review implements ReviewInterface
     protected $status;
 
     /**
-     * @var ProductInterface
+     * @var ReviewableInterface
      */
-    protected $product;
+    protected $reviewSubject;
 
     /**
      * @var \DateTime
@@ -131,15 +128,15 @@ class Review implements ReviewInterface
     }
 
     /**
-     * @param CustomerInterface $customer
+     * {@inheritdoc}
      */
-    public function setAuthor(CustomerInterface $customer = null)
+    public function setAuthor(ReviewAuthorInterface $author = null)
     {
-        $this->author = $customer;
+        $this->author = $author;
     }
 
     /**
-     * @return CustomerInterface
+     * {@inheritdoc}
      */
     public function getAuthor()
     {
@@ -165,17 +162,17 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getReviewSubject()
     {
-        return $this->product;
+        return $this->reviewSubject;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setReviewSubject(ReviewableInterface $reviewSubject)
     {
-        $this->product = $product;
+        $this->reviewSubject = $reviewSubject;
     }
 
     /**

@@ -52,10 +52,12 @@ class ReviewContext extends DefaultContext
         $review->setComment($reviewHash['comment']);
 
         $product = $this->getRepository('product')->findOneBy(array('name' => $reviewHash['product']));
-        $review->setProduct($product);
+        $review->setReviewSubject($product);
 
         $author = $this->getRepository('customer')->findOneBy(array('email' => $reviewHash['author']));
         $review->setAuthor($author);
+
+        $review->setStatus(ReviewInterface::STATUS_ACCEPTED);
 
         return $review;
     }

@@ -17,7 +17,6 @@ $ bin/phpspec run -fpretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusReportBundle/index.html).
 
 Contributing
 ------------
@@ -68,5 +67,5 @@ License can be found [here](https://github.com/Sylius/SyliusReportBundle/blob/ma
 Authors
 -------
 
-The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusReportBundle/contributors).
+The bundle was originally created by [Daniel Richter](nexyz9@gmail.com) and [Mateusz Zalewski](mateusz.zalewski@lakion.com).
+See the list of [contributors](https://github.com/Sylius/SyliusReviewBundle/contributors).

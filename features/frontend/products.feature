@@ -17,7 +17,7 @@ Feature: Products
             | Clothing > PHP T-Shirts |
             | Clothing > Gloves       |
         And the following products exist:
-            | name             | price | taxons       | average_rating |
+            | name             | price | taxons       | average rating |
             | Super T-Shirt    | 19.99 | T-Shirts     | 0              |
             | Black T-Shirt    | 18.99 | T-Shirts     | 0              |
             | Sylius Tee       | 12.99 | PHP T-Shirts | 0              |

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
 use Doctrine\ORM\EntityRepository;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -41,6 +42,6 @@ class UniqueCustomerEmailSpec extends ObjectBehavior
 
     function it_has_targets()
     {
-        $this->getTargets()->shouldReturn('class');
+        $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }
 }

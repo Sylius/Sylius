@@ -34,7 +34,7 @@
         <!--Listeners-->
         <service id="sylius.listener.review_create" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
-            <tag name="kernel.event_listener" event="sylius.review.pre_create" method="controlReviewAuthor" />
+            <tag name="kernel.event_listener" event="sylius.review.pre_create" method="ensureReviewHasAuthor" />
         </service>
 
         <service id="sylius.review.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />

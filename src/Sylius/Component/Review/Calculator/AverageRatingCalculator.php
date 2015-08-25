@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Review\Calculator;
 
-use Sylius\Component\Review\Model\Reviewable;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -27,7 +27,7 @@ class AverageRatingCalculator implements AverageRatingCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(Reviewable $reviewable)
+    public function calculate(ReviewableInterface $reviewable)
     {
         if (0 === count($reviews = $reviewable->getReviews())) {
             return 0;
