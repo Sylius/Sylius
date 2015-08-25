@@ -37,7 +37,7 @@ class ResolveDynamicRelationsPass implements CompilerPassInterface
         $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
 
         foreach ($resources as $resourceName => $resourceConfig) {
-            if (SyliusResourceBundle::DRIVER_DOCTRINE_ORM !== $resourceConfig['driver']) {
+            if (!$this->shouldBeResolved($resourceConfig)) {
                 continue;
             }
 
@@ -99,5 +99,15 @@ class ResolveDynamicRelationsPass implements CompilerPassInterface
         throw new \InvalidArgumentException(
             sprintf('The class %s does not exist.', $key)
         );
+    }
+
+    /**
+     * @param array $resourceConfig
+     *
+     * @return bool
+     */
+    private function shouldBeResolved($resourceConfig)
+    {
+        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM === $resourceConfig['driver'] && isset($resourceConfig['classes']['interface']);
     }
 }
