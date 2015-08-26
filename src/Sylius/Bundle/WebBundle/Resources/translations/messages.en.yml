@@ -6,18 +6,18 @@ sylius:
         order_confirmation:
             name: Order confirmation
             subject: Thank you for your order!
-
         order_comment:
             name: Order comment
             subject: New comment posted on order #{{ order.number }}
-
         shipment_confirmation:
             name: Shipment confirmation
             subject: Your order has been shipped!
-
         user_confirmation:
             name: User confirmation
             subject: Welcome to our store!
+        support_notification:
+            name: Support notification
+            subject: New support notification
     account:
         address:
             action:

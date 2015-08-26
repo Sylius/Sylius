@@ -20,7 +20,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusSupportExtension extends AbstractResourceExtension
 {
-    protected $configFiles = array();
+    /**
+     * @var array
+     */
+    protected $configFiles = array(
+        'services.xml',
+        'recipients.yml',
+    );
 
     /**
      * {@inheritdoc}

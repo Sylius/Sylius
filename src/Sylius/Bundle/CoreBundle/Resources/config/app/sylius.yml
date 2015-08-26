@@ -262,6 +262,7 @@ sylius_mailer:
         sylius.email.shipment_confirmation.name: SyliusWebBundle:Email:shipmentConfirmation.html.twig
         sylius.email.user_confirmation.name: SyliusWebBundle:Email:userConfirmation.html.twig
         sylius.email.password_reset.name: SyliusWebBundle:Email:passwordReset.html.twig
+        sylius.email.support_notification.name: SyliusWebBundle:Email:supportNotification.html.twig
     sender:
         name: Example.com
         address: no-reply@example.com
@@ -287,6 +288,9 @@ sylius_mailer:
         reset_password_pin:
             subject: sylius.emails.user.password_reset.subject
             template: SyliusWebBundle:Email:passwordReset.html.twig
+        support_notification:
+            subject: sylius.emails.support_notification.subject
+            template: SyliusWebBundle:Email:supportNotification.html.twig
 
 sylius_rbac:
     classes:
