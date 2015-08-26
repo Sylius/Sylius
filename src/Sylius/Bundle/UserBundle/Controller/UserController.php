@@ -215,10 +215,12 @@ class UserController extends ResourceController
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
 
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
+
         $this->domainManager->update($user);
 
-        $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
+        $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
@@ -239,10 +241,12 @@ class UserController extends ResourceController
         $user->setPlainPassword($newPassword);
 
         $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
+        $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
 
         $this->domainManager->update($user);
 
+        $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
+        
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
         }
