@@ -360,7 +360,7 @@ class ResourceController extends ContainerAware
         $event = $this->eventDispatcher->dispatchResourceEvent(ResourceEvents::POST_DELETE, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->handleView($configuration, View::create(204));
+            return $this->handleView($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
         return $this->redirectHandler->redirectToIndex($configuration);
