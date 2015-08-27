@@ -60,7 +60,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $this->mapVariations($metadata, $class, $subject);
+            $this->mapOptions($metadata, $class, $subject);
             $this->mapAttributes($metadata, $class, $subject);
             $this->mapParent($metadata, $class);
         }
@@ -85,12 +85,14 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 ))
             ),
         );
@@ -103,7 +105,7 @@ class LoadMetadataSubscriber implements EventSubscriber
      * @param array                           $class
      * @param string                          $subject
      */
-    private function mapVariations(ClassMetadataInfo $metadata, array $class, $subject)
+    private function mapOptions(ClassMetadataInfo $metadata, array $class, $subject)
     {
         $optionMapping = array(
             'fieldName'    => 'options',
@@ -116,12 +118,14 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
+                    'onDelete'             => 'CASCADE',
                 ))
             ),
         );
