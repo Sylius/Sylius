@@ -19,6 +19,11 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
+    const WEB_ASSETS_DIRECTORY      = 'web/assets/*';
+    const WEB_BUNDLES_DIRECTORY     = 'web/bundles/*';
+    const WEB_MEDIA_DIRECTORY       = 'web/media/';
+    const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
+
     /**
      * @var CommandExecutor
      */
@@ -180,6 +185,29 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         foreach ($errors as $error) {
             $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
         }
+    }
+
+    /**
+     * @param string $directory
+     *
+     * @return bool
+     */
+    protected function isDirectoryWritable($directory)
+    {
+        return is_writable($directory);
+    }
+
+    /**
+     * @param string $directory
+     * @param string $command
+     *
+     * @return string
+     */
+    protected function createBadPermissionsMessage($directory, $command)
+    {
+        return '<error>Cannot run command due to bad directory permissions.</error>
+Set '.$directory.' writable and run command
+<comment>'.$command.'</comment>';
     }
 
     /**

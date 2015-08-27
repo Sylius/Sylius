@@ -51,6 +51,18 @@ EOT
 
         $output->writeln('Loading sample data...');
 
+        if (!$this->isDirectoryWritable(self::WEB_MEDIA_DIRECTORY)) {
+            $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_DIRECTORY, 'sylius:install:sample-data'));
+
+            return 0;
+        }
+
+        if (!$this->isDirectoryWritable(self::WEB_MEDIA_IMAGE_DIRECTORY)) {
+            $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_IMAGE_DIRECTORY, 'sylius:install:sample-data'));
+
+            return 0;
+        }
+
         $doctrineConfiguration = $this->get('doctrine.orm.entity_manager')->getConnection()->getConfiguration();
         $logger = $doctrineConfiguration->getSQLLogger();
         $doctrineConfiguration->setSQLLogger(null);

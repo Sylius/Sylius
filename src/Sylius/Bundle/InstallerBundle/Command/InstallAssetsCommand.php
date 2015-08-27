@@ -30,6 +30,18 @@ EOT
     {
         $output->writeln(sprintf('Installing Sylius assets for environment <info>%s</info>.', $this->getEnvironment()));
 
+        if (!$this->isDirectoryWritable(self::WEB_ASSETS_DIRECTORY)) {
+            $output->writeln($this->createBadPermissionsMessage(self::WEB_ASSETS_DIRECTORY, 'sylius:install:assets'));
+
+            return 0;
+        }
+
+        if (!$this->isDirectoryWritable(self::WEB_BUNDLES_DIRECTORY)) {
+            $output->writeln($this->createBadPermissionsMessage(self::WEB_BUNDLES_DIRECTORY, 'sylius:install:assets'));
+
+            return 0;
+        }
+
         $commands = array(
             'assets:install',
             'assetic:dump',
