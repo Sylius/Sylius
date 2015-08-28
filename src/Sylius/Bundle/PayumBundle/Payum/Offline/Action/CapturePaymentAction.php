@@ -36,6 +36,7 @@ class CapturePaymentAction extends GenericCapturePaymentAction
 
         $payment->setDetails(array(
             Constants::FIELD_PAID => false,
+            Constants::FIELD_STATUS => Constants::STATUS_PENDING
         ));
     }
 }

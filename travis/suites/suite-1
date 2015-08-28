@@ -1,0 +1,25 @@
+#!/bin/bash
+bin/phpspec run -f dot
+
+bin/behat -s account -f progress
+bin/behat -s addressing -f progress
+bin/behat -s cart -f progress
+bin/behat -s currencies -f progress
+bin/behat -s dashboard -f progress
+bin/behat -s homepage -f progress
+bin/behat -s inventory -f progress
+bin/behat -s localization -f progress
+bin/behat -s oauth -f progress
+bin/behat -s reports -f progress
+bin/behat -s taxonomies -f progress
+bin/behat -s users -f progress
+bin/behat -s search -f progress
+
+bin/behat -s checkout -f progress features/frontend/checkout_addressing.feature
+bin/behat -s checkout -f progress features/frontend/checkout_finalize.feature
+bin/behat -s checkout -f progress features/frontend/checkout_inventory.feature
+bin/behat -s checkout -f progress features/frontend/checkout_payment.feature
+bin/behat -s checkout -f progress features/frontend/checkout_security.feature
+bin/behat -s checkout -f progress features/frontend/checkout_shipping.feature
+bin/behat -s checkout -f progress features/frontend/checkout_start.feature
+bin/behat -s checkout -f progress features/frontend/checkout_taxation.feature

@@ -1,0 +1,26 @@
+#!/bin/bash
+bin/behat -s emails -f progress
+bin/behat -s orders -f progress
+bin/behat -s payments -f progress
+bin/behat -s pricing -f progress
+bin/behat -s settings -f progress
+bin/behat -s shipping -f progress
+bin/behat -s taxation -f progress
+
+bin/behat -s products -f progress features/backend/products.feature
+bin/behat -s products -f progress features/backend/product_attributes.feature
+bin/behat -s products -f progress features/backend/product_options.feature
+bin/behat -s products -f progress features/backend/product_archetypes.feature
+bin/behat -s products -f progress features/backend/product_taxonomies.feature
+bin/behat -s products -f progress features/backend/product_variants.feature
+bin/behat -s products -f progress features/backend/products_filter.feature
+bin/behat -s products -f progress features/frontend/products.feature
+
+bin/behat -s promotions -f progress features/backend/promotions.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_complex.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_coupons.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_dates.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_fixed.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_percentage.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_product.feature
+bin/behat -s promotions -f progress features/frontend/cart_promotions_usage_limit.feature

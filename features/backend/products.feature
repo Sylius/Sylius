@@ -49,8 +49,8 @@ Feature: Products
         When I follow "Products"
         Then I should be on the product index page
         And I should see 4 products in the list
-        And I should see product with price "€5.99" in that list
-        But I should not see product with price "€19.99" in that list
+        And I should see product with retail price "€5.99" in that list
+        But I should not see product with retail price "€19.99" in that list
 
     Scenario: Seeing empty index of products
         Given there are no products

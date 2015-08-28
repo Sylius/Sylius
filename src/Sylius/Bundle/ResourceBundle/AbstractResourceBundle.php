@@ -51,20 +51,35 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         if (null !== $this->getModelNamespace()) {
             $className = get_class($this);
             foreach ($className::getSupportedDrivers() as $driver) {
-                list($compilerPassClassame, $compilerPassMethod) = $this->getMappingCompilerPassInfo($driver);
+                list($compilerPassClassName, $compilerPassMethod) = $this->getMappingCompilerPassInfo($driver);
 
-                if (class_exists($compilerPassClassame)) {
-                    if (!method_exists($compilerPassClassame, $compilerPassMethod)) {
+                if (class_exists($compilerPassClassName)) {
+                    if (!method_exists($compilerPassClassName, $compilerPassMethod)) {
                         throw new InvalidConfigurationException(
                             "The 'mappingFormat' value is invalid, must be 'xml', 'yml' or 'annotation'."
                         );
                     }
 
-                    $container->addCompilerPass($compilerPassClassame::$compilerPassMethod(
-                        array($this->getConfigFilesPath() => $this->getModelNamespace()),
-                        array(sprintf('%s.object_manager', $this->getBundlePrefix())),
-                        sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
-                    ));
+                    switch ($this->mappingFormat) {
+                        case ResourceBundleInterface::MAPPING_XML:
+                        case ResourceBundleInterface::MAPPING_YAML:
+                            $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
+                                array($this->getConfigFilesPath() => $this->getModelNamespace()),
+                                array(sprintf('%s.object_manager', $this->getBundlePrefix())),
+                                sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
+                            ));
+                            break;
+
+                        case ResourceBundleInterface::MAPPING_ANNOTATION:
+                            $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
+                                array($this->getModelNamespace()),
+                                array($this->getConfigFilesPath()),
+                                array(sprintf('%s.object_manager', $this->getBundlePrefix())),
+                                sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
+                            ));
+
+                            break;
+                    }
                 }
             }
         }

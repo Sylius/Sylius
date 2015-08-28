@@ -14,8 +14,10 @@ namespace Sylius\Bundle\SettingsBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -28,6 +30,34 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 class SettingsController extends FOSRestController
 {
     /**
+     * Get a specific settings data.
+     * This controller action only used for Rest API.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function showAction(Request $request)
+    {
+        $namespace = $request->get('namespace');
+
+        try {
+            $settings = $this->getSettingsManager()->loadSettings($namespace);
+        } catch (MissingOptionsException $e) {
+            // When a Settings is not persisted yet, it won't have any initial value in database,
+            // so we create a new empty instance.
+            $settings = new Settings(array());
+        }
+
+        $view = $this
+            ->view()
+            ->setData($settings)
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
      * Edit configuration with given namespace.
      *
      * @param Request $request
@@ -38,7 +68,15 @@ class SettingsController extends FOSRestController
     public function updateAction(Request $request, $namespace)
     {
         $manager = $this->getSettingsManager();
-        $settings = $manager->loadSettings($namespace);
+
+        try {
+            $settings = $manager->loadSettings($namespace);
+        } catch (MissingOptionsException $e) {
+            // When it is the first time that a Settings is being persisted,
+            // it won't have any initial value in database, so we should create a new instance.
+            $settings = new Settings(array());
+        }
+
         $isApiRequest = $this->isApiRequest($request);
 
         $form = $this

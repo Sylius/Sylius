@@ -37,6 +37,10 @@ class TaxonomyContext extends DefaultContext
         $taxonomy = $this->getRepository('taxonomy')->createNew();
         $taxonomy->setName($name);
 
+        if (null === $taxonomy->getCurrentLocale()) {
+            $taxonomy->setCurrentLocale('en_US');
+        }
+
         $this->getEntityManager()->persist($taxonomy);
         if ($flush) {
             $this->getEntityManager()->flush();

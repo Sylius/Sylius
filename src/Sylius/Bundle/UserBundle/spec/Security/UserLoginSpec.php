@@ -41,7 +41,7 @@ class UserLoginSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\UserBundle\Security\UserLoginInterface');
     }
 
-    function it_throws_exception_and_does_not_log_user_in_when_user_check_will_throw_exception($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
+    function it_throws_exception_and_does_not_log_user_in_when_user_is_disabled($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
     {
         $user->getRoles()->willReturn(array('ROLE_TEST'));
         $userChecker->checkPreAuth($user)->willThrow('Symfony\Component\Security\Core\Exception\DisabledException');
@@ -52,11 +52,36 @@ class UserLoginSpec extends ObjectBehavior
         $this->shouldThrow('Symfony\Component\Security\Core\Exception\DisabledException')->during('login', array($user));
     }
 
+    function it_throws_exception_and_does_not_log_user_in_when_user_account_status_is_invalid($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
+    {
+        $user->getRoles()->willReturn(array('ROLE_TEST'));
+        $userChecker->checkPreAuth($user)->shouldBeCalled();
+        $userChecker->checkPostAuth($user)->willThrow('Symfony\Component\Security\Core\Exception\CredentialsExpiredException');
+
+        $securityContext->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type('Sylius\Bundle\UserBundle\Event\UserEvent'))->shouldNotBeCalled();
+
+        $this->shouldThrow('Symfony\Component\Security\Core\Exception\CredentialsExpiredException')->during('login', array($user));
+    }
+
+    function it_throws_exception_and_does_not_log_user_in_when_user_has_no_roles($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
+    {
+        $user->getRoles()->willReturn(array());
+        $userChecker->checkPreAuth($user)->shouldBeCalled();
+        $userChecker->checkPostAuth($user)->shouldBeCalled();
+
+        $securityContext->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type('Sylius\Bundle\UserBundle\Event\UserEvent'))->shouldNotBeCalled();
+
+        $this->shouldThrow('Symfony\Component\Security\Core\Exception\AuthenticationException')->during('login', array($user));
+    }
+
     function it_logs_user_in($securityContext, $userChecker, $eventDispatcher, UserInterface $user)
     {
         $user->getRoles()->willReturn(array('ROLE_TEST'));
 
         $userChecker->checkPreAuth($user)->shouldBeCalled();
+        $userChecker->checkPostAuth($user)->shouldBeCalled();
         $securityContext->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldBeCalled();
         $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type('Sylius\Bundle\UserBundle\Event\UserEvent'))->shouldBeCalled();
 

@@ -3,7 +3,7 @@ winzou_state_machine:
         class:         %sylius.model.shipment.class%
         property_path: state
         graph:         sylius_shipment
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             checkout:    ~
             pending:     ~
@@ -45,7 +45,7 @@ winzou_state_machine:
         class:         %sylius.model.shipment_item.class%
         property_path: shippingState
         graph:         sylius_shipment_item
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: %sylius.state_machine.class%
         states:
             checkout: ~
             onhold:      ~

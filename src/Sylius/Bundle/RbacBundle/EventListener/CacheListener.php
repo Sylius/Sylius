@@ -53,6 +53,14 @@ class CacheListener
     /**
      * @param LifecycleEventArgs $args
      */
+    public function postUpdate(LifecycleEventArgs $args)
+    {
+        $this->clearCache($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
     protected function clearCache(LifecycleEventArgs $args)
     {
         if ($args->getObject() instanceof RoleInterface || $args->getObject() instanceof PermissionInterface) {

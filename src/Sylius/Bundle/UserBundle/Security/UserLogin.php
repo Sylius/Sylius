@@ -16,6 +16,7 @@ use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
@@ -58,9 +59,25 @@ class UserLogin implements UserLoginInterface
     public function login(UserInterface $user, $firewallName = 'main')
     {
         $this->userChecker->checkPreAuth($user);
+        $this->userChecker->checkPostAuth($user);
 
-        $token = new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        $token = $this->createToken($user, $firewallName);
+        if (!$token->isAuthenticated()) {
+            throw new AuthenticationException('Unauthenticated token');
+        }
+
         $this->securityContext->setToken($token);
         $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
+    }
+
+    /**
+     * @param UserInterface $user
+     * @param string        $firewallName
+     *
+     * @return UsernamePasswordToken
+     */
+    protected function createToken(UserInterface $user, $firewallName)
+    {
+        return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
     }
 }

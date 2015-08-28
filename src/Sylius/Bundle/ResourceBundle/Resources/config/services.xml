@@ -39,6 +39,9 @@
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_request.class">Sylius\Bundle\ResourceBundle\EventListener\KernelRequestSubscriber</parameter>
 
+        <parameter key="sylius.validator.enabled.class">Sylius\Bundle\ResourceBundle\Validator\EnabledValidator</parameter>
+        <parameter key="sylius.validator.disabled.class">Sylius\Bundle\ResourceBundle\Validator\DisabledValidator</parameter>
+
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
 
@@ -85,6 +88,13 @@
         <service id="sylius.form.extension.collection"
                  class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
+        </service>
+
+        <service id="sylius.validator.enabled" class="%sylius.validator.enabled.class%">
+            <tag name="validator.constraint_validator" alias="sylius_resource_enabled_validator" />
+        </service>
+        <service id="sylius.validator.disabled" class="%sylius.validator.disabled.class%">
+            <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
         </service>
     </services>
 </container>

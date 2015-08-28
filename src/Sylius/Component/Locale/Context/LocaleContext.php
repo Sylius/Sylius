@@ -14,23 +14,20 @@ namespace Sylius\Component\Locale\Context;
 use Sylius\Component\Storage\StorageInterface;
 
 /**
- * Default locale context implementation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class LocaleContext implements LocaleContextInterface
 {
+    // Key used to store the locale in storage.
+    const STORAGE_KEY = '_sylius_locale';
+
     /**
-     * Default locale.
-     *
      * @var string
      */
     protected $defaultLocale;
 
     /**
-     * Locale storage.
-     *
      * @var StorageInterface
      */
     protected $storage;
@@ -52,7 +49,7 @@ class LocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getCurrentLocale()
     {
         return $this->storage->getData(self::STORAGE_KEY, $this->defaultLocale);
     }
@@ -60,7 +57,7 @@ class LocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocale($locale)
+    public function setCurrentLocale($locale)
     {
         return $this->storage->setData(self::STORAGE_KEY, $locale);
     }

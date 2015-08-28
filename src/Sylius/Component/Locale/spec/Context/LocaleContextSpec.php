@@ -15,6 +15,11 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Storage\StorageInterface;
 
+/**
+ * @mixin \Sylius\Component\Locale\Context\LocaleContext
+ *
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
 class LocaleContextSpec extends ObjectBehavior
 {
     function let(StorageInterface $storage)
@@ -27,7 +32,7 @@ class LocaleContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Locale\Context\LocaleContext');
     }
 
-    function it_implements_Sylius_locale_context_interface()
+    function it_is_Sylius_locale_context()
     {
         $this->shouldImplement('Sylius\Component\Locale\Context\LocaleContextInterface');
     }
@@ -37,17 +42,28 @@ class LocaleContextSpec extends ObjectBehavior
         $this->getDefaultLocale()->shouldReturn('pl_PL');
     }
 
-    function it_gets_locale_from_session($storage)
-    {
-        $storage->getData(Argument::any(), 'pl_PL')->willReturn('en_US');
-
-        $this->getLocale()->shouldReturn('en_US');
-    }
-
-    function it_sets_locale_to_session($storage)
+    function it_can_set_locale_to_storage(StorageInterface$storage)
     {
         $storage->setData(Argument::any(), 'en_GB')->shouldBeCalled();
 
-        $this->setLocale('en_GB');
+        $this->setCurrentLocale('en_GB');
+    }
+
+    function it_can_get_current_locale(StorageInterface $storage)
+    {
+        $storage->setData(Argument::any(), 'en_US')->shouldBeCalled()->willReturn();
+
+        $this->setCurrentLocale('en_US');
+
+        $storage->getData(Argument::cetera())->shouldBeCalled()->willReturn('en_US');
+
+        $this->getCurrentLocale()->shouldReturn('en_US');
+    }
+
+    function its_current_locale_is_default_locale_by_default(StorageInterface $storage)
+    {
+        $storage->getData(Argument::cetera())->shouldBeCalled()->willReturn('pl_PL');
+
+        $this->getCurrentLocale()->shouldReturn('pl_PL');
     }
 }

@@ -59,3 +59,7 @@ Feature: Products
         Given I am on the store homepage
         Then I should see "Super T-Shirt"
         But I should not see "Black T-Shirt"
+
+    Scenario: Receiving exception while entering page for product with empty slug
+        Given I go to page for product with empty slug
+         Then the response status code should be 404

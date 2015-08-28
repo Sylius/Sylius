@@ -29,11 +29,11 @@ Feature: Countries and provinces
          Then I should be on the country index page
           And I should see country with name "China" in the list
 
-    Scenario: ISO codes are listed in the index
+    Scenario: Country codes are listed in the index
         Given I am on the dashboard page
          When I follow "Countries"
          Then I should be on the country index page
-          And I should see country with iso code "FR" in the list
+          And I should see country with iso name "FR" in the list
 
     Scenario: Seeing empty index of countries
         Given there are no countries
@@ -46,32 +46,23 @@ Feature: Countries and provinces
           And I follow "Create country"
          Then I should be on the country creation page
 
-    Scenario: Submitting form without name filled
-        Given I am on the country creation page
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country name."
-
-    Scenario: Country ISO code is required
-        Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country ISO code."
-
     Scenario: Creating new country
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "Poland" from "Name"
           And I press "Create"
          Then I should be on the page of country "Poland"
           And I should see "Country has been successfully created."
 
+    Scenario: Listing only available countries during creating a new country
+        Given there is a disabled country "Germany"
+         When I am on the country creation page
+         Then I should not see name "France" as available choice
+          And I should not see name "Germany" as available choice
+
     @javascript
     Scenario: Creating new country with provinces
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "Poland" from "Name"
           And I click "Add province"
           And I click "Add province"
           And I fill in the 1st province with "Lubusz"
@@ -97,43 +88,6 @@ Feature: Countries and provinces
          When I click "edit" near "China"
          Then I should be editing country "China"
 
-    Scenario: Updating the country and province
-        Given I am editing country "Ukraine"
-         When I fill in "Name" with "Russia"
-          And I fill in "ISO name" with "RU"
-          And I fill in province name with "Volgograd"
-          And I press "Save changes"
-         Then I should be on the page of country "Russia"
-          And "Russia" should appear on the page
-
-    @javascript
-    Scenario: Updating the country and removing province
-      Given I am editing country "Ukraine"
-       When I fill in "Name" with "Russia"
-        And I fill in "ISO name" with "RU"
-        And I remove all the provinces
-        And I press "Save changes"
-       Then I should see "Country has been successfully updated."
-        And "Russia" should appear on the page
-        But I should not see "Provinces"
-
-    @javascript
-    Scenario: Deleting country via the list
-        Given I am on the country index page
-         When I press "delete" near "China"
-          And I click "delete" from the confirmation modal
-         Then I should still be on the country index page
-          And I should see "Country has been successfully deleted."
-          But I should not see country with name "China" in the list
-
-    @javascript
-    Scenario: Deleting country
-        Given I am on the page of country "China"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the country index page
-          And I should see "Country has been successfully deleted."
-
     Scenario: Accessing country details via the list
         Given I am on the country index page
          When I click "China"
@@ -152,3 +106,17 @@ Feature: Countries and provinces
           And I click "delete" from the confirmation modal
          Then I should still be on the page of country "France"
           And "Toulouse" should not appear on the page
+
+    Scenario: Enabling country
+        Given there is a disabled country "Poland"
+          And I am on the country index page
+         When I click "Enable" near "Poland"
+         Then I should see enabled country with name "Poland" in the list
+          And I should see "Country has been successfully enabled"
+
+    Scenario: Disabling country
+        Given there is an enabled country "Poland"
+          And I am on the country index page
+         When I click "Disable" near "Poland"
+         Then I should see disabled country with name "Poland" in the list
+          And I should see "Country has been successfully disabled"

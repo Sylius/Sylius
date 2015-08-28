@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Locale extension.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class SyliusLocaleExtension extends AbstractResourceExtension
@@ -42,5 +40,10 @@ class SyliusLocaleExtension extends AbstractResourceExtension
 
         $definition = $container->findDefinition('sylius.context.locale');
         $definition->replaceArgument(0, new Reference($config['storage']));
+
+        $container
+            ->getDefinition('sylius.form.type.locale_choice')
+            ->setArguments(array(new Reference('sylius.repository.locale')))
+        ;
     }
 }

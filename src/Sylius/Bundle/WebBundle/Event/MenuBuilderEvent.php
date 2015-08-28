@@ -22,8 +22,13 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class MenuBuilderEvent extends Event
 {
-    const BACKEND_MAIN = 'sylius.menu_builder.backend.main';
-    const BACKEND_SIDEBAR = 'sylius.menu_builder.backend.sidebar';
+    const BACKEND_MAIN        = 'sylius.menu_builder.backend.main';
+    const BACKEND_SIDEBAR     = 'sylius.menu_builder.backend.sidebar';
+    const FRONTEND_MAIN       = 'sylius.menu_builder.frontend.main';
+    const FRONTEND_CURRENCY   = 'sylius.menu_builder.frontend.currency';
+    const FRONTEND_TAXONOMIES = 'sylius.menu_builder.frontend.taxonomies';
+    const FRONTEND_SOCIAL     = 'sylius.menu_builder.frontend.social';
+    const FRONTEND_ACCOUNT    = 'sylius.menu_builder.frontend.account';
 
     /**
      * @var FactoryInterface

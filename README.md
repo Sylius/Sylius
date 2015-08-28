@@ -79,7 +79,7 @@ If you are using the supplied Vagrant development environment, please see the re
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
 Sylius on Twitter
 -----------------

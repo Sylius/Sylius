@@ -3,3 +3,4 @@ sylius:
         locale:
             code: Code
             enabled: Enabled
+            name: Name

@@ -19,8 +19,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
- * Locale controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleController extends ResourceController
@@ -38,7 +36,7 @@ class LocaleController extends ResourceController
             $locale = $this->getLocaleContext()->getDefaultLocale();
         }
 
-        $this->getLocaleContext()->setLocale($locale);
+        $this->getLocaleContext()->setCurrentLocale($locale);
 
         if ($this->config->isApiRequest()) {
             $view = $this

@@ -28,7 +28,6 @@ class ZoneMemberCountryType extends ZoneMemberType
         $builder
             ->add('country', 'sylius_country_choice', array(
                 'label'    => 'sylius.form.zone_member_country.country',
-                'property' => 'name',
             ))
         ;
 

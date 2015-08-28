@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -38,5 +39,10 @@ class SyliusUserExtension extends AbstractResourceExtension
         $container->setParameter('sylius.user.resetting.token_ttl', $config['resetting']['token']['ttl']);
         $container->setParameter('sylius.user.resetting.token_length', $config['resetting']['token']['length']);
         $container->setParameter('sylius.user.resetting.pin_length', $config['resetting']['pin']['length']);
+
+        $container
+            ->getDefinition('sylius.form.type.customer_registration')
+            ->addArgument(new Reference('sylius.repository.customer'))
+        ;
     }
 }

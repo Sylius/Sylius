@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\LocaleBundle\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
@@ -28,15 +28,11 @@ use Symfony\Component\Translation\TranslatorInterface;
 class LocaleMenuBuilder extends MenuBuilder
 {
     /**
-     * Locale repository.
-     *
      * @var LocaleProviderInterface
      */
     protected $localeProvider;
 
     /**
-     * Constructor.
-     *
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
@@ -77,12 +73,10 @@ class LocaleMenuBuilder extends MenuBuilder
         }
 
         foreach ($locales as $locale) {
-            $code = $locale->getCode();
-
-            $menu->addChild($code, array(
+            $menu->addChild($locale, array(
                 'route' => 'sylius_locale_change',
-                'routeParameters' => array('locale' => $code),
-            ))->setLabel(Intl::getLocaleBundle()->getLocaleName($code));
+                'routeParameters' => array('locale' => $locale),
+            ))->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
         }
 
         return $menu;

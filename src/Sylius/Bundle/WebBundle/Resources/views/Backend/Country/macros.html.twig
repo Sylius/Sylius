@@ -2,27 +2,32 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+    {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if countries|length > 0 %}
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.country.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.country.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('isoName', 'sylius.country.iso_name'|trans) }}</th>
+            <th>{{ 'sylius.country.name'|trans }}</th>
+            <th>{{ sylius_resource_sort('enabled', 'sylius.country.enabled'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     {% for country in countries %}
-        <tr id="{{ country.id }}">
-            <td>{{ country.id }}</td>
-            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+        <tr>
             <td><span class="label label-primary">{{ country.isoName }}</span></td>
+            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+            <td>{{ misc.state_label(country.enabled) }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
-                {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
+                    {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
+                    {% if country.enabled %}
+                        {{ buttons.disable(path('sylius_backend_country_disable', {'id': country.id})) }}
+                    {% else %}
+                        {{ buttons.enable(path('sylius_backend_country_enable', {'id': country.id})) }}
+                    {% endif %}
                 </div>
             </td>
         </tr>
@@ -30,7 +35,8 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.country.no_results'|trans) }}
+    {{ alerts.info('sylius.country.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}
+

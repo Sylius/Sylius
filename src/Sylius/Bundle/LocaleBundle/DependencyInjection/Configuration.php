@@ -91,7 +91,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                         ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType')->end()
+                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType')->end()
                                     ->end()
                                 ->end()
                             ->end()

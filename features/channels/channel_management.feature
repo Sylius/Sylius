@@ -10,7 +10,7 @@ Feature: Channel management
           And I am logged in as administrator
           And the following zones are defined:
             | name | type    | members                         |
-            | USA  | country | USA                             |
+            | USA  | country | United States                   |
             | EU   | country | Germany, United Kingdom, France |
           And there are following currencies configured:
             | code | exchange rate | enabled |

@@ -14,7 +14,7 @@ Feature: Shipping methods
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | USA                     |
+            | USA          | country | United States           |
           And there are following shipping categories:
             | name    |
             | Regular |
