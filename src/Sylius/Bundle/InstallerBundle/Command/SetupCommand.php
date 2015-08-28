@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SetupCommand extends AbstractInstallCommand
 {
+    /**
+     * @var array
+     */
+    private $currencies = array();
+
     /**
      * {@inheritdoc}
      */
@@ -170,9 +176,9 @@ EOT
         $currencyManager = $this->get('sylius.manager.currency');
 
         do {
-            if ($input->getOption('no-interaction')) {
-                $currencies = array('USD');
-            } else {
+            $currencies = array('USD');
+
+            if (!$input->getOption('no-interaction')) {
                 $output->writeln('Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".');
                 $codes = $this->ask($output, '<question>In which currency your customers can buy goods?</question> ', array(), 'USD');
                 $currencies = explode(',', $codes);
@@ -195,13 +201,16 @@ EOT
             $name = Intl::getCurrencyBundle()->getCurrencyName($code);
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
-            if (null !== $currencyRepository->findOneByCode($code)) {
+            if (null !== $existingCurrency = $currencyRepository->findOneByCode($code)) {
+                $this->currencies[] = $existingCurrency;
+
                 continue;
             }
 
             $currency = $currencyRepository->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate(1);
+            $this->currencies[] = $currency;
 
             $currencyManager->persist($currency);
         }
@@ -266,13 +275,7 @@ EOT
         $channelRepository = $this->get('sylius.repository.channel');
         $channelManager = $this->get('sylius.manager.channel');
 
-        if ($input->getOption('no-interaction')) {
-            $channels = array('DEFAULT');
-        } else {
-            $output->writeln('Please enter a list of channels, separated by commas or just hit ENTER to use "DEFAULT". For example "WEB-UK, WEB-DE, MOBILE".');
-            $codes = $this->ask($output, '<question>On which channels are you going to sell your goods?</question> ', array(), 'DEFAULT');
-            $channels = explode(',', $codes);
-        }
+        $channels = $this->getChannelsArray($input, $output);
 
         foreach ($channels as $code) {
             $output->writeln(sprintf('Adding <info>%s</info>.', $code));
@@ -287,10 +290,29 @@ EOT
             $channel->setCode($code);
             $channel->setName($code);
             $channel->setColor(null);
+            $channel->setCurrencies(new ArrayCollection($this->currencies));
 
             $channelManager->persist($channel);
         }
 
         $channelManager->flush();
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return array
+     */
+    private function getChannelsArray(InputInterface $input, OutputInterface $output)
+    {
+        if ($input->getOption('no-interaction')) {
+            return array('DEFAULT');
+        }
+
+        $output->writeln('Please enter a list of channels, separated by commas or just hit ENTER to use "DEFAULT". For example "WEB-UK, WEB-DE, MOBILE".');
+        $codes = $this->ask($output, '<question>On which channels are you going to sell your goods?</question> ', array(), 'DEFAULT');
+
+        return explode(',', $codes);
     }
 }
