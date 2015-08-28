@@ -14,9 +14,37 @@ namespace Sylius\Bundle\InstallerBundle\Command;
 use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\RuntimeException;
 
 class InstallCommand extends AbstractInstallCommand
 {
+    /**
+     * @var array
+     */
+    private $commands = array(
+        array (
+            'command' => 'check-requirements',
+            'message' => 'Checking system requirements.',
+        ),
+        array (
+            'command' => 'database',
+            'message' => 'Setting up the database.',
+        ),
+        array (
+            'command' => 'setup',
+            'message' => 'Shop configuration.',
+        ),
+        array (
+            'command' => 'assets',
+            'message' => 'Installing assets.',
+        ),
+    );
+
+    /**
+     * @var bool
+     */
+    private $isErrored = false;
+
     /**
      * {@inheritdoc}
      */
@@ -40,30 +68,38 @@ EOT
         $output->writeln('<info>Installing Sylius...</info>');
         $output->writeln('');
 
-        $output->writeln('<comment>Step 1 of 4.</comment> <info>Checking system requirements.</info>');
-        $this->commandExecutor->runCommand('sylius:install:check-requirements', array(), $output);
-        $output->writeln('');
+        foreach ($this->commands as $step => $command) {
+            try {
+                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step+1, count($this->commands), $command['message']));
+                $this->commandExecutor->runCommand('sylius:install:'.$command['command'], array(), $output);
+                $output->writeln('');
+            } catch (RuntimeException $exception) {
+                $this->isErrored = true;
 
-        $output->writeln('<comment>Step 2 of 4.</comment> <info>Setting up the database.</info>');
-        $this->commandExecutor->runCommand('sylius:install:database', array(), $output);
-        $output->writeln('');
-
-        $output->writeln('<comment>Step 3 of 4.</comment> <info>Shop configuration.</info>');
-        $this->commandExecutor->runCommand('sylius:install:setup', array(), $output);
-        $output->writeln('');
-
-        $output->writeln('<comment>Step 4 of 4.</comment> <info>Installing assets.</info>');
-        $this->commandExecutor->runCommand('sylius:install:assets', array(), $output);
-        $output->writeln('');
+                continue;
+            }
+        }
 
         $map = array(
-            Kernel::ENV_DEV => '/app_dev.php',
-            Kernel::ENV_TEST => '/app_test.php',
+            Kernel::ENV_DEV     => '/app_dev.php',
+            Kernel::ENV_TEST    => '/app_test.php',
             Kernel::ENV_STAGING => '/app_staging.php',
-            Kernel::ENV_PROD => '/'
+            Kernel::ENV_PROD    => '/',
         );
 
-        $output->writeln('<info>Sylius has been successfully installed.</info>');
+        $output->writeln($this->getProperFinalMessage());
         $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $map[$this->getEnvironment()]));
+    }
+
+    /**
+     * @return string
+     */
+    private function getProperFinalMessage()
+    {
+        if ($this->isErrored) {
+            return '<info>Sylius has been installed, but some error occurred.</info>';
+        }
+
+        return '<info>Sylius has been successfully installed.</info>';
     }
 }

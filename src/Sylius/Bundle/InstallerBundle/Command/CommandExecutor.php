@@ -17,6 +17,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\RuntimeException;
 
 /**
  * Command executor
@@ -72,6 +73,10 @@ class CommandExecutor
 
         $this->application->setAutoExit(false);
         $exitCode = $this->application->run(new ArrayInput($parameters), $output ?: new NullOutput());
+
+        if (1 === $exitCode) {
+            throw new RuntimeException('This command terminated with a permission error');
+        }
 
         if (0 !== $exitCode) {
             $this->application->setAutoExit(true);

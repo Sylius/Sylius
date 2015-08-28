@@ -54,13 +54,13 @@ EOT
         if (!$this->isDirectoryWritable(self::WEB_MEDIA_DIRECTORY)) {
             $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_DIRECTORY, 'sylius:install:sample-data'));
 
-            return 0;
+            return 1;
         }
 
         if (!$this->isDirectoryWritable(self::WEB_MEDIA_IMAGE_DIRECTORY)) {
             $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_IMAGE_DIRECTORY, 'sylius:install:sample-data'));
 
-            return 0;
+            return 1;
         }
 
         $doctrineConfiguration = $this->get('doctrine.orm.entity_manager')->getConnection()->getConfiguration();

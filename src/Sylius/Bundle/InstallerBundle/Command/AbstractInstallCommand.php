@@ -205,9 +205,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function createBadPermissionsMessage($directory, $command)
     {
-        return '<error>Cannot run command due to bad directory permissions.</error>
-Set '.$directory.' writable and run command
-<comment>'.$command.'</comment>';
+        return '<error>Cannot run command due to bad directory permissions.</error>'.PHP_EOL.'Set '.$directory.' writable and run command'.PHP_EOL.'<comment>'.$command.'</comment>';
     }
 
     /**
