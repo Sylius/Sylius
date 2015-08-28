@@ -2,7 +2,6 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -33,13 +32,13 @@ EOT
         if (!$this->isDirectoryWritable(self::WEB_ASSETS_DIRECTORY)) {
             $output->writeln($this->createBadPermissionsMessage(self::WEB_ASSETS_DIRECTORY, 'sylius:install:assets'));
 
-            return 0;
+            return 1;
         }
 
         if (!$this->isDirectoryWritable(self::WEB_BUNDLES_DIRECTORY)) {
             $output->writeln($this->createBadPermissionsMessage(self::WEB_BUNDLES_DIRECTORY, 'sylius:install:assets'));
 
-            return 0;
+            return 1;
         }
 
         $commands = array(
