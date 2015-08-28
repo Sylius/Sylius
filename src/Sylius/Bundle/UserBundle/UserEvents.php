@@ -23,6 +23,7 @@ final class UserEvents
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
     const REQUEST_RESET_PASSWORD_TOKEN = 'sylius.user.password_reset.request.token';
+
     /**
      * The REQUEST_RESET_PASSWORD_PIN event occurs when the resetting process is initialized and user requested for confirmation pin.
      *
@@ -30,20 +31,39 @@ final class UserEvents
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
     const REQUEST_RESET_PASSWORD_PIN = 'sylius.user.password_reset.request.pin';
+
     /**
-     * The RESETTING_RESET_SUCCESS event occurs when the resetting form is submitted successfully.
+     * The PRE_PASSWORD_RESET event occurs right before the user changes are flushed.
      *
      * This event allows you to set the response instead of using the default one.
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
-    const PASSWORD_RESET_SUCCESS = 'sylius.user.password_reset.success';
+    const PRE_PASSWORD_RESET = 'sylius.user.pre_password_reset';
+
     /**
-     * The RESETTING_CHANGE_SUCCESS event occurs when the change form is submitted successfully.
+     * The POST_PASSWORD_RESET event occurs right after the user changes are flushed.
      *
      * This event allows you to set the response instead of using the default one.
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
-    const PASSWORD_CHANGE_SUCCESS = 'sylius.user.password_change.success';
+    const POST_PASSWORD_RESET = 'sylius.user.post_password_reset';
+
+    /**
+     * The PRE_PASSWORD_CHANGE event occurs before the change form is submitted successfully.
+     *
+     * This event allows you to set the response instead of using the default one.
+     * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
+     */
+    const PRE_PASSWORD_CHANGE = 'sylius.user.pre_password_change';
+
+    /**
+     * The POST_PASSWORD_CHANGE event occurs after the change form is submitted successfully.
+     *
+     * This event allows you to set the response instead of using the default one.
+     * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
+     */
+    const POST_PASSWORD_CHANGE = 'sylius.user.post_password_change';
+
     /**
      * The SECURITY_IMPLICIT_LOGIN event occurs when the user is logged in programmatically.
      *
