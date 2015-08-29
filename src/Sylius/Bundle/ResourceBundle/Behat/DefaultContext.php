@@ -408,7 +408,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     throw new \InvalidArgumentException(sprintf('There is no column with index %d', $index));
                 }
 
-                if (0 !== stripos(trim($columns[$index]->getText()), trim($searchedValue))) {
+                $containing = false;
+                $searchedValue = trim($searchedValue);
+                if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
+                    $searchedValue = substr($searchedValue, 1, strlen($searchedValue) - 2);
+                    $containing = true;
+                }
+
+                $position = stripos(trim($columns[$index]->getText()), $searchedValue);
+                if (($containing && false === $position) || (!$containing && 0 !== $position)) {
                     $found = false;
 
                     break;

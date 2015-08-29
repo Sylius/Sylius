@@ -13,7 +13,7 @@ sylius_web:
 
 create:
     resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
-    
+
 create_image:
     resource: "@CmfCreateBundle/Resources/config/routing/image.xml"
 
@@ -34,17 +34,17 @@ fos_oauth_server_token:
 
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix: /login
+    prefix: /connect-login
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix: /connect
 
 amazon_login:
-    path: /login/check-amazon
+    path: /connect-login/check-amazon
 
 facebook_login:
-    path: /login/check-facebook
+    path: /connect-login/check-facebook
 
 google_login:
-    path: /login/check-google
+    path: /connect-login/check-google

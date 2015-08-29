@@ -42,7 +42,6 @@ class WebContext extends DefaultContext
         }
     }
 
-
     /**
      * @Given /^I am on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
      * @Given /^I go to the page of ([^""]*) with ([^""]*) "([^""]*)"$/
@@ -92,6 +91,7 @@ class WebContext extends DefaultContext
         $this->assertSession()->addressEquals($this->generatePageUrl(
             sprintf('%s_show', $type), array('id' => $resource->getId())
         ));
+
         $this->assertStatusCodeEquals(200);
     }
 
@@ -249,7 +249,7 @@ class WebContext extends DefaultContext
     /**
      * For example: I should see product with name "Wine X" in that list.
      *
-     * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
+     * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ((?:(?![\w\s]+ containing))[\w\s]+) "([^""]*)" in (?:that|the) list$/
      */
     public function iShouldSeeResourceWithValueInThatList($columnName, $value)
     {
@@ -264,13 +264,43 @@ class WebContext extends DefaultContext
     /**
      * For example: I should not see product with name "Wine X" in that list.
      *
-     * @Then /^I should not see [\w\s]+ with ([\w\s]+) "([^""]*)" in (?:that|the) list$/
+     * @Then /^I should not see [\w\s]+ with ((?:(?![\w\s]+ containing))[\w\s]+) "([^""]*)" in (?:that|the) list$/
      */
     public function iShouldNotSeeResourceWithValueInThatList($columnName, $value)
     {
         $tableNode = new TableNode(array(
             array(trim($columnName)),
             array(trim($value)),
+        ));
+
+        $this->iShouldNotSeeTheFollowingRow($tableNode);
+    }
+
+    /**
+     * For example: I should see product with name containing "Wine X" in that list.
+     *
+     * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ([\w\s]+) containing "([^""]*)" in (?:that|the) list$/
+     */
+    public function iShouldSeeResourceWithValueContainingInThatList($columnName, $value)
+    {
+        $tableNode = new TableNode(array(
+            array(trim($columnName)),
+            array(trim('%' . $value . '%')),
+        ));
+
+        $this->iShouldSeeTheFollowingRow($tableNode);
+    }
+
+    /**
+     * For example: I should not see product with name containing "Wine X" in that list.
+     *
+     * @Then /^I should not see [\w\s]+ with ([\w\s]+) containing "([^""]*)" in (?:that|the) list$/
+     */
+    public function iShouldNotSeeResourceWithValueContainingInThatList($columnName, $value)
+    {
+        $tableNode = new TableNode(array(
+            array(trim($columnName)),
+            array(trim('%' . $value . '%')),
         ));
 
         $this->iShouldNotSeeTheFollowingRow($tableNode);
