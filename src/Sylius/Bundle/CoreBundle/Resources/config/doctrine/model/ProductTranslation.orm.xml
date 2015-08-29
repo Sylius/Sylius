@@ -18,7 +18,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductTranslation" table="sylius_product_translation">
-        <field name="shortDescription" column="short_description" type="string" nullable="true">
+        <field name="shortDescription" column="short_description" type="text" nullable="true">
             <gedmo:versioned />
         </field>
 
