@@ -1,9 +1,5 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import simple_list %}
-
 {% block content %}
 
     <h4>{{ 'sylius.account.home.welcome'|trans }}</h4>
@@ -18,9 +14,5 @@
             {{ 'sylius.account.home.since'|trans }} {{ app.user.createdAt|date() }}
         </div>
     </div>
-
-    <h4>{{ 'sylius.account.home.last5orders'|trans|raw }}</h4>
-
-    {% include "SyliusWebBundle:Frontend/Account:Order/_list.html.twig" %}
 
 {% endblock %}
