@@ -34,9 +34,8 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then /^I should be on user login page$/
+     * @Then /^I should (?:|still )be on user login page$/
      * @Then /^I should be redirected to user login page$/
-     * @Then /^I should still be on user login page$/
      */
     public function iShouldBeOnTheLoginPage()
     {
@@ -68,7 +67,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then /^I should be on the store homepage$/
+     * @Then /^I should (?:|still )be on the store homepage$/
      * @Then /^I should be redirected to the store homepage$/
      */
     public function iShouldBeOnTheStoreHomepage()
@@ -93,11 +92,11 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account homepage$/
+     * @Then /^I should (?:|still )be on my account homepage$/
      */
     public function iShouldBeOnMyAccountHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
+        $this->assertRoute('sylius_account_profile_show');
     }
 
     /**
@@ -109,19 +108,11 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account password page$/
+     * @Then /^I should (?:|still )be on my account password page$/
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
-    }
-
-    /**
-     * @Then /^I should still be on my account password page$/
-     */
-    public function iShouldStillBeOnMyAccountPasswordPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertRoute('sylius_account_change_password');
     }
 
     /**
@@ -133,27 +124,19 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account profile edition page$/
+     * @Then /^I should (?:|still )be on my account profile edition page$/
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
+        $this->assertRoute('sylius_account_profile_update');
     }
 
     /**
-     * @Given /^I should still be on my account profile edition page$/
-     */
-    public function iShouldStillBeOnMyProfileEditionPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
-    }
-
-    /**
-     * @Given /^I should be on my account profile page$/
+     * @Then /^I should (?:|still )be on my account profile page$/
      */
     public function iShouldBeOnMyProfilePage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
+        $this->assertRoute('sylius_account_profile_show');
     }
 
     /**
@@ -161,7 +144,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountOrdersPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_order_index'));
+        $this->assertRoute('sylius_account_order_index');
     }
 
     /**
@@ -181,21 +164,11 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then /^I should be on my account addresses page$/
+     * @Then /^I should (?:|still )be on my account addresses page$/
      */
     public function iShouldBeOnMyAccountAddressesPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
-        $this->assertStatusCodeEquals(200);
-    }
-
-    /**
-     * @Given /^I should still be on my account addresses page$/
-     */
-    public function iShouldStillBeOnMyAccountAddressesPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertRoute('sylius_account_address_index');
     }
 
     /**
@@ -207,39 +180,19 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then /^I should be on my account address creation page$/
+     * @Then /^I should (?:|still )be on my account address creation page$/
      */
     public function iShouldBeOnMyAccountAddressCreationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_create'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertRoute('sylius_account_address_create');
     }
 
     /**
-     * @Then /^I should still be on my account address creation page$/
-     */
-    public function iShouldStillBeOnMyAccountAddressCreationPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_create'));
-        $this->assertStatusCodeEquals(200);
-    }
-
-    /**
-     * @Then /^I should be on login page$/
-     */
-    public function iShouldBeOnLoginPage()
-    {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_security_login'));
-        $this->assertStatusCodeEquals(200);
-    }
-
-    /**
-     * @Then /^I should be on registration page$/
+     * @Then /^I should (?:|still )be on registration page$/
      */
     public function iShouldBeOnRegistrationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_registration'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertRoute('sylius_user_registration');
     }
 
     /**
@@ -657,6 +610,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->fillField('Password', $password);
         $this->fillField('Verification', $password);
         $this->pressButton('Register');
+    }
+
+    /**
+     * @When /^(?:|I )fill in guest email with "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function fillGuestEmail($value)
+    {
+        $value = $this->fixStepArgument($value);
+        $this->getSession()->getPage()->fillField('sylius_customer_guest[email]', $value);
     }
 
     /**

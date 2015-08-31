@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
+namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Checkout guest form type.
- *
- * @author Dmitrijs Balabka <dmitry.balabka@gmail.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class GuestType extends AbstractResourceType
+class CustomerSimpleRegistrationType extends AbstractResourceType
 {
     /**
      * @var RepositoryInterface
@@ -33,21 +33,27 @@ class GuestType extends AbstractResourceType
      * @param array               $validationGroups
      * @param RepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
+    public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);
+
         $this->customerRepository = $customerRepository;
     }
+
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('email', 'email', array(
-                'label' => 'sylius.form.guest.email',
+                'label' => 'sylius.form.customer.email',
+            ))
+            ->add('user', 'sylius_user_registration', array(
+                'label' => false,
             ))
             ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
+            ->addEventSubscriber(new UserRegistrationFormListener())
             ->setDataLocked(false)
         ;
     }
@@ -55,8 +61,20 @@ class GuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_checkout_guest';
+        return 'sylius_customer_simple_registration';
     }
 }

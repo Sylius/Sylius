@@ -14,7 +14,7 @@ sylius_account_profile_update:
         _controller: sylius.controller.customer:updateProfileAction
         _sylius:
             form: sylius_customer_profile
-            redirect: sylius_account_profile_update
+            redirect: sylius_account_profile_show
 
 sylius_account_change_password:
     path: /change-password

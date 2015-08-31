@@ -6,6 +6,9 @@ Feature: Checkout finalization
 
     Background:
         Given store has default configuration
+          And there are following users:
+            | email             | password | enabled |
+            | john@example.com  | foo1     | yes     |
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -56,16 +59,24 @@ Feature: Checkout finalization
     Scenario: Placing the order as Guest with invalid email address
         Given I am not logged in
           And I added product "PHP Top" to cart
-          And I go to the checkout start page
-         And I fill in "sylius_checkout_guest[email]" with "example"
+         When I go to the checkout start page
+          And I fill in guest email with "example"
           And I press "Proceed with your order"
          Then I should see "This email is invalid"
+
+    Scenario: Trying to place an order as Guest with already registered email address
+        Given I am not logged in
+          And I added product "PHP Top" to cart
+         When I go to the checkout start page
+          And I fill in guest email with "john@example.com"
+          And I press "Proceed with your order"
+         Then I should see "This email is already registered, please login or use forgotten password"
 
     Scenario: Placing the order as Guest
         Given I am not logged in
           And I added product "PHP Top" to cart
           And I go to the checkout start page
-          And I fill in "sylius_checkout_guest[email]" with "example@example.com"
+          And I fill in guest email with "example@example.com"
           And I press "Proceed with your order"
           And I fill in the shipping address to United Kingdom
           And I press "Continue"

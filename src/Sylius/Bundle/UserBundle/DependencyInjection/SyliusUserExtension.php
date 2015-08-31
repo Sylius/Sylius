@@ -44,5 +44,13 @@ class SyliusUserExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.customer_registration')
             ->addArgument(new Reference('sylius.repository.customer'))
         ;
+        $container
+            ->getDefinition('sylius.form.type.customer_simple_registration')
+            ->addArgument(new Reference('sylius.repository.customer'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.customer_guest')
+            ->addArgument(new Reference('sylius.repository.customer'))
+        ;
     }
 }

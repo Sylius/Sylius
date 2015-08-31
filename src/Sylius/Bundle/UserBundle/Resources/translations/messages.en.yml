@@ -1,5 +1,6 @@
 sylius:
     ui:
+        email: Email
         register: Register
         login: Login
         logout: Logout
@@ -18,8 +19,7 @@ sylius:
         customer_since: You are a customer since
         welcome: Welcome
         customer:
-            id: Customer ID:
-            email: Email:
+            id: Customer ID
     form:
         group:
             name: Name
