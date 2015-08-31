@@ -726,6 +726,9 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_user:
+    templates:
+        user: SyliusWebBundle:Frontend/User
+        customer: SyliusWebBundle:Frontend/Customer
     classes:
         user:
             model: Sylius\Component\Core\Model\User

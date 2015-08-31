@@ -17,7 +17,7 @@ Feature: Forgot password
           And I follow "Forgot password"
          When I fill in "Email" with "bar@foo.com"
           And I press "Reset"
-         Then I should be on the store homepage
+         Then I should be redirected to the login page
           And I should see "Your password has been reset successfully!"
 
     Scenario: Trying to reset password without email

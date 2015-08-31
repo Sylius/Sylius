@@ -25,6 +25,25 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class WebContext extends BaseWebContext implements SnippetAcceptingContext
 {
     /**
+     * @Given /^I am on the login page?$/
+     * @When /^I go to the login page?$/
+     */
+    public function iAmOnTheLoginPage()
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
+    }
+
+    /**
+     * @Then /^I should be on the login page$/
+     * @Then /^I should be redirected to the login page$/
+     * @Then /^I should still be on the login page$/
+     */
+    public function iShouldBeOnTheLoginPage()
+    {
+        $this->assertRoute('sylius_user_security_login');
+    }
+
+    /**
      * @Given /^go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
@@ -49,11 +68,12 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on the store homepage$/
+     * @Then /^I should be on the store homepage$/
+     * @Then /^I should be redirected to the store homepage$/
      */
     public function iShouldBeOnTheStoreHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_homepage'));
+        $this->assertRoute('sylius_homepage');
     }
 
     /**
@@ -69,7 +89,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountHomepage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_homepage'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_show'));
     }
 
     /**
@@ -77,7 +97,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
     }
 
     /**
@@ -133,7 +153,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfilePage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
     }
 
     /**
@@ -670,5 +690,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iGoToPageForProductWithEmptySlug()
     {
         $this->visitPath('/p/');
+    }
+
+    private function assertRoute($route)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl($route));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
     }
 }
