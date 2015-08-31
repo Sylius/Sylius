@@ -79,6 +79,7 @@ class CustomerController extends ResourceController
     protected function getCustomer()
     {
         $customer = $this->get('sylius.context.customer')->getCustomer();
+
         if (null === $customer) {
             throw new AccessDeniedException('You have to be logged in user to access this section.');
         }

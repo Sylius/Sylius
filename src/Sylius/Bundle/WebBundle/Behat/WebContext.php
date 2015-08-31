@@ -25,6 +25,25 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class WebContext extends BaseWebContext implements SnippetAcceptingContext
 {
     /**
+     * @Given /^I am on user login page?$/
+     * @When /^I go to user login page?$/
+     */
+    public function iAmOnTheLoginPage()
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
+    }
+
+    /**
+     * @Then /^I should be on user login page$/
+     * @Then /^I should be redirected to user login page$/
+     * @Then /^I should still be on user login page$/
+     */
+    public function iShouldBeOnTheLoginPage()
+    {
+        $this->assertRoute('sylius_user_security_login');
+    }
+
+    /**
      * @Given /^go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
@@ -49,11 +68,12 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on the store homepage$/
+     * @Then /^I should be on the store homepage$/
+     * @Then /^I should be redirected to the store homepage$/
      */
     public function iShouldBeOnTheStoreHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_homepage'));
+        $this->assertRoute('sylius_homepage');
     }
 
     /**
@@ -670,5 +690,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iGoToPageForProductWithEmptySlug()
     {
         $this->visitPath('/p/');
+    }
+
+    private function assertRoute($route)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl($route));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
     }
 }
