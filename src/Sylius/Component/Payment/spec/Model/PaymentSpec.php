@@ -126,6 +126,20 @@ class PaymentSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
+    function its_deletion_date_is_mutable(\DateTime $deletionTime)
+    {
+        $this->setDeletedAt($deletionTime);
+        $this->getDeletedAt()->shouldReturn($deletionTime);
+    }
+
+    function it_can_be_deleted()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setDeletedAt($date);
+        $this->isDeleted()->shouldReturn(true);
+    }
+
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
