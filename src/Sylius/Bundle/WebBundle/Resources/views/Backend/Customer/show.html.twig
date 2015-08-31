@@ -14,7 +14,7 @@
 <div class="page-header">
     <div class="actions-menu">
         {% if customer.user is not null and customer.user.id is not sameas(app.user.id) and not customer.deleted %}
-        {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
+        {{ buttons.generic(path('sylius_account_profile_show', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
         {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
         {% if not customer.deleted %}
