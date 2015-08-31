@@ -15,18 +15,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * User repository interface.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 interface UserRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Finds user by email
-     *
      * @param string $email
      *
-     * @return null|UserInterface User object or null
+     * @return null|UserInterface
      */
     public function findOneByEmail($email);
 }

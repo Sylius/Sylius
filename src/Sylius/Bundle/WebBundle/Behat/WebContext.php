@@ -69,7 +69,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountHomepage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_homepage'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_show'));
     }
 
     /**
@@ -77,7 +77,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
     }
 
     /**
@@ -133,7 +133,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfilePage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_show'));
     }
 
     /**
