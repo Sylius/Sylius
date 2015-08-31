@@ -31,6 +31,11 @@ class SetupCommand extends AbstractInstallCommand
     private $currencies = array();
 
     /**
+     * @var array
+     */
+    private $locales = array();
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -123,9 +128,9 @@ EOT
         $localeManager = $this->get('sylius.manager.locale');
 
         do {
-            if ($input->getOption('no-interaction')) {
-                $locales = array('en_US');
-            } else {
+            $locales = array('en_US');
+
+            if (!$input->getOption('no-interaction')) {
                 $output->writeln('Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".');
                 $codes = $this->ask($output, '<question>In which language your customers can browse the store?</question> ', array(), 'en_US');
                 $locales = explode(',', $codes);
@@ -153,12 +158,15 @@ EOT
 
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
-            if (null !== $localeRepository->findOneByCode($code)) {
+            if (null !== $existingLocale = $localeRepository->findOneByCode($code)) {
+                $this->locales[] = $existingLocale;
+
                 continue;
             }
 
             $locale = $localeRepository->createNew();
             $locale->setCode($code);
+            $this->locales[] = $locale;
 
             $localeManager->persist($locale);
         }
@@ -228,9 +236,9 @@ EOT
         $countryManager = $this->get('sylius.manager.country');
 
         do {
-            if ($input->getOption('no-interaction')) {
-                $countries = array('US');
-            } else {
+            $countries = array('US');
+
+            if (!$input->getOption('no-interaction')) {
                 $output->writeln('Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".');
                 $codes = $this->ask($output, '<question>To which countries you are going to sell your goods?</question> ', array(), 'US');
                 $countries = explode(',', $codes);
@@ -291,6 +299,7 @@ EOT
             $channel->setName($code);
             $channel->setColor(null);
             $channel->setCurrencies(new ArrayCollection($this->currencies));
+            $channel->setLocales(new ArrayCollection($this->locales));
 
             $channelManager->persist($channel);
         }
