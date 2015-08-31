@@ -128,13 +128,7 @@ EOT
         $localeManager = $this->get('sylius.manager.locale');
 
         do {
-            $locales = array('en_US');
-
-            if (!$input->getOption('no-interaction')) {
-                $output->writeln('Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".');
-                $codes = $this->ask($output, '<question>In which language your customers can browse the store?</question> ', array(), 'en_US');
-                $locales = explode(',', $codes);
-            }
+            $locales = $this->getLocalesCodes($input, $output);
 
             $valid = true;
 
@@ -184,13 +178,7 @@ EOT
         $currencyManager = $this->get('sylius.manager.currency');
 
         do {
-            $currencies = array('USD');
-
-            if (!$input->getOption('no-interaction')) {
-                $output->writeln('Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".');
-                $codes = $this->ask($output, '<question>In which currency your customers can buy goods?</question> ', array(), 'USD');
-                $currencies = explode(',', $codes);
-            }
+            $currencies = $this->getCurrenciesCodes($input, $output);
 
             $valid = true;
 
@@ -236,13 +224,7 @@ EOT
         $countryManager = $this->get('sylius.manager.country');
 
         do {
-            $countries = array('US');
-
-            if (!$input->getOption('no-interaction')) {
-                $output->writeln('Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".');
-                $codes = $this->ask($output, '<question>To which countries you are going to sell your goods?</question> ', array(), 'US');
-                $countries = explode(',', $codes);
-            }
+            $countries = $this->getCountriesCodes($input, $output);
             
             $valid = true;
 
@@ -283,7 +265,7 @@ EOT
         $channelRepository = $this->get('sylius.repository.channel');
         $channelManager = $this->get('sylius.manager.channel');
 
-        $channels = $this->getChannelsArray($input, $output);
+        $channels = $this->getChannelsCodes($input, $output);
 
         foreach ($channels as $code) {
             $output->writeln(sprintf('Adding <info>%s</info>.', $code));
@@ -313,14 +295,85 @@ EOT
      *
      * @return array
      */
-    private function getChannelsArray(InputInterface $input, OutputInterface $output)
+    private function getChannelsCodes(InputInterface $input, OutputInterface $output)
+    {
+        return $this->getCodes(
+            $input,
+            $output,
+            'On which channels are you going to sell your goods?',
+            'Please enter a list of channels, separated by commas or just hit ENTER to use "DEFAULT". For example "WEB-UK, WEB-DE, MOBILE".',
+            'DEFAULT'
+        );
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return array
+     */
+    private function getCurrenciesCodes(InputInterface $input, OutputInterface $output)
+    {
+        return $this->getCodes(
+            $input,
+            $output,
+            'In which currency your customers can buy goods?',
+            'Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".',
+            'USD'
+        );
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return array
+     */
+    private function getLocalesCodes(InputInterface $input, OutputInterface $output)
+    {
+        return $this->getCodes(
+            $input,
+            $output,
+            'In which language your customers can browse the store?',
+            'Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".',
+            'en_US'
+        );
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return array
+     */
+    private function getCountriesCodes(InputInterface $input, OutputInterface $output)
+    {
+        return $this->getCodes(
+            $input,
+            $output,
+            'To which countries you are going to sell your goods?',
+            'Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".',
+            'US'
+        );
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     * @param string          $question
+     * @param string          $description
+     * @param string          $defaultAnswer
+     *
+     * @return array
+     */
+    private function getCodes(InputInterface $input, OutputInterface $output, $question, $description, $defaultAnswer)
     {
         if ($input->getOption('no-interaction')) {
-            return array('DEFAULT');
+            return array($defaultAnswer);
         }
 
-        $output->writeln('Please enter a list of channels, separated by commas or just hit ENTER to use "DEFAULT". For example "WEB-UK, WEB-DE, MOBILE".');
-        $codes = $this->ask($output, '<question>On which channels are you going to sell your goods?</question> ', array(), 'DEFAULT');
+        $output->writeln($description);
+        $codes = $this->ask($output, '<question>'.$question.'</question> ', array(), $defaultAnswer);
 
         return explode(',', $codes);
     }
