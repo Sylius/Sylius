@@ -21,60 +21,49 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 class Payment implements PaymentInterface, PaymentSubjectInterface
 {
     /**
-     * Payments method identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Method.
-     *
      * @var PaymentMethodInterface
      */
     protected $method;
 
     /**
-     * Currency.
-     *
      * @var string
      */
     protected $currency;
 
     /**
-     * Amount.
-     *
      * @var integer
      */
     protected $amount = 0;
 
     /**
-     * State.
-     *
      * @var string
      */
     protected $state = PaymentInterface::STATE_NEW;
 
     /**
-     * Credit card as a source.
-     *
      * @var CreditCardInterface
      */
     protected $creditCard;
 
     /**
-     * Creation date.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $deletedAt;
 
     /**
      * @var array
@@ -232,6 +221,32 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDeleted()
+    {
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDeletedAt(\DateTime $deletedAt = null)
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
