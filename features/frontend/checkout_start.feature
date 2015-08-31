@@ -61,6 +61,6 @@ Feature: Checkout starting
               can checkout using only email without registration
         Given I added product "PHP Top" to cart
          When I go to the checkout start page
-          And I fill in "sylius_checkout_guest[email]" with "example@example.com"
+          And I fill in guest email with "example@example.com"
           And I press "Proceed with your order"
          Then I should be redirected to the checkout addressing step

@@ -1,12 +1,10 @@
 {% extends 'SyliusUserBundle::layout.html.twig' %}
 
 {% block content %}
-<div class="page-header">
-    <h1>{{ 'sylius.ui.register'|trans }}</h1>
-</div>
+{{ 'sylius.ui.register'|trans }}
 
 <form action="{{ path('sylius_user_registration') }}" method="post" class="form-horizontal" >
-    <fieldset class="well">
+    <fieldset>
         {{ form_errors(form) }}
 
         {{ form_row(form.firstName) }}
@@ -17,11 +15,8 @@
         {{ form_rest(form) }}
     </fieldset>
 
-    <div class="form-actions clearfix">
-        <button class="btn btn-success btn-lg" type="submit">
-            <i class="icon-user"></i>
-            {{ 'sylius.ui.register'|trans }}
-        </button>
-    </div>
+    <button type="submit">
+        {{ 'sylius.ui.register'|trans }}
+    </button>
 </form>
 {% endblock %}
