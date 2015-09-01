@@ -57,6 +57,8 @@ Every payment is represented by **Payment** instance and has following propertie
 +-------------+---------------------------------------------+------------------------------+
 | updatedAt   | Date of the last update                     | \DateTime                    |
 +-------------+---------------------------------------------+------------------------------+
+| deletedAt   | Date of deletion                            | \DateTime                    |
++-------------+---------------------------------------------+------------------------------+
 
 
 The following payment types are available :
