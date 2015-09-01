@@ -5,28 +5,26 @@ Feature: Search products
     I want to be able to search the products
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
-        And taxonomy "Category" has following taxons:
+          And taxonomy "Category" has following taxons:
             | Clothing > T-Shirts     |
             | Clothing > PHP T-Shirts |
             | Clothing > Gloves       |
-        And the following products exist:
+          And the following products exist:
             | name             | price | taxons       | description             |
             | Super T-Shirt    | 19.99 | T-Shirts     | super black t-shirt     |
             | Black T-Shirt    | 18.99 | T-Shirts     | black t-shirt           |
             | Sylius Tee       | 12.99 | PHP T-Shirts | a very nice php t-shirt |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts | symfony t-shirt         |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | doctrine t-shirt        |
-        And all products assigned to "DEFAULT-WEB" channel
-        And I populate the index
-        And channel "DEFAULT-WEB" has following configuration:
-          | taxonomy |
-          | Category |
-
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxonomy |
+            | Category |
+          And I populate the index
 
     Scenario: Search homepage is accessible
         Given I am on homepage

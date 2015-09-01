@@ -5,7 +5,8 @@ Feature: User registration
     I need to be able to create an account in the store
 
     Background:
-        Given there are following users:
+        Given store has default configuration
+          And there are following users:
             | email       | password |
             | bar@bar.com | foo1     |
           And the following customers exist:
@@ -17,8 +18,6 @@ Feature: User registration
           And the following orders exist:
             | customer                | address                                        |
             | customer@email.com      | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
-          And there is default currency configured
-          And there is default channel configured
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage

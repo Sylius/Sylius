@@ -5,13 +5,13 @@ Feature: Currency management
     I want to configure currencies and exchange rates
 
     Background:
-        Given there are following currencies configured:
+        Given store has default configuration
+          And there are following currencies configured:
             | code | exchange rate | enabled |
             | USD  | 0.76496       | yes     |
             | GBP  | 1.16998       | no      |
             | EUR  | 1.00000       | yes     |
             | AUD  | 0.73986       | yes     |
-          And there is default channel configured
           And I am logged in as administrator
 
     Scenario: Browsing all configured currencies

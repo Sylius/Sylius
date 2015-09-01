@@ -5,15 +5,14 @@ Feature: Zones
     In order to apply taxes and allow shipping to geographical areas
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are following zones:
             | name                      | type     | members                                       | scope      |
             | Baltic states             | country  | Lithuania, Latvia, Estonia                    | content    |
             | USA GMT-8                 | province | Washington, Oregon, Nevada, Idaho, California | shipping   |
             | Baltic states + USA GMT-8 | zone     | Baltic states, USA GMT-8                      |            |
             | Germany                   | country  | Germany                                       | price      |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all zones
         Given I am on the dashboard page

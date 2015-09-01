@@ -5,24 +5,20 @@ Feature: Product variants
     I want to be able to manage product variants
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there are following options:
+        Given store has default configuration
+          And there are following options:
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
-        And the following products exist:
+          And the following products exist:
             | name           | price | options                     |
             | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color |
             | Black T-Shirt  | 19.99 | T-Shirt size                |
             | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color |
             | Mug            | 5.99  |                             |
             | Sticker        | 10.00 |                             |
-        And product "Super T-Shirt" is available in all variations
+          And product "Super T-Shirt" is available in all variations
+          And I am logged in as administrator
 
     Scenario: Viewing a product without options
         Given I am on the product index page

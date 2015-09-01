@@ -5,13 +5,12 @@ Feature: Shipping categories
     I want to be able to manage shipping categories
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And there are following shipping categories:
             | name    |
             | Regular |
             | Heavy   |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all shipping categories
         Given I am on the dashboard page
@@ -68,11 +67,4 @@ Feature: Shipping categories
           And I click "delete" from the confirmation modal
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully deleted."
-
-    @javascript
-    Scenario: Deleted shipping category disappears from the list
-        Given I am on the shipping category index page
-         When I click "delete" near "Regular"
-          And I click "delete" from the confirmation modal
-         Then I should be on the shipping category index page
           And I should not see shipping category with name "Regular" in that list

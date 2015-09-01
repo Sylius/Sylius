@@ -5,9 +5,7 @@ Feature: Promotions
     I want to be able to manage promotions
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following promotions exist:
             | name           | description                            | usage limit | used | starts     | ends       |
             | New Year       | New Year Sale for more than 3 items    | 0           | 0    | 2013-12-31 | 2014-01-03 |
@@ -39,6 +37,7 @@ Feature: Promotions
           And promotion "Free orders" has following actions defined:
             | type                | configuration   |
             | Percentage discount | Percentage: 100 |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all promotions
         Given I am on the dashboard page

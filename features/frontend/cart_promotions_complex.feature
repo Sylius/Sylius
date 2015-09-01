@@ -5,34 +5,33 @@ Feature: Checkout promotions with multiple rules and actions
     I want to apply promotion discounts during checkout
 
     Background:
-        Given the following promotions exist:
-          | name              | description                                            |
-          | 150 EUR / 2 items | Discount for orders over 150 EUR with at least 2 items |
-        And promotion "150 EUR / 2 items" has following rules defined:
-          | type       | configuration        |
-          | Item total | Amount: 150          |
-          | Item count | Count: 2,Equal: true |
-        And promotion "150 EUR / 2 items" has following actions defined:
-          | type                | configuration |
-          | Fixed discount      | Amount: 20    |
-          | Percentage discount | Percentage: 5 |
-        And there are following taxonomies defined:
-          | name     |
-          | Category |
-        And taxonomy "Category" has following taxons:
-          | Clothing > Debian T-Shirts |
-        And the following products exist:
-          | name    | price | taxons          |
-          | Buzz    | 500   | Debian T-Shirts |
-          | Potato  | 200   | Debian T-Shirts |
-          | Woody   | 125   | Debian T-Shirts |
-          | Sarge   | 25    | Debian T-Shirts |
-          | Etch    | 20    | Debian T-Shirts |
-          | Lenny   | 15    | Debian T-Shirts |
-        And there is default currency configured
-        And there is default channel configured
-        And all products assigned to "DEFAULT-WEB" channel
-        And all promotions assigned to "DEFAULT-WEB" channel
+        Given store has default configuration
+          And the following promotions exist:
+            | name              | description                                            |
+            | 150 EUR / 2 items | Discount for orders over 150 EUR with at least 2 items |
+          And promotion "150 EUR / 2 items" has following rules defined:
+            | type       | configuration        |
+            | Item total | Amount: 150          |
+            | Item count | Count: 2,Equal: true |
+          And promotion "150 EUR / 2 items" has following actions defined:
+            | type                | configuration |
+            | Fixed discount      | Amount: 20    |
+            | Percentage discount | Percentage: 5 |
+          And there are following taxonomies defined:
+            | name     |
+            | Category |
+          And taxonomy "Category" has following taxons:
+            | Clothing > Debian T-Shirts |
+          And the following products exist:
+            | name    | price | taxons          |
+            | Buzz    | 500   | Debian T-Shirts |
+            | Potato  | 200   | Debian T-Shirts |
+            | Woody   | 125   | Debian T-Shirts |
+            | Sarge   | 25    | Debian T-Shirts |
+            | Etch    | 20    | Debian T-Shirts |
+            | Lenny   | 15    | Debian T-Shirts |
+          And all products are assigned to the default channel
+          And all promotions are assigned to the default channel
 
     Scenario: Several discounts are applied when a promotion has several
               actions and the cart fulfills all the rules

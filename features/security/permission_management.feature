@@ -5,33 +5,30 @@ Feature: Permissions management
     I want to be able to manage permissions
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there is following permission hierarchy:
-            | code                        | parent         | description                   |
-            | sylius.catalog              |                | Manage products catalog       |
-            | sylius.product.show         | sylius.catalog | View single product           |
-            | sylius.product.index        | sylius.catalog | List all products             |
-            | sylius.product.create       | sylius.catalog | Add new products              |
-            | sylius.product.update       | sylius.catalog | Edit products                 |
-            | sylius.product.delete       | sylius.catalog | Delete products               |
-            | sylius.permission.show      |                | View single permission        |
-            | sylius.permission.index     |                | List all permissions          |
-            | sylius.permission.create    |                | Add new permissions           |
-            | sylius.permission.update    |                | Edit permissions              |
-            | sylius.permission.delete    |                | Delete permissions            |
-        And there is following role hierarchy:
-            | code                   | parent               | name            | security roles             |
-            | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
-        And role "Administrator" has the following permissions:
+        Given store has default configuration
+          And there is following permission hierarchy:
+            | code                     | parent         | description             |
+            | sylius.catalog           |                | Manage products catalog |
+            | sylius.product.show      | sylius.catalog | View single product     |
+            | sylius.product.index     | sylius.catalog | List all products       |
+            | sylius.product.create    | sylius.catalog | Add new products        |
+            | sylius.product.update    | sylius.catalog | Edit products           |
+            | sylius.product.delete    | sylius.catalog | Delete products         |
+            | sylius.permission.show   |                | View single permission  |
+            | sylius.permission.index  |                | List all permissions    |
+            | sylius.permission.create |                | Add new permissions     |
+            | sylius.permission.update |                | Edit permissions        |
+            | sylius.permission.delete |                | Delete permissions      |
+          And there is following role hierarchy:
+            | code                 | parent | name          | security roles             |
+            | sylius.administrator |        | Administrator | ROLE_ADMINISTRATION_ACCESS |
+          And role "Administrator" has the following permissions:
             | sylius.permission.show   |
             | sylius.permission.index  |
             | sylius.permission.create |
             | sylius.permission.update |
             | sylius.permission.delete |
-        And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Seeing index of all permissions
         Given I am on the dashboard page

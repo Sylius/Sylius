@@ -5,17 +5,14 @@ Feature: Products filter
     I want to be able to filter list by name
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And I am logged in as administrator
-        And the following products exist:
+        Given store has default configuration
+          And the following products exist:
             | name          | price | sku |
             | Super T-Shirt | 19.99 | 123 |
             | Black T-Shirt | 19.99 | 321 |
-            | Mug           | 5.99  | 136 |
             | Sticker       | 10.00 | 555 |
-            | Banana        | 10.00 | 999 |
             | Orange        | 10.00 | 124 |
+          And I am logged in as administrator
 
     Scenario: Filtering products by name
         Given I am on the product index page

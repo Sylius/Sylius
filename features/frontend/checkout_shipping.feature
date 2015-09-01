@@ -5,7 +5,8 @@ Feature: Checkout shipping
     I want to be able to use checkout shipping step
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -32,10 +33,8 @@ Feature: Checkout shipping
           And the following payment methods exist:
             | name  | gateway | enabled | calculator | calculator_configuration |
             | Dummy | dummy   | yes     | fixed      | amount: 0                |
-          And there is default currency configured
-          And there is default channel configured
-          And all products assigned to "DEFAULT-WEB" channel
-          And channel "DEFAULT-WEB" has following configuration:
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
             | taxonomy | payment | shipping                                      |
             | Category | Dummy   | DHL Express, FedEx, FedEx Premium, UPS Ground |
           And I am logged in user

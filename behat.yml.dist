@@ -147,6 +147,7 @@ default:
         oauth:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\UserBundle\Behat\OAuthContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext

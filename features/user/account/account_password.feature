@@ -5,8 +5,7 @@ Feature: User account password change
     I want to be able to change password
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
+        Given store has default configuration
           And I am logged in user
           And I am on my account homepage
 

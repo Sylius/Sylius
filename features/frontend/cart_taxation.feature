@@ -5,13 +5,14 @@ Feature: Cart taxation
     I want to apply taxes during checkout
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
             | Clothing > PHP T-Shirts |
           And the following zones are defined:
-            | name  | type    | members        |
+            | name    | type    | members        |
             | UK      | country | United Kingdom |
             | Germany | country | Germany        |
           And there are following tax categories:
@@ -24,13 +25,7 @@ Feature: Cart taxation
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 50    | PHP T-Shirts | Taxable Goods |
-          And there is default currency configured
-          And there is default channel configured
-          And all products assigned to "DEFAULT-WEB" channel
-          And channel "DEFAULT-WEB" has following configuration:
-            | taxonomy |
-            | Category |
-
+          And all products are assigned to the default channel
 
     Scenario: No taxes are applied for unknown billing address
               when default tax zone is not configured

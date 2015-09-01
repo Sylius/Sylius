@@ -5,13 +5,12 @@ Feature: Product archetype translations
     I want to be able to create archetypes with localised names
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-            | es_ES | yes     |
-        And I am logged in as administrator
+        Given store has default configuration
+          And there are following locales configured:
+            | code  |
+            | en_US |
+            | es_ES |
+          And I am logged in as administrator
 
     Scenario: Creating a product archetype requires default translation fields
         Given I am on the product archetype creation page
