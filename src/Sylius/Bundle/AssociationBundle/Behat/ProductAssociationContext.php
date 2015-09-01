@@ -50,7 +50,7 @@ class ProductAssociationContext extends DefaultContext
             ->getQuery()
             ->getOneOrNullResult()
        ;
-        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $typeName));
+        $associationType = $this->getRepository('ProductAssociationType')->findOneBy(array('name' => $typeName));
         if (!$associationType instanceof AssociationTypeInterface) {
             throw new \InvalidArgumentException(sprintf('Association Type %s does not exists and it should', $typeName));
         }
@@ -101,7 +101,7 @@ class ProductAssociationContext extends DefaultContext
         }
 
         $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProductName));
-        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationTypeName));
+        $associationType = $this->getRepository('ProductAssociationType')->findOneBy(array('name' => $associationTypeName));
 
         $this->currentProduct->addAssociation(new ProductAssociation($associatedProduct, $associationType));
 
@@ -116,7 +116,7 @@ class ProductAssociationContext extends DefaultContext
     {
         $product = $this->getRepository('Product')->findOneBy(array('name' => $product));
         $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProduct));
-        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationType));
+        $associationType = $this->getRepository('ProductAssociationType')->findOneBy(array('name' => $associationType));
 
         $this->getSession()->visit($this->generateUrl('sylius_backend_product_update', array('id' => $product->getId())));
         $this->assertSession()->fieldValueEquals('sylius_product[associations][0][type]', $associationType->getId());

@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Association\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -32,14 +34,34 @@ interface AssociationInterface
     public function setType(AssociationTypeInterface $type);
 
     /**
-     * @return bool
+     * @return Associatable
      */
-    public function isDeleted();
+    public function getOwner();
 
     /**
-     * Returns associated object
-     *
-     * @return mixed
+     * @param Associatable
      */
-    public function getAssociatedObject();
+    public function setOwner(Associatable $associatedObject = null);
+
+    /**
+     * @return Associatable
+     */
+    public function getAssociatedObjects();
+
+    /**
+     * @param Collection
+     */
+    public function setAssociatedObjects(Collection $associatedObjects);
+
+    /**
+     * @param Associatable
+     */
+    public function addAssociatedObject(Associatable $associatedObject);
+
+    /**
+     * @param Associatable
+     *
+     * @return bool
+     */
+    public function hasAssociatedObject(Associatable $associatedObject);
 }

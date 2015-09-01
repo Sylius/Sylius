@@ -1,8 +1,8 @@
 ---
 sylius:
     form:
-        association:
+        product_association:
             product: Associated Product
             type: Association Type
-        association_type:
+        product_association_type:
             name: Name

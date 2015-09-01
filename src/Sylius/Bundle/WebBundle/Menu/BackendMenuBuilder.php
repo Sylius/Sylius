@@ -155,10 +155,10 @@ class BackendMenuBuilder extends MenuBuilder
             $menu->removeChild('assortment');
         }
 
-        $child->addChild('association types', array(
-            'route' => 'sylius_backend_association_type_index',
+        $child->addChild('product_association types', array(
+            'route' => 'sylius_backend_product_association_type_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.association_type', $section)));
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_association_type', $section)));
     }
 
     /**

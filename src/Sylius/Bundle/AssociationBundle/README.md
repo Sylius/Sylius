@@ -26,17 +26,6 @@ Contributing
 
 All information's about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Mailing lists
--------------
-
-### Users
-
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
-
 Sylius twitter account
 ----------------------
 
@@ -70,5 +59,5 @@ License can be found [here](https://github.com/Sylius/SyliusArchetypeBundle/blob
 Authors
 -------
 
-The bundle was originally created by Łukasz Chruściel based on Leszek Probucki work.
+The bundle was originally created by [Łukasz Chruściel](lukasz.chrusciel@lakion.com) based on [Leszek Prabucki](leszek.prabucki@gmail.com) work.
 See the list of [contributors](https://github.com/Sylius/SyliusAssociationBundle/contributors).

@@ -69,7 +69,6 @@ class SyliusProductBundle extends AbstractResourceBundle
             OptionInterface::class               => 'sylius.model.product_option.class',
             OptionValueInterface::class          => 'sylius.model.product_option_value.class',
             ArchetypeInterface::class            => 'sylius.model.product_archetype.class',
-            AssociationTypeInterface::class      => 'sylius.model.association_type.class'
         );
     }
 

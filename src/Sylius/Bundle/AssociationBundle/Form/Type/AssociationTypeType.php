@@ -22,13 +22,30 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AssociationTypeType extends AbstractResourceType
 {
     /**
+     * @var string
+     */
+    private $subject;
+
+    /**
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     * @param string   $subject
+     */
+    public function __construct($dataClass, array $validationGroups = array(), $subject)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->subject = $subject;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.association_type.name',
+                'label' => 'sylius.form.product_association_type.name',
                 'required' => true
             ))
         ;
@@ -39,20 +56,6 @@ class AssociationTypeType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_association_type';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        parent::setDefaultOptions($resolver);
-
-        $resolver->replaceDefaults(array(
-            'empty_data' => function (FormInterface $form) {
-                return new $this->dataClass($form->get('name')->getData());
-            }
-        ));
+        return sprintf('sylius_%s_association_type', $this->subject);
     }
 }

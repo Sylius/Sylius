@@ -32,17 +32,6 @@ class SyliusAssociationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\Association\Model\AssociationTypeInterface'      => 'sylius.model.association_type.class'
-        );
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Association\Model';

@@ -247,7 +247,13 @@
             {% for association in product.associations %}
                 <tr>
                     <td class="sylius-association-type"><strong>{{ association.type.name }}</strong></td>
-                    <td>{{ association.associatedObject }}</td>
+                    <td>
+                        <ul>
+                        {% for associatedObject in association.associatedObjects %}
+                            <li>{{ associatedObject.name }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                 </tr>
             {% else %}
                 <tr>

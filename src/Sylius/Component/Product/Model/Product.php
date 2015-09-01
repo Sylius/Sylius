@@ -473,6 +473,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function addAssociation(AssociationInterface $association)
     {
         $this->associations[] = $association;
+        $association->setOwner($this);
     }
 
     /**
@@ -480,6 +481,7 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     public function removeAssociation(AssociationInterface $association)
     {
+        $association->setOwner(null);
         $this->associations->removeElement($association);
     }
 

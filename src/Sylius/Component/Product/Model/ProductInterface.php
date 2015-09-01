@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
+use Sylius\Component\Association\Model\Associatable;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -27,7 +28,8 @@ interface ProductInterface extends
     SoftDeletableInterface,
     TimestampableInterface,
     ToggleableInterface,
-    ProductTranslationInterface
+    ProductTranslationInterface,
+    Associatable
 {
     /**
      * @return bool

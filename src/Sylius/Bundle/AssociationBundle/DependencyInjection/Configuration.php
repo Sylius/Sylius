@@ -38,7 +38,6 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addValidationGroupsSection($rootNode);
-        $this->addAssociationSection($rootNode);
 
         return $treeBuilder;
     }
@@ -57,6 +56,10 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
+                        ->arrayNode('association')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
                     ->end()
                 ->end()
             ->end()
@@ -71,33 +74,37 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('association_type')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Association\Model\AssociationType')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType')->end()
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('subject')->isRequired()->end()
+                            ->arrayNode('association')
+                                ->isRequired()
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('model')->isRequired()->end()
+                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                    ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\AssociationBundle\Form\Type\AssociationType')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-    ;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addAssociationSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('product_association')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->variableNode('classes')
+                            ->arrayNode('association_type')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('model')->defaultValue('Sylius\Component\Association\Model\AssociationType')->end()
+                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                    ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()

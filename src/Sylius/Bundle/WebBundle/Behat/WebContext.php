@@ -104,7 +104,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iWantToCreateNewAssociationType()
     {
-        $this->iAmOnThePage('association type creation');
+        $this->iAmOnThePage('product association type creation');
     }
 
     /**

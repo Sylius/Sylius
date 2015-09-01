@@ -1,19 +1,5 @@
 {% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
 
 <div class="tab-pane" id="associations">
-    <div id="sylius-assortment-product-associations" class="collection-container" data-prototype="{{ ('<div id="sylius_product_associations___name__">' ~ form_widget(form.associations.vars.prototype)) ~ '</div>'|e }}">
-        {% for associationForm in form.associations %}
-        <div class="sylius-assortment-product-associations-association row">
-            <div class="col-md-10">
-                {{ form_widget(associationForm) }}
-            </div>
-            <div class="col-md-2">
-                <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-product-associations" data-collection-item="association"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.product.remove_association'|trans }}</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-assortment-product-associations" data-collection="sylius-assortment-product-associations">
-        {{ 'sylius.product.add_association'|trans }}
-    </a>
+    {{ form_row(form.associations, { 'label': false }) }}
 </div>

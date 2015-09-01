@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.association_type.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.product_association_type.name'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,15 +18,15 @@
                 <td>{{ type.id }}</td>
                 <td>{{ type.name }}</td>
                 <td class="center-text">
-                    {{ buttons.edit(path('sylius_backend_association_type_update', {'id': type.id})) }}
-                    {{ buttons.delete(path('sylius_backend_association_type_delete', {'id': type.id})) }}
+                    {{ buttons.edit(path('sylius_backend_product_association_type_update', {'id': type.id})) }}
+                    {{ buttons.delete(path('sylius_backend_product_association_type_delete', {'id': type.id})) }}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.product_attribute.no_results'|trans) }}
+{{ alerts.info('sylius.product_association_type.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}

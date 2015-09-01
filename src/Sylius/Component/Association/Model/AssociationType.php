@@ -38,17 +38,21 @@ class AssociationType implements AssociationTypeInterface
     protected $updatedAt;
 
     /**
-     * @var null|\DateTime
-     */
-    protected $deletedAt;
-
-    /**
      * @param string $name
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -58,7 +62,6 @@ class AssociationType implements AssociationTypeInterface
     {
         return $this->name;
     }
-
     /**
      * {@inheritdoc}
      */
@@ -69,11 +72,35 @@ class AssociationType implements AssociationTypeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return \DateTime
      */
-    public function getId()
+    public function getCreatedAt()
     {
-        return $this->id;
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -91,4 +118,11 @@ class AssociationType implements AssociationTypeInterface
 
         return true;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+
 }
