@@ -11,27 +11,20 @@
 
 namespace Sylius\Component\Metadata\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface RootMetadataInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
     public function getId();
 
     /**
-     * @return string
+     * @param string $id
      */
-    public function getKey();
-
-    /**
-     * @param string $key
-     */
-    public function setKey($key);
+    public function setId($id);
 
     /**
      * @return MetadataInterface

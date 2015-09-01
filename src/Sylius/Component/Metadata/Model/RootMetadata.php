@@ -17,14 +17,9 @@ namespace Sylius\Component\Metadata\Model;
 class RootMetadata implements RootMetadataInterface
 {
     /**
-     * @var mixed
-     */
-    protected $id;
-
-    /**
      * @var string
      */
-    protected $key;
+    protected $id;
 
     /**
      * @var MetadataInterface
@@ -42,17 +37,9 @@ class RootMetadata implements RootMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getKey()
+    public function setId($id)
     {
-        return $this->key;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKey($key)
-    {
-        $this->key = $key;
+        $this->id = $id;
     }
 
     /**
