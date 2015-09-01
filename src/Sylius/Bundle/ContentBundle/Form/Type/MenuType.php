@@ -47,6 +47,7 @@ class MenuType extends AbstractResourceType
                 'by_reference'     => false,
                 'label'            => false,
                 'button_add_label' => 'sylius.form.menu.add_menu_node',
+                'cascade_validation' => true,
              ))
             ->add('uri', null, array(
                 'required' => false,

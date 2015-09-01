@@ -665,9 +665,11 @@ sylius:
         id: ID
         index_header: Pages
         no_results: There are no pages to display.
+        no_route: Your content will not appear in frontend if no route is defined
         publishable: Published
         start_date: Start Date
         end_date: End date
+        routes: Routes
         title: Title
         update_header: Editing page
     password: Password
