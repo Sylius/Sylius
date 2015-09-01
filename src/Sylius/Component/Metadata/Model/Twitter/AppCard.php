@@ -76,56 +76,6 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function serialize()
-    {
-        return json_encode([
-            $this->site,
-            $this->siteId,
-            $this->description,
-            $this->appNameIphone,
-            $this->appIdIphone,
-            $this->appUrlIphone,
-            $this->appNameIpad,
-            $this->appIdIpad,
-            $this->appUrlIpad,
-            $this->appNameGooglePlay,
-            $this->appIdGooglePlay,
-            $this->appUrlGooglePlay,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->site,
-            $this->siteId,
-            $this->description,
-            $this->appNameIphone,
-            $this->appIdIphone,
-            $this->appUrlIphone,
-            $this->appNameIpad,
-            $this->appIdIpad,
-            $this->appUrlIpad,
-            $this->appNameGooglePlay,
-            $this->appIdGooglePlay,
-            $this->appUrlGooglePlay,
-        ) = json_decode($serialized, true);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
@@ -134,9 +84,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppNameIphone($appNameIphone)
+    public function setDescription($description)
     {
-        $this->appNameIphone = $appNameIphone;
+        $this->description = $description;
     }
 
     /**
@@ -150,9 +100,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppIdIphone($appIdIphone)
+    public function setAppNameIphone($appNameIphone)
     {
-        $this->appIdIphone = $appIdIphone;
+        $this->appNameIphone = $appNameIphone;
     }
 
     /**
@@ -166,9 +116,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppUrlIphone($appUrlIphone)
+    public function setAppIdIphone($appIdIphone)
     {
-        $this->appUrlIphone = $appUrlIphone;
+        $this->appIdIphone = $appIdIphone;
     }
 
     /**
@@ -182,9 +132,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppNameIpad($appNameIpad)
+    public function setAppUrlIphone($appUrlIphone)
     {
-        $this->appNameIpad = $appNameIpad;
+        $this->appUrlIphone = $appUrlIphone;
     }
 
     /**
@@ -198,9 +148,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppIdIpad($appIdIpad)
+    public function setAppNameIpad($appNameIpad)
     {
-        $this->appIdIpad = $appIdIpad;
+        $this->appNameIpad = $appNameIpad;
     }
 
     /**
@@ -214,9 +164,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppUrlIpad($appUrlIpad)
+    public function setAppIdIpad($appIdIpad)
     {
-        $this->appUrlIpad = $appUrlIpad;
+        $this->appIdIpad = $appIdIpad;
     }
 
     /**
@@ -230,9 +180,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppNameGooglePlay($appNameGooglePlay)
+    public function setAppUrlIpad($appUrlIpad)
     {
-        $this->appNameGooglePlay = $appNameGooglePlay;
+        $this->appUrlIpad = $appUrlIpad;
     }
 
     /**
@@ -246,9 +196,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppIdGooglePlay($appIdGooglePlay)
+    public function setAppNameGooglePlay($appNameGooglePlay)
     {
-        $this->appIdGooglePlay = $appIdGooglePlay;
+        $this->appNameGooglePlay = $appNameGooglePlay;
     }
 
     /**
@@ -262,9 +212,9 @@ class AppCard extends AbstractCard implements AppCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setAppUrlGooglePlay($appUrlGooglePlay)
+    public function setAppIdGooglePlay($appIdGooglePlay)
     {
-        $this->appUrlGooglePlay = $appUrlGooglePlay;
+        $this->appIdGooglePlay = $appIdGooglePlay;
     }
 
     /**
@@ -273,5 +223,13 @@ class AppCard extends AbstractCard implements AppCardInterface
     public function getAppUrlGooglePlay()
     {
         return $this->appUrlGooglePlay;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppUrlGooglePlay($appUrlGooglePlay)
+    {
+        $this->appUrlGooglePlay = $appUrlGooglePlay;
     }
 }

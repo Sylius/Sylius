@@ -44,14 +44,6 @@ abstract class AbstractCard extends AbstractMetadata implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function setSite($site)
-    {
-        $this->site = $site;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getSite()
     {
         return $this->site;
@@ -60,9 +52,9 @@ abstract class AbstractCard extends AbstractMetadata implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function setSiteId($siteId)
+    public function setSite($site)
     {
-        $this->siteId = $siteId;
+        $this->site = $site;
     }
 
     /**
@@ -71,5 +63,13 @@ abstract class AbstractCard extends AbstractMetadata implements CardInterface
     public function getSiteId()
     {
         return $this->siteId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
     }
 }

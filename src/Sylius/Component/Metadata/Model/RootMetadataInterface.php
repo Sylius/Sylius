@@ -24,22 +24,22 @@ interface RootMetadataInterface
     public function getId();
 
     /**
-     * @param string $key
-     */
-    public function setKey($key);
-
-    /**
      * @return string
      */
     public function getKey();
 
     /**
-     * @param MetadataInterface $metadata
+     * @param string $key
      */
-    public function setMetadata(MetadataInterface $metadata);
+    public function setKey($key);
 
     /**
      * @return MetadataInterface
      */
     public function getMetadata();
+
+    /**
+     * @param MetadataInterface $metadata
+     */
+    public function setMetadata(MetadataInterface $metadata);
 }

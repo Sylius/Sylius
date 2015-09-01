@@ -40,10 +40,9 @@ class SyliusMetadataBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        );
+        ];
     }
 
     /**
@@ -51,9 +50,9 @@ class SyliusMetadataBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             'Sylius\Component\Metadata\Model\RootMetadataInterface' => 'sylius.model.metadata.class',
-        );
+        ];
     }
 
     /**

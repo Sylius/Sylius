@@ -51,33 +51,9 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     /**
      * {@inheritdoc}
      */
-    public function serialize()
+    public function getCreator()
     {
-        return json_encode([
-            $this->site,
-            $this->siteId,
-            $this->creator,
-            $this->creatorId,
-            $this->title,
-            $this->description,
-            $this->image,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->site,
-            $this->siteId,
-            $this->creator,
-            $this->creatorId,
-            $this->title,
-            $this->description,
-            $this->image,
-        ) = json_decode($serialized, true);
+        return $this->creator;
     }
 
     /**
@@ -91,9 +67,9 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     /**
      * {@inheritdoc}
      */
-    public function getCreator()
+    public function getCreatorId()
     {
-        return $this->creator;
+        return $this->creatorId;
     }
 
     /**
@@ -107,9 +83,9 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     /**
      * {@inheritdoc}
      */
-    public function getCreatorId()
+    public function getTitle()
     {
-        return $this->creatorId;
+        return $this->title;
     }
 
     /**
@@ -123,9 +99,9 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getDescription()
     {
-        return $this->title;
+        return $this->description;
     }
 
     /**
@@ -139,9 +115,9 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getImage()
     {
-        return $this->description;
+        return $this->image;
     }
 
     /**
@@ -150,13 +126,5 @@ class SummaryLargeImageCard extends AbstractCard implements SummaryLargeImageCar
     public function setImage($image)
     {
         $this->image = $image;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 }

@@ -21,23 +21,16 @@ interface SummaryLargeImageCardInterface extends CardInterface
     /**
      * The twitter:creator property.
      *
-     * @param string $creator
-     */
-    public function setCreator($creator);
-
-    /**
-     * The twitter:creator property.
-     *
      * @return string
      */
     public function getCreator();
 
     /**
-     * The twitter:creator:id property.
+     * The twitter:creator property.
      *
-     * @param string $creatorId
+     * @param string $creator
      */
-    public function setCreatorId($creatorId);
+    public function setCreator($creator);
 
     /**
      * The twitter:creator:id property.
@@ -47,11 +40,11 @@ interface SummaryLargeImageCardInterface extends CardInterface
     public function getCreatorId();
 
     /**
-     * The twitter:title property.
+     * The twitter:creator:id property.
      *
-     * @param string $title
+     * @param string $creatorId
      */
-    public function setTitle($title);
+    public function setCreatorId($creatorId);
 
     /**
      * The twitter:title property.
@@ -61,11 +54,11 @@ interface SummaryLargeImageCardInterface extends CardInterface
     public function getTitle();
 
     /**
-     * The twitter:description property.
+     * The twitter:title property.
      *
-     * @param string $description
+     * @param string $title
      */
-    public function setDescription($description);
+    public function setTitle($title);
 
     /**
      * The twitter:description property.
@@ -75,11 +68,11 @@ interface SummaryLargeImageCardInterface extends CardInterface
     public function getDescription();
 
     /**
-     * The twitter:image property.
+     * The twitter:description property.
      *
-     * @param string $image
+     * @param string $description
      */
-    public function setImage($image);
+    public function setDescription($description);
 
     /**
      * The twitter:image property.
@@ -87,4 +80,11 @@ interface SummaryLargeImageCardInterface extends CardInterface
      * @return string
      */
     public function getImage();
+
+    /**
+     * The twitter:image property.
+     *
+     * @param string $image
+     */
+    public function setImage($image);
 }

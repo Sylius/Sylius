@@ -21,23 +21,16 @@ interface PlayerCardInterface extends CardInterface
     /**
      * The twitter:title property.
      *
-     * @param string $title
-     */
-    public function setTitle($title);
-
-    /**
-     * The twitter:title property.
-     *
      * @return string
      */
     public function getTitle();
 
     /**
-     * The twitter:description property.
+     * The twitter:title property.
      *
-     * @param string $description
+     * @param string $title
      */
-    public function setDescription($description);
+    public function setTitle($title);
 
     /**
      * The twitter:description property.
@@ -47,11 +40,11 @@ interface PlayerCardInterface extends CardInterface
     public function getDescription();
 
     /**
-     * The twitter:image property.
+     * The twitter:description property.
      *
-     * @param string $image
+     * @param string $description
      */
-    public function setImage($image);
+    public function setDescription($description);
 
     /**
      * The twitter:image property.
@@ -61,11 +54,11 @@ interface PlayerCardInterface extends CardInterface
     public function getImage();
 
     /**
-     * The twitter:player property.
+     * The twitter:image property.
      *
-     * @param string $player
+     * @param string $image
      */
-    public function setPlayer($player);
+    public function setImage($image);
 
     /**
      * The twitter:player property.
@@ -75,11 +68,11 @@ interface PlayerCardInterface extends CardInterface
     public function getPlayer();
 
     /**
-     * The twitter:player:width property.
+     * The twitter:player property.
      *
-     * @param integer $playerWidth
+     * @param string $player
      */
-    public function setPlayerWidth($playerWidth);
+    public function setPlayer($player);
 
     /**
      * The twitter:player:width property.
@@ -89,11 +82,11 @@ interface PlayerCardInterface extends CardInterface
     public function getPlayerWidth();
 
     /**
-     * The twitter:player:height property.
+     * The twitter:player:width property.
      *
-     * @param integer $playerHeight
+     * @param integer $playerWidth
      */
-    public function setPlayerHeight($playerHeight);
+    public function setPlayerWidth($playerWidth);
 
     /**
      * The twitter:player:height property.
@@ -103,11 +96,11 @@ interface PlayerCardInterface extends CardInterface
     public function getPlayerHeight();
 
     /**
-     * The twitter:player:stream property.
+     * The twitter:player:height property.
      *
-     * @param string $playerStream
+     * @param integer $playerHeight
      */
-    public function setPlayerStream($playerStream);
+    public function setPlayerHeight($playerHeight);
 
     /**
      * The twitter:player:stream property.
@@ -117,11 +110,11 @@ interface PlayerCardInterface extends CardInterface
     public function getPlayerStream();
 
     /**
-     * The twitter:player:stream:content_type property.
+     * The twitter:player:stream property.
      *
-     * @param string $playerStreamContentType
+     * @param string $playerStream
      */
-    public function setPlayerStreamContentType($playerStreamContentType);
+    public function setPlayerStream($playerStream);
 
     /**
      * The twitter:player:stream:content_type property.
@@ -129,4 +122,11 @@ interface PlayerCardInterface extends CardInterface
      * @return string
      */
     public function getPlayerStreamContentType();
+
+    /**
+     * The twitter:player:stream:content_type property.
+     *
+     * @param string $playerStreamContentType
+     */
+    public function setPlayerStreamContentType($playerStreamContentType);
 }

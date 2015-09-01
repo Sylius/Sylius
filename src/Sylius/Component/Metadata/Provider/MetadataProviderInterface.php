@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sylius\Component\Metadata\Provider;
 
 use Sylius\Component\Metadata\Model\MetadataInterface;

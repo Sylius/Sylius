@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Metadata\Model;
 
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -43,14 +42,6 @@ class RootMetadata implements RootMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setKey($key)
-    {
-        $this->key = $key;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getKey()
     {
         return $this->key;
@@ -59,9 +50,9 @@ class RootMetadata implements RootMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setMetadata(MetadataInterface $metadata)
+    public function setKey($key)
     {
-        $this->metadata = $metadata;
+        $this->key = $key;
     }
 
     /**
@@ -70,5 +61,13 @@ class RootMetadata implements RootMetadataInterface
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetadata(MetadataInterface $metadata)
+    {
+        $this->metadata = $metadata;
     }
 }

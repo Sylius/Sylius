@@ -20,6 +20,11 @@ use Sylius\Component\Metadata\Model\Twitter\CardInterface;
 interface PageMetadataInterface extends MetadataInterface
 {
     /**
+     * @return string
+     */
+    public function getTitle();
+
+    /**
      * @param string $title
      */
     public function setTitle($title);
@@ -27,7 +32,7 @@ interface PageMetadataInterface extends MetadataInterface
     /**
      * @return string
      */
-    public function getTitle();
+    public function getDescription();
 
     /**
      * @param string $description
@@ -35,9 +40,9 @@ interface PageMetadataInterface extends MetadataInterface
     public function setDescription($description);
 
     /**
-     * @return string
+     * @return string[]
      */
-    public function getDescription();
+    public function getKeywords();
 
     /**
      * @param string[] $keywords
@@ -45,17 +50,12 @@ interface PageMetadataInterface extends MetadataInterface
     public function setKeywords(array $keywords);
 
     /**
-     * @return string[]
+     * @return CardInterface|null
      */
-    public function getKeywords();
+    public function getTwitter();
 
     /**
      * @param CardInterface $card
      */
     public function setTwitter(CardInterface $card);
-
-    /**
-     * @return CardInterface|null
-     */
-    public function getTwitter();
 }

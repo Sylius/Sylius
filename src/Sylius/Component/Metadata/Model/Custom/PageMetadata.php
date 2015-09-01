@@ -42,41 +42,6 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function serialize()
-    {
-        return serialize([
-            $this->title,
-            $this->description,
-            $this->keywords,
-            $this->twitter,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->title,
-            $this->description,
-            $this->keywords,
-            $this->twitter,
-        ) = unserialize($serialized);
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle()
     {
         return $this->title;
@@ -85,9 +50,9 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setTitle($title)
     {
-        $this->description = $description;
+        $this->title = $title;
     }
 
     /**
@@ -101,9 +66,9 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setKeywords(array $keywords)
+    public function setDescription($description)
     {
-        $this->keywords = $keywords;
+        $this->description = $description;
     }
 
     /**
@@ -117,9 +82,9 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setTwitter(CardInterface $card)
+    public function setKeywords(array $keywords)
     {
-        $this->twitter = $card;
+        $this->keywords = $keywords;
     }
 
     /**
@@ -128,5 +93,13 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     public function getTwitter()
     {
         return $this->twitter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTwitter(CardInterface $twitter)
+    {
+        $this->twitter = $twitter;
     }
 }

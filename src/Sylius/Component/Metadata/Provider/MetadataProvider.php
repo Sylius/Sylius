@@ -59,7 +59,6 @@ class MetadataProvider implements MetadataProviderInterface
     {
         $identifiers = $this->getHierarchyByMetadataSubject($metadataSubject);
 
-
         $parents = [];
         $baseMetadata = null;
         foreach ($identifiers as $identifier) {

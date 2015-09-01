@@ -28,23 +28,16 @@ interface CardInterface extends MetadataInterface
     /**
      * The twitter:site property.
      *
-     * @param string $site
-     */
-    public function setSite($site);
-
-    /**
-     * The twitter:site property.
-     *
      * @return string
      */
     public function getSite();
 
     /**
-     * The twitter:site:id property.
+     * The twitter:site property.
      *
-     * @param string $siteId
+     * @param string $site
      */
-    public function setSiteId($siteId);
+    public function setSite($site);
 
     /**
      * The twitter:site:id property.
@@ -52,4 +45,11 @@ interface CardInterface extends MetadataInterface
      * @return string
      */
     public function getSiteId();
+
+    /**
+     * The twitter:site:id property.
+     *
+     * @param string $siteId
+     */
+    public function setSiteId($siteId);
 }

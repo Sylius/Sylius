@@ -66,39 +66,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function serialize()
+    public function getTitle()
     {
-        return json_encode([
-            $this->site,
-            $this->siteId,
-            $this->title,
-            $this->description,
-            $this->image,
-            $this->player,
-            $this->playerWidth,
-            $this->playerHeight,
-            $this->playerStream,
-            $this->playerStreamContentType,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->site,
-            $this->siteId,
-            $this->title,
-            $this->description,
-            $this->image,
-            $this->player,
-            $this->playerWidth,
-            $this->playerHeight,
-            $this->playerStream,
-            $this->playerStreamContentType,
-        ) = json_decode($serialized, true);
+        return $this->title;
     }
 
     /**
@@ -112,9 +82,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getDescription()
     {
-        return $this->title;
+        return $this->description;
     }
 
     /**
@@ -128,9 +98,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getImage()
     {
-        return $this->description;
+        return $this->image;
     }
 
     /**
@@ -144,9 +114,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getImage()
+    public function getPlayer()
     {
-        return $this->image;
+        return $this->player;
     }
 
     /**
@@ -160,9 +130,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getPlayer()
+    public function getPlayerWidth()
     {
-        return $this->player;
+        return $this->playerWidth;
     }
 
     /**
@@ -176,9 +146,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getPlayerWidth()
+    public function getPlayerHeight()
     {
-        return $this->playerWidth;
+        return $this->playerHeight;
     }
 
     /**
@@ -192,9 +162,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getPlayerHeight()
+    public function getPlayerStream()
     {
-        return $this->playerHeight;
+        return $this->playerStream;
     }
 
     /**
@@ -208,9 +178,9 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getPlayerStream()
+    public function getPlayerStreamContentType()
     {
-        return $this->playerStream;
+        return $this->playerStreamContentType;
     }
 
     /**
@@ -219,13 +189,5 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     public function setPlayerStreamContentType($playerStreamContentType)
     {
         $this->playerStreamContentType = $playerStreamContentType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPlayerStreamContentType()
-    {
-        return $this->playerStreamContentType;
     }
 }
