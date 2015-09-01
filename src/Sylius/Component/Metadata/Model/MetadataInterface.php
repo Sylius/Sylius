@@ -14,7 +14,7 @@ namespace Sylius\Component\Metadata\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface MetadataInterface extends \Serializable
+interface MetadataInterface
 {
     /**
      * @param MetadataInterface $metadata

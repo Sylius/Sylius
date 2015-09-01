@@ -21,23 +21,16 @@ interface SummaryCardInterface extends CardInterface
     /**
      * The twitter:creator:id property.
      *
-     * @param string $creatorId
-     */
-    public function setCreatorId($creatorId);
-
-    /**
-     * The twitter:creator:id property.
-     *
      * @return string
      */
     public function getCreatorId();
 
     /**
-     * The twitter:title property.
+     * The twitter:creator:id property.
      *
-     * @param string $title
+     * @param string $creatorId
      */
-    public function setTitle($title);
+    public function setCreatorId($creatorId);
 
     /**
      * The twitter:title property.
@@ -47,11 +40,11 @@ interface SummaryCardInterface extends CardInterface
     public function getTitle();
 
     /**
-     * The twitter:description property.
+     * The twitter:title property.
      *
-     * @param string $description
+     * @param string $title
      */
-    public function setDescription($description);
+    public function setTitle($title);
 
     /**
      * The twitter:description property.
@@ -61,11 +54,11 @@ interface SummaryCardInterface extends CardInterface
     public function getDescription();
 
     /**
-     * The twitter:image property.
+     * The twitter:description property.
      *
-     * @param string $image
+     * @param string $description
      */
-    public function setImage($image);
+    public function setDescription($description);
 
     /**
      * The twitter:image property.
@@ -73,4 +66,11 @@ interface SummaryCardInterface extends CardInterface
      * @return string
      */
     public function getImage();
+
+    /**
+     * The twitter:image property.
+     *
+     * @param string $image
+     */
+    public function setImage($image);
 }

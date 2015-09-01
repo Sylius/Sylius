@@ -52,6 +52,15 @@ abstract class AbstractMetadata implements MetadataInterface
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        return array_map(
+            function ($value) {
+                if ($value instanceof MetadataInterface) {
+                    $value = $value->toArray();
+                }
+
+                return $value;
+            },
+            get_object_vars($this)
+        );
     }
 }

@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Metadata\Provider;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Metadata\Compiler\MetadataCompilerInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Metadata\Model\RootMetadataInterface;
 class MetadataProvider implements MetadataProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ObjectRepository
      */
     protected $rootMetadataRepository;
 
@@ -38,12 +38,12 @@ class MetadataProvider implements MetadataProviderInterface
     protected $metadataHierarchyProvider;
 
     /**
-     * @param RepositoryInterface $rootMetadataRepository
+     * @param ObjectRepository $rootMetadataRepository
      * @param MetadataCompilerInterface $metadataCompiler
      * @param MetadataHierarchyProviderInterface $metadataHierarchyProvider
      */
     public function __construct(
-        RepositoryInterface $rootMetadataRepository,
+        ObjectRepository $rootMetadataRepository,
         MetadataCompilerInterface $metadataCompiler,
         MetadataHierarchyProviderInterface $metadataHierarchyProvider
     ) {
@@ -59,12 +59,12 @@ class MetadataProvider implements MetadataProviderInterface
     {
         $identifiers = $this->getHierarchyByMetadataSubject($metadataSubject);
 
-
         $parents = [];
         $baseMetadata = null;
         foreach ($identifiers as $identifier) {
             /** @var RootMetadataInterface $rootMetadata */
-            $rootMetadata = $this->rootMetadataRepository->findOneBy(['key' => $identifier]);
+            // TODO: Use find($identifier) after Resource refactoring (PR #2255)
+            $rootMetadata = $this->rootMetadataRepository->findOneBy(['id' => $identifier]);
 
             if (null === $rootMetadata) {
                 continue;

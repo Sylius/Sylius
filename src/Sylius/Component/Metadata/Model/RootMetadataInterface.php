@@ -17,27 +17,22 @@ namespace Sylius\Component\Metadata\Model;
 interface RootMetadataInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
     public function getId();
 
     /**
-     * @param string $key
+     * @param string $id
      */
-    public function setKey($key);
-
-    /**
-     * @return string
-     */
-    public function getKey();
-
-    /**
-     * @param MetadataInterface $metadata
-     */
-    public function setMetadata(MetadataInterface $metadata);
+    public function setId($id);
 
     /**
      * @return MetadataInterface
      */
     public function getMetadata();
+
+    /**
+     * @param MetadataInterface $metadata
+     */
+    public function setMetadata(MetadataInterface $metadata);
 }
