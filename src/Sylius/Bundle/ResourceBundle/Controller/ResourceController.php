@@ -538,6 +538,8 @@ class ResourceController extends FOSRestController
             $handler->setExclusionStrategyVersion($version);
         }
 
+        $view->getSerializationContext()->enableMaxDepthChecks();
+
         return $handler->handle($view);
     }
 
