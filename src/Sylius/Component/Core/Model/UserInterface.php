@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Rbac\Model\IdentityInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
@@ -19,4 +20,20 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
  */
 interface UserInterface extends BaseUserInterface, IdentityInterface
 {
+    /**
+     * @param RoleInterface $role
+     */
+    public function addAuthorizationRole(RoleInterface $role);
+
+    /**
+     * @param RoleInterface $role
+     */
+    public function removeAuthorizationRole(RoleInterface $role);
+
+    /**
+     * @param RoleInterface $role
+     *
+     * @return bool
+     */
+    public function hasAuthorizationRole(RoleInterface $role);
 }
