@@ -1,3 +1,7 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import simple_list %}
+
 <div class="row">
     {% if orders is not empty %}
         <table id="orders" class="table">

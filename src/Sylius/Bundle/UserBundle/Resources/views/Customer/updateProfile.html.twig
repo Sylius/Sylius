@@ -1,0 +1,15 @@
+{% extends 'SyliusUserBundle::layout.html.twig' %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block content %}
+<h4>{{ 'sylius.ui.profile'|trans }}</h4>
+<br>
+
+<form action="{{ path('sylius_account_profile_update') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+    <fieldset>
+        {{ form_widget(form) }}
+    </fieldset>
+    {{ form_rest(form) }}
+    {{ update('sylius_account_profile_show') }}
+</form>
+{% endblock %}

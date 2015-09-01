@@ -1,0 +1,16 @@
+{% extends 'SyliusUserBundle::layout.html.twig' %}
+
+{% block content %}
+<h4>{{ 'sylius.ui.welcome'|trans }}</h4>
+<br>
+
+<div class="row">
+    <div class="col-md-7">{{ 'sylius.ui.account_panel_outline'|trans }} </div>
+    <div class="col-md-5">
+        <strong>{{ customer.lastName|upper }} {{ customer.firstName }}</strong><br><br>
+        {{ 'sylius.ui.customer.id'|trans }} {{ app.user.id }} <br>
+        {{ 'sylius.ui.customer.email'|trans }} {{ customer.email }}<br>
+        {{ 'sylius.ui.customer_since'|trans }} {{ app.user.createdAt|date() }}
+    </div>
+</div>
+{% endblock %}

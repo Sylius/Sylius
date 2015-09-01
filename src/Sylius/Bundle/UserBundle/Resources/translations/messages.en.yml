@@ -1,9 +1,25 @@
 sylius:
-    user:
+    ui:
+        register: Register
+        login: Login
+        logout: Logout
+        logged_in_as: Logged in as %username%
+        no_account: No account yet?
+        forgot_password: Forgot password?
+        reset_password: Reset password
+        reset: Reset
         password:
             reset:
                 header: Reset password
                 button: Reset
+        profile: Profile
+        change_password: Change your password
+        account_panel_outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
+        customer_since: You are a customer since
+        welcome: Welcome
+        customer:
+            id: Customer ID:
+            email: Email:
     form:
         group:
             name: Name
@@ -26,3 +42,10 @@ sylius:
             different_billing_address: Use different address for billing?
         user_filter:
             query: Search
+        user_change_password:
+            confirmation: Confirmation
+            current: Current password
+            new: New password
+        user_reset_password:
+            confirmation: Confirmation
+            new: New password
