@@ -5,7 +5,8 @@ Feature: Tax categories
     I want to apply taxes depending on the item cateogry
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -26,13 +27,8 @@ Feature: Tax categories
             | name         | price | taxons       | tax category |
             | PHP Top      | 50    | PHP T-Shirts | Clothing     |
             | Golden Apple | 120   | Food         | Food         |
-        And there is default currency configured
-        And there is default channel configured
-        And all products assigned to "DEFAULT-WEB" channel
-        And all promotions assigned to "DEFAULT-WEB" channel
-        And channel "DEFAULT-WEB" has following configuration:
-          | taxonomy |
-          | Category |
+          And all products are assigned to the default channel
+          And all promotions are assigned to the default channel
 
     Scenario: Correct taxes are applied for one item
         Given the default tax zone is "UK"

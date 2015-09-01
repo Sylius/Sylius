@@ -5,9 +5,7 @@ Feature: Channel management
     I want to configure channels
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name | type    | members                         |
             | USA  | country | United States                   |
@@ -42,6 +40,7 @@ Feature: Channel management
           And channel "WEB-EU" has following configuration:
             | shipping | payment                  |
             | DHL      | Credit Card (EU), PayPal |
+          And I am logged in as administrator
 
     Scenario: Browsing all configured channels
         Given I am on the dashboard page

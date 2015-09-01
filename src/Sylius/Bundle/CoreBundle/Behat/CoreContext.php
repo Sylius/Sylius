@@ -12,6 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\Currency;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -44,6 +48,36 @@ class CoreContext extends DefaultContext
     protected $orders = array();
 
     /**
+     * @Given store has default configuration
+     */
+    public function storeHasDefaultConfiguration()
+    {
+        $manager = $this->getEntityManager();
+
+        /** @var CurrencyInterface $currency */
+        $currency = $this->getRepository('currency')->createNew();
+        $currency->setCode('EUR');
+        $currency->setExchangeRate(1);
+        $manager->persist($currency);
+
+        /** @var LocaleInterface $locale */
+        $locale = $this->getRepository('locale')->createNew();
+        $locale->setCode('en_US');
+        $manager->persist($locale);
+
+        /* @var ChannelInterface $channel */
+        $channel = $this->getRepository('channel')->createNew();
+        $channel->setCode('DEFAULT-WEB');
+        $channel->setName('Default');
+        $channel->setUrl('http://example.com');
+        $channel->addCurrency($currency);
+        $channel->addLocale($locale);
+        $manager->persist($channel);
+
+        $manager->flush();
+    }
+
+    /**
      * @Given I am logged in as :role
      */
     public function iAmLoggedInAsAuthorizationRole($role)
@@ -65,7 +99,7 @@ class CoreContext extends DefaultContext
      */
     public function iAmNotLoggedIn()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_logout'));
+        $this->getSession()->restart();
     }
 
     /**
@@ -232,8 +266,10 @@ class CoreContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, array(), false);
+
+            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, array());
             $user->getCustomer()->addAddress($address);
+
             $manager->persist($address);
             $manager->persist($user);
         }
@@ -428,6 +464,14 @@ class CoreContext extends DefaultContext
         $repository = $this->getRepository('locale');
         $manager = $this->getEntityManager();
 
+        $locales = $repository->findAll();
+        foreach ($locales as $locale) {
+            $manager->remove($locale);
+        }
+
+        $manager->flush();
+        $manager->clear();
+
         foreach ($table->getHash() as $data) {
             $locale = $repository->createNew();
 
@@ -454,18 +498,28 @@ class CoreContext extends DefaultContext
      */
     public function productIsAvailableInAllVariations($productName)
     {
+        /** @var ProductInterface $product */
         $product = $this->findOneByName('product', $productName);
 
-        $this->getService('sylius.generator.product_variant')->generate($product);
+        $this->generateProductVariations($product);
 
-        /* @var $variant ProductVariantInterface */
-        foreach ($product->getVariants() as $variant) {
-            $variant->setPrice($product->getMasterVariant()->getPrice());
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given all products are available in all variations
+     */
+    public function allProductsAreAvailableInAllVariations()
+    {
+        /** @var ProductInterface[] $products */
+        $products = $this->getRepository('product')->findAll();
+        foreach ($products as $product) {
+            if ($product->hasOptions()) {
+                $this->generateProductVariations($product);
+            }
         }
 
-        $manager = $this->getEntityManager();
-        $manager->persist($product);
-        $manager->flush();
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -676,5 +730,19 @@ class CoreContext extends DefaultContext
         $authorizationRole->setSecurityRoles(array('ROLE_ADMINISTRATION_ACCESS'));
 
         return $authorizationRole;
+    }
+
+    /**
+     * @param ProductInterface $product
+     */
+    private function generateProductVariations($product)
+    {
+        $this->getService('sylius.generator.product_variant')->generate($product);
+
+        foreach ($product->getVariants() as $variant) {
+            $variant->setPrice($product->getMasterVariant()->getPrice());
+        }
+
+        $this->getEntityManager()->persist($product);
     }
 }

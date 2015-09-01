@@ -5,17 +5,13 @@ Feature: Countries and provinces
     I want to be able to manage countries and their provinces
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following countries:
+        Given store has default configuration
+          And there are following countries:
             | name    | provinces                       |
             | France  | Lyon, Toulouse, Rennes, Nancy   |
             | China   |                                 |
             | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all countries
         Given I am on the dashboard page

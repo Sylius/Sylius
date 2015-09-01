@@ -5,12 +5,7 @@ Feature: Shipping methods
     I want to be able to configure shipping methods
 
     Background:
-        Given there is default currency configured
-          And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
@@ -31,6 +26,7 @@ Feature: Shipping methods
           And shipping method "TurboPackage" has following rules defined:
             | type   | configuration     |
             | Weight | Min: 10, Max: 500 |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all shipping methods
         Given I am on the dashboard page
@@ -130,11 +126,4 @@ Feature: Shipping methods
           And I click "delete" from the confirmation modal
          Then I should be on the shipping method index page
           And I should see "Shipping method has been successfully deleted."
-
-    @javascript
-    Scenario: Deleted shipping method disappears from the list
-        Given I am on the page of shipping method "FedEx"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the shipping method index page
           And I should not see shipping method with name "FedEx" in that list

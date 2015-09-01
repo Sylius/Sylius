@@ -5,13 +5,12 @@ Feature: Products
     I want to be able to manage products
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-            | es_ES | yes     |
+        Given store has default configuration
+          And there are following locales configured:
+            | code  |
+            | en_US |
+            | es_ES |
+          And I am logged in as administrator
 
     Scenario: Creating a product requires default translation fields
         Given I am on the product creation page

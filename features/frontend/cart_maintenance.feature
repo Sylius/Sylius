@@ -5,23 +5,22 @@ Feature: Cart
     I want my cart to be maintained after I log in
 
     Background:
-          Given there are following users:
+          Given store has default configuration
+            And there are following users:
               | email       | password | enabled |
               | bar@foo.com | foo1     | yes     |
-          And there are following taxonomies defined:
+            And there are following taxonomies defined:
               | name     |
               | Category |
-          And taxonomy "Category" has following taxons:
+            And taxonomy "Category" has following taxons:
               | Clothing > PHP T-Shirts |
-          And the following products exist:
+            And the following products exist:
               | name    | price | taxons       |
               | PHP Top | 85    | PHP T-Shirts |
-          And there is default currency configured
-          And there is default channel configured
-          And channel "DEFAULT-WEB" has following configuration:
+            And all products are assigned to the default channel
+            And the default channel has following configuration:
               | taxonomy |
               | Category |
-          And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: The cart is maintained after user log in
         Given I am on the store homepage

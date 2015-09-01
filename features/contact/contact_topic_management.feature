@@ -5,14 +5,13 @@ Feature: Contact topics management
     I want to manage contact request topics
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
-        And there are following contact topics:
+        Given store has default configuration
+          And there are following contact topics:
             | title               |
             | Order return        |
             | Delivery            |
             | Product information |
-        And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Browsing all contact topics
         Given I am on the dashboard page

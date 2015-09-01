@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 class ChannelContext extends DefaultContext
 {
     /**
-     * @Given /^all products assigned to "([^""]*)" channel$/
+     * @Given /^all products are assigned to "([^""]*)" channel$/
      */
     public function assignChannelToProducts($code)
     {
@@ -33,6 +33,14 @@ class ChannelContext extends DefaultContext
         }
 
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given all products are assigned to the default channel
+     */
+    public function allProductsAreAssignedToTheDefaultChannel()
+    {
+        $this->assignChannelToProducts('DEFAULT-WEB');
     }
 
     /**
@@ -54,7 +62,7 @@ class ChannelContext extends DefaultContext
     }
 
     /**
-     * @Given /^all promotions assigned to "([^""]*)" channel$/
+     * @Given /^all promotions are assigned to "([^""]*)" channel$/
      */
     public function assignChannelToPromotions($code)
     {
@@ -67,6 +75,14 @@ class ChannelContext extends DefaultContext
         }
 
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given all promotions are assigned to the default channel
+     */
+    public function allPromotionsAreAssignedToDefaultChannel()
+    {
+        $this->assignChannelToPromotions('DEFAULT-WEB');
     }
 
     /**
@@ -117,6 +133,14 @@ class ChannelContext extends DefaultContext
         }
 
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given the default channel has following configuration:
+     */
+    public function theDefaultChannelHasFollowingConfiguration(TableNode $table)
+    {
+        $this->channelHasFollowingConfiguration('DEFAULT-WEB', $table);
     }
 
     /**

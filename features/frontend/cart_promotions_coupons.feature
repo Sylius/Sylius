@@ -5,45 +5,44 @@ Feature: Checkout coupon promotions
     I want to apply promotion discounts during checkout
 
     Background:
-        Given the following promotions exist:
-          | name                      | description            |
-          | Press campaign            | Coupon based promotion |
-          | New Year campaign         | Coupon based promotion |
-        And promotion "Press campaign" has following rules defined:
-          | type       | configuration |
-          | Item total | Amount: 100   |
-        And promotion "Press campaign" has following coupons:
-          | code   | usage limit | used |
-          | XD0001 | 1           | 0    |
-        And promotion "Press campaign" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 5     |
-        And promotion "New Year campaign" has following rules defined:
-          | type       | configuration |
-          | Item count | Count: 2      |
-        And promotion "New Year campaign" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 10    |
-        And promotion "New Year campaign" has following coupons:
-          | code   | usage limit | used |
-          | XD0002 | 1           | 1    |
-        And there are following taxonomies defined:
-          | name     |
-          | Category |
-        And taxonomy "Category" has following taxons:
-          | Clothing > Debian T-Shirts |
-        And the following products exist:
-          | name    | price | taxons          |
-          | Buzz    | 500   | Debian T-Shirts |
-          | Potato  | 200   | Debian T-Shirts |
-          | Woody   | 125   | Debian T-Shirts |
-          | Sarge   | 25    | Debian T-Shirts |
-          | Etch    | 20    | Debian T-Shirts |
-          | Lenny   | 1     | Debian T-Shirts |
-        And there is default currency configured
-        And there is default channel configured
-        And all products assigned to "DEFAULT-WEB" channel
-        And all promotions assigned to "DEFAULT-WEB" channel
+        Given store has default configuration
+          And the following promotions exist:
+            | name                      | description            |
+            | Press campaign            | Coupon based promotion |
+            | New Year campaign         | Coupon based promotion |
+          And promotion "Press campaign" has following rules defined:
+            | type       | configuration |
+            | Item total | Amount: 100   |
+          And promotion "Press campaign" has following coupons:
+            | code   | usage limit | used |
+            | XD0001 | 1           | 0    |
+          And promotion "Press campaign" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 5     |
+          And promotion "New Year campaign" has following rules defined:
+            | type       | configuration |
+            | Item count | Count: 2      |
+          And promotion "New Year campaign" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 10    |
+          And promotion "New Year campaign" has following coupons:
+            | code   | usage limit | used |
+            | XD0002 | 1           | 1    |
+          And there are following taxonomies defined:
+            | name     |
+            | Category |
+          And taxonomy "Category" has following taxons:
+            | Clothing > Debian T-Shirts |
+          And the following products exist:
+            | name    | price | taxons          |
+            | Buzz    | 500   | Debian T-Shirts |
+            | Potato  | 200   | Debian T-Shirts |
+            | Woody   | 125   | Debian T-Shirts |
+            | Sarge   | 25    | Debian T-Shirts |
+            | Etch    | 20    | Debian T-Shirts |
+            | Lenny   | 1     | Debian T-Shirts |
+          And all products are assigned to the default channel
+          And all promotions are assigned to the default channel
 
     Scenario: Promotion with coupons is applied when the customer
               has added a valid coupon

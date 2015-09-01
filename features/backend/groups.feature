@@ -5,9 +5,7 @@ Feature: Customer groups management
     I want to be able to group them
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
@@ -25,6 +23,7 @@ Feature: Customer groups management
             | martha@example.com | yes     | Retail Customers      |                                                        |
             | rick@example.com   | no      | Retail Customers      | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
             | dale@example.com   | yes     | Wholesale Customers   |                                                        |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all groups
         Given I am on the dashboard page

@@ -97,9 +97,11 @@
                 <h2>{{ 'sylius.frontend.menu.sidebar.links'|trans }}</h2>
                 <ul>
                   {% for link in links %}
-                    <li>
-                      <a href="{{ path(link) }}">{{ link.title|striptags }}</a>
-                    </li>
+                  	{% if cmf_is_linkable(link) %}
+                        <li>
+                          <a href="{{ path(link) }}">{{ link.title|striptags }}</a>
+                        </li>
+                    {% endif %}
                   {% endfor %}
                 </ul>
                 {% endif %}

@@ -5,8 +5,7 @@ Feature: User account homepage
     I want to be able to see my account homepage
 
     Background:
-        Given there is default currency configured
-        And there is default channel configured
+        Given store has default configuration
 
     Scenario: Displaying the my account section only to logged users
         Given I am on the store homepage

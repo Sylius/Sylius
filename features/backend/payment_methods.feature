@@ -5,13 +5,12 @@ Feature: Payment methods
     I want to be able to manage payment methods
 
     Background:
-        Given there is default currency configured
-          And there is default channel configured
-          And I am logged in as administrator
+        Given store has default configuration
           And the following payment methods exist:
             | name        | gateway | calculator | calculator_configuration |
             | Credit Card | stripe  | fixed      | amount: 10               |
             | PayPal      | paypal  | percent    | percent: 5               |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all payment methods
         Given I am on the dashboard page

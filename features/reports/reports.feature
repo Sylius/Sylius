@@ -5,18 +5,17 @@ Feature: Reports
     I want to be able to manage reports
 
     Background:
-        Given there are following reports configured:
+        Given store has default configuration
+          And there are following reports configured:
             | name           | description | code             | renderer | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
             | TableReport    | Lorem ipsum | table_report     | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
             | BarChartReport | Lorem ipsum | bar_chart_report | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
-        And there is default currency configured
-        And there is default channel configured
-        And there are following users:
+          And there are following users:
             | email          | enabled  | created at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
             | martha@foo.com | yes      | 2010-01-02 13:00:00 |
             | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
-        And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Seeing created reports it the list
         Given I am on the dashboard page
@@ -74,7 +73,7 @@ Feature: Reports
          When I fill in the following:
             | Name        | Report1           | 
             | Description | Lorem ipsum dolor |
-            | Code        | table report     |
+            | Code        | table report      |
           And I press "Create"
          Then I should still be on the report creation page
           And I should see "Report code should be a single word."

@@ -5,7 +5,8 @@ Feature: Checkout shipping in preferred language
     I want to be able to see shipping methods in my preferred language
 
     Background:
-        Given there are following taxonomies defined:
+        Given store has default configuration
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -23,16 +24,14 @@ Feature: Checkout shipping in preferred language
             | United Kingdom |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration | enabled |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
-            | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | yes     |
-          And there is default currency configured
-          And there is default channel configured
-          And all products assigned to "DEFAULT-WEB" channel
+            | zone         | name       | calculator | configuration | enabled |
+            | USA          | FedEx      | Flat rate  | Amount: 6500  | yes     |
+            | UK + Germany | UPS Ground | Flat rate  | Amount: 20000 | yes     |
+          And all products are assigned to the default channel
           And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-            | de_DE | yes     |
+            | code  |
+            | en_US |
+            | de_DE |
           And the shipping method translations exist
             | shipping_method | name        | locale |
             | UPS Ground      | UPS Land    | de     |

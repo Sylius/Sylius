@@ -5,16 +5,12 @@ Feature: Product attributes
     I want to be able to configure product attributes
 
     Background:
-        Given there is default currency configured
-        And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-        And there is default channel configured
-        And I am logged in as administrator
-        And there are following attributes:
+        Given store has default configuration
+          And there are following attributes:
             | name               | presentation   |
             | T-Shirt collection | Collection     |
             | T-Shirt fabric     | T-Shirt fabric |
+          And I am logged in as administrator
 
     Scenario: Seeing index of all attributes
         Given I am on the dashboard page
