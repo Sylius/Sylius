@@ -446,9 +446,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheProductPage($name)
     {
-        $this->iAmOnTheProductPage($name);
+        $product = $this->findOneBy('product', array('name' => $name));
 
-        $this->assertStatusCodeEquals(200);
+        $this->assertSession()->addressEquals($this->generateUrl($product));
     }
 
     /**
@@ -468,9 +468,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {
-        $this->iAmOnTheOrderPage($action, $number);
-
-        $this->assertStatusCodeEquals(200);
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $number)));
     }
 
     /**
