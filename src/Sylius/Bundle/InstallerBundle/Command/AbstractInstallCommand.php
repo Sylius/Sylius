@@ -19,8 +19,8 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-    const WEB_ASSETS_DIRECTORY      = 'web/assets/*';
-    const WEB_BUNDLES_DIRECTORY     = 'web/bundles/*';
+    const WEB_ASSETS_DIRECTORY      = 'web/assets/';
+    const WEB_BUNDLES_DIRECTORY     = 'web/bundles/';
     const WEB_MEDIA_DIRECTORY       = 'web/media/';
     const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
