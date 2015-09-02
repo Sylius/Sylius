@@ -13,11 +13,25 @@ namespace spec\Sylius\Component\Mailer\Model;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ * @author Manuel Gonzalez <mgonyan@gmail.com>
+ */
 class EmailSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_GB');
+        $this->setFallbackLocale('en_GB');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Mailer\Model\Email');
+    }
+
+    function it_extends_abstract_translatable()
+    {
+        $this->shouldHaveType('Sylius\Component\Translation\Model\AbstractTranslatable');
     }
 
     function it_implements_Sylius_email_interface()
