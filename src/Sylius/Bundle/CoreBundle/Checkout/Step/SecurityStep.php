@@ -109,7 +109,7 @@ class SecurityStep extends CheckoutStep
         /** @var CustomerInterface $customer */
         $customer = $this->get('sylius.repository.customer')->createNew();
 
-        return $this->createForm('sylius_checkout_guest', $customer);
+        return $this->createForm('sylius_customer_guest', $customer);
     }
 
     /**

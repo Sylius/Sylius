@@ -1,0 +1,8 @@
+{% extends 'SyliusUserBundle::layout.html.twig' %}
+
+{% block content %}
+    <strong>{{ customer.fullName|upper }}</strong><br>
+    {{ 'sylius.ui.customer.id'|trans }}: {{ app.user.id }}<br>
+    {{ 'sylius.ui.email'|trans }}: {{ customer.email }}<br>
+    {{ 'sylius.ui.customer_since'|trans }} {{ app.user.createdAt|date() }}
+{% endblock %}

@@ -1,0 +1,13 @@
+sylius_register:
+    resource: @SyliusUserBundle/Resources/config/routing/registration.yml
+
+sylius_login:
+    resource: @SyliusUserBundle/Resources/config/routing/security.yml
+
+sylius_password_resetting:
+    resource: @SyliusUserBundle/Resources/config/routing/password_reset.yml
+    prefix: /resetting
+
+sylius_account:
+    resource: @SyliusUserBundle/Resources/config/routing/account.yml
+    prefix: /account

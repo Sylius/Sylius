@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'sylius.ui.logged_in_as'|trans({'%username%': app.user.username}) }}
+            <a href="{{ path('sylius_user_security_logout') }}">
+                {{ 'sylius.ui.logout'|trans }}
+            </a>
+        {% else %}
+            <a href="{{ path('sylius_user_security_login') }}">{{ 'sylius.ui.login'|trans }}</a>
+        {% endif %}
+    </div>
+
+    {% block flashes %}
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endblock flashes %}
+
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

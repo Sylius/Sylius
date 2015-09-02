@@ -1,9 +1,7 @@
+{% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
-
 {% block content %}
-
     <h4>{{ 'sylius.form.frontend.profile.title'|trans }}</h4>
     <br>
 
@@ -11,8 +9,8 @@
         <fieldset>
             {{ form_widget(form) }}
         </fieldset>
+        {{ form_rest(form) }}
         {{ update() }}
     </form>
-
 
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'SyliusUserBundle::layout.html.twig' %}
+
+{% block content %}
+{{ 'sylius.ui.register'|trans }}
+
+<form action="{{ path('sylius_user_registration') }}" method="post" class="form-horizontal" >
+    <fieldset>
+        {{ form_errors(form) }}
+
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.user.plainPassword) }}
+
+        {{ form_rest(form) }}
+    </fieldset>
+
+    <button type="submit">
+        {{ 'sylius.ui.register'|trans }}
+    </button>
+</form>
+{% endblock %}

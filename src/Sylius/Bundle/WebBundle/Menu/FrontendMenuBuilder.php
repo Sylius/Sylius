@@ -144,7 +144,7 @@ class FrontendMenuBuilder extends MenuBuilder
                 ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
             } else {
                 $menu->addChild('account', array(
-                    'route' => 'sylius_account_homepage',
+                    'route' => 'sylius_account_profile_show',
                     'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.account')),
                     'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
                 ))->setLabel($this->translate('sylius.frontend.menu.main.account'));
@@ -318,7 +318,7 @@ class FrontendMenuBuilder extends MenuBuilder
         ));
 
         $child->addChild('account', array(
-            'route' => 'sylius_account_homepage',
+            'route' => 'sylius_account_profile_show',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.homepage')),
             'labelAttributes' => array('icon' => 'icon-home', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));

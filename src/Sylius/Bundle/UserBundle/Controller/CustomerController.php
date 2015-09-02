@@ -27,9 +27,25 @@ class CustomerController extends ResourceController
      *
      * @return Response
      */
+    public function showProfileAction(Request $request)
+    {
+        $customer = $this->getCustomer();
+
+        return $this->render(
+            $this->config->getTemplate('showProfile.html'),
+            array(
+                $this->config->getResourceName() => $customer,
+            )
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function updateProfileAction(Request $request)
     {
-        $this->validateAccess();
         $customer = $this->getCustomer();
         $form     = $this->getForm($customer);
 
@@ -48,7 +64,7 @@ class CustomerController extends ResourceController
         }
 
         return $this->render(
-            'SyliusWebBundle:Frontend/Account:Profile/edit.html.twig',
+            $this->config->getTemplate('updateProfile.html'),
             array(
                 $this->config->getResourceName() => $customer,
                 'form'                           => $form->createView(),
@@ -57,18 +73,17 @@ class CustomerController extends ResourceController
     }
 
     /**
-     * @return CustomerInterface|null
+     * @return CustomerInterface
+     * @throws AccessDeniedException - When user is not logged in.
      */
     protected function getCustomer()
     {
-        return $this->get('sylius.context.customer')->getCustomer();
-    }
+        $customer = $this->get('sylius.context.customer')->getCustomer();
 
-    // TODO will be replaced by denyAccessUnlessGranted after bump to Symfony 2.7
-    protected function validateAccess()
-    {
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            throw new AccessDeniedException('You have to be registered user to access this section.');
+        if (null === $customer) {
+            throw new AccessDeniedException('You have to be logged in user to access this section.');
         }
+
+        return $customer;
     }
 }
