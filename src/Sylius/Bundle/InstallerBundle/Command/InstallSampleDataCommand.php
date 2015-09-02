@@ -51,15 +51,10 @@ EOT
 
         $output->writeln('Loading sample data...');
 
-        if (!$this->isDirectoryWritable(self::WEB_MEDIA_DIRECTORY)) {
-            $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_DIRECTORY, 'sylius:install:sample-data'));
-
-            return 1;
-        }
-
-        if (!$this->isDirectoryWritable(self::WEB_MEDIA_IMAGE_DIRECTORY)) {
-            $output->writeln($this->createBadPermissionsMessage(self::WEB_MEDIA_IMAGE_DIRECTORY, 'sylius:install:sample-data'));
-
+        try {
+            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+        } catch (\RuntimeException $exception) {
             return 1;
         }
 
