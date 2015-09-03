@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SupportBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Support\Model\TicketInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

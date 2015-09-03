@@ -59,7 +59,7 @@ class SupportTicket implements SupportTicketInterface
     /**
      * @var string
      */
-    protected $state = TicketInterface::STATE_OPEN;
+    protected $state = SupportTicketInterface::STATE_OPEN;
 
     public function __construct()
     {

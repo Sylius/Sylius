@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Support\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Support\Model\SupportCategoryInterface;
+use Sylius\Component\Support\Model\SupportTicketInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -117,12 +118,12 @@ class SupportTicketSpec extends ObjectBehavior
 
     function it_has_open_state_by_default()
     {
-        $this->getState()->shouldReturn(TicketInterface::STATE_OPEN);
+        $this->getState()->shouldReturn(SupportTicketInterface::STATE_OPEN);
     }
 
     function its_state_is_mutable()
     {
-        $this->setState(TicketInterface::STATE_CLOSED);
-        $this->getState()->shouldReturn(TicketInterface::STATE_CLOSED);
+        $this->setState(SupportTicketInterface::STATE_CLOSED);
+        $this->getState()->shouldReturn(SupportTicketInterface::STATE_CLOSED);
     }
 }
