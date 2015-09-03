@@ -20,5 +20,5 @@ bin/*
 !bin/sylius-cs-fixer
 vendor
 
-deployment/deploy.rb
-deployment/stages/*.rb
+deploy/deploy.rb
+deploy/stages/*.rb
