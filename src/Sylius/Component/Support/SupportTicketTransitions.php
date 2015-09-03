@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SupportBundle\Controller;
-
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Support\TicketTransitions;
+namespace Sylius\Component\Support;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class TicketController extends ResourceController
+class SupportTicketTransitions
 {
-    protected $stateMachineGraph = TicketTransitions::GRAPH;
+    const GRAPH = 'sylius_support_ticket';
+
+    const SYLIUS_REPLY   = 'reply';
+    const SYLIUS_RESOLVE = 'resolve';
+    const SYLIUS_CLOSE   = 'close';
+    const SYLIUS_OPEN   = 'open';
 }
