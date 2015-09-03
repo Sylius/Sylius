@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Class SyliusSearchExtension
- *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class SyliusSearchExtension extends AbstractResourceExtension
@@ -46,6 +44,6 @@ class SyliusSearchExtension extends AbstractResourceExtension
         $container->setParameter('sylius_search.pre_search_filter.enabled', $config['filters']['pre_search_filter']['enabled']);
         $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxonomy']);
 
-        $container->setParameter('sylius_search.custom.accessors', $config['custom_accessors']);
+        $container->setParameter('sylius_search.custom.accessor.class', $config['custom_accessor']);
     }
 }
