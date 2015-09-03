@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -21,11 +22,20 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /*
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class OneEnabledEntityValidator extends ConstraintValidator
+class HasEnabledEntityValidator extends ConstraintValidator
 {
+    /**
+     * @var ManagerRegistry
+     */
     protected $registry;
+    /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
     protected $accessor;
 
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
@@ -41,8 +51,8 @@ class OneEnabledEntityValidator extends ConstraintValidator
      */
     public function validate($entity, Constraint $constraint)
     {
-        if (!$constraint instanceof OneEnabledEntity) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\OneEnabledEntity');
+        if (!$constraint instanceof HasEnabledEntity) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\HasEnabledEntity');
         }
 
         $enabled = $this->accessor->getValue($entity, $constraint->enabledPath);
@@ -51,35 +61,9 @@ class OneEnabledEntityValidator extends ConstraintValidator
             return;
         }
 
-        if ($constraint->entityManager) {
-            $entityManager = $this->registry->getManager($constraint->entityManager);
+        $entityManager = $this->getProperEntityManager($entity, $constraint);
 
-            if (!$entityManager) {
-                throw new ConstraintDefinitionException(
-                    sprintf('Object manager "%s" does not exist.', $constraint->entityManager)
-                );
-            }
-        } else {
-            $entityManager = $this->registry->getManagerForClass(get_class($entity));
-
-            if (!$entityManager) {
-                throw new ConstraintDefinitionException(
-                    sprintf(
-                        'Unable to find the object manager associated with an entity of class "%s".',
-                        get_class($entity)
-                    )
-                );
-            }
-        }
-
-        /* @var $class \Doctrine\Common\Persistence\Mapping\ClassMetadata */
-        $class = $entityManager->getClassMetadata(get_class($entity));
-
-        if (!$class->hasField($constraint->enabledPath) && !$class->hasAssociation($constraint->enabledPath)) {
-            throw new ConstraintDefinitionException(
-                sprintf("The field '%s' is not mapped by Doctrine, so it cannot be validated.", $constraint->enabledPath)
-            );
-        }
+        $this->ensureEntityHasProvidedEnabledField($entity, $constraint, $entityManager);
 
         $criteria = array($constraint->enabledPath => true);
 
@@ -108,6 +92,48 @@ class OneEnabledEntityValidator extends ConstraintValidator
             $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
 
             $this->context->addViolationAt($errorPath, $constraint->message);
+        }
+    }
+
+    /**
+     * @param $entity
+     * @param Constraint $constraint
+     * @return ObjectManager|null
+     */
+    private function getProperEntityManager($entity, Constraint $constraint)
+    {
+        if ($constraint->entityManager) {
+            $entityManager = $this->registry->getManager($constraint->entityManager);
+
+            if (!$entityManager) {
+                throw new ConstraintDefinitionException(
+                    sprintf('Object manager "%s" does not exist.', $constraint->entityManager)
+                );
+            }
+        } else {
+            $entityManager = $this->registry->getManagerForClass(get_class($entity));
+
+            if (!$entityManager) {
+                throw new ConstraintDefinitionException(
+                    sprintf(
+                        'Unable to find the object manager associated with an entity of class "%s".',
+                        get_class($entity)
+                    )
+                );
+            }
+        }
+        return $entityManager;
+    }
+
+    private function ensureEntityHasProvidedEnabledField($entity, Constraint $constraint, ObjectManager $entityManager)
+    {
+        /* @var \Doctrine\Common\Persistence\Mapping\ClassMetadata $class */
+        $class = $entityManager->getClassMetadata(get_class($entity));
+
+        if (!$class->hasField($constraint->enabledPath) && !$class->hasAssociation($constraint->enabledPath)) {
+            throw new ConstraintDefinitionException(
+                sprintf("The field '%s' is not mapped by Doctrine, so it cannot be validated.", $constraint->enabledPath)
+            );
         }
     }
 }

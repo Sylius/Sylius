@@ -55,7 +55,7 @@
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
-        <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelListener</parameter>
+        <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
 
         <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
@@ -87,7 +87,7 @@
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
         <parameter key="sylius.a2lix_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider</parameter>
 
-        <parameter key="sylius.validator.one_enabled.class">Sylius\Bundle\CoreBundle\Validator\Constraints\OneEnabledEntityValidator</parameter>
+        <parameter key="sylius.validator.has_enabled.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
@@ -541,9 +541,9 @@
             <argument type="service" id="sylius.context.locale" />
         </service>
 
-        <service id="sylius.validator.one_enabled" class="%sylius.validator.one_enabled.class%">
+        <service id="sylius.validator.has_enabled" class="%sylius.validator.has_enabled.class%">
             <argument type="service" id="doctrine" />
-            <tag name="validator.constraint_validator" alias="sylius_one_enabled" />
+            <tag name="validator.constraint_validator" alias="sylius_has_enabled" />
         </service>
     </services>
 

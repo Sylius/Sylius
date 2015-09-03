@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /*
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class OneEnabledEntity extends Constraint
+class HasEnabledEntity extends Constraint
 {
     public $entityManager = null;
     public $message = 'Must have at least one enabled entity';
@@ -31,6 +31,6 @@ class OneEnabledEntity extends Constraint
 
     public function validatedBy()
     {
-        return 'sylius_one_enabled';
+        return 'sylius_has_enabled';
     }
 }

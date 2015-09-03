@@ -80,7 +80,7 @@
     </class>
 
     <class name="Sylius\Component\Core\Model\Channel">
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OneEnabledEntity">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity">
             <option name="groups">sylius</option>
         </constraint>
     </class>
