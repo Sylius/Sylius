@@ -1,0 +1,7 @@
+sylius_support:
+    path: /
+    defaults:
+        _controller: sylius.controller.support_ticket:createAction
+        _sylius:
+            template: SyliusWebBundle:Frontend:support.html.twig
+            redirect: sylius_support

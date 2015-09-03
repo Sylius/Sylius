@@ -55,6 +55,17 @@
         {% set label = 'sylius.order.state.order_confimed' %}
         {% set class = 'label-success' %}
     {% endif %}
+{% elseif type == 'support_ticket' %}
+    {% set label = 'sylius.support_ticket.state.'~state %}
+    {% if state is sameas('open') %}
+        {% set class = 'label-primary' %}
+    {% elseif state is sameas('closed') %}
+        {% set class = 'label-warning' %}
+    {% elseif state is sameas('resolved') %}
+        {% set class = 'label-success' %}
+    {% else %}
+        {% set class = 'label-danger' %}
+    {% endif %}
 {% else %}
     {% if state %}
         {% set label = 'sylius.yes' %}

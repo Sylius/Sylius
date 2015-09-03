@@ -1,0 +1,24 @@
+winzou_state_machine:
+    sylius_support:
+        class:               %sylius.model.support_ticket.class%
+        property_path:       state
+        graph:               sylius_support_ticket
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            open:     ~
+            pending:  ~
+            resolved: ~
+            closed:   ~
+        transitions:
+            reply:
+                from: [open]
+                to:   pending
+            resolve:
+                from: [open, pending]
+                to:   resolved
+            close:
+                from: [open, pending, resolved]
+                to:   closed
+            open:
+                from: [pending, closed]
+                to:   open

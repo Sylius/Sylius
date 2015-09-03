@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_support_category_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.support_category:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportCategory:index.html.twig
+            sortable: true
+            paginate: false
+
+sylius_backend_support_category_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.support_category:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportCategory:create.html.twig
+            redirect: sylius_backend_support_category_index
+
+sylius_backend_support_category_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.support_category:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/SupportCategory:update.html.twig
+            redirect: sylius_backend_support_category_index
+
+sylius_backend_support_category_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.support_category:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_support_category_index

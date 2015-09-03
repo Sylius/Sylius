@@ -1,0 +1,65 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.support'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_support_ticket_index') }}">{{ 'sylius.breadcrumb.support_ticket.index'|trans }}</a></li>
+    <li>{{ support_ticket.id }}</li>
+    <li>{{ 'sylius.breadcrumb.support_ticket.show'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fa fa-life-ring"></i> {{ 'sylius.support_ticket.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.firstName'|trans }}</strong></td>
+                    <td>{{ support_ticket.firstName }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.lastName'|trans }}</strong></td>
+                    <td>{{ support_ticket.lastName }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.email'|trans }}</strong></td>
+                    <td>{{ support_ticket.email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.category'|trans }}</strong></td>
+                    <td>{{ support_ticket.category }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.message'|trans }}</strong></td>
+                    <td>{{ support_ticket.message }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.state.header'|trans }}</strong></td>
+                    <td>{{ misc.state_label(support_ticket.state, 'support_ticket') }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.support_ticket.created_at'|trans }}</strong></td>
+                    <td>{{ support_ticket.createdAt|date }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% for transition in ['open', 'reply', 'resolve', 'close'] if sm_can(support_ticket, transition, 'sylius_support_ticket') -%}
+            <form action="{{ path('sylius_backend_support_ticket_update_state', {'id': support_ticket.id, 'transition': transition}) }}" method="post" style="display: inline">
+                <input type="hidden" name="_method" value="PUT">
+                <button class="btn btn-{{ transition == 'close' ? 'warning' : transition == 'resolve' ? 'success' : 'primary' }}" type="submit">
+                    <i class="glyphicon glyphicon-{{ transition == 'reply' ? 'share' : transition == 'open' ? 'open' : transition == 'resolve' ? 'ok' : 'remove' }}"></i> <span>{{ transition }}</span>
+                </button>
+            </form>
+        {%- endfor %}
+    </div>
+</div>
+
+{% endblock %}
