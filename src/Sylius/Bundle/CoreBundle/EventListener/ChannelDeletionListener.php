@@ -11,25 +11,36 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /*
- * Generic channel listener.
+ * Listener to prevent the deletion of last enabled channel.
  *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class ChannelListener
+class ChannelDeletionListener
 {
+    /**
+     * @var ChannelRepository
+     */
     private $repository;
 
-    public function __construct(EntityRepository $repository)
+    /**
+     * @param ChannelRepository $repository
+     */
+    public function __construct(ChannelRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * Prevent channel deletion if no more channels enabled.
+     *
+     * @param ResourceEvent $event
+     */
     public function onChannelPreDelete(ResourceEvent $event)
     {
         $resource = $event->getSubject();
