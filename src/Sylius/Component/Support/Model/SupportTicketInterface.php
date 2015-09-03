@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface TicketInterface extends TimestampableInterface
+interface SupportTicketInterface extends TimestampableInterface
 {
     /**
      * @return integer
@@ -64,12 +64,12 @@ interface TicketInterface extends TimestampableInterface
     public function setMessage($message);
 
     /**
-     * @return CategoryInterface
+     * @return SupportCategoryInterface
      */
     public function getCategory();
 
     /**
-     * @param CategoryInterface $category
+     * @param SupportCategoryInterface $category
      */
-    public function setCategory(CategoryInterface $category = null);
+    public function setCategory(SupportCategoryInterface $category = null);
 }

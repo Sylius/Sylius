@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CategoryTranslationType extends AbstractResourceType
+class SupportCategoryTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -12,21 +12,21 @@
 namespace spec\Sylius\Component\Support\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Support\Model\CategoryInterface;
+use Sylius\Component\Support\Model\SupportCategoryInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class TicketSpec extends ObjectBehavior
+class SupportTicketSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Support\Model\Ticket');
+        $this->shouldHaveType('Sylius\Component\Support\Model\SupportTicket');
     }
 
-    function it_implements_Sylius_support_ticket_interface()
+    function it_implements_sylius_support_ticket_interface()
     {
-        $this->shouldImplement('Sylius\Component\Support\Model\TicketInterface');
+        $this->shouldImplement('Sylius\Component\Support\Model\SupportTicketInterface');
     }
 
     function it_has_no_id_by_default()
@@ -83,7 +83,7 @@ class TicketSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    function its_category_is_mutable(CategoryInterface $category)
+    function its_category_is_mutable(SupportCategoryInterface $category)
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);

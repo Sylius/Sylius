@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CategorySpec extends ObjectBehavior
+class SupportCategorySpec extends ObjectBehavior
 {
     public function let()
     {
@@ -27,12 +27,12 @@ class CategorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Support\Model\Category');
+        $this->shouldHaveType('Sylius\Component\Support\Model\SupportCategory');
     }
 
-    function it_implements_Sylius_support_category_interface()
+    function it_implements_sylius_support_category_interface()
     {
-        $this->shouldImplement('Sylius\Component\Support\Model\CategoryInterface');
+        $this->shouldImplement('Sylius\Component\Support\Model\SupportCategoryInterface');
     }
 
     function it_has_no_id_by_default()

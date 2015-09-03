@@ -18,8 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TicketTypeSpec extends ObjectBehavior
+class SupportCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -28,7 +29,7 @@ class TicketTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SupportBundle\Form\Type\TicketType');
+        $this->shouldHaveType('Sylius\Bundle\SupportBundle\Form\Type\SupportCategoryType');
     }
 
     function it_is_a_form_type()
@@ -39,29 +40,9 @@ class TicketTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('firstName', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('lastName', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('email', 'email', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('message', 'textarea', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('category', 'sylius_support_category_choice', Argument::any())
-            ->willReturn($builder)
-        ;
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder);
 
         $this->buildForm($builder, array());
     }
@@ -80,6 +61,6 @@ class TicketTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_support_ticket');
+        $this->getName()->shouldReturn('sylius_support_category');
     }
 }

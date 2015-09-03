@@ -38,9 +38,9 @@ class SyliusSupportBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Support\Model\TicketInterface'              => 'sylius.model.support_ticket.class',
-            'Sylius\Component\Support\Model\CategoryInterface'            => 'sylius.model.support_category.class',
-            'Sylius\Component\Support\Model\CategoryTranslationInterface' => 'sylius.model.support_category_translation.class',
+            'Sylius\Component\Support\Model\SupportTicketInterface'              => 'sylius.model.support_ticket.class',
+            'Sylius\Component\Support\Model\SupportCategoryInterface'            => 'sylius.model.support_category.class',
+            'Sylius\Component\Support\Model\SupportCategoryTranslationInterface' => 'sylius.model.support_category_translation.class',
         );
     }
 

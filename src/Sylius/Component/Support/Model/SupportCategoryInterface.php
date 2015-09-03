@@ -15,6 +15,6 @@ namespace Sylius\Component\Support\Model;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface CategoryInterface extends CategoryTranslationInterface
+interface SupportCategoryInterface extends SupportCategoryTranslationInterface
 {
 }

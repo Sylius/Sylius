@@ -24,18 +24,18 @@ class LoadSupportTicketData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $supportRequestRepository = $this->getSupportTicketRepository();
+        $supportTicketRepository = $this->getSupportTicketRepository();
 
         for ($i = 0; $i < 20; $i++) {
-            $supportRequest = $supportRequestRepository->createNew();
+            $supportTicket = $supportTicketRepository->createNew();
 
-            $supportRequest->setFirstName($this->faker->firstName());
-            $supportRequest->setLastName($this->faker->lastName());
-            $supportRequest->setEmail($this->faker->email());
-            $supportRequest->setMessage($this->faker->paragraph());
-            $supportRequest->setCategory($this->getReference('Sylius.SupportCategory.'.rand(0, 4)));
+            $supportTicket->setFirstName($this->faker->firstName());
+            $supportTicket->setLastName($this->faker->lastName());
+            $supportTicket->setEmail($this->faker->email());
+            $supportTicket->setMessage($this->faker->paragraph());
+            $supportTicket->setCategory($this->getReference('Sylius.SupportCategory.'.rand(0, 4)));
 
-            $manager->persist($supportRequest);
+            $manager->persist($supportTicket);
         }
 
         $manager->flush();

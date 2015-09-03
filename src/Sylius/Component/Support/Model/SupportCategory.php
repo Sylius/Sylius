@@ -11,12 +11,13 @@
 
 namespace Sylius\Component\Support\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CategoryTranslation extends AbstractTranslation implements CategoryTranslationInterface
+class SupportCategory extends AbstractTranslatable implements SupportCategoryInterface
 {
     /**
      * @var integer
@@ -27,14 +28,6 @@ class CategoryTranslation extends AbstractTranslation implements CategoryTransla
      * @var string
      */
     protected $title;
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
-    }
 
     /**
      * {@inheritdoc}
@@ -49,14 +42,22 @@ class CategoryTranslation extends AbstractTranslation implements CategoryTransla
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->translate()->getTitle();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setTitle($name)
     {
-        $this->title = $title;
+        $this->translate()->setTitle($name);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

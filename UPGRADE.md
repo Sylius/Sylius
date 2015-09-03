@@ -1,7 +1,7 @@
 UPGRADE
 =======
 
-# From 0.14.0 to 0.15.x
+# From 0.15.0 to 0.16.x
 
 ### Support
 
@@ -10,19 +10,19 @@ ContactBundle has been renamed to SupportBundle.
 
 Model classes and interfaces have been renamed.
 
-* Request becomes Ticket.
-* Topic becomes Category.
-* TopicTranslation becomes CategoryTranslation.
+* Request becomes SupportTicket.
+* Topic becomes SupportCategory.
+* TopicTranslation becomes SupportCategoryTranslation.
 
 ```bash
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ContactBundle/Sylius\\Bundle\\SupportBundle/g' {} \;
 $ find ./src -type f -exec sed -i 's/Sylius\\Component\\Contact/Sylius\\Component\\Support/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Request/Sylius\\Component\\Support\\Model\\Ticket/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\RequestInterface/Sylius\\Component\\Support\\Model\\TicketInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Topic/Sylius\\Component\\Support\\Model\\Category/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicInterface/Sylius\\Component\\Support\\Model\\CategoryInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslation/Sylius\\Component\\Support\\Model\\CategoryTranslation/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslationInterface/Sylius\\Component\\Support\\Model\\CategoryTranslationInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Request/Sylius\\Component\\Support\\Model\\SupportTicket/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\RequestInterface/Sylius\\Component\\Support\\Model\\SupportTicketInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\Topic/Sylius\\Component\\Support\\Model\\SupportCategory/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicInterface/Sylius\\Component\\Support\\Model\\SupportCategoryInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslation/Sylius\\Component\\Support\\Model\\SupportCategoryTranslation/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Support\\Model\\TopicTranslationInterface/Sylius\\Component\\Support\\Model\\SupportCategoryTranslationInterface/g' {} \;
 ```
 
 Configuration root node has been adjusted as well.
@@ -40,6 +40,8 @@ After:
 sylius_support:
     driver: doctrine/orm
 ```
+
+# From 0.14.0 to 0.15.x
 
 ## Multi Channel support
 

@@ -14,7 +14,7 @@ namespace Sylius\Component\Support\Model;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Ticket implements TicketInterface
+class SupportTicket implements SupportTicketInterface
 {
     /**
      * @var integer
@@ -42,7 +42,7 @@ class Ticket implements TicketInterface
     protected $message;
 
     /**
-     * @var CategoryInterface
+     * @var SupportCategoryInterface
      */
     protected $category;
 
@@ -144,7 +144,7 @@ class Ticket implements TicketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCategory(CategoryInterface $category = null)
+    public function setCategory(SupportCategoryInterface $category = null)
     {
         $this->category = $category;
     }

@@ -14,7 +14,7 @@ namespace Sylius\Component\Support\Model;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface CategoryTranslationInterface
+interface SupportCategoryTranslationInterface
 {
     /**
      * @return integer

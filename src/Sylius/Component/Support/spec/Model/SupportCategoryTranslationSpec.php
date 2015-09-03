@@ -17,16 +17,16 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CategoryTranslationSpec extends ObjectBehavior
+class SupportCategoryTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Support\Model\CategoryTranslation');
+        $this->shouldHaveType('Sylius\Component\Support\Model\SupportCategoryTranslation');
     }
 
-    function it_implements_Sylius_category_translation_interface()
+    function it_implements_sylius_support_category_translation_interface()
     {
-        $this->shouldImplement('Sylius\Component\Support\Model\CategoryTranslationInterface');
+        $this->shouldImplement('Sylius\Component\Support\Model\SupportCategoryTranslationInterface');
     }
 
     function it_has_no_id_by_default()

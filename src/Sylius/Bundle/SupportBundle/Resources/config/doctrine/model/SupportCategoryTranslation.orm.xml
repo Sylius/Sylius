@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Support\Model\CategoryTranslation" table="sylius_support_category_translation">
+    <mapped-superclass name="Sylius\Component\Support\Model\SupportCategoryTranslation" table="sylius_support_category_translation">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

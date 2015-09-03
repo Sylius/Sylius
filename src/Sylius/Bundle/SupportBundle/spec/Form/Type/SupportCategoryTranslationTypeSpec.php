@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CategoryTranslationTypeSpec extends ObjectBehavior
+class SupportCategoryTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -28,7 +28,7 @@ class CategoryTranslationTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SupportBundle\Form\Type\CategoryTranslationType');
+        $this->shouldHaveType('Sylius\Bundle\SupportBundle\Form\Type\SupportCategoryTranslationType');
     }
 
     function it_is_a_form_type()

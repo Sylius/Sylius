@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Support\Model\Ticket">
+    <class name="Sylius\Component\Support\Model\SupportTicket">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.support_ticket.first_name.not_blank</option>
@@ -61,13 +61,13 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Support\Model\Category">
+    <class name="Sylius\Component\Support\Model\SupportCategory">
         <property name="translations">
             <constraint name="Valid" />
         </property>
     </class>
 
-    <class name="Sylius\Component\Support\Model\CategoryTranslation">
+    <class name="Sylius\Component\Support\Model\SupportCategoryTranslation">
         <property name="title">
             <constraint name="NotBlank">
                 <option name="message">sylius.support_category.title.not_blank</option>

@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class TicketType extends AbstractResourceType
+class SupportTicketType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
