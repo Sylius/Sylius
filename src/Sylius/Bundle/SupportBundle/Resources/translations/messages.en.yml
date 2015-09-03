@@ -1,0 +1,10 @@
+sylius:
+    form:
+        support_ticket:
+            first_name: First name
+            last_name: Last name
+            email: Email
+            message: Message
+            category: Category
+        support_category:
+            title: Title

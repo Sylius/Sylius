@@ -184,11 +184,11 @@ sylius:
             index: Customers
         dashboard: Dashboard
         edit: Edit
-        contact_request:
-            index: Contact requests
-            show: Contact request
-        contact_topic:
-            index: Contact topics
+        support_ticket:
+            index: Support tickets
+            show: Support ticket
+        support_category:
+            index: Support categories
         content: Content
         currency:
             index: Currencies
@@ -1038,29 +1038,29 @@ sylius:
         scope: Scope
     zone_member:
         members: Members
-    contact_topic:
-        create: Create contact topic
-        create_header: New contact topic
+    support_category:
+        create: Create support category
+        create_header: New support category
         id: ID
         title: Title
-        index_header: Contact topics
-        no_results: There are no contact topics to display.
-        update_header: Editing contact topic
+        index_header: Support categories
+        no_results: There are no support categories to display.
+        update_header: Editing support category
         updated_at: Last update
-    contact_request:
-        create: Create contact request
-        create_header: New contact request
+    support_ticket:
+        create: Create support ticket
+        create_header: New support ticket
         id: ID
         firstName: First name
         lastName: Last name
         email: Email
         message: Message
-        topic: Topic
-        index_header: Contact requests
-        no_results: There are no contact requests to display.
-        update_header: Editing contact request
+        category: Category
+        index_header: Support tickets
+        no_results: There are no support tickets to display.
+        update_header: Editing support ticket
         updated_at: Last update
-        show_header: Contact request details
+        show_header: Support ticket details
     gender:
         male: Male
         female: Female

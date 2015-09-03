@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    support_ticket:
+      first_name: Nome
+      last_name: Cognome
+      email: Email
+    support_category:
+      title: Titolo

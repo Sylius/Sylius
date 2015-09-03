@@ -34,7 +34,7 @@
         "sylius/api-bundle":              "0.15.*@dev",
         "sylius/attribute-bundle":        "0.15.*@dev",
         "sylius/cart-bundle":             "0.15.*@dev",
-        "sylius/contact-bundle":          "0.15.*@dev",
+        "sylius/support-bundle":          "0.15.*@dev",
         "sylius/content-bundle":          "0.15.*@dev",
         "sylius/currency-bundle":         "0.15.*@dev",
         "sylius/flow-bundle":             "0.15.*@dev",
