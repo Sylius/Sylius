@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxation\Calculator;
 
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
@@ -22,83 +23,13 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 class DelegatingCalculator implements CalculatorInterface
 {
     /**
-     * Calculators hash by name.
-     *
-     * @var CalculatorInterface[]
+     * @var ServiceRegistry
      */
-    protected $calculators = array();
+    private $calculatorsRegistry;
 
-    /**
-     * Get all calculators.
-     *
-     * @return CalculatorInterface[]
-     */
-    public function getCalculators()
+    public function __construct(ServiceRegistry $serviceRegistry)
     {
-        return $this->calculators;
-    }
-
-    /**
-     * Register calculator under given name.
-     *
-     * @param string              $name
-     * @param CalculatorInterface $calculator
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function registerCalculator($name, CalculatorInterface $calculator)
-    {
-        if ($this->hasCalculator($name)) {
-            throw new \InvalidArgumentException(sprintf('Calculator with name "%s" is already registered', $name));
-        }
-
-        $this->calculators[$name] = $calculator;
-    }
-
-    /**
-     * Unregister calculator.
-     *
-     * @param string $name
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function unregisterCalculator($name)
-    {
-        if (!$this->hasCalculator($name)) {
-            throw new \InvalidArgumentException(sprintf('Calculator with name "%s" does not exist', $name));
-        }
-
-        unset($this->calculators[$name]);
-    }
-
-    /**
-     * Has calculator with name registered?
-     *
-     * @param string $name
-     *
-     * @return Boolean
-     */
-    public function hasCalculator($name)
-    {
-        return isset($this->calculators[$name]);
-    }
-
-    /**
-     * Get calculator registered under given name.
-     *
-     * @param string $name
-     *
-     * @return CalculatorInterface
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function getCalculator($name)
-    {
-        if (!$this->hasCalculator($name)) {
-            throw new \InvalidArgumentException(sprintf('Calculator with name "%s" does not exist', $name));
-        }
-
-        return $this->calculators[$name];
+        $this->calculatorsRegistry = $serviceRegistry;
     }
 
     /**
@@ -106,7 +37,7 @@ class DelegatingCalculator implements CalculatorInterface
      */
     public function calculate($base, TaxRateInterface $rate)
     {
-        $calculator = $this->getCalculator($rate->getCalculator());
+        $calculator = $this->calculatorsRegistry->get($rate->getCalculator());
 
         return $calculator->calculate($base, $rate);
     }

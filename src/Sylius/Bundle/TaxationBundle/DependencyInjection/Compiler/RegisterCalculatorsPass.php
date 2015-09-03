@@ -27,11 +27,11 @@ class RegisterCalculatorsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.tax_calculator')) {
+        if (!$container->hasDefinition('sylius.registry.tax_calculator')) {
             return;
         }
 
-        $delegatingCalculator = $container->getDefinition('sylius.tax_calculator');
+        $calculatorRegistry = $container->getDefinition('sylius.registry.tax_calculator');
         $calculators = array();
 
         foreach ($container->findTaggedServiceIds('sylius.tax_calculator') as $id => $attributes) {
@@ -42,7 +42,7 @@ class RegisterCalculatorsPass implements CompilerPassInterface
             $name = $attributes[0]['calculator'];
             $calculators[$name] = $name;
 
-            $delegatingCalculator->addMethodCall('registerCalculator', array($name, new Reference($id)));
+            $calculatorRegistry->addMethodCall('register', array($name, new Reference($id)));
         }
 
         $container->setParameter('sylius.tax_calculators', $calculators);
