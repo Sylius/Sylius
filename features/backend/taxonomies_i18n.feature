@@ -6,27 +6,27 @@ Feature: Taxonomies internationalization
 
     Background:
         Given store has default configuration
-          And there are following locales configured:
-            | code | enabled |
-            | en   | yes     |
-            | es   | yes     |
+          And there are following locales configured and assigned to the default channel:
+            | code  |
+            | en_US |
+            | es_ES |
           And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
             | Clothing > Shirts > Long Sleeve |
-          And the following taxon translations exist
+          And the following taxon translations exist:
             | taxon       | name        | locale |
-            | Category    | Categoria   | es     |
-            | Clothing    | Ropa        | es     |
-            | Shirts      | Camisas     | es     |
-            | Long Sleeve | Manga Larga | es     |
+            | Category    | Categoria   | es_ES  |
+            | Clothing    | Ropa        | es_ES  |
+            | Shirts      | Camisas     | es_ES  |
+            | Long Sleeve | Manga Larga | es_ES  |
 
     Scenario: Creating a taxon generates the proper permalink
-        Then Taxon translation "Long Sleeve" should have permalink "category/clothing/shirts/long-sleeve"
-         And Taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
+        Then taxon translation "Long Sleeve" should have permalink "category/clothing/shirts/long-sleeve"
+         And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
 
     Scenario: Updating a taxon updates children permalinks only for the given locale
         When I change then name of taxon translation "Shirts" to "New Shirts"
-        Then Taxon translation "Long Sleeve" should have permalink "category/clothing/new-shirts/long-sleeve"
-         And Taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
+        Then taxon translation "Long Sleeve" should have permalink "category/clothing/new-shirts/long-sleeve"
+         And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"

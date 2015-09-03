@@ -233,11 +233,13 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $productTranslation = $this->findOneByName('product_translation', $data['product']);
+
             $product = $productTranslation->getTranslatable();
             $product->setCurrentLocale($data['locale']);
-            $product
-                ->setName($data['name'])
-                ->setDescription('...');
+            $product->setFallbackLocale($data['locale']);
+
+            $product->setName($data['name']);
+            $product->setDescription('...');
         }
 
         $manager->flush();
@@ -256,7 +258,7 @@ class ProductContext extends DefaultContext
     }
 
     /**
-     * @Given the following attribute translations exist
+     * @Given the following attribute translations exist:
      */
     public function theFollowingAttributeTranslationsExist(TableNode $table)
     {
@@ -264,16 +266,17 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $attribute = $this->findOneByName('product_attribute', $data['attribute']);
-            $attribute
-                ->setCurrentLocale($data['locale'])
-                ->setPresentation($data['presentation']);
+            $attribute->setCurrentLocale($data['locale']);
+            $attribute->setFallbackLocale($data['locale']);
+
+            $attribute->setPresentation($data['presentation']);
         }
 
         $manager->flush();
     }
 
     /**
-     * @Given the following option translations exist
+     * @Given the following option translations exist:
      */
     public function theFollowingOptionTranslationsExist(TableNode $table)
     {
@@ -281,9 +284,10 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $option = $this->findOneByName('product_option', $data['option']);
-            $option
-                ->setCurrentLocale($data['locale'])
-                ->setPresentation($data['presentation']);
+            $option->setCurrentLocale($data['locale']);
+            $option->setFallbackLocale($data['locale']);
+
+            $option->setPresentation($data['presentation']);
         }
 
         $manager->flush();
