@@ -30,6 +30,7 @@ class SupportContext extends DefaultContext
         }
 
         $manager->flush();
+        $manager->clear();
 
         foreach ($table->getHash() as $data) {
             $newSupportTicket = $repository->createNew();
@@ -59,6 +60,7 @@ class SupportContext extends DefaultContext
         }
 
         $manager->flush();
+        $manager->clear();
 
         foreach ($table->getHash() as $data) {
             $newSupportCategory = $repository->createNew();

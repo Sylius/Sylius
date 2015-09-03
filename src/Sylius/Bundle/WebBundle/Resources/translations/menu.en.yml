@@ -93,7 +93,7 @@ sylius:
                 marketing: Marketing
                 support: Support
                 support_tickets: Tickets
-                support_categories: Configure Categories
+                support_categories: Configure categories
     frontend:
         menu:
             account:
