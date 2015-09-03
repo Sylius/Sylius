@@ -1,0 +1,10 @@
+set :stage, :develop
+
+set :symfony_env, "dev"
+set :branch,      "develop"
+
+set :composer_install_flags, '--no-interaction'
+
+set :controllers_to_clear, []
+
+server 'domain.com or ip', user: fetch(:ssh_user), roles: %w{app db web}, port: fetch(:ssh_port)

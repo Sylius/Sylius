@@ -1,0 +1,8 @@
+set :stage, :production
+
+set :symfony_env, "prod"
+set :branch,      "master"
+
+set :composer_install_flags, '--no-dev --no-interaction --optimize-autoloader'
+
+server 'domain.com or ip', user: fetch(:ssh_user), roles: %w{app db web}, port: fetch(:ssh_port)
