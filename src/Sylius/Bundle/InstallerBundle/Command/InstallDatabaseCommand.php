@@ -84,6 +84,11 @@ EOT
         $commands[] = 'doctrine:phpcr:repository:init';
         $commands[] = 'sylius:search:index';
         $commands[] = 'sylius:rbac:initialize';
+        $commands['doctrine:migrations:version'] = array(
+            '--add' => true,
+            '--all' => true,
+            '--no-interaction' => true,
+        );
 
         $this->runCommands($commands, $input, $output);
 
