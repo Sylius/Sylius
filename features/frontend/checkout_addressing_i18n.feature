@@ -38,7 +38,7 @@ Feature: Checkout addressing in preferred language
         Given I am not logged in
           And I added product "PHP Top" to cart
          When I go to the checkout start page
-          And I fill in "sylius_checkout_guest[email]" with "example@example.com"
+          And I fill in guest email with "example@example.com"
           And I press "Proceed with your order"
           And I change the locale to "German"
          Then I select "Deutschland" from "Land"

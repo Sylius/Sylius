@@ -29,15 +29,10 @@ EOT
     {
         $output->writeln(sprintf('Installing Sylius assets for environment <info>%s</info>.', $this->getEnvironment()));
 
-        if (!$this->isDirectoryWritable(self::WEB_ASSETS_DIRECTORY)) {
-            $output->writeln($this->createBadPermissionsMessage(self::WEB_ASSETS_DIRECTORY, 'sylius:install:assets'));
-
-            return 1;
-        }
-
-        if (!$this->isDirectoryWritable(self::WEB_BUNDLES_DIRECTORY)) {
-            $output->writeln($this->createBadPermissionsMessage(self::WEB_BUNDLES_DIRECTORY, 'sylius:install:assets'));
-
+        try {
+            $this->ensureDirectoryExistsAndIsWritable(self::WEB_ASSETS_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable(self::WEB_BUNDLES_DIRECTORY, $output);
+        } catch (\RuntimeException $exception) {
             return 1;
         }
 

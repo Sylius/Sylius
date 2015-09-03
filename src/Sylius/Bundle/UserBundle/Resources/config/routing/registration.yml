@@ -1,0 +1,11 @@
+sylius_user_registration:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            form: sylius_customer_registration
+            event: register
+            template: SyliusUserBundle::register.html.twig
+            redirect: referrer
+            permission: false

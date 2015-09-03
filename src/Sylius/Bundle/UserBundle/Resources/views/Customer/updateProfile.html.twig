@@ -1,0 +1,12 @@
+{% extends 'SyliusUserBundle::layout.html.twig' %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block content %}
+<form action="{{ path('sylius_account_profile_update') }}" {{ form_enctype(form) }} method="POST">
+    <fieldset>
+        {{ form_widget(form) }}
+    </fieldset>
+    {{ form_rest(form) }}
+    {{ update() }}
+</form>
+{% endblock %}

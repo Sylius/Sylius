@@ -151,6 +151,7 @@ class ExtensionsRequirements extends RequirementCollection
         $status = (function_exists('apc_store') && ini_get('apc.enabled'))
             || function_exists('eaccelerator_put') && ini_get('eaccelerator.enable')
             || function_exists('xcache_set')
+            || function_exists('zend_optimizer_version')
         ;
 
         $this

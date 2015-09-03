@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,7 +38,14 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('user')->defaultValue('SyliusUserBundle:User')->end()
+                        ->scalarNode('customer')->defaultValue('SyliusUserBundle:Customer')->end()
+                    ->end()
+                ->end()
                 ->arrayNode('resetting')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -95,6 +103,14 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius', 'sylius_customer_profile', 'sylius_user_registration'))
                         ->end()
+                        ->arrayNode('customer_simple_registration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius', 'sylius_user_registration'))
+                        ->end()
+                        ->arrayNode('customer_guest')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius_customer_guest'))
+                        ->end()
                         ->arrayNode('user')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
@@ -137,6 +153,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerType')->end()
                                         ->scalarNode('profile')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType')->end()
                                         ->scalarNode('registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType')->end()
+                                        ->scalarNode('simple_registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType')->end()
+                                        ->scalarNode('guest')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType')->end()
                                     ->end()
                                 ->end()
                             ->end()

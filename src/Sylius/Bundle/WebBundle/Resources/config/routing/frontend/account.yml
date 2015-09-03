@@ -1,32 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_account_homepage:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.frontend.account:indexAction
-
-sylius_account_profile_update:
-    path: /profile/edit
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.customer:updateProfileAction
-        _sylius:
-            form: sylius_customer_profile
-            template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
-            redirect: sylius_account_homepage
-
-sylius_account_change_password:
-    path: /change-password
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.user:changePasswordAction
-        _sylius:
-            form: sylius_user_change_password
-            event: change_password
-            template: SyliusWebBundle:Frontend/Account:passwordUpdate.html.twig
-
 sylius_account_order:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/order.yml
     prefix: /orders

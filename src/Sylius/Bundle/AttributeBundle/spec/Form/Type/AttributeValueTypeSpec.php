@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -32,8 +32,8 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6 checkout-new-customer">
-        {% if guest_form is not empty %}
+    {% if guest_form is not empty %}
+    <div class="col-md-6 checkout-guest-customer">
         <div class="well">
             <form action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
                 <fieldset>
@@ -45,7 +45,9 @@
                 </div>
             </form>
         </div>
-        {% endif %}
+    </div>
+    {% endif %}
+    <div class="col-md-6 checkout-new-customer">
         <div class="well">
             <form action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
                 <fieldset>

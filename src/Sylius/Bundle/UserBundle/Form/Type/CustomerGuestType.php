@@ -20,23 +20,38 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Dmitrijs Balabka <dmitry.balabka@gmail.com>
  */
-class CustomerRegistrationType extends CustomerSimpleRegistrationType
+class CustomerGuestType extends AbstractResourceType
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
+     * @param string              $dataClass
+     * @param array               $validationGroups
+     * @param RepositoryInterface $customerRepository
+     */
+    public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->customerRepository = $customerRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        parent::buildForm($builder, $options);
-
         $builder
-            ->add('firstName', 'text', array(
-                'label' => 'sylius.form.customer.first_name',
+            ->add('email', 'email', array(
+                'label' => 'sylius.form.customer.email',
             ))
-            ->add('lastName', 'text', array(
-                'label' => 'sylius.form.customer.last_name',
-            ))
+            ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
+            ->setDataLocked(false)
         ;
     }
 
@@ -45,6 +60,6 @@ class CustomerRegistrationType extends CustomerSimpleRegistrationType
      */
     public function getName()
     {
-        return 'sylius_customer_registration';
+        return 'sylius_customer_guest';
     }
 }
