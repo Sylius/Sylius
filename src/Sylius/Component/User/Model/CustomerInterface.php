@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Customer interface.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 interface CustomerInterface extends UserAwareInterface, TimestampableInterface, SoftDeletableInterface
@@ -44,12 +42,11 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
 
     /**
      * @param  string $email
-     * @return self
      */
     public function setEmail($email);
 
     /**
-     * Gets the canonical email in search and sort queries.
+     * Gets normalized email (should be used in search and sort queries).
      *
      * @return string
      */
@@ -57,7 +54,6 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
 
     /**
      * @param  string $emailCanonical
-     * @return self
      */
     public function setEmailCanonical($emailCanonical);
 
@@ -75,7 +71,6 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
 
     /**
      * @param  string $firstName
-     * @return self
      */
     public function setFirstName($firstName);
 
@@ -86,7 +81,6 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
 
     /**
      * @param  string $lastName
-     * @return self
      */
     public function setLastName($lastName);
 
@@ -97,18 +91,18 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
 
     /**
      * @param  \DateTime $birthday
-     * @return self
      */
     public function setBirthday(\DateTime $birthday = null);
 
     /**
-     * @return int
+     * @return string
      */
     public function getGender();
 
     /**
-     * @param  int  $gender
-     * @return self
+     * You should use interface constants for that.
+     *
+     * @param  string $gender
      */
     public function setGender($gender);
 

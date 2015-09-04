@@ -14,15 +14,13 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * Group model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface GroupInterface
 {
     /**
-     * @return integer
+     * @return int
      */
     public function getId();
 
@@ -33,8 +31,6 @@ interface GroupInterface
 
     /**
      * @param string $name
-     *
-     * @return self
      */
     public function setName($name);
 }

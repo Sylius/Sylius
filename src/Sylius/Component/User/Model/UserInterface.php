@@ -19,8 +19,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * User interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -40,12 +38,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param  string $email
-     * @return self
      */
     public function setEmail($email);
 
     /**
-     * Gets the canonical email in search and sort queries.
+     * Gets normalized email (should be used in search and sort queries).
      *
      * @return string
      */
@@ -53,7 +50,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param  string $emailCanonical
-     * @return self
      */
     public function setEmailCanonical($emailCanonical);
 
@@ -64,20 +60,16 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param CustomerInterface $customer
-     *
-     * @return self
      */
     public function setCustomer(CustomerInterface $customer = null);
 
     /**
      * @param string $username
-     *
-     * @return self
      */
     public function setUsername($username);
 
     /**
-     * Gets the canonical username in search and sort queries.
+     * Gets normalized username (should be used in search and sort queries).
      *
      * @return string
      */
@@ -85,8 +77,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param string $usernameCanonical
-     *
-     * @return self
      */
     public function setUsernameCanonical($usernameCanonical);
 
@@ -97,8 +87,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param string $password
-     *
-     * @return self
      */
     public function setPlainPassword($password);
 
@@ -106,26 +94,16 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * Sets the hashed password.
      *
      * @param string $password
-     *
-     * @return self
      */
     public function setPassword($password);
 
     /**
-     * Sets the enabled flag of the user.
-     *
      * @param boolean $boolean
-     *
-     * @return self
      */
     public function setEnabled($boolean);
 
     /**
-     * Sets the locking status of the user.
-     *
      * @param boolean $boolean
-     *
-     * @return self
      */
     public function setLocked($boolean);
 
@@ -136,8 +114,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
 
     /**
      * @param string $confirmationToken
-     *
-     * @return self
      */
     public function setConfirmationToken($confirmationToken);
 
@@ -145,8 +121,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * Sets the timestamp that the user requested a password reset.
      *
      * @param null|\DateTime $date
-     *
-     * @return self
      */
     public function setPasswordRequestedAt(\DateTime $date = null);
 
@@ -160,18 +134,12 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
     /**
-     * Gets the last login time.
-     *
      * @return \DateTime
      */
     public function getLastLogin();
 
     /**
-     * Sets the last login time
-     *
      * @param \DateTime $time
-     *
-     * @return self
      */
     public function setLastLogin(\DateTime $time = null);
 
@@ -190,27 +158,19 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function hasRole($role);
 
     /**
-     * Sets the roles of the user.
-     *
      * This overwrites any previous roles.
      *
      * @param array $roles
-     *
-     * @return self
      */
     public function setRoles(array $roles);
 
     /**
      * @param string $role
-     *
-     * @return self
      */
     public function addRole($role);
 
     /**
      * @param string $role
-     *
-     * @return self
      */
     public function removeRole($role);
 
@@ -234,8 +194,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * Connects OAuth account.
      *
      * @param UserOAuthInterface $oauth
-     *
-     * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
 }

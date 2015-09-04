@@ -39,6 +39,8 @@ class User implements UserInterface
     protected $username;
 
     /**
+     * Normalized representation of a username.
+     *
      * @var string
      */
     protected $usernameCanonical;
@@ -49,7 +51,7 @@ class User implements UserInterface
     protected $enabled = false;
 
     /**
-     * The salt to use for hashing
+     * Random data that is used as an additional input to a function that hashes a password.
      *
      * @var string
      */
@@ -63,7 +65,7 @@ class User implements UserInterface
     protected $password;
 
     /**
-     * Plain password. Used for model validation. Must not be persisted.
+     * Password before encryption. Used for model validation. Must not be persisted.
      *
      * @var string
      */
@@ -103,6 +105,7 @@ class User implements UserInterface
 
     /**
      * We need at least one role to be able to authenticate
+     *
      * @var array
      */
     protected $roles = array(UserInterface::DEFAULT_ROLE);
@@ -175,8 +178,6 @@ class User implements UserInterface
     public function setUsername($username)
     {
         $this->username = $username;
-
-        return $this;
     }
 
     /**
@@ -193,8 +194,6 @@ class User implements UserInterface
     public function setUsernameCanonical($usernameCanonical)
     {
         $this->usernameCanonical = $usernameCanonical;
-
-        return $this;
     }
 
     /**
@@ -219,14 +218,10 @@ class User implements UserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
-
-        return $this;
     }
 
     /**
-     * Gets the encrypted password.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getPassword()
     {
@@ -239,8 +234,6 @@ class User implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -253,14 +246,10 @@ class User implements UserInterface
 
     /**
      * @param \DateTime $date
-     *
-     * @return User
      */
     public function setExpiresAt(\DateTime $date = null)
     {
         $this->expiresAt = $date;
-
-        return $this;
     }
 
     /**
@@ -273,20 +262,14 @@ class User implements UserInterface
 
     /**
      * @param \DateTime $date
-     *
-     * @return User
      */
     public function setCredentialsExpireAt(\DateTime $date = null)
     {
         $this->credentialsExpireAt = $date;
-
-        return $this;
     }
 
     /**
-     * Gets the last login time.
-     *
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getLastLogin()
     {
@@ -342,9 +325,7 @@ class User implements UserInterface
      */
     public function setEnabled($boolean)
     {
-        $this->enabled = (Boolean) $boolean;
-
-        return $this;
+        $this->enabled = (bool) $boolean;
     }
 
     /**
@@ -361,8 +342,6 @@ class User implements UserInterface
     public function setLocked($boolean)
     {
         $this->locked = $boolean;
-
-        return $this;
     }
 
     /**
@@ -425,8 +404,6 @@ class User implements UserInterface
         foreach ($roles as $role) {
             $this->addRole($role);
         }
-
-        return $this;
     }
 
     /**
@@ -443,8 +420,6 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->customer->setEmail($email);
-
-        return $this;
     }
 
     /**
@@ -461,8 +436,6 @@ class User implements UserInterface
     public function setEmailCanonical($emailCanonical)
     {
         $this->customer->setEmailCanonical($emailCanonical);
-
-        return $this;
     }
 
     /**
@@ -489,8 +462,6 @@ class User implements UserInterface
     public function setPasswordRequestedAt(\DateTime $date = null)
     {
         $this->passwordRequestedAt = $date;
-
-        return $this;
     }
 
     /**
@@ -538,8 +509,6 @@ class User implements UserInterface
             $this->oauthAccounts->add($oauth);
             $oauth->setUser($this);
         }
-
-        return $this;
     }
 
     /**
@@ -556,8 +525,6 @@ class User implements UserInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -574,8 +541,6 @@ class User implements UserInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -592,8 +557,6 @@ class User implements UserInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 
     /**
@@ -615,8 +578,6 @@ class User implements UserInterface
     }
 
     /**
-     * Serializes the user.
-     *
      * The serialized data have to contain the fields used by the equals method and the username.
      *
      * @return string
@@ -635,8 +596,6 @@ class User implements UserInterface
     }
 
     /**
-     * Unserializes the user.
-     *
      * @param string $serialized
      */
     public function unserialize($serialized)
