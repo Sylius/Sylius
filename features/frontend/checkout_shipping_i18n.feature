@@ -12,29 +12,31 @@ Feature: Checkout shipping in preferred language
           And taxonomy "Category" has following taxons:
             | Clothing > PHP T-Shirts |
           And the following products exist:
-            | name          | price | taxons       |
-            | PHP Top       | 5.99  | PHP T-Shirts |
+            | name    | price | taxons       |
+            | PHP Top | 5.99  | PHP T-Shirts |
           And the following zones are defined:
-            | name         | type    | members                 |
-            | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | United States           |
+            | name    | type    | members       |
+            | Germany | country | Germany       |
+            | USA     | country | United States |
           And there are following countries:
-            | name           |
-            | USA            |
-            | United Kingdom |
-            | Germany        |
+            | name          |
+            | United States |
+            | Germany       |
           And the following shipping methods exist:
-            | zone         | name       | calculator | configuration | enabled |
-            | USA          | FedEx      | Flat rate  | Amount: 6500  | yes     |
-            | UK + Germany | UPS Ground | Flat rate  | Amount: 20000 | yes     |
+            | zone    | name       |
+            | USA     | FedEx      |
+            | Germany | UPS Ground |
           And all products are assigned to the default channel
-          And there are following locales configured:
+          And there are following locales configured and assigned to the default channel:
             | code  |
             | en_US |
             | de_DE |
-          And the shipping method translations exist
-            | shipping_method | name        | locale |
-            | UPS Ground      | UPS Land    | de     |
+          And the shipping method translations exist:
+            | shipping method | name     | locale |
+            | UPS Ground      | UPS Land | de_DE  |
+          And the default channel has following configuration:
+            | taxonomy | shipping          |
+            | Category | FedEx, UPS Ground |
           And I am logged in user
           And I added product "PHP Top" to cart
 
@@ -42,7 +44,7 @@ Feature: Checkout shipping in preferred language
         Given I go to the checkout start page
           And I fill in the shipping address to Germany
          When I press "Continue"
-          And I change the locale to "German"
+          And I change the locale to "German (Germany)"
          Then I should be on the checkout shipping step
           And I should see "UPS Land"
           And I should not see "UPS Ground"

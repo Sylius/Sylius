@@ -40,8 +40,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds form section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addFormSection(ArrayNodeDefinition $node)
@@ -56,8 +54,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds filter section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addFilterSection(ArrayNodeDefinition $node)
@@ -125,8 +121,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds driver section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addDriverSection(ArrayNodeDefinition $node)
@@ -145,8 +139,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds query logger section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addQueryLoggerSection(ArrayNodeDefinition $node)
@@ -167,8 +159,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds indexes section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addIndexesSection(ArrayNodeDefinition $node)
@@ -193,24 +183,18 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds custom accessors section
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addAccessorsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('custom_accessors')
-                ->prototype('scalar')
-                ->end()
+                ->scalarNode('custom_accessor')->defaultValue('Symfony\Component\PropertyAccess\PropertyAccessor')->end()
             ->end()
         ;
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)

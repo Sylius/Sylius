@@ -12,27 +12,25 @@ Feature: Checkout addressing in preferred language
           And taxonomy "Category" has following taxons:
             | Clothing > PHP T-Shirts |
           And the following products exist:
-            | name          | price | taxons       |
-            | PHP Top       | 5.99  | PHP T-Shirts |
+            | name    | price | taxons       |
+            | PHP Top | 5.99  | PHP T-Shirts |
           And the following zones are defined:
-            | name         | type    | members                 |
-            | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | United States           |
+            | name    | type    | members       |
+            | Germany | country | Germany       |
+            | USA     | country | United States |
           And there are following countries:
             | name           |
-            | USA            |
-            | United Kingdom |
-            | Poland         |
+            | United States  |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  |
+            | zone    | name        |
+            | Germany | DHL Express |
+            | USA     | FedEx       |
           And all products are assigned to the default channel
-          And there are following locales configured:
-            | code  | enabled |
-            | en_US | yes     |
-            | de_DE | yes     |
+          And there are following locales configured and assigned to the default channel:
+            | code  |
+            | en_US |
+            | de_DE |
 
     Scenario: Seeing country in preferred language
         Given I am not logged in
@@ -40,5 +38,5 @@ Feature: Checkout addressing in preferred language
          When I go to the checkout start page
           And I fill in guest email with "example@example.com"
           And I press "Proceed with your order"
-          And I change the locale to "German"
+          And I change the locale to "German (Germany)"
          Then I select "Deutschland" from "Land"

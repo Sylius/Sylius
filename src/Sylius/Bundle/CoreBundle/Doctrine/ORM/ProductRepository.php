@@ -39,8 +39,13 @@ class ProductRepository extends BaseProductRepository
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
             ->innerJoin('product.taxons', 'taxon')
-            ->andWhere('taxon = :taxon')
+            ->andWhere($queryBuilder->expr()->orX(
+                'taxon = :taxon',
+                ':left < taxon.left AND taxon.right < :right'
+            ))
             ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight())
         ;
 
         $this->applyCriteria($queryBuilder, $criteria);

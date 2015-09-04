@@ -89,7 +89,7 @@ class TaxonomyContext extends DefaultContext
     }
 
     /**
-     * @Given the following taxonomy translations exist
+     * @Given the following taxonomy translations exist:
      */
     public function theFollowingTaxonomyTranslationsExist(TableNode $table)
     {
@@ -97,33 +97,37 @@ class TaxonomyContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $taxonomyTranslation = $this->findOneByName('taxonomy_translation', $data['taxonomy']);
+
             $taxonomy = $taxonomyTranslation->getTranslatable();
-            $taxonomy
-                ->setCurrentLocale($data['locale'])
-                ->setName($data['name']);
+            $taxonomy->setCurrentLocale($data['locale']);
+            $taxonomy->setFallbackLocale($data['locale']);
+
+            $taxonomy->setName($data['name']);
         }
 
         $manager->flush();
     }
 
     /**
-     * @Given the following taxon translations exist
+     * @Given the following taxon translations exist:
      */
     public function theFollowingTaxonTranslationsExist(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
             $taxonTranslation = $this->findOneByName('taxon_translation', $data['taxon']);
+
             $taxon = $taxonTranslation->getTranslatable();
-            $taxon
-                ->setCurrentLocale($data['locale'])
-                ->setName($data['name']);
+            $taxon->setCurrentLocale($data['locale']);
+            $taxon->setFallbackLocale($data['locale']);
+
+            $taxon->setName($data['name']);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Then Taxon translation :taxonName should have permalink :expectedPermalink
+     * @Then taxon translation :taxonName should have permalink :expectedPermalink
      */
     public function taxonForLocaleShouldHavePermalink($taxonName, $expectedPermalink)
     {

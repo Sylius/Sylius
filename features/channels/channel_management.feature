@@ -7,20 +7,18 @@ Feature: Channel management
     Background:
         Given store has default configuration
           And the following zones are defined:
-            | name | type    | members                         |
-            | USA  | country | United States                   |
-            | EU   | country | Germany, United Kingdom, France |
+            | name | type    | members         |
+            | USA  | country | United States   |
+            | EU   | country | Germany, France |
           And there are following currencies configured:
-            | code | exchange rate | enabled |
-            | USD  | 0.76496       | yes     |
-            | GBP  | 1.16998       | yes     |
-            | EUR  | 1.00000       | yes     |
+            | code |
+            | USD  |
+            | EUR  |
           And there are following locales configured:
-            | code  | activated |
-            | en_US | yes       |
-            | en_GB | yes       |
-            | fr_FR | yes       |
-            | de_DE | yes       |
+            | code  |
+            | en_US |
+            | fr_FR |
+            | de_DE |
           And the following payment methods exist:
             | name             | gateway |
             | Credit Card (US) | stripe  |
@@ -31,9 +29,9 @@ Feature: Channel management
             | USA  | FedEx |
             | EU   | DHL   |
           And there are following channels configured:
-            | code   | name       | currencies | locales             |
-            | WEB-US | mystore.us | EUR, GBP   | en_US               |
-            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE |
+            | code   | name       | currencies | locales      |
+            | WEB-US | mystore.us | USD        | en_US        |
+            | WEB-EU | mystore.eu | EUR, GBP   | fr_FR, de_DE |
           And channel "WEB-US" has following configuration:
             | shipping | payment                  |
             | FedEx    | Credit Card (US), PayPal |
@@ -54,11 +52,6 @@ Feature: Channel management
          Then I should be on the channel index page
           And I should see channel with code "WEB-US" in the list
 
-    Scenario: Seeing empty index of channels
-        Given there are no channels
-         When I am on the channel index page
-         Then I should see "There are no channels configured."
-
     Scenario: Accessing the channel creation form
         Given I am on the dashboard page
          When I follow "Channels"
@@ -75,7 +68,7 @@ Feature: Channel management
           And I select "FedEx" from "Shipping Methods"
          When I press "Create"
          Then I should be on the channel index page
-          And I should see "Channel has been successfully created."
+          And I should see "Channel has been successfully created"
 
     Scenario: Accessing the channel edit form
         Given I am on the channel index page
@@ -93,7 +86,7 @@ Feature: Channel management
     Scenario: Deleting a channel
         Given I am on the channel index page
          When I press "delete" near "WEB-EU"
-          And I confirm the deletion action
+          And I click "delete" from the confirmation modal
          Then I should still be on the channel index page
-          And I should see "Channel has been successfully deleted."
+          And I should see "Channel has been successfully deleted"
           And I should not see channel with name "mystore.eu" in the list

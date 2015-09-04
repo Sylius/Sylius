@@ -17,44 +17,37 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following attributes:
-            | name               | presentation      | type     | choices   |
-            | T-Shirt fabric     | Fabric            | text     |           |
+            | name           | presentation | type | choices |
+            | T-Shirt fabric | Fabric       | text |         |
           And the following products exist:
-            | name          | price | options                     | attributes             | taxons       |
-            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   | T-Shirts     |
+            | name          | price | options                     | attributes           | taxons   |
+            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool | T-Shirts |
           And product "Super T-Shirt" is available in all variations
-          And there are following locales configured:
+          And there are following locales configured and assigned to the default channel:
             | code  |
             | en_US |
             | es_ES |
           And the following product translations exist:
             | product       | name           | locale |
-            | Super T-Shirt | Camiseta Super | es     |
-          And the following taxonomy translations exist
+            | Super T-Shirt | Camiseta Super | es_ES   |
+          And the following taxonomy translations exist:
             | taxonomy | name      | locale |
-            | Category | Categoria | es     |
-          And the following taxon translations exist
+            | Category | Categoria | es_ES  |
+          And the following taxon translations exist:
             | taxon    | name      | locale |
-            | Clothing | Ropa      | es     |
-            | T-Shirts | Camisetas | es     |
-          And the following attribute translations exist
+            | Clothing | Ropa      | es_ES  |
+            | T-Shirts | Camisetas | es_ES  |
+          And the following attribute translations exist:
             | attribute      | presentation | locale |
-            | T-Shirt fabric | Material     | es     |
-          And the following option translations exist
+            | T-Shirt fabric | Material     | es_ES  |
+          And the following option translations exist:
             | option       | presentation | locale |
-            | T-Shirt size | Talla        | es     |
+            | T-Shirt size | Talla        | es_ES  |
           And all products are assigned to the default channel
 
-    Scenario: Seeing translated product, taxonomy and taxon name
+    Scenario: Seeing translated product name, options and attributes
         Given I am on the store homepage
-        When I change the locale to "Spanish"
-        Then I should see "Camiseta Super"
-        And I should see "Categoria"
-        And I should see "Camisetas"
-
-    Scenario: Seeing translated product options and attributes
-        Given I am on the store homepage
-        When I change the locale to "Spanish"
-        And I follow "Camiseta Super"
-        Then I should see "Material"
-        And I should see "Talla"
+         When I change the locale to "Spanish (Spain)"
+          And I follow "Camiseta Super"
+         Then I should see "Material"
+          And I should see "Talla"

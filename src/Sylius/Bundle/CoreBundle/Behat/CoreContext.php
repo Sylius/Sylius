@@ -494,6 +494,27 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^there are following locales configured and assigned to the default channel:$/
+     */
+    public function thereAreLocalesAssignedToDefaultChannel(TableNode $table)
+    {
+        $this->thereAreLocales($table);
+
+        /** @var ChannelInterface $defaultChannel */
+        $defaultChannel = $this->getRepository('channel')->findOneBy(array('code' => 'DEFAULT-WEB'));
+
+        /** @var LocaleInterface[] $locales */
+        $locales = $this->getRepository('locale')->findAll();
+        foreach ($locales as $locale) {
+            $defaultChannel->addLocale($locale);
+        }
+
+        $em = $this->getEntityManager();
+        //$em->persist($defaultChannel);
+        $em->flush();
+    }
+
+    /**
      * @Given /^product "([^""]*)" is available in all variations$/
      */
     public function productIsAvailableInAllVariations($productName)
