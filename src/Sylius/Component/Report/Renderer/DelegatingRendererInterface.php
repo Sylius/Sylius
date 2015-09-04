@@ -20,7 +20,6 @@ use Sylius\Component\Report\DataFetcher\Data;
 interface DelegatingRendererInterface
 {
     /**
-     *
      * @param ReportInterface $subject
      * @param Data            $data
      *

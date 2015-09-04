@@ -21,12 +21,12 @@ use Sylius\Component\Report\Model\ReportInterface;
 interface DelegatingDataFetcherInterface
 {
     /**
-    * Fetch data for given config.
-    *
-    * @param ReportInterface $report
-    * @param array $configuration
-    *
-    * @return array
-    */
+     * Fetch data for given config.
+     *
+     * @param ReportInterface $report
+     * @param array           $configuration
+     *
+     * @return array
+     */
     public function fetch(ReportInterface $report, array $configuration = array());
 }

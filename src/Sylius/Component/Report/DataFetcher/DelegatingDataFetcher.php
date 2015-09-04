@@ -29,8 +29,6 @@ class DelegatingDataFetcher implements DelegatingDataFetcherInterface
     protected $registry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $registry
      */
     public function __construct(ServiceRegistryInterface $registry)
@@ -40,6 +38,8 @@ class DelegatingDataFetcher implements DelegatingDataFetcherInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException If the report does not have a data fetcher.
      */
     public function fetch(ReportInterface $report, array $configuration = array())
     {

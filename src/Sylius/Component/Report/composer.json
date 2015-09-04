@@ -33,6 +33,9 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1"
     },
+    "suggest": {
+        "symfony/templating": "~2.3"
+    },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Report\\": "" }
     },

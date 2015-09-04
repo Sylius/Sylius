@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ReportBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Templating\EngineInterface;
 use Sylius\Component\Report\Model\ReportInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
 
@@ -39,7 +38,7 @@ class TableRendererSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
     }
 
-    function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
+    function it_renders_data_with_given_configuration(ReportInterface $report, Data $reportData, $templating)
     {
         $reportData->getLabels()->willReturn(array('month', 'user_total'));
         $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
@@ -53,15 +52,15 @@ class TableRendererSpec extends ObjectBehavior
 
         $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Table:default.html.twig'));
 
-        $templating->renderResponse('SyliusReportBundle:Table:default.html.twig', array(
+        $templating->render('SyliusReportBundle:Table:default.html.twig', array(
             'data' => $renderData,
             'configuration' => array('template' => 'SyliusReportBundle:Table:default.html.twig'),
-        ))->willReturn($response);
+        ))->willReturn('<div>Table Report</div>');
 
-        $this->render($report, $reportData)->shouldReturn($response);
+        $this->render($report, $reportData)->shouldReturn('<div>Table Report</div>');
     }
 
-    function it_has_type()
+    function it_is_a_table_type()
     {
         $this->getType()->shouldReturn(DefaultRenderers::TABLE);
     }
