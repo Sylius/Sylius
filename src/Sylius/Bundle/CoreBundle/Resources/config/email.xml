@@ -41,7 +41,7 @@
 
         <service id="sylius.email_manager.support_notification" class="%sylius.email_manager.support_notification.class%">
             <argument type="service" id="sylius.email_sender" />
-            <argument type="service" id="sylius.provider.support_notification_recipient" />
+            <argument type="service" id="sylius.provider.support.array_recipients" />
             <tag name="kernel.event_listener" event="sylius.support_ticket.post_create" method="sendNotificationEmail" />
         </service>
     </services>

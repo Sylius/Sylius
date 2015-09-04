@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
  
-namespace Sylius\Component\Support\Adapter;
+namespace Sylius\Component\Support\Provider;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ConfigNotificationRecipientAdapter implements ConfigNotificationRecipientAdapterInterface
+class ArrayRecipientsProvider implements ArrayRecipientsProviderInterface
 {
     /**
      * @var array

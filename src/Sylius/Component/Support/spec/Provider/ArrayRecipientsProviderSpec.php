@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Support\Adapter;
+namespace spec\Sylius\Component\Support\Provider;
 
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ConfigNotificationRecipientAdapterSpec extends ObjectBehavior
+class ArrayRecipientsProviderSpec extends ObjectBehavior
 {
     function let()
     {
@@ -27,12 +27,12 @@ class ConfigNotificationRecipientAdapterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Support\Adapter\ConfigNotificationRecipientAdapter');
+        $this->shouldHaveType('Sylius\Component\Support\Provider\ArrayRecipientsProvider');
     }
 
-    function it_implements_config_notification_recipient_adapter_interface()
+    function it_implements_notification_recipient_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Support\Adapter\ConfigNotificationRecipientAdapterInterface');
+        $this->shouldImplement('Sylius\Component\Support\Provider\ArrayRecipientsProviderInterface');
     }
 
     function it_provides_emails()

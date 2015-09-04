@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Sylius\Component\Support\Adapter;
+ 
+namespace Sylius\Component\Support\Provider;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ConfigNotificationRecipientAdapterInterface
+interface ArrayRecipientsProviderInterface
 {
     /**
      * @return array

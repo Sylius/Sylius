@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Support\Provider\NotificationRecipientProviderInterface;
+use Sylius\Component\Support\Provider\ArrayRecipientsProviderInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -26,15 +26,15 @@ class SupportNotificationEmailManager
     protected $emailSender;
 
     /**
-     * @var NotificationRecipientProviderInterface
+     * @var ArrayRecipientsProviderInterface
      */
     protected $emailProvider;
 
     /**
      * @param SenderInterface                        $emailSender
-     * @param NotificationRecipientProviderInterface $emailProvider
+     * @param ArrayRecipientsProviderInterface $emailProvider
      */
-    public function __construct(SenderInterface $emailSender, NotificationRecipientProviderInterface $emailProvider)
+    public function __construct(SenderInterface $emailSender, ArrayRecipientsProviderInterface $emailProvider)
     {
         $this->emailSender = $emailSender;
         $this->emailProvider = $emailProvider;
