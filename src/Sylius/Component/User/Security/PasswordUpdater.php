@@ -11,22 +11,22 @@
 
 namespace Sylius\Component\User\Security;
 
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class PasswordUpdater implements PasswordUpdaterInterface
 {
     /**
-     * @var EncoderFactoryInterface
+     * @var UserPasswordEncoderInterface
      */
-    private $encoderFactory;
+    private $userPasswordEncoder;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->encoderFactory = $encoderFactory;
+        $this->userPasswordEncoder = $passwordEncoder;
     }
 
     /**
@@ -35,8 +35,7 @@ class PasswordUpdater implements PasswordUpdaterInterface
     public function updatePassword(UserInterface $user)
     {
         if (0 !== strlen($password = $user->getPlainPassword())) {
-            $encoder = $this->encoderFactory->getEncoder($user);
-            $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
+            $user->setPassword($this->userPasswordEncoder->encode($user));
             $user->eraseCredentials();
         }
     }
