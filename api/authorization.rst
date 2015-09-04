@@ -31,15 +31,14 @@ Example
 
 .. code-block:: text
 
-    public id: 2_4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw
+    public id: 4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw
     secret: s8tg7026wo0k0koco8o4wc0kwocowskgwkk0wowsgc8o4408c
 
 .. tip::
 
-    If you use Guzzle check out OAuth2 plugins (Guzzle5_ or Guzzle3_) and use Password Credentials.
+    If you use Guzzle check out `OAuth2 plugin`__ and use Password Credentials.
 
-.. _Guzzle5: https://github.com/NMRKT/guzzle5-oauth2-subscriber
-.. _Guzzle3: https://github.com/commerceguys/guzzle-oauth2-plugin
+__ https://github.com/commerceguys/guzzle-oauth2-plugin
 
 Obtain access token
 ~~~~~~~~~~~~~~~~~~~
@@ -62,7 +61,7 @@ Example
 
 .. code-block:: text
 
-    GET /oauth/v2/token?client_id=2_4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw&client_secret=s8tg7026wo0k0koco8o4wc0kwocowskgwkk0wowsgc8o4408c&grant_type=password&username=sylius@example.com&password=sylius
+    GET /oauth/v2/token?client_id=4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw&client_secret=s8tg7026wo0k0koco8o4wc0kwocowskgwkk0wowsgc8o4408c&grant_type=password&username=sylius@example.com&password=sylius
 
 Example response
 ................
@@ -119,7 +118,7 @@ Example
 
 .. code-block:: text
 
-    GET /oauth/v2/token?client_id=2_4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw&client_secret=s8tg7026wo0k0koco8o4wc0kwocowskgwkk0wowsgc8o4408c&grant_type=refresh_token&refresh_token=YzYzNDYyZmFiN2QyYTk3OTM4ZTFjODA2ZWJkMDFiZmIwZjE2Yzc4MTBkZWFlYzM3ZDU4YTE5ODcwMTc3MTRlZQ
+    GET /oauth/v2/token?client_id=4fugw85qtim8c48s88g00s0gc040s4s4k8wk4kswowkksg0skw&client_secret=s8tg7026wo0k0koco8o4wc0kwocowskgwkk0wowsgc8o4408c&grant_type=refresh_token&refresh_token=YzYzNDYyZmFiN2QyYTk3OTM4ZTFjODA2ZWJkMDFiZmIwZjE2Yzc4MTBkZWFlYzM3ZDU4YTE5ODcwMTc3MTRlZQ
 
 Example response
 ................
