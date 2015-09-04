@@ -29,7 +29,6 @@ class MoneyContext extends DefaultContext
         }
 
         $manager->flush();
-        $manager->clear();
 
         foreach ($table->getHash() as $data) {
             $exchangeRate = isset($data['exchange rate']) ? $data['exchange rate'] : 1;

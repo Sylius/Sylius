@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -19,7 +20,9 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 

@@ -82,7 +82,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->arrayNode('default')
-                                            ->prototype('scalar')
+                                            ->prototype('scalar')->end()
                                             ->defaultValue(array('sylius'))
                                         ->end()
                                     ->end()

@@ -107,7 +107,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\CountryType')->end()
-                                                ->scalarNode('choice')->defaultValue('Sylius\Bundle\CountryBundle\Form\Type\CountryChoiceType')->end()
+                                                ->scalarNode('choice')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType')->end()
                                             ->end()
                                         ->end()
                                     ->end()

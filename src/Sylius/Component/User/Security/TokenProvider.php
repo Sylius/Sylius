@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\User\Security;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -26,7 +26,7 @@ class TokenProvider implements TokenProviderInterface
     private $repository;
 
     /**
-     * @var EntityManagerInterface
+     * @var ResourceManagerInterface
      */
     private $manager;
 
@@ -42,10 +42,10 @@ class TokenProvider implements TokenProviderInterface
 
     /**
      * @param ResourceRepositoryInterface $repository
-     * @param EntityManagerInterface      $manager
+     * @param ResourceManagerInterface    $manager
      * @param GeneratorInterface          $generator
      */
-    public function __construct(ResourceRepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
+    public function __construct(ResourceRepositoryInterface $repository, ResourceManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
     {
         $this->repository = $repository;
         $this->manager = $manager;
@@ -72,11 +72,11 @@ class TokenProvider implements TokenProviderInterface
      */
     protected function isUsedCode($token)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
+        $this->repository->disableFilter('softdeleteable');
 
         $isUsed = null !== $this->repository->findOneBy(array('confirmationToken' => $token));
 
-        $this->manager->getFilters()->enable('softdeleteable');
+        $this->repository->enableFilter('softdeleteable');
 
         return $isUsed;
     }

@@ -52,7 +52,6 @@
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
-            <call method="setMessages"/>
         </service>
 
         <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">

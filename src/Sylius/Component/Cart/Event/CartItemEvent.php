@@ -27,10 +27,11 @@ class CartItemEvent extends CartEvent
     /**
      * @param CartInterface     $cart
      * @param CartItemInterface $item
+     * @param string            $message
      */
-    public function __construct(CartInterface $cart, CartItemInterface $item)
+    public function __construct(CartInterface $cart, CartItemInterface $item, $message = null)
     {
-        parent::__construct($cart);
+        parent::__construct($cart, $message);
 
         $this->item = $item;
     }

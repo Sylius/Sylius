@@ -26,4 +26,6 @@ final class ResourceActions
     const REVERT     = 'revert';
     const TRANSITION = 'transition';
     const MOVE       = 'move';
+    const ENABLE     = 'enable';
+    const DISABLE    = 'disable';
 }

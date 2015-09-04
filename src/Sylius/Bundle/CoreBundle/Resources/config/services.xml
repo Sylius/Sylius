@@ -120,7 +120,7 @@
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
             <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.checker.restricted_zone" />
@@ -188,7 +188,6 @@
             <argument type="service" id="sylius.factory.shipment" />
         </service>
         <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
-            <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="sylius.factory.payment" />
         </service>

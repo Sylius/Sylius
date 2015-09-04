@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Resource\Event\FlashEvent;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Cart\Event\CartEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Default cart controller.
  * It extends the format agnostic resource controller.
+ *
  * Resource controller class provides several actions and methods for creating
  * pages and api for your cart system.
  *
@@ -34,21 +34,22 @@ class CartController extends Controller
      *
      * @return Response
      */
-    public function summaryAction()
+    public function summaryAction(Request $request)
     {
-        $cart = $this->getCurrentCart();
-        $form = $this->createForm('sylius_cart', $cart);
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('summary.html'))
+        $cart = $this->getCurrentCart();
+        $form = $this->createResourceForm($configuration, $cart);
+
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
             ->setData(array(
                 'cart' => $cart,
                 'form' => $form->createView()
             ))
         ;
 
-        return $this->handleView($view);
+        return $this->handleView($configuration, $view);
     }
 
     /**
@@ -64,36 +65,34 @@ class CartController extends Controller
      */
     public function saveAction(Request $request)
     {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
         $cart = $this->getCurrentCart();
-        $form = $this->createForm('sylius_cart', $cart);
+        $form = $this->createResourceForm($configuration, $cart);
 
         if ($form->handleRequest($request)->isValid()) {
             $event = new CartEvent($cart);
-            $event->isFresh(true);
 
-            $eventDispatcher = $this->getEventDispatcher();
+            $this->eventDispatcher->dispatch(CartEvents::CHANGE, $event);
+            $this->eventDispatcher->dispatch(CartEvents::PRE_SAVE, $event);
 
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
+            $this->manager->persist($cart);
+            $this->manager->flush();
 
-            // Update models
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
-
-            // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
+            $this->eventDispatcher->dispatch(CartEvents::POST_SAVE, $event);
 
             return $this->redirectToCartSummary();
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('summary.html'))
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
             ->setData(array(
                 'cart' => $cart,
                 'form' => $form->createView()
             ))
         ;
 
-        return $this->handleView($view);
+        return $this->handleView($configuration, $view);
     }
 
     /**
@@ -104,13 +103,15 @@ class CartController extends Controller
      */
     public function clearAction()
     {
-        $eventDispatcher = $this->getEventDispatcher();
+        $cart = $this->getCurrentCart();
+        $event = new CartEvent($cart);
 
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CLEAR_INITIALIZE, new CartEvent($this->getCurrentCart()));
+        $this->eventDispatcher->dispatch(CartEvents::PRE_CLEAR, $event);
 
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
+        $this->manager->remove($cart);
+        $this->manager->flush();
+
+        $this->eventDispatcher->dispatch(CartEvents::POST_CLEAR, $event);
 
         return $this->redirectToCartSummary();
     }

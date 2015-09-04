@@ -108,11 +108,11 @@ Feature: Countries and provinces
           And I am on the country index page
          When I click "Enable" near "Poland"
          Then I should see enabled country with name "Poland" in the list
-          And I should see "Country has been successfully enabled"
+          And I should see "Country has been successfully updated"
 
     Scenario: Disabling country
         Given there is an enabled country "Poland"
           And I am on the country index page
          When I click "Disable" near "Poland"
          Then I should see disabled country with name "Poland" in the list
-          And I should see "Country has been successfully disabled"
+          And I should see "Country has been successfully updated"

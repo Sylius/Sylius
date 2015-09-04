@@ -12,24 +12,36 @@
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\GenericResourceEvent;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FlashesListener
 {
+    const FLASHES_BAG = 'flashes';
+    const TRANSLATION_DOMAIN = 'flashes';
+
     /**
      * @var SessionInterface
      */
     private $session;
 
     /**
-     * @param SessionInterface $session
+     * @var TranslatorInterface
      */
-    public function __construct(SessionInterface $session)
+    private $translator;
+
+    /**
+     * @param SessionInterface $session
+     * @param $translator
+     */
+    public function __construct(SessionInterface $session, $translator)
     {
         $this->session = $session;
+        $this->translator = $translator;
     }
 
     /**
@@ -46,7 +58,7 @@ class FlashesListener
      */
     private function addFlash($type, $message)
     {
-        $this->session->getBag('flashes')->add($type, $message);
+        $this->session->getBag(self::FLASHES_BAG)->add($type, $message);
     }
 
     /**
@@ -60,7 +72,24 @@ class FlashesListener
         $requestConfiguration = $event->getRequestConfiguration();
 
         $defaultMessage = sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getResourceName(), $event->getActionName());
+        $message = $requestConfiguration->getFlashMessage() ?: $defaultMessage;
 
-        return $requestConfiguration->getFlashMessage() ?: $defaultMessage;
+        $translatedMessage = $this->translator->trans($message, array(), self::TRANSLATION_DOMAIN);
+
+        if ($translatedMessage === $message) {
+            $translatedMessage = $this->translator->trans('sylius.resource.'.$event->getActionName(), array('%resource%' => $this->getHumanizedResourceName($metadata)), self::TRANSLATION_DOMAIN);
+        }
+
+        return $translatedMessage;
+    }
+
+    /**
+     * @param ResourceMetadataInterface $metadata
+     *
+     * @return string
+     */
+    private function getHumanizedResourceName(ResourceMetadataInterface $metadata)
+    {
+        return $resource = ucfirst(str_replace('_', ' ', $metadata->getResourceName()));
     }
 }

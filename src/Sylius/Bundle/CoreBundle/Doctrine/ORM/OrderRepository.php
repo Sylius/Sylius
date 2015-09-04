@@ -54,6 +54,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
+     * @param int $count
+     *
+     * @return OrderInterface[]
+     */
+    public function findMostRecent($count = 10)
+    {
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * Get the order data for the details page.
      *
      * @param integer $id
@@ -400,7 +417,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     protected function getQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->objectRepository->createQueryBuilder('c');
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         if (null !== $state) {
             $queryBuilder
@@ -410,6 +427,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         }
 
         return $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
             ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
             ->setParameter('from', $from)
@@ -420,6 +438,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = array())
     {
         $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
 
         $queryBuilder
             ->innerJoin('o.customer', 'customer')

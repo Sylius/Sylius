@@ -140,9 +140,11 @@ class ProductRepository extends BaseProductRepository
         $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
+            ->leftJoin('o.variants', 'variant')
+            ->addSelect('variant')
             ->leftJoin('variant.images', 'image')
             ->addSelect('image')
-            ->andWhere($queryBuilder->expr()->eq('product.id', ':id'))
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
         ;
 
@@ -151,7 +153,7 @@ class ProductRepository extends BaseProductRepository
             ->getOneOrNullResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->objectManager->getFilters()->enable('softdeleteable');
 
         return $result;
     }
@@ -173,10 +175,11 @@ class ProductRepository extends BaseProductRepository
     {
         if (isset($criteria['channels'])) {
             $queryBuilder
-                ->innerJoin('product.channels', 'channel')
+                ->innerJoin('o.channels', 'channel')
                 ->andWhere('channel = :channel')
                 ->setParameter('channel', $criteria['channels'])
             ;
+
             unset($criteria['channels']);
         }
 

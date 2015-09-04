@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
+use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartEvents;
 use Sylius\Component\Cart\Event\CartItemEvents;
-use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Flash message listener.
@@ -25,17 +26,27 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class FlashSubscriber implements EventSubscriberInterface
 {
+    const FLASHES_BAG = 'flashes';
+    const TRANSLATION_DOMAIN = 'flashes';
+
     /**
      * @var SessionInterface
      */
     private $session;
 
     /**
-     * @param SessionInterface $session
+     * @var TranslatorInterface
      */
-    public function __construct(SessionInterface $session)
+    private $translator;
+
+    /**
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
         $this->session = $session;
+        $this->translator = $translator;
     }
 
     /**
@@ -71,17 +82,17 @@ class FlashSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param FlashEvent $event
+     * @param CartEvent $event
      */
-    public function addErrorFlash(ResourceEvent $event)
+    public function addErrorFlash(CartEvent $event)
     {
         $this->addFlash('error', $event->getMessage(), $event->getName());
     }
 
     /**
-     * @param FlashEvent $event
+     * @param CartEvent $event
      */
-    public function addSuccessFlash(ResourceEvent $event)
+    public function addSuccessFlash(CartEvent $event)
     {
         $this->addFlash('success', $event->getMessage(), $event->getName());
     }
@@ -95,9 +106,9 @@ class FlashSubscriber implements EventSubscriberInterface
     {
         $messages = self::getMessages();
 
-        $this->session->getBag('flashes')->add(
+        $this->session->getBag(self::FLASHES_BAG)->add(
             $type,
-            $message ?: $messages[$eventName]
+            $this->translator->trans($message ?: $messages[$eventName], array(), self::TRANSLATION_DOMAIN)
         );
     }
 }

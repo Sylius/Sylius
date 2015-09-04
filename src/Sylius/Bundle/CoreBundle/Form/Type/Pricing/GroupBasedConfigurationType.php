@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Pricing;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +26,9 @@ class GroupBasedConfigurationType extends AbstractType
     protected $groupRepository;
 
     /**
-     * @param RepositoryInterface $groupRepository
+     * @param ResourceRepositoryInterface $groupRepository
      */
-    public function __construct(RepositoryInterface $groupRepository)
+    public function __construct(ResourceRepositoryInterface $groupRepository)
     {
         $this->groupRepository = $groupRepository;
     }

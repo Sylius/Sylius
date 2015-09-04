@@ -25,11 +25,17 @@ class CartEvent extends Event
     protected $cart;
 
     /**
+     * @var string
+     */
+    protected $message;
+
+    /**
      * @param CartInterface $cart
      */
-    public function __construct(CartInterface $cart)
+    public function __construct(CartInterface $cart, $message = null)
     {
         $this->cart = $cart;
+        $this->message = $message;
     }
 
     /**
@@ -38,5 +44,13 @@ class CartEvent extends Event
     public function getCart()
     {
         return $this->cart;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

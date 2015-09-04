@@ -149,8 +149,10 @@ abstract class AbstractDriver implements DriverInterface
 
         if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
             $definition->addMethodCall('setLocaleProvider', array(new Reference('sylius.translation.locale_provider')));
-            $definition->addMethodCall('setTranslatableFields', array($metadata->getClass('translation.mapping.fields')));
+            $definition->addMethodCall('setTranslatableFields', array($metadata->getParameter('translation')['fields']));
         }
+
+        return $definition;
     }
 
     /**
@@ -166,8 +168,6 @@ abstract class AbstractDriver implements DriverInterface
         $factoryClass = $metadata->hasClass('factory') ? $metadata->getClass('factory') : $defaultFactoryClass;
 
         $definition = new Definition($factoryClass);
-        $reflection = new \ReflectionClass($factoryClass);
-
         $definition->setArguments(array($metadata->getClass('model')));
 
         if ($metadata->isTranslatable()) {

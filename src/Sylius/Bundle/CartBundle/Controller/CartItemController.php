@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\CartEvents;
 use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Event\CartItemEvents;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
@@ -50,30 +53,24 @@ class CartItemController extends Controller
      */
     public function addAction(Request $request)
     {
-        $cart = $this->getCurrentCart();
-        $emptyItem = $this->createNew();
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
 
-        $eventDispatcher = $this->getEventDispatcher();
+        $cart = $this->getCurrentCart();
+        $emptyItem = $this->createNew($configuration);
 
         try {
             $item = $this->getResolver()->resolve($emptyItem, $request);
         } catch (ItemResolvingException $exception) {
-            // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
+            $this->eventDispatcher->dispatch(CartItemEvents::ADD_FAILED, new CartItemEvent($cart, $emptyItem));
 
             return $this->redirectAfterAdd($request);
         }
 
         $event = new CartItemEvent($cart, $item);
-        $event->isFresh(true);
 
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
-
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
+        $this->eventDispatcher->dispatch(CartEvents::CHANGE, new CartEvent($cart));
+        $this->eventDispatcher->dispatch(CartItemEvents::PRE_ADD, $event);
+        $this->eventDispatcher->dispatch(CartItemEvents::POST_ADD, $event);
 
         return $this->redirectAfterAdd($request);
     }
@@ -105,30 +102,25 @@ class CartItemController extends Controller
      *
      * @return Response
      */
-    public function removeAction($id)
+    public function removeAction(Request $request, $id)
     {
-        $cart = $this->getCurrentCart();
-        $item = $this->getRepository()->find($id);
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
 
-        $eventDispatcher = $this->getEventDispatcher();
+        $cart = $this->getCurrentCart();
+        $item = $this->repository->find($id);
 
         if (!$item || false === $cart->hasItem($item)) {
             // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
+            $this->eventDispatcher->dispatch(CartItemEvents::REMOVE_FAILED, new CartItemEvent($cart, $item));
 
             return $this->redirectToCartSummary();
         }
 
         $event = new CartItemEvent($cart, $item);
-        $event->isFresh(true);
 
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_INITIALIZE, $event);
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
-
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
+        $this->eventDispatcher->dispatch(CartEvents::CHANGE, new CartEvent($cart));
+        $this->eventDispatcher->dispatch(CartItemEvents::PRE_REMOVE, $event);
+        $this->eventDispatcher->dispatch(CartItemEvents::POST_REMOVE, $event);
 
         return $this->redirectToCartSummary();
     }

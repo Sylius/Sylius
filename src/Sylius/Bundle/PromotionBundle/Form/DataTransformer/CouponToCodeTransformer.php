@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -29,7 +29,7 @@ class CouponToCodeTransformer implements DataTransformerInterface
     /**
      * Coupon repository.
      *
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     protected $couponRepository;
 
@@ -41,10 +41,10 @@ class CouponToCodeTransformer implements DataTransformerInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository         $couponRepository
+     * @param ResourceRepositoryInterface         $couponRepository
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(ObjectRepository $couponRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(ResourceRepositoryInterface $couponRepository, EventDispatcherInterface $dispatcher)
     {
         $this->couponRepository = $couponRepository;
         $this->dispatcher = $dispatcher;

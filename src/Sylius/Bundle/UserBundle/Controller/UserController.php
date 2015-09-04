@@ -255,8 +255,9 @@ class UserController extends ResourceController
     protected function findUserByToken($token)
     {
         $user = $this->getRepository()->findOneBy(array('confirmationToken' => $token));
+
         if (null === $user) {
-            throw new NotFoundHttpException('This token does not exist');
+            throw new NotFoundHttpException('This token does not exist.');
         }
 
         return $user;

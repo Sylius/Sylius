@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
@@ -49,7 +50,7 @@ class VariantController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(RequestConfiguration $configuration)
     {
         if (null === $productId = $this->getRequest()->get('productId')) {
             throw new NotFoundHttpException('No parent product given.');
@@ -57,7 +58,7 @@ class VariantController extends ResourceController
 
         $product = $this->findProductOr404($productId);
 
-        $variant = parent::createNew();
+        $variant = parent::createNew($configuration);
         $variant->setProduct($product);
 
         return $variant;

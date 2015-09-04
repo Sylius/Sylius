@@ -135,14 +135,14 @@ class ProductController extends BaseProductController
         if (!$product->getChannels()->contains($channel)) {
             throw new NotFoundHttpException(sprintf(
                 'Requested %s does not exist for channel: %s.',
-                $configuration->getResourceName(),
+                $this->metadata->getResourceName(),
                 $channel->getName()
             ));
         }
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('show.html'))
-            ->setTemplateVar($configuration->getResourceName())
+            ->setTemplateVar($this->metadata->getResourceName())
             ->setData($product)
         ;
 

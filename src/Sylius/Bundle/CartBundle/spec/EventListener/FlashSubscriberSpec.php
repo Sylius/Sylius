@@ -18,6 +18,7 @@ use Sylius\Component\Cart\Event\CartItemEvents;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -25,9 +26,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class FlashSubscriberSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session)
+    function let(SessionInterface $session, TranslatorInterface $translator)
     {
-        $this->beConstructedWith($session);
+        $this->beConstructedWith($session, $translator);
     }
 
     function it_is_initializable()

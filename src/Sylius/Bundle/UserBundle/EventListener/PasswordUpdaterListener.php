@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -64,11 +65,11 @@ class PasswordUpdaterListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param ResourceEvent $event
      */
-    public function genericEventUpdater(GenericEvent $event)
+    public function genericEventUpdater(ResourceEvent $event)
     {
-        $user = $event->getSubject();
+        $user = $event->getResource();
 
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
@@ -81,11 +82,11 @@ class PasswordUpdaterListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param ResourceEvent $event
      */
-    public function customerUpdateEvent(GenericEvent $event)
+    public function customerUpdateEvent(ResourceEvent $event)
     {
-        $customer = $event->getSubject();
+        $customer = $event->getResource();
 
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(

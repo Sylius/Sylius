@@ -82,6 +82,8 @@ class CartSubscriber implements EventSubscriberInterface
     {
         $cart = $event->getCart();
         $cart->addItem($event->getItem());
+
+        $this->saveCart($event);
     }
 
     /**
@@ -91,6 +93,8 @@ class CartSubscriber implements EventSubscriberInterface
     {
         $cart = $event->getCart();
         $cart->removeItem($event->getItem());
+
+        $this->saveCart($event);
     }
 
     /**
@@ -110,6 +114,8 @@ class CartSubscriber implements EventSubscriberInterface
     public function saveCart(CartEvent $event)
     {
         $cart  = $event->getCart();
+
+        $cart->calculateTotal();
 
         $errors = $this->validator->validate($cart);
         $valid  = 0 === count($errors);

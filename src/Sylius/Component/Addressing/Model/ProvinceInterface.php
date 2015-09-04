@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface
+interface ProvinceInterface extends ResourceInterface
 {
     /**
      * @return mixed

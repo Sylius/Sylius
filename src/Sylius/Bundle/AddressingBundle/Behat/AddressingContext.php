@@ -102,6 +102,7 @@ class AddressingContext extends DefaultContext
     public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $scope = null, $flush = true)
     {
         $factory = $this->getFactory('zone');
+        $repository = $this->getRepository('zone');
 
         /* @var $zone ZoneInterface */
         $zone = $factory->createNew();

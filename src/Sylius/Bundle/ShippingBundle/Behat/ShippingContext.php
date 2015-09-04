@@ -62,7 +62,7 @@ class ShippingContext extends DefaultContext
         $shippingMethod = $this->findOneByName('shipping_method', $name);
 
         $manager = $this->getManager('shipping_method_rule');
-        $factory = $this->getRepository('shipping_method_rule');
+        $factory = $this->getFactory('shipping_method_rule');
 
         foreach ($table->getHash() as $data) {
             /* @var $rule RuleInterface */

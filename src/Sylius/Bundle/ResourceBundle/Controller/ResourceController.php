@@ -25,9 +25,10 @@ use Sylius\Component\Resource\Event\ResourceEvents;
 use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +43,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ResourceController extends ContainerAware
+class ResourceController extends Controller
 {
     /**
      * @var ResourceMetadataInterface
@@ -241,7 +242,7 @@ class ResourceController extends ContainerAware
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
 
         $resource = $this->createNew($configuration);
-        $form = $this->createForm($configuration, $resource);
+        $form = $this->createResourceForm($configuration, $resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->eventDispatcher->dispatch(GenericResourceEvents::PRE_CREATE, new GenericResourceEvent($resource, $this->metadata, $configuration, ResourceActions::CREATE));
@@ -293,7 +294,7 @@ class ResourceController extends ContainerAware
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
         $resource = $this->findOr404($configuration);
-        $form     = $this->createForm($configuration, $resource);
+        $form     = $this->createResourceForm($configuration, $resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->eventDispatcher->dispatch(GenericResourceEvents::PRE_UPDATE, new GenericResourceEvent($resource, $this->metadata, $configuration, ResourceActions::UPDATE));
@@ -384,6 +385,46 @@ class ResourceController extends ContainerAware
     public function disableAction(Request $request)
     {
         return $this->toggle($request, false);
+    }
+
+    /**
+     * @param Request $request
+     * @param boolean $enabled
+     *
+     * @return RedirectResponse|Response
+     */
+    protected function toggle(Request $request, $enabled)
+    {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
+        $resource = $this->findOr404($configuration);
+
+        if (!$resource instanceof ToggleableInterface) {
+            throw new \InvalidArgumentException('Resource must implement ToggleableInterface.');
+        }
+
+        $resource->setEnabled($enabled);
+
+        $this->eventDispatcher->dispatch(GenericResourceEvents::PRE_UPDATE, new GenericResourceEvent($resource, $this->metadata, $configuration, ResourceActions::UPDATE));
+        $event = $this->eventDispatcher->dispatchResourceEvent(ResourceEvents::PRE_UPDATE, $resource);
+
+        if ($event->isPropagationStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getResponseCode(), $event->getMessage());
+        }
+
+        $this->manager->persist($resource);
+        $this->manager->flush();
+
+        $this->eventDispatcher->dispatchResourceEvent(ResourceEvents::POST_UPDATE, $resource);
+        $this->eventDispatcher->dispatch(GenericResourceEvents::POST_UPDATE, new GenericResourceEvent($resource, $this->metadata, $configuration, ResourceActions::UPDATE));
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->handleView($configuration, View::create(204));
+        }
+
+        return $this->redirectHandler->redirectToIndex($configuration);
     }
 
     /**
@@ -491,7 +532,7 @@ class ResourceController extends ContainerAware
      *
      * @return FormInterface
      */
-    private function createForm(RequestConfiguration $configuration, $resource = null)
+    protected function createResourceForm(RequestConfiguration $configuration, $resource = null)
     {
         $form = $this->formFactory->createForm($configuration, $this->metadata);
         $form->setData($resource);

@@ -37,8 +37,8 @@ class DoctrineORMDriver extends AbstractDriver
         $repositoryClassParameter = $metadata->getServiceId('repository').'.class';
 
         $repositoryClass = $translatable ?
-            new Parameter('sylius.doctrine.orm.translatable_repository.class') :
-            new Parameter('sylius.doctrine.orm.repository.class')
+            $container->getParameter('sylius.doctrine.orm.translatable_repository.class') :
+            $container->getParameter('sylius.doctrine.orm.repository.class')
         ;
 
         if ($container->hasParameter($repositoryClassParameter)) {
@@ -59,6 +59,14 @@ class DoctrineORMDriver extends AbstractDriver
             $repositoryDefinition,
             new Reference($this->getObjectManagerId($metadata)),
         ));
+
+        $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
+        $repositoryReflection = new \ReflectionClass($repositoryClass);
+
+        if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
+            $definition->addMethodCall('setLocaleProvider', array(new Reference('sylius.translation.locale_provider')));
+            $definition->addMethodCall('setTranslatableFields', array($metadata->getParameter('translation')['fields']));
+        }
 
         return $definition;
     }

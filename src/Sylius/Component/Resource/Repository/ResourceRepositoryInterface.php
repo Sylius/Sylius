@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Resource\Repository;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * Model repository interface.
  *

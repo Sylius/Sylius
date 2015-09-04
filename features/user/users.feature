@@ -79,7 +79,7 @@ Feature: Customers management
         Given I am on the customer creation page
          When I press "Create"
          Then I should still be on the customer creation page
-          And I should see "Please enter your first name."
+          And I should see "Please enter your email."
 
     Scenario: Creating customer
         Given I am on the customer creation page

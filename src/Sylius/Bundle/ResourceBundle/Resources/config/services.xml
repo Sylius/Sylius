@@ -113,6 +113,7 @@
 
         <service id="sylius.event_listener.flashes" class="%sylius.event_listener.flashes.class%">
             <argument type="service" id="session" />
+            <argument type="service" id="translator" />
             <tag name="kernel.event_listener" event="sylius.resource.post_create" method="addSuccessFlash" />
             <tag name="kernel.event_listener" event="sylius.resource.post_update" method="addSuccessFlash" />
             <tag name="kernel.event_listener" event="sylius.resource.post_delete" method="addSuccessFlash" />
