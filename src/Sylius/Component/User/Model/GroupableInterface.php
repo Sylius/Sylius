@@ -14,8 +14,6 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * Group model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -48,8 +46,6 @@ interface GroupableInterface
      * Add a group to the user groups.
      *
      * @param GroupInterface $group
-     *
-     * @return self
      */
     public function addGroup(GroupInterface $group);
 
@@ -57,8 +53,6 @@ interface GroupableInterface
      * Remove a group from the user groups.
      *
      * @param GroupInterface $group
-     *
-     * @return self
      */
     public function removeGroup(GroupInterface $group);
 }

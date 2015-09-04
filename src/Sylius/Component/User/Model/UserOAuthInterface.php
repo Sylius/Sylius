@@ -12,8 +12,6 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * User OAuth account interface.
- *
  * @author Sergio Marchesini
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -30,8 +28,6 @@ interface UserOAuthInterface extends UserAwareInterface
      * Set OAuth provider name.
      *
      * @param string $provider
-     *
-     * @return self
      */
     public function setProvider($provider);
 
@@ -46,8 +42,6 @@ interface UserOAuthInterface extends UserAwareInterface
      * Set OAuth identifier.
      *
      * @param string $identifier
-     *
-     * @return self
      */
     public function setIdentifier($identifier);
 
@@ -62,8 +56,6 @@ interface UserOAuthInterface extends UserAwareInterface
      * Set OAuth access token.
      *
      * @param string $accessToken
-     *
-     * @return self
      */
     public function setAccessToken($accessToken);
 }

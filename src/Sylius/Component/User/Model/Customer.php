@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Customer model.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Customer implements CustomerInterface, GroupableInterface
@@ -91,9 +89,7 @@ class Customer implements CustomerInterface, GroupableInterface
     }
 
     /**
-     * Returns the customer unique id.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -117,8 +113,6 @@ class Customer implements CustomerInterface, GroupableInterface
             $this->user = $user;
             $this->assignCustomer($user);
         }
-
-        return $this;
     }
 
     /**
@@ -143,8 +137,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setEmail($email)
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -161,8 +153,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setEmailCanonical($emailCanonical)
     {
         $this->emailCanonical = $emailCanonical;
-
-        return $this;
     }
 
     /**
@@ -187,8 +177,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
 
     /**
@@ -205,8 +193,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
-        return $this;
     }
 
     /**
@@ -223,8 +209,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setBirthday(\DateTime $birthday = null)
     {
         $this->birthday = $birthday;
-
-        return $this;
     }
 
     /**
@@ -241,8 +225,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setGender($gender)
     {
         $this->gender = $gender;
-
-        return $this;
     }
 
     /**
@@ -298,8 +280,6 @@ class Customer implements CustomerInterface, GroupableInterface
         if (!$this->getGroups()->contains($group)) {
             $this->getGroups()->add($group);
         }
-
-        return $this;
     }
 
     /**
@@ -310,8 +290,6 @@ class Customer implements CustomerInterface, GroupableInterface
         if ($this->getGroups()->contains($group)) {
             $this->getGroups()->removeElement($group);
         }
-
-        return $this;
     }
 
     /**
@@ -328,8 +306,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -346,8 +322,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -364,8 +338,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 
     /**

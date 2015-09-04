@@ -23,8 +23,6 @@ interface UserAwareInterface
 
     /**
      * @param UserInterface $user
-     *
-     * @return self
      */
     public function setUser(UserInterface $user = null);
 }
