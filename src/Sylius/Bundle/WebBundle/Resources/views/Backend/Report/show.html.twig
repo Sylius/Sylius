@@ -28,7 +28,7 @@
     <br>
     </form>
     {{ report.description }}
-    {{ render(controller('sylius.controller.report:embeddAction', {'report': report, 'configuration' : configuration})) }}
+    {{ render(controller('sylius.controller.report:embedAction', {'report': report, 'configuration' : configuration})) }}
 {% endblock %}
 
 {% block stylesheets %}

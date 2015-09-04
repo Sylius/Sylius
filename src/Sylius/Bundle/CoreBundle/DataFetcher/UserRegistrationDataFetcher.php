@@ -18,6 +18,9 @@ class UserRegistrationDataFetcher extends TimePeriod
      */
     private $userRepository;
 
+    /**
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;

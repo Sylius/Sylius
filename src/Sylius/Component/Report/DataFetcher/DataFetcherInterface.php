@@ -17,8 +17,6 @@ namespace Sylius\Component\Report\DataFetcher;
 interface DataFetcherInterface
 {
     /**
-     * Fetching data from data base
-     *
      * @param array $configuration
      *
      * @return Data $data
@@ -26,7 +24,7 @@ interface DataFetcherInterface
     public function fetch(array $configuration);
 
     /**
-     * @return Type of data
+     * @return string
      */
     public function getType();
 }
