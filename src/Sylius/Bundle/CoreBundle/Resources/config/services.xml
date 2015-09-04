@@ -543,7 +543,7 @@
 
         <service id="sylius.validator.has_enabled" class="%sylius.validator.has_enabled.class%">
             <argument type="service" id="doctrine" />
-            <tag name="validator.constraint_validator" alias="sylius_has_enabled" />
+            <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
     </services>
 
