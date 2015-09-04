@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -38,7 +38,7 @@ class PaymentMethodChoiceType extends ResourceChoiceType
     private $feeCalculatorRegistry;
 
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $paymentRepository;
 
@@ -47,9 +47,9 @@ class PaymentMethodChoiceType extends ResourceChoiceType
      * @param string                   $driver
      * @param string                   $name
      * @param ServiceRegistryInterface $feeCalculatorRegistry
-     * @param RepositoryInterface      $paymentRepository
+     * @param ResourceRepositoryInterface      $paymentRepository
      */
-    public function __construct($className, $driver, $name, ServiceRegistryInterface $feeCalculatorRegistry, RepositoryInterface $paymentRepository)
+    public function __construct($className, $driver, $name, ServiceRegistryInterface $feeCalculatorRegistry, ResourceRepositoryInterface $paymentRepository)
     {
         parent::__construct($className, $driver, $name);
 
@@ -69,8 +69,14 @@ class PaymentMethodChoiceType extends ResourceChoiceType
                 'disabled' => $options['disabled'],
             );
 
-            return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
-                return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
+            return function (EntityRepository $repository) use ($repositoryOptions) {
+                $queryBuilder = $repository->createQueryBuilder('o');
+
+                if (!$repositoryOptions['disabled']) {
+                    $queryBuilder->where('o.enabled = true');
+                }
+
+                return $queryBuilder;
             };
         };;
 

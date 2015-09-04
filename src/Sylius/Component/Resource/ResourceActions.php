@@ -28,4 +28,5 @@ final class ResourceActions
     const MOVE       = 'move';
     const ENABLE     = 'enable';
     const DISABLE    = 'disable';
+    const GENERATE   = 'generate';
 }

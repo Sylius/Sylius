@@ -11,7 +11,11 @@
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
+<<<<<<< HEAD
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+=======
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
+>>>>>>> Fix specs
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -25,14 +29,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class LocaleChoiceType extends AbstractType
 {
     /**
+<<<<<<< HEAD
      * @var RepositoryInterface
+=======
+     * @var ResourceRepositoryInterface
+>>>>>>> Fix specs
      */
     protected $localeRepository;
 
     /**
+<<<<<<< HEAD
      * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
+=======
+     * @param ResourceRepositoryInterface $repository
+     */
+    public function __construct(ResourceRepositoryInterface $repository)
+>>>>>>> Fix specs
     {
         $this->localeRepository = $repository;
     }

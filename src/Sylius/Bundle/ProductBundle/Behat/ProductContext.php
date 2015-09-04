@@ -105,7 +105,7 @@ class ProductContext extends DefaultContext
     public function thereIsArchetypeWithFollowingConfiguration($name, TableNode $table)
     {
         $manager = $this->getManager('product_archetype');
-        $factory = $this->getRepository('product_archetype');
+        $factory = $this->getFactory('product_archetype');
 
         $archetype = $factory->createNew();
         $archetype->setName($name);
@@ -223,7 +223,7 @@ class ProductContext extends DefaultContext
             $attribute->{'set'.\ucfirst($key)}($value);
         }
 
-        $manager = $this->getManager('product_attributej');
+        $manager = $this->getManager('product_attribute');
         $manager->persist($attribute);
 
         if ($flush) {

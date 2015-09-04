@@ -68,7 +68,7 @@ class OrderShippingListener
      */
     public function processOrderShipments(GenericEvent $event)
     {
-        $this->shipmentFactory->createShipment(
+        $this->shipmentFactory->createForOrder(
             $this->getOrder($event)
         );
     }

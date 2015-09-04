@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,37 +28,39 @@ class CommentController extends ResourceController
      */
     public function createAction(Request $request)
     {
-        if (!$order = $this->get('sylius.repository.order')->findOneById($request->get('id'))) {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
+        if (!$order = $this->get('sylius.repository.order')->find($request->get('id'))) {
             throw new NotFoundHttpException('Requested order does not exist');
         }
 
-        $resource = $this->createNew();
+        $resource = $this->createNew($configuration);
 
-        $form = $this->getForm($resource);
+        $form = $this->createResourceForm($configuration, $resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource->setOrder($order);
             $resource->setAuthor($this->getUser()->getEmail());
 
-            $this->domainManager->create($resource);
+            $this->manager->persist($resource);
+            $this->manager->flush();
+
 
             return $this->redirect($this->generateUrl('sylius_backend_order_show', array('id' => $order->getId())));
         }
 
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->handleView($configuration, View::create($form));
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($config->getTemplate('create.html'))
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('create.html'))
             ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                $this->metadata->getResourceName() => $resource,
+                'form'                             => $form->createView()
             ))
         ;
 
-        return $this->handleView($view);
+        return $this->handleView($configuration, $view);
     }
 }

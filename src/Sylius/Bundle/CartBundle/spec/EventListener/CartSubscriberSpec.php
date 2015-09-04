@@ -43,6 +43,8 @@ class CartSubscriberSpec extends ObjectBehavior
         $event->getItem()->willReturn($cartItem);
         $cart->addItem($cartItem)->shouldBeCalled();
 
+        $cart->calculateTotal()->shouldBeCalled();
+
         $this->addItem($event);
     }
 
@@ -51,6 +53,8 @@ class CartSubscriberSpec extends ObjectBehavior
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
         $cart->removeItem($cartItem)->shouldBeCalled();
+
+        $cart->calculateTotal()->shouldBeCalled();
 
         $this->removeItem($event);
     }
@@ -85,6 +89,9 @@ class CartSubscriberSpec extends ObjectBehavior
     ) {
         $constraintList->count()->willReturn(1);
         $event->getCart()->willReturn($cart);
+
+        $cart->calculateTotal()->shouldBeCalled();
+
         $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);
 
         $manager->persist($cart)->shouldNotBeCalled();

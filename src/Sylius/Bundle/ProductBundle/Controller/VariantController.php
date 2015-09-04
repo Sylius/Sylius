@@ -31,6 +31,8 @@ class VariantController extends ResourceController
      */
     public function generateAction(Request $request)
     {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
         if (null === $productId = $request->get('productId')) {
             throw new NotFoundHttpException('No product given.');
         }
@@ -42,9 +44,9 @@ class VariantController extends ResourceController
         $manager->persist($product);
         $manager->flush();
 
-        $this->flashHelper->setFlash('success', 'generate');
+        $this->get('session')->getBag('flashes')->add('success', $this->get('translator')->trans('sylius.variant.generate', array(), 'flashes'));
 
-        return $this->redirectHandler->redirectTo($product);
+        return $this->redirectHandler->redirectToResource($configuration, $product);
     }
 
     /**

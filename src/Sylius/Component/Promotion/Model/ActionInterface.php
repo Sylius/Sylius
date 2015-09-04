@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ActionInterface
+interface ActionInterface extends ResourceInterface
 {
     const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
     const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';

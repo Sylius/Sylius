@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CustomerAwareListener
 {
@@ -41,8 +42,10 @@ class CustomerAwareListener
             $resource = $event->getCart();
         } elseif ($event instanceof ResourceEvent) {
             $resource = $event->getResource();
+        } elseif ($event instanceof GenericEvent) {
+            $resource = $event->getSubject();
         } else {
-            throw new \InvalidArgumentException('CustomerAwareListener expects CartEvent or ResourceEvent.');
+            throw new \InvalidArgumentException('CustomerAwareListener expects GenericEvent, CartEvent or ResourceEvent.');
         }
 
         if (!$resource instanceof CustomerAwareInterface) {

@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Component\User\Security;
 
+use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
 /**
@@ -23,9 +23,9 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
  */
 class TokenProviderSpec extends ObjectBehavior
 {
-    public function let(ResourceRepositoryInterface $repository, ResourceManagerInterface $manager, GeneratorInterface $generator)
+    public function let(ResourceRepositoryInterface $repository, GeneratorInterface $generator)
     {
-        $this->beConstructedWith($repository, $manager, $generator, 12);
+        $this->beConstructedWith($repository, $generator, 12);
     }
 
     public function it_is_initializable()
@@ -38,12 +38,10 @@ class TokenProviderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Security\TokenProviderInterface');
     }
 
-    public function it_generates_random_token($repository, $manager, FilterCollection $filter, $generator)
+    public function it_generates_random_token($repository, $generator)
     {
-        $manager->getFilters()->willReturn($filter);
-
-        $filter->disable('softdeleteable')->shouldBeCalled();
-        $filter->enable('softdeleteable')->shouldBeCalled();
+        $repository->disableFilter('softdeleteable')->shouldBeCalled();
+        $repository->enableFilter('softdeleteable')->shouldBeCalled();
 
         $repository->findOneBy(Argument::any())->willReturn(null);
 

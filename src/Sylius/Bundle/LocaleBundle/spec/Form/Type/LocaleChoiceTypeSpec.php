@@ -12,14 +12,22 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+<<<<<<< HEAD
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+=======
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
+>>>>>>> Fix specs
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class LocaleChoiceTypeSpec extends ObjectBehavior
 {
+<<<<<<< HEAD
     function let(RepositoryInterface $localeRepository)
+=======
+    function let(ResourceRepositoryInterface $localeRepository)
+>>>>>>> Fix specs
     {
         $this->beConstructedWith($localeRepository);
     }

@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Promotions extension.
@@ -40,5 +41,14 @@ class SyliusPromotionExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $container
+            ->getDefinition('sylius.form.type.promotion_action')
+            ->addArgument(new Reference('sylius.registry.promotion_action'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.promotion_rule')
+            ->addArgument(new Reference('sylius.registry.promotion_rule_checker'))
+        ;
     }
 }

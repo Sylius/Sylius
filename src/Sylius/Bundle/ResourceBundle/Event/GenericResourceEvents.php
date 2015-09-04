@@ -40,4 +40,7 @@ final class GenericResourceEvents
 
     const PRE_TRANSITION  = 'sylius.resource.pre_transition';
     const POST_TRANSITION = 'sylius.resource.post_transition';
+
+    const PRE_GENERATE     = 'sylius.resource.pre_generate';
+    const POST_GENERATE    = 'sylius.resource.post_generate';
 }

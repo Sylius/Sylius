@@ -10,11 +10,12 @@
  */
 
 namespace Sylius\Component\Payment\Repository;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-interface PaymentMethodRepositoryInterface
+interface PaymentMethodRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * @param array $options

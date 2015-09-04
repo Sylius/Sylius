@@ -26,11 +26,6 @@ class TokenProvider implements TokenProviderInterface
     private $repository;
 
     /**
-     * @var ResourceManagerInterface
-     */
-    private $manager;
-
-    /**
      * @var GeneratorInterface
      */
     private $generator;
@@ -42,13 +37,11 @@ class TokenProvider implements TokenProviderInterface
 
     /**
      * @param ResourceRepositoryInterface $repository
-     * @param ResourceManagerInterface    $manager
      * @param GeneratorInterface          $generator
      */
-    public function __construct(ResourceRepositoryInterface $repository, ResourceManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
+    public function __construct(ResourceRepositoryInterface $repository, GeneratorInterface $generator, $tokenLength)
     {
         $this->repository = $repository;
-        $this->manager = $manager;
         $this->generator = $generator;
         $this->tokenLength = $tokenLength;
     }

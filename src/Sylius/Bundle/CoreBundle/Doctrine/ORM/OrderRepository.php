@@ -84,6 +84,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
+            ->leftJoin('o.items', 'item')
             ->leftJoin('o.adjustments', 'adjustment')
             ->leftJoin('o.customer', 'customer')
             ->leftJoin('item.inventoryUnits', 'inventoryUnit')
@@ -100,6 +101,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->leftJoin('billingAddress.country', 'billingCountry')
             ->leftJoin('o.shippingAddress', 'shippingAddress')
             ->leftJoin('shippingAddress.country', 'shippingCountry')
+            ->addSelect('item')
             ->addSelect('adjustment')
             ->addSelect('customer')
             ->addSelect('inventoryUnit')
@@ -139,6 +141,11 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     {
         $queryBuilder = $this->objectRepository->createQueryBuilder('o');
         $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
+        $queryBuilder
+            ->leftJoin('o.customer', 'customer')
+            ->addSelect('customer')
+        ;
 
         if ($deleted) {
             $this->objectManager->getFilters()->disable('softdeleteable');

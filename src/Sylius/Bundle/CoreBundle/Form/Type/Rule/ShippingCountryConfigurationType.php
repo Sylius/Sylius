@@ -22,36 +22,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ShippingCountryConfigurationType extends AbstractType
 {
     /**
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * @param string $dataClass        Class of Country model
-     * @param array  $validationGroups Array of validation groups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-        $this->dataClass        = $dataClass;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_entity_to_identifier', array(
-                'label'       => 'sylius.form.rule.shipping_country_configuration.country',
-                'empty_value' => 'sylius.form.country.select',
-                'class'       => $this->dataClass,
-                'identifier'  => 'id',
+            ->add('country', 'sylius_country_to_identifier', array(
+                'label' => 'sylius.form.rule.shipping_country_configuration.country',
             ))
         ;
     }

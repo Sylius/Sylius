@@ -200,6 +200,8 @@ class CoreContext extends DefaultContext
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
         $this->getService('event_dispatcher')->dispatch(CartEvents::CHANGE, new CartEvent($order));
 
+        $this->getService('sylius.order_processing.taxation_processor')->applyTaxes($order);
+        $order->calculateTotal();
         $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
 
         $manager->persist($order);

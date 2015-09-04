@@ -35,6 +35,22 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
+
+                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
+                $formDefinition->addArgument($subjectName);
+
+                if (isset($resourceConfig['translation'])) {
+                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
+                    $formTranslationDefinition->addArgument($subjectName);
+                }
+            }
+        }
+
         $configFiles = array(
             'services.xml',
         );

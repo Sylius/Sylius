@@ -241,6 +241,17 @@ abstract class AbstractDriver implements DriverInterface
             $container->setParameter($formId.'.class', $class);
             $container->setDefinition($formId, $definition);
         }
+
+        $repositoryId = sprintf('%s.repository.%s', $metadata->getApplicationName(), $metadata->getResourceName());
+        $toIdentifierName = sprintf('%s_%s_to_identifier', $metadata->getApplicationName(), $metadata->getResourceName());
+        $toIdentifierId = sprintf('%s.form.type.%s_to_identifier', $metadata->getApplicationName(), $metadata->getResourceName());
+
+        $toIdentifierDefinition = new Definition('Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType');
+        $toIdentifierDefinition->setArguments(array(new Reference($repositoryId), $toIdentifierName));
+
+        $toIdentifierDefinition->addTag('form.type', array('alias' => $toIdentifierName));
+
+        $container->setDefinition($toIdentifierId, $toIdentifierDefinition);
     }
 
     /**
