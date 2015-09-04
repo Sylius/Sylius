@@ -1,0 +1,84 @@
+# Sylius default deployment configuration.
+
+# Capistrano documentation: https://github.com/capistrano/capistrano/wiki
+
+# config valid only for current version of Capistrano
+lock '3.4.0'
+
+#############################
+# APPLICATION CONFIGURATION #
+#############################
+
+set :application, ""
+set :deploy_to,   ""
+
+############################
+# REPOSITORY CONFIGURATION #
+############################
+
+set :scm,      :git
+set :repo_url, ""
+
+#############################
+# USERS & SSH CONFIGURATION #
+#############################
+
+set :webserver_user, "www-data"
+set :local_user,     "user"
+set :ssh_user,       fetch(:local_user)
+set :ssh_port,       "22"
+set :ssh_options, {
+  forward_agent: true,
+}
+
+#############################
+# PERMISSIONS CONFIGURATION #
+#############################
+
+set :use_set_permissions,    true
+set :permission_method,      :acl
+
+set :file_permissions_paths, [fetch(:log_path), fetch(:cache_path), fetch(:web_path) + "/media"]
+set :file_permissions_users, [fetch(:local_user), fetch(:webserver_user)]
+
+#####################################
+# SHARED FILES & DIRS CONFIGURATION #
+#####################################
+
+# Files that need to remain the same between deploys
+set :linked_files, fetch(:linked_files, []).push(fetch(:app_config_path) + "/parameters.yml", fetch(:web_path) + "/.htaccess", fetch(:web_path) + "/robots.txt")
+
+# Dirs that need to remain the same between deploys (shared dirs)
+set :linked_dirs, fetch(:linked_dirs, []).push(fetch(:log_path), fetch(:web_path) + "/media")
+
+###########################
+# ADITIONAL CONFIGURATION #
+###########################
+
+# Default value for :log_level is :debug
+set :log_level, :info
+
+# Default value for default_env is {}
+# To modify env path var, uncomment the next line and replace _path_to_dir_ with the corresponding value
+# set :default_env, { path: "_path_to_dir_:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+namespace :deploy do
+  after :starting, 'composer:install_executable'
+  after :updated, :publishing do
+    invoke 'symfony:assets:install'
+    invoke 'symfony:assetic:dump'
+  end
+
+  task :migrate do
+    invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
+  end
+end
+
+after 'deploy:finishing', 'deploy:cleanup'
+
+set :composer_version, '1.0.0-alpha10'
+
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
