@@ -43,7 +43,7 @@ class UserOAuth implements UserOAuthInterface
     protected $user;
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -64,8 +64,6 @@ class UserOAuth implements UserOAuthInterface
     public function setProvider($provider)
     {
         $this->provider = $provider;
-
-        return $this;
     }
 
     /**
@@ -82,8 +80,6 @@ class UserOAuth implements UserOAuthInterface
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
-
-        return $this;
     }
 
     /**
@@ -100,8 +96,6 @@ class UserOAuth implements UserOAuthInterface
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
-
-        return $this;
     }
 
     /**
@@ -118,7 +112,5 @@ class UserOAuth implements UserOAuthInterface
     public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
-
-        return $this;
     }
 }

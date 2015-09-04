@@ -14,8 +14,6 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * Group model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -53,8 +51,6 @@ class Group implements GroupInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function __toString()
