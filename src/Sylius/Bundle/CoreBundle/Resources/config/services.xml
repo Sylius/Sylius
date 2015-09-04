@@ -87,7 +87,7 @@
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
         <parameter key="sylius.a2lix_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider</parameter>
 
-        <parameter key="sylius.validator.has_enabled.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
+        <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
@@ -541,7 +541,7 @@
             <argument type="service" id="sylius.context.locale" />
         </service>
 
-        <service id="sylius.validator.has_enabled" class="%sylius.validator.has_enabled.class%">
+        <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
