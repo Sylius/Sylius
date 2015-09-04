@@ -28,6 +28,11 @@ class PaymentContext extends DefaultContext
         $repository = $this->getRepository('payment_method');
 
         foreach ($table->getHash() as $data) {
+            if (!isset($data['calculator'], $data['calculator_configuration'])) {
+                $data['calculator'] = 'fixed';
+                $data['calculator_configuration'] = 'amount: 0';
+            }
+
             /* @var $method PaymentMethodInterface */
             $method = $repository->createNew();
             $method->setName(trim($data['name']));
@@ -35,13 +40,7 @@ class PaymentContext extends DefaultContext
             $method->setFeeCalculator($data['calculator']);
             $method->setFeeCalculatorConfiguration($this->getConfiguration($data['calculator_configuration']));
 
-            $enabled = true;
-
-            if (isset($data['enabled'])) {
-                $enabled = 'yes' === trim($data['enabled']);
-            }
-
-            $method->setEnabled($enabled);
+            $method->setEnabled(isset($data['enabled']) ? 'yes' === trim($data['enabled']) : true);
 
             $manager->persist($method);
         }

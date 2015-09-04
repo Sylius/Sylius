@@ -6,7 +6,7 @@ Feature: Products
 
     Background:
         Given store has default configuration
-          And there are following locales configured:
+          And there are following locales configured and assigned to the default channel:
             | code  |
             | en_US |
             | es_ES |
@@ -15,22 +15,22 @@ Feature: Products
     Scenario: Creating a product requires default translation fields
         Given I am on the product creation page
         And I fill in the following:
-            | Price                                      | 29.99                    |
-            | sylius_product_translations_es_name        | Soy i18n                 |
-            | sylius_product_translations_es_description | Conmemorando el dia i18n |
+            | Price                                         | 29.99                    |
+            | sylius_product_translations_es_ES_name        | Soy i18n                 |
+            | sylius_product_translations_es_ES_description | Conmemorando el dia i18n |
         When I press "Create"
         Then I should still be on the product creation page
-        And  I should see "Please enter product name."
+        And  I should see "Please enter product name"
 
     Scenario: Creating a product in specific locale
         Given I am on the product creation page
         And I fill in the following:
-            | Price                                      | 29.99                    |
-            | sylius_product_translations_es_name        | Soy i18n                 |
-            | sylius_product_translations_es_description | Conmemorando el dia i18n |
-            | sylius_product_translations_en_name        | I am i18n                 |
-            | sylius_product_translations_en_description | Finally i18n |
+            | Price                                         | 29.99                    |
+            | sylius_product_translations_es_ES_name        | Soy i18n                 |
+            | sylius_product_translations_es_ES_description | Conmemorando el dia i18n |
+            | sylius_product_translations_en_US_name        | I am i18n                |
+            | sylius_product_translations_en_US_description | Finally i18n             |
         When I press "Create"
-        Then "Product has been successfully created." should appear on the page
-        And "es" translation for product "Soy i18n" should exist
-        And "en" translation for product "I am i18n" should exist
+        Then "Product has been successfully created" should appear on the page
+        And "es_ES" translation for product "Soy i18n" should exist
+        And "en_US" translation for product "I am i18n" should exist
