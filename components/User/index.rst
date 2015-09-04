@@ -7,6 +7,6 @@ Users management implementation in PHP.
    :numbered:
 
    installation
-   basic_usage
    models
+   basic_usage
    summary
