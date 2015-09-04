@@ -26,7 +26,7 @@ abstract class TimePeriod implements DataFetcherInterface
     const PERIOD_YEAR   = 'year';
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public static function getPeriodChoices()
     {
@@ -74,7 +74,7 @@ abstract class TimePeriod implements DataFetcherInterface
         $fetched = array();
 
         if ($configuration['empty_records']) {
-            $fetched = $this->fillEmptyRecodrs($fetched, $configuration);
+            $fetched = $this->fillEmptyRecords($fetched, $configuration);
         }
         foreach ($rawData as $row) {
             $date = new \DateTime($row[$labels[0]]);
@@ -87,10 +87,12 @@ abstract class TimePeriod implements DataFetcherInterface
     }
 
     /**
-     * Method responsible for providing raw data to fetch.
-     * It returns the configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by).
+     * Responsible for providing raw data to fetch, from the configuration (ie: start date, end date, time period,
+     * empty records flag, interval, period format, presentation format, group by).
      *
-     * @param Array
+     * @param array $configuration
+     *
+     * @return array
      */
     abstract protected function getData(array $configuration = array());
 
@@ -120,15 +122,15 @@ abstract class TimePeriod implements DataFetcherInterface
      *
      * @return array
      */
-    private function fillEmptyRecodrs(array $fetched, array $configuration)
+    private function fillEmptyRecords(array $fetched, array $configuration)
     {
         $date = $configuration['start'];
         $dateInterval = new \DateInterval($configuration['interval']);
 
         $numberOfPeriods = $configuration['start']->diff($configuration['end']);
-        $formatednumberOfPeriods = $numberOfPeriods->format($configuration['periodFormat']);
+        $formattedNumberOfPeriods = $numberOfPeriods->format($configuration['periodFormat']);
 
-        for ($i = 0; $i <= $formatednumberOfPeriods; $i++) {
+        for ($i = 0; $i <= $formattedNumberOfPeriods; $i++) {
             $fetched[$date->format($configuration['presentationFormat'])] = 0;
             $date = $date->add($dateInterval);
         }

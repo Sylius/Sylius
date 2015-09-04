@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\ReportBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface;
+use Sylius\Component\Report\Renderer\DelegatingRendererInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\Model\ReportInterface;
@@ -51,13 +54,15 @@ class ReportController extends ResourceController
 
     /**
      * @param Request $request
+     * @param string  $report
+     * @param array   $configuration
      *
      * @return Response
      */
-    public function embeddAction(Request $request, $report, array $configuration = array())
+    public function embedAction(Request $request, $report, array $configuration = array())
     {
         if (!$report instanceof ReportInterface) {
-            $report = $this->get('sylius.repository.report')->findOneBy(array('code' => $report));
+            $report = $this->getReportRepository()->findOneBy(array('code' => $report));
         }
 
         if (null === $report) {
@@ -65,8 +70,32 @@ class ReportController extends ResourceController
         }
 
         $configuration = $request->query->get('configuration', $configuration);
-        $data = $this->get('sylius.report.data_fetcher')->fetch($report, $configuration);
+        $data = $this->getReportDataFetcher()->fetch($report, $configuration);
 
-        return $this->get('sylius.report.renderer')->render($report, $data);
+        return new Response($this->getReportRenderer()->render($report, $data));
+    }
+
+    /**
+     * @return DelegatingRendererInterface
+     */
+    private function getReportRenderer()
+    {
+        return $this->get('sylius.report.renderer');
+    }
+
+    /**
+     * @return DelegatingDataFetcherInterface
+     */
+    private function getReportDataFetcher()
+    {
+        return $this->get('sylius.report.data_fetcher');
+    }
+
+    /**
+     * @return RepositoryInterface
+     */
+    private function getReportRepository()
+    {
+        return $this->get('sylius.repository.report');
     }
 }

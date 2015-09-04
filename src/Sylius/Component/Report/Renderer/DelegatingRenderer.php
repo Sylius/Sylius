@@ -28,8 +28,6 @@ class DelegatingRenderer implements DelegatingRendererInterface
     protected $registry;
 
     /**
-     * Contructor
-     *
      * @param ServiceRegistryInterface $registry
      */
     public function __construct(ServiceRegistryInterface $registry)
@@ -37,6 +35,11 @@ class DelegatingRenderer implements DelegatingRendererInterface
         $this->registry = $registry;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException If the report subject does not have a renderer.
+     */
     public function render(ReportInterface $subject, Data $data)
     {
         if (null === $type = $subject->getRenderer()) {

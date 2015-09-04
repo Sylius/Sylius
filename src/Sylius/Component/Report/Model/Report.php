@@ -18,7 +18,6 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-
 class Report implements ReportInterface
 {
     /**
@@ -49,8 +48,6 @@ class Report implements ReportInterface
     private $renderer = DefaultRenderers::TABLE;
 
     /**
-     * Renderer configuration.
-     *
      * @var array
      */
     private $rendererConfiguration = array();
@@ -68,9 +65,7 @@ class Report implements ReportInterface
     private $dataFetcherConfiguration = array();
 
     /**
-     * Gets the value of id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -78,9 +73,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * Gets the value of name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -88,23 +81,15 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the value of name.
-     *
-     * @param string $name the name
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Gets the value of description.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -112,22 +97,14 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the value of description.
-     *
-     * @param string $description the description
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
-     * Gets the value of code.
-     *
      * @return string
      */
     public function getCode()
@@ -136,23 +113,15 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the value of code.
-     *
-     * @param string $code the code
-     *
-     * @return self
+     * @param string $code
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * Gets the dataFetcher name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDataFetcher()
     {
@@ -160,22 +129,14 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the value of dataFetcher.
-     *
-     * @param string $dataFetcher the data fetcher
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setDataFetcher($dataFetcher)
     {
         $this->dataFetcher = $dataFetcher;
-
-        return $this;
     }
 
     /**
-     * Gets the Renderer name.
-     *
      * @return string
      */
     public function getRenderer()
@@ -184,23 +145,15 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the Renderer name.
-     *
-     * @param string $renderer the renderer
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setRenderer($renderer)
     {
         $this->renderer = $renderer;
-
-        return $this;
     }
 
     /**
-     * Gets the value of dataFetcherConfiguration.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getDataFetcherConfiguration()
     {
@@ -208,23 +161,15 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the value of dataFetcherConfiguration.
-     *
-     * @param array $dataFetcherConfiguration the data fetcher configuration
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setDataFetcherConfiguration(array $dataFetcherConfiguration)
     {
         $this->dataFetcherConfiguration = $dataFetcherConfiguration;
-
-        return $this;
     }
 
     /**
-     * Gets the Renderers configuration.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getRendererConfiguration()
     {
@@ -232,16 +177,10 @@ class Report implements ReportInterface
     }
 
     /**
-     * Sets the Renderers configuration.
-     *
-     * @param array $rendererConfiguration the renderer configuration
-     *
-     * @return self
+     * {@inheritdoc}
      */
-    public function setRendererConfiguration($rendererConfiguration)
+    public function setRendererConfiguration(array $rendererConfiguration)
     {
         $this->rendererConfiguration = $rendererConfiguration;
-
-        return $this;
     }
 }

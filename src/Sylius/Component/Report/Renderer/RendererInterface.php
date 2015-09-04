@@ -18,7 +18,7 @@ interface RendererInterface
 {
     /**
      * @param ReportInterface $report
-     * @param Data $data
+     * @param Data            $data
      *
      * @return string
      */
