@@ -16,7 +16,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-/*
+/**
  * Listener to prevent the deletion of last enabled channel.
  *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -26,14 +26,14 @@ class ChannelDeletionListener
     /**
      * @var ChannelRepository
      */
-    private $repository;
+    private $channelRepository;
 
     /**
      * @param ChannelRepository $repository
      */
     public function __construct(ChannelRepository $repository)
     {
-        $this->repository = $repository;
+        $this->channelRepository = $repository;
     }
 
     /**
@@ -43,18 +43,18 @@ class ChannelDeletionListener
      */
     public function onChannelPreDelete(ResourceEvent $event)
     {
-        $resource = $event->getSubject();
+        $channel = $event->getSubject();
 
-        if (!$resource instanceof ChannelInterface) {
+        if (!$channel instanceof ChannelInterface) {
             throw new UnexpectedTypeException(
-                $resource,
+                $channel,
                 'Sylius\Component\Channel\Model\ChannelInterface'
             );
         }
 
-        $result = $this->repository->findBy(array('enabled' => true));
+        $results = $this->channelRepository->findBy(array('enabled' => true));
 
-        if (!$result || (count($result) === 1 && current($result) === $resource)) {
+        if (!$results || (count($results) === 1 && current($results) === $channel)) {
             $event->stop('error.at_least_one');
         }
     }
