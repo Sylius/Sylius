@@ -32,7 +32,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_api',
         'sylius_attribute',
         'sylius_channel',
-        'sylius_contact',
+        'sylius_support',
         'sylius_currency',
         'sylius_inventory',
         'sylius_locale',
@@ -53,6 +53,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_variation',
         'sylius_translation',
         'sylius_rbac',
+        'sylius_support',
     );
 
     protected $configFiles = array(

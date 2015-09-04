@@ -98,7 +98,7 @@
         "sylius/cart":               "self.version",
         "sylius/cart-bundle":        "self.version",
         "sylius/contact":            "self.version",
-        "sylius/contact-bundle":     "self.version",
+        "sylius/support-bundle":     "self.version",
         "sylius/content":            "self.version",
         "sylius/content-bundle":     "self.version",
         "sylius/core":               "self.version",

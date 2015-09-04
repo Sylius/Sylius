@@ -7,6 +7,7 @@ imports:
     - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusSupportBundle/Resources/config/state-machine.yml }
 
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
@@ -113,9 +114,9 @@ jms_serializer:
             sylius-attribute:
                 namespace_prefix: "Sylius\\Component\\Attribute"
                 path: "@SyliusAttributeBundle/Resources/config/serializer"
-            sylius-contact:
-                namespace_prefix: "Sylius\\Component\\Contact"
-                path: "@SyliusContactBundle/Resources/config/serializer"
+            sylius-support:
+                namespace_prefix: "Sylius\\Component\\Support"
+                path: "@SyliusSupportBundle/Resources/config/serializer"
             sylius-channel:
                 namespace_prefix: "Sylius\\Component\\Channel"
                 path: "@SyliusChannelBundle/Resources/config/serializer"

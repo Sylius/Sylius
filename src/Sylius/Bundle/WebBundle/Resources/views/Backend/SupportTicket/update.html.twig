@@ -1,0 +1,26 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.support'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_support_ticket_index') }}">{{ 'sylius.breadcrumb.support_ticket.index'|trans }}</a></li>
+    <li>{{ support_ticket.id }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.support_ticket.update_header'|trans|raw }}</h1>
+</div>
+
+{{ form_errors(form) }}
+
+<form action="{{ path('sylius_backend_support_ticket_update', {'id': support_ticket.id}) }}" method="post" class="form-horizontal" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    {% include 'SyliusWebBundle:Backend/SupportTicket:_form.html.twig' %}
+    {{ update() }}
+</form>
+{% endblock %}

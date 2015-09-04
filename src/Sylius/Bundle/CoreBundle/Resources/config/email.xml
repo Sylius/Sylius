@@ -20,6 +20,7 @@
         <parameter key="sylius.listener.mailer.class">Sylius\Bundle\CoreBundle\EventListener\MailerListener</parameter>
         <parameter key="sylius.email_manager.order.class">Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager</parameter>
         <parameter key="sylius.email_manager.shipment.class">Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager</parameter>
+        <parameter key="sylius.email_manager.support_notification.class">Sylius\Bundle\CoreBundle\EmailManager\SupportNotificationEmailManager</parameter>
     </parameters>
 
     <services>
@@ -36,6 +37,12 @@
 
         <service id="sylius.email_manager.shipment" class="%sylius.email_manager.shipment.class%">
             <argument type="service" id="sylius.email_sender" />
+        </service>
+
+        <service id="sylius.email_manager.support_notification" class="%sylius.email_manager.support_notification.class%">
+            <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="sylius.provider.support.array_recipients" />
+            <tag name="kernel.event_listener" event="sylius.support_ticket.post_create" method="sendNotificationEmail" />
         </service>
     </services>
 

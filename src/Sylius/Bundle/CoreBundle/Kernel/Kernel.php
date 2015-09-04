@@ -45,7 +45,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new \Sylius\Bundle\CurrencyBundle\SyliusCurrencyBundle(),
-            new \Sylius\Bundle\ContactBundle\SyliusContactBundle(),
+            new \Sylius\Bundle\SupportBundle\SyliusSupportBundle(),
             new \Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new \Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new \Sylius\Bundle\CartBundle\SyliusCartBundle(),

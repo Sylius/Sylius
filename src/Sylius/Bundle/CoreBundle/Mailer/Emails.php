@@ -22,4 +22,6 @@ class Emails
     const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
 
     const USER_CONFIRMATION     = 'user_confirmation';
+
+    const SUPPORT_NOTIFICATION  = 'support_notification';
 }
