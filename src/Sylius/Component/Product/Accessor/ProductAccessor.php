@@ -16,8 +16,6 @@ use Symfony\Component\PropertyAccess\Exception;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
- * Product Accessor
- *
  * This class uses the property accessor to dynamically translate getters to values.
  * In case of sylius it extends the default functionality to include options and attributes.
  *
@@ -31,18 +29,18 @@ class ProductAccessor extends PropertyAccessor
     /**
      * {@inheritdoc}
      */
-    public function getValue($objectOrArray, $propertyPath)
+    public function getValue($product, $propertyPath)
     {
         try {
-            return parent::getValue($objectOrArray, $propertyPath);
+            return parent::getValue($product, $propertyPath);
         } catch (Exception\NoSuchPropertyException $e) {
             $tags = array();
-            if (!$objectOrArray instanceof ProductInterface) {
+            if (!$product instanceof ProductInterface) {
                 return $tags;
             }
 
             $propertyPath = strtolower((string) $propertyPath);
-            foreach ($objectOrArray->getAvailableVariants() as $variant) {
+            foreach ($product->getAvailableVariants() as $variant) {
                 foreach ($variant->getOptions() as $option) {
                     if ($propertyPath === strtolower($option->getPresentation())) {
                         $tags[] = $option->getValue();
@@ -50,7 +48,7 @@ class ProductAccessor extends PropertyAccessor
                 }
             }
 
-            foreach ($objectOrArray->getAttributes() as $attribute) {
+            foreach ($product->getAttributes() as $attribute) {
                 if ($propertyPath === strtolower($attribute->getName())) {
                     $tags[] = $attribute->getValue();
                 }
