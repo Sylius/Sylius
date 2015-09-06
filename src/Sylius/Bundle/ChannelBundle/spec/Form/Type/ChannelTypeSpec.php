@@ -57,12 +57,6 @@ class ChannelTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('enabled', 'checkbox', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('url', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)

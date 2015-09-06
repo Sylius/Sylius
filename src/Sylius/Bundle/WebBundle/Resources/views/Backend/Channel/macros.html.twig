@@ -26,7 +26,11 @@
                     <td>
                         <div class="pull-right">
                             {{ buttons.edit(path('sylius_backend_channel_update', {'id': channel.id})) }}
-                            {{ buttons.delete(path('sylius_backend_channel_delete', {'id': channel.id})) }}
+                            {% if channel.enabled %}
+                                {{ buttons.disable(path('sylius_backend_channel_disable', {'id': channel.id})) }}
+                            {% else %}
+                                {{ buttons.enable(path('sylius_backend_channel_enable', {'id': channel.id})) }}
+                            {% endif %}
                         </div>
                     </td>
                 </tr>

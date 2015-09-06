@@ -29,9 +29,9 @@ Feature: Channel management
             | USA  | FedEx |
             | EU   | DHL   |
           And there are following channels configured:
-            | code   | name       | currencies | locales      |
-            | WEB-US | mystore.us | USD        | en_US        |
-            | WEB-EU | mystore.eu | EUR, GBP   | fr_FR, de_DE |
+            | code   | name       | currencies | locales      | enabled |
+            | WEB-US | mystore.us | USD        | en_US        | true    |
+            | WEB-EU | mystore.eu | EUR, GBP   | fr_FR, de_DE | false   |
           And channel "WEB-US" has following configuration:
             | shipping | payment                  |
             | FedEx    | Credit Card (US), PayPal |
@@ -82,11 +82,16 @@ Feature: Channel management
          Then I should be on the channel index page
           And I should see channel with name "mystore.com" in the list
 
-    @javascript
-    Scenario: Deleting a channel
-        Given I am on the channel index page
-         When I press "delete" near "WEB-EU"
-          And I click "delete" from the confirmation modal
-         Then I should still be on the channel index page
-          And I should see "Channel has been successfully deleted"
-          And I should not see channel with name "mystore.eu" in the list
+    Scenario: Enabling channel
+        Given there is a disabled channel "WEB-VE"
+          And I am on the channel index page
+         When I click "Enable" near "WEB-VE"
+         Then I should see enabled channel with name "WEB-VE" in the list
+          And I should see "Channel has been successfully enabled"
+
+    Scenario: Disabling channel
+        Given there is an enabled channel "WEB-VE"
+          And I am on the channel index page
+         When I click "Disable" near "WEB-VE"
+         Then I should see disabled channel with name "WEB-VE" in the list
+          And I should see "Channel has been successfully disabled"

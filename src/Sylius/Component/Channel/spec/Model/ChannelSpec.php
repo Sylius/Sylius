@@ -25,6 +25,11 @@ class ChannelSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Channel\Model\ChannelInterface');
     }
 
+    function it_implements_Sylius_toogleable_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+    }
+
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -65,13 +70,34 @@ class ChannelSpec extends ObjectBehavior
 
     function it_is_enabled_by_default()
     {
-        $this->shouldBeEnabled();
+        $this->isEnabled()->shouldReturn(true);
     }
 
     function it_can_be_disabled()
     {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+    }
+
+    function it_can_be_enabled()
+    {
+        $this->disable();
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->enable();
+        $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_can_set_enabled_value()
+    {
         $this->setEnabled(false);
-        $this->shouldNotBeEnabled();
+        $this->isEnabled()->shouldReturn(false);
+
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
     }
 
     function it_initializes_creation_date_by_default()

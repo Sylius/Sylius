@@ -12,11 +12,12 @@
 namespace Sylius\Component\Channel\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ChannelInterface extends TimestampableInterface
+interface ChannelInterface extends TimestampableInterface, ToggleableInterface
 {
     /**
      * @return mixed
@@ -72,14 +73,4 @@ interface ChannelInterface extends TimestampableInterface
      * @param string $color
      */
     public function setColor($color);
-
-    /**
-     * @return bool
-     */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
 }
