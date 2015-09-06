@@ -70,34 +70,34 @@ class ChannelSpec extends ObjectBehavior
 
     function it_is_enabled_by_default()
     {
-        $this->isEnabled()->shouldReturn(true);
+        $this->shouldBeEnabled();
     }
 
     function it_can_be_disabled()
     {
         $this->disable();
-        $this->isEnabled()->shouldReturn(false);
+        $this->shouldNotBeEnabled();
     }
 
     function it_can_be_enabled()
     {
         $this->disable();
-        $this->isEnabled()->shouldReturn(false);
+        $this->shouldNotBeEnabled();
 
         $this->enable();
-        $this->isEnabled()->shouldReturn(true);
+        $this->shouldBeEnabled();
     }
 
     function it_can_set_enabled_value()
     {
         $this->setEnabled(false);
-        $this->isEnabled()->shouldReturn(false);
+        $this->shouldNotBeEnabled();
 
         $this->setEnabled(true);
-        $this->isEnabled()->shouldReturn(true);
+        $this->shouldBeEnabled();
 
         $this->setEnabled(false);
-        $this->isEnabled()->shouldReturn(false);
+        $this->shouldNotBeEnabled();
     }
 
     function it_initializes_creation_date_by_default()
