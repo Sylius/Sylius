@@ -119,11 +119,16 @@ Feature: Shipping methods
           And I press "Save changes"
          Then I should be on the page of shipping method "General Shipping"
 
-    @javascript
-    Scenario: Deleting shipping method
-        Given I am on the page of shipping method "FedEx"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the shipping method index page
-          And I should see "Shipping method has been successfully deleted."
-          And I should not see shipping method with name "FedEx" in that list
+    Scenario: Enabling shipping method
+        Given there is a disabled shipping method "UPS" within zone "USA"
+          And I am on the shipping method index page
+         When I click "Enable" near "UPS"
+         Then I should see enabled shipping method with name "UPS" in the list
+          And I should see "Shipping method has been successfully enabled"
+
+    Scenario: Disabling shipping method
+        Given there is an enabled shipping method "UPS" within zone "USA"
+          And I am on the shipping method index page
+         When I click "Disable" near "UPS"
+         Then I should see disabled shipping method with name "UPS" in the list
+          And I should see "Shipping method has been successfully disabled"

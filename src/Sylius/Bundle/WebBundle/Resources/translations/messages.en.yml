@@ -888,7 +888,7 @@ sylius:
         category: Category
         create: Create shipping method
         create_header: New shipping method
-        enabled: Is enabled?
+        enabled: enabled
         id: ID
         index_header: Shipping methods
         manage: Manage shipping methods

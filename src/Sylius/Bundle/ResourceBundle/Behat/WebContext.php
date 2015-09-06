@@ -390,7 +390,7 @@ class WebContext extends DefaultContext
     public function iShouldSeeResourceInTheListAsEnabled($columnName, $value)
     {
         $tableNode = new TableNode(array(
-            array(trim($columnName), 'Enabled'),
+            array(trim($columnName), 'Is Enabled?'),
             array(trim($value), 'YES')
         ));
 
@@ -403,7 +403,7 @@ class WebContext extends DefaultContext
     public function iShouldSeeResourceInTheListAsDisabled($columnName, $value)
     {
         $tableNode = new TableNode(array(
-            array(trim($columnName), 'Enabled'),
+            array(trim($columnName), 'Is Enabled?'),
             array(trim($value), 'NO')
         ));
 
