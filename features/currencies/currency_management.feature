@@ -58,9 +58,16 @@ Feature: Currency management
         Then I should be on the currency index page
         And I should see currency with exchange rate "0.76498" in the list
 
-    Scenario: Deleting a currency
-        Given I am on the currency index page
-        When I press "delete" near "US Dollar"
-        Then I should still be on the currency index page
-        And I should see "Currency has been successfully deleted."
-        And I should not see currency with name "US Dollar" in the list
+    Scenario: Enabling currency
+        Given there is a disabled currency "VEF"
+        And I am on the currency index page
+        When I click "Enable" near "VEF"
+        Then I should see enabled currency with code "VEF" in the list
+        And I should see "Currency has been successfully enabled"
+
+    Scenario: Disabling currency
+        Given there is an enabled currency "VEF"
+        And I am on the currency index page
+        When I click "Disable" near "VEF"
+        Then I should see disabled currency with code "VEF" in the list
+        And I should see "Currency has been successfully disabled"
