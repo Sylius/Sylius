@@ -113,6 +113,20 @@ Feature: Payment methods
          Then I should be editing payment method "Credit Card"
           And I should see "The fee cannot be lower than 0."
 
+    Scenario: Enabling payment method
+        Given there is a disabled payment method "Apple Pay"
+          And I am on the payment method index page
+         When I click "Enable" near "Apple Pay"
+         Then I should see enabled payment method with name "Apple Pay" in the list
+          And I should see "Payment method has been successfully enabled"
+
+    Scenario: Disabling payment method
+        Given there is an enabled payment method "Apple Pay"
+          And I am on the payment method index page
+         When I click "Disable" near "Apple Pay"
+         Then I should see disabled payment method with name "Apple Pay" in the list
+          And I should see "Payment method has been successfully disabled"
+
     @javascript
     Scenario: Deleting payment method
         Given I am on the payment method index page

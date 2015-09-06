@@ -12,24 +12,15 @@
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * Payment method interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentMethodInterface extends TimestampableInterface, PaymentMethodTranslationInterface
+interface PaymentMethodInterface extends TimestampableInterface, PaymentMethodTranslationInterface, ToggleableInterface
 {
-    /**
-     * @return Boolean
-     */
-    public function isEnabled();
-
-    /**
-     * @param Boolean $enabled
-     */
-    public function setEnabled($enabled);
-
     /**
      * @return string
      */
@@ -51,8 +42,6 @@ interface PaymentMethodInterface extends TimestampableInterface, PaymentMethodTr
     public function setDescription($description);
 
     /**
-     * Set the payment gateway to use.
-     *
      * @return string
      */
     public function getGateway();

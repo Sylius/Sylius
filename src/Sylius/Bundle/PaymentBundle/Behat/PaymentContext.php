@@ -24,28 +24,60 @@ class PaymentContext extends DefaultContext
      */
     public function thereArePaymentMethods(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('payment_method');
-
         foreach ($table->getHash() as $data) {
-            if (!isset($data['calculator'], $data['calculator_configuration'])) {
-                $data['calculator'] = 'fixed';
-                $data['calculator_configuration'] = 'amount: 0';
-            }
-
-            /* @var $method PaymentMethodInterface */
-            $method = $repository->createNew();
-            $method->setName(trim($data['name']));
-            $method->setGateway(trim($data['gateway']));
-            $method->setFeeCalculator($data['calculator']);
-            $method->setFeeCalculatorConfiguration($this->getConfiguration($data['calculator_configuration']));
-
-            $method->setEnabled(isset($data['enabled']) ? 'yes' === trim($data['enabled']) : true);
-
-            $manager->persist($method);
+            $this->thereIsPaymentMethod(
+                $data['name'],
+                isset($data['gateway']) ? $data['gateway'] : null,
+                isset($data['calculator']) ? $data['calculator'] : null,
+                isset($data['calculator_configuration']) ? $data['calculator_configuration'] : null,
+                isset($data['enabled']) ? $data['enabled'] : false,
+                false
+            );
         }
 
-        $manager->flush();
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /^There is payment method "([^""]*)" with "([^""]*)" gateway$/
+     * @Given /^there is an enabled payment method "([^""]*)"$/
+     */
+    public function thereIsPaymentMethod(
+        $name,
+        $gateway = 'stripe',
+        $calculator = 'fixed',
+        $calculatorConfig = 'amount: 0',
+        $enabled = true,
+        $flush = true
+    ) {
+        $repository = $this->getRepository('payment_method');
+        /* @var $method PaymentMethodInterface */
+        if (null === $method = $repository->findOneBy(array('name' => $name))) {
+            $method = $repository->createNew();
+            $method->setName($name);
+            $method->setGateway($gateway);
+            $method->setFeeCalculator($calculator);
+            $method->setFeeCalculatorConfiguration($this->getConfiguration($calculatorConfig));
+        }
+
+        $method->setEnabled($enabled);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($method);
+
+        if ($flush) {
+            $manager->flush();
+        }
+
+        return $method;
+    }
+
+    /**
+     * @Given /^there is a disabled payment method "([^""]*)"$/
+     */
+    public function thereIsDisabledPaymentMethod($name)
+    {
+        $this->thereIsPaymentMethod($name, 'stripe', 'fixed', 'amount: 0', false);
     }
 
     /**

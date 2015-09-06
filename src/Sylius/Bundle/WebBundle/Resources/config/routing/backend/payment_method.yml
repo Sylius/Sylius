@@ -30,11 +30,18 @@ sylius_backend_payment_method_update:
             template: SyliusWebBundle:Backend/PaymentMethod:update.html.twig
             redirect: sylius_backend_payment_method_index
 
-sylius_backend_payment_method_delete:
-    path: /{id}
-    methods: [DELETE]
+sylius_backend_payment_method_enable:
+    path: /{id}/enable
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.payment_method:deleteAction
+        _controller: sylius.controller.payment_method:enableAction
         _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_payment_method_index
+
+sylius_backend_payment_method_disable:
+    path: /{id}/disable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.payment_method:disableAction
+        _sylius:
             redirect: sylius_backend_payment_method_index
