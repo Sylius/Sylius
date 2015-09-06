@@ -30,7 +30,11 @@
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_currency_update', {'id': currency.id})) }}
-                {{ buttons.delete(path('sylius_backend_currency_delete', {'id': currency.id})) }}
+                {% if currency.enabled %}
+                    {{ buttons.disable(path('sylius_backend_currency_disable', {'id': currency.id})) }}
+                {% else %}
+                    {{ buttons.enable(path('sylius_backend_currency_enable', {'id': currency.id})) }}
+                {% endif %}
                 </div>
             </td>
         </tr>

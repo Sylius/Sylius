@@ -29,11 +29,18 @@ sylius_backend_currency_update:
             template: SyliusWebBundle:Backend/Currency:update.html.twig
             redirect: sylius_backend_currency_index
 
-sylius_backend_currency_delete:
-    path: /{id}
-    methods: [DELETE]
+sylius_backend_currency_enable:
+    path: /{id}/enable
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.currency:deleteAction
+        _controller: sylius.controller.currency:enableAction
         _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_currency_index
+
+sylius_backend_currency_disable:
+    path: /{id}/disable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.currency:disableAction
+        _sylius:
             redirect: sylius_backend_currency_index

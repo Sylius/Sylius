@@ -156,4 +156,20 @@ class Currency implements CurrencyInterface
     {
         $this->updatedAt = $updatedAt;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
+    }
 }
