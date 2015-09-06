@@ -110,8 +110,8 @@ class CoreContext extends DefaultContext
     public function thereAreOrders(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $finite  = $this->getService('sm.factory');
-        $orderRepository   = $this->getRepository('order');
+        $finite = $this->getService('sm.factory');
+        $orderRepository = $this->getRepository('order');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
         /** @var $paymentMethod PaymentMethodInterface */
@@ -182,7 +182,6 @@ class CoreContext extends DefaultContext
             $order->addItem($item);
         }
 
-
         $order->calculateTotal();
         $order->complete();
 
@@ -210,7 +209,7 @@ class CoreContext extends DefaultContext
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false,
                 array(),
-                isset($data['created at']) ? new \DateTime($data["created at"]) : null
+                isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
         }
 
@@ -332,9 +331,9 @@ class CoreContext extends DefaultContext
             }
 
             $configuration[] = array(
-                'min'   => $min,
-                'max'   => $max,
-                'price' => (int) ($data['price'] * 100)
+                'min' => $min,
+                'max' => $max,
+                'price' => (int) ($data['price'] * 100),
             );
         }
 
@@ -430,19 +429,21 @@ class CoreContext extends DefaultContext
     /**
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
+     * @Given /^there is an enabled shipping method "([^""]*)" within zone "([^""]*)"$/
      */
     public function thereIsShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
     {
-        /* @var $method ShippingMethodInterface */
-        $method = $this
-            ->getRepository('shipping_method')
-            ->createNew()
-        ;
+        $repository = $this->getRepository('shipping_method');
 
-        $method->setName($name);
-        $method->setZone($this->findOneByName('zone', $zoneName));
-        $method->setCalculator($calculator);
-        $method->setConfiguration($configuration ?: array('amount' => 2500));
+        /* @var $method ShippingMethodInterface */
+        if (null === $method = $repository->findOneBy(array('name' => $name))) {
+            $method = $repository->createNew();
+            $method->setName($name);
+            $method->setZone($this->findOneByName('zone', $zoneName));
+            $method->setCalculator($calculator);
+            $method->setConfiguration($configuration ?: array('amount' => 2500));
+        };
+
         $method->setEnabled($enabled);
 
         $manager = $this->getEntityManager();
@@ -452,6 +453,14 @@ class CoreContext extends DefaultContext
         }
 
         return $method;
+    }
+
+    /**
+     * @Given /^there is a disabled shipping method "([^""]*)" within zone "([^""]*)"$/
+     */
+    public function thereIsDisabledShippingMethod($name, $zoneName)
+    {
+        $this->thereIsShippingMethod($name, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, false);
     }
 
     /**
@@ -479,7 +488,7 @@ class CoreContext extends DefaultContext
             } elseif (isset($data['name'])) {
                 $locale->setCode($this->getLocaleCodeByEnglishLocaleName($data['name']));
             } else {
-                throw new \InvalidArgumentException("Locale definition should have either code or name");
+                throw new \InvalidArgumentException('Locale definition should have either code or name');
             }
 
             if (isset($data['enabled'])) {
@@ -561,14 +570,14 @@ class CoreContext extends DefaultContext
         $address->setPostcode($addressData[2]);
         $address->setCity($addressData[3]);
         $address->setCountry($this->findOneBy('country', array(
-            'isoName' => $this->getCountryCodeByEnglishCountryName($addressData[4])
+            'isoName' => $this->getCountryCodeByEnglishCountryName($addressData[4]),
         )));
 
         return $address;
     }
 
     /**
-     * @param  string $address
+     * @param string $address
      *
      * @return array
      */
@@ -736,7 +745,7 @@ class CoreContext extends DefaultContext
     }
 
     /**
-     * @param  string $role
+     * @param string $role
      *
      * @return RoleInterface
      */

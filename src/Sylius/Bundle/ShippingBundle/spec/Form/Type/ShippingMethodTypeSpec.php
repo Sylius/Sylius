@@ -68,11 +68,6 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('enabled', 'checkbox', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('calculator', 'sylius_shipping_calculator_choice', Argument::any())
             ->willReturn($builder)
         ;
