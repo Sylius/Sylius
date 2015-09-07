@@ -30,6 +30,8 @@ interface ProductVariantInterface extends
     PriceableInterface,
     MetadataSubjectInterface
 {
+    const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
+
     /**
      * Get images.
      *

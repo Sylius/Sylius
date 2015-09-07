@@ -90,6 +90,22 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getMetadataClassIdentifier()
+    {
+        return self::METADATA_CLASS_IDENTIFIER;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataIdentifier()
+    {
+        return $this->getMetadataClassIdentifier() . '-' . $this->getId();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSku()
     {
         return $this->getMasterVariant()->getSku();

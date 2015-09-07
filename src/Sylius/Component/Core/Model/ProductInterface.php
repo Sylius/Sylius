@@ -43,6 +43,8 @@ interface ProductInterface extends
     const VARIANT_SELECTION_CHOICE = 'choice';
     const VARIANT_SELECTION_MATCH  = 'match';
 
+    const METADATA_CLASS_IDENTIFIER = 'Product';
+
     /**
      * Get product SKU.
      *

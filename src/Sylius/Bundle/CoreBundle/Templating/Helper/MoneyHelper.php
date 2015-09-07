@@ -18,7 +18,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 class MoneyHelper extends BaseMoneyHelper
 {
     /**
-     * @var LocaleContextInterface
+     * @var LocaleContextInterfaceP
      */
     protected $localeContext;
 
