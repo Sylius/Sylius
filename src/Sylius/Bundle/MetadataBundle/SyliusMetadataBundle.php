@@ -60,6 +60,6 @@ class SyliusMetadataBundle extends AbstractResourceBundle
      */
     protected function getModelNamespace()
     {
-        return 'Sylius\Component\Metadata\Model';
+        return 'Sylius\Bundle\MetadataBundle\Model';
     }
 }

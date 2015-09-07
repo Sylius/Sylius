@@ -99,7 +99,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('metadata')
                         ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\RootMetadata')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\MetadataBundle\Model\RootMetadata')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->end()
