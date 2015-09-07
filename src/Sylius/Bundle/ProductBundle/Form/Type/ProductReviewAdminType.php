@@ -61,6 +61,8 @@ class ProductReviewAdminType extends ProductReviewType
      */
     public function getName()
     {
-        return 'sylius_product_review_admin';
+        return sprintf('sylius_%s_review_admin', $this->subject);
     }
+
+
 }
