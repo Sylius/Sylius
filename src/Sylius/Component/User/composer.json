@@ -30,8 +30,9 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "0.15.*@dev",
-        "sylius/storage":  "0.15.*@dev"
+        "sylius/resource":  "0.15.*@dev",
+        "sylius/storage":   "0.15.*@dev",
+        "symfony/security": "~2.3"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
