@@ -25,7 +25,7 @@ class RootMetadataFormType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('key', 'text')
+            ->add('id', 'text', ['read_only' => true])
             ->add('metadata', 'sylius_page_metadata')
         ;
     }
