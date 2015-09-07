@@ -20,8 +20,9 @@ interface DynamicFormsChoicesMapInterface
      * @param string $group
      * @param string $dataClass
      * @param string $formName
+     * @param string $label
      */
-    public function addForm($group, $dataClass, $formName);
+    public function addForm($group, $dataClass, $formName, $label);
 
     /**
      * @param string $group
@@ -46,4 +47,11 @@ interface DynamicFormsChoicesMapInterface
      * @return string|null
      */
     public function getDataClassByGroupAndFormName($group, $formName);
+
+    /**
+     * @param string $formName
+     *
+     * @return string
+     */
+    public function getLabelByFormName($formName);
 }

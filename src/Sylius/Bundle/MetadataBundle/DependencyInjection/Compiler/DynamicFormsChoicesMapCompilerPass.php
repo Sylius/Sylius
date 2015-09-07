@@ -48,7 +48,12 @@ class DynamicFormsChoicesMapCompilerPass implements CompilerPassInterface
             $dataClass = $this->getFormDataClass($formDefinition);
             $formName = $this->getFormName($formDefinition);
 
-            $definition->addMethodCall('addForm', [$tags[0]['group'], $dataClass, $formName]);
+            $definition->addMethodCall('addForm', [
+                $tags[0]['group'],
+                $dataClass,
+                $formName,
+                isset($tags[0]['label']) ? $tags[0]['label'] : $formName
+            ]);
         }
     }
 

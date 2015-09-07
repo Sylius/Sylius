@@ -29,7 +29,7 @@
                     if (settings.containerSelector) {
                         container = $(settings.containerSelector);
                     } else {
-                        container = $(prototypeElement.data('container'));
+                        container = $(element.data('container'));
                     }
 
                     if (!container.length) {
