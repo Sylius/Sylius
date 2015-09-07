@@ -8,6 +8,7 @@ bin/behat --strict -f progress -s shipping
 bin/behat --strict -f progress -s taxation
 bin/behat --strict -f progress -s i18n
 bin/behat --strict -f progress -s channels
+bin/behat --strict -f progress -s metadata
 
 bin/behat --strict -f progress -s products features/backend/products.feature
 bin/behat --strict -f progress -s products features/backend/product_attributes.feature

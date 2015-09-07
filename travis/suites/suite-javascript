@@ -10,3 +10,4 @@ bin/behat --strict -f progress -p javascript -s payments
 bin/behat --strict -f progress -p javascript -s orders
 bin/behat --strict -f progress -p javascript -s addressing
 bin/behat --strict -f progress -p javascript -s account
+bin/behat --strict -f progress -p javascript -s metadata
