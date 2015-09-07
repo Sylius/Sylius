@@ -24,12 +24,16 @@ class SyliusReviewExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
+
+        foreach ($config['classes'] as $name => $parameters) {
+            $this->addRequiredArgumentsToForms($name, $parameters, $container);
+        }
     }
 
     /**
@@ -58,6 +62,24 @@ class SyliusReviewExtension extends AbstractResourceExtension
         $config['validation_groups'] = $convertedConfig;
 
         return parent::process($config, $container);
+    }
+
+    /**
+     * @param string           $name
+     * @param array            $parameters
+     * @param ContainerBuilder $container
+     */
+    private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
+    {
+        if (!$container->hasDefinition('sylius.form.type.'.$name)) {
+            return;
+        }
+
+        foreach ($parameters['form'] as $formName => $form) {
+            $formKey = ('default' === $formName) ? $name : $name.'_'.$formName;
+
+            $container->getDefinition('sylius.form.type.'.$formKey)->addArgument($parameters['subject']);
+        }
     }
 
     /**

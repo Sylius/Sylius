@@ -23,7 +23,7 @@ class ReviewTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('dataClass', array('validation_group'));
+        $this->beConstructedWith('dataClass', array('validation_group'), 'subject');
     }
 
     function it_is_initializable()
@@ -94,6 +94,6 @@ class ReviewTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_review');
+        $this->getName()->shouldReturn('sylius_subject_review');
     }
 }

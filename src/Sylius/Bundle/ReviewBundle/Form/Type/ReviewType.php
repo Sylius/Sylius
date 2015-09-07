@@ -23,6 +23,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ReviewType extends AbstractResourceType
 {
     /**
+     * @var string
+     */
+    protected $subject;
+
+    /**
+     * @param string $dataClass
+     * @param array  $validationGroups
+     * @param string $subject
+     */
+    public function __construct($dataClass, array $validationGroups = array(), $subject)
+    {
+        $this->subject = $subject;
+
+        parent::__construct($dataClass, $validationGroups);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -65,7 +82,7 @@ class ReviewType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_review';
+        return sprintf('sylius_%s_review', $this->subject);
     }
 
     /**

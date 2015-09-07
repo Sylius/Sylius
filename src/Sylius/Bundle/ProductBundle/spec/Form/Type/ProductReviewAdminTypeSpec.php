@@ -22,7 +22,7 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('dataClass', array('validation_group'));
+        $this->beConstructedWith('dataClass', array('validation_group'), 'product');
     }
     function it_is_initializable()
     {

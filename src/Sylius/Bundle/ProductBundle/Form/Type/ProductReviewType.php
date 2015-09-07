@@ -18,11 +18,4 @@ use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
  */
 class ProductReviewType extends ReviewType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_product_review';
-    }
 }
