@@ -13,10 +13,10 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Metadata\Model\RootMetadata" table="sylius_metadata">
+    <mapped-superclass name="Sylius\Bundle\MetadataBundle\Model\RootMetadata" table="sylius_metadata">
         <id name="id" column="id" type="string" />
 
-        <field name="metadata" column="metadata" type="object" />
+        <field name="metadata" column="metadata" type="text" />
     </mapped-superclass>
 
 </doctrine-mapping>
