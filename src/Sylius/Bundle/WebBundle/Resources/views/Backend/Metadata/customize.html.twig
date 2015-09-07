@@ -18,7 +18,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.metadata.customize_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.metadata.customize_header'|trans|raw }} {{ metadata.id }}</h1>
 </div>
 
 {{ form_errors(form) }}
