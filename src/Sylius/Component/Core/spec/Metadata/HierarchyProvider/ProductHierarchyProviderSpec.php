@@ -56,7 +56,7 @@ class ProductHierarchyProviderSpec extends ObjectBehavior
             'Product-42',
             'Archetype-42',
             'Product',
-            'Default',
+            'DefaultPage',
         ]);
     }
 
@@ -71,7 +71,7 @@ class ProductHierarchyProviderSpec extends ObjectBehavior
         $this->getHierarchyByMetadataSubject($product)->shouldReturn([
             'Product-42',
             'Product',
-            'Default',
+            'DefaultPage',
         ]);
     }
 }

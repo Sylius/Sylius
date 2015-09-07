@@ -63,7 +63,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
             'Product-42',
             'Archetype-42',
             'Product',
-            'Default',
+            'DefaultPage',
         ]);
     }
 
@@ -84,7 +84,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
             'ProductVariant-42',
             'Product-42',
             'Product',
-            'Default',
+            'DefaultPage',
         ]);
     }
 }

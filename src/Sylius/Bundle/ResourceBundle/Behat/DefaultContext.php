@@ -46,10 +46,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var array
      */
     protected $actions = array(
-        'viewing'  => 'show',
-        'creation' => 'create',
-        'editing'  => 'update',
-        'building' => 'build',
+        'viewing'       => 'show',
+        'creation'      => 'create',
+        'editing'       => 'update',
+        'building'      => 'build',
+        'customization' => 'customize',
     );
 
     /**

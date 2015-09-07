@@ -23,12 +23,15 @@
         {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
     {% endif %}
     {% if not product.deleted %}
-    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
-    <a href="{{ path(product) }}" class="btn btn-info">
-       <i class="glyphicon glyphicon-shopping-cart"></i>
-        {{ 'sylius.product.show_in_store'|trans }}
-    </a>
+        <a href="{{ path('sylius_backend_metadata_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
+        </a>
+        {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+        {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
+        <a href="{{ path(product) }}" class="btn btn-info">
+           <i class="glyphicon glyphicon-shopping-cart"></i>
+            {{ 'sylius.product.show_in_store'|trans }}
+        </a>
     {% else %}
         {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
     {% endif %}

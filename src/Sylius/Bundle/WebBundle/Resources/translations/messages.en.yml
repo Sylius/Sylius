@@ -565,7 +565,14 @@ sylius:
         customize: Customize metadata
         manage: Manage metadata
         content: Content
-        index_metadata: Metadata
+        index_metadata: Metadatas
+        default_page:
+            group_customize: Customize default metadata
+        product:
+            single_customize: Customize metadata
+            group_customize: Customize products metadata
+        product_variant:
+            single_customize: Customize metadata
     move_down: Move down
     move_up: Move up
     na: N/A
