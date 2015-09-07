@@ -25,13 +25,13 @@ class SummaryLargeImageCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('site', 'text')
-            ->add('siteId', 'text')
-            ->add('creator', 'text')
-            ->add('creatorId', 'text')
-            ->add('title', 'text')
-            ->add('description', 'textarea')
-            ->add('image', 'text')
+            ->add('title', 'text', ['label' => 'sylius.metadata.twitter.title'])
+            ->add('description', 'textarea', ['label' => 'sylius.metadata.twitter.description'])
+            ->add('image', 'text', ['label' => 'sylius.metadata.twitter.image'])
+            ->add('site', 'text', ['label' => 'sylius.metadata.twitter.site'])
+            ->add('siteId', 'text', ['label' => 'sylius.metadata.twitter.site_id'])
+            ->add('creator', 'text', ['label' => 'sylius.metadata.twitter.creator'])
+            ->add('creatorId', 'text', ['label' => 'sylius.metadata.twitter.creator_id'])
         ;
     }
 

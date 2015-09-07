@@ -38,19 +38,29 @@ class PageMetadataType extends AbstractResourceType
         $this->dynamicFormBuilder = $dynamicFormBuilder;
     }
 
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text')
-            ->add('description', 'textarea')
-            ->add('keywords', 'text')
+            ->add('title', 'text', ['label' => 'sylius.metadata.page.title'])
+            ->add('description', 'textarea', ['label' => 'sylius.metadata.page.description'])
+            ->add('keywords', 'text', ['label' => 'sylius.metadata.page.keywords'])
         ;
 
-        $this->dynamicFormBuilder->buildDynamicForm($builder, 'twitter', 'sylius_twitter_card');
+        $this->dynamicFormBuilder->buildDynamicForm(
+            $builder,
+            'twitter',
+            'sylius_twitter_card',
+            [
+                'select' => [
+                    'label' => 'sylius.metadata.page.twitter',
+                    'required' => false,
+                    'placeholder' => 'sylius.metadata.twitter.type.none',
+                ],
+            ]
+        );
 
         $this->addKeywordsTransformer($builder);
     }

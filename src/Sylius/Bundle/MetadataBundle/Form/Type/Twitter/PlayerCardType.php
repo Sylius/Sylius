@@ -25,16 +25,16 @@ class PlayerCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('site', 'text')
-            ->add('siteId', 'text')
-            ->add('title', 'text')
-            ->add('description', 'textarea')
-            ->add('image', 'text')
-            ->add('player', 'textarea')
-            ->add('playerWidth', 'number')
-            ->add('playerHeight', 'number')
-            ->add('playerStream', 'text')
-            ->add('playerStreamContentType', 'text')
+            ->add('title', 'text', ['label' => 'sylius.metadata.twitter.title'])
+            ->add('description', 'textarea', ['label' => 'sylius.metadata.twitter.description'])
+            ->add('image', 'text', ['label' => 'sylius.metadata.twitter.image'])
+            ->add('player', 'textarea', ['label' => 'sylius.metadata.twitter.player'])
+            ->add('site', 'text', ['label' => 'sylius.metadata.twitter.site'])
+            ->add('siteId', 'text', ['label' => 'sylius.metadata.twitter.site_id'])
+            ->add('playerWidth', 'number', ['label' => 'sylius.metadata.twitter.player_width'])
+            ->add('playerHeight', 'number', ['label' => 'sylius.metadata.twitter.player_height'])
+            ->add('playerStream', 'text', ['label' => 'sylius.metadata.twitter.player_stream'])
+            ->add('playerStreamContentType', 'text', ['label' => 'sylius.metadata.twitter.player_stream_content_type'])
         ;
     }
 

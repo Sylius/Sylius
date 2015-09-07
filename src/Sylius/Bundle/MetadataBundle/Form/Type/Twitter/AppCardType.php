@@ -25,18 +25,18 @@ class AppCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('site', 'text')
-            ->add('siteId', 'text')
-            ->add('description', 'textarea')
-            ->add('appNameIphone', 'text')
-            ->add('appIdIphone', 'text')
-            ->add('appUrlIphone', 'text')
-            ->add('appNameIpad', 'text')
-            ->add('appIdIpad', 'text')
-            ->add('appUrlIpad', 'text')
-            ->add('appNameGooglePlay', 'text')
-            ->add('appIdGooglePlay', 'text')
-            ->add('appUrlGooglePlay', 'text')
+            ->add('description', 'textarea', ['label' => 'sylius.metadata.twitter.description'])
+            ->add('site', 'text', ['label' => 'sylius.metadata.twitter.site'])
+            ->add('siteId', 'text', ['label' => 'sylius.metadata.twitter.site_id'])
+            ->add('appNameIphone', 'text', ['label' => 'sylius.metadata.twitter.app_name_iphone'])
+            ->add('appIdIphone', 'text', ['label' => 'sylius.metadata.twitter.app_id_iphone'])
+            ->add('appUrlIphone', 'text', ['label' => 'sylius.metadata.twitter.app_url_iphone'])
+            ->add('appNameIpad', 'text', ['label' => 'sylius.metadata.twitter.app_name_ipad'])
+            ->add('appIdIpad', 'text', ['label' => 'sylius.metadata.twitter.app_id_ipad'])
+            ->add('appUrlIpad', 'text', ['label' => 'sylius.metadata.twitter.app_url_ipad'])
+            ->add('appNameGooglePlay', 'text', ['label' => 'sylius.metadata.twitter.app_name_googleplay'])
+            ->add('appIdGooglePlay', 'text', ['label' => 'sylius.metadata.twitter.app_id_googleplay'])
+            ->add('appUrlGooglePlay', 'text', ['label' => 'sylius.metadata.twitter.app_url_googleplay'])
         ;
     }
 
