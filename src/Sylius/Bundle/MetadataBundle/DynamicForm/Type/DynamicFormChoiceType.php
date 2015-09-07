@@ -47,7 +47,7 @@ class DynamicFormChoiceType extends AbstractType
 
         $availableFormsNames = $this->dynamicFormsChildrenMap->getFormsNamesByGroup($options['group']);
 
-        $this->addAvailableFormsField($builder, $availableFormsNames);
+        $this->addAvailableFormsField($builder, $availableFormsNames, $options);
         $this->addAvailableFormsPrototypes($builder, $availableFormsNames);
     }
 
@@ -66,9 +66,12 @@ class DynamicFormChoiceType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults([
-            'inherit_data' => true,
-        ]);
+        $resolver
+            ->setDefaults([
+                'inherit_data' => true,
+                'select' => [],
+            ])
+        ;
     }
 
     /**
@@ -83,18 +86,19 @@ class DynamicFormChoiceType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param string[] $availableFormsNames
      */
-    private function addAvailableFormsField(FormBuilderInterface $builder, $availableFormsNames)
+    private function addAvailableFormsField(FormBuilderInterface $builder, $availableFormsNames, array $options)
     {
         $choices = [];
         foreach ($availableFormsNames as $availableFormName) {
-            $choices[$availableFormName] = $availableFormName;
+            $choices[$availableFormName] = $this->dynamicFormsChildrenMap->getLabelByFormName($availableFormName);
         }
 
-        $builder->add('_form', 'choice', [
-            'choices' => $choices,
-            'mapped' => false,
-            'required' => false,
-        ]);
+        $options = array_merge(
+            ['choices' => $choices, 'mapped' => false],
+            $options['select']
+        );
+
+        $builder->add('_form', 'choice', $options);
     }
 
     /**

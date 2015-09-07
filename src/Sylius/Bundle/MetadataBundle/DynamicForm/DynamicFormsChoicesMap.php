@@ -24,11 +24,19 @@ class DynamicFormsChoicesMap implements DynamicFormsChoicesMapInterface
     protected $forms;
 
     /**
+     * Maps form name to label.
+     *
+     * @var string[]
+     */
+    protected $labels;
+
+    /**
      * {@inheritdoc}
      */
-    public function addForm($group, $dataClass, $formName)
+    public function addForm($group, $dataClass, $formName, $label)
     {
         $this->forms[$group][$dataClass] = $formName;
+        $this->labels[$formName] = $label;
     }
 
     /**
@@ -65,5 +73,13 @@ class DynamicFormsChoicesMap implements DynamicFormsChoicesMapInterface
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabelByFormName($formName)
+    {
+        return isset($this->labels[$formName]) ? $this->labels[$formName] : $formName;
     }
 }

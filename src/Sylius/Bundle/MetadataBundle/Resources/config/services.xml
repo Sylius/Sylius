@@ -95,28 +95,28 @@
             <argument>%sylius.model.twitter_summary_card.class%</argument>
             <argument>%sylius.validation_group.twitter_summary_card%</argument>
             <tag name="form.type" alias="sylius_twitter_summary_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" class="%sylius.model.twitter_summary_card.class%" />
+            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.summary_card" class="%sylius.model.twitter_summary_card.class%" />
         </service>
 
         <service id="sylius.form.type.twitter_summary_large_image_card" class="%sylius.form.type.twitter_summary_large_image_card.class%">
             <argument>%sylius.model.twitter_summary_large_image_card.class%</argument>
             <argument>%sylius.validation_group.twitter_summary_large_image_card%</argument>
             <tag name="form.type" alias="sylius_twitter_summary_large_image_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" class="%sylius.model.twitter_summary_large_image_card.class%" />
+            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.summary_large_image_card" class="%sylius.model.twitter_summary_large_image_card.class%" />
         </service>
 
         <service id="sylius.form.type.twitter_player_card" class="%sylius.form.type.twitter_player_card.class%">
             <argument>%sylius.model.twitter_player_card.class%</argument>
             <argument>%sylius.validation_group.twitter_player_card%</argument>
             <tag name="form.type" alias="sylius_twitter_player_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" class="%sylius.model.twitter_player_card.class%" />
+            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.player_card" class="%sylius.model.twitter_player_card.class%" />
         </service>
 
         <service id="sylius.form.type.twitter_app_card" class="%sylius.form.type.twitter_app_card.class%">
             <argument>%sylius.model.twitter_app_card.class%</argument>
             <argument>%sylius.validation_group.twitter_app_card%</argument>
             <tag name="form.type" alias="sylius_twitter_app_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" class="%sylius.model.twitter_app_card.class%" />
+            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.app_card" class="%sylius.model.twitter_app_card.class%" />
         </service>
     </services>
 

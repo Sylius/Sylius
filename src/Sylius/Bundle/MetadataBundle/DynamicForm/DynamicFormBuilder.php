@@ -15,7 +15,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -81,7 +80,7 @@ class DynamicFormBuilder implements DynamicFormBuilderInterface
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder, $name, $group) {
             try {
                 $data = $this->propertyAccessor->getValue($event->getData(), $name);
-            } catch (AccessException $exception) {
+            } catch (\RuntimeException $exception) {
                 $data = null;
             }
 
@@ -110,7 +109,7 @@ class DynamicFormBuilder implements DynamicFormBuilderInterface
                 return;
             }
 
-            $this->addEmbeddedFormField($builder->get($name), $event->getForm()->get($name), $formName);
+            $this->addEmbeddedFormField($builder->get($name), $event->getForm(), $formName);
         });
     }
 }
