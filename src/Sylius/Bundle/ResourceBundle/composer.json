@@ -26,8 +26,8 @@
         "symfony/twig-bundle":             "~2.3",
         "symfony/expression-language":     "~2.4",
         "symfony/form":                    "~2.3",
-        "sylius/resource":                 "0.15.*@dev",
-        "sylius/storage":                  "0.15.*@dev",
+        "sylius/resource":                 "0.16.*",
+        "sylius/storage":                  "0.16.*",
         "friendsofsymfony/rest-bundle":    "~1.5",
         "jms/serializer-bundle":           "~0.13",
         "white-october/pagerfanta-bundle": "~1.0",
@@ -40,15 +40,15 @@
         "doctrine/orm":              "~2.4",
         "doctrine/mongodb-odm":      "1.0.*@dev",
         "doctrine/phpcr-bundle":     "~1.1",
-        "sylius/rbac-bundle":        "0.15.*@dev",
-        "sylius/translation-bundle": "0.15.*@dev"
+        "sylius/rbac-bundle":        "0.16.*",
+        "sylius/translation-bundle": "0.16.*"
     },
     "suggest": {
         "doctrine/orm":              "~2.4",
         "doctrine/mongodb-odm":      "1.0.*@dev",
         "doctrine/phpcr-bundle":     "~1.1",
-        "sylius/rbac-bundle":        "0.15.*@dev",
-        "sylius/translation-bundle": "0.15.*@dev"
+        "sylius/rbac-bundle":        "0.16.*",
+        "sylius/translation-bundle": "0.16.*"
     },
     "config": {
         "bin-dir": "bin"
@@ -59,9 +59,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\ResourceBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

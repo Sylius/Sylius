@@ -23,8 +23,8 @@
         "php": ">=5.3.3",
 
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/pricing":                  "0.15.*@dev",
-        "sylius/resource-bundle":          "0.15.*@dev",
+        "sylius/pricing":                  "0.16.*",
+        "sylius/resource-bundle":          "0.16.*",
         "symfony/framework-bundle":        "~2.3"
     },
     "require-dev": {
@@ -42,9 +42,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\PricingBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

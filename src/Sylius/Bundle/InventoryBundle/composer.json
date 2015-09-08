@@ -24,8 +24,8 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.15.*@dev",
-        "sylius/inventory":                "0.15.*@dev"
+        "sylius/resource-bundle":          "0.16.*",
+        "sylius/inventory":                "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
@@ -41,9 +41,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\InventoryBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

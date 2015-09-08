@@ -23,7 +23,7 @@
         "php": ">=5.3.3",
 
         "doctrine/common":         "~2.3",
-        "sylius/resource":         "0.15.*@dev",
+        "sylius/resource":         "0.16.*",
         "symfony/property-access": "~2.3"
     },
     "require-dev": {
@@ -38,9 +38,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Originator\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

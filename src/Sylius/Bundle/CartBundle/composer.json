@@ -23,10 +23,8 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/order-bundle":      "0.15.*@dev",
-        "sylius/money-bundle":      "0.15.*@dev",
-        "sylius/resource-bundle":   "0.15.*@dev",
-        "sylius/cart":              "0.15.*@dev"
+        "sylius/order-bundle":      "0.16.*",
+        "sylius/cart":              "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",
@@ -43,9 +41,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\CartBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }
