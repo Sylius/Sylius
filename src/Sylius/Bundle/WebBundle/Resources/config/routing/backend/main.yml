@@ -92,6 +92,18 @@ sylius_backend_email:
     resource: @SyliusWebBundle/Resources/config/routing/backend/email.yml
     prefix: /emails
 
+sylius_backend_stock_location:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_location.yml
+    prefix: /stock-locations
+
+sylius_backend_stock_movement:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_movement.yml
+    prefix: /stock-locations/{locationId}/stock-movements
+
+sylius_backend_stock_item:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_item.yml
+    prefix: /stock-locations/{locationId}/stock-items
+
 sylius_backend_payment_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment_method.yml
     prefix: /payment-methods

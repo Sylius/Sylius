@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Sylius\Component\Inventory\Model\StockItem" table="sylius_stock_item">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="onHand" column="on_hand" nullable="false" />
+        <field name="onHold" column="on_hold" nullable="false" />
+        <field name="availableOnDemand" column="available_on_demand" type="boolean" />
+
+        <many-to-one field="stockable" target-entity="Sylius\Component\Inventory\Model\StockableInterface">
+            <join-column name="stockable_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
+        <many-to-one field="location" target-entity="Sylius\Component\Inventory\Model\StockLocationInterface">
+            <join-column name="stock_location_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
+        <one-to-many field="stockMovements" target-entity="Sylius\Component\Inventory\Model\StockMovementInterface" mapped-by="stockItem">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

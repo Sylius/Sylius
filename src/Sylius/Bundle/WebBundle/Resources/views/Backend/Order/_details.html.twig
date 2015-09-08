@@ -33,6 +33,8 @@
                         <span class="label label-primary pull-right">{{ shipment.state|title }}</span>
                         {{ shipment.method.name }}
                     </a>
+                    <br>
+                    {{ 'sylius.shipment.stock_location'|trans }} <strong>{{ shipment.stockLocation.code }}</strong>
                 </li>
                 {% else %}
                 <li class="text-muted">

@@ -56,6 +56,7 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
+        <parameter key="sylius.listener.product_inventory.class">Sylius\Bundle\CoreBundle\EventListener\ProductInventoryListener</parameter>
 
         <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
@@ -186,6 +187,7 @@
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
             <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.inventory_coordinator" />
         </service>
         <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
             <argument type="service" id="sylius.repository.payment" />
@@ -349,6 +351,12 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+        </service>
+        <service id="sylius.listener.product_inventory" class="%sylius.listener.product_inventory.class%">
+            <argument type="service" id="sylius.factory.stock_item" />
+            <argument type="service" id="sylius.manager.product" />
+            <tag name="kernel.event_listener" event="sylius.product.post_create" method="createProductStockItems" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_create" method="createProductVariantStockItems" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">

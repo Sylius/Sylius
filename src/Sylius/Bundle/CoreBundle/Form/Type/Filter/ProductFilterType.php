@@ -42,6 +42,17 @@ class ProductFilterType extends AbstractType
                     'placeholder' => 'sylius.form.product_filter.sku'
                 )
             ))
+            ->add('channels', 'sylius_channel_choice', array(
+                'required'    => false,
+                'multiple'    => true,
+                'empty_value' => 'sylius.form.product_filter.channels.empty_value',
+            ))
+            ->add('categories', 'entity', array(
+                'required'    => false,
+                'multiple'    => true,
+                'class'       => 'Sylius\Component\Core\Model\Taxon',
+                'empty_value' => 'sylius.form.product_filter.categories.empty_value',
+            ))
         ;
     }
 

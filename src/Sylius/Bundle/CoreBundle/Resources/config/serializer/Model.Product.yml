@@ -5,6 +5,8 @@ Sylius\Component\Core\Model\Product:
         shortDescription:
             expose: true
             type: string
+        channels:
+            expose: true
     virtual_properties:
         getMasterVariant:
             serialized_name: masterVariant

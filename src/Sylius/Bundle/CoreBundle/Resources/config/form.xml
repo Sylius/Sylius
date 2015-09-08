@@ -27,7 +27,7 @@
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
-
+        <parameter key="sylius.form.type.product_stock.class">Sylius\Bundle\CoreBundle\Form\Type\ProductStockType</parameter>
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
 
         <parameter key="sylius.form.type.customer_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\CustomerFilterType</parameter>
@@ -94,6 +94,9 @@
             </argument>
             <tag name="form.type" alias="sylius_advanced_order" />
         </service>
+        <service id="sylius.form.type.product_stock" class="%sylius.form.type.product_stock.class%">
++            <tag name="form.type" alias="sylius_product_stock" />
++        </service>
         <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
             <argument>%sylius.model.country.class%</argument>
             <argument type="collection">

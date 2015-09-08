@@ -54,6 +54,12 @@
             <gedmo:versioned/>
         </field>
 
+        <one-to-many field="stockItems" target-entity="Sylius\Component\Inventory\Model\StockItemInterface" mapped-by="stockable">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductVariantImageInterface" mapped-by="variant">
             <cascade>
                 <cascade-all />

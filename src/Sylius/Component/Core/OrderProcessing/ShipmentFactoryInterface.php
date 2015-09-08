@@ -21,9 +21,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface ShipmentFactoryInterface
 {
     /**
-     * Create shipment for order.
+     * Create shipments for order.
      *
      * @param OrderInterface $order
      */
-    public function createShipment(OrderInterface $order);
+    public function createShipments(OrderInterface $order);
 }

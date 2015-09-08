@@ -18,6 +18,7 @@
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     {% if not product.deleted %}
+    {{ buttons.show(path('sylius_backend_product_stock', {'id': product.id}), 'Stock'|trans) }}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
     <a href="{{ path(product) }}" class="btn btn-info">
@@ -117,12 +118,6 @@
                     <td>{{ 'sylius.product.shipping_category'|trans }}</td>
                     <td>{{ product.shippingCategory|default('sylius.product.no_shipping_category'|trans) }}</td>
                 </tr>
-                <tr>
-                    <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
-                    <td>
-                        {{ misc.state_label(product.masterVariant.availableOnDemand) }}
-                    </td>
-                </tr>
                 {% if product.restrictedZone %}
                     <tr>
                         <td>{{ 'sylius.product.restricted_zone'|trans }}</td>
@@ -131,10 +126,6 @@
                         </td>
                     </tr>
                 {% endif %}
-                <tr>
-                    <td>{{ 'sylius.product.stock'|trans }}</td>
-                    <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
-                </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
