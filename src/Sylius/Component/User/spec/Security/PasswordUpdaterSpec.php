@@ -14,36 +14,33 @@ namespace spec\Sylius\Component\User\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 /**
 * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
 */
 class PasswordUpdaterSpec extends ObjectBehavior
 {
-    public function let(EncoderFactoryInterface $encoderFactory)
+    function let(UserPasswordEncoderInterface $userPasswordEncoder)
     {
-        $this->beConstructedWith($encoderFactory);
+        $this->beConstructedWith($userPasswordEncoder);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\User\Security\PasswordUpdater');
     }
 
-    public function it_implements_password_updater_interface()
+    function it_implements_password_updater_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Security\PasswordUpdaterInterface');
     }
 
-    public function it_updates_user_profile_with_encoded_password($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
+    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
-        $user->getSalt()->willReturn('typicalSalt');
 
-        $encoderFactory->getEncoder($user)->willReturn($encoder);
-        $encoder->encodePassword('topSecretPlainPassword', 'typicalSalt')->willReturn('topSecretEncodedPassword');
+        $userPasswordEncoder->encode($user)->willReturn('topSecretEncodedPassword');
 
         $user->eraseCredentials()->shouldBeCalled();
         $user->setPassword('topSecretEncodedPassword')->shouldBeCalled();
@@ -51,13 +48,11 @@ class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    public function it_does_nothing_if_plain_password_is_empty($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
+    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('');
-        $user->getSalt()->willReturn('typicalSalt');
 
-        $encoderFactory->getEncoder($user)->shouldNotBeCalled();
-        $encoder->encodePassword('', 'typicalSalt')->shouldNotBeCalled();
+        $userPasswordEncoder->encode($user)->willReturn('topSecretEncodedPassword');
 
         $user->setPassword(Argument::any())->shouldNotBeCalled();
         $user->eraseCredentials()->shouldNotBeCalled();

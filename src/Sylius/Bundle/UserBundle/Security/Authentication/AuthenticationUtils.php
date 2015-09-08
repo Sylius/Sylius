@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Security\Authentication;
+namespace Sylius\Bundle\UserBundle\Security\Authentication;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
