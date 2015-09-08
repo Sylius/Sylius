@@ -69,9 +69,10 @@ Feature: Orders management
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
          When I press "delete"
-          And I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
+          And I should not see order with number "#000000001" in the list
 
     @javascript
     Scenario: Deleting the order via list
@@ -80,14 +81,6 @@ Feature: Orders management
           And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
-
-    @javascript
-    Scenario: Deleted order disappears from the list
-        Given I am viewing order with number "000000002"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the order index page
-          And I should not see order with number "#000000002" in the list
 
     Scenario: Order integrity is preserved after deleting a product
         Given I have deleted the product "Mug"
