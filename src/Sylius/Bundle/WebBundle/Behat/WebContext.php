@@ -517,6 +517,21 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
+     * @When /^I add zone member "([^"]+)"$/
+     */
+    public function iAddZoneMember($zoneMember)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'zone_members');
+        $select = $newItem->find('css', 'select');
+
+        if (null === $select) {
+            throw new \Exception('There is no select field available!');
+        }
+
+        $select->selectOption($zoneMember);
+    }
+
+    /**
      * @Given /^I remove first choice$/
      */
     public function iRemoveFirstChoice()
