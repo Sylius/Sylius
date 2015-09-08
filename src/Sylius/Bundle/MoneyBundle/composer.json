@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "0.15.*@dev",
+        "sylius/resource-bundle":   "0.16.*",
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
@@ -41,9 +41,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\MoneyBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

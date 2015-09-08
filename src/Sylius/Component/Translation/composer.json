@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource":       "0.15.*@dev",
+        "sylius/resource":       "0.16.*",
         "doctrine/collections" : "~1.2"
     },
     "require-dev": {
@@ -37,9 +37,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Translation\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

@@ -24,10 +24,10 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.15.*@dev",
-        "sylius/archetype":                "0.15.*@dev",
-        "sylius/attribute-bundle":         "0.15.*@dev",
-        "sylius/variation-bundle":         "0.15.*@dev"
+        "sylius/resource-bundle":          "0.16.*",
+        "sylius/archetype":                "0.16.*",
+        "sylius/attribute-bundle":         "0.16.*",
+        "sylius/variation-bundle":         "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
@@ -43,9 +43,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     },
     "minimum-stability": "dev"

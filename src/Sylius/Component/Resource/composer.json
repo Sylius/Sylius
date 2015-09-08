@@ -39,9 +39,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Resource\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

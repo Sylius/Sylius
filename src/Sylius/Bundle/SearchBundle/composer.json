@@ -22,9 +22,9 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/product-bundle":            "0.15.*@dev",
-        "sylius/resource-bundle":           "0.15.*@dev",
-        "sylius/channel":                   "0.15.*@dev",
+        "sylius/product-bundle":            "0.16.*",
+        "sylius/resource-bundle":           "0.16.*",
+        "sylius/channel":                   "0.16.*",
         "symfony/framework-bundle":         "~2.3",
         "symfony/property-access":          "~2.3",
 
@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "sylius/taxonomy": "0.15.*@dev"
+        "sylius/taxonomy": "0.16.*"
     },
     "config": {
         "bin-dir": "bin"
@@ -45,9 +45,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\SearchBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

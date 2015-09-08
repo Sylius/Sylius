@@ -22,8 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/registry": "0.15.*@dev",
-        "sylius/resource": "0.15.*@dev"
+        "sylius/registry": "0.16.*",
+        "sylius/resource": "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
@@ -37,9 +37,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Promotion\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

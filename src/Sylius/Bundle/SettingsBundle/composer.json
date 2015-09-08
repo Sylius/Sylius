@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle":        "~2.3",
         "doctrine/doctrine-cache-bundle":  "~1.0",
-        "sylius/resource-bundle":          "0.15.*@dev"
+        "sylius/resource-bundle":          "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",
@@ -40,9 +40,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\SettingsBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

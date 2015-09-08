@@ -22,12 +22,12 @@
     "require": {
         "php":                       ">=5.3.3",
 
-        "jms/translation-bundle":    "1.1.*",
         "symfony/framework-bundle":  "~2.3",
+        "jms/translation-bundle":    "1.1.*",
         "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~1.0",
         "knplabs/knp-snappy-bundle": "*@dev",
-        "sylius/core-bundle":        "0.15.*@dev"
+        "sylius/core-bundle":        "0.16.*"
     },
     "config": {
         "bin-dir": "bin"
@@ -35,9 +35,10 @@
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\WebBundle\\": "" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

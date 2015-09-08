@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/core-bundle": "0.15.*@dev"
+        "sylius/core-bundle": "0.16.*"
     },
     "require-dev": {
         "fzaninotto/faker":                  "1.2.*",
@@ -34,9 +34,10 @@
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\FixturesBundle\\": "" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

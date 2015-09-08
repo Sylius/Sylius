@@ -27,7 +27,6 @@
         "doctrine/doctrine-cache-bundle":       "~1.0",
         "doctrine/doctrine-fixtures-bundle":    "~2.2",
         "doctrine/doctrine-migrations-bundle":  "~1.0",
-        "doctrine/migrations":                  "~1.0@dev",
         "doctrine/orm":                         "~2.4",
         "doctrine/phpcr-odm":                   "^1.2.2",
         "friendsofsymfony/elastica-bundle":     "^3.0.2",
@@ -145,6 +144,8 @@
         "sylius/taxonomy-bundle":    "self.version",
         "sylius/translation":        "self.version",
         "sylius/translation-bundle": "self.version",
+        "sylius/user":               "self.version",
+        "sylius/user-bundle":        "self.version",
         "sylius/variation":          "self.version",
         "sylius/variation-bundle":   "self.version",
         "sylius/web-bundle":         "self.version"
@@ -175,7 +176,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

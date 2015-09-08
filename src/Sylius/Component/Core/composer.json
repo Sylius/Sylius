@@ -23,30 +23,30 @@
         "php": ">=5.3.3",
 
         "knplabs/gaufrette":  "0.2.*@dev",
-        "sylius/addressing":  "0.15.*@dev",
-        "sylius/archetype":   "0.15.*@dev",
-        "sylius/attribute":   "0.15.*@dev",
-        "sylius/cart":        "0.15.*@dev",
-        "sylius/channel":     "0.15.*@dev",
-        "sylius/contact":     "0.15.*@dev",
-        "sylius/currency":    "0.15.*@dev",
-        "sylius/inventory":   "0.15.*@dev",
-        "sylius/locale":      "0.15.*@dev",
-        "sylius/order":       "0.15.*@dev",
-        "sylius/originator":  "0.15.*@dev",
-        "sylius/payment":     "0.15.*@dev",
-        "sylius/pricing":     "0.15.*@dev",
-        "sylius/product":     "0.15.*@dev",
-        "sylius/promotion":   "0.15.*@dev",
-        "sylius/registry":    "0.15.*@dev",
-        "sylius/resource":    "0.15.*@dev",
-        "sylius/sequence":    "0.15.*@dev",
-        "sylius/shipping":    "0.15.*@dev",
-        "sylius/storage":     "0.15.*@dev",
-        "sylius/taxation":    "0.15.*@dev",
-        "sylius/taxonomy":    "0.15.*@dev",
-        "sylius/translation": "0.15.*@dev",
-        "sylius/variation":   "0.15.*@dev"
+        "sylius/addressing":  "0.16.*",
+        "sylius/archetype":   "0.16.*",
+        "sylius/attribute":   "0.16.*",
+        "sylius/cart":        "0.16.*",
+        "sylius/channel":     "0.16.*",
+        "sylius/contact":     "0.16.*",
+        "sylius/currency":    "0.16.*",
+        "sylius/inventory":   "0.16.*",
+        "sylius/locale":      "0.16.*",
+        "sylius/order":       "0.16.*",
+        "sylius/originator":  "0.16.*",
+        "sylius/payment":     "0.16.*",
+        "sylius/pricing":     "0.16.*",
+        "sylius/product":     "0.16.*",
+        "sylius/promotion":   "0.16.*",
+        "sylius/registry":    "0.16.*",
+        "sylius/resource":    "0.16.*",
+        "sylius/sequence":    "0.16.*",
+        "sylius/shipping":    "0.16.*",
+        "sylius/storage":     "0.16.*",
+        "sylius/taxation":    "0.16.*",
+        "sylius/taxonomy":    "0.16.*",
+        "sylius/translation": "0.16.*",
+        "sylius/variation":   "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.1",
@@ -61,9 +61,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Core\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

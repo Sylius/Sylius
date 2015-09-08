@@ -32,9 +32,9 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.15.*@dev",
-        "sylius/money-bundle":             "0.15.*@dev",
-        "sylius/report":                   "0.15.*@dev"
+        "sylius/resource-bundle":          "0.16.*",
+        "sylius/money-bundle":             "0.16.*",
+        "sylius/report":                   "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",
@@ -50,9 +50,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\ReportBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }
