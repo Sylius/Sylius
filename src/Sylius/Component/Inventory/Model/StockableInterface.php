@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Model;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockableInterface
+interface StockableInterface extends StockItemsAwareInterface
 {
     /**
      * @return string

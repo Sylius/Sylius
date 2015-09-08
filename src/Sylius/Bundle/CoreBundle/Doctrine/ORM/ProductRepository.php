@@ -89,7 +89,10 @@ class ProductRepository extends BaseProductRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->addSelect('variant')
+            ->addSelect('channels')
             ->leftJoin('product.variants', 'variant')
+            ->leftJoin('product.channels', 'channels')
+            ->leftJoin('product.taxons', 'categories')
         ;
 
         if (!empty($criteria['name'])) {
@@ -102,6 +105,18 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('variant.sku = :sku')
                 ->setParameter('sku', $criteria['sku'])
+            ;
+        }
+        if (!empty($criteria['channels'])) {
+            $queryBuilder
+                ->andWhere('product.channels = :channels')
+                ->setParameter('channels', $criteria['channels'])
+            ;
+        }
+        if (!empty($criteria['categories'])) {
+            $queryBuilder
+                ->andWhere('product.taxons = :categories')
+                ->setParameter('categories', $criteria['categories'])
             ;
         }
 
@@ -120,6 +135,29 @@ class ProductRepository extends BaseProductRepository
         }
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Get the product data for the stock page.
+     *
+     * @param integer $id
+     *
+     * @return null|ProductInterface
+     */
+    public function findForStockPage($id)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        return $this->getQueryBuilder()
+            ->addSelect('stockItem')
+            ->addSelect('stockLocation')
+            ->leftJoin('variant.stockItems', 'stockItem')
+            ->leftJoin('stockItem.location', 'stockLocation')
+            ->andWhere('product.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**

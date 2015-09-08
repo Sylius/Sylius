@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.repository.channel.class">Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository</parameter>
+        <parameter key="sylius.form.type.channel_choice.class">Sylius\Bundle\ChannelBundle\Form\Type\ChannelEntityChoiceType</parameter>
     </parameters>
 
 </container>

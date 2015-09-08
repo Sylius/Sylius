@@ -1,0 +1,6 @@
+sylius:
+    form:
+        stock_location:
+            name: Name
+            code: Code
+            enabled: Enabled

@@ -47,6 +47,7 @@ sylius:
                 shipping_methods: Shipping methods
                 slideshow: Slideshow
                 stockables: Inventory levels
+                stock_locations: Stock locations
                 support: Support
                 taxation_settings: Taxation settings
                 taxonomies: Categorization
@@ -74,8 +75,6 @@ sylius:
                 groups: Groups
                 homepage: Back to frontend
                 locales: Locales
-                marketing: Marketing
-                menus: Menus
                 new_order: Add new order
                 new_promotion: Add new promotion
                 options: Manage options
@@ -97,6 +96,7 @@ sylius:
                 shipping_methods: Shipping methods
                 slideshow: Slideshow
                 stockables: Inventory levels
+                stock_locations: Stock locations
                 support: Support
                 tax_categories: Taxation categories
                 tax_rates: Tax rates

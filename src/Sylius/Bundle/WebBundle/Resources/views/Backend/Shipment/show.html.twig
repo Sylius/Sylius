@@ -42,6 +42,10 @@
                     <td>{{ shipment.id }}</td>
                 </tr>
                 <tr>
+                    <td><strong>{{ 'sylius.shipment.stock_location'|trans }}</strong></td>
+                    <td>{{ shipment.stockLocation }}</td>
+                </tr>
+                <tr>
                     <td><strong>{{ 'sylius.order.number'|trans }}</strong></td>
                     <td><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></td>
                 </tr>

@@ -1,0 +1,40 @@
+{% macro list(stock_locations) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if stock_locations|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', 'sylius.stock_location.id'|trans) }}</th>
+                <th>{{ sylius_resource_sort('code', 'sylius.stock_location.code'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.stock_location.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.stock_location.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_location in stock_locations %}
+            <tr id="{{ stock_location.id }}">
+                <td>{{ stock_location.id }}</td>
+                <td>{{ stock_location.code }}</td>
+                <td>{{ stock_location.name }}</td>
+                <td>{{ stock_location.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_stock_item_index', {'locationId': stock_location.id}), 'Inventory') }}
+                    {{ buttons.show(path('sylius_backend_stock_movement_index', {'locationId': stock_location.id}), 'Stock movements') }}
+                    {{ buttons.edit(path('sylius_backend_stock_location_update', {'id': stock_location.id})) }}
+                    {{ buttons.delete(path('sylius_backend_stock_location_delete', {'id': stock_location.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.stock_location.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

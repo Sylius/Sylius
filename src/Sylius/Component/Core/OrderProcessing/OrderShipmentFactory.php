@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Inventory\Coordinator\CoordinatorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -29,13 +30,20 @@ class OrderShipmentFactory implements OrderShipmentFactoryInterface
     protected $shipmentFactory;
 
     /**
+     * @var CoordinatorInterface
+     */
+    protected $coordinator;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface $shipmentFactory
+     * @param CoordinatorInterface $coordinator
      */
-    public function __construct(FactoryInterface $shipmentFactory)
+    public function __construct(FactoryInterface $shipmentFactory, CoordinatorInterface $coordinator)
     {
         $this->shipmentFactory = $shipmentFactory;
+        $this->coordinator = $coordinator;
     }
 
     /**
@@ -47,13 +55,19 @@ class OrderShipmentFactory implements OrderShipmentFactoryInterface
             $shipment = $order->getShipments()->first();
         } else {
             $shipment = $this->shipmentFactory->createNew();
-            $order->addShipment($shipment);
         }
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            if (null === $inventoryUnit->getShipment()) {
-                $shipment->addItem($inventoryUnit);
+        $packages = $this->coordinator->getPackages($order);
+
+        foreach ($packages as $package) {
+
+            $shipment->setStockLocation($package->getStockLocation());
+
+            foreach ($package->getInventoryUnits() as $unit) {
+                $shipment->addItem($unit);
             }
+
+            $order->addShipment($shipment);
         }
     }
 }

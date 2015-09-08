@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_stock_movement_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.stock_movement:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/StockMovement:index.html.twig
+            method: createByLocationPaginator
+            arguments: [$locationId]
+            sortable: true
+            sorting:
+                createdAt: desc
