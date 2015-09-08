@@ -525,9 +525,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     {
         $router = $this->getService('router');
 
-        $url = $this->getSession()->getCurrentUrl();
-        $path = str_replace(rtrim($this->getMinkParameter('base_url'), '/'), '', $url);
-        $match = $router->match($path);
+        $request = $this->getSession()->getDriver()->getClient()->getRequest();
+        //$path = str_replace(rtrim($this->getMinkParameter('base_url'), '/'), '', $url);
+        $match = $router->matchRequest($request);
 
         if (null === $match || !isset($match['_route'])) {
             throw new \Exception(sprintf('Route for URL "%s" not found!', $url));
