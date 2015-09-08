@@ -16,14 +16,13 @@ namespace Sylius\Component\User\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends \Serializable, TimestampableInterface, SoftDeletableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
     /**
@@ -64,6 +63,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setCustomer(CustomerInterface $customer = null);
 
     /**
+     * @return string
+     */
+    public function getUsername();
+
+    /**
      * @param string $username
      */
     public function setUsername($username);
@@ -91,6 +95,14 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setPlainPassword($password);
 
     /**
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string
+     */
+    public function getPassword();
+
+    /**
      * Sets the hashed password.
      *
      * @param string $password
@@ -98,14 +110,42 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setPassword($password);
 
     /**
-     * @param boolean $boolean
+     * Returns the salt that was originally used to encode the password.
+     *
+     * @return string
      */
-    public function setEnabled($boolean);
+    public function getSalt();
 
     /**
-     * @param boolean $boolean
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
      */
-    public function setLocked($boolean);
+    public function eraseCredentials();
+
+    /**
+     * Internally, if this method returns false, the authentication system
+     * will throw a DisabledException and prevent login.
+     *
+     * @return bool
+     */
+    public function isEnabled();
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled);
+
+    /**
+     * @param boolean $locked
+     */
+    public function setLocked($locked);
+
+    /**
+     * @return bool
+     */
+    public function isAccountNonLocked();
 
     /**
      * @return string
@@ -134,6 +174,26 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
     /**
+     * @return bool
+     */
+    public function isAccountNonExpired();
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setExpiresAt(\DateTime $date = null);
+
+    /**
+     * @return bool
+     */
+    public function isCredentialsNonExpired();
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setCredentialsExpireAt(\DateTime $date = null);
+
+    /**
      * @return \DateTime
      */
     public function getLastLogin();
@@ -156,6 +216,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @return boolean
      */
     public function hasRole($role);
+
+    /**
+     * @return array
+     */
+    public function getRoles();
 
     /**
      * This overwrites any previous roles.

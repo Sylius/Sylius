@@ -1,4 +1,4 @@
-Sylius\Component\User\Model\User:
+Sylius\Bundle\UserBundle\Model\User:
     exclusion_policy: ALL
     xml_root_name: sylius_user
     properties:

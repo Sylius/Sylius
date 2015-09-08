@@ -729,7 +729,7 @@ sylius_user:
         customer: SyliusWebBundle:Frontend/Customer
     classes:
         user:
-            model: Sylius\Component\Core\Model\User
+            model: Sylius\Bundle\CoreBundle\Model\User
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\UserType
         customer:
