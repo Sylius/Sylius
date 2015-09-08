@@ -4,7 +4,7 @@ User
 Users management implementation in PHP.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
    models
