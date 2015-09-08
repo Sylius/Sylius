@@ -66,8 +66,7 @@ Feature: User account addresses page
     @javascript
     Scenario: Deleting an address
       Given I press "Delete" near "GERMANY"
-       Then I should see "Do you want to delete this item"
-       When I press "delete"
+       When I click "delete" from the confirmation modal
        Then I should see 2 addresses in the list
         And I should not see "GERMANY"
         And I should still be on my account addresses page
