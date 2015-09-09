@@ -17,7 +17,7 @@
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
+    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\User" table="sylius_user">
         <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
             <cascade>
                 <cascade-all />

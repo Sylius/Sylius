@@ -1,2 +1,2 @@
-Sylius\Component\Core\Model\User:
+Sylius\Bundle\CoreBundle\Model\User:
     exclusion_policy: ALL

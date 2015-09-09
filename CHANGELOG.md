@@ -7,6 +7,7 @@ This chapter references the relevant changes done in 0.16 version.
 
 To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.15.0...master
 
+ * bug #3239 [BC BREAK][User] Remove symfony dependency from User components
 
 ## v0.15 (2015-09-08)
 
