@@ -39,8 +39,6 @@ class PaymentProcessor implements PaymentProcessorInterface
     protected $paymentManager;
 
     /**
-     * Constructor.
-     *
      * @param RepositoryInterface $paymentRepository
      */
     public function __construct(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
@@ -72,19 +70,11 @@ class PaymentProcessor implements PaymentProcessorInterface
     private function updateExistingPaymentsStates(OrderInterface $order)
     {
         foreach ($order->getPayments() as $payment) {
-            $this->cancelPaymentStateIfNotStarted($payment);
+            if (PaymentInterface::STATE_NEW === $payment->getState()) {
+                $payment->setState(PaymentInterface::STATE_CANCELLED);
+            }
         }
 
         $this->paymentManager->flush();
-    }
-
-    /**
-     * @param PaymentInterface $payment
-     */
-    private function cancelPaymentStateIfNotStarted(PaymentInterface $payment)
-    {
-        if (PaymentInterface::STATE_NEW === $payment->getState()) {
-            $payment->setState(PaymentInterface::STATE_CANCELLED);
-        }
     }
 }

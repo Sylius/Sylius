@@ -14,12 +14,14 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PaymentChargesProcessor implements PaymentChargesProcessorInterface
 {
@@ -34,15 +36,23 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     protected $feeCalculator;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $adjustmentRepository
-     * @param DelegatingFeeCalculatorInterface $feeCalculator
+     * @var OriginatorInterface
      */
-    public function __construct(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $feeCalculator)
-    {
+    protected $originator;
+
+    /**
+     * @param RepositoryInterface              $adjustmentRepository
+     * @param DelegatingFeeCalculatorInterface $feeCalculator
+     * @param OriginatorInterface              $originator
+     */
+    public function __construct(
+        RepositoryInterface $adjustmentRepository,
+        DelegatingFeeCalculatorInterface $feeCalculator,
+        OriginatorInterface $originator
+    ) {
         $this->adjustmentRepository = $adjustmentRepository;
         $this->feeCalculator = $feeCalculator;
+        $this->originator = $originator;
     }
 
     /**
@@ -50,24 +60,21 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
      */
     public function applyPaymentCharges(OrderInterface $order)
     {
-        $order->removeAdjustments(AdjustmentInterface::PAYMENT_ADJUSTMENT);
-        $order->calculateTotal();
-
         foreach ($order->getPayments() as $payment) {
-            $this->addAdjustmentIfForNotCancelled($order, $payment);
-        }
-    }
+            if (PaymentInterface::STATE_CANCELLED === $payment->getState()) {
+                continue;
+            }
 
-    /**
-     * @param OrderInterface   $order
-     * @param PaymentSubjectInterface $payment
-     */
-    private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentSubjectInterface $payment)
-    {
-        if (PaymentInterface::STATE_CANCELLED !== $payment->getState())
-        {
-            $order->addAdjustment($this->prepareAdjustmentForOrder($payment));
+            foreach ($order->getAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT) as $adjustment) {
+                if ($payment === $this->originator->getOrigin($adjustment)) {
+                    $order->removeAdjustment($adjustment);
+                }
+            }
+
+            $order->addAdjustment($this->createAdjustment($payment));
         }
+
+        $order->calculateTotal();
     }
 
     /**
@@ -75,12 +82,14 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
      *
      * @return AdjustmentInterface
      */
-    private function prepareAdjustmentForOrder(PaymentSubjectInterface $payment)
+    private function createAdjustment(PaymentSubjectInterface $payment)
     {
         $adjustment = $this->adjustmentRepository->createNew();
         $adjustment->setLabel(AdjustmentInterface::PAYMENT_ADJUSTMENT);
         $adjustment->setAmount($this->feeCalculator->calculate($payment));
         $adjustment->setDescription($payment->getMethod()->getName());
+
+        $this->originator->setOrigin($adjustment, $payment);
 
         return $adjustment;
     }
