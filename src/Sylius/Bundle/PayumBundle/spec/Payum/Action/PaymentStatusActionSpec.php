@@ -73,9 +73,8 @@ class PaymentStatusActionSpec extends ObjectBehavior
     }
 
     function it_should_do_status_subrequest_with_payment_details_as_model(
-        PaymentInterface $payment,
-        GetStatusInterface $statusRequest,
-        PayumPaymentInterface $payment
+        PayumPaymentInterface $payment,
+        GetStatusInterface $statusRequest
     ) {
         $details = array('foo' => 'foo', 'bar' => 'baz');
 
