@@ -24,6 +24,7 @@
         this.$element = $(element);
         this.$list = this.$element.find('[data-form-collection="list"]:first');
         this.count = this.$list.children().length;
+        this.lastChoice = null;
 
         this.$element.on(
             'click',
@@ -124,7 +125,11 @@
                 prototypeName = $target.data('form-prototype-prefix') + prototypeName;
             }
 
-            this.$list.html('');
+            if (null !== this.lastChoice && this.lastChoice !== prototypeName) {
+                this.$list.html('');
+            }
+
+            this.lastChoice = prototypeName;
 
             this.$element.data(
                 'prototype',
