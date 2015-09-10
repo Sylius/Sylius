@@ -16,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class SettingsRequirements extends RequirementCollection
 {
-    const REQUIRED_PHP_VERSION = '5.3.3';
+    const REQUIRED_PHP_VERSION = '5.5.9';
 
     public function __construct(TranslatorInterface $translator)
     {
