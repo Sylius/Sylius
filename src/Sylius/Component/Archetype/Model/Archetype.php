@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
@@ -28,6 +29,8 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class Archetype extends AbstractTranslatable implements ArchetypeInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -54,20 +57,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
      * @var ArchetypeInterface
      */
     protected $parent;
-
-    /**
-     * Creation time.
-     *
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * Last update time.
-     *
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -133,8 +122,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function addAttribute(BaseAttributeInterface $attribute)
     {
         $this->attributes->add($attribute);
-
-        return $this;
     }
 
     /**
@@ -143,8 +130,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function removeAttribute(BaseAttributeInterface $attribute)
     {
         $this->attributes->removeElement($attribute);
-
-        return $this;
     }
 
     /**
@@ -181,8 +166,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function addOption(BaseOptionInterface $option)
     {
         $this->options->add($option);
-
-        return $this;
     }
 
     /**
@@ -191,8 +174,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function removeOption(BaseOptionInterface $option)
     {
         $this->options->removeElement($option);
-
-        return $this;
     }
 
     /**
@@ -225,38 +206,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function getParent()
     {
         return $this->parent;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     /**

@@ -31,8 +31,6 @@ interface TopicTranslationInterface extends ResourceInterface
      * Set topic title.
      *
      * @param string $title
-     *
-     * @return $this
      */
     public function setTitle($title);
 }

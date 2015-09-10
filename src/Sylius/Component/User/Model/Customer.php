@@ -13,12 +13,16 @@ namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Customer implements CustomerInterface, GroupableInterface
 {
+    use SoftDeletableTrait, TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -60,28 +64,10 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
-     * @var Collection
+     * @var Collection|GroupInterface[]
      */
     protected $groups;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
-
-    /**
-     * Initialize Customer
-     */
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -265,7 +251,7 @@ class Customer implements CustomerInterface, GroupableInterface
     public function getGroupNames()
     {
         $names = array();
-        foreach ($this->getGroups() as $group) {
+        foreach ($this->groups as $group) {
             $names[] = $group->getName();
         }
 
@@ -277,8 +263,8 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function addGroup(GroupInterface $group)
     {
-        if (!$this->getGroups()->contains($group)) {
-            $this->getGroups()->add($group);
+        if (!$this->groups->contains($group)) {
+            $this->groups->add($group);
         }
     }
 
@@ -287,65 +273,9 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function removeGroup(GroupInterface $group)
     {
-        if ($this->getGroups()->contains($group)) {
-            $this->getGroups()->removeElement($group);
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return (null !== $this->deletedAt) && ((new \DateTime()) >= $this->deletedAt);
     }
 
     public function __toString()

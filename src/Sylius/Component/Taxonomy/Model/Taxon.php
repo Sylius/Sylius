@@ -13,6 +13,7 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -21,6 +22,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class Taxon extends AbstractTranslatable implements TaxonInterface
 {
+    use SoftDeletableTrait;
+
     /**
      * @var mixed
      */
@@ -61,14 +64,10 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
      */
     protected $level;
 
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
-
     public function __construct()
     {
         parent::__construct();
+
         $this->children = new ArrayCollection();
     }
 
@@ -233,8 +232,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
             return $this->getSlug();
         }
 
-        $permalink = $this->parent->getPermalink().'/'.$this->getSlug();
-        $this->setPermalink($permalink);
+        $this->setPermalink($permalink = $this->parent->getPermalink().'/'.$this->getSlug());
 
         return $permalink;
     }
@@ -309,29 +307,5 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
     }
 }

@@ -26,6 +26,7 @@ class TopicTranslation extends AbstractTranslation implements TopicTranslationIn
      * @var mixed
      */
     protected $id;
+
     /**
      * Category title.
      *
@@ -60,7 +61,5 @@ class TopicTranslation extends AbstractTranslation implements TopicTranslationIn
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 }

@@ -14,19 +14,36 @@ namespace Sylius\Component\Resource\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ToggleableInterface
+trait ToggleableTrait
 {
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
+
     /**
      * @return bool
      */
-    public function isEnabled();
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
 
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled);
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
+    }
 
-    public function enable();
+    public function enable()
+    {
+        $this->enabled = true;
+    }
 
-    public function disable();
+    public function disable()
+    {
+        $this->enabled = false;
+    }
 }

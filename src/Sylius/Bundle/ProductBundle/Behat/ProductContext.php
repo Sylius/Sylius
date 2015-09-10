@@ -238,7 +238,6 @@ class ProductContext extends DefaultContext
             $product = $productTranslation->getTranslatable();
             $product->setCurrentLocale($data['locale']);
             $product->setFallbackLocale($data['locale']);
-
             $product->setName($data['name']);
             $product->setDescription('...');
         }
@@ -269,7 +268,6 @@ class ProductContext extends DefaultContext
             $attribute = $this->findOneByName('product_attribute', $data['attribute']);
             $attribute->setCurrentLocale($data['locale']);
             $attribute->setFallbackLocale($data['locale']);
-
             $attribute->setName($data['name']);
         }
 
@@ -287,7 +285,6 @@ class ProductContext extends DefaultContext
             $option = $this->findOneByName('product_option', $data['option']);
             $option->setCurrentLocale($data['locale']);
             $option->setFallbackLocale($data['locale']);
-
             $option->setPresentation($data['presentation']);
         }
 

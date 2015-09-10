@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class Address implements AddressInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -65,16 +69,6 @@ class Address implements AddressInterface
      * @var string
      */
     protected $postcode;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -247,37 +241,5 @@ class Address implements AddressInterface
     public function setPostcode($postcode)
     {
         $this->postcode = $postcode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

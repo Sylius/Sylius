@@ -11,8 +11,12 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 class Image implements ImageInterface
 {
+    use TimestampableTrait;
+
     /**
      * Id
      *
@@ -33,20 +37,6 @@ class Image implements ImageInterface
      * @var string
      */
     protected $path;
-
-    /**
-     * Creation date
-     *
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * Update date
-     *
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -85,8 +75,6 @@ class Image implements ImageInterface
     public function setFile(\SplFileInfo $file)
     {
         $this->file = $file;
-
-        return $this;
     }
 
     /**
@@ -111,43 +99,5 @@ class Image implements ImageInterface
     public function setPath($path)
     {
         $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

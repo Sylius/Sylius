@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
@@ -25,13 +28,15 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  */
 class Product extends AbstractTranslatable implements ProductInterface
 {
+    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
     protected $id;
 
     /**
-     * @var null|ArchetypeInterface
+     * @var null|BaseArchetypeInterface
      */
     protected $archetype;
 
@@ -60,29 +65,10 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     protected $options;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
-
     public function __construct()
     {
         parent::__construct();
+
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
         $this->variants = new ArrayCollection();
@@ -107,7 +93,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|BaseArchetypeInterface $archetype
+     * {@inheritdoc}
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -302,7 +288,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function getAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode) {
+            if ($attributeCode === $attribute->getAttribute()->getCode()) {
                 return $attribute;
             }
         }
@@ -462,94 +448,14 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
-        $this->deletedAt = $deletedAt;
-
-        if(null === $deletedAt) {
-            foreach($this->variants as $variant) {
+        if (null === $deletedAt) {
+            foreach ($this->variants as $variant) {
                 $variant->setDeletedAt(null);
             }
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enable()
-    {
-        $this->enabled = true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function disable()
-    {
-        $this->enabled = false;
+        $this->deletedAt = $deletedAt;
     }
 }

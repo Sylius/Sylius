@@ -19,7 +19,7 @@ class Sequence implements SequenceInterface
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $index = 0;
 

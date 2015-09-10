@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Adjustment implements AdjustmentInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -73,16 +77,6 @@ class Adjustment implements AdjustmentInterface
      * @var string
      */
     protected $originType;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -288,38 +282,6 @@ class Adjustment implements AdjustmentInterface
     public function setOriginType($originType)
     {
         $this->originType = $originType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     private function recalculateAdjustable()

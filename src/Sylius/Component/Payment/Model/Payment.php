@@ -12,12 +12,16 @@
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Payment implements PaymentInterface
 {
+    use SoftDeletableTrait, TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -47,21 +51,6 @@ class Payment implements PaymentInterface
      * @var CreditCardInterface
      */
     protected $creditCard;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
 
     /**
      * @var array
@@ -158,6 +147,7 @@ class Payment implements PaymentInterface
         if (!is_int($amount)) {
             throw new \InvalidArgumentException('Amount must be an integer.');
         }
+
         $this->amount = $amount;
     }
 
@@ -175,62 +165,6 @@ class Payment implements PaymentInterface
     public function setState($state)
     {
         $this->state = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
     }
 
     /**
