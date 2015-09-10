@@ -1,15 +1,1053 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
+  emails:
+    order_confirmation:
+      name: Потвърждение на поръчката
+      subject: Благодарим за поръчката!
+    order_comment:
+      name: Коментар
+      subject: Нов коментар на поръчка
+    shipment_confirmation:
+      name: Доставка потвърждение
+      subject: Вашата поръчка беше изпратена!
+    user_confirmation:
+      name: Потвърждение потребител
+      subject: Добре дошли в нашия магазин!
   account:
+    address:
+      action:
+        billing: Задай адрес за фактуриране по подразбиране
+        create: Добави нов адрес
+        delete: Изтрий
+        edit: Редактиране
+        shipping: Задай по подразбиране като адрес за доставка
+      create: Добави нов адрес
+      default:
+        billing: По подразбиране адрес за фактуриране
+        no_billing: Адрес за фактуриране НЕ по подразбиране
+        no_shipping: Адрес за доставка НЕ по подразбиране
+        shipping: Адрес за доставка по подразбиране
+      empty: Нямате дефинирани адреси.
+      list: Всички адреси
+      update: Редактиране на моя адрес
     home:
-      email: ""
-      id: ""
+      email: 'Имейл :'
+      id: 'клиентски ID :'
+      outline: 'Насладете се на всички функции, които са налични  за преглед във вашето лично пространство, проследявайте и управлявайте всички ваши данни.'
+      since: Вие сте клиент от
+      welcome: Добре дошли във вашето лично пространство
+      last5orders: Последните 5 поръчки
     order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+      created_at: Поставени в
+      details: Детайлите за вашата поръчка
+      download_invoice: Изтегляне на фактурата
+      empty: Все още не сте направили поръчка.
+      invoice: Фактура
+      list: Всички поръчки
+      number: 'Номер:'
+      payment_mode: 'Плащане режим:'
+      placed_at: 'Направена в %at%'
+      shipment:
+        pending: За одобрение
+        ready: 'Готов от %at%'
+        returned: 'Върнати %at%'
+        shipped: 'Доставено %at%'
+      shipment_mode: 'Режим на пратка:'
+      state: 'Област :'
+      total: Oбщо
+      tracking_number: Номер за проследяване
+    title: Моят акаунт
+  add_to_cart: Добави към количката
+  address:
+    city: Град
+    company: Компания
+    country: Страна
+    firstname: Имe
+    lastname: Фамилия
+    postcode: Пощенски код
+    province: Провинция
+    street: Улица
+  alert:
+    error: Грешка
+    info: Информация
+    success: Успех
+    warning: Внимание
+  backend:
+    alert:
+      info: Информация
+    dashboard:
+      chart_order_count: Брой поръчки
+      chart_order_total: Стойност на поръчката
+      header: Табло за управление
+      orders: Пръчки за седмицата
+      revenue: Приходи за седмицата
+      subheader: Преглед на вашия магазин
+    logout: Изход
+    quick_links:
+      add_product: Нов продукт
+      orders: Последни поръчки
+      products: Вашите продукти
+      customers: Потребители
+    statistics:
+      header: Статистика за този месец
+      orders_this_month: Общо поръчки
+      registrations_this_month: Общо регистрации
+      sales_this_month: Продажби
+  backend_welcome: 'Здравейте <b>%name%</b>!'
+  block:
+    index_header: Блокове
+    no_results: Няма блокове за показване.
+    simple_blocks: Прости блокове
+    string_blocks: Низ блокове
+    imagine_blocks: Imagine блокове
+    slideshow_blocks: Слайдшоу блокове
+    imagine:
+      create: Създаване на imagine блок
+      create_header: Създаване на нов блок imagine
+      end_date: Крайна дата
+      id: ID
+      index: Imagine блокове
+      index_header: Imagine блокове
+      label: Етикет
+      publishable: Публикуван
+      start_date: Начална дата
+      title: Заглавие
+      update_header: Редактиране на imagine блок
+      updated_at: Последна актуализация
+    simple:
+      body: Тяло
+      create: Създаване на прост блок
+      create_header: Създаване на нов прост блок
+      end_date: Крайна дата
+      id: ID
+      index: Прости блокове
+      index_header: Прости блокове
+      label: Етикет
+      publishable: Публикуван
+      start_date: Начална дата
+      title: Заглавие
+      update_header: Редактиране на прости блок
+      updated_at: Последна актуализация
+    slideshow:
+      body: Тяло
+      create: Създаване на блок на слайдшоу
+      create_header: Създаване на нов блок на слайдшоу
+      end_date: Крайна дата
+      id: ID
+      index: Слайдшоу блокове
+      index_header: Слайдшоу блокове
+      publishable: Публикуван
+      start_date: Начална дата
+      title: Заглавие
+      update_header: Редактиране слайдшоу блок
+      updated_at: Последна актуализация
+    string:
+      body: Тяло
+      create: Създаване на блок на низ
+      create_header: Създаване на нов блок на низ
+      end_date: Крайна дата
+      id: ID
+      index: Низ блокове
+      index_header: Низ блокове
+      label: Етикет
+      publishable: Публикуван
+      start_date: Начална дата
+      title: Заглавие
+      update_header: Редактиране на низ блок
+      updated_at: Последна актуализация
+  breadcrumb:
+    assortment: Асортимент
+    block:
+      imagine:
+        index: Imagine блокове
+      index: Блокове
+      simple:
+        index: Прости блокове
+      slideshow:
+        index: Слайдшоу блокове
+      string:
+        index: Низ блокове
+    build: Изгради
+    configuration: Конфигурация
+    content: Съдържание
+    country:
+      index: Страни
+    section:
+      customer: Клиент
+    customer:
+      index: Потребители
+    dashboard: Табло
+    edit: Редактиране
+    contact_request:
+      index: Контакт запитвания
+      show: Контакт запитване
+    contact_topic:
+      index: Контакт теми
+    currency:
+      index: Валути
+    general_settings: Общи Настройки
+    generate: Генериране
+    group:
+      index: Групи
+    inventory:
+      index: Инвентар
+    locale:
+      index: Езикови променливи
+    marketing: Маркетинг
+    menu:
+      index: Менюта
+    menu_node:
+      index: Подменюта
+    new: Нов
+    option:
+      index: Опцйи
+    order:
+      index: Поръчки
+      adjustments: Корекции
+    page:
+      index: Страници
+    payment:
+      index: Плащания
+    payment_method:
+      index: Методи на плащане
+    product:
+      index: Продукти
+    promotion:
+      index: Промоции
+    promotion_coupon:
+      index: Купони
+    attribute:
+      index: Атрибути
+    archetype:
+      index: архетипи
+    redirect_route:
+      index: Пренасочване на маршрути
+    report:
+      index: Отчети
+    route:
+      index: Маршрути
+    sales: Продажби
+    security_settings: Настройки за защита
+    shipment:
+      index: Пратки
+    shipping_category:
+      index: Категории за доставка
+    shipping_method:
+      index: Начин на доставка
+    support: Поддръжка
+    tax_category:
+      index: Данъчни категории
+    tax_rate:
+      index: Данъчни ставки
+    taxation_settings: Настройки на данъчно облагане
+    taxonomy:
+      index: Класификации
+    email:
+      index: Имейли
+    channel:
+      index: Канали
+    update: Редактиране
+    permission:
+      index: Права
+    role:
+      index: Роли
+    zone:
+      index: Зони
+  browse_products: Преглед на продуктите
+  cancel: Отказ
+  cart:
+    empty: Вашата кошница е празна
+    summary:
+      add_coupon: Добавяне на купон
+      checkout: Плащане
+      clear: Изчисти количка
+      grand_total: Обща сума
+      product: Продукт
+      quantity: Кол
+      save: Запиши
+      total: Oбщо
+      unit_price: Цена
+    summary_header: Обобщена количка
+    total_items: '1 артикул|%count% елементи'
+  checkout:
+    addressing:
+      header: Адресиране стъпка
+    back: Назад
+    credit_card:
+      header: Детайли за плащане
+    finalize:
+      address:
+        city: Град
+        country: Страна
+        firstname: Имe
+        lastname: Фамилия
+        postcode: Пощенски код
+        province: Провинция
+        street: Улица
+      header: Информация за поръчката
+      order:
+        billing_address: Адрес на плащане
+        items_total: Общо елементи
+        no_items: Тази поръчка не съдържа никакви артикули
+        no_promotion: Нама приложена промоция
+        no_shipping_charges: Няма такси за доставка
+        no_taxes: Няма приложени такси
+        payment_charges: Плащане такси
+        payment_total: Плащане общо
+        promotion_discount: Промоционални отстъпки
+        promotion_total: Промоция общо
+        shipping_address: Адрес за доставка
+        shipping_charges: Такси за експедиране
+        shipping_total: Общо за доставка
+        tax_total: Общо такси
+        taxes: Такси
+        total: Oбщо
+      order_item:
+        quantity: Кол
+        total: Oбщо
+        unit_price: Цена на артикула
+      place_order: Изпрати поръчка
+      product:
+        name: Име
+    forward: Продължи
+    payment:
+      header: Метод на разплащане
+    security:
+      existing_customer: Съществуващ клиент
+      header: 'Влезте в магазина <small>или да създайте нов акаунт</small>'
+      login: Вход
+      new_customer: Нов клиент
+      register: Регистриране
+      guest: Гост
+      proceed_order: Продължете с вашата поръчка
+    shipping:
+      error: Съжаляваме, но Нашият магазин не е в състояние да осигури доставка в страната, която сте избрали.
+      header: Начин на доставка
+  confirmation:
+    message: Искате ли да изтриете този елемент?
+    title: Потвърждение
+  country:
+    add_province: Добавяне на провинция
+    create: Създаване страна
+    create_header: Новата страна
+    id: ID
+    index_header: Страни
+    iso_name: Име ISO
+    manage: Управление на страни
+    name: Име
+    no_results: Няма конфигурирани страни.
+    show_header: Страната детайли
+    update_header: Редактиране на страната
+    enabled: Включен
+  email:
+    create: Добавяне на нов имейл
+    create_header: Добавяне на нов имейл
+    index_header: Имейл шаблони
+    manage: Управление на имейли
+    no_results: Няма никакви имейли конфигурирани.
+    update_header: Редактиране на имейл
+    code: Код
+    enabled: Включен?
+    subject: Заглавие
+    updated_at: Последна актуализация
+  create: Създаване
+  created_at: Създаден на
+  delete: Изтриване
+  deleted: Изтрито
+  edit: Редактиране
+  move_up: Премести нагоре
+  move_down: Премести надолу
+  permission:
+    create: Добави ново разрешение
+    create_header: New permission
+    code: Код
+    id: ID
+    description: Описание
+    index_header: Разрешения
+    no_results: Няма дефинирани права.
+    update_header: Редактиране разрешения
+    updated_at: Последна актуализация
+  role:
+    create: Добавяне на нова роля
+    create_header: Нова роля
+    code: Код
+    id: ID
+    name: Име
+    description: Описание
+    index_header: Роли
+    no_results: Няма дефинирани роли.
+    update_header: Редактиране на роля
+    updated_at: Последна актуализация
+  currency:
+    create: Създаване на валута
+    create_header: Нова валута
+    code: Код
+    id: ID
+    name: Име
+    enabled: Включено
+    index_header: Валути
+    no_results: Няма никакви валути за показване.
+    exchange_rate: Обменен курс
+    update_header: Редактиране на валута
+    updated_at: Последна актуализация
+  filter: Филтър
+  form:
+    cart:
+      coupon: Ако имате купон с промоция, въведете го тук
+    choose_file: Изберете файла
+    frontend:
+      password:
+        confirmation: Потвърждение
+        current: Текуща парола
+        new: Нова парола
+        title: Смяна на парола
+      profile:
+        title: Редактиране на личните данни
+    login:
+      email: E-mail
+      password: Парола
+    menu:
+      add_menu_node: Добавяне на елемент от меню
+    option_value:
+      add_value: Добавяне на стойност
+    profile:
+      email: E-mail
+      firstName: Имe
+      lastName: Фамилия
+    comment:
+      comment: Коментар
+      notify_customer: Известяване на клиент?
+  gallery:
+    next: Напред
+    previous: Предишен
+    slideshow: Слайдшоу
+  generate: Генериране
+  go_to_dashboard: Отидете на таблото
+  group:
+    create: Създаване на група
+    create_header: Добавяне на нови клиентски групи
+    id: ID
+    index_header: Групи
+    name: Име
+    no_results: Няма групи за показване.
+    roles: Роли
+    update_header: Редактирай група
+  hide_deleted: Скрий изтритите
+  history:
+    header: История
+    action: Действие
+    author: Автор
+    data: Данни
+    logged_at: Влезли в (версия)
+    revert: Върни
+    no_results: Няма регистрирани събития за показване.
+    empty: Празно
+  homepage:
+    splash:
+      headline: Добре дошли в Sylius
+      subheadline: Модерната платформа за електронна търговия за Symfony2
+  inventory_unit:
+    created_at: Създадено
+    inventory_state: Състояние на запаси
+    name: Име
+    no_results: Няма инвентарни единици за показване.
+    shipping_state: Състояние на доставката
+    sku: Код
+    updated_at: Последна актуализация
+  locale:
+    id: ID
+    name: Име
+    code: Код
+    create: Създаване на езикова променлива
+    create_header: Добавяне на нов локал
+    enabled: Включен
+    index_header: Индекс на всички конфигурирани локали
+    no_results: Няма конфигурирани локали.
+    update_header: Редактиране на езикова променлива
+    updated_at: Последна актуализация
+  login: Вход
+  login_header: Администрация
+  logo: Sylius
+  manage: Управлявай
+  menu:
+    create: Създай меню
+    create_header: Създаване на меню
+    end_date: Крайна дата
+    id: ID
+    index_header: Менюта
+    no_results: Няма менюта за показване.
+    publishable: Публикувано
+    start_date: Начална дата
+    title: Заглавие
+    update_header: Редактиране на меню
+  menu_node:
+    create: Създаване на меню възел
+    create_header: Създаване на меню възел
+    id: ID
+    index_header: Подменюта
+    no_results: Има няма подменюта за показване.
+    parent: Родител
+    title: Заглавие
+    update_header: Редактиране на подменюта
+  meta:
+    backend_title: Sylius табло
+    frontend_description: Sylius е модерна платформа за електронна търговия за PHP, базирана на Symfony2.
+    frontend_keywords: sylius, електронна търговия, symfony2, Магазин, количка, онлайн магазин
+    frontend_title: Sylius, модерна електронна търговия за Symfony2
+  na: N/A
+  newest: Най-новите продукти
   "no": false
+  no_results: Няма резултати
+  product_option:
+    create: Създай опция
+    create_header: Нова опция на продукт
+    index_header: Продукт опции
+    manage: Управление на опциите
+    name: име
+    no_results: Няма конфигурирани опции.
+    presentation: презентация
+    update_header: Опция за редактиране
+    updated_at: Последна актуализация
+    values: стойности
+  order:
+    billing_address: Адрес на плащане
+    create: Създаване на поръчка
+    create_header: Нова поръчка
+    created_at: Създаден
+    details: Детайли за поръчка
+    general_info: Обща информация
+    guest: Гост клиент
+    id: ID
+    index_header: Текущи поръчки
+    inventory_tracking: Опис за проследяване
+    items_total: Общо артикули
+    items: Артикули
+    channel: Канал
+    manage: Управление на поръчки
+    no_items: Тази поръчка не съдържа никакви артикули
+    no_results: Няма нови поръчки
+    no_shipments: Няма никакви пратки за тази поръчка
+    no_shipping_charges: Няма прилагани такси за доставка
+    no_taxes: Няма приложени такси
+    number: Номер
+    order_state: Състояние на поръчката
+    payment: Разплащане
+    payment_state: Състояние на плащане
+    payment_states:
+      balance_due: Неизплатените суми
+    promotion_total: Промоция общо
+    recent_header: Последни поръчки
+    shipment_state: Състояние на пратка
+    shipment_states:
+      pending: Чакащи
+    shipments: Пратки
+    release_inventory: Освобождаване запаси
+    inventory_unit:
+      backorder: Backorder
+      fulfill: Изпълни
+      return: Връщане
+    shipping_address: Адрес за доставка
+    shipping_charges: Такси за експедиране
+    shipping_total: Общо за доставка
+    show_header: 'Поръчка #%number%'
+    state: Област
+    tax_total: Общо такси
+    taxes: Такси
+    total: Oбщо
+    update_header: Редактиране на поръчка
+    customer: клиент
+    currency: Валута
+    immutable_warning: Вече експедираните поръчки са неизменни.
+    promotion_coupons: Купони
+    no_promotion: 'Не купони са used.order:'
+    adjustments:
+      manage: Управление на корекции
+      label: Етикет
+      description: Описание
+      amount: Сума
+      locked: Заключен?
+      lock: Заключване
+      unlock: Отключване
+      lock_all: Заключване всички корекции
+      unlock_all: Отключи всички корекции
+    comment:
+      header: Коментар за поръчка
+      comment: Коментар
+      author: Автор
+      created_at: Създаден на
+      notify: Известие
+      state: Област
+      customer:
+        notified: Клиента уведомен
+        not_notified: Клиента не е уведомен
+      no_comment: Няма коментари
+  route:
+    create: Създаване на маршрут
+    create_header: Създаване на маршрут
+    id: ID
+    index_header: Маршрути
+    name: Име
+    no_results: Няма групи за показване.
+    page: Страница
+    title: Заглавие
+    update_header: Редактиране на маршрут
+    view: Изглед
+  redirect_route:
+    create: Създай пренасочващ маршрут
+    create_header: Създаване на пренасочващ маршрут
+    id: ID
+    index_header: Маршрут пренасочване
+    no_results: Няма маршрути за пренасочване.
+    title: Заглавие
+    update_header: Редактиране на маршрут пренасочване
+  shipment:
+    ship: Изпрщам
+    created_at: Създаден на
+    id: ID
+    index_header: Пратки
+    inventory_state: Състояние на запаси
+    manage: Управление на пратките
+    method: Метод
+    modified: Модифициран
+    name: Име
+    no_items: Няма елементи за показване.
+    no_results: Няма никакви пратки за показване.
+    order: Поръчка
+    show_header: Данни за пратката
+    sku: Код
+    state: Област
+    tracking_code: Проследяващ код
+    update: Редактиране
+    update_header: Редактиране на експедиране
+    updated_at: Последна актуализация
+  channel:
+    create: Добави канал
+    created_at: Създаден на
+    code: Код
+    enabled: Включен
+    id: ID
+    index_header: Канали
+    manage: Управление на канали
+    create_header: Добави канал
+    name: Име
+    url: URL
+    no_results: Не са конфигурирани канали.
+    update: Редактиране
+    update_header: Редактиране на канал
+    updated_at: Последна актуализация
+  order_item:
+    product: Елемент
+    quantity: Кол
+    sellable: Продукт
+    total: Oбщо
+    unit_price: Цена на артикула
+  out_of_stock: Изчерпан
+  page:
+    body: Тяло
+    create: Създаване на нова страница
+    create_header: Създаване на нова страница
+    id: ID
+    index_header: Страници
+    no_results: Няма страници за показване.
+    no_route: Вашето съдържание няма да се появи в интерфейса, ако няма дефиниран маршрут
+    publishable: Публикувано
+    start_date: Начална дата
+    end_date: Крайна дата
+    routes: Маршрути
+    title: Заглавие
+    update_header: Редактиране на страница
+  password: Парола
+  payment:
+    order: Поръчка
+    amount: Сума
+    create: Създаване на плащане
+    create_header: Ново плащане
+    created_at: Създаден на
+    id: ID
+    index_header: Плащания
+    manage: Управление на плащания
+    method: Метод
+    no_results: Няма никакви конфигурирани плащания.
+    state:
+      header: Област
+      cancelled: Отказано
+      checkout: Плащане
+      completed: Завършен
+      failed: Неуспешно
+      new: Нов
+      pending: Чакащо
+      processing: Обработване
+      refunded: Върнати пари
+      unknown: Неизвестен
+      void: Void
+    update_header: Редактиране на плащане
+    updated_at: Последна актуализация
+  payment_method:
+    create: Създаване на метод на плащане
+    create_header: Нов начин на плащане
+    enabled: Е разрешено?
+    gateway: портал
+    id: ID
+    index_header: Начин на плащане
+    name: Име
+    no_results: Няма конфигурирани методи за плащане.
+    update_header: Редактиране на метод на плащане
+    updated_at: Последна актуализация
+  product:
+    add_attribute: Добави атрибут
+    available_on: На разположение от
+    available_on_demand: Достъпни при поискване
+    categorization: Категоризация
+    contain_variants: Съдържа варианти
+    create: Създаване на продукт
+    create_header: Нов продукт
+    archetype: Образец
+    description: Описание
+    generate_variants: Генериране на варианти
+    index_by_taxon_header: 'Продукти <small>категории под "%taxon%" таксон</small>'
+    index_header: 'Продукти <small>индекс на всички продукти в магазина</small>'
+    manage: Управление на продукти
+    name: Име
+    no_description: '<i>Няма описание...</i>'
+    no_images: Няма изображения за този продукт
+    no_options: Няма опции за този продукт
+    no_attributes: Този продукт няма дефинирани атрибути
+    no_results: Няма продукти за показване.
+    no_shipping_category: Няма категория за доставка
+    no_short_description: '<i>Няма кратко описание</i>'
+    no_sku: Няма Код
+    no_tax_category: Няма категория такси
+    no_taxons: Няма никакви класификации за този продукт
+    options: Опцйи
+    variants: Варианти
+    price: Цена на дребно
+    attributes: Атрибути
+    restricted_zone: Ограничена зона
+    remove_attribute: Премахнете атрибута
+    shipping_category: Категория доставки
+    show: Виж още
+    show_header: 'Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>'
+    show_in_store: Покажи в магазина
+    sku: Код
+    stock: Текуща наличност
+    tabs:
+      categorization: Категоризация
+      images: Изображения
+      options: Опцйи
+      product: Продукт
+      attributes: Атрибути
+      channels: Канали
+      pricing: Ценообразуване
+    tax_category: Данъчна категория
+    unavailable: Не е наличен
+    update_header: Редактиране на продукт
+    updated_at: Последна актуализация
+    variant_selection_method: Метод на избор на вариант
+    view_details: 'Преглед %product% детайли.'
+    volume_price: Ценообразуване, базирано на обем
+    volume_based:
+      qty_min: Количество мин
+      qty_max: Макс кол
+      price: Цена
+    delete_revert: Възстанови
+  product_not_available_in_zone: Не са налични във вашата страна
+  promotion:
+    actions: Действия
+    add_action: Добавяне на действие
+    add_rule: Добавяне на правило
+    coupon_based: Базирано на купони?
+    create: Създаване на промоция
+    create_header: Нова промоция
+    created_at: Създаден на
+    description: Описание
+    ends_at: Завършва на
+    general_info: Обща информация
+    id: ID
+    index_header: Текущи промоции
+    manage: Управление на промоции
+    name: Име
+    no_results: Няма конфигурирани промоции.
+    rules: Правила
+    show_header: Детайлите на промоцията
+    starts_at: Започва от
+    update_header: Редактиране на промоция
+    updated_at: Последна актуализация
+    usage_limit: Лимит за ползване
+    used: Използван
+    priority: Приоритет
+    exclusive: Изключителната
+  promotion_action:
+    configuration: Конфигурация
+    type: Тип
+  promotion_coupon:
+    code: Код
+    create: Добавяне на купон
+    create_header: Създаване на нов купон
+    generate: Генериране на купони
+    generate_header: Генериране на купони
+    index: Списък купони
+    index_header: Купони
+    no_results: Няма купонки за показване.
+    total_results:
+      Total: '%total%'
+    update_header: Редактиране на купон
+    expires_at: Изтича на
+  promotion_rule:
+    configuration: Конфигурация
+    type: Тип
+  product_attribute:
+    add_choice: Добавяне на избор
+    create: Създаване на продукт атрибут
+    create_header: Нов продукт атрибут
+    index_header: Продуктови атрибути
+    manage: Управление на атрибути
+    name: име
+    no_results: Няма конфигурирани атрибути.
+    presentation: презентация
+    type: тип
+    update_header: Редактиране на атрибут
+    updated_at: Последна актуализация
+  archetype:
+    build: Изграждане на образец
+    build_header: Строителен продукт от образец
+    create: Създаване на образец
+    create_header: Нови образец
+    index_header: Продуктови образци
+    code: код
+    name: име
+    no_results: Няма никакви дефинирани образци.
+    options: Опции
+    attributes: атрибути
+    parent: родител
+    update_header: Редактиране образец
+    updated_at: Последна актуализация
+  province:
+    provinces: Области
+  remember_me: Запомни ме?
+  report:
+    create: Създай отчет
+    create_header: Създаване на нов отчет
+    no_results: Няма данни създадени.
+    show_header: Доклад за подробни данни
+    details: детайли
+    id: id
+    name: Име
+    code: Код
+    description: Описание
+    manage: Управление
+    update_header: Редактиране на отчет
+    renderer: Генератор тип
+    data_fetcher: Изтегляне на данни тип
+    index_header: Отчети
+    no_data: Няма данни за показване.
+    no_report: Няма доклад за показване.
+  save_changes: Запиши промените
+  search: Търси
+  security:
+    login:
+      header: 'Вход за <small>Sylius магазин</small>'
+      info: 'Моля влезте като използвате имейл <b>"sylius@example.com"</b> и <b>"sylius"</b> като парола. <small>Г -н Sylius демо ръководство</small>'
+      no_account: Нямаш акаунт?
+      forgot_password: Забравена парола?
+      button: Вход
+  settings:
+    general_header: Общи настройки
+    security_header: Настройки за защита
+    taxation_header: Настройки на данъчно облагане
+  shipment_category:
+    manage: Управлявайте категории за доставка
+  shipping_address: Адрес за доставка
+  billing_address: Адрес на плащане
+  shipping_category:
+    create: Създаване на категория доставка
+    create_header: Нова категория за доставка
+    id: ID
+    index_header: Категории за доставка
+    manage: Управлявайте категории за доставка
+    name: Име
+    no_results: Няма цонфигурирани категории за доставка.
+    update_header: Редактиране на категоря доставка
+    updated_at: Последна актуализация
+  shipping_method:
+    calculator: Калкулатор
+    category: Категория
+    create: Създаване на метод на доставка
+    create_header: Нов начин за доставка
+    enabled: Е разрешено?
+    id: ID
+    index_header: Начин на доставка
+    manage: Управление на методи за доставка
+    name: Име
+    no_results: Няма конфигурирани методи за доставка.
+    show_header: Детайли за методи за доставка
+    update_header: Редактиране на метод на експедиране
+    updated_at: Последна актуализация
+    zone: Зона
+  shop_by: Пазарувай от
+  show: детайли
+  show_all: Покажи всички
+  show_deleted: Покажи изтритите
+  stockable:
+    index_header: 'Запаси, <small>тук можете да видите текущите нива на запасите</small>'
+    name: име
+    no_results: Няма опис елементи за показване.
+    on_hand: ниво на складови запаси
+    on_hold: в изчакване
+    sku: Код
+    updated_at: Последна актуализация
+  tax_category:
+    create: Създаване на данъчна категория
+    create_header: Нова данъчна категория
+    description: Описание
+    id: ID
+    index_header: Категории такси
+    manage: Управление на категории такси
+    name: Име
+    no_description: Няма описание
+    no_results: Няма никакви данъчни конфигурирани категории.
+    update_header: Редактиране на категория такси
+    updated_at: Последна актуализация
+  tax_rate:
+    amount: Сума
+    calculator: Калкулатор
+    category: Категория
+    create: Създаване на данъчна ставка
+    create_header: Нова данъчна ставка
+    included_in_price: Включени в цената?
+    index_header: Данъчни ставки
+    manage: Управление на данъчните ставки
+    name: Име
+    no_results: Има няма конфигурирани данъчни ставки.
+    show_header: Данъчна ставка детайли
+    update_header: Актуализиране на данъчна ставка
+    updated_at: Последна актуализация
+    zone: Зона
+  taxon:
+    create: Създаване на таксон
+    create_header: Нови таксон
+    image: Изберете изображение
+    name: Име
+    no_image: Няма снимки за този таксон
+    no_results: Няма никакви таксони за показване.
+    product_index_header: 'Продукти, категоризирани като "%name%"'
+    update_header: Редактиране таксон
+  taxonomy:
+    create: Създаване на класификация
+    create_header: Нова класификация
+    image: Изберете изображение
+    index_header: 'Категоризация, <small>тук можете да видите определени класификации</small>'
+    manage: Управление на класификации
+    name: Име
+    no_image: Няма снимки за този таксон
+    no_results: Няма никакви таксономии.
+    show_header: 'Класификация <small><strong>%name%</strong></small>'
+    update_header: Редактиране на класификация
+  total_quantity: Общо количество
+  unknown: Неизвестно
+  customer:
+    billing_address: Адрес на плащане
+    create: създаване на клиент
+    create_header: Нов клиент
+    email: E-Mail
+    filter:
+      all: Покажи всички потребители
+      registered: Покажи регистрирани клиенти
+      unconfirmed: Покажи непотвърдени сметки
+    general_info: 'Клиент "%fullName%" обща информация'
+    first_name: Имe
+    id: ID
+    index_header: 'Клиенти, <small>Списък на всички клиенти в магазина</small>'
+    last_name: Фамилия
+    manage: управление на клиенти
+    no_results: Няма посетители за показване.
+    order:
+      no_results: Няма никакви поръчки за този потребител за показване.
+    orders: Поръчки на клиенти
+    recent_header: Последни клиенти
+    creation_date: Дата на създаване
+    shipping_address: Адрес за доставка
+    show_header: Подробности за клиентите
+    update_header: Редактиране на клиент
+    groups: Групи
+    no_groups: Няма никакви поръчки за този потребител за показване.
+  user:
+    create: създаване на потребител
+    create_header: Нов потребител
+    enabled: Потвърдено?
+    general_info: 'Обща информация за потребителя "%username%"'
+    id: ID
+    index_header: 'Потребители, <small>списък с всички потребители, регистрирани в магазина</small>'
+    last_login: Последно влизане
+    impersonate: Влезте в системата като този потребител
+    manage: управление на потребители
+    no_results: Няма потребители за показване.
+    oauth:
+      provider: OAuth доставчик
+      identifier: Идентификатор
+      access_token: Access token
+      none: Няма свързани OAuth акаунти.
+    recent_header: Последните потребители
+    registration_date: Дата на регистрация
+    register:
+      button: Регистриране
+      header: 'Регистрация <small>създаде акаунт в магазина</small>'
+    show_header: Потребителски детайли
+    update_header: Редактиране на потребител
+    username: Потребител
+  variant:
+    add_image: Добавяне на изображение
+    availability: Наличност
+    available_on_demand: Достъпни при поискване
+    create: Създаване на вариант
+    create_header: Нов продукт вариант
+    delete_image: Изтриване на изображение
+    last_update: Последна актуализация
+    no_results: Няма никакви варианти за показване.
+    options: Опцйи
+    price: Цена
+    sku: Код
+    stock: Текуща наличност
+    update_header: Редактиране вариант
   "yes": true
+  zone:
+    add_member: Добавяне на член
+    create: Създаване на зона
+    create_header: Нова зона
+    index_header: Зони
+    manage: Управление на зони
+    name: Име
+    no_results: Няма конфигурирани зони.
+    show_header: Зона детайли
+    type: Тип
+    update_header: Редактиране на зона
+    scope: Oбсег
+  zone_member:
+    members: Потребители
+  contact_topic:
+    create: Създаване на контакт тема
+    create_header: Нова тема за контакт
+    id: ID
+    title: Заглавие
+    index_header: Контакт теми
+    no_results: Няма контакт теми за показване.
+    update_header: Редактиране на контакт тема
+    updated_at: Последна актуализация
+  contact_request:
+    create: Създаване на контакт искане
+    create_header: Ново контакт запитване
+    id: ID
+    firstName: Имe
+    lastName: Фамилия
+    email: E-mail
+    message: Съобщение
+    topic: Тема
+    index_header: Контакт запитвания
+    no_results: Няма никакви контакт запитвания за показване.
+    update_header: Редактиране на контакт запитвания
+    updated_at: Последна актуализация
+    show_header: Контакт запитване информация
+  gender:
+    male: Мъж
+    female: Жена
+  enable: Активиране
+  disable: Деактивиране

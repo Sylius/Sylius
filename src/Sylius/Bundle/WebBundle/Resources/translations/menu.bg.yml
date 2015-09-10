@@ -1,3 +1,119 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Асортимент
+        blocks: Блокове
+        configuration: Конфигурация
+        countries: Страни
+        customer: Клиент
+        content: Съдържание
+        channels: Канали
+        dashboard: Табло
+        currencies: Валути
+        general_settings: Общи настройки
+        groups: Групи
+        homepage: Вашият магазин
+        locales: Езикови променливи
+        new_order: Добави нова поръчка
+        new_promotion: Добавяне на нова промоция
+        options: Управление на опциите за продукта
+        orders: Текущи поръчки
+        pages: Страници
+        payment_methods: Начин на плащане
+        payments: Плащания
+        products: Продукти
+        promotions: Промоции
+        attributes: Конфигуриране на атрибути
+        archetypes: Продукт архетипи
+        sales: Поръчки
+        shipments: Пратки
+        shipping_categories: Категории за доставка
+        shipping_methods: Начин на доставка
+        stockables: Нива на инвентара
+        tax_categories: Категории такси
+        tax_rates: Данъчни ставки
+        taxation_settings: Настройки на данъчно облагане
+        taxonomies: Категоризация
+        customers: Потребители
+        zones: Зони
+        emails: Имейли
+        roles: Роли
+        permissions: Права
+        report: Отчети
+      sidebar:
+        api_clients: API клиенти
+        assortment: Асортимент
+        blocks: Блокове
+        configuration: Конфигурация
+        content: Съдържание
+        countries: Страни
+        channels: Канали
+        customer: Клиент
+        dashboard: Табло
+        currencies: Валути
+        general_settings: Общи настройки
+        groups: Групи
+        homepage: Обратно към фронт интерфейса
+        locales: Езикови променливи
+        new_order: Добави нова поръчка
+        new_promotion: Добавяне на нова промоция
+        options: Управление на опциите
+        orders: Текущи поръчки
+        pages: Страници
+        routes: Маршрути
+        redirects: Пренасочвания
+        menus: Менюта
+        payment_methods: Начин на плащане
+        payments: Плащания
+        products: Продукти
+        promotions: Промоции
+        report: Отчети
+        attributes: Конфигуриране на атрибути
+        archetypes: Продукт архетипи
+        sales: Поръчки
+        security_settings: Настройки за защита
+        shipments: Пратки
+        shipping_categories: Категории за доставка
+        shipping_methods: Начин на доставка
+        slideshow: Слайдшоу
+        stockables: Нива на инвентара
+        tax_categories: Категории такси
+        tax_rates: Данъчни ставки
+        taxation_settings: Настройки на данъчно облагане
+        taxonomies: Категоризация
+        customers: Потребители
+        zones: Зони
+        emails: Имейли
+        roles: Роли
+        permissions: Права
+        marketing: Маркетинг
+        support: Поддръжка
+        contact_requests: Запитвания
+        contact_topics: Конфигуриране на теми
+  frontend:
+    menu:
+      account:
+        addresses: Моята адресна книга
+        homepage: Начало
+        orders: Моите поръчки / моите фактури
+        password: Моята парола
+        profile: Моята лична информация
+        shop: Обратно към магазина
+      currency: 'Покажи цените в %currency%'
+      main:
+        account: Моят профил
+        administration: Администрация
+        cart: 'Покажи количката (%items%) %total%'
+        login: Вход
+        logout: Изход
+        register: Регистриране
+      sidebar:
+        links: Линкове
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

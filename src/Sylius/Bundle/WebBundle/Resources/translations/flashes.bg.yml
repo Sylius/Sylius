@@ -1,3 +1,12 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  account:
+    address:
+      create: Вашият адрес е добавен успешно.
+      update: Вашия адресе беше актуализиран успешно.
+      delete: Вашия адрес беше успешно изтрит.
+      set_as_billing: Адреса ви за фактуриране е променен.
+      set_as_shipping: Вашия адрес за доставка е променен.
+    password:
+      change_success: Парола е променена
+      invalid: Грешна текуща парола

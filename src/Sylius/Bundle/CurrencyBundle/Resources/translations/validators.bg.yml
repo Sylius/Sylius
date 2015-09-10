@@ -1,3 +1,7 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+sylius:
+    currency:
+        code:
+            not_blank: Моля изберете валутен код.
+            unique: Валутният код трябва да е уникален.
+        exchange_rate:
+            not_blank: Моля въведете валутен курс.

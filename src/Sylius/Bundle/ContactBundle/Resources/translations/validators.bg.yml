@@ -1,3 +1,20 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+sylius:
+    contact_request:
+        first_name:
+            not_blank: Моля въведете име.
+            min_length: Вашето име е твърде кратко.
+            max_length: Вашето име е твърде дълго.
+        last_name:
+            not_blank: Моля въведете фамилия.
+            min_length: Вашата фамилия е твърде кратка.
+            max_length: Вашата фамилия е тяърде кратка.
+        email:
+            not_blank: Моля въведете Email.
+            email: Вашият Email е валиден.
+        message:
+            not_blank: Моля въведете съобщение.
+    contact_topic:
+        title:
+            not_blank: Моля въведете заглавие.
+            min_length: Заглавието е твърде кратко.
+            max_length: Заглавието е твърде дълго.

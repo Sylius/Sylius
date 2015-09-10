@@ -1,3 +1,24 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  locale:
+    code:
+      not_blank: Моля, въведете кода на локал.
+      unique: Тази езикова променлива вече съществува.
+  product_variant:
+    onHand:
+      min: 'Минимума трябва да бъде по-голямо от {{ limit }}.'
+      not_blank: Моля въведете на ръка.
+    price:
+      min: Цена не трябва да бъде отрицателно.
+      not_blank: Моля въведете цената.
+  product_translation:
+    short_description:
+      max: 'Кратко описание трябва да бъде по-дълго от {{ limit }} знаци.'
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Въведете доставка метод зона.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Въведете данъчна ставка зона.
