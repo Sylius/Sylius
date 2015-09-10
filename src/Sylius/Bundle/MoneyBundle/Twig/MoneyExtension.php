@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
-
 /**
  * Sylius money Twig helper.
  *
@@ -21,16 +19,25 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
 class MoneyExtension extends \Twig_Extension
 {
     /**
-     * @var MoneyHelper
+     * The default currency.
+     *
+     * @var string
      */
-    protected $helper;
+    private $currency;
 
     /**
-     * @param MoneyHelper $helper
+     * @var string
      */
-    public function __construct(MoneyHelper $helper)
+    private $locale;
+
+    /**
+     * @param string $locale   The locale used to format money.
+     * @param string $currency The default currency.
+     */
+    public function __construct($locale, $currency = null)
     {
-        $this->helper = $helper;
+        $this->locale   = $locale ?: \Locale::getDefault();
+        $this->currency = $currency;
     }
 
     /**
@@ -46,14 +53,26 @@ class MoneyExtension extends \Twig_Extension
     /**
      * Format the money amount to nice display form.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
+     * @param bool        $decimal
+     * @param string|null $locale
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currency = null, $locale = null)
+    public function formatAmount($amount, $currency = null, $decimal = false, $locale = null)
     {
-        return $this->helper->formatAmount($amount, $currency, false, $locale);
+        $locale    = $locale   ?: $this->getDefaultLocale();
+        $currency  = $currency ?: $this->getDefaultCurrency();
+        $formatter = new \NumberFormatter($locale, $decimal ? \NumberFormatter::DECIMAL : \NumberFormatter::CURRENCY);
+
+        if (false === $result = $formatter->formatCurrency($amount / 100, $currency)) {
+            throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
+        }
+
+        return $result;
     }
 
     /**
@@ -62,5 +81,25 @@ class MoneyExtension extends \Twig_Extension
     public function getName()
     {
         return 'sylius_money';
+    }
+
+    /**
+     * Get the default currency if none is provided as argument.
+     *
+     * @return string The currency code
+     */
+    protected function getDefaultCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Get the default locale if none is provided as argument.
+     *
+     * @return string The locale code
+     */
+    protected function getDefaultLocale()
+    {
+        return $this->locale;
     }
 }

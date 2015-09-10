@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.inventory" class="%sylius.twig.extension.inventory.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.inventory" />
+            <argument type="service" id="sylius.availability_checker" />
             <tag name="twig.extension" />
         </service>
     </services>

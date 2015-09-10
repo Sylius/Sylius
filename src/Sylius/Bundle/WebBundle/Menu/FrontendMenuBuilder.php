@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension;
 use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -57,9 +57,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Currency converter helper.
      *
-     * @var CurrencyHelper
+     * @var CurrencyExtension
      */
-    protected $currencyHelper;
+    protected $currencyExtension;
 
     /**
      * @var ChannelContextInterface
@@ -77,7 +77,8 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param CurrencyProviderInterface $currencyProvider
      * @param RepositoryInterface       $taxonomyRepository
      * @param CartProviderInterface     $cartProvider
-     * @param CurrencyHelper            $currencyHelper
+     * @param CurrencyExtension         $currencyExtension
+     * @param ChannelContextInterface   $channelContext
      */
     public function __construct(
         FactoryInterface          $factory,
@@ -88,7 +89,7 @@ class FrontendMenuBuilder extends MenuBuilder
         CurrencyProviderInterface $currencyProvider,
         RepositoryInterface       $taxonomyRepository,
         CartProviderInterface     $cartProvider,
-        CurrencyHelper            $currencyHelper,
+        CurrencyExtension         $currencyExtension,
         ChannelContextInterface   $channelContext
     ) {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
@@ -96,7 +97,7 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
-        $this->currencyHelper = $currencyHelper;
+        $this->currencyExtension = $currencyExtension;
         $this->channelContext = $channelContext;
     }
 
@@ -125,12 +126,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
                 '%items%' => $cartTotals['items'],
-                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
+                '%total%' => $this->currencyExtension->convertAndFormatAmount($cartTotals['total'])
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
             '%items%' => $cartTotals['items'],
-            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
+            '%total%' => $this->currencyExtension->convertAndFormatAmount($cartTotals['total'])
         )));
 
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

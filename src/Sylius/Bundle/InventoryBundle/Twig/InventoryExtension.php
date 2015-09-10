@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Twig;
 
-use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
@@ -22,20 +22,20 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 class InventoryExtension extends \Twig_Extension
 {
     /**
-     * Inventory management helper methods.
+     * Availability checker.
      *
-     * @var InventoryHelper
+     * @var AvailabilityCheckerInterface
      */
-    private $helper;
+    private $checker;
 
     /**
      * Constructor.
      *
-     * @param InventoryHelper $helper
+     * @param AvailabilityCheckerInterface $checker
      */
-    public function __construct(InventoryHelper $helper)
+    public function __construct(AvailabilityCheckerInterface $checker)
     {
-        $this->helper = $helper;
+        $this->checker = $checker;
     }
 
     /**
@@ -54,25 +54,24 @@ class InventoryExtension extends \Twig_Extension
      *
      * @param StockableInterface $stockable
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        return $this->helper->isStockAvailable($stockable);
+        return $this->checker->isStockAvailable($stockable);
     }
 
     /**
-     * Check whether stock is sufficient for given
-     * stockable and quantity.
+     * Check whether stock is sufficient for given stockable and quantity.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        return $this->helper->isStockSufficient($stockable, $quantity);
+        return $this->checker->isStockSufficient($stockable, $quantity);
     }
 
     /**

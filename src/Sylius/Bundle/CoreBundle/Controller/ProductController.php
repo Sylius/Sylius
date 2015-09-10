@@ -220,14 +220,16 @@ class ProductController extends BaseProductController
         /** @var $products ProductInterface[] */
         $results  = array();
         $products = $this->get('sylius.repository.product')->createFilterPaginator($request->query->get('criteria'));
-        $helper   = $this->get('sylius.templating.helper.currency');
+        $helper   = $this->get('sylius.twig.extension.currency');
         foreach ($products as $product) {
+            $price = $product->getMasterVariant()->getPrice();
+
             $results[] = array(
                 'id'        => $product->getMasterVariant()->getId(),
                 'name'      => $product->getName(),
                 'image'     => $product->getImage()->getPath(),
-                'price'     => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
-                'raw_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
+                'price'     => $helper->convertAndFormatAmount($price),
+                'raw_price' => $helper->convertAndFormatAmount($price, null, true),
                 'desc'      => $product->getShortDescription(),
             );
         }
@@ -260,8 +262,7 @@ class ProductController extends BaseProductController
         $searchTerm = null,
         $searchParam = null,
         $requestMethod = null
-    )
-    {
+    ) {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
 

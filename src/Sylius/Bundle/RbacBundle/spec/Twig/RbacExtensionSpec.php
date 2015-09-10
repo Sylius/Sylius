@@ -12,16 +12,13 @@
 namespace spec\Sylius\Bundle\RbacBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\RbacBundle\Templating\Helper\RbacHelper;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
 class RbacExtensionSpec extends ObjectBehavior
 {
-    function let(RbacHelper $helper)
+    function let(AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->beConstructedWith($helper);
+        $this->beConstructedWith($authorizationChecker);
     }
 
     function it_is_initializable()
@@ -32,5 +29,14 @@ class RbacExtensionSpec extends ObjectBehavior
     function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
+    }
+
+    function it_uses_authorization_checker_to_verify_permissions($authorizationChecker)
+    {
+        $authorizationChecker->isGranted('can_block_users')->willReturn(true);
+        $this->isGranted('can_block_users')->shouldReturn(true);
+
+        $authorizationChecker->isGranted('can_eat_bananas')->willReturn(false);
+        $this->isGranted('can_eat_bananas')->shouldReturn(false);
     }
 }

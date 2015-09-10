@@ -12,16 +12,13 @@
 namespace spec\Sylius\Bundle\PricingBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class PricingExtensionSpec extends ObjectBehavior
 {
-    function let(PricingHelper $helper)
+    function let(DelegatingCalculatorInterface $calculator)
     {
-        $this->beConstructedWith($helper);
+        $this->beConstructedWith($calculator);
     }
 
     function it_is_initializable()

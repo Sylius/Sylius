@@ -11,24 +11,22 @@
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class RestrictedZoneExtension extends \Twig_Extension
 {
     /**
-     * @var RestrictedZoneHelper
+     * @var RestrictedZoneCheckerInterface
      */
-    private $helper;
+    private $restrictedZoneChecker;
 
     /**
-     * Constructor.
-     *
-     * @param RestrictedZoneHelper $helper
+     * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      */
-    public function __construct(RestrictedZoneHelper $helper)
+    public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker)
     {
-        $this->helper = $helper;
+        $this->restrictedZoneChecker = $restrictedZoneChecker;
     }
 
     /**
@@ -44,11 +42,11 @@ class RestrictedZoneExtension extends \Twig_Extension
     /**
      * @param ProductInterface $product
      *
-     * @return Boolean
+     * @return bool
      */
     public function isRestricted(ProductInterface $product)
     {
-        return $this->helper->isRestricted($product);
+        return $this->restrictedZoneChecker->isRestricted($product);
     }
 
     /**

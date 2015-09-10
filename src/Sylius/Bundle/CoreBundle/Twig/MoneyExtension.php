@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Templating\Helper;
+namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper as BaseMoneyHelper;
+use Sylius\Bundle\CurrencyBundle\Twig\MoneyExtension as BaseMoneyExtension;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-class MoneyHelper extends BaseMoneyHelper
+class MoneyExtension extends BaseMoneyExtension
 {
     /**
      * @var LocaleContextInterface
@@ -28,9 +28,9 @@ class MoneyHelper extends BaseMoneyHelper
      */
     public function __construct(LocaleContextInterface $localeContext, CurrencyContextInterface $currencyContext)
     {
-        $this->localeContext = $localeContext;
+        parent::__construct($localeContext->getCurrentLocale(), $currencyContext);
 
-        parent::__construct($this->getDefaultLocale(), $currencyContext);
+        $this->localeContext = $localeContext;
     }
 
     /**

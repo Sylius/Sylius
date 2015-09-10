@@ -24,7 +24,6 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
 {
     protected $configFiles = array(
         'services.xml',
-        'templating.xml',
         'twig.xml',
     );
 

@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.locale" class="%sylius.twig.extension.locale.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.locale" />
+            <argument type="service" id="sylius.context.locale" />
             <tag name="twig.extension" />
         </service>
     </services>

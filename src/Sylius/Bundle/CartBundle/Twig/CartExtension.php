@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
-use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 
 /**
@@ -23,18 +25,30 @@ use Symfony\Component\Form\FormView;
 class CartExtension extends \Twig_Extension
 {
     /**
-     * @var CartHelper
+     * @var CartProviderInterface
      */
-    private $helper;
+    protected $cartProvider;
 
     /**
-     * Constructor.
-     *
-     * @param CartHelper $helper
+     * @var RepositoryInterface
      */
-    public function __construct(CartHelper $helper)
+    protected $cartItemRepository;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
+     * @param CartProviderInterface $cartProvider
+     * @param RepositoryInterface   $cartItemRepository
+     * @param FormFactoryInterface  $formFactory
+     */
+    public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactoryInterface $formFactory)
     {
-        $this->helper = $helper;
+        $this->cartProvider = $cartProvider;
+        $this->cartItemRepository = $cartItemRepository;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -56,17 +70,17 @@ class CartExtension extends \Twig_Extension
      */
     public function getCurrentCart()
     {
-        return $this->helper->getCurrentCart();
+        return $this->cartProvider->getCart();
     }
 
     /**
      * Check if a cart exists.
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasCart()
     {
-        return $this->helper->hasCart();
+        return $this->cartProvider->hasCart();
     }
 
     /**
@@ -78,7 +92,9 @@ class CartExtension extends \Twig_Extension
      */
     public function getItemFormView(array $options = array())
     {
-        return $this->helper->getItemFormView($options);
+        $form = $this->formFactory->create('sylius_cart_item', $this->cartItemRepository->createNew(), $options);
+
+        return $form->createView();
     }
 
     /**
