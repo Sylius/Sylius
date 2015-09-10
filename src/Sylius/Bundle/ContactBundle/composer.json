@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php":                      ">=5.5.9",
 
         "symfony/framework-bundle": "~2.3",
         "sylius/resource-bundle":   "0.16.*",

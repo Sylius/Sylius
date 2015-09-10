@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php":                      ">=5.5.9",
 
         "doctrine/collections":     "~1.0",
         "doctrine/common":          "~2.3",

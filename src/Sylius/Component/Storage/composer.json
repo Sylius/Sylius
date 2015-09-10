@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.5.9"
     },
     "require-dev": {
         "doctrine/cache":          "~1.3",
