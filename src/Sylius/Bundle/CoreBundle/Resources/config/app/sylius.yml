@@ -99,7 +99,11 @@ sylius_archetype:
                 translation:
                     model: Sylius\Component\Product\Model\ArchetypeTranslation
 
-sylius_attribute: ~
+sylius_attribute:
+    classes:
+        product:
+            attribute:
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAttributeRepository
 
 sylius_variation:
     classes:

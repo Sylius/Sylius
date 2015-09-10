@@ -9,6 +9,9 @@ sylius_backend_product_attribute_index:
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:index.html.twig
             sortable: true
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting, $deleted]
             sorting:
                 name: desc
 
