@@ -34,6 +34,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/resource-bundle":          "0.16.*",
         "sylius/money-bundle":             "0.16.*",
+        "sylius/registry":                 "0.16.*",
         "sylius/report":                   "0.16.*"
     },
     "require-dev": {
