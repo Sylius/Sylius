@@ -98,14 +98,14 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setPassword($password);
 
     /**
-     * @param boolean $boolean
+     * @param boolean $enabled
      */
-    public function setEnabled($boolean);
+    public function setEnabled($enabled);
 
     /**
-     * @param boolean $boolean
+     * @param boolean $locked
      */
-    public function setLocked($boolean);
+    public function setLocked($locked);
 
     /**
      * @return string
@@ -132,6 +132,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @return boolean true if the user's password request is non expired, false otherwise
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setCredentialsExpireAt(\DateTime $date = null);
 
     /**
      * @return \DateTime

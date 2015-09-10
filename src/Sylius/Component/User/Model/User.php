@@ -261,7 +261,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $date
+     * {@inheritdoc}
      */
     public function setCredentialsExpireAt(\DateTime $date = null)
     {
@@ -282,8 +282,6 @@ class User implements UserInterface
     public function setLastLogin(\DateTime $time = null)
     {
         $this->lastLogin = $time;
-
-        return $this;
     }
 
     /**
@@ -300,8 +298,6 @@ class User implements UserInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
-
-        return $this;
     }
 
     /**
@@ -323,9 +319,9 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($boolean)
+    public function setEnabled($enabled)
     {
-        $this->enabled = (bool) $boolean;
+        $this->enabled = (bool) $enabled;
     }
 
     /**
@@ -339,9 +335,9 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocked($boolean)
+    public function setLocked($locked)
     {
-        $this->locked = $boolean;
+        $this->locked = $locked;
     }
 
     /**
@@ -369,8 +365,6 @@ class User implements UserInterface
         if (!in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
-
-        return $this;
     }
 
     /**
@@ -382,8 +376,6 @@ class User implements UserInterface
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles);
         }
-
-        return $this;
     }
 
     /**
