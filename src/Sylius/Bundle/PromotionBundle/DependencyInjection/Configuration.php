@@ -130,7 +130,6 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('classes')
-                    ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('promotion')
