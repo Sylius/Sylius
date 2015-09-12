@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
+use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
@@ -53,18 +54,29 @@ class BuildPriceableFormSubscriberSpec extends ObjectBehavior
         Form $form,
         Form $field
     ) {
-        $event->getData()->shouldBeCalled()->willReturn($priceable);
-        $event->getForm()->shouldBeCalled()->willReturn($form);
+        $event->getData()->willReturn($priceable);
+        $event->getForm()->willReturn($form);
 
-        $calculator->getType()->shouldBeCalled()->willReturn('foo');
-        $calculatorRegistry->get('bar')->shouldBeCalled()->willReturn($calculator);
+        $calculator->getType()->willReturn('foo');
+        $calculatorRegistry->get('bar')->willReturn($calculator);
 
-        $priceable->getPricingCalculator()->shouldBeCalled()->willReturn('bar');
-        $priceable->getPricingConfiguration()->shouldBeCalled()->willReturn(array());
+        $priceable->getPricingCalculator()->willReturn('bar');
+        $priceable->getPricingConfiguration()->willReturn(array());
 
-        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->shouldBeCalled()->willReturn($field);
+        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);
+    }
+
+    function it_should_set_default_pricing_calculator_to_standard_if_null_on_post_submit(
+        FormEvent $event,
+        PriceableInterface $priceable
+    ) {
+        $event->getData()->willReturn($priceable);
+        $priceable->getPricingCalculator()->willReturn(null);
+        $priceable->setPricingCalculator(Calculators::STANDARD)->shouldBeCalled();
+
+        $this->postSubmit($event);
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
+use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -38,20 +39,31 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
      */
     private $factory;
 
+    /**
+     * @param ServiceRegistryInterface $calculatorRegistry
+     * @param FormFactoryInterface $factory
+     */
     public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
     {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preSubmit',
+            FormEvents::POST_SUBMIT  => 'postSubmit'
         );
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function preSetData(FormEvent $event)
     {
         $priceable = $event->getData();
@@ -61,13 +73,16 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
         }
 
         if (!$priceable instanceof PriceableInterface) {
-            throw new UnexpectedTypeException($priceable, 'Sylius\Component\Pricing\Model\PriceableInterface');
+            throw new UnexpectedTypeException($priceable, PriceableInterface::class);
         }
 
         $this->addConfigurationFields($event->getForm(), $priceable->getPricingCalculator(), $priceable->getPricingConfiguration());
     }
 
-    public function preBind(FormEvent $event)
+    /**
+     * @param FormEvent $event
+     */
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
 
@@ -76,6 +91,22 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
         }
 
         $this->addConfigurationFields($event->getForm(), $data['pricingCalculator']);
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function postSubmit(FormEvent $event)
+    {
+        $priceable = $event->getData();
+
+        if (!$priceable instanceof PriceableInterface) {
+            throw new UnexpectedTypeException($priceable, PriceableInterface::class);
+        }
+
+        if (null === $priceable->getPricingCalculator()) {
+            $priceable->setPricingCalculator(Calculators::STANDARD);
+        }
     }
 
     /**
