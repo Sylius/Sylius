@@ -816,6 +816,6 @@ sylius_review:
                 model: Sylius\Component\Product\Model\ProductReview
                 form:
                     default: Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType
-                    admin: Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType
+                    admin: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType
             reviewer:
                 model: Sylius\Component\Core\Model\Customer
