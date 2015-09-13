@@ -25,6 +25,8 @@
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
         <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType</parameter>
+
+        <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType</parameter>
     </parameters>
 
     <services>
@@ -44,13 +46,9 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product_translation" />
         </service>
-        <service id="sylius.form.type.product_review" class="Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType">
+        <service id="sylius.form.type.product_review" class="%sylius.form.type.product_review.class%">
             <argument>%sylius.model.product_review.class%</argument>
             <tag name="form.type" alias="sylius_product_review" />
-        </service>
-        <service id="sylius.form.type.product_review_admin" class="Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType">
-            <argument>%sylius.model.product_review.class%</argument>
-            <tag name="form.type" alias="sylius_product_review_admin" />
         </service>
 
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -24,14 +24,15 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
     {
         $this->beConstructedWith('dataClass', array('validation_group'), 'product');
     }
+
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType');
     }
 
-    function it_extends_review_type()
+    function it_extends_product_review_admin_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType');
+        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -75,6 +76,19 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
         $builder->get('author')->willReturn($builder)->shouldBeCalled();
         $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer'))->willReturn($builder)->shouldBeCalled();
 
+        $builder->resetModelTransformers()->shouldBeCalled();
+        $builder->remove('author')->willReturn($builder)->shouldBeCalled();
+
+        $builder
+            ->add('author', 'entity', array(
+                'class'    => 'Sylius\Component\Core\Model\Customer',
+                'label'    => 'sylius.form.review.author',
+                'property' => 'email',
+            ))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
         $builder
             ->add('reviewSubject', 'entity', array(
                 'class'    => 'Sylius\Component\Product\Model\Product',
@@ -86,10 +100,5 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
         ;
 
         $this->buildForm($builder, array('rating_steps' => 5));
-    }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('sylius_product_review_admin');
     }
 }
