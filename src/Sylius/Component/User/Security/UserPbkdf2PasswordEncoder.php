@@ -93,11 +93,7 @@ class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
             throw new \LogicException(sprintf('The algorithm "%s" is not supported.', $this->algorithm));
         }
 
-        if (function_exists('hash_pbkdf2')) {
-            $digest = hash_pbkdf2($this->algorithm, $plainPassword, $salt, $this->iterations, $this->length, true);
-        } else {
-            $digest = $this->hashPbkdf2($this->algorithm, $plainPassword, $salt, $this->iterations, $this->length);
-        }
+        $digest = hash_pbkdf2($this->algorithm, $plainPassword, $salt, $this->iterations, $this->length, true);
 
         return $this->encodeHashAsBase64 ? base64_encode($digest) : bin2hex($digest);
     }
@@ -110,36 +106,5 @@ class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
     protected function isPasswordTooLong($password)
     {
         return strlen($password) > self::MAX_PASSWORD_LENGTH;
-    }
-
-    /**
-     * @todo remove this method after PHP 5.5 bump
-     *
-     * @param string $algorithm
-     * @param string $password
-     * @param string $salt
-     * @param int    $iterations
-     * @param int    $length
-     *
-     * @return string
-     */
-    private function hashPbkdf2($algorithm, $password, $salt, $iterations, $length = 0)
-    {
-        // Number of blocks needed to create the derived key
-        $blocks = ceil($length / strlen(hash($algorithm, null, true)));
-        $digest = '';
-
-        for ($i = 1; $i <= $blocks; $i++) {
-            $ib = $block = hash_hmac($algorithm, $salt.pack('N', $i), $password, true);
-
-            // Iterations
-            for ($j = 1; $j < $iterations; $j++) {
-                $ib ^= ($block = hash_hmac($algorithm, $block, $password, true));
-            }
-
-            $digest .= $ib;
-        }
-
-        return substr($digest, 0, $this->length);
     }
 }
