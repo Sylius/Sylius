@@ -75,7 +75,7 @@ class ProductReviewController extends ResourceController
         $form = $this->getForm($resource);
 
         if (!$this->createResourceIfValid($request, $form)) {
-            return new JsonResponse($this->getDeepErrors($form));
+            return new JsonResponse($this->getFormErrorsAsArray($form));
         }
 
         return new JsonResponse('success');
@@ -107,7 +107,7 @@ class ProductReviewController extends ResourceController
     }
 
     /**
-     * @param Request $request
+     * @param Request       $request
      * @param FormInterface $form
      *
      * @return bool
@@ -128,32 +128,13 @@ class ProductReviewController extends ResourceController
      *
      * @return array
      */
-    private function getDeepErrors(FormInterface $form)
+    private function getFormErrorsAsArray(FormInterface $form)
     {
         $errors = array();
-
-        foreach ($form as $child) {
-            if ($child->isSubmitted() && $child->isValid()) {
-                continue;
-            }
-            $errors[$child->getName()] = $this->getChildErrorsAsArray($child->getErrors());
+        foreach ($form->getErrors(true) as $error) {
+            $errors[$error->getCause()->getPropertyPath()] = $error->getMessage();
         }
 
         return $errors;
-    }
-
-    /**
-     * @param array $errors
-     *
-     * @return array
-     */
-    private function getChildErrorsAsArray(array $errors)
-    {
-        $childErrors = array();
-        foreach ($errors as $error) {
-            $childErrors[] = $error->getMessage();
-        }
-
-        return $childErrors;
     }
 }

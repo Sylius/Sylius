@@ -368,11 +368,9 @@ class BackendMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Add reviews menu
-     *
      * @param ItemInterface $menu
      * @param array         $childOptions
-     * @param $section
+     * @param string        $section
      */
     public function addReviewsMenu(ItemInterface $menu, array $childOptions, $section)
     {
@@ -382,9 +380,9 @@ class BackendMenuBuilder extends MenuBuilder
         ;
 
         $child->addChild('reviews', array(
-            'route' => 'sylius_backend_product_review_index',
+            'route'           => 'sylius_backend_product_review_index',
             'labelAttributes' => array('icon' => 'icon-user'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.reviews', $section)));
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_review', $section)));
     }
 
     /**

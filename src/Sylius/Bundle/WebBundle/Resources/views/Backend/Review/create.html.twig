@@ -5,14 +5,14 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.review.create'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_product_review_index') }}">Reviews</a></li>
-    <li>New</li>
+    <li><a href="{{ path('sylius_backend_product_review_index') }}">{{ 'sylius.review.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 	<div class="page-header">
-	    <h1><i class="icon-plus-sign"></i> New Review</h1>
+	    <h1><i class="icon-plus-sign"></i>{{ 'sylius.review.create'|trans }}</h1>
 	</div>
 
 	{{ form_errors(form) }}

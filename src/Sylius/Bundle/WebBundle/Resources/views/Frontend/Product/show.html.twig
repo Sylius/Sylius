@@ -12,7 +12,9 @@
     <div class="col-md-9">
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+        {% if product.averageRating %}
         <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
+        {% endif %}
     </div>
 </div>
 {% if product.images|length > 0 %}
@@ -135,43 +137,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        $(document).ready(function(){
-            $("#reviewForm").submit(function(e){
-                e.preventDefault();
-                var form = $(this);
-
-                $.ajax({
-                    type: "POST",
-                    url: location.href+"/product_review",
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    success: function(data) {
-                        if (data == 'success') {
-                            location.reload();
-                        } else {
-                            renderErrorsOnProperFields(data, form);
-                        }
-                    }
-                });
-            });
-        });
-
-        function renderErrorsOnProperFields(data, form) {
-            clearErrors(form);
-
-            $.each(data, function(key, value){
-                var element = form.find('#sylius_review_'+key);
-
-                element.siblings('.form-error').remove();
-                element.parent().append('<span class="help-block form-error">'+value+'</span>');
-                element.parents('.form-group').addClass('has-error');
-            });
-        }
-
-        function clearErrors(form) {
-            form.find('.form-error').remove();
-            form.find('.has-error').removeClass('has-error');
-        }
-    </script>
+    {% javascripts output='assets/compiled/backend_review.js'
+    'bundles/syliusreview/js/sylius-review.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

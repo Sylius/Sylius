@@ -46,20 +46,20 @@ class ReviewType extends AbstractResourceType
     {
         $builder
             ->add('rating', 'choice', array(
-                'choices' => $this->createRatingList($options['rating_steps']),
-                'label' => 'sylius.form.review.rating',
+                'choices'  => $this->createRatingList($options['rating_steps']),
+                'label'    => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ))
             ->add('author', 'text', array(
-                'label' => 'sylius.form.review.author',
+                'label'    => 'sylius.form.review.author',
                 'required' => false,
             ))
             ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title',
+                'label'    => 'sylius.form.review.title',
             ))
             ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment',
+                'label'    => 'sylius.form.review.comment',
             ))
         ;
 
@@ -86,7 +86,7 @@ class ReviewType extends AbstractResourceType
     }
 
     /**
-     * @param integer $maxRate
+     * @param int $maxRate
      *
      * @return array
      */

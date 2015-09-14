@@ -80,8 +80,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'onDelete'             => 'CASCADE',
-                )
-            )
+                ),
+            ),
         ))->shouldBeCalled();
 
         $metadata->mapManyToOne(array(
@@ -90,7 +90,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'joinColumn'   => array(
                 'name'                 => 'customer_id',
                 'referencedColumnName' => 'id',
-            )
+            ),
+            'cascade'      => array('persist'),
         ))->shouldBeCalled();
 
         $this->loadClassMetadata($eventArguments);

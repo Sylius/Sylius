@@ -77,7 +77,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'joinColumn'   => array(
                     'name'                 => 'customer_id',
                     'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
-                )
+                ),
+                'cascade'      => array('persist'),
             );
 
             $metadata->mapManyToOne($subjectMapping);

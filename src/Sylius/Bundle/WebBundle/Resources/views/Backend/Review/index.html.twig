@@ -7,7 +7,7 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.review.index'|trans }}</li>
-    <li>Reviews</li>
+    <li>{{ 'sylius.review.index'|trans }}</li>
 </ol>
 {% endblock %}
 
@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.review.create') }}
         {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.review.manage') }}
     </div>
-    <h1><i class="icon-th"></i> Reviews</h1>
+    <h1><i class="icon-th"></i> {{ 'sylius.review.index'|trans }}</h1>
 </div>
 
 {{ pagination(product_reviews) }}

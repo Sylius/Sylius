@@ -620,8 +620,18 @@ sylius:
         update_header: Editing redirect route
     review:
         create: New review
+        index: reviews
         manage: Manage reviews
         no_reviews: There are no reviews.
+        id: ID
+        subject: Subject
+        title: Title
+        status: Status
+        rating: Rating
+        author: Author
+        created_at: Created at
+        details: Review details
+        editing: Editing review
     shipment:
         ship: Ship
         created_at: Created at
