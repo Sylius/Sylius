@@ -31,16 +31,16 @@ interface CartInterface extends OrderInterface
     /**
      * Gets expiration time.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getExpiresAt();
 
     /**
      * Sets expiration time.
      *
-     * @param \DateTime|null $expiresAt
+     * @param \DateTimeInterface|null $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
 
     /**
      * Bumps the expiration time.

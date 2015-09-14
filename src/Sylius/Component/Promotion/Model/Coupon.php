@@ -56,28 +56,28 @@ class Coupon implements CouponInterface
     /**
      * Expiration date
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Modification time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -184,7 +184,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
 
@@ -202,7 +202,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -220,7 +220,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -246,7 +246,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

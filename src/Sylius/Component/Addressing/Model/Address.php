@@ -91,14 +91,14 @@ class Address implements AddressInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -312,7 +312,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -330,7 +330,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

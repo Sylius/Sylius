@@ -34,12 +34,12 @@ class Locale implements LocaleInterface
     protected $enabled = true;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -128,7 +128,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -144,7 +144,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }

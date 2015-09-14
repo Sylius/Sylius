@@ -34,7 +34,7 @@ class SearchLog implements SearchLogInterface
     private $remoteAddress;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $createdAt;
 

@@ -77,14 +77,14 @@ class CreditCard implements CreditCardInterface
     /**
      * Creation date.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -254,7 +254,7 @@ class CreditCard implements CreditCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -272,7 +272,7 @@ class CreditCard implements CreditCardInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

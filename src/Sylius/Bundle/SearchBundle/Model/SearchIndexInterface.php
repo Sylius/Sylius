@@ -83,7 +83,7 @@ interface SearchIndexInterface
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param \DateTimeInterface $createdAt
      *
      * @return SearchIndexInterface
      */
@@ -92,7 +92,7 @@ interface SearchIndexInterface
     /**
      * Get createdAt
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCreatedAt();
 }

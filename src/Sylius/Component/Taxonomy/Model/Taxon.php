@@ -75,7 +75,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -352,7 +352,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

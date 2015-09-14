@@ -72,7 +72,7 @@ class User implements UserInterface
     protected $plainPassword;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $lastLogin;
 
@@ -84,7 +84,7 @@ class User implements UserInterface
     protected $confirmationToken;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $passwordRequestedAt;
 
@@ -94,12 +94,12 @@ class User implements UserInterface
     protected $locked = false;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $credentialsExpireAt;
 
@@ -116,17 +116,17 @@ class User implements UserInterface
     protected $oauthAccounts;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -245,9 +245,9 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date = null)
+    public function setExpiresAt(\DateTimeInterface $date = null)
     {
         $this->expiresAt = $date;
     }
@@ -261,9 +261,9 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setCredentialsExpireAt(\DateTime $date = null)
+    public function setCredentialsExpireAt(\DateTimeInterface $date = null)
     {
         $this->credentialsExpireAt = $date;
     }
@@ -279,7 +279,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastLogin(\DateTime $time = null)
+    public function setLastLogin(\DateTimeInterface $time = null)
     {
         $this->lastLogin = $time;
 
@@ -449,7 +449,7 @@ class User implements UserInterface
     /**
      * Gets the timestamp that the user requested a password reset.
      *
-     * @return null|\DateTime
+     * @return null|\DateTimeInterface
      */
     public function getPasswordRequestedAt()
     {
@@ -459,7 +459,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setPasswordRequestedAt(\DateTime $date = null)
+    public function setPasswordRequestedAt(\DateTimeInterface $date = null)
     {
         $this->passwordRequestedAt = $date;
     }
@@ -522,7 +522,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -538,7 +538,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -554,7 +554,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
     }

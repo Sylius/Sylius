@@ -49,14 +49,14 @@ class ShipmentItem implements ShipmentItemInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -149,7 +149,7 @@ class ShipmentItem implements ShipmentItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -167,7 +167,7 @@ class ShipmentItem implements ShipmentItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

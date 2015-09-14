@@ -60,14 +60,14 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -248,7 +248,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -266,7 +266,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

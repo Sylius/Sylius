@@ -44,7 +44,7 @@ class SearchIndex implements SearchIndexInterface
     private $tags;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $createdAt;
 

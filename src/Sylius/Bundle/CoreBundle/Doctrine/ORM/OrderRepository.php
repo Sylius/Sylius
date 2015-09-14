@@ -284,7 +284,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
+    public function findBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
@@ -294,7 +294,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
+    public function countBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
@@ -305,7 +305,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
+    public function revenueBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
@@ -371,7 +371,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->fetchAll();
     }
 
-    protected function getQueryBuilderBetweenDatesGroupByDate(\DateTime $from, \DateTime $to, $groupBy = 'Date(date)')
+    protected function getQueryBuilderBetweenDatesGroupByDate(\DateTimeInterface $from, \DateTimeInterface $to, $groupBy = 'Date(date)')
     {
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
 
@@ -386,7 +386,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
+    public function findExpired(\DateTimeInterface $expiresAt, $state = OrderInterface::STATE_PENDING)
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -400,7 +400,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         return $queryBuilder->getQuery()->getResult();
     }
 
-    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
+    protected function getCollectionQueryBuilderBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
         if (null !== $state) {

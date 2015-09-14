@@ -59,21 +59,21 @@ class Variant implements VariantInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -225,7 +225,7 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -243,7 +243,7 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -269,7 +269,7 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

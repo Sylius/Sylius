@@ -43,7 +43,7 @@ class ExpiredOrdersPurger implements PurgerInterface
     /**
      * Expires at.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
@@ -62,9 +62,9 @@ class ExpiredOrdersPurger implements PurgerInterface
     /**
      * Set expires at.
      *
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt)
+    public function setExpiresAt(\DateTimeInterface $expiresAt)
     {
         $this->expiresAt = $expiresAt;
     }

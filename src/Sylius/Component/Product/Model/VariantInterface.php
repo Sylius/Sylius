@@ -42,14 +42,14 @@ interface VariantInterface extends BaseVariantInterface
     /**
      * Return available on.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getAvailableOn();
 
     /**
      * Set available on.
      *
-     * @param null|\DateTime $availableOn
+     * @param null|\DateTimeInterface $availableOn
      */
-    public function setAvailableOn(\DateTime $availableOn = null);
+    public function setAvailableOn(\DateTimeInterface $availableOn = null);
 }

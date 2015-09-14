@@ -21,9 +21,9 @@ interface ReleaserInterface
     /**
      * Release all expired orders.
      *
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      *
      * @return bool
      */
-    public function release(\DateTime $expiresAt);
+    public function release(\DateTimeInterface $expiresAt);
 }

@@ -109,8 +109,8 @@ class UserRepositorySpec extends ObjectBehavior
     function it_counts_user_user_repository(
         $em,
         QueryBuilder $builder,
-        \DateTime $from,
-        \DateTime $to,
+        \DateTimeInterface $from,
+        \DateTimeInterface $to,
         AbstractQuery $query,
         Expr $expr
     ) {

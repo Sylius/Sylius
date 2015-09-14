@@ -52,7 +52,7 @@ class ExpiredOrdersReleaser implements ReleaserInterface
     /**
      * {@inheritdoc}
      */
-    public function release(\DateTime $expiresAt)
+    public function release(\DateTimeInterface $expiresAt)
     {
         $orders = $this->repository->findExpired($expiresAt);
 

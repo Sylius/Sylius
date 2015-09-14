@@ -93,13 +93,13 @@ class PromotionSpec extends ObjectBehavior
         $this->getUsed()->shouldReturn(1);
     }
 
-    function its_starts_at_should_be_mutable(\DateTime $date)
+    function its_starts_at_should_be_mutable(\DateTimeInterface $date)
     {
         $this->setStartsAt($date);
         $this->getStartsAt()->shouldReturn($date);
     }
 
-    function its_ends_at_should_be_mutable(\DateTime $date)
+    function its_ends_at_should_be_mutable(\DateTimeInterface $date)
     {
         $this->setEndsAt($date);
         $this->getEndsAt()->shouldReturn($date);

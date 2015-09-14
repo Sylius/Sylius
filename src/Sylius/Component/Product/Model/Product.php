@@ -42,7 +42,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * Available on.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $availableOn;
 
@@ -70,21 +70,21 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -236,7 +236,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setAvailableOn(\DateTime $availableOn = null)
+    public function setAvailableOn(\DateTimeInterface $availableOn = null)
     {
         $this->availableOn = $availableOn;
 
@@ -499,7 +499,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -517,7 +517,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -543,7 +543,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 
