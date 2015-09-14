@@ -1,3 +1,13 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  cart:
+    restricted_zone_removal: 'Продуктът %product% отстранен от количка, тъй като не е достъпен във вашата страна.'
+  checkout:
+    restricted_zone: Този продукт не е наличен във вашата страна.
+    success: Благодарим за поръчката!
+    canceled: Вашето плащане е отменено.
+    processing: В момента плащането се обработва.
+    new: Вашето плащане е ново.
+    failed: Вашето плащане е отказано.
+    unknown: Неизвестна грешка на плащане.
+    out_of_stock: 'Има само %quantity% %name% в наличност.'

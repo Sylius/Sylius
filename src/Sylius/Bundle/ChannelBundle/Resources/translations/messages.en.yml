@@ -1,9 +1,9 @@
 sylius:
     form:
         channel:
-            code: Code
-            name: Name
-            description: Description
+            code: Код
+            name: Име
+            description: Описание
             url: URL
-            enabled: Enabled
-            color: Color
+            enabled: Включен
+            color: Цвят

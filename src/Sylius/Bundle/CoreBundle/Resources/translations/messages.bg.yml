@@ -1,3 +1,121 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Моля, изберете метод на доставка.
+  form:
+    action:
+      add_product_configuration:
+        price: Единична цена
+        quantity: Количество
+        variant: Вариант
+      customer_group: Клиентска група
+    block:
+      body: Тяло
+      id: ID
+      title: Заглавие
+    cart:
+      coupon: Купон
+    checkout:
+      addressing:
+        different_billing_address: Използвайте различен адрес за фактуриране?
+      payment_method: Метод на плащане
+      shipping_method: Начин на доставка
+    promotion:
+      channels: Канал
+    coupon:
+      per_customer_usage_limit: Лимит за потребление на потребител
+    group:
+      name: Име
+      roles: Роли
+    channel:
+      taxonomies: Класификации
+      locales: Езикови променливи
+      currencies: Валути
+      shipping_methods: Начин на доставка
+      payment_methods: Методи на плащане
+    image:
+      file: Изображение
+    locale:
+      code: Код
+      enabled: Включен
+    order_filter:
+      created_at_from: Създадена след
+      created_at_to: Създаден преди
+      number: Номер
+      total_from: От
+      total_to: До
+      payment_state: Състояние на плащане
+      channel: Всички канали
+    page:
+      body: Тяло
+      id: ID
+      title: Заглавие
+    product:
+      restricted_zone: Ограничена зона
+      shipping_category: Категория доставки
+      short_description: Кратко описание
+      tax_category: Данъчна категория
+      variant_selection_method: Метод на избор на вариант
+    product_filter:
+      name: Име
+      sku: SKU
+    settings:
+      general:
+        currency: Валута по подразбиране
+        locale: Език
+        meta_description: Описание
+        meta_keywords: Мета ключови думи
+        title: Заглавие на страницата
+        tracking_code:
+          Tracking code (for example: Код на Google Анализ
+      taxation:
+        default_tax_zone: Данъчната зона по подразбиране
+      security:
+        enabled: Активиране?
+    shipment_filter:
+      created_at_from: От
+      created_at_to: До
+      number: Номер на поръчка
+      shipping_address: Достави до име
+      channel: Всички канали
+    payment_filter:
+      created_at_from: От
+      created_at_to: До
+      number: Номер на поръчка
+      billing_address: Име за фактуриране
+      channel: Всички канали
+    shipping_method:
+      zone: Зона
+    taxon:
+      file: Избери изображение
+    taxonomy:
+      file: Избери изображение
+    user:
+      billing_address: Адрес на плащане
+      different_billing_address: Използвайте различен адрес за фактуриране?
+      enabled: Включен
+      first_name: Имe
+      groups: Групи
+      roles: Роли
+      last_name: Фамилия
+      password: Парола
+      shipping_address: Адрес за доставка
+    user_filter:
+      query: Търси
+    variant:
+      available_on_demand: Достъпни при поискване
+      depth: Дълбочина
+      height: Височина
+      images: Изображения
+      on_hand: Текуща наличност
+      price: Цена
+      sku: SKU
+      weight: Височина
+      width: Широчина
+    attribute:
+      product_attribute_value:
+        attribute: Атрибут
+        value: Стойност
+    guest:
+      email: E-mail

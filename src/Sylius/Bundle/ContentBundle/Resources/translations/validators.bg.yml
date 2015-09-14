@@ -1,0 +1,82 @@
+---
+sylius:
+  imagine_block:
+    name:
+      not_blank: Моля въведете име на изобразителен блок.
+    label:
+      not_blank: Моля въведете изобразителен блок етикет.
+    filter:
+      not_blank: Моля въведете изобразителен блок филтър.
+    image:
+      not_blank: Моля изберете изобразителен блок.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  menu:
+    name:
+      not_blank: Моля, въведете име на меню.
+    label:
+      not_blank: Моля въведете менюто етикет.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  menu_node:
+    name:
+      not_blank: Моля въведете меню възел име.
+    label:
+      not_blank: Моля въведете меню възел етикет.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  route:
+    name:
+      not_blank: Въведете име на маршрут.
+    content:
+      not_blank: Моля въведете маршрут съдържание.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  slideshow_block:
+    name:
+      not_blank: Въведете име на слайдшоу.
+    title:
+      not_blank: Моля въведете заглавие на слайдшоу.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  simple_block:
+    name:
+      not_blank: Моля въведете име просто блок.
+    title:
+      not_blank: Моля въведете заглавие на прост блок.
+    body:
+      not_blank: Моля въведете тяло на прост блок.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  string_block:
+    name:
+      not_blank: Моля въведете име просто блок.
+    body:
+      not_blank: Моля въведете тяло на прост блок.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.
+  static_content:
+    name:
+      not_blank: Въведете име на статично съдържание.
+    title:
+      not_blank: Моля въведете заглавие на статично съдържание.
+    body:
+      not_blank: Моля въведете статично съдържание тяло.
+    start_date:
+      invalid_date: Публикуваната началната дата е невалидна.
+    end_date:
+      invalid_date: Публикуваната крайната дата е невалидна.

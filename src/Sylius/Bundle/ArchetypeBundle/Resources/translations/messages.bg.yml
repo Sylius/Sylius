@@ -1,0 +1,8 @@
+sylius:
+  form:
+    archetype:
+      code: Код
+      name: Име
+      parent: Родител
+      attributes: Атрибути
+      options: Опции
