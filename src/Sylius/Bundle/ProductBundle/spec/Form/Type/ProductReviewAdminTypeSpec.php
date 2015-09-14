@@ -77,9 +77,9 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 
         $builder
             ->add('reviewSubject', 'entity', array(
-                'class'    => 'Sylius\Component\Product\Model\Product',
+                'class'    => 'Sylius\Component\Core\Model\Product',
                 'label'    => 'sylius.form.review.product',
-                'property' => 'id',
+                'property' => 'name',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()

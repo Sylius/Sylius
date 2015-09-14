@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\Form\Transformer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Review\Model\ReviewAuthorInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
@@ -30,11 +31,11 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\DataTransformerInterface');
     }
 
-    function it_transforms_form_data(CustomerInterface $customer)
+    function it_transforms_form_data(ReviewAuthorInterface $author)
     {
-        $customer->getEmail()->willReturn('john.doe@example.com');
+        $author->getEmail()->willReturn('john.doe@example.com');
 
-        $this->transform($customer)->shouldReturn('john.doe@example.com');
+        $this->transform($author)->shouldReturn('john.doe@example.com');
     }
 
     function it_returns_null_if_given_value_is_null()
@@ -44,14 +45,14 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
 
     function it_throws_exception_if_given_value_is_not_customer_interface_object()
     {
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Core\Model\CustomerInterface'))->during('transform', array('badObject'));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewAuthorInterface'))->during('transform', array('badObject'));
     }
 
-    function it_reverse_transforms_form_data(CustomerInterface $customer)
+    function it_reverse_transforms_form_data(ReviewAuthorInterface $author)
     {
-        $customer->getEmail()->willReturn('john.doe@example.com');
+        $author->getEmail()->willReturn('john.doe@example.com');
 
-        $this->reverseTransform('john.doe@example.com')->shouldBeSameAs($customer);
+        $this->reverseTransform('john.doe@example.com')->shouldBeSameAs($author);
     }
 
     function it_returns_null_if_given_value_is_incorrect(\DateTime $wrongObject)
@@ -64,7 +65,7 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
     {
         return array(
             'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof CustomerInterface || !$key instanceof CustomerInterface) {
+                if (!$subject instanceof ReviewAuthorInterface || !$key instanceof ReviewAuthorInterface) {
                     return false;
                 }
 

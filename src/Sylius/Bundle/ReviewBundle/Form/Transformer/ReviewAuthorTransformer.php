@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ReviewBundle\Form\Transformer;
 
 use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Review\Model\ReviewAuthorInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -30,8 +30,8 @@ class ReviewAuthorTransformer implements DataTransformerInterface
             return;
         }
 
-        if (!$value instanceof CustomerInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\Core\Model\CustomerInterface');
+        if (!$value instanceof ReviewAuthorInterface) {
+            throw new UnexpectedTypeException($value, 'Sylius\Component\Review\Model\ReviewAuthorInterface');
         }
 
         return $value->getEmail();

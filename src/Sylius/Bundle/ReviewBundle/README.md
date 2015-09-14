@@ -67,5 +67,5 @@ License can be found [here](https://github.com/Sylius/SyliusReportBundle/blob/ma
 Authors
 -------
 
-The bundle was originally created by [Daniel Richter](nexyz9@gmail.com) and [Mateusz Zalewski](mateusz.zalewski@lakion.com).
+The bundle was originally created by [Mateusz Zalewski](mateusz.zalewski@lakion.com), based on [Daniel Richter](nexyz9@gmail.com) work.
 See the list of [contributors](https://github.com/Sylius/SyliusReviewBundle/contributors).

@@ -16,5 +16,13 @@ namespace Sylius\Component\Review\Model;
  */
 interface ReviewAuthorInterface
 {
+    /**
+     * @return string
+     */
+    public function getEmail();
 
+    /**
+     * @param string $email
+     */
+    public function setEmail($email);
 }
