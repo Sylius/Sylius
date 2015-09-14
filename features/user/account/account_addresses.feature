@@ -113,7 +113,7 @@ Feature: User account addresses page
 
     Scenario: Showing only enabled countries
        When I am on my account address creation page
-       Then I should not see "Ukraine" in the countries list
+       Then I should not see country "Ukraine" as available choice
 
     Scenario: Trying to create a new address with country that is no longer available
       Given I am on my account address creation page
