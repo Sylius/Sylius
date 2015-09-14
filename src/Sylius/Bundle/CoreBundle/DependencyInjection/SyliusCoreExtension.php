@@ -60,7 +60,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'controller.xml',
         'form.xml',
         'api_form.xml',
-        'templating.xml',
         'twig.xml',
         'reports.xml',
         'email.xml',

@@ -18,11 +18,20 @@
 
     <parameters>
         <parameter key="sylius.twig.extension.currency.class">Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension</parameter>
+        <parameter key="sylius.twig.extension.money.class">Sylius\Bundle\CurrencyBundle\Twig\MoneyExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius.twig.extension.currency" class="%sylius.twig.extension.currency.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.currency" />
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.currency_converter" />
+            <argument type="service" id="sylius.twig.extension.money" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.twig.extension.money" class="%sylius.twig.extension.money.class%">
+            <argument>%sylius.money.locale%</argument>
+            <argument type="service" id="sylius.context.currency" />
             <tag name="twig.extension" />
         </service>
     </services>

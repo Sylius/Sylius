@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\Twig;
 
-use Sylius\Bundle\RbacBundle\Templating\Helper\RbacHelper;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Sylius RBAC Twig helper.
@@ -21,16 +21,13 @@ use Sylius\Bundle\RbacBundle\Templating\Helper\RbacHelper;
 class RbacExtension extends \Twig_Extension
 {
     /**
-     * @var RbacHelper
+     * @var AuthorizationCheckerInterface
      */
-    protected $helper;
+    private $authorizationChecker;
 
-    /**
-     * @param RbacHelper $helper
-     */
-    public function __construct(RbacHelper $helper)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->helper = $helper;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -44,7 +41,7 @@ class RbacExtension extends \Twig_Extension
     }
 
     /**
-     * Check if currently logged in user is granted specific permission.
+     * Check if currently logged in identity is granted permission.
      *
      * @param string $permissionCode
      *
@@ -52,7 +49,7 @@ class RbacExtension extends \Twig_Extension
      */
     public function isGranted($permissionCode)
     {
-        return $this->helper->isGranted($permissionCode);
+        return $this->authorizationChecker->isGranted($permissionCode);
     }
 
     /**

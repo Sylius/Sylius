@@ -12,13 +12,14 @@
 namespace spec\Sylius\Bundle\CoreBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class RestrictedZoneExtensionSpec extends ObjectBehavior
 {
-    function let(RestrictedZoneHelper $helper)
+    function let(RestrictedZoneCheckerInterface $restrictedZoneChecker)
     {
-        $this->beConstructedWith($helper);
+        $this->beConstructedWith($restrictedZoneChecker);
     }
 
     function it_is_initializable()
@@ -29,5 +30,16 @@ class RestrictedZoneExtensionSpec extends ObjectBehavior
     function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
+    }
+
+    function it_uses_restricted_zone_checker(
+        $restrictedZoneChecker,
+        ProductInterface $product
+    ) {
+        $restrictedZoneChecker->isRestricted($product)->willReturn(false);
+        $this->isRestricted($product)->shouldReturn(false);
+
+        $restrictedZoneChecker->isRestricted($product)->willReturn(true);
+        $this->isRestricted($product)->shouldReturn(true);
     }
 }

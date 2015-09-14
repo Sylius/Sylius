@@ -27,7 +27,6 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 {
     protected $configFiles = array(
         'services.xml',
-        'templating.xml',
         'twig.xml',
     );
 

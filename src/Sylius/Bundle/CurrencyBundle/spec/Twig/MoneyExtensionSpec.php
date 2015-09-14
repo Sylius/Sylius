@@ -9,16 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
+namespace spec\Sylius\Bundle\CurrencyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
-class MoneyHelperSpec extends ObjectBehavior
+class MoneyExtensionSpec extends ObjectBehavior
 {
     function let(CurrencyContextInterface $currencyContext)
     {
@@ -27,6 +23,11 @@ class MoneyHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper');
+        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Twig\MoneyExtension');
+    }
+
+    function it_is_a_Twig_extension()
+    {
+        $this->shouldHaveType('Twig_Extension');
     }
 }

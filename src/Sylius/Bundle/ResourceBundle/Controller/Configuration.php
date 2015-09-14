@@ -44,11 +44,6 @@ class Configuration
     protected $templateNamespace;
 
     /**
-     * @var string
-     */
-    protected $templatingEngine;
-
-    /**
      * @var Parameters
      */
     protected $parameters;
@@ -70,13 +65,11 @@ class Configuration
         $bundlePrefix,
         $resourceName,
         $templateNamespace,
-        $templatingEngine = 'twig',
         array $settings
     ) {
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;
-        $this->templatingEngine = $templatingEngine;
         $this->settings = $settings;
         $this->parser = $parser;
         $this->parameters = new Parameters();
@@ -132,11 +125,6 @@ class Configuration
         return $this->templateNamespace;
     }
 
-    public function getTemplatingEngine()
-    {
-        return $this->templatingEngine;
-    }
-
     public function isApiRequest()
     {
         return null !== $this->request && 'html' !== $this->request->getRequestFormat();
@@ -154,7 +142,7 @@ class Configuration
 
     public function getTemplateName($name)
     {
-        return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);
+        return sprintf('%s:%s.twig', $this->templateNamespace ?: ':', $name);
     }
 
     public function getTemplate($name)
@@ -304,7 +292,7 @@ class Configuration
         if ($this->isSortable()) {
             $sorting = $this->getRequestParameter('sorting');
             foreach ($defaultSorting as $key => $value) {
-                //do not override request parameters by $defaultSorting values
+                // Do not override request parameters by $defaultSorting values
                 if (!isset($sorting[$key])){
                     $sorting[$key] = $value;
                 }
@@ -354,9 +342,7 @@ class Configuration
 
     public function getFlashMessage($message = null)
     {
-        $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
-
-        return $this->parameters->get('flash', $message);
+        return $this->parameters->get('flash', sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message));
     }
 
     public function getSortablePosition()

@@ -12,16 +12,12 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class MoneyExtensionSpec extends ObjectBehavior
 {
-    function let(MoneyHelper $helper)
+    function let()
     {
-        $this->beConstructedWith($helper);
+        $this->beConstructedWith('de_DE', 'EUR');
     }
 
     function it_is_initializable()
@@ -32,5 +28,21 @@ class MoneyExtensionSpec extends ObjectBehavior
     function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
+    }
+
+    function it_formats_the_integer_amounts_into_string_representation()
+    {
+        $this->formatAmount(15)->shouldReturn('0,15 €');
+        $this->formatAmount(2500)->shouldReturn('25,00 €');
+        $this->formatAmount(312)->shouldReturn('3,12 €');
+        $this->formatAmount(500)->shouldReturn('5,00 €');
+    }
+
+    function it_allows_to_format_money_in_different_currencies()
+    {
+        $this->formatAmount(15, 'USD')->shouldReturn('0,15 $');
+        $this->formatAmount(2500, 'USD')->shouldReturn('25,00 $');
+        $this->formatAmount(312, 'EUR')->shouldReturn('3,12 €');
+        $this->formatAmount(500)->shouldReturn('5,00 €');
     }
 }

@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.rbac" class="%sylius.twig.extension.rbac.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.rbac" />
+            <argument type="service" id="sylius.authorization_checker" />
             <tag name="twig.extension" />
         </service>
     </services>

@@ -24,7 +24,6 @@ class SyliusCurrencyExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
         'services.xml',
-        'templating.xml',
         'twig.xml',
     );
 

@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
+namespace Sylius\Bundle\CurrencyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper as BaseMoneyHelper;
+use Sylius\Bundle\MoneyBundle\Twig\MoneyExtension as BaseMoneyExtension;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 /**
- * Overrided templating helper to display amounts in currently used currency
- * by default.
+ * Sylius money Twig helper.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MoneyHelper extends BaseMoneyHelper
+class MoneyExtension extends BaseMoneyExtension
 {
     /**
      * Currency context.
@@ -31,9 +30,7 @@ class MoneyHelper extends BaseMoneyHelper
 
     public function __construct($locale, CurrencyContextInterface $currencyContext)
     {
-        $this->currencyContext = $currencyContext;
-
-        parent::__construct($locale);
+        parent::__construct($locale, $currencyContext->getCurrency() ?: $currencyContext->getDefaultCurrency());
     }
 
     /**
@@ -41,6 +38,6 @@ class MoneyHelper extends BaseMoneyHelper
      */
     protected function getDefaultCurrency()
     {
-        return $this->currencyContext->getCurrency();
+        return $this->currencyContext->getCurrency() ?: $this->currencyContext->getDefaultCurrency();
     }
 }

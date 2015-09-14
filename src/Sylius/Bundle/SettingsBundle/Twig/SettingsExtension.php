@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
-use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 
 /**
  * Sylius settings extension for Twig.
@@ -21,16 +21,18 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 class SettingsExtension extends \Twig_Extension
 {
     /**
-     * @var SettingsHelper
+     * Settings manager.
+     *
+     * @var SettingsManagerInterface
      */
-    private $helper;
+    private $settingsManager;
 
     /**
-     * @param SettingsHelper $helper
+     * @param SettingsManagerInterface $settingsManager
      */
-    public function __construct(SettingsHelper $helper)
+    public function __construct(SettingsManagerInterface $settingsManager)
     {
-        $this->helper = $helper;
+        $this->settingsManager = $settingsManager;
     }
 
     /**
@@ -39,8 +41,8 @@ class SettingsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-             new \Twig_SimpleFunction('sylius_settings_all', array($this, 'getSettings')),
-             new \Twig_SimpleFunction('sylius_settings_get', array($this, 'getSettingsParameter')),
+            new \Twig_SimpleFunction('sylius_settings_all', array($this, 'getSettings')),
+            new \Twig_SimpleFunction('sylius_settings_get', array($this, 'getSettingsParameter')),
         );
     }
 
@@ -53,7 +55,7 @@ class SettingsExtension extends \Twig_Extension
      */
     public function getSettings($namespace)
     {
-        return $this->helper->getSettings($namespace);
+        return $this->settingsManager->loadSettings($namespace);
     }
 
     /**
@@ -62,10 +64,20 @@ class SettingsExtension extends \Twig_Extension
      * @param string $name
      *
      * @return mixed
+     *
+     * @throws \InvalidArgumentException
      */
     public function getSettingsParameter($name)
     {
-        return $this->helper->getSettingsParameter($name);
+        if (false === strpos($name, '.')) {
+            throw new \InvalidArgumentException(sprintf('Parameter must be in format "namespace.name", "%s" given.', $name));
+        }
+
+        list($namespace, $name) = explode('.', $name);
+
+        $settings = $this->settingsManager->loadSettings($namespace);
+
+        return $settings->get($name);
     }
 
     /**

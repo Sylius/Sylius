@@ -41,7 +41,6 @@ class ConfigurationFactorySpec extends ObjectBehavior
             'sylius',
             'product',
             'SyliusWebBundle:Product',
-            'twig',
             array('paginate' => 10)
         )->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }

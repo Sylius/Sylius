@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.settings" class="%sylius.twig.extension.settings.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.settings" />
+            <argument type="service" id="sylius.settings.manager" />
             <tag name="twig.extension" />
         </service>
     </services>

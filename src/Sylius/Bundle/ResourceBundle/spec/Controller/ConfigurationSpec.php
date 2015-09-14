@@ -24,7 +24,6 @@ class ConfigurationSpec extends ObjectBehavior
             'sylius',
             'product',
             'SyliusWebBundle:Product',
-            'twig',
             array(
                 'paginate' => false,
                 'default_page_size' => 10,
@@ -84,11 +83,6 @@ class ConfigurationSpec extends ObjectBehavior
     function it_returns_assigned_template_namespace()
     {
         $this->getTemplateNamespace()->shouldReturn('SyliusWebBundle:Product');
-    }
-
-    function it_returns_assigned_templating_engine()
-    {
-        $this->getTemplatingEngine()->shouldReturn('twig');
     }
 
     function its_api_request_when_format_is_not_html(Request $request)

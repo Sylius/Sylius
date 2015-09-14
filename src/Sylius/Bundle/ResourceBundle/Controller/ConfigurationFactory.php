@@ -24,8 +24,6 @@ class ConfigurationFactory
     protected $parametersParser;
 
     /**
-     * Default Settings
-     *
      * @var array
      */
     protected $settings;
@@ -36,8 +34,6 @@ class ConfigurationFactory
     protected $configurationClass;
 
     /**
-     * Constructor.
-     *
      * @param ParametersParser $parametersParser
      * @param string           $configurationClass
      * @param array            $settings
@@ -55,18 +51,16 @@ class ConfigurationFactory
      * @param string $bundlePrefix
      * @param string $resourceName
      * @param string $templateNamespace
-     * @param string $templatingEngine
      *
      * @return Configuration
      */
-    public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace)
     {
         return new $this->configurationClass(
             $this->parametersParser,
             $bundlePrefix,
             $resourceName,
             $templateNamespace,
-            $templatingEngine,
             $this->settings
         );
     }

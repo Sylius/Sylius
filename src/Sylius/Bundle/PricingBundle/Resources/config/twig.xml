@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.pricing" class="%sylius.twig.extension.pricing.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.pricing" />
+            <argument type="service" id="sylius.price_calculator" />
             <tag name="twig.extension" />
         </service>
     </services>

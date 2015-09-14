@@ -11,24 +11,24 @@
 
 namespace Sylius\Bundle\LocaleBundle\Twig;
 
-use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleExtension extends \Twig_Extension
 {
     /**
-     * @var LocaleHelper
+     * @var LocaleContextInterface
      */
-    protected $helper;
+    private $localeContext;
 
     /**
-     * @param LocaleHelper $helper
+     * @param LocaleContextInterface $localeContext
      */
-    public function __construct(LocaleHelper $helper)
+    public function __construct(LocaleContextInterface $localeContext)
     {
-        $this->helper = $helper;
+        $this->localeContext = $localeContext;
     }
 
     /**
@@ -46,7 +46,7 @@ class LocaleExtension extends \Twig_Extension
      */
     public function getCurrentLocale()
     {
-        return $this->helper->getCurrentLocale();
+        return $this->localeContext->getCurrentLocale();
     }
 
     /**

@@ -11,26 +11,39 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Twig;
 
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 /**
  * Sylius currency Twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyHelper
+     * @var CurrencyConverterInterface
      */
-    protected $helper;
+    private $converter;
 
     /**
-     * @param CurrencyHelper $helper
+     * @var CurrencyContextInterface
      */
-    public function __construct(CurrencyHelper $helper)
-    {
-        $this->helper = $helper;
+    private $currencyContext;
+
+    /**
+     * @var MoneyExtension
+     */
+    private $moneyExtension;
+
+    public function __construct(
+        CurrencyContextInterface $currencyContext,
+        CurrencyConverterInterface $converter,
+        MoneyExtension $moneyExtension
+    ) {
+        $this->currencyContext = $currencyContext;
+        $this->converter       = $converter;
+        $this->moneyExtension  = $moneyExtension;
     }
 
     /**
@@ -45,29 +58,32 @@ class CurrencyExtension extends \Twig_Extension
     }
 
     /**
-     * Convert amount to target currency.
+     * Convert amount to target or currently used currency.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
      *
      * @return string
      */
     public function convertAmount($amount, $currency = null)
     {
-        return $this->helper->convertAmount($amount, $currency);
+        return $this->converter->convert($amount, $currency ?: $this->currencyContext->getCurrency());
     }
 
     /**
-     * Convert and format amount.
+     * Convert amount and format it!
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
+     * @param bool        $decimal
      *
      * @return string
      */
-    public function convertAndFormatAmount($amount, $currency = null)
+    public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
     {
-        return $this->helper->convertAndFormatAmount($amount, $currency);
+        $currency = $currency ?: $this->currencyContext->getCurrency();
+
+        return $this->moneyExtension->formatAmount($this->converter->convert($amount, $currency), $currency, $decimal);
     }
 
     /**
