@@ -36,9 +36,14 @@ class DataSource implements DataSourceInterface
     private $expressionBuilder;
 
     /**
+     * @var int
+     */
+    private $defaultMaxPerPage = 20;
+
+    /**
      * @param EntityRepository
      */
-    function __construct(EntityRepository $repository, $method = null, $arguments = array())
+    function __construct(EntityRepository $repository, $method = null, $arguments = array(), $defaultMaxPerPage = 20)
     {
         if (null === $method) {
             $queryBuilder = $repository->createQueryBuilder('o');
@@ -48,6 +53,8 @@ class DataSource implements DataSourceInterface
 
         $this->queryBuilder = $queryBuilder;
         $this->expressionBuilder = new ExpressionBuilder($queryBuilder);
+
+        $this->defaultMaxPerPage = $defaultMaxPerPage;
     }
 
     /**
@@ -78,6 +85,9 @@ class DataSource implements DataSourceInterface
      */
     public function getData()
     {
-        return new Pagerfanta(new DoctrineORMAdapter($this->queryBuilder));
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryBuilder));
+        $paginator->setMaxPerPage($this->defaultMaxPerPage);
+
+        return $paginator;
     }
 }
