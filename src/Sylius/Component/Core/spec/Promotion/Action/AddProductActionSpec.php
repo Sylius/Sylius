@@ -15,17 +15,18 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- */
 class AddProductActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
-    {
-        $this->beConstructedWith($itemRepository, $variantRepository);
+    function let(
+        RepositoryInterface $orderItemRepository,
+        RepositoryInterface $variantRepository,
+        OriginatorInterface $originator
+    ) {
+        $this->beConstructedWith($orderItemRepository, $variantRepository, $originator);
     }
 
     function it_is_initializable()
@@ -38,78 +39,66 @@ class AddProductActionSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
-    function it_adds_product_as_promotion(
-        $itemRepository,
+    function it_should_add_product_as_promotional(
         $variantRepository,
+        $orderItemRepository,
+        $originator,
         OrderInterface $order,
-        OrderItemInterface $item,
+        OrderItemInterface $orderItem,
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
 
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
-
-        $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
-        $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
-        $item->setImmutable(true)->shouldBeCalled();
-
         $order->getItems()->willReturn(array());
 
-        $order->addItem($item)->shouldBeCalled();
+        $originator->getOrigin($orderItem)->willReturn(null);
+
+        $variantRepository->find($configuration['variant'])->willReturn($variant);
+
+        $orderItemRepository->createNew()->willReturn($orderItem);
+
+        $orderItem->setUnitPrice($configuration['price'])->shouldBeCalled();
+        $orderItem->setVariant($variant)->shouldBeCalled();
+        $orderItem->setQuantity($configuration['quantity'])->shouldBeCalled();
+
+        $originator->setOrigin($orderItem, $promotion)->shouldBeCalled();
+
+        $order->addItem($orderItem)->shouldBeCalled();
 
         $this->execute($order, $configuration, $promotion);
     }
 
-    function it_does_not_add_product_if_exists(
-        $variantRepository,
-        $itemRepository,
+    function it_should_not_add_product_if_alredy_exists(
+        $originator,
         OrderInterface $order,
-        OrderItemInterface $item,
-        ProductVariantInterface $variant,
+        OrderItemInterface $orderItem,
         PromotionInterface $promotion
     ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
 
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
+        $order->getItems()->willReturn(array($orderItem));
 
-        $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
-        $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
-        $item->equals($item)->willReturn(true);
+        $originator->getOrigin($orderItem)->willReturn($promotion);
 
-        $order->getItems()->willReturn(array($item));
-
-        $order->addItem($item)->shouldNotBeCalled();
+        $order->addItem($orderItem)->shouldNotBeCalled();
 
         $this->execute($order, $configuration, $promotion);
     }
 
-    function it_reverts_product(
-        $variantRepository,
-        $itemRepository,
+    function it_should_remove_promotional_product_during_revert(
+        $originator,
         OrderInterface $order,
-        OrderItemInterface $item,
-        ProductVariantInterface $variant,
+        OrderItemInterface $orderItem,
         PromotionInterface $promotion
     ) {
         $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
 
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
+        $order->getItems()->willReturn(array($orderItem));
 
-        $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
-        $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
-        $item->equals($item)->willReturn(true);
-        $item->setImmutable(true)->shouldBeCalled();
+        $originator->getOrigin($orderItem)->willReturn($promotion);
 
-        $order->getItems()->willReturn(array($item));
-
-        $order->removeItem($item)->shouldBeCalled();
+        $order->removeItem($orderItem)->shouldBeCalled();
 
         $this->revert($order, $configuration, $promotion);
     }

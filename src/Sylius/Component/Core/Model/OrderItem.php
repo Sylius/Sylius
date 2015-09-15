@@ -45,6 +45,20 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     protected $promotions;
 
+    /**
+     * Origin identifier.
+     *
+     * @var int
+     */
+    protected $originId;
+
+    /**
+     * Origin type.
+     *
+     * @var string
+     */
+    protected $originType;
+
     public function __construct()
     {
         parent::__construct();
@@ -75,8 +89,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function setVariant(ProductVariantInterface $variant)
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
     /**
@@ -87,6 +99,38 @@ class OrderItem extends CartItem implements OrderItemInterface
         return parent::equals($item) || ($item instanceof self
             && $item->getVariant() === $this->variant
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginId()
+    {
+        return $this->originId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginId($originId)
+    {
+        $this->originId = $originId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginType()
+    {
+        return $this->originType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginType($originType)
+    {
+        $this->originType = $originType;
     }
 
     /**
@@ -106,8 +150,6 @@ class OrderItem extends CartItem implements OrderItemInterface
             $unit->setOrderItem($this);
             $this->inventoryUnits->add($unit);
         }
-
-        return $this;
     }
 
     /**
@@ -117,8 +159,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         $unit->setOrderItem(null);
         $this->inventoryUnits->removeElement($unit);
-
-        return $this;
     }
 
     /**
@@ -153,8 +193,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
         }
-
-        return $this;
     }
 
     /**
@@ -165,8 +203,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
         }
-
-        return $this;
     }
 
     /**

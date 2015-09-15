@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Originator\Model\OriginAwareInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
@@ -20,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterface
+interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterface, OriginAwareInterface
 {
     /**
      * Get the product.
@@ -69,7 +70,7 @@ interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterfac
      *
      * @param InventoryUnitInterface $unit
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit);
 }
