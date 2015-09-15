@@ -46,9 +46,10 @@ class ReviewerTransformer implements DataTransformerInterface
             return;
         }
 
-        $customer = new Customer();
-        $customer->setEmail($value);
+        //this is temporary, after implementing proper form from UserBundle in ReviewType, it's going to be Reviewer object, as it's default review author class
+        $reviewer = new Customer();
+        $reviewer->setEmail($value);
 
-        return $customer;
+        return $reviewer;
     }
 }

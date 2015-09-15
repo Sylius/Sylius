@@ -12,8 +12,6 @@
 namespace spec\Sylius\Component\Review\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;

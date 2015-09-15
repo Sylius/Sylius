@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Review\Model;
 
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 

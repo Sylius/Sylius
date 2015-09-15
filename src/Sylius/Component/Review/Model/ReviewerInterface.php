@@ -25,4 +25,24 @@ interface ReviewerInterface
      * @param string $email
      */
     public function setEmail($email);
+
+    /**
+     * @return string
+     */
+    public function getFirstName();
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName);
+
+    /**
+     * @return string
+     */
+    public function getLastName();
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName);
 }

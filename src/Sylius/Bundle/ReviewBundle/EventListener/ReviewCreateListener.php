@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\ReviewBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
