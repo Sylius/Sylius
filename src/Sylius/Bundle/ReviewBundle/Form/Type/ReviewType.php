@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer;
+use Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -63,7 +63,7 @@ class ReviewType extends AbstractResourceType
             ))
         ;
 
-        $builder->get('author')->addModelTransformer(new ReviewAuthorTransformer());
+        $builder->get('author')->addModelTransformer(new ReviewerTransformer());
     }
 
     /**

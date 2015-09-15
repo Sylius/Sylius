@@ -38,7 +38,7 @@ class Review implements ReviewInterface
     protected $comment;
 
     /**
-     * @var ReviewAuthorInterface
+     * @var ReviewerInterface
      */
     protected $author;
 
@@ -130,7 +130,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setAuthor(ReviewAuthorInterface $author = null)
+    public function setAuthor(ReviewerInterface $author = null)
     {
         $this->author = $author;
     }

@@ -58,12 +58,12 @@ interface ReviewInterface extends TimestampableInterface
     public function getComment();
 
     /**
-     * @param ReviewAuthorInterface $author
+     * @param ReviewerInterface $author
      */
-    public function setAuthor(ReviewAuthorInterface $author = null);
+    public function setAuthor(ReviewerInterface $author = null);
 
     /**
-     * @return ReviewAuthorInterface
+     * @return ReviewerInterface
      */
     public function getAuthor();
 

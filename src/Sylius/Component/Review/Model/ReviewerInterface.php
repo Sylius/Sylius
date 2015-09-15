@@ -14,7 +14,7 @@ namespace Sylius\Component\Review\Model;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ReviewAuthorInterface
+interface ReviewerInterface
 {
     /**
      * @return string

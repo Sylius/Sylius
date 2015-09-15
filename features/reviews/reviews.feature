@@ -35,7 +35,7 @@ Feature: Reviews
 
     Scenario: Seeing created reviews in the list
         Given I am on the dashboard page
-         When I follow "Reviews"
+         When I follow "Product reviews"
          Then I should see 3 reviews in the list
 
     Scenario: Adding new review with default options
