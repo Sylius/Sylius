@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Form\Transformer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -43,7 +42,7 @@ class ReviewerTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_throws_exception_if_given_value_is_not_customer_interface_object()
+    function it_throws_exception_if_given_value_is_not_reviewer_interface_object()
     {
         $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewerInterface'))->during('transform', array('badObject'));
     }
