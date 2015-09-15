@@ -66,7 +66,7 @@ Feature: Product variants
     Scenario: Generating only missing variants of product
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
+        And I select "L" from "Size"
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Black T-Shirt"
@@ -83,8 +83,8 @@ Feature: Product variants
     Scenario: Generating only missing variants of product with multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
-        And I select "Red" from "T-Shirt color"
+        And I select "L" from "Size"
+        And I select "Red" from "Color"
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Sylius T-Shirt"
@@ -94,7 +94,7 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
+        And I select "L" from "Size"
         And I press "Create"
         Then I should be on the page of product "Black T-Shirt"
         And I should see "Variant has been successfully created."
@@ -102,8 +102,8 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
-        And I select "Red" from "T-Shirt color"
+        And I select "L" from "Size"
+        And I select "Red" from "Color"
         And I press "Create"
         Then I should be on the page of product "Sylius T-Shirt"
         And I should see "Variant has been successfully created."
@@ -111,7 +111,7 @@ Feature: Product variants
     Scenario: Updating the variant price
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "edit" near "T-Shirt size: L"
+        When I click "edit" near "Size: L"
         And I fill in "Price" with "33.99"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
@@ -121,7 +121,7 @@ Feature: Product variants
     Scenario: Deleting product variant
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "delete" near "T-Shirt size: L"
+        When I click "delete" near "Size: L"
         And I click "delete" from the confirmation modal
         Then I should be on the page of product "Black T-Shirt"
         And I should see "Variant has been successfully deleted."

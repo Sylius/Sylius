@@ -46,7 +46,7 @@ Feature: Inventory tracking
     Scenario: Updating variant stock level
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
-         When I click "edit" near "T-Shirt size: L"
+         When I click "edit" near "Size: L"
           And I fill in "Current stock" with "10"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
@@ -55,7 +55,7 @@ Feature: Inventory tracking
     Scenario: Making variant not available on demand
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
-         When I click "edit" near "T-Shirt size: L"
+         When I click "edit" near "Size: L"
           And I uncheck "Available on demand"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
