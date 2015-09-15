@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Grid\Filter;
 
-use Sylius\Component\Grid\DataSource\DataSourceInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

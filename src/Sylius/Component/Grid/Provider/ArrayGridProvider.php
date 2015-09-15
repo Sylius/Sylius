@@ -33,6 +33,8 @@ class ArrayGridProvider implements GridProviderInterface
 
     /**
      * @param string $name
+     *
+     * @return Grid
      */
     public function getGrid($name)
     {

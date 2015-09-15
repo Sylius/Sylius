@@ -40,11 +40,14 @@ class DataFactory implements DataFactoryInterface
 
     /**
      * @param DataSourceProviderInterface $dataSourceProvider
-     * @param FiltersApplicatorInterface $filtersApplicator
-     * @param SorterInterface $sorter
+     * @param FiltersApplicatorInterface  $filtersApplicator
+     * @param SorterInterface             $sorter
      */
-    public function __construct(DataSourceProviderInterface $dataSourceProvider, FiltersApplicatorInterface $filtersApplicator, SorterInterface $sorter)
-    {
+    public function __construct(
+        DataSourceProviderInterface $dataSourceProvider,
+        FiltersApplicatorInterface $filtersApplicator,
+        SorterInterface $sorter
+    ) {
         $this->dataSourceProvider = $dataSourceProvider;
         $this->filtersApplicator = $filtersApplicator;
         $this->sorter = $sorter;

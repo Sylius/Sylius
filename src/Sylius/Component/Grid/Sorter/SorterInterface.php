@@ -24,9 +24,9 @@ interface SorterInterface
     const DESC = 'desc';
 
     /**
-     * @param Grid $grid
+     * @param Grid                $grid
      * @param DataSourceInterface $dataSource
-     * @param Parameters $parameters
+     * @param Parameters          $parameters
      */
     public function sort(Grid $grid, DataSourceInterface $dataSource, Parameters $parameters);
 }

@@ -45,7 +45,6 @@ class StringFilter implements FilterInterface
         $fields = isset($options['fields']) ? $options['fields'] : array($name);
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
-
         if (1 === count($fields)) {
             $expression = $this->getExpression($expressionBuilder, $type, $fields[0], $value);
         } else {
@@ -80,7 +79,6 @@ class StringFilter implements FilterInterface
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -92,9 +90,12 @@ class StringFilter implements FilterInterface
     /**
      * Get expression.
      *
-     * @param string $type
-     * @param string $field
-     * @param mixed  $value
+     * @param ExpressionBuilderInterface $expressionBuilder
+     * @param string                     $type
+     * @param string                     $field
+     * @param mixed                      $value
+     *
+     * @return mixed
      */
     private function getExpression(ExpressionBuilderInterface $expressionBuilder, $type, $field, $value)
     {

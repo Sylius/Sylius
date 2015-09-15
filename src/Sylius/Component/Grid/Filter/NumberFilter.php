@@ -88,7 +88,6 @@ class NumberFilter implements FilterInterface
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */

@@ -31,7 +31,7 @@ class ColumnRenderer implements ColumnRendererInterface
     private $resolvedOptions = array();
 
     /**
-     * @param ServiceRegistryInterface $filterRegistry
+     * @param ServiceRegistryInterface $columnTypeRegistry
      */
     public function __construct(ServiceRegistryInterface $columnTypeRegistry)
     {
@@ -43,7 +43,10 @@ class ColumnRenderer implements ColumnRendererInterface
      */
     public function render($data, Column $column)
     {
-        return $this->columnTypeRegistry->get($column->getType())->render($data, $column->getName(), $this->resolveOptions($column));
+        return $this->columnTypeRegistry
+            ->get($column->getType())
+            ->render($data, $column->getName(), $this->resolveOptions($column))
+        ;
     }
 
     /**

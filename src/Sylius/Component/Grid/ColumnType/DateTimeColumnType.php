@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Grid\ColumnType;
 
-use Sylius\Component\Grid\Definition\Grid;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

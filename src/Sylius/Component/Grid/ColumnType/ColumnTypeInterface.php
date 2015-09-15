@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Grid\ColumnType;
 
-use Sylius\Component\Grid\Definition\Grid;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**

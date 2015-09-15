@@ -49,7 +49,6 @@ class DateFilter implements FilterInterface
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */

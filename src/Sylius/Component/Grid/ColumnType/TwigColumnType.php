@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Grid\ColumnType;
 
-use Sylius\Component\Grid\Definition\Grid;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -47,14 +46,14 @@ class TwigColumnType extends AbstractColumnType
     {
         $resolver
             ->setRequired(array(
-                'template'
+                'template',
             ))
             ->setOptional(array(
                 'path',
-                'sort'
+                'sort',
             ))
             ->setDefaults(array(
-                'context' => array()
+                'context' => array(),
             ))
             ->setAllowedTypes(array(
                 'template' => array('string'),

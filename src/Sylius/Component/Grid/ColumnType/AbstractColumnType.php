@@ -13,6 +13,7 @@ namespace Sylius\Component\Grid\ColumnType;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -20,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 abstract class AbstractColumnType implements ColumnTypeInterface
 {
     /**
-     * @var PropertyAccesssorInterface
+     * @var PropertyAccessorInterface
      */
     protected $propertyAccessor;
 

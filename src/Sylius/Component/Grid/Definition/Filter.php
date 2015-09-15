@@ -40,7 +40,7 @@ class Filter
      * @param string $name
      * @param string $type
      * @param string $label
-     * @param array $options
+     * @param array  $options
      */
     public function __construct($name, $type, $label = null, array $options = array())
     {
@@ -52,7 +52,9 @@ class Filter
 
     /**
      * @param string $name
-     * @param array $configuration
+     * @param array  $configuration
+     *
+     * @return $this
      */
     public static function createFromArray($name, array $configuration)
     {
@@ -87,7 +89,6 @@ class Filter
     {
         return $this->type;
     }
-
 
     /**
      * @return array

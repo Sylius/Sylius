@@ -52,7 +52,9 @@ class BulkAction
 
     /**
      * @param string $name
-     * @param array $configuration
+     * @param array  $configuration
+     *
+     * @return $this
      */
     public static function createFromArray($name, array $configuration)
     {

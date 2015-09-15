@@ -67,19 +67,29 @@ class Grid
     private $sorting = array();
 
     /**
-     * @param string $applicationName
-     * @param string $resourceName
-     * @param string $driver
-     * @param array $columns
-     * @param array $filters
-     * @param array $actions
-     * @param array $rowActions
-     * @param array $massActions
-     * @param array $sorting
-     * @param array $options
+     * @param string   $applicationName
+     * @param string   $resourceName
+     * @param string   $driver
+     * @param Column[] $columns
+     * @param Filter[] $filters
+     * @param Action[] $actions
+     * @param Action[] $rowActions
+     * @param Action[] $massActions
+     * @param array    $sorting
+     * @param array    $options
      */
-    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $massActions, array $sorting, array $options)
-    {
+    public function __construct(
+        $applicationName,
+        $resourceName,
+        $driver,
+        array $columns,
+        array $filters,
+        array $actions,
+        array $rowActions,
+        array $massActions,
+        array $sorting,
+        array $options
+    ) {
         $this->applicationName = $applicationName;
         $this->resourceName = $resourceName;
         $this->driver = $driver;
@@ -125,6 +135,8 @@ class Grid
 
     /**
      * @param array $configuration
+     *
+     * @return $this
      */
     public static function createFromArray(array $configuration)
     {
@@ -158,7 +170,18 @@ class Grid
 
         list($applicationName, $resourceName) = explode('.', $configuration['resource']);
 
-        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $massActions, $sorting, $options);
+        return new self(
+            $applicationName,
+            $resourceName,
+            $configuration['driver'],
+            $columns,
+            $filters,
+            $actions,
+            $rowActions,
+            $massActions,
+            $sorting,
+            $options
+        );
     }
 
     /**
@@ -186,7 +209,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return Column[]
      */
     public function getColumns()
     {
@@ -214,7 +237,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return Filter[]
      */
     public function getFilters()
     {
@@ -223,6 +246,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return Filter
      */
     public function getFilter($name)
     {
@@ -240,7 +265,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return Action[]
      */
     public function getActions()
     {
@@ -248,7 +273,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return Action[]
      */
     public function getRowActions()
     {
@@ -256,7 +281,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return Action[]
      */
     public function getMassActions()
     {
