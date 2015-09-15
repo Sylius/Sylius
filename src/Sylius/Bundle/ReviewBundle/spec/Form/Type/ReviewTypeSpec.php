@@ -75,7 +75,7 @@ class ReviewTypeSpec extends ObjectBehavior
         ;
 
         $builder->get('author')->willReturn($builder)->shouldBeCalled();
-        $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer'))->willReturn($builder)->shouldBeCalled();
+        $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer'))->willReturn($builder)->shouldBeCalled();
 
         $this->buildForm($builder, array('rating_steps' => 5));
     }

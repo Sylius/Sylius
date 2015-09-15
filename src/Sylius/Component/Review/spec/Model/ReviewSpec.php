@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
-use Sylius\Component\Review\Model\ReviewAuthorInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -51,7 +51,7 @@ class ReviewSpec extends ObjectBehavior
         $this->getComment()->shouldReturn('Lorem ipsum dolor');
     }
 
-    function it_has_author(ReviewAuthorInterface $author)
+    function it_has_author(ReviewerInterface $author)
     {
         $this->setAuthor($author);
         $this->getAuthor()->shouldReturn($author);

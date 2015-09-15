@@ -13,17 +13,17 @@ namespace spec\Sylius\Bundle\ReviewBundle\Form\Transformer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Review\Model\ReviewAuthorInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewAuthorTransformerSpec extends ObjectBehavior
+class ReviewerTransformerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewAuthorTransformer');
+        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer');
     }
 
     function it_implements_data_transformer_interface()
@@ -31,7 +31,7 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\DataTransformerInterface');
     }
 
-    function it_transforms_form_data(ReviewAuthorInterface $author)
+    function it_transforms_form_data(ReviewerInterface $author)
     {
         $author->getEmail()->willReturn('john.doe@example.com');
 
@@ -45,10 +45,10 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
 
     function it_throws_exception_if_given_value_is_not_customer_interface_object()
     {
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewAuthorInterface'))->during('transform', array('badObject'));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewerInterface'))->during('transform', array('badObject'));
     }
 
-    function it_reverse_transforms_form_data(ReviewAuthorInterface $author)
+    function it_reverse_transforms_form_data(ReviewerInterface $author)
     {
         $author->getEmail()->willReturn('john.doe@example.com');
 
@@ -65,7 +65,7 @@ class ReviewAuthorTransformerSpec extends ObjectBehavior
     {
         return array(
             'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof ReviewAuthorInterface || !$key instanceof ReviewAuthorInterface) {
+                if (!$subject instanceof ReviewerInterface || !$key instanceof ReviewerInterface) {
                     return false;
                 }
 

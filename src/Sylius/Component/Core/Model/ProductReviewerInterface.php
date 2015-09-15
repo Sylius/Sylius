@@ -11,12 +11,12 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Review\Model\ReviewAuthorInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ProductReviewerInterface extends ReviewAuthorInterface
+interface ProductReviewerInterface extends ReviewerInterface
 {
 
 }
