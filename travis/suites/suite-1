@@ -14,7 +14,6 @@ bin/behat -s reports -f progress
 bin/behat -s taxonomies -f progress
 bin/behat -s users -f progress
 bin/behat -s search -f progress
-bin/behat -s search_orm_only -f progress
 
 bin/behat -s checkout -f progress features/frontend/checkout_addressing.feature
 bin/behat -s checkout -f progress features/frontend/checkout_finalize.feature
