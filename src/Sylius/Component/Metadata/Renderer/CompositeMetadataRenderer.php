@@ -67,7 +67,7 @@ class CompositeMetadataRenderer implements MetadataRendererInterface
     /**
      * @param MetadataRendererInterface $renderer
      */
-    protected function addRenderer(MetadataRendererInterface $renderer)
+    public function addRenderer(MetadataRendererInterface $renderer)
     {
         $this->renderers[] = $renderer;
     }
