@@ -5,6 +5,7 @@ namespace Sylius\Component\Metadata\Renderer\Custom;
 use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -22,11 +23,19 @@ class PageMetadataRenderer implements MetadataRendererInterface
     protected $universalRenderer;
 
     /**
-     * @param MetadataRendererInterface $universalRenderer
+     * @var OptionsResolver
      */
-    public function __construct(MetadataRendererInterface $universalRenderer)
+    protected $optionsResolver;
+
+    /**
+     * @param MetadataRendererInterface $universalRenderer
+     * @param OptionsResolver $optionsResolver
+     */
+    public function __construct(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver)
     {
         $this->universalRenderer = $universalRenderer;
+
+        $this->optionsResolver = $this->configureOptionsResolver($optionsResolver);
 
         $this->addSubrenderer('title', function ($value) {
             return sprintf('<title>%s</title>', $value);
@@ -48,29 +57,20 @@ class PageMetadataRenderer implements MetadataRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(MetadataInterface $metadata)
+    public function render(MetadataInterface $metadata, array $options = [])
     {
-        $properties = $metadata->toArray();
+        $this->optionsResolver->resolve($options);
 
-        $renderedProperties = [];
-        foreach ($properties as $propertyKey => $propertyValue) {
-            if (null === $propertyValue) {
-                continue;
-            }
-
-            $this->ensurePropertyIsKnown($metadata, $propertyKey);
-
-            $renderedProperties[] = $this->renderProperty($propertyKey, $propertyValue);
-        }
-
-        return join("\n", $renderedProperties);
+        return join("\n", $this->renderProperties($metadata));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supports(MetadataInterface $metadata)
+    public function supports(MetadataInterface $metadata, array $options = [])
     {
+        $this->optionsResolver->resolve($options);
+
         return $metadata instanceof PageMetadataInterface;
     }
 
@@ -115,5 +115,46 @@ class PageMetadataRenderer implements MetadataRendererInterface
                 $propertyKey
             ));
         }
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     *
+     * @return array
+     */
+    protected function renderProperties(MetadataInterface $metadata)
+    {
+        $renderedProperties = [];
+        foreach ($metadata->toArray() as $propertyKey => $propertyValue) {
+            if (null === $propertyValue) {
+                continue;
+            }
+
+            $this->ensurePropertyIsKnown($metadata, $propertyKey);
+
+            $renderedProperties[] = $this->renderProperty($propertyKey, $propertyValue);
+        }
+
+        return $renderedProperties;
+    }
+
+    /**
+     * @param OptionsResolver $optionsResolver
+     *
+     * @return OptionsResolver
+     */
+    private function configureOptionsResolver(OptionsResolver $optionsResolver)
+    {
+        $optionsResolver
+            ->setDefaults([
+                'group' => 'head',
+            ])
+            ->setAllowedValues(
+                'group',
+                ['head']
+            )
+        ;
+
+        return $optionsResolver;
     }
 }

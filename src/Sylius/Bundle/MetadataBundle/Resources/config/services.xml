@@ -22,7 +22,9 @@
         <parameter key="sylius.metadata.provider.class">Sylius\Component\Metadata\Provider\MetadataProvider</parameter>
         <parameter key="sylius.metadata.twig_extension.class">Sylius\Component\Metadata\Twig\MetadataExtension</parameter>
 
+        <parameter key="sylius.metadata.renderer.options_resolver.class">Symfony\Component\OptionsResolver\OptionsResolver</parameter>
         <parameter key="sylius.metadata.renderer.class">Sylius\Component\Metadata\Renderer\CompositeMetadataRenderer</parameter>
+        <parameter key="sylius.metadata.renderer.custom_page.class">Sylius\Component\Metadata\Renderer\Custom\PageMetadataRenderer</parameter>
         <parameter key="sylius.metadata.renderer.twitter.class">Sylius\Component\Metadata\Renderer\Twitter\GenericTwitterMetadataRenderer</parameter>
 
         <parameter key="sylius.metadata.hierarchy_provider.class">Sylius\Component\Metadata\HierarchyProvider\CompositeMetadataHierarchyProvider</parameter>
@@ -54,11 +56,20 @@
             <tag name="twig.extension" />
         </service>
 
+        <service id="sylius.metadata.renderer.options_resolver" class="%sylius.metadata.renderer.options_resolver.class%" scope="prototype" public="false" />
+
         <service id="sylius.metadata.renderer" class="%sylius.metadata.renderer.class%">
             <argument type="collection" /> <!-- Metadata renderers array -->
         </service>
 
+        <service id="sylius.metadata.renderer.custom_page" class="%sylius.metadata.renderer.custom_page.class%" public="false">
+            <argument type="service" id="sylius.metadata.renderer" />
+            <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
+            <tag name="sylius.metadata_renderer" />
+        </service>
+        
         <service id="sylius.metadata.renderer.twitter" class="%sylius.metadata.renderer.twitter.class%" public="false">
+            <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
             <tag name="sylius.metadata_renderer" />
         </service>
 

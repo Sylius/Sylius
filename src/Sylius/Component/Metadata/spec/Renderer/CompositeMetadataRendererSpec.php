@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Metadata\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
 
@@ -43,14 +44,14 @@ class CompositeMetadataRendererSpec extends ObjectBehavior
         MetadataInterface $supportedMetadata,
         MetadataInterface $unsupportedMetadata
     ) {
-        $firstRenderer->supports($supportedMetadata)->shouldBeCalled()->willReturn(false);
-        $secondRenderer->supports($supportedMetadata)->shouldBeCalled()->willReturn(true);
+        $firstRenderer->supports($supportedMetadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn(false);
+        $secondRenderer->supports($supportedMetadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn(true);
 
-        $firstRenderer->supports($unsupportedMetadata)->shouldBeCalled()->willReturn(false);
-        $secondRenderer->supports($unsupportedMetadata)->shouldBeCalled()->willReturn(false);
+        $firstRenderer->supports($unsupportedMetadata, ['bar' => 'foo'])->shouldBeCalled()->willReturn(false);
+        $secondRenderer->supports($unsupportedMetadata, ['bar' => 'foo'])->shouldBeCalled()->willReturn(false);
 
-        $this->supports($supportedMetadata)->shouldReturn(true);
-        $this->supports($unsupportedMetadata)->shouldReturn(false);
+        $this->supports($supportedMetadata, ['foo' => 'bar'])->shouldReturn(true);
+        $this->supports($unsupportedMetadata, ['bar' => 'foo'])->shouldReturn(false);
     }
 
     function it_delegates_rendering_to_correct_renderer(
@@ -58,13 +59,13 @@ class CompositeMetadataRendererSpec extends ObjectBehavior
         MetadataRendererInterface $secondRenderer,
         MetadataInterface $metadata
     ) {
-        $firstRenderer->supports($metadata)->shouldBeCalled()->willReturn(false);
-        $secondRenderer->supports($metadata)->shouldBeCalled()->willReturn(true);
+        $firstRenderer->supports($metadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn(false);
+        $secondRenderer->supports($metadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn(true);
 
-        $firstRenderer->render($metadata)->shouldNotBeCalled();
-        $secondRenderer->render($metadata)->shouldBeCalled()->willReturn('Rendered metadata');
+        $firstRenderer->render(Argument::cetera())->shouldNotBeCalled();
+        $secondRenderer->render($metadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn('Rendered metadata');
 
-        $this->render($metadata)->shouldReturn('Rendered metadata');
+        $this->render($metadata, ['foo' => 'bar'])->shouldReturn('Rendered metadata');
     }
 
     function it_throws_exception_if_trying_to_render_unsupported_metadata(
@@ -72,12 +73,12 @@ class CompositeMetadataRendererSpec extends ObjectBehavior
         MetadataRendererInterface $secondRenderer,
         MetadataInterface $metadata
     ) {
-        $firstRenderer->supports($metadata)->shouldBeCalled()->willReturn(false);
-        $secondRenderer->supports($metadata)->shouldBeCalled()->willReturn(false);
+        $firstRenderer->supports($metadata, ['bar' => 'baz'])->shouldBeCalled()->willReturn(false);
+        $secondRenderer->supports($metadata, ['bar' => 'baz'])->shouldBeCalled()->willReturn(false);
 
-        $firstRenderer->render($metadata)->shouldNotBeCalled();
-        $secondRenderer->render($metadata)->shouldNotBeCalled();
+        $firstRenderer->render(Argument::cetera())->shouldNotBeCalled();
+        $secondRenderer->render(Argument::cetera())->shouldNotBeCalled();
 
-        $this->shouldThrow('\InvalidArgumentException')->duringRender($metadata);
+        $this->shouldThrow('\InvalidArgumentException')->duringRender($metadata, ['bar' => 'baz']);
     }
 }

@@ -20,15 +20,17 @@ interface MetadataRendererInterface
 {
     /**
      * @param MetadataInterface $metadata
+     * @param array $options
      *
      * @return string
      */
-    public function render(MetadataInterface $metadata);
+    public function render(MetadataInterface $metadata, array $options = []);
 
     /**
      * @param MetadataInterface $metadata
+     * @param array $options
      *
      * @return boolean
      */
-    public function supports(MetadataInterface $metadata);
+    public function supports(MetadataInterface $metadata, array $options = []);
 }
