@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
@@ -76,7 +85,7 @@ class OrderPromotionListenerSpec extends ObjectBehavior
         $this->handleCouponPromotion($event);
     }
 
-    function it_adds_error_message_to_flasbag_when_coupon_is_not_eligible(
+    function it_adds_error_message_to_flashbag_when_coupon_is_not_eligible(
         GenericEvent $event,
         FlashBagInterface $flashBag,
         $session,
