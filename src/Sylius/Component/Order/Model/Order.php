@@ -31,7 +31,7 @@ class Order implements OrderInterface
     /**
      * Completion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $completedAt;
 
@@ -95,21 +95,21 @@ class Order implements OrderInterface
     /**
      * Creation time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Modification time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -169,7 +169,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCompletedAt(\DateTime $completedAt = null)
+    public function setCompletedAt(\DateTimeInterface $completedAt = null)
     {
         $this->completedAt = $completedAt;
 
@@ -511,7 +511,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -529,7 +529,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -555,7 +555,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

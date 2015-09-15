@@ -22,12 +22,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * Gets expired orders.
      *
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      * @param string    $state
      *
      * @return OrderInterface[]
      */
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING);
+    public function findExpired(\DateTimeInterface $expiresAt, $state = OrderInterface::STATE_PENDING);
 
     /**
      * Gets the number of orders placed by the customer

@@ -73,14 +73,14 @@ class Promotion implements PromotionInterface
     /**
      * Start date
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $startsAt;
 
     /**
      * End date
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $endsAt;
 
@@ -115,21 +115,21 @@ class Promotion implements PromotionInterface
     /**
      * Last time updated
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
     /**
      * Creation date
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Deletion time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $deletedAt;
 
@@ -281,7 +281,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTime $startsAt = null)
+    public function setStartsAt(\DateTimeInterface $startsAt = null)
     {
         $this->startsAt = $startsAt;
 
@@ -299,7 +299,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTime $endsAt = null)
+    public function setEndsAt(\DateTimeInterface $endsAt = null)
     {
         $this->endsAt = $endsAt;
 
@@ -479,7 +479,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -497,7 +497,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -523,7 +523,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTimeInterface $deletedAt)
     {
         $this->deletedAt = $deletedAt;
 

@@ -120,9 +120,9 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     /**
      * Sets the timestamp that the user requested a password reset.
      *
-     * @param null|\DateTime $date
+     * @param null|\DateTimeInterface $date
      */
-    public function setPasswordRequestedAt(\DateTime $date = null);
+    public function setPasswordRequestedAt(\DateTimeInterface $date = null);
 
     /**
      * Checks whether the password reset request has expired.
@@ -134,14 +134,14 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getLastLogin();
 
     /**
-     * @param \DateTime $time
+     * @param \DateTimeInterface $time
      */
-    public function setLastLogin(\DateTime $time = null);
+    public function setLastLogin(\DateTimeInterface $time = null);
 
     /**
      * Never use this to check if this user has access to anything!

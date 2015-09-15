@@ -85,16 +85,16 @@ interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
     /**
      * Get the expiration date
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getExpiresAt();
 
     /**
      * Set the expiration date
      *
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
 
     /**
      * Is this coupon valid?

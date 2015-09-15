@@ -98,13 +98,13 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \DateTime   $from
-     * @param \DateTime   $to
+     * @param \DateTimeInterface   $from
+     * @param \DateTimeInterface   $to
      * @param null|string $status
      *
      * @return mixed
      */
-    public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
+    public function countBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to, $status = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
         if (null !== $status) {
@@ -177,12 +177,12 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \DateTime $from
-     * @param \DateTime $to
+     * @param \DateTimeInterface $from
+     * @param \DateTimeInterface $to
      *
      * @return QueryBuilder
      */
-    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
+    protected function getCollectionQueryBuilderBetweenDates(\DateTimeInterface $from, \DateTimeInterface $to)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 

@@ -75,14 +75,14 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * Creation date.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
@@ -282,7 +282,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -300,7 +300,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

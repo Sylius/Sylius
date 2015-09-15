@@ -47,16 +47,16 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Return completion date.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCompletedAt();
 
     /**
      * Set completion time.
      *
-     * @param null|\DateTime $completedAt
+     * @param null|\DateTimeInterface $completedAt
      */
-    public function setCompletedAt(\DateTime $completedAt = null);
+    public function setCompletedAt(\DateTimeInterface $completedAt = null);
 
     /**
      * Get order items.

@@ -126,7 +126,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function its_deletion_date_is_mutable(\DateTime $deletionTime)
+    function its_deletion_date_is_mutable(\DateTimeInterface $deletionTime)
     {
         $this->setDeletedAt($deletionTime);
         $this->getDeletedAt()->shouldReturn($deletionTime);

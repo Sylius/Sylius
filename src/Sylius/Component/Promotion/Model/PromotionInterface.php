@@ -117,30 +117,30 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * Get start date
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getStartsAt();
 
     /**
      * Set start date
      *
-     * @param \DateTime $startsAt
+     * @param \DateTimeInterface $startsAt
      */
-    public function setStartsAt(\DateTime $startsAt = null);
+    public function setStartsAt(\DateTimeInterface $startsAt = null);
 
     /**
      * Get end date
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getEndsAt();
 
     /**
      * Set end date
      *
-     * @param \DateTime $endsAt
+     * @param \DateTimeInterface $endsAt
      */
-    public function setEndsAt(\DateTime $endsAt = null);
+    public function setEndsAt(\DateTimeInterface $endsAt = null);
 
     /**
      * @return Boolean

@@ -51,7 +51,7 @@ interface SearchLogInterface
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param \DateTimeInterface $createdAt
      *
      * @return SearchLogInterface
      */
@@ -60,7 +60,7 @@ interface SearchLogInterface
     /**
      * Get createdAt
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCreatedAt();
 }

@@ -24,7 +24,7 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * Available on.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $availableOn;
 
@@ -73,7 +73,7 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setAvailableOn(\DateTime $availableOn = null)
+    public function setAvailableOn(\DateTimeInterface $availableOn = null)
     {
         $this->availableOn = $availableOn;
 

@@ -26,14 +26,14 @@ interface SoftDeletableInterface
     /**
      * Get the time of deletion.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getDeletedAt();
 
     /**
      * Set deletion time.
      *
-     * @param \DateTime $deletedAt
+     * @param \DateTimeInterface $deletedAt
      */
-    public function setDeletedAt(\DateTime $deletedAt = null);
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null);
 }

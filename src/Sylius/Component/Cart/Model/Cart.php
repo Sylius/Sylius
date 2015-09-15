@@ -25,7 +25,7 @@ class Cart extends Order implements CartInterface
     /**
      * Expiration time.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
@@ -66,7 +66,7 @@ class Cart extends Order implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
 
