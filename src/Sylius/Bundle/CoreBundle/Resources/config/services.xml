@@ -403,6 +403,7 @@
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
 

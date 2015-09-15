@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -23,33 +24,38 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * Free product action.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
-     *
      * @var RepositoryInterface
      */
-    protected $itemRepository;
+    protected $orderItemRepository;
 
     /**
-     * Variant repository.
-     *
      * @var RepositoryInterface
      */
     protected $variantRepository;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $itemRepository
-     * @param RepositoryInterface $variantRepository
+     * @var OriginatorInterface
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
-    {
-        $this->itemRepository    = $itemRepository;
-        $this->variantRepository = $variantRepository;
+    protected $originator;
+
+    /**
+     * @param RepositoryInterface $orderItemRepository
+     * @param RepositoryInterface $variantRepository
+     * @param OriginatorInterface $originator
+     */
+    public function __construct(
+        RepositoryInterface $orderItemRepository, 
+        RepositoryInterface $variantRepository,
+        OriginatorInterface $originator
+    ) {
+        $this->orderItemRepository = $orderItemRepository;
+        $this->variantRepository   = $variantRepository;
+        $this->originator          = $originator;
     }
 
     /**
@@ -65,17 +71,13 @@ class AddProductAction implements PromotionActionInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
-        $promotionItem = $this->createItem($configuration);
-
-        foreach ($subject->getItems() as $item) {
-            if ($item->equals($promotionItem)) {
+        foreach ($subject->getItems() as $orderItem) {
+            if ($promotion === $this->originator->getOrigin($orderItem)) {
                 return;
             }
         }
 
-        $promotionItem->setImmutable(true);
-
-        $subject->addItem($promotionItem);
+        $subject->addItem($this->createItem($configuration, $promotion));
     }
 
     /**
@@ -91,12 +93,11 @@ class AddProductAction implements PromotionActionInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
-        $promotionItem = $this->createItem($configuration);
-        $promotionItem->setImmutable(true);
+        foreach ($subject->getItems() as $orderItem) {
+            if ($promotion === $this->originator->getOrigin($orderItem)) {
+                $subject->removeItem($orderItem);
 
-        foreach ($subject->getItems() as $item) {
-            if ($item->equals($promotionItem)) {
-                $subject->removeItem($item);
+                return;
             }
         }
     }
@@ -110,20 +111,24 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Create promotion item
+     * Create promotion order item.
      *
-     * @param array $configuration
+     * @param array              $configuration
+     * @param PromotionInterface $promotion
      *
      * @return OrderItemInterface
      */
-    protected function createItem(array $configuration)
+    protected function createItem(array $configuration, PromotionInterface $promotion)
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        return $this->itemRepository->createNew()
-            ->setVariant($variant)
-            ->setQuantity((int) $configuration['quantity'])
-            ->setUnitPrice((int) $configuration['price'])
-        ;
+        $orderItem = $this->orderItemRepository->createNew();
+        $orderItem->setVariant($variant);
+        $orderItem->setQuantity((int) $configuration['quantity']);
+        $orderItem->setUnitPrice((int) $configuration['price']);
+
+        $this->originator->setOrigin($orderItem, $promotion);
+
+        return $orderItem;
     }
 }

@@ -19,5 +19,5 @@ interface AdjustmentInterface extends BaseAdjustmentInterface
     const TAX_ADJUSTMENT       = 'tax';
     const SHIPPING_ADJUSTMENT  = 'shipping';
     const PROMOTION_ADJUSTMENT = 'promotion';
-    const PAYMENT_ADJUSTMENT   = "payment";
+    const PAYMENT_ADJUSTMENT   = 'payment';
 }
