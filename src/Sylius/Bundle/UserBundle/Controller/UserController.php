@@ -31,7 +31,12 @@ class UserController extends ResourceController
 {
     public function changePasswordAction(Request $request)
     {
-        $this->validateAccess();
+        $this->denyAccessUnlessGranted(
+            'IS_AUTHENTICATED_REMEMBERED',
+            null,
+            'You have to be registered user to access this section.'
+        );
+
         $user = $this->getUser();
 
         $changePassword = new ChangePassword();
@@ -254,14 +259,6 @@ class UserController extends ResourceController
         $this->addFlash('success', 'sylius.user.password.change.success');
 
         return new RedirectResponse($this->generateUrl('sylius_account_profile_show'));
-    }
-
-    // TODO will be replaced by denyAccessUnlessGranted after bump to Symfony 2.7
-    protected function validateAccess()
-    {
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            throw new AccessDeniedException('You have to be registered user to access this section.');
-        }
     }
 
     /**
