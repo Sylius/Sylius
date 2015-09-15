@@ -118,6 +118,7 @@ class SettingsManager implements SettingsManagerInterface
             $parameters = $this->cache->fetch($namespace);
         } else {
             $parameters = $this->getParameters($namespace);
+            $this->cache->save($namespace, $parameters);
         }
 
         $schema = $this->schemaRegistry->getSchema($namespace);
