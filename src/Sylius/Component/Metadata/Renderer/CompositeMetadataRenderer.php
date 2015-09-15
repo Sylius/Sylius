@@ -36,11 +36,11 @@ class CompositeMetadataRenderer implements MetadataRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(MetadataInterface $metadata)
+    public function render(MetadataInterface $metadata, array $options = [])
     {
         foreach ($this->renderers as $renderer) {
-            if ($renderer->supports($metadata)) {
-                return $renderer->render($metadata);
+            if ($renderer->supports($metadata, $options)) {
+                return $renderer->render($metadata, $options);
             }
         }
 
@@ -53,10 +53,10 @@ class CompositeMetadataRenderer implements MetadataRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(MetadataInterface $metadata)
+    public function supports(MetadataInterface $metadata, array $options = [])
     {
         foreach ($this->renderers as $renderer) {
-            if ($renderer->supports($metadata)) {
+            if ($renderer->supports($metadata, $options)) {
                 return true;
             }
         }
@@ -67,7 +67,7 @@ class CompositeMetadataRenderer implements MetadataRendererInterface
     /**
      * @param MetadataRendererInterface $renderer
      */
-    protected function addRenderer(MetadataRendererInterface $renderer)
+    public function addRenderer(MetadataRendererInterface $renderer)
     {
         $this->renderers[] = $renderer;
     }

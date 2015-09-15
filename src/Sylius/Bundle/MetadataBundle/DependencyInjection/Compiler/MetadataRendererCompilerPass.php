@@ -33,11 +33,8 @@ class MetadataRendererCompilerPass implements CompilerPassInterface
 
         $taggedServices = $container->findTaggedServiceIds('sylius.metadata_renderer');
 
-        $renderers = $definition->getArgument(0) ?: [];
         foreach ($taggedServices as $id => $tags) {
-            $renderers[] = new Reference($id);
+            $definition->addMethodCall('addRenderer', [new Reference($id)]);
         }
-
-        $definition->replaceArgument(0, $renderers);
     }
 }

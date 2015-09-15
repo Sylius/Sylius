@@ -14,6 +14,7 @@ namespace Sylius\Component\Metadata\Renderer\Twitter;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Model\Twitter\CardInterface;
 use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -49,35 +50,35 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
     ];
 
     /**
-     * {@inheritdoc}
+     * @var OptionsResolver
      */
-    public function render(MetadataInterface $metadata)
+    protected $optionsResolver;
+
+    /**
+     * @param OptionsResolver $optionsResolver
+     */
+    public function __construct(OptionsResolver $optionsResolver)
     {
-        $properties = $metadata->toArray();
-
-        $renderedProperties = [];
-        foreach ($properties as $propertyKey => $propertyValue) {
-            if (null === $propertyValue) {
-                continue;
-            }
-
-            $this->ensurePropertyIsKnown($metadata, $propertyKey);
-
-            $renderedProperties[] = sprintf(
-                '<meta name="%s" content="%s" />',
-                $this->keysToNames[$propertyKey],
-                htmlentities($propertyValue, \ENT_COMPAT)
-            );
-        }
-
-        return join("\n", $renderedProperties);
+        $this->optionsResolver = $this->configureOptionsResolver($optionsResolver);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supports(MetadataInterface $metadata)
+    public function render(MetadataInterface $metadata, array $options = [])
     {
+        $this->optionsResolver->resolve($options);
+
+        return join("\n", $this->renderProperties($metadata));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(MetadataInterface $metadata, array $options = [])
+    {
+        $this->optionsResolver->resolve($options);
+
         return $metadata instanceof CardInterface;
     }
 
@@ -94,5 +95,50 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
                 $propertyKey
             ));
         }
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     *
+     * @return array
+     */
+    protected function renderProperties(MetadataInterface $metadata)
+    {
+        $renderedProperties = [];
+        foreach ($metadata->toArray() as $propertyKey => $propertyValue) {
+            if (null === $propertyValue) {
+                continue;
+            }
+
+            $this->ensurePropertyIsKnown($metadata, $propertyKey);
+
+            $renderedProperties[] = sprintf(
+                '<meta name="%s" content="%s" />',
+                $this->keysToNames[$propertyKey],
+                htmlentities($propertyValue, \ENT_COMPAT)
+            );
+        }
+
+        return $renderedProperties;
+    }
+
+    /**
+     * @param OptionsResolver $optionsResolver
+     *
+     * @return OptionsResolver
+     */
+    private function configureOptionsResolver(OptionsResolver $optionsResolver)
+    {
+        $optionsResolver
+            ->setDefaults([
+                'group' => 'head',
+            ])
+            ->setAllowedValues(
+                'group',
+                ['head']
+            )
+        ;
+
+        return $optionsResolver;
     }
 }
