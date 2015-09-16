@@ -50,6 +50,16 @@ interface PageMetadataInterface extends MetadataInterface
     public function setKeywords(array $keywords);
 
     /**
+     * @return string
+     */
+    public function getCharset();
+
+    /**
+     * @param string $charset
+     */
+    public function setCharset($charset);
+
+    /**
      * @return CardInterface|null
      */
     public function getTwitter();
