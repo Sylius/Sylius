@@ -48,16 +48,49 @@ class MetadataExtensionSpec extends ObjectBehavior
         $this->getProperty($metadataSubject, 'property.path[0]')->shouldReturn('property value');
     }
 
+    function it_proxies_get_property_to_Metadata_Accessor_even_when_no_property_path_has_been_passed(
+        MetadataAccessorInterface $metadataAccessor,
+        MetadataSubjectInterface $metadataSubject,
+        MetadataInterface $metadata
+    ) {
+        $metadataAccessor->getProperty($metadataSubject, null)->shouldBeCalled()->willReturn($metadata);
+
+        $this->getProperty($metadataSubject, null)->shouldReturn($metadata);
+    }
+
+    function it_proxies_get_property_to_Metadata_Accessor_and_uses_default_value_if_null_was_returned(
+        MetadataAccessorInterface $metadataAccessor,
+        MetadataSubjectInterface $metadataSubject,
+        MetadataInterface $metadata
+    ) {
+        $metadataAccessor->getProperty($metadataSubject, 'property.path[0]')->shouldBeCalled()->willReturn(null);
+
+        $this->getProperty($metadataSubject, 'property.path[0]', $metadata)->shouldReturn($metadata);
+    }
+
     function it_proxies_render_property_to_Metadata_Renderer(
         MetadataAccessorInterface $metadataAccessor,
         MetadataRendererInterface $metadataRenderer,
         MetadataSubjectInterface $metadataSubject,
         MetadataInterface $metadata
     ) {
-        $metadataRenderer->render($metadata)->shouldBeCalled()->willReturn('Rendered metadata');
+        $metadataRenderer->render($metadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn('Rendered property metadata');
 
         $metadataAccessor->getProperty($metadataSubject, 'property.path')->shouldBeCalled()->willReturn($metadata);
 
-        $this->renderProperty($metadataSubject, 'property.path')->shouldReturn('Rendered metadata');
+        $this->renderProperty($metadataSubject, 'property.path', ['foo' => 'bar'])->shouldReturn('Rendered property metadata');
+    }
+
+    function it_proxies_render_property_to_Metadata_Renderer_even_when_no_property_path_has_been_passed(
+        MetadataAccessorInterface $metadataAccessor,
+        MetadataRendererInterface $metadataRenderer,
+        MetadataSubjectInterface $metadataSubject,
+        MetadataInterface $metadata
+    ) {
+        $metadataRenderer->render($metadata, ['foo' => 'bar'])->shouldBeCalled()->willReturn('Rendered metadata');
+
+        $metadataAccessor->getProperty($metadataSubject, null)->shouldBeCalled()->willReturn($metadata);
+
+        $this->renderProperty($metadataSubject, null, ['foo' => 'bar'])->shouldReturn('Rendered metadata');
     }
 }

@@ -53,26 +53,28 @@ class MetadataExtension extends \Twig_Extension
 
     /**
      * @param MetadataSubjectInterface $metadataSubject
-     * @param string $propertyPath
+     * @param string|null $propertyPath
+     * @param mixed|null $defaultValue
      *
      * @return mixed
      */
-    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath)
+    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null, $defaultValue = null)
     {
-        return $this->metadataAccessor->getProperty($metadataSubject, $propertyPath);
+        return $this->metadataAccessor->getProperty($metadataSubject, $propertyPath) ?: $defaultValue;
     }
 
     /**
      * @param MetadataSubjectInterface $metadataSubject
-     * @param string $propertyPath
+     * @param string|null $propertyPath
+     * @param array $options
      *
      * @return string
      */
-    public function renderProperty(MetadataSubjectInterface $metadataSubject, $propertyPath)
+    public function renderProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null, array $options = [])
     {
         $metadataProperty = $this->metadataAccessor->getProperty($metadataSubject, $propertyPath);
 
-        return $this->metadataRenderer->render($metadataProperty);
+        return $this->metadataRenderer->render($metadataProperty, $options);
     }
 
     /**
@@ -80,6 +82,6 @@ class MetadataExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_restricted_zone';
+        return 'sylius_metadata';
     }
 }
