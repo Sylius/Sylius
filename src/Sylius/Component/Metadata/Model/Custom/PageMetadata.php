@@ -35,6 +35,11 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     protected $keywords = [];
 
     /**
+     * @var string
+     */
+    protected $charset = 'UTF-8';
+
+    /**
      * @var CardInterface
      */
     protected $twitter;
@@ -85,6 +90,22 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     public function setKeywords(array $keywords)
     {
         $this->keywords = $keywords;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCharset()
+    {
+        return $this->charset;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCharset($charset)
+    {
+        $this->charset = $charset;
     }
 
     /**

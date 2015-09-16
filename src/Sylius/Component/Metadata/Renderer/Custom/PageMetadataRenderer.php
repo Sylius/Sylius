@@ -167,6 +167,10 @@ class PageMetadataRenderer implements MetadataRendererInterface
             return sprintf('<meta name="keywords" content="%s" />', join(', ', $value));
         });
 
+        $this->addSubrenderer('charset', function ($value) {
+            return sprintf('<meta charset="%s" />', $value);
+        });
+
         $this->addSubrenderer('twitter', function ($value) {
             return $this->universalRenderer->render($value);
         });

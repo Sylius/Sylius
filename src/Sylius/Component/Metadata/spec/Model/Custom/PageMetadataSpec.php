@@ -55,6 +55,14 @@ class PageMetadataSpec extends ObjectBehavior
         $this->getKeywords()->shouldReturn(['lorem', 'ipsum']);
     }
 
+    function it_has_charset()
+    {
+        $this->getCharset()->shouldReturn('UTF-8');
+
+        $this->setCharset('ISO-8859-2');
+        $this->getCharset()->shouldReturn('ISO-8859-2');
+    }
+
     function it_has_Twitter(CardInterface $card)
     {
         $this->getTwitter()->shouldReturn(null);
