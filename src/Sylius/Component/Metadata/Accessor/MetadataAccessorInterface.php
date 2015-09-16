@@ -20,9 +20,9 @@ interface MetadataAccessorInterface
 {
     /**
      * @param MetadataSubjectInterface $metadataSubject
-     * @param string $propertyPath
+     * @param string|null $propertyPath
      *
      * @return mixed
      */
-    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath);
+    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null);
 }

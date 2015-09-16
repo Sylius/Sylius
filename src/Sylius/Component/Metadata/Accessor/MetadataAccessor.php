@@ -43,9 +43,13 @@ class MetadataAccessor implements MetadataAccessorInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath)
+    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null)
     {
         $metadata = $this->metadataProvider->getMetadataBySubject($metadataSubject);
+
+        if (null === $propertyPath) {
+            return $metadata;
+        }
 
         return $this->propertyAccessor->getValue($metadata, $propertyPath);
     }
