@@ -6,6 +6,7 @@ use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -28,30 +29,22 @@ class PageMetadataRenderer implements MetadataRendererInterface
     protected $optionsResolver;
 
     /**
+     * @var PropertyAccessorInterface
+     */
+    private $propertyAccessor;
+
+    /**
      * @param MetadataRendererInterface $universalRenderer
      * @param OptionsResolver $optionsResolver
+     * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver)
+    public function __construct(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver, PropertyAccessorInterface $propertyAccessor)
     {
         $this->universalRenderer = $universalRenderer;
-
         $this->optionsResolver = $this->configureOptionsResolver($optionsResolver);
+        $this->propertyAccessor = $propertyAccessor;
 
-        $this->addSubrenderer('title', function ($value) {
-            return sprintf('<title>%s</title>', $value);
-        });
-
-        $this->addSubrenderer(['description', 'author'], function ($value, $key) {
-            return sprintf('<meta name="%s" content="%s" />', $key, $value);
-        });
-
-        $this->addSubrenderer('keywords', function ($value) {
-            return sprintf('<meta name="keywords" content="%s" />', join(', ', $value));
-        });
-
-        $this->addSubrenderer('twitter', function ($value) {
-            return $this->universalRenderer->render($value);
-        });
+        $this->declareSubrenderers();
     }
 
     /**
@@ -124,13 +117,12 @@ class PageMetadataRenderer implements MetadataRendererInterface
      */
     protected function renderProperties(MetadataInterface $metadata, array $options)
     {
-        $properties = array_replace_recursive(
-            $options['defaults'],
-            array_filter($metadata->toArray(), function ($item) { return null !== $item; })
-        );
+        $this->setDefaultValuesOnMetadata($metadata, $options['defaults']);
 
         $renderedProperties = [];
-        foreach ($properties as $propertyKey => $propertyValue) {
+        foreach (array_keys($metadata->toArray()) as $propertyKey) {
+            $propertyValue = $this->propertyAccessor->getValue($metadata, $propertyKey);
+
             if (null === $propertyValue) {
                 continue;
             }
@@ -159,5 +151,41 @@ class PageMetadataRenderer implements MetadataRendererInterface
         $optionsResolver->setAllowedTypes('defaults', 'array');
 
         return $optionsResolver;
+    }
+
+    protected function declareSubrenderers()
+    {
+        $this->addSubrenderer('title', function ($value) {
+            return sprintf('<title>%s</title>', $value);
+        });
+
+        $this->addSubrenderer(['description', 'author'], function ($value, $key) {
+            return sprintf('<meta name="%s" content="%s" />', $key, $value);
+        });
+
+        $this->addSubrenderer('keywords', function ($value) {
+            return sprintf('<meta name="keywords" content="%s" />', join(', ', $value));
+        });
+
+        $this->addSubrenderer('twitter', function ($value) {
+            return $this->universalRenderer->render($value);
+        });
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     * @param array $defaultValues
+     *
+     * @return MetadataInterface
+     */
+    protected function setDefaultValuesOnMetadata(MetadataInterface $metadata, array $defaultValues)
+    {
+        foreach ($defaultValues as $propertyPath => $value) {
+            if (null !== $this->propertyAccessor->getValue($metadata, $propertyPath)) {
+                continue;
+            }
+
+            $this->propertyAccessor->setValue($metadata, $propertyPath, $value);
+        }
     }
 }
