@@ -59,9 +59,10 @@ class PageMetadataRenderer implements MetadataRendererInterface
      */
     public function render(MetadataInterface $metadata, array $options = [])
     {
-        $this->optionsResolver->resolve($options);
-
-        return join("\n", $this->renderProperties($metadata));
+        return join("\n", $this->renderProperties(
+            $metadata,
+            $this->optionsResolver->resolve($options)
+        ));
     }
 
     /**
@@ -69,8 +70,6 @@ class PageMetadataRenderer implements MetadataRendererInterface
      */
     public function supports(MetadataInterface $metadata, array $options = [])
     {
-        $this->optionsResolver->resolve($options);
-
         return $metadata instanceof PageMetadataInterface;
     }
 
@@ -119,13 +118,19 @@ class PageMetadataRenderer implements MetadataRendererInterface
 
     /**
      * @param MetadataInterface $metadata
+     * @param array $options
      *
      * @return array
      */
-    protected function renderProperties(MetadataInterface $metadata)
+    protected function renderProperties(MetadataInterface $metadata, array $options)
     {
+        $properties = array_replace_recursive(
+            $options['defaults'],
+            array_filter($metadata->toArray(), function ($item) { return null !== $item; })
+        );
+
         $renderedProperties = [];
-        foreach ($metadata->toArray() as $propertyKey => $propertyValue) {
+        foreach ($properties as $propertyKey => $propertyValue) {
             if (null === $propertyValue) {
                 continue;
             }
@@ -145,15 +150,13 @@ class PageMetadataRenderer implements MetadataRendererInterface
      */
     private function configureOptionsResolver(OptionsResolver $optionsResolver)
     {
-        $optionsResolver
-            ->setDefaults([
-                'group' => 'head',
-            ])
-            ->setAllowedValues(
-                'group',
-                ['head']
-            )
-        ;
+        $optionsResolver->setDefaults([
+            'group' => 'head',
+            'defaults' => [],
+        ]);
+
+        $optionsResolver->setAllowedValues('group', ['head']);
+        $optionsResolver->setAllowedTypes('defaults', 'array');
 
         return $optionsResolver;
     }

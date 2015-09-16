@@ -24,12 +24,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class GenericTwitterMetadataRendererSpec extends ObjectBehavior
 {
+    private $defaultOptions = ['group' => 'head', 'defaults' => []];
+
     function let(OptionsResolver $optionsResolver)
     {
         $this->beConstructedWith($optionsResolver);
 
         $optionsResolver->setDefaults(Argument::type('array'))->willReturn($optionsResolver);
         $optionsResolver->setAllowedValues(Argument::any(), Argument::type('array'))->willReturn($optionsResolver);
+        $optionsResolver->setAllowedTypes(Argument::any(), Argument::any())->willReturn($optionsResolver);
     }
 
     function it_is_initializable()
@@ -43,19 +46,16 @@ class GenericTwitterMetadataRendererSpec extends ObjectBehavior
     }
 
     function it_checks_if_metadata_is_supported_or_not(
-        OptionsResolver $optionsResolver,
         CardInterface $twitterMetadata,
         MetadataInterface $randomMetadata
     ) {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
-
         $this->supports($twitterMetadata)->shouldReturn(true);
         $this->supports($randomMetadata)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_metadata_has_unsupported_properties(OptionsResolver $optionsResolver, CardInterface $twitterMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $twitterMetadata->toArray()->shouldBeCalled()->willReturn(['type' => 'summary', 'notexisting' => '42']);
 
@@ -64,19 +64,18 @@ class GenericTwitterMetadataRendererSpec extends ObjectBehavior
 
     function it_renders_valid_metadata(OptionsResolver $optionsResolver, CardInterface $twitterMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $twitterMetadata->toArray()->shouldBeCalled()->willReturn(['type' => 'summary', 'title' => 'Lorem ipsum']);
 
-        $this->render($twitterMetadata)->shouldReturn(
-            '<meta name="twitter:card" content="summary" />' . "\n" .
-            '<meta name="twitter:title" content="Lorem ipsum" />'
-        );
+        $renderedMetadata = $this->render($twitterMetadata);
+        $renderedMetadata->shouldContainText('<meta name="twitter:card" content="summary" />');
+        $renderedMetadata->shouldContainText('<meta name="twitter:title" content="Lorem ipsum" />');
     }
 
     function it_does_not_render_null_values(OptionsResolver $optionsResolver, CardInterface $twitterMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $twitterMetadata->toArray()->shouldBeCalled()->willReturn([
             'type' => 'summary',
@@ -84,9 +83,46 @@ class GenericTwitterMetadataRendererSpec extends ObjectBehavior
             'title' => 'Lorem ipsum',
         ]);
 
-        $this->render($twitterMetadata)->shouldReturn(
-            '<meta name="twitter:card" content="summary" />' . "\n" .
-            '<meta name="twitter:title" content="Lorem ipsum" />'
-        );
+        $renderedMetadata = $this->render($twitterMetadata);
+        $renderedMetadata->shouldContainText('<meta name="twitter:card" content="summary" />');
+        $renderedMetadata->shouldContainText('<meta name="twitter:title" content="Lorem ipsum" />');
+    }
+
+    function it_uses_defaults_option_to_set_default_values_while_rendering(
+        OptionsResolver $optionsResolver,
+        CardInterface $twitterMetadata
+    ) {
+        $twitterMetadata->toArray()->shouldBeCalled()->willReturn([
+            'type' => 'summary',
+            'title' => 'Lorem ipsum',
+            'image' => null,
+        ]);
+
+        $options = [
+            'defaults' => [
+                'image' => 'http://example.com/example.jpg',
+            ],
+        ];
+
+        $resolvedOptions = array_replace($this->defaultOptions, $options);
+
+        $optionsResolver->resolve($options)->shouldBeCalled()->willReturn($resolvedOptions);
+
+        $renderedMetadata = $this->render($twitterMetadata, $options);
+        $renderedMetadata->shouldContainText('<meta name="twitter:card" content="summary" />');
+        $renderedMetadata->shouldContainText('<meta name="twitter:title" content="Lorem ipsum" />');
+        $renderedMetadata->shouldContainText('<meta name="twitter:image" content="http://example.com/example.jpg" />');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMatchers()
+    {
+        return [
+            'containText' => function ($subject, $text) {
+                return false !== strpos($subject, $text);
+            },
+        ];
     }
 }
