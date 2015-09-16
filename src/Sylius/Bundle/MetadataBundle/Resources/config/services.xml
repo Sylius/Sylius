@@ -65,6 +65,7 @@
         <service id="sylius.metadata.renderer.custom_page" class="%sylius.metadata.renderer.custom_page.class%" public="false">
             <argument type="service" id="sylius.metadata.renderer" />
             <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
+            <argument type="service" id="property_accessor" />
             <tag name="sylius.metadata_renderer" />
         </service>
         
