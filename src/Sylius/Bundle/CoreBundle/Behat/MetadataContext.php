@@ -16,12 +16,37 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\ElementInterface;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Metadata\Model\Custom\PageMetadata;
+use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
+use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\Twitter\AppCard;
+use Sylius\Component\Metadata\Model\Twitter\CardInterface;
+use Sylius\Component\Metadata\Model\Twitter\PlayerCard;
+use Sylius\Component\Metadata\Model\Twitter\SummaryCard;
+use Sylius\Component\Metadata\Model\Twitter\SummaryLargeImageCard;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class MetadataContext extends DefaultContext
 {
+    /**
+     * @var PropertyAccessor
+     */
+    private $propertyAccessor;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($applicationName = null)
+    {
+        parent::__construct($applicationName);
+
+        $this->propertyAccessor = new PropertyAccessor();
+    }
+
     /**
      * @When I am customizing metadata
      * @When I am customizing metadata with identifier "([^"]+)"
@@ -153,6 +178,79 @@ class MetadataContext extends DefaultContext
     }
 
     /**
+     * @Given product :productName has the following page metadata:
+     */
+    public function productHasTheFollowingPageMetadata($productName, TableNode $table)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->getRepository('product')->findOneBy(['name' => $productName]);
+
+        /** @var RootMetadataInterface $metadata */
+        $metadata = $this->getRepository('metadata')->createNew();
+
+        $pageMetadata = new PageMetadata();
+
+        foreach ($table->getRowsHash() as $key => $value) {
+            if ($this->createNewMetadataObjectIfNeeded($pageMetadata, $key, $value)) {
+                continue;
+            }
+
+            if (false !== strpos($value, ',')) {
+                $value = array_map('trim', explode(',', $value));
+            }
+
+            $this->propertyAccessor->setValue($pageMetadata, $key, $value);
+        }
+
+        $metadata->setId($product->getMetadataIdentifier());
+        $metadata->setMetadata($pageMetadata);
+
+        $em = $this->getEntityManager();
+        $em->persist($metadata);
+        $em->flush();
+    }
+
+    /**
+     * @Then I should see :title as page title
+     */
+    public function iShouldSeeAsPageTitle($title)
+    {
+        $this->assertSession()->elementTextContains('css', 'title', $title);
+    }
+
+    /**
+     * @Then the page keywords should contain :keyword
+     */
+    public function thePageKeywordsShouldContain($keyword)
+    {
+        $this->assertSession()->elementExists('css', sprintf('meta[name="keywords"][content*="%s"]', $keyword));
+    }
+
+    /**
+     * @Then there should be Twitter summary card metadata on this page
+     */
+    public function thereShouldBeTwitterSummaryCardMetadataOnThisPage()
+    {
+        $this->assertSession()->elementExists('css', 'meta[name="twitter:card"][content="summary"]');
+    }
+
+    /**
+     * @Then Twitter site should be :site
+     */
+    public function twitterSiteShouldBe($site)
+    {
+        $this->assertSession()->elementExists('css', sprintf('meta[name="twitter:site"][content="%s"]', $site));
+    }
+
+    /**
+     * @Then Twitter image should be :image
+     */
+    public function twitterImageShouldBe($image)
+    {
+        $this->assertSession()->elementExists('css', sprintf('meta[name="twitter:image"][content="%s"]', $image));
+    }
+
+    /**
      * @When /I deselect "([^"]+)"/
      */
     public function iDeselectSelectField($fieldName)
@@ -236,5 +334,51 @@ class MetadataContext extends DefaultContext
         }
 
         return null;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return CardInterface
+     */
+    protected function getTwitterCardFromString($value)
+    {
+        switch (strtolower($value)) {
+            case 'summary':
+                return new SummaryCard();
+
+            case 'summary with large image':
+            case 'summary large image':
+            case 'summarylargeimage':
+                return new SummaryLargeImageCard();
+
+            case 'player':
+                return new PlayerCard();
+
+            case 'app':
+            case 'application':
+                return new AppCard();
+
+            default:
+                throw new \InvalidArgumentException(sprintf('Unknown card type "%s"!', $value));
+        }
+    }
+
+    /**
+     * @param PageMetadataInterface $pageMetadata
+     * @param string $key
+     * @param string $value
+     *
+     * @return boolean True if created new metadata object
+     */
+    protected function createNewMetadataObjectIfNeeded(PageMetadataInterface $pageMetadata, $key, $value)
+    {
+        if ('twitter.card' === strtolower($key)) {
+            $pageMetadata->setTwitter($this->getTwitterCardFromString($value));
+
+            return true;
+        }
+
+        return false;
     }
 }
