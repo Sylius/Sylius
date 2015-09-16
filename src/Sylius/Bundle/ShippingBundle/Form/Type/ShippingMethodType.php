@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
@@ -31,7 +32,7 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * Calculator registry.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistry
      */
     protected $calculatorRegistry;
 
@@ -47,10 +48,10 @@ class ShippingMethodType extends AbstractResourceType
      *
      * @param string                       $dataClass
      * @param array                        $validationGroups
-     * @param CalculatorRegistryInterface  $calculatorRegistry
+     * @param ServiceRegistry              $calculatorRegistry
      * @param RuleCheckerRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistry $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -94,7 +95,7 @@ class ShippingMethodType extends AbstractResourceType
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
         $prototypes['calculators'] = array();
-        foreach ($this->calculatorRegistry->getCalculators() as $name => $calculator) {
+        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
             if (!$calculator->isConfigurable()) {
                 continue;
             }

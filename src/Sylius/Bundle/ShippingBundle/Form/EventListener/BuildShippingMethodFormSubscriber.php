@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -29,7 +30,7 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     /**
      * It hold registry of all calculators.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistry
      */
     private $calculatorRegistry;
 
@@ -43,10 +44,10 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param CalculatorRegistryInterface $calculatorRegistry
-     * @param FormFactoryInterface        $factory
+     * @param ServiceRegistry      $calculatorRegistry
+     * @param FormFactoryInterface $factory
      */
-    public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistry $calculatorRegistry, FormFactoryInterface $factory)
     {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
@@ -104,7 +105,7 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = array())
     {
-        $calculator = $this->calculatorRegistry->getCalculator($calculatorName);
+        $calculator = $this->calculatorRegistry->get($calculatorName);
 
         if (!$calculator->isConfigurable()) {
             return;

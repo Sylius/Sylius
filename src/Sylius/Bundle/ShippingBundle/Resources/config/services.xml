@@ -24,7 +24,8 @@
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType</parameter>
         <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
 
-        <parameter key="sylius.shipping_calculator_registry.class">Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry</parameter>
+        <parameter key="sylius.shipping_calculator_registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.shipping_calculator.interface">Sylius\Component\Shipping\Calculator\CalculatorInterface</parameter>
         <parameter key="sylius.shipping_calculator.class">Sylius\Component\Shipping\Calculator\DelegatingCalculator</parameter>
 
         <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry</parameter>
@@ -88,7 +89,9 @@
             <tag name="form.type" alias="sylius_shipping_calculator_choice" />
         </service>
 
-        <service id="sylius.shipping_calculator_registry" class="%sylius.shipping_calculator_registry.class%" />
+        <service id="sylius.shipping_calculator_registry" class="%sylius.shipping_calculator_registry.class%">
+            <argument>%sylius.shipping_calculator.interface%</argument>
+        </service>
         <service id="sylius.shipping_calculator" class="%sylius.shipping_calculator.class%">
             <argument type="service" id="sylius.shipping_calculator_registry" />
         </service>

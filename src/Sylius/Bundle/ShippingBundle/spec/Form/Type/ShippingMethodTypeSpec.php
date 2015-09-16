@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
 use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
@@ -29,7 +30,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(
-        CalculatorRegistryInterface $calculatorRegistry,
+        ServiceRegistry $calculatorRegistry,
         RuleCheckerRegistryInterface $checkerRegistry,
         FormBuilder $builder,
         FormFactoryInterface $factory
@@ -47,7 +48,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
     {
-        $calculatorRegistry->getCalculators()->willReturn(array());
+        $calculatorRegistry->get(Argument::any())->willReturn(array());
 
         $builder->addEventSubscriber(
             Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber')
@@ -86,7 +87,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         $calculatorRegistry
     ) {
-        $calculatorRegistry->getCalculators()->willReturn(array());
+        $calculatorRegistry->all()->willReturn(array());
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
         $builder
@@ -140,7 +141,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $calculatorRegistry
-            ->getCalculators()
+            ->all()
             ->willReturn(
                 array(
                     'flat_rate'     => $flatRateCalculator,

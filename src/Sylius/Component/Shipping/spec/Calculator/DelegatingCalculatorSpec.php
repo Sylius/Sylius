@@ -14,15 +14,15 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    function let(CalculatorRegistryInterface $registry)
+    function let(ServiceRegistry $registry)
     {
         $this->beConstructedWith($registry);
     }
