@@ -17,12 +17,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PageMetadataRendererSpec extends ObjectBehavior
 {
+    private $defaultOptions = ['group' => 'head', 'defaults' => []];
+    
     function let(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver)
     {
         $this->beConstructedWith($universalRenderer, $optionsResolver);
 
         $optionsResolver->setDefaults(Argument::type('array'))->willReturn($optionsResolver);
         $optionsResolver->setAllowedValues(Argument::any(), Argument::type('array'))->willReturn($optionsResolver);
+        $optionsResolver->setAllowedTypes(Argument::any(), Argument::any())->willReturn($optionsResolver);
     }
 
     function it_is_initializable()
@@ -36,19 +39,16 @@ class PageMetadataRendererSpec extends ObjectBehavior
     }
 
     function it_checks_if_metadata_is_supported_or_not(
-        OptionsResolver $optionsResolver,
         PageMetadataInterface $pageMetadata,
         MetadataInterface $randomMetadata
     ) {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
-
         $this->supports($pageMetadata)->shouldReturn(true);
         $this->supports($randomMetadata)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_metadata_has_unsupported_properties(OptionsResolver $optionsResolver, PageMetadataInterface $pageMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $pageMetadata->toArray()->shouldBeCalled()->willReturn(['title' => 'Lorem ipsum', 'notexisting' => '42']);
 
@@ -57,7 +57,7 @@ class PageMetadataRendererSpec extends ObjectBehavior
 
     function it_renders_valid_metadata(OptionsResolver $optionsResolver, PageMetadataInterface $pageMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $pageMetadata->toArray()->shouldBeCalled()->willReturn([
             'title' => 'Lorem ipsum',
@@ -65,23 +65,23 @@ class PageMetadataRendererSpec extends ObjectBehavior
             'author' => 'Krzysztof Krawczyk',
         ]);
 
-        $this->render($pageMetadata)->shouldReturn(
-            '<title>Lorem ipsum</title>' . "\n" .
-            '<meta name="keywords" content="foo, bar" />' . "\n" .
-            '<meta name="author" content="Krzysztof Krawczyk" />'
-        );
+        $renderedMetadata = $this->render($pageMetadata);
+        $renderedMetadata->shouldContainText('<title>Lorem ipsum</title>');
+        $renderedMetadata->shouldContainText('<meta name="keywords" content="foo, bar" />');
+        $renderedMetadata->shouldContainText('<meta name="author" content="Krzysztof Krawczyk" />');
     }
 
     function it_does_not_render_null_values(OptionsResolver $optionsResolver, PageMetadataInterface $pageMetadata)
     {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $pageMetadata->toArray()->shouldBeCalled()->willReturn([
             'title' => 'Lorem ipsum',
             'description' => null,
         ]);
 
-        $this->render($pageMetadata)->shouldReturn('<title>Lorem ipsum</title>');
+        $renderedMetadata = $this->render($pageMetadata);
+        $renderedMetadata->shouldContainText('<title>Lorem ipsum</title>');
     }
 
     function it_delegates_twitter_metadata_rendering_to_another_renderer(
@@ -90,12 +90,48 @@ class PageMetadataRendererSpec extends ObjectBehavior
         PageMetadataInterface $pageMetadata,
         CardInterface $twitterMetadata
     ) {
-        $optionsResolver->resolve([])->shouldBeCalled()->willReturn([]);
+        $optionsResolver->resolve([])->shouldBeCalled()->willReturn($this->defaultOptions);
 
         $pageMetadata->toArray()->shouldBeCalled()->willReturn(['twitter' => $twitterMetadata]);
 
         $universalRenderer->render($twitterMetadata)->shouldBeCalled()->willReturn('Rendered Twitter metadata');
 
         $this->render($pageMetadata)->shouldReturn('Rendered Twitter metadata');
+    }
+
+    function it_uses_defaults_option_to_set_default_values_while_rendering(
+        OptionsResolver $optionsResolver,
+        PageMetadataInterface $pageMetadata
+    ) {
+        $pageMetadata->toArray()->shouldBeCalled()->willReturn([
+            'title' => 'Lorem ipsum',
+            'author' => null,
+        ]);
+
+        $options = [
+            'defaults' => [
+                'author' => 'Krzysztof Krawczyk',
+            ],
+        ];
+
+        $resolvedOptions = array_merge($this->defaultOptions, $options);
+
+        $optionsResolver->resolve($options)->shouldBeCalled()->willReturn($resolvedOptions);
+
+        $renderedMetadata = $this->render($pageMetadata, $options);
+        $renderedMetadata->shouldContainText('<title>Lorem ipsum</title>');
+        $renderedMetadata->shouldContainText('<meta name="author" content="Krzysztof Krawczyk" />');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMatchers()
+    {
+        return [
+            'containText' => function ($subject, $text) {
+                return false !== strpos($subject, $text);    
+            },
+        ];
     }
 }
