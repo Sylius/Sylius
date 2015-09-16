@@ -2,6 +2,10 @@ language: php
 
 sudo: false
 
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+
 matrix:
     fast_finish: true
 
@@ -34,10 +38,10 @@ before_install:
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - composer self-update
-    - composer install --prefer-source --no-interaction
-    - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
+    - composer install --prefer-dist --no-interaction
+    - composer require doctrine/mongodb-odm="~1.0" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
-    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction $COMPOSER_FLAGS
+    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 before_script:
     - app/console doctrine:database:create --env=test
