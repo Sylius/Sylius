@@ -69,5 +69,8 @@ class PageMetadataSpec extends ObjectBehavior
 
         $this->setTwitter($card);
         $this->getTwitter()->shouldReturn($card);
+
+        $this->setTwitter(null);
+        $this->getTitle()->shouldReturn(null);
     }
 }
