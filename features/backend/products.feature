@@ -111,43 +111,13 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add attribute"
+        And I click "Add"
         And I select "T-Shirt fabric" from "Attribute"
         And I fill in "Value" with "Cotton"
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created." should appear on the page
         And I should see "Cotton"
-
-    @javascript
-    Scenario: Creating product with boolean attribute
-        Given I am on the product creation page
-        When I fill in the following:
-            | Name        | Manchester United tee   |
-            | Description | Interesting description |
-            | Price       | 59.99                   |
-        And go to "Attributes" tab
-        And I click "Add attribute"
-        And I select "T-Shirt fare trade" from "Attribute"
-        And I check "Value"
-        When I press "Create"
-        Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
-
-    @javascript
-    Scenario: Creating product with attributes to choose
-        Given I am on the product creation page
-        When I fill in the following:
-            | Name        | Manchester United tee   |
-            | Description | Interesting description |
-            | Price       | 59.99                   |
-        And go to "Attributes" tab
-        And I click "Add attribute"
-        And I select "Color" from "Attribute"
-        And I select "red" from "Value"
-        When I press "Create"
-        Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
 
     @javascript
     Scenario: Creating product with number attribute
@@ -157,7 +127,7 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add attribute"
+        And I click "Add"
         And I select "Color" from "Attribute"
         And I fill in "Value" with "12"
         When I press "Create"
@@ -214,7 +184,7 @@ Feature: Products
         And I click "delete" from the confirmation modal
         Then I should be on the product index page
         And I should see "Product has been successfully deleted."
-        And I should not see product with name "Sticker" in that list
+        And I should not see product with name "Mug" in that list
 
     Scenario: Accessing the product details page from list
         Given I am on the product index page

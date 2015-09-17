@@ -12,7 +12,10 @@
 namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\WebContext as BaseWebContext;
 use Symfony\Component\Intl\Intl;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -498,12 +501,47 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
-
         foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
-            $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
+            $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
+            $newItem->fillField('Value', $value[0]);
         }
+    }
+
+    /**
+     * @Given /^I add choice "([^""]*)"$/
+     */
+    public function iAddChoice($value)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'choices');
+        $newItem->find('css', 'input')->setValue($value);
+    }
+
+    /**
+     * @When /^I add zone member "([^"]+)"$/
+     */
+    public function iAddZoneMember($zoneMember)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'zone_members');
+        $select = $newItem->find('css', 'select');
+
+        if (null === $select) {
+            throw new \Exception('There is no select field available!');
+        }
+
+        $select->selectOption($zoneMember);
+    }
+
+    /**
+     * @Given /^I remove first choice$/
+     */
+    public function iRemoveFirstChoice()
+    {
+        $collection = $this->getFormCollectionDiv($this->getSession()->getPage(), 'choices');
+
+        /** @var NodeElement $firstItem */
+        $firstItem = current($collection->findAll('css', 'div[data-form-collection="item"]'));
+
+        $firstItem->clickLink('Delete');
     }
 
     /**
@@ -660,5 +698,33 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
             $this->assertStatusCodeEquals(200);
         } catch (UnsupportedDriverActionException $e) {
         }
+    }
+
+    /**
+     * @param DocumentElement $page
+     * @param string $collectionName
+     *
+     * @return NodeElement
+     */
+    protected function getFormCollectionDiv(DocumentElement $page, $collectionName)
+    {
+        return $page->find('css', 'div[data-form-type="collection"][id*="'. $collectionName .'"]');
+    }
+
+    /**
+     * @param DocumentElement $page
+     * @param string $collectionName
+     *
+     * @return NodeElement
+     */
+    protected function addNewItemToFormCollection(DocumentElement $page, $collectionName)
+    {
+        $collection = $this->getFormCollectionDiv($page, $collectionName);
+
+        $collection->find('css', 'a[data-form-collection="add"]')->click();
+
+        $items = $collection->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -352,17 +353,15 @@ class WebContext extends DefaultContext
         $this->assertSession()->elementExists('css', '#confirmation-modal');
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")', $button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->waitForModalToAppear($modalContainer);
 
         $primaryButton->press();
+
+        $this->waitForModalToDisappear($modalContainer);
+
+        $this->getSession()->wait(100);
     }
 
     /**
@@ -474,6 +473,10 @@ class WebContext extends DefaultContext
      */
     protected function assertStatusCodeEquals($code)
     {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
         $this->assertSession()->statusCodeEquals($code);
     }
 
@@ -517,5 +520,41 @@ class WebContext extends DefaultContext
         $isoName = $this->getCountryCodeByEnglishCountryName($name);
 
         $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     *
+     * @throws \Exception
+     */
+    protected function waitForModalToAppear($modalContainer)
+    {
+        $i = 0;
+        while (false === strpos($modalContainer->getAttribute('class'), 'in')) {
+            if (10 === $i) {
+                throw new \Exception('The confirmation modal was not opened...');
+            }
+
+            $this->getSession()->wait(100);
+            ++$i;
+        }
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     *
+     * @throws \Exception
+     */
+    protected function waitForModalToDisappear($modalContainer)
+    {
+        $i = 0;
+        while (false !== strpos($modalContainer->getAttribute('class'), 'in')) {
+            if (10 === $i) {
+                throw new \Exception('The confirmation modal was not closed...');
+            }
+
+            $this->getSession()->wait(100);
+            ++$i;
+        }
     }
 }

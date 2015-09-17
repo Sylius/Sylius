@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\StringUtil;
 
 class FixtureContext extends DefaultContext
@@ -71,12 +72,14 @@ class FixtureContext extends DefaultContext
      */
     public function objectWithFollowingDataShouldBeCreated($type, TableNode $table)
     {
+        $accessor = new PropertyAccessor();
+
         $data = $table->getRowsHash();
         $type = str_replace(' ', '_', trim($type));
 
         $object = $this->findOneByName($type, $data['name']);
         foreach ($data as $property => $value) {
-            $objectValue = $object->{'get'.ucfirst($property)}();
+            $objectValue = $accessor->getValue($object, $property);
             if (is_array($objectValue)) {
                 $objectValue = implode(',', $objectValue);
             }

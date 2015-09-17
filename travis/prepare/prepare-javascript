@@ -1,0 +1,31 @@
+#!/bin/bash
+# Configuring display
+/sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
+export DISPLAY=:99
+
+# Installing google-chrome
+if [ ! -f $SYLIUS_CACHE_DIR/google-chrome.deb ]; then
+    curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > $SYLIUS_CACHE_DIR/google-chrome.deb
+fi
+
+sudo dpkg -i $SYLIUS_CACHE_DIR/google-chrome.deb
+sudo apt-get -f install
+
+# Downloading and configuring Selenium & ChromeDriver
+if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ]; then
+    curl http://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.1.jar > $SYLIUS_CACHE_DIR/selenium.jar
+fi
+
+if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ]; then
+    curl http://chromedriver.storage.googleapis.com/2.19/chromedriver_linux64.zip > chromedriver.zip
+    unzip chromedriver.zip
+    mv chromedriver $SYLIUS_CACHE_DIR
+fi
+
+# Running Selenium with ChromeDriver
+java -jar $SYLIUS_CACHE_DIR/selenium.jar -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver > $SYLIUS_BUILD_DIR/selenium.log 2>&1 &
+vendor/lakion/mink-debug-extension/travis/tools/wait-for-port 4444
+
+# Running webserver
+app/console server:run 127.0.0.1:8080 --env=test > $SYLIUS_BUILD_DIR/webserver.log 2>&1 &
+vendor/lakion/mink-debug-extension/travis/tools/wait-for-port 8080

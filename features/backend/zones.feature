@@ -62,15 +62,13 @@ Feature: Zones
           And I fill in "Name" with "EU"
           And I select "Country" from "Type"
           And I select "shipping" from "Scope"
-          And I click "Add member"
-          And I click "Add member"
-          And I select "Estonia" from the 1st country
-          And I select "France" from the 2nd country
+          And I add zone member "Estonia"
+          And I add zone member "Germany"
          When I press "Create"
          Then I should be on the page of zone "EU"
           And I should see "Zone has been successfully created."
           And "Estonia" should appear on the page
-          And "France" should appear on the page
+          And "Germany" should appear on the page
           And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
@@ -89,8 +87,8 @@ Feature: Zones
          When I click "edit" near "USA GMT-8"
          Then I should be editing zone "USA GMT-8"
 
-  @javascript
-  Scenario: Updating the zone
+    @javascript
+    Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
           And I remove the first country
@@ -99,7 +97,7 @@ Feature: Zones
           And I should see "Zone has been successfully updated."
           And "Washington" should not appear on the page
 
-  Scenario: Updating the zone
+    Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
           And I press "Save changes"
@@ -110,8 +108,7 @@ Feature: Zones
     @javascript
     Scenario: Adding zone member to the existing zone
         Given I am editing zone "Baltic states"
-         When I click "Add member"
-          And I select "Estonia" from "Country"
+         When I add zone member "Estonia"
           And I press "Save changes"
          Then I should be on the page of zone "Baltic states"
           And I should see "Zone has been successfully updated."
@@ -119,11 +116,12 @@ Feature: Zones
 
     @javascript
     Scenario: Deleting zone
-        Given I am on the page of zone "USA GMT-8"
+        Given I am on the page of zone "Germany"
          When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
+          And I should not see zone with name "Germany" in that list
 
     @javascript
     Scenario: Deleting zone from list
@@ -132,11 +130,4 @@ Feature: Zones
           And I click "delete" from the confirmation modal
          Then I should still be on the zone index page
           And I should see "Zone has been successfully deleted."
-
-    @javascript
-    Scenario: Deleted zone disappears from the list
-        Given I am on the page of zone "Germany"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the zone index page
-          But I should not see zone with name "Germany" in that list
+          And I should not see zone with name "USA GMT-8" in that list

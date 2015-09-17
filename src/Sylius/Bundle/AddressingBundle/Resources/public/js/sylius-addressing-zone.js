@@ -10,8 +10,6 @@
     'use strict';
 
     $(document).ready(function() {
-        if (0 == $('[data-form-collection="item"]').length) {
-            $('#sylius_zone_type').trigger('change');
-        }
+        $('#sylius_zone_type').trigger('change');
     });
 })( jQuery );
