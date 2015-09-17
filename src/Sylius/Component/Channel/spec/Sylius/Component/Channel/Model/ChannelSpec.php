@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Model\ChannelInterface;
 
 class ChannelSpec extends ObjectBehavior
 {
@@ -80,10 +79,8 @@ class ChannelSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    function its_creation_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -93,10 +90,8 @@ class ChannelSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    function its_last_update_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }

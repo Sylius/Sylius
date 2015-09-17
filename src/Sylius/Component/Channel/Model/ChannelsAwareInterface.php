@@ -33,7 +33,7 @@ interface ChannelsAwareInterface
     /**
      * @param ChannelInterface $channel
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasChannel(ChannelInterface $channel);
 
