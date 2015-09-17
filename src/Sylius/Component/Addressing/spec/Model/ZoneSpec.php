@@ -100,13 +100,4 @@ class ZoneSpec extends ObjectBehavior
         $this->setScope('shipping');
         $this->getScope()->shouldReturn('shipping');
     }
-
-    function it_has_fluent_interface(ZoneMemberInterface $member, Collection $members)
-    {
-        $this->setName('Yugoslavia')->shouldReturn($this);
-        $this->setMembers($members)->shouldReturn($this);
-        $this->addMember($member)->shouldReturn($this);
-        $this->removeMember($member)->shouldReturn($this);
-        $this->setScope('shipping')->shouldReturn($this);
-    }
 }

@@ -59,10 +59,4 @@ class ZoneMemberProvinceSpec extends ObjectBehavior
 
         $this->getName()->shouldReturn('Łódzkie');
     }
-
-    function it_has_fluent_interface(ProvinceInterface $province, ZoneInterface $zone)
-    {
-        $this->setProvince($province)->shouldReturn($this);
-        $this->setBelongsTo($zone)->shouldReturn($this);
-    }
 }
