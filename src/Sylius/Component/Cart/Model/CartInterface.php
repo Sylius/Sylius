@@ -22,22 +22,16 @@ use Sylius\Component\Order\Model\OrderInterface;
 interface CartInterface extends OrderInterface
 {
     /**
-     * Get the identifier.
-     *
      * @return string
      */
     public function getIdentifier();
 
     /**
-     * Gets expiration time.
-     *
      * @return \DateTime
      */
     public function getExpiresAt();
 
     /**
-     * Sets expiration time.
-     *
      * @param \DateTime|null $expiresAt
      */
     public function setExpiresAt(\DateTime $expiresAt = null);
@@ -49,9 +43,7 @@ interface CartInterface extends OrderInterface
     public function incrementExpiresAt();
 
     /**
-     * Checks whether the cart is expired or not.
-     *
-     * @return Boolean
+     * @return bool
      */
     public function isExpired();
 }
