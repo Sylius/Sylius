@@ -49,7 +49,7 @@ class MetadataContext extends DefaultContext
 
     /**
      * @When I am customizing metadata
-     * @When I am customizing metadata with identifier "([^"]+)"
+     * @When I am customizing metadata with identifier :identifier
      */
     public function iAmCustomizingMetadata($identifier = 'FooBar')
     {
@@ -178,17 +178,17 @@ class MetadataContext extends DefaultContext
     }
 
     /**
-     * @Given product :productName has the following page metadata:
+     * @Given there is the following metadata :metadataName:
      */
-    public function productHasTheFollowingPageMetadata($productName, TableNode $table)
+    public function thereIsTheFollowingMetadata($metadataName, TableNode $table)
     {
-        /** @var ProductInterface $product */
-        $product = $this->getRepository('product')->findOneBy(['name' => $productName]);
-
         /** @var RootMetadataInterface $metadata */
         $metadata = $this->getRepository('metadata')->createNew();
 
         $pageMetadata = new PageMetadata();
+
+        $metadata->setId($metadataName);
+        $metadata->setMetadata($pageMetadata);
 
         foreach ($table->getRowsHash() as $key => $value) {
             if ($this->createNewMetadataObjectIfNeeded($pageMetadata, $key, $value)) {
@@ -202,12 +202,20 @@ class MetadataContext extends DefaultContext
             $this->propertyAccessor->setValue($pageMetadata, $key, $value);
         }
 
-        $metadata->setId($product->getMetadataIdentifier());
-        $metadata->setMetadata($pageMetadata);
-
         $em = $this->getEntityManager();
         $em->persist($metadata);
         $em->flush();
+    }
+
+    /**
+     * @Given product :productName has the following page metadata:
+     */
+    public function productHasTheFollowingPageMetadata($productName, TableNode $table)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->getRepository('product')->findOneBy(['name' => $productName]);
+
+        $this->thereIsTheFollowingMetadata($product->getMetadataIdentifier(), $table);
     }
 
     /**
