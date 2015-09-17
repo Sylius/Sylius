@@ -18,7 +18,7 @@ use Sylius\Component\Translation\Model\AbstractTranslation;
 class ArchetypeTranslation extends AbstractTranslation implements ArchetypeTranslationInterface
 {
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -49,7 +49,5 @@ class ArchetypeTranslation extends AbstractTranslation implements ArchetypeTrans
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }

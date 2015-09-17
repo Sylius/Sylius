@@ -103,10 +103,8 @@ class ProductContext extends DefaultContext
         $repository = $this->getRepository('product_archetype');
 
         $archetype = $repository->createNew();
-        $archetype
-            ->setName($name)
-            ->setCode($name)
-        ;
+        $archetype->setName($name);
+        $archetype->setCode($name);
 
         $data = $table->getRowsHash();
 
