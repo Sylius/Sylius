@@ -12,36 +12,26 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default province model.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class Province implements ProvinceInterface
 {
     /**
-     * Province id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * ISO Name.
-     *
      * @var string
      */
     protected $isoName;
 
     /**
-     * Country.
-     *
      * @var CountryInterface
      */
     protected $country;
@@ -73,8 +63,6 @@ class Province implements ProvinceInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -91,8 +79,6 @@ class Province implements ProvinceInterface
     public function setIsoName($isoName)
     {
         $this->isoName = $isoName;
-
-        return $this;
     }
 
     /**
@@ -109,7 +95,5 @@ class Province implements ProvinceInterface
     public function setCountry(CountryInterface $country = null)
     {
         $this->country = $country;
-
-        return $this;
     }
 }

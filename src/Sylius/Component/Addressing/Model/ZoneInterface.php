@@ -14,8 +14,6 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Zone interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -37,8 +35,6 @@ interface ZoneInterface
 
     /**
      * @param string $name
-     *
-     * @return ZoneInterface
      */
     public function setName($name);
 
@@ -49,8 +45,6 @@ interface ZoneInterface
 
     /**
      * @param string $type
-     *
-     * @return ZoneInterface
      */
     public function setType($type);
 
@@ -61,8 +55,6 @@ interface ZoneInterface
 
     /**
      * @param string $scope
-     *
-     * @return ZoneInterface
      */
     public function setScope($scope);
 
@@ -73,8 +65,6 @@ interface ZoneInterface
 
     /**
      * @param Collection $members
-     *
-     * @return ZoneInterface
      */
     public function setMembers(Collection $members);
 
@@ -85,15 +75,11 @@ interface ZoneInterface
 
     /**
      * @param ZoneMemberInterface $member
-     *
-     * @return ZoneInterface
      */
     public function addMember(ZoneMemberInterface $member);
 
     /**
      * @param ZoneMemberInterface $member
-     *
-     * @return ZoneInterface
      */
     public function removeMember(ZoneMemberInterface $member);
 

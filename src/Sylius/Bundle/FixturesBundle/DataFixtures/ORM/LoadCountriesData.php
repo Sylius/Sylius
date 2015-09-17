@@ -121,9 +121,9 @@ class LoadCountriesData extends DataFixture
         $provinceRepository = $this->getProvinceRepository();
 
         foreach ($this->states as $isoName => $name) {
-            $province = $provinceRepository->createNew()
-                ->setName($name)
-                ->setIsoName($isoName);
+            $province = $provinceRepository->createNew();
+            $province->setName($name);
+            $province->setIsoName($isoName);
             $country->addProvince($province);
 
             $this->setReference('Sylius.Province.'.$isoName, $province);

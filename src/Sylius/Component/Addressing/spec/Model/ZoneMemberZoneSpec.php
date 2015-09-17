@@ -58,10 +58,4 @@ class ZoneMemberZoneSpec extends ObjectBehavior
 
         $this->getName()->shouldReturn('USA');
     }
-
-    function it_has_fluent_interface(ZoneInterface $zone, ZoneInterface $belongsTo)
-    {
-        $this->setZone($zone)->shouldReturn($this);
-        $this->setBelongsTo($belongsTo)->shouldReturn($this);
-    }
 }
