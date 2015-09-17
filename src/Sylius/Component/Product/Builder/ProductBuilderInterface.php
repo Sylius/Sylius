@@ -14,17 +14,11 @@ namespace Sylius\Component\Product\Builder;
 use Sylius\Component\Product\Model\ProductInterface;
 
 /**
- * Product builder interface.
- *
- * Goal of service implementing this interface is to ease the process of programatically creating products.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductBuilderInterface
 {
     /**
-     * Start creating the product with specified name.
-     *
      * @param string $name
      *
      * @return ProductBuilderInterface
@@ -32,8 +26,6 @@ interface ProductBuilderInterface
     public function create($name);
 
     /**
-     * Add attribute with name and value.
-     *
      * @param string $name
      * @param mixed  $value
      * @param string $presentation
@@ -43,9 +35,7 @@ interface ProductBuilderInterface
     public function addAttribute($name, $value, $presentation = null);
 
     /**
-     * Save the product
-     *
-     * @param Boolean $flush
+     * @param bool $flush
      *
      * @return ProductInterface
      */

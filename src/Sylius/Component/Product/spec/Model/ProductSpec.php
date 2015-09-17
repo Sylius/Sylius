@@ -287,19 +287,4 @@ class ProductSpec extends ObjectBehavior
         $this->setDeletedAt($deletedAt);
         $this->shouldNotBeDeleted();
     }
-
-    function it_has_fluent_interface()
-    {
-        $date = new \DateTime();
-
-        $this->setName('Foo')->shouldReturn($this);
-        $this->setSlug('product-foo')->shouldReturn($this);
-        $this->setDescription('Foo')->shouldReturn($this);
-        $this->setAvailableOn($date)->shouldReturn($this);
-        $this->setMetaDescription('SEO bla bla')->shouldReturn($this);
-        $this->setMetaKeywords('foo, bar, baz')->shouldReturn($this);
-        $this->setCreatedAt($date)->shouldReturn($this);
-        $this->setUpdatedAt($date)->shouldReturn($this);
-        $this->setDeletedAt($date)->shouldReturn($this);
-    }
 }
