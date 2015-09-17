@@ -35,7 +35,20 @@ class WebContext extends DefaultContext
      */
     public function iShouldBeOnThePage($page)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl($page));
+        $currentRoute = $this->getCurrentPageRouteName();
+
+        $route = null;
+        $passed = false;
+        foreach ($this->getPossibleRoutesForPage($page) as $route) {
+            if ($currentRoute === $route) {
+                $passed = true;
+                break;
+            }
+        }
+
+        if (false === $passed) {
+            throw new \Exception(sprintf('Current route is "%s", expected one was "%s"', $currentRoute, $route));
+        }
 
         try {
             $this->assertStatusCodeEquals(200);

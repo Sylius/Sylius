@@ -5,14 +5,6 @@ sylius_checkout_start:
     path: /
     defaults: { _controller: sylius.controller.process:startAction, scenarioAlias: 'sylius_checkout' }
 
-sylius_checkout_display:
-    path: /{stepName}
-    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout' }
-
-sylius_checkout_forward:
-    path: /{stepName}/forward
-    defaults: { _controller: sylius.controller.process:forwardAction, scenarioAlias: 'sylius_checkout' }
-
 sylius_checkout_security:
     path: /security
     defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'security' }
@@ -36,3 +28,11 @@ sylius_checkout_payment:
 sylius_checkout_finalize:
     path: /finalize
     defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'finalize' }
+
+sylius_checkout_display:
+    path: /{stepName}
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout' }
+
+sylius_checkout_forward:
+    path: /{stepName}/forward
+    defaults: { _controller: sylius.controller.process:forwardAction, scenarioAlias: 'sylius_checkout' }

@@ -204,21 +204,40 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             return $this->generateUrl($page, $parameters);
         }
 
-        $route  = str_replace(' ', '_', trim($page));
+        $route = $this->getPossibleRoutesForPage($page)->current();
+
+        return $this->generateUrl($route, $parameters);
+    }
+
+    /**
+     * @param string $page
+     *
+     * @return \Generator
+     */
+    protected function getPossibleRoutesForPage($page)
+    {
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
-        if (null === $routes->get($route)) {
-            $route = $this->applicationName.'_'.$route;
+        $route = str_replace(' ', '_', trim($page));
+        if (null !== $routes->get($route)) {
+            yield $route;
         }
 
-        if (null === $routes->get($route)) {
-            $route = str_replace($this->applicationName.'_', $this->applicationName.'_backend_', $route);
+        $route = $this->applicationName . '_' . $route;
+        if (null !== $routes->get($route)) {
+            yield $route;
+        }
+
+        $route = str_replace($this->applicationName . '_', $this->applicationName . '_backend_', $route);
+        if (null !== $routes->get($route)) {
+            yield $route;
         }
 
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
-
-        return $this->generateUrl($route, $parameters);
+        if (null !== $routes->get($route)) {
+            yield $route;
+        }
     }
 
     /**
@@ -495,5 +514,25 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         }
 
         return $code;
+    }
+
+    /**
+     * @return string
+     *
+     * @throws \Exception If route not found
+     */
+    protected function getCurrentPageRouteName()
+    {
+        $router = $this->getService('router');
+
+        $request = $this->getSession()->getDriver()->getClient()->getRequest();
+        //$path = str_replace(rtrim($this->getMinkParameter('base_url'), '/'), '', $url);
+        $match = $router->matchRequest($request);
+
+        if (null === $match || !isset($match['_route'])) {
+            throw new \Exception(sprintf('Route for URL "%s" not found!', $url));
+        }
+
+        return $match['_route'];
     }
 }
