@@ -12,13 +12,13 @@
 namespace Sylius\Component\Shipping\Checker\Registry;
 
 /**
- * This exception should be thrown by rule checker registry
- * when checker of given type already exists.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ExistingRuleCheckerException extends \InvalidArgumentException
 {
+    /**
+     * @param string $type
+     */
     public function __construct($type)
     {
         parent::__construct(sprintf('Shipping method rule checker of type "%s" already exist.', $type));

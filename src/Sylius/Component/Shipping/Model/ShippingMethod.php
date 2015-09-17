@@ -16,23 +16,17 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
- * Shipping method model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
 {
     /**
-     * Shipping method identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Category.
-     *
      * @var ShippingCategoryInterface
      */
     protected $category;
@@ -40,55 +34,40 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * The one of 3 requirement variants.
      *
-     * @var integer
+     * @var int
      */
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
     /**
-     * Is method enabled?
-     *
-     * @var Boolean
+     * @var bool
      */
     protected $enabled = true;
 
     /**
-     * Calculator name.
-     *
      * @var string
      */
     protected $calculator;
 
     /**
-     * All extra configuration.
-     *
      * @var array
      */
     protected $configuration = array();
 
     /**
-     * Shipping method rules.
-     *
      * @var Collection|RuleInterface[]
      */
     protected $rules;
 
     /**
-     * Creation date.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -127,8 +106,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setCategory(ShippingCategoryInterface $category = null)
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
@@ -145,8 +122,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setCategoryRequirement($categoryRequirement)
     {
         $this->categoryRequirement = $categoryRequirement;
-
-        return $this;
     }
 
     /**
@@ -172,9 +147,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
-
-        return $this;
+        $this->enabled = (bool) $enabled;
     }
 
     /**
@@ -191,8 +164,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setName($name)
     {
         $this->translate()->setName($name);
-
-        return $this;
     }
 
     /**
@@ -209,8 +180,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setCalculator($calculator)
     {
         $this->calculator = $calculator;
-
-        return $this;
     }
 
     /**
@@ -227,8 +196,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -256,8 +223,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
             $rule->setMethod($this);
             $this->rules->add($rule);
         }
-
-        return $this;
     }
 
     /**
@@ -267,8 +232,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     {
         $rule->setMethod(null);
         $this->rules->removeElement($rule);
-
-        return $this;
     }
 
     /**
@@ -285,8 +248,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -303,13 +264,9 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
-     * Get the default requirement labels.
-     *
      * @return array
      */
     public static function getCategoryRequirementLabels()

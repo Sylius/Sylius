@@ -16,64 +16,45 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * This model represents single shipment.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Shipment implements ShipmentInterface, TimestampableInterface
 {
     /**
-     * Shipment identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Shipment state.
-     *
      * @var string
      */
     protected $state = ShipmentInterface::STATE_CHECKOUT;
 
     /**
-     * Shipping method.
-     *
      * @var ShippingMethodInterface
      */
     protected $method;
 
     /**
-     * Shipment items.
-     *
      * @var Collection|ShipmentItemInterface[]
      */
     protected $items;
 
     /**
-     * Tracking code for this shipment, if any required.
-     *
      * @var string
      */
     protected $tracking;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -110,8 +91,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function setState($state)
     {
         $this->state = $state;
-
-        return $this;
     }
 
     /**
@@ -128,8 +107,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function setMethod(ShippingMethodInterface $method)
     {
         $this->method = $method;
-
-        return $this;
     }
 
     /**
@@ -157,8 +134,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
             $item->setShipment($this);
             $this->items->add($item);
         }
-
-        return $this;
     }
 
     /**
@@ -170,8 +145,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
             $item->setShipment(null);
             $this->items->removeElement($item);
         }
-
-        return $this;
     }
 
     /**
@@ -205,8 +178,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function setTracking($tracking)
     {
         $this->tracking = $tracking;
-
-        return $this;
     }
 
     /**
@@ -231,8 +202,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -249,8 +218,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

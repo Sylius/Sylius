@@ -15,8 +15,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Per weight amount rate calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class WeightRateCalculator extends Calculator

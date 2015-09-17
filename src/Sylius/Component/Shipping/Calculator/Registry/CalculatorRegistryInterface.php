@@ -14,46 +14,34 @@ namespace Sylius\Component\Shipping\Calculator\Registry;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 /**
- * Interface for calculator registry.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorRegistryInterface
 {
     /**
-     * Get hash of all calculators and their names.
-     *
      * @return CalculatorInterface[]
      */
     public function getCalculators();
 
     /**
-     * Register calculator under given name.
-     *
      * @param string              $name
      * @param CalculatorInterface $calculator
      */
     public function registerCalculator($name, CalculatorInterface $calculator);
 
     /**
-     * Unregister calculator.
-     *
      * @param string $name
      */
     public function unregisterCalculator($name);
 
     /**
-     * Has calculator registered with given name?
-     *
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasCalculator($name);
 
     /**
-     * Return calculator with given name.
-     *
      * @param string $name
      *
      * @return CalculatorInterface

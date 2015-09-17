@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Interface for object referencing multiple shipping methods.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ShippingMethodsAwareInterface
@@ -26,7 +26,7 @@ interface ShippingMethodsAwareInterface
     /**
      * @param ShippingMethodInterface $shippingMethod
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasShippingMethod(ShippingMethodInterface $shippingMethod);
 
