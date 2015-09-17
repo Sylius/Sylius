@@ -74,6 +74,10 @@ class MetadataExtension extends \Twig_Extension
     {
         $metadataProperty = $this->metadataAccessor->getProperty($metadataSubject, $propertyPath);
 
+        if (null === $metadataProperty) {
+            return null;
+        }
+
         return $this->metadataRenderer->render($metadataProperty, $options);
     }
 
