@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Shipping method interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -28,15 +26,11 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
     const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
 
     /**
-     * Get shipping category, if any.
-     *
      * @return null|ShippingCategoryInterface
      */
     public function getCategory();
 
     /**
-     * Set shipping category.
-     *
      * @param null|ShippingCategoryInterface $category
      */
     public function setCategory(ShippingCategoryInterface $category = null);
@@ -49,35 +43,27 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
      *
-     * @return integer
+     * @return int
      */
     public function getCategoryRequirement();
 
     /**
-     * Set the requirement.
-     *
-     * @param integer $categoryRequirement
+     * @param int $categoryRequirement
      */
     public function setCategoryRequirement($categoryRequirement);
 
     /**
-     * Get the human readable label of category requirement.
-     *
      * @return string
      */
     public function getCategoryRequirementLabel();
 
     /**
-     * Check whether the shipping method is currently enabled.
-     *
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * Enable or disable the shipping method.
-     *
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
@@ -110,31 +96,23 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
     public function setConfiguration(array $configuration);
 
     /**
-     * Get all rules assigned to this shipping method.
-     *
      * @return Collection|RuleInterface[]
      */
     public function getRules();
 
     /**
-     * Check if this shipping method already contains the rule?
-     *
      * @param RuleInterface $rule
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasRule(RuleInterface $rule);
 
     /**
-     * Adds rule.
-     *
      * @param RuleInterface $rule
      */
     public function addRule(RuleInterface $rule);
 
     /**
-     * Remove rule.
-     *
      * @param RuleInterface $rule
      */
     public function removeRule(RuleInterface $rule);

@@ -14,12 +14,13 @@ namespace Sylius\Component\Shipping\Checker;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Checks if item count exceeds (or at least is equal) to the configured count.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration)
     {
         $count = $subject->getShippingItemCount();
@@ -31,6 +32,9 @@ class ItemCountRuleChecker implements RuleCheckerInterface
         return $count > $configuration['count'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigurationFormType()
     {
         return 'sylius_shipping_rule_item_count_configuration';

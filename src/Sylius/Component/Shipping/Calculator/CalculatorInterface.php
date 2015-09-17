@@ -15,39 +15,29 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Shipping charges calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorInterface
 {
     /**
-     * Is this shipping calculator configurable?
-     *
      * @return bool
      */
     public function isConfigurable();
 
     /**
-     * Calculate the shipping charge for given subject and configuration.
-     *
      * @param ShippingSubjectInterface $subject
      * @param array                    $configuration
      *
-     * @return integer
+     * @return int
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration);
 
     /**
-     * Get calculator configuration form type, if any required.
-     *
      * @return string
      */
     public function getConfigurationFormType();
 
     /**
-     * Define the configuration.
-     *
      * @param OptionsResolverInterface $resolver
      */
     public function setConfiguration(OptionsResolverInterface $resolver);

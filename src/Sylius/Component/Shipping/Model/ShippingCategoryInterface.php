@@ -14,36 +14,31 @@ namespace Sylius\Component\Shipping\Model;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Shipping category interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingCategoryInterface extends TimestampableInterface
 {
     /**
-     * Get category name.
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getName();
 
     /**
-     * Set category name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get description.
-     *
      * @return string
      */
     public function getDescription();
 
     /**
-     * Set description.
-     *
      * @param string $description
      */
     public function setDescription($description);

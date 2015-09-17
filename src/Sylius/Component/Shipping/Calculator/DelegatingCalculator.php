@@ -23,15 +23,11 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 class DelegatingCalculator implements DelegatingCalculatorInterface
 {
     /**
-     * Calculator registry.
-     *
      * @var CalculatorRegistryInterface
      */
     protected $registry;
 
     /**
-     * Constructor.
-     *
      * @param CalculatorRegistryInterface $registry
      */
     public function __construct(CalculatorRegistryInterface $registry)

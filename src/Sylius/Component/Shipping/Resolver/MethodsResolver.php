@@ -17,29 +17,21 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Default available methods resolver.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MethodsResolver implements MethodsResolverInterface
 {
     /**
-     * Shipping methods repository.
-     *
      * @var ObjectRepository
      */
     protected $repository;
 
     /**
-     * Shipping method eligibility checker.
-     *
      * @var ShippingMethodEligibilityCheckerInterface
      */
     protected $eligibilityChecker;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository                          $repository
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
@@ -66,8 +58,6 @@ class MethodsResolver implements MethodsResolverInterface
     }
 
     /**
-     * Return all methods matching given criteria.
-     *
      * @param array $criteria
      *
      * @return ShippingMethodInterface[]

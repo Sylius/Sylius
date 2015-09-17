@@ -12,8 +12,6 @@
 namespace Sylius\Component\Shipping\Model;
 
 /**
- * Shipping method rule model interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleInterface
@@ -21,6 +19,11 @@ interface RuleInterface
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
     const TYPE_WEIGHT     = 'weight';
+
+    /**
+     * @return mixed
+     */
+    public function getId();
 
     /**
      * @return string

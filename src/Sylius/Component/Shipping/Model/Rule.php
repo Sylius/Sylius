@@ -12,29 +12,21 @@
 namespace Sylius\Component\Shipping\Model;
 
 /**
- * Shipping method rule model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Rule implements RuleInterface
 {
     /**
-     * Shipping rule identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Rule type.
-     *
      * @var string
      */
     protected $type;
 
     /**
-     * All extra configuration.
-     *
      * @var array
      */
     protected $configuration;
@@ -49,6 +41,9 @@ class Rule implements RuleInterface
         $this->configuration = array();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -68,8 +63,6 @@ class Rule implements RuleInterface
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -86,8 +79,6 @@ class Rule implements RuleInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -104,7 +95,5 @@ class Rule implements RuleInterface
     public function setMethod(ShippingMethodInterface $method = null)
     {
         $this->method = $method;
-
-        return $this;
     }
 }
