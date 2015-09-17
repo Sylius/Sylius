@@ -119,7 +119,7 @@ class PageMetadata extends AbstractMetadata implements PageMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function setTwitter(CardInterface $twitter)
+    public function setTwitter(CardInterface $twitter = null)
     {
         $this->twitter = $twitter;
     }

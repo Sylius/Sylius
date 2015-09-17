@@ -106,10 +106,10 @@ class DynamicFormBuilder implements DynamicFormBuilderInterface
         $builder->get($name)->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($builder, $name) {
             $formName = $event->getData()['_form'];
             if (empty($formName)) {
-                return;
+                $event->setData([$name => null]);
             }
 
-            $this->addEmbeddedFormField($builder->get($name), $event->getForm(), $formName);
+            $this->addEmbeddedFormField($builder->get($name), $event->getForm(), $formName ?: 'text');
         });
     }
 }

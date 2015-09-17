@@ -65,7 +65,7 @@ interface PageMetadataInterface extends MetadataInterface
     public function getTwitter();
 
     /**
-     * @param CardInterface $card
+     * @param CardInterface|null $card
      */
-    public function setTwitter(CardInterface $card);
+    public function setTwitter(CardInterface $card = null);
 }
