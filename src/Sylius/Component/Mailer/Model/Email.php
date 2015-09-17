@@ -12,30 +12,22 @@
 namespace Sylius\Component\Mailer\Model;
 
 /**
- * Mailer model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Email implements EmailInterface
 {
     /**
-     * Id
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * Code.
-     *
      * @var string
      */
     protected $code;
 
     /**
-     * Activation status.
-     *
-     * @var Boolean
+     * @var bool
      */
     protected $enabled = true;
 
@@ -65,15 +57,11 @@ class Email implements EmailInterface
     protected $senderAddress;
 
     /**
-     * Creation date
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -84,9 +72,7 @@ class Email implements EmailInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
@@ -107,8 +93,6 @@ class Email implements EmailInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -124,7 +108,7 @@ class Email implements EmailInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (bool) $enabled;
     }
 
     /**
@@ -221,8 +205,6 @@ class Email implements EmailInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -239,7 +221,5 @@ class Email implements EmailInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
