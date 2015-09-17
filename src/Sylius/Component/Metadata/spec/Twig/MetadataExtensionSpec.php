@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Metadata\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Metadata\Accessor\MetadataAccessorInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
@@ -92,5 +93,17 @@ class MetadataExtensionSpec extends ObjectBehavior
         $metadataAccessor->getProperty($metadataSubject, null)->shouldBeCalled()->willReturn($metadata);
 
         $this->renderProperty($metadataSubject, null, ['foo' => 'bar'])->shouldReturn('Rendered metadata');
+    }
+
+    function it_does_not_proxy_render_property_to_Metadata_Renderer_if_there_is_no_metadata(
+        MetadataAccessorInterface $metadataAccessor,
+        MetadataRendererInterface $metadataRenderer,
+        MetadataSubjectInterface $metadataSubject
+    ) {
+        $metadataRenderer->render(Argument::cetera())->shouldNotBeCalled();
+
+        $metadataAccessor->getProperty($metadataSubject, 'property')->shouldBeCalled()->willReturn(null);
+
+        $this->renderProperty($metadataSubject, 'property')->shouldReturn(null);
     }
 }
