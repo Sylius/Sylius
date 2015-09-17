@@ -14,51 +14,36 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Sylius catalog product translation model.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductTranslation extends AbstractTranslation implements ProductTranslationInterface
 {
     /**
-     * Product id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Product name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Permalink for the product.
-     * Used in url to access it.
-     *
      * @var string
      */
     protected $slug;
 
     /**
-     * Product description.
-     *
      * @var string
      */
     protected $description;
 
     /**
-     * Meta keywords.
-     *
      * @var string
      */
     protected $metaKeywords;
 
     /**
-     * Meta description.
-     *
      * @var string
      */
     protected $metaDescription;
@@ -85,8 +70,6 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -103,8 +86,6 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setSlug($slug = null)
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
@@ -121,8 +102,6 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -139,8 +118,6 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setMetaKeywords($metaKeywords)
     {
         $this->metaKeywords = $metaKeywords;
-
-        return $this;
     }
 
     /**
@@ -157,7 +134,5 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setMetaDescription($metaDescription)
     {
         $this->metaDescription = $metaDescription;
-
-        return $this;
     }
 }

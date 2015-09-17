@@ -15,22 +15,15 @@ use Sylius\Component\Variation\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
 /**
- * Model for product variants.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Variant extends BaseVariant implements VariantInterface
 {
     /**
-     * Available on.
-     *
      * @var \DateTime
      */
     protected $availableOn;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -80,8 +73,6 @@ class Variant extends BaseVariant implements VariantInterface
         if ($this->isMaster() && null !== $this->object) {
             $this->getProduct()->setAvailableOn($availableOn);
         }
-
-        return $this;
     }
 
     /**
@@ -96,7 +87,5 @@ class Variant extends BaseVariant implements VariantInterface
         }
 
         $this->setAvailableOn($masterVariant->getAvailableOn());
-
-        return $this;
     }
 }

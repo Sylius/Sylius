@@ -16,70 +16,44 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Product builder with fluent interface.
- *
- * Usage example:
- *
- * <code>
- * <?php
- * $this->get('sylius.builder.product')
- *     ->create('Github mug')
- *     ->setDescription("Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids")
- *     ->setPrice(1200)
- *     ->addAttribute('collection', 2013)
- *     ->save()
- * ;
- * </code>
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProductBuilder implements ProductBuilderInterface
 {
     /**
-     * Currently built product.
-     *
      * @var ProductInterface
      */
     protected $product;
 
     /**
-     * Product object manager.
-     *
      * @var ObjectManager
      */
     protected $productManager;
 
     /**
-     * Product repository.
-     *
      * @var RepositoryInterface
      */
     protected $productRepository;
 
     /**
-     * Attribute repository.
-     *
      * @var RepositoryInterface
      */
     protected $attributeRepository;
 
     /**
-     * Product attribute repository.
-     *
      * @var RepositoryInterface
      */
     protected $attributeValueRepository;
 
     public function __construct(
-        ObjectManager      $productManager,
+        ObjectManager       $productManager,
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
-    )
-    {
-        $this->productManager            = $productManager;
-        $this->productRepository         = $productRepository;
-        $this->attributeRepository        = $attributeRepository;
+    ) {
+        $this->productManager = $productManager;
+        $this->productRepository = $productRepository;
+        $this->attributeRepository = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;
     }
 
@@ -108,6 +82,9 @@ class ProductBuilder implements ProductBuilderInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAttribute($name, $value, $presentation = null)
     {
         $attribute = $this->attributeRepository->findOneBy(array('name' => $name));

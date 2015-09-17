@@ -20,16 +20,12 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
- * Sylius catalog product model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Product extends AbstractTranslatable implements ProductInterface
 {
     /**
-     * Product id.
-     *
      * @var mixed
      */
     protected $id;
@@ -40,57 +36,40 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $archetype;
 
     /**
-     * Available on.
-     *
      * @var \DateTime
      */
     protected $availableOn;
 
     /**
-     * Attributes.
-     *
      * @var Collection|BaseAttributeValueInterface[]
      */
     protected $attributes;
 
     /**
-     * Product variants.
-     *
      * @var Collection|BaseVariantInterface[]
      */
     protected $variants;
 
     /**
-     * Product options.
-     *
      * @var Collection|BaseOptionInterface[]
      */
     protected $options;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * Deletion time.
-     *
      * @var \DateTime
      */
     protected $deletedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -123,8 +102,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
         $this->archetype = $archetype;
-
-        return $this;
     }
 
     /**
@@ -141,8 +118,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setName($name)
     {
         $this->translate()->setName($name);
-
-        return $this;
     }
 
     /**
@@ -159,8 +134,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setSlug($slug = null)
     {
         $this->translate()->setSlug($slug);
-
-        return $this;
     }
 
     /**
@@ -177,8 +150,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setDescription($description)
     {
         $this->translate()->setDescription($description);
-
-        return $this;
     }
 
     /**
@@ -195,8 +166,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setMetaKeywords($metaKeywords)
     {
         $this->translate()->setMetaKeywords($metaKeywords);
-
-        return $this;
     }
 
     /**
@@ -213,8 +182,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setMetaDescription($metaDescription)
     {
         $this->translate()->setMetaDescription($metaDescription);
-
-        return $this;
     }
 
     /**
@@ -239,8 +206,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
-
-        return $this;
     }
 
     /**
@@ -259,8 +224,6 @@ class Product extends AbstractTranslatable implements ProductInterface
         foreach ($attributes as $attribute) {
             $this->addAttribute($attribute);
         }
-
-        return $this;
     }
 
     /**
@@ -272,8 +235,6 @@ class Product extends AbstractTranslatable implements ProductInterface
             $attribute->setProduct($this);
             $this->attributes->add($attribute);
         }
-
-        return $this;
     }
 
     /**
@@ -285,8 +246,6 @@ class Product extends AbstractTranslatable implements ProductInterface
             $this->attributes->removeElement($attribute);
             $attribute->setProduct(null);
         }
-
-        return $this;
     }
 
     /**
@@ -350,8 +309,6 @@ class Product extends AbstractTranslatable implements ProductInterface
             $masterVariant->setProduct($this);
             $this->variants->add($masterVariant);
         }
-
-        return $this;
     }
 
     /**
@@ -392,8 +349,6 @@ class Product extends AbstractTranslatable implements ProductInterface
         foreach ($variants as $variant) {
             $this->addVariant($variant);
         }
-
-        return $this;
     }
 
     /**
@@ -405,8 +360,6 @@ class Product extends AbstractTranslatable implements ProductInterface
             $variant->setProduct($this);
             $this->variants->add($variant);
         }
-
-        return $this;
     }
 
     /**
@@ -418,8 +371,6 @@ class Product extends AbstractTranslatable implements ProductInterface
             $variant->setProduct(null);
             $this->variants->removeElement($variant);
         }
-
-        return $this;
     }
 
     /**
@@ -452,8 +403,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setOptions(Collection $options)
     {
         $this->options = $options;
-
-        return $this;
     }
 
     /**
@@ -464,8 +413,6 @@ class Product extends AbstractTranslatable implements ProductInterface
         if (!$this->hasOption($option)) {
             $this->options->add($option);
         }
-
-        return $this;
     }
 
     /**
@@ -476,8 +423,6 @@ class Product extends AbstractTranslatable implements ProductInterface
         if ($this->hasOption($option)) {
             $this->options->removeElement($option);
         }
-
-        return $this;
     }
 
     /**
@@ -502,8 +447,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -520,8 +463,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -552,7 +493,5 @@ class Product extends AbstractTranslatable implements ProductInterface
                 $variant->setDeletedAt(null);
             }
         }
-
-        return $this;
     }
 }

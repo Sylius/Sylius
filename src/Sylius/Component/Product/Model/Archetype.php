@@ -14,8 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Archetype\Model\Archetype as BaseArchetype;
 
 /**
- * Default archetype implementation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
