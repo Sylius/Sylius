@@ -13,7 +13,14 @@ namespace Sylius\Component\Currency\Importer;
 
 class EuropeanCentralBankImporter extends AbstractImporter
 {
+    /**
+     * @var string
+     */
     private $url = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
+
+    /**
+     * @var string
+     */
     private $baseCurrency;
 
     /**

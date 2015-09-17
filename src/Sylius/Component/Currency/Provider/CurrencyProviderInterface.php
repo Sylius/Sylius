@@ -14,8 +14,6 @@ namespace Sylius\Component\Currency\Provider;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
- * This service returns all the available currencies.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyProviderInterface

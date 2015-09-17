@@ -13,6 +13,9 @@ namespace Sylius\Component\Currency\Importer;
 
 class OpenExchangeRatesImporter extends AbstractImporter
 {
+    /**
+     * @var string
+     */
     private $url = 'http://openexchangerates.org/api/currencies.json';
 
     /**

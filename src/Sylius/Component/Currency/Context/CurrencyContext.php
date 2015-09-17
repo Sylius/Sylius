@@ -16,19 +16,19 @@ use Sylius\Component\Storage\StorageInterface;
 class CurrencyContext implements CurrencyContextInterface
 {
     /**
-     * Default currency.
-     *
      * @var string
      */
     protected $defaultCurrency;
 
     /**
-     * Locale storage.
-     *
      * @var StorageInterface
      */
     protected $storage;
 
+    /**
+     * @param StorageInterface $storage
+     * @param string           $defaultCurrency
+     */
     public function __construct(StorageInterface $storage, $defaultCurrency)
     {
         $this->storage = $storage;
