@@ -45,7 +45,7 @@
                         {% endif %}
                         {% if customer.user is null %}
                             {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% elseif customer.user.id is not sameas(app.user.id) %}
+                        {% elseif customer.user.id is not same as(app.user.id) %}
                             {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
                         {% endif %}
                     {% endif %}
@@ -97,7 +97,7 @@
                         {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
                         {% if customer.user is null %}
                             {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% elseif customer.user.id is not sameas(app.user.id) %}
+                        {% elseif customer.user.id is not same as(app.user.id) %}
                             {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
                         {% endif %}
                     {% endif %}

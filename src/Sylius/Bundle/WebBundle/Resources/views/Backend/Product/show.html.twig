@@ -149,7 +149,7 @@
                                 <th>{{ 'sylius.product.volume_based.qty_min'|trans }}</th>
                                 <th>{{ 'sylius.product.volume_based.qty_max'|trans }}</th>
                             </tr>
-                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not sameas(null) and pricing.price is not sameas(null)) %}
+                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not same as(null) and pricing.price is not same as(null)) %}
                                 <tr>
                                     <td>{{ pricing.price|sylius_price }}</td>
                                     <td>{{ pricing.min }}</td>
