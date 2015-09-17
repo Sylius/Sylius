@@ -14,12 +14,15 @@ namespace Sylius\Component\Channel\Model;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Channel interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ChannelInterface extends TimestampableInterface
 {
+    /**
+     * @return mixed
+     */
+    public function getId();
+
     /**
      * @return string
      */
@@ -40,9 +43,24 @@ interface ChannelInterface extends TimestampableInterface
      */
     public function setName($name);
 
+    /**
+     * @return string
+     */
     public function getDescription();
+
+    /**
+     * @param string $description
+     */
     public function setDescription($description);
+
+    /**
+     * @return string
+     */
     public function getUrl();
+
+    /**
+     * @param string $url
+     */
     public function setUrl($url);
 
     /**
@@ -56,12 +74,12 @@ interface ChannelInterface extends TimestampableInterface
     public function setColor($color);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 }
