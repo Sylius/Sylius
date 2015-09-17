@@ -34,7 +34,7 @@
 {% macro state_label(state, type) %}
 {% if type == 'payment' %}
     {% set label = 'sylius.payment.state.'~state %}
-    {% if state is sameas('completed') %}
+    {% if state is same as('completed') %}
         {% set class = 'label-success' %}
     {% elseif state in ['checkout', 'processing', 'new'] %}
         {% set class = 'label-primary' %}
@@ -42,13 +42,13 @@
         {% set class = 'label-danger' %}
     {% endif %}
 {% elseif type == 'order' %}
-    {% if state is sameas(1) %}
+    {% if state is same as(1) %}
         {% set label = 'sylius.order.state.checkout' %}
         {% set class = 'label-warning' %}
-    {% elseif state is sameas(2) %}
+    {% elseif state is same as(2) %}
         {% set label = 'sylius.order.state.cart_locked' %}
         {% set class = 'label-default' %}
-    {% elseif state is sameas(3) %}
+    {% elseif state is same as(3) %}
         {% set label = 'sylius.order.state.ordered' %}
         {% set class = 'label-info' %}
     {% else %}
