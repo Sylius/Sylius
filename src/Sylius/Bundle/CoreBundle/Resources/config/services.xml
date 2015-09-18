@@ -60,6 +60,8 @@
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
+        <parameter key="sylius.listener.product_delete.class">Sylius\Bundle\CoreBundle\EventListener\ProductDeleteListener</parameter>
+        <parameter key="sylius.listener.customer_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerDeleteListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -389,6 +391,16 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+        </service>
+        <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
+            <argument type="service" id="sylius.manager.product_review" />
+            <tag name="kernel.event_listener" event="sylius.product.post_delete" method="removeProductReviews" />
+        </service>
+        <service id="sylius.listener.customer_delete" class="%sylius.listener.customer_delete.class%">
+            <argument type="service" id="sylius.repository.product_review" />
+            <argument type="service" id="sylius.manager.product_review" />
+            <argument type="service" id="sylius.review.calculator.average_rating" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_delete" method="removeCustomerReviews" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
