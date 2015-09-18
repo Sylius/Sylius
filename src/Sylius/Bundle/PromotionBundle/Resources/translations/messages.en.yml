@@ -11,6 +11,9 @@ sylius:
             shipping_discount_configuration:
                 percentage: Percentage
             type: Type
+            nth_product_fixed_discount_configuration:
+                amount: Amount
+                nth: Nth
         rule:
             taxonomy_configuration:
                 taxons: Taxons
@@ -38,6 +41,8 @@ sylius:
             shipping_country_configuration:
                 country: Country
             type: Type
+            nth_product_configuration:
+                nth: Nth
         coupon:
             code: Code
             usage_limit: Usage limit

@@ -87,6 +87,18 @@ Feature: Promotions
           And I should see "Promotion has been successfully created."
 
     @javascript
+    Scenario: Creating new promotion with nth item rule
+        Given I am on the promotion creation page
+         When I fill in "Name" with "Behat Training"
+          And I fill in "Description" with "Behat Training discount on 2nd same item"
+          And I click "Add rule"
+          And I select "Nth product" from "Type"
+          And I fill in "Nth" with "2"
+          And I press "Create"
+          Then I should see "Behat Training"
+          And I should see "Promotion has been successfully created."
+
+    @javascript
     Scenario: Creating new promotion with fixed discount action
         Given I am on the promotion creation page
          When I fill in "Name" with "Behat Training"
