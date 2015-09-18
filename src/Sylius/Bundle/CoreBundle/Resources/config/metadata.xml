@@ -19,9 +19,16 @@
     <parameters>
         <parameter key="sylius.metadata.hierarchy_provider.product.class">Sylius\Component\Core\Metadata\HierarchyProvider\ProductHierarchyProvider</parameter>
         <parameter key="sylius.metadata.hierarchy_provider.product_variant.class">Sylius\Component\Core\Metadata\HierarchyProvider\ProductVariantHierarchyProvider</parameter>
+
+        <parameter key="sylius.metadata.provider.core.class">Sylius\Component\Core\Metadata\Provider\MetadataProvider</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.metadata.provider.core" class="%sylius.metadata.provider.core.class%" decorates="sylius.metadata.provider" public="false">
+            <argument type="service" id="sylius.metadata.provider.core.inner" />
+            <argument type="service" id="sylius.metadata.hierarchy_provider" />
+        </service>
+
         <service id="sylius.metadata.hierarchy_provider.product" class="%sylius.metadata.hierarchy_provider.product.class%" public="false">
             <tag name="sylius.metadata_hierarchy_provider" />
         </service>
