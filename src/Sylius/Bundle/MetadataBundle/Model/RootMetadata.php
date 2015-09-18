@@ -12,10 +12,19 @@ use Sylius\Component\Metadata\Model\RootMetadataInterface;
 class RootMetadata extends BaseRootMetadata implements RootMetadataInterface
 {
     /**
+     * @var MetadataInterface
+     */
+    protected $metadataAsObject;
+
+    /**
      * {@inheritdoc}
      */
     public function getMetadata()
     {
+        if (null !== $this->metadataAsObject) {
+            return $this->metadataAsObject;
+        }
+
         return unserialize($this->metadata) ?: null;
     }
 
@@ -24,6 +33,11 @@ class RootMetadata extends BaseRootMetadata implements RootMetadataInterface
      */
     public function setMetadata(MetadataInterface $metadata)
     {
-        $this->metadata = serialize($metadata);
+        $this->metadataAsObject = $metadata;
+    }
+
+    public function serializeMetadata()
+    {
+        $this->metadata = serialize($this->metadataAsObject);
     }
 }

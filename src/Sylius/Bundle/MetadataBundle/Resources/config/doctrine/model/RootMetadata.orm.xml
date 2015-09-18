@@ -17,6 +17,11 @@
         <id name="id" column="id" type="string" />
 
         <field name="metadata" column="metadata" type="text" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="serializeMetadata" />
+            <lifecycle-callback type="preUpdate" method="serializeMetadata" />
+        </lifecycle-callbacks>
     </mapped-superclass>
 
 </doctrine-mapping>
