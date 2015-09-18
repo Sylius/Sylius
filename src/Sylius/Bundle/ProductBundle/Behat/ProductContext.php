@@ -293,4 +293,16 @@ class ProductContext extends DefaultContext
 
         $manager->flush();
     }
+
+    /**
+     * @Given /^product "([^"]*)" has been deleted$/
+     */
+    public function productHasBeenDeleted($productName)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_index'));
+
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $productName));
+        $locator = sprintf('button:contains("%s")', 'delete');
+        $tr->find('css', $locator)->press();
+    }
 }

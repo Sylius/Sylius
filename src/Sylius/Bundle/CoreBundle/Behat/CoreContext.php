@@ -12,14 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Model\Currency;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -31,8 +27,11 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\User\Model\GroupableInterface;
@@ -539,6 +538,18 @@ class CoreContext extends DefaultContext
         }
 
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /^customer "([^"]*)" has been deleted$/
+     */
+    public function customerHasBeenDeleted($customerEmail)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_customer_index'));
+
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $customerEmail));
+        $locator = sprintf('button:contains("%s")', 'delete');
+        $tr->find('css', $locator)->press();
     }
 
     /**
