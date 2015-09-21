@@ -29,7 +29,6 @@ class ProductReviewAdminType extends BaseProductReviewAdminType
         $builder->get('author')->resetModelTransformers();
 
         $builder
-            ->remove('author')
             ->add('author', 'entity', array(
                 'class'    => 'Sylius\Component\Core\Model\Customer',
                 'label'    => 'sylius.form.review.author',

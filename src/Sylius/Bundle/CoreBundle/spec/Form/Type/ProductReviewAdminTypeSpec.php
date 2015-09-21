@@ -77,7 +77,6 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
         $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer'))->willReturn($builder)->shouldBeCalled();
 
         $builder->resetModelTransformers()->shouldBeCalled();
-        $builder->remove('author')->willReturn($builder)->shouldBeCalled();
 
         $builder
             ->add('author', 'entity', array(

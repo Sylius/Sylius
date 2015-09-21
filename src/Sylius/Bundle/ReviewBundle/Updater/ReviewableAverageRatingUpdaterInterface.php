@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ReviewBundle\Updater;
 
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -19,7 +20,12 @@ use Sylius\Component\Review\Model\ReviewInterface;
 interface ReviewableAverageRatingUpdaterInterface
 {
     /**
+     * @param ReviewableInterface $reviewSubject
+     */
+    public function update(ReviewableInterface $reviewSubject);
+
+    /**
      * @param ReviewInterface $review
      */
-    public function update(ReviewInterface $review);
+    public function updateFromReview(ReviewInterface $review);
 }

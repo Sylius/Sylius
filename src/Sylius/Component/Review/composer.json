@@ -15,6 +15,10 @@
             "email": "mateusz.zalewski@lakion.com"
         },
         {
+            "name": "Daniel Richter",
+            "email": "nexyz9@gmail.com"
+        },
+        {
             "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
@@ -24,7 +28,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.5.9"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
@@ -37,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

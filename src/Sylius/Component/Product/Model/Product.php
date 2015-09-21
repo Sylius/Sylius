@@ -79,11 +79,8 @@ class Product extends AbstractTranslatable implements ProductInterface, Reviewab
     /**
      * @var float
      */
-    protected $averageRating;
+    protected $averageRating = 0;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();

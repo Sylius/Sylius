@@ -45,7 +45,7 @@ class Review implements ReviewInterface
     /**
      * @var string
      */
-    protected $status;
+    protected $status = ReviewInterface::STATUS_NEW;
 
     /**
      * @var ReviewableInterface
@@ -68,7 +68,6 @@ class Review implements ReviewInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->status = ReviewInterface::STATUS_NEW;
     }
 
     /**
