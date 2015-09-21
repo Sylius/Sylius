@@ -338,18 +338,7 @@ form.form-signin .btn-success:hover {
 
 /* Forms. */
 .file-overlay {
-    width: 200px;
-    position: absolute;
-}
-
-input[type="file"] {
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    -webkit-opacity: 0;
-    opacity: 0;
     cursor: pointer;
-    width: 200px;
-    z-index: 100;
 }
 
 .form-control {

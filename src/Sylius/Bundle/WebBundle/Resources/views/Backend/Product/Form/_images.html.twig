@@ -6,8 +6,8 @@
         <span class="thumbnail"></span>
     </div>
     <div class="col-md-9">
-        <span class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
-        <input type="file" class="form-control" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
+        <label for="sylius_product_masterVariant_images___name___file" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.form.choose_file'|trans }}</label>
+        <input type="file" class="form-control hidden" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
     </div>
     <div class="col-md-2">
         <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-product-images" data-collection-item="image"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
