@@ -14,8 +14,6 @@ namespace Sylius\Component\Taxation\Calculator;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
- * Default tax calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */

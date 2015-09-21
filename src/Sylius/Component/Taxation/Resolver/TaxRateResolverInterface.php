@@ -15,15 +15,11 @@ use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
- * Tax rate resolver interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxRateResolverInterface
 {
     /**
-     * Get the tax rate for given taxable good and context.
-     *
      * @param TaxableInterface $taxable
      * @param array            $criteria
      *

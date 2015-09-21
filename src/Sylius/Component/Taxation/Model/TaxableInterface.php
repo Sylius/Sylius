@@ -12,15 +12,11 @@
 namespace Sylius\Component\Taxation\Model;
 
 /**
- * Taxable interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxableInterface
 {
     /**
-     * Get the tax category for taxable item.
-     *
      * @return TaxCategoryInterface
      */
     public function getTaxCategory();

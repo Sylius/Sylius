@@ -12,22 +12,16 @@
 namespace Sylius\Component\Taxation\Model;
 
 /**
- * Tax rate model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRate implements TaxRateInterface
 {
     /**
-     * Get tax rate identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Tax category.
-     *
      * @var TaxCategoryInterface
      */
     protected $category;
@@ -42,43 +36,30 @@ class TaxRate implements TaxRateInterface
     protected $name;
 
     /**
-     * Tax amount.
-     *
      * @var float
      */
     protected $amount = 0;
 
     /**
-     * Is tax included in price?
-     *
      * @var Boolean
      */
     protected $includedInPrice = false;
 
     /**
-     * Calculator name.
-     *
      * @var string
      */
     protected $calculator;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -106,8 +87,6 @@ class TaxRate implements TaxRateInterface
     public function setCategory(TaxCategoryInterface $category = null)
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
@@ -124,8 +103,6 @@ class TaxRate implements TaxRateInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -150,8 +127,6 @@ class TaxRate implements TaxRateInterface
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
-        return $this;
     }
 
     /**
@@ -167,9 +142,7 @@ class TaxRate implements TaxRateInterface
      */
     public function setIncludedInPrice($includedInPrice)
     {
-        $this->includedInPrice = (Boolean) $includedInPrice;
-
-        return $this;
+        $this->includedInPrice = (bool) $includedInPrice;
     }
 
     /**
@@ -186,8 +159,6 @@ class TaxRate implements TaxRateInterface
     public function setCalculator($calculator)
     {
         $this->calculator = $calculator;
-
-        return $this;
     }
 
     /**
@@ -204,8 +175,6 @@ class TaxRate implements TaxRateInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -222,7 +191,5 @@ class TaxRate implements TaxRateInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
