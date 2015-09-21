@@ -15,22 +15,16 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
 
 /**
- * Taxon interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonInterface extends VariableTaxonInterface
 {
     /**
-     * Get products.
-     *
      * @return Collection|ProductInterface[]
      */
     public function getProducts();
 
     /**
-     * Set products.
-     *
      * @param ProductInterface[] $products
      */
     public function setProducts($products);

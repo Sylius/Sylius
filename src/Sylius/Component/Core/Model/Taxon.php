@@ -71,8 +71,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     public function setFile(\SplFileInfo $file)
     {
         $this->file = $file;
-
-        return $this;
     }
 
     /**
@@ -97,8 +95,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     public function setPath($path)
     {
         $this->path = $path;
-
-        return $this;
     }
 
     /**
@@ -115,8 +111,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -133,8 +127,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

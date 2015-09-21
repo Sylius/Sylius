@@ -12,29 +12,21 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 /**
- * Taxonomy translation model interface.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface TaxonomyTranslationInterface
 {
     /**
-     * Get taxonomy id.
-     *
      * @return mixed
      */
     public function getId();
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName();
 
     /**
-     * Set taxonomy name.
-     *
      * @param string $name
      */
     public function setName($name);
