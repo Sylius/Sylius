@@ -23,6 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ChannelBasedConfigurationType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $channelRepository;
 
     /**

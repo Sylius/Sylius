@@ -53,8 +53,6 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function setChannels(Collection $channels)
     {
         $this->channels = $channels;
-
-        return $this;
     }
 
     /**

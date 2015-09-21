@@ -21,6 +21,9 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CustomerFilterType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -33,6 +36,9 @@ class CustomerFilterType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_customer_filter';

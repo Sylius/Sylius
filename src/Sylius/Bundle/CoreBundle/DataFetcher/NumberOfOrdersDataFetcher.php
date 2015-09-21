@@ -16,8 +16,6 @@ use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * Number of orders data fetcher
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class NumberOfOrdersDataFetcher extends TimePeriod

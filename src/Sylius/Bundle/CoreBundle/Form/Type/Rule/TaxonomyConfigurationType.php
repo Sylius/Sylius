@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonomyConfigurationType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $validationGroups;
 
     public function __construct(array $validationGroups)

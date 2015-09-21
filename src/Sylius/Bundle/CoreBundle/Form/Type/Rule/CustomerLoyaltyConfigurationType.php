@@ -24,8 +24,14 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class CustomerLoyaltyConfigurationType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $validationGroups;
 
+    /**
+     * @param array $validationGroups
+     */
     public function __construct(array $validationGroups)
     {
         $this->validationGroups = $validationGroups;

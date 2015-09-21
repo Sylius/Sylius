@@ -22,15 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Product controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductController extends BaseProductController
 {
     /**
-     * List products categorized under given taxon.
-     *
      * @param Request $request
      * @param string  $permalink
      *
@@ -115,8 +111,6 @@ class ProductController extends BaseProductController
 
 
     /**
-     * Show product details in frontend.
-     *
      * @param Request $request
      *
      * @return Response
@@ -147,8 +141,6 @@ class ProductController extends BaseProductController
     }
 
     /**
-     * Get product history changes.
-     *
      * @param Request $request
      *
      * @return Response
@@ -197,8 +189,6 @@ class ProductController extends BaseProductController
     }
 
     /**
-     * Render product filter form.
-     *
      * @param Request $request
      *
      * @return Response
@@ -250,6 +240,20 @@ class ProductController extends BaseProductController
         return parent::findOr404($request, $criteria);
     }
 
+    /**
+     * @param TaxonInterface $taxon
+     * @param Pagerfanta     $results
+     * @param string         $template
+     * @param string         $page
+     * @param mixed          $facets
+     * @param mixed          $facetTags
+     * @param mixed          $filters
+     * @param mixed          $searchTerm
+     * @param mixed          $searchParam
+     * @param mixed          $requestMethod
+     *
+     * @return Response
+     */
     private function renderResults(
         TaxonInterface $taxon,
         Pagerfanta $results,

@@ -131,6 +131,7 @@ class SecurityStep extends CheckoutStep
     /**
      * @param FormInterface $guestForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processGuestOrder(FormInterface $guestForm, OrderInterface $order)
@@ -146,6 +147,7 @@ class SecurityStep extends CheckoutStep
     /**
      * @param FormInterface  $registrationForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processRegistration(FormInterface $registrationForm, OrderInterface $order)
@@ -159,6 +161,7 @@ class SecurityStep extends CheckoutStep
 
     /**
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processUserLoggedIn(OrderInterface $order)

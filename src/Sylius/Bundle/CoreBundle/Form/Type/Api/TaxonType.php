@@ -14,9 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Taxon form type.
- */
 class TaxonType extends AbstractResourceType
 {
     /**

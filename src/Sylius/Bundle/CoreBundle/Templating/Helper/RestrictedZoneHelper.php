@@ -23,8 +23,6 @@ class RestrictedZoneHelper extends Helper
     private $restrictedZoneChecker;
 
     /**
-     * Constructor.
-     *
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      */
     public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker)

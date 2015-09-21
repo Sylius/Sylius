@@ -58,8 +58,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setOrderItem(OrderItemInterface $orderItem = null)
     {
         $this->orderItem = $orderItem;
-
-        return $this;
     }
 
     /**
@@ -76,8 +74,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShipment(BaseShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
-
-        return $this;
     }
 
     /**
@@ -94,8 +90,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShippable(ShippableInterface $shippable)
     {
         $this->setStockable($shippable);
-
-        return $this;
     }
 
     /**
@@ -112,7 +106,5 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-
-        return $this;
     }
 }

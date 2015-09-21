@@ -21,16 +21,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order payment listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderPaymentListener
 {
     /**
-     * Order payment processor.
-     *
      * @var PaymentProcessorInterface
      */
     protected $paymentProcessor;
@@ -51,8 +47,6 @@ class OrderPaymentListener
     protected $factory;
 
     /**
-     * Constructor.
-     *
      * @param PaymentProcessorInterface        $paymentProcessor
      * @param PaymentChargesProcessorInterface $paymentChargesProcessor
      * @param EventDispatcherInterface         $dispatcher
@@ -71,8 +65,6 @@ class OrderPaymentListener
     }
 
     /**
-     * Get the order from event and create payment.
-     *
      * @param GenericEvent $event
      *
      * @throws \InvalidArgumentException
@@ -83,8 +75,6 @@ class OrderPaymentListener
     }
 
     /**
-     * Update order's payment.
-     *
      * @param GenericEvent $event
      *
      * @throws \InvalidArgumentException

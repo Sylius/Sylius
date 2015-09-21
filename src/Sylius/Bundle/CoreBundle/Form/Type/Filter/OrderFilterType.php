@@ -17,6 +17,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class OrderFilterType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -78,6 +81,9 @@ class OrderFilterType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_order_filter';

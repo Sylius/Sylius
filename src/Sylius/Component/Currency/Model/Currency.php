@@ -36,7 +36,7 @@ class Currency implements CurrencyInterface
     protected $exchangeRate;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $enabled = true;
 
@@ -50,19 +50,22 @@ class Currency implements CurrencyInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->code;
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -125,7 +128,7 @@ class Currency implements CurrencyInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (bool) $enabled;
     }
 
     /**

@@ -19,6 +19,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -40,8 +43,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
@@ -65,8 +66,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `routing` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addRoutingSection(ArrayNodeDefinition $node)
@@ -99,8 +98,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `checkout` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addCheckoutSection(ArrayNodeDefinition $node)
@@ -128,8 +125,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Helper method to append checkout step nodes.
-     *
      * @param $name
      * @param $defaultTemplate
      * @return NodeDefinition

@@ -19,8 +19,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
 /**
- * Core channel context, which is aware of multiple channels.
- *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  */
 class ChannelContext extends BaseChannelContext implements ChannelContextInterface
@@ -46,11 +44,12 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
         if (null === $this->channel) {
             $this->channel = $this->channelResolver->resolve();
         }
+
         return $this->channel;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function onKernelRequest(KernelEvent $event)
     {

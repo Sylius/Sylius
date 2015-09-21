@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\CoreBundle\DataFetcher\NumberOfOrdersDataFetcher;
 
 /**
- * User based raport configuration form type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class NumberOfOrdersType extends AbstractType

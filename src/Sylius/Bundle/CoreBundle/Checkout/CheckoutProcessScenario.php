@@ -17,22 +17,16 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Sylius checkout process.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CheckoutProcessScenario implements ProcessScenarioInterface
 {
     /**
-     * Cart provider.
-     *
      * @var CartProviderInterface
      */
     protected $cartProvider;
 
     /**
-     * Constructor.
-     *
      * @param CartProviderInterface $cartProvider
      */
     public function __construct(CartProviderInterface $cartProvider)
@@ -67,8 +61,6 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
     }
 
     /**
-     * Get current cart.
-     *
      * @return OrderInterface
      */
     protected function getCurrentCart()

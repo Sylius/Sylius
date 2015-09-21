@@ -40,7 +40,5 @@ class Address extends BaseAddress implements AddressInterface
     public function setCustomer(BaseCustomerInterface $customer = null)
     {
         $this->customer = $customer;
-
-        return $this;
     }
 }

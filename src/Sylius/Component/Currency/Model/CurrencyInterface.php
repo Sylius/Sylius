@@ -48,7 +48,7 @@ interface CurrencyInterface extends TimestampableInterface
     public function setExchangeRate($rate);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 

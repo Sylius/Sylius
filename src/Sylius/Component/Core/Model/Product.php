@@ -98,8 +98,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setSku($sku)
     {
         $this->getMasterVariant()->setSku($sku);
-
-        return $this;
     }
 
     /**
@@ -120,8 +118,6 @@ class Product extends BaseProduct implements ProductInterface
         }
 
         $this->variantSelectionMethod = $variantSelectionMethod;
-
-        return $this;
     }
 
     /**
@@ -162,8 +158,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setTaxons(Collection $taxons)
     {
         $this->taxons = $taxons;
-
-        return $this;
     }
 
     /**
@@ -174,8 +168,6 @@ class Product extends BaseProduct implements ProductInterface
         if (!$this->hasTaxon($taxon)) {
             $this->taxons->add($taxon);
         }
-
-        return $this;
     }
 
     /**
@@ -186,8 +178,6 @@ class Product extends BaseProduct implements ProductInterface
         if ($this->hasTaxon($taxon)) {
             $this->taxons->removeElement($taxon);
         }
-
-        return $this;
     }
 
     /**
@@ -212,8 +202,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setPrice($price)
     {
         $this->getMasterVariant()->setPrice($price);
-
-        return $this;
     }
 
     /**
@@ -230,8 +218,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
-
-        return $this;
     }
 
     /**
@@ -248,8 +234,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setShippingCategory(ShippingCategoryInterface $category = null)
     {
         $this->shippingCategory = $category;
-
-        return $this;
     }
 
     /**
@@ -300,8 +284,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setChannels(Collection $channels)
     {
         $this->channels = $channels;
-
-        return $this;
     }
 
     /**
@@ -357,6 +339,5 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
-        return $this;
     }
 }
