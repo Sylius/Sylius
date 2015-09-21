@@ -16,8 +16,6 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Object variant interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface VariantInterface extends SoftDeletableInterface, TimestampableInterface
@@ -25,14 +23,14 @@ interface VariantInterface extends SoftDeletableInterface, TimestampableInterfac
     /**
      * Checks whether variant is master.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isMaster();
 
     /**
      * Defines whether variant is master.
      *
-     * @param Boolean $master
+     * @param bool $master
      */
     public function setMaster($master);
 
@@ -100,7 +98,7 @@ interface VariantInterface extends SoftDeletableInterface, TimestampableInterfac
      *
      * @param OptionValueInterface $option
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasOption(OptionValueInterface $option);
 

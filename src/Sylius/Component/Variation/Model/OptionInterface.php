@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Object option interface.
- *
  * Model implementing this interface represents the option type, which can be
  * attached to an object.
  *
@@ -84,7 +82,7 @@ interface OptionInterface extends TimestampableInterface, OptionTranslationInter
      *
      * @param OptionValueInterface $optionValue
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasValue(OptionValueInterface $optionValue);
 }

@@ -15,71 +15,50 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Object variant model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Variant implements VariantInterface
 {
     /**
-     * Variant id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Is master?
-     *
-     * @var Boolean
+     * @var bool
      */
     protected $master = false;
 
     /**
-     * Variant presentation.
-     *
      * @var string
      */
     protected $presentation;
 
     /**
-     * Product.
-     *
      * @var VariableInterface
      */
     protected $object;
 
     /**
-     * Option values.
-     *
      * @var Collection|OptionValueInterface[]
      */
     protected $options;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * Deletion time.
-     *
      * @var \DateTime
      */
     protected $deletedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->options = new ArrayCollection();
@@ -107,9 +86,7 @@ class Variant implements VariantInterface
      */
     public function setMaster($master)
     {
-        $this->master = (Boolean) $master;
-
-        return $this;
+        $this->master = (bool) $master;
     }
 
     /**
@@ -126,8 +103,6 @@ class Variant implements VariantInterface
     public function setPresentation($presentation)
     {
         $this->presentation = $presentation;
-
-        return $this;
     }
 
     /**
@@ -144,8 +119,6 @@ class Variant implements VariantInterface
     public function setObject(VariableInterface $object = null)
     {
         $this->object = $object;
-
-        return $this;
     }
 
     /**
@@ -162,8 +135,6 @@ class Variant implements VariantInterface
     public function setOptions(Collection $options)
     {
         $this->options = $options;
-
-        return $this;
     }
 
     /**
@@ -174,8 +145,6 @@ class Variant implements VariantInterface
         if (!$this->hasOption($option)) {
             $this->options->add($option);
         }
-
-        return $this;
     }
 
     /**
@@ -186,8 +155,6 @@ class Variant implements VariantInterface
         if ($this->hasOption($option)) {
             $this->options->removeElement($option);
         }
-
-        return $this;
     }
 
     /**
@@ -210,8 +177,6 @@ class Variant implements VariantInterface
         if ($this->isMaster()) {
             throw new \LogicException('Master variant cannot inherit from another master variant.');
         }
-
-        return $this;
     }
 
     /**
@@ -228,8 +193,6 @@ class Variant implements VariantInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -246,8 +209,6 @@ class Variant implements VariantInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -272,7 +233,5 @@ class Variant implements VariantInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 }

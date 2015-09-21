@@ -22,7 +22,7 @@ interface SetBuilderInterface
      * Get all permutations of option set.
      *
      * @param array   $setTuples
-     * @param boolean $isRecursiveStep
+     * @param bool $isRecursiveStep
      *
      * @return array The product set of tuples.
      */
