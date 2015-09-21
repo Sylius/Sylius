@@ -12,50 +12,36 @@
 namespace Sylius\Component\Order\Model;
 
 /**
- * Default adjustment model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Adjustment implements AdjustmentInterface
 {
     /**
-     * Id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Adjustable order.
-     *
      * @var OrderInterface
      */
     protected $order;
 
     /**
-     * Adjustable order item.
-     *
      * @var OrderItemInterface
      */
     protected $orderItem;
 
     /**
-     * Adjustment label.
-     *
      * @var string
      */
     protected $label;
 
     /**
-     * Short description of adjustment.
-     *
      * @var string
      */
     protected $description;
 
     /**
-     * Adjustment amount.
-     *
      * @var int
      */
     protected $amount = 0;
@@ -69,43 +55,30 @@ class Adjustment implements AdjustmentInterface
     protected $neutral = false;
 
     /**
-     * Is adjustment locked?
-     *
      * @var bool
      */
     protected $locked = false;
 
     /**
-     * Origin identifier.
-     *
      * @var int
      */
     protected $originId;
 
     /**
-     * Origin type.
-     *
      * @var string
      */
     protected $originType;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Modification time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -149,8 +122,6 @@ class Adjustment implements AdjustmentInterface
         if ($adjustable instanceof OrderItemInterface) {
             $this->orderItem = $adjustable;
         }
-
-        return $this;
     }
 
     /**
@@ -167,8 +138,6 @@ class Adjustment implements AdjustmentInterface
     public function setLabel($label)
     {
         $this->label = $label;
-
-        return $this;
     }
 
     /**
@@ -185,8 +154,6 @@ class Adjustment implements AdjustmentInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -206,8 +173,6 @@ class Adjustment implements AdjustmentInterface
             throw new \InvalidArgumentException('Amount must be an integer.');
         }
         $this->amount = $amount;
-
-        return $this;
     }
 
     /**
@@ -224,8 +189,6 @@ class Adjustment implements AdjustmentInterface
     public function setNeutral($neutral)
     {
         $this->neutral = (bool) $neutral;
-
-        return $this;
     }
 
     /**
@@ -242,8 +205,6 @@ class Adjustment implements AdjustmentInterface
     public function lock()
     {
         $this->locked = true;
-
-        return $this;
     }
 
     /**
@@ -286,8 +247,6 @@ class Adjustment implements AdjustmentInterface
     public function setOriginId($originId)
     {
         $this->originId = $originId;
-
-        return $this;
     }
 
     /**
@@ -304,8 +263,6 @@ class Adjustment implements AdjustmentInterface
     public function setOriginType($originType)
     {
         $this->originType = $originType;
-
-        return $this;
     }
 
     /**
@@ -322,8 +279,6 @@ class Adjustment implements AdjustmentInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -340,7 +295,5 @@ class Adjustment implements AdjustmentInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

@@ -17,15 +17,11 @@ namespace Sylius\Component\Order\Model;
 interface OrderAwareInterface
 {
     /**
-     * Return the order.
-     *
      * @return OrderInterface
      */
     public function getOrder();
 
     /**
-     * Set the order.
-     *
      * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order = null);

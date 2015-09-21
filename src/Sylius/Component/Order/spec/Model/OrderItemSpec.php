@@ -79,7 +79,8 @@ class OrderItemSpec extends ObjectBehavior
 
     function its_unit_price_should_accept_only_integer()
     {
-        $this->setUnitPrice(4498)->getUnitPrice()->shouldBeInteger();
+        $this->setUnitPrice(4498);
+        $this->getUnitPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(round(44.98 * 100));
@@ -94,7 +95,8 @@ class OrderItemSpec extends ObjectBehavior
 
     function its_total_should_accept_only_integer()
     {
-        $this->setTotal(4498)->getTotal()->shouldBeInteger();
+        $this->setTotal(4498);
+        $this->getTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
@@ -138,19 +140,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
-    }
-
-    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
-    {
-        $this->addAdjustment($adjustment)->shouldReturn($this);
-        $adjustment->isLocked()->willReturn(true);
-        $this->removeAdjustment($adjustment)->shouldReturn($this);
-    }
-
-    function it_has_fluent_interface_for_totals_calculation()
-    {
-        $this->calculateAdjustmentsTotal()->shouldReturn($this);
-        $this->calculateTotal()->shouldReturn($this);
     }
 
     function its_total_is_mutable()

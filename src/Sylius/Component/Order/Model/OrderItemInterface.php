@@ -19,29 +19,21 @@ namespace Sylius\Component\Order\Model;
 interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
 {
     /**
-     * Get item quantity.
-     *
      * @return int
      */
     public function getQuantity();
 
     /**
-     * Set quantity.
-     *
      * @param int $quantity
      */
     public function setQuantity($quantity);
 
     /**
-     * Get unit price of item.
-     *
      * @return int
      */
     public function getUnitPrice();
 
     /**
-     * Define the unit price of item.
-     *
      * @param int $unitPrice
      */
     public function setUnitPrice($unitPrice);
@@ -54,8 +46,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
     public function getTotal();
 
     /**
-     * Set item total.
-     *
      * @param int $total
      */
     public function setTotal($total);

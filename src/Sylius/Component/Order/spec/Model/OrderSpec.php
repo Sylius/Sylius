@@ -137,14 +137,6 @@ class OrderSpec extends ObjectBehavior
         $this->hasItem($item)->shouldReturn(false);
     }
 
-    function it_has_fluent_interface_for_items_management(OrderItemInterface $item)
-    {
-        $this->addItem($item)->shouldReturn($this);
-        $this->removeItem($item)->shouldReturn($this);
-
-        $this->clearItems()->shouldReturn($this);
-    }
-
     function it_has_items_total_equal_to_0_by_default()
     {
         $this->getItemsTotal()->shouldReturn(0);
@@ -152,7 +144,8 @@ class OrderSpec extends ObjectBehavior
 
     function its_items_total_should_accept_only_integer()
     {
-        $this->setItemsTotal(4498)->getItemsTotal()->shouldBeInteger();
+        $this->setItemsTotal(4498);
+        $this->getItemsTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(round(44.98 * 100));
@@ -181,11 +174,9 @@ class OrderSpec extends ObjectBehavior
         $item2->equals(Argument::any())->willReturn(false);
         $item3->equals(Argument::any())->willReturn(false);
 
-        $this
-            ->addItem($item1)
-            ->addItem($item2)
-            ->addItem($item3)
-        ;
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addItem($item3);
 
         $this->calculateItemsTotal();
 
@@ -222,20 +213,6 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
-    {
-        $this->addAdjustment($adjustment)->shouldReturn($this);
-        $adjustment->isLocked()->willReturn(true);
-        $this->removeAdjustment($adjustment)->shouldReturn($this);
-    }
-
-    function it_has_fluent_interface_for_totals_calculation()
-    {
-        $this->calculateItemsTotal()->shouldReturn($this);
-        $this->calculateAdjustmentsTotal()->shouldReturn($this);
-        $this->calculateTotal()->shouldReturn($this);
-    }
-
     function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
@@ -255,11 +232,9 @@ class OrderSpec extends ObjectBehavior
         $adjustment2->setAdjustable($this)->shouldBeCalled();
         $adjustment3->setAdjustable($this)->shouldBeCalled();
 
-        $this
-            ->addAdjustment($adjustment1)
-            ->addAdjustment($adjustment2)
-            ->addAdjustment($adjustment3)
-        ;
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+        $this->addAdjustment($adjustment3);
 
         $this->calculateAdjustmentsTotal();
 
@@ -273,7 +248,8 @@ class OrderSpec extends ObjectBehavior
 
     function its_total_should_accept_only_integer()
     {
-        $this->setTotal(4498)->getTotal()->shouldBeInteger();
+        $this->setTotal(4498);
+        $this->getTotal()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
@@ -303,12 +279,10 @@ class OrderSpec extends ObjectBehavior
         $adjustment1->setAdjustable($this)->shouldBeCalled();
         $adjustment2->setAdjustable($this)->shouldBeCalled();
 
-        $this
-            ->addItem($item1)
-            ->addItem($item2)
-            ->addAdjustment($adjustment1)
-            ->addAdjustment($adjustment2)
-        ;
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
 
         $this->calculateTotal();
 
@@ -337,12 +311,10 @@ class OrderSpec extends ObjectBehavior
         $adjustment1->setAdjustable($this)->shouldBeCalled();
         $adjustment2->setAdjustable($this)->shouldBeCalled();
 
-        $this
-            ->addItem($item1)
-            ->addItem($item2)
-            ->addAdjustment($adjustment1)
-            ->addAdjustment($adjustment2)
-        ;
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
 
         $this->calculateTotal();
 
@@ -364,10 +336,8 @@ class OrderSpec extends ObjectBehavior
 
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
-        $this
-            ->addItem($item)
-            ->addAdjustment($adjustment)
-        ;
+        $this->addItem($item);
+        $this->addAdjustment($adjustment);
 
         $this->calculateTotal();
 
@@ -390,18 +360,16 @@ class OrderSpec extends ObjectBehavior
         $this->shouldBeEmpty();
     }
 
-    function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface$item2)
+    function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface $item2)
     {
         $item1->setOrder($this)->shouldBeCalled();
+        $item1->merge($item2, false)->shouldBeCalled();
 
         $item1->equals($item2)->willReturn(true);
         $item2->equals($item1)->willReturn(true);
-        $item1->merge($item2, false)->willReturn($this);
 
-        $this
-            ->addItem($item1)
-            ->addItem($item2)
-        ;
+        $this->addItem($item1);
+        $this->addItem($item2);
 
         $this->countItems()->shouldReturn(1);
     }
