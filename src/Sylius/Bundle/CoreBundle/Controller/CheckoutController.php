@@ -65,7 +65,7 @@ class CheckoutController extends FOSRestController
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
-            //return new Response('Order cannot be empty!', 400);
+            return new Response('Order cannot be empty!', 400);
         }
 
         if ($request->isMethod('GET')) {
