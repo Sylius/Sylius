@@ -12,29 +12,21 @@
 namespace Sylius\Component\Variation\Model;
 
 /**
- * Option value.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValue implements OptionValueInterface
 {
     /**
-     * Option value id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Value.
-     *
      * @var string
      */
     protected $value;
 
     /**
-     * Option.
-     *
      * @var OptionInterface
      */
     protected $option;
@@ -69,8 +61,6 @@ class OptionValue implements OptionValueInterface
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
     /**
@@ -87,8 +77,6 @@ class OptionValue implements OptionValueInterface
     public function setOption(OptionInterface $option = null)
     {
         $this->option = $option;
-
-        return $this;
     }
 
     /**
