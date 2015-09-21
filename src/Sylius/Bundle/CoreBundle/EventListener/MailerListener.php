@@ -19,8 +19,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Generic mailer listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MailerListener

@@ -20,23 +20,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Order inventory processing listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderInventoryListener
 {
     /**
-     * Inventory handler.
-     *
      * @var InventoryHandlerInterface
      */
     protected $inventoryHandler;
 
     /**
-     * Constructor.
-     *
      * @param InventoryHandlerInterface $inventoryHandler
      */
     public function __construct(InventoryHandlerInterface $inventoryHandler)
@@ -45,8 +39,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Put order inventory on hold.
-     *
      * @param GenericEvent $event
      */
     public function holdInventoryUnits(GenericEvent $event)
@@ -57,8 +49,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Update the inventory units.
-     *
      * @param GenericEvent $event
      */
     public function processInventoryUnits(GenericEvent $event)
@@ -68,6 +58,9 @@ class OrderInventoryListener
         );
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function resolveInventoryState(GenericEvent $event)
     {
         $orderItem = $this->getItem($event);
@@ -88,8 +81,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Gets order from event.
-     *
      * @param GenericEvent $event
      *
      * @return OrderInterface
@@ -111,8 +102,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Gets order from event.
-     *
      * @param GenericEvent $event
      *
      * @return OrderInterface

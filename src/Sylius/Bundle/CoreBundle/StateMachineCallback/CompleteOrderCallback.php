@@ -15,9 +15,6 @@ use Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback as Base
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 
-/**
- * Set update sold value for items in order.
- */
 class CompleteOrderCallback extends BaseCompleteOrderCallback
 {
     /**

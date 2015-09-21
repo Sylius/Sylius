@@ -11,12 +11,19 @@
 
 namespace Sylius\Bundle\CoreBundle\Tests;
 
+use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
 
 class MySqlDriver extends Driver
 {
+    /**
+     * @var Connection
+     */
     private static $connection;
 
+    /**
+     * {@inheritdoc}
+     */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
     {
         if (null === self::$connection) {

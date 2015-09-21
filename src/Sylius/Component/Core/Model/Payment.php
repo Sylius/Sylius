@@ -42,7 +42,5 @@ class Payment extends BasePayment implements PaymentInterface
     public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 }

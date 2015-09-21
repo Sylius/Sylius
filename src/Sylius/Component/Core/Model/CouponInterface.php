@@ -31,8 +31,6 @@ interface CouponInterface extends BaseCouponInterface
      * Set per customer usage limit.
      *
      * @param int $perCustomerUsageLimit
-     *
-     * @return self
      */
     public function setPerCustomerUsageLimit($perCustomerUsageLimit = 0);
 }

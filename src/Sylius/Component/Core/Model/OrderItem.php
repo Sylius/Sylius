@@ -75,8 +75,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function setVariant(ProductVariantInterface $variant)
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
     /**
@@ -106,8 +104,6 @@ class OrderItem extends CartItem implements OrderItemInterface
             $unit->setOrderItem($this);
             $this->inventoryUnits->add($unit);
         }
-
-        return $this;
     }
 
     /**
@@ -117,8 +113,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         $unit->setOrderItem(null);
         $this->inventoryUnits->removeElement($unit);
-
-        return $this;
     }
 
     /**
@@ -153,8 +147,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
         }
-
-        return $this;
     }
 
     /**
@@ -165,8 +157,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
         }
-
-        return $this;
     }
 
     /**

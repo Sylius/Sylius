@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * User choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class UserChoiceType extends AbstractType

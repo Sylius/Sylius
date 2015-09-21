@@ -33,15 +33,11 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     protected $container;
 
     /**
-     * Route configuration for the object classes to search in
-     *
      * @var array
      */
     protected $routeConfigs;
 
     /**
-     * Contains an associative array of all the classes and the repositories needed in route generation
-     *
      * @var ObjectRepository[]
      */
     protected $classRepositories = array();
@@ -158,8 +154,6 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * This method is called from a compiler pass
-     *
      * @param string           $class
      * @param string           $id
      */
@@ -173,8 +167,6 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * Get repository services.
-     *
      * @return array
      */
     private function getRepositories()

@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Core channel context, which is aware of multiple channels.
- *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

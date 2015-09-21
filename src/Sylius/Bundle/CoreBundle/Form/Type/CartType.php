@@ -22,12 +22,15 @@ use Symfony\Component\Form\FormEvents;
  */
 class CartType extends BaseCartType
 {
+    /**
+     * @var FactoryInterface
+     */
     protected $couponFactory;
 
     /**
      * @param string              $dataClass        FQCN of cart model
      * @param string[]            $validationGroups
-     * @param FactoryInterface $couponFactory
+     * @param FactoryInterface    $couponFactory
      */
     public function __construct($dataClass, array $validationGroups, FactoryInterface $couponFactory)
     {

@@ -42,7 +42,5 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
-
-        return $this;
     }
 }

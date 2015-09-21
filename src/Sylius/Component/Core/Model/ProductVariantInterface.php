@@ -73,8 +73,6 @@ interface ProductVariantInterface extends
 
     /**
      * @param int $sold
-     *
-     * @return $this
      */
     public function setSold($sold);
 

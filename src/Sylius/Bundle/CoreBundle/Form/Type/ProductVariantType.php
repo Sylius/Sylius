@@ -15,8 +15,6 @@ use Sylius\Bundle\ProductBundle\Form\Type\VariantType as BaseVariantType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Product variant type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariantType extends BaseVariantType

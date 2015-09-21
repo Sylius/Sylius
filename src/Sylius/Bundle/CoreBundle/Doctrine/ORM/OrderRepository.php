@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Core\Model\CouponInterface;
@@ -36,8 +37,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Gets orders for customer.
-     *
      * @param CustomerInterface $customer
      * @param array         $sorting
      *
@@ -54,8 +53,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Get the order data for the details page.
-     *
      * @param integer $id
      *
      * @return OrderInterface|null
@@ -109,8 +106,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Create filter paginator.
-     *
      * @param array   $criteria
      * @param array   $sorting
      * @param Boolean $deleted
@@ -214,8 +209,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
-     * Create checkouts paginator.
-     *
      * @param array   $criteria
      * @param array   $sorting
      * @param Boolean $deleted
@@ -284,6 +277,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param string    $state
+     *
+     * @return OrderInterface[]
+     */
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -294,6 +294,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param string    $state
+     *
+     * @return int
+     */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -305,6 +312,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param string    $state
+     *
+     * @return float
+     */
     public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -371,6 +385,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->fetchAll();
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param string    $groupBy
+     *
+     * @return QueryBuilder
+     */
     protected function getQueryBuilderBetweenDatesGroupByDate(\DateTime $from, \DateTime $to, $groupBy = 'Date(date)')
     {
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
@@ -386,6 +407,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
     {
         $queryBuilder = $this->getQueryBuilder();
@@ -400,6 +424,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param string    $state
+     *
+     * @return QueryBuilder
+     */
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -418,6 +449,12 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * @param CustomerInterface $customer
+     * @param array             $sorting
+     *
+     * @return QueryBuilder
+     */
     protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -433,6 +470,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         return $queryBuilder;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getCollectionQueryBuilder()
     {
         $queryBuilder = parent::getCollectionQueryBuilder();

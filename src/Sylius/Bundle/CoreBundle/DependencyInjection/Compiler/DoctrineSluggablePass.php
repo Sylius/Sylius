@@ -15,8 +15,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Disables softdeleteable filter when slugs are generated.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class DoctrineSluggablePass implements CompilerPassInterface

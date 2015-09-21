@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The addressing step of checkout.
@@ -62,6 +63,13 @@ class AddressingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
@@ -74,6 +82,7 @@ class AddressingStep extends CheckoutStep
     /**
      * @param  OrderInterface    $order
      * @param  CustomerInterface $customer
+     *
      * @return FormInterface
      */
     protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)

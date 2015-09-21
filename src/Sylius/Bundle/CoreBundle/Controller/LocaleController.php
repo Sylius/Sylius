@@ -15,8 +15,6 @@ use Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider;
 use Sylius\Bundle\LocaleBundle\Controller\LocaleController as BaseLocaleController;
 
 /**
- * Locale controller which is Channel aware.
- *
  * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
 class LocaleController extends BaseLocaleController

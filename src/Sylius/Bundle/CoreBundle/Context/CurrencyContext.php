@@ -19,17 +19,30 @@ use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
- * Core currency context, which is aware of multiple channels.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CurrencyContext extends BaseCurrencyContext
 {
     const STORAGE_KEY = '_sylius_currency_%s';
 
+    /**
+     * @var SecurityContextInterface
+     */
     protected $securityContext;
+
+    /**
+     * @var SettingsManagerInterface
+     */
     protected $settingsManager;
+
+    /**
+     * @var ObjectManager
+     */
     protected $customerManager;
+
+    /**
+     * @var ChannelContextInterface
+     */
     protected $channelContext;
 
     /**
@@ -93,9 +106,8 @@ class CurrencyContext extends BaseCurrencyContext
     }
 
     /**
-     * Get storage key for channel with given code.
-     *
      * @param string $channelCode
+     *
      * @return string
      */
     private function getStorageKey($channelCode)

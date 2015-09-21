@@ -30,6 +30,10 @@ class ContainsProductConfigurationType extends AbstractType
      */
     protected $variantRepository;
 
+    /**
+     * @param array                             $validationGroups
+     * @param ProductVariantRepositoryInterface $variantRepository
+     */
     public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
     {
         $this->validationGroups  = $validationGroups;

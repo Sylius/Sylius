@@ -16,8 +16,6 @@ use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Security settings schema.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecuritySettingsSchema implements SchemaInterface

@@ -14,12 +14,13 @@ namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Increments promotion usage when a promotion is used by an order
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class PromotionUsageCallback
 {
+    /**
+     * @param OrderInterface $order
+     */
     public function incrementPromotionUsage(OrderInterface $order)
     {
         foreach ($order->getPromotions() as $promotion) {
@@ -27,6 +28,9 @@ class PromotionUsageCallback
         }
     }
 
+    /**
+     * @param OrderInterface $order
+     */
     public function decrementPromotionUsage(OrderInterface $order)
     {
         foreach ($order->getPromotions() as $promotion) {

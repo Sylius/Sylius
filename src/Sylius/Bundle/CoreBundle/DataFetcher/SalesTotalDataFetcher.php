@@ -16,8 +16,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * Sales total data fetcher
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class SalesTotalDataFetcher extends TimePeriod

@@ -43,8 +43,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
-
-        return $this;
     }
 
     /**

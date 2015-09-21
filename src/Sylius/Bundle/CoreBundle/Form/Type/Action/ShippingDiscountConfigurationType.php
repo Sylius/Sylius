@@ -18,12 +18,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Shipping discount action configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingDiscountConfigurationType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $validationGroups;
 
     public function __construct(array $validationGroups)
@@ -47,6 +48,9 @@ class ShippingDiscountConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -56,6 +60,9 @@ class ShippingDiscountConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_shipping_discount_configuration';

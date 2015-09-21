@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Checkout shipping step form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingStepType extends AbstractResourceType

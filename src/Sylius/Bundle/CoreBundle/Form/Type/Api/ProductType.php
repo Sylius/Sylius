@@ -14,9 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 use Sylius\Bundle\CoreBundle\Form\Type\ProductType as BaseProductType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Taxon form type.
- */
 class ProductType extends BaseProductType
 {
     /**

@@ -16,8 +16,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * Number of orders data fetcher
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class NumberOfOrdersDataFetcher extends TimePeriod

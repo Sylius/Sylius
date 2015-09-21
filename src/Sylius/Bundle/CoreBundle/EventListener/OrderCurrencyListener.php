@@ -23,13 +23,22 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 class OrderCurrencyListener
 {
+    /**
+     * @var CurrencyContextInterface
+     */
     protected $currencyContext;
 
+    /**
+     * @param CurrencyContextInterface $currencyContext
+     */
     public function __construct(CurrencyContextInterface $currencyContext)
     {
         $this->currencyContext = $currencyContext;
     }
 
+    /**
+     * @param CartEvent $event
+     */
     public function processOrderCurrency(CartEvent $event)
     {
         $order = $event->getCart();
