@@ -12,8 +12,10 @@
 namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableAverageRatingUpdaterInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -32,12 +34,13 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\ReviewDeleteListener');
     }
 
-    function it_recalculates_subject_rating_on_accepted_review_deletion($reviewableAverageRatingUpdater, GenericEvent $event, ReviewInterface $review)
+    function it_recalculates_subject_rating_on_accepted_review_deletion($reviewableAverageRatingUpdater, GenericEvent $event, ReviewInterface $review, ReviewableInterface $reviewSubject)
     {
         $event->getSubject()->willReturn($review)->shouldBeCalled();
         $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
+        $review->getReviewSubject()->willReturn($reviewSubject)->shouldBeCalled();
 
-        $reviewableAverageRatingUpdater->update($review)->shouldBeCalled();
+        $reviewableAverageRatingUpdater->update($reviewSubject)->shouldBeCalled();
 
         $this->recalculateSubjectRating($event);
     }
@@ -47,7 +50,7 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($review)->shouldBeCalled();
         $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW)->shouldBeCalled();
 
-        $reviewableAverageRatingUpdater->update($review)->shouldNotBeCalled();
+        $reviewableAverageRatingUpdater->update(Argument::type('Sylius\Component\Review\Model\ReviewableInterface'))->shouldNotBeCalled();
 
         $this->recalculateSubjectRating($event);
     }
@@ -57,7 +60,7 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($review)->shouldBeCalled();
         $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED)->shouldBeCalled();
 
-        $reviewableAverageRatingUpdater->update($review)->shouldNotBeCalled();
+        $reviewableAverageRatingUpdater->update(Argument::type('Sylius\Component\Review\Model\ReviewableInterface'))->shouldNotBeCalled();
 
         $this->recalculateSubjectRating($event);
     }

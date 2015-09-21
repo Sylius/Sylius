@@ -40,6 +40,19 @@ class ReviewableAverageRatingUpdaterSpec extends ObjectBehavior
     function it_updates_review_subject_average_rating(
         $averageRatingCalculator,
         $reviewSubjectManager,
+        ReviewableInterface $reviewSubject
+    ) {
+        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5)->shouldBeCalled();
+
+        $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
+        $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
+
+        $this->update($reviewSubject);
+    }
+
+    function it_updates_review_subject_average_rating_from_review(
+        $averageRatingCalculator,
+        $reviewSubjectManager,
         ReviewableInterface $reviewSubject,
         ReviewInterface $review
     ) {
@@ -49,6 +62,6 @@ class ReviewableAverageRatingUpdaterSpec extends ObjectBehavior
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
         $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
 
-        $this->update($review);
+        $this->updateFromReview($review);
     }
 }

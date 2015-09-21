@@ -74,7 +74,9 @@ class ProductReviewController extends ResourceController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if (!$this->createResourceIfValid($request, $form)) {
+        if ($form->submit($request)->isValid()) {
+            $this->domainManager->create($form->getData());
+
             return new JsonResponse($this->getFormErrorsAsArray($form));
         }
 

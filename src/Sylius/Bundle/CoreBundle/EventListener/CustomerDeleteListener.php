@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -58,14 +59,15 @@ class CustomerDeleteListener
      */
     public function removeCustomerReviews(GenericEvent $event)
     {
-        if (!(($author = $event->getSubject()) instanceof CustomerInterface)) {
+        $author = $event->getSubject();
+        if (!$author instanceof CustomerInterface) {
             throw new UnexpectedTypeException($author, 'Sylius\Component\Core\Model\CustomerInterface');
         }
 
         $reviewSubjectsToRecalculate = array();
 
         foreach ($this->reviewRepository->findBy(array('author' => $author)) as $review) {
-            $reviewSubjectsToRecalculate = $this->controlReviewSubjectReviews($review, $reviewSubjectsToRecalculate);
+            $reviewSubjectsToRecalculate = $this->removeReviewsAndExtractSubject($review, $reviewSubjectsToRecalculate);
         }
         $this->reviewManager->flush();
 
@@ -75,12 +77,12 @@ class CustomerDeleteListener
     }
 
     /**
-     * @param ReviewInterface $review
-     * @param array           $reviewSubjectsToRecalculate
+     * @param ReviewInterface       $review
+     * @param ReviewableInterface[] $reviewSubjectsToRecalculate
      *
      * @return array
      */
-    private function controlReviewSubjectReviews(ReviewInterface $review, array $reviewSubjectsToRecalculate)
+    private function removeReviewsAndExtractSubject(ReviewInterface $review, array $reviewSubjectsToRecalculate)
     {
         $reviewSubject = $review->getReviewSubject();
 

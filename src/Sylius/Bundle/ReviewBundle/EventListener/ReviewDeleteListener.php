@@ -40,11 +40,8 @@ class ReviewDeleteListener
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Review\Model\ReviewInterface');
         }
 
-        if (ReviewInterface::STATUS_NEW === $subject->getStatus()
-            || ReviewInterface::STATUS_REJECTED === $subject->getStatus()) {
-            return;
+        if (ReviewInterface::STATUS_ACCEPTED === $subject->getStatus()) {
+            $this->reviewableAverageRatingUpdater->update($subject->getReviewSubject());
         }
-
-        $this->reviewableAverageRatingUpdater->update($subject);
     }
 }

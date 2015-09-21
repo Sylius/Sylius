@@ -76,7 +76,6 @@ class Product extends BaseProduct implements ProductInterface
         $this->reviews = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
-        $this->averageRating = 0;
     }
 
     /**
