@@ -15,59 +15,40 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Tax category model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxCategory implements TaxCategoryInterface
 {
     /**
-     * Identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Tax category name.
-     *
-     * Can be 'Clothing' or 'Electronics'.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Short description of tax category.
-     *
      * @var string
      */
     protected $description;
 
     /**
-     * All rates applicable for items from this category.
-     *
      * @var Collection
      */
     protected $rates;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->rates = new ArrayCollection();
@@ -104,8 +85,6 @@ class TaxCategory implements TaxCategoryInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -122,8 +101,6 @@ class TaxCategory implements TaxCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -143,8 +120,6 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory($this);
             $this->rates->add($rate);
         }
-
-        return $this;
     }
 
     /**
@@ -156,8 +131,6 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory(null);
             $this->rates->removeElement($rate);
         }
-
-        return $this;
     }
 
     /**
@@ -182,8 +155,6 @@ class TaxCategory implements TaxCategoryInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -200,7 +171,5 @@ class TaxCategory implements TaxCategoryInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
