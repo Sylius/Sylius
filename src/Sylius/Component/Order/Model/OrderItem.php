@@ -22,50 +22,36 @@ use Doctrine\Common\Collections\Collection;
 class OrderItem implements OrderItemInterface
 {
     /**
-     * Item id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Order.
-     *
      * @var OrderInterface
      */
     protected $order;
 
     /**
-     * Quantity.
-     *
      * @var int
      */
     protected $quantity = 1;
 
     /**
-     * Unit price.
-     *
      * @var int
      */
     protected $unitPrice = 0;
 
     /**
-     * Total adjustments.
-     *
      * @var Collection|AdjustmentInterface[]
      */
     protected $adjustments;
 
     /**
-     * Adjustments total.
-     *
      * @var int
      */
     protected $adjustmentsTotal = 0;
 
     /**
-     * Order item total.
-     *
      * @var int
      */
     protected $total = 0;
@@ -111,8 +97,6 @@ class OrderItem implements OrderItemInterface
         }
 
         $this->quantity = $quantity;
-
-        return $this;
     }
 
     /**
@@ -129,8 +113,6 @@ class OrderItem implements OrderItemInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 
     /**
@@ -150,8 +132,6 @@ class OrderItem implements OrderItemInterface
             throw new \InvalidArgumentException('Unit price must be an integer.');
         }
         $this->unitPrice = $unitPrice;
-
-        return $this;
     }
 
     /**
@@ -177,8 +157,6 @@ class OrderItem implements OrderItemInterface
             $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
         }
-
-        return $this;
     }
 
     /**
@@ -190,8 +168,6 @@ class OrderItem implements OrderItemInterface
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
         }
-
-        return $this;
     }
 
     /**
@@ -232,8 +208,6 @@ class OrderItem implements OrderItemInterface
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
         }
-
-        return $this;
     }
 
     /**
@@ -256,8 +230,6 @@ class OrderItem implements OrderItemInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
-
-        return $this;
     }
 
     /**
@@ -277,8 +249,6 @@ class OrderItem implements OrderItemInterface
             throw new \InvalidArgumentException('Total must be an integer.');
         }
         $this->total = $total;
-
-        return $this;
     }
 
     /**
@@ -293,8 +263,6 @@ class OrderItem implements OrderItemInterface
         if ($this->total < 0) {
             $this->total = 0;
         }
-
-        return $this;
     }
 
     /**
@@ -317,8 +285,6 @@ class OrderItem implements OrderItemInterface
         if ($this !== $orderItem) {
             $this->quantity += $orderItem->getQuantity();
         }
-
-        return $this;
     }
 
     /**
@@ -335,7 +301,5 @@ class OrderItem implements OrderItemInterface
     public function setImmutable($immutable)
     {
         $this->immutable = (bool) $immutable;
-
-        return $this;
     }
 }

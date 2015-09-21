@@ -12,35 +12,27 @@
 namespace Sylius\Component\Order\Model;
 
 /**
- * Identity entity.
- *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
 class Identity implements IdentityInterface
 {
     /**
-     * Id.
-     *
      * @var int
      */
     protected $id;
 
     /**
-     * Order.
-     *
      * @var OrderInterface
      */
     protected $order;
 
     /**
-     * Identity name, for instance "ebay id"
-     *
+     * @var string
      */
     protected $name;
 
     /**
-     * Identity value, for instance "2342343242"
-     *
+     * @var int
      */
     protected $value;
 
@@ -66,8 +58,6 @@ class Identity implements IdentityInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
     /**
      * {@inheritdoc}
@@ -75,8 +65,6 @@ class Identity implements IdentityInterface
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
     /**
@@ -93,7 +81,5 @@ class Identity implements IdentityInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 }
