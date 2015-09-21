@@ -12,8 +12,6 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Promotion action model interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ActionInterface
@@ -22,43 +20,36 @@ interface ActionInterface
     const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     /**
-     * Get type
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getType();
 
     /**
-     * Set type
-     *
-     * @param $type
+     * @param string $type
      */
     public function setType($type);
 
     /**
-     * Get configuration
-     *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set configuration
-     *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
 
     /**
-     * Get promotion
-     *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set promotion
-     *
      * @param PromotionInterface $promotion
      */
     public function setPromotion(PromotionInterface $promotion = null);

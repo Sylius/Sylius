@@ -12,16 +12,12 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Countable promotion subject interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionCountableSubjectInterface extends PromotionSubjectInterface
 {
     /**
-     * Count promotion subjects.
-     *
-     * @return integer
+     * @return int
      */
     public function getPromotionSubjectCount();
 }

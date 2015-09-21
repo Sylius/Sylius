@@ -12,44 +12,32 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Promotion action model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Action implements ActionInterface
 {
     /**
-     * The id of this action
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * The type of this action
-     *
      * @var string
      */
     protected $type;
 
     /**
-     * The configuration of this action
-     *
      * @var array
      */
     protected $configuration = array();
 
     /**
-     * The promotion associated with this action
-     *
      * @var PromotionInterface
      */
     protected $promotion;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -70,8 +58,6 @@ class Action implements ActionInterface
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -88,8 +74,6 @@ class Action implements ActionInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -106,7 +90,5 @@ class Action implements ActionInterface
     public function setPromotion(PromotionInterface $promotion = null)
     {
         $this->promotion = $promotion;
-
-        return $this;
     }
 }
