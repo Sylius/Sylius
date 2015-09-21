@@ -17,22 +17,16 @@ namespace Sylius\Component\Payment\Model;
 interface PaymentSubjectInterface
 {
     /**
-     * Get payment method associated with this payment.
-     *
      * @return PaymentMethodInterface
      */
     public function getMethod();
 
     /**
-     * Get amount.
-     *
      * @return integer
      */
     public function getAmount();
 
     /**
-     * Get payment state
-     *
      * @return string
      */
     public function getState();

@@ -25,8 +25,6 @@ class DelegatingFeeCalculator implements DelegatingFeeCalculatorInterface
     private $serviceRegistry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $serviceRegistry
      */
     public function __construct(ServiceRegistryInterface $serviceRegistry)

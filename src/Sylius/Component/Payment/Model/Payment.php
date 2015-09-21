@@ -14,8 +14,6 @@ namespace Sylius\Component\Payment\Model;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Payments model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Payment implements PaymentInterface, PaymentSubjectInterface
@@ -100,8 +98,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setMethod(PaymentMethodInterface $method = null)
     {
         $this->method = $method;
-
-        return $this;
     }
 
     /**
@@ -116,8 +112,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
         if ($source instanceof CreditCardInterface) {
             $this->creditCard = $source;
         }
-
-        return $this;
     }
 
     /**
@@ -146,8 +140,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
-
-        return $this;
     }
 
     /**
@@ -167,8 +159,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
             throw new \InvalidArgumentException('Amount must be an integer.');
         }
         $this->amount = $amount;
-
-        return $this;
     }
 
     /**
@@ -185,8 +175,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setState($state)
     {
         $this->state = $state;
-
-        return $this;
     }
 
     /**
@@ -203,8 +191,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -221,8 +207,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -247,8 +231,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 
     /**
@@ -265,8 +247,6 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
         }
 
         $this->details = $details;
-
-        return $this;
     }
 
     /**
