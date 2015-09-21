@@ -87,6 +87,17 @@ Feature: Promotions
           And I should see "Promotion has been successfully created."
 
     @javascript
+    Scenario: Creating new promotion with cheapest product rule
+        Given I am on the promotion creation page
+         When I fill in "Name" with "Behat Training"
+          And I fill in "Description" with "Behat Training promotion on the cheapest product"
+          And I click "Add rule"
+          And I select "Cheapest Product" from "Type"
+          And I press "Create"
+         Then I should see "Behat Training"
+          And I should see "Promotion has been successfully created."
+
+    @javascript
     Scenario: Creating new promotion with fixed discount action
         Given I am on the promotion creation page
          When I fill in "Name" with "Behat Training"
