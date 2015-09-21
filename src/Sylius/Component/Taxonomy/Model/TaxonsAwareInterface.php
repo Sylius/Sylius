@@ -14,15 +14,11 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Taxons aware interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonsAwareInterface
 {
     /**
-     * Get all taxons.
-     *
      * @param string $taxonomy
      *
      * @return Collection|TaxonInterface[]
@@ -30,15 +26,11 @@ interface TaxonsAwareInterface
     public function getTaxons($taxonomy = null);
 
     /**
-     * Set the taxons.
-     *
      * @param Collection $collection
      */
     public function setTaxons(Collection $collection);
 
     /**
-     * Has a taxon?
-     *
      * @param TaxonInterface $taxon
      *
      * @return bool
@@ -46,15 +38,11 @@ interface TaxonsAwareInterface
     public function hasTaxon(TaxonInterface $taxon);
 
     /**
-     * Add taxon.
-     *
      * @param TaxonInterface $taxon
      */
     public function addTaxon(TaxonInterface $taxon);
 
     /**
-     * Remove taxon.
-     *
      * @param TaxonInterface $taxon
      */
     public function removeTaxon(TaxonInterface $taxon);

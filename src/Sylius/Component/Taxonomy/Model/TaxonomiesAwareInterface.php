@@ -14,8 +14,6 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple taxonomies.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonomiesAwareInterface
