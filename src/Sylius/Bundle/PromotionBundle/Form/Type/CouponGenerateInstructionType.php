@@ -21,6 +21,9 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CouponGenerateInstructionType extends AbstractResourceType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,9 +33,16 @@ class CouponGenerateInstructionType extends AbstractResourceType
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.coupon_generate_instruction.usage_limit'
             ))
+            ->add('expiresAt', 'date', array(
+                'label' => 'sylius.form.coupon_generate_instruction.expires_at',
+                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+            ))
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_coupon_generate_instruction';
