@@ -17,8 +17,6 @@ use Sylius\Component\Promotion\Model\Promotion as BasePromotion;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 
 /**
- * Promotion model.
- *
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
 class Promotion extends BasePromotion implements PromotionInterface
@@ -30,9 +28,6 @@ class Promotion extends BasePromotion implements PromotionInterface
      */
     protected $channels;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();
@@ -53,8 +48,6 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function setChannels(Collection $channels)
     {
         $this->channels = $channels;
-
-        return $this;
     }
 
     /**

@@ -15,91 +15,69 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Coupon model interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
 {
     /**
-     * Get code
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getCode();
 
     /**
-     * Set code
-     *
      * @param string $code
      */
     public function setCode($code);
 
     /**
-     * Get usage limit
-     *
-     * @return integer
+     * @return int
      */
     public function getUsageLimit();
 
     /**
-     * Set usage limit
-     *
-     * @param integer $usageLimit
+     * @param int $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
     /**
-     * Get number of times this coupon has been used
-     *
-     * @return integer
+     * @return int
      */
     public function getUsed();
 
     /**
-     * Set number of times this coupon has been used
-     *
-     * @param integer $used
+     * @param int $used
      */
     public function setUsed($used);
 
-    /**
-     * Increment usage
-     */
     public function incrementUsed();
 
     /**
-     * Get associated promotion
-     *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set the associated promotion
-     *
      * @param PromotionInterface $promotion
      */
     public function setPromotion(PromotionInterface $promotion = null);
 
     /**
-     * Get the expiration date
-     *
      * @return \DateTime
      */
     public function getExpiresAt();
 
     /**
-     * Set the expiration date
-     *
      * @param \DateTime $expiresAt
      */
     public function setExpiresAt(\DateTime $expiresAt = null);
 
     /**
-     * Is this coupon valid?
-     *
-     * @return Boolean
+     * @return bool
      */
     public function isValid();
 }

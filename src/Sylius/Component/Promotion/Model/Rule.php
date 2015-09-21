@@ -12,52 +12,37 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Promotion rule model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Rule implements RuleInterface
 {
     /**
-     * Id
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * Type
-     *
      * @var string
      */
     protected $type;
 
     /**
-     * Configuration
-     *
      * @var array
      */
     protected $configuration;
 
     /**
-     * Associated promotion
-     *
      * @var PromotionInterface
      */
     protected $promotion;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->configuration = array();
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -78,8 +63,6 @@ class Rule implements RuleInterface
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -96,8 +79,6 @@ class Rule implements RuleInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -114,7 +95,5 @@ class Rule implements RuleInterface
     public function setPromotion(PromotionInterface $promotion = null)
     {
         $this->promotion = $promotion;
-
-        return $this;
     }
 }
