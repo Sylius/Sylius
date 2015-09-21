@@ -19,15 +19,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 abstract class AbstractTranslatable implements TranslatableInterface
 {
     /**
-     * Translations.
-     *
      * @var TranslationInterface[]
      */
     protected $translations;
 
     /**
-     * Current locale.
-     *
      * @var string
      */
     protected $currentLocale;
@@ -40,15 +36,10 @@ abstract class AbstractTranslatable implements TranslatableInterface
     protected $currentTranslation;
 
     /**
-     * Fallback locale.
-     *
      * @var string
      */
     protected $fallbackLocale;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->translations = new ArrayCollection();
@@ -71,8 +62,6 @@ abstract class AbstractTranslatable implements TranslatableInterface
             $this->translations->set($translation->getLocale(), $translation);
             $translation->setTranslatable($this);
         }
-
-        return $this;
     }
 
     /**
@@ -83,8 +72,6 @@ abstract class AbstractTranslatable implements TranslatableInterface
         if ($this->translations->removeElement($translation)) {
             $translation->setTranslatable(null);
         }
-
-        return $this;
     }
 
     /**
@@ -103,8 +90,6 @@ abstract class AbstractTranslatable implements TranslatableInterface
     public function setCurrentLocale($currentLocale)
     {
         $this->currentLocale = $currentLocale;
-
-        return $this;
     }
 
     /**
@@ -121,8 +106,6 @@ abstract class AbstractTranslatable implements TranslatableInterface
     public function setFallbackLocale($fallbackLocale)
     {
         $this->fallbackLocale = $fallbackLocale;
-
-        return $this;
     }
 
     /**
