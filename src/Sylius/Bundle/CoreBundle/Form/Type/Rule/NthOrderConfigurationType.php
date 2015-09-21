@@ -44,6 +44,25 @@ class NthOrderConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 )
             ))
+            ->add('time', 'integer', array(
+                'label'       => 'sylius.form.rule.nth_order_configuration.time',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                )
+            ))
+            ->add('unit', 'choice', array(
+                'label'       => 'sylius.form.rule.nth_order_configuration.unit.header',
+                'choices'     => array(
+                    'days'   => 'sylius.form.rule.nth_order_configuration.unit.days',
+                    'weeks'  => 'sylius.form.rule.nth_order_configuration.unit.weeks',
+                    'months' => 'sylius.form.rule.nth_order_configuration.unit.months',
+                    'years'  => 'sylius.form.rule.nth_order_configuration.unit.years',
+                ),
+                'constraints' => array(
+                    new NotBlank(),
+                )
+            ))
         ;
     }
 

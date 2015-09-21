@@ -52,6 +52,8 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
+        $time = new \DateTime(sprintf('%d %s ago', $configuration['time'], $configuration['unit']));
+
         return $this->orderRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED) === ($configuration['nth'] - 1);
     }
 

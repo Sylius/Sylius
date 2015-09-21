@@ -20,7 +20,6 @@ interface RuleInterface
 {
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
-    const TYPE_ORDER_TOTAL_MONTH = 'order_total_month';
 
     /**
      * Get type

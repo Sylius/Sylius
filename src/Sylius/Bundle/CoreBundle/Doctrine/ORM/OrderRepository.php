@@ -265,7 +265,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
+    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state, array $configuration = array())
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -277,6 +277,14 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->setParameter('customer', $customer)
             ->setParameter('state', $state)
         ;
+
+        if($configuration!==null){
+            $queryBuilder
+                ->andWhere= $this->getCollectionQueryBuilderBetweenDates(
+                $configuration['start'],
+                $configuration['end'],
+                $state);
+        }
 
         return (int) $queryBuilder
             ->getQuery()
