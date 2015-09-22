@@ -37,20 +37,9 @@ class CompositeMetadataHierarchyProviderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface');
     }
 
-    function it_check_if_given_resolver_supports_a_metadata(
-        MetadataHierarchyProviderInterface $firstHierarchyProvider,
-        MetadataHierarchyProviderInterface $secondHierarchyProvider,
-        MetadataSubjectInterface $supportedMetadataSubject,
-        MetadataSubjectInterface $unsupportedMetadataSubject
-    ) {
-        $firstHierarchyProvider->supports($supportedMetadataSubject)->shouldBeCalled()->willReturn(false);
-        $secondHierarchyProvider->supports($supportedMetadataSubject)->shouldBeCalled()->willReturn(true);
-
-        $firstHierarchyProvider->supports($unsupportedMetadataSubject)->shouldBeCalled()->willReturn(false);
-        $secondHierarchyProvider->supports($unsupportedMetadataSubject)->shouldBeCalled()->willReturn(false);
-
-        $this->supports($supportedMetadataSubject)->shouldReturn(true);
-        $this->supports($unsupportedMetadataSubject)->shouldReturn(false);
+    function it_supports_every_metadata_subject(MetadataSubjectInterface $metadataSubject)
+    {
+        $this->supports($metadataSubject)->shouldReturn(true);
     }
 
     function it_delegates_resolving_to_correct_resolver(
@@ -67,17 +56,18 @@ class CompositeMetadataHierarchyProviderSpec extends ObjectBehavior
         $this->getHierarchyByMetadataSubject($metadataSubject)->shouldReturn(['Child-42', 'Child', 'Parent-42']);
     }
 
-    function it_throws_exception_if_trying_to_resolve_unsupported_metadata(
-        MetadataHierarchyProviderInterface $firstHierarchyProvider,
-        MetadataHierarchyProviderInterface $secondHierarchyProvider,
+    function it_returns_default_hirearchy_if_can_not_find_supporting_hierarchy_provider(
+        MetadataHierarchyProviderInterface $hierarchyProvider,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $firstHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(false);
-        $secondHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(false);
+        $this->beConstructedWith([$hierarchyProvider]);
 
-        $firstHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldNotBeCalled();
-        $secondHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldNotBeCalled();
+        $hierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(false);
+        $hierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldNotBeCalled();
 
-        $this->shouldThrow('\InvalidArgumentException')->duringGetHierarchyByMetadataSubject($metadataSubject);
+        $metadataSubject->getMetadataIdentifier()->shouldBeCalled()->willReturn('Metadata-42');
+        $metadataSubject->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('Metadata');
+
+        $this->getHierarchyByMetadataSubject($metadataSubject)->shouldReturn(['Metadata-42', 'Metadata']);
     }
 }

@@ -36,32 +36,26 @@ class CompositeMetadataHierarchyProvider implements MetadataHierarchyProviderInt
     /**
      * {@inheritdoc}
      */
-    public function getHierarchyByMetadataSubject(MetadataSubjectInterface $metadata)
+    public function getHierarchyByMetadataSubject(MetadataSubjectInterface $metadataSubject)
     {
         foreach ($this->providers as $provider) {
-            if ($provider->supports($metadata)) {
-                return $provider->getHierarchyByMetadataSubject($metadata);
+            if ($provider->supports($metadataSubject)) {
+                return $provider->getHierarchyByMetadataSubject($metadataSubject);
             }
         }
 
-        throw new \InvalidArgumentException(sprintf(
-            'There is no provider suitable for %s',
-            get_class($metadata)
-        ));
+        return [
+            $metadataSubject->getMetadataIdentifier(),
+            $metadataSubject->getMetadataClassIdentifier(),
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supports(MetadataSubjectInterface $metadata)
+    public function supports(MetadataSubjectInterface $metadataSubject)
     {
-        foreach ($this->providers as $provider) {
-            if ($provider->supports($metadata)) {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 
     /**

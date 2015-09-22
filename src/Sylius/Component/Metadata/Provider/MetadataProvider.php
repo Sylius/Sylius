@@ -46,7 +46,8 @@ class MetadataProvider implements MetadataProviderInterface
         ObjectRepository $rootMetadataRepository,
         MetadataCompilerInterface $metadataCompiler,
         MetadataHierarchyProviderInterface $metadataHierarchyProvider
-    ) {
+    )
+    {
         $this->rootMetadataRepository = $rootMetadataRepository;
         $this->metadataCompiler = $metadataCompiler;
         $this->metadataHierarchyProvider = $metadataHierarchyProvider;
@@ -57,7 +58,7 @@ class MetadataProvider implements MetadataProviderInterface
      */
     public function getMetadataBySubject(MetadataSubjectInterface $metadataSubject)
     {
-        $identifiers = $this->getHierarchyByMetadataSubject($metadataSubject);
+        $identifiers = $this->metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject);
 
         $parents = [];
         $baseMetadata = null;
@@ -84,24 +85,5 @@ class MetadataProvider implements MetadataProviderInterface
         }
 
         return $this->metadataCompiler->compile($baseMetadata, $parents);
-    }
-
-    /**
-     * @param MetadataSubjectInterface $metadataSubject
-     *
-     * @return string[]
-     */
-    private function getHierarchyByMetadataSubject(MetadataSubjectInterface $metadataSubject)
-    {
-        if ($this->metadataHierarchyProvider->supports($metadataSubject)) {
-            $identifiers = $this->metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject);
-        } else {
-            $identifiers = [
-                $metadataSubject->getMetadataIdentifier(),
-                $metadataSubject->getMetadataClassIdentifier(),
-            ];
-        }
-
-        return $identifiers;
     }
 }

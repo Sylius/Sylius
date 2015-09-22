@@ -54,7 +54,6 @@ class MetadataProviderSpec extends ObjectBehavior
         MetadataInterface $metadata,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
         $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
             'MetadataSubject-42',
             'MetadataSubject',
@@ -79,7 +78,6 @@ class MetadataProviderSpec extends ObjectBehavior
         MetadataInterface $compiledMetadata,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
         $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
             'MetadataSubject-42',
             'MetadataSubject',
@@ -106,7 +104,6 @@ class MetadataProviderSpec extends ObjectBehavior
         MetadataInterface $compiledMetadata,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
         $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
             'MetadataSubject-42',
             'MetadataSubject',
@@ -129,7 +126,6 @@ class MetadataProviderSpec extends ObjectBehavior
         MetadataHierarchyProviderInterface $metadataHierarchyProvider,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(true);
         $metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject)->shouldBeCalled()->willReturn([
             'MetadataSubject-42',
             'MetadataSubject',
@@ -141,24 +137,5 @@ class MetadataProviderSpec extends ObjectBehavior
         $metadataCompiler->compile(Argument::cetera())->shouldNotBeCalled();
 
         $this->getMetadataBySubject($metadataSubject)->shouldReturn(null);
-    }
-
-    function it_creates_default_hierarchy_if_there_is_no_suitable_hierarchy_provider(
-        RepositoryInterface $rootMetadataRepository,
-        MetadataCompilerInterface $metadataCompiler,
-        MetadataHierarchyProviderInterface $metadataHierarchyProvider,
-        MetadataSubjectInterface $metadataSubject
-    ) {
-        $metadataHierarchyProvider->supports($metadataSubject)->shouldBeCalled()->willReturn(false);
-
-        $metadataSubject->getMetadataIdentifier()->shouldBeCalled()->willReturn('MetadataSubject-42');
-        $metadataSubject->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('MetadataSubject');
-
-        $rootMetadataRepository->findOneBy(['id' => 'MetadataSubject-42'])->shouldBeCalled();
-        $rootMetadataRepository->findOneBy(['id' => 'MetadataSubject'])->shouldBeCalled();
-
-        $metadataCompiler->compile(Argument::cetera());
-
-        $this->getMetadataBySubject($metadataSubject);
     }
 }
