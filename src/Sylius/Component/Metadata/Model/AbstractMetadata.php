@@ -63,4 +63,14 @@ abstract class AbstractMetadata implements MetadataInterface
             get_object_vars($this)
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function forAll(callable $callable)
+    {
+        foreach (get_object_vars($this) as $key => $value) {
+            $this->$key = $callable($value);
+        }
+    }
 }

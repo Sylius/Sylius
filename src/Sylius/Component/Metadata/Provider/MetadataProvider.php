@@ -20,22 +20,22 @@ use Sylius\Component\Metadata\Model\RootMetadataInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataProvider implements MetadataProviderInterface
+final class MetadataProvider implements MetadataProviderInterface
 {
     /**
      * @var ObjectRepository
      */
-    protected $rootMetadataRepository;
+    private $rootMetadataRepository;
 
     /**
      * @var MetadataCompilerInterface
      */
-    protected $metadataCompiler;
+    private $metadataCompiler;
 
     /**
      * @var MetadataHierarchyProviderInterface
      */
-    protected $metadataHierarchyProvider;
+    private $metadataHierarchyProvider;
 
     /**
      * @param ObjectRepository $rootMetadataRepository

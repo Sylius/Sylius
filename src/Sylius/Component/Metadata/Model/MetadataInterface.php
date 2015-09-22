@@ -25,4 +25,9 @@ interface MetadataInterface
      * @return array
      */
     public function toArray();
+
+    /**
+     * @param callable $callable
+     */
+    public function forAll(callable $callable);
 }
