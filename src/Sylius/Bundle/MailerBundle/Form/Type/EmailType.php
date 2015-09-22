@@ -40,12 +40,6 @@ class EmailType extends AbstractResourceType
             ->add('senderAddress', 'email', array(
                 'label' => 'sylius.form.email.sender_address',
             ))
-            ->add('subject', 'text', array(
-                'label' => 'sylius.form.email.subject',
-            ))
-            ->add('content', 'textarea', array(
-                'label' => 'sylius.form.email.content',
-            ))
             ->add('template', 'sylius_email_template_choice', array(
                 'label'       => 'sylius.form.email.template',
                 'required'    => false,

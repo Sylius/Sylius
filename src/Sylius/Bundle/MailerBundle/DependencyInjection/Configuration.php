@@ -24,6 +24,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
+ * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -95,6 +96,28 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\MailerBundle\Form\Type\EmailType')->end()
                                         ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('translation')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Mailer\Model\EmailTranslation')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                        ->scalarNode('repository')->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\MailerBundle\Form\Type\EmailTranslationType')->end()
+                                            ->end()
+                                        ->end()
+                                        ->arrayNode('mapping')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                            ->arrayNode('fields')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                            ->end()
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

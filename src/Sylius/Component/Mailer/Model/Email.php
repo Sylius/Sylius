@@ -11,23 +11,20 @@
 
 namespace Sylius\Component\Mailer\Model;
 
+use Sylius\Component\Translation\Model\AbstractTranslatable;
+
 /**
- * Mailer model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
-class Email implements EmailInterface
+class Email extends AbstractTranslatable implements EmailInterface
 {
     /**
-     * Id
-     *
      * @var integer
      */
     protected $id;
 
     /**
-     * Code.
-     *
      * @var string
      */
     protected $code;
@@ -38,16 +35,6 @@ class Email implements EmailInterface
      * @var Boolean
      */
     protected $enabled = true;
-
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $content;
 
     /**
      * @var string
@@ -80,13 +67,12 @@ class Email implements EmailInterface
 
     public function __construct()
     {
+        parent::__construct();
         $this->createdAt = new \DateTime();
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @inheritdoc
      */
     public function getId()
     {
@@ -107,8 +93,6 @@ class Email implements EmailInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -132,7 +116,7 @@ class Email implements EmailInterface
      */
     public function getSubject()
     {
-        return $this->subject;
+        return $this->translate()->getSubject();
     }
 
     /**
@@ -140,7 +124,7 @@ class Email implements EmailInterface
      */
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        $this->translate()->setSubject($subject);
     }
 
     /**
@@ -148,7 +132,7 @@ class Email implements EmailInterface
      */
     public function getContent()
     {
-        return $this->content;
+        return $this->translate()->getContent();
     }
 
     /**
@@ -156,7 +140,7 @@ class Email implements EmailInterface
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        $this->translate()->setContent($content);
     }
 
     /**
@@ -221,8 +205,6 @@ class Email implements EmailInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -239,7 +221,5 @@ class Email implements EmailInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
