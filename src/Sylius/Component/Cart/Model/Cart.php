@@ -23,15 +23,10 @@ use Sylius\Component\Order\Model\Order;
 class Cart extends Order implements CartInterface
 {
     /**
-     * Expiration time.
-     *
      * @var \DateTime
      */
     protected $expiresAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -69,8 +64,6 @@ class Cart extends Order implements CartInterface
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
-
-        return $this;
     }
 
     /**
@@ -82,7 +75,5 @@ class Cart extends Order implements CartInterface
         $expiresAt->add(new \DateInterval('PT3H'));
 
         $this->expiresAt = $expiresAt;
-
-        return $this;
     }
 }
