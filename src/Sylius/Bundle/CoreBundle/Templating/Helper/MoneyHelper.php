@@ -23,8 +23,8 @@ class MoneyHelper extends BaseMoneyHelper
     protected $localeContext;
 
     /**
-     * @param LocaleContextInterface   $localeContext   The locale context
-     * @param CurrencyContextInterface $currencyContext The currency context
+     * @param LocaleContextInterface   $localeContext
+     * @param CurrencyContextInterface $currencyContext
      */
     public function __construct(LocaleContextInterface $localeContext, CurrencyContextInterface $currencyContext)
     {
@@ -38,6 +38,6 @@ class MoneyHelper extends BaseMoneyHelper
      */
     protected function getDefaultLocale()
     {
-        return $this->localeContext->getCurrentLocale();
+        return $this->localeContext->getDefaultLocale();
     }
 }
