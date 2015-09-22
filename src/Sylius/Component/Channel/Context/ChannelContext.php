@@ -14,8 +14,6 @@ namespace Sylius\Component\Channel\Context;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * Default channel context implementation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ChannelContext implements ChannelContextInterface
@@ -39,7 +37,5 @@ class ChannelContext implements ChannelContextInterface
     public function setChannel(ChannelInterface $channel)
     {
         $this->channel = $channel;
-
-        return $this;
     }
 }

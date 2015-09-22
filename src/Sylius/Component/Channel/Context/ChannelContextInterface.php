@@ -21,15 +21,11 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 interface ChannelContextInterface
 {
     /**
-     * Get the currently active channel.
-     *
      * @return ChannelInterface
      */
     public function getChannel();
 
     /**
-     * Set the currently active channel.
-     *
      * @param ChannelInterface $channel
      */
     public function setChannel(ChannelInterface $channel);
