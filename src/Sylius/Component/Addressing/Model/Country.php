@@ -40,7 +40,7 @@ class Country implements CountryInterface
     protected $provinces;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled = true;
 
@@ -49,6 +49,9 @@ class Country implements CountryInterface
         $this->provinces = new ArrayCollection();
     }
 
+    /**
+     * @return null|string
+     */
     public function __toString()
     {
         return $this->getName();
@@ -153,7 +156,7 @@ class Country implements CountryInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (boolean) $enabled;
+        $this->enabled = (bool) $enabled;
     }
 
     /**
