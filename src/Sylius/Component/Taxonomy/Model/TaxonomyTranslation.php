@@ -14,22 +14,16 @@ namespace Sylius\Component\Taxonomy\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Model for taxonomy translations.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonomyTranslation extends AbstractTranslation implements TaxonomyTranslationInterface
 {
     /**
-     * Taxonomy id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Taxonomy name.
-     *
      * @var string
      */
     protected $name;
@@ -64,7 +58,5 @@ class TaxonomyTranslation extends AbstractTranslation implements TaxonomyTransla
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }

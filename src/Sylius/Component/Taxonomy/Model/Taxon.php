@@ -16,72 +16,51 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
- * Model for taxons.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Taxon extends AbstractTranslatable implements TaxonInterface
 {
     /**
-     * Taxon id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * The taxonomy of this taxon.
-     *
      * @var TaxonomyInterface
      */
     protected $taxonomy;
 
     /**
-     * Parent taxon.
-     *
      * @var TaxonInterface
      */
     protected $parent;
 
     /**
-     * Child taxons.
-     *
-     * @var Collection
+     * @var Collection|TaxonInterface[]
      */
     protected $children;
 
     /**
-     * Required by DoctrineExtensions.
-     *
-     * @var mixed
+     * @var int
      */
     protected $left;
 
     /**
-     * Required by DoctrineExtensions.
-     *
-     * @var mixed
+     * @var int
      */
     protected $right;
 
     /**
-     * Required by DoctrineExtensions.
-     *
-     * @var mixed
+     * @var int
      */
     protected $level;
 
     /**
-     * Deletion time.
-     *
      * @var \DateTime
      */
     protected $deletedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -118,8 +97,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setTaxonomy(TaxonomyInterface $taxonomy = null)
     {
         $this->taxonomy = $taxonomy;
-
-        return $this;
     }
 
     /**
@@ -144,8 +121,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setParent(TaxonInterface $parent = null)
     {
         $this->parent = $parent;
-
-        return $this;
     }
 
     /**
@@ -175,8 +150,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
 
             $this->children->add($taxon);
         }
-
-        return $this;
     }
 
     /**
@@ -190,8 +163,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
 
             $this->children->removeElement($taxon);
         }
-
-        return $this;
     }
 
     /**
@@ -208,8 +179,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setName($name)
     {
         $this->translate()->setName($name);
-
-        return $this;
     }
 
     /**
@@ -226,8 +195,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setSlug($slug = null)
     {
         $this->translate()->setSlug($slug);
-
-        return $this;
     }
 
     /**
@@ -257,8 +224,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setPermalink($permalink)
     {
         $this->translate()->setPermalink($permalink);
-
-        return $this;
     }
 
     /**
@@ -275,8 +240,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setDescription($description)
     {
         $this->translate()->setDescription($description);
-
-        return $this;
     }
 
     /**
@@ -293,8 +256,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setLeft($left)
     {
         $this->left = $left;
-
-        return $this;
     }
 
     /**
@@ -311,8 +272,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setRight($right)
     {
         $this->right = $right;
-
-        return $this;
     }
 
     /**
@@ -329,8 +288,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
-
-        return $this;
     }
 
     /**
@@ -355,7 +312,5 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 }
