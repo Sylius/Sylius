@@ -12,22 +12,16 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 /**
- * Settings container.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Settings implements \ArrayAccess
 {
     /**
-     * Parameters.
-     *
      * @var array
      */
     protected $parameters;
 
     /**
-     * Constructor.
-     *
      * @param array $parameters
      */
     public function __construct(array $parameters)

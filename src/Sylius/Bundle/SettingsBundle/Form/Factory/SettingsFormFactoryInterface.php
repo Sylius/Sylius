@@ -14,18 +14,14 @@ namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * Settings form factory interface
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SettingsFormFactoryInterface
 {
     /**
-     * Create the form for given schema.
-     *
-     * @param string $namespace
+     * @param string     $namespace
      * @param null|mixed $data
-     * @param array $options
+     * @param array      $options
      *
      * @return FormInterface
      */

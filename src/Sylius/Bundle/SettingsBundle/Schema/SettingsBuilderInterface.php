@@ -15,22 +15,16 @@ use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Settings builder interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SettingsBuilderInterface extends OptionsResolverInterface
 {
     /**
-     * Return all transformers.
-     *
      * @return ParameterTransformerInterface[]
      */
     public function getTransformers();
 
     /**
-     * Set transformer for given parameter.
-     *
      * @param string                        $parameterName
      * @param ParameterTransformerInterface $transformer
      */

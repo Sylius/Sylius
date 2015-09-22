@@ -15,8 +15,6 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Settings event.
- *
  * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
 class SettingsEvent extends GenericEvent
@@ -40,11 +38,9 @@ class SettingsEvent extends GenericEvent
     private $parameters;
 
     /**
-     * Constructor.
-     *
-     * @param string $namespace
+     * @param string   $namespace
      * @param Settings $settings
-     * @param array $parameters
+     * @param array    $parameters
      */
     public function __construct($namespace, Settings $settings, array $parameters)
     {

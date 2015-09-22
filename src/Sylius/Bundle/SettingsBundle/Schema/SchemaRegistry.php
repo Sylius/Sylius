@@ -12,22 +12,15 @@
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
 /**
- * Default schema registry.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SchemaRegistry implements SchemaRegistryInterface
 {
     /**
-     * Schemas.
-     *
      * @var array
      */
     protected $schemas;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->schemas = array();
