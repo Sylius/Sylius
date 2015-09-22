@@ -96,10 +96,8 @@ class AttributeSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    function its_creation_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -109,23 +107,9 @@ class AttributeSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    function its_last_update_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
-    }
-
-    function it_has_fluent_interface()
-    {
-        $date = new \DateTime();
-
-        $this->setName('T-Shirt brand')->shouldReturn($this);
-        $this->setPresentation('Brand')->shouldReturn($this);
-        $this->setType(AttributeTypes::CHOICE)->shouldReturn($this);
-        $this->setConfiguration(array())->shouldReturn($this);
-        $this->setCreatedAt($date)->shouldReturn($this);
-        $this->setUpdatedAt($date)->shouldReturn($this);
     }
 }
