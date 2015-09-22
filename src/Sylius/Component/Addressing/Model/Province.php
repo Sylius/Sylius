@@ -36,6 +36,9 @@ class Province implements ProvinceInterface
      */
     protected $country;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;

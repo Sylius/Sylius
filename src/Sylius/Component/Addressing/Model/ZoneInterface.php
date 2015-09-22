@@ -64,12 +64,12 @@ interface ZoneInterface
     public function getMembers();
 
     /**
-     * @param Collection $members
+     * @param Collection|ZoneMemberInterface[] $members
      */
     public function setMembers(Collection $members);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function hasMembers();
 
@@ -86,7 +86,7 @@ interface ZoneInterface
     /**
      * @param ZoneMemberInterface $member
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasMember(ZoneMemberInterface $member);
 }
