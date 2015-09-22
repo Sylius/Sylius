@@ -12,8 +12,6 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Zone member interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ZoneMemberInterface
@@ -30,14 +28,10 @@ interface ZoneMemberInterface
 
     /**
      * @param ZoneInterface $belongsTo
-     *
-     * @return ZoneMemberInterface
      */
     public function setBelongsTo(ZoneInterface $belongsTo = null);
 
     /**
-     * Gets zone member name.
-     *
      * @return string
      */
     public function getName();

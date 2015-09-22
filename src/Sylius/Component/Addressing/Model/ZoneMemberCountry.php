@@ -12,8 +12,6 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default country zone member model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberCountry extends ZoneMember
@@ -33,14 +31,10 @@ class ZoneMemberCountry extends ZoneMember
 
     /**
      * @param CountryInterface $country
-     *
-     * @return ZoneMemberCountry
      */
     public function setCountry(CountryInterface $country = null)
     {
         $this->country = $country;
-
-        return $this;
     }
 
     /**

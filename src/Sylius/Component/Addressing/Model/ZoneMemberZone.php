@@ -12,10 +12,6 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default zone member zone model.
- *
- * A zone can also consist of other zones.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberZone extends ZoneMember
@@ -35,14 +31,10 @@ class ZoneMemberZone extends ZoneMember
 
     /**
      * @param ZoneInterface $zone
-     *
-     * @return ZoneMemberZone
      */
     public function setZone(ZoneInterface $zone = null)
     {
         $this->zone = $zone;
-
-        return $this;
     }
 
     /**

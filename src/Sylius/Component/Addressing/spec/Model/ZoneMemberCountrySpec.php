@@ -59,10 +59,4 @@ class ZoneMemberCountrySpec extends ObjectBehavior
 
         $this->getName()->shouldReturn('Serbia');
     }
-
-    function it_has_fluent_interface(CountryInterface $country, ZoneInterface $zone)
-    {
-        $this->setCountry($country)->shouldReturn($this);
-        $this->setBelongsTo($zone)->shouldReturn($this);
-    }
 }

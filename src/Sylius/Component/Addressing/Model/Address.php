@@ -12,92 +12,66 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default address model.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class Address implements AddressInterface
 {
     /**
-     * Address id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * First name.
-     *
      * @var string
      */
     protected $firstName;
 
     /**
-     * Last name.
-     *
      * @var string
      */
     protected $lastName;
 
     /**
-     * Phone number.
-     *
      * @var string
      */
     protected $phoneNumber;
 
     /**
-     * Company.
-     *
      * @var string
      */
     protected $company;
 
     /**
-     * Country.
-     *
      * @var CountryInterface
      */
     protected $country;
 
     /**
-     * Province.
-     *
      * @var ProvinceInterface
      */
     protected $province;
 
     /**
-     * Street.
-     *
      * @var string
      */
     protected $street;
 
     /**
-     * City.
-     *
      * @var string
      */
     protected $city;
 
     /**
-     * Postcode.
-     *
      * @var string
      */
     protected $postcode;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -129,8 +103,6 @@ class Address implements AddressInterface
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
 
     /**
@@ -147,8 +119,6 @@ class Address implements AddressInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
-        return $this;
     }
 
     /**
@@ -173,8 +143,6 @@ class Address implements AddressInterface
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
     }
 
     /**
@@ -191,8 +159,6 @@ class Address implements AddressInterface
     public function setCompany($company)
     {
         $this->company = $company;
-
-        return $this;
     }
 
     /**
@@ -213,8 +179,6 @@ class Address implements AddressInterface
         }
 
         $this->country = $country;
-
-        return $this;
     }
 
     /**
@@ -243,8 +207,6 @@ class Address implements AddressInterface
         }
 
         $this->province = $province;
-
-        return $this;
     }
 
     /**
@@ -261,8 +223,6 @@ class Address implements AddressInterface
     public function setStreet($street)
     {
         $this->street = $street;
-
-        return $this;
     }
 
     /**
@@ -279,8 +239,6 @@ class Address implements AddressInterface
     public function setCity($city)
     {
         $this->city = $city;
-
-        return $this;
     }
 
     /**
@@ -297,8 +255,6 @@ class Address implements AddressInterface
     public function setPostcode($postcode)
     {
         $this->postcode = $postcode;
-
-        return $this;
     }
 
     /**
@@ -315,8 +271,6 @@ class Address implements AddressInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -333,7 +287,5 @@ class Address implements AddressInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

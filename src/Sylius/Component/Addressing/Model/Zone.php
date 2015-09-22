@@ -15,44 +15,32 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Default zone model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Zone implements ZoneInterface
 {
     /**
-     * Zone id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Zone name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Zone type.
-     *
      * @var string
      */
     protected $type;
 
     /**
-     * Zone scope.
-     *
      * @var string
      */
     protected $scope;
 
     /**
-     * Zone members.
-     *
      * @var Collection
      */
     protected $members;
@@ -89,8 +77,6 @@ class Zone implements ZoneInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -111,8 +97,6 @@ class Zone implements ZoneInterface
         }
 
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -139,8 +123,6 @@ class Zone implements ZoneInterface
     public function setScope($scope)
     {
         $this->scope = $scope;
-
-        return $this;
     }
 
     /**
@@ -157,8 +139,6 @@ class Zone implements ZoneInterface
     public function setMembers(Collection $members)
     {
         $this->members = $members;
-
-        return $this;
     }
 
     /**
@@ -178,8 +158,6 @@ class Zone implements ZoneInterface
             $this->members->add($member);
             $member->setBelongsTo($this);
         }
-
-        return $this;
     }
 
     /**
@@ -191,8 +169,6 @@ class Zone implements ZoneInterface
             $this->members->removeElement($member);
             $member->setBelongsTo(null);
         }
-
-        return $this;
     }
 
     /**

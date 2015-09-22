@@ -12,22 +12,16 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default zone member model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 abstract class ZoneMember implements ZoneMemberInterface
 {
     /**
-     * Zone member id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Zone member belongs to.
-     *
      * @var ZoneInterface
      */
     protected $belongsTo;
@@ -54,7 +48,5 @@ abstract class ZoneMember implements ZoneMemberInterface
     public function setBelongsTo(ZoneInterface $belongsTo = null)
     {
         $this->belongsTo = $belongsTo;
-
-        return $this;
     }
 }

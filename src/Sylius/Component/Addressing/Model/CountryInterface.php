@@ -21,6 +21,9 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  */
 interface CountryInterface extends ToggleableInterface
 {
+    /**
+     * @return mixed
+     */
     public function getId();
 
     /**
