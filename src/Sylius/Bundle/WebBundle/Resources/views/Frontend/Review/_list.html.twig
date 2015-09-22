@@ -1,15 +1,23 @@
 {% for review in product_reviews %}
-    <div class="review">
-        <span class="pull-right">{{ review.createdAt|date }}</span>
-            <h4 class="title">
-                Title: {{ review.title }}
-            </h4>
-            Rating: {{ review.rating }}
-            <br>
-            Author: {{ review.author.email }}
-            <p class="comment">
-                {{ review.comment }}
-            </p>
+    <div class="review panel panel-default">
+        <div class="panel-heading">
+            <b>{{ review.title }}</b>
+            <div class="pull-right">
+                {{ review.createdAt|date('Y-m-d H:i') }}
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4>Rating: {{ review.rating }}</h4>
+            {{ review.comment }}
+        </div>
+        <div class="panel-footer">
+            {% set author = review.author %}
+            {% if author.firstName is not null and author.lastName is not null %}
+                - Author: {{ author.firstName }} {{ author.lastName|first }}.
+            {% else %}
+                - Author: Guest
+            {% endif %}
+        </div>
     </div>
 {% else %}
     <p>{{ 'sylius.review.no_results'|trans }}</p>

@@ -29,7 +29,7 @@
         {% for review in reviews %}
             <tr>
                 <td>{{ review.id }}</td>
-                <td>{{ review.reviewSubject.name }}</td>
+                <td><a href="{{ path('sylius_backend_product_show', { 'id': review.reviewSubject.id }) }}">{{ review.reviewSubject.name }}</a></td>
                 <td>{{ review.title }}</td>
                 <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.status }}</label></td>
                 <td><label class="label label-default">{{ review.rating }}</label></td>
@@ -51,7 +51,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.review.no_reviews') }}
+{{ alerts.info('sylius.review.no_reviews'|trans) }}
 {% endif %}
 
 {% endmacro %}

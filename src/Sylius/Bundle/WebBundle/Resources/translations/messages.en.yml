@@ -620,7 +620,7 @@ sylius:
         update_header: Editing redirect route
     review:
         create: New review
-        index: reviews
+        index: Product reviews
         manage: Manage reviews
         no_reviews: There are no reviews.
         id: ID
@@ -629,6 +629,7 @@ sylius:
         status: Status
         rating: Rating
         author: Author
+        guest: Guest
         created_at: Created at
         details: Review details
         editing: Editing review

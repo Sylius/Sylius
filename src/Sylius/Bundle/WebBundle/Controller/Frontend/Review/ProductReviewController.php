@@ -77,10 +77,10 @@ class ProductReviewController extends ResourceController
         if ($form->submit($request)->isValid()) {
             $this->domainManager->create($form->getData());
 
-            return new JsonResponse($this->getFormErrorsAsArray($form));
+            return new JsonResponse('success');
         }
 
-        return new JsonResponse('success');
+        return new JsonResponse($this->getFormErrorsAsArray($form));
     }
 
     /**

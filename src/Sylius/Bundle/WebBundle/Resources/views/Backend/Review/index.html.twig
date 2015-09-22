@@ -14,8 +14,8 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.review.create') }}
-        {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.review.manage') }}
+        {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.review.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.review.manage'|trans) }}
     </div>
     <h1><i class="icon-th"></i> {{ 'sylius.review.index'|trans }}</h1>
 </div>
