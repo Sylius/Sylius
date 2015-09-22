@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Sylius package.
  *
@@ -16,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractTranslatable implements TranslatableInterface
+trait TranslatableTrait
 {
     /**
      * @var TranslationInterface[]

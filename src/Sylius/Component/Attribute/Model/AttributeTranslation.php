@@ -11,13 +11,16 @@
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class AttributeTranslation extends AbstractTranslation implements AttributeTranslationInterface
+class AttributeTranslation implements AttributeTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * @var mixed
      */

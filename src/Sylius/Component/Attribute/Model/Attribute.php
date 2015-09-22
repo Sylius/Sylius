@@ -12,15 +12,19 @@
 namespace Sylius\Component\Attribute\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Attribute extends AbstractTranslatable implements AttributeInterface
+class Attribute implements AttributeInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -58,7 +62,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->__ttConstruct();
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

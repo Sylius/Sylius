@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Contact\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * Default contact topic representation.
@@ -19,8 +19,10 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class Topic extends AbstractTranslatable implements TopicInterface
+class Topic implements TopicInterface
 {
+    use TranslatableTrait;
+
     /**
      * @var int
      */

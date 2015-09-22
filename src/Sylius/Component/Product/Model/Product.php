@@ -15,16 +15,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Product extends AbstractTranslatable implements ProductInterface
+class Product implements ProductInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -72,7 +76,7 @@ class Product extends AbstractTranslatable implements ProductInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->__ttConstruct();
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
         $this->variants = new ArrayCollection();

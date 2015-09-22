@@ -12,15 +12,21 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 use Sylius\Component\Translation\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
+class Taxonomy implements TaxonomyInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::setCurrentLocale as private ttSetCurrentLocale;
+        TranslatableTrait::setFallbackLocale as private ttSetFallbackLocale;
+        TranslatableTrait::addTranslation as private ttAddTranslation;
+    }
+
     /**
      * @var mixed
      */
@@ -69,7 +75,7 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
      */
     public function setCurrentLocale($currentLocale)
     {
-        parent::setCurrentLocale($currentLocale);
+        $this->ttSetCurrentLocale($currentLocale);
 
         if (null !== $this->root) {
             $this->root->setCurrentLocale($currentLocale);
@@ -81,7 +87,7 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
      */
     public function setFallbackLocale($fallbackLocale)
     {
-        parent::setFallbackLocale($fallbackLocale);
+        $this->ttSetFallbackLocale($fallbackLocale);
 
         if (null !== $this->root) {
             $this->root->setFallbackLocale($fallbackLocale);
@@ -163,7 +169,7 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
      */
     public function addTranslation(TranslationInterface $translation)
     {
-        parent::addTranslation($translation);
+        $this->ttAddTranslation($translation);
 
         if ($translation instanceof TaxonomyTranslation) {
             $this->root->setName($translation->getName());

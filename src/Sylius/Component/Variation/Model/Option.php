@@ -13,14 +13,18 @@ namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Option extends AbstractTranslatable implements OptionInterface
+class Option implements OptionInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -57,7 +61,7 @@ class Option extends AbstractTranslatable implements OptionInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->__ttConstruct();
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

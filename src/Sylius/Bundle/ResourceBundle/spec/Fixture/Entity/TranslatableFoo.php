@@ -11,15 +11,18 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Entity;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * Foo translatable entity.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableFoo extends AbstractTranslatable
+class TranslatableFoo implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     public static function getTranslationClass()
     {
         return  'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';

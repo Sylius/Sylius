@@ -3,11 +3,12 @@
 namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Model\TranslationInterface;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
-class AbstractTranslatableSpec extends ObjectBehavior
+class TranslatableTraitSpec extends ObjectBehavior
 {
     function let()
     {
@@ -92,14 +93,17 @@ class AbstractTranslatableSpec extends ObjectBehavior
     }
 }
 
-class ConcreteTranslatable extends AbstractTranslatable
+class ConcreteTranslatable implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     public static function getTranslationClass()
     {
-        return  'spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation';
+        return 'spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation';
     }
 }
 
-class ConcreteTranslatableTranslation extends AbstractTranslation
+class ConcreteTranslatableTranslation implements TranslationInterface
 {
+    use TranslationTrait;
 }
