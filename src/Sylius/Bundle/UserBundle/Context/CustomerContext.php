@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Context;
 
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -41,7 +42,7 @@ class CustomerContext implements CustomerContextInterface
     public function getCustomer()
     {
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')
-            && $this->securityContext->getToken()->getUser()
+            && $this->securityContext->getToken()->getUser() instanceof UserInterface
         ) {
             return $this->securityContext->getToken()->getUser()->getCustomer();
         }
