@@ -12,7 +12,7 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 
 /**
  * Stock operator interface.
@@ -24,33 +24,34 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 interface InventoryOperatorInterface
 {
     /**
-     * Increase stock on hand for given stockable by quantity.
+     * Increase stock on hand for given stock item by quantity.
      *
-     * @param StockableInterface $stockable
+     * @param StockItemInterface $stockItem
      * @param integer            $quantity
      */
-    public function increase(StockableInterface $stockable, $quantity);
-
-    /**
-     * Hold stock for given stockable by quantity.
-     *
-     * @param StockableInterface $stockable
-     * @param integer            $quantity
-     */
-    public function hold(StockableInterface $stockable, $quantity);
-
-    /**
-     * Release stock for given stockable by quantity.
-     *
-     * @param StockableInterface $stockable
-     * @param integer            $quantity
-     */
-    public function release(StockableInterface $stockable, $quantity);
+    public function increase(StockItemInterface $stockItem, $quantity);
 
     /**
      * Decrease stock by count of given inventory units.
      *
-     * @param StockableInterface[]|Collection $inventoryUnits
+     * @param StockItemInterface $stockItem
+     * @param integer            $quantity
      */
-    public function decrease($inventoryUnits);
+    public function decrease(StockItemInterface $stockItem, $quantity);
+
+    /**
+     * Hold stock for given stock item by quantity.
+     *
+     * @param StockItemInterface $stockItem
+     * @param integer            $quantity
+     */
+    public function hold(StockItemInterface $stockItem, $quantity);
+
+    /**
+     * Release stock for given stock item by quantity.
+     *
+     * @param StockItemInterface $stockItem
+     * @param integer            $quantity
+     */
+    public function release(StockItemInterface $stockItem, $quantity);
 }

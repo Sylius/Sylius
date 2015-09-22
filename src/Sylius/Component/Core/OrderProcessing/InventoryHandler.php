@@ -91,6 +91,7 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function holdInventory(OrderInterface $order)
     {
+        return;
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
@@ -103,6 +104,7 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function releaseInventory(OrderInterface $order)
     {
+        return;
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 
@@ -129,8 +131,8 @@ class InventoryHandler implements InventoryHandlerInterface
                 }
             }
 
-            $this->inventoryOperator->release($item->getVariant(), $quantity);
-            $this->inventoryOperator->decrease($units);
+            //$this->inventoryOperator->release($item->getVariant(), $quantity);
+            //$this->inventoryOperator->decrease($units);
         }
     }
 

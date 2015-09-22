@@ -24,7 +24,7 @@ interface ChannelRepositoryInterface
 {
     /**
      * @param string $hostname
-     * @return mixed
+     * @return null|ChannelInterface
      * @throws NonUniqueResultException
      */
     public function findMatchingHostname($hostname);

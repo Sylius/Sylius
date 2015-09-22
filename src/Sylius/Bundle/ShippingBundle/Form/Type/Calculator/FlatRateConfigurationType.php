@@ -52,7 +52,7 @@ class FlatRateConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
-                ),
+                )
             ))
         ;
     }

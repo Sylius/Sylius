@@ -12,10 +12,9 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Inventory\SyliusStockableEvents;
+use Sylius\Component\Inventory\Factory\StockMovementFactoryInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Inventory\SyliusStockItemEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -28,22 +27,11 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class InventoryOperator implements InventoryOperatorInterface
 {
     /**
-     * Backorders handler.
-     *
-     * @var BackordersHandlerInterface
+     * @var StockMovementFactoryInterface
      */
-    protected $backordersHandler;
+    protected $stockMovementFactory;
 
     /**
-     * Availability checker.
-     *
-     * @var AvailabilityCheckerInterface
-     */
-    protected $availabilityChecker;
-
-    /**
-     * Event dispatcher.
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
@@ -51,104 +39,77 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Constructor.
      *
-     * @param BackordersHandlerInterface   $backordersHandler
-     * @param AvailabilityCheckerInterface $availabilityChecker
-     * @param EventDispatcherInterface     $eventDispatcher
+     * @param StockMovementFactoryInterface $stockMovementFactory
+     * @param EventDispatcherInterface      $eventDispatcher
      */
-    public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
+    public function __construct(StockMovementFactoryInterface $stockMovementFactory, EventDispatcherInterface $eventDispatcher)
     {
-        $this->backordersHandler = $backordersHandler;
-        $this->availabilityChecker = $availabilityChecker;
+        $this->stockMovementFactory = $stockMovementFactory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function increase(StockableInterface $stockable, $quantity)
+    public function increase(StockItemInterface $stockItem, $quantity)
     {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
+        $this->assertQuantityGreaterThanZero($quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_INCREASE, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::PRE_INCREASE, new GenericEvent($stockItem));
 
-        $stockable->setOnHand($stockable->getOnHand() + $quantity);
+        $stockMovement = $this->stockMovementFactory->create($stockItem, $quantity);
+        $stockItem->setOnHand($stockItem->getOnHand() + $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_INCREASE, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::POST_INCREASE, new GenericEvent($stockItem));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hold(StockableInterface $stockable, $quantity)
+    public function hold(StockItemInterface $stockItem, $quantity)
     {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
+        $this->assertQuantityGreaterThanZero($quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::PRE_HOLD, new GenericEvent($stockItem));
 
-        $stockable->setOnHold($stockable->getOnHold() + $quantity);
+        $stockItem->setOnHold($stockItem->getOnHold() + $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::POST_HOLD, new GenericEvent($stockItem));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function release(StockableInterface $stockable, $quantity)
+    public function release(StockItemInterface $stockItem, $quantity)
     {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
+        $this->assertQuantityGreaterThanZero($quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::PRE_RELEASE, new GenericEvent($stockItem));
 
-        $stockable->setOnHold($stockable->getOnHold() - $quantity);
+        $stockItem->setOnHold($stockItem->getOnHold() - $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($stockable));
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::POST_RELEASE, new GenericEvent($stockItem));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function decrease($inventoryUnits)
+    public function decrease(StockItemInterface $stockItem, $quantity)
     {
-        if (!is_array($inventoryUnits) && !$inventoryUnits instanceof Collection) {
-            throw new \InvalidArgumentException('Inventory units value must be array or instance of "Doctrine\Common\Collections\Collection".');
-        }
+        $this->assertQuantityGreaterThanZero($quantity);
 
-        $quantity = count($inventoryUnits);
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::PRE_DECREASE, new GenericEvent($stockItem));
 
+        $stockMovement = $this->stockMovementFactory->create($stockItem, -1 * $quantity);
+        $stockItem->setOnHand($stockItem->getOnHand() - $quantity);
+
+        $this->eventDispatcher->dispatch(SyliusStockItemEvents::POST_DECREASE, new GenericEvent($stockItem));
+    }
+
+    private function assertQuantityGreaterThanZero($quantity)
+    {
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
-
-        if ($inventoryUnits instanceof Collection) {
-            $stockable = $inventoryUnits->first()->getStockable();
-        } else {
-            $stockable = $inventoryUnits[0]->getStockable();
-        }
-
-        if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
-            throw new InsufficientStockException($stockable, $quantity);
-        }
-
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_DECREASE, new GenericEvent($stockable));
-
-        $this->backordersHandler->processBackorders($inventoryUnits);
-
-        $onHand = $stockable->getOnHand();
-
-        foreach ($inventoryUnits as $inventoryUnit) {
-            if (InventoryUnitInterface::STATE_SOLD === $inventoryUnit->getInventoryState()) {
-                --$onHand;
-            }
-        }
-
-        $stockable->setOnHand($onHand);
-
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_DECREASE, new GenericEvent($stockable));
     }
 }

@@ -44,6 +44,7 @@ sylius:
                 roles: Roles
                 permissions: Permissions
                 report: Reports
+                stock_locations: Stock locations
             sidebar:
                 api_clients: API clients
                 assortment: Assortment
@@ -53,6 +54,8 @@ sylius:
                 countries: Countries
                 channels: Channels
                 customer: Customer
+                stock_locations: Stock locations
+                customer: Customers
                 dashboard: Dashboard
                 currencies: Currencies
                 general_settings: General settings

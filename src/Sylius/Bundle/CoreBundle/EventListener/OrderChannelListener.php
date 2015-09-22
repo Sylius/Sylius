@@ -28,9 +28,6 @@ class OrderChannelListener
      */
     protected $channelContext;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(ChannelContextInterface $channelContext)
     {
         $this->channelContext = $channelContext;

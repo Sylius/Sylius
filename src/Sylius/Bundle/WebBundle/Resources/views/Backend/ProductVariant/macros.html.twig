@@ -13,8 +13,6 @@
             <th>{{ 'sylius.variant.availability'|trans }}</th>
             <th>{{ 'sylius.variant.last_update'|trans }}</th>
             <th>{{ 'sylius.variant.options'|trans }}</th>
-            <th>{{ 'sylius.variant.available_on_demand'|trans }}</th>
-            <th>{{ 'sylius.variant.stock'|trans }}</th>
             <th>{{ 'sylius.variant.price'|trans }}</th>
             <th></th>
         </tr>
@@ -38,12 +36,6 @@
                 {% endfor %}
                 </ul>
             </td>
-            <td>
-                <span class="label label-{{ variant.availableOnDemand ? 'success' : 'warning'}}">
-                    {{ variant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
-            </td>
-            <td><span class="label label-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
             <td>{{ variant.price|sylius_price }}</td>
             <td>
                 <div class="pull-right">

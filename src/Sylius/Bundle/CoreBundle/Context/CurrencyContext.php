@@ -17,7 +17,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Core currency context, which is aware of multiple channels.
@@ -28,17 +27,11 @@ class CurrencyContext extends BaseCurrencyContext
 {
     const STORAGE_KEY = '_sylius_currency_%s';
 
-    protected $securityContext;
+    protected $customerContext;
     protected $settingsManager;
     protected $customerManager;
     protected $channelContext;
 
-    /**
-     * @param StorageInterface         $storage
-     * @param SettingsManagerInterface $settingsManager
-     * @param ObjectManager            $customerManager
-     * @param ChannelContextInterface  $channelContext
-     */
     public function __construct(
         StorageInterface $storage,
         CustomerContextInterface $customerContext,

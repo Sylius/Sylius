@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Inventory\Operator;
 
-use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 
 /**
  * Inventory operator which does not adjust inventory
@@ -23,32 +23,32 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function increase(StockableInterface $stockable, $quantity)
+    public function increase(StockItemInterface $stockItem, $quantity)
     {
-        // nothing happens.
+        // Nothing happens.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function decrease($inventoryUnits)
+    public function decrease(StockItemInterface $stockItem, $quantity)
     {
-        // nothing happens.
+        // Nothing happens.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hold(StockableInterface $stockable, $quantity)
+    public function hold(StockItemInterface $stockItem, $quantity)
     {
-        // nothing happens
+        // Nothing happens.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function release(StockableInterface $stockable, $quantity)
+    public function release(StockItemInterface $stockItem, $quantity)
     {
-        // nothing happens
+        // Nothing happens.
     }
 }

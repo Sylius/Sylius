@@ -24,9 +24,9 @@ interface InventoryUnitFactoryInterface
     /**
      * Create given amount of inventory units.
      *
-     * @param StockableInterface $stockable
-     * @param integer            $quantity
-     * @param string             $state
+     * @param StockableInterface     $stockable
+     * @param integer                $quantity
+     * @param string                 $state
      */
     public function create(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD);
 }

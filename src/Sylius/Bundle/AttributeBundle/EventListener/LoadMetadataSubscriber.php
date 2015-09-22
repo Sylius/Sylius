@@ -57,40 +57,51 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['attribute_value']['model'] !== $metadata->getName()) {
-                continue;
-            }
+            if ($class['attribute_value']['model'] === $metadata->getName()) {
+                $subjectMapping = array(
+                    'fieldName'     => 'subject',
+                    'targetEntity'  => $class['subject'],
+                    'inversedBy'    => 'attributes',
+                    'joinColumns'   => array(array(
+                        'name'                 => $subject.'_id',
+                        'referencedColumnName' => 'id',
+                        'nullable'             => false,
+                        'onDelete'             => 'CASCADE'
+                    ))
+                );
 
-            $targetEntity = $class['subject'];
-            $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-            $subjectMapping = array(
-                'fieldName'     => 'subject',
-                'targetEntity'  => $targetEntity,
-                'inversedBy'    => 'attributes',
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
-                    'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
+                $metadata->mapManyToOne($subjectMapping);
 
-            $this->mapManyToOne($metadata, $subjectMapping);
+                $targetEntity = $class['subject'];
+                $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
+                $subjectMapping = array(
+                    'fieldName'     => 'subject',
+                    'targetEntity'  => $targetEntity,
+                    'inversedBy'    => 'attributes',
+                    'joinColumns'   => array(array(
+                        'name'                 => $subject.'_id',
+                        'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
+                        'nullable'             => false,
+                        'onDelete'             => 'CASCADE',
+                    )),
+                );
 
-            $attributeModel = $class['attribute']['model'];
-            $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
-            $attributeMapping = array(
-                'fieldName'     => 'attribute',
-                'targetEntity'  => $attributeModel,
-                'joinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
-                    'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
+                $this->mapManyToOne($metadata, $subjectMapping);
 
-            $this->mapManyToOne($metadata, $attributeMapping);
+                $attributeModel = $class['attribute']['model'];
+                $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
+                $attributeMapping = array(
+                    'fieldName'     => 'attribute',
+                    'targetEntity'  => $attributeModel,
+                    'joinColumns'   => array(array(
+                        'name'                 => 'attribute_id',
+                        'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
+                        'nullable'             => false,
+                        'onDelete'             => 'CASCADE',
+                    )),
+                );
+
+                $this->mapManyToOne($metadata, $attributeMapping);
         }
     }
 

@@ -48,6 +48,12 @@ class ShipmentRepository extends EntityRepository
                 ->setParameter('channel', $criteria['channel'])
             ;
         }
+        if (!empty($criteria['stockLocation'])) {
+            $queryBuilder
+                ->andWhere($this->getalias().'.stockLocation = :location')
+                ->setParameter('location', $criteria['stockLocation'])
+            ;
+        }
         if (!empty($criteria['shippingAddress'])) {
             $queryBuilder
                 ->andWhere('address.lastName LIKE :shippingAddress')

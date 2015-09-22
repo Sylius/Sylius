@@ -88,8 +88,10 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
-            ->addSelect('variant')
+            ->select('product, variant, channels')
             ->leftJoin('product.variants', 'variant')
+            ->leftJoin('product.channels', 'channels')
+            ->leftJoin('product.taxons', 'categories')
         ;
 
         if (!empty($criteria['name'])) {
@@ -102,6 +104,18 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('variant.sku = :sku')
                 ->setParameter('sku', $criteria['sku'])
+            ;
+        }
+        if (!empty($criteria['channels'])) {
+            $queryBuilder
+                ->andWhere('product.channels = :channels')
+                ->setParameter('channels', $criteria['channels'])
+            ;
+        }
+        if (!empty($criteria['categories'])) {
+            $queryBuilder
+                ->andWhere('product.taxons = :categories')
+                ->setParameter('categories', $criteria['categories'])
             ;
         }
 
@@ -149,6 +163,33 @@ class ProductRepository extends BaseProductRepository
         $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
+    }
+
+    /**
+     * Get the product data for the stock page.
+     *
+     * @param integer $id
+     *
+     * @return null|ProductInterface
+     */
+    public function findForStockPage($id)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->leftJoin('variant.stockItems', 'stockItem')
+            ->addSelect('stockItem')
+            ->leftJoin('stockItem.location', 'stockLocation')
+            ->addSelect('stockLocation')
+            ->andWhere($queryBuilder->expr()->eq('product.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**

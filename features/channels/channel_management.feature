@@ -5,20 +5,22 @@ Feature: Channel management
     I want to configure channels
 
     Background:
-        Given store has default configuration
+        Given I am logged in as administrator
           And the following zones are defined:
-            | name | type    | members         |
-            | USA  | country | United States   |
-            | EU   | country | Germany, France |
+            | name | type    | members                         |
+            | USA  | country | USA                             |
+            | EU   | country | Germany, United Kingdom, France |
           And there are following currencies configured:
-            | code |
-            | USD  |
-            | EUR  |
+            | code | exchange rate | enabled |
+            | USD  | 0.76496       | yes     |
+            | GBP  | 1.16998       | yes     |
+            | EUR  | 1.00000       | yes     |
           And there are following locales configured:
-            | code  |
-            | en_US |
-            | fr_FR |
-            | de_DE |
+            | code  | activated |
+            | en_US | yes       |
+            | en_GB | yes       |
+            | fr_FR | yes       |
+            | de_DE | yes       |
           And the following payment methods exist:
             | name             | gateway |
             | Credit Card (US) | stripe  |
@@ -56,6 +58,16 @@ Feature: Channel management
         Given I am on the dashboard page
          When I follow "Channels"
           And I follow "Add channel"
+
+    Scenario: Seeing empty index of channels
+        Given there are no channels
+         When I am on the channel index page
+         Then I should see "There are no channels to display."
+
+    Scenario: Accessing the channel creation form
+        Given I am on the dashboard page
+         When I follow "Channels"
+          And I follow "Create channel"
          Then I should be on the channel creation page
 
     Scenario: Creating new channel
