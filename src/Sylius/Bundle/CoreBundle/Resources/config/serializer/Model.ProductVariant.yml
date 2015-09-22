@@ -5,3 +5,21 @@ Sylius\Component\Core\Model\ProductVariant:
         sku:
             expose: true
             type: string
+        price:
+            expose: true
+            type: integer
+        onHold:
+            expose: true
+            type: integer
+        availableOnDemand:
+            expose: true
+            type: boolean
+        width:
+            expose: true
+            type: float
+        height:
+            expose: true
+            type: float
+        depth:
+            expose: true
+            type: float
