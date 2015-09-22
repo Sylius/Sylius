@@ -20,6 +20,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
+     * @var array
+     */
+    private $reviewSubjects = array();
+
+    /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
@@ -34,6 +39,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
         foreach ($config['classes'] as $name => $parameters) {
             $this->addRequiredArgumentsToForms($name, $parameters, $container);
         }
+        foreach ($this->reviewSubjects as $subject) {
+            $this->addProperTagToReviewDeleteListener($subject, $container);
+        }
     }
 
     /**
@@ -45,6 +53,8 @@ class SyliusReviewExtension extends AbstractResourceExtension
         $convertedConfig = array();
 
         foreach ($config['classes'] as $subject => $parameters) {
+            $this->reviewSubjects[] = $subject;
+
             $subjects[$subject] = $parameters;
             unset($parameters['subject']);
 
@@ -80,6 +90,20 @@ class SyliusReviewExtension extends AbstractResourceExtension
 
             $container->getDefinition('sylius.form.type.'.$formKey)->addArgument($parameters['subject']);
         }
+    }
+
+    /**
+     * @param string           $resourceName
+     * @param ContainerBuilder $container
+     */
+    private function addProperTagToReviewDeleteListener($resourceName, ContainerBuilder $container)
+    {
+        if (!$container->hasDefinition('sylius.listener.review_delete')) {
+            return;
+        }
+
+        $listenerDefinition = $container->getDefinition('sylius.listener.review_delete');
+        $listenerDefinition->addTag('kernel.event_listener', array('event' => 'sylius.'.$resourceName.'_review.post_delete', 'method' => 'recalculateSubjectRating'));
     }
 
     /**

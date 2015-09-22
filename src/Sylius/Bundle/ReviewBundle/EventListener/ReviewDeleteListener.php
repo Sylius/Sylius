@@ -34,6 +34,9 @@ class ReviewDeleteListener
         $this->reviewableAverageRatingUpdater = $reviewableAverageRatingUpdater;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function recalculateSubjectRating(GenericEvent $event)
     {
         if (!(($subject = $event->getSubject()) instanceof ReviewInterface)) {

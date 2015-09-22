@@ -34,7 +34,6 @@
         </service>
         <service id="sylius.listener.review_delete" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewDeleteListener">
             <argument type="service" id="sylius.review.updater.reviewable_average_rating" />
-            <tag name="kernel.event_listener" event="sylius.product_review.pre_delete" method="recalculateSubjectRating" />
         </service>
 
         <service id="sylius.review.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
