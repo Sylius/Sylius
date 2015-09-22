@@ -23,8 +23,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
- * Settings controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsController extends FOSRestController
@@ -58,8 +56,6 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Edit configuration with given namespace.
-     *
      * @param Request $request
      * @param string  $namespace
      *
@@ -112,8 +108,6 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Get settings manager.
-     *
      * @return SettingsManagerInterface
      */
     protected function getSettingsManager()
@@ -122,8 +116,6 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Get settings form factory.
-     *
      * @return SettingsFormFactoryInterface
      */
     protected function getSettingsFormFactory()
@@ -132,8 +124,6 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Get translator.
-     *
      * @return TranslatorInterface
      */
     protected function getTranslator()

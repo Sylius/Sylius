@@ -45,8 +45,6 @@ class SettingsExtension extends \Twig_Extension
     }
 
     /**
-     * Load settings from given namespace.
-     *
      * @param string $namespace
      *
      * @return array
@@ -57,8 +55,6 @@ class SettingsExtension extends \Twig_Extension
     }
 
     /**
-     * Load settings parameter for given namespace and name.
-     *
      * @param string $name
      *
      * @return mixed

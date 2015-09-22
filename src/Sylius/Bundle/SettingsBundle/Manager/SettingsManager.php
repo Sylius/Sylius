@@ -24,36 +24,26 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**
- * Settings manager.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsManager implements SettingsManagerInterface
 {
     /**
-     * Schema registry.
-     *
      * @var SchemaRegistryInterface
      */
     protected $schemaRegistry;
 
     /**
-     * Object manager.
-     *
      * @var ObjectManager
      */
     protected $parameterManager;
 
     /**
-     * Parameter object repository.
-     *
      * @var RepositoryInterface
      */
     protected $parameterRepository;
 
     /**
-     * Cache.
-     *
      * @var Cache
      */
     protected $cache;
@@ -66,27 +56,21 @@ class SettingsManager implements SettingsManagerInterface
     protected $resolvedSettings = array();
 
     /**
-     * Validator instance
-     *
      * @var ValidatorInterface
      */
     protected $validator;
 
     /**
-     * Event dispatcher
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
-     * @param SchemaRegistryInterface $schemaRegistry
-     * @param ObjectManager $parameterManager
-     * @param RepositoryInterface $parameterRepository
-     * @param Cache $cache
-     * @param ValidatorInterface $validator
+     * @param SchemaRegistryInterface  $schemaRegistry
+     * @param ObjectManager            $parameterManager
+     * @param RepositoryInterface      $parameterRepository
+     * @param Cache                    $cache
+     * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
@@ -171,11 +155,9 @@ class SettingsManager implements SettingsManagerInterface
             } else {
                 $parameter = $this->parameterRepository->createNew();
 
-                $parameter
-                    ->setNamespace($namespace)
-                    ->setName($name)
-                    ->setValue($value)
-                ;
+                $parameter->setNamespace($namespace);
+                $parameter->setName($name);
+                $parameter->setValue($value);
 
                 /* @var $errors ConstraintViolationListInterface */
                 $errors = $this->validator->validate($parameter);
@@ -195,8 +177,6 @@ class SettingsManager implements SettingsManagerInterface
     }
 
     /**
-     * Load parameter from database.
-     *
      * @param string $namespace
      *
      * @return array

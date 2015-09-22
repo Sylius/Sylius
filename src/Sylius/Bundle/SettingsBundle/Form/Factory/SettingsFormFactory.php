@@ -15,29 +15,21 @@ use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * Settings form factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsFormFactory implements SettingsFormFactoryInterface
 {
     /**
-     * Schema registry.
-     *
      * @var SchemaRegistryInterface
      */
     protected $schemaRegistry;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param SchemaRegistryInterface $schemaRegistry
      * @param FormFactoryInterface    $formFactory
      */

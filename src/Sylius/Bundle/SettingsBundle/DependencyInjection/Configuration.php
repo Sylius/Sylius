@@ -47,8 +47,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
