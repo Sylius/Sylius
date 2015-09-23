@@ -123,8 +123,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         RouterInterface $router,
         \Twig_Environment $twig,
-        $parameters,
-        Request $request
+        $parameters
     ) {
         $parameters->get('parameter_name')->willReturn(array());
         $parameters->get('sortable')->willReturn(true);
