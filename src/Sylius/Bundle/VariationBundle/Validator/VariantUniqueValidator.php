@@ -26,15 +26,11 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class VariantUniqueValidator extends ConstraintValidator
 {
     /**
-     * Variant repository.
-     *
      * @var RepositoryInterface
      */
     protected $variantRepository;
 
     /**
-     * Constructor.
-     *
      * @param RepositoryInterface $variantRepository
      */
     public function __construct(RepositoryInterface $variantRepository)

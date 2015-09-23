@@ -15,15 +15,11 @@ use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 /**
- * Variants choice list.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantChoiceList extends ObjectChoiceList
 {
     /**
-     * Constructor.
-     *
      * @param VariableInterface $variable
      */
     public function __construct(VariableInterface $variable)

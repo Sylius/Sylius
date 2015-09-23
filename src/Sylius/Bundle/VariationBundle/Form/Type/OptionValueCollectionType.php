@@ -28,15 +28,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class OptionValueCollectionType extends AbstractType
 {
     /**
-     * Variable name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Constructor.
-     *
      * @param string $variableName
      */
     public function __construct($variableName)
