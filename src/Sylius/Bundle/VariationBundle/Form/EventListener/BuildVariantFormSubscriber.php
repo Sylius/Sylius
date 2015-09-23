@@ -24,22 +24,16 @@ use Symfony\Component\Form\FormFactoryInterface;
 class BuildVariantFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * Variable object name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;
 
     /**
-     * Constructor.
-     *
      * @param string               $variableName
      * @param FormFactoryInterface $factory
      */

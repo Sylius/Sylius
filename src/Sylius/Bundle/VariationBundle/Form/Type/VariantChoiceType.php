@@ -19,14 +19,18 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Variant choice form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantChoiceType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected $variableName;
 
+    /**
+     * @param string $variableName
+     */
     public function __construct($variableName)
     {
         $this->variableName = $variableName;

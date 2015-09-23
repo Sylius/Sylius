@@ -17,22 +17,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Variant form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantType extends AbstractResourceType
 {
     /**
-     * Variable object name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Constructor.
-     *
      * @param string $dataClass
      * @param array  $validationGroups
      * @param string $variableName
