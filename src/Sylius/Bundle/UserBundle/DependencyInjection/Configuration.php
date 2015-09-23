@@ -155,6 +155,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType')->end()
                                         ->scalarNode('simple_registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType')->end()
                                         ->scalarNode('guest')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType')->end()
+                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
                                     ->end()
                                 ->end()
                             ->end()
