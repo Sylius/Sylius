@@ -19,29 +19,21 @@ namespace Sylius\Component\Attribute\Model;
 class AttributeValue implements AttributeValueInterface
 {
     /**
-     * Id.
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * Subject.
-     *
      * @var AttributeSubjectInterface
      */
     protected $subject;
 
     /**
-     * Attribute.
-     *
      * @var AttributeInterface
      */
     protected $attribute;
 
     /**
-     * Attribute value.
-     *
      * @var mixed
      */
     protected $value;
@@ -76,8 +68,6 @@ class AttributeValue implements AttributeValueInterface
     public function setSubject(AttributeSubjectInterface $subject = null)
     {
         $this->subject = $subject;
-
-        return $this;
     }
 
     /**
@@ -94,8 +84,6 @@ class AttributeValue implements AttributeValueInterface
     public function setAttribute(AttributeInterface $attribute)
     {
         $this->attribute = $attribute;
-
-        return $this;
     }
 
     /**
@@ -123,8 +111,6 @@ class AttributeValue implements AttributeValueInterface
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
     /**
@@ -168,7 +154,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @throws \BadMethodCallException When attribute is not set
+     * @throws \BadMethodCallException
      */
     protected function assertAttributeIsSet()
     {

@@ -16,15 +16,16 @@ namespace Sylius\Component\Attribute\Model;
 interface AttributeTranslationInterface
 {
     /**
-     * The name displayed to user.
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getPresentation();
 
     /**
-     * Set presentation.
-     *
      * @param string $presentation
      */
     public function setPresentation($presentation);

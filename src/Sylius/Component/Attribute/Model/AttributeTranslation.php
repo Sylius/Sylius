@@ -14,23 +14,16 @@ namespace Sylius\Component\Attribute\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Model for object attributes translation.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AttributeTranslation extends AbstractTranslation implements AttributeTranslationInterface
 {
     /**
-     * Attribute id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Presentation.
-     * Displayed to user.
-     *
      * @var string
      */
     protected $presentation;
@@ -57,7 +50,5 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     public function setPresentation($presentation)
     {
         $this->presentation = $presentation;
-
-        return $this;
     }
 }

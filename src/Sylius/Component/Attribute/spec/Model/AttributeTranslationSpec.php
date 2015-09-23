@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -43,12 +42,5 @@ class AttributeTranslationSpec extends ObjectBehavior
     {
         $this->setPresentation('Size');
         $this->getPresentation()->shouldReturn('Size');
-    }
-
-    function it_has_fluent_interface()
-    {
-        $date = new \DateTime();
-
-        $this->setPresentation('Brand')->shouldReturn($this);
     }
 }

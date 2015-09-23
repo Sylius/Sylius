@@ -16,58 +16,42 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model for object attributes.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
     /**
-     * Attribute id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Type.
-     *
      * @var string
      */
     protected $type = AttributeTypes::TEXT;
 
     /**
-     * Internal name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Attribute configuration.
-     *
      * @var array
      */
     protected $configuration = array();
 
     /**
-     * All values associated with this attribute.
-     *
      * @var AttributeValueInterface[]|Collection
      */
     protected $values;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -109,8 +93,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -127,8 +109,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setPresentation($presentation)
     {
         $this->translate()->setPresentation($presentation);
-
-        return $this;
     }
 
     /**
@@ -145,8 +125,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -163,8 +141,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -189,8 +165,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -207,7 +181,5 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

@@ -48,9 +48,8 @@ class ProductContext extends DefaultContext
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
                 $attributeValue =  $this->getRepository('product_attribute_value')->createNew();
 
-                $attributeValue
-                    ->setAttribute($productAttribute)
-                    ->setValue($attribute[1]);
+                $attributeValue->setAttribute($productAttribute);
+                $attributeValue->setValue($attribute[1]);
 
                 $product->addAttribute($attributeValue);
             }
