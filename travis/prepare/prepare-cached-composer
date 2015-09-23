@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Argument 1: Dir with scripts
+function main
+{
+    UNIQUE_KEY=$( text_md5sum $1 )
+
+    before_hook $1
+
+    if is_cache_fresh $UNIQUE_KEY; then
+        restore_composer_lock_from_cache $UNIQUE_KEY
+    else
+        rebuild_cache_hook $1
+        store_composer_lock_in_cache $UNIQUE_KEY
+    fi
+
+    after_hook $1
+}
+
+# Argument 1: Cache unique key
+function store_composer_lock_in_cache
+{
+    cp composer.lock $SYLIUS_CACHE_DIR/composer-$1.lock
+    file_md5sum 'composer.lock' > $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum
+}
+
+# Argument 1: Cache unique key
+function restore_composer_lock_from_cache
+{
+    cp $SYLIUS_CACHE_DIR/composer-$1.lock composer.lock
+}
+
+# Argument 1: Cache unique key
+function is_cache_fresh
+{
+    if [ -f $SYLIUS_CACHE_DIR/composer-$1.lock ] && [ -f $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum ] && [ file_md5sum 'composer.lock' -eq `cat $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum` ];
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Argument 1: String to hash
+function text_md5sum
+{
+    echo $1 | md5sum | awk '{ print $1 }'
+}
+
+# Argument 1: File to hash
+function file_md5sum
+{
+    md5sum $1 | awk '{ print $1 }'
+}
+
+# Argument 1: Dir with scripts
+function before_hook
+{
+    if [ -f $1/1-before ]; then
+        bash $1/1-before
+    fi
+}
+
+# Argument 1: Dir with scripts
+function rebuild_cache_hook
+{
+    if [ -f $1/2-rebuild-cache ]; then
+        bash $1/2-rebuild-cache
+    fi
+}
+
+# Argument 1: Dir with scripts
+function after_hook
+{
+    if [ -f $1/3-after ]; then
+        bash $1/3-after
+    fi
+}
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <dir with scripts>"
+    exit 1
+fi
+
+main $1
