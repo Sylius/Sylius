@@ -30,11 +30,21 @@ class ItemCountRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectCount() >= $configuration['count'];
+        if (!isset($configuration['equal'])) {
+            $configuration['equal'] = 'equal';
+        } else {
+            $configuration['equal'] = $configuration['equal'] ? 'equal' : 'more_than';
         }
 
-        return $subject->getPromotionSubjectCount() > $configuration['count'];
+        switch ($configuration['equal']) {
+            case 'more_than':
+                return $subject->getPromotionSubjectCount() > $configuration['count'];
+
+            case 'exactly':
+                return $subject->getPromotionSubjectCount() === $configuration['count'];
+        }
+
+        return $subject->getPromotionSubjectCount() >= $configuration['count'];
     }
 
     /**

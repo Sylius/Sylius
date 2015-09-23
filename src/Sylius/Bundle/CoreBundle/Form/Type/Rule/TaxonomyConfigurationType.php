@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Taxonomy rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonomyConfigurationType extends AbstractType
@@ -42,7 +40,7 @@ class TaxonomyConfigurationType extends AbstractType
                 ),
             ))
             ->add('exclude', 'checkbox', array(
-                'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
+                'label' => 'sylius.form.rule.exclude',
             ))
         ;
     }

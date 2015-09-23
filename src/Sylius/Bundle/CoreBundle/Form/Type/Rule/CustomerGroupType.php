@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * CustomerGroup rule configuration form type.
- *
  * @author Antonio Perić <antonio@locastic.com>
  */
 class CustomerGroupType extends AbstractType
@@ -47,25 +45,20 @@ class CustomerGroupType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $groupRepository = $this->groupRepository;
-
         $builder
-            ->add(
-                'groups',
-                'sylius_entity_to_identifier',
-                array(
-                    'label' => 'sylius.form.action.customer_group',
-                    'property' => 'name',
-                    'class' => $groupRepository->getClassName(),
-                    'query_builder' => function () use ($groupRepository) {
-                        return $groupRepository->getFormQueryBuilder();
-                    },
-                    'constraints' => array(
-                        new NotBlank(),
-                        new Type(array('type' => 'numeric')),
-                    ),
-                )
-            );
+            ->add('groups', 'sylius_entity_to_identifier', array(
+                'label' => 'sylius.form.action.customer_group',
+                'property' => 'name',
+                'class' => $this->groupRepository->getClassName(),
+                'query_builder' => function () {
+                    return $this->groupRepository->getFormQueryBuilder();
+                },
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                ),
+            ))
+        ;
     }
 
     /**
@@ -74,11 +67,10 @@ class CustomerGroupType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'validation_groups' => $this->validationGroups,
-                )
-            );
+            ->setDefaults(array(
+                'validation_groups' => $this->validationGroups,
+            ))
+        ;
     }
 
     /**

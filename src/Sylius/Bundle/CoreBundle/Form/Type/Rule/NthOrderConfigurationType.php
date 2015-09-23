@@ -18,8 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Nth order rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class NthOrderConfigurationType extends AbstractType

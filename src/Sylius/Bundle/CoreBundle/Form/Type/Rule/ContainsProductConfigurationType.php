@@ -58,7 +58,7 @@ class ContainsProductConfigurationType extends AbstractType
                 )
             ))
             ->add('exclude', 'checkbox', array(
-                'label' => 'sylius.form.rule.contains_product_configuration.exclude',
+                'label' => 'sylius.form.rule.exclude',
             ))
         ;
     }
