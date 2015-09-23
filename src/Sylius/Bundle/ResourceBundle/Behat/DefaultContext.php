@@ -456,6 +456,32 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
+     * Callback can return any value, to stop waiting use anonymous function provided as first argument.
+     *
+     * @param callable $callback
+     * @param int $limit
+     * @param int $delay In miliseconds
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException If timeout was reached
+     */
+    protected function waitFor(callable $callback, $limit = 10, $delay = 100)
+    {
+        for ($i = 0; $i < $limit; ++$i) {
+            $payload = $callback();
+
+            if (null !== $payload) {
+                return $payload;
+            }
+
+            usleep($delay * 1000);
+        }
+
+        throw new \RuntimeException(sprintf('Timeout reached (%f seconds)!', round($limit * $delay / 1000, 1)));
+    }
+
+    /**
      * @param string $name
      *
      * @return string
