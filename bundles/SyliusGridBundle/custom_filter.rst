@@ -88,11 +88,11 @@ That is all. Now let register your new filter type as service.
         app.grid.filter.tournament_statistics:
             class: App\Grid\Filter\TournamentStatisticsFilter
             tags:
-                - { name: sylius.grid.filter type: tournament_statistics }
+                - { name: sylius.grid_filter, type: tournament_statistics }
         app.form.type.filter.tournament_statistics:
             class: AppBundle\Form\Type\Filter\TournamentStatisticsFilterType
             tags:
-                - { name: form.type type: sylius_filter_tournament_statistics }
+                - { name: form.type, alias: sylius_filter_tournament_statistics }
 
 
 Now you can use your new filter type in the grid configuration!
