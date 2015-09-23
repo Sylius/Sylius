@@ -44,8 +44,8 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
     }
 
     function it_is_not_restricted_if_customer_have_no_shipping_address(
-        ProductInterface $product,
         $customerContext,
+        ProductInterface $product,
         CustomerInterface $customer
     ) {
         $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
@@ -55,7 +55,6 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
     }
 
     function it_is_not_restricted_if_product_have_no_restricted_zone(
-        ProductInterface $product,
         $customerContext,
         CustomerInterface $customer,
         AddressInterface $address,
@@ -69,7 +68,6 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
     }
 
     function it_is_not_restricted_if_zone_matcher_does_not_match_customers_shipping_address(
-        ProductInterface $product,
         $customerContext,
         $zoneMatcher,
         CustomerInterface $customer,
@@ -86,7 +84,6 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
     }
 
     function it_is_restricted_if_zone_matcher_match_customers_shipping_address(
-        ProductInterface $product,
         $customerContext,
         $zoneMatcher,
         CustomerInterface $customer,
