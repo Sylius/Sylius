@@ -77,7 +77,10 @@ class FixtureContext extends DefaultContext
         $data = $table->getRowsHash();
         $type = str_replace(' ', '_', trim($type));
 
-        $object = $this->findOneByName($type, $data['name']);
+        $object = $this->waitFor(function () use ($type, $data) {
+            return $this->findOneByName($type, $data['name']);
+        });
+
         foreach ($data as $property => $value) {
             $objectValue = $accessor->getValue($object, $property);
             if (is_array($objectValue)) {
