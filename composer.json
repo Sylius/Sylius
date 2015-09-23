@@ -73,7 +73,8 @@
         "twig/twig":                            "~1.11",
         "white-october/pagerfanta-bundle":      "~1.0",
         "willdurand/hateoas-bundle":            "~0.4",
-        "winzou/state-machine-bundle":          "~0.2"
+        "winzou/state-machine-bundle":          "~0.2",
+        "akeneo/phpspec-skip-example-extension": "^1.2"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",
