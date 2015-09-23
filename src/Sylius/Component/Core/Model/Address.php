@@ -15,8 +15,6 @@ use Sylius\Component\Addressing\Model\Address as BaseAddress;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
- * Address entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Address extends BaseAddress implements AddressInterface
@@ -40,7 +38,5 @@ class Address extends BaseAddress implements AddressInterface
     public function setCustomer(BaseCustomerInterface $customer = null)
     {
         $this->customer = $customer;
-
-        return $this;
     }
 }

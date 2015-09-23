@@ -41,7 +41,7 @@ class Zone implements ZoneInterface
     protected $scope;
 
     /**
-     * @var Collection
+     * @var Collection|ZoneMemberInterface[]
      */
     protected $members;
 
@@ -50,6 +50,9 @@ class Zone implements ZoneInterface
         $this->members = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
