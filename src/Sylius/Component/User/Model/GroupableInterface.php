@@ -13,6 +13,8 @@
 
 namespace Sylius\Component\User\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -22,7 +24,7 @@ interface GroupableInterface
     /**
      * Gets the groups granted to the user.
      *
-     * @return \Traversable
+     * @return Collection|GroupInterface[]
      */
     public function getGroups();
 

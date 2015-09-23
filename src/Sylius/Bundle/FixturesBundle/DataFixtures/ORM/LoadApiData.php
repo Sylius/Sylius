@@ -13,10 +13,10 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use OAuth2\OAuth2;
 use Sylius\Bundle\ApiBundle\Model\Client;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * Api fixtures.

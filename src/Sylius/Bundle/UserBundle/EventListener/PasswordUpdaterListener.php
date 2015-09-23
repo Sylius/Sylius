@@ -15,8 +15,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * User update listener.

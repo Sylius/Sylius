@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use JMS\TranslationBundle\Annotation\Ignore;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 

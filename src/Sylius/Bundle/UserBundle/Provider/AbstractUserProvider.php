@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\Provider;
 
-use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

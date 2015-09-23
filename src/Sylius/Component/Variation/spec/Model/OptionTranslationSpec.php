@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Variation\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Variation\Model\OptionValueInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

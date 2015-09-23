@@ -13,11 +13,11 @@ namespace Sylius\Bundle\ReportBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface;
+use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\DelegatingRendererInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

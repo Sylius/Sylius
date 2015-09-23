@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * Order state choice type.

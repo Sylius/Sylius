@@ -11,8 +11,6 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Core\Model\ModelAggregateInterface;
-use Payum\Core\Model\ModelAwareInterface;
 use Payum\Core\PaymentInterface as PayumPaymentInterface;
 use Payum\Core\Request\Generic;
 use PhpSpec\ObjectBehavior;

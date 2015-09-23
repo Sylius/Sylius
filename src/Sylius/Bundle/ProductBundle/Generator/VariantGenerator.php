@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\ProductBundle\Generator;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 use Sylius\Component\Variation\Generator\VariantGenerator as BaseVariantGenerator;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Validator\ValidatorInterface;

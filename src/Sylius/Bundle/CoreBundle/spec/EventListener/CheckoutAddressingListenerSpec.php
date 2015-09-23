@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Automatic set customer's default addressing

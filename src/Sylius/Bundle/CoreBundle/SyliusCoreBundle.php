@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CartItemResolverPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -42,6 +43,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new CartItemResolverPass());
         $container->addCompilerPass(new DoctrineSluggablePass());
         $container->addCompilerPass(new RoutingRepositoryPass());
     }

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use JMS\TranslationBundle\Annotation\Ignore;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;

@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Rbac\Resolver;
 
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * Service implementing this service is responsible for getting all applicable permissions from Role.

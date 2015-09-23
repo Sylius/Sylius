@@ -3,8 +3,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Locale;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
  * @mixin \Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider
