@@ -354,7 +354,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      * @Then I should not see :button button near :user in :table table
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
-    {   
+    {
         $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
         $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
     }
@@ -613,7 +613,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $this->clickLink('Show deleted');
     }
-    
+
     /**
      * @Then I should see table of :id sorted by lastName
      */
@@ -621,15 +621,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
         $allSurnames = array();
-        
-        foreach ($allNames as $name){
+
+        foreach ($allNames as $name) {
             $spacePosition = strpos($name->getText(), ' ');
             $surname = substr($name->getText(), $spacePosition + 1);
             $allSurnames[] .= $surname;
         }
-        
+
         sort($allSurnames);
-        
+
         $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
     }
 
@@ -688,6 +688,19 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iGoToPageForProductWithEmptySlug()
     {
         $this->visitPath('/p/');
+    }
+
+    /**
+     * @Given /^I have changed my account password to "([^""]*)"$/
+     * @When /^I change my account password to "([^""]*)"$/
+     */
+    public function iChangeMyPasswordTo($newPassword)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_change_password'));
+        $this->fillField('Current password', 'sylius');
+        $this->fillField('New password', $newPassword);
+        $this->fillField('Confirmation', $newPassword);
+        $this->pressButton('Save changes');
     }
 
     private function assertRoute($route)
