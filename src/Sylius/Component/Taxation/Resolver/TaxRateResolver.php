@@ -15,22 +15,16 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 
 /**
- * Default tax rate resolver.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRateResolver implements TaxRateResolverInterface
 {
     /**
-     * Tax rate repository.
-     *
      * @var RepositoryInterface
      */
     protected $taxRateRepository;
 
     /**
-     * Tax rate repository.
-     *
      * @var RepositoryInterface $taxRateRepository
      */
     public function __construct(RepositoryInterface $taxRateRepository)
