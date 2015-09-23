@@ -180,7 +180,7 @@ class ElasticsearchFinder extends AbstractFinder
     public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter    = new \Elastica\Filter\Bool();
+        $boolFilter    = new \Elastica\Filter\BoolFilter();
 
         if (!empty($types)) {
             foreach ($types as $type) {
@@ -222,7 +222,7 @@ class ElasticsearchFinder extends AbstractFinder
     public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter    = new \Elastica\Filter\Bool();
+        $boolFilter    = new \Elastica\Filter\BoolFilter();
         $query = new \Elastica\Query\QueryString($searchTerm);
 
         if (!empty($types)) {
@@ -402,7 +402,7 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($facets as $name => $facet) {
             $normName = key($facet);
 
-            ${$normName.'BoolFilter'} = new \Elastica\Filter\Bool();
+            ${$normName.'BoolFilter'} = new \Elastica\Filter\BoolFilter();
 
             foreach ($appliedFilters as $value) {
                 if (is_array($value[key($value)])) {
@@ -444,7 +444,7 @@ class ElasticsearchFinder extends AbstractFinder
     public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
         $rangeFilters = new \Elastica\Filter\Range();
-        $boolFilter   = new \Elastica\Filter\Bool();
+        $boolFilter   = new \Elastica\Filter\BoolFilter();
 
         $filters = array();
         foreach ($appliedFilters as $facet) {
