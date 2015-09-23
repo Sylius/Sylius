@@ -94,7 +94,7 @@
 
                 {% set links = cmf_children(cmf_find('/cms/pages')) %}
                 {% if links is not empty %}
-                <h2>{{ 'sylius.frontend.menu.sidebar.links'|trans }}</h2>
+                <h2>{{ 'sylius.ui.links'|trans }}</h2>
                 <ul>
                   {% for link in links %}
                   	{% if cmf_is_linkable(link) %}

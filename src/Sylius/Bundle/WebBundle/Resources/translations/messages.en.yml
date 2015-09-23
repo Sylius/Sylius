@@ -1066,3 +1066,5 @@ sylius:
         female: Female
     enable: Enable
     disable: Disable
+    ui:
+        links: Links
