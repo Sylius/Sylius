@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $TRAVIS_PHP_VERSION != "7.0" ]; then bin/phpspec run -f dot; fi
+bin/phpspec run -f dot
 
 bin/behat --strict -f progress -s account
 bin/behat --strict -f progress -s addressing 
