@@ -28,45 +28,34 @@ interface TranslatableInterface
     public function translate($locale = null);
 
     /**
-     * Set current locale.
+     * @param TranslationInterface $translation
      *
+     * @return bool
+     */
+    public function hasTranslation(TranslationInterface $translation);
+
+    /**
      * @param string $locale
-     *
-     * @return self
      */
     public function setCurrentLocale($locale);
 
     /**
-     * Set fallback locale.
-     *
      * @param string $locale
-     *
-     * @return self
      */
     public function setFallbackLocale($locale);
 
     /**
-     * Get all translations.
-     *
      * @return TranslationInterface[]
      */
     public function getTranslations();
 
     /**
-     * Add a new translation.
-     *
      * @param TranslationInterface $translation
-     *
-     * @return self
      */
     public function addTranslation(TranslationInterface $translation);
 
     /**
-     * Remove a translation.
-     *
      * @param TranslationInterface $translation
-     *
-     * @return self
      */
     public function removeTranslation(TranslationInterface $translation);
 }
