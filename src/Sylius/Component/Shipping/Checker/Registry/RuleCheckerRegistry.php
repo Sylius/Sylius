@@ -14,18 +14,11 @@ namespace Sylius\Component\Shipping\Checker\Registry;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 
 /**
- * Rule checker registry.
- *
- * This service keeps all rule checkers registered inside
- * container. Allows to retrieve them by type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class RuleCheckerRegistry implements RuleCheckerRegistryInterface
 {
     /**
-     * Rule checkers.
-     *
      * @var RuleCheckerInterface[]
      */
     protected $checkers = array();

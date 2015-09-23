@@ -20,8 +20,6 @@ use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 
 /**
- * Shipment processor.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShipmentProcessor implements ShipmentProcessorInterface

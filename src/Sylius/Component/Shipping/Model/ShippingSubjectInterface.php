@@ -14,8 +14,6 @@ namespace Sylius\Component\Shipping\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Shipping subject.
- *
  * This interface can be implemented by any object, which needs to be
  * evaluated by default shipping calculators and rule checkers.
  *
@@ -24,30 +22,22 @@ use Doctrine\Common\Collections\Collection;
 interface ShippingSubjectInterface
 {
     /**
-     * Get the total weight of shipped goods.
-     *
-     * @return integer
+     * @return int
      */
     public function getShippingWeight();
 
     /**
-     * Get the total volume of shipped goods.
-     *
-     * @return integer
+     * @return int
      */
     public function getShippingVolume();
 
     /**
-     * Get the total amount of shipped goods.
-     *
-     * @return integer
+     * @return int
      */
     public function getShippingItemCount();
 
     /**
-     * Get the total value of shipped goods.
-     *
-     * @return integer
+     * @return int
      */
     public function getShippingItemTotal();
 

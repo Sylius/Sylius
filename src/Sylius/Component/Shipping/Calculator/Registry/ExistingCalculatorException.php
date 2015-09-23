@@ -12,16 +12,11 @@
 namespace Sylius\Component\Shipping\Calculator\Registry;
 
 /**
- * This exception should be thrown by calculator registry
- * when calculator with given name already exists.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ExistingCalculatorException extends \InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string $name
      */
     public function __construct($name)

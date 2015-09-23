@@ -14,18 +14,11 @@ namespace Sylius\Component\Shipping\Calculator\Registry;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 /**
- * Calculator registry.
- *
- * This service keeps all calculators registered inside
- * container. Allows to retrieve them by name.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CalculatorRegistry implements CalculatorRegistryInterface
 {
     /**
-     * Calculators array.
-     *
      * @var CalculatorInterface[]
      */
     protected $calculators = array();

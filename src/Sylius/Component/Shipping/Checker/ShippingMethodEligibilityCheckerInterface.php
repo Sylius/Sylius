@@ -15,19 +15,15 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Shipping method eligibility checker interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ShippingMethodEligibilityCheckerInterface
 {
     /**
-     * Check if given shipping method supports the concrete subject.
-     *
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface  $method
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method);
 }

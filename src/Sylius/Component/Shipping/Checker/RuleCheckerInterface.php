@@ -14,8 +14,6 @@ namespace Sylius\Component\Shipping\Checker;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Shipping method rule checker interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleCheckerInterface
@@ -26,12 +24,12 @@ interface RuleCheckerInterface
      *
      * @param ShippingSubjectInterface $subject
      * @param array                    $configuration
+     *
+     * @return bool
      */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration);
 
     /**
-     * Get the name of configuration form type.
-     *
      * @return string
      */
     public function getConfigurationFormType();
