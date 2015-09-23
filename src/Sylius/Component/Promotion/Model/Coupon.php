@@ -12,79 +12,57 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Coupon model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Coupon implements CouponInterface
 {
     /**
-     * Id
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * Coupon code
-     *
      * @var string
      */
     protected $code;
 
     /**
-     * Usage limit
-     *
-     * @var integer
+     * @var int
      */
     protected $usageLimit;
 
     /**
-     * Number of times used
-     *
-     * @var integer
+     * @var int
      */
     protected $used = 0;
 
     /**
-     * Associated promotion
-     *
      * @var PromotionInterface
      */
     protected $promotion;
 
     /**
-     * Expiration date
-     *
      * @var \DateTime
      */
     protected $expiresAt;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Modification time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * Deletion time.
-     *
      * @var \DateTime
      */
     protected $deletedAt;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -105,8 +83,6 @@ class Coupon implements CouponInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -123,8 +99,6 @@ class Coupon implements CouponInterface
     public function setUsageLimit($usageLimit)
     {
         $this->usageLimit = $usageLimit;
-
-        return $this;
     }
 
     /**
@@ -141,8 +115,6 @@ class Coupon implements CouponInterface
     public function setUsed($used)
     {
         $this->used = $used;
-
-        return $this;
     }
 
     /**
@@ -151,8 +123,6 @@ class Coupon implements CouponInterface
     public function incrementUsed()
     {
         $this->used++;
-
-        return $this;
     }
 
     /**
@@ -169,8 +139,6 @@ class Coupon implements CouponInterface
     public function setPromotion(PromotionInterface $promotion = null)
     {
         $this->promotion = $promotion;
-
-        return $this;
     }
 
     /**
@@ -187,8 +155,6 @@ class Coupon implements CouponInterface
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
-
-        return $this;
     }
 
     /**
@@ -205,8 +171,6 @@ class Coupon implements CouponInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -223,8 +187,6 @@ class Coupon implements CouponInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -249,10 +211,7 @@ class Coupon implements CouponInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
-
 
     /**
      * {@inheritdoc}
