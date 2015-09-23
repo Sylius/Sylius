@@ -66,3 +66,6 @@ suites:
     MailerBundle      : { namespace: Sylius\Bundle\MailerBundle, psr4_prefix: Sylius\Bundle\MailerBundle, spec_path: src/Sylius/Bundle/MailerBundle, src_path: src/Sylius/Bundle/MailerBundle }
     RbacBundle        : { namespace: Sylius\Bundle\RbacBundle, psr4_prefix: Sylius\Bundle\RbacBundle, spec_path: src/Sylius/Bundle/RbacBundle, src_path: src/Sylius/Bundle/RbacBundle }
     UserBundle        : { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
+
+extensions:
+    - Akeneo\SkipExampleExtension
