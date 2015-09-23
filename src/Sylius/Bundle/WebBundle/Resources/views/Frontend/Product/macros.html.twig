@@ -32,3 +32,9 @@
 </div>
 
 {% endmacro %}
+
+{% macro price(variant, classes) %}
+{% if (variant.originalprice > variant.price) %}
+    <span class="label crossed {% for class in classes %} {{ class }} {% endfor %}">{{ variant.originalPrice|sylius_price }}</span>
+{% endif %}
+{% endmacro %}

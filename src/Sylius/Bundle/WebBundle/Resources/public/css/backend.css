@@ -493,11 +493,13 @@ form.form-signin .btn-success:hover {
 .sylius-products-table .id,
 .sylius-products-table .stock,
 .sylius-products-table .retail-price,
+.sylius-products-table .original-price,
 .sylius-products-table .updated-at {
     text-align: center;
 }
 .sylius-products-table .stock,
 .sylius-products-table .retail-price,
+.sylius-products-table .original-price,
 .sylius-products-table .updated-at {
     width: 150px;
 }
@@ -618,7 +620,7 @@ form.form-signin .btn-success:hover {
 
 /** Content. **/
 .content-block-overview {
-	
+
 }
 
 .content-block-overview i {

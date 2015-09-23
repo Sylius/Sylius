@@ -162,7 +162,7 @@ a.oauth-login:hover {
     background-color: #333 !important;
 }
 .create-ui-toolbar-wrapper.editing {
-    background: rgba(0, 0, 0, 0.7) !important;
+	background: rgba(0, 0, 0, 0.7) !important;
 }
 
 a.create-ui-toggle {
@@ -211,3 +211,13 @@ a.create-ui-toggle {
     box-shadow: 0px 0px;
     background: none;
 }
+
+/* Specific rules */
+.crossed {
+    text-decoration: line-through;
+}
+
+.label-originalprice {
+    margin-right: 0.3em;
+}
+>>>>>>> Added a field 'original_price'

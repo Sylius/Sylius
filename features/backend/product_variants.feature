@@ -51,6 +51,13 @@ Feature: Product variants
         And I press "Create"
         Then I should see "Price must not be negative"
 
+    Scenario: Trying to create product variant with invalid original price
+        Given I am creating variant of "Black T-Shirt"
+        When I fill in "Price" with "1.00"
+        And I fill in "Original price" with "-0.01"
+        And I press "Create"
+        Then I should see "Original price must not be negative"
+
     Scenario: Displaying the "Generate variants" button
               only for products with options
         Given I am viewing product "Mug"
