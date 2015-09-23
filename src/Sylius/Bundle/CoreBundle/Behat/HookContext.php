@@ -57,15 +57,6 @@ class HookContext implements Context, KernelAwareContext
         }
 
         $entityManager->clear();
-
-        /*
-        $process = new Process(sprintf('%s/console sylius:rbac:initialize --env=test', $this->getContainer()->getParameter('kernel.root_dir')));
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException('Could not initialize permissions.');
-        }
-        */
     }
 
     /**
