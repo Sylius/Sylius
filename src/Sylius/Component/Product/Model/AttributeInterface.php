@@ -14,8 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 
 /**
- * Product attributes interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeInterface extends BaseAttributeInterface

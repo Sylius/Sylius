@@ -14,8 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 
 /**
- * Product options interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OptionInterface extends BaseOptionInterface
