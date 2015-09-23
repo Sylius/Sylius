@@ -14,8 +14,6 @@ namespace Sylius\Component\Currency\Model;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Interface for the model representing a currency configured in app.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyInterface extends TimestampableInterface
@@ -48,12 +46,12 @@ interface CurrencyInterface extends TimestampableInterface
     public function setExchangeRate($rate);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 }
