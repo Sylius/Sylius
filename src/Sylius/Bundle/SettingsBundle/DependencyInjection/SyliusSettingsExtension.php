@@ -16,12 +16,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
- * Settings extension.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class SyliusSettingsExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    /**
+     * @var array
+     */
     protected $configFiles = array(
         'services.xml',
         'templating.xml',

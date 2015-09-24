@@ -17,15 +17,11 @@ use Symfony\Component\Templating\Helper\Helper;
 class SettingsHelper extends Helper
 {
     /**
-     * Settings manager.
-     *
      * @var SettingsManagerInterface
      */
     private $settingsManager;
 
     /**
-     * Constructor.
-     *
      * @param SettingsManagerInterface $settingsManager
      */
     public function __construct(SettingsManagerInterface $settingsManager)
@@ -34,8 +30,6 @@ class SettingsHelper extends Helper
     }
 
     /**
-     * Load settings from given namespace.
-     *
      * @param string $namespace
      *
      * @return array
@@ -46,8 +40,6 @@ class SettingsHelper extends Helper
     }
 
     /**
-     * Load settings parameter for given namespace and name.
-     *
      * @param string $name
      *
      * @return mixed
