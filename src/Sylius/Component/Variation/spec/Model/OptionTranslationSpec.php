@@ -44,9 +44,4 @@ class OptionTranslationSpec extends ObjectBehavior
         $this->setPresentation('Size');
         $this->getPresentation()->shouldReturn('Size');
     }
-
-    function it_has_fluent_interface()
-    {
-        $this->setPresentation('Size')->shouldReturn($this);
-    }
 }
