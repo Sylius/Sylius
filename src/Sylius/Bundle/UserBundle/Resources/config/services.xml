@@ -57,7 +57,8 @@
     <services>
         <!-- Customer context -->
         <service id="sylius.context.customer" class="%sylius.context.customer.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
 
         <!-- Controllers -->

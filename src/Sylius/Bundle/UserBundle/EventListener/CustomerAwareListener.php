@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
+use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -20,16 +20,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CustomerAwareListener
 {
     /**
-     * @var CustomerContextInterface
+     * @var CustomerContext
      */
     protected $customerContext;
 
     /**
-     * @param CustomerContextInterface $securityContext
+     * @param CustomerContext $customerContext
      */
-    public function __construct(CustomerContextInterface $securityContext)
+    public function __construct(CustomerContext $customerContext)
     {
-        $this->customerContext = $securityContext;
+        $this->customerContext = $customerContext;
     }
 
     /**
