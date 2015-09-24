@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Myke Hines <myke@webhines.com>
@@ -44,7 +44,7 @@ class CommentTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -54,7 +54,7 @@ class CommentTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     public function it_has_valid_name()

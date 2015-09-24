@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VariantMatchTypeSpec extends ObjectBehavior
 {
@@ -54,7 +54,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array('variable' => $variable));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'variable'
@@ -65,7 +65,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
         ))->shouldBeCalled()->willReturn($resolver);
 
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

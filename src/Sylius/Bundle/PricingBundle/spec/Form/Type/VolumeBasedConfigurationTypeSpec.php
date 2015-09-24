@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
 {
@@ -27,7 +27,7 @@ class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class'    => null,
@@ -38,7 +38,7 @@ class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
             'type'          => 'sylius_price_calculator_volume_based_configuration'
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_parent()

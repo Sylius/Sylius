@@ -14,8 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResourceChoiceTypeSpec extends ObjectBehavior
 {
@@ -68,7 +67,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('phpcr_document');
     }
 
-    function it_defines_resource_options(OptionsResolverInterface $resolver)
+    function it_defines_resource_options(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -81,6 +80,6 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
             ->willReturn($resolver)
         ;
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

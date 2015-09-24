@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateExtensionSpec extends ObjectBehavior
 {
@@ -40,7 +40,7 @@ class DateExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_configure_the_resolver(OptionsResolverInterface $resolver)
+    function it_should_configure_the_resolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
@@ -56,7 +56,7 @@ class DateExtensionSpec extends ObjectBehavior
             'leading_zero' => array('bool'),
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_extended_type()

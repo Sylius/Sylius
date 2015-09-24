@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -39,7 +39,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_defines_calculator_choices(OptionsResolverInterface $resolver)
+    function it_defines_calculator_choices(OptionsResolver $resolver)
     {
         $choices = array(
             'flat_rate'     => 'Flat rate per shipment',
@@ -48,6 +48,6 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 
         $resolver->setDefaults(array('choices' => $choices))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }
