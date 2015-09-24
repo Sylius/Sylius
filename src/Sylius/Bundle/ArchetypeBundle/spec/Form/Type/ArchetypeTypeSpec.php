@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ArchetypeBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -66,7 +66,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -74,7 +74,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
                 'validation_groups' => array('sylius')
             ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

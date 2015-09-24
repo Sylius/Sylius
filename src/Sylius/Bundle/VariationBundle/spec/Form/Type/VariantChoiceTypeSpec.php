@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VariantChoiceTypeSpec extends ObjectBehavior
 {
@@ -44,7 +44,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
@@ -56,7 +56,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
             'variable' => array('Sylius\Component\Variation\Model\VariableInterface')
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

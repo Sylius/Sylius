@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonChoiceTypeSpec extends ObjectBehavior
 {
@@ -45,7 +45,7 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setRequired(array(
@@ -57,7 +57,7 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
             'filter' => array('\Closure', 'null'),
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver, array());
+        $this->configureOptions($resolver, array());
     }
 
     function it_has_a_name()

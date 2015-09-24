@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -47,7 +48,7 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_defines_data_fetcher_choices(OptionsResolverInterface $resolver)
+    function it_defines_data_fetcher_choices(OptionsResolver $resolver)
     {
         $dataFetchers = array(
             'user_registration' => 'User Registration',
@@ -55,6 +56,6 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
 
         $resolver->setDefaults(array('choices' => $dataFetchers))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }
