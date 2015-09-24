@@ -50,6 +50,7 @@ class CouponGeneratorSpec extends ObjectBehavior
     ) {
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);
+        $instruction->getExpiresAt()->willReturn(null);
 
         $repository->createNew()->willReturn($coupon);
         $repository->findOneBy(Argument::any())->willReturn(null);
@@ -57,6 +58,7 @@ class CouponGeneratorSpec extends ObjectBehavior
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
+        $coupon->setExpiresAt(null)->shouldBeCalled();
 
         $manager->getFilters()->shouldBeCalled()->willReturn($filters);
         $filters->disable('softdeleteable')->shouldBeCalled();

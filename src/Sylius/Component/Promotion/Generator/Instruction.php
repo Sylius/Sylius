@@ -20,6 +20,7 @@ class Instruction
 {
     protected $amount;
     protected $usageLimit;
+    protected $expiresAt;
 
     public function __construct()
     {
@@ -48,5 +49,15 @@ class Instruction
         $this->usageLimit = $usageLimit;
 
         return $this;
+    }
+
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(\DateTime $expiresAt = null)
+    {
+        $this->expiresAt = $expiresAt;
     }
 }

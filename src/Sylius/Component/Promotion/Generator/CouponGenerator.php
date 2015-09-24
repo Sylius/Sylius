@@ -32,6 +32,10 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected $manager;
 
+    /**
+     * @param RepositoryInterface    $repository
+     * @param EntityManagerInterface $manager
+     */
     public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
     {
         $this->repository = $repository;
@@ -49,14 +53,15 @@ class CouponGenerator implements CouponGeneratorInterface
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
             $coupon->setUsageLimit($instruction->getUsageLimit());
-            
+            $coupon->setExpiresAt($instruction->getExpiresAt());
+
             $generatedCoupons[] = $coupon;
 
             $this->manager->persist($coupon);
         }
 
         $this->manager->flush();
-        
+
         return $generatedCoupons;
     }
 
