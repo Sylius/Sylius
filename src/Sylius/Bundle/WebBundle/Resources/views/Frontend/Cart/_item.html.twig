@@ -8,7 +8,7 @@
         {{ form_row(form.items[loop.index0].quantity, {'label': false}) }}
     </td>
     <td class="col-md-1">
-        <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
+        <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i>{{ 'sylius.delete'|trans }}</a>
     </td>
     <td class="col-md-1">
         {{ item.unitPrice|sylius_price }}
