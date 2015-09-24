@@ -48,8 +48,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addValidationGroupsSection(ArrayNodeDefinition $node)
@@ -83,8 +81,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)

@@ -18,22 +18,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Option value choice form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValueChoiceType extends AbstractType
 {
     /**
-     * Variable object name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Constructor.
-     *
      * @param string $variableName
      */
     public function __construct($variableName)

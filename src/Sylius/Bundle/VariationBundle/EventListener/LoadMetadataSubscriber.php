@@ -29,8 +29,6 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $variables;
 
     /**
-     * Constructor.
-     *
      * @param array $variables
      */
     public function __construct(array $variables)
