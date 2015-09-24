@@ -46,11 +46,4 @@ class ArchetypeTranslationSpec extends ObjectBehavior
         $this->setName('T-Shirt size');
         $this->getName()->shouldReturn('T-Shirt size');
     }
-
-    function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
-    {
-        $date = new \DateTime();
-
-        $this->setName('T-Shirt')->shouldReturn($this);
-    }
 }

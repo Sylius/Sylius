@@ -67,8 +67,8 @@ class LoadProductArchetypeData extends DataFixture
         $archetype->setCode($code);
 
         foreach ($nameTranslations as $locale => $name) {
-            $archetype->setCurrentLocale($locale)
-                ->setName($name);
+            $archetype->setCurrentLocale($locale);
+            $archetype->setName($name);
         }
 
         foreach ($options as $option) {

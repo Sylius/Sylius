@@ -27,9 +27,7 @@ use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslationInterface
 {
      /**
-     * Get id.
-     *
-     * @return int
+     * @return mixed
      */
     public function getId();
     
@@ -48,8 +46,6 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
     public function setAttributes(Collection $attributes);
 
     /**
-     * Adds attribute.
-     *
      * @param BaseAttributeInterface $attribute
      */
     public function addAttribute(BaseAttributeInterface $attribute);
@@ -85,8 +81,6 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
     public function setOptions(Collection $options);
 
     /**
-     * Adds option.
-     *
      * @param BaseOptionInterface $option
      */
     public function addOption(BaseOptionInterface $option);
@@ -123,15 +117,11 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
     public function getParent();
     
     /**
-     * Get code.
-     *
      * @return string
      */
     public function getCode();
 
     /**
-     * Sets code.
-     *
      * @param string $code
      */
     public function setCode($code);
