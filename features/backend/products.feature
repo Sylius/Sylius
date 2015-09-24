@@ -234,3 +234,17 @@ Feature: Products
         Then I should be on the product index page
         And I should see "Product has been successfully deleted."
         And I should not see product with name "Sticker" in that list
+
+    Scenario: Enabling product
+        Given There is disabled product named "Mug"
+        And I am on the page of product "Mug"
+        When I press "Enable"
+        Then I should be on the product index page
+        And I should see "Product has been successfully enabled."
+
+    Scenario: Disabling product
+        Given There is enabled product named "Mug"
+        And I am on the page of product "Mug"
+        When I press "Disable"
+        Then I should be on the product index page
+        And I should see "Product has been successfully disabled."

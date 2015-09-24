@@ -75,6 +75,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     protected $deletedAt;
 
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -94,7 +99,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @return null|ArchetypeInterface
+     * {@inheritdoc}
      */
     public function getArchetype()
     {
@@ -102,7 +107,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|ArchetypeInterface $archetype
+     * @param null|BaseArchetypeInterface $archetype
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -514,5 +519,37 @@ class Product extends AbstractTranslatable implements ProductInterface
                 $variant->setDeletedAt(null);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }

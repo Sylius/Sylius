@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
@@ -39,6 +40,11 @@ class ProductSpec extends ObjectBehavior
     function it_implements_Sylius_product_interface()
     {
         $this->shouldImplement(ProductInterface::class);
+    }
+
+    function it_implements_toggleable_interface()
+    {
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -287,5 +293,19 @@ class ProductSpec extends ObjectBehavior
 
         $this->setDeletedAt($deletedAt);
         $this->shouldNotBeDeleted();
+    }
+
+    function it_is_enabled_by_default()
+    {
+        $this->shouldBeEnabled();
+    }
+
+    function it_is_toggleable()
+    {
+        $this->disable();
+        $this->shouldNotBeEnabled();
+
+        $this->enable();
+        $this->shouldBeEnabled();
     }
 }
