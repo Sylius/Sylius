@@ -24,6 +24,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
+use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,10 +45,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var array
      */
     protected $actions = array(
-        'viewing'  => 'show',
-        'creation' => 'create',
-        'editing'  => 'update',
-        'building' => 'build',
+        'viewing'       => 'show',
+        'creation'      => 'create',
+        'editing'       => 'update',
+        'building'      => 'build',
+        'customization' => 'customize',
     );
 
     /**

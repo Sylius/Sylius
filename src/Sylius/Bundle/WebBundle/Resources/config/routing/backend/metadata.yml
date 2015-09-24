@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_metadata_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.metadata:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Metadata:index.html.twig
+            sortable: true
+            paginate: 50
+            sorting:
+                id: asc
+
+sylius_backend_metadata_customize:
+    path: /customize/{id}
+    methods: [GET, POST, PUT]
+    defaults:
+        _controller: sylius.controller.metadata:customizeAction
+        _sylius:
+            factory:
+                method: createPageMetadataWithGivenId
+                arguments: [$id]
+            template: SyliusWebBundle:Backend/Metadata:customize.html.twig
+            redirect: sylius_backend_metadata_show
+
+sylius_backend_metadata_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.metadata:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_metadata_index
+
+sylius_backend_metadata_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.metadata:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Metadata:show.html.twig
