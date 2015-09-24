@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\RuleInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -40,10 +40,10 @@ class RuleChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_set_rule_types_to_choose_from(OptionsResolverInterface $resolver)
+    function it_should_set_rule_types_to_choose_from(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array('choices' => $this->choices))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

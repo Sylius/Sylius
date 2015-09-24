@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -59,7 +59,7 @@ class RuleTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Rule',
@@ -69,7 +69,7 @@ class RuleTypeSpec extends ObjectBehavior
         $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => RuleInterface::TYPE_ITEM_TOTAL))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
@@ -51,7 +51,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $this->buildForm($builder);
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Customer',
@@ -59,7 +59,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
             'cascade_validation' => true
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

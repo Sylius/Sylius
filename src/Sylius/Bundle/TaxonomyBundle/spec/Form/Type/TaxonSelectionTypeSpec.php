@@ -19,7 +19,7 @@ use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonSelectionTypeSpec extends ObjectBehavior
 {
@@ -72,7 +72,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class'         => null,
@@ -83,7 +83,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
         $resolver->setNormalizers(Argument::withKey('model_transformer'))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()
