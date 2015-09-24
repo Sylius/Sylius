@@ -48,10 +48,9 @@ class CountryType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $self = $this;
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($self) {
+            function (FormEvent $event) {
                 // Adding dynamically created isoName field
                 $nameOptions = array(
                     'label' => 'sylius.form.country.name',
@@ -61,7 +60,7 @@ class CountryType extends AbstractResourceType
                 if ($country instanceof CountryInterface && null !== $country->getIsoName()) {
                     $nameOptions['disabled'] = true;
                 } else {
-                    $nameOptions['choices'] = $self->getAvailableCountries();
+                    $nameOptions['choices'] = $this->getAvailableCountries();
                 }
 
                 $form = $event->getForm();

@@ -11,17 +11,15 @@
 
 namespace spec\Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin \Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class LocaleChoiceTypeSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $localeRepository)
+    function let(RepositoryInterface $localeRepository)
     {
         $this->beConstructedWith($localeRepository);
     }

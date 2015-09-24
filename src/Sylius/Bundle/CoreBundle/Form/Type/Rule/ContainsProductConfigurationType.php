@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Contains product rule configuration form type.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class ContainsProductConfigurationType extends AbstractType
@@ -43,14 +41,12 @@ class ContainsProductConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $variantRepository = $this->variantRepository;
-
         $builder
             ->add('variant', 'sylius_entity_to_identifier', array(
                 'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $variantRepository->getClassName(),
-                'query_builder' => function () use ($variantRepository) {
-                    return $variantRepository->getFormQueryBuilder();
+                'class'         => $this->variantRepository->getClassName(),
+                'query_builder' => function () {
+                    return $this->variantRepository->getFormQueryBuilder();
                 },
                 'constraints'   => array(
                     new NotBlank(),

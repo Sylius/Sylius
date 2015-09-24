@@ -21,16 +21,12 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Taxon choice form form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonChoiceType extends AbstractType
 {
     /**
-     * Taxonon repository.
-     *
      * @var TaxonRepositoryInterface
      */
     protected $taxonRepository;
@@ -66,9 +62,8 @@ class TaxonChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $repository = $this->taxonRepository;
-        $choiceList = function (Options $options) use ($repository) {
-            $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+        $choiceList = function (Options $options) {
+            $taxons = $this->taxonRepository->getTaxonsAsList($options['taxonomy']);
 
             if (null !== $options['filter']) {
                 $taxons = array_filter($taxons, $options['filter']);

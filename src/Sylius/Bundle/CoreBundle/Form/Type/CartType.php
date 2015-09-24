@@ -18,8 +18,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * Cart form.
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class CartType extends BaseCartType
@@ -27,10 +25,8 @@ class CartType extends BaseCartType
     protected $couponRepository;
 
     /**
-     * Constructor.
-     *
      * @param string              $dataClass        FQCN of cart model
-     * @param array               $validationGroups
+     * @param string[]            $validationGroups
      * @param RepositoryInterface $couponRepository
      */
     public function __construct($dataClass, array $validationGroups, RepositoryInterface $couponRepository)
@@ -47,8 +43,6 @@ class CartType extends BaseCartType
     {
         parent::buildForm($builder, $options);
 
-        $couponRepository = $this->couponRepository;
-
         $builder
             ->add('promotionCoupons', 'collection', array(
                 'type'         => 'sylius_promotion_coupon_to_code',
@@ -57,7 +51,7 @@ class CartType extends BaseCartType
                 'by_reference' => false,
                 'label'        => 'sylius.form.cart.coupon',
             ))
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($couponRepository) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $data = $event->getData();
 
                 if (!$data->getPromotionCoupons()->isEmpty()) {
@@ -65,7 +59,7 @@ class CartType extends BaseCartType
                 }
 
                 $data->addPromotionCoupon(
-                    $couponRepository->createNew()
+                    $this->couponRepository->createNew()
                 );
             })
         ;

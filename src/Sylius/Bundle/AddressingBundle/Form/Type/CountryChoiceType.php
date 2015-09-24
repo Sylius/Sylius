@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
@@ -23,14 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CountryChoiceType extends AbstractType
 {
     /**
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $countryRepository;
 
     /**
-     * @param ObjectRepository $repository
+     * @param RepositoryInterface $repository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->countryRepository = $repository;
     }
@@ -40,13 +40,11 @@ class CountryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $countryRepository = $this->countryRepository;
-
-        $choiceList = function (Options $options) use ($countryRepository) {
+        $choiceList = function (Options $options)  {
             if (null === $options['enabled']) {
-                $choices = $countryRepository->findAll();
+                $choices = $this->countryRepository->findAll();
             } else {
-                $choices = $countryRepository->findBy(array('enabled' => $options['enabled']));
+                $choices = $this->countryRepository->findBy(array('enabled' => $options['enabled']));
             }
 
             return new ObjectChoiceList($choices, null, array(), null, 'id');
