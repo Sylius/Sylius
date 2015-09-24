@@ -110,6 +110,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>{{ 'sylius.product.main_taxon'|trans }}</td>
+                    <td>
+                        {%  if product.mainTaxon is not null %}
+                            {{ product.mainTaxon }}
+                        {%  else %}
+                            {{ 'sylius.product.no_taxon'|trans }}
+                        {%  endif %}
+                    </td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.tax_category'|trans }}</td>
                     <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
                 </tr>

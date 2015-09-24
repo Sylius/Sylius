@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
@@ -144,5 +144,16 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setRestrictedZone($zone);
         $this->getRestrictedZone()->shouldReturn($zone);
+    }
+
+    function it_has_no_main_taxon_by_default()
+    {
+      $this->getMainTaxon()->shouldReturn(null);
+    }
+
+    function it_sets_main_taxon(TaxonInterface $taxon)
+    {
+        $this->setMainTaxon($taxon);
+        $this->getMainTaxon()->shouldReturn($taxon);
     }
 }

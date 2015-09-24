@@ -325,9 +325,22 @@ class ProductContext extends DefaultContext
         foreach ($calculatorConfiguration as $channelCode => $price) {
             $channel = $channelRepository->findOneBy(array('code' => $channelCode));
 
-            $finalCalculatorConfiguration[$channel->getId()] = (int) round($price * 100);
+            $finalCalculatorConfiguration[$channel->getId()] = (int)round($price * 100);
         }
 
         return $finalCalculatorConfiguration;
+    }
+
+    /**
+     * @Given product :productName has main taxon :mainTaxonName
+     */
+    public function productHasMainTaxon($productName, $mainTaxonName)
+    {
+        $manager = $this->getEntityManager();
+
+        $product = $this->findOneByName('product', $productName);
+        $mainTaxon = $this->findOneByName('taxon', $mainTaxonName);
+        $product->setMainTaxon($mainTaxon);
+        $manager->flush($product);
     }
 }

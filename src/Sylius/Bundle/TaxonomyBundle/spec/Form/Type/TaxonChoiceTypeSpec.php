@@ -49,12 +49,10 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setRequired(array(
-            'taxonomy',
-            'filter',
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setDefaults(Argument::withKey('taxonomy'))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setDefaults(Argument::withKey('filter'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes('taxonomy', TaxonomyInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver, array());

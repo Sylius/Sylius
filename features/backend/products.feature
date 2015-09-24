@@ -38,6 +38,7 @@ Feature: Products
           And taxonomy "Special" has following taxons:
             | Featured |
             | New      |
+          And product "Sticker" has main taxon "New"
           And I am logged in as administrator
 
     Scenario: Seeing index of all products with simple prices
@@ -190,3 +191,35 @@ Feature: Products
         Given I am on the product index page
         When I click "Mug"
         Then I should be on the page of product "Mug"
+
+    @javascript
+    Scenario: Creating product with main taxon
+        Given I am on the product creation page
+        And I fill in the following:
+            | Name        | The best T-shirt        |
+            | Description | Interesting description |
+            | Price       | 2.99                    |
+        And go to "Categorization" tab
+        And I select "New" from "Main taxon"
+        And I press "Create"
+        Then I should be on the page of product "The best T-shirt"
+        And "Product has been successfully created." should appear on the page
+        And "New" should appear on the page
+
+    Scenario: Selecting the main taxon of product
+        Given I am editing product "Black T-Shirt"
+        And go to "Categorization" tab
+        When I select "New" from "Main taxon"
+        And I press "Save changes"
+        Then I should be on the page of product "Black T-Shirt"
+        And I should see "Product has been successfully updated."
+        And "New" should appear on the page
+
+    @javascript
+    Scenario: Deleting product with main taxon
+        Given I am on the page of product "Sticker"
+        When I press "delete"
+        And I click "delete" from the confirmation modal
+        Then I should be on the product index page
+        And I should see "Product has been successfully deleted."
+        And I should not see product with name "Sticker" in that list

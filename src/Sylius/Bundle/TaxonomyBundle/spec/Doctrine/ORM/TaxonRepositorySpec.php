@@ -15,6 +15,7 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
+use Elastica\Type\AbstractType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
@@ -64,5 +65,48 @@ class TaxonRepositorySpec extends ObjectBehavior
         $query->getOneOrNullResult()->shouldBeCalled();
 
         $this->findOneByPermalink('link');
+    }
+
+    function it_finds_non_root_taxons($em, QueryBuilder $builder, AbstractQuery $query)
+    {
+        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+
+        $builder
+            ->select('o')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->from(Argument::any(), 'o', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->addSelect('translation')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->leftJoin('o.translations', 'translation')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->where('o.parent IS NOT NULL')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->orderBy('o.left')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->getQuery()
+            ->shouldBeCalled()
+            ->willReturn($query)
+        ;
+        $query->getResult()->shouldBeCalled();
+        $this->getNonRootTaxons();
     }
 }

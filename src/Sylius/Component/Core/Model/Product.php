@@ -21,10 +21,9 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
- * Sylius core product entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class Product extends BaseProduct implements ProductInterface
 {
@@ -69,6 +68,11 @@ class Product extends BaseProduct implements ProductInterface
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
+
+    /**
+     * @var BaseTaxonInterface
+     */
+    protected $mainTaxon;
 
     /**
      * Constructor.
@@ -358,5 +362,21 @@ class Product extends BaseProduct implements ProductInterface
     {
         $this->translate()->setShortDescription($shortDescription);
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMainTaxon()
+    {
+       return $this->mainTaxon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMainTaxon(TaxonInterface $mainTaxon = null)
+    {
+        $this->mainTaxon = $mainTaxon;
     }
 }

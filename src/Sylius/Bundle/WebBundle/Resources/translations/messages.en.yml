@@ -734,6 +734,7 @@ sylius:
         no_sku: No SKU
         no_tax_category: No tax category
         no_taxons: There are no taxons for this product
+        no_taxon: There is no main taxon for this product
         options: Options
         variants: Variants
         price: Retail price
@@ -741,6 +742,7 @@ sylius:
         restricted_zone: Restricted zone
         remove_attribute: Remove attribute
         shipping_category: Shipping category
+        main_taxon: Main taxon
         show: View more
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
         show_in_store: show in store
