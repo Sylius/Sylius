@@ -12,85 +12,60 @@
 namespace Sylius\Component\Payment\Model;
 
 /**
- * Credit card model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CreditCard implements CreditCardInterface
 {
     /**
-     * Credit card identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Special token for payment gateway.
-     *
      * @var string
      */
     protected $token;
 
     /**
-     * CC type.
-     *
      * @var string
      */
     protected $type;
 
     /**
-     * Cardholder name.
-     *
      * @var string
      */
     protected $cardholderName;
 
     /**
-     * Card number.
-     *
      * @var string
      */
     protected $number;
 
     /**
-     * Security code.
-     *
      * @var string
      */
     protected $securityCode;
 
     /**
-     * Expiry month number.
-     *
      * @var integer
      */
     protected $expiryMonth;
 
     /**
-     * Expiry year number.
-     *
      * @var integer
      */
     protected $expiryYear;
 
     /**
-     * Creation date.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -126,8 +101,6 @@ class CreditCard implements CreditCardInterface
     public function setToken($token)
     {
         $this->token = $token;
-
-        return $this;
     }
 
     /**
@@ -144,8 +117,6 @@ class CreditCard implements CreditCardInterface
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -162,8 +133,6 @@ class CreditCard implements CreditCardInterface
     public function setCardholderName($cardholderName)
     {
         $this->cardholderName = $cardholderName;
-
-        return $this;
     }
 
     /**
@@ -180,8 +149,6 @@ class CreditCard implements CreditCardInterface
     public function setNumber($number)
     {
         $this->number = $number;
-
-        return $this;
     }
 
     public function getMaskedNumber()
@@ -203,8 +170,6 @@ class CreditCard implements CreditCardInterface
     public function setSecurityCode($securityCode)
     {
         $this->securityCode = $securityCode;
-
-        return $this;
     }
 
     /**
@@ -221,8 +186,6 @@ class CreditCard implements CreditCardInterface
     public function setExpiryMonth($expiryMonth)
     {
         $this->expiryMonth = $expiryMonth;
-
-        return $this;
     }
 
     /**
@@ -239,8 +202,6 @@ class CreditCard implements CreditCardInterface
     public function setExpiryYear($expiryYear)
     {
         $this->expiryYear = $expiryYear;
-
-        return $this;
     }
 
     /**
@@ -257,8 +218,6 @@ class CreditCard implements CreditCardInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -275,7 +234,5 @@ class CreditCard implements CreditCardInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

@@ -94,7 +94,8 @@ class PaymentSpec extends ObjectBehavior
 
     function its_amount_should_accept_only_integer()
     {
-        $this->setAmount(4498)->getAmount()->shouldBeInteger();
+        $this->setAmount(4498);
+        $this->getAmount()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
