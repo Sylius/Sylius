@@ -19,7 +19,7 @@ Configuration reference
                 model: ~
             order:
                 model: Sylius\Component\Order\Model\Order
-                controller: Sylius\Bundle\OrderBundle\Controller\OrderController
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\OrderBundle\Form\Type\OrderType
             order_item:
