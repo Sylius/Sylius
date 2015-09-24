@@ -83,14 +83,11 @@ class ShippingMethodChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $methodsResolver = $this->resolver;
-        $repository = $this->repository;
-
-        $choiceList = function (Options $options) use ($methodsResolver, $repository) {
+        $choiceList = function (Options $options) {
             if (isset($options['subject'])) {
-                $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
+                $methods = $this->resolver->getSupportedMethods($options['subject'], $options['criteria']);
             } else {
-                $methods = $repository->findBy($options['criteria']);
+                $methods = $this->repository->findBy($options['criteria']);
             }
 
             return new ObjectChoiceList($methods, null, array(), null, 'id');
