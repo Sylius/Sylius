@@ -50,7 +50,7 @@ class ContactContext extends DefaultContext
     public function thereAreContactTopics(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('contact_topics');
+        $repository = $this->getRepository('contact_topic');
 
         foreach ($repository->findAll() as $contactTopic) {
             $manager->remove($contactTopic);
