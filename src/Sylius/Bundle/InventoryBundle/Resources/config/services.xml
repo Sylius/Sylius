@@ -53,7 +53,8 @@
         </service>
 
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
-            <argument type="service" id="sylius.factory.stock_movement" />
+            <argument type="service" id="sylius.backorders_handler" />
+            <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
