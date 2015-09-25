@@ -23,9 +23,7 @@ use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';
 
 /**
- * Doctrine ODM MongoDB driver translatable document repository spec.
- *
- * @require \Doctrine\ODM\MongoDB\DocumentManager
+ * @require Doctrine\ODM\MongoDB\DocumentManager
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
@@ -40,15 +38,9 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
     ) {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Document\TranslatableFoo';
 
-        $documentManager
-            ->createQueryBuilder($class->name)
-            ->willReturn($queryBuilder)
-        ;
+        $documentManager->createQueryBuilder($class->name)->willReturn($queryBuilder);
 
-        $queryBuilder
-            ->getQuery()
-            ->willReturn($query)
-        ;
+        $queryBuilder->getQuery()->willReturn($query);
 
         $this->beConstructedWith($documentManager, $unitOfWork, $class);
     }
@@ -90,20 +82,12 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
-            $queryBuilder
-                ->field($property)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->field($property)->willReturn($queryBuilder);
 
-            $queryBuilder
-                ->equals($value)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->equals($value)->willReturn($queryBuilder);
         }
 
         $this->findOneBy($criteria)->shouldReturn(null);
@@ -125,20 +109,12 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
-            $queryBuilder
-                ->field($property)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->field($property)->willReturn($queryBuilder);
 
-            $queryBuilder
-                ->equals($value)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->equals($value)->willReturn($queryBuilder);
         }
 
         $this->findBy($criteria)->shouldReturn(null);
@@ -158,17 +134,9 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         );
 
         foreach ($criteria as $property => $value) {
-            $queryBuilder
-                ->field($property)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->field($property)->willReturn($queryBuilder);
 
-            $queryBuilder
-                ->in($value)
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
+            $queryBuilder->in($value)->willReturn($queryBuilder);
         }
 
         $this->findBy($criteria)->shouldReturn(null);
@@ -181,9 +149,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     function it_creates_Pagerfanta_paginator()
     {
-        $this
-            ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
-        ;
+        $this->createPaginator()->shouldHaveType('Pagerfanta\Pagerfanta');
     }
 }

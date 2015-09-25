@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.9",
+        "php": ">=5.5.9",
 
         "symfony/framework-bundle":        "~2.3",
         "symfony/twig-bundle":             "~2.3",
@@ -41,7 +41,8 @@
         "doctrine/mongodb-odm":      "1.0.*@dev",
         "doctrine/phpcr-bundle":     "~1.1",
         "sylius/rbac-bundle":        "0.16.*",
-        "sylius/translation-bundle": "0.16.*"
+        "sylius/translation-bundle": "0.16.*",
+        "akeneo/phpspec-skip-example-extension": "~1.2"
     },
     "suggest": {
         "doctrine/orm":              "~2.4",
