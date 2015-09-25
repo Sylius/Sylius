@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
- * Order interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
@@ -33,55 +31,38 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     const STATE_RETURNED    = 'returned';
 
     /**
-     * Has the order been completed by user and can be handled.
-     *
      * @return Boolean
      */
     public function isCompleted();
 
-    /**
-     * Mark the order as completed.
-     */
     public function complete();
 
     /**
-     * Return completion date.
-     *
      * @return \DateTime
      */
     public function getCompletedAt();
 
     /**
-     * Set completion time.
-     *
      * @param null|\DateTime $completedAt
      */
     public function setCompletedAt(\DateTime $completedAt = null);
 
     /**
-     * Get order items.
-     *
      * @return Collection|OrderItemInterface[] An array or collection of OrderItemInterface
      */
     public function getItems();
 
     /**
-     * Set items.
-     *
      * @param Collection|OrderItemInterface[] $items
      */
     public function setItems(Collection $items);
 
     /**
-     * Returns number of order items.
-     *
      * @return integer
      */
     public function countItems();
 
     /**
-     * Adds item to order.
-     *
      * @param OrderItemInterface $item
      */
     public function addItem(OrderItemInterface $item);
@@ -94,8 +75,6 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function removeItem(OrderItemInterface $item);
 
     /**
-     * Has item in order?
-     *
      * @param OrderItemInterface $item
      *
      * @return Boolean
@@ -103,8 +82,6 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function hasItem(OrderItemInterface $item);
 
     /**
-     * Get items total.
-     *
      * @return integer
      */
     public function getItemsTotal();
@@ -116,15 +93,11 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function calculateItemsTotal();
 
     /**
-     * Get order total.
-     *
      * @return integer
      */
     public function getTotal();
 
     /**
-     * Set total.
-     *
      * @param integer $total
      */
     public function setTotal($total);
@@ -143,15 +116,11 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function getTotalItems();
 
     /**
-     * Returns total quantity of items in cart.
-     *
      * @return integer
      */
     public function getTotalQuantity();
 
     /**
-     * Checks whether the cart is empty or not.
-     *
      * @return Boolean
      */
     public function isEmpty();
@@ -162,44 +131,33 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function clearItems();
 
     /**
-     * Get order state.
-     *
      * @return string
      */
     public function getState();
 
     /**
-     * Set order state.
-     *
      * @param string $state
      */
     public function setState($state);
 
     /**
-     * Add an identity to this order.  Eg. external identity to refer to an ebay order id
+     * Add an identity to this order. Eg. external identity to refer to an ebay order id.
      *
      * @param IdentityInterface $identity
-     * @return mixed
      */
     public function addIdentity(IdentityInterface $identity);
 
     /**
-     * Remove identity from order.
-     *
      * @param IdentityInterface $identity
      */
     public function removeIdentity(IdentityInterface $identity);
 
     /**
-     * Is the identity already contained in this order?
-     *
      * @param IdentityInterface $identity
      */
     public function hasIdentity(IdentityInterface $identity);
 
     /**
-     * Get all identities for this order.
-     *
      * @return Collection|IdentityInterface[]
      */
     public function getIdentities();

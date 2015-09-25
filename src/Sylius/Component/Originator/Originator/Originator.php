@@ -77,9 +77,7 @@ class Originator implements OriginatorInterface
             ));
         }
 
-        $originAware
-            ->setOriginId($id)
-            ->setOriginType(get_class($origin))
-        ;
+        $originAware->setOriginId($id);
+        $originAware->setOriginType(get_class($origin));
     }
 }

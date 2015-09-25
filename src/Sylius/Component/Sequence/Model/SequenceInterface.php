@@ -14,20 +14,17 @@ namespace Sylius\Component\Sequence\Model;
 interface SequenceInterface
 {
     /**
-     * Return sequence type
      * @return string
      */
     public function getType();
 
     /**
-     * Get the sequence index
      * @return integer
      */
     public function getIndex();
 
     /**
      * Increment sequence type
-     * @return self
      */
     public function incrementIndex();
 }
