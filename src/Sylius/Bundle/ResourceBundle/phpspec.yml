@@ -1,3 +1,6 @@
+extensions:
+    - Akeneo\SkipExampleExtension
+
 suites:
     main:
         namespace: Sylius\Bundle\ResourceBundle

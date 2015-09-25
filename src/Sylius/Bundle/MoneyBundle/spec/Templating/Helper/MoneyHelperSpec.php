@@ -20,7 +20,7 @@ class MoneyHelperSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('de_DE', 'EUR');
+        $this->beConstructedWith('en', 'EUR');
     }
 
     function it_is_initializable()
@@ -35,17 +35,17 @@ class MoneyHelperSpec extends ObjectBehavior
 
     function it_formats_the_integer_amounts_into_string_representation()
     {
-        $this->formatAmount(15)->shouldReturn('0,15 €');
-        $this->formatAmount(2500)->shouldReturn('25,00 €');
-        $this->formatAmount(312)->shouldReturn('3,12 €');
-        $this->formatAmount(500)->shouldReturn('5,00 €');
+        $this->formatAmount(15)->shouldReturn('€0.15');
+        $this->formatAmount(2500)->shouldReturn('€25.00');
+        $this->formatAmount(312)->shouldReturn('€3.12');
+        $this->formatAmount(500)->shouldReturn('€5.00');
     }
 
     function it_allows_to_format_money_in_different_currencies()
     {
-        $this->formatAmount(15, 'USD')->shouldReturn('0,15 $');
-        $this->formatAmount(2500, 'USD')->shouldReturn('25,00 $');
-        $this->formatAmount(312, 'EUR')->shouldReturn('3,12 €');
-        $this->formatAmount(500)->shouldReturn('5,00 €');
+        $this->formatAmount(15, 'USD')->shouldReturn('$0.15');
+        $this->formatAmount(2500, 'USD')->shouldReturn('$25.00');
+        $this->formatAmount(312, 'EUR')->shouldReturn('€3.12');
+        $this->formatAmount(500)->shouldReturn('€5.00');
     }
 }

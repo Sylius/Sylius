@@ -31,7 +31,8 @@
         "phpspec/phpspec":   "~2.1",
         "doctrine/orm":      "~2.2",
         "symfony/form":      "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "akeneo/phpspec-skip-example-extension": "~1.2"
     },
     "config": {
         "bin-dir": "bin"
