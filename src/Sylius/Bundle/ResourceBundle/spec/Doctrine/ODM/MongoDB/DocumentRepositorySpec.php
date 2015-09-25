@@ -20,6 +20,8 @@ use PhpSpec\ObjectBehavior;
 /**
  * Doctrine ODM driver document repository spec.
  *
+ * @require \Doctrine\ODM\MongoDB\DocumentManager
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class DocumentRepositorySpec extends ObjectBehavior

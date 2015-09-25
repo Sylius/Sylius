@@ -46,7 +46,10 @@ before_install:
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - composer self-update
+
     - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-mongodb; fi
+    - if [ $TRAVIS_PHP_VERSION == "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-phpspec-php7; fi
+
     - composer install --prefer-source --no-interaction
 
     - if [ $TEST_SUITE = "javascript" ]; then travis/prepare/prepare-javascript; fi
