@@ -633,7 +633,26 @@ class CoreContext extends DefaultContext
             $shipment->setTracking($shipmentData[2]);
         }
 
+        $shipment->setStockLocation(
+            $this->createStockLocation()
+        );
+
         return $shipment;
+    }
+
+    private function createStockLocation()
+    {
+        $stocklocation = $this->getRepository('stock_location')->createNew();
+
+        $stocklocation->setCode('Bordeaux');
+        $stocklocation->setName('Bordeaux Werehouse');
+        $stocklocation->setAddress(
+            $this->createAddress('Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France')
+        );
+
+        $this->getEntityManager()->persist($stocklocation);
+
+        return $stocklocation;
     }
 
     /**
