@@ -85,7 +85,8 @@
         "coduo/php-matcher":                    "~1.0",
         "phpspec/phpspec":                      "~2.1",
         "phpunit/phpunit":                      "~4.1",
-        "lakion/mink-debug-extension":          "^1.0.1"
+        "lakion/mink-debug-extension":          "^1.0.1",
+        "akeneo/phpspec-skip-example-extension": "~1.2"
     },
     "replace": {
         "sylius/addressing":         "self.version",

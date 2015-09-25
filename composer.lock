@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9223f62cbb3516e3e019a3648c2cc4c1",
+    "hash": "f45642c2c8997291516f7c2ad78c9ac5",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -7653,6 +7653,49 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "akeneo/phpspec-skip-example-extension",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akeneo/PhpSpecSkipExampleExtension.git",
+                "reference": "d7472a3b32aff125762a11d0ed6ee0eb7b3de038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/d7472a3b32aff125762a11d0ed6ee0eb7b3de038",
+                "reference": "d7472a3b32aff125762a11d0ed6ee0eb7b3de038",
+                "shasum": ""
+            },
+            "require": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev",
+                    "dev-1.1": "1.1.x-dev",
+                    "dev-1.0": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Akeneo": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gildas Quéméner",
+                    "email": "gildas@akeneo.com"
+                }
+            ],
+            "description": "Skip your PhpSpec examples through annotations",
+            "time": "2015-09-13 14:38:13"
+        },
         {
             "name": "behat/behat",
             "version": "v3.0.15",
