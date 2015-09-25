@@ -386,6 +386,13 @@ sylius_rbac:
         sylius.order.update: Edit order
         sylius.order.delete: Delete order
 
+        sylius.manage.order_item: Manage order items
+        sylius.order_item.show: Show order item
+        sylius.order_item.index: List order items
+        sylius.order_item.create: Create order item
+        sylius.order_item.update: Edit order item
+        sylius.order_item.delete: Delete order item
+
         sylius.manage.shipment: Manage shipments
         sylius.shipment.show: Show shipment
         sylius.shipment.index: List shipments
@@ -617,6 +624,7 @@ sylius_rbac:
         sylius.manage.taxonomy: [sylius.taxonomy.show, sylius.taxonomy.index, sylius.taxonomy.create, sylius.taxonomy.update, sylius.taxonomy.delete]
         sylius.manage.taxon: [sylius.taxon.show, sylius.taxon.index, sylius.taxon.create, sylius.taxon.update, sylius.taxon.delete]
         sylius.manage.order: [sylius.order.show, sylius.order.index, sylius.order.create, sylius.order.update, sylius.order.delete]
+        sylius.manage.order_item: [sylius.order_item.show, sylius.order_item.index, sylius.order_item.create, sylius.order_item.update, sylius.order_item.delete]
         sylius.manage.shipment: [sylius.shipment.show, sylius.shipment.index, sylius.shipment.create, sylius.shipment.update, sylius.shipment.delete]
         sylius.manage.promotion: [sylius.promotion.show, sylius.promotion.index, sylius.promotion.create, sylius.promotion.update, sylius.promotion.delete]
         sylius.manage.promotion_coupon: [sylius.promotion_coupon.show, sylius.promotion_coupon.index, sylius.promotion_coupon.create, sylius.promotion_coupon.update, sylius.promotion_coupon.delete]
@@ -647,7 +655,7 @@ sylius_rbac:
         sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
-        sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
+        sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.payment, sylius.manage.report]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
