@@ -3,3 +3,6 @@ suites:
         namespace: Sylius\Bundle\ResourceBundle
         psr4_prefix: Sylius\Bundle\ResourceBundle
         src_path: .
+
+extensions:
+    - Akeneo\SkipExampleExtension
