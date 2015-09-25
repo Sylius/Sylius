@@ -95,8 +95,8 @@
             <tag name="form.type" alias="sylius_advanced_order" />
         </service>
         <service id="sylius.form.type.product_stock" class="%sylius.form.type.product_stock.class%">
-+            <tag name="form.type" alias="sylius_product_stock" />
-+        </service>
+            <tag name="form.type" alias="sylius_product_stock" />
+        </service>
         <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
             <argument>%sylius.model.country.class%</argument>
             <argument type="collection">
