@@ -73,8 +73,7 @@
         "twig/twig":                            "~1.11",
         "white-october/pagerfanta-bundle":      "~1.0",
         "willdurand/hateoas-bundle":            "~0.4",
-        "winzou/state-machine-bundle":          "~0.2",
-        "akeneo/phpspec-skip-example-extension": "^1.2"
+        "winzou/state-machine-bundle":          "~0.2"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",
@@ -86,7 +85,8 @@
         "coduo/php-matcher":                    "~1.0",
         "phpspec/phpspec":                      "~2.1",
         "phpunit/phpunit":                      "~4.1",
-        "lakion/mink-debug-extension":          "^1.0.1"
+        "lakion/mink-debug-extension":          "^1.0.1",
+        "akeneo/phpspec-skip-example-extension": "~1.2"
     },
     "replace": {
         "sylius/addressing":         "self.version",
