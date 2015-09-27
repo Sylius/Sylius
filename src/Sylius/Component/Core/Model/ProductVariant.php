@@ -321,7 +321,15 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function isAvailableOnDemand()
     {
         return $this->availableOnDemand;
-     }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAvailableOnDemand($availableOnDemand)
+    {
+        $this->availableOnDemand = $availableOnDemand;
+    }
 
     /**
      * {@inheritdoc}
