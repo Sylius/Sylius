@@ -35,6 +35,9 @@ class ProductType extends BaseProductType
             ->add('price', 'sylius_money', array(
                 'property_path' => 'masterVariant.price'
             ))
+            ->add('onHand', 'integer', array(
+                'property_path' => 'masterVariant.onHand'
+            ))
             ->add('sku', 'text', array(
                 'property_path' => 'masterVariant.sku'
             ))
