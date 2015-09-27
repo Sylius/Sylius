@@ -134,7 +134,7 @@ class CoreContext extends DefaultContext
             $order->setCustomer($customer);
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
-                $order->addShipment($this->createShipment($data['shipment']));
+                $order->addShipment($this->createShipment($data['shipment'], $data['address']));
             }
 
             $order->setNumber(str_pad($currentOrderNumber, 9, 0, STR_PAD_LEFT));
@@ -611,13 +611,14 @@ class CoreContext extends DefaultContext
     /**
      * Create an shipment instance from string.
      *
-     * @param string $string
+     * @param string $shipment
+     * @param string $address
      *
      * @return ShipmentInterface
      */
-    private function createShipment($string)
+    private function createShipment($shipment, $address)
     {
-        $shipmentData = explode(',', $string);
+        $shipmentData = explode(',', $shipment);
         $shipmentData = array_map('trim', $shipmentData);
 
         /* @var $shippingMethod ShippingMethodInterface */
@@ -634,20 +635,22 @@ class CoreContext extends DefaultContext
         }
 
         $shipment->setStockLocation(
-            $this->createStockLocation()
+            $this->createStockLocation($address)
         );
 
         return $shipment;
     }
 
-    private function createStockLocation()
+    private function createStockLocation($address)
     {
         $stocklocation = $this->getRepository('stock_location')->createNew();
 
-        $stocklocation->setCode('Bordeaux');
-        $stocklocation->setName('Bordeaux Werehouse');
+        $addressData = explode(',', $address);
+
+        $stocklocation->setCode($address[3]);
+        $stocklocation->setName($address[3].' Werehouse');
         $stocklocation->setAddress(
-            $this->createAddress('Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France')
+            $this->createAddress($address)
         );
 
         $this->getEntityManager()->persist($stocklocation);
