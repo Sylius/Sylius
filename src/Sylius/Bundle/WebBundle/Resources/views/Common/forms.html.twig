@@ -16,7 +16,9 @@
     {% set type = type|default('text') %}
 
     {% if 'file' == type %}
-        <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' hidden'}) %}
+        <label for="{{ id }}" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.form.choose_file'|trans }}</label>
+        &nbsp;
     {% endif %}
     {{ parent() }}
 {% endspaceless %}
