@@ -7,5 +7,7 @@ sylius:
       first_name: Imię
       last_name: Nazwisko
       email: Email
+      message: Treść wiadomości
+      topic: Temat wiadomości
     contact_topic:
       title: Tytuł

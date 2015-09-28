@@ -9,6 +9,7 @@ sylius:
       country: Land
       first_name: Voornaam
       last_name: Achternaam
+      phone_number: Telefoonnummer
       postcode: Postcode
       street: Straat
       province: Provincie
@@ -29,6 +30,7 @@ sylius:
         province: Provincie
         zone: Zone
       scope: Bereik
+      select_scope: Selecteer bereik
     zone_member_country:
       country: Land
     zone_member_province:

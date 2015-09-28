@@ -23,7 +23,7 @@ sylius:
         products: Produtos
         promotions: Promoções
         properties: Configurar propriedades
-        archetypes: Protótipos de produtos
+        prototypes: Protótipos de produtos
         sales: Pedidos
         shipments: Envios
         shipping_categories: Categorias de envio
@@ -58,7 +58,7 @@ sylius:
         products: Produtos
         promotions: Promoções
         properties: Configurar propriedades
-        archetypes: Protótipos de produtos
+        prototypes: Protótipos de produtos
         sales: Pedidos
         shipments: Envios
         shipping_categories: Categorias de envio

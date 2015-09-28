@@ -3,7 +3,9 @@
 
 sylius:
   extensions:
+    header: kiegészítők
     accelerator:
+      header: Gyorsító
       help: Telepítsd és engedélyezd a PHP gyorstárazók egyikét, pl. az APC-t (erősen ajánlott)!
     apc: APC
     ctype: Ctype
@@ -23,11 +25,14 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
+    header: fájlrendszer
     cache:
+      header: gyorsítótár
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: létezik
     logs:
+      header: naplók
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: nem létezik
@@ -38,6 +43,7 @@ sylius:
     vendors: vendors
     writable: írható
   settings:
+    header: PHP verzió és beállítások
     any: bármely
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -50,6 +56,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: időzóna
     timezone_deprecated:
+      header: Elavult időzóna
       help: 'Ez az időzóna %timezone% elavult. Javítsd ki a php.ini fájlban (a támogatott időzónákat itt találod a PHP súgójában: http://php.net/manual/en/timezones.others.php).'
     version: PHP verzió
     version_recommanded: Ajánlott PHP-verzió

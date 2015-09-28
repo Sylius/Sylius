@@ -5,4 +5,5 @@ sylius:
   form:
     priceable:
       price: Cena
+      calculator: Ceník
       configuration: Nastavení

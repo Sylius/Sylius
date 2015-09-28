@@ -1,24 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: auto
+route: route
 sylius:
   form:
+    action_block:
+      action_name: Actienaam
+      id: Id
     imagine_block:
       parent: Ouder
       internal_name: Interne naam
+      slideshow_small: Slideshow groot (volledige breedte)
+      slideshow_medium: Slideshow medium (inhoud)
+      slideshow_large: Slideshow kleine (zijkant)
     menu:
+      childrens: Kinderen
+      display: Weergeven
+      display_children: Toon kinderen
+      label: Label
       name: Naam
       parent: Ouder
+      route: Route
+      uri: URI
     menu_block:
       body: Inhoud
+      id: Id
       name: Naam
     menu_node_block:
       content: Inhoud
+      display: Weergeven
+      display_children: Toon kinderen
       internal_name: Interne naam
+      label: Label
+      link_type: Koppelingstype
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
+      publishable: Publiceerbaar
+      route: Route
+      uri: URI
     redirect_route:
+      id: Id
       name: Naam
+      route_name: Route_naam
+      uri: URI
     reference_block:
       body: Inhoud
+      id: Id
       title: Titel
     route:
       content: Inhoud
@@ -30,13 +58,20 @@ sylius:
       parent: Ouder
       title: Titel
     slideshow_block:
+      childrens: Kinderen
       internal_name: Interne naam
       parent: Ouder
       title: Titel
     static_content:
       body: Inhoud
+      id: Id
       internal_name: Interne naam
+      menu_nodes: Menu items
       parent: Ouder
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
+      publishable: Publiceerbaar
+      routes: Routes
       title: Titel
     string_block:
       body: Inhoud

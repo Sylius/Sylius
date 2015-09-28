@@ -134,7 +134,7 @@ sylius:
       index: Kuponok
     property:
       index: Tulajdonságok
-    archetype:
+    prototype:
       index: Prototípusok
     sales: Értékesítés
     shipment:
@@ -315,7 +315,7 @@ sylius:
     no_results: Nincsenek konfigurált területek.
     update_header: Terület szerkesztése
     updated_at: Utolsó frissítés
-  login: Bejelentkezés
+  login: Belépés
   login_header: Adminisztráció
   logo: Sylius
   manage: Kezelés
@@ -346,7 +346,7 @@ sylius:
     created_at: Létrehozás időpontja
     general_info: Általános info
     id: Azonosító
-    index_header: Függőben lévő rendelések
+    index_header: Aktuális rendelések
     inventory_tracking: Leltár követés
     items_total: Tételek összesen
     manage: Megrendelések kezelése
@@ -554,7 +554,7 @@ sylius:
     type: típus
     update_header: Tulajdonság szerkesztése
     updated_at: Utolsó frissítés
-  archetype:
+  prototype:
     build: Prototípus felépítése
     build_header: Termék felépítése prototípusból
     create: Prototípus létrehozása

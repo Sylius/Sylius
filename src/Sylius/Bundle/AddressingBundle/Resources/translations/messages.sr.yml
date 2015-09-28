@@ -9,6 +9,7 @@ sylius:
       country: Zemlja
       first_name: Ime
       last_name: Prezime
+      phone_number: Broj telefona
       postcode: Poštanski broj
       street: Ulica
       province: Pokrajina
@@ -25,7 +26,11 @@ sylius:
       name: Ime
       type: Tip
       types:
+        country: Zemlja
         province: Provincija
+        zone: Zona
+      scope: Adresa isporuke
+      select_scope: Izaberite adresu isporuke
     zone_member_country:
       country: Zemlja
     zone_member_province:

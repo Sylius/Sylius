@@ -1,0 +1,79 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+auto: auto
+route: maršrutas
+sylius:
+  form:
+    action_block:
+      action_name: Veiksmo pavadinimas
+      id: Id
+    imagine_block:
+      parent: Motininis elementas
+      internal_name: Vidinis pavadinimas
+      slideshow_small: Didelė prezentacija (pilno pločio)
+      slideshow_medium: Vidutinė prezentacija (turinys)
+      slideshow_large: Maža prezentacija (šone)
+    menu:
+      childrens: Dukteriniai elementai
+      display: Rodymas
+      display_children: Rodyti dukterinius elementus
+      label: Etiketė
+      name: Pavadinimas
+      parent: Motininis elementas
+      route: Maršrutas
+      uri: URI
+    menu_block:
+      body: Bloko turinys
+      id: Id
+      name: Pavadinimas
+    menu_node_block:
+      content: Turinys
+      display: Rodymas
+      display_children: Rodyti dukterinius elementus
+      internal_name: Vidinis pavadinimas
+      label: Etiketė
+      link_type: Saito tipas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
+      publishable: Publikuotinas
+      route: Maršrutas
+      uri: URI
+    redirect_route:
+      id: Id
+      name: Pavadinimas
+      route_name: Maršruto_pavadinimas
+      uri: URI
+    reference_block:
+      body: Bloko turinys
+      id: Id
+      title: Pavadinimas
+    route:
+      content: Turinys
+      name: Pavadinimas
+      parent: Motininis elementas
+    simple_block:
+      body: Bloko turinys
+      internal_name: Vidinis pavadinimas
+      parent: Motininis elementas
+      title: Antraštė
+    slideshow_block:
+      childrens: Dukteriniai elementai
+      internal_name: Vidinis pavadinimas
+      parent: Motininis elementas
+      title: Pavadinimas
+    static_content:
+      body: Bloko turinys
+      id: Id
+      internal_name: Vidinis pavadinimas
+      menu_nodes: Meniu elementai
+      parent: Motininis elementas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
+      publishable: Publikuotinas
+      routes: Maršrutai
+      title: Pavadinimas
+    string_block:
+      body: Bloko turinys
+      id: ID
+      name: Pavadinimas

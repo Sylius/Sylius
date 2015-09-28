@@ -8,3 +8,7 @@ sylius:
     option:
       name: Denumire internă
       presentation: Prezentare
+      values: Valori posibile
+    option_value:
+      add_value: Adaugă valoare
+      value: Valoare

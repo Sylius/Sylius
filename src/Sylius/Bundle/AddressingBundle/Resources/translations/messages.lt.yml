@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Miestas
+      company: įmonė
+      country: Šalis
+      first_name: Vardas
+      last_name: Pavardė
+      phone_number: Telefono numeris
+      postcode: Pašto kodas
+      street: Gatvė
+      province: Provincija
+    country:
+      iso_name: ISO pavadinimas
+      name: Pavadinimas
+      provinces: Provincijos
+      select: Pasirinkite
+    province:
+      name: Pavadinimas
+      select: Pasirinkite
+    zone:
+      members: Nariai
+      name: Pavadinimas
+      type: Tipas
+      types:
+        country: Šalis
+        province: Provincija
+        zone: Zona
+      scope: Apimtis
+      select_scope: Pasirinkite sritį
+    zone_member_country:
+      country: Šalis
+    zone_member_province:
+      province: Provincija
+    zone_member_zone:
+      zone: Zona

@@ -4,3 +4,5 @@
 sylius:
   payment:
     complete: Platba bola dokončená.
+    cancel: Platba bola zrušená.
+    transition_fail: Akcia nemohla byť vykonaná vzhľadom na aktuálny stav platby

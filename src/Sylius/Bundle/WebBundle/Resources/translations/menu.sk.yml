@@ -46,6 +46,7 @@ sylius:
         exchange_rates: Výmenné kurzy
         general_settings: Základné nastavenia
         groups: Skupiny
+        homepage: Naspäť na stránku
         locales: Jazyky
         new_order: Pridať novú objednávku
         new_promotion: Pridať novú akciu

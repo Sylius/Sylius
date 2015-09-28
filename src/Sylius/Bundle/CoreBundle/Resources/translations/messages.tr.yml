@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
       payment_method: Ödeme Şekli
       shipping_method: Gönderim şekli
+    coupon:
+      per_user_usage_limit: Kullanıcı Bazlı Limit
     group:
       name: Ad
       roles: Roller

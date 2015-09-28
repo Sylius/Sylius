@@ -7,5 +7,7 @@ sylius:
       first_name: Fornavn
       last_name: Efternavn
       email: Email
+      message: Besked
+      topic: Emne
     contact_topic:
       title: Titel

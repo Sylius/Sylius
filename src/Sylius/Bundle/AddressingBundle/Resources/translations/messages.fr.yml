@@ -9,9 +9,10 @@ sylius:
       country: Pays
       first_name: Prénom
       last_name: Nom
+      phone_number: Téléphone
       postcode: Code postal
       street: Adresse
-      province: Etat
+      province: Région
     country:
       iso_name: Nom ISO
       name: Nom
@@ -26,9 +27,10 @@ sylius:
       type: Type
       types:
         country: Pays
-        province: Etat
+        province: Région
         zone: Zone
       scope: "Champ d'application"
+      select_scope: "Sélectionnez le champ d'application"
     zone_member_country:
       country: Pays
     zone_member_province:

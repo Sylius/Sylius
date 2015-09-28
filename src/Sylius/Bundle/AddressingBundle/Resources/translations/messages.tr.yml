@@ -9,9 +9,10 @@ sylius:
       country: Ülke
       first_name: Ad
       last_name: Soyad
+      phone_number: Telefon
       postcode: Posta kodu
-      street: Adres
-      province: İl
+      street: Sokak
+      province: Eyalet
     country:
       iso_name: Ülke kodu
       name: Ülke adı
@@ -19,19 +20,20 @@ sylius:
       select: Ülke seçin
     province:
       name: Ad
-      select: Ülke seçin
+      select: Seçiniz
     zone:
       members: Üyeler
       name: Bölge adı
       type: Türü
       types:
         country: Ülke
-        province: İl
+        province: Eyalet
         zone: Bölge
       scope: Kapsam
+      select_scope: Ölçek seçiniz
     zone_member_country:
       country: Ülke
     zone_member_province:
-      province: İl
+      province: Eyalet
     zone_member_zone:
       zone: Bölge

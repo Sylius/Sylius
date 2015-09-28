@@ -9,6 +9,7 @@ sylius:
       country: Maa
       first_name: Etunimi
       last_name: Sukunimi
+      phone_number: Puhelinnumero
       postcode: Postinumero
       street: Katuosoite
       province: Lääni

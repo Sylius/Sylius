@@ -5,5 +5,19 @@ sylius:
   contact_request:
     first_name:
       not_blank: Zadajte svoje krstné meno.
+      min_length: Krstné menu je príliž krátke.
+      max_length: Krstné meno je príliž dlhé.
     last_name:
       not_blank: Zadajte svoje priezvisko.
+      min_length: Priezvisko je príliž krátke.
+      max_length: Priezvisko je prílž dlhé.
+    email:
+      not_blank: Zadajte Váš email.
+      email: Email je neplatný.
+    message:
+      not_blank: Zadajte text správy.
+  contact_topic:
+    title:
+      not_blank: Zadajte tému správy.
+      min_length: Téma je príliž krátka.
+      max_length: Téma je príliž dlhá.

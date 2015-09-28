@@ -3,6 +3,11 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Количество
+        equal: равно
+      type: Тип
     shipment:
       state: Cтатус
       states:

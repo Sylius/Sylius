@@ -5,4 +5,5 @@ sylius:
   form:
     priceable:
       price: Ár
+      calculator: Árazás
       configuration: Konfiguráció

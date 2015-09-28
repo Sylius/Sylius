@@ -7,5 +7,7 @@ sylius:
       first_name: Meno
       last_name: Priezvisko
       email: Email
+      message: Správa
+      topic: Téma
     contact_topic:
       title: Názov

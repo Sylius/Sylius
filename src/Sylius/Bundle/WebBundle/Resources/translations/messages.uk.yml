@@ -12,7 +12,7 @@ sylius:
         create: Створити нову адресу
         delete: Видалити
         edit: Редагувати
-        shipping: Встановити як адресу доставки за замовчуванням
+        shipping: Встановити, як адресу доставки за замовчуванням
       create: Створити нову адресу
       default:
         billing: Платіжна адреса за замовчуванням
@@ -358,12 +358,15 @@ sylius:
     number: Номер
     payment: Оплата
     payment_state: Статус платежу
+    payment_states:
+      balance_due: Сума до сплати
     promotion_total: Загальна сума промо-знижки
     recent_header: Останні замовлення
     shipment_state: Статус доставки
     shipment_states:
       pending: В очікуванні
     shipments: Відправки
+    release_inventory: Інвентаризація випуску
     inventory_unit:
       backorder: Звільняється
       fulfill: Виконано
@@ -462,6 +465,7 @@ sylius:
     create_header: Новий товар
     description: Опис
     generate_variants: Генерувати варіанти
+    index_by_taxon_header: 'Товари <small> категорії "%taxon%" </small>'
     manage: Керування продуктами
     name: Ім’я
     no_description: '<i>Немає опису...</i>'
@@ -482,6 +486,7 @@ sylius:
     show: Детальніше
     show_in_store: показати в магазині
     sku: Артикул
+    stock: Кількість на складі
     tabs:
       categorization: Категоризація
       images: Зображення
@@ -650,11 +655,20 @@ sylius:
     manage: Керувати класифікаторами
     name: Ім’я
     no_image: Немає зображення для цього класифікатору
+    show_header: 'Таксономія <small><strong>%name%</strong></small>'
+    update_header: Редагування таксономії
+  total_quantity: Загальна кількість
   unknown: Не вказаний
   user:
     billing_address: Платіжна адреса
+    create: Створити користувача
+    create_header: Новий користувач
     email: Електронна пошта
+    enabled: Підтверджено?
+    filter:
+      all: Показати всіх користувачів
     first_name: Iм’я
+    general_info: 'Загальна інформація користувача "%username%"'
     id: ID
     last_login: Останній вхід
     last_name: Прізвище
@@ -682,6 +696,7 @@ sylius:
     options: Опції
     price: Ціна
     sku: Артикул
+    stock: Кількість на складі
     update_header: Редагування варіанту
   "yes": true
   zone:

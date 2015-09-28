@@ -1,3 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Angiv attributtens navn.
+      min_length: 'Attributnavn skal være mindst 1 tegn langt. | Attributnavn skal være mindst {{ limit }} tegn langt.'
+  attribute_value:
+    attribute:
+      not_blank: Vælg venligst attributten.
+    value:
+      not_blank: Angiv attributtens navn.

@@ -8,6 +8,7 @@ sylius:
     restricted_zone: Ez a termék nem áll rendelkezése az Ön országában.
     success: Köszönjük a rendelést!
     canceled: Az Ön fizetése törölve lett.
+    processing: A fizetés jelenleg feldolgozás alatt áll.
     failed: A fizetés el lett utasítva.
     unknown: Ismeretlen hiba fizetés közben.
     out_of_stock: 'A raktáron csak %quantity% %name% van.'

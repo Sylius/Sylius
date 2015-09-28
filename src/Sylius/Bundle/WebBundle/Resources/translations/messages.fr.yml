@@ -134,8 +134,8 @@ sylius:
       index: Coupons de réduction
     property:
       index: Propriétés
-    archetype:
-      index: archetypes
+    prototype:
+      index: Prototypes
     sales: Ventes
     shipment:
       index: Expéditions
@@ -310,7 +310,7 @@ sylius:
     code: Code
     create: Créer des paramètres régionaux
     create_header: Ajout de nouveaux paramètres régionaux
-    enabled: Activé
+    enabled: Activée
     index_header: Index de tous les paramètres régionaux configurés
     no_results: "Il n'y a aucun paramètres régionaux configurés."
     update_header: Modifier les paramètres régionaux
@@ -554,17 +554,17 @@ sylius:
     type: type
     update_header: "Edition d'une propriété"
     updated_at: dernière modification
-  archetype:
-    build: Conception de archetype
-    build_header: "Conception d'un produit d'après un archetype"
-    create: Créer un archetype
-    create_header: Nouveau archetype
-    index_header: archetypes de produits
+  prototype:
+    build: Conception de prototype
+    build_header: "Conception d'un produit d'après un prototype"
+    create: Créer un prototype
+    create_header: Nouveau prototype
+    index_header: Prototypes de produits
     name: nom
-    no_results: Aucun archetype défini
+    no_results: Aucun prototype défini
     options: options
     properties: propriétés
-    update_header: Modification du archetype
+    update_header: Modification du prototype
     updated_at: dernière modification
   province:
     provinces: Province

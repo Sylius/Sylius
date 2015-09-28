@@ -3,4 +3,5 @@
 
 form:
   collection:
+    add: Ekle
     delete: Sil
