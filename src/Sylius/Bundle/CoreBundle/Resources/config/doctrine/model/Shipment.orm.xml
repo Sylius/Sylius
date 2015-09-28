@@ -22,7 +22,7 @@
         </many-to-one>
 
         <many-to-one field="stockLocation" target-entity="Sylius\Component\Inventory\Model\StockLocationInterface">
-            <join-column name="stock_location_id" referenced-column-name="id" nullable="false" />
+            <join-column name="stock_location_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>
 
