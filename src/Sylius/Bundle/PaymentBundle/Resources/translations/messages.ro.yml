@@ -1,13 +1,30 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     credit_card:
+      cardholder_name: Numele titularului de card
       expiry_month: Luna expirării
       expiry_year: Anul expirării
       number: Numărul cardului
       security_code: Codul de securitate (CVV)
       type: Tipul cardului
+    payment:
+      amount: Suma de plată
+      method: Modul de plată
+      state:
+        0: Statusul plății
+        checkout: Trimite comanda
+        completed: Finalizată
+        failed: Eșuată
+        new: Nouă
+        pending: În așteptare
+        processing: În curs de procesare
+        unknown: Necunoscută
+        void: Nulă
+        cancelled: Anulată
+        refunded: Rambursată
     payment_method:
       description: Descriere
+      enabled: Activată?
+      gateway: Gateway
+      name: Nume

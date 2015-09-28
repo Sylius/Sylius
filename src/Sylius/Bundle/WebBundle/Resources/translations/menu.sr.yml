@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   backend:
     menu:
@@ -20,7 +18,7 @@ sylius:
         products: Poroizvodi
         promotions: Promocije
         properties: Konfiguracija atributa
-        archetypes: Prototipovi proizvoda
+        prototypes: Prototipovi proizvoda
         sales: Narudžbine
         shipments: Pošiljke
         shipping_categories: Kategorije slanja
@@ -48,7 +46,7 @@ sylius:
         products: Proizvodi
         promotions: Promocije
         properties: Konfiguracija atributa
-        archetypes: Prototipovi
+        prototypes: Prototipovi
         sales: Narudžbine
         shipments: Pošiljke
         shipping_categories: Kategorije slanja

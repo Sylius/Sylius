@@ -1,0 +1,8 @@
+---
+sylius:
+  exchange_rate:
+    currency:
+      not_blank: Pasirinkite valiutą.
+    rate:
+      not_blank: Įveskite kursą.
+    unique: Valiuta turi būti unikali.

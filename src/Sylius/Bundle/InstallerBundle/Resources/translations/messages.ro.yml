@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 $: '$'
 sylius:
   flashes:
@@ -8,27 +6,38 @@ sylius:
   form:
     configuration:
       database:
+        header: Conexiune la baza de date
         driver:
+          header: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
           postgresql: PostgreSQL
           sqlite: SQLite
-        password: Parola
+        host: Host
+        name: Nume
+        password: Parolă
         port: Port
         user: Utilizator
       locale:
-        locale: Setări regionale
+        header: Setări de localizare
+        currency: Monedă
+        locale: Cod localizare
       mailer:
-        password: Parola
+        header: Setări e-mail
+        host: Host
+        password: Parolă
         transport:
+          header: Transport
           gmail: Gmail
+          mail: Mail
           sendmail: Sendmail
           smtp: SMTP
         user: Utilizator
     setup:
-      email: Email
-      plain_password: Parola
+      email: E-mail
+      load_fixtures: Încarcă fixture-urile
+      plain_password: Parolă
       username: Nume de utilizator
   process:
     step:
@@ -36,9 +45,17 @@ sylius:
         button:
           back: Înapoi
           install: Instalează
+          next: Pasul următor
+        header: 'Verificare cerinţe sistem <small>Sylius installer</small>'
         table:
-          required: necesare
-          status: stare
+          current: curent
+          required: obligatoriu
+          status: status
+      configure:
+        header: 'Configuraţie <small>Sylius installer</small>'
+      setup:
+        header: 'Configurare administrare <small>Sylius installer</small>'
       welcome:
-        content: '<p>Bun venit la programul de instalare Sylius.</p>'
+        content: '<p>Bun venit la instalarea Sylius.</p>'
+        header: 'Bine ați venit <small>Sylius installer</small>'
 €: €

@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     address:
@@ -9,6 +7,7 @@ sylius:
       country: Negara
       first_name: Nama Depan
       last_name: Nama belakang
+      phone_number: Nomor telepon
       postcode: Kodepos
       street: Alamat
       province: Provinsi
@@ -25,7 +24,11 @@ sylius:
       name: Nama
       type: Jenis
       types:
+        country: Negara
+        province: Provinsi
         zone: Zona
+      scope: Ruang lingkup
+      select_scope: Pilih cakupan
     zone_member_country:
       country: Negara
     zone_member_province:

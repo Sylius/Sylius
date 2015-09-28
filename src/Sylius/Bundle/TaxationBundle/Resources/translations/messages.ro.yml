@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     tax_category:
@@ -9,5 +7,6 @@ sylius:
     tax_rate:
       category: Categorie
       name: Nume
-      amount: Suma
+      amount: Valoare
+      included_in_price: Inclusă în preţ?
       calculator: Calculator

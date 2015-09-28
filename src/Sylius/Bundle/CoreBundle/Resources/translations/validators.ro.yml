@@ -1,7 +1,35 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   group:
     name:
-      not_blank: Introduceți numele grupului.
+      max: 'Numele grupului nu poate depăși {{ limit }} de caractere.'
+      min: 'Numele grupului trebuie să conțină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați numele grupului.
+  locale:
+    code:
+      not_blank: Vă rugăm să completați codul localizării.
+      unique: Acest cod de localizare există deja.
+  user:
+    first_name:
+      max: 'Prenumele nu poate depăși {{ limit }} caractere.'
+      min: 'Prenumele trebuie să conţină cel puțin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați prenumele.
+    last_name:
+      max: 'Numele nu poate depăși {{ limit }} de caractere.'
+      min: 'Numele trebuie să conţină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați numele.
+  product_variant:
+    onHand:
+      min: 'Stocul curent trebuie să fie mai mare decât {{ limit }}.'
+      not_blank: Vă rugăm să introduceţi stocul curent.
+    price:
+      min: Preţul nu poate fi negativ.
+      not_blank: Vă rugăm să completați preţul.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Vă rugăm să introduceţi zona pentru metoda de livrare.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Vă rugăm să introduceţi zona de taxă.

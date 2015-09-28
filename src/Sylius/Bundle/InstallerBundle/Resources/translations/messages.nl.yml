@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 $: '$'
 sylius:
   flashes:
@@ -8,7 +6,9 @@ sylius:
   form:
     configuration:
       database:
+        header: Databaseverbinding
         driver:
+          header: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -20,12 +20,15 @@ sylius:
         port: Poort
         user: Gebruiker
       locale:
+        header: Locatieinstellingen
         currency: Valuta
         locale: Locatie
       mailer:
+        header: E-mailinstellingen
         host: Host
         password: Wachtwoord
         transport:
+          header: Transport
           gmail: Gmail
           mail: Mail
           sendmail: Sendmail

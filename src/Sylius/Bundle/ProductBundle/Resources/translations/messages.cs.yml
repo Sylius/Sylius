@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   label:
     product:
@@ -10,6 +8,9 @@ sylius:
       available_on: Dostupný od
       meta_keywords: Meta klíčová slova
       meta_description: Meta popis
-    archetype:
+    property:
+      name: Interní název
+      presentation: Prezentace
+    prototype:
       name: Jméno
       properties: Vlastnosti

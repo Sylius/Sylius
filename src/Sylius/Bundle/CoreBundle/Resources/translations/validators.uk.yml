@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   group:
     name:
@@ -23,6 +21,7 @@ sylius:
   product_variant:
     onHand:
       min: 'На руках має бути більше, ніж {{ limit }}.'
+      not_blank: Будь ласка, вкажіть кількість товару на складі.
     price:
       min: Ціна не має бути негативною.
       not_blank: Будь ласка, введіть ціну.

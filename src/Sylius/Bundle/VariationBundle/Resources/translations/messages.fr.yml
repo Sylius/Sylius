@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     variant:
@@ -12,5 +10,3 @@ sylius:
     option_value:
       add_value: Ajouter une valeur
       value: Valeur
-    archetype:
-      options: Options

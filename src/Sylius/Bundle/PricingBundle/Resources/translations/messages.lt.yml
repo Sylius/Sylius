@@ -1,0 +1,7 @@
+---
+sylius:
+  form:
+    priceable:
+      price: Kaina
+      calculator: Kainodara
+      configuration: Konfigūracija

@@ -1,0 +1,6 @@
+---
+sylius:
+  form:
+    locale:
+      code: Код
+      enabled: Овозможено

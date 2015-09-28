@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   backend:
     menu:
@@ -23,7 +21,7 @@ sylius:
         products: Prodotti
         promotions: Promozioni
         properties: Configura proprietà
-        archetypes: Prodotti prototipo
+        prototypes: Prodotti prototipo
         sales: Ordini
         shipments: Spedizioni
         shipping_categories: Categorie di spedizione
@@ -58,7 +56,7 @@ sylius:
         products: Prodotti
         promotions: Promozioni
         properties: Configura proprietà
-        archetypes: Prototipi di prodotto
+        prototypes: Prototipi di prodotto
         sales: Ordini
         shipments: Spedizioni
         shipping_categories: Categorie spedizioni

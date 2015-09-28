@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   checkout:
     shipping_method:
@@ -22,6 +20,8 @@ sylius:
         different_billing_address: Gebruik een ander factuuradres?
       payment_method: Betalingsmethode
       shipping_method: Verzendmethode
+    coupon:
+      per_user_usage_limit: Gebruikslimieten per gebruiker
     group:
       name: Naam
       roles: Rollen
@@ -36,7 +36,7 @@ sylius:
       number: Nummer
       total_from: Van
       total_to: Tot
-      payment_state: Betaal status
+      payment_state: Betaalstatus
     page:
       body: Inhoud
       id: ID

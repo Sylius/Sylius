@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   cart:
     restricted_zone_removal: 'Hem retirat el producte %product%, ja que no està disponible al seu país.'

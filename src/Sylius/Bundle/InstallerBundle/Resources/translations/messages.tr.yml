@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 $: '$'
 sylius:
   flashes:
@@ -8,7 +6,9 @@ sylius:
   form:
     configuration:
       database:
+        header: Veritabanı bağlantısı
         driver:
+          header: Sürücü
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -20,12 +20,15 @@ sylius:
         port: Port
         user: Kullanıcı
       locale:
+        header: Yerel ayarlar
         currency: Kur
         locale: Bölgesel ayar
       mailer:
+        header: E-Posta ayarları
         host: Sunucu
         password: Şifre
         transport:
+          header: Taşıma
           gmail: Gmail
           mail: Posta
           sendmail: Sendmail

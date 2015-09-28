@@ -1,28 +1,50 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     action:
+      fixed_discount_configuration:
+        amount: Valoare
       percentage_discount_configuration:
         percentage: Procent
       shipping_discount_configuration:
         percentage: Procent
       type: Tip
     rule:
-      item_total_configuration:
+      taxonomy_configuration:
+        taxons: Categorii
+        exclude: Exclude
+      item_count_configuration:
+        count: Număr
         equal: Egal
+      item_total_configuration:
+        amount: Valoare
+        equal: Egal
+      nth_order_configuration:
+        nth: Al n-lea
       user_loyality_configuration:
+        time: Înregistrat de
         unit:
           days: Zile
           weeks: Săptămâni
           months: Luni
           years: Ani
+          0: Unitate
+        after: Utilizator creat după perioada
+      shipping_country_configuration:
+        country: Țară
       type: Tip
     coupon:
       code: Cod
+      usage_limit: Limita de utilizare
+    coupon_generate_instruction:
+      amount: Valoare
+      usage_limit: Limita de utilizare
     promotion:
       actions: Acțiuni
+      coupon_based: Bazat pe cod promoțional
       description: Descriere
       ends_at: Se termină la
+      name: Nume
+      rules: Reguli
       starts_at: Începe la
+      usage_limit: Limita de utilizare

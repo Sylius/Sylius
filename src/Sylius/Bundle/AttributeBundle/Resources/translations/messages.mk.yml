@@ -1,0 +1,6 @@
+---
+sylius:
+  form:
+    attribute:
+      name: Интерно име
+      presentation: Презентација

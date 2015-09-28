@@ -1,3 +1,16 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  attribute:
+    name:
+      not_blank: Vă rugăm să completați numele atributului.
+      min_length: 'Numele atributului trebuie să conțină cel puţin 1 caracter.|Numele atributului trebuie să conțină cel puţin {{ limit }} caractere.'
+      max_length: 'Numele atributului nu poate depăși 1 caracter.|Numele atributului nu poate depăși {{ limit }} de caractere.'
+    presentation:
+      not_blank: Vă rugăm să introduceţi prezentarea atributului.
+      min_length: 'Prezentarea atributului trebuie să conțină cel puţin 1 caracter.|Prezentarea atributului trebuie să conțină cel puţin {{ limit }} caractere.'
+      max_length: 'Prezentarea atributului nu poate depăși 1 caracter.|Prezentarea atributului nu poate depăși {{ limit }} de caractere.'
+  attribute_value:
+    attribute:
+      not_blank: Vă rugăm să alegeți atributul.
+    value:
+      not_blank: Vă rugăm să completați valoarea atributului.

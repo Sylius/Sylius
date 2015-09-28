@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   backend:
     menu:
@@ -74,6 +72,7 @@ sylius:
     menu:
       account:
         addresses: Adresář
+        homepage: Domů
         orders: Objednávky / faktury
         password: Heslo
         profile: Osobní údaje
@@ -86,3 +85,9 @@ sylius:
         login: Přihlásit
         logout: Odhlásit
         register: Registrace
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   checkout:
     shipping_method:
@@ -22,6 +20,8 @@ sylius:
         different_billing_address: Utilizar um endereço diferente para cobrança?
       payment_method: Forma de Pagamento
       shipping_method: Forma de envio
+    coupon:
+      per_user_usage_limit: Uso limitado por usuário
     group:
       name: Nome
       roles: Papéis

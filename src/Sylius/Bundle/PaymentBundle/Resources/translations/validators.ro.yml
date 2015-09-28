@@ -1,9 +1,26 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   credit_card:
+    cardholder_name:
+      min_length: 'Numele titularului cardului trebuie să conțină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați numele titularului cardului.
+    expiry_month:
+      max_range: 'Luna de expirare a cardului de credit trebuie să fie între {{ min }} şi {{ max }}.'
+      min_range: 'Luna de expirare a cardului de credit trebuie să fie între {{ min }} şi {{ max }}.'
+      not_blank: Vă rugăm să alegeți luna de expirare.
+    number:
+      not_blank: Vă rugăm să completați numărul cardului.
+      luhn: Numărul cardului de credit nu este valid.
     security_code:
-      not_blank: Introduceți codul de securitate.
+      not_blank: Vă rugăm să completați codul de securitate.
+      max_length: 'Codul de verificare a cardului de credit trebuie să conțină cel puţin {{ limit }} cifre.'
+      min_length: 'Codul de verificare a cardului de credit trebuie să fie de cel mult {{ limit }} cifre.'
     expiry_year:
-      not_blank: Alegeți anul expirării.
+      not_blank: Vă rugăm să alegeți anul expirării.
+  payment_method:
+    gateway:
+      not_blank: Vă rugăm să alegeți gateway-ul de plată.
+    name:
+      max_length: 'Numele metodei de plată trebuie să conţină cu {{ limit }} caractere mai mult sau mai puţin.'
+      min_length: 'Numele metodei de plată trebuie să conțină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați numele metodei de plată.

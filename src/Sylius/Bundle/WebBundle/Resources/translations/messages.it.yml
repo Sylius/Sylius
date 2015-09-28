@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 email:
   order_confirmation:
     subject: Oggetto
@@ -134,7 +132,7 @@ sylius:
       index: Codici promozionali
     property:
       index: Proprietà
-    archetype:
+    prototype:
       index: Prototipi
     sales: Vendite
     shipment:
@@ -554,7 +552,7 @@ sylius:
     type: tipo
     update_header: Modificando proprietà
     updated_at: ultima modifica
-  archetype:
+  prototype:
     build: Costruisci prototipo
     build_header: Costruisci un prodotto da un prototipi
     create: Crea prototipo

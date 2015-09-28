@@ -1,10 +1,51 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   product:
     sku:
-      not_blank: Introduceți codul SKU al produsului.
+      not_blank: Vă rugăm să completați codul SKU al produsului.
       unique: Codul SKU trebuie să fie unic.
     name:
-      not_blank: Introduceți numele produsului.
+      not_blank: Vă rugăm să completați numele produsului.
+      min_length: 'Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.'
+    description:
+      not_blank: Vă rugăm să completați descrierea produsului.
+      min_length: 'Descrierea produsului trebuie să conţină cel puţin 1 caracter.|Descrierea produsului trebuie să conţină cel puţin {{ limit }} caractere.'
+  variant:
+    sku:
+      not_blank: Vă rugăm să completați codul SKU a variantei.
+      unique: Codul SKU a variantei trebuie să fie unic.
+    combination: O variantă cu acest set de opţiuni este setată deja.
+  option:
+    name:
+      not_blank: Vă rugăm să completați numele opţiunii.
+      min_length: 'Numele opţiunii trebuie să conţină cel puţin un caracter.|Numele opţiunii trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Numele opţiunii nu poate depăși un caracter.|Numele opțiunii nu poate depăși {{ limit }} de caractere.'
+    presentation:
+      not_blank: Vă rugăm să introduceţi prezentarea opţiunii.
+      min_length: 'Prezentarea atributului trebuie să conţină cel puţin 1 caracter.|Prezentarea atributului trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Prezentarea opţiunii nu poate depăși un caracter.|Prezentarea opţiunii nu poate depăși {{ limit }} de caractere.'
+    values:
+      min_count: 'Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.|Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.'
+  option_value:
+    value:
+      not_blank: Vă rugăm să completați valoarea opțiunii.
+  property:
+    name:
+      not_blank: Vă rugăm să completați numele atributului.
+      min_length: 'Numele atributului trebuie să conţină cel puţin 1 caracter.|Numele atributului trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Numele atributului nu poate depăși un caracter.|Numele atributului nu poate depăși {{ limit }} de caractere.'
+    presentation:
+      not_blank: Vă rugăm să completați prezentarea atributului.
+      min_length: 'Prezentarea atributului trebuie să conţină cel puţin 1 caracter.|Prezentarea atributului trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Prezentarea atributului nu poate depăși un caracter.|Prezentarea atributului nu poate depăși {{ limit }} de caractere.'
+  product_property:
+    property:
+      not_blank: Vă rugăm să alegeți un atribut.
+    value:
+      not_blank: Vă rugăm să completați valoarea atributului.
+  prototype:
+    name:
+      not_blank: Vă rugăm să completați numele șablonului.
+      min_length: 'Numele șablonului trebuie să conţină cel puţin 1 caracter.|Numele șablonului trebuie să conţină cel puţin {{ limit }} caractere.'
+      max_length: 'Numele șablonului nu poate depăși un caracter.|Numele șablonului nu poate depăși {{ limit }} de caractere.'

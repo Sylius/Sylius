@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     variant:
@@ -8,3 +6,7 @@ sylius:
     option:
       name: Denumire internă
       presentation: Prezentare
+      values: Valori posibile
+    option_value:
+      add_value: Adaugă valoare
+      value: Valoare

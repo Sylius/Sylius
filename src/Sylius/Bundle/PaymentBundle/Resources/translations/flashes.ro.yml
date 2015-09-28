@@ -1,3 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  payment:
+    complete: Plata a fost finalizată.
+    cancel: Plata a fost anulată.
+    transition_fail: Acţiunea nu a putut fi efectuată având în vedere starea actuală a plății
