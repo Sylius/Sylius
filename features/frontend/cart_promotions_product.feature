@@ -14,7 +14,7 @@ Feature: Checkout product promotion
             | Etch   | 20    |
             | Woody  | 125   |
             | Sarge  | 25    |
-            | Ubu    | 200   |
+            | Ubuntu | 200   |
           And the following promotions exist:
             | name                | description                      |
             | Free product        | Almost free product over 100 eur |
@@ -22,8 +22,8 @@ Feature: Checkout product promotion
             | type       | configuration |
             | Item total | Amount: 100   |
           And promotion "Free product" has following actions defined:
-            | type        | configuration                   |
-            | Add product | variant:Ubu,quantity:1,price:10 |
+            | type        | configuration                      |
+            | Add product | variant:Ubuntu,quantity:1,price:10 |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
@@ -32,7 +32,7 @@ Feature: Checkout product promotion
         Given I am on the store homepage
          When I add product "Etch" to cart, with quantity "1"
          Then I should be on the cart summary page
-          And "Ubu" should not appear on the page
+          And "Ubuntu" should not appear on the page
           And "Grand total: €20.00" should appear on the page
 
     Scenario: Free product is applied when the cart has the
@@ -40,5 +40,5 @@ Feature: Checkout product promotion
         Given I am on the store homepage
          When I add product "Potato" to cart, with quantity "3"
          Then I should be on the cart summary page
-          And "Ubu" should appear on the page
+          And "Ubuntu" should appear on the page
           And "Grand total: €610.00" should appear on the page
