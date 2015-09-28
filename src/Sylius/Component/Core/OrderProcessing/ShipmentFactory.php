@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Inventory\Coordinator\CoordinatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -30,20 +29,13 @@ class ShipmentFactory implements ShipmentFactoryInterface
     protected $shipmentRepository;
 
     /**
-     * @var CoordinatorInterface
-     */
-    protected $coordinator;
-
-    /**
      * Constructor.
      *
      * @param RepositoryInterface  $shipmentRepository
-     * @param CoordinatorInterface $coordinator
      */
-    public function __construct(RepositoryInterface $shipmentRepository, CoordinatorInterface $coordinator)
+    public function __construct(RepositoryInterface $shipmentRepository)
     {
         $this->shipmentRepository = $shipmentRepository;
-        $this->coordinator = $coordinator;
     }
 
     /**

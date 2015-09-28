@@ -52,14 +52,14 @@ class ShipmentFactorySpec extends ObjectBehavior
         ;
 
         $order
-            ->hasShipments()
-            ->willReturn(false)
-            ->shouldBeCalled()
+            ->getInventoryUnits()
+            ->willReturn(array($inventoryUnit))
         ;
 
         $order
-            ->getInventoryUnits()
-            ->willReturn(array($inventoryUnit))
+            ->getShipments()
+            ->willReturn($shipments)
+            ->shouldBeCalled()
         ;
 
         $shipment
@@ -72,7 +72,7 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->createShipment($order);
+        $this->createShipments($order);
     }
 
     function it_adds_new_inventory_units_to_existing_shipment(
@@ -85,12 +85,6 @@ class ShipmentFactorySpec extends ObjectBehavior
         $shipments
             ->first()
             ->willReturn($shipment)
-            ->shouldBeCalled()
-        ;
-
-        $order
-            ->hasShipments()
-            ->willReturn(true)
             ->shouldBeCalled()
         ;
 
@@ -123,6 +117,6 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->createShipment($order);
+        $this->createShipments($order);
     }
 }
