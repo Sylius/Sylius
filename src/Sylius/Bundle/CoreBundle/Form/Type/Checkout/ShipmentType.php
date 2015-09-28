@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -78,10 +79,8 @@ class ShipmentType extends AbstractType
                 'criteria',
                 'channel'
             ))
-            ->setAllowedTypes(array(
-                'criteria'   => array('array'),
-                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
-            ))
+            ->setAllowedTypes('criteria', 'array')
+            ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }
 

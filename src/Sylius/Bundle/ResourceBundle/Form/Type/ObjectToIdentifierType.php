@@ -63,9 +63,7 @@ class ObjectToIdentifierType extends AbstractType
             ->setDefaults(array(
                 'identifier' => 'id',
             ))
-            ->setAllowedTypes(array(
-                'identifier' => array('string'),
-            ))
+            ->setAllowedTypes('identifier', 'string')
         ;
     }
 

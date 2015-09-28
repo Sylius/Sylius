@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -52,9 +53,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
             'variable'
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes(array(
-            'variable' => array('Sylius\Component\Variation\Model\VariableInterface')
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

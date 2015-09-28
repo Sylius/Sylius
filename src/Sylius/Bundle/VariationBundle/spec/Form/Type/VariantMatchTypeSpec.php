@@ -60,10 +60,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
             'variable'
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes(array(
-            'variable' => 'Sylius\Component\Variation\Model\VariableInterface'
-        ))->shouldBeCalled()->willReturn($resolver);
-
+        $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,10 +60,9 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         $resolver->setOptional(array(
             'subject',
         ))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes(array(
-            'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-            'criteria' => array('array')
-        ))->shouldBeCalled()->willReturn($resolver);
+
+        $resolver->setAllowedTypes('subject', ShippingSubjectInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('criteria', 'array')->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

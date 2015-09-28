@@ -63,9 +63,7 @@ class ShippingStepType extends AbstractResourceType
             ->setOptional(array(
                 'criteria'
             ))
-            ->setAllowedTypes(array(
-                'criteria' => array('array')
-            ))
+            ->setAllowedTypes('criteria', 'array')
         ;
     }
 

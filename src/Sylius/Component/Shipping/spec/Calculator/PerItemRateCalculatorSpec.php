@@ -38,7 +38,7 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
     function it_has_required_amount_configuration_options(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array('amount'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes(array('amount' => array('numeric')))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('amount', 'numeric')->shouldBeCalled()->willReturn($resolver);
 
         $this->setConfiguration($resolver);
     }

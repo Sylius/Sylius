@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -84,10 +85,8 @@ class TaxonChoiceType extends AbstractType
                 'taxonomy',
                 'filter',
             ))
-            ->setAllowedTypes(array(
-                'taxonomy' => array('Sylius\Component\Taxonomy\Model\TaxonomyInterface'),
-                'filter' => array('\Closure', 'null'),
-            ))
+            ->setAllowedTypes('taxonomy', TaxonomyInterface::class)
+            ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }
 
