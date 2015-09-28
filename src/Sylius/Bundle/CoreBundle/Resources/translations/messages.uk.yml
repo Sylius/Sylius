@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Використовувати іншу платіжну адресу?
       payment_method: Спосіб оплати
       shipping_method: Метод доставки
+    coupon:
+      per_user_usage_limit: Обмеження використання на користувача
     group:
       name: Ім’я
       roles: Ролі
@@ -86,6 +88,7 @@ sylius:
       depth: Глибина
       height: Висота
       images: Зображення
+      on_hand: Кількість на складі
       price: Ціна
       sku: Артикул
       weight: Вага

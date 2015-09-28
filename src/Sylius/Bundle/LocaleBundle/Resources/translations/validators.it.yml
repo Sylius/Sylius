@@ -5,4 +5,4 @@ sylius:
   locale:
     code:
       not_blank: Scegliere un codice locale.
-      unique: Codice locale deve essere univoco.
+      unique: Il codice di localizzazione deve essere univoco.

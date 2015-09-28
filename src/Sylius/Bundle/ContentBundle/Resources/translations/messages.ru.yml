@@ -1,24 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: Автоматически
+route: маршрут
 sylius:
   form:
+    action_block:
+      action_name: Действие
+      id: ID
     imagine_block:
       parent: Родитель
       internal_name: Внутреннее название
+      slideshow_small: Большое слайдшоу (полноразмерное)
+      slideshow_medium: Среднее слайдшоу (контент)
+      slideshow_large: Малое слайдшоу (сайдбар)
     menu:
+      childrens: Потомки
+      display: Отображать
+      display_children: Показать потомков
+      label: Заголовок
       name: Название
       parent: Родитель
+      route: Маршрут
+      uri: URI
     menu_block:
       body: Содержание
+      id: ID
       name: Название
     menu_node_block:
       content: Контент
+      display: Отображать
+      display_children: Показать потомков
       internal_name: Внутреннее название
+      label: Заголовок
+      link_type: Тип ссылки
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликованый
+      route: Маршрут
+      uri: URI
     redirect_route:
+      id: ID
       name: Название
+      route_name: Имя маршрута
+      uri: URI
     reference_block:
       body: Содержание
+      id: ID
       title: Название
     route:
       content: Контент
@@ -30,13 +58,20 @@ sylius:
       parent: Родитель
       title: Название
     slideshow_block:
+      childrens: Потомки
       internal_name: Внутреннее название
       parent: Родитель
       title: Название
     static_content:
       body: Содержание
+      id: ID
       internal_name: Внутреннее название
+      menu_nodes: Узлы меню
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликованый
+      routes: Маршруты
       title: Название
     string_block:
       body: Содержание

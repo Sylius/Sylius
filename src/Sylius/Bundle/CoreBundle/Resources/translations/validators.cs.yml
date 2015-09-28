@@ -7,6 +7,10 @@ sylius:
       max: 'Název skupiny nesmí být delší než {{ limit }} znaků.'
       min: 'Název skupinu musí být alespoň {{ limit }} znaků dlouhý.'
       not_blank: Zadejte název skupiny.
+  locale:
+    code:
+      not_blank: Prosím vložte místní (locale) kód.
+      unique: Tento locale již existuje.
   user:
     first_name:
       max: 'Křestní jméno nesmí být delší než {{ limit }} znaků.'
@@ -16,3 +20,18 @@ sylius:
       max: 'Příjmení nesmí být delší než {{ limit }} znaků.'
       min: 'Příjmení musí být alespoň {{ limit }} znaků dlouhé.'
       not_blank: Zadejte své příjmení.
+  product_variant:
+    onHand:
+      min: 'Na skladě musí být více než {{ limit }}.'
+      not_blank: Prosím zadejte sklad.
+    price:
+      min: Cena nesmí být záporná.
+      not_blank: Prosím vložte cenu.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Prosím vložte zónu dodací metody.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Prosím zvolte zónu daňové sazby.

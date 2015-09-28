@@ -1,3 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  tax_category:
+    name:
+      not_blank: Lütfen vergi kategorisinin adını giriniz.
+  tax_rate:
+    category:
+      not_blank: Lütfen vergi kategorisi seçiniz.
+    name:
+      not_blank: Lütfen vergi oranının adını giriniz.
+    amount:
+      not_blank: Lütfen vergi oranını giriniz.
+    calculator:
+      not_blank: Lütfen vergi hesaplama şekli seçiniz.

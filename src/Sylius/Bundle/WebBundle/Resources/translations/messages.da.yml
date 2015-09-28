@@ -99,6 +99,7 @@ sylius:
     assortment: Sortiment
     block:
       index: Indholdsblokke
+    build: Byg
     configuration: Konfiguration
     country:
       index: Lande
@@ -133,8 +134,8 @@ sylius:
       index: Kuponer
     property:
       index: Egenskaber
-    archetype:
-      index: archetyper
+    prototype:
+      index: Prototyper
     sales: Salg
     shipment:
       index: Forsendelser
@@ -326,6 +327,7 @@ sylius:
   na: N/A
   newest: Nyeste produkter
   "no": false
+  no_results: Ingen resultater
   option:
     create: Opret indstilling
     create_header: Ny produkt egenskab
@@ -367,6 +369,7 @@ sylius:
     release_inventory: Frigiv varer
     inventory_unit:
       backorder: Restordre
+      fulfill: Udfør
       return: Returner
     shipping_address: Leveringsadresse
     shipping_charges: Forsendelsesomkostninger
@@ -380,8 +383,10 @@ sylius:
     tax_total: Moms i alt
     taxes: Moms
     total: Total
+    update_header: Redigering af ordre
     user: Bruger
   shipment:
+    ship: Afsend
     created_at: Oprettet den
     id: ID
     index_header: Forsendelser
@@ -436,6 +441,7 @@ sylius:
       pending: Afventer
       processing: Behandler
       unknown: Ukendt
+      void: Ugyldig
     update_header: Redigerer betaling
     updated_at: Seneste opdatering
   payment_method:
@@ -446,8 +452,11 @@ sylius:
     id: ID
     index_header: Betalingsmetoder
     name: Navn
+    no_results: Der er ingen betalingsmetoder konfigureret.
+    update_header: Redigering betalingsmetode
     updated_at: Seneste opdatering
   product:
+    add_property: Tilføj egenskab
     available_on: Tilgængelig
     available_on_demand: Tilgængelig for restordre
     categorization: Kategorisering
@@ -457,6 +466,7 @@ sylius:
     description: Beskrivelse
     generate_variants: Generer varianter
     index_by_taxon_header: 'Produkter <small>kategoriseret under "%taxon%" taxon</small>'
+    index_header: 'Produkter <small>katalog af alle produkter i din butik</small>'
     manage: Administrere produkter
     name: Navn
     no_description: '<i>Ingen beskrivelse...</i>'
@@ -475,6 +485,8 @@ sylius:
     restricted_zone: Begrænset zone
     shipping_category: Fragt kategori
     show: Se mere
+    show_header: 'Produkt detaljer <small>Viser produkt "<strong>%product%</strong>"</small>'
+    show_in_store: vis i butik
     sku: SKU
     stock: Nuværende lager antal
     tabs:
@@ -542,39 +554,55 @@ sylius:
     type: type
     update_header: Redigering af egenskab
     updated_at: sidste opdatering
-  archetype:
-    build: Skab archetype
-    build_header: Skaber produkt efter archetype
-    create: Opret archetype
-    create_header: Ny archetype
-    index_header: Produkt archetyper
+  prototype:
+    build: Skab prototype
+    build_header: Skaber produkt efter prototype
+    create: Opret prototype
+    create_header: Ny prototype
+    index_header: Produkt prototyper
     name: navn
+    no_results: Der er ingen prototyper defineret.
+    options: indstillinger
+    properties: egenskaber
+    update_header: Redigering af prototype
     updated_at: sidste opdatering
+  province:
+    provinces: Provinser
   remember_me: Husk mig?
+  save_changes: Gem ændringer
   search: Søg
   settings:
     general_header: Generelle indstillinger
     taxation_header: Indstillinger for moms
+  shipment_category:
+    manage: Administrer forsendelses kategorier
   shipping_address: Leveringsadresse
   shipping_category:
     create: Opret shipping kategori
     create_header: Ny shipping kategori
     id: ID
-    index_header: Forsendelses kategorier
+    index_header: Forsendelseskategorier
+    manage: Administrer forsendelseskategorier
     name: Navn
+    no_results: Der er ingen forsendelseskategorier konfigureret.
+    update_header: Rediger forsendelseskategori
     updated_at: Seneste opdatering
   shipping_method:
     calculator: Beregner
     category: Kategori
+    create: Opret forsendelsesmetode
+    create_header: Ny forsendelsesmetode
     enabled: Er aktiveret?
     id: ID
     index_header: Fragtmetoder
+    manage: Administrer forsendelsesmetoder
     name: Navn
     no_results: Der er ingen forsendelsesmetoder konfigureret.
     show_header: Forsendelsesmetode detaljer
     update_header: Redigering af forsendelsesmetode
     updated_at: Seneste opdatering
     zone: Zone
+  shop_by: Butik af
   show: detaljer
   show_all: Vis alle
   show_deleted: Vis slettede
@@ -626,8 +654,13 @@ sylius:
     create: Opret taksonomi
     create_header: Ny taksonomi
     image: Vælg billede
+    index_header: 'Kategorisering, <small>her ser du de definerede taksonomier</small>'
+    manage: Administrer taksonomier
     name: Navn
     no_image: Der er intet billede for denne taksinomiske gruppe
+    no_results: Der er ingen taksonomier defineret.
+    show_header: 'Taksonomi <small><strong>%name%</strong></small>'
+    update_header: Rediger taksonomi
   total_quantity: Samlet antal
   unknown: Ukendt
   user:
@@ -640,10 +673,13 @@ sylius:
       all: Vis alle brugere
       unconfirmed: Ubekræftede konti
     first_name: Fornavn
+    general_info: 'Bruger "%username%" generel info'
     id: ID
+    index_header: 'Brugere <small>liste over alle brugere registreret i butikken</small>'
     last_login: Sidste login
     last_name: Efternavn
     impersonate: Log ind som denne bruger
+    manage: administrere brugere
     no_results: Der er ingen brugere at vise.
     order:
       no_results: Der er ingen ordrer for denne bruger at vise.
@@ -676,6 +712,9 @@ sylius:
     index_header: Zoner
     manage: Administrer zoner
     name: Navn
+    no_results: Der er ingen zoner konfigureret.
+    show_header: Zone detaljer
     type: Type
+    update_header: Rediger zone
   zone_member:
     members: Medlemmer

@@ -4,7 +4,7 @@
 sylius:
   parameter:
     namespace:
-      max_length: Le paramètre namespace ne doit pas contenir plus de 255 characters|Le paramètre Espace de noms ne doit pas être plus de 255 caractères.
+      max_length: "L'espace de nom du paramètre ne doit pas contenir plus de 255 caractères.|L'espace de nom du paramètre ne doit pas contenir plus de 255 caractères."
       min_length: Le paramètre namespace doit contenir au moins 2 caractères long|Le paramètre Espace de noms doit comporter au moins 2 caractères.
       not_blank: Veuillez choisir un espace de nom pour ce paramètre.
     name:

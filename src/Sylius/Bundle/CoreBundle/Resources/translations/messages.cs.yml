@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Použít jinou adresu pro fakturaci?
       payment_method: Způsob Platby
       shipping_method: Způsob Dopravy
+    coupon:
+      per_user_usage_limit: Využití uživatelských limitů
     group:
       name: Jméno
       roles: Role
@@ -31,6 +33,8 @@ sylius:
       code: Kód
       enabled: Povoleno
     order_filter:
+      created_at_from: Vytvořeno po
+      created_at_to: Vytvořeno před
       number: Číslo
       total_from: Od
       total_to: Do

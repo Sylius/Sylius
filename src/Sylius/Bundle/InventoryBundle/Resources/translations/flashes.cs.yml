@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backorder: Skladová jednotka je zastaralá.
+    sell: Skladová jednotka splněna.
+    return: Skladová jednotka navrácena.
+    transition_fail: Akci nelze provést vzhledem k současnému stavu jednotky

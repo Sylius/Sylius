@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Prezentace
+    option:
+      name: Interní název
+      presentation: Prezentace
+      values: Možné hodnoty
+    option_value:
+      add_value: Přidání hodnoty
+      value: Hodnota

@@ -1,24 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: Automático
+route: rota
 sylius:
   form:
+    action_block:
+      action_name: Nome da ação
+      id: Id
     imagine_block:
       parent: Pai
       internal_name: Nome interno
+      slideshow_small: Slideshow maior (largura total)
+      slideshow_medium: Slideshow Médio (conteúdo)
+      slideshow_large: Slideshow Pequeno (ao lado)
     menu:
+      childrens: Filhos
+      display: Mostrar
+      display_children: Mostrar filhos
+      label: Rótulo
       name: Nome
       parent: Pai
+      route: Rota
+      uri: URI
     menu_block:
       body: Texto
+      id: Id
       name: Nome
     menu_node_block:
       content: Conteúdo
+      display: Mostrar
+      display_children: Mostrar filhos
       internal_name: Nome interno
+      label: Rótulo
+      link_type: Tipo de link
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
+      publishable: Publicável
+      route: Rota
+      uri: URI
     redirect_route:
+      id: Id
       name: Nome
+      route_name: Nome da Rota
+      uri: URI
     reference_block:
       body: Texto
+      id: Id
       title: Título
     route:
       content: Conteúdo
@@ -30,13 +58,20 @@ sylius:
       parent: Pai
       title: Título
     slideshow_block:
+      childrens: Filhos
       internal_name: Nome interno
       parent: Pai
       title: Título
     static_content:
       body: Texto
+      id: Id
       internal_name: Nome interno
+      menu_nodes: Nó do menu
       parent: Pai
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
+      publishable: Publicável
+      routes: Rotas
       title: Título
     string_block:
       body: Texto

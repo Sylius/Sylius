@@ -15,3 +15,14 @@ sylius:
       luhn: Zadané číslo kreditnej karty je chybné.
     security_code:
       not_blank: Prosím zadajte bezpečnostný kód.
+      max_length: 'CVV kód na karte musí obsahovať aspoň {{ limit }} čisiel.'
+      min_length: 'CVV kód na karte nesmie obsahovať viac ako {{ limit }} číslic.'
+    expiry_year:
+      not_blank: Prosím zvoľte rok expirácie.
+  payment_method:
+    gateway:
+      not_blank: Prosím zvolťe spôsob platby.
+    name:
+      max_length: 'Názov spôsobu platby musí obsahovať {{ limit }} znakov alebo menej.'
+      min_length: 'Názov spôsobu platby musí obsahovať aspoň {{ limit }} znakov.'
+      not_blank: Zadajte názov pre spôsob platby.

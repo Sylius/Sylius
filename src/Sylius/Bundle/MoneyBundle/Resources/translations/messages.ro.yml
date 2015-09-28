@@ -5,4 +5,4 @@ sylius:
   form:
     exchange_rate:
       currency: Moneda
-      rate: Curs de schimb
+      rate: Curs

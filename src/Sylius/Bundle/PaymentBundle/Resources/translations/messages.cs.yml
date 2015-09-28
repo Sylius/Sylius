@@ -15,10 +15,16 @@ sylius:
       method: Způsob platby
       state:
         0: Stav platby
+        checkout: Objednat
         completed: Dokončeno
         failed: Neúspěšné
         new: Nový
+        pending: Čekající
+        processing: Zpracovává se
         unknown: Neznámý
+        void: Neplatné
+        cancelled: Zrušeno
+        refunded: Platba vrácena
     payment_method:
       description: Popis
       enabled: Povoleno?

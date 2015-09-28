@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: Inventoriaus vienetas užsakytas į ateitį.
+    sell: Inventoriaus vienetas išpildytas.
+    return: Inventoriaus vienetas grąžintas.
+    transition_fail: Veiksmas negalėjo būti atliktas atsižvelgiant į dabartinę vieneto būseną

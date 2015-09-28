@@ -23,7 +23,7 @@ sylius:
         products: สินค้า
         promotions: ส่งเสริมการขาย
         properties: กำหนดค่าคุณสมบัติ
-        archetypes: ต้นแบบสินค้า
+        prototypes: ต้นแบบสินค้า
         sales: ใบสั่งซื้อ
         shipments: การจัดส่งสินค้า
         shipping_categories: ประเภทการจัดส่ง
@@ -58,7 +58,7 @@ sylius:
         products: สินค้า
         promotions: ส่งเสริมการขาย
         properties: กำหนดค่าคุณสมบัติ
-        archetypes: ต้นแบบสินค้า
+        prototypes: ต้นแบบสินค้า
         sales: ใบสั่งซื้อ
         shipments: การจัดส่งสินค้า
         shipping_categories: ประเภทการจัดส่ง

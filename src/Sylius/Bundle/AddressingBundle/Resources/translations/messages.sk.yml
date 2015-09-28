@@ -9,6 +9,7 @@ sylius:
       country: Štát
       first_name: Meno
       last_name: Priezvisko
+      phone_number: Telefónne číslo
       postcode: PSČ
       street: Adresa
       province: Provincia
@@ -29,6 +30,7 @@ sylius:
         province: Provincia
         zone: Zóna
       scope: Rozsah pôsobnosti
+      select_scope: Vyberte rozsah
     zone_member_country:
       country: Krajina
     zone_member_province:

@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Kiekis
+        equal: Atitinka
+      type: Tipas
+    shipment:
+      state: Būsena
+      states:
+        checkout: Apmokėjimas
+        dispatched: Išsiųstas
+        pending: Laukiama
+        ready: Paruošta
+        shipped: Pristatytas
+        returned: Grąžintas
+      tracking_code: Sekimo kodas
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Suma
+      flexible_rate_configuration:
+        additional_item_cost: Papildomos prekės kaina
+        additional_item_limit: Papildomų prekių limitas
+        first_item_cost: Pirmos prekės kaina
+      per_item_rate_configuration:
+        amount: Suma
+      weight_rate_configuration:
+        amount: Suma
+        division: Dalyba
+    shipping_category:
+      description: Aprašymas
+      name: Pavadinimas
+    shipping_method:
+      calculator: Skaičiuoklė
+      category: Kategorija
+      category_requirement: Kategorijos reikalavimas
+      configuration: Konfigūracija
+      enabled: Įjungtas
+      name: Pavadinimas

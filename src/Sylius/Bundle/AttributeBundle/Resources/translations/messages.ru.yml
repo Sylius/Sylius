@@ -6,6 +6,3 @@ sylius:
     attribute:
       name: Внутреннее название
       presentation: Публичное название
-    archetype:
-      name: Название
-      properties: Свойства

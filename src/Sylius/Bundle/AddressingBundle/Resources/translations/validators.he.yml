@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: 'שם העיר אינו יכול להיות ארוך מ- 255 תווים|שם העיר אינו יכול להיות ארוך מ- 255 תווים.'
+      not_blank: יש להזין את שם העיר.

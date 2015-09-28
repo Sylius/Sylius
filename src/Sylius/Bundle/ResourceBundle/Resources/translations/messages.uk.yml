@@ -3,4 +3,5 @@
 
 form:
   collection:
+    add: Додати
     delete: Видалити

@@ -134,7 +134,7 @@ sylius:
       index: sylius.breadcrumb.promotion_coupon.index
     property:
       index: Список свойств товаров
-    archetype:
+    prototype:
       index: Список прототипов
     sales: Продажи
     shipment:
@@ -366,7 +366,10 @@ sylius:
     shipment_states:
       pending: Ожидает
     shipments: Посылки
+    release_inventory: Инвентаризация выпуска
     inventory_unit:
+      backorder: Не выполнен
+      fulfill: Завершён
       return: Возврат
     shipping_address: Адрес доставки
     shipping_charges: Затраты на доставку
@@ -457,6 +460,7 @@ sylius:
     available_on: Доступен с
     available_on_demand: Доступно по запросу
     categorization: Каталоги
+    contain_variants: Содержит варианты
     create: Создать товар
     create_header: Новый товар
     description: Описание
@@ -550,7 +554,7 @@ sylius:
     type: тип
     update_header: Редактирование свойства
     updated_at: последнее изменение
-  archetype:
+  prototype:
     build: Построить прототип
     build_header: Построение товара по прототипу
     create: Создание прототипа

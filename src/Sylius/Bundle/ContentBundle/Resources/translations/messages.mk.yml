@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+auto: автоматски
+sylius:
+  form:
+    action_block:
+      action_name: Име на акцијата
+      id: ID број
+    imagine_block:
+      parent: Родител
+      internal_name: Интерно име
+    menu_block:
+      id: ID број
+    redirect_route:
+      id: ID број
+    reference_block:
+      id: ID број
+    static_content:
+      id: ID број

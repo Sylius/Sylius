@@ -9,6 +9,7 @@ sylius:
       country: Ország
       first_name: Keresztnév
       last_name: Vezetéknév
+      phone_number: Telefonszám
       postcode: Irányítószám
       street: Utca
       province: Tartomány/állam
@@ -28,6 +29,8 @@ sylius:
         country: Ország
         province: Tartomány/állam
         zone: Zóna
+      scope: Hatókör
+      select_scope: Hatókör kiválasztása
     zone_member_country:
       country: Ország
     zone_member_province:

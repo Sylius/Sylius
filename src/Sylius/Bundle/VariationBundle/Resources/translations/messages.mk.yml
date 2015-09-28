@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    variant:
+      presentation: Презентација
+    option:
+      name: Интерно име
+      presentation: Презентација
+      values: Можни вредности
+    option_value:
+      add_value: Додај вредност
+      value: Вредност

@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Adresa byla úspěšně nastavena jako výchozí fakturační adresu.
+        shipping:
+          success: Adresa byla úspěšně nastavena jako výchozí dodací adresa.

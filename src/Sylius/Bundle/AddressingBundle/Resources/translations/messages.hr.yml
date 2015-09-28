@@ -9,6 +9,7 @@ sylius:
       country: Država
       first_name: Ime
       last_name: Prezime
+      phone_number: Kontakt telefon
       postcode: Poštanski broj
       street: Ulica
       province: Pokrajina
@@ -29,6 +30,7 @@ sylius:
         province: Županija
         zone: Regija
       scope: Djelokrug
+      select_scope: Odaberite doseg
     zone_member_country:
       country: Država
     zone_member_province:

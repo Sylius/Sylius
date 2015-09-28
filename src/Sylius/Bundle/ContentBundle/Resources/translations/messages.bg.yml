@@ -1,3 +1,79 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: Авто
+route: маршрут
+sylius:
+  form:
+    action_block:
+      action_name: Име на действието
+      id: ID
+    imagine_block:
+      parent: Родител
+      internal_name: Вътрешно име
+      slideshow_small: Слайдшоу дебелото (пълна ширина)
+      slideshow_medium: Слайдшоу среда (съдържание)
+      slideshow_large: Слайдшоу малки (страна)
+    menu:
+      childrens: Наследници
+      display: Екран
+      display_children: Наследници на Дисплея
+      label: Етикет
+      name: Име
+      parent: Родител
+      route: Маршрут
+      uri: URI
+    menu_block:
+      body: Тяло
+      id: ID
+      name: Име
+    menu_node_block:
+      content: Съдържание
+      display: Екран
+      display_children: Наследници на Дисплея
+      internal_name: Вътрешно име
+      label: Етикет
+      link_type: Тип връзка
+      publish_end_date: Крайна дата на публикуване
+      publish_start_date: Публикуване на начална дата
+      publishable: Публикуване
+      route: Маршрут
+      uri: URI
+    redirect_route:
+      id: ID
+      name: Име
+      route_name: Име на пътя
+      uri: URI
+    reference_block:
+      body: Тяло
+      id: ID
+      title: Заглавие
+    route:
+      content: Съдържание
+      name: Име
+      parent: Източник
+    simple_block:
+      body: Тяло
+      internal_name: Вътрешно име
+      parent: Източник
+      title: Заглавие
+    slideshow_block:
+      childrens: Наследници
+      internal_name: Вътрешно име
+      parent: Източник
+      title: Заглавие
+    static_content:
+      body: Тяло
+      id: ID
+      internal_name: Вътрешно име
+      menu_nodes: Меню деца
+      parent: Родител
+      publish_end_date: Крайна дата на публикуване
+      publish_start_date: Публикуване на начална дата
+      publishable: Публикуване
+      routes: Маршрути
+      title: Заглавие
+    string_block:
+      body: Тяло
+      id: ID
+      name: Име

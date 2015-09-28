@@ -8,6 +8,7 @@ sylius:
   form:
     configuration:
       database:
+        header: Databaseforbindelsen
         driver:
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
@@ -20,9 +21,11 @@ sylius:
         port: Port
         user: Bruger
       locale:
+        header: Lokalitetsindstillinger
         currency: Valuta
         locale: Landekode
       mailer:
+        header: Mail indstillinger
         host: Vært
         password: Adgangskode
         transport:
@@ -49,4 +52,6 @@ sylius:
         header: 'Konfiguration <small>Sylius installer</small>'
       setup:
         header: 'Administration setup <small>Sylius installer</small>'
+      welcome:
+        content: '<p>Velkommen til Sylius installeren.</p>'
 €: €

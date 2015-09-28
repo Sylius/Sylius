@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Asortimentas
+        configuration: Konfigūracija
+        countries: Šalys
+        customer: Klientai
+        dashboard: Skydelis
+        exchange_rates: Valiutų kursai
+        general_settings: Bendrieji nustatymai
+        homepage: Jūsų parduotuvė
+        locales: Lokalės
+        new_order: Pridėti naują užsakymą
+        new_promotion: Pridėti naują akciją
+        options: Valdyti produkto parinktis
+        orders: Esami užsakymai
+        payment_methods: Apmokėjimo būdai
+        payments: Mokėjimai
+        products: Produktai
+        promotions: Akcijos
+        properties: Konfigūruoti ypatybės
+        prototypes: Produkto prototipai
+        sales: Užsakymai
+        shipments: Pristatymai
+        shipping_categories: Pristatymo kategorijos
+        shipping_methods: Pristatymo būdai
+        stockables: Atsargų lygiai
+        tax_categories: Apmokestinimo kategorijos
+        tax_rates: Mokesčių tarifai
+        taxation_settings: Apmokestinimo nustatymai
+        taxonomies: Skirstymas į kategorijas
+        users: Vartotojai
+        zones: Zonos
+      sidebar:
+        assortment: Asortimentas
+        blocks: Blokai
+        configuration: Konfigūracija
+        content: Turinys
+        countries: Šalys
+        customer: Klientai
+        dashboard: Skydelis
+        exchange_rates: Valiutų kursai
+        general_settings: Bendrieji nustatymai
+        groups: Grupės
+        homepage: Grįžti į svetainę
+        locales: Lokalės
+        new_order: Pridėti naują užsakymą
+        new_promotion: Pridėti naują akciją
+        options: Valdyti parinktis
+        orders: Esami užsakymai
+        pages: Puslapiai
+        payment_methods: Apmokėjimo būdai
+        payments: Mokėjimai
+        products: Produktai
+        promotions: Akcijos
+        properties: Konfigūruoti ypatybės
+        prototypes: Produkto prototipai
+        sales: Užsakymai
+        shipments: Pristatymai
+        shipping_categories: Pristatymo kategorijos
+        shipping_methods: Pristatymo būdai
+        stockables: Atsargų lygiai
+        tax_categories: Apmokestinimo kategorijos
+        tax_rates: Mokesčių tarifai
+        taxation_settings: Apmokestinimo nustatymai
+        taxonomies: Skirstymas į kategorijas
+        users: Vartotojai
+        zones: Zonos
+  frontend:
+    menu:
+      account:
+        addresses: Mano adresų knygelė
+        homepage: Pagrindinis puslapis
+        orders: Mano užsakymai bei sąskaitos
+        password: Mano slaptažodis
+        profile: Mano asmeninė informacija
+        shop: Atgal į parduotuvę
+      currency: 'Rodyti kainas %currency%'
+      main:
+        account: Mano paskyra
+        administration: Administravimas
+        cart: 'Peržiūrėti krepšelį (%items%) %total%'
+        login: Prisijungti
+        logout: Atsijungti
+        register: Užsiregistruoti
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

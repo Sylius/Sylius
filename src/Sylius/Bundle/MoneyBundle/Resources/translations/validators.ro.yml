@@ -6,5 +6,5 @@ sylius:
     currency:
       not_blank: Vă rugăm să alegeţi moneda.
     rate:
-      not_blank: Vă rugăm să introduceți cursul de schimb.
+      not_blank: Vă rugăm să introduceți cursul.
     unique: Moneda trebuie să fie unică.

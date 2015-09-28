@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
+  "no": false
+  tax_rate:
+    included_in_price: Вклучено во цената?
+  "yes": true

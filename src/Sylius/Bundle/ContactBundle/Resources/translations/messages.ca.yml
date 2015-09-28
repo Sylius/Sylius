@@ -7,5 +7,6 @@ sylius:
       first_name: Nom
       last_name: Cognoms
       email: Correu electrònic
+      message: Missatge
     contact_topic:
       title: Títol

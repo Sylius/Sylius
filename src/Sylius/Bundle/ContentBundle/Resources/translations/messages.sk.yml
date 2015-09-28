@@ -1,22 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: automaticky
+route: cesta
 sylius:
   form:
+    action_block:
+      action_name: Názov akcie
+      id: Id
     imagine_block:
       parent: Rodič
+      internal_name: Inerný názov
+      slideshow_small: Slideshow Veľký (celá šírka)
+      slideshow_medium: Slideshow Stredný (obsah)
+      slideshow_large: Slideshow Malý (po strane)
     menu:
+      childrens: Potomkovia
+      display: Zobraziť
+      display_children: Zobraziť potomkov
+      label: Označenie
       name: Názov
       parent: Rodič
+      route: Cesta
+      uri: URI
     menu_block:
       body: Obsah
+      id: Id
       name: Názov
     menu_node_block:
       content: Obsah
+      display: Zobraziť
+      display_children: Zobraziť potomkov
+      internal_name: Inerný názov
+      label: Označenie
+      link_type: Typ odkazu
+      publish_end_date: Dátum konca uverejnenia
+      publish_start_date: Dátum začiatku uverejnenia
+      publishable: Zverejniteľné
+      route: Cesta
+      uri: URI
     redirect_route:
+      id: Id
       name: Názov
+      route_name: Nazov_cesty
+      uri: URI
     reference_block:
       body: Obsah
+      id: Id
       title: Názov
     route:
       content: Obsah
@@ -24,14 +54,24 @@ sylius:
       parent: Rodič
     simple_block:
       body: Obsah
+      internal_name: Interný názov
       parent: Rodič
       title: Názov
     slideshow_block:
+      childrens: Potomkovia
+      internal_name: Inetrný názov
       parent: Rodič
       title: Názov
     static_content:
       body: Obsah
+      id: Id
+      internal_name: Interný názov
+      menu_nodes: Uzly menu
       parent: Rodič
+      publish_end_date: Dátum konca uverejnenia
+      publish_start_date: Dátum začiatku uverejnenia
+      publishable: Zverejniteľné
+      routes: Trasy
       title: Názov
     string_block:
       body: Obsah

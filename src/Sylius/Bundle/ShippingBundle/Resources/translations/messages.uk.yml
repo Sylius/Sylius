@@ -36,6 +36,7 @@ sylius:
     shipping_method:
       calculator: Калькулятор
       category: Категорія
+      category_requirement: Вимоги категорії
       configuration: Конфігурація
       enabled: Ввімкнено?
       name: Ім’я

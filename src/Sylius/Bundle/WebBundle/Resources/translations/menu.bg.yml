@@ -1,3 +1,95 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Асортимент
+        configuration: Конфигурация
+        countries: Страни
+        customer: Потребители
+        dashboard: Табло
+        exchange_rates: Валутен курс
+        general_settings: Общи настройки
+        homepage: Вашият магазин
+        locales: Езикови променливи
+        new_order: Добави нова поръчка
+        new_promotion: Добавяне на нова промоция
+        options: Управление на опциите за продукта
+        orders: Текущи поръчки
+        payment_methods: Начин на плащане
+        payments: Плащания
+        products: Продукти
+        promotions: Промоции
+        properties: Конфигуриране на свойства
+        prototypes: Прототипи на продукта
+        sales: Поръчки
+        shipments: пратки
+        shipping_categories: Категории за доставка
+        shipping_methods: Начин на доставка
+        stockables: Нива на инвентара
+        tax_categories: Категории такси
+        tax_rates: Данъчни ставки
+        taxation_settings: Настройки на данъчно облагане
+        taxonomies: Категоризация
+        users: Потребители
+        zones: Зони
+      sidebar:
+        assortment: Асортимент
+        blocks: Блокове
+        configuration: Конфигурация
+        content: Съдържание
+        countries: Страни
+        customer: Потребители
+        dashboard: Табло
+        exchange_rates: Валутен курс
+        general_settings: Общи настройки
+        groups: Групи
+        homepage: Обратно към фронт интерфейса
+        locales: Езикови променливи
+        new_order: Добави нова поръчка
+        new_promotion: Добавяне на нова промоция
+        options: Управление на опциите
+        orders: Текущи поръчки
+        pages: Страници
+        payment_methods: Начин на плащане
+        payments: Плащания
+        products: Продукти
+        promotions: Промоции
+        properties: Конфигуриране на свойства
+        prototypes: Прототипи на продукта
+        sales: Поръчки
+        shipments: пратки
+        shipping_categories: Категории за доставка
+        shipping_methods: Начин на доставка
+        stockables: Нива на инвентара
+        tax_categories: Категории такси
+        tax_rates: Данъчни ставки
+        taxation_settings: Настройки на данъчно облагане
+        taxonomies: Категоризация
+        users: Потребители
+        zones: Зони
+  frontend:
+    menu:
+      account:
+        addresses: Моята адресна книга
+        homepage: Начална страница
+        orders: Моите поръчки / моите фактури
+        password: Моята парола
+        profile: Моята лична информация
+        shop: Обратно към магазина
+      currency: 'Покажи цените в %currency%'
+      main:
+        account: Моят акаунт
+        administration: Администрация
+        cart: 'Покажи количката (%items%) %total%'
+        login: Вход
+        logout: Изход
+        register: Регистриране
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

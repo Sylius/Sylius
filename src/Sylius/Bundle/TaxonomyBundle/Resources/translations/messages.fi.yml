@@ -1,3 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Kuvaus
+      name: Nimi
+      parent: Vanhempi
+      permalink: Pysyvä linkki
+    taxonomy:
+      name: Nimi
+  taxon:
+    create_taxon: Luo taksoni
+    delete_taxonomy: Poista taksonomia
+    manage_taxonomies: Hallitse Taksonomioita

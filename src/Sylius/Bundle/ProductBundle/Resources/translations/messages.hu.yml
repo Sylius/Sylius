@@ -13,6 +13,6 @@ sylius:
     property:
       name: Belső név
       presentation: Bemutató
-    archetype:
+    prototype:
       name: Név
       properties: Tulajdonságok

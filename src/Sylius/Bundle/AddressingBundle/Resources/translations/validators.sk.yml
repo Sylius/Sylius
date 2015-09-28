@@ -21,6 +21,8 @@ sylius:
       max_length: PSČ nemôže byť dlhšie ako 255 znakov.
       min_length: PSČ musí obsahovať minimálne 2 znaky.
       not_blank: Prosím zadajte vaše PSČ.
+    province:
+      valid: Prosím vyberte správnu provinciu.
     street:
       max_length: Ulica nesmie byť dlhšia ako 255 znakov.
       min_length: Ulica musí obsahovať minimálne 2 znaky|Ulica musí obsahovať minimálne 2 znaky.
@@ -32,7 +34,14 @@ sylius:
     name:
       max_length: Názov krajiny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov krajiny.
+  province:
+    name:
+      max_length: Názov provincie nesmie byť dlhší ako 255 znakov|Názov provincie nesmie byť dlhší ako 255 znakov.
+      min_length: Názov provincie musí byť dlhší ako 2 znaky|Názov provincie musí byť dlhší ako 2 znaky.
+      not_blank: Prosím zadajte názov provincie.
   zone:
+    members:
+      min_count: 'Prosím pridajte zóne aspoň {{ limit }} členov.'
     name:
       max_length: Názov zóny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov zóny.

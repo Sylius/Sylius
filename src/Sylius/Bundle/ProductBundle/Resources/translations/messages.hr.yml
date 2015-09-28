@@ -13,6 +13,6 @@ sylius:
     property:
       name: Interni naziv
       presentation: Prezentacija
-    archetype:
+    prototype:
       name: Naziv
       properties: Svojstva

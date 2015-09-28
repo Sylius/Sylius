@@ -4,7 +4,9 @@
 sylius:
   parameter:
     namespace:
-      not_blank: Należy wybrać obszar nazw dla tego parametru.
+      max_length: Nazwa przestrzeni nazw parametru może składać się z maksymalnie 255 znaków.|Nazwa przestrzeni nazw parametru może składać się z maksymalnie 255 znaków.
+      min_length: Nazwa przestrzeni nazw parametru musi składać się z przynajmniej 2 znaków.|Nazwa przestrzeni nazw parametru musi składać się z przynajmniej 2 znaków.
+      not_blank: Należy wybrać przestrzeń nazw dla tego parametru.
     name:
       max_length: Nazwa parametru może składać się z maksymalnie 255 znaków.|Nazwa parametru może składać się z maksymalnie 255 znaków.
       min_length: Nazwa parametru musi składać się z przynajmniej 2 znaków.|Nazwa parametru musi składać się z przynajmniej 2 znaków.

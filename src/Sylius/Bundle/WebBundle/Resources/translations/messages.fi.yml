@@ -11,5 +11,18 @@ sylius:
       payment_mode: ""
       shipment_mode: ""
       state: ""
+  checkout:
+    back: Edellinen
+  form:
+    login:
+      email: Sähköpostiosoite
+    profile:
+      email: Sähköpostiosoite
+  gallery:
+    next: Seuraava
   "no": false
+  order:
+    user: Käyttäjä
+  user:
+    username: Käyttäjänimi
   "yes": true
