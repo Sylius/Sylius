@@ -67,11 +67,9 @@ class FlexibleRateCalculator extends Calculator
                 'first_item_cost',
                 'additional_item_cost'
             ))
-            ->setAllowedTypes(array(
-                'first_item_cost'       => array('numeric'),
-                'additional_item_cost'  => array('numeric'),
-                'additional_item_limit' => array('integer')
-            ))
+            ->setAllowedTypes('first_item_cost', 'numeric')
+            ->setAllowedTypes('additional_item_cost', 'numeric')
+            ->setAllowedTypes('additional_item_limit', 'integer')
         ;
     }
 }

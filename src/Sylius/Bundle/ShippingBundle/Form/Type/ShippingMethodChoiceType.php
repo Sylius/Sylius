@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -103,10 +104,8 @@ class ShippingMethodChoiceType extends AbstractType
             ->setOptional(array(
                 'subject',
             ))
-            ->setAllowedTypes(array(
-                'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-                'criteria' => array('array'),
-            ))
+            ->setAllowedTypes('subject', ShippingSubjectInterface::class)
+            ->setAllowedTypes('criteria', 'array')
         ;
     }
 

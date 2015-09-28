@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
 
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType as BasePaymentMethodChoiceType;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,9 +47,7 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
                 'query_builder' => $queryBuilder,
                 'channel' => null
             ))
-            ->setAllowedTypes(array(
-                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
-            ))
+            ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }
 }

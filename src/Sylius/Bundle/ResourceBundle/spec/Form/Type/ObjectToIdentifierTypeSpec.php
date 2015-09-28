@@ -50,9 +50,7 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
             'identifier' => 'id'
         ))->willReturn($resolver);
 
-        $resolver->setAllowedTypes(array(
-            'identifier' => array('string')
-        ))->willReturn($resolver);
+        $resolver->setAllowedTypes('identifier', 'string')->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

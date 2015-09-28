@@ -101,9 +101,7 @@ class AddressType extends AbstractResourceType
                 },
                 'shippable'         => false,
             ))
-            ->setAllowedTypes(array(
-                'shippable' => 'bool',
-            ))
+            ->setAllowedTypes('shippable', 'bool')
         ;
     }
 

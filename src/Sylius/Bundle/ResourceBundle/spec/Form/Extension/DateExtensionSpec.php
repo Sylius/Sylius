@@ -50,11 +50,9 @@ class DateExtensionSpec extends ObjectBehavior
             'leading_zero',
         ))->shouldBeCalled();
 
-        $resolver->setAllowedTypes(array(
-            'placeholder' => array('string'),
-            'language' => array('string'),
-            'leading_zero' => array('bool'),
-        ))->shouldBeCalled();
+        $resolver->setAllowedTypes('placeholder', 'string')->shouldBeCalled();
+        $resolver->setAllowedTypes('language', 'string')->shouldBeCalled();
+        $resolver->setAllowedTypes('leading_zero', 'bool')->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

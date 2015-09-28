@@ -56,10 +56,8 @@ class VolumeRateCalculator extends Calculator
                 'amount',
                 'division'
             ))
-            ->setAllowedTypes(array(
-                'amount'   => array('numeric'),
-                'division' => array('numeric')
-            ))
+            ->setAllowedTypes('amount', 'numeric')
+            ->setAllowedTypes('division', 'numeric')
         ;
     }
 }
