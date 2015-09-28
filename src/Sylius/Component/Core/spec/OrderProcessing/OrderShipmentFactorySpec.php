@@ -54,14 +54,14 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ;
 
         $order
-            ->hasShipments()
-            ->willReturn(false)
-            ->shouldBeCalled()
+            ->getInventoryUnits()
+            ->willReturn(array($inventoryUnit))
         ;
 
         $order
-            ->getInventoryUnits()
-            ->willReturn(array($inventoryUnit))
+            ->getShipments()
+            ->willReturn($shipments)
+            ->shouldBeCalled()
         ;
 
         $shipment
@@ -87,12 +87,6 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         $shipments
             ->first()
             ->willReturn($shipment)
-            ->shouldBeCalled()
-        ;
-
-        $order
-            ->hasShipments()
-            ->willReturn(true)
             ->shouldBeCalled()
         ;
 
