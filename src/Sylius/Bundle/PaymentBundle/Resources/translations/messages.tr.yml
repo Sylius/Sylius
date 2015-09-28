@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     credit_card:
@@ -14,7 +12,7 @@ sylius:
       amount: Ödeme tutarı
       method: Ödeme tipi
       state:
-        header: Ödeme durumu
+        0: Ödeme durumu
         checkout: 'Ödeme  yap'
         completed: Tamamlandı
         failed: Başarısız oldu

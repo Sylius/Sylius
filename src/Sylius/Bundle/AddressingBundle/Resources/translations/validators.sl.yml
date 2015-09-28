@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   address:
     city:
@@ -15,3 +13,5 @@ sylius:
       not_blank: Prosim, vnesite ime.
     last_name:
       max_length: Priimek ne sme biti daljši od 255 znakov|Priimek ne sme biti daljši od 255 znakov.
+      min_length: Priimek mora vsebovati vsaj 2 znaka.
+      not_blank: Prosimo vnesite priimek.

@@ -1,0 +1,7 @@
+---
+sylius:
+  form:
+    currency:
+      code: Kodas
+      exchange_rate: Valiutų kursas
+      enabled: Įjungta

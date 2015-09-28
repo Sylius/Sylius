@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     credit_card:
@@ -14,7 +12,7 @@ sylius:
       amount: Import a pagar
       method: Mètode de pagament
       state:
-        header: Estat de pagament
+        0: Estat de pagament
         checkout: Realitza la compra
         completed: Completat
         failed: "S'ha produït un error"

@@ -1,3 +1,13 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  cart:
+    restricted_zone_removal: 'Produsul %product% a fost scos din coș, deoarece nu este disponibil în ţara dumneavoastră.'
+  checkout:
+    restricted_zone: Acest produs nu este disponibil în ţara dumneavoastră.
+    success: Vă mulțumim pentru comanda dumneavoastră!
+    canceled: Plata dumneavoastră a fost anulată.
+    processing: Plata dumneavoastră este în curs de procesare.
+    new: Plata dumneavoastră este nouă.
+    failed: Plata dumneavoastră a fost refuzată.
+    unknown: Eroare la plată.
+    out_of_stock: 'Sunt numai %quantity% %name% în stoc.'

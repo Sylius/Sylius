@@ -1,3 +1,24 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  promotion:
+    description:
+      max_length: 'Descrierea promoției nu poate depăși un caracter.|Descrierea promoției nu poate depăși {{ limit }} de caractere.'
+      min_length: 'Descrierea promoției trebuie să conţină cel puţin un caracter.|Descrierea promoției trebuie să conţină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați descrierea promoţiei.
+    name:
+      max_length: 'Numele promoției nu poate depăși un caracter.|Numele promoției nu poate depăși {{ limit }} de caractere.'
+      min_length: 'Numele promoţiei trebuie să conţină cel puţin un caracter. |Numele promoţiei trebuie să conţină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să completați numele promoţiei.
+  promotion_coupon:
+    code:
+      max_length: 'Codul promoţional nu poate depăși un caracter.|Codul promoţional nu poate depăși {{ limit }} de caractere.'
+      min_length: 'Codul promoţional trebuie să conţină cel puţin un caracter.|Codul promoţional trebuie să conţină cel puţin {{ limit }} caractere.'
+      not_blank: Vă rugăm să introduceţi codul promoţional.
+    usage_limit:
+      min: 'Limita de utilizare a codului promoțional trebuie să fie cel puţin {{ limit }}.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'Numărul de coduri promoționale generate trebuie să fie de cel puţin {{ limit }}.'
+      not_blank: Vă rugăm să introduceţi numărul de coduri promoționale de generat.
+    usage_limit:
+      min: 'Limita de utilizare a codurilor promoționale generate trebuie să fie de cel puţin {{ limit }}.'

@@ -1,7 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   currency:
+    code:
+      not_blank: Zvolte kód měny.
+      unique: Kód měny musí být unikátní.
     exchange_rate:
       not_blank: Zadejte měnu.

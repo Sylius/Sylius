@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   group:
     name:
@@ -21,6 +19,9 @@ sylius:
       min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
       not_blank: Zadajte svoje priezvisko.
   product_variant:
+    onHand:
+      min: 'Na sklade musí byť viac ako {{ limit }}.'
+      not_blank: Prosím zadajte sklad.
     price:
       min: Cena nemôže obsahovať záporné hodnoty.
       not_blank: Zadajte cenu.

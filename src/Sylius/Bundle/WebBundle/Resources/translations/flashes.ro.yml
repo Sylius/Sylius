@@ -1,3 +1,9 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Adresa implicită de facturare a fost setată cu succes.
+        shipping:
+          success: Adresa implicită de livrare a fost setată cu succes.

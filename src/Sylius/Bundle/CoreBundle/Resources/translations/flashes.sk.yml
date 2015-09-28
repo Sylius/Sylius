@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   cart:
     restricted_zone_removal: 'Produkt %product% bol odstránený z košíka, pretože nie je dostupný vo vašej krajine.'
@@ -9,6 +7,7 @@ sylius:
     success: Ďakujeme za vašu objednávku!
     canceled: Vaša platba bola zrušená.
     processing: Vaša platba sa spracováva.
+    new: Vaša platba je nová.
     failed: Vaša platba bola odmietnutá.
     unknown: Neznáma chyba platby.
     out_of_stock: 'K dispozícii je iba %quantity% %name% na sklade.'

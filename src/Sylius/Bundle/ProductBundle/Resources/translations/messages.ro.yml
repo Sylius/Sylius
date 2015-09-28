@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   label:
     product:
@@ -13,6 +11,6 @@ sylius:
     property:
       name: Denumire internă
       presentation: Prezentare
-    archetype:
+    prototype:
       name: Nume
       properties: Proprietăți

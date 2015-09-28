@@ -1,9 +1,7 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     priceable:
       price: Prijs
-      calculator: Prijzen
+      calculator: Prijsstelling
       configuration: Configuratie

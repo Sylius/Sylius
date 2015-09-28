@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   cart:
     restricted_zone_removal: 'Proizvod %product% je uklonjen iz košarice jer nije dostupan u vašoj državi.'

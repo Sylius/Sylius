@@ -1,0 +1,6 @@
+---
+sylius:
+  form:
+    locale:
+      code: Kodas
+      enabled: Įjungta

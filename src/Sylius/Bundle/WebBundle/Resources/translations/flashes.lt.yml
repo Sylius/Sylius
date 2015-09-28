@@ -1,0 +1,9 @@
+---
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Adresas sėkmingai nustatytas kaip numatytasis atsiskaitymo adresas.
+        shipping:
+          success: Adresas sėkmingai nustatytas kaip numatytasis pristatymo adresas.

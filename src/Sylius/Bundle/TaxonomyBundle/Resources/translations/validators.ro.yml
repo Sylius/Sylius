@@ -1,3 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  taxon:
+    name:
+      max_length: Numele categoriei nu poate depăși 255 de caractere.
+      not_blank: Vă rugăm să completați numele categoriei.
+  taxonomy:
+    name:
+      max_length: Numele categorizării nu poate depăși 255 de caractere.
+      not_blank: Vă rugăm să completați nume categorizare.

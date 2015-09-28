@@ -1,0 +1,11 @@
+---
+sylius:
+  form:
+    contact_request:
+      first_name: Vardas
+      last_name: Pavardė
+      email: El. paštas
+      message: Žinutė
+      topic: Tema
+    contact_topic:
+      title: Antraštė

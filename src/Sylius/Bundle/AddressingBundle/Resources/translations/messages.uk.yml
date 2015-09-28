@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     address:
@@ -9,6 +7,7 @@ sylius:
       country: Країна
       first_name: Iм’я
       last_name: Прізвище
+      phone_number: Номер Телефону
       postcode: Iндекс
       street: Вулиця
       province: Область
@@ -29,6 +28,7 @@ sylius:
         province: Область
         zone: Зона
       scope: Сфера
+      select_scope: Виберіть область
     zone_member_country:
       country: Країна
     zone_member_province:

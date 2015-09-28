@@ -1,0 +1,6 @@
+---
+sylius:
+  resource:
+    create: '%resource% sėkmingai sukurtas.'
+    update: '%resource% sėkmingai atnaujintas.'
+    delete: '%resource% sėkmingai pašalintas.'

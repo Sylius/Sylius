@@ -1,0 +1,6 @@
+---
+sylius:
+  form:
+    attribute:
+      name: Vidinis pavadinimas
+      presentation: Prezentacija

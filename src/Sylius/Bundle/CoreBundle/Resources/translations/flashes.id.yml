@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   cart:
     restricted_zone_removal: 'Produk produk % dihapus dari keranjang karena itu tidak tersedia di negara Anda.'

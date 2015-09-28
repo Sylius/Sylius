@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   account:
     home:
@@ -214,7 +212,7 @@ sylius:
   property:
     name: Tên
     presentation: trình bày
-  archetype:
+  prototype:
     index_header: Sản phẩm mẫu
     name: Tên
   search: Tìm kiếm

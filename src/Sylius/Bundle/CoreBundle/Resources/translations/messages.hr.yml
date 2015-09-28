@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   checkout:
     shipping_method:
@@ -22,6 +20,8 @@ sylius:
         different_billing_address: Želim koristiti drugu adresu za račun.
       payment_method: Način plaćanja
       shipping_method: Vrsta dostave
+    coupon:
+      per_user_usage_limit: Broj korištenja po korisniku
     group:
       name: Naziv grupe
       roles: Role (korisnička prava)

@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   checkout:
     shipping_method:
@@ -22,8 +20,11 @@ sylius:
         different_billing_address: Použiť inú fakturačnú adresu?
       payment_method: Spôsob platby
       shipping_method: Spôsob prepravy
+    coupon:
+      per_user_usage_limit: Využitie užívateľskej kvóty
     group:
       name: Názov
+      roles: Rola
     image:
       file: Obrázok
     locale:
@@ -41,6 +42,7 @@ sylius:
       id: ID
       title: Názov
     product:
+      restricted_zone: Zóna s obmedzeným prístupom
       shipping_category: Prepravná kategória
       short_description: Krátky popis
       tax_category: Daňová kategória
@@ -61,6 +63,7 @@ sylius:
       created_at_from: Od
       created_at_to: Do
       number: Číslo objednávky
+      shipping_address: Meno príjemcu
     shipping_method:
       zone: Zóna
     taxon:

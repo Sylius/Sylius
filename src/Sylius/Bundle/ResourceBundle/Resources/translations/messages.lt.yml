@@ -1,0 +1,5 @@
+---
+form:
+  collection:
+    add: Pridėti
+    delete: Šalinti

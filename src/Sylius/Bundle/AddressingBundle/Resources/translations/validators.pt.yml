@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   address:
     city:
@@ -44,4 +42,4 @@ sylius:
       min_count: 'Por favor, adicione pelo menos {{ limit }} membro da região.'
     name:
       max_length: O campo zona não pode ter mais que 255 caracteres|O campo zona não pode ter mais que 255 caracteres.
-      not_blank: Por favor, digite o nome da zona.
+      not_blank: Por favor, digite o nome da região.

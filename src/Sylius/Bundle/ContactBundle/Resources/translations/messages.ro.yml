@@ -1,7 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     contact_request:
-      email: Email
+      first_name: Prenume
+      last_name: Nume
+      email: Adresă e-mail
+      message: Mesaj
+      topic: Subiect
+    contact_topic:
+      title: Titlu

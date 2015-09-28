@@ -1,3 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+sylius:
+  parameter:
+    namespace:
+      max_length: Namespace-ul nu poate depăși 255 caractere|Namespace-ul nu poate depăși 255 de caractere.
+      min_length: Namespace-ul trebuie să conţină cel puţin 2 caractere|Namespace-ul trebuie să conţină cel puţin 2 caractere.
+      not_blank: Vă rugăm să alegeți un namespace pentru parametru.
+    name:
+      max_length: Numele parametrului nu poate depăși 255 de caractere|Numele parametrului nu poate depăși 255 de caractere.
+      min_length: Numele parametrului trebuie să conţină cel puţin 2 caractere.|Numele parametrului trebuie să conţină cel puţin 2 caractere.
+      not_blank: Vă rugăm să completați numele parametrului.
