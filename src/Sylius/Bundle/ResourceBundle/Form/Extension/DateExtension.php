@@ -63,7 +63,7 @@ class DateExtension extends AbstractTypeExtension
             'leading_zero' => false,
         ));
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'placeholder',
             'language',
             'leading_zero',

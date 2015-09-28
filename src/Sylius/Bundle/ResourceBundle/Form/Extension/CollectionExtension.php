@@ -40,7 +40,7 @@ class CollectionExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'button_add_label',
             'button_delete_label',
         ));

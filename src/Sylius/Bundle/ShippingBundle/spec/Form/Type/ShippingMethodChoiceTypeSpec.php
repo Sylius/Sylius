@@ -57,7 +57,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'subject',
         ))->shouldBeCalled()->willReturn($resolver);
 

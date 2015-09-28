@@ -101,7 +101,7 @@ class ShippingMethodChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
             ))
-            ->setOptional(array(
+            ->setDefined(array(
                 'subject',
             ))
             ->setAllowedTypes('subject', ShippingSubjectInterface::class)

@@ -44,7 +44,7 @@ class DateExtensionSpec extends ObjectBehavior
     {
         $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'placeholder',
             'language',
             'leading_zero',

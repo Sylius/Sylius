@@ -39,7 +39,7 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'configuration_type',
         ));
     }

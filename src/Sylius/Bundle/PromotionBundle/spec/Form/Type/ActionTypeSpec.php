@@ -66,7 +66,7 @@ class ActionTypeSpec extends ObjectBehavior
             'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
-        $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
+        $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT))->shouldBeCalled();
 
         $this->configureOptions($resolver);

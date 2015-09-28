@@ -60,7 +60,7 @@ class ShippingStepType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setOptional(array(
+            ->setDefined(array(
                 'criteria'
             ))
             ->setAllowedTypes('criteria', 'array')
