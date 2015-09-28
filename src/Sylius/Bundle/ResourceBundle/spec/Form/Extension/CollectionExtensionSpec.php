@@ -36,7 +36,7 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_have_default_option(OptionsResolver $resolver)
     {
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'button_add_label',
             'button_delete_label',
         ))->shouldBeCalled();

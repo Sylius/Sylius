@@ -66,7 +66,7 @@ class RuleTypeSpec extends ObjectBehavior
             'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
-        $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
+        $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => RuleInterface::TYPE_ITEM_TOTAL))->shouldBeCalled();
 
         $this->configureOptions($resolver);

@@ -75,7 +75,7 @@ class ShipmentType extends AbstractType
             ->setDefaults(array(
                 'data_class' => $this->dataClass
             ))
-            ->setOptional(array(
+            ->setDefined(array(
                 'criteria',
                 'channel'
             ))

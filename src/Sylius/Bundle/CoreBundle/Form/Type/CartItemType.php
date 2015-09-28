@@ -55,7 +55,7 @@ class CartItemType extends BaseCartItemType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setOptional(array(
+            ->setDefined(array(
                 'product'
             ))
             ->setAllowedTypes('product', ProductInterface::class)
