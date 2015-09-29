@@ -17,6 +17,6 @@ sylius_api_checkout_index:
 
 sylius_api_checkout_proceed:
     path: /{orderId}
-    methods: [GET, PUT]
+    methods: [GET, PUT, PATCH]
     defaults:
         _controller: sylius.controller.checkout:proceedAction
