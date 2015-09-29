@@ -17,8 +17,6 @@
     <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.variant.create_header'|trans|raw }}</h1>
 </div>
 
-{{ form_errors(form) }}
-
 <form action="{{ path('sylius_backend_product_variant_create', {'productId': product.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/ProductVariant:_form.html.twig' %}
     {{ create() }}
