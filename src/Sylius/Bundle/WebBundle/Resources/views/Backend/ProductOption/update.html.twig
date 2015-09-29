@@ -16,8 +16,6 @@
     <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.product_option.update_header'|trans|raw }}</h1>
 </div>
 
-{{ form_errors(form) }}
-
 <form action="{{ path('sylius_backend_product_option_update', {'id': product_option.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/ProductOption:_form.html.twig' %}
