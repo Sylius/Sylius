@@ -12,11 +12,13 @@
 namespace Sylius\Bundle\UserBundle\Validator\Constraints;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class RegisteredUserValidator extends ConstraintValidator
 {
@@ -26,11 +28,18 @@ class RegisteredUserValidator extends ConstraintValidator
     private $customerRepository;
 
     /**
-     * @param RepositoryInterface $customerRepository
+     * @var CustomerContextInterface
      */
-    public function __construct(RepositoryInterface $customerRepository)
+    private $customerContext;
+
+    /**
+     * @param RepositoryInterface      $customerRepository
+     * @param CustomerContextInterface $customerContext
+     */
+    public function __construct(RepositoryInterface $customerRepository, CustomerContextInterface $customerContext)
     {
         $this->customerRepository = $customerRepository;
+        $this->customerContext = $customerContext;
     }
 
     /**
@@ -39,7 +48,7 @@ class RegisteredUserValidator extends ConstraintValidator
     public function validate($customer, Constraint $constraint)
     {
         $existingCustomer = $this->customerRepository->findOneBy(array('email' => $customer->getEmail()));
-        if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {
+        if (null !== $existingCustomer && null !== $existingCustomer->getUser() && $this->customerContext->getCustomer() !== $customer) {
             $this->context->addViolationAt(
                 'email',
                 $constraint->message,
