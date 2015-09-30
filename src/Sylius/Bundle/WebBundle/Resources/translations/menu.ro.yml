@@ -1,3 +1,126 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        archetypes: Tipuri de produse
+        assortment: Sortiment
+        attributes: Atribute
+        blocks: Blocuri
+        configuration: Configurare
+        countries: Țări
+        customer: Client
+        customers: Clienți
+        content: Conţinut
+        dashboard: Dashboard
+        currencies: Monede
+        emails: E-mailuri
+        exchange_rates: Cursuri
+        general_settings: Setări generale
+        groups: Grupuri
+        homepage: Magazin
+        locales: Setări regionale
+        new_order: Comandă nouă
+        new_promotion: Promoție nouă
+        options: Opțiuni de produse
+        orders: Comenzi curente
+        pages: Pagini
+        payment_methods: Metode de plată
+        payments: Plăți
+        permissions: Permisiuni
+        products: Produse
+        promotions: Promoții
+        properties: Properties
+        reports: Raporturi
+        roles: Roluri
+        sales: Comenzi
+        shipments: Livrări
+        shipping_categories: Categorii de livrare
+        shipping_methods: Metode de livrare
+        stockables: Stoc
+        tax_categories: Categorii de taxe
+        tax_rates: Taxe
+        taxation_settings: Setări taxe
+        taxonomies: Categorizare
+        users: Utilizatori
+        zones: Zone
+      sidebar:
+        api_clients: Clienți API
+        archetypes: Tipuri de produse
+        assortment: Sortiment
+        attributes: Atribute
+        blocks: Blocuri
+        channels: Canale
+        configuration: Configurare
+        contact_requests: Cereri de contact
+        contact_topics: Subiecte contact
+        content: Conținut
+        countries: Țări
+        currencies: Monede
+        customer: Client
+        customers: Clienți
+        dashboard: Dashboard
+        emails: E-mailuri
+        exchange_rates: Cursuri
+        general_settings: Setări generale
+        groups: Grupuri
+        homepage: Magazin
+        locales: Setări regionale
+        marketing: Marketing
+        menus: Meniuri
+        new_order: Comandă nouă
+        new_promotion: Promoție nouă
+        options: Opțiuni de produse
+        orders: Comenzi curente
+        pages: Pagini
+        payment_methods: Metode de plată
+        payments: Plăți
+        permissions: Permisiuni
+        products: Produse
+        promotions: Promoții
+        properties: Properties
+        redirects: Redirecționări
+        report: Raporturi
+        roles: Roluri
+        routes: URL-uri
+        sales: Comenzi
+        security_settings: Setări de securitate
+        shipments: Livrări
+        shipping_categories: Categorii de livrare
+        shipping_methods: Metode de livrare
+        slideshow: Slider
+        stockables: Stoc
+        support: Suport
+        tax_categories: Categorii de taxe
+        tax_rates: Taxe
+        taxation_settings: Setări taxe
+        taxonomies: Categorizare
+        users: Utilizători
+        zones: Zone
+  frontend:
+    menu:
+      account:
+        addresses: Adrese
+        homepage: Pagina de pornire
+        orders: Comenzi, facturi
+        password: Parolă
+        profile: Profil
+        shop: La magazin
+      currency: 'Afișare prețuri %currency%'
+      main:
+        account: Contul meu
+        administration: Administrare
+        cart: 'Coș (%items%) %total%'
+        login: Login
+        logout: Ieșire
+        register: Îregistrare
+      sidebar:
+        links: Linkuri
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter
