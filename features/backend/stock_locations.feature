@@ -8,9 +8,9 @@ Feature: Stock location management
         Given store has default configuration
           And there are stock locations:
             | name                | code      |
-            | London Werehouse    | LONDON    |
-            | Nashville Werehouse | NASHVILLE |
-            | Warsaw Werehouse    | WARSAW    |
+            | London Warehouse    | LONDON    |
+            | Nashville Warehouse | NASHVILLE |
+            | Warsaw Warehouse    | WARSAW    |
           And I am logged in as administrator
 
     Scenario: Seeing index of all stock locations
@@ -23,7 +23,7 @@ Feature: Stock location management
         Given I am on the dashboard page
          When I follow "Stock locations"
          Then I should be on the stock location index page
-          And I should see stock location with name "London Werehouse" in the list
+          And I should see stock location with name "London Warehouse" in the list
 
     Scenario: Stock location codes are listed in the index
         Given I am on the dashboard page
@@ -50,3 +50,18 @@ Feature: Stock location management
          Then I should be on the stock location index page
           And I should see stock location with name "Hong Kong" in the list
           And I should see "Stock location has been successfully created."
+
+    Scenario: Accessing the stock location editing form
+        Given I am on the stock location index page
+         When I click "edit" near "London Warehouse"
+         Then I should be editing stock location "London Warehouse"
+
+    Scenario: Updating the stock location
+        Given I am on the stock location index page
+          And I click "edit" near "London Warehouse"
+         When I fill in "Name" with "Big Ben Warehouse"
+          And I press "Save changes"
+         Then I should be on the stock location index page
+          And I should see stock location with name "Big Ben Warehouse" in the list
+          And I should not see stock location with name "London Warehouse" in the list
+          And I should see "Stock location has been successfully updated."

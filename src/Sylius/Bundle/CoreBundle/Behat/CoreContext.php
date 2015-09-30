@@ -648,7 +648,7 @@ class CoreContext extends DefaultContext
         $addressData = explode(',', $address);
 
         $stocklocation->setCode($address[3]);
-        $stocklocation->setName($address[3].' Werehouse');
+        $stocklocation->setName($address[3].' Warehouse');
         $stocklocation->setAddress(
             $this->createAddress($address)
         );
