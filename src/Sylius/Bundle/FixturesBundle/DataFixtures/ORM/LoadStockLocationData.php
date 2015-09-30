@@ -27,10 +27,10 @@ class LoadStockLocationData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $location1 = $this->createLocation('LONDON-1', 'London Werehouse');
+        $location1 = $this->createLocation('LONDON-1', 'London Warehouse');
         $location2 = $this->createLocation('NASHVILLE-1', 'Nashville 1');
         $location3 = $this->createLocation('NASHVILLE-2', 'Nashville 2');
-        $location4 = $this->createLocation('WARSAW-1', 'Warsaw Werehouse');
+        $location4 = $this->createLocation('WARSAW-1', 'Warsaw Warehouse');
 
         foreach (array($location1, $location2, $location3, $location4) as $location) {
             $manager->persist($location);
