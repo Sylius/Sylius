@@ -108,7 +108,7 @@ EOT
             } while ($exists);
 
             $user->setEmail($email);
-            $user->setPlainPassword($this->askHidden($output, 'Choose password:', array(new NotBlank())));
+            $user->setPlainPassword($this->getAdministratorPassword($output));
         }
 
         $user->setEnabled(true);
@@ -376,5 +376,24 @@ EOT
         $codes = $this->ask($output, '<question>'.$question.'</question> ', array(), $defaultAnswer);
 
         return explode(',', $codes);
+    }
+
+    /**
+     * @param OutputInterface $output
+     *
+     * @return mixed
+     */
+    private function getAdministratorPassword(OutputInterface $output)
+    {
+        do {
+            $password = $this->askHidden($output, 'Choose password:', array(new NotBlank()));
+            $repeatedPassword = $this->askHidden($output, 'Repeat password:', array(new NotBlank()));
+
+            if ($repeatedPassword !== $password) {
+                $output->writeln('<error>Passwords does not match confirmation!</error>');
+            }
+        } while ($repeatedPassword !== $password);
+
+        return $password;
     }
 }
