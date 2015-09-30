@@ -65,3 +65,10 @@ Feature: Stock location management
           And I should see stock location with name "Big Ben Warehouse" in the list
           And I should not see stock location with name "London Warehouse" in the list
           And I should see "Stock location has been successfully updated."
+
+    Scenario: Deleting stock location
+        Given I am on the stock location index page
+         When I click "delete" near "London Warehouse"
+         Then I should still be on the stock location index page
+          And I should see "Stock location has been successfully deleted."
+          And I should not see stock location with name "London Warehouse" in that list
