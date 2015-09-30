@@ -86,7 +86,11 @@ class WebContext extends DefaultContext
 
         $entityManager = $this->getEntityManager();
         $entityManager->getFilters()->disable('softdeleteable');
-        $resource = $this->findOneBy($type, array($property => $value));
+
+        $resource = $this->waitFor(function () use ($type, $property, $value) {
+            return $this->getRepository($type)->findOneBy([$property => $value]);
+        });
+
         $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
@@ -524,37 +528,21 @@ class WebContext extends DefaultContext
 
     /**
      * @param NodeElement $modalContainer
-     *
-     * @throws \Exception
      */
     protected function waitForModalToAppear($modalContainer)
     {
-        $i = 0;
-        while (false === strpos($modalContainer->getAttribute('class'), 'in')) {
-            if (10 === $i) {
-                throw new \Exception('The confirmation modal was not opened...');
-            }
-
-            $this->getSession()->wait(100);
-            ++$i;
-        }
+        $this->waitFor(function () use ($modalContainer) {
+            return false !== strpos($modalContainer->getAttribute('class'), 'in');
+        });
     }
 
     /**
      * @param NodeElement $modalContainer
-     *
-     * @throws \Exception
      */
     protected function waitForModalToDisappear($modalContainer)
     {
-        $i = 0;
-        while (false !== strpos($modalContainer->getAttribute('class'), 'in')) {
-            if (10 === $i) {
-                throw new \Exception('The confirmation modal was not closed...');
-            }
-
-            $this->getSession()->wait(100);
-            ++$i;
-        }
+        $this->waitFor(function () use ($modalContainer) {
+            return false === strpos($modalContainer->getAttribute('class'), 'in');
+        });
     }
 }
