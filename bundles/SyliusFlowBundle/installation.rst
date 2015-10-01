@@ -53,9 +53,9 @@ Lets create a few simple steps:
     namespace Acme\DemoBundle\Process\Step;
 
     use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-    use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+    use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 
-    class FirstStep extends ControllerStep
+    class FirstStep extends AbstractControllerStep
     {
         public function displayAction(ProcessContextInterface $context)
         {
@@ -76,9 +76,9 @@ Lets create a few simple steps:
     namespace Acme\DemoBundle\Process\Step;
 
     use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-    use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+    use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 
-    class SecondStep extends ControllerStep
+    class SecondStep extends AbstractControllerStep
     {
         public function displayAction(ProcessContextInterface $context)
         {
