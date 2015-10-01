@@ -20,11 +20,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 class AverageRatingCalculator implements AverageRatingCalculatorInterface
 {
     /**
-     * @var int
-     */
-    private $reviewsNumber = 0;
-
-    /**
      * {@inheritdoc}
      */
     public function calculate(ReviewableInterface $reviewable)
@@ -34,32 +29,16 @@ class AverageRatingCalculator implements AverageRatingCalculatorInterface
         }
 
         $sum = 0.0;
+        $reviewsNumber = 0;
 
         foreach ($reviews as $review) {
-            $sum = $this->addReviewRatingIfAccepted($sum, $review);
+            if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
+                $reviewsNumber++;
+
+                $sum = $sum + $review->getRating();
+            }
         }
 
-        if (0 === $this->reviewsNumber) {
-            return 0;
-        }
-
-        return $sum / $this->reviewsNumber;
-    }
-
-    /**
-     * @param float           $sum
-     * @param ReviewInterface $review
-     *
-     * @return float
-     */
-    private function addReviewRatingIfAccepted($sum, ReviewInterface $review)
-    {
-        if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
-            $this->reviewsNumber++;
-
-            return $sum + $review->getRating();
-        }
-
-        return $sum;
+        return $sum / $reviewsNumber;
     }
 }

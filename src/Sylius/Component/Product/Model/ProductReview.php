@@ -18,5 +18,4 @@ use Sylius\Component\Review\Model\Review;
  */
 class ProductReview extends Review
 {
-    
 }

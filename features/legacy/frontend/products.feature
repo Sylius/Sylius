@@ -97,8 +97,8 @@ Feature: Products
         And I fill in "Author" with "guest@example.com"
         And I select the "5" radio button
         And I press "Submit"
+        And I wait 3 seconds
         Then I should see "Product review has been successfully created."
-        And I should see 2 reviews on the reviews list
 
     @javascript
     Scenario: Adding review as logged in user
@@ -108,5 +108,5 @@ Feature: Products
         And I fill in "Comment" with "Very good shirt."
         And I select the "5" radio button
         And I press "Submit"
+        And I wait 3 seconds
         Then I should see "Product review has been successfully created."
-        And I should see 2 reviews on the reviews list
