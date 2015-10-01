@@ -381,7 +381,6 @@ class Order extends Cart implements OrderInterface
     public function removeShipment(ShipmentInterface $shipment)
     {
         if ($this->hasShipment($shipment)) {
-            $shipment->setOrder(null);
             $this->shipments->removeElement($shipment);
         }
 

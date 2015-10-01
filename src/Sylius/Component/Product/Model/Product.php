@@ -107,7 +107,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|BaseArchetypeInterface $archetype
+     * {@inheritdoc}
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -514,8 +514,8 @@ class Product extends AbstractTranslatable implements ProductInterface
     {
         $this->deletedAt = $deletedAt;
 
-        if(null === $deletedAt) {
-            foreach($this->variants as $variant) {
+        if (null === $deletedAt) {
+            foreach ($this->variants as $variant) {
                 $variant->setDeletedAt(null);
             }
         }

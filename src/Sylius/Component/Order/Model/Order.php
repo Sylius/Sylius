@@ -253,6 +253,7 @@ class Order implements OrderInterface
         if (!is_int($itemsTotal)) {
             throw new \InvalidArgumentException('Items total must be an integer.');
         }
+
         $this->itemsTotal = $itemsTotal;
     }
 
@@ -415,6 +416,7 @@ class Order implements OrderInterface
         if (!is_int($total)) {
             throw new \InvalidArgumentException('Total must be an integer.');
         }
+
         $this->total = $total;
     }
 
@@ -535,7 +537,6 @@ class Order implements OrderInterface
         return $this->items->isEmpty();
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -545,6 +546,16 @@ class Order implements OrderInterface
             $this->identities->add($identity);
 
             $identity->setOrder($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeIdentity(IdentityInterface $identity)
+    {
+        if ($this->hasIdentity($identity)) {
+            $this->identities->removeElement($identity);
         }
     }
 
@@ -562,16 +573,5 @@ class Order implements OrderInterface
     public function getIdentities()
     {
         return $this->identities;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeIdentity(IdentityInterface $identity)
-    {
-        if ($this->hasIdentity($identity)) {
-            $identity->setOrder(null);
-            $this->identities->removeElement($identity);
-        }
     }
 }

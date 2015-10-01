@@ -288,7 +288,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public static function getCategoryRequirementLabels()
     {
