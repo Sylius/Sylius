@@ -18,5 +18,4 @@ use Sylius\Component\Review\Model\ReviewerInterface;
  */
 interface ProductReviewerInterface extends ReviewerInterface
 {
-
 }

@@ -76,6 +76,7 @@ Feature: Reviews
     Scenario: Removing review from the list
         Given I am on the product review index page
          When I press "delete" near "Awesome"
+          And I click "delete" from the confirmation modal
          Then I should still be on the product review index page
           And I should see "Review has been successfully deleted."
 
@@ -83,6 +84,7 @@ Feature: Reviews
     Scenario: Removing review from details page
         Given I am on the page of product review with title "Awesome"
          When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the product review index page
           And I should see "Review has been successfully deleted."
 
