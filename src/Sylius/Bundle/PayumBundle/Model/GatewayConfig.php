@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Model\PaymentConfigInterface;
+use Payum\Core\Model\GatewayConfigInterface;
 
-class PaymentConfig implements PaymentConfigInterface
+class GatewayConfig implements GatewayConfigInterface
 {
     /**
      * @var int
@@ -23,7 +23,7 @@ class PaymentConfig implements PaymentConfigInterface
     /**
      * @var string
      */
-    protected $paymentName;
+    protected $gatewayName;
 
     /**
      * @var string
@@ -51,17 +51,17 @@ class PaymentConfig implements PaymentConfigInterface
     /**
      * {@inheritDoc}
      */
-    public function getPaymentName()
+    public function getGatewayName()
     {
-        return $this->paymentName;
+        return $this->gatewayName;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setPaymentName($paymentName)
+    public function setGatewayName($gatewayName)
     {
-        $this->paymentName = $paymentName;
+        $this->gatewayName = $gatewayName;
     }
 
     /**

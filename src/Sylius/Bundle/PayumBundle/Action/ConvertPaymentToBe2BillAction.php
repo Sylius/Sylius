@@ -9,32 +9,35 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
+namespace Sylius\Bundle\PayumBundle\Action;
 
+use Payum\Core\Action\GatewayAwareAction;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\Convert;
 use Payum\Core\Request\GetHttpRequest;
-use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
+class ConvertPaymentToBe2BillAction extends GatewayAwareAction
 {
     /**
      * {@inheritDoc}
+     *
+     * @param Convert $request
      */
-    protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
+    public function execute($request)
     {
-        if ($payment->getDetails()) {
-            return;
-        }
+        RequestNotSupportedException::assertSupports($this, $request);
 
-        $this->payment->execute($httpRequest = new GetHttpRequest());
-
+        /** @var PaymentInterface $payment */
+        $payment = $request->getSource();
         $order = $payment->getOrder();
 
-        $details = array();
+        $this->gateway->execute($httpRequest = new GetHttpRequest());
+
+        $details = [];
         $details['AMOUNT'] = $order->getTotal();
         $details['CLIENTEMAIL'] = $order->getCustomer()->getEmail();
         $details['CLIENTUSERAGENT'] = $httpRequest->userAgent ?: 'Unknown';
@@ -43,6 +46,18 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();
 
-        $payment->setDetails($details);
+        $request->setResult($details);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($request)
+    {
+        return
+            $request instanceof Convert &&
+            $request->getSource() instanceof PaymentInterface &&
+            $request->getTo() === 'array'
+        ;
     }
 }

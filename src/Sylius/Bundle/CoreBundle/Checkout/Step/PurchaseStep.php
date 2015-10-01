@@ -16,10 +16,9 @@ use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\PayumBundle\Payum\Request\GetStatus;
+use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PurchaseStep extends CheckoutStep
@@ -55,21 +54,14 @@ class PurchaseStep extends CheckoutStep
         $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new GetStatus($token);
-        $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
+        $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
 
         /** @var $payment PaymentInterface */
         $payment = $status->getFirstModel();
         $order = $payment->getOrder();
 
+        // Should it be here??
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
-
-        $nextState = $status->getValue();
-
-        $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
-
-        if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
-            $stateMachine->apply($transition);
-        }
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
