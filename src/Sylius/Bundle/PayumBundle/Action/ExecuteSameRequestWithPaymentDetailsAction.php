@@ -9,59 +9,46 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Action;
 
-use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Action\GatewayAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\Capture;
-use Payum\Core\Security\TokenInterface;
+use Payum\Core\Request\Generic;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-abstract class AbstractCapturePaymentAction extends PaymentAwareAction
+class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareAction
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
-     * @param $request Capture
+     * @param $request Generic
      */
     public function execute($request)
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         $payment = $request->getModel();
-
-        $this->composeDetails($payment, $request->getToken());
-
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
 
         try {
             $request->setModel($details);
-            $this->payment->execute($request);
 
-            $payment->setDetails($details);
-        } catch (\Exception $e) {
-            $payment->setDetails($details);
-
-            throw $e;
+            $this->gateway->execute($request);
+        } finally {
+            $payment->setDetails((array) $details);
         }
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supports($request)
     {
         return
-            $request instanceof Capture &&
+            $request instanceof Generic &&
             $request->getModel() instanceof PaymentInterface
         ;
     }
-
-    /**
-     * @param PaymentInterface $payment
-     * @param TokenInterface   $token
-     */
-    abstract protected function composeDetails(PaymentInterface $payment, TokenInterface $token);
 }

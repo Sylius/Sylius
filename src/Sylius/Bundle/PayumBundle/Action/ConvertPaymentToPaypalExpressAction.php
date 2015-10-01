@@ -9,25 +9,28 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
+namespace Sylius\Bundle\PayumBundle\Action;
 
-use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
+use Payum\Core\Action\ActionInterface;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\Convert;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
-class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAction
+class ConvertPaymentToPaypalExpressAction implements ActionInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     *
+     * @param Convert $request
      */
-    protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
+    public function execute($request)
     {
-        if ($payment->getDetails()) {
-            return;
-        }
+        RequestNotSupportedException::assertSupports($this, $request);
 
+        /** @var PaymentInterface $payment */
+        $payment = $request->getSource();
         $order = $payment->getOrder();
 
         $details = array();
@@ -66,9 +69,26 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
         }
 
-        $payment->setDetails($details);
+        $request->setResult($details);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($request)
+    {
+        return
+            $request instanceof Convert &&
+            $request->getSource() instanceof PaymentInterface &&
+            $request->getTo() === 'array'
+        ;
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return int
+     */
     private function calculateNonNeutralTaxTotal(OrderInterface $order)
     {
         $nonNeutralTaxTotal = 0;

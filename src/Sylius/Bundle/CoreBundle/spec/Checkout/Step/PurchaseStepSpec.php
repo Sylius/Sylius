@@ -12,21 +12,17 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Payum\Core\PaymentInterface;
+use Payum\Core\GatewayInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Payment\SyliusPaymentEvents;
-use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -46,19 +42,18 @@ class PurchaseStepSpec extends ObjectBehavior
         Request $request,
         CartProviderInterface $cartProvider,
         RegistryInterface $payum,
-        PaymentInterface $payment,
+        GatewayInterface $gateway,
         EventDispatcherInterface $eventDispatcher,
         DoctrinRegistryInterface $doctrine,
         ObjectManager $objectManager,
         Session $session,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        FactoryInterface $factory
+        TranslatorInterface $translator
     ) {
         $session->getFlashBag()->willReturn($flashBag);
         $doctrine->getManager()->willReturn($objectManager);
-        $token->getPaymentName()->willReturn('aPaymentName');
-        $payum->getPayment('aPaymentName')->willReturn($payment);
+        $token->getGatewayName()->willReturn('aGatewayName');
+        $payum->getGateway('aGatewayName')->willReturn($gateway);
         $httpRequestVerifier->verify($request)->willReturn($token);
         $httpRequestVerifier->invalidate($token)->willReturn(null);
 
@@ -70,7 +65,6 @@ class PurchaseStepSpec extends ObjectBehavior
         $container->get('doctrine')->willReturn($doctrine);
         $container->has('doctrine')->willReturn(true);
         $container->get('translator')->willReturn($translator);
-        $container->get('sm.factory')->willReturn($factory);
 
         $this->setName('purchase');
 
@@ -89,11 +83,9 @@ class PurchaseStepSpec extends ObjectBehavior
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         Request $request,
-        $factory,
         ProcessContextInterface $context,
-        PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
-        StateMachineInterface $sm
+        GatewayInterface $gateway,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $context->getRequest()->willReturn($request);
 
@@ -103,17 +95,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $paymentModel->setOrder($order);
         $order->addPayment($paymentModel);
 
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
+        $gateway
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
             }
         );
-
-        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
-        $sm->getTransitionToState('completed')->willReturn(PaymentTransitions::SYLIUS_COMPLETE);
-        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldBeCalled();
 
         $eventDispatcher
             ->dispatch(
@@ -144,11 +132,9 @@ class PurchaseStepSpec extends ObjectBehavior
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         Request $request,
-        $factory,
         ProcessContextInterface $context,
-        PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
-        StateMachineInterface $sm
+        GatewayInterface $gateway,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $context->getRequest()->willReturn($request);
 
@@ -158,17 +144,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $paymentModel->setOrder($order);
         $order->addPayment($paymentModel);
 
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
+        $gateway
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
             }
         );
-
-        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
-        $sm->getTransitionToState('completed')->willReturn(null);
-        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
         $eventDispatcher
             ->dispatch(

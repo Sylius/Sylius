@@ -31,8 +31,8 @@
         "sylius/order-bundle":                  "0.16.*",
         "sylius/payment-bundle":                "0.16.*",
         "sylius/resource-bundle":               "0.16.*",
-        "payum/payum":                          "~0.14.0",
-        "payum/payum-bundle":                   "~0.14.2",
+        "payum/payum":                          "~1.0",
+        "payum/payum-bundle":                   "~1.0",
         "winzou/state-machine":                 "~0.1"
     },
     "require-dev": {

@@ -7,11 +7,11 @@ payum:
         token_storage:
             Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken: { doctrine: orm }
 
-    dynamic_payments:
+    dynamic_gateways:
         config_storage:
-            Sylius\Bundle\PayumBundle\Model\PaymentConfig: { doctrine: orm }
+            Sylius\Bundle\PayumBundle\Model\GatewayConfig: { doctrine: orm }
 
-    payments:
+    gateways:
         paypal_express_checkout:
             paypal_express_checkout_nvp:
                 username:  %paypal.express_checkout.username%
@@ -37,12 +37,4 @@ payum:
                 secret_key: %stripe.secret_key%
 
         dummy:
-            custom:
-                actions:
-                    - sylius.payum.dummy.action.capture_payment
-                    - sylius.payum.dummy.action.payment_status
-
-        offline:
-            offline:
-                actions:
-                    - sylius.payum.offline.action.capture_payment
+            offline: ~
