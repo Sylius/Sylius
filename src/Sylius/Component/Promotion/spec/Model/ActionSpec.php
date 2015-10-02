@@ -11,8 +11,10 @@
 
 namespace spec\Sylius\Component\Promotion\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\BenefitInterface;
+use Sylius\Component\Promotion\Model\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -35,16 +37,28 @@ class ActionSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_type_by_default()
+    function it_should_not_have_benefits_by_default()
     {
-        $this->getType()->shouldReturn(null);
+        $this->getBenefits()->shouldHaveType(ArrayCollection::class);
+        $this->getBenefits()->shouldBeEmpty();
     }
 
-    function its_type_should_be_mutable()
+    function it_should_not_have_filters_by_default()
     {
-        $this->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
-        $this->getType()->shouldReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
+        $this->getFilters()->shouldHaveType(ArrayCollection::class);
+        $this->getFilters()->shouldBeEmpty();
     }
+
+//    function it_should_not_have_type_by_default()
+//    {
+//        $this->getType()->shouldReturn(null);
+//    }
+//
+//    function its_type_should_be_mutable()
+//    {
+//        $this->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
+//        $this->getType()->shouldReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
+//    }
 
     function it_should_initialize_array_for_configuration_by_default()
     {
@@ -67,4 +81,33 @@ class ActionSpec extends ObjectBehavior
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);
     }
+
+    function its_adding_and_removing_filters(FilterInterface $filter)
+    {
+        $this->hasFilter($filter)->shouldReturn(false);
+
+        $filter->setAction($this)->shouldBeCalled();
+        $this->addFilter($filter);
+
+        $this->hasFilter($filter)->shouldReturn(true);
+
+        $filter->unsetAction()->shouldBeCalled();
+        $this->removeFilter($filter)->shouldReturn(null);
+        $this->hasFilter($filter)->shouldReturn(false);
+    }
+
+    function its_adding_and_removing_benefits(BenefitInterface $benefit)
+    {
+        $this->hasBenefit($benefit)->shouldReturn(false);
+
+        $benefit->setAction($this)->shouldBeCalled();
+        $this->addBenefit($benefit);
+
+        $this->hasBenefit($benefit)->shouldReturn(true);
+
+        $benefit->unsetAction()->shouldBeCalled();
+        $this->removeBenefit($benefit)->shouldReturn(null);
+        $this->hasBenefit($benefit)->shouldReturn(false);
+    }
+
 }

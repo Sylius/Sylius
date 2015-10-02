@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Promotion\Model\FilterInterface;
+
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -20,11 +23,6 @@ class Action implements ActionInterface
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $type;
 
     /**
      * @var array
@@ -37,28 +35,44 @@ class Action implements ActionInterface
     protected $promotion;
 
     /**
+     * @var  ArrayCollection[BenefitInterface]
+     */
+    protected $benefits;
+
+    /**
+     * @var ArrayCollection[FilterInterface]
+     */
+    protected $filters;
+
+    public function __construct()
+    {
+        $this->benefits = new ArrayCollection();
+        $this->filters = new ArrayCollection();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function getType()
+//    {
+//        return $this->type;
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function setType($type)
+//    {
+//        $this->type = $type;
+//    }
 
     /**
      * {@inheritdoc}
@@ -91,4 +105,73 @@ class Action implements ActionInterface
     {
         $this->promotion = $promotion;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBenefits()
+    {
+        return $this->benefits;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFilter(FilterInterface $filter)
+    {
+        return $this->filters->contains($filter);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->filters->add($filter);
+        $filter->setAction($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeFilter(FilterInterface $filter)
+    {
+        $this->filters->removeElement($filter);
+        $filter->unsetAction();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBenefit(BenefitInterface $benefit)
+    {
+        return $this->benefits->contains($benefit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBenefit(BenefitInterface $benefit)
+    {
+        $this->benefits->add($benefit);
+        $benefit->setAction($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeBenefit(BenefitInterface $benefit)
+    {
+        $this->benefits->removeElement($benefit);
+        $benefit->unsetAction();
+    }
+
 }
