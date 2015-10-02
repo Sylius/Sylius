@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Product stock form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductStockType extends AbstractType
@@ -42,7 +40,6 @@ class ProductStockType extends AbstractType
             ->add('quantity', 'integer')
             ->add('location', 'sylius_stock_location_choice')
         ;
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

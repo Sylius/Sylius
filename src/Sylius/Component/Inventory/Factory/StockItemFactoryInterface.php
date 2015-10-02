@@ -15,8 +15,6 @@ use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Stock item factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface StockItemFactoryInterface

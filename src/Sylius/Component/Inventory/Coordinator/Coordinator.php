@@ -17,9 +17,7 @@ use Sylius\Component\Inventory\Packaging\PackerInterface;
 use Sylius\Component\Inventory\Provider\StockLocationProviderInterface;
 
 /**
- * Coordinator.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * {@inheritdoc}
  */
 class Coordinator implements CoordinatorInterface
 {

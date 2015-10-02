@@ -21,14 +21,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 class StockLocation implements StockLocationInterface
 {
     /**
-     * Stock item id.
-     *
      * @var mixed
      */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $code;
+
+    /**
+     * @var bool
+     */
     protected $enabled = true;
 
     /**

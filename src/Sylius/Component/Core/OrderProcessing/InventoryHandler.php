@@ -91,7 +91,6 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function holdInventory(OrderInterface $order)
     {
-        // TODO: handle multiple stock locations
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
@@ -104,7 +103,6 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function releaseInventory(OrderInterface $order)
     {
-        // TODO: handle multiple stock locations
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 

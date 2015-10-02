@@ -31,7 +31,7 @@ class ShipmentFactory implements ShipmentFactoryInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface  $shipmentRepository
+     * @param RepositoryInterface $shipmentRepository
      */
     public function __construct(RepositoryInterface $shipmentRepository)
     {
