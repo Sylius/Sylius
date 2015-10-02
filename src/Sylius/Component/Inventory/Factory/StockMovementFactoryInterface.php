@@ -14,8 +14,6 @@ namespace Sylius\Component\Inventory\Factory;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 
 /**
- * Stock movement factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface StockMovementFactoryInterface

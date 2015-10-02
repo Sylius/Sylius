@@ -15,8 +15,6 @@ use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Stock movement factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StockMovementFactory implements StockMovementFactoryInterface

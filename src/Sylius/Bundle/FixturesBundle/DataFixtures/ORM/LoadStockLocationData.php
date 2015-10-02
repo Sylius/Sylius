@@ -16,8 +16,6 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\StockLocationInterface;
 
 /**
- * Stock location data.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadStockLocationData extends DataFixture

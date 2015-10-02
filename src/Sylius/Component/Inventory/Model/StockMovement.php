@@ -21,13 +21,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 class StockMovement implements StockMovementInterface
 {
     /**
-     * Stock movement id.
-     *
      * @var mixed
      */
     protected $id;
 
+    /**
+     * @var StockItemInterface
+     */
     protected $stockItem;
+
+    /**
+     * @var int
+     */
     protected $quantity;
 
     /**
@@ -44,9 +49,6 @@ class StockMovement implements StockMovementInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();

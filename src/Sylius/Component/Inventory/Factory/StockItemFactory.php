@@ -20,8 +20,6 @@ use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Stock item factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StockItemFactory implements StockItemFactoryInterface
