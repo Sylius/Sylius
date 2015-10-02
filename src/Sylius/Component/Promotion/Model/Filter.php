@@ -80,6 +80,14 @@ class Filter implements FilterInterface
     /**
      * {@inheritdoc}
      */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function unsetAction()
     {
         $this->action = null;

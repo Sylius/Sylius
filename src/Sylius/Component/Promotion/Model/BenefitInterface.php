@@ -50,4 +50,9 @@ interface BenefitInterface
 
     public function unsetAction();
 
+    /**
+     * @return ActionInterface
+     */
+    public function getAction();
+
 }

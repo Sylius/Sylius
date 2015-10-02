@@ -21,6 +21,19 @@
         <many-to-one field="promotion" target-entity="Sylius\Component\Promotion\Model\PromotionInterface" inversed-by="actions">
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+
+        <one-to-many field="benefits" target-entity="Sylius\Component\Promotion\Model\BenefitInterface" mapped-by="action">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="filters" target-entity="Sylius\Component\Promotion\Model\FilterInterface" mapped-by="action">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
     </mapped-superclass>
 
 </doctrine-mapping>

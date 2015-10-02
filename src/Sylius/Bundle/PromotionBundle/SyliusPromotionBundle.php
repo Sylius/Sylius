@@ -55,6 +55,8 @@ class SyliusPromotionBundle extends AbstractResourceBundle
             'Sylius\Component\Promotion\Model\CouponInterface'           => 'sylius.model.promotion_coupon.class',
             'Sylius\Component\Promotion\Model\RuleInterface'             => 'sylius.model.promotion_rule.class',
             'Sylius\Component\Promotion\Model\ActionInterface'           => 'sylius.model.promotion_action.class',
+            'Sylius\Component\Promotion\Model\BenefitInterface'          => 'sylius.model.promotion_benefit.class',
+            'Sylius\Component\Promotion\Model\FilterInterface'           => 'sylius.model.promotion_filter.class',
             'Sylius\Component\Promotion\Model\PromotionSubjectInterface' => 'sylius.model.promotion_subject.class',
         );
     }

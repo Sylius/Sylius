@@ -85,4 +85,13 @@ class Benefit implements BenefitInterface
         $this->action = null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+
 }

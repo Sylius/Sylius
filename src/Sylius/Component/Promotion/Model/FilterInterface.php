@@ -53,4 +53,9 @@ interface FilterInterface
      */
     public function unsetAction();
 
+    /**
+     * @return ActionInterface
+     */
+    public function getAction();
+
 }
