@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventListener;
 
-use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -31,7 +30,7 @@ class GuestCustomerFormListener implements EventSubscriberInterface
     private $customerRepository;
 
     /**
-     * @var CustomerContext
+     * @var CustomerContextInterface
      */
     private $customerContext;
 
@@ -99,11 +98,13 @@ class GuestCustomerFormListener implements EventSubscriberInterface
         $customer = $this->customerRepository->findOneBy(array('email' => $email));
 
         if (null !== $customer && null !== $customer->getUser()) {
-            return $customer;
+            return null;
         }
 
-        $customer = $this->customerRepository->createNew();
-        $customer->setEmail($email);
+        if (null === $customer) {
+            $customer = $this->customerRepository->createNew();
+            $customer->setEmail($email);
+        }
 
         return $customer;
     }

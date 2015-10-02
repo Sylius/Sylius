@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,18 +25,18 @@ class CustomerGuestType extends AbstractResourceType
     /**
      * @var EventSubscriberInterface
      */
-    private $eventSubscriber;
+    private $guestCustomerSubscriber;
 
     /**
      * @param string                   $dataClass
      * @param array                    $validationGroups
-     * @param EventSubscriberInterface $eventSubscriber
+     * @param EventSubscriberInterface $guestCustomerSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventSubscriber)
+    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $guestCustomerSubscriber)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->eventSubscriber = $eventSubscriber;
+        $this->guestCustomerSubscriber = $guestCustomerSubscriber;
     }
 
     /**
@@ -50,7 +48,8 @@ class CustomerGuestType extends AbstractResourceType
             ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventSubscriber($this->eventSubscriber)
+            ->addEventSubscriber($this->guestCustomerSubscriber)
+            ->setDataLocked(false)
         ;
     }
 
