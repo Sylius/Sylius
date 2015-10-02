@@ -17,14 +17,17 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\User\Model\Customer">
-        <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
-            <option name="message">sylius.customer.email.registered</option>
-            <option name="groups">sylius_customer_guest</option>
-        </constraint>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="message">sylius.customer.email.unique</option>
             <option name="fields">email</option>
-            <option name="groups">sylius</option>
+            <option name="groups">
+                <value>sylius</value>
+                <value>sylius_customer_guest</value>
+            </option>
+        </constraint>
+        <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
+            <option name="message">sylius.customer.email.registered</option>
+            <option name="groups">sylius_customer_guest</option>
         </constraint>
         <property name="firstName">
             <constraint name="NotBlank">

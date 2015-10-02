@@ -92,7 +92,7 @@ class GuestCustomerFormListenerSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_sets_existing_customer_as_form_data_if_customer_with_passed_email_already_exist(
+    function it_sets_null_as_form_data_if_customer_with_passed_email_already_exist(
         $customerContext,
         $customerRepository,
         CustomerInterface $customer,
@@ -107,7 +107,7 @@ class GuestCustomerFormListenerSpec extends ObjectBehavior
         $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn($customer)->shouldBeCalled();
         $customer->getUser()->willReturn($user)->shouldBeCalled();
 
-        $form->setData($customer)->shouldBeCalled();
+        $form->setData(null)->shouldBeCalled();
 
         $this->preSubmit($event);
     }

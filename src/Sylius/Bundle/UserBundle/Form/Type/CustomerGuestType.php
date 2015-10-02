@@ -25,18 +25,18 @@ class CustomerGuestType extends AbstractResourceType
     /**
      * @var EventSubscriberInterface
      */
-    private $eventSubscriber;
+    private $guestCustomerSubscriber;
 
     /**
      * @param string                   $dataClass
      * @param array                    $validationGroups
-     * @param EventSubscriberInterface $eventSubscriber
+     * @param EventSubscriberInterface $guestCustomerSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventSubscriber)
+    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $guestCustomerSubscriber)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->eventSubscriber = $eventSubscriber;
+        $this->guestCustomerSubscriber = $guestCustomerSubscriber;
     }
 
     /**
@@ -48,7 +48,8 @@ class CustomerGuestType extends AbstractResourceType
             ->add('email', 'email', array(
                 'label' => 'sylius.form.customer.email',
             ))
-            ->addEventSubscriber($this->eventSubscriber)
+            ->addEventSubscriber($this->guestCustomerSubscriber)
+            ->setDataLocked(false)
         ;
     }
 

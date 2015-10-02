@@ -96,3 +96,13 @@ Feature: Checkout security
           And I press "Register"
          Then I should be on the checkout security forward step
           And I should see "Please enter your email"
+
+    Scenario: Placing order as guest
+         When I fill in guest email with "test@example.com"
+          And I press "Proceed with your order"
+         Then I should be redirected to the checkout addressing step
+
+    Scenario: Placing order as guest with already registered email
+         When I fill in guest email with "john@example.com"
+          And I press "Proceed with your order"
+         Then I should see "This email is already registered, please login or use forgotten password."
