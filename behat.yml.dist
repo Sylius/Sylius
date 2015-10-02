@@ -129,6 +129,7 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
                 - Sylius\Bundle\InventoryBundle\Behat\StockLocationContext
+                - Sylius\Bundle\InventoryBundle\Behat\StockItemContext
             filters:
                 tags: "@inventory"
 

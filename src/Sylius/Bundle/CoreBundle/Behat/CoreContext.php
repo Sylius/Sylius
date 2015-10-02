@@ -784,7 +784,7 @@ class CoreContext extends DefaultContext
     /**
      * @param ProductInterface $product
      */
-    private function generateProductVariations($product)
+    private function generateProductVariations(ProductInterface $product)
     {
         $this->getService('sylius.generator.product_variant')->generate($product);
 
