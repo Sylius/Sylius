@@ -95,6 +95,11 @@ Feature: Product archetypes
         Then I should be on the product archetype index page
         And I should see "Archetype has been successfully updated."
 
+    Scenario: Parent archetype choices list
+        Given I am editing product archetype "T-Shirt"
+        Then I should not see Parent "T-Shirt" as available choice
+        And I should see Parent "Beverage" as available choice
+
     Scenario: Inheriting the properties from parent archetype to a child archetype
         Given I am on the product archetype creation page
         When I fill in "Code" with "coffee"
