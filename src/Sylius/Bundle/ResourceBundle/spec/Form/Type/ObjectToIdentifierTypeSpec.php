@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ObjectToIdentifierTypeSpec extends ObjectBehavior
 {
@@ -44,7 +44,7 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'identifier' => 'id'
@@ -54,7 +54,7 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
             'identifier' => array('string')
         ))->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

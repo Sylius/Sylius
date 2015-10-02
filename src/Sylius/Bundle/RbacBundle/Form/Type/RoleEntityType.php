@@ -13,6 +13,7 @@ namespace Sylius\Bundle\RbacBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RoleEntityType extends ResourceChoiceType
 {
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'query_builder' => function (EntityRepository $repository) {

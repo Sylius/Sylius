@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType as BasePaymentMethodChoiceType;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Payment method choice type
@@ -26,9 +26,9 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $queryBuilder = function (Options $options) {
             $repositoryOptions = array(

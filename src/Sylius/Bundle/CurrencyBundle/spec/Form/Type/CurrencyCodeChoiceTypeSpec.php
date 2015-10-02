@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -38,7 +38,7 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class_and_validation_groups(
         $currencyProvider,
-        OptionsResolverInterface $resolver,
+        OptionsResolver $resolver,
         Currency $currency
     ) {
         $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn(array($currency));
@@ -51,7 +51,7 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
             ))
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()
