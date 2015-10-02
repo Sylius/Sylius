@@ -8,5 +8,7 @@ sylius:
     option:
       name: Belső név
       presentation: Bemutató
+      values: Lehetséges értékek
     option_value:
       add_value: Adja hozzá az értéket
+      value: Érték

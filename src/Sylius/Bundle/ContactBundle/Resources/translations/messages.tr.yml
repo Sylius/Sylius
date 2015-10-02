@@ -7,5 +7,7 @@ sylius:
       first_name: Ad
       last_name: Soyad
       email: E-posta
+      message: Mesaj
+      topic: Konu
     contact_topic:
       title: Başlık

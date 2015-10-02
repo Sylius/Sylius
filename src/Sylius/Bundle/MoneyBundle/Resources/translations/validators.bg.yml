@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  exchange_rate:
+    currency:
+      not_blank: Моля изберете валута.
+    rate:
+      not_blank: Моля въведете курс.
+    unique: Валутата трябва да бъде уникална.

@@ -7,5 +7,7 @@ sylius:
       first_name: Voornaam
       last_name: Achternaam
       email: E-mail
+      message: Bericht
+      topic: Onderwerp
     contact_topic:
       title: Titel

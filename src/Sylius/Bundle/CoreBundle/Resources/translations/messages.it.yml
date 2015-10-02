@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
       payment_method: Metodo di pagamento
       shipping_method: Metodo di spedizione
+    coupon:
+      per_user_usage_limit: Limitazione di utilizzo per utente
     group:
       name: Nome
       roles: Regole

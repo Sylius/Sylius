@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Aprašymas
+      name: Pavadinimas
+      parent: Motininis elementas
+      permalink: Nuolatinė nuoroda
+    taxonomy:
+      name: Pavadinimas
+  taxon:
+    create_taxon: Sukurti taksoną
+    delete_taxonomy: Pašalinti taksonomiją
+    manage_taxonomies: Valdyti taksonomijas
+    no_taxonomies: Nėra taksonomijų.
+    no_taxons: Nėra taksonų.
+    update_taxonomy: Atnaujinti taksonomiją

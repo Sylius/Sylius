@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  option:
+    name:
+      not_blank: Prosím, zadajte názov voľby.
+  variant:
+    combination: Variant s touto sadou možností už existuje.

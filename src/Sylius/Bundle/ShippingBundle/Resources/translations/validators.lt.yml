@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Kategorijos pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+      min_length: 'Kategorijos pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite pristatymo kategorijos pavadinimą.
+  shipping_method:
+    calculator:
+      max_length: Didžiausias ilgis
+      min_length: Mažiausias ilgis
+      not_blank: Ne tuščias
+    name:
+      max_length: 'Pristatymo būdo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+      min_length: 'Pristatymo būdo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite pristatymo būdo zoną.

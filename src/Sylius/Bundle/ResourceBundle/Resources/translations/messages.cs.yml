@@ -3,4 +3,5 @@
 
 form:
   collection:
+    add: Přidat
     delete: Odstranit

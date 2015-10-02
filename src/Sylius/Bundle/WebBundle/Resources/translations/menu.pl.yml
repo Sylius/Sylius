@@ -15,7 +15,7 @@ sylius:
         homepage: Wróć do sklepu
         locales: Ustawienia regionalne
         new_order: Dodaj nowe zamówienie
-        new_promotion: Dodaj nową promocje
+        new_promotion: Dodaj nową promocję
         options: Warianty
         orders: Aktualne zamówienia
         payment_methods: Metody płatności
@@ -23,7 +23,7 @@ sylius:
         products: Produkty
         promotions: Promocje
         properties: Właściwości
-        archetypes: Prototypy
+        prototypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki
@@ -39,7 +39,7 @@ sylius:
         assortment: Asortyment
         blocks: Bloki
         configuration: Konfiguracja
-        content: Zawartość
+        content: Treść
         countries: Kraje
         customer: Klienci
         dashboard: Panel
@@ -49,7 +49,7 @@ sylius:
         homepage: Wróć do sklepu
         locales: Ustawienia regionalne
         new_order: Dodaj nowe zamówienie
-        new_promotion: Dodaj nową promocje
+        new_promotion: Dodaj nową promocję
         options: Warianty
         orders: Aktualne zamówienia
         pages: Strony
@@ -58,7 +58,7 @@ sylius:
         products: Produkty
         promotions: Promocje
         properties: Właściwości
-        archetypes: Prototypy
+        prototypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki

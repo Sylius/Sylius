@@ -1,3 +1,15 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    menu:
+      name: الاسم
+    menu_block:
+      name: الاسم
+    redirect_route:
+      name: الاسم
+    route:
+      name: الاسم
+    string_block:
+      name: الاسم

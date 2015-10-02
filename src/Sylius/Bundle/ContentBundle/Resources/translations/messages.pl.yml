@@ -1,27 +1,55 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: Automatycznie
+route: ścieżka
 sylius:
   form:
+    action_block:
+      action_name: Nazwa akcji
+      id: Id
     imagine_block:
       parent: Rodzic
       internal_name: Nazwa w systemie
+      slideshow_small: Pokaz slajdów Duży (pełna szerokość)
+      slideshow_medium: Pokaz slajdów Średni (treść)
+      slideshow_large: Pokaz slajdów Mały (slajd)
     menu:
+      childrens: Dzieci
+      display: Wyświetl
+      display_children: Wyświetl dzieci
+      label: Etykieta
       name: Nazwa
       parent: Rodzic
+      route: Ścieżka
+      uri: URI
     menu_block:
       body: Zawartość
+      id: Id
       name: Nazwa
     menu_node_block:
-      content: Zawartość
+      content: Treść
+      display: Wyświetl
+      display_children: Wyświetl dzieci
       internal_name: Nazwa w systemie
+      label: Etykieta
+      link_type: Typ łącza
+      publish_end_date: Data zakończenia publikacji
+      publish_start_date: Data publikacji
+      publishable: Możliwe do opublikowania
+      route: Ścieżka
+      uri: URI
     redirect_route:
+      id: Id
       name: Nazwa
+      route_name: Nazwa_ścieżki
+      uri: URI
     reference_block:
       body: Zawartość
+      id: Id
       title: Tytuł
     route:
-      content: Zawartość
+      content: Treść
       name: Nazwa
       parent: Rodzic
     simple_block:
@@ -30,13 +58,20 @@ sylius:
       parent: Rodzic
       title: Tytuł
     slideshow_block:
+      childrens: Dzieci
       internal_name: Nazwa w systemie
       parent: Rodzic
       title: Tytuł
     static_content:
       body: Zawartość
+      id: Id
       internal_name: Nazwa w systemie
+      menu_nodes: Węzły menu
       parent: Rodzic
+      publish_end_date: Data zakończenia publikacji
+      publish_start_date: Data publikacji
+      publishable: Możliwe do opublikowania
+      routes: Ścieżki
       title: Tytuł
     string_block:
       body: Zawartość

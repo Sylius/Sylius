@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Įveskite produkto kodą.
+      unique: Produkto kodas turi būti unikalus.
+    name:
+      not_blank: Įveskite produkto pavadinimą.
+      min_length: 'Produkto pavadinimas turi būti ne mažiau kaip 1 simbolio ilgio.|Produkto pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.'
+      max_length: 'Produkto pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Produkto pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+    description:
+      not_blank: Įveskite produkto aprašymą.
+      min_length: 'Produkto aprašymas turi būti ne mažiau kaip 1 simbolis.|Produkto aprašymas turi būti ne mažiau kaip {{ limit }} simbolių.'
+  variant:
+    sku:
+      not_blank: Įveskite varianto kodą.
+      unique: Varianto kodas turi būti unikalus.
+    combination: Variantas su šia parinktimi jau egzistuoja.
+  option:
+    name:
+      not_blank: Įveskite parinkties pavadinimą.
+      min_length: 'Parinkties pavadinimas turi būti ne mažiau kaip 1 simbolis.|Parinkties pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Parinkties pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Parinkties pavadinimas turi būti ilgesnis nei {{ limit }} simbolių.'
+    presentation:
+      not_blank: Įveskite pasirinkties prezentaciją.
+      min_length: 'Parinkties prezentacija turi būti ne mažiau kaip 1 simbolis.|Parinkties prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Parinkties prezentacija turi būti ne ilgesnė kaip 1 simbolis.|Parinkties prezentacija turi būti ne ilgesnis nei {{ limit }} simbolių.'
+    values:
+      min_count: 'Prašome įtraukti bent {{ limit }} parinkties reikšmę.|Prašome įtraukti bent {{ limit }} parinkties reikšmes.'
+  option_value:
+    value:
+      not_blank: Įveskite parinkties reikšmę.
+  property:
+    name:
+      not_blank: Įveskite ypatybės pavadinimą.
+      min_length: 'Ypatybės pavadinimas turi būti ne mažiau kaip 1 simbolis.|Ypatybės pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Ypatybės pavadinimas negali būti ilgesnis negu 1 simbolis.|Ypatybės pavadinimas negali būti ilgesnis nei {{ limit }} simbolių.'
+    presentation:
+      not_blank: Įveskite ypatybės prezentaciją.
+      min_length: 'Ypatybės prezentacija turi būti ne mažiau kaip 1 simbolis.|Ypatybės prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Ypatybės prezentacija turi būti ne ilgesnis kaip 1 simbolis.|Ypatybės prezentacija turi būti ne ilgesnis nei {{ limit }} simbolių.'
+  product_property:
+    property:
+      not_blank: Pasirinkite ypatybę.
+    value:
+      not_blank: Įveskite produkto ypatybės reikšmę.
+  prototype:
+    name:
+      not_blank: Įveskite prototipo pavadinimą.
+      min_length: 'Prototipo pavadinimas turi būti ne mažiau kaip 1 simbolis.|Prototipo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Prototipo pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Prototipo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'

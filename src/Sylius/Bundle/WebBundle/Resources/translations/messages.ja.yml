@@ -77,7 +77,7 @@ sylius:
     configuration: sylius.breadcrumb.configuration
     country:
       index: sylius.breadcrumb.country.index
-    customer: sylius.breadcrumb.section.customers
+    customers: sylius.breadcrumb.customers
     edit: sylius.breadcrumb.edit
     exchange_rate:
       index: sylius.breadcrumb.exchange_rate.index
@@ -102,8 +102,8 @@ sylius:
       index: sylius.breadcrumb.promotion_coupon.index
     property:
       index: sylius.breadcrumb.property.index
-    archetype:
-      index: sylius.breadcrumb.archetype.index
+    prototype:
+      index: sylius.breadcrumb.prototype.index
     sales: sylius.breadcrumb.sales
     shipment:
       index: sylius.breadcrumb.shipment.index
@@ -429,7 +429,7 @@ sylius:
     type: タイプ
     update_header: 商品プロパティの編集
     updated_at: 最終更新日時
-  archetype:
+  prototype:
     build: プロトタイプから商品を登録する
     build_header: プロトタイプから商品を登録
     create: 商品プロトタイプを登録する

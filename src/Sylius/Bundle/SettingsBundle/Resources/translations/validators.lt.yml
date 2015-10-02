@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Parametro vardų sritis negali būti ilgesnė negu 255 simboliai|Parametro vardų sritis negali būti ilgesnė negu 255 simboliai.
+      min_length: Parametro vardų sritis turi būti mažiausiai 2 simbolių ilgio|Parametro vardų sritis turi būti mažiausiai 2 simbolių ilgio.
+      not_blank: Pasirinkite šio parametro vardų sritį.
+    name:
+      max_length: Parametro pavadinimas negali būti ilgesnis negu 255 simboliai|Parametro pavadinimas negali būti ilgesnis negu 255 simboliai.
+      min_length: Parametro pavadinimas turi būti mažiausiai 2 simbolių ilgio|Parametro pavadinimas turi būti mažiausiai 2 simbolių ilgio.
+      not_blank: Įveskite šio parametro pavadinimą.

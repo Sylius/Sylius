@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Użyć innego adresu do rozliczeń?
       payment_method: Metoda płatności
       shipping_method: Metoda wysyłki
+    coupon:
+      per_user_usage_limit: Limit użyć per użytkownik
     group:
       name: Nazwa
       roles: Role

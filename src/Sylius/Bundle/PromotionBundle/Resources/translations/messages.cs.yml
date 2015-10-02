@@ -3,8 +3,50 @@
 
 sylius:
   form:
+    action:
+      fixed_discount_configuration:
+        amount: Částka
+      percentage_discount_configuration:
+        percentage: Procentní podíl
+      shipping_discount_configuration:
+        percentage: Procentní podíl
+      type: Typ
+    rule:
+      taxonomy_configuration:
+        taxons: Taxony
+        exclude: Vyloučit
+      item_count_configuration:
+        count: Počet
+        equal: Rovno
+      item_total_configuration:
+        amount: Částka
+        equal: Rovno
+      nth_order_configuration:
+        nth: -tý
+      user_loyality_configuration:
+        time: Čas
+        unit:
+          days: Dny
+          weeks: Týdny
+          months: Měsíce
+          years: Roky
+          0: Jednotka
+        after: Uživatelem vytvořené po tomto období
+      shipping_country_configuration:
+        country: Země
+      type: Typ
     coupon:
       code: Kód
+      usage_limit: Omezení použití
+    coupon_generate_instruction:
+      amount: Částka
+      usage_limit: Omezení použití
     promotion:
+      actions: Akce
+      coupon_based: Kupón na bázi
       description: Popis
+      ends_at: Končí
       name: Jméno
+      rules: Pravidla
+      starts_at: Začíná
+      usage_limit: Omezení použití

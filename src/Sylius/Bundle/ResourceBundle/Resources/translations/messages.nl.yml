@@ -3,4 +3,5 @@
 
 form:
   collection:
-    delete: Verwijderen
+    add: Toevoegen
+    delete: Verwijder

@@ -9,6 +9,7 @@ sylius:
       country: Държава
       first_name: Собствено име
       last_name: Фамилно име
+      phone_number: Телефонен номер
       postcode: Пощенски код
       street: Улица
       province: Област
@@ -29,6 +30,7 @@ sylius:
         province: Област
         zone: Зона
       scope: Oбсег
+      select_scope: Изберете обхват
     zone_member_country:
       country: Държава
     zone_member_province:

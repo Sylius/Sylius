@@ -3,4 +3,5 @@
 
 form:
   collection:
+    add: Добавить
     delete: sylius.account.address.action.delete

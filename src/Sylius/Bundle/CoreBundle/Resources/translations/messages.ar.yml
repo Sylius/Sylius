@@ -1,3 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    group:
+      name: الاسم
+    product_filter:
+      name: الاسم
+    user:
+      first_name: الاسم الأول
+      last_name: اسم العائلة
+      password: كلمة السر

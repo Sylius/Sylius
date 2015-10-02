@@ -4,7 +4,7 @@
 sylius:
   form:
     address:
-      city: By
+      city: Poststed
       company: Firma
       country: Land
       first_name: Fornavn
@@ -12,9 +12,9 @@ sylius:
       phone_number: Telefonnummer
       postcode: Postnummer
       street: Gate
-      province: Provins
+      province: Fylke
     country:
-      iso_name: ISO navn
+      iso_name: ISO-kode
       name: Navn
       provinces: Fylker
       select: Velg
@@ -27,7 +27,7 @@ sylius:
       type: Type
       types:
         country: Land
-        province: Provins
+        province: Fylke
         zone: Sone
       scope: Omfang
       select_scope: Velg omfang

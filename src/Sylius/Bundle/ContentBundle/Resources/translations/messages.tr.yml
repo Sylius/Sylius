@@ -1,24 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: Otomatik
+route: rota
 sylius:
   form:
+    action_block:
+      action_name: Eylem Adı
+      id: Id
     imagine_block:
       parent: Üst
       internal_name: Dahili isim
+      slideshow_small: Slayt gösterisi büyük (tam genişlik)
+      slideshow_medium: Slayt gösterisi orta (içerik)
+      slideshow_large: Slayt küçük (yan)
     menu:
+      childrens: Çocuklar
+      display: Görünüm
+      display_children: Çocukların görünümü
+      label: Etiket
       name: Ad
       parent: Üst
+      route: Rota
+      uri: URI
     menu_block:
       body: İçerik
+      id: Id
       name: Ad
     menu_node_block:
       content: İçerik
+      display: Görünüm
+      display_children: Çocukların görünümü
       internal_name: Dahili isim
+      label: Etiket
+      link_type: Bağlantı türü
+      publish_end_date: Yayın bitiş tarihi
+      publish_start_date: Yayın başlangıç tarihi
+      publishable: Yayınlanabilir
+      route: Rota
+      uri: URI
     redirect_route:
+      id: Id
       name: Ad
+      route_name: Rota İsmi
+      uri: URI
     reference_block:
       body: İçerik
+      id: Id
       title: Başlık
     route:
       content: İçerik
@@ -30,13 +58,20 @@ sylius:
       parent: Üst
       title: Başlık
     slideshow_block:
+      childrens: Çocuklar
       internal_name: Dahili isim
       parent: Üst
       title: Başlık
     static_content:
       body: İçerik
+      id: Id
       internal_name: Dahili isim
+      menu_nodes: Menü düğümleri
       parent: Üst
+      publish_end_date: Yayın bitiş tarihi
+      publish_start_date: Yayın başlangıç tarihi
+      publishable: Yayınlanabilir
+      routes: Rotalar
       title: Başlık
     string_block:
       body: İçerik

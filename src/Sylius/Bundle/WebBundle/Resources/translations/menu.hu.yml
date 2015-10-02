@@ -14,16 +14,16 @@ sylius:
         general_settings: Általános beállítások
         homepage: Saját bolt
         locales: Területi beállítások
-        new_order: Új rendelés hozzáadása
-        new_promotion: Új promóció hozzáadása
+        new_order: Új rendelés
+        new_promotion: Új promóció
         options: Termék beállítások kezelése
-        orders: Függőben lévő rendelések
+        orders: Aktuális rendelések
         payment_methods: Fizetési módok
         payments: Fizetések
         products: Termékek
         promotions: Promóciók
         properties: Tulajdonságok beállítása
-        archetypes: Termék prototípusok
+        prototypes: Termék prototípusok
         sales: Rendelések
         shipments: Szállítások
         shipping_categories: Szállítási kategóriák
@@ -48,19 +48,19 @@ sylius:
         groups: Csoportok
         homepage: Vissza az oldalra
         locales: Területi beállítások
-        new_order: Új rendelés hozzáadása
+        new_order: Új rendelés
         new_promotion: Új promóció hozzáadása
         options: Beállítások kezelése
         orders: Függőben lévő rendelések
         pages: Oldalak
         payment_methods: Fizetési módok
-        payments: Fizetések
+        payments: Kifizetések
         products: Termékek
         promotions: Promóciók
         properties: Tulajdonságok beállítása
-        archetypes: Termék prototípusok
+        prototypes: Termék prototípusok
         sales: Rendelések
-        shipments: Szállítások
+        shipments: Szállítmányok
         shipping_categories: Szállítási kategóriák
         shipping_methods: Szállítási módok
         stockables: Készletszintek
@@ -73,19 +73,19 @@ sylius:
   frontend:
     menu:
       account:
-        addresses: Címjegyzékem
-        homepage: Kezdőoldal
+        addresses: Címjegyzék
+        homepage: Főoldal
         orders: Megrendeléseim / számláim
-        password: Jelszóm
+        password: Jelszó
         profile: Személyes információk
         shop: Vissza az áruházba
-      currency: 'Az árak megjelenítése %currency%'
+      currency: 'Az árak megjelenítése %currency% pénznemben'
       main:
-        account: Az Ön fiókja
+        account: Fiókom
         administration: Adminisztráció
-        cart: 'A kosár tartalma (%items%) %total%'
-        login: Bejelentkezés
-        logout: Kijelentkezés
+        cart: 'Kosár (%items%) %total%'
+        login: Belépés
+        logout: Kilépés
         register: Regisztráció
       social:
         facebook: Facebook

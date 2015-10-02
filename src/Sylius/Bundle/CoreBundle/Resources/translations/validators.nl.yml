@@ -22,8 +22,8 @@ sylius:
       not_blank: Vul uw voornaam in.
   product_variant:
     onHand:
-      min: 'Voorraad moet groter zijn dan {{ limit }}.'
-      not_blank: Voer de hoeveelheid voorraad in.
+      min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'
+      not_blank: Vul de verkoopbare voorraad in.
     price:
       min: Prijs mag niet negatief zijn.
       not_blank: Voer de prijs in.

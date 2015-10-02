@@ -22,6 +22,8 @@ sylius:
         different_billing_address: Использовать другой адрес для составления счета?
       payment_method: Способ оплаты
       shipping_method: Способ доставки
+    coupon:
+      per_user_usage_limit: Ограничение использования на пользователя
     group:
       name: Название
       roles: Роли

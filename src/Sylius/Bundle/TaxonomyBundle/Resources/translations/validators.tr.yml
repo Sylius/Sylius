@@ -1,3 +1,12 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  taxon:
+    name:
+      max_length: Sınıf adı 255 karakterden uzun olamaz.
+      not_blank: Lütfen sınıf adını giriniz.
+  taxonomy:
+    name:
+      max_length: Sınıflandırma adı 255 karakterden uzun olamaz.
+      not_blank: Lütfen sınıflandırma adı giriniz.

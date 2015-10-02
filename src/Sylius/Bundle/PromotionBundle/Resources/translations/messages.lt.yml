@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Suma
+      percentage_discount_configuration:
+        percentage: Procentas
+      shipping_discount_configuration:
+        percentage: Procentas
+      type: Tipas
+    rule:
+      taxonomy_configuration:
+        taxons: Taksonai
+        exclude: Neįtraukti
+      item_count_configuration:
+        count: Kiekis
+        equal: Lygus
+      item_total_configuration:
+        amount: Suma
+        equal: Lygus
+      nth_order_configuration:
+        nth: N-tasis
+      user_loyality_configuration:
+        time: Laikas
+        unit:
+          days: Dienos
+          weeks: Savaitės
+          months: Mėnesiai
+          years: Metai
+          0: Vienetas
+        after: Vartotojas sukurtas pasibaigus šiam laikotarpiui
+      shipping_country_configuration:
+        country: Šalis
+      type: Tipas
+    coupon:
+      code: Kodas
+      usage_limit: Naudojimo limitas
+    coupon_generate_instruction:
+      amount: Suma
+      usage_limit: Naudojimo limitas
+    promotion:
+      actions: Veiksmai
+      coupon_based: Pagal kuponą
+      description: Aprašymas
+      ends_at: Baigiasi
+      name: Pavadinimas
+      rules: Taisyklės
+      starts_at: Prasideda
+      usage_limit: Naudojimo limitas

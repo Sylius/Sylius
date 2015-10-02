@@ -13,7 +13,10 @@ sylius:
     province:
       name: Nama
     zone:
+      name: Nama
+      type: Jenis
       types:
         country: Negara
+        province: Wilayah
     zone_member_country:
       country: Negara

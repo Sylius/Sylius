@@ -9,6 +9,7 @@ sylius:
       country: Краіна
       first_name: Імя
       last_name: Прозвішча
+      phone_number: Нумар тэлефону
       postcode: Індэкс
       street: Вуліца
       province: Вобласць
@@ -19,7 +20,7 @@ sylius:
       select: Выбярыце
     province:
       name: Імя
-      select: Выбярыце
+      select: Абраць
     zone:
       members: Удзельнікі
       name: Імя

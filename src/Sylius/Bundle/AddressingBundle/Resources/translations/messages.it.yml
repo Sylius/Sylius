@@ -9,6 +9,7 @@ sylius:
       country: Nazione
       first_name: Nome
       last_name: Cognome
+      phone_number: Numero di telefono
       postcode: CAP
       street: Indirizzo
       province: Provincia
@@ -29,6 +30,7 @@ sylius:
         province: Provincia
         zone: Zona
       scope: Ambito
+      select_scope: Selezionare il campo di applicazione
     zone_member_country:
       country: Nazione
     zone_member_province:
