@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -45,6 +48,11 @@ class ArchetypeTypeSpec extends ObjectBehavior
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(ParentArchetypeListener::class))
             ->willReturn($builder)
         ;
 
