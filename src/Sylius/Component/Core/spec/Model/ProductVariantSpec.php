@@ -48,12 +48,14 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_price_should_be_mutable()
     {
-        $this->setPrice(499)->getPrice()->shouldReturn(499);
+        $this->setPrice(499);
+        $this->getPrice()->shouldReturn(499);
     }
 
     function its_price_should_accept_only_integer()
     {
-        $this->setPrice(410)->getPrice()->shouldBeInteger();
+        $this->setPrice(410);
+        $this->getPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));

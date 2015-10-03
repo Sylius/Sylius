@@ -156,8 +156,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setSku($sku)
     {
         $this->sku = $sku;
-
-        return $this;
     }
 
     /**
@@ -177,8 +175,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             throw new \InvalidArgumentException('Price must be an integer.');
         }
         $this->price = $price;
-
-        return $this;
     }
 
     /**
@@ -195,8 +191,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setPricingCalculator($calculator)
     {
         $this->pricingCalculator = $calculator;
-
-        return $this;
     }
 
     /**
@@ -213,8 +207,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setPricingConfiguration(array $configuration)
     {
         $this->pricingConfiguration = $configuration;
-
-        return $this;
     }
 
     /**
@@ -239,8 +231,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setOnHold($onHold)
     {
         $this->onHold = $onHold;
-
-        return $this;
     }
 
     /**
@@ -261,8 +251,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         if (0 > $this->onHand) {
             $this->onHand = 0;
         }
-
-        return $this;
     }
 
     /**
@@ -279,8 +267,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setSold($sold)
     {
         $this->sold = (int)$sold;
-
-        return $this;
     }
 
     /**
@@ -305,8 +291,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setAvailableOnDemand($availableOnDemand)
     {
         $this->availableOnDemand = (bool)$availableOnDemand;
-
-        return $this;
     }
 
     /**
@@ -317,8 +301,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         parent::setDefaults($masterVariant);
 
         $this->setPrice($masterVariant->getPrice());
-
-        return $this;
     }
 
     /**
@@ -366,8 +348,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $image->setVariant($this);
             $this->images->add($image);
         }
-
-        return $this;
     }
 
     /**
@@ -377,8 +357,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $image->setVariant(null);
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
@@ -395,8 +373,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setWeight($weight)
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
     /**
@@ -413,8 +389,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setWidth($width)
     {
         $this->width = $width;
-
-        return $this;
     }
 
     /**
@@ -431,8 +405,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setHeight($height)
     {
         $this->height = $height;
-
-        return $this;
     }
 
     /**
@@ -449,8 +421,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setDepth($depth)
     {
         $this->depth = $depth;
-
-        return $this;
     }
 
     /**

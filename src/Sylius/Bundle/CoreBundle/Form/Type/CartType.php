@@ -24,6 +24,9 @@ use Symfony\Component\Form\FormEvents;
  */
 class CartType extends BaseCartType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $couponRepository;
 
     /**

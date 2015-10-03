@@ -25,6 +25,9 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class CustomerGroupType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $validationGroups;
 
     /**

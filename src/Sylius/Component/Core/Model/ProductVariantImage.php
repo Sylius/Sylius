@@ -34,7 +34,5 @@ class ProductVariantImage extends Image implements ProductVariantImageInterface
     public function setVariant(ProductVariantInterface $variant = null)
     {
         $this->variant = $variant;
-
-        return $this;
     }
 }

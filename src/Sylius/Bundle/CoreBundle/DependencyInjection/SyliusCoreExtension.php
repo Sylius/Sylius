@@ -55,6 +55,9 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_rbac',
     );
 
+    /**
+     * @var array
+     */
     protected $configFiles = array(
         'services.xml',
         'controller.xml',

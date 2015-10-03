@@ -15,8 +15,6 @@ use Sylius\Bundle\PromotionBundle\Form\Type\CouponType as BaseCouponType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Coupon form.
- *
  * @author Myke Hines <myke@webhines.com>
  */
 class CouponType extends BaseCouponType

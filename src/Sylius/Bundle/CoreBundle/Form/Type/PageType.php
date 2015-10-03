@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Simple page type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PageType extends AbstractResourceType

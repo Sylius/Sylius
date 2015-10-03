@@ -33,43 +33,31 @@ use Symfony\Component\HttpFoundation\Request;
 class ItemResolver implements ItemResolverInterface
 {
     /**
-     * Cart provider.
-     *
      * @var CartProviderInterface
      */
     protected $cartProvider;
 
     /**
-     * Prica calculator.
-     *
      * @var DelegatingCalculatorInterface
      */
     protected $priceCalculator;
 
     /**
-     * Product repository.
-     *
      * @var RepositoryInterface
      */
     protected $productRepository;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     protected $formFactory;
 
     /**
-     * Stock availability checker.
-     *
      * @var AvailabilityCheckerInterface
      */
     protected $availabilityChecker;
 
     /**
-     * Restricted zone checker.
-     *
      * @var RestrictedZoneCheckerInterface
      */
     protected $restrictedZoneChecker;
@@ -80,8 +68,6 @@ class ItemResolver implements ItemResolverInterface
     protected $channelContext;
 
     /**
-     * Constructor.
-     *
      * @param CartProviderInterface          $cartProvider
      * @param RepositoryInterface            $productRepository
      * @param FormFactoryInterface           $formFactory

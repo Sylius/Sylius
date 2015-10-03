@@ -16,8 +16,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
- * Sends the order confirmation email.
- *
  * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
 class OrderEmailManager

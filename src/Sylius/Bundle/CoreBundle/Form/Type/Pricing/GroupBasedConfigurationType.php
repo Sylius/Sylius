@@ -23,6 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class GroupBasedConfigurationType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $groupRepository;
 
     /**

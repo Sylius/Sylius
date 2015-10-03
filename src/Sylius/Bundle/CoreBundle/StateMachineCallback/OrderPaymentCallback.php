@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Synchronization between payments and their order.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class OrderPaymentCallback
@@ -36,6 +34,9 @@ class OrderPaymentCallback
         $this->factory = $factory;
     }
 
+    /**
+     * @param PaymentInterface $payment
+     */
     public function updateOrderOnPayment(PaymentInterface $payment)
     {
         /** @var $order OrderInterface */

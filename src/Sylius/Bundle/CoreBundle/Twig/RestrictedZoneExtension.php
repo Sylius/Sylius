@@ -22,8 +22,6 @@ class RestrictedZoneExtension extends \Twig_Extension
     private $helper;
 
     /**
-     * Constructor.
-     *
      * @param RestrictedZoneHelper $helper
      */
     public function __construct(RestrictedZoneHelper $helper)

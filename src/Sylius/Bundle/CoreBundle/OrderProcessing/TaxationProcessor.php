@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
@@ -21,15 +22,11 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
- * Taxation processor.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
      * @var RepositoryInterface
      */
     protected $adjustmentRepository;
@@ -42,29 +39,21 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected $calculator;
 
     /**
-     * Tax rate resolver.
-     *
      * @var TaxRateResolverInterface
      */
     protected $taxRateResolver;
 
     /**
-     * Zone matcher.
-     *
      * @var ZoneMatcherInterface
      */
     protected $zoneMatcher;
 
     /**
-     * Taxation settings.
-     *
      * @var Settings
      */
     protected $settings;
 
     /**
-     * Constructor.
-     *
      * @param RepositoryInterface      $adjustmentRepository
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
@@ -120,7 +109,13 @@ class TaxationProcessor implements TaxationProcessorInterface
         $order->calculateTotal();
     }
 
-    protected function processTaxes(OrderInterface $order, $zone)
+    /**
+     * @param OrderInterface $order
+     * @param ZoneInterface  $zone
+     *
+     * @return array
+     */
+    protected function processTaxes(OrderInterface $order, ZoneInterface $zone)
     {
         $taxes = array();
         foreach ($order->getItems() as $item) {
@@ -146,6 +141,10 @@ class TaxationProcessor implements TaxationProcessorInterface
         return $taxes;
     }
 
+    /**
+     * @param array          $taxes
+     * @param OrderInterface $order
+     */
     protected function addAdjustments(array $taxes, OrderInterface $order)
     {
         foreach ($taxes as $description => $tax) {

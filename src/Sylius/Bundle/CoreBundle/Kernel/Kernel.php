@@ -162,7 +162,7 @@ abstract class Kernel extends BaseKernel
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isVagrantEnvironment()
     {

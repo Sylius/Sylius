@@ -20,15 +20,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Order promotion listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderPromotionListener
 {
     /**
-     * Order promotion processor.
-     *
      * @var PromotionProcessorInterface
      */
     protected $promotionProcessor;
@@ -49,8 +45,6 @@ class OrderPromotionListener
     protected $itemBased;
 
     /**
-     * Constructor.
-     *
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
@@ -70,8 +64,6 @@ class OrderPromotionListener
     }
 
     /**
-     * Get the order from event and run the promotion processor on it.
-     *
      * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException

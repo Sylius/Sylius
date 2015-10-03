@@ -16,8 +16,6 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * Sends the shipment confirmation email.
- *
  * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
 class ShipmentEmailManager

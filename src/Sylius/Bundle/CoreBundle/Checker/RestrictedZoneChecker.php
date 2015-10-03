@@ -21,9 +21,20 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
+    /**
+     * @var CustomerContextInterface
+     */
     private $customerContext;
+
+    /**
+     * @var ZoneMatcherInterface
+     */
     private $zoneMatcher;
 
+    /**
+     * @param CustomerContextInterface $customerContext
+     * @param ZoneMatcherInterface     $zoneMatcher
+     */
     public function __construct(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->customerContext = $customerContext;

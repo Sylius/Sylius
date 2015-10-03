@@ -19,16 +19,12 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
- * Product repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductRepository extends BaseProductRepository
 {
     /**
-     * Create paginator for products categorized under given taxon.
-     *
      * @param TaxonInterface $taxon
      * @param array          $criteria
      *

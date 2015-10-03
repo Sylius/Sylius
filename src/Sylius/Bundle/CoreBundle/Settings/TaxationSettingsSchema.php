@@ -18,22 +18,16 @@ use Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Taxation settings schema.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationSettingsSchema implements SchemaInterface
 {
     /**
-     * Zone repository.
-     *
      * @var ObjectRepository
      */
     private $zoneRepository;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $zoneRepository
      */
     public function __construct(ObjectRepository $zoneRepository)

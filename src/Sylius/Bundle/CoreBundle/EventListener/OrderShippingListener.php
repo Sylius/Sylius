@@ -20,36 +20,26 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order shipping listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderShippingListener
 {
     /**
-     * Order shipments factory.
-     *
      * @var ShipmentFactoryInterface
      */
     protected $shipmentFactory;
 
     /**
-     * Order shipping processor.
-     *
      * @var ShipmentProcessorInterface
      */
     protected $shippingProcessor;
 
     /**
-     * Order shipping charges processor.
-     *
      * @var ShippingChargesProcessorInterface
      */
     protected $shippingChargesProcessor;
 
     /**
-     * Constructor.
-     *
      * @param ShipmentFactoryInterface          $shipmentFactory
      * @param ShipmentProcessorInterface        $shippingProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
@@ -62,8 +52,6 @@ class OrderShippingListener
     }
 
     /**
-     * Get the order from event and create shipments.
-     *
      * @param GenericEvent $event
      */
     public function processOrderShipments(GenericEvent $event)
@@ -74,8 +62,6 @@ class OrderShippingListener
     }
 
     /**
-     * Get the order from event and run the shipping processor on it.
-     *
      * @param GenericEvent $event
      */
     public function processOrderShippingCharges(GenericEvent $event)
@@ -86,8 +72,6 @@ class OrderShippingListener
     }
 
     /**
-     * Update shipment states after order is created.
-     *
      * @param GenericEvent $event
      */
     public function updateShipmentStatesOnhold(GenericEvent $event)
@@ -98,6 +82,13 @@ class OrderShippingListener
         );
     }
 
+    /**
+     * @param GenericEvent $event
+     *
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
+     */
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();

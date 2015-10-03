@@ -16,8 +16,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class ShipmentRepository extends EntityRepository
 {
     /**
-     * Create filter paginator.
-     *
      * @param array $criteria
      * @param array $sorting
      *
@@ -79,6 +77,9 @@ class ShipmentRepository extends EntityRepository
         return $this->getPaginator($queryBuilder);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getAlias()
     {
         return 's';

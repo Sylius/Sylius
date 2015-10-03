@@ -23,6 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ZoneBasedConfigurationType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $zoneRepository;
 
     /**

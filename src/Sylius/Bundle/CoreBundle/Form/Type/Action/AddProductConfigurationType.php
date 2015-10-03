@@ -19,12 +19,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Free product configuration form.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class AddProductConfigurationType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $validationGroups;
 
     /**
@@ -76,6 +77,9 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -85,6 +89,9 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_add_product_configuration';

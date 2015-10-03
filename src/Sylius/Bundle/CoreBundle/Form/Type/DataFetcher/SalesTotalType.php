@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher;
 
 /**
- * User based raport configuration form type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class SalesTotalType extends AbstractType

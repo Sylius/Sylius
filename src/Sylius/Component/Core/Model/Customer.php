@@ -57,8 +57,6 @@ class Customer extends BaseCustomer implements CustomerInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
-
-        return $this;
     }
 
     /**
@@ -87,8 +85,6 @@ class Customer extends BaseCustomer implements CustomerInterface
         if (null !== $billingAddress) {
             $this->addAddress($billingAddress);
         }
-
-        return $this;
     }
 
     /**
@@ -109,8 +105,6 @@ class Customer extends BaseCustomer implements CustomerInterface
         if (null !== $shippingAddress) {
             $this->addAddress($shippingAddress);
         }
-
-        return $this;
     }
 
     /**
@@ -130,8 +124,6 @@ class Customer extends BaseCustomer implements CustomerInterface
             $this->addresses[] = $address;
             $address->setCustomer($this);
         }
-
-        return $this;
     }
 
     /**
@@ -141,8 +133,6 @@ class Customer extends BaseCustomer implements CustomerInterface
     {
         $this->addresses->removeElement($address);
         $address->setCustomer(null);
-
-        return $this;
     }
 
     /**

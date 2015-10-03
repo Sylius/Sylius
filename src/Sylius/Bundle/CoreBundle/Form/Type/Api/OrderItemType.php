@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Order item form type for api creation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItemType extends BaseOrderItemType

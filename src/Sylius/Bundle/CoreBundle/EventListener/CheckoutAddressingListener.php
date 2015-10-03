@@ -23,6 +23,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class CheckoutAddressingListener
 {
+    /**
+     * @param GenericEvent $event
+     */
     public function setCustomerAddressing(GenericEvent $event)
     {
         $order = $event->getSubject();

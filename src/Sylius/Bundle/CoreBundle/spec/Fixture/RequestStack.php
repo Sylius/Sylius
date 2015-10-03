@@ -15,13 +15,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestStack
 {
+    /**
+     * @var Request
+     */
     private $request;
 
+    /**
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
+    /**
+     * @return Request
+     */
     public function getCurrentRequest()
     {
         return $this->request;

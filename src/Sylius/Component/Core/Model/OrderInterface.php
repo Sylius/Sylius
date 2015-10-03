@@ -85,7 +85,7 @@ interface OrderInterface extends
     /**
      * Set the checkout state.
      *
-     * @param string $
+     * @param string $checkoutState
      */
     public function setCheckoutState($checkoutState);
 
