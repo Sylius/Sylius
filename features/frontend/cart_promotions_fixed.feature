@@ -32,6 +32,7 @@ Feature: Checkout fixed discount promotions
             | Shipping to Germany | Discount for orders with shipping country Germany |
             | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
             | 3rd order           | Discount for 3rd order                            |
+            | 2nd item            | Discount for 2nd item                             |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
           And promotion "3 items" has following rules defined:
@@ -91,6 +92,20 @@ Feature: Checkout fixed discount promotions
          Then I should be on the cart summary page
           And "Promotion total: -€15.00" should appear on the page
           And "Grand total: €110.00" should appear on the page
+
+    Scenario: Nth product promotion is applied when the cart has the
+              number of products required
+        Given promotion "2nd item" has following rules defined:
+            | type        | configuration |
+            | Nth product | Nth: 2        |
+          And promotion "2nd item" has following actions defined:
+            | type                       | configuration     |
+            | Nth product fixed discount | Amount: 10,Nth: 2 |
+          And I am on the store homepage
+         When I add product "Sarge" to cart, with quantity "4"
+         Then I should be on the cart summary page
+          And "Promotion total: -€20.00" should appear on the page
+          And "Grand total: €80.00" should appear on the page
 
     Scenario: Item count promotion is not applied when the cart has
               not the number of items required
