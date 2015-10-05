@@ -30,3 +30,4 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * feature #3585 [BC BREAK] [Shipping]  `CalculatorRegistry` was deleted and replaced by `ServiceRegistry`,`RuleCheckerRegistry` was deleted and replaced by `ServiceRegistry`
  * feature #3586 [BC BREAK] [Shipping] Remove class Calculator, all calculator implement CalculatorInterface
  * feature #3622 [BC BREAK] [Shipping] change CalculatorInterface
+ * feature #2822 [BC BREAK][Translation] Make translatable translation class retrieval static
