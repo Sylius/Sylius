@@ -45,11 +45,10 @@ class OrderController extends ResourceController
         $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
         // Fetch and cache deleted orders
-        $entityManager = $this->get('doctrine.orm.entity_manager');
-        $entityManager->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
-        $entityManager->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
             'customer' => $customer,

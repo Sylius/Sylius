@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,6 +23,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGenerator implements CouponGeneratorInterface
 {
+    use FilterManipulatorTrait;
+
     /**
      * @var RepositoryInterface
      */
@@ -87,12 +90,20 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected function isUsedCode($code)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $isUsed = null !== $this->repository->findOneBy(array('code' => $code));
 
-        $this->manager->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $isUsed;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityManager()
+    {
+        return $this->manager;
     }
 }

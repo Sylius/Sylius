@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Doctrine\ORM\Query\FilterCollection;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\FilterManipulatorTrait;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -35,6 +37,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class ResourceController extends FOSRestController
 {
+    use FilterManipulatorTrait;
+
     /**
      * @var Configuration
      */
@@ -310,9 +314,9 @@ class ResourceController extends FOSRestController
      */
     public function restoreAction(Request $request)
     {
-        $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
         $resource = $this->findOr404($request);
-        $this->get('doctrine')->getManager()->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
         
         $resource->setDeletedAt(null);
 
@@ -529,6 +533,9 @@ class ResourceController extends FOSRestController
         return new PagerfantaFactory();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function handleView(View $view)
     {
         $handler = $this->get('fos_rest.view_handler');
@@ -543,6 +550,11 @@ class ResourceController extends FOSRestController
         return $handler->handle($view);
     }
 
+    /**
+     * @param string $permission
+     *
+     * @return bool
+     */
     protected function isGrantedOr403($permission)
     {
         if (!$this->container->has('sylius.authorization_checker')) {
@@ -558,5 +570,15 @@ class ResourceController extends FOSRestController
                 throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
             }
         }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityManager()
+    {
+        return $this->getDoctrine()->getEntityManager();
     }
 }
