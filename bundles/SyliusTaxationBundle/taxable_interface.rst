@@ -14,14 +14,25 @@ First step is to implement the simple interface.
 
 .. code-block:: php
 
-    namespace Acme\Bundle\ShopBundle\Entity;
+    namespace AcmeBundle\Entity;
 
-    use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
-    use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
+    use Sylius\Component\Taxation\Model\TaxCategory;
+    use Sylius\Component\Taxation\Model\TaxableInterface;
 
-    class Server
+    class Server implements TaxableInterface
     {
+        private $name;
         private $taxCategory;
+
+        public function getName()
+        {
+            return $this->name;
+        }
+
+        public function setName($name)
+        {
+            $this->name = $name;
+        }
 
         public function getTaxCategory()
         {
@@ -31,8 +42,6 @@ First step is to implement the simple interface.
         public function setTaxCategory(TaxCategoryInterface $taxCategory) // This method is not required.
         {
             $this->taxCategory = $taxCategory;
-
-            return $this;
         }
     }
 
@@ -47,10 +56,10 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
                       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                           http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-        <entity name="Acme\ShopBundle\Entity\Server" table="acme_server">
+        <entity name="AcmeBundle\Entity\Server" table="acme_server">
             <!-- your mappings... -->
 
-            <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
+            <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
                 <join-column name="tax_category_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
         </entity>
@@ -66,7 +75,7 @@ If you want to add a tax category selection field to your model form, simply use
 
 .. code-block:: php
 
-    namespace Acme\ShopBundle\Form\Type;
+    namespace AcmeBundle\Form\Type;
 
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\AbstractType;
@@ -79,5 +88,10 @@ If you want to add a tax category selection field to your model form, simply use
                 ->add('name', 'text')
                 ->add('taxCategory', 'sylius_tax_category_choice')
             ;
+        }
+
+        public function getName()
+        {
+            return 'acme_server';
         }
     }
