@@ -15,9 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Debug\Exception\ContextErrorException;
-use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
@@ -244,98 +241,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function ensureDirectoryExistsAndIsWritable($directory, OutputInterface $output)
     {
-        $this->ensureDirectoryExists($directory, $output);
-        $this->ensureDirectoryIsWritable($directory, $output);
-    }
+        $checker = $this->get('sylius.installer.checker.command_directory');
+        $checker->setCommandName($this->getName());
 
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    private function ensureDirectoryExists($directory, OutputInterface $output)
-    {
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0755, true)) {
-                $output->writeln($this->createUnexisitingDirectoryMessage(getcwd().'/'.$directory));
-
-                throw new \RuntimeException("Failed while trying to create directory.");
-            }
-
-            $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', $directory));
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createUnexisitingDirectoryMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>' . PHP_EOL .
-            sprintf('Create directory "%s" and run command "<comment>%s</comment>"', $directory, $this->getName())
-        ;
-    }
-
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    protected function ensureDirectoryIsWritable($directory, OutputInterface $output)
-    {
-        try {
-            $this->changePermissionsRecursively($directory, $output);
-        } catch (AccessDeniedException $exception) {
-            $output->writeln($this->createBadPermissionsMessage($exception->getMessage()));
-
-            throw new \RuntimeException("Failed while trying to change directory permissions.");
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createBadPermissionsMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>' . PHP_EOL .
-            sprintf('Set "%s" writable recursively and run command "<comment>%s</comment>"', $directory, $this->getName())
-        ;
-    }
-
-    /**
-     * @param string          $directory
-     * @param OutputInterface $output
-     *
-     * @throws AccessDeniedException if directory/file permissions cannot be changed
-     */
-    private function changePermissionsRecursively($directory, OutputInterface $output)
-    {
-        if (is_file($directory) && is_writable($directory)) {
-            return;
-        }
-
-        if (!is_writable($directory)) {
-            try {
-                chmod($directory, 0755);
-
-                $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', $directory));
-            } catch (ContextErrorException $exception) {
-                throw new AccessDeniedException(dirname($directory));
-            }
-        }
-
-        foreach (new RecursiveDirectoryIterator($directory, \FilesystemIterator::CURRENT_AS_FILEINFO) as $subdirectory) {
-            if ('.' !== $subdirectory->getFilename()[0]) {
-                try {
-                    $this->changePermissionsRecursively($subdirectory->getPathname(), $output);
-                } catch (AccessDeniedException $exception) {
-                    throw $exception;
-                }
-            }
-        }
+        $checker->ensureDirectoryExists($directory, $output);
+        $checker->ensureDirectoryIsWritable($directory, $output);
     }
 }
