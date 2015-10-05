@@ -24,7 +24,7 @@ winzou_state_machine:
                 from: [checkout, onhold]
                 to:   backordered
             prepare:
-                from: [checkout, onhold]
+                from: [checkout, onhold, backordered]
                 to:   ready
             ship:
                 from: [ready]
@@ -65,7 +65,7 @@ winzou_state_machine:
                 from: [checkout, onhold]
                 to:   backordered
             prepare:
-                from: [checkout, onhold]
+                from: [checkout, onhold, backordered]
                 to:   ready
             ship:
                 from: [ready]
