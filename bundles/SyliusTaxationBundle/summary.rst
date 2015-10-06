@@ -14,12 +14,15 @@ Configuration Reference
                 model: Sylius\Component\Taxation\Model\TaxCategory
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
+                form:
+                    default: Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
+                    choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
             tax_rate:
                 model: Sylius\Component\Taxation\Model\TaxRate
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
+                form:
+                    default: Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
         validation_groups:
             tax_category: [sylius]
             tax_rate: [sylius]

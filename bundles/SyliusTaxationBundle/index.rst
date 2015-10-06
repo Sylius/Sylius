@@ -14,8 +14,6 @@ As with any Sylius bundle, you can override all the models, controllers, reposit
 
    installation
    taxable_interface
-   tax_categories
-   tax_rates
    configuring_taxation
    calculating_taxes
    custom_calculators
