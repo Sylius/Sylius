@@ -24,6 +24,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sylius\Bundle\ShippingBundle\Form\Transformer\ObjectToIdentifierTransformer;
 
 /**
  * A select form which allows the user to select
@@ -74,6 +75,8 @@ class ShippingMethodChoiceType extends AbstractType
     {
         if ($options['multiple']) {
             $builder->addModelTransformer(new CollectionToArrayTransformer());
+        } else {
+            $builder->addModelTransformer(new ObjectToIdentifierTransformer($this->repository));
         }
     }
 
