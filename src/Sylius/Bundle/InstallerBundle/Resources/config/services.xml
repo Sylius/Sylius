@@ -92,7 +92,9 @@
             <argument>%kernel.root_dir%/config/parameters.yml</argument>
         </service>
 
-        <service id="sylius.installer.checker.command_directory" class="%sylius.installer.checker.command_directory.class%" />
+        <service id="sylius.installer.checker.command_directory" class="%sylius.installer.checker.command_directory.class%">
+            <argument type="service" id="filesystem" />
+        </service>
     </services>
 
 </container>
