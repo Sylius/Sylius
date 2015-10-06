@@ -34,6 +34,7 @@
         "swiftmailer/swiftmailer":       "~5.0",
         "sylius/core":                   "0.16.*",
         "sylius/addressing-bundle":      "0.16.*",
+        "sylius/affiliate-bundle":       "0.16.*",
         "sylius/api-bundle":             "0.16.*",
         "sylius/attribute-bundle":       "0.16.*",
         "sylius/cart-bundle":            "0.16.*",

@@ -41,6 +41,12 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <one-to-one field="affiliate" target-entity="Sylius\Component\Affiliate\Model\AffiliateInterface">
+            <join-column name="affiliate_id" on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

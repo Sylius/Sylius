@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Affiliate\Model\ReferrerAwareInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
@@ -30,6 +31,7 @@ interface OrderInterface extends
     PaymentsSubjectInterface,
     PromotionCountableSubjectInterface,
     PromotionCouponsAwareSubjectInterface,
+    ReferrerAwareInterface,
     CustomerAwareInterface,
     ChannelAwareInterface
 {

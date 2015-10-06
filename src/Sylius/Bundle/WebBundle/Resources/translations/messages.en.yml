@@ -35,6 +35,31 @@ sylius:
             empty: You have no addresses defined.
             list: All your addresses
             update: Edit my address
+        affiliate:
+            status:
+                create: Start earning money right now & create your affiliate account!
+                disabled: Your affiliate acccount was disabled by administration.
+                paused: Your affiliate account was paused by administration.
+            index:
+                list: Your affiliation details
+                stats: Affiliation statistics
+                referral_code: Your referral code
+                example_link: You need to add to your links the following
+                resources: Resources
+            history:
+                title: History of your earnings & payouts
+                created_at: Logged at
+                type: Type of transaction
+                payouts: Payouts
+                earnings: Earnings
+                amount: Amount
+                empty: You have no logged transaction yet.
+            referrals:
+                title: List of your referrals
+                name: Name
+                created_at: Registered at
+                earning: Earnings
+                empty: You have no referrals yet.
         home:
             email: Email :
             id: Customer ID :
@@ -160,7 +185,75 @@ sylius:
             title: Title
             update_header: Editing string block
             updated_at: Last update
+    affiliate:
+        id: ID
+        status: Status
+        referral_code: Referral code
+        referrals: Referrals
+        transactions: Transactions
+        updated_at: Last update
+        create: Create new affiliate
+        create_header: Create new affiliate
+        index_header: Affiliate
+        update_header: Edit affiliate
+        manage: Manage affiliate
+        show_header: Affiliate details
+        general_info: General info
+        status: Status
+        states:
+            enabled: Enabled
+            paused: Paused
+            disabled: Disabled
+        transaction:
+            date: Logged at
+            amount: Amount
+            type: Type
+            payout: Payout
+            earning: Earning
+        referral:
+            name: Name
+        banner:
+            create: Create new affiliate banner
+            create_header: Create new affiliate banner
+            index_header: Affiliate banners
+            update_header: Edit affiliate banner
+            manage: Manage affiliate banners
+            name: Name
+            no_results: There are no affiliate banners configured.
+        goal:
+            create: Create new affiliate goal
+            create_header: Create new affiliate goal
+            index_header: Affiliate goals
+            update_header: Edit affiliate goal
+            manage: Manage affiliate goals
+            name: Name
+            used: Used
+            starts_at: Starts at
+            ends_at: Ends at
+            no_results: There are no affiliate goals configured.
+            add_provision: Add provision
+            add_rule: Add rule
+            created_at: Created at
+            description: Description
+            show_header: Affiliate goal details
+        provisions: Provisions
+        provision:
+            configuration: Configuration
+            type: Type
+        rules: Rules
+        rule:
+            configuration: Configuration
+            type: Type
     breadcrumb:
+        affiliate:
+            banner:
+                index:
+                    Affiliate Banners
+            index: Affiliates
+            goal:
+                index:
+                    Affiliate Goals
+        affiliate_settings: Affiliate Settings
         assortment: Assortment
         block:
             imagine:
@@ -866,6 +959,7 @@ sylius:
             forgot_password: Forgot password?
             button: Login
     settings:
+        affiliate_header: Affiliate settings
         general_header: General settings
         security_header: Security settings
         taxation_header: Taxation settings

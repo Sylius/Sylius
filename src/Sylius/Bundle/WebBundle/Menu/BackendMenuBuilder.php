@@ -238,6 +238,18 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.emails', $section)));
         }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate_goal.index')) {
+            $child->addChild('affiliate_goals', array(
+                'route' => 'sylius_backend_affiliate_goal_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-usd'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_goal', $section)));
+        }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate_banner.index')) {
+            $child->addChild('affiliate_banners', array(
+                'route' => 'sylius_backend_affiliate_banner_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-picture'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_banner', $section)));
+        }
 
         if (!$child->hasChildren()) {
             $menu->removeChild('marketing');
@@ -314,6 +326,12 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.permissions', $section)));
         }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate.index')) {
+            $child->addChild('affiliates', array(
+                'route'           => 'sylius_backend_affiliate_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-certificate'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliates', $section)));
+        }
 
         if (!$child->hasChildren()) {
             $menu->removeChild('customer');
@@ -384,6 +402,11 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-info-sign'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
         }
+
+        $child->addChild('affiliate_settings', array(
+            'route' => 'sylius_backend_affiliate_settings',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-euro'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_settings', $section)));
 
         if ($this->authorizationChecker->isGranted('sylius.settings.security')) {
             $child->addChild('security_settings', array(

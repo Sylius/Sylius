@@ -45,6 +45,10 @@ sylius:
                 permissions: Permissions
                 report: Reports
             sidebar:
+                affiliates: Affiliates
+                affiliate_banner: Affiliate banners
+                affiliate_goal: Affiliate goals
+                affiliate_settings: Affiliate settings
                 api_clients: API clients
                 assortment: Assortment
                 blocks: Blocks
@@ -98,6 +102,7 @@ sylius:
         menu:
             account:
                 addresses: My address book
+                affiliate: Affiliation
                 homepage: Home
                 orders: My orders / my invoices
                 password: My password

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Component\Promotion\Model\ActionInterface;
 
 /**

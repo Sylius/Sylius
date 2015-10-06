@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
+namespace Sylius\Bundle\ResourceBundle\Form\EventListener;
 
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Resource\Model\RuleInterface;
 
 /**
- *
  * This listener adds configuration form to a rule,
  * if selected rule requires one.
  *

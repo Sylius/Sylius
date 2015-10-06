@@ -1,0 +1,32 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<h4>{{ 'sylius.account.affiliate.referrals.title'|trans }}</h4>
+
+<div class="row">
+    {% if referrals is not empty %}
+        <table id="referrals" class="table">
+            <thead>
+            <tr>
+                <td>{{ 'sylius.account.affiliate.referrals.created_at'|trans }}</td>
+                <td>{{ 'sylius.account.affiliate.referrals.name'|trans }}</td>
+                <td>{{ 'sylius.account.affiliate.referrals.earning'|trans }}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for referral in referrals %}
+                <tr class="referral">
+                    <td>{{ referral.createdAt|date }}</td>
+                    <td>{#{ referral.name }#}</td>
+                    <td>{#{ referral.earning|sylius_money }#}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ 'sylius.account.affiliate.referrals.empty'|trans }}</p>
+    {% endif %}
+</div>
+
+{% endblock %}

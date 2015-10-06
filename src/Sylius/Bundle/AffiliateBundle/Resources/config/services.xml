@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.context.affiliate.class">Sylius\Bundle\AffiliateBundle\Context\AffiliateContext</parameter>
+
+        <parameter key="sylius.listener.banner_upload.class">Sylius\Bundle\AffiliateBundle\EventListener\ImageUploadListener</parameter>
+        <parameter key="sylius.listener.referral_code_generator.class">Sylius\Bundle\AffiliateBundle\EventListener\ReferralCodeGeneratorListener</parameter>
+
+        <parameter key="sylius.generator.invitation_instructions.class">Sylius\Component\Affiliate\Generator\Instruction</parameter>
+        <parameter key="sylius.generator.invitation_generator.class">Sylius\Component\Affiliate\Generator\InvitationGenerator</parameter>
+
+        <parameter key="sylius.referral_processor.class">Sylius\Component\Affiliate\Processor\ReferralProcessor</parameter>
+
+        <parameter key="sylius.referral_eligibility_checker.class">Sylius\Component\Affiliate\Checker\ReferralEligibilityChecker</parameter>
+        <parameter key="sylius.affiliate_provision_applicator.class">Sylius\Component\Affiliate\Provision\ProvisionApplicator</parameter>
+
+        <parameter key="sylius.affiliate_provision.fixed_provision.class">Sylius\Component\Affiliate\Provision\FixedProvisionProvision</parameter>
+        <parameter key="sylius.form.type.affiliate_provision.fixed_provision_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Provision\FixedDiscountConfigurationType</parameter>
+
+        <parameter key="sylius.affiliate_goal_provision.fixed_provision.class">Sylius\Component\Affiliate\Provision\FixedProvision</parameter>
+        <parameter key="sylius.affiliate_goal_provision.percentage_provision.class">Sylius\Component\Affiliate\Provision\PercentageProvision</parameter>
+
+        <parameter key="sylius.registry.affiliate_goal_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.affiliate_goal_provision.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+
+        <parameter key="sylius.form.type.affiliate.class">Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateType</parameter>
+
+        <parameter key="sylius.form.type.invitations.class">Sylius\Bundle\AffiliateBundle\Form\Type\InvitationsType</parameter>
+
+        <parameter key="sylius.form.type.affiliate_goal.class">Sylius\Bundle\AffiliateBundle\Form\Type\GoalType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_rule.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_rule.collection.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleCollectionType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_rule_choice.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleChoiceType</parameter>
+
+        <parameter key="sylius.form.type.affiliate_goal_provision.class">Sylius\Bundle\AffiliateBundle\Form\Type\ProvisionType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_provision.collection.class">Sylius\Bundle\AffiliateBundle\Form\Type\ProvisionCollectionType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_provision_choice.class">Sylius\Bundle\AffiliateBundle\Form\Type\ProvisionChoiceType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_provision.fixed_provision_configuration.class">Sylius\Bundle\AffiliateBundle\Form\Type\Provision\FixedProvisionConfigurationType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal_provision.percentage_provision_configuration.class">Sylius\Bundle\AffiliateBundle\Form\Type\Provision\PercentageProvisionConfigurationType</parameter>
+    </parameters>
+
+    <services>
+
+        <!-- affiliate -->
+        <service id="sylius.context.affiliate" class="%sylius.context.affiliate.class%">
+            <argument type="service" id="sylius.affiliate_resolver" />
+            <argument>%sylius_affiliate.referral.query_parameter%</argument>
+            <argument>%sylius_affiliate.referral.cookie_name%</argument>
+            <argument>%sylius_affiliate.referral.cookie_lifetime%</argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+        </service>
+
+        <service id="sylius.referral_processor" class="%sylius.referral_processor.class%">
+            <argument type="service" id="sylius.repository.affiliate_goal" />
+            <argument type="service" id="sylius.referral_eligibility_checker" />
+            <argument type="service" id="sylius.affiliate_provision_applicator" />
+            <argument type="service" id="sylius.context.affiliate" />
+        </service>
+
+        <service id="sylius.referral_eligibility_checker" class="%sylius.referral_eligibility_checker.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_rule_checker" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="sylius.affiliate_provision_applicator" class="%sylius.affiliate_provision_applicator.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_provision" />
+            <argument type="service" id="sylius.manager.affiliate" />
+        </service>
+
+        <service id="sylius.listener.banner_upload" class="%sylius.listener.banner_upload.class%">
+            <argument type="service" id="sylius.image_uploader" />
+            <tag name="kernel.event_listener" event="sylius.affiliate_banner.pre_create" method="uploadBannerImage" />
+            <tag name="kernel.event_listener" event="sylius.affiliate_banner.pre_update" method="uploadBannerImage" />
+        </service>
+
+        <service id="sylius.listener.referral_code_generator" class="%sylius.listener.referral_code_generator.class%">
+            <argument type="service" id="sylius.repository.affiliate" />
+            <argument type="service" id="sylius.manager.affiliate" />
+            <tag name="kernel.event_listener" event="sylius.affiliate.pre_create" method="generateReferralCode" />
+        </service>
+
+        <service id="sylius.affiliate_resolver" class="%sylius.affiliate_resolver.class%">
+            <argument type="service" id="sylius.repository.affiliate" />
+        </service>
+
+        <service id="sylius.generator.invitation_generator" class="%sylius.generator.invitation_generator.class%">
+            <argument type="service" id="sylius.repository.invitation" />
+            <argument type="service" id="sylius.manager.invitation" />
+            <argument type="service" id="sylius.email_sender" />
+        </service>
+
+        <service id="sylius.affiliate_goal_provision.fixed_provision" class="%sylius.affiliate_goal_provision.fixed_provision.class%">
+            <argument type="service" id="sylius.repository.transaction" />
+            <tag name="sylius.affiliate_goal_provision" type="fixed_provision" label="Fixed provision" />
+        </service>
+
+        <service id="sylius.affiliate_goal_provision.percentage_provision" class="%sylius.affiliate_goal_provision.percentage_provision.class%">
+            <argument type="service" id="sylius.repository.transaction" />
+            <tag name="sylius.affiliate_goal_provision" type="percentage_provision" label="Percentage provision" />
+        </service>
+
+
+        <service id="sylius.registry.affiliate_goal_rule_checker" class="%sylius.registry.affiliate_goal_rule_checker.class%">
+            <argument>Sylius\Component\Affiliate\Checker\RuleCheckerInterface</argument>
+        </service>
+        <service id="sylius.registry.affiliate_goal_provision" class="%sylius.registry.affiliate_goal_provision.class%">
+            <argument>Sylius\Component\Affiliate\Provision\AffiliateProvisionInterface</argument>
+        </service>
+
+        <service id="sylius.form.type.affiliate_goal_rule.collection" class="%sylius.form.type.affiliate_goal_rule.collection.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_rule_checker" />
+            <tag name="form.type" alias="sylius_affiliate_goal_rule_collection" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision.collection" class="%sylius.form.type.affiliate_goal_provision.collection.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_provision" />
+            <tag name="form.type" alias="sylius_affiliate_goal_provision_collection" />
+        </service>
+
+        <service id="sylius.form.type.affiliate_goal_rule.collection" class="%sylius.form.type.affiliate_goal_rule.collection.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_rule_checker" />
+            <tag name="form.type" alias="sylius_affiliate_goal_rule_collection" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision.collection" class="%sylius.form.type.affiliate_goal_provision.collection.class%">
+            <argument type="service" id="sylius.registry.affiliate_goal_provision" />
+            <tag name="form.type" alias="sylius_affiliate_goal_provision_collection" />
+        </service>
+        
+        <service id="sylius.form.type.affiliate_goal" class="%sylius.form.type.affiliate_goal.class%">
+            <argument>%sylius.model.affiliate_goal.class%</argument>
+            <argument>%sylius.validation_group.affiliate_goal%</argument>
+            <tag name="form.type" alias="sylius_affiliate_goal" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_rule" class="%sylius.form.type.affiliate_goal_rule.class%">
+            <argument>%sylius.model.affiliate_rule.class%</argument>
+            <argument>%sylius.validation_group.affiliate_rule%</argument>
+            <argument type="service" id="sylius.registry.affiliate_goal_rule_checker" />
+            <tag name="form.type" alias="sylius_affiliate_goal_rule" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision" class="%sylius.form.type.affiliate_goal_provision.class%">
+            <argument>%sylius.model.affiliate_provision.class%</argument>
+            <argument>%sylius.validation_group.affiliate_provision%</argument>
+            <argument type="service" id="sylius.registry.affiliate_goal_provision" />
+            <tag name="form.type" alias="sylius_affiliate_goal_provision" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_rule_choice" class="%sylius.form.type.affiliate_goal_rule_choice.class%">
+            <argument>%sylius.affiliate_goal_rules%</argument>
+            <tag name="form.type" alias="sylius_affiliate_goal_rule_choice" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision_choice" class="%sylius.form.type.affiliate_goal_provision_choice.class%">
+            <argument>%sylius.affiliate_goal_provisions%</argument>
+            <tag name="form.type" alias="sylius_affiliate_goal_provision_choice" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision.fixed_provision_configuration" class="%sylius.form.type.affiliate_goal_provision.fixed_provision_configuration.class%">
+            <argument>%sylius.validation_group.affiliate_goal_provision_fixed_provision_configuration%</argument>
+            <tag name="form.type" alias="sylius_affiliate_provision_fixed_configuration" />
+        </service>
+        <service id="sylius.form.type.affiliate_goal_provision.percentage_provision_configuration" class="%sylius.form.type.affiliate_goal_provision.percentage_provision_configuration.class%">
+            <argument>%sylius.validation_group.affiliate_goal_provision_percentage_provision_configuration%</argument>
+            <tag name="form.type" alias="sylius_affiliate_provision_percentage_configuration" />
+        </service>
+
+        <service id="sylius.form.type.affiliate" class="%sylius.form.type.affiliate.class%">
+            <argument>%sylius.model.affiliate.class%</argument>
+            <argument>%sylius.validation_group.affiliate%</argument>
+            <tag name="form.type" alias="sylius_affiliate" />
+        </service>
+
+        <service id="sylius.form.type.affiliate_banner" class="%sylius.form.type.affiliate_banner.class%">
+            <argument>%sylius.model.affiliate_banner.class%</argument>
+            <tag name="form.type" alias="sylius_affiliate_banner" />
+        </service>
+
+        <service id="sylius.form.type.affiliate_invitations" class="%sylius.form.type.invitations.class%">
+            <tag name="form.type" alias="sylius_affiliate_invitations" />
+        </service>
+    </services>
+
+</container>

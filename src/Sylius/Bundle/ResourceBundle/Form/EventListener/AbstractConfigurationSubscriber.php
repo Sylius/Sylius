@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
+namespace Sylius\Bundle\ResourceBundle\Form\EventListener;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,11 +37,11 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     protected $registryIdentifier;
 
     public function __construct(
-        ServiceRegistryInterface $actionRegistry,
+        ServiceRegistryInterface $registry,
         FormFactoryInterface $factory,
         $registryIdentifier = null
     ) {
-        $this->registry = $actionRegistry;
+        $this->registry = $registry;
         $this->factory = $factory;
         $this->registryIdentifier = $registryIdentifier;
     }
@@ -52,9 +52,9 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_SET_DATA  => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit',
+            FormEvents::PRE_SUBMIT    => 'preSubmit',
         );
     }
 
@@ -107,9 +107,13 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
      */
     protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = array())
     {
+        if (!$this->registry->has($registryIdentifier)) {
+            return;
+        }
+
         $model = $this->registry->get($registryIdentifier);
 
-        $configurationField = $this->factory->createNamed(
+        $form->add($this->factory->createNamed(
             'configuration',
             $model->getConfigurationFormType(),
             $data,
@@ -117,20 +121,22 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
                 'auto_initialize' => false,
                 'label' => false,
             )
-        );
-
-        $form->add($configurationField);
+        ));
     }
 
     /**
-     * Return the identifier of the rule/action registered in the registry
+     * Return the identifier of the rule/action registered in the registry.
+     *
+     * @param string $model
      *
      * @return string
      */
     abstract protected function getRegistryIdentifier($model);
 
     /**
-     * Return the rule/action configuration
+     * Return the rule/action configuration.
+     *
+     * @param string $model
      *
      * @return array
      */

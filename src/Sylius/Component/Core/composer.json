@@ -24,6 +24,7 @@
 
         "knplabs/gaufrette":  "0.2.*@dev",
         "sylius/addressing":  "0.16.*",
+        "sylius/affiliate":   "0.16.*",
         "sylius/archetype":   "0.16.*",
         "sylius/attribute":   "0.16.*",
         "sylius/cart":        "0.16.*",

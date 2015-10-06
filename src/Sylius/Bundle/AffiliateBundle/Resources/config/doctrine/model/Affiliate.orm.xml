@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Sylius\Component\Affiliate\Model\Affiliate" table="sylius_affiliate">
+        <indexes>
+            <index columns="referral_code" />
+        </indexes>
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="status" column="status" type="integer" />
+        <field name="referralCode" column="referral_code" type="string" unique="true" />
+
+        <one-to-many field="transactions" target-entity="Sylius\Component\Affiliate\Model\TransactionInterface" mapped-by="affiliate">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
+        <many-to-many field="referrals" target-entity="Sylius\Component\User\Model\CustomerInterface">
+            <join-table name="sylius_affiliate_referrals">
+                <join-columns>
+                    <join-column name="affiliate_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="customer_id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

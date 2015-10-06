@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\Form\FormBuilderInterface;

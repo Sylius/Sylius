@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Type;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NthOrderConfigurationType extends AbstractType
+abstract class NthOrderConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -57,13 +57,5 @@ class NthOrderConfigurationType extends AbstractType
                 'validation_groups' => $this->validationGroups,
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_rule_nth_order_configuration';
     }
 }

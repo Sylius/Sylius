@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule\Promotion;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

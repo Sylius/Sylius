@@ -45,7 +45,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
 
     function it_is_configuration_subscriber()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber');
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Form\EventListener\AbstractConfigurationSubscriber');
     }
 
     function it_subscribes_evetns()

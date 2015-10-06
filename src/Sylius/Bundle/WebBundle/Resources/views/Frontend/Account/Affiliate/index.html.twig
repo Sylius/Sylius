@@ -1,0 +1,57 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>{{ 'sylius.account.affiliate.index.list'|trans }}</h4>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>{{ 'sylius.account.affiliate.index.referral_code'|trans }} : {{ affiliate.referralCode }}</p>
+                <p>{{ 'sylius.account.affiliate.index.example_link'|trans }} : {{ url('sylius_homepage') }} <b>?{{ query_parameter }}={{ affiliate.referralCode }}</b></p>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.account.affiliate.index.stats'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if app.user.customer.affiliate is not empty %}
+                {% if app.user.customer.affiliate.disabled %}
+                {{ 'sylius.account.affiliate.status.disabled'|trans }}
+                {% elseif app.user.customer.affiliate.paused %}
+                    {{ 'sylius.account.affiliate.status.paused'|trans }}
+                {% else %}
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.referrals'|trans }}</strong></td>
+                    <td>
+                        {{ referrals_count }}
+                        <a class="btn btn-primary pull-right" href="{{ url('sylius_account_affiliate_referrals') }}">{{ 'sylius.account.affiliate.referrals.title'|trans }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.transactions'|trans }}</strong></td>
+                    <td>
+                        {{ transactions_count }}
+                        <a class="btn btn-primary pull-right" href="{{ url('sylius_account_affiliate_history') }}">{{ 'sylius.account.affiliate.history.title'|trans }}</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td>{{ 'sylius.account.affiliate.status.create'|trans }}</td>
+                    <td>
+                        <a class="btn btn-success" href="{{ url('sylius_account_affiliate_create') }}">{{ 'sylius.account.affiliate.create'|trans }}</a>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

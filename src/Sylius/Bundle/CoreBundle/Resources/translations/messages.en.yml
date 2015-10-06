@@ -61,6 +61,13 @@ sylius:
             name: Name
             sku: SKU
         settings:
+            affiliate:
+                enabled: Enable?
+                enabled_multi_level: Enable multi level?
+                provision_amount: Provision amount
+                provision_fixed: Fixed amount
+                provision_percent: Percent
+                provision_type: Provision type
             general:
                 currency: Default currency
                 locale: Language

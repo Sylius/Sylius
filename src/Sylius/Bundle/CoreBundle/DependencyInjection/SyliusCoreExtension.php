@@ -29,6 +29,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     private $bundles = array(
         'sylius_addressing',
+        'sylius_affiliate',
         'sylius_api',
         'sylius_attribute',
         'sylius_channel',

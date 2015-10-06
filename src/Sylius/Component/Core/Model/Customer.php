@@ -13,6 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\User\Model\Customer as BaseCustomer;
+use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -43,6 +45,16 @@ class Customer extends BaseCustomer implements CustomerInterface
      * @var ArrayCollection
      */
     protected $addresses;
+
+    /**
+     * @var AffiliateInterface
+     */
+    protected $affiliate;
+
+    /**
+     * @var ReferralInterface
+     */
+    protected $referrer;
 
     public function __construct()
     {
@@ -159,5 +171,39 @@ class Customer extends BaseCustomer implements CustomerInterface
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAffiliate()
+    {
+        return $this->affiliate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAffiliate(AffiliateInterface $affiliate = null)
+    {
+        $this->affiliate = $affiliate;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferralInterface $referral = null)
+    {
+        $this->referrer = $referral;
+        return $this;
     }
 }

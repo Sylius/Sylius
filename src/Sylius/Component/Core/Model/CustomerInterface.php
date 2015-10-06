@@ -13,11 +13,13 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Affiliate\Model\AffiliateAwareInterface;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface CustomerInterface extends BaseCustomerInterface
+interface CustomerInterface extends BaseCustomerInterface, AffiliateAwareInterface, ReferralInterface
 {
     /**
      * @param string $currency

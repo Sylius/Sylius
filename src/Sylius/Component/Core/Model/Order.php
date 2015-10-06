@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
@@ -35,6 +36,13 @@ class Order extends Cart implements OrderInterface
      * @var BaseCustomerInterface
      */
     protected $customer;
+
+    /**
+     * Referral.
+     *
+     * @var ReferralInterface
+     */
+    protected $referrer;
 
     /**
      * Channel.
@@ -148,6 +156,10 @@ class Order extends Cart implements OrderInterface
     public function setCustomer(BaseCustomerInterface $customer = null)
     {
         $this->customer = $customer;
+
+        if (null !== $this->customer->getReferrer()) {
+            $this->referrer = $this->customer->getReferrer();
+        }
 
         return $this;
     }
@@ -607,5 +619,23 @@ class Order extends Cart implements OrderInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferralInterface $referral = null)
+    {
+        $this->referrer = $referral;
+
+        return $this;
     }
 }

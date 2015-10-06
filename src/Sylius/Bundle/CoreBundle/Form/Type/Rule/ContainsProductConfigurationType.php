@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\Type;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class ContainsProductConfigurationType extends AbstractType
+abstract class ContainsProductConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -73,13 +73,5 @@ class ContainsProductConfigurationType extends AbstractType
                 'validation_groups' => $this->validationGroups,
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_rule_contains_product_configuration';
     }
 }

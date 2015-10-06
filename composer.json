@@ -89,6 +89,8 @@
     "replace": {
         "sylius/addressing":         "self.version",
         "sylius/addressing-bundle":  "self.version",
+        "sylius/affiliate":          "self.version",
+        "sylius/affiliate-bundle":   "self.version",
         "sylius/api-bundle":         "self.version",
         "sylius/archetype":          "self.version",
         "sylius/archetype-bundle":   "self.version",

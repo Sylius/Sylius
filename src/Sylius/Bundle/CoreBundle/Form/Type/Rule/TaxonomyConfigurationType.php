@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonomyConfigurationType extends AbstractType
+abstract class TaxonomyConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -57,13 +57,5 @@ class TaxonomyConfigurationType extends AbstractType
                 'validation_groups' => $this->validationGroups,
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_rule_taxonomy_configuration';
     }
 }

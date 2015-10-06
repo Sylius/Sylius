@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_affiliate_banner_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.affiliate_banner:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateBanner:index.html.twig
+
+sylius_backend_affiliate_banner_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.affiliate_banner:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateBanner:create.html.twig
+            redirect: sylius_backend_affiliate_banner_index
+
+sylius_backend_affiliate_banner_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.affiliate_banner:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateBanner:update.html.twig
+            redirect: sylius_backend_affiliate_banner_index
+
+sylius_backend_affiliate_banner_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.affiliate_banner:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_affiliate_banner_index

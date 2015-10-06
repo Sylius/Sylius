@@ -21,6 +21,7 @@
         <parameter key="sylius.controller.frontend.account.profile.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\ProfileController</parameter>
         <parameter key="sylius.controller.frontend.account.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AccountController</parameter>
         <parameter key="sylius.controller.frontend.account.address.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController</parameter>
+        <parameter key="sylius.controller.frontend.account.affiliate.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AffiliateController</parameter>
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
@@ -49,6 +50,11 @@
             </call>
         </service>
         <service id="sylius.controller.frontend.account" class="%sylius.controller.frontend.account.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.account.affiliate" class="%sylius.controller.frontend.account.affiliate.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

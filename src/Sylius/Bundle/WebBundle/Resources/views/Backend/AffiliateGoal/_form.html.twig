@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.usageLimit) }}
+        {{ form_row(form.startsAt) }}
+        {{ form_row(form.endsAt) }}
+        {{ form_widget(form._token) }}
+    </div>
+    <div class="row">
+        <div class="col-md-6 row-split">
+            {{ form_row(form.rules) }}
+        </div>
+        <div class="col-md-6 row-split">
+            {{ form_row(form.provisions) }}
+        </div>
+    </div>
+</div>
+
+<hr>
