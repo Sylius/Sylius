@@ -56,7 +56,7 @@ before_install:
 
 before_script:
     - app/console doctrine:database:create --env=test
-    - app/console doctrine:schema:create --env=test
+    - app/console doctrine:migrations:migrate --env=test --no-interaction
     - app/console doctrine:phpcr:repository:init --env=test
 
     - app/console cache:warmup --env=test
