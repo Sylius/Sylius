@@ -12,6 +12,8 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
 {
     const EXPECTED_ARCHETYPE = 123;
 
+    static $defaultConfig = [ArchetypeFilter::OPTION_ARCHETYPE => self::EXPECTED_ARCHETYPE];
+
     /**
      * Subject under tests
      *
@@ -21,9 +23,7 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->sut = new ArchetypeFilter([
-            ArchetypeFilter::OPTION_ARCHETYPE => self::EXPECTED_ARCHETYPE,
-        ]);
+        $this->sut = new ArchetypeFilter();
     }
 
     /**
@@ -37,7 +37,7 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
             $item,
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $this->assertEquals(
             new ArrayCollection([$item]),
@@ -52,7 +52,7 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
     {
         $collection = new ArrayCollection();
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
         $this->assertEquals($collection, $result);
     }
 
@@ -66,7 +66,7 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
             $item2 = $this->mockOrderItemWithArchetypeId(self::EXPECTED_ARCHETYPE),
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $this->assertEquals($expected, $result);
     }
@@ -83,7 +83,7 @@ class ArchetypeFilterTest extends \PHPUnit_Framework_TestCase
             $this->mockOrderItemWithArchetypeId(1234),
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $expected = new ArrayCollection([
             $item1, $item2,

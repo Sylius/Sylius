@@ -33,4 +33,9 @@ class CheapestFilter extends AbstractFilter
 
         return $returnCollection;
     }
+
+    protected function resolveConfiguration(array $configuration)
+    {
+        return $configuration;
+    }
 }

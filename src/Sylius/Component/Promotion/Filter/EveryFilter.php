@@ -23,4 +23,9 @@ class EveryFilter extends AbstractFilter
     {
         return $collection;
     }
+
+    protected function resolveConfiguration(array $configuration)
+    {
+        return $configuration;
+    }
 }

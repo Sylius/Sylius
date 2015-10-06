@@ -19,11 +19,6 @@ class ArchetypeFilter extends AbstractFilter
 {
     const OPTION_ARCHETYPE = 'archetype';
 
-    public function __construct($configuration)
-    {
-        $this->configuration = $this->resolveConfiguration($configuration);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -44,7 +39,7 @@ class ArchetypeFilter extends AbstractFilter
         return $returnedCollection;
     }
 
-    private function resolveConfiguration($configuration)
+    protected function resolveConfiguration(array $configuration)
     {
         $resolver = new OptionsResolver();
 

@@ -17,8 +17,9 @@ interface FilterInterface
 {
     /**
      * @param ArrayCollection $arrayCollection
+     * @param array           $configuration
      *
      * @return ArrayCollection
      */
-    public function apply(ArrayCollection $arrayCollection);
+    public function apply(ArrayCollection $arrayCollection, array $configuration = array());
 }

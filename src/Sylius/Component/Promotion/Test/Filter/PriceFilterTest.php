@@ -16,6 +16,11 @@ class PriceFilterTest extends \PHPUnit_Framework_TestCase
      */
     private $sut;
 
+    public function setUp()
+    {
+        $this->sut = new PriceFilter();
+    }
+
     /**
      * @dataProvider collectionDataProvider
      * @test
@@ -26,9 +31,7 @@ class PriceFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function it_returns_values_according_to_configuration($configuration, $collection, $expectedResult)
     {
-        $this->sut = new PriceFilter($configuration);
-
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, $configuration);
 
         $this->assertInstanceOf(ArrayCollection::class, $result);
         $this->assertSameSize($expectedResult, $result);

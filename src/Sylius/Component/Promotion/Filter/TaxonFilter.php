@@ -19,11 +19,6 @@ class TaxonFilter extends AbstractFilter
 {
     const OPTION_TAXON = 'taxon';
 
-    public function __construct($configuration)
-    {
-        $this->configuration = $this->resolveConfiguration($configuration);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -44,7 +39,7 @@ class TaxonFilter extends AbstractFilter
         return $returnedCollection;
     }
 
-    private function resolveConfiguration($configuration)
+    protected function resolveConfiguration(array $configuration)
     {
         $resolver = new OptionsResolver();
 

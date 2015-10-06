@@ -12,6 +12,8 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
 {
     const EXPECTED_TAXON = 123;
 
+    static $defaultConfig = [TaxonFilter::OPTION_TAXON => self::EXPECTED_TAXON];
+
     /**
      * Subject under tests
      *
@@ -21,9 +23,7 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->sut = new TaxonFilter([
-            TaxonFilter::OPTION_TAXON => self::EXPECTED_TAXON,
-        ]);
+        $this->sut = new TaxonFilter();
     }
 
     /**
@@ -37,7 +37,7 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
             $item1,
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $this->assertEquals(
             new ArrayCollection([$item1]),
@@ -52,7 +52,7 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
     {
         $collection = new ArrayCollection();
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
         $this->assertEquals($collection, $result);
     }
 
@@ -66,7 +66,7 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
             $item2 = $this->mockOrderItemWithTaxonId(self::EXPECTED_TAXON),
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $this->assertEquals($expected, $result);
     }
@@ -83,7 +83,7 @@ class TaxonFilterTest extends \PHPUnit_Framework_TestCase
             $this->mockOrderItemWithTaxonId(1234),
         ]);
 
-        $result = $this->sut->apply($collection);
+        $result = $this->sut->apply($collection, self::$defaultConfig);
 
         $expected = new ArrayCollection([
             $item1, $item2,

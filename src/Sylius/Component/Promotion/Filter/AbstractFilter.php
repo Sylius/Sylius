@@ -22,19 +22,13 @@ abstract class AbstractFilter implements FilterInterface
 
     /**
      * {@inheritdoc}
-     */
-    public function __construct($configuration = array())
-    {
-        $this->configuration = $configuration;
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @throws UnexpectedValueException if the filter has not returned ArrayCollection
      */
-    public function apply(ArrayCollection $collection)
+    public function apply(ArrayCollection $collection, array $configuration = array())
     {
+        $this->configuration = $this->resolveConfiguration($configuration);
+
         $filteredCollection = $this->filter($collection);
 
         if ($filteredCollection instanceof ArrayCollection) {
@@ -52,4 +46,6 @@ abstract class AbstractFilter implements FilterInterface
      * @return ArrayCollection
      */
     protected abstract function filter(ArrayCollection $collection);
+
+    protected abstract function resolveConfiguration(array $configuration);
 }

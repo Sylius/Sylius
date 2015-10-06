@@ -21,11 +21,6 @@ class PriceFilter extends AbstractFilter
     const OPTION_VALUE = 'value';
     const OPTION_COMPARISON = 'comparison';
 
-    public function __construct($configuration)
-    {
-        $this->configuration = $this->resolveConfiguration($configuration);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -42,7 +37,7 @@ class PriceFilter extends AbstractFilter
         return $collection->matching($criteria);
     }
 
-    private function resolveConfiguration($configuration)
+    protected function resolveConfiguration(array $configuration)
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(
