@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import state_label %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -68,9 +69,7 @@
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
                 <td>
                     {% if customer.user is not null %}
-                        <span class="label label-{{ customer.user.enabled ? 'success' : 'danger'}}">
-                            {{ customer.user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                        </span>
+                        {{ state_label(customer.user.enabled) }}
                     {% endif %}
                 </td>
             </tr>
