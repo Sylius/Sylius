@@ -16,7 +16,7 @@ First step is to implement the simple interface.
 
     namespace AcmeBundle\Entity;
 
-    use Sylius\Component\Taxation\Model\TaxCategory;
+    use Sylius\Component\Taxation\Model\TaxCategoryInterface;
     use Sylius\Component\Taxation\Model\TaxableInterface;
 
     class Server implements TaxableInterface
