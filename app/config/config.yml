@@ -19,7 +19,9 @@ framework:
     templating:      { engines: ['twig'] }
     default_locale:  "%sylius.locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
 
 twig:
     form:

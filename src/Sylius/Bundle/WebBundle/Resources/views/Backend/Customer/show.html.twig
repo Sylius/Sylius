@@ -13,16 +13,14 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {% if customer.user is not null and customer.user.id is not sameas(app.user.id) and not customer.deleted %}
+        {% if customer.user is not null and customer.user.id is not same as(app.user.id) and not customer.deleted %}
         {{ buttons.generic(path('sylius_account_profile_show', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
         {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
         {% if not customer.deleted %}
             {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
-            {% if customer.user is null %}
-                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, false) }}
-            {% elseif customer.user.id is not sameas(app.user.id) %}
-                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, false) }}
+            {% if customer.user is null or customer.user.id is not same as(app.user.id) %}
+                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, true) }}
             {% endif %}
         {% endif %}
     </div>

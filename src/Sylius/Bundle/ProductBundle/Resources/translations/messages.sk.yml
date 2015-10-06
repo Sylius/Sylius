@@ -10,6 +10,9 @@ sylius:
       available_on: Dostupný od
       meta_keywords: Meta kľúčové slová
       meta_description: Meta popis
-    archetype:
+    property:
+      name: Interný názov
+      presentation: Verejný názov
+    prototype:
       name: Názov
       properties: Vlastnosti

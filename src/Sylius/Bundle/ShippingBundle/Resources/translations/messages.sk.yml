@@ -4,9 +4,11 @@
 sylius:
   form:
     shipment:
-      state: Štát
+      state: Stav
       states:
+        checkout: Košík
         dispatched: Odoslané
+        pending: Čakajúca
         ready: Pripravená
         shipped: Odoslané
         returned: Vrátený tovar
@@ -25,4 +27,6 @@ sylius:
       name: Názov
     shipping_method:
       calculator: Kalkulačka
+      category: Kategória
+      configuration: Konfigurácia
       name: Názov

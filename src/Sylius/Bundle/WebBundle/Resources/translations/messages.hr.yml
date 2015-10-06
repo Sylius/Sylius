@@ -80,7 +80,7 @@ sylius:
       products: Pregledaj proizvode
       users: Pregledaj korisnika
     statistics:
-      header: Statistika
+      0: Statistika
       orders_this_month: Narudžbe u trenutnom mjesecu
       registrations_this_month: Registracije u trenutnom mjesecu
       sales_this_month: Prodaja u trenutnom mjesecu
@@ -134,7 +134,7 @@ sylius:
       index: Kuponi
     property:
       index: Svojstva
-    archetype:
+    prototype:
       index: Prototipovi proizvoda
     sales: Prodaja
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: Tip
     update_header: Ažuriranje atributa
     updated_at: Ažurirano
-  archetype:
+  prototype:
     build: Kreiraj prototip
     build_header: Kreirajte artikal na bazi prototipa
     create: Kreiraj prototip

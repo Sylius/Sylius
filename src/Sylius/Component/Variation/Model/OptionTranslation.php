@@ -14,23 +14,16 @@ namespace Sylius\Component\Variation\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Product option trnaslation default implementation.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class OptionTranslation extends AbstractTranslation implements OptionTranslationInterface
 {
     /**
-     * Property id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Presentation.
-     * Displayed to user.
-     *
      * @var string
      */
     protected $presentation;
@@ -57,7 +50,5 @@ class OptionTranslation extends AbstractTranslation implements OptionTranslation
     public function setPresentation($presentation)
     {
         $this->presentation = $presentation;
-
-        return $this;
     }
 }

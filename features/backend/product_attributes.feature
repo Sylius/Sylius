@@ -98,16 +98,14 @@ Feature: Product attributes
         When I fill in "Internal name" with "Book author"
         And I fill in "Presentation" with "Author"
         And I select "Choice" from "Type"
-        And I click "Add choice"
-        And I fill in "Choice 0" with "J.R.R Tolken"
-        And I click "Add choice"
-        And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
+        And I add choice "J.R.R Tolken"
+        And I add choice "Jaroslaw Grzedowicz"
         And I press "Create"
         Then product attribute with following data should be created:
-            | name         | Book author                      |
-            | presentation | Author                           |
-            | type         | choice                           |
-            | choices      | J.R.R Tolken,Jaroslaw Grzedowicz |
+            | name                   | Book author                      |
+            | presentation           | Author                           |
+            | type                   | choice                           |
+            | configuration[choices] | J.R.R Tolken,Jaroslaw Grzedowicz |
         And I should see "Attribute has been successfully created."
 
     @javascript
@@ -116,15 +114,13 @@ Feature: Product attributes
         When I fill in "Internal name" with "Book author"
         And I fill in "Presentation" with "Author"
         And I select "Choice" from "Type"
-        And I click "Add choice"
-        And I fill in "Choice 0" with "J.R.R Tolken"
-        And I click "Add choice"
-        And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
-        And I remove attribute choice number 0
+        And I add choice "J.R.R Tolken"
+        And I add choice "Jaroslaw Grzedowicz"
+        And I remove first choice
         And I press "Create"
         Then product attribute with following data should be created:
-            | name         | Book author         |
-            | presentation | Author              |
-            | type         | choice              |
-            | choices      | Jaroslaw Grzedowicz |
+            | name                   | Book author         |
+            | presentation           | Author              |
+            | type                   | choice              |
+            | configuration[choices] | Jaroslaw Grzedowicz |
         And I should see "Attribute has been successfully created."

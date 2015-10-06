@@ -15,6 +15,9 @@ Sylius\Component\Product\Model\Product:
         options:
             expose: true
             max_depth: 1
+        variants:
+            expose: true
+            max_depth: 1
         attributes:
             expose: true
             max_depth: 1

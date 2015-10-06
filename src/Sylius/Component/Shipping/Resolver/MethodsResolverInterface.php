@@ -15,15 +15,11 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Returns are shipping methods which support given shipping subject.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface MethodsResolverInterface
 {
     /**
-     * Get all methods available for given shippables aware.
-     *
      * @param ShippingSubjectInterface $subject
      * @param array                    $criteria
      *

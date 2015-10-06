@@ -11,17 +11,15 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Coupons aware promotion subject interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionCouponsAwareSubjectInterface extends PromotionSubjectInterface
 {
     /**
-     * Gets associated promotion coupons.
-     *
-     * @return CouponInterface[]
+     * @return Collection|CouponInterface[]
      */
     public function getPromotionCoupons();
 }

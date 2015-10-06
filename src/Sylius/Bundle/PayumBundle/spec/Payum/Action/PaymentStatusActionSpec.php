@@ -73,9 +73,9 @@ class PaymentStatusActionSpec extends ObjectBehavior
     }
 
     function it_should_do_status_subrequest_with_payment_details_as_model(
-        PaymentInterface $payment,
+        PayumPaymentInterface $payumPayment,
         GetStatusInterface $statusRequest,
-        PayumPaymentInterface $payment
+        PaymentInterface $payment
     ) {
         $details = array('foo' => 'foo', 'bar' => 'baz');
 
@@ -83,11 +83,11 @@ class PaymentStatusActionSpec extends ObjectBehavior
         $statusRequest->setModel($details)->shouldBeCalled();
         $statusRequest->setModel($payment)->shouldBeCalled();
 
-        $payment->execute($statusRequest)->shouldBeCalled();
-
         $payment->getDetails()->willReturn($details);
 
-        $this->setPayment($payment);
+        $payumPayment->execute($statusRequest)->shouldBeCalled();
+        $this->setPayment($payumPayment);
+
         $this->execute($statusRequest);
     }
 }

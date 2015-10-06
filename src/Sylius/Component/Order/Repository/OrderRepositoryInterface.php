@@ -23,8 +23,6 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
 {
     /**
-     * Gets recently completed orders.
-     *
      * @param integer $amount
      *
      * @return OrderInterface[]
@@ -32,8 +30,6 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
     public function findRecentOrders($amount = 10);
 
     /**
-     * Was that order number already used?
-     *
      * @param int|string $number
      *
      * @return bool

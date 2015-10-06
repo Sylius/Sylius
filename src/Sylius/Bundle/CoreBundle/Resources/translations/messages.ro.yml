@@ -2,12 +2,94 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Vă rugăm să alegeți metoda de livrare.
   form:
     action:
       add_product_configuration:
         price: Preț unitar
         quantity: Cantitate
+        variant: Variantă
+    block:
+      body: Corp
+      id: Id
+      title: Titlu
     cart:
-      coupon: Cupon
+      coupon: Cod promoțional
+    checkout:
+      addressing:
+        different_billing_address: Folosiți o adresă de facturare diferită?
+      payment_method: Metoda de plată
+      shipping_method: Metoda de livrare
+    coupon:
+      per_user_usage_limit: Limita de utilizare per utilizator
+    group:
+      name: Nume
+      roles: Roluri
+    image:
+      file: Imagine
     locale:
       code: Cod
+      enabled: Activat
+    order_filter:
+      created_at_from: Creată după
+      created_at_to: Creată înainte de
+      number: Număr
+      total_from: De la
+      total_to: Până la
+      payment_state: Status plată
+    page:
+      body: Corp
+      id: Id
+      title: Titlu
+    product:
+      restricted_zone: Zonă cu restricție
+      shipping_category: Categoria de livrare
+      short_description: Descriere scurtă
+      tax_category: Categoria de taxă
+      variant_selection_method: Metoda de selectare a variantei
+    product_filter:
+      name: Nume
+      sku: SKU
+    settings:
+      general:
+        currency: Moneda implicită
+        locale: Limba
+        meta_description: Meta descriere
+        meta_keywords: Meta cuvinte cheie
+        title: Titlul paginii
+      taxation:
+        default_tax_zone: Zona de taxă implicită
+    shipment_filter:
+      created_at_from: De la
+      created_at_to: Până la
+      number: Număr comandă
+      shipping_address: Livrează la
+    shipping_method:
+      zone: Zonă
+    taxon:
+      file: Alege imagine
+    taxonomy:
+      file: Alege imagine
+    user:
+      billing_address: Adresa de facturare
+      different_billing_address: Folosiți o adresă de facturare diferită?
+      enabled: Activat
+      first_name: Prenume
+      groups: Grupuri
+      last_name: Nume
+      password: Parolă
+      shipping_address: Adresa de livrare
+    user_filter:
+      query: Căutare
+    variant:
+      available_on_demand: Disponibil la comandă
+      depth: Adâncime
+      height: Înălţime
+      images: Imagini
+      on_hand: Stoc curent
+      price: Preț
+      sku: SKU
+      weight: Greutate
+      width: Lăţime

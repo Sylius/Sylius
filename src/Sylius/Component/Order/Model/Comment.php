@@ -19,64 +19,45 @@ namespace Sylius\Component\Order\Model;
 class Comment implements CommentInterface
 {
     /**
-     * Id.
-     *
      * @var int
      */
     protected $id;
 
     /**
-     * Order.
-     *
      * @var OrderInterface
      */
     protected $order;
 
     /**
-     * Flag to notify customer.
-     *
      * @var bool
      */
     protected $notifyCustomer = false;
 
     /**
-     * Order comment.
-     *
      * @var string
      */
     protected $comment;
 
     /**
-     * State.
-     *
      * @var string
      */
     protected $state;
 
     /**
-     * Author.
-     *
      * @var string
      */
     protected $author;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Modification time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -107,8 +88,6 @@ class Comment implements CommentInterface
         if (null !== $order) {
             $this->state = $order->getState();
         }
-
-        return $this;
     }
 
     /**
@@ -125,8 +104,6 @@ class Comment implements CommentInterface
     public function setNotifyCustomer($notifyCustomer)
     {
         $this->notifyCustomer = (bool) $notifyCustomer;
-
-        return $this;
     }
 
     /**
@@ -143,8 +120,6 @@ class Comment implements CommentInterface
     public function setComment($comment = null)
     {
         $this->comment = $comment;
-
-        return $this;
     }
 
     /**
@@ -161,8 +136,6 @@ class Comment implements CommentInterface
     public function setState($state)
     {
         $this->state = $state;
-
-        return $this;
     }
 
     /**
@@ -179,8 +152,6 @@ class Comment implements CommentInterface
     public function setAuthor($author)
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
@@ -197,8 +168,6 @@ class Comment implements CommentInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -215,7 +184,5 @@ class Comment implements CommentInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

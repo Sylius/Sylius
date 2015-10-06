@@ -11,22 +11,17 @@
 
 namespace Sylius\Component\Translation\Model;
 
-
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AbstractTranslation implements TranslationInterface
 {
     /**
-     * Locale.
-     *
      * @var string
      */
     protected $locale;
 
     /**
-     * Translatable object.
-     *
      * @var TranslatableInterface
      */
     protected $translatable;
@@ -45,7 +40,7 @@ class AbstractTranslation implements TranslationInterface
     public function setTranslatable(TranslatableInterface $translatable = null)
     {
         if ($translatable === $this->translatable) {
-            return $this;
+            return;
         }
 
         $previousTranslatable = $this->translatable;
@@ -58,8 +53,6 @@ class AbstractTranslation implements TranslationInterface
         if (null !== $translatable) {
             $translatable->addTranslation($this);
         }
-
-        return $this;
     }
 
     /**
@@ -76,7 +69,5 @@ class AbstractTranslation implements TranslationInterface
     public function setLocale($locale)
     {
         $this->locale = $locale;
-
-        return $this;
     }
 }

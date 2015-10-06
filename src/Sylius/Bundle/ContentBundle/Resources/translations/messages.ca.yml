@@ -1,15 +1,27 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: automàtica
 sylius:
   form:
+    action_block:
+      action_name: "Nom de l'acció"
+    imagine_block:
+      internal_name: Nom intern
+      slideshow_small: Presentació de diapositives gran (ample)
+      slideshow_medium: Presentació de diapositives mitjanes (contingut)
+      slideshow_large: Presentació de diapositives petita (costat)
     menu:
       name: Nom
+      uri: URI
     menu_block:
       body: Cos
       name: Nom
+    menu_node_block:
+      uri: URI
     redirect_route:
       name: Nom
+      uri: URI
     reference_block:
       body: Cos
       title: Títol

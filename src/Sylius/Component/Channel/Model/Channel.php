@@ -12,8 +12,6 @@
 namespace Sylius\Component\Channel\Model;
 
 /**
- * Basic channel model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Channel implements ChannelInterface
@@ -49,7 +47,7 @@ class Channel implements ChannelInterface
     protected $color;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $enabled = true;
 
@@ -63,9 +61,6 @@ class Channel implements ChannelInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -98,8 +93,6 @@ class Channel implements ChannelInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -116,8 +109,6 @@ class Channel implements ChannelInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -134,8 +125,6 @@ class Channel implements ChannelInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -152,8 +141,6 @@ class Channel implements ChannelInterface
     public function setUrl($url)
     {
         $this->url = $url;
-
-        return $this;
     }
 
     /**
@@ -170,8 +157,6 @@ class Channel implements ChannelInterface
     public function setColor($color)
     {
         $this->color = $color;
-
-        return $this;
     }
 
     /**
@@ -204,8 +189,6 @@ class Channel implements ChannelInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -222,7 +205,5 @@ class Channel implements ChannelInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

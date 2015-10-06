@@ -13,6 +13,6 @@ sylius:
     property:
       name: System navn
       presentation: Præsentation
-    archetype:
+    prototype:
       name: Navn
       properties: Egenskaber

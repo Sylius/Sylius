@@ -9,6 +9,7 @@ sylius:
       country: Země
       first_name: Křestní jméno
       last_name: Příjmení
+      phone_number: Telefonní číslo
       postcode: PSČ
       street: Ulice
       province: Provincie
@@ -25,8 +26,11 @@ sylius:
       name: Jméno
       type: Typ
       types:
+        country: Země
         province: Provincie
         zone: Oblast
+      scope: Rozsah
+      select_scope: Zvolte rozsah
     zone_member_country:
       country: Země
     zone_member_province:

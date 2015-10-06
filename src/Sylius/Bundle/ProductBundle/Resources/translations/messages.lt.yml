@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  label:
+    product:
+      name: Pavadinimas
+      description: Aprašymas
+      properties: Ypatybės
+      available_on: Prieinamas nuo
+      meta_keywords: Meta raktažodžiai
+      meta_description: Meta aprašymas
+    property:
+      name: Vidinis pavadinimas
+      presentation: Prezentacija
+    prototype:
+      name: Pavadinimas
+      properties: Ypatybės

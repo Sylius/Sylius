@@ -15,22 +15,16 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Option value type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValueType extends AbstractResourceType
 {
     /**
-     * Variable object name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Constructor.
-     *
      * @param string $dataClass
      * @param array  $validationGroups
      * @param string $variableName

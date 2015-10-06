@@ -3,7 +3,7 @@
 
 sylius:
   cart:
-    restricted_zone_removal: 'Produto %product% removido do carrinho, pois não está disponível no seu país.'
+    restricted_zone_removal: 'Produto %product% removido do carrinho, uma vez que o carrinho não está disponível em seu país.'
   checkout:
     restricted_zone: O produto não está disponível em seu país.
     success: Obrigado pelo seu pedido!

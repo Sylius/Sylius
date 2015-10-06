@@ -15,15 +15,11 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Calculator which charges a flat rate per shipment.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FlatRateCalculator extends Calculator
 {
     /**
-     * Calculates flat rate per item on the shipment.
-     *
      * {@inheritdoc}
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)

@@ -14,8 +14,6 @@ namespace Sylius\Component\Shipping\Checker\Registry;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 
 /**
- * Rule checker registry interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleCheckerRegistryInterface
@@ -39,7 +37,7 @@ interface RuleCheckerRegistryInterface
     /**
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasChecker($name);
 

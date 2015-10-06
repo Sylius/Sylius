@@ -209,20 +209,4 @@ class AddressSpec extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
-
-    function it_has_fluent_interface(
-        CountryInterface $country,
-        ProvinceInterface $province
-    ) {
-        $this->setFirstName('John')->shouldReturn($this);
-        $this->setLastName('Doe')->shouldReturn($this);
-        $this->setStreet('Foo Street 3-44')->shouldReturn($this);
-        $this->setCity('Nashville')->shouldReturn($this);
-        $this->setPostcode('53562')->shouldReturn($this);
-
-        $country->hasProvince($province)->willReturn(true);
-
-        $this->setCountry($country)->shouldReturn($this);
-        $this->setProvince($province)->shouldReturn($this);
-    }
 }

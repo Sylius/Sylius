@@ -35,9 +35,8 @@ class PermissionRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Doctrine\ORM\PermissionRepository');
     }
 
-    function it_gets_chield_permission(
+    function it_gets_child_permission(
         $em,
-        $builder,
         PermissionInterface $permission,
         QueryBuilder $builder,
         AbstractQuery $query,

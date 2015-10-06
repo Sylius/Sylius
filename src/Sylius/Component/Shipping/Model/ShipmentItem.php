@@ -12,57 +12,40 @@
 namespace Sylius\Component\Shipping\Model;
 
 /**
- * Shipment item model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentItem implements ShipmentItemInterface
 {
     /**
-     * Item id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Shipment.
-     *
      * @var ShipmentInterface
      */
     protected $shipment;
 
     /**
-     * Shippable object.
-     *
      * @var ShippableInterface
      */
     protected $shippable;
 
     /**
-     * Shipping state.
-     *
      * @var string
      */
     protected $shippingState = ShipmentInterface::STATE_READY;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -98,8 +81,6 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShipment(ShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
-
-        return $this;
     }
 
     /**
@@ -116,8 +97,6 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShippable(ShippableInterface $shippable)
     {
         $this->shippable = $shippable;
-
-        return $this;
     }
 
     /**
@@ -134,8 +113,6 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-
-        return $this;
     }
 
     /**
@@ -152,8 +129,6 @@ class ShipmentItem implements ShipmentItemInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -170,7 +145,5 @@ class ShipmentItem implements ShipmentItemInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

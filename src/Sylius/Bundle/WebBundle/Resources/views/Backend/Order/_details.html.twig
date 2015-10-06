@@ -11,7 +11,7 @@
                         </span>
                         {{ payment.method }} - {{ payment.amount|sylius_price(payment.currency) }}
                     </a>
-                    {% if hide_form|default(false) is sameas(false) %}
+                    {% if hide_form|default(false) is same as(false) %}
                         {{ misc.payment_form(payment) }}
                     {% endif %}
                 </li>

@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Base product interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -30,22 +28,16 @@ interface ProductInterface extends
     ProductTranslationInterface
 {
     /**
-     * Check whether the product is available.
-     *
      * @return bool
      */
     public function isAvailable();
 
     /**
-     * Return available on.
-     *
      * @return \DateTime
      */
     public function getAvailableOn();
 
     /**
-     * Set available on.
-     *
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);

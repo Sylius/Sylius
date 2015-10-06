@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Град
+      company: Компанија
+      country: Држава
+      first_name: Име
+      last_name: Презиме
+      phone_number: Телефонски Број
+      postcode: Поштенски Број
+      street: Улица
+      province: Регион
+    country:
+      name: Назив
+      provinces: Региони
+      select: Изберете
+    province:
+      name: Име
+      select: Изберете
+    zone:
+      members: Членови
+      name: Назив
+      type: Вид
+      types:
+        country: Држава
+        province: Регион
+        zone: Зона
+      scope: Опсег
+      select_scope: Изберете опсег
+    zone_member_country:
+      country: Држава
+    zone_member_province:
+      province: Регион
+    zone_member_zone:
+      zone: Зона

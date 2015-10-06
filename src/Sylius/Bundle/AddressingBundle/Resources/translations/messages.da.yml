@@ -9,6 +9,7 @@ sylius:
       country: Land
       first_name: Fornavn
       last_name: Efternavn
+      phone_number: Telefonnummer
       postcode: Postnummer
       street: Gade
       province: Provins
@@ -28,6 +29,8 @@ sylius:
         country: Land
         province: Provins
         zone: Zone
+      scope: Omfang
+      select_scope: Vælg omfang
     zone_member_country:
       country: Land
     zone_member_province:

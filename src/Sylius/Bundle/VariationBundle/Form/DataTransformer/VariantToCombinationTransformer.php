@@ -32,8 +32,6 @@ class VariantToCombinationTransformer implements DataTransformerInterface
     protected $variable;
 
     /**
-     * Constructor.
-     *
      * @param VariableInterface $variable
      */
     public function __construct(VariableInterface $variable)

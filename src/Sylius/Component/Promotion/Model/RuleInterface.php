@@ -12,8 +12,6 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Promotion rule model interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleInterface
@@ -22,43 +20,36 @@ interface RuleInterface
     const TYPE_ITEM_COUNT = 'item_count';
 
     /**
-     * Get type
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getType();
 
     /**
-     * Set type
-     *
      * @param string $type
      */
     public function setType($type);
 
     /**
-     * Get configuration
-     *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set configuration
-     *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
 
     /**
-     * Get associated promotion
-     *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set associated promotion
-     *
      * @param PromotionInterface $promotion
      */
     public function setPromotion(PromotionInterface $promotion = null);

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bash travis/prepare/prepare-cached-composer travis/prepare/mongodb

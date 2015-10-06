@@ -14,8 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Archetype\Model\ArchetypeTranslation as BaseArchetypeTranslation;
 
 /**
- * Default archetype translation implementation.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ArchetypeTranslation extends BaseArchetypeTranslation implements ArchetypeTranslationInterface

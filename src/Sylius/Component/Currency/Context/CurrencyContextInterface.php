@@ -12,9 +12,6 @@
 namespace Sylius\Component\Currency\Context;
 
 /**
- * Interface to be implemented by the service providing the currently used
- * currency.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyContextInterface
@@ -23,22 +20,16 @@ interface CurrencyContextInterface
     const STORAGE_KEY = '_sylius_currency';
 
     /**
-     * Get the default currency.
-     *
      * @return string
      */
     public function getDefaultCurrency();
 
     /**
-     * Get the currently active currency.
-     *
      * @return string
      */
     public function getCurrency();
 
     /**
-     * Set the currently active currency.
-     *
      * @param string $currency
      */
     public function setCurrency($currency);

@@ -65,11 +65,4 @@ class ParameterSpec extends ObjectBehavior
         $this->setValue(true);
         $this->getValue()->shouldReturn(true);
     }
-
-    function it_should_have_fluent_interface()
-    {
-        $this->setNamespace('taxation')->shouldReturn($this);
-        $this->setName('enable')->shouldReturn($this);
-        $this->setValue(true)->shouldReturn($this);
-    }
 }

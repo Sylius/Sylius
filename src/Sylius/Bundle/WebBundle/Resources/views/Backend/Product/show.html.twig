@@ -19,7 +19,7 @@
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
     <a href="{{ path(product) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
@@ -149,7 +149,7 @@
                                 <th>{{ 'sylius.product.volume_based.qty_min'|trans }}</th>
                                 <th>{{ 'sylius.product.volume_based.qty_max'|trans }}</th>
                             </tr>
-                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not sameas(null) and pricing.price is not sameas(null)) %}
+                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not same as(null) and pricing.price is not same as(null)) %}
                                 <tr>
                                     <td>{{ pricing.price|sylius_price }}</td>
                                     <td>{{ pricing.min }}</td>

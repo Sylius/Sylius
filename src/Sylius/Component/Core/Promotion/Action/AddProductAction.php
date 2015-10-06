@@ -120,10 +120,11 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        return $this->itemRepository->createNew()
-            ->setVariant($variant)
-            ->setQuantity((int) $configuration['quantity'])
-            ->setUnitPrice((int) $configuration['price'])
-        ;
+        $promotionItem = $this->itemRepository->createNew();
+        $promotionItem->setVariant($variant);
+        $promotionItem->setQuantity((int) $configuration['quantity']);
+        $promotionItem->setUnitPrice((int) $configuration['price']);
+
+        return $promotionItem;
     }
 }

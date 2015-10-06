@@ -18,22 +18,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Variant match form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantMatchType extends AbstractType
 {
     /**
-     * Variable object name.
-     *
      * @var string
      */
     protected $variableName;
 
     /**
-     * Constructor.
-     *
      * @param string $variableName
      */
     public function __construct($variableName)

@@ -12,22 +12,16 @@
 namespace Sylius\Component\Inventory\Model;
 
 /**
- * Stockable interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface StockableInterface
 {
     /**
-     * Get stock keeping unit.
-     *
-     * @return mixed
+     * @return string
      */
     public function getSku();
 
     /**
-     * Get inventory displayed name.
-     *
      * @return string
      */
     public function getInventoryName();
@@ -36,42 +30,32 @@ interface StockableInterface
      * Simply checks if there any stock available.
      * It should also return true for items available on demand.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isInStock();
 
     /**
-     * Is stockable available on demand?
-     *
-     * @return Boolean
+     * @return bool
      */
     public function isAvailableOnDemand();
 
     /**
-     * Get stock on hold.
-     *
-     * @return integer
+     * @return int
      */
     public function getOnHold();
 
     /**
-     * Set stock on hold.
-     *
-     * @param integer
+     * @param int
      */
     public function setOnHold($onHold);
 
     /**
-     * Get stock on hand.
-     *
-     * @return integer
+     * @return int
      */
     public function getOnHand();
 
     /**
-     * Set stock on hand.
-     *
-     * @param integer $onHand
+     * @param int $onHand
      */
     public function setOnHand($onHand);
 }

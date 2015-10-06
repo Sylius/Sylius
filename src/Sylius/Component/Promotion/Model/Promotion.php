@@ -15,29 +15,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Promotion model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Promotion implements PromotionInterface
 {
     /**
-     * Id
-     *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
     /**
-     * Name
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description;
@@ -45,97 +37,72 @@ class Promotion implements PromotionInterface
     /**
      * When exclusive, promotion with top priority will be applied
      *
-     * @var integer
+     * @var int
      */
     protected $priority = 0;
 
     /**
      * Cannot be applied together with other promotions
      *
-     * @var boolean
+     * @var bool
      */
     protected $exclusive = false;
 
     /**
-     * Usage limit
-     *
-     * @var integer
+     * @var int
      */
     protected $usageLimit;
 
     /**
-     * Number of times this coupon has been used
-     *
-     * @var integer
+     * @var int
      */
     protected $used = 0;
 
     /**
-     * Start date
-     *
      * @var \DateTime
      */
     protected $startsAt;
 
     /**
-     * End date
-     *
      * @var \DateTime
      */
     protected $endsAt;
 
     /**
-     * Whether this promotion is triggered by a coupon
-     *
-     * @var Boolean
+     * @var bool
      */
     protected $couponBased = false;
 
     /**
-     * Associated coupons
-     *
      * @var Collection|CouponInterface[]
      */
     protected $coupons;
 
     /**
-     * Associated rules
-     *
      * @var Collection|RuleInterface[]
      */
     protected $rules;
 
     /**
-     * Associated actions
-     *
      * @var Collection|ActionInterface[]
      */
     protected $actions;
 
     /**
-     * Last time updated
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * Creation date
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Deletion time.
-     *
      * @var \DateTime
      */
     protected $deletedAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->coupons = new ArrayCollection();
@@ -145,7 +112,7 @@ class Promotion implements PromotionInterface
     }
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -166,8 +133,6 @@ class Promotion implements PromotionInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -184,8 +149,6 @@ class Promotion implements PromotionInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -202,8 +165,6 @@ class Promotion implements PromotionInterface
     public function setPriority($priority)
     {
         $this->priority = $priority;
-
-        return $this;
     }
 
     /**
@@ -220,8 +181,6 @@ class Promotion implements PromotionInterface
     public function setExclusive($exclusive)
     {
         $this->exclusive = $exclusive;
-
-        return $this;
     }
 
     /**
@@ -238,8 +197,6 @@ class Promotion implements PromotionInterface
     public function setUsageLimit($usageLimit)
     {
         $this->usageLimit = $usageLimit;
-
-        return $this;
     }
 
     /**
@@ -256,8 +213,6 @@ class Promotion implements PromotionInterface
     public function setUsed($used)
     {
         $this->used = $used;
-
-        return $this;
     }
 
     /**
@@ -265,9 +220,7 @@ class Promotion implements PromotionInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
-
-        return $this;
+        ++$this->used;
     }
 
     /**
@@ -284,8 +237,6 @@ class Promotion implements PromotionInterface
     public function setStartsAt(\DateTime $startsAt = null)
     {
         $this->startsAt = $startsAt;
-
-        return $this;
     }
 
     /**
@@ -302,8 +253,6 @@ class Promotion implements PromotionInterface
     public function setEndsAt(\DateTime $endsAt = null)
     {
         $this->endsAt = $endsAt;
-
-        return $this;
     }
 
     /**
@@ -319,9 +268,7 @@ class Promotion implements PromotionInterface
      */
     public function setCouponBased($couponBased)
     {
-        $this->couponBased = (Boolean) $couponBased;
-
-        return $this;
+        $this->couponBased = (bool) $couponBased;
     }
 
     /**
@@ -357,8 +304,6 @@ class Promotion implements PromotionInterface
             $coupon->setPromotion($this);
             $this->coupons->add($coupon);
         }
-
-        return $this;
     }
 
     /**
@@ -368,8 +313,6 @@ class Promotion implements PromotionInterface
     {
         $coupon->setPromotion(null);
         $this->coupons->removeElement($coupon);
-
-        return $this;
     }
 
     /**
@@ -405,8 +348,6 @@ class Promotion implements PromotionInterface
             $rule->setPromotion($this);
             $this->rules->add($rule);
         }
-
-        return $this;
     }
 
     /**
@@ -416,8 +357,6 @@ class Promotion implements PromotionInterface
     {
         $rule->setPromotion(null);
         $this->rules->removeElement($rule);
-
-        return $this;
     }
 
     /**
@@ -453,8 +392,6 @@ class Promotion implements PromotionInterface
             $action->setPromotion($this);
             $this->actions->add($action);
         }
-
-        return $this;
     }
 
     /**
@@ -464,8 +401,6 @@ class Promotion implements PromotionInterface
     {
         $action->setPromotion(null);
         $this->actions->removeElement($action);
-
-        return $this;
     }
 
     /**
@@ -482,8 +417,6 @@ class Promotion implements PromotionInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -500,8 +433,6 @@ class Promotion implements PromotionInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -526,7 +457,5 @@ class Promotion implements PromotionInterface
     public function setDeletedAt(\DateTime $deletedAt)
     {
         $this->deletedAt = $deletedAt;
-
-        return $this;
     }
 }

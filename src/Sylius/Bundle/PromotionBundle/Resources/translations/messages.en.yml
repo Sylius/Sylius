@@ -1,6 +1,5 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-
 sylius:
     form:
         action:
@@ -45,6 +44,7 @@ sylius:
         coupon_generate_instruction:
             amount: Amount
             usage_limit: Usage limit
+            expires_at: Expires at
         promotion:
             actions: Actions
             coupon_based: Coupon based

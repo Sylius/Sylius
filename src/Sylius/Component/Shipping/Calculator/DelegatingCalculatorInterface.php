@@ -14,18 +14,14 @@ namespace Sylius\Component\Shipping\Calculator;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Delegating calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface DelegatingCalculatorInterface
 {
     /**
-     * Calculate the shipping charge for given subject.
-     *
      * @param ShippingSubjectInterface $subject
      *
-     * @return integer
+     * @return int
      */
     public function calculate(ShippingSubjectInterface $subject);
 }

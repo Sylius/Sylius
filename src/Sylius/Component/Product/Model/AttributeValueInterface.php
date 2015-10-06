@@ -14,22 +14,16 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 
 /**
- * Product to attribute relation interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeValueInterface extends BaseAttributeValueInterface
 {
     /**
-     * Get product.
-     *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set product.
-     *
      * @param ProductInterface|null $product
      */
     public function setProduct(ProductInterface $product = null);

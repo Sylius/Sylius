@@ -18,6 +18,9 @@ namespace Sylius\Component\Currency\Converter;
  */
 class UnavailableCurrencyException extends \InvalidArgumentException
 {
+    /**
+     * @param string $currency
+     */
     public function __construct($currency)
     {
         parent::__construct(sprintf('Currency "%s" is not available.', $currency));

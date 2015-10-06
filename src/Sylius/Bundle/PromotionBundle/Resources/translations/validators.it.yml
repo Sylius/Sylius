@@ -17,10 +17,10 @@ sylius:
       min_length: 'Il codice del coupon deve essere lungo almeno 1 carattere. |Il codice del coupon deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Per favore inserisci il codice coupon.
     usage_limit:
-      min: 'Il limite di utilizzo dei coupons deve essere minimo {{ limit }}.'
+      min: 'Il limite di utilizzo dei coupon deve essere minimo {{ limit }}.'
   promotion_coupon_generate_instruction:
     amount:
-      min: 'Il totale dei coupons da generare deve essere minimo {{ limit }}.'
+      min: 'Il totale dei coupon da generare deve essere minimo {{ limit }}.'
       not_blank: Inserisci la quantità di coupon da generare.
     usage_limit:
-      min: 'Il limite di utilizzo dei coupons generati deve essere minimo {{ limit }}.'
+      min: 'Il limite di utilizzo dei coupon generati deve essere minimo {{ limit }}.'

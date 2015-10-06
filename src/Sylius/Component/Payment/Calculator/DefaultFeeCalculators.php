@@ -16,13 +16,7 @@ namespace Sylius\Component\Payment\Calculator;
  */
 class DefaultFeeCalculators
 {
-    /**
-     * Fixed fee calculator for payment
-     */
     const FIXED = 'fixed';
 
-    /**
-     * Percent fee calculator for payment
-     */
     const PERCENT = 'percent';
 }

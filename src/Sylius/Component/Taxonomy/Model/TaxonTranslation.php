@@ -14,43 +14,31 @@ namespace Sylius\Component\Taxonomy\Model;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
- * Model for taxon translations.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonTranslation extends AbstractTranslation implements TaxonTranslationInterface
 {
     /**
-     * Taxon id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Taxon name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Taxon slug.
-     *
      * @var string
      */
     protected $slug;
 
     /**
-     * Taxon permalink.
-     *
      * @var string
      */
     protected $permalink;
 
     /**
-     * Taxon description.
-     *
      * @var string
      */
     protected $description;
@@ -85,8 +73,6 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -103,8 +89,6 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setSlug($slug = null)
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
@@ -121,8 +105,6 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setPermalink($permalink)
     {
         $this->permalink = $permalink;
-
-        return $this;
     }
 
     /**
@@ -139,7 +121,5 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 }

@@ -6,5 +6,8 @@ sylius:
     contact_request:
       first_name: Nama Depan
       last_name: Nama belakang
+      email: Email
+      message: Pesan
+      topic: Topik
     contact_topic:
       title: Judul

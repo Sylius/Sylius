@@ -39,7 +39,7 @@ interface VariableInterface
      * This method is not for checking if object has any variations.
      * It should determine if any variants (other than internal master) exist.
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasVariants();
 
@@ -77,14 +77,14 @@ interface VariableInterface
      *
      * @param VariantInterface $variant
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasVariant(VariantInterface $variant);
 
     /**
      * This should return true only when object has options.
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasOptions();
 
@@ -121,7 +121,7 @@ interface VariableInterface
      *
      * @param OptionInterface $option
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasOption(OptionInterface $option);
 }

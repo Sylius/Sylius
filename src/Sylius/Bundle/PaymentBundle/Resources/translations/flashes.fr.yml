@@ -3,6 +3,6 @@
 
 sylius:
   payment:
-    complete: Le paiement a été exécuté avec succès.
+    complete: Le paiement a été réalisé avec succès.
     cancel: Le paiement a été annulé.
     transition_fail: Cette action ne peut être exécutée dans cette phase du paiement

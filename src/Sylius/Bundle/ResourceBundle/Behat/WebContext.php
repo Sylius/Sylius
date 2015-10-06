@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -85,7 +86,11 @@ class WebContext extends DefaultContext
 
         $entityManager = $this->getEntityManager();
         $entityManager->getFilters()->disable('softdeleteable');
-        $resource = $this->findOneBy($type, array($property => $value));
+
+        $resource = $this->waitFor(function () use ($type, $property, $value) {
+            return $this->getRepository($type)->findOneBy([$property => $value]);
+        });
+
         $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
@@ -352,17 +357,15 @@ class WebContext extends DefaultContext
         $this->assertSession()->elementExists('css', '#confirmation-modal');
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")', $button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->waitForModalToAppear($modalContainer);
 
         $primaryButton->press();
+
+        $this->waitForModalToDisappear($modalContainer);
+
+        $this->getSession()->wait(100);
     }
 
     /**
@@ -474,6 +477,10 @@ class WebContext extends DefaultContext
      */
     protected function assertStatusCodeEquals($code)
     {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
         $this->assertSession()->statusCodeEquals($code);
     }
 
@@ -517,5 +524,25 @@ class WebContext extends DefaultContext
         $isoName = $this->getCountryCodeByEnglishCountryName($name);
 
         $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     */
+    protected function waitForModalToAppear($modalContainer)
+    {
+        $this->waitFor(function () use ($modalContainer) {
+            return false !== strpos($modalContainer->getAttribute('class'), 'in');
+        });
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     */
+    protected function waitForModalToDisappear($modalContainer)
+    {
+        $this->waitFor(function () use ($modalContainer) {
+            return false === strpos($modalContainer->getAttribute('class'), 'in');
+        });
     }
 }

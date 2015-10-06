@@ -14,28 +14,31 @@ namespace Sylius\Component\Sequence\Model;
 class Sequence implements SequenceInterface
 {
     /**
-     * Identifier
      * @var integer
      */
     protected $id;
 
     /**
-     * Sequence index
      * @var integer
      */
     protected $index = 0;
 
     /**
-     * Sequence type
      * @var string
      */
     protected $type;
 
+    /**
+     * @param string $type
+     */
     public function __construct($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -62,8 +65,6 @@ class Sequence implements SequenceInterface
      */
     public function incrementIndex()
     {
-        $this->index++;
-
-        return $this;
+        ++$this->index;
     }
 }

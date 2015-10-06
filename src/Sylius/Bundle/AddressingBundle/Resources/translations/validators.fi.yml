@@ -1,3 +1,40 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Kaupunki saa olla korkeintaan 255 merkin pituinen|Kaupunki saa olla korkeintaan 255 merkin pituinen.
+      min_length: Kaupungin tulee olla vähintään kahden merkin pituinen|Kaupungin tulee olla vähintään kahden merkin pituinen.
+      not_blank: Lisää kaupunki.
+    country:
+      not_blank: Valitse maa.
+    first_name:
+      max_length: Etunimi saa olla korkeintaan 255 merkin pituinen|Etunimi saa olla korkeintaan 255 merkin pituinen.
+      min_length: Etunimen tulee olla vähintään kahden merkin pituinen|Etunimen tulee olla vähintään kahden merkin pituinen.
+      not_blank: Lisää etunimi.
+    last_name:
+      max_length: Sukunimi saa olla korkeintaan 255 merkin pituinen|Sukunimi saa olla korkeintaan 255 merkin pituinen.
+      min_length: Sukunimen tulee olla vähintään kahden merkin pituinen|Sukunimen tulee olla vähintään kahden merkin pituinen.
+      not_blank: Lisää sukunimi.
+    postcode:
+      max_length: Postinumero saa olla korkeintaan 255 merkin pituinen|Postinumero saa olla korkeintaan 255 merkin pituinen.
+      min_length: Postinumeron tulee olla vähintään kahden merkin pituinen|Postinumeron tulee olla vähintään kahden merkin pituinen.
+      not_blank: Lisää postinumero.
+    province:
+      valid: Valitse maakunta.
+    street:
+      max_length: Postiosoite saa olla korkeintaan 255 merkin pituinen|Postiosoite saa olla korkeintaan 255 merkin pituinen.
+      min_length: Postiosoitteen tulee olla vähintään kahden merkin pituinen|Postiosoitteen tulee olla vähintään kahden merkin pituinen.
+      not_blank: Lisää postiosoite.
+  country:
+    iso_name:
+      not_blank: Lisää maan ISO-koodi.
+    name:
+      max_length: Maa saa olla korkeintaan 255 merkin pituinen|Maa saa olla korkeintaan 255 merkin pituinen.
+      not_blank: Lisää maan nimi.
+  province:
+    name:
+      max_length: Maakunnan nimi saa olla enintään 255 merkkiä pitkä|Maakunnan nimi ei saa yli 255 merkkiä pitkä.
+      min_length: Maakunnan nimen on oltava vähintään 2 merkkiä pitkä|Maakunnan nimen on oltava vähintään 2 merkkiä pitkä.
+      not_blank: Lisää maakunta.

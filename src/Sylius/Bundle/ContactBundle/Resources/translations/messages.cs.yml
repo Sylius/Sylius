@@ -7,5 +7,7 @@ sylius:
       first_name: Křestní Jméno
       last_name: Příjmení
       email: Email
+      message: Zpráva
+      topic: Téma
     contact_topic:
       title: Název

@@ -14,8 +14,6 @@ namespace Sylius\Component\Currency\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple currencies.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrenciesAwareInterface
@@ -33,7 +31,7 @@ interface CurrenciesAwareInterface
     /**
      * @param CurrencyInterface $currency
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasCurrency(CurrencyInterface $currency);
 

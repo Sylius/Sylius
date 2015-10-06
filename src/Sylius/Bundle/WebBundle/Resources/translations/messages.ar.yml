@@ -11,5 +11,66 @@ sylius:
       payment_mode: ""
       shipment_mode: ""
       state: ""
+  address:
+    country: البلد
+    firstname: الاسم الأول
+    lastname: اسم العائلة
+  breadcrumb:
+    country:
+      index: البلدان
+    new: جديد
+  checkout:
+    finalize:
+      address:
+        firstname: الاسم الأول
+        lastname: اسم العائلة
+      product:
+        name: الاسم
+  country:
+    index_header: البلدان
+    name: الاسم
+  form:
+    login:
+      email: البريد الإلكتروني
+      password: كلمة السر
+    profile:
+      email: البريد الإلكتروني
+      firstName: الاسم الأول
+      lastName: اسم العائلة
+  group:
+    name: الاسم
+  inventory_unit:
+    name: الاسم
   "no": false
+  shipment:
+    name: الاسم
+  page:
+    index_header: الصفحات
+  password: كلمة السر
+  payment:
+    state:
+      new: جديد
+  payment_method:
+    name: الاسم
+  product:
+    name: الاسم
+  promotion:
+    name: الاسم
+  shipping_category:
+    name: الاسم
+  shipping_method:
+    name: الاسم
+  tax_category:
+    name: الاسم
+  tax_rate:
+    name: الاسم
+  taxon:
+    name: الاسم
+  taxonomy:
+    name: الاسم
+  user:
+    first_name: الاسم الأول
+    last_name: اسم العائلة
   "yes": true
+  zone:
+    name: الاسم

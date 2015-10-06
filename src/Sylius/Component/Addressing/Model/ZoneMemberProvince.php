@@ -12,8 +12,6 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * Default province zone member model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberProvince extends ZoneMember
@@ -33,14 +31,10 @@ class ZoneMemberProvince extends ZoneMember
 
     /**
      * @param ProvinceInterface $province
-     *
-     * @return ZoneMemberProvince
      */
     public function setProvince(ProvinceInterface $province = null)
     {
         $this->province = $province;
-
-        return $this;
     }
 
     /**

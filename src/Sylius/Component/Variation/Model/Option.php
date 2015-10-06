@@ -16,30 +16,24 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
- * Product option default implementation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Option extends AbstractTranslatable implements OptionInterface
 {
     /**
-     * Property id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
      * Internal name.
-     * See description in interface.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Presentation.
      * Displayed to user.
      *
      * @var string
@@ -47,29 +41,20 @@ class Option extends AbstractTranslatable implements OptionInterface
     protected $presentation;
 
     /**
-     * Values that option can have.
-     *
      * @var Collection|OptionValueInterface[]
      */
     protected $values;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -107,8 +92,6 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -125,8 +108,6 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function setPresentation($presentation)
     {
         $this->translate()->setPresentation($presentation);
-
-        return $this;
     }
 
     /**
@@ -143,8 +124,6 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function setValues(Collection $values)
     {
         $this->values = $values;
-
-        return $this;
     }
 
     /**
@@ -156,8 +135,6 @@ class Option extends AbstractTranslatable implements OptionInterface
             $value->setOption($this);
             $this->values->add($value);
         }
-
-        return $this;
     }
 
     /**
@@ -169,8 +146,6 @@ class Option extends AbstractTranslatable implements OptionInterface
             $this->values->removeElement($value);
             $value->setOption(null);
         }
-
-        return $this;
     }
 
     /**
@@ -195,8 +170,6 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -213,7 +186,5 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

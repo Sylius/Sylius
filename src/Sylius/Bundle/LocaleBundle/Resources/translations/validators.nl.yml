@@ -4,5 +4,5 @@
 sylius:
   locale:
     code:
-      not_blank: Kies land-/ taalcode.
-      unique: Land-/ taalcode moet uniek zijn.
+      not_blank: Kies land-/taalcode.
+      unique: Land-/taalcode moet uniek zijn.

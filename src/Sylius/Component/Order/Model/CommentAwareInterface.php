@@ -16,27 +16,17 @@ use Doctrine\Common\Collections\Collection;
 interface CommentAwareInterface
 {
     /**
-     * Return order comments.
-     *
      * @return Collection|CommentInterface[]
      */
     public function getComments();
 
     /**
-     * Add comment.
-     *
      * @param CommentInterface $comment
-     *
-     * @return $this
      */
     public function addComment(CommentInterface $comment);
 
     /**
-     * Remove comment.
-     *
      * @param CommentInterface $comment
-     *
-     * @return $this
      */
     public function removeComment(CommentInterface $comment);
 }

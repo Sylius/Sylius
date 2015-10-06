@@ -20,6 +20,10 @@ sylius:
       max: 'A vezetéknév nem lehet hosszabb, mint {{ limit }} karakter.'
       min: 'A vezetéknévnek legalább {{limit}} karakter hosszúnak kell lennie.'
       not_blank: Kérjük, add meg a vezetéknevedet.
+  product_variant:
+    price:
+      min: Az ár nem lehet negatív szám.
+      not_blank: Kérjük, írja be az árat.
 sylius_shipping:
   method:
     zone:

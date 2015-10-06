@@ -4,44 +4,44 @@
 sylius:
   address:
     city:
-      max_length: By må ikke være lengre enn 255 characters|By må ikke være lengre enn 255 tegn.
-      min_length: By må inneholde minst to tegn|By må inneholde minst to tegn.
-      not_blank: Angi by.
+      max_length: Bynavn må ikke være lengre enn 255 tegn|Bynavn må ikke være lengre enn 255 tegn.
+      min_length: Bynavn må inneholde minst to tegn|Bynavn må inneholde minst to tegn.
+      not_blank: Vennligst oppgi bynavn.
     country:
       not_blank: Vennligst velg land.
     first_name:
       max_length: Fornavn må ikke inneholde mer enn 255 tegn|Fornavn må ikke inneholde mer enn 255 tegn.
       min_length: Fornavn må inneholde minst to tegn|Fornavn må inneholde minst to tegn.
-      not_blank: Vennligst fyll inn fornavn.
+      not_blank: Vennligst oppgi fornavn.
     last_name:
       max_length: Etternavn må ikke inneholde mer enn 255 tegn|Etternavn må ikke inneholde mer enn 255 tegn.
       min_length: Etternavn må inneholde minst to tegn|Etternavn må inneholde minst to tegn.
-      not_blank: Vennligst fyll inn etternavn.
+      not_blank: Vennligst oppgi etternavn.
     postcode:
       max_length: Postnummer må ikke inneholde mer enn 255 tegn|Postnummer må ikke inneholde mer enn 255 tegn.
       min_length: Postnummer må inneholde minst to tegn|Postnummer må inneholde minst to tegn.
-      not_blank: Vennligst fyll inn postnummer.
+      not_blank: Vennligst oppgi postnummer.
     province:
-      valid: Velg riktig fylke.
+      valid: Velg et gyldig fylke.
     street:
       max_length: Gateadresse kan ikke være lengre enn 255 tegn|Gateadresse kan ikke være lengre enn 255 tegn.
-      min_length: Gateadresse må være minst to tegn lang|Gateadresse må inneholde minst to tegn.
-      not_blank: Skriv inn gateadresse.
+      min_length: Gateadresse må inneholde minst to tegn|Gateadresse må inneholde minst to tegn.
+      not_blank: Vennligst oppgi gateadresse.
     not_shippable: Denne adressen er ikke en gyldig fraktdestinasjon.
   country:
     iso_name:
-      not_blank: Angi ISO-koden for land.
+      not_blank: Vennligst oppgi ISO-kode.
     name:
-      max_length: Landet kan ikke være lengre enn 255 tegn|Landet kan ikke være lengre enn 255 tegn.
-      not_blank: Angi land.
+      max_length: Navnet på landet kan ikke være lengre enn 255 tegn|Navnet på landet kan ikke være lengre enn 255 tegn.
+      not_blank: Vennligst oppgi navn på landet.
   province:
     name:
-      max_length: Fylket kan ikke være lengre enn 255 characters|Fylket kan ikke være lengre enn 255 tegn.
-      min_length: Fylket må være minst to tegn langt|Fylket må inneholde minst to tegn.
-      not_blank: Skriv inn navn på fylket.
+      max_length: Fylkesnavnet kan ikke være lengre enn 255 characters|Fylkesnavnet kan ikke være lengre enn 255 tegn.
+      min_length: Fylkesnavnet må inneholde minst to tegn|Fylkesnavnet må inneholde minst to tegn.
+      not_blank: Vennligst oppgi navn på fylket.
   zone:
     members:
       min_count: 'Legg til minst {{ limit }} sone-medlemmer.'
     name:
-      max_length: Sonenavn kan ikke være lengre enn 255 characters|Sonenavn kan ikke være lengre enn 255 tegn.
-      not_blank: Angi sonenavn.
+      max_length: Sonenavn kan ikke være lengre enn 255 tegn|Sonenavn kan ikke være lengre enn 255 tegn.
+      not_blank: Vennligst oppgi sonenavn.

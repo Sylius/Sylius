@@ -12,8 +12,6 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 /**
- * Default calculators.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DefaultCalculators

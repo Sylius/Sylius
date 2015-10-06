@@ -10,7 +10,5 @@ sylius:
       presentation: Weergave
       values: Mogelijke waarden
     option_value:
-      add_value: Voeg waarde toe
+      add_value: Waarde toevoegen
       value: Waarde
-    archetype:
-      options: Opties

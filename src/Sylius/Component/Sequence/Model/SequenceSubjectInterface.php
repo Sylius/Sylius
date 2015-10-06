@@ -19,21 +19,17 @@ namespace Sylius\Component\Sequence\Model;
 interface SequenceSubjectInterface
 {
     /**
-     * Get the number type
      * @return string
      */
     public function getSequenceType();
 
     /**
-     * Get the number
      * @return string|null
      */
     public function getNumber();
 
     /**
-     * Set the number
      * @param string
-     * @return self
      */
     public function setNumber($number);
 }

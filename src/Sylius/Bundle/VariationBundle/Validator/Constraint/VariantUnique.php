@@ -22,7 +22,14 @@ use Symfony\Component\Validator\Constraint;
  */
 class VariantUnique extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'This property must be unique';
+
+    /**
+     * @var mixed
+     */
     public $property;
 
     /**

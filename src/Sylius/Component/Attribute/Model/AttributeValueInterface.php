@@ -12,52 +12,41 @@
 namespace Sylius\Component\Attribute\Model;
 
 /**
- * Attribute value model.
- *
- * This model associates the attribute with its value on the object.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeValueInterface
 {
     /**
-     * Get subject.
-     *
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return AttributeSubjectInterface
      */
     public function getSubject();
 
     /**
-     * Set subject.
-     *
      * @param AttributeSubjectInterface|null $subject
      */
     public function setSubject(AttributeSubjectInterface $subject = null);
 
     /**
-     * Get attribute.
-     *
      * @return AttributeInterface
      */
     public function getAttribute();
 
     /**
-     * Set attribute.
-     *
      * @param AttributeInterface $attribute
      */
     public function setAttribute(AttributeInterface $attribute);
 
     /**
-     * Get attribute value.
-     *
      * @return mixed
      */
     public function getValue();
 
     /**
-     * Set attribute value.
-     *
      * @param mixed $value
      */
     public function setValue($value);
@@ -77,15 +66,11 @@ interface AttributeValueInterface
     public function getPresentation();
 
     /**
-     * The type of the attribute.
-     *
      * @return string
      */
     public function getType();
 
     /**
-     * Get attribute configuration.
-     *
      * @return array
      */
     public function getConfiguration();

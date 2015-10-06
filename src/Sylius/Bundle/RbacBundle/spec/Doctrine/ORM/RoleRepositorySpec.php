@@ -37,7 +37,6 @@ class RoleRepositorySpec extends ObjectBehavior
 
     function it_gets_chield_roles(
         $em,
-        $builder,
         RoleInterface $role,
         QueryBuilder $builder,
         AbstractQuery $query,

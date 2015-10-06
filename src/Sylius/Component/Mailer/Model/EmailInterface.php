@@ -21,30 +21,22 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface EmailInterface extends TimestampableInterface
 {
     /**
-     * Get code.
-     *
      * @return string
      */
     public function getCode();
 
     /**
-     * Set code.
-     *
      * @param string $code
      */
     public function setCode($code);
 
     /**
-     * Is activated?
-     *
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * Set activation status.
-     *
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
@@ -55,8 +47,6 @@ interface EmailInterface extends TimestampableInterface
 
     /**
      * @param string $subject
-     *
-     * @return string
      */
     public function setSubject($subject);
 
@@ -67,8 +57,6 @@ interface EmailInterface extends TimestampableInterface
 
     /**
      * @param string $content
-     *
-     * @return string
      */
     public function setContent($content);
 
@@ -89,8 +77,6 @@ interface EmailInterface extends TimestampableInterface
 
     /**
      * @param string $senderName
-     *
-     * @return string
      */
     public function setSenderName($senderName);
 
@@ -101,8 +87,6 @@ interface EmailInterface extends TimestampableInterface
 
     /**
      * @param string $senderAddress
-     *
-     * @return string
      */
     public function setSenderAddress($senderAddress);
 }

@@ -509,9 +509,7 @@ class CoreContext extends DefaultContext
             $defaultChannel->addLocale($locale);
         }
 
-        $em = $this->getEntityManager();
-        //$em->persist($defaultChannel);
-        $em->flush();
+        $this->getEntityManager()->flush();
     }
 
     /**

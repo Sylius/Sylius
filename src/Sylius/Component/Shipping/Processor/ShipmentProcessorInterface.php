@@ -15,23 +15,17 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
- * Shipment processor.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ShipmentProcessorInterface
 {
     /**
-     * Update shipments state.
-     *
      * @param ShipmentInterface[] $shipments
      * @param string              $transition ShipmentTransitions::*
      */
     public function updateShipmentStates($shipments, $transition);
 
     /**
-     * Update shipment items shipment state.
-     *
      * @param ShipmentItemInterface[] $items
      * @param string                  $transition ShipmentItemTransitions::*
      */

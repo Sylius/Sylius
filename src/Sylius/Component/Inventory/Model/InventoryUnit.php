@@ -12,50 +12,35 @@
 namespace Sylius\Component\Inventory\Model;
 
 /**
- * Inventory unit model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnit implements InventoryUnitInterface
 {
     /**
-     * Product id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Stockable object.
-     *
      * @var StockableInterface
      */
     protected $stockable;
 
     /**
-     * State of the inventory unit.
-     *
      * @var string
      */
     protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -83,8 +68,6 @@ class InventoryUnit implements InventoryUnitInterface
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
-
-        return $this;
     }
 
     /**
@@ -117,8 +100,6 @@ class InventoryUnit implements InventoryUnitInterface
     public function setInventoryState($state)
     {
         $this->inventoryState = $state;
-
-        return $this;
     }
 
     /**
@@ -151,8 +132,6 @@ class InventoryUnit implements InventoryUnitInterface
     public function setCreatedAt(\DateTime $createAt)
     {
         $this->createdAt = $createAt;
-
-        return $this;
     }
 
     /**
@@ -169,7 +148,5 @@ class InventoryUnit implements InventoryUnitInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

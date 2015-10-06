@@ -12,50 +12,35 @@
 namespace Sylius\Component\Shipping\Model;
 
 /**
- * Shipping category model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategory implements ShippingCategoryInterface
 {
     /**
-     * Category identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Category name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Description.
-     *
      * @var string
      */
     protected $description;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -91,8 +76,6 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -109,8 +92,6 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -127,8 +108,6 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -145,7 +124,5 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

@@ -14,36 +14,26 @@ namespace Sylius\Component\Taxation\Model;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Tax category interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxCategoryInterface extends TimestampableInterface
 {
     /**
-     * Get category name.
-     *
      * @return string
      */
     public function getName();
 
     /**
-     * Set the name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get the description.
-     *
      * @return string
      */
     public function getDescription();
 
     /**
-     * Set description.
-     *
      * @param string $description
      */
     public function setDescription($description);

@@ -16,22 +16,16 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * Checks if shipping method rules are capable of shipping given subject.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
     /**
-     * Shipping rules registry.
-     *
      * @var RuleCheckerRegistryInterface
      */
     protected $registry;
 
     /**
-     * Constructor.
-     *
      * @param RuleCheckerRegistryInterface $registry
      */
     public function __construct(RuleCheckerRegistryInterface $registry)
@@ -60,12 +54,10 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
     }
 
     /**
-     * Returns whether the subject satisfies the category requirement configured in the method
-     *
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface  $method
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {

@@ -14,8 +14,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Variation\Model\OptionTranslation as BaseOptionTranslation;
 
 /**
- * Product option translation model.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class OptionTranslation extends BaseOptionTranslation implements OptionTranslationInterface

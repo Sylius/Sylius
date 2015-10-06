@@ -12,6 +12,6 @@ sylius:
       meta_description: Μετα-περιγραφή
     property:
       presentation: Παρουσίαση
-    archetype:
+    prototype:
       name: Ονομασία
       properties: Ιδιότητες

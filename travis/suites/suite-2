@@ -1,28 +1,28 @@
 #!/bin/bash
-bin/behat -s emails -f progress
-bin/behat -s orders -f progress
-bin/behat -s payments -f progress
-bin/behat -s pricing -f progress
-bin/behat -s settings -f progress
-bin/behat -s shipping -f progress
-bin/behat -s taxation -f progress
-bin/behat -s i18n -f progress
-bin/behat -s channels -f progress
+bin/behat --strict -f progress -s emails
+bin/behat --strict -f progress -s orders
+bin/behat --strict -f progress -s payments
+bin/behat --strict -f progress -s pricing
+bin/behat --strict -f progress -s settings
+bin/behat --strict -f progress -s shipping
+bin/behat --strict -f progress -s taxation
+bin/behat --strict -f progress -s i18n
+bin/behat --strict -f progress -s channels
 
-bin/behat -s products -f progress features/backend/products.feature
-bin/behat -s products -f progress features/backend/product_attributes.feature
-bin/behat -s products -f progress features/backend/product_options.feature
-bin/behat -s products -f progress features/backend/product_archetypes.feature
-bin/behat -s products -f progress features/backend/product_taxonomies.feature
-bin/behat -s products -f progress features/backend/product_variants.feature
-bin/behat -s products -f progress features/backend/products_filter.feature
-bin/behat -s products -f progress features/frontend/products.feature
+bin/behat --strict -f progress -s products features/backend/products.feature
+bin/behat --strict -f progress -s products features/backend/product_attributes.feature
+bin/behat --strict -f progress -s products features/backend/product_options.feature
+bin/behat --strict -f progress -s products features/backend/product_archetypes.feature
+bin/behat --strict -f progress -s products features/backend/product_taxonomies.feature
+bin/behat --strict -f progress -s products features/backend/product_variants.feature
+bin/behat --strict -f progress -s products features/backend/products_filter.feature
+bin/behat --strict -f progress -s products features/frontend/products.feature
 
-bin/behat -s promotions -f progress features/backend/promotions.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_complex.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_coupons.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_dates.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_fixed.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_percentage.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_product.feature
-bin/behat -s promotions -f progress features/frontend/cart_promotions_usage_limit.feature
+bin/behat --strict -f progress -s promotions features/backend/promotions.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_complex.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_coupons.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_dates.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_fixed.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_percentage.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_product.feature
+bin/behat --strict -f progress -s promotions features/frontend/cart_promotions_usage_limit.feature

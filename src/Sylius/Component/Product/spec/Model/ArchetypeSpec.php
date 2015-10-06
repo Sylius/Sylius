@@ -99,15 +99,4 @@ class ArchetypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn($parent);
         $this->hasParent()->shouldReturn(true);
     }
-
-    function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
-    {
-        $date = new \DateTime();
-
-        $this->setAttributes($attributes)->shouldReturn($this);
-        $this->addAttribute($attribute)->shouldReturn($this);
-        $this->removeAttribute($attribute)->shouldReturn($this);
-        $this->setCreatedAt($date)->shouldReturn($this);
-        $this->setUpdatedAt($date)->shouldReturn($this);
-    }
 }

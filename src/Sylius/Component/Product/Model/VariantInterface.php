@@ -14,41 +14,31 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
 /**
- * Product variant interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface VariantInterface extends BaseVariantInterface
 {
     /**
-     * Get product.
-     *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set product.
-     *
      * @param null|ProductInterface $product
      */
     public function setProduct(ProductInterface $product = null);
 
     /**
-     * Check whether the product is available.
+     * @return bool
      */
     public function isAvailable();
 
     /**
-     * Return available on.
-     *
      * @return \DateTime
      */
     public function getAvailableOn();
 
     /**
-     * Set available on.
-     *
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);

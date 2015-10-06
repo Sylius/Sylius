@@ -23,8 +23,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 interface ChannelRepositoryInterface
 {
     /**
-     * Find channel best matching given hostname.
-     *
      * @param string $hostname
      * @return mixed
      * @throws NonUniqueResultException

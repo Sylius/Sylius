@@ -4,4 +4,4 @@
 sylius:
   shipment:
     ship:
-      success: Livrarea a fost finalizată.
+      success: Comanda dumneavoastră a fost expediată.

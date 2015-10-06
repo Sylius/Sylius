@@ -1,3 +1,32 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: עיר
+      company: חברה
+      country: מדינה
+      first_name: שם פרטי
+      last_name: שם משפחה
+      phone_number: מספר טלפון
+      postcode: מיקוד
+      street: רחוב
+      province: מחוז
+    country:
+      iso_name: שם ISO
+      name: שם
+      provinces: מחוזות
+      select: בחירה
+    province:
+      name: שם
+      select: בחירה
+    zone:
+      name: שם
+      type: סוג
+      types:
+        country: מדינה
+        province: מחוז
+        zone: איזור
+    zone_member_country:
+      country: מדינה

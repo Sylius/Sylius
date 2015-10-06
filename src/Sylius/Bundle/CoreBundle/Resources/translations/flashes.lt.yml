@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    restricted_zone_removal: 'Produktas %product% pašalintas iš krepšelio, kadangi netinkamas jūsų šaliai.'
+  checkout:
+    restricted_zone: Šis produktas netinkamas jūsų šaliai.
+    success: Dėkojame už užsakymą!
+    canceled: Jūsų mokėjimas buvo atšauktas.
+    processing: Jūsų mokėjimas yra apdorojamas.
+    new: Jūsų mokėjimas yra naujas.
+    failed: Jūsų mokėjimas buvo atmestas.
+    unknown: Nežinomas mokėjimo klaida.
+    out_of_stock: 'Prekės %name% yra tik %quantity% vnt.'

@@ -25,8 +25,6 @@ interface ArchetypeTranslationInterface
     public function getName();
 
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);

@@ -23,7 +23,7 @@ sylius:
         products: Proizvodi
         promotions: Promocije
         properties: Uredi svojstva
-        archetypes: Prototipovi proizvoda
+        prototypes: Prototipovi proizvoda
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki
@@ -58,7 +58,7 @@ sylius:
         products: Proizvodi
         promotions: Akcije
         properties: Uredi svojstva
-        archetypes: Prototipovi proizvoda
+        prototypes: Prototipovi proizvoda
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki

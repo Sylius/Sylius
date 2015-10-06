@@ -15,6 +15,7 @@ sylius:
       luhn: A megadott hitelkártya-szám érvénytelen.
     security_code:
       not_blank: Kérjük, írja be a biztonsági kódot.
+      max_length: 'A hitelkártya CVV kódja legalább {{ limit }} számjegyből kell állnia.'
     expiry_year:
       not_blank: Kérjük, válassza ki a lejárati évet.
   payment_method:

@@ -37,11 +37,11 @@
         "sylius/user":              "0.16.*",
         "sylius/resource-bundle":   "0.16.*",
         "sylius/mailer-bundle":     "0.16.*",
-        "symfony/framework-bundle": "~2.3"
+        "symfony/framework-bundle": "~2.7"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/form":    "~2.3"
+        "symfony/form":    "~2.7"
     },
     "config": {
         "bin-dir": "bin"

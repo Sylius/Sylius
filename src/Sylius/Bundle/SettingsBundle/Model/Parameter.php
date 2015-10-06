@@ -12,15 +12,11 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 /**
- * Settings parameter model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Parameter implements ParameterInterface
 {
     /**
-     * Parameter id.
-     *
      * @var mixed
      */
     protected $id;
@@ -33,23 +29,17 @@ class Parameter implements ParameterInterface
     protected $namespace;
 
     /**
-     * Parameter name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Parameter value.
-     *
      * @var mixed
      */
     protected $value;
 
     /**
-     * Get parameter id.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -70,8 +60,6 @@ class Parameter implements ParameterInterface
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
-
-        return $this;
     }
 
     /**
@@ -88,8 +76,6 @@ class Parameter implements ParameterInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -106,7 +92,5 @@ class Parameter implements ParameterInterface
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 }
