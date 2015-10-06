@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Promotion\Action;
+namespace Sylius\Component\Core\Promotion\Benefit;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class AddProductAction implements PromotionActionInterface
+class AddProductBenefit implements PromotionBenefitInterface
 {
     /**
      * @var FactoryInterface

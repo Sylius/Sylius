@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Promotion\Action;
+namespace spec\Sylius\Component\Promotion\Benefit;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Applicator\PromotionApplicator;
+use Sylius\Component\Promotion\Applicator\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
@@ -30,17 +32,17 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Action\PromotionApplicator');
+        $this->shouldHaveType(PromotionApplicator::class);
     }
 
     function it_should_be_Sylius_promotion_applicator()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
+        $this->shouldImplement(PromotionApplicatorInterface::class);
     }
 
     function it_should_execute_all_actions_registered(
         ServiceRegistryInterface $registry,
-        PromotionActionInterface $action,
+        PromotionBenefitInterface $action,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         ActionInterface $actionModel
@@ -61,7 +63,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_should_revert_all_actions_registered(
         ServiceRegistryInterface $registry,
-        PromotionActionInterface $action,
+        PromotionBenefitInterface $action,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         ActionInterface $actionModel

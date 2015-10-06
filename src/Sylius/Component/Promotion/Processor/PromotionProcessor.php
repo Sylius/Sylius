@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Processor;
 
-use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
+use Sylius\Component\Promotion\Applicator\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;

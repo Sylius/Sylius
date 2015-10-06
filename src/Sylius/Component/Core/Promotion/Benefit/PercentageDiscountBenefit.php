@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Promotion\Action;
+namespace Sylius\Component\Core\Promotion\Benefit;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PercentageDiscountAction extends DiscountAction
+class PercentageDiscountBenefit extends DiscountBenefit
 {
     /**
      * {@inheritdoc}

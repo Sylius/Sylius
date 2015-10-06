@@ -9,20 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Promotion\Action;
+namespace spec\Sylius\Component\Core\Promotion\Benefit;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Promotion\Benefit\AddProductBenefit;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class AddProductActionSpec extends ObjectBehavior
+class AddProductBenefitSpec extends ObjectBehavior
 {
     function let(FactoryInterface $itemFactory, RepositoryInterface $variantRepository)
     {
@@ -31,12 +33,12 @@ class AddProductActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\AddProductAction');
+        $this->shouldHaveType(AddProductBenefit::class);
     }
 
     function it_implements_Sylius_promotion_action_interface()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
+        $this->shouldImplement(PromotionBenefitInterface::class);
     }
 
     function it_adds_product_as_promotion(

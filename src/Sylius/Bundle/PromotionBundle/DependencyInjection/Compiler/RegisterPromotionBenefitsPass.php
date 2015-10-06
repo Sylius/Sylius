@@ -20,18 +20,18 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RegisterPromotionActionsPass implements CompilerPassInterface
+class RegisterPromotionBenefitsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.promotion_action')) {
+        if (!$container->hasDefinition('sylius.registry.promotion_benefit')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.promotion_action');
+        $registry = $container->getDefinition('sylius.registry.promotion_benefit');
         $actions = array();
 
-        foreach ($container->findTaggedServiceIds('sylius.promotion_action') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.promotion_benefit') as $id => $attributes) {
             if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged promotion action needs to have `type` and `label` attributes.');
             }
@@ -41,6 +41,6 @@ class RegisterPromotionActionsPass implements CompilerPassInterface
             $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
         }
 
-        $container->setParameter('sylius.promotion_actions', $actions);
+        $container->setParameter('sylius.promotion_benefits', $actions);
     }
 }

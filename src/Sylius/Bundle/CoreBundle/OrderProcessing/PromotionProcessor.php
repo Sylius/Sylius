@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
+use Sylius\Component\Promotion\Applicator\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessor as BasePromotionProcessor;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -26,8 +26,12 @@ class PromotionProcessor extends BasePromotionProcessor
 {
     protected $channelContext;
 
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator, ChannelContextInterface $channelContext)
-    {
+    public function __construct(
+        PromotionRepositoryInterface $repository,
+        PromotionEligibilityCheckerInterface $checker,
+        PromotionApplicatorInterface $applicator,
+        ChannelContextInterface $channelContext
+    ) {
         parent::__construct($repository, $checker, $applicator);
         $this->channelContext = $channelContext;
     }

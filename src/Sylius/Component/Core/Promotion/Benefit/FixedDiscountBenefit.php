@@ -9,33 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Promotion\Action;
+namespace Sylius\Component\Core\Promotion\Benefit;
 
-use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Shipping discount action.
+ * Fixed discount action.
  *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingDiscountAction extends DiscountAction
+class FixedDiscountBenefit extends DiscountBenefit
 {
     /**
      * {@inheritdoc}
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
+            );
         }
 
         $adjustment = $this->createAdjustment($promotion);
-        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setAmount(- $adjustmentAmount);
+        $adjustment->setAmount(-$configuration['amount']);
 
         $subject->addAdjustment($adjustment);
     }
@@ -45,6 +48,6 @@ class ShippingDiscountAction extends DiscountAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_shipping_discount_configuration';
+        return 'sylius_promotion_action_fixed_discount_configuration';
     }
 }

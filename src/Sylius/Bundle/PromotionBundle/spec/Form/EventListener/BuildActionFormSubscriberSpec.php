@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
@@ -28,11 +28,11 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $registry,
-        PromotionActionInterface $action,
+        PromotionBenefitInterface $benefit,
         FormFactoryInterface $factory
     ) {
-        $action->getConfigurationFormType()->willReturn('sylius_promotion_action_fixed_discount_configuration');
-        $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->willReturn($action);
+        $benefit->getConfigurationFormType()->willReturn('sylius_promotion_action_fixed_discount_configuration');
+        $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->willReturn($benefit);
 
         $this->beConstructedWith($registry, $factory);
     }

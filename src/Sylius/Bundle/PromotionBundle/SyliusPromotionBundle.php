@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle;
 
-use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
+use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionBenefitsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -42,7 +42,7 @@ class SyliusPromotionBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterRuleCheckersPass());
-        $container->addCompilerPass(new RegisterPromotionActionsPass());
+        $container->addCompilerPass(new RegisterPromotionBenefitsPass());
     }
 
     /**

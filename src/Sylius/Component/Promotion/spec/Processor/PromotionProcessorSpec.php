@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
+use Sylius\Component\Promotion\Applicator\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;

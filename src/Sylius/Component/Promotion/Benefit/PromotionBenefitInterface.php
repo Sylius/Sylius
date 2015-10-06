@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Promotion\Action;
+namespace Sylius\Component\Promotion\Benefit;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionActionInterface
+interface PromotionBenefitInterface
 {
     /**
      * Applies the promotion to its subject.
