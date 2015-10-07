@@ -22,40 +22,36 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer');
     }
 
-    function it_does_not_transform_null_value(ObjectRepository $repository)
+    function it_does_not_reverse_null_value(ObjectRepository $repository)
     {
         $repository->findOneBy(Argument::any())->shouldNotBeCalled();
 
-        $this->transform(null)->shouldReturn(null);
+        $this->reverseTransform(null)->shouldReturn(null);
     }
 
     function it_throws_an_exception_on_non_existing_entity(ObjectRepository $repository)
     {
-        $value = 6;
+        $repository->findOneBy(array('id' => 6))->shouldBeCalled()->willReturn(null);
 
-        $repository->findOneBy(array('id' => $value))->shouldBeCalled()->willReturn(null);
-
-        $this->shouldThrow('Symfony\Component\Form\Exception\TransformationFailedException')->duringTransform($value);
+        $this->shouldThrow('Symfony\Component\Form\Exception\TransformationFailedException')->during('reverseTransform', array(6));
     }
 
-    function it_transforms_identifier_in_entity(ObjectRepository $repository, FakeEntity $entity)
+    function it_reverses_identifier_in_entity(ObjectRepository $repository, FakeEntity $entity)
     {
-        $value = 5;
+        $repository->findOneBy(array('id' => 5))->shouldBeCalled()->willReturn($entity);
 
-        $repository->findOneBy(array('id' => $value))->shouldBeCalled()->willReturn($entity);
-
-        $this->transform($value)->shouldReturn($entity);
+        $this->reverseTransform(5)->shouldReturn($entity);
     }
 
-    function it_does_not_reverse_null_value()
+    function it_does_not_transform_null_value()
     {
-        $this->reverseTransform(null)->shouldReturn('');
+        $this->transform(null)->shouldReturn('');
     }
 
-    function it_reverses_entity_in_identifier(FakeEntity $value)
+    function it_transforms_entity_in_identifier(FakeEntity $value)
     {
         $value->getId()->shouldBeCalled()->willReturn(6);
 
-        $this->reverseTransform($value)->shouldReturn(6);
+        $this->transform($value)->shouldReturn(6);
     }
 }
