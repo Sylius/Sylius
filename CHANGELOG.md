@@ -8,6 +8,7 @@ This chapter references the relevant changes done in 0.16 version.
 To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.15.0...master
 
  * feature #3110 [BC BREAK] Bumped minimal versions, major changes: PHP >=5.5.9, Symfony ^2.7
+ * bc break #3364 [BC BREAK] Renamed setDefaultOptions to configureOptions
 
 ## v0.15 (2015-09-08)
 

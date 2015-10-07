@@ -58,11 +58,9 @@ class WeightRateCalculator extends Calculator
                 'division',
                 'fixed',
             ))
-            ->setAllowedTypes(array(
-                'variable' => array('numeric'),
-                'division' => array('numeric'),
-                'fixed'    => array('numeric'),
-            ))
+            ->setAllowedTypes('variable', 'numeric')
+            ->setAllowedTypes('division', 'numeric')
+            ->setAllowedTypes('fixed', 'numeric')
         ;
     }
 }

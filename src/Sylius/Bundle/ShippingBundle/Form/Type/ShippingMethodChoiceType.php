@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * A select form which allows the user to select
@@ -80,7 +81,7 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $methodsResolver = $this->resolver;
         $repository = $this->repository;
@@ -100,13 +101,11 @@ class ShippingMethodChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
             ))
-            ->setOptional(array(
+            ->setDefined(array(
                 'subject',
             ))
-            ->setAllowedTypes(array(
-                'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-                'criteria' => array('array'),
-            ))
+            ->setAllowedTypes('subject', ShippingSubjectInterface::class)
+            ->setAllowedTypes('criteria', 'array')
         ;
     }
 

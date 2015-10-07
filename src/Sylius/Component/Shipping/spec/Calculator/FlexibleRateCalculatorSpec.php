@@ -46,14 +46,9 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($resolver);
 
-        $resolver
-            ->setAllowedTypes(array(
-                'first_item_cost'       => array('numeric'),
-                'additional_item_cost'  => array('numeric'),
-                'additional_item_limit' => array('integer')
-            ))
-            ->shouldBeCalled()->willReturn($resolver)
-        ;
+        $resolver->setAllowedTypes('first_item_cost', 'numeric')->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('additional_item_cost', 'numeric')->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('additional_item_limit', 'integer')->shouldBeCalled()->willReturn($resolver);
 
         $this->setConfiguration($resolver);
     }

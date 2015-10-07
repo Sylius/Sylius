@@ -14,10 +14,11 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
@@ -53,18 +54,17 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'subject',
         ))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes(array(
-            'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-            'criteria' => array('array')
-        ))->shouldBeCalled()->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver);
+        $resolver->setAllowedTypes('subject', ShippingSubjectInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('criteria', 'array')->shouldBeCalled()->willReturn($resolver);
+
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_parent()

@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateExtension extends AbstractTypeExtension
 {
@@ -37,7 +37,7 @@ class DateExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $format = function (Options $options, $value) {
             if ($options['widget'] === 'single_text') {
@@ -63,17 +63,15 @@ class DateExtension extends AbstractTypeExtension
             'leading_zero' => false,
         ));
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'placeholder',
             'language',
             'leading_zero',
         ));
 
-        $resolver->setAllowedTypes(array(
-            'placeholder' => array('string'),
-            'language' => array('string'),
-            'leading_zero' => array('bool'),
-        ));
+        $resolver->setAllowedTypes('placeholder', 'string');
+        $resolver->setAllowedTypes('language', 'string');
+        $resolver->setAllowedTypes('leading_zero', 'bool');
     }
 
     /**

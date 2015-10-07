@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonChoiceTypeSpec extends ObjectBehavior
 {
@@ -45,19 +46,18 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setRequired(array(
             'taxonomy',
             'filter',
         ))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes(array(
-            'taxonomy' => array('Sylius\Component\Taxonomy\Model\TaxonomyInterface'),
-            'filter' => array('\Closure', 'null'),
-        ))->shouldBeCalled()->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver, array());
+        $resolver->setAllowedTypes('taxonomy', TaxonomyInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
+
+        $this->configureOptions($resolver, array());
     }
 
     function it_has_a_name()
