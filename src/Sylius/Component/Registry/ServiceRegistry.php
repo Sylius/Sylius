@@ -64,7 +64,9 @@ class ServiceRegistry implements ServiceRegistryInterface
         }
 
         if (!in_array($this->interface, class_implements($service))) {
-            throw new \InvalidArgumentException(sprintf('Service for this registry needs to implement "%s".', $this->interface));
+            throw new \InvalidArgumentException(
+                sprintf('Service for this registry needs to implement "%s", "%s" given.', $this->interface, get_class($service))
+            );
         }
 
         $this->services[$type] = $service;
