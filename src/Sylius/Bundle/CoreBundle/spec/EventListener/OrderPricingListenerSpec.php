@@ -32,7 +32,7 @@ class OrderPricingListenerSpec extends ObjectBehavior
     function it_should_throw_an_exception_if_its_subjet_is_not_order_interface(GenericEvent $event)
     {
         $wrongOrderClass = new \stdClass();
-        $exception = new UnexpectedTypeException($wrongOrderClass, 'Sylius\Component\Order\Model\OrderInterface');
+        $exception = new UnexpectedTypeException($wrongOrderClass, 'Sylius\Component\Core\Model\OrderInterface');
 
         $event->getSubject()->shouldBeCalled()->willReturn($wrongOrderClass);
 
