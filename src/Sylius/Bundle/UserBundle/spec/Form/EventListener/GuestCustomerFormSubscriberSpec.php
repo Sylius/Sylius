@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class GuestCustomerFormListenerSpec extends ObjectBehavior
+class GuestCustomerFormSubscriberSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository, CustomerContextInterface $customerContext)
     {
@@ -31,7 +31,7 @@ class GuestCustomerFormListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventListener\GuestCustomerFormListener');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventListener\GuestCustomerFormSubscriber');
     }
 
     function it_implements_event_subscriber_interface()

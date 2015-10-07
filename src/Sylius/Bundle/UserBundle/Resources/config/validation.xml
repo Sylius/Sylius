@@ -20,10 +20,7 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="message">sylius.customer.email.unique</option>
             <option name="fields">email</option>
-            <option name="groups">
-                <value>sylius</value>
-                <value>sylius_customer_guest</value>
-            </option>
+            <option name="groups">sylius</option>
         </constraint>
         <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
             <option name="message">sylius.customer.email.registered</option>
