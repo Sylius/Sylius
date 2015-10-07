@@ -18,6 +18,9 @@ Feature: Checkout security
             | email            | password | enabled |
             | john@example.com | foo1     | yes     |
             | rick@example.com | bar1     | yes     |
+          And there are following customers:
+            | email                |
+            | customer@example.com |
           And the following zones are defined:
             | name  | type    | members        |
             | UK    | country | United Kingdom |
@@ -99,6 +102,11 @@ Feature: Checkout security
 
     Scenario: Placing order as guest
          When I fill in guest email with "test@example.com"
+          And I press "Proceed with your order"
+         Then I should be redirected to the checkout addressing step
+
+    Scenario: Placing order as already existing customer
+         When I fill in guest email with "customer@example.com"
           And I press "Proceed with your order"
          Then I should be redirected to the checkout addressing step
 

@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class GuestCustomerFormListener implements EventSubscriberInterface
+class GuestCustomerFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var RepositoryInterface
@@ -81,7 +81,7 @@ class GuestCustomerFormListener implements EventSubscriberInterface
             return $customer;
         }
 
-        if (!isset($rawData['email']{0})) {
+        if (!isset($rawData['email'][0])) {
             return null;
         }
 
@@ -97,6 +97,7 @@ class GuestCustomerFormListener implements EventSubscriberInterface
     {
         $customer = $this->customerRepository->findOneBy(array('email' => $email));
 
+        // if this email is already a registered user, do not assign this customer (force login)
         if (null !== $customer && null !== $customer->getUser()) {
             return null;
         }

@@ -28,18 +28,11 @@ class RegisteredUserValidator extends ConstraintValidator
     private $customerRepository;
 
     /**
-     * @var CustomerContextInterface
+     * @param RepositoryInterface $customerRepository
      */
-    private $customerContext;
-
-    /**
-     * @param RepositoryInterface      $customerRepository
-     * @param CustomerContextInterface $customerContext
-     */
-    public function __construct(RepositoryInterface $customerRepository, CustomerContextInterface $customerContext)
+    public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
-        $this->customerContext = $customerContext;
     }
 
     /**
