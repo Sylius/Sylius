@@ -18,29 +18,22 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Object to id transformer.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ObjectToIdentifierTransformer implements DataTransformerInterface
 {
     /**
-     * Repository.
-     *
      * @var ObjectRepository
      */
     protected $repository;
 
     /**
-     * Identifier.
-     *
      * @var string
      */
     protected $identifier;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $repository
      * @param string           $identifier
      */
@@ -54,6 +47,26 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
      * {@inheritdoc}
      */
     public function transform($value)
+    {
+        if (null === $value) {
+            return '';
+        }
+
+        $class = $this->repository->getClassName();
+
+        if (!$value instanceof $class) {
+            throw new UnexpectedTypeException($value, $class);
+        }
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        return $accessor->getValue($value, $this->identifier);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverseTransform($value)
     {
         if (!$value) {
             return null;
@@ -69,25 +82,5 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
         }
 
         return $entity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value)
-    {
-        if (null === $value) {
-            return '';
-        }
-
-        $class = $this->repository->getClassName();
-
-        if (!$value instanceof $class) {
-            throw new UnexpectedTypeException($value, $class);
-        }
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-
-        return $accessor->getValue($value, $this->identifier);
     }
 }
