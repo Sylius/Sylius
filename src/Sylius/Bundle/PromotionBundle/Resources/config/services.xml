@@ -28,6 +28,7 @@
 
         <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.registry.promotion_benefit.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.promotion_filter.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</parameter>
         <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponType</parameter>
@@ -66,6 +67,7 @@
 
         <service id="sylius.promotion_applicator" class="%sylius.promotion_applicator.class%">
             <argument type="service" id="sylius.registry.promotion_benefit" />
+            <argument type="service" id="sylius.registry.promotion_filter" />
         </service>
 
         <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%">
@@ -73,6 +75,9 @@
         </service>
         <service id="sylius.registry.promotion_benefit" class="%sylius.registry.promotion_benefit.class%">
             <argument>Sylius\Component\Promotion\Benefit\PromotionBenefitInterface</argument>
+        </service>
+        <service id="sylius.registry.promotion_filter" class="%sylius.registry.promotion_filter.class%">
+            <argument>Sylius\Component\Promotion\Filter\FilterInterface</argument>
         </service>
 
         <service id="sylius.form.type.promotion_rule.collection" class="%sylius.form.type.promotion_rule.collection.class%">

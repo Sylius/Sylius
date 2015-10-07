@@ -412,6 +412,22 @@
             <tag name="sylius.promotion_benefit" type="add_product" label="Add product" />
         </service>
 
+        <service id="sylius.promotion_filter.archetype" class="Sylius\Component\Promotion\Filter\ArchetypeFilter">
+            <tag name="sylius.promotion_filter" type="archetype_filter" label="Archetype filter" />
+        </service>
+        <service id="sylius.promotion_filter.cheapest" class="Sylius\Component\Promotion\Filter\CheapestFilter">
+            <tag name="sylius.promotion_filter" type="cheapest_filter" label="Cheapest filter" />
+        </service>
+        <service id="sylius.promotion_filter.every" class="Sylius\Component\Promotion\Filter\EveryFilter">
+            <tag name="sylius.promotion_filter" type="every_filter" label="Every filter" />
+        </service>
+        <service id="sylius.promotion_filter.price" class="Sylius\Component\Promotion\Filter\PriceFilter">
+            <tag name="sylius.promotion_filter" type="price_filter" label="Price filter" />
+        </service>
+        <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Promotion\Filter\TaxonFilter">
+            <tag name="sylius.promotion_filter" type="taxon_filter" label="Taxon filter" />
+        </service>
+
         <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
