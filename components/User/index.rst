@@ -9,4 +9,3 @@ Users management implementation in PHP.
    installation
    models
    basic_usage
-   summary
