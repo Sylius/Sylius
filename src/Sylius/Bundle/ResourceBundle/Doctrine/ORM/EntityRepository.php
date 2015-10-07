@@ -25,6 +25,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
+    use FilterManipulatorTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -212,5 +214,13 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function getAlias()
     {
         return 'o';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityManager()
+    {
+        return $this->_em;
     }
 }

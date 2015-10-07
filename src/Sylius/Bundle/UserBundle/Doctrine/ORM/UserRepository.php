@@ -36,7 +36,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         $queryBuilder = parent::getCollectionQueryBuilder();
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->disableFilter('softdeleteable');
         }
 
         if (isset($criteria['query'])) {
@@ -77,7 +77,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -92,7 +92,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             ->getOneOrNullResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $result;
     }

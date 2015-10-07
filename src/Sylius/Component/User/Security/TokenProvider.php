@@ -12,6 +12,7 @@
 namespace Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\FilterManipulatorTrait;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -20,6 +21,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class TokenProvider implements TokenProviderInterface
 {
+    use FilterManipulatorTrait;
+
     /**
      * @var RepositoryInterface
      */
@@ -72,12 +75,20 @@ class TokenProvider implements TokenProviderInterface
      */
     protected function isUsedCode($token)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $isUsed = null !== $this->repository->findOneBy(array('confirmationToken' => $token));
 
-        $this->manager->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $isUsed;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityManager()
+    {
+        return $this->manager;
     }
 }

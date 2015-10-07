@@ -62,7 +62,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -127,7 +127,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->disableFilter('softdeleteable');
         }
 
         if (!empty($criteria['number'])) {
@@ -190,7 +190,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndCoupon(CustomerInterface $customer, CouponInterface $coupon)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -208,7 +208,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getSingleScalarResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $count;
     }
@@ -228,7 +228,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->disableFilter('softdeleteable');
         }
 
         if (!empty($criteria['createdAtFrom'])) {

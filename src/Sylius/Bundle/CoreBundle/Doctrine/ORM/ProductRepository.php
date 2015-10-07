@@ -115,7 +115,7 @@ class ProductRepository extends BaseProductRepository
         $this->applySorting($queryBuilder, $sorting);
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->disableFilter('softdeleteable');
             $queryBuilder->andWhere('product.deletedAt IS NOT NULL');
         }
 
@@ -131,7 +131,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -146,7 +146,7 @@ class ProductRepository extends BaseProductRepository
             ->getOneOrNullResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $result;
     }

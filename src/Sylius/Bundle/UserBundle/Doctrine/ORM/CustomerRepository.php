@@ -29,7 +29,7 @@ class CustomerRepository extends EntityRepository
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->disableFilter('softdeleteable');
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -41,7 +41,7 @@ class CustomerRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->enableFilter('softdeleteable');
 
         return $result;
     }
@@ -59,7 +59,7 @@ class CustomerRepository extends EntityRepository
             ->leftJoin($this->getPropertyName('user'), 'user');
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->disableFilter('softdeleteable');
         }
 
         if (isset($criteria['query'])) {
