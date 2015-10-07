@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Promotion\Applicator;
 
+use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
+use Sylius\Component\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -22,20 +24,49 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class PromotionApplicator implements PromotionApplicatorInterface
 {
-    protected $registry;
+    /**
+     * @var ServiceRegistryInterface
+     */
+    protected $benefitRegistry;
 
-    public function __construct(ServiceRegistryInterface $registry)
+    /**
+     * @var ServiceRegistryInterface
+     */
+    protected $filterRegistry;
+
+    public function __construct(ServiceRegistryInterface $benefitRegistry, ServiceRegistryInterface $filterRegistry)
     {
-        $this->registry = $registry;
+        $this->benefitRegistry = $benefitRegistry;
+        $this->filterRegistry = $filterRegistry;
     }
 
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
+        // preparing copy of order items for filtering (every action we start from clear set)
+        $orderItems = $subject->getItems();
+
         foreach ($promotion->getActions() as $action) {
-            $this->registry
-                ->get($action->getType())
-                ->execute($subject, $action->getConfiguration(), $promotion)
-            ;
+            $filteredSubjects = $orderItems;
+
+            // filtering down order items for the ones that apply to benefit
+            /** @var \Sylius\Component\Promotion\Model\FilterInterface $filter */
+            foreach ($action->getFilters() as $filter) {
+                /** @var FilterInterface $filterObject */
+                $filterObject = $this->filterRegistry->get($filter->getType());
+
+                $filteredSubjects = $filterObject->apply($filteredSubjects, $filter->getConfiguration());
+            }
+
+            // apply all of the benefits to the filtered set
+            foreach ($action->getBenefits() as $benefit) {
+                /** @var PromotionBenefitInterface $benefitObject */
+                $benefitObject = $this->benefitRegistry->get($benefit->getType());
+
+                /** @var  $filteredSubject */
+                foreach ($filteredSubjects as $filteredSubject) {
+                    $benefitObject->execute($filteredSubject, $benefit->getConfiguration(), $promotion);
+                }
+            }
         }
 
         $subject->addPromotion($promotion);
@@ -44,7 +75,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
-            $this->registry
+            $this->benefitRegistry
                 ->get($action->getType())
                 ->revert($subject, $action->getConfiguration(), $promotion)
             ;

@@ -10,58 +10,59 @@ Feature: Checkout product promotion
             | name     |
             | Category |
         And taxonomy "Category" has following taxons:
-            | Clothing > Debian |
-            | Clothing > Centos |
+            | Clothing > Dress  |
+            | Clothing > Jacket |
         And the following products exist:
             | name    | price | taxons |
-            | Buzz    | 500   | Debian |
-            | Potato  | 200   | Debian |
-            | Woody   | 125   | Debian |
-            | Sarge   | 25    | Centos |
-            | Etch    | 20    | Centos |
-            | Lenny   | 15    | Centos |
+            | Dr500   | 500   | Dress  |
+            | Ja200   | 200   | Jacket |
+            | Dr125   | 125   | Dress  |
+            | Ja25    | 25    | Jacket |
+            | Dr20    | 20    | Dress  |
+            | Ja15    | 15    | Jacket |
           And the following promotions exist:
             | name               | description     |
-            | Discount on Debian | 50% Only Debian |
-          And promotion "Discount on Debian" has following rules defined:
-            | type             | configuration             |
-            | Taxonomy         | Taxons: Debian,Exclude: 0 |
-            And promotion "Discount on Debian" has following actions defined:
+            | Discount on Dress  | 50% Only Dress  |
+          And promotion "Discount on Dress" has following rules defined:
+            | type             | configuration            |
+            | Taxonomy         | Taxons: Dress,Exclude: 0 |
+          And promotion "Discount on Dress" has following benefits defined:
             | type                  | configuration  |
             | Percentage Discount   | Percentage: 50 |
+          And promotion "Discount on Dress" has following filters defined:
+            | type                  | configuration          |
+            | taxon_filter          | Filtered_taxon: Dress  |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
-    Scenario: Discount should not be applied if order contains no Debian products
+    Scenario: Discount should not be applied if order contains no Dress products
         Given I have empty order
-          And I add "3" product of "Sarge" type
+          And I add "3" product of "Ja25" type
          When I apply promotions
          Then I should have no discount
           And Total price should be 75.00
 
-    Scenario: Discount should not be applied if order contains one Debian product
+    Scenario: Discount should not be applied if order contains one Dress product
         Given I have empty order
-          And I add "1" product of "Potato" type
+          And I add "1" product of "Dr500" type
          When I apply promotions
-         Then I should have "50% Only Debian" discount equal -100
-          And Total price should be 100.00
+         Then I should have "50% Only Dress" discount equal -250
+          And Total price should be 250.00
 
-    Scenario: Discount should be applied to all Debian
-              products if order contains more than one Debian product
+    Scenario: Discount should be applied to all Dress
+              products if order contains more than one Dress product
         Given I have empty order
-          And I add "2" product of "Potato" type
+          And I add "2" product of "Dr125" type
+          And I add "1" product of "Dr20" type
          When I apply promotions
-         Then I should have "50% Only Debian" discount equal -200
-          And Total price should be 200.00
+         Then I should have "50% Only Dress" discount equal -135.00
+          And Total price should be 135.00
 
-    Scenario: Discount should be applied only to Debian
-              products if the order contains not only Debian products
+    Scenario: Discount should be applied only to Dress
+              products if the order contains not only Dress products
         Given I have empty order
-          And I add "1" product of "Potato" type
-          And I add "1" product of "Sarge" type
+          And I add "1" product of "Dr500" type
+          And I add "1" product of "Ja200" type
          When I apply promotions
-#        For now it also discounts Sarge product
-#         Then I should have "50% Only Debian" discount equal -100
-#        And Total price should be 125.00
-        Then I should have "50% Only Debian" discount equal -112.50
-         And Total price should be 112.50
+         Then I should have "50% Only Dress" discount equal -250
+          And Total price should be 450.00

@@ -14,10 +14,14 @@ namespace Sylius\Bundle\PromotionBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Product\Model\Product;
+use Sylius\Component\Promotion\Filter\FilterInterface;
+use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\BenefitInterface;
 
 class PromotionContext extends DefaultContext
 {
@@ -79,28 +83,59 @@ class PromotionContext extends DefaultContext
     }
 
     /**
-     * @Given /^promotion "([^""]*)" has following actions defined:$/
+     * @Given /^promotion "([^""]*)" has following filters defined:$/
      */
-    public function theFollowingPromotionActionsAreDefined($name, TableNode $table)
+    public function theFollowingPromotionFiltersAreDefined($promotionName, TableNode $table)
     {
-        $promotion = $this->findOneByName('promotion', $name);
+        /** @var PromotionInterface $promotion */
+        $promotion = $this->findOneByName('promotion', $promotionName);
 
         $manager = $this->getEntityManager();
-        $factory = $this->getFactory('promotion_action');
+        $filterFactory = $this->getFactory('promotion_filter');
 
-        foreach ($table->getHash() as $data) {
-            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+        foreach ($table->getHash() as $filterData) {
+            $actionNumber = $this->getActionNumber($filterData);
+            $action = $this->getOrCreateAction($promotion, $actionNumber);
 
-            $action = $factory->createNew();
-            $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $action->setConfiguration($configuration);
+            $configuration = $this->getConfiguration($filterData['configuration']);
+            $filterType = $filterData['type'];
 
-            $promotion->addAction($action);
+            /** @var FilterInterface $filter */
+            $filter = $filterFactory->createNew();
+            $filter->setType($filterType);
+            $filter->setConfiguration($configuration);
 
-            $manager->persist($action);
+            $action->addFilter($filter);
         }
+    }
 
-        $manager->flush();
+    /**
+     * @Given /^promotion "([^""]*)" has following benefits defined:$/
+     */
+    public function theFollowingPromotionBenefitsAreDefined($promotionName, TableNode $table)
+    {
+        /** @var PromotionInterface $promotion */
+        $promotion = $this->findOneByName('promotion', $promotionName);
+        $benefitRepository = $this->getRepository('promotion_benefit');
+
+        foreach ($table->getHash() as $benefitData) {
+            $actionNumber = $this->getActionNumber($benefitData);
+
+            $action = $this->getOrCreateAction($promotion, $actionNumber);
+
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($benefitData['configuration']));
+            $benefitType = strtolower(str_replace(' ', '_', $benefitData['type']));
+
+            /** @var BenefitInterface $benefit */
+            $benefit = $benefitRepository->createNew();
+            $benefit->setType($benefitType);
+
+
+            $benefit->setType($benefitType);
+            $benefit->setConfiguration($configuration);
+
+            $action->addBenefit($benefit);
+        }
     }
 
     /**
@@ -201,25 +236,18 @@ class PromotionContext extends DefaultContext
     public function shouldBeADiscount($discountName, $discountValue)
     {
         $discountExist = false;
+        $totalDiscountFound = 0;
 
         /** @var Adjustment $promotion */
-        foreach ($this->order->getAdjustments('promotion') as $promotion)
-        {
-            if (
-                $promotion->getDescription() == $discountName
-            ) {
-                $discountExist = true;
+        foreach ($this->order->getItems() as $item) {
 
-                \PHPUnit_Framework_Assert::assertSame(
-                   $this->normalizePrice($discountValue),
-                   $promotion->getAmount(),
-                   sprintf('Promotion: "%s" found but discount do not match, actual discount: %s',
-                        $discountName,
-                        $promotion->getAmount()
-                   )
-                );
-
-                break;
+            foreach ($item->getAdjustments('promotion') as $promotion) {
+                if (
+                   $promotion->getDescription() == $discountName
+                ) {
+                    $discountExist = true;
+                    $totalDiscountFound += $promotion->getAmount();
+                }
             }
         }
 
@@ -230,6 +258,16 @@ class PromotionContext extends DefaultContext
                     $discountName, $discountValue)
             );
         }
+
+        \PHPUnit_Framework_Assert::assertSame(
+            $this->normalizePrice($discountValue),
+            $totalDiscountFound,
+            sprintf('Promotion: "%s" found but discount do not match, actual discount: %s',
+                $discountName,
+                $promotion->getAmount()
+            )
+        );
+
     }
 
     /**
@@ -316,5 +354,42 @@ class PromotionContext extends DefaultContext
     private function normalizePrice($price)
     {
         return (int) round($price * 100);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return int
+     */
+    private function getActionNumber($data)
+    {
+        $actionNumber = 1;
+
+        if (array_key_exists('actionNumber', $data)) {
+            $actionNumber = $data['actionNumber'];
+        }
+
+        return $actionNumber;
+    }
+
+    /**
+     * @param $promotion
+     * @param $actionNumber
+     *
+     * @return ActionInterface
+     */
+    private function getOrCreateAction($promotion, $actionNumber)
+    {
+        $actionRepository = $this->getRepository('promotion_action');
+
+        if (!$promotion->getActions()->offsetExists($actionNumber)) {
+            /** @var ActionInterface $action */
+            $action = $actionRepository->createNew();
+            $promotion->getActions()->offsetSet($actionNumber, $action);
+        } else {
+            $action = $promotion->getActions()->offsetGet($actionNumber);
+        }
+
+        return $action;
     }
 }

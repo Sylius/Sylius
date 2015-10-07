@@ -193,6 +193,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
                     break;
 
+                case 'filtered_taxon':
+                    $configuration['taxon'] = $this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId();
+                    break;
+
                 case 'variant':
                     $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
                     break;
