@@ -35,7 +35,6 @@
             </join-table>
         </many-to-many>
 
-        <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
 
 </doctrine-mapping>
