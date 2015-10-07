@@ -252,6 +252,14 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then /^I should see "([^"]*)" in "([^"]*)" field$/
+     */
+    public function iShouldSeeInField($value, $field)
+    {
+        $this->assertSession()->fieldValueEquals($field, $value);
+    }
+
+    /**
      * For example: I should see product with name "Wine X" in that list.
      *
      * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ((?:(?![\w\s]+ containing))[\w\s]+) "([^""]*)" in (?:that|the) list$/
@@ -636,5 +644,16 @@ class WebContext extends DefaultContext
         if (null === $select->getAttribute('disabled')) {
             throw new \Exception(sprintf('"%s" %s should be disabled', $name, $fieldType));
         }
+    }
+
+    /**
+     * @Given /^permalink of taxon "([^"]*)" in "([^"]*)" taxonomy has been changed to "([^"]*)"$/
+     */
+    public function permalinkOfTaxonInTaxonomyHasBeenChangedTo($taxon, $taxonomy, $newPermalink)
+    {
+        $this->iAmOnTheResourcePage('taxonomy', 'name', $taxonomy);
+        $this->iClickNear('edit', $taxon);
+        $this->fillField('Permalink', $newPermalink);
+        $this->pressButton('Save changes');
     }
 }

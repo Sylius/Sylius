@@ -139,6 +139,18 @@ Feature: taxonomies
          Then I should be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully updated."
 
+    Scenario: Changing taxon slug
+        Given permalink of taxon "Clothing" in "Category" taxonomy has been changed to "super-clothing"
+          And I am on the page of taxonomy "Category"
+         When I click "edit" near "Clothing"
+         Then I should see "category/super-clothing" in "Permalink" field
+
+    Scenario: Changing taxon slug with parent slug prefix
+        Given permalink of taxon "Clothing" in "Category" taxonomy has been changed to "category/super-clothing-category/best"
+          And I am on the page of taxonomy "Category"
+         When I click "edit" near "Clothing"
+         Then I should see "category/super-clothing-category-best" in "Permalink" field
+
     @javascript
     Scenario: Deleting taxons
         Given I am on the page of taxonomy "Category"
