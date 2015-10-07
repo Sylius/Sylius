@@ -17,6 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SettingsRequirements extends RequirementCollection
 {
     const REQUIRED_PHP_VERSION = '5.5.9';
+    const RECOMMENDED_PHP_VERSION = '5.6.13';
 
     public function __construct(TranslatorInterface $translator)
     {
@@ -34,8 +35,8 @@ class SettingsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.settings.version_recommanded', array(), 'requirements'),
-                version_compare(phpversion(), '5.3.8', '>='),
-                '>=5.3.8',
+                version_compare(phpversion(), self::RECOMMENDED_PHP_VERSION, '>='),
+                '>='.self::RECOMMENDED_PHP_VERSION,
                 phpversion(),
                 false
             ))
