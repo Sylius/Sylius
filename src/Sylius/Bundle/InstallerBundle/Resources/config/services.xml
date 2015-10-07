@@ -29,6 +29,7 @@
         <parameter key="sylius.form.type.configuration.hidden.class">Sylius\Bundle\InstallerBundle\Form\Type\Configuration\HiddenType</parameter>
         <parameter key="sylius.form.type.setup.class">Sylius\Bundle\InstallerBundle\Form\Type\SetupType</parameter>
         <parameter key="sylius.installer.yaml_persister.class">Sylius\Bundle\InstallerBundle\Persister\YamlPersister</parameter>
+        <parameter key="sylius.installer.checker.command_directory.class">Sylius\Bundle\InstallerBundle\Checker\CommandDirectoryChecker</parameter>
     </parameters>
 
     <services>
@@ -89,6 +90,10 @@
 
         <service id="sylius.installer.yaml_persister" class="%sylius.installer.yaml_persister.class%">
             <argument>%kernel.root_dir%/config/parameters.yml</argument>
+        </service>
+
+        <service id="sylius.installer.checker.command_directory" class="%sylius.installer.checker.command_directory.class%">
+            <argument type="service" id="filesystem" />
         </service>
     </services>
 

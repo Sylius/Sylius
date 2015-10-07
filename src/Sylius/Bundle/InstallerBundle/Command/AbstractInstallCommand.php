@@ -241,67 +241,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function ensureDirectoryExistsAndIsWritable($directory, OutputInterface $output)
     {
-        $this->ensureDirectoryExists($directory, $output);
-        $this->ensureDirectoryIsWritable($directory, $output);
-    }
+        $checker = $this->get('sylius.installer.checker.command_directory');
+        $checker->setCommandName($this->getName());
 
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    private function ensureDirectoryExists($directory, OutputInterface $output)
-    {
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0755, true)) {
-                $output->writeln($this->createUnexisitingDirectoryMessage($directory));
-
-                throw new \RuntimeException("Failed while trying to create directory.");
-            }
-
-            $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', $directory));
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createUnexisitingDirectoryMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>' . PHP_EOL .
-            sprintf('Create directory "%s" and run command "<comment>%s</comment>"', $directory, $this->getName())
-            ;
-    }
-
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    protected function ensureDirectoryIsWritable($directory, OutputInterface $output)
-    {
-        if (!is_writable($directory)) {
-            if (!chmod($directory, 0755)) {
-                $output->writeln($this->createBadPermissionsMessage($directory));
-
-                throw new \RuntimeException("Failed while trying to change directory permissions.");
-            }
-
-            $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', $directory));
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createBadPermissionsMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>' . PHP_EOL .
-            sprintf('Set directory "%s" writable and run command "<comment>%s</comment>"', $directory, $this->getName())
-            ;
+        $checker->ensureDirectoryExists($directory, $output);
+        $checker->ensureDirectoryIsWritable($directory, $output);
     }
 }
