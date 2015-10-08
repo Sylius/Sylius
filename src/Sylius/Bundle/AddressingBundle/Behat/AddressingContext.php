@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AddressingBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;

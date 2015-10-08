@@ -11,9 +11,7 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\AttributeInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

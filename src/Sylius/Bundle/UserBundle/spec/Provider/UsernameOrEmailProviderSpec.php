@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\UserBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

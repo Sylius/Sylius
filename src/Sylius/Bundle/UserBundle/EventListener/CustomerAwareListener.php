@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CustomerAwareListener

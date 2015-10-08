@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\Channel;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Hostname based channel resolver.

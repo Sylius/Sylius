@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\User\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

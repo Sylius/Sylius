@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CartBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Purger\PurgerInterface;
+use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 
 /**
  * Default cart purger.

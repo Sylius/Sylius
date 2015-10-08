@@ -11,14 +11,14 @@
 
 namespace spec\Sylius\Bundle\RbacBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Rbac\Model\RoleInterface;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>

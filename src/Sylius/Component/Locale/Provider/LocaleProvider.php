@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Locale\Provider;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

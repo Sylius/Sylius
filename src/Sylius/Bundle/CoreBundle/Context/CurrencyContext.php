@@ -17,7 +17,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Core currency context, which is aware of multiple channels.

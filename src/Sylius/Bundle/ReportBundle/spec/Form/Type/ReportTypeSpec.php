@@ -12,15 +12,15 @@
 namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormView;
 use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormConfigInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

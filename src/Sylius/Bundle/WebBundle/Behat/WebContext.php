@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
@@ -18,7 +19,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\WebContext as BaseWebContext;
 use Symfony\Component\Intl\Intl;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Web context.

@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

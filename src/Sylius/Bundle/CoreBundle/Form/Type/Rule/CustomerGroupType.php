@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
+use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
