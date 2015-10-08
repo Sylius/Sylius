@@ -19,8 +19,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Product inventory listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductInventoryListener
