@@ -13,17 +13,17 @@ Feature: Products
             | Clothing > T-Shirts     |
             | Clothing > PHP T-Shirts |
             | Clothing > Gloves       |
-          And the following products exist:
-            | name             | price | taxons       |
-            | Super T-Shirt    | 19.99 | T-Shirts     |
-            | Black T-Shirt    | 18.99 | T-Shirts     |
-            | Sylius Tee       | 12.99 | PHP T-Shirts |
-            | Symfony T-Shirt  | 15.00 | PHP T-Shirts |
-            | Doctrine T-Shirt | 15.00 | PHP T-Shirts |
           And there are following channels configured:
             | code   | name       | currencies | locales             | url          |
             | WEB-US | mystore.us | EUR, GBP   | en_US               |              |
             | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost    |
+          And the following products exist:
+            | name             | price | taxons       | pricing calculator | calculator configuration |
+            | Super T-Shirt    | 19.99 | T-Shirts     | channel_based      | WEB-EU:15.99             |
+            | Black T-Shirt    | 18.99 | T-Shirts     |                    |                          |
+            | Sylius Tee       | 12.99 | PHP T-Shirts |                    |                          |
+            | Symfony T-Shirt  | 15.00 | PHP T-Shirts |                    |                          |
+            | Doctrine T-Shirt | 15.00 | PHP T-Shirts |                    |                          |
           And channel "WEB-EU" has following configuration:
             | taxonomy |
             | Category |
@@ -63,3 +63,8 @@ Feature: Products
     Scenario: Receiving exception while entering page for product with empty slug
         Given I go to page for product with empty slug
          Then the response status code should be 404
+
+    Scenario: Display proper product price for specific channel
+        Given I am on the store homepage
+        Then I should see "Super T-shirt"
+        And I should see "€15.99"
