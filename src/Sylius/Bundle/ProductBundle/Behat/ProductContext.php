@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductContext extends DefaultContext
 {
@@ -86,6 +87,10 @@ class ProductContext extends DefaultContext
 
             if (isset($data['deleted']) && 'yes' === $data['deleted']) {
                 $product->setDeletedAt(new \DateTime());
+            }
+
+            if (isset($data['pricing calculator']) && '' !== $data['pricing calculator']) {
+                $this->configureProductPricingCalculator($product, $data);
             }
 
             $manager->persist($product);
@@ -288,5 +293,39 @@ class ProductContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param array            $data
+     */
+    private function configureProductPricingCalculator(ProductInterface $product, array $data)
+    {
+        $product->getMasterVariant()->setPricingCalculator($data['pricing calculator']);
+
+        if (!isset($data['calculator configuration']) || '' === $data['calculator configuration']) {
+            throw new \InvalidArgumentException('You must set chosen calculator configuration');
+        }
+
+        $product->getMasterVariant()->setPricingConfiguration($this->getPricingCalculatorConfiguration($data));
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    private function getPricingCalculatorConfiguration(array $data)
+    {
+        $calculatorConfiguration = $this->getConfiguration($data['calculator configuration']);
+
+        $finalCalculatorConfiguration = array();
+        foreach ($calculatorConfiguration as $channelCode => $price) {
+            $channel = $this->getRepository('channel')->findOneBy(array('code' => $channelCode));
+
+            $finalCalculatorConfiguration[$channel->getId()] = $price * 100;
+        }
+
+        return $finalCalculatorConfiguration;
     }
 }

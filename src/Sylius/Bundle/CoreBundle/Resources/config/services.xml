@@ -413,6 +413,7 @@
         </service>
 
         <service id="sylius.price_calculator.channel_based" class="%sylius.price_calculator.channel_based.class%">
+            <argument type="service" id="sylius.context.channel" />
             <tag name="sylius.price_calculator" type="channel_based" label="Channel based" />
         </service>
 
