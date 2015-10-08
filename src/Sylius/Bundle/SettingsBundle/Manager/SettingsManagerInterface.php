@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

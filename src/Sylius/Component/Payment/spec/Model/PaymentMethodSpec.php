@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

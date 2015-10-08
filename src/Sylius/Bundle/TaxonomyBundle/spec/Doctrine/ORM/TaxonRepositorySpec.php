@@ -12,11 +12,11 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManager;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 class TaxonRepositorySpec extends ObjectBehavior

@@ -11,8 +11,6 @@
 
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\PDOStatement;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

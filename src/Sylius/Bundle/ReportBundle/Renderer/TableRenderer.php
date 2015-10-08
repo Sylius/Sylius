@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ReportBundle\Renderer;
 
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
-use Sylius\Component\Report\Renderer\RendererInterface;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**

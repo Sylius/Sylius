@@ -12,10 +12,10 @@
 namespace spec\Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Doctrine\ORM\Query\FilterCollection;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 

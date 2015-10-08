@@ -2,9 +2,6 @@
 
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

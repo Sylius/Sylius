@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
-use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**

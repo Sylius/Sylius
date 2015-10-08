@@ -14,11 +14,11 @@ namespace spec\Sylius\Component\Variation\Generator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValue;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>

@@ -17,7 +17,6 @@ use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstrai
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**

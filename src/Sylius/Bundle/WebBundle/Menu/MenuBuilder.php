@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\WebBundle\Menu;
 
-use JMS\TranslationBundle\Annotation\Ignore;
 use Knp\Menu\FactoryInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

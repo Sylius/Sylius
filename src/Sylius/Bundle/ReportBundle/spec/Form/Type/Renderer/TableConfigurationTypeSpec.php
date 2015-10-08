@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormBuilder;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
