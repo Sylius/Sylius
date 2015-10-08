@@ -42,6 +42,7 @@ class PaymentType extends AbstractResourceType
                     PaymentInterface::STATE_FAILED     => 'sylius.form.payment.state.failed',
                     PaymentInterface::STATE_VOID       => 'sylius.form.payment.state.void',
                     PaymentInterface::STATE_COMPLETED  => 'sylius.form.payment.state.completed',
+                    PaymentInterface::STATE_AUTHORIZED => 'sylius.form.payment.state.authorized',
                     PaymentInterface::STATE_NEW        => 'sylius.form.payment.state.new',
                     PaymentInterface::STATE_CANCELLED  => 'sylius.form.payment.state.cancelled',
                     PaymentInterface::STATE_REFUNDED   => 'sylius.form.payment.state.refunded',

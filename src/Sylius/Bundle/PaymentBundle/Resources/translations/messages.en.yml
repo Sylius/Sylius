@@ -18,6 +18,7 @@ sylius:
                 header: Payment state
                 checkout: Checkout
                 completed: Completed
+                authorized: Authorized
                 failed: Failed
                 new: New
                 pending: Pending
