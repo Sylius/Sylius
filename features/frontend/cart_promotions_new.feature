@@ -35,6 +35,15 @@ Feature: Checkout product promotion
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
+        Scenario Outline: Somexamples
+            Given I have empty order
+              And I add
+
+            Examples:
+            | backetContent| activePromotions | discountName | discountValue | totalPrice |
+            | Dr500:2      | activePromotions | discountName | discountValue | totalPrice |
+
+
     Scenario: Discount should not be applied if order contains no Dress products
         Given I have empty order
           And I add "3" product of "Ja25" type
@@ -61,6 +70,7 @@ Feature: Checkout product promotion
     Scenario: Discount should be applied only to Dress
               products if the order contains not only Dress products
         Given I have empty order
+          And Promotion "50% Only Dress" is active
           And I add "1" product of "Dr500" type
           And I add "1" product of "Ja200" type
          When I apply promotions

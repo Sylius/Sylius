@@ -148,11 +148,20 @@ class PromotionContext extends DefaultContext
         $factory = $this->getFactory('promotion');
 
         foreach ($table->getHash() as $data) {
+            /** @var PromotionInterface $promotion */
             $promotion = $factory->createNew();
 
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
             $promotion->setCode($data['code']);
+
+            if (array_key_exists('active', $data) && '' == $data['active']) {
+                $promotion->setStartsAt($this->faker->dateTimeBetween('-30 years', 'now'));
+                $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
+            } else {
+                $promotion->setStartsAt($this->faker->dateTime('-2 years'));
+                $promotion->setEndsAt($this->faker->dateTime('-1 year'));
+            }
 
             if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
                 $promotion->setUsageLimit((int) $data['usage limit']);
@@ -170,6 +179,27 @@ class PromotionContext extends DefaultContext
             $manager->persist($promotion);
         }
 
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^Promotion "([^""]*)" is active$/
+     */
+    public function promotionIsActive($promotionName)
+    {
+//        $promotion = $this->findOneByName('promotion', $promotionName);
+
+        $res = $this->getRepository('promotion')->findAll();
+
+        var_dump(get_class($res));
+
+        die('zzz');
+
+        $promotion->setStartsAt($this->faker->dateTimeBetween('-30 years', 'now'));
+        $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
+
+        $manager = $this->getEntityManager();
+        $manager->persist($promotion);
         $manager->flush();
     }
 
