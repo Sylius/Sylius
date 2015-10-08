@@ -1,7 +1,10 @@
 PHP E-Commerce Components
 =========================
 
-The components are the foundation of the Sylius platform, but they can also be used standalone with any PHP application and project even if you use a different framework than Symfony. They provide you with default models, services and logic for all aspects of e-commerce.
+The components are the foundation of the Sylius platform, but they can also
+be used standalone with any PHP application and project even if you use a different
+framework than Symfony. They provide you with default models, services and logic
+for all aspects of e-commerce.
 
 :doc:`/components/using_components`
 
@@ -32,6 +35,7 @@ The components are the foundation of the Sylius platform, but they can also be u
     Shipping/index
     Taxation/index
     Taxonomy/index
+    User/index
     Variation/index
 
 .. include:: /components/map.rst.inc

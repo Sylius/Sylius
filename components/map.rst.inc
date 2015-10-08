@@ -21,4 +21,5 @@
 * :doc:`/components/Shipping/index`
 * :doc:`/components/Taxation/index`
 * :doc:`/components/Taxonomy/index`
+* :doc:`/components/User/index`
 * :doc:`/components/Variation/index`
