@@ -368,7 +368,7 @@ class OrmFinder extends AbstractFinder
                     }
 
                     // filtering on an array of values
-                    if (is_array($tags[strtolower($key)]) && in_array(ucfirst($separateFilter[$key]), $tags[strtolower($key)])) {
+                    if (is_array($tags[strtolower($key)]) && in_array($separateFilter[$key], $tags[strtolower($key)])) {
                         $result[] = $facet['itemId'];
 
                         // got the value, I don't want to move into more checks
