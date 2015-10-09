@@ -88,6 +88,7 @@ hwi_oauth:
             client_id:     %sylius.oauth.facebook.clientid%
             client_secret: %sylius.oauth.facebook.clientsecret%
             scope:         "email"
+            infos_url:     "https://graph.facebook.com/me?fields=id,name,email"
             options:
                 display: popup
         google:
