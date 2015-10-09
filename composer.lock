@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb733c46406fff11e542c3ce341cbb1d",
-    "content-hash": "2f0b13b9ff33b0be290bc98ce8148392",
+    "hash": "866137bd484fd3a944a05e0a285e926d",
+    "content-hash": "1f0730d06b60dd0e2653c04047af777a",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -583,6 +583,7 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
+<<<<<<< HEAD
             "version": "1.6.0",
             "source": {
                 "type": "git",
@@ -593,6 +594,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
                 "reference": "a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
+=======
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineBundle.git",
+                "reference": "d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3",
+                "reference": "d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -657,7 +670,11 @@
                 "orm",
                 "persistence"
             ],
+<<<<<<< HEAD
             "time": "2015-11-04 21:33:02"
+=======
+            "time": "2015-08-31 14:47:06"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -745,7 +762,7 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "v2.21",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
@@ -802,6 +819,7 @@
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
+<<<<<<< HEAD
             "version": "1.1.1",
             "source": {
                 "type": "git",
@@ -812,6 +830,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/303a576e2124efb07ec215e34ea2480b841cf5e4",
                 "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4",
+=======
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
+                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
+                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -856,7 +886,11 @@
                 "migrations",
                 "schema"
             ],
+<<<<<<< HEAD
             "time": "2015-11-04 13:45:30"
+=======
+            "time": "2015-09-29 10:07:00"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "doctrine/inflector",
@@ -1321,6 +1355,41 @@
                 "phpcr"
             ],
             "time": "2015-10-08 11:16:58"
+<<<<<<< HEAD
+=======
+        },
+        {
+            "name": "fp/klarna-invoice",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/formapro/KlarnaInvoice.git",
+                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/formapro/KlarnaInvoice/zipball/c0aebad0be069d875619a2ef2455c29e667ed27a",
+                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.16",
+                "phpxmlrpc/phpxmlrpc": "~3.0|~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Klarna.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "It unofficial repo of Klarna Invoice service with Composer added. We use it with https://github.com/Payum/KlarnaInvoice",
+            "homepage": "http://developers.klarna.com",
+            "time": "2015-09-03 08:23:32"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
@@ -2234,6 +2303,7 @@
         },
         {
             "name": "jackalope/jackalope",
+<<<<<<< HEAD
             "version": "1.2.5",
             "source": {
                 "type": "git",
@@ -2244,6 +2314,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jackalope/jackalope/zipball/a7d15812d3bd2de39beccee86e1041b079a1284c",
                 "reference": "a7d15812d3bd2de39beccee86e1041b079a1284c",
+=======
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jackalope/jackalope.git",
+                "reference": "75cd273ed693b6c077c9856709ebac6ca3252e25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jackalope/jackalope/zipball/75cd273ed693b6c077c9856709ebac6ca3252e25",
+                "reference": "75cd273ed693b6c077c9856709ebac6ca3252e25",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -2283,7 +2365,11 @@
             "keywords": [
                 "phpcr"
             ],
+<<<<<<< HEAD
             "time": "2015-11-06 08:52:52"
+=======
+            "time": "2015-10-09 16:37:07"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "jackalope/jackalope-doctrine-dbal",
@@ -2539,9 +2625,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2715,6 +2801,46 @@
                 "shasum": ""
             },
             "require": {
+<<<<<<< HEAD
+=======
+                "php": ">=5.2.16"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "~1.5",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Klarna": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Wrapper for the Klarna Checkout API",
+            "homepage": "http://developers.klarna.com",
+            "time": "2014-10-06 08:03:01"
+        },
+        {
+            "name": "knplabs/gaufrette",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/Gaufrette.git",
+                "reference": "9d52413665284f9c96e0cef399fc14e68ac0aa5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/9d52413665284f9c96e0cef399fc14e68ac0aa5a",
+                "reference": "9d52413665284f9c96e0cef399fc14e68ac0aa5a",
+                "shasum": ""
+            },
+            "require": {
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "php": ">=5.3.2"
             },
             "require-dev": {
@@ -5357,6 +5483,7 @@
         },
         {
             "name": "payum/payum",
+<<<<<<< HEAD
             "version": "1.0.0",
             "source": {
                 "type": "git",
@@ -5367,6 +5494,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Payum/Payum/zipball/df32af9076820fc83053428004e5a3774a153a3a",
                 "reference": "df32af9076820fc83053428004e5a3774a153a3a",
+=======
+            "version": "0.14.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Payum/Payum.git",
+                "reference": "5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba",
+                "reference": "5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -5481,7 +5620,11 @@
                 "stripe checkout",
                 "stripe.js"
             ],
+<<<<<<< HEAD
             "time": "2015-11-09 09:29:05"
+=======
+            "time": "2015-09-29 06:53:37"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "payum/payum-bundle",
@@ -5616,9 +5759,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -6989,6 +7132,7 @@
         },
         {
             "name": "symfony/symfony",
+<<<<<<< HEAD
             "version": "v2.7.6",
             "source": {
                 "type": "git",
@@ -6999,6 +7143,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/symfony/zipball/66b2e9662c44d478b69e48278aa54079a006eb42",
                 "reference": "66b2e9662c44d478b69e48278aa54079a006eb42",
+=======
+            "version": "v2.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/symfony.git",
+                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/619528a274647cffc1792063c3ea04c4fa8266a0",
+                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -7106,7 +7262,11 @@
             "keywords": [
                 "framework"
             ],
+<<<<<<< HEAD
             "time": "2015-10-27 19:07:24"
+=======
+            "time": "2015-09-25 11:16:52"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "true/punycode",
@@ -7208,6 +7368,7 @@
         },
         {
             "name": "twig/twig",
+<<<<<<< HEAD
             "version": "v1.23.1",
             "source": {
                 "type": "git",
@@ -7218,6 +7379,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
                 "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+=======
+            "version": "v1.22.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ebfc36b7e77b0c1175afe30459cf943010245540",
+                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -7265,7 +7438,11 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< HEAD
             "time": "2015-11-05 12:49:06"
+=======
+            "time": "2015-10-13 07:07:02"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -7468,7 +7645,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8650,7 +8827,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -9036,6 +9214,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "4.8.16",
             "source": {
                 "type": "git",
@@ -9046,6 +9225,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/625f8c345606ed0f3a141dfb88f4116f0e22978e",
                 "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e",
+=======
+            "version": "4.8.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "be067d6105286b74272facefc2697038f8807b77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be067d6105286b74272facefc2697038f8807b77",
+                "reference": "be067d6105286b74272facefc2697038f8807b77",
+>>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -9104,7 +9295,11 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
             "time": "2015-10-23 06:48:33"
+=======
+            "time": "2015-10-14 13:49:40"
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -9161,6 +9356,7 @@
                 "xunit"
             ],
             "time": "2015-10-02 06:51:40"
+<<<<<<< HEAD
         },
         {
             "name": "phpxmlrpc/phpxmlrpc",
@@ -9197,6 +9393,8 @@
                 "xmlrpc"
             ],
             "time": "2015-04-19 00:17:47"
+=======
+>>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "sebastian/comparator",
