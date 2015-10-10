@@ -44,8 +44,13 @@ class ChannelBasedCalculator implements CalculatorInterface
     public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
     {
         $currentChannel = $this->channelContext->getChannel();
+        $calculatorConfiguration = $subject->getPricingConfiguration();
 
-        return $subject->getPricingConfiguration()[$currentChannel->getId()];
+        if (!isset($calculatorConfiguration[$currentChannel->getId()])) {
+            return $subject->getPrice();
+        }
+
+        return $calculatorConfiguration[$currentChannel->getId()];
     }
 
 
