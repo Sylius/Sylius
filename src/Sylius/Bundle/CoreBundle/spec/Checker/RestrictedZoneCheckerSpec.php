@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
 
 class RestrictedZoneCheckerSpec extends ObjectBehavior
 {
-    function let(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
+    function let(CustomerContext $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->beConstructedWith($customerContext, $zoneMatcher);
     }

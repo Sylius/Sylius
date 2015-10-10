@@ -14,7 +14,9 @@ namespace spec\Sylius\Bundle\UserBundle\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -22,9 +24,9 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class CustomerContextSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext)
+    function let(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->beConstructedWith($securityContext);
+        $this->beConstructedWith($tokenStorage, $authorizationChecker);
     }
 
     function it_is_initializable()
@@ -32,19 +34,34 @@ class CustomerContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Context\CustomerContext');
     }
 
-    function it_gets_customer_from_currently_logged_user($securityContext, TokenInterface $token, UserInterface $user, CustomerInterface $customer)
-    {
-        $securityContext->getToken()->willReturn($token);
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+    function it_gets_customer_from_currently_logged_user(
+        $authorizationChecker,
+        $tokenStorage,
+        TokenInterface $token,
+        UserInterface $user,
+        CustomerInterface $customer
+    ) {
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+
+        $tokenStorage->getToken()->willReturn($token);
+
         $token->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $this->getCustomer()->shouldReturn($customer);
     }
 
-    function it_returns_null_if_user_is_not_logged_in($securityContext)
+    function it_returns_null_if_user_is_not_logged_in_correctly($authorizationChecker, $tokenStorage)
     {
-        $securityContext->getToken()->willReturn(null);
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $tokenStorage->getToken()->willReturn(null);
+
+        $this->getCustomer()->shouldReturn(null);
+    }
+
+    function it_returns_null_if_user_is_not_logged_in($authorizationChecker)
+    {
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(false);
 
         $this->getCustomer()->shouldReturn(null);
     }

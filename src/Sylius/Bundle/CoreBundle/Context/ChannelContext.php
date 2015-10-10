@@ -15,8 +15,6 @@ use Sylius\Component\Channel\Context\ChannelContext as BaseChannelContext;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Core\Channel\ChannelResolverInterface;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-
 
 /**
  * Core channel context, which is aware of multiple channels.
@@ -46,6 +44,7 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
         if (null === $this->channel) {
             $this->channel = $this->channelResolver->resolve();
         }
+
         return $this->channel;
     }
 
@@ -54,7 +53,7 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
      */
     public function onKernelRequest(KernelEvent $event)
     {
-        if ($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) {
+        if ($event->isMasterRequest()) {
             $this->channel = $this->channelResolver->resolve($event->getRequest()->getHost());
         }
     }

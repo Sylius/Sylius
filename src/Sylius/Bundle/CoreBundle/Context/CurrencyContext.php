@@ -13,11 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Core currency context, which is aware of multiple channels.
@@ -34,14 +34,15 @@ class CurrencyContext extends BaseCurrencyContext
     protected $channelContext;
 
     /**
-     * @param StorageInterface         $storage
+     * @param StorageInterface $storage
+     * @param CustomerContext $customerContext
      * @param SettingsManagerInterface $settingsManager
-     * @param ObjectManager            $customerManager
-     * @param ChannelContextInterface  $channelContext
+     * @param ObjectManager $customerManager
+     * @param ChannelContextInterface $channelContext
      */
     public function __construct(
         StorageInterface $storage,
-        CustomerContextInterface $customerContext,
+        CustomerContext $customerContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $customerManager,
         ChannelContextInterface $channelContext
@@ -67,7 +68,8 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function getCurrency()
     {
-        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrency()) {
+        $customer = $this->customerContext->getCustomer();
+        if ($customer instanceof CustomerInterface) {
             return $customer->getCurrency();
         }
 
@@ -81,10 +83,13 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function setCurrency($currency)
     {
-        if (null === $customer = $this->customerContext->getCustomer()) {
+        $customer = $this->customerContext->getCustomer();
+        if (!$customer instanceof CustomerInterface) {
             $channel = $this->channelContext->getChannel();
 
-            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
+            $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
+
+            return;
         }
 
         $customer->setCurrency($currency);

@@ -13,8 +13,8 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -29,7 +29,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener');
     }
 
-    function let(CustomerContextInterface $customerContext)
+    function let(CustomerContext $customerContext)
     {
         $this->beConstructedWith($customerContext);
     }
