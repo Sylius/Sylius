@@ -1,0 +1,7 @@
+sylius_review_product:
+    pattern: /p/{slug}/product_review
+    methods:  [POST]
+    defaults:
+        _controller: sylius.controller.frontend.product_review:createWithAjaxAction
+        _sylius:
+            permission: false

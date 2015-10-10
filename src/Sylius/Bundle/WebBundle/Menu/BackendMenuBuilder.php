@@ -51,6 +51,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addSupportMenu($menu, $childOptions, 'main');
         $this->addContentMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'main');
+        $this->addReviewsMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
             'route' => 'sylius_homepage'
@@ -91,6 +92,8 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addCustomerMenu($menu, $childOptions, 'sidebar');
         $this->addSupportMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
+        $this->addReviewsMenu($menu, $childOptions, 'sidebar');
+
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_SIDEBAR, new MenuBuilderEvent($this->factory, $menu));
@@ -362,6 +365,24 @@ class BackendMenuBuilder extends MenuBuilder
         if (!$child->hasChildren()) {
             $menu->removeChild('sales');
         }
+    }
+
+    /**
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    public function addReviewsMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('review', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.review', $section)))
+        ;
+
+        $child->addChild('reviews', array(
+            'route'           => 'sylius_backend_product_review_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-pencil'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_review', $section)));
     }
 
     /**

@@ -1,0 +1,47 @@
+{
+    "name": "sylius/review",
+    "type": "library",
+    "description": "Review system, for commenting and rating shop components.",
+    "keywords": ["shop", "ecommerce", "review", "rating"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Mateusz Zalewski",
+            "email": "mateusz.zalewski@lakion.com"
+        },
+        {
+            "name": "Daniel Richter",
+            "email": "nexyz9@gmail.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Review\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Review\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.16-dev"
+        }
+    }
+}

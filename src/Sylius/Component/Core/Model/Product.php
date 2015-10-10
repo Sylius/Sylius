@@ -16,42 +16,33 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
- * Sylius core product entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Product extends BaseProduct implements ProductInterface
 {
     /**
-     * Variant selection method.
-     *
      * @var string
      */
     protected $variantSelectionMethod;
 
     /**
-     * Taxons.
-     *
      * @var Collection|BaseTaxonInterface[]
      */
     protected $taxons;
 
     /**
-     * Tax category.
-     *
      * @var TaxCategoryInterface
      */
     protected $taxCategory;
 
     /**
-     * Shipping category.
-     *
      * @var ShippingCategoryInterface
      */
     protected $shippingCategory;
@@ -64,15 +55,10 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
-     * Channels in which this product is available.
-     *
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -80,6 +66,7 @@ class Product extends BaseProduct implements ProductInterface
         $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }

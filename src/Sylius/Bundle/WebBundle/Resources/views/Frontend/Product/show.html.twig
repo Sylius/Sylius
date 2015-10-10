@@ -12,6 +12,9 @@
     <div class="col-md-9">
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+        {% if product.averageRating %}
+        <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
+        {% endif %}
     </div>
 </div>
 {% if product.images|length > 0 %}
@@ -121,4 +124,22 @@
     </div>
 </form>
 </div>
+
+<hr />
+
+<div>
+    <h3>{{ 'sylius.review.header'|trans }}</h3>
+    {% render(url("sylius_partial_product_review_list", { 'slug': product.slug, limit: 3 })) %}
+    <hr />
+    {% render(url("sylius_partial_product_review_form", { 'slug': product.slug })) %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/backend_review.js'
+    'bundles/syliusreview/js/sylius-review.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

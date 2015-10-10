@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\Customer as BaseCustomer;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Customer extends BaseCustomer implements CustomerInterface
+class Customer extends BaseCustomer implements CustomerInterface, ProductReviewerInterface
 {
     /**
      * @var string

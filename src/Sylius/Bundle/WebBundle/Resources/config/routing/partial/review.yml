@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_partial_product_review_list:
+    pattern: /{slug}
+    defaults:
+        _controller: sylius.controller.frontend.product_review:indexAction
+        _sylius:
+            paginate: false
+            limit: $limit
+            sorting:
+                createdAt: desc
+            filterable: true
+            criteria: { 'reviewSubject': $product, 'status': 'accepted' }
+            template: 'SyliusWebBundle:Frontend/Review:_list.html.twig'
+            permission: false
+
+sylius_partial_product_review_form:
+    pattern: /{slug}/new
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.product_review:createAction
+        _sylius:
+            template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
+            permission: false

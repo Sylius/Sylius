@@ -231,6 +231,8 @@ sylius:
             index: Redirect routes
         report:
             index: Reports
+        review:
+            index: Reviews
         route:
             index: Routes
         sales: Sales
@@ -616,6 +618,21 @@ sylius:
         no_results: There are no redirect routes to display.
         title: Title
         update_header: Editing redirect route
+    review:
+        create: New review
+        index: Product reviews
+        manage: Manage reviews
+        no_reviews: There are no reviews.
+        id: ID
+        subject: Subject
+        title: Title
+        status: Status
+        rating: Rating
+        author: Author
+        guest: Guest
+        created_at: Created at
+        details: Review details
+        editing: Editing review
     shipment:
         ship: Ship
         created_at: Created at
@@ -738,6 +755,7 @@ sylius:
         variants: Variants
         price: Retail price
         attributes: Attributes
+        rating: Rating
         restricted_zone: Restricted zone
         remove_attribute: Remove attribute
         shipping_category: Shipping category

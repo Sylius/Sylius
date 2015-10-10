@@ -69,9 +69,11 @@ sylius:
                 menus: Menus
                 payment_methods: Payment methods
                 payments: Payments
+                product_review: Product reviews
                 products: Products
                 promotions: Promotions
                 report: Reports
+                review: Reviews
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders

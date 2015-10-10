@@ -1,0 +1,23 @@
+winzou_state_machine:
+    sylius_review:
+        class:         %sylius.model.product_review.class%
+        property_path: status
+        graph:         sylius_product_review
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new:      ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            accept:
+                from: [new]
+                to:   accepted
+            reject:
+                from: [new]
+                to:   rejected
+        callbacks:
+            after:
+                update_review_subject_average_price:
+                    on: 'accept'
+                    do: [@sylius.review.updater.reviewable_average_rating, updateFromReview]
+                    args: ['object']

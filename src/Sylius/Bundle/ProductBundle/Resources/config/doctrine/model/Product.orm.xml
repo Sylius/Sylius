@@ -55,6 +55,12 @@
             </join-table>
         </many-to-many>
 
+        <one-to-many field="reviews" target-entity="Sylius\Component\Product\Model\ProductReview" mapped-by="reviewSubject">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
