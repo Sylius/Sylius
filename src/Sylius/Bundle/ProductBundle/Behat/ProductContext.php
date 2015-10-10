@@ -320,10 +320,12 @@ class ProductContext extends DefaultContext
         $calculatorConfiguration = $this->getConfiguration($data['calculator configuration']);
 
         $finalCalculatorConfiguration = array();
-        foreach ($calculatorConfiguration as $channelCode => $price) {
-            $channel = $this->getRepository('channel')->findOneBy(array('code' => $channelCode));
+        $channelRepository = $this->getRepository('channel');
 
-            $finalCalculatorConfiguration[$channel->getId()] = $price * 100;
+        foreach ($calculatorConfiguration as $channelCode => $price) {
+            $channel = $channelRepository->findOneBy(array('code' => $channelCode));
+
+            $finalCalculatorConfiguration[$channel->getId()] = (int) round($price * 100);
         }
 
         return $finalCalculatorConfiguration;

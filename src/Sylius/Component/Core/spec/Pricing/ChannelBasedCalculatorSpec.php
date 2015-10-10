@@ -36,14 +36,31 @@ class ChannelBasedCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
     }
 
-    function it_calculates_subject_price_based_on_current_channel(PriceableInterface $subject, ChannelInterface $channel, $channelContext)
-    {
-        $channelContext->getChannel()->willReturn($channel)->shouldBeCalled();
-        $channel->getId()->willReturn(1)->shouldBeCalled();
+    function it_calculates_subject_price_based_on_current_channel(
+        $channelContext,
+        ChannelInterface $channel,
+        PriceableInterface $subject
+    ) {
+        $channelContext->getChannel()->willReturn($channel);
+        $channel->getId()->willReturn(1);
 
-        $subject->getPricingConfiguration()->willReturn(array(1 => 1400))->shouldBeCalled();
+        $subject->getPricingConfiguration()->willReturn(array(1 => 1400));
 
         $this->calculate($subject, array(), array())->shouldReturn(1400);
+    }
+
+    function it_returns_defaul_price_if_current_channel_price_is_not_configured(
+        $channelContext,
+        ChannelInterface $channel,
+        PriceableInterface $subject
+    ) {
+        $channelContext->getChannel()->willReturn($channel);
+        $channel->getId()->willReturn(1);
+
+        $subject->getPricingConfiguration()->willReturn(array(2 => 1400));
+        $subject->getPrice()->willReturn(2000);
+
+        $this->calculate($subject, array(), array())->shouldReturn(2000);
     }
 
     function it_has_type()
