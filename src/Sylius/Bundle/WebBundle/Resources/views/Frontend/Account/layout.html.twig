@@ -12,5 +12,12 @@
 {% endblock %}
 
 {% block sidebar %}
-{{ knp_menu_render('sylius.frontend.account', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {{ knp_menu_render('sylius.frontend.account', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+    {% else %}
+        <a href="{{ path('sylius_homepage') }}" class="btn btn-default">
+            <i class="icon-arrow-left icon-large"></i>&nbsp;
+            <span>{{ 'sylius.back_to_shop'|trans }}</span>
+        </a>
+    {% endif %}
 {% endblock sidebar %}

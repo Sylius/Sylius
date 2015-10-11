@@ -39,20 +39,25 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
     }
 
-    function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder)
+    function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder, CartInterface $cart)
     {
-        $builder->add('security', 'sylius_checkout_security')->willReturn($builder)->shouldBeCalled();
-        $builder->add('addressing', 'sylius_checkout_addressing')->willReturn($builder)->shouldBeCalled();
-        $builder->add('shipping', 'sylius_checkout_shipping')->willReturn($builder)->shouldBeCalled();
-        $builder->add('payment', 'sylius_checkout_payment')->willReturn($builder)->shouldBeCalled();
-        $builder->add('finalize', 'sylius_checkout_finalize')->willReturn($builder)->shouldBeCalled();
-        $builder->add("purchase", "sylius_checkout_purchase")->willReturn($builder)->shouldBeCalled();
+        $cart->getNumber()->willReturn('000000001');
 
-        $builder->setDisplayRoute('sylius_checkout_display')->willReturn($builder)->shouldBeCalled();
-        $builder->setForwardRoute('sylius_checkout_forward')->willReturn($builder)->shouldBeCalled();
+        $builder->add('security', 'sylius_checkout_security')->willReturn($builder);
+        $builder->add('addressing', 'sylius_checkout_addressing')->willReturn($builder);
+        $builder->add('shipping', 'sylius_checkout_shipping')->willReturn($builder);
+        $builder->add('payment', 'sylius_checkout_payment')->willReturn($builder);
+        $builder->add('finalize', 'sylius_checkout_finalize')->willReturn($builder);
+        $builder->add('purchase', 'sylius_checkout_purchase')->willReturn($builder);
 
-        $builder->setRedirect('sylius_homepage')->willReturn($builder)->shouldBeCalled();
-        $builder->validate(Argument::any())->willReturn($builder)->shouldBeCalled();
+        $builder->setDisplayRoute('sylius_checkout_display')->willReturn($builder);
+        $builder->setForwardRoute('sylius_checkout_forward')->willReturn($builder);
+
+        $builder->setRedirect('sylius_order_track')->willReturn($builder);
+        $builder->setRedirectParams(array(
+            'number' => '000000001'
+        ))->willReturn($builder);
+        $builder->validate(Argument::any())->willReturn($builder);
 
         $this->build($builder);
     }

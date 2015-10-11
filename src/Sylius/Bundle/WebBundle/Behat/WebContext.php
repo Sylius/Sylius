@@ -462,7 +462,13 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $order = $this->findOneBy('order', array('number' => $number));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $order->getNumber())));
+        if ('tracking' === $action) {
+            $route = 'sylius_order_track';
+        } else {
+            $route = 'sylius_account_order_'.$action;
+        }
+
+        $this->getSession()->visit($this->generatePageUrl($route, array('number' => $order->getNumber())));
     }
 
     /**
@@ -471,7 +477,13 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $number)));
+        if ('tracking' === $action) {
+            $route = 'sylius_order_track';
+        } else {
+            $route = 'sylius_account_order_'.$action;
+        }
+
+        $this->assertSession()->addressEquals($this->generatePageUrl($route, array('number' => $number)));
     }
 
     /**

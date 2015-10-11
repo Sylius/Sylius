@@ -42,12 +42,8 @@ Feature: Checkout finalization
           And I select the "Dummy" radio button
           And I press "Continue"
          When I click "Place order"
-         Then I should be on the store homepage
+         Then I should be on the order tracking page for 000000001
           And I should see "Thank you for your order!"
-          And I am on my account orders page
-          And I should see "All your orders"
-          And I should see 1 orders in the list
-          And I should see "000000001"
 
     Scenario: Placing the order as Guest without email address
         Given I am not logged in
@@ -85,5 +81,5 @@ Feature: Checkout finalization
           And I select the "Dummy" radio button
           And I press "Continue"
          When I click "Place order"
-         Then I should be on the store homepage
+         Then I should be on the order tracking page for 000000001
           And I should see "Thank you for your order!"

@@ -22,6 +22,7 @@
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.listener.customer_context.class">Sylius\Bundle\UserBundle\EventListener\CustomerContextListener</parameter>
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
@@ -327,6 +328,10 @@
         </service>
         <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setCustomerAddressing" />
+        </service>
+        <service id="sylius.listener.customer_context" class="%sylius.listener.customer_context.class%">
+            <argument type="service" id="sylius.context.customer" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setCustomerContextFromSubject" />
         </service>
         <service id="sylius.listener.insufficient_stock_exception" class="%sylius.listener.insufficient_stock_exception.class%">
             <argument type="service" id="router" />

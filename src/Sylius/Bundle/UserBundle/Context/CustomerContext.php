@@ -14,6 +14,10 @@ namespace Sylius\Bundle\UserBundle\Context;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -22,29 +26,70 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class CustomerContext implements CustomerContextInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    private $securityContext;
+    protected $tokenStorage;
 
     /**
-     * @param SecurityContextInterface $securityContext
+     * @var AuthorizationCheckerInterface
      */
-    public function __construct(SecurityContextInterface $securityContext)
-    {
-        $this->securityContext = $securityContext;
+    protected $authorizationChecker;
+
+    /**
+     * @var SessionInterface
+     */
+    protected $session;
+
+    /**
+     * @param TokenStorageInterface         $tokenStorage
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param SessionInterface              $session
+     */
+    public function __construct(
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker,
+        SessionInterface $session
+    ) {
+        $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->session = $session;
     }
 
     /**
-     * Gets customer based on currently logged user.
+     * Gets customer based on currently logged user or from session (if user is not authenticated).
      *
      * @return CustomerInterface|null
      */
     public function getCustomer()
     {
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')
-            && $this->securityContext->getToken()->getUser() instanceof UserInterface
-        ) {
-            return $this->securityContext->getToken()->getUser()->getCustomer();
+        $user = $this->getUser();
+
+        if (null !== $user && $user instanceof UserInterface) {
+            return $user->getCustomer();
+        }
+
+        return $this->session->get('customer');
+    }
+
+    /**
+     * Stores customer in session.
+     *
+     * @param CustomerInterface $customer
+     */
+    public function setCustomer(CustomerInterface $customer)
+    {
+        $this->session->set('customer', $customer);
+    }
+
+    /**
+     * @return UserInterface|null
+     */
+    protected function getUser()
+    {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            if ($token = $this->tokenStorage->getToken()) {
+                return $token->getUser();
+            }
         }
 
         return null;
