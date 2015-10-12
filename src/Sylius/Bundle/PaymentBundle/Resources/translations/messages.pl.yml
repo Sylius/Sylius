@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   form:
     credit_card:
@@ -22,7 +20,7 @@ sylius:
         pending: Oczekujący
         processing: Przetwarzany
         unknown: Nieznany
-        void: Void
+        void: Nieważne
         cancelled: Anulowane
         refunded: Zwrócone
     payment_method:
