@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
   product:
     sku:
@@ -21,3 +19,33 @@ sylius:
   option:
     name:
       not_blank: Prosím, zadajte názov voľby.
+      min_length: 'Názov možnosti musí obsahovať aspoň 1 znak.|Názov možnosti musí obsahovať aspoň {{ limit }} znakov.'
+      max_length: 'Názov možnosti nesmie byť dlhší ako 1 znak.|Názov možnosti nesmie byť dlhší ako {{ limit }} znakov.'
+    presentation:
+      not_blank: Prosím, zadajte prezentácie názov možnosti.
+      min_length: 'Prezentáčný názov musí mať aspoň 1 znak. | Prezentáčný názov musí byť dlhý aspoň {{ limit }} znakov.'
+      max_length: 'Prezentáčný názov nesmie byť dlhší ako 1 znak. | Prezentáčný názov nesmie byť dlhší ako {{ limit }} znakov.'
+    values:
+      min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre možnost. | Prosím pridajte aspoň {{ limit }} hodnôt pre možnost.'
+  option_value:
+    value:
+      not_blank: Prosím, vyplňte hodnotu.
+  property:
+    name:
+      not_blank: Zadajte názov vlastnosti.
+      min_length: 'Názov vlastnosti musí byť mať aspoň 1 znak. | Názov vlastnosti musí mať aspoň {{ limit }} znakov.'
+      max_length: 'Názov vlastnosti nesmie byť dlhší než 1 znak. | Názov vlastnosti nesmie byť dlhší než {{ limit }} znakov.'
+    presentation:
+      not_blank: Zadajte prezentačny názov vlastnosti.
+      min_length: 'Prezentačný názov musí byť mať aspoň 1 znak. | Prezentačný názov musí mať aspoň {{ limit }} znakov.'
+      max_length: 'Prezentačný názov nesmie byť dlhší než 1 znak. | Prezentačný názov nesmie byť dlhší než {{ limit }} znakov.'
+  product_property:
+    property:
+      not_blank: Vyberte vlastnosť.
+    value:
+      not_blank: Zadajte hodnotu pre vlastnosť.
+  prototype:
+    name:
+      not_blank: Zadajte názov prototypu.
+      min_length: 'Názov prototypu musí byť mať aspoň 1 znak. | Názov prototypu musí mať aspoň {{ limit }} znakov.'
+      max_length: 'Názov prototypu nesmie byť dlhší než 1 znak. | Názov prototypu nesmie byť dlhší než {{ limit }} znakov.'

@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 email:
   order_confirmation:
     subject: Predmet e-mailu pri potvrdení objednávky
@@ -466,13 +464,27 @@ sylius:
     description: Popis
     generate_variants: Generaovať varianty
     index_by_taxon_header: 'Produkty <small>kategorizované pod taxonom "%taxon%"</small>'
+    index_header: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
+    manage: Spravovať produkty
     name: Názov
     no_description: '<i>Žiadny popis</i>'
+    no_images: Pre produkt neexistujú žiadne obrázky
+    no_options: Pre produkt neexistujú žiadne možnosti
+    no_properties: Pre produkt nie sú definovane žiadne vlastnosti
+    no_results: Neexistujú žiadne produkty na zobrazenie.
+    no_shipping_category: Žiadna kategória doručenia
+    no_short_description: '<i>Žiadny stručný popis</i>'
     no_sku: Žiadny Kód
+    no_tax_category: Žiadna kategória pre daň
+    no_taxons: Pre produkt neexistujú žiadne kategórie
     options: Možnosti
+    price: Predajná cena
     properties: Vlastnosti
     restricted_zone: Zóna s obmedzeným prístupom
-    shipping_category: Prepravná kategória
+    shipping_category: Kategória doručenia
+    show: Zobraziť viac
+    show_header: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
+    show_in_store: zobraziť v obchode
     sku: Kód
     stock: Aktuálne skladom
     tabs:
@@ -482,85 +494,171 @@ sylius:
       product: Produkt
       properties: Vlastnosti
     tax_category: Daňová kategória
+    unavailable: Nedostupný
     update_header: Úprava produktu
     updated_at: Posledná aktualizácia
     variant_selection_method: Metóda výberu variantu
+    view_details: 'Zobraziť podrobnosti pre %product%.'
+  product_not_available_in_zone: Nedostupné vo vašej krajine
   promotion:
     actions: Akcie
+    add_action: Pridať podmienku
+    add_rule: Pridať pravidlo
+    coupon_based: Používať kupóny?
+    create: Vytvorenie propagácie
+    create_header: Nové propagácia
     created_at: Vytvorené
     description: Popis
     ends_at: Končí
+    general_info: Všeobecné informácie
     id: ID
+    index_header: Aktuálne propagácie
+    manage: Spravovať propagácie
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne propagácie.
     rules: Pravidlá
+    show_header: Detail propagácie
     starts_at: Začína
+    update_header: Upraviť propagáciu
     updated_at: Posledná aktualizácia
     usage_limit: Limit použitia
+    used: Použité
   promotion_action:
     configuration: Konfigurácia
     type: Typ
   promotion_coupon:
+    create: Pridať kupón
+    create_header: Vytvoriť nový kupón
+    generate: Vygenerovať kupóny
+    generate_header: Generujú sa kupóny
+    index: Zoznam kupónov
     index_header: Kupóny
+    no_results: Neexistujú žiadne kupóny na zobrazenie.
+    total_results:
+      Total: '%total%'
+    update_header: Upraviť kupón
   promotion_rule:
     configuration: Konfigurácia
     type: Typ
   property:
+    add_choice: Pridať možnosť
+    create: Vytvoriť vlastnosť
+    create_header: Nová vlastnosť produktu
+    index_header: Vlastnosti produktu
+    manage: Spravovať vlastnosti
     name: názov
+    no_results: Nie sú nakonfigurované žiadne vlastnosti.
     presentation: prezentácia
     type: typ
+    update_header: Úprava vlastností
     updated_at: Posledná aktualizácia
   prototype:
+    build: Vygenerovať prototyp
+    build_header: Vytváram produkt z prototypu
+    create: Vytvoriť prototyp
+    create_header: Nový prototyp
     index_header: Prototypy produktov
     name: názov
+    no_results: Nie sú definovanéžiadne prototypy.
+    options: možnosti
+    properties: vlastnosti
+    update_header: Úpravu prototypu
     updated_at: Posledná aktualizácia
+  province:
+    provinces: Provincie
+  remember_me: Zapamätať si ma?
   save_changes: Uložiť zmeny
   search: Vyhľadať
   settings:
     general_header: Základné nastavenia
     taxation_header: Nastavenie zdaňovania
+  shipment_category:
+    manage: Spravovať kategórie dopravy
   shipping_address: Doručovacia adresa
   shipping_category:
+    create: Vytvoriť kategóriu doručenia
+    create_header: Nová kategória doručenia
     id: ID
     index_header: Kategórie doručenia
+    manage: Spravovať kategórie doručenia
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne kategórie doručenia.
+    update_header: Úprava kategórie doručenia
     updated_at: Posledná aktualizácia
   shipping_method:
     calculator: Kalkulačka
     category: Kategória
+    create: Vytvoriť spôsob dopravy
     create_header: Nový spôsob doručenia
     enabled: Povolený?
     id: ID
     index_header: Spôsoby doručenia
+    manage: Správa spôsoby dopravy
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne spôsoby dopravy.
+    show_header: Podrobnosti spôsobu dopravy
+    update_header: Úprava spôsobu dopravy
     updated_at: Posledná aktualizácia
     zone: Zóna
+  shop_by: Nakupovať podľa
   show: detail
   show_all: Zobraziť všetky
+  show_deleted: Zobraziť odstránené
   stockable:
+    index_header: 'Inventár <small> prehľad skladových zásob</small>'
     name: názov
+    no_results: Neexistujú žiadne položky skladových zásob.
+    on_hand: na sklade
+    on_hold: pozastavené
     sku: kód
     updated_at: posledná aktualizácia
   tax_category:
+    create: Vytvoriť daňovú kategoriu
+    create_header: Nová daňová kategoria
     description: Popis
     id: ID
     index_header: Kategórie zdaňovania
+    manage: Správovať daňové kategorie
     name: Názov
+    no_description: Žiadny popis
+    no_results: Nie sú nakonfigurované žiadne daňové kategorie.
+    update_header: Úprava daňovej kategórie
     updated_at: Posledná aktualizácia
   tax_rate:
     amount: Suma
     calculator: Kalkulačka
     category: Kategória
+    create: Vytvoriť sadzbu dane
+    create_header: Nová sadzba dane
     included_in_price: V cene?
     index_header: Daňové sadzby
+    manage: Spravovať sadzby dane
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne daňové sadzby.
+    show_header: Podrobnosti sadzby dane
+    update_header: Úprava sadzby dane
     updated_at: Posledná aktualizácia
     zone: Zóna
   taxon:
+    create: Vytvoriť kategóriu
+    create_header: Nová kategória
     image: Vybrať obrázok
     name: Názov
+    no_image: Neexistuje žiadny obrázok pre kategoriu
+    no_results: Nie sú žiadne kategórie na zobrazenie.
+    product_index_header: 'Produkty kategorizované ako "%name%"'
+    update_header: Úprava kategórie
   taxonomy:
+    create: Vytvoriť triedenie
+    create_header: Nové triedenie
     image: Vybrať obrázok
+    index_header: 'Kategorizácia <small>tu vidíte definované tridenia</small>'
+    manage: Spravovať triedenia
     name: Názov
+    no_image: Neexistuje žiadny obrázok pre triedenie
+    no_results: Nie sú definované žiadne triedenia.
+    show_header: 'Triedenie <small><strong>%name%</strong></small>'
+    update_header: Úprava triedenia
   total_quantity: Celkové množstvo
   unknown: Neznáme
   user:

@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 auto: automaticky
 route: cesta
 sylius:
@@ -9,7 +7,7 @@ sylius:
       action_name: Názov akcie
       id: Id
     imagine_block:
-      parent: Rodič
+      parent: Nadradená kategória
       internal_name: Inerný názov
       slideshow_small: Slideshow Veľký (celá šírka)
       slideshow_medium: Slideshow Stredný (obsah)
@@ -20,7 +18,7 @@ sylius:
       display_children: Zobraziť potomkov
       label: Označenie
       name: Názov
-      parent: Rodič
+      parent: Nadradená kategória
       route: Cesta
       uri: URI
     menu_block:
@@ -51,23 +49,23 @@ sylius:
     route:
       content: Obsah
       name: Názov
-      parent: Rodič
+      parent: Nadradená kategória
     simple_block:
       body: Obsah
       internal_name: Interný názov
-      parent: Rodič
+      parent: Nadradená kategória
       title: Názov
     slideshow_block:
       childrens: Potomkovia
       internal_name: Inetrný názov
-      parent: Rodič
+      parent: Nadradená kategória
       title: Názov
     static_content:
       body: Obsah
       id: Id
       internal_name: Interný názov
       menu_nodes: Uzly menu
-      parent: Rodič
+      parent: Nadradená kategória
       publish_end_date: Dátum konca uverejnenia
       publish_start_date: Dátum začiatku uverejnenia
       publishable: Zverejniteľné
