@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Currency\Importer\ImporterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

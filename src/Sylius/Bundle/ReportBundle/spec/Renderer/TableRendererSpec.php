@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\ReportBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Templating\EngineInterface;
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

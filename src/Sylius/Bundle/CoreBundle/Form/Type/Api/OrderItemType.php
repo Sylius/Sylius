@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Order item form type for api creation.

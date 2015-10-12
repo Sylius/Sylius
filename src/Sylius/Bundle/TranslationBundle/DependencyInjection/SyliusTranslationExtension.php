@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\TranslationBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

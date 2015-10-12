@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Faker\Factory as FakerFactory;

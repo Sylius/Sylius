@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\InstallerBundle\Checker;
 
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;

@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

@@ -15,7 +15,6 @@ use Sylius\Bundle\UserBundle\Controller\SecurityController as BaseSecurityContro
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * Backend security controller.

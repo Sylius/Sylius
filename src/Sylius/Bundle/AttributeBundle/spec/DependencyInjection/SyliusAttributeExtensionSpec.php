@@ -12,10 +12,9 @@
 namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Prophecy\Argument;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
-use Sylius\Component\Currency\Context\CurrencyContext;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

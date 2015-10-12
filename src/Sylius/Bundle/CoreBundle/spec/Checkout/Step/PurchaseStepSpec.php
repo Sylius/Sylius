@@ -19,7 +19,6 @@ use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use spec\Sylius\Bundle\CoreBundle\Fixture\RequestStack;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;

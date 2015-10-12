@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ReportBundle;
 
+use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterDataFetcherPass;
+use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterRenderersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterRenderersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterDataFetcherPass;
 
 /**
  * Report component for Symfony2 applications.

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\UserBundle\OAuth;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
@@ -20,7 +21,6 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class UserProviderSpec extends ObjectBehavior
