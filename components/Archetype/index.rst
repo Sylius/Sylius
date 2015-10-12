@@ -10,9 +10,9 @@ attach them when creating a new object. This is called an _archetype_ and a mode
 implementing a simple interface.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   model
-   implementing_subject_interface
-   summary
+   basic_usage
+   models
+   interfaces
