@@ -10,13 +10,16 @@
 
 namespace Sylius\Component\Archetype\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ArchetypeTranslation extends AbstractTranslation implements ArchetypeTranslationInterface
+class ArchetypeTranslation implements ArchetypeTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * @var mixed
      */

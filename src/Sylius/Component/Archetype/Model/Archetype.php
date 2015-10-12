@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 
@@ -26,8 +26,12 @@ use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
  * @author Adam Elsodaney <adam.elso@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Archetype extends AbstractTranslatable implements ArchetypeInterface
+class Archetype implements ArchetypeInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -74,8 +78,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
         $this->attributes = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
-
-        parent::__construct();
+        $this->__ttConstruct();
     }
 
     public function __toString()

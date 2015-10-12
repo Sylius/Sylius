@@ -13,14 +13,18 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
+class ShippingMethod implements ShippingMethodInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -70,8 +74,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
 
     public function __construct()
     {
-        parent::__construct();
-
+        $this->__ttConstruct();
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

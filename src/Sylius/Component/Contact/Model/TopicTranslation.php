@@ -11,15 +11,18 @@
 
 namespace Sylius\Component\Contact\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
  * Contact topic translation model.
  *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicTranslation extends AbstractTranslation implements TopicTranslationInterface
+class TopicTranslation implements TopicTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * Category id.
      *

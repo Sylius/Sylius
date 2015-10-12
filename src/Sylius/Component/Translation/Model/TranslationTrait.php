@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Sylius package.
  *
@@ -14,7 +13,7 @@ namespace Sylius\Component\Translation\Model;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class AbstractTranslation implements TranslationInterface
+trait TranslationTrait
 {
     /**
      * @var string

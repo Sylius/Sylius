@@ -11,13 +11,16 @@
 
 namespace Sylius\Component\Shipping\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface
+class ShippingMethodTranslation implements ShippingMethodTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * @var mixed
      */

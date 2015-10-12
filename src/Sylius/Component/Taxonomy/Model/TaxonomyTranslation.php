@@ -11,13 +11,16 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonomyTranslation extends AbstractTranslation implements TaxonomyTranslationInterface
+class TaxonomyTranslation implements TaxonomyTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * @var mixed
      */

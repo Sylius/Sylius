@@ -11,13 +11,18 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
 /**
+ * Product option translation default implementation.
+ *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class OptionTranslation extends AbstractTranslation implements OptionTranslationInterface
+class OptionTranslation implements OptionTranslationInterface, TranslationInterface
 {
+    use TranslationTrait;
+
     /**
      * @var mixed
      */

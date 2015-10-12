@@ -11,15 +11,18 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Document;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
  * Foo translatable document.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class TranslatableFoo extends AbstractTranslatable
+class TranslatableFoo implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     public static function getTranslationClass()
     {
         return 'spec\Sylius\Bundle\ResourceBundle\Fixture\Document\Foo';

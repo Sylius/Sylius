@@ -5,9 +5,10 @@ namespace spec\Sylius\Component\Translation\Model;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationTrait;
 
-class AbstractTranslationSpec extends ObjectBehavior
+class TranslationTraitSpec extends ObjectBehavior
 {
     function let()
     {
@@ -29,11 +30,11 @@ class AbstractTranslationSpec extends ObjectBehavior
         TranslatableInterface $translatable1,
         TranslatableInterface $translatable2
     ) {
-        $translatable1->addTranslation(Argument::type('Sylius\Component\Translation\Model\AbstractTranslation'));
+        $translatable1->addTranslation(Argument::type('Sylius\Component\Translation\Model\TranslationInterface'));
         $this->setTranslatable($translatable1);
 
-        $translatable1->removeTranslation(Argument::type('Sylius\Component\Translation\Model\AbstractTranslation'));
-        $translatable2->addTranslation(Argument::type('Sylius\Component\Translation\Model\AbstractTranslation'));
+        $translatable1->removeTranslation(Argument::type('Sylius\Component\Translation\Model\TranslationInterface'));
+        $translatable2->addTranslation(Argument::type('Sylius\Component\Translation\Model\TranslationInterface'));
         $this->setTranslatable($translatable2);
     }
 
@@ -44,6 +45,7 @@ class AbstractTranslationSpec extends ObjectBehavior
     }
 }
 
-class ConcreteTranslation extends AbstractTranslation
+class ConcreteTranslation implements TranslationInterface
 {
+    use TranslationTrait;
 }

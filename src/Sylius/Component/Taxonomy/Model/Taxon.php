@@ -13,14 +13,18 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Taxon extends AbstractTranslatable implements TaxonInterface
+class Taxon implements TaxonInterface
 {
+    use TranslatableTrait {
+        TranslatableTrait::__construct as private __ttConstruct;
+    }
+
     /**
      * @var mixed
      */
@@ -63,7 +67,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->__ttConstruct();
         $this->children = new ArrayCollection();
     }
 
