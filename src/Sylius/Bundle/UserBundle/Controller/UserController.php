@@ -75,14 +75,14 @@ class UserController extends ResourceController
     {
         $generator = $this->get('sylius.user.token_provider');
 
-        return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
+        return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
         $generator = $this->get('sylius.user.pin_provider');
 
-        return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
+        return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
     public function resetPasswordAction(Request $request, $token)
@@ -115,7 +115,7 @@ class UserController extends ResourceController
         );
     }
 
-    protected function prepereResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
+    protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
         $passwordReset = new PasswordReset();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
