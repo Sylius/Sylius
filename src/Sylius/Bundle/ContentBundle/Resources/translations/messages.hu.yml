@@ -4,8 +4,10 @@
 sylius:
   form:
     imagine_block:
-      parent: Szülő
+      filter: Szűrő
+      image: Kép
       internal_name: Belső név
+      parent: Szülő
     menu:
       name: Név
       parent: Szülő

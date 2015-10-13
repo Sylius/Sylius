@@ -14,7 +14,7 @@ sylius:
       amount: Mokėjimo suma
       method: Apmokėjimo būdas
       state:
-        0: Apmokėjimo būsena
+        header: Apmokėjimo būsena
         checkout: Apmokėjimas
         completed: Baigtas
         failed: Nepavyko
@@ -30,3 +30,6 @@ sylius:
       enabled: Įjungtas?
       gateway: Apmokėjimo kanalas
       name: Pavadinimas
+      fee_calculator:
+        fixed:
+          amount: Suma

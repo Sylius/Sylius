@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Internt navn
       presentation: Presentasjon
+      type: Type

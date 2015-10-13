@@ -11,6 +11,9 @@ sylius:
     group:
       name: Tên
       roles: Vai trò
+    channel:
+      locales: Miền địa phương
+      payment_methods: Phương thức thanh toán
     image:
       file: Hình ảnh
     locale:
@@ -30,6 +33,7 @@ sylius:
       file: Chọn ảnh
     user:
       groups: Nhóm
+      roles: Vai trò
       password: Mật khẩu
     user_filter:
       query: Tìm kiếm

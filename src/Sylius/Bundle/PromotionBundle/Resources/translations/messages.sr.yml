@@ -3,5 +3,8 @@
 
 sylius:
   form:
+    rule:
+      contains_product_configuration:
+        variants: Poroizvodi
     promotion:
       name: Ime

@@ -2,20 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
   address:
     firstname: Förnamn
   breadcrumb:
     group:
       index: Grupper
+    role:
+      index: Roller
   checkout:
     finalize:
       address:
@@ -26,6 +19,19 @@ sylius:
         name: Namn
   country:
     name: Namn
+    enabled: Aktiverad
+  email:
+    code: Kod
+  permission:
+    code: Kod
+  role:
+    code: Kod
+    name: Namn
+    index_header: Roller
+  currency:
+    code: Kod
+    name: Namn
+    enabled: Aktiverad
   form:
     profile:
       firstName: Förnamn
@@ -37,15 +43,22 @@ sylius:
     name: Namn
     sku: SKU
   locale:
+    name: Namn
     code: Kod
     enabled: Aktiverad
   "no": false
   order:
     billing_address: Faktureringsadress
     number: Nummer
+  route:
+    name: Namn
   shipment:
     name: Namn
     sku: SKU
+  channel:
+    code: Kod
+    enabled: Aktiverad
+    name: Namn
   order_item:
     unit_price: Enhetspris
   payment_method:
@@ -57,6 +70,11 @@ sylius:
     tax_category: Momskategori
   promotion:
     name: Namn
+  promotion_coupon:
+    code: Kod
+  report:
+    name: Namn
+    code: Kod
   shipping_category:
     name: Namn
   shipping_method:
@@ -71,11 +89,15 @@ sylius:
     name: Namn
   taxonomy:
     name: Namn
-  user:
+  customer:
     billing_address: Faktureringsadress
     first_name: Förnamn
+    groups: Grupper
   variant:
     sku: SKU
   "yes": true
   zone:
     name: Namn
+    scope: Omfattning
+  contact_request:
+    firstName: Förnamn

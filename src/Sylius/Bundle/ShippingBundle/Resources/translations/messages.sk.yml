@@ -3,30 +3,40 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Počet
     shipment:
       state: Stav
       states:
         checkout: Košík
-        dispatched: Odoslané
         pending: Čakajúca
         ready: Pripravená
         shipped: Odoslané
         returned: Vrátený tovar
+        cancelled: Zrušené
       tracking_code: Sledovací kód
     shipping_calculator:
       flat_rate_configuration:
         amount: Suma
       flexible_rate_configuration:
+        additional_item_cost: Cena za každý ďalší predmet
+        additional_item_limit: Obmedenie na ďalšie predmety
         first_item_cost: Cena prvej položky
       per_item_rate_configuration:
         amount: Suma
       weight_rate_configuration:
+        division: Delenie
+      volume_rate_configuration:
         amount: Suma
+        division: Delenie
     shipping_category:
       description: Popis
       name: Názov
     shipping_method:
       calculator: Kalkulačka
       category: Kategória
+      category_requirement: Podmienka pre kategóriu doručenia
       configuration: Konfigurácia
+      enabled: Povolené
       name: Názov

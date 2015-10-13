@@ -2,24 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  group:
-    name:
-      max: 'Nazwa grupy nie może być dłuższa niż {{ limit }} znaków.'
-      min: 'Nazwa grupy nie może być krótsza niż {{ limit }} znaków.'
-      not_blank: Wprowadź nazwę grupy.
   locale:
     code:
       not_blank: Proszę podać kod ISO języka.
       unique: Ten język jest już skonfigurowany.
-  user:
-    first_name:
-      max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'
-      min: 'Imię nie może mieć mniej niż {{ limit }} znaków.'
-      not_blank: Proszę podać swoje imię.
-    last_name:
-      max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
-      min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
-      not_blank: Proszę wpisać swoje nazwisko.
   product_variant:
     onHand:
       min: 'Dostępna ilość musi być większa niż {{ limit }}.'
@@ -30,7 +16,7 @@ sylius:
 sylius_shipping:
   method:
     zone:
-      not_blank: sylius_shipping.method.zone.not_blank
+      not_blank: Proszę wybrać strefę dla metody wysyłki.
 sylius_taxation:
   rate:
     zone:

@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Vidinis pavadinimas
       presentation: Prezentacija
+      type: Tipas

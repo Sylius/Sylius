@@ -5,27 +5,27 @@ sylius:
   address:
     city:
       max_length: Nazwa miejscowości nie powinna przekraczać 255 znaków.|Nazwa miejscowości nie powinna przekraczać 255 znaków.
-      min_length: Nazwa miejscowości powinna mieć 2 lub więcej znaków|Nazwa miejscowości powinna mieć 2 lub więcej znaków.
-      not_blank: Podaj nazwę miejscowości.
+      min_length: Nazwa miejscowości powinna mieć co najmniej 2 znaki|Nazwa miejscowości powinna mieć co najmniej 2 znaki.
+      not_blank: Proszę podać miejscowość.
     country:
       not_blank: Proszę wybrać kraj.
     first_name:
       max_length: Imię nie powinno przekraczać 255 znaków|Imię nie powinno przekraczać 255 znaków.
-      min_length: Imię powinno mieć 2 lub więcej znaków|Imię powinno mieć 2 lub więcej znaków.
+      min_length: Imię powinno mieć co najmniej 2 znaki|Imię powinno mieć co najmniej 2 znaki.
       not_blank: Proszę podać swoje imię.
     last_name:
       max_length: Nazwisko nie powinno przekraczać 255 znaków|Nazwisko nie powinno przekraczać 255 znaków.
-      min_length: Nazwisko powinno mieć 2 lub więcej znaków|Nazwisko powinno mieć 2 lub więcej znaków.
+      min_length: Nazwisko powinno mieć co najmniej 2 znaki|Nazwisko powinno mieć co najmniej 2 znaki.
       not_blank: Proszę podać swoje nazwisko.
     postcode:
       max_length: Kod pocztowy nie powinien przekraczać 255 znaków|Kod pocztowy nie powinien przekraczać 255 znaków.
-      min_length: Kod pocztowy powinien mieć 2 lub więcej znaków|Kod pocztowy powinien mieć 2 lub więcej znaków.
+      min_length: Kod pocztowy powinien mieć co najmniej 2 znaki|Kod pocztowy powinien mieć co najmniej 2 znaki.
       not_blank: Proszę podać kod pocztowy.
     province:
       valid: Proszę wybrać prawidłowe województwo.
     street:
       max_length: Adres nie powinien przekraczać 255 znaków|Adres nie powinien przekraczać 255 znaków.
-      min_length: Adres powinien mieć 2 lub więcej znaków|Adres powinien mieć 2 lub więcej znaków.
+      min_length: Adres powinien mieć co najmniej 2 znaki|Adres powinien mieć co najmniej 2 znaki.
       not_blank: Proszę podać ulicę.
     not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
   country:
@@ -37,11 +37,11 @@ sylius:
   province:
     name:
       max_length: Nazwa województwa nie powinna przekraczać 255 znaków|Nazwa województwa nie powinna przekraczać 255 znaków.
-      min_length: Nazwa województwa powinna mieć 2 lub więcej znaków|Nazwa województwa powinna mieć 2 lub więcej znaków.
+      min_length: Nazwa województwa powinna mieć co najmniej 2 znaki|Nazwa województwa powinna mieć co najmniej 2 znaki.
       not_blank: Proszę podać nazwę województwa.
   zone:
     members:
-      min_count: 'Proszę podać co najmniej {{ limit }} kraj.'
+      min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
     name:
       max_length: Nazwa strefy nie powinna przekraczać 255 znaków|Nazwa strefy nie powinna przekraczać 255 znaków.
       not_blank: Proszę podać nazwę strefy.

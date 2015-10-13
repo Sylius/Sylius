@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Код
       enabled: Уключана
+      name: Імя

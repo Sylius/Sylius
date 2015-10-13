@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: หมวดหมู่
         exclude: ไม่รวม
+      contains_product_configuration:
+        variants: สินค้า
+        exclude: ไม่รวม
       item_count_configuration:
         count: จำนวน
         equal: เท่ากับ
@@ -23,15 +26,6 @@ sylius:
         equal: เท่ากับ
       nth_order_configuration:
         nth: Nth
-      user_loyality_configuration:
-        time: เวลา
-        unit:
-          days: วัน
-          weeks: สัปดาห์
-          months: เดือน
-          years: ปี
-          0: หน่วย
-        after: ผู้ใช้ที่สร้างขึ้นหลังจากรอบเวลานี้
       shipping_country_configuration:
         country: ประเทศ
       type: ชนิด

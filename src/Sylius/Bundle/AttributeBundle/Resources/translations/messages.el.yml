@@ -5,3 +5,4 @@ sylius:
   form:
     attribute:
       presentation: Παρουσίαση
+      type: Τύπος
