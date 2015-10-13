@@ -5,5 +5,10 @@ sylius:
   form:
     priceable:
       price: Prijs
-      calculator: Prijsstelling
       configuration: Configuratie
+    pricing:
+      volume_based:
+        price: Prijs
+  pricing:
+    volume_based:
+      price: Prijs
