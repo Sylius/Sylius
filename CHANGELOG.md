@@ -32,3 +32,4 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * feature #3622 [BC BREAK] [Shipping] change CalculatorInterface
  * feature [#2822](https://github.com/Sylius/Sylius/pull/2717) [BC BREAK][Translation] Make translatable translation class retrieval static.
  * feature [#2843](https://github.com/Sylius/Sylius/pull/2843) [BC BREAK][CartBundle] Listeners have been renamed to subscribers.
+ * feature [#2803](https://github.com/Sylius/Sylius/pull/2803) [BC BREAK][PaymentBundle] Form registration, missing specs and CS Fixes.
