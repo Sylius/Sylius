@@ -2,6 +2,7 @@
 * :doc:`/components/Archetype/index`
 * :doc:`/components/Attribute/index`
 * :doc:`/components/Cart/index`
+* :doc:`/components/Channel/index`
 * :doc:`/components/Contact/index`
 * :doc:`/components/Currency/index`
 * :doc:`/components/Grid/index`

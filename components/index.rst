@@ -16,6 +16,7 @@ for all aspects of e-commerce.
     Archetype/index
     Attribute/index
     Cart/index
+    Channel/index
     Contact/index
     Currency/index
     Grid/index
