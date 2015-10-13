@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Ad
       description: Açıklama
-      properties: Özellikler
-      available_on: Satışta
+      options: Ayarlar
       meta_keywords: Meta anahtar kelimeleri
       meta_description: Meta açıklama
-    property:
-      name: Dahili isim
-      presentation: Sunum
-    prototype:
+    product_variant:
+      available_on: Mevcut üzerine
+    product_archetype:
       name: Ad
-      properties: Özellikler
+      parent: Üst
+      options: Ayarlar

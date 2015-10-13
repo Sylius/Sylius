@@ -7,6 +7,8 @@ sylius:
       id: ID
     group:
       name: Ime
+    order_filter:
+      payment_state: Stanje plaćanja
     page:
       id: ID
     product_filter:

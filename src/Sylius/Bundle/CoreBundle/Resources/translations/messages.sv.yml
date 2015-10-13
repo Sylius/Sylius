@@ -54,6 +54,10 @@ sylius:
       created_at_to: Till
       number: Beställningsnummer
       shipping_address: Skickas till
+    payment_filter:
+      created_at_from: Från
+      created_at_to: Till
+      number: Beställningsnummer
     shipping_method:
       zone: Zon
     taxon:
@@ -66,5 +70,6 @@ sylius:
       enabled: Aktiverad
       first_name: Förnamn
       groups: Grupper
+      roles: Roller
     variant:
       sku: SKU

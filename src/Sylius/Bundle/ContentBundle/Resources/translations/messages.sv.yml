@@ -3,13 +3,24 @@
 
 sylius:
   form:
+    imagine_block:
+      image: Bild
+      internal_name: Internt namn
     menu:
       name: Namn
     menu_block:
       name: Namn
+    menu_node_block:
+      internal_name: Internt namn
     redirect_route:
       name: Namn
     route:
       name: Namn
+    simple_block:
+      internal_name: Internt namn
+    slideshow_block:
+      internal_name: Internt namn
+    static_content:
+      internal_name: Internt namn
     string_block:
       name: Namn

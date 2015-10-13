@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Interne naam
       presentation: Weergave
+      type: Type

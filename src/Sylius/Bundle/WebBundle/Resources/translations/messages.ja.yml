@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  emails:
+    order_confirmation:
+      subject: ご注文を承りました。
   account:
     address:
       action:
@@ -12,12 +15,9 @@ sylius:
         no_billing: sylius.account.address.default.no_billing
         no_shipping: sylius.account.address.default.no_shipping
         shipping: sylius.account.address.default.shipping
-      empty: sylius.account.address.empty
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
-      email: ""
-      id: ""
       outline: お客様情報の確認と変更を行うことができます。
       since: ご登録日時
       welcome: お客様専用ページへようこそ
@@ -27,11 +27,7 @@ sylius:
       empty: sylius.account.order.empty
       invoice: sylius.account.order.invoice
       list: sylius.account.order.list
-      number: ""
-      payment_mode: ""
       placed_at: sylius.account.order.placed_at
-      shipment_mode: ""
-      state: ""
       tracking_number: sylius.account.order.tracking_number
     title: マイアカウント
   add_to_cart: カートに入れる
@@ -64,23 +60,28 @@ sylius:
       add_product: sylius.backend.quick_links.add_product
       orders: sylius.backend.quick_links.orders
       products: sylius.backend.quick_links.products
-      users: sylius.backend.quick_links.users
     statistics:
-      0: sylius.backend.statistics
       orders_this_month: sylius.backend.statistics.orders_this_month
       registrations_this_month: sylius.backend.statistics.registrations_this_month
       sales_this_month: sylius.backend.statistics.sales_this_month
   backend_welcome: sylius.backend_welcome
+  block:
+    imagine:
+      updated_at: 最終更新日
+    simple:
+      updated_at: 最終更新日
+    slideshow:
+      updated_at: 最終更新日
+    string:
+      updated_at: 最終更新日
   breadcrumb:
     assortment: sylius.breadcrumb.assortment
     build: sylius.breadcrumb.build
     configuration: sylius.breadcrumb.configuration
     country:
       index: sylius.breadcrumb.country.index
-    customers: sylius.breadcrumb.customers
+    dashboard: ダッシュボード
     edit: sylius.breadcrumb.edit
-    exchange_rate:
-      index: sylius.breadcrumb.exchange_rate.index
     general_settings: sylius.breadcrumb.general_settings
     generate: sylius.breadcrumb.generate
     inventory:
@@ -100,10 +101,6 @@ sylius:
       index: sylius.breadcrumb.promotion.index
     promotion_coupon:
       index: sylius.breadcrumb.promotion_coupon.index
-    property:
-      index: sylius.breadcrumb.property.index
-    prototype:
-      index: sylius.breadcrumb.prototype.index
     sales: sylius.breadcrumb.sales
     shipment:
       index: sylius.breadcrumb.shipment.index
@@ -119,14 +116,13 @@ sylius:
     taxonomy:
       index: sylius.breadcrumb.taxonomy.index
     update: sylius.breadcrumb.update
-    user:
-      index: sylius.breadcrumb.user.index
     zone:
       index: sylius.breadcrumb.zone.index
   cancel: キャンセル
   cart:
     empty: カートには何もありません。
     summary:
+      add_coupon: クーポンを追加
       checkout: 注文に進む
       clear: カートを空にする
       grand_total: 総合計
@@ -195,19 +191,17 @@ sylius:
     no_results: 国は登録されていません。
     show_header: 国の詳細
     update_header: 国を編集
+  email:
+    updated_at: 最終更新日
   create: 作成
   delete: 削除
   edit: 編集
-  email: メールアドレス
-  exchange_rate:
-    create: 為替レートを登録する
-    create_header: 為替レートを登録
-    currency: 通貨
-    index_header: 為替レート
-    no_results: 為替レートは登録されていません。
-    rate: レート
-    update_header: 為替レートの編集
-    updated_at: 最終更新日時
+  permission:
+    updated_at: 最終更新日
+  role:
+    updated_at: 最終更新日
+  currency:
+    updated_at: 最終更新日
   filter: F絞り込む
   form:
     choose_file: ファイルを選択
@@ -242,27 +236,21 @@ sylius:
     no_results: 在庫情報がありません。
     shipping_state: 出荷ステータス
     updated_at: 最終更新日
+  locale:
+    updated_at: 最終更新日
   login: ログイン
   login_header: 管理
   manage: 管理
   meta:
-    backend_title: 管理者ダッシュボード
     frontend_description: SyliusはSymfony2フレームワークを使用した先進的なPHPのeコマースソフトウェアです。
     frontend_keywords: sylius, eコマース, symfony2, ショップ, カート, ネットショップ
     frontend_title: Symfony2のeコマース、Sylius
   newest: 新着商品
   "no": false
-  option:
-    create: 商品オプションを登録
-    create_header: 商品オプション登録
-    index_header: 商品オプション
-    manage: 商品オプション管理
-    name: オプション名
-    no_results: 商品オプションは登録されていません。
-    presentation: 表示名
-    update_header: 商品オプションを編集
+  product_option:
+    manage: 商品オプションの管理
+    name: 商品名
     updated_at: 最終更新日時
-    values: オプション
   order:
     billing_address: 請求先
     create: 注文を登録
@@ -291,12 +279,11 @@ sylius:
     shipping_address: 配送先
     shipping_charges: 送料
     shipping_total: 送料合計
-    show_header: 注文詳細
     tax_total: 税の合計
     taxes: 税
     total: 総合計
     update_header: 注文を編集
-    user: 顧客
+    promotion_coupons: sylius.breadcrumb.promotion_coupon.index
   shipment:
     created_at: 登録日時
     index_header: 出荷管理
@@ -311,6 +298,8 @@ sylius:
     show_header: 出荷の詳細
     state: 出荷ステータス
     updated_at: 最終更新日時
+  channel:
+    updated_at: 最終更新日
   order_item:
     product: sylius.order_item.product
     quantity: 数量
@@ -320,6 +309,7 @@ sylius:
   out_of_stock: 在庫切れ
   password: パスワード
   payment:
+    order: 注文
     amount: 請求金額合計
     create: 入金を登録する
     create_header: 入金を登録
@@ -341,7 +331,6 @@ sylius:
     update_header: 支払い方法の編集
     updated_at: 最終更新日時
   product:
-    add_property: 商品プロパティを登録
     available_on: 入荷日
     available_on_demand: 即納
     categorization: カテゴリ設定
@@ -356,7 +345,6 @@ sylius:
     no_description: '<i>説明未入力</i>'
     no_images: 画像未登録
     no_options: 商品オプション未設定
-    no_properties: 商品プロパティ未設定
     no_results: 該当する商品がありません。
     no_short_description: '<i>概要未入力</i>'
     no_sku: '<i>SKU未登録</i>'
@@ -364,7 +352,6 @@ sylius:
     no_taxons: カテゴリ未設定
     options: 商品オプション
     price: 販売価格
-    properties: 商品プロパティ
     show: 詳細
     show_header: '商品詳細<small>"<strong>%product%</strong>"</small>'
     show_in_store: 販売ページへ
@@ -374,11 +361,12 @@ sylius:
       images: 商品画像
       options: 商品オプション設定
       product: 商品情報
-      properties: 商品オプション設定
     tax_category: 税区分
     update_header: 商品を編集
     updated_at: 最終更新日時
     variant_selection_method: バリエーション選択方法
+    volume_based:
+      price: 価格
   promotion:
     actions: 値引き設定
     add_action: 値引き設定を追加
@@ -417,35 +405,23 @@ sylius:
   promotion_rule:
     configuration: 条件設定
     type: 条件タイプ
-  property:
-    add_choice: 選択肢を追加
-    create: 商品プロパティを登録する
-    create_header: 商品プロパティを登録
-    index_header: 商品プロパティ管理
-    manage: 商品プロパティ管理
-    name: プロパティ名
-    no_results: 商品プロパティは登録されていません。
-    presentation: 表示名
-    type: タイプ
-    update_header: 商品プロパティの編集
+  product_attribute:
+    name: 商品名
     updated_at: 最終更新日時
-  prototype:
-    build: プロトタイプから商品を登録する
-    build_header: プロトタイプから商品を登録
-    create: 商品プロトタイプを登録する
-    create_header: 商品プロトタイプの登録
-    index_header: 商品プロトタイプ管理
-    name: プロトタイプ名
-    no_results: 商品プロトタイプは登録されていません。
-    options: 商品オプション
-    properties: 商品プロパティ
-    update_header: 商品プロトタイプの編集
+  archetype:
+    name: 商品名
     updated_at: 最終更新日時
   province:
     provinces: 都道府県
   remember_me: 次回から自動ログイン
+  report:
+    details: 詳細
+    manage: 管理
   save_changes: 保存
   search: 検索
+  security:
+    login:
+      button: ログイン
   settings:
     general_header: 一般的な設定
     taxation_header: 税設定
@@ -530,27 +506,23 @@ sylius:
     no_results: 該当するカテゴリがありません。
     show_header: 'カテゴリ詳細： <small><strong>%name%</strong></small>'
     update_header: カテゴリを編集
+  customer:
+    billing_address: ご請求先住所
+    first_name: 名
+    last_name: 姓
+    shipping_address: 配送先住所
   user:
-    billing_address: 請求先住所
     create: ユーザーを登録する
     create_header: ユーザーを登録
-    email: メールアドレス
     enabled: 認証
-    filter:
-      all: 全て表示
-      unconfirmed: 未認証ユーザー
-    first_name: 名
     general_info: 'ユーザー"%username%"の概要'
     index_header: 顧客管理
     last_login: 最終ログイン日時
-    last_name: 姓
     manage: 顧客管理
     no_results: 該当する顧客がありません。
-    order:
-      no_results: 注文履歴はありません。
-    orders: 注文履歴
     recent_header: 新着の顧客
-    shipping_address: 配送先住所
+    register:
+      button: お客様登録
     show_header: 顧客詳細
     update_header: 顧客の編集
     username: ユーザー名
@@ -581,3 +553,9 @@ sylius:
     update_header: ゾーンの編集
   zone_member:
     members: 地域
+  contact_topic:
+    updated_at: 最終更新日
+  contact_request:
+    firstName: 名
+    lastName: 姓
+    updated_at: 最終更新日

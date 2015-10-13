@@ -1,10 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: email.order_confirmation.subject
 sylius:
+  emails:
+    order_confirmation:
+      subject: Siparişiniz için teşekkür ederiz!
   account:
     address:
       action:
@@ -19,12 +19,9 @@ sylius:
         no_billing: Hiçbir varsayılan fatura adresi ayarlanmadı
         no_shipping: Hiçbir varsayılan teslim adresi ayarlanmadı
         shipping: Varsayılan teslim adresi
-      empty: Henüz hiçbir adresi oluşturmadınız.
       list: Tüm adresleriniz
       update: Adresi düzenle
     home:
-      email: ""
-      id: ""
       outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
       since: den beri müşterisiniz
       welcome: Alanınıza hoş geldiniz
@@ -35,16 +32,12 @@ sylius:
       empty: Henüz hiçbir sipariş vermediniz.
       invoice: Fatura
       list: Tüm siparişleriniz
-      number: ""
-      payment_mode: ""
       placed_at: '%at% tarihinde sipariş verildi'
       shipment:
         pending: Beklemede
         ready: '%at% tarihinden beri hazır'
         returned: '%at% tarihinde iade edildi'
         shipped: '%at% tarihinde kargolandı'
-      shipment_mode: ""
-      state: ""
       total: Toplam
       tracking_number: Kargo takip numarası
     title: Hesabım
@@ -78,35 +71,47 @@ sylius:
       add_product: Yeni ürün
       orders: Son siparişler
       products: Ürünleriniz
-      users: Kullanıcılar
     statistics:
-      0: Bu ayki istatistikler
       orders_this_month: Toplam siparişler
       registrations_this_month: Toplam kayıtlar
       sales_this_month: Satışlar
   backend_welcome: 'Merhaba <b>%name%</b>!'
   block:
-    body: İçerik
-    create: Bloğu Oluştur
-    create_header: Yeni içerik bloğu oluşturma
-    id: ID
-    index_header: İçerik blokları
+    index_header: Bloklar
     no_results: Görüntülenecek hiçbir blok yoktur.
-    title: Başlık
-    update_header: İçerik bloğu düzenleme
-    updated_at: Son gücelleme
+    imagine:
+      id: Id
+      label: Etiket
+      title: Başlık
+      updated_at: Son gücelleme
+    simple:
+      body: İçerik
+      id: Id
+      label: Etiket
+      title: Başlık
+      updated_at: Son gücelleme
+    slideshow:
+      body: İçerik
+      id: Id
+      title: Başlık
+      updated_at: Son gücelleme
+    string:
+      body: İçerik
+      id: Id
+      label: Etiket
+      title: Başlık
+      updated_at: Son gücelleme
   breadcrumb:
     assortment: Çeşitlilik
     block:
-      index: İçerik Blokları
+      index: Bloklar
     build: Oluştur
     configuration: Ayarlar
+    content: İçerik
     country:
       index: Ülkeler
-    customers: Müşteriler
+    dashboard: Kontrol Paneli
     edit: Düzenle
-    exchange_rate:
-      index: Döviz Kurları
     general_settings: Genel Ayarlar
     generate: Oluştur
     group:
@@ -115,13 +120,15 @@ sylius:
       index: Stok
     locale:
       index: Diller
+    menu_node:
+      index: Menü düğümleri
     new: Yeni
     option:
       index: Ayarlar
     order:
       index: Siparişler
     page:
-      index: Statik Sayfalar
+      index: Sayfalar
     payment:
       index: Ödemeler
     payment_method:
@@ -132,10 +139,8 @@ sylius:
       index: Promosyonlar
     promotion_coupon:
       index: Kuponlar
-    property:
-      index: Özellikler
-    prototype:
-      index: Prototipler
+    route:
+      index: Rotalar
     sales: Satışlar
     shipment:
       index: Kargo İşlemleri
@@ -151,8 +156,8 @@ sylius:
     taxonomy:
       index: Kategoriler
     update: Düzenle
-    user:
-      index: Kullanıcılar
+    role:
+      index: Roller
     zone:
       index: Bölgeler
   browse_products: Ürünlere göz atın
@@ -160,7 +165,7 @@ sylius:
   cart:
     empty: Sepetiniz boş
     summary:
-      add_coupon: Tamam
+      add_coupon: Kupon Ekle
       checkout: 'Ödeme  yap'
       clear: Sepeti boşalt
       grand_total: Toplam
@@ -234,22 +239,35 @@ sylius:
     no_results: Yapılandırılmış hiçbir ülke bulunmamaktadır.
     show_header: Ülke bilgileri
     update_header: Ülke düzenleme
+    enabled: Etkin
+  email:
+    code: Kod
+    enabled: Etkin?
+    updated_at: Son gücelleme
   create: Oluştur
   created_at: Oluşturulma tarihi
   delete: sil
   deleted: Silindi
   edit: düzenle
-  email: E-Posta
-  exchange_rate:
-    create: Döviz Kuru oluşturun
-    create_header: Yeni Döviz Kuru
-    currency: para birimi
+  permission:
+    code: Kod
     id: ID
-    index_header: Döviz kurları
-    no_results: Görüntülenecek hiçbir döviz kuru yoktur.
-    rate: oran
-    update_header: Döviz Kuru düzenleme
-    updated_at: son gücelleme
+    description: Açıklama
+    updated_at: Son gücelleme
+  role:
+    code: Kod
+    id: ID
+    name: Ad
+    description: Açıklama
+    index_header: Roller
+    updated_at: Son gücelleme
+  currency:
+    code: Kod
+    id: ID
+    name: Ad
+    enabled: Etkin
+    exchange_rate: Döviz Kuru
+    updated_at: Son gücelleme
   filter: Filtrele
   form:
     cart:
@@ -279,7 +297,6 @@ sylius:
   generate: Oluştur
   group:
     create: Grup oluştur
-    create_header: Yeni kullanıcı grubu ekleme
     id: ID
     index_header: Gruplar
     name: Ad
@@ -288,12 +305,9 @@ sylius:
     update_header: Grubu düzenle
   hide_deleted: Silineni gizle
   history:
-    0: Geçmiş
     action: Eylem
     author: Hazırlayan
     data: Veri Merkezi
-    logged_at: Oturum açıldı
-    version: Versiyon
   homepage:
     splash:
       headline: "Sylius'a hoş geldiniz"
@@ -307,6 +321,8 @@ sylius:
     sku: Stok Kodu
     updated_at: Son gücelleme
   locale:
+    id: ID
+    name: Ad
     code: Kod
     create: Dil oluştur
     create_header: Yeni dil ekleme
@@ -319,26 +335,25 @@ sylius:
   login_header: Yönetim
   logo: Sylius
   manage: Yönet
+  menu:
+    id: ID
+    title: Başlık
+  menu_node:
+    id: ID
+    index_header: Menü düğümleri
+    parent: Üst
+    title: Başlık
   meta:
-    backend_title: Sylius kontrol paneli.
     frontend_description: Sylius, Symfony2 çatısını esas alan, PHP için çağdaş e-ticaret çözümüdür.
     frontend_keywords: sylius, e-ticaret, symfony2, mağaza, sepet, alışveriş, internet mağazası
     frontend_title: Sylius, Symfony2 için çağdaş e-ticaret
   na: Veri yok
   newest: Yeni Ürünler
   "no": false
-  no_results: Bulunamadı
-  option:
-    create: Seçenek oluştur
-    create_header: Yeni ürün seçeneği
-    index_header: Ürün seçenekleri
+  product_option:
     manage: Seçeneklerini yönet
     name: isim
-    no_results: Yapılandırılmış hiçbir seçenek yok.
-    presentation: sunum
-    update_header: Seçenek düzenle
     updated_at: son gücelleme
-    values: değerler
   order:
     billing_address: Fatura adresi
     create: Sipariş oluştur
@@ -374,17 +389,29 @@ sylius:
     shipping_address: Teslimat adresi
     shipping_charges: Kargo ücretleri
     shipping_total: Toplam kargo ücreti
-    show_header: Sipariş
-    state:
-      cart_locked: Sepet kilitlendi
-      checkout: 'Ödeme  yap'
-      order_confimed: Sipariş onaylandı
-      ordered: Sipariş edildi
+    state: Durum
     tax_total: Toplam KDV
     taxes: Vergiler
     total: Toplam
     update_header: Sipariş düzenleme
-    user: Kullanıcı
+    currency: Kur
+    promotion_coupons: Kuponlar
+    adjustments:
+      label: Etiket
+      description: Açıklama
+      amount: Miktar
+    comment:
+      author: Hazırlayan
+      created_at: Oluşturulma tarihi
+      state: Durum
+  route:
+    id: ID
+    index_header: Rotalar
+    name: Ad
+    title: Başlık
+  redirect_route:
+    id: ID
+    title: Başlık
   shipment:
     ship: Kargo
     created_at: Oluşturulma tarihi
@@ -405,6 +432,14 @@ sylius:
     update: Düzenle
     update_header: Kargo düzenle
     updated_at: Son gücelleme
+  channel:
+    created_at: Oluşturulma tarihi
+    code: Kod
+    enabled: Etkin
+    id: ID
+    name: Ad
+    update: Düzenle
+    updated_at: Son gücelleme
   order_item:
     product: Öğe
     quantity: Adet
@@ -415,14 +450,13 @@ sylius:
   page:
     body: İçerik
     create: Yeni sayfa oluştur
-    create_header: Yeni statik içerik oluşturma
     id: ID
     index_header: Sayfalar
-    no_results: Görüntülenecek statik sayfa yoktur.
+    routes: Rotalar
     title: Başlık
-    update_header: Son gücelleme
   password: Şifre
   payment:
+    order: Sipariş
     amount: Miktar
     create: Ödeme oluştur
     create_header: Yeni ödeme
@@ -433,13 +467,15 @@ sylius:
     method: Yöntem
     no_results: Hiçbir ödeme bulunamadı.
     state:
-      0: Durum
+      header: Durum
+      cancelled: İptal Edildi
       checkout: 'Ödeme  yap'
       completed: Tamamlandı
       failed: Başarısız oldu
       new: Yeni
       pending: Beklemede
       processing: İşlem Yapılıyor
+      refunded: İade Edildi
       unknown: Bilinmiyor
       void: Boş
     update_header: Ödeme düzenle
@@ -456,7 +492,6 @@ sylius:
     update_header: Ödeme yöntemi düzenle
     updated_at: Son gücelleme
   product:
-    add_property: Özellik ekle
     available_on: Mevcut üzerine
     available_on_demand: İsteğe bağlı olarak mevcuttur
     categorization: Sınıflandırma
@@ -472,7 +507,6 @@ sylius:
     no_description: '<i>Açıklama yok...</i>'
     no_images: Bu ürün için hiçbir resim yok
     no_options: Bu ürün için hiçbir seçenek yok
-    no_properties: Bu ürün için hiçbir özellik tanımlanmamış
     no_results: Gösterilebilecek bir ürün yok.
     no_shipping_category: Kargo kategorisi yok
     no_short_description: '<i>Kısa açıklama yok</i>'
@@ -481,7 +515,6 @@ sylius:
     no_taxons: Bu ürün için bir sınıf yok
     options: Ayarlar
     price: Perakende fiyatı
-    properties: Özellikler
     restricted_zone: Kısıtlı bölge
     shipping_category: Teslimat kategorisi
     show: Detayları göster
@@ -494,13 +527,15 @@ sylius:
       images: Resimleri
       options: Ayarlar
       product: Ürün
-      properties: Özellikler
+      pricing: Fiyatlandırma
     tax_category: Vergi kategorisi
     unavailable: 'sylius -> ürün -> kullanılamıyor'
     update_header: Ürün Düzenleme
     updated_at: Son gücelleme
     variant_selection_method: Varyant seçme yöntemi
     view_details: '%product% ayrıntıları görüntüleyin. (ürün ayrıntılarını görüntüleyin)'
+    volume_based:
+      price: Fiyatı
   product_not_available_in_zone: 'sylius -> ürün_sizin bölgenizde mevcut değil'
   promotion:
     actions: Eylemler
@@ -529,6 +564,7 @@ sylius:
     configuration: Ayarlar
     type: Türü
   promotion_coupon:
+    code: Kod
     create: Kupon Ekle
     create_header: Yeni kupon oluşturmak
     generate: Kuponlar oluşturmak
@@ -542,35 +578,26 @@ sylius:
   promotion_rule:
     configuration: Ayarlar
     type: Türü
-  property:
-    add_choice: Seçim Ekle
-    create: Özellik oluşturma
-    create_header: Yeni ürün özelliği
-    index_header: Ürün özellikleri
-    manage: Özelliklerini Yönet
+  product_attribute:
     name: isim
-    no_results: Yapılandırılmış hiçbir özellik yok.
-    presentation: sunum
-    type: türü
-    update_header: Özellik düzenleme
     updated_at: son gücelleme
-  prototype:
-    build: 'Prototip  yapım türü'
-    build_header: Prototip ürün yapılandırması
-    create: Prototip oluşturma
-    create_header: Yeni prototip
-    index_header: Ürün prototipleri
+  archetype:
     name: isim
-    no_results: Tanımlı hiçbir prototip vardır.
-    options: Ayarlar
-    properties: Özellikler
-    update_header: Prototip düzenleme
     updated_at: son gücelleme
   province:
     provinces: İller
   remember_me: Beni hatırla?
+  report:
+    details: ayrıntılar
+    name: Ad
+    code: Kod
+    description: Açıklama
+    manage: Yönet
   save_changes: Değişiklikleri kaydet
   search: Arama
+  security:
+    login:
+      button: Giriş
   settings:
     general_header: Genel ayarlar
     taxation_header: Vergilendirme ayarları
@@ -663,30 +690,29 @@ sylius:
     update_header: Taksonomi düzenleme
   total_quantity: Toplam miktar
   unknown: Bilinmiyor
-  user:
+  customer:
     billing_address: Fatura adresi
+    email: E-posta
+    first_name: Ad
+    id: ID
+    last_name: Soyad
+    shipping_address: Teslimat adresi
+    groups: Gruplar
+  user:
     create: Kullanıcı oluşturma
     create_header: Yeni Kullanıcı
-    email: E-Posta
     enabled: Onaylandı?
-    filter:
-      all: Tüm kullanıcıları göster
-      unconfirmed: Doğrulanmamış hesap
-    first_name: Ad
     general_info: 'Kullanıcı "%username%" genel bilgisi'
     id: ID
     index_header: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
     last_login: Son oturum açma tarihi
-    last_name: Soyad
     impersonate: kullanıcı olarak oturum açın
     manage: kullanıcıları yönet
     no_results: Şu anda görüntülenecek hiçbir kullanıcı.
-    order:
-      no_results: Bu kullanıcının göstermek için herhangi bir siparişi yoktur.
-    orders: Kullanıcı siparişleri
     recent_header: Son kullanıcılar
     registration_date: Kayıt tarihi
-    shipping_address: Teslimat adresi
+    register:
+      button: Üye ol
     show_header: Kullanıcı detayları
     update_header: Kullanıcı düzenleme
     username: Kullanıcı adı
@@ -716,5 +742,18 @@ sylius:
     show_header: Bölge ayrıntıları
     type: Türü
     update_header: Bölge düzenleme
+    scope: Kapsam
   zone_member:
     members: Üyeler
+  contact_topic:
+    id: ID
+    title: Başlık
+    updated_at: Son gücelleme
+  contact_request:
+    id: ID
+    firstName: Ad
+    lastName: Soyad
+    email: E-posta
+    message: Mesaj
+    topic: Konu
+    updated_at: Son gücelleme

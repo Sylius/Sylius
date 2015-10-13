@@ -14,7 +14,7 @@ sylius:
       amount: Betaal hoeveelheid
       method: Betaalmethode
       state:
-        0: Betaal status
+        header: Betaalstatus
         checkout: Afrekenen
         completed: Voltooid
         failed: Mislukt
@@ -30,3 +30,6 @@ sylius:
       enabled: Actief?
       gateway: Gateway
       name: Naam
+      fee_calculator:
+        fixed:
+          amount: Hoeveelheid

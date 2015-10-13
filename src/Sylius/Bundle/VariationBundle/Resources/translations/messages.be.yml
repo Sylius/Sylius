@@ -4,10 +4,10 @@
 sylius:
   form:
     variant:
-      presentation: Публічнае імя
+      presentation: Выгляд
     option:
       name: Унутранае імя
-      presentation: Публічнае імя
+      presentation: Выгляд
       values: Магчымыя значэнні
     option_value:
       add_value: Дадаць значэнне

@@ -2,22 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  emails:
+    order_confirmation:
+      subject: Vielen Dank für Ihre Bestellung!
   address:
     firstname: Vorname
     street: Strasse / Nr.
   block:
-    body: Body
-    id: ID
-    title: Titel
+    imagine:
+      id: ID
+      label: Bezeichnung
+      title: Titel
+    simple:
+      body: Body
+      id: ID
+      label: Bezeichnung
+      title: Titel
+    slideshow:
+      body: Body
+      id: ID
+      title: Titel
+    string:
+      body: Body
+      id: ID
+      label: Bezeichnung
+      title: Titel
+  breadcrumb:
+    role:
+      index: Rollen
   checkout:
     finalize:
       address:
@@ -30,8 +42,22 @@ sylius:
   country:
     id: ID
     name: Name
-  exchange_rate:
+    enabled: Aktiviert
+  email:
+    code: Code
+  permission:
+    code: Code
     id: ID
+  role:
+    code: Code
+    id: ID
+    name: Name
+    index_header: Rollen
+  currency:
+    code: Code
+    id: ID
+    name: Name
+    enabled: Aktiviert
   form:
     profile:
       firstName: Vorname
@@ -43,17 +69,39 @@ sylius:
     name: Name
     sku: Bestandseinheit
   locale:
+    id: ID
+    name: Name
     code: Code
     enabled: Aktiviert
+  menu:
+    id: ID
+    title: Titel
+  menu_node:
+    id: ID
+    title: Titel
   "no": false
   order:
     billing_address: Rechnungsadresse
     id: ID
     number: Nummer
+    adjustments:
+      label: Bezeichnung
+  route:
+    id: ID
+    name: Name
+    title: Titel
+  redirect_route:
+    id: ID
+    title: Titel
   shipment:
     id: ID
     name: Name
     sku: Bestandseinheit
+  channel:
+    code: Code
+    enabled: Aktiviert
+    id: ID
+    name: Name
   order_item:
     unit_price: Stückpreis
   page:
@@ -75,6 +123,11 @@ sylius:
   promotion:
     id: ID
     name: Name
+  promotion_coupon:
+    code: Code
+  report:
+    name: Name
+    code: Code
   shipping_category:
     id: ID
     name: Name
@@ -92,12 +145,23 @@ sylius:
     name: Name
   taxonomy:
     name: Name
-  user:
+  customer:
     billing_address: Rechnungsadresse
     first_name: Vorname
+    id: ID
+  user:
     id: ID
   variant:
     sku: Bestandseinheit
   "yes": true
   zone:
     name: Name
+    scope: Umfang
+  contact_topic:
+    id: ID
+    title: Titel
+  contact_request:
+    id: ID
+    firstName: Vorname
+    message: Nachricht
+    topic: Betreff

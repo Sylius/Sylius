@@ -2,8 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Ime
-    prototype:
+    product_variant:
+      available_on: Dostupno
+    product_archetype:
       name: Ime

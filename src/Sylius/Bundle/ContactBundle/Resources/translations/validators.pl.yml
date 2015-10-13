@@ -8,11 +8,11 @@ sylius:
       min_length: Twoje imię jest za krótkie.
       max_length: Twoje imię jest zbyt długie.
     last_name:
-      not_blank: Proszę wpisać swoje nazwisko.
+      not_blank: Proszę podać swoje nazwisko.
       min_length: Twoje nazwisko jest za krótkie.
       max_length: Twoje nazwisko jest za długie.
     email:
-      not_blank: Podaj swój e-mail.
+      not_blank: Proszę podać swój e-mail.
       email: Podany adres e-mail jest nieprawidłowy.
     message:
       not_blank: Wpisz swoją wiadomość.

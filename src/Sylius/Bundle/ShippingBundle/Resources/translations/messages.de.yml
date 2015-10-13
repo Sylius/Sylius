@@ -6,4 +6,5 @@ sylius:
     shipping_category:
       name: Name
     shipping_method:
+      enabled: Aktiviert
       name: Name
