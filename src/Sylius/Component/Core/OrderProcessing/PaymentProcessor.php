@@ -73,9 +73,9 @@ class PaymentProcessor implements PaymentProcessorInterface
     {
         foreach ($order->getPayments() as $payment) {
             $this->cancelPaymentStateIfNotStarted($payment);
-        }
 
-        $this->paymentManager->flush();
+            $this->paymentManager->flush($payment);
+        }
     }
 
     /**
