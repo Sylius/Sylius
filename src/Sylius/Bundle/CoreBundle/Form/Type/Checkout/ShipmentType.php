@@ -56,7 +56,6 @@ class ShipmentType extends AbstractType
                     'label'       => 'sylius.form.checkout.shipping_method',
                     'subject'     => $shipment,
                     'criteria'    => $criteria,
-                    'channel'     => $channel,
                     'expanded'    => true,
                     'constraints' => array(
                         $notBlank
