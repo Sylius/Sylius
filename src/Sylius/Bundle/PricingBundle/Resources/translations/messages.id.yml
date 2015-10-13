@@ -5,3 +5,9 @@ sylius:
   form:
     priceable:
       price: Harga
+    pricing:
+      volume_based:
+        price: Harga
+  pricing:
+    volume_based:
+      price: Harga

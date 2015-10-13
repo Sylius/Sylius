@@ -19,8 +19,6 @@ sylius:
         payments: Plaćanja
         products: Poroizvodi
         promotions: Promocije
-        properties: Konfiguracija atributa
-        prototypes: Prototipovi proizvoda
         sales: Narudžbine
         shipments: Pošiljke
         shipping_categories: Kategorije slanja
@@ -35,7 +33,6 @@ sylius:
         assortment: Asortiman
         configuration: Konfiguracija
         countries: Zemlje
-        customer: Korisnici
         dashboard: Kontrolna tabla
         general_settings: Globalna podešavanja
         homepage: Nazad na prodavnicu
@@ -47,18 +44,16 @@ sylius:
         payments: Plaćanja
         products: Proizvodi
         promotions: Promocije
-        properties: Konfiguracija atributa
-        prototypes: Prototipovi
         sales: Narudžbine
         shipments: Pošiljke
         shipping_categories: Kategorije slanja
         shipping_methods: Načini dostave
+        slideshow: Galerija
         stockables: Stanje zaliha
         tax_categories: Kategorije poreza
         tax_rates: Poreske stope
         taxation_settings: Podešavanja poreza
         taxonomies: Kategorizacija
-        users: Korisnici
         zones: Zone
   frontend:
     menu:

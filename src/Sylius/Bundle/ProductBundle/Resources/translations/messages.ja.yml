@@ -2,7 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
+      options: sylius.breadcrumb.option.index
       meta_keywords: Metaタグ(keywords)
       meta_description: metaタグ(description)
+    product_variant:
+      available_on: 入荷日
+    product_archetype:
+      options: sylius.breadcrumb.option.index

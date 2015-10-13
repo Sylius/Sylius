@@ -7,3 +7,11 @@ sylius:
       price: Fiyatı
       calculator: Fiyatlandırma
       configuration: Ayarlar
+    pricing:
+      volume_based:
+        price: Fiyatı
+  pricing:
+    volume_based:
+      price: Fiyatı
+      button:
+        add: Ekle

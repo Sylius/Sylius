@@ -22,8 +22,6 @@ sylius:
         different_billing_address: Eine andere Rechnungsadresse benutzen?
       payment_method: Zahlungsart
       shipping_method: Versandarten
-    coupon:
-      per_user_usage_limit: Benutzungslimite pro Benutzer
     group:
       name: Name
       roles: Rollen
@@ -66,6 +64,10 @@ sylius:
       created_at_to: zu
       number: Auftragsnummer
       shipping_address: Liefern an
+    payment_filter:
+      created_at_from: Von
+      created_at_to: zu
+      number: Auftragsnummer
     shipping_method:
       zone: Zone
     taxon:
@@ -77,5 +79,6 @@ sylius:
       different_billing_address: Eine andere Rechnungsadresse benutzen?
       enabled: Aktiviert
       first_name: Vorname
+      roles: Rollen
     variant:
       sku: Bestandseinheit

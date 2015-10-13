@@ -3,5 +3,8 @@
 
 sylius:
   form:
+    payment:
+      state:
+        header: Stanje plaćanja
     payment_method:
       name: Ime

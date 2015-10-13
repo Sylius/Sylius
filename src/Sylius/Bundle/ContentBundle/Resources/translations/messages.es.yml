@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Nombre de la acción
       id: Id
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
     imagine_block:
-      parent: Padre
+      filter: Filtrar
+      image: Imagen
       internal_name: Nombre interno
-      slideshow_small: Presentación de diapositivas grande (Ancho Completo)
+      label: Etiqueta
+      parent: Padre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
       slideshow_medium: Presentación de diapositivas medio (Contenido)
-      slideshow_large: Presentación de diapositivas grande (Lateral)
     menu:
       childrens: Hijos
       display: Visualización
@@ -21,12 +26,16 @@ sylius:
       label: Etiqueta
       name: Nombre
       parent: Padre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
       route: Ruta
       uri: URI
     menu_block:
       body: Cuerpo
       id: Id
       name: Nombre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
     menu_node_block:
       content: Contenido
       display: Visualización
@@ -36,7 +45,6 @@ sylius:
       link_type: Tipo de Enlace
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
-      publishable: Publicable
       route: Ruta
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Cuerpo
       id: Id
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
       title: Título
     route:
       content: Contenido
@@ -56,11 +66,15 @@ sylius:
       body: Cuerpo
       internal_name: Nombre interno
       parent: Padre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
       title: Título
     slideshow_block:
       childrens: Hijos
       internal_name: Nombre interno
       parent: Padre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
       title: Título
     static_content:
       body: Cuerpo
@@ -70,10 +84,11 @@ sylius:
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
-      publishable: Publicable
       routes: Rutas
       title: Título
     string_block:
       body: Cuerpo
       id: ID
       name: Nombre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio

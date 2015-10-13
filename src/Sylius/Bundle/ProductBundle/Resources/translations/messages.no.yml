@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Navn
       description: Beskrivelse
-      properties: Egenskaper
-      available_on: Tilgjengelig
+      options: Instillinger
       meta_keywords: Meta nøkkelord
       meta_description: Metabeskrivelse
-    property:
-      name: Internt navn
-      presentation: Presentasjon
-    prototype:
+    product_variant:
+      available_on: Tilgjengelig
+    product_archetype:
       name: Navn
-      properties: Egenskaper
+      parent: Forelder
+      options: Instillinger

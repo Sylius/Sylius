@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Nome da ação
       id: Id
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
     imagine_block:
-      parent: Pai
+      filter: Filtrar
+      image: Imagem
       internal_name: Nome interno
-      slideshow_small: Slideshow maior (largura total)
+      label: Rótulo
+      parent: Pai
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
       slideshow_medium: Slideshow Médio (conteúdo)
-      slideshow_large: Slideshow Pequeno (ao lado)
     menu:
       childrens: Filhos
       display: Mostrar
@@ -21,12 +26,16 @@ sylius:
       label: Rótulo
       name: Nome
       parent: Pai
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
       route: Rota
       uri: URI
     menu_block:
       body: Texto
       id: Id
       name: Nome
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
     menu_node_block:
       content: Conteúdo
       display: Mostrar
@@ -36,7 +45,6 @@ sylius:
       link_type: Tipo de link
       publish_end_date: Data final de publicação
       publish_start_date: Data de início da publicação
-      publishable: Publicável
       route: Rota
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Texto
       id: Id
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
       title: Título
     route:
       content: Conteúdo
@@ -56,11 +66,15 @@ sylius:
       body: Texto
       internal_name: Nome interno
       parent: Pai
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
       title: Título
     slideshow_block:
       childrens: Filhos
       internal_name: Nome interno
       parent: Pai
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação
       title: Título
     static_content:
       body: Texto
@@ -70,10 +84,11 @@ sylius:
       parent: Pai
       publish_end_date: Data final de publicação
       publish_start_date: Data de início da publicação
-      publishable: Publicável
       routes: Rotas
       title: Título
     string_block:
       body: Texto
       id: ID
       name: Nome
+      publish_end_date: Data final de publicação
+      publish_start_date: Data de início da publicação

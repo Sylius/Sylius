@@ -14,7 +14,7 @@ sylius:
       amount: Kwota płatności
       method: Metoda płatności
       state:
-        0: Status płatności
+        header: Status płatności
         checkout: Koszyk
         completed: Zakończone
         failed: Nieudane
@@ -22,7 +22,7 @@ sylius:
         pending: Oczekujący
         processing: Przetwarzany
         unknown: Nieznany
-        void: Void
+        void: Nieważne
         cancelled: Anulowane
         refunded: Zwrócone
     payment_method:
@@ -30,3 +30,6 @@ sylius:
       enabled: Aktywna?
       gateway: Bramka
       name: Nazwa
+      fee_calculator:
+        fixed:
+          amount: Kwota

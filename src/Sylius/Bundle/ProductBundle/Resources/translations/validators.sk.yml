@@ -17,7 +17,3 @@ sylius:
     sku:
       not_blank: Prosím, zadajte kód varianty.
       unique: Kód variácie musí byť unikátny.
-    combination: Variant s touto sadou možností už existuje.
-  option:
-    name:
-      not_blank: Prosím, zadajte názov voľby.

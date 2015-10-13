@@ -16,12 +16,9 @@ sylius:
         no_billing: Адрес за фактуриране НЕ по подразбиране
         no_shipping: Адрес за доставка НЕ по подразбиране
         shipping: Адрес за доставка по подразбиране
-      empty: Все още не се въвели адрес.
       list: Всички адреси
       update: Редактиране на моя адрес
     home:
-      email: ""
-      id: ""
       outline: 'Насладете се на всички функции, които са налични  за преглед във вашето лично пространство, проследявайте и управлявайте всички ваши данни.'
       since: Вие сте клиент от
       welcome: Добре дошли във вашето лично пространство
@@ -32,16 +29,12 @@ sylius:
       empty: Все още не сте направили поръчка.
       invoice: Фактура
       list: 'Всички  поръчки'
-      number: ""
-      payment_mode: ""
       placed_at: 'Направена в %at%'
       shipment:
         pending: Изчакване
         ready: 'Готов от %at%'
         returned: 'Върната %at%'
         shipped: 'Доставено %at%'
-      shipment_mode: ""
-      state: ""
       total: Общо
       tracking_number: Номер за проследяване
     title: Моят акаунт
@@ -75,35 +68,40 @@ sylius:
       add_product: Нов продукт
       orders: Последни поръчки
       products: Вашите продукти
-      users: Потребители
     statistics:
-      0: Статистика за този месец
       orders_this_month: Общо поръчки
       registrations_this_month: Общо регистрации
       sales_this_month: Продажби
   backend_welcome: 'Здравейте <b>%name%</b>!'
   block:
-    body: съобщение
-    create: Създаване на блок
-    create_header: Създаване на нов блок на съдържание
-    id: ID
-    index_header: Съдържание блокове
+    index_header: Блокове
     no_results: Няма блокове за показване.
-    title: Заглавие
-    update_header: Редактиране на съдържание на блок
-    updated_at: Последно обновяване
+    imagine:
+      id: ID
+      label: Етикет
+      updated_at: Последно обновяване
+    simple:
+      id: ID
+      label: Етикет
+      updated_at: Последно обновяване
+    slideshow:
+      id: ID
+      updated_at: Последно обновяване
+    string:
+      id: ID
+      label: Етикет
+      updated_at: Последно обновяване
   breadcrumb:
     assortment: Асортимент
     block:
-      index: Съдържание блокове
+      index: Блокове
     build: Изгради
     configuration: Конфигурация
+    content: Съдържание
     country:
       index: Страни
-    customers: Потребители
+    dashboard: Табло
     edit: Редактирай
-    exchange_rate:
-      index: Валутен курс
     general_settings: Общи Настройки
     generate: Генерирай
     group:
@@ -112,13 +110,15 @@ sylius:
       index: Инвентар
     locale:
       index: Езикови променливи
+    menu_node:
+      index: Меню деца
     new: Ново
     option:
       index: Опцйи
     order:
       index: Поръчки
     page:
-      index: Статични страници
+      index: Страници
     payment:
       index: Плащания
     payment_method:
@@ -129,10 +129,8 @@ sylius:
       index: Промоции
     promotion_coupon:
       index: Купони
-    property:
-      index: Свойства
-    prototype:
-      index: Прототипи
+    route:
+      index: Маршрути
     sales: Продажби
     shipment:
       index: пратки
@@ -148,8 +146,6 @@ sylius:
     taxonomy:
       index: Категоризация
     update: Редактирай
-    user:
-      index: Потребители
     zone:
       index: Зони
   browse_products: Преглед на продуктите
@@ -157,7 +153,7 @@ sylius:
   cart:
     empty: Вашата кошница е празна
     summary:
-      add_coupon: Ок
+      add_coupon: Добавяне на купон
       checkout: Плащане
       clear: Изчисти кошницата
       grand_total: Обща сума
@@ -231,21 +227,18 @@ sylius:
     no_results: Има няма конфигурирани страни .
     show_header: Информация за страните
     update_header: Редактиране на страната
+  email:
+    updated_at: Последно обновяване
   create: Създай
   created_at: Създаден на
   delete: изтриване
   deleted: Изтрито
   edit: редактиране
-  email: E-Mail
-  exchange_rate:
-    create: Създаване на обменен курс
-    create_header: Новите обменни курсове
-    currency: валута
-    id: ID
-    index_header: Валутен курс
-    no_results: Няма обменни курсове за показване.
-    rate: курс
-    update_header: Редактиране на обменен курс
+  permission:
+    updated_at: Последно обновяване
+  role:
+    updated_at: Последно обновяване
+  currency:
     updated_at: Последно обновяване
   filter: Филтър
   form:
@@ -276,7 +269,6 @@ sylius:
   generate: Генерирай
   group:
     create: Създаване на група
-    create_header: Добавяне на нови групи потребители
     id: ID
     index_header: Групи
     name: Име
@@ -285,12 +277,9 @@ sylius:
     update_header: Редактиране на група
   hide_deleted: Скрий изтритите
   history:
-    0: История
     action: Действие
     author: Автор
     data: Данни
-    logged_at: Влязъл в
-    version: Версия
   homepage:
     splash:
       headline: Добре дошли в Sylius
@@ -316,26 +305,19 @@ sylius:
   login_header: Администрация
   logo: Sylius
   manage: Управление
+  menu_node:
+    index_header: Меню деца
   meta:
-    backend_title: Sylius табло.
     frontend_description: Sylius е модерна платформа за електронна търговия за PHP, базирана на Symfony2.
     frontend_keywords: sylius, електронна търговия, symfony2, Магазин, количка, онлайн магазин
     frontend_title: Sylius, модерна електронна търговия за Symfony2
   na: N/A
   newest: Най-новите продукти
   "no": false
-  no_results: sylius.no_results
-  option:
-    create: Създаване на опция
-    create_header: Нова опция на продукт
-    index_header: Опции за продукти
+  product_option:
     manage: Управление на опциите
     name: Име
-    no_results: Няма конфигурирани опции.
-    presentation: презентация
-    update_header: Опция за редактиране
     updated_at: Последно обновяване
-    values: стойности
   order:
     billing_address: Адрес на плащане
     create: Създай поръчка
@@ -371,17 +353,18 @@ sylius:
     shipping_address: Адрес за доставка
     shipping_charges: Такси за експедиране
     shipping_total: Общо за доставка
-    show_header: Поръчка
-    state:
-      cart_locked: Количка заключена
-      checkout: Плащане
-      order_confimed: Поръчки потвърдени
-      ordered: Поръчано
     tax_total: Общо такси
     taxes: Такси
     total: Общо
     update_header: Редактиране на поръчка
-    user: Потребител
+    promotion_coupons: Купони
+    adjustments:
+      label: Етикет
+    comment:
+      author: Автор
+      created_at: Създаден на
+  route:
+    index_header: Маршрути
   shipment:
     ship: Изпрщам
     created_at: Създаден на
@@ -402,6 +385,10 @@ sylius:
     update: Редактирай
     update_header: Редактиране на експедиране
     updated_at: Последно обновяване
+  channel:
+    created_at: Създаден на
+    update: Редактирай
+    updated_at: Последно обновяване
   order_item:
     product: артикул
     quantity: Количество
@@ -412,14 +399,13 @@ sylius:
   page:
     body: Тяло
     create: Създаване на нова страница
-    create_header: Създаване на ново статично съдържание
     id: ID
     index_header: Страници
-    no_results: Няма статични страници за показване.
+    routes: Маршрути
     title: Заглавие
-    update_header: Последно обновяване
   password: Парола
   payment:
+    order: Поръчка
     amount: Сума
     create: Създаване на плащане
     create_header: Ново плащане
@@ -430,7 +416,6 @@ sylius:
     method: Метод
     no_results: Няма никакви конфигурирани плащания.
     state:
-      0: Състояние
       checkout: Плащане
       completed: Изпълнена
       failed: Неуспешно
@@ -453,7 +438,6 @@ sylius:
     update_header: Редактиране на метод на плащане
     updated_at: Последно обновяване
   product:
-    add_property: Добавяне на свойство
     available_on: На разположение на
     available_on_demand: Достъпни при поискване
     categorization: Категоризация
@@ -469,7 +453,6 @@ sylius:
     no_description: '<i>Няма описание...</i>'
     no_images: Няма изображения за този продукт
     no_options: Съществуват опции за този продукт
-    no_properties: Този продукт има няма дефинирани свойства
     no_results: Няма продукти за показване.
     no_shipping_category: Няма категория за доставка
     no_short_description: '<i>Кратко описание</i>'
@@ -478,7 +461,6 @@ sylius:
     no_taxons: Няма никакви класификации за този продукт
     options: Опцйи
     price: Цена на дребно
-    properties: Свойства
     restricted_zone: Ограничена зона
     shipping_category: Категория доставки
     show: Виж повече
@@ -491,7 +473,6 @@ sylius:
       images: Изображения
       options: Опцйи
       product: Продукт
-      properties: Свойства
     tax_category: Данъчна категория
     unavailable: Не е налично
     update_header: Редактиране на продукт
@@ -539,35 +520,23 @@ sylius:
   promotion_rule:
     configuration: Конфигурация
     type: Тип
-  property:
-    add_choice: Добавяне на избор
-    create: Създаване на свойство
-    create_header: Ново свойство на продукта
-    index_header: Свойства на продукта
-    manage: Управление на свойства
+  product_attribute:
     name: Име
-    no_results: Няма конфигурирани свойства.
-    presentation: презентация
-    type: тип
-    update_header: Редактиране на свойство
     updated_at: Последно обновяване
-  prototype:
-    build: Изграждане на прототип
-    build_header: Създаване на продукт от прототип
-    create: Създаване на прототип
-    create_header: Нов прототип
-    index_header: Прототипи на продукта
+  archetype:
     name: Име
-    no_results: Няма никакви прототипи дефинирани.
-    options: опции
-    properties: свойства
-    update_header: Редактиране на прототип
     updated_at: Последно обновяване
   province:
     provinces: Области
   remember_me: Запомни ме?
+  report:
+    details: детайли
+    manage: Управление
   save_changes: Запиши промените
   search: Търсене
+  security:
+    login:
+      button: Вход
   settings:
     general_header: Общи настройки
     taxation_header: Настройки на данъчно облагане
@@ -661,29 +630,20 @@ sylius:
   total_quantity: Общо количество
   unknown: Неизвестен
   user:
-    billing_address: Адрес на плащане
     create: създаване на потребител
     create_header: Нов потребител
-    email: E-Mail
     enabled: Потвърдено?
-    filter:
-      all: Покажи всички потребители
-      unconfirmed: Непотвърдени сметки
-    first_name: Собствено име
     general_info: 'Обща информация за потребителя "%username%"'
     id: ID
     index_header: 'Потребители, <small>списък с всички потребители, регистрирани в магазина</small>'
     last_login: Последно влизане
-    last_name: Фамилно име
     impersonate: Влезте в системата като този потребител
     manage: управление на потребители
     no_results: Няма потребители за показване.
-    order:
-      no_results: Няма никакви поръчки за този потребител за показване.
-    orders: Потребителски поръчки
     recent_header: Последните потребители
     registration_date: Дата на регистрация
-    shipping_address: Адрес за доставка
+    register:
+      button: Регистриране
     show_header: Потребителски детайли
     update_header: Редактиране на потребител
     username: Потребителско име
@@ -713,5 +673,12 @@ sylius:
     show_header: Зона детайли
     type: Тип
     update_header: Редактиране на зона
+    scope: Oбсег
   zone_member:
     members: Членове
+  contact_topic:
+    updated_at: Последно обновяване
+  contact_request:
+    message: Съобщение
+    topic: Тема
+    updated_at: Последно обновяване

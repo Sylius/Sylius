@@ -14,7 +14,7 @@ sylius:
       amount: Suma platby
       method: Spôsob platby
       state:
-        0: Stav platby
+        header: Stav platby
         checkout: Košík
         completed: Dokončené
         failed: Neúspešné
@@ -30,3 +30,6 @@ sylius:
       enabled: Povolené?
       gateway: Brána
       name: Názov
+      fee_calculator:
+        fixed:
+          amount: Suma

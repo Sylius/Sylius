@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Kod
       enabled: Aktiverad
+      name: Namn

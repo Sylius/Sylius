@@ -7,11 +7,10 @@ sylius:
     action_block:
       id: Id
     imagine_block:
-      parent: Vanhempi
       internal_name: Sisäinen nimi
-      slideshow_small: Diaesitys Suuri (täysleveä)
+      label: Otsikko
+      parent: Vanhempi
       slideshow_medium: Diaesitys keskikokoinen (sisältö)
-      slideshow_large: Diaesitys Pieni (sivu)
     menu:
       label: Otsikko
       name: Nimi

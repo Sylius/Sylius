@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: ลงทะเบียน
+    login: เข้าสู่ระบบ
+    logout: ออกจากระบบ
+    change_password: เปลี่ยนรหัสผ่านของคุณ
+    account_panel_outline: ยินดีด้วย คุณสามารถใช้งานคุณสมบัติของระบบได้ทั้งหมด
+  form:
+    group:
+      name: ชื่อ
+      roles: Roles
+    user:
+      email: Email
+      enabled: เปิดใช้งานแล้ว
+      password:
+        label: รหัสผ่าน
+      shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+    customer:
+      first_name: ชื่อ
+      groups: กลุ่ม
+      last_name: นามสกุล
+      email: Email
+      billing_address: ที่อยู่สำหรับออกใบเสร็จ
+      different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
+    user_filter:
+      query: ค้นหา
+    user_change_password:
+      confirmation: การยืนยัน
+      current: รหัสผ่านปัจจุบัน
+      new: รหัสผ่านใหม่
+    user_reset_password:
+      confirmation: การยืนยัน
+      new: รหัสผ่านใหม่

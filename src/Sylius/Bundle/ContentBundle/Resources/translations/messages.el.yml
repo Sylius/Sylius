@@ -3,6 +3,9 @@
 
 sylius:
   form:
+    imagine_block:
+      filter: Φίλτρο
+      image: Εικόνα
     menu:
       name: Ονομασία
     menu_block:

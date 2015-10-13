@@ -5,5 +5,13 @@ sylius:
   form:
     priceable:
       price: Cena
-      calculator: Ceny
+      calculator: Cennik
       configuration: Konfiguracja
+    pricing:
+      volume_based:
+        price: Cena
+  pricing:
+    volume_based:
+      price: Cena
+      button:
+        add: Dodaj

@@ -1,10 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: Predmet e-mailu pri potvrdení objednávky
 sylius:
+  emails:
+    order_confirmation:
+      subject: Ďakujeme za vašu objednávku!
   account:
     address:
       action:
@@ -19,12 +19,9 @@ sylius:
         no_billing: Žiadna predvolená fakturačná adresa
         no_shipping: Žiadna predvolená doručovacia adresa
         shipping: Predvolaná doručovacia adresa
-      empty: Zatiaľ ste nevytvorili žiadnu adresu.
       list: Všetky vaše adresy
       update: Upraviť moju adresu
     home:
-      email: ""
-      id: ""
       outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore.
       since: Ste zákazníkom od
       welcome: Vitajte vo vašom priestore
@@ -35,16 +32,12 @@ sylius:
       empty: Zatiaľ ste nevytvorili žiadnu objednávku.
       invoice: Faktúra
       list: Všetky vaše objednávky
-      number: ""
-      payment_mode: ""
       placed_at: 'Umiestnené v %at%'
       shipment:
         pending: Čakajúca
         ready: 'Pripravené od %at%'
         returned: 'Vrátené %at%'
         shipped: 'Odoslané %at%'
-      shipment_mode: ""
-      state: ""
       total: Spolu
       tracking_number: Sledovací kód
     title: Môj účet
@@ -78,35 +71,47 @@ sylius:
       add_product: Nový produkt
       orders: Posledné objednávky
       products: Vaše produkty
-      users: Používatelia
     statistics:
-      0: Mesačná štatistika
       orders_this_month: Celkový počet objednávok
       registrations_this_month: Celkový počet registrácií
       sales_this_month: Predaj
   backend_welcome: 'Ahoj <b>%name%</b>!'
   block:
-    body: Obsah
-    create: Vytvoriť blok
-    create_header: Vytvorenie nového bloku s obsahom
-    id: ID
-    index_header: Bloky s obsahom
+    index_header: Bloky
     no_results: Neexistujú žiadne bloky na zobrazenie.
-    title: Názov
-    update_header: Upravujem blok obsahu
-    updated_at: Posledná aktualizácia
+    imagine:
+      id: Id
+      label: Označenie
+      title: Názov
+      updated_at: Posledná aktualizácia
+    simple:
+      body: Obsah
+      id: Id
+      label: Označenie
+      title: Názov
+      updated_at: Posledná aktualizácia
+    slideshow:
+      body: Obsah
+      id: Id
+      title: Názov
+      updated_at: Posledná aktualizácia
+    string:
+      body: Obsah
+      id: Id
+      label: Označenie
+      title: Názov
+      updated_at: Posledná aktualizácia
   breadcrumb:
     assortment: Sortiment
     block:
-      index: Bloky s obsahom
+      index: Bloky
     build: Verzia
     configuration: Konfigurácia
+    content: Obsah
     country:
       index: Krajiny
-    customers: Zákazníci
+    dashboard: Nástenka
     edit: Upraviť
-    exchange_rate:
-      index: Výmenné kurzy
     general_settings: Všeobecné nastavenia
     generate: Vygenerovať
     group:
@@ -115,13 +120,15 @@ sylius:
       index: Inventár
     locale:
       index: Jazyky
+    menu_node:
+      index: Uzly menu
     new: Nový
     option:
       index: Možnosti
     order:
       index: Objednávky
     page:
-      index: Statické stránky
+      index: Stránky
     payment:
       index: Platby
     payment_method:
@@ -132,10 +139,8 @@ sylius:
       index: Akcie
     promotion_coupon:
       index: Kupóny
-    property:
-      index: Vlastnosti
-    prototype:
-      index: Prototypy
+    route:
+      index: Trasy
     sales: Predaj
     shipment:
       index: Zásielky
@@ -151,8 +156,8 @@ sylius:
     taxonomy:
       index: Taxonómie
     update: Upraviť
-    user:
-      index: Používatelia
+    role:
+      index: Rola
     zone:
       index: Zóny
   browse_products: Prehľadávať produkty
@@ -160,7 +165,7 @@ sylius:
   cart:
     empty: Váš košík je prázdny
     summary:
-      add_coupon: OK
+      add_coupon: Pridať kupón
       checkout: Objednať
       clear: Vyprázdniť košík
       grand_total: Celkový súčet
@@ -234,21 +239,34 @@ sylius:
     no_results: Neexistujú žiadne nakonfigurované krajiny.
     show_header: Podrobnosti o krajine
     update_header: Úprava krajiny
+    enabled: Povolené
+  email:
+    code: Kód
+    enabled: Povolené?
+    updated_at: Posledná aktualizácia
   create: Vytvoriť
   created_at: Vytvorené
   delete: odstrániť
   deleted: Zmazané
   edit: upraviť
-  email: E-mail
-  exchange_rate:
-    create: Vytvoriť výmenný kurz
-    create_header: Nový výmenný kurz
-    currency: mena
+  permission:
+    code: Kód
     id: ID
-    index_header: Výmenné kurzy
-    no_results: Neexistujú žiadne výmenné kurzy na zobrazenie.
-    rate: kurz
-    update_header: Upráva výmenného kurzu
+    description: Popis
+    updated_at: Posledná aktualizácia
+  role:
+    code: Kód
+    id: ID
+    name: Názov
+    description: Popis
+    index_header: Rola
+    updated_at: Posledná aktualizácia
+  currency:
+    code: Kód
+    id: ID
+    name: Názov
+    enabled: Povolené
+    exchange_rate: Výmenný kurz
     updated_at: Posledná aktualizácia
   filter: Filter
   form:
@@ -279,7 +297,6 @@ sylius:
   generate: Vygenerovať
   group:
     create: Vytvorenie skupiny
-    create_header: Pridávanie nových užívateľských skupín
     id: ID
     index_header: Skupiny
     name: Názov
@@ -288,12 +305,9 @@ sylius:
     update_header: Upraviť skupinu
   hide_deleted: Skryť odstránené
   history:
-    0: História
     action: Akcia
     author: Autor
     data: Údaje
-    logged_at: Prihlásený na
-    version: Verzia
   homepage:
     splash:
       headline: Vitajte v Sylius
@@ -307,6 +321,8 @@ sylius:
     sku: Kód
     updated_at: Posledná aktualizácia
   locale:
+    id: ID
+    name: Názov
     code: Kód
     create: Vytvoriť jazyk
     create_header: Pridávam nové národné prostredie
@@ -319,26 +335,25 @@ sylius:
   login_header: Administrácia
   logo: Sylius
   manage: Správa
+  menu:
+    id: ID
+    title: Názov
+  menu_node:
+    id: ID
+    index_header: Uzly menu
+    parent: Nadradená kategória
+    title: Názov
   meta:
-    backend_title: Nástenka.
     frontend_description: Sylius je moderné riešenie internetového obchodu pre PHP, založené na Symfony2 frameworku.
     frontend_keywords: sylius, e-commerce, symfony2, obchod, nákupný košík, internetový obchod
     frontend_title: Sylius, moderný e-commerce pre Symfony2
   na: Nie je k dispozícii
   newest: Najnovšie produkty
   "no": false
-  no_results: Žiadne výsledky
-  option:
-    create: Vytvoriť možnosť
-    create_header: Nová voľba produktu
-    index_header: Možnosti produktu
+  product_option:
     manage: Spravovať možnosti
     name: názov
-    no_results: Žiadne nakonfigurované možnosti.
-    presentation: prezentácia
-    update_header: Upravujem možnosti
-    updated_at: Posledná aktualizácia
-    values: hodnoty
+    updated_at: posledná aktualizácia
   order:
     billing_address: Fakturačná adresa
     create: Vytvoriť objednávku
@@ -374,17 +389,29 @@ sylius:
     shipping_address: Doručovacia adresa
     shipping_charges: Poplatky za dopravu
     shipping_total: Doprava celkom
-    show_header: Objednávka
-    state:
-      cart_locked: Košík uzamknutý
-      checkout: Objednať
-      order_confimed: Objednávka potvrdená
-      ordered: Objednané
+    state: Stav
     tax_total: Daň celkom
     taxes: Dane
     total: Spolu
     update_header: Úprava objednávky
-    user: Používateľ
+    currency: Mena
+    promotion_coupons: Kupóny
+    adjustments:
+      label: Označenie
+      description: Popis
+      amount: Suma
+    comment:
+      author: Autor
+      created_at: Vytvorené
+      state: Stav
+  route:
+    id: ID
+    index_header: Trasy
+    name: Názov
+    title: Názov
+  redirect_route:
+    id: ID
+    title: Názov
   shipment:
     ship: Dodanie
     created_at: Vytvorené
@@ -405,6 +432,14 @@ sylius:
     update: Upraviť
     update_header: Úprava zásielky
     updated_at: Posledná aktualizácia
+  channel:
+    created_at: Vytvorené
+    code: Kód
+    enabled: Povolené
+    id: ID
+    name: Názov
+    update: Upraviť
+    updated_at: Posledná aktualizácia
   order_item:
     product: Položka
     quantity: Množstvo
@@ -415,14 +450,13 @@ sylius:
   page:
     body: Obsah
     create: Vytvoriť novú stránku
-    create_header: Vytváranie nového statického obsahu
     id: ID
     index_header: Stránky
-    no_results: Tu nie sú žiadne statické stránky k zobrazeniu.
+    routes: Trasy
     title: Názov
-    update_header: Posledná aktualizácia
   password: Heslo
   payment:
+    order: Objednávka
     amount: Množstvo
     create: Vytvoriť platbu
     create_header: Nová platba
@@ -433,13 +467,15 @@ sylius:
     method: Metóda
     no_results: Nie sú nakonfigurované žiadne platby.
     state:
-      0: Stav
+      header: Stav
+      cancelled: Zrušené
       checkout: Košík
       completed: Dokončené
       failed: Neúspešné
       new: Nový
       pending: Čakajúca
       processing: Spracováva sa
+      refunded: Vrátené
       unknown: Neznáme
       void: Neplatné
     update_header: Úprava platby
@@ -456,7 +492,6 @@ sylius:
     update_header: Upravujem spôsob platby
     updated_at: Posledná aktualizácia
   product:
-    add_property: Pridať vlastnosť
     available_on: Dostupný od
     available_on_demand: Na objednávku
     categorization: Kategórie
@@ -466,13 +501,25 @@ sylius:
     description: Popis
     generate_variants: Generaovať varianty
     index_by_taxon_header: 'Produkty <small>kategorizované pod taxonom "%taxon%"</small>'
+    index_header: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
+    manage: Spravovať produkty
     name: Názov
     no_description: '<i>Žiadny popis</i>'
+    no_images: Pre produkt neexistujú žiadne obrázky
+    no_options: Pre produkt neexistujú žiadne možnosti
+    no_results: Neexistujú žiadne produkty na zobrazenie.
+    no_shipping_category: Žiadna kategória doručenia
+    no_short_description: '<i>Žiadny stručný popis</i>'
     no_sku: Žiadny Kód
+    no_tax_category: Žiadna kategória pre daň
+    no_taxons: Pre produkt neexistujú žiadne kategórie
     options: Možnosti
-    properties: Vlastnosti
+    price: Predajná cena
     restricted_zone: Zóna s obmedzeným prístupom
-    shipping_category: Prepravná kategória
+    shipping_category: Kategória doručenia
+    show: Zobraziť viac
+    show_header: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
+    show_in_store: zobraziť v obchode
     sku: Kód
     stock: Aktuálne skladom
     tabs:
@@ -480,113 +527,192 @@ sylius:
       images: Obrázky
       options: Možnosti
       product: Produkt
-      properties: Vlastnosti
+      pricing: Oceňovanie produktov
     tax_category: Daňová kategória
+    unavailable: Nedostupný
     update_header: Úprava produktu
     updated_at: Posledná aktualizácia
     variant_selection_method: Metóda výberu variantu
+    view_details: 'Zobraziť podrobnosti pre %product%.'
+    volume_based:
+      price: Cena
+  product_not_available_in_zone: Nedostupné vo vašej krajine
   promotion:
     actions: Akcie
+    add_action: Pridať podmienku
+    add_rule: Pridať pravidlo
+    coupon_based: Používať kupóny?
+    create: Vytvorenie propagácie
+    create_header: Nové propagácia
     created_at: Vytvorené
     description: Popis
     ends_at: Končí
+    general_info: Všeobecné informácie
     id: ID
+    index_header: Aktuálne propagácie
+    manage: Spravovať propagácie
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne propagácie.
     rules: Pravidlá
+    show_header: Detail propagácie
     starts_at: Začína
+    update_header: Upraviť propagáciu
     updated_at: Posledná aktualizácia
     usage_limit: Limit použitia
+    used: Použité
   promotion_action:
     configuration: Konfigurácia
     type: Typ
   promotion_coupon:
+    code: Kód
+    create: Pridať kupón
+    create_header: Vytvoriť nový kupón
+    generate: Vygenerovať kupóny
+    generate_header: Generujú sa kupóny
+    index: Zoznam kupónov
     index_header: Kupóny
+    no_results: Neexistujú žiadne kupóny na zobrazenie.
+    total_results:
+      Total: '%total%'
+    update_header: Upraviť kupón
   promotion_rule:
     configuration: Konfigurácia
     type: Typ
-  property:
+  product_attribute:
     name: názov
-    presentation: prezentácia
-    type: typ
-    updated_at: Posledná aktualizácia
-  prototype:
-    index_header: Prototypy produktov
+    updated_at: posledná aktualizácia
+  archetype:
     name: názov
-    updated_at: Posledná aktualizácia
+    updated_at: posledná aktualizácia
+  province:
+    provinces: Provincie
+  remember_me: Zapamätať si ma?
+  report:
+    details: detail
+    name: Názov
+    code: Kód
+    description: Popis
+    manage: Správa
   save_changes: Uložiť zmeny
   search: Vyhľadať
+  security:
+    login:
+      button: Prihlásenie
   settings:
     general_header: Základné nastavenia
     taxation_header: Nastavenie zdaňovania
+  shipment_category:
+    manage: Spravovať kategórie dopravy
   shipping_address: Doručovacia adresa
   shipping_category:
+    create: Vytvoriť kategóriu doručenia
+    create_header: Nová kategória doručenia
     id: ID
     index_header: Kategórie doručenia
+    manage: Spravovať kategórie doručenia
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne kategórie doručenia.
+    update_header: Úprava kategórie doručenia
     updated_at: Posledná aktualizácia
   shipping_method:
     calculator: Kalkulačka
     category: Kategória
+    create: Vytvoriť spôsob dopravy
     create_header: Nový spôsob doručenia
     enabled: Povolený?
     id: ID
     index_header: Spôsoby doručenia
+    manage: Správa spôsoby dopravy
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne spôsoby dopravy.
+    show_header: Podrobnosti spôsobu dopravy
+    update_header: Úprava spôsobu dopravy
     updated_at: Posledná aktualizácia
     zone: Zóna
+  shop_by: Nakupovať podľa
   show: detail
   show_all: Zobraziť všetky
+  show_deleted: Zobraziť odstránené
   stockable:
+    index_header: 'Inventár <small> prehľad skladových zásob</small>'
     name: názov
+    no_results: Neexistujú žiadne položky skladových zásob.
+    on_hand: na sklade
+    on_hold: pozastavené
     sku: kód
     updated_at: posledná aktualizácia
   tax_category:
+    create: Vytvoriť daňovú kategoriu
+    create_header: Nová daňová kategoria
     description: Popis
     id: ID
     index_header: Kategórie zdaňovania
+    manage: Správovať daňové kategorie
     name: Názov
+    no_description: Žiadny popis
+    no_results: Nie sú nakonfigurované žiadne daňové kategorie.
+    update_header: Úprava daňovej kategórie
     updated_at: Posledná aktualizácia
   tax_rate:
     amount: Suma
     calculator: Kalkulačka
     category: Kategória
+    create: Vytvoriť sadzbu dane
+    create_header: Nová sadzba dane
     included_in_price: V cene?
     index_header: Daňové sadzby
+    manage: Spravovať sadzby dane
     name: Názov
+    no_results: Nie sú nakonfigurované žiadne daňové sadzby.
+    show_header: Podrobnosti sadzby dane
+    update_header: Úprava sadzby dane
     updated_at: Posledná aktualizácia
     zone: Zóna
   taxon:
+    create: Vytvoriť kategóriu
+    create_header: Nová kategória
     image: Vybrať obrázok
     name: Názov
+    no_image: Neexistuje žiadny obrázok pre kategoriu
+    no_results: Nie sú žiadne kategórie na zobrazenie.
+    product_index_header: 'Produkty kategorizované ako "%name%"'
+    update_header: Úprava kategórie
   taxonomy:
+    create: Vytvoriť triedenie
+    create_header: Nové triedenie
     image: Vybrať obrázok
+    index_header: 'Kategorizácia <small>tu vidíte definované tridenia</small>'
+    manage: Spravovať triedenia
     name: Názov
+    no_image: Neexistuje žiadny obrázok pre triedenie
+    no_results: Nie sú definované žiadne triedenia.
+    show_header: 'Triedenie <small><strong>%name%</strong></small>'
+    update_header: Úprava triedenia
   total_quantity: Celkové množstvo
   unknown: Neznáme
-  user:
+  customer:
     billing_address: Fakturačná adresa
+    email: Email
+    first_name: Meno
+    id: ID
+    last_name: Priezvisko
+    shipping_address: Doručovacia adresa
+    groups: Skupiny
+  user:
     create: vytvoriť používateľa
     create_header: Nový používateľ
-    email: E-mail
     enabled: Potvrdený?
-    filter:
-      all: Zobraziť všetkých používateľov
-      unconfirmed: Nepotvrdené účty
-    first_name: Meno
     general_info: 'Všeobecné informácie o používateľovi "%username%"'
     id: ID
     index_header: 'Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>'
     last_login: Posledné prihlásenie
-    last_name: Priezvisko
     impersonate: Prihlásiť sa ako tento používateľ
     manage: spravovať používateľov
     no_results: Tu nie sú žiadní používatelia k zobrazeniu.
-    order:
-      no_results: Tento používateľ nemá žiadne objednávky.
-    orders: Objednávky používateľa
     recent_header: Poslední používatelia
     registration_date: Dátum registrácie
-    shipping_address: Doručovacia adresa
+    register:
+      button: Registrovať
     show_header: Údaje o používateľovi
     update_header: Úprava používateľa
     username: Používateľské meno
@@ -616,5 +742,18 @@ sylius:
     show_header: Detaily zóny
     type: Typ
     update_header: Upravujem zónu
+    scope: Rozsah pôsobnosti
   zone_member:
     members: Používatelia
+  contact_topic:
+    id: ID
+    title: Názov
+    updated_at: Posledná aktualizácia
+  contact_request:
+    id: ID
+    firstName: Meno
+    lastName: Priezvisko
+    email: Email
+    message: Správa
+    topic: Téma
+    updated_at: Posledná aktualizácia

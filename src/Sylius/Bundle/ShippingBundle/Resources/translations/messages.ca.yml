@@ -11,4 +11,5 @@ sylius:
       description: Descripció
       name: Nom
     shipping_method:
+      enabled: Activat
       name: Nom
