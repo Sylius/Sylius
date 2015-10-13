@@ -1,29 +1,31 @@
 Models
 ======
 
+.. _component_currency_model_currency:
+
 Currency
 --------
 
-Every currency is represented by **Currency** instance and has following properties:
+Every currency is represented by a **Currency** model which by default has the following properties:
 
-+-----------------+-------------------------------------+------------+
-| Method          | Description                         | Type       |
-+=================+=====================================+============+
-| code            | Code of the currency                | string     |
-+-----------------+-------------------------------------+------------+
-| exchangeRate    | Exchange rate                       | float      |
-+-----------------+-------------------------------------+------------+
-| enabled         |                                     | boolean    |
-+-----------------+-------------------------------------+------------+
-| createdAt       | Date of creation                    | \DateTime  |
-+-----------------+-------------------------------------+------------+
-| updatedAt       | Date of last update                 | \DateTime  |
-+-----------------+-------------------------------------+------------+
-
-CurrencyInterface
------------------
++--------------+-------------------------------------------+
+| Method       | Description                               |
++==============+===========================================+
+| id           | Unique id of the currency                 |
++--------------+-------------------------------------------+
+| code         | Currency's code                           |
++--------------+-------------------------------------------+
+| exchangeRate | Currency's Exchange rate                  |
++--------------+-------------------------------------------+
+| enabled      | Indicates whether the currency is enabled |
++--------------+-------------------------------------------+
+| createdAt    | Date of creation                          |
++--------------+-------------------------------------------+
+| updatedAt    | Date of last update                       |
++--------------+-------------------------------------------+
 
 .. note::
+   This model implements :ref:`component_currency_model_currency-interface`. |br|
+   For more detailed information go to `Sylius API Currency`_.
 
-    This interface asks you to implement a extra method named ``CurrencyInterface::getName()`` which will return the human-friendly
-    name of the currency
+.. _Sylius API Currency: http://api.sylius.org/Sylius/Component/Currency/Model/Currency.html
