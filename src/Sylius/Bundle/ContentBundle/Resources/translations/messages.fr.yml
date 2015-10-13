@@ -34,7 +34,7 @@ sylius:
       internal_name: Nom interne
       label: Label
       link_type: Type de lien
-      publish_end_date: Date de fin publication
+      publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
       publishable: Publiable
       route: Route
@@ -68,7 +68,7 @@ sylius:
       internal_name: Nom interne
       menu_nodes: Nœuds de menu
       parent: Parent
-      publish_end_date: Date de fin publication
+      publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
       publishable: Publiable
       routes: Chemins

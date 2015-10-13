@@ -3,6 +3,11 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Počet
+        equal: rovná sa
+      type: Typ
     shipment:
       state: Stav
       states:
@@ -17,16 +22,21 @@ sylius:
       flat_rate_configuration:
         amount: Suma
       flexible_rate_configuration:
+        additional_item_cost: Cena za každý ďalší predmet
+        additional_item_limit: Obmedenie na ďalšie predmety
         first_item_cost: Cena prvej položky
       per_item_rate_configuration:
         amount: Suma
       weight_rate_configuration:
         amount: Suma
+        division: Delenie
     shipping_category:
       description: Popis
       name: Názov
     shipping_method:
       calculator: Kalkulačka
       category: Kategória
+      category_requirement: Podmienka pre kategóriu doručenia
       configuration: Konfigurácia
+      enabled: Aktívna
       name: Názov

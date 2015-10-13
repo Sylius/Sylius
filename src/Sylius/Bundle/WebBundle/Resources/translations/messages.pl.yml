@@ -395,7 +395,7 @@ sylius:
     method: metoda
     modified: modyfikacja
     name: nazwa
-    no_items: Brak elementów
+    no_items: Brak przedmiotów.
     no_results: Brak przesyłek.
     order: zamówienie
     show_header: Szczegóły przesyłki
@@ -441,7 +441,7 @@ sylius:
       pending: Oczekujący
       processing: Przetwarzany
       unknown: Nieznany
-      void: Void
+      void: Pusty
     update_header: Edycja płatności
     updated_at: Ostatnia aktualizacja
   payment_method:
@@ -620,11 +620,11 @@ sylius:
     description: Opis
     id: ID
     index_header: Kategorie podatkowe
-    manage: Zarządaj kategoriami podatkowymi
+    manage: Zarządzaj kategoriami podatkowymi
     name: Nazwa
     no_description: Brak opisu
     no_results: Brak skonfigurowanych kategorii podatkowych.
-    update_header: Eycja kategorii podatkowej
+    update_header: Edycja kategorii podatkowej
     updated_at: Ostatnia aktualizacja
   tax_rate:
     amount: Wartość
@@ -634,7 +634,7 @@ sylius:
     create_header: Nowa stawka podatkowa
     included_in_price: Wliczony w cenę?
     index_header: Stawki podatkowe
-    manage: Zarządaj stawkami podatkowymi
+    manage: Zarządzaj stawkami podatkowymi
     name: Nazwa
     no_results: Brak skonfigurowanych stawek podatkowych.
     show_header: Szczegóły stawki podatkowej
@@ -651,16 +651,16 @@ sylius:
     product_index_header: 'Produkty sklasyfikowane jako "%name%"'
     update_header: Edycja taksonomii
   taxonomy:
-    create: Dodaj kategorię
-    create_header: Nowa kategoria
+    create: Dodaj taksonomie
+    create_header: Nowa taksonomia
     image: Wybierz zdjęcie
     index_header: 'Kategoria <small>Tutaj znajdziesz zdefiniowane grupy produktów</small>'
     manage: Zarządzanie kategoriami
     name: Nazwa
     no_image: Brak zdjęcia
-    no_results: Brak zdefiniowanych kategorii.
-    show_header: 'Kategoria <small><strong>%name%</strong></small>'
-    update_header: Edycja kategorii
+    no_results: Brak zdefiniowanych grup produktów.
+    show_header: 'Taksonomia <small><strong>%name%</strong></small>'
+    update_header: Edycja taksonomii
   total_quantity: Całkowita ilość
   unknown: Nieznany
   user:
@@ -710,7 +710,7 @@ sylius:
     create: Dodaj strefę
     create_header: Nowa strefa
     index_header: Strefy
-    manage: Zarządznie strefami
+    manage: Zarządzanie strefami
     name: Nazwa
     no_results: Brak stref.
     show_header: Szczegóły strefy

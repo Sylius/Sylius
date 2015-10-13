@@ -22,7 +22,7 @@ sylius:
         pending: Oczekujący
         processing: Przetwarzany
         unknown: Nieznany
-        void: Void
+        void: Nieważne
         cancelled: Anulowane
         refunded: Zwrócone
     payment_method:

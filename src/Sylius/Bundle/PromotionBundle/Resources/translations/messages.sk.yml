@@ -13,6 +13,7 @@ sylius:
       type: Typ
     rule:
       taxonomy_configuration:
+        taxons: Kategórie
         exclude: Vylúčiť
       item_count_configuration:
         count: Počet
@@ -30,6 +31,7 @@ sylius:
           months: Mesiacov
           years: Rokov
           0: Jednotka
+        after: Používateľ vytvorený po období
       shipping_country_configuration:
         country: Krajina
       type: Typ
