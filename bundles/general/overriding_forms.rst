@@ -40,7 +40,8 @@ Now, define the new form class in the ``app/config/config.yml``.
         driver: doctrine/orm
         classes:
             address:
-                form: Acme\ShopBundle\Form\Type\AddressType
+                form: 
+                    default: Acme\ShopBundle\Form\Type\AddressType
 
 Done! Sylius will now use your custom address form everywhere!
 
