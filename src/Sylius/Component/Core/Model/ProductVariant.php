@@ -520,4 +520,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->depth * $this->height * $this->width;
     }
+
+    public function isReduced()
+    {
+        if ($this->originalPrice > $this->price) {
+            return true;
+        }
+
+        return false;
+    }
 }
