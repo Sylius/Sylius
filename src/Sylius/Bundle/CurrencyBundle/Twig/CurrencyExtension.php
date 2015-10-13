@@ -41,7 +41,6 @@ class CurrencyExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('sylius_currency', array($this, 'convertAmount')),
             new \Twig_SimpleFilter('sylius_price', array($this, 'convertAndFormatAmount')),
-            new \Twig_SimpleFilter('sylius_original_price', array($this, 'convertAndFormatAmount')),
         );
     }
 
