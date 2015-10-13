@@ -6,11 +6,11 @@ sylius:
     menu:
       main:
         assortment: Асортимент
+        blocks: Блокове
         configuration: Конфигурация
         countries: Страни
-        customer: Потребители
+        content: Съдържание
         dashboard: Табло
-        exchange_rates: Валутен курс
         general_settings: Общи настройки
         homepage: Вашият магазин
         locales: Езикови променливи
@@ -18,12 +18,11 @@ sylius:
         new_promotion: Добавяне на нова промоция
         options: Управление на опциите за продукта
         orders: Текущи поръчки
+        pages: Страници
         payment_methods: Начин на плащане
         payments: Плащания
         products: Продукти
         promotions: Промоции
-        properties: Конфигуриране на свойства
-        prototypes: Прототипи на продукта
         sales: Поръчки
         shipments: пратки
         shipping_categories: Категории за доставка
@@ -33,7 +32,6 @@ sylius:
         tax_rates: Данъчни ставки
         taxation_settings: Настройки на данъчно облагане
         taxonomies: Категоризация
-        users: Потребители
         zones: Зони
       sidebar:
         assortment: Асортимент
@@ -41,9 +39,7 @@ sylius:
         configuration: Конфигурация
         content: Съдържание
         countries: Страни
-        customer: Потребители
         dashboard: Табло
-        exchange_rates: Валутен курс
         general_settings: Общи настройки
         groups: Групи
         homepage: Обратно към фронт интерфейса
@@ -53,22 +49,21 @@ sylius:
         options: Управление на опциите
         orders: Текущи поръчки
         pages: Страници
+        routes: Маршрути
         payment_methods: Начин на плащане
         payments: Плащания
         products: Продукти
         promotions: Промоции
-        properties: Конфигуриране на свойства
-        prototypes: Прототипи на продукта
         sales: Поръчки
         shipments: пратки
         shipping_categories: Категории за доставка
         shipping_methods: Начин на доставка
+        slideshow: Слайдшоу
         stockables: Нива на инвентара
         tax_categories: Категории такси
         tax_rates: Данъчни ставки
         taxation_settings: Настройки на данъчно облагане
         taxonomies: Категоризация
-        users: Потребители
         zones: Зони
   frontend:
     menu:

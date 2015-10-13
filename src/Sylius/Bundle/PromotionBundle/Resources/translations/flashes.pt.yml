@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-  promotion_coupon:
-    generate: Cupons de promoção foram gerados com sucesso.
-    eligible: Seu cupom de promoção foi adicionado ao carrinho.
-    invalid: Seu cupom de promoção não é válido.
-    not_eligible: Seu carrinho não é elegível para este cupom da promoção.

@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Naziv akcije
       id: Id
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
     imagine_block:
-      parent: Nadređena kategorija
+      filter: Filter
+      image: Fotografija
       internal_name: Interni naziv
-      slideshow_small: Slideshow Velika slika (puna širina)
+      label: Oznaka
+      parent: Nadređena kategorija
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
       slideshow_medium: Slideshow srednja veličina (sadržaj)
-      slideshow_large: Slideshow mala veličina (sidebar)
     menu:
       childrens: Djeca
       display: Prikaz
@@ -21,12 +26,16 @@ sylius:
       label: Oznaka
       name: Naziv grupe
       parent: Nadređena kategorija
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
       route: Ruta
       uri: URI
     menu_block:
       body: Sadržaj
       id: Id
       name: Naziv
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
     menu_node_block:
       content: Sadržaj
       display: Prikaz
@@ -36,7 +45,6 @@ sylius:
       link_type: Vrsta poveznice (linka)
       publish_end_date: Datum završetka objave
       publish_start_date: Datum početka objave
-      publishable: Objavljivo
       route: Ruta
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Sadržaj
       id: Id
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
       title: Naslov
     route:
       content: Sadržaj
@@ -56,11 +66,15 @@ sylius:
       body: Poruka
       internal_name: Interni naziv
       parent: Nadređena kategorija
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
       title: Naslov
     slideshow_block:
       childrens: Djeca
       internal_name: Interni naziv
       parent: Nadređena kategorija
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave
       title: Naslov
     static_content:
       body: Poruka
@@ -70,10 +84,11 @@ sylius:
       parent: Nadređena kategorija
       publish_end_date: Datum završetka objave
       publish_start_date: Datum početka objave
-      publishable: Objavljivo
       routes: Rute
       title: Naslov
     string_block:
       body: Poruka
       id: ID
       name: Naziv grupe
+      publish_end_date: Datum završetka objave
+      publish_start_date: Datum početka objave

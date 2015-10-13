@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-  resource:
-    create: '%resource% er opprettet.'
-    update: '%resource% er oppdatert.'
-    delete: '%resource% er slettet.'

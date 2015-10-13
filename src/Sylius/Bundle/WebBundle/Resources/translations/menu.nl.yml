@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Assortiment
+        blocks: Blokken
         configuration: Configuratie
         countries: Landen
-        customer: Klanten
+        content: Inhoud
         dashboard: Dashboard
-        exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen
+        groups: Groepen
         homepage: Uw winkel
         locales: "Talen/Regio's"
         new_order: Bestelling toevoegen
         new_promotion: Kortingsactie toevoegen
         options: Productopties
         orders: Huidige bestellingen
+        pages: "Pagina's"
         payment_methods: Betaalmethoden
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Producteigenschappen
-        prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
@@ -33,17 +33,15 @@ sylius:
         tax_rates: BTW-tarieven
         taxation_settings: Belasting instellingen
         taxonomies: Categorisering
-        users: Gebruikers
         zones: Zones
+        roles: Rollen
       sidebar:
         assortment: Assortiment
         blocks: Blokken
         configuration: Configuratie
         content: Inhoud
         countries: Landen
-        customer: Klanten
         dashboard: Dashboard
-        exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen
         groups: Groepen
         homepage: Terug naar de voorkant
@@ -57,19 +55,18 @@ sylius:
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Producteigenschappen
-        prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
         shipping_methods: Verzendmethoden
+        slideshow: Slideshow
         stockables: Voorraad
         tax_categories: Belasting categorieën
         tax_rates: Belastingtarieven
         taxation_settings: Belasting instellingen
         taxonomies: Categorisering
-        users: Gebruikers
         zones: Zones
+        roles: Rollen
   frontend:
     menu:
       account:
