@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: الاسم
-    prototype:
+    product_archetype:
       name: الاسم

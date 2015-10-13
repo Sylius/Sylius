@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Název akce
       id: ID
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
     imagine_block:
-      parent: Rodič
+      filter: Filtr
+      image: Obrázek
       internal_name: Interní název
-      slideshow_small: Prezentace Velká (plná šíře)
+      label: Popisek
+      parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
       slideshow_medium: Prezentace střední (obsah)
-      slideshow_large: Prezentace malá (postranní)
     menu:
       childrens: Potomci
       display: Zobrazit
@@ -21,12 +26,16 @@ sylius:
       label: Popisek
       name: Jméno
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
       route: Cesta
       uri: URI
     menu_block:
       body: Tělo
       id: ID
       name: Jméno
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
     menu_node_block:
       content: Obsah
       display: Zobrazit
@@ -36,7 +45,6 @@ sylius:
       link_type: Typ vazby
       publish_end_date: Publikovat k datu ukončení
       publish_start_date: Publikovat datum zahájení
-      publishable: Publikovatelný
       route: Cesta
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Tělo
       id: ID
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
       title: Název
     route:
       content: Obsah
@@ -56,11 +66,15 @@ sylius:
       body: Tělo
       internal_name: Interní název
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
       title: Název
     slideshow_block:
       childrens: Potomci
       internal_name: Interní název
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
       title: Název
     static_content:
       body: Tělo
@@ -70,10 +84,11 @@ sylius:
       parent: Rodič
       publish_end_date: Publikovat k datu ukončení
       publish_start_date: Publikovat datum zahájení
-      publishable: Publikovatelný
       routes: Cesty
       title: Název
     string_block:
       body: Tělo
       id: ID
       name: Jméno
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení

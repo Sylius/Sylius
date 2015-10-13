@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    imagine_block:
+      filter: F絞り込む
+      image: 画像

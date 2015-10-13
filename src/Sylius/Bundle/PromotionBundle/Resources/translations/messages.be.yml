@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Катэгорыі
         exclude: Выключыць
+      contains_product_configuration:
+        variants: Тавары
+        exclude: Выключыць
       item_count_configuration:
         count: Колькасць
         equal: Роўна
@@ -23,15 +26,6 @@ sylius:
         equal: Роўна
       nth_order_configuration:
         nth: N-нны
-      user_loyality_configuration:
-        time: Час
-        unit:
-          days: Дні
-          weeks: Тыдні
-          months: Месяцы
-          years: Годы
-          0: Адзінка
-        after: Карыстальнік створаны пасля гэтага перыяду
       shipping_country_configuration:
         country: Краіна
       type: Тып

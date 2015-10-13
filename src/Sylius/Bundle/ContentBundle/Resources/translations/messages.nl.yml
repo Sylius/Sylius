@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Actienaam
       id: Id
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
     imagine_block:
-      parent: Ouder
+      filter: Filter
+      image: Afbeelding
       internal_name: Interne naam
-      slideshow_small: Slideshow groot (volledige breedte)
+      label: Label
+      parent: Ouder
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
       slideshow_medium: Slideshow medium (inhoud)
-      slideshow_large: Slideshow kleine (zijkant)
     menu:
       childrens: Kinderen
       display: Weergeven
@@ -21,12 +26,16 @@ sylius:
       label: Label
       name: Naam
       parent: Ouder
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
       route: Route
       uri: URI
     menu_block:
       body: Inhoud
       id: Id
       name: Naam
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
     menu_node_block:
       content: Inhoud
       display: Weergeven
@@ -36,7 +45,6 @@ sylius:
       link_type: Koppelingstype
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
-      publishable: Publiceerbaar
       route: Route
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Inhoud
       id: Id
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
       title: Titel
     route:
       content: Inhoud
@@ -56,11 +66,15 @@ sylius:
       body: Inhoud
       internal_name: Interne naam
       parent: Ouder
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
       title: Titel
     slideshow_block:
       childrens: Kinderen
       internal_name: Interne naam
       parent: Ouder
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren
       title: Titel
     static_content:
       body: Inhoud
@@ -70,10 +84,11 @@ sylius:
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
-      publishable: Publiceerbaar
       routes: Routes
       title: Titel
     string_block:
       body: Inhoud
       id: ID
       name: Naam
+      publish_end_date: Einddatum publiceren
+      publish_start_date: Begindatum publiceren

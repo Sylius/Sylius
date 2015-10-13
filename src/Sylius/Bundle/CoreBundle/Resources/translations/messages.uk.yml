@@ -22,11 +22,14 @@ sylius:
         different_billing_address: Використовувати іншу платіжну адресу?
       payment_method: Спосіб оплати
       shipping_method: Метод доставки
-    coupon:
-      per_user_usage_limit: Обмеження використання на користувача
     group:
       name: Ім’я
       roles: Ролі
+    channel:
+      taxonomies: Категоризація
+      locales: Локалі
+      shipping_methods: Методи доставки
+      payment_methods: Способи оплати
     image:
       file: Зображення
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: До
       number: Номер замовлення
       shipping_address: "Ім'я одержувача"
+    payment_filter:
+      created_at_from: Від
+      created_at_to: До
+      number: Номер замовлення
     shipping_method:
       zone: Зона
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Ввімкнено
       first_name: Iм’я
       groups: Групи
+      roles: Ролі
       last_name: Прізвище
       password: Пароль
       shipping_address: Адреса доставки
@@ -93,3 +101,8 @@ sylius:
       sku: Артикул
       weight: Вага
       width: Ширина
+    attribute:
+      product_attribute_value:
+        value: Значення
+    guest:
+      email: Email

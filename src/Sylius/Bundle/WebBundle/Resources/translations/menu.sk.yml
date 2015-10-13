@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Sortiment
+        blocks: Bloky
         configuration: Konfigurácia
         countries: Krajiny
-        customer: Zákazníci
+        content: Obsah
         dashboard: Nástenka
-        exchange_rates: Výmenné kurzy
         general_settings: Základné nastavenia
+        groups: Skupiny
         homepage: Zobraziť obchod
         locales: Jazyky
         new_order: Pridať novú objednávku
         new_promotion: Pridať novú akciu
         options: Spravovať možnosti produktov
         orders: Aktuálne objednávky
+        pages: Stránky
         payment_methods: Spôsoby platby
         payments: Platby
         products: Produkty
         promotions: Akcie
-        properties: Konfigurácia vlastností
-        prototypes: Prototypy produktov
         sales: Objednávky
         shipments: Zásielky
         shipping_categories: Kategórie doručenia
@@ -33,17 +33,15 @@ sylius:
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
         taxonomies: Kategorizácia
-        users: Používatelia
         zones: Zóny
+        roles: Rola
       sidebar:
         assortment: Sortiment
         blocks: Bloky
         configuration: Konfigurácia
         content: Obsah
         countries: Krajiny
-        customer: Zákazníci
         dashboard: Nástenka
-        exchange_rates: Výmenné kurzy
         general_settings: Základné nastavenia
         groups: Skupiny
         homepage: Naspäť na stránku
@@ -53,23 +51,23 @@ sylius:
         options: Spravovať možnosti
         orders: Aktuálne objednávky
         pages: Stránky
+        routes: Trasy
         payment_methods: Spôsoby platby
         payments: Platby
         products: Produkty
         promotions: Akcie
-        properties: Konfigurácia vlastností
-        prototypes: Prototypy produktov
         sales: Objednávky
         shipments: Zásielky
         shipping_categories: Kategórie doručenia
         shipping_methods: Spôsoby doručenia
+        slideshow: Prezentácia
         stockables: Úrovne zásob
         tax_categories: Kategórie zdaňovania
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
         taxonomies: Kategorizácia
-        users: Používatelia
         zones: Zóny
+        roles: Rola
   frontend:
     menu:
       account:

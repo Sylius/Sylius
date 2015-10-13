@@ -22,11 +22,14 @@ sylius:
         different_billing_address: Utilizar um endereço diferente para cobrança?
       payment_method: Forma de Pagamento
       shipping_method: Forma de envio
-    coupon:
-      per_user_usage_limit: Uso limitado por usuário
     group:
       name: Nome
       roles: Papéis
+    channel:
+      taxonomies: Taxonomias
+      locales: Localidades
+      shipping_methods: Métodos de envio
+      payment_methods: Meios de pagamentos
     image:
       file: Imagem
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: Para
       number: Número do pedido
       shipping_address: Nome do meio de expedição
+    payment_filter:
+      created_at_from: De
+      created_at_to: Para
+      number: Número do pedido
     shipping_method:
       zone: Zona
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Ativado
       first_name: Nome
       groups: Grupos
+      roles: Papéis
       last_name: Sobrenome
       password: Senha
       shipping_address: Endereço de entrega
@@ -93,3 +101,8 @@ sylius:
       sku: SKU
       weight: Peso
       width: Largura
+    attribute:
+      product_attribute_value:
+        value: Valor
+    guest:
+      email: Email

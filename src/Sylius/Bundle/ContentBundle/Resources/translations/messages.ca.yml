@@ -7,10 +7,9 @@ sylius:
     action_block:
       action_name: "Nom de l'acció"
     imagine_block:
+      image: Imatge
       internal_name: Nom intern
-      slideshow_small: Presentació de diapositives gran (ample)
       slideshow_medium: Presentació de diapositives mitjanes (contingut)
-      slideshow_large: Presentació de diapositives petita (costat)
     menu:
       name: Nom
       uri: URI
@@ -18,6 +17,7 @@ sylius:
       body: Cos
       name: Nom
     menu_node_block:
+      internal_name: Nom intern
       uri: URI
     redirect_route:
       name: Nom
@@ -29,11 +29,14 @@ sylius:
       name: Nom
     simple_block:
       body: Cos
+      internal_name: Nom intern
       title: Títol
     slideshow_block:
+      internal_name: Nom intern
       title: Títol
     static_content:
       body: Cos
+      internal_name: Nom intern
       title: Títol
     string_block:
       body: Cos

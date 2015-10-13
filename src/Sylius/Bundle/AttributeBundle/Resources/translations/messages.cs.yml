@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Interní název
       presentation: Prezentace
+      type: Typ

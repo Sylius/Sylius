@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Veiksmo pavadinimas
       id: Id
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
     imagine_block:
-      parent: Motininis elementas
+      filter: Filtruoti
+      image: Paveikslėlis
       internal_name: Vidinis pavadinimas
-      slideshow_small: Didelė prezentacija (pilno pločio)
+      label: Etiketė
+      parent: Motininis elementas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
       slideshow_medium: Vidutinė prezentacija (turinys)
-      slideshow_large: Maža prezentacija (šone)
     menu:
       childrens: Dukteriniai elementai
       display: Rodymas
@@ -21,12 +26,16 @@ sylius:
       label: Etiketė
       name: Pavadinimas
       parent: Motininis elementas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
       route: Maršrutas
       uri: URI
     menu_block:
       body: Bloko turinys
       id: Id
       name: Pavadinimas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
     menu_node_block:
       content: Turinys
       display: Rodymas
@@ -36,7 +45,6 @@ sylius:
       link_type: Saito tipas
       publish_end_date: Publikavimo pabaigos data
       publish_start_date: Publikavimo pradžios data
-      publishable: Publikuotinas
       route: Maršrutas
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Bloko turinys
       id: Id
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
       title: Pavadinimas
     route:
       content: Turinys
@@ -56,11 +66,15 @@ sylius:
       body: Bloko turinys
       internal_name: Vidinis pavadinimas
       parent: Motininis elementas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
       title: Antraštė
     slideshow_block:
       childrens: Dukteriniai elementai
       internal_name: Vidinis pavadinimas
       parent: Motininis elementas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data
       title: Pavadinimas
     static_content:
       body: Bloko turinys
@@ -70,10 +84,11 @@ sylius:
       parent: Motininis elementas
       publish_end_date: Publikavimo pabaigos data
       publish_start_date: Publikavimo pradžios data
-      publishable: Publikuotinas
       routes: Maršrutai
       title: Pavadinimas
     string_block:
       body: Bloko turinys
       id: ID
       name: Pavadinimas
+      publish_end_date: Publikavimo pabaigos data
+      publish_start_date: Publikavimo pradžios data

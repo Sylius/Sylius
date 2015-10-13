@@ -7,3 +7,11 @@ sylius:
       price: Cena
       calculator: Oceňovanie produktov
       configuration: Konfigurácia
+    pricing:
+      volume_based:
+        price: Cena
+  pricing:
+    volume_based:
+      price: Cena
+      button:
+        add: Pridať

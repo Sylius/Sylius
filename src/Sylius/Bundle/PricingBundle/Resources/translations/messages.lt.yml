@@ -7,3 +7,11 @@ sylius:
       price: Kaina
       calculator: Kainodara
       configuration: Konfigūracija
+    pricing:
+      volume_based:
+        price: Kaina
+  pricing:
+    volume_based:
+      price: Kaina
+      button:
+        add: Pridėti

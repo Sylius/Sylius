@@ -14,7 +14,7 @@ sylius:
       amount: Сумма платежа
       method: Метод платежа
       state:
-        0: Статус платежа
+        header: Статус платежа
         checkout: Сверка
         completed: Завершен
         failed: Провален
@@ -30,3 +30,6 @@ sylius:
       enabled: Включен?
       gateway: Терминал
       name: Название
+      fee_calculator:
+        fixed:
+          amount: Сумма

@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    register: Registracija
+    login: Prijavi se
+    logout: Odjavi se
+  form:
+    group:
+      name: Ime
+    user_change_password:
+      confirmation: Potvrda
+    user_reset_password:
+      confirmation: Potvrda

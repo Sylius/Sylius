@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Дія
       id: ID
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
     imagine_block:
-      parent: "Батьківський об'єкт"
+      filter: Фільтр
+      image: Зображення
       internal_name: "Внутрішнє ім'я"
-      slideshow_small: Велике слайд-шоу (повний розмір)
+      label: Назва
+      parent: "Батьківський об'єкт"
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
       slideshow_medium: Середнє слайд-шоу (по ширині контекту)
-      slideshow_large: Мале слайд-шоу (по ширині контекту)
     menu:
       childrens: Нащадки
       display: Відобразити
@@ -21,12 +26,16 @@ sylius:
       label: Назва
       name: Ім’я
       parent: "Батьківський об'єкт"
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
       route: Маршрут
       uri: Адрес
     menu_block:
       body: Тіло
       id: ID
       name: Ім’я
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
     menu_node_block:
       content: Зміст
       display: Відобразити
@@ -36,7 +45,6 @@ sylius:
       link_type: Тип посилання
       publish_end_date: Опублікувати до
       publish_start_date: Опублікувати від
-      publishable: Опублікований
       route: Маршрут
       uri: Адрес
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Тіло
       id: ID
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
       title: Назва
     route:
       content: Зміст
@@ -56,11 +66,15 @@ sylius:
       body: Тіло
       internal_name: "Внутрішнє ім'я"
       parent: "Батьківський об'єкт"
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
       title: Назва
     slideshow_block:
       childrens: Нащадки
       internal_name: "Внутрішнє ім'я"
       parent: "Батьківський об'єкт"
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від
       title: Назва
     static_content:
       body: Тіло
@@ -70,10 +84,11 @@ sylius:
       parent: "Батьківський об'єкт"
       publish_end_date: Опублікувати до
       publish_start_date: Опублікувати від
-      publishable: Опублікований
       routes: Маршрути
       title: Заголовок
     string_block:
       body: Тіло
       id: ID
       name: Ім’я
+      publish_end_date: Опублікувати до
+      publish_start_date: Опублікувати від

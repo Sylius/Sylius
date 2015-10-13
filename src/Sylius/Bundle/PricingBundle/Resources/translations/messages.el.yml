@@ -6,3 +6,9 @@ sylius:
     priceable:
       price: Τιμή
       configuration: Παραμετροποίηση
+    pricing:
+      volume_based:
+        price: Τιμή
+  pricing:
+    volume_based:
+      price: Τιμή
