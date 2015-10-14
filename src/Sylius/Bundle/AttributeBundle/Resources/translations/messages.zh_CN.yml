@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    attribute:
+      name: 内部名称
+      presentation: 演示

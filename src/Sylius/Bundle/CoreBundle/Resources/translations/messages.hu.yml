@@ -25,6 +25,11 @@ sylius:
     group:
       name: Név
       roles: Szerepek
+    channel:
+      taxonomies: Taxonómiák
+      locales: Területi beállítások
+      shipping_methods: Szállítási módok
+      payment_methods: Fizetési módok
     image:
       file: Kép
     locale:
@@ -62,6 +67,10 @@ sylius:
       created_at_to: -ig
       number: Rendelés azonosítója
       shipping_address: Szállítás erre a névre
+    payment_filter:
+      created_at_from: -tól
+      created_at_to: -ig
+      number: Rendelés azonosítója
     shipping_method:
       zone: Zóna
     taxon:
@@ -74,6 +83,7 @@ sylius:
       enabled: Engedélyezve
       first_name: Keresztnév
       groups: Csoportok
+      roles: Szerepek
       last_name: Vezetéknév
       password: Jelszó
       shipping_address: Szállítási cím
@@ -89,3 +99,8 @@ sylius:
       sku: SKU
       weight: Súly
       width: Szélesség
+    attribute:
+      product_attribute_value:
+        value: Érték
+    guest:
+      email: E-mail

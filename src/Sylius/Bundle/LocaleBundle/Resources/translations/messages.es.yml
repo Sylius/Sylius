@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Código
       enabled: Activado
+      name: Nombre

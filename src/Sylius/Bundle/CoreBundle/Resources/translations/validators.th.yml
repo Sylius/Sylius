@@ -2,24 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  group:
-    name:
-      max: 'ชื่อกลุ่มต้องยาวไม่เกิน {{ limit }} ตัวอักษร'
-      min: 'ชื่อกลุ่มต้องยาวอย่างน้อย {{ limit }} อักษร'
-      not_blank: กรุณาระบุชื่อกลุ่ม
   locale:
     code:
       not_blank: ระบุรหัสภาษา
       unique: มีภาษานี้อยู่แล้ว
-  user:
-    first_name:
-      max: 'ชื่อต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร'
-      min: 'ชื่อต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
-      not_blank: กรุณาระบุชื่อ
-    last_name:
-      max: 'นามสกุลต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร.'
-      min: 'นามสกุลต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร.'
-      not_blank: กรุณาระบุนามสกุลของคุณ
   product_variant:
     onHand:
       min: 'On hand ต้องมากกว่า {{ limit }}.'

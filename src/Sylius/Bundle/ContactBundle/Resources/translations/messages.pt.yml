@@ -4,10 +4,10 @@
 sylius:
   form:
     contact_request:
-      first_name: Nome
-      last_name: Sobrenome
-      email: Email
+      first_name: Nome próprio
+      last_name: Apelido
+      email: Endereço de email
       message: Mensagem
-      topic: Tópico
+      topic: Assunto
     contact_topic:
       title: Título

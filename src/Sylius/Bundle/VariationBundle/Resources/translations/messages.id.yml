@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Presentasi
+    option:
+      name: Nama internal
+      presentation: Presentasi

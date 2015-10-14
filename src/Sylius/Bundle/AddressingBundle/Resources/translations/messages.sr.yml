@@ -4,36 +4,36 @@
 sylius:
   form:
     address:
-      city: Grad
-      company: Kompanija
-      country: Zemlja
-      first_name: Ime
-      last_name: Prezime
-      phone_number: Broj telefona
-      postcode: Poštanski broj
-      street: Ulica
-      province: Pokrajina
+      city: Град
+      company: Компанија
+      country: Земља
+      first_name: Име
+      last_name: Презиме
+      phone_number: Број телефона
+      postcode: Поштански број
+      street: Улица
+      province: Провинција
     country:
-      iso_name: ISO kod
-      name: Ime
-      provinces: Provincije
-      select: Izaberite
+      iso_name: ИСО код
+      name: Име
+      provinces: Провинције
+      select: Изаберите
     province:
-      name: Ime
-      select: Izaberite
+      name: Име
+      select: Изаберите
     zone:
-      members: Članovi
-      name: Ime
-      type: Tip
+      members: Чланови
+      name: Име
+      type: Тип
       types:
-        country: Zemlja
-        province: Provincija
-        zone: Zona
-      scope: Adresa isporuke
-      select_scope: Izaberite adresu isporuke
+        country: Земља
+        province: Провинција
+        zone: Зона
+      scope: Обухват
+      select_scope: Изабери обухват
     zone_member_country:
-      country: Zemlja
+      country: Земља
     zone_member_province:
-      province: Provincija
+      province: Провинција
     zone_member_zone:
-      zone: Zona
+      zone: Област

@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Nama
+      roles: Peran
+    user:
+      enabled: Diaktifkan
+      password:
+        label: Kata sandi
+      shipping_address: Alamat pengiriman
+    customer:
+      first_name: Nama Depan
+      groups: Kelompok
+      last_name: Nama belakang
+      billing_address: Alamat Penagihan
+      different_billing_address: Menggunakan alamat berbeda untuk penagihan?
+    user_filter:
+      query: Cari

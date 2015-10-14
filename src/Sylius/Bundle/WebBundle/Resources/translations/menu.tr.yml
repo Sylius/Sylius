@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Çeşitlilik
+        blocks: Bloklar
         configuration: Ayarlar
         countries: Ülkeler
-        customer: Müşteriler
+        content: İçerik
         dashboard: Kontrol Paneli
-        exchange_rates: Döviz kurları
         general_settings: Genel ayarlar
+        groups: Gruplar
         homepage: Mağazanız
         locales: Diller
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Ürün seçeneklerini yönet
         orders: Şuanki siparişler
+        pages: Sayfalar
         payment_methods: Ödeme tipleri
         payments: Ödemeler
         products: Ürünler
         promotions: Promosyonlar
-        properties: Ayarları yapılandırma
-        prototypes: Ürün prototipleri
         sales: Siparişler
         shipments: Kargo İşlemleri
         shipping_categories: Kargo kategorileri
@@ -33,17 +33,15 @@ sylius:
         tax_rates: Vergi oranları
         taxation_settings: Vergilendirme ayarları
         taxonomies: Sınıflandırma
-        users: Kullanıcılar
         zones: Bölgeler
+        roles: Roller
       sidebar:
         assortment: Çeşitlilik
         blocks: Bloklar
         configuration: Ayarlar
         content: İçerik
         countries: Ülkeler
-        customer: Müşteriler
         dashboard: Kontrol Paneli
-        exchange_rates: Döviz kurları
         general_settings: Genel ayarlar
         groups: Gruplar
         homepage: Siteye dön
@@ -53,23 +51,23 @@ sylius:
         options: Seçeneklerini yönet
         orders: Şuanki siparişler
         pages: Sayfalar
+        routes: Rotalar
         payment_methods: Ödeme tipleri
         payments: Ödemeler
         products: Ürünler
         promotions: Promosyonlar
-        properties: Ayarları yapılandırma
-        prototypes: Ürün prototipleri
         sales: Siparişler
         shipments: Kargo İşlemleri
         shipping_categories: Kargo kategorileri
         shipping_methods: Gönderim metodları
+        slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
         tax_categories: Vergi kategorileri
         tax_rates: Vergi oranları
         taxation_settings: Vergilendirme ayarları
         taxonomies: Sınıflandırma
-        users: Kullanıcılar
         zones: Bölgeler
+        roles: Roller
   frontend:
     menu:
       account:

@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Nazwa w systemie
       presentation: Nazwa publiczna
+      type: Typ

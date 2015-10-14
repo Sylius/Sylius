@@ -12,7 +12,7 @@ sylius:
       phone_number: Telefon
       postcode: Poštna številka
       street: Ulica
-      province: Provinca
+      province: Regija
     country:
       iso_name: ISO ime
       name: Ime
@@ -33,6 +33,6 @@ sylius:
     zone_member_country:
       country: Država
     zone_member_province:
-      province: Provinca
+      province: Regija
     zone_member_zone:
       zone: Območje

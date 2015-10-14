@@ -6,3 +6,5 @@ sylius:
     attribute:
       name: Nom interne
       presentation: Présentation
+      type: Type
+      choices: Choix

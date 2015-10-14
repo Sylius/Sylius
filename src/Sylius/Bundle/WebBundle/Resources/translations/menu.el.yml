@@ -5,12 +5,15 @@ sylius:
   backend:
     menu:
       main:
+        blocks: Μπλοκ
         configuration: Ρυθμίσεις παραμέτρων
         countries: Χώρες
-        customer: Πελάτες
+        content: Περιεχόμενο
         general_settings: Γενικές ρυθμίσεις
+        groups: Ομάδες
         new_order: Προσθήκη νέας παραγγελίας
         orders: Τρέχουσες παραγγελίες
+        pages: Σελίδες
         payment_methods: Τρόποι πληρωμής
         payments: Πληρωμές
         products: Προϊόντα
@@ -19,16 +22,14 @@ sylius:
         shipments: Αποστολές
         tax_rates: Φορολογικοί συντελεστές
         taxonomies: Κατηγοριοποίηση
-        users: Χρήστες
         zones: Ζώνες
+        roles: Ρόλοι
       sidebar:
         assortment: Κατάταξη
         blocks: Μπλοκ
         configuration: Ρύθμιση παραμέτρων
         content: Περιεχόμενο
         countries: Χώρες
-        customer: Πελάτες
-        exchange_rates: Συναλλαγματικές ισοτιμίες
         general_settings: Γενικές ρυθμίσεις
         groups: Ομάδες
         locales: Τοπικές ρυθμίσεις
@@ -45,8 +46,8 @@ sylius:
         stockables: Επίπεδα αποθέματος
         tax_rates: Φορολογικοί συντελεστές
         taxonomies: Κατηγοριοποίηση
-        users: Χρήστες
         zones: Ζώνες
+        roles: Ρόλοι
   frontend:
     menu:
       account:

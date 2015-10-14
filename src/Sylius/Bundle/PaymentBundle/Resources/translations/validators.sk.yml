@@ -26,3 +26,11 @@ sylius:
       max_length: 'Názov spôsobu platby musí obsahovať {{ limit }} znakov alebo menej.'
       min_length: 'Názov spôsobu platby musí obsahovať aspoň {{ limit }} znakov.'
       not_blank: Zadajte názov pre spôsob platby.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'Poplatok nemôže byť nižšii ako {{ compared_value }}.'
+        not_blank: Zadajte čiastku poplatku.
+      percent:
+        max_range: 'Percentný poplatok nesmie byť vyšší ako {{ limit }}.'
+        min_range: 'Percentný poplatok nemôže byť nižšii ako {{ limit }}.'
+        not_blank: Zadajte poplatok percentom.

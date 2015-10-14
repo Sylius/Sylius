@@ -3,5 +3,33 @@
 
 sylius:
   form:
+    credit_card:
+      cardholder_name: Name des Karteninhabers
+      expiry_month: Ablaufmonat
+      expiry_year: Ablaufjahr
+      number: Kartennummer
+      security_code: Sicherheitscode (CVV)
+      type: Kartentyp
+    payment:
+      amount: Zahlungsbetrag
+      method: Zahlungsweise
+      state:
+        header: Zahlungsstatus
+        checkout: Zur Kasse
+        completed: Abgeschlossen
+        failed: Fehlgeschlagen
+        new: Neu
+        pending: Ausstehend
+        processing: Wird verarbeitet
+        unknown: Unbekannt
+        void: Ungültig
+        cancelled: Abgebrochen
+        refunded: Rückerstattet
     payment_method:
+      description: Beschreibung
+      enabled: Aktiviert?
+      gateway: Schnittstelle
       name: Name
+      fee_calculator:
+        fixed:
+          amount: Anzahl

@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      code: Code
+      enabled: Aktiviert
+      content: Inhalt

@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Унутранае імя
       presentation: Выгляд
+      type: Тып

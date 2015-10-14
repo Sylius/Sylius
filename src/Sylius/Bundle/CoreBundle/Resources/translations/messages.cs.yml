@@ -22,11 +22,14 @@ sylius:
         different_billing_address: Použít jinou adresu pro fakturaci?
       payment_method: Způsob Platby
       shipping_method: Způsob Dopravy
-    coupon:
-      per_user_usage_limit: Využití uživatelských limitů
     group:
       name: Jméno
       roles: Role
+    channel:
+      taxonomies: Taxonomie
+      locales: Lokalizace
+      shipping_methods: Způsoby dopravy
+      payment_methods: Způsoby platby
     image:
       file: Obrázek
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: Do
       number: Číslo objednávky
       shipping_address: Jméno příjemce
+    payment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo objednávky
     shipping_method:
       zone: Oblast
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Povoleno
       first_name: Křestní Jméno
       groups: Skupiny
+      roles: Role
       last_name: Příjmení
       password: Heslo
       shipping_address: Doručovací adresa
@@ -93,3 +101,8 @@ sylius:
       sku: SKU
       weight: Hmotnost
       width: Šířka
+    attribute:
+      product_attribute_value:
+        value: Hodnota
+    guest:
+      email: Email

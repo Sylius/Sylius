@@ -5,18 +5,16 @@ sylius:
   form:
     rule:
       item_count_configuration:
-        count: Cantitate
-        equal: Egal
-      type: Tip
+        count: Număr
     shipment:
       state: Status
       states:
         checkout: Finalizare comandă
-        dispatched: Expediată
         pending: În așteptare
         ready: Gata
         shipped: Expediată
         returned: Returnată
+        cancelled: Anulată
       tracking_code: Codul de urmărire
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +26,8 @@ sylius:
       per_item_rate_configuration:
         amount: Sumă
       weight_rate_configuration:
+        division: Divizie
+      volume_rate_configuration:
         amount: Valoare
         division: Divizie
     shipping_category:
@@ -38,5 +38,5 @@ sylius:
       category: Categorie
       category_requirement: Cerința categoriei
       configuration: Configurare
-      enabled: Activat?
+      enabled: Activat
       name: Nume

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    role:
+      code: Kod
+      name: Ad
+      description: Açıklama
+      parent: Üst
+    permission:
+      code: Kod
+      description: Açıklama
+      parent: Üst

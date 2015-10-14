@@ -1,3 +1,23 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  locale:
+    code:
+      not_blank: Bitte lokalen Code eingeben.
+      unique: Locale existiert bereits.
+  product_variant:
+    onHand:
+      min: 'Menge muss größer sein als {{ limit }}.'
+      not_blank: Bitte verfügbare Menge eingeben.
+    price:
+      min: Preis darf nicht negativ sein.
+      not_blank: Bitte Preis eingeben.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Bitte Versandgebiet angeben.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Bitte Steuerzone angeben.

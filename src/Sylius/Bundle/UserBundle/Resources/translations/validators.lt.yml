@@ -1,0 +1,33 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Grupės pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+      min: 'Grupės pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite grupės pavadinimą.
+  user:
+    email:
+      not_blank: Įveskite savo elektroninio pašto adresą.
+      invalid: Šis adresas yra neteisingas.
+    plainPassword:
+      not_blank: Įveskite savo slaptažodį.
+      mismatch: Įvesti slaptažodžiai nesutampa
+  customer:
+    first_name:
+      max: 'Vardas turi būti ne ilgesnis nei {{ limit }} simbolių.'
+      min: 'Vardas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite savo vardą.
+    last_name:
+      max: 'Pavardė turi būti ne ilgesnė nei {{ limit }} simbolių.'
+      min: 'Pavardė turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite savo pavardę.
+    email:
+      already_used: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
+      max: 'El. paštas turi būti ne ilgesnis nei {{ limit }} simbolių.'
+      min: 'El. paštas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      not_blank: Įveskite savo elektroninio pašto adresą.
+      invalid: Šis adresas yra neteisingas.
+      unique: Šį adresas jau naudojamas.
+      registered: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.

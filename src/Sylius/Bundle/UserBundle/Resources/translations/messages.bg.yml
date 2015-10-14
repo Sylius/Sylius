@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    register: Регистриране
+    login: Вход
+    logout: Изход
+    change_password: Смяна на парола
+    account_panel_outline: 'Насладете се на всички функции, които са налични  за преглед във вашето лично пространство, проследявайте и управлявайте всички ваши данни.'
+  form:
+    user_change_password:
+      confirmation: Потвърждение
+      current: Текуща парола
+      new: Нова парола
+    user_reset_password:
+      confirmation: Потвърждение
+      new: Нова парола

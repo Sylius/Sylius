@@ -2,8 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
-    product:
-      name: Ime
-    prototype:
-      name: Ime
+  form:
+    product_variant:
+      available_on: Доступно
