@@ -33,7 +33,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body {% if is_granted('ROLE_SYLIUS_ADMIN') %}class="toolbar-padding"{% endif %}>
     {% if settings.tracking_code %}
         {{ settings.tracking_code|raw }}
     {% endif %}
