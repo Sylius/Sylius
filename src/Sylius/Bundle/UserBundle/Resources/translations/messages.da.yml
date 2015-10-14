@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Registrer
+    login: Log ind
+    logout: Log af
+    change_password: Ændre din adgangskode
+    account_panel_outline: Nyd alle de funktioner som er tilgængelige på din personlige oversigt, til at se, spore og håndtere al din data.
+  form:
+    group:
+      name: Navn
+      roles: Roller
+    user:
+      email: Email
+      enabled: Aktiveret
+      password:
+        label: Adgangskode
+      shipping_address: Leveringsadresse
+    customer:
+      first_name: Fornavn
+      groups: Grupper
+      last_name: Efternavn
+      email: Email
+      billing_address: Faktureringsadresse
+      different_billing_address: Brug anden faktureringsadresse?
+    user_filter:
+      query: Søg
+    user_change_password:
+      confirmation: Bekræftelse
+      current: Nuværende adgangskode
+      new: Ny adgangskode
+    user_reset_password:
+      confirmation: Bekræftelse
+      new: Ny adgangskode

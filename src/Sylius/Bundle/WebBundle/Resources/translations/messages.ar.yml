@@ -2,15 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
   address:
     country: البلد
     firstname: الاسم الأول
@@ -19,6 +10,8 @@ sylius:
     country:
       index: البلدان
     new: جديد
+    page:
+      index: الصفحات
   checkout:
     finalize:
       address:
@@ -29,6 +22,11 @@ sylius:
   country:
     index_header: البلدان
     name: الاسم
+  role:
+    name: الاسم
+  currency:
+    name: الاسم
+    exchange_rate: سعر الصرف
   form:
     login:
       email: البريد الإلكتروني
@@ -41,8 +39,14 @@ sylius:
     name: الاسم
   inventory_unit:
     name: الاسم
+  locale:
+    name: الاسم
   "no": false
+  route:
+    name: الاسم
   shipment:
+    name: الاسم
+  channel:
     name: الاسم
   page:
     index_header: الصفحات
@@ -56,6 +60,8 @@ sylius:
     name: الاسم
   promotion:
     name: الاسم
+  report:
+    name: الاسم
   shipping_category:
     name: الاسم
   shipping_method:
@@ -68,9 +74,14 @@ sylius:
     name: الاسم
   taxonomy:
     name: الاسم
-  user:
+  customer:
+    email: البريد الإلكتروني
     first_name: الاسم الأول
     last_name: اسم العائلة
   "yes": true
   zone:
     name: الاسم
+  contact_request:
+    firstName: الاسم الأول
+    lastName: اسم العائلة
+    email: البريد الإلكتروني

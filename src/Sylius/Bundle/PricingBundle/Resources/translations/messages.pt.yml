@@ -2,8 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Preço
-      calculator: Preços
-      configuration: Configuração
+  pricing:
+    volume_based:
+      button:
+        add: Adicionar

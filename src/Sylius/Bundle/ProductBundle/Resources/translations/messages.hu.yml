@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Név
       description: Leírás
-      properties: Tulajdonságok
-      available_on: A rendelkezésre álló
+      options: Beállítások
       meta_keywords: Meta kulcsszavak
       meta_description: Meta leírás
-    property:
-      name: Belső név
-      presentation: Bemutató
-    prototype:
+    product_variant:
+      available_on: A rendelkezésre álló
+    product_archetype:
       name: Név
-      properties: Tulajdonságok
+      parent: Szülő
+      options: Beállítások

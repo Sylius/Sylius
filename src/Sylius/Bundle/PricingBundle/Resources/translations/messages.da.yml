@@ -6,3 +6,9 @@ sylius:
     priceable:
       price: Pris
       configuration: Konfiguration
+    pricing:
+      volume_based:
+        price: Pris
+  pricing:
+    volume_based:
+      price: Pris

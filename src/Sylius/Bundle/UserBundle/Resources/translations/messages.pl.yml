@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Zarejestruj
+    login: Zaloguj
+    logout: Wyloguj
+    change_password: Zmiana hasła
+    account_panel_outline: sylius.account.home.outline
+  form:
+    group:
+      name: Nazwa
+      roles: Role
+    user:
+      email: Email
+      enabled: Aktywne
+      password:
+        label: Hasło
+      shipping_address: Adres wysyłkowy
+    customer:
+      first_name: Imię
+      groups: Grupy
+      last_name: Nazwisko
+      email: Email
+      billing_address: Adres rozliczeniowy
+      different_billing_address: Użyć innego adresu do rozliczeń?
+    user_filter:
+      query: Szukaj
+    user_change_password:
+      confirmation: Potwierdzenie
+      current: Obecne hasło
+      new: Nowe hasło
+    user_reset_password:
+      confirmation: Potwierdzenie
+      new: Nowe hasło

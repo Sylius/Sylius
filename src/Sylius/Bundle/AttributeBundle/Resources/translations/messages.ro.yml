@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Denumire internă
       presentation: Prezentare
+      type: Tip

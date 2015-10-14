@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Dahili isim
       presentation: Sunum
+      type: Türü

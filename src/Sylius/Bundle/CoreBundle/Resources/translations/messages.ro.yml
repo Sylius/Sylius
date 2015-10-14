@@ -22,11 +22,14 @@ sylius:
         different_billing_address: Folosiți o adresă de facturare diferită?
       payment_method: Metoda de plată
       shipping_method: Metoda de livrare
-    coupon:
-      per_user_usage_limit: Limita de utilizare per utilizator
     group:
       name: Nume
       roles: Roluri
+    channel:
+      taxonomies: Categorizări
+      locales: Setări regionale
+      shipping_methods: Metode de livrare
+      payment_methods: Metode de plată
     image:
       file: Imagine
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: Până la
       number: Număr comandă
       shipping_address: Livrează la
+    payment_filter:
+      created_at_from: De la
+      created_at_to: Până la
+      number: Număr comandă
     shipping_method:
       zone: Zonă
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Activat
       first_name: Prenume
       groups: Grupuri
+      roles: Roluri
       last_name: Nume
       password: Parolă
       shipping_address: Adresa de livrare
@@ -93,3 +101,8 @@ sylius:
       sku: SKU
       weight: Greutate
       width: Lăţime
+    attribute:
+      product_attribute_value:
+        value: Valoare
+    guest:
+      email: E-mail

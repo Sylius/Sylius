@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Nombre
       description: Descripción
-      properties: Propiedades
-      available_on: Disponible desde
+      options: Opciones de producto
       meta_keywords: Meta palabras clave
       meta_description: Meta descripción
-    property:
-      name: Nombre interno
-      presentation: Presentación
-    prototype:
+    product_variant:
+      available_on: Disponible el
+    product_archetype:
       name: Nombre
-      properties: Propiedades
+      parent: Padre
+      options: Opciones de producto

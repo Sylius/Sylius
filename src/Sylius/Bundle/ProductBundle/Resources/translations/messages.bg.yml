@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    product:
+      options: Опцйи
+    product_variant:
+      available_on: На разположение на
+    product_archetype:
+      options: Опцйи

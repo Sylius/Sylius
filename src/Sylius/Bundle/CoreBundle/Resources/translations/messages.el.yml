@@ -60,6 +60,10 @@ sylius:
       created_at_to: Προς
       number: Αριθμός Παραγγελίας
       shipping_address: Αποστολή στο όνομα
+    payment_filter:
+      created_at_from: Από
+      created_at_to: Προς
+      number: Αριθμός Παραγγελίας
     shipping_method:
       zone: Ζώνη
     taxon:
@@ -72,6 +76,7 @@ sylius:
       enabled: Ενεργοποιημένο
       first_name: Όνομα
       groups: Ομάδες
+      roles: Ρόλοι
       last_name: Επώνυμο
       password: Κωδικός πρόσβασης
       shipping_address: Διεύθυνση αποστολής
@@ -86,3 +91,5 @@ sylius:
       sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
       weight: Βάρος
       width: Πλάτος
+    guest:
+      email: Ηλεκτρονικό ταχυδρομείο

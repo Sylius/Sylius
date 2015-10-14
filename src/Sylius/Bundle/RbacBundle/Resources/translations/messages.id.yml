@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    role:
+      code: Kode
+      name: Nama
+    permission:
+      code: Kode

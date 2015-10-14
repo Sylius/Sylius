@@ -14,7 +14,7 @@ sylius:
       amount: Beløp
       method: Betalingsmetode
       state:
-        0: Betalingsstatus
+        header: Betalingsstatus
         checkout: Gå til kassen
         completed: Fullført
         failed: Mislyktes
@@ -30,3 +30,6 @@ sylius:
       enabled: Aktivert?
       gateway: Rute
       name: Navn
+      fee_calculator:
+        fixed:
+          amount: Beløp

@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: E-posta
+    register: Üye ol
+    login: Giriş
+    logout: Çıkış yap
+    change_password: Parolanızı değiştirin
+    account_panel_outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
+  form:
+    group:
+      name: Ad
+      roles: Roller
+    user:
+      email: E-posta
+      enabled: Etkin
+      password:
+        label: Şifre
+      shipping_address: Teslimat adresi
+    customer:
+      first_name: Ad
+      groups: Gruplar
+      last_name: Soyad
+      email: E-posta
+      billing_address: Fatura adresi
+      different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+    user_filter:
+      query: Arama
+    user_change_password:
+      confirmation: Doğrulama
+      current: Geçerli parola
+      new: Yeni parola
+    user_reset_password:
+      confirmation: Doğrulama
+      new: Yeni parola

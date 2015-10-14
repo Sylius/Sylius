@@ -3,6 +3,8 @@
 
 sylius:
   form:
+    imagine_block:
+      image: Hình ảnh
     menu:
       name: Tên
     menu_block:

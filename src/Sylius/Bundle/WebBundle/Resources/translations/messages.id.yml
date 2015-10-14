@@ -2,25 +2,40 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  emails:
+    order_confirmation:
+      subject: Terima kasih atas pesanan Anda!
   address:
     firstname: Nama Depan
     lastname: Nama belakang
   block:
-    body: Body
-    id: ID
-    title: Judul
+    imagine:
+      id: Id
+      label: Label
+      title: Judul
+    simple:
+      body: Body
+      id: Id
+      label: Label
+      title: Judul
+    slideshow:
+      body: Body
+      id: Id
+      title: Judul
+    string:
+      body: Body
+      id: Id
+      label: Label
+      title: Judul
   breadcrumb:
     group:
       index: Kelompok
+    menu_node:
+      index: Menu node
+    route:
+      index: Rute
+    role:
+      index: Peran
   cart:
     summary:
       unit_price: Harga
@@ -37,8 +52,22 @@ sylius:
   country:
     id: ID
     name: Nama
-  exchange_rate:
+    enabled: Diaktifkan
+  email:
+    code: Kode
+  permission:
+    code: Kode
     id: ID
+  role:
+    code: Kode
+    id: ID
+    name: Nama
+    index_header: Peran
+  currency:
+    code: Kode
+    id: ID
+    name: Nama
+    enabled: Diaktifkan
   form:
     login:
       password: Kata sandi
@@ -54,24 +83,49 @@ sylius:
     name: Nama
     sku: SKU
   locale:
+    id: ID
+    name: Nama
     code: Kode
     enabled: Diaktifkan
+  menu:
+    id: ID
+    title: Judul
+  menu_node:
+    id: ID
+    index_header: Menu node
+    title: Judul
   "no": false
   order:
     billing_address: Alamat Penagihan
     id: ID
     number: Nomor
     shipping_address: Alamat pengiriman
-    user: Pengguna
+    currency: Mata Uang
+    adjustments:
+      label: Label
+  route:
+    id: ID
+    index_header: Rute
+    name: Nama
+    title: Judul
+  redirect_route:
+    id: ID
+    title: Judul
   shipment:
     id: ID
     name: Nama
     sku: SKU
+  channel:
+    code: Kode
+    enabled: Diaktifkan
+    id: ID
+    name: Nama
   order_item:
     unit_price: Harga Satuan
   page:
     body: Body
     id: ID
+    routes: Rute
     title: Judul
   password: Kata sandi
   payment:
@@ -90,9 +144,16 @@ sylius:
       images: Gambar
     tax_category: Kategori Pajak
     variant_selection_method: Metode Pilih Varian
+    volume_based:
+      price: Harga
   promotion:
     id: ID
     name: Nama
+  promotion_coupon:
+    code: Kode
+  report:
+    name: Nama
+    code: Kode
   search: Cari
   shipping_address: Alamat pengiriman
   shipping_category:
@@ -112,12 +173,15 @@ sylius:
     name: Nama
   taxonomy:
     name: Nama
-  user:
+  customer:
     billing_address: Alamat Penagihan
     first_name: Nama Depan
     id: ID
     last_name: Nama belakang
     shipping_address: Alamat pengiriman
+    groups: Kelompok
+  user:
+    id: ID
   variant:
     available_on_demand: Tersedia
     price: Harga
@@ -126,3 +190,13 @@ sylius:
   "yes": true
   zone:
     name: Nama
+    scope: Ruang lingkup
+  contact_topic:
+    id: ID
+    title: Judul
+  contact_request:
+    id: ID
+    firstName: Nama Depan
+    lastName: Nama belakang
+    message: Pesan
+    topic: Topik

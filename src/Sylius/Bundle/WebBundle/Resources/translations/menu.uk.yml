@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Асортимент
+        blocks: Блоки
         configuration: Конфігурація
         countries: Країни
-        customer: Клієнти
+        content: Зміст
         dashboard: Панель керування
-        exchange_rates: Курси валют
         general_settings: Загальні налаштування
+        groups: Групи
         homepage: Ваш магазин
         locales: Локалі
         new_order: Додати нове замовлення
         new_promotion: Додати нові акції
         options: Керувати опціями продукту
         orders: Поточні замовлення
+        pages: Сторінки
         payment_methods: Варіанти оплати
         payments: Платежі
         products: Продукти
         promotions: Промо-акції
-        properties: Налаштування властивостей
-        prototypes: Прототипи продукту
         sales: Замовлення
         shipments: Відправки
         shipping_categories: Категорії доставки
@@ -33,17 +33,15 @@ sylius:
         tax_rates: Податкові ставки
         taxation_settings: Налаштування оподаткування
         taxonomies: Категоризація
-        users: Користувачі
         zones: Пояси
+        roles: Ролі
       sidebar:
         assortment: Асортимент
         blocks: Блоки
         configuration: Конфігурація
         content: Зміст
         countries: Країни
-        customer: Клієнти
         dashboard: Панель керування
-        exchange_rates: Курси валют
         general_settings: Загальні налаштування
         groups: Групи
         homepage: Назад до інтерфейсу
@@ -53,23 +51,23 @@ sylius:
         options: Керування опціями
         orders: Поточний замовлень
         pages: Сторінки
+        routes: Маршрути
         payment_methods: Варіанти оплати
         payments: Платежі
         products: Продукти
         promotions: Промо-акції
-        properties: Налаштування властивостей
-        prototypes: Прототипи продукту
         sales: Замовлення
         shipments: Відправки
         shipping_categories: Категорії доставки
         shipping_methods: Методи доставки
+        slideshow: Слайд-шоу
         stockables: Рівні запасів
         tax_categories: Категорії оподаткування
         tax_rates: Податкові ставки
         taxation_settings: Налаштування оподаткування
         taxonomies: Категоризація
-        users: Користувачі
         zones: Пояси
+        roles: Ролі
   frontend:
     menu:
       account:

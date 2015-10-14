@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    report:
+      name: Jméno
+      description: Popis
+      code: Kód
+      chart:
+        type: Typ

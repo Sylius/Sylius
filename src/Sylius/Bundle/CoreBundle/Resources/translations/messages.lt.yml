@@ -11,6 +11,7 @@ sylius:
         price: Vieneto kaina
         quantity: Kiekis
         variant: Variantas
+      customer_group: Pirkėjų grupė
     block:
       body: Bloko turinys
       id: ID
@@ -22,11 +23,19 @@ sylius:
         different_billing_address: Naudoti kitą adresą apmokėjimui?
       payment_method: Apmokėjimo būdas
       shipping_method: Pristatymo būdas
+    promotion:
+      channels: Kanalas
     coupon:
-      per_user_usage_limit: Vartotojo naudojimo limitas
+      per_customer_usage_limit: Kliento naudojimosi ribos
     group:
       name: Pavadinimas
       roles: Rolės
+    channel:
+      taxonomies: Taksonomijos
+      locales: Lokalės
+      currencies: Valiutos
+      shipping_methods: Pristatymo būdai
+      payment_methods: Mokėjimo būdai
     image:
       file: Paveikslėlis
     locale:
@@ -39,6 +48,7 @@ sylius:
       total_from: Nuo
       total_to: Iki
       payment_state: Apmokėjimo būsena
+      channel: Visi kanalai
     page:
       body: Bloko turinys
       id: ID
@@ -59,13 +69,24 @@ sylius:
         meta_description: Meta aprašymas
         meta_keywords: Meta raktažodžiai
         title: Puslapio antraštė
+        tracking_code:
+          Tracking code (for example: Google Analytics kodas)
       taxation:
         default_tax_zone: Numatyta mokesčių zona
+      security:
+        enabled: Įgalinti?
     shipment_filter:
       created_at_from: Nuo
       created_at_to: Iki
       number: Užsakymo numeris
       shipping_address: Pristatyti vardu
+      channel: Visi kanalai
+    payment_filter:
+      created_at_from: Nuo
+      created_at_to: Iki
+      number: Užsakymo numeris
+      billing_address: Mokėtojo pavadinimas
+      channel: Visi kanalai
     shipping_method:
       zone: Zona
     taxon:
@@ -78,6 +99,7 @@ sylius:
       enabled: Įjungta
       first_name: Vardas
       groups: Grupės
+      roles: Rolės
       last_name: Pavardė
       password: Slaptažodis
       shipping_address: Pristatymo adresas
@@ -93,3 +115,9 @@ sylius:
       sku: Kodas
       weight: Svoris
       width: Plotis
+    attribute:
+      product_attribute_value:
+        attribute: Atributas
+        value: Reikšmė
+    guest:
+      email: Elektroninis paštas

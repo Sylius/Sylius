@@ -16,6 +16,7 @@ sylius:
       max_length: 'Kód kupónu nesmie byť dlhší ako 1 znak.|Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.'
       min_length: 'Kód kupónu musí obsahovať aspoň 1 znak.|Kód kupónu musí obsahovať aspoň {{ limit }} znakov.'
       not_blank: Zadajte kód kupónu.
+      unique: Tento kupón už existuje.
     usage_limit:
       min: 'Limit použitia kupónu musí byť najmenej {{ limit }}.'
   promotion_coupon_generate_instruction:

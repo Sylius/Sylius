@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    channel:
+      code: Kodas
+      name: Pavadinimas
+      description: Aprašymas
+      url: URL
+      enabled: Įjungta
+      color: Spalva

@@ -2,16 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Ονομασία
       description: Περιγραφή
-      properties: Ιδιότητες
-      available_on: Διαθέσιμο την
+      options: Επιλογές
       meta_keywords: Μετα-λέξεις-κλειδιά
       meta_description: Μετα-περιγραφή
-    property:
-      presentation: Παρουσίαση
-    prototype:
+    product_variant:
+      available_on: Διαθέσιμο την
+    product_archetype:
       name: Ονομασία
-      properties: Ιδιότητες
+      options: Επιλογές

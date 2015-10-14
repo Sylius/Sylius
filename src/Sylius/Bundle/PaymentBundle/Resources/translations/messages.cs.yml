@@ -14,7 +14,7 @@ sylius:
       amount: Platební částka
       method: Způsob platby
       state:
-        0: Stav platby
+        header: Stav platby
         checkout: Objednat
         completed: Dokončeno
         failed: Neúspěšné
@@ -30,3 +30,6 @@ sylius:
       enabled: Povoleno?
       gateway: Brána
       name: Jméno
+      fee_calculator:
+        fixed:
+          amount: Částka

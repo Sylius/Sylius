@@ -15,21 +15,15 @@ sylius:
       taxonomy_configuration:
         taxons: Taxons
         exclude: Udelad
+      contains_product_configuration:
+        variants: Produkter
+        exclude: Udelad
       item_count_configuration:
         count: Antal
         equal: Lige
       item_total_configuration:
         amount: Beløb
         equal: Lige
-      user_loyality_configuration:
-        time: Tid
-        unit:
-          days: Dage
-          weeks: Uger
-          months: Måneder
-          years: År
-          0: Enhed
-        after: Bruger oprettet efter denne periode
       shipping_country_configuration:
         country: Land
       type: Type

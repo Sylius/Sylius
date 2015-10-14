@@ -4,5 +4,10 @@
 sylius:
   backend:
     menu:
+      main:
+        groups: Kelompok
+        roles: Peran
       sidebar:
         groups: Kelompok
+        routes: Rute
+        roles: Peran

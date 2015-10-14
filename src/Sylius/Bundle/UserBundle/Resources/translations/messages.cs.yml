@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Registrace
+    login: Přihlásit
+    logout: Odhlásit
+    change_password: Změnit heslo
+    account_panel_outline: Užijte si všechny funkce, které jsou dostupné ve vašem osobním prostoru k prohlížení, sledování a spravování všech vašich dat.
+  form:
+    group:
+      name: Jméno
+      roles: Role
+    user:
+      email: Email
+      enabled: Povoleno
+      password:
+        label: Heslo
+      shipping_address: Doručovací adresa
+    customer:
+      first_name: Křestní Jméno
+      groups: Skupiny
+      last_name: Příjmení
+      email: Email
+      billing_address: Fakturační adresa
+      different_billing_address: Použít jinou adresu pro fakturaci?
+    user_filter:
+      query: Hledat
+    user_change_password:
+      confirmation: Potvrzení
+      current: Současné heslo
+      new: Nové heslo
+    user_reset_password:
+      confirmation: Potvrzení
+      new: Nové heslo

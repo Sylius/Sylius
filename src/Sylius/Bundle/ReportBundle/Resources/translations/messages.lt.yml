@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Kiekis
+        equal: Atitinka
+      type: Tipas
+    report:
+      name: Pavadinimas
+      description: Aprašymas
+      data_fetcher: Duomenų gavėjas
+      code: Kodas
+      renderer:
+        label: Vaizdo generatorius
+        template: Šablonas
+      chart:
+        type: Tipas
+      user_registration:
+        start: Pradžios data
+        end: Pabaigos data
+        period: Laikotarpis
+        empty_records: Spausdinti tuščius įrašus?

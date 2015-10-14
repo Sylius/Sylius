@@ -11,3 +11,5 @@ sylius:
       first_name: الاسم الأول
       last_name: اسم العائلة
       password: كلمة السر
+    guest:
+      email: البريد الإلكتروني

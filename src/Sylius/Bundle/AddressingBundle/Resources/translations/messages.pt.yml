@@ -8,29 +8,27 @@ sylius:
       company: Empresa
       country: País
       first_name: Nome
-      last_name: Sobrenome
+      last_name: Apelido
       phone_number: Número de Telefone
-      postcode: CEP
+      postcode: Código postal
       street: Rua
-      province: Estado
+      province: Distrito
     country:
       iso_name: ISO
       name: Nome
-      provinces: Estados
-      select: Selecione
+      provinces: Distritos
+      select: Seleccionar
     province:
       name: Nome
-      select: Selecione
+      select: Seleccionar
     zone:
       members: Membros
       name: Nome
       type: Tipo
       types:
         country: País
-        province: Estado
-        zone: Região
-      scope: Escopo
-      select_scope: Selecione o escopo
+        province: Distrito
+        zone: Zona
     zone_member_country:
       country: País
     zone_member_province:

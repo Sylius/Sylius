@@ -3,7 +3,44 @@
 
 sylius:
   form:
+    action:
+      fixed_discount_configuration:
+        amount: Anzahl
+      percentage_discount_configuration:
+        percentage: Prozent
+      shipping_discount_configuration:
+        percentage: Prozent
+      type: Typ
+    rule:
+      taxonomy_configuration:
+        taxons: Gruppen
+        exclude: Ausschließen
+      contains_product_configuration:
+        variants: Produkte
+        exclude: Ausschließen
+      item_count_configuration:
+        count: Anzahl
+        equal: Gleich
+      item_total_configuration:
+        amount: Anzahl
+        equal: Gleich
+      nth_order_configuration:
+        nth: 'N#'
+      shipping_country_configuration:
+        country: Land
+      type: Typ
     coupon:
       code: Code
+      usage_limit: Nutzungslimit
+    coupon_generate_instruction:
+      amount: Anzahl
+      usage_limit: Nutzungslimit
     promotion:
+      actions: Aktionen
+      coupon_based: Gutschein basierend
+      description: Beschreibung
+      ends_at: Endet am
       name: Name
+      rules: Regeln
+      starts_at: Beginnt am
+      usage_limit: Nutzungslimit

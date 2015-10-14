@@ -6,17 +6,15 @@ sylius:
     rule:
       item_count_configuration:
         count: Ilość
-        equal: Równe
-      type: Typ
     shipment:
       state: Status
       states:
         checkout: Koszyk
-        dispatched: Wysłano
         pending: Oczekujący
         ready: Gotowe
         shipped: Dostarczono
         returned: Zwrócone
+        cancelled: Anulowane
       tracking_code: Kod śledzenia
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +26,8 @@ sylius:
       per_item_rate_configuration:
         amount: Kwota
       weight_rate_configuration:
+        division: Podział
+      volume_rate_configuration:
         amount: Kwota
         division: Podział
     shipping_category:
@@ -38,5 +38,5 @@ sylius:
       category: Kategoria
       category_requirement: Wymagania kategorii
       configuration: Konfiguracja
-      enabled: Włączony
+      enabled: Aktywne
       name: Nazwa

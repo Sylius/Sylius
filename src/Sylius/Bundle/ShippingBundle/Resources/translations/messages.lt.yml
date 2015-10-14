@@ -6,17 +6,17 @@ sylius:
     rule:
       item_count_configuration:
         count: Kiekis
-        equal: Atitinka
-      type: Tipas
+        equal: Lygi
+      type: Taisyklės tipas
     shipment:
       state: Būsena
       states:
         checkout: Apmokėjimas
-        dispatched: Išsiųstas
         pending: Laukiama
         ready: Paruošta
         shipped: Pristatytas
         returned: Grąžintas
+        cancelled: Atšaukta
       tracking_code: Sekimo kodas
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +28,8 @@ sylius:
       per_item_rate_configuration:
         amount: Suma
       weight_rate_configuration:
+        division: Dalyba
+      volume_rate_configuration:
         amount: Suma
         division: Dalyba
     shipping_category:
@@ -38,5 +40,5 @@ sylius:
       category: Kategorija
       category_requirement: Kategorijos reikalavimas
       configuration: Konfigūracija
-      enabled: Įjungtas
+      enabled: Įjungta
       name: Pavadinimas

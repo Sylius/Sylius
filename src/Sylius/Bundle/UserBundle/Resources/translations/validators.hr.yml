@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_blank: Molimo unesite vašu email adresu.
+  customer:
+    first_name:
+      not_blank: Molimo unesite Vaše ime.
+    last_name:
+      not_blank: Molimo unesite Vaše prezime.
+    email:
+      not_blank: Molimo unesite vašu email adresu.

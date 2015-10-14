@@ -4,7 +4,7 @@
 sylius:
   checkout:
     shipping_method:
-      not_blank: Bitte wählen Sie die Versandart.
+      not_blank: Bitte wählen Sie eine Versandart aus.
   form:
     action:
       add_product_configuration:
@@ -12,7 +12,7 @@ sylius:
         quantity: Stückzahl
         variant: Variante
     block:
-      body: Body
+      body: Inhalt
       id: ID
       title: Titel
     cart:
@@ -20,27 +20,30 @@ sylius:
     checkout:
       addressing:
         different_billing_address: Eine andere Rechnungsadresse benutzen?
-      payment_method: Zahlungsart
+      payment_method: Zahlungsmethode
       shipping_method: Versandarten
-    coupon:
-      per_user_usage_limit: Benutzungslimite pro Benutzer
     group:
       name: Name
       roles: Rollen
+    channel:
+      taxonomies: Klassifizierungen
+      locales: Gebietsschemata
+      shipping_methods: Versandmethoden
+      payment_methods: Zahlungsmethoden
     image:
-      file: Bild
+      file: Foto
     locale:
       code: Code
       enabled: Aktiviert
     order_filter:
-      created_at_from: Erstellt nach
-      created_at_to: Erstellt vor
+      created_at_from: Danach erstellt
+      created_at_to: Vorher erstellt
       number: Nummer
       total_from: Von
-      total_to: zu
+      total_to: Bis
       payment_state: Zahlungsstatus
     page:
-      body: Body
+      body: Inhalt
       id: ID
       title: Titel
     product:
@@ -48,7 +51,7 @@ sylius:
       shipping_category: Versandkategorie
       short_description: Kurzbeschreibung
       tax_category: Steuerkategorie
-      variant_selection_method: Varianten
+      variant_selection_method: Variantenauswahlmethode
     product_filter:
       name: Name
       sku: Bestandseinheit
@@ -56,18 +59,22 @@ sylius:
       general:
         currency: Standardwährung
         locale: Sprache
-        meta_description: Meta-Beschreibung
-        meta_keywords: Meta-Stichwörter
-        title: Titel der Seite
+        meta_description: Metabeschreibung
+        meta_keywords: Metastichwörter
+        title: Seitentitel
       taxation:
         default_tax_zone: Standard Steuerzone
     shipment_filter:
       created_at_from: Von
-      created_at_to: zu
-      number: Auftragsnummer
+      created_at_to: Bis
+      number: Bestellnummer
       shipping_address: Liefern an
+    payment_filter:
+      created_at_from: Von
+      created_at_to: Bis
+      number: Bestellnummer
     shipping_method:
-      zone: Zone
+      zone: Versandgebiet
     taxon:
       file: Foto auswählen
     taxonomy:
@@ -77,5 +84,25 @@ sylius:
       different_billing_address: Eine andere Rechnungsadresse benutzen?
       enabled: Aktiviert
       first_name: Vorname
+      groups: Gruppen
+      roles: Rollen
+      last_name: Nachname
+      password: Passwort
+      shipping_address: Lieferadresse
+    user_filter:
+      query: Suche
     variant:
+      available_on_demand: Auf Nachfrage
+      depth: Tiefe
+      height: Höhe
+      images: Fotos
+      on_hand: Auf Lager
+      price: Preis
       sku: Bestandseinheit
+      weight: Gewicht
+      width: Breite
+    attribute:
+      product_attribute_value:
+        value: Wert
+    guest:
+      email: E-Mail

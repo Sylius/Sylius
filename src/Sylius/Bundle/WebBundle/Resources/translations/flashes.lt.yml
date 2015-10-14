@@ -4,8 +4,14 @@
 sylius:
   account:
     address:
-      flash:
-        billing:
-          success: Adresas sėkmingai nustatytas kaip numatytasis atsiskaitymo adresas.
-        shipping:
-          success: Adresas sėkmingai nustatytas kaip numatytasis pristatymo adresas.
+      create: Jūsų adresas buvo sėkmingai pridėtas.
+      update: Jūsų adresas buvo sėkmingai atnaujintas.
+      delete: Adresas sėkmingai ištrintas.
+      set_as_billing: Jūsų atsiskaitymo adresas pakeistas.
+      set_as_shipping: Jūsų pristatymo adresas pakeistas.
+    password:
+      change_success: Slaptažodis pakeistas
+      invalid: Klaidingas dabartinis slaptažodis
+  channel:
+    error:
+      at_least_one: Šis kanalas negali būti pašalintas, bent vienas įjungtas kanalas yra privalomas.

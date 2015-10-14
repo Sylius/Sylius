@@ -6,17 +6,15 @@ sylius:
     rule:
       item_count_configuration:
         count: Кількість
-        equal: Дорівнює
-      type: Тип
     shipment:
       state: Статус
       states:
         checkout: Оформити замовлення
-        dispatched: Відправлено
         pending: В очікуванні
         ready: Готовий
         shipped: Відправлено
         returned: Повернуто
+        cancelled: Відхилено
       tracking_code: Трекінг-код
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +26,8 @@ sylius:
       per_item_rate_configuration:
         amount: Кількість
       weight_rate_configuration:
+        division: Ділення
+      volume_rate_configuration:
         amount: Кількість
         division: Ділення
     shipping_category:
@@ -38,5 +38,5 @@ sylius:
       category: Категорія
       category_requirement: Вимоги категорії
       configuration: Конфігурація
-      enabled: Ввімкнено?
+      enabled: Увімкнено
       name: Ім’я

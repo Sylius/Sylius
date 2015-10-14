@@ -14,7 +14,7 @@ sylius:
       amount: Fizetendő összeg
       method: Fizetési mód
       state:
-        0: Fizetés állapota
+        header: Fizetés állapota
         checkout: Fizetés
         completed: Befejezve
         failed: Sikertelen
@@ -28,3 +28,6 @@ sylius:
       enabled: Engedélyezve?
       gateway: Átjáró
       name: Név
+      fee_calculator:
+        fixed:
+          amount: Összeg

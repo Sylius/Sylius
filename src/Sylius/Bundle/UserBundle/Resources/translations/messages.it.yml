@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Registrati
+    login: Login
+    logout: Logout
+    change_password: Modifica la password
+    account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati.
+  form:
+    group:
+      name: Nome
+      roles: Regole
+    user:
+      email: Email
+      enabled: Abilitato
+      password:
+        label: Password
+      shipping_address: Indirizzo di spedizione
+    customer:
+      first_name: Nome
+      groups: Gruppi
+      last_name: Cognome
+      email: Email
+      billing_address: Indirizzo di fatturazione
+      different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
+    user_filter:
+      query: Ricerca
+    user_change_password:
+      confirmation: Conferma
+      current: Password corrente
+      new: Nuova password
+    user_reset_password:
+      confirmation: Conferma
+      new: Nuova password

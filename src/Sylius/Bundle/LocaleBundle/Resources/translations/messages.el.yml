@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Κώδικος
       enabled: Ενεργοποιημένο
+      name: Ονομασία

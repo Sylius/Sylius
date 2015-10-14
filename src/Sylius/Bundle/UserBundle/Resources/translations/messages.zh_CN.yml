@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: 电子邮件
+    register: 注册
+    login: 登录
+    logout: 注销
+    change_password: 更改您的密码
+    account_panel_outline: 在您的个人空间查看、 跟踪和管理您的所有数据的所有功能。
+  form:
+    group:
+      name: 名称
+      roles: 角色
+    user:
+      email: 电子邮件
+      enabled: 已启用
+      password:
+        label: 密码
+      shipping_address: 送货地址
+    customer:
+      first_name: 名字
+      groups: 团体
+      last_name: 姓氏
+      email: 电子邮件
+      billing_address: 账单地址
+      different_billing_address: 使用不同地址的帐单吗？
+    user_filter:
+      query: 搜索
+    user_change_password:
+      confirmation: 确认
+      current: 当前密码
+      new: 新密码
+    user_reset_password:
+      confirmation: 确认
+      new: 新密码

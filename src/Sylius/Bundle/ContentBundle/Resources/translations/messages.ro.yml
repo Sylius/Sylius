@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Numele acţiunii
       id: Id
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
     imagine_block:
-      parent: Părinte
+      filter: Filtrează
+      image: Imagine
       internal_name: Denumire internă
-      slideshow_small: Slideshow mic (lateral)
+      label: Label
+      parent: Părinte
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
       slideshow_medium: Slideshow mediu (conţinut)
-      slideshow_large: Slideshow mare (lăţime integrală)
     menu:
       childrens: Copii
       display: Afișare
@@ -21,12 +26,16 @@ sylius:
       label: Label
       name: Nume
       parent: Părinte
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
       route: Rută
       uri: URI
     menu_block:
       body: Corp
       id: Id
       name: Nume
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
     menu_node_block:
       content: Conţinut
       display: Afișare
@@ -36,7 +45,6 @@ sylius:
       link_type: Tip link
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
-      publishable: Publicabil
       route: Rută
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Corp
       id: Id
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
       title: Titlu
     route:
       content: Conţinut
@@ -56,11 +66,15 @@ sylius:
       body: Corp
       internal_name: Denumire internă
       parent: Părinte
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
       title: Titlu
     slideshow_block:
       childrens: Copii
       internal_name: Denumire internă
       parent: Părinte
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării
       title: Titlu
     static_content:
       body: Corp
@@ -70,10 +84,11 @@ sylius:
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Publicare începând cu data de
-      publishable: Publicabil
       routes: Rute
       title: Titlu
     string_block:
       body: Corp
       id: Id
       name: Nume
+      publish_end_date: Data de sfârșit a publicării
+      publish_start_date: Data de început a publicării

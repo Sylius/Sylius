@@ -2,8 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Tên
-    prototype:
+      options: Tùy chọn
+    product_archetype:
       name: Tên
+      options: Tùy chọn

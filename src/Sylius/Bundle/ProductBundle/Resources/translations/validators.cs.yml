@@ -17,37 +17,3 @@ sylius:
     sku:
       not_blank: Prosím zvolte variantu Jednotky vedení skladu.
       unique: Varianta Jednotky vedení skladu musí být unikátní.
-    combination: Varianta s touto sadou možností již existuje.
-  option:
-    name:
-      not_blank: Prosím zadejte název možnosti.
-      min_length: 'Název možnosti musí být nejméně 1 znak. |Název možnosti musí být alespoň {{ limit }} znaků.'
-      max_length: 'Název možnosti nesmí být delší než 1 znak. | Název možnosti nesmí být delší než {{ limit }} znaků.'
-    presentation:
-      not_blank: Prosím, zadejte možnost prezentace.
-      min_length: 'Možnost prezentace musí mít alespoň 1 znak. |Možnost prezentace musí mít alespoň {{ limit }} znaků.'
-      max_length: 'Možnost prezentace nesmí být delší než 1 znak. |Možnost prezentace nesmí být delší než {{ limit }} znaků.'
-    values:
-      min_count: 'Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.'
-  option_value:
-    value:
-      not_blank: Vložte prosím hodnotu možnosti.
-  property:
-    name:
-      not_blank: Zadejte prosím název vlastnosti.
-      min_length: 'Název vlastnosti musí mít alespoň 1 znak. |Název vlastnosti musí mít alespoň {{ limit }} znaků.'
-      max_length: 'Název vlastnosti nesmí být delší než 1 znak. |Název vlastnosti nesmí být delší než {{ limit }} znaků.'
-    presentation:
-      not_blank: Zadejte vlastnost prezentace.
-      min_length: 'Prezentace vlastnosti musí mít alespoň 1 znak.|Prezentace vlastnosti musí mít alespoň {{ limit }} znaků.'
-      max_length: 'Prezentace vlastnosti nesmí být delší než 1 znak.|Prezentace vlastnosti nesmí být delší než {{ limit }} znaků.'
-  product_property:
-    property:
-      not_blank: Zvolte prosím vlastnost.
-    value:
-      not_blank: Prosím zadejte hodnotu vlastnosti produktu.
-  prototype:
-    name:
-      not_blank: Zadejte prosím název prototypu.
-      min_length: 'Název prototypu musí mít alespoň 1 znak.|Název prototypu musí mít alespoň {{ limit }} znaků.'
-      max_length: 'Název prototypu nesmí být delší než 1 znak.|Název prototypu nesmí být delší než {{ limit }} znaků.'

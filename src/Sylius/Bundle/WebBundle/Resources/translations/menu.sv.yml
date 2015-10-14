@@ -4,5 +4,9 @@
 sylius:
   backend:
     menu:
+      main:
+        groups: Grupper
+        roles: Roller
       sidebar:
         groups: Grupper
+        roles: Roller

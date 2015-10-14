@@ -4,20 +4,20 @@
 sylius:
   contact_request:
     first_name:
-      not_blank: Por favor, digite seu nome.
-      min_length: Seu nome é muito curto.
-      max_length: Seu nome é muito longo
+      not_blank: Por favor insira o seu primeiro nome.
+      min_length: O primeiro nome é demasiado curto.
+      max_length: O primeiro nome é demasiado longo.
     last_name:
-      not_blank: Por favor, digite seu sobrenome.
-      min_length: Seu sobrenome é muito curto.
-      max_length: Seu sobrenome é muito longo.
+      not_blank: Por favor insira o seu apelido.
+      min_length: O apelido é demasico curto.
+      max_length: O apelido é demasico longo.
     email:
-      not_blank: Por favor, insira seu email.
-      email: Seu email está inválido.
+      not_blank: Por favor insira o seu e-mail.
+      email: O e-mail é inválido.
     message:
-      not_blank: Por favor, insira sua mensagem.
+      not_blank: Por favor insira a sua mensagem.
   contact_topic:
     title:
-      not_blank: Por favor, insira o título do tópico.
-      min_length: Seu título é muito curto.
-      max_length: Seu título é muito longo.
+      not_blank: Por favor insira o assunto.
+      min_length: O título é demasiado curto.
+      max_length: O título é demasiado longo.

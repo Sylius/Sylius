@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Cod
       enabled: Activat
+      name: Nume

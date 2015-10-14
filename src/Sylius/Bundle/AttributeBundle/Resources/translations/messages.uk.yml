@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: "Внутрішнє ім'я"
       presentation: Презентація
+      type: Тип

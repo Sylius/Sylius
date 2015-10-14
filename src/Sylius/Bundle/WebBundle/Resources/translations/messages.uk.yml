@@ -1,10 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: Тема листа
 sylius:
+  emails:
+    order_confirmation:
+      subject: Дякуємо за замовлення!
   account:
     address:
       action:
@@ -19,12 +19,9 @@ sylius:
         no_billing: Немає платіжної адреси за замовчуванням
         no_shipping: Немає адреси доставки за замовчуванням
         shipping: Адреса доставки за замовчуванням
-      empty: Ви поки не створили жодної адреси.
       list: Усі ваші адреси
       update: Редагувати мою адресу
     home:
-      email: ""
-      id: ""
       outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними.
       since: Ви є клієнтом з
       welcome: Ласкаво просимо до вашого простору
@@ -35,16 +32,12 @@ sylius:
       empty: Ви поки не розмістили жодного замовлення.
       invoice: Рахунок
       list: Всі ваші замовлення
-      number: ""
-      payment_mode: ""
       placed_at: 'Розміщене %at%'
       shipment:
         pending: В очікуванні
         ready: 'Готове з %at%'
         returned: 'Повернене %at%'
         shipped: 'Відправлене %at%'
-      shipment_mode: ""
-      state: ""
       total: Усього
       tracking_number: Трекінг-номер
     title: Мій обліковий запис
@@ -78,35 +71,47 @@ sylius:
       add_product: Новий товар
       orders: Останні замовлення
       products: Ваші продукти
-      users: Користувачі
     statistics:
-      0: Статистика цього місяця
       orders_this_month: Всього замовлень
       registrations_this_month: Всього реєстрацій
       sales_this_month: Продажі
   backend_welcome: 'Привіт, <b>%name%</b>!'
   block:
-    body: Тіло
-    create: Створити блок
-    create_header: Створення нового блоку вмісту
-    id: ID
-    index_header: Блоки вмісту
+    index_header: Блоки
     no_results: Немає блоків для відображення.
-    title: Назва
-    update_header: Редагування блоку вмісту
-    updated_at: Останнє оновлення
+    imagine:
+      id: ID
+      label: Назва
+      title: Назва
+      updated_at: Останнє оновлення
+    simple:
+      body: Тіло
+      id: ID
+      label: Назва
+      title: Назва
+      updated_at: Останнє оновлення
+    slideshow:
+      body: Тіло
+      id: ID
+      title: Назва
+      updated_at: Останнє оновлення
+    string:
+      body: Тіло
+      id: ID
+      label: Назва
+      title: Назва
+      updated_at: Останнє оновлення
   breadcrumb:
     assortment: Асортимент
     block:
-      index: Блоки вмісту
+      index: Блоки
     build: Побудувати
     configuration: Конфігурація
+    content: Зміст
     country:
       index: Країни
-    customers: Клієнти
+    dashboard: Панель керування
     edit: Редагувати
-    exchange_rate:
-      index: Курси валют
     general_settings: Загальні налаштування
     generate: Генерувати
     group:
@@ -115,13 +120,15 @@ sylius:
       index: Інвентаризація
     locale:
       index: Локалі
+    menu_node:
+      index: Елементи меню
     new: Новий
     option:
       index: Опції
     order:
       index: Замовлення
     page:
-      index: Статичні сторінки
+      index: Сторінки
     payment:
       index: Платежі
     payment_method:
@@ -132,10 +139,8 @@ sylius:
       index: Промо-акції
     promotion_coupon:
       index: Купони
-    property:
-      index: Властивості
-    prototype:
-      index: Прототипи
+    route:
+      index: Маршрути
     sales: Продажі
     shipment:
       index: Відправки
@@ -151,8 +156,8 @@ sylius:
     taxonomy:
       index: Категоризація
     update: Редагувати
-    user:
-      index: Користувачі
+    role:
+      index: Ролі
     zone:
       index: Пояси
   browse_products: Перегляд товарів
@@ -160,7 +165,7 @@ sylius:
   cart:
     empty: Ваш кошик пустий
     summary:
-      add_coupon: Так
+      add_coupon: Додати купон
       checkout: Оформити замовлення
       clear: Очистити кошик
       grand_total: Загальний підсумок
@@ -234,22 +239,35 @@ sylius:
     no_results: Немає налаштованих країн.
     show_header: Подробиці про країну
     update_header: Редагування країни
+    enabled: Увімкнено
+  email:
+    code: Код
+    enabled: Ввімкнено?
+    updated_at: Останнє оновлення
   create: Створити
   created_at: Створено
   delete: видалити
   deleted: Видалено
   edit: редагувати
-  email: Електронна пошта
-  exchange_rate:
-    create: Створити обмінний курс
-    create_header: Новий курс
-    currency: валюта
+  permission:
+    code: Код
     id: ID
-    index_header: Курси валют
-    no_results: Немає курсів для відображення.
-    rate: курс
-    update_header: Редагування обмінного курсу
-    updated_at: останнє оновлення
+    description: Опис
+    updated_at: Останнє оновлення
+  role:
+    code: Код
+    id: ID
+    name: Ім’я
+    description: Опис
+    index_header: Ролі
+    updated_at: Останнє оновлення
+  currency:
+    code: Код
+    id: ID
+    name: Ім’я
+    enabled: Увімкнено
+    exchange_rate: Обмінний курс
+    updated_at: Останнє оновлення
   filter: Фільтр
   form:
     cart:
@@ -279,7 +297,6 @@ sylius:
   generate: Генерувати
   group:
     create: Створити групу
-    create_header: Додавання нових груп користувачів
     id: ID
     index_header: Групи
     name: Ім’я
@@ -288,12 +305,9 @@ sylius:
     update_header: Редагувати групу
   hide_deleted: Приховати видалений
   history:
-    0: Історія
     action: Дія
     author: Автор
     data: Дані
-    logged_at: Заходив
-    version: Версія
   homepage:
     splash:
       headline: Ласкаво просимо до Sylius
@@ -307,6 +321,8 @@ sylius:
     sku: Артикул
     updated_at: Останнє оновлення
   locale:
+    id: ID
+    name: Ім’я
     code: Код
     create: Створити мову
     create_header: Додавання нової мови
@@ -319,26 +335,25 @@ sylius:
   login_header: Адміністрування
   logo: Sylius
   manage: Управління
+  menu:
+    id: ID
+    title: Назва
+  menu_node:
+    id: ID
+    index_header: Елементи меню
+    parent: "Батьківський об'єкт"
+    title: Назва
   meta:
-    backend_title: Панель адміністрування Sylius.
     frontend_description: 'Sylius - це сучасне рішення електронної комерції для PHP, на основі фреймворку Symfony.'
     frontend_keywords: sylius, ecommerce, symfony2, магазин, кошик, інтернет-магазин
     frontend_title: Sylius, сучасна система електронної комерції для Symfony2
   na: N/A
   newest: Найновіші продукти
   "no": false
-  no_results: Немає результатів
-  option:
-    create: Створити опцію
-    create_header: Нова опція товару
-    index_header: Опції продукту
+  product_option:
     manage: Керування опціями
     name: ім’я
-    no_results: Немає сконфігурованих опцій.
-    presentation: презентація
-    update_header: Опції редагування
     updated_at: останнє оновлення
-    values: значення
   order:
     billing_address: Платіжна адреса
     create: Створити замовлення
@@ -374,17 +389,29 @@ sylius:
     shipping_address: Адреса доставки
     shipping_charges: Націнки за доставку
     shipping_total: Всього за доставку
-    show_header: Замовлення
-    state:
-      cart_locked: Кошик заблоковано
-      checkout: Оформити замовлення
-      order_confimed: Замовлення підтверджено
-      ordered: Замовлено
+    state: Статус
     tax_total: Всього податок
     taxes: Податки
     total: Усього
     update_header: Редагування замовлення
-    user: Користувач
+    currency: Валюта
+    promotion_coupons: Купони
+    adjustments:
+      label: Назва
+      description: Опис
+      amount: Кількість
+    comment:
+      author: Автор
+      created_at: Створено
+      state: Статус
+  route:
+    id: ID
+    index_header: Маршрути
+    name: Ім’я
+    title: Назва
+  redirect_route:
+    id: ID
+    title: Назва
   shipment:
     ship: Доставити
     created_at: Створено
@@ -405,6 +432,14 @@ sylius:
     update: Редагувати
     update_header: Редагування відправки
     updated_at: Останнє оновлення
+  channel:
+    created_at: Створено
+    code: Код
+    enabled: Увімкнено
+    id: ID
+    name: Ім’я
+    update: Редагувати
+    updated_at: Останнє оновлення
   order_item:
     product: Елемент
     quantity: К-сть
@@ -415,14 +450,13 @@ sylius:
   page:
     body: Тіло
     create: Створити нову сторінку
-    create_header: Створення нового статичного вмісту
     id: ID
     index_header: Сторінки
-    no_results: Немає статичних сторінок для відображення.
+    routes: Маршрути
     title: Назва
-    update_header: Останнє оновлення
   password: Пароль
   payment:
+    order: Замовлення
     amount: Сума
     create: Створити оплату
     create_header: Нова оплата
@@ -433,13 +467,15 @@ sylius:
     method: Метод
     no_results: Не сконфігуровано жодної оплати.
     state:
-      0: Статус
+      header: Статус
+      cancelled: Відхилено
       checkout: Оформити замовлення
       completed: Завершено
       failed: Помилка
       new: Новий
       pending: В очікуванні
       processing: В процесі
+      refunded: Повернуто
       unknown: Не вказаний
       void: Порожньо
     update_header: Редагування оплати
@@ -456,7 +492,6 @@ sylius:
     update_header: Редагування способу оплати
     updated_at: Останнє оновлення
   product:
-    add_property: Додати властивість
     available_on: Доступно
     available_on_demand: На вимогу
     categorization: Категоризація
@@ -471,7 +506,6 @@ sylius:
     no_description: '<i>Немає опису...</i>'
     no_images: Немає зображень для цього продукту
     no_options: Немає опцій для цього продукту
-    no_properties: У цього продукту не визначені властивості
     no_results: Немає товарів для відображення.
     no_shipping_category: Без категорії доставки
     no_short_description: '<i>Без короткого опису</i>'
@@ -480,7 +514,6 @@ sylius:
     no_taxons: Немає таксонів для цього продукту
     options: Опції
     price: Роздрібна ціна
-    properties: Властивості
     restricted_zone: Заборонена зона
     shipping_category: Категорія доставки
     show: Детальніше
@@ -492,12 +525,14 @@ sylius:
       images: Зображення
       options: Опції
       product: Товар
-      properties: Властивості
+      pricing: Ціноутворення
     tax_category: Категорія податку
     unavailable: Недоступно
     update_header: Редагування продукту
     updated_at: Останнє оновлення
     variant_selection_method: Метод вибору варіанту
+    volume_based:
+      price: Ціна
   product_not_available_in_zone: Не доступно у вашій країні
   promotion:
     actions: Дії
@@ -526,6 +561,7 @@ sylius:
     configuration: Конфігурація
     type: Тип
   promotion_coupon:
+    code: Код
     create: Додати купон
     create_header: Створити новий купон
     generate: Генерувати купони
@@ -539,35 +575,26 @@ sylius:
   promotion_rule:
     configuration: Конфігурація
     type: Тип
-  property:
-    add_choice: Додати вибір
-    create: Створити властивість
-    create_header: Нова властивість продукту
-    index_header: Властивості продукції
-    manage: Керування властивостями
+  product_attribute:
     name: ім’я
-    no_results: Немає сконфігурованих властивостей.
-    presentation: презентація
-    type: тип
-    update_header: Редагування властивостей
     updated_at: останнє оновлення
-  prototype:
-    build: Створення прототипу
-    build_header: Створити товар з прототипу
-    create: Створити прототип
-    create_header: Новий прототип
-    index_header: Прототипи продукту
+  archetype:
     name: ім’я
-    no_results: Немає сконфігурованих прототипів.
-    options: опції
-    properties: властивості
-    update_header: Редагування прототипу
     updated_at: останнє оновлення
   province:
     provinces: Провінції
   remember_me: "Запам'ятати?"
+  report:
+    details: подробиці
+    name: Ім’я
+    code: Код
+    description: Опис
+    manage: Управління
   save_changes: Зберегти зміни
   search: Пошук
+  security:
+    login:
+      button: Логін
   settings:
     general_header: Загальні налаштування
     taxation_header: Налаштування оподаткування
@@ -659,28 +686,28 @@ sylius:
     update_header: Редагування таксономії
   total_quantity: Загальна кількість
   unknown: Не вказаний
-  user:
+  customer:
     billing_address: Платіжна адреса
+    email: Email
+    first_name: Iм’я
+    id: ID
+    last_name: Прізвище
+    shipping_address: Адреса доставки
+    groups: Групи
+  user:
     create: Створити користувача
     create_header: Новий користувач
-    email: Електронна пошта
     enabled: Підтверджено?
-    filter:
-      all: Показати всіх користувачів
-    first_name: Iм’я
     general_info: 'Загальна інформація користувача "%username%"'
     id: ID
     last_login: Останній вхід
-    last_name: Прізвище
     impersonate: Увійти в систему як цей користувач
     manage: керування користувачами
     no_results: Немає користувачів для відображення.
-    order:
-      no_results: Немає замовлень для цього користувача.
-    orders: Замовлення користувача
     recent_header: Недавні користувачі
     registration_date: Дата реєстрації
-    shipping_address: Адреса доставки
+    register:
+      button: Зареєструватися
     show_header: Інформація про користувача
     update_header: Редагування користувача
     username: "Ім'я користувача"
@@ -710,5 +737,18 @@ sylius:
     show_header: Подробиці про зону
     type: Тип
     update_header: Редагування зони
+    scope: Сфера
   zone_member:
     members: Члени
+  contact_topic:
+    id: ID
+    title: Назва
+    updated_at: Останнє оновлення
+  contact_request:
+    id: ID
+    firstName: Iм’я
+    lastName: Прізвище
+    email: Email
+    message: Повідомлення
+    topic: Тема
+    updated_at: Останнє оновлення

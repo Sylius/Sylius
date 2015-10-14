@@ -7,3 +7,11 @@ sylius:
       price: Pris
       calculator: Prising
       configuration: Konfigurasjon
+    pricing:
+      volume_based:
+        price: Pris
+  pricing:
+    volume_based:
+      price: Pris
+      button:
+        add: Legg til
