@@ -33,6 +33,7 @@ for all aspects of e-commerce.
     Resource/index
     Sequence/index
     Shipping/index
+    Storage/index
     Taxation/index
     Taxonomy/index
     User/index
