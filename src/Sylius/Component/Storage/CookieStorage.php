@@ -25,10 +25,12 @@ class CookieStorage implements StorageInterface
      * @var Request
      */
     protected $request;
+    protected $lifetime = '+30 days';
     protected $eventDispatcher;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct($lifetime, EventDispatcherInterface $eventDispatcher)
     {
+        $this->lifetime = $lifetime;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -65,7 +67,7 @@ class CookieStorage implements StorageInterface
 
         $this->eventDispatcher->addListener('kernel.response', function (FilterResponseEvent $event) use ($key, $value) {
             $event->getResponse()->headers->setCookie(
-                new Cookie($key, $value, new \DateTime('+30 days'))
+                new Cookie($key, $value, new \DateTime($this->lifetime))
             );
         });
     }
@@ -78,9 +80,7 @@ class CookieStorage implements StorageInterface
         $this->request->cookies->remove($key);
 
         $this->eventDispatcher->addListener('kernel.response', function (FilterResponseEvent $event) use ($key) {
-            $event->getResponse()->headers->setCookie(
-                new Cookie($key, null)
-            );
+            $event->getResponse()->headers->clearCookie($key);
         });
     }
 }

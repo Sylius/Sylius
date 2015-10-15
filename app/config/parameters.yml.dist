@@ -17,6 +17,7 @@ parameters:
 
     sylius.locale:                    en_US
     sylius.currency:                  USD
+    sylius.cookie.lifetime:           +30 days
 
     sylius.cache:
         type: file_system
