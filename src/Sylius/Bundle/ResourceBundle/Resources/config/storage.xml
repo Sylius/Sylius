@@ -24,6 +24,7 @@
 
     <services>
         <service id="sylius.storage.cookie" class="%sylius.storage.cookie.class%" public="false">
+            <argument type="service" id="event_dispatcher" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
