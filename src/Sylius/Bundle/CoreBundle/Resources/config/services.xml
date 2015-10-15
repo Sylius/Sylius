@@ -418,6 +418,9 @@
         <service id="sylius.promotion_filter.cheapest" class="Sylius\Component\Promotion\Filter\CheapestFilter">
             <tag name="sylius.promotion_filter" type="cheapest_filter" label="Cheapest filter" />
         </service>
+        <service id="sylius.promotion_filter.most_expensive" class="Sylius\Component\Promotion\Filter\MostExpensiveFilter">
+            <tag name="sylius.promotion_filter" type="most_expensive_filter" label="Most expensive filter" />
+        </service>
         <service id="sylius.promotion_filter.every" class="Sylius\Component\Promotion\Filter\EveryFilter">
             <tag name="sylius.promotion_filter" type="every_filter" label="Every filter" />
         </service>
