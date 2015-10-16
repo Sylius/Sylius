@@ -11,15 +11,15 @@
 
 namespace Sylius\Component\Promotion\Filter;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface FilterInterface
 {
     /**
-     * @param ArrayCollection $arrayCollection
+     * @param Collection $arrayCollection
      * @param array           $configuration
      *
      * @return ArrayCollection
      */
-    public function apply(ArrayCollection $arrayCollection, array $configuration = array());
+    public function apply(Collection $collection, array $configuration = array());
 }

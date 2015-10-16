@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Filter;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +24,7 @@ class PriceFilter extends AbstractFilter
     /**
      * {@inheritdoc}
      */
-    protected function filter(ArrayCollection $collection)
+    protected function filter(Collection $collection)
     {
         $criteria = Criteria::create()->where(
             new Comparison(

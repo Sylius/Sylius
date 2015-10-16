@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Filter;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
 class EveryFilter extends AbstractFilter
@@ -19,7 +19,7 @@ class EveryFilter extends AbstractFilter
     /**
      * {@inheritdoc}
      */
-    protected function filter(ArrayCollection $collection)
+    protected function filter(Collection $collection)
     {
         return $collection;
     }

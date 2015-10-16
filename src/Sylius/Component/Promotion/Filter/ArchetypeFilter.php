@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Filter;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +23,7 @@ class ArchetypeFilter extends AbstractFilter
     /**
      * {@inheritdoc}
      */
-    protected function filter(ArrayCollection $collection)
+    protected function filter(Collection $collection)
     {
         $returnedCollection = new ArrayCollection();
 

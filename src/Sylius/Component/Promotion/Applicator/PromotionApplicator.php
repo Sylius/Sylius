@@ -11,16 +11,20 @@
 
 namespace Sylius\Component\Promotion\Applicator;
 
+use Doctrine\ORM\PersistentCollection;
+use Sylius\Component\Core\Promotion\Benefit\AddProductBenefit;
 use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 use Sylius\Component\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\AbstractType;
 
 /**
  * Applies all registered promotion actions to given subject.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author  Piotr Walków <walkow.piotr@gmail.com>
  */
 class PromotionApplicator implements PromotionApplicatorInterface
 {
@@ -64,7 +68,12 @@ class PromotionApplicator implements PromotionApplicatorInterface
 
                 /** @var  $filteredSubject */
                 foreach ($filteredSubjects as $filteredSubject) {
-                    $benefitObject->execute($filteredSubject, $benefit->getConfiguration(), $promotion);
+                    // so far addProductBenefit works only on Order
+                    if ($benefitObject instanceof AddProductBenefit) {
+                        $benefitObject->execute($subject, $benefit->getConfiguration(), $promotion);
+                    } else {
+                        $benefitObject->execute($filteredSubject, $benefit->getConfiguration(), $promotion);
+                    }
                 }
             }
         }
@@ -75,12 +84,15 @@ class PromotionApplicator implements PromotionApplicatorInterface
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
-            $this->benefitRegistry
-                ->get($action->getType())
-                ->revert($subject, $action->getConfiguration(), $promotion)
-            ;
+            foreach ($action->getBenefits() as $benefit) {
+                $this->benefitRegistry
+                    ->get($benefit->getType())
+                    ->revert($subject, $benefit->getConfiguration(), $promotion)
+                ;
+            }
         }
 
         $subject->removePromotion($promotion);
     }
 }
+

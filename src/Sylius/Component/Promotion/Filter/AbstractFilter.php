@@ -11,7 +11,8 @@
 
 namespace Sylius\Component\Promotion\Filter;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Selectable;
 
 abstract class AbstractFilter implements FilterInterface
 {
@@ -23,29 +24,32 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws UnexpectedValueException if the filter has not returned ArrayCollection
+     * @throws UnexpectedValueException if the filter has not returned Collection or it's not Selectable
      */
-    public function apply(ArrayCollection $collection, array $configuration = array())
+    public function apply(Collection $collection, array $configuration = array())
     {
         $this->configuration = $this->resolveConfiguration($configuration);
 
         $filteredCollection = $this->filter($collection);
 
-        if ($filteredCollection instanceof ArrayCollection) {
+        // no possible way of knowing if it would be PersistentCollection or ArrayCollection
+        if ($filteredCollection instanceof Collection &&
+            $filteredCollection instanceof Selectable
+        ) {
             return $filteredCollection;
         }
 
         throw new \UnexpectedValueException(
-            'Filter has not returned an instance of ArrayCollection'
+            'Filter has not returned an instance of Selectable Collection'
         );
     }
 
     /**
-     * @param ArrayCollection $collection
+     * @param Collection $collection
      *
-     * @return ArrayCollection
+     * @return Collection&Selectable
      */
-    protected abstract function filter(ArrayCollection $collection);
+    protected abstract function filter(Collection $collection);
 
     protected abstract function resolveConfiguration(array $configuration);
 }
