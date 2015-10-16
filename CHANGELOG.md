@@ -34,3 +34,4 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * feature [#2843](https://github.com/Sylius/Sylius/pull/2843) [BC BREAK][CartBundle] Listeners have been renamed to subscribers.
  * feature [#2803](https://github.com/Sylius/Sylius/pull/2803) [BC BREAK][PaymentBundle] Form registration, missing specs and CS Fixes.
  * feature [#3104](https://github.com/Sylius/Sylius/pull/3104) [BC BREAK][Locale] Refactored LocaleProvider and LocaleContext, changed architecture a little bit.
+ * feature [#2863](https://github.com/Sylius/Sylius/pull/2863) [BC BREAK][FlowBundle] missing specs and CS.
