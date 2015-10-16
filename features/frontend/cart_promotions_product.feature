@@ -21,7 +21,7 @@ Feature: Checkout product promotion
           And promotion "Free product" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
-          And promotion "Free product" has following actions defined:
+          And promotion "Free product" has following benefits defined:
             | type        | configuration                   |
             | Add product | variant:Ubu,quantity:1,price:10 |
           And all products are assigned to the default channel

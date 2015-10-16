@@ -13,13 +13,13 @@ Feature: Checkout usage limited promotions
           And promotion "25% off over 200 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 200   |
-          And promotion "25% off over 200 EUR" has following actions defined:
+          And promotion "25% off over 200 EUR" has following benefits defined:
             | type                | configuration  |
             | Percentage discount | Percentage: 25 |
           And promotion "Free order with at least 3 items" has following rules defined:
             | type       | configuration        |
             | Item count | Count: 3,Equal: true |
-          And promotion "Free order with at least 3 items" has following actions defined:
+          And promotion "Free order with at least 3 items" has following benefits defined:
             | type                | configuration   |
             | Percentage discount | Percentage: 100 |
           And there are following taxonomies defined:
@@ -38,18 +38,15 @@ Feature: Checkout usage limited promotions
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
-    Scenario: Promotion with usage limit is not applied when the
-              number of usage is reached
-        Given I am on the store homepage
-         When I add product "Etch" to cart, with quantity "3"
-         Then I should be on the cart summary page
-          And "Promotion total" should not appear on the page
-          And "Grand total: €60.00" should appear on the page
+Scenario Outline: Some xamples should pass
+            Given I have empty order
+              And I add <basketContent> to the order
+              And I have <activePromotions> promotions activated
+             When I apply promotions
+             Then I should have <discountName> discount equal <discountValue>
+              And Total price should be <totalPrice>
 
-    Scenario: Promotion with usage limit is applied when the
-    number of usage is not reached
-        Given I am on the store homepage
-        And I added product "Woody" to cart, with quantity "3"
-        Then I should be on the cart summary page
-        And "Promotion total: -€93.75" should appear on the page
-        And "Grand total: €281.25" should appear on the page
+        Examples:
+        | basketContent | activePromotions                   | discountName                                  | discountValue | totalPrice |
+        | Woody:3       | "25% off over 200 EUR"             | "First order over 200 EUR have 25% discount!" | -93.75        | 281.25     |
+        | Etch:3        | "Free order with at least 3 items" | ""                                            |               | 60         |

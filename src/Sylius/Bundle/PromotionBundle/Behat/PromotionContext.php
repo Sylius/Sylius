@@ -14,9 +14,12 @@ namespace Sylius\Bundle\PromotionBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\Address;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\Adjustment;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Promotion\Filter\FilterInterface;
@@ -97,7 +100,12 @@ class PromotionContext extends DefaultContext
             $actionNumber = $this->getActionNumber($filterData);
             $action = $this->getOrCreateAction($promotion, $actionNumber);
 
-            $configuration = $this->getConfiguration($filterData['configuration']);
+            $configuration = [];
+
+            if (!empty($filterData['configuration'])) {
+                $configuration = $this->getConfiguration($filterData['configuration']);
+            }
+
             $filterType = $filterData['type'];
 
             /** @var FilterInterface $filter */
@@ -135,7 +143,13 @@ class PromotionContext extends DefaultContext
             $benefit->setConfiguration($configuration);
 
             $action->addBenefit($benefit);
+
+            $promotion->addAction($action);
+            $action->setPromotion($promotion);
         }
+
+        $this->getEntityManager()->persist($promotion);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -155,12 +169,12 @@ class PromotionContext extends DefaultContext
             $promotion->setDescription($data['description']);
             $promotion->setCode($data['code']);
 
-            if (array_key_exists('active', $data) && '' == $data['active']) {
-                $promotion->setStartsAt($this->faker->dateTimeBetween('-30 years', 'now'));
-                $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
-            } else {
+            if (array_key_exists('not-active', $data) && '' == $data['not-active']) {
                 $promotion->setStartsAt($this->faker->dateTime('-2 years'));
                 $promotion->setEndsAt($this->faker->dateTime('-1 year'));
+            } else {
+                $promotion->setStartsAt($this->faker->dateTimeBetween('-30 years', 'now'));
+                $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
             }
 
             if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
@@ -183,17 +197,27 @@ class PromotionContext extends DefaultContext
     }
 
     /**
+     * @Given /^Order is shipped to "([^""]*)"$/
+     */
+    public function orderIsShippedTo($countryName) {
+
+        $country = $this->getRepository('country')->findOneBy([
+            'isoName' => $this->getCountryCodeByEnglishCountryName($countryName)
+        ]);
+
+        /** @var AddressInterface $address */
+        $address = $this->getRepository('address')->createNew();
+        $address->setCountry($country);
+
+        $this->order->setShippingAddress($address);
+    }
+
+    /**
      * @Given /^Promotion "([^""]*)" is active$/
      */
     public function promotionIsActive($promotionName)
     {
-//        $promotion = $this->findOneByName('promotion', $promotionName);
-
-        $res = $this->getRepository('promotion')->findAll();
-
-        var_dump(get_class($res));
-
-        die('zzz');
+        $promotion = $this->findOneByName('promotion', $promotionName);
 
         $promotion->setStartsAt($this->faker->dateTimeBetween('-30 years', 'now'));
         $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
@@ -209,6 +233,7 @@ class PromotionContext extends DefaultContext
     public function emptyOrder()
     {
         $this->order = $this->getContainer()->get('sylius.repository.order')->createNew();
+        $this->order->setCurrency('123');
     }
 
     /**
@@ -225,6 +250,7 @@ class PromotionContext extends DefaultContext
         $orderItem = $this->getContainer()->get('sylius.repository.order_item')->createNew();
 
         $priceCalculator = $this->getContainer()->get('sylius.price_calculator');
+
         $price = $priceCalculator->calculate($product->getMasterVariant());
 
         $orderItem->setUnitPrice($price);
@@ -265,18 +291,29 @@ class PromotionContext extends DefaultContext
      */
     public function shouldBeADiscount($discountName, $discountValue)
     {
-        $discountExist = false;
+        if (!$discountName) {
+            $this->shouldBeNoDiscount();
+            return;
+        }
+
+        $discounts = explode(',', $discountName);
         $totalDiscountFound = 0;
 
-        /** @var Adjustment $promotion */
-        foreach ($this->order->getItems() as $item) {
+        foreach ($discounts as $discountName) {
+            $discountExist = false;
 
-            foreach ($item->getAdjustments('promotion') as $promotion) {
-                if (
-                   $promotion->getDescription() == $discountName
-                ) {
-                    $discountExist = true;
-                    $totalDiscountFound += $promotion->getAmount();
+            /** @var Adjustment $promotion */
+            foreach ($this->order->getItems() as $item) {
+
+                foreach ($item->getAdjustments('promotion') as $promotion) {
+                    var_dump($promotion->getDescription());
+
+                    if (
+                        $promotion->getDescription() == $discountName
+                    ) {
+                        $discountExist = true;
+                        $totalDiscountFound += $promotion->getAmount();
+                    }
                 }
             }
         }
@@ -284,15 +321,14 @@ class PromotionContext extends DefaultContext
         if (!$discountExist) {
             throw new \Exception(
                 sprintf(
-                    'Expected discount with name: %s not found',
-                    $discountName, $discountValue)
+                    'Expected discount with name: %s not found', $discountName)
             );
         }
 
         \PHPUnit_Framework_Assert::assertSame(
             $this->normalizePrice($discountValue),
             $totalDiscountFound,
-            sprintf('Promotion: "%s" found but discount do not match, actual discount: %s',
+            sprintf('Promotion(s): "%s" found but discount do not match, actual discount: %s',
                 $discountName,
                 $promotion->getAmount()
             )
@@ -310,6 +346,33 @@ class PromotionContext extends DefaultContext
             $this->order->getTotal(),
             'Expected different total price'
         );
+    }
+
+    /**
+     * @Given /^I add ([^""]*) to the order$/
+     *
+     * @param TableNode $basketContent
+     */
+    public function orderShouldContain($basketContent)
+    {
+        foreach (explode(',', $basketContent) as $product)
+        {
+            list($productName, $productQuantity) = explode(':', $product);
+
+            $this->addProductsToOrder($productQuantity, $productName);
+        }
+    }
+
+    /**
+     * @Given /^I have "([^""]*)" promotions activated$/
+     *
+     * @param TableNode $promotions
+     */
+    public function givenPromotionsShouldBeActive($promotions)
+    {
+        foreach (explode(',', $promotions) as $promotionName) {
+            $this->promotionIsActive($promotionName);
+        }
     }
 
     /**

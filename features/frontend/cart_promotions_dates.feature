@@ -33,6 +33,9 @@ Feature: Checkout limited time promotions
             | Sarge   | 25    | Debian T-Shirts |
             | Etch    | 20    | Debian T-Shirts |
             | Lenny   | 15    | Debian T-Shirts |
+          And promotion "Decade" has following filters defined:
+              | type                  | configuration |
+              | most_expensive_filter |               |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 

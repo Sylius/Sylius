@@ -16,13 +16,13 @@ Feature: Checkout coupon promotions
           And promotion "Press campaign" has following coupons:
             | code   | usage limit | used |
             | XD0001 | 1           | 0    |
-          And promotion "Press campaign" has following actions defined:
+          And promotion "Press campaign" has following benefits defined:
             | type           | configuration |
             | Fixed discount | Amount: 5     |
           And promotion "New Year campaign" has following rules defined:
             | type       | configuration |
             | Item count | Count: 2      |
-          And promotion "New Year campaign" has following actions defined:
+          And promotion "New Year campaign" has following benefits defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |
           And promotion "New Year campaign" has following coupons:

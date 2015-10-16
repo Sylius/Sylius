@@ -15,16 +15,16 @@ Feature: Promotions
           And promotion "New Year" has following rules defined:
             | type       | configuration |
             | Item count | Count: 3      |
-          And promotion "New year" has following actions defined:
+          And promotion "New year" has following benefits defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |
           And promotion "Christmas" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
-          And promotion "Christmas" has following actions defined:
+          And promotion "Christmas" has following benefits defined:
             | type           | configuration |
             | Fixed discount | Amount: 15    |
-          And promotion "Press Campaign" has following actions defined:
+          And promotion "Press Campaign" has following benefits defined:
             | type           | configuration |
             | Fixed discount | Amount: 5     |
           And promotion "Press Campaign" has following coupons:
@@ -34,7 +34,7 @@ Feature: Promotions
             | XD0003 | 1           | 0    |
             | AD0001 | 3           | 2    |
             | AD0002 | 3           | 0    |
-          And promotion "Free orders" has following actions defined:
+          And promotion "Free orders" has following benefits defined:
             | type                | configuration   |
             | Percentage discount | Percentage: 100 |
           And I am logged in as administrator
