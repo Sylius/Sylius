@@ -17,7 +17,7 @@ Feature: Forgot password
          When I fill in "Email" with "bar@foo.com"
           And I press "Reset"
          Then I should be redirected to user login page
-          And I should see "Your password has been reset successfully!"
+          And I should see "We send you an email with instructions to reset your password!"
 
     Scenario: Trying to reset password without email
         Given I am on the sylius user request password reset token page
