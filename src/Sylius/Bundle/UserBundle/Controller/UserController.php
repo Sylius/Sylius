@@ -128,7 +128,7 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('error', 'sylius.user.email.not_exist');
-            $this->addFlash('error', 'sylius.user.password.reset.failed');
+            $this->addFlash('error', 'sylius.user.password.request.failed');
         }
 
         if ($this->config->isApiRequest()) {
@@ -194,7 +194,7 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->domainManager->update($user);
+        $this->domainManager->update($user, 'sylius.user.password.request.success');
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
@@ -202,8 +202,6 @@ class UserController extends ResourceController
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
         }
-
-        $this->addFlash('success', 'sylius.user.password.reset.success');
 
         return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
     }
@@ -223,14 +221,13 @@ class UserController extends ResourceController
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
 
-        $this->domainManager->update($user);
+        $this->domainManager->update($user, 'sylius.user.password.reset.success');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
         }
-        $this->addFlash('success', 'sylius.user.password.change.success');
 
         return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
     }
@@ -248,14 +245,13 @@ class UserController extends ResourceController
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
 
-        $this->domainManager->update($user);
+        $this->domainManager->update($user, 'sylius.user.password.change.success');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
-        
+
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($user, 204));
         }
-        $this->addFlash('success', 'sylius.user.password.change.success');
 
         return new RedirectResponse($this->generateUrl('sylius_account_profile_show'));
     }
