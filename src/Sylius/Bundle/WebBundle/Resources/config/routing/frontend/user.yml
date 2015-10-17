@@ -7,8 +7,10 @@ sylius_user_registration:
             form: sylius_customer_registration
             event: register
             template: SyliusWebBundle:Frontend/User:register.html.twig
-            redirect: sylius_homepage
             permission: false
+            redirect:
+                route: sylius_homepage
+                parameters: { email: resource.email }
 
 sylius_login:
     resource: @SyliusUserBundle/Resources/config/routing/security.yml
