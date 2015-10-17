@@ -6,7 +6,6 @@ sylius:
             invalid: Wrong current password.
             request:
                 success: We send you an email with instructions to reset your password!
-                failed: Failed to request password.
             reset:
                 success: Your password has been reset successfully!
             change:

@@ -128,7 +128,6 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('error', 'sylius.user.email.not_exist');
-            $this->addFlash('error', 'sylius.user.password.request.failed');
         }
 
         if ($this->config->isApiRequest()) {
