@@ -26,7 +26,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
     /**
      * @var RepositoryInterface
      */
-    private $customerRepository;
+    protected $customerRepository;
 
     /**
      * @param RepositoryInterface $customerRepository
