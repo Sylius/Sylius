@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Асартымент
+        blocks: Блокі
         configuration: Канфігурацыя
         countries: Краіны
-        customer: Пакупнікі
+        content: Змест
         dashboard: Прыборная панэль
-        exchange_rates: Абменны курс
         general_settings: Агульныя налады
+        groups: Групы
         homepage: Ваша крама
         locales: Месцы размяшчэння
         new_order: Дадаць новую замову
         new_promotion: Дадаць новую прамоцыю
         options: Кіраваць опцыямі тавара
         orders: Бягучыя замовы
+        pages: Старонкі
         payment_methods: Метады аплаты
         payments: Плацяжы
         products: Тавары
         promotions: Прамоцыі
-        properties: Наладзіць характарыстыкі
-        prototypes: Аналагі тавара
         sales: Замовы
         shipments: Дастаўка
         shipping_categories: Катэгорыі дастаўкі
@@ -33,17 +33,15 @@ sylius:
         tax_rates: Стаўка падатку
         taxation_settings: Налады падаткаабкладання
         taxonomies: Класіфікацыя
-        users: Карыстальнікі
         zones: Зоны
+        roles: Ролі
       sidebar:
         assortment: Асартымент
         blocks: Блокі
         configuration: Канфігурацыя
         content: Змест
         countries: Краіны
-        customer: Пакупнікі
         dashboard: Прыборная панэль
-        exchange_rates: Абменны курс
         general_settings: Агульныя налады
         groups: Групы
         homepage: Назад да крамы
@@ -57,19 +55,18 @@ sylius:
         payments: Плацяжы
         products: Тавары
         promotions: Прамоцыі
-        properties: Наладзіць характарыстыкі
-        prototypes: Аналагі тавара
         sales: Замовы
         shipments: Дастаўка
         shipping_categories: Катэгорыі дастаўкі
         shipping_methods: Метады дастаўкі
+        slideshow: Слайдшоў
         stockables: Колькасць на складзе
         tax_categories: Катэгорыі падаткаў
         tax_rates: Стаўка падатку
         taxation_settings: Налады падаткаабкладання
         taxonomies: Класіфікацыя
-        users: Карыстальнікі
         zones: Зоны
+        roles: Ролі
   frontend:
     menu:
       account:

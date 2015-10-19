@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Приказ
+    option:
+      name: Интерни назив
+      presentation: Приказ

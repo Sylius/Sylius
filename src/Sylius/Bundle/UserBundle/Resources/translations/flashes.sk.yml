@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Používateľ s týmto e-mailom neexistuje.
+    password:
+      invalid: Nesprávne heslo.
+      reset:
+        success: Vaše heslo bolo úspešne zmenené!
+        failed: Nepodarilo sa resetovať heslo.
+      change:
+        success: Vaše heslo bolo úspešne zmenené!

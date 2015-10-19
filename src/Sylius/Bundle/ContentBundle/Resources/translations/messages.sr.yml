@@ -3,14 +3,17 @@
 
 sylius:
   form:
-    menu:
-      name: Ime
-    menu_block:
-      name: Ime
-    redirect_route:
-      name: Ime
+    imagine_block:
+      filter: Филтер
+      internal_name: Интерни назив
+    menu_node_block:
+      content: Садржај
+      internal_name: Интерни назив
     route:
-      name: Ime
-    string_block:
-      id: ID
-      name: Ime
+      content: Садржај
+    simple_block:
+      internal_name: Интерни назив
+    slideshow_block:
+      internal_name: Интерни назив
+    static_content:
+      internal_name: Интерни назив

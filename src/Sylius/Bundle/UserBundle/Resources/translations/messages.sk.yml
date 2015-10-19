@@ -1,0 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Registrovať
+    login: Prihlásenie
+    logout: Odhlásiť
+    logged_in_as: 'Prihlásený ako %username%'
+    no_account: Ešte nemáte konto?
+    forgot_password: Zabudli ste heslo?
+    reset_password: Resetovať heslo
+    reset: Resetovať
+    password:
+      reset:
+        header: Resetovať heslo
+        button: Resetovať
+    profile: Profil
+    change_password: Zmena hesla
+    account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore.
+    customer_since: Ste zákazníkom od
+    welcome: Vitajte
+    customer:
+      id: ID zákazníka
+  form:
+    group:
+      name: Názov
+      roles: Rola
+    user:
+      email: Email
+      enabled: Povolené
+      password:
+        label: Heslo
+        confirmation: Overenie
+      remember_me: Zapamätať si ma
+      shipping_address: Doručovacia adresa
+    customer:
+      first_name: Meno
+      groups: Skupiny
+      last_name: Priezvisko
+      email: Email
+      birthday: Dátum narodenia
+      billing_address: Fakturačná adresa
+      different_billing_address: Použiť inú fakturačnú adresu?
+    user_filter:
+      query: Vyhľadať
+    user_change_password:
+      confirmation: Potvrdenie
+      current: Aktuálne heslo
+      new: Nové heslo
+    user_reset_password:
+      confirmation: Potvrdenie
+      new: Nové heslo

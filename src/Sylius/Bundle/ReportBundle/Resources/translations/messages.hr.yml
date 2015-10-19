@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    report:
+      name: Naziv grupe
+      description: Opis
+      code: ISO kod
+      chart:
+        type: Vrsta

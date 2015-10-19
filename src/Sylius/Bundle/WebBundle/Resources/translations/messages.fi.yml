@@ -2,17 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  block:
+    imagine:
+      id: Id
+      label: Otsikko
+    simple:
+      id: Id
+      label: Otsikko
+    slideshow:
+      id: Id
+    string:
+      id: Id
+      label: Otsikko
   checkout:
     back: Edellinen
+  currency:
+    exchange_rate: Vaihtokurssi
   form:
     login:
       email: Sähköpostiosoite
@@ -20,9 +25,22 @@ sylius:
       email: Sähköpostiosoite
   gallery:
     next: Seuraava
+  menu_node:
+    parent: Vanhempi
   "no": false
   order:
-    user: Käyttäjä
+    currency: Valuutta
+    adjustments:
+      label: Otsikko
+  product:
+    tabs:
+      pricing: Hinnoittelu
+  customer:
+    email: Sähköpostiosoite
   user:
     username: Käyttäjänimi
   "yes": true
+  contact_request:
+    email: Sähköpostiosoite
+    message: Viesti
+    topic: Aihe

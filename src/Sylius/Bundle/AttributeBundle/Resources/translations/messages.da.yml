@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: System navn
       presentation: Præsentation
+      type: Type

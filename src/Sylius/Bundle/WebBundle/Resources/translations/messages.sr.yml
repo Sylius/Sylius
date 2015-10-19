@@ -5,529 +5,536 @@ sylius:
   account:
     address:
       action:
-        billing: Postaviti kao podrazumevanu adresu plaćanja
-        create: Kreiraj novu adresu
-        delete: Obrisati
-        edit: Izmeniti
-        shipping: Postaviti kao podrazumevanu adresu isporuke
-      create: Kreiraj novu adresu
+        billing: Постави подразумевану адресу за плаћање
+        create: Унеси нову адресу
+        delete: Обриши
+        edit: Измени
+        shipping: Постави подразумевану адресу за слање
+      create: Унеси нову адресу
       default:
-        billing: Podrazumevana adresa plaćanja
-        no_billing: Nema podrazumevane adrese plaćanja
-        no_shipping: Nema podrazumevane adrese isporuke
-        shipping: Podrazumevana adresa isporuke
-      empty: Još uvek niste kreirali adresu.
-      list: Sve vaše adrese
-      update: Izmeni moju adresu
+        billing: Подразумевана адреса за плаћање
+        no_billing: Нема подразумеване адреса за плаћање
+        no_shipping: Нема подразумеване адреса за слање
+        shipping: Подразумевана адреса за слање
+      list: Све Ваше адресе
+      update: Измени моју адресу
     home:
-      email: ""
-      id: ""
+      outline: Уживајте у свим карактеристикама које су доступне на Вашој личној страници да видите, пратите и управљате свим Вашим подацима.
+      since: Ви сте купац још од
+      welcome: Добро дошли на Вашу страницу
     order:
-      invoice: Faktura
-      number: ""
-      payment_mode: ""
+      created_at: Постављен на
+      details: Детаљи Ваше наруџбине
+      download_invoice: Преузмите фактуру
+      empty: Још увек нисте направили поруџбину.
+      invoice: Фактура
+      list: Све Ваше наруџбине
+      placed_at: 'Постављен на %at%'
       shipment:
-        pending: Na čekanju
-      shipment_mode: ""
-      state: ""
-      total: Ukupno
-    title: Moj nalog
-  add_to_cart: Dodaj u korpu
+        pending: Обрада у току
+        ready: 'Спремно од %at%'
+        returned: 'Враћено %at%'
+        shipped: 'Послато %at%'
+      total: Укупно
+      tracking_number: Број за праћење поруџбине
+    title: Мој налог
+  add_to_cart: Додај у корпу
   address:
-    city: Grad
-    company: Kompanija
-    country: Zemlja
-    firstname: Ime
-    lastname: Prezime
-    postcode: Poštanski kod
-    province: Provincija
-    street: Ulica
+    city: Град
+    company: Предузеће
+    country: Земља
+    firstname: Име
+    lastname: Презиме
+    postcode: Поштански код
+    province: Провинција
+    street: Улица
   alert:
-    error: Greška
-    info: Obaveštenje
-    success: Uspeh
-    warning: Upozorenje
+    error: Грешка
+    info: Обавештење
+    success: Успех
+    warning: Упозпрење
   backend:
     alert:
-      info: Obaveštenje
+      info: Обавештење
     dashboard:
-      chart_order_count: Broj narudžbina
-      chart_order_total: Vrednost narudžbine
-      header: Administrativna tabla
-      orders: Prošlonedeljne porudžbine
-      revenue: Prošlonedeljna zarada
-      subheader: Pregled prodavnice
-    logout: Odjavi se
+      chart_order_count: Број наруџбина
+      chart_order_total: Вредност наруџбине
+      header: Административна табла
+      orders: Прошлонедељне поруџбине
+      revenue: Прошлонедељна зарада
+      subheader: Преглед продавнице
+    logout: Одјави се
     quick_links:
-      add_product: Novi proizvod
-      users: Korisnici
+      add_product: Нови производ
+      orders: Најновије наруџбине
+      products: Ваши производи
+    statistics:
+      orders_this_month: Укупно поруџбина
+      registrations_this_month: Укупно пријављених
+      sales_this_month: Продаје
+  backend_welcome: 'Здраво <b>%name%</b>!'
   block:
-    id: ID
-    title: Naslov
+    index_header: Блокови
+    no_results: Нема блокова за приказивање.
+    imagine:
+      updated_at: Ажурирано
+    simple:
+      updated_at: Ажурирано
+    slideshow:
+      updated_at: Ажурирано
+    string:
+      updated_at: Ажурирано
   breadcrumb:
-    assortment: Asortiman
+    assortment: Избор
+    block:
+      index: Блокови
+    content: Садржај
     country:
-      index: Zemlje
-    edit: Izmeniti
+      index: Земље
+    dashboard: Командна Табла
+    edit: Измени
     order:
-      index: Narudžbine
+      index: Наруџбине
+    page:
+      index: Стране
     payment:
-      index: Plaćanja
+      index: Плаћања
     product:
-      index: Poroizvodi
+      index: Пороизводи
     promotion:
-      index: Promocije
+      index: Промоције
+    sales: Продаје
     shipment:
-      index: Pošiljke
-    update: Izmeniti
-    user:
-      index: Korisnici
+      index: Пошиљке
+    update: Измени
     zone:
-      index: Zone
-  cancel: Otkaži
+      index: Зоне
+  cancel: Откажи
   cart:
-    empty: Korpa je prazna
+    empty: Ваша корпа је празна
     summary:
-      add_coupon: U redu
-      checkout: Završite kupovinu
-      clear: Izpraznite korpu
-      grand_total: Sveukupno
-      product: Proizvod
-      quantity: Količina
-      save: Sačuvaj
-      total: Ukupno
-      unit_price: Cena
-    summary_header: Rezime korpe
-    total_items: '1 predmet|%count% predmet(a)'
+      add_coupon: Додај купон
+      checkout: Завршите куповину
+      clear: Испразни корпу
+      grand_total: Свеукупно
+      product: Производ
+      quantity: Количина
+      save: Сачувај
+      total: Укупно
+      unit_price: Цена
+    summary_header: Резиме корпе
+    total_items: '1 предмет|%count% предмет(а)'
   checkout:
     addressing:
-      header: Adresa
-    back: Nazad
+      header: Адреса
+    back: Назад
     finalize:
       address:
-        city: Grad
-        country: Zemlja
-        firstname: Ime
-        lastname: Prezime
-        postcode: Poštanski broj
-        province: Provincija
-        street: Ulica
-      header: Rezime narudžbine
+        city: Град
+        country: Земља
+        firstname: Име
+        lastname: Презиме
+        postcode: Поштански број
+        province: Провинција
+        street: Улица
+      header: Резиме наруџбине
       order:
-        billing_address: Adresa za naplatu
-        items_total: Ukupno proizvoda
-        no_items: Narudžbina je prazna
-        no_promotion: Nijedna promocija nije dodata
-        no_shipping_charges: Nisu dodati troškovi porudžbine
-        no_taxes: Nisu dodati porezi
-        promotion_discount: Promotivni popust
-        promotion_total: Ukupno promocije
-        shipping_address: Adresa za isporuku
-        shipping_charges: Cena isporuke
-        shipping_total: Ukupno poštarina
-        tax_total: Ukupno porezi
-        taxes: Porezi
-        total: Ukupno
+        billing_address: Адреса за наплату
+        items_total: Укупно производа
+        no_items: Наруџбина је празна
+        no_promotion: Ниједна промоција није додата
+        no_shipping_charges: Нису додати трошкови поруџбине
+        no_taxes: Нису додати порези
+        promotion_discount: Промотивни попуст
+        promotion_total: Укупно промоције
+        shipping_address: Адреса за испоруку
+        shipping_charges: Цена испоруке
+        shipping_total: Укупно поштарина
+        tax_total: Укупно порези
+        taxes: Порези
+        total: Укупно
       order_item:
-        quantity: Količina
-        total: Ukupno
-        unit_price: Cena jedinice
-      place_order: Kreirajte narudžbinu
+        quantity: Количина
+        total: Укупно
+        unit_price: Цена јединице
+      place_order: Креирајте наруџбину
       product:
-        name: Ime
-    forward: Nastavak
+        name: Име
+    forward: Наставак
     payment:
-      header: Metod plaćanja
+      header: Метод плаћања
     security:
-      existing_customer: Postojeća mušterija
-      header: 'Ulogujete se <small>ili napravite novi nalog</small>'
-      login: Ulogujte se
-      new_customer: Nova mušterija
-      register: Registrujte se
+      existing_customer: Постојећа муштерија
+      header: 'Улогујете се <small>или направите нови налог</small>'
+      login: Улогујте се
+      new_customer: Нова муштерија
+      register: Региструјте се
     shipping:
-      header: Način dostave
-  confirmation:
-    message: Da li želite da obrišete ovu stavku?
-    title: Potvrda
+      header: Начин доставе
   country:
-    add_province: Dodaj provinciju
-    create: Dodaj zemlju
-    create_header: Nova zemlja
-    id: ID
-    index_header: Zemlje
-    iso_name: ISO kod
-    manage: Upravljaj zemljama
-    name: Ime
-    no_results: Nisu konfigurisane zemlje.
-    show_header: Detalji zemlje
-    update_header: Izmenite zemlju
-  create: Kreiraj
-  created_at: Kreirano
-  delete: Izbriši
-  deleted: Obrisano
-  edit: Ažuriraj
-  email: E-Pošta
-  exchange_rate:
-    currency: Valuta
-    id: ID
-    index_header: Kursna lista
+    add_province: Додај провинцију
+    create: Додај земљу
+    create_header: Нова земља
+    id: ИД
+    index_header: Земље
+    iso_name: ИСО код
+    manage: Управљај земљама
+    name: Име
+    no_results: Нису конфигурисане земље.
+    show_header: Детаљи земље
+    update_header: Измените земљу
+  email:
+    updated_at: Ажурирано
+  create: Креирај
+  delete: Избриши
+  edit: Ажурирај
+  permission:
+    updated_at: Ажурирано
+  role:
+    updated_at: Ажурирано
+  currency:
+    updated_at: Ажурирано
+  filter: Филтер
   form:
-    choose_file: Fajl
+    cart:
+      coupon: Ако имате промотивни купон, унесите га овде
+    choose_file: Фајл
     frontend:
       password:
-        confirmation: Potvrda
+        confirmation: Потврда
+        current: Тренутна лозинка
+        new: Нова лозинка
     login:
-      password: Lozinka
-    profile:
-      firstName: Ime
-      lastName: Prezime
+      password: Лозинка
   gallery:
-    next: Sledeća
-    previous: Predhodna
-    slideshow: Galerija
-  generate: Generiši
-  group:
-    id: ID
-    name: Ime
-    roles: Uloge
+    next: Следећа
+    previous: Предходна
+    slideshow: Галерија
+  generate: Генериши
   homepage:
     splash:
-      headline: Dobrodošli u Sylius
-      subheadline: Moderno e-komerc rešenje
+      headline: Добродошли у Сyлиус
+      subheadline: Модерно е-комерц решење
   inventory_unit:
-    created_at: Kreiran
-    inventory_state: Stanje zaliha
-    name: Ime
-    no_results: Nema proizvoda za prikaz.
-    shipping_state: Stanje pošiljke
-    updated_at: Ažurirano
-  login: Prijavljivanje
-  login_header: Administracija
-  manage: Upravljajte
+    created_at: Креиран
+    inventory_state: Стање залиха
+    name: Име
+    no_results: Нема производа за приказ.
+    shipping_state: Стање пошиљке
+    sku: СКУ
+    updated_at: Ажурирано
+  locale:
+    updated_at: Ажурирано
+  login: Пријављивање
+  login_header: Администрација
+  logo: Сyлиус
+  manage: Управљајте
   meta:
-    backend_title: Kontrolna tabla.
-    frontend_description: Sylius je moderno rešenje za PHP, bazirano na Symfony2 frejmvorku.
-    frontend_keywords: sylius, e-komerc, symfony2, prodavnica, korpa
-    frontend_title: Sylius, moderni e-komerc za Symfony2
-  newest: Najnoviji proizvodi
+    frontend_description: Сyлиус је модерно решење за ПХП, базирано на Сyмфонy2 фрејмворку.
+    frontend_keywords: сyлиус, е-комерц, сyмфонy2, продавница, корпа
+    frontend_title: Сyлиус, модерни е-комерц за Сyмфонy2
+  newest: Најновији производи
   "no": false
-  option:
-    create: Kreirajte opciju
-    create_header: Nova opcija proizvoda
-    index_header: Opcije proizvoda
-    manage: Upravljajte opcijama
-    name: Ime
-    no_results: Nema konfigurisanih opcija.
-    presentation: prezentacija
-    update_header: Ažuriranje opcija
-    updated_at: ažurirano
-    values: vrednosti
+  product_option:
+    manage: Управљај опцијама
+    name: Име
+    updated_at: ажурирано
   order:
-    billing_address: Adresa za naplatu
-    create: Kreirajte narudžbinu
-    create_header: Nova narudžbina
-    created_at: Kreirano
-    general_info: Opste informacije
-    id: ID
-    index_header: Trenutne narudžbine
-    inventory_tracking: Pracenje zaliha
-    items_total: Ukupno proizvoda
-    manage: Upravljajte narudžbinama
-    no_items: Narudžbina ne sadrzi artikle
-    no_results: Nema novih narudžbina
-    no_shipments: Nema isporuka za ovu narudžbinu
-    no_shipping_charges: Nema troskova narudžbine
-    no_taxes: Nema poreza
-    number: Broj
-    payment_state: Stanje plaćanja
+    billing_address: Адреса за наплату
+    create: Креирајте наруџбину
+    create_header: Нова наруџбина
+    created_at: Креирано
+    general_info: Опсте информације
+    id: ИД
+    index_header: Тренутне наруџбине
+    inventory_tracking: Працење залиха
+    items_total: Укупно производа
+    manage: Управљајте наруџбинама
+    no_items: Наруџбина не садрзи артикле
+    no_results: Нема нових наруџбина
+    no_shipments: Нема испорука за ову наруџбину
+    no_shipping_charges: Нема троскова наруџбине
+    no_taxes: Нема пореза
+    number: Број
+    payment_state: Стање плаћања
     payment_states:
-      balance_due: Dugovni saldo
-    promotion_total: Ukupno promocije
-    recent_header: Poslednje narudžbine
-    shipment_state: Stanje pošiljke
+      balance_due: Дуговни салдо
+    promotion_total: Укупно промоције
+    recent_header: Последње наруџбине
+    shipment_state: Стање пошиљке
     shipment_states:
-      pending: Na čekanju
-    shipments: Pošiljke
-    shipping_address: Adresa za slanje
-    shipping_charges: Cena isporuke
-    shipping_total: Ukupno isporuka
-    show_header: Detalji narudžbine
-    tax_total: Ukupno porezi
-    taxes: Porezi
-    total: Ukupno
-    update_header: Ažuriranje narudžbine
-    user: Korisnik
+      pending: На чекању
+    shipments: Пошиљке
+    shipping_address: Адреса за слање
+    shipping_charges: Цена испоруке
+    shipping_total: Укупно испорука
+    tax_total: Укупно порези
+    taxes: Порези
+    total: Укупно
+    update_header: Ажурирање наруџбине
   shipment:
-    created_at: napravljeno
-    id: ID
-    index_header: Isporuke
-    inventory_state: stanje zaliha
-    manage: Upravljajte pošiljkama
-    method: metod
-    modified: izmenjeno
-    name: ime
-    no_items: Nema proizvoda za prikaz.
-    no_results: Nema pošiljaka za prikaz.
-    order: narudžbina
-    show_header: Detalji pošiljke
-    state: stanje
-    update: Izmeniti
-    updated_at: ažurirano
+    created_at: направљено
+    id: ИД
+    index_header: Испоруке
+    inventory_state: стање залиха
+    manage: Управљајте пошиљкама
+    method: метод
+    modified: измењено
+    name: име
+    no_items: Нема производа за приказ.
+    no_results: Нема пошиљака за приказ.
+    order: наруџбина
+    show_header: Детаљи пошиљке
+    sku: СКУ
+    state: стање
+    update: Измени
+    updated_at: ажурирано
+  channel:
+    update: Измени
+    updated_at: Ажурирано
   order_item:
-    quantity: Količina
-    sellable: Proizvod
-    total: Ukupno
-    unit_price: Cena po komadu
-  out_of_stock: Nema na lageru
+    quantity: Количина
+    sellable: Производ
+    total: Укупно
+    unit_price: Цена по комаду
+  out_of_stock: Нема на лагеру
   page:
-    id: ID
-  password: Lozinka
+    index_header: Стране
+  password: Лозинка
   payment:
-    amount: Količina
-    create: Kreiraj plaćanje
-    create_header: Novo plaćanje
-    created_at: Kreirano
-    id: ID
-    index_header: Plaćanje
-    method: Metod
-    no_results: Nisu konfigurisana plaćanja.
-    update_header: Ažuriranje plaćanja
-    updated_at: Ažurirano
+    order: наруџбина
+    amount: Количина
+    create: Креирај плаћање
+    create_header: Ново плаћање
+    created_at: Креирано
+    id: ИД
+    index_header: Плаћање
+    method: Метод
+    no_results: Нису конфигурисана плаћања.
+    update_header: Ажурирање плаћања
+    updated_at: Ажурирано
   payment_method:
-    create: Kreirajte metod plaćanja
-    create_header: Novi metod plaćanja
-    enabled: Aktivno?
-    gateway: kapija
-    id: ID
-    index_header: Metod plaćanja
-    name: Ime
-    no_results: Nema konfigurisanih metoda plaćanja.
-    update_header: Ažuriranje metoda plaćanja
-    updated_at: Ažurirano
+    create: Креирајте метод плаћања
+    create_header: Нови метод плаћања
+    enabled: Активно?
+    gateway: капија
+    id: ИД
+    index_header: Метод плаћања
+    name: Име
+    no_results: Нема конфигурисаних метода плаћања.
+    update_header: Ажурирање метода плаћања
+    updated_at: Ажурирано
   product:
-    add_property: Dodajte atribut
-    available_on: Dostupno
-    available_on_demand: Dostupno na zahtev
-    categorization: Kategorizacija
-    create: Kreiraj proizvod
-    create_header: Novi proizvod
-    description: Opis
-    generate_variants: Generiši varijante
-    index_by_taxon_header: 'Proizvodi <small>Kategorisani u "%taxon%"</small>'
-    index_header: 'Proizvodi <small>Svi proizvodi u prodavnici</small>'
-    manage: Upravljajte proizvodima
-    name: Ime
-    no_description: '<i>Nema opisa...</i>'
-    no_images: Nema slika za ovaj proizvod
-    no_options: Nema opcija za ovaj proizvod
-    no_properties: Proizvod nema definisane atribute
-    no_results: Nema proizvoda za prikaz.
-    no_short_description: '<i>Nema kratkog opisa</i>'
-    no_sku: '<i>Nema SKU</i>'
-    no_tax_category: Nema kategorije poreza
-    no_taxons: sylius.product.no_taxons
-    options: Opcije
-    price: Prodajna cena
-    properties: Atributi
-    show: Više
-    show_header: 'Detalji proizvoda <small>Pregled proizvoda "<strong>%product%</strong>"</small>'
-    stock: Lager
+    available_on: Доступно
+    available_on_demand: Доступно на захтев
+    categorization: Категоризација
+    create: Креирај производ
+    create_header: Нови производ
+    description: Опис
+    generate_variants: Генериши варијанте
+    index_by_taxon_header: 'Производи <small>Категорисани у "%taxon%"</small>'
+    index_header: 'Производи <small>Сви производи у продавници</small>'
+    manage: Управљајте производима
+    name: Име
+    no_description: '<и>Нема описа...</и>'
+    no_images: Нема слика за овај производ
+    no_options: Нема опција за овај производ
+    no_results: Нема производа за приказ.
+    no_short_description: '<и>Нема кратког описа</и>'
+    no_sku: '<и>Нема СКУ</и>'
+    no_tax_category: Нема категорије пореза
+    no_taxons: сyлиус.продуцт.но_таxонс
+    options: Опције
+    price: Продајна цена
+    show: Више
+    show_header: 'Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>'
+    sku: СКУ
+    stock: Лагер
     tabs:
-      categorization: Kategorizacija
-      images: Slike
-      options: Opcije
-      product: Proizvod
-      properties: Atributi
-    tax_category: Kategorija proizvoda
-    update_header: Ažuriranje proizvoda
-    updated_at: Ažurirano
-    variant_selection_method: Metod izbora varijante proizvoda
+      categorization: Категоризација
+      images: Слике
+      options: Опције
+      product: Производ
+    tax_category: Категорија производа
+    update_header: Ажурирање производа
+    updated_at: Ажурирано
+    variant_selection_method: Метод избора варијанте производа
   promotion:
-    actions: Akcije
-    add_action: Dodajte akciju
-    add_rule: Dodajte pravilo
-    coupon_based: Bazirano na kuponu?
-    create: Kreirajte promociju
-    create_header: Nova promocija
-    created_at: Kreirano
-    description: Opis
-    ends_at: Završava se
-    id: ID
-    index_header: Trenutne promocije
-    manage: Upravljajte promocijama
-    name: Ime
-    no_results: Nema konfigurisanih promocija.
-    rules: Pravila
-    show_header: Detalji promocije
-    starts_at: Počinje
-    update_header: Ažuriranje promocije
-    updated_at: Ažurirano
-    usage_limit: Ograničenje korišćenja
-    used: Korišćeno
+    actions: Акције
+    add_action: Додајте акцију
+    add_rule: Додајте правило
+    coupon_based: Базирано на купону?
+    create: Креирајте промоцију
+    create_header: Нова промоција
+    created_at: Креирано
+    description: Опис
+    ends_at: Завршава се
+    index_header: Тренутне промоције
+    manage: Управљајте промоцијама
+    name: Име
+    no_results: Нема конфигурисаних промоција.
+    rules: Правила
+    show_header: Детаљи промоције
+    starts_at: Почиње
+    update_header: Ажурирање промоције
+    updated_at: Ажурирано
+    usage_limit: Ограничење коришћења
+    used: Коришћено
   promotion_action:
-    configuration: Konfiguracija
-    type: Tip
+    configuration: Конфигурација
+    type: Тип
   promotion_coupon:
-    create: Dodaj kupon
-    create_header: Novi kupon
-    generate: Generiši kupone
-    generate_header: Generisanje kupona
-    index: Lista kupona
-    no_results: Nema kupona za prikaz.
-    update_header: Ažuriranje kupona
+    create: Додај купон
+    create_header: Нови купон
+    generate: Генериши купоне
+    generate_header: Генерисање купона
+    index: Листа купона
+    no_results: Нема купона за приказ.
+    update_header: Ажурирање купона
   promotion_rule:
-    configuration: Konfiguracija
-    type: Tip
-  property:
-    add_choice: Dodajte izbor
-    create: Novi atribut
-    create_header: Novi atribut proizvoda
-    index_header: Atributi proizvoda
-    manage: Upravljajte atributima
-    name: ime
-    no_results: Nema konfigurisanih atributa.
-    presentation: prezentacija
-    type: tip
-    update_header: Ažuriranje atributa
-    updated_at: ažurirano
-  prototype:
-    build: Kreiraj prototip
-    build_header: Kreirajte proizvod od prototipa
-    create: Kreiraj prototip
-    create_header: Novi prototip
-    index_header: Prototipovi proizvoda
-    name: ime
-    no_results: Nema definisanih prototipova.
-    options: opcije
-    properties: atributi
-    update_header: Ažuriranje prototipa
-    updated_at: Ažurirano
+    configuration: Конфигурација
+    type: Тип
+  product_attribute:
+    name: Име
+    updated_at: ажурирано
+  archetype:
+    name: Име
+    updated_at: ажурирано
   province:
-    provinces: Provincije
-  remember_me: Zapamti me?
-  save_changes: Sačuvaj izmene
+    provinces: Провинције
+  remember_me: Запамти ме?
+  report:
+    details: Детаљи
+    manage: Управљајте
+  save_changes: Сачувај измене
+  security:
+    login:
+      button: Пријави се
   settings:
-    general_header: Generalna podešavanja
-    taxation_header: Podešavanja poreza
+    general_header: Генерална подешавања
+    taxation_header: Подешавања пореза
   shipment_category:
-    manage: Upravljajte kategorijama slanja
+    manage: Управљајте категоријама слања
   shipping_category:
-    create: Nova kategorija slanja
-    create_header: Nova kategorija slanja
-    id: ID
-    index_header: Kategorije slanja
-    manage: Upravljajte kategorijama slanja
-    name: Ime
-    no_results: Nema konfigurisanih kategorija slanja.
-    update_header: Ažuriranje kategorije slanja
-    updated_at: ažurirano
+    create: Нова категорија слања
+    create_header: Нова категорија слања
+    id: ИД
+    index_header: Категорије слања
+    manage: Управљајте категоријама слања
+    name: Име
+    no_results: Нема конфигурисаних категорија слања.
+    update_header: Ажурирање категорије слања
+    updated_at: ажурирано
   shipping_method:
-    calculator: Kalkulator
-    category: Kategorija
-    create: Novi način dostave
-    create_header: Novi način dostave
-    enabled: Aktivno?
-    id: ID
-    index_header: Načini dostave
-    manage: Upravljajte načinima dostave
-    name: Ime
-    no_results: Nema konfigurisanih načina dostave.
-    show_header: Detalji nalina dostave
-    update_header: Ažuriranje načina dostave
-    updated_at: ažurirano
-    zone: Zona
-  shop_by: Kupujte po
-  show: Detalji
+    calculator: Калкулатор
+    category: Категорија
+    create: Нови начин доставе
+    create_header: Нови начин доставе
+    enabled: Активно?
+    id: ИД
+    index_header: Начини доставе
+    manage: Управљајте начинима доставе
+    name: Име
+    no_results: Нема конфигурисаних начина доставе.
+    show_header: Детаљи налина доставе
+    update_header: Ажурирање начина доставе
+    updated_at: ажурирано
+    zone: Зона
+  shop_by: Купујте по
+  show: Детаљи
   stockable:
-    index_header: 'Lager <small>Pregled stanja zaliha</small>'
-    name: Ime
-    no_results: Nema zaliha.
-    on_hand: nivo zaliha
-    sku: SKU
-    updated_at: ažurirano
+    index_header: 'Лагер <small>Преглед стања залиха</small>'
+    name: Име
+    no_results: Нема залиха.
+    on_hand: ниво залиха
+    sku: СКУ
+    updated_at: ажурирано
   tax_category:
-    create: Kreirajte kategoriju poreza
-    create_header: Nova kategorija poreza
-    description: Opis
-    id: ID
-    index_header: Kategorije poreza
-    manage: Upravljajte kategorijama poreza
-    name: Ime
-    no_description: Nema opisa
-    no_results: Nema konfigurisanih kategorija poreza.
-    update_header: Ažuriranje kategorije poreza
-    updated_at: ažurirano
+    create: Креирајте категорију пореза
+    create_header: Нова категорија пореза
+    description: Опис
+    id: ИД
+    index_header: Категорије пореза
+    manage: Управљајте категоријама пореза
+    name: Име
+    no_description: Нема описа
+    no_results: Нема конфигурисаних категорија пореза.
+    update_header: Ажурирање категорије пореза
+    updated_at: ажурирано
   tax_rate:
-    amount: Količina
-    calculator: Kalkulator
-    category: Kategorija poreske stope
-    create: Kreirajte porez
-    create_header: Novi porez
-    included_in_price: Ukljucen u cenu?
-    index_header: Poreske stope
-    manage: Upravljajte poreskim stopama
-    name: Ime
-    no_results: Nema konfigurisanih poreskih stopa.
-    show_header: Detalji poreza
-    update_header: Ažuriranje poreske stope
-    updated_at: ažurirano
-    zone: Zona
+    amount: Количина
+    calculator: Калкулатор
+    category: Категорија пореске стопе
+    create: Креирајте порез
+    create_header: Нови порез
+    included_in_price: Укљуцен у цену?
+    index_header: Пореске стопе
+    manage: Управљајте пореским стопама
+    name: Име
+    no_results: Нема конфигурисаних пореских стопа.
+    show_header: Детаљи пореза
+    update_header: Ажурирање пореске стопе
+    updated_at: ажурирано
+    zone: Зона
   taxon:
-    create: Kreiraj kategoriju
-    create_header: Nova kategorija
-    image: Izaberite sliku
-    name: Ime
-    no_image: Name slike za kategorizaciju
-    no_results: Nema rezultata.
-    update_header: Ažuriranje kategorizacije
+    create: Креирај категорију
+    create_header: Нова категорија
+    image: Изаберите слику
+    name: Име
+    no_image: Наме слике за категоризацију
+    no_results: Нема резултата.
+    update_header: Ажурирање категоризације
   taxonomy:
-    create: Kreirajte kategorizaciju
-    create_header: Nova kategorizacija
-    image: Izaberite sliku
-    index_header: 'Kategorizacija <small>Definisane kategorije</small>'
-    name: Ime
-    no_image: Nema slika za kategorizaciju
-    no_results: Nema definisanih kategorizacija.
-    show_header: 'Kategorizacija <small><strong>%name%</strong></small>'
-    update_header: Ažuriranje kategorizacije
+    create: Креирајте категоризацију
+    create_header: Нова категоризација
+    image: Изаберите слику
+    index_header: 'Категоризација <small>Дефинисане категорије</small>'
+    name: Име
+    no_image: Нема слика за категоризацију
+    no_results: Нема дефинисаних категоризација.
+    show_header: 'Категоризација <small><стронг>%name%</стронг></small>'
+    update_header: Ажурирање категоризације
   user:
-    email: E-Pošta
-    enabled: Omogućeno?
-    filter:
-      all: Prikaz svih korisnika
-      unconfirmed: Nepotvrđeni nalozi
-    general_info: 'Korisnik "%username%"'
-    id: ID
-    index_header: 'Korisnici <small>Lista svih registrovanih korisnika</small>'
-    last_login: Poslednje prijavljivanje
-    no_results: Nema korisnika za prikaz.
-    recent_header: Poslednji korisnici
-    show_header: Detalji korisnika
-    username: Krosnicko ime
+    enabled: Омогућено?
+    general_info: 'Корисник "%username%"'
+    id: ИД
+    index_header: 'Корисници <small>Листа свих регистрованих корисника</small>'
+    last_login: Последње пријављивање
+    no_results: Нема корисника за приказ.
+    recent_header: Последњи корисници
+    register:
+      button: Регистрација
+    show_header: Детаљи корисника
+    username: Кросницко име
   variant:
-    add_image: Dodaj sliku
-    availability: Dostupnost
-    available_on_demand: Dostupno na zahtev
-    create: Kreiraj varijantu
-    create_header: Nova varijanta proizvoda
-    delete_image: Izbrišite sliku
-    last_update: poslednja izmena
-    no_results: Nema varijanti proizvoda za prikaz.
-    options: Opcije
-    price: Cena
-    stock: Zalihe
-    update_header: Ažuriranje varijante
+    add_image: Додај слику
+    availability: Доступност
+    available_on_demand: Доступно на захтев
+    create: Креирај варијанту
+    create_header: Нова варијанта производа
+    delete_image: Избришите слику
+    last_update: последња измена
+    no_results: Нема варијанти производа за приказ.
+    options: Опције
+    price: Цена
+    stock: Залихе
+    update_header: Ажурирање варијанте
   "yes": true
   zone:
-    add_member: Dodajte člana
-    create: Kreirajte zonu
-    create_header: Nova zona
-    index_header: Zone
-    manage: Upravljajte zonama
-    name: Ime
-    no_results: Nema konfigurisanih zona.
-    show_header: Detalji zone
-    type: Tip
-    update_header: Ažuriranje zone
+    add_member: Додајте члана
+    create: Креирајте зону
+    create_header: Нова зона
+    index_header: Зоне
+    manage: Управљајте зонама
+    name: Име
+    no_results: Нема конфигурисаних зона.
+    show_header: Детаљи зоне
+    type: Тип
+    update_header: Ажурирање зоне
+    scope: Обухват
   zone_member:
-    members: Članovi
+    members: Чланови
+  contact_topic:
+    updated_at: Ажурирано
+  contact_request:
+    updated_at: Ажурирано

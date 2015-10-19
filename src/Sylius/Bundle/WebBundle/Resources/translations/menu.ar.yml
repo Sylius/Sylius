@@ -7,6 +7,7 @@ sylius:
       main:
         countries: البلدان
         homepage: متجرك
+        pages: الصفحات
       sidebar:
         countries: البلدان
         pages: الصفحات

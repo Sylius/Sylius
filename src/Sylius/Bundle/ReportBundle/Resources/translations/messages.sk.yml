@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Počet
+        equal: Rovná sa
+      type: Typ
+    report:
+      name: Názov
+      description: Popis
+      data_fetcher: Načítanie dát
+      code: Kód
+      renderer:
+        label: Vykreslenie
+        template: Šablóna
+      chart:
+        type: Typ
+      user_registration:
+        start: Dátum začiatku zverejnenia
+        end: Dátum ukončenia zverejnenia
+        period: Časové obdobie
+        empty_records: Vytlačiť prázdne záznamy?

@@ -5,3 +5,9 @@ sylius:
   form:
     priceable:
       price: Preu
+    pricing:
+      volume_based:
+        price: Preu
+  pricing:
+    volume_based:
+      price: Preu

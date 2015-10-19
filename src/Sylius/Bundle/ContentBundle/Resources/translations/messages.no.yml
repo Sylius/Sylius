@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Navn på handlingen
       id: Id
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
     imagine_block:
-      parent: Forelder
+      filter: Filtrer
+      image: Bilde
       internal_name: Internt navn
-      slideshow_small: Slideshow stor (full bredde)
+      label: Etikett
+      parent: Forelder
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
       slideshow_medium: Slideshow Medium (innhold)
-      slideshow_large: Slideshow liten (side)
     menu:
       childrens: Barn
       display: Vis
@@ -21,12 +26,16 @@ sylius:
       label: Etikett
       name: Navn
       parent: Forelder
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
       route: Rute
       uri: URI
     menu_block:
       body: Kropp
       id: Id
       name: Navn
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
     menu_node_block:
       content: Innhold
       display: Vis
@@ -36,7 +45,6 @@ sylius:
       link_type: Lenketype
       publish_end_date: Sluttdato for publisering
       publish_start_date: Startdato for publisering
-      publishable: Publiserbart
       route: Rute
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Kropp
       id: Id
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
       title: Tittel
     route:
       content: Innhold
@@ -56,11 +66,15 @@ sylius:
       body: Kropp
       internal_name: Internt navn
       parent: Forelder
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
       title: Tittel
     slideshow_block:
       childrens: Barn
       internal_name: Internt navn
       parent: Forelder
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
       title: Tittel
     static_content:
       body: Kropp
@@ -70,10 +84,11 @@ sylius:
       parent: Forelder
       publish_end_date: Sluttdato for publisering
       publish_start_date: Startdato for publisering
-      publishable: Publiserbart
       routes: Ruter
       title: Tittel
     string_block:
       body: Kropp
       id: ID
       name: Navn
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering

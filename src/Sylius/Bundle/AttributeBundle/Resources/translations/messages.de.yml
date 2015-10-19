@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Interner Name
       presentation: Präsentation
+      type: Typ

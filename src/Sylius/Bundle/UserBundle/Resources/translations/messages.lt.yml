@@ -1,0 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Elektroninis paštas
+    register: Užsiregistruoti
+    login: Prisijungti
+    logout: Atsijungti
+    logged_in_as: 'Prisijungęs kaip %username%'
+    no_account: Dar neturite paskyros?
+    forgot_password: Pamiršote slaptažodį?
+    reset_password: Atkurti slaptažodį
+    reset: Atstatyti
+    password:
+      reset:
+        header: Atstatyti slaptažodį
+        button: Atstatyti
+    profile: Profilis
+    change_password: Pakeisti savo slaptažodį
+    account_panel_outline: Mėgaukitės visomis funkcijomis, kurias galima pasiekti per savo asmeninę erdvę tam, kad peržiūrėti, stebėti ir valdyti visus savo duomenis.
+    customer_since: Jūs esate klientas nuo
+    welcome: Sveiki
+    customer:
+      id: Vartotojo ID
+  form:
+    group:
+      name: Pavadinimas
+      roles: Rolės
+    user:
+      email: Elektroninis paštas
+      enabled: Įjungta
+      password:
+        label: Slaptažodis
+        confirmation: Patikrinimas
+      remember_me: Prisiminti mane
+      shipping_address: Pristatymo adresas
+    customer:
+      first_name: Vardas
+      groups: Grupės
+      last_name: Pavardė
+      email: Elektroninis paštas
+      birthday: Gimimo diena
+      billing_address: Mokėtojo adresas
+      different_billing_address: Naudoti kitą adresą apmokėjimui?
+    user_filter:
+      query: Ieškoti
+    user_change_password:
+      confirmation: Patvirtinimas
+      current: Dabartinis slaptažodis
+      new: Naujas slaptažodis
+    user_reset_password:
+      confirmation: Patvirtinimas
+      new: Naujas slaptažodis

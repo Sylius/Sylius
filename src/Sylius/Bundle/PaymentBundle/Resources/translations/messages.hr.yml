@@ -14,7 +14,7 @@ sylius:
       amount: Iznos
       method: Način plaćanja
       state:
-        0: Stanje uplate
+        header: Stanje plaćanja
         checkout: Blagajna
         completed: Završeno
         failed: Neuspješno
@@ -30,3 +30,6 @@ sylius:
       enabled: Omogući?
       gateway: Gateway
       name: Naziv
+      fee_calculator:
+        fixed:
+          amount: Iznos

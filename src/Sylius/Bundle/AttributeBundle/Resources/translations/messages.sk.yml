@@ -6,3 +6,5 @@ sylius:
     attribute:
       name: Interný názov
       presentation: Prezentácia
+      type: Typ
+      choices: Možnosti

@@ -8,25 +8,41 @@ sylius:
     action_block:
       action_name: Názov akcie
       id: Id
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
     imagine_block:
-      parent: Rodič
+      filter: Filter
+      image: Obrázok
       internal_name: Inerný názov
-      slideshow_small: Slideshow Veľký (celá šírka)
+      label: Označenie
+      link_url: URL odkaz
+      parent: Nadradená kategória
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
+      slideshow_small: Slideshow malý (po strane)
       slideshow_medium: Slideshow Stredný (obsah)
-      slideshow_large: Slideshow Malý (po strane)
+      slideshow_large: Slideshow veľký (celá šírka)
     menu:
       childrens: Potomkovia
       display: Zobraziť
       display_children: Zobraziť potomkov
       label: Označenie
       name: Názov
-      parent: Rodič
+      parent: Nadradená kategória
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       route: Cesta
       uri: URI
     menu_block:
       body: Obsah
       id: Id
       name: Názov
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
     menu_node_block:
       content: Obsah
       display: Zobraziť
@@ -34,9 +50,9 @@ sylius:
       internal_name: Inerný názov
       label: Označenie
       link_type: Typ odkazu
-      publish_end_date: Dátum konca uverejnenia
-      publish_start_date: Dátum začiatku uverejnenia
-      publishable: Zverejniteľné
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       route: Cesta
       uri: URI
     redirect_route:
@@ -47,33 +63,46 @@ sylius:
     reference_block:
       body: Obsah
       id: Id
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       title: Názov
     route:
       content: Obsah
       name: Názov
-      parent: Rodič
+      parent: Nadradená kategória
     simple_block:
       body: Obsah
       internal_name: Interný názov
-      parent: Rodič
+      parent: Nadradená kategória
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       title: Názov
     slideshow_block:
+      add_slide: Pridať
       childrens: Potomkovia
       internal_name: Inetrný názov
-      parent: Rodič
+      parent: Nadradená kategória
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       title: Názov
     static_content:
       body: Obsah
       id: Id
       internal_name: Interný názov
       menu_nodes: Uzly menu
-      parent: Rodič
-      publish_end_date: Dátum konca uverejnenia
-      publish_start_date: Dátum začiatku uverejnenia
-      publishable: Zverejniteľné
+      parent: Nadradená kategória
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené
       routes: Trasy
       title: Názov
     string_block:
       body: Obsah
       id: ID
       name: Názov
+      publish_end_date: Dátum ukončenia zverejnenia
+      publish_start_date: Dátum začiatku zverejnenia
+      publishable: Uverejnené

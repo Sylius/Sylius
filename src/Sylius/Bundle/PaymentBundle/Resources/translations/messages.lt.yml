@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Mokėjimo suma
       method: Apmokėjimo būdas
+      fee_calculator: Mokesčių skaičiuoklė
       state:
-        0: Apmokėjimo būsena
+        header: Apmokėjimo būsena
         checkout: Apmokėjimas
         completed: Baigtas
+        authorized: Patvirtintas
         failed: Nepavyko
         new: Naujas
         pending: Laukiama
@@ -30,3 +32,8 @@ sylius:
       enabled: Įjungtas?
       gateway: Apmokėjimo kanalas
       name: Pavadinimas
+      fee_calculator:
+        fixed:
+          amount: Suma
+        percent:
+          percent: '%'

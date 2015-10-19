@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: '分类名需要在 {{ limit }} 个字符以内。'
+      min_length: '分类名至少要 {{ limit }} 个字符。'
+  shipping_method:
+    name:
+      max_length: '配送方式名称需要在 {{ limit }} 个字符以内。'
+      min_length: '配送方式名称至少要 {{ limit }} 个字符。'
+      not_blank: 请填写配送方式名称。

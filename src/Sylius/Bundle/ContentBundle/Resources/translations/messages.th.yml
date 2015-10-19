@@ -4,8 +4,10 @@
 sylius:
   form:
     imagine_block:
-      parent: หมวดแม่
+      filter: ตัวกรอง
+      image: รูปภาพ
       internal_name: ชื่อภายใน
+      parent: หมวดแม่
     menu:
       name: ชื่อ
       parent: หมวดแม่

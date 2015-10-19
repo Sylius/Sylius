@@ -1,3 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    priceable:
+      price: Preis
+      calculator: Preisgestaltung
+      configuration: Einstellung
+    pricing:
+      volume_based:
+        price: Preis
+  pricing:
+    volume_based:
+      price: Preis
+      button:
+        add: Hinzufügen

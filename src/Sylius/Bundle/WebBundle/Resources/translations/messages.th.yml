@@ -1,10 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: หัวข้ออีเมล์
 sylius:
+  emails:
+    order_confirmation:
+      subject: ขอบคุณสำหรับการสั่งซื้อ
   account:
     address:
       action:
@@ -19,12 +19,9 @@ sylius:
         no_billing: ไม่มีค่าเริ่มต้นที่อยู่สำหรับเรียกเก็บเงิน
         no_shipping: ไม่มีค่าเริ่มต้นที่อยู่ในการจัดส่ง
         shipping: ค่าเริ่มต้นที่อยู่ในการจัดส่ง
-      empty: คุณยังไม่ได้สร้างรายการที่อยู่
       list: รายการที่อยู่ทั้งหมดของคุณ
       update: แก้ไขที่อยู่ของฉัน
     home:
-      email: ""
-      id: ""
       outline: ยินดีด้วย คุณสามารถใช้งานคุณสมบัติของระบบได้ทั้งหมด
       since: คุณเป็นลูกค้าตั้งแต่
       welcome: ยินดีต้อนรับสู่พื้นที่ของคุณ
@@ -35,16 +32,12 @@ sylius:
       empty: คุณไม่มีคำสั่งซื้อใดๆ ในตอนนี้
       invoice: ใบแจ้งหนี้
       list: ใบสั่งซื้อทั้งหมดของคุณ
-      number: ""
-      payment_mode: ""
       placed_at: 'Placed at %at%'
       shipment:
         pending: อยู่ระหว่างการพิจารณา
         ready: 'พร้อมตั้งแต่ %at%'
         returned: 'ส่งคืน %at%'
         shipped: 'จัดส่ง %at%'
-      shipment_mode: ""
-      state: ""
       total: ผลรวม
       tracking_number: หมายเลขการติดตาม
     title: บัญชีของฉัน
@@ -78,35 +71,40 @@ sylius:
       add_product: สินค้าใหม่
       orders: การสั่งซื้อล่าสุด
       products: สินค้าของคุณ
-      users: ผู้ใช้
     statistics:
-      0: สถิติเดือนนี้
       orders_this_month: ใบสั่งซื้อทั้งหมด
       registrations_this_month: การลงทะเบียนทั้งหมด
       sales_this_month: ขาย
   backend_welcome: 'สวัสดี <b>%name%</b>!'
   block:
-    body: Body
-    create: สร้างบล็อก
-    create_header: สร้างเนื้อหาบล็อกใหม่
-    id: ID
-    index_header: บล็อกแสดงเนื้อหา
+    index_header: บล็อก
     no_results: ไม่มีรายการสำหรับแสดง
-    title: หัวข้อ
-    update_header: แก้ไขเนื้อหาบล็อก
-    updated_at: ปรับปรุงล่าสุด
+    imagine:
+      title: หัวข้อ
+      updated_at: ปรับปรุงล่าสุด
+    simple:
+      body: Body
+      title: หัวข้อ
+      updated_at: ปรับปรุงล่าสุด
+    slideshow:
+      body: Body
+      title: หัวข้อ
+      updated_at: ปรับปรุงล่าสุด
+    string:
+      body: Body
+      title: หัวข้อ
+      updated_at: ปรับปรุงล่าสุด
   breadcrumb:
     assortment: จัดประเภท
     block:
-      index: บล็อกแสดงเนื้อหา
+      index: บล็อก
     build: สร้าง
     configuration: ตั้งค่าคอนฟิก
+    content: เนื้อหา
     country:
       index: ประเทศ
-    customers: ลูกค้า
+    dashboard: แดชบอร์ด
     edit: แก้ไข
-    exchange_rate:
-      index: อัตราแลกเปลี่ยน
     general_settings: ตั้งค่าทั่วไป
     generate: สร้าง
     group:
@@ -121,7 +119,7 @@ sylius:
     order:
       index: ใบสั่งซื้อ
     page:
-      index: เพจ
+      index: หน้า
     payment:
       index: การชำระเงิน
     payment_method:
@@ -132,10 +130,6 @@ sylius:
       index: ส่งเสริมการขาย
     promotion_coupon:
       index: คูปอง
-    property:
-      index: คุณสมบัติ
-    prototype:
-      index: แบบตัวอย่าง
     sales: ขาย
     shipment:
       index: การจัดส่งสินค้า
@@ -151,8 +145,8 @@ sylius:
     taxonomy:
       index: การจัดประเภท
     update: แก้ไข
-    user:
-      index: ผู้ใช้
+    role:
+      index: Roles
     zone:
       index: โซน
   browse_products: ค้นหาผลิตภัณฑ์
@@ -160,7 +154,7 @@ sylius:
   cart:
     empty: รถเข็นของคุณว่างเปล่า
     summary:
-      add_coupon: ตกลง
+      add_coupon: เพิ่มคูปอง
       checkout: ชำระเงิน
       clear: ล้างรถเข็น
       grand_total: ผลรวมทั้งหมด
@@ -234,21 +228,34 @@ sylius:
     no_results: ไม่มีประเทศถูกกำหนดค่าไว้
     show_header: รายละเอียดประเทศ
     update_header: แก้ไขประเทศ
+    enabled: เปิดใช้งานแล้ว
+  email:
+    code: รหัส
+    enabled: เปิดใช้งานแล้ว?
+    updated_at: ปรับปรุงล่าสุด
   create: สร้าง
   created_at: สร้างเมื่อ
   delete: ลบ
   deleted: ลบทิ้งแล้ว
   edit: แก้ไข
-  email: อีเมล
-  exchange_rate:
-    create: สร้างอัตราแลกเปลี่ยน
-    create_header: อัตราแลกเปลี่ยนใหม่
-    currency: สกุลเงิน
+  permission:
+    code: รหัส
     id: ID
-    index_header: อัตราแลกเปลี่ยน
-    no_results: ไม่มีรายการอัตราแลกเปลี่ยน
-    rate: อัตรา
-    update_header: แก้ไขอัตราแลกเปลี่ยน
+    description: คำอธิบาย
+    updated_at: ปรับปรุงล่าสุด
+  role:
+    code: รหัส
+    id: ID
+    name: ชื่อ
+    description: คำอธิบาย
+    index_header: Roles
+    updated_at: ปรับปรุงล่าสุด
+  currency:
+    code: รหัส
+    id: ID
+    name: ชื่อ
+    enabled: เปิดใช้งานแล้ว
+    exchange_rate: อัตราแลกเปลี่ยน
     updated_at: ปรับปรุงล่าสุด
   filter: ตัวกรอง
   form:
@@ -279,7 +286,6 @@ sylius:
   generate: สร้าง
   group:
     create: สร้างกลุ่ม
-    create_header: เพิ่มกลุ่มผู้ใช้ใหม่
     id: ID
     index_header: กลุ่ม
     name: ชื่อ
@@ -288,12 +294,9 @@ sylius:
     update_header: แก้ไขกลุ่ม
   hide_deleted: ซ่อนรายการที่ลบแล้ว
   history:
-    0: ประวัติย้อนหลัง
     action: การดำเนินการ
     author: ผู้เขียน
     data: ข้อมูล
-    logged_at: เข้าสู่ระบบเมื่อ
-    version: เวอร์ชัน
   homepage:
     splash:
       headline: ยินดีต้อนรับสู่ ツ Sylius
@@ -307,6 +310,8 @@ sylius:
     sku: SKU
     updated_at: ปรับปรุงล่าสุด
   locale:
+    id: ID
+    name: ชื่อ
     code: รหัส
     create: สร้างตำแหน่งที่ตั้ง
     create_header: เพิ่มตำแหน่งที่ตั้งใหม่
@@ -319,26 +324,24 @@ sylius:
   login_header: การจัดการระบบ
   logo: ツ Sylius
   manage: จัดการ
+  menu:
+    id: ID
+    title: หัวข้อ
+  menu_node:
+    id: ID
+    parent: หมวดแม่
+    title: หัวข้อ
   meta:
-    backend_title: แดชบอร์ด
     frontend_description: Sylius เป็นอีคอมเมิร์ซโซลูชั่นที่ทันสมัยสำหรับ PHP ที่พัฒนาด้วย Symfony2
     frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
     frontend_title: Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
   na: N/A
   newest: สินค้าใหม่ล่าสุด
   "no": false
-  no_results: ไม่พบรายการ
-  option:
-    create: สร้างตัวเลือก
-    create_header: เลือกสินค้าใหม่
-    index_header: ตัวเลือกสินค้า
+  product_option:
     manage: จัดการตัวเลือก
     name: ชื่อ
-    no_results: ไม่มีตัวเลือกที่กำหนดไว้
-    presentation: การนำเสนอ
-    update_header: แก้ไขตัวเลือก
     updated_at: ปรับปรุงล่าสุด
-    values: ค่า
   order:
     billing_address: ที่อยู่สำหรับออกใบเสร็จ
     create: สร้างใบสั่งซื้อ
@@ -374,17 +377,27 @@ sylius:
     shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
     shipping_charges: ค่าจัดส่ง
     shipping_total: รวมค่าจัดส่ง
-    show_header: ใบสั่งซื้อ
-    state:
-      cart_locked: รถเข็นถูกล็อกไว้
-      checkout: ชำระเงิน
-      order_confimed: ใบสั่งซื้อถูกยืนยันแล้ว
-      ordered: สั่งซื้อแล้ว
+    state: สถานะ
     tax_total: ยอดรวมภาษี
     taxes: ภาษี
     total: ผลรวม
     update_header: แก้ไขใบสั่งซื้อ
-    user: ผู้ใช้
+    currency: สกุลเงิน
+    promotion_coupons: คูปอง
+    adjustments:
+      description: คำอธิบาย
+      amount: ยอดรวม
+    comment:
+      author: ผู้เขียน
+      created_at: สร้างเมื่อ
+      state: สถานะ
+  route:
+    id: ID
+    name: ชื่อ
+    title: หัวข้อ
+  redirect_route:
+    id: ID
+    title: หัวข้อ
   shipment:
     ship: จัดส่ง
     created_at: สร้างเมื่อ
@@ -405,6 +418,14 @@ sylius:
     update: แก้ไข
     update_header: แก้ไขการจัดส่ง
     updated_at: ปรับปรุงล่าสุด
+  channel:
+    created_at: สร้างเมื่อ
+    code: รหัส
+    enabled: เปิดใช้งานแล้ว
+    id: ID
+    name: ชื่อ
+    update: แก้ไข
+    updated_at: ปรับปรุงล่าสุด
   order_item:
     product: รายการ
     quantity: ปริมาณ
@@ -415,14 +436,12 @@ sylius:
   page:
     body: Body
     create: สร้างหน้าเพจใหม่
-    create_header: สร้างเนื้อหาใหม่
     id: ID
     index_header: หน้า
-    no_results: ไม่มีกรายการสำหรับแสดง
     title: หัวข้อ
-    update_header: ปรับปรุงล่าสุด
   password: รหัสผ่าน
   payment:
+    order: ใบสั่งซื้อ
     amount: ยอดเงิน
     create: สร้างการชำระเงิน
     create_header: การชำระเงินใหม่
@@ -433,13 +452,15 @@ sylius:
     method: วิธีการ
     no_results: ไม่มีการกำหนดรายการการชำระเงินไว้
     state:
-      0: สถานะ
+      header: สถานะ
+      cancelled: ถูกยกเลิก
       checkout: ชำระเงิน
       completed: เสร็จสมบูรณ์
       failed: ล้มเหลว
       new: ใหม่
       pending: อยู่ระหว่างการพิจารณา
       processing: กำลังประมวลผล
+      refunded: คืนเงินแล้ว
       unknown: ไม่ระบุ
       void: Void
     update_header: แก้ไขการชำระเงิน
@@ -456,7 +477,6 @@ sylius:
     update_header: แก้ไขวิธีการชำระเงิน
     updated_at: ปรับปรุงล่าสุด
   product:
-    add_property: เพิ่มคุณสมบัติ
     available_on: พร้อมจำหน่ายเมื่อ
     available_on_demand: Available on demand
     categorization: การจัดประเภท
@@ -472,7 +492,6 @@ sylius:
     no_description: '<i>ไม่มีคำอธิบาย...</i>'
     no_images: ไม่มีภาพสำหรับผลิตภัณฑ์นี้
     no_options: ไม่มีตัวเลือกสำหรับผลิตภัณฑ์นี้
-    no_properties: ผลิตภัณฑ์นี้ไม่ได้กำหนดคุณสมบัติไว้
     no_results: ไม่มีรายการสำหรับแสดง
     no_shipping_category: ไม่มีประเภทการจัดส่ง
     no_short_description: '<i>ไม่มีคำอธิบายสั้น ๆ</i>'
@@ -481,7 +500,6 @@ sylius:
     no_taxons: มีไม่มีการจัดประเภทสำหรับผลิตภัณฑ์นี้
     options: ตัวเลือก
     price: ราคาขายปลีก
-    properties: คุณสมบัติ
     restricted_zone: จำกัดโซน
     shipping_category: ประเภทการจัดส่ง
     show: ดูเพิ่มเติม
@@ -494,13 +512,15 @@ sylius:
       images: ภาพ
       options: ตัวเลือก
       product: สินค้า
-      properties: คุณสมบัติ
+      pricing: การกำหนดราคา
     tax_category: ประเภทภาษี
     unavailable: ไม่สามารถใช้ได้
     update_header: แก้ไขสินค้า
     updated_at: ปรับปรุงล่าสุด
     variant_selection_method: วิธีการเลือกตัวแปร
     view_details: 'ดูรายละเอียด %product%'
+    volume_based:
+      price: ราคา
   product_not_available_in_zone: ไม่มีในประเทศของคุณ
   promotion:
     actions: ดำเนินการ
@@ -529,6 +549,7 @@ sylius:
     configuration: ตั้งค่าคอนฟิก
     type: ชนิด
   promotion_coupon:
+    code: รหัส
     create: เพิ่มคูปอง
     create_header: สร้างคูปองใหม่
     generate: สร้างคูปอง
@@ -542,35 +563,26 @@ sylius:
   promotion_rule:
     configuration: ตั้งค่าคอนฟิก
     type: ชนิด
-  property:
-    add_choice: เพิ่มตัวเลือก
-    create: สร้างคุณสมบัติ
-    create_header: คุณสมบัติสินค้าใหม่
-    index_header: คุณสมบัติของสินค้า
-    manage: จัดการคุณสมบัติ
+  product_attribute:
     name: ชื่อ
-    no_results: ไม่มีคุณสมบัติที่กำหนดไว้
-    presentation: การนำเสนอ
-    type: ชนิด
-    update_header: แก้ไขคุณสมบัติ
     updated_at: ปรับปรุงล่าสุด
-  prototype:
-    build: สร้างต้นแบบ
-    build_header: สร้างสินค้าจากต้นแบบ
-    create: สร้างต้นแบบ
-    create_header: ต้นแบบใหม่
-    index_header: ต้นแบบสินค้า
+  archetype:
     name: ชื่อ
-    no_results: ไม่มีการกำหนดต้นแบบสินค้าไว้
-    options: ตัวเลือก
-    properties: คุณสมบัติ
-    update_header: แก้ไขต้นแบบ
     updated_at: ปรับปรุงล่าสุด
   province:
     provinces: จังหวัด
   remember_me: จำการการเข้าระบบของฉันไว้
+  report:
+    details: รายละเอียด
+    name: ชื่อ
+    code: รหัส
+    description: คำอธิบาย
+    manage: จัดการ
   save_changes: บันทึกการเปลี่ยนแปลง
   search: ค้นหา
+  security:
+    login:
+      button: เข้าสู่ระบบ
   settings:
     general_header: ตั้งค่าทั่วไป
     taxation_header: การตั้งค่าภาษี
@@ -663,30 +675,29 @@ sylius:
     update_header: แก้ไขการจัดประเภท
   total_quantity: ปริมาณรวม
   unknown: ไม่ระบุ
-  user:
+  customer:
     billing_address: ที่อยู่สำหรับออกใบเสร็จ
+    email: Email
+    first_name: ชื่อ
+    id: ID
+    last_name: นามสกุล
+    shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+    groups: กลุ่ม
+  user:
     create: สร้างผู้ใช้
     create_header: ผู้ใช้ใหม่
-    email: อีเมล
     enabled: ยืนยันแล้ว?
-    filter:
-      all: แสดงทั้งหมด
-      unconfirmed: บัญชียังไม่ได้ยืนยัน
-    first_name: ชื่อ
     general_info: 'ข้อมูลทั่วไปของ "%username%"'
     id: ID
     index_header: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
     last_login: เข้าสู่ระบบล่าสุด
-    last_name: นามสกุล
     impersonate: เข้าสู่ระบบในฐานะผู้ใช้นี้
     manage: จัดการผู้ใช้
     no_results: ไม่มีรายการผู้ใช้
-    order:
-      no_results: ไม่มีรายการสั่งซื้อ
-    orders: ใบสั่งซื้อของผู้ใช้
     recent_header: ผู้ใช้ล่าสุด
     registration_date: วันที่สมัครสมาชิก
-    shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+    register:
+      button: ลงทะเบียน
     show_header: รายละเอียดผู้ใช้
     update_header: แก้ไขผู้ใช้
     username: ชื่อผู้ใช้
@@ -716,5 +727,16 @@ sylius:
     show_header: รายละเอียดโซน
     type: ชนิด
     update_header: แก้ไขโซน
+    scope: Scope
   zone_member:
     members: สมาชิก
+  contact_topic:
+    id: ID
+    title: หัวข้อ
+    updated_at: ปรับปรุงล่าสุด
+  contact_request:
+    id: ID
+    firstName: ชื่อ
+    lastName: นามสกุล
+    email: Email
+    updated_at: ปรับปรุงล่าสุด

@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Interni naziv
       presentation: Prezentacija
+      type: Vrsta

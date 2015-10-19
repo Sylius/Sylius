@@ -2,24 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  group:
-    name:
-      max: 'Groep naam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Groep naam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul een groep naam in.
   locale:
     code:
       not_blank: Voer een locatie code in.
       unique: Deze locatie bestaat al.
-  user:
-    first_name:
-      max: 'Voornaam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Voornaam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul uw voornaam in.
-    last_name:
-      max: 'Achternaam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Achternaam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul uw voornaam in.
   product_variant:
     onHand:
       min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'

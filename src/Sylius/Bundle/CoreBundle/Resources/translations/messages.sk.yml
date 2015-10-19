@@ -11,6 +11,7 @@ sylius:
         price: Jednotková cena
         quantity: Množstvo
         variant: Variácia
+      customer_group: Zákaznícka skupina
     block:
       body: Obsah
       id: ID
@@ -22,11 +23,19 @@ sylius:
         different_billing_address: Použiť inú fakturačnú adresu?
       payment_method: Spôsob platby
       shipping_method: Spôsob prepravy
+    promotion:
+      channels: Kanál
     coupon:
-      per_user_usage_limit: Využitie užívateľskej kvóty
+      per_customer_usage_limit: Obmedzenie použitia pre zákazníka
     group:
       name: Názov
       roles: Rola
+    channel:
+      taxonomies: Taxonómie
+      locales: Jazyky
+      currencies: Meny
+      shipping_methods: Spôsoby doručenia
+      payment_methods: Spôsoby platby
     image:
       file: Obrázok
     locale:
@@ -39,6 +48,7 @@ sylius:
       total_from: Od
       total_to: Do
       payment_state: Stav platby
+      channel: Všetky kanály
     page:
       body: Obsah
       id: ID
@@ -59,13 +69,24 @@ sylius:
         meta_description: Meta popis
         meta_keywords: Meta kľúčové slová
         title: Názov stránky
+        tracking_code:
+          Tracking code (for example: Google Analytics kód
       taxation:
         default_tax_zone: Predvolené daňové pásmo
+      security:
+        enabled: Povoliť?
     shipment_filter:
       created_at_from: Od
       created_at_to: Do
       number: Číslo objednávky
       shipping_address: Meno príjemcu
+      channel: Všetky kanály
+    payment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo objednávky
+      billing_address: Fakturačná adresa
+      channel: Všetky kanály
     shipping_method:
       zone: Zóna
     taxon:
@@ -78,6 +99,7 @@ sylius:
       enabled: Povolený
       first_name: Meno
       groups: Skupiny
+      roles: Rola
       last_name: Priezvisko
       password: Heslo
       shipping_address: Doručovacia adresa
@@ -93,3 +115,9 @@ sylius:
       sku: Kód
       weight: Hmotnosť
       width: Šírka
+    attribute:
+      product_attribute_value:
+        attribute: Vlastnosť
+        value: Hodnota
+    guest:
+      email: Email

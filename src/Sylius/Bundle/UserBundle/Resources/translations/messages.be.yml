@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: Email
+    register: Зарэгістравацца
+    login: Увайсці
+    logout: Выйсці
+    change_password: Змяніць пароль
+    account_panel_outline: Карыстайцеся ўсімі даступнымі вам магчымасцямі, сачыце за сваімі звесткамі і кіруйце імі.
+  form:
+    group:
+      name: Імя
+      roles: Ролі
+    user:
+      email: Email
+      enabled: Уключана
+      password:
+        label: Пароль
+      shipping_address: Адрас дастаўкі
+    customer:
+      first_name: Імя
+      groups: Групы
+      last_name: Прозвішча
+      email: Email
+      billing_address: Адрас для аплаты
+      different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
+    user_filter:
+      query: Пошук
+    user_change_password:
+      confirmation: Пацверджанне
+      current: Бягучы пароль
+      new: Новы пароль
+    user_reset_password:
+      confirmation: Пацверджанне
+      new: Новы пароль

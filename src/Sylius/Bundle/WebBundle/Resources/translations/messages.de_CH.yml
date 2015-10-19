@@ -1,0 +1,167 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  emails:
+    order_confirmation:
+      subject: Vielen Dank für Ihre Bestellung!
+  address:
+    firstname: Vorname
+    street: Strasse / Nr.
+  block:
+    imagine:
+      id: ID
+      label: Bezeichnung
+      title: Titel
+    simple:
+      body: Body
+      id: ID
+      label: Bezeichnung
+      title: Titel
+    slideshow:
+      body: Body
+      id: ID
+      title: Titel
+    string:
+      body: Body
+      id: ID
+      label: Bezeichnung
+      title: Titel
+  breadcrumb:
+    role:
+      index: Rollen
+  checkout:
+    finalize:
+      address:
+        firstname: Vorname
+        street: Strasse / Nr.
+      order:
+        billing_address: Rechnungsadresse
+      product:
+        name: Name
+  country:
+    id: ID
+    name: Name
+    enabled: Aktiviert
+  email:
+    code: Code
+  permission:
+    code: Code
+    id: ID
+  role:
+    code: Code
+    id: ID
+    name: Name
+    index_header: Rollen
+  currency:
+    code: Code
+    id: ID
+    name: Name
+    enabled: Aktiviert
+  form:
+    profile:
+      firstName: Vorname
+  group:
+    id: ID
+    name: Name
+    roles: Rollen
+  inventory_unit:
+    name: Name
+    sku: Bestandseinheit
+  locale:
+    id: ID
+    name: Name
+    code: Code
+    enabled: Aktiviert
+  menu:
+    id: ID
+    title: Titel
+  menu_node:
+    id: ID
+    title: Titel
+  "no": false
+  order:
+    billing_address: Rechnungsadresse
+    id: ID
+    number: Nummer
+    adjustments:
+      label: Bezeichnung
+  route:
+    id: ID
+    name: Name
+    title: Titel
+  redirect_route:
+    id: ID
+    title: Titel
+  shipment:
+    id: ID
+    name: Name
+    sku: Bestandseinheit
+  channel:
+    code: Code
+    enabled: Aktiviert
+    id: ID
+    name: Name
+  order_item:
+    unit_price: Stückpreis
+  page:
+    body: Body
+    id: ID
+    title: Titel
+  payment:
+    id: ID
+  payment_method:
+    id: ID
+    name: Name
+  product:
+    name: Name
+    restricted_zone: Beschränktes Versandgebiet
+    shipping_category: Versandkategorie
+    sku: Bestandseinheit
+    tax_category: Steuerkategorie
+    variant_selection_method: Varianten
+  promotion:
+    id: ID
+    name: Name
+  promotion_coupon:
+    code: Code
+  report:
+    name: Name
+    code: Code
+  shipping_category:
+    id: ID
+    name: Name
+  shipping_method:
+    id: ID
+    name: Name
+    zone: Zone
+  tax_category:
+    id: ID
+    name: Name
+  tax_rate:
+    name: Name
+    zone: Zone
+  taxon:
+    name: Name
+  taxonomy:
+    name: Name
+  customer:
+    billing_address: Rechnungsadresse
+    first_name: Vorname
+    id: ID
+  user:
+    id: ID
+  variant:
+    sku: Bestandseinheit
+  "yes": true
+  zone:
+    name: Name
+    scope: Umfang
+  contact_topic:
+    id: ID
+    title: Titel
+  contact_request:
+    id: ID
+    firstName: Vorname
+    message: Nachricht
+    topic: Betreff

@@ -9,31 +9,31 @@ sylius:
       country: Land
       first_name: Vorname
       last_name: Nachname
-      phone_number: Telefonnummber
-      postcode: Postleitzahl
-      street: Strasse / Nr.
-      province: Kanton
+      phone_number: Telefonnummer
+      postcode: PLZ
+      street: Straße
+      province: Bundesland
     country:
-      iso_name: ISO Name
+      iso_name: ISO-Name
       name: Name
-      provinces: Kantone
-      select: Auswählen
+      provinces: Bundesländer
+      select: Bundesland auswählen
     province:
       name: Name
-      select: Auswählen
+      select: Bundesland auswählen
     zone:
       members: Mitglieder
       name: Name
       type: Typ
       types:
         country: Land
-        province: Kanton
-        zone: Zone
+        province: Region
+        zone: Versandgebiet
       scope: Umfang
-      select_scope: Bereich auswählen
+      select_scope: Bereich wählen
     zone_member_country:
       country: Land
     zone_member_province:
-      province: Kanton
+      province: Bundesland
     zone_member_zone:
       zone: Zone

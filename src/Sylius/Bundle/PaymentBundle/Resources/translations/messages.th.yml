@@ -14,7 +14,7 @@ sylius:
       amount: ยอดการชำระเงิน
       method: วิธีการชำระเงิน
       state:
-        0: สถานะการชำระเงิน
+        header: สถานะการชำระเงิน
         checkout: ชำระเงิน
         completed: เสร็จสมบูรณ์
         failed: ล้มเหลว
@@ -30,3 +30,6 @@ sylius:
       enabled: เปิดใช้งานแล้ว?
       gateway: ช่องทางการชำระเงิน
       name: ชื่อ
+      fee_calculator:
+        fixed:
+          amount: ยอดรวม

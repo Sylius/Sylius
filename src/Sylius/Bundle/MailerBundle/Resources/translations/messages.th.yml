@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      code: รหัส
+      enabled: เปิดใช้งานแล้ว
+      content: เนื้อหา

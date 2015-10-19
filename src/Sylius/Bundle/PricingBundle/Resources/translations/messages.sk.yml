@@ -5,5 +5,19 @@ sylius:
   form:
     priceable:
       price: Cena
-      calculator: Oceňovanie produktov
+      calculator: Cenník produktov
       configuration: Konfigurácia
+    pricing:
+      volume_based:
+        label: Nastavenie cenníkov
+        min: Min. objem
+        max: Max. objem
+        price: Cena
+  pricing:
+    volume_based:
+      min: Min. objem
+      max: Max. objem
+      price: Cena
+      no_results: Žiadna cenová konfigurácia
+      button:
+        add: Pridať

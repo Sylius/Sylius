@@ -5,8 +5,10 @@ auto: auto
 sylius:
   form:
     imagine_block:
-      parent: Overordnede
+      filter: Filter
+      image: Billede
       internal_name: System navn
+      parent: Overordnede
     menu:
       name: Navn
       parent: Overordnede

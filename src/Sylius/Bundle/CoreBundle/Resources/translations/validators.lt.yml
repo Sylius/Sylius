@@ -2,24 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  group:
-    name:
-      max: 'Grupės pavadinimas turi būti ne ilgesnis nei {{ limit }} simbolių.'
-      min: 'Grupės pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
-      not_blank: Įveskite grupės pavadinimą.
   locale:
     code:
       not_blank: Įveskite lokalės kodą.
       unique: Šią lokalė jau egzistuoja.
-  user:
-    first_name:
-      max: 'Vardas turi būti ne ilgesnis nei {{ limit }} simbolių.'
-      min: 'Vardas turi būti ne mažiau kaip {{ limit }} simbolių.'
-      not_blank: Įveskite savo vardą.
-    last_name:
-      max: 'Pavardė turi būti ne ilgesnė nei {{ limit }} simbolių.'
-      min: 'Pavardė turi būti ne mažiau kaip {{ limit }} simbolių.'
-      not_blank: Įveskite savo pavardę.
   product_variant:
     onHand:
       min: 'Atsargos turi būti didesnės nei {{ limit }}.'
@@ -27,6 +13,9 @@ sylius:
     price:
       min: Kaina negali būti neigiama.
       not_blank: Įveskite kainą.
+  product_translation:
+    short_description:
+      max: 'Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.'
 sylius_shipping:
   method:
     zone:

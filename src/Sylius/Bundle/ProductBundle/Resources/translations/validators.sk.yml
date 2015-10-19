@@ -17,7 +17,8 @@ sylius:
     sku:
       not_blank: Prosím, zadajte kód varianty.
       unique: Kód variácie musí byť unikátny.
-    combination: Variant s touto sadou možností už existuje.
-  option:
+  archetype:
     name:
-      not_blank: Prosím, zadajte názov voľby.
+      not_blank: Zadajte názov produktového prototypu.
+      min_length: 'Názov produktového prototypu musí byť mať aspoň 1 znak. | Názov produktového prototypu musí mať aspoň {{ limit }} znakov.'
+      max_length: 'Názov produktového prototypu nesmie byť dlhší než 1 znak. | Názov produktového prototypu nesmie byť dlhší než {{ limit }} znakov.'

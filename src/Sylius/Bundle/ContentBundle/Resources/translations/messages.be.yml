@@ -4,8 +4,10 @@
 sylius:
   form:
     imagine_block:
-      parent: "Бацькоўскі аб'ект"
+      filter: Фільтр
+      image: малюнак
       internal_name: Унутранае імя
+      parent: "Бацькоўскі аб'ект"
     menu:
       name: Імя
       parent: "Бацькоўскі аб'ект"
