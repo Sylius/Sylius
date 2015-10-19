@@ -42,9 +42,9 @@
     </class>
 
     <class name="Sylius\Component\Order\Model\Adjustment">
-        <property name="label">
+        <property name="type">
             <constraint name="NotBlank">
-                <option name="message">sylius.adjustment.label.not_blank</option>
+                <option name="message">sylius.adjustment.type.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

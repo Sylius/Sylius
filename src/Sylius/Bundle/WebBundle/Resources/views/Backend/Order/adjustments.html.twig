@@ -38,7 +38,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ 'sylius.order.adjustments.label'|trans }}</th>
+            <th>{{ 'sylius.order.adjustments.type'|trans }}</th>
             <th>{{ 'sylius.order.adjustments.description'|trans }}</th>
             <th>{{ 'sylius.order.adjustments.amount'|trans }}</th>
             <th>{{ 'sylius.order.adjustments.locked'|trans }}</th>
@@ -49,7 +49,7 @@
     {% for adjustment in order.adjustments %}
         <tr>
             <td>
-                {{ adjustment.label }}
+                {{ adjustment.type }}
             </td>
             <td>
                 {{ adjustment.description }}

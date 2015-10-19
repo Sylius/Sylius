@@ -578,7 +578,7 @@ sylius:
         no_promotion: No coupons were used.order:
         adjustments:
             manage: Manage adjustments
-            label: Label
+            type: Type
             description: Description
             amount: Amount
             locked: Locked?
