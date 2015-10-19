@@ -59,7 +59,7 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
         $delegatingFeeCalculator->calculate($payment)->willReturn(50);
 
         $adjustmentRepository->createNew()->willReturn($adjustment)->shouldBeCalled();
-        $adjustment->setLabel('payment')->shouldBeCalled();
+        $adjustment->setType('payment')->shouldBeCalled();
         $adjustment->setAmount(50)->shouldBeCalled();
         $adjustment->setDescription('testPaymentMethod')->shouldBeCalled();
 

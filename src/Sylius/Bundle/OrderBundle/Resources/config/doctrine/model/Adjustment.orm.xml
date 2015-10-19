@@ -22,7 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="label" column="label" type="string" />
+        <field name="type" column="type" type="string" />
         <field name="description" column="description" type="string" nullable="true" />
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />

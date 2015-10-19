@@ -150,7 +150,7 @@ class TaxationProcessor implements TaxationProcessorInterface
     {
         foreach ($taxes as $description => $tax) {
             $adjustment = $this->adjustmentRepository->createNew();
-            $adjustment->setLabel(AdjustmentInterface::TAX_ADJUSTMENT);
+            $adjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
             $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
             $adjustment->setNeutral($tax['included']);
