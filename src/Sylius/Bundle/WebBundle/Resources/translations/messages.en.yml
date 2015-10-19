@@ -40,6 +40,9 @@ sylius:
                 create: Start earning money right now & create your affiliate account!
                 disabled: Your affiliate acccount was disabled by administration.
                 paused: Your affiliate account was paused by administration.
+            signup:
+                title: Become an Affiliate
+                success: Thanks for signing up as an affiliate
             index:
                 list: Your affiliation details
                 stats: Affiliation statistics

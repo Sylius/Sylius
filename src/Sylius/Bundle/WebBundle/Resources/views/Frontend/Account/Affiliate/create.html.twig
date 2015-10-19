@@ -1,0 +1,16 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<h4>{{ 'sylius.account.affiliate.signup.title'|trans }}</h4>
+<br />
+
+<form action="{{ path('sylius_account_affiliate_signup') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+    {{ form_rest(form) }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> {{ 'sylius.user.register.button'|trans }}</button>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+    </div>
+</form>
+
+{% endblock %}

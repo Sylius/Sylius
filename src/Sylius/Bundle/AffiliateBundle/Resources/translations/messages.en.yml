@@ -23,6 +23,7 @@ sylius:
             percent: Percent
             status: Status
             referral_code: Referral code
+            terms: Terms & Conditions
         affiliate_goal:
             description: Description
             ends_at: Ends at

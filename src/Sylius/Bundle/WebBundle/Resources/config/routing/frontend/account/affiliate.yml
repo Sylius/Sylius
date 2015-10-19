@@ -7,9 +7,9 @@ sylius_account_affiliate_index:
     defaults:
         _controller: sylius.controller.frontend.account.affiliate:indexAction
 
-sylius_account_affiliate_create:
-    path: /
-    methods: [POST]
+sylius_account_affiliate_signup:
+    path: /signup
+    methods: [GET,POST]
     defaults:
         _controller: sylius.controller.frontend.account.affiliate:createAction
 

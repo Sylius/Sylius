@@ -341,11 +341,20 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'icon-briefcase', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.orders'));
 
-        $child->addChild('affiliate', array(
-            'route'           => 'sylius_account_affiliate_index',
-            'linkAttributes'  => array('title' => $this->translate('sylius.frontend.menu.account.affiliate')),
-            'labelAttributes' => array('icon' => 'icon-money', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.affiliate'));
+        if ($this->securityContext->getToken()->getUser()->getCustomer()->getAffiliate()) {
+            $child->addChild('affiliate', array(
+                'route' => 'sylius_account_affiliate_index',
+                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.affiliate')),
+                'labelAttributes' => array('icon' => 'icon-money', 'iconOnly' => false)
+            ))->setLabel($this->translate('sylius.frontend.menu.account.affiliate'));
+        } else {
+            $child->addChild('affiliate', array(
+                'route' => 'sylius_account_affiliate_signup',
+                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.affiliate')),
+                'labelAttributes' => array('icon' => 'icon-money', 'iconOnly' => false)
+            ))->setLabel($this->translate('sylius.frontend.menu.account.affiliate'));
+        }
+
 
         $child->addChild('addresses', array(
             'route' => 'sylius_account_address_index',

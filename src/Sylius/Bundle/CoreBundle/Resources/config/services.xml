@@ -116,7 +116,7 @@
     <services>
         <!-- settings schemas -->
         <service id="sylius.settings_schema.affiliate" class="%sylius.settings_schema.affiliate.class%">
-            <tag name="sylius.settings_schema" namespace="affiliate" />
+            <tag name="sylius.settings_schema" namespace="sylius_affiliate" />
         </service>
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">

@@ -18,8 +18,10 @@ use Sylius\Component\Affiliate\Generator\Instruction;
 use Sylius\Component\Affiliate\Generator\InvitationGeneratorInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Affiliate\Model\TransactionInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,31 +65,49 @@ class AffiliateController extends FOSRestController
      *
      * @return Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
         if (null !== $this->getAffiliate()) {
             return new RedirectResponse($this->generateUrl('sylius_account_affiliate_index'));
         }
 
         /** @var $affiliate AffiliateInterface */
-        $affiliate = $this->getAffiliateRepository()->createNew();
-        $settings  = $this->get('sylius.settings.affiliate');
+        $affiliate  = $this->getAffiliateRepository()->createNew();
+        /** @var $customer CustomerInterface */
+        $customer   = $this->getCustomer();
+        $form       = $this->getSignupForm();
 
-        /** @var $user UserInterface */
-        $user = $this->getUser();
+        if ($form->handleRequest($request)->isValid()) {
 
-        if ($settings->get('enable_multi_level') && $referrer = $user->getCustomer()->getReferrer()) {
-            $affiliate->setReferrer($referrer);
+            $settings = $this->get('sylius.settings.manager')->loadSettings('sylius_affiliate');
+
+            if ($settings->get('enabled_multi_level') && $referrer = $customer->getReferrer()) {
+                $affiliate->setReferrer($referrer);
+            }
+
+            $customer->setAffiliate($affiliate);
+
+            $this->get('event_dispatcher')->dispatch('sylius.affiliate.pre_create', new GenericEvent($affiliate));
+
+            $manager = $this->getCustomerManager();
+            $manager->persist($customer);
+            $manager->flush();
+
+            $this->addFlash('success', 'sylius.account.affiliate.signup.success');
+
+            return $this->redirectToIndex();
         }
 
-        $user->getCustomer()->setAffiliate($affiliate);
+        $view = $this
+            ->view()
+            ->setTemplate('SyliusWebBundle:Frontend/Account:Affiliate/create.html.twig')
+            ->setData(array(
+                'customer' => $this->getCustomer(),
+                'form'     => $form->createView()
+            ))
+        ;
 
-        $manager = $this->getUserManager();
-        $manager->persist($affiliate);
-        $manager->persist($user);
-        $manager->flush();
-
-        return new RedirectResponse($this->generateUrl('sylius_account_affiliate_index'));
+        return $this->handleView($view);
     }
 
     /**
@@ -226,5 +246,31 @@ class AffiliateController extends FOSRestController
     private function getInvitationGenerator()
     {
         return $this->get('sylius.generator.invitation_generator');
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
+    }
+
+    /**
+     * @return ObjectManager
+     */
+    private function getCustomerManager()
+    {
+        return $this->get('sylius.manager.customer');
+    }
+
+    protected function redirectToIndex()
+    {
+        return $this->redirect($this->generateUrl('sylius_account_affiliate_index'));
+    }
+
+    private function getSignupForm()
+    {
+        return $this->get('form.factory')->create('sylius_affiliate_signup');
     }
 }
