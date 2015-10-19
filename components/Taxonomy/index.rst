@@ -1,11 +1,13 @@
 Taxonomy
 ========
 
-Basic taxonomies library for any PHP application.
+Basic taxonomies library for any PHP application. Taxonomies work similarly to the distinction of species in the fauna and flora
+and their aim is to help the store owner manage products.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
+   basic_usage
    models
-   summary
+   interfaces
