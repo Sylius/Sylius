@@ -100,3 +100,12 @@ Feature: Checkout shipping
          When I press "Continue"
          Then I should be on the checkout addressing step
           And "We're sorry" should appear on the page
+
+    Scenario: Returning to shipping method page
+        Given I go to the checkout start page
+          And I fill in the shipping address to United States
+          And I press "Continue"
+         When I select the "FedEx" radio button
+          And I press "Continue"
+          And I click "Back"
+         Then I should see "FedEx"
