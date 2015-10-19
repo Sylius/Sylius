@@ -33,6 +33,12 @@ sylius_cart:
     resource: @SyliusCartBundle/Resources/config/routing.yml
     prefix: /cart
 
+sylius_order_track:
+    path: /track/{number}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.order:showAction
+
 sylius_cart_summary:
     path: /cart
     defaults:

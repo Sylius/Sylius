@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    back_to_shop: Back to shop
     emails:
         order_confirmation:
             name: Order confirmation
