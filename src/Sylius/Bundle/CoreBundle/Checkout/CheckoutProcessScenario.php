@@ -24,15 +24,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 class CheckoutProcessScenario implements ProcessScenarioInterface
 {
     /**
-     * Cart provider.
-     *
      * @var CartProviderInterface
      */
     protected $cartProvider;
 
     /**
-     * Constructor.
-     *
      * @param CartProviderInterface $cartProvider
      */
     public function __construct(CartProviderInterface $cartProvider)
@@ -45,8 +41,6 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
      */
     public function build(ProcessBuilderInterface $builder)
     {
-        $cart = $this->getCurrentCart();
-
         $builder
             ->add('security', 'sylius_checkout_security')
             ->add('addressing', 'sylius_checkout_addressing')
@@ -54,21 +48,16 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
             ->add('payment', 'sylius_checkout_payment')
             ->add('finalize', 'sylius_checkout_finalize')
             ->add('purchase', 'sylius_checkout_purchase')
-        ;
-
-        $builder
             ->setDisplayRoute('sylius_checkout_display')
             ->setForwardRoute('sylius_checkout_forward')
             ->setRedirect('sylius_homepage')
-            ->validate(function () use ($cart) {
-                return !$cart->isEmpty();
+            ->validate(function () {
+                return !$this->getCurrentCart()->isEmpty();
             })
         ;
     }
 
     /**
-     * Get current cart.
-     *
      * @return OrderInterface
      */
     protected function getCurrentCart()

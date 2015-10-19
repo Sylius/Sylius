@@ -46,10 +46,9 @@ class LocaleType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $self = $this;
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($self) {
+            function (FormEvent $event) {
                 // Adding dynamically created code field
                 $nameOptions = array(
                     'label' => 'sylius.form.locale.name',
@@ -59,7 +58,7 @@ class LocaleType extends AbstractResourceType
                 if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                     $nameOptions['disabled'] = true;
                 } else {
-                    $nameOptions['choices'] = $self->getAvailableLocales();
+                    $nameOptions['choices'] = $this->getAvailableLocales();
                 }
 
                 $form = $event->getForm();
