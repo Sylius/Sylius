@@ -60,7 +60,13 @@ class LoadPaymentMethodsData extends DataFixture
     {
         /* @var $method PaymentMethodInterface */
         $method = $this->getPaymentMethodRepository()->createNew();
-        $method->setName($name);
+
+        $translatedNames = array(
+            $this->defaultLocale => sprintf($name),
+            'es_ES' => sprintf($this->fakers['es_ES']->word),
+        );
+        $this->addTranslatedFields($method, $translatedNames);
+
         $method->setGateway($gateway);
         $method->setEnabled($enabled);
         $method->setFeeCalculator($feeCalculator);
@@ -69,5 +75,18 @@ class LoadPaymentMethodsData extends DataFixture
         $this->setReference('Sylius.PaymentMethod.'.$name, $method);
 
         return $method;
+    }
+
+    private function addTranslatedFields(PaymentMethodInterface $method, $translatedNames)
+    {
+        foreach ($translatedNames as $locale => $name) {
+            $method->setCurrentLocale($locale);
+            $method->setFallbackLocale($locale);
+
+            $method->setName($name);
+            $method->setDescription($this->fakers[$locale]->paragraph);
+        }
+
+        $method->setCurrentLocale($this->defaultLocale);
     }
 }
