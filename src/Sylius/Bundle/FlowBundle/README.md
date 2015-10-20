@@ -52,7 +52,7 @@ namespace Acme\Bundle\CheckoutBundle\Process\Step;
 
 use Acme\Bundle\CheckoutBundle\Entity\Address;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
+use Sylius\Bundle\FlowBundle\Process\Step\AbstractContainerAwareStep;
 
 /**
  * Delivery step.
@@ -60,7 +60,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
  *
  * @author Potato Potato <potato@potato.foo>
  */
-class DeliveryStep extends ContainerAwareStep
+class DeliveryStep extends AbstractContainerAwareStep
 {
     /**
      * {@inheritdoc}
