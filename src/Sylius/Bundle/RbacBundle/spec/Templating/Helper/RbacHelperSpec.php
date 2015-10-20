@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\RbacBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
-use Sylius\Component\Rbac\Context\RbacContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
