@@ -1,12 +1,5 @@
 sylius:
     form:
-        rule:
-            item_count_configuration:
-                count: sylius.form.rule.item_count_configuration.count   # FIXME
-                equal: sylius.form.rule.item_count_configuration.equal   # FIXME
-
-            type: sylius.form.rule.type   # FIXME
-
         report:
             name: Name
             description: Description
