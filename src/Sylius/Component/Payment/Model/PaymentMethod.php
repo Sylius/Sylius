@@ -40,8 +40,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     protected $description;
 
     /**
-     * Gateway name.
-     *
      * @var string
      */
     protected $gateway;
@@ -74,6 +72,7 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function __construct()
     {
         parent::__construct();
+
         $this->createdAt = new \DateTime();
     }
 
