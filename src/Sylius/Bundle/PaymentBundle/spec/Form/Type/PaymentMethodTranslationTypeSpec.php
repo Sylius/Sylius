@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paula
- * Date: 24/07/15
- * Time: 15:59
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace spec\Sylius\Bundle\PaymentBundle\spec\Form\Type;
