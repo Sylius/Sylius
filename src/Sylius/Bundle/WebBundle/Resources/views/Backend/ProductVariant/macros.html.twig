@@ -46,7 +46,7 @@
             </td>
             <td><span class="label label-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
             <td>{{ variant.price|sylius_price }}</td>
-            <td>{{ variant.originalPrice|sylius_original_price }}</td>
+            <td>{{ variant.originalPrice|sylius_price }}</td>
             <td>
                 <div class="pull-right">
                 {% if not variant.deleted %}
