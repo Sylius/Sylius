@@ -87,7 +87,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             return $eligible;
         }
 
-        return $this->areCouponsEligibleForPromotion($subject, $promotion);
+        return $eligible && $this->areCouponsEligibleForPromotion($subject, $promotion);
     }
 
     /**
