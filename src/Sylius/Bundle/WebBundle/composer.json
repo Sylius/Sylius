@@ -22,7 +22,7 @@
     "require": {
         "php":                       ">=5.5.9",
 
-        "symfony/framework-bundle":  "~2.3",
+        "symfony/framework-bundle":  "^2.7.5",
         "jms/translation-bundle":    "1.1.*",
         "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~1.0",

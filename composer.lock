@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "866137bd484fd3a944a05e0a285e926d",
-    "content-hash": "1f0730d06b60dd0e2653c04047af777a",
+    "hash": "b79d0bd5c27c7364e062b47dbf62f184",
+    "content-hash": "26f7af91881b476e6675a4ffaec32368",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -583,7 +583,6 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-<<<<<<< HEAD
             "version": "1.6.0",
             "source": {
                 "type": "git",
@@ -594,18 +593,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
                 "reference": "a5b3ba908ba68f3e14e42762a7b940fde65ed7da",
-=======
-            "version": "v1.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3",
-                "reference": "d63be7eb9a95d46720f7d6badac4e5bc2bcff2e3",
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -670,11 +657,7 @@
                 "orm",
                 "persistence"
             ],
-<<<<<<< HEAD
             "time": "2015-11-04 21:33:02"
-=======
-            "time": "2015-08-31 14:47:06"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -762,23 +745,23 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "v2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8"
+                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
-                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/0f1a2f91b349e10f5c343f75ab71d23aace5b029",
+                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "~1.0",
                 "doctrine/doctrine-bundle": "~1.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.1"
+                "symfony/doctrine-bridge": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -815,11 +798,10 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2015-08-04 22:43:14"
+            "time": "2015-11-04 21:23:23"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-<<<<<<< HEAD
             "version": "1.1.1",
             "source": {
                 "type": "git",
@@ -830,18 +812,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/303a576e2124efb07ec215e34ea2480b841cf5e4",
                 "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4",
-=======
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
-                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -886,11 +856,7 @@
                 "migrations",
                 "schema"
             ],
-<<<<<<< HEAD
             "time": "2015-11-04 13:45:30"
-=======
-            "time": "2015-09-29 10:07:00"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "doctrine/inflector",
@@ -1355,41 +1321,6 @@
                 "phpcr"
             ],
             "time": "2015-10-08 11:16:58"
-<<<<<<< HEAD
-=======
-        },
-        {
-            "name": "fp/klarna-invoice",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/formapro/KlarnaInvoice.git",
-                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/formapro/KlarnaInvoice/zipball/c0aebad0be069d875619a2ef2455c29e667ed27a",
-                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.16",
-                "phpxmlrpc/phpxmlrpc": "~3.0|~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Klarna.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "It unofficial repo of Klarna Invoice service with Composer added. We use it with https://github.com/Payum/KlarnaInvoice",
-            "homepage": "http://developers.klarna.com",
-            "time": "2015-09-03 08:23:32"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
@@ -1970,16 +1901,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "97fe7210def29451ec74923b27e552238defd75a"
+                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/97fe7210def29451ec74923b27e552238defd75a",
-                "reference": "97fe7210def29451ec74923b27e552238defd75a",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/b1e1c0d55f8083c71eda2c28c12a228d708294ea",
+                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea",
                 "shasum": ""
             },
             "require": {
@@ -2017,20 +1948,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2015-08-15 19:37:21"
+            "time": "2015-10-15 22:28:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e"
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
-                "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
                 "shasum": ""
             },
             "require": {
@@ -2075,7 +2006,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-08-15 19:32:36"
+            "time": "2015-11-03 01:34:55"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -2252,21 +2183,21 @@
         },
         {
             "name": "incenteev/composer-parameter-handler",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "84a205fe80a46101607bafbc423019527893ddd0"
+                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/84a205fe80a46101607bafbc423019527893ddd0",
-                "reference": "84a205fe80a46101607bafbc423019527893ddd0",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
+                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/yaml": "~2.0"
+                "symfony/yaml": "~2.3|~3.0"
             },
             "require-dev": {
                 "composer/composer": "1.0.*@dev",
@@ -2299,33 +2230,20 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2015-06-03 08:27:03"
+            "time": "2015-11-10 17:04:01"
         },
         {
             "name": "jackalope/jackalope",
-<<<<<<< HEAD
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jackalope/jackalope.git",
-                "reference": "a7d15812d3bd2de39beccee86e1041b079a1284c"
+                "reference": "a4bd18fee1d7d750fdba8bfa32aad1559da32b42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jackalope/jackalope/zipball/a7d15812d3bd2de39beccee86e1041b079a1284c",
-                "reference": "a7d15812d3bd2de39beccee86e1041b079a1284c",
-=======
-            "version": "1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jackalope/jackalope.git",
-                "reference": "75cd273ed693b6c077c9856709ebac6ca3252e25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jackalope/jackalope/zipball/75cd273ed693b6c077c9856709ebac6ca3252e25",
-                "reference": "75cd273ed693b6c077c9856709ebac6ca3252e25",
->>>>>>> Symfony update to 2.7.5 in main composer.json
+                "url": "https://api.github.com/repos/jackalope/jackalope/zipball/a4bd18fee1d7d750fdba8bfa32aad1559da32b42",
+                "reference": "a4bd18fee1d7d750fdba8bfa32aad1559da32b42",
                 "shasum": ""
             },
             "require": {
@@ -2365,11 +2283,7 @@
             "keywords": [
                 "phpcr"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-06 08:52:52"
-=======
-            "time": "2015-10-09 16:37:07"
->>>>>>> Symfony update to 2.7.5 in main composer.json
+            "time": "2015-11-10 13:02:01"
         },
         {
             "name": "jackalope/jackalope-doctrine-dbal",
@@ -2801,46 +2715,6 @@
                 "shasum": ""
             },
             "require": {
-<<<<<<< HEAD
-=======
-                "php": ">=5.2.16"
-            },
-            "require-dev": {
-                "phpmd/phpmd": "~1.5",
-                "phpunit/phpunit": "~3.7",
-                "satooshi/php-coveralls": "~0.6",
-                "squizlabs/php_codesniffer": "~1.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Klarna": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Wrapper for the Klarna Checkout API",
-            "homepage": "http://developers.klarna.com",
-            "time": "2014-10-06 08:03:01"
-        },
-        {
-            "name": "knplabs/gaufrette",
-            "version": "0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "9d52413665284f9c96e0cef399fc14e68ac0aa5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/9d52413665284f9c96e0cef399fc14e68ac0aa5a",
-                "reference": "9d52413665284f9c96e0cef399fc14e68ac0aa5a",
-                "shasum": ""
-            },
-            "require": {
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "php": ">=5.3.2"
             },
             "require-dev": {
@@ -3203,38 +3077,37 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5"
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/9928f7c4ad98b234e3559d1049abd13387f86db5",
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/process": "~2.1"
+                "symfony/process": "~2.1|~3.0"
             },
             "conflict": {
-                "twig/twig": "<1.12"
+                "twig/twig": "<1.23"
             },
             "require-dev": {
-                "cssmin/cssmin": "*",
-                "joliclic/javascript-packer": "*",
-                "kamicane/packager": "*",
+                "cssmin/cssmin": "3.0.1",
+                "joliclic/javascript-packer": "1.1",
+                "kamicane/packager": "1.0",
                 "leafo/lessphp": "^0.3.7",
-                "leafo/scssphp": "*@dev",
-                "leafo/scssphp-compass": "*@dev",
-                "mrclay/minify": "*",
+                "leafo/scssphp": "~0.1",
+                "mrclay/minify": "~2.2",
                 "patchwork/jsqueeze": "~1.0|~2.0",
                 "phpunit/phpunit": "~4.8",
                 "psr/log": "~1.0",
-                "ptachoire/cssembed": "*",
-                "symfony/phpunit-bridge": "~2.7",
+                "ptachoire/cssembed": "~1.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
                 "twig/twig": "~1.8|~2.0"
             },
             "suggest": {
@@ -3277,7 +3150,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-10-15 01:33:42"
+            "time": "2015-11-12 13:51:40"
         },
         {
             "name": "kriswallsmith/buzz",
@@ -5483,7 +5356,6 @@
         },
         {
             "name": "payum/payum",
-<<<<<<< HEAD
             "version": "1.0.0",
             "source": {
                 "type": "git",
@@ -5494,18 +5366,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Payum/Payum/zipball/df32af9076820fc83053428004e5a3774a153a3a",
                 "reference": "df32af9076820fc83053428004e5a3774a153a3a",
-=======
-            "version": "0.14.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Payum/Payum.git",
-                "reference": "5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba",
-                "reference": "5e6f84b7f8e144a2ee4b084d57d6b9c8b34c9bba",
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -5620,11 +5480,7 @@
                 "stripe checkout",
                 "stripe.js"
             ],
-<<<<<<< HEAD
             "time": "2015-11-09 09:29:05"
-=======
-            "time": "2015-09-29 06:53:37"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "payum/payum-bundle",
@@ -7132,7 +6988,6 @@
         },
         {
             "name": "symfony/symfony",
-<<<<<<< HEAD
             "version": "v2.7.6",
             "source": {
                 "type": "git",
@@ -7143,18 +6998,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/symfony/zipball/66b2e9662c44d478b69e48278aa54079a006eb42",
                 "reference": "66b2e9662c44d478b69e48278aa54079a006eb42",
-=======
-            "version": "v2.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/symfony.git",
-                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/619528a274647cffc1792063c3ea04c4fa8266a0",
-                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0",
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -7262,11 +7105,7 @@
             "keywords": [
                 "framework"
             ],
-<<<<<<< HEAD
             "time": "2015-10-27 19:07:24"
-=======
-            "time": "2015-09-25 11:16:52"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "true/punycode",
@@ -7368,7 +7207,6 @@
         },
         {
             "name": "twig/twig",
-<<<<<<< HEAD
             "version": "v1.23.1",
             "source": {
                 "type": "git",
@@ -7379,18 +7217,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
                 "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
-=======
-            "version": "v1.22.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ebfc36b7e77b0c1175afe30459cf943010245540",
-                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540",
->>>>>>> Symfony update to 2.7.5 in main composer.json
                 "shasum": ""
             },
             "require": {
@@ -7438,11 +7264,7 @@
             "keywords": [
                 "templating"
             ],
-<<<<<<< HEAD
             "time": "2015-11-05 12:49:06"
-=======
-            "time": "2015-10-13 07:07:02"
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -7800,40 +7622,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "ajbdev/authorizenet-php-api",
-            "version": "1.1.81",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ajbdev/authorizenet-php-api.git",
-                "reference": "88465a99aa96cc2e991a1f544c4c42042ace8c8e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ajbdev/authorizenet-php-api/zipball/88465a99aa96cc2e991a1f544c4c42042ace8c8e",
-                "reference": "88465a99aa96cc2e991a1f544c4c42042ace8c8e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib/",
-                    "AuthorizeNet.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Authorize.NET PHP library with composer support",
-            "keywords": [
-                "authorize.net",
-                "ecommerce",
-                "payment"
-            ],
-            "abandoned": "authorizenet/authorizenet",
-            "time": "2015-09-03 19:58:03"
-        },
         {
             "name": "akeneo/phpspec-skip-example-extension",
             "version": "v1.2.0",
@@ -8428,38 +8216,6 @@
             "time": "2014-10-18 10:00:46"
         },
         {
-            "name": "fp/klarna-invoice",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/formapro/KlarnaInvoice.git",
-                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/formapro/KlarnaInvoice/zipball/c0aebad0be069d875619a2ef2455c29e667ed27a",
-                "reference": "c0aebad0be069d875619a2ef2455c29e667ed27a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.16",
-                "phpxmlrpc/phpxmlrpc": "~3.0|~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Klarna.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "It unofficial repo of Klarna Invoice service with Composer added. We use it with https://github.com/Payum/KlarnaInvoice",
-            "homepage": "http://developers.klarna.com",
-            "time": "2015-09-03 08:23:32"
-        },
-        {
             "name": "instaclick/php-webdriver",
             "version": "1.4.3",
             "source": {
@@ -8516,43 +8272,6 @@
                 "webtest"
             ],
             "time": "2015-06-15 20:19:33"
-        },
-        {
-            "name": "klarna/checkout",
-            "version": "v1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/klarna/kco_php.git",
-                "reference": "748fa73c86187a7b6e9c6ad86c6ce121869173fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/klarna/kco_php/zipball/748fa73c86187a7b6e9c6ad86c6ce121869173fa",
-                "reference": "748fa73c86187a7b6e9c6ad86c6ce121869173fa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.16"
-            },
-            "require-dev": {
-                "phpmd/phpmd": "~1.5",
-                "phpunit/phpunit": "~3.7",
-                "satooshi/php-coveralls": "~0.6",
-                "squizlabs/php_codesniffer": "~1.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Klarna": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Wrapper for the Klarna Checkout API",
-            "homepage": "http://developers.klarna.com",
-            "time": "2014-10-06 08:03:01"
         },
         {
             "name": "lakion/mink-debug-extension",
@@ -8660,98 +8379,6 @@
             "time": "2013-03-27 03:38:29"
         },
         {
-            "name": "paypal/rest-api-sdk-php",
-            "version": "V0.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-                "reference": "9e09f7bff507e81cbb03d233c15c080fefd1d512"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/9e09f7bff507e81cbb03d233c15c080fefd1d512",
-                "reference": "9e09f7bff507e81cbb03d233c15c080fefd1d512",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "paypal/sdk-core-php": "1.2.*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PayPal": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "PayPal",
-                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
-                }
-            ],
-            "description": "PayPal's PHP SDK for REST APIs",
-            "homepage": "https://github.com/paypal/rest-api-sdk-php",
-            "keywords": [
-                "payments",
-                "paypal",
-                "rest",
-                "sdk"
-            ],
-            "time": "2013-03-08 02:11:59"
-        },
-        {
-            "name": "paypal/sdk-core-php",
-            "version": "V1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paypal/sdk-core-php.git",
-                "reference": "06588e5017a6c983168a3bd8e7093d7068974cd0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paypal/sdk-core-php/zipball/06588e5017a6c983168a3bd8e7093d7068974cd0",
-                "reference": "06588e5017a6c983168a3bd8e7093d7068974cd0",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "PayPal",
-                    "homepage": "https://github.com/paypal/sdk-core-php/contributors"
-                }
-            ],
-            "description": "PayPal Core SDK for PHP",
-            "homepage": "https://github.com/paypal/sdk-core-php",
-            "keywords": [
-                "paypal",
-                "php",
-                "sdk"
-            ],
-            "time": "2013-03-06 13:21:44"
-        },
-        {
             "name": "phpdocumentor/reflection-docblock",
             "version": "2.0.4",
             "source": {
@@ -8836,16 +8463,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.4.0-alpha2",
+            "version": "2.4.0-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "febe6074a6e6d3dc25930926a027da6cfe994724"
+                "reference": "e82d151ae84b014cedb62cbf37ba3e7599ef21c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/febe6074a6e6d3dc25930926a027da6cfe994724",
-                "reference": "febe6074a6e6d3dc25930926a027da6cfe994724",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e82d151ae84b014cedb62cbf37ba3e7599ef21c7",
+                "reference": "e82d151ae84b014cedb62cbf37ba3e7599ef21c7",
                 "shasum": ""
             },
             "require": {
@@ -8910,7 +8537,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2015-11-03 06:54:42"
+            "time": "2015-11-13 20:41:42"
         },
         {
             "name": "phpspec/prophecy",
@@ -9214,29 +8841,16 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
-            "version": "4.8.16",
+            "version": "4.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e"
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/625f8c345606ed0f3a141dfb88f4116f0e22978e",
-                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e",
-=======
-            "version": "4.8.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "be067d6105286b74272facefc2697038f8807b77"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be067d6105286b74272facefc2697038f8807b77",
-                "reference": "be067d6105286b74272facefc2697038f8807b77",
->>>>>>> Symfony update to 2.7.5 in main composer.json
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
                 "shasum": ""
             },
             "require": {
@@ -9295,11 +8909,7 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
-            "time": "2015-10-23 06:48:33"
-=======
-            "time": "2015-10-14 13:49:40"
->>>>>>> Symfony update to 2.7.5 in main composer.json
+            "time": "2015-11-11 11:32:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -9356,45 +8966,6 @@
                 "xunit"
             ],
             "time": "2015-10-02 06:51:40"
-<<<<<<< HEAD
-        },
-        {
-            "name": "phpxmlrpc/phpxmlrpc",
-            "version": "3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gggeek/phpxmlrpc.git",
-                "reference": "490862c33009397151ac39c811b6ee8e24689692"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gggeek/phpxmlrpc/zipball/490862c33009397151ac39c811b6ee8e24689692",
-                "reference": "490862c33009397151ac39c811b6ee8e24689692",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib/xmlrpc.inc",
-                    "lib/xmlrpcs.inc"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "A php library for building xmlrpc clients and servers",
-            "homepage": "http://gggeek.github.io/phpxmlrpc/",
-            "keywords": [
-                "webservices",
-                "xmlrpc"
-            ],
-            "time": "2015-04-19 00:17:47"
-=======
->>>>>>> Symfony update to 2.7.5 in main composer.json
         },
         {
             "name": "sebastian/comparator",
@@ -9766,54 +9337,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
-        },
-        {
-            "name": "stripe/stripe-php",
-            "version": "v1.18.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "022c3f21ec1e4141b46738bd5e7ab730d04f78cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/022c3f21ec1e4141b46738bd5e7ab730d04f78cc",
-                "reference": "022c3f21ec1e4141b46738bd5e7ab730d04f78cc",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.2"
-            },
-            "require-dev": {
-                "simpletest/simpletest": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib/Stripe/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stripe and contributors",
-                    "homepage": "https://github.com/stripe/stripe-php/contributors"
-                }
-            ],
-            "description": "Stripe PHP Library",
-            "homepage": "https://stripe.com/",
-            "keywords": [
-                "api",
-                "payment processing",
-                "stripe"
-            ],
-            "time": "2015-01-22 05:01:46"
         }
     ],
     "aliases": [],

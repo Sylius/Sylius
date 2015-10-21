@@ -24,7 +24,7 @@
 
         "sylius/rbac":                     "0.16.*",
         "sylius/resource-bundle":          "0.16.*",
-        "symfony/framework-bundle":        "~2.3",
+        "symfony/framework-bundle":        "^2.7.5",
         "doctrine/doctrine-cache-bundle":  "~1.0"
     },
     "require-dev": {

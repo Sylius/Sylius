@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.5.9",
 
-        "symfony/framework-bundle":        "~2.3",
+        "symfony/framework-bundle":        "^2.7.5",
         "symfony/twig-bundle":             "~2.3",
         "symfony/expression-language":     "~2.4",
         "symfony/form":                    "~2.3",

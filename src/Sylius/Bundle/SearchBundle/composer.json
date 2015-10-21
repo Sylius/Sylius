@@ -25,7 +25,7 @@
         "sylius/product-bundle":            "0.16.*",
         "sylius/resource-bundle":           "0.16.*",
         "sylius/channel":                   "0.16.*",
-        "symfony/framework-bundle":         "~2.3",
+        "symfony/framework-bundle":         "^2.7.5",
         "symfony/property-access":          "~2.3",
 
         "friendsofsymfony/elastica-bundle": "~3.0.2",
