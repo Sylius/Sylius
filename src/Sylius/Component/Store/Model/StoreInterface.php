@@ -22,7 +22,7 @@ interface StoreInterface extends TimestampableInterface
     public function getAddress();
     public function setAddress($description);
     public function getGeoloc();
-    public function setGeoloc($url);
+    public function setGeoloc($geoloc);
     public function isDefault();
     public function setDefault($default);
     public function isEnabled();

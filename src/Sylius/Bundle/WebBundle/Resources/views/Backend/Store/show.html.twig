@@ -5,7 +5,7 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_zone_index') }}">{{ 'sylius.breadcrumb.store.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_store_index') }}">{{ 'sylius.breadcrumb.store.index'|trans }}</a></li>
     <li>{{ store.name }}</li>
 </ol>
 {% endblock %}
@@ -16,17 +16,15 @@
 </div>
 
 <div class="well">
-    {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.store.manage'|trans) }}
-    {{ buttons.edit(path('sylius_backend_zone_update', {'id': store.id})) }}
-    {{ buttons.delete(path('sylius_backend_zone_delete', {'id': store.id}), null, false, true) }}
+    {{ buttons.manage(path('sylius_backend_store_index'), 'sylius.store.manage'|trans) }}
+    {{ buttons.edit(path('sylius_backend_store_update', {'id': store.id})) }}
+    {{ buttons.delete(path('sylius_backend_store_delete', {'id': store.id}), null, false, true) }}
 </div>
 
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th>{{ 'sylius.store.name'|trans }}</th>
-            <th>{{ 'sylius.store.type'|trans }}</th>
-            <th>{{ 'sylius.store.scope'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +37,7 @@
     {#<table id="members" class="table table-bordered table-condensed">#}
         {#<thead>#}
             {#<tr>#}
-                {#<th>{{ 'sylius.zone_member.members'|trans }}</th>#}
+                {#<th>{{ 'sylius.store_member.members'|trans }}</th>#}
                 {#<th></th>#}
             {#</tr>#}
         {#</thead>#}
@@ -49,7 +47,7 @@
                     {#<td>{{ member.name }}</td>#}
                     {#<td>#}
                         {#<div class="pull-right">#}
-                            {#{{ buttons.delete(path('sylius_backend_zone_member_delete', {'zoneId': store.id, 'id': member.id})) }}#}
+                            {#{{ buttons.delete(path('sylius_backend_store_member_delete', {'storeId': store.id, 'id': member.id})) }}#}
                         {#</div>#}
                     {#</td>#}
                 {#</tr>#}

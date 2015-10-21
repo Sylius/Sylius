@@ -13,6 +13,7 @@ namespace Sylius\Bundle\StoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Sylius store form type.
@@ -22,6 +23,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 class StoreType extends AbstractResourceType
 {
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Sylius\Component\Store\Model\Store',
+            'validation_groups' => array(),
+        ));
+    }
     /**
      * {@inheritdoc}
      */
@@ -35,9 +43,8 @@ class StoreType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.store.name'
             ))
-            ->add('description', 'textarea', array(
-                'required' => false,
-                'label'    => 'sylius.form.store.description'
+            ->add('enabled', null, array(
+                'label' => 'sylius.form.store.enabled'
             ))
             ->add('address', 'text', array(
                 'label' => 'sylius.form.store.address'
@@ -47,7 +54,6 @@ class StoreType extends AbstractResourceType
             ))
         ;
     }
-
     /**
      * {@inheritdoc}
      */
