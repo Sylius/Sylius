@@ -12,11 +12,12 @@
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentMethod implements PaymentMethodInterface
+class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterface
 {
     /**
      * @var mixed
@@ -70,6 +71,8 @@ class PaymentMethod implements PaymentMethodInterface
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->createdAt = new \DateTime();
     }
 
@@ -78,7 +81,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -102,7 +105,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (Boolean)$enabled;
     }
 
     /**
@@ -110,7 +113,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -118,7 +121,9 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
+
+        return $this;
     }
 
     /**
@@ -126,7 +131,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->translate()->getDescription();
     }
 
     /**
@@ -134,7 +139,9 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->translate()->setDescription($description);
+
+        return $this;
     }
 
     /**

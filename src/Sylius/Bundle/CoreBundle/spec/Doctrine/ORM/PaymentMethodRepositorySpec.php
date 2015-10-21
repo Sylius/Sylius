@@ -38,6 +38,8 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
     ) {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
+        $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin("method.translations", "translation")->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere('method IN (:methods)')->shouldBeCalled()->willReturn($builder);
 
