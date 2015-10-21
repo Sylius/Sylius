@@ -48,11 +48,6 @@ class CurrencyTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $builder
-            ->add('enabled', 'checkbox', Argument::any())
-            ->willReturn($builder)
-        ;
-
         $this->buildForm($builder, array());
     }
 

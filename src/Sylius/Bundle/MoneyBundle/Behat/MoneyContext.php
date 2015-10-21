@@ -43,14 +43,18 @@ class MoneyContext extends DefaultContext
 
     /**
      * @Given /^I created currency "([^""]*)"$/
+     * @Given /^there is an enabled currency "([^""]*)"$/
      */
     public function thereIsCurrency($code, $rate = 1, $enabled = true, $flush = true)
     {
         $repository = $this->getRepository('currency');
 
-        $currency = $repository->createNew();
-        $currency->setCode($code);
-        $currency->setExchangeRate($rate);
+        if (null === $currency = $this->getRepository('currency')->findOneBy(array('code' => $code))) {
+            $currency = $repository->createNew();
+            $currency->setCode($code);
+            $currency->setExchangeRate($rate);
+        }
+
         $currency->setEnabled($enabled);
 
         $manager = $this->getEntityManager();
@@ -69,5 +73,13 @@ class MoneyContext extends DefaultContext
     public function setupDefaultCurrency()
     {
         $this->thereIsCurrency('EUR');
+    }
+
+    /**
+     * @Given /^there is a disabled currency "([^""]*)"$/
+     */
+    public function thereIsDisabledCurrency($code)
+    {
+        $this->thereIsCurrency($code, 1, false);
     }
 }

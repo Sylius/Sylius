@@ -12,11 +12,12 @@
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CurrencyInterface extends TimestampableInterface
+interface CurrencyInterface extends TimestampableInterface, ToggleableInterface
 {
     /**
      * @return string
@@ -44,14 +45,4 @@ interface CurrencyInterface extends TimestampableInterface
      * @param float $rate
      */
     public function setExchangeRate($rate);
-
-    /**
-     * @return bool
-     */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
 }
