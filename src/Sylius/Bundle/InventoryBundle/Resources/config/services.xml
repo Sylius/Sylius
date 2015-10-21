@@ -83,8 +83,8 @@
 
         <service id="sylius.listener.stock_item" class="%sylius.listener.stock_item.class%">
             <argument type="service" id="sylius.factory.stock_item" />
-            <tag name="kernel.event_listener" event="sylius.stockable.post_create" method="onStockableCreate" />
-            <tag name="kernel.event_listener" event="sylius.stock_location.post_create" method="onStockLocationCreate" />
+            <tag name="kernel.event_listener" event="sylius.stockable.post_create" method="createAllForStockable" />
+            <tag name="kernel.event_listener" event="sylius.stock_location.post_create" method="createAllForLocation" />
         </service>
 
         <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">
