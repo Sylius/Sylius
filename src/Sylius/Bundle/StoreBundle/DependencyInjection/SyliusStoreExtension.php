@@ -27,14 +27,19 @@ class SyliusStoreExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
+        $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
 
-        $definition = $container->findDefinition('sylius.context.store');
-        $definition->replaceArgument(0, new Reference($config['storage']));
+
+//        $definition = $container->findDefinition('sylius.context.store');
+//        $definition->replaceArgument(0, new Reference($config['storage']));
+
+        $container
+            ->getDefinition('sylius.form.type.store')
+            ->setArguments(array(new Reference('sylius.repository.store')));
     }
 }
