@@ -34,7 +34,7 @@ class StockItemListener
     /**
      * {@inheritdoc}
      */
-    public function onStockableCreate(GenericEvent $event)
+    public function createAllForStockable(GenericEvent $event)
     {
         $this->stockItemFactory->createAllForStockable($event->getSubject());
     }
@@ -42,7 +42,7 @@ class StockItemListener
     /**
      * {@inheritdoc}
      */
-    public function onStockLocationCreate(GenericEvent $event)
+    public function createAllForLocation(GenericEvent $event)
     {
         $this->stockItemFactory->createAllForLocation($event->getSubject());
     }
