@@ -28,7 +28,7 @@
         "sylius/registry":                 "0.16.*",
         "sylius/money-bundle":             "0.16.*",
         "sylius/resource-bundle":          "0.16.*",
-        "symfony/framework-bundle":        "~2.3"
+        "symfony/framework-bundle":        "^2.7.5"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",

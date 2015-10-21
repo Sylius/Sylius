@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.5.9",
 
-        "symfony/framework-bundle": "~2.3",
+        "symfony/framework-bundle": "^2.7.5",
         "sylius/channel":           "0.16.*",
         "sylius/resource-bundle":   "0.16.*"
     },
