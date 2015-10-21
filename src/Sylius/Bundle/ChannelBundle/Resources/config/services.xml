@@ -27,10 +27,6 @@
             <argument>%sylius.validation_group.channel%</argument>
             <tag name="form.type" alias="sylius_channel" />
         </service>
-        <service id="sylius.form.type.channel_choice" class="%sylius.form.type.channel_choice.class%">
-            <argument>%sylius.model.channel.class%</argument>
-            <tag name="form.type" alias="sylius_channel_choice" />
-        </service>
 
         <service id="sylius.context.channel" class="%sylius.context.channel.class%" />
     </services>
