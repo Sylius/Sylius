@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,7 +50,7 @@ class ProductStockType extends AbstractType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => 'Sylius\Component\Core\Model\ProductInterface'
+                'product' => ProductInterface::class
             ))
         ;
     }
