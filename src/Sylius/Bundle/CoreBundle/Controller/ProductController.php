@@ -22,8 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Product controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductController extends BaseProductController
@@ -207,7 +205,7 @@ class ProductController extends BaseProductController
 
             $quantity = $data['quantity'];
 
-            if (!array_key_exists('variant', $data)) {
+            if (!isset($data['variant'])) {
                 $variant = $product->getMasterVariant();
             } else {
                 $variant = $data['variant'];
