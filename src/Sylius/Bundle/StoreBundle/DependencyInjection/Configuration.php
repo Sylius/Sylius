@@ -37,11 +37,34 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+            ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end();
 
+        $this->addValidationGroupsSection($rootNode);
         $this->addClassesSection($rootNode);
 
         return $treeBuilder;
+    }
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                                ->arrayNode('store')
+                                    ->prototype('scalar')->end()
+                                ->defaultValue(array('sylius'))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 
     private function addClassesSection(ArrayNodeDefinition $node)
@@ -49,24 +72,25 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
             ->arrayNode('classes')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->arrayNode('store')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('model')->defaultValue('Sylius\Component\Store\Model\Store')->end()
-            ->scalarNode('controller')->defaultValue('Sylius\Bundle\StoreBundle\Controller\StoreController')->end()
-            ->scalarNode('repository')->end()
-            ->arrayNode('form')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('default')->defaultValue('Sylius\Bundle\StoreBundle\Form\Type\StoreType')->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('store')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Store\Model\Store')->end()
+                                ->scalarNode('controller')
+                                    ->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->arrayNode('form')
+                                ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\StoreBundle\Form\Type\StoreType')->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
     }
 }
