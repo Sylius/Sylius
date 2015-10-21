@@ -1,30 +1,26 @@
-{% macro list(zones) %}
+{% macro list(stores) %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
-{% if zones|length > 0 %}
+{% if stores|length > 0 %}
 <table class="table">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.store.name'|trans) }}</th>
-            <th>{{ sylius_resource_sort('type', 'sylius.store.type'|trans) }}</th>
-            <th>{{ sylius_resource_sort('type', 'sylius.store.scope'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    {% for store in zones %}
+    {% for store in stores %}
         <tr id="{{ store.id }}">
             <td>{{ store.id }}</td>
-            <td><a href="{{ path('sylius_backend_zone_show', {'id': store.id}) }}"><strong>{{ store.name }}</strong></a></td>
-            <td><span class="label label-primary">{{ store.type }}</span></td>
-            <td>{{ store.scope }}</td>
+            <td><a href="{{ path('sylius_backend_store_show', {'id': store.id}) }}"><strong>{{ store.name }}</strong></a></td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_zone_update', {'id': store.id})) }}
-                {{ buttons.delete(path('sylius_backend_zone_delete', {'id': store.id})) }}
+                {{ buttons.edit(path('sylius_backend_store_update', {'id': store.id})) }}
+                {{ buttons.delete(path('sylius_backend_store_delete', {'id': store.id})) }}
                 </div>
             </td>
         </tr>
