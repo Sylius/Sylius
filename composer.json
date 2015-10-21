@@ -18,6 +18,12 @@
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "/var/www/hosts/teststore"
+        }
+    ],
     "require": {
         "php":                                  ">=5.5.9",
         "a2lix/translation-form-bundle":        "~2.0",
@@ -140,6 +146,7 @@
         "sylius/shipping":           "self.version",
         "sylius/shipping-bundle":    "self.version",
         "sylius/storage":            "self.version",
+        "sylius/store":              "self.version",
         "sylius/taxation":           "self.version",
         "sylius/taxation-bundle":    "self.version",
         "sylius/taxonomy":           "self.version",

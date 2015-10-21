@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_store_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.store:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Store:index.html.twig
+            sortable: true
+            paginate: false
+
+sylius_backend_store_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.store:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Store:create.html.twig
+            redirect: sylius_backend_store_show
+
+sylius_backend_store_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.store:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Store:update.html.twig
+            redirect: sylius_backend_store_show
+
+sylius_backend_store_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.store:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_store_index
+
+sylius_backend_store_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.store:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Store:show.html.twig

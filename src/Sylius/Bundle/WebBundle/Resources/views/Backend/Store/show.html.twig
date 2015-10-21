@@ -1,0 +1,60 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_zone_index') }}">{{ 'sylius.breadcrumb.store.index'|trans }}</a></li>
+    <li>{{ store.name }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.store.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.store.manage'|trans) }}
+    {{ buttons.edit(path('sylius_backend_zone_update', {'id': store.id})) }}
+    {{ buttons.delete(path('sylius_backend_zone_delete', {'id': store.id}), null, false, true) }}
+</div>
+
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.store.name'|trans }}</th>
+            <th>{{ 'sylius.store.type'|trans }}</th>
+            <th>{{ 'sylius.store.scope'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ store.name }}</td>
+        </tr>
+    </tbody>
+</table>
+{#{% if store.hasMembers %}#}
+    {#<table id="members" class="table table-bordered table-condensed">#}
+        {#<thead>#}
+            {#<tr>#}
+                {#<th>{{ 'sylius.zone_member.members'|trans }}</th>#}
+                {#<th></th>#}
+            {#</tr>#}
+        {#</thead>#}
+        {#<tbody>#}
+            {#{% for member in store.members %}#}
+                {#<tr id="{{ member.id }}">#}
+                    {#<td>{{ member.name }}</td>#}
+                    {#<td>#}
+                        {#<div class="pull-right">#}
+                            {#{{ buttons.delete(path('sylius_backend_zone_member_delete', {'zoneId': store.id, 'id': member.id})) }}#}
+                        {#</div>#}
+                    {#</td>#}
+                {#</tr>#}
+            {#{% endfor %}#}
+        {#</tbody>#}
+    {#</table>#}
+{#{% endif %}#}
+{% endblock %}

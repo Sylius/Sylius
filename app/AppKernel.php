@@ -24,7 +24,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            // Put here your own bundles!
+            new \Sylius\Bundle\StoreBundle\SyliusStoreBundle()
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {

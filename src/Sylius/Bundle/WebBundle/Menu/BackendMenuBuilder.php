@@ -461,13 +461,20 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-flag'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.countries', $section)));
         }
-
         if ($this->authorizationChecker->isGranted('sylius.zone.index')) {
             $child->addChild('zones', array(
                 'route'           => 'sylius_backend_zone_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-globe'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.zones', $section)));
         }
+
+//        if ($this->authorizationChecker->isGranted('sylius.store.index')) {
+            $child->addChild('stores', array(
+                'route'           => 'sylius_backend_store_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-globe'),
+//            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stores', $section)));
+            ))->setLabel('Stores');
+//        }
 
         if ($this->authorizationChecker->isGranted('sylius.api_client.index')) {
             $child->addChild('api_clients', array(

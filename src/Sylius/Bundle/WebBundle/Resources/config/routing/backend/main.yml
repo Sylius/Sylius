@@ -88,6 +88,10 @@ sylius_backend_shipment:
     resource: @SyliusWebBundle/Resources/config/routing/backend/shipment.yml
     prefix: /shipments
 
+sylius_backend_store:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/store.yml
+    prefix: /stores
+
 sylius_backend_email:
     resource: @SyliusWebBundle/Resources/config/routing/backend/email.yml
     prefix: /emails

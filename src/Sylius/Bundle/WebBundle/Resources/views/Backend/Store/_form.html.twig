@@ -3,7 +3,8 @@
 {{ form_errors(form) }}
 
 {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
-{{ form_row(form.exchangeRate, {'attr': {'class': 'input-sm'}}) }}
+{{ form_row(form.address) }}
+{{ form_row(form.geoloc) }}
 {{ form_row(form.enabled) }}
 
 {{ form_rest(form) }}

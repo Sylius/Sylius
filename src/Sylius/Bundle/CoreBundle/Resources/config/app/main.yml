@@ -147,6 +147,9 @@ jms_serializer:
             sylius-shipping:
                 namespace_prefix: "Sylius\\Component\\Shipping"
                 path: "@SyliusShippingBundle/Resources/config/serializer"
+            sylius-store:
+                namespace_prefix: "Sylius\\Component\\Store"
+                path: "@SyliusStoreBundle/Resources/config/serializer"
             sylius-taxation:
                 namespace_prefix: "Sylius\\Component\\Taxation"
                 path: "@SyliusTaxationBundle/Resources/config/serializer"
