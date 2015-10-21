@@ -24,9 +24,7 @@
 
     <services>
         <service id="sylius.storage.cookie" class="%sylius.storage.cookie.class%" public="false">
-            <call method="setRequest">
-                <argument type="service" id="request" on-invalid="null" strict="false" />
-            </call>
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="sylius.storage.session" class="%sylius.storage.session.class%" public="false">

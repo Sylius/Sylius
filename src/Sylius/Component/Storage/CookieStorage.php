@@ -11,24 +11,25 @@
 
 namespace Sylius\Component\Storage;
 
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class CookieStorage implements StorageInterface
 {
     /**
-     * @var Request
+     * @var RequestStack
      */
-    protected $request;
+    protected $requestStack;
 
     /**
-     * @param Request $request
+     * @param RequestStack $requestStack
      */
-    public function setRequest($request)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->request = $request;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -36,7 +37,7 @@ class CookieStorage implements StorageInterface
      */
     public function hasData($key)
     {
-        return $this->request->cookies->has($key);
+        return $this->requestStack->getCurrentRequest()->cookies->has($key);
     }
 
     /**
@@ -44,7 +45,7 @@ class CookieStorage implements StorageInterface
      */
     public function getData($key, $default = null)
     {
-        return $this->request->cookies->get($key, $default);
+        return $this->requestStack->getCurrentRequest()->cookies->get($key, $default);
     }
 
     /**
@@ -52,7 +53,7 @@ class CookieStorage implements StorageInterface
      */
     public function setData($key, $value)
     {
-        $this->request->cookies->set($key, $value);
+        $this->requestStack->getCurrentRequest()->cookies->set($key, $value);
     }
 
     /**
@@ -60,6 +61,6 @@ class CookieStorage implements StorageInterface
      */
     public function removeData($key)
     {
-        $this->request->cookies->remove($key);
+        $this->requestStack->getCurrentRequest()->cookies->remove($key);
     }
 }
