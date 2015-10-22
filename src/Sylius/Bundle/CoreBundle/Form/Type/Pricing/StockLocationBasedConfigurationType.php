@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Pricing;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Inventory\Repository\StockLocationRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,7 +25,7 @@ class StockLocationBasedConfigurationType extends AbstractType
 {
     protected $stockLocationRepository;
 
-    public function __construct(RepositoryInterface $stockLocationRepository)
+    public function __construct(StockLocationRepositoryInterface $stockLocationRepository)
     {
         $this->stockLocationRepository = $stockLocationRepository;
     }
@@ -35,7 +35,7 @@ class StockLocationBasedConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->stockLocationRepository->findBy(['enabled' => true]) as $stockLocation) {
+        foreach ($this->stockLocationRepository->findAllEnabled() as $stockLocation) {
             $builder
                 ->add($stockLocation->getId(), 'sylius_money', array(
                     'label'    => $stockLocation->getName(),
