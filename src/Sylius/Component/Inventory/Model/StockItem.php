@@ -83,9 +83,6 @@ class StockItem implements StockItemInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->stockMovements = new ArrayCollection();
@@ -114,8 +111,6 @@ class StockItem implements StockItemInterface
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
-
-        return $this;
     }
 
     public function getLocation()
@@ -126,8 +121,6 @@ class StockItem implements StockItemInterface
     public function setLocation(StockLocationInterface $location)
     {
         $this->location = $location;
-
-        return $this;
     }
 
     public function getStockMovements()
@@ -140,8 +133,6 @@ class StockItem implements StockItemInterface
         if (!$this->hasStockMovement($movement)) {
             $this->stockMovements->add($movement);
         }
-
-        return $this;
     }
 
     public function removeStockMovement(StockMovementInterface $movement)
@@ -149,8 +140,6 @@ class StockItem implements StockItemInterface
         if ($this->hasStockMovement($movement)) {
             $this->stockMovements->removeElement($movement);
         }
-
-        return $this;
     }
 
     public function hasStockMovement(StockMovementInterface $movement)
@@ -166,8 +155,6 @@ class StockItem implements StockItemInterface
     public function setOnHand($onHand)
     {
         $this->onHand = $onHand;
-
-        return $this;
     }
 
     public function getOnHold()
@@ -178,8 +165,6 @@ class StockItem implements StockItemInterface
     public function setOnHold($onHold)
     {
         $this->onHold = $onHold;
-
-        return $this;
     }
 
     public function isAvailableOnDemand()
@@ -190,8 +175,6 @@ class StockItem implements StockItemInterface
     public function setAvailableOnDemand($availableOnDemand)
     {
         $this->availableOnDemand = (bool) $availableOnDemand;
-
-        return $this;
     }
 
     /**
@@ -208,8 +191,6 @@ class StockItem implements StockItemInterface
     public function setCreatedAt(\DateTime $createAt)
     {
         $this->createdAt = $createAt;
-
-        return $this;
     }
 
     /**
@@ -226,7 +207,5 @@ class StockItem implements StockItemInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
