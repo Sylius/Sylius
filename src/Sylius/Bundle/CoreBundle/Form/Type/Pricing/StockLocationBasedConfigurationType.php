@@ -35,7 +35,7 @@ class StockLocationBasedConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->stockLocationRepository->findAll() as $stockLocation) {
+        foreach ($this->stockLocationRepository->findBy(['enabled' => true]) as $stockLocation) {
             $builder
                 ->add($stockLocation->getId(), 'sylius_money', array(
                     'label'    => $stockLocation->getName(),
