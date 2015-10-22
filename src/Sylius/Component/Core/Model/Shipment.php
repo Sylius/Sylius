@@ -50,8 +50,6 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 
     /**
@@ -68,8 +66,6 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setStockLocation(BaseStockLocationInterface $location = null)
     {
         $this->stockLocation = $location;
-
-        return $this;
     }
 
     /**
