@@ -75,10 +75,8 @@ class StockItemFactory implements StockItemFactoryInterface
         }
 
         $item = $this->stockItemRepository->createNew();
-        $item
-            ->setStockable($stockable)
-            ->setLocation($location)
-        ;
+        $item->setStockable($stockable);
+        $item->setLocation($location);
 
         return $item;
     }
