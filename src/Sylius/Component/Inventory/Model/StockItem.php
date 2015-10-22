@@ -44,14 +44,14 @@ class StockItem implements StockItemInterface
     /**
      * On hand quantity.
      *
-     * @var integer
+     * @var int
      */
     protected $onHand = 0;
 
     /**
      * On hold quantity.
      *
-     * @var integer
+     * @var int
      */
     protected $onHold = 0;
 
@@ -65,7 +65,7 @@ class StockItem implements StockItemInterface
     /**
      * Available on demand?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $availableOnDemand = false;
 
@@ -189,7 +189,7 @@ class StockItem implements StockItemInterface
 
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (Boolean) $availableOnDemand;
+        $this->availableOnDemand = (bool) $availableOnDemand;
 
         return $this;
     }
