@@ -55,7 +55,8 @@
         <parameter key="sylius.form.type.affiliate_rule.route_visit_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\RouteVisitConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.uri_visit_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\UriVisitConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.registration_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\RegistrationConfigurationType</parameter>
-        
+        <parameter key="sylius.form.type.affiliate_rule.referrer_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\ReferrerConfigurationType</parameter>
+
     </parameters>
 
     <services>
@@ -199,6 +200,11 @@
         <service id="sylius.form.type.affiliate_rule.registration_configuration" class="%sylius.form.type.affiliate_rule.registration_configuration.class%">
             <argument>%sylius.validation_group.affiliate_rule_registration_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_registration_configuration" />
+        </service>
+        <service id="sylius.form.type.affiliate_rule.referrer_configuration" class="%sylius.form.type.affiliate_rule.referrer_configuration.class%">
+            <argument type="service" id="sylius.repository.affiliate" />
+            <argument>%sylius.validation_group.affiliate_rule_referrer_configuration%</argument>
+            <tag name="form.type" alias="sylius_affiliate_rule_referrer_configuration" />
         </service>
 
         <service id="sylius.form.type.price_calculator.channel_based" class="%sylius.form.type.price_calculator.channel_based.class%">

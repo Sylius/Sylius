@@ -81,6 +81,7 @@
         <parameter key="sylius.affiliate_goal_rule_checker.route_visit.class">Sylius\Component\Core\Affiliate\Checker\RouteVisitRuleChecker</parameter>
         <parameter key="sylius.affiliate_goal_rule_checker.taxonomy.class">Sylius\Component\Core\Affiliate\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.affiliate_goal_rule_checker.uri_visit.class">Sylius\Component\Core\Affiliate\Checker\UriVisitRuleChecker</parameter>
+        <parameter key="sylius.affiliate_goal_rule_checker.referrer.class">Sylius\Bundle\AffiliateBundle\Checker\ReferrerRuleChecker</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
@@ -463,6 +464,10 @@
         </service>
         <service id="sylius.affiliate_goal_rule_checker.taxonomy" class="%sylius.affiliate_goal_rule_checker.taxonomy.class%">
             <tag name="sylius.affiliate_goal_rule_checker" type="taxonomy" label="Order Contains Taxonomy" />
+        </service>
+        <service id="sylius.affiliate_goal_rule_checker.referrer" class="%sylius.affiliate_goal_rule_checker.referrer.class%">
+            <argument type="service" id="sylius.context.affiliate" />
+            <tag name="sylius.affiliate_goal_rule_checker" type="referrer" label="Referrer" />
         </service>
 
         <!-- money -->

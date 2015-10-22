@@ -54,6 +54,10 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
             return false;
         }
 
+        //if (!$this->isEligibleToAffiliate($goal, $affiliate)) {
+        //    return false;
+        //}
+
         $eligible      = true;
         $eligibleRules = false;
 
@@ -140,5 +144,30 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
         }
 
         return true;
+    }
+
+    /**
+     * Checks if goal is affiliate specific.
+     *
+     * @param GoalInterface $goal
+     * @see ReferrerRuleChecker
+     * @return Boolean
+     */
+    protected function isEligibleToAffiliate(GoalInterface $goal, AffiliateInterface $affiliate)
+    {
+        if ($goal->hasRules()) {
+            /* @var RuleInterface $rule */
+            foreach ($goal->getRules() as $rule) {
+                try {
+                    if ($this->isEligibleToRule($affiliate, $goal, $rule)) {
+                        return true;
+                    }
+                } catch (UnsupportedTypeException $exception) {
+                    continue;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -41,7 +41,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-one field="affiliate" target-entity="Sylius\Component\Affiliate\Model\AffiliateInterface">
+        <one-to-one field="affiliate" target-entity="Sylius\Component\Affiliate\Model\AffiliateInterface" inversed-by="customer">
             <join-column name="affiliate_id" on-delete="SET NULL" />
             <cascade>
                 <cascade-persist />

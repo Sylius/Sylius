@@ -9,22 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Affiliate\Checker;
+namespace Sylius\Bundle\AffiliateBundle\Checker;
 
 use Sylius\Component\Affiliate\Checker\RuleCheckerInterface;
+use Sylius\Component\Core\Affiliate\AffiliateContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class UriVisitRuleChecker implements RuleCheckerInterface
+class ReferrerRuleChecker implements RuleCheckerInterface
 {
+    protected $affiliateContext;
+
+    public function __construct(AffiliateContextInterface $affiliateContext)
+    {
+        $this->affiliateContext = $affiliateContext;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function isEligible($subject, array $configuration)
     {
-        /**
-         * @var Request $subject
-         */
-        return $configuration['uri'] === $subject->getRequestUri();
+        if (!$this->affiliateContext->hasAffiliate()) {
+            return false;
+        }
+
+        return $this->affiliateContext->getAffiliate()->getId() == $configuration['affiliate'];
     }
 
     /**
@@ -32,7 +41,7 @@ class UriVisitRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_affiliate_rule_uri_visit_configuration';
+        return 'sylius_affiliate_rule_referrer_configuration';
     }
 
     /**
@@ -40,6 +49,6 @@ class UriVisitRuleChecker implements RuleCheckerInterface
      */
     public function supports($subject)
     {
-        return $subject instanceof Request;
+        return true;
     }
 }

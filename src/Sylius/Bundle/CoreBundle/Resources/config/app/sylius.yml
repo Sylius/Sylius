@@ -42,6 +42,7 @@ sylius_affiliate:
     classes:
         affiliate:
             referral: Sylius\Component\Core\Model\Customer
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\AffiliateRepository
 
 sylius_channel:
     classes:

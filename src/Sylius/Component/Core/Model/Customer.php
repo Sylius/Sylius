@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\User\Model\Customer as BaseCustomer;
-use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\AffiliateInterface as BaseAffiliateInterface;
 use Sylius\Component\Affiliate\Model\ReferralInterface;
 
 /**
@@ -47,7 +47,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     protected $addresses;
 
     /**
-     * @var AffiliateInterface
+     * @var BaseAffiliateInterface
      */
     protected $affiliate;
 
@@ -184,7 +184,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setAffiliate(AffiliateInterface $affiliate = null)
+    public function setAffiliate(BaseAffiliateInterface $affiliate = null)
     {
         $this->affiliate = $affiliate;
         return $this;
