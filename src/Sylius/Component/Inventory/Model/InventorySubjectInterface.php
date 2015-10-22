@@ -18,5 +18,8 @@ namespace Sylius\Component\Inventory\Model;
  */
 interface InventorySubjectInterface
 {
+    /**
+     * @return Collection|InventoryUnitInterface[]
+     */
     public function getInventoryUnits();
 }
