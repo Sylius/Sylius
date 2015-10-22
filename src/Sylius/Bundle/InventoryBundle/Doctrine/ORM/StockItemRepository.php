@@ -26,9 +26,9 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
      */
     public function countOnHandByStockable(StockableInterface $stockable)
     {
-        return $this->createQueryBuilder('i')
-            ->select('SUM(i.onHand)')
-            ->where('i.stockable = :stockable')
+        return $this->getQueryBuilder()
+            ->select('SUM('.$this->getPropertyName('onHand').')')
+            ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
             ->getSingleScalarResult()
@@ -40,9 +40,9 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
      */
     public function countOnHoldByStockable(StockableInterface $stockable)
     {
-        return $this->createQueryBuilder('i')
-            ->select('SUM(i.onHold)')
-            ->where('i.stockable = :stockable')
+        return $this->getQueryBuilder()
+            ->select('SUM('.$this->getPropertyName('onHold').')')
+            ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
             ->getSingleScalarResult()
@@ -56,7 +56,7 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
     {
         return $this->findOneBy(array(
             'stockable' => $stockable,
-            'location' => $location
+            'location' => $location,
         ));
     }
 
@@ -65,10 +65,8 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
      */
     public function createByLocationPaginator($locationId)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->andWhere('o.location = :location')
+        $queryBuilder = $this->getQueryBuilder()
+            ->andWhere($this->getPropertyName('location').' = :location')
             ->setParameter('location', $locationId)
         ;
 
