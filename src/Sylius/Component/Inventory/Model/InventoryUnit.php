@@ -105,8 +105,6 @@ class InventoryUnit implements InventoryUnitInterface
     public function setStockItem(StockItemInterface $stockItem = null)
     {
         $this->stockItem = $stockItem;
-
-        return $this;
     }
 
     /**
