@@ -41,7 +41,5 @@ class StockLocation extends BaseStockLocation implements StockLocationInterface
     public function setAddress(AddressInterface $address = null)
     {
         $this->address = $address;
-
-        return $this;
     }
 }
