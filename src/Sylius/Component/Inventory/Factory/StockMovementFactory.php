@@ -25,8 +25,6 @@ class StockMovementFactory implements StockMovementFactoryInterface
     protected $stockMovementRepository;
 
     /**
-     * Constructor.
-     *
      * @param RepositoryInterface $stockMovementRepository
      */
     public function __construct(
@@ -47,10 +45,8 @@ class StockMovementFactory implements StockMovementFactoryInterface
 
         $movement = $this->stockMovementRepository->createNew();
 
-        $movement
-            ->setStockItem($stockItem)
-            ->setQuantity($quantity)
-        ;
+        $movement->setStockItem($stockItem);
+        $movement->setQuantity($quantity);
 
         $stockItem->addStockMovement($movement);
 
