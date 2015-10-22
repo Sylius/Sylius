@@ -27,7 +27,7 @@ class StockLocationRepository extends EntityRepository implements StockLocationR
     {
         return $this->getQueryBuilder()
             ->leftJoin($this->getPropertyName('stockItems'), 'i')
-            ->select('COUNT(*)')
+            ->select('COUNT('.$this->getPropertyName('id').')')
             ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
