@@ -24,8 +24,8 @@ class StockMovementRepository extends EntityRepository implements StockMovementR
      */
     public function createByLocationPaginator($locationId)
     {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->leftJoin('o.stockItem', 'stockItem')
+        $queryBuilder = $this->getQueryBuilder()
+            ->leftJoin($this->getPropertyName('stockItem'), 'stockItem')
             ->addSelect('stockItem')
             ->andWhere('stockItem.location = :location')
             ->setParameter('location', $locationId)
