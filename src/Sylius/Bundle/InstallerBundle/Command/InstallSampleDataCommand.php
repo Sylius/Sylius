@@ -19,18 +19,19 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class InstallSampleDataCommand extends AbstractInstallCommand
 {
+
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName('sylius:install:sample-data')
-            ->setDescription('Install sample data into Sylius.')
-            ->setHelp(<<<EOT
+                ->setName('sylius:install:sample-data')
+                ->setDescription('Install sample data into Sylius.')
+                ->setHelp(<<<EOT
 The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
-            )
+                )
         ;
     }
 
@@ -62,9 +63,19 @@ EOT
         $logger = $doctrineConfiguration->getSQLLogger();
         $doctrineConfiguration->setSQLLogger(null);
 
+        $fixtureArgs = array(
+            '--no-interaction' => true
+        );
+
+        // Add a fixtures option if value has been supplied
+        $fixtureOption = $this->getContainer()->getParameter('sylius.installer.fixtures.argument');
+        if ($fixtureOption != 'EDITME') {
+            $fixtureArgs['--fixtures'] = $fixtureOption;
+        }
+
         $commands = array(
-            'doctrine:fixtures:load'       => array('--no-interaction' => true),
-            'doctrine:phpcr:fixtures:load' => array('--no-interaction' => true),
+            'doctrine:fixtures:load' => $fixtureArgs,
+            'doctrine:phpcr:fixtures:load' => $fixtureArgs,
             'sylius:search:index',
         );
 
