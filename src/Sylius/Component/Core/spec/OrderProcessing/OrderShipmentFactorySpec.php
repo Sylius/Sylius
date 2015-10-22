@@ -61,7 +61,6 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         $order
             ->getShipments()
             ->willReturn($shipments)
-            ->shouldBeCalled()
         ;
 
         $shipment
