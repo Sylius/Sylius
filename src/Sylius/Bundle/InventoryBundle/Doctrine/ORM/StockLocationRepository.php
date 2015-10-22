@@ -25,10 +25,10 @@ class StockLocationRepository extends EntityRepository implements StockLocationR
      */
     public function countBackorderableByStockable(StockableInterface $stockable)
     {
-        return $this->createQueryBuilder('l')
-            ->leftJoin('l.stockItems', 'i')
+        return $this->getQueryBuilder()
+            ->leftJoin($this->getPropertyName('stockItems'), 'i')
             ->select('COUNT(*)')
-            ->where('i.stockable = :stockable')
+            ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
             ->getSingleScalarResult()
