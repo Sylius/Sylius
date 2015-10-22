@@ -76,7 +76,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
         $weight = 0;
 
         foreach ($this->items as $item) {
-            $weight = +$item->getShippable()->getShippingWeight();
+            $weight += $item->getShippable()->getShippingWeight();
         }
 
         return $weight;
