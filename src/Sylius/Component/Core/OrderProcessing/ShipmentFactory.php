@@ -41,7 +41,7 @@ class ShipmentFactory implements ShipmentFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createShipments(OrderInterface $order)
+    public function createShipment(OrderInterface $order)
     {
         if ($order->getShipments()->isEmpty()) {
             $shipment = $this->shipmentRepository->createNew();

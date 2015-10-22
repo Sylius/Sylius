@@ -72,7 +72,7 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->createShipments($order);
+        $this->createShipment($order);
     }
 
     function it_adds_new_inventory_units_to_existing_shipment(
@@ -117,6 +117,6 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->createShipments($order);
+        $this->createShipment($order);
     }
 }
