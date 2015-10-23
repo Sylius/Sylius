@@ -52,6 +52,9 @@ class StoreType extends AbstractResourceType
             ->add('geoloc', 'text', array(
                 'label' => 'sylius.form.store.geoloc'
             ))
+            ->add('user', null, array(
+                'label' => 'sylius.form.store.user'
+            ))
         ;
     }
     /**

@@ -25,6 +25,10 @@
         <field name="enabled" type="boolean" />
         <field name="geoloc" type="text" nullable="true" />
 
+        <one-to-one field="user" target-entity="Sylius\Component\User\Model\User">
+            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        </one-to-one>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
