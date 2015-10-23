@@ -62,8 +62,14 @@ sylius_content:
             repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
             form:
                 choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
-sylius_store:  ~
-#    driver: ~
+
+sylius_store:
+     classes:
+         store:
+             model: Sylius\Component\Store\Model\Store
+             repository: Sylius\Bundle\StoreBundle\Doctrine\ORM\StoreRepository
+             form:
+                 default: Sylius\Bundle\StoreBundle\Form\Type\StoreType
 
 sylius_taxonomy:
     classes:
@@ -611,7 +617,6 @@ sylius_rbac:
         sylius.settings.taxation: Manage taxation settings
 
         sylius.catalog: Manage products catalog
-        sylius.store: Manage stores
         sylius.sales: Manage sales
         sylius.shipping: Manage shipping
         sylius.marketing: Manage marketing campaigns
@@ -666,7 +671,7 @@ sylius_rbac:
         sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
-        sylius.store: [sylius.manage.order, sylius.manage.order_item, sylius.manage.payment, sylius.manage.report, sylius.manage.store]
+        sylius.store: [sylius.catalog, sylius.manage.order, sylius.manage.order_item, sylius.manage.payment, sylius.manage.report]
         sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.payment, sylius.manage.report]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
@@ -692,8 +697,8 @@ sylius_rbac:
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         store_owner:
             name: Store Owner
+            permissions: [sylius.store]
             description: Store Owner to manage own Products and view own payments
-            permissions: [sylius.sales]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         sales_manager:
             name: Sales Manager
@@ -745,7 +750,7 @@ sylius_rbac:
             permissions: [sylius.support, sylius.customer.show, sylius.customer.index]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
     roles_hierarchy:
-        administrator: [catalog_manager, store_owner, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
+        administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
 
 sylius_user:
