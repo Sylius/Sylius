@@ -43,7 +43,31 @@ class FinalizeStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
 
-        $this->completeOrder($order);
+        $storeIds = array();
+        foreach ($order->getItems() as $key => $item) {
+            if ($storeItem = $item->getProduct()->getStore()) {
+                $storeIds[$storeItem->getId()] = array('item' => $item, 'store' => $storeItem);
+            }
+        }
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
+        foreach ($storeIds as $key => $store) {
+            $newVirtualOrder = $this->get('sylius.repository.order')->createNew();
+            $newVirtualOrder->setStore($store['store']);
+            $newVirtualOrder->setCustomer($order->getCustomer());
+            $newVirtualOrder->setChannel($order->getChannel());
+            $newVirtualOrder->setShippingAddress($order->getShippingAddress());
+            $newVirtualOrder->setBillingAddress($order->getBillingAddress());
+            $newVirtualOrder->setCurrency($order->getCurrency());
+            $newVirtualOrder->addItem($store['item']);
+
+            $newVirtualOrder->addPayment($payment);
+            $this->completeOrder($newVirtualOrder);
+        }
+
+        if (!$storeIds) {
+            $this->completeOrder($order);
+        }
 
         return $this->complete();
     }
@@ -52,7 +76,7 @@ class FinalizeStep extends CheckoutStep
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'context' => $context,
-            'order'   => $order
+            'order' => $order
         ));
     }
 
