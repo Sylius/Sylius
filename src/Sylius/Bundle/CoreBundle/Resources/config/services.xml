@@ -436,7 +436,7 @@
 
         <service id="sylius.context.channel" class="%sylius.context.channel.class%">
             <argument type="service" id="sylius.channel_resolver" />
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="50" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="sylius.channel_resolver" class="Sylius\Component\Core\Channel\ChannelResolver">
