@@ -20,7 +20,7 @@ Feature: User account password change
           And I fill in "Confirmation" with "newpassword"
           And I press "Save changes"
          Then I should still be on my account password page
-          And I should see "Wrong current password"
+          And I should see "Provided password is different then the current one"
 
     Scenario: Changing my password with a wrong confirmation password
         Given I am on my account password page

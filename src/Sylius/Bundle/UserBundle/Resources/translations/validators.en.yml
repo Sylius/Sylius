@@ -12,6 +12,7 @@ sylius:
         plainPassword:
             not_blank: Please enter your password.
             mismatch: The entered passwords don't match
+            wrong_current: Provided password is different then the current one.
 
     customer:
         first_name:

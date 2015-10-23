@@ -43,20 +43,7 @@ class UserController extends ResourceController
         $form = $this->createResourceForm($formType, $changePassword);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $encoderFactory = $this->get('security.encoder_factory');
-
-            $encoder = $encoderFactory->getEncoder($user);
-            $validPassword = $encoder->isPasswordValid(
-                $user->getPassword(),
-                $changePassword->getCurrentPassword(),
-                $user->getSalt()
-            );
-
-            if ($validPassword) {
-                return $this->handleChangePassword($user, $changePassword->getNewPassword());
-            }
-
-            $this->addFlash('error', 'sylius.user.password.invalid');
+            return $this->handleChangePassword($user, $changePassword->getNewPassword());
         }
 
         if ($this->config->isApiRequest()) {

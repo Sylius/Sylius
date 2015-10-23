@@ -40,6 +40,7 @@
         <parameter key="sylius.form.type.user_request_password_reset.class">Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType</parameter>
         <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
+        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
 
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
@@ -52,6 +53,8 @@
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
 
         <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
+
+        <parameter key="sylius.user.validator.unique_registered_user">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
     </parameters>
 
     <services>
@@ -179,12 +182,12 @@
         <service id="sylius.form.type.user_change_password" class="%sylius.form.type.user_change_password.class%">
             <tag name="form.type" alias="sylius_user_change_password" />
         </service>
-        <service id="sylius.form.type.gender" class="Sylius\Bundle\UserBundle\Form\Type\GenderType">
+        <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
         </service>
 
         <!-- Validators -->
-        <service id="validator.unique.registered_user" class="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator">
+        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user%">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
