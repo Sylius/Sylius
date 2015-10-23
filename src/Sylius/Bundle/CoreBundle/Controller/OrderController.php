@@ -39,10 +39,12 @@ class OrderController extends ResourceController
         $user = $this->getUser();
         if ($user) {
             if ($roles = $user->getAuthorizationRoles()) {
-                if ($roles[0]->getCode() == 'store_owner') {
-                    $storeRepository = $this->container->get('sylius.repository.store');
-                    $store = $storeRepository->findOneBy(array('user' => $user->getId()));
-                    $criteria = array('store' => $store->getId());
+                if (array_key_exists(0, $roles)) {
+                    if ($roles[0]->getCode() == 'store_owner') {
+                        $storeRepository = $this->container->get('sylius.repository.store');
+                        $store = $storeRepository->findOneBy(array('user' => $user->getId()));
+                        $criteria = array('store' => $store->getId());
+                    }
                 }
             }
         }

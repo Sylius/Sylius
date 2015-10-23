@@ -42,10 +42,12 @@ class PaymentController extends BasePaymentController
         $user = $this->getUser();
         if ($user) {
             if ($roles = $user->getAuthorizationRoles()) {
-                if ($roles[0]->getCode() == 'store_owner') {
-                    $storeRepository = $this->container->get('sylius.repository.store');
-                    $store = $storeRepository->findOneBy(array('user' => $user->getId()));
-                    $criteria = array('store' => $store->getId());
+                if (array_key_exists(0, $roles)) {
+                    if ($roles[0]->getCode() == 'store_owner') {
+                        $storeRepository = $this->container->get('sylius.repository.store');
+                        $store = $storeRepository->findOneBy(array('user' => $user->getId()));
+                        $criteria = array('store' => $store->getId());
+                    }
                 }
             }
         }
@@ -78,17 +80,15 @@ class PaymentController extends BasePaymentController
         $logRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
-        ;
+            ->getRepository('Gedmo\Loggable\Entity\LogEntry');
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history.html'))
             ->setData(array(
                 $this->config->getResourceName() => $payment,
-                'logs'                           => $logRepository->getLogEntries($payment)
-            ))
-        ;
+                'logs' => $logRepository->getLogEntries($payment)
+            ));
 
         return $this->handleView($view);
     }
