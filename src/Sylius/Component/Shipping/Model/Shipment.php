@@ -15,6 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
+use Sylius\Component\Store\Model\StoreInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -44,6 +46,11 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      * @var string
      */
     protected $tracking;
+
+    /**
+     * @var null|StoreInterface
+     */
+    protected $store;
 
     /**
      * @var \DateTime
@@ -256,5 +263,21 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function getShippingItemTotal()
     {
         return 0;
+    }
+
+    /**
+     * @return null|StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    /**
+     * @param null|StoreInterface $store
+     */
+    public function setStore(StoreInterface $store = null)
+    {
+        $this->store = $store;
     }
 }

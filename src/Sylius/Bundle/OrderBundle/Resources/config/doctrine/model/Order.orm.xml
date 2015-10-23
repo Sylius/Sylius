@@ -57,6 +57,10 @@
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
 
+        <many-to-one field="store" target-entity="Sylius\Component\Store\Model\StoreInterface">
+            <join-column name="store_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

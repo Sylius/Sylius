@@ -14,6 +14,8 @@ namespace Sylius\Component\Report\Model;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
 
+use Sylius\Component\Store\Model\StoreInterface;
+
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -63,6 +65,11 @@ class Report implements ReportInterface
      * @var array
      */
     private $dataFetcherConfiguration = array();
+
+    /**
+     * @var null|StoreInterface
+     */
+    protected $store;
 
     /**
      * {@inheritdoc}
@@ -182,5 +189,21 @@ class Report implements ReportInterface
     public function setRendererConfiguration(array $rendererConfiguration)
     {
         $this->rendererConfiguration = $rendererConfiguration;
+    }
+
+    /**
+     * @return null|StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    /**
+     * @param null|StoreInterface $store
+     */
+    public function setStore(StoreInterface $store = null)
+    {
+        $this->store = $store;
     }
 }
