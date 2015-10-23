@@ -32,6 +32,18 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     protected $root;
 
     /**
+     * @param TaxonInterface $root
+     */
+    public function __construct(TaxonInterface $root = null)
+    {
+        parent::__construct();
+
+        if (null !== $root) {
+            $this->setRoot($root);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function __toString()
