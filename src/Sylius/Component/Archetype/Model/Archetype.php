@@ -28,6 +28,7 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class Archetype extends AbstractTranslatable implements ArchetypeInterface
 {
+
     /**
      * @var mixed
      */
@@ -105,6 +106,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setCode($code)
     {
         $this->code = $code;
+        return $this;
     }
 
     /**
@@ -125,6 +127,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setAttributes(Collection $attributes)
     {
         $this->attributes = $attributes;
+        return $this;
     }
 
     /**
@@ -173,6 +176,8 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setOptions(Collection $options)
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**
@@ -217,6 +222,8 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setParent(ArchetypeInterface $parent = null)
     {
         $this->parent = $parent;
+
+        return $this;
     }
 
     /**
@@ -241,6 +248,8 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -257,6 +266,8 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
@@ -273,5 +284,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     public function setName($name)
     {
         $this->translate()->setName($name);
+
+        return $this;
     }
 }
