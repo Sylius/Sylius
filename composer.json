@@ -43,7 +43,6 @@
         "knplabs/knp-menu-bundle":              "~1.1",
         "knplabs/knp-snappy-bundle":            "~1.2",
         "liip/imagine-bundle":                  "~1.0",
-        "mathiasverraes/money":                 "~1.2",
         "omnipay/omnipay":                      "~2.3",
         "payum/omnipay-bridge":                 "~0.14.0",
         "payum/payum":                          "~0.14.0",
