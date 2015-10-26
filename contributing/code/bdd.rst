@@ -292,7 +292,9 @@ Few tips & rules to follow when working with PHPSpec & Sylius:
 * Use underscores (``_``) in the examples;
 * Use type hinting to mock and stub classes;
 * If your specification is getting too complex, the design is wrong, try decoupling a bit more;
-* If you cannot describe something easily, probably you should not be doing it that way.
+* If you cannot describe something easily, probably you should not be doing it that way;
+* shouldBeCalled or willReturn, never together, except for builders;
+* Use constants in assumptions but strings in expected results;
 
 Happy coding!
 
