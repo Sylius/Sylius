@@ -456,8 +456,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Callback can return any value, to stop waiting use anonymous function provided as first argument.
-     *
      * @param callable $callback
      * @param int $limit
      * @param int $delay In miliseconds
@@ -471,7 +469,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();
 
-            if (null !== $payload) {
+            if (false !== $payload && null !== $payload) {
                 return $payload;
             }
 
