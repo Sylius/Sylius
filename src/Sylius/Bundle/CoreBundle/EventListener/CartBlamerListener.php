@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-/*
+/**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CartBlamerListener
