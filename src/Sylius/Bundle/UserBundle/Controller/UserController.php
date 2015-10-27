@@ -110,11 +110,8 @@ class UserController extends ResourceController
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
-            if (null !== $user) {
-                return $this->handleResetPasswordRequest($generator, $user, $senderEvent);
-            }
 
-            $this->addFlash('error', 'sylius.user.email.not_exist');
+            return $this->handleResetPasswordRequest($generator, $user, $senderEvent);
         }
 
         if ($this->config->isApiRequest()) {
