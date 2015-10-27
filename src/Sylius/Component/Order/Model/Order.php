@@ -13,6 +13,7 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Store\Model\StoreInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -71,6 +72,11 @@ class Order implements OrderInterface
      * @var int
      */
     protected $total = 0;
+
+    /**
+     * @var null|StoreInterface
+     */
+    protected $store;
 
     /**
      * @var \DateTime
@@ -573,5 +579,21 @@ class Order implements OrderInterface
             $identity->setOrder(null);
             $this->identities->removeElement($identity);
         }
+    }
+
+    /**
+     * @return null|StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    /**
+     * @param null|StoreInterface $store
+     */
+    public function setStore(StoreInterface $store = null)
+    {
+        $this->store = $store;
     }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
+use Sylius\Component\Store\Model\StoreInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
@@ -34,6 +35,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var null|ArchetypeInterface
      */
     protected $archetype;
+
+    /**
+     * @var null|StoreInterface
+     */
+    protected $store;
 
     /**
      * @var \DateTime
@@ -102,6 +108,21 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
         $this->archetype = $archetype;
+    }
+    /**
+     * @return null|StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    /**
+     * @param null|StoreInterface $store
+     */
+    public function setStore(StoreInterface $store = null)
+    {
+        $this->store = $store;
     }
 
     /**

@@ -21,6 +21,9 @@ Sylius\Component\Product\Model\Product:
         attributes:
             expose: true
             max_depth: 1
+        store:
+            expose: true
+            max_depth: 1
         createdAt:
             expose: true
             type: DateTime

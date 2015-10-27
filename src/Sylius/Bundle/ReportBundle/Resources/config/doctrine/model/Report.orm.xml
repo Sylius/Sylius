@@ -28,6 +28,11 @@
 
         <field name="dataFetcher" column="data_fetcher" type="string" nullable="false" />
         <field name="dataFetcherConfiguration" column="data_fetcher_configuration" type="array" />
+
+        <one-to-one field="store" target-entity="Sylius\Component\Store\Model\StoreInterface">
+            <join-column name="store_id" referenced-column-name="id" nullable="true" />
+        </one-to-one>
+
     </mapped-superclass>
 
 </doctrine-mapping>

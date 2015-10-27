@@ -19,6 +19,7 @@ use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Store\Model\StoreInterface;
 
 /**
  * Sylius core Order model.
@@ -46,6 +47,12 @@ interface OrderInterface extends
      * @return null|UserInterface
      */
     public function getUser();
+    /**
+     * Get Store.
+     *
+     * @return null|StoreInterface
+     */
+    public function getStore();
 
     /**
      * Get shipping address.

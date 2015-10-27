@@ -20,6 +20,48 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends ResourceController
 {
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function indexAction(Request $request)
+    {
+        $this->isGrantedOr403('index');
+
+        $criteria = $this->config->getCriteria();
+        $sorting = $this->config->getSorting();
+
+        $repository = $this->getRepository();
+
+
+        $user = $this->getUser();
+        if ($user) {
+            if ($roles = $user->getAuthorizationRoles()) {
+                if (array_key_exists(0, $roles)) {
+                    if ($roles[0]->getCode() == 'store_owner') {
+                        $storeRepository = $this->container->get('sylius.repository.store');
+                        $store = $storeRepository->findOneBy(array('user' => $user->getId()));
+                        $criteria = array('store' => $store->getId());
+                    }
+                }
+            }
+        }
+
+
+        $resources = $repository->findBy($criteria);
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('index.html'))
+            ->setTemplateVar($this->config->getPluralResourceName())
+            ->setData($resources);
+
+        return $this->handleView($view);
+
+    }
+
     /**
      * @param Request $request
      * @param integer $id
@@ -38,8 +80,7 @@ class OrderController extends ResourceController
 
         $paginator = $this
             ->getRepository()
-            ->createByCustomerPaginator($customer, $this->config->getSorting())
-        ;
+            ->createByCustomerPaginator($customer, $this->config->getSorting());
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
         $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -53,7 +94,7 @@ class OrderController extends ResourceController
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
             'customer' => $customer,
-            'orders'   => $paginator
+            'orders' => $paginator
         ));
     }
 
@@ -70,8 +111,7 @@ class OrderController extends ResourceController
 
         $this->get('sm.factory')
             ->get($order, OrderTransitions::GRAPH)
-            ->apply(OrderTransitions::SYLIUS_RELEASE)
-        ;
+            ->apply(OrderTransitions::SYLIUS_RELEASE);
 
         $this->domainManager->update($order);
 
@@ -104,14 +144,13 @@ class OrderController extends ResourceController
             ->setTemplate($this->config->getTemplate('history.html'))
             ->setData(array(
                 'order' => $order,
-                'logs'  => array(
-                    'order'            => $repository->getLogEntries($order),
-                    'order_items'      => $items,
-                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                'logs' => array(
+                    'order' => $repository->getLogEntries($order),
+                    'order_items' => $items,
+                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
                     'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
                 ),
-            ))
-        ;
+            ));
 
         return $this->handleView($view);
     }

@@ -13,6 +13,8 @@ namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
+use Sylius\Component\Store\Model\StoreInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -47,6 +49,11 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
      * @var CreditCardInterface
      */
     protected $creditCard;
+
+    /**
+     * @var null|StoreInterface
+     */
+    protected $store;
 
     /**
      * @var \DateTime
@@ -255,5 +262,21 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * @return null|StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    /**
+     * @param null|StoreInterface $store
+     */
+    public function setStore(StoreInterface $store = null)
+    {
+        $this->store = $store;
     }
 }

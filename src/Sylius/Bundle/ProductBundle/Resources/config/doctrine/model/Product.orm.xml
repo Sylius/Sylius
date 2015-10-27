@@ -23,6 +23,10 @@
             <gedmo:versioned />
         </field>
 
+        <many-to-one field="store" target-entity="Sylius\Component\Store\Model\StoreInterface">
+            <join-column name="store_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <many-to-one field="archetype" target-entity="Sylius\Component\Product\Model\ArchetypeInterface">
             <join-column name="archetype_id" referenced-column-name="id" nullable="true" />
         </many-to-one>

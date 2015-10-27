@@ -77,6 +77,10 @@ sylius_api_payment:
     resource: @SyliusApiBundle/Resources/config/routing/payment.yml
     prefix: /payments
 
+sylius_api_store:
+    resource: @SyliusApiBundle/Resources/config/routing/store.yml
+    prefix: /stores
+
 sylius_api_channel:
     resource: @SyliusApiBundle/Resources/config/routing/channel.yml
     prefix: /channels
