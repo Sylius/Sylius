@@ -15,6 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -184,12 +185,18 @@ class CoreContext extends DefaultContext
             $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
+
+            // adding also inventory units into orderItem
+            $this->getService('event_dispatcher')->dispatch(
+                SyliusCartEvents::ITEM_ADD_INITIALIZE,
+                new CartItemEvent($order, $item)
+            );
         }
 
-        $order->calculateTotal();
         $order->complete();
 
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
+
         $this->getService('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
 
         $order->setPaymentState(PaymentInterface::STATE_COMPLETED);

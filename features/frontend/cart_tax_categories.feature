@@ -40,7 +40,7 @@ Feature: Tax categories
          When I fill in "Quantity" with "2"
           And I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Clothing VAT (19%) €19.00"
+          And I should see "Clothing VAT (19%) €9.50"
           And "Tax total: €19.00" should appear on the page
           And "Grand total: €119.00" should appear on the page
 

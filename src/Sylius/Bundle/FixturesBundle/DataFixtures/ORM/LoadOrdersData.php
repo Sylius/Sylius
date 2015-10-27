@@ -66,8 +66,6 @@ class LoadOrdersData extends DataFixture
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
             $this->dispatchEvents($order);
-
-            $order->calculateTotal();
             $order->complete();
 
             $paymentState = PaymentInterface::STATE_COMPLETED;

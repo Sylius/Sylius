@@ -59,7 +59,5 @@ class OrderTaxationListener
         }
 
         $this->taxationProcessor->applyTaxes($order);
-
-        $order->calculateTotal();
     }
 }

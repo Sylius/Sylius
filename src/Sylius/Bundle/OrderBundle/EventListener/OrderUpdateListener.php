@@ -21,6 +21,7 @@ class OrderUpdateListener
     public function recalculateOrderTotal(GenericEvent $event)
     {
         $order = $event->getSubject();
-        $order->calculateTotal();
+
+        // @TODO disable this listener?
     }
 }

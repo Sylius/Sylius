@@ -31,11 +31,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Order\Model\OrderItemInterface');
     }
 
-    function it_implements_Sylius_adjustable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
-    }
-
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -112,40 +107,10 @@ class OrderItemSpec extends ObjectBehavior
         ;
     }
 
-    function it_initializes_adjustments_collection_by_default()
-    {
-        $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
-    {
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-        $this->addAdjustment($adjustment);
-        $this->hasAdjustment($adjustment)->shouldReturn(true);
-    }
-
-    function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
-    {
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($adjustment);
-
-        $this->hasAdjustment($adjustment)->shouldReturn(true);
-
-        $adjustment->setAdjustable(null)->shouldBeCalled();
-        $adjustment->isLocked()->willReturn(false);
-        $this->removeAdjustment($adjustment);
-
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-    }
-
-    function its_total_is_mutable()
+    function its_total_is_not_mutable()
     {
         $this->setTotal(5999);
-        $this->getTotal()->shouldReturn(5999);
+        $this->getTotal()->shouldReturn(0);
     }
 
     function it_calculates_correct_total_based_on_quantity_and_unit_price()
@@ -153,63 +118,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
 
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(19487);
-    }
-
-    function it_calculates_correct_total_based_on_adjustments(AdjustmentInterface $adjustment)
-    {
-        $this->setQuantity(13);
-        $this->setUnitPrice(1499);
-
-        $adjustment->isNeutral()->willReturn(false);
-        $adjustment->getAmount()->willReturn(-1000);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-
-        $this->addAdjustment($adjustment);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(18487);
-    }
-
-    function it_ignores_neutral_adjustments_when_calculating_total(
-        AdjustmentInterface $adjustment,
-        AdjustmentInterface $neutralAdjustment
-    ) {
-        $this->setQuantity(13);
-        $this->setUnitPrice(1499);
-
-        $adjustment->isNeutral()->willReturn(false);
-        $adjustment->getAmount()->willReturn(-1000);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($adjustment);
-
-        $neutralAdjustment->isNeutral()->willReturn(true);
-        $neutralAdjustment->getAmount()->willReturn(2499);
-        $neutralAdjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($neutralAdjustment);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(18487);
-    }
-
-    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(AdjustmentInterface $adjustment)
-    {
-        $this->setQuantity(1);
-        $this->setUnitPrice(1500);
-
-        $adjustment->isNeutral()->willReturn(false);
-        $adjustment->getAmount()->willReturn(-2000);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-
-        $this->addAdjustment($adjustment);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(0);
+        $this->getTotal()->shouldReturn(13 * 1499);
     }
 
     function it_ignores_merging_same_items()
