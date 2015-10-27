@@ -1,71 +1,108 @@
 Models
 ======
 
-The Product
------------
+.. _component_product_model_product:
 
-Product is the main model in SyliusProductComponent. This simple class represents every unique product in the catalog.
-The default interface contains the following attributes with appropriate setters and getters.
+Product
+-------
 
-+-----------------+----------------------------------------------------+
-| Attribute       | Description                                        |
-+=================+====================================================+
-| id              | Unique id of the product                           |
-+-----------------+----------------------------------------------------+
-| name            | Name of the product                                |
-+-----------------+----------------------------------------------------+
-| slug            | SEO slug, by default created from the name         |
-+-----------------+----------------------------------------------------+
-| description     | Description of your great product                  |
-+-----------------+----------------------------------------------------+
-| availableOn     | Date when product becomes available in catalog     |
-+-----------------+----------------------------------------------------+
-| metaDescription | Description for search engines                     |
-+-----------------+----------------------------------------------------+
-| metaKeywords    | Comma separated list of keywords for product (SEO) |
-+-----------------+----------------------------------------------------+
-| createdAt       | Date when product was created                      |
-+-----------------+----------------------------------------------------+
-| updatedAt       | Date of last product update                        |
-+-----------------+----------------------------------------------------+
-| deletedAt       | Date of deletion from catalog                      |
-+-----------------+----------------------------------------------------+
+The **Product** model represents every unique product in the catalog.
+By default it contains the following properties:
 
-Product Properties
++-----------------+-----------------------------------------------------------------------------+
+| Property        | Description                                                                 |
++=================+=============================================================================+
+| id              | Unique id of the product                                                    |
++-----------------+-----------------------------------------------------------------------------+
+| name            | Product's name taken from the ``ProductTranslation``                        |
++-----------------+-----------------------------------------------------------------------------+
+| slug            | Product's urlized name taken from the ``ProductTranslation``                |
++-----------------+-----------------------------------------------------------------------------+
+| description     | Product's description taken from the ``ProductTranslation``                 |
++-----------------+-----------------------------------------------------------------------------+
+| metaKeywords    | Product's meta keywords taken from the ``ProductTranslation``               |
++-----------------+-----------------------------------------------------------------------------+
+| metaDescription | Product's meta description taken from the ``ProductTranslation``            |
++-----------------+-----------------------------------------------------------------------------+
+| archetype       | An archetype assigned to this product                                       |
++-----------------+-----------------------------------------------------------------------------+
+| availableOn     | When the product is available                                               |
++-----------------+-----------------------------------------------------------------------------+
+| attributes      | Attributes assigned to this product                                         |
++-----------------+-----------------------------------------------------------------------------+
+| variants        | Variants assigned to this product                                           |
++-----------------+-----------------------------------------------------------------------------+
+| options         | Options assigned to this product                                            |
++-----------------+-----------------------------------------------------------------------------+
+| createdAt       | Product's date of creation                                                  |
++-----------------+-----------------------------------------------------------------------------+
+| updatedAt       | Product's date of update                                                    |
++-----------------+-----------------------------------------------------------------------------+
+| deletedAt       | Product's date of deletion                                                  |
++-----------------+-----------------------------------------------------------------------------+
+
+.. note::
+   This model extends the :ref:`component_translation_model_abstract-translatable`
+   and implements the :ref:`component_product_model_product-interface`. |br|
+   For more detailed information go to `Sylius API Product`_.
+
+.. _Sylius API Product: http://api.sylius.org/Sylius/Component/Product/Model/Product.html
+
+.. _component_product_model_product-translation:
+
+ProductTranslation
 ------------------
 
-Except products, you can also define Properties (think Attributes) and define their values on each product.
-Default property model has following structure.
+This model is responsible for keeping a translation
+of product's simple properties according to given locale.
+By default it has the following properties:
 
-+--------------+-------------------------------------------+
-| Attribute    | Description                               |
-+==============+===========================================+
-| id           | Unique id of the property                 |
-+--------------+-------------------------------------------+
-| name         | Name of the property ("T-Shirt Material") |
-+--------------+-------------------------------------------+
-| presentation | Pretty name visible for user ("Material") |
-+--------------+-------------------------------------------+
-| type         | Property type                             |
-+--------------+-------------------------------------------+
-| createdAt    | Date when property was created            |
-+--------------+-------------------------------------------+
-| updatedAt    | Date of last property update              |
-+--------------+-------------------------------------------+
++-----------------+--------------------------------------+
+| Property        | Description                          |
++=================+======================================+
+| id              | Unique id of the product translation |
++-----------------+--------------------------------------+
 
-Currently there are several different property types are available, a proper form widget (Symfony Form type) will be rendered
-on product form for entering the value.
+.. note::
+   This model extends the :ref:`component_translation_model_abstract-translation`
+   and implements the :ref:`component_product_model_product-translation-interface`. |br|
+   For more detailed information go to `Sylius API ProductTranslation`_.
 
-+------------+
-| Type       |
-+============+
-| text       |
-+------------+
-| number     |
-+------------+
-| percentage |
-+------------+
-| checkbox   |
-+------------+
-| choice     |
-+------------+
+.. _Sylius API ProductTranslation: http://api.sylius.org/Sylius/Component/Product/Model/ProductTranslation.html
+
+.. _component_product_model_attribute-value:
+
+AttributeValue
+--------------
+
+This **AttributeValue** extension ensures that it's **subject**
+is an instance of the :ref:`component_product_model_product-interface`.
+
+.. note::
+   This model extends the :ref:`component_attribute_model_attribute-value`
+   and implements the :ref:`component_product_model_attribute-value-interface`. |br|
+   For more detailed information go to `Sylius API AttributeValue`_.
+
+.. _Sylius API AttributeValue: http://api.sylius.org/Sylius/Component/Product/Model/AttributeValue.html
+
+.. _component_product_model_variant:
+
+Variant
+-------
+
+This **Variant** extension ensures that it's **object**
+is an instance of the :ref:`component_product_model_product-interface`
+and provides an additional property:
+
++-------------+---------------------------------------------------------+
+| Property    | Description                                             |
++=============+=========================================================+
+| availableOn | The date indicating when a product variant is available |
++-------------+---------------------------------------------------------+
+
+.. note::
+   This model extends the :ref:`component_variation_model_variant`
+   and implements the :ref:`component_product_model_variant-interface`. |br|
+   For more detailed information go to `Sylius API Variant`_.
+
+.. _Sylius API Variant: http://api.sylius.org/Sylius/Component/Product/Model/Variant.html
