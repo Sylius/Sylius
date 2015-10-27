@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Order\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Model for order line items.
  *
@@ -42,16 +39,6 @@ class OrderItem implements OrderItemInterface
     protected $unitPrice = 0;
 
     /**
-     * @var Collection|AdjustmentInterface[]
-     */
-    protected $adjustments;
-
-    /**
-     * @var int
-     */
-    protected $adjustmentsTotal = 0;
-
-    /**
      * @var int
      */
     protected $total = 0;
@@ -62,14 +49,6 @@ class OrderItem implements OrderItemInterface
      * @var bool
      */
     protected $immutable = false;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->adjustments = new ArrayCollection();
-    }
 
     /**
      * {@inheritdoc}
@@ -137,107 +116,9 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustments($type = null)
-    {
-        if (null === $type) {
-            return $this->adjustments;
-        }
-
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
-            return $type === $adjustment->getType();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAdjustment(AdjustmentInterface $adjustment)
-    {
-        if (!$this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable($this);
-            $this->adjustments->add($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAdjustment(AdjustmentInterface $adjustment)
-    {
-        if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAdjustment(AdjustmentInterface $adjustment)
-    {
-        return $this->adjustments->contains($adjustment);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdjustmentsTotal($type = null)
-    {
-        if (null === $type) {
-            return $this->adjustmentsTotal;
-        }
-
-        $total = 0;
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            $total += $adjustment->getAmount();
-        }
-
-        return $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAdjustments($type)
-    {
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            if ($adjustment->isLocked()) {
-                continue;
-            }
-
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearAdjustments()
-    {
-        return $this->adjustments->clear();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateAdjustmentsTotal()
-    {
-        $this->adjustmentsTotal = 0;
-
-        foreach ($this->adjustments as $adjustment) {
-            if (!$adjustment->isNeutral()) {
-                $this->adjustmentsTotal += $adjustment->getAmount();
-            }
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTotal()
     {
-        return $this->total;
+        return $this->getQuantity() * $this->getUnitPrice();
     }
 
     /**
@@ -249,20 +130,6 @@ class OrderItem implements OrderItemInterface
             throw new \InvalidArgumentException('Total must be an integer.');
         }
         $this->total = $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateTotal()
-    {
-        $this->calculateAdjustmentsTotal();
-
-        $this->total = ($this->quantity * $this->unitPrice) + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
     }
 
     /**

@@ -42,6 +42,7 @@ class PercentageDiscountAction extends DiscountAction
         $adjustment->setAmount(- $adjustmentAmount);
 
         $subject->addAdjustment($adjustment);
+        $adjustment->setAdjustable($subject);
     }
 
     /**

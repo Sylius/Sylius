@@ -28,6 +28,12 @@
             <join-column name="stockable_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
+        <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="inventoryUnit" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

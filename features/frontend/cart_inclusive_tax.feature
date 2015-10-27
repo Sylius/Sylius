@@ -36,5 +36,5 @@ Feature: Tax included in price
          When I fill in "Quantity" with "3"
           And I press "Add to cart"
          Then I should be on the cart summary page
-          And "Tax total: €47.68" should appear on the page
+          And "Tax total: €47.67" should appear on the page
           And "Grand total: €255.00" should appear on the page

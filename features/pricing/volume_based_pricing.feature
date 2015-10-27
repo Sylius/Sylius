@@ -57,5 +57,5 @@ Feature: Volume based pricing
         Given I am on the store homepage
          When I add product "Symfony Tee" to cart, with quantity "100"
          Then I should be on the cart summary page
-          And "Tax total: €839.85" should appear on the page
-          And "Grand total: €6,438.85" should appear on the page
+          And "Tax total: €840.00" should appear on the page
+          And "Grand total: €6,439.00" should appear on the page

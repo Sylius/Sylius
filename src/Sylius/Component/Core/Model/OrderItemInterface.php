@@ -13,12 +13,11 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjectInterface
+interface OrderItemInterface extends CartItemInterface
 {
     /**
      * @return ProductInterface

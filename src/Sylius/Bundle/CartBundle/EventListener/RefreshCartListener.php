@@ -21,6 +21,8 @@ class RefreshCartListener
 {
     public function refreshCart(GenericEvent $event)
     {
+        // @TODO disable this listener?
+
         $cart = $event->getSubject();
 
         if (!$cart instanceof CartInterface) {
@@ -28,7 +30,5 @@ class RefreshCartListener
                 'RefreshCartListener requires event subject to be instance of "Sylius\Component\Cart\Model\CartInterface"'
             );
         }
-
-        $cart->calculateTotal();
     }
 }

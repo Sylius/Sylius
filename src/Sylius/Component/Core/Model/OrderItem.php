@@ -39,7 +39,7 @@ class OrderItem extends CartItem implements OrderItemInterface
 
     public function __construct()
     {
-        parent::__construct();
+//        parent::__construct();
 
         $this->inventoryUnits = new ArrayCollection();
         $this->promotions = new ArrayCollection();
@@ -115,55 +115,51 @@ class OrderItem extends CartItem implements OrderItemInterface
         return $this->inventoryUnits->contains($unit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionSubjectTotal()
-    {
-        return $this->getTotal();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionSubjectCount()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotion(BasePromotionInterface $promotion)
-    {
-        return $this->promotions->contains($promotion);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addPromotion(BasePromotionInterface $promotion)
-    {
-        if (!$this->hasPromotion($promotion)) {
-            $this->promotions->add($promotion);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePromotion(BasePromotionInterface $promotion)
-    {
-        if ($this->hasPromotion($promotion)) {
-            $this->promotions->removeElement($promotion);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotions()
-    {
-        return $this->promotions;
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function getPromotionSubjectTotal()
+//    {
+//        return $this->getTotal();
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function hasPromotion(BasePromotionInterface $promotion)
+//    {
+//        return $this->promotions->contains($promotion);
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function addPromotion(BasePromotionInterface $promotion)
+//    {
+//        if (!$this->hasPromotion($promotion)) {
+//            $this->promotions->add($promotion);
+//        }
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function removePromotion(BasePromotionInterface $promotion)
+//    {
+//        if ($this->hasPromotion($promotion)) {
+//            $this->promotions->removeElement($promotion);
+//        }
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function getPromotions()
+//    {
+//        return $this->promotions;
+//    }
 }

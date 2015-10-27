@@ -49,5 +49,4 @@ interface AdjustableInterface
 
     public function clearAdjustments();
 
-    public function calculateAdjustmentsTotal();
 }

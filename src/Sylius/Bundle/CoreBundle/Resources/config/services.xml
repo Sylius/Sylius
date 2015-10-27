@@ -203,7 +203,6 @@
             <argument type="service" id="sylius.payment.delegating_fee_calculator" />
         </service>
         <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.tax_rate_resolver" />
             <argument type="service" id="sylius.zone_matcher" />
@@ -216,6 +215,7 @@
                     <argument>sylius_taxation</argument>
                 </service>
             </argument>
+            <argument type="service" id="event_dispatcher"/>
         </service>
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
             <argument type="service" id="sylius.factory.adjustment" />
@@ -244,8 +244,7 @@
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="processInventoryUnits" piority="-100"/>
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
         </service>
@@ -355,6 +354,11 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+        </service>
+
+        <service id="sylius.listener.adjustment" class="Sylius\Bundle\CoreBundle\EventListener\AdjustmentSubscriber">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
