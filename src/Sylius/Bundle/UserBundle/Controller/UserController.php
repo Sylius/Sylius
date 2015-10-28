@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
+use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\TokenProviderInterface;
@@ -81,12 +82,12 @@ class UserController extends ResourceController
             return $this->handleExpiredToken($token, $user);
         }
 
-        $changePassword = new ChangePassword();
+        $changePassword = new PasswordReset();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
         $form = $this->createResourceForm($formType, $changePassword);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleResetPassword($user, $changePassword->getNewPassword());
+            return $this->handleResetPassword($user, $changePassword->getPassword());
         }
 
         if ($this->config->isApiRequest()) {
@@ -104,7 +105,7 @@ class UserController extends ResourceController
 
     protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
-        $passwordReset = new PasswordReset();
+        $passwordReset = new PasswordResetRequest();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
         $form = $this->createResourceForm($formType, $passwordReset);
 

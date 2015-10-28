@@ -14,26 +14,26 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PasswordReset
+class PasswordResetRequest
 {
     /**
      * @var string
      */
-    private $password;
+    private $email;
 
     /**
      * @return string
      */
-    public function getPassword()
+    public function getEmail()
     {
-        return $this->password;
+        return $this->email;
     }
 
     /**
-     * @param string $password
+     * @param string $email the email
      */
-    public function setPassword($password)
+    public function setEmail($email)
     {
-        $this->password = $password;
+        $this->email = $email;
     }
 }

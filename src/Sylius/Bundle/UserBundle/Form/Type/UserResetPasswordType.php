@@ -26,7 +26,7 @@ class UserResetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('newPassword', 'repeated', array(
+            ->add('password', 'repeated', array(
                 'type'            => 'password',
                 'first_options'   => array('label' => 'sylius.form.user.password.label'),
                 'second_options'  => array('label' => 'sylius.form.user.password.confirmation'),
@@ -41,7 +41,7 @@ class UserResetPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\ChangePassword',
+            'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\PasswordReset',
             'validation_groups' => array('sylius'),
         ));
     }
