@@ -1,0 +1,9 @@
+call bin\behat --strict -f progress -s emails
+call bin\behat --strict -f progress -s orders
+call bin\behat --strict -f progress -s payments
+call bin\behat --strict -f progress -s pricing
+call bin\behat --strict -f progress -s settings
+call bin\behat --strict -f progress -s shipping
+call bin\behat --strict -f progress -s taxation
+call bin\behat --strict -f progress -s i18n
+call bin\behat --strict -f progress -s channels
