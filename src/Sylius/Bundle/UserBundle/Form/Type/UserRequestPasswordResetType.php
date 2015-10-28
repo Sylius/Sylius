@@ -38,7 +38,7 @@ class UserRequestPasswordResetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\PasswordReset',
+            'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest',
             'validation_groups' => array('sylius'),
         ));
     }

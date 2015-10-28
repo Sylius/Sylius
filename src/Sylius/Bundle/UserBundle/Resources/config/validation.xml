@@ -130,6 +130,21 @@
     </class>
 
     <class name="Sylius\Bundle\UserBundle\Form\Model\PasswordReset">
+        <property name="password">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">4</option>
+                <option name="minMessage">sylius.user.password.min</option>
+                <option name="max">254</option>
+                <option name="maxMessage">sylius.user.password.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest">
         <property name="email">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.email.not_blank</option>

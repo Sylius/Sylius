@@ -54,7 +54,7 @@
 
         <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
-        <parameter key="sylius.user.validator.unique_registered_user">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
+        <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
     </parameters>
 
     <services>
@@ -187,7 +187,7 @@
         </service>
 
         <!-- Validators -->
-        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user%">
+        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
