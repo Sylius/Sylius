@@ -397,6 +397,13 @@ default:
             filters:
                 tags: "@security"
 
+        integration:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreIntegrationContext
+            filters:
+                tags: "@integration"
+
     extensions:
         Lakion\Behat\MinkDebugExtension:
             directory: travis/build-output
