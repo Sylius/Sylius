@@ -24,8 +24,7 @@
 
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "0.16.*",
-        "mathiasverraes/money":     "*@dev"
+        "sylius/resource-bundle":   "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
