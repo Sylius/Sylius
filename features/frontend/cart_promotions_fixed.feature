@@ -32,6 +32,7 @@ Feature: Checkout fixed discount promotions
             | Shipping to Germany | Discount for orders with shipping country Germany |
             | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
             | 3rd order           | Discount for 3rd order                            |
+            | most expensive item | Discount for the most expensive item              |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
           And promotion "3 items" has following rules defined:
@@ -91,6 +92,20 @@ Feature: Checkout fixed discount promotions
          Then I should be on the cart summary page
           And "Promotion total: -€15.00" should appear on the page
           And "Grand total: €110.00" should appear on the page
+
+    Scenario: Most expensive promotion is applied when the cart has at
+              least one product
+        Given promotion "most expensive item" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 10    |
+          And promotion "most expensive item" has following rules defined:
+            | type     | configuration                      |
+            | item_most_expensive |  |
+        Given I am on the store homepage
+         When I add product "Potato" to cart, with quantity "1"
+         Then I should be on the cart summary page
+          And "Grand total: €190.00" should appear on the page
+
 
     Scenario: Item count promotion is not applied when the cart has
               not the number of items required

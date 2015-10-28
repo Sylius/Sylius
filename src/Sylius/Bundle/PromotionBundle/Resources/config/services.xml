@@ -20,6 +20,7 @@
         <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_most_expensive.class">Sylius\Component\Promotion\Checker\ItemMostExpensiveRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
 
@@ -37,6 +38,7 @@
         <parameter key="sylius.form.type.promotion_action.collection.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType</parameter>
         <parameter key="sylius.form.type.promotion_rule_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\RuleChoiceType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_total_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.item_most_expensive_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemMostExpensiveConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType</parameter>
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
@@ -62,6 +64,9 @@
         </service>
         <service id="sylius.promotion_rule_checker.item_count" class="%sylius.promotion_rule_checker.item_count.class%">
             <tag name="sylius.promotion_rule_checker" type="item_count" label="Item count" />
+        </service>
+        <service id="sylius.promotion_rule_checker.item_most_expensive" class="%sylius.promotion_rule_checker.item_most_expensive.class%">
+            <tag name="sylius.promotion_rule_checker" type="item_most_expensive" label="Most expensive item" />
         </service>
 
         <service id="sylius.promotion_applicator" class="%sylius.promotion_applicator.class%">
@@ -113,6 +118,10 @@
         <service id="sylius.form.type.promotion_rule.item_total_configuration" class="%sylius.form.type.promotion_rule.item_total_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_item_total_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.item_most_expensive_configuration" class="%sylius.form.type.promotion_rule.item_most_expensive_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_item_most_expensive_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_item_most_expensive_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.item_count_configuration" class="%sylius.form.type.promotion_rule.item_count_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_item_count_configuration%</argument>

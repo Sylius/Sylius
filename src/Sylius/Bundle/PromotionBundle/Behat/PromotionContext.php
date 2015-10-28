@@ -54,7 +54,10 @@ class PromotionContext extends DefaultContext
         $repository = $this->getRepository('promotion_rule');
 
         foreach ($table->getHash() as $data) {
-            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+            $configuration = [];
+            if ($data['configuration'] != '') {
+                $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+            }
 
             $rule = $repository->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
