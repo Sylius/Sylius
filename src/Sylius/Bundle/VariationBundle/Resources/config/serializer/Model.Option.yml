@@ -1,0 +1,7 @@
+Sylius\Component\Variation\Model\Option:
+    exclusion_policy: ALL
+    xml_root_name: option
+    properties:
+        name:
+            expose: true
+            type: string
