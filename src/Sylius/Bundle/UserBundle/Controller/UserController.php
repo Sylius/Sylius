@@ -111,8 +111,16 @@ class UserController extends ResourceController
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
+            if (null !== $user) {
+                $this->handleResetPasswordRequest($generator, $user, $senderEvent);
+            }
 
-            return $this->handleResetPasswordRequest($generator, $user, $senderEvent);
+            if ($this->config->isApiRequest()) {
+                return $this->handleView($this->view($user, 204));
+            }
+            $this->addFlash('success', 'sylius.user.reset_password.requested');
+
+            return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
         }
 
         if ($this->config->isApiRequest()) {
@@ -178,16 +186,13 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->domainManager->update($user, 'sylius.user.password.request.success');
+        /** I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
+        $manager = $this->get('doctrine.orm.default_entity_manager');
+        $manager->persist($user);
+        $manager->flush();
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
-
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($user, 204));
-        }
-
-        return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
     }
 
     /**

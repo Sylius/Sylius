@@ -10,3 +10,5 @@ sylius:
                 success: Your password has been reset successfully!
             change:
                 success: Your password has been changed successfully!
+        reset_password:
+            requested: If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.

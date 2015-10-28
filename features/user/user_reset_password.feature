@@ -10,14 +10,14 @@ Feature: Forgot password
             | email       | password | enabled |
             | bar@foo.com | foo1     | yes     |
 
-    Scenario: Reseting user password
+    Scenario: Resetting user password
         Given I am on the store homepage
           And I follow "Login"
           And I follow "Forgot password"
          When I fill in "Email" with "bar@foo.com"
           And I press "Reset"
          Then I should be redirected to user login page
-          And I should see "We send you an email with instructions to reset your password!"
+          And I should see "If the email you have specified exists in our system, we have sent there an instruction on how to reset your password."
 
     Scenario: Trying to reset password without email
         Given I am on the sylius user request password reset token page
@@ -36,5 +36,5 @@ Feature: Forgot password
         Given I am on the sylius user request password reset token page
           And I fill in "Email" with "foo@foo.com"
          When I press "Reset"
-         Then I should be on the sylius user request password reset token page
-          And I should see "User with this email does not exist"
+         Then I should be redirected to user login page
+          And I should see "If the email you have specified exists in our system, we have sent there an instruction on how to reset your password."
