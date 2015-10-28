@@ -8,4 +8,3 @@ Sylius\Component\Core\Model\Product:
     virtual_properties:
         getMasterVariant:
             serialized_name: masterVariant
-            max_depth: 1

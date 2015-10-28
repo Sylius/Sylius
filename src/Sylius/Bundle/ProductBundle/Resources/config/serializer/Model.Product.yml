@@ -12,18 +12,15 @@ Sylius\Component\Product\Model\Product:
         description:
             expose: true
             type: string
-        options:
-            expose: true
-            max_depth: 1
-        variants:
-            expose: true
-            max_depth: 1
         attributes:
             expose: true
-            max_depth: 1
+            max_depth: 2
         createdAt:
             expose: true
             type: DateTime
         updatedAt:
             expose: true
             type: DateTime
+    virtual_properties:
+        getVariants:
+            serialized_name: variants

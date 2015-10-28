@@ -1,0 +1,13 @@
+Sylius\Component\Variation\Model\Variant:
+    exclusion_policy: ALL
+    xml_root_name: variant
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        presentation:
+            expose: true
+            type: string
+        options:
+            expose: true
