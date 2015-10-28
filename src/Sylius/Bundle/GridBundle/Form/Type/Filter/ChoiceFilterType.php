@@ -32,7 +32,8 @@ class ChoiceFilterType extends AbstractType
             ->add('value', 'choice', array(
                 'required' => false,
                 'choices'  => $options['choices'],
-                'multiple' => $options['multiple']
+                'multiple' => $options['multiple'],
+                'expanded' => $options['expanded'],
             ))
         ;
     }
@@ -45,14 +46,16 @@ class ChoiceFilterType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'multiple'   => false
+                'multiple'   => false,
+                'expanded'   => false,
             ))
             ->setRequired(array(
                 'choices'
             ))
             ->setAllowedTypes(array(
                 'choices'  => array('array'),
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
+                'expanded' => array('bool'),
             ))
         ;
     }

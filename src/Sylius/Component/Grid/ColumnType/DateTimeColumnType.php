@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Grid\ColumnType;
 
-use Sylius\Component\Grid\Definition\Grid;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,7 +29,21 @@ class DateTimeColumnType extends StringColumnType
             throw new \InvalidArgumentException(sprintf('Expected instance of "DateTime", got "%s".', gettype($value)));
         }
 
-        return $value->format('d/m/Y H:i:s');
+        return $value->format($options['format']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setOptions($resolver);
+
+        $resolver
+            ->setOptional(array('format'))
+            ->setAllowedTypes(array('format' => array('string')))
+            ->setDefaults(array('format' => 'd/m/Y H:i:s'))
+        ;
     }
 
     /**
