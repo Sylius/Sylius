@@ -20,10 +20,10 @@ Feature: Channel management
             | fr_FR |
             | de_DE |
           And the following payment methods exist:
-            | name             | gateway |
-            | Credit Card (US) | stripe  |
-            | Credit Card (EU) | adyen   |
-            | PayPal           | paypal  |
+            | name             | gateway | enabled | calculator | calculator_configuration |
+            | Credit Card (US) | stripe  | yes     | fixed      | amount: 0                |
+            | Credit Card (EU) | adyen   | yes     | fixed      | amount: 50               |
+            | PayPal           | paypal  | yes     | fixed      | amount: 10               |
           And the following shipping methods exist:
             | zone | name  |
             | USA  | FedEx |

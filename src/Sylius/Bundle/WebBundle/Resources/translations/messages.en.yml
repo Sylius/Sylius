@@ -345,7 +345,7 @@ sylius:
         no_results: There are no countries configured.
         show_header: Country details
         update_header: Editing country
-        enabled: Is enabled?
+        enabled: Enabled
     email:
         create: Add new Email
         create_header: Adding new Email
@@ -701,7 +701,7 @@ sylius:
     payment_method:
         create: Create payment method
         create_header: New payment method
-        enabled: Is enabled?
+        enabled: enabled
         gateway: gateway
         id: ID
         index_header: Payment methods

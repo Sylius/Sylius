@@ -60,7 +60,7 @@ class PaymentContext extends DefaultContext
             $method->setFeeCalculatorConfiguration($this->getConfiguration($calculatorConfig));
         }
 
-        $method->setEnabled($enabled);
+        $method->setEnabled($enabled === "yes" or $enabled === true);
 
         $manager = $this->getEntityManager();
         $manager->persist($method);
