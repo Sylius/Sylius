@@ -1,0 +1,3 @@
+.. |br| raw:: html
+
+    <br />
