@@ -37,6 +37,10 @@ sylius_api_order_item:
     resource: @SyliusApiBundle/Resources/config/routing/order_item.yml
     prefix: /orders/{orderId}/items
 
+sylius_api_adjustment:
+    resource: @SyliusApiBundle/Resources/config/routing/adjustment.yml
+    prefix: /orders/{orderId}/adjustments
+
 sylius_api_checkout:
     resource: @SyliusApiBundle/Resources/config/routing/checkout.yml
     prefix: /checkouts
