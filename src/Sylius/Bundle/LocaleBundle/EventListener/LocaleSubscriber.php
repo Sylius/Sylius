@@ -45,7 +45,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if (!$request->hasPreviousSession() or !$event->isMasterRequest()) {
+        if (!$request->hasPreviousSession() || !$event->isMasterRequest()) {
             return;
         }
 
