@@ -63,6 +63,7 @@
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.contains_product.class">Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.cheapest_product.class">Sylius\Component\Core\Promotion\Checker\CheapestProductRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.customer_group.class">Sylius\Component\Core\Promotion\Checker\CustomerGroupRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
@@ -381,6 +382,9 @@
         </service>
         <service id="sylius.promotion_rule_checker.contains_product" class="%sylius.promotion_rule_checker.contains_product.class%">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains Product" />
+        </service>
+        <service id="sylius.promotion_rule_checker.cheapest_product" class="%sylius.promotion_rule_checker.cheapest_product.class%">
+            <tag name="sylius.promotion_rule_checker" type="cheapest_product" label="Cheapest Product" />
         </service>
         <service id="sylius.promotion_rule_checker.customer_group" class="%sylius.promotion_rule_checker.customer_group.class%">
             <tag name="sylius.promotion_rule_checker" type="customer_group" label="User Group" />
