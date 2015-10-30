@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\User\Security;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\User\Model\CredentialingInterface;
+use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 /**
@@ -36,7 +36,7 @@ class PasswordUpdaterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Security\PasswordUpdaterInterface');
     }
 
-    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, CredentialingInterface $user)
+    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, CredentialsHolderInterface $user)
     {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
 
@@ -48,7 +48,7 @@ class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, CredentialingInterface $user)
+    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, CredentialsHolderInterface $user)
     {
         $user->getPlainPassword()->willReturn('');
 

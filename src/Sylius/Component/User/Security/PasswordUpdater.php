@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\User\Security;
 
-use Sylius\Component\User\Model\CredentialingInterface;
+use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -32,7 +32,7 @@ class PasswordUpdater implements PasswordUpdaterInterface
     /**
      * {@inheritDoc}
      */
-    public function updatePassword(CredentialingInterface $user)
+    public function updatePassword(CredentialsHolderInterface $user)
     {
         if (0 !== strlen($password = $user->getPlainPassword())) {
             $user->setPassword($this->userPasswordEncoder->encode($user));

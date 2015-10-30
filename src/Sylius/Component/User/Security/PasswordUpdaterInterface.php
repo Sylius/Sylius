@@ -11,12 +11,12 @@
 
 namespace Sylius\Component\User\Security;
 
-use Sylius\Component\User\Model\CredentialingInterface;
+use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface PasswordUpdaterInterface
 {
-    public function updatePassword(CredentialingInterface $user);
+    public function updatePassword(CredentialsHolderInterface $user);
 }
