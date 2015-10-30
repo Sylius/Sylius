@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\User\Security;
 
+use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -21,9 +22,9 @@ interface UserPasswordEncoderInterface
     /**
      * Encodes the user plain password.
      *
-     * @param UserInterface $user
+     * @param CredentialsHolderInterface $user
      *
      * @return string The encoded password
      */
-    public function encode(UserInterface $user);
+    public function encode(CredentialsHolderInterface $user);
 }
