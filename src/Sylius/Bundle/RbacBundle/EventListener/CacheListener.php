@@ -63,7 +63,7 @@ class CacheListener
      */
     protected function clearCache(LifecycleEventArgs $args)
     {
-        if ($args->getObject() instanceof RoleInterface || $args->getObject() instanceof PermissionInterface) {
+        if ($args->getEntity() instanceof RoleInterface || $args->getEntity() instanceof PermissionInterface) {
             $this->cache->deleteAll();
         }
     }

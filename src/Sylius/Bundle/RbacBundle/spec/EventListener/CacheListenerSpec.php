@@ -35,7 +35,7 @@ class CacheListenerSpec extends ObjectBehavior
 
     function it_clears_the_cache_after_persisting_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
     {
-        $args->getObject()->shouldBeCalled()->willReturn($role);
+        $args->getEntity()->shouldBeCalled()->willReturn($role);
         $cache->deleteAll()->shouldBeCalled();
 
         $this->postPersist($args);
@@ -43,7 +43,7 @@ class CacheListenerSpec extends ObjectBehavior
 
     function it_clears_the_cache_on_post_after_removing_a_role($cache, LifecycleEventArgs $args, RoleInterface $role)
     {
-        $args->getObject()->shouldBeCalled()->willReturn($role);
+        $args->getEntity()->shouldBeCalled()->willReturn($role);
         $cache->deleteAll()->shouldBeCalled();
 
         $this->postRemove($args);
@@ -54,7 +54,7 @@ class CacheListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         PermissionInterface $permission
     ) {
-        $args->getObject()->shouldBeCalled()->willReturn($permission);
+        $args->getEntity()->shouldBeCalled()->willReturn($permission);
         $cache->deleteAll()->shouldBeCalled();
 
         $this->postPersist($args);
@@ -65,7 +65,7 @@ class CacheListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         PermissionInterface $permission
     ) {
-        $args->getObject()->shouldBeCalled()->willReturn($permission);
+        $args->getEntity()->shouldBeCalled()->willReturn($permission);
         $cache->deleteAll()->shouldBeCalled();
 
         $this->postRemove($args);
