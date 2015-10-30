@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\CredentialingInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
@@ -39,7 +38,7 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
      */
     public function encode(CredentialingInterface $user)
     {
-        $encoder = $this->encoderFactory->getEncoder($user);
+        $encoder = $this->encoderFactory->getEncoder(get_class($user));
 
         return $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
     }
