@@ -50,11 +50,11 @@ class Country implements CountryInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ?: $this->getIsoName();
     }
 
     /**
