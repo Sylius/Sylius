@@ -36,7 +36,7 @@
 <form method="post" action="{{ path('sylius_backend_product_stock', {'id': product.id}) }}" class="form-horizontal">
     {{ form_widget(form) }}
     <div class="form-actions">
-        <input type="submit" class="btn btn-primary" value="Modify stock" />
+        <input type="submit" class="btn btn-primary" value="{{ 'sylius.product.stock.modify'|trans }}" />
     </div>
 </form>
 
@@ -65,10 +65,10 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Stock Location</th>
-                        <th>Count On Hand</th>
-                        <th>Count On Hold</th>
-                        <th>Available On Demand</th>
+                        <th>{{ 'sylius.product.stock.location'|trans }}</th>
+                        <th>{{ 'sylius.product.stock.on_hand'|trans }}</th>
+                        <th>{{ 'sylius.product.stock.on_hold'|trans }}</th>
+                        <th>{{ 'sylius.product.stock.available_on_demand'|trans }}</th>
                     </tr>
                 </thead>
                 <tbody>

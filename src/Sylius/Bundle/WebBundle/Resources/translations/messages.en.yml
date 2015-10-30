@@ -744,7 +744,6 @@ sylius:
         update_header: Editing payment method
         updated_at: Last update
     product:
-        stock: Stock
         add_attribute: Add attribute
         available_on: Available on
         available_on_demand: Available on demand
@@ -780,7 +779,6 @@ sylius:
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
         show_in_store: show in store
         sku: SKU
-        stock: Current stock
         tabs:
             categorization: Categorization
             images: Images
@@ -802,6 +800,12 @@ sylius:
             qty_max: Qty max
             price: Price
         delete_revert: Undelete
+        stock:
+            modify: Modify stock
+            location: Stock Location
+            on_hand: Count On Hand
+            on_hold: Count On Hold
+            available_on_demand: Available On Demand
     product_not_available_in_zone: Not available in your country
     promotion:
         actions: Actions
