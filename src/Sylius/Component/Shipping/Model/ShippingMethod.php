@@ -277,4 +277,14 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
         );
     }
+
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
+    }
 }
