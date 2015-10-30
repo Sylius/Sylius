@@ -45,8 +45,14 @@ class FormController extends Controller
      */
     public function filterAction($type, $template)
     {
+        $request = $this->get('request_stack')->getMasterRequest();
+
+        $form = $this->get('form.factory')->createNamed('criteria', $type, null, ['method' => 'GET']);
+
+        $form->handleRequest($request);
+
         return $this->render($template, array(
-            'form' => $this->get('form.factory')->createNamed('criteria', $type)->createView()
+            'form' => $form->createView()
         ));
     }
 }
