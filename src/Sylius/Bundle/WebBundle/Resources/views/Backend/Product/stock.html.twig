@@ -73,17 +73,16 @@
                 </thead>
                 <tbody>
                     {% for stock_item in variant.stockItems %}
-                    {% set location = stock_item.location %}
                     <tr>
-                        <td class="center-text">{{ location.name }} <a href="{{ path('sylius_backend_stock_movement_index', {'locationId': location.id}) }}"><i class="glyphicon glyphicon-info-sign"></i></a></td>
+                        <td class="center-text">{{ stock_item.location.name }} <a href="{{ path('sylius_backend_stock_movement_index', {'locationId': stock_item.location.id}) }}"><i class="glyphicon glyphicon-info-sign"></i></a></td>
                         <td class="center-text">{{ stock_item.onHand }}</td>
                         <td class="center-text">{{ stock_item.onHold }}</td>
                         <td class="center-text">
                             <a href="{{ path('sylius_api_stock_item_update', {'id': stock_item.id}) }}" data-value="{{ stock_item.availableOnDemand }}" class="available-on-demand-toggle">
                             {% if stock_item.availableOnDemand %}
-                                <i class="glyphicon glyphicon-ok-sign" style="color: #1abb9c;"></i>
+                                <i class="glyphicon glyphicon-ok-sign"></i>
                             {% else %}
-                                <i class="glyphicon glyphicon-remove-sign" style="color: #d9534f;"></i>
+                                <i class="glyphicon glyphicon-remove-sign"></i>
                             {% endif %}
                             </a>
                         </td>
