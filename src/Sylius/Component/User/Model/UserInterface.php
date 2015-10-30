@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends AdvancedUserInterface, CredentialingInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
     /**

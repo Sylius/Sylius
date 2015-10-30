@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\User\Security;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\CredentialingInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -30,7 +30,7 @@ class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Security\UserPasswordEncoderInterface');
     }
 
-    function it_encodes_password(UserInterface $user)
+    function it_encodes_password(CredentialingInterface $user)
     {
         $user->getPlainPassword()->willReturn('myPassword');
         $user->getSalt()->willReturn('typicalSalt');

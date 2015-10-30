@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\User\Security;
 
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\CredentialingInterface;
 
 /**
  * Pbkdf2PasswordEncoder uses the PBKDF2 (Password-Based Key Derivation Function 2).
@@ -70,7 +70,7 @@ class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
      *
      * @throws \LogicException when the algorithm is not supported
      */
-    public function encode(UserInterface $user)
+    public function encode(CredentialingInterface $user)
     {
         return $this->encodePassword($user->getPlainPassword(), $user->getSalt());
     }
