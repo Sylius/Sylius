@@ -5,7 +5,7 @@ namespace Sylius\Component\User\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface CredentialingInterface
+interface CredentialsHolderInterface
 {
     /**
      * @return string
