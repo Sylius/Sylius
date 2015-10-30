@@ -81,23 +81,6 @@ interface UserInterface extends AdvancedUserInterface, CredentialingInterface, \
     public function setUsernameCanonical($usernameCanonical);
 
     /**
-     * @return string
-     */
-    public function getPlainPassword();
-
-    /**
-     * @param string $password
-     */
-    public function setPlainPassword($password);
-
-    /**
-     * Sets the hashed password.
-     *
-     * @param string $password
-     */
-    public function setPassword($password);
-
-    /**
      * @param boolean $enabled
      */
     public function setEnabled($enabled);
