@@ -46,6 +46,7 @@ class LocaleSubscriberSpec extends ObjectBehavior
     {
         $localeContext->getCurrentLocale()->willReturn('fr_FR');
         $event->getRequest()->willReturn($request);
+        $event->isMasterRequest()->shouldBeCalled()->willReturn(true);
         $request->hasPreviousSession()->shouldBeCalled()->willReturn(true);
         $request->setLocale('fr_FR')->shouldBeCalled();
 
@@ -58,6 +59,7 @@ class LocaleSubscriberSpec extends ObjectBehavior
         $localeContext->getDefaultLocale()->willReturn('fr_FR');
         $event->getRequest()->willReturn($request);
         $request->hasPreviousSession()->shouldBeCalled()->willReturn(true);
+        $event->isMasterRequest()->shouldBeCalled()->willReturn(true);
         $request->setLocale('fr_FR')->shouldBeCalled();
 
         $this->onKernelRequest($event);

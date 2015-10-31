@@ -48,7 +48,7 @@ final class LocaleSubscriber extends BaseLocaleSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$request->hasPreviousSession() || !$event->isMasterRequest()) {
+        if (!$event->isMasterRequest()) {
             return;
         }
 
@@ -71,7 +71,13 @@ final class LocaleSubscriber extends BaseLocaleSubscriber
             return $locale;
         }
 
-        return $this->localeProvider->getAvailableLocales()[0];
+        $localesAvailables = $this->localeProvider->getAvailableLocales();
+
+        if(count($localesAvailables) > 0) {
+            return $localesAvailables[0];
+        }
+
+        return $this->localeContext->getDefaultLocale();
     }
 
     /**
