@@ -58,8 +58,43 @@ class Configuration implements ConfigurationInterface
         ->end();
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('stock_item')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('stock_location')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('stock_movement')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('inventory_unit')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 
     /**
@@ -75,20 +110,47 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('inventory_unit')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
-                                ->scalarNode('repository')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('stockable')
                             ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_item')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\StockItem')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\InventoryBundle\Form\Type\StockItemType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_location')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\StockLocation')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_movement')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\StockMovement')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\InventoryBundle\Form\Type\StockMovementType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('inventory_unit')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
+                                ->scalarNode('repository')->end()
                             ->end()
                         ->end()
                     ->end()

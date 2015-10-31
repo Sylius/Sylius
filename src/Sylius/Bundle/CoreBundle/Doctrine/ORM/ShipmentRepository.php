@@ -30,7 +30,7 @@ class ShipmentRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $queryBuilder
-            ->leftJoin($this->getAlias().'.order', 'shipmentOrder')
+            ->leftJoin($this->getPropertyName('order'), 'shipmentOrder')
             ->leftJoin('shipmentOrder.shippingAddress', 'address')
             ->addSelect('shipmentOrder')
             ->addSelect('address')
@@ -46,6 +46,12 @@ class ShipmentRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('shipmentOrder.channel = :channel')
                 ->setParameter('channel', $criteria['channel'])
+            ;
+        }
+        if (!empty($criteria['stockLocation'])) {
+            $queryBuilder
+                ->andWhere($this->getPropertyName('stockLocation').' = :location')
+                ->setParameter('location', $criteria['stockLocation'])
             ;
         }
         if (!empty($criteria['shippingAddress'])) {

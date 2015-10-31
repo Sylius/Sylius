@@ -14,11 +14,12 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Inventory\Model\InventorySubjectInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
 
 /**
  * Sylius core Order model.
@@ -31,7 +32,8 @@ interface OrderInterface extends
     PromotionCountableSubjectInterface,
     PromotionCouponsAwareSubjectInterface,
     CustomerAwareInterface,
-    ChannelAwareInterface
+    ChannelAwareInterface,
+    InventorySubjectInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';
@@ -102,13 +104,6 @@ interface OrderInterface extends
      * @param string $paymentState
      */
     public function setPaymentState($paymentState);
-
-    /**
-     * Get all inventory units.
-     *
-     * @return Collection|InventoryUnitInterface[]
-     */
-    public function getInventoryUnits();
 
     /**
      * Get all inventory units by the product variant.

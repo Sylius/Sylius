@@ -59,6 +59,10 @@ class ShipmentFilterType extends AbstractType
                 'required'    => false,
                 'empty_value' => 'sylius.form.shipment_filter.channel'
             ))
+            ->add('stockLocation', 'sylius_stock_location_choice', array(
+                'required'    => false,
+                'empty_value' => 'sylius.form.shipment_filter.stock_location.empty_value'
+            ))
         ;
     }
 

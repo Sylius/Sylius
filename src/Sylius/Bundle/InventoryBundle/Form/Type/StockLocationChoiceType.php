@@ -9,28 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\InventoryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * User choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class UserChoiceType extends AbstractType
+abstract class StockLocationChoiceType extends AbstractType
 {
     /**
-     * User class name.
+     * StockLocation model class name.
      *
      * @var string
      */
     protected $className;
 
     /**
-     * Constructor.
-     *
      * @param string $className
      */
     public function __construct($className)
@@ -41,11 +37,11 @@ abstract class UserChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->className,
+                'class' => $this->className
             ))
         ;
     }
@@ -55,6 +51,6 @@ abstract class UserChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_user_choice';
+        return 'sylius_stock_location_choice';
     }
 }

@@ -1,0 +1,30 @@
+{% macro list(stock_movements) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if stock_movements|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('createdAt', 'sylius.stock_movement.created_at'|trans) }}</th>
+                <th>{{ sylius_resource_sort('stockItem', 'sylius.stock_movement.stockable'|trans) }}</th>
+                <th>{{ sylius_resource_sort('quantity', 'sylius.stock_movement.quantity'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_movement in stock_movements %}
+            <tr id="{{ stock_movement.id }}">
+                <td>{{ stock_movement.createdAt|date }}</td>
+                <td>{{ stock_movement.stockItem.stockable }}</td>
+                <td>{{ stock_movement.quantity }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.stock_movement.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

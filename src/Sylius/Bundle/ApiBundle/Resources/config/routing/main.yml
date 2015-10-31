@@ -85,6 +85,14 @@ sylius_api_channel:
     resource: @SyliusApiBundle/Resources/config/routing/channel.yml
     prefix: /channels
 
+sylius_api_stock_location:
+    resource: @SyliusApiBundle/Resources/config/routing/stock_location.yml
+    prefix: /stock-locations
+
+sylius_api_stock_item:
+    resource: @SyliusApiBundle/Resources/config/routing/stock_item.yml
+    prefix: /stock-items
+
 sylius_api_country:
     resource: @SyliusApiBundle/Resources/config/routing/country.yml
     prefix: /countries

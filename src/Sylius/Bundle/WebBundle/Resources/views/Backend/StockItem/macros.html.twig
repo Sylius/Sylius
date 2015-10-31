@@ -1,0 +1,35 @@
+{% macro list(stock_items) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if stock_items|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('stockable', 'sylius.stock_item.stockable'|trans) }}</th>
+                <th>{{ sylius_resource_sort('onHand', 'sylius.stock_item.on_hand'|trans) }}</th>
+                <th>{{ sylius_resource_sort('onHold', 'sylius.stock_item.on_hold'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.stock_item.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_item in stock_items %}
+            <tr id="{{ stock_item.id }}">
+                <td>{{ stock_item.stockable }}</td>
+                <td>{{ stock_item.onHand }}</td>
+                <td>{{ stock_item.onHold }}</td>
+                <td>{{ stock_item.updatedAt|date }}</td>
+                <td>
+                    {{ buttons.show(path('sylius_backend_product_stock', {'id': stock_item.stockable.product.id}), 'Overview / Change'|trans) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.stock_item.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

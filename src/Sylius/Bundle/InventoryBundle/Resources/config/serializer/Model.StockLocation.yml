@@ -1,0 +1,29 @@
+Sylius\Component\Inventory\Model\StockLocation:
+    exclusion_policy: ALL
+    xml_root_name: stock-location
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        code:
+            expose: true
+            type: string
+        enabled:
+            expose: true
+            type: boolean
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_stock_location_show
+                parameters:
+                    id: expr(object.getId())

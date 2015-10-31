@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\InventoryBundle\Form\Type;
 
 /**
- * User choice type for "doctrine/orm" driver.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class UserEntityType extends UserChoiceType
+class StockLocationEntityType extends StockLocationChoiceType
 {
     /**
      * {@inheritdoc}

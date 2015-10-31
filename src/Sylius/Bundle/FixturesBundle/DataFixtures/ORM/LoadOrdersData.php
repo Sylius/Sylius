@@ -24,6 +24,20 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
 {
+    private $stockLocations = array(
+        'LONDON-1',
+        'NASHVILLE-1',
+        'NASHVILLE-2',
+        'LONDON-1'
+    );
+
+    private $shippingMethods = array(
+        'UPS Ground',
+        'DHL',
+        'FedEx World Shipping',
+        'FedEx'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -118,7 +132,8 @@ class LoadOrdersData extends DataFixture
     {
         /* @var $shipment ShipmentInterface */
         $shipment = $this->getShipmentRepository()->createNew();
-        $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
+        $shipment->setMethod($this->getReference('Sylius.ShippingMethod.'.$this->faker->randomElement($this->shippingMethods)));
+        $shipment->setStockLocation($this->getReference('Sylius.StockLocation.'.$this->faker->randomElement($this->stockLocations)));
         $shipment->setState($this->getShipmentState());
 
         foreach ($order->getInventoryUnits() as $item) {
