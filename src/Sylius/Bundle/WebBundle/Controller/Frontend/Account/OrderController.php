@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -140,15 +141,16 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The order does not exist.');
         }
 
-        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN')
-            && (!$this->getCustomer() || $this->getCustomer()->getId() !== $order->getCustomer()->getId())
-        ) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SYLIUS_ADMIN') && !$order->getCustomer()->isEqualTo($this->getCustomer())) {
             throw new AccessDeniedException();
         }
 
         return $order;
     }
 
+    /**
+     * @return null|CustomerInterface
+     */
     protected function getCustomer()
     {
         return $this->get('sylius.context.customer')->getCustomer();

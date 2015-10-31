@@ -99,4 +99,20 @@ class Province implements ProvinceInterface
     {
         $this->country = $country;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEqualTo($data)
+    {
+        if (is_object($data)) {
+            if (!$data instanceof ProvinceInterface) {
+                return false;
+            }
+
+            return $data->getId() === $this->id;
+        }
+
+        return $data === $this->id;
+    }
 }

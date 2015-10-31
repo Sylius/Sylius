@@ -22,13 +22,14 @@ use Sylius\Component\User\Model\User as BaseUser;
 class User extends BaseUser implements UserInterface
 {
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|RoleInterface[]
      */
     protected $authorizationRoles;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->authorizationRoles = new ArrayCollection();
     }
 
@@ -75,10 +76,26 @@ class User extends BaseUser implements UserInterface
     {
         $roles = parent::getRoles();
 
-        foreach ($this->getAuthorizationRoles() as $role) {
+        foreach ($this->authorizationRoles as $role) {
             $roles = array_merge($roles, $role->getSecurityRoles());
         }
 
         return $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEqualTo($data)
+    {
+        if (is_object($data)) {
+            if (!$data instanceof UserInterface) {
+                return false;
+            }
+
+            return $data->getId() === $this->id;
+        }
+
+        return $data === $this->id;
     }
 }

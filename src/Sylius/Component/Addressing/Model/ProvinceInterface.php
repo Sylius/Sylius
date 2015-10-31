@@ -11,13 +11,15 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\EquatableInterface;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface
+interface ProvinceInterface extends EquatableInterface
 {
     /**
-     * @return mixed
+     * @return int
      */
     public function getId();
 
