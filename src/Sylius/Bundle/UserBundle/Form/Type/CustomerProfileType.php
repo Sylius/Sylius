@@ -39,7 +39,9 @@ class CustomerProfileType extends AbstractResourceType
                 'widget'   => 'single_text',
                 'required' => false,
             ))
-            ->add('gender', 'sylius_gender')
+            ->add('gender', 'sylius_gender', array(
+                'label'    => 'sylius.form.customer.gender'
+            ))
         ;
     }
 
