@@ -12,9 +12,12 @@ Feature: Locale selection
             | en_US | yes     |
             | fr_FR | no      |
             | pl_PL | yes     |
+            | es_ES | yes     |
           And there are following channels configured:
-            | code        | name            | currencies | locales                    | url       |
-            | DEFAULT-WEB | Default Channel | EUR        | de_DE, en_US, fr_FR, pl_PL | localhost |
+            | code        | name            | currencies | locales                    | url             |
+            | DEFAULT-WEB | Default Channel | EUR        | de_DE, en_US, fr_FR, pl_PL | localhost       |
+            | WEB-US      | US Channel      | USD        | en_US                      | us.sylius.local |
+            | WEB-ES      | VE Channel      | EUR, USD   | es_ES                      | es.sylius.local |
 
     Scenario: Only enabled locales are visible to the user
         Given I am on the store homepage
@@ -31,3 +34,13 @@ Feature: Locale selection
           And I am on the store homepage
          When I change the locale to "German (Germany)"
          Then I should browse the store in "German (Germany)"
+
+    Scenario: Viewing the storefront at WEB-US channel
+        Given I am on the store homepage using "WEB-US" channel
+         Then I should be on the homepage
+          And I should browse the store in "English (United States)"
+
+    Scenario: Viewing the storefront at WEB-VE channel
+        Given I am on the store homepage using "WEB-ES" channel
+         Then I should be on the homepage
+          And I should browse the store in "Spanish (Spain)"
