@@ -751,7 +751,6 @@ sylius:
       qty_min: Min. množstvo
       qty_max: Max. množstvo
       price: Cena
-    delete_revert: Obnoviť
   product_not_available_in_zone: Nedostupné vo vašej krajine
   promotion:
     actions: Akcie
