@@ -26,12 +26,12 @@ Feature: Checkout fixed discount promotions
             | Lenny   | 15    | Debian T-Shirts |
             | Ubu     | 200   | Ubuntu T-Shirts |
           And the following promotions exist:
-            | name                | description                                       |
-            | 3 items             | Discount for orders with at least 3 items         |
-            | 300 EUR             | Discount for orders over 300 EUR                  |
-            | Shipping to Germany | Discount for orders with shipping country Germany |
-            | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
-            | 3rd order           | Discount for 3rd order                            |
+            | name                | description                                              |
+            | 3 items             | 15 EUR Discount for orders with at least 3 items         |
+            | 300 EUR             | 40 EUR Discount for orders over 300 EUR                  |
+            | Shipping to Germany | 40 EUR Discount for orders with shipping country Germany |
+            | Ubuntu T-Shirts     | 40 EUR Discount for Ubuntu T-Shirts                      |
+            | 3rd order           | 10 EUR Discount for 3rd order                            |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
           And promotion "3 items" has following rules defined:
@@ -72,7 +72,7 @@ Feature: Checkout fixed discount promotions
          When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
           And "Promotion total: -€40.00" should appear on the page
-          And "Grand total: €295.00" should appear on the page
+          And "Grand total: €335.00" should appear on the page
 
     Scenario: Fixed discount promotion is not applied when the cart
               has not the required amount
@@ -183,4 +183,4 @@ Feature: Checkout fixed discount promotions
          When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
           And "Promotion total: -€55.00" should appear on the page
-          And "Grand total: €1,500.00" should appear on the page
+          And "Grand total: €1,620.00" should appear on the page

@@ -8,14 +8,14 @@ Feature: Checkout usage limited promotions
         Given store has default configuration
           And the following promotions exist:
             | name                             | description                                          | usage limit | used |
-            | 50% off over 200 EUR             | First 3 orders over 200 EUR have 50% discount!       | 3           | 0    |
+            | 25% off over 200 EUR             | First order over 200 EUR have 25% discount!          | 1           | 0    |
             | Free order with at least 3 items | First order with at least 3 items has 100% discount! | 1           | 1    |
-          And promotion "50% off over 200 EUR" has following rules defined:
+          And promotion "25% off over 200 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 200   |
-          And promotion "50% off over 200 EUR" has following actions defined:
+          And promotion "25% off over 200 EUR" has following actions defined:
             | type                | configuration  |
-            | Percentage discount | Percentage: 50 |
+            | Percentage discount | Percentage: 25 |
           And promotion "Free order with at least 3 items" has following rules defined:
             | type       | configuration        |
             | Item count | Count: 3,Equal: true |
@@ -38,20 +38,18 @@ Feature: Checkout usage limited promotions
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
-    Scenario: Promotion with usage limit is applied when the
-              number of usage is not reached
-        Given I am on the store homepage
-         When I add product "Buzz" to cart, with quantity "2"
-         Then I should be on the cart summary page
-          And "Promotion total: -€500.00" should appear on the page
-          And "Grand total: €0.00" should appear on the page
-
     Scenario: Promotion with usage limit is not applied when the
               number of usage is reached
         Given I am on the store homepage
-          And I added product "Sarge" to cart, with quantity "3"
-          And I added product "Etch" to cart, with quantity "1"
-         When I add product "Lenny" to cart, with quantity "2"
+         When I add product "Etch" to cart, with quantity "3"
          Then I should be on the cart summary page
           And "Promotion total" should not appear on the page
-          And "Grand total: €125.00" should appear on the page
+          And "Grand total: €60.00" should appear on the page
+
+    Scenario: Promotion with usage limit is applied when the
+    number of usage is not reached
+        Given I am on the store homepage
+        And I added product "Woody" to cart, with quantity "3"
+        Then I should be on the cart summary page
+        And "Promotion total: -€93.75" should appear on the page
+        And "Grand total: €281.25" should appear on the page
