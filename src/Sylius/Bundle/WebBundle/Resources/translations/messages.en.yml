@@ -765,7 +765,6 @@ sylius:
             qty_min: Qty min
             qty_max: Qty max
             price: Price
-        delete_revert: Undelete
     product_not_available_in_zone: Not available in your country
     promotion:
         actions: Actions
@@ -856,6 +855,7 @@ sylius:
         index_header: Reports
         no_data: There is no data to display.
         no_report: There is no report to display.
+    restore: Restore
     save_changes: Save changes
     search: Search
     security:

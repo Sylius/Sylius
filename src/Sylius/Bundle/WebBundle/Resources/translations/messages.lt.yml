@@ -751,7 +751,6 @@ sylius:
       qty_min: Kiekis min
       qty_max: Kiekis max
       price: Kaina
-    delete_revert: Atstatyti
   product_not_available_in_zone: Neprieinamas jūsų šalyje
   promotion:
     actions: Veiksmai
