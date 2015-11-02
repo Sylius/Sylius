@@ -29,9 +29,7 @@
         "sylius/translation": "0.16.*"
     },
     "require-dev": {
-        "phpspec/phpspec":         "~2.1",
-
-        "symfony/property-access": "~2.3"
+        "phpspec/phpspec":         "~2.1"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Product\\": "" }

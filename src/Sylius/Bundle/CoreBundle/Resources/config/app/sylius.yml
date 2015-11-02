@@ -216,7 +216,7 @@ sylius_search:
                 id: ~
                 name: ~
                 description: ~
-    custom_accessor: Sylius\Component\Product\Accessor\ProductAccessor
+    custom_accessor: Sylius\Component\Core\Accessor\ProductAccessor
     filters:
         pre_search_filter:
             enabled: true
