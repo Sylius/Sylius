@@ -4,7 +4,10 @@ Promotion
 Super-flexible promotions system with support of complex rules and actions. Coupon codes included!
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   summary
+   basic_usage
+   models
+   interfaces
+   promotion_events
