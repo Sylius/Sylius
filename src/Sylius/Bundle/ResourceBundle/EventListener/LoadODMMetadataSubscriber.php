@@ -29,6 +29,11 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     protected $classes;
 
     /**
+     * @var array
+     */
+    private $savedAssociations = array();
+
+    /**
      * Constructor
      *
      * @param array $classes
@@ -59,7 +64,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         $this->setCustomRepositoryClasses($metadata);
 
         if (!$metadata->isMappedSuperclass) {
-            $this->setAssociationMappings($metadata, $eventArgs->getDocumentManager()->getConfiguration());
+            $this->setAssociationMappings($metadata);
         } else {
             $this->unsetAssociationMappings($metadata);
         }
@@ -79,18 +84,12 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
+    private function setAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
-            $parentMetadata = new ClassMetadata($parent);
-            if (in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
-                $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
-                if ($parentMetadata->isMappedSuperclass) {
-                    foreach ($parentMetadata->associationMappings as $key => $value) {
-                        if ($this->hasRelation($value['association'])) {
-                            $metadata->associationMappings[$key] = $value;
-                        }
-                    }
+            if (isset($this->savedAssociations[$parent])) {
+                foreach ($this->savedAssociations[$parent] as $key => $mapping) {
+                    $metadata->associationMappings[$key] = $mapping;
                 }
             }
         }
@@ -100,6 +99,10 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     {
         foreach ($metadata->associationMappings as $key => $value) {
             if ($this->hasRelation($value['association'])) {
+                if (!isset($this->savedAssociations[$metadata->getName()])) {
+                    $this->savedAssociations[$metadata->getName()] = array();
+                }
+                $this->savedAssociations[$metadata->getName()][$key] = $metadata->associationMappings[$key];
                 unset($metadata->associationMappings[$key]);
             }
         }
