@@ -72,11 +72,11 @@ class ProcessContextSpec extends ObjectBehavior
         $this->initialize($process, $currentStep);
 
         $process->getValidator()->willReturn($processValidator);
-        $processValidator->isValid()->willReturn(false);
+        $processValidator->isValid($this)->willReturn(false);
         $this->isValid()->shouldReturn(false);
 
         $process->getValidator()->willReturn($processValidator);
-        $processValidator->isValid()->willReturn(true);
+        $processValidator->isValid($this)->willReturn(true);
 
         $process->getValidator()->willReturn(null);
         $currentStep->getName()->willReturn('current_step');
