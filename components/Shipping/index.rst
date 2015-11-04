@@ -1,10 +1,15 @@
 Shipping
 ========
 
-Shipments and shipping methods management for PHP E-Commerce apps. It contains flexible calculators system for computing the shipping costs.
+Shipments and shipping methods management for PHP E-Commerce applications. It contains flexible calculators system for computing the shipping costs.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   summary
+   basic_usage
+   calculators
+   checkers
+   models
+   interfaces
+   state_machine
