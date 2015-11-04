@@ -37,6 +37,11 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var array
      */
     protected $configuration = array();
@@ -93,6 +98,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

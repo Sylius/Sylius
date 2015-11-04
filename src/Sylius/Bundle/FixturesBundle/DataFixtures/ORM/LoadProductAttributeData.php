@@ -28,31 +28,31 @@ class LoadProductAttributeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $attribute = $this->createAttribute('T-Shirt brand', array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'));
+        $attribute = $this->createAttribute('T-Shirt brand', 't_shirt_brand', array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt collection', array($this->defaultLocale => 'Collection', 'es_ES' => 'Coleccion'));
+        $attribute = $this->createAttribute('T-Shirt collection', 't_shirt_collection', array($this->defaultLocale => 'Collection', 'es_ES' => 'Coleccion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt material', array($this->defaultLocale => 'Made of', 'es_ES' => 'Material'));
+        $attribute = $this->createAttribute('T-Shirt material', 't_shirt_material', array($this->defaultLocale => 'Made of', 'es_ES' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker resolution', array($this->defaultLocale => 'Print resolution', 'es_ES' => 'Resolucion'));
+        $attribute = $this->createAttribute('Sticker resolution', 'sticker_resolution', array($this->defaultLocale => 'Print resolution', 'es_ES' => 'Resolucion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker paper', array($this->defaultLocale => 'Paper', 'es_ES' => 'Papel'));
+        $attribute = $this->createAttribute('Sticker paper', 'sticker_paper', array($this->defaultLocale => 'Paper', 'es_ES' => 'Papel'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Mug material', array($this->defaultLocale => 'Material', 'es_ES' => 'Material'));
+        $attribute = $this->createAttribute('Mug material', 'mug_material', array($this->defaultLocale => 'Material', 'es_ES' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book author', array($this->defaultLocale => 'Author', 'es_ES' => 'Autor'));
+        $attribute = $this->createAttribute('Book author', 'book_author', array($this->defaultLocale => 'Author', 'es_ES' => 'Autor'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book ISBN', array($this->defaultLocale => 'ISBN', 'es_ES' => 'ISBN'));
+        $attribute = $this->createAttribute('Book ISBN', 'book_isbn', array($this->defaultLocale => 'ISBN', 'es_ES' => 'ISBN'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book pages', array($this->defaultLocale => 'Number of pages', 'es_ES' => 'Numero de paginas'));
+        $attribute = $this->createAttribute('Book pages', 'book_pages', array($this->defaultLocale => 'Number of pages', 'es_ES' => 'Numero de paginas'));
         $manager->persist($attribute);
 
         $manager->flush();
@@ -70,16 +70,18 @@ class LoadProductAttributeData extends DataFixture
      * Create attribute.
      *
      * @param string $name
+     * @param string $code
      * @param array  $presentationTranslations
      *
      * @return AttributeInterface
      */
-    protected function createAttribute($name, array $presentationTranslations)
+    protected function createAttribute($name, $code, array $presentationTranslations)
     {
         /* @var $attribute AttributeInterface */
         $attribute = $this->getProductAttributeFactory()->createNew();
 
         $attribute->setName($name);
+        $attribute->setCode($code);
 
         foreach ($presentationTranslations as $locale => $presentation) {
             $attribute->setCurrentLocale($locale);

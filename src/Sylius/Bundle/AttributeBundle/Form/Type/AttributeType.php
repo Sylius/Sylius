@@ -54,6 +54,9 @@ class AttributeType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.attribute.name',
             ))
+            ->add('code', 'text', array(
+                'label' => 'sylius.form.attribute.code',
+            ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
                 'label' => 'sylius.form.attribute.presentation',

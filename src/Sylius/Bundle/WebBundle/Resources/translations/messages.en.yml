@@ -815,6 +815,7 @@ sylius:
         type: Type
     product_attribute:
         add_choice: Add choice
+        code: Code
         create: Create product attribute
         create_header: New product attribute
         index_header: Product attributes

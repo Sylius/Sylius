@@ -1,7 +1,11 @@
 sylius:
-  form:
-    attribute:
-      name: Internal name
-      presentation: Presentation
-      type: Type
-      choices: Choices
+    form:
+        attribute:
+            name: Internal name
+            code: Code
+            presentation: Presentation
+            type: Type
+            choices: Choices
+    attribute_type:
+        checkbox: Checkbox
+        text: Text

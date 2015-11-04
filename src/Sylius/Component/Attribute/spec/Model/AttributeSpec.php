@@ -52,6 +52,12 @@ class AttributeSpec extends ObjectBehavior
         $this->setName('T-Shirt collection');
         $this->getName()->shouldReturn('T-Shirt collection');
     }
+    
+    function its_code_is_mutable()
+    {
+        $this->setCode('testCode');
+        $this->getCode()->shouldReturn('testCode');
+    }
 
     function it_returns_name_when_converted_to_string()
     {

@@ -32,6 +32,16 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
     /**
      * @return string
      */
+    public function getCode();
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code);
+
+    /**
+     * @return string
+     */
     public function getType();
 
     /**
