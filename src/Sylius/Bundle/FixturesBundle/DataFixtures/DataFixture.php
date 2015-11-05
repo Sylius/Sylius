@@ -73,7 +73,19 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
             $this->faker = $this->fakers[$this->defaultLocale];
         }
 
-        $this->fakers['es_ES'] = FakerFactory::create('es_ES');
+        foreach ($this->getLocales() as $local) {
+            $this->fakers[$local->getCode()] = FakerFactory::create($local->getCode());
+        }
+    }
+
+    /**
+     * Return locales available from the database
+     *
+     * @return mixed
+     */
+    public function getLocales()
+    {
+        return $this->getLocaleRepository()->findAll();
     }
 
     public function __call($method, $arguments)
