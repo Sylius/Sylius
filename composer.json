@@ -21,6 +21,7 @@
     "require": {
         "php":                                  ">=5.5.9",
         "ext-exif":                             "*",
+        "ext-gd":                               "*",
         "a2lix/translation-form-bundle":        "~2.0",
         "doctrine/collections":                 "~1.2",
         "doctrine/common":                      "~2.5",
