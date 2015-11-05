@@ -57,6 +57,6 @@ class LoadLocalesData extends DataFixture
      */
     public function getOrder()
     {
-        return 10;
+        return 1;
     }
 }
