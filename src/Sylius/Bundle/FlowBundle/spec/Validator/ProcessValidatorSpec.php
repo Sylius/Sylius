@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 class ProcessValidatorSpec extends ObjectBehavior
@@ -52,13 +53,13 @@ class ProcessValidatorSpec extends ObjectBehavior
         $this->getValidation()->shouldReturn($closure);
     }
 
-    function it_calls_validation_closure()
+    function it_calls_validation_closure(ProcessContextInterface $processContext)
     {
         $this->setValidation(function() {
             return true;
         });
 
-        $this->isValid()->shouldReturn(true);
+        $this->isValid($processContext)->shouldReturn(true);
     }
 
     function it_has_response(StepInterface $step)
