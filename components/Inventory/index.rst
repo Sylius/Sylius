@@ -4,7 +4,10 @@ Inventory
 Inventory management for PHP applications.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   summary
+   basic_usage
+   models
+   interfaces
+   state_machine
