@@ -52,7 +52,7 @@ final class ChannelContext implements ChannelContextInterface
 
     /**
      * @param ChannelResolverInterface $channelResolver
-     * @param RequestStack $requestStack
+     * @param RequestStack             $requestStack
      */
     public function __construct(ChannelResolverInterface $channelResolver, RequestStack $requestStack)
     {

@@ -30,7 +30,7 @@ final class LocaleSubscriber extends BaseLocaleSubscriber
     protected $localeProvider;
 
     /**
-     * @param LocaleContextInterface $localeContext
+     * @param LocaleContextInterface     $localeContext
      * @param ChannelAwareLocaleProvider $localeProvider
      */
     public function __construct(LocaleContextInterface $localeContext, ChannelAwareLocaleProvider $localeProvider)
@@ -60,20 +60,22 @@ final class LocaleSubscriber extends BaseLocaleSubscriber
      *
      * @return string
      */
-    private function getProperLocale(Request $request){
+    private function getProperLocale(Request $request)
+    {
         $currentLocale = $this->localeContext->getCurrentLocale();
-        if($this->isLocaleAvailable($currentLocale)){
+
+        if ($this->isLocaleAvailable($currentLocale)) {
             return $currentLocale;
         }
 
         $locale = $request->getLocale();
-        if($this->isLocaleAvailable($locale)){
+        if ($this->isLocaleAvailable($locale)) {
             return $locale;
         }
 
         $localesAvailables = $this->localeProvider->getAvailableLocales();
 
-        if(count($localesAvailables) > 0) {
+        if (count($localesAvailables) > 0) {
             return $localesAvailables[0];
         }
 
@@ -85,7 +87,8 @@ final class LocaleSubscriber extends BaseLocaleSubscriber
      *
      * @return bool
      */
-    private function isLocaleAvailable($locale){
+    private function isLocaleAvailable($locale)
+    {
         return $this->localeProvider->isLocaleAvailable($locale);
     }
 }
