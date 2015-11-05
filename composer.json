@@ -23,6 +23,7 @@
         "ext-exif":                             "*",
         "ext-fileinfo":                         "*",
         "ext-gd":                               "*",
+        "ext-intl":                             "*",
         "a2lix/translation-form-bundle":        "~2.0",
         "doctrine/collections":                 "~1.2",
         "doctrine/common":                      "~2.5",
