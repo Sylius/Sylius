@@ -119,7 +119,7 @@ class ExtensionsRequirements extends RequirementCollection
                 $status = extension_loaded('intl'),
                 $on,
                 $status ? $on : $off,
-                false,
+                true,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'intl'), 'requirements')
             ))
             ->add(new Requirement(
