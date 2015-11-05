@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\SearchBundle\Behat;
 
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Bundle\SearchBundle\Command\IndexCommand;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Process\Process;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -25,15 +27,13 @@ class SearchContext extends DefaultContext
      */
     public function iPopulateTheIndex()
     {
-        $command = $this->kernel->getRootDir() . "/console sylius:search:index --env=test";
-        $process = new Process($command);
-        $process->run();
+        $command = new IndexCommand();
+        $command->setContainer($this->kernel->getContainer());
 
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
+        $output = new BufferedOutput();
+        if ($command->run(new ArgvInput(['env' => 'test']), $output)) { //return code is not zero
+            throw new \RuntimeException($output->fetch());
         }
-
-        print $process->getOutput();
     }
 
     /**
