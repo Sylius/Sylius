@@ -37,7 +37,7 @@ class UserResetPasswordTypeSpec extends ObjectBehavior
 
     function it_builds_form(FormBuilderInterface $builder)
     {
-        $builder->add('newPassword', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('password', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

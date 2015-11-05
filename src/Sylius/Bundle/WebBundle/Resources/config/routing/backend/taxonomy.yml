@@ -10,6 +10,8 @@ sylius_backend_taxonomy_index:
             template: SyliusWebBundle:Backend/Taxonomy:index.html.twig
             sortable: true
             paginate: 50
+            sorting:
+                name: asc
 
 sylius_backend_taxonomy_create:
     path: /new

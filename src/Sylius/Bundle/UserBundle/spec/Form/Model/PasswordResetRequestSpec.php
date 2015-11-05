@@ -16,16 +16,16 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PasswordResetSpec extends ObjectBehavior
+class PasswordResetRequestSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\PasswordReset');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest');
     }
 
-    function it_has_new_password()
+    function it_has_email()
     {
-        $this->setPassword('testPassword');
-        $this->getPassword()->shouldReturn('testPassword');
+        $this->setEmail('test@example.com');
+        $this->getEmail()->shouldReturn('test@example.com');
     }
 }

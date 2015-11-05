@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-/*
+/**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CartBlamerListener
@@ -48,6 +48,10 @@ class CartBlamerListener
      */
     public function blame(UserEvent $userEvent)
     {
+        if (!$this->cartProvider->hasCart()) {
+            return;
+        }
+
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
@@ -66,6 +70,10 @@ class CartBlamerListener
      */
     public function interactiveBlame(InteractiveLoginEvent $interactiveLoginEvent)
     {
+        if (!$this->cartProvider->hasCart()) {
+            return;
+        }
+
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {

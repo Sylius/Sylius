@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Validator;
 
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,9 +60,11 @@ interface ProcessValidatorInterface
     /**
      * Check validation.
      *
+     * @param ProcessContextInterface $processContext
+     *
      * @return bool
      */
-    public function isValid();
+    public function isValid(ProcessContextInterface $processContext);
 
     /**
      * @param StepInterface $step

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
+use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\TokenProviderInterface;
@@ -81,12 +82,12 @@ class UserController extends ResourceController
             return $this->handleExpiredToken($token, $user);
         }
 
-        $changePassword = new ChangePassword();
+        $changePassword = new PasswordReset();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
         $form = $this->createResourceForm($formType, $changePassword);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleResetPassword($user, $changePassword->getNewPassword());
+            return $this->handleResetPassword($user, $changePassword->getPassword());
         }
 
         if ($this->config->isApiRequest()) {
@@ -104,17 +105,22 @@ class UserController extends ResourceController
 
     protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
-        $passwordReset = new PasswordReset();
+        $passwordReset = new PasswordResetRequest();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
         $form = $this->createResourceForm($formType, $passwordReset);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
-                return $this->handleResetPasswordRequest($generator, $user, $senderEvent);
+                $this->handleResetPasswordRequest($generator, $user, $senderEvent);
             }
 
-            $this->addFlash('error', 'sylius.user.email.not_exist');
+            if ($this->config->isApiRequest()) {
+                return $this->handleView($this->view($user, 204));
+            }
+            $this->addFlash('success', 'sylius.user.reset_password.requested');
+
+            return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
         }
 
         if ($this->config->isApiRequest()) {
@@ -180,16 +186,13 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->domainManager->update($user, 'sylius.user.password.request.success');
+        /** I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
+        $manager = $this->get('doctrine.orm.default_entity_manager');
+        $manager->persist($user);
+        $manager->flush();
 
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
-
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($user, 204));
-        }
-
-        return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
     }
 
     /**

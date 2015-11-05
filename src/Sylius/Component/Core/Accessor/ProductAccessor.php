@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Accessor;
+namespace Sylius\Component\Core\Accessor;
 
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\PropertyAccess\Exception;

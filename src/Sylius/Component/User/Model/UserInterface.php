@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
     /**
@@ -79,23 +79,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @param string $usernameCanonical
      */
     public function setUsernameCanonical($usernameCanonical);
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword();
-
-    /**
-     * @param string $password
-     */
-    public function setPlainPassword($password);
-
-    /**
-     * Sets the hashed password.
-     *
-     * @param string $password
-     */
-    public function setPassword($password);
 
     /**
      * @param boolean $enabled
