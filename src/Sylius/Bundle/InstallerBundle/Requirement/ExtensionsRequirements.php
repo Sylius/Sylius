@@ -122,6 +122,14 @@ class ExtensionsRequirements extends RequirementCollection
                 false,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'intl'), 'requirements')
             ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.fileinfo', array(), 'requirements'),
+                $status = extension_loaded('fileinfo'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'fileinfo'), 'requirements')
+            ))
         ;
 
         if (extension_loaded('intl')) {
