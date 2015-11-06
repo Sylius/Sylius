@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
@@ -24,9 +25,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PaymentChargesProcessorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
-    {
-        $this->beConstructedWith($adjustmentRepository, $delegatingFeeCalculator);
+    function let(
+        RepositoryInterface $adjustmentRepository,
+        DelegatingFeeCalculatorInterface $delegatingFeeCalculator,
+        OriginatorInterface $originator
+    ) {
+        $this->beConstructedWith($adjustmentRepository, $delegatingFeeCalculator, $originator);
     }
 
     function it_is_initializable()
@@ -42,28 +46,33 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
     function it_applies_payment_charges(
         $adjustmentRepository,
         $delegatingFeeCalculator,
+        $originator,
         AdjustmentInterface $adjustment,
         OrderInterface $order,
         PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod
     ) {
-        $order->removeAdjustments('payment')->shouldBeCalled();
-        $order->getPayments()->willReturn(array($payment))->shouldBeCalled();
+        $order->getPayments()->willReturn(array($payment));
+        $order->getAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT)->willReturn(array());
 
-        $order->calculateTotal()->shouldBeCalled();
+        $originator->getOrigin($adjustment)->willReturn(null);
 
-        $payment->getState()->willReturn('new')->shouldBeCalled();
+        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $payment->getMethod()->willReturn($paymentMethod);
         $paymentMethod->getName()->willReturn('testPaymentMethod');
 
         $delegatingFeeCalculator->calculate($payment)->willReturn(50);
 
-        $adjustmentRepository->createNew()->willReturn($adjustment)->shouldBeCalled();
+        $adjustmentRepository->createNew()->willReturn($adjustment);
         $adjustment->setLabel('payment')->shouldBeCalled();
         $adjustment->setAmount(50)->shouldBeCalled();
         $adjustment->setDescription('testPaymentMethod')->shouldBeCalled();
 
+        $originator->setOrigin($adjustment, $payment)->shouldBeCalled();
+
         $order->addAdjustment($adjustment)->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyPaymentCharges($order);
     }
