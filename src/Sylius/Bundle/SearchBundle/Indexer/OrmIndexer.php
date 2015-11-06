@@ -242,7 +242,10 @@ class OrmIndexer implements IndexerInterface
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
             $func = 'get' . ucfirst($field);
-            $content .= $element->$func() . self::SPACER;
+            
+            if (method_exists($element, $func)) {
+               $content .= $element->$func() . self::SPACER;
+            }
         }
 
         return $content;
