@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
 use Doctrine\ORM\EntityManager;
+use FOS\ElasticaBundle\Command\PopulateCommand;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Process\Process;
 
 /**
  * ElasticSearch indexer
@@ -45,14 +47,16 @@ class ElasticsearchIndexer implements IndexerInterface
      */
     public function populate(EntityManager $em = null)
     {
-        $process = new Process(sprintf("%s/console fos:elastica:populate --env=%s", $this->kernel->getRootDir(), $this->kernel->getEnvironment()));
-        $process->run();
+        $command = new PopulateCommand();
+        $command->setContainer($this->kernel->getContainer());
 
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
+        $output = new BufferedOutput();
+        $input = new ArgvInput(['env' => $this->kernel->getEnvironment()]);
+        if ($command->run($input, $output)) { //return code is not zero
+            throw new \RuntimeException($output->fetch());
         }
 
-        $this->output = $process->getOutput();
+        $this->output = $output->fetch();
 
         return $this;
     }
