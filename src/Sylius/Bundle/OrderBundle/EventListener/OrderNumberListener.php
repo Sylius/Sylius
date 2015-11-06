@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderNumberListener
 {
     /**
-     * Order number listener
+     * Order number listener.
      *
      * @var NumberListener
      */

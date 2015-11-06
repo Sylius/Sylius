@@ -68,7 +68,7 @@ interface RoleInterface extends TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPermission(PermissionInterface $permission);
 
@@ -88,7 +88,7 @@ interface RoleInterface extends TimestampableInterface
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -105,7 +105,7 @@ interface RoleInterface extends TimestampableInterface
     /**
      * @param RoleInterface $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(RoleInterface $role);
 

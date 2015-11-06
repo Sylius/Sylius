@@ -39,13 +39,13 @@ class VariantTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Variant',
-                'validation_groups' => array()
+                'validation_groups' => array(),
             ))
             ->shouldBeCalled();
 
         $resolver
             ->setDefaults(array(
-                'master' => false
+                'master' => false,
             ))
             ->shouldBeCalled();
 

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -38,7 +37,7 @@ class ZoneMemberCollectionTypeSpec extends ObjectBehavior
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'allow_add'    => true,
+            'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
         ))->shouldBeCalled();

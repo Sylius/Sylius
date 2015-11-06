@@ -100,5 +100,4 @@ class OrderPromotionListenerSpec extends ObjectBehavior
 
         $this->handleCouponPromotion($event);
     }
-
 }

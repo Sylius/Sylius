@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Request handling
+ * Request handling.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

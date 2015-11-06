@@ -22,12 +22,12 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION         = '0.16.0-dev';
-    const VERSION_ID      = '00160';
-    const MAJOR_VERSION   = '0';
-    const MINOR_VERSION   = '16';
+    const VERSION = '0.16.0-dev';
+    const VERSION_ID = '00160';
+    const MAJOR_VERSION = '0';
+    const MINOR_VERSION = '16';
     const RELEASE_VERSION = '0';
-    const EXTRA_VERSION   = 'DEV';
+    const EXTRA_VERSION = 'DEV';
 
     const ENV_DEV = 'dev';
     const ENV_PROD = 'prod';
@@ -162,7 +162,7 @@ abstract class Kernel extends BaseKernel
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isVagrantEnvironment()
     {

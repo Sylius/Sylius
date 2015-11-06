@@ -19,7 +19,7 @@ use Symfony\Component\Intl\Intl;
 class Locale implements LocaleInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -29,7 +29,7 @@ class Locale implements LocaleInterface
     protected $code;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled = true;
 
@@ -54,7 +54,7 @@ class Locale implements LocaleInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {

@@ -47,12 +47,12 @@ class CreditCard implements CreditCardInterface
     protected $securityCode;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $expiryMonth;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $expiryYear;
 

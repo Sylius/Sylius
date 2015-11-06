@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
@@ -20,7 +19,7 @@ class ProcessValidatorSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('message', 'step_name', function(){});
+        $this->beConstructedWith('message', 'step_name', function () {});
     }
 
     function it_is_initializable()
@@ -47,7 +46,7 @@ class ProcessValidatorSpec extends ObjectBehavior
 
     function its_validation_is_mutable()
     {
-        $closure = function(){};
+        $closure = function () {};
 
         $this->setValidation($closure)->shouldReturn($this);
         $this->getValidation()->shouldReturn($closure);
@@ -55,7 +54,7 @@ class ProcessValidatorSpec extends ObjectBehavior
 
     function it_calls_validation_closure(ProcessContextInterface $processContext)
     {
-        $this->setValidation(function() {
+        $this->setValidation(function () {
             return true;
         });
 

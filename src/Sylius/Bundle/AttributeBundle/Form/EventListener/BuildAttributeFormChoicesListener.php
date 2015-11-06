@@ -48,8 +48,8 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA    => 'buildChoices',
-            FormEvents::PRE_SUBMIT      => 'buildConfiguration',
+            FormEvents::PRE_SET_DATA => 'buildChoices',
+            FormEvents::PRE_SUBMIT => 'buildConfiguration',
         );
     }
 
@@ -72,10 +72,10 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
         if (!$event->getForm()->has('configuration')) {
             $event->getForm()->add(
                 $this->factory->createNamed('configuration', 'collection', null, array(
-                    'allow_add'         => true,
-                    'allow_delete'      => true,
-                    'by_reference'      => false,
-                    'auto_initialize'   => false,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'auto_initialize' => false,
                 ))
             );
         }
@@ -104,14 +104,14 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
 
         $event->getForm()->add(
             $this->factory->createNamed('choices', 'collection', null, array(
-                'label'             => 'sylius.form.attribute.choices',
-                'type'              => 'text',
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
-                'mapped'            => false,
-                'data'              => $data,
+                'label' => 'sylius.form.attribute.choices',
+                'type' => 'text',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
+                'mapped' => false,
+                'data' => $data,
             )
         ));
     }

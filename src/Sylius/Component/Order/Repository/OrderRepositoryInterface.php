@@ -23,7 +23,7 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
 {
     /**
-     * @param integer $amount
+     * @param int $amount
      *
      * @return OrderInterface[]
      */

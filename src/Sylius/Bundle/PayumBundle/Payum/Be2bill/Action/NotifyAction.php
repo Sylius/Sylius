@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
@@ -60,12 +60,12 @@ class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareIn
         parent::__construct($factory);
 
         $this->paymentRepository = $paymentRepository;
-        $this->objectManager     = $objectManager;
-        $this->identifier        = $identifier;
+        $this->objectManager = $objectManager;
+        $this->identifier = $identifier;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setApi($api)
     {
@@ -77,7 +77,7 @@ class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareIn
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @param $request Notify
      */
@@ -125,7 +125,7 @@ class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareIn
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports($request)
     {

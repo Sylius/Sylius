@@ -40,10 +40,10 @@ class EmailSendEvent extends Event
     protected $data;
 
     /**
-     * @param mixed $message
-     * @param array $recipients
+     * @param mixed          $message
+     * @param array          $recipients
      * @param EmailInterface $email
-     * @param array $data
+     * @param array          $data
      */
     public function __construct(
         $message,

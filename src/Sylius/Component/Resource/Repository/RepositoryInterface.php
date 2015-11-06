@@ -21,14 +21,14 @@ use Doctrine\Common\Persistence\ObjectRepository;
 interface RepositoryInterface extends ObjectRepository
 {
     /**
-     * Create a new resource
+     * Create a new resource.
      *
      * @return mixed
      */
     public function createNew();
 
     /**
-     * Get paginated collection
+     * Get paginated collection.
      *
      * @param array $criteria
      * @param array $orderBy

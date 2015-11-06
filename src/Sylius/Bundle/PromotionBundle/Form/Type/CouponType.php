@@ -28,14 +28,14 @@ class CouponType extends AbstractResourceType
     {
         $builder
             ->add('code', 'text', array(
-                'label' => 'sylius.form.coupon.code'
+                'label' => 'sylius.form.coupon.code',
             ))
             ->add('usageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon.usage_limit'
+                'label' => 'sylius.form.coupon.usage_limit',
             ))
             ->add('expiresAt', 'date', array(
                 'label' => 'sylius.form.coupon.expires_at',
-                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
             ))
         ;
     }

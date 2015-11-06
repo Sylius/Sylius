@@ -154,7 +154,6 @@ class RbacInitializer
 
             $this->roleManager->persist($role);
 
-
             $rolesByCode[$code] = $role;
         }
 

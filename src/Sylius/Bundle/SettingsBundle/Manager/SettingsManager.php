@@ -49,7 +49,7 @@ class SettingsManager implements SettingsManagerInterface
     protected $cache;
 
     /**
-     * Runtime cache for resolved parameters
+     * Runtime cache for resolved parameters.
      *
      * @var Settings[]
      */
@@ -118,6 +118,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)

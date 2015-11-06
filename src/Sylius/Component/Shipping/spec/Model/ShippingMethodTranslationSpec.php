@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodTranslation extends ObjectBehavior
+class ShippingMethodTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

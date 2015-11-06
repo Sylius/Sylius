@@ -28,13 +28,13 @@ class VolumePriceConfigurationType extends AbstractType
     {
         $builder
             ->add('min', 'number', array(
-                'label' => 'sylius.form.pricing.volume_based.min'
+                'label' => 'sylius.form.pricing.volume_based.min',
             ))
             ->add('max', 'number', array(
-                'label' => 'sylius.form.pricing.volume_based.max'
+                'label' => 'sylius.form.pricing.volume_based.max',
             ))
             ->add('price', 'sylius_money', array(
-                'label' => 'sylius.form.pricing.volume_based.price'
+                'label' => 'sylius.form.pricing.volume_based.price',
             ))
         ;
     }

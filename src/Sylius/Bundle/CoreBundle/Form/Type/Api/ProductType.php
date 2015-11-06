@@ -29,24 +29,24 @@ class ProductType extends BaseProductType
         $builder
             ->add('taxons', 'entity', array(
                 'multiple' => true,
-                'class' => 'Sylius\Component\Core\Model\Taxon'
+                'class' => 'Sylius\Component\Core\Model\Taxon',
             ))
             ->add('price', 'sylius_money', array(
-                'property_path' => 'masterVariant.price'
+                'property_path' => 'masterVariant.price',
             ))
             ->add('onHand', 'integer', array(
-                'property_path' => 'masterVariant.onHand'
+                'property_path' => 'masterVariant.onHand',
             ))
             ->add('sku', 'text', array(
-                'property_path' => 'masterVariant.sku'
+                'property_path' => 'masterVariant.sku',
             ))
             ->add('images', 'collection', array(
-                'type'          => 'sylius_image',
-                'allow_add'     => true,
-                'allow_delete'  => true,
-                'by_reference'  => false,
-                'label'         => 'sylius.form.variant.images',
-                'property_path' => 'masterVariant.images'
+                'type' => 'sylius_image',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'sylius.form.variant.images',
+                'property_path' => 'masterVariant.images',
             ))
             ->remove('masterVariant')
             ->remove('variantSelectionMethod')

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PricingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CalculatorChoiceTypeSpec extends ObjectBehavior
@@ -35,7 +34,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'choices' => array('standard' => 'Standard')
+            'choices' => array('standard' => 'Standard'),
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

@@ -19,7 +19,7 @@ namespace Sylius\Component\Contact\Model;
 class Request implements RequestInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -59,7 +59,7 @@ class Request implements RequestInterface
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

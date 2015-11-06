@@ -88,7 +88,7 @@ class RuleTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Rule',
+                'data_class' => 'Rule',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

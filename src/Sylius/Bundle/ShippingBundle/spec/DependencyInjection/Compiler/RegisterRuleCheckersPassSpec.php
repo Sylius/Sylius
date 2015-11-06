@@ -38,8 +38,8 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
                 array(
                     'type' => 'rule_checker_name',
                     'label' => 'rule_checker_label',
-                )
-            )
+                ),
+            ),
         ));
 
         $ruleChecker->addMethodCall(

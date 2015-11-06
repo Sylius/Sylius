@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ClientManagerSpec extends ObjectBehavior
 {
@@ -33,7 +32,7 @@ class ClientManagerSpec extends ObjectBehavior
 
     function it_finds_client_by_public_id(ClientInterface $client, $repository)
     {
-        $repository->findOneBy(array('randomId'  => 'random_string'))->shouldBeCalled()->willReturn($client);
+        $repository->findOneBy(array('randomId' => 'random_string'))->shouldBeCalled()->willReturn($client);
 
         $this->findClientByPublicId('random_string')->shouldReturn($client);
     }

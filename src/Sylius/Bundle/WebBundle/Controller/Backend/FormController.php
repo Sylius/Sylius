@@ -31,7 +31,7 @@ class FormController extends Controller
     public function showAction($type, $template)
     {
         return $this->render($template, array(
-            'form' => $this->createForm($type)->createView()
+            'form' => $this->createForm($type)->createView(),
         ));
     }
 
@@ -46,7 +46,7 @@ class FormController extends Controller
     public function filterAction($type, $template)
     {
         return $this->render($template, array(
-            'form' => $this->get('form.factory')->createNamed('criteria', $type)->createView()
+            'form' => $this->get('form.factory')->createNamed('criteria', $type)->createView(),
         ));
     }
 }

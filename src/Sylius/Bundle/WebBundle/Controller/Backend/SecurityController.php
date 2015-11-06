@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class SecurityController extends BaseSecurityController
 {
     /**
-     * Target action for _switch_user=_exit, redirects admin back to impersonated user
+     * Target action for _switch_user=_exit, redirects admin back to impersonated user.
      *
      * @param string $username
      *

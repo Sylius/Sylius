@@ -22,7 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusMailerExtension extends AbstractResourceExtension
 {
-
     /**
      * {@inheritdoc}
      */

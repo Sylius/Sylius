@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Taxation\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;

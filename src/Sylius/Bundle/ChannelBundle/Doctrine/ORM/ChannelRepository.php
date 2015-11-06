@@ -22,7 +22,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findMatchingHostname($hostname)
     {
@@ -37,7 +37,7 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findDefault()
     {

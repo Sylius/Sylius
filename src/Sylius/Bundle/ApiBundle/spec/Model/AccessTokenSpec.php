@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class AccessTokenSpec extends ObjectBehavior
 {

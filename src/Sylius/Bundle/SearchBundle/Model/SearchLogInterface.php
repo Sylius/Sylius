@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\SearchBundle\Model;
 
 /**
- * SearchLog entity
+ * SearchLog entity.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 interface SearchLogInterface
 {
     /**
-     * Set searchString
+     * Set searchString.
      *
      * @param string $searchString
      *
@@ -42,14 +42,14 @@ interface SearchLogInterface
     public function setRemoteAddress($remoteAddress);
 
     /**
-     * Get remoteAddress
+     * Get remoteAddress.
      *
      * @return string
      */
     public function getRemoteAddress();
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -58,7 +58,7 @@ interface SearchLogInterface
     public function setCreatedAt($createdAt);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */

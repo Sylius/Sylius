@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Model;
 
 /**
- * SearchIndex entity
+ * SearchIndex entity.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

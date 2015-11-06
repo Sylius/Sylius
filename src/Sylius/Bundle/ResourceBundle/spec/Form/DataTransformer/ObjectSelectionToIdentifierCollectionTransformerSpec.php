@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 
 // Since the root namespace "spec" is not in our autoload
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
 class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
 {

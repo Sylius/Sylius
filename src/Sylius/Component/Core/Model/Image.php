@@ -14,35 +14,35 @@ namespace Sylius\Component\Core\Model;
 class Image implements ImageInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * File
+     * File.
      *
      * @var \SplFileInfo
      */
     protected $file;
 
     /**
-     * Path to file
+     * Path to file.
      *
      * @var string
      */
     protected $path;
 
     /**
-     * Creation date
+     * Creation date.
      *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
+     * Update date.
      *
      * @var \DateTime
      */
@@ -54,9 +54,9 @@ class Image implements ImageInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

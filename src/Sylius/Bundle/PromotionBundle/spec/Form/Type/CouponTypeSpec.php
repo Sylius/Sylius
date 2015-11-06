@@ -60,7 +60,7 @@ class CouponTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Coupon',
+                'data_class' => 'Coupon',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

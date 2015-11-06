@@ -48,7 +48,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind',
+            FormEvents::PRE_SUBMIT => 'preBind',
         );
     }
 

@@ -186,7 +186,7 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        /** I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
+        /* I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
         $manager = $this->get('doctrine.orm.default_entity_manager');
         $manager->persist($user);
         $manager->flush();

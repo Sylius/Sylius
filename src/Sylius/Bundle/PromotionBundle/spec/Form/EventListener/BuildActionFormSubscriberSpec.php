@@ -87,8 +87,7 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
         Form $field
     ) {
         $event->getForm()->willReturn($form);
-        $event->getData()->willReturn(array('type' =>ActionInterface::TYPE_FIXED_DISCOUNT));
-
+        $event->getData()->willReturn(array('type' => ActionInterface::TYPE_FIXED_DISCOUNT));
 
         $factory->createNamed(
             'configuration',

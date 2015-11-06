@@ -19,12 +19,12 @@ namespace Sylius\Component\Report\Renderer;
 final class DefaultRenderers
 {
     /**
-     * Table renderer
+     * Table renderer.
      */
-    const TABLE = "table";
+    const TABLE = 'table';
 
     /**
-     * Chart renderer
+     * Chart renderer.
      */
-    const CHART = "chart";
+    const CHART = 'chart';
 }

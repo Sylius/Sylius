@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Rbac\Resolver;
+
 use Sylius\Component\Rbac\Model\IdentityInterface;
 
 /**

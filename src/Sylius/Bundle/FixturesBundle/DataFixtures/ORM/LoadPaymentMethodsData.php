@@ -48,11 +48,11 @@ class LoadPaymentMethodsData extends DataFixture
     /**
      * Create payment method.
      *
-     * @param string  $name
-     * @param string  $gateway
-     * @param string  $feeCalculator
-     * @param array   $feeCalculatorConfiguration
-     * @param boolean $enabled
+     * @param string $name
+     * @param string $gateway
+     * @param string $feeCalculator
+     * @param array  $feeCalculatorConfiguration
+     * @param bool   $enabled
      *
      * @return PaymentMethodInterface
      */

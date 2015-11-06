@@ -28,8 +28,8 @@ class RenderedEmail
 
     public function __construct($subject, $body)
     {
-        $this->subject  = $subject;
-        $this->body     = $body;
+        $this->subject = $subject;
+        $this->body = $body;
     }
 
     /**
@@ -72,4 +72,3 @@ class RenderedEmail
         return $this;
     }
 }
-

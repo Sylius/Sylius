@@ -49,7 +49,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
-            'message'  => 'Variant with given presentation already exists'
+            'message' => 'Variant with given presentation already exists',
         ));
 
         $variant->getPresentation()->willReturn('IPHONE5WHITE');
@@ -67,7 +67,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
-            'message'  => 'Variant with given presentation already exists'
+            'message' => 'Variant with given presentation already exists',
         ));
 
         $variant->getPresentation()->willReturn('111AAA');
@@ -85,7 +85,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
-            'message'  => 'Variant with given presentation already exists'
+            'message' => 'Variant with given presentation already exists',
         ));
 
         $variant->getPresentation()->willReturn('111AAA');

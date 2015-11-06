@@ -28,19 +28,19 @@ class RequestType extends AbstractResourceType
     {
         $builder
             ->add('firstName', 'text', array(
-                'label' => 'sylius.form.contact_request.first_name'
+                'label' => 'sylius.form.contact_request.first_name',
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius.form.contact_request.last_name'
+                'label' => 'sylius.form.contact_request.last_name',
             ))
             ->add('email', 'email', array(
-                'label' => 'sylius.form.contact_request.email'
+                'label' => 'sylius.form.contact_request.email',
             ))
             ->add('message', 'textarea', array(
-                'label' => 'sylius.form.contact_request.message'
+                'label' => 'sylius.form.contact_request.message',
             ))
             ->add('topic', 'sylius_contact_topic_choice', array(
-                'label'    => 'sylius.form.contact_request.topic',
+                'label' => 'sylius.form.contact_request.topic',
                 'required' => false,
             ))
         ;

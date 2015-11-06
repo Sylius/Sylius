@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ShipmentFactory implements ShipmentFactoryInterface
 {
     /**
-    * Shipment repository.
+     * Shipment repository.
      *
      * @var RepositoryInterface
      */

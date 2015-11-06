@@ -47,7 +47,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
-            'message'  => 'Product with given name already exists.'
+            'message' => 'Product with given name already exists.',
         ));
 
         $product->getName()->willReturn('iPhone');
@@ -65,7 +65,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
-            'message'  => 'Product with given name already exists.'
+            'message' => 'Product with given name already exists.',
         ));
 
         $product->getName()->willReturn('iPhone');
@@ -83,7 +83,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
     ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
-            'message'  => 'Product with given name already exists'
+            'message' => 'Product with given name already exists',
         ));
 
         $product->getName()->willReturn('iPhone');

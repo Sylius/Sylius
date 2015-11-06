@@ -33,7 +33,7 @@ class PermissionType extends AbstractResourceType
                 'label' => 'sylius.form.permission.description',
             ))
             ->add('parent', 'sylius_permission_choice', array(
-                'label'    => 'sylius.form.permission.parent',
+                'label' => 'sylius.form.permission.parent',
             ))
         ;
 
@@ -47,7 +47,7 @@ class PermissionType extends AbstractResourceType
                 ));
             } else {
                 $form->add('code', 'text', array(
-                    'label'    => 'sylius.form.permission.code',
+                    'label' => 'sylius.form.permission.code',
                     'disabled' => true,
 
                 ));

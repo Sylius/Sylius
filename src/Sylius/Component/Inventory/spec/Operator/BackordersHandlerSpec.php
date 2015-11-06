@@ -31,7 +31,7 @@ class BackordersHandlerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
-   }
+    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
     {
@@ -89,11 +89,11 @@ class BackordersHandlerSpec extends ObjectBehavior
         $repository
             ->findBy(
                 array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
                 ),
                 array(
-                    'createdAt' => 'ASC'
+                    'createdAt' => 'ASC',
                 )
             )
             ->willReturn(array($inventoryUnit1, $inventoryUnit2))
@@ -119,11 +119,11 @@ class BackordersHandlerSpec extends ObjectBehavior
         $repository
             ->findBy(
                 array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
                 ),
                 array(
-                    'createdAt' => 'ASC'
+                    'createdAt' => 'ASC',
                 )
             )
             ->willReturn(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))
@@ -147,11 +147,11 @@ class BackordersHandlerSpec extends ObjectBehavior
         $repository
             ->findBy(
                 array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
                 ),
                 array(
-                    'createdAt' => 'ASC'
+                    'createdAt' => 'ASC',
                 )
             )
             ->willReturn(array($inventoryUnit1, $inventoryUnit2))

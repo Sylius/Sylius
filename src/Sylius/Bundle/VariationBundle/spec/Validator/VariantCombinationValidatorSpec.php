@@ -39,7 +39,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
     function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)
     {
         $constraint = new VariantCombination(array(
-            'message' => 'Variant with given presentation already exists'
+            'message' => 'Variant with given presentation already exists',
         ));
 
         $variant->isMaster()->willReturn(true);
@@ -52,7 +52,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         VariableInterface $variable
     ) {
         $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
+            'message' => 'Variant with given options already exists',
         ));
 
         $variant->isMaster()->willReturn(false);
@@ -69,7 +69,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         VariableInterface $variable
     ) {
         $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
+            'message' => 'Variant with given options already exists',
         ));
 
         $variant->isMaster()->willReturn(false);
@@ -89,7 +89,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $context
     ) {
         $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
+            'message' => 'Variant with given options already exists',
         ));
 
         $variant->isMaster()->willReturn(false);

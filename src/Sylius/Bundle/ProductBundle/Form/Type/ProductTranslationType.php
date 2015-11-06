@@ -26,18 +26,18 @@ class ProductTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.product.name'
+                'label' => 'sylius.form.product.name',
             ))
             ->add('description', 'textarea', array(
-                'label' => 'sylius.form.product.description'
+                'label' => 'sylius.form.product.description',
             ))
             ->add('metaKeywords', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_keywords'
+                'label' => 'sylius.form.product.meta_keywords',
             ))
             ->add('metaDescription', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_description'
+                'label' => 'sylius.form.product.meta_description',
             ))
         ;
     }

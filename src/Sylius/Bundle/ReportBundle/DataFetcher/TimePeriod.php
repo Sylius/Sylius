@@ -21,9 +21,9 @@ use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
  */
 abstract class TimePeriod implements DataFetcherInterface
 {
-    const PERIOD_DAY    = 'day';
-    const PERIOD_MONTH  = 'month';
-    const PERIOD_YEAR   = 'year';
+    const PERIOD_DAY = 'day';
+    const PERIOD_MONTH = 'month';
+    const PERIOD_YEAR = 'year';
 
     /**
      * @return array
@@ -31,9 +31,9 @@ abstract class TimePeriod implements DataFetcherInterface
     public static function getPeriodChoices()
     {
         return array(
-            self::PERIOD_DAY    => 'Daily',
-            self::PERIOD_MONTH  => 'Monthly',
-            self::PERIOD_YEAR   => 'Yearly',
+            self::PERIOD_DAY => 'Daily',
+            self::PERIOD_MONTH => 'Monthly',
+            self::PERIOD_YEAR => 'Yearly',
         );
     }
 
@@ -130,7 +130,7 @@ abstract class TimePeriod implements DataFetcherInterface
         $numberOfPeriods = $configuration['start']->diff($configuration['end']);
         $formattedNumberOfPeriods = $numberOfPeriods->format($configuration['periodFormat']);
 
-        for ($i = 0; $i <= $formattedNumberOfPeriods; $i++) {
+        for ($i = 0; $i <= $formattedNumberOfPeriods; ++$i) {
             $fetched[$date->format($configuration['presentationFormat'])] = 0;
             $date = $date->add($dateInterval);
         }

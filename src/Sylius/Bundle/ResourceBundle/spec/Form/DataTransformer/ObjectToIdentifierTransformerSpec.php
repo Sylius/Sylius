@@ -7,7 +7,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 // Since the root namespace "spec" is not in our autoload
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
 class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {

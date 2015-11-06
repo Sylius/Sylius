@@ -45,7 +45,6 @@ class ShipmentFactorySpec extends ObjectBehavior
         ArrayCollection $shipments,
         InventoryUnitInterface $inventoryUnit
     ) {
-
         $shipmentRepository
             ->createNew()
             ->willReturn($shipment)
@@ -103,7 +102,7 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->getInventoryUnits()
             ->willReturn(array(
                 $inventoryUnit,
-                $inventoryUnitWithoutShipment
+                $inventoryUnitWithoutShipment,
             ))
         ;
 

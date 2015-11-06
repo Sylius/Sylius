@@ -18,7 +18,7 @@ class GetStatusSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new \stdClass);
+        $this->beConstructedWith(new \stdClass());
     }
 
     function it_is_initializable()

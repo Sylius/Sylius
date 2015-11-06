@@ -70,7 +70,7 @@ class CreditCardTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'CreditCard',
+                'data_class' => 'CreditCard',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

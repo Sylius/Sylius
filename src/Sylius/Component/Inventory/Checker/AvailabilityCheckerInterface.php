@@ -35,7 +35,7 @@ interface AvailabilityCheckerInterface
      * Takes required quantity into account.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      *
      * @return Boolean
      */

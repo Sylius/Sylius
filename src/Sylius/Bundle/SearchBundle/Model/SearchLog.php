@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Model;
 
 /**
- * SearchLog entity
+ * SearchLog entity.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

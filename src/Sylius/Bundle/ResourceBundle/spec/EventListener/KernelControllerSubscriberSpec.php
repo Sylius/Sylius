@@ -36,15 +36,14 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         FilterControllerEvent $event,
         ResourceController $resourceController,
         Configuration $configuration
-    )
-    {
+    ) {
         $resourceController->getConfiguration()->willReturn($configuration);
 
         $event->getController()->willReturn(array($resourceController));
         $event->getRequest()->willReturn($request);
 
         $request->attributes = $parameterBag;
-        $request->headers    = $headerBag;
+        $request->headers = $headerBag;
 
         $this->beConstructedWith(
             $parametersParser,
@@ -73,7 +72,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     function it_subscribes_events()
     {
         $this::getSubscribedEvents(array(
-            'kernel.controller' => array('onKernelController', 0)
+            'kernel.controller' => array('onKernelController', 0),
         ));
     }
 
@@ -127,7 +126,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
             'filterable' => true,
             'sorting' => '$sorting',
             'sortable' => true,
-            'criteria' => '$c'
+            'criteria' => '$c',
         ));
 
         $request->get('criteria')->willReturn(array('product' => 10));
@@ -169,7 +168,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
             'filterable' => true,
             'sorting' => '$sorting',
             'sortable' => true,
-            'criteria' => '$c'
+            'criteria' => '$c',
         ));
 
         $request->get('criteria')->willReturn(array('product' => 10));

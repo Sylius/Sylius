@@ -80,7 +80,7 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $deletedAt;
 
     /**
-     * Initialize Customer
+     * Initialize Customer.
      */
     public function __construct()
     {

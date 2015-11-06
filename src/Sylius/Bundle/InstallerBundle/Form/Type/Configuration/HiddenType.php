@@ -24,13 +24,13 @@ class HiddenType extends AbstractType
                 'data' => 'file_system',
                 'constraints' => array(
                     new Assert\NotBlank(),
-                )
+                ),
             ))
             ->add('sylius_secret', 'hidden', array(
                 'data' => uniqid(),
                 'constraints' => array(
                     new Assert\NotBlank(),
-                )
+                ),
             ))
         ;
     }

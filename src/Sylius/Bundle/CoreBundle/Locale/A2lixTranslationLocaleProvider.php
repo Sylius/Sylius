@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\CoreBundle\Locale;
 
 use A2lix\TranslationFormBundle\Locale\LocaleProviderInterface as A2lixLocaleProviderInterface;
@@ -23,7 +32,7 @@ class A2lixTranslationLocaleProvider implements A2lixLocaleProviderInterface
 
     /**
      * @param SyliusLocaleProviderInterface $syliusLocaleProvider
-     * @param SyliusLocaleContextInterface $syliusLocaleContext
+     * @param SyliusLocaleContextInterface  $syliusLocaleContext
      */
     public function __construct(
         SyliusLocaleProviderInterface $syliusLocaleProvider,
@@ -32,7 +41,7 @@ class A2lixTranslationLocaleProvider implements A2lixLocaleProviderInterface
         $this->syliusLocaleProvider = $syliusLocaleProvider;
         $this->syliusLocaleContext = $syliusLocaleContext;
     }
-    
+
     /**
      * {@inheritdoc}
      */

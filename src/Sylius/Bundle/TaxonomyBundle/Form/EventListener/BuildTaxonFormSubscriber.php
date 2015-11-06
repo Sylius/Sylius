@@ -48,7 +48,7 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit',
+            FormEvents::POST_SUBMIT => 'postSubmit',
         );
     }
 
@@ -66,11 +66,11 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
         }
 
         $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
-            'taxonomy'        => $taxon->getTaxonomy(),
-            'filter'          => $this->getFilterTaxonOption($taxon),
-            'required'        => false,
-            'label'           => 'sylius.form.taxon.parent',
-            'empty_value'     => '---',
+            'taxonomy' => $taxon->getTaxonomy(),
+            'filter' => $this->getFilterTaxonOption($taxon),
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'empty_value' => '---',
             'auto_initialize' => false,
         )));
     }

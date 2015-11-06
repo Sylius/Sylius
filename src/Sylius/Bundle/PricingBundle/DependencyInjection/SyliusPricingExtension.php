@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Pricing extension
+ * Pricing extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -48,7 +48,7 @@ class SyliusPricingExtension extends Extension
                 ->setArguments(array(
                     $formType,
                     new Reference('sylius.registry.price_calculator'),
-                    new Reference('sylius.form.subscriber.priceable')
+                    new Reference('sylius.form.subscriber.priceable'),
                 ))
                 ->addTag('form.type_extension', array('alias' => $formType))
             ;
@@ -56,7 +56,7 @@ class SyliusPricingExtension extends Extension
             $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);
         }
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('templating.xml');
         $loader->load('twig.xml');

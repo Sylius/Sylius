@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace spec\Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
@@ -37,9 +36,9 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
         $container->findTaggedServiceIds('sylius.tax_calculator')->shouldBeCalled()->willReturn(array(
             'calculator_id' => array(
                 array(
-                    'calculator' => 'calculator_name'
-                )
-            )
+                    'calculator' => 'calculator_name',
+                ),
+            ),
         ));
 
         $calculator->addMethodCall(

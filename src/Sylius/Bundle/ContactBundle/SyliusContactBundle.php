@@ -38,8 +38,8 @@ class SyliusContactBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Contact\Model\RequestInterface'          => 'sylius.model.contact_request.class',
-            'Sylius\Component\Contact\Model\TopicInterface'            => 'sylius.model.contact_topic.class',
+            'Sylius\Component\Contact\Model\RequestInterface' => 'sylius.model.contact_request.class',
+            'Sylius\Component\Contact\Model\TopicInterface' => 'sylius.model.contact_topic.class',
             'Sylius\Component\Contact\Model\TopicTranslationInterface' => 'sylius.model.contact_topic_translation.class',
         );
     }

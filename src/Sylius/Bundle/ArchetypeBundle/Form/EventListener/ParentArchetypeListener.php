@@ -58,7 +58,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
         $parentOptions = array(
             'required' => false,
             'label' => 'sylius.form.archetype.parent',
-            'property' => 'name'
+            'property' => 'name',
         );
 
         if (null != $currentArchetype->getId()) {
@@ -69,7 +69,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
                         ->where('o.id != :id')
                         ->setParameter('id', $currentArchetype->getId())
                         ;
-                }
+                },
             );
         }
 

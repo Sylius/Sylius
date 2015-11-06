@@ -55,7 +55,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'ShippingCategory',
+                'data_class' => 'ShippingCategory',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

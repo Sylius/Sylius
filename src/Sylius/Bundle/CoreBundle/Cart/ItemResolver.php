@@ -98,8 +98,7 @@ class ItemResolver implements ItemResolverInterface
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         DelegatingCalculatorInterface  $priceCalculator,
         ChannelContextInterface        $channelContext
-    )
-    {
+    ) {
         $this->cartProvider = $cartProvider;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
@@ -171,7 +170,7 @@ class ItemResolver implements ItemResolverInterface
      *
      * @param mixed $request
      *
-     * @return string|integer
+     * @return string|int
      *
      * @throws ItemResolvingException
      */

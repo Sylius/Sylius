@@ -49,7 +49,7 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(array(
             'data_class' => null,
-            'validation_groups' => array('sylius')
+            'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

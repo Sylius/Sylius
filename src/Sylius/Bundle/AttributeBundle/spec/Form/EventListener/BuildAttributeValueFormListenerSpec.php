@@ -81,9 +81,9 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $productAttribute->getValue()->willReturn(array());
         $productAttribute->getConfiguration()->willReturn(array(
             'choices' => array(
-                'red'  => 'Red',
-                'blue' => 'Blue'
-            )
+                'red' => 'Red',
+                'blue' => 'Blue',
+            ),
         ));
         $productAttribute->getName()->willReturn('My name');
 

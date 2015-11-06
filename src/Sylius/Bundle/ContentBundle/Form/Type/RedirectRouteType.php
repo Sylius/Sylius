@@ -28,21 +28,20 @@ class RedirectRouteType extends AbstractResourceType
     {
         $builder
             ->add('id', 'text', array(
-                'label' => 'sylius.form.redirect_route.id'
+                'label' => 'sylius.form.redirect_route.id',
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.redirect_route.name'
+                'label' => 'sylius.form.redirect_route.name',
             ))
             ->add('routeName', 'text', array(
-                'label'    => 'sylius.form.redirect_route.route_name',
+                'label' => 'sylius.form.redirect_route.route_name',
                 'required' => false,
             ))
             ->add('uri', 'url', array(
-                'label'    => 'sylius.form.redirect_route.uri',
+                'label' => 'sylius.form.redirect_route.uri',
                 'required' => false,
             ))
         ;
-
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process\Step;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ActionResultSpec extends ObjectBehavior
 {

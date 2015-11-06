@@ -39,6 +39,6 @@ class RecursivePermissionIterator extends ArrayIterator implements RecursiveIter
 
     public function getChildren()
     {
-        return new RecursivePermissionIterator($this->current()->getChildren());
+        return new self($this->current()->getChildren());
     }
 }

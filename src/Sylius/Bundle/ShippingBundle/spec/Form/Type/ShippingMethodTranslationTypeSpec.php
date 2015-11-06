@@ -21,7 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
-    function let() {
+    function let()
+    {
         $this->beConstructedWith('ShippingMethodTranslation', array('sylius'));
     }
 
@@ -45,7 +46,7 @@ class ShippingMethodTranslationTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'ShippingMethodTranslation',
+                'data_class' => 'ShippingMethodTranslation',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

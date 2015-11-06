@@ -132,6 +132,7 @@ class Configuration implements ConfigurationInterface
      *
      * @param $name
      * @param $defaultTemplate
+     *
      * @return NodeDefinition
      */
     private function addCheckoutStepNode($name, $defaultTemplate)

@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SearchStringQuerySpec extends ObjectBehavior
 {
-
     function let()
     {
         $request = new Request();
@@ -54,5 +53,4 @@ class SearchStringQuerySpec extends ObjectBehavior
     {
         $this->isDropdownFilterEnabled()->shouldReturn(true);
     }
-
-} 
+}

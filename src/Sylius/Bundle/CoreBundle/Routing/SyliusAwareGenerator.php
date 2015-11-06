@@ -17,7 +17,7 @@ use Symfony\Cmf\Component\Routing\ContentAwareGenerator as BaseContentAwareGener
 class SyliusAwareGenerator extends BaseContentAwareGenerator
 {
     /**
-     * Route configuration for the object classes to search in
+     * Route configuration for the object classes to search in.
      *
      * @var array
      */
@@ -32,7 +32,7 @@ class SyliusAwareGenerator extends BaseContentAwareGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function generate($name, $parameters = array(), $absolute = false)
     {
@@ -44,7 +44,7 @@ class SyliusAwareGenerator extends BaseContentAwareGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports($name)
     {

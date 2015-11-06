@@ -31,8 +31,7 @@ class SettingsManagerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->beConstructedWith($registry, $manager, $repository, $cache, $validator, $eventDispatcher);
     }
 

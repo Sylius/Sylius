@@ -21,8 +21,6 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 
-;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

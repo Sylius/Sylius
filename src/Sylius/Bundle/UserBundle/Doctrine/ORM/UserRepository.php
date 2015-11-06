@@ -71,7 +71,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * Get the user data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */

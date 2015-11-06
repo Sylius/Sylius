@@ -34,9 +34,9 @@ class PermissionsResolver implements PermissionsResolverInterface
         );
 
         foreach ($iterator as $permission) {
-           if (!$permissions->contains($permission))  {
-               $permissions->add($permission);
-           }
+            if (!$permissions->contains($permission)) {
+                $permissions->add($permission);
+            }
         }
 
         return $permissions;

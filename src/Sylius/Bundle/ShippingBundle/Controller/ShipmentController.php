@@ -41,7 +41,7 @@ class ShipmentController extends ResourceController
             ->setTemplate($this->config->getTemplate('show.html'))
             ->setTemplateVar($this->config->getResourceName())
             ->setData(array(
-                'shipment'               => $shipment,
+                'shipment' => $shipment,
                 'shipment_tracking_form' => $form->createView(),
             ))
         ;

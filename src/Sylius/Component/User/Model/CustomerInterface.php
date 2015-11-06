@@ -7,8 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -31,7 +29,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getId();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasUser();
 
@@ -41,7 +39,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getEmail();
 
     /**
-     * @param  string $email
+     * @param string $email
      */
     public function setEmail($email);
 
@@ -53,7 +51,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getEmailCanonical();
 
     /**
-     * @param  string $emailCanonical
+     * @param string $emailCanonical
      */
     public function setEmailCanonical($emailCanonical);
 
@@ -70,7 +68,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getFirstName();
 
     /**
-     * @param  string $firstName
+     * @param string $firstName
      */
     public function setFirstName($firstName);
 
@@ -80,7 +78,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getLastName();
 
     /**
-     * @param  string $lastName
+     * @param string $lastName
      */
     public function setLastName($lastName);
 
@@ -90,7 +88,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getBirthday();
 
     /**
-     * @param  \DateTime $birthday
+     * @param \DateTime $birthday
      */
     public function setBirthday(\DateTime $birthday = null);
 
@@ -102,7 +100,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     /**
      * You should use interface constants for that.
      *
-     * @param  string $gender
+     * @param string $gender
      */
     public function setGender($gender);
 

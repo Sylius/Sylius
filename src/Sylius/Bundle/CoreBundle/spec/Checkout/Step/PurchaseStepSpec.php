@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

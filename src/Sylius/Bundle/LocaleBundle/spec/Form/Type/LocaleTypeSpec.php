@@ -56,7 +56,7 @@ class LocaleTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Locale',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled();
 

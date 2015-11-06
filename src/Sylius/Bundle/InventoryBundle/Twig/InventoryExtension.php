@@ -66,7 +66,7 @@ class InventoryExtension extends \Twig_Extension
      * stockable and quantity.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      *
      * @return Boolean
      */

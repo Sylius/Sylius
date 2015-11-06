@@ -67,7 +67,7 @@ class SearchContext extends DefaultContext
         $result = $queryBuilder->getQuery()->getResult();
         if (!$result) {
             throw new \Exception(
-                "The entry does not exist in the index"
+                'The entry does not exist in the index'
             );
         }
 
@@ -91,7 +91,7 @@ class SearchContext extends DefaultContext
         $result = $queryBuilder->getQuery()->getResult();
         if (!empty($result)) {
             throw new \Exception(
-                "The entry does exist in the index"
+                'The entry does exist in the index'
             );
         }
 

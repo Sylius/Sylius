@@ -24,7 +24,7 @@ class ConfigurationFactory
     protected $parametersParser;
 
     /**
-     * Default Settings
+     * Default Settings.
      *
      * @var array
      */

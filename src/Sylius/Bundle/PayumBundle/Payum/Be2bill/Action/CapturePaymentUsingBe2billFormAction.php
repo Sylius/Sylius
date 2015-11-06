@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
@@ -29,7 +29,7 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
     protected $httpRequest;
 
     /**
-     * Define the Symfony Request
+     * Define the Symfony Request.
      *
      * @param Request $request
      */
@@ -39,7 +39,7 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function execute($request)
     {

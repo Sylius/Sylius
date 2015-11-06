@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -32,7 +33,7 @@ class ParametersParserSpec extends ObjectBehavior
         $this->parse(
             array(
                 'criteria' => '$criteria',
-                'sortable' => '$sorting'
+                'sortable' => '$sorting',
             ),
             $request
         )->shouldReturn(array(
@@ -43,7 +44,7 @@ class ParametersParserSpec extends ObjectBehavior
             array(
                 'criteria' => 'criteria',
                 'sortable' => 'sorting',
-            )
+            ),
         ));
     }
 
@@ -55,9 +56,9 @@ class ParametersParserSpec extends ObjectBehavior
         $this->parse(
             array(
                 'criteria' => array(
-                    'enable' => '$enable'
+                    'enable' => '$enable',
                 ),
-                'sortable' => '$sorting'
+                'sortable' => '$sorting',
             ),
             $request
         )->shouldReturn(array(
@@ -72,7 +73,7 @@ class ParametersParserSpec extends ObjectBehavior
                         'enable' => 'enable',
                     ),
                     'sortable' => 'sorting',
-                )
+                ),
             ));
     }
 }

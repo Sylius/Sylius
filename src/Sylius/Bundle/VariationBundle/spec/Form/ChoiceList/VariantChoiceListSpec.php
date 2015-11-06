@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\ChoiceList;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 

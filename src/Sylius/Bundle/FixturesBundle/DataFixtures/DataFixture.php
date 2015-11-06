@@ -79,7 +79,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     }
 
     /**
-     * Return locales available from the database
+     * Return locales available from the database.
      *
      * @return mixed
      */
@@ -159,10 +159,10 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $address->setStreet($this->faker->streetAddress);
         $address->setPostcode($this->faker->postcode);
 
-        /** @var CountryInterface $country */
+        /* @var CountryInterface $country */
         $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
         $isoName = array_rand($countries);
-        $country = $this->getReference("Sylius.Country." . $isoName);
+        $country = $this->getReference('Sylius.Country.'.$isoName);
 
         $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
 

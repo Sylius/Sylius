@@ -47,8 +47,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $applicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn(array());
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -30,15 +29,15 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
             array(
                 array('default_mapping' => array(
                     'translatable' => array(
-                        'field'          => 'translations',
-                        'currentLocale'  => 'currentLocale',
-                        'fallbackLocale' => 'fallbackLocale'
+                        'field' => 'translations',
+                        'currentLocale' => 'currentLocale',
+                        'fallbackLocale' => 'fallbackLocale',
                     ),
-                    'translation'  => array(
-                        'field'  => 'translatable',
-                        'locale' => 'locale'
-                    )
-                ))
+                    'translation' => array(
+                        'field' => 'translatable',
+                        'locale' => 'locale',
+                    ),
+                )),
             ));
 
         $subjects = array(
@@ -46,17 +45,17 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 'subject' => 'Some\App\Product\Entity\Product',
                 'attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
-                    'form'  => 'Some\App\Product\Form\AttributeType',
+                    'form' => 'Some\App\Product\Form\AttributeType',
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
-                        'form'  => array(
+                        'form' => array(
                             'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                        )
+                        ),
                     ),
                 ),
                 'attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
-                    'form'  => 'Some\App\Product\Form\AttributeValueType',
+                    'form' => 'Some\App\Product\Form\AttributeValueType',
                 ),
             ),
         );
@@ -75,7 +74,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                             'model' => 'Some\App\Product\Entity\AttributeTranslation',
                             'form' => array(
                                 'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                            )
+                            ),
                         ),
                     ),
                     'attribute_value' => array(
@@ -90,18 +89,18 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
             'classes' => array(
                 'product_attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
-                    'form'  => 'Some\App\Product\Form\AttributeType',
+                    'form' => 'Some\App\Product\Form\AttributeType',
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
                         'form' => array(
                             'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                        )
+                        ),
                     ),
                     'subject' => 'product',
                 ),
                 'product_attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
-                    'form'  => 'Some\App\Product\Form\AttributeValueType',
+                    'form' => 'Some\App\Product\Form\AttributeValueType',
                     'subject' => 'product',
                 ),
             ),

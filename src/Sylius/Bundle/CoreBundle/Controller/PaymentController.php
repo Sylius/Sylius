@@ -45,7 +45,7 @@ class PaymentController extends BasePaymentController
             ->setTemplate($this->config->getTemplate('history.html'))
             ->setData(array(
                 $this->config->getResourceName() => $payment,
-                'logs'                           => $logRepository->getLogEntries($payment)
+                'logs' => $logRepository->getLogEntries($payment),
             ))
         ;
 

@@ -38,7 +38,7 @@ class ShippingCountryConfigurationType extends AbstractType
     public function __construct($dataClass, array $validationGroups)
     {
         $this->validationGroups = $validationGroups;
-        $this->dataClass        = $dataClass;
+        $this->dataClass = $dataClass;
     }
 
     /**
@@ -48,10 +48,10 @@ class ShippingCountryConfigurationType extends AbstractType
     {
         $builder
             ->add('country', 'sylius_entity_to_identifier', array(
-                'label'       => 'sylius.form.rule.shipping_country_configuration.country',
+                'label' => 'sylius.form.rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
-                'class'       => $this->dataClass,
-                'identifier'  => 'id',
+                'class' => $this->dataClass,
+                'identifier' => 'id',
             ))
         ;
     }

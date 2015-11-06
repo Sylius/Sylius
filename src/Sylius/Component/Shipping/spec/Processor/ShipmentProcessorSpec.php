@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Shipping\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;

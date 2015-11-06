@@ -12,19 +12,15 @@
 namespace spec\Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
 class SearchIndexRepositorySpec extends ObjectBehavior
 {
-
     function let(
         EntityManager $em,
         BaseProductRepository $productRepository
-    )
-    {
+    ) {
         $this->beConstructedWith($em, $productRepository);
     }
 
@@ -32,5 +28,4 @@ class SearchIndexRepositorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository');
     }
-
 }

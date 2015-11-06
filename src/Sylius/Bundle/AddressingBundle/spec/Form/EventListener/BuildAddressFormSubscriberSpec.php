@@ -46,7 +46,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         ));
     }
 
@@ -86,7 +86,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn(array(
-            'country' => 'France'
+            'country' => 'France',
         ));
 
         $countryRepository->find('France')->shouldBeCalled()->willReturn($country);

@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services.xml'
+        'services.xml',
     );
 
     /**
@@ -54,14 +54,14 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         $container->prependExtensionConfig('fos_oauth_server', array(
-            'db_driver'           => 'orm',
-            'client_class'        => $config['classes']['api_client']['model'],
-            'access_token_class'  => $config['classes']['api_access_token']['model'],
+            'db_driver' => 'orm',
+            'client_class' => $config['classes']['api_client']['model'],
+            'access_token_class' => $config['classes']['api_access_token']['model'],
             'refresh_token_class' => $config['classes']['api_refresh_token']['model'],
-            'auth_code_class'     => $config['classes']['api_auth_code']['model'],
+            'auth_code_class' => $config['classes']['api_auth_code']['model'],
 
-            'service'             => array(
-                'user_provider'  => 'sylius.user_provider.name_or_email',
+            'service' => array(
+                'user_provider' => 'sylius.user_provider.name_or_email',
                 'client_manager' => 'sylius.oauth_server.client_manager',
             ),
         ));

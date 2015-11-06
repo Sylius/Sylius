@@ -67,7 +67,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         Notify $request,
         TokenInterface $token
     ) {
-        $request->getModel()->willReturn(new \stdClass);
+        $request->getModel()->willReturn(new \stdClass());
         $request->getToken()->willReturn($token);
 
         $this->supports($request)->shouldReturn(false);
@@ -75,7 +75,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
     function it_should_not_support_anything_not_model_request()
     {
-        $this->supports(new \stdClass)->shouldReturn(false);
+        $this->supports(new \stdClass())->shouldReturn(false);
     }
 
     function it_throws_exception_if_executing_not_supported_request()

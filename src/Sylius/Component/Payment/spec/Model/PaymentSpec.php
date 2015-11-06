@@ -48,8 +48,8 @@ class PaymentSpec extends ObjectBehavior
 
     function its_payment_method_is_mutable(PaymentMethodInterface $method)
     {
-      $this->setMethod($method);
-      $this->getMethod()->shouldReturn($method);
+        $this->setMethod($method);
+        $this->getMethod()->shouldReturn($method);
     }
 
     function it_has_no_source_by_default()

@@ -22,7 +22,7 @@ class OrderController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int     $id
      *
      * @return Response
      *
@@ -53,7 +53,7 @@ class OrderController extends ResourceController
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
             'customer' => $customer,
-            'orders'   => $paginator
+            'orders' => $paginator,
         ));
     }
 
@@ -104,10 +104,10 @@ class OrderController extends ResourceController
             ->setTemplate($this->config->getTemplate('history.html'))
             ->setData(array(
                 'order' => $order,
-                'logs'  => array(
-                    'order'            => $repository->getLogEntries($order),
-                    'order_items'      => $items,
-                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                'logs' => array(
+                    'order' => $repository->getLogEntries($order),
+                    'order_items' => $items,
+                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
                     'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
                 ),
             ))

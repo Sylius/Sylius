@@ -52,7 +52,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * Gets revenue group by date
-     * between particular dates
+     * between particular dates.
      *
      * @param array $configuration
      *
@@ -62,7 +62,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * Gets number of orders group by date
-     * between particular dates
+     * between particular dates.
      * 
      * @param array $configuration
      *

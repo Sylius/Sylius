@@ -22,7 +22,7 @@ use Doctrine\Common\Collections\Collection;
 class Role implements RoleInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -93,7 +93,7 @@ class Role implements RoleInterface
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -330,7 +330,6 @@ class Role implements RoleInterface
     {
         $this->securityRoles = $securityRoles;
     }
-
 
     /**
      * {@inheritdoc}

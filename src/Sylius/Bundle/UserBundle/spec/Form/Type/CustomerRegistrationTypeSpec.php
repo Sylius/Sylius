@@ -56,7 +56,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $resolver->setDefaults(array(
             'data_class' => 'Customer',
             'validation_groups' => array('sylius'),
-            'cascade_validation' => true
+            'cascade_validation' => true,
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

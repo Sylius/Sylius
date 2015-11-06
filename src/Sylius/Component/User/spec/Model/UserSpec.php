@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\User\Model;
 use PhpSpec\ObjectBehavior;
 
 /**
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */

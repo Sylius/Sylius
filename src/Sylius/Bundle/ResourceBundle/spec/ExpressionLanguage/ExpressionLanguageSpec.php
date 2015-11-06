@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\ExpressionLanguage;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ExpressionLanguageSpec extends ObjectBehavior
