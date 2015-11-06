@@ -204,7 +204,7 @@ An OrderItem can also hold adjustments.
 
     $adjustment = new Adjustment();
     $adjustment->setAmount(1200);
-    $adjustment->setLabel('tax');
+    $adjustment->setType('tax');
 
     $item = new OrderItem();
     $item->addAdjustment($adjustment);
