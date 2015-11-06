@@ -1,5 +1,6 @@
 Repository interfaces
 ======================
+.. _component_resource_repository_repository-interface:
 
 RepositoryInterface
 -------------------
