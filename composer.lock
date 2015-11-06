@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f45642c2c8997291516f7c2ad78c9ac5",
+    "hash": "fa499db8e84ad7dd3fa87ac8d0c48158",
+    "content-hash": "15985684ec87461d9de572d29c50b53a",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -3262,61 +3263,6 @@
                 "imagine"
             ],
             "time": "2015-08-27 11:27:33"
-        },
-        {
-            "name": "mathiasverraes/money",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mathiasverraes/money.git",
-                "reference": "b9e258119041fed20e4704f72e3ebb94ed10bea2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mathiasverraes/money/zipball/b9e258119041fed20e4704f72e3ebb94ed10bea2",
-                "reference": "b9e258119041fed20e4704f72e3ebb94ed10bea2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "suggest": {
-                "Sylius/SyliusMoneyBundle": "Sylius' Symfony2 integration with Money library",
-                "TheBigBrainsCompany/TbbcMoneyBundle": "Very complete Symfony2 bundle with support for Twig, Doctrine, Forms, ...",
-                "pink-tie/money-bundle": "Pink-Tie's Symfony2 integration with Money library"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Money": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mathias Verraes",
-                    "email": "mathias@verraes.net"
-                }
-            ],
-            "description": "PHP implementation of Fowler's Money pattern",
-            "homepage": "http://verraes.net/2011/04/fowler-money-pattern-in-php/",
-            "keywords": [
-                "Generic Sub-domain",
-                "Value Object",
-                "money"
-            ],
-            "time": "2014-10-07 12:54:10"
         },
         {
             "name": "midgard/createphp",
@@ -6834,12 +6780,12 @@
             "version": "v2.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/AsseticBundle.git",
+                "url": "https://github.com/symfony/assetic-bundle.git",
                 "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
                 "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
                 "shasum": ""
             },
@@ -6904,12 +6850,12 @@
             "version": "v2.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/MonologBundle.git",
+                "url": "https://github.com/symfony/monolog-bundle.git",
                 "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
                 "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
                 "shasum": ""
             },
@@ -6963,12 +6909,12 @@
             "version": "v2.3.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/SwiftmailerBundle.git",
+                "url": "https://github.com/symfony/swiftmailer-bundle.git",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
                 "shasum": ""
             },
@@ -9367,7 +9313,11 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=5.5.9",
+        "ext-exif": "*",
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }

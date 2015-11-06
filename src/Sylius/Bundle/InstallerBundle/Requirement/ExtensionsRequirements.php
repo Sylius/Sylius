@@ -119,8 +119,16 @@ class ExtensionsRequirements extends RequirementCollection
                 $status = extension_loaded('intl'),
                 $on,
                 $status ? $on : $off,
-                false,
+                true,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'intl'), 'requirements')
+            ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.fileinfo', array(), 'requirements'),
+                $status = extension_loaded('fileinfo'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'fileinfo'), 'requirements')
             ))
         ;
 
@@ -176,7 +184,7 @@ class ExtensionsRequirements extends RequirementCollection
                 $status = defined('GD_VERSION'),
                 $on,
                 $status ? $on : $off,
-                false,
+                true,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'gd'), 'requirements')
             ))
         ;
