@@ -47,7 +47,8 @@ class ChoiceFilter implements FilterInterface
     {
         $resolver
             ->setDefaults(array(
-                'multiple' => false
+                'multiple' => false,
+                'expanded' => false,
             ))
             ->setOptional(array(
                 'field',
@@ -55,7 +56,8 @@ class ChoiceFilter implements FilterInterface
             ))
             ->setAllowedTypes(array(
                 'field'    => array('string'),
-                'multiple' => array('bool')
+                'multiple' => array('bool'),
+                'expanded' => array('bool'),
             ))
         ;
     }
