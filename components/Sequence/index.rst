@@ -4,7 +4,10 @@ Sequence
 Component for generating number/hash sequences in PHP.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   summary
+   basic_usage
+   models
+   interfaces
+   generators
