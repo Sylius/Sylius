@@ -67,6 +67,11 @@ class Grid
     private $sorting = array();
 
     /**
+     * @var array
+     */
+    private $templates = array();
+
+    /**
      * @param string $applicationName
      * @param string $resourceName
      * @param string $driver
@@ -76,9 +81,10 @@ class Grid
      * @param array $rowActions
      * @param array $massActions
      * @param array $sorting
+     * @param array $templates
      * @param array $options
      */
-    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $massActions, array $sorting, array $options)
+    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $massActions, array $sorting, array $templates, array $options)
     {
         $this->applicationName = $applicationName;
         $this->resourceName = $resourceName;
@@ -120,11 +126,14 @@ class Grid
         $this->rowActions = $rowActions;
         $this->massActions = $massActions;
         $this->sorting = $sorting;
+        $this->templates = $templates;
         $this->options = $options;
     }
 
     /**
      * @param array $configuration
+     *
+     * @return Grid
      */
     public static function createFromArray(array $configuration)
     {
@@ -154,11 +163,12 @@ class Grid
         }
 
         $sorting = array_key_exists('sorting', $configuration) ? $configuration['sorting'] : array();
+        $templates = array_key_exists('templates', $configuration) ? $configuration['templates'] : array();
         $options = array_key_exists('options', $configuration) ? $configuration['options'] : array();
 
         list($applicationName, $resourceName) = explode('.', $configuration['resource']);
 
-        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $massActions, $sorting, $options);
+        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $massActions, $sorting, $templates, $options);
     }
 
     /**
@@ -269,6 +279,14 @@ class Grid
     public function getSorting()
     {
         return $this->sorting;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTemplates()
+    {
+        return $this->templates;
     }
 
     /**

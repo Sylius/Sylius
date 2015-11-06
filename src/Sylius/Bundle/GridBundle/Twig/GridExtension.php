@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Column;
+use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Renderer\ColumnRendererInterface;
 use Sylius\Component\Grid\Sorter\SorterInterface;
 use Sylius\Component\Grid\View\GridView;
@@ -87,6 +88,9 @@ class GridExtension extends \Twig_Extension
     /**
      * @param \Twig_Environment $twig
      * @param GridView          $gridView
+     * @param Configuration     $configuration
+     *
+     * @return string
      */
     public function render(\Twig_Environment $twig, GridView $gridView, Configuration $configuration)
     {
@@ -138,6 +142,8 @@ class GridExtension extends \Twig_Extension
      * @param Action            $actionDefinition
      * @param Request           $request
      * @param $object
+     *
+     * @return string
      */
     public function renderAction(\Twig_Environment $twig, GridView $gridView, Action $actionDefinition, Request $request, $object = null)
     {
@@ -161,6 +167,8 @@ class GridExtension extends \Twig_Extension
      * @param \Twig_Environment $twig
      * @param Request           $request
      * @param GridView          $gridView
+     *
+     * @return string
      */
     public function renderFilterForm(\Twig_Environment $twig, Request $request, GridView $gridView)
     {
@@ -174,7 +182,7 @@ class GridExtension extends \Twig_Extension
         $form = $filterFormBuilder->getForm();
         $form->submit($request);
 
-        return $twig->render('SyliusGridBundle::_filterForm.html.twig', array('form' => $form->createView(), 'grid' => $gridView));
+        return $twig->render($this->getFiltersFormTemplate($gridDefinition), array('form' => $form->createView(), 'grid' => $gridView));
     }
 
     /**
@@ -183,5 +191,20 @@ class GridExtension extends \Twig_Extension
     public function getName()
     {
         return 'sylius_grid';
+    }
+
+    /**
+     * @param Grid $definition
+     *
+     * @return string
+     */
+    private function getFiltersFormTemplate(Grid $definition)
+    {
+        $templates = $definition->getTemplates();
+        if (isset($templates['filters'])) {
+            return $templates['filters'];
+        }
+
+        return 'SyliusGridBundle::_filterForm.html.twig';
     }
 }
