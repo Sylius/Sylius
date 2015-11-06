@@ -34,7 +34,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * @var string
      */
-    protected $label;
+    protected $type;
 
     /**
      * @var string
@@ -127,17 +127,17 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getLabel()
+    public function getType()
     {
-        return $this->label;
+        return $this->type;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLabel($label)
+    public function setType($type)
     {
-        $this->label = $label;
+        $this->type = $type;
     }
 
     /**

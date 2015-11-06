@@ -78,7 +78,7 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     private function prepareAdjustmentForOrder(PaymentSubjectInterface $payment)
     {
         $adjustment = $this->adjustmentRepository->createNew();
-        $adjustment->setLabel(AdjustmentInterface::PAYMENT_ADJUSTMENT);
+        $adjustment->setType(AdjustmentInterface::PAYMENT_ADJUSTMENT);
         $adjustment->setAmount($this->feeCalculator->calculate($payment));
         $adjustment->setDescription($payment->getMethod()->getName());
 
