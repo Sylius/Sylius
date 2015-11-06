@@ -271,7 +271,7 @@ Response
         "adjustments":[
             {
                 "id":1011,
-                "label":"tax",
+                "type":"tax",
                 "description":"EU VAT (23%)",
                 "amount":22490,
                 "neutral":false,
@@ -281,7 +281,7 @@ Response
             },
             {
                 "id":1012,
-                "label":"shipping",
+                "type":"shipping",
                 "description":"UPS Ground",
                 "amount":2500,
                 "neutral":false,
@@ -291,7 +291,7 @@ Response
             },
             {
                 "id":1013,
-                "label":"promotion",
+                "type":"promotion",
                 "description":"New Year Sale for 3 and more items.",
                 "amount":-500,
                 "neutral":false,
@@ -301,7 +301,7 @@ Response
             },
             {
                 "id":1014,
-                "label":"promotion",
+                "type":"promotion",
                 "description":"Christmas Sale for orders over 100 EUR.",
                 "amount":-250,
                 "neutral":false,

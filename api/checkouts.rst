@@ -504,7 +504,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 "created_at": "2014-12-15T13:37:29+0000",
                 "description": "No tax (0%)",
                 "id": 205,
-                "label": "tax",
+                "type": "tax",
                 "locked": false,
                 "neutral": false,
                 "updated_at": "2014-12-15T13:37:29+0000"
@@ -514,7 +514,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 "created_at": "2014-12-15T14:30:41+0000",
                 "description": "FedEx World Shipping",
                 "id": 207,
-                "label": "shipping",
+                "type": "shipping",
                 "locked": false,
                 "neutral": false,
                 "updated_at": "2014-12-15T14:30:41+0000"
@@ -524,7 +524,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 "created_at": "2014-12-15T14:30:41+0000",
                 "description": "Christmas Sale for orders over 100 EUR.",
                 "id": 208,
-                "label": "promotion",
+                "type": "promotion",
                 "locked": false,
                 "neutral": false,
                 "updated_at": "2014-12-15T14:30:41+0000"

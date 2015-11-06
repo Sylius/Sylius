@@ -19,7 +19,7 @@ Adjustments have the following properties:
 +-------------+-----------------------------------------+
 | orderItem   | Reference to OrderItem                  |
 +-------------+-----------------------------------------+
-| label       | Type of the adjustment (e.g. "tax")     |
+| type        | Type of the adjustment (e.g. "tax")     |
 +-------------+-----------------------------------------+
 | description | e.g. "Clothing Tax 9%"                  |
 +-------------+-----------------------------------------+
