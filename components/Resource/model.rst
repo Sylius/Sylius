@@ -1,5 +1,7 @@
 Model interfaces
-=================
+================
+
+.. _component_resource_model_soft-deletable-interface:
 
 SoftDeletableInterface
 ----------------------
@@ -17,6 +19,7 @@ This interface will ask you to implement the following methods to your model, th
 | setDeletedAt(\DateTime $deletedAt) | Cet deletion time.                       | Void              |
 +------------------------------------+------------------------------------------+-------------------+
 
+.. _component_resource_model_timestampable-interface:
 
 TimestampableInterface
 ----------------------
