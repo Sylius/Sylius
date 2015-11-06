@@ -1,6 +1,84 @@
 Models
 ======
 
+Order
+-----
+
+**Order** object represents order.
+Orders have the following properties:
+
++------------------+---------------------------------------------+
+| Property         | Description                                 |
++==================+=============================================+
+| id               | Unique id of the order                      |
++------------------+---------------------------------------------+
+| completedAt      | Completion time of the order                |
++------------------+---------------------------------------------+
+| number           | Number is human-friendly identifier         |
++------------------+---------------------------------------------+
+| itemsTotal       | Total value of items in order               |
++------------------+---------------------------------------------+
+| adjustmentsTotal | Total value of adjustments                  |
++------------------+---------------------------------------------+
+| total            | Calculated total (items + adjustments)      |
++------------------+---------------------------------------------+
+| items            | Collection of items                         |
++------------------+---------------------------------------------+
+| adjustments      | Collection of adjustments                   |
++------------------+---------------------------------------------+
+| comments         | Collection of comments                      |
++------------------+---------------------------------------------+
+| identities       | Collection of identities                    |
++------------------+---------------------------------------------+
+| createdAt        | Date when order was created                 |
++------------------+---------------------------------------------+
+| updatedAt        | Date of last change                         |
++------------------+---------------------------------------------+
+| deletedAt        | Date when order was deleted                 |
++------------------+---------------------------------------------+
+| state            | State of the order (e.g. "cart", "pending") |
++------------------+---------------------------------------------+
+
+.. note::
+    This model implements the :ref:`component_order_model_order-interface`
+    For more detailed information go to `Sylius API Order`_.
+
+.. _Sylius API Order: http://api.sylius.org/Sylius/Component/Order/Model/Order.html
+
+.. _component_order_model_order-item:
+
+OrderItem
+---------
+
+**OrderItem** object represents items in order.
+OrderItems have the following properties:
+
++------------------+----------------------------------------------+
+| Property         | Description                                  |
++==================+==============================================+
+| id               | Unique id of the orderItem                   |
++------------------+----------------------------------------------+
+| order            | Reference to Order                           |
++------------------+----------------------------------------------+
+| quantity         | Items quantity                               |
++------------------+----------------------------------------------+
+| unitPrice        | The price of a single unit                   |
++------------------+----------------------------------------------+
+| adjustments      | Collection of adjustments                    |
++------------------+----------------------------------------------+
+| adjustmentsTotal | Total of the adjustments in orderItem        |
++------------------+----------------------------------------------+
+| total            | Total of the orderItem (unitPrice * quantity)|
++------------------+----------------------------------------------+
+| immutable        | Boolean flag of immutability                 |
++------------------+----------------------------------------------+
+
+.. note::
+    This model implements the :ref:`component_order_model_order-item-interface`
+    For more detailed information go to `Sylius API OrderItem`_.
+
+.. _Sylius API OrderItem: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html
+
 .. _component_order_model_adjustment:
 
 Adjustment
@@ -105,81 +183,3 @@ Identities have the following properties:
 .. _Sylius API Identity: http://api.sylius.org/Sylius/Component/Order/Model/Identity.html
 
 .. _component_order_model_order:
-
-Order
------
-
-**Order** object represents order.
-Orders have the following properties:
-
-+------------------+---------------------------------------------+
-| Property         | Description                                 |
-+==================+=============================================+
-| id               | Unique id of the order                      |
-+------------------+---------------------------------------------+
-| completedAt      | Completion time of the order                |
-+------------------+---------------------------------------------+
-| number           | Number is human-friendly identifier         |
-+------------------+---------------------------------------------+
-| itemsTotal       | Total value of items in order               |
-+------------------+---------------------------------------------+
-| adjustmentsTotal | Total value of adjustments                  |
-+------------------+---------------------------------------------+
-| total            | Calculated total (items + adjustments)      |
-+------------------+---------------------------------------------+
-| items            | Collection of items                         |
-+------------------+---------------------------------------------+
-| adjustments      | Collection of adjustments                   |
-+------------------+---------------------------------------------+
-| comments         | Collection of comments                      |
-+------------------+---------------------------------------------+
-| identities       | Collection of identities                    |
-+------------------+---------------------------------------------+
-| createdAt        | Date when order was created                 |
-+------------------+---------------------------------------------+
-| updatedAt        | Date of last change                         |
-+------------------+---------------------------------------------+
-| deletedAt        | Date when order was deleted                 |
-+------------------+---------------------------------------------+
-| state            | State of the order (e.g. "cart", "pending") |
-+------------------+---------------------------------------------+
-
-.. note::
-    This model implements the :ref:`component_order_model_order-interface`
-    For more detailed information go to `Sylius API Order`_.
-
-.. _Sylius API Order: http://api.sylius.org/Sylius/Component/Order/Model/Order.html
-
-.. _component_order_model_order-item:
-
-OrderItem
----------
-
-**OrderItem** object represents items in order.
-OrderItems have the following properties:
-
-+------------------+----------------------------------------------+
-| Property         | Description                                  |
-+==================+==============================================+
-| id               | Unique id of the orderItem                   |
-+------------------+----------------------------------------------+
-| order            | Reference to Order                           |
-+------------------+----------------------------------------------+
-| quantity         | Items quantity                               |
-+------------------+----------------------------------------------+
-| unitPrice        | The price of a single unit                   |
-+------------------+----------------------------------------------+
-| adjustments      | Collection of adjustments                    |
-+------------------+----------------------------------------------+
-| adjustmentsTotal | Total of the adjustments in orderItem        |
-+------------------+----------------------------------------------+
-| total            | Total of the orderItem (unitPrice * quantity)|
-+------------------+----------------------------------------------+
-| immutable        | Boolean flag of immutability                 |
-+------------------+----------------------------------------------+
-
-.. note::
-    This model implements the :ref:`component_order_model_order-item-interface`
-    For more detailed information go to `Sylius API OrderItem`_.
-
-.. _Sylius API OrderItem: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html
