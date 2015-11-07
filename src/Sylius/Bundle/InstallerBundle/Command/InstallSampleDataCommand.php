@@ -75,7 +75,7 @@ EOT
 
         $commands = array(
             'doctrine:fixtures:load' => $fixtureArgs,
-            'doctrine:phpcr:fixtures:load' => $fixtureArgs,
+            'doctrine:phpcr:fixtures:load' => array('--no-interaction' => true),
             'sylius:search:index',
         );
 
