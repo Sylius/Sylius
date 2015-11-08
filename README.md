@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/packagist/l/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Version](https://img.shields.io/packagist/v/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Build status...](https://img.shields.io/travis/Sylius/Sylius/master.svg)](http://travis-ci.org/Sylius/Sylius)
+[![Build Status Windows](https://ci.appveyor.com/api/projects/status/github/pjedrzejewski/sylius?branch=master&svg=true)](https://ci.appveyor.com/project/pjedrzejewski/sylius/branch/master)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
 [![HHVM Status](https://img.shields.io/hhvm/Sylius/Sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
 [![Dependency Status](https://www.versioneye.com/php/sylius:sylius/badge.svg)](https://www.versioneye.com/php/sylius:sylius)
