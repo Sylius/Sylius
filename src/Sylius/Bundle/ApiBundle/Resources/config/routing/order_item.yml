@@ -10,7 +10,7 @@ sylius_api_order_item_index:
             repository:
                 method: findByOrder
                 arguments: [$orderId]
-            paginate: $limit
+            paginate: false
             sortable: true
             sorting:
                 updatedAt: desc

@@ -2,8 +2,6 @@ Sylius\Component\Core\Model\OrderItem:
     exclusion_policy: ALL
     xml_root_name: order
     properties:
-        inventoryUnits:
-            expose: true
         variant:
             expose: true
     relations:
