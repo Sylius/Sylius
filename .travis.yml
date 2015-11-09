@@ -48,7 +48,6 @@ before_install:
     - composer self-update
 
     - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-mongodb; fi
-    - if [ $TRAVIS_PHP_VERSION == "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-phpspec-php7; fi
 
     - composer install --prefer-source --no-interaction
 

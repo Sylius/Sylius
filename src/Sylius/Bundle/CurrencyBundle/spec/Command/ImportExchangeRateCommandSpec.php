@@ -36,7 +36,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius:currency:import');
     }
 
-    function it_updates_a_avaivalble_exchange_rate(
+    function it_updates_a_available_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,
@@ -46,6 +46,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
 
         $output->writeln('Fetching data from external database.')->shouldBeCalled();
 
