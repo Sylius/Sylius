@@ -1,9 +1,0 @@
-#!/bin/bash
-
-wget https://github.com/digitalkaoz/typehint-to-docblock/releases/download/0.2.2/typehint-to-docblock.phar
-
-for SPEC_DIR in `find src/ -name spec | grep spec$`
-do
-    echo "Transforming specs in $SPEC_DIR"
-    php typehint-to-docblock.phar transform $SPEC_DIR
-done
