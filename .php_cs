@@ -28,7 +28,8 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('*.xml')
     ->notName('*Spec.php')
     ->exclude('app')
-    ->fixers(array('header_comment'))
 ;
 
-return Symfony\CS\Config\Config::create()->finder($finder);
+return Symfony\CS\Config\Config::create()
+        ->fixers(array('header_comment'))
+        ->finder($finder);
