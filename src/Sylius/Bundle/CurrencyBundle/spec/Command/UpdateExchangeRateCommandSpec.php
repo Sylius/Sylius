@@ -49,6 +49,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
 
         $output->writeln('Fetching data from external database.')->shouldBeCalled();
 
@@ -77,6 +78,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
 
         $output->writeln('Fetching data from external database.')->shouldBeCalled();
 
