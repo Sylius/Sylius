@@ -142,7 +142,7 @@ EOT
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
-        /**
+        /*
          * @var UserInterface
          * @var $customer     CustomerInterface
          */

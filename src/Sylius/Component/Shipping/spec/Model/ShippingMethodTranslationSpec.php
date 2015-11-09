@@ -12,8 +12,6 @@
 namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
