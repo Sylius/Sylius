@@ -23,3 +23,5 @@ Sylius\Component\Core\Model\ProductVariant:
         depth:
             expose: true
             type: float
+        images:
+            expose: true
