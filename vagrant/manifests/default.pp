@@ -33,9 +33,12 @@ Class['::apt::update'] -> Package <|
 and title != 'software-properties-common'
 |>
 
-    apt::key { '4F4EA0AAE5267A6C': }
+apt::key { '4F4EA0AAE5267A6C': }
 
-apt::ppa { 'ppa:ondrej/php5-oldstable':
+# when bumping the php version again, please
+# have a look at the PPA documentary in order to provide a proper PPA alias:
+# https://launchpad.net/~ondrej/+archive/ubuntu/php5
+apt::ppa { 'ppa:ondrej/php5':
   require => Apt::Key['4F4EA0AAE5267A6C']
 }
 
@@ -74,16 +77,17 @@ apache::vhost { "${host_name}":
 class { 'php':
   service             => 'apache',
   service_autorestart => false,
-  module_prefix       => '',
 }
 
-php::module { 'php5-mysql': }
-php::module { 'php5-cli': }
-php::module { 'php5-curl': }
-php::module { 'php5-intl': }
-php::module { 'php5-mcrypt': }
-php::module { 'php5-gd': }
-php::module { 'php-apc': }
+php::module { 'mysql': }
+php::module { 'cli': }
+php::module { 'curl': }
+php::module { 'intl': }
+php::module { 'mcrypt': }
+php::module { 'gd': }
+php::module { 'apc':
+  module_prefix => 'php-',
+}
 
 class { 'php::devel':
   require => Class['php'],
@@ -91,12 +95,6 @@ class { 'php::devel':
 
 class { 'php::pear':
   require => Class['php'],
-}
-
-php::pear::module { 'PHPUnit':
-  repository  => 'pear.phpunit.de',
-  use_package => 'no',
-  require => Class['php::pear']
 }
 
 php::pecl::module { 'mongo':
@@ -109,7 +107,6 @@ class { 'composer':
   auto_update => true,
   require => Package['php5', 'curl'],
 }
-
 
 php::ini { 'php_ini_configuration':
   value   => [
