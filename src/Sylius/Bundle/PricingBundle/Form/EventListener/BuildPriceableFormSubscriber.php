@@ -41,7 +41,7 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface     $factory
      */
     public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
     {
@@ -56,8 +56,8 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+            FormEvents::POST_SUBMIT => 'postSubmit',
         );
     }
 

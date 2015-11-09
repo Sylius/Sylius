@@ -128,7 +128,7 @@ class ResourceExtension extends \Twig_Extension
 
         if (isset($sorting[$property])) {
             $currentOrder = $sorting[$property];
-            $order        = 'asc' === $sorting[$property] ? 'desc' : 'asc';
+            $order = 'asc' === $sorting[$property] ? 'desc' : 'asc';
         }
 
         $url = $this->router->generate(
@@ -140,9 +140,9 @@ class ResourceExtension extends \Twig_Extension
         );
 
         return $twig->render($options['template'], array(
-            'url'          => $url,
-            'label'        => $label,
-            'icon'         => $property == key($sorting),
+            'url' => $url,
+            'label' => $label,
+            'icon' => $property == key($sorting),
             'currentOrder' => $currentOrder,
         ));
     }
@@ -183,7 +183,7 @@ class ResourceExtension extends \Twig_Extension
 
             return $twig->render($options['template'], array(
                 'paginator' => $paginator,
-                'limits'    => $limits,
+                'limits' => $limits,
             ));
         }
 

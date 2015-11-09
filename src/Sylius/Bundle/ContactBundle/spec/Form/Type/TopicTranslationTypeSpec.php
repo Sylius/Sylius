@@ -51,8 +51,8 @@ class TopicTranslationTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'ContactTranslation',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'ContactTranslation',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

@@ -27,7 +27,7 @@ interface CalculatorInterface
      * @param array              $configuration
      * @param array              $context
      *
-     * @return integer
+     * @return int
      */
     public function calculate(PriceableInterface $subject, array $configuration, array $context = array());
 

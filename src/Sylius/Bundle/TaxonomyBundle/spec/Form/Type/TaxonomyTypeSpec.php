@@ -51,7 +51,7 @@ class TaxonomyTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Taxonomy',
+                'data_class' => 'Taxonomy',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

@@ -47,7 +47,7 @@ class ProductContext extends DefaultContext
                 $attribute = explode(':', $data['attributes']);
 
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
-                $attributeValue =  $this->getRepository('product_attribute_value')->createNew();
+                $attributeValue = $this->getRepository('product_attribute_value')->createNew();
 
                 $attributeValue->setAttribute($productAttribute);
                 $attributeValue->setValue($attribute[1]);
@@ -133,7 +133,7 @@ class ProductContext extends DefaultContext
         $archetype = $this->findOneByName('product_archetype_translation', $archetypeName);
 
         if (!$archetype->getLocale() === $locale) {
-            throw new \Exception('There is no translation for product archetype'. $archetypeName . ' in '.$locale . 'locale');
+            throw new \Exception('There is no translation for product archetype'.$archetypeName.' in '.$locale.'locale');
         }
     }
 
@@ -187,8 +187,8 @@ class ProductContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
             $additionalData = array(
-                'type'         => isset($data['type']) ? $data['type'] : 'text',
-                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
+                'type' => isset($data['type']) ? $data['type'] : 'text',
+                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name'],
             );
             if ($choices) {
                 $additionalData['configuration'] = array('choices' => $choices);
@@ -207,7 +207,7 @@ class ProductContext extends DefaultContext
     {
         $additionalData = array_merge(array(
             'presentation' => $name,
-            'type' => 'text'
+            'type' => 'text',
         ), $additionalData);
 
         $attribute = $this->getRepository('product_attribute')->createNew();
@@ -255,7 +255,7 @@ class ProductContext extends DefaultContext
         $product = $this->findOneByName('product_translation', $productName);
 
         if (!$product->getLocale() === $locale) {
-            throw new \Exception('There is no translation for product'. $productName . ' in '.$locale . 'locale');
+            throw new \Exception('There is no translation for product'.$productName.' in '.$locale.'locale');
         }
     }
 

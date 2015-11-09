@@ -28,11 +28,11 @@ class OrderType extends AbstractResourceType
     {
         $builder
             ->add('items', 'collection', array(
-                'type'         => 'sylius_order_item',
-                'allow_add'    => true,
+                'type' => 'sylius_order_item',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.order.items'
+                'label' => 'sylius.form.order.items',
             ))
         ;
     }

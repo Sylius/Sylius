@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\CartBundle\Command;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Cart\Purger\PurgerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

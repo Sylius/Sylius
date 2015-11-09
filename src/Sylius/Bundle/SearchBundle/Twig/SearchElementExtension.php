@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Twig;
 
 /**
- * Twig extension to handle search result object templates
+ * Twig extension to handle search result object templates.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -25,7 +25,7 @@ class SearchElementExtension extends \Twig_Extension
     {
         return array(
             'getsearchresultsnippet' => new \Twig_SimpleFunction('getSearchResultSnippet', function ($object) {
-                $pathArray = explode('\\',get_class($object));
+                $pathArray = explode('\\', get_class($object));
 
                 return 'SyliusSearchBundle:SearchResultSnippets:'.lcfirst(array_pop($pathArray)).'.html.twig';
             }),

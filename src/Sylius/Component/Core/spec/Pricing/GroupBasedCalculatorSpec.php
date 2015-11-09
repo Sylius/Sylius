@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\User\Model\GroupInterface;
 
-;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -37,7 +35,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $configuration = array(
             42 => 4999,
             17 => 4599,
-            95 => 4400
+            95 => 4400,
         );
 
         $priceable->getPrice()->shouldBeCalled()->willReturn(5500);
@@ -53,7 +51,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $configuration = array(
             42 => 4999,
             17 => 4599,
-            95 => 4400
+            95 => 4400,
         );
 
         $context = array('groups' => array($group));
@@ -70,7 +68,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $configuration = array(
             42 => 4999,
             17 => 4599,
-            95 => 4400
+            95 => 4400,
         );
 
         $context = array('groups' => array($group));
@@ -87,7 +85,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $configuration = array(
             42 => 4999,
             17 => 4599,
-            95 => 4400
+            95 => 4400,
         );
 
         $context = array('groups' => array($group1, $group2));

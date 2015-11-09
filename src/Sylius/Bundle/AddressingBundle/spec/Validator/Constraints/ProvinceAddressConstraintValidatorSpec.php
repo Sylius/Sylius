@@ -34,7 +34,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     {
         $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
             '',
-            $constraint
+            $constraint,
         ));
     }
 
@@ -47,7 +47,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
         $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('property_path')
+            $this->createViolation('property_path'),
         )));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
@@ -68,7 +68,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
         $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('other_property_path')
+            $this->createViolation('other_property_path'),
         )));
 
         $context->addViolation(Argument::any())->shouldBeCalled();

@@ -55,7 +55,6 @@ class ProcessContextSpec extends ObjectBehavior
         $this->getPreviousStep()->shouldReturn($previousStep);
     }
 
-
     function it_is_valid(
         $storage,
         ProcessInterface $process,
@@ -93,7 +92,6 @@ class ProcessContextSpec extends ObjectBehavior
         $storage->get('history', array())->shouldBeCalled()->willReturn(array('current_step'));
         $this->isValid()->shouldReturn(false);
     }
-
 
     function it_checks_if_it_is_the_first_step(
         $storage,
@@ -182,7 +180,7 @@ class ProcessContextSpec extends ObjectBehavior
         $process->countSteps()->shouldBeCalled()->willReturn(2);
         $this->initialize($process, $currentStep);
 
-        $storage->get("history", array())->shouldBeCalled()->willreturn(array("step_one", "step_two", "step_three"));
+        $storage->get('history', array())->shouldBeCalled()->willreturn(array('step_one', 'step_two', 'step_three'));
         $storage->set('history', array('step_one', 'step_two'))->shouldBeCalled();
 
         $this->rewindHistory();

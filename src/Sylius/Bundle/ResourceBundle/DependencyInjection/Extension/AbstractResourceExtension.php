@@ -30,11 +30,11 @@ use Symfony\Component\DependencyInjection\Parameter;
  */
 abstract class AbstractResourceExtension extends AbstractExtension
 {
-    const CONFIGURE_LOADER       = 1;
-    const CONFIGURE_DATABASE     = 2;
-    const CONFIGURE_PARAMETERS   = 4;
-    const CONFIGURE_VALIDATORS   = 8;
-    const CONFIGURE_FORMS        = 16;
+    const CONFIGURE_LOADER = 1;
+    const CONFIGURE_DATABASE = 2;
+    const CONFIGURE_PARAMETERS = 4;
+    const CONFIGURE_VALIDATORS = 8;
+    const CONFIGURE_FORMS = 16;
     const CONFIGURE_TRANSLATIONS = 32;
 
     const DEFAULT_KEY = 'default';
@@ -54,7 +54,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
      * @param array                  $config
      * @param ConfigurationInterface $configuration
      * @param ContainerBuilder       $container
-     * @param integer                $configure
+     * @param int                    $configure
      *
      * @return array
      */

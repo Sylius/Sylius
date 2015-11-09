@@ -36,7 +36,7 @@ class TaxonomyConfigurationType extends AbstractType
     {
         $builder
             ->add('taxons', 'sylius_taxon_selection', array(
-                'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'label' => 'sylius.form.rule.taxonomy_configuration.taxons',
                 'model_transformer' => array(
                     'save_objects' => false,
                 ),

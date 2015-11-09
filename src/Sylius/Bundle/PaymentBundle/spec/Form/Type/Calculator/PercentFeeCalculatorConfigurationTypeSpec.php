@@ -33,7 +33,7 @@ class PercentFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('percent', 'number', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.percent.percent',
+                'label' => 'sylius.form.payment_method.fee_calculator.percent.percent',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()

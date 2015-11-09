@@ -89,6 +89,7 @@ class ResourceChoiceType extends AbstractType
      * @param string $driver
      *
      * @return string
+     *
      * @throws UnknownDriverException
      */
     protected function getFormTypeForDriver($driver)

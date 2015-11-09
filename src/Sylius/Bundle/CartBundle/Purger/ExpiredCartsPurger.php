@@ -58,7 +58,7 @@ class ExpiredCartsPurger implements PurgerInterface
     }
 
     /**
-     * Purge a cart
+     * Purge a cart.
      *
      * @param CartInterface $cart
      */

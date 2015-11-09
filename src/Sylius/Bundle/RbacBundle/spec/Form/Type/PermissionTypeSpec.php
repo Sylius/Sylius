@@ -64,8 +64,8 @@ class PermissionTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Permission',
-                'validation_groups' => array('sylius')
+                'data_class' => 'Permission',
+                'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
         ;

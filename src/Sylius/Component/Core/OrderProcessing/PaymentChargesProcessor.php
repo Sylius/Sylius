@@ -36,7 +36,7 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $adjustmentRepository
+     * @param RepositoryInterface              $adjustmentRepository
      * @param DelegatingFeeCalculatorInterface $feeCalculator
      */
     public function __construct(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $feeCalculator)
@@ -59,13 +59,12 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     }
 
     /**
-     * @param OrderInterface   $order
+     * @param OrderInterface          $order
      * @param PaymentSubjectInterface $payment
      */
     private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentSubjectInterface $payment)
     {
-        if (PaymentInterface::STATE_CANCELLED !== $payment->getState())
-        {
+        if (PaymentInterface::STATE_CANCELLED !== $payment->getState()) {
             $order->addAdjustment($this->prepareAdjustmentForOrder($payment));
         }
     }

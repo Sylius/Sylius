@@ -14,12 +14,12 @@ namespace Sylius\Component\Sequence\Model;
 class Sequence implements SequenceInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $index = 0;
 

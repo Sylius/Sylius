@@ -72,19 +72,19 @@ class CouponToCodeTransformer implements DataTransformerInterface
     public function reverseTransform($code)
     {
         if (!$code) {
-            return null;
+            return;
         }
 
         if (!$coupon = $this->couponRepository->findOneBy(array('code' => $code))) {
             $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_INVALID, new GenericEvent());
 
-            return null;
+            return;
         }
 
         if (!$coupon->isValid()) {
             $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent());
 
-            return null;
+            return;
         }
 
         return $coupon;

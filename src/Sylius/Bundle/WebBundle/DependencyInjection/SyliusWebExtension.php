@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Sylius frontend DIC extension
+ * Sylius frontend DIC extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

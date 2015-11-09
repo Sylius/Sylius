@@ -38,7 +38,7 @@ class SyliusSearchBundle extends AbstractResourceBundle
     {
         return array(
             'Sylius\Bundle\SearchBundle\Model\SearchIndexInterface' => 'sylius.model.search.class',
-            'Sylius\Bundle\SearchBundle\Model\SearchLogInterface'   => 'sylius.model.log.class',
+            'Sylius\Bundle\SearchBundle\Model\SearchLogInterface' => 'sylius.model.log.class',
         );
     }
 

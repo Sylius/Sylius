@@ -3,7 +3,6 @@
 namespace spec\Sylius\Component\Resource\Event;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
 class ResourceEventSpec extends ObjectBehavior
@@ -66,5 +65,4 @@ class ResourceEventSpec extends ObjectBehavior
         $this->setMessageParameters(array('parameters'))->shouldReturn($this);
         $this->getMessageParameters()->shouldReturn(array('parameters'));
     }
-
 }

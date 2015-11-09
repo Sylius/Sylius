@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
@@ -33,12 +32,12 @@ class ParametersSpec extends ObjectBehavior
     {
         $this->replace(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
 
         $this->all()->shouldReturn(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
     }
 
@@ -46,7 +45,7 @@ class ParametersSpec extends ObjectBehavior
     {
         $this->replace(array(
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
+            'paginate' => 'paginate',
         ));
 
         $this->get('criteria')->shouldReturn('criteria');

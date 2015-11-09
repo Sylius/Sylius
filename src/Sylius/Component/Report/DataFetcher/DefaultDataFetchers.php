@@ -19,17 +19,17 @@ namespace Sylius\Component\Report\DataFetcher;
 final class DefaultDataFetchers
 {
     /**
-     * User registrations data fetcher
+     * User registrations data fetcher.
      */
     const USER_REGISTRATION = 'user_registration';
 
     /**
-     * Sales total data fetcher
+     * Sales total data fetcher.
      */
     const SALES_TOTAL = 'sales_total';
 
     /**
-     * Number of orders data fetcher
+     * Number of orders data fetcher.
      */
     const NUMBER_OF_ORDERS = 'number_of_orders';
 }

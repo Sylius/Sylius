@@ -32,7 +32,7 @@ class EmailType extends AbstractResourceType
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.email.enabled',
+                'label' => 'sylius.form.email.enabled',
             ))
             ->add('senderName', 'text', array(
                 'label' => 'sylius.form.email.sender_name',
@@ -47,8 +47,8 @@ class EmailType extends AbstractResourceType
                 'label' => 'sylius.form.email.content',
             ))
             ->add('template', 'sylius_email_template_choice', array(
-                'label'       => 'sylius.form.email.template',
-                'required'    => false,
+                'label' => 'sylius.form.email.template',
+                'required' => false,
                 'empty_value' => 'sylius.form.email.no_template',
             ))
         ;

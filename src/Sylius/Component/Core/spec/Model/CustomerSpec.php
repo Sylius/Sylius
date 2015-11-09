@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 
 /**
-
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CustomerSpec extends ObjectBehavior

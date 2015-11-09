@@ -20,41 +20,41 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ResourceEvent extends GenericEvent
 {
-    const TYPE_ERROR   = 'error';
+    const TYPE_ERROR = 'error';
     const TYPE_WARNING = 'warning';
-    const TYPE_INFO    = 'info';
+    const TYPE_INFO = 'info';
     const TYPE_SUCCESS = 'success';
 
     /**
-     * Message type
+     * Message type.
      *
      * @var string
      */
     protected $messageType = '';
 
     /**
-     * Message
+     * Message.
      *
      * @var string
      */
     protected $message = '';
 
     /**
-     * Message parameters
+     * Message parameters.
      *
      * @var array
      */
     protected $messageParameters = array();
 
     /**
-     * ErrorCode
+     * ErrorCode.
      *
-     * @var integer
+     * @var int
      */
     protected $errorCode = 500;
 
     /**
-     * Stop event propagation
+     * Stop event propagation.
      *
      * @param string $message
      * @param string $type
@@ -71,7 +71,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Alias
+     * Alias.
      *
      * @return bool
      */
@@ -81,7 +81,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get messageType property
+     * Get messageType property.
      *
      * @return string
      */
@@ -91,7 +91,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets messageType property
+     * Sets messageType property.
      *
      * @param string $messageType Should be one of ResourceEvent's TYPE constants
      *
@@ -105,7 +105,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get message property
+     * Get message property.
      *
      * @return string
      */
@@ -115,7 +115,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets message property
+     * Sets message property.
      *
      * @param string $message
      *
@@ -129,7 +129,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get messageParameters property
+     * Get messageParameters property.
      *
      * @return array
      */
@@ -139,7 +139,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets messageParameters property
+     * Sets messageParameters property.
      *
      * @param array $messageParameters
      *
@@ -153,7 +153,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get errorCode property
+     * Get errorCode property.
      *
      * @return int
      */
@@ -163,7 +163,7 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets errorCode property
+     * Sets errorCode property.
      *
      * @param int $errorCode
      *

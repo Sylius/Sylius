@@ -14,7 +14,7 @@ namespace Sylius\Component\Channel\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple channels
+ * Interface implemented by objects related to multiple channels.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

@@ -55,7 +55,7 @@ class RuleTypeSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'configuration_type' => 'configuration_form_type'
+            'configuration_type' => 'configuration_form_type',
         ));
     }
 

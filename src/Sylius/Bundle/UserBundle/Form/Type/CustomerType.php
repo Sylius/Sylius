@@ -27,7 +27,7 @@ class CustomerType extends CustomerProfileType
         parent::buildForm($builder, $options);
         $builder
             ->add('groups', 'sylius_group_choice', array(
-                'label'    => 'sylius.form.customer.groups',
+                'label' => 'sylius.form.customer.groups',
                 'multiple' => true,
                 'required' => false,
             ))

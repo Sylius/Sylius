@@ -26,25 +26,25 @@ class TaxonType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.taxon.name'
+                'label' => 'sylius.form.taxon.name',
             ))
             ->add('permalink', 'text', array(
                 'required' => false,
-                'label' => 'sylius.form.taxon.permalink'
+                'label' => 'sylius.form.taxon.permalink',
             ))
             ->add('description', 'text', array(
                 'required' => false,
-                'label' => 'sylius.form.taxon.description'
+                'label' => 'sylius.form.taxon.description',
             ))
             ->add('parent', 'sylius_taxon_choice', array(
                 'required' => false,
-                'label' => 'sylius.form.taxon.parent'
+                'label' => 'sylius.form.taxon.parent',
             ))
             ->add(
                 'file',
                 'file',
                 array(
-                    'label' => 'sylius.form.taxon.file'
+                    'label' => 'sylius.form.taxon.file',
                 )
             )
         ;

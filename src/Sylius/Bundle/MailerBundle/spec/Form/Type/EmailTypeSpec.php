@@ -81,7 +81,7 @@ class EmailTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Email',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled();
 

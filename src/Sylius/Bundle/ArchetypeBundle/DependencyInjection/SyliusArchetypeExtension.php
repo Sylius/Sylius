@@ -107,9 +107,10 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         $validationConfig = array();
         foreach ($config['validation_groups'] as $subject => $parameters) {
             foreach ($parameters as $resource => $validationGroups) {
-                $validationConfig[$subject . '_' . $resource] = $validationGroups;
+                $validationConfig[$subject.'_'.$resource] = $validationGroups;
             }
         }
+
         return $validationConfig;
     }
 }

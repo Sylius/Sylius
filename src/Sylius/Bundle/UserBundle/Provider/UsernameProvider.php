@@ -17,7 +17,7 @@ namespace Sylius\Bundle\UserBundle\Provider;
 class UsernameProvider extends AbstractUserProvider
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function findUser($username)
     {

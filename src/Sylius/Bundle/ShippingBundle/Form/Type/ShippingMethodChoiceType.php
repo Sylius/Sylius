@@ -95,7 +95,7 @@ class ShippingMethodChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList,
-                'criteria'    => array(),
+                'criteria' => array(),
             ))
             ->setDefined(array(
                 'subject',

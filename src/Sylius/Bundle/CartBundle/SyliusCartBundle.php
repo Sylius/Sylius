@@ -45,7 +45,7 @@ class SyliusCartBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Cart\Model\CartInterface'     => 'sylius.model.cart.class',
+            'Sylius\Component\Cart\Model\CartInterface' => 'sylius.model.cart.class',
             'Sylius\Component\Cart\Model\CartItemInterface' => 'sylius.model.cart_item.class',
         );
     }

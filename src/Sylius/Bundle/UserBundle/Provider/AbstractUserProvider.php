@@ -47,7 +47,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function loadUserByUsername($usernameOrEmail)
     {
@@ -64,7 +64,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function refreshUser(UserInterface $user)
     {
@@ -83,12 +83,12 @@ abstract class AbstractUserProvider implements UserProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     abstract protected function findUser($uniqueIdentifier);
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supportsClass($class)
     {

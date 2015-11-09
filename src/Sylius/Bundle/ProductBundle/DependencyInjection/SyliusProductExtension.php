@@ -59,19 +59,19 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $container->prependExtensionConfig('sylius_attribute', array(
                 'classes' => array(
                     'product' => array(
-                        'subject'         => $config['classes']['product']['model'],
-                        'attribute'       => array(
-                            'model'       => 'Sylius\Component\Product\Model\Attribute',
-                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                        'subject' => $config['classes']['product']['model'],
+                        'attribute' => array(
+                            'model' => 'Sylius\Component\Product\Model\Attribute',
+                            'repository' => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
                             'translation' => array(
-                                'model' => 'Sylius\Component\Product\Model\AttributeTranslation'
+                                'model' => 'Sylius\Component\Product\Model\AttributeTranslation',
                             ),
                         ),
                         'attribute_value' => array(
-                            'model' => 'Sylius\Component\Product\Model\AttributeValue'
+                            'model' => 'Sylius\Component\Product\Model\AttributeValue',
                         ),
-                    )
-                ))
+                    ),
+                ), )
         );
     }
 
@@ -93,21 +93,21 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                             'model' => 'Sylius\Component\Product\Model\Variant',
                             'controller' => 'Sylius\Bundle\ProductBundle\Controller\VariantController',
                             'form' => array(
-                                'default' => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType'
+                                'default' => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType',
                             ),
                         ),
-                        'option'       => array(
-                            'model'       => 'Sylius\Component\Product\Model\Option',
-                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                        'option' => array(
+                            'model' => 'Sylius\Component\Product\Model\Option',
+                            'repository' => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
                             'translation' => array(
-                                'model' => 'Sylius\Component\Product\Model\OptionTranslation'
+                                'model' => 'Sylius\Component\Product\Model\OptionTranslation',
                             ),
                         ),
                         'option_value' => array(
-                            'model' => 'Sylius\Component\Product\Model\OptionValue'
+                            'model' => 'Sylius\Component\Product\Model\OptionValue',
                         ),
-                    )
-                ))
+                    ),
+                ), )
         );
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
@@ -20,7 +20,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @param $request Generic
      */
@@ -48,7 +48,7 @@ class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports($request)
     {

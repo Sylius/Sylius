@@ -59,7 +59,7 @@ class ProductUniqueValidator extends ConstraintValidator
 
         if (null !== $conflictualProduct && $conflictualProduct != $product) {
             $this->context->addViolationAt($constraint->property, $constraint->message, array(
-                '%property%' => $constraint->property
+                '%property%' => $constraint->property,
             ));
         }
     }

@@ -7,7 +7,6 @@ use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Doctrine\ODM\PHPCR\UnitOfWork;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class DocumentRepositorySpec extends ObjectBehavior
 {

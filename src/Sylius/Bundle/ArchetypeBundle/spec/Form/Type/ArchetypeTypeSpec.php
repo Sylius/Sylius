@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -79,7 +77,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
         $resolver->setDefaults(
             array(
                 'data_class' => 'Archetype',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
             ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

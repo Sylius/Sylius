@@ -69,7 +69,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (!$value) {
-            return null;
+            return;
         }
 
         if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {

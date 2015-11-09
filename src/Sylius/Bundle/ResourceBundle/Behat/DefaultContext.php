@@ -43,9 +43,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var array
      */
     protected $actions = array(
-        'viewing'  => 'show',
+        'viewing' => 'show',
         'creation' => 'create',
-        'editing'  => 'update',
+        'editing' => 'update',
         'building' => 'build',
     );
 
@@ -204,7 +204,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             return $this->generateUrl($page, $parameters);
         }
 
-        $route  = str_replace(' ', '_', trim($page));
+        $route = str_replace(' ', '_', trim($page));
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {
@@ -329,9 +329,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param string $columnName
+     * @param string      $columnName
      *
-     * @return integer
+     * @return int
      *
      * @throws \Exception If column was not found
      */
@@ -340,7 +340,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         /** @var NodeElement $firstRow */
@@ -358,7 +358,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param array $fields
+     * @param array       $fields
      *
      * @return NodeElement|null
      *
@@ -369,7 +369,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $foundRows = $this->getRowsWithFields($table, $fields, true);
 
         if (empty($foundRows)) {
-            return null;
+            return;
         }
 
         return current($foundRows);
@@ -377,8 +377,8 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param array $fields
-     * @param boolean $onlyFirstOccurence
+     * @param array       $fields
+     * @param bool        $onlyFirstOccurence
      *
      * @return NodeElement[]
      *
@@ -389,7 +389,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
@@ -437,7 +437,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param string[] $fields
+     * @param string[]    $fields
      *
      * @return string[]
      *
@@ -457,8 +457,8 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param callable $callback
-     * @param int $limit
-     * @param int $delay In miliseconds
+     * @param int      $limit
+     * @param int      $delay    In miliseconds
      *
      * @return mixed
      *
@@ -493,7 +493,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if (null === $isoName) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 
@@ -514,7 +514,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if (null === $code) {
             throw new \InvalidArgumentException(sprintf(
-                'Locale "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Locale "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 

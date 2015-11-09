@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -212,8 +211,8 @@ class ResourceExtensionSpec extends ObjectBehavior
     }
 
     function it_should_not_render_sorting_link_when_not_sortable(
-        Request $request, 
-        GetResponseEvent $event, 
+        Request $request,
+        GetResponseEvent $event,
         \Twig_Environment $twig,
         $parameters
     ) {
@@ -279,7 +278,7 @@ class ResourceExtensionSpec extends ObjectBehavior
                     'paginate' => $limit,
                     '_sylius' => array('paginate' => '$paginate'),
                 )
-            )->willReturn('?paginate=' . $limit);
+            )->willReturn('?paginate='.$limit);
         }
 
         $twig->render('SyliusResourceBundle:Twig:paginate.html.twig', array(
@@ -325,7 +324,7 @@ class ResourceExtensionSpec extends ObjectBehavior
                     'paginate' => $limit,
                     '_sylius' => array('paginate' => '$paginate'),
                 )
-            )->willReturn('?paginate=' . $limit . '&params=value');
+            )->willReturn('?paginate='.$limit.'&params=value');
         }
 
         $twig->render('SyliusResourceBundle:Twig:newpaginate.html.twig', array(

@@ -44,7 +44,7 @@ EOT
                 'doctrine:database:create',
                 'doctrine:schema:create',
                 'cache:clear',
-                'doctrine:phpcr:repository:init'
+                'doctrine:phpcr:repository:init',
             );
 
             $this->runCommands($commands, $input, $output);

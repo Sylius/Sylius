@@ -201,7 +201,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return null;
+            return;
         }
 
         return '#'.$redirect['hash'];
@@ -305,7 +305,7 @@ class Configuration
             $sorting = $this->getRequestParameter('sorting');
             foreach ($defaultSorting as $key => $value) {
                 //do not override request parameters by $defaultSorting values
-                if (!isset($sorting[$key])){
+                if (!isset($sorting[$key])) {
                     $sorting[$key] = $value;
                 }
             }

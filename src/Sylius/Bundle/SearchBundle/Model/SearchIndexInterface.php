@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\SearchBundle\Model;
 
 /**
- * SearchIndex interface
+ * SearchIndex interface.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 interface SearchIndexInterface
 {
     /**
-     * Set itemId
+     * Set itemId.
      *
      * @param int $itemId
      *
@@ -28,14 +28,14 @@ interface SearchIndexInterface
     public function setItemId($itemId);
 
     /**
-     * Get itemId
+     * Get itemId.
      *
      * @return int
      */
     public function getItemId();
 
     /**
-     * Set entity
+     * Set entity.
      *
      * @param string $entity
      *
@@ -44,14 +44,14 @@ interface SearchIndexInterface
     public function setEntity($entity);
 
     /**
-     * Get entity
+     * Get entity.
      *
      * @return string
      */
     public function getEntity();
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
      *
@@ -60,7 +60,7 @@ interface SearchIndexInterface
     public function setValue($value);
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -74,14 +74,14 @@ interface SearchIndexInterface
     public function setTags($tags);
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
     public function getTags();
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -90,7 +90,7 @@ interface SearchIndexInterface
     public function setCreatedAt($createdAt);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c); Paweł Jędrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,11 +21,11 @@ interface InventoryUnitInterface extends TimestampableInterface
     /**
      * Default states.
      */
-    const STATE_CHECKOUT    = 'checkout';
-    const STATE_ONHOLD      = 'onhold';
-    const STATE_SOLD        = 'sold';
+    const STATE_CHECKOUT = 'checkout';
+    const STATE_ONHOLD = 'onhold';
+    const STATE_SOLD = 'sold';
     const STATE_BACKORDERED = 'backordered';
-    const STATE_RETURNED    = 'returned';
+    const STATE_RETURNED = 'returned';
 
     /**
      * @return StockableInterface

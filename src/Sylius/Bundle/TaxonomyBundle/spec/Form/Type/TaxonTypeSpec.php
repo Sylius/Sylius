@@ -63,7 +63,7 @@ class TaxonTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Taxon',
+                'data_class' => 'Taxon',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

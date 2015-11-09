@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sylius sandbox application.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *

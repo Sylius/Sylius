@@ -33,31 +33,31 @@ class ProductType extends BaseProductType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_product_translation',
-                'label'    => 'sylius.form.product.translations'
+                'label' => 'sylius.form.product.translations',
             ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(
-                'required'    => false,
+                'required' => false,
                 'empty_value' => '---',
-                'label'       => 'sylius.form.product.tax_category'
+                'label' => 'sylius.form.product.tax_category',
             ))
             ->add('shippingCategory', 'sylius_shipping_category_choice', array(
-                'required'    => false,
+                'required' => false,
                 'empty_value' => '---',
-                'label'       => 'sylius.form.product.shipping_category'
+                'label' => 'sylius.form.product.shipping_category',
             ))
             ->add('taxons', 'sylius_taxon_selection')
             ->add('variantSelectionMethod', 'choice', array(
-                'label'   => 'sylius.form.product.variant_selection_method',
-                'choices' => Product::getVariantSelectionMethodLabels()
+                'label' => 'sylius.form.product.variant_selection_method',
+                'choices' => Product::getVariantSelectionMethodLabels(),
             ))
             ->add('channels', 'sylius_channel_choice', array(
-                'multiple'    => true,
-                'expanded'    => true,
-                'label'       => 'sylius.form.product.channels',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.product.channels',
             ))
             ->add('restrictedZone', 'sylius_zone_choice', array(
                 'empty_value' => '---',
-                'label'       => 'sylius.form.product.restricted_zone',
+                'label' => 'sylius.form.product.restricted_zone',
             ))
         ;
     }

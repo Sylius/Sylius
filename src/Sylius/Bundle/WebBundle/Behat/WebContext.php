@@ -355,8 +355,8 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
     {
-        $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
-        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
+        $this->assertSession()->elementExists('css', '#'.$table." tr[data-customer='$customer']");
+        $this->assertSession()->elementNotExists('css', '#'.$table." tr[data-customer='$customer'] form input[value=".strtoupper($button).']');
     }
 
     /**
@@ -590,7 +590,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
         $column = null;
@@ -664,7 +664,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $pageMapping = array(
             'my orders history' => 'sylius_account_order_index',
-            'my address book'   => 'sylius_account_address_index'
+            'my address book' => 'sylius_account_address_index',
         );
 
         $this->getSession()->visit($this->generatePageUrl($pageMapping[$page]));
@@ -715,18 +715,18 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
 
     /**
      * @param DocumentElement $page
-     * @param string $collectionName
+     * @param string          $collectionName
      *
      * @return NodeElement
      */
     protected function getFormCollectionDiv(DocumentElement $page, $collectionName)
     {
-        return $page->find('css', 'div[data-form-type="collection"][id*="'. $collectionName .'"]');
+        return $page->find('css', 'div[data-form-type="collection"][id*="'.$collectionName.'"]');
     }
 
     /**
      * @param DocumentElement $page
-     * @param string $collectionName
+     * @param string          $collectionName
      *
      * @return NodeElement
      */

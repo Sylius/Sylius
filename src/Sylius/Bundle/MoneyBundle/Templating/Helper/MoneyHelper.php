@@ -33,7 +33,7 @@ class MoneyHelper extends Helper
      */
     public function __construct($locale, $currency = null)
     {
-        $this->locale   = $locale ?: \Locale::getDefault();
+        $this->locale = $locale ?: \Locale::getDefault();
         $this->currency = $currency;
     }
 
@@ -51,7 +51,7 @@ class MoneyHelper extends Helper
      */
     public function formatAmount($amount, $currency = null, $decimal = false, $locale = null)
     {
-        $locale   = $locale   ?: $this->getDefaultLocale();
+        $locale = $locale   ?: $this->getDefaultLocale();
         $currency = $currency ?: $this->getDefaultCurrency();
 
         if ($decimal) {
@@ -60,7 +60,7 @@ class MoneyHelper extends Helper
             $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         }
 
-        $result   = $formatter->formatCurrency($amount / 100, $currency);
+        $result = $formatter->formatCurrency($amount / 100, $currency);
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
         }

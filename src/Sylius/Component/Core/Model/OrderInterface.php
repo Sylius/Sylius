@@ -33,12 +33,12 @@ interface OrderInterface extends
     CustomerAwareInterface,
     ChannelAwareInterface
 {
-    const CHECKOUT_STATE_CART       = 'cart';
+    const CHECKOUT_STATE_CART = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';
-    const CHECKOUT_STATE_SHIPPING   = 'shipping';
-    const CHECKOUT_STATE_PAYMENT    = 'payment';
-    const CHECKOUT_STATE_FINALIZE   = 'finalize';
-    const CHECKOUT_STATE_COMPLETED  = 'completed';
+    const CHECKOUT_STATE_SHIPPING = 'shipping';
+    const CHECKOUT_STATE_PAYMENT = 'payment';
+    const CHECKOUT_STATE_FINALIZE = 'finalize';
+    const CHECKOUT_STATE_COMPLETED = 'completed';
 
     /**
      * Get user.
@@ -229,14 +229,14 @@ interface OrderInterface extends
     public function isBackorder();
 
     /**
-     * Gets the last updated shipment of the order
+     * Gets the last updated shipment of the order.
      *
      * @return ShipmentInterface
      */
     public function getLastShipment();
 
     /**
-     * Gets the last new payment of the order
+     * Gets the last new payment of the order.
      *
      * @param $state
      *

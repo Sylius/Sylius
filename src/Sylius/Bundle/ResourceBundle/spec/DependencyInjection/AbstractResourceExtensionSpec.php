@@ -42,15 +42,15 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                'choice' => 'Sylius\ChoiceFormType'
-                            )
-                        )
-                    )
-                )
+                                'choice' => 'Sylius\ChoiceFormType',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new Configuration(),
             $container,
@@ -67,7 +67,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
             ->setArguments(array(
                 'Sylius\Model',
                 SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
-                'sylius_resource_choice'
+                'sylius_resource_choice',
             ))
             ->addTag('form.type', array('alias' => 'sylius_resource_choice'));
         $container
@@ -80,15 +80,15 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                'choice' => 'Sylius\ChoiceFormType'
-                            )
-                        )
-                    )
-                )
+                                'choice' => 'Sylius\ChoiceFormType',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new Configuration(),
             $container,
@@ -112,15 +112,15 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType'
-                            )
-                        )
+                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType',
+                            ),
+                        ),
                     ),
-                )
+                ),
             ),
             new Configuration(),
             $container,
@@ -150,16 +150,16 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
                                 AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType',
-                                'other'                                => 'Sylius\OtherFormType',
-                            )
-                        )
+                                'other' => 'Sylius\OtherFormType',
+                            ),
+                        ),
                     ),
-                )
+                ),
             ),
             new Configuration(),
             $container,
@@ -180,11 +180,11 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'validation_groups' => array(
-                        'resource' => array('group')
+                        'resource' => array('group'),
                     ),
-                )
+                ),
             ),
             new Configuration(),
             $container,
@@ -214,7 +214,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('sylius');
+        $rootNode = $treeBuilder->root('sylius');
 
         $rootNode
             ->addDefaultsIfNotSet()

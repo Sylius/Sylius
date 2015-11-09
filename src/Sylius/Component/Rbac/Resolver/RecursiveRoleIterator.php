@@ -39,6 +39,6 @@ class RecursiveRoleIterator extends ArrayIterator implements RecursiveIterator
 
     public function getChildren()
     {
-        return new RecursiveRoleIterator($this->current()->getChildren());
+        return new self($this->current()->getChildren());
     }
 }

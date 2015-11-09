@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

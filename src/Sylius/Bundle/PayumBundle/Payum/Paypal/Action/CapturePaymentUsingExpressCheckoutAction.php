@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
@@ -38,32 +38,32 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
 
         $m = 0;
         foreach ($order->getItems() as $item) {
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal()/$item->getQuantity()/100, 2);
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal() / $item->getQuantity() / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
-            $m++;
+            ++$m;
         }
 
         if (0 !== $taxTotal = $this->calculateNonNeutralTaxTotal($order)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($taxTotal / 100, 2);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($taxTotal / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
 
-            $m++;
+            ++$m;
         }
 
         if (0 !== $promotionTotal = $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($promotionTotal / 100, 2);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($promotionTotal / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
 
-            $m++;
+            ++$m;
         }
 
         if (0 !== $shippingTotal = $order->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($shippingTotal / 100, 2);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($shippingTotal / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
         }
 
         $payment->setDetails($details);

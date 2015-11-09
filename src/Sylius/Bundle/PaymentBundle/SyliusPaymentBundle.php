@@ -49,8 +49,8 @@ class SyliusPaymentBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Payment\Model\CreditCardInterface'    => 'sylius.model.credit_card.class',
-            'Sylius\Component\Payment\Model\PaymentInterface'       => 'sylius.model.payment.class',
+            'Sylius\Component\Payment\Model\CreditCardInterface' => 'sylius.model.credit_card.class',
+            'Sylius\Component\Payment\Model\PaymentInterface' => 'sylius.model.payment.class',
             'Sylius\Component\Payment\Model\PaymentMethodInterface' => 'sylius.model.payment_method.class',
         );
     }

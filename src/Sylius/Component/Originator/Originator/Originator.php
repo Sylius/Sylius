@@ -50,13 +50,13 @@ class Originator implements OriginatorInterface
     public function getOrigin(OriginAwareInterface $originAware)
     {
         if (null === $originAware->getOriginId() || null === $originAware->getOriginType()) {
-            return null;
+            return;
         }
 
         return $this->manager
             ->getRepository($originAware->getOriginType())
             ->findOneBy(array(
-                $this->identifier => $originAware->getOriginId()
+                $this->identifier => $originAware->getOriginId(),
             ))
         ;
     }

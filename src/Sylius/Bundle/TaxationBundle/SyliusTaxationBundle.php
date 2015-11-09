@@ -50,7 +50,7 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     {
         return array(
             'Sylius\Component\Taxation\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
-            'Sylius\Component\Taxation\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
+            'Sylius\Component\Taxation\Model\TaxRateInterface' => 'sylius.model.tax_rate.class',
         );
     }
 

@@ -84,8 +84,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         Form $field
     ) {
         $event->getForm()->willReturn($form);
-        $event->getData()->willReturn(array('type' =>RuleInterface::TYPE_ITEM_TOTAL));
-
+        $event->getData()->willReturn(array('type' => RuleInterface::TYPE_ITEM_TOTAL));
 
         $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();

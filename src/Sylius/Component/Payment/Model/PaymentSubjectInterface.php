@@ -22,7 +22,7 @@ interface PaymentSubjectInterface
     public function getMethod();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getAmount();
 

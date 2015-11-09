@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -65,7 +64,7 @@ class BuildVariantFormSubscriberSpec extends ObjectBehavior
             array($optionValue),
             array(
                 'options' => array($options),
-                'auto_initialize' => false
+                'auto_initialize' => false,
             )
         )->shouldBeCalled()->willReturn($optionsForm);
 

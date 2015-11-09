@@ -2,12 +2,12 @@
 
 /*
  * This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\CoreBundle\Purger;
 
@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Purge expired pending orders
+ * Purge expired pending orders.
  *
  * @author Ka-Yue Yeung <kayuey@gmail.com>
  */
@@ -54,9 +54,9 @@ class ExpiredOrdersPurger implements PurgerInterface
 
     public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
-        $this->manager    = $manager;
+        $this->manager = $manager;
         $this->repository = $repository;
-        $this->factory    = $factory;
+        $this->factory = $factory;
     }
 
     /**

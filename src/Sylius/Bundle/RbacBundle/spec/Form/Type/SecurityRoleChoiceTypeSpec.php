@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\RbacBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,7 +22,7 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
     function let()
     {
         $this->beConstructedWith(array(
-            'key' => 'role'
+            'key' => 'role',
         ));
     }
 
@@ -41,10 +40,10 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(array(
             'choices' => array(
-                'key' => 'role'
+                'key' => 'role',
             ),
             'multiple' => true,
-            'expanded' => true
+            'expanded' => true,
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

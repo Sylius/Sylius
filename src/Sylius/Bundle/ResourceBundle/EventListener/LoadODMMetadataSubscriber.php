@@ -29,7 +29,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     protected $classes;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $classes
      */

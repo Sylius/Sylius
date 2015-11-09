@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CustomerSpec extends ObjectBehavior

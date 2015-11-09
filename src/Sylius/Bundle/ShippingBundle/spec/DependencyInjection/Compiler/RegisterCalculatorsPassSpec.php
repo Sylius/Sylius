@@ -38,8 +38,8 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
                 array(
                     'calculator' => 'calculator_name',
                     'label' => 'calculator_label',
-                )
-            )
+                ),
+            ),
         ));
 
         $calculator->addMethodCall(

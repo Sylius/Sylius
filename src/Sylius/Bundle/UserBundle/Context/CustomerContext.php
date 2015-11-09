@@ -47,6 +47,6 @@ class CustomerContext implements CustomerContextInterface
             return $this->securityContext->getToken()->getUser()->getCustomer();
         }
 
-        return null;
+        return;
     }
 }

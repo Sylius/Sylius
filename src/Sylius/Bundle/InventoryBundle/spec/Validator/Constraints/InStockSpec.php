@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class InStockSpec extends ObjectBehavior
 {

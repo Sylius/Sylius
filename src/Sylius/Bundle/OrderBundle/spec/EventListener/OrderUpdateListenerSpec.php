@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\OrderBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

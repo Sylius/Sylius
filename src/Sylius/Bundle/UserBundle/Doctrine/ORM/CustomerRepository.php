@@ -23,7 +23,7 @@ class CustomerRepository extends EntityRepository
     /**
      * Get the customer's data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */

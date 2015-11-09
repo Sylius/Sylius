@@ -45,10 +45,10 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     private $forceApiVersion = false;
 
     private $apiVersionHeader = 'Accept';
-    private $apiGroupsHeader  = 'Accept';
+    private $apiGroupsHeader = 'Accept';
 
     private $apiVersionRegexp = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    private $apiGroupsRegexp  = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    private $apiGroupsRegexp = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     public function __construct(ParametersParser $parametersParser, Parameters $parameters, array $settings, $forceApiVersion = false)
     {

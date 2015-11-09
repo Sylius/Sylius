@@ -47,5 +47,4 @@ interface IdentityInterface
      * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order = null);
-
 }

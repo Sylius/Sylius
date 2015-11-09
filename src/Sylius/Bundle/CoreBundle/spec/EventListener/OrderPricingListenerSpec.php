@@ -136,7 +136,7 @@ class OrderPricingListenerSpec extends ObjectBehavior
                 'customer' => $customer,
                 'groups' => array('group1', 'group2'),
                 'channel' => array($channel),
-                'quantity' => 5
+                'quantity' => 5,
             )
         )->shouldBeCalled()->willReturn(10);
 

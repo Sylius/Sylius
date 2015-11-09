@@ -28,11 +28,11 @@ class CommentType extends AbstractResourceType
     {
         $builder
             ->add('comment', 'textarea', array(
-                'label'    => 'sylius.form.comment.comment',
+                'label' => 'sylius.form.comment.comment',
                 'required' => false,
             ))
             ->add('notifyCustomer', 'checkbox', array(
-                'label'    => 'sylius.form.comment.notify_customer'
+                'label' => 'sylius.form.comment.notify_customer',
             ))
         ;
     }

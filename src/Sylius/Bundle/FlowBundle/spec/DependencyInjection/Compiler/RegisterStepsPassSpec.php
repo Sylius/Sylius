@@ -34,9 +34,9 @@ class RegisterStepsPassSpec extends ObjectBehavior
         $container->findTaggedServiceIds('sylius.process.step')->shouldBeCalled()->willreturn(array(
             'id' => array(
                 array(
-                    'alias' => 'alias'
-                )
-            )
+                    'alias' => 'alias',
+                ),
+            ),
         ));
 
         $coordinator->addMethodCall('registerStep', Argument::type('array'))->shouldBeCalled();

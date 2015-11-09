@@ -44,7 +44,7 @@ class CartController extends Controller
             ->setTemplate($this->config->getTemplate('summary.html'))
             ->setData(array(
                 'cart' => $cart,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ))
         ;
 
@@ -89,7 +89,7 @@ class CartController extends Controller
             ->setTemplate($this->config->getTemplate('summary.html'))
             ->setData(array(
                 'cart' => $cart,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ))
         ;
 

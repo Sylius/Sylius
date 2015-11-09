@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

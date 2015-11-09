@@ -32,7 +32,7 @@ class SearchController extends ResourceController
      */
     public function indexAction(Request $request)
     {
-        /**
+        /*
          * when using elastic search if you want to setup multiple indexes and control
          * them separately you can do so by adding the index service with a setter
          *
@@ -54,7 +54,7 @@ class SearchController extends ResourceController
 
         $paginator = $finder->getPaginator();
 
-        $searchConfig = $this->container->getParameter("sylius_search.config");
+        $searchConfig = $this->container->getParameter('sylius_search.config');
 
         if ($paginator) {
             $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -90,7 +90,7 @@ class SearchController extends ResourceController
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->get('sylius.repository.taxonomy')
                 ->findOneBy(array(
-                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
+                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon')),
                 ))
             ;
 

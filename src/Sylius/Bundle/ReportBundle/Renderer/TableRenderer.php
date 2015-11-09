@@ -51,13 +51,13 @@ class TableRenderer implements RendererInterface
 
             $rendererConfiguration = $report->getRendererConfiguration();
 
-            return $this->templating->render($rendererConfiguration["template"], array(
+            return $this->templating->render($rendererConfiguration['template'], array(
                 'data' => $data,
                 'configuration' => $rendererConfiguration,
             ));
         }
 
-        return $this->templating->render("SyliusReportBundle::noDataTemplate.html.twig", array(
+        return $this->templating->render('SyliusReportBundle::noDataTemplate.html.twig', array(
             'report' => $report,
         ));
     }

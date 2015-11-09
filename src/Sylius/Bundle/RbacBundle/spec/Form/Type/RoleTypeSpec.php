@@ -78,7 +78,7 @@ class RoleTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'Role',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled();
 

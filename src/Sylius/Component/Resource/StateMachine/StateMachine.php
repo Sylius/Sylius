@@ -14,14 +14,14 @@ namespace Sylius\Component\Resource\StateMachine;
 use SM\StateMachine\StateMachine as BaseStateMachine;
 
 /**
- * Sylius State Machine
+ * Sylius State Machine.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class StateMachine extends BaseStateMachine implements StateMachineInterface
 {
     /**
-     * @{inheritDoc}
+     * {@inheritdoc}
      */
     public function getTransitionFromState($fromState)
     {
@@ -32,11 +32,11 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritdoc}
      */
     public function getTransitionToState($toState)
     {
@@ -47,6 +47,6 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 }

@@ -43,7 +43,7 @@ abstract class FormContext extends RawMinkContext
     }
 
     /**
-     * Add an item of the collection type
+     * Add an item of the collection type.
      *
      * @param string $collectionSelector
      * @param null   $buttonName
@@ -66,12 +66,12 @@ abstract class FormContext extends RawMinkContext
     }
 
     /**
-     * Delete an item of the collection type
+     * Delete an item of the collection type.
      *
-     * @param string  $collectionSelector
-     * @param integer $position
-     * @param null    $buttonName
-     * @param string  $buttonType
+     * @param string $collectionSelector
+     * @param int    $position
+     * @param null   $buttonName
+     * @param string $buttonType
      */
     protected function deleteCollectionItem(
         $position,
@@ -95,11 +95,12 @@ abstract class FormContext extends RawMinkContext
     }
 
     /**
-     * Check if the value of the field is valid
+     * Check if the value of the field is valid.
      *
-     * @param  string           $position
-     * @param  string           $label
-     * @param  string           $collectionSelector
+     * @param string $position
+     * @param string $label
+     * @param string $collectionSelector
+     *
      * @return NodeElement|null
      */
     protected function isInvalidCollectionField($position, $label, $collectionSelector = null)
@@ -128,12 +129,12 @@ abstract class FormContext extends RawMinkContext
     }
 
     /**
-     * Fill a collection form field
+     * Fill a collection form field.
      *
-     * @param integer $position
-     * @param string  $field
-     * @param mixed   $value
-     * @param string  $collectionSelector
+     * @param int    $position
+     * @param string $field
+     * @param mixed  $value
+     * @param string $collectionSelector
      */
     protected function fillCollectionField($position, $field, $value, $collectionSelector = null)
     {

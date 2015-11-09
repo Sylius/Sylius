@@ -50,11 +50,11 @@ class VolumeRateCalculator extends Calculator
     {
         $resolver
             ->setDefaults(array(
-                'division' => 1
+                'division' => 1,
             ))
             ->setRequired(array(
                 'amount',
-                'division'
+                'division',
             ))
             ->setAllowedTypes('amount', 'numeric')
             ->setAllowedTypes('division', 'numeric')

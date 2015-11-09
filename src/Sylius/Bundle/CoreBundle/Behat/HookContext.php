@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -46,14 +47,14 @@ class HookContext implements Context, KernelAwareContext
 
         $isMySqlDriver = $entityManager->getConnection()->getDriver() instanceof PDOMySqlDriver;
         if ($isMySqlDriver) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
+            $entityManager->getConnection()->executeUpdate('SET foreign_key_checks = 0;');
         }
 
         $purger = new ORMPurger($entityManager);
         $purger->purge();
 
         if ($isMySqlDriver) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
+            $entityManager->getConnection()->executeUpdate('SET foreign_key_checks = 1;');
         }
 
         $entityManager->clear();
@@ -80,4 +81,4 @@ class HookContext implements Context, KernelAwareContext
     {
         return $this->kernel->getContainer();
     }
-} 
+}

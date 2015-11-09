@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
 
 /**
@@ -39,7 +38,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.product.name'
+                'label' => 'sylius.form.product.name',
             ))
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -47,7 +46,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
 
         $builder
             ->add('description', 'textarea', array(
-                'label' => 'sylius.form.product.description'
+                'label' => 'sylius.form.product.description',
             ))
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -56,7 +55,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
         $builder
             ->add('metaKeywords', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_keywords'
+                'label' => 'sylius.form.product.meta_keywords',
             ))
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -65,7 +64,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
         $builder
             ->add('metaDescription', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_description'
+                'label' => 'sylius.form.product.meta_description',
             ))
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -74,7 +73,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
         $builder
             ->add('shortDescription', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.short_description'
+                'label' => 'sylius.form.product.short_description',
             ))
             ->shouldBeCalled()
             ->willReturn($builder)

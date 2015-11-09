@@ -108,7 +108,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $setBuilder->build(array(
             array('black1', 'white2', 'red3'),
-            array('small4', 'medium5', 'large6')
+            array('small4', 'medium5', 'large6'),
         ))->willReturn(array(
             array('black1', 'small4'),
             array('black1', 'medium5'),

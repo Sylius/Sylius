@@ -57,7 +57,7 @@ class PaymentRepository extends EntityRepository
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':createdAtFrom'))
-                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00',strtotime($criteria['createdAtFrom'])))
+                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00', strtotime($criteria['createdAtFrom'])))
             ;
         }
         if (!empty($criteria['createdAtTo'])) {

@@ -38,14 +38,14 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     }
 
     /**
-     * Add mapping to translatable entities
+     * Add mapping to translatable entities.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection    = $classMetadata->reflClass;
+        $reflection = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
@@ -74,12 +74,12 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         }
 
         $metadata->mapOneToMany(array(
-            'fieldName'     => 'translations',
-            'targetEntity'  => $this->configs[$metadata->name]['translation']['model'],
-            'mappedBy'      => 'translatable',
-            'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => 'locale',
-            'cascade'       => array('persist', 'merge', 'remove'),
+            'fieldName' => 'translations',
+            'targetEntity' => $this->configs[$metadata->name]['translation']['model'],
+            'mappedBy' => 'translatable',
+            'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+            'indexBy' => 'locale',
+            'cascade' => array('persist', 'merge', 'remove'),
             'orphanRemoval' => true,
         ));
     }
@@ -98,29 +98,29 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         }
 
         $metadata->mapManyToOne(array(
-            'fieldName'    => 'translatable' ,
+            'fieldName' => 'translatable',
             'targetEntity' => $this->configs[$metadata->name]['model'],
-            'inversedBy'   => 'translations' ,
-            'joinColumns'  => array(array(
-                'name'                 => 'translatable_id',
+            'inversedBy' => 'translations',
+            'joinColumns' => array(array(
+                'name' => 'translatable_id',
                 'referencedColumnName' => 'id',
-                'onDelete'             => 'CASCADE',
-                'nullable'             => false,
+                'onDelete' => 'CASCADE',
+                'nullable' => false,
             )),
         ));
 
         if (!$metadata->hasField('locale')) {
             $metadata->mapField(array(
                 'fieldName' => 'locale',
-                'type'      => 'string',
-                'nullable'  => false,
+                'type' => 'string',
+                'nullable' => false,
             ));
         }
 
         // Map unique index.
         $columns = array(
             $metadata->getSingleAssociationJoinColumnName('translatable'),
-            'locale'
+            'locale',
         );
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {

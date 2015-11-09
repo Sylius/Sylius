@@ -32,7 +32,7 @@ class RuleChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->rules
+                'choices' => $this->rules,
             ))
         ;
     }

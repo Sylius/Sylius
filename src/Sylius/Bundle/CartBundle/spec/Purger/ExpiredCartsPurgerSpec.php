@@ -4,7 +4,6 @@ namespace spec\Sylius\Bundle\CartBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 

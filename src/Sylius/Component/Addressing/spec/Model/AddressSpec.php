@@ -99,8 +99,7 @@ class AddressSpec extends ObjectBehavior
     function it_unsets_the_province_when_erasing_the_country(
         CountryInterface $country,
         ProvinceInterface $province
-    )
-    {
+    ) {
         $country->hasProvince($province)->willReturn(true);
 
         $this->setCountry($country);
@@ -128,8 +127,7 @@ class AddressSpec extends ObjectBehavior
     function its_province_is_mutable(
         CountryInterface $country,
         ProvinceInterface $province
-    )
-    {
+    ) {
         $country->hasProvince($province)->willReturn(true);
         $this->setCountry($country);
 
@@ -140,8 +138,7 @@ class AddressSpec extends ObjectBehavior
     function it_throws_if_trying_to_define_province_which_does_not_belong_to_country(
         CountryInterface $country,
         ProvinceInterface $province
-    )
-    {
+    ) {
         $country->hasProvince($province)->willReturn(false);
         $this->setCountry($country);
 

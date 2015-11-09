@@ -52,7 +52,7 @@ class DisabledValidatorSpec extends ObjectBehavior
         Constraints\Disabled $constraint,
         ToggleableInterface $subject
     ) {
-        $constraint->message = "foobar";
+        $constraint->message = 'foobar';
 
         $subject->isEnabled()->shouldBeCalled()->willReturn(true);
 

@@ -122,7 +122,7 @@ class Coupon implements CouponInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
+        ++$this->used;
     }
 
     /**

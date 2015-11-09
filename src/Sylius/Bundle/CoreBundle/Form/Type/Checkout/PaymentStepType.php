@@ -49,13 +49,13 @@ class PaymentStepType extends AbstractResourceType
 
         $builder
             ->add('paymentMethod', 'sylius_payment_method_choice', array(
-                'label'         => 'sylius.form.checkout.payment_method',
-                'expanded'      => true,
+                'label' => 'sylius.form.checkout.payment_method',
+                'expanded' => true,
                 'property_path' => 'lastPayment.method',
-                'channel'       => $this->channelContext->getChannel(),
-                'constraints'   => array(
-                    $notBlank
-                )
+                'channel' => $this->channelContext->getChannel(),
+                'constraints' => array(
+                    $notBlank,
+                ),
             ))
         ;
     }

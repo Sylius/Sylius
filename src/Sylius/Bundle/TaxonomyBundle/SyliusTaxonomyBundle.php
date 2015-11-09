@@ -40,7 +40,7 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
     {
         return array(
             'Sylius\Component\Taxonomy\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
-            'Sylius\Component\Taxonomy\Model\TaxonInterface'    => 'sylius.model.taxon.class',
+            'Sylius\Component\Taxonomy\Model\TaxonInterface' => 'sylius.model.taxon.class',
         );
     }
 

@@ -63,7 +63,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return int
@@ -225,7 +225,7 @@ EOT
 
         do {
             $countries = $this->getCountriesCodes($input, $output);
-            
+
             $valid = true;
 
             foreach ($countries as $code) {

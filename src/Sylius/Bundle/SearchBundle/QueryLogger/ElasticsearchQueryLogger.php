@@ -39,7 +39,7 @@ class ElasticsearchQueryLogger implements QueryLoggerInterface
         $document = new Document();
         $document->setData(array(
             'search_term' => $searchTerm,
-            'ip_address' => $ipAddress
+            'ip_address' => $ipAddress,
         ));
         $this->type->addDocuments(array($document));
     }

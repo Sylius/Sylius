@@ -50,7 +50,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'multiple' => true
+            'multiple' => true,
         ));
     }
 

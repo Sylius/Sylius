@@ -62,8 +62,8 @@ class CountryTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'Country',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'Country',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

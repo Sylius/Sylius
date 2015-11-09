@@ -31,7 +31,7 @@ class TaxonomyType extends BaseTaxonomyType
             'file',
             array(
                 'property_path' => 'root.file',
-                'label' => 'sylius.form.taxonomy.file'
+                'label' => 'sylius.form.taxonomy.file',
             )
         );
     }

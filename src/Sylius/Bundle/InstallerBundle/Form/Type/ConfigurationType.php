@@ -20,13 +20,13 @@ class ConfigurationType extends AbstractType
     {
         $builder
             ->add('database', 'sylius_configuration_database', array(
-                'label' => 'sylius.form.configuration.database'
+                'label' => 'sylius.form.configuration.database',
             ))
             ->add('mailer', 'sylius_configuration_mailer', array(
-                'label' => 'sylius.form.configuration.mailer'
+                'label' => 'sylius.form.configuration.mailer',
             ))
             ->add('locale', 'sylius_configuration_locale', array(
-                'label' => 'sylius.form.configuration.locale'
+                'label' => 'sylius.form.configuration.locale',
             ))
             ->add('hidden', 'sylius_configuration_hidden')
         ;

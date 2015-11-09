@@ -115,7 +115,7 @@ class Order extends Cart implements OrderInterface
     protected $shippingState = OrderShippingStates::CHECKOUT;
 
     /**
-     * Promotions applied
+     * Promotions applied.
      *
      * @var Collection|BasePromotionInterface[]
      */
@@ -173,7 +173,7 @@ class Order extends Cart implements OrderInterface
     public function getUser()
     {
         if (null === $this->customer) {
-            return null;
+            return;
         }
 
         return $this->customer->getUser();
@@ -537,7 +537,7 @@ class Order extends Cart implements OrderInterface
     }
 
     /**
-     * Gets the last updated shipment of the order
+     * Gets the last updated shipment of the order.
      *
      * @return false|ShipmentInterface
      */

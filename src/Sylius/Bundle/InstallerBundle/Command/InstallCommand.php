@@ -22,19 +22,19 @@ class InstallCommand extends AbstractInstallCommand
      * @var array
      */
     private $commands = array(
-        array (
+        array(
             'command' => 'check-requirements',
             'message' => 'Checking system requirements.',
         ),
-        array (
+        array(
             'command' => 'database',
             'message' => 'Setting up the database.',
         ),
-        array (
+        array(
             'command' => 'setup',
             'message' => 'Shop configuration.',
         ),
-        array (
+        array(
             'command' => 'assets',
             'message' => 'Installing assets.',
         ),
@@ -72,7 +72,7 @@ EOT
 
         foreach ($this->commands as $step => $command) {
             try {
-                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step+1, count($this->commands), $command['message']));
+                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($this->commands), $command['message']));
                 $this->commandExecutor->runCommand('sylius:install:'.$command['command'], array(), $output);
                 $output->writeln('');
             } catch (RuntimeException $exception) {
@@ -83,10 +83,10 @@ EOT
         }
 
         $map = array(
-            Kernel::ENV_DEV     => '/app_dev.php',
-            Kernel::ENV_TEST    => '/app_test.php',
+            Kernel::ENV_DEV => '/app_dev.php',
+            Kernel::ENV_TEST => '/app_test.php',
             Kernel::ENV_STAGING => '/app_staging.php',
-            Kernel::ENV_PROD    => '/',
+            Kernel::ENV_PROD => '/',
         );
 
         $output->writeln($this->getProperFinalMessage());

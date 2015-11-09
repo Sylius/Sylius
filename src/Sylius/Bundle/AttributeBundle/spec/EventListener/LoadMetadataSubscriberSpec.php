@@ -81,8 +81,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
         $classMetadataInfo->fieldMappings = array(
             'id' => array(
-                'columnName' => 'id'
-            )
+                'columnName' => 'id',
+            ),
         );
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
@@ -92,26 +92,26 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
 
         $subjectMapping = array(
-            'fieldName'     => 'subject',
-            'targetEntity'  => 'Some\App\Product\Entity\Product',
-            'inversedBy'    => 'attributes',
-            'joinColumns'   => array(array(
-                'name'                 => 'product_id',
+            'fieldName' => 'subject',
+            'targetEntity' => 'Some\App\Product\Entity\Product',
+            'inversedBy' => 'attributes',
+            'joinColumns' => array(array(
+                'name' => 'product_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $attributeMapping = array(
-            'fieldName'     => 'attribute',
-            'targetEntity'  => 'Some\App\Product\Entity\Attribute',
-            'joinColumns'   => array(array(
-                'name'                 => 'attribute_id',
+            'fieldName' => 'attribute',
+            'targetEntity' => 'Some\App\Product\Entity\Attribute',
+            'joinColumns' => array(array(
+                'name' => 'attribute_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();

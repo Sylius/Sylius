@@ -55,8 +55,8 @@ class SecurityStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
-        $request          = $context->getRequest();
-        $guestForm        = $this->getGuestForm();
+        $request = $context->getRequest();
+        $guestForm = $this->getGuestForm();
         $registrationForm = $this->getRegistrationForm();
 
         if ($this->isGuestOrderAllowed() && $guestForm->handleRequest($request)->isValid()) {
@@ -78,9 +78,9 @@ class SecurityStep extends CheckoutStep
     protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm, FormInterface $guestForm = null)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'context'           => $context,
+            'context' => $context,
             'registration_form' => $registrationForm->createView(),
-            'guest_form'        => null !== $guestForm ? $guestForm->createView() : null,
+            'guest_form' => null !== $guestForm ? $guestForm->createView() : null,
         ));
     }
 
@@ -104,7 +104,7 @@ class SecurityStep extends CheckoutStep
     protected function getGuestForm()
     {
         if (!$this->isGuestOrderAllowed()) {
-            return null;
+            return;
         }
         /** @var CustomerInterface $customer */
         $customer = $this->get('sylius.repository.customer')->createNew();
@@ -129,8 +129,9 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * @param FormInterface $guestForm
+     * @param FormInterface  $guestForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processGuestOrder(FormInterface $guestForm, OrderInterface $order)
@@ -146,6 +147,7 @@ class SecurityStep extends CheckoutStep
     /**
      * @param FormInterface  $registrationForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processRegistration(FormInterface $registrationForm, OrderInterface $order)
@@ -159,6 +161,7 @@ class SecurityStep extends CheckoutStep
 
     /**
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processUserLoggedIn(OrderInterface $order)

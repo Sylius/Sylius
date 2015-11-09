@@ -23,11 +23,11 @@ class PaymentMethodTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.payment_method.name'
+                'label' => 'sylius.form.payment_method.name',
             ))
             ->add('description', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_method.description'
+                'label' => 'sylius.form.payment_method.description',
             ))
         ;
     }

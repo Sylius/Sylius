@@ -41,7 +41,7 @@ class ChannelBasedConfigurationType extends AbstractType
         foreach ($this->channelRepository->findAll() as $channel) {
             $builder
                 ->add($channel->getId(), 'sylius_money', array(
-                    'label'    => $channel->getName(),
+                    'label' => $channel->getName(),
                     'required' => false,
                 ))
             ;
@@ -55,7 +55,7 @@ class ChannelBasedConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

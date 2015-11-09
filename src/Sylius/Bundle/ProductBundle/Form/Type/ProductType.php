@@ -32,16 +32,16 @@ class ProductType extends AbstractResourceType
                 'master' => true,
             ))
             ->add('attributes', 'collection', array(
-                'required'     => false,
-                'type'         => 'sylius_product_attribute_value',
-                'allow_add'    => true,
+                'required' => false,
+                'type' => 'sylius_product_attribute_value',
+                'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false
+                'by_reference' => false,
             ))
             ->add('options', 'sylius_product_option_choice', array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.product.options'
+                'label' => 'sylius.form.product.options',
             ))
         ;
     }

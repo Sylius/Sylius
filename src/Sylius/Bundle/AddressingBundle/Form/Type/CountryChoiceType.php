@@ -40,7 +40,7 @@ class CountryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options)  {
+        $choiceList = function (Options $options) {
             if (null === $options['enabled']) {
                 $choices = $this->countryRepository->findAll();
             } else {
@@ -53,8 +53,8 @@ class CountryChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList,
-                'enabled'     => null,
-                'label'       => 'sylius.form.address.country',
+                'enabled' => null,
+                'label' => 'sylius.form.address.country',
                 'empty_value' => 'sylius.form.country.select',
             ))
         ;

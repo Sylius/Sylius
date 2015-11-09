@@ -52,7 +52,7 @@ class EnabledValidatorSpec extends ObjectBehavior
         Constraints\Enabled $constraint,
         ToggleableInterface $subject
     ) {
-        $constraint->message = "Violation message";
+        $constraint->message = 'Violation message';
 
         $subject->isEnabled()->shouldBeCalled()->willReturn(false);
 

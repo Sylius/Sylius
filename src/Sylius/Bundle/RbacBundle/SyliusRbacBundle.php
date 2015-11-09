@@ -37,7 +37,7 @@ class SyliusRbacBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Rbac\Model\RoleInterface'       => 'sylius.model.role.class',
+            'Sylius\Component\Rbac\Model\RoleInterface' => 'sylius.model.role.class',
             'Sylius\Component\Rbac\Model\PermissionInterface' => 'sylius.model.permission.class',
         );
     }

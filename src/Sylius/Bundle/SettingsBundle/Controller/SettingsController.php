@@ -103,7 +103,7 @@ class SettingsController extends FOSRestController
 
         return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), array(
             'settings' => $settings,
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -153,6 +153,7 @@ class SettingsController extends FOSRestController
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     private function isApiRequest(Request $request)

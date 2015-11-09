@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SearchBundle\Indexer;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Interface IndexerInterface
+ * Interface IndexerInterface.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -34,7 +34,7 @@ interface IndexerInterface
     public function populate(EntityManager $em);
 
     /**
-     * Gathers the command output for informing the user
+     * Gathers the command output for informing the user.
      *
      * @return string
      */

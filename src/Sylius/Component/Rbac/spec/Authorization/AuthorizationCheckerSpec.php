@@ -28,8 +28,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->beConstructedWith($currentIdentityProvider, $permissionMap, $rolesResolver);
     }
 

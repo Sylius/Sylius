@@ -54,7 +54,6 @@ class CustomerRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
 
-
         $collection->enable('softdeleteable')->shouldBeCalled();
 
         $this->findForDetailsPage(1);
@@ -96,7 +95,7 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->createFilterPaginator(
             array(
                 'enabled' => true,
-                'query' => 'arnaud'
+                'query' => 'arnaud',
             ),
             array('name' => 'asc'),
             true

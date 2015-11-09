@@ -56,8 +56,8 @@ class ProvinceTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'Province',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

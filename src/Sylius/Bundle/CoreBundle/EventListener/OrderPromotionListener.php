@@ -54,8 +54,7 @@ class OrderPromotionListener
         PromotionProcessorInterface $promotionProcessor,
         SessionInterface $session,
         TranslatorInterface $translator
-    )
-    {
+    ) {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;

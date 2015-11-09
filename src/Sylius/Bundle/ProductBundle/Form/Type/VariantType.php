@@ -33,7 +33,7 @@ class VariantType extends BaseVariantType
                 'date_format' => 'y-M-d',
                 'date_widget' => 'choice',
                 'time_widget' => 'text',
-                'label'       => 'sylius.form.product_variant.available_on'
+                'label' => 'sylius.form.product_variant.available_on',
             ))
         ;
     }

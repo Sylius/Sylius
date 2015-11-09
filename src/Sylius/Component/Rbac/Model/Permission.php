@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Permission implements PermissionInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -77,7 +77,7 @@ class Permission implements PermissionInterface
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

@@ -54,7 +54,7 @@ class CommentController extends ResourceController
             ->setTemplate($config->getTemplate('create.html'))
             ->setData(array(
                 $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                'form' => $form->createView(),
             ))
         ;
 
