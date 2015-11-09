@@ -39,15 +39,14 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
 
     /**
      * @param CurrentIdentityProviderInterface $currentIdentityProvider
-     * @param PermissionMapInterface $permissionMap
-     * @param RolesResolverInterface $rolesResolver
+     * @param PermissionMapInterface           $permissionMap
+     * @param RolesResolverInterface           $rolesResolver
      */
     public function __construct(
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->currentIdentityProvider = $currentIdentityProvider;
         $this->permissionMap = $permissionMap;
         $this->rolesResolver = $rolesResolver;

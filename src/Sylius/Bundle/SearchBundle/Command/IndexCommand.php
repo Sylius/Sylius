@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to populate a search index
+ * Command to populate a search index.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

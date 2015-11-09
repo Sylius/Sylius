@@ -48,7 +48,7 @@ class CommentTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Comment',
+                'data_class' => 'Comment',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

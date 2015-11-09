@@ -15,7 +15,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 
 /**
- * Data fetcher choice type
+ * Data fetcher choice type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

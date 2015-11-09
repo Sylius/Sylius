@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>

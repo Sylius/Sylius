@@ -24,10 +24,10 @@ interface AdapterInterface
     /**
      * Send an e-mail.
      *
-     * @param array  $recipients
-     * @param string $senderAddress
-     * @param string $senderName
-     * @param RenderedEmail $renderedEmail
+     * @param array          $recipients
+     * @param string         $senderAddress
+     * @param string         $senderName
+     * @param RenderedEmail  $renderedEmail
      * @param EmailInterface $email
      */
     public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data);

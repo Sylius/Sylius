@@ -30,7 +30,7 @@ class TaxonType extends BaseTaxonType
             'file',
             'file',
             array(
-                'label' => 'sylius.form.taxon.file'
+                'label' => 'sylius.form.taxon.file',
             )
         );
     }

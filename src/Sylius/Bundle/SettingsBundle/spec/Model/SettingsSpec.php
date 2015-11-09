@@ -21,10 +21,10 @@ class SettingsSpec extends ObjectBehavior
     function let()
     {
         $parameters = array(
-            'title'      => 'Sylius, Symfony2 ecommerce',
+            'title' => 'Sylius, Symfony2 ecommerce',
             'percentage' => 12,
-            'page'       => 1,
-            'zone'       => new \stdClass()
+            'page' => 1,
+            'zone' => new \stdClass(),
         );
 
         $this->beConstructedWith($parameters);

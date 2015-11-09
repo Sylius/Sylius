@@ -75,10 +75,10 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'         => null,
-            'multiple'           => true,
-            'render_label'       => false,
-            'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+            'data_class' => null,
+            'multiple' => true,
+            'render_label' => false,
+            'model_transformer' => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
         ))->shouldBeCalled();
 
         $resolver->setNormalizers(Argument::withKey('model_transformer'))->shouldBeCalled();

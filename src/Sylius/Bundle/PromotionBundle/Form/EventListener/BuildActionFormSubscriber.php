@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Model\ActionInterface;
 class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
-     * Get action configuration
+     * Get action configuration.
      *
      * @param ActionInterface $action
      *
@@ -39,7 +39,7 @@ class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
     }
 
     /**
-     * Get action type
+     * Get action type.
      *
      * @param ActionInterface $action
      *
@@ -55,6 +55,6 @@ class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
             return $this->registryIdentifier;
         }
 
-        return null;
+        return;
     }
 }

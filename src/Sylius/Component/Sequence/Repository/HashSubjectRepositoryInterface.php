@@ -12,7 +12,7 @@
 namespace Sylius\Component\Sequence\Repository;
 
 /**
- * Repository interface for model which needs number uniqueness check before applying (like random numbers)
+ * Repository interface for model which needs number uniqueness check before applying (like random numbers).
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
@@ -22,6 +22,7 @@ interface HashSubjectRepositoryInterface
      * Is the given number used?
      *
      * @param $number string
+     *
      * @return bool
      */
     public function isNumberUsed($number);

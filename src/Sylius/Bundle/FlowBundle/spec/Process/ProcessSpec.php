@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
@@ -88,5 +87,4 @@ class ProcessSpec extends ObjectBehavior
         $this->getSteps()->shouldReturn(array('other_name' => $secondStep));
         $this->getOrderedSteps()->shouldReturn(array($secondStep));
     }
-
 }

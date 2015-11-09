@@ -61,7 +61,7 @@ class TaxCategoryTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'TaxCategory',
+                    'data_class' => 'TaxCategory',
                     'validation_groups' => array('sylius'),
                 )
             )

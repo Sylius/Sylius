@@ -12,9 +12,6 @@
 namespace Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -36,7 +33,7 @@ class ArchetypeType extends AbstractResourceType
      * @param array  $validationGroups
      * @param string $subject
      */
-    function __construct($dataClass, array $validationGroups, $subject)
+    public function __construct($dataClass, array $validationGroups, $subject)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -51,21 +48,21 @@ class ArchetypeType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new ParentArchetypeListener($this->subject))
             ->add('code', 'text', array(
-                'label' => 'sylius.form.archetype.code'
+                'label' => 'sylius.form.archetype.code',
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_archetype_translation', $this->subject),
-                'label'    => 'sylius.form.archetype.name'
+                'label' => 'sylius.form.archetype.name',
             ))
             ->add('attributes', sprintf('sylius_%s_attribute_choice', $this->subject), array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.archetype.attributes'
+                'label' => 'sylius.form.archetype.attributes',
             ))
             ->add('options', sprintf('sylius_%s_option_choice', $this->subject), array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.archetype.options'
+                'label' => 'sylius.form.archetype.options',
             ))
         ;
     }

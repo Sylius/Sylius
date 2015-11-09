@@ -194,5 +194,4 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
 interface FakeStockableInterface extends StockableInterface, SoftDeletableInterface
 {
-
 }

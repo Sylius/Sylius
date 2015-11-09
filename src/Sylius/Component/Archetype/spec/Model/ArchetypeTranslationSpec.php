@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Archetype\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

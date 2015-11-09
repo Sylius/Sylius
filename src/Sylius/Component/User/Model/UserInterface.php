@@ -7,8 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -37,7 +35,7 @@ interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterfac
     public function getEmail();
 
     /**
-     * @param  string $email
+     * @param string $email
      */
     public function setEmail($email);
 
@@ -49,7 +47,7 @@ interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterfac
     public function getEmailCanonical();
 
     /**
-     * @param  string $emailCanonical
+     * @param string $emailCanonical
      */
     public function setEmailCanonical($emailCanonical);
 
@@ -81,12 +79,12 @@ interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterfac
     public function setUsernameCanonical($usernameCanonical);
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * @param boolean $locked
+     * @param bool $locked
      */
     public function setLocked($locked);
 
@@ -112,7 +110,7 @@ interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterfac
      *
      * @param \DateInterval $ttl Requests older than this time interval will be considered expired
      *
-     * @return boolean true if the user's password request is non expired, false otherwise
+     * @return bool true if the user's password request is non expired, false otherwise
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
@@ -141,7 +139,7 @@ interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterfac
      *
      * @param string $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role);
 

@@ -41,7 +41,7 @@ class ShipmentTypeSpec extends ObjectBehavior
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
         $this->buildForm($builder, array(
-            'multiple' => true
+            'multiple' => true,
         ));
     }
 

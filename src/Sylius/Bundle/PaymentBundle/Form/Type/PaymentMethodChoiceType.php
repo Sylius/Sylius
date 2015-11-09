@@ -72,12 +72,12 @@ class PaymentMethodChoiceType extends ResourceChoiceType
             return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
                 return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
             };
-        };;
+        };
 
         $resolver
             ->setDefaults(array(
                 'query_builder' => $queryBuilder,
-                'disabled'      => false,
+                'disabled' => false,
             ))
         ;
     }

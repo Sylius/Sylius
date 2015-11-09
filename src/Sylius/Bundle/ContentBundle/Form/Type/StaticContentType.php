@@ -29,55 +29,54 @@ class StaticContentType extends AbstractResourceType
     {
         $builder
             ->add('publishable', null, array(
-                'label' => 'sylius.form.static_content.publishable'
+                'label' => 'sylius.form.static_content.publishable',
             ))
             ->add('id', 'text', array(
-                'label' => 'sylius.form.static_content.id'
+                'label' => 'sylius.form.static_content.id',
             ))
             ->add('parent', null, array(
-                'label' => 'sylius.form.static_content.parent'
+                'label' => 'sylius.form.static_content.parent',
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.static_content.internal_name'
+                'label' => 'sylius.form.static_content.internal_name',
             ))
             ->add('locale', 'text', array(
-                'label' => 'sylius.form.static_content.title'
+                'label' => 'sylius.form.static_content.title',
             ))
             ->add('title', 'text', array(
-                'label' => 'sylius.form.static_content.title'
+                'label' => 'sylius.form.static_content.title',
             ))
             ->add('routes', 'collection', array(
-                'type'         => 'sylius_route',
-                'allow_add'    => true,
+                'type' => 'sylius_route',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.static_content.routes',
+                'label' => 'sylius.form.static_content.routes',
                 'cascade_validation' => true,
              ))
             ->add('menuNodes', 'collection', array(
-                'type'         => 'sylius_menu_node',
-                'allow_add'    => true,
+                'type' => 'sylius_menu_node',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.static_content.menu_nodes',
+                'label' => 'sylius.form.static_content.menu_nodes',
                 'cascade_validation' => true,
              ))
             ->add('body', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.static_content.body',
+                'label' => 'sylius.form.static_content.body',
             ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'sylius.form.static_content.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
                 'label' => 'sylius.form.static_content.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
         ;
-
     }
 
     /**
@@ -85,13 +84,13 @@ class StaticContentType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(            
+        $resolver->setDefaults(array(
             'cascade_validation' => true,
         ));
-        
+
         parent::configureOptions($resolver);
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -153,7 +153,7 @@ class AddressingContext extends DefaultContext
         $isoName = $this->getCountryCodeByEnglishCountryName($name);
 
         /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('isoName' => $isoName));
+        $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName));
         $country->setEnabled(false);
 
         $manager = $this->getEntityManager();
@@ -163,7 +163,7 @@ class AddressingContext extends DefaultContext
 
     /**
      * @param CountryInterface $country
-     * @param TableNode|array $provinces
+     * @param TableNode|array  $provinces
      */
     private function addProvincesToCountry($country, $provinces)
     {

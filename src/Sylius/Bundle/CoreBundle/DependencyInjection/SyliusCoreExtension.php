@@ -93,7 +93,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'Symfony\Bundle\AsseticBundle\Factory\Resource\FileResource',
             'Symfony\Bundle\FrameworkBundle\Templating\TemplateReference',
             'Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator',
-            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader'
+            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader',
         ));
     }
 
@@ -113,7 +113,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
         foreach ($config['routing'] as $className => $routeConfig) {
             $routeClasses[$className] = array(
-                'field'  => $routeConfig['field'],
+                'field' => $routeConfig['field'],
                 'prefix' => $routeConfig['prefix'],
             );
             $controllerByClasses[$className] = $routeConfig['defaults']['controller'];

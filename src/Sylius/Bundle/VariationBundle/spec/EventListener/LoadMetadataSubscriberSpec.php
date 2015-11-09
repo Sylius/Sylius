@@ -79,8 +79,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'product_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $optionsMapping = array(
@@ -94,16 +94,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
+                    'onDelete' => 'CASCADE',
                 )),
                 'inverseJoinColumns' => array(array(
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
+                    'onDelete' => 'CASCADE',
+                )),
+            ),
         );
 
         $metadata->mapManyToOne($objectMapping)->shouldBeCalled();
@@ -117,8 +117,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
@@ -136,7 +136,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'fieldName' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\OptionValue',
             'mappedBy' => 'option',
-            'cascade' => array('all')
+            'cascade' => array('all'),
         );
 
         $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
@@ -160,8 +160,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
+                'onDelete' => 'CASCADE',
+            )),
         );
 
         $nonApplicableOptionsMapping = array(
@@ -175,16 +175,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
+                    'onDelete' => 'CASCADE',
                 )),
                 'inverseJoinColumns' => array(array(
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
+                    'onDelete' => 'CASCADE',
+                )),
+            ),
         );
 
         $metadata->mapManyToOne($optionMapping)->shouldBeCalled();

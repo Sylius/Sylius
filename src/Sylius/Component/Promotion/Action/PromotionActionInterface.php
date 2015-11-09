@@ -33,7 +33,7 @@ interface PromotionActionInterface
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 
     /**
-     * Revert the promotion from its subject
+     * Revert the promotion from its subject.
      *
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration

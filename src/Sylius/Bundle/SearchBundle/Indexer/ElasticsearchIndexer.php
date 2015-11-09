@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * ElasticSearch indexer
+ * ElasticSearch indexer.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

@@ -22,9 +22,9 @@ class MailerType extends AbstractType
         $builder
             ->add('sylius_mailer_transport', 'choice', array(
                 'choices' => array(
-                    'smtp'     => 'sylius.form.configuration.mailer.transport.smtp',
-                    'gmail'    => 'sylius.form.configuration.mailer.transport.gmail',
-                    'mail'     => 'sylius.form.configuration.mailer.transport.mail',
+                    'smtp' => 'sylius.form.configuration.mailer.transport.smtp',
+                    'gmail' => 'sylius.form.configuration.mailer.transport.gmail',
+                    'mail' => 'sylius.form.configuration.mailer.transport.mail',
                     'sendmail' => 'sylius.form.configuration.mailer.transport.sendmail',
                 ),
                 'constraints' => array(
@@ -33,19 +33,19 @@ class MailerType extends AbstractType
                 'label' => 'sylius.form.configuration.mailer.transport',
             ))
             ->add('sylius_mailer_host', 'text', array(
-                'data'  => '127.0.0.1',
+                'data' => '127.0.0.1',
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.configuration.mailer.host',
             ))
             ->add('sylius_mailer_user', 'text', array(
-                'label'    => 'sylius.form.configuration.mailer.user',
+                'label' => 'sylius.form.configuration.mailer.user',
                 'required' => false,
             ))
             ->add('sylius_mailer_password', 'password', array(
                 'required' => false,
-                'label'    => 'sylius.form.configuration.mailer.password'
+                'label' => 'sylius.form.configuration.mailer.password',
             ))
         ;
     }

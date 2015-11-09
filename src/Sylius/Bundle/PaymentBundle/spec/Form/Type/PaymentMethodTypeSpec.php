@@ -88,7 +88,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'PaymentMethod',
+                'data_class' => 'PaymentMethod',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

@@ -36,7 +36,7 @@ class TokenProvider implements TokenProviderInterface
     private $generator;
 
     /**
-     * @var integer
+     * @var int
      */
     private $tokenLength;
 
@@ -54,7 +54,7 @@ class TokenProvider implements TokenProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function generateUniqueToken()
     {

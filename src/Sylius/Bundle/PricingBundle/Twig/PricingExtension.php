@@ -54,7 +54,7 @@ class PricingExtension extends \Twig_Extension
      * @param PriceableInterface $priceable
      * @param array              $context
      *
-     * @return integer
+     * @return int
      */
     public function calculatePrice(PriceableInterface $priceable, array $context = array())
     {

@@ -44,7 +44,7 @@ class MoneyTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'currency' => 'PLN',
-                'divisor' => 100)
+                'divisor' => 100, )
             )
             ->shouldBeCalled();
 

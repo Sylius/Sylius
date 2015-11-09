@@ -94,7 +94,7 @@ class PromotionTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Promotion',
+                'data_class' => 'Promotion',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

@@ -59,6 +59,6 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
     {
         $payment->getMethod()->willReturn(null);
 
-        $this->shouldThrow(new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured."))->during("calculate", array($payment));
+        $this->shouldThrow(new \InvalidArgumentException('Cannot calculate fee for payment without payment method configured.'))->during('calculate', array($payment));
     }
 }

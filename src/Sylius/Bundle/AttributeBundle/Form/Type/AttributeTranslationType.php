@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Attribute Translation type.
-
+ 
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */

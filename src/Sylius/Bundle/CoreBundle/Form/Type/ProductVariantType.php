@@ -30,39 +30,39 @@ class ProductVariantType extends BaseVariantType
 
         $builder
             ->add('sku', 'text', array(
-                'label' => 'sylius.form.variant.sku'
+                'label' => 'sylius.form.variant.sku',
             ))
             ->add('price', 'sylius_money', array(
-                'label' => 'sylius.form.variant.price'
+                'label' => 'sylius.form.variant.price',
             ))
             ->add('availableOnDemand', 'checkbox', array(
-                'label' => 'sylius.form.variant.available_on_demand'
+                'label' => 'sylius.form.variant.available_on_demand',
             ))
             ->add('onHand', 'integer', array(
-                'label' => 'sylius.form.variant.on_hand'
+                'label' => 'sylius.form.variant.on_hand',
             ))
             ->add('images', 'collection', array(
-                'type'         => 'sylius_image',
-                'allow_add'    => true,
+                'type' => 'sylius_image',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.variant.images'
+                'label' => 'sylius.form.variant.images',
             ))
             ->add('width', 'number', array(
                 'required' => false,
-                'label'    => 'sylius.form.variant.width'
+                'label' => 'sylius.form.variant.width',
             ))
             ->add('height', 'number', array(
                 'required' => false,
-                'label'    => 'sylius.form.variant.height'
+                'label' => 'sylius.form.variant.height',
             ))
             ->add('depth', 'number', array(
                 'required' => false,
-                'label'    => 'sylius.form.variant.depth'
+                'label' => 'sylius.form.variant.depth',
             ))
             ->add('weight', 'number', array(
                 'required' => false,
-                'label'    => 'sylius.form.variant.weight'
+                'label' => 'sylius.form.variant.weight',
             ))
         ;
     }

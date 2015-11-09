@@ -138,8 +138,8 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->getCalculators()
             ->willReturn(
                 array(
-                    'flat_rate'     => $flatRateCalculator,
-                    'per_item_rate' => $perItemRateCalculator
+                    'flat_rate' => $flatRateCalculator,
+                    'per_item_rate' => $perItemRateCalculator,
                 )
             )
         ;
@@ -172,7 +172,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
                         'flat_rate' => $flatRateForm,
                         'per_item_rate' => $perItemForm,
                     ),
-                    'rules' => array()
+                    'rules' => array(),
                 )
             )
             ->shouldBeCalled()
@@ -185,7 +185,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'ShippingMethod',
+                'data_class' => 'ShippingMethod',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

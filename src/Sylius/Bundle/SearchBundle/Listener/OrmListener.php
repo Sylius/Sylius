@@ -17,7 +17,7 @@ use Doctrine\ORM\Event\PostFlushEventArgs;
 use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
 
 /**
- * Orm Listener
+ * Orm Listener.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -29,7 +29,7 @@ class OrmListener implements EventSubscriber
     private $ormIndexer;
 
     /**
-     * Objects scheduled for insertion and replacement
+     * Objects scheduled for insertion and replacement.
      */
     public $scheduledForInsertion = array();
     public $scheduledForDeletion = array();
@@ -56,7 +56,7 @@ class OrmListener implements EventSubscriber
     }
 
     /**
-     * Happens after updating a product
+     * Happens after updating a product.
      *
      * @param LifecycleEventArgs $args
      */
@@ -88,7 +88,7 @@ class OrmListener implements EventSubscriber
     }
 
     /**
-     * Happens before the deletion of a product
+     * Happens before the deletion of a product.
      *
      * @param LifecycleEventArgs $args
      */

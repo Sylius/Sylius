@@ -58,8 +58,7 @@ class ProductSpec extends ObjectBehavior
         TaxonInterface $taxon3,
         TaxonomyInterface $taxonomy1,
         TaxonomyInterface $taxonomy2
-    )
-    {
+    ) {
         $taxon1->getTaxonomy()->willReturn($taxonomy1);
         $taxon2->getTaxonomy()->willReturn($taxonomy1);
         $taxon3->getTaxonomy()->willReturn($taxonomy2);

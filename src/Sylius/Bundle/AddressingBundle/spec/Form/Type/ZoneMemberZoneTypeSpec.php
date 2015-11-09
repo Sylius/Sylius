@@ -66,8 +66,8 @@ class ZoneMemberZoneTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'ZoneMember',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'ZoneMember',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

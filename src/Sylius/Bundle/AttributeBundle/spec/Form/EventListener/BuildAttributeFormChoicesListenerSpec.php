@@ -32,7 +32,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
     {
         self::getSubscribedEvents()->shouldReturn(array(
             'form.pre_set_data' => 'buildChoices',
-            'form.pre_bind'     => 'buildConfiguration',
+            'form.pre_bind' => 'buildConfiguration',
         ));
     }
 
@@ -67,14 +67,14 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
-                'label'             => 'sylius.form.attribute.choices',
-                'type'              => 'text',
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
-                'mapped'            => false,
-                'data'              => null,
+                'label' => 'sylius.form.attribute.choices',
+                'type' => 'text',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
+                'mapped' => false,
+                'data' => null,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()
@@ -96,10 +96,10 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('configuration', 'collection', null, array(
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()

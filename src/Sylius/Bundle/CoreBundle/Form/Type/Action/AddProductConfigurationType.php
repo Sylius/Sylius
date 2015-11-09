@@ -35,7 +35,7 @@ class AddProductConfigurationType extends AbstractType
 
     public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
+        $this->validationGroups = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -46,31 +46,31 @@ class AddProductConfigurationType extends AbstractType
     {
         $builder
             ->add('variant', 'sylius_entity_to_identifier', array(
-                'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $this->variantRepository->getClassName(),
+                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'class' => $this->variantRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->variantRepository->getFormQueryBuilder();
                 },
-                'constraints'   => array(
+                'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('quantity', 'integer', array(
                 'label' => 'sylius.form.action.add_product_configuration.quantity',
-                'empty_data'  => 1,
+                'empty_data' => 1,
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('price', 'sylius_money', array(
                 'label' => 'sylius.form.action.add_product_configuration.price',
-                'empty_data'  => 0,
+                'empty_data' => 0,
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
         ;
     }

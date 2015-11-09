@@ -73,9 +73,9 @@ class NumberListener
         EventDispatcherInterface $eventDispatcher,
         $sequenceClass
     ) {
-        $this->registry      = $registry;
-        $this->eventManager  = $eventManager;
-        $this->eventDispatcher  = $eventDispatcher;
+        $this->registry = $registry;
+        $this->eventManager = $eventManager;
+        $this->eventDispatcher = $eventDispatcher;
         $this->sequenceClass = $sequenceClass;
     }
 

@@ -290,7 +290,7 @@ class WebContext extends DefaultContext
     {
         $tableNode = new TableNode(array(
             array(trim($columnName)),
-            array(trim('%' . $value . '%')),
+            array(trim('%'.$value.'%')),
         ));
 
         $this->iShouldSeeTheFollowingRow($tableNode);
@@ -305,7 +305,7 @@ class WebContext extends DefaultContext
     {
         $tableNode = new TableNode(array(
             array(trim($columnName)),
-            array(trim('%' . $value . '%')),
+            array(trim('%'.$value.'%')),
         ));
 
         $this->iShouldNotSeeTheFollowingRow($tableNode);
@@ -373,7 +373,7 @@ class WebContext extends DefaultContext
      */
     public function iWait($time)
     {
-        $this->getSession()->wait($time*1000);
+        $this->getSession()->wait($time * 1000);
     }
 
     /**
@@ -391,7 +391,7 @@ class WebContext extends DefaultContext
     {
         $tableNode = new TableNode(array(
             array(trim($columnName), 'Enabled'),
-            array(trim($value), 'YES')
+            array(trim($value), 'YES'),
         ));
 
         $this->iShouldSeeTheFollowingRow($tableNode);
@@ -404,7 +404,7 @@ class WebContext extends DefaultContext
     {
         $tableNode = new TableNode(array(
             array(trim($columnName), 'Enabled'),
-            array(trim($value), 'NO')
+            array(trim($value), 'NO'),
         ));
 
         $this->iShouldSeeTheFollowingRow($tableNode);
@@ -473,7 +473,7 @@ class WebContext extends DefaultContext
     /**
      * Assert that given code equals the current one.
      *
-     * @param integer $code
+     * @param int $code
      */
     protected function assertStatusCodeEquals($code)
     {

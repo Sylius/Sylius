@@ -68,60 +68,60 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $metadata->getName()->willReturn('Some\App\Product\Entity\Archetype');
 
         $attributeMapping = array(
-            'fieldName'    => 'attributes',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+            'fieldName' => 'attributes',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\Attribute',
-            'joinTable'    => array(
+            'joinTable' => array(
                 'name' => 'sylius_product_archetype_attribute',
-                'joinColumns'   => array(array(
-                    'name'                 => 'archetype_id', // or `product_archetype_id` ?
+                'joinColumns' => array(array(
+                    'name' => 'archetype_id', // or `product_archetype_id` ?
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
                 )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'attribute_id', // or `product_attribute_id` ?
+                'inverseJoinColumns' => array(array(
+                    'name' => 'attribute_id', // or `product_attribute_id` ?
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                ))
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                )),
             ),
         );
 
         $optionMapping = array(
-            'fieldName'    => 'options',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+            'fieldName' => 'options',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\Option',
-            'joinTable'    => array(
+            'joinTable' => array(
                 'name' => 'sylius_product_archetype_option',
-                'joinColumns'   => array(array(
-                    'name'                 => 'product_archetype_id',
+                'joinColumns' => array(array(
+                    'name' => 'product_archetype_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
                 )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'option_id',
+                'inverseJoinColumns' => array(array(
+                    'name' => 'option_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                ))
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                )),
             ),
         );
 
         $parentMapping = array(
-            'fieldName'    => 'parent',
-            'type'         => ClassMetadataInfo::MANY_TO_ONE,
+            'fieldName' => 'parent',
+            'type' => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => 'Some\App\Product\Entity\Archetype',
-            'joinColumn'   => array(
-                'name'                 => 'parent_id',
+            'joinColumn' => array(
+                'name' => 'parent_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => true,
-                'onDelete'             => 'SET NULL'
+                'nullable' => true,
+                'onDelete' => 'SET NULL',
             ),
         );
 

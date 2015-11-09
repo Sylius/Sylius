@@ -28,11 +28,11 @@ class OptionValueChoiceTypeSpec extends ObjectBehavior
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setRequired(array(
-            'option'
+            'option',
         ))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->addAllowedTypes(array(
-            'option' => 'Sylius\Component\Variation\Model\OptionInterface'
+            'option' => 'Sylius\Component\Variation\Model\OptionInterface',
         ))->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);

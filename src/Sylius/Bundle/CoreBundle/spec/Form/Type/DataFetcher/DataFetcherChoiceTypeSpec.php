@@ -26,7 +26,7 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
         );
         $this->beConstructedWith($dataFetchers);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\DataFetcherChoiceType');

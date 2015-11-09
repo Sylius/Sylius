@@ -76,7 +76,7 @@ class LocaleType extends AbstractResourceType
     }
 
     /**
-     * Should be private, used public to support PHP 5.3
+     * Should be private, used public to support PHP 5.3.
      *
      * @internal
      *

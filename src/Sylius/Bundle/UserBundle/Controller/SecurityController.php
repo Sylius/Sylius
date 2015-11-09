@@ -33,9 +33,9 @@ class SecurityController extends Controller
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->renderLogin($template, array(
-            'form'          => $form->createView(),
+            'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ));
     }
 

@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CalculatorChoiceType extends AbstractType
 {
     /**
-     * Calculators
+     * Calculators.
      *
      * @var array
      */
@@ -44,7 +44,7 @@ class CalculatorChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'choices' => $this->calculators
+            'choices' => $this->calculators,
         ));
     }
 

@@ -24,7 +24,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * Create customer orders paginator.
      *
      * @param CustomerInterface $customer
-     * @param array         $sorting
+     * @param array             $sorting
      *
      * @return PagerfantaInterface
      */
@@ -39,7 +39,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * Gets orders for customer.
      *
      * @param CustomerInterface $customer
-     * @param array         $sorting
+     * @param array             $sorting
      *
      * @return array
      */
@@ -56,7 +56,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * Get the order data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return OrderInterface|null
      */
@@ -315,7 +315,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getSingleScalarResult()
         ;
     }
-
 
     /**
      * {@inheritdoc}

@@ -239,7 +239,7 @@ class Coordinator implements CoordinatorInterface
         // Default parameters for display route
         $routeParameters = array(
             'scenarioAlias' => $process->getScenarioAlias(),
-            'stepName'      => $step->getName(),
+            'stepName' => $step->getName(),
         );
 
         if (null !== $queryParameters) {

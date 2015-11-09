@@ -58,14 +58,14 @@ class PaymentMethodType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_payment_method_translation',
-                'label' => 'sylius.form.payment_method.name'
+                'label' => 'sylius.form.payment_method.name',
             ))
             ->add('gateway', 'sylius_payment_gateway_choice', array(
                 'label' => 'sylius.form.payment_method.gateway',
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.payment_method.enabled',
+                'label' => 'sylius.form.payment_method.enabled',
             ))
             ->add('feeCalculator', 'sylius_fee_calculator_choice', array(
                 'label' => 'sylius.form.payment.fee_calculator',

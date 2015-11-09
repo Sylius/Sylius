@@ -14,7 +14,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
- *
  * This listener adds configuration form to a rule,
  * if selected rule requires one.
  *
@@ -24,7 +23,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
-     * Get Rule configuration
+     * Get Rule configuration.
      *
      * @param RuleInterface $rule
      *
@@ -40,7 +39,7 @@ class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
     }
 
     /**
-     * Get rule type
+     * Get rule type.
      *
      * @param RuleInterface $rule
      *
@@ -56,6 +55,6 @@ class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
             return $this->registryIdentifier;
         }
 
-        return null;
+        return;
     }
 }

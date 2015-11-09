@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\Form\FormEvent;
@@ -41,7 +40,7 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
+            FormEvents::POST_SUBMIT => 'postSubmit',
         ));
     }
 
@@ -62,11 +61,11 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
         $taxon->getParent()->shouldBeCalled()->willReturn($parent);
 
         $factory->createNamed('parent', 'sylius_taxon_choice', $parent, array(
-            'taxonomy'        => $taxonomy,
-            'filter'          => null,
-            'required'        => false,
-            'label'           => 'sylius.form.taxon.parent',
-            'empty_value'     => '---',
+            'taxonomy' => $taxonomy,
+            'filter' => null,
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'empty_value' => '---',
             'auto_initialize' => false,
         ))->shouldBeCalled()->willReturn($parentForm);
 

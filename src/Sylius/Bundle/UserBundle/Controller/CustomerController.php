@@ -47,7 +47,7 @@ class CustomerController extends ResourceController
     public function updateProfileAction(Request $request)
     {
         $customer = $this->getCustomer();
-        $form     = $this->getForm($customer);
+        $form = $this->getForm($customer);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($customer);
@@ -67,13 +67,14 @@ class CustomerController extends ResourceController
             $this->config->getTemplate('updateProfile.html'),
             array(
                 $this->config->getResourceName() => $customer,
-                'form'                           => $form->createView(),
+                'form' => $form->createView(),
             )
         );
     }
 
     /**
      * @return CustomerInterface
+     *
      * @throws AccessDeniedException - When user is not logged in.
      */
     protected function getCustomer()

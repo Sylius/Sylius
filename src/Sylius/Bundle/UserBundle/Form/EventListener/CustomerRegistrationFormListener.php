@@ -37,7 +37,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
@@ -47,7 +47,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function preSubmit(FormEvent $event)
     {

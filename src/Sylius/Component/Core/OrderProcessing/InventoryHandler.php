@@ -59,9 +59,9 @@ class InventoryHandler implements InventoryHandlerInterface
         InventoryUnitFactoryInterface $inventoryUnitFactory,
         FactoryInterface $factory
     ) {
-        $this->inventoryOperator    = $inventoryOperator;
+        $this->inventoryOperator = $inventoryOperator;
         $this->inventoryUnitFactory = $inventoryUnitFactory;
-        $this->factory              = $factory;
+        $this->factory = $factory;
     }
 
     /**
@@ -123,7 +123,7 @@ class InventoryHandler implements InventoryHandlerInterface
                 $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
                 if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
                     if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
-                        $quantity++;
+                        ++$quantity;
                     }
                     $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
                 }
@@ -144,7 +144,7 @@ class InventoryHandler implements InventoryHandlerInterface
     }
 
     /**
-     * Apply and count a transition on all given units
+     * Apply and count a transition on all given units.
      *
      * @param Collection $units
      * @param string     $transition
@@ -159,7 +159,7 @@ class InventoryHandler implements InventoryHandlerInterface
             $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
-                $quantity++;
+                ++$quantity;
             }
         }
 

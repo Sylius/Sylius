@@ -10,16 +10,15 @@
  */
 
 namespace spec\Sylius\Bundle\SearchBundle\Query;
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Taxon;
-
 
 /**
  * @author agounaris <agounaris@gmail.com>
  */
 class TaxonQuerySpec extends ObjectBehavior
 {
-
     function let(Taxon $taxon)
     {
         $this->beConstructedWith($taxon, array('test'));
@@ -39,5 +38,4 @@ class TaxonQuerySpec extends ObjectBehavior
     {
         $this->getAppliedFilters()->shouldReturn(array('test'));
     }
-
-} 
+}

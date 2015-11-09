@@ -47,7 +47,7 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('sylius')
+            'validation_groups' => array('sylius'),
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

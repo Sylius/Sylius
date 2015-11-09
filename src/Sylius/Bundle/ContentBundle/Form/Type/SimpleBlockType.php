@@ -28,33 +28,32 @@ class SimpleBlockType extends AbstractResourceType
     {
         $builder
             ->add('parentDocument', null, array(
-                'label' => 'sylius.form.simple_block.parent'
+                'label' => 'sylius.form.simple_block.parent',
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.simple_block.internal_name'
+                'label' => 'sylius.form.simple_block.internal_name',
             ))
             ->add('title', 'text', array(
-                'label' => 'sylius.form.simple_block.title'
+                'label' => 'sylius.form.simple_block.title',
             ))
             ->add('body', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.simple_block.body',
+                'label' => 'sylius.form.simple_block.body',
             ))
             ->add('publishable', null, array(
-                'label' => 'sylius.form.simple_block.publishable'
+                'label' => 'sylius.form.simple_block.publishable',
             ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'sylius.form.simple_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
                 'label' => 'sylius.form.simple_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
         ;
-
     }
 
     /**

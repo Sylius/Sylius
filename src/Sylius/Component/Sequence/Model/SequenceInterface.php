@@ -19,12 +19,12 @@ interface SequenceInterface
     public function getType();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getIndex();
 
     /**
-     * Increment sequence type
+     * Increment sequence type.
      */
     public function incrementIndex();
 }

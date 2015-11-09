@@ -60,7 +60,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Adjustment',
+                'data_class' => 'Adjustment',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

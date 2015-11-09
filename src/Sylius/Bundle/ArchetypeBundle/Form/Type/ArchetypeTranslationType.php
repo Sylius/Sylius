@@ -31,7 +31,7 @@ class ArchetypeTranslationType extends AbstractResourceType
      * @param array  $validationGroups
      * @param string $subject
      */
-    function __construct($dataClass, array $validationGroups, $subject)
+    public function __construct($dataClass, array $validationGroups, $subject)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -45,7 +45,7 @@ class ArchetypeTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.archetype.name'
+                'label' => 'sylius.form.archetype.name',
             ))
         ;
     }

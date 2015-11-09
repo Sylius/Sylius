@@ -42,7 +42,7 @@ class FixedFeeCalculatorConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'sylius_money', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
+                'label' => 'sylius.form.payment_method.fee_calculator.fixed.amount',
                 'currency' => $this->currencyContext->getCurrency(),
             ))
         ;

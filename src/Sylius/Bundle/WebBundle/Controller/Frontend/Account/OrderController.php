@@ -78,6 +78,7 @@ class OrderController extends FOSRestController
      * @param string  $number
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
@@ -90,7 +91,7 @@ class OrderController extends FOSRestController
         }
 
         $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', array(
-            'order' => $order
+            'order' => $order,
         ));
 
         $generator = $this
@@ -109,8 +110,8 @@ class OrderController extends FOSRestController
             $generator->getOutputFromHtml($html),
             200,
             array(
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="' . $order->getNumber() . '.pdf"'
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="'.$order->getNumber().'.pdf"',
             )
         );
     }
@@ -124,7 +125,7 @@ class OrderController extends FOSRestController
     }
 
     /**
-     * Finds order or throws 404
+     * Finds order or throws 404.
      *
      * @param string $number
      *

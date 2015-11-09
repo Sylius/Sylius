@@ -76,7 +76,7 @@ class UserRepositorySpec extends ObjectBehavior
         $this->createFilterPaginator(
             array(
                 'enabled' => true,
-                'query' => 'arnaud'
+                'query' => 'arnaud',
             ),
             array('name' => 'asc'),
             true

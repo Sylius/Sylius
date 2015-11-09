@@ -38,7 +38,7 @@ abstract class AbstractGenerator implements GeneratorInterface
     }
 
     /**
-     * Generate the number
+     * Generate the number.
      *
      * @param int                      $index
      * @param SequenceSubjectInterface $subject

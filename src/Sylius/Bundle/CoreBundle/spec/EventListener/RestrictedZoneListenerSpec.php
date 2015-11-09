@@ -46,8 +46,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $cartProvider,
         GenericEvent $event,
         OrderInterface $cart
-    )
-    {
+    ) {
         $event->getSubject()->willReturn(null);
 
         $cartProvider->getCart()->willReturn($cart);

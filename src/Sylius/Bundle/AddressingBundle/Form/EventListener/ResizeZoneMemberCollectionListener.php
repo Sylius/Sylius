@@ -60,7 +60,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
 
         foreach ($prototypes as $prototype) {
             $dataClass = $prototype->getConfig()->getDataClass();
-            $type      = $prototype->getConfig()->getType();
+            $type = $prototype->getConfig()->getType();
 
             $typeKey = $type instanceof ResolvedFormTypeInterface ? $type->getName() : $type;
             $this->typeMap[$typeKey] = $type;
@@ -170,7 +170,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
     private function createFormField(FormInterface $form, $type, $name)
     {
         $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
-            'property_path'   => '['.$name.']',
+            'property_path' => '['.$name.']',
             'auto_initialize' => false,
         ), $this->options)));
     }

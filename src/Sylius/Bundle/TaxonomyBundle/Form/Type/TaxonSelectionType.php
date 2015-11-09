@@ -69,8 +69,8 @@ class TaxonSelectionType extends AbstractType
             /* @var $taxonomy TaxonomyInterface */
             $builder->add($taxonomy->getId(), 'choice', array(
                 'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, array(), null, 'id'),
-                'multiple'    => $options['multiple'],
-                'label'       => /* @Ignore */ $taxonomy->getName(),
+                'multiple' => $options['multiple'],
+                'label' => /* @Ignore */ $taxonomy->getName(),
             ));
         }
     }
@@ -82,10 +82,10 @@ class TaxonSelectionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'         => null,
-                'multiple'           => true,
-                'render_label'       => false,
-                'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+                'data_class' => null,
+                'multiple' => true,
+                'render_label' => false,
+                'model_transformer' => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
             ))
         ;
 
@@ -93,7 +93,7 @@ class TaxonSelectionType extends AbstractType
             'model_transformer' => function (Options $options, $value) {
                 if (!is_array($value)) {
                     $value = array(
-                        'class'        => $value,
+                        'class' => $value,
                         'save_objects' => true,
                     );
                 } else {

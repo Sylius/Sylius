@@ -16,7 +16,7 @@ use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 
 /**
- * Finder
+ * Finder.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

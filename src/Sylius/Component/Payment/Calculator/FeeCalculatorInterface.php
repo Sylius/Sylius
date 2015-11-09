@@ -20,9 +20,9 @@ interface FeeCalculatorInterface
 {
     /**
      * @param PaymentSubjectInterface $payment
-     * @param array $configuration
+     * @param array                   $configuration
      *
-     * @return integer
+     * @return int
      */
     public function calculate(PaymentSubjectInterface $payment, array $configuration);
 

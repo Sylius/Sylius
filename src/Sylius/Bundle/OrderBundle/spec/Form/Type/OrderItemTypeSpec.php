@@ -55,7 +55,7 @@ class OrderItemTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'OrderItem',
+                'data_class' => 'OrderItem',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

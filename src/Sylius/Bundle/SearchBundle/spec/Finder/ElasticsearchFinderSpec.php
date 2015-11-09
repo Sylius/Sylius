@@ -12,11 +12,9 @@
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -30,8 +28,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $container,
         QueryLoggerInterface $queryLogger,
         ChannelContextInterface $channelContext
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $searchRepository,
             $config,
@@ -52,17 +49,17 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $config = array(
             'filters' => array(
                 'facets' => array(
-                    'taxons'  => array(
+                    'taxons' => array(
                         'display_name' => 'Basic categories',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                    'price'   => array(
+                    'price' => array(
                         'display_name' => 'Available prices',
-                        'type'         => 'range',
-                        'value'        => null,
-                        'values'       => array(
+                        'type' => 'range',
+                        'value' => null,
+                        'values' => array(
                             array('from' => 0, 'to' => 2000),
                             array('from' => 2001, 'to' => 5000),
                             array('from' => 5001, 'to' => 10000),
@@ -70,18 +67,18 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                     ),
                     'made_of' => array(
                         'display_name' => 'Material',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                    'color'   => array(
+                    'color' => array(
                         'display_name' => 'Available colors',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
@@ -93,17 +90,17 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $config = array(
             'filters' => array(
                 'facets' => array(
-                    'taxons'  => array(
+                    'taxons' => array(
                         'display_name' => 'Basic categories',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                    'price'   => array(
+                    'price' => array(
                         'display_name' => 'Available prices',
-                        'type'         => 'range',
-                        'value'        => null,
-                        'values'       => array(
+                        'type' => 'range',
+                        'value' => null,
+                        'values' => array(
                             array('from' => 0, 'to' => 2000),
                             array('from' => 2001, 'to' => 5000),
                             array('from' => 5001, 'to' => 10000),
@@ -111,22 +108,21 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                     ),
                     'made_of' => array(
                         'display_name' => 'Material',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                    'color'   => array(
+                    'color' => array(
                         'display_name' => 'Available colors',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
         $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType('\Elastica\Query');
     }
-
 }

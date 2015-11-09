@@ -35,12 +35,12 @@ class UserRegistrationType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
+                'choices' => UserRegistrationDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
             ->add('empty_records', 'checkbox', array(
-                'label'    => 'sylius.form.report.user_registration.empty_records',
+                'label' => 'sylius.form.report.user_registration.empty_records',
                 'required' => false,
             ))
         ;

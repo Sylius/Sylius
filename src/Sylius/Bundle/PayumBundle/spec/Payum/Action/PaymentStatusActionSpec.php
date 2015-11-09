@@ -39,7 +39,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
 
     function it_should_not_support_status_request_with_no_order_model(
         GetStatusInterface $statusRequest
-    )  {
+    ) {
         $statusRequest->getModel()->willReturn('foo');
 
         $this->supports($statusRequest)->shouldReturn(false);

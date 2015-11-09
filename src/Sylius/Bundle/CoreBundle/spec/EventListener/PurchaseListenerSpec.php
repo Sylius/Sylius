@@ -71,7 +71,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.success')
         ;
-        $flashBag->add('success','translated.sylius.checkout.success')->shouldBeCalled();
+        $flashBag->add('success', 'translated.sylius.checkout.success')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -103,7 +103,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -135,7 +135,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -167,7 +167,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.canceled')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.canceled')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -199,7 +199,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.failed')
         ;
-        $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.failed')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -231,7 +231,7 @@ class PurchaseListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.unknown')
         ;
-        $flashBag->add('error','translated.sylius.checkout.unknown')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.unknown')->shouldBeCalled();
 
         $this->addFlash($event);
     }

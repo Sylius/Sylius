@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\Event;
 class FlashEvent extends Event
 {
     /**
-     * Flash message
+     * Flash message.
      *
      * @var string
      */

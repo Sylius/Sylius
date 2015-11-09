@@ -28,8 +28,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     function let(
         RepositoryInterface $adjustmentRepository,
         DelegatingCalculatorInterface $calculator
-    )
-    {
+    ) {
         $this->beConstructedWith($adjustmentRepository, $calculator);
     }
 

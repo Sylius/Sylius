@@ -42,7 +42,7 @@ class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
      */
     public function getAvailableCurrencies()
     {
-        $currentChannel =  $this->channelContext->getChannel();
+        $currentChannel = $this->channelContext->getChannel();
 
         return $currentChannel->getCurrencies()->filter(function (CurrencyInterface $currency) {
             return $currency->isEnabled();

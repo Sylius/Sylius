@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Operator;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Inventory operator which does not adjust inventory
+ * Inventory operator which does not adjust inventory.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */

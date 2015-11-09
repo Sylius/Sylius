@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 

@@ -18,7 +18,7 @@ namespace Sylius\Component\User\Security\Generator;
 class TokenGenerator implements GeneratorInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function generate($length)
     {
@@ -35,5 +35,4 @@ class TokenGenerator implements GeneratorInterface
 
         return substr($hash, $startPosition, $length);
     }
-
 }

@@ -38,7 +38,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
         if (isset($classes['repository'])) {
-            $repositoryClass  = $classes['repository'];
+            $repositoryClass = $classes['repository'];
         }
 
         $definition = new Definition($repositoryClass);

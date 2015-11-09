@@ -51,7 +51,7 @@ class OptionValueTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(array(
                 'data_class' => 'OptionValue',
-                'validation_groups' => array()
+                'validation_groups' => array(),
             ))
             ->shouldBeCalled();
 

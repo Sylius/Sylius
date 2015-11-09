@@ -16,7 +16,7 @@ namespace Sylius\Component\Promotion\Model;
  */
 interface ActionInterface
 {
-    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
+    const TYPE_FIXED_DISCOUNT = 'fixed_discount';
     const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     /**

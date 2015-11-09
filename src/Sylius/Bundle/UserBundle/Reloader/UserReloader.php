@@ -33,7 +33,7 @@ class UserReloader implements UserReloaderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reloadUser(UserInterface $user)
     {

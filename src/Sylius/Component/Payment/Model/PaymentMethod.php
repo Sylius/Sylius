@@ -105,7 +105,7 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean)$enabled;
+        $this->enabled = (Boolean) $enabled;
     }
 
     /**

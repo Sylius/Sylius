@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\RuntimeException;
 
 /**
- * Command executor
+ * Command executor.
  *
  * @author Romain Monceau <romain@akeneo.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -56,7 +56,7 @@ class CommandExecutor
 
     /**
      * @param $command
-     * @param array $parameters
+     * @param array           $parameters
      * @param OutputInterface $output
      *
      * @return $this
@@ -103,7 +103,7 @@ class CommandExecutor
         if ($this->input->hasOption('env')) {
             $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : Kernel::ENV_DEV;
         }
-        
+
         if ($this->input->hasOption('no-interaction') && true === $this->input->getOption('no-interaction')) {
             $defaultParameters['--no-interaction'] = true;
         }

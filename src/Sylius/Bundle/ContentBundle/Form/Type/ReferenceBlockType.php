@@ -28,30 +28,29 @@ class ReferenceBlockType extends AbstractResourceType
     {
         $builder
             ->add('id', 'text', array(
-                'label' => 'sylius.form.reference_block.id'
+                'label' => 'sylius.form.reference_block.id',
             ))
             ->add('title', 'text', array(
-                'label' => 'sylius.form.reference_block.title'
+                'label' => 'sylius.form.reference_block.title',
             ))
             ->add('body', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.reference_block.body',
+                'label' => 'sylius.form.reference_block.body',
             ))
             ->add('publishable', null, array(
-                'label' => 'sylius.form.reference_block.publishable'
+                'label' => 'sylius.form.reference_block.publishable',
                 ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'sylius.form.reference_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
                 'label' => 'sylius.form.reference_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                 'time_widget' => 'text',
             ))
         ;
-
     }
 
     /**

@@ -21,7 +21,7 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
 class Report implements ReportInterface
 {
     /**
-     *@var integer
+     *@var int
      */
     private $id;
 

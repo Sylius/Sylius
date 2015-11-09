@@ -43,7 +43,7 @@ class ShipmentEmailManager
 
         $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getCustomer()->getEmail()), array(
             'shipment' => $shipment,
-            'order' => $order
+            'order' => $order,
         ));
     }
 }

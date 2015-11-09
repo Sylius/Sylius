@@ -35,14 +35,14 @@ class Promotion implements PromotionInterface
     protected $description;
 
     /**
-     * When exclusive, promotion with top priority will be applied
+     * When exclusive, promotion with top priority will be applied.
      *
      * @var int
      */
     protected $priority = 0;
 
     /**
-     * Cannot be applied together with other promotions
+     * Cannot be applied together with other promotions.
      *
      * @var bool
      */

@@ -17,7 +17,6 @@ use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\Query\Query;
 use Doctrine\ODM\MongoDB\UnitOfWork;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';

@@ -38,10 +38,10 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
-            'Sylius\Component\Addressing\Model\CountryInterface'    => 'sylius.model.country.class',
-            'Sylius\Component\Addressing\Model\ProvinceInterface'   => 'sylius.model.province.class',
-            'Sylius\Component\Addressing\Model\ZoneInterface'       => 'sylius.model.zone.class',
+            'Sylius\Component\Addressing\Model\AddressInterface' => 'sylius.model.address.class',
+            'Sylius\Component\Addressing\Model\CountryInterface' => 'sylius.model.country.class',
+            'Sylius\Component\Addressing\Model\ProvinceInterface' => 'sylius.model.province.class',
+            'Sylius\Component\Addressing\Model\ZoneInterface' => 'sylius.model.zone.class',
             'Sylius\Component\Addressing\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
         );
     }

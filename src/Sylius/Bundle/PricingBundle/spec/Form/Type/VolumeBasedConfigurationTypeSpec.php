@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PricingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
@@ -30,12 +29,12 @@ class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'    => null,
-            'allow_add'     => true,
-            'allow_delete'  => true,
-            'by_reference'  => false,
-            'label'         => 'sylius.form.pricing.volume_based.label',
-            'type'          => 'sylius_price_calculator_volume_based_configuration'
+            'data_class' => null,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'label' => 'sylius.form.pricing.volume_based.label',
+            'type' => 'sylius_price_calculator_volume_based_configuration',
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

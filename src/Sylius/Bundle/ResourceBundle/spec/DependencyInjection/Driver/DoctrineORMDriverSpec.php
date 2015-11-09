@@ -37,7 +37,7 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
     function it_should_create_definition(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")->shouldBeCalled();
+        $container->hasParameter('prefix.repository.resource.class')->shouldBeCalled();
 
         $container->setDefinition(
             'prefix.controller.resource',
@@ -57,7 +57,7 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
-            'model'      => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
+            'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
             'controller' => 'Sylius\Controller',
             'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
@@ -65,10 +65,10 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
     function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")
+        $container->hasParameter('prefix.repository.resource.class')
             ->willReturn(true);
 
-        $container->getParameter("prefix.repository.resource.class")
+        $container->getParameter('prefix.repository.resource.class')
             ->shouldBeCalled();
 
         $container->setDefinition(

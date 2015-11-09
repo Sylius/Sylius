@@ -72,8 +72,8 @@ class ZoneTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'Zone',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'Zone',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled()

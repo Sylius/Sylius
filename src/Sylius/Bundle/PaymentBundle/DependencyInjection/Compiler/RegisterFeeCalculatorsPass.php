@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class RegisterFeeCalculatorsPass implements CompilerPassInterface
 {
     /**
-     * Array of registered fee calculators
+     * Array of registered fee calculators.
      *
      * @var array
      */
@@ -52,8 +52,8 @@ class RegisterFeeCalculatorsPass implements CompilerPassInterface
     }
 
     /**
-     * @param integer $id
-     * @param array   $attributes
+     * @param int   $id
+     * @param array $attributes
      *
      * @throws \InvalidArgumentException if fee calculator is improperly tagged
      */

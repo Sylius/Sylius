@@ -19,7 +19,7 @@ use Doctrine\ORM\Query\SqlWalker;
 /**
  * MatchAgainstFunction ::=
  *  "MATCH" "(" StateFieldPathExpression {"," StateFieldPathExpression}* ")" "AGAINST" "("
- *      StringPrimary ["BOOLEAN"] ["EXPAND"] ")"
+ *      StringPrimary ["BOOLEAN"] ["EXPAND"] ")".
  */
 class MatchAgainstFunction extends FunctionNode
 {
@@ -100,8 +100,8 @@ class MatchAgainstFunction extends FunctionNode
         }
 
         $against = $walker->walkStringPrimary($this->against)
-            . ($this->booleanMode ? ' IN BOOLEAN MODE' : '')
-            . ($this->queryExpansion ? ' WITH QUERY EXPANSION' : '');
+            .($this->booleanMode ? ' IN BOOLEAN MODE' : '')
+            .($this->queryExpansion ? ' WITH QUERY EXPANSION' : '');
 
         return sprintf('MATCH (%s) AGAINST (%s)', implode(', ', $fields), $against);
     }

@@ -49,7 +49,7 @@ class CartTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Cart',
+                'data_class' => 'Cart',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

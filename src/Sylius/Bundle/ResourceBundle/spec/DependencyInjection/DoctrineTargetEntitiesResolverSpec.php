@@ -64,11 +64,11 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array(),
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'sylius.resource.interface' => 'sylius.resource.model'
+            'sylius.resource.interface' => 'sylius.resource.model',
         ));
     }
 
@@ -100,11 +100,11 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array(),
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
+            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo',
         ));
     }
 }

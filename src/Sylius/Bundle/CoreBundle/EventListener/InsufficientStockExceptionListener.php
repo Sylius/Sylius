@@ -45,9 +45,9 @@ class InsufficientStockExceptionListener
 
     /**
      * @param UrlGeneratorInterface $router
-     * @param SessionInterface $session
-     * @param TranslatorInterface $translator
-     * @param string $redirectTo
+     * @param SessionInterface      $session
+     * @param TranslatorInterface   $translator
+     * @param string                $redirectTo
      */
     public function __construct(
         UrlGeneratorInterface $router,
@@ -78,7 +78,7 @@ class InsufficientStockExceptionListener
                 'sylius.checkout.out_of_stock',
                 array(
                     '%quantity%' => $exception->getStockable()->getOnHand(),
-                    '%name%'     => $exception->getStockable()->getInventoryName(),
+                    '%name%' => $exception->getStockable()->getInventoryName(),
                 ),
                 'flashes'
             )

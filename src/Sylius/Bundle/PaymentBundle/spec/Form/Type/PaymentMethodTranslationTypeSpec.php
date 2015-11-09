@@ -60,8 +60,8 @@ class PaymentMethodTranslationTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    'data_class'        => 'PaymentMethodTranslation',
-                    'validation_groups' => array('sylius')
+                    'data_class' => 'PaymentMethodTranslation',
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

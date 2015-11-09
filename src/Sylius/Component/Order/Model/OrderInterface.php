@@ -21,14 +21,14 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  */
 interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
 {
-    const STATE_CART        = 'cart';
+    const STATE_CART = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
-    const STATE_PENDING     = 'pending';
-    const STATE_CONFIRMED   = 'confirmed';
-    const STATE_SHIPPED     = 'shipped';
-    const STATE_ABANDONED   = 'abandoned';
-    const STATE_CANCELLED   = 'cancelled';
-    const STATE_RETURNED    = 'returned';
+    const STATE_PENDING = 'pending';
+    const STATE_CONFIRMED = 'confirmed';
+    const STATE_SHIPPED = 'shipped';
+    const STATE_ABANDONED = 'abandoned';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_RETURNED = 'returned';
 
     /**
      * @return Boolean
@@ -58,7 +58,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function setItems(Collection $items);
 
     /**
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -82,7 +82,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function hasItem(OrderItemInterface $item);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
@@ -93,12 +93,12 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function calculateItemsTotal();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -116,7 +116,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function getTotalItems();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 

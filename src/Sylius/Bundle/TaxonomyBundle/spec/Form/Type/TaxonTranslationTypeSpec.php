@@ -65,7 +65,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'TaxonTranslation',
+                'data_class' => 'TaxonTranslation',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

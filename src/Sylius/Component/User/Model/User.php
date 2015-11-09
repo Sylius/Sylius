@@ -7,8 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This component was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -46,7 +44,7 @@ class User implements UserInterface
     protected $usernameCanonical;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled = false;
 
@@ -77,7 +75,7 @@ class User implements UserInterface
     protected $lastLogin;
 
     /**
-     * Random string sent to the user email address in order to verify it
+     * Random string sent to the user email address in order to verify it.
      *
      * @var string
      */
@@ -89,7 +87,7 @@ class User implements UserInterface
     protected $passwordRequestedAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $locked = false;
 
@@ -104,7 +102,7 @@ class User implements UserInterface
     protected $credentialsExpireAt;
 
     /**
-     * We need at least one role to be able to authenticate
+     * We need at least one role to be able to authenticate.
      *
      * @var array
      */
@@ -478,7 +476,7 @@ class User implements UserInterface
     public function getOAuthAccount($provider)
     {
         if ($this->oauthAccounts->isEmpty()) {
-            return null;
+            return;
         }
 
         $filtered = $this->oauthAccounts->filter(function (UserOAuthInterface $oauth) use ($provider) {
@@ -486,7 +484,7 @@ class User implements UserInterface
         });
 
         if ($filtered->isEmpty()) {
-            return null;
+            return;
         }
 
         return $filtered->current();

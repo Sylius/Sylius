@@ -26,7 +26,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderItemInventoryListener
 {
     /**
-     * Event Dispatcher
+     * Event Dispatcher.
      *
      * @var EventDispatcherInterface
      */

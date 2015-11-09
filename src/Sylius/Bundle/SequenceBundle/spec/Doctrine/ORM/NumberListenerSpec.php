@@ -89,4 +89,4 @@ class NumberListenerSpec extends ObjectBehavior
 
         $this->preFlush($args);
     }
-} 
+}

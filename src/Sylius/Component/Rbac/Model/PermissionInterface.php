@@ -56,7 +56,7 @@ interface PermissionInterface extends TimestampableInterface
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -73,7 +73,7 @@ interface PermissionInterface extends TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(PermissionInterface $permission);
 

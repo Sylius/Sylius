@@ -89,10 +89,11 @@ EOT
             $email = $this->getHelper('dialog')->askAndValidate(
                 $output,
                 'Please enter an email:',
-                function($username) {
+                function ($username) {
                     if (empty($username)) {
                         throw new \Exception('Email can not be empty');
                     }
+
                     return $username;
                 }
             );
@@ -104,10 +105,11 @@ EOT
             $password = $this->getHelper('dialog')->askHiddenResponseAndValidate(
                 $output,
                 'Please choose a password:',
-                function($password) {
+                function ($password) {
                     if (empty($password)) {
                         throw new \Exception('Password can not be empty');
                     }
+
                     return $password;
                 }
             );
@@ -130,9 +132,9 @@ EOT
     /**
      * @param string $email
      * @param string $password
-     * @param bool $enabled
-     * @param array $roles
-     * @param array $securityRoles
+     * @param bool   $enabled
+     * @param array  $roles
+     * @param array  $securityRoles
      *
      * @return UserInterface
      */
@@ -141,8 +143,8 @@ EOT
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
         /**
-         * @var $user UserInterface
-         * @var $customer CustomerInterface
+         * @var UserInterface
+         * @var $customer     CustomerInterface
          */
         $user = $this->getUserRepository()->createNew();
         $customer = $this->getCustomerRepository()->createNew();
