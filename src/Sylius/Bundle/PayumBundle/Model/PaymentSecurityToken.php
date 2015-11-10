@@ -40,7 +40,7 @@ class PaymentSecurityToken implements TokenInterface
     /**
      * @var string
      */
-    protected $paymentName;
+    protected $gatewayName;
 
     public function __construct()
     {
@@ -116,16 +116,16 @@ class PaymentSecurityToken implements TokenInterface
     /**
      * {@inheritDoc}
      */
-    public function getPaymentName()
+    public function getGatewayName()
     {
-        return $this->paymentName;
+        return $this->gatewayName;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setPaymentName($paymentName)
+    public function setGatewayName($gatewayName)
     {
-        $this->paymentName = $paymentName;
+        $this->gatewayName = $gatewayName;
     }
 }

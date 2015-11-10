@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
+use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
+use Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -60,15 +63,15 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('payment_security_token')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('model')->defaultValue(PaymentSecurityToken::class)->end()
+                                ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('payment_config')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PayumBundle\Model\PaymentConfig')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('model')->defaultValue(GatewayConfig::class)->end()
+                                ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                             ->end()
                         ->end()
                     ->end()

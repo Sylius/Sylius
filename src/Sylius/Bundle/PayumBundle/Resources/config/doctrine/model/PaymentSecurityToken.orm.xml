@@ -26,7 +26,7 @@
 
         <field name="targetUrl" column="target_url" type="text" nullable="false" />
 
-        <field name="paymentName" column="payment_name" type="string" length="255" nullable="false" />
+        <field name="gatewayName" column="gateway_name" type="string" length="255" nullable="false" />
 
     </mapped-superclass>
 </doctrine-mapping>

@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Request;
+namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\BaseGetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
