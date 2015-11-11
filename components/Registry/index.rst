@@ -1,11 +1,12 @@
 Registry
 ========
 
-Simple registry component useful for all type of applications.
+Simple registry component useful for all types of applications.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   registry
-   summary
+   basic_usage
+   interfaces
+   exceptions
