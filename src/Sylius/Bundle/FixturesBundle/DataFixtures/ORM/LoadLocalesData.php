@@ -21,7 +21,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
  */
 class LoadLocalesData extends DataFixture
 {
-    protected $locales = array(
+    private $locales = array(
         'en_US' => true,
         'en_GB' => true,
         'es_ES' => true,
@@ -57,6 +57,6 @@ class LoadLocalesData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }
