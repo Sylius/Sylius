@@ -20,12 +20,20 @@ sylius_api_order_item_create:
         _sylius:
             form: sylius_api_order_item
 
+sylius_api_order_item_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.order_item:updateAction
+        _sylius:
+            criteria:
+                order: $orderId
+
 sylius_api_order_item_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.order_item:deleteAction
         _sylius:
-            filterable: true
             criteria:
                 order: $orderId
