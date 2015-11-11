@@ -1,262 +1,218 @@
 Models
 ======
 
-The Address
------------
+.. _component_addressing_model_address:
 
-This is a very basic representation of Address model.
+Address
+-------
 
-+-----------+--------------------------------+
-| Attribute | Description                    |
-+===========+================================+
-| id        | Unique id of the address       |
-+-----------+--------------------------------+
-| firstname |                                |
-+-----------+--------------------------------+
-| lastname  |                                |
-+-----------+--------------------------------+
-| company   |                                |
-+-----------+--------------------------------+
-| country   | Reference to Country model     |
-+-----------+--------------------------------+
-| province  | Reference to Province model    |
-+-----------+--------------------------------+
-| street    |                                |
-+-----------+--------------------------------+
-| city      |                                |
-+-----------+--------------------------------+
-| postcode  |                                |
-+-----------+--------------------------------+
-| createdAt | Date when address was created  |
-+-----------+--------------------------------+
-| updatedAt | Date of last address update    |
-+-----------+--------------------------------+
+The customer's address is represented by an **Address** model. It should contain all data
+concerning customer's address and as default has the following properties:
 
-Creating and modifying Address object is very simple.
++-------------+------------------------------------+
+| Property    | Description                        |
++=============+====================================+
+| id          | Unique id of the address           |
++-------------+------------------------------------+
+| firstName   | Customer's first name              |
++-------------+------------------------------------+
+| lastName    | Customer's last name               |
++-------------+------------------------------------+
+| phoneNumber | Customer's phone number            |
++-------------+------------------------------------+
+| company     | Company name                       |
++-------------+------------------------------------+
+| country     | Reference to a **Country** object  |
++-------------+------------------------------------+
+| province    | Reference to a **Province** object |
++-------------+------------------------------------+
+| street      | Address' street                    |
++-------------+------------------------------------+
+| city        | Address' city                      |
++-------------+------------------------------------+
+| postcode    | Address' postcode                  |
++-------------+------------------------------------+
+| createdAt   | Date when address was created      |
++-------------+------------------------------------+
+| updatedAt   | Date of last address' update       |
++-------------+------------------------------------+
 
-.. code-block:: php
 
-    <?php
+.. note::
+   This model implements the :ref:`component_addressing_model_address-interface`. |br|
+   For more detailed information go to `Sylius API Address`_.
 
-    use Sylius\Component\Addressing\Address;
+.. _Sylius API Address: http://api.sylius.org/Sylius/Component/Addressing/Model/Address.html
 
-    $address = new Address();
-
-    $address
-        ->setFirstname('John')
-        ->setLastname('Doe')
-        ->setStreet('Superstreet 14')
-        ->setCity('New York')
-        ->setPostcode('13111')
-    ;
-
-    $user = // Get your user from somewhere or any model which can reference an Address.
-    $user->setShippingAddress($address);
+.. _component_addressing_model_country:
 
 Country
 -------
 
-"Country" model represents a geographical area of a country.
+The geographical area of a country is represented by a **Country** model.
+It should contain all data concerning a country and as default has the following properties:
 
-+-----------+--------------------------------+
-| Attribute | Description                    |
-+===========+================================+
-| id        | Unique id of the country       |
-+-----------+--------------------------------+
-| name      |                                |
-+-----------+--------------------------------+
-| isoName   |                                |
-+-----------+--------------------------------+
-| provinces | Collection of provinces        |
-+-----------+--------------------------------+
-| createdAt | Date when country was created  |
-+-----------+--------------------------------+
-| updatedAt | Date of last country update    |
-+-----------+--------------------------------+
++-----------+--------------------------------------+
+| Property  | Description                          |
++===========+======================================+
+| id        | Unique id of the country             |
++-----------+--------------------------------------+
+| isoName   | Country's ISO code                   |
++-----------+--------------------------------------+
+| provinces | Collection of **Province** objects   |
++-----------+--------------------------------------+
+| enabled   | Indicates whether country is enabled |
++-----------+--------------------------------------+
 
-.. code-block:: php
+.. note::
+   This model implements the :ref:`component_addressing_model_country-interface`. |br|
+   For more detailed information go to `Sylius API Country`_.
 
-    <?php
+.. _Sylius API Country: http://api.sylius.org/Sylius/Component/Addressing/Model/Country.html
 
-    use Sylius\Component\Addressing\Address;
-    use Sylius\Component\Addressing\Country;
-    
-    $poland = new Country();
-    $poland
-        ->setName('Poland')
-        ->setIsoName('PL')
-    ;
-
-    $address
-        ->setFirstname('Pawel')
-        ->setLastname('Jedrzejewski')
-        ->setCountry($poland)
-        ->setStreet('Testing 123')
-        ->setCity('Lodz')
-        ->setPostcode('21-242')
-    ;
+.. _component_addressing_model_province:
 
 Province
 --------
 
-"Province" is a smaller area inside of a Country. You can use it to manage provinces or states and assign it to an address as well.
+Smaller area inside a country is represented by a **Province** model.
+You can use it to manage provinces or states and assign it to an address as well.
+It should contain all data concerning a province and as default has the following properties:
 
-+-----------+--------------------------------+
-| Attribute | Description                    |
-+===========+================================+
-| id        | Unique id of the province      |
-+-----------+--------------------------------+
-| name      |                                |
-+-----------+--------------------------------+
-| country   | Reference to a country         |
-+-----------+--------------------------------+
-| createdAt | Date when province was created |
-+-----------+--------------------------------+
-| updatedAt | Date of last update            |
-+-----------+--------------------------------+
++----------+----------------------------------------------+
+| Property | Description                                  |
++==========+==============================================+
+| id       | Unique id of the province                    |
++----------+----------------------------------------------+
+| name     | Province's name                              |
++----------+----------------------------------------------+
+| isoName  | Province's ISO code                          |
++----------+----------------------------------------------+
+| country  | The **Country** this province is assigned to |
++----------+----------------------------------------------+
 
-.. code-block:: php
+.. note::
+   This model implements the :ref:`component_addressing_model_province-interface`. |br|
+   For more detailed information go to `Sylius API Province`_.
 
-    <?php
+.. _Sylius API Province: http://api.sylius.org/Sylius/Component/Addressing/Model/Province.html
 
-    use Sylius\Component\Addressing\Address;
-    use Sylius\Component\Addressing\Country;
-    use Sylius\Component\Addressing\Province;
+.. _component_addressing_model_zone:
 
-    $usa = new Country();
-    $usa
-        ->setName('United States of America')
-        ->setIsoName('US')
-    ;
+Zone
+----
 
-    $tennessee = new Province();
-    $tennessee->setName('Tennessee');
+The geographical area is represented by a **Zone** model.
+It should contain all data concerning a zone and as default has the following properties:
 
-    $address
-        ->setFirstname('John')
-        ->setLastname('Deo')
-        ->setCountry($usa)
-        ->setProvince($tennessee)
-        ->setStreet('Testing 111')
-        ->setCity('Nashville')
-        ->setPostcode('123123')
-    ;
++----------+---------------------------------------------------------+
+| Property | Description                                             |
++==========+=========================================================+
+| id       | Unique id of the zone                                   |
++----------+---------------------------------------------------------+
+| name     | Zone's name                                             |
++----------+---------------------------------------------------------+
+| type     | Zone's type                                             |
++----------+---------------------------------------------------------+
+| scope    | Zone's scope                                            |
++----------+---------------------------------------------------------+
+| members  | All of the **ZoneMember** objects assigned to this zone |
++----------+---------------------------------------------------------+
 
-Zones
------
+.. note::
+   This model implements the :ref:`component_addressing_model_zone-interface`. |br|
+   For more detailed information go to `Sylius API Zone`_.
 
-This library allows you to define **Zones**, which represent a specific geographical area.
+.. _Sylius API Zone: http://api.sylius.org/Sylius/Component/Addressing/Model/Zone.html
 
-Every **Zone** is represented by the following model:
+.. _component_addressing_model_zone-member:
 
-+-----------+--------------------------------+
-| Attribute | Description                    |
-+===========+================================+
-| id        | Unique id of the zone          |
-+-----------+--------------------------------+
-| name      |                                |
-+-----------+--------------------------------+
-| type      | String type of zone            |
-+-----------+--------------------------------+
-| members   | Zone members                   |
-+-----------+--------------------------------+
-| createdAt | Date when zone was created     |
-+-----------+--------------------------------+
-| updatedAt | Date of last update            |
-+-----------+--------------------------------+
+ZoneMember
+----------
 
-It exposes the following API:
+In order to add a member to a zone, a class must extend abstract **ZoneMember**.
+On default this model has the following properties:
 
-.. code-block:: php
++-----------+-----------------------------------------+
+| Property  | Description                             |
++===========+=========================================+
+| id        | Unique id of the zone member            |
++-----------+-----------------------------------------+
+| belongsTo | The **Zone** this member is assigned to |
++-----------+-----------------------------------------+
 
-    <?php
+.. note::
+   This model implements :ref:`component_addressing_model_zone-member-interface` |br|
+   For more detailed information go to `Sylius API ZoneMember`_.
 
-    $zone->getName(); // Name of the zone, for example "EU".
-    $zone->getType(); // Type, for example "country".
+.. _Sylius API ZoneMember: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMember.html
 
-    foreach ($zone->getMembers() as $member) {
-        echo $member->getName();
-    }
+.. note::
+   Each **ZoneMember** instance holds a reference to the **Zone** object and
+   an appropriate area entity, for example a **Country**.
 
-    $zone->getCreatedAt();
-    $zone->getUpdatedAt();
+There are three default zone member models:
 
-Three different types of zones are supported out-of-the-box.
-
-* ``country`` zone, which consists of many countries.
-* ``province`` zone, which is constructed from multiple provinces.
-* ``zone``, which is a group of other zones.
-
-Each zone type has different **ZoneMember** model, but they all expose the same API:
-
-.. code-block:: php
-
-    <?php
-
-    foreach ($zone->getMembers() as $member) {
-        echo $member->getName();
-
-        echo $member->getZone()->getName(); // Name of the zone.
-    }
-
-There are following models and each of them represents a different zone member:
-
-* ``ZoneMemberCountry``
-* ``ZoneMemberProvince``
-* ``ZoneMemberZone``
-
-Each **ZoneMember** instance holds a reference to the **Zone** object and appropriate area entity, for example a **Country**.
-
-Creating a zone requires adding appropriate members:
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Addressing\Country;
-    use Sylius\Component\Addressing\Zone;
-    use Sylius\Component\Addressing\ZoneInterface;
-    use Sylius\Component\Addressing\ZoneMemberCountry;
-
-    $eu = new Zone();
-    $eu
-        ->setName('European Union')
-        ->setType(ZoneInterface::TYPE_COUNTRY)
-    ;
-
-    $germany = new Country();
-    $germany
-        ->setName('Germany')
-        ->setIsoName('DE')
-    ;
-    $france = new Country();
-    $france
-        ->setName('France')
-        ->setIsoName('FR')
-    ;
-    $poland = new Country();
-    $poland
-        ->setName('Poland')
-        ->setIsoName('PL')
-    ;
-
-    $germanyMember = new ZoneMemberCountry();
-    $germanyMember->setCountry($germany)
-
-    $franceMember = new ZoneMemberCountry();
-    $franceMember->setCountry($france)
-
-    $polandMember = new ZoneMemberCountry();
-    $polandMember->setCountry($poland)
-
-    $eu
-        ->addMember($germanyMember)
-        ->addMember($franceMember)
-        ->addMember($polandMember)
-    ;
+* :ref:`component_addressing_model_zone-member-country`
+* :ref:`component_addressing_model_zone-member-province`
+* :ref:`component_addressing_model_zone-member-zone`
 
 .. tip::
+   Feel free to implement your own custom zone members!
 
-    Default zone types are defined as constants in the ``ZoneInterface`` interface.
+.. _component_addressing_model_zone-member-country:
 
-Exactly the same process applies to different types of Zones.
+ZoneMemberCountry
+-----------------
+
+Country member of a zone is represented by a **ZoneMemberCountry** model.
+It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
+
++----------+--------------------------------------------------+
+| Property | Description                                      |
++==========+==================================================+
+| country  | The **Country** associated with this zone member |
++----------+--------------------------------------------------+
+
+.. note::
+   For more detailed information go to `Sylius API ZoneMemberCountry`_.
+
+.. _Sylius API ZoneMemberCountry: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberCountry.html
+
+.. _component_addressing_model_zone-member-province:
+
+ZoneMemberProvince
+------------------
+
+Province member of a zone is represented by a **ZoneMemberProvince** model.
+It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
+
++----------+---------------------------------------------------+
+| Property | Description                                       |
++==========+===================================================+
+| province | The **Province** associated with this zone member |
++----------+---------------------------------------------------+
+
+.. note::
+   For more detailed information go to `Sylius API ZoneMemberProvince`_.
+
+.. _Sylius API ZoneMemberProvince: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberProvince.html
+
+.. _component_addressing_model_zone-member-zone:
+
+ZoneMemberZone
+--------------
+
+Zone member of a zone is represented by a **ZoneMemberZone** model.
+It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
+
++----------+-----------------------------------------------+
+| Property | Description                                   |
++==========+===============================================+
+| zone     | The **Zone** associated with this zone member |
++----------+-----------------------------------------------+
+
+.. note::
+   For more detailed information go to `Sylius API ZoneMemberZone`_.
+
+.. _Sylius API ZoneMemberZone: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberZone.html

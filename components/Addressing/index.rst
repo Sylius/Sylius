@@ -1,14 +1,14 @@
 Addressing
 ==========
 
-Sylius Addressing component for PHP E-Commerce applications.
-
-The component provides you with basic Address, Country, Province and Zone models.
+Sylius Addressing component for PHP E-Commerce applications which
+provides you with basic Address, Country, Province and Zone models.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
+   basic_usage
    models
-   zone_matcher
-   summary
+   interfaces
+   zone_types
