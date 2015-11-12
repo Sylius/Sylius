@@ -68,6 +68,7 @@ class Configuration implements ConfigurationInterface
                                 ->prototype('array')
                                     ->children()
                                         ->scalarNode('type')->end()
+                                        ->scalarNode('sortable')->end()
                                         ->scalarNode('label')->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
