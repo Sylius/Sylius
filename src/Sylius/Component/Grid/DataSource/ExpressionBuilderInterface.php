@@ -32,4 +32,5 @@ interface ExpressionBuilderInterface
     public function like($field, $pattern);
     public function notLike($field, $pattern);
     public function orderBy($field, $direction);
+    public function addOrderBy($field, $direction);
 }

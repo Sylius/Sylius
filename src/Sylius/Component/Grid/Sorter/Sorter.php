@@ -17,6 +17,7 @@ use Sylius\Component\Grid\Parameters;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Sorter implements SorterInterface
 {
@@ -38,8 +39,26 @@ class Sorter implements SorterInterface
             $field = isset($options['sort']) ? $options['sort'] : $field;
 
             if (in_array($direction, array(SorterInterface::ASC, SorterInterface::DESC))) {
-                $dataSource->getExpressionBuilder()->orderBy($field, $direction);
+                $this->applySorting($dataSource, $field, $direction);
             }
         }
+    }
+
+    /**
+     * @param DataSourceInterface $dataSource
+     * @param string|array        $sortingFields
+     * @param string              $direction
+     */
+    private function applySorting(DataSourceInterface $dataSource, $sortingFields, $direction)
+    {
+        if (is_array($sortingFields)) {
+            foreach ($sortingFields as $field) {
+                $dataSource->getExpressionBuilder()->addOrderBy($field, $direction);
+            }
+
+            return;
+        }
+
+        $dataSource->getExpressionBuilder()->orderBy($sortingFields, $direction);
     }
 }
