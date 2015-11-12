@@ -20,14 +20,14 @@
         }
     ],
     "require": {
-        "php":                       ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "symfony/framework-bundle":  "^2.7.5",
-        "jms/translation-bundle":    "1.1.*",
-        "knplabs/knp-menu-bundle":   "1.1.*",
-        "liip/imagine-bundle":       "~1.0",
+        "jms/translation-bundle": "1.1.*",
+        "knplabs/knp-menu-bundle": "1.1.*",
         "knplabs/knp-snappy-bundle": "*@dev",
-        "sylius/core-bundle":        "0.16.*"
+        "liip/imagine-bundle": "~1.0",
+        "sylius/core-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "config": {
         "bin-dir": "bin"

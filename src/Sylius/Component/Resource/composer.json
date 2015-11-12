@@ -7,25 +7,25 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Sylius project",
+            "name":     "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name": "Community contributions",
+            "name":     "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php":                      ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "doctrine/collections":     "~1.0",
-        "doctrine/common":          "~2.3",
-        "winzou/state-machine":     "~0.1",
-        "symfony/event-dispatcher": "~2.3"
+        "doctrine/collections": "~1.0",
+        "doctrine/common": "~2.3",
+        "symfony/event-dispatcher": "~2.3",
+        "winzou/state-machine": "~0.1"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"

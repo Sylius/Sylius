@@ -7,34 +7,39 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Łukasz Chruściel",
-            "email": "lukasz.chrusciel@lakion.com"
+            "name":     "Łukasz Chruściel",
+            "email":    "lukasz.chrusciel@lakion.com"
         },
         {
-            "name": "Mateusz Zalewski",
-            "email": "mateusz.zalewski@lakion.com"
+            "name":     "Mateusz Zalewski",
+            "email":    "mateusz.zalewski@lakion.com"
         },
         {
-            "name": "Sylius project",
+            "name":     "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name": "Community contributions",
+            "name":     "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": ">=5.5.9"
+        "php": ">=5.5.9",
+
+        "sylius/registry": "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
     },
     "suggest": {
         "symfony/templating": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Report\\": "" }

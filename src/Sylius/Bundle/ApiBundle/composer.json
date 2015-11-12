@@ -20,18 +20,18 @@
         }
     ],
     "require": {
-        "php":                      ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "sylius/resource-bundle":               "0.16.*",
-        "symfony/framework-bundle":             "^2.7.5",
-        "friendsofsymfony/oauth-server-bundle": "~1.4"
+        "friendsofsymfony/oauth-server-bundle": "~1.4",
+        "sylius/resource-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "symfony/form":           "~2.3",
-        "twig/twig":              "~1.0",
-        "phpspec/phpspec":        "~2.0",
-        "phpunit/phpunit":        "~3.7",
-        "sylius/fixtures-bundle": "0.16.*"
+        "phpspec/phpspec": "~2.1",
+        "phpunit/phpunit": "~3.7",
+        "sylius/fixtures-bundle": "0.16.*",
+        "symfony/form": "~2.3",
+        "twig/twig": "~1.0"
     },
     "config": {
         "bin-dir": "bin"

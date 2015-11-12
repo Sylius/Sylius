@@ -22,16 +22,16 @@
     "require": {
         "php": ">=5.5.9",
 
-        "symfony/framework-bundle":        "^2.7.5",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.16.*",
-        "sylius/archetype":                "0.16.*",
-        "sylius/attribute-bundle":         "0.16.*",
-        "sylius/variation-bundle":         "0.16.*"
+        "sylius/archetype": "0.16.*",
+        "sylius/attribute-bundle": "0.16.*",
+        "sylius/resource-bundle": "0.16.*",
+        "sylius/variation-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0",
-        "symfony/form":      "~2.3",
+        "phpspec/phpspec": "~2.1",
+        "symfony/form": "~2.3",
         "symfony/validator": "~2.3"
     },
     "config": {
@@ -48,6 +48,5 @@
         "branch-alias": {
             "dev-master": "0.16-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
