@@ -141,7 +141,7 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.display_price'|trans }}</td>
-                    <td>{{ misc.state_label(product.displayPrice) }}</td>
+                    <td>{{ misc.state_label(product.masterVariant.displayPrice) }}</td>
                 </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
                 <tr>

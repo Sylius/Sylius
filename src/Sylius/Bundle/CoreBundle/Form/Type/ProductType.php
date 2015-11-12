@@ -59,9 +59,6 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label'       => 'sylius.form.product.restricted_zone',
             ))
-            ->add('displayPrice', 'checkbox', array(
-                'label' => 'sylius.form.variant.display_price'
-            ))
         ;
     }
 }

@@ -70,13 +70,6 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     protected $deletedAt;
 
-    /**
-     * Whether the price is displayed or not
-     *
-     * @var bool
-     */
-    protected $displayPrice;
-
     public function __construct()
     {
         parent::__construct();
@@ -500,21 +493,5 @@ class Product extends AbstractTranslatable implements ProductInterface
                 $variant->setDeletedAt(null);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDisplayPrice()
-    {
-        return $this->displayPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setdisplayPrice(bool $displayPrice)
-    {
-        $this->displayPrice = $displayPrice;
     }
 }

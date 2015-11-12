@@ -53,7 +53,9 @@
         <field name="weight" column="weight" type="float" nullable="true">
             <gedmo:versioned/>
         </field>
-
+        <field name="displayPrice" column="display_price" type="boolean">
+            <gedmo:versioned/>
+        </field>
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductVariantImageInterface" mapped-by="variant">
             <cascade>
                 <cascade-all />

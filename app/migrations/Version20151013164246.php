@@ -16,7 +16,9 @@ class Version20151013164246 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql("ALTER TABLE sylius_product ADD COLUMN display_price TINYINT(1) DEFAULT 1");
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql("ALTER TABLE sylius_product_variant ADD COLUMN display_price TINYINT(1) DEFAULT 1");
     }
 
     /**
@@ -25,6 +27,8 @@ class Version20151013164246 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql("ALTER TABLE sylius_product DROP COLUMN display_price");
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql("ALTER TABLE sylius_product_variant DROP COLUMN sylius_product_variant");
     }
 }

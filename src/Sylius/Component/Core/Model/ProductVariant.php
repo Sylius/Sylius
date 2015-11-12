@@ -116,6 +116,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $depth;
 
     /**
+     * Is display price
+     *
+     * @var bool
+     */
+    protected $displayPrice;
+
+    /**
      * Override constructor to set on hand stock.
      */
     public function __construct()
@@ -491,5 +498,23 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingVolume()
     {
         return $this->depth * $this->height * $this->width;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDisplayPrice()
+    {
+        return $this->displayPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDisplayPrice($displayPrice)
+    {
+        $this->displayPrice = (bool)$displayPrice;
+
+        return $this;
     }
 }

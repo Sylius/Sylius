@@ -57,11 +57,7 @@
             </join-table>
         </many-to-many>
 
-        <field name="displayPrice" column="display_price" type="boolean" nullable="false">
-+           <gedmo:versioned />
-+       </field>
-
-        <gedmo:loggable />
+         <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>
