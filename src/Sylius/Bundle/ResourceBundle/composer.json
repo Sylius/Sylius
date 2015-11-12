@@ -22,33 +22,33 @@
     "require": {
         "php": ">=5.5.9",
 
-        "symfony/framework-bundle":        "^2.7.5",
-        "symfony/twig-bundle":             "~2.3",
-        "symfony/expression-language":     "~2.4",
-        "symfony/form":                    "~2.3",
-        "sylius/resource":                 "0.16.*",
-        "sylius/storage":                  "0.16.*",
-        "friendsofsymfony/rest-bundle":    "~1.5",
-        "jms/serializer-bundle":           "~0.13",
+        "doctrine/doctrine-bundle": "~1.3",
+        "friendsofsymfony/rest-bundle": "~1.5",
+        "jms/serializer-bundle": "~0.13",
+        "sylius/resource": "0.16.*",
+        "sylius/storage": "0.16.*",
+        "symfony/expression-language": "~2.4",
+        "symfony/form": "~2.3",
+        "symfony/framework-bundle": "^2.7.5",
+        "symfony/twig-bundle": "~2.3",
         "white-october/pagerfanta-bundle": "~1.0",
-        "doctrine/doctrine-bundle":        "~1.3",
-        "willdurand/hateoas-bundle":       "~0.4"
+        "willdurand/hateoas-bundle": "~0.4"
     },
     "require-dev": {
-        "phpspec/phpspec":           "~2.1",
-        "twig/twig":                 "~1.11",
-        "doctrine/orm":              "~2.4",
-        "doctrine/mongodb-odm":      "1.0.*@dev",
-        "doctrine/phpcr-bundle":     "~1.1",
-        "sylius/rbac-bundle":        "0.16.*",
+        "phpspec/phpspec": "~2.1",
+        "akeneo/phpspec-skip-example-extension": "~1.2",
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/orm": "~2.4",
+        "doctrine/phpcr-bundle": "~1.1",
+        "sylius/rbac-bundle": "0.16.*",
         "sylius/translation-bundle": "0.16.*",
-        "akeneo/phpspec-skip-example-extension": "~1.2"
+        "twig/twig": "~1.11"
     },
     "suggest": {
-        "doctrine/orm":              "~2.4",
-        "doctrine/mongodb-odm":      "1.0.*@dev",
-        "doctrine/phpcr-bundle":     "~1.1",
-        "sylius/rbac-bundle":        "0.16.*",
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/orm": "~2.4",
+        "doctrine/phpcr-bundle": "~1.1",
+        "sylius/rbac-bundle": "0.16.*",
         "sylius/translation-bundle": "0.16.*"
     },
     "config": {

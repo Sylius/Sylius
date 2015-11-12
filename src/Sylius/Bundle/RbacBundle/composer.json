@@ -20,17 +20,17 @@
         }
     ],
     "require": {
-        "php":                             ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "sylius/rbac":                     "0.16.*",
-        "sylius/resource-bundle":          "0.16.*",
-        "symfony/framework-bundle":        "^2.7.5",
-        "doctrine/doctrine-cache-bundle":  "~1.0"
+        "doctrine/doctrine-cache-bundle": "~1.0",
+        "sylius/rbac": "0.16.*",
+        "sylius/resource-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/form":    "~2.3",
-        "twig/twig":       "~1.0"
+        "symfony/form": "~2.3",
+        "twig/twig": "~1.0"
     },
     "config": {
         "bin-dir": "bin"

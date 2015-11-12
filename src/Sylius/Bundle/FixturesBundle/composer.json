@@ -25,8 +25,8 @@
         "sylius/core-bundle": "0.16.*"
     },
     "require-dev": {
-        "fzaninotto/faker":                  "1.2.*",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "fzaninotto/faker": "1.2.*"
     },
     "config": {
         "bin-dir": "bin"

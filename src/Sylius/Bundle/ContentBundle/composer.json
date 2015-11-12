@@ -20,21 +20,21 @@
         }
     ],
     "require": {
-        "php":                               ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "symfony/framework-bundle":          "^2.7.5",
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-        "sylius/resource-bundle":            "0.16.*",
-        "symfony-cmf/block-bundle":          "~1.2",
-        "symfony-cmf/content-bundle":        "~1.2",
-        "symfony-cmf/create-bundle":         "~1.2",
-        "symfony-cmf/media-bundle":          "~1.2",
-        "symfony-cmf/menu-bundle":           "~1.2",
-        "symfony-cmf/routing-bundle":        "~1.2"
+        "sylius/resource-bundle": "0.16.*",
+        "symfony-cmf/block-bundle": "~1.2",
+        "symfony-cmf/content-bundle": "~1.2",
+        "symfony-cmf/create-bundle": "~1.2",
+        "symfony-cmf/media-bundle": "~1.2",
+        "symfony-cmf/menu-bundle": "~1.2",
+        "symfony-cmf/routing-bundle": "~1.2",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec":  "~2.1",
-        "symfony/form":     "~2.3"
+        "phpspec/phpspec": "~2.1",
+        "symfony/form": "~2.3"
     },
     "config": {
         "bin-dir": "bin"

@@ -23,10 +23,13 @@
         "php": ">=5.5.9",
 
         "sylius/originator": "0.16.*",
-        "sylius/sequence":   "0.16.*"
+        "sylius/sequence": "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Order\\": "" }

@@ -7,23 +7,22 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Sylius project",
+            "name":     "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name": "Community contributions",
+            "name":     "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": ">=5.5.9",
 
-        "doctrine/common":         "~2.3",
-        "sylius/resource":         "0.16.*",
+        "sylius/resource": "0.16.*",
         "symfony/property-access": "~2.3"
     },
     "require-dev": {

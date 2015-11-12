@@ -25,8 +25,11 @@
         "symfony/framework-bundle": "~2.7.5"
     },
     "require-dev": {
-        "symfony/yaml":    "~2.1",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "symfony/yaml": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\FlowBundle\\": "" }
