@@ -110,6 +110,7 @@ sylius:
             images: Images
             on_hand: Current stock
             price: Price
+            display_price: Display price
             sku: SKU
             weight: Weight
             width: Width
