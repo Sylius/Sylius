@@ -14,8 +14,11 @@ Configuration Reference
                     name:
                         type: twig # Type of column.
                         label: Name # Label.
+                        sortable: true
                         options:
-                            template: :Grid/Column:_name.html.twig # Options specific for column type.
+                            template: :Grid/Column:_name.html.twig # Only twig column
+                            path: name
+                            sort: name
                 filters:
                     group:
                         type: entity
