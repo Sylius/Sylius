@@ -60,7 +60,7 @@ class TwigColumnType extends AbstractColumnType
                 'template' => array('string'),
                 'context'  => array('array'),
                 'path' => array('string'),
-                'sort' => array('string'),
+                'sort' => array('string', 'array'),
             ))
         ;
     }

@@ -41,7 +41,7 @@ class StringColumnType extends AbstractColumnType
             ))
             ->setAllowedTypes(array(
                 'path' => array('string'),
-                'sort' => array('string')
+                'sort' => array('string', 'array')
             ))
         ;
     }

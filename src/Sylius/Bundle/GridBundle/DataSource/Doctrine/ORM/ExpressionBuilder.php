@@ -148,6 +148,11 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         return $this->queryBuilder->orderBy($this->getFieldName($field), $direction);
     }
 
+    public function addOrderBy($field, $direction)
+    {
+        return $this->queryBuilder->addOrderBy($this->getFieldName($field), $direction);
+    }
+
     private function getFieldName($field)
     {
         if (false === strpos($field, '.')) {
