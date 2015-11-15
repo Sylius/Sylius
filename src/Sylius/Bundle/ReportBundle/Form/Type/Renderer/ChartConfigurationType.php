@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,11 +29,11 @@ class ChartConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', array(
+            ->add('type', ChoiceType::class, array(
                 'label' => 'sylius.form.report.chart.type',
                 'choices' => ChartRenderer::getChartTypes(),
             ))
-            ->add('template', 'choice', array(
+            ->add('template', ChoiceType::class, array(
                 'label' => 'sylius.form.report.renderer.template',
                 'choices' => array(
                     'SyliusReportBundle:Chart:default.html.twig' => 'Default',

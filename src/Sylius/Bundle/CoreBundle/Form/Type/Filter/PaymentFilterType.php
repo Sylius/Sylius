@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,28 +28,28 @@ class PaymentFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', 'text', array(
+            ->add('number', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.number',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.payment_filter.number'
                 )
             ))
-            ->add('billingAddress', 'text', array(
+            ->add('billingAddress', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.billing_address',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.payment_filter.billing_address'
                 )
             ))
-            ->add('createdAtFrom', 'text', array(
+            ->add('createdAtFrom', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.created_at_from',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.payment_filter.created_at_from'
                 )
             ))
-            ->add('createdAtTo', 'text', array(
+            ->add('createdAtTo', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.created_at_to',
                 'attr'     => array(

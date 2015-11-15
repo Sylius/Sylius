@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,7 +45,7 @@ class ItemTotalConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 ),
             ))
-            ->add('equal', 'checkbox', array(
+            ->add('equal', CheckboxType::class, array(
                 'label' => 'sylius.form.rule.item_total_configuration.equal',
                 'constraints' => array(
                     new Type(array('type' => 'bool')),

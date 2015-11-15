@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,7 +42,7 @@ class TaxonomyConfigurationType extends AbstractType
                     'save_objects' => false,
                 ),
             ))
-            ->add('exclude', 'checkbox', array(
+            ->add('exclude', CheckboxType::class, array(
                 'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
             ))
         ;

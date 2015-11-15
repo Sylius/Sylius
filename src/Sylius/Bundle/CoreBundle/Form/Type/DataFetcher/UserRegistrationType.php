@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,12 +36,12 @@ class UserRegistrationType extends AbstractType
             ->add('end', 'date', array(
                 'label' => 'sylius.form.report.user_registration.end',
             ))
-            ->add('period', 'choice', array(
+            ->add('period', ChoiceType::class, array(
                 'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
-            ->add('empty_records', 'checkbox', array(
+            ->add('empty_records', CheckboxType::class, array(
                 'label'    => 'sylius.form.report.user_registration.empty_records',
                 'required' => false,
             ))

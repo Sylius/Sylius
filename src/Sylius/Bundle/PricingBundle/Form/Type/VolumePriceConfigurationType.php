@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,10 +28,10 @@ class VolumePriceConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-            ->add('min', 'number', array(
+            ->add('min', NumberType::class, array(
                 'label' => 'sylius.form.pricing.volume_based.min'
             ))
-            ->add('max', 'number', array(
+            ->add('max', NumberType::class, array(
                 'label' => 'sylius.form.pricing.volume_based.max'
             ))
             ->add('price', 'sylius_money', array(

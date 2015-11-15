@@ -11,6 +11,10 @@
 
 namespace Sylius\Bundle\InstallerBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,26 +32,26 @@ class SetupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text', array(
+            ->add('username', TextType::class, array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.setup.username'
             ))
-            ->add('plain_password', 'password', array(
+            ->add('plain_password', PasswordType::class, array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.setup.plain_password'
             ))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                     new Assert\Email(),
                 ),
                 'label' => 'sylius.form.setup.email'
             ))
-            ->add('load_fixtures', 'checkbox', array(
+            ->add('load_fixtures', CheckboxType::class, array(
                 'required' => false,
                 'mapped'   => false,
                 'label'    => 'sylius.form.setup.load_fixtures'

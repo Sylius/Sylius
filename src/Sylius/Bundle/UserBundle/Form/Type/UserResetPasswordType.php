@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,7 +27,7 @@ class UserResetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password', 'repeated', array(
+            ->add('password', RepeatedType::class, array(
                 'type'            => 'password',
                 'first_options'   => array('label' => 'sylius.form.user.password.label'),
                 'second_options'  => array('label' => 'sylius.form.user.password.confirmation'),

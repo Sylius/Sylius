@@ -11,6 +11,10 @@
 
 namespace Sylius\Bundle\InstallerBundle\Form\Type\Configuration;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,7 +24,7 @@ class DatabaseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sylius_database_driver', 'choice', array(
+            ->add('sylius_database_driver', ChoiceType::class, array(
                 'choices' => array(
                     'pdo_mysql'  => 'sylius.form.configuration.database.driver.mysql',
                     'pdo_pgsql'  => 'sylius.form.configuration.database.driver.postgresql',
@@ -34,33 +38,33 @@ class DatabaseType extends AbstractType
                 'label' => 'sylius.form.configuration.database.driver',
 
             ))
-            ->add('sylius_database_host', 'text', array(
+            ->add('sylius_database_host', TextType::class, array(
                 'data'  => '127.0.0.1',
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.configuration.database.host',
             ))
-            ->add('sylius_database_port', 'integer', array(
+            ->add('sylius_database_port', IntegerType::class, array(
                 'required'    => false,
                 'constraints' => array(
                     new Assert\Type(array('type' => 'integer'))
                 ),
                 'label'    => 'sylius.form.configuration.database.port'
             ))
-            ->add('sylius_database_name', 'text', array(
+            ->add('sylius_database_name', TextType::class, array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.configuration.database.name'
             ))
-            ->add('sylius_database_user', 'text', array(
+            ->add('sylius_database_user', TextType::class, array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
                 'label' => 'sylius.form.configuration.database.user'
             ))
-            ->add('sylius_database_password', 'password', array(
+            ->add('sylius_database_password', PasswordType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.configuration.database.password'
             ))

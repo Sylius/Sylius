@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Sylius\Bundle\MoneyBundle\Form\DataTransformer\SyliusMoneyTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,7 +64,7 @@ class MoneyType extends AbstractType
      */
     public function getParent()
     {
-        return 'money';
+        return MoneyType::class;
     }
 
     /**

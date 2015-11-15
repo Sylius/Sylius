@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,7 +38,7 @@ class ShippingDiscountConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percentage', 'percent', array(
+            ->add('percentage', PercentType::class, array(
                 'label' => 'sylius.form.action.shipping_discount_configuration.percentage',
                 'constraints' => array(
                     new NotBlank(),

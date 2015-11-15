@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Sylius\Bundle\AddressingBundle\Form\EventListener\ResizeZoneMemberCollectionListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -86,7 +87,7 @@ class ZoneMemberCollectionType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**
