@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
@@ -30,6 +31,8 @@ class VariantController extends ResourceController
      */
     public function generateAction(Request $request)
     {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
         if (null === $productId = $request->get('productId')) {
             throw new NotFoundHttpException('No product given.');
         }
@@ -41,15 +44,15 @@ class VariantController extends ResourceController
         $manager->persist($product);
         $manager->flush();
 
-        $this->flashHelper->setFlash('success', 'generate');
+        $this->get('session')->getBag('flashes')->add('success', $this->get('translator')->trans('sylius.variant.generate', array(), 'flashes'));
 
-        return $this->redirectHandler->redirectTo($product);
+        return $this->redirectHandler->redirectToResource($configuration, $product);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(RequestConfiguration $configuration)
     {
         if (null === $productId = $this->getRequest()->get('productId')) {
             throw new NotFoundHttpException('No parent product given.');
@@ -57,7 +60,7 @@ class VariantController extends ResourceController
 
         $product = $this->findProductOr404($productId);
 
-        $variant = parent::createNew();
+        $variant = parent::createNew($configuration);
         $variant->setProduct($product);
 
         return $variant;

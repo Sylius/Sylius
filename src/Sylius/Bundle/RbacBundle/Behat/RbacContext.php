@@ -30,7 +30,7 @@ class RbacContext extends DefaultContext
 
         $manager->flush();
 
-        $root = $repository->createNew();
+        $root = $this->getFactory('permission')->createNew();
         $root->setCode('root');
         $root->setDescription('Root');
 
@@ -40,7 +40,7 @@ class RbacContext extends DefaultContext
         $permissions = array();
 
         foreach ($table->getHash() as $data) {
-            $permission = $repository->createNew();
+            $permission = $this->getFactory('permission')->createNew();
 
             $permission->setCode($data['code']);
             $permission->setDescription($data['description']);
@@ -73,7 +73,7 @@ class RbacContext extends DefaultContext
 
         $manager->flush();
 
-        $root = $repository->createNew();
+        $root = $this->getFactory('role')->createNew();
         $root->setCode('root');
         $root->setName('Root');
 
@@ -83,7 +83,7 @@ class RbacContext extends DefaultContext
         $roles = array();
 
         foreach ($table->getHash() as $data) {
-            $role = $repository->createNew();
+            $role = $this->getFactory('role')->createNew();
 
             $role->setCode($data['code']);
             $role->setName($data['name']);

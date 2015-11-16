@@ -84,14 +84,7 @@ class WebContext extends DefaultContext
     {
         $type = str_replace(' ', '_', $type);
 
-        $entityManager = $this->getEntityManager();
-        $entityManager->getFilters()->disable('softdeleteable');
-
-        $resource = $this->waitFor(function () use ($type, $property, $value) {
-            return $this->getRepository($type)->findOneBy([$property => $value]);
-        });
-
-        $entityManager->getFilters()->enable('softdeleteable');
+        $resource = $this->findOneBy($type, array($property => $value));
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
             sprintf('%s_show', $type), array('id' => $resource->getId())

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Resource\Event\FlashEvent;
+use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\CartEvents;
+use Sylius\Component\Cart\Event\CartItemEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -21,13 +22,12 @@ use Symfony\Component\Translation\TranslatorInterface;
  * Flash message listener.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FlashSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var string[]
-     */
-    public $messages;
+    const FLASHES_BAG = 'flashes';
+    const TRANSLATION_DOMAIN = 'flashes';
 
     /**
      * @var SessionInterface
@@ -40,7 +40,7 @@ class FlashSubscriber implements EventSubscriberInterface
     private $translator;
 
     /**
-     * @param SessionInterface    $session
+     * @param SessionInterface $session
      * @param TranslatorInterface $translator
      */
     public function __construct(SessionInterface $session, TranslatorInterface $translator)
@@ -55,48 +55,44 @@ class FlashSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            SyliusCartEvents::CART_CLEAR_COMPLETED  => 'addSuccessFlash',
-            SyliusCartEvents::CART_SAVE_COMPLETED   => 'addSuccessFlash',
+            CartEvents::POST_CLEAR => 'addSuccessFlash',
+            CartEvents::POST_SAVE  => 'addSuccessFlash',
 
-            SyliusCartEvents::ITEM_ADD_COMPLETED    => 'addSuccessFlash',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
-
-            SyliusCartEvents::ITEM_ADD_ERROR        => 'addErrorFlash',
-            SyliusCartEvents::ITEM_REMOVE_ERROR     => 'addErrorFlash',
+            CartItemEvents::POST_ADD      => 'addSuccessFlash',
+            CartItemEvents::ADD_FAILED    => 'addErrorFlash',
+            CartItemEvents::POST_REMOVE   => 'addSuccessFlash',
+            CartItemEvents::REMOVE_FAILED => 'addErrorFlash',
         );
     }
 
     /**
      * @return $this
      */
-    public function setMessages()
+    public static function getMessages()
     {
-        $this->messages = array(
-            SyliusCartEvents::CART_SAVE_COMPLETED    => 'sylius.cart.cart_save_completed',
-            SyliusCartEvents::CART_CLEAR_COMPLETED   => 'sylius.cart.cart_clear_completed',
+        return array(
+            CartEvents::POST_CLEAR => 'sylius.cart.clear',
+            CartEvents::POST_SAVE  => 'sylius.cart.save',
 
-            SyliusCartEvents::ITEM_ADD_COMPLETED     => 'sylius.cart.item_add_completed',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => 'sylius.cart.item_remove_completed',
-
-            SyliusCartEvents::ITEM_ADD_ERROR         => 'sylius.cart.item_add_error',
-            SyliusCartEvents::ITEM_REMOVE_ERROR      => 'sylius.cart.item_remove_error'
+            CartItemEvents::POST_ADD      => 'sylius.cart_item.add',
+            CartItemEvents::ADD_FAILED    => 'sylius.cart_item.add_failed',
+            CartItemEvents::POST_REMOVE   => 'sylius.cart_item.remove',
+            CartItemEvents::REMOVE_FAILED => 'sylius.cart_item.remove_failed',
         );
-
-        return $this;
     }
 
     /**
-     * @param FlashEvent $event
+     * @param CartEvent $event
      */
-    public function addErrorFlash(FlashEvent $event)
+    public function addErrorFlash(CartEvent $event)
     {
         $this->addFlash('error', $event->getMessage(), $event->getName());
     }
 
     /**
-     * @param FlashEvent $event
+     * @param CartEvent $event
      */
-    public function addSuccessFlash(FlashEvent $event)
+    public function addSuccessFlash(CartEvent $event)
     {
         $this->addFlash('success', $event->getMessage(), $event->getName());
     }
@@ -108,9 +104,11 @@ class FlashSubscriber implements EventSubscriberInterface
      */
     private function addFlash($type, $message, $eventName)
     {
-        $this->session->getBag('flashes')->add(
+        $messages = self::getMessages();
+
+        $this->session->getBag(self::FLASHES_BAG)->add(
             $type,
-            $message ?: $this->translator->trans($this->messages[$eventName], array(), 'flashes')
+            $this->translator->trans($message ?: $messages[$eventName], array(), self::TRANSLATION_DOMAIN)
         );
     }
 }

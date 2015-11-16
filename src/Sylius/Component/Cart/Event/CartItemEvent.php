@@ -15,8 +15,6 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 
 /**
- * Cart item event.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartItemEvent extends CartEvent
@@ -29,10 +27,11 @@ class CartItemEvent extends CartEvent
     /**
      * @param CartInterface     $cart
      * @param CartItemInterface $item
+     * @param string            $message
      */
-    public function __construct(CartInterface $cart, CartItemInterface $item)
+    public function __construct(CartInterface $cart, CartItemInterface $item, $message = null)
     {
-        parent::__construct($cart);
+        parent::__construct($cart, $message);
 
         $this->item = $item;
     }

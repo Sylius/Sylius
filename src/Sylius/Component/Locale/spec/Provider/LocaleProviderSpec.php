@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Locale\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @mixin \Sylius\Component\Locale\Provider\LocaleProvider
@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class LocaleProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $localeRepository)
+    function let(ResourceRepositoryInterface $localeRepository)
     {
         $this->beConstructedWith($localeRepository);
     }
@@ -41,7 +41,7 @@ class LocaleProviderSpec extends ObjectBehavior
     }
 
     function it_returns_available_locales_codes(
-        RepositoryInterface $localeRepository,
+        ResourceRepositoryInterface $localeRepository,
         LocaleInterface $firstLocale,
         LocaleInterface $secondLocale
     ) {
@@ -55,7 +55,7 @@ class LocaleProviderSpec extends ObjectBehavior
     }
 
     function it_checks_if_the_locale_code_is_available(
-        RepositoryInterface $localeRepository,
+        ResourceRepositoryInterface $localeRepository,
         LocaleInterface $firstLocale,
         LocaleInterface $secondLocale
     ) {

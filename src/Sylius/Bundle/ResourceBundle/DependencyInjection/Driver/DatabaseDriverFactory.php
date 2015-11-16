@@ -13,30 +13,31 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
 class DatabaseDriverFactory
 {
-    public static function get(
-        ContainerBuilder $container,
-        $prefix,
-        $resourceName,
-        $managerName,
-        $type = SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        $templates = null
-    ) {
-        switch ($type) {
+    /**
+     * @param ResourceMetadataInterface $metadata
+     *
+     * @return DoctrineODMDriver|DoctrineORMDriver|DoctrinePHPCRDriver
+     *
+     * @throws UnknownDriverException
+     */
+    public static function getForResource(ResourceMetadataInterface $metadata)
+    {
+        switch ($metadata->getDriver()) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return new DoctrineORMDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrineORMDriver();
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                return new DoctrineODMDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrineODMDriver();
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                return new DoctrinePHPCRDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrinePHPCRDriver();
             default:
-                throw new UnknownDriverException($type);
+                throw new UnknownDriverException($metadata);
         }
     }
 }

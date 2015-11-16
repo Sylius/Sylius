@@ -11,13 +11,13 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\ValidatorInterface;
  */
 class CartSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
+    function let(ResourceManagerInterface $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
         $this->beConstructedWith($manager, $validator, $provider);
     }
@@ -43,6 +43,8 @@ class CartSubscriberSpec extends ObjectBehavior
         $event->getItem()->willReturn($cartItem);
         $cart->addItem($cartItem)->shouldBeCalled();
 
+        $cart->calculateTotal()->shouldBeCalled();
+
         $this->addItem($event);
     }
 
@@ -51,6 +53,8 @@ class CartSubscriberSpec extends ObjectBehavior
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
         $cart->removeItem($cartItem)->shouldBeCalled();
+
+        $cart->calculateTotal()->shouldBeCalled();
 
         $this->removeItem($event);
     }
@@ -85,10 +89,12 @@ class CartSubscriberSpec extends ObjectBehavior
     ) {
         $constraintList->count()->willReturn(1);
         $event->getCart()->willReturn($cart);
+
+        $cart->calculateTotal()->shouldBeCalled();
+
         $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);
 
         $manager->persist($cart)->shouldNotBeCalled();
-        $manager->flush()->shouldNotBeCalled();
         $provider->setCart($cart)->shouldNotBeCalled();
 
         $this->saveCart($event);

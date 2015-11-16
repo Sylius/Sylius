@@ -35,7 +35,6 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('sylius_resource');
 
         $this->addResourcesSection($rootNode);
-        $this->addSettingsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -54,20 +53,28 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                            ->scalarNode('object_manager')->defaultValue('default')->end()
+                            ->scalarNode('manager')->defaultValue('default')->end()
                             ->scalarNode('templates')->cannotBeEmpty()->end()
                             ->arrayNode('classes')
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                    ->scalarNode('interface')->end()
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->end()
-                                    ->scalarNode('interface')->end()
+                                    ->scalarNode('factory')->end()
+                                    ->arrayNode('form')
+                                        ->prototype('scalar')->end()
+                                    ->end()
                                     ->arrayNode('translation')
                                         ->children()
                                             ->scalarNode('model')->isRequired()->end()
+                                            ->scalarNode('interface')->end()
                                             ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                             ->scalarNode('repository')->end()
-                                            ->scalarNode('interface')->end()
+                                            ->scalarNode('factory')->end()
+                                            ->arrayNode('form')
+                                                ->prototype('scalar')->end()
+                                            ->end()
                                             ->arrayNode('mapping')
                                                 ->isRequired()
                                                 ->children()
@@ -81,35 +88,6 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `settings` section.
-     *
-     * @param $node
-     */
-    private function addSettingsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('settings')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->variableNode('paginate')->defaultNull()->end()
-                        ->variableNode('limit')->defaultNull()->end()
-                        ->arrayNode('allowed_paginate')
-                            ->prototype('integer')->end()
-                            ->defaultValue(array(10, 20, 30))
-                        ->end()
-                        ->integerNode('default_page_size')->defaultValue(10)->end()
-                        ->booleanNode('sortable')->defaultFalse()->end()
-                        ->variableNode('sorting')->defaultNull()->end()
-                        ->booleanNode('filterable')->defaultFalse()->end()
-                        ->variableNode('criteria')->defaultNull()->end()
                     ->end()
                 ->end()
             ->end()

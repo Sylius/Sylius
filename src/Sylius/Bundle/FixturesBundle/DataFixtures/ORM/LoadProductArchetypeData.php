@@ -63,11 +63,12 @@ class LoadProductArchetypeData extends DataFixture
      */
     protected function createArchetype($code, array $nameTranslations, array $options, array $properties)
     {
-        $archetype = $this->getProductArchetypeRepository()->createNew();
+        $archetype = $this->getProductArchetypeFactory()->createNew();
         $archetype->setCode($code);
 
         foreach ($nameTranslations as $locale => $name) {
             $archetype->setCurrentLocale($locale);
+            $archetype->setFallbackLocale($locale);
             $archetype->setName($name);
         }
 

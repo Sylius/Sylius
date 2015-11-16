@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     private $countryRepository;
 
@@ -39,10 +39,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository     $countryRepository
+     * @param ResourceRepositoryInterface     $countryRepository
      * @param FormFactoryInterface $factory
      */
-    public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    public function __construct(ResourceRepositoryInterface $countryRepository, FormFactoryInterface $factory)
     {
         $this->countryRepository = $countryRepository;
         $this->factory = $factory;

@@ -58,6 +58,7 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function __construct()
     {
         parent::__construct();
+
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

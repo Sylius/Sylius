@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\PromotionBundle\Controller;
 
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,69 +34,63 @@ class CouponController extends ResourceController
      */
     public function generateAction(Request $request)
     {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
         if (null === $promotionId = $request->get('promotionId')) {
             throw new NotFoundHttpException('No promotion id given.');
         }
 
-        $promotion = $this
-            ->getPromotionController()
-            ->findOr404($request, array('id' => $promotionId))
-        ;
+        $promotionRepository = $this->get('sylius.repository.promotion');
+
+        if (!$promotion = $promotionRepository->find($promotionId)) {
+            throw new NotFoundHttpException('Requested promotion does not exist.');
+        }
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction');
 
         if ($form->handleRequest($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
-            $this->flashHelper->setFlash('success', 'generate');
+            $this->get('session')->getBag('flashes')->add('success', $this->get('translator')->trans('sylius.promotion_coupon.generate', array(), 'flashes'));
 
-            return $this->redirectHandler->redirectTo($promotion);
+            return $this->redirectHandler->redirectToResource($configuration, $promotion);
         }
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->handleView($configuration, View::create($form));
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('generate.html'))
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('generate.html'))
             ->setData(array(
                 'promotion' => $promotion,
                 'form'      => $form->createView()
             ))
         ;
 
-        return $this->handleView($view);
+        return $this->handleView($configuration, $view);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(RequestConfiguration $configuration)
     {
-        $request = $this->getRequest();
+        $request = $configuration->getRequest();
+
         if (null === $promotionId = $request->get('promotionId')) {
             throw new NotFoundHttpException('No promotion id given');
         }
 
-        $promotion = $this
-            ->getPromotionController()
-            ->findOr404($request, array('id' => $promotionId))
-        ;
+        $promotionRepository = $this->get('sylius.repository.promotion');
 
-        $coupon = parent::createNew();
+        if (!$promotion = $promotionRepository->find($promotionId)) {
+            throw new NotFoundHttpException('Requested promotion does not exist.');
+        }
+
+        $coupon = parent::createNew($configuration);
         $coupon->setPromotion($promotion);
 
         return $coupon;
-    }
-
-    /**
-     * Get promotion controller.
-     *
-     * @return ResourceController
-     */
-    protected function getPromotionController()
-    {
-        return $this->get('sylius.controller.promotion');
     }
 
     /**

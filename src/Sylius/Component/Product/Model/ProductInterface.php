@@ -13,6 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -23,6 +24,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface ProductInterface extends
     ArchetypeSubjectInterface,
     SlugAwareInterface,
+    ResourceInterface,
     SoftDeletableInterface,
     TimestampableInterface,
     ProductTranslationInterface

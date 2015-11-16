@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 
-class PaymentRepository extends EntityRepository
+class PaymentRepository extends ResourceRepository
 {
     /**
      * Create filter paginator.

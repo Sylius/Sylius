@@ -21,7 +21,7 @@ class MoneyContext extends DefaultContext
      */
     public function thereAreCurrencies(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('currency');
         $repository = $this->getRepository('currency');
 
         foreach ($repository->findAll() as $currency) {
@@ -29,7 +29,6 @@ class MoneyContext extends DefaultContext
         }
 
         $manager->flush();
-        $manager->clear();
 
         foreach ($table->getHash() as $data) {
             $exchangeRate = isset($data['exchange rate']) ? $data['exchange rate'] : 1;
@@ -47,17 +46,17 @@ class MoneyContext extends DefaultContext
      */
     public function thereIsCurrency($code, $rate = 1, $enabled = true, $flush = true)
     {
-        $repository = $this->getRepository('currency');
+        $factory = $this->getFactory('currency');
 
         if (null === $currency = $this->getRepository('currency')->findOneBy(array('code' => $code))) {
-            $currency = $repository->createNew();
+            $currency = $factory->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
         }
 
         $currency->setEnabled($enabled);
 
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('currency');
         $manager->persist($currency);
 
         if ($flush) {

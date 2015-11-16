@@ -13,13 +13,13 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $customerRepository)
+    function let(ResourceRepositoryInterface $customerRepository)
     {
         $this->beConstructedWith('Customer', array('sylius'), $customerRepository);
     }

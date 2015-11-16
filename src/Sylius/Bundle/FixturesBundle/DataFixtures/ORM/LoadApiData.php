@@ -30,13 +30,14 @@ class LoadApiData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        // create user with API role
+        // Create user with API role.
         $user = $this->createUser(
             'api@example.com',
             'api',
             true,
             array('ROLE_API')
         );
+
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
         $manager->persist($user);
@@ -74,8 +75,8 @@ class LoadApiData extends DataFixture
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
         /* @var $user UserInterface */
-        $user = $this->getUserRepository()->createNew();
-        $customer = $this->getCustomerRepository()->createNew();
+        $user = $this->getUserFactory()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);

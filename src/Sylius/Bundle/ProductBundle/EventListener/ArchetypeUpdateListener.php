@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\ProductBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Product update listener.
@@ -31,21 +31,21 @@ class ArchetypeUpdateListener
     protected $builder;
 
     /**
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     protected $productRepository;
 
     /**
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $productManager;
 
     /**
      * @param ArchetypeBuilderInterface $builder
-     * @param ObjectRepository $productRepository
-     * @param ObjectManager $productManager
+     * @param ResourceRepositoryInterface $productRepository
+     * @param ResourceManagerInterface $productManager
      */
-    public function __construct(ArchetypeBuilderInterface $builder, ObjectRepository $productRepository, ObjectManager $productManager)
+    public function __construct(ArchetypeBuilderInterface $builder, ResourceRepositoryInterface $productRepository, ResourceManagerInterface $productManager)
     {
         $this->builder = $builder;
         $this->productRepository = $productRepository;
@@ -53,11 +53,11 @@ class ArchetypeUpdateListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param ResourceEvent $event
      */
-    public function onArchetypeUpdate(GenericEvent $event)
+    public function onArchetypeUpdate(ResourceEvent $event)
     {
-        $archetype = $event->getSubject();
+        $archetype = $event->getResource();
 
         if (!$archetype instanceof ArchetypeInterface) {
             throw new UnexpectedTypeException($archetype, 'Sylius\Component\Archetype\Model\ArchetypeInterface');
@@ -70,5 +70,7 @@ class ArchetypeUpdateListener
 
             $this->productManager->persist($product);
         }
+
+        $this->productManager->flush();
     }
 }

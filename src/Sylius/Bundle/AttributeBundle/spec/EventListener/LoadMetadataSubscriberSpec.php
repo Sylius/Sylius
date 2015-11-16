@@ -29,12 +29,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'product' => array(
                 'subject' => 'Some\App\Product\Entity\Product',
                 'attribute' => array(
-                    'model' => 'Some\App\Product\Entity\Attribute',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Attribute',
+                    ),
                 ),
                 'attribute_value' => array(
-                    'model' => 'Some\App\Product\Entity\AttributeValue',
-                ),
-            ),
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\AttributeValue',
+                    ),
+                )
+            )
         ));
     }
 

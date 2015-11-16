@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 
 /**
@@ -26,9 +26,9 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * Adjustment repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $adjustmentRepository;
+    protected $adjustmentFactory;
 
     /**
      * Shipping charges calculator.
@@ -40,12 +40,12 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface           $adjustmentRepository
+     * @param ResourceFactoryInterface           $adjustmentFactory
      * @param DelegatingCalculatorInterface $calculator
      */
-    public function __construct(RepositoryInterface $adjustmentRepository, DelegatingCalculatorInterface $calculator)
+    public function __construct(ResourceFactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
     {
-        $this->adjustmentRepository = $adjustmentRepository;
+        $this->adjustmentFactory = $adjustmentFactory;
         $this->calculator = $calculator;
     }
 
@@ -60,8 +60,8 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
         foreach ($order->getShipments() as $shipment) {
             $shippingCharge = $this->calculator->calculate($shipment);
 
-            $adjustment = $this->adjustmentRepository->createNew();
-            $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+            $adjustment = $this->adjustmentFactory->createNew();
+            $adjustment->setLabel(AdjustmentInterface::SHIPPING_ADJUSTMENT);
             $adjustment->setAmount($shippingCharge);
             $adjustment->setDescription($shipment->getMethod()->getName());
 

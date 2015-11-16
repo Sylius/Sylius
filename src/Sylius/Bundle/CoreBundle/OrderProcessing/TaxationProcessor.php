@@ -16,7 +16,7 @@ use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
@@ -30,9 +30,9 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * Adjustment repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $adjustmentRepository;
+    protected $adjustmentFactory;
 
     /**
      * Tax calculator.
@@ -65,20 +65,20 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface      $adjustmentRepository
+     * @param ResourceFactoryInterface      $adjustmentFactory
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher
      * @param Settings                 $taxationSettings
      */
     public function __construct(
-        RepositoryInterface $adjustmentRepository,
+        ResourceFactoryInterface $adjustmentFactory,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
     ) {
-        $this->adjustmentRepository = $adjustmentRepository;
+        $this->adjustmentFactory = $adjustmentFactory;
         $this->calculator = $calculator;
         $this->taxRateResolver = $taxRateResolver;
         $this->zoneMatcher = $zoneMatcher;
@@ -149,8 +149,8 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected function addAdjustments(array $taxes, OrderInterface $order)
     {
         foreach ($taxes as $description => $tax) {
-            $adjustment = $this->adjustmentRepository->createNew();
-            $adjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
+            $adjustment = $this->adjustmentFactory->createNew();
+            $adjustment->setLabel(AdjustmentInterface::TAX_ADJUSTMENT);
             $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
             $adjustment->setNeutral($tax['included']);

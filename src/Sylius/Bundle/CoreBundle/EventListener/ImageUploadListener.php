@@ -14,10 +14,10 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListener
 {
@@ -28,9 +28,10 @@ class ImageUploadListener
         $this->uploader = $uploader;
     }
 
-    public function uploadProductImage(GenericEvent $event)
+    public function uploadProductImage(ResourceEvent $event)
     {
-        $subject = $event->getSubject();
+        $subject = $event->getResource();
+
         if (!$subject instanceof ProductInterface && !$subject instanceof ProductVariantInterface) {
             throw new UnexpectedTypeException(
                 $subject,
@@ -51,9 +52,9 @@ class ImageUploadListener
         }
     }
 
-    public function uploadTaxonImage(GenericEvent $event)
+    public function uploadTaxonImage(ResourceEvent $event)
     {
-        $subject = $event->getSubject();
+        $subject = $event->getResource();
 
         if (!$subject instanceof TaxonInterface) {
             throw new UnexpectedTypeException(
@@ -67,9 +68,9 @@ class ImageUploadListener
         }
     }
 
-    public function uploadTaxonomyImage(GenericEvent $event)
+    public function uploadTaxonomyImage(ResourceEvent $event)
     {
-        $subject = $event->getSubject();
+        $subject = $event->getResource();
 
         if (!$subject instanceof TaxonomyInterface) {
             throw new UnexpectedTypeException(

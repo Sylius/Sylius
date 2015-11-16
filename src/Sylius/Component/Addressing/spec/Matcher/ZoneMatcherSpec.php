@@ -19,7 +19,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberCountry;
 use Sylius\Component\Addressing\Model\ZoneMemberProvince;
 use Sylius\Component\Addressing\Model\ZoneMemberZone;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ZoneMatcherSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(ResourceRepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
@@ -83,7 +83,7 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_should_match_address_by_country(
-        RepositoryInterface$repository,
+        ResourceRepositoryInterface$repository,
         CountryInterface $country,
         AddressInterface $address,
         ZoneMemberCountry $memberCountry,

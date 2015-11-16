@@ -42,7 +42,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_deletes_user_if_it_is_different_than_currently_loggged_one(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedUser, $flashBag, $securityContext, TokenInterface $tokenInterface)
     {
-        $event->getSubject()->willReturn($userToBeDeleted);
+        $event->getResource()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
         $securityContext->getToken()->willReturn($tokenInterface);
@@ -56,7 +56,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_deletes_user_if_no_user_is_logged_in(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $securityContext, TokenInterface $tokenInterface)
     {
-        $event->getSubject()->willReturn($userToBeDeleted);
+        $event->getResource()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
         $securityContext->getToken()->willReturn($tokenInterface);
@@ -69,7 +69,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_deletes_user_if_there_is_no_token(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $securityContext)
     {
-        $event->getSubject()->willReturn($userToBeDeleted);
+        $event->getResource()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
         $securityContext->getToken()->willReturn(null);
@@ -81,7 +81,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_does_not_allow_to_delete_currently_logged_user(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $securityContext, $flashBag, TokenInterface $token)
     {
-        $event->getSubject()->willReturn($userToBeDeleted);
+        $event->getResource()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
         $securityContext->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);

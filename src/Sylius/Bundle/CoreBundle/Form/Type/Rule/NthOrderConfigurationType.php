@@ -24,13 +24,6 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class NthOrderConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -50,6 +43,7 @@ class NthOrderConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -62,6 +56,8 @@ class NthOrderConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+=======
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_rule_nth_order_configuration';

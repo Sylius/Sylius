@@ -79,16 +79,23 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     public function __call($method, $arguments)
     {
         $matches = array();
+
         if (preg_match('/^get(.*)Repository$/', $method, $matches)) {
             return $this->get('sylius.repository.'.$matches[1]);
+        }
+        if (preg_match('/^get(.*)Factory$/', $method, $matches)) {
+            return $this->get('sylius.factory.'.$matches[1]);
+        }
+        if (preg_match('/^get(.*)Manager$/', $method, $matches)) {
+            return $this->get('sylius.manager.'.$matches[1]);
         }
 
         return call_user_func_array(array($this, $method), $arguments);
     }
 
-    protected function getZoneMemberRepository($zoneType)
+    protected function getZoneMemberFactory($zoneType)
     {
-        return $this->get('sylius.repository.zone_member_'.$zoneType);
+        return $this->get('sylius.factory.zone_member_'.$zoneType);
     }
 
     /**
@@ -140,7 +147,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     protected function createAddress()
     {
         /* @var $address AddressInterface */
-        $address = $this->getAddressRepository()->createNew();
+        $address = $this->getAddressFactory()->createNew();
         $address->setFirstname($this->faker->firstName);
         $address->setLastname($this->faker->lastName);
         $address->setCity($this->faker->city);

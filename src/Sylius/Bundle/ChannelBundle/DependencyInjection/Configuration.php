@@ -40,36 +40,13 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
         $this->addClassesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('channel')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
+     * Adds `resources` section.
      *
      * @param ArrayNodeDefinition $node
      */
@@ -77,20 +54,36 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('channel')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Channel\Model\Channel')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ChannelBundle\Form\Type\ChannelType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Channel\Model\Channel')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Channel\Model\ChannelInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ChannelBundle\Form\Type\ChannelType')->end()
+                                                ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

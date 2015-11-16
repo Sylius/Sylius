@@ -30,11 +30,13 @@ class LoadImagesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $manager = $this->getProductVariantImageManager();
+
         $finder = new Finder();
         $uploader = $this->get('sylius.image_uploader');
 
         foreach ($finder->files()->in(__DIR__.$this->path) as $img) {
-            $image = $this->getProductVariantImageRepository()->createNew();
+            $image = $this->getProductVariantImageFactory()->createNew();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
             $uploader->upload($image);
 
@@ -51,6 +53,6 @@ class LoadImagesData extends DataFixture
      */
     public function getOrder()
     {
-        return 10;
+        return 30;
     }
 }

@@ -12,14 +12,12 @@
 namespace Sylius\Component\Cart\Event;
 
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Resource\Event\ResourceEvent;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Cart event.
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartEvent extends ResourceEvent
+class CartEvent extends Event
 {
     /**
      * @var CartInterface
@@ -27,16 +25,17 @@ class CartEvent extends ResourceEvent
     protected $cart;
 
     /**
-     * @var Boolean
+     * @var string
      */
-    protected $isFresh = false;
+    protected $message;
 
     /**
      * @param CartInterface $cart
      */
-    public function __construct(CartInterface $cart)
+    public function __construct(CartInterface $cart, $message = null)
     {
         $this->cart = $cart;
+        $this->message = $message;
     }
 
     /**
@@ -48,19 +47,10 @@ class CartEvent extends ResourceEvent
     }
 
     /**
-     * Notice the event listeners to refresh/recalculate cart
-     * information's
-     *
-     * @param null|Boolean $fresh
-     *
-     * @return Boolean
+     * @return string
      */
-    public function isFresh($fresh = null)
+    public function getMessage()
     {
-        if (null === $fresh) {
-            return $this->isFresh;
-        }
-
-        return $this->isFresh = (Boolean) $fresh;
+        return $this->message;
     }
 }

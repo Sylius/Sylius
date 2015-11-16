@@ -35,6 +35,7 @@
         </service>
         <service id="sylius.email_provider" class="%sylius.email_provider.class%">
             <argument type="service" id="sylius.repository.email" />
+            <argument type="service" id="sylius.factory.email" />
             <argument>%sylius.mailer.emails%</argument>
         </service>
         <service id="sylius.email_sender" class="%sylius.email_sender.class%">

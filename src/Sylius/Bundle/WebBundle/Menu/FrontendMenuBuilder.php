@@ -19,7 +19,7 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
@@ -43,7 +43,7 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Taxonomy repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $taxonomyRepository;
 
@@ -75,22 +75,23 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param EventDispatcherInterface  $eventDispatcher
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
-     * @param RepositoryInterface       $taxonomyRepository
+     * @param ResourceRepositoryInterface       $taxonomyRepository
      * @param CartProviderInterface     $cartProvider
      * @param CurrencyHelper            $currencyHelper
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
+        FactoryInterface              $factory,
+        SecurityContextInterface      $securityContext,
+        TranslatorInterface           $translator,
+        EventDispatcherInterface      $eventDispatcher,
         AuthorizationCheckerInterface $authorizationChecker,
-        CurrencyProviderInterface $currencyProvider,
-        RepositoryInterface       $taxonomyRepository,
-        CartProviderInterface     $cartProvider,
-        CurrencyHelper            $currencyHelper,
-        ChannelContextInterface   $channelContext
-    ) {
+        CurrencyProviderInterface     $currencyProvider,
+        ResourceRepositoryInterface   $taxonomyRepository,
+        CartProviderInterface         $cartProvider,
+        CurrencyHelper                $currencyHelper,
+        ChannelContextInterface       $channelContext
+    )
+    {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
 
         $this->currencyProvider = $currencyProvider;

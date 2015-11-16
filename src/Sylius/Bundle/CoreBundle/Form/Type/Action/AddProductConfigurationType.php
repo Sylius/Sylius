@@ -23,19 +23,21 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class AddProductConfigurationType extends AbstractType
 {
+<<<<<<< HEAD
     /**
      * @var string[]
      */
     protected $validationGroups;
 
+=======
+>>>>>>> Fix specs
     /**
      * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -45,12 +47,15 @@ class AddProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
+            ->add('variant', 'sylius_product_variant_to_identifier', array(
                 'label'         => 'sylius.form.action.add_product_configuration.variant',
+<<<<<<< HEAD
                 'class'         => $this->variantRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->variantRepository->getFormQueryBuilder();
                 },
+=======
+>>>>>>> Fix specs
                 'constraints'   => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
@@ -75,6 +80,7 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
+<<<<<<< HEAD
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -84,6 +90,8 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
+=======
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_action_add_product_configuration';

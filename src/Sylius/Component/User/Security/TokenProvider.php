@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\User\Security;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
 /**
@@ -21,14 +21,9 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 class TokenProvider implements TokenProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $repository;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $manager;
 
     /**
      * @var GeneratorInterface
@@ -41,14 +36,12 @@ class TokenProvider implements TokenProviderInterface
     private $tokenLength;
 
     /**
-     * @param RepositoryInterface    $repository
-     * @param EntityManagerInterface $manager
-     * @param GeneratorInterface     $generator
+     * @param ResourceRepositoryInterface $repository
+     * @param GeneratorInterface          $generator
      */
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
+    public function __construct(ResourceRepositoryInterface $repository, GeneratorInterface $generator, $tokenLength)
     {
         $this->repository = $repository;
-        $this->manager = $manager;
         $this->generator = $generator;
         $this->tokenLength = $tokenLength;
     }
@@ -72,11 +65,11 @@ class TokenProvider implements TokenProviderInterface
      */
     protected function isUsedCode($token)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
+        $this->repository->disableFilter('softdeleteable');
 
         $isUsed = null !== $this->repository->findOneBy(array('confirmationToken' => $token));
 
-        $this->manager->getFilters()->enable('softdeleteable');
+        $this->repository->enableFilter('softdeleteable');
 
         return $isUsed;
     }

@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +28,8 @@ class LocaleController extends ResourceController
      */
     public function changeAction(Request $request)
     {
+        $configuration = $this->configurationFactory->create($this->metadata, $request);
+
         $locale = $request->get('locale');
 
         if (!$this->getLocaleProvider()->isLocaleAvailable($locale)) {
@@ -38,13 +38,10 @@ class LocaleController extends ResourceController
 
         $this->getLocaleContext()->setCurrentLocale($locale);
 
-        if ($this->config->isApiRequest()) {
-            $view = $this
-                ->view()
-                ->setData(array('locale' => $locale))
-            ;
+        if (!$configuration->isHtmlRequest()) {
+            $view = View::create(array('locale' => $locale));
 
-            return $this->handleView($view);
+            return $this->handleView($configuration, $view);
         }
 
         return $this->redirect($request->headers->get('referer') ?: '/');

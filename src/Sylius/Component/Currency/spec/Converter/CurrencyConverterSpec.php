@@ -14,11 +14,11 @@ namespace spec\Sylius\Component\Currency\Converter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $currencyRepository)
+    function let(ResourceRepositoryInterface $currencyRepository)
     {
         $this->beConstructedWith($currencyRepository);
     }

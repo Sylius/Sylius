@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 
 class ImageUploadListenerSpec extends ObjectBehavior
 {
@@ -32,13 +32,13 @@ class ImageUploadListenerSpec extends ObjectBehavior
     }
 
     function it_uses_image_uploader_to_upload_images(
-        GenericEvent $event,
+        ResourceEvent $event,
         ProductVariantInterface $variant,
         ProductInterface $product,
         ImageInterface $image,
         $uploader
     ) {
-        $event->getSubject()->willReturn($product);
+        $event->getResource()->willReturn($product);
         $product->getMasterVariant()->willReturn($variant);
         $variant->getImages()->willReturn(array($image));
         $uploader->upload($image)->shouldBeCalled();
@@ -48,11 +48,11 @@ class ImageUploadListenerSpec extends ObjectBehavior
     }
 
     function it_uses_image_uploader_to_upload_taxon_image(
-        GenericEvent $event,
+        ResourceEvent $event,
         Taxon $taxon,
         $uploader
     ) {
-        $event->getSubject()->willReturn($taxon);
+        $event->getResource()->willReturn($taxon);
         $uploader->upload($taxon)->shouldBeCalled();
         $taxon->hasFile()->willReturn(true);
 
@@ -60,10 +60,10 @@ class ImageUploadListenerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_event_subject_is_not_a_product(
-        GenericEvent $event,
+        ResourceEvent $event,
         $uploader
     ) {
-        $event->getSubject()->willReturn($uploader);
+        $event->getResource()->willReturn($uploader);
 
         $this
             ->shouldThrow('InvalidArgumentException')

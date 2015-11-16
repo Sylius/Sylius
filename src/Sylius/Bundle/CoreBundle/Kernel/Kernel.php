@@ -40,20 +40,21 @@ abstract class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = array(
-            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
+            new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
+            new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new \Sylius\Bundle\CurrencyBundle\SyliusCurrencyBundle(),
             new \Sylius\Bundle\ContactBundle\SyliusContactBundle(),
             new \Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
+            new \Sylius\Bundle\ChannelBundle\SyliusChannelBundle(),
             new \Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new \Sylius\Bundle\CartBundle\SyliusCartBundle(),
             new \Sylius\Bundle\ProductBundle\SyliusProductBundle(),
-            new \Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
-            new \Sylius\Bundle\ChannelBundle\SyliusChannelBundle(),
             new \Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new \Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
+            new \Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
             new \Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new \Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new \Sylius\Bundle\PaymentBundle\SyliusPaymentBundle(),
@@ -68,14 +69,11 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\SearchBundle\SyliusSearchBundle(),
-            new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
+            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
-            new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
@@ -111,13 +109,13 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-
+            new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
-
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
-            new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
+            new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // Must be added after PayumBundle.
+            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
         );
 
         return $bundles;

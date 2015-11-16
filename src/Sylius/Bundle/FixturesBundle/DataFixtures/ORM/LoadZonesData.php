@@ -41,17 +41,20 @@ class LoadZonesData extends DataFixture
             $this->euCountries + array('US')
         );
 
-        $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
-        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
-        $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
+        $zoneManager = $this->getZoneManager();
 
-        $manager->flush();
+        $zoneManager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
+        $zoneManager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $zoneManager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $zoneManager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $settingsManager = $this->get('sylius.settings.manager');
         $settings = $settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $eu);
+
         $settingsManager->saveSettings('sylius_taxation', $settings);
+
+        $zoneManager->flush();
     }
 
     /**
@@ -74,13 +77,13 @@ class LoadZonesData extends DataFixture
     protected function createZone($name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
-        $zone = $this->getZoneRepository()->createNew();
+        $zone = $this->getZoneFactory()->createNew();
         $zone->setName($name);
         $zone->setType($type);
 
         foreach ($members as $id) {
             /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberRepository($type)->createNew();
+            $zoneMember = $this->getZoneMemberFactory($type)->createNew();
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
                 $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));

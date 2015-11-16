@@ -24,11 +24,11 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_coupon');
+        $manager = $this->getManager('promotion_coupon');
+        $factory = $this->getFactory('promotion_coupon');
 
         foreach ($table->getHash() as $data) {
-            $coupon = $repository->createNew();
+            $coupon = $factory->createNew();
             $coupon->setCode($data['code']);
             $coupon->setUsageLimit(isset($data['usage limit']) ? $data['usage limit'] : 0);
             $coupon->setUsed(isset($data['used']) ? $data['used'] : 0);
@@ -50,13 +50,13 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_rule');
+        $manager = $this->getManager('promotion_rule');
+        $factory = $this->getFactory('promotion_rule');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $rule = $repository->createNew();
+            $rule = $factory->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($configuration);
 
@@ -75,13 +75,13 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_action');
+        $manager = $this->getManager('promotion_action');
+        $factory = $this->getFactory('promotion_action');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $action = $repository->createNew();
+            $action = $factory->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $action->setConfiguration($configuration);
 
@@ -99,11 +99,11 @@ class PromotionContext extends DefaultContext
      */
     public function theFollowingPromotionsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion');
+        $manager = $this->getManager('promotion');
+        $factory = $this->getFactory('promotion');
 
         foreach ($table->getHash() as $data) {
-            $promotion = $repository->createNew();
+            $promotion = $factory->createNew();
 
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);

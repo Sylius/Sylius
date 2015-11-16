@@ -20,14 +20,14 @@ class LoadBlocksData extends DataFixture
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $productOptionManager)
     {
-        $session = $manager->getPhpcrSession();
+        $session = $productOptionManager->getPhpcrSession();
 
         $basepath = $this->container->getParameter('cmf_block.persistence.phpcr.block_basepath');
         NodeHelper::createPath($session, $basepath);
 
-        $parent = $manager->find(null, $basepath);
+        $parent = $productOptionManager->find(null, $basepath);
         $repository = $this->container->get('sylius.repository.simple_block');
 
         $contactBlock = $repository->createNew();
@@ -36,7 +36,7 @@ class LoadBlocksData extends DataFixture
         $contactBlock->setTitle('Contact us');
         $contactBlock->setBody('<p>Call us '.$this->faker->phoneNumber.'!</p><p>'.$this->faker->paragraph.'</p>');
 
-        $manager->persist($contactBlock);
+        $productOptionManager->persist($contactBlock);
 
         for ($i = 1; $i <= 3; $i++) {
             $block = $repository->createNew();
@@ -45,7 +45,7 @@ class LoadBlocksData extends DataFixture
             $block->setTitle(ucfirst($this->faker->word));
             $block->setBody($this->faker->paragraph);
 
-            $manager->persist($block);
+            $productOptionManager->persist($block);
         }
 
         $repository = $this->container->get('sylius.repository.string_block');
@@ -55,9 +55,9 @@ class LoadBlocksData extends DataFixture
         $welcomeText->setName('welcome-text');
         $welcomeText->setBody('Welcome to Sylius e-commerce');
 
-        $manager->persist($welcomeText);
+        $productOptionManager->persist($welcomeText);
 
-        $manager->flush();
+        $productOptionManager->flush();
     }
 
     /**

@@ -22,13 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TaxonomyConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -50,6 +43,7 @@ class TaxonomyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -62,6 +56,8 @@ class TaxonomyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+=======
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_rule_taxonomy_configuration';

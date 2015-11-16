@@ -21,11 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType');
@@ -49,7 +44,6 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(array(
             'data_class' => null,
-            'validation_groups' => array('sylius')
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

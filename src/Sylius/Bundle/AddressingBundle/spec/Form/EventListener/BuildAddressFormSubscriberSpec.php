@@ -11,12 +11,12 @@
 
 namespace spec\Sylius\Bundle\AddressingBundle\Form\EventListener;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    function let(ResourceRepositoryInterface $countryRepository, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($countryRepository, $factory);
     }
@@ -86,10 +86,10 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn(array(
-            'country' => 'France'
+            'country' => 'FR'
         ));
 
-        $countryRepository->find('France')->shouldBeCalled()->willReturn($country);
+        $countryRepository->find('FR')->shouldBeCalled()->willReturn($country);
         $country->hasProvinces()->willReturn(true);
 
         $factory->createNamed('province', 'sylius_province_choice', null, Argument::withKey('country'))

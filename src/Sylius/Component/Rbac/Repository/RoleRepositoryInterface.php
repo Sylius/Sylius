@@ -12,14 +12,14 @@
 namespace Sylius\Component\Rbac\Repository;
 
 use Sylius\Component\Rbac\Model\RoleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Role repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface RoleRepositoryInterface extends RepositoryInterface
+interface RoleRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * Get child roles.

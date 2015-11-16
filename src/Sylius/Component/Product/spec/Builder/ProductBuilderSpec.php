@@ -11,12 +11,13 @@
 
 namespace spec\Sylius\Component\Product\Builder;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -25,19 +26,21 @@ class ProductBuilderSpec extends ObjectBehavior
 {
     function let(
         ProductInterface $product,
-        ObjectManager $productManager,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $attributeRepository,
-        RepositoryInterface $attributeValueRepository
+        ResourceManagerInterface $productManager,
+        ResourceFactoryInterface $productFactory,
+        ResourceRepositoryInterface $attributeRepository,
+        ResourceFactoryInterface $attributeFactory,
+        ResourceFactoryInterface $attributeValueFactory
     ) {
         $this->beConstructedWith(
             $productManager,
-            $productRepository,
+            $productFactory,
             $attributeRepository,
-            $attributeValueRepository
+            $attributeFactory,
+            $attributeValueFactory
         );
 
-        $productRepository->createNew()->shouldBeCalled()->willReturn($product);
+        $productFactory->createNew()->shouldBeCalled()->willReturn($product);
 
         $this->create('Black GitHub Mug')->shouldReturn($this);
     }
@@ -49,13 +52,13 @@ class ProductBuilderSpec extends ObjectBehavior
 
     function it_adds_attribute_to_product_if_already_exists(
         $attributeRepository,
-        $attributeValueRepository,
+        $attributeValueFactory,
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($attribute);
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
         $attributeValue->setValue(2013)->shouldBeCalled();
@@ -67,22 +70,20 @@ class ProductBuilderSpec extends ObjectBehavior
 
     function it_creates_attribute_if_it_does_not_exist(
         $attributeRepository,
-        $attributeValueRepository,
+        $attributeValueFactory,
+        $attributeFactory,
         $productManager,
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
-        $attributeRepository->createNew()->shouldBeCalled()->willReturn($attribute);
+        $attributeFactory->createNew()->shouldBeCalled()->willReturn($attribute);
 
         $attribute->setName('collection')->shouldBeCalled();
         $attribute->setPresentation('collection')->shouldBeCalled();
 
-        $productManager->persist($attribute)->shouldBeCalled();
-        $productManager->flush($attribute)->shouldBeCalled();
-
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
         $attributeValue->setValue(2013)->shouldBeCalled();
@@ -98,14 +99,6 @@ class ProductBuilderSpec extends ObjectBehavior
         $productManager->flush()->shouldBeCalled();
 
         $this->save()->shouldReturn($product);
-    }
-
-    function it_saves_product_without_flushing_if_needed($productManager, $product)
-    {
-        $productManager->persist($product)->shouldBeCalled();
-        $productManager->flush()->shouldNotBeCalled();
-
-        $this->save(false)->shouldReturn($product);
     }
 
     function it_proxies_undefined_methods_to_product($product)

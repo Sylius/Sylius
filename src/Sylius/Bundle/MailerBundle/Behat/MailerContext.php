@@ -22,18 +22,19 @@ class MailerContext extends DefaultContext
      */
     public function thereAreEmails(TableNode $table)
     {
+        $manager = $this->getManager('email');
+
         foreach ($table->getHash() as $data) {
-            $email = $this->getRepository('email')->createNew();
+            $email = $this->getFactory('email')->createNew();
 
             $email->setCode(trim($data['code']));
             $email->setSubject(trim($data['subject']));
             $email->setEnabled('yes' === trim($data['enabled']));
             $email->setContent('Testing!');
 
-            $manager = $this->getEntityManager();
             $manager->persist($email);
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 }

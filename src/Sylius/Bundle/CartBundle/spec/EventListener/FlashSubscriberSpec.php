@@ -13,14 +13,16 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Resource\Event\FlashEvent;
+use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\CartEvents;
+use Sylius\Component\Cart\Event\CartItemEvents;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FlashSubscriberSpec extends ObjectBehavior
 {
@@ -34,54 +36,61 @@ class FlashSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\FlashSubscriber');
     }
 
-    function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
+    function it_should_add_a_custom_error_flash_message_from_event($session, $translator, CartEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an error message";
-
         $event
             ->getMessage()
-            ->willReturn($message)
+            ->willReturn('Custom message')
         ;
 
         $event
             ->getName()
-            ->willReturn(SyliusCartEvents::ITEM_ADD_ERROR)
+            ->willReturn(CartEvents::POST_CLEAR)
         ;
 
         $session
-            ->getBag(Argument::exact('flashes'))
+            ->getBag('flashes')
             ->willReturn($flashBag)
         ;
 
         $flashBag
-            ->add('error', $message)
-            ->willReturn(null)
+            ->add('error', 'Custom message')
+            ->shouldBeCalled()
+        ;
+
+        $translator
+            ->trans('Custom message', array(), 'flashes')
+            ->willReturn('Custom message');
         ;
 
         $this->addErrorFlash($event);
     }
 
-    function it_should_add_a_custom_success_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
+    function it_should_add_a_custom_success_flash_message_from_event($session, $translator, CartEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an success message";
-
         $event
             ->getMessage()
-            ->willReturn($message)
+            ->willReturn('Custom success message')
         ;
 
         $event
             ->getName()
-            ->willReturn(SyliusCartEvents::ITEM_ADD_COMPLETED)
+            ->willReturn(CartEvents::POST_CLEAR)
         ;
 
         $session
-            ->getBag(Argument::exact('flashes'))
+            ->getBag('flashes')
             ->willReturn($flashBag)
         ;
 
+        $translator
+            ->trans('Custom success message', array(), 'flashes')
+            ->willReturn('Custom success message')
+        ;
+
+
         $flashBag
-            ->add('success', $message)
+            ->add('success', 'Custom success message')
             ->willReturn(null)
         ;
 
@@ -91,11 +100,9 @@ class FlashSubscriberSpec extends ObjectBehavior
     function it_should_have_a_default_error_flash_message_for_event_name(
         $session,
         $translator,
-        FlashEvent $event,
+        CartEvent $event,
         FlashBag $flashBag
     ) {
-        $messages = array(SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.');
-
         $event
             ->getMessage()
             ->willReturn(null)
@@ -103,22 +110,22 @@ class FlashSubscriberSpec extends ObjectBehavior
 
         $event
             ->getName()
-            ->willReturn(SyliusCartEvents::ITEM_ADD_ERROR)
+            ->willReturn(CartItemEvents::ADD_FAILED)
         ;
 
         $session
-            ->getBag(Argument::exact('flashes'))
+            ->getBag('flashes')
             ->willReturn($flashBag)
         ;
 
         $translator
-            ->trans(Argument::cetera())
-            ->willReturn($messages[SyliusCartEvents::ITEM_ADD_ERROR])
+            ->trans('sylius.cart_item.add_failed', array(), 'flashes')
+            ->willReturn('Item could not be added to the cart.')
         ;
 
         $flashBag
-            ->add('error', $messages[SyliusCartEvents::ITEM_ADD_ERROR])
-            ->willReturn(null)
+            ->add('error', 'Item could not be added to the cart.')
+            ->shouldBeCalled();
         ;
 
         $this->addErrorFlash($event);
@@ -127,11 +134,9 @@ class FlashSubscriberSpec extends ObjectBehavior
     function it_should_have_a_default_success_flash_message_for_event_name(
         $session,
         $translator,
-        FlashEvent $event,
+        CartEvent $event,
         FlashBag $flashBag
     ) {
-        $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.');
-
         $event
             ->getMessage()
             ->willReturn(null)
@@ -139,22 +144,22 @@ class FlashSubscriberSpec extends ObjectBehavior
 
         $event
             ->getName()
-            ->willReturn(SyliusCartEvents::ITEM_ADD_COMPLETED)
+            ->willReturn(CartEvents::POST_SAVE)
         ;
 
         $session
-            ->getBag(Argument::exact('flashes'))
+            ->getBag('flashes')
             ->willReturn($flashBag)
         ;
 
         $translator
-            ->trans(Argument::cetera())
-            ->willReturn($messages[SyliusCartEvents::ITEM_ADD_COMPLETED])
+            ->trans('sylius.cart.save', array(), 'flashes')
+            ->willReturn('Cart has been successfully saved.')
         ;
 
         $flashBag
-            ->add('success', $messages[SyliusCartEvents::ITEM_ADD_COMPLETED])
-            ->willReturn(null)
+            ->add('success', 'Cart has been successfully saved.')
+            ->shouldBeCalled()
         ;
 
         $this->addSuccessFlash($event);

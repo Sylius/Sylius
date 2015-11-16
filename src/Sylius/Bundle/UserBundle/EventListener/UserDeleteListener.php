@@ -51,7 +51,7 @@ class UserDeleteListener
      */
     public function deleteUser(ResourceEvent $event)
     {
-        $user = $event->getSubject();
+        $user = $event->getResource();
 
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(

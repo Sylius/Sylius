@@ -11,9 +11,9 @@
 
 namespace spec\Sylius\Bundle\PromotionBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class CouponToCodeTransformerSpec extends ObjectBehavior
 {
     function let(
-        ObjectRepository $couponRepository,
+        ResourceRepositoryInterface $couponRepository,
         EventDispatcher $dispatcher
     ) {
         $this->beConstructedWith($couponRepository, $dispatcher);
@@ -70,7 +70,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     }
 
     function it_should_return_coupon_if_found_on_reverse_transform(
-        ObjectRepository$couponRepository,
+        ResourceRepositoryInterface$couponRepository,
         CouponInterface $coupon
     ) {
         $couponRepository

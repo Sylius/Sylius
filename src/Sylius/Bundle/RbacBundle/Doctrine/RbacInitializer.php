@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\RbacBundle\Doctrine;
 
 use Doctrine\ORM\NonUniqueResultException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -23,8 +25,9 @@ class RbacInitializer
 {
     private $permissions;
     private $permissionsHierarchy;
-    private $permissionManager;
+    private $permissionFactory;
     private $permissionRepository;
+    private $permissionManager;
 
     private $permissionsByCode = array(
         'root' => null,
@@ -32,28 +35,33 @@ class RbacInitializer
 
     private $roles;
     private $rolesHierarchy;
-    private $roleManager;
+    private $roleFactory;
     private $roleRepository;
+    private $roleManager;
 
     public function __construct(
         array $permissions,
         array $permissionsHierarchy,
-        $permissionManager,
-        RepositoryInterface $permissionRepository,
+        ResourceFactoryInterface $permissionFactory,
+        ResourceRepositoryInterface $permissionRepository,
+        ResourceManagerInterface $permissionManager,
         array $roles,
         array $rolesHierarchy,
-        $roleManager,
-        RepositoryInterface $roleRepository
+        ResourceFactoryInterface $roleFactory,
+        ResourceRepositoryInterface $roleRepository,
+        ResourceManagerInterface $roleManager
     ) {
         $this->permissions = $permissions;
         $this->permissionsHierarchy = $permissionsHierarchy;
-        $this->permissionManager = $permissionManager;
+        $this->permissionFactory = $permissionFactory;
         $this->permissionRepository = $permissionRepository;
+        $this->permissionManager = $permissionManager;
 
         $this->roles = $roles;
         $this->rolesHierarchy = $rolesHierarchy;
-        $this->roleManager = $roleManager;
+        $this->roleFactory = $roleFactory;
         $this->roleRepository = $roleRepository;
+        $this->roleManager = $roleManager;
     }
 
     public function initialize(OutputInterface $output = null)
@@ -63,7 +71,7 @@ class RbacInitializer
             $this->initializeRoles($output);
         } catch (NonUniqueResultException $exception) {
             if ($output) {
-                $output->writeln('RBAC already initialized');
+                $output->writeln('RBAC already initialized.');
             }
         }
     }
@@ -71,7 +79,7 @@ class RbacInitializer
     protected function initializePermissions(OutputInterface $output = null)
     {
         if (null === $root = $this->permissionRepository->findOneBy(array('code' => 'root'))) {
-            $root = $this->permissionRepository->createNew();
+            $root = $this->permissionFactory->createNew();
             $root->setCode('root');
             $root->setDescription('Root');
 
@@ -83,7 +91,7 @@ class RbacInitializer
 
         foreach ($this->permissions as $code => $description) {
             if (null === $permission = $this->permissionRepository->findOneBy(array('code' => $code))) {
-                $permission = $this->permissionRepository->createNew();
+                $permission = $this->permissionFactory->createNew();
                 $permission->setCode($code);
                 $permission->setDescription($description);
                 $permission->setParent($root);
@@ -114,7 +122,7 @@ class RbacInitializer
         }
 
         if (null === $root = $this->roleRepository->findOneBy(array('code' => 'root'))) {
-            $root = $this->roleRepository->createNew();
+            $root = $this->roleFactory->createNew();
             $root->setCode('root');
             $root->setName('Root');
 
@@ -128,7 +136,7 @@ class RbacInitializer
 
         foreach ($this->roles as $code => $data) {
             if (null === $role = $this->roleRepository->findOneBy(array('code' => $code))) {
-                $role = $this->roleRepository->createNew();
+                $role = $this->roleFactory->createNew();
                 $role->setCode($code);
                 $role->setName($data['name']);
                 $role->setDescription($data['description']);

@@ -12,10 +12,10 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Backorders handler.
@@ -27,16 +27,16 @@ class BackordersHandler implements BackordersHandlerInterface
     /**
      * Inventory unit repository.
      *
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param ObjectRepository $repository
+     * @param ResourceRepositoryInterface $repository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(ResourceRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

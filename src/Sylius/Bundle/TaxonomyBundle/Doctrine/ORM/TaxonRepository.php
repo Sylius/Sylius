@@ -25,7 +25,9 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
 {
     public function getTaxonsAsList(TaxonomyInterface $taxonomy)
     {
-        return $this->getQueryBuilder()
+        return $this->objectRepository->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->where('o.taxonomy = :taxonomy')
             ->andWhere('o.parent IS NOT NULL')
             ->setParameter('taxonomy', $taxonomy)
@@ -36,10 +38,12 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
 
     public function findOneByPermalink($permalink)
     {
-        return $this->getQueryBuilder()
+        return $this->objectRepository->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->where('translation.permalink = :permalink')
             ->setParameter('permalink', $permalink)
-            ->orderBy($this->getAlias().'.left')
+            ->orderBy('o.left')
             ->getQuery()
             ->getOneOrNullResult();
     }

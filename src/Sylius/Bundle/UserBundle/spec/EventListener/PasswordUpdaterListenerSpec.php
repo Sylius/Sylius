@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -33,10 +33,9 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener');
     }
 
-    function it_updates_password_for_generic_event($passwordUpdater, GenericEvent $event, UserInterface $user)
+    function it_updates_password_for_generic_event($passwordUpdater, ResourceEvent $event, UserInterface $user)
     {
-        $event->getSubject()->willReturn($user);
-
+        $event->getResource()->willReturn($user);
         $user->getPlainPassword()->willReturn('testPassword');
 
         $passwordUpdater->updatePassword($user)->shouldBeCalled();
@@ -44,12 +43,15 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->genericEventUpdater($event);
     }
 
-    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only($passwordUpdater, GenericEvent $event, UserInterface $user)
+    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(ResourceEvent $event, UserInterface $user)
     {
-        $user = '';
-        $event->getSubject()->willReturn($user);
-        $this->shouldThrow(new UnexpectedTypeException($user, 'Sylius\Component\User\Model\UserInterface'))
-            ->duringGenericEventUpdater($event);
+        $notAUser = '';
+        $event->getResource()->willReturn($notAUser);
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException($notAUser, 'Sylius\Component\User\Model\UserInterface'))
+            ->duringGenericEventUpdater($event)
+        ;
     }
 
     function it_updates_password_on_pre_persist_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)

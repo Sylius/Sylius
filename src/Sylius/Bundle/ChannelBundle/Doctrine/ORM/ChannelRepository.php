@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
@@ -19,14 +19,14 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
+class ChannelRepository extends ResourceRepository implements ChannelRepositoryInterface
 {
     /**
      * {@inheritDoc}
      */
     public function findMatchingHostname($hostname)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->like('o.url', ':hostname'))
@@ -41,8 +41,7 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
      */
     public function findDefault()
     {
-        return $this
-            ->getCollectionQueryBuilder()
+        return $this->objectRepository->createQueryBuilder('o')
             ->getQuery()
             ->setMaxResults(1)
             ->getSingleResult()

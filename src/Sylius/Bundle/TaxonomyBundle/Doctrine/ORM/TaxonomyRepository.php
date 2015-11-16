@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
 use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Component\Taxonomy\Repository\TaxonomyRepositoryInterface;
 
 /**
  * Base taxonomy repository.
@@ -19,37 +20,22 @@ use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonomyRepository extends TranslatableResourceRepository
+class TaxonomyRepository extends TranslatableResourceRepository implements TaxonomyRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    protected function getQueryBuilder()
+    public function findOneByName($name)
     {
-        return parent::getQueryBuilder()
-            ->select('taxonomy, root, taxons')
-            ->leftJoin('taxonomy.root', 'root')
-            ->leftJoin('root.children', 'taxons')
-        ;
-    }
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCollectionQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->select('taxonomy, root, taxons')
-            ->leftJoin('taxonomy.root', 'root')
-            ->leftJoin('root.children', 'taxons')
+        return $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getAlias()
-    {
-        return 'taxonomy';
     }
 }

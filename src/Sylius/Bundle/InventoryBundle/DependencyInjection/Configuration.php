@@ -40,55 +40,85 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('backorders')->defaultTrue()->end()
-                ->booleanNode('track_inventory')->defaultTrue()->end()
-                ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
-                ->scalarNode('operator')->cannotBeEmpty()->end()
+                ->booleanNode('tracking')->defaultTrue()->end()
                 ->arrayNode('events')->prototype('scalar')->end()
             ->end()
-        ->end()
-        ->validate()
-            ->ifTrue(function ($array) {
-                return !isset($array['operator']);
-            })
-            ->then(function ($array) {
-                $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
+        ;
 
-                return $array;
-            })
-        ->end();
-
-        $this->addClassesSection($rootNode);
+        $this->addServicesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `services` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addServicesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('services')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
+                        ->scalarNode('operator')->defaultValue('sylius.inventory_operator.default')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `resources` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addResourcesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('resources')
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('inventory_unit')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
-                                ->scalarNode('repository')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('stockable')
                             ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->arraynode('classes')
+                                    ->adddefaultsifnotset()
+                                    ->children()
+                                        ->scalarnode('model')->isRequired()->end()
+                                        ->scalarnode('interface')->defaultvalue('Sylius\Component\Inventory\Model\StockableInterface')->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('inventory_unit')
+                            ->adddefaultsifnotset()
+                            ->children()
+                                ->arraynode('classes')
+                                    ->adddefaultsifnotset()
+                                    ->children()
+                                        ->scalarnode('model')->defaultvalue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
+                                        ->scalarnode('interface')->defaultvalue('Sylius\Component\Inventory\Model\InventoryUnitInterface')->end()
+                                        ->scalarnode('controller')->defaultvalue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
+                                        ->scalarnode('repository')->cannotbeempty()->end()
+                                        ->scalarnode('factory')->cannotbeempty()->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

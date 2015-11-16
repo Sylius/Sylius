@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Component\Shipping\Resolver;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 class MethodsResolverSpec extends ObjectBehavior
 {
     function let(
-        ObjectRepository $methodRepository,
+        ResourceRepositoryInterface $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);

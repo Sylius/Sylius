@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Originator\Model\OriginAwareInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 class OriginatorSpec extends ObjectBehavior
 {
@@ -71,7 +71,7 @@ class OriginatorSpec extends ObjectBehavior
         $this->getOrigin($originAware)->shouldReturn(null);
     }
 
-    public function it_gets_origin($manager, RepositoryInterface $repository, OriginAwareInterface $originAware, FakeEntity $entity)
+    public function it_gets_origin($manager, ResourceRepositoryInterface $repository, OriginAwareInterface $originAware, FakeEntity $entity)
     {
         $originAware->getOriginId()->willReturn(5);
         $originAware->getOriginType()->willReturn('Sylius\Component\Originator\Model\FakeEntity');

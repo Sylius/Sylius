@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
@@ -23,14 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CountryChoiceType extends AbstractType
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $countryRepository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param ResourceRepositoryInterface $repository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(ResourceRepositoryInterface $repository)
     {
         $this->countryRepository = $repository;
     }

@@ -14,31 +14,26 @@ namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SearchIndexRepository extends EntityRepository
+class SearchIndexRepository extends ResourceRepository
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
     /**
      * @var ProductRepository
      */
     private $productRepository;
 
     /**
-     * @param EntityManager     $em
+     * @param EntityManager     $entityManager
      * @param ProductRepository $productRepository
      */
-    public function __construct(EntityManager $em, ProductRepository $productRepository)
+    public function __construct(EntityManager $entityManager, ProductRepository $productRepository)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->productRepository = $productRepository;
     }
 
@@ -54,7 +49,7 @@ class SearchIndexRepository extends EntityRepository
         $productClassName = $this->productRepository->getClassName();
 
         // Gets the taxon ids
-        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder
             ->select('product')
             ->from($productClassName, 'product')
@@ -102,7 +97,7 @@ class SearchIndexRepository extends EntityRepository
     {
         $results = array();
         foreach ($resultSetFromFulltextSearch as $model => $ids) {
-            $queryBuilder = $this->em->createQueryBuilder();
+            $queryBuilder = $this->entityManager->createQueryBuilder();
             $queryBuilder
                 ->select('u')
                 ->from($model, 'u')

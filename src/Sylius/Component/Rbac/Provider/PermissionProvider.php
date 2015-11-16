@@ -12,7 +12,7 @@
 namespace Sylius\Component\Rbac\Provider;
 
 use Sylius\Component\Rbac\Exception\PermissionNotFoundException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Default permission provider uses repository to find the permission.
@@ -22,14 +22,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PermissionProvider implements PermissionProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param ResourceRepositoryInterface $repository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(ResourceRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

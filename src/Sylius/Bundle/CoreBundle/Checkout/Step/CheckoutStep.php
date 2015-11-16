@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
@@ -50,7 +50,7 @@ abstract class CheckoutStep extends AbstractControllerStep
     /**
      * Get object manager.
      *
-     * @return ObjectManager
+     * @return ResourceManagerInterface
      */
     protected function getManager()
     {

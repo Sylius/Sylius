@@ -34,25 +34,6 @@ class SyliusCartBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_order';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\Cart\Model\CartInterface'     => 'sylius.model.cart.class',
-            'Sylius\Component\Cart\Model\CartItemInterface' => 'sylius.model.cart_item.class',
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Cart\Model';

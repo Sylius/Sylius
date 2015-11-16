@@ -83,24 +83,25 @@ class LoadCountriesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $countryRepository = $this->getCountryRepository();
+        $countryFactory = $this->getCountryFactory();
+        $countryManager = $this->getCountryManager();
+
         $countries = Intl::getRegionBundle()->getCountryNames();
 
         foreach ($countries as $isoName => $name) {
-            $country = $countryRepository->createNew();
-
+            $country = $countryFactory->createNew();
             $country->setIsoName($isoName);
 
             if ('US' === $isoName) {
                 $this->addUsStates($country);
             }
 
-            $manager->persist($country);
+            $countryManager->persist($country);
 
             $this->setReference('Sylius.Country.'.$isoName, $country);
         }
 
-        $manager->flush();
+        $countryManager->flush();
     }
 
     /**
@@ -118,12 +119,13 @@ class LoadCountriesData extends DataFixture
      */
     protected function addUsStates(CountryInterface $country)
     {
-        $provinceRepository = $this->getProvinceRepository();
+        $provinceFactory = $this->getProvinceFactory();
 
         foreach ($this->states as $isoName => $name) {
-            $province = $provinceRepository->createNew();
-            $province->setName($name);
-            $province->setIsoName($isoName);
+            $province = $provinceFactory->createNew()
+                ->setName($name)
+                ->setIsoName($isoName);
+
             $country->addProvince($province);
 
             $this->setReference('Sylius.Province.'.$isoName, $province);

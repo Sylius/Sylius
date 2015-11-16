@@ -20,11 +20,6 @@ use Symfony\Component\Form\FormBuilder;
  */
 class ItemTotalConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType');

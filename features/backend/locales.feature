@@ -47,11 +47,11 @@ Feature: Managing locales
           And I am on the locale index page
          When I click "Enable" near "Polish (Poland)"
          Then I should see enabled locale with name "Polish (Poland)" in the list
-          And I should see "Locale has been successfully enabled"
+          And I should see "Locale has been successfully updated"
 
     Scenario: Disabling locale
         Given there is an enabled locale "Polish (Poland)"
           And I am on the locale index page
          When I click "Disable" near "Polish (Poland)"
          Then I should see disabled locale with name "Polish (Poland)" in the list
-          And I should see "Locale has been successfully disabled"
+          And I should see "Locale has been successfully updated"

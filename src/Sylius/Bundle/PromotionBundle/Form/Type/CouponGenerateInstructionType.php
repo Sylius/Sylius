@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Coupon generate instruction type.
@@ -40,9 +41,21 @@ class CouponGenerateInstructionType extends AbstractResourceType
         ;
     }
 
+<<<<<<< HEAD
     /**
      * {@inheritdoc}
      */
+=======
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'validation_groups' => array('sylius')
+            ))
+        ;
+    }
+
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_coupon_generate_instruction';

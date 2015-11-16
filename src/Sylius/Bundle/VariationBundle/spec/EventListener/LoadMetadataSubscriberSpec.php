@@ -27,15 +27,21 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'product' => array(
                 'variable' => 'Some\App\Product\Entity\Product',
                 'option' => array(
-                    'model' => 'Some\App\Product\Entity\Option',
+                    'classes'  => array(
+                        'model' => 'Some\App\Product\Entity\Option',
+                    )
                 ),
                 'option_value' => array(
-                    'model' => 'Some\App\Product\Entity\OptionValue',
+                    'classes'  => array(
+                        'model' => 'Some\App\Product\Entity\OptionValue',
+                    )
                 ),
                 'variant' => array(
-                    'model' => 'Some\App\Product\Entity\Variant',
+                    'classes'  => array(
+                        'model' => 'Some\App\Product\Entity\Variant',
+                    )
                 ),
-            ),
+            )
         ));
     }
 
@@ -44,12 +50,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\EventListener\LoadMetadataSubscriber');
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    function it_is_a_doctrine_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    function it_subscribes_to_loadClassMetadata_events_dispatched_by_doctrine()
     {
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }

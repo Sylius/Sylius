@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\Translation\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TranslatableResourceRepositoryInterface extends RepositoryInterface
+interface TranslatableResourceRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * @param LocaleProviderInterface $localeProvider

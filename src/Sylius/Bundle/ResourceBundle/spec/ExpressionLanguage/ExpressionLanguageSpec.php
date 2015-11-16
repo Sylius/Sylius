@@ -13,13 +13,13 @@ class ExpressionLanguageSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage');
     }
 
-    function it_is_expression_language()
+    function it_is_an_expression_language()
     {
         $this->shouldHaveType('Symfony\Component\ExpressionLanguage\ExpressionLanguage');
     }
 
     function it_is_container_aware(ContainerInterface $container)
     {
-        $this->setContainer($container)->shouldReturn($this);
+        $this->shouldImplement('Symfony\Component\DependencyInjection\ContainerAwareInterface');
     }
 }

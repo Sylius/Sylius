@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Pricing;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +26,9 @@ class ChannelBasedConfigurationType extends AbstractType
     protected $channelRepository;
 
     /**
-     * @param RepositoryInterface $channelRepository
+     * @param ResourceRepositoryInterface $channelRepository
      */
-    public function __construct(RepositoryInterface $channelRepository)
+    public function __construct(ResourceRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;
     }

@@ -34,19 +34,6 @@ class SyliusUserBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\User\Model\CustomerInterface'  => 'sylius.model.customer.class',
-            'Sylius\Component\User\Model\UserInterface'      => 'sylius.model.user.class',
-            'Sylius\Component\User\Model\UserOAuthInterface' => 'sylius.model.user_oauth.class',
-            'Sylius\Component\User\Model\GroupInterface'     => 'sylius.model.group.class',
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\User\Model';

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
 
@@ -20,14 +20,14 @@ use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionRepository extends EntityRepository implements PermissionRepositoryInterface
+class PermissionRepository extends ResourceRepository implements PermissionRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getChildPermissions(PermissionInterface $permission)
     {
-        $queryBuilder =  $this->createQueryBuilder('o');
+        $queryBuilder =  $this->objectRepository->createQueryBuilder('o');
 
         return $queryBuilder
             ->where($queryBuilder->expr()->lt('o.left', $permission->getRight()))

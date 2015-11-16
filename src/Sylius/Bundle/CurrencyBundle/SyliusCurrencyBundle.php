@@ -35,16 +35,6 @@ class SyliusCurrencyBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\Currency\Model\CurrencyInterface' => 'sylius.model.currency.class',
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Currency\Model';

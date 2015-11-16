@@ -4,8 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "fb733c46406fff11e542c3ce341cbb1d",
     "content-hash": "2f0b13b9ff33b0be290bc98ce8148392",
+=======
+    "hash": "f43ba485c6ea82c73a76e0e0d2455b51",
+>>>>>>> Resource bundle refactoring
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -1043,8 +1047,13 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/doctrine/migrations/zipball/d196ddc229f50c66c5a015c158adb78a2dfb4351",
                 "reference": "d196ddc229f50c66c5a015c158adb78a2dfb4351",
+=======
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/27edc388296a3cffc7c30942a7613abb4998701c",
+                "reference": "1ac14fac3ced533047d8feae8edc7c283d5b8a67",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -1665,6 +1674,7 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
+<<<<<<< HEAD
             "version": "v2.4.7",
             "source": {
                 "type": "git",
@@ -1675,6 +1685,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/1a86ba1c7426238b4f765089e0af51174a38af7f",
                 "reference": "1a86ba1c7426238b4f765089e0af51174a38af7f",
+=======
+            "version": "v2.3.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
+                "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -1740,13 +1762,18 @@
                 "tree",
                 "uploadable"
             ],
+<<<<<<< HEAD
             "time": "2015-09-28 16:39:27"
+=======
+            "time": "2015-02-24 21:41:37"
+>>>>>>> Resource bundle refactoring
         },
         {
             "name": "guzzle/guzzle",
             "version": "v3.9.3",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
                 "url": "https://github.com/guzzle/guzzle3.git",
                 "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
             },
@@ -1754,6 +1781,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
                 "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+=======
+                "url": "https://github.com/Guzzle3/common.git",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -1842,6 +1878,7 @@
             "version": "6.1.0",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
                 "url": "https://github.com/guzzle/guzzle.git",
                 "reference": "66fd14b4d0b8f2389eaf37c5458608c7cb793a81"
             },
@@ -1849,6 +1886,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/guzzle/zipball/66fd14b4d0b8f2389eaf37c5458608c7cb793a81",
                 "reference": "66fd14b4d0b8f2389eaf37c5458608c7cb793a81",
+=======
+                "url": "https://github.com/Guzzle3/http.git",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/http/zipball/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -1904,6 +1950,7 @@
             "version": "1.0.2",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
                 "url": "https://github.com/guzzle/promises.git",
                 "reference": "97fe7210def29451ec74923b27e552238defd75a"
             },
@@ -1911,6 +1958,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/promises/zipball/97fe7210def29451ec74923b27e552238defd75a",
                 "reference": "97fe7210def29451ec74923b27e552238defd75a",
+=======
+                "url": "https://github.com/Guzzle3/parser.git",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -1955,6 +2011,7 @@
             "version": "1.2.0",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
                 "url": "https://github.com/guzzle/psr7.git",
                 "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e"
             },
@@ -1962,6 +2019,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/psr7/zipball/4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
                 "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
+=======
+                "url": "https://github.com/Guzzle3/stream.git",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -5236,6 +5302,7 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
                 "url": "https://github.com/Payum/iso4217.git",
                 "reference": "265c01a8c228f3c75b053353328769780a0a3321"
             },
@@ -5243,6 +5310,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Payum/iso4217/zipball/265c01a8c228f3c75b053353328769780a0a3321",
                 "reference": "265c01a8c228f3c75b053353328769780a0a3321",
+=======
+                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
+                "reference": "9e09f7bff507e81cbb03d233c15c080fefd1d512"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/9e09f7bff507e81cbb03d233c15c080fefd1d512",
+                "reference": "9e09f7bff507e81cbb03d233c15c080fefd1d512",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -7624,6 +7700,7 @@
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
             "name": "ajbdev/authorizenet-php-api",
             "version": "1.1.81",
             "source": {
@@ -7673,12 +7750,33 @@
             },
             "require": {
                 "phpspec/phpspec": "~2.1"
+=======
+            "name": "akeneo/phpspec-skip-example-extension",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akeneo/PhpSpecSkipExampleExtension.git",
+                "reference": "d3d6a1b4324bb511d50d03eff5900279342bb9fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/d3d6a1b4324bb511d50d03eff5900279342bb9fb",
+                "reference": "d3d6a1b4324bb511d50d03eff5900279342bb9fb",
+                "shasum": ""
+            },
+            "require": {
+                "phpspec/phpspec": "2.1.*"
+>>>>>>> Resource bundle refactoring
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.2.x-dev",
                     "dev-1.1": "1.1.x-dev",
+=======
+                    "dev-master": "1.1.x-dev",
+>>>>>>> Resource bundle refactoring
                     "dev-1.0": "1.0.x-dev"
                 }
             },
@@ -7698,7 +7796,11 @@
                 }
             ],
             "description": "Skip your PhpSpec examples through annotations",
+<<<<<<< HEAD
             "time": "2015-09-13 14:38:13"
+=======
+            "time": "2015-02-02 14:10:11"
+>>>>>>> Resource bundle refactoring
         },
         {
             "name": "behat/behat",
@@ -7903,12 +8005,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkBrowserKitDriver.git",
+<<<<<<< HEAD
                 "reference": "da47df1593dac132f04d24e7277ef40d33d9f201"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/da47df1593dac132f04d24e7277ef40d33d9f201",
                 "reference": "da47df1593dac132f04d24e7277ef40d33d9f201",
+=======
+                "reference": "aed8f4a596b79014a75254c3e337511c33e38cbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/aed8f4a596b79014a75254c3e337511c33e38cbd",
+                "reference": "aed8f4a596b79014a75254c3e337511c33e38cbd",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {
@@ -8018,12 +8129,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkSelenium2Driver.git",
+<<<<<<< HEAD
                 "reference": "bedbf1999c7ba1bc6921b30ee2eadf383e7ff5c9"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/bedbf1999c7ba1bc6921b30ee2eadf383e7ff5c9",
                 "reference": "bedbf1999c7ba1bc6921b30ee2eadf383e7ff5c9",
+=======
+                "reference": "8018fee80bf6573f909ece3e0dfc07d0eb352210"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/8018fee80bf6573f909ece3e0dfc07d0eb352210",
+                "reference": "8018fee80bf6573f909ece3e0dfc07d0eb352210",
+>>>>>>> Resource bundle refactoring
                 "shasum": ""
             },
             "require": {

@@ -24,13 +24,6 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class ItemTotalConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -56,6 +49,7 @@ class ItemTotalConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -68,6 +62,8 @@ class ItemTotalConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+=======
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_rule_item_total_configuration';

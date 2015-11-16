@@ -5,8 +5,17 @@ Feature: Roles management
     I want to be able to manage user roles
 
     Background:
+<<<<<<< HEAD
         Given store has default configuration
           And there is following permission hierarchy:
+=======
+        Given there is default currency configured
+        And there is default channel configured
+        And there are following locales configured:
+            | code  | enabled |
+            | en_US | yes     |
+        And there is following permission hierarchy:
+>>>>>>> Fix specs
             | code                  | parent         | description             |
             | sylius.catalog        |                | Manage products catalog |
             | sylius.product.show   | sylius.catalog | View single product     |

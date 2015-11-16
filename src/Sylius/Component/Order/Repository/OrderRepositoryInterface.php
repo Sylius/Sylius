@@ -12,7 +12,7 @@
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 
 /**
@@ -20,7 +20,7 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
+interface OrderRepositoryInterface extends ResourceRepositoryInterface, HashSubjectRepositoryInterface
 {
     /**
      * @param integer $amount

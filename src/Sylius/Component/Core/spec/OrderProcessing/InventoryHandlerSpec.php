@@ -58,7 +58,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection());
 
-        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)
+        $inventoryUnitFactory->createForStockable($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)
             ->shouldBeCalled()
             ->willReturn(array($unit1, $unit2));
 
@@ -82,7 +82,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)
+        $inventoryUnitFactory->createForStockable($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)
             ->shouldBeCalled()
             ->willReturn(array($unit2));
 

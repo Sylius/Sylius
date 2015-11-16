@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentsFactoryInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderShippingListenerSpec extends ObjectBehavior
 {
     function let(
-        ShipmentFactoryInterface $shipmentFactory,
+        OrderShipmentsFactoryInterface $shipmentFactory,
         ShipmentProcessorInterface $shippingProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {

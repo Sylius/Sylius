@@ -5,6 +5,7 @@ Feature: Permissions management
     I want to be able to manage permissions
 
     Background:
+<<<<<<< HEAD
         Given store has default configuration
           And there is following permission hierarchy:
             | code                     | parent         | description             |
@@ -23,6 +24,30 @@ Feature: Permissions management
             | code                 | parent | name          | security roles             |
             | sylius.administrator |        | Administrator | ROLE_ADMINISTRATION_ACCESS |
           And role "Administrator" has the following permissions:
+=======
+        Given there is default currency configured
+        And there is default channel configured
+        And there are following locales configured:
+            | code  | enabled |
+            | en_US | yes     |
+        And there is following permission hierarchy:
+            | code                        | parent         | description                   |
+            | sylius.catalog              |                | Manage products catalog       |
+            | sylius.product.show         | sylius.catalog | View single product           |
+            | sylius.product.index        | sylius.catalog | List all products             |
+            | sylius.product.create       | sylius.catalog | Add new products              |
+            | sylius.product.update       | sylius.catalog | Edit products                 |
+            | sylius.product.delete       | sylius.catalog | Delete products               |
+            | sylius.permission.show      |                | View single permission        |
+            | sylius.permission.index     |                | List all permissions          |
+            | sylius.permission.create    |                | Add new permissions           |
+            | sylius.permission.update    |                | Edit permissions              |
+            | sylius.permission.delete    |                | Delete permissions            |
+        And there is following role hierarchy:
+            | code                   | parent               | name            | security roles             |
+            | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
+        And role "Administrator" has the following permissions:
+>>>>>>> Fix specs
             | sylius.permission.show   |
             | sylius.permission.index  |
             | sylius.permission.create |
@@ -58,7 +83,8 @@ Feature: Permissions management
         Then I should be on the permission index page
         And I should see "Permission has been successfully created."
         And I should see 13 permissions in the list
-        And I should see permission with code "sylius.product.display_sales_stats" in that list
+        And show last response
+        And I should see "View sales statistics (sylius.product.display_sales_stats)"
 
     Scenario: Cannot edit the parent of root node
         Given I am on the permission index page

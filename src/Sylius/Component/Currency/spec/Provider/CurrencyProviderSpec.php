@@ -13,14 +13,14 @@ namespace spec\Sylius\Component\Currency\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CurrencyProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $currencyRepository)
+    function let(ResourceRepositoryInterface $currencyRepository)
     {
         $this->beConstructedWith($currencyRepository);
     }

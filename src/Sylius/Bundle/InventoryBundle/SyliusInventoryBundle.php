@@ -35,17 +35,6 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
-    {
-        return array(
-            'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
-            'Sylius\Component\Inventory\Model\StockableInterface'     => 'sylius.model.stockable.class',
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Inventory\Model';

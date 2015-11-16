@@ -16,7 +16,9 @@ use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
@@ -33,14 +35,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $oauthRepository;
+    protected $customerFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $customerRepository;
+    protected $userFactory;
+
+    /**
+     * @var UserRepositoryInterface
+     */
+    protected $userRepository;
 
     /**
      * @var ObjectManager
@@ -48,23 +55,42 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $userManager;
 
     /**
-     * @param RepositoryInterface     $customerRepository
-     * @param UserRepositoryInterface $userRepository
-     * @param RepositoryInterface     $oauthRepository
-     * @param ObjectManager           $userManager
-     * @param CanonicalizerInterface  $canonicalizer
+     * @var ResourceFactoryInterface
+     */
+    protected $oauthFactory;
+
+    /**
+     * @var ResourceRepositoryInterface
+     */
+    protected $oauthRepository;
+
+    /**
+     * Constructor.
+     *
+     * @param ResourceFactoryInterface    $customerFactory
+     * @param ResourceFactoryInterface    $userFactory
+     * @param UserRepositoryInterface     $userRepository
+     * @param ResourceManagerInterface    $userManager
+     * @param ResourceFactoryInterface    $oauthFactory
+     * @param ResourceRepositoryInterface $oauthRepository
      */
     public function __construct(
-        RepositoryInterface $customerRepository,
+        ResourceFactoryInterface $customerFactory,
+        ResourceFactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
-        RepositoryInterface $oauthRepository,
-        ObjectManager $userManager,
+        ResourceManagerInterface $userManager,
+        ResourceFactoryInterface $oauthFactory,
+        ResourceRepositoryInterface $oauthRepository,
         CanonicalizerInterface $canonicalizer
     ) {
         parent::__construct($userRepository, $canonicalizer);
-        $this->customerRepository = $customerRepository;
-        $this->oauthRepository = $oauthRepository;
+
+        $this->customerFactory = $customerFactory;
+        $this->userFactory = $userFactory;
+        $this->userRepository = $userRepository;
         $this->userManager = $userManager;
+        $this->oauthFactory = $oauthFactory;
+        $this->oauthRepository = $oauthRepository;
     }
 
     /**
@@ -109,11 +135,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->userRepository->createNew();
-        $customer = $this->customerRepository->createNew();
+        $user = $this->userFactory->createNew();
+        $customer = $this->customerFactory->createNew();
+
         $user->setCustomer($customer);
 
-        // set default values taken from OAuth sign-in provider account
+        // Set default values taken from OAuth sign-in provider account.
         if (null !== $email = $response->getEmail()) {
             $customer->setEmail($email);
         }
@@ -122,7 +149,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             $user->setUsername($response->getEmail() ?: $response->getNickname());
         }
 
-        // set random password to prevent issue with not nullable field & potential security hole
+        // Set random password to prevent issue with not nullable field & potential security hole.
         $user->setPlainPassword(substr(sha1($response->getAccessToken()), 0, 10));
 
         $user->setEnabled(true);
@@ -140,7 +167,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     protected function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->createNew();
+        $oauth = $this->oauthFactory->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());

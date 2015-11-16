@@ -29,6 +29,8 @@ class LoadProductOptionData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $manager = $this->getProductOptionManager();
+
         // T-Shirt size option.
         $option = $this->createOption(
             'T-Shirt size',
@@ -68,7 +70,7 @@ class LoadProductOptionData extends DataFixture
      */
     public function getOrder()
     {
-        return 20;
+        return 10;
     }
 
     /**
@@ -83,18 +85,19 @@ class LoadProductOptionData extends DataFixture
     protected function createOption($name, array $presentationTranslation, array $values)
     {
         /* @var $option OptionInterface */
-        $option = $this->getProductOptionRepository()->createNew();
+        $option = $this->getProductOptionFactory()->createNew();
         $option->setName($name);
 
         foreach ($presentationTranslation as $locale => $presentation) {
             $option->setCurrentLocale($locale);
+            $option->setFallbackLocale($locale);
+
             $option->setPresentation($presentation);
         }
-        $option->setCurrentLocale($this->defaultLocale);
 
         foreach ($values as $text) {
             /* @var $value OptionValueInterface */
-            $value = $this->getProductOptionValueRepository()->createNew();
+            $value = $this->getProductOptionValueFactory()->createNew();
             $value->setValue($text);
 
             $option->addValue($value);

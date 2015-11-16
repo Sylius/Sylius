@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
@@ -26,14 +26,15 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class VariantUniqueValidator extends ConstraintValidator
 {
     /**
-     * @var RepositoryInterface
+     *
+     * @var ResourceRepositoryInterface
      */
     protected $variantRepository;
 
     /**
-     * @param RepositoryInterface $variantRepository
+     * @param ResourceRepositoryInterface $variantRepository
      */
-    public function __construct(RepositoryInterface $variantRepository)
+    public function __construct(ResourceRepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;
     }

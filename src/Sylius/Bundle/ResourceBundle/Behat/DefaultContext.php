@@ -17,10 +17,10 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
@@ -111,7 +111,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param string $resourceName
      *
-     * @return RepositoryInterface
+     * @return ResourceRepositoryInterface
      */
     protected function getRepository($resourceName)
     {
@@ -119,7 +119,33 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @return ObjectManager
+     * Get factory by resource name.
+     *
+     * @param string $resource
+     *
+     * @return ResourceFactoryInterface
+     */
+    protected function getFactory($resource)
+    {
+        return $this->getService('sylius.factory.'.$resource);
+    }
+
+    /**
+     * Get manager by resource name.
+     *
+     * @param string $resource
+     *
+     * @return ResourceManagerInterface
+     */
+    protected function getManager($resource)
+    {
+        return $this->getService('sylius.manager.'.$resource);
+    }
+
+    /**
+     * Get entity manager.
+     *
+     * @return ResourceManagerInterface
      */
     protected function getEntityManager()
     {

@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\SettingsBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ParameterInterface
+interface ParameterInterface extends ResourceInterface
 {
     /**
      * @return mixed

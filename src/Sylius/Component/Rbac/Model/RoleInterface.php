@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Rbac\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface RoleInterface extends TimestampableInterface
+interface RoleInterface extends ResourceInterface, TimestampableInterface
 {
     /**
      * @return string
@@ -40,7 +41,7 @@ interface RoleInterface extends TimestampableInterface
      */
     public function setName($name);
 
-    /**
+    /**pp
      * @return string
      */
     public function getDescription();

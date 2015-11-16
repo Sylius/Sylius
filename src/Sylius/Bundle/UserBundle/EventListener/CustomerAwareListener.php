@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
@@ -33,14 +34,18 @@ class CustomerAwareListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param ResourceEvent|CartEvent $event
      */
-    public function setCustomer(GenericEvent $event)
+    public function setCustomer($event)
     {
         if ($event instanceof CartEvent) {
             $resource = $event->getCart();
-        } else {
+        } elseif ($event instanceof ResourceEvent) {
+            $resource = $event->getResource();
+        } elseif ($event instanceof GenericEvent) {
             $resource = $event->getSubject();
+        } else {
+            throw new \InvalidArgumentException('CustomerAwareListener expects GenericEvent, CartEvent or ResourceEvent.');
         }
 
         if (!$resource instanceof CustomerAwareInterface) {

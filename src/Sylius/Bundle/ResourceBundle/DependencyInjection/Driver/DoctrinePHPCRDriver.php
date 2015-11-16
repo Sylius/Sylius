@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,31 +22,28 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DoctrinePHPCRDriver extends AbstractDatabaseDriver
+class DoctrinePHPCRDriver extends AbstractDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDriver()
+    protected function getRepositoryDefinition(ResourceMetadataInterface $metadata, ContainerBuilder $container)
     {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
-    }
+        $repositoryClass = new Parameter('sylius.doctrine.phpcr_odm.repository.class');
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepositoryDefinition(array $classes)
-    {
-        $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
-
-        if (isset($classes['repository'])) {
-            $repositoryClass  = $classes['repository'];
+        if ($metadata->hasClass('repository')) {
+            $repositoryClass = $metadata->getClass('repository');
         }
+
+        $repositoryDefinition = new Definition('Doctrine\ODM\PHPCR\EntityRepository');
+        $repositoryDefinition->setFactoryService($this->getObjectManagerId($metadata));
+        $repositoryDefinition->setFactoryMethod('getRepository');
+        $repositoryDefinition->setArguments(array($metadata->getClass('model')));
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model']),
+            $repositoryDefinition,
+            new Reference($this->getObjectManagerId($metadata)),
         ));
 
         return $definition;
@@ -53,16 +52,16 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceKey()
+    protected function getObjectManagerId(ResourceMetadataInterface $metadata)
     {
-        return sprintf('doctrine_phpcr.odm.%s_document_manager', $this->managerName);
+        return sprintf('doctrine_phpcr.odm.%s_document_manager', $metadata->getParameter('manager', 'default'));
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getClassMetadataClassname()
+    public function getName()
     {
-        return 'Doctrine\\ODM\\PHPCR\\Mapping\\ClassMetadata';
+        return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
     }
 }

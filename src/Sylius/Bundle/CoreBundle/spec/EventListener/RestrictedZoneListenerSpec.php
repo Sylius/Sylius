@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
@@ -20,6 +19,7 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,7 +30,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
     function let(
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         CartProviderInterface $cartProvider,
-        ObjectManager $cartManager,
+        ResourceManagerInterface $cartManager,
         SessionInterface $session,
         TranslatorInterface $translator
     ) {

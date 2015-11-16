@@ -29,23 +29,27 @@ class LoadTaxonomiesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $manager = $this->getTaxonomyManager();
+
         $manager->persist($this->createTaxonomy(
             array($this->defaultLocale => 'Category', 'es_ES' => 'Categoria'),
             array(
                 array($this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas'),
                 array($this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas'),
-                array($this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas'),
-                array($this->defaultLocale => 'Books', 'es_ES' => 'Libros'),
-            )));
+                array($this->defaultLocale => 'Mugs',     'es_ES' => 'Tazas'),
+                array($this->defaultLocale => 'Books',    'es_ES' => 'Libros'),
+            )
+        ));
 
         $manager->persist($this->createTaxonomy(
             array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'),
             array(
-                array($this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas'),
+                array($this->defaultLocale => 'SuperTees',   'es_ES' => 'SuperCamisetas'),
                 array($this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky'),
-                array($this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza'),
-                array($this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania'),
-            )));
+                array($this->defaultLocale => 'Mugland',     'es_ES' => 'Mundotaza'),
+                array($this->defaultLocale => 'Bookmania',   'es_ES' => 'Libromania'),
+            )
+        ));
 
         $manager->flush();
     }
@@ -59,7 +63,7 @@ class LoadTaxonomiesData extends DataFixture
     }
 
     /**
-     * Create and save taxonomy with given taxons.
+     * Create and persist taxonomy with given taxons.
      *
      * @param array $taxonomyName
      * @param array $taxonsArray
@@ -72,7 +76,7 @@ class LoadTaxonomiesData extends DataFixture
     protected function createTaxonomy(array $taxonomyName, array $taxonsArray)
     {
         /* @var $taxonomy TaxonomyInterface */
-        $taxonomy = $this->getTaxonomyRepository()->createNew();
+        $taxonomy = $this->getTaxonomyFactory()->createNew();
 
         foreach ($taxonomyName as $locale => $name) {
             $taxonomy->setCurrentLocale($locale);
@@ -86,7 +90,7 @@ class LoadTaxonomiesData extends DataFixture
 
         foreach ($taxonsArray as $taxonArray) {
             /* @var $taxon TaxonInterface */
-            $taxon = $this->getTaxonRepository()->createNew();
+            $taxon = $this->getTaxonFactory()->createNew();
             foreach ($taxonArray as $locale => $taxonName) {
                 $taxon->setCurrentLocale($locale);
                 $taxon->setFallbackLocale($locale);
@@ -97,6 +101,7 @@ class LoadTaxonomiesData extends DataFixture
                     $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
                 }
             }
+
             $taxonomy->addTaxon($taxon);
         }
 

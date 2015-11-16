@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class CartBlamerListener
 {
     /**
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     private $cartManager;
 
@@ -34,10 +34,10 @@ class CartBlamerListener
     private $cartProvider;
 
     /**
-     * @param ObjectManager $cartManager
+     * @param ResourceManagerInterface $cartManager
      * @param CartProviderInterface $cartProvider
      */
-    public function __construct(ObjectManager $cartManager, CartProviderInterface $cartProvider)
+    public function __construct(ResourceManagerInterface $cartManager, CartProviderInterface $cartProvider)
     {
         $this->cartManager = $cartManager;
         $this->cartProvider = $cartProvider;
@@ -62,7 +62,7 @@ class CartBlamerListener
         $cart->setCustomer($customer);
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 
     /**
@@ -88,6 +88,6 @@ class CartBlamerListener
         $cart->setCustomer($user->getCustomer());
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 }

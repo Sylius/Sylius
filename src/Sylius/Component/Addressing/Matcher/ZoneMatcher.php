@@ -11,10 +11,10 @@
 
 namespace Sylius\Component\Addressing\Matcher;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Default zone matcher.
@@ -30,7 +30,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Zone repository.
      *
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
@@ -48,9 +48,9 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository $repository
+     * @param ResourceRepositoryInterface $repository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(ResourceRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

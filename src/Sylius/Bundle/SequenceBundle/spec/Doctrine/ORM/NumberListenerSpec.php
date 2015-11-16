@@ -13,11 +13,11 @@ namespace spec\Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\Sequence;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;

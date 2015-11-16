@@ -25,11 +25,11 @@ class ProductContext extends DefaultContext
      */
     public function thereAreProducts(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product');
+        $manager = $this->getManager('product');
+        $factory = $this->getFactory('product');
 
         foreach ($table->getHash() as $data) {
-            $product = $repository->createNew();
+            $product = $factory->createNew();
 
             $product->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
             $product->setName(trim($data['name']));
@@ -47,7 +47,7 @@ class ProductContext extends DefaultContext
                 $attribute = explode(':', $data['attributes']);
 
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
-                $attributeValue =  $this->getRepository('product_attribute_value')->createNew();
+                $attributeValue =  $this->getFactory('product_attribute_value')->createNew();
 
                 $attributeValue->setAttribute($productAttribute);
                 $attributeValue->setValue($attribute[1]);
@@ -104,10 +104,10 @@ class ProductContext extends DefaultContext
      */
     public function thereIsArchetypeWithFollowingConfiguration($name, TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product_archetype');
+        $manager = $this->getManager('product_archetype');
+        $factory = $this->getFactory('product_archetype');
 
-        $archetype = $repository->createNew();
+        $archetype = $factory->createNew();
         $archetype->setName($name);
         $archetype->setCode($name);
 
@@ -143,11 +143,13 @@ class ProductContext extends DefaultContext
      */
     public function thereAreOptions(TableNode $table)
     {
+        $manager = $this->getManager('product_option');
+
         foreach ($table->getHash() as $data) {
-            $this->thereIsOption($data['name'], $data['values'], $data['presentation'], false);
+            $manager->persist($this->thereIsOption($data['name'], $data['values'], $data['presentation'], false));
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 
     /**
@@ -155,20 +157,20 @@ class ProductContext extends DefaultContext
      */
     public function thereIsOption($name, $values, $presentation = null, $flush = true)
     {
-        $optionValueRepository = $this->getRepository('product_option_value');
+        $optionValueFactory = $this->getFactory('product_option_value');
 
-        $option = $this->getRepository('product_option')->createNew();
+        $option = $this->getFactory('product_option')->createNew();
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
         foreach (explode(',', $values) as $value) {
-            $optionValue = $optionValueRepository->createNew();
+            $optionValue = $optionValueFactory->createNew();
             $optionValue->setValue(trim($value));
 
             $option->addValue($optionValue);
         }
 
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('product_option');
         $manager->persist($option);
 
         if ($flush) {
@@ -184,6 +186,8 @@ class ProductContext extends DefaultContext
      */
     public function thereAreAttributes(TableNode $table)
     {
+        $manager = $this->getManager('product_attribute');
+
         foreach ($table->getHash() as $data) {
             $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
             $additionalData = array(
@@ -193,10 +197,12 @@ class ProductContext extends DefaultContext
             if ($choices) {
                 $additionalData['configuration'] = array('choices' => $choices);
             }
-            $this->thereIsAttribute($data['name'], $additionalData);
+
+            $attribute = $this->thereIsAttribute($data['name'], $additionalData);
+            $manager->persist($attribute);
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 
     /**
@@ -210,15 +216,16 @@ class ProductContext extends DefaultContext
             'type' => 'text'
         ), $additionalData);
 
-        $attribute = $this->getRepository('product_attribute')->createNew();
+        $attribute = $this->getFactory('product_attribute')->createNew();
         $attribute->setName($name);
 
         foreach ($additionalData as $key => $value) {
             $attribute->{'set'.\ucfirst($key)}($value);
         }
 
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('product_attribute');
         $manager->persist($attribute);
+
         if ($flush) {
             $manager->flush();
         }
@@ -231,17 +238,26 @@ class ProductContext extends DefaultContext
      */
     public function theFollowingProductTranslationsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('product');
 
         foreach ($table->getHash() as $data) {
             $productTranslation = $this->findOneByName('product_translation', $data['product']);
 
             $product = $productTranslation->getTranslatable();
             $product->setCurrentLocale($data['locale']);
+<<<<<<< HEAD
             $product->setFallbackLocale($data['locale']);
 
             $product->setName($data['name']);
             $product->setDescription('...');
+=======
+            $product
+                ->setName($data['name'])
+                ->setDescription('...')
+            ;
+
+            $manager->persist($product);
+>>>>>>> Resource bundle refactoring
         }
 
         $manager->flush();
@@ -264,14 +280,23 @@ class ProductContext extends DefaultContext
      */
     public function theFollowingAttributeTranslationsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('product_attribute');
 
         foreach ($table->getHash() as $data) {
             $attribute = $this->findOneByName('product_attribute', $data['attribute']);
+<<<<<<< HEAD
             $attribute->setCurrentLocale($data['locale']);
             $attribute->setFallbackLocale($data['locale']);
 
             $attribute->setPresentation($data['presentation']);
+=======
+            $attribute
+                ->setCurrentLocale($data['locale'])
+                ->setPresentation($data['presentation'])
+            ;
+
+            $manager->persist($attribute);
+>>>>>>> Resource bundle refactoring
         }
 
         $manager->flush();
@@ -282,14 +307,23 @@ class ProductContext extends DefaultContext
      */
     public function theFollowingOptionTranslationsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('product_option');
 
         foreach ($table->getHash() as $data) {
             $option = $this->findOneByName('product_option', $data['option']);
+<<<<<<< HEAD
             $option->setCurrentLocale($data['locale']);
             $option->setFallbackLocale($data['locale']);
 
             $option->setPresentation($data['presentation']);
+=======
+            $option
+                ->setCurrentLocale($data['locale'])
+                ->setPresentation($data['presentation'])
+            ;
+
+            $manager->persist($option);
+>>>>>>> Resource bundle refactoring
         }
 
         $manager->flush();

@@ -27,6 +27,7 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
     {
         foreach ($this->getPossibleTransitions() as $transition) {
             $config = $this->config['transitions'][$transition];
+
             if (in_array($fromState, $config['from'])) {
                 return $transition;
             }
@@ -42,6 +43,7 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
     {
         foreach ($this->getPossibleTransitions() as $transition) {
             $config = $this->config['transitions'][$transition];
+
             if ($toState === $config['to']) {
                 return $transition;
             }

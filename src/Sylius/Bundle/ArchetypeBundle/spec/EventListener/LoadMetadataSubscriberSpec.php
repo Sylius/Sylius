@@ -29,7 +29,9 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'attribute' => 'Some\App\Product\Entity\Attribute',
                 'option' => 'Some\App\Product\Entity\Option',
                 'archetype' => array(
-                    'model' => 'Some\App\Product\Entity\Archetype',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Archetype',
+                    )
                 ),
             ),
         ));
@@ -40,12 +42,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ArchetypeBundle\EventListener\LoadMetadataSubscriber');
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    function it_is_a_doctrine_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    function it_subscribes_to_loadClassMetadata_events_dispatched_by_doctrine()
     {
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }

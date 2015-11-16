@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Purger;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ResourceManagerInterface;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Cart\Purger\PurgerInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
@@ -29,7 +29,7 @@ class ExpiredOrdersPurger implements PurgerInterface
     /**
      * Order manager.
      *
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $manager;
 
@@ -52,7 +52,7 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     protected $factory;
 
-    public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
+    public function __construct(ResourceManagerInterface $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
         $this->manager    = $manager;
         $this->repository = $repository;

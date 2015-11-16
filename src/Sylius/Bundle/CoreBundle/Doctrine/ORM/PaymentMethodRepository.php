@@ -14,7 +14,7 @@ class PaymentMethodRepository extends BasePaymentMethodRepository
         $queryBuilder = parent::getQueryBuidlerForChoiceType($options);
 
         if ($options['channel']) {
-            $queryBuilder->andWhere('method IN (:methods)')
+            $queryBuilder->andWhere('o IN (:methods)')
                 ->setParameter('methods', $options['channel']->getPaymentMethods()->toArray());
         }
 

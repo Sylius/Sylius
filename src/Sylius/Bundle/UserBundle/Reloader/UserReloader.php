@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Reloader;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -20,16 +20,16 @@ use Sylius\Component\User\Model\UserInterface;
 class UserReloader implements UserReloaderInterface
 {
     /**
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
-    private $objectManager;
+    private $userManager;
 
     /**
-     * @param ObjectManager $objectManager
+     * @param ResourceManagerInterface $userManager
      */
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ResourceManagerInterface $userManager)
     {
-        $this->objectManager = $objectManager;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -37,6 +37,6 @@ class UserReloader implements UserReloaderInterface
      */
     public function reloadUser(UserInterface $user)
     {
-        $this->objectManager->refresh($user);
+        $this->userManager->refresh($user);
     }
 }

@@ -21,23 +21,4 @@ use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
  */
 class ProductRepository extends TranslatableResourceRepository
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->select($this->getAlias().', option, variant')
-            ->leftJoin($this->getAlias().'.options', 'option')
-            ->leftJoin($this->getAlias().'.variants', 'variant')
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getAlias()
-    {
-        return 'product';
-    }
 }

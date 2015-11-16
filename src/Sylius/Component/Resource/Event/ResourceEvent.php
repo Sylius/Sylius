@@ -11,78 +11,104 @@
 
 namespace Sylius\Component\Resource\Event;
 
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Resource event.
  *
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
+ * @param Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceEvent extends GenericEvent
+class ResourceEvent extends Event
 {
     const TYPE_ERROR   = 'error';
-    const TYPE_WARNING = 'warning';
     const TYPE_INFO    = 'info';
-    const TYPE_SUCCESS = 'success';
+    const TYPE_WARNING = 'warning';
 
     /**
-     * Message type
+     * @var ResourceInterface
+     */
+    protected $resource;
+
+    /**
+     * @var ResourceMetadataInterface
+     */
+    protected $metadata;
+
+    /**
+     * Response code.
      *
+     * @var integer
+     */
+    protected $responseCode = 500;
+
+    /**
      * @var string
      */
-    protected $messageType = '';
+    protected $messageType;
 
     /**
-     * Message
-     *
      * @var string
      */
-    protected $message = '';
+    protected $message;
 
     /**
-     * Message parameters
-     *
-     * @var array
+     * @param array
      */
     protected $messageParameters = array();
 
     /**
-     * ErrorCode
-     *
-     * @var integer
+     * @param ResourceInterface $resource
+     * @param ResourceMetadataInterface $metadata
      */
-    protected $errorCode = 500;
+    public function __construct(ResourceInterface $resource, ResourceMetadataInterface $metadata)
+    {
+        $this->resource = $resource;
+        $this->metadata = $metadata;
+    }
 
     /**
-     * Stop event propagation
-     *
-     * @param string $message
+     * @param $message
      * @param string $type
-     * @param array  $parameters
+     * @param array $parameters
+     * @param int $responseCode
      */
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = array(), $errorCode = 500)
+    public function stop($message, $type = self::TYPE_ERROR, $parameters = array(), $responseCode = 500)
     {
         $this->messageType = $type;
         $this->message = $message;
         $this->messageParameters = $parameters;
-        $this->errorCode = $errorCode;
+        $this->responseCode = $responseCode;
 
         $this->stopPropagation();
     }
 
     /**
-     * Alias
-     *
-     * @return bool
+     * @return ResourceInterface
      */
-    public function isStopped()
+    public function getResource()
     {
-        return $this->isPropagationStopped();
+        return $this->resource;
     }
 
     /**
-     * Get messageType property
-     *
+     * @return ResourceMetadataInterface
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResponseCode()
+    {
+        return $this->responseCode;
+    }
+
+    /**
      * @return string
      */
     public function getMessageType()
@@ -91,22 +117,6 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets messageType property
-     *
-     * @param string $messageType Should be one of ResourceEvent's TYPE constants
-     *
-     * @return $this
-     */
-    public function setMessageType($messageType)
-    {
-        $this->messageType = $messageType;
-
-        return $this;
-    }
-
-    /**
-     * Get message property
-     *
      * @return string
      */
     public function getMessage()
@@ -115,64 +125,10 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Sets message property
-     *
-     * @param string $message
-     *
-     * @return $this
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * Get messageParameters property
-     *
      * @return array
      */
     public function getMessageParameters()
     {
         return $this->messageParameters;
-    }
-
-    /**
-     * Sets messageParameters property
-     *
-     * @param array $messageParameters
-     *
-     * @return $this
-     */
-    public function setMessageParameters(array $messageParameters)
-    {
-        $this->messageParameters = $messageParameters;
-
-        return $this;
-    }
-
-    /**
-     * Get errorCode property
-     *
-     * @return int
-     */
-    public function getErrorCode()
-    {
-        return $this->errorCode;
-    }
-
-    /**
-     * Sets errorCode property
-     *
-     * @param int $errorCode
-     *
-     * @return $this
-     */
-    public function setErrorCode($errorCode)
-    {
-        $this->errorCode = $errorCode;
-
-        return $this;
     }
 }

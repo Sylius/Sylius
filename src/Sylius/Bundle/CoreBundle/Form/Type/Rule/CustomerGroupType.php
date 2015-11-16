@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class CustomerGroupType extends AbstractType
 {
+<<<<<<< HEAD
     /**
      * @var string[]
      */
@@ -43,12 +44,15 @@ class CustomerGroupType extends AbstractType
         $this->groupRepository = $groupRepository;
     }
 
+=======
+>>>>>>> Fix specs
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+<<<<<<< HEAD
             ->add('groups', 'sylius_entity_to_identifier', array(
                 'label' => 'sylius.form.action.customer_group',
                 'property' => 'name',
@@ -56,12 +60,17 @@ class CustomerGroupType extends AbstractType
                 'query_builder' => function () {
                     return $this->groupRepository->getFormQueryBuilder();
                 },
+=======
+            ->add('groups', 'sylius_group_to_identifier', array(
+                'label' => 'sylius.form.action.customer_group',
+>>>>>>> Fix specs
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 ),
             ))
         ;
+<<<<<<< HEAD
     }
 
     /**
@@ -74,6 +83,8 @@ class CustomerGroupType extends AbstractType
                 'validation_groups' => $this->validationGroups,
             ))
         ;
+=======
+>>>>>>> Fix specs
     }
 
     /**

@@ -25,23 +25,6 @@ use Symfony\Component\Validator\Constraints\Type;
 class FlexibleRateConfigurationType extends AbstractType
 {
     /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -79,7 +62,6 @@ class FlexibleRateConfigurationType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
 
+use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType as BasePaymentMethodChoiceType;
+<<<<<<< HEAD
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
+=======
+>>>>>>> Fix specs
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,8 +41,20 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
                 'channel' => $options['channel'],
             );
 
-            return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
-                return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
+            return function (EntityRepository $repository) use ($repositoryOptions) {
+                $queryBuilder = $repository->createQueryBuilder('o');
+
+                if (!$repositoryOptions['disabled']) {
+                    $queryBuilder->where('o.enabled = true');
+                }
+                if ($repositoryOptions['channel']) {
+                    $queryBuilder
+                        ->andWhere('o IN (:methods)')
+                        ->setParameter('methods', $repositoryOptions['channel']->getPaymentMethods()->toArray())
+                    ;
+                }
+
+                return $queryBuilder;
             };
         };
 

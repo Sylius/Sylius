@@ -25,11 +25,13 @@ class ShippingContext extends DefaultContext
      */
     public function thereAreShippingCategories(TableNode $table)
     {
+        $manager = $this->getManager('shipping_category');
+
         foreach ($table->getHash() as $data) {
-            $this->thereIsShippingCategory($data['name'], false);
+            $manager->persist($this->thereIsShippingCategory($data['name'], false));
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 
     /**
@@ -39,11 +41,12 @@ class ShippingContext extends DefaultContext
     public function thereIsShippingCategory($name, $flush = true)
     {
         /* @var $category ShippingCategoryInterface */
-        $category = $this->getRepository('shipping_category')->createNew();
+        $category = $this->getFactory('shipping_category')->createNew();
         $category->setName($name);
 
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('shipping_category');
         $manager->persist($category);
+
         if ($flush) {
             $manager->flush();
         }
@@ -58,12 +61,12 @@ class ShippingContext extends DefaultContext
     {
         $shippingMethod = $this->findOneByName('shipping_method', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('shipping_method_rule');
+        $manager = $this->getManager('shipping_method_rule');
+        $factory = $this->getFactory('shipping_method_rule');
 
         foreach ($table->getHash() as $data) {
             /* @var $rule RuleInterface */
-            $rule = $repository->createNew();
+            $rule = $factory->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($this->getConfiguration($data['configuration']));
 
@@ -80,7 +83,7 @@ class ShippingContext extends DefaultContext
      */
     public function theShippingMethodTranslationsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('shipping_method');
 
         foreach ($table->getHash() as $data) {
             $shippingMethodTranslation = $this->findOneByName('shipping_method_translation', $data['shipping method']);
@@ -88,8 +91,9 @@ class ShippingContext extends DefaultContext
             $shippingMethod = $shippingMethodTranslation->getTranslatable();
             $shippingMethod->setCurrentLocale($data['locale']);
             $shippingMethod->setFallbackLocale($data['locale']);
-
             $shippingMethod->setName($data['name']);
+
+            $manager->persist($shippingMethod);
         }
 
         $manager->flush();

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -25,11 +26,12 @@ class ProductController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(RequestConfiguration $configuration)
     {
-        $product = parent::createNew();
+        $product = parent::createNew($configuration);
+        $request = $configuration->getRequest();
 
-        $code = $this->getRequest()->query->get('archetype');
+        $code = $request->query->get('archetype');
 
         if (null === $code) {
             return $product;
@@ -58,7 +60,7 @@ class ProductController extends ResourceController
      */
     protected function getArchetypeRepository()
     {
-        return $this->get('sylius.repository.product_archetype');
+        return $this->container->get('sylius.repository.product_archetype');
     }
 
     /**
@@ -68,6 +70,6 @@ class ProductController extends ResourceController
      */
     protected function getBuilder()
     {
-        return $this->get('sylius.builder.product_archetype');
+        return $this->container->get('sylius.builder.product_archetype');
     }
 }

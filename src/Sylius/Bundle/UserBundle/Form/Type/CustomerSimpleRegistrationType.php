@@ -14,7 +14,7 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
 use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,16 +24,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CustomerSimpleRegistrationType extends AbstractResourceType
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $customerRepository;
 
     /**
-     * @param string              $dataClass
-     * @param array               $validationGroups
-     * @param RepositoryInterface $customerRepository
+     * @param string                      $dataClass
+     * @param array                       $validationGroups
+     * @param ResourceRepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
+    public function __construct($dataClass, array $validationGroups, ResourceRepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 

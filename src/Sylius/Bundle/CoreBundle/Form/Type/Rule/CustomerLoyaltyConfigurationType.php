@@ -24,13 +24,6 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class CustomerLoyaltyConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -65,6 +58,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -77,6 +71,8 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
+=======
+>>>>>>> Fix specs
     public function getName()
     {
         return 'sylius_promotion_rule_customer_loyalty_configuration';

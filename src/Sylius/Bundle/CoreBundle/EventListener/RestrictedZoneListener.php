@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -27,7 +27,7 @@ class RestrictedZoneListener
     private $session;
     private $translator;
 
-    public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
+    public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ResourceManagerInterface $cartManager, SessionInterface $session, TranslatorInterface $translator)
     {
         $this->restrictedZoneChecker = $restrictedZoneChecker;
         $this->cartProvider = $cartProvider;
