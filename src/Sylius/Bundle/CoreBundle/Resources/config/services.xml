@@ -91,6 +91,12 @@
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
+        <parameter key="sylius.sql_logger.purger.purge_mode" type="constant">Doctrine\Common\DataFixtures\Purger\ORMPurger::PURGE_MODE_DELETE</parameter>
+        <parameter key="sylius.sql_logger.purger.class">Sylius\Bundle\CoreBundle\Purger\QueryLogger</parameter>
+
+        <parameter key="sylius.purger.orm_purger.doctrine.class">Doctrine\Common\DataFixtures\Purger\ORMPurger</parameter>
+        <parameter key="sylius.purger.orm_purger.class">Sylius\Bundle\CoreBundle\Purger\ORMPurger</parameter>
+
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
@@ -504,6 +510,22 @@
             <argument>_sylius</argument>
             <argument>%sylius.sylius_by_classes%</argument>
         </service>
+
+        <service id="sylius.sql_logger.purger" class="%sylius.sql_logger.purger.class%" public="false" />
+
+        <service id="sylius.purger.orm_purger.doctrine" class="%sylius.purger.orm_purger.doctrine.class%" public="false">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <call method="setPurgeMode">
+                <argument>%sylius.sql_logger.purger.purge_mode%</argument>
+            </call>
+        </service>
+
+        <service id="sylius.purger.orm_purger" class="%sylius.purger.orm_purger.class%" decorates="sylius.purger.orm_purger.doctrine">
+            <argument type="service" id="sylius.purger.orm_purger.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.sql_logger.purger" />
+        </service>
+
 
         <!-- Data fetchers -->
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">

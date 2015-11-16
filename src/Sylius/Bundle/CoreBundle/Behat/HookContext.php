@@ -14,19 +14,26 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\Common\DataFixtures\Purger\PurgerInterface;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
+use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class HookContext implements Context, KernelAwareContext
+class HookContext extends DefaultContext
 {
     /**
      * @var KernelInterface
      */
     protected $kernel;
+
+    /**
+     * @var PurgerInterface
+     */
+    private static $ormPurger;
 
     /**
      * {@inheritdoc}
@@ -49,8 +56,11 @@ class HookContext implements Context, KernelAwareContext
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
         }
 
-        $purger = new ORMPurger($entityManager);
-        $purger->purge();
+        if (null === static::$ormPurger) {
+            static::$ormPurger = $this->getService('sylius.purger.orm_purger');
+        }
+
+        static::$ormPurger->purge();
 
         if ($isMySqlDriver) {
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
