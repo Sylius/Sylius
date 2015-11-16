@@ -101,7 +101,7 @@ class LoadOrdersData extends DataFixture
     protected function createPayment(OrderInterface $order, $state = null)
     {
         /* @var $payment PaymentInterface */
-        $payment = $this->getPaymentRepository()->createNew();
+        $payment = $this->getPaymentFactory()->createNew();
         $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
         $payment->setAmount($order->getTotal());
@@ -117,7 +117,7 @@ class LoadOrdersData extends DataFixture
     protected function createShipment(OrderInterface $order)
     {
         /* @var $shipment ShipmentInterface */
-        $shipment = $this->getShipmentRepository()->createNew();
+        $shipment = $this->getShipmentFactory()->createNew();
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
         $shipment->setState($this->getShipmentState());
 

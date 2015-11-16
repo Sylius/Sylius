@@ -83,7 +83,7 @@ class LoadProductOptionData extends DataFixture
     protected function createOption($name, array $presentationTranslation, array $values)
     {
         /* @var $option OptionInterface */
-        $option = $this->getProductOptionRepository()->createNew();
+        $option = $this->getProductOptionFactory()->createNew();
         $option->setName($name);
 
         foreach ($presentationTranslation as $locale => $presentation) {
@@ -94,7 +94,7 @@ class LoadProductOptionData extends DataFixture
 
         foreach ($values as $text) {
             /* @var $value OptionValueInterface */
-            $value = $this->getProductOptionValueRepository()->createNew();
+            $value = $this->getProductOptionValueFactory()->createNew();
             $value->setValue($text);
 
             $option->addValue($value);

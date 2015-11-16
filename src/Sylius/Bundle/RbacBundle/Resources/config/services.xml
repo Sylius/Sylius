@@ -65,10 +65,12 @@
             <argument>%sylius.rbac.default_permissions%</argument>
             <argument>%sylius.rbac.default_permissions_hierarchy%</argument>
             <argument type="service" id="sylius.manager.permission" />
+            <argument type="service" id="sylius.factory.permission" />
             <argument type="service" id="sylius.repository.permission" />
             <argument>%sylius.rbac.default_roles%</argument>
             <argument>%sylius.rbac.default_roles_hierarchy%</argument>
             <argument type="service" id="sylius.manager.role" />
+            <argument type="service" id="sylius.factory.role" />
             <argument type="service" id="sylius.repository.role" />
         </service>
     </services>

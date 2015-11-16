@@ -74,8 +74,8 @@ class LoadApiData extends DataFixture
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
         /* @var $user UserInterface */
-        $user = $this->getUserRepository()->createNew();
-        $customer = $this->getCustomerRepository()->createNew();
+        $user = $this->getUserFactory()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);

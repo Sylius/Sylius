@@ -54,7 +54,7 @@ class LoadGroupsData extends DataFixture
     protected function createGroup($name, array $roles = array())
     {
         /* @var $group GroupInterface */
-        $group = $this->getGroupRepository()->createNew();
+        $group = $this->getGroupFactory()->createNew();
         $group->setName($name);
 
         $this->setReference('Sylius.Group.'.$name, $group);

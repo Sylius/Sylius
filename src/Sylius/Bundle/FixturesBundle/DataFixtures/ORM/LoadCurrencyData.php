@@ -32,10 +32,10 @@ class LoadCurrencyData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currencyRepository = $this->getCurrencyRepository();
+        $currencyFactory = $this->getCurrencyFactory();
 
         foreach ($this->currencies as $code => $rate) {
-            $currency = $currencyRepository->createNew();
+            $currency = $currencyFactory->createNew();
 
             $currency->setCode($code);
             $currency->setExchangeRate($rate);

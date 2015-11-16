@@ -59,7 +59,7 @@ class LoadPaymentMethodsData extends DataFixture
     protected function createPaymentMethod($name, $gateway, $feeCalculator, array $feeCalculatorConfiguration, $enabled = true)
     {
         /* @var $method PaymentMethodInterface */
-        $method = $this->getPaymentMethodRepository()->createNew();
+        $method = $this->getPaymentMethodFactory()->createNew();
 
         $translatedNames = array(
             $this->defaultLocale => sprintf($name),

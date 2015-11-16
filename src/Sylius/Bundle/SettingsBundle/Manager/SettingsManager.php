@@ -17,6 +17,7 @@ use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -44,6 +45,11 @@ class SettingsManager implements SettingsManagerInterface
     protected $parameterRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $parameterFactory;
+
+    /**
      * @var Cache
      */
     protected $cache;
@@ -69,6 +75,7 @@ class SettingsManager implements SettingsManagerInterface
      * @param SchemaRegistryInterface  $schemaRegistry
      * @param ObjectManager            $parameterManager
      * @param RepositoryInterface      $parameterRepository
+     * @param FactoryInterface         $parameterFactory
      * @param Cache                    $cache
      * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
@@ -77,6 +84,7 @@ class SettingsManager implements SettingsManagerInterface
         SchemaRegistryInterface $schemaRegistry,
         ObjectManager $parameterManager,
         RepositoryInterface $parameterRepository,
+        FactoryInterface $parameterFactory,
         Cache $cache,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
@@ -84,6 +92,7 @@ class SettingsManager implements SettingsManagerInterface
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;
         $this->parameterRepository = $parameterRepository;
+        $this->parameterFactory = $parameterFactory;
         $this->cache = $cache;
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
@@ -153,7 +162,7 @@ class SettingsManager implements SettingsManagerInterface
             if (isset($persistedParametersMap[$name])) {
                 $persistedParametersMap[$name]->setValue($value);
             } else {
-                $parameter = $this->parameterRepository->createNew();
+                $parameter = $this->parameterFactory->createNew();
 
                 $parameter->setNamespace($namespace);
                 $parameter->setName($name);
