@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Base discount action.
@@ -28,12 +28,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 abstract class DiscountAction implements PromotionActionInterface
 {
-    protected $adjustmentRepository;
+    /**
+     * @var FactoryInterface
+     */
+    protected $adjustmentFactory;
+
+    /**
+     * @var OriginatorInterface
+     */
     protected $originator;
 
-    public function __construct(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
+    /**
+     * @param FactoryInterface $adjustmentFactory
+     * @param OriginatorInterface $originator
+     */
+    public function __construct(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
     {
-        $this->adjustmentRepository = $adjustmentRepository;
+        $this->adjustmentFactory = $adjustmentFactory;
         $this->originator = $originator;
     }
 
@@ -63,7 +74,7 @@ abstract class DiscountAction implements PromotionActionInterface
      */
     protected function createAdjustment(PromotionInterface $promotion)
     {
-        $adjustment = $this->adjustmentRepository->createNew();
+        $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 

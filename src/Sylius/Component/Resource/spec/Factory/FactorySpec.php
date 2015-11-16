@@ -18,6 +18,8 @@ use spec\Sylius\Component\Resource\Fixtures\SampleResource;
 require_once __DIR__.'/../Fixtures/SampleResource.php';
 
 /**
+ * @mixin \Sylius\Component\Resource\Factory\Factory
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FactorySpec extends ObjectBehavior

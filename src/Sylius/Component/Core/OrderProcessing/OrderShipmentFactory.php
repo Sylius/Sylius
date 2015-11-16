@@ -12,41 +12,41 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Shipment factory.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentFactory implements ShipmentFactoryInterface
+class OrderShipmentFactory implements OrderShipmentFactoryInterface
 {
     /**
     * Shipment repository.
      *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $shipmentRepository;
+    protected $shipmentFactory;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $shipmentRepository
+     * @param FactoryInterface $shipmentFactory
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(FactoryInterface $shipmentFactory)
     {
-        $this->shipmentRepository = $shipmentRepository;
+        $this->shipmentFactory = $shipmentFactory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createShipment(OrderInterface $order)
+    public function createForOrder(OrderInterface $order)
     {
         if ($order->hasShipments()) {
             $shipment = $order->getShipments()->first();
         } else {
-            $shipment = $this->shipmentRepository->createNew();
+            $shipment = $this->shipmentFactory->createNew();
             $order->addShipment($shipment);
         }
 

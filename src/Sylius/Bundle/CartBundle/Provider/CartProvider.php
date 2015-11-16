@@ -17,6 +17,7 @@ use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -40,6 +41,11 @@ class CartProvider implements CartProviderInterface
      * @var ObjectManager
      */
     protected $manager;
+
+    /**
+     * @var FactoryInterface
+     */
+    protected $cartFactory;
 
     /**
      * Cart repository.
@@ -67,13 +73,15 @@ class CartProvider implements CartProviderInterface
      *
      * @param CartContextInterface     $context
      * @param ObjectManager            $manager
+     * @param FactoryInterface $cartFactory
      * @param RepositoryInterface      $repository
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(CartContextInterface $context, ObjectManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(CartContextInterface $context, ObjectManager $manager, FactoryInterface $cartFactory, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
     {
         $this->context = $context;
         $this->manager = $manager;
+        $this->cartFactory = $cartFactory;
         $this->repository = $repository;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -99,7 +107,7 @@ class CartProvider implements CartProviderInterface
             return $this->cart;
         }
 
-        $this->cart = $this->repository->createNew();
+        $this->cart = $this->cartFactory->createNew();
         $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, new CartEvent($this->cart));
 
         return $this->cart;

@@ -15,22 +15,21 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(
-        RepositoryInterface $adjustmentRepository,
-        DelegatingCalculatorInterface $calculator
-    )
+    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
     {
-        $this->beConstructedWith($adjustmentRepository, $calculator);
+        $this->beConstructedWith($adjustmentFactory, $calculator);
     }
 
     function it_is_initializable()
@@ -65,14 +64,14 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     }
 
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
-        $adjustmentRepository,
+        FactoryInterface $adjustmentFactory,
         $calculator,
         AdjustmentInterface $adjustment,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
     ) {
-        $adjustmentRepository->createNew()->willReturn($adjustment);
+        $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(array($shipment));
 
         $calculator->calculate($shipment)->willReturn(450);

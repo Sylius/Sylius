@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -26,18 +27,20 @@ class ProductBuilderSpec extends ObjectBehavior
     function let(
         ProductInterface $product,
         ObjectManager $productManager,
-        RepositoryInterface $productRepository,
+        FactoryInterface $productFactory,
+        FactoryInterface $attributeFactory,
         RepositoryInterface $attributeRepository,
-        RepositoryInterface $attributeValueRepository
+        FactoryInterface $attributeValueFactory
     ) {
         $this->beConstructedWith(
+            $productFactory,
             $productManager,
-            $productRepository,
+            $attributeFactory,
             $attributeRepository,
-            $attributeValueRepository
+            $attributeValueFactory
         );
 
-        $productRepository->createNew()->shouldBeCalled()->willReturn($product);
+        $productFactory->createNew()->willReturn($product);
 
         $this->create('Black GitHub Mug')->shouldReturn($this);
     }
@@ -49,13 +52,13 @@ class ProductBuilderSpec extends ObjectBehavior
 
     function it_adds_attribute_to_product_if_already_exists(
         $attributeRepository,
-        $attributeValueRepository,
+        $attributeValueFactory,
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($attribute);
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
         $attributeValue->setValue(2013)->shouldBeCalled();
@@ -66,15 +69,17 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_creates_attribute_if_it_does_not_exist(
+        FactoryInterface $attributeFactory,
         $attributeRepository,
-        $attributeValueRepository,
+        $attributeFactory,
+        $attributeValueFactory,
         $productManager,
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
-        $attributeRepository->createNew()->shouldBeCalled()->willReturn($attribute);
+        $attributeFactory->createNew()->shouldBeCalled()->willReturn($attribute);
 
         $attribute->setName('collection')->shouldBeCalled();
         $attribute->setPresentation('collection')->shouldBeCalled();
@@ -82,7 +87,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $productManager->persist($attribute)->shouldBeCalled();
         $productManager->flush($attribute)->shouldBeCalled();
 
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
         $attributeValue->setValue(2013)->shouldBeCalled();

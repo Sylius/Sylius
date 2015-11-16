@@ -17,6 +17,7 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,11 +28,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
-     *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $itemRepository;
+    protected $itemFactory;
 
     /**
      * Variant repository.
@@ -41,14 +40,12 @@ class AddProductAction implements PromotionActionInterface
     protected $variantRepository;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $itemRepository
+     * @param FactoryInterface $itemFactory
      * @param RepositoryInterface $variantRepository
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemFactory    = $itemFactory;
         $this->variantRepository = $variantRepository;
     }
 
@@ -120,7 +117,7 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        $promotionItem = $this->itemRepository->createNew();
+        $promotionItem = $this->itemFactory->createNew();
         $promotionItem->setVariant($variant);
         $promotionItem->setQuantity((int) $configuration['quantity']);
         $promotionItem->setUnitPrice((int) $configuration['price']);

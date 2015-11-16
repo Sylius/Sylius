@@ -17,7 +17,7 @@ use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
@@ -26,9 +26,9 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class ArchetypeBuilderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeValueRepository)
+    function let(FactoryInterface $attributeValueFactory)
     {
-        $this->beConstructedWith($attributeValueRepository);
+        $this->beConstructedWith($attributeValueFactory);
     }
 
     function it_is_initializable()
@@ -52,7 +52,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
     }
 
     function it_assigns_archetype_attributes_and_options_to_the_subject(
-        $attributeValueRepository,
+        $attributeValueFactory,
         ArchetypeInterface $archetype,
         ArchetypeSubjectInterface $subject,
         AttributeInterface $attribute,
@@ -65,7 +65,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $attribute->getName()->willReturn('test');
         $subject->getAttributeByName('test')->shouldBeCalled()->willReturn(null);
 
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
 
         $subject->getArchetype()->willReturn($archetype);
@@ -76,7 +76,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
     }
 
     function it_creates_new_values_only_for_non_existing_attributes(
-        $attributeValueRepository,
+        $attributeValueFactory,
         ArchetypeInterface $archetype,
         ArchetypeSubjectInterface $subject,
         AttributeInterface $attribute,
@@ -89,7 +89,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $attribute->getName()->willReturn('test');
         $subject->getAttributeByName('test')->shouldBeCalled()->willReturn($attributeValue);
 
-        $attributeValueRepository->createNew()->shouldNotBeCalled();
+        $attributeValueFactory->createNew()->shouldNotBeCalled();
         $attributeValue->setAttribute($attribute)->shouldNotBeCalled();
 
         $subject->getArchetype()->willReturn($archetype);
