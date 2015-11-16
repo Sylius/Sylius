@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\DependencyInjection;
 
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -211,6 +212,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchIndex')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('log')
@@ -220,6 +222,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchLog')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                     ->end()

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -98,6 +99,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Taxonomy\Model\Taxonomy')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -111,6 +113,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue('Sylius\Component\Taxonomy\Model\TaxonomyTranslation')->end()
                                         ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                         ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -136,6 +139,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Taxonomy\Model\Taxon')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\TaxonomyBundle\Controller\TaxonController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -148,6 +152,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue('Sylius\Component\Taxonomy\Model\TaxonTranslation')->end()
                                         ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                         ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()

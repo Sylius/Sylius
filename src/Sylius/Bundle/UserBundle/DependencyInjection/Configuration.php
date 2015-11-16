@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -147,6 +148,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\Customer')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\CustomerController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -166,6 +168,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\User')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\UserController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -181,6 +184,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\UserOAuth')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('group')
@@ -189,6 +193,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\Group')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
