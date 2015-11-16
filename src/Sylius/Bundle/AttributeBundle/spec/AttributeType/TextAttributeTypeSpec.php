@@ -25,7 +25,7 @@ class TextAttributeTypeSpec extends ObjectBehavior
 
     function it_implements_attribute_type_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\Model\AttributeTypeInterface');
+        $this->shouldImplement('Sylius\Component\Attribute\AttributeType\AttributeTypeInterface');
     }
 
     function its_storage_type_is_text()

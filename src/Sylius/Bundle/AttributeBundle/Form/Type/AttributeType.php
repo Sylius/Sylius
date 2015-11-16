@@ -61,8 +61,7 @@ class AttributeType extends AbstractResourceType
                 'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
                 'label' => 'sylius.form.attribute.presentation',
             ))
-            ->add('type', 'choice', array(
-                'choices' => AttributeTypes::getChoices(),
+            ->add('type', 'sylius_attribute_type_choice', array(
                 'label' => 'sylius.form.attribute.type',
             ))
             ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory()))

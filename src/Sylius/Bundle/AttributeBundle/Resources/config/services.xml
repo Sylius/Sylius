@@ -18,12 +18,33 @@
 
     <parameters>
         <parameter key="sylius.event_subscriber.attribute.load_metadata.class">Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber</parameter>
+
+        <parameter key="sylius.form.type.attribute_type_choice.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType</parameter>
+        <parameter key="sylius.registry.attribute_type.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\TextAttributeTypeType</parameter>
     </parameters>
 
     <services>
         <service id="sylius.event_subscriber.attribute.load_metadata" class="%sylius.event_subscriber.attribute.load_metadata.class%">
             <tag name="doctrine.event_subscriber" />
             <argument>%sylius.attribute.subjects%</argument>
+        </service>
+
+        <service id="sylius.registry.attribute_type" class="%sylius.registry.attribute_type.class%">
+            <argument>Sylius\Component\Attribute\AttributeType\AttributeTypeInterface</argument>
+        </service>
+        <service id="sylius.form.type.attribute_type_choice" class="%sylius.form.type.attribute_type_choice.class%">
+            <argument>%sylius.attribute.attribute_types%</argument>
+            <tag name="form.type" alias="sylius_attribute_type_choice" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.text" class="%sylius.attribute.attribute_type.text.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="text" label="Text attribute type" />
+        </service>
+        <service id="sylius.form.type.attribute_type.text" class="%sylius.form.type.attribute_type.text.class%">
+            <tag name="form.type" alias="sylius_attribute_type_text" />
         </service>
     </services>
 

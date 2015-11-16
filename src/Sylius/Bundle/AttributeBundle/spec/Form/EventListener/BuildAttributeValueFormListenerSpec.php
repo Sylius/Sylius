@@ -13,7 +13,10 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,9 +26,9 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildAttributeValueFormListenerSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    function let(FormFactoryInterface $formFactory, ServiceRegistryInterface $attributeTypeRegistry)
     {
-        $this->beConstructedWith($formFactory, 'server');
+        $this->beConstructedWith($formFactory, $attributeTypeRegistry, 'server');
     }
 
     function it_subscribes_to_pre_set_data_event()
@@ -33,75 +36,44 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildForm'));
     }
 
-    function it_builds_form_with_attribute_and_value_when_new_product_attribute(
-        FormEvent $event,
+    function it_builds_form_with_attribute_and_value_for_new_product_attribute(
+        $formFactory,
         Form $form,
         Form $valueField,
-        $formFactory
+        FormEvent $event
     ) {
         $event->getData()->willReturn(null);
         $event->getForm()->willReturn($form);
 
-        $formFactory->createNamed('value', 'text', null, Argument::any())->willReturn($valueField)->shouldBeCalled();
+        $formFactory->createNamed('value', 'sylius_attribute_type_text', null, Argument::type('array'))->willReturn($valueField);
         $form->add($valueField)->shouldBeCalled()->willReturn($form);
 
         $this->buildForm($event);
     }
 
     function it_builds_value_field_base_on_product_attribute(
-        FormEvent $event,
+        $attributeTypeRegistry,
+        $formFactory,
+        AttributeInterface $productAttribute,
+        AttributeTypeInterface $productAttributeType,
+        AttributeValueInterface $productAttributeValue,
         Form $form,
-        AttributeValueInterface $productAttribute,
         Form $valueField,
-        $formFactory
+        FormEvent $event
     ) {
-        $productAttribute->getType()->willReturn('checkbox');
-        $productAttribute->getName()->willReturn('My name');
-        $productAttribute->getConfiguration()->willReturn(array());
-        $productAttribute->getValue()->willReturn(true);
-
-        $event->getData()->willReturn($productAttribute);
+        $event->getData()->willReturn($productAttributeValue);
         $event->getForm()->willReturn($form);
 
-        $formFactory->createNamed('value', 'checkbox', null, array('label' => 'My name', 'auto_initialize' => false))->willReturn($valueField)->shouldBeCalled();
+        $productAttributeValue->getAttribute()->willReturn($productAttribute);
+        $productAttribute->getType()->willReturn('text');
 
-        $form->add($valueField)->shouldBeCalled()->willReturn($form);
+        $attributeTypeRegistry->get('text')->willReturn($productAttributeType);
+        $productAttributeType->getFormType()->willReturn('text_form');
+        $productAttributeValue->getValue()->willReturn('Test');
 
-        $this->buildForm($event);
-    }
+        $formFactory->createNamed('value', 'text_form', array('value' => 'Test'), Argument::type('array'))->willReturn($valueField);
 
-    function it_builds_options_base_on_product_attribute(
-        FormEvent $event,
-        Form $form,
-        AttributeValueInterface $productAttribute,
-        Form $valueField,
-        $formFactory
-    ) {
-        $productAttribute->getType()->willReturn('choice');
-        $productAttribute->getValue()->willReturn(array());
-        $productAttribute->getConfiguration()->willReturn(array(
-            'choices' => array(
-                'red'  => 'Red',
-                'blue' => 'Blue'
-            )
-        ));
-        $productAttribute->getName()->willReturn('My name');
-
-        $event->getData()->willReturn($productAttribute);
-        $event->getForm()->willReturn($form);
-
-        $formFactory
-            ->createNamed(
-                'value',
-                'choice',
-                null,
-                array('label' => 'My name', 'auto_initialize' => false, 'choices' => array('red' => 'Red', 'blue' => 'Blue'))
-            )
-            ->willReturn($valueField)
-            ->shouldBeCalled()
-        ;
-
-        $form->add($valueField)->shouldBeCalled()->willReturn($form);
+        $form->add($valueField)->shouldBeCalled();
 
         $this->buildForm($event);
     }

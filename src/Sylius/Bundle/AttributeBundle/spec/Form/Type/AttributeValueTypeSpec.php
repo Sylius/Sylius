@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -25,9 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AttributeValueTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(ServiceRegistryInterface $attributeTypeRegistry)
     {
-        $this->beConstructedWith('AttributeValue', array('sylius'), 'server');
+        $this->beConstructedWith('AttributeValue', array('sylius'), 'server', $attributeTypeRegistry);
     }
 
     function it_is_initializable()

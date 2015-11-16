@@ -11,47 +11,42 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
 
-use Sylius\Component\Attribute\Model\AttributeTypes;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * Form event listener that builds product property form dynamically based on product data.
- *
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Liverbool <liverbool@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class BuildAttributeValueFormListener implements EventSubscriberInterface
 {
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     protected $factory;
 
     /**
-     * Attributes subject name.
-     *
+     * @var ServiceRegistryInterface
+     */
+    protected $attributeTypeRegistry;
+
+    /**
      * @var string
      */
     protected $subjectName;
 
     /**
-     * Constructor.
-     *
-     * @param FormFactoryInterface $factory
-     * @param string               $subjectName
+     * @param FormFactoryInterface     $factory
+     * @param ServiceRegistryInterface $attributeTypeRegistry
+     * @param string                   $subjectName
      */
-    public function __construct(FormFactoryInterface $factory, $subjectName)
+    public function __construct(FormFactoryInterface $factory, ServiceRegistryInterface $attributeTypeRegistry, $subjectName)
     {
         $this->factory = $factory;
         $this->subjectName = $subjectName;
+        $this->attributeTypeRegistry = $attributeTypeRegistry;
     }
 
     /**
@@ -59,65 +54,31 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'buildForm');
+        return array(
+            FormEvents::PRE_SET_DATA => 'buildForm'
+        );
     }
 
     /**
-     * Builds proper product form after setting the product.
-     *
      * @param FormEvent $event
      */
     public function buildForm(FormEvent $event)
     {
         $attributeValue = $event->getData();
         $form = $event->getForm();
+        $options = array('label' => false, 'auto_initialize' => false);
 
         if (null === $attributeValue) {
-            $form->add($this->factory->createNamed('value', 'text', null, array(
-                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName),
-                'auto_initialize' => false,
-            )));
+            $form->add($this->factory->createNamed('value', 'sylius_attribute_type_text', null, $options));
 
             return;
         }
 
-        $options = array('label' => $attributeValue->getName(), 'auto_initialize' => false);
-
-        if (is_array($attributeValue->getConfiguration())) {
-            $options = array_merge($options, $attributeValue->getConfiguration());
-        }
-
-        $this->verifyValue($attributeValue);
+        $attribute = $attributeValue->getAttribute();
+        $attributeType = $this->attributeTypeRegistry->get($attribute->getType());
 
         $form
-            ->add($this->factory->createNamed('value', $attributeValue->getType(), null, $options))
+            ->add($this->factory->createNamed('value', $attributeType->getFormType(), array('value' => $attributeValue->getValue()), $options))
         ;
-    }
-
-    /**
-     * Verify value before set to form.
-     *
-     * @param AttributeValueInterface $attributeValue
-     */
-    protected function verifyValue(AttributeValueInterface $attributeValue)
-    {
-        switch ($attributeValue->getType()) {
-
-            case AttributeTypes::CHECKBOX:
-                if (!is_bool($attributeValue->getValue())) {
-                    $attributeValue->setValue(false);
-                }
-
-                break;
-
-            case AttributeTypes::MONEY:
-            case AttributeTypes::NUMBER:
-            case AttributeTypes::PERCENTAGE:
-                if (!is_numeric($attributeValue->getValue())) {
-                    $attributeValue->setValue(null);
-                }
-
-                break;
-        }
     }
 }
