@@ -86,6 +86,7 @@
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
         <parameter key="sylius.a2lix_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider</parameter>
+        <parameter key="sylius.event_subscriber.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleSubscriber</parameter>
 
         <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
 
@@ -530,6 +531,12 @@
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
+        </service>
+
+        <service id="sylius.event_subscriber.locale" class="%sylius.event_subscriber.locale.class%">
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.channel_aware_locale_provider" />
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 

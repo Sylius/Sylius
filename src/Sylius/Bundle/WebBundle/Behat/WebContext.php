@@ -80,10 +80,16 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
 
     /**
      * @Given /^I am on the store homepage$/
+     * @Given /^I am on the store homepage using "([^"]*)" channel$/
      */
-    public function iAmOnTheStoreHomepage()
+    public function iAmOnTheStoreHomepage($channelCode = null)
     {
-        $this->getSession()->visit($this->generateUrl('sylius_homepage'));
+        if ($channelCode != null) {
+            $context = $this->getService('router')->getContext();
+            $channel = $this->getService('sylius.repository.channel')->findOneBy(array('code' => $channelCode));
+            $context->setHost($channel->getUrl());
+        }
+        $this->getSession()->visit($this->generateUrl('sylius_homepage', array(), true));
     }
 
     /**
@@ -355,8 +361,8 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
     {
-        $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
-        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
+        $this->assertSession()->elementExists('css', '#'.$table." tr[data-customer='$customer']");
+        $this->assertSession()->elementNotExists('css', '#'.$table." tr[data-customer='$customer'] form input[value=".strtoupper($button).']');
     }
 
     /**
@@ -409,6 +415,10 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $text = 'Welcome to Sylius';
 
         switch ($name) {
+            case 'Spanish':
+            case 'Spanish (Spain)':
+                $text = 'Bienvenido a Sylius';
+            break;
             case 'Polish':
             case 'Polish (Poland)':
                 $text = 'Witaj w Sylius';
@@ -590,7 +600,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
         $column = null;
@@ -721,7 +731,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     protected function getFormCollectionDiv(DocumentElement $page, $collectionName)
     {
-        return $page->find('css', 'div[data-form-type="collection"][id*="'. $collectionName .'"]');
+        return $page->find('css', 'div[data-form-type="collection"][id*="'.$collectionName.'"]');
     }
 
     /**
