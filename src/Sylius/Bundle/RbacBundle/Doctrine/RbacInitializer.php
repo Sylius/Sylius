@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\RbacBundle\Doctrine;
 
 use Doctrine\ORM\NonUniqueResultException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -24,6 +25,7 @@ class RbacInitializer
     private $permissions;
     private $permissionsHierarchy;
     private $permissionManager;
+    private $permissionFactory;
     private $permissionRepository;
 
     private $permissionsByCode = array(
@@ -33,25 +35,30 @@ class RbacInitializer
     private $roles;
     private $rolesHierarchy;
     private $roleManager;
+    private $roleFactory;
     private $roleRepository;
 
     public function __construct(
         array $permissions,
         array $permissionsHierarchy,
         $permissionManager,
+        FactoryInterface $permissionFactory,
         RepositoryInterface $permissionRepository,
         array $roles,
         array $rolesHierarchy,
         $roleManager,
+        FactoryInterface $roleFactory,
         RepositoryInterface $roleRepository
     ) {
         $this->permissions = $permissions;
         $this->permissionsHierarchy = $permissionsHierarchy;
+        $this->permissionFactory = $permissionFactory;
         $this->permissionManager = $permissionManager;
         $this->permissionRepository = $permissionRepository;
 
         $this->roles = $roles;
         $this->rolesHierarchy = $rolesHierarchy;
+        $this->roleFactory = $roleFactory;
         $this->roleManager = $roleManager;
         $this->roleRepository = $roleRepository;
     }
@@ -71,7 +78,7 @@ class RbacInitializer
     protected function initializePermissions(OutputInterface $output = null)
     {
         if (null === $root = $this->permissionRepository->findOneBy(array('code' => 'root'))) {
-            $root = $this->permissionRepository->createNew();
+            $root = $this->permissionFactory->createNew();
             $root->setCode('root');
             $root->setDescription('Root');
 
@@ -83,7 +90,7 @@ class RbacInitializer
 
         foreach ($this->permissions as $code => $description) {
             if (null === $permission = $this->permissionRepository->findOneBy(array('code' => $code))) {
-                $permission = $this->permissionRepository->createNew();
+                $permission = $this->permissionFactory->createNew();
                 $permission->setCode($code);
                 $permission->setDescription($description);
                 $permission->setParent($root);
@@ -114,7 +121,7 @@ class RbacInitializer
         }
 
         if (null === $root = $this->roleRepository->findOneBy(array('code' => 'root'))) {
-            $root = $this->roleRepository->createNew();
+            $root = $this->roleFactory->createNew();
             $root->setCode('root');
             $root->setName('Root');
 
@@ -128,7 +135,7 @@ class RbacInitializer
 
         foreach ($this->roles as $code => $data) {
             if (null === $role = $this->roleRepository->findOneBy(array('code' => $code))) {
-                $role = $this->roleRepository->createNew();
+                $role = $this->roleFactory->createNew();
                 $role->setCode($code);
                 $role->setName($data['name']);
                 $role->setDescription($data['description']);

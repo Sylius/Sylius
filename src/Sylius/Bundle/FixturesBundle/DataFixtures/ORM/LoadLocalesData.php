@@ -35,12 +35,12 @@ class LoadLocalesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $localeRepository = $this->getLocaleRepository();
+        $localeFactory = $this->getLocaleFactory();
 
         $locales = array_merge($this->locales, array($this->defaultLocale => true));
 
         foreach ($locales as $code => $enabled) {
-            $locale = $localeRepository->createNew();
+            $locale = $localeFactory->createNew();
             $locale->setCode($code);
             $locale->setEnabled($enabled);
 

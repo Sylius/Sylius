@@ -77,7 +77,7 @@ class LoadProductAttributeData extends DataFixture
     protected function createAttribute($name, array $presentationTranslations)
     {
         /* @var $attribute AttributeInterface */
-        $attribute = $this->getProductAttributeRepository()->createNew();
+        $attribute = $this->getProductAttributeFactory()->createNew();
 
         $attribute->setName($name);
 

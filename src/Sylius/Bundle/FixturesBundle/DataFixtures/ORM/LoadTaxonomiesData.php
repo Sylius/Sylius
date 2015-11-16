@@ -72,7 +72,7 @@ class LoadTaxonomiesData extends DataFixture
     protected function createTaxonomy(array $taxonomyName, array $taxonsArray)
     {
         /* @var $taxonomy TaxonomyInterface */
-        $taxonomy = $this->getTaxonomyRepository()->createNew();
+        $taxonomy = $this->getTaxonomyFactory()->createNew();
 
         foreach ($taxonomyName as $locale => $name) {
             $taxonomy->setCurrentLocale($locale);
@@ -86,7 +86,7 @@ class LoadTaxonomiesData extends DataFixture
 
         foreach ($taxonsArray as $taxonArray) {
             /* @var $taxon TaxonInterface */
-            $taxon = $this->getTaxonRepository()->createNew();
+            $taxon = $this->getTaxonFactory()->createNew();
             foreach ($taxonArray as $locale => $taxonName) {
                 $taxon->setCurrentLocale($locale);
                 $taxon->setFallbackLocale($locale);
