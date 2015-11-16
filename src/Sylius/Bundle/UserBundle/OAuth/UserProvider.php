@@ -16,6 +16,7 @@ use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
@@ -33,9 +34,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     /**
+     * @var FactoryInterface
+     */
+    protected $oauthFactory;
+
+    /**
      * @var RepositoryInterface
      */
     protected $oauthRepository;
+
+    /**
+     * @var FactoryInterface
+     */
+    protected $customerFactory;
 
     /**
      * @var RepositoryInterface
@@ -43,27 +54,42 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $customerRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $userFactory;
+
+    /**
      * @var ObjectManager
      */
     protected $userManager;
 
     /**
-     * @param RepositoryInterface     $customerRepository
+     * @param FactoryInterface $customerFactory
+     * @param RepositoryInterface $customerRepository
+     * @param FactoryInterface $userFactory
      * @param UserRepositoryInterface $userRepository
-     * @param RepositoryInterface     $oauthRepository
-     * @param ObjectManager           $userManager
-     * @param CanonicalizerInterface  $canonicalizer
+     * @param FactoryInterface $oauthFactory
+     * @param RepositoryInterface $oauthRepository
+     * @param ObjectManager $userManager
+     * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(
+        FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
+        FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
+        FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
     ) {
         parent::__construct($userRepository, $canonicalizer);
+
+        $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
+        $this->oauthFactory = $oauthFactory;
         $this->oauthRepository = $oauthRepository;
+        $this->userFactory = $userFactory;
         $this->userManager = $userManager;
     }
 
@@ -109,8 +135,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->userRepository->createNew();
-        $customer = $this->customerRepository->createNew();
+        $user = $this->userFactory->createNew();
+        $customer = $this->customerFactory->createNew();
         $user->setCustomer($customer);
 
         // set default values taken from OAuth sign-in provider account
@@ -140,7 +166,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     protected function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->createNew();
+        $oauth = $this->oauthFactory->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());

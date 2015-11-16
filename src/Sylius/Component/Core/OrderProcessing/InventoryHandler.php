@@ -21,8 +21,6 @@ use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
 /**
- * Order inventory handler.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -136,7 +134,7 @@ class InventoryHandler implements InventoryHandlerInterface
 
     protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
     {
-        $units = $this->inventoryUnitFactory->create($item->getVariant(), $quantity, $state);
+        $units = $this->inventoryUnitFactory->createForStockable($item->getVariant(), $quantity, $state);
 
         foreach ($units as $unit) {
             $item->addInventoryUnit($unit);

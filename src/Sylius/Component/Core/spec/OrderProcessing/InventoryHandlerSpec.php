@@ -19,11 +19,14 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\OrderProcessing\InventoryHandler
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryHandlerSpec extends ObjectBehavior
@@ -47,7 +50,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     }
 
     function it_creates_inventory_units_via_the_factory(
-        $inventoryUnitFactory,
+        InventoryUnitFactoryInterface $inventoryUnitFactory,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
@@ -56,11 +59,8 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection());
-
-        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)
-            ->shouldBeCalled()
-            ->willReturn(array($unit1, $unit2));
+        $item->getInventoryUnits()->willReturn(new ArrayCollection());
+        $inventoryUnitFactory->createForStockable($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->willReturn(array($unit1, $unit2));
 
         $item->addInventoryUnit($unit1)->shouldBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();
@@ -69,7 +69,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     }
 
     function it_creates_only_missing_inventory_units_via_the_factory(
-        $inventoryUnitFactory,
+        InventoryUnitFactoryInterface $inventoryUnitFactory,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
@@ -82,9 +82,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)
-            ->shouldBeCalled()
-            ->willReturn(array($unit2));
+        $inventoryUnitFactory->createForStockable($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->willReturn(array($unit2));
 
         $item->addInventoryUnit($unit1)->shouldNotBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();

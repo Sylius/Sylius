@@ -13,6 +13,7 @@ namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -22,6 +23,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGenerator implements CouponGeneratorInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    protected $couponFactory;
+
     /**
      * @var RepositoryInterface
      */
@@ -33,11 +39,13 @@ class CouponGenerator implements CouponGeneratorInterface
     protected $manager;
 
     /**
-     * @param RepositoryInterface    $repository
+     * @param FactoryInterface $couponFactory
+     * @param RepositoryInterface $repository
      * @param EntityManagerInterface $manager
      */
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
+    public function __construct(FactoryInterface $couponFactory, RepositoryInterface $repository, EntityManagerInterface $manager)
     {
+        $this->couponFactory = $couponFactory;
         $this->repository = $repository;
         $this->manager = $manager;
     }
@@ -49,7 +57,7 @@ class CouponGenerator implements CouponGeneratorInterface
     {
         $generatedCoupons = array();
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
-            $coupon = $this->repository->createNew();
+            $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
             $coupon->setUsageLimit($instruction->getUsageLimit());

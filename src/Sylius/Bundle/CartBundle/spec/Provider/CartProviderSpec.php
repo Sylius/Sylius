@@ -17,6 +17,7 @@ use Prophecy\Argument;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -28,10 +29,11 @@ class CartProviderSpec extends ObjectBehavior
     function let(
         CartContextInterface $context,
         ObjectManager $manager,
+        FactoryInterface $cartFactory,
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->beConstructedWith($context, $manager, $repository, $eventDispatcher);
+        $this->beConstructedWith($context, $manager, $cartFactory, $repository, $eventDispatcher);
     }
 
     function it_is_initializable()
@@ -60,11 +62,12 @@ class CartProviderSpec extends ObjectBehavior
     function it_creates_new_cart_if_there_is_no_identifier_in_storage(
         $context,
         $repository,
+        FactoryInterface $cartFactory,
         $eventDispatcher,
         CartInterface $cart
     ) {
         $context->getCurrentCartIdentifier()->willReturn(null);
-        $repository->createNew()->willReturn($cart);
+        $cartFactory->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
@@ -72,13 +75,14 @@ class CartProviderSpec extends ObjectBehavior
 
     function it_creates_new_cart_if_identifier_is_wrong(
         $context,
+        FactoryInterface $cartFactory,
         $repository,
         $eventDispatcher,
         CartInterface $cart
     ) {
         $context->getCurrentCartIdentifier()->willReturn(7);
         $repository->find(7)->shouldBeCalled()->willReturn(null);
-        $repository->createNew()->willReturn($cart);
+        $cartFactory->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);

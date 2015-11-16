@@ -16,37 +16,38 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\OrderProcessing\OrderShipmentFactory
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentFactorySpec extends ObjectBehavior
+class OrderShipmentFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $shipmentRepository)
+    function let(FactoryInterface $shipmentFactory)
     {
-        $this->beConstructedWith($shipmentRepository);
+        $this->beConstructedWith($shipmentFactory);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\ShipmentFactory');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\OrderShipmentFactory');
     }
 
     function it_implements_Sylius_shipment_factory_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface');
     }
 
     function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
-        $shipmentRepository,
+        FactoryInterface $shipmentFactory,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        ArrayCollection $shipments,
         InventoryUnitInterface $inventoryUnit
     ) {
 
-        $shipmentRepository
+        $shipmentFactory
             ->createNew()
             ->willReturn($shipment)
         ;
@@ -72,7 +73,7 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->createShipment($order);
+        $this->createForOrder($order);
     }
 
     function it_adds_new_inventory_units_to_existing_shipment(
@@ -123,6 +124,6 @@ class ShipmentFactorySpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->createShipment($order);
+        $this->createForOrder($order);
     }
 }

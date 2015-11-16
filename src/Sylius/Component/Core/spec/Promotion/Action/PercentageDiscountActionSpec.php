@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
+    function let(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
     {
-        $this->beConstructedWith($adjustmentRepository, $originator);
+        $this->beConstructedWith($adjustmentFactory, $originator);
     }
 
     function it_is_initializable()
@@ -40,14 +40,14 @@ class PercentageDiscountActionSpec extends ObjectBehavior
     }
 
     function it_applies_percentage_discount_as_promotion_adjustment(
-        $adjustmentRepository,
+        FactoryInterface $adjustmentFactory,
         $originator,
         OrderInterface $order,
         AdjustmentInterface $adjustment,
         PromotionInterface $promotion
     ) {
         $order->getPromotionSubjectTotal()->willReturn(10000);
-        $adjustmentRepository->createNew()->willReturn($adjustment);
+        $adjustmentFactory->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
 
         $adjustment->setAmount(-2500)->shouldBeCalled();

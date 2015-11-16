@@ -15,16 +15,18 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\OrderProcessing\PaymentProcessor
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PaymentProcessorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
+    function let(FactoryInterface $paymentFactory, ObjectManager $paymentManager)
     {
-        $this->beConstructedWith($paymentRepository, $paymentManager);
+        $this->beConstructedWith($paymentFactory, $paymentManager);
     }
 
     function it_is_initializable()
@@ -38,7 +40,7 @@ class PaymentProcessorSpec extends ObjectBehavior
     }
 
     function it_creates_payment(
-        $paymentRepository,
+        $paymentFactory,
         OrderInterface $order,
         PaymentInterface $payment
     ) {
@@ -47,7 +49,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         $order->getCurrency()->willReturn('EUR')->shouldBeCalled();
         $order->getTotal()->willReturn(100)->shouldBeCalled();
 
-        $paymentRepository->createNew()->willReturn($payment)->shouldBeCalled();
+        $paymentFactory->createNew()->willReturn($payment)->shouldBeCalled();
         $payment->setCurrency('EUR')->shouldBeCalled();
         $payment->setAmount(100)->shouldBeCalled();
 
@@ -58,7 +60,7 @@ class PaymentProcessorSpec extends ObjectBehavior
 
     function it_sets_not_started_payments_as_cancelled_while_creating_payment(
         $paymentManager,
-        $paymentRepository,
+        $paymentFactory,
         OrderInterface $order,
         PaymentInterface $existingPayment,
         PaymentInterface $payment
@@ -72,7 +74,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         $order->getCurrency()->willReturn('EUR')->shouldBeCalled();
         $order->getTotal()->willReturn(100)->shouldBeCalled();
 
-        $paymentRepository->createNew()->willReturn($payment)->shouldBeCalled();
+        $paymentFactory->createNew()->willReturn($payment)->shouldBeCalled();
         $payment->setCurrency('EUR')->shouldBeCalled();
         $payment->setAmount(100)->shouldBeCalled();
 

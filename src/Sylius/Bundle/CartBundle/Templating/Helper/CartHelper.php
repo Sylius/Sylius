@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CartBundle\Templating\Helper;
 
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\Helper\Helper;
@@ -30,9 +30,9 @@ class CartHelper extends Helper
     /**
      * Cart item manager.
      *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $cartItemRepository;
+    protected $cartItemFactory;
 
     /**
      * Form factory.
@@ -45,13 +45,13 @@ class CartHelper extends Helper
      * Constructor.
      *
      * @param CartProviderInterface $cartProvider
-     * @param RepositoryInterface   $cartItemRepository
+     * @param FactoryInterface   $cartItemFactory
      * @param FormFactoryInterface  $formFactory
      */
-    public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactoryInterface $formFactory)
+    public function __construct(CartProviderInterface $cartProvider, FactoryInterface $cartItemFactory, FormFactoryInterface $formFactory)
     {
         $this->cartProvider = $cartProvider;
-        $this->cartItemRepository = $cartItemRepository;
+        $this->cartItemFactory = $cartItemFactory;
         $this->formFactory = $formFactory;
     }
 
@@ -84,7 +84,7 @@ class CartHelper extends Helper
      */
     public function getItemFormView(array $options = array())
     {
-        $form = $this->formFactory->create('sylius_cart_item', $this->cartItemRepository->createNew(), $options);
+        $form = $this->formFactory->create('sylius_cart_item', $this->cartItemFactory->createNew(), $options);
 
         return $form->createView();
     }
