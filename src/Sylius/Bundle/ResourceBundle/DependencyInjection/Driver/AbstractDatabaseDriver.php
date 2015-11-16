@@ -78,6 +78,14 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
             }
         }
 
+        if (isset($classes['factory'])) {
+            $this->container->setDefinition(
+                $this->getContainerKey('factory'),
+                $this->getFactoryDefinition($classes['factory'], $classes['model'])
+            );
+
+        }
+
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
             $repositoryDefinition
@@ -137,6 +145,20 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
             ->setArguments(array($this->getConfigurationDefinition()))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
+
+        return $definition;
+    }
+
+    /**
+     * @param $factoryClass
+     * @param $modelClass
+     *
+     * @return Definition
+     */
+    protected function getFactoryDefinition($factoryClass, $modelClass)
+    {
+        $definition = new Definition($factoryClass);
+        $definition->setArguments(array($modelClass));
 
         return $definition;
     }

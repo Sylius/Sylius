@@ -26,16 +26,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
     /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
-    /**
      * @param mixed $id
      *
      * @return null|object

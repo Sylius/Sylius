@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -139,6 +140,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Promotion\Model\Promotion')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionBundle\Form\Type\PromotionType')->end()
                             ->end()
                         ->end()
@@ -148,6 +150,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Promotion\Model\Rule')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionBundle\Form\Type\RuleType')->end()
                             ->end()
                         ->end()
@@ -157,6 +160,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Promotion\Model\Action')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionBundle\Form\Type\ActionType')->end()
                             ->end()
                         ->end()
@@ -166,6 +170,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Promotion\Model\Coupon')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\PromotionBundle\Controller\CouponController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionBundle\Form\Type\CouponType')->end()
                             ->end()
                         ->end()
