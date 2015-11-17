@@ -12,8 +12,8 @@ Feature: User account homepage
          Then I should not see "My account"
 
     Scenario: Viewing the homepage of my account
-        Given I am on the store homepage
-          And I am logged in user
+        Given I am logged in user
+          And I am on the store homepage
          When I follow "My account"
          Then I should be on my account homepage
           And I should see "Welcome to your space"
