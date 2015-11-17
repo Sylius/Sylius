@@ -66,6 +66,16 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     /**
      * {@inheritdoc}
      */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    {
+        $criteria['translation.locale'] = $this->localeProvider->getCurrentLocale();
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $resource = parent::createNew();
