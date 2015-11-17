@@ -213,16 +213,16 @@
                         factory-service="sylius.settings.manager"
                         factory-method="loadSettings"
                         class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                        >
+                >
                     <argument>sylius_taxation</argument>
                 </service>
             </argument>
         </service>
-        <service id="sylius.order_processing.taxation_remover" class="%sylius.order_processing.taxation_remover.class%">
-        </service>
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.shipping_calculator" />
+        </service>
+        <service id="sylius.order_processing.taxation_remover" class="%sylius.order_processing.taxation_remover.class%">
         </service>
 
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
@@ -259,7 +259,7 @@
         </service>
         <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
             <argument type="service" id="sylius.price_calculator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" priority="-30"/>
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" />
             <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" />
         </service>
@@ -271,7 +271,9 @@
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
+            <argument type="service" id="sylius.order_processing.taxation_remover" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="removeTaxes" priority="-10"/>
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" priority="-50"/>
             <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
         </service>
@@ -300,7 +302,7 @@
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-50" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-40" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
@@ -358,6 +360,13 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+        </service>
+
+        <!-- event subscribers-->
+        <service id="sylius.shopper_context_change_subscriber" class="Sylius\Bundle\CoreBundle\EventSubscriber\ShopperContextChangeSubscriber">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="sylius.cart_provider"/>
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
