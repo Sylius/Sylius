@@ -4,6 +4,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,7 +26,9 @@ class OrderChannelListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderChannelListener');
     }
 
-    function it_throws_an_exception_if_event_subject_is_an_invaliad_order_instance(GenericEvent $event)
+    function it_throws_an_exception_if_event_subject_is_an_invaliad_order_instance(
+        CartEvent $event
+    )
     {
         $orderClass = new \stdClass();
         $exception = new UnexpectedTypeException(
@@ -33,18 +36,18 @@ class OrderChannelListenerSpec extends ObjectBehavior
             'Sylius\Component\Core\Model\OrderInterface'
         );
 
-        $event->getSubject()->shouldBeCalled()->willReturn($orderClass);
+        $event->getCart()->shouldBeCalled()->willReturn($orderClass);
 
         $this->shouldThrow($exception)->duringProcessOrderChannel($event);
     }
 
     function it_proccess_order_channel_successfully(
-        GenericEvent $event,
+        CartEvent $event,
         OrderInterface $order,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $event->getCart()->shouldBeCalled()->willReturn($order);
 
         $channelContext->getChannel()->shouldBeCalled()->willReturn($channel);
 

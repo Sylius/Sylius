@@ -291,7 +291,7 @@
         </service>
         <service id="sylius.listener.order_channel" class="%sylius.listener.order_channel.class%">
             <argument type="service" id="sylius.context.channel" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderChannel" />
+            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderChannel" />
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -37,11 +38,11 @@ class OrderChannelListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param CartEvent $event
      */
-    public function processOrderChannel(GenericEvent $event)
+    public function processOrderChannel(CartEvent $event)
     {
-        $order = $event->getSubject();
+        $order = $event->getCart();
 
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
