@@ -14,6 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationRemoverInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -21,9 +23,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderTaxationListenerSpec extends ObjectBehavior
 {
-    function let(TaxationProcessorInterface $taxationProcessor)
+    function let(
+        TaxationProcessorInterface $taxationProcessor,
+        TaxationRemoverInterface $taxationRemover
+    )
     {
-        $this->beConstructedWith($taxationProcessor);
+        $this->beConstructedWith($taxationProcessor, $taxationRemover);
     }
 
     function it_is_initializable()
@@ -36,12 +41,18 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(UnexpectedTypeException::class)
             ->duringApplyTaxes($event)
+        ;
+
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->duringRemoveTaxes($event)
         ;
     }
 
-    function it_calls_taxation_processor_on_order(
+
+    function it_delegates_apply_taxes_to_taxation_processor(
         TaxationProcessorInterface $taxationProcessor,
         GenericEvent $event,
         OrderInterface $order
@@ -51,5 +62,18 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         $order->calculateTotal()->shouldBeCalled();
 
         $this->applyTaxes($event);
+    }
+
+    function it_delegates_remove_taxes_to_taxation_remover(
+        TaxationRemoverInterface $taxationRemover,
+        GenericEvent $event,
+        OrderInterface $order
+    ) {
+        $event->getSubject()->willReturn($order);
+
+        $taxationRemover->removeTaxes($order)->shouldBeCalled();
+        $order->calculateTotal()->shouldBeCalled();
+
+        $this->removeTaxes($event);
     }
 }
