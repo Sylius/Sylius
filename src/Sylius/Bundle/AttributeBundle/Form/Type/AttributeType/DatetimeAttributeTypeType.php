@@ -9,22 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Form\Type;
+namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeTypeType extends AbstractType
+class DatetimeAttributeTypeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('value', 'checkbox');
+        $builder->add('value', 'datetime');
     }
 
     /**
@@ -32,6 +34,6 @@ class CheckboxAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_checkbox';
+        return 'sylius_attribute_type_datetime';
     }
 }

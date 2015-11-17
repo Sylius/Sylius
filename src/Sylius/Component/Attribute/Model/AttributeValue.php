@@ -48,6 +48,16 @@ class AttributeValue implements AttributeValueInterface
     protected $boolean;
 
     /**
+     * @var int
+     */
+    protected $integer;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dateTime;
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -172,6 +182,38 @@ class AttributeValue implements AttributeValueInterface
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInteger()
+    {
+        return $this->integer;
+    }
+
+    /**
+     * @param int $integer
+     */
+    public function setInteger($integer)
+    {
+        $this->integer = $integer;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setDateTime($dateTime)
+    {
+        $this->dateTime = $dateTime;
     }
 
     /**

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
+namespace spec\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -22,7 +22,7 @@ class TextAttributeTypeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\TextAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeTypeType');
     }
 
     function it_is_a_form_type()
@@ -32,7 +32,7 @@ class TextAttributeTypeTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
-        $builder->add('value', 'text', Argument::any())->willReturn($builder);
+        $builder->add('value', 'text')->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

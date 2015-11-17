@@ -23,10 +23,16 @@
         <parameter key="sylius.registry.attribute_type.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\TextAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeTypeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\CheckboxAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeTypeType</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\AttributeType\IntegerAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeTypeType</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeType</parameter>
     </parameters>
 
     <services>
@@ -55,6 +61,20 @@
         </service>
         <service id="sylius.form.type.attribute_type.checkbox" class="%sylius.form.type.attribute_type.checkbox.class%">
             <tag name="form.type" alias="sylius_attribute_type_checkbox" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.integer" class="%sylius.attribute.attribute_type.integer.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="integer" label="Integer" />
+        </service>
+        <service id="sylius.form.type.attribute_type.integer" class="%sylius.form.type.attribute_type.integer.class%">
+            <tag name="form.type" alias="sylius_attribute_type_integer" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.datetime" class="%sylius.attribute.attribute_type.datetime.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="datetime" label="Datetime" />
+        </service>
+        <service id="sylius.form.type.attribute_type.datetime" class="%sylius.form.type.attribute_type.datetime.class%">
+            <tag name="form.type" alias="sylius_attribute_type_datetime" />
         </service>
     </services>
 
