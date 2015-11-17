@@ -24,6 +24,9 @@
 
         <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\TextAttributeTypeType</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\CheckboxAttributeTypeType</parameter>
     </parameters>
 
     <services>
@@ -41,10 +44,17 @@
         </service>
 
         <service id="sylius.attribute.attribute_type.text" class="%sylius.attribute.attribute_type.text.class%">
-            <tag name="sylius.attribute.attribute_type" attribute-type="text" label="Text attribute type" />
+            <tag name="sylius.attribute.attribute_type" attribute-type="text" label="Text" />
         </service>
         <service id="sylius.form.type.attribute_type.text" class="%sylius.form.type.attribute_type.text.class%">
             <tag name="form.type" alias="sylius_attribute_type_text" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.checkbox" class="%sylius.attribute.attribute_type.checkbox.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="checkbox" label="Checkbox" />
+        </service>
+        <service id="sylius.form.type.attribute_type.checkbox" class="%sylius.form.type.attribute_type.checkbox.class%">
+            <tag name="form.type" alias="sylius_attribute_type_checkbox" />
         </service>
     </services>
 

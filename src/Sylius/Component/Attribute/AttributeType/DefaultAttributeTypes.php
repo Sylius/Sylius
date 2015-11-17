@@ -17,6 +17,7 @@ namespace Sylius\Component\Attribute\AttributeType;
 final class DefaultAttributeTypes
 {
     const TEXT = 'text';
+    const CHECKBOX = 'checkbox';
 
     /**
      * @return array
@@ -24,7 +25,8 @@ final class DefaultAttributeTypes
     public static function getTypes()
     {
         return array(
-            self::TEXT => 'sylius.attribute_type.text',
+            self::TEXT     => 'sylius.attribute_type.text',
+            self::CHECKBOX => 'sylius.attribute_type.checkbox',
         );
     }
 }
