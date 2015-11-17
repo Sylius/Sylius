@@ -43,7 +43,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var RouterInterface
      */
-    protected static $router;
+    private static $router;
 
     /**
      * @var array
