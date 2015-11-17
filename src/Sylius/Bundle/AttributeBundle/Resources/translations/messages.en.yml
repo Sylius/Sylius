@@ -8,4 +8,7 @@ sylius:
             choices: Choices
     attribute_type:
         checkbox: Checkbox
+        datetime: Datetime
+        integer: Integer
         text: Text
+        title: Attribute types

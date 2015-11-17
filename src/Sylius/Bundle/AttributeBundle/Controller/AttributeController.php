@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -33,6 +34,16 @@ class AttributeController extends ResourceController
         $attribute->setStorageType($attributeType->getStorageType());
 
         return $attribute;
+    }
+
+    /**
+     * @return Response
+     */
+    public function renderAttributeTypesAction()
+    {
+        $attributeTypes = $this->get('sylius.registry.attribute_type')->all();
+
+        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeTypes.html.twig', array('attributeTypes' => $attributeTypes));
     }
 
     /**

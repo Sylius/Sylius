@@ -38,3 +38,9 @@ sylius_backend_product_attribute_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_attribute_index
+
+sylius_backend_product_attribute_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeTypesAction
