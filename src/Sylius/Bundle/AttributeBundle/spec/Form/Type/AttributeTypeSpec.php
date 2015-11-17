@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Component\Attribute\Model\AttributeTypes;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -27,9 +28,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AttributeTypeSpec extends ObjectBehavior
 {
-    function let(FormBuilder $builder, FormFactoryInterface $formFactory)
+    function let(FormBuilder $builder, FormFactoryInterface $formFactory, ServiceRegistryInterface $attributeTypeRegistry)
     {
-        $this->beConstructedWith('Attribute', array('sylius'), 'server');
+        $this->beConstructedWith('Attribute', array('sylius'), 'server', $attributeTypeRegistry);
 
         $builder->getFormFactory()->willReturn($formFactory);
     }

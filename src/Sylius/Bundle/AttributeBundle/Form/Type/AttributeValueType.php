@@ -35,9 +35,9 @@ class AttributeValueType extends AbstractResourceType
     protected $attributeTypeRegistry;
 
     /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $subjectName
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param string                   $subjectName
      * @param ServiceRegistryInterface $attributeTypeRegistry
      */
     public function __construct($dataClass, array $validationGroups, $subjectName, ServiceRegistryInterface $attributeTypeRegistry)
@@ -60,20 +60,20 @@ class AttributeValueType extends AbstractResourceType
             ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->attributeTypeRegistry, $this->subjectName))
         ;
 
-        $this->buildAttributeValuePrototypes($builder);
+//        $this->buildAttributeValuePrototypes($builder);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars['prototypes'] = array();
-
-        foreach ($form->getConfig()->getAttribute('prototypes', array()) as $name => $prototype) {
-            $view->vars['prototypes'][$name] = $prototype->createView($view);
-        }
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function buildView(FormView $view, FormInterface $form, array $options)
+//    {
+//        $view->vars['prototypes'] = array();
+//
+//        foreach ($form->getConfig()->getAttribute('prototypes', array()) as $name => $prototype) {
+//            $view->vars['prototypes'][$name] = $prototype->createView($view);
+//        }
+//    }
 
     /**
      * {@inheritdoc}
@@ -82,24 +82,17 @@ class AttributeValueType extends AbstractResourceType
     {
         return sprintf('sylius_%s_attribute_value', $this->subjectName);
     }
-
-    /**
-     * Build attribute values' prototypes.
-     *
-     * @param FormBuilderInterface $builder
-     */
-    protected function buildAttributeValuePrototypes($builder)
-    {
-        $attributes = $builder->get('attribute')->getOption('choice_list')->getChoices();
-
-        $prototypes = array();
-        foreach ($attributes as $attribute) {
-            $config = array_merge(array(
-                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName),
-            ), $attribute->getConfiguration());
-            $prototypes[] = $builder->create('value', $attribute->getType(), $config)->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
-    }
+//
+//    /**
+//     * @param FormBuilderInterface $builder
+//     */
+//    protected function buildAttributeValuePrototypes($builder)
+//    {
+//        $prototypes = array();
+//        foreach ($this->attributeTypeRegistry->all() as $attributeTypeName => $attributeType) {
+//            $prototypes[$attributeTypeName] = $builder->create('value', $attributeType->getFormType(), array('label' => false, 'auto_initialize' => false))->getForm();
+//        }
+//
+//        $builder->setAttribute('prototypes', $prototypes);
+//    }
 }

@@ -12,9 +12,8 @@
 namespace Sylius\Component\Attribute\Model;
 
 /**
- * Attribute to subject relation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValue implements AttributeValueInterface
 {
@@ -39,12 +38,14 @@ class AttributeValue implements AttributeValueInterface
     protected $value;
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function __toString()
-    {
-        return $this->value;
-    }
+    protected $text;
+
+    /**
+     * @var bool
+     */
+    protected $boolean;
 
     /**
      * {@inheritdoc}
@@ -91,18 +92,13 @@ class AttributeValue implements AttributeValueInterface
      */
     public function getValue()
     {
-        if ($this->attribute && AttributeTypes::CHECKBOX === $this->attribute->getType()) {
-            return (Boolean) $this->value;
+        if (null === $this->attribute) {
+            return null;
         }
 
-        if ($this->attribute && AttributeTypes::CHOICE === $this->attribute->getType()) {
-            $configuration = $this->getConfiguration();
-            if (isset($configuration['choices'][$this->value])) {
-                return $configuration['choices'][$this->value];
-            }
-        }
+        $getter = 'get'.ucfirst($this->attribute->getStorageType());
 
-        return $this->value;
+        return $this->$getter();
     }
 
     /**
@@ -110,7 +106,10 @@ class AttributeValue implements AttributeValueInterface
      */
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->assertAttributeIsSet();
+
+        $setter = 'set'.ucfirst($this->attribute->getStorageType());
+        $this->$setter($value['value']);
     }
 
     /**
@@ -144,13 +143,45 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
+     * @return boolean
+     */
+    public function getBoolean()
+    {
+        return $this->boolean;
+    }
+
+    /**
+     * @param boolean $boolean
+     */
+    public function setBoolean($boolean)
+    {
+        $this->boolean = $boolean;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getConfiguration()
+    public function __toString()
     {
-        $this->assertAttributeIsSet();
+        $getter = 'get'.ucfirst($this->attribute->getStorageType());
 
-        return $this->attribute->getConfiguration();
+        return $this->$getter();
     }
 
     /**

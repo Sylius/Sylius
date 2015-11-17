@@ -66,9 +66,4 @@ interface AttributeValueInterface extends ResourceInterface
      * @return string
      */
     public function getType();
-
-    /**
-     * @return array
-     */
-    public function getConfiguration();
 }

@@ -52,6 +52,11 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $values;
 
     /**
+     * @var string
+     */
+    protected $storageType;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -170,6 +175,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * @param string $storageType
+     */
+    public function setStorageType($storageType)
+    {
+        $this->storageType = $storageType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStorageType()
+    {
+        return $this->storageType;
     }
 
     /**

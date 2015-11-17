@@ -24,7 +24,7 @@ class CheckboxAttributeType implements AttributeTypeInterface
      */
     public function getStorageType()
     {
-        return 'bool';
+        return 'boolean';
     }
 
     /**
@@ -40,6 +40,6 @@ class CheckboxAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::TEXT;
+        return DefaultAttributeTypes::CHECKBOX;
     }
 }

@@ -21,7 +21,8 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="value" column="value" type="text" nullable="true" />
+        <field name="text" column="text" type="text" nullable="true" />
+        <field name="boolean" column="boolean" type="boolean" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

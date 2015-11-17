@@ -12,34 +12,37 @@
 namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
 
 use Sylius\Component\Attribute\Model\AttributeTypes;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * Form event listener that builds choices for attribute form.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Liverbool <liverbool@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class BuildAttributeFormChoicesListener implements EventSubscriberInterface
 {
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;
 
     /**
-     * Constructor.
-     *
-     * @param FormFactoryInterface $factory
+     * @var ServiceRegistryInterface
      */
-    public function __construct(FormFactoryInterface $factory)
+    protected $attributeTypeRegistry;
+
+    /**
+     * @param FormFactoryInterface     $factory
+     * @param ServiceRegistryInterface $attributeTypeRegistry
+     */
+    public function __construct(FormFactoryInterface $factory, ServiceRegistryInterface $attributeTypeRegistry)
     {
         $this->factory = $factory;
+        $this->attributeTypeRegistry = $attributeTypeRegistry;
     }
 
     /**
@@ -48,71 +51,18 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA    => 'buildChoices',
-            FormEvents::PRE_SUBMIT      => 'buildConfiguration',
+            FormEvents::PRE_SET_DATA => 'setAttributeStorageType',
         );
     }
 
     /**
-     * Build configuration field for attribute form.
-     *
      * @param FormEvent $event
      */
-    public function buildConfiguration(FormEvent $event)
-    {
-        $data = $event->getData();
-        $data['configuration'] = array();
-
-        if (array_key_exists('type', $data) && AttributeTypes::CHOICE === $data['type'] && !empty($data['choices'])) {
-            $data['configuration'] = array(
-                'choices' => $data['choices'],
-            );
-        }
-
-        if (!$event->getForm()->has('configuration')) {
-            $event->getForm()->add(
-                $this->factory->createNamed('configuration', 'collection', null, array(
-                    'allow_add'         => true,
-                    'allow_delete'      => true,
-                    'by_reference'      => false,
-                    'auto_initialize'   => false,
-                ))
-            );
-        }
-
-        $event->setData($data);
-    }
-
-    /**
-     * Builds choices for attribute form.
-     *
-     * @param FormEvent $event
-     */
-    public function buildChoices(FormEvent $event)
+    public function setAttributeStorageType(FormEvent $event)
     {
         $attribute = $event->getData();
-        if (null === $attribute) {
-            return;
-        }
 
-        $data = null;
-        $config = $attribute->getConfiguration();
-
-        if (!empty($config['choices'])) {
-            $data = $config['choices'];
-        }
-
-        $event->getForm()->add(
-            $this->factory->createNamed('choices', 'collection', null, array(
-                'label'             => 'sylius.form.attribute.choices',
-                'type'              => 'text',
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
-                'mapped'            => false,
-                'data'              => $data,
-            )
-        ));
+        $attributeType = $this->attributeTypeRegistry->get($attribute->getType());
+        $attribute->setStorageType($attributeType->getStorageType());
     }
 }

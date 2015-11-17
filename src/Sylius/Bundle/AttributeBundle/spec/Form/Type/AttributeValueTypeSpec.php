@@ -23,6 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValueTypeSpec extends ObjectBehavior
 {
@@ -43,12 +44,8 @@ class AttributeValueTypeSpec extends ObjectBehavior
 
     function it_builds_attribute_types_prototype_and_passes_it_as_argument(
         FormBuilder $builder,
-        FormBuilder $fieldBuilder,
-        FormFactoryInterface $formFactory,
-        ChoiceListInterface $choiceList,
-        AttributeInterface $attribute
-    )
-    {
+        FormFactoryInterface $formFactory
+    ) {
         $builder->getFormFactory()->willReturn($formFactory);
         $builder->add('attribute', 'sylius_server_attribute_choice', Argument::any())->willReturn($builder);
 
@@ -56,30 +53,6 @@ class AttributeValueTypeSpec extends ObjectBehavior
             ->addEventSubscriber(Argument::any())
             ->willReturn($builder)
         ;
-
-        $attribute->getType()->willReturn('checkbox')->shouldBeCalled();
-        $attribute->getConfiguration()->willReturn(array('label' => 'sylius.form.attribute.server_attribute_value.value'))->shouldBeCalled();
-
-        $choiceList
-            ->getChoices()
-            ->willReturn(array($attribute))
-        ;
-        $fieldBuilder
-            ->getOption('choice_list')
-            ->willReturn($choiceList)
-        ;
-        $builder
-            ->get('attribute')
-            ->willReturn($fieldBuilder)
-        ;
-        $builder
-            ->create('value', 'checkbox', array('label' => 'sylius.form.attribute.server_attribute_value.value'))
-            ->shouldBeCalled()
-            ->willReturn($fieldBuilder)
-        ;
-        $fieldBuilder->getForm()->willReturn('Form for attribute');
-
-        $builder->setAttribute('prototypes', array(0 => 'Form for attribute'))->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }

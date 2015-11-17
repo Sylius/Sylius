@@ -14,35 +14,38 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type;
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeTypes;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Attribute type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeType extends AbstractResourceType
 {
     /**
-     * Subject name.
-     *
      * @var string
      */
     protected $subjectName;
 
     /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subjectName
+     * @var ServiceRegistryInterface
      */
-    public function __construct($dataClass, array $validationGroups, $subjectName)
+    protected $attributeTypeRegistry;
+
+    /**
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param string $subjectName
+     * @param ServiceRegistryInterface $attributeTypeRegistry
+     */
+    public function __construct($dataClass, array $validationGroups, $subjectName, ServiceRegistryInterface $attributeTypeRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
+        $this->attributeTypeRegistry = $attributeTypeRegistry;
     }
 
     /**
@@ -64,7 +67,7 @@ class AttributeType extends AbstractResourceType
             ->add('type', 'sylius_attribute_type_choice', array(
                 'label' => 'sylius.form.attribute.type',
             ))
-            ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory()))
+            ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory(), $this->attributeTypeRegistry))
         ;
     }
 

@@ -98,6 +98,12 @@ class AttributeSpec extends ObjectBehavior
         $this->getConfiguration()->shouldReturn(array('choices' => array('Red', 'Blue')));
     }
 
+    function its_storage_type_is_mutable()
+    {
+        $this->setStorageType('text');
+        $this->getStorageType()->shouldReturn('text');
+    }
+
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);
