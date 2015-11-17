@@ -67,6 +67,14 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
             $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($shippingTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+
+            $m++;
+        }
+
+        if (0 !== $paymentTotal = $order->getAdjustmentsTotal(AdjustmentInterface::PAYMENT_ADJUSTMENT)) {
+            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Payment Fee Total';
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($paymentTotal / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
         }
 
         $request->setResult($details);
