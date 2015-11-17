@@ -405,7 +405,9 @@ default:
             sessions:
                 default:
                     symfony2: ~
-        Behat\Symfony2Extension: ~
+        Behat\Symfony2Extension:
+            kernel:
+                debug: true
 
     gherkin:
         filters:
