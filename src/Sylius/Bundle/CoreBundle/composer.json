@@ -63,7 +63,7 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1",
         "fzaninotto/faker": "~1.2",
-        "symfony/form": "~2.3"
+        "symfony/form": "^2.7"
     },
     "suggest": {
         "sylius/web-bundle":      "Provides default web interface",

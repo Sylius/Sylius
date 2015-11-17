@@ -27,10 +27,10 @@
         "jms/serializer-bundle": "~0.13",
         "sylius/resource": "0.16.*",
         "sylius/storage": "0.16.*",
-        "symfony/expression-language": "~2.4",
-        "symfony/form": "~2.3",
+        "symfony/expression-language": "^2.7",
+        "symfony/form": "^2.7",
         "symfony/framework-bundle": "^2.7.5",
-        "symfony/twig-bundle": "~2.3",
+        "symfony/twig-bundle": "^2.7",
         "white-october/pagerfanta-bundle": "~1.0",
         "willdurand/hateoas-bundle": "~0.4"
     },
