@@ -501,6 +501,15 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then /^I should see select "([^"]*)" with "([^"]*)" option selected$/
+     */
+    public function iShouldSeeSelectWithOptionSelected($fieldName, $fieldOption)
+    {
+        $this->assertSession()->fieldExists(ucfirst($fieldName));
+        $this->assertSession()->fieldValueEquals($fieldName, $fieldOption);
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code
@@ -574,5 +583,25 @@ class WebContext extends DefaultContext
         $this->waitFor(function () use ($modalContainer) {
             return false === strpos($modalContainer->getAttribute('class'), 'in');
         });
+    }
+
+    /**
+     * @Given /^I am on the product attribute creation page with type "([^"]*)"$/
+     */
+    public function iAmOnTheProductAttributeCreationPageWithType($type)
+    {
+        $this->iAmOnThePage('product attribute creation');
+        $this->iShouldSeeSelectWithOptionSelected('Type', $type);
+    }
+
+    /**
+     * @Given /^I should not be able to edit "([^"]*)" (field|select)$/
+     */
+    public function iShouldNotBeAbleToEditSelect($name, $fieldType)
+    {
+        $select = $this->assertSession()->fieldExists($name);
+        if (null === $select->getAttribute('disabled')) {
+            throw new \Exception(sprintf('"%s" %s should be disabled', $name, $fieldType));
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductContext extends DefaultContext
@@ -183,44 +184,32 @@ class ProductContext extends DefaultContext
      */
     public function thereAreAttributes(TableNode $table)
     {
-        foreach ($table->getHash() as $data) {
-            $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
-            $additionalData = array(
-                'type'         => isset($data['type']) ? $data['type'] : 'text',
-                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
-            );
-            if ($choices) {
-                $additionalData['configuration'] = array('choices' => $choices);
-            }
-            $this->thereIsAttribute($data['name'], $additionalData);
+        foreach ($table->getHash() as $attribute) {
+            $this->thereIsAttribute($attribute['name'], $attribute['code'], $attribute['presentation'], $attribute['type']);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^There is attribute "([^""]*)"$/
-     * @Given /^I created attribute "([^""]*)"$/
+     * @Given /^There is attribute "([^""]*)" with type "([^""]*)"$/
+     * @Given /^I created attribute "([^""]*)" with type "([^""]*)"$/
      */
-    public function thereIsAttribute($name, $additionalData = array(), $flush = true)
+    public function thereIsAttribute($name, $type, $code = null, $presentation = null)
     {
-        $additionalData = array_merge(array(
-            'presentation' => $name,
-            'type' => 'text'
-        ), $additionalData);
+        $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
+        $presentation = (null === $presentation) ? $name : $name;
+        $storageType = (DefaultAttributeTypes::CHECKBOX === $type) ? 'boolean' : $type;
 
         $attribute = $this->getFactory('product_attribute')->createNew();
         $attribute->setName($name);
-
-        foreach ($additionalData as $key => $value) {
-            $attribute->{'set'.\ucfirst($key)}($value);
-        }
+        $attribute->setType($type);
+        $attribute->setCode($code);
+        $attribute->setStorageType($storageType);
+        $attribute->setPresentation($presentation);
 
         $manager = $this->getEntityManager();
         $manager->persist($attribute);
-        if ($flush) {
-            $manager->flush();
-        }
 
         return $attribute;
     }

@@ -59,21 +59,7 @@ class AttributeValueType extends AbstractResourceType
             ))
             ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->attributeTypeRegistry, $this->subjectName))
         ;
-
-//        $this->buildAttributeValuePrototypes($builder);
     }
-
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function buildView(FormView $view, FormInterface $form, array $options)
-//    {
-//        $view->vars['prototypes'] = array();
-//
-//        foreach ($form->getConfig()->getAttribute('prototypes', array()) as $name => $prototype) {
-//            $view->vars['prototypes'][$name] = $prototype->createView($view);
-//        }
-//    }
 
     /**
      * {@inheritdoc}
@@ -82,17 +68,4 @@ class AttributeValueType extends AbstractResourceType
     {
         return sprintf('sylius_%s_attribute_value', $this->subjectName);
     }
-//
-//    /**
-//     * @param FormBuilderInterface $builder
-//     */
-//    protected function buildAttributeValuePrototypes($builder)
-//    {
-//        $prototypes = array();
-//        foreach ($this->attributeTypeRegistry->all() as $attributeTypeName => $attributeType) {
-//            $prototypes[$attributeTypeName] = $builder->create('value', $attributeType->getFormType(), array('label' => false, 'auto_initialize' => false))->getForm();
-//        }
-//
-//        $builder->setAttribute('prototypes', $prototypes);
-//    }
 }

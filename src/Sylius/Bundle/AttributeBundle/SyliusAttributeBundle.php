@@ -42,7 +42,6 @@ class SyliusAttributeBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterAttributeTypePass());
     }
 
-
     /**
      * {@inheritdoc}
      */

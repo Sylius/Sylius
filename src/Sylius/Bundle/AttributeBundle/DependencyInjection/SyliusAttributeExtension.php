@@ -46,8 +46,10 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                 }
             }
 
-            $attributeTypeRegistry = $container->getDefinition('sylius.registry.attribute_type');
-            $formDefinition->addArgument($attributeTypeRegistry);
+            if (strstr($name, 'value')) {
+                $attributeTypeRegistry = $container->getDefinition('sylius.registry.attribute_type');
+                $formDefinition->addArgument($attributeTypeRegistry);
+            }
         }
 
         $configFiles = array(

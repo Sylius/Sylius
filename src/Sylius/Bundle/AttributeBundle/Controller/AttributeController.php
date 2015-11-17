@@ -43,7 +43,7 @@ class AttributeController extends ResourceController
     {
         $attributeTypes = $this->get('sylius.registry.attribute_type')->all();
 
-        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeTypes.html.twig', array('attributeTypes' => $attributeTypes));
+        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeTypesModal.html.twig', array('attributeTypes' => $attributeTypes));
     }
 
     /**

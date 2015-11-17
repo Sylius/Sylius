@@ -28,22 +28,15 @@ class AttributeType extends AbstractResourceType
     protected $subjectName;
 
     /**
-     * @var ServiceRegistryInterface
-     */
-    protected $attributeTypeRegistry;
-
-    /**
      * @param string $dataClass
      * @param array $validationGroups
      * @param string $subjectName
-     * @param ServiceRegistryInterface $attributeTypeRegistry
      */
-    public function __construct($dataClass, array $validationGroups, $subjectName, ServiceRegistryInterface $attributeTypeRegistry)
+    public function __construct($dataClass, array $validationGroups, $subjectName)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
-        $this->attributeTypeRegistry = $attributeTypeRegistry;
     }
 
     /**

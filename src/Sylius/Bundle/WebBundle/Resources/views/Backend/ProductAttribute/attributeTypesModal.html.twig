@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="list-group">
                     {% for name, attributeType in attributeTypes %}
-                        <a href="{{ path('sylius_backend_product_attribute_create', { 'type': name }) }}" class="list-group-item">
+                        <a href="{{ path('sylius_backend_product_attribute_create', { 'type': name }) }}" id="{{ name }}" class="list-group-item">
                             {% set label = 'sylius.attribute_type.' ~ attributeType.type %}
                             {{ label|trans }}
                         </a>
