@@ -30,7 +30,7 @@
     "require": {
         "php":                             ">=5.5.9",
 
-        "symfony/framework-bundle":        "~2.3",
+        "symfony/framework-bundle":        "^2.7.5",
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/resource-bundle":          "0.16.*",
         "sylius/money-bundle":             "0.16.*",

@@ -22,7 +22,7 @@
     "require": {
         "php":                           ">=5.5.9",
 
-        "symfony/framework-bundle":      "~2.3",
+        "symfony/framework-bundle":      "^2.7.5",
         "symfony-cmf/routing-bundle":    "~1.2",
         "winzou/state-machine-bundle":   "~0.2",
         "a2lix/translation-form-bundle": "~2.0",

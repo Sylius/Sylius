@@ -23,7 +23,7 @@
         "php":                      ">=5.5.9",
 
         "sylius/resource-bundle":               "0.16.*",
-        "symfony/framework-bundle":             "~2.3",
+        "symfony/framework-bundle":             "^2.7.5",
         "friendsofsymfony/oauth-server-bundle": "~1.4"
     },
     "require-dev": {
