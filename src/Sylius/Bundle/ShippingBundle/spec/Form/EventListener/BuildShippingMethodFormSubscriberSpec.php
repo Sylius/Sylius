@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\FormEvent;
@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
-    function let(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($calculatorRegistry, $factory);
     }
@@ -63,7 +63,7 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $shippingMethod->getCalculator()->shouldBeCalled()->willreturn('calculator_type');
         $shippingMethod->getConfiguration()->shouldBeCalled()->willreturn(array());
 
-        $calculatorRegistry->getCalculator('calculator_type')->shouldBeCalled()->willreturn($calculator);
+        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willreturn($calculator);
         $calculator->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
         $calculator->isConfigurable()->shouldBeCalled()->willreturn(true);
 
@@ -91,7 +91,7 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn(array('calculator' => 'calculator_type'));
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
-        $calculatorRegistry->getCalculator('calculator_type')->shouldBeCalled()->willreturn($calculator);
+        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willreturn($calculator);
         $calculator->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
         $calculator->isConfigurable()->shouldBeCalled()->willreturn(true);
 

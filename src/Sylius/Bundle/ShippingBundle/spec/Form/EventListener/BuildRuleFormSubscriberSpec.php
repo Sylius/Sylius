@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\Rule;
 use Symfony\Component\Form\FormEvent;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildRuleFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
+    function let(ServiceRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($checkerRegistry, $factory);
     }
@@ -62,7 +62,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $rule->getType()->shouldBeCalled()->willreturn('rule_type');
         $rule->getConfiguration()->shouldBeCalled()->willreturn(array());
 
-        $checkerRegistry->getChecker('rule_type')->shouldBeCalled()->willreturn($checker);
+        $checkerRegistry->get('rule_type')->shouldBeCalled()->willreturn($checker);
         $checker->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
 
         $factory->createNamed(
@@ -88,7 +88,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn(array('type' => 'rule_type'));
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
-        $checkerRegistry->getChecker('rule_type')->shouldBeCalled()->willreturn($checker);
+        $checkerRegistry->get('rule_type')->shouldBeCalled()->willreturn($checker);
         $checker->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
 
         $factory->createNamed(

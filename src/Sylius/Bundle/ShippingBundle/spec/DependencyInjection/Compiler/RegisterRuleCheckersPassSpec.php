@@ -30,8 +30,8 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
 
     function it_processes_the_calculators_services(ContainerBuilder $container, Definition $ruleChecker)
     {
-        $container->hasDefinition('sylius.shipping_rule_checker_registry')->shouldBeCalled()->willReturn(true);
-        $container->getDefinition('sylius.shipping_rule_checker_registry')->shouldBeCalled()->willReturn($ruleChecker);
+        $container->hasDefinition('sylius.registry.shipping_rule_checker')->shouldBeCalled()->willReturn(true);
+        $container->getDefinition('sylius.registry.shipping_rule_checker')->shouldBeCalled()->willReturn($ruleChecker);
 
         $container->findTaggedServiceIds('sylius.shipping_rule_checker')->shouldBeCalled()->willReturn(array(
             'rule_checker_id' => array(
@@ -43,7 +43,7 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
         ));
 
         $ruleChecker->addMethodCall(
-            'registerChecker',
+            'register',
             Argument::type('array')
         )->shouldBeCalled();
 

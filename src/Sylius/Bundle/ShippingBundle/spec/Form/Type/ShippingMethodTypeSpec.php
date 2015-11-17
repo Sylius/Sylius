@@ -15,8 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
 use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,15 +28,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(
-        CalculatorRegistryInterface $calculatorRegistry,
-        RuleCheckerRegistryInterface $checkerRegistry,
+        ServiceRegistryInterface $calculatorRegistry,
+        ServiceRegistryInterface $checkerRegistry,
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
 
         $builder->getFormFactory()->willReturn($factory);
-        $checkerRegistry->getCheckers()->willReturn(array());
+        $checkerRegistry->all()->willReturn(array());
     }
 
     function it_is_a_form_type()
@@ -47,7 +46,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
     {
-        $calculatorRegistry->getCalculators()->willReturn(array());
+        $calculatorRegistry->all()->willReturn(array());
 
         $builder->addEventSubscriber(
             Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber')
@@ -81,7 +80,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         $calculatorRegistry
     ) {
-        $calculatorRegistry->getCalculators()->willReturn(array());
+        $calculatorRegistry->all()->willReturn(array());
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
         $builder
@@ -135,7 +134,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $calculatorRegistry
-            ->getCalculators()
+            ->all()
             ->willReturn(
                 array(
                     'flat_rate'     => $flatRateCalculator,

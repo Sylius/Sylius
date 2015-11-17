@@ -13,8 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -31,26 +30,26 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * Calculator registry.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $calculatorRegistry;
 
     /**
      * Rule checker registry.
      *
-     * @var RuleCheckerRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $checkerRegistry;
 
     /**
      * Constructor.
      *
-     * @param string                       $dataClass
-     * @param array                        $validationGroups
-     * @param CalculatorRegistryInterface  $calculatorRegistry
-     * @param RuleCheckerRegistryInterface $checkerRegistry
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param ServiceRegistryInterface $calculatorRegistry
+     * @param ServiceRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -86,11 +85,11 @@ class ShippingMethodType extends AbstractResourceType
 
         $prototypes = array();
         $prototypes['rules'] = array();
-        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
+        foreach ($this->checkerRegistry->all() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
         $prototypes['calculators'] = array();
-        foreach ($this->calculatorRegistry->getCalculators() as $name => $calculator) {
+        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
             if (!$calculator->isConfigurable()) {
                 continue;
             }

@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RuleTypeSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $checkerRegistry)
+    function let(ServiceRegistryInterface $checkerRegistry)
     {
         $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
     }
