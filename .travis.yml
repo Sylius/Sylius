@@ -14,30 +14,23 @@ cache:
 
 sudo: false
 
+services:
+    - mongodb
+
 matrix:
     fast_finish: true
 
     include:
         - php: 5.6
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.6
-          env: TEST_SUITE=2
-
+          env: TEST_SUITE=no-javascript
         - php: 5.6
           env: TEST_SUITE=javascript
           sudo: required
 
         - php: 7.0
-          env: TEST_SUITE=1
-        - php: 7.0
-          env: TEST_SUITE=2
-
+          env: TEST_SUITE=no-javascript
         - php: 5.5
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.5
-          env: TEST_SUITE=2
+          env: TEST_SUITE=no-javascript
 
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
@@ -47,7 +40,7 @@ before_install:
 
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-mongodb; fi
+    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then travis/prepare/prepare-mongodb; fi
 
     - composer install --prefer-source --no-interaction
 
