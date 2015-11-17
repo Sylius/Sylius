@@ -78,7 +78,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
         $attributeType = $this->attributeTypeRegistry->get($attribute->getType());
 
         $form
-            ->add($this->factory->createNamed('value', $attributeType->getFormType(), array('value' => $attributeValue->getValue()), $options))
+            ->add($this->factory->createNamed('value', 'sylius_attribute_type_'.$attributeType->getType(), array('value' => $attributeValue->getValue()), $options))
         ;
     }
 }

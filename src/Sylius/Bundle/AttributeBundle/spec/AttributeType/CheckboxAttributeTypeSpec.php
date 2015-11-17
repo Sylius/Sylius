@@ -33,11 +33,6 @@ class CheckboxAttributeTypeSpec extends ObjectBehavior
         $this->getStorageType()->shouldReturn('boolean');
     }
 
-    function its_form_type_is_sylius_checkbox_attribute_type()
-    {
-        $this->getFormType()->shouldReturn('sylius_attribute_type_checkbox');
-    }
-
     function its_type_is_checkbox()
     {
         $this->getType()->shouldReturn('checkbox');

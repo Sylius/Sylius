@@ -24,10 +24,5 @@ interface AttributeTypeInterface
     /**
      * @return string
      */
-    public function getFormType();
-
-    /**
-     * @return string
-     */
     public function getType();
 }

@@ -30,14 +30,6 @@ class TextAttributeType implements AttributeTypeInterface
     /**
      * @return string
      */
-    public function getFormType()
-    {
-        return 'sylius_attribute_type_text';
-    }
-
-    /**
-     * @return string
-     */
     public function getType()
     {
         return DefaultAttributeTypes::TEXT;

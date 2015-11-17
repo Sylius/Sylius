@@ -33,11 +33,6 @@ class TextAttributeTypeSpec extends ObjectBehavior
         $this->getStorageType()->shouldReturn('text');
     }
 
-    function its_form_type_is_sylius_text_attribute_type()
-    {
-        $this->getFormType()->shouldReturn('sylius_attribute_type_text');
-    }
-
     function its_type_is_text()
     {
         $this->getType()->shouldReturn('text');

@@ -30,14 +30,6 @@ class CheckboxAttributeType implements AttributeTypeInterface
     /**
      * @return string
      */
-    public function getFormType()
-    {
-        return 'sylius_attribute_type_checkbox';
-    }
-
-    /**
-     * @return string
-     */
     public function getType()
     {
         return DefaultAttributeTypes::CHECKBOX;
