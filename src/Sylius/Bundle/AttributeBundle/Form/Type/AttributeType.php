@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -65,9 +63,9 @@ class AttributeType extends AbstractResourceType
                 'label' => 'sylius.form.attribute.presentation',
             ))
             ->add('type', 'sylius_attribute_type_choice', array(
-                'label' => 'sylius.form.attribute.type',
+                'label'    => 'sylius.form.attribute.type',
+                'disabled' => true,
             ))
-            ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory(), $this->attributeTypeRegistry))
         ;
     }
 

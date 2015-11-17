@@ -73,7 +73,8 @@ class AttributeTypeSpec extends ObjectBehavior
 
         $builder
             ->add('type', 'sylius_attribute_type_choice', array(
-                'label' => 'sylius.form.attribute.type'
+                'label'    => 'sylius.form.attribute.type',
+                'disabled' => true,
             ))
             ->shouldBeCalled()
             ->willReturn($builder)

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
+use Sylius\Bundle\AttributeBundle\Controller\AttributeController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
@@ -78,7 +79,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('model')->defaultValue(Attribute::class)->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->defaultValue(AttributeInterface::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(AttributeController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                             ->arrayNode('form')
