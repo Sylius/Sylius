@@ -12,20 +12,20 @@
 namespace spec\Sylius\Component\Shipping\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $registry)
+    function let(ServiceRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
@@ -54,7 +54,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
         $shippingMethod->getCategory()->shouldBeCalled();
         $shippingMethod->getRules()->shouldBeCalled()->willReturn(array($rule));
-        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
 
         $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(true);
 
@@ -75,7 +75,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
         $shippingMethod->getCategory()->shouldBeCalled();
         $shippingMethod->getRules()->shouldBeCalled()->willReturn(array($rule));
-        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
 
         $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(false);
 
