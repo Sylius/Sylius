@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -654,14 +655,12 @@ class CoreContext extends DefaultContext
         $session->set('_security_user', serialize($token));
         $session->save();
 
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            $this->visitPath('/');
+        }
+
         $this->getSession()->setCookie($session->getName(), $session->getId());
         $this->getService('security.token_storage')->setToken($token);
-//
-//        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
-//
-//        $this->fillField('Email', $email);
-//        $this->fillField('Password', 'sylius');
-//        $this->pressButton('Login');
     }
 
     /**
