@@ -53,7 +53,7 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "symfony/property-access": "~2.3"
+        "symfony/property-access": "^2.7"
     },
     "config": {
         "bin-dir": "bin"

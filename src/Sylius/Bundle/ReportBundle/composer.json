@@ -39,8 +39,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/form": "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/form": "^2.7",
+        "symfony/validator": "^2.7"
     },
     "config": {
         "bin-dir": "bin"
