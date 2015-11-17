@@ -23,7 +23,7 @@ final class ORMPurger implements PurgerInterface
     private $entityManager;
 
     /**
-     * @var QueryLogger
+     * @var QueryLoggerInterface
      */
     private $queryLogger;
 
@@ -35,9 +35,9 @@ final class ORMPurger implements PurgerInterface
     /**
      * @param PurgerInterface $purger
      * @param EntityManagerInterface $entityManager
-     * @param QueryLogger $queryLogger
+     * @param QueryLoggerInterface $queryLogger
      */
-    public function __construct(PurgerInterface $purger, EntityManagerInterface $entityManager, QueryLogger $queryLogger)
+    public function __construct(PurgerInterface $purger, EntityManagerInterface $entityManager, QueryLoggerInterface $queryLogger)
     {
         $this->purger = $purger;
         $this->entityManager = $entityManager;

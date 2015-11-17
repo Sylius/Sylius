@@ -56,11 +56,11 @@ class HookContext extends DefaultContext
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
         }
 
-        if (null === static::$ormPurger) {
-            static::$ormPurger = $this->getService('sylius.purger.orm_purger');
+        if (null === self::$ormPurger) {
+            self::$ormPurger = $this->getService('sylius.purger.orm_purger');
         }
 
-        static::$ormPurger->purge();
+        self::$ormPurger->purge();
 
         if ($isMySqlDriver) {
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");

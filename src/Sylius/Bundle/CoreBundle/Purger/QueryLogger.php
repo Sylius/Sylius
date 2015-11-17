@@ -2,12 +2,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Purger;
 
-use Doctrine\DBAL\Logging\SQLLogger;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class QueryLogger implements SQLLogger
+final class QueryLogger implements QueryLoggerInterface
 {
     /**
      * @var array
@@ -35,13 +33,16 @@ final class QueryLogger implements SQLLogger
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getLoggedQueries()
     {
         return $this->queries;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function clearLoggedQueries()
     {
         $this->queries = [];
