@@ -23,6 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class TaxonChoiceType extends AbstractType
 {
@@ -62,8 +63,13 @@ class TaxonChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            $taxons = $this->taxonRepository->getTaxonsAsList($options['taxonomy']);
+        $repository = $this->taxonRepository;
+        $choiceList = function (Options $options) use ($repository) {
+            $taxons = $repository->getNonRootTaxons();
+
+            if (null !== $options['taxonomy']) {
+                $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            }
 
             if (null !== $options['filter']) {
                 $taxons = array_filter($taxons, $options['filter']);
@@ -75,12 +81,10 @@ class TaxonChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList,
+                'taxonomy' => null,
+                'filter' => null,
             ))
-            ->setRequired(array(
-                'taxonomy',
-                'filter',
-            ))
-            ->setAllowedTypes('taxonomy', TaxonomyInterface::class)
+            ->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }

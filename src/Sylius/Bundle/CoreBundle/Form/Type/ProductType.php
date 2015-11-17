@@ -16,10 +16,9 @@ use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Product form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ProductType extends BaseProductType
 {
@@ -59,6 +58,9 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label'       => 'sylius.form.product.restricted_zone',
             ))
+            ->add('mainTaxon', 'sylius_taxon_choice', array(
+                'label' => 'sylius.form.product.main_taxon'
+             ))
         ;
     }
 }
