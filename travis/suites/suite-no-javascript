@@ -1,0 +1,28 @@
+#!/bin/bash
+bin/phpspec run -f dot
+
+bin/behat --strict -f progress -s account
+bin/behat --strict -f progress -s cart 
+bin/behat --strict -f progress -s currencies 
+bin/behat --strict -f progress -s dashboard 
+bin/behat --strict -f progress -s homepage 
+bin/behat --strict -f progress -s inventory 
+bin/behat --strict -f progress -s localization 
+bin/behat --strict -f progress -s oauth 
+bin/behat --strict -f progress -s reports 
+bin/behat --strict -f progress -s taxonomies 
+bin/behat --strict -f progress -s users 
+bin/behat --strict -f progress -s search
+bin/behat --strict -f progress -s checkout
+bin/behat --strict -f progress -s addressing
+bin/behat --strict -f progress -s emails
+bin/behat --strict -f progress -s orders
+bin/behat --strict -f progress -s payments
+bin/behat --strict -f progress -s pricing
+bin/behat --strict -f progress -s settings
+bin/behat --strict -f progress -s shipping
+bin/behat --strict -f progress -s taxation
+bin/behat --strict -f progress -s i18n
+bin/behat --strict -f progress -s channels
+bin/behat --strict -f progress -s products
+bin/behat --strict -f progress -s promotions
