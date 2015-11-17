@@ -52,6 +52,7 @@ sylius:
             id: ID
             title: Title
         product:
+            display_price: Display price
             restricted_zone: Restricted zone
             shipping_category: Shipping category
             short_description: Short description
@@ -109,6 +110,7 @@ sylius:
             images: Images
             on_hand: Current stock
             price: Price
+            display_price: Display price
             sku: SKU
             weight: Weight
             width: Width

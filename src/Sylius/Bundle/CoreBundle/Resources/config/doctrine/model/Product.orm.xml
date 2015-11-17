@@ -57,7 +57,7 @@
             </join-table>
         </many-to-many>
 
-        <gedmo:loggable />
+         <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

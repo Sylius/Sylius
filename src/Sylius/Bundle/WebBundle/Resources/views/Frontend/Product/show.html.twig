@@ -60,7 +60,11 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>{{ 'sylius.variant.price'|trans }}</th>
+                        <th>
+                            {% if product.masterVariant.displayPrice != false  %}
+                            {{ 'sylius.variant.price'|trans }}
+                            {% endif %}
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -79,7 +83,9 @@
                             {% endif %}
                         </td>
                         <td>
+                            {% if product.masterVariant.displayPrice != false %}
                             <span class="label label-success">{{ sylius_calculate_price(variant)|sylius_price }}</span>
+                            {% endif %}
                         </td>
                         <td>
                         {% if sylius_inventory_is_available(variant) %}
@@ -98,10 +104,12 @@
                 </div>
             {% endif %}
         {% else %}
+            {% if product.masterVariant.displayPrice != false  %}
             <h4>
                 <span class="label label-success pull-right">{{ sylius_calculate_price(product.masterVariant)|sylius_price }}</span>
                 {{ 'sylius.variant.price'|trans }}
             </h4>
+            {% endif %}
         {% endif %}
     </div>
     <div class="col-md-6 pull-right">

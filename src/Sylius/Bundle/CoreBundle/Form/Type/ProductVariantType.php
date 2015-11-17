@@ -64,6 +64,10 @@ class ProductVariantType extends BaseVariantType
                 'required' => false,
                 'label'    => 'sylius.form.variant.weight'
             ))
+            ->add('displayPrice', 'checkbox', array(
+                'required'    => false,
+                'label' => 'sylius.form.variant.display_price'
+            ))
         ;
     }
 }

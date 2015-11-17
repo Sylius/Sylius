@@ -719,6 +719,7 @@ sylius:
         create_header: New product
         archetype: Archetype
         description: Description
+        display_price: Display price
         generate_variants: Generate variants
         index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
         index_header: Products <small>Index of all products in your store</small>
