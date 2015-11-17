@@ -5,10 +5,10 @@ namespace Sylius\Bundle\CoreBundle\Tests;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Prophet;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class IntegrationTestCase extends WebTestCase
 {
@@ -21,9 +21,6 @@ abstract class IntegrationTestCase extends WebTestCase
     /** @var ContainerInterface */
     protected $container;
 
-    /** @var Client */
-    protected $client;
-
     /** @var  Prophet */
     protected $prophet;
 
@@ -34,9 +31,13 @@ abstract class IntegrationTestCase extends WebTestCase
     {
         parent::setUp();
 
+        $config = ['environment' => 'test', 'debug' => true];
+
+        self::$kernel = self::createKernel($config);
+        self::$kernel->boot();
+
         $this->prophet = new Prophet();
-        $this->client = $this->createClient();
-        $this->container = static::$kernel->getContainer();
+        $this->container = self::$kernel->getContainer();
         $this->entityManager = $this->container->get('doctrine.orm.entity_manager');
         $this->eventDispatcher = $this->container->get('event_dispatcher');
 
@@ -50,9 +51,15 @@ abstract class IntegrationTestCase extends WebTestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         $this->prophet->checkPredictions();
         $this->entityManager->rollback();
+
+        if (self::$kernel === null) {
+            return;
+        }
+
+        self::$kernel->shutdown();
+
+        parent::tearDown();
     }
 }

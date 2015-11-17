@@ -90,22 +90,18 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.listener.cart" class="%sylius.listener.cart.class%">
-            <tag name="kernel.event_subscriber" />
-            <argument type="service" id="sylius.manager.cart" />
-            <argument type="service" id="validator" />
-            <argument type="service" id="sylius.cart_provider" />
-        </service>
+        <!--<service id="sylius.listener.cart" class="%sylius.listener.cart.class%">-->
+            <!--<tag name="kernel.event_subscriber" />-->
+            <!--<argument type="service" id="sylius.manager.cart" />-->
+            <!--<argument type="service" id="validator" />-->
+            <!--<argument type="service" id="sylius.cart_provider" />-->
+        <!--</service>-->
 
         <service id="sylius.listener.cart_flash" class="%sylius.listener.cart_flash.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <call method="setMessages"/>
-        </service>
-
-        <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
         </service>
 
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">

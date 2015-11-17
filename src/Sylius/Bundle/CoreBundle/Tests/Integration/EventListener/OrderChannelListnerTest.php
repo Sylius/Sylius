@@ -25,26 +25,6 @@ class OrderChannelListenerTest extends IntegrationTestCase
     }
 
     /**
-     * Checks also if the currency has been set
-     *
-     * @TODO extract to SyliusCartEventIntegration tests
-     */
-    public function test_it_sets_channel_on_order()
-    {
-        /** @var OrderInterface $order */
-        $order = $this->prophet->prophesize(OrderInterface::class);
-
-        $event = new CartEvent($order->reveal());
-
-        // OrderChannelListener
-        $order->setChannel(Argument::any())->shouldBeCalled();
-        // OrderCurrencyListener
-        $order->setCurrency(Argument::any())->shouldBeCalled();
-
-        $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, $event);
-    }
-
-    /**
      * @return OrderChannelListener
      */
     private function getService()

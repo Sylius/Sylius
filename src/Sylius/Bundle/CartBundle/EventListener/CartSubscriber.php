@@ -12,10 +12,12 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -73,7 +75,7 @@ class CartSubscriber implements EventSubscriberInterface
             SyliusCartEvents::ITEM_ADD_INITIALIZE    => 'addItem',
             SyliusCartEvents::ITEM_REMOVE_INITIALIZE => 'removeItem',
             SyliusCartEvents::CART_CLEAR_INITIALIZE  => 'clearCart',
-            SyliusCartEvents::CART_SAVE_INITIALIZE   => 'saveCart',
+            SyliusCoreEvents::POST_CART_CHANGE       => ['saveCart', -254]
         );
     }
 
@@ -96,21 +98,23 @@ class CartSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param CartEvent $event
+     * @param Event $event
      */
-    public function clearCart(CartEvent $event)
+    public function clearCart(Event $event)
     {
-        $this->cartManager->remove($event->getCart());
+        $cart = $this->cartProvider->getCart();
+
+        $this->cartManager->remove($cart);
         $this->cartManager->flush();
         $this->cartProvider->abandonCart();
     }
 
     /**
-     * @param CartEvent $event
+     * @param Event $event
      */
-    public function saveCart(CartEvent $event)
+    public function saveCart(Event $event)
     {
-        $cart  = $event->getCart();
+        $cart  = $this->cartProvider->getCart();
 
         $errors = $this->validator->validate($cart);
         $valid  = 0 === count($errors);

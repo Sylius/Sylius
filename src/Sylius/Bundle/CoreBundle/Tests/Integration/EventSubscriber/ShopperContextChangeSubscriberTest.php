@@ -24,11 +24,23 @@ class ShopperContextChangeSubscriberTest extends IntegrationTestCase
 
     public function test_it_calls_internal_cart_change_events()
     {
-        $event = $this->prophet->prophesize(GenericEvent::class);
+        $this->eventDispatcher->dispatch(
+            SyliusCoreEvents::SHOPPER_CONTEXT_CHANGE
+        );
+    }
+
+    public function test_it_calls_pre()
+    {
+        $this->eventDispatcher->dispatch(
+            SyliusCoreEvents::PRE_CART_CHANGE
+        );
 
         $this->eventDispatcher->dispatch(
-            SyliusCoreEvents::SHOPPER_CONTEXT_CHANGE ,
-            $event->reveal()
+            SyliusCoreEvents::CART_CHANGE
+        );
+
+        $this->eventDispatcher->dispatch(
+            SyliusCoreEvents::POST_CART_CHANGE
         );
     }
 }

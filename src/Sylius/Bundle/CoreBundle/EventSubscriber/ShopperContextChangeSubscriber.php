@@ -55,36 +55,41 @@ class ShopperContextChangeSubscriber implements EventSubscriberInterface
 
     public function onPreCartChange()
     {
-        $cart = $this->cartProvider->getCart();
-
-        $cartEvent = new CartEvent($cart);
-        $this->eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
-            $cartEvent
-        );
+        var_dump('preCartChange');
+//        $cart = $this->cartProvider->getCart();
+//
+//        $cartEvent = new CartEvent($cart);
+//        $this->eventDispatcher->dispatch(
+//            SyliusCartEvents::CART_INITIALIZE,
+//            $cartEvent
+//        );
     }
 
     public function onCartChange()
     {
-        $cart = $this->cartProvider->getCart();
+        var_dump('onCartChange');
 
-        $cartEvent = new GenericEvent($cart);
-
-        $this->eventDispatcher->dispatch(
-            SyliusCartEvents::CART_CHANGE,
-            $cartEvent
-        );
+//        $cart = $this->cartProvider->getCart();
+//
+//        $cartEvent = new GenericEvent($cart);
+//
+//        $this->eventDispatcher->dispatch(
+//            SyliusCartEvents::CART_CHANGE,
+//            $cartEvent
+//        );
     }
 
     public function onPostCartChange()
     {
-        $cart = $this->cartProvider->getCart();
+        var_dump('postCartChange');
 
-        $cartEvent = new CartEvent($cart);
-
-        $this->eventDispatcher->dispatch(
-            SyliusCartEvents::CART_SAVE_INITIALIZE,
-            $cartEvent
-        );
+//        $cart = $this->cartProvider->getCart();
+//
+//        $cartEvent = new CartEvent($cart);
+//
+//        $this->eventDispatcher->dispatch(
+//            SyliusCartEvents::CART_SAVE_INITIALIZE,
+//            $cartEvent
+//        );
     }
 }

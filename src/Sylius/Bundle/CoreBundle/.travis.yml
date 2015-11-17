@@ -8,6 +8,7 @@ php:
 before_script: composer install --prefer-source --no-interaction
 
 script: bin/phpspec run -fpretty --verbose
+script: bin/phpunit -c app
 
 notifications:
   email: "travis-ci@sylius.org"

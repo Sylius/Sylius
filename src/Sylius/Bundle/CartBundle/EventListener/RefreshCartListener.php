@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -19,9 +21,19 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class RefreshCartListener
 {
-    public function refreshCart(GenericEvent $event)
+    /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    public function __construct(CartProviderInterface $cartProvider)
     {
-        $cart = $event->getSubject();
+        $this->cartProvider = $cartProvider;
+    }
+
+    public function refreshCart(Event $event)
+    {
+        $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof CartInterface) {
             throw new \InvalidArgumentException(
@@ -29,6 +41,8 @@ class RefreshCartListener
             );
         }
 
+        var_dump('refreshing cart!');
+        dump('refreshing cart!');
         $cart->calculateTotal();
     }
 }

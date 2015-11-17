@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Order pricing listener.
@@ -29,25 +30,34 @@ class OrderPricingListener
     private $priceCalculator;
 
     /**
+     * @var CartProviderInterface
+     */
+    private $cartProvider;
+
+    /**
      * Constructor.
      *
      * @param DelegatingCalculatorInterface $priceCalculator
      */
-    public function __construct(DelegatingCalculatorInterface $priceCalculator)
+    public function __construct(
+        DelegatingCalculatorInterface $priceCalculator,
+        CartProviderInterface $cartProvider
+    )
     {
         $this->priceCalculator = $priceCalculator;
+        $this->cartProvider = $cartProvider;
     }
 
     /**
      * Recalculate the order unit prices.
      *
-     * @param GenericEvent $event
+     * @param Event $event
      *
      * @throws UnexpectedTypeException
      */
-    public function recalculatePrices(GenericEvent $event)
+    public function recalculatePrices(Event $event)
     {
-        $order = $event->getSubject();
+        $order = $this->cartProvider->getCart();
 
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
