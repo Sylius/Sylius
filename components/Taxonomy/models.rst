@@ -4,116 +4,134 @@ Models
 Taxonomy is a list constructed from individual Taxons. Every taxonomy has one special taxon, which serves as a root of the tree.
 All taxons can have many child taxons, you can define as many of them as you need.
 
-A good examples of taxonomies are "Categories" and "Brands". Below you can see an example tree.
+Good examples of taxonomies are "Categories" and "Brands". Below you can see exemplary trees.
 
 .. code-block:: text
 
     | Categories
-    |--  T-Shirts
-    |    |-- Men
-    |    `-- Women
-    |--  Stickers
-    |--  Mugs
-    `--  Books
+    |\__T-Shirts
+    |   |\__Men
+    |    \__Women
+    |\__Stickers
+    |\__Mugs
+     \__Books
 
     | Brands
-    |-- SuperTees
-    |-- Stickypicky
-    |-- Mugland
-    `-- Bookmania
+    |\__SuperTees
+    |\__Stickypicky
+    |\__Mugland
+     \__Bookmania
+
+.. _component_taxonomy_model_taxonomy:
 
 Taxonomy
 --------
 
-+-----------------+--------------------------------+------------------------+
-| Attribute       | Description                    | Type                   |
-+=================+================================+========================+
-| id              | Unique id of the taxonomy      | mixed                  |
-+-----------------+--------------------------------+------------------------+
-| name            | Name of the taxonomy           | string                 |
-+-----------------+--------------------------------+------------------------+
-| root            | First, "root" Taxon            | TaxonInterface         |
-+-----------------+--------------------------------+------------------------+
-| createdAt       | Date when taxonomy was created | \DateTime              |
-+-----------------+--------------------------------+------------------------+
-| updatedAt       | Date of last update            | \DateTime              |
-+-----------------+--------------------------------+------------------------+
++-----------------+-----------------------------------------------------------------+
+| Property        | Description                                                     |
++=================+=================================================================+
+| id              | Unique id of the taxonomy                                       |
++-----------------+-----------------------------------------------------------------+
+| name            | Name of the taxonomy taken from the root's ``TaxonTranslation`` |
++                 +                                                                 +
+|                 | and stored on ``TaxonomyTranslation``                           |
++-----------------+-----------------------------------------------------------------+
+| root            | First, root Taxon                                               |
++-----------------+-----------------------------------------------------------------
 
-This model implements ``TaxonomyInterface``, it implements these extra methods:
+.. note::
 
-+------------------------------------+-------------------------------------+----------------------------+
-| Method                             | Description                         | Returned value             |
-+====================================+=====================================+============================+
-| getTaxons()                        | Get all taxons                      | TaxonInterface[]           |
-+------------------------------------+-------------------------------------+----------------------------+
-| hasTaxon(TaxonInterface $taxon)    | Check if the taxonomy has taxon     | boolean                    |
-+------------------------------------+-------------------------------------+----------------------------+
-| addTaxon(TaxonInterface $taxon)    | Add a taxon                         | Void                       |
-+------------------------------------+-------------------------------------+----------------------------+
-| removeTaxon(TaxonInterface $taxon) | Remove a taxon                      | Void                       |
-+------------------------------------+-------------------------------------+----------------------------+
+    This model implements the :ref:`component_taxonomy_model_taxonomy-interface`.
+    You will find more information about this model in `Sylius API Taxonomy`_.
 
+.. _Sylius API Taxonomy: http://api.sylius.org/Sylius/Component/Taxonomy/Model/Taxonomy.html
 
-Taxons
-------
+.. _component_taxonomy_model_taxonomy-translation:
 
-+-----------------+--------------------------------+------------------------+
-| Attribute       | Description                    | Type                   |
-+=================+================================+========================+
-| id              | Unique id of the taxon         | mixed                  |
-+-----------------+--------------------------------+------------------------+
-| name            | Name of the taxon              | string                 |
-+-----------------+--------------------------------+------------------------+
-| slug            | Urlized name                   | string                 |
-+-----------------+--------------------------------+------------------------+
-| permalink       | Full permalink for given taxon | string                 |
-+-----------------+--------------------------------+------------------------+
-| description     | Description of taxon           | string                 |
-+-----------------+--------------------------------+------------------------+
-| taxonomy        | Taxonomy                       | TaxonomyInterface      |
-+-----------------+--------------------------------+------------------------+
-| parent          | Parent taxon                   | TaxonInterface         |
-+-----------------+--------------------------------+------------------------+
-| children        | Sub taxons                     | Collection             |
-+-----------------+--------------------------------+------------------------+
-| left            | Location within taxonomy       | mixed                  |
-+-----------------+--------------------------------+------------------------+
-| right           | Location within taxonomy       | mixed                  |
-+-----------------+--------------------------------+------------------------+
-| level           | How deep it is in the tree     | mixed                  |
-+-----------------+--------------------------------+------------------------+
-| createdAt       | Date when taxon was created    | \DateTime              |
-+-----------------+--------------------------------+------------------------+
-| updatedAt       | Date of last update            | \DateTime              |
-+-----------------+--------------------------------+------------------------+
+TaxonomyTranslation
+-------------------
 
-This model implements ``TaxonInterface``, it implements these extra methods:
++-----------------+-----------------------------------------------------------------+
+| Property        | Description                                                     |
++=================+=================================================================+
+| id              | Unique id of the taxonomy translation                           |
++-----------------+-----------------------------------------------------------------+
+| name            | Name of the taxonomy taken from the root's ``TaxonTranslation`` |
++-----------------+-----------------------------------------------------------------+
 
-+------------------------------------+-------------------------------------+----------------+
-| Method                             | Description                         | Returned value |
-+====================================+=====================================+================+
-| hasChild()                         | Check whether the taxon has a child | boolean        |
-+------------------------------------+-------------------------------------+----------------+
-| addChild(TaxonInterface $taxon)    | Add child taxon                     | Void           |
-+------------------------------------+-------------------------------------+----------------+
-| removeChild(TaxonInterface $taxon) | Remove child taxon.                 | Void           |
-+------------------------------------+-------------------------------------+----------------+
+.. note::
 
-TaxonsAwareInterface
---------------------
+    This model implements the :ref:`component_taxonomy_model_taxonomy-translation-interface`.
+    You will find more information about this model in `Sylius API TaxonomyTranslation`_.
 
-This interface should be implemented by models that support taxons.
+.. _Sylius API TaxonomyTranslation: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonomyTranslation.html
 
-+------------------------------------+---------------------------------+--------------------+
-| Method                             | Description                     | Returned value     |
-+====================================+=================================+====================+
-| getTaxons($taxonomy = null)        | Get all taxons                  | TaxonInterface[]   |
-+------------------------------------+---------------------------------+--------------------+
-| setTaxons(Collection $collection)  | Set the taxons                  | Void               |
-+------------------------------------+---------------------------------+--------------------+
-| hasTaxon(TaxonInterface $taxon)    | Checks whether object has taxon | Boolean            |
-+------------------------------------+---------------------------------+--------------------+
-| addTaxon(TaxonInterface $taxon)    | Add a taxon                     | TaxonomyInterface  |
-+------------------------------------+---------------------------------+--------------------+
-| removeTaxon(TaxonInterface $taxon) | Remove a taxon                  | TaxonomyInterface  |
-+------------------------------------+---------------------------------+--------------------+
+.. _component_taxonomy_model_taxon:
+
+Taxon
+-----
+
++-----------------+--------------------------------------------------------------------+
+| Property        | Description                                                        |
++=================+====================================================================+
+| id              | Unique id of the taxon                                             |
++-----------------+--------------------------------------------------------------------+
+| name            | Name of the taxon taken form the ``TaxonTranslation``              |
++-----------------+--------------------------------------------------------------------+
+| slug            | Urlized name taken from the ``TaxonTranslation``                   |
++-----------------+--------------------------------------------------------------------+
+| permalink       | Full permalink for given taxon taken form the ``TaxonTranslation`` |
++-----------------+--------------------------------------------------------------------+
+| description     | Description of taxon taken from the ``TaxonTranslation``           |
++-----------------+--------------------------------------------------------------------+
+| taxonomy        | Taxonomy object                                                    |
++-----------------+--------------------------------------------------------------------+
+| parent          | Parent taxon                                                       |
++-----------------+--------------------------------------------------------------------+
+| children        | Sub taxons                                                         |
++-----------------+--------------------------------------------------------------------+
+| left            | Location within taxonomy                                           |
++-----------------+--------------------------------------------------------------------+
+| right           | Location within taxonomy                                           |
++-----------------+--------------------------------------------------------------------+
+| level           | How deep it is in the tree                                         |
++-----------------+--------------------------------------------------------------------+
+| createdAt       | Date when taxon was created                                        |
++-----------------+--------------------------------------------------------------------+
+| updatedAt       | Date of last update                                                |
++-----------------+--------------------------------------------------------------------+
+
+.. note::
+
+    This model implements the :ref:`component_taxonomy_model_taxon-interface`.
+    You will find more information about this model in `Sylius API Taxon`_.
+
+.. _Sylius API Taxon: http://api.sylius.org/Sylius/Component/Taxonomy/Model/Taxon.html
+
+.. _component_taxonomy_model_taxon-translation:
+
+TaxonTranslation
+----------------
+
+This model stores translations for the **Taxon** instances.
+
++-----------------+------------------------------------+
+| Property        | Description                        |
++=================+====================================+
+| id              | Unique id of the taxon translation |
++-----------------+------------------------------------+
+| name            | Name of the taxon                  |
++-----------------+------------------------------------+
+| slug            | Urlized name                       |
++-----------------+------------------------------------+
+| permalink       | Full permalink for given taxon     |
++-----------------+------------------------------------+
+| description     | Description of taxon               |
++-----------------+------------------------------------+
+
+.. note::
+
+    This model implements the :ref:`component_taxonomy_model_taxon-translation-interface`.
+    You will find more information about this model in `Sylius API TaxonTranslation`_.
+
+.. _Sylius API TaxonTranslation: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonTranslation.html
