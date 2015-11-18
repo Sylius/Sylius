@@ -1,0 +1,10 @@
+#!/bin/bash
+
+git clone -b php7 https://github.com/php-memcached-dev/php-memcached.git php-memcached
+cd php-memcached
+
+phpize
+./configure
+make
+
+cp modules/memcached.so `php -i | grep extensions | awk '{ print $5 }'`

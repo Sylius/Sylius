@@ -407,7 +407,7 @@ default:
                     symfony2: ~
         Behat\Symfony2Extension:
             kernel:
-                debug: true
+                debug: false
 
     gherkin:
         filters:
