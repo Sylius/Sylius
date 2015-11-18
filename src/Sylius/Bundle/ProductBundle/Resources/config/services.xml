@@ -25,6 +25,8 @@
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
         <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType</parameter>
+
+        <parameter key="sylius.event_listener.slug_generator.product_translation.class">Sylius\Component\Product\Sluggable\ProductTranslationSlugEventListener</parameter>
     </parameters>
 
     <services>
@@ -68,6 +70,11 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.manager.product" />
             <tag name="kernel.event_listener" event="sylius.product_archetype.pre_update" method="onArchetypeUpdate" />
+        </service>
+        
+        <service id="sylius.event_listener.slug_generator.product_translation" class="%sylius.event_listener.slug_generator.product_translation.class%">
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
     </services>
 
