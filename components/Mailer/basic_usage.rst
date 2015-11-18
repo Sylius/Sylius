@@ -11,7 +11,7 @@ SenderAdapter
 
 This is an abstraction layer that allows you to create your own logic of sending an email.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -58,7 +58,7 @@ Sender
 
 This service collects those two adapters **SenderAdapter**, **RendererAdapter** and deals with process of sending an email.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -81,7 +81,7 @@ RendererAdapter
 
 This is an abstraction layer that allows you to create your own logic of rendering an email object.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -134,7 +134,7 @@ DefaultSettingsProvider
 
 The **DefaultSettingsProvider** is service which provides you with default sender address and sender name.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -154,7 +154,7 @@ EmailProvider
 
 The **EmailProvider** allows you to get specific email from storage.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
