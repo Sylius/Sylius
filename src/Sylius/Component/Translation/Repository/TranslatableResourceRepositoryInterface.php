@@ -20,13 +20,6 @@ use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 interface TranslatableResourceRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param LocaleProviderInterface $localeProvider
-     *
-     * @return self
-     */
-    public function setLocaleProvider(LocaleProviderInterface $localeProvider);
-
-    /**
      * @param array $translatableFields
      *
      * @return self
