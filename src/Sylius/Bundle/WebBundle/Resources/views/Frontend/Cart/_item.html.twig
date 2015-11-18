@@ -1,19 +1,22 @@
-{% set product = item.variant.product %}
+{% set product = item.vars.value.variant.product %}
 <tr>
     <td class="col-md-1">{{ loop.index }}</td>
     <td>
-        {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
+        {{ include(
+        'SyliusWebBundle:Frontend/Product:_variant.html.twig',
+        {'variant': item.vars.value.variant}
+        ) }}
     </td>
     <td class="col-md-2">
-        {{ form_row(form.items[loop.index0].quantity, {'label': false}) }}
+        {{ form_row(item.quantity, {'label': false}) }}
     </td>
     <td class="col-md-1">
-        <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
+        <a href="{{ path('sylius_cart_item_remove', {'id': item.vars.value.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
     </td>
     <td class="col-md-1">
-        {{ item.unitPrice|sylius_price }}
+        {{ item.vars.value.unitPrice|sylius_price }}
     </td>
     <td class="col-md-1" style="text-align: right">
-        {{ item.total|sylius_price }}
+        {{ item.vars.value.total|sylius_price }}
     </td>
 </tr>
