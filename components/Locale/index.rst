@@ -4,7 +4,10 @@ Locales
 Managing different locales for PHP apps.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
-   summary
+   basic_usage
+   models
+   interfaces
+
