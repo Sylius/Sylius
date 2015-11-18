@@ -9,6 +9,9 @@ Sylius\Component\Taxonomy\Model\Taxon:
         name:
             expose: true
             type: string
+        path:
+            expose: true
+            type: string
         children:
             expose: true
     relations:
