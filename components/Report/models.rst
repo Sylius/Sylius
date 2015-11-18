@@ -1,10 +1,12 @@
 Models
 ======
 
-The Report
------------
+.. _component_report_model_report:
 
-Report is the main model in SyliusReportComponent. This simple class represents every unique report in the system.
+Report
+------
+
+Report is the main model in **SyliusReportComponent**. This simple class represents every unique report in the system.
 The default model contains the following attributes with appropriate setters and getters.
 
 +---------------------------+----------------------------------------------------+
@@ -16,7 +18,7 @@ The default model contains the following attributes with appropriate setters and
 +---------------------------+----------------------------------------------------+
 | name                      | Name of the report                                 |
 +---------------------------+----------------------------------------------------+
-| description               | Description of your gorgeous report                |
+| description               | Description of your report                         |
 +---------------------------+----------------------------------------------------+
 | renderer                  | Name of the renderer that visualize report data    |
 +---------------------------+----------------------------------------------------+
@@ -28,12 +30,15 @@ The default model contains the following attributes with appropriate setters and
 +---------------------------+----------------------------------------------------+
 
 .. note::
+    This model implements the :ref:`component_report_model_report-interface`
+    For more detailed information go to `Sylius API Report`_.
 
-    This model implements ``ReportInterface``
+.. _Sylius API Report: http://api.sylius.org/Sylius/Component/Report/Model/Report.html
 
+.. _component_report_data-fetcher_data:
 
-The Data
------------
+Data
+----
 
 Data model represents report data in a uniform form.
 
@@ -45,29 +50,7 @@ Data model represents report data in a uniform form.
 | data         | Array of values with data           |
 +--------------+-------------------------------------+
 
+.. note::
+    For more detailed information go to `Sylius API Data`_.
 
-DataFetcherInterface
-----------------------
-
-To characterize data fetcher object, its class needs to implement the ``DataFetcherInterface``.
-
-+-------------------------------+---------------------------------------------+
-| Method                        | Description                                 |
-+===============================+=============================================+
-| fetch(array $configuration)   | Returns data, based on given configuration  |
-+-------------------------------+---------------------------------------------+
-| getType()                     | Returns type of data fetcher object         |
-+-------------------------------+---------------------------------------------+
-
-RendererInterface
-----------------------
-
-To characterize renderer object, its class needs to implement the ``RendererInterface``.
-
-+-----------------------------------------------+----------------------------------------------------------+
-| Method                                        | Description                                              |
-+===============================================+==========================================================+
-| render(ReportInterface $report, Data $data)   | Renders given data and report with proper configuration  |
-+-----------------------------------------------+----------------------------------------------------------+
-| getType()                                     | Returns type of renderer object                          |
-+-----------------------------------------------+----------------------------------------------------------+
+.. _Sylius API Data: http://api.sylius.org/Sylius/Component/Report/DataFetcher/Data.html
