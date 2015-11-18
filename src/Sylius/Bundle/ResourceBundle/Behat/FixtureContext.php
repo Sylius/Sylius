@@ -78,7 +78,11 @@ class FixtureContext extends DefaultContext
         $type = str_replace(' ', '_', trim($type));
 
         $object = $this->waitFor(function () use ($type, $data) {
-            return $this->findOneByName($type, $data['name']);
+            try {
+                return $this->findOneByName($type, $data['name']);
+            } catch (\InvalidArgumentException $exception) {
+                return null;
+            }
         });
 
         foreach ($data as $property => $value) {
