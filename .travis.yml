@@ -14,25 +14,24 @@ cache:
 
 sudo: false
 
-services:
-    - memcached
-
 matrix:
     fast_finish: true
 
     include:
         - php: 5.6
           env: TEST_SUITE=no-javascript
-          services: [mongodb]
+          services: [memcached, mongodb]
         - php: 5.6
           env: TEST_SUITE=javascript
+          services: [memcached]
           sudo: required
 
         - php: 7.0
           env: TEST_SUITE=no-javascript
+          services: [memcached]
         - php: 5.5
           env: TEST_SUITE=no-javascript
-          services: [mongodb]
+          services: [memcached, mongodb]
 
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
@@ -47,9 +46,11 @@ before_install:
 
     - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then travis/prepare/prepare-mongodb; fi
 
-    - composer install --prefer-source --no-interaction
+    - composer install --prefer-dist --no-interaction
 
     - if [ $TEST_SUITE = "javascript" ]; then travis/prepare/prepare-javascript; fi
+
+    - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
     - app/console doctrine:database:create --env=test
