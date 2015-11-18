@@ -1,132 +1,110 @@
 Models
 ======
 
+.. _component_variation_model_variant:
+
 Variant
 -------
 
-Every variant is represented by **Variant** instance and has following properties:
+Every variant is represented by **Variant** instance and has the following properties:
 
-+--------------+---------------------------------------------+------------------------+
-| Method       | Description                                 | Type                   |
-+==============+=============================================+========================+
-| master       | Defines whether variant is master           | boolean                |
-+--------------+---------------------------------------------+------------------------+
-| presentation | Name displayed to user.                     | string                 |
-+--------------+---------------------------------------------+------------------------+
-| object       | Related product                             | VariableInterface      |
-+--------------+---------------------------------------------+------------------------+
-| options      | Option values                               | OptionValueInterface[] |
-+--------------+---------------------------------------------+------------------------+
-| createdAt    | Date of creation                            | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
-| updatedAt    | Date of the last update                     | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
++--------------+---------------------------------------------+
+| Property     | Description                                 |
++==============+=============================================+
+| id           | Unique id of the variant                    |
++--------------+---------------------------------------------+
+| master       | Defines whether variant is master           |
++--------------+---------------------------------------------+
+| presentation | Name displayed to user                      |
++--------------+---------------------------------------------+
+| object       | Related product                             |
++--------------+---------------------------------------------+
+| options      | Option values                               |
++--------------+---------------------------------------------+
+| createdAt    | Date of creation                            |
++--------------+---------------------------------------------+
+| updatedAt    | Date of the last update                     |
++--------------+---------------------------------------------+
 
-This model implements ``VariantInterface``, you need to implement these extra methods:
+.. note::
 
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| Method                                       | Description                                                         | Returned value             |
-+==============================================+=====================================================================+============================+
-| addOption(OptionValueInterface $option)      | Adds option value                                                   | Void                       |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| removeOption(OptionValueInterface $option)   | Removes option from variant                                         | Void                       |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| hasOption(OptionValueInterface $option)      | Checks whether variant has given option                             | Boolean                    |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| setDefaults(VariantInterface $masterVariant) | This method is used toinherit values from a master variant          | Void                       |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
+    This model implements the :ref:`component_variation_model_variant-interface`.
+    You will find more information about this interface in `Sylius API Variant`_.
+
+.. _Sylius API Variant: http://api.sylius.org/Sylius/Component/Variation/Model/Variant.html
+
+.. _component_variation_model_option:
 
 Option
 ------
 
-Every variant option is represented by **Option** instance and has following properties:
+Every variant option is represented by **Option** instance and has the following properties:
 
-+--------------+---------------------------------------------+------------------------+
-| Method       | Description                                 | Type                   |
-+==============+=============================================+========================+
-| name         | Internal name                               | string                 |
-+--------------+---------------------------------------------+------------------------+
-| presentation | Name displayed to user                      | string                 |
-+--------------+---------------------------------------------+------------------------+
-| values       | Option values                               | OptionValueInterface[] |
-+--------------+---------------------------------------------+------------------------+
-| createdAt    | Date of creation                            | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
-| updatedAt    | Date of the last update                     | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
++--------------+---------------------------------------------+
+| Property     | Description                                 |
++==============+=============================================+
+| id           | Unique id of the Option                     |
++--------------+---------------------------------------------+
+| name         | Internal name                               |
++--------------+---------------------------------------------+
+| presentation | Name displayed to user                      |
++--------------+---------------------------------------------+
+| values       | Option values                               |
++--------------+---------------------------------------------+
+| createdAt    | Date of creation                            |
++--------------+---------------------------------------------+
+| updatedAt    | Date of the last update                     |
++--------------+---------------------------------------------+
 
-This model implements ``OptionInterface``, you need to implement these extra methods:
+.. note::
 
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| Method                                       | Description                                                         | Returned value             |
-+==============================================+=====================================================================+============================+
-| addValue(OptionValueInterface $option)       | Adds option value                                                   | Void                       |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| removeValue(OptionValueInterface $option)    | Removes option value                                                | Void                       |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| hasValue(OptionValueInterface $option)       | Checks whether option has given value                               | Boolean                    |
-+----------------------------------------------+---------------------------------------------------------------------+----------------------------+
+    This model implements the :ref:`component_variation_model_option-interface`.
+    You will find more information about this interface in `Sylius API Option`_.
+
+.. _Sylius API Option: http://api.sylius.org/Sylius/Component/Variation/Model/Option.html
+
+.. _component_variation_model_option-translation:
+
+OptionTranslation
+-----------------
+
+Every variant option has a corresponding translation stored as an **OptionTranslation** instance and has the following properties:
+
++--------------+---------------------------------------------+
+| Property     | Description                                 |
++==============+=============================================+
+| id           | Unique id of the translation                |
++--------------+---------------------------------------------+
+| presentation | Translated option name                      |
++--------------+---------------------------------------------+
+
+.. note::
+
+    This model implements the :ref:`component_variation_model_option-translation-interface`.
+    You will find more information about this interface in `Sylius API OptionTranslation`_.
+
+.. _Sylius API OptionTranslation: http://api.sylius.org/Sylius/Component/Variation/Model/OptionTranslation.html
+
+.. _component_variation_model_option_value:
 
 OptionValue
 -----------
 
-Every variant option value is represented by **OptionValue** instance and has following properties:
+Every variant option value is represented by **OptionValue** instance and has the following properties:
 
-+--------------+---------------------------------------------+------------------------+
-| Method       | Description                                 | Type                   |
-+==============+=============================================+========================+
-| value        | Option internal value                       | string                 |
-+--------------+---------------------------------------------+------------------------+
-| option       | Option                                      | OptionInterface        |
-+--------------+---------------------------------------------+------------------------+
-| createdAt    | Date of creation                            | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
-| updatedAt    | Date of the last update                     | \DateTime              |
-+--------------+---------------------------------------------+------------------------+
++--------------+---------------------------------------------+
+| Property     | Description                                 |
++==============+=============================================+
+| id           | Unique id of the OptionValue                |
++--------------+---------------------------------------------+
+| value        | Option internal value                       |
++--------------+---------------------------------------------+
+| option       | An instance of Option                       |
++--------------+---------------------------------------------+
 
-This model implements ``OptionInterface``, you need to implement these extra methods:
+.. note::
 
-+-------------------+---------------------------------------------------------------------+----------------+
-| Method            | Description                                                         | Returned value |
-+===================+=====================================================================+================+
-| getName()         | Proxy method to access the name of real option object               | string         |
-+-------------------+---------------------------------------------------------------------+----------------+
-| getPresentation() | Proxy method to access the presentation of real option object       | string         |
-+-------------------+---------------------------------------------------------------------+----------------+
+    This model implements the :ref:`component_variation_model_option-value-interface`.
+    You will find more information about this interface in `Sylius API OptionValue`_.
 
-VariableInterface
------------------
-
-This interface should be implemented by models that support variants and options.
-
-+---------------------------------------------+------------------------------------------+----------------------------+
-| Method                                      | Description                              | Returned value             |
-+=============================================+==========================================+============================+
-| getMasterVariant()                          | Returns master variant                   | VariantInterface           |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| setMasterVariant(VariantInterface $variant) | Sets master variant                      | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| hasVariants()                               | Checks whether object has variant        | Boolean                    |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| getVariants()                               | Returns all object variants              | VariantInterface[]         |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| setVariants(Collection $variants)           | Sets all object variants                 | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| addVariant(VariantInterface $variant)       | Adds variant                             | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| removeVariant(VariantInterface $variant)    | Removes variant from object              | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| hasVariant(VariantInterface $variant)       | Checks whether object has given variant  | Boolean                    |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| hasOptions()                                | Checks whether object has given option   | Boolean                    |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| getOptions()                                | Returns all object options               | OptionInterface[]          |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| setOptions(Collection $options)             | Sets all object options                  | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| addOption(OptionInterface $option)          | Adds option                              | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| removeOption(OptionInterface $option)       | Removes option from product              | Void                       |
-+---------------------------------------------+------------------------------------------+----------------------------+
-| hasOption(OptionInterface $option)          | Checks whether object has given option   | Boolean                    |
-+---------------------------------------------+------------------------------------------+----------------------------+
+.. _Sylius API OptionValue: http://api.sylius.org/Sylius/Component/Variation/Model/OptionValue.html
