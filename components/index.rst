@@ -36,6 +36,7 @@ for all aspects of e-commerce.
     Shipping/index
     Taxation/index
     Taxonomy/index
+    Translation/index
     User/index
     Variation/index
 
