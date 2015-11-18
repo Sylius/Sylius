@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Behat;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Bundle\SearchBundle\Command\IndexCommand;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -53,22 +54,26 @@ class SearchContext extends DefaultContext
     /**
      * @Given /^I should find an indexed entry for "([^""]*)"$/
      */
-    public function iCreateAndIndex($id)
+    public function iShouldFindAnIndexedEntry($id)
     {
+        /** @var EntityManagerInterface $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
+        $query = $queryBuilder
             ->select('u')
             ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
+            ->getQuery()
         ;
 
-        $result = $queryBuilder->getQuery()->getResult();
-        if (!$result) {
-            throw new \Exception(
-                "The entry does not exist in the index"
-            );
+        $result = $this->waitFor(function () use ($query) {
+            return $query->getResult();
+        });
+
+        if (empty($result)) {
+            throw new \Exception("The entry does not exist in the index");
         }
 
         return true;
@@ -77,24 +82,26 @@ class SearchContext extends DefaultContext
     /**
      * @Given /^I should not find an indexed entry for "([^""]*)"$/
      */
-    public function iDeleteAnIndex($id)
+    public function iShouldNotFindAnIndexedEntry($id)
     {
+        /** @var EntityManagerInterface $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
+        $query = $queryBuilder
             ->select('u')
             ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
+            ->getQuery()
         ;
 
-        $result = $queryBuilder->getQuery()->getResult();
-        if (!empty($result)) {
-            throw new \Exception(
-                "The entry does exist in the index"
-            );
+        try {
+            $this->waitFor(function () use ($query) {
+                return 0 === count($query->getResult()) ? true : false;
+            });
+        } catch (\RuntimeException $exception) {
+            throw new \Exception("The entry does exist in the index", 0, $exception);
         }
-
-        return true;
     }
 }

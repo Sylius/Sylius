@@ -475,7 +475,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();
 
-            if (false !== $payload && null !== $payload) {
+            if (!empty($payload)) {
                 return $payload;
             }
 
