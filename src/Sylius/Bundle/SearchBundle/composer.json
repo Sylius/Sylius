@@ -22,15 +22,14 @@
     "require": {
         "php": ">=5.5.9",
 
-        "sylius/product-bundle":            "0.16.*",
-        "sylius/resource-bundle":           "0.16.*",
-        "sylius/channel":                   "0.16.*",
-        "symfony/framework-bundle":         "^2.7.5",
-        "symfony/property-access":          "~2.3",
-
+        "doctrine/orm": "~2.3",
         "friendsofsymfony/elastica-bundle": "~3.0.2",
-        "twig/twig":                        "~1.11",
-        "doctrine/orm":                     "~2.3"
+        "sylius/channel": "0.16.*",
+        "sylius/product-bundle": "0.16.*",
+        "sylius/resource-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5",
+        "symfony/property-access": "^2.7",
+        "twig/twig": "~1.11"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",

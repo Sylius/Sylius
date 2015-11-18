@@ -22,14 +22,14 @@
     "require": {
         "php": ">=5.5.9",
 
-        "symfony/framework-bundle":        "^2.7.5",
-        "doctrine/doctrine-cache-bundle":  "~1.0",
-        "sylius/resource-bundle":          "0.16.*"
+        "doctrine/doctrine-cache-bundle": "~1.0",
+        "sylius/resource-bundle": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.1",
-        "symfony/form":      "~2.3",
-        "symfony/validator": "~2.3"
+        "phpspec/phpspec": "~2.1",
+        "symfony/form": "^2.7",
+        "symfony/validator": "^2.7"
     },
     "config": {
         "bin-dir": "bin"

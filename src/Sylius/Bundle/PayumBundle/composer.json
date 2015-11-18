@@ -24,16 +24,15 @@
         }
     ],
     "require": {
-        "php":                    ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "sylius/core":                          "0.16.*",
-        "sylius/currency":                      "0.16.*",
-        "sylius/order-bundle":                  "0.16.*",
-        "sylius/payment-bundle":                "0.16.*",
-        "sylius/resource-bundle":               "0.16.*",
-        "payum/payum":                          "~1.0",
-        "payum/payum-bundle":                   "~1.0",
-        "winzou/state-machine":                 "~0.1"
+        "payum/payum": "~1.0",
+        "payum/payum-bundle": "~1.0",
+        "sylius/core": "0.16.*",
+        "sylius/currency": "0.16.*",
+        "sylius/order-bundle": "0.16.*",
+        "sylius/payment-bundle": "0.16.*",
+        "sylius/resource-bundle": "0.16.*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"

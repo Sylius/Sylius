@@ -7,28 +7,28 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Sylius project",
+            "name":     "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name": "Community contributions",
+            "name":     "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": ">=5.5.9",
 
-        "sylius/resource":    "0.16.*",
-        "sylius/attribute":   "0.16.*",
-        "sylius/variation":   "0.16.*",
-        "sylius/translation": "0.16.*"
+        "sylius/attribute": "0.16.*",
+        "sylius/resource": "0.16.*",
+        "sylius/translation": "0.16.*",
+        "sylius/variation": "0.16.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"

@@ -11,7 +11,7 @@
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Michał Marcinkowski",
+            "name":     "Michał Marcinkowski",
             "homepage": "http://michalmarcinkowski.com"
         },
         {
@@ -24,15 +24,15 @@
         }
     ],
     "require": {
-        "php":                      ">=5.5.9",
+        "php": ">=5.5.9",
 
-        "symfony/framework-bundle": "^2.7.5",
-        "sylius/resource-bundle":   "0.16.*",
-        "sylius/contact":           "0.16.*"
+        "sylius/resource-bundle": "0.16.*",
+        "sylius/contact": "0.16.*",
+        "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/form":    "~2.3"
+        "symfony/form": "^2.7"
     },
     "config": {
         "bin-dir": "bin"
