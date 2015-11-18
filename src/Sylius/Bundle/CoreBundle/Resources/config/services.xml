@@ -34,7 +34,7 @@
 
         <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Component\Core\OrderProcessing\InventoryHandler</parameter>
         <parameter key="sylius.order_processing.state_resolver.class">Sylius\Component\Core\OrderProcessing\StateResolver</parameter>
-        <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Component\Core\OrderProcessing\ShipmentFactory</parameter>
+        <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Component\Core\OrderProcessing\OrderShipmentFactory</parameter>
         <parameter key="sylius.order_processing.payment_processor.class">Sylius\Component\Core\OrderProcessing\PaymentProcessor</parameter>
         <parameter key="sylius.order_processing.payment_charges_processor.class">Sylius\Component\Core\OrderProcessing\PaymentChargesProcessor</parameter>
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
@@ -192,18 +192,18 @@
         </service>
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
-            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.factory.shipment" />
         </service>
         <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
-            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius.factory.payment" />
             <argument type="service" id="sylius.manager.payment" />
         </service>
         <service id="sylius.order_processing.payment_charges_processor" class="%sylius.order_processing.payment_charges_processor.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.payment.delegating_fee_calculator" />
         </service>
         <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.tax_rate_resolver" />
             <argument type="service" id="sylius.zone_matcher" />
@@ -218,7 +218,7 @@
             </argument>
         </service>
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.shipping_calculator" />
         </service>
 
@@ -392,22 +392,22 @@
             <tag name="sylius.promotion_rule_checker" type="customer_group" label="User Group" />
         </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
         <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
-            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping discount" />
         </service>
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
-            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>

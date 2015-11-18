@@ -63,11 +63,6 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
-    function it_creates_new_resource_instance()
-    {
-        $this->createNew()->shouldHaveType('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
-    }
-
     function it_returns_null_if_resource_not_found($queryBuilder, $query)
     {
         $queryBuilder

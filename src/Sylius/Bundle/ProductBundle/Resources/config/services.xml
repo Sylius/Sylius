@@ -54,7 +54,7 @@
 
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
-            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>

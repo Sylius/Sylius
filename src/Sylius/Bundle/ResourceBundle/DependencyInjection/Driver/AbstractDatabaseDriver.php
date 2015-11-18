@@ -72,24 +72,32 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
 
         if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
-            $repositoryDefinition->addMethodCall('setLocaleProvider', array(new Reference('sylius.translation.locale_provider')));
             if (isset($classes['translation']['mapping']['fields'])) {
                 $repositoryDefinition->addMethodCall('setTranslatableFields', array($classes['translation']['mapping']['fields']));
             }
-        }
-
-        if (isset($classes['factory'])) {
-            $this->container->setDefinition(
-                $this->getContainerKey('factory'),
-                $this->getFactoryDefinition($classes['factory'], $classes['model'])
-            );
-
         }
 
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
             $repositoryDefinition
         );
+
+
+        if (isset($classes['factory'])) {
+            $factoryDefinition = $this->getFactoryDefinition($classes['factory'], $classes['model']);
+            $translatableFactoryInterface = 'Sylius\Component\Translation\Factory\TranslatableFactoryInterface' ;
+
+            $reflection = new \ReflectionClass($classes['factory']);
+
+            if (interface_exists($translatableFactoryInterface) && $reflection->implementsInterface($translatableFactoryInterface)) {
+                $factoryDefinition->addArgument(new Reference('sylius.translation.locale_provider'));
+            }
+
+            $this->container->setDefinition(
+                $this->getContainerKey('factory'),
+                $factoryDefinition
+            );
+        }
 
         $this->setManagerAlias();
     }

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -93,7 +94,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\Product')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ProductBundle\Controller\ProductController')->end()
                                 ->scalarNode('repository')->defaultValue('Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()

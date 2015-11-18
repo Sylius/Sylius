@@ -76,17 +76,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    public function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
-    {
-        $localeProvider->getCurrentLocale()->willReturn('en_US');
-        $localeProvider->getFallbackLocale()->willReturn('en_US');
-
-        $this->setLocaleProvider($localeProvider);
-
-        $this->createNew()->getCurrentLocale()->shouldReturn('en_US');
-        $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
-    }
-
     public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
         $translatableFields = array('foo');
@@ -279,7 +268,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_has_fluent_interface(LocaleProviderInterface $localeProvider)
     {
-        $this->setLocaleProvider($localeProvider)->shouldReturn($this);
         $this->setTranslatableFields(array('name'))->shouldReturn($this);
     }
 }

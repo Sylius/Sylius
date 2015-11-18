@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Variation\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValue;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -25,9 +25,9 @@ use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
  */
 class VariantGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder)
+    function let(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
     {
-        $this->beConstructedWith($variantRepository, $setBuilder);
+        $this->beConstructedWith($variantFactory, $setBuilder);
     }
 
     function it_is_initializable()
@@ -49,7 +49,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
     function it_generates_variants_for_every_value_of_an_objects_single_option(
         VariableInterface $productVariable,
-        RepositoryInterface $variantRepository,
+        FactoryInterface $variantFactory,
         SetBuilderInterface $setBuilder,
         OptionInterface $colorOption,
         OptionValue $blackColor, OptionValue $whiteColor, OptionValue $redColor,
@@ -74,7 +74,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $productVariable->getMasterVariant()->willReturn($masterVariant);
 
-        $variantRepository->createNew()->willReturn($permutationVariant);
+        $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
         $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
@@ -85,7 +85,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
     function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
         VariableInterface $productVariable,
-        RepositoryInterface $variantRepository,
+        FactoryInterface $variantFactory,
         SetBuilderInterface $setBuilder,
         OptionInterface $colorOption, OptionInterface $sizeOption,
         OptionValue $blackColor, OptionValue $whiteColor, OptionValue $redColor,
@@ -123,7 +123,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $productVariable->getMasterVariant()->willReturn($masterVariant);
 
-        $variantRepository->createNew()->willReturn($permutationVariant);
+        $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
         $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
