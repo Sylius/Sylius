@@ -1,12 +1,14 @@
 Currency
 ========
 
-Managing different currencies, exchange rates and converting cash amounts for PHP apps.
+Managing different currencies, exchange rates and converting cash amounts for PHP applications.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
+   basic_usage
    models
-   provider
-   summary
+   interfaces
+   importers
+   unavailable_currency_exception
