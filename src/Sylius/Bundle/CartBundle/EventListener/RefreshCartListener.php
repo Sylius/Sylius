@@ -41,8 +41,8 @@ class RefreshCartListener
             );
         }
 
-        var_dump('refreshing cart!');
-        dump('refreshing cart!');
+//        var_dump('refreshing cart!');
+//        dump('refreshing cart!');
         $cart->calculateTotal();
     }
 }

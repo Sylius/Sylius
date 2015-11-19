@@ -14,10 +14,12 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,11 +32,13 @@ class OrderPromotionListenerSpec extends ObjectBehavior
 {
     function let(
         PromotionProcessorInterface $promotionProcessor,
+        CartProviderInterface $cartProvider,
         SessionInterface $session,
         TranslatorInterface $translator
     ) {
         $this->beConstructedWith(
             $promotionProcessor,
+            $cartProvider,
             $session,
             $translator
         );
@@ -46,21 +50,23 @@ class OrderPromotionListenerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_subject_is_not_order(
-        GenericEvent $event,
+        Event $event,
+        CartProviderInterface $cartProvider,
         \stdClass $nonOrder
     ) {
-        $event->getSubject()->willReturn($nonOrder);
+        $cartProvider->getCart()->willReturn($nonOrder);
 
         $this->shouldThrow(UnexpectedTypeException::class)
             ->duringProcessOrderPromotion($event);
     }
 
     function it_processes_promotion_on_orders(
-        GenericEvent $event,
+        Event $event,
         OrderInterface $order,
-        $promotionProcessor
+        PromotionProcessorInterface $promotionProcessor,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->willReturn($order);
+        $cartProvider->getCart()->willReturn($order);
         $promotionProcessor->process($order)->shouldBeCalled();
         $order->calculateTotal()->shouldBeCalled();
 

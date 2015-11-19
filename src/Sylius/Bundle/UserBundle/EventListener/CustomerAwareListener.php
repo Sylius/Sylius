@@ -27,21 +27,13 @@ class CustomerAwareListener
     protected $customerContext;
 
     /**
-     * @var CartProviderInterface
-     */
-    protected $cartProvider;
-
-    /**
      * @param CustomerContextInterface $securityContext
-     * @param CartProviderInterface    $cartProvider
      */
     public function __construct(
-        CustomerContextInterface $securityContext,
-        CartProviderInterface $cartProvider
+        CustomerContextInterface $securityContext
     )
     {
         $this->customerContext = $securityContext;
-        $this->cartProvider = $cartProvider;
     }
 
     /**

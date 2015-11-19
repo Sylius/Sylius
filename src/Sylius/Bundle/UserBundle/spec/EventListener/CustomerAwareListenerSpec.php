@@ -17,6 +17,7 @@ use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -26,7 +27,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener');
+        $this->shouldHaveType(CustomerAwareListener::class);
     }
 
     function let(CustomerContextInterface $customerContext)

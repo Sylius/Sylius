@@ -18,17 +18,10 @@ class ShopperContextChangeSubscriber implements EventSubscriberInterface
      */
     private $eventDispatcher;
 
-    /**
-     * @var CartProviderInterface
-     */
-    private $cartProvider;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        CartProviderInterface $cartProvider
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->eventDispatcher = $eventDispatcher;
-        $this->cartProvider = $cartProvider;
     }
 
     public static function getSubscribedEvents()

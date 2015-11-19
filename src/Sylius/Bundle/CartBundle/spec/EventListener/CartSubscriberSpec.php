@@ -13,13 +13,13 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -55,9 +55,15 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->removeItem($event);
     }
 
-    function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
+    function it_should_clear_a_cart_from_event(
+        Event $event,
+        CartInterface $cart,
+        ObjectManager $manager,
+        CartProviderInterface $provider
+    )
     {
-        $event->getCart()->willReturn($cart);
+        $provider->getCart()->willReturn($cart);
+
         $manager->remove($cart)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
         $provider->abandonCart()->shouldBeCalled();
@@ -65,9 +71,15 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->clearCart($event);
     }
 
-    function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
+    function it_should_save_a_valid_cart(
+        Event $event,
+        CartInterface $cart,
+        ObjectManager $manager,
+        CartProviderInterface $provider
+    )
     {
-        $event->getCart()->willReturn($cart);
+        $provider->getCart()->willReturn($cart);
+
         $manager->persist($cart)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
         $provider->setCart($cart)->shouldBeCalled();
@@ -76,15 +88,15 @@ class CartSubscriberSpec extends ObjectBehavior
     }
 
     function it_should_not_save_an_invalid_cart(
-        $manager,
-        $provider,
-        $validator,
-        CartEvent $event,
+        ObjectManager $manager,
+        CartProviderInterface $provider,
+        ValidatorInterface $validator,
+        Event $event,
         CartInterface $cart,
         ConstraintViolationListInterface $constraintList
     ) {
         $constraintList->count()->willReturn(1);
-        $event->getCart()->willReturn($cart);
+        $provider->getCart()->willReturn($cart);
         $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);
 
         $manager->persist($cart)->shouldNotBeCalled();

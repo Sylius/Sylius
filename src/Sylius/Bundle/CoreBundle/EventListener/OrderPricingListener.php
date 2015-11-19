@@ -38,6 +38,7 @@ class OrderPricingListener
      * Constructor.
      *
      * @param DelegatingCalculatorInterface $priceCalculator
+     * @param CartProviderInterface $cartProvider
      */
     public function __construct(
         DelegatingCalculatorInterface $priceCalculator,
