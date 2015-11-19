@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -36,6 +37,7 @@ use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class CoreContext extends DefaultContext
 {
@@ -645,12 +647,20 @@ class CoreContext extends DefaultContext
      */
     private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = array())
     {
-        $this->thereIsUser($email, 'sylius', $role, 'yes', null, array(), true, $authorizationRoles);
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
+        $user = $this->thereIsUser($email, 'sylius', $role, 'yes', null, array(), true, $authorizationRoles);
 
-        $this->fillField('Email', $email);
-        $this->fillField('Password', 'sylius');
-        $this->pressButton('Login');
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'administration', $user->getRoles());
+
+        $session = $this->getService('session');
+        $session->set('_security_user', serialize($token));
+        $session->save();
+
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            $this->visitPath('/');
+        }
+
+        $this->getSession()->setCookie($session->getName(), $session->getId());
+        $this->getService('security.token_storage')->setToken($token);
     }
 
     /**

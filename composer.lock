@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "966e6bd5836ff7e2d7d2ebe642137a49",
-    "content-hash": "d1216f5c2dc613567ca55f1a3ff3725f",
+    "hash": "57a5dfddec4bde440e435c633608a3ac",
+    "content-hash": "6e4f624570e03ebd42f228a3b20dd688",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -745,23 +745,23 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "2.3.0",
+            "version": "v2.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029"
+                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/0f1a2f91b349e10f5c343f75ab71d23aace5b029",
-                "reference": "0f1a2f91b349e10f5c343f75ab71d23aace5b029",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
+                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "~1.0",
                 "doctrine/doctrine-bundle": "~1.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.3|~3.0"
+                "symfony/doctrine-bridge": "~2.1"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -798,7 +798,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2015-11-04 21:23:23"
+            "time": "2015-08-04 22:43:14"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -1250,35 +1250,41 @@
         },
         {
             "name": "doctrine/phpcr-odm",
-            "version": "1.2.6",
+            "version": "1.3.0-rc4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/phpcr-odm.git",
-                "reference": "5db71ae9c32998d25e48e507f78b72c2b2a52041"
+                "reference": "ec40d241b0964667c616106bd5740b058cda02d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/phpcr-odm/zipball/5db71ae9c32998d25e48e507f78b72c2b2a52041",
-                "reference": "5db71ae9c32998d25e48e507f78b72c2b2a52041",
+                "url": "https://api.github.com/repos/doctrine/phpcr-odm/zipball/ec40d241b0964667c616106bd5740b058cda02d1",
+                "reference": "ec40d241b0964667c616106bd5740b058cda02d1",
                 "shasum": ""
             },
             "require": {
+                "doctrine/annotations": "~1.2",
                 "doctrine/common": "~2.4",
+                "doctrine/data-fixtures": "~1.0,>=1.0.0",
                 "doctrine/instantiator": "~1.0.1",
-                "php": ">=5.3.3",
+                "php": ">=5.3.9",
                 "phpcr/phpcr": "~2.1.1",
                 "phpcr/phpcr-implementation": "~2.1.0",
-                "phpcr/phpcr-utils": "~1.1"
+                "phpcr/phpcr-utils": "^1.2.8",
+                "symfony/console": "~2.3|~3.0"
+            },
+            "conflict": {
+                "jackalope/jackalope-doctrine-dbal": "<1.1.5"
             },
             "require-dev": {
                 "liip/rmt": "~1.1",
                 "symfony/phpunit-bridge": "2.7.*@dev",
-                "symfony/yaml": "~2.0"
+                "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
-                "jackalope/jackalope-doctrine-dbal": "~1.0",
+                "jackalope/jackalope-doctrine-dbal": "~1.1",
                 "jackalope/jackalope-jackrabbit": "~1.0",
-                "symfony/yaml": "~2.0"
+                "symfony/yaml": "~2.3|~3.0"
             },
             "bin": [
                 "bin/phpcrodm",
@@ -1287,7 +1293,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -1320,7 +1326,7 @@
                 "odm",
                 "phpcr"
             ],
-            "time": "2015-10-08 11:16:58"
+            "time": "2015-11-06 08:48:23"
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
@@ -9343,6 +9349,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "doctrine/phpcr-odm": 5,
         "phpspec/phpspec": 15
     },
     "prefer-stable": false,

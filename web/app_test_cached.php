@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
  * Sylius front controller.
- * Dev environment.
+ * Testing prod-like environment.
  */
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])
@@ -26,12 +25,12 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-require_once __DIR__.'/../app/bootstrap.php.cache';
-Debug::enable();
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
 require_once __DIR__.'/../app/AppKernel.php';
 
-$kernel = new AppKernel('dev', true);
+$kernel = new AppKernel('test_cached', false);
+$kernel->loadClassCache();
 
 $request = Request::createFromGlobals();
 

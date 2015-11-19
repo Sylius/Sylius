@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /*
  * Sylius front controller.
- * Testing environment.
+ * Testing dev-like environment.
  */
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])
@@ -27,16 +27,11 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
-// Require kernel.
 require_once __DIR__.'/../app/AppKernel.php';
 
-// Initialize kernel and run the application.
 $kernel = new AppKernel('test', true);
-$kernel->loadClassCache();
 
 $request = Request::createFromGlobals();
-
-Request::enableHttpMethodParameterOverride();
 
 $response = $kernel->handle($request);
 $response->send();

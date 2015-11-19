@@ -24,6 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,6 +39,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var Generator
      */
     protected $faker;
+
+    /**
+     * @var RouterInterface
+     */
+    private static $router;
 
     /**
      * @var array
@@ -205,7 +211,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         }
 
         $route  = str_replace(' ', '_', trim($page));
-        $routes = $this->getContainer()->get('router')->getRouteCollection();
+        $routes = $this->getRouter()->getRouteCollection();
 
         if (null === $routes->get($route)) {
             $route = $this->applicationName.'_'.$route;
@@ -256,7 +262,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function generateUrl($route, array $parameters = array(), $absolute = false)
     {
-        return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
+        return $this->locatePath($this->getRouter()->generate($route, $parameters, $absolute));
     }
 
     /**
@@ -469,7 +475,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();
 
-            if (false !== $payload && null !== $payload) {
+            if (!empty($payload)) {
                 return $payload;
             }
 
@@ -519,5 +525,17 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         }
 
         return $code;
+    }
+
+    /**
+     * @return RouterInterface
+     */
+    protected function getRouter()
+    {
+        if (null === self::$router) {
+            self::$router = $this->getService('router');
+        }
+
+        return self::$router;
     }
 }

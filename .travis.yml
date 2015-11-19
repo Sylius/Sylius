@@ -15,53 +15,63 @@ cache:
 sudo: false
 
 matrix:
-    fast_finish: true
-
     include:
         - php: 5.6
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.6
-          env: TEST_SUITE=2
-
+          env: TEST_SUITE=no-javascript
+          services: [memcached, mongodb]
         - php: 5.6
           env: TEST_SUITE=javascript
+          services: [memcached]
           sudo: required
 
         - php: 7.0
-          env: TEST_SUITE=1
-        - php: 7.0
-          env: TEST_SUITE=2
+          env: TEST_SUITE=no-javascript
+          services: [memcached]
+        - php: 5.5
+          env: TEST_SUITE=no-javascript
+          services: [memcached, mongodb]
 
-        - php: 5.5
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.5
-          env: TEST_SUITE=2
+    fast_finish: true
+
+    allow_failures:
+        - php: 7.0
 
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then travis/prepare/prepare-php7-memcached; fi
+
+    - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-mongodb; fi
+    - |
+        if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then
+            travis/prepare/prepare-mongodb
+        else
+            composer install --prefer-dist --no-interaction
+        fi
 
-    - composer install --prefer-source --no-interaction
-
-    - if [ $TEST_SUITE = "javascript" ]; then travis/prepare/prepare-javascript; fi
+    - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
-    - app/console doctrine:database:create --env=test
-    - app/console doctrine:schema:create --env=test
-    - app/console doctrine:phpcr:repository:init --env=test
+    - app/console doctrine:database:create --env=test_cached
+    - app/console doctrine:schema:create --env=test_cached
+    - app/console doctrine:phpcr:repository:init --env=test_cached
 
-    - app/console cache:warmup --env=test
+    - app/console cache:warmup --env=test_cached --no-debug
 
-    - if [ $TEST_SUITE = "javascript" ]; then app/console assets:install --env=test; fi
-    - if [ $TEST_SUITE = "javascript" ]; then app/console assetic:dump --env=test; fi
+    - |
+        if [ $TEST_SUITE = "javascript" ]; then
+            travis/prepare/prepare-javascript
+            app/console assets:install --env=test_cached --no-debug
+            app/console assetic:dump --env=test_cached --no-debug
+        fi
+
+    - php -v
+    - php -i
 
 script:
     - travis/run-tests $TEST_SUITE
