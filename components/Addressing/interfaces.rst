@@ -82,7 +82,7 @@ if given :ref:`component_addressing_model_address` is in a restricted zone.
 .. note::
    For more detailed information go to `Sylius API RestrictedZoneCheckerInterface`_.
 
-.. _Sylius API RestrictedZoneCheckerInterface: http://api.sylius.org/Sylius/Component/Addressing/Model/RestrictedZoneCheckerInterface.html
+.. _Sylius API RestrictedZoneCheckerInterface: http://api.sylius.org/Sylius/Component/Addressing/Checker/RestrictedZoneCheckerInterface.html
 
 .. _component_addressing_matcher_zone-matcher-interface:
 
@@ -95,4 +95,4 @@ and all zones containing the provided :ref:`component_addressing_model_address`.
 .. note::
    For more detailed information go to `Sylius API ZoneMatcherInterface`_.
 
-.. _Sylius API ZoneMatcherInterface: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMatcherInterface.html
+.. _Sylius API ZoneMatcherInterface: http://api.sylius.org/Sylius/Component/Addressing/Matcher/ZoneMatcherInterface.html
