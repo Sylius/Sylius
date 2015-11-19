@@ -11,16 +11,13 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ZoneMemberInterface
+interface ZoneMemberInterface extends ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return ZoneInterface
      */

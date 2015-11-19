@@ -62,7 +62,7 @@ class Currency implements CurrencyInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {

@@ -12,13 +12,14 @@
 namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface VariantInterface extends SoftDeletableInterface, TimestampableInterface
+interface VariantInterface extends SoftDeletableInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * Checks whether variant is master.

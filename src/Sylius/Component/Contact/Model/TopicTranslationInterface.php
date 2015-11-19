@@ -11,18 +11,15 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * Contact topic translation interface.
  *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface TopicTranslationInterface
+interface TopicTranslationInterface extends ResourceInterface
 {
-    /**
-     * Get id.
-     */
-    public function getId();
-
     /**
      * Get topic title.
      *

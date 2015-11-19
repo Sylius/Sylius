@@ -22,7 +22,7 @@ use Doctrine\Common\Collections\Collection;
 class Role implements RoleInterface
 {
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -110,6 +110,9 @@ class Role implements RoleInterface
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;

@@ -14,7 +14,7 @@ namespace Sylius\Component\Sequence\Model;
 class Sequence implements SequenceInterface
 {
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -37,7 +37,7 @@ class Sequence implements SequenceInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {

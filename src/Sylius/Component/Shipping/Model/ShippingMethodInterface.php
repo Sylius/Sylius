@@ -12,6 +12,7 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
@@ -19,7 +20,11 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodInterface extends TimestampableInterface, ShippingMethodTranslationInterface, ToggleableInterface
+interface ShippingMethodInterface extends
+    TimestampableInterface,
+    ShippingMethodTranslationInterface,
+    ToggleableInterface,
+    ResourceInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;

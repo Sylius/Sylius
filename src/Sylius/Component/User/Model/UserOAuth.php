@@ -18,7 +18,7 @@ namespace Sylius\Component\User\Model;
 class UserOAuth implements UserOAuthInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -43,7 +43,7 @@ class UserOAuth implements UserOAuthInterface
     protected $user;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
