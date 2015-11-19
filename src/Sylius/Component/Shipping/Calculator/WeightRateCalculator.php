@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class WeightRateCalculator extends Calculator
+class WeightRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

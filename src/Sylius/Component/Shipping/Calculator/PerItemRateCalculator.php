@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerItemRateCalculator extends Calculator
+class PerItemRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

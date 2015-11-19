@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Antonio Peric <antonio@locastic.com>
  */
-class VolumeRateCalculator extends Calculator
+class VolumeRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
