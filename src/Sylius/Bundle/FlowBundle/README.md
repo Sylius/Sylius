@@ -87,9 +87,8 @@ class DeliveryStep extends AbstractContainerAwareStep
 
         if ($form->handleRequest($request)->isValid()) {
             $context->getStorage()->set('delivery.address', $form->getData());
-            $context->complete(); // Complete step, user will be redirected to next step.
 
-            return;
+            return $this->complete();
         }
 
         // Form was not valid so we display the form again.
