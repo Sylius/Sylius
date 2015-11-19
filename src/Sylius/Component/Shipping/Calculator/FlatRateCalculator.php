@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlatRateCalculator extends Calculator
+class FlatRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
