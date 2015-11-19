@@ -33,8 +33,7 @@ function restore_composer_lock_from_cache
 # Argument 1: Cache unique key
 function is_cache_fresh
 {
-    if [ -f $SYLIUS_CACHE_DIR/composer-$1.lock ] && [ -f $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum ] && [ file_md5sum 'composer.lock' -eq `cat $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum` ];
-    then
+    if [ -f "$SYLIUS_CACHE_DIR/composer-$1.lock" ] && [ -f "$SYLIUS_CACHE_DIR/composer-$1.lock.md5sum" ] && [ file_md5sum 'composer.lock' -eq "`cat $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum`" ]; then
         return 0
     else
         return 1

@@ -405,9 +405,7 @@ default:
             sessions:
                 default:
                     symfony2: ~
-        Behat\Symfony2Extension:
-            kernel:
-                debug: false
+        Behat\Symfony2Extension: ~
 
     gherkin:
         filters:
@@ -434,3 +432,37 @@ javascript:
     gherkin:
         filters:
             tags: "@javascript"
+
+cached:
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                env: test_cached
+                debug: false
+
+javascript_cached:
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            screenshot: true
+        Behat\MinkExtension:
+            base_url: http://localhost:8080/
+            selenium2:
+                capabilities:
+                    browserName: chrome
+                    browser: chrome
+                    version: ""
+                    chrome:
+                        switches:
+                            - "start-fullscreen"
+                            - "no-sandbox"
+            browser_name: chrome
+            show_auto: false
+        Behat\Symfony2Extension:
+            kernel:
+                env: test_cached
+                debug: false
+
+    gherkin:
+        filters:
+            tags: "@javascript"
+

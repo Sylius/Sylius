@@ -21,13 +21,6 @@ doctrine:
         dbname: %sylius.database.name%_test
         path:   %sylius.database.path%
         driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
-    orm:
-        entity_managers:
-            default:
-                metadata_cache_driver:
-                    type: memcached
-                    host: localhost
-                    port: 11211
 
 sylius_money:
     currency: EUR
