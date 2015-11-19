@@ -21,7 +21,7 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
 class Report implements ReportInterface
 {
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -66,8 +66,6 @@ class Report implements ReportInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return integer
      */
     public function getId()
     {

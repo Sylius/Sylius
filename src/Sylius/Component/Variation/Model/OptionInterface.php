@@ -12,7 +12,6 @@
 namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -21,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionInterface extends TimestampableInterface, OptionTranslationInterface, ResourceInterface
+interface OptionInterface extends TimestampableInterface, OptionTranslationInterface
 {
     /**
      * Get internal name.

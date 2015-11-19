@@ -24,9 +24,9 @@ interface OrderInterface extends
     AdjustableInterface,
     CommentAwareInterface,
     ResourceInterface,
-    TimestampableInterface,
     SoftDeletableInterface,
-    SequenceSubjectInterface
+    SequenceSubjectInterface,
+    TimestampableInterface
 {
     const STATE_CART        = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
