@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Sequence\Model;
 
-interface SequenceInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface SequenceInterface extends ResourceInterface
 {
     /**
      * @return string

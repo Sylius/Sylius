@@ -11,13 +11,14 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentInterface extends TimestampableInterface, SoftDeletableInterface
+interface PaymentInterface extends TimestampableInterface, SoftDeletableInterface, ResourceInterface
 {
     // Payment states.
     const STATE_NEW        = 'new';

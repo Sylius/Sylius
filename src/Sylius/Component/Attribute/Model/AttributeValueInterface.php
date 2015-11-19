@@ -11,16 +11,13 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AttributeValueInterface
+interface AttributeValueInterface extends ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return AttributeSubjectInterface
      */

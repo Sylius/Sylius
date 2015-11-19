@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
@@ -19,7 +20,13 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
+interface OrderInterface extends
+    AdjustableInterface,
+    CommentAwareInterface,
+    ResourceInterface,
+    TimestampableInterface,
+    SoftDeletableInterface,
+    SequenceSubjectInterface
 {
     const STATE_CART        = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';

@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Payment\Model;
 
-interface PaymentMethodTranslationInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface PaymentMethodTranslationInterface extends ResourceInterface
 {
     /**
      * Get payments method name.

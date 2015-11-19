@@ -13,22 +13,22 @@
 
 namespace Sylius\Component\User\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface CustomerInterface extends UserAwareInterface, TimestampableInterface, SoftDeletableInterface
+interface CustomerInterface extends
+    UserAwareInterface,
+    TimestampableInterface,
+    SoftDeletableInterface,
+    ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';
     const MALE_GENDER = 'm';
     const FEMALE_GENDER = 'f';
-
-    /**
-     * @return int
-     */
-    public function getId();
 
     /**
      * @return boolean
