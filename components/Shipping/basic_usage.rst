@@ -1,11 +1,14 @@
+.. _basic_usage:
+
 Basic Usage
 ===========
 
 In all examples is used an exemplary class implementing **ShippableInterface**, which looks like:
 
-.. code-block::
+.. code-block:: php
 
-    <?
+    <?php
+
     use Sylius\Component\Shipping\Model\ShippableInterface;
     use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
@@ -217,14 +220,14 @@ Note that a **ShippingItem** can exist without a **Shipment** assigned.
     use Sylius\Component\Shipping\Model\ShipmentInterface;
 
     $shipment = new Shipment();
-    $shippable = new Wardrobe();
+    $wardrobe = new Wardrobe();
     $shipmentItem = new ShipmentItem();
 
     $shipmentItem->setShipment($shipment);
     $shipmentItem->getShipment(); // returns shipment object
     $shipmentItem->setShipment(null);
 
-    $shipmentItem->setShippable($shippable);
+    $shipmentItem->setShippable($wardrobe);
     $shipmentItem->getShippable(); // returns shippable object
 
     $shipmentItem->getShippingState(); // returns const STATE_READY
@@ -309,10 +312,10 @@ This example shows how use an exemplary class implementing **RuleCheckerInterfac
     $rule = new Rule();
     $rule->setConfiguration(array('count' => 5, 'equal' => true));
 
-    $shippable = new Wardrobe();
+    $wardrobe = new Wardrobe();
 
     $shipmentItem = new ShipmentItem();
-    $shipmentItem->setShippable($shippable);
+    $shipmentItem->setShippable($wardrobe);
 
     $shipment = new Shipment();
     $shipment->addItem($shipmentItem);
@@ -328,7 +331,7 @@ Delegating calculation to correct calculator instance
 -----------------------------------------------------
 
 **DelegatingCalculator** class delegates the calculation of charge for particular shipping subject to a correct calculator instance,
-based on the name defined on the shipping method. It uses **CalculatorRegistry** to keep all calculators registered inside
+based on the name defined on the shipping method. It uses **ServiceRegistry** to keep all calculators registered inside
 container. The calculators are retrieved by name.
 
 .. code-block:: php
@@ -341,8 +344,8 @@ container. The calculators are retrieved by name.
     use Sylius\Component\Shipping\Calculator\FlexibleRateCalculator;
     use Sylius\Component\Shipping\Model\Shipment;
     use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry;
     use Sylius\Component\Shipping\Calculator\DelegatingCalculator;
+    use Sylius\Component\Registry\ServiceRegistry;
 
     $configuration = array(
         'first_item_cost'       => 1000,
@@ -359,13 +362,12 @@ container. The calculators are retrieved by name.
     $shipment->setMethod($shippingMethod);
     $shipment->addItem($shipmentItem);
 
-    $calculatorRegistry = new CalculatorRegistry();
     $flexibleRateCalculator = new FlexibleRateCalculator();
     $perItemRateCalculator = new PerItemRateCalculator();
-    $calculatorRegistry
-    ->registerCalculator(DefaultCalculators::FLEXIBLE_RATE, $flexibleRateCalculator);
-    $calculatorRegistry
-    ->registerCalculator(DefaultCalculators::PER_ITEM_RATE, $perItemRateCalculator);
+
+    $calculatorRegistry = new ServiceRegistry(CalculatorInterface::class);
+    $calculatorRegistry->register(DefaultCalculators::FLEXIBLE_RATE, $flexibleRateCalculator);
+    $calculatorRegistry->register(DefaultCalculators::PER_ITEM_RATE, $perItemRateCalculator);
 
     $delegatingCalculators = new DelegatingCalculator($calculatorRegistry);
     $delegatingCalculators->calculate($shipment); // returns 1000
@@ -379,15 +381,13 @@ container. The calculators are retrieved by name.
     $delegatingCalculators->calculate($shipment); // returns 200
 
 .. caution::
-       The method ``->registerCalculator()`` throws `ExistingCalculatorException`_.
-       The method ``->getCalculator()`` used in ``->calculate`` throws `NonExistingCalculatorException`_.
+       The method ``->register()`` and  ``->get()`` used in ``->calculate`` throw `InvalidArgumentException`_.
        The method ``->calculate`` throws `UndefinedShippingMethodException`_ when given shipment does not have a shipping method defined.
 
 .. hint::
     You can read more about each of the available calculators in the :doc:`calculators` chapter.
 
-.. _ExistingCalculatorException: http://api.sylius.org/Sylius/Component/Shipping/Calculator/Registry/ExistingCalculatorException.html
-.. _NonExistingCalculatorException: http://api.sylius.org/Sylius/Component/Shipping/Calculator/Registry/NonExistingCalculatorException.html
+.. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
 .. _UndefinedShippingMethodException: http://api.sylius.org/Sylius/Component/Shipping/Calculator/UndefinedShippingMethodException.html
 
 Resolvers
@@ -456,15 +456,15 @@ Finally you can create a method resolver:
 
     $shippingRepository = new InMemoryRepository(); //it has collection of shipping methods
 
-    $shippable = new Wardrobe();
-    $shippable->setShippingCategory($shippingCategory);
-    $shippable2 = new Wardrobe();
-    $shippable2->setShippingCategory($shippingCategory1);
+    $wardrobe = new Wardrobe();
+    $wardrobe->setShippingCategory($shippingCategory);
+    $wardrobe2 = new Wardrobe();
+    $wardrobe2->setShippingCategory($shippingCategory1);
 
     $shipmentItem = new ShipmentItem();
-    $shipmentItem->setShippable($shippable);
+    $shipmentItem->setShippable($wardrobe);
     $shipmentItem2 = new ShipmentItem();
-    $shipmentItem2->setShippable($shippable2);
+    $shipmentItem2->setShippable($wardrobe2);
 
     $shipment = new Shipment();
     $shipment->addItem($shipmentItem);
