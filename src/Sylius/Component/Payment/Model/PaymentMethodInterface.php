@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentMethodInterface extends TimestampableInterface, PaymentMethodTranslationInterface, ResourceInterface
+interface PaymentMethodInterface extends TimestampableInterface, PaymentMethodTranslationInterface
 {
     /**
      * @return Boolean

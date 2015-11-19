@@ -26,5 +26,4 @@ interface AttributeTranslationInterface extends ResourceInterface
      * @param string $presentation
      */
     public function setPresentation($presentation);
-
-} 
+}
