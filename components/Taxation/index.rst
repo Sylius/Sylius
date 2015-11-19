@@ -1,11 +1,12 @@
 Taxation
 ========
 
-Tax rates and tax classification for PHP apps. You can define different tax categories and match them to objects.
+Tax rates and tax classification for PHP applications. You can define different tax categories and match them to objects.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
+   basic_usage
    models
-   summary
+   interfaces

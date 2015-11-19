@@ -1,13 +1,13 @@
 Models
 ======
 
-The Tax rate
-------------
+TaxRate
+-------
 
 Tax rate model holds the configuration for particular tax rate.
 
 +-----------------+------------------------------------+
-| Attribute       | Description                        |
+| Property        | Description                        |
 +=================+====================================+
 | id              | Unique id of the tax rate          |
 +-----------------+------------------------------------+
@@ -27,17 +27,15 @@ Tax rate model holds the configuration for particular tax rate.
 +-----------------+------------------------------------+
 
 .. note::
+    This model implements ``TaxRateInterface``.
 
-    This model implements ``TaxRateInterface``
-
-
-The Tax category
-----------------
+TaxCategory
+-----------
 
 Tax category model holds the configuration for particular tax category.
 
 +-----------------+--------------------------------------------------------+
-| Attribute       | Description                                            |
+| Property        | Description                                            |
 +=================+========================================================+
 | id              | Unique id of the tax category                          |
 +-----------------+--------------------------------------------------------+
@@ -53,6 +51,5 @@ Tax category model holds the configuration for particular tax category.
 +-----------------+--------------------------------------------------------+
 
 .. note::
-
-    This model implements ``TaxCategoryInterface``
+    This model implements ``TaxCategoryInterface``.
 
