@@ -36,11 +36,25 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
+     * @param bool $includeDeleted
      *
      * @return null|object
      */
-    public function find($id)
+    public function find($id, $includeDeleted = false)
+    {
+        if (!$includeDeleted) {
+            return $this->getOneById($id);
+        }
+
+        $this->_em->getFilters()->disable('softdeleteable');
+        $result = $this->getOneById($id);
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $result;
+    }
+
+    private function getOneById($id)
     {
         return $this
             ->getQueryBuilder()

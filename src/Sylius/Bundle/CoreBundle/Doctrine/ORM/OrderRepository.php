@@ -82,6 +82,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->leftJoin('billingAddress.country', 'billingCountry')
             ->leftJoin('o.shippingAddress', 'shippingAddress')
             ->leftJoin('shippingAddress.country', 'shippingCountry')
+            // to be able to get product image we have to obtain master variant
+            ->leftJoin('product.variants', 'variants')
+            ->having('variants.master = true')
+            ->addSelect('variants')
             ->addSelect('adjustment')
             ->addSelect('customer')
             ->addSelect('inventoryUnit')
@@ -102,10 +106,14 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->setParameter('id', $id)
         ;
 
-        return $queryBuilder
+        $result = $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $result;
     }
 
     /**

@@ -27,7 +27,7 @@ class CommentController extends ResourceController
      */
     public function createAction(Request $request)
     {
-        if (!$order = $this->get('sylius.repository.order')->findOneById($request->get('id'))) {
+        if (!$order = $this->get('sylius.repository.order')->find($request->get('id'), true)) {
             throw new NotFoundHttpException('Requested order does not exist');
         }
 
