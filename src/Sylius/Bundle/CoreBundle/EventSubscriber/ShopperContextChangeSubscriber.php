@@ -48,41 +48,13 @@ class ShopperContextChangeSubscriber implements EventSubscriberInterface
 
     public function onPreCartChange()
     {
-        var_dump('preCartChange');
-//        $cart = $this->cartProvider->getCart();
-//
-//        $cartEvent = new CartEvent($cart);
-//        $this->eventDispatcher->dispatch(
-//            SyliusCartEvents::CART_INITIALIZE,
-//            $cartEvent
-//        );
     }
 
     public function onCartChange()
     {
-        var_dump('onCartChange');
-
-//        $cart = $this->cartProvider->getCart();
-//
-//        $cartEvent = new GenericEvent($cart);
-//
-//        $this->eventDispatcher->dispatch(
-//            SyliusCartEvents::CART_CHANGE,
-//            $cartEvent
-//        );
     }
 
     public function onPostCartChange()
     {
-        var_dump('postCartChange');
-
-//        $cart = $this->cartProvider->getCart();
-//
-//        $cartEvent = new CartEvent($cart);
-//
-//        $this->eventDispatcher->dispatch(
-//            SyliusCartEvents::CART_SAVE_INITIALIZE,
-//            $cartEvent
-//        );
     }
 }
