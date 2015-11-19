@@ -24,9 +24,21 @@ class DatetimeAttributeTypeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function getParent()
     {
-        $builder->add('value', 'datetime');
+        return 'datetime';
+    }
+
+    /**
+     * {@inheritdoc{
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'label' => false,
+            )
+        );
     }
 
     /**

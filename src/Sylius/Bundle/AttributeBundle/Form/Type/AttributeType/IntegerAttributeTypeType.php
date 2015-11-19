@@ -13,6 +13,7 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -22,9 +23,21 @@ class IntegerAttributeTypeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function getParent()
     {
-        $builder->add('value', 'integer');
+        return 'integer';
+    }
+
+    /**
+     * {@inheritdoc{
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'label' => false,
+            )
+        );
     }
 
     /**

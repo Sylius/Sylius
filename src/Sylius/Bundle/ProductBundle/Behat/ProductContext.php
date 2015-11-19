@@ -185,7 +185,12 @@ class ProductContext extends DefaultContext
     public function thereAreAttributes(TableNode $table)
     {
         foreach ($table->getHash() as $attribute) {
-            $this->thereIsAttribute($attribute['name'], $attribute['code'], $attribute['presentation'], $attribute['type']);
+            $this->thereIsAttribute(
+                $attribute['name'],
+                $attribute['type'],
+                (isset($attribute['code'])) ? $attribute['code'] : null,
+                (isset($attribute['presentation'])) ? $attribute['presentation'] : null)
+            ;
         }
 
         $this->getEntityManager()->flush();

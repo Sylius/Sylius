@@ -119,7 +119,7 @@ class AttributeValue implements AttributeValueInterface
         $this->assertAttributeIsSet();
 
         $setter = 'set'.ucfirst($this->attribute->getStorageType());
-        $this->$setter($value['value']);
+        $this->$setter($value);
     }
 
     /**
@@ -213,7 +213,15 @@ class AttributeValue implements AttributeValueInterface
      */
     public function setDateTime($dateTime)
     {
-        $this->dateTime = $dateTime;
+        $dateTimeValue = sprintf('%d/%d/%d %d:%d',
+            $dateTime['date']['year'],
+            $dateTime['date']['month'],
+            $dateTime['date']['day'],
+            $dateTime['time']['hour'],
+            $dateTime['time']['minute']
+        );
+
+        $this->dateTime = new \DateTime($dateTimeValue);
     }
 
     /**

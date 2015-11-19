@@ -1,5 +1,10 @@
 {% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
 
 <div class="tab-pane" id="attributes">
-    {{ form_row(form.attributes, { 'label': false }) }}
+    {#{{ form_row(form.attributes, { 'label': false }) }}#}
+    {#{{ dump(form.attributes) }}#}
+    <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#attributes-modal">
+        <i class="glyphicon glyphicon-plus"></i>
+        {{ 'sylius.form.attribute.add'|trans }}
+    </a>
 </div>

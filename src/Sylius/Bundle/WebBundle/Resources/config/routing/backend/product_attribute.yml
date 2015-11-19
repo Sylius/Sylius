@@ -44,3 +44,15 @@ sylius_backend_product_attribute_types:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_attribute:renderAttributeTypesAction
+
+sylius_backend_product_attributes:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributesAction
+
+sylius_backend_product_attribute_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeTypesFormsAction

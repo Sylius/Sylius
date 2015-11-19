@@ -1,11 +1,13 @@
 sylius:
     form:
         attribute:
-            name: Internal name
+            add: Add
+            add_attributes: Add attributes
+            choices: Choices
             code: Code
+            name: Internal name
             presentation: Presentation
             type: Type
-            choices: Choices
     attribute_type:
         checkbox: Checkbox
         datetime: Datetime

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -44,6 +45,44 @@ class AttributeController extends ResourceController
         $attributeTypes = $this->get('sylius.registry.attribute_type')->all();
 
         return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeTypesModal.html.twig', array('attributeTypes' => $attributeTypes));
+    }
+
+    /**
+     * @return Response
+     */
+    public function renderAttributesAction()
+    {
+        $form = $this->get('form.factory')->create(
+            'sylius_product_attribute_choice',
+            null,
+            array(
+                'expanded' => true,
+                'multiple' => true,
+            )
+        );
+
+        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeChoice.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function renderAttributeTypesFormsAction(Request $request)
+    {
+        $attributeRepository = $this->get('sylius.repository.product_attribute');
+        $forms = array();
+
+        foreach ($request->query->get('sylius_product_attribute_choice') as $choice) {
+            /** @var AttributeInterface $attribute */
+            $attribute = $attributeRepository->find($choice);
+            $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
+
+            $forms[$attribute->getId()] = $this->get('form.factory')->createNamed('value', $attributeForm, null, array('label' => $attribute->getName()))->createView();
+        }
+
+        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
     }
 
     /**

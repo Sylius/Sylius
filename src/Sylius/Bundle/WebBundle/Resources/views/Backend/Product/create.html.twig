@@ -10,6 +10,52 @@
     '@A2lixTranslationFormBundle/Resources/public/js/a2lix_translation_bootstrap.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script>
+        function modifyAttributeForms(data) {
+            $.each($(data).find('input'), function(){
+                if ($(this).attr('data-name') != null) {
+                    $(this).attr('name', $(this).attr('data-name'));
+                }
+            });
+            $.each($(data).find('select'), function(){
+                if ($(this).attr('data-name') != null) {
+                    $(this).attr('name', $(this).attr('data-name'));
+                }
+            });
+
+            return data;
+        }
+
+        function setAttributeChoiceListener() {
+            $('#attributeChoice').submit(function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var attributesCount = $('#attributes').children('.form-group').length;
+
+                $.ajax({
+                    type: 'GET',
+                    url: form.attr('action'),
+                    data: form.serialize()+'&count='+attributesCount,
+                    dataType: 'html'
+                }).done(function(data){
+                    console.log(data);
+                    var finalData = modifyAttributeForms($(data));
+                    $('#attributes').prepend(finalData);
+                    $('#attributes-modal').modal('hide');
+                });
+            });
+        }
+
+        $(document).ready(function(){
+            var attributesModal = $('#attributes-modal');
+            attributesModal.on('shown.bs.modal', function () {
+                setAttributeChoiceListener();
+            });
+            attributesModal.on('hide.bs.modal', function () {
+                $('#attributeChoice').unbind();
+            });
+        });
+    </script>
 {% endjavascripts %}
 {% endblock %}
 
