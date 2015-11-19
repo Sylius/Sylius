@@ -1,8 +1,15 @@
-{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+{% form_theme form 'SyliusAttributeBundle::attributeCollection.html.twig' %}
 
 <div class="tab-pane" id="attributes">
-    {#{{ form_row(form.attributes, { 'label': false }) }}#}
-    {#{{ dump(form.attributes) }}#}
+    <div data-form-type="collection" {{ block('widget_container_attributes') }}>
+        <div class="form-group">
+        <div>
+            <div data-form-collection="list" class="row collection-list">
+                {{ form_row(form.attributes, { 'label': false }) }}
+            </div>
+        </div>
+        </div>
+    </div>
     <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#attributes-modal">
         <i class="glyphicon glyphicon-plus"></i>
         {{ 'sylius.form.attribute.add'|trans }}
