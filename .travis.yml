@@ -47,23 +47,28 @@ before_install:
 
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then travis/prepare/prepare-mongodb; fi
-
-    - composer install --prefer-dist --no-interaction
-
-    - if [ $TEST_SUITE = "javascript" ]; then travis/prepare/prepare-javascript; fi
+    - |
+        if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then
+            travis/prepare/prepare-mongodb
+        else
+            composer install --prefer-dist --no-interaction
+        fi
 
     - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
-    - app/console doctrine:database:create --env=test
-    - app/console doctrine:schema:create --env=test
-    - app/console doctrine:phpcr:repository:init --env=test
+    - app/console doctrine:database:create --env=test_cached
+    - app/console doctrine:schema:create --env=test_cached
+    - app/console doctrine:phpcr:repository:init --env=test_cached
 
-    - app/console cache:warmup --env=test --no-debug
+    - app/console cache:warmup --env=test_cached --no-debug
 
-    - if [ $TEST_SUITE = "javascript" ]; then app/console assets:install --env=test; fi
-    - if [ $TEST_SUITE = "javascript" ]; then app/console assetic:dump --env=test; fi
+    - |
+        if [ $TEST_SUITE = "javascript" ]; then
+            travis/prepare/prepare-javascript
+            app/console assets:install --env=test_cached --no-debug
+            app/console assetic:dump --env=test_cached --no-debug
+        fi
 
     - php -v
     - php -i
