@@ -47,8 +47,7 @@ class PermissionMap implements PermissionMapInterface
     public function __construct(
         PermissionProviderInterface $permissionProvider,
         PermissionsResolverInterface $permissionsResolver
-    )
-    {
+    ) {
         $this->permissionProvider = $permissionProvider;
         $this->permissionsResolver = $permissionsResolver;
     }

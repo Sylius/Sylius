@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('authorization_checker')->defaultValue('sylius.authorization_checker.default')->end()
+                ->scalarNode('voter')->defaultValue('sylius.rbac.voter.default')->end()
                 ->scalarNode('identity_provider')->defaultValue('sylius.authorization_identity_provider.security')->end()
                 ->scalarNode('permission_map')->defaultValue('sylius.permission_map.cached')->end()
                 ->arrayNode('security_roles')
