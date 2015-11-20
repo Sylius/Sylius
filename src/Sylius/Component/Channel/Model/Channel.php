@@ -172,7 +172,23 @@ class Channel implements ChannelInterface
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (bool) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 
     /**

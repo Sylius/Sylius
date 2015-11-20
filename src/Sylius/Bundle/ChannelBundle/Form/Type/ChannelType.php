@@ -37,10 +37,6 @@ class ChannelType extends AbstractResourceType
                 'label'    => 'sylius.form.channel.description',
                 'required' => false,
             ))
-            ->add('enabled', 'checkbox', array(
-                'label'    => 'sylius.form.channel.enabled',
-                'required' => false,
-            ))
             ->add('url', 'text', array(
                 'label'    => 'sylius.form.channel.url',
                 'required' => false,

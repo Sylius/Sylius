@@ -30,11 +30,18 @@ sylius_backend_channel_update:
             template: SyliusWebBundle:Backend/Channel:update.html.twig
             redirect: sylius_backend_channel_index
 
-sylius_backend_channel_delete:
-    path:    /{id}
-    methods: [DELETE]
+sylius_backend_channel_enable:
+    path: /{id}/enable
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.channel:deleteAction
+        _controller: sylius.controller.channel:enableAction
         _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_channel_index
+
+sylius_backend_channel_disable:
+    path: /{id}/disable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.channel:disableAction
+        _sylius:
             redirect: sylius_backend_channel_index

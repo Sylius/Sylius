@@ -90,7 +90,7 @@ class ChannelContext extends DefaultContext
      */
     public function setupDefaultChannel()
     {
-        $this->thereIsChannel('DEFAULT-WEB', "Default", "localhost", "en_US", "EUR");
+        $this->thereIsChannel('DEFAULT-WEB', "Default", "localhost", true, "en_US", "EUR");
     }
 
     /**
@@ -103,6 +103,7 @@ class ChannelContext extends DefaultContext
                 $data['code'],
                 $data['name'],
                 isset($data['url']) ? $data['url'] : null,
+                isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['locales']) ? $data['locales'] : null,
                 isset($data['currencies']) ? $data['currencies'] : null,
                 isset($data['shipping']) ? $data['shipping'] : null,
@@ -144,15 +145,35 @@ class ChannelContext extends DefaultContext
     }
 
     /**
+     * @Given /^there is a disabled channel "([^""]*)"$/
+     */
+    public function thereIsDisabledChannel($name)
+    {
+        $this->thereIsChannel($name, $name, null, false);
+    }
+
+    /**
+     * @Given /^there is an enabled channel "([^""]*)"$/
+     */
+    public function thereIsEnabledChannel($name)
+    {
+        $this->thereIsChannel($name, $name, null, true);
+    }
+
+    /**
      * @Given /^There is channel "([^""]*)" named "([^""]*)" for url "([^""]*)"$/
      */
-    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = "EUR", $shippingMethods = null, $paymentMethos = null, $flush = true)
+    public function thereIsChannel($code, $name, $url, $enabled = true, $locales = null, $currencies = "EUR", $shippingMethods = null, $paymentMethos = null, $flush = true)
     {
         /* @var $channel ChannelInterface */
-        $channel = $this->getRepository('channel')->createNew();
-        $channel->setCode($code);
-        $channel->setName($name);
-        $channel->setUrl($url);
+        if (null === $channel = $this->getRepository('channel')->findOneBy(array('code' => $code))) {
+            $channel = $this->getRepository('channel')->createNew();
+            $channel->setCode($code);
+            $channel->setName($name);
+            $channel->setUrl($url);
+        }
+
+        $channel->setEnabled($enabled);
 
         $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethos);
 
