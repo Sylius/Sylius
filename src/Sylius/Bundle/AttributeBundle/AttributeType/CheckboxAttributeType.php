@@ -24,7 +24,7 @@ class CheckboxAttributeType implements AttributeTypeInterface
      */
     public function getStorageType()
     {
-        return 'boolean';
+        return DefaultAttributeTypes::STORAGE_BOOLEAN;
     }
 
     /**

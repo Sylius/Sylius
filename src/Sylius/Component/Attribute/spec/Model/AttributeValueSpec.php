@@ -79,7 +79,7 @@ class AttributeValueSpec extends ObjectBehavior
         $attribute->getStorageType()->willReturn('text');
         $this->setAttribute($attribute);
 
-        $this->setValue(array('value' => 'XXL'));
+        $this->setValue('XXL');
         $this->getValue()->shouldReturn('XXL');
     }
 
@@ -88,7 +88,7 @@ class AttributeValueSpec extends ObjectBehavior
         $attribute->getStorageType()->willReturn('text');
         $this->setAttribute($attribute);
 
-        $this->setValue(array('value' => 'S'));
+        $this->setValue('S');
         $this->__toString()->shouldReturn('S');
     }
 

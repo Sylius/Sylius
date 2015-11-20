@@ -30,11 +30,9 @@ class DatetimeAttributeTypeTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
+    function it_has_parent()
     {
-        $builder->add('value', 'datetime')->willReturn($builder);
-
-        $this->buildForm($builder, array());
+        $this->getParent()->shouldReturn('datetime');
     }
 
     function it_has_name()

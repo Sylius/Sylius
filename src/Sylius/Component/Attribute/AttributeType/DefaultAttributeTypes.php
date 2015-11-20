@@ -19,7 +19,15 @@ final class DefaultAttributeTypes
     const CHECKBOX = 'checkbox';
     const DATETIME = 'datetime';
     const INTEGER  = 'integer';
+    const PERCENT  = 'percent';
     const TEXT     = 'text';
+    const TEXTAREA = 'textarea';
+
+    const STORAGE_TEXT     = 'text';
+    const STORAGE_BOOLEAN  = 'boolean';
+    const STORAGE_DATETIME = 'datetime';
+    const STORAGE_INTEGER  = 'integer';
+    const STORAGE_FLOAT    = 'float';
 
     /**
      * @return array
@@ -30,7 +38,9 @@ final class DefaultAttributeTypes
             self::CHECKBOX => 'sylius.attribute_type.checkbox',
             self::DATETIME => 'sylius.attribute_type.datetime',
             self::INTEGER  => 'sylius.attribute_type.integer',
+            self::PERCENT  => 'sylius.attribute_type.percent',
             self::TEXT     => 'sylius.attribute_type.text',
+            self::TEXTAREA => 'sylius.attribute_type.textarea',
         );
     }
 }

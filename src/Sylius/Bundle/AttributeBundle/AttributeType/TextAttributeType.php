@@ -24,7 +24,7 @@ class TextAttributeType implements AttributeTypeInterface
      */
     public function getStorageType()
     {
-        return 'text';
+        return DefaultAttributeTypes::STORAGE_TEXT;
     }
 
     /**

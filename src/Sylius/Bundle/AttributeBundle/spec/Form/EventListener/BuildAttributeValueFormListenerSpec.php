@@ -66,12 +66,13 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
 
         $productAttributeValue->getAttribute()->willReturn($productAttribute);
         $productAttribute->getType()->willReturn('text');
+        $productAttribute->getName()->willReturn('Test');
 
         $attributeTypeRegistry->get('text')->willReturn($productAttributeType);
         $productAttributeType->getType()->willReturn('text_form');
         $productAttributeValue->getValue()->willReturn('Test');
 
-        $formFactory->createNamed('value', 'sylius_attribute_type_text_form', array('value' => 'Test'), Argument::type('array'))->willReturn($valueField);
+        $formFactory->createNamed('value', 'sylius_attribute_type_text_form', 'Test', Argument::type('array'))->willReturn($valueField);
 
         $form->add($valueField)->shouldBeCalled();
 

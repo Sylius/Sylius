@@ -53,6 +53,11 @@ class AttributeValue implements AttributeValueInterface
     protected $integer;
 
     /**
+     * @var float
+     */
+    protected $float;
+
+    /**
      * @var \DateTime
      */
     protected $dateTime;
@@ -198,6 +203,22 @@ class AttributeValue implements AttributeValueInterface
     public function setInteger($integer)
     {
         $this->integer = $integer;
+    }
+
+    /**
+     * @return float
+     */
+    public function getFloat()
+    {
+        return $this->float;
+    }
+
+    /**
+     * @param float $float
+     */
+    public function setFloat($float)
+    {
+        $this->float = $float;
     }
 
     /**

@@ -38,7 +38,11 @@
                 {% for attribute in product.attributes %}
                 <tr>
                     <td>{{ attribute.presentation }}</td>
-                    <td>{{ attribute.value }}</td>
+                    {% if attribute.value.timestamp is defined %}
+                        <td>{{ attribute.value|date('Y/m/d') }}</td>
+                    {% else %}
+                        <td>{{ attribute.value }}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

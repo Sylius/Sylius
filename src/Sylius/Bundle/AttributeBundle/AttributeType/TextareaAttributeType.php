@@ -17,14 +17,14 @@ use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeType implements AttributeTypeInterface
+class TextareaAttributeType implements AttributeTypeInterface
 {
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_DATETIME;
+        return DefaultAttributeTypes::STORAGE_TEXT;
     }
 
     /**
@@ -32,6 +32,6 @@ class DatetimeAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::DATETIME;
+        return DefaultAttributeTypes::TEXTAREA;
     }
 }

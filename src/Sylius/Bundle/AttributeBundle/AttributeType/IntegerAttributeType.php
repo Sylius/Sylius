@@ -24,7 +24,7 @@ class IntegerAttributeType implements AttributeTypeInterface
      */
     public function getStorageType()
     {
-        return 'integer';
+        return DefaultAttributeTypes::STORAGE_INTEGER;
     }
 
     /**

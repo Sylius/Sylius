@@ -25,11 +25,17 @@
         <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeTypeType</parameter>
 
+        <parameter key="sylius.attribute.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\AttributeType\TextareaAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeTypeType</parameter>
+
         <parameter key="sylius.attribute.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeTypeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\AttributeType\IntegerAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeTypeType</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\AttributeType\PercentAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeTypeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeType</parameter>
@@ -56,6 +62,13 @@
             <tag name="form.type" alias="sylius_attribute_type_text" />
         </service>
 
+        <service id="sylius.attribute.attribute_type.textarea" class="%sylius.attribute.attribute_type.textarea.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="textarea" label="Textarea" />
+        </service>
+        <service id="sylius.form.type.attribute_type.textarea" class="%sylius.form.type.attribute_type.textarea.class%">
+            <tag name="form.type" alias="sylius_attribute_type_textarea" />
+        </service>
+
         <service id="sylius.attribute.attribute_type.checkbox" class="%sylius.attribute.attribute_type.checkbox.class%">
             <tag name="sylius.attribute.attribute_type" attribute-type="checkbox" label="Checkbox" />
         </service>
@@ -68,6 +81,13 @@
         </service>
         <service id="sylius.form.type.attribute_type.integer" class="%sylius.form.type.attribute_type.integer.class%">
             <tag name="form.type" alias="sylius_attribute_type_integer" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.percent" class="%sylius.attribute.attribute_type.percent.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="percent" label="Percent" />
+        </service>
+        <service id="sylius.form.type.attribute_type.percent" class="%sylius.form.type.attribute_type.percent.class%">
+            <tag name="form.type" alias="sylius_attribute_type_percent" />
         </service>
 
         <service id="sylius.attribute.attribute_type.datetime" class="%sylius.attribute.attribute_type.datetime.class%">

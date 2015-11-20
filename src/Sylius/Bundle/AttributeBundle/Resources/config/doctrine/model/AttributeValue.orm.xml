@@ -24,6 +24,7 @@
         <field name="text" column="text" type="text" nullable="true" />
         <field name="boolean" column="boolean" type="boolean" nullable="true" />
         <field name="integer" column="integer_value" type="integer" nullable="true" />
+        <field name="float" column="float_value" type="float" nullable="true" />
         <field name="dateTime" column="datetime" type="datetime" nullable="true" />
     </mapped-superclass>
 
