@@ -470,7 +470,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @throws \RuntimeException If timeout was reached
      */
-    protected function waitFor(callable $callback, $limit = 10, $delay = 100)
+    protected function waitFor(callable $callback, $limit = 30, $delay = 100)
     {
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();

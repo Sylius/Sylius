@@ -655,9 +655,7 @@ class CoreContext extends DefaultContext
         $session->set('_security_user', serialize($token));
         $session->save();
 
-        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
-            $this->visitPath('/');
-        }
+        $this->prepareSessionIfNeeded();
 
         $this->getSession()->setCookie($session->getName(), $session->getId());
         $this->getService('security.token_storage')->setToken($token);
@@ -781,5 +779,18 @@ class CoreContext extends DefaultContext
         }
 
         $this->getEntityManager()->persist($product);
+    }
+
+    private function prepareSessionIfNeeded()
+    {
+        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        if (false !== strpos($this->getSession()->getCurrentUrl(), $this->getMinkParameter('base_url'))) {
+            return;
+        }
+
+        $this->visitPath('/');
     }
 }
