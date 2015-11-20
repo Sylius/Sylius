@@ -23,7 +23,7 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
-            {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+            {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
                 {% include "CmfCreateBundle::includecssfiles.html.twig" %}
             {% endif %}
         {% endblock %}
@@ -33,7 +33,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body {% if is_granted('ROLE_SYLIUS_ADMIN') %}class="toolbar-padding"{% endif %}>
+    <body {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}class="toolbar-padding"{% endif %}>
     {% if settings.tracking_code %}
         {{ settings.tracking_code|raw }}
     {% endif %}
@@ -141,7 +141,7 @@
         {% endblock %}
         </div>
 
-        {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+        {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
             {% render(controller(
                 "cmf_create.jsloader.controller:includeJSFilesAction",
                 {'_locale': app.request.locale, 'editor': 'hallo'}

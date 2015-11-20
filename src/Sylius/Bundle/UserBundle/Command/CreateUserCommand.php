@@ -62,7 +62,6 @@ EOT
 
         $securityRoles = ['ROLE_USER'];
         if ($superAdmin) {
-            $securityRoles[] = 'ROLE_SYLIUS_ADMIN';
             $securityRoles[] = 'ROLE_ADMINISTRATION_ACCESS';
         }
 

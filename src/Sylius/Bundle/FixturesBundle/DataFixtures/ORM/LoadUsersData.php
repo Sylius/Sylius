@@ -33,7 +33,7 @@ class LoadUsersData extends DataFixture
             'sylius@example.com',
             'sylius',
             true,
-            array('ROLE_USER', 'ROLE_SYLIUS_ADMIN', 'ROLE_ADMINISTRATION_ACCESS')
+            array('ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS')
         );
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
