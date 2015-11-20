@@ -710,7 +710,7 @@ sylius_rbac:
             name: Content Editor
             description: Content Team people
             permissions: [sylius.content]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_CAN_VIEW_NON_PUBLISHED]
         tax_manager:
             name: Tax Manager
             description: Taxes Team
