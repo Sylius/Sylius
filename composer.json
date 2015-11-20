@@ -23,7 +23,6 @@
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
-        "ext-intl": "*",
 
         "a2lix/translation-form-bundle": "~2.0",
         "doctrine/collections": "~1.2",
@@ -73,6 +72,9 @@
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/symfony": "^2.7.7",
         "symfony/twig-bundle": "^2.7",
+        "symfony/polyfill-iconv": "~1.0",
+        "symfony/polyfill-intl-icu": "~1.0",
+        "symfony/polyfill-mbstring": "~1.0",
         "twig/extensions": "~1.0",
         "twig/twig": "~1.11",
         "white-october/pagerfanta-bundle": "~1.0",
@@ -156,6 +158,11 @@
         "sylius/variation":          "self.version",
         "sylius/variation-bundle":   "self.version",
         "sylius/web-bundle":         "self.version"
+    },
+    "suggest": {
+        "ext-iconv": "For better performance than using Symfony Polyfill Component",
+        "ext-intl": "For better performance than using Symfony Polyfill Component",
+        "ext-mbstring": "For better performance than using Symfony Polyfill Component"
     },
     "scripts": {
         "travis-build": [

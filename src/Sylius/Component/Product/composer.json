@@ -26,10 +26,14 @@
         "sylius/attribute": "0.16.*",
         "sylius/resource": "0.16.*",
         "sylius/translation": "0.16.*",
-        "sylius/variation": "0.16.*"
+        "sylius/variation": "0.16.*",
+        "symfony/polyfill-iconv": "~1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
+    },
+    "suggest": {
+        "ext-iconv": "For better performance than using Symfony Polyfill Component"
     },
     "config": {
         "bin-dir": "bin"
