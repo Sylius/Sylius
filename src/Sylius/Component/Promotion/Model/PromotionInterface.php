@@ -12,12 +12,13 @@
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface extends TimestampableInterface
+interface PromotionInterface extends SoftDeletableInterface, TimestampableInterface
 {
     /**
      * @return mixed
