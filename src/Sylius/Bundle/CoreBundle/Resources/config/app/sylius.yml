@@ -540,13 +540,6 @@ sylius_rbac:
         sylius.simple_block.update: Edit simple block
         sylius.simple_block.delete: Delete simple block
 
-        sylius.manage.simple_block: Manage simple blocks
-        sylius.simple_block.show: Show simple block
-        sylius.simple_block.index: List simple blocks
-        sylius.simple_block.create: Create simple block
-        sylius.simple_block.update: Edit simple block
-        sylius.simple_block.delete: Delete simple block
-
         sylius.manage.string_block: Manage string blocks
         sylius.string_block.show: Show string block
         sylius.string_block.index: List string blocks
