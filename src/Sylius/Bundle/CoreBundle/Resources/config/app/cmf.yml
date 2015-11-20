@@ -42,7 +42,7 @@ doctrine_cache:
 
 cmf_create:
     security:
-      role: ROLE_SYLIUS_ADMIN
+      role: ROLE_ADMINISTRATION_ACCESS
     persistence:
         phpcr:
             image: false
