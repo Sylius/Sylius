@@ -24,10 +24,10 @@
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType</parameter>
         <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
 
-        <parameter key="sylius.shipping_calculator_registry.class">Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry</parameter>
+        <parameter key="sylius.registry.shipping_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.shipping_calculator.class">Sylius\Component\Shipping\Calculator\DelegatingCalculator</parameter>
 
-        <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry</parameter>
+        <parameter key="sylius.registry.shipping_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
         <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Component\Shipping\Checker\ItemCountRuleChecker</parameter>
@@ -64,13 +64,15 @@
         </service>
 
         <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%">
-            <argument type="service" id="sylius.shipping_rule_checker_registry" />
+            <argument type="service" id="sylius.registry.shipping_rule_checker" />
         </service>
         <service id="sylius.shipping_rule_checker.item_count" class="%sylius.shipping_rule_checker.item_count.class%">
             <tag name="sylius.shipping_rule_checker" type="item_count" label="Item count" />
         </service>
 
-        <service id="sylius.shipping_rule_checker_registry" class="%sylius.shipping_rule_checker_registry.class%" />
+        <service id="sylius.registry.shipping_rule_checker" class="%sylius.registry.shipping_rule_checker.class%" >
+                <argument>Sylius\Component\Shipping\Checker\RuleCheckerInterface</argument>
+        </service>
 
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
@@ -78,7 +80,7 @@
         </service>
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />
-            <argument type="service" id="sylius.shipping_calculator_registry" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <tag name="form.type" alias="sylius_shipping_method_choice" />
         </service>
@@ -88,9 +90,11 @@
             <tag name="form.type" alias="sylius_shipping_calculator_choice" />
         </service>
 
-        <service id="sylius.shipping_calculator_registry" class="%sylius.shipping_calculator_registry.class%" />
+        <service id="sylius.registry.shipping_calculator" class="%sylius.registry.shipping_calculator.class%" >
+            <argument>Sylius\Component\Shipping\Calculator\CalculatorInterface</argument>
+        </service>
         <service id="sylius.shipping_calculator" class="%sylius.shipping_calculator.class%">
-            <argument type="service" id="sylius.shipping_calculator_registry" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
         </service>
 
         <service id="sylius.shipping_shipping_calculator.flat_rate" class="%sylius.shipping_calculator.flat_rate.class%">

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
         MethodsResolverInterface $resolver,
-        CalculatorRegistryInterface $calculators,
+        ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
         $this->beConstructedWith($resolver, $calculators, $repository);

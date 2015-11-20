@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
@@ -43,7 +43,7 @@ class ShippingMethodChoiceType extends AbstractType
     protected $resolver;
 
     /**
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $calculators;
 
@@ -53,15 +53,13 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * Constructor.
-     *
      * @param MethodsResolverInterface    $resolver
-     * @param CalculatorRegistryInterface $calculators
-     * @param Repositoryinterface         $repository
+     * @param ServiceRegistryInterface    $calculators
+     * @param RepositoryInterface         $repository
      */
     public function __construct(
         MethodsResolverInterface $resolver,
-        CalculatorRegistryInterface $calculators,
+        ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
         $this->resolver = $resolver;
@@ -124,7 +122,7 @@ class ShippingMethodChoiceType extends AbstractType
                 throw new UnexpectedTypeException($method, 'ShippingMethodInterface');
             }
 
-            $calculator = $this->calculators->getCalculator($method->getCalculator());
+            $calculator = $this->calculators->get($method->getCalculator());
             $shippingCosts[$choiceView->value] = $calculator->calculate($subject, $method->getConfiguration());
         }
 

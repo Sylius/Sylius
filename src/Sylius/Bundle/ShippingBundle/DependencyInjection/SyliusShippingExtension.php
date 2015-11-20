@@ -35,10 +35,10 @@ class SyliusShippingExtension extends AbstractResourceExtension
         );
 
         $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
-        $shippingMethod->addArgument(new Reference('sylius.shipping_calculator_registry'));
-        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_calculator'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
 
         $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method_rule');
-        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
     }
 }
