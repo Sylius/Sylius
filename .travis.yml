@@ -9,7 +9,6 @@ cache:
     directories:
         - bin
         - vendor
-        - $HOME/.composer/cache
         - $SYLIUS_CACHE_DIR
 
 sudo: false
