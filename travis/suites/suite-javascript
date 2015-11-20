@@ -1,12 +1,12 @@
 #!/bin/bash
-bin/behat --strict -f progress -p javascript_cached -s channels
-bin/behat --strict -f progress -p javascript_cached -s users
-bin/behat --strict -f progress -p javascript_cached -s taxonomies
-bin/behat --strict -f progress -p javascript_cached -s taxation
-bin/behat --strict -f progress -p javascript_cached -s shipping
-bin/behat --strict -f progress -p javascript_cached -s promotions
-bin/behat --strict -f progress -p javascript_cached -s products
-bin/behat --strict -f progress -p javascript_cached -s payments
-bin/behat --strict -f progress -p javascript_cached -s orders
-bin/behat --strict -f progress -p javascript_cached -s addressing
 bin/behat --strict -f progress -p javascript_cached -s account
+bin/behat --strict -f progress -p javascript_cached -s addressing
+bin/behat --strict -f progress -p javascript_cached -s channels
+bin/behat --strict -f progress -p javascript_cached -s orders
+bin/behat --strict -f progress -p javascript_cached -s payments
+bin/behat --strict -f progress -p javascript_cached -s products
+bin/behat --strict -f progress -p javascript_cached -s promotions
+bin/behat --strict -f progress -p javascript_cached -s shipping
+bin/behat --strict -f progress -p javascript_cached -s taxation
+bin/behat --strict -f progress -p javascript_cached -s taxonomies
+bin/behat --strict -f progress -p javascript_cached -s users
