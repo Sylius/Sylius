@@ -4,7 +4,6 @@
 [![License](https://img.shields.io/packagist/l/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Version](https://img.shields.io/packagist/v/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Build status on Linux](https://img.shields.io/travis/Sylius/Sylius/master.svg)](http://travis-ci.org/Sylius/Sylius)
-[![Build status on Windows](https://img.shields.io/appveyor/ci/pjedrzejewski/sylius.svg)](https://ci.appveyor.com/project/pjedrzejewski/sylius/branch/master)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
 [![HHVM Status](https://img.shields.io/hhvm/Sylius/Sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
 [![Dependency Status](https://www.versioneye.com/php/sylius:sylius/badge.svg)](https://www.versioneye.com/php/sylius:sylius)
@@ -16,6 +15,10 @@ Ultimate goal of the project is to create a webshop engine, which is user-friend
 Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application. 
 
 We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
+
+Windows support is a WIP! 
+
+[![Build status on Windows](https://img.shields.io/appveyor/ci/pjedrzejewski/sylius.svg)](https://ci.appveyor.com/project/pjedrzejewski/sylius/branch/master)
 
 Documentation
 -------------
