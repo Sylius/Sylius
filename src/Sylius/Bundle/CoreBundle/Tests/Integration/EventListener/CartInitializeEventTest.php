@@ -15,8 +15,13 @@ use Sylius\Component\Core\Model\OrderInterface;
  */
 class CartInitializeEventTest extends IntegrationTestCase
 {
+    /**
+     * @test
+     */
     public function is_sets_channel_and_currency_on_order()
     {
+        $this->markTestSkipped();
+
         /** @var OrderInterface $order */
         $order = $this->prophet->prophesize(OrderInterface::class);
 

@@ -7,6 +7,7 @@ use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Bundle\CoreBundle\Tests\IntegrationTestCase;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ShopperContextChangeSubscriberTest extends IntegrationTestCase
@@ -31,10 +32,13 @@ class ShopperContextChangeSubscriberTest extends IntegrationTestCase
         );
     }
 
-    public function test_it_calls_pre()
+    public function test_it_calls_events()
     {
+        $cart = $this->prophet->prophesize(OrderInterface::class);
+        $event = new GenericEvent($cart->reveal());
+
         $this->eventDispatcher->dispatch(
-            SyliusCoreEvents::PRE_CART_CHANGE
+            SyliusCoreEvents::PRE_CART_CHANGE, $event
         );
 
         $this->eventDispatcher->dispatch(

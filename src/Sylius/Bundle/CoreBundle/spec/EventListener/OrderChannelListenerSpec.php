@@ -5,13 +5,9 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\OrderChannelListener;
-use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -20,11 +16,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderChannelListenerSpec extends ObjectBehavior
 {
     function let(
-        ChannelContextInterface $channelContext,
-        CartProviderInterface $cartProvider
+        ChannelContextInterface $channelContext
     )
     {
-        $this->beConstructedWith($channelContext, $cartProvider);
+        $this->beConstructedWith($channelContext);
     }
 
     function it_is_initializable()
@@ -33,32 +28,23 @@ class OrderChannelListenerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_event_subject_is_an_invaliad_order_instance(
-        Event $event,
-        CartProviderInterface $cartProvider
+        GenericEvent $event
     )
     {
         $orderClass = new \stdClass();
-        $exception = new UnexpectedTypeException(
-            $orderClass,
-            'Sylius\Component\Core\Model\OrderInterface'
-        );
+        $event->getSubject()->shouldBeCalled()->willReturn($orderClass);
 
-        $cartProvider->getCart()->shouldBeCalled()->willReturn($orderClass);
-
-        $this->shouldThrow($exception)->duringProcessOrderChannel($event);
+        $this->shouldThrow(\UnexpectedValueException::class)->duringProcessOrderChannel($event);
     }
 
     function it_proccess_order_channel_successfully(
-        Event $event,
+        GenericEvent $event,
         OrderInterface $order,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel,
-        CartProviderInterface $cartProvider
+        ChannelInterface $channel
     ) {
-        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
-
+        $event->getSubject()->shouldBeCalled()->willReturn($order);
         $channelContext->getChannel()->shouldBeCalled()->willReturn($channel);
-
         $order->setChannel($channel)->shouldBeCalled();
 
         $this->processOrderChannel($event);

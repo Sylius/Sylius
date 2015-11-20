@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
+use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -82,7 +83,7 @@ class CartProvider implements CartProviderInterface
         $cart = $this->provideCart();
 
         $this->eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
+            SyliusCoreEvents::PRE_CART_CHANGE,
             new GenericEvent($cart)
         );
 

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CartBundle\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Provider\CartProvider;
+use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
@@ -56,7 +57,7 @@ class CartProviderSpec extends ObjectBehavior
         $cartContext->getCurrentCartIdentifier()->willReturn(3);
         $cartRepository->find(3)->willReturn($cart);
         $eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
+            SyliusCoreEvents::PRE_CART_CHANGE,
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
 
@@ -77,7 +78,7 @@ class CartProviderSpec extends ObjectBehavior
         $cartRepository->find()->shouldNotBeCalled();
 
         $eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
+            SyliusCoreEvents::PRE_CART_CHANGE,
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
 
@@ -100,7 +101,7 @@ class CartProviderSpec extends ObjectBehavior
         $cartContext->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
+            SyliusCoreEvents::PRE_CART_CHANGE,
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
 
