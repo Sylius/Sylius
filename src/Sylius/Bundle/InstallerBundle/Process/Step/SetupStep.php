@@ -69,7 +69,7 @@ class SetupStep extends AbstractControllerStep
 
             $user = $form->getData();
             $user->setEnabled(true);
-            $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
+            $user->setRoles(array('ROLE_ADMINISTRATION_ACCESS'));
 
             $em->persist($user);
             $em->flush();
