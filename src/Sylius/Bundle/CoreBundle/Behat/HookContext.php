@@ -10,10 +10,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Behat;
 
-use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Behat\Behat\Hook\Scope\BeforeStepScope;
+use Behat\Mink\Driver\Selenium2Driver;
 use Doctrine\Common\DataFixtures\Purger\PurgerInterface;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
@@ -41,6 +40,17 @@ class HookContext extends DefaultContext
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * @BeforeStep
+     */
+    public function setTimeouts(BeforeStepScope $scope)
+    {
+        $driver = $this->getMink()->getSession()->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            $driver->setTimeouts(['page load' => 30000]);
+        }
     }
 
     /**
