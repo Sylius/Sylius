@@ -32,7 +32,7 @@ security:
             anonymous:  true
 
         main:
-            switch_user: { role: ROLE_SYLIUS_ADMIN }
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context:     user
             pattern:     /.*
             form_login:
