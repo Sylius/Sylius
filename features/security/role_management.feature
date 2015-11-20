@@ -62,7 +62,7 @@ Feature: Roles management
         Then I should be on the role index page
         And I should see "Role has been successfully created."
         And I should see 4 roles in the list
-        And I should see role with code "sylius.salesman" in that list
+        And I should see role with name "Salesman" in that list
 
     Scenario: Cannot edit the parent of root node
         Given I am on the role index page
@@ -83,4 +83,4 @@ Feature: Roles management
         When I click "delete" near "sylius.catalog_manager"
         Then I should be on the role index page
         And I should see "Role has been successfully deleted."
-        And I should not see role with code "sylius.catalog_manager" in the list
+        And I should not see role with name "Catalog Manager" in the list
