@@ -701,7 +701,7 @@ sylius:
     payment_method:
         create: Create payment method
         create_header: New payment method
-        enabled: Is enabled?
+        enabled: enabled
         gateway: gateway
         id: ID
         index_header: Payment methods

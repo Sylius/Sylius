@@ -105,7 +105,7 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean)$enabled;
+        $this->enabled = (bool) $enabled;
     }
 
     /**
@@ -238,5 +238,15 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }
