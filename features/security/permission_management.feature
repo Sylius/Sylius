@@ -58,7 +58,7 @@ Feature: Permissions management
         Then I should be on the permission index page
         And I should see "Permission has been successfully created."
         And I should see 13 permissions in the list
-        And I should see permission with code "sylius.product.display_sales_stats" in that list
+        And I should see permission with code containing "sylius.product.display_sales_stats" in that list
 
     Scenario: Cannot edit the parent of root node
         Given I am on the permission index page
@@ -80,4 +80,4 @@ Feature: Permissions management
         When I click "delete" near "Edit product"
         Then I should be on the permission index page
         And I should see "Permission has been successfully deleted."
-        And I should not see permission with code "sylius.product.edit" in the list
+        And I should not see permission with code containing "sylius.product.edit" in the list
