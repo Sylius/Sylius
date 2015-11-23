@@ -80,6 +80,21 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function visitPath($path, $sessionName = null)
+    {
+        parent::visitPath($path, $sessionName);
+
+        $page = $this->getSession()->getPage();
+        $this->waitFor(function () use ($page) {
+            return null !== $page->find('css', 'html');
+        }, 10, 100);
+
+        $this->getSession()->executeScript("setTimeout(function(){window.close();}, 20000)");
+    }
+
+    /**
      * @param string $type
      * @param string $name
      *
