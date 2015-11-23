@@ -399,7 +399,7 @@ class ResourceController extends FOSRestController
      */
     public function createNew()
     {
-        return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
+        return $this->resourceResolver->createResource($this->getFactory(), 'createNew');
     }
 
     /**
@@ -470,6 +470,14 @@ class ResourceController extends FOSRestController
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    public function getFactory()
+    {
+        return $this->get($this->config->getServiceName('factory'));
     }
 
     /**

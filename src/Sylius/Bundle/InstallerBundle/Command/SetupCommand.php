@@ -74,13 +74,14 @@ EOT
 
         $userManager = $this->get('sylius.manager.user');
         $userRepository = $this->get('sylius.repository.user');
-        $customerRepository = $this->get('sylius.repository.customer');
+        $userFactory = $this->get('sylius.factory.user');
+        $customerFactory = $this->get('sylius.factory.customer');
 
         $rbacInitializer = $this->get('sylius.rbac.initializer');
         $rbacInitializer->initialize();
 
-        $user = $userRepository->createNew();
-        $customer = $customerRepository->createNew();
+        $user = $userFactory->createNew();
+        $customer = $customerFactory->createNew();
         $user->setCustomer($customer);
 
         if ($input->getOption('no-interaction')) {
@@ -126,6 +127,7 @@ EOT
     {
         $localeRepository = $this->get('sylius.repository.locale');
         $localeManager = $this->get('sylius.manager.locale');
+        $localeFactory = $this->get('sylius.factory.locale');
 
         do {
             $locales = $this->getLocalesCodes($input, $output);
@@ -158,7 +160,7 @@ EOT
                 continue;
             }
 
-            $locale = $localeRepository->createNew();
+            $locale = $localeFactory->createNew();
             $locale->setCode($code);
             $this->locales[] = $locale;
 
@@ -176,6 +178,7 @@ EOT
     {
         $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
+        $currencyFactory = $this->get('sylius.factory.currency');
 
         do {
             $currencies = $this->getCurrenciesCodes($input, $output);
@@ -203,7 +206,7 @@ EOT
                 continue;
             }
 
-            $currency = $currencyRepository->createNew();
+            $currency = $currencyFactory->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate(1);
             $this->currencies[] = $currency;
@@ -222,6 +225,7 @@ EOT
     {
         $countryRepository = $this->get('sylius.repository.country');
         $countryManager = $this->get('sylius.manager.country');
+        $countryFactory = $this->get('sylius.factory.country');
 
         do {
             $countries = $this->getCountriesCodes($input, $output);
@@ -247,7 +251,7 @@ EOT
                 continue;
             }
 
-            $country = $countryRepository->createNew();
+            $country = $countryFactory->createNew();
             $country->setIsoName($code);
 
             $countryManager->persist($country);
@@ -264,6 +268,7 @@ EOT
     {
         $channelRepository = $this->get('sylius.repository.channel');
         $channelManager = $this->get('sylius.manager.channel');
+        $channelFactory = $this->get('sylius.factory.channel');
 
         $channels = $this->getChannelsCodes($input, $output);
 
@@ -275,7 +280,7 @@ EOT
             }
 
             /** @var ChannelInterface $channel */
-            $channel = $channelRepository->createNew();
+            $channel = $channelFactory->createNew();
             $channel->setUrl(null);
             $channel->setCode($code);
             $channel->setName($code);
