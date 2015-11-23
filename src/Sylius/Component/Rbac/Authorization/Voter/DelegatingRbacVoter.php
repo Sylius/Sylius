@@ -26,7 +26,7 @@ class DelegatingRbacVoter extends DefaultRbacVoter implements DelegatingRbacVote
     /**
      * @var bool
      */
-    private $sorted = false;
+    private $sorted;
 
     /**
      * {@inheritdoc}
@@ -34,6 +34,7 @@ class DelegatingRbacVoter extends DefaultRbacVoter implements DelegatingRbacVote
     public function addResourceVoter(ResourceVoterInterface $resourceVoter)
     {
         $this->resourceVoters[] = $resourceVoter;
+        $this->sorted = false;
     }
 
     /**
@@ -62,5 +63,7 @@ class DelegatingRbacVoter extends DefaultRbacVoter implements DelegatingRbacVote
             }
             return ($voter1->getPriority() < $voter2->getPriority()) ? -1 : 1;
         });
+
+        $this->sorted = true;
     }
 }
