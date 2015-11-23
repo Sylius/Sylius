@@ -12,14 +12,15 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -122,6 +123,16 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getRepository($resourceName)
     {
         return $this->getService($this->applicationName.'.repository.'.$resourceName);
+    }
+
+    /**
+     * @param string $resourceName
+     *
+     * @return FactoryInterface
+     */
+    protected function getFactory($resourceName)
+    {
+        return $this->getService($this->applicationName.'.factory.'.$resourceName);
     }
 
     /**

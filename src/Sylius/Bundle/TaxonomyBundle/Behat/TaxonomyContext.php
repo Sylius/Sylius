@@ -34,7 +34,7 @@ class TaxonomyContext extends DefaultContext
      */
     public function thereIsTaxonomy($name, $flush = true)
     {
-        $taxonomy = $this->getRepository('taxonomy')->createNew();
+        $taxonomy = $this->getFactory('taxonomy')->createNew();
         $taxonomy->setName($name);
 
         if (null === $taxonomy->getCurrentLocale()) {
@@ -66,7 +66,7 @@ class TaxonomyContext extends DefaultContext
 
                 if (!isset($taxons[$taxonName])) {
                     /* @var $taxon TaxonInterface */
-                    $taxon = $this->getRepository('taxon')->createNew();
+                    $taxon = $this->getFactory('taxon')->createNew();
                     $taxon->setName($taxonName);
 
                     $taxons[$taxonName] = $taxon;

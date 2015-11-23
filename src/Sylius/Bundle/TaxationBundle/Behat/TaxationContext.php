@@ -36,7 +36,7 @@ class TaxationContext extends DefaultContext
      */
     public function thereIsTaxCategory($name, $flush = true)
     {
-        $category = $this->getRepository('tax_category')->createNew();
+        $category = $this->getFactory('tax_category')->createNew();
         $category->setName($name);
 
         $manager = $this->getEntityManager();

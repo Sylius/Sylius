@@ -38,7 +38,7 @@ class FixtureContext extends DefaultContext
             $additionalData = $additionalData->getHash();
         }
 
-        $entity = $this->getRepository($resource)->createNew();
+        $entity = $this->getFactory($resource)->createNew();
 
         if (count($additionalData) > 0) {
             $this->setDataToObject($entity, $additionalData);
