@@ -10,6 +10,7 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * feature #3110 [BC BREAK] Bumped minimal versions, major changes: PHP >=5.5.9, Symfony ^2.7
  * bc break #3364 [BC BREAK] Renamed setDefaultOptions to configureOptions
  * bc break #3536 [BC BREAK] Renamed label to type on adjustment
+ * bc break #3610 [BC BREAK] Renamed `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
 
 ## v0.15 (2015-09-08)
 
