@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -154,21 +153,23 @@ EOT
         $user->setRoles($securityRoles);
         $user->setEnabled($enabled);
 
-        $roleRepository = $this->getContainer()->get('sylius.repository.role');
-        foreach ($roles as $code) {
-            /** @var RoleInterface $role */
-            $role = $roleRepository->findOneBy(array('code' => $code));
-
-            if (null === $role) {
-                throw new \InvalidArgumentException(
-                    sprintf('No role with code `%s` does not exist.', $code)
-                );
-            }
-
-            $user->addAuthorizationRole($role);
-        }
-
         $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
+
+        if (!$this->isRbacEnabled()) {
+            $roleRepository = $this->getContainer()->get('sylius.repository.role');
+            foreach ($roles as $code) {
+                /** @var \Sylius\Component\Rbac\Model\RoleInterface $role */
+                $role = $roleRepository->findOneBy(array('code' => $code));
+
+                if (null === $role) {
+                    throw new \InvalidArgumentException(
+                        sprintf('No role with code `%s` does not exist.', $code)
+                    );
+                }
+
+                $user->addAuthorizationRole($role);
+            }
+        }
 
         return $user;
     }
@@ -203,5 +204,16 @@ EOT
     protected function getRoleRepository()
     {
         return $this->getContainer()->get('sylius.repository.role');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isRbacEnabled()
+    {
+        return array_key_exists(
+            'Sylius\Bundle\RbacBundle\SyliusRbacBundle',
+            $this->getContainer()->getParameter('kernel.bundles')
+        );
     }
 }

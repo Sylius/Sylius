@@ -59,13 +59,13 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     public function supports($permissionCode, $resource)
     {
-        if ($this->application !== $this->getComponent($permissionCode, 'application')) {
+        if ($this->application !== $this->getPermissionComponent($permissionCode, 'application')) {
             return false;
         }
-        if ($this->resource !== $this->getComponent($permissionCode, 'resource')) {
+        if ($this->resource !== $this->getPermissionComponent($permissionCode, 'resource')) {
             return false;
         }
-        if (!in_array($this->getComponent($permissionCode, 'action'), $this->actions)) {
+        if (!in_array($this->getPermissionComponent($permissionCode, 'action'), $this->actions)) {
             return false;
         }
 
@@ -85,7 +85,7 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     public function isGranted(IdentityInterface $identity, $permissionCode, $resource)
     {
-        $action = $this->getComponent($permissionCode, 'action');
+        $action = $this->getPermissionComponent($permissionCode, 'action');
 
         return $this->isActionGranted($identity, $action, $resource);
     }
@@ -101,7 +101,7 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     abstract protected function isActionGranted(IdentityInterface $identity, $action, $resource);
 
-    private function getComponent($permissionCode, $component)
+    private function getPermissionComponent($permissionCode, $component)
     {
         $components = array_combine(array('application', 'resource', 'action'), explode('.', $permissionCode));
 
