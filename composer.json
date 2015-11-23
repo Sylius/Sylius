@@ -80,7 +80,7 @@
         "winzou/state-machine-bundle": "~0.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4@alpha",
+        "phpspec/phpspec": "^2.4@rc",
         "behat/behat": "~3.0",
         "behat/symfony2-extension": "~2.0",
         "behat/mink-extension": "~2.0",
