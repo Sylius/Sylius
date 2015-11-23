@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\RbacBundle\Security;
+namespace spec\Sylius\Component\Rbac\Authorization\Voter;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\IdentityInterface;
@@ -17,9 +17,7 @@ use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
 use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
-use Doctrine\Common\Cache\Cache;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 
 /**
  * @author Christian Daguerre <christian@daguer.re>
@@ -27,55 +25,64 @@ use Doctrine\Common\Cache\Cache;
 class RbacVoterSpec extends ObjectBehavior
 {
     function let(
-        PermissionMapInterface $permissionMap,
         PermissionProviderInterface $permissionProvider,
-        RolesResolverInterface $rolesResolver,
-        Cache $cache
+        PermissionMapInterface $permissionMap,
+        RolesResolverInterface $rolesResolver
     ) {
-        $this->beConstructedWith($permissionMap, $permissionProvider, $rolesResolver, $cache);
+        $this->beConstructedWith($permissionProvider, $permissionMap, $rolesResolver);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\RbacBundle\Security\RbacVoter');
+        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\Voter\RbacVoter');
     }
 
-    function it_is_a_symfony_security_voter()
+    function it_implements_voter_interface()
     {
-        $this->shouldHaveType('Symfony\Component\Security\Core\Authorization\Voter\VoterInterface');
+        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\Voter\RbacVoterInterface');
     }
 
     function it_denies_access_if_none_of_current_identity_roles_has_permission(
-        TokenInterface $token,
         IdentityInterface $identity,
+        $permissionProvider,
         $permissionMap,
         $rolesResolver,
+        PermissionInterface $permission,
         RoleInterface $role1,
         RoleInterface $role2
     ) {
-        $token->getUser()->shouldBeCalled()->willReturn($identity);
         $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
+
+        $role1->getCode()->shouldBeCalled()->willReturn('role1');
+        $role2->getCode()->shouldBeCalled()->willReturn('role2');
+
+        $permissionProvider->getPermission('can_close_store')->shouldBeCalled()->willReturn($permission);
 
         $permissionMap->hasPermission($role1, 'can_close_store')->shouldBeCalled()->willReturn(false);
         $permissionMap->hasPermission($role2, 'can_close_store')->shouldBeCalled()->willReturn(false);
 
-        $this->vote($token, null, array('can_close_store'))->shouldReturn(VoterInterface::ACCESS_DENIED);
+        $this->isGranted($identity, 'can_close_store', null)->shouldReturn(false);
     }
 
     function it_grants_access_if_any_of_current_identity_roles_has_permission(
-        TokenInterface $token,
         IdentityInterface $identity,
+        $permissionProvider,
         $permissionMap,
         $rolesResolver,
+        PermissionInterface $permission,
         RoleInterface $role1,
         RoleInterface $role2
     ) {
-        $token->getUser()->shouldBeCalled()->willReturn($identity);
         $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
 
-        $permissionMap->hasPermission($role1, 'can_close_store')->shouldBeCalled()->willReturn(false);
-        $permissionMap->hasPermission($role2, 'can_close_store')->shouldBeCalled()->willReturn(true);
+        $role1->getCode()->shouldBeCalled()->willReturn('role1');
+        $role2->getCode()->shouldBeCalled()->willReturn('role2');
 
-        $this->vote($token, null, array('can_close_store'))->shouldReturn(VoterInterface::ACCESS_GRANTED);
+        $permissionProvider->getPermission('can_open_store')->shouldBeCalled()->willReturn($permission);
+
+        $permissionMap->hasPermission($role1, 'can_open_store')->shouldBeCalled()->willReturn(false);
+        $permissionMap->hasPermission($role2, 'can_open_store')->shouldBeCalled()->willReturn(true);
+
+        $this->isGranted($identity, 'can_open_store', null)->shouldReturn(true);
     }
 }

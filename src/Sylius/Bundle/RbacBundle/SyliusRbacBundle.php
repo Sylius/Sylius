@@ -13,8 +13,8 @@ namespace Sylius\Bundle\RbacBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\RbacBundle\DependencyInjection\Compiler\TagVoterPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Bundle\RbacBundle\DependencyInjection\Compiler\VotersPass;
 
 /**
  * Rbac bundle.
@@ -59,6 +59,6 @@ class SyliusRbacBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new TagVoterPass());
+        $container->addCompilerPass(new VotersPass());
     }
 }

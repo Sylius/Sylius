@@ -294,7 +294,7 @@ sylius_rbac:
         permission:
             form:
                 choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
-    voter: sylius.rbac.voter.toggleable
+    voter: sylius.rbac.voter.default
     permissions:
         sylius.manage.customer: Manage customers
         sylius.customer.show: Show customer

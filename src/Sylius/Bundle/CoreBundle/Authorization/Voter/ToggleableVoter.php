@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Security;
+namespace Sylius\Bundle\CoreBundle\Authorization\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\RbacBundle\Security\RbacVoterInterface;
 
 /**
  * @author Christian Daguerre <christian@daguer.re>
  */
-class ToggleableRbacVoter implements VoterInterface
+class ToggleableVoter implements VoterInterface
 {
     /**
-     * @var RbacVoterInterface
+     * @var VoterInterface
      */
-    protected $rbacVoter;
+    protected $voter;
 
     /**
      * @var SettingsManagerInterface
@@ -38,12 +37,12 @@ class ToggleableRbacVoter implements VoterInterface
     private $settings;
 
     /**
-     * @param RbacVoterInterface       $rbacVoter
+     * @param VoterInterface           $voter
      * @param SettingsManagerInterface $settingsManager
      */
-    public function __construct(RbacVoterInterface $rbacVoter, SettingsManagerInterface $settingsManager)
+    public function __construct(VoterInterface $voter, SettingsManagerInterface $settingsManager)
     {
-        $this->rbacVoter = $rbacVoter;
+        $this->voter = $voter;
         $this->settingsManager = $settingsManager;
     }
 
@@ -56,7 +55,7 @@ class ToggleableRbacVoter implements VoterInterface
             return false;
         }
 
-        return $this->rbacVoter->supportsAttribute($attribute);
+        return $this->voter->supportsAttribute($attribute);
     }
 
     /**
@@ -68,7 +67,7 @@ class ToggleableRbacVoter implements VoterInterface
             return false;
         }
 
-        return $this->rbacVoter->supportsClass($class);
+        return $this->voter->supportsClass($class);
     }
 
     /**
@@ -80,7 +79,7 @@ class ToggleableRbacVoter implements VoterInterface
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
-        return $this->rbacVoter->vote($token, $object, $attributes);
+        return $this->voter->vote($token, $object, $attributes);
     }
 
     /**

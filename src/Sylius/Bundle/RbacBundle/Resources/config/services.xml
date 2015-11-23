@@ -18,11 +18,14 @@
 
     <parameters>
         <parameter key="sylius.authorization_identity_provider.security.class">Sylius\Bundle\RbacBundle\Provider\SecurityIdentityProvider</parameter>
-        <parameter key="sylius.authorization_checker.default.class">Sylius\Component\Rbac\Authorization\AuthorizationChecker</parameter>
+
         <parameter key="sylius.permission_provider.class">Sylius\Component\Rbac\Provider\PermissionProvider</parameter>
         <parameter key="sylius.roles_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetRolesResolver</parameter>
         <parameter key="sylius.permissions_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetPermissionsResolver</parameter>
-        <parameter key="sylius.rbac.voter.default.class">Sylius\Bundle\RbacBundle\Security\RbacVoter</parameter>
+
+        <parameter key="sylius.rbac.voter.bridge.class">Sylius\Bundle\RbacBundle\Authorization\Voter\RbacVoterBridge</parameter>
+        <parameter key="sylius.rbac.voter.default.class">Sylius\Component\Rbac\Authorization\Voter\RbacVoter</parameter>
+        <parameter key="sylius.rbac.voter.delegating.class">Sylius\Component\Rbac\Authorization\Voter\DelegatingRbacVoter</parameter>
 
         <parameter key="sylius.permission_map.default.class">Sylius\Component\Rbac\Authorization\PermissionMap</parameter>
         <parameter key="sylius.permission_map.cached.class">Sylius\Component\Rbac\Authorization\CachedPermissionMap</parameter>
@@ -43,12 +46,20 @@
         <service id="sylius.permissions_resolver" class="%sylius.permissions_resolver.class%">
             <argument type="service" id="sylius.repository.permission" />
         </service>
+
+        <service id="sylius.rbac.voter.bridge" class="%sylius.rbac.voter.bridge.class%" public="false">
+            <argument type="service" id="sylius.repository.role"/>
+            <argument type="service" id="sylius.repository.permission"/>
+        </service>
         <service id="sylius.rbac.voter.default" class="%sylius.rbac.voter.default.class%" public="false">
+            <argument type="service" id="sylius.permission_provider"/>
             <argument type="service" id="sylius.permission_map"/>
-            <argument type="service" id="sylius.permission_provider" />
             <argument type="service" id="sylius.roles_resolver"/>
-            <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
-            <!-- tagged as a security.voter in compiler pass to avoid multiple rbac voters -->
+        </service>
+        <service id="sylius.rbac.voter.delegating" class="%sylius.rbac.voter.delegating.class%" public="false">
+            <argument type="service" id="sylius.permission_provider"/>
+            <argument type="service" id="sylius.permission_map"/>
+            <argument type="service" id="sylius.roles_resolver"/>
         </service>
 
         <service id="sylius.permission_map.default" class="%sylius.permission_map.default.class%">

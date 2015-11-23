@@ -103,7 +103,7 @@
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
-        <parameter key="sylius.rbac.voter.toggleable.class">Sylius\Bundle\CoreBundle\Security\ToggleableRbacVoter</parameter>
+        <parameter key="sylius.rbac.voter.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\Voter\ToggleableVoter</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
     </parameters>
 
@@ -541,8 +541,9 @@
         </service>
 
         <service id="sylius.rbac.voter" class="%sylius.rbac.voter.toggleable.class%" public="false">
-            <argument type="service" id="sylius.rbac.voter.default" />
+            <argument type="service" id="sylius.rbac.voter.bridge" />
             <argument type="service" id="sylius.settings.manager" />
+            <tag name="security.voter" />
         </service>
 
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">

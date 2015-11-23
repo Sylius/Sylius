@@ -36,7 +36,7 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
 
         $container->setAlias('sylius.authorization_identity_provider', $config['identity_provider']);
         $container->setAlias('sylius.permission_map', $config['permission_map']);
-        $container->setAlias('sylius.rbac.voter', $config['voter']);
+        $container->setParameter('sylius.rbac.voter_id', $config['voter']);
 
         $container->setParameter('sylius.rbac.security_roles', $config['security_roles']);
 
