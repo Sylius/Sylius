@@ -13,6 +13,7 @@ namespace Sylius\Component\Rbac\Provider;
 
 use Sylius\Component\Rbac\Exception\PermissionNotFoundException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 
 /**
  * Default permission provider uses repository to find the permission.
