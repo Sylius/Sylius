@@ -36,21 +36,6 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
     /**
      * {@inheritdoc}
      */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        $object = new $className();
-
-        $object->setCurrentLocale($this->localeProvider->getCurrentLocale());
-        $object->setFallbackLocale($this->localeProvider->getFallbackLocale());
-
-        return $object;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setLocaleProvider(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;
