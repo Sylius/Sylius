@@ -69,9 +69,9 @@ class ReportContext extends DefaultContext
         $dataFetcherConfiguration,
         $flush = true
     ) {
-        $repository = $this->getRepository('report');
+        $factory = $this->getFactory('report');
 
-        $report = $repository->createNew();
+        $report = $factory->createNew();
         $report->setName($name);
         $report->setDescription($description);
         $report->setCode($code);

@@ -55,7 +55,7 @@ class AddressingContext extends DefaultContext
 
         /* @var $country CountryInterface */
         if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
-            $country = $this->getRepository('country')->createNew();
+            $country = $this->getFactory('country')->createNew();
             $country->setIsoName(trim($isoName));
             $country->setEnabled($enabled);
 
@@ -104,13 +104,13 @@ class AddressingContext extends DefaultContext
         $repository = $this->getRepository('zone');
 
         /* @var $zone ZoneInterface */
-        $zone = $repository->createNew();
+        $zone = $this->getFactory('zone')->createNew();
         $zone->setName($name);
         $zone->setType($type);
         $zone->setScope($scope);
 
         foreach ($members as $memberName) {
-            $member = $this->getService('sylius.repository.zone_member_'.$type)->createNew();
+            $member = $this->getService('sylius.factory.zone_member_'.$type)->createNew();
             if (ZoneInterface::TYPE_ZONE === $type) {
                 $zoneable = $repository->findOneBy(array('name' => $memberName));
             } else {

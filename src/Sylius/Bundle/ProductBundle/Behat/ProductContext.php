@@ -26,10 +26,10 @@ class ProductContext extends DefaultContext
     public function thereAreProducts(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product');
+        $factory = $this->getFactory('product');
 
         foreach ($table->getHash() as $data) {
-            $product = $repository->createNew();
+            $product = $factory->createNew();
 
             $product->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
             $product->setName(trim($data['name']));
@@ -47,7 +47,7 @@ class ProductContext extends DefaultContext
                 $attribute = explode(':', $data['attributes']);
 
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
-                $attributeValue =  $this->getRepository('product_attribute_value')->createNew();
+                $attributeValue =  $this->getFactory('product_attribute_value')->createNew();
 
                 $attributeValue->setAttribute($productAttribute);
                 $attributeValue->setValue($attribute[1]);
@@ -105,9 +105,9 @@ class ProductContext extends DefaultContext
     public function thereIsArchetypeWithFollowingConfiguration($name, TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product_archetype');
+        $factory = $this->getFactory('product_archetype');
 
-        $archetype = $repository->createNew();
+        $archetype = $factory->createNew();
         $archetype->setName($name);
         $archetype->setCode($name);
 
@@ -155,14 +155,14 @@ class ProductContext extends DefaultContext
      */
     public function thereIsOption($name, $values, $presentation = null, $flush = true)
     {
-        $optionValueRepository = $this->getRepository('product_option_value');
+        $optionValueFactory = $this->getFactory('product_option_value');
 
-        $option = $this->getRepository('product_option')->createNew();
+        $option = $this->getFactory('product_option')->createNew();
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
         foreach (explode(',', $values) as $value) {
-            $optionValue = $optionValueRepository->createNew();
+            $optionValue = $optionValueFactory->createNew();
             $optionValue->setValue(trim($value));
 
             $option->addValue($optionValue);
@@ -210,7 +210,7 @@ class ProductContext extends DefaultContext
             'type' => 'text'
         ), $additionalData);
 
-        $attribute = $this->getRepository('product_attribute')->createNew();
+        $attribute = $this->getFactory('product_attribute')->createNew();
         $attribute->setName($name);
 
         foreach ($additionalData as $key => $value) {
