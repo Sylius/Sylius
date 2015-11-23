@@ -24,11 +24,6 @@ class DocumentRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository');
     }
 
-    function it_creates_instance()
-    {
-        $this->createNew()->shouldHaveType('Sylius\Component\Core\Model\Product');
-    }
-
     function it_has_a_paginator(QueryBuilder $queryBuilder)
     {
         $this->getPaginator($queryBuilder)->shouldHaveType('Pagerfanta\Pagerfanta');

@@ -28,16 +28,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function createPaginator(array $criteria = array(), array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
