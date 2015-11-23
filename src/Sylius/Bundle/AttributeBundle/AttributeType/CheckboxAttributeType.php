@@ -12,19 +12,21 @@
 namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CheckboxAttributeType implements AttributeTypeInterface
 {
+    const TYPE = 'checkbox';
+
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_BOOLEAN;
+        return AttributeValueInterface::STORAGE_BOOLEAN;
     }
 
     /**
@@ -32,6 +34,6 @@ class CheckboxAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::CHECKBOX;
+        return static::TYPE;
     }
 }

@@ -33,11 +33,9 @@ class TextareaAttributeTypeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'label' => false,
-            )
-        );
+        $resolver->setDefaults(array(
+            'label' => false,
+        ));
     }
 
     /**

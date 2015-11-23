@@ -12,19 +12,21 @@
 namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class TextareaAttributeType implements AttributeTypeInterface
 {
+    const TYPE = 'textarea';
+
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_TEXT;
+        return AttributeValueInterface::STORAGE_TEXT;
     }
 
     /**
@@ -32,6 +34,6 @@ class TextareaAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::TEXTAREA;
+        return static::TYPE;
     }
 }

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Controller;
 
+use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,6 +94,6 @@ class AttributeController extends ResourceController
             return $this->getRequest()->query->get('type');
         }
 
-        return DefaultAttributeTypes::TEXT;
+        return TextAttributeType::TYPE;
     }
 }

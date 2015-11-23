@@ -15,12 +15,12 @@ Feature: Product archetypes
             | Beverage milk    | Milk         | None, Whole, Skinny, Soya  |
             | Coffee variety   | Variety      | Colombian, Ethiopian       |
           And there are following attributes:
-            | name                  | presentation   |
-            | T-Shirt collection    | Collection     |
-            | T-Shirt fabric        | T-Shirt fabric |
-            | Bag material          | Material       |
-            | Beverage calories     | Calories       |
-            | Coffee caffeine       | Caffeine       |
+            | name                  | presentation   | type     |
+            | T-Shirt collection    | Collection     | text     |
+            | T-Shirt fabric        | T-Shirt fabric | text     |
+            | Bag material          | Material       | text     |
+            | Beverage calories     | Calories       | integer  |
+            | Coffee caffeine       | Caffeine       | checkbox |
           And there is archetype "T-Shirt" with following configuration:
             | code       | Arch1                              |
             | options    | T-Shirt color, T-Shirt size        |
@@ -83,6 +83,8 @@ Feature: Product archetypes
             | Name               | Manchester United tee   |
             | Description        | Interesting description |
             | Price              | 59.99                   |
+        And I go to "Attributes" tab
+        And I fill in the following:
             | T-Shirt fabric     | Cotton 100%             |
             | T-Shirt collection | Champions League '11    |
         And I press "Create"

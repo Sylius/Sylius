@@ -65,12 +65,12 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
     public function getValues();
 
     /**
-     * @param string $storageType
-     */
-    public function setStorageType($storageType);
-
-    /**
      * @return string
      */
     public function getStorageType();
+
+    /**
+     * @param string $storageType
+     */
+    public function setStorageType($storageType);
 }

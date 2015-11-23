@@ -27,9 +27,10 @@
                     </p>
                 {% endif %}
                 <div class="form-group">
-                    <label class="col-lg-2 control-label" for="">{{ form.vars.data.attribute.name }}</label>
+                    {% set labelId = form.vars.data.attribute.name|replace(' ', '_')|lower %}
+                    <label class="col-lg-2 control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>
                     {% for field in form.children %}
-                        {{ _self.attributeItemField(field) }}
+                        {{ _self.attributeItemField(field, labelId) }}
                     {% endfor %}
                 </div>
             </div>
@@ -37,11 +38,11 @@
     {% endspaceless %}
 {% endmacro %}
 
-{% macro attributeItemField(item) %}
+{% macro attributeItemField(item, labelId) %}
     {% set data = item.vars %}
     {% if data.name == 'attribute' %}
         <input type="hidden" id="{{ data.id }}" name="{{ data.full_name }}" value="{{ data.value }}" />
     {% else %}
-        <div class="col-lg-10">{{ form_widget(item) }}</div>
+        <div class="col-lg-10">{{ form_widget(item, {'id': labelId}) }}</div>
     {% endif %}
 {% endmacro %}

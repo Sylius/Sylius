@@ -12,19 +12,21 @@
 namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PercentAttributeType implements AttributeTypeInterface
 {
+    const TYPE = 'percent';
+
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_FLOAT;
+        return AttributeValueInterface::STORAGE_FLOAT;
     }
 
     /**
@@ -32,6 +34,6 @@ class PercentAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::PERCENT;
+        return static::TYPE;
     }
 }

@@ -46,7 +46,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^go to "([^""]*)" tab$/
+     * @Given /^(?:|I )go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
     {

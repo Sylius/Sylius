@@ -12,19 +12,21 @@
 namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class DatetimeAttributeType implements AttributeTypeInterface
 {
+    const TYPE = 'datetime';
+
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_DATETIME;
+        return AttributeValueInterface::STORAGE_DATETIME;
     }
 
     /**
@@ -32,6 +34,6 @@ class DatetimeAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::DATETIME;
+        return static::TYPE;
     }
 }

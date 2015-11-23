@@ -14,7 +14,7 @@ Feature: Products
             | name               | presentation      | type     |
             | T-Shirt fabric     | T-Shirt           | text     |
             | T-Shirt fare trade | Faretrade product | checkbox |
-            | Size               | size              | number   |
+            | Size               | size              | integer  |
           And the following products exist:
             | name          | price | options                     | attributes            |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
@@ -113,7 +113,7 @@ Feature: Products
         And go to "Attributes" tab
         And I click "Add"
         And I wait 2 seconds
-        And I check "T-Shirt fabric"
+        And I check "T-Shirt fabric attribute"
         And I wait 1 second
         And I press "Add attributes"
         And I wait 2 seconds
@@ -145,6 +145,23 @@ Feature: Products
         And I press "Save changes"
         Then I should be on the page of product "Big Sticker"
         And I should see "Product has been successfully updated."
+
+    @javascript
+    Scenario: Modifying product attributes
+        Given I am editing product "Super T-Shirt"
+        When I go to "Attributes" tab
+        And I delete "T-Shirt fabric" attribute
+        And I click "Add"
+        And I wait 2 seconds
+        And I check "Size attribute"
+        And I wait 1 second
+        And I press "Add attributes"
+        And I wait 5 seconds
+        And I fill in "Size" with "100"
+        When I press "Save changes"
+        Then I should be on the page of product "Super T-Shirt"
+        And I should see "100"
+        And I should not see "Wool"
 
     Scenario: Selecting the product tax category
         Given I am editing product "Sticker"

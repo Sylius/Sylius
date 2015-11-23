@@ -1,34 +1,31 @@
 {% for attributeId, form in forms %}
-    <div class="form-group">
-        <div>
-            <div data-form-collection="item"
-                 data-form-collection-index="{{ count }}"
-                 class="collection-item">
-                <div class="collection-box">
+    <div data-form-collection="item"
+         data-form-collection-index="{{ count }}"
+         class="collection-item">
+        <div class="collection-box">
 
-                    <p class="text-right">
-                        <a href="#" data-form-collection="delete" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-remove collection-button-remove"></i>
-                            {{ 'sylius.delete'|trans }}
-                        </a>
-                    </p>
+            <p class="text-right">
+                <a href="#" data-form-collection="delete" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-remove collection-button-remove"></i>
+                    {{ 'sylius.delete'|trans }}
+                </a>
+            </p>
 
-                    <div class="form-group">
-                        {{ form_label(form) }}
-                        <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
-                        <div class="col-lg-10">
-                            {{ _self.formField(form, count) }}
-                        </div>
-                    </div>
-
+            <div class="form-group">
+                {% set id = form.vars.label|replace(' ', '_')|lower %}
+                <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
+                <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
+                <div class="col-lg-10">
+                    {{ _self.formField(form, count, id) }}
                 </div>
             </div>
+
         </div>
     </div>
     {% set count = count+1 %}
 {% endfor %}
 
-{% macro formField(item, count, prefix = '') %}
+{% macro formField(item, count, id, prefix = '') %}
     {% if item.children|length > 0 %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
@@ -36,9 +33,9 @@
         {% endfor %}
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}
-        {% set id = 'sylius_product_attributes_'~count~prefix~'_'~item.vars.name %}
+        {#{% set id = 'sylius_product_attributes_'~count~prefix~'_'~item.vars.name %}#}
         {% set dataName = 'sylius_product[attributes]['~count~namePrefix~']['~item.vars.name~']' %}
 
-        {{ form_widget(item, {'attr': {'id': id, 'data-name': dataName }}) }}
+        {{ form_widget(item, {'id': id, 'attr': {'data-name': dataName }}) }}
     {% endif %}
 {% endmacro %}

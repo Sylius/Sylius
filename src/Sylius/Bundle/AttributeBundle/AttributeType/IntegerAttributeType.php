@@ -12,19 +12,21 @@
 namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class IntegerAttributeType implements AttributeTypeInterface
 {
+    const TYPE = 'integer';
+
     /**
      * @return string
      */
     public function getStorageType()
     {
-        return DefaultAttributeTypes::STORAGE_INTEGER;
+        return AttributeValueInterface::STORAGE_INTEGER;
     }
 
     /**
@@ -32,6 +34,6 @@ class IntegerAttributeType implements AttributeTypeInterface
      */
     public function getType()
     {
-        return DefaultAttributeTypes::INTEGER;
+        return static::TYPE;
     }
 }

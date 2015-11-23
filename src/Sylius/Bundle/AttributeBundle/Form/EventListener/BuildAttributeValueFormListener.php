@@ -45,8 +45,8 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
     public function __construct(FormFactoryInterface $factory, ServiceRegistryInterface $attributeTypeRegistry, $subjectName)
     {
         $this->factory = $factory;
-        $this->subjectName = $subjectName;
         $this->attributeTypeRegistry = $attributeTypeRegistry;
+        $this->subjectName = $subjectName;
     }
 
     /**
@@ -55,7 +55,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'buildForm'
+            FormEvents::PRE_SET_DATA => 'buildForm',
         );
     }
 

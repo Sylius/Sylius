@@ -16,6 +16,8 @@ namespace Sylius\Component\Attribute\AttributeType;
  */
 interface AttributeTypeInterface
 {
+    const DEFAULT_ATTRIBUTE_TYPE = 'text';
+
     /**
      * @return string
      */

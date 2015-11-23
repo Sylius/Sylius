@@ -22,6 +22,14 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 class SyliusAttributeExtension extends AbstractResourceExtension
 {
     /**
+     * @var array
+     */
+    protected $configFiles = array(
+        'services.xml',
+        'attribute_types.xml',
+    );
+
+    /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
@@ -46,7 +54,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                 }
             }
 
-            if (strstr($name, 'value')) {
+            if (strpos($name, 'value')) {
                 $attributeTypeRegistry = $container->getDefinition('sylius.registry.attribute_type');
                 $formDefinition->addArgument($attributeTypeRegistry);
             }

@@ -12,8 +12,9 @@
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
+use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -78,13 +79,13 @@ class AttributeSpec extends ObjectBehavior
 
     function it_has_text_type_by_default()
     {
-        $this->getType()->shouldReturn(AttributeTypes::TEXT);
+        $this->getType()->shouldReturn(TextAttributeType::TYPE);
     }
 
     function its_type_is_mutable()
     {
-        $this->setType(AttributeTypes::CHECKBOX);
-        $this->getType()->shouldReturn(AttributeTypes::CHECKBOX);
+        $this->setType(CheckboxAttributeType::TYPE);
+        $this->getType()->shouldReturn(CheckboxAttributeType::TYPE);
     }
 
     function it_initializes_empty_configuration_array_by_default()

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Attribute\AttributeType\DefaultAttributeTypes;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductContext extends DefaultContext
@@ -204,7 +204,7 @@ class ProductContext extends DefaultContext
     {
         $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
         $presentation = (null === $presentation) ? $name : $name;
-        $storageType = (DefaultAttributeTypes::CHECKBOX === $type) ? 'boolean' : $type;
+        $storageType = (CheckboxAttributeType::TYPE === $type) ? 'boolean' : $type;
 
         $attribute = $this->getFactory('product_attribute')->createNew();
         $attribute->setName($name);
@@ -335,5 +335,15 @@ class ProductContext extends DefaultContext
         $mainTaxon = $this->findOneByName('taxon', $mainTaxonName);
         $product->setMainTaxon($mainTaxon);
         $manager->flush($product);
+    }
+
+    /**
+     * @Given /^I delete "([^""]*)" attribute$/
+     */
+    public function iDeleteAttribute($attribute)
+    {
+        $item = $this->assertSession()->elementExists('css', sprintf('.collection-item:contains("%s")', $attribute));
+
+        $item->clickLink('Delete');
     }
 }

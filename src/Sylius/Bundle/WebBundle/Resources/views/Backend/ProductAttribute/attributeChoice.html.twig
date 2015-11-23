@@ -11,7 +11,7 @@
                         {% for attributeField in form %}
                             {% if attributeField.vars.name != '_token' %}
                             <a oldhref class="list-group-item col-xs-12 col-md-6">
-                                {{ attributeField.vars.label }} {{ form_widget(attributeField, { 'id': attributeField.vars.label }) }}
+                                {{ attributeField.vars.label }} {{ form_widget(attributeField, { 'id': attributeField.vars.label~' attribute' }) }}
                             </a>
                             {% endif %}
                         {% endfor %}

@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
