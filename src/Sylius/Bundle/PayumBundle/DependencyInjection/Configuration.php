@@ -67,7 +67,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                             ->end()
                         ->end()
-                        ->arrayNode('payment_config')
+                        ->arrayNode('gateway_config')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue(GatewayConfig::class)->end()
