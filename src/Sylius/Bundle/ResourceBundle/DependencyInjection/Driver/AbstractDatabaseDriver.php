@@ -85,7 +85,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
 
         if (isset($classes['factory'])) {
             $factoryDefinition = $this->getFactoryDefinition($classes['factory'], $classes['model']);
-            $translatableFactoryInterface = 'Sylius\Component\Translation\Factory\TranslatableFactoryInterface' ;
+            $translatableFactoryInterface = 'Sylius\Component\Translation\Factory\TranslatableFactoryInterface';
 
             $reflection = new \ReflectionClass($classes['factory']);
 
