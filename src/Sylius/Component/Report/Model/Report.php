@@ -21,51 +21,53 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
 class Report implements ReportInterface
 {
     /**
-     *@var integer
+     * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      */
-    private $code;
+    protected $code;
 
     /**
      * Renderer name.
      *
      * @var string
      */
-    private $renderer = DefaultRenderers::TABLE;
+    protected $renderer = DefaultRenderers::TABLE;
 
     /**
      * @var array
      */
-    private $rendererConfiguration = array();
+    protected $rendererConfiguration = array();
 
     /**
      * Data fetcher name.
      *
      * @var string
      */
-    private $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
+    protected $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
 
     /**
      * @var array
      */
-    private $dataFetcherConfiguration = array();
+    protected $dataFetcherConfiguration = array();
 
     /**
      * {@inheritdoc}
+     *
+     * @return integer
      */
     public function getId()
     {
