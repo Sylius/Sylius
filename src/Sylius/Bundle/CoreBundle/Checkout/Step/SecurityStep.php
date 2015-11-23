@@ -90,7 +90,7 @@ class SecurityStep extends CheckoutStep
     protected function getRegistrationForm()
     {
         /** @var CustomerInterface $customer */
-        $customer = $this->get('sylius.repository.customer')->createNew();
+        $customer = $this->get('sylius.factory.customer')->createNew();
 
         $form = $this->createForm('sylius_customer_registration', $customer);
         $form->setData($customer);
@@ -107,7 +107,7 @@ class SecurityStep extends CheckoutStep
             return null;
         }
         /** @var CustomerInterface $customer */
-        $customer = $this->get('sylius.repository.customer')->createNew();
+        $customer = $this->get('sylius.factory.customer')->createNew();
 
         return $this->createForm('sylius_customer_guest', $customer);
     }
