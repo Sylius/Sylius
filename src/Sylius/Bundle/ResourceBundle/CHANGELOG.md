@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.16.0
+
+* Introduce Factory for all resources.
+
 ### v0.10.0
 
 * Twig extension was renamed from `SyliusResourceExtension` into `ResourceExtension`,
