@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57a5dfddec4bde440e435c633608a3ac",
-    "content-hash": "6e4f624570e03ebd42f228a3b20dd688",
+    "hash": "0db2aafd7e948d4f297b9935f64b3dd0",
+    "content-hash": "f7a3fd9a90f9091396e761daa603dce8",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -2545,9 +2545,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2686,9 +2686,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -5623,9 +5623,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7475,7 +7475,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8462,7 +8462,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -8470,16 +8471,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.4.0-beta",
+            "version": "2.4.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "e82d151ae84b014cedb62cbf37ba3e7599ef21c7"
+                "reference": "dc26e3238abcdd5e31ae66b036a6bc52c639a347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e82d151ae84b014cedb62cbf37ba3e7599ef21c7",
-                "reference": "e82d151ae84b014cedb62cbf37ba3e7599ef21c7",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/dc26e3238abcdd5e31ae66b036a6bc52c639a347",
+                "reference": "dc26e3238abcdd5e31ae66b036a6bc52c639a347",
                 "shasum": ""
             },
             "require": {
@@ -8544,7 +8545,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2015-11-13 20:41:42"
+            "time": "2015-11-20 21:41:56"
         },
         {
             "name": "phpspec/prophecy",
@@ -9350,7 +9351,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/phpcr-odm": 5,
-        "phpspec/phpspec": 15
+        "phpspec/phpspec": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
