@@ -15,6 +15,7 @@ use ArrayObject;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -40,7 +41,7 @@ class InMemoryRepository implements RepositoryInterface
     protected $interface;
 
     /**
-     * @param string $interface
+     * @param string $interface | Fully qualified name of the interface.
      *
      * @throws \InvalidArgumentException
      * @throws UnexpectedTypeException
@@ -61,54 +62,46 @@ class InMemoryRepository implements RepositoryInterface
     }
 
     /**
-     * @param ResourceInterface $resource
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      * @throws UnexpectedTypeException
      */
     public function add(ResourceInterface $resource)
     {
-        if (!in_array($this->interface, class_implements($resource))) {
+        if (!$resource instanceof $this->interface) {
             throw new UnexpectedTypeException($resource, $this->interface);
         }
 
-        if (null === $resource->getId()) {
-            throw new \InvalidArgumentException('Resource\'s id needs to be set in order to add.');
-        }
-
-        if ($this->arrayObject->offsetExists($resource->getId())) {
+        if (in_array($resource, $this->findAll())) {
             throw new \InvalidArgumentException(
-                sprintf('An object with id \'%s\' is already in the repository.', $resource->getId())
+                sprintf('Given object is already in the repository.')
             );
         }
 
-        $this->arrayObject->offsetSet($resource->getId(), $resource);
-    }
-
-    /**
-     * @param ResourceInterface $resource
-     */
-    public function remove(ResourceInterface $resource)
-    {
-        if ($this->arrayObject->offsetExists($resource->getId())) {
-            $this->arrayObject->offsetUnset($resource->getId());
-        }
+        $this->arrayObject->append($resource);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function remove(ResourceInterface $resource)
     {
-        if (empty($id)) {
-            return null;
-        }
+        $newResources = array_filter($this->findAll(), function($object) use ($resource) {
+            return $object !== $resource;
+        });
 
-        if ($this->arrayObject->offsetExists($id)) {
-            return $this->arrayObject->offsetGet($id);
-        }
+        $this->arrayObject->exchangeArray($newResources);
+    }
 
-        return null;
+    /**
+     * {@inheritdoc}
+     *
+     * @throws UnsupportedMethodException
+     */
+    public function find($id = null)
+    {
+        throw new UnsupportedMethodException('find');
     }
 
     /**
@@ -116,21 +109,21 @@ class InMemoryRepository implements RepositoryInterface
      */
     public function findAll()
     {
-        return array_values($this->arrayObject->getArrayCopy());
+        return $this->arrayObject->getArrayCopy();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findBy(array $criteria = array(), array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        $results = $this->arrayObject->getArrayCopy();
+        $results = $this->findAll();
 
-        if (isset($criteria)) {
+        if (!empty($criteria)) {
             $results = $this->applyCriteria($results, $criteria);
         }
 
-        if (isset($orderBy)) {
+        if (!empty($orderBy)) {
             $results = $this->applyOrder($results, $orderBy);
         }
 
@@ -142,17 +135,21 @@ class InMemoryRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \UnexpectedValueException
+     * @throws \InvalidArgumentException
      */
     public function findOneBy(array $criteria)
     {
-        $results = $this->applyCriteria($this->findAll(), $criteria);
-
-        if (1 < $length = count($results)) {
-            throw new \UnexpectedValueException(sprintf('Non unique result. Number of results: %s.', $length));
+        if (empty($criteria)){
+            throw new \InvalidArgumentException('The criteria array needs to be set.');
         }
 
-        return $results[0];
+        $results = $this->applyCriteria($this->findAll(), $criteria);
+
+        if ($result = reset($results)) {
+            return $result;
+        }
+
+        return null;
     }
 
     /**
@@ -168,27 +165,20 @@ class InMemoryRepository implements RepositoryInterface
      */
     public function createPaginator(array $criteria = null, array $orderBy = null)
     {
-        $results = $this->findAll();
+        $resources = $this->findAll();
 
-        if (isset($orderBy)) {
-            $results = $this->applyOrder($results, $orderBy);
+        if (!empty($orderBy)) {
+            $resources = $this->applyOrder($resources, $orderBy);
         }
 
-        if (isset($criteria)) {
-            $results = $this->applyCriteria($results, $criteria);
+        if (!empty($criteria)) {
+            $resources = $this->applyCriteria($resources, $criteria);
         }
 
-        $adapter = new ArrayAdapter($results);
+        $adapter = new ArrayAdapter($resources);
         $pagerfanta = new Pagerfanta($adapter);
 
         return $pagerfanta;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
     }
 
     /**
@@ -197,7 +187,7 @@ class InMemoryRepository implements RepositoryInterface
      *
      * @return ResourceInterface[]|array
      */
-    private function applyCriteria(array $resources, array $criteria = array())
+    private function applyCriteria(array $resources, array $criteria)
     {
         foreach ($this->arrayObject as $object) {
             foreach ($criteria as $criterion => $value) {
@@ -225,19 +215,19 @@ class InMemoryRepository implements RepositoryInterface
         $sortable = array();
         $results = array();
 
-        foreach ($resources as $object) {
-            $sortable[$object->getId()] = $this->accessor->getValue($object, $property);
+        foreach ($resources as $key => $object) {
+            $sortable[$key] = $this->accessor->getValue($object, $property);
         }
 
-        if ('ASC' === $order) {
+        if (RepositoryInterface::ORDER_ASCENDING === $order) {
             asort($sortable);
         }
-        if ('DSC' === $order) {
+        if (RepositoryInterface::ORDER_DESCENDING === $order) {
             arsort($sortable);
         }
 
-        foreach ($sortable as $id => $value) {
-            $results[$id] = $resources[$id];
+        foreach ($sortable as $key => $object) {
+            $results[$key] = $resources[$key];
         }
 
         return $results;

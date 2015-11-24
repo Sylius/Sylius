@@ -28,8 +28,13 @@ class UnknownDriverExceptionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\UnknownDriverException');
     }
 
-    function it_should_extends_exception()
+    function it_extends_exception()
     {
         $this->shouldHaveType('\Exception');
+    }
+
+    function it_has_a_message()
+    {
+        $this->getMessage()->shouldReturn('Unknown driver "driver".');
     }
 }

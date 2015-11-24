@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Resource\Exception\Driver;
+namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class InvalidDriverExceptionSpec extends ObjectBehavior
+class UnsupportedMethodExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('driver', 'className');
+        $this->beConstructedWith('methodName');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\InvalidDriverException');
+        $this->shouldHaveType('Sylius\Component\Resource\Exception\UnsupportedMethodException');
     }
 
     function it_extends_exception()
@@ -35,6 +35,6 @@ class InvalidDriverExceptionSpec extends ObjectBehavior
 
     function it_has_a_message()
     {
-        $this->getMessage()->shouldReturn('Driver "driver" is not supported by className.');
+        $this->getMessage()->shouldReturn(sprintf('The method "methodName" is not supported.'));
     }
 }

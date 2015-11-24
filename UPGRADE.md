@@ -6,6 +6,10 @@ UPGRADE
 ## PayumBundle
 
  * Changed configuration key `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
+ 
+## Resource
+
+ * RepositoryInterface now has two additional methods `add` and `remove`
 
 # From 0.14.0 to 0.15.x
 

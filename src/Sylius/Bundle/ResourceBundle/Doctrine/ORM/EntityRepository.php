@@ -16,6 +16,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -96,6 +97,28 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add(ResourceInterface $resource)
+    {
+        $this->_em->persist($resource);
+
+        $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(ResourceInterface $resource)
+    {
+        if (null !== $this->find($resource->getId())) {
+            $this->_em->remove($resource);
+
+            $this->_em->flush();
+        }
     }
 
     /**

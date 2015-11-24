@@ -11,13 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ShipmentRepository extends EntityRepository
 {
     /**
-     * Create filter paginator.
-     *
      * @param array $criteria
      * @param array $sorting
      *
