@@ -57,6 +57,6 @@ class WeightRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_weight_rate_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_weight_rate');
     }
 }

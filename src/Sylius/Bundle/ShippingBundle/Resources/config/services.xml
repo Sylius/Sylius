@@ -33,19 +33,19 @@
         <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Component\Shipping\Checker\ItemCountRuleChecker</parameter>
 
         <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Component\Shipping\Calculator\FlatRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.flat_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
 
         <parameter key="sylius.shipping_calculator.per_item_rate.class">Sylius\Component\Shipping\Calculator\PerItemRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.per_item_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.per_item_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType</parameter>
 
         <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Component\Shipping\Calculator\FlexibleRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.flexible_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
 
         <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Component\Shipping\Calculator\WeightRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.weight_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.weight_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
 
         <parameter key="sylius.shipping_calculator.volume_rate.class">Sylius\Component\Shipping\Calculator\VolumeRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.volume_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.volume_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType</parameter>
 
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
 
@@ -97,44 +97,44 @@
             <argument type="service" id="sylius.registry.shipping_calculator" />
         </service>
 
-        <service id="sylius.shipping_shipping_calculator.flat_rate" class="%sylius.shipping_calculator.flat_rate.class%">
+        <service id="sylius.shipping_calculator.flat_rate" class="%sylius.shipping_calculator.flat_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="flat_rate" label="sylius.form.shipping_calculator.flat_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.flat_rate_configuration" class="%sylius.form.type.shipping_calculator.flat_rate_configuration.class%">
+        <service id="sylius.form.type.shipping_calculator.flat_rate" class="%sylius.form.type.shipping_calculator.flat_rate.class%">
             <argument>%sylius.validation_group.shipping_calculator_flat_rate_configuration%</argument>
-            <tag name="form.type" alias="sylius_shipping_calculator_flat_rate_configuration" />
+            <tag name="form.type" alias="sylius_shipping_calculator_flat_rate" />
         </service>
 
         <service id="sylius.shipping_calculator.per_item_rate" class="%sylius.shipping_calculator.per_item_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="per_item_rate" label="sylius.form.shipping_calculator.per_item_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.per_item_rate_configuration" class="%sylius.form.type.shipping_calculator.per_item_rate_configuration.class%">
+        <service id="sylius.form.type.shipping_calculator.per_item_rate" class="%sylius.form.type.shipping_calculator.per_item_rate.class%">
             <argument>%sylius.validation_group.shipping_calculator_per_item_rate_configuration%</argument>
-            <tag name="form.type" alias="sylius_shipping_calculator_per_item_rate_configuration" />
+            <tag name="form.type" alias="sylius_shipping_calculator_per_item_rate" />
         </service>
 
         <service id="sylius.shipping_calculator.flexible_rate" class="%sylius.shipping_calculator.flexible_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="flexible_rate" label="sylius.form.shipping_calculator.flexible_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.flexible_rate_configuration" class="%sylius.form.type.shipping_calculator.flexible_rate_configuration.class%">
+        <service id="sylius.form.type.shipping_calculator.flexible_rate" class="%sylius.form.type.shipping_calculator.flexible_rate.class%">
             <argument>%sylius.validation_group.shipping_calculator_flexible_rate_configuration%</argument>
-            <tag name="form.type" alias="sylius_shipping_calculator_flexible_rate_configuration" />
+            <tag name="form.type" alias="sylius_shipping_calculator_flexible_rate" />
         </service>
 
         <service id="sylius.shipping_calculator.weight_rate" class="%sylius.shipping_calculator.weight_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="weight_rate" label="sylius.form.shipping_calculator.weight_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.weight_rate_configuration" class="%sylius.form.type.shipping_calculator.weight_rate_configuration.class%">
+        <service id="sylius.form.type.shipping_calculator.weight_rate" class="%sylius.form.type.shipping_calculator.weight_rate.class%">
             <argument>%sylius.validation_group.shipping_calculator_weight_rate_configuration%</argument>
-            <tag name="form.type" alias="sylius_shipping_calculator_weight_rate_configuration" />
+            <tag name="form.type" alias="sylius_shipping_calculator_weight_rate" />
         </service>
 
         <service id="sylius.shipping_calculator.volume_rate" class="%sylius.shipping_calculator.volume_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="volume_rate" label="sylius.form.shipping_calculator.volume_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.volume_rate_configuration" class="%sylius.form.type.shipping_calculator.volume_rate_configuration.class%">
+        <service id="sylius.form.type.shipping_calculator.volume_rate" class="%sylius.form.type.shipping_calculator.volume_rate.class%">
             <argument>%sylius.validation_group.shipping_calculator_volume_rate_configuration%</argument>
-            <tag name="form.type" alias="sylius_shipping_calculator_volume_rate_configuration" />
+            <tag name="form.type" alias="sylius_shipping_calculator_volume_rate" />
         </service>
 
         <service id="sylius.form.type.shipment_tracking" class="%sylius.form.type.shipment_tracking.class%">

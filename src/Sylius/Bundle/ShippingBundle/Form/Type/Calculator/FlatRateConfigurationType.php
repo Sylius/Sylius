@@ -75,6 +75,6 @@ class FlatRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_flat_rate_configuration';
+        return 'sylius_shipping_calculator_flat_rate';
     }
 }

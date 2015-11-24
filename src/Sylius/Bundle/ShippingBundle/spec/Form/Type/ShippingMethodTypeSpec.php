@@ -19,21 +19,24 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $calculatorRegistry,
         ServiceRegistryInterface $checkerRegistry,
+        FormRegistryInterface $formRegistry,
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
 
         $builder->getFormFactory()->willReturn($factory);
         $checkerRegistry->all()->willReturn(array());
@@ -101,7 +104,8 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FlatRateCalculator $flatRateCalculator,
         FormBuilder $perItemFormBuilder,
         Form $perItemForm,
-        PerItemRateCalculator $perItemRateCalculator
+        PerItemRateCalculator $perItemRateCalculator,
+        $formRegistry
     ) {
         $builder
             ->add(Argument::any(), Argument::cetera())
@@ -114,23 +118,13 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $flatRateCalculator
-            ->getConfigurationFormType()
-            ->willReturn('sylius_shipping_calculator_flat_rate_configuration')
-        ;
-
-        $flatRateCalculator
-            ->isConfigurable()
-            ->willReturn(true)
+            ->getType()
+            ->willReturn('flat_rate')
         ;
 
         $perItemRateCalculator
-            ->getConfigurationFormType()
-            ->willReturn('sylius_shipping_calculator_per_item_rate_configuration')
-        ;
-
-        $perItemRateCalculator
-            ->isConfigurable()
-            ->willReturn(true)
+            ->getType()
+            ->willReturn('per_item_rate')
         ;
 
         $calculatorRegistry
@@ -149,7 +143,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_flat_rate_configuration')
+            ->create('configuration', 'sylius_shipping_calculator_flat_rate')
             ->willReturn($flatRateFormBuilder)
         ;
 
@@ -159,9 +153,12 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_per_item_rate_configuration')
+            ->create('configuration', 'sylius_shipping_calculator_per_item_rate')
             ->willReturn($perItemFormBuilder)
         ;
+
+        $formRegistry->hasType('sylius_shipping_calculator_per_item_rate')->shouldBeCalled()->willReturn(true);
+        $formRegistry->hasType('sylius_shipping_calculator_flat_rate')->shouldBeCalled()->willReturn(true);
 
         $builder
             ->setAttribute(

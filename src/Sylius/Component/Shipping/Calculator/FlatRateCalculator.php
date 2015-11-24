@@ -12,7 +12,6 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,33 +25,11 @@ class FlatRateCalculator implements CalculatorInterface
     {
         return (int)$configuration['amount'];
     }
-
     /**
      * {@inheritdoc}
      */
-    public function isConfigurable()
+    public function getType()
     {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return 'sylius_shipping_calculator_flat_rate_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setRequired(array(
-                'amount'
-            ))
-            ->setAllowedTypes('amount', 'numeric')
-        ;
+        return 'flat_rate';
     }
 }

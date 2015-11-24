@@ -18,14 +18,9 @@ class VolumeRateCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
     }
 
-    function it_is_configurable()
+    function it_returns_volume_rate_type()
     {
-        $this->shouldBeConfigurable();
-    }
-
-    function it_returns_volume_rate_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_volume_rate_configuration');
+        $this->getType()->shouldReturn('volume_rate');
     }
 
     function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShippingSubjectInterface $subject)

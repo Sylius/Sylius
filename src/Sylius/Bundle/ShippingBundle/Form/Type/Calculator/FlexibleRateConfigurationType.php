@@ -89,6 +89,6 @@ class FlexibleRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_flexible_rate_configuration';
+        return 'sylius_shipping_calculator_flexible_rate';
     }
 }
