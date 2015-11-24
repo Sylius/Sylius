@@ -11,14 +11,15 @@
 
 namespace Sylius\Component\Rbac\Authorization;
 
-use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
+use Sylius\Component\Rbac\Authorization\Voter\RbacVoterInterface;
+use Sylius\Component\Rbac\Model\IdentityInterface;
 
 /**
  * Default authorization checker.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Christian Daguerre <christian@daguer.re>
  */
 class AuthorizationChecker implements AuthorizationCheckerInterface
 {
@@ -28,35 +29,24 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
     protected $currentIdentityProvider;
 
     /**
-     * @var PermissionMapInterface
+     * @var RbacVoterInterface
      */
-    protected $permissionMap;
-
-    /**
-     * @var RolesResolverInterface
-     */
-    protected $rolesResolver;
+    protected $voter;
 
     /**
      * @param CurrentIdentityProviderInterface $currentIdentityProvider
-     * @param PermissionMapInterface $permissionMap
-     * @param RolesResolverInterface $rolesResolver
+     * @param RbacVoterInterface                   $voter
      */
-    public function __construct(
-        CurrentIdentityProviderInterface $currentIdentityProvider,
-        PermissionMapInterface $permissionMap,
-        RolesResolverInterface $rolesResolver
-    )
+    public function __construct(CurrentIdentityProviderInterface $currentIdentityProvider, RbacVoterInterface $voter)
     {
         $this->currentIdentityProvider = $currentIdentityProvider;
-        $this->permissionMap = $permissionMap;
-        $this->rolesResolver = $rolesResolver;
+        $this->voter = $voter;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isGranted($permissionCode)
+    public function isGranted($permissionCode, $resource = null)
     {
         $identity = $this->currentIdentityProvider->getIdentity();
 
@@ -65,17 +55,12 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
         }
 
         if (!$identity instanceof IdentityInterface) {
-            throw new \InvalidArgumentException('Current identity must implement "Sylius\Component\Rbac\Model\IdentityInterface".');
+            throw new \InvalidArgumentException(sprintf(
+                'Current identity must implement "%s".',
+                IdentityInterface::class
+            ));
         }
 
-        $roles = $this->rolesResolver->getRoles($identity);
-
-        foreach ($roles as $role) {
-            if ($this->permissionMap->hasPermission($role, $permissionCode)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->voter->isGranted($identity, $permissionCode, $resource);
     }
 }

@@ -12,25 +12,18 @@
 namespace spec\Sylius\Component\Rbac\Authorization;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
-use Sylius\Component\Rbac\Model\PermissionInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
+use Sylius\Component\Rbac\Authorization\Voter\RbacVoterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AuthorizationCheckerSpec extends ObjectBehavior
 {
-    function let(
-        CurrentIdentityProviderInterface $currentIdentityProvider,
-        PermissionMapInterface $permissionMap,
-        RolesResolverInterface $rolesResolver
-    )
+    function let(CurrentIdentityProviderInterface $currentIdentityProvider, RbacVoterInterface $voter)
     {
-        $this->beConstructedWith($currentIdentityProvider, $permissionMap, $rolesResolver);
+        $this->beConstructedWith($currentIdentityProvider, $voter);
     }
 
     function it_is_initializable()
@@ -53,16 +46,12 @@ class AuthorizationCheckerSpec extends ObjectBehavior
     function it_returns_false_if_none_of_current_identity_roles_has_permission(
         $currentIdentityProvider,
         IdentityInterface $identity,
-        $permissionMap,
-        $rolesResolver,
-        RoleInterface $role1,
-        RoleInterface $role2
+        $voter
     ) {
         $currentIdentityProvider->getIdentity()->shouldBeCalled()->willReturn($identity);
-        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
 
-        $permissionMap->hasPermission($role1, 'can_close_store')->shouldBeCalled()->willReturn(false);
-        $permissionMap->hasPermission($role2, 'can_close_store')->shouldBeCalled()->willReturn(false);
+        $voter->isGranted($identity, 'can_close_store', null)->shouldBeCalled()->willReturn(false);
+        $voter->isGranted($identity, 'can_close_store', null)->shouldBeCalled()->willReturn(false);
 
         $this->isGranted('can_close_store')->shouldReturn(false);
     }
@@ -70,17 +59,12 @@ class AuthorizationCheckerSpec extends ObjectBehavior
     function it_returns_true_if_any_of_current_identity_roles_has_permission(
         $currentIdentityProvider,
         IdentityInterface $identity,
-        $permissionMap,
-        $rolesResolver,
-        PermissionInterface $permission,
-        RoleInterface $role1,
-        RoleInterface $role2
+        $voter
     ) {
         $currentIdentityProvider->getIdentity()->shouldBeCalled()->willReturn($identity);
-        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
 
-        $permissionMap->hasPermission($role1, 'can_open_store')->shouldBeCalled()->willReturn(false);
-        $permissionMap->hasPermission($role2, 'can_open_store')->shouldBeCalled()->willReturn(true);
+        $voter->isGranted($identity, 'can_open_store', null)->shouldBeCalled()->willReturn(false);
+        $voter->isGranted($identity, 'can_open_store', null)->shouldBeCalled()->willReturn(true);
 
         $this->isGranted('can_open_store')->shouldReturn(true);
     }

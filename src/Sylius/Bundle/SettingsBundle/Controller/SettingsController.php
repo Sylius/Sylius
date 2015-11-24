@@ -140,11 +140,11 @@ class SettingsController extends FOSRestController
      */
     protected function isGrantedOr403($namespace)
     {
-        if (!$this->container->has('sylius.authorization_checker')) {
+        if (!$this->container->has('security.authorization_checker')) {
             return true;
         }
 
-        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
+        if (!$this->get('security.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
             throw new AccessDeniedException();
         }
 

@@ -107,13 +107,14 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $this->isGrantedOr403('show');
+        $resource = $this->findOr404($request);
+        $this->isGrantedOr403('show', $resource);
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
             ->setTemplateVar($this->config->getResourceName())
-            ->setData($this->findOr404($request))
+            ->setData($resource)
         ;
 
         return $this->handleView($view);
@@ -176,9 +177,9 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $this->isGrantedOr403('create');
-
         $resource = $this->createNew();
+        $this->isGrantedOr403('create', $resource);
+
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
@@ -222,10 +223,10 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
-        $this->isGrantedOr403('update');
-
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $this->isGrantedOr403('update', $resource);
+
+        $form = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
@@ -268,9 +269,10 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->isGrantedOr403('delete');
+        $resource = $this->findOr404($request);
+        $this->isGrantedOr403('delete', $resource);
 
-        $resource = $this->domainManager->delete($this->findOr404($request));
+        $resource = $this->domainManager->delete($resource);
 
         if ($this->config->isApiRequest()) {
             if ($resource instanceof ResourceEvent) {
@@ -312,8 +314,9 @@ class ResourceController extends FOSRestController
     {
         $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
         $resource = $this->findOr404($request);
+        $this->isGrantedOr403('update', $resource);
         $this->get('doctrine')->getManager()->getFilters()->enable('softdeleteable');
-        
+
         $resource->setDeletedAt(null);
 
         $this->domainManager->update($resource, 'restore_deleted');
@@ -333,7 +336,9 @@ class ResourceController extends FOSRestController
      */
     public function revertAction(Request $request, $version)
     {
-        $resource   = $this->findOr404($request);
+        $resource = $this->findOr404($request);
+        $this->isGrantedOr403('update', $resource);
+
         $em         = $this->get('doctrine.orm.entity_manager');
         $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $repository->revert($resource, $version);
@@ -481,6 +486,7 @@ class ResourceController extends FOSRestController
     protected function move(Request $request, $movement)
     {
         $resource = $this->findOr404($request);
+        $this->isGrantedOr403('update', $resource);
 
         $this->domainManager->move($resource, $movement);
 
@@ -503,9 +509,9 @@ class ResourceController extends FOSRestController
      */
     protected function toggle(Request $request, $enabled)
     {
-        $this->isGrantedOr403('update');
-
         $resource = $this->findOr404($request);
+        $this->isGrantedOr403('update', $resource);
+
         $resource->setEnabled($enabled);
 
         $this->domainManager->update($resource, $enabled ? 'enable' : 'disable');
@@ -543,18 +549,14 @@ class ResourceController extends FOSRestController
         return $handler->handle($view);
     }
 
-    protected function isGrantedOr403($permission)
+    protected function isGrantedOr403($permission, $resource = null)
     {
-        if (!$this->container->has('sylius.authorization_checker')) {
-            return true;
-        }
-
         $permission = $this->config->getPermission($permission);
 
         if ($permission) {
             $grant = sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission);
 
-            if (!$this->get('sylius.authorization_checker')->isGranted($grant)) {
+            if (!$this->get('security.authorization_checker')->isGranted($grant, $resource)) {
                 throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
             }
         }

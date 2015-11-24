@@ -13,6 +13,8 @@ namespace Sylius\Bundle\RbacBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Bundle\RbacBundle\DependencyInjection\Compiler\VotersPass;
 
 /**
  * Rbac bundle.
@@ -48,5 +50,15 @@ class SyliusRbacBundle extends AbstractResourceBundle
     protected function getModelNamespace()
     {
         return 'Sylius\Component\Rbac\Model';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new VotersPass());
     }
 }

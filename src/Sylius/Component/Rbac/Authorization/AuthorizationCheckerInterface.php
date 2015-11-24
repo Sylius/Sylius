@@ -20,8 +20,9 @@ interface AuthorizationCheckerInterface
 {
     /**
      * @param string $permissionCode
+     * @param mixed  $resource
      *
-     * @return boolean
+     * @return bool
      */
-    public function isGranted($permissionCode);
+    public function isGranted($permissionCode, $resource = null);
 }

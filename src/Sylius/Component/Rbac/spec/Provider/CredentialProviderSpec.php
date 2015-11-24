@@ -19,21 +19,21 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionProviderSpec extends ObjectBehavior
+class CredentialProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $permissionRepository)
+    function let(RepositoryInterface $roleRepository, RepositoryInterface $permissionRepository)
     {
-        $this->beConstructedWith($permissionRepository);
+        $this->beConstructedWith($roleRepository, $permissionRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Provider\PermissionProvider');
+        $this->shouldHaveType('Sylius\Component\Rbac\Provider\CredentialProvider');
     }
 
     function it_implements_Sylius_Rbac_permission_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Rbac\Provider\PermissionProviderInterface');
+        $this->shouldImplement('Sylius\Component\Rbac\Provider\CredentialProviderInterface');
     }
 
     function it_looks_for_permission_via_repository($permissionRepository, PermissionInterface $permission)
