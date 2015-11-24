@@ -14,6 +14,9 @@ namespace Sylius\Component\Rbac\Authorization\Voter;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 
 /**
+ * Abstract resource voter to handle action specific permissions. Handles permissions
+ * following the standard naming convention, ie. "prefix.resource_name.action".
+ *
  * @author Christian Daguerre <christian@daguer.re>
  */
 abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
@@ -69,7 +72,17 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
             return false;
         }
 
-        return in_array($this->dataClass, class_implements($resource));
+        if ($this->dataClass === get_class($resource)) {
+            return true;
+        }
+        if (in_array($this->dataClass, class_implements($resource))) {
+            return true;
+        }
+        if (in_array($this->dataClass, class_parents($resource))) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
