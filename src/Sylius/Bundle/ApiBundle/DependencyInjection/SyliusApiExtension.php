@@ -55,10 +55,10 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 
         $container->prependExtensionConfig('fos_oauth_server', array(
             'db_driver'           => 'orm',
-            'client_class'        => $config['classes']['api_client']['model'],
-            'access_token_class'  => $config['classes']['api_access_token']['model'],
-            'refresh_token_class' => $config['classes']['api_refresh_token']['model'],
-            'auth_code_class'     => $config['classes']['api_auth_code']['model'],
+            'client_class'        => $config['resources']['api_client']['classes']['model'],
+            'access_token_class'  => $config['resources']['api_access_token']['classes']['model'],
+            'refresh_token_class' => $config['resources']['api_refresh_token']['classes']['model'],
+            'auth_code_class'     => $config['resources']['api_auth_code']['classes']['model'],
 
             'service'             => array(
                 'user_provider'  => 'sylius.user_provider.name_or_email',

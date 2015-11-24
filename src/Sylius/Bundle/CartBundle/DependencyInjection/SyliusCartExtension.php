@@ -44,16 +44,16 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         $definition = $container->findDefinition('sylius.context.cart');
         $definition->replaceArgument(0, new Reference($config['storage']));
 
-        $classes = $config['classes'];
+        $resources = $config['resources'];
 
-        $container->setParameter('sylius.controller.cart.class', $classes['cart']['controller']);
-        $container->setParameter('sylius.form.type.cart.class', $classes['cart']['form']);
+        $container->setParameter('sylius.controller.cart.class', $resources['cart']['classes']['controller']);
+        $container->setParameter('sylius.form.type.cart.class', $resources['cart']['classes']['form']);
 
-        $container->setParameter('sylius.controller.cart_item.class', $classes['item']['controller']);
-        $container->setParameter('sylius.form.type.cart_item.class', $classes['item']['form']);
+        $container->setParameter('sylius.controller.cart_item.class', $resources['item']['classes']['controller']);
+        $container->setParameter('sylius.form.type.cart_item.class', $resources['item']['classes']['form']);
 
-        $container->setParameter('sylius.validation_group.cart', $config['validation_groups']['cart']);
-        $container->setParameter('sylius.validation_group.cart_item', $config['validation_groups']['item']);
+        $container->setParameter('sylius.validation_group.cart', $resources['cart']['validation_groups']);
+        $container->setParameter('sylius.validation_group.cart_item', $resources['item']['validation_groups']);
     }
 
     /**
@@ -66,12 +66,16 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         }
 
         $container->prependExtensionConfig('sylius_order', array(
-            'classes' => array(
+            'resources' => array(
                 'order_item' => array(
-                    'model' => 'Sylius\Component\Cart\Model\CartItem'
+                    'classes' => array(
+                        'model' => 'Sylius\Component\Cart\Model\CartItem'
+                    )
                 ),
                 'order' => array(
-                    'model' => 'Sylius\Component\Cart\Model\Cart'
+                    'classes' => array(
+                        'model' => 'Sylius\Component\Cart\Model\Cart'
+                    )
                 )
             ))
         );

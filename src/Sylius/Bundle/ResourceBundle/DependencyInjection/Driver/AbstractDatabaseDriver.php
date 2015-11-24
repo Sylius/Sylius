@@ -58,23 +58,23 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $this->templates = $templates;
     }
 
-    public function load(array $classes)
+    public function load(array $parameters)
     {
-        if (isset($classes['controller'])) {
+        if (isset($parameters['classes']['controller'])) {
             $this->container->setDefinition(
                 $this->getContainerKey('controller'),
-                $this->getControllerDefinition($classes['controller'])
+                $this->getControllerDefinition($parameters['classes']['controller'])
             );
         }
 
-        $repositoryDefinition = $this->getRepositoryDefinition($classes);
+        $repositoryDefinition = $this->getRepositoryDefinition($parameters);
         $reflection = new \ReflectionClass($repositoryDefinition->getClass());
 
         $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
 
         if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
-            if (isset($classes['translation']['mapping']['fields'])) {
-                $repositoryDefinition->addMethodCall('setTranslatableFields', array($classes['translation']['mapping']['fields']));
+            if (isset($parameters['fields'])) {
+                $repositoryDefinition->addMethodCall('setTranslatableFields', array($parameters['fields']));
             }
         }
 
@@ -84,8 +84,8 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         );
 
 
-        if (isset($classes['factory'])) {
-            $factoryDefinition = $this->getFactoryDefinition($classes['factory'], $classes['model']);
+        if (isset($parameters['classes']['factory'])) {
+            $factoryDefinition = $this->getFactoryDefinition($parameters['classes']['factory'], $parameters['classes']['model']);
 
             $this->container->setDefinition(
                 $this->getContainerKey('factory'),
@@ -113,11 +113,11 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * Get the respository service
      *
-     * @param array $classes
+     * @param array $parameters
      *
      * @return Definition
      */
-    abstract protected function getRepositoryDefinition(array $classes);
+    abstract protected function getRepositoryDefinition(array $parameters);
 
     /**
      * @return Definition

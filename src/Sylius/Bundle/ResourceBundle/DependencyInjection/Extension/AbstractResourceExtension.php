@@ -78,21 +78,22 @@ abstract class AbstractResourceExtension extends AbstractExtension
             $this->configureTranslations($config, $container);
         }
 
-        $classes = isset($config['classes']) ? $config['classes'] : array();
+        $resources = isset($config['resources']) ? $config['resources'] : array();
 
         if ($configure & self::CONFIGURE_PARAMETERS) {
-            $this->mapClassParameters($classes, $container);
+            $this->mapClassParameters($resources, $container);
         }
 
         if ($configure & self::CONFIGURE_VALIDATORS) {
-            $this->mapValidationGroupParameters($config['validation_groups'], $container);
+            $this->mapValidationGroupParameters($config['resources'], $container);
+            $this->mapFormsValidationGroupParameters($config, $container);
         }
 
         if ($configure & self::CONFIGURE_FORMS) {
             $this->registerFormTypes($config, $container);
         }
 
-        $configClasses = array($this->applicationName => $classes);
+        $configClasses = array($this->applicationName => $resources);
 
         if ($container->hasParameter('sylius.config.classes')) {
             $configClasses = array_merge_recursive(
@@ -109,40 +110,29 @@ abstract class AbstractResourceExtension extends AbstractExtension
     /**
      * Remap class parameters.
      *
-     * @param array            $classes
+     * @param array            $resources
      * @param ContainerBuilder $container
      */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    protected function mapClassParameters(array $resources, ContainerBuilder $container)
     {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                if ('form' === $service) {
-                    if (!is_array($class)) {
-                        $class = array(self::DEFAULT_KEY => $class);
-                    }
-                    foreach ($class as $suffix => $subClass) {
-                        $container->setParameter(
-                            sprintf(
-                                '%s.form.type.%s%s.class',
-                                $this->applicationName,
-                                $model,
-                                $suffix === self::DEFAULT_KEY ? '' : sprintf('_%s', $suffix)
-                            ),
-                            $subClass
-                        );
-                    }
-                } elseif ('translation' === $service) {
-                    $this->mapClassParameters(array(sprintf('%s_translation', $model) => $class), $container);
+        foreach ($resources as $resource => $parameters) {
+            if (isset($parameters['translation'])) {
+                $this->mapClassParameters(array(sprintf('%s_translation', $resource) => $parameters['translation']), $container);
+            }
+
+            foreach ($parameters['classes'] as $serviceName => $serviceClassOrClasses) {
+                if (!is_array($serviceClassOrClasses)) {
+                    $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resource), $serviceClassOrClasses);
                 } else {
-                    $container->setParameter(
-                        sprintf(
-                            '%s.%s.%s.class',
-                            $this->applicationName,
-                            $service,
-                            $model
-                        ),
-                        $class
-                    );
+                    $serviceClasses = $serviceClassOrClasses;
+
+                    foreach ($serviceClasses as $serviceType => $serviceClass) {
+                        if (self::DEFAULT_KEY === $serviceType) {
+                            $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resource), $serviceClass);
+                        } else {
+                            $container->setParameter(sprintf('%s.%s.%s_%s.class', $this->applicationName, $serviceName, $resource, $serviceType), $serviceClass);
+                        }
+                    }
                 }
             }
         }
@@ -156,27 +146,27 @@ abstract class AbstractResourceExtension extends AbstractExtension
      */
     protected function registerFormTypes(array $config, ContainerBuilder $container)
     {
-        foreach ($config['classes'] as $model => $serviceClasses) {
-            if (!isset($serviceClasses['form']) || !is_array($serviceClasses['form'])) {
+        foreach ($config['resources'] as $resource => $parameters) {
+            if (!isset($parameters['classes']['form']) || !is_array($parameters['classes']['form'])) {
                 continue;
             }
 
-            if ($this->isTranslationSupported() && isset($serviceClasses['translation'])) {
-                $this->registerFormTypes(array('classes' => array(sprintf('%s_translation', $model) => $serviceClasses['translation'])), $container);
+            if ($this->isTranslationSupported() && isset($parameters['translation'])) {
+                $this->registerFormTypes(array('resources' => array(sprintf('%s_translation', $resource) => $parameters['translation'])), $container);
             }
 
-            foreach ($serviceClasses['form'] as $name => $class) {
+            foreach ($parameters['classes']['form'] as $name => $class) {
                 $suffix = ($name === self::DEFAULT_KEY ? '' : sprintf('_%s', $name));
-                $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);
+                $alias = sprintf('%s_%s%s', $this->applicationName, $resource, $suffix);
                 $definition = new Definition($class);
                 if ('choice' === $name) {
                     $definition->setArguments(array(
-                        $serviceClasses['model'],
+                        $parameters['classes']['model'],
                         $config['driver'],
                         $alias,
                     ));
                 } else {
-                    $validationGroupsParameterName = sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix);
+                    $validationGroupsParameterName = sprintf('%s.validation_group.%s%s', $this->applicationName, $resource, $suffix);
                     $validationGroups = array('Default');
 
                     if ($container->hasParameter($validationGroupsParameterName)) {
@@ -184,13 +174,13 @@ abstract class AbstractResourceExtension extends AbstractExtension
                     }
 
                     $definition->setArguments(array(
-                        $serviceClasses['model'],
+                        $parameters['classes']['model'],
                         $validationGroups,
                     ));
                 }
                 $definition->addTag('form.type', array('alias' => $alias));
                 $container->setDefinition(
-                    sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix),
+                    sprintf('%s.form.type.%s%s', $this->applicationName, $resource, $suffix),
                     $definition
                 );
             }
@@ -200,13 +190,30 @@ abstract class AbstractResourceExtension extends AbstractExtension
     /**
      * Remap validation group parameters.
      *
-     * @param array            $validationGroups
+     * @param array            $resources
      * @param ContainerBuilder $container
      */
-    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
+    protected function mapValidationGroupParameters(array $resources, ContainerBuilder $container)
     {
-        foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('%s.validation_group.%s', $this->applicationName, $model), $groups);
+        foreach ($resources as $resource => $parameters) {
+            if (isset($parameters['validation_groups'])) {
+                $container->setParameter(sprintf('%s.validation_group.%s', $this->applicationName, $resource), $parameters['validation_groups']);
+            }
+        }
+    }
+
+    /**
+     * Remap validation group parameters for forms.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function mapFormsValidationGroupParameters(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['validation_groups'])) {
+            foreach ($config['validation_groups'] as $validationGroups => $class) {
+                $container->setParameter(sprintf('%s.validation_group.%s', $this->applicationName, $validationGroups), $validationGroups);
+            }
         }
     }
 
@@ -234,20 +241,20 @@ abstract class AbstractResourceExtension extends AbstractExtension
         $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
         $container->setParameter(sprintf('%s.object_manager', $this->getAlias()), $manager);
 
-        if (!isset($config['classes'])) {
+        if (!isset($config['resources'])) {
             return;
         }
 
-        foreach ($config['classes'] as $model => $classes) {
-            if (array_key_exists('model', $classes)) {
+        foreach ($config['resources'] as $resource => $parameters) {
+            if (array_key_exists('model', $parameters['classes'])) {
                 DatabaseDriverFactory::get(
                     $container,
                     $this->applicationName,
-                    $model,
+                    $resource,
                     $manager,
                     $driver,
-                    isset($config['templates'][$model]) ? $config['templates'][$model] : null
-                )->load($classes);
+                    isset($config['templates'][$resource]) ? $config['templates'][$resource] : null
+                )->load($parameters);
             }
         }
     }
@@ -262,18 +269,19 @@ abstract class AbstractResourceExtension extends AbstractExtension
         $manager = isset($config['object_manager']) ? $config['object_manager'] : 'default';
         $mapper = new Mapper();
 
-        foreach ($config['classes'] as $model => $classes) {
-            if (array_key_exists('model', $classes) && array_key_exists('translation', $classes)) {
-                $mapper->mapTranslations($classes, $container);
+        foreach ($config['resources'] as $resource => $parameters) {
+            if (isset($parameters['classes']['model']) && isset($parameters['translation']['classes']['model'])) {
+                $mapper->mapTranslations($parameters, $container);
+                $this->mapValidationGroupParameters($parameters['translation'], $container);
 
                 DatabaseDriverFactory::get(
                     $container,
                     $this->applicationName,
-                    sprintf('%s_translation', $model),
+                    sprintf('%s_translation', $resource),
                     $manager,
                     $driver,
-                    isset($config['templates'][$model]) ? $config['templates'][$model] : null
-                )->load($classes['translation']);
+                    isset($config['templates'][$resource]) ? $config['templates'][$resource] : null
+                )->load($parameters['translation']);
             }
         }
     }

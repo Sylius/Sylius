@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -42,8 +43,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `resources` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addResourcesSection(ArrayNodeDefinition $node)
@@ -60,16 +59,16 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('classes')
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->end()
+                                    ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
+                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->scalarNode('interface')->end()
                                     ->arrayNode('translation')
                                         ->children()
-                                            ->scalarNode('model')->isRequired()->end()
-                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                            ->scalarNode('repository')->end()
-                                            ->scalarNode('interface')->end()
+                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->arrayNode('mapping')
                                                 ->isRequired()
                                                 ->children()
@@ -90,8 +89,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `settings` section.
-     *
      * @param $node
      */
     private function addSettingsSection(ArrayNodeDefinition $node)

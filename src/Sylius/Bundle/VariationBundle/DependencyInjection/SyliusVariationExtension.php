@@ -34,12 +34,12 @@ class SyliusVariationExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
 
-        foreach ($config['classes'] as $name => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+        foreach ($config['resources'] as $resource => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$resource);
             $formDefinition->addArgument($parameters['variable']);
 
             if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$resource.'_translation');
                 $formTranslationDefinition->addArgument($parameters['variable']);
             }
         }
@@ -53,43 +53,27 @@ class SyliusVariationExtension extends AbstractResourceExtension
         $convertedConfig = array();
         $variables = array();
 
-        foreach ($config['classes'] as $variable => $parameters) {
-            $variables[$variable] = $parameters;
+        foreach ($config['resources'] as $resource => $parameters) {
+            $variables[$resource] = $parameters;
             unset($parameters['variable']);
 
-            foreach ($parameters as $resource => $classes) {
-                $convertedConfig[$variable.'_'.$resource] = $classes;
-                $convertedConfig[$variable.'_'.$resource]['variable'] = $variable;
+            foreach ($parameters as $parameter => $classes) {
+                $convertedConfig[$resource.'_'.$parameter] = $classes;
+                $convertedConfig[$resource.'_'.$parameter]['variable'] = $resource;
+
+                if (!isset($classes['validation_groups'])) {
+                    $classes['validation_groups']['default'] = array('sylius');
+                }
             }
 
-            $this->createvariableServices($container, $variable);
+            $this->createvariableServices($container, $resource);
 
-            if (!isset($config['validation_groups'][$variable]['variant'])) {
-                $config['validation_groups'][$variable]['variant'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$variable]['option'])) {
-                $config['validation_groups'][$variable]['option'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$variable]['option_translation'])) {
-                $config['validation_groups'][$variable]['option_translation'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$variable]['option_value'])) {
-                $config['validation_groups'][$variable]['option_value'] = array('sylius');
-            }
+
         }
 
         $container->setParameter('sylius.variation.variables', $variables);
 
-        $config['classes'] = $convertedConfig;
-        $convertedConfig = array();
-
-        foreach ($config['validation_groups'] as $variable => $parameters) {
-            foreach ($parameters as $resource => $validationGroups) {
-                $convertedConfig[$variable.'_'.$resource] = $validationGroups;
-            }
-        }
-
-        $config['validation_groups'] = $convertedConfig;
+        $config['resources'] = $convertedConfig;
 
         return parent::process($config, $container);
     }

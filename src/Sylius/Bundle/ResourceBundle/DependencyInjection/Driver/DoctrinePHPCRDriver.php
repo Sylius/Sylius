@@ -33,18 +33,18 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function getRepositoryDefinition(array $parameters)
     {
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
-        if (isset($classes['repository'])) {
-            $repositoryClass  = $classes['repository'];
+        if (isset($parameters['classes']['repository'])) {
+            $repositoryClass  = $parameters['classes']['repository'];
         }
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model']),
+            $this->getClassMetadataDefinition($parameters['classes']['model']),
         ));
 
         return $definition;
