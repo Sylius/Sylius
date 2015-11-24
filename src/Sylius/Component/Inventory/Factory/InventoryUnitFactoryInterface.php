@@ -13,20 +13,21 @@ namespace Sylius\Component\Inventory\Factory;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Inventory unit factory interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface InventoryUnitFactoryInterface
+interface InventoryUnitFactoryInterface extends FactoryInterface
 {
     /**
-     * Create given amount of inventory units.
+     * Create a specific amount of inventory units for given stockable object.
      *
      * @param StockableInterface $stockable
      * @param integer            $quantity
      * @param string             $state
      */
-    public function create(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD);
+    public function createForStockable(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD);
 }

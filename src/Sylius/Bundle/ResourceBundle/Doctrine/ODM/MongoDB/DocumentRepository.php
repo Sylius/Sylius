@@ -25,16 +25,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
     /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
-    /**
      * @param int $id
      *
      * @return object

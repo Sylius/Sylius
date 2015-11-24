@@ -52,7 +52,7 @@ class AddressController extends FOSRestController
     public function createAction(Request $request)
     {
         $customer = $this->getCustomer();
-        $address = $this->getAddressRepository()->createNew();
+        $address = $this->getAddressFactory()->createNew();
         $form = $this->getAddressForm($address);
 
         if ($form->handleRequest($request)->isValid()) {
@@ -195,6 +195,14 @@ class AddressController extends FOSRestController
     protected function getAddressRepository()
     {
         return $this->get('sylius.repository.address');
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    protected function getAddressFactory()
+    {
+        return $this->get('sylius.factory.address');
     }
 
     protected function redirectToIndex()

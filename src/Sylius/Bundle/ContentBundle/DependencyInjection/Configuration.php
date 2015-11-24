@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -123,6 +124,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -137,6 +139,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -151,6 +154,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -165,6 +169,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -179,6 +184,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -193,6 +199,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -207,6 +214,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -221,6 +229,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -235,6 +244,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -249,6 +259,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -263,6 +274,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -277,6 +289,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()

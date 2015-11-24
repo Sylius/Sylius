@@ -15,6 +15,7 @@ use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
 use Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -65,6 +66,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue(PaymentSecurityToken::class)->end()
                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('gateway_config')
@@ -72,6 +74,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue(GatewayConfig::class)->end()
                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                     ->end()

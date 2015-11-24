@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -127,6 +129,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\Shipment')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ShippingBundle\Controller\ShipmentController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -141,6 +144,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\ShipmentItem')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -155,6 +159,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\ShippingMethod')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -167,6 +172,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\ShippingMethodTranslation')->end()
                                         ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                         ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -186,21 +192,13 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-//                        ->arrayNode('shipping_method_translation')
-//                            ->addDefaultsIfNotSet()
-//                            ->children()
-//                                ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\ShippingMethodTranslation')->end()
-//                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-//                                ->scalarNode('repository')->end()
-//                                ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType')->end()
-//                            ->end()
-//                        ->end()
                         ->arrayNode('shipping_category')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\ShippingCategory')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -216,6 +214,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Shipping\Model\Rule')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()

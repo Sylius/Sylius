@@ -71,7 +71,7 @@ class LoadShippingData extends DataFixture
     protected function createShippingCategory($name, $description)
     {
         /* @var $category ShippingCategoryInterface */
-        $category = $this->getShippingCategoryRepository()->createNew();
+        $category = $this->getShippingCategoryFactory()->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -94,7 +94,7 @@ class LoadShippingData extends DataFixture
     protected function createShippingMethod(array $translatedNames, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
     {
         /* @var $method ShippingMethodInterface */
-        $method = $this->getShippingMethodRepository()->createNew();
+        $method = $this->getShippingMethodFactory()->createNew();
 
         foreach ($translatedNames as $locale => $name) {
             $method->setCurrentLocale($locale);

@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -93,6 +95,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('model')->defaultValue('Sylius\Component\Archetype\Model\Archetype')->end()
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->defaultValue('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository')->end()
+                                    ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                     ->arrayNode('form')
                                         ->addDefaultsIfNotSet()
                                         ->children()
@@ -106,6 +109,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->defaultValue('Sylius\Component\Archetype\Model\ArchetypeTranslation')->end()
                                             ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                             ->scalarNode('repository')->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()

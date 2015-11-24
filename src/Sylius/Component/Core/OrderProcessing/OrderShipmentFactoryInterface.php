@@ -18,12 +18,12 @@ use Sylius\Component\Core\Model\OrderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentFactoryInterface
+interface OrderShipmentFactoryInterface
 {
     /**
      * Create shipment for order.
      *
      * @param OrderInterface $order
      */
-    public function createShipment(OrderInterface $order);
+    public function createForOrder(OrderInterface $order);
 }

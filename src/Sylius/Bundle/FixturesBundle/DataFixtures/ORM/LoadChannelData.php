@@ -59,7 +59,7 @@ class LoadChannelData extends DataFixture
     protected function createChannel($code, $name, $url, array $locales = array(), array $currencies = array(), array $taxonomies = array(), array $shippingMethods = array(), array $paymentMethods = array())
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->getChannelRepository()->createNew();
+        $channel = $this->getChannelFactory()->createNew();
         $channel->setUrl($url);
         $channel->setCode($code);
         $channel->setName($name);

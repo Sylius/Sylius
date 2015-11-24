@@ -23,6 +23,7 @@ class ContactContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('contact_request');
+        $factory = $this->getFactory('contact_request');
 
         foreach ($repository->findAll() as $contactRequest) {
             $manager->remove($contactRequest);
@@ -31,7 +32,7 @@ class ContactContext extends DefaultContext
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $newContactRequest = $repository->createNew();
+            $newContactRequest = $factory->createNew();
             $newContactRequest->setFirstName($data['firstName']);
             $newContactRequest->setLastName($data['lastName']);
             $newContactRequest->setEmail($data['email']);
@@ -50,7 +51,8 @@ class ContactContext extends DefaultContext
     public function thereAreContactTopics(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('contact_topics');
+        $repository = $this->getRepository('contact_topic');
+        $factory = $this->getFactory('contact_topic');
 
         foreach ($repository->findAll() as $contactTopic) {
             $manager->remove($contactTopic);
@@ -59,7 +61,7 @@ class ContactContext extends DefaultContext
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $newContactTopic = $repository->createNew();
+            $newContactTopic = $factory->createNew();
             $newContactTopic->setTitle($data['title']);
 
             $manager->persist($newContactTopic);
@@ -67,5 +69,4 @@ class ContactContext extends DefaultContext
 
         $manager->flush();
     }
-
 }

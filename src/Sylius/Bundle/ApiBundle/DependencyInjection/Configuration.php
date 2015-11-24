@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -110,6 +111,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\ApiBundle\Model\Client')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -124,6 +126,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\ApiBundle\Model\AccessToken')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('api_refresh_token')
@@ -132,6 +135,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\ApiBundle\Model\RefreshToken')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                         ->arrayNode('api_auth_code')
@@ -140,6 +144,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\ApiBundle\Model\AuthCode')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
                             ->end()
                         ->end()
                     ->end()

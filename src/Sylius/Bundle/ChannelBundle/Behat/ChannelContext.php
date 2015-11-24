@@ -149,7 +149,7 @@ class ChannelContext extends DefaultContext
     public function thereIsChannel($code, $name, $url, $locales = null, $currencies = "EUR", $shippingMethods = null, $paymentMethos = null, $flush = true)
     {
         /* @var $channel ChannelInterface */
-        $channel = $this->getRepository('channel')->createNew();
+        $channel = $this->getFactory('channel')->createNew();
         $channel->setCode($code);
         $channel->setName($name);
         $channel->setUrl($url);

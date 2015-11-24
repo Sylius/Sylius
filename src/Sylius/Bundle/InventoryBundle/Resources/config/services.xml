@@ -22,7 +22,6 @@
         <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
         <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
         <parameter key="sylius.backorders_handler.class">Sylius\Component\Inventory\Operator\BackordersHandler</parameter>
-        <parameter key="sylius.inventory_unit_factory.class">Sylius\Component\Inventory\Factory\InventoryUnitFactory</parameter>
         <parameter key="sylius.listener.inventory.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
     </parameters>
@@ -41,10 +40,6 @@
         </service>
 
         <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
-            <argument type="service" id="sylius.repository.inventory_unit" />
-        </service>
-
-        <service id="sylius.inventory_unit_factory" class="%sylius.inventory_unit_factory.class%">
             <argument type="service" id="sylius.repository.inventory_unit" />
         </service>
 

@@ -41,6 +41,7 @@
             <argument type="service" id="sylius.settings.schema_registry" />
             <argument type="service" id="sylius.manager.parameter" />
             <argument type="service" id="sylius.repository.parameter" />
+            <argument type="service" id="sylius.factory.parameter" />
             <argument type="service" id="sylius.settings.cache" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher" />

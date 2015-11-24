@@ -25,7 +25,7 @@ class PaymentContext extends DefaultContext
     public function thereArePaymentMethods(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('payment_method');
+        $factory = $this->getFactory('payment_method');
 
         foreach ($table->getHash() as $data) {
             if (!isset($data['calculator'], $data['calculator_configuration'])) {
@@ -34,7 +34,7 @@ class PaymentContext extends DefaultContext
             }
 
             /* @var $method PaymentMethodInterface */
-            $method = $repository->createNew();
+            $method = $factory->createNew();
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
             $method->setFeeCalculator($data['calculator']);

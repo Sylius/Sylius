@@ -13,9 +13,10 @@ namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -143,8 +144,8 @@ EOT
          * @var $user UserInterface
          * @var $customer CustomerInterface
          */
-        $user = $this->getUserRepository()->createNew();
-        $customer = $this->getCustomerRepository()->createNew();
+        $user = $this->getUserFactory()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);
@@ -182,19 +183,19 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return FactoryInterface
      */
-    protected function getUserRepository()
+    protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.repository.user');
+        return $this->getContainer()->get('sylius.factory.user');
     }
 
     /**
-     * @return EntityRepository
+     * @return FactoryInterface
      */
-    protected function getCustomerRepository()
+    protected function getCustomerFactory()
     {
-        return $this->getContainer()->get('sylius.repository.customer');
+        return $this->getContainer()->get('sylius.factory.customer');
     }
 
     /**

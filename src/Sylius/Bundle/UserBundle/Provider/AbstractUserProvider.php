@@ -27,10 +27,12 @@ abstract class AbstractUserProvider implements UserProviderInterface
      * @var string
      */
     protected $supportedUserClass = 'Sylius\Component\User\Model\UserInterface';
+
     /**
      * @var UserRepositoryInterface
      */
     protected $userRepository;
+
     /**
      * @var CanonicalizerInterface
      */
