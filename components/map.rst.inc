@@ -1,3 +1,4 @@
+* :doc:`/components/general/index`
 * :doc:`/components/Addressing/index`
 * :doc:`/components/Archetype/index`
 * :doc:`/components/Attribute/index`

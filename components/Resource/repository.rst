@@ -1,16 +1,14 @@
-Repository interfaces
-======================
+Repository Interfaces
+=====================
 .. _component_resource_repository_repository-interface:
 
 RepositoryInterface
 -------------------
 
-This interface will ask you to implement two methods to your repositories:
+This interface should be implemented by every Resource Repository service.
 
-+----------------------------------------------------------------+--------------------------------------------+------------------+
-| Method                                                         | Description                                | Returned value   |
-+================================================================+============================================+==================+
-| createNew()                                                    | Create a new  instance of your resource    | mixed            |
-+----------------------------------------------------------------+--------------------------------------------+------------------+
-| createPaginator(array $criteria = null, array $orderBy = null) | Get paginated collection of your resources | mixed            |
-+----------------------------------------------------------------+--------------------------------------------+------------------+
++----------------------------------------------------------------+--------------------------------------------+
+| Method                                                         | Description                                |
++================================================================+============================================+
+| createPaginator(array $criteria = null, array $orderBy = null) | Get paginated collection of your resources |
++----------------------------------------------------------------+--------------------------------------------+

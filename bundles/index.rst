@@ -1,5 +1,5 @@
-Symfony2 Ecommerce Bundles
-==========================
+Symfony2 Bundles
+================
 
 .. toctree::
     :hidden:
