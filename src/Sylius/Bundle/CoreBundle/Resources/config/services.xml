@@ -21,6 +21,7 @@
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
+        <parameter key="sylius.context.rbac.class">Sylius\Bundle\CoreBundle\Context\RbacContext</parameter>
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.channel_resolver.class">Sylius\Component\Core\Channel\ChannelResolver</parameter>
 
@@ -103,7 +104,6 @@
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
-        <parameter key="sylius.rbac.voter.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\Voter\ToggleableVoter</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
     </parameters>
 
@@ -122,6 +122,11 @@
         </service>
         <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
             <tag name="sylius.settings_schema" namespace="sylius_security" />
+        </service>
+
+        <!-- rbac -->
+        <service id="sylius.context.rbac" class="%sylius.context.rbac.class%">
+            <argument type="service" id="sylius.settings.manager" />
         </service>
 
         <!-- cart -->
@@ -538,12 +543,6 @@
 
         <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
             <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
-        </service>
-
-        <service id="sylius.rbac.voter" class="%sylius.rbac.voter.toggleable.class%" public="false">
-            <argument type="service" id="sylius.rbac.voter.bridge" />
-            <argument type="service" id="sylius.settings.manager" />
-            <tag name="security.voter" />
         </service>
 
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">

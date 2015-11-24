@@ -15,22 +15,19 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Sylius\Component\Rbac\Authorization\Voter\RbacVoterInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Rbac\Provider\CredentialProviderInterface;
 
 /**
+ * Bridges Sylius RBAC voters to Symfony voters.
+ *
  * @author Christian Daguerre <christian@daguer.re>
  */
 class RbacVoterBridge implements VoterInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var CredentialProviderInterface
      */
-    protected $roleRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $permissionRepository;
+    protected $credentialProvider;
 
     /**
      * @var RbacVoterInterface
@@ -38,22 +35,13 @@ class RbacVoterBridge implements VoterInterface
     protected $rbacVoter;
 
     /**
-     * @var array
-     */
-    private $cache;
-
-    /**
      * Constructor.
      *
-     * @param RepositoryInterface $roleRepository
-     * @param RepositoryInterface $permissionRepository
+     * @param CredentialProviderInterface $credentialProvider
      */
-    public function __construct(
-        RepositoryInterface $roleRepository,
-        RepositoryInterface $permissionRepository
-    ) {
-        $this->roleRepository = $roleRepository;
-        $this->permissionRepository = $permissionRepository;
+    public function __construct(CredentialProviderInterface $credentialProvider)
+    {
+        $this->credentialProvider = $credentialProvider;
     }
 
     /**
@@ -69,10 +57,10 @@ class RbacVoterBridge implements VoterInterface
      */
     public function supportsAttribute($attribute)
     {
-        if ($this->attributeExists($attribute, 'role')) {
+        if ($this->credentialProvider->hasRole($attribute)) {
             return true;
         }
-        if ($this->attributeExists($attribute, 'permission')) {
+        if ($this->credentialProvider->hasPermission($attribute)) {
             return true;
         }
 
@@ -99,11 +87,11 @@ class RbacVoterBridge implements VoterInterface
         $identity = $token->getUser();
 
         if (!$identity instanceof IdentityInterface) {
-            return self::ACCESS_ABSTAIN;
+            return VoterInterface::ACCESS_ABSTAIN;
         }
 
         // abstain vote by default in case none of the attributes are supported
-        $vote = self::ACCESS_ABSTAIN;
+        $vote = VoterInterface::ACCESS_ABSTAIN;
 
         foreach ($attributes as $permissionCode) {
             if (!$this->supportsAttribute($permissionCode)) {
@@ -111,27 +99,14 @@ class RbacVoterBridge implements VoterInterface
             }
 
             // as soon as at least one attribute is supported, default is to deny access
-            $vote = self::ACCESS_DENIED;
+            $vote = VoterInterface::ACCESS_DENIED;
 
             // grant access as soon as at least one voter returns a positive response
             if ($this->rbacVoter->isGranted($identity, $permissionCode, $object)) {
-                return self::ACCESS_GRANTED;
+                return VoterInterface::ACCESS_GRANTED;
             }
         }
 
         return $vote;
-    }
-
-    private function attributeExists($attribute, $type)
-    {
-        if (!isset($this->cache[$type])) {
-            $this->cache[$type] = array();
-        }
-
-        if (!array_key_exists($attribute, $this->cache[$type])) {
-            $this->cache[$type][$attribute] = $this->{ $type . 'Repository' }->findBy(array('code' => $attribute));
-        }
-
-        return null !== $this->cache[$type][$attribute];
     }
 }

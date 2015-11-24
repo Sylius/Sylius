@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Sylius\Component\Rbac\Authorization\Voter\DelegatingVoterInterface;
 
 /**
@@ -27,20 +28,15 @@ class VotersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $voterId = $container->getParameter('sylius.rbac.voter_id');
+        $voterId = $container->getParameter('sylius.rbac.voter.id');
         $voterDefinition = $container->getDefinition($voterId);
         $this->addResourceVoters($container, $voterDefinition);
 
-        $bridgeDefinition = $container->getDefinition('sylius.rbac.voter.bridge');
-        $bridgeDefinition->addMethodCall('setRbacVoter', array(new Reference($voterId)));
+        $bridgeInstance = new DefinitionDecorator('sylius.rbac.voter.bridge');
+        $bridgeInstance->addMethodCall('setRbacVoter', array(new Reference($voterId)));
+        $bridgeInstance->addTag('security.voter');
 
-        if (!$container->hasDefinition('sylius.rbac.voter')) {
-            $container->setAlias('sylius.rbac.voter', 'sylius.rbac.voter.bridge');
-        }
-
-        if (!$container->findDefinition('sylius.rbac.voter')->hasTag('security.voter')) {
-            $container->findDefinition('sylius.rbac.voter')->addTag('security.voter');
-        }
+        $container->setDefinition(sprintf('%s.bridge', $voterId), $bridgeInstance);
     }
 
     private function addResourceVoters(ContainerBuilder $container, Definition $voterDefinition)

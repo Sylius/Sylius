@@ -19,6 +19,14 @@ use Sylius\Component\Rbac\Model\IdentityInterface;
 interface RbacVoterInterface
 {
     /**
+     * Set resource resource voters.
+     *
+     * @param ResourceVoterInterface $resourceVoter
+     * @param int                    $priority
+     */
+    public function addResourceVoter(ResourceVoterInterface $resourceVoter);
+
+    /**
      * Checks whether the given identity is allowed to perform the given
      * action, optionally for the given resource.
      *

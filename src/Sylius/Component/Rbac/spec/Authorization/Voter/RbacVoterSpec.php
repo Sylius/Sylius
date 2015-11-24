@@ -25,11 +25,10 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
 class RbacVoterSpec extends ObjectBehavior
 {
     function let(
-        PermissionProviderInterface $permissionProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
     ) {
-        $this->beConstructedWith($permissionProvider, $permissionMap, $rolesResolver);
+        $this->beConstructedWith($permissionMap, $rolesResolver);
     }
 
     function it_is_initializable()
@@ -44,10 +43,8 @@ class RbacVoterSpec extends ObjectBehavior
 
     function it_denies_access_if_none_of_current_identity_roles_has_permission(
         IdentityInterface $identity,
-        $permissionProvider,
         $permissionMap,
         $rolesResolver,
-        PermissionInterface $permission,
         RoleInterface $role1,
         RoleInterface $role2
     ) {
@@ -55,8 +52,6 @@ class RbacVoterSpec extends ObjectBehavior
 
         $role1->getCode()->shouldBeCalled()->willReturn('role1');
         $role2->getCode()->shouldBeCalled()->willReturn('role2');
-
-        $permissionProvider->getPermission('can_close_store')->shouldBeCalled()->willReturn($permission);
 
         $permissionMap->hasPermission($role1, 'can_close_store')->shouldBeCalled()->willReturn(false);
         $permissionMap->hasPermission($role2, 'can_close_store')->shouldBeCalled()->willReturn(false);
@@ -66,10 +61,8 @@ class RbacVoterSpec extends ObjectBehavior
 
     function it_grants_access_if_any_of_current_identity_roles_has_permission(
         IdentityInterface $identity,
-        $permissionProvider,
         $permissionMap,
         $rolesResolver,
-        PermissionInterface $permission,
         RoleInterface $role1,
         RoleInterface $role2
     ) {
@@ -77,8 +70,6 @@ class RbacVoterSpec extends ObjectBehavior
 
         $role1->getCode()->shouldBeCalled()->willReturn('role1');
         $role2->getCode()->shouldBeCalled()->willReturn('role2');
-
-        $permissionProvider->getPermission('can_open_store')->shouldBeCalled()->willReturn($permission);
 
         $permissionMap->hasPermission($role1, 'can_open_store')->shouldBeCalled()->willReturn(false);
         $permissionMap->hasPermission($role2, 'can_open_store')->shouldBeCalled()->willReturn(true);

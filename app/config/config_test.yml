@@ -32,6 +32,9 @@ sylius_payment:
         test:   Test
         stripe: Stripe
 
+sylius_rbac:
+    voter: sylius.rbac.voter.default
+
 doctrine_cache:
     providers:
         sylius_settings:

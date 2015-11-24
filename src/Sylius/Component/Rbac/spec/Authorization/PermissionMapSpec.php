@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
-use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
+use Sylius\Component\Rbac\Provider\CredentialProviderInterface;
 use Sylius\Component\Rbac\Resolver\PermissionsResolverInterface;
 
 /**
@@ -23,9 +23,9 @@ use Sylius\Component\Rbac\Resolver\PermissionsResolverInterface;
  */
 class PermissionMapSpec extends ObjectBehavior
 {
-    function let(PermissionProviderInterface $permissionProvider, PermissionsResolverInterface $permissionResolver)
+    function let(CredentialProviderInterface $credentialProvider, PermissionsResolverInterface $permissionResolver)
     {
-        $this->beConstructedWith($permissionProvider, $permissionResolver);
+        $this->beConstructedWith($credentialProvider, $permissionResolver);
     }
 
     function it_is_initializable()
@@ -50,7 +50,7 @@ class PermissionMapSpec extends ObjectBehavior
     }
 
     function it_checks_if_role_has_permission_with_given_code(
-        $permissionProvider,
+        $credentialProvider,
         $permissionResolver,
         RoleInterface $role,
         PermissionInterface $permission,
@@ -60,7 +60,7 @@ class PermissionMapSpec extends ObjectBehavior
         $validPermissions->contains($permission)->shouldBeCalled()->willReturn(true);
         $invalidPermissions->contains($permission)->shouldBeCalled()->willReturn(false);
 
-        $permissionProvider->getPermission('can_eat_bananas')->shouldBeCalled()->willReturn($permission);
+        $credentialProvider->getPermission('can_eat_bananas')->shouldBeCalled()->willReturn($permission);
 
         $permissionResolver->getPermissions($role)->shouldBeCalled()->willReturn($validPermissions);
         $this->hasPermission($role, 'can_eat_bananas')->shouldReturn(true);

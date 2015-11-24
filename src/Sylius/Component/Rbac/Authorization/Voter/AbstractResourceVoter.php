@@ -21,11 +21,6 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
     /**
      * @var string
      */
-    protected $application;
-
-    /**
-     * @var string
-     */
     protected $resource;
 
     /**
@@ -39,19 +34,24 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
     protected $dataClass;
 
     /**
+     * @var string
+     */
+    protected $prefix;
+
+    /**
      * Constructor.
      *
-     * @param string $application
      * @param string $resource
      * @param array  $actions
      * @param string $dataClass
+     * @param string $prefix
      */
-    public function __construct($application, $resource, array $actions, $dataClass)
+    public function __construct($resource, array $actions, $dataClass, $prefix = 'sylius')
     {
-        $this->application = $application;
         $this->resource = $resource;
         $this->actions = $actions;
         $this->dataClass = $dataClass;
+        $this->prefix = $prefix;
     }
 
     /**
@@ -59,13 +59,13 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     public function supports($permissionCode, $resource)
     {
-        if ($this->application !== $this->getPermissionComponent($permissionCode, 'application')) {
+        if ($this->prefix !== $this->getPart($permissionCode, 'prefix')) {
             return false;
         }
-        if ($this->resource !== $this->getPermissionComponent($permissionCode, 'resource')) {
+        if ($this->resource !== $this->getPart($permissionCode, 'resource')) {
             return false;
         }
-        if (!in_array($this->getPermissionComponent($permissionCode, 'action'), $this->actions)) {
+        if (!in_array($this->getPart($permissionCode, 'action'), $this->actions)) {
             return false;
         }
 
@@ -85,7 +85,7 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     public function isGranted(IdentityInterface $identity, $permissionCode, $resource)
     {
-        $action = $this->getPermissionComponent($permissionCode, 'action');
+        $action = $this->getPart($permissionCode, 'action');
 
         return $this->isActionGranted($identity, $action, $resource);
     }
@@ -101,9 +101,17 @@ abstract class AbstractResourceRbacVoter implements ResourceVoterInterface
      */
     abstract protected function isActionGranted(IdentityInterface $identity, $action, $resource);
 
-    private function getPermissionComponent($permissionCode, $component)
+    /**
+     * Get application/bundle prefix, resource name and action from permission code.
+     *
+     * @param string $permissionCode
+     * @param string $component      One of 'prefix', 'resource', 'action'
+     *
+     * @return string
+     */
+    protected function getPart($permissionCode, $component)
     {
-        $components = array_combine(array('application', 'resource', 'action'), explode('.', $permissionCode));
+        $components = array_combine(array('prefix', 'resource', 'action'), explode('.', $permissionCode));
 
         return $components[$component];
     }

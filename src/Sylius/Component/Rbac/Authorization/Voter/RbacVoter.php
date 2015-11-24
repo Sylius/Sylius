@@ -25,11 +25,6 @@ use Sylius\Component\Rbac\Exception\CredentialsTooBroadException;
 class RbacVoter implements RbacVoterInterface
 {
     /**
-     * @var PermissionProviderInterface
-     */
-    protected $permissionProvider;
-
-    /**
      * @var PermissionMapInterface
      */
     protected $permissionMap;
@@ -40,18 +35,25 @@ class RbacVoter implements RbacVoterInterface
     protected $rolesResolver;
 
     /**
+     * @var array|ResourceVoterInterface[]
+     */
+    protected $resourceVoters;
+
+    /**
+     * @var bool
+     */
+    private $sorted;
+
+    /**
      * Constructor.
      *
-     * @param RepositoryInterface    $permissionProvider
      * @param PermissionMapInterface $permissionMap
      * @param RolesResolverInterface $rolesResolver
      */
     public function __construct(
-        PermissionProviderInterface $permissionProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
     ) {
-        $this->permissionProvider = $permissionProvider;
         $this->permissionMap = $permissionMap;
         $this->rolesResolver = $rolesResolver;
     }
@@ -59,73 +61,55 @@ class RbacVoter implements RbacVoterInterface
     /**
      * {@inheritdoc}
      */
+    public function addResourceVoter(ResourceVoterInterface $resourceVoter)
+    {
+        $this->resourceVoters[] = $resourceVoter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isGranted(IdentityInterface $identity, $permissionCode, $resource = null)
     {
+        if ($resource) {
+            $this->sortResourceVoters();
+            foreach ($this->resourceVoters as $voter) {
+                if ($voter->supports($permissionCode, $resource)) {
+                    return $voter->isGranted($identity, $permissionCode, $resource);
+                }
+            }
+        }
+
         $roles = $this->rolesResolver->getRoles($identity);
 
         foreach ($roles as $role) {
-            // If it's a role and no resource was provided, return true
             if ($role->getCode() === $permissionCode) {
-                if ($resource) {
-                    throw new CredentialsTooBroadException($resource, $permissionCode);
-                }
                 return true;
             }
-
-            // No such permission, continue looking for a role with the given code.
-            if (null === $permission = $this->getPermission($permissionCode)) {
-                continue;
-            }
-
-            // Continue looking for permission in other roles
-            if (!$this->permissionMap->hasPermission($role, $permissionCode)) {
-                continue;
-            }
-
-            // User has permission, return true if no resource was provided
-            if (!$resource) {
+            if ($this->permissionMap->hasPermission($role, $permissionCode)) {
                 return true;
             }
-
-            // Fail if a resource was provided, but the role is not specific enough
-            if ($permission->hasChildren()) {
-                throw new CredentialsTooBroadException($resource, $permissionCode);
-            }
-
-            return $this->hasPermissionForResource($identity, $permissionCode, $resource);
         }
 
         return false;
     }
 
     /**
-     * Checks whether the identity has the permission for a given resource.
-     * By the time this is called, we already know the user has the permission.
-     *
-     * @param IdentityInterface $identity
-     * @param string            $permissionCode
-     * @param mixed             $resource
-     *
-     * @return bool
+     * Sort resource voters by priority.
      */
-    protected function hasPermissionForResource(IdentityInterface $identity, $permissionCode, $resource)
+    private function sortResourceVoters()
     {
-        return true;
-    }
-
-    /**
-     * Checks whether a permission with the given code exists.
-     *
-     * @param string $code
-     *
-     * @return PermissionInterface|null
-     */
-    protected function getPermission($code)
-    {
-        try {
-            return $this->permissionProvider->getPermission($code);
-        } catch (PermissionNotFoundException $e) {
-            return null;
+        if ($this->sorted) {
+            return;
         }
+
+        usort($this->resourceVoters, function (ResourceVoterInterface $voter1, ResourceVoterInterface $voter2) {
+            if ($voter1->getPriority() === $voter2->getPriority()) {
+                return 0;
+            }
+            return ($voter1->getPriority() < $voter2->getPriority()) ? -1 : 1;
+        });
+
+        $this->sorted = true;
     }
 }

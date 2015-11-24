@@ -73,6 +73,16 @@ interface RoleInterface extends TimestampableInterface
     public function hasPermission(PermissionInterface $permission);
 
     /**
+     * @return array
+     */
+    public function getSecurityRoles();
+
+    /**
+     * @param array
+     */
+    public function setSecurityRoles(array $securityRoles);
+
+    /**
      * @return null|RoleInterface
      */
     public function getParent();
