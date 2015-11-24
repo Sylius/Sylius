@@ -557,8 +557,6 @@ class ResourceController extends FOSRestController
             $grant = sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission);
 
             if (!$this->get('security.authorization_checker')->isGranted($grant, $resource)) {
-                var_dump($this->get('security.authorization_checker')->isGranted($grant, $resource));
-                die;
                 throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
             }
         }
