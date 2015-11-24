@@ -16,7 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
-use Sylius\Component\Rbac\Authorization\Voter\DelegatingVoterInterface;
 
 /**
  * @author Christian Daguerre <christian@daguer.re>
@@ -29,6 +28,7 @@ class VotersPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $voterId = $container->getParameter('sylius.rbac.voter.id');
+
         $voterDefinition = $container->getDefinition($voterId);
         $this->addResourceVoters($container, $voterDefinition);
 
@@ -41,16 +41,6 @@ class VotersPass implements CompilerPassInterface
 
     private function addResourceVoters(ContainerBuilder $container, Definition $voterDefinition)
     {
-        $voterClass = $voterDefinition->getClass();
-
-        if ($container->hasParameter(substr($voterClass, 1, -1))) {
-            $voterClass = $container->getParameter(substr($voterClass, 1, -1));
-        }
-
-        if (!in_array(DelegatingVoterInterface::class, class_implements($voterClass))) {
-            return;
-        }
-
         $resourceVoters = $container->findTaggedServiceIds('rbac.resource_voter');
 
         foreach (array_keys($resourceVoters) as $id) {
