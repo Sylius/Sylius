@@ -56,6 +56,7 @@ class RbacVoter implements RbacVoterInterface
     ) {
         $this->permissionMap = $permissionMap;
         $this->rolesResolver = $rolesResolver;
+        $this->resourceVoters = array();
     }
 
     /**
