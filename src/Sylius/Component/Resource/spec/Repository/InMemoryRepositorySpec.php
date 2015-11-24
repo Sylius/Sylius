@@ -13,29 +13,23 @@ namespace spec\Sylius\Component\Resource\Repository;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use spec\Sylius\Component\Resource\Fixtures\SampleResourceInterface;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\InMemoryRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+
+require_once __DIR__ . '/../Fixtures/SampleResourceInterface.php';
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class InMemoryRepositorySpec extends ObjectBehavior
 {
-    function let(RepositableInterface $book, RepositableInterface $shirt)
+    function let()
     {
-        $this->beConstructedWith(RepositableInterface::class);
-
-        $book->getId()->willReturn(10);
-        $book->getName()->willReturn('Book');
-        $book->getRating()->willReturn(5);
-
-        $shirt->getId()->willReturn(5);
-        $shirt->getName()->willReturn('Shirt');
-
-        $this->add($book);
-        $this->add($shirt);
+        $this->beConstructedWith(SampleResourceInterface::class);
     }
 
     function it_throws_invalid_argument_exception_when_constructing_with_null()
@@ -43,7 +37,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('__construct', array(null));
     }
 
-    function it_throws_unexpected_type_exception_when_constructing_without_resource_interface(Void $void)
+    function it_throws_unexpected_type_exception_when_constructing_without_resource_interface($void = 1)
     {
         $this->shouldThrow(UnexpectedTypeException::class)->during('__construct', array($void));
     }
@@ -63,123 +57,126 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('add', array($resource));
     }
 
-    function it_throws_invalid_argument_exception_when_adding_object_with_null_id(RepositableInterface $mug)
-    {
-        $mug->getId()->willReturn(null);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('add', array($mug));
-    }
-
-    function it_throws_invalid_argument_exception_when_adding_different_objects_with_same_id(
-        RepositableInterface $leftShoe,
-        RepositableInterface $rightShoe
-    ) {
-        $leftShoe->getId()->willReturn(1);
-        $leftShoe->getName()->willReturn('leftShoe');
-        $rightShoe->getId()->willReturn(1);
-        $rightShoe->getName()->willReturn('rightShoe');
-
-        $this->add($leftShoe);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('add', array($rightShoe));
-    }
-
-    function it_adds_an_object(RepositableInterface $monocle)
+    function it_adds_an_object(SampleResourceInterface $monocle)
     {
         $monocle->getId()->willReturn(2);
 
         $this->add($monocle);
-        $this->find(2)->shouldReturn($monocle);
+        $this->findOneBy(array('id' => 2))->shouldReturn($monocle);
     }
 
-    function it_removes_a_resource(RepositableInterface $shirt)
+    function it_removes_a_resource(SampleResourceInterface $shirt)
     {
+        $shirt->getId()->willReturn(5);
+
+        $this->add($shirt);
         $this->remove($shirt);
 
-        $this->find(5)->shouldReturn(null);
+        $this->findOneBy(array('id' => 5))->shouldReturn(null);
     }
 
-    function it_finds_an_object_by_id(RepositableInterface $book)
+    function it_throws_unsupported_method_exception_while_using_find()
     {
-        $this->find(10)->shouldReturn($book);
+        $this->shouldThrow(UnsupportedMethodException::class)->during('find', array());
     }
 
-    function it_returns_null_when_finding_with_null_parameter()
+    function it_finds_many_objects_with_parameter(SampleResourceInterface $book)
     {
-        $this->find(null)->shouldReturn(null);
-    }
+        $book->getName()->willReturn('Book');
 
-    function it_returns_null_when_finding_unavailable_id()
-    {
-        $this->find(11)->shouldReturn(null);
-    }
-
-    function it_finds_many_objects_with_parameter(RepositableInterface $book)
-    {
-        $book->getName()->shouldBeCalled();
+        $this->add($book);
 
         $this->findBy(array('name' => 'Book'))->shouldReturn(array($book));
     }
 
-    function it_finds_all_objects_when_parameter_is_not_set(RepositableInterface $book, RepositableInterface $shirt)
-    {
-        $this->findBy()->shouldReturn(array($book, $shirt));
+    function it_returns_all_objects_when_finding_by_an_empty_array_parameter(
+        SampleResourceInterface $book,
+        SampleResourceInterface $shirt
+    ) {
+        $book->getId()->willReturn(10);
+        $book->getName()->willReturn('Book');
+
+        $shirt->getId()->willReturn(5);
+        $shirt->getName()->willReturn('Shirt');
+
+        $this->add($book);
+        $this->add($shirt);
+
+        $this->findBy(array())->shouldReturn(array($book, $shirt));
     }
 
-    function it_finds_many_objects_with_parameter_order_limit_offset(
-        RepositableInterface $secondBook,
-        RepositableInterface $thirdBook,
-        RepositableInterface $fourthBook
+    function it_finds_many_objects_by_multiple_criteria_order_limit_offset(
+        SampleResourceInterface $firstBook,
+        SampleResourceInterface $secondBook,
+        SampleResourceInterface $thirdBook
     ) {
-        $secondBook->getId()->willReturn(80);
-        $thirdBook->getId()->willReturn(81);
-        $fourthBook->getId()->willReturn(82);
+        $id = 80;
+        $name = 'Book';
 
-        $secondBook->getName()->willReturn('Book');
-        $thirdBook->getName()->willReturn('Book');
-        $fourthBook->getName()->willReturn('Book');
+        $firstBook->getId()->willReturn($id);
+        $secondBook->getId()->willReturn($id);
+        $thirdBook->getId()->willReturn($id);
 
-        $secondBook->getRating()->willReturn(3);
-        $thirdBook->getRating()->willReturn(2);
-        $fourthBook->getRating()->willReturn(1);
+        $firstBook->getName()->willReturn($name);
+        $secondBook->getName()->willReturn($name);
+        $thirdBook->getName()->willReturn($name);
 
+        $firstBook->getRating()->willReturn(3);
+        $secondBook->getRating()->willReturn(2);
+        $thirdBook->getRating()->willReturn(1);
+
+        $this->add($firstBook);
         $this->add($secondBook);
         $this->add($thirdBook);
-        $this->add($fourthBook);
 
         $this->findBy(
-            array('name' => 'Book'),
-            array('rating' => 'ASC'),
+            $criteria = array('name' => $name, 'id' => $id),
+            $orderBy = array('rating' => RepositoryInterface::ORDER_ASCENDING),
             $limit = 2,
             $offset = 1
-        )->shouldReturn(array($thirdBook, $secondBook));
+        )->shouldReturn(array($secondBook, $firstBook));
     }
 
-    function it_throws_unexpected_value_exception_on_multiple_results_while_finding_one_object_by_parameter(RepositableInterface $secondBook)
+    function it_throws_invalid_argument_exception_when_finding_one_object_with_empty_parameter_array()
     {
-        $secondBook->getId()->willReturn(81);
-        $secondBook->getName()->willReturn('Book');
-
-        $this->add($secondBook);
-
-        $this->shouldThrow(\UnexpectedValueException::class)->during('findOneBy', array(array('name' => 'Book')));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('findOneBy', array(array()));
     }
 
-    function it_finds_one_object_by_parameter(RepositableInterface $book)
+    function it_finds_one_object_by_parameter(SampleResourceInterface $book, SampleResourceInterface $shirt)
     {
+        $book->getName()->willReturn('Book');
+        $shirt->getName()->willReturn('Shirt');
+
+        $this->add($book);
+        $this->add($shirt);
+
         $this->findOneBy(array('name' => 'Book'))->shouldReturn($book);
     }
 
-    function it_finds_all_objects_in_memory(RepositableInterface $book, RepositableInterface $shirt)
+    function it_returns_first_result_while_finding_one_by_parameters(
+        SampleResourceInterface $book,
+        SampleResourceInterface $secondBook
+    ) {
+        $book->getName()->willReturn('Book');
+        $secondBook->getName()->willReturn('Book');
+
+
+        $this->add($book);
+        $this->add($secondBook);
+
+        $this->findOneBy(array('name' => 'Book'))->shouldReturn($book);
+    }
+
+    function it_finds_all_objects_in_memory(SampleResourceInterface $book, SampleResourceInterface $shirt)
     {
+        $this->add($book);
+        $this->add($shirt);
+
         $this->findAll()->shouldReturn(array($book, $shirt));
     }
 
-    function it_return_empty_array_when_memory_is_empty(RepositableInterface $book, RepositableInterface $shirt)
+    function it_return_empty_array_when_memory_is_empty()
     {
-        $this->remove($book);
-        $this->remove($shirt);
-
         $this->findAll()->shouldReturn(array());
     }
 
@@ -190,65 +187,6 @@ class InMemoryRepositorySpec extends ObjectBehavior
 
     function it_returns_stated_class_name()
     {
-        $this->getClassName()->shouldReturn(RepositableInterface::class);
-    }
-}
-
-class Void
-{
-}
-
-interface RepositableInterface extends ResourceInterface
-{
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @return int
-     */
-    public function getRating();
-}
-
-class Repositable implements RepositableInterface
-{
-    /**
-     * @var mixed
-     */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var int
-     */
-    private $rating;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRating()
-    {
-        return $this->rating;
+        $this->getClassName()->shouldReturn(SampleResourceInterface::class);
     }
 }

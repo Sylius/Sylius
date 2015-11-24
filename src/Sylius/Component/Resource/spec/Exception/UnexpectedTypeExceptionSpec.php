@@ -3,13 +3,12 @@
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UnexpectedTypeExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('givenType', 'expectedType');
+        $this->beConstructedWith('stringValue', '\ExpectedType');
     }
 
     function it_is_initializable()
@@ -20,5 +19,10 @@ class UnexpectedTypeExceptionSpec extends ObjectBehavior
     function it_extends_invalid_argument_exception()
     {
         $this->shouldHaveType('\InvalidArgumentException');
+    }
+
+    function it_has_a_message()
+    {
+        $this->getMessage()->shouldReturn('Expected argument of type "\ExpectedType", "string" given.');
     }
 }

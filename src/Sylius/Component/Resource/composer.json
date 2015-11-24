@@ -25,6 +25,7 @@
         "doctrine/collections": "~1.0",
         "doctrine/common": "~2.3",
         "symfony/event-dispatcher": "^2.7",
+        "symfony/property-access": "^2.7",
         "winzou/state-machine": "~0.1"
     },
     "require-dev": {
