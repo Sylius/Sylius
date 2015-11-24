@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
@@ -33,7 +32,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 {
     function let(
         InventoryOperatorInterface $inventoryOperator,
-        InventoryUnitFactory $inventoryUnitFactory,
+        InventoryUnitFactoryInterface $inventoryUnitFactory,
         FactoryInterface $factory
     ) {
         $this->beConstructedWith($inventoryOperator, $inventoryUnitFactory, $factory);

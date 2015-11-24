@@ -45,7 +45,7 @@ class AddProductAction implements PromotionActionInterface
      */
     public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository)
     {
-        $this->itemFactory    = $itemFactory;
+        $this->itemFactory = $itemFactory;
         $this->variantRepository = $variantRepository;
     }
 

@@ -13,27 +13,32 @@ namespace Sylius\Component\Translation\Factory;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslatableFactory extends Factory implements TranslatableFactoryInterface
+class TranslatableFactory implements TranslatableFactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var LocaleProviderInterface
      */
     private $localeProvider;
 
     /**
-     * @param string $className
+     * @param FactoryInterface $factory
      * @param LocaleProviderInterface $localeProvider
      */
-    public function __construct($className, LocaleProviderInterface $localeProvider)
+    public function __construct(FactoryInterface $factory, LocaleProviderInterface $localeProvider)
     {
-        parent::__construct($className);
-
+        $this->factory = $factory;
         $this->localeProvider = $localeProvider;
     }
 
@@ -42,7 +47,7 @@ class TranslatableFactory extends Factory implements TranslatableFactoryInterfac
      */
     public function createNew()
     {
-        $resource = parent::createNew();
+        $resource = $this->factory->createNew();
 
         if (!$resource instanceof TranslatableInterface) {
             throw new UnexpectedTypeException($resource, TranslatableInterface::class);
