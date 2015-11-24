@@ -10,4 +10,6 @@ CHANGELOG
 
 ### v0.16.0
 
-*Replaced custom  CalculatorRegistry with ServiceRegistry component in ShippingMethodTypeSpec
+* Replaced custom  CalculatorRegistry with ServiceRegistry component in ShippingMethodTypeSpec
+
+* Add FormRegistryInterface in let in ShippingMethodTypeSpec

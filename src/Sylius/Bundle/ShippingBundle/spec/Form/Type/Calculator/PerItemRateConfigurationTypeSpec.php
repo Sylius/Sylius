@@ -55,6 +55,6 @@ class PerItemRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_per_item_rate_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_per_item_rate');
     }
 }

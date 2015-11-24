@@ -25,3 +25,6 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * feature #2887 [BC BREAK][ApiBundle] Change API client public id to be simply random id
  * feature #2717 [BC BREAK] Added SyliusUserBundle together with Customer-User split
  * feature #2752 [BC BREAK] Multi channel support
+ * feature #3585 [BC BREAK] [Shipping]  `CalculatorRegistry` was deleted and replaced by `ServiceRegistry`,`RuleCheckerRegistry` was deleted and replaced by `ServiceRegistry`
+ * feature #3586 [BC BREAK] [Shipping] Remove class Calculator, all calculator implement CalculatorInterface
+ * feature #3622 [BC BREAK] [Shipping] change CalculatorInterface

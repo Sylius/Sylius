@@ -21,12 +21,13 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 
 class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
     {
-        $this->beConstructedWith($calculatorRegistry, $factory);
+        $this->beConstructedWith($calculatorRegistry, $factory, $formRegistry);
     }
     
     function it_is_initializable()
@@ -50,6 +51,7 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
     function it_adds_configuration_field_on_pre_set_data(
         $calculatorRegistry,
         $factory,
+        $formRegistry,
         FormEvent $event, 
         FormInterface $form, 
         ShippingMethod $shippingMethod,
@@ -63,16 +65,17 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $shippingMethod->getCalculator()->shouldBeCalled()->willreturn('calculator_type');
         $shippingMethod->getConfiguration()->shouldBeCalled()->willreturn(array());
 
-        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willreturn($calculator);
-        $calculator->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
-        $calculator->isConfigurable()->shouldBeCalled()->willreturn(true);
+        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
+        $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
+
+        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
             'configuration',
-            'configuration_form_type',
+            'sylius_shipping_calculator_calculator_type',
             array(),
             array('auto_initialize' => false)
-        )->shouldBeCalled()->willreturn($formConfiguration);
+        )->shouldBeCalled()->willReturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();
         
@@ -82,25 +85,26 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
     function it_adds_configuration_field_on_post_submit(
         $calculatorRegistry,
         $factory,
+        $formRegistry,
         FormEvent $event,
         FormInterface $form,
-        ShippingMethodInterface $shippingMethod,
         FormInterface $formConfiguration,
         CalculatorInterface $calculator
     ) {
         $event->getData()->shouldBeCalled()->willReturn(array('calculator' => 'calculator_type'));
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
-        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willreturn($calculator);
-        $calculator->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
-        $calculator->isConfigurable()->shouldBeCalled()->willreturn(true);
+        $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
+        $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
+
+        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
             'configuration',
-            'configuration_form_type',
+            'sylius_shipping_calculator_calculator_type',
             array(),
             array('auto_initialize' => false)
-        )->shouldBeCalled()->willreturn($formConfiguration);
+        )->shouldBeCalled()->willReturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();
 

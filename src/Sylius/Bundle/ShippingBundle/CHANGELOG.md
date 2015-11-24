@@ -52,3 +52,8 @@ CHANGELOG
 * Replace custom CalculatorRegistry with ServiceRegistry in BuildShippingMethodFormSubscriber, ShippingMethodChoiceType, ShippingMethodType,
   BuildShippingMethodFormSubscriberSpec, ShippingMethodChoiceTypeSpec
 
+* Add new field FormRegistryInterface to ShippingMethod in SyliusShippingExtension
+* Change name of calculators forms according to this schema: sylius.form.type_shipping_calculator_<typeOfCalculator> in service.xml
+* Change name of calculator types according to this schema : sylius_shipping_calculator_<typeOfCalculator> in class from Type/Calculator
+* BuildMethodFromSubscriber - add new filed FormRegistryInterface, rework addConfigurationFields method
+* ShippingMethodType - is constructed with new parameter FormRegistryInterface, rework buildForm

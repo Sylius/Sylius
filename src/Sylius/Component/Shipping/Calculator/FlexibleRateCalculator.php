@@ -12,7 +12,6 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,35 +40,8 @@ class FlexibleRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function isConfigurable()
+    public function getType()
     {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return 'sylius_shipping_calculator_flexible_rate_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'additional_item_limit' => 0,
-            ))
-            ->setRequired(array(
-                'first_item_cost',
-                'additional_item_cost'
-            ))
-            ->setAllowedTypes('first_item_cost', 'numeric')
-            ->setAllowedTypes('additional_item_cost', 'numeric')
-            ->setAllowedTypes('additional_item_limit', 'integer')
-        ;
+        return 'flexible_rate';
     }
 }

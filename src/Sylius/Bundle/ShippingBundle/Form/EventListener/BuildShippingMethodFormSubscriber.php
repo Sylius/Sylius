@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 
 /**
  * This listener adds configuration form to a method, if
@@ -41,15 +42,20 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     private $factory;
 
     /**
-     * Constructor.
-     *
+     * @var FormRegistryInterface
+     */
+    private $formRegistry;
+
+    /**
      * @param ServiceRegistryInterface $calculatorRegistry
      * @param FormFactoryInterface     $factory
+     * @param FormRegistryInterface    $formRegistry
      */
-    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
     {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
+        $this->formRegistry = $formRegistry;
     }
 
     /**
@@ -106,11 +112,18 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     {
         $calculator = $this->calculatorRegistry->get($calculatorName);
 
-        if (!$calculator->isConfigurable()) {
+        $calculatorTypeName = sprintf("sylius_shipping_calculator_%s", $calculator->getType());
+
+        if (!$this->formRegistry->hasType($calculatorTypeName)) {
             return;
         }
 
-        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $data, array('auto_initialize' => false));
+        $configurationField = $this->factory->createNamed(
+            'configuration',
+            $calculatorTypeName,
+            $data,
+            array('auto_initialize' => false)
+        );
 
         $form->add($configurationField);
     }
