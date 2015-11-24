@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -85,13 +86,6 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
 
         if (isset($classes['factory'])) {
             $factoryDefinition = $this->getFactoryDefinition($classes['factory'], $classes['model']);
-            $translatableFactoryInterface = 'Sylius\Component\Translation\Factory\TranslatableFactoryInterface';
-
-            $reflection = new \ReflectionClass($classes['factory']);
-
-            if (interface_exists($translatableFactoryInterface) && $reflection->implementsInterface($translatableFactoryInterface)) {
-                $factoryDefinition->addArgument(new Reference('sylius.translation.locale_provider'));
-            }
 
             $this->container->setDefinition(
                 $this->getContainerKey('factory'),
@@ -165,7 +159,21 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected function getFactoryDefinition($factoryClass, $modelClass)
     {
+        $translatableFactoryInterface = 'Sylius\Component\Translation\Factory\TranslatableFactoryInterface';
+
+        $reflection = new \ReflectionClass($factoryClass);
+
         $definition = new Definition($factoryClass);
+
+        if (interface_exists($translatableFactoryInterface) && $reflection->implementsInterface($translatableFactoryInterface)) {
+            $decoratedDefinition = new Definition(Factory::class);
+            $decoratedDefinition->setArguments(array($modelClass));
+
+            $definition->setArguments(array($decoratedDefinition, new Reference('sylius.translation.locale_provider')));
+
+            return $definition;
+        }
+
         $definition->setArguments(array($modelClass));
 
         return $definition;

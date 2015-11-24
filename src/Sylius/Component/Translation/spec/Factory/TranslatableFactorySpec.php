@@ -13,10 +13,15 @@ namespace spec\Sylius\Component\Translation\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use spec\Sylius\Component\Translation\Fixtures\SampleNonTranslatableResource;
 use spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource;
 
 require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';
+require_once __DIR__.'/../Fixtures/SampleNonTranslatableResource.php';
 
 /**
  * @mixin \Sylius\Component\Translation\Factory\TranslatableFactory
@@ -25,9 +30,9 @@ require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';
  */
 class TranslatableFactorySpec extends ObjectBehavior
 {
-    function let(LocaleProviderInterface $localeProvider)
+    function let(FactoryInterface $factory, LocaleProviderInterface $localeProvider)
     {
-        $this->beConstructedWith('spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource', $localeProvider);
+        $this->beConstructedWith($factory, $localeProvider);
     }
 
     function it_is_initializable()
@@ -40,11 +45,26 @@ class TranslatableFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Translation\Factory\TranslatableFactoryInterface');
     }
 
-    function it_creates_translatable_and_sets_locales(LocaleProviderInterface $localeProvider)
+    function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, SampleNonTranslatableResource $resource)
+    {
+        $factory->createNew()->willReturn($resource);
+
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->during('createNew')
+        ;
+    }
+
+    function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, SampleTranslatableResource $resource)
     {
         $localeProvider->getCurrentLocale()->willReturn('pl_PL');
         $localeProvider->getFallbackLocale()->willReturn('en_GB');
 
-        $this->createNew()->shouldHaveType(SampleTranslatableResource::class);
+        $factory->createNew()->willReturn($resource);
+
+        $resource->setCurrentLocale('pl_PL')->shouldBeCalled();
+        $resource->setFallbackLocale('en_GB')->shouldBeCalled();
+
+        $this->createNew()->shouldReturn($resource);
     }
 }
