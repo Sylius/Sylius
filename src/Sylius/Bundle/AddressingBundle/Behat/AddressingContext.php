@@ -137,7 +137,7 @@ class AddressingContext extends DefaultContext
     public function thereIsProvince($name)
     {
         /* @var $province ProvinceInterface */
-        $province = $this->getRepository('province')->createNew();
+        $province = $this->getFactory('province')->createNew();
         $province->setName($name);
 
         $this->getEntityManager()->persist($province);

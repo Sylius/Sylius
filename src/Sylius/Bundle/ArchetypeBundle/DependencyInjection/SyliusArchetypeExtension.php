@@ -91,7 +91,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
     {
         $builderDefintion = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
         $builderDefintion
-            ->setArguments(array(new Reference(sprintf('sylius.repository.%s_attribute_value', $subject))))
+            ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subject))))
         ;
 
         $container->setDefinition('sylius.builder.'.$subject.'_archetype', $builderDefintion);
