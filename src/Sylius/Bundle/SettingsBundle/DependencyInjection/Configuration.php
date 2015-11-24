@@ -13,6 +13,9 @@ namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\SettingsBundle\Model\Parameter;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -54,16 +57,22 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('parameter')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SettingsBundle\Model\Parameter')->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Parameter::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ParameterInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

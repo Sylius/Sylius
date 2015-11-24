@@ -18,6 +18,9 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionType;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionValueType;
+use Sylius\Component\Variation\Model\OptionTranslation;
+use Sylius\Component\Variation\Model\OptionTranslationInterface;
+use Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType;
 use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -74,13 +77,13 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
-                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('default')->defaultValue(VariantType::class)->end()
+                                                    ->scalarNode('default')->defaultValue(VariantType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()
                                         ->end()
@@ -136,15 +139,15 @@ class Configuration implements ConfigurationInterface
                                                 ->isRequired()
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('model')->isRequired()->end()
-                                                    ->scalarNode('interface')->defaultValue('Sylius\Component\Variation\Model\OptionTranslationInterface')->end()
-                                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                                    ->scalarNode('repository')->end()
+                                                    ->scalarNode('model')->defaultValue(OptionTranslation::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('interface')->defaultValue(OptionTranslationInterface::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('repository')->cannotBeEmpty()->end()
                                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                     ->arrayNode('form')
                                                         ->addDefaultsIfNotSet()
                                                         ->children()
-                                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType')->end()
+                                                            ->scalarNode('default')->defaultValue(OptionTranslationType::class)->cannotBeEmpty()->end()
                                                         ->end()
                                                     ->end()
                                                 ->end()
@@ -173,15 +176,15 @@ class Configuration implements ConfigurationInterface
                                     ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('model')->isRequired()->end()
-                                            ->scalarNode('interface')->isRequired()->end()
-                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('default')->defaultValue('Sylius\Bundle\VariationBundle\Form\Type\OptionValueType')->end()
+                                                    ->scalarNode('default')->defaultValue(OptionValueType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()
                                         ->end()

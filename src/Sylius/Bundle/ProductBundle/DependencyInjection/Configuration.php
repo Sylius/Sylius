@@ -54,8 +54,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `resources` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addResourcesSection(ArrayNodeDefinition $node)
@@ -80,7 +78,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

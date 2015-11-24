@@ -13,6 +13,10 @@ namespace Sylius\Bundle\ReportBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ReportBundle\Form\Type\ReportType;
+use Sylius\Component\Report\Model\Report;
+use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -42,57 +46,47 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('report')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('report')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Report\Model\Report')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ReportBundle\Controller\ReportController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ReportBundle\Form\Type\ReportType')->end()
+                                        ->scalarNode('model')->defaultValue(Report::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ReportInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(ReportType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
