@@ -71,7 +71,7 @@
         "symfony/options-resolver": "^2.7",
         "symfony/property-access": "^2.7",
         "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/symfony": "^2.7.5",
+        "symfony/symfony": "^2.7.7",
         "symfony/twig-bundle": "^2.7",
         "twig/extensions": "~1.0",
         "twig/twig": "~1.11",
