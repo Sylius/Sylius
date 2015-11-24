@@ -1,17 +1,19 @@
-PHP E-Commerce Components
-=========================
+PHP Components
+==============
+
+We provide a set of well-tested and decoupled PHP libraries.
 
 The components are the foundation of the Sylius platform, but they can also
-be used standalone with any PHP application and project even if you use a different
-framework than Symfony. They provide you with default models, services and logic
-for all aspects of e-commerce.
+be used standalone with any PHP application even if you use a framework different than Symfony.
 
-:doc:`/components/using_components`
+These packages solve common E-Commerce and web application problems. Have a look around this documentation to see if you will find them useful!
+
+We recommend checking out :doc:`/components/general/index`, which will get you started in minutes.
 
 .. toctree::
     :hidden:
 
-    Using Components <using_components>
+    general/index
     Addressing/index
     Archetype/index
     Attribute/index

@@ -8,5 +8,6 @@ Domain management abstraction for PHP. It provides interface for most common ope
 
    installation
    model
+   factory
    repository
    summary
