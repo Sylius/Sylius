@@ -167,6 +167,7 @@ sylius_payment:
         be2bill: Be2Bill
         stripe_checkout: Stripe Checkout
         paypal_express_checkout: Paypal Express Checkout
+        paypal_pro_checkout: Paypal Pro Checkout
 
 sylius_payum: ~
 

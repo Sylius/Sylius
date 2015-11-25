@@ -35,6 +35,9 @@
         <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction">
             <tag name="payum.action" factory="paypal_express_checkout_nvp" alias="sylius.convert_payment" />
         </service>
+        <service id="sylius.payum.action.convert_payment_to_paypal_pro" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalProAction">
+            <tag name="payum.action" factory="paypal_pro_checkout_nvp" alias="sylius.convert_payment" />
+        </service>
 
         <!-- Be2bill -->
         <service id="sylius.payum.action.convert_payment_to_be2bill" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToBe2BillAction">
