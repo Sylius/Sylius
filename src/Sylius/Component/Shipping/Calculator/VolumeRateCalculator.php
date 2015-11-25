@@ -12,7 +12,6 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Antonio Peric <antonio@locastic.com>
@@ -27,37 +26,12 @@ class VolumeRateCalculator implements CalculatorInterface
         return (int) round($configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isConfigurable()
-    {
-        return true;
-    }
 
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFormType()
+    public function getType()
     {
-        return 'sylius_shipping_calculator_volume_rate_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'division' => 1
-            ))
-            ->setRequired(array(
-                'amount',
-                'division'
-            ))
-            ->setAllowedTypes('amount', 'numeric')
-            ->setAllowedTypes('division', 'numeric')
-        ;
+        return 'volume_rate';
     }
 }

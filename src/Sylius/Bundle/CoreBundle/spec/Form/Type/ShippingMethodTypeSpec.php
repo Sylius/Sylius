@@ -13,12 +13,13 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry)
+    function let(ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
     {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
     }
 
     function it_should_be_initializable()

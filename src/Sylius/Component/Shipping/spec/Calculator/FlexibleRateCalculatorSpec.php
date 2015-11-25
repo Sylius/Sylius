@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,32 +29,10 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
     }
 
-    function it_is_configurable()
+
+    function it_returns_flexible_rate_type()
     {
-        $this->shouldBeConfigurable();
-    }
-
-    function it_has_required_first_and_additional_items_cost_with_limit_configuration_options(
-        OptionsResolverInterface $resolver
-    ) {
-        $resolver->setDefaults(array('additional_item_limit' => 0))
-            ->shouldBeCalled()
-            ->willReturn($resolver);
-
-        $resolver->setRequired(array('first_item_cost', 'additional_item_cost'))
-            ->shouldBeCalled()
-            ->willReturn($resolver);
-
-        $resolver->setAllowedTypes('first_item_cost', 'numeric')->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes('additional_item_cost', 'numeric')->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes('additional_item_limit', 'integer')->shouldBeCalled()->willReturn($resolver);
-
-        $this->setConfiguration($resolver);
-    }
-
-    function it_returns_flexible_rate_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_flexible_rate_configuration');
+        $this->getType()->shouldReturn('flexible_rate');
     }
 
     function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item(ShipmentInterface $shipment)

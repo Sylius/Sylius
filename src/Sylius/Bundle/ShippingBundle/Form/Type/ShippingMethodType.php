@@ -17,44 +17,45 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormRegistryInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Shipping method form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ShippingMethodType extends AbstractResourceType
 {
     /**
-     * Calculator registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $calculatorRegistry;
 
     /**
-     * Rule checker registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $checkerRegistry;
 
     /**
-     * Constructor.
-     *
+     * @var FormRegistryInterface
+     */
+    private $formRegistry;
+
+    /**
      * @param string                   $dataClass
      * @param array                    $validationGroups
      * @param ServiceRegistryInterface $calculatorRegistry
      * @param ServiceRegistryInterface $checkerRegistry
+     * @param FormRegistryInterface    $formRegistry
      */
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->calculatorRegistry = $calculatorRegistry;
         $this->checkerRegistry = $checkerRegistry;
+        $this->formRegistry = $formRegistry;
     }
 
     /**
@@ -63,7 +64,7 @@ class ShippingMethodType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.name',
@@ -90,10 +91,14 @@ class ShippingMethodType extends AbstractResourceType
         }
         $prototypes['calculators'] = array();
         foreach ($this->calculatorRegistry->all() as $name => $calculator) {
-            if (!$calculator->isConfigurable()) {
+
+            $calculatorTypeName = sprintf("sylius_shipping_calculator_%s", $calculator->getType());
+
+            if(!$this->formRegistry->hasType($calculatorTypeName)){
                 continue;
             }
-            $prototypes['calculators'][$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
+
+            $prototypes['calculators'][$name] = $builder->create('configuration',$calculatorTypeName)->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
