@@ -41,6 +41,12 @@ parameters:
     paypal.express_checkout.signature: EDITME
     paypal.express_checkout.sandbox: true
 
+    paypal.pro_checkout.username: EDITME
+    paypal.pro_checkout.password: EDITME
+    paypal.pro_checkout.partner: EDITME
+    paypal.pro_checkout.vendor: EDITME
+    paypal.pro_checkout.sandbox: true
+
     stripe.publishable_key: EDITME
     stripe.secret_key: EDITME
     stripe.test_mode: true
