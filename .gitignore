@@ -18,6 +18,7 @@
 !/bin/install
 !/bin/sylius-cs-fixer
 /vendor
+/node_modules
 
 /etc/build/*
 !/etc/build/.gitkeep

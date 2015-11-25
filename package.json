@@ -1,0 +1,30 @@
+{
+  "name": "sylius",
+  "version": "0.16.0",
+  "description": "E-Commerce for Symfony",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "gulp-if": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglifycss": "^1.0.5"
+  },
+  "devDependencies": {
+    "gulp-debug": "^2.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/Sylius.git"
+  },
+  "author": "Paweł Jędrzejewski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sylius/Sylius/issues"
+  },
+  "homepage": "https://github.com/Sylius/Sylius#readme"
+}

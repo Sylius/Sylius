@@ -1,0 +1,5 @@
+sylius:
+  ui:
+    dashboard: Dashboard
+    tax_categories: Tax categories
+    powered_by: Powered by

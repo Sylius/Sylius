@@ -1,0 +1,21 @@
+{
+  "name": "sylius",
+  "homepage": "http://sylius.org",
+  "authors": [
+    "Paweł Jędrzejewski <pawel@sylius.org>",
+    "Sylius Community"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#~2.3.2",
+    "font-awesome": "fontawesome#~4.4.0"
+  }
+}

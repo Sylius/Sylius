@@ -1,0 +1,10 @@
+sylius_admin_tax_category_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.tax_category:indexAction
+        _sylius:
+            template: SyliusAdminBundle:TaxCategory:index.html.twig
+            sortable: true
+            sorting:
+                name: desc
