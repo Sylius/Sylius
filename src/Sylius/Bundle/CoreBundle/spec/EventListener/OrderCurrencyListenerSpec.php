@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderCurrencyListenerSpec extends ObjectBehavior
 {
@@ -29,11 +29,11 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_event_has_non_order_subject(
-        CartEvent $event,
+        GenericEvent $event,
         \stdClass $invalidSubject
     )
     {
-        $event->getCart()->willReturn($invalidSubject);
+        $event->getSubject()->willReturn($invalidSubject);
 
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -41,9 +41,13 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_sets_currency_on_order($currencyContext, CartEvent $event, OrderInterface $order)
+    function it_sets_currency_on_order(
+        $currencyContext,
+        GenericEvent $event,
+        OrderInterface $order
+    )
     {
-        $event->getCart()->willReturn($order);
+        $event->getSubject()->willReturn($order);
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');
 
         $this->processOrderCurrency($event);
