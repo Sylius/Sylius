@@ -42,11 +42,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected $faker;
 
     /**
-     * @var RouterInterface
-     */
-    private static $router;
-
-    /**
      * @var array
      */
     protected $actions = array(
@@ -59,7 +54,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    private $kernel;
+
+    /**
+     * @var KernelInterface
+     */
+    private static $sharedKernel;
 
     public function __construct($applicationName = null)
     {
@@ -78,6 +78,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+
+        if (null === self::$sharedKernel) {
+            self::$sharedKernel = clone $kernel;
+            self::$sharedKernel->boot();
+        }
     }
 
     /**
@@ -543,10 +548,32 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getRouter()
     {
-        if (null === self::$router) {
-            self::$router = $this->getService('router');
-        }
+        return $this->getSharedService('router');
+    }
 
-        return self::$router;
+    /**
+     * @return KernelInterface
+     */
+    protected function getKernel()
+    {
+        return $this->kernel;
+    }
+
+    /**
+     * @return KernelInterface
+     */
+    protected function getSharedKernel()
+    {
+        return self::$sharedKernel;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function getSharedService($id)
+    {
+        return self::$sharedKernel->getContainer()->get($id);
     }
 }

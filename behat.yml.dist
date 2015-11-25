@@ -400,16 +400,18 @@ default:
     extensions:
         Lakion\Behat\MinkDebugExtension:
             directory: travis/build-output
-            clean_start: false
         Behat\MinkExtension:
             sessions:
                 default:
                     symfony2: ~
-        Behat\Symfony2Extension: ~
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestKernel
+                path: app/TestKernel.php
 
     gherkin:
         filters:
-            tags: "~@javascript"
+            tags: "~@javascript && ~@contact"
 
 javascript:
     extensions:
@@ -431,7 +433,7 @@ javascript:
 
     gherkin:
         filters:
-            tags: "@javascript"
+            tags: "@javascript && ~@contact"
 
 cached:
     extensions:
@@ -439,6 +441,10 @@ cached:
             kernel:
                 env: test_cached
                 debug: false
+
+    gherkin:
+        filters:
+            tags: "~@javascript && ~@contact"
 
 javascript_cached:
     extensions:
@@ -464,5 +470,5 @@ javascript_cached:
 
     gherkin:
         filters:
-            tags: "@javascript"
+            tags: "@javascript && ~@contact"
 

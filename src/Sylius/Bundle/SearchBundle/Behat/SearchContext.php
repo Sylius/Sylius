@@ -29,7 +29,7 @@ class SearchContext extends DefaultContext
     public function iPopulateTheIndex()
     {
         $command = new IndexCommand();
-        $command->setContainer($this->kernel->getContainer());
+        $command->setContainer($this->getContainer());
 
         $output = new BufferedOutput();
         if ($command->run(new ArgvInput(['env' => 'test']), $output)) { //return code is not zero
