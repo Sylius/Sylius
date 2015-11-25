@@ -13,9 +13,18 @@ namespace Sylius\Bundle\PromotionBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Order\Model\Adjustment;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItem;
+use Sylius\Component\Product\Model\Product;
 
 class PromotionContext extends DefaultContext
 {
+    /**
+     * @var OrderInterface
+     */
+    private $order;
+
     /**
      * @Given /^promotion "([^""]*)" has following coupons defined:$/
      * @Given /^promotion "([^""]*)" has following coupons:$/
@@ -128,6 +137,112 @@ class PromotionContext extends DefaultContext
     }
 
     /**
+     * @Given /^I have empty order$/
+     */
+    public function emptyOrder()
+    {
+        $this->order = $this->getContainer()->get('sylius.repository.order')->createNew();
+    }
+
+    /**
+     * @Given /^I add "([^""]*)" product of "([^""]*)" type$/
+     */
+    public function addProductsToOrder($quantity, $productName)
+    {
+        /** @var Product $product */
+        $product = $this->getContainer()
+            ->get('sylius.repository.product')
+            ->findOneBy(['name' => $productName]);
+
+        /** @var OrderItem $orderItem */
+        $orderItem = $this->getContainer()->get('sylius.repository.order_item')->createNew();
+
+        $priceCalculator = $this->getContainer()->get('sylius.price_calculator');
+        $price = $priceCalculator->calculate($product->getMasterVariant());
+
+        $orderItem->setUnitPrice($price);
+        $orderItem->setQuantity($quantity);
+        $orderItem->setVariant($product->getMasterVariant());
+        $this->order->addItem($orderItem);
+        $orderItem->setOrder($this->order);
+
+        $this->order->calculateTotal();
+    }
+
+    /**
+     * @When /^I apply promotions$/
+     */
+    public function applyPromotions()
+    {
+        $promotionProcessor = $this->getContainer()->get('sylius.promotion_processor');
+        $promotionProcessor->process($this->order);
+        $this->order->calculateTotal();
+    }
+
+    /**
+     * @Then /^I should have no discount$/
+     */
+    public function shouldBeNoDiscount()
+    {
+        \PHPUnit_Framework_Assert::assertEquals(
+            0,
+            $this->order->getAdjustmentsTotal(),
+            sprintf(
+                'Expected no discount, discount found with value: %s', $this->order->getAdjustmentsTotal()
+            )
+        );
+    }
+
+    /**
+     * @Then /^I should have "([^""]*)" discount equal ([^""]*)$/
+     */
+    public function shouldBeADiscount($discountName, $discountValue)
+    {
+        $discountExist = false;
+
+        /** @var Adjustment $promotion */
+        foreach ($this->order->getAdjustments('promotion') as $promotion)
+        {
+            if (
+                $promotion->getDescription() == $discountName
+            ) {
+                $discountExist = true;
+
+                \PHPUnit_Framework_Assert::assertSame(
+                   $this->normalizePrice($discountValue),
+                   $promotion->getAmount(),
+                   sprintf('Promotion: "%s" found but discount do not match, actual discount: %s',
+                        $discountName,
+                        $promotion->getAmount()
+                   )
+                );
+
+                break;
+            }
+        }
+
+        if (!$discountExist) {
+            throw new \Exception(
+                sprintf(
+                    'Expected discount with name: %s not found',
+                    $discountName, $discountValue)
+            );
+        }
+    }
+
+    /**
+     * @Then /^Total price should be ([^""]*)$/
+     */
+    public function totalPriceShouldBe($totalPrice)
+    {
+        \PHPUnit_Framework_Assert::assertEquals(
+            $this->normalizePrice($totalPrice),
+            $this->order->getTotal(),
+            'Expected different total price'
+        );
+    }
+
+    /**
      * Cleaning promotion configuration that is serialized in database.
      *
      * @param array $configuration
@@ -157,5 +272,10 @@ class PromotionContext extends DefaultContext
         }
 
         return $configuration;
+    }
+
+    private function normalizePrice($price)
+    {
+        return (int) round($price * 100);
     }
 }
