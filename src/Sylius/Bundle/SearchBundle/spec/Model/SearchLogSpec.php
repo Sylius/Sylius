@@ -42,4 +42,4 @@ class SearchLogSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn('2014-08-08 16:18:00');
     }
 
-} 
+}
