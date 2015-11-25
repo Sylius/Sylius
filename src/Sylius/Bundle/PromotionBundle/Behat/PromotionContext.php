@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class PromotionContext extends DefaultContext
@@ -125,6 +126,43 @@ class PromotionContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @Then I should see product :productName in the cart summary
+     */
+    public function iShouldSeeProductInCartSummary($productName)
+    {
+        $cartSummary = $this->getCartSummaryPageElement();
+        if (false === strpos($cartSummary->getText(), $productName)) {
+            throw new \InvalidArgumentException(sprintf('Product "%s" was not found in cart summary', $productName));
+        }
+    }
+
+    /**
+     * @Then I should not see product :productName in the cart summary
+     */
+    public function iShouldNotSeeProductInCartSummary($productName)
+    {
+        $cartSummary = $this->getCartSummaryPageElement();
+        if (false !== strpos($cartSummary->getText(), $productName)) {
+            throw new \InvalidArgumentException(sprintf('Product "%s" was found in cart summary', $productName));
+        }
+    }
+
+    /**
+     * @return NodeElement
+     *
+     * @throws \Exception
+     */
+    private function getCartSummaryPageElement()
+    {
+        $element = $this->getSession()->getPage()->find('css', 'div:contains("Cart summary") > form > table');
+        if (null === $element) {
+            throw new \Exception("Cart summary element cannot be found!");
+        }
+
+        return $element;
     }
 
     /**
