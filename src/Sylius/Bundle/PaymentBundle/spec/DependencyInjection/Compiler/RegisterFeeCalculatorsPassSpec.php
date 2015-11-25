@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
+namespace spec\Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
