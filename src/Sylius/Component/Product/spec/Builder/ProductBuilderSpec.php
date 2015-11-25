@@ -51,9 +51,9 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_adds_attribute_to_product_if_already_exists(
+        $product,
         $attributeRepository,
         $attributeValueFactory,
-        $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
@@ -69,12 +69,11 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_creates_attribute_if_it_does_not_exist(
-        FactoryInterface $attributeFactory,
-        $attributeRepository,
-        $attributeFactory,
-        $attributeValueFactory,
-        $productManager,
         $product,
+        $productManager,
+        $attributeFactory,
+        $attributeRepository,
+        $attributeValueFactory,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
     ) {
@@ -97,7 +96,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->addAttribute('collection', 2013)->shouldReturn($this);
     }
 
-    function it_saves_product($productManager, $product)
+    function it_saves_product($product, $productManager)
     {
         $productManager->persist($product)->shouldBeCalled();
         $productManager->flush()->shouldBeCalled();
@@ -105,7 +104,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->save()->shouldReturn($product);
     }
 
-    function it_saves_product_without_flushing_if_needed($productManager, $product)
+    function it_saves_product_without_flushing_if_needed($product, $productManager)
     {
         $productManager->persist($product)->shouldBeCalled();
         $productManager->flush()->shouldNotBeCalled();
