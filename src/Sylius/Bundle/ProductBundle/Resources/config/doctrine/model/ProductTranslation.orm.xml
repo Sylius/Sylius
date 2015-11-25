@@ -22,7 +22,9 @@
         <field name="name" column="name" type="string">
             <gedmo:versioned />
         </field>
-        <field name="slug" column="slug" type="string" unique="true" />
+        <field name="slug" column="slug" type="string" unique="true">
+            <gedmo:slug fields="name" unique="true" />
+        </field>
         <field name="description" column="description" type="text">
             <gedmo:versioned />
         </field>

@@ -67,11 +67,11 @@
 
         <service id="sylius.event_subscriber.load_orm_metadata" class="%sylius.event_subscriber.load_orm_metadata.class%">
             <argument>%sylius.config.classes%</argument>
-            <tag name="doctrine.event_subscriber" />
+            <tag name="doctrine.event_subscriber" priority="8192" />
         </service>
         <service id="sylius.event_subscriber.load_odm_metadata" class="%sylius.event_subscriber.load_odm_metadata.class%">
             <argument>%sylius.config.classes%</argument>
-            <tag name="doctrine_mongodb.odm.event_subscriber" />
+            <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
         </service>
         <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
