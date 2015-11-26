@@ -18,7 +18,7 @@
     {% for country in countries %}
         <tr>
             <td><span class="label label-primary">{{ country.isoName }}</span></td>
-            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.isoName|transCountryIso() }}</a></td>
             <td>{{ misc.state_label(country.enabled) }}</td>
             <td>
                 <div class="pull-right">

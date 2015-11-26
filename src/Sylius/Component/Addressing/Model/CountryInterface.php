@@ -33,13 +33,6 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface
     public function setIsoName($isoName);
 
     /**
-     * @param string $locale
-     *
-     * @return string
-     */
-    public function getName($locale = null);
-
-    /**
      * @return Collection|ProvinceInterface[]
      */
     public function getProvinces();

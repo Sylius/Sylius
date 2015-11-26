@@ -26,6 +26,11 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class SyliusAddressingExtension extends AbstractResourceExtension
 {
+    protected $configFiles = array(
+        'services.xml',
+        'twig.xml',
+    );
+
     /**
      * {@inheritdoc}
      */

@@ -13,7 +13,6 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
@@ -54,7 +53,7 @@ class Country implements CountryInterface
      */
     public function __toString()
     {
-        return $this->getName() ?: $this->getIsoName();
+        return $this->getIsoName();
     }
 
     /**
@@ -63,14 +62,6 @@ class Country implements CountryInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName($locale = null)
-    {
-        return Intl::getRegionBundle()->getCountryName($this->isoName, $locale);
     }
 
     /**
