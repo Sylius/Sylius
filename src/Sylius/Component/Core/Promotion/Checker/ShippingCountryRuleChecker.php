@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Checks if shipping country match.
@@ -23,6 +24,19 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
+
+    /**
+     * @param RepositoryInterface $countryRepository
+     */
+    public function __construct(RepositoryInterface $countryRepository)
+    {
+        $this->countryRepository = $countryRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,7 +50,9 @@ class ShippingCountryRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $address->getCountry()->getId() === $configuration['country'];
+        $countryId = $this->countryRepository->findOneBy(array('code' => $address->getCountry()));
+
+        return $countryId === $configuration['country'];
     }
 
     /**

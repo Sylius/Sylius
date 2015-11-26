@@ -30,15 +30,11 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     private $countryRepository;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository     $countryRepository
      * @param FormFactoryInterface $factory
      */
@@ -71,12 +67,13 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $country = $address->getCountry();
-        if (null === $country) {
+        $countryCode = $address->getCountry();
+        if (null === $countryCode) {
             return;
         }
 
-        if ($country->hasProvinces()) {
+        $country = $this->countryRepository->findOneBy(array('code' => $countryCode));
+        if (null !== $country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
                 'country' => $country,
                 'auto_initialize' => false,

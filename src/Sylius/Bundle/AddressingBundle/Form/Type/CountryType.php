@@ -27,8 +27,8 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('isoName', 'country', array(
-                'label' => 'sylius.form.country.iso_name',
+            ->add('code', 'string', array(
+                'label' => 'sylius.form.country.code',
             ))
             ->add('provinces', 'collection', array(
                 'type' => 'sylius_province',

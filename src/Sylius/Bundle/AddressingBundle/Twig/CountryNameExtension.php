@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Lakion package.
+ * This file is part of the Sylius package.
  *
- * (c) Lakion
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -24,19 +25,21 @@ class CountryNameExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'transCountryIso' => new \Twig_Filter_Method($this, 'translateIsoName'),
+            new \Twig_SimpleFilter('countryName', array($this, 'translateIsoName')),
         );
     }
 
     /**
-     * @param string $isoName
+     * @param mixed  $country
      * @param string $locale
      *
      * @return string
      */
-    public function translateIsoName($isoName, $locale = null)
-    {
-        return Intl::getRegionBundle()->getCountryName($isoName, $locale);
+    public function translateIsoName($country, $locale = null)
+    {   if ($country instanceof CountryInterface) {
+            return Intl::getRegionBundle()->getCountryName($country->getIsoName(), $locale);
+        }
+        return Intl::getRegionBundle()->getCountryName($country, $locale);
     }
 
     /**

@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -52,10 +54,13 @@ class CountryChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
-                'choice_list' => $choiceList,
-                'enabled'     => null,
-                'label'       => 'sylius.form.address.country',
-                'empty_value' => 'sylius.form.country.select',
+                'choice_list'  => $choiceList,
+                'choice_label' => function (CountryInterface $country) {
+                    return Intl::getRegionBundle()->getCountryName($country->getCode());
+                },
+                'enabled'      => null,
+                'label'        => 'sylius.form.address.country',
+                'empty_value'  => 'sylius.form.country.select',
             ))
         ;
     }

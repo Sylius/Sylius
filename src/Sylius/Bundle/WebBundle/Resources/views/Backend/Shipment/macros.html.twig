@@ -30,7 +30,7 @@
             </td>
             <td>{{ shipment.method.name }}</td>
             <td>{{ misc.shipment_state(shipment.state) }}</td>
-            <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.country }})</td>
+            <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.country|countryName }})</td>
             <td class="text-center">{{ shipment.items|length }}</td>
             <td>{{ shipment.createdAt|date }}</td>
             <td>

@@ -380,6 +380,7 @@
             <tag name="sylius.promotion_rule_checker" type="customer_loyalty" label="Customer loyalty" />
         </service>
         <service id="sylius.promotion_rule_checker.shipping_country" class="%sylius.promotion_rule_checker.shipping_country.class%">
+            <argument type="service" id="sylius.repository.country" />
             <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
         </service>
         <service id="sylius.promotion_rule_checker.taxonomy" class="%sylius.promotion_rule_checker.taxonomy.class%">

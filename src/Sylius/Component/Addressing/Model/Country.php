@@ -31,7 +31,7 @@ class Country implements CountryInterface
      *
      * @var string
      */
-    protected $isoName;
+    protected $code;
 
     /**
      * @var Collection|ProvinceInterface[]
@@ -53,7 +53,7 @@ class Country implements CountryInterface
      */
     public function __toString()
     {
-        return $this->getIsoName();
+        return $this->getCode();
     }
 
     /**
@@ -67,17 +67,17 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getIsoName()
+    public function getCode()
     {
-        return $this->isoName;
+        return $this->code;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setIsoName($isoName)
+    public function setCode($code)
     {
-        $this->isoName = $isoName;
+        $this->code = $code;
     }
 
     /**

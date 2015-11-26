@@ -42,6 +42,6 @@ class ZoneMemberCountry extends ZoneMember
      */
     public function getName()
     {
-        return $this->country->getName();
+        return $this->country->getCode();
     }
 }

@@ -51,12 +51,12 @@ class AddressingContext extends DefaultContext
      */
     public function thereIsCountry($name, $enabled = true, $provinces = null, $flush = true)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(array('code' => $countryCode))) {
             $country = $this->getFactory('country')->createNew();
-            $country->setIsoName(trim($isoName));
+            $country->setCode(trim($countryCode));
             $country->setEnabled($enabled);
 
             $this->addProvincesToCountry($country, $provinces);
@@ -150,10 +150,10 @@ class AddressingContext extends DefaultContext
      */
     public function storeOwnerSetCountryAsDisabled($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('isoName' => $isoName));
+        $country = $this->getRepository("country")->findOneBy(array('code' => $countryCode));
         $country->setEnabled(false);
 
         $manager = $this->getEntityManager();

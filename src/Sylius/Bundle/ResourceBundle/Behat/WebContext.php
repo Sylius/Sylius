@@ -597,9 +597,9 @@ class WebContext extends DefaultContext
      */
     private function iAmOnTheCountryPageByName($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countrycode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iAmOnTheResourcePage('country', 'isoName', $isoName);
+        $this->iAmOnTheResourcePage('country', 'code', $countrycode);
     }
 
     /**
@@ -608,9 +608,9 @@ class WebContext extends DefaultContext
      */
     private function iShouldBeDoingSomethingWithCountryByName($action, $name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iShouldBeDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+        $this->iShouldBeDoingSomethingWithResource($action, 'country', 'code', $countryCode);
     }
 
     /**
@@ -619,9 +619,9 @@ class WebContext extends DefaultContext
      */
     private function iAmDoingSomethingWithCountryByName($action, $name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iAmDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+        $this->iAmDoingSomethingWithResource($action, 'country', 'code', $countryCode);
     }
 
     /**
@@ -629,9 +629,9 @@ class WebContext extends DefaultContext
      */
     private function iShouldBeOnTheCountryPageByName($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
+        $this->iShouldBeOnTheResourcePage('country', 'code', $countryCode);
     }
 
     /**

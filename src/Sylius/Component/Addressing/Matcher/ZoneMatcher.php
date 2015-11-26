@@ -17,8 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
- * Default zone matcher.
- *
  * This implementation can match addresses against zones by country and province.
  * It also handles sub-zones.
  *
@@ -28,8 +26,6 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 class ZoneMatcher implements ZoneMatcherInterface
 {
     /**
-     * Zone repository.
-     *
      * @var ObjectRepository
      */
     protected $repository;
@@ -46,8 +42,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     );
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $repository
      */
     public function __construct(ObjectRepository $repository)
@@ -94,8 +88,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Checks if address belongs to zone.
-     *
      * @param AddressInterface $address
      * @param ZoneInterface    $zone
      *
@@ -113,8 +105,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Checks if address belongs to particular zone member.
-     *
      * @param AddressInterface    $address
      * @param ZoneMemberInterface $member
      *
@@ -128,10 +118,10 @@ class ZoneMatcher implements ZoneMatcherInterface
 
         switch ($type) {
             case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();
+                return null !== $address->getProvince() && $address->getProvince() === $member->getProvince()->getCode();
 
             case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountry() && $address->getCountry() === $member->getCountry();
+                return null !== $address->getCountry() && $address->getCountry() === $member->getCountry()->getCode();
 
             case ZoneInterface::TYPE_ZONE:
                 return $this->addressBelongsToZone($address, $member->getZone());
@@ -142,8 +132,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Gets all zones
-     *
      * @param string|null $scope
      *
      * @return array $zones

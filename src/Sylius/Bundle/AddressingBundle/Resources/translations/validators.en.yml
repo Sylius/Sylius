@@ -26,11 +26,8 @@ sylius:
             not_blank: Please enter street.
         not_shippable: This address is not a valid shipping destination.
     country:
-        iso_name:
+        code:
             not_blank: Please enter country ISO code.
-        name:
-            max_length: Country Name must not be longer than 255 characters|Country Name must not be longer than 255 characters.
-            not_blank: Please enter country name.
     province:
         name:
             max_length: Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.

@@ -31,12 +31,12 @@ interface ProvinceInterface extends ResourceInterface
     /**
      * @return string
      */
-    public function getIsoName();
+    public function getCode();
 
     /**
-     * @param string $isoName
+     * @param string $code
      */
-    public function setIsoName($isoName);
+    public function setCode($code);
 
     /**
      * @return CountryInterface

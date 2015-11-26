@@ -22,6 +22,11 @@ class Address implements AddressInterface
     protected $id;
 
     /**
+     * @var mixed
+     */
+    protected $code;
+
+    /**
      * @var string
      */
     protected $firstName;
@@ -42,12 +47,12 @@ class Address implements AddressInterface
     protected $company;
 
     /**
-     * @var CountryInterface
+     * @var string
      */
     protected $country;
 
     /**
-     * @var ProvinceInterface
+     * @var string
      */
     protected $province;
 
@@ -87,6 +92,22 @@ class Address implements AddressInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -172,12 +193,8 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountry(CountryInterface $country = null)
+    public function setCountry($country = null)
     {
-        if (null === $country) {
-            $this->province = null;
-        }
-
         $this->country = $country;
     }
 
@@ -192,20 +209,8 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvince(ProvinceInterface $province = null)
+    public function setProvince($province = null)
     {
-        if (null === $this->country) {
-            throw new \BadMethodCallException('Cannot define province on address without assigned country');
-        }
-
-        if (null !== $province && !$this->country->hasProvince($province)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Cannot set province "%s", because it does not belong to country "%s"',
-                $province->getName(),
-                $this->country->getName()
-            ));
-        }
-
         $this->province = $province;
     }
 

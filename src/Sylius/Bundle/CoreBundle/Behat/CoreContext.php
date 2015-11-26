@@ -115,7 +115,6 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $finite = $this->getService('sm.factory');
-        $orderRepository = $this->getRepository('order');
         $orderFactory = $this->getFactory('order');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
@@ -579,10 +578,7 @@ class CoreContext extends DefaultContext
         $address->setStreet($addressData[1]);
         $address->setPostcode($addressData[2]);
         $address->setCity($addressData[3]);
-        $address->setCountry($this->findOneBy('country', array(
-            'isoName' => $this->getCountryCodeByEnglishCountryName($addressData[4]),
-        )));
-
+        $address->setCountry($this->getCountryCodeByEnglishCountryName($addressData[4]));
         return $address;
     }
 

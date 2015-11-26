@@ -11,7 +11,7 @@ sylius:
             street: Street
             province: Province
         country:
-            iso_name: ISO name
+            code: ISO code
             name: Name
             provinces: Provinces
             select: Select
