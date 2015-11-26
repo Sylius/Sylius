@@ -17,6 +17,17 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Taxation\Model\TaxCategory">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.tax_category.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.tax_category.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.tax_category.name.not_blank</option>
@@ -33,6 +44,17 @@
     </class>
 
     <class name="Sylius\Component\Taxation\Model\TaxRate">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity" >
+            <option name="fields">code</option>
+            <option name="message">sylius.tax_rate.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.tax_rate.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.tax_rate.name.not_blank</option>

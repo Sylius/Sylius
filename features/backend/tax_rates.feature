@@ -11,16 +11,16 @@ Feature: Tax rates
             | UK + Germany | country | United Kingdom, Germany |
             | USA          | country | United States           |
           And there are following tax categories:
-            | name        |
-            | Clothing    |
-            | Electronics |
-            | Food        |
+            | code | name        |
+            | TC1  | Clothing    |
+            | TC2  | Electronics |
+            | TC3  | Food        |
           And the following tax rates exist:
-            | category    | zone         | name                  | amount |
-            | Clothing    | UK + Germany | UK+DE Clothing Tax    | 20%    |
-            | Electronics | UK + Germany | UK+DE Electronics Tax | 23%    |
-            | Clothing    | USA          | US Clothing Tax       | 8%     |
-            | Electronics | USA          | US Electronics Tax    | 10%    |
+            | code | category    | zone         | name                  | amount |
+            | TR1  | Clothing    | UK + Germany | UK+DE Clothing Tax    | 20%    |
+            | TR2  | Electronics | UK + Germany | UK+DE Electronics Tax | 23%    |
+            | TR3  | Clothing    | USA          | US Clothing Tax       | 8%     |
+            | TR4  | Electronics | USA          | US Electronics Tax    | 10%    |
           And I am logged in as administrator
 
     Scenario: Seeing index of all tax rates
@@ -48,33 +48,36 @@ Feature: Tax rates
 
     Scenario: Trying to create tax leaving the amount field blank
         Given I am on the tax rate creation page
-         When I fill in "Name" with "US Food Tax"
-          And I leave "Amount" empty
-          And I press "Create"
+         When I fill in "Code" with "TR5"
+         And I fill in "Name" with "US Food Tax"
+         And I leave "Amount" empty
+         And I press "Create"
          Then I should still be on the tax rate creation page
-          And I should see "Please enter tax rate amount."
+         And I should see "Please enter tax rate amount."
 
     Scenario: Creating new tax rate
         Given I am on the tax rate creation page
-          And I fill in "Name" with "US Food Tax"
-          And I fill in "Amount" with "30"
-          And I select "USA" from "Zone"
+         When I fill in "Code" with "TR5"
+         And I fill in "Name" with "US Food Tax"
+         And I fill in "Amount" with "30"
+         And I select "USA" from "Zone"
          When I press "Create"
          Then I should be on the page of tax rate "US Food Tax"
-          And I should see "Tax rate has been successfully created."
+         And I should see "Tax rate has been successfully created."
 
     Scenario: Creating tax rate included in price
         Given I am on the tax rate creation page
-          And I fill in "Name" with "EU VAT"
-          And I fill in "Amount" with "19"
-          And I select "UK + Germany" from "Zone"
-          And I check "Included in price?"
+         When I fill in "Code" with "TR5"
+         And I fill in "Name" with "EU VAT"
+         And I fill in "Amount" with "19"
+         And I select "UK + Germany" from "Zone"
+         And I check "Included in price?"
          When I press "Create"
          Then I should be on the page of tax rate "EU VAT"
-          And I should see "Tax rate has been successfully created."
+         And I should see "Tax rate has been successfully created."
 
     Scenario: Created tax rates appear in the list
-        Given I created 18% tax "Food Tax" for category "Food" within zone "USA"
+        Given I created 18% tax "Food Tax" with code "TR5" for category "Food" with zone "USA"
           And I go to the tax rate index page
          Then I should see 5 tax rates in the list
           And I should see tax rate with name "Food Tax" in that list
@@ -137,3 +140,24 @@ Feature: Tax rates
     Scenario: Displaying the tax rate amount on details page
         Given I am on the page of tax rate "US Clothing Tax"
          Then I should see "8%"
+
+    Scenario: Cannot update tax rate code
+         When I am editing tax rate "UK+DE Clothing Tax"
+         Then the code field should be disabled
+
+    Scenario: Try add tax rate  with existing code
+        Given I am on the tax rate creation page
+        When I fill in "Code" with "TR1"
+        And I fill in "Name" with "US Food Tax"
+        And I fill in "Amount" with "30"
+        And I press "Create"
+        Then I should still be on the tax rate creation page
+        And I should see "The tax rate with given code already exists"
+
+    Scenario: Trying to create tax rate leaving the code field blank
+        Given I am on the tax rate creation page
+        When I fill in "Name" with "US Food Tax"
+        And I fill in "Amount" with "30"
+        And I press "Create"
+        Then I should still be on the tax rate creation page
+        And I should see "Please enter tax rate code."

@@ -10,15 +10,15 @@ Feature: Orders management
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
           And there are following tax categories:
-            | name    |
-            | General |
+            | code | name    |
+            | TC1  | General |
           And there are products:
             | name          | price | tax category |
             | Mug           | 5.99  | General      |
             | Sticker       | 10.00 | General      |
           And the following tax rates exist:
-            | category | zone         | name | amount |
-            | General  | German lands | VAT  | 23     |
+            | code | category | zone         | name | amount |
+            | TR1  | General  | German lands | VAT  | 23     |
           And the following orders were placed:
             | customer          | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
