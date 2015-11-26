@@ -740,4 +740,12 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
 
         return end($items);
     }
+
+    /**
+     * @Then The code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
+    }
 }

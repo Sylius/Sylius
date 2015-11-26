@@ -12,13 +12,13 @@ Feature: User account orders page
         | Scandinavia | country | Norway, Sweden, Finland |
         | France      | country | France                  |
       And there are following shipping categories:
-        | name    |
-        | Regular |
-        | Heavy   |
+        | code | name    |
+        | SC1  | Regular |
+        | SC2  | Heavy   |
       And the following shipping methods exist:
-        | category | zone        | name |
-        | Regular  | Scandinavia | DHL  |
-        | Heavy    | France      | UPS  |
+        | code | category | zone        | name |
+        | SM1  | Regular  | Scandinavia | DHL  |
+        | SM2  | Heavy    | France      | UPS  |
       And the following products exist:
         | name | price | sku |
         | Mug  | 5.99  | 456 |

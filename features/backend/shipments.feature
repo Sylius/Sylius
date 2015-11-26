@@ -12,15 +12,15 @@ Feature: Shipments
             | UK + Poland  | country | United Kingdom, Poland        |
             | USA          | country | United States                 |
           And the following shipping methods exist:
-            | category | zone         | name        |
-            | Regular  | USA          | FedEx       |
-            | Heavy    | UK + Poland  | DHL         |
-            |          | UK + Poland  | DHL Express |
+            | code | category | zone         | name        |
+            | SM1  | Regular  | USA          | FedEx       |
+            | SM2  | Heavy    | UK + Poland  | DHL         |
+            | SM3  |          | UK + Poland  | DHL Express |
           And the following orders were placed:
             | customer          | address                                                | shipment |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany | FedEx    |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       | DHL      |
-          And I am logged in as administratorzs
+          And I am logged in as administrator
 
     Scenario: Seeing index of all shipments
         Given I am on the dashboard page

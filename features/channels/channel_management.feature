@@ -25,9 +25,9 @@ Feature: Channel management
             | Credit Card (EU) | adyen   |
             | PayPal           | paypal  |
           And the following shipping methods exist:
-            | zone | name  |
-            | USA  | FedEx |
-            | EU   | DHL   |
+            | code | zone | name  |
+            | SM1  | USA  | FedEx |
+            | SM2  | EU   | DHL   |
           And there are following channels configured:
             | code   | name       | currencies | locales      |
             | WEB-US | mystore.us | USD        | en_US        |

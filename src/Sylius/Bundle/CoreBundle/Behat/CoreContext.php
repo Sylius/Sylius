@@ -424,18 +424,18 @@ class CoreContext extends DefaultContext
                 $data['enabled'] = 'yes';
             }
 
-            $this->thereIsShippingMethod($data['name'], $data['zone'], $calculator, $configuration, 'yes' === $data['enabled'], false);
+            $this->thereIsShippingMethod($data['name'], $data['code'], $data['zone'], $calculator, $configuration, 'yes' === $data['enabled'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
-     * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
-     * @Given /^there is an enabled shipping method "([^""]*)" within zone "([^""]*)"$/
+     * @Given /^I created shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
+     * @Given /^There is shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
+     * @Given /^there is an enabled shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
+    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
     {
         $repository = $this->getRepository('shipping_method');
         $factory = $this->getFactory('shipping_method');
@@ -444,6 +444,7 @@ class CoreContext extends DefaultContext
         if (null === $method = $repository->findOneBy(array('name' => $name))) {
             $method = $factory->createNew();
             $method->setName($name);
+            $method->setCode($code);
             $method->setZone($this->findOneByName('zone', $zoneName));
             $method->setCalculator($calculator);
             $method->setConfiguration($configuration ?: array('amount' => 2500));
@@ -461,11 +462,11 @@ class CoreContext extends DefaultContext
     }
 
     /**
-     * @Given /^there is a disabled shipping method "([^""]*)" within zone "([^""]*)"$/
+     * @Given /^there is a disabled shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      */
-    public function thereIsDisabledShippingMethod($name, $zoneName)
+    public function thereIsDisabledShippingMethod($name, $code, $zoneName)
     {
-        $this->thereIsShippingMethod($name, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, false);
+        $this->thereIsShippingMethod($name, $code, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, false);
     }
 
     /**

@@ -11,15 +11,15 @@ Feature: Shipping methods
             | UK + Germany | country | United Kingdom, Germany |
             | USA          | country | United States           |
           And there are following shipping categories:
-            | name    |
-            | Regular |
-            | Heavy   |
+            | code | name    |
+            | CS1  | Regular |
+            | CS2  | Heavy   |
           And the following shipping methods exist:
-            | category | zone         | name         |
-            | Regular  | USA          | FedEx        |
-            | Heavy    | UK + Germany | DHL          |
-            |          | UK + Germany | DHL Express  |
-            |          | USA          | TurboPackage |
+            | code | category | zone         | name         |
+            | SM1  | Regular  | USA          | FedEx        |
+            | SM2  | Heavy    | UK + Germany | DHL          |
+            | SM3  |          | UK + Germany | DHL Express  |
+            | SM4  |          | USA          | TurboPackage |
           And shipping method "DHL Express" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 10000 |
@@ -55,6 +55,7 @@ Feature: Shipping methods
     Scenario: Creating new shipping method for specific zone
         Given I am on the shipping method creation page
          When I fill in "Name" with "FedEx World Shipping"
+          And I fill in "Code" with "SM5"
           And I select "USA" from "Zone"
           And I select "Flat rate per item" from "Calculator"
           And I fill in "Amount" with "10"
@@ -67,6 +68,7 @@ Feature: Shipping methods
     Scenario: Creating new shipping method with flat rate per item
         Given I am on the shipping method creation page
          When I fill in "Name" with "FedEx World Shipping"
+          And I fill in "Code" with "SM6"
           And I select "USA" from "Zone"
           And I select "Flat rate per item" from "Calculator"
           And I fill in "Amount" with "10"
@@ -78,6 +80,7 @@ Feature: Shipping methods
     Scenario: Creating new shipping method with flat rate per shipment
         Given I am on the shipping method creation page
          When I fill in "Name" with "FedEx World Shipping"
+          And I fill in "Code" with "SM7"
           And I select "Flat rate per shipment" from "Calculator"
           And I fill in "Amount" with "10"
           And I press "Create"
@@ -88,6 +91,7 @@ Feature: Shipping methods
     Scenario: Creating new shipping method with flexible rate
         Given I am on the shipping method creation page
          When I fill in "Name" with "FedEx World Shipping"
+          And I fill in "Code" with "SM7"
           And I select "Flexible rate" from "Calculator"
           And I fill in "First item cost" with "100"
           And I fill in "Additional item cost" with "10"
@@ -97,7 +101,7 @@ Feature: Shipping methods
           And I should see "Shipping method has been successfully created."
 
     Scenario: Created shipping methods appear in the list
-        Given I created shipping method "FedEx World Shipping" within zone "USA"
+        Given I created shipping method "FedEx World Shipping" with code "SM7" and zone "USA"
           And I go to the shipping method index page
          Then I should see 5 shipping methods in the list
           And I should see shipping method with name "FedEx World Shipping" in that list
@@ -120,15 +124,34 @@ Feature: Shipping methods
          Then I should be on the page of shipping method "General Shipping"
 
     Scenario: Enabling shipping method
-        Given there is a disabled shipping method "UPS" within zone "USA"
+        Given there is a disabled shipping method "UPS" with code "SM7" and zone "USA"
           And I am on the shipping method index page
          When I click "Enable" near "UPS"
          Then I should see enabled shipping method with name "UPS" in the list
           And I should see "Shipping method has been successfully enabled"
 
     Scenario: Disabling shipping method
-        Given there is an enabled shipping method "UPS" within zone "USA"
+        Given there is an enabled shipping method "UPS" with code "SM7" and zone "USA"
           And I am on the shipping method index page
          When I click "Disable" near "UPS"
          Then I should see disabled shipping method with name "UPS" in the list
           And I should see "Shipping method has been successfully disabled"
+
+    Scenario: Cannot update shipping method code
+        When I am editing shipping method "FedEx"
+        Then The code field should be disabled
+
+    Scenario: Try add shipping method with existing code
+        Given I am on the shipping method creation page
+        When I fill in "Name" with "MegaPackage"
+        When I fill in "Code" with "SM1"
+        And I press "Create"
+        Then I should still be on the shipping method creation page
+        And I should see "The shipping method with given code already exists"
+
+    Scenario: Submitting invalid form without code
+      Given I am on the shipping method creation page
+      When I fill in "Name" with "MegaPackage"
+      And I press "Create"
+      Then I should still be on the shipping method creation page
+      And I should see "Please enter shipping method code."

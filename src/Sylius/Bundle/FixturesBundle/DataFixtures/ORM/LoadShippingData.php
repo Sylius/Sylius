@@ -31,23 +31,23 @@ class LoadShippingData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $regular = $this->createShippingCategory('Regular', 'Regular weight items');
-        $heavy = $this->createShippingCategory('Heavy', 'Heavy items');
+        $regular = $this->createShippingCategory('Regular', 'Regular weight items', 'SC1');
+        $heavy = $this->createShippingCategory('Heavy', 'Heavy items', 'SC2');
 
         $manager->persist($regular);
         $manager->persist($heavy);
 
         $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'SM1', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = array('amount' => 2500);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'SM2', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('amount' => 2350);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'SM3', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'), 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'), 'SM4', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
     }
@@ -65,15 +65,17 @@ class LoadShippingData extends DataFixture
      *
      * @param string $name
      * @param string $description
+     * @param string $code
      *
      * @return ShippingCategoryInterface
      */
-    protected function createShippingCategory($name, $description)
+    protected function createShippingCategory($name, $description, $code)
     {
         /* @var $category ShippingCategoryInterface */
         $category = $this->getShippingCategoryFactory()->createNew();
         $category->setName($name);
         $category->setDescription($description);
+        $category->setCode($code);
 
         $this->setReference('Sylius.ShippingCategory.'.$name, $category);
 
@@ -84,6 +86,7 @@ class LoadShippingData extends DataFixture
      * Create shipping method.
      *
      * @param array                     $translatedNames
+     * @param string                    $code
      * @param string                    $zoneName
      * @param string                    $calculator
      * @param array                     $configuration
@@ -91,7 +94,7 @@ class LoadShippingData extends DataFixture
      *
      * @return ShippingMethodInterface
      */
-    protected function createShippingMethod(array $translatedNames, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
+    protected function createShippingMethod(array $translatedNames, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this->getShippingMethodFactory()->createNew();
@@ -107,6 +110,7 @@ class LoadShippingData extends DataFixture
         }
 
         $method->setZone($this->getZoneByName($zoneName));
+        $method->setCode($code);
         $method->setCalculator($calculator);
         $method->setConfiguration($configuration);
         $method->setCategory($category);
