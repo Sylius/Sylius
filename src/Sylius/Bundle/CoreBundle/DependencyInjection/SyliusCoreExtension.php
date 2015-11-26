@@ -134,6 +134,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
         $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
         $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
+        $container->setParameter('sylius.sitemap', $config['sitemap']);
     }
 
     /**
