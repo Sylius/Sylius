@@ -53,6 +53,11 @@ class TaxCategoryTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 

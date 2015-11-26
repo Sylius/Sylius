@@ -15,11 +15,11 @@ Feature: Tax included in price
             | name    | type    | members        |
             | Germany | country | Germany        |
           And there are following tax categories:
-            | name          |
-            | Taxable Goods |
+            | code | name          |
+            | TC1  | Taxable Goods |
           And the following tax rates exist:
-            | category      | zone    | name        | amount | included in price? |
-            | Taxable Goods | Germany | Germany VAT | 23%    | yes                |
+            | code | category      | zone    | name        | amount | included in price? |
+            | TR1  | Taxable Goods | Germany | Germany VAT | 23%    | yes                |
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 85    | PHP T-Shirts | Taxable Goods |

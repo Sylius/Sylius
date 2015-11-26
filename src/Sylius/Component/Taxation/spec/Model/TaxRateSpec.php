@@ -64,6 +64,12 @@ class TaxRateSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Taxable goods');
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('TR1');
+        $this->getCode()->shouldReturn('TR1');
+    }
+
     function it_should_have_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);

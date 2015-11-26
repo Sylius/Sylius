@@ -28,24 +28,24 @@ class LoadTaxationData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $taxableGoods = $this->createTaxCategory('Taxable goods', 'Default taxation category');
+        $taxableGoods = $this->createTaxCategory('TC1', 'Taxable goods', 'Default taxation category');
 
         $manager->persist($taxableGoods);
         $manager->flush();
 
-        $taxRate = $this->createTaxRate('EU VAT', 'EU', 0.23);
+        $taxRate = $this->createTaxRate('TR1', 'EU VAT', 'EU', 0.23);
         $taxRate->setCategory($taxableGoods);
 
         $manager->persist($taxRate);
         $manager->flush();
 
-        $taxableGoods->addRate($this->createTaxRate('US Sales Tax', 'USA', 0.08));
+        $taxableGoods->addRate($this->createTaxRate('TR2', 'US Sales Tax', 'USA', 0.08));
         $taxRate->setCategory($taxableGoods);
 
         $manager->persist($taxRate);
         $manager->flush();
 
-        $taxableGoods->addRate($this->createTaxRate('No tax', 'Rest of World', 0.00));
+        $taxableGoods->addRate($this->createTaxRate('TR3', 'No tax', 'Rest of World', 0.00));
         $taxRate->setCategory($taxableGoods);
 
         $manager->persist($taxRate);
@@ -61,18 +61,18 @@ class LoadTaxationData extends DataFixture
     }
 
     /**
-     * Create tax category.
-     *
+     * @param string $code
      * @param string $name
      * @param string $description
      *
      * @return TaxCategoryInterface
      */
-    protected function createTaxCategory($name, $description)
+    protected function createTaxCategory($code, $name, $description)
     {
         /* @var $category TaxCategoryInterface */
         $category = $this->getTaxCategoryFactory()->createNew();
         $category->setName($name);
+        $category->setCode($code);
         $category->setDescription($description);
 
         $this->setReference('Sylius.TaxCategory.'.$name, $category);
@@ -83,6 +83,7 @@ class LoadTaxationData extends DataFixture
     /**
      * Create tax rate.
      *
+     * @param string  $code
      * @param string  $name
      * @param string  $zoneName
      * @param float   $amount
@@ -91,7 +92,7 @@ class LoadTaxationData extends DataFixture
      *
      * @return TaxRateInterface
      */
-    protected function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
+    protected function createTaxRate($code, $name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
     {
         /* @var $rate TaxRateInterface */
         $rate = $this->getTaxRateFactory()->createNew();
@@ -100,6 +101,7 @@ class LoadTaxationData extends DataFixture
         $rate->setAmount($amount);
         $rate->setIncludedInPrice($includedInPrice);
         $rate->setCalculator($calculator);
+        $rate->setCode($code);
 
         $this->setReference('Sylius.TaxRate.'.$name, $rate);
 

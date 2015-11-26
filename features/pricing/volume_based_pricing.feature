@@ -15,11 +15,11 @@ Feature: Volume based pricing
             | name    | type    | members        |
             | UK      | country | United Kingdom |
           And there are following tax categories:
-            | name          |
-            | Taxable Goods |
+            | code | name          |
+            | TC1  | Taxable Goods |
           And the following tax rates exist:
-            | category      | zone    | name        | amount |
-            | Taxable Goods | UK      | UK Tax      | 15%    |
+            | code | category      | zone | name       | amount |
+            | TR1  | Taxable Goods | UK   | TR1 UK Tax | 15%    |
           And the default tax zone is "UK"
           And the following products exist:
             | name        | price | taxons       | tax category  |

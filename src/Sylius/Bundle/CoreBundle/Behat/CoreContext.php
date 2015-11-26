@@ -381,17 +381,17 @@ class CoreContext extends DefaultContext
     public function thereAreTaxRates(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxRate($data['amount'], $data['name'], $data['category'], $data['zone'], isset($data['included in price?']) ? $data['included in price?'] : false, false);
+            $this->thereIsTaxRate($data['amount'], $data['name'], $data['code'], $data['category'], $data['zone'], isset($data['included in price?']) ? $data['included in price?'] : false, false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^there is (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
-     * @Given /^I created (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
+     * @Given /^there is (\d+)% tax "([^""]*)" with code "([^""]*)" for category "([^""]*)" with zone "([^""]*)"$/
+     * @Given /^I created (\d+)% tax "([^""]*)" with code "([^""]*)" for category "([^""]*)" with zone "([^""]*)"$/
      */
-    public function thereIsTaxRate($amount, $name, $category, $zone, $includedInPrice = false, $flush = true)
+    public function thereIsTaxRate($amount, $name, $code, $category, $zone, $includedInPrice = false, $flush = true)
     {
         /* @var $rate TaxRateInterface */
         $rate = $this->getFactory('tax_rate')->createNew();
@@ -401,6 +401,7 @@ class CoreContext extends DefaultContext
         $rate->setCategory($this->findOneByName('tax_category', $category));
         $rate->setZone($this->findOneByName('zone', $zone));
         $rate->setCalculator('default');
+        $rate->setCode($code);
 
         $manager = $this->getEntityManager();
         $manager->persist($rate);

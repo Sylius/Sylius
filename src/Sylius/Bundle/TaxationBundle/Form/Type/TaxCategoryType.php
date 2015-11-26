@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\TaxationBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Tax category form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxCategoryType extends AbstractResourceType
@@ -34,6 +33,7 @@ class TaxCategoryType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.tax_category.description',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 
