@@ -17,6 +17,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 
 /**
  * Payment method form type.
@@ -70,6 +71,7 @@ class PaymentMethodType extends AbstractResourceType
             ->add('feeCalculator', 'sylius_fee_calculator_choice', array(
                 'label' => 'sylius.form.payment.fee_calculator',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new BuildPaymentMethodFeeCalculatorFormSubscriber($this->feeCalculatorRegistry, $builder->getFormFactory()))
         ;
 

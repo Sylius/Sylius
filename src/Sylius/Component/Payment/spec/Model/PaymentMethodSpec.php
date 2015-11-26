@@ -39,6 +39,12 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function its_code_is_mutable()
+    {
+        $this->setCode('PM1');
+        $this->getCode()->shouldReturn('PM1');
+    }
+
     function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);

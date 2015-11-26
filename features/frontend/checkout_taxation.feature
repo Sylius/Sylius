@@ -27,8 +27,8 @@ Feature: Checkout taxation
             | code | zone | name        |
             | SM1  | UK   | DHL Express |
           And the following payment methods exist:
-            | name  | gateway | enabled | calculator | calculator_configuration |
-            | Dummy | dummy   | yes     | fixed      | amount: 0                |
+            | code | name  | gateway | enabled | calculator | calculator_configuration |
+            | PM1  | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping    |
