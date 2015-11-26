@@ -19,6 +19,7 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="code" column="code" type="string" unique="true" />
         <field name="name" column="name" type="string" />
         <field name="description" column="description" type="text" nullable="true" />
 

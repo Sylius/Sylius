@@ -24,8 +24,8 @@ Feature: Checkout taxation
             | name    | price | taxons       | tax category  |
             | PHP Top | 250   | PHP T-Shirts | Taxable Goods |
           And the following shipping methods exist:
-            | zone | name        |
-            | UK   | DHL Express |
+            | code | zone | name        |
+            | SM1  | UK   | DHL Express |
           And the following payment methods exist:
             | name  | gateway | enabled | calculator | calculator_configuration |
             | Dummy | dummy   | yes     | fixed      | amount: 0                |

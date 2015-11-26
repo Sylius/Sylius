@@ -23,9 +23,9 @@ Feature: Checkout shipping in preferred language
             | United States |
             | Germany       |
           And the following shipping methods exist:
-            | zone    | name       |
-            | USA     | FedEx      |
-            | Germany | UPS Ground |
+            | code | zone    | name       |
+            | SM1  | USA     | FedEx      |
+            | SM2  | Germany | UPS Ground |
           And all products are assigned to the default channel
           And there are following locales configured and assigned to the default channel:
             | code  |

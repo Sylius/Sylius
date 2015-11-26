@@ -27,6 +27,11 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var ShippingCategoryInterface
      */
     protected $category;
@@ -90,6 +95,22 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

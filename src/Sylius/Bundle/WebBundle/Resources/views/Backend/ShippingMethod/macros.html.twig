@@ -8,6 +8,7 @@
             <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', 'sylius.shipping_method.id'|trans) }}</th>
+                <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans)}}</th>
                 <th>{{ sylius_resource_sort('name', 'sylius.shipping_method.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('zone', 'sylius.shipping_method.zone'|trans) }}</th>
                 <th>{{ sylius_resource_sort('category', 'sylius.shipping_method.category'|trans) }}</th>
@@ -20,6 +21,7 @@
             {% for shipping_method in shipping_methods %}
                 <tr id="{{ shipping_method.id }}">
                     <td>{{ shipping_method.id }}</td>
+                    <td>{{ shipping_method.code }}</td>
                     <td>{{ shipping_method.name }}</td>
                     <td>{{ shipping_method.zone }}</td>
                     <td>{{ shipping_method.category|default('<em>undefined</em>')|raw }}</td>

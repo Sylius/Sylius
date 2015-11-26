@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,12 +40,21 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
     function it_builds_form_with_name_and_description_fields(FormBuilder $builder)
     {
         $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
+            ->willReturn($builder);
+
+        $builder
             ->add('name', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
             ->add('description', 'textarea', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('code', 'text', Argument::any())
             ->willReturn($builder)
         ;
 

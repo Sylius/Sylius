@@ -7,9 +7,9 @@ Feature: Shipping categories
     Background:
         Given store has default configuration
           And there are following shipping categories:
-            | name    |
-            | Regular |
-            | Heavy   |
+            | code | name    |
+            | SC1  | Regular |
+            | SC2  | Heavy   |
           And I am logged in as administrator
 
     Scenario: Seeing index of all shipping categories
@@ -31,19 +31,21 @@ Feature: Shipping categories
 
     Scenario: Submitting invalid form without name
         Given I am on the shipping category creation page
-         When I press "Create"
-         Then I should still be on the shipping category creation page
-          And I should see "Please enter shipping category name"
+        When I fill in "Code" with "SC1"
+        And I press "Create"
+        Then I should still be on the shipping category creation page
+        And I should see "Please enter shipping category name"
 
     Scenario: Creating new shipping category
         Given I am on the shipping category creation page
-         When I fill in "Name" with "Light"
-          And I press "Create"
-         Then I should be on the shipping category index page
-          And I should see "Shipping category has been successfully created."
+        When I fill in "Name" with "Light"
+        And I fill in "Code" with "SC32"
+        And I press "Create"
+        Then I should be on the shipping category index page
+        And I should see "Shipping category has been successfully created."
 
     Scenario: Created shipping categories appear in the list
-        Given I created shipping category "Light"
+        Given I created shipping category "Light" with code "SC3"
           And I go to the shipping category index page
          Then I should see 3 shipping categories in the list
           And I should see shipping category with name "Light" in that list
@@ -59,6 +61,25 @@ Feature: Shipping categories
           And I press "Save changes"
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully updated."
+
+    Scenario: Cannot update shipping category code
+         When I am editing shipping category "Heavy"
+         Then The code field should be disabled
+
+    Scenario: Try add shipping category with existing code
+        Given I am on the shipping category creation page
+        When I fill in "Name" with "Middle"
+        And I fill in "Code" with "SC1"
+        And I press "Create"
+        Then I should still be on the shipping category creation page
+        And I should see "The shipping category with given code already exists"
+
+    Scenario: Submitting invalid form without code
+        Given I am on the shipping category creation page
+        When I fill in "Name" with "Middle"
+        And I press "Create"
+        Then I should still be on the shipping category creation page
+        And I should see "Please enter shipping category code"
 
     @javascript
     Scenario: Deleting shipping category from list

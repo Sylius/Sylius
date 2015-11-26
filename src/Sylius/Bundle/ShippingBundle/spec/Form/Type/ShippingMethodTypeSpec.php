@@ -51,9 +51,16 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     {
         $calculatorRegistry->all()->willReturn(array());
 
-        $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber')
-        )->willReturn($builder);
+        $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber'))
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
+            ->willReturn($builder)
+        ;
+
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->willReturn($builder)
@@ -88,6 +95,11 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber'))
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
             ->willReturn($builder)
         ;
 

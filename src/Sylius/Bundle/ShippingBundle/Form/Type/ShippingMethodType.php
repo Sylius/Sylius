@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -65,6 +66,7 @@ class ShippingMethodType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.name',

@@ -25,11 +25,11 @@ Feature: Checkout shipping
             | Poland         |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration | enabled |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
-            | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
-            | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
+            | code | zone         | name          | calculator | configuration | enabled |
+            | SM1  | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
+            | SM2  | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
+            | SM3  | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
+            | SM4  | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
             | name  | gateway | enabled | calculator | calculator_configuration |
             | Dummy | dummy   | yes     | fixed      | amount: 0                |
