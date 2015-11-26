@@ -144,7 +144,7 @@ Feature: Shipping methods
     Scenario: Try add shipping method with existing code
         Given I am on the shipping method creation page
         When I fill in "Name" with "MegaPackage"
-        When I fill in "Code" with "SM1"
+        And I fill in "Code" with "SM1"
         And I press "Create"
         Then I should still be on the shipping method creation page
         And I should see "The shipping method with given code already exists"
