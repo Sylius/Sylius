@@ -40,6 +40,8 @@ before_install:
 
     - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then travis/prepare/prepare-php7-memcached; fi
 
+    - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
     - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -50,8 +52,6 @@ before_install:
 
     - composer install --no-interaction --prefer-dist --no-scripts
     - composer run-script "travis-$TEST_SUITE-build" --no-interaction
-
-    - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
     - app/console doctrine:database:create --env=test_cached
