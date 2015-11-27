@@ -338,6 +338,11 @@ sylius_rbac:
                 form:
                     choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
     permissions:
+        sylius.access.account: May access his account area
+        sylius.access.administration: May access administration area
+        sylius.access.api: May make API requests
+        sylius.allowed_to_switch: Can impersonate users
+
         sylius.manage.customer: Manage customers
         sylius.customer.show: Show customer
         sylius.customer.index: List customers
@@ -733,73 +738,65 @@ sylius_rbac:
         sylius.accounts: [sylius.manage.customer, sylius.manage.group, sylius.manage.user]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
         sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
-    security_roles:
-        ROLE_ADMINISTRATION_ACCESS: Can access administration
-        ROLE_API_ACCESS: Can access REST API
-        ROLE_ALLOWED_TO_SWITCH: Can impersonate users
+
     roles:
+        user:
+            name: User
+            description: Any user with an account
+            permissions: [sylius.access.account]
+        api_access:
+            name: Public API users
+            description: Can access REST API
+            permissions: [sylius.access.api]
         administrator:
             name: Administrator
             description: Administrator user
             permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
+            child_roles: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         catalog_manager:
             name: Catalog Manager
             description: Users responsible for catalog product management
-            permissions: [sylius.catalog]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.catalog]
         sales_manager:
             name: Sales Manager
             description: Sales
-            permissions: [sylius.sales]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.sales]
         marketing_manager:
             name: Marketing Manager
             description: Marketing
-            permissions: [sylius.marketing]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.marketing]
         accounts_manager:
             name: Accounts Manager
             description: Users responsible for managing customer accounts
-            permissions: [sylius.accounts]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
+            permissions: [sylius.access.administration, sylius.accounts, sylius.allowed_to_switch]
         shipping_manager:
             name: Shipping Manager
             description: Shipping Department people
-            permissions: [sylius.shipping]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.shipping]
         content_editor:
             name: Content Editor
             description: Content Team people
-            permissions: [sylius.content]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_CAN_VIEW_NON_PUBLISHED]
+            permissions: [sylius.access.administration, sylius.content]
         tax_manager:
             name: Tax Manager
             description: Taxes Team
-            permissions: [sylius.taxes]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.taxes]
         it:
             name: IT
             description: IT Team
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            child_roles: [security_auditor, developer]
         security_auditor:
             name: Security Auditor
             description: Security Team
-            permissions: [sylius.security]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.security]
         developer:
             name: Developer
             description: Developers Access
-            permissions: [sylius.customer.index, sylius.customer.show, sylius.manage.api_client]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            permissions: [sylius.access.administration, sylius.customer.index, sylius.customer.show, sylius.manage.api_client]
         support:
             name: Support
             description: Support Team
-            permissions: [sylius.support, sylius.customer.show, sylius.customer.index]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
-    roles_hierarchy:
-        administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
-        it: [security_auditor, developer]
+            permissions: [sylius.access.administration, sylius.support, sylius.customer.show, sylius.customer.index, sylius.allowed_to_switch]
 
 sylius_user:
     resources:

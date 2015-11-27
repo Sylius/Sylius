@@ -26,8 +26,6 @@
         <field name="name" type="string" />
         <field name="description" type="text" nullable="true" />
 
-        <field name="securityRoles" column="security_roles" type="array" />
-
         <many-to-one field="parent" target-entity="Sylius\Component\Rbac\Model\RoleInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />

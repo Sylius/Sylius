@@ -17,49 +17,54 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.authorization_identity_provider.security.class">Sylius\Bundle\RbacBundle\Provider\SecurityIdentityProvider</parameter>
-        <parameter key="sylius.authorization_checker.default.class">Sylius\Component\Rbac\Authorization\AuthorizationChecker</parameter>
-        <parameter key="sylius.permission_provider.class">Sylius\Component\Rbac\Provider\PermissionProvider</parameter>
-        <parameter key="sylius.roles_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetRolesResolver</parameter>
-        <parameter key="sylius.permissions_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetPermissionsResolver</parameter>
-        <parameter key="sylius.permission_map.default.class">Sylius\Component\Rbac\Authorization\PermissionMap</parameter>
-        <parameter key="sylius.permission_map.cached.class">Sylius\Component\Rbac\Authorization\CachedPermissionMap</parameter>
+        <parameter key="sylius.rbac.hierarchy_provider.config.class">Sylius\Bundle\RbacBundle\Security\Role\Provider\ArrayHierarchyProvider</parameter>
+        <parameter key="sylius.rbac.hierarchy_provider.repository.class">Sylius\Bundle\RbacBundle\Security\Role\Provider\RepositoryHierarchyProvider</parameter>
+        <parameter key="sylius.rbac.hierarchy_provider.cached.class">Sylius\Bundle\RbacBundle\Security\Role\Provider\CachedHierarchyProvider</parameter>
+        <parameter key="sylius.rbac.hierarchy_provider.fallback.class">Sylius\Bundle\RbacBundle\Security\Role\Provider\FallbackHierarchyProvider</parameter>
+        <parameter key="sylius.rbac.role_hierarchy.class">Sylius\Bundle\RbacBundle\Security\Role\RoleHierarchy</parameter>
+        <parameter key="sylius.rbac.role_hierarchy_voter.class">Sylius\Bundle\RbacBundle\Security\Voter\RoleHierarchyVoter</parameter>
         <parameter key="sylius.form.type.security_role_choice.class">Sylius\Bundle\RbacBundle\Form\Type\SecurityRoleChoiceType</parameter>
         <parameter key="sylius.rbac.initializer.class">Sylius\Bundle\RbacBundle\Doctrine\RbacInitializer</parameter>
+        <parameter key="sylius.rbac.role_inflector.class">Sylius\Bundle\RbacBundle\Security\Role\Inflector</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.authorization_identity_provider.security" class="%sylius.authorization_identity_provider.security.class%">
-            <argument type="service" id="security.token_storage" />
+        <service id="sylius.rbac.role_inflector" class="%sylius.rbac.role_inflector.class%">
+            <argument>%sylius.rbac.role_prefix%</argument>
         </service>
-        <service id="sylius.authorization_checker.default" class="%sylius.authorization_checker.default.class%">
-            <argument type="service" id="sylius.authorization_identity_provider" />
-            <argument type="service" id="sylius.permission_map" />
-            <argument type="service" id="sylius.roles_resolver" />
+        <service id="sylius.rbac.hierarchy_provider.config" class="%sylius.rbac.hierarchy_provider.config.class%">
+            <argument>%sylius.rbac.role_hierarchy%</argument>
         </service>
-        <service id="sylius.permission_provider" class="%sylius.permission_provider.class%">
-            <argument type="service" id="sylius.repository.permission" />
-        </service>
-        <service id="sylius.roles_resolver" class="%sylius.roles_resolver.class%">
+        <service id="sylius.rbac.hierarchy_provider.repository" class="%sylius.rbac.hierarchy_provider.repository.class%">
             <argument type="service" id="sylius.repository.role" />
-        </service>
-        <service id="sylius.permissions_resolver" class="%sylius.permissions_resolver.class%">
             <argument type="service" id="sylius.repository.permission" />
+            <argument type="service" id="sylius.rbac.role_inflector" />
         </service>
-
-        <service id="sylius.permission_map.default" class="%sylius.permission_map.default.class%">
-            <argument type="service" id="sylius.permission_provider" />
-            <argument type="service" id="sylius.permissions_resolver" />
-        </service>
-        <service id="sylius.permission_map.cached" class="%sylius.permission_map.cached.class%">
-            <argument type="service" id="sylius.permission_map.default" />
+        <service id="sylius.rbac.hierarchy_provider.cached" class="%sylius.rbac.hierarchy_provider.cached.class%">
+            <argument type="service" id="sylius.rbac.hierarchy_provider.repository" />
             <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
         </service>
+        <service id="sylius.rbac.hierarchy_provider.fallback" class="%sylius.rbac.hierarchy_provider.fallback.class%">
+            <argument type="service" id="sylius.rbac.hierarchy_provider.cached" />
+            <argument type="service" id="sylius.rbac.hierarchy_provider.config" />
+        </service>
 
+        <service id="sylius.rbac.role_hierarchy" class="%sylius.rbac.role_hierarchy.class%">
+            <argument type="service" id="sylius.rbac.hierarchy_provider" />
+        </service>
+
+        <service id="sylius.rbac.role_hierarchy_voter" class="%sylius.rbac.role_hierarchy_voter.class%">
+            <argument type="service" id="sylius.rbac.role_hierarchy" />
+            <argument type="service" id="sylius.rbac.role_inflector" />
+            <tag name="security.voter" />
+        </service>
+
+        <!--
         <service id="sylius.form.type.security_role_choice" class="%sylius.form.type.security_role_choice.class%">
             <argument>%sylius.rbac.security_roles%</argument>
             <tag name="form.type" alias="sylius_security_role_choice" />
         </service>
+        -->
 
         <service id="sylius.rbac.initializer" class="%sylius.rbac.initializer.class%">
             <argument>%sylius.rbac.default_permissions%</argument>
@@ -68,7 +73,6 @@
             <argument type="service" id="sylius.factory.permission" />
             <argument type="service" id="sylius.repository.permission" />
             <argument>%sylius.rbac.default_roles%</argument>
-            <argument>%sylius.rbac.default_roles_hierarchy%</argument>
             <argument type="service" id="sylius.manager.role" />
             <argument type="service" id="sylius.factory.role" />
             <argument type="service" id="sylius.repository.role" />

@@ -122,7 +122,6 @@
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
-        <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Provider\TranslationLocaleProvider</parameter>
         <parameter key="sylius.translation.locales_provider.class">Sylius\Bundle\CoreBundle\Provider\AvailableLocalesProvider</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
@@ -633,6 +632,7 @@
             <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
 
+<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
         <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
             <argument type="service" id="sylius.authorization_checker.default" />
             <argument type="service" id="sylius.settings.manager" />
@@ -642,6 +642,8 @@
             <argument type="service" id="sylius.repository.locale" />
         </service>
 
+=======
+>>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
             <argument type="service" id="sylius.context.locale" />
         </service>

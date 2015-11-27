@@ -390,12 +390,20 @@ class ResourceController extends Controller
      */
     protected function toggle(Request $request, $enabled)
     {
+<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
         $resource = $this->findOr404($configuration);
         $resource->setEnabled($enabled);
+=======
+        $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
+        $resource = $this->findOr404($request);
+        $this->get('doctrine')->getManager()->getFilters()->enable('softdeleteable');
+
+        $resource->setDeletedAt(null);
+>>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
 
         $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
         $this->manager->flush();
@@ -525,10 +533,26 @@ class ResourceController extends Controller
      */
     protected function findOr404(RequestConfiguration $configuration)
     {
+<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
         if (null === $resource = $this->singleResourceProvider->get($configuration, $this->repository)) {
             throw new NotFoundHttpException();
         }
 
         return $resource;
+=======
+        if (!$this->container->has('security.authorization_checker')) {
+            return true;
+        }
+
+        $permission = $this->config->getPermission($permission);
+
+        if ($permission) {
+            $grant = sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission);
+
+            if (!$this->get('security.authorization_checker')->isGranted($grant)) {
+                throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
+            }
+        }
+>>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
     }
 }

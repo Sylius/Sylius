@@ -79,6 +79,10 @@ class CoreContext extends DefaultContext
         $manager->persist($channel);
 
         $manager->flush();
+
+        /** @var \Doctrine\Common\Cache\ClearableCache $rbacCache */
+        $rbacCache = $this->getService('doctrine_cache.providers.sylius_rbac');
+        $rbacCache->deleteAll();
     }
 
     /**
@@ -86,7 +90,7 @@ class CoreContext extends DefaultContext
      */
     public function iAmLoggedInAsAuthorizationRole($role)
     {
-        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', [$role]);
+        $this->iAmLoggedInAsRole('sylius@example.com', $role);
     }
 
     /**
@@ -95,7 +99,7 @@ class CoreContext extends DefaultContext
      */
     public function iAmLoggedInUser($email = 'sylius@example.com')
     {
-        $this->iAmLoggedInAsRole('ROLE_USER', $email);
+        $this->iAmLoggedInAsRole($email);
     }
 
     /**
@@ -216,12 +220,11 @@ class CoreContext extends DefaultContext
             $this->thereIsUser(
                 $data['email'],
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
-                'ROLE_USER',
+                [],
                 isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : [],
                 false,
-                [],
                 isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
         }
@@ -278,7 +281,7 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
 
-            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, []);
+            $user = $this->thereIsUser($data['user'], 'sylius', [], 'yes', null, []);
             $user->getCustomer()->addAddress($address);
 
             $manager->persist($address);
@@ -288,14 +291,14 @@ class CoreContext extends DefaultContext
         $manager->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = [], $flush = true, array $authorizationRoles = [], $createdAt = null)
+    public function thereIsUser($email, $password, array $roles = [], $enabled = 'yes', $address = null, $groups = [], $flush = true, $createdAt = null)
     {
         if (null !== $user = $this->getRepository('user')->findOneByEmail($email)) {
             return $user;
         }
 
         /* @var $user UserInterface */
-        $user = $this->createUser($email, $password, $role, $enabled, $address, $groups, $authorizationRoles, $createdAt);
+        $user = $this->createUser($email, $password, $roles, $enabled, $address, $groups, $createdAt);
 
         $this->getEntityManager()->persist($user);
         if ($flush) {
@@ -672,9 +675,15 @@ class CoreContext extends DefaultContext
      * @param string $email
      * @param array  $authorizationRoles
      */
-    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = [])
+    private function iAmLoggedInAsRole($email = 'sylius@example.com', $roles = null)
     {
-        $user = $this->thereIsUser($email, 'sylius', $role, 'yes', null, [], true, $authorizationRoles);
+        if (!$roles) {
+            $roles = [];
+        } elseif (!is_array($roles)) {
+            $roles = array($roles);
+        }
+
+        $user = $this->thereIsUser($email, 'sylius', $roles, 'yes', null, [], true);
 
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'administration', $user->getRoles());
 
@@ -708,6 +717,11 @@ class CoreContext extends DefaultContext
     protected function assignAuthorizationRoles(UserInterface $user, array $authorizationRoles = [])
     {
         foreach ($authorizationRoles as $role) {
+            $securityRole = $this->getService('sylius.rbac.role_inflector')->toSecurityRole($role);
+            if ($this->getService('sylius.rbac.role_hierarchy')->attributeExists($securityRole)) {
+                $user->addRole($securityRole);
+                break;
+            }
             try {
                 $authorizationRole = $this->findOneByName('role', $role);
             } catch (\InvalidArgumentException $exception) {
@@ -748,7 +762,7 @@ class CoreContext extends DefaultContext
     /**
      * @param $email
      * @param $password
-     * @param $role
+     * @param $roles
      * @param $enabled
      * @param $address
      * @param $groups
@@ -757,7 +771,7 @@ class CoreContext extends DefaultContext
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $role = null, $enabled = 'yes', $address = null, array $groups = [], array $authorizationRoles = [], $createdAt = null)
+    protected function createUser($email, $password, array $roles = [], $enabled = 'yes', $address = null, array $groups = [], $createdAt = null)
     {
         $user = $this->getFactory('user')->createNew();
         $customer = $this->createCustomer($email, $address, $groups, $createdAt);
@@ -771,10 +785,7 @@ class CoreContext extends DefaultContext
         $user->setEmailCanonical($email);
         $this->getService('sylius.user.password_updater')->updatePassword($user);
 
-        if (null !== $role) {
-            $user->addRole($role);
-        }
-        $this->assignAuthorizationRoles($user, $authorizationRoles);
+        $this->assignAuthorizationRoles($user, $roles);
 
         return $user;
     }
@@ -789,7 +800,6 @@ class CoreContext extends DefaultContext
         $authorizationRole = $this->getFactory('role')->createNew();
         $authorizationRole->setCode($role);
         $authorizationRole->setName(ucfirst($role));
-        $authorizationRole->setSecurityRoles(['ROLE_ADMINISTRATION_ACCESS']);
 
         return $authorizationRole;
     }

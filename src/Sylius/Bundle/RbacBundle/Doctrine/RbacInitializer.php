@@ -15,6 +15,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,7 +34,6 @@ class RbacInitializer
     ];
 
     private $roles;
-    private $rolesHierarchy;
     private $roleManager;
     private $roleFactory;
     private $roleRepository;
@@ -45,7 +45,6 @@ class RbacInitializer
         FactoryInterface $permissionFactory,
         RepositoryInterface $permissionRepository,
         array $roles,
-        array $rolesHierarchy,
         $roleManager,
         FactoryInterface $roleFactory,
         RepositoryInterface $roleRepository
@@ -57,7 +56,6 @@ class RbacInitializer
         $this->permissionRepository = $permissionRepository;
 
         $this->roles = $roles;
-        $this->rolesHierarchy = $rolesHierarchy;
         $this->roleFactory = $roleFactory;
         $this->roleManager = $roleManager;
         $this->roleRepository = $roleRepository;
@@ -157,15 +155,20 @@ class RbacInitializer
                 }
             }
 
-            $role->setSecurityRoles($data['security_roles']);
-
             $this->roleManager->persist($role);
 
             $rolesByCode[$code] = $role;
         }
 
-        foreach ($this->rolesHierarchy as $code => $children) {
-            foreach ($children as $childCode) {
+        foreach ($this->roles as $code => $config) {
+            foreach ($config['child_roles'] as $childCode) {
+                if (!isset($rolesByCode[$childCode])) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The role "%s" set as child role of "%s" does not exist in the RBAC hierarchy.',
+                        $childCode,
+                        $code
+                    ));
+                }
                 $rolesByCode[$code]->addChild($rolesByCode[$childCode]);
             }
         }

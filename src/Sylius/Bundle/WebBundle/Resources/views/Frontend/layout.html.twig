@@ -25,7 +25,7 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
-            {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
+            {% if is_granted('ROLE_CONTENT_EDITOR') %}
                 {% include "CmfCreateBundle::includecssfiles.html.twig" %}
             {% endif %}
         {% endblock %}
@@ -35,7 +35,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}class="toolbar-padding"{% endif %}>
+    <body {% if is_granted('ROLE_CONTENT_EDITOR') %}class="toolbar-padding"{% endif %}>
     {% if settings.tracking_code %}
         {{ settings.tracking_code|raw }}
     {% endif %}
@@ -145,7 +145,7 @@
         {% endblock %}
         </div>
 
-        {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
+        {% if is_granted('ROLE_CONTENT_EDITOR') %}
             {% render(controller(
                 "cmf_create.jsloader.controller:includeJSFilesAction",
                 {'_locale': app.request.locale, 'editor': 'hallo'}

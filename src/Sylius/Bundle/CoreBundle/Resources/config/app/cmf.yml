@@ -30,7 +30,7 @@ cmf_media:
     persistence:
         phpcr:
             media_basepath: /cms/medias
-            
+
 cmf_routing:
     chain:
         routers_by_id:
@@ -52,7 +52,7 @@ doctrine_cache:
 
 cmf_create:
     security:
-      role: ROLE_ADMINISTRATION_ACCESS
+      role: ROLE_CONTENT_EDITOR
     persistence:
         phpcr:
             image: false

@@ -91,16 +91,16 @@ security:
         - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/account.*", role: ROLE_USER }
+        - { path: "/account.*", role: [ROLE_USER, sylius.access.account] }
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "/administration.*", roles: [ROLE_ADMINISTRATOR, sylius.access.administration] }
 
         - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "/admin.*", roles: [ROLE_ADMINISTRATOR, sylius.access.administration] }
 
-        - { path: ^/api, role: ROLE_API_ACCESS }
+        - { path: ^/api, roles: [ROLE_API, sylius.access.api] }
 
         - { path: "/_partial.*", ip: 127.0.0.1 }

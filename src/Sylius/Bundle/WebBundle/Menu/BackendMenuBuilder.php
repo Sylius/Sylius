@@ -115,14 +115,14 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.assortment', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.taxon.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.taxon.index')) {
             $child->addChild('taxons', [
                 'route' => 'sylius_backend_taxon_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-folder-close'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxons', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product.index')) {
             $child->addChild('products', [
                 'route' => 'sylius_backend_product_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-th-list'],
@@ -133,28 +133,28 @@ class BackendMenuBuilder extends MenuBuilder
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stockables', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_option.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product_option.index')) {
             $child->addChild('options', [
                 'route' => 'sylius_backend_product_option_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-th'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.options', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_attribute.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product_attribute.index')) {
             $child->addChild('product_attributes', [
                 'route' => 'sylius_backend_product_attribute_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-list-alt'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.attributes', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_archetype.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product_archetype.index')) {
             $child->addChild('product_archetypes', [
                 'route' => 'sylius_backend_product_archetype_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-compressed'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.archetypes', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_association_type.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product_association_type.index')) {
             $child->addChild('product_association_types', [
                 'route' => 'sylius_backend_product_association_type_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-th-list'],
@@ -180,31 +180,31 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.content', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.simple_block.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.simple_block.index')) {
             $child->addChild('blocks', [
                 'route' => 'sylius_backend_block_overview',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-th-large'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.blocks', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.static_content.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.static_content.index')) {
             $child->addChild('Pages', [
                 'route' => 'sylius_backend_static_content_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-file'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.pages', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.menu.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.menu.index')) {
             $child->addChild('Menus', [
                 'route' => 'sylius_backend_menu_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-list-alt'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.menus', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.slideshow.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.slideshow.index')) {
             $child->addChild('Slideshow', [
                 'route' => 'sylius_backend_slideshow_block_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-film'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.slideshow', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.route.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.route.index')) {
             $child->addChild('Routes', [
                 'route' => 'sylius_backend_route_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-random'],
@@ -230,19 +230,19 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.marketing', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.promotion.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.promotion.index')) {
             $child->addChild('promotions', [
                 'route' => 'sylius_backend_promotion_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-bullhorn'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.promotions', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.promotion.create')) {
+        if ($this->authorizationChecker->isGranted('sylius.promotion.create')) {
             $child->addChild('new_promotion', [
                 'route' => 'sylius_backend_promotion_create',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-plus-sign'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.new_promotion', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.manage.email')) {
+        if ($this->authorizationChecker->isGranted('sylius.manage.email')) {
             $child->addChild('emails', [
                 'route' => 'sylius_backend_email_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-envelope'],
@@ -268,13 +268,13 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.support', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.contact_request.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.contact_request.index')) {
             $child->addChild('contact_requests', [
                 'route' => 'sylius_backend_contact_request_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-envelope'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.contact_requests', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.contact_topic.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.contact_topic.index')) {
             $child->addChild('contact_topics', [
                 'route' => 'sylius_backend_contact_topic_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-align-justify'],
@@ -300,25 +300,25 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.customer.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.customer.index')) {
             $child->addChild('customers', [
                 'route' => 'sylius_backend_customer_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-user'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customers', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.group.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.group.index')) {
             $child->addChild('groups', [
                 'route' => 'sylius_backend_group_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-home'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.groups', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.role.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.role.index')) {
             $child->addChild('roles', [
                 'route' => 'sylius_backend_role_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-sort-by-attributes'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.roles', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.permission.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.permission.index')) {
             $child->addChild('permissions', [
                 'route' => 'sylius_backend_permission_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-lock'],
@@ -344,25 +344,25 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.sales', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.order.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.order.index')) {
             $child->addChild('orders', [
                 'route' => 'sylius_backend_order_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-shopping-cart'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.orders', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.shipment.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.shipment.index')) {
             $child->addChild('shipments', [
                 'route' => 'sylius_backend_shipment_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-plane'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.shipments', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.payment.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.payment.index')) {
             $child->addChild('payments', [
                 'route' => 'sylius_backend_payment_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-credit-card'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.payments', $section)));
         }
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.report.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.report.index')) {
             $child->addChild('reports', [
                 'route' => 'sylius_backend_report_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-stats'],
@@ -386,7 +386,7 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.review', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_review.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.product_review.index')) {
             $child->addChild('reviews', [
                 'route' => 'sylius_backend_product_review_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-pencil'],
@@ -412,105 +412,105 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.configuration', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_general')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_general')) {
             $child->addChild('general_settings', [
                 'route' => 'sylius_backend_general_settings',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-info-sign'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_security')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_security')) {
             $child->addChild('security_settings', [
                 'route' => 'sylius_backend_security_settings',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-lock'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.security_settings', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.channel.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.channel.index')) {
             $child->addChild('channels', [
                 'route' => 'sylius_backend_channel_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.channels', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.metadata_container.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.metadata_container.index')) {
             $child->addChild('metadata', [
                 'route' => 'sylius_backend_metadata_container_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-file'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.metadata', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.locale.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.locale.index')) {
             $child->addChild('locales', [
                 'route' => 'sylius_backend_locale_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-flag'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.locales', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.payment_method.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.payment_method.index')) {
             $child->addChild('payment_methods', [
                 'route' => 'sylius_backend_payment_method_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-credit-card'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.payment_methods', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.currency.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.currency.index')) {
             $child->addChild('currencies', [
                 'route' => 'sylius_backend_currency_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-usd'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.currencies', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_taxation')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_taxation')) {
             $child->addChild('taxation_settings', [
                 'route' => 'sylius_backend_taxation_settings',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxation_settings', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.tax_category.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.tax_category.index')) {
             $child->addChild('tax_categories', [
                 'route' => 'sylius_backend_tax_category_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_categories', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.tax_rate.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.tax_rate.index')) {
             $child->addChild('tax_rates', [
                 'route' => 'sylius_backend_tax_rate_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_rates', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.shipping_category.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.shipping_category.index')) {
             $child->addChild('shipping_categories', [
                 'route' => 'sylius_backend_shipping_category_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.shipping_categories', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.shipping_method.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.shipping_method.index')) {
             $child->addChild('shipping_methods', [
                 'route' => 'sylius_backend_shipping_method_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.shipping_methods', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.country.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.country.index')) {
             $child->addChild('countries', [
                 'route' => 'sylius_backend_country_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-flag'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.countries', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.zone.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.zone.index')) {
             $child->addChild('zones', [
                 'route' => 'sylius_backend_zone_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-globe'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.zones', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.api_client.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.api_client.index')) {
             $child->addChild('api_clients', [
                 'route' => 'sylius_backend_api_client_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-globe'],

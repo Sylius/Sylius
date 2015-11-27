@@ -96,16 +96,6 @@ class RbacContext extends DefaultContext
                 $role->setParent($root);
             }
 
-            if (!empty($data['security roles'])) {
-                $securityRoles = [];
-
-                foreach (explode(',', $data['security roles']) as $securityRole) {
-                    $securityRoles[] = trim($securityRole);
-                }
-
-                $role->setSecurityRoles($securityRoles);
-            }
-
             $roles[$data['code']] = $role;
 
             $manager->persist($role);
@@ -129,18 +119,5 @@ class RbacContext extends DefaultContext
 
         $manager->persist($role);
         $manager->flush();
-    }
-
-    /**
-     * @Given authorization checks are enabled
-     */
-    public function authorizationChecksAreEnabled()
-    {
-        $settingsManager = $this->getService('sylius.settings.manager');
-        $settings = $settingsManager->load('sylius_security');
-
-        $settings->set('enabled', true);
-
-        $settingsManager->save($settings);
     }
 }

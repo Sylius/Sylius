@@ -18,9 +18,9 @@ use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -77,7 +77,6 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
-     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
      * @param TaxonRepositoryInterface $taxonRepository
      * @param CartProviderInterface $cartProvider
@@ -90,7 +89,6 @@ class FrontendMenuBuilder extends MenuBuilder
         AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
-        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker,
         CurrencyProviderInterface $currencyProvider,
         TaxonRepositoryInterface $taxonRepository,
         CartProviderInterface $cartProvider,
@@ -98,7 +96,7 @@ class FrontendMenuBuilder extends MenuBuilder
         ChannelContextInterface $channelContext,
         TokenStorageInterface $tokenStorage
     ) {
-        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher);
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonRepository = $taxonRepository;
@@ -176,7 +174,8 @@ class FrontendMenuBuilder extends MenuBuilder
             ])->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->authorizationChecker->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
+        if ($this->authorizationChecker->isGranted('sylius.access.administration')
+            || $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $routeParams = [
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.administration')],
