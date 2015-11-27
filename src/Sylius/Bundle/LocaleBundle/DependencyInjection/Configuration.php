@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\LocaleBundle\Controller\LocaleController;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
-use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -73,17 +73,17 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(LocaleController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                            ->arrayNode('form')
+                                        ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
-                                                ->children()
+                                            ->children()
                                                 ->scalarNode('default')->defaultValue(LocaleType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(LocaleChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')
-                                    ->addDefaultIfNotSet()
+                                    ->addDefaultsIfNotSet()
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
