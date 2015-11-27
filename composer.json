@@ -77,7 +77,8 @@
         "twig/twig": "~1.11",
         "white-october/pagerfanta-bundle": "~1.0",
         "willdurand/hateoas-bundle": "~0.4",
-        "winzou/state-machine-bundle": "~0.2"
+        "winzou/state-machine-bundle": "~0.2",
+        "ocramius/proxy-manager": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4@rc",
@@ -157,12 +158,9 @@
         "sylius/web-bundle":         "self.version"
     },
     "scripts": {
-        "travis-no-javascript-build": [
+        "travis-build": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
-        ],
-        "travis-javascript-build": [
-            "@travis-no-javascript-build",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor"
         ],
         "post-install-cmd": [

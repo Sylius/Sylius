@@ -13,21 +13,20 @@ cache:
 
 sudo: false
 
+addons:
+    apt:
+        sources:
+            - google-chrome
+        packages:
+            - google-chrome-stable
+
 matrix:
     include:
         - php: 5.6
-          env: TEST_SUITE=no-javascript
           services: [memcached, mongodb]
-        - php: 5.6
-          env: TEST_SUITE=javascript
-          services: [memcached]
-          sudo: required
-
         - php: 7.0
-          env: TEST_SUITE=no-javascript
           services: [memcached]
         - php: 5.5
-          env: TEST_SUITE=no-javascript
           services: [memcached, mongodb]
 
     fast_finish: true
@@ -39,6 +38,7 @@ before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
     - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then travis/prepare/prepare-php7-memcached; fi
+    - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then travis/prepare/prepare-mongodb; fi
 
     - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
@@ -47,11 +47,8 @@ before_install:
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - composer self-update
-
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = "no-javascript" ]; then travis/prepare/prepare-mongodb; fi
-
     - composer install --no-interaction --prefer-dist --no-scripts
-    - composer run-script "travis-$TEST_SUITE-build" --no-interaction
+    - composer run-script travis-build --no-interaction
 
 before_script:
     - app/console doctrine:database:create --env=test_cached
@@ -60,18 +57,17 @@ before_script:
 
     - app/console cache:warmup --env=test_cached --no-debug
 
-    - |
-        if [ $TEST_SUITE = "javascript" ]; then
-            travis/prepare/prepare-javascript
-            app/console assets:install --env=test_cached --no-debug
-            app/console assetic:dump --env=test_cached --no-debug
-        fi
+    - app/console assetic:dump --env=test_cached --no-debug &
+    - app/console assets:install --env=test_cached --no-debug &
 
     - php -v
     - php -i
 
 script:
-    - travis/run-tests $TEST_SUITE
+    - travis/run-tests default
+
+before_cache:
+    - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
 
 after_failure:
     - export IMGUR_API_KEY=4907fcd89e761c6b07eeb8292d5a9b2a
