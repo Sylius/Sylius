@@ -11,6 +11,7 @@
  
 namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
 
+use Sylius\Bundle\CoreBundle\Sitemap\Exception\TemplateNotFoundException;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -25,18 +26,25 @@ class TwigAdapter implements RendererAdapterInterface
     private $twig;
 
     /**
-     * @param EngineInterface $twig
+     * @var array
      */
-    public function __construct(EngineInterface $twig)
+    private $configuration;
+
+    /**
+     * @param EngineInterface $twig
+     * @param array           $configuration
+     */
+    public function __construct(EngineInterface $twig, array $configuration)
     {
         $this->twig = $twig;
+        $this->configuration = $configuration;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function render($name, array $data = array())
+    public function render(SitemapInterface $sitemap)
     {
-        return $this->twig->renderResponse($name, $data);
+        return $this->twig->render($this->configuration['template'], array('url_set' => $sitemap->getUrls()));
     }
 }

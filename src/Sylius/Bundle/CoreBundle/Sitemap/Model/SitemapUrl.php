@@ -11,27 +11,25 @@
  
 namespace Sylius\Bundle\CoreBundle\Sitemap\Model;
 
-use Sylius\Bundle\CoreBundle\Sitemap\Renderer\TemplateAware;
-
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapUrl implements SitemapUrlInterface, TemplateAware
+class SitemapUrl implements SitemapUrlInterface
 {
     /**
      * @var string
      */
-    private $loc;
+    private $localization;
 
     /**
      * @var \DateTime
      */
-    private $lastmod;
+    private $lastModification;
 
     /**
      * @var string
      */
-    private $changefreq;
+    private $changeFrequency;
 
     /**
      * @var float
@@ -39,65 +37,58 @@ class SitemapUrl implements SitemapUrlInterface, TemplateAware
     private $priority;
 
     /**
-     * @var string
-     */
-    private $template;
-
-    /**
      * {@inheritdoc}
      */
-    public function getLoc()
+    public function getLocalization()
     {
-        return $this->loc;
+        return $this->localization;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLoc($loc)
+    public function setLocalization($localization)
     {
-        $this->loc = $loc;
+        $this->localization = $localization;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLastmod()
+    public function getLastModification()
     {
-        return $this->lastmod;
+        return $this->lastModification;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLastmod(\DateTime $lastmod)
+    public function setLastModification(\DateTime $lastModification)
     {
-        $this->lastmod = $lastmod;
+        $this->lastModification = $lastModification;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getChangefreq()
+    public function getChangeFrequency()
     {
-        return $this->changefreq;
+        return $this->changeFrequency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setChangefreq($changefreq)
+    public function setChangeFrequency($changeFrequency)
     {
-        if (!in_array($changefreq, self::getSupportedChangefreq(), true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The value %s is not supported by the option changefreq.',
-                    $changefreq
-                )
-            );
+        if (!in_array($changeFrequency, self::getSupportedChangeFrequencies(), true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The value %s is not supported by the option changefreq.',
+                $changeFrequency
+            ));
         }
 
-        $this->changefreq = $changefreq;
+        $this->changeFrequency = $changeFrequency;
     }
 
     /**
@@ -114,37 +105,18 @@ class SitemapUrl implements SitemapUrlInterface, TemplateAware
     public function setPriority($priority)
     {
         if (!is_numeric($priority) || 0 >= $priority || 1 <= $priority) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The value %s is not supported by the option priority, it must be a numeric between 0.0 and 1.0.',
-                    $priority
-                )
-            );
+            throw new \InvalidArgumentException(sprintf(
+                'The value %s is not supported by the option priority, it must be a numeric between 0.0 and 1.0.', $priority
+            ));
         }
 
         $this->priority = $priority;
     }
 
-    static function getSupportedChangefreq()
+    static function getSupportedChangeFrequencies()
     {
         $class = new \ReflectionClass(__CLASS__);
 
         return $class->getConstants();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTemplate($template)
-    {
-        $this->template = $template;
     }
 }

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Model;
  
 use PhpSpec\ObjectBehavior;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
@@ -30,50 +29,46 @@ class SitemapSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface');
     }
 
-    function it_is_template_aware()
+    function it_has_sitemap_urls()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Renderer\TemplateAware');
+        $this->setUrls(array());
+        $this->getUrls()->shouldReturn(array());
     }
 
-    function it_has_sitemap_url_set(Collection $urlSet)
+    function it_adds_url(SitemapUrlInterface $sitemapUrl)
     {
-        $this->setUrlSet($urlSet);
-        $this->getUrlSet()->shouldReturn($urlSet);
-    }
-
-    function it_adds_url_to_set(Collection $urlSet, SitemapUrlInterface $sitemapUrl)
-    {
-        $this->setUrlSet($urlSet);
-        $urlSet->add($sitemapUrl)->shouldBeCalled();
-
         $this->addUrl($sitemapUrl);
+        $this->getUrls()->shouldReturn(array($sitemapUrl));
     }
 
-    function it_removes_url_from_set(Collection $urlSet, SitemapUrlInterface $sitemapUrl)
+    function it_removes_url(SitemapUrlInterface $sitemapUrl, SitemapUrlInterface $productUrl, SitemapUrlInterface $staticUrl)
     {
-        $this->setUrlSet($urlSet);
-        $urlSet->removeElement($sitemapUrl)->shouldBeCalled();
-
+        $this->addUrl($sitemapUrl);
+        $this->addUrl($staticUrl);
+        $this->addUrl($productUrl);
         $this->removeUrl($sitemapUrl);
+
+        $this->getUrls()->shouldReturn(array($staticUrl, $productUrl));
     }
 
-    function it_has_loc()
+    function it_has_localization()
     {
-        $this->setLoc('http://sylius.org/sitemap1.xml');
-        $this->getLoc()->shouldReturn('http://sylius.org/sitemap1.xml');
+        $this->setLocalization('http://sylius.org/sitemap1.xml');
+        $this->getLocalization()->shouldReturn('http://sylius.org/sitemap1.xml');
     }
 
-    function it_has_lastmod()
+    function it_has_last_modification_date(\DateTime $now)
     {
-        $now = new \DateTime();
-
-        $this->setLastmod($now);
-        $this->getLastmod()->shouldReturn($now);
+        $this->setLastModification($now);
+        $this->getLastModification()->shouldReturn($now);
     }
 
-    function it_has_sitemap_template()
+    function it_throws_sitemap_url_not_found_exception_if_cannot_find_url_to_remove(SitemapUrlInterface $productUrl, SitemapUrlInterface $staticUrl)
     {
-        $this->setTemplate('@CoreBundle:Sitemap:sitemap.xml.twig');
-        $this->getTemplate()->shouldReturn('@CoreBundle:Sitemap:sitemap.xml.twig');
+        $this->addUrl($productUrl);
+
+        $staticUrl->getLocalization()->willReturn('http://sylius.org');
+
+        $this->shouldThrow('Sylius\Bundle\CoreBundle\Sitemap\Exception\SitemapUrlNotFoundException')->during('removeUrl', array($staticUrl));
     }
 }

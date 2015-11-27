@@ -20,9 +20,7 @@ sylius_core:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
                     permission: false
     sitemap:
-        resources: [product]
-        url_set_template: SyliusCoreBundle:Sitemap:url_set.xml.twig
-        template: @SyliusCore/Sitemap/url_set.xml.twig
+        template: @SyliusCore/Sitemap/show.xml.twig
 
 sylius_money:
     currency: %sylius.currency%

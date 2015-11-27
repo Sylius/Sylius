@@ -9,17 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
+namespace Sylius\Bundle\CoreBundle\Sitemap\Builder;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface RendererAdapterInterface
+interface SitemapBuilderInterface
 {
     /**
-     * @param SitemapInterface $sitemap
+     * @param UrlProviderInterface $provider
      */
-    public function render(SitemapInterface $sitemap);
+    public function addProvider(UrlProviderInterface $provider);
+
+    /**
+     * @return SitemapInterface
+     */
+    public function build();
 }

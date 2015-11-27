@@ -11,9 +11,8 @@
  
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
  
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Sitemap\Model\Sitemap;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface;
 
 /**
@@ -23,7 +22,9 @@ class SitemapRendererSpec extends ObjectBehavior
 {
     function let(RendererAdapterInterface $adapter)
     {
-        $this->beConstructedWith($adapter);
+        $this->beConstructedWith(
+            $adapter
+        );
     }
 
     function it_is_initializable()
@@ -36,20 +37,11 @@ class SitemapRendererSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface');
     }
 
-    function it_has_renderer_adapter(RendererAdapterInterface $adapter)
-    {
-        $this->setAdapter($adapter);
-        $this->getAdapter()->shouldReturn($adapter);
-    }
-
     function it_renders_sitemap(
-        Sitemap $sitemap,
-        Collection $urlSet,
-        $adapter
+        $adapter,
+        SitemapInterface $sitemap
     ) {
-        $sitemap->getTemplate()->willReturn('@SyliusCore/Sitemap/url_set.xml.twig');
-        $sitemap->getUrlSet()->willReturn($urlSet);
-        $adapter->render('@SyliusCore/Sitemap/url_set.xml.twig', array('url_set' => $urlSet))->shouldBeCalled();
+        $adapter->render($sitemap)->shouldBeCalled();
 
         $this->render($sitemap);
     }

@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
-
-use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
+namespace Sylius\Bundle\CoreBundle\Sitemap\Provider;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface RendererAdapterInterface
+interface UrlProviderInterface
 {
     /**
-     * @param SitemapInterface $sitemap
+     * @param array $criteria
+     *
+     * @return array
      */
-    public function render(SitemapInterface $sitemap);
+    public function generate(array $criteria);
 }

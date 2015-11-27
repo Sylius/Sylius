@@ -11,54 +11,47 @@
  
 namespace Sylius\Bundle\CoreBundle\Sitemap\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CoreBundle\Sitemap\Renderer\TemplateAware;
+use Sylius\Bundle\CoreBundle\Sitemap\Exception\SitemapUrlNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class Sitemap implements SitemapInterface, TemplateAware
+class Sitemap implements SitemapInterface
 {
     /**
-     * @var Collection
+     * @var array
      */
-    private $urlSet;
+    private $urls;
 
     /**
      * @var string
      */
-    private $loc;
+    private $localization;
 
     /**
      * @var \DateTime
      */
-    private $lastmod;
-
-    /**
-     * @var string
-     */
-    private $template;
+    private $lastModification;
 
     public function __construct()
     {
-        $this->urlSet = new ArrayCollection();
+        $this->urls = array();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUrlSet($urlSet)
+    public function setUrls($urls)
     {
-        $this->urlSet = $urlSet;
+        $this->urls = $urls;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUrlSet()
+    public function getUrls()
     {
-        return $this->urlSet;
+        return $this->urls;
     }
 
     /**
@@ -66,7 +59,7 @@ class Sitemap implements SitemapInterface, TemplateAware
      */
     public function addUrl(SitemapUrlInterface $url)
     {
-        $this->urlSet->add($url);
+        array_push($this->urls, $url);
     }
 
     /**
@@ -74,54 +67,44 @@ class Sitemap implements SitemapInterface, TemplateAware
      */
     public function removeUrl(SitemapUrlInterface $url)
     {
-        $this->urlSet->removeElement($url);
+        $key = array_search($url, $this->urls);
+        if (false === $key) {
+            throw new SitemapUrlNotFoundException($url);
+        }
+
+        unset($this->urls[$key]);
+        $this->urls = array_values($this->urls);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLoc($loc)
+    public function setLocalization($localization)
     {
-        $this->loc = $loc;
+        $this->localization = $localization;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLoc()
+    public function getLocalization()
     {
-        return $this->loc;
+        return $this->localization;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLastmod(\DateTime $lastmod)
+    public function setLastModification(\DateTime $lastModification)
     {
-        $this->lastmod = $lastmod;
+        $this->lastModification = $lastModification;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLastmod()
+    public function getLastModification()
     {
-        return $this->lastmod;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTemplate($template)
-    {
-        $this->template = $template;
+        return $this->lastModification;
     }
 }

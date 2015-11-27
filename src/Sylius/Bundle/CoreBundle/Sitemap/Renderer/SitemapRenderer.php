@@ -24,38 +24,19 @@ class SitemapRenderer implements SitemapRendererInterface
     private $adapter;
 
     /**
-     * {@inheritdoc}
+     * @param RendererAdapterInterface $adapter
+     * @param array $configuration
      */
-    public function __construct(RendererAdapterInterface $adapter)
+    public function __construct(RendererAdapterInterface $adapter, array $configuration = array())
     {
         $this->adapter = $adapter;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render(SitemapInterface $sitemap)
     {
-        $template = $sitemap->getTemplate();
-        $urlSet = $sitemap->getUrlSet();
-
-        $data = array(
-            'url_set' => $urlSet
-        );
-
-        return $this->adapter->render($template, $data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdapter()
-    {
-        return $this->adapter;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAdapter($adapter)
-    {
-        $this->adapter = $adapter;
+        return $this->adapter->render($sitemap);
     }
 }

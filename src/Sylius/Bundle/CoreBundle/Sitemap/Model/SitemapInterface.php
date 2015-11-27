@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Lakion package.
+ * This file is part of the Sylius package.
  *
- * (c) Lakion
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,14 +19,14 @@ use Doctrine\Common\Collections\Collection;
 interface SitemapInterface
 {
     /**
-     * @return string
+     * @return array
      */
-    public function getUrlSet();
+    public function getUrls();
 
     /**
-     * @param Collection $urlSet
+     * @param array $urlSet
      */
-    public function setUrlSet($urlSet);
+    public function setUrls($urlSet);
 
     /**
      * @param SitemapUrlInterface $url
@@ -41,20 +41,20 @@ interface SitemapInterface
     /**
      * @return string
      */
-    public function getLoc();
+    public function getLocalization();
 
     /**
-     * @param string $loc
+     * @param string $localization
      */
-    public function setLoc($loc);
+    public function setLocalization($localization);
 
     /**
      * @return \DateTime
      */
-    public function getLastmod();
+    public function getLastModification();
 
     /**
-     * @param \DateTime $lastmod
+     * @param \DateTime $lastModification
      */
-    public function setLastmod(\DateTime $lastmod);
+    public function setLastModification(\DateTime $lastModification);
 }

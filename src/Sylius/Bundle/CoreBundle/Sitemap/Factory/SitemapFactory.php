@@ -8,18 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+ 
+namespace Sylius\Bundle\CoreBundle\Sitemap\Factory;
 
-namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
-
-use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\Sitemap;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface RendererAdapterInterface
+class SitemapFactory implements SitemapFactoryInterface
 {
     /**
-     * @param SitemapInterface $sitemap
+     * {@inheritdoc}
      */
-    public function render(SitemapInterface $sitemap);
+    public function createEmpty()
+    {
+        return new Sitemap();
+    }
 }

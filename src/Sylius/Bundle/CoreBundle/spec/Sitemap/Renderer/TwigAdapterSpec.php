@@ -13,16 +13,18 @@ namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
  
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Bundle\TwigBundle\TwigEngine;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class TwigAdapterSpec extends ObjectBehavior
 {
-    function let(TwigEngine $twig)
+    function let(EngineInterface $twig)
     {
-        $this->beConstructedWith($twig);
+        $this->beConstructedWith($twig, array('template' => '@SyliusCore/Sitemap/url_set.xml.twig'));
     }
 
     function it_is_initializable()
@@ -35,10 +37,14 @@ class TwigAdapterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface');
     }
 
-    function it_renders_sitemap($twig)
-    {
-        $twig->renderResponse('SyliusCoreBundle:Sitemap:sitemap.xml.twig', array('data' => Argument::any()))->shouldBeCalled();
+    function it_renders_sitemap(
+        $twig,
+        SitemapInterface $sitemap,
+        SitemapUrlInterface $productUrl
+    ) {
+        $sitemap->getUrls()->willReturn(array($productUrl));
+        $twig->render('@SyliusCore/Sitemap/url_set.xml.twig', array('url_set' => array($productUrl)))->shouldBeCalled();
 
-        $this->render('SyliusCoreBundle:Sitemap:sitemap.xml.twig', array('data' => Argument::any()));
+        $this->render($sitemap);
     }
 }

@@ -28,29 +28,22 @@ class SitemapUrlSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface');
     }
 
-    function it_is_template_aware()
+    function it_has_localization()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Renderer\TemplateAware');
+        $this->setLocalization('http://sylius.org/');
+        $this->getLocalization()->shouldReturn('http://sylius.org/');
     }
 
-    function it_has_loc()
+    function it_has_last_modification(\DateTime $now)
     {
-        $this->setLoc('http://sylius.org/');
-        $this->getLoc()->shouldReturn('http://sylius.org/');
+        $this->setLastModification($now);
+        $this->getLastModification()->shouldReturn($now);
     }
 
-    function it_has_lastmod()
+    function it_has_change_frequency()
     {
-        $now = new \DateTime();
-
-        $this->setLastmod($now);
-        $this->getLastmod()->shouldReturn($now);
-    }
-
-    function it_has_changefreq()
-    {
-        $this->setChangefreq('always');
-        $this->getChangefreq()->shouldReturn('always');
+        $this->setChangeFrequency('always');
+        $this->getChangeFrequency()->shouldReturn('always');
     }
 
     function it_has_priority()
@@ -75,13 +68,8 @@ class SitemapUrlSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_if_changefreq_will_be_not_supported()
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangefreq', array('John'));
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangefreq', array(1));
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangefreq', array(true));
-    }
-
-    function it_has_template()
-    {
-        $this->setTemplate('SyliusCoreBundle:Sitemap:url_set.xml.twig');
+        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array('John'));
+        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array(1));
+        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array(true));
     }
 }

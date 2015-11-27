@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
+namespace Sylius\Bundle\CoreBundle\Sitemap\Factory;
 
-use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
+
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface RendererAdapterInterface
+interface SitemapUrlFactoryInterface
 {
     /**
-     * @param SitemapInterface $sitemap
+     * @return SitemapUrlInterface
      */
-    public function render(SitemapInterface $sitemap);
+    public function createEmpty();
 }
