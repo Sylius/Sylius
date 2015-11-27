@@ -1,2 +1,0 @@
-#!/bin/bash
-bin/behat --strict -f progress -p javascript_cached
