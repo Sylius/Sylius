@@ -4,8 +4,9 @@ Product
 Powerful products catalog for PHP applications.
 
 .. toctree::
-   :numbered:
+   :maxdepth: 2
 
    installation
+   basic_usage
    models
-   summary
+   interfaces
