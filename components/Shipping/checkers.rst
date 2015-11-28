@@ -29,9 +29,10 @@ This class checks if shipping method rules are capable of shipping given subject
     use Sylius\Component\Shipping\Model\ShipmentItem;
     use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
     use Sylius\Component\Shipping\Model\RuleInterface;
-    use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry;
     use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
     use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
+    use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
+    use Sylius\Component\Registry\ServiceRegistry;
 
     $rule = new Rule();
     $rule->setConfiguration(array('count' => 0, 'equal' => true));
@@ -61,9 +62,10 @@ This class checks if shipping method rules are capable of shipping given subject
     $shipment = new Shipment();
     $shipment->addItem($shipmentItem);
 
-    $ruleCheckerRegistry = new RuleCheckerRegistry();
     $ruleChecker = new ItemCountRuleChecker();
-    $ruleCheckerRegistry->registerChecker(RuleInterface::TYPE_ITEM_COUNT, $ruleChecker);
+
+    $ruleCheckerRegistry = new ServiceRegistry(RuleCheckerInterface::class);
+    $ruleCheckerRegistry->register(RuleInterface::TYPE_ITEM_COUNT, $ruleChecker);
 
     $methodEligibilityChecker = new shippingMethodEligibilityChecker($ruleCheckerRegistry);
 
@@ -74,45 +76,12 @@ This class checks if shipping method rules are capable of shipping given subject
     // and shipping method has default category requirement
     $methodEligibilityChecker->isCategoryEligible($shipment, $shippingMethod);
 
+.. caution::
+    The method ``->register()`` throws `InvalidArgumentException`_.
+
 .. note::
     This model implements the :ref:`component_shipping_checker_shipping-method-eligibility-checker-interface`. |br|
     For more detailed information go to `Sylius API ShippingMethodEligibilityChecker`_.
 
 .. _Sylius API ShippingMethodEligibilityChecker: http://api.sylius.org/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityChecker.html
-
-RuleCheckerRegistry
--------------------
-
-This service keeps all rule checkers registered inside container. Allows to retrieve them by type.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\RuleInterface;
-    use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry;
-    use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
-
-    $ruleCheckerRegistry = new RuleCheckerRegistry();
-    $ruleChecker = new ItemCountRuleChecker();
-    $ruleCheckerRegistry->registerChecker(RuleInterface::TYPE_ITEM_COUNT,$ruleChecker);
-    $ruleCheckerRegistry->hasChecker(RuleInterface::TYPE_ITEM_COUNT); // returns true
-    $ruleCheckerRegistry->unregisterChecker(RuleInterface::TYPE_ITEM_COUNT);
-    $ruleCheckerRegistry->hasChecker(RuleInterface::TYPE_ITEM_COUNT);// returns false
-
-.. caution::
-    The method ``->registerChecker()`` throws `ExistingRuleCheckerException`_ when checker of given type already exists.
-    The method ``->unregisterChecker()`` throws `NonExistingRuleCheckerException`_ when checker of given type does not exist.
-    All of above exceptions extends the `PHP InvalidArgumentException`_.
-
-.. note::
-    This model implements the :ref:`component_shipping_checker_registry_rule-checker-registry-interface`. |br|
-    For more detailed information go to `Sylius API RuleCheckerRegistry`_.
-
-.. _Sylius API RuleCheckerRegistry: http://api.sylius.org/Sylius/Component/Shipping/Checker/Registry/RuleCheckerRegistry.html
-
-.. _NonExistingRuleCheckerException: http://api.sylius.org/Sylius/Component/Shipping/Checker/Registry/NonExistingRuleCheckerException.html
-
-.. _ExistingRuleCheckerException: http://api.sylius.org/Sylius/Component/Shipping/Checker/Registry/ExistingRuleCheckerException.html
-
-.. _PHP InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
+.. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
