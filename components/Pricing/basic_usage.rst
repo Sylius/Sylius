@@ -1,7 +1,7 @@
 Basic Usage
 ===========
 
-In all examples is used an exemplary class implementing **PriceableInterface**, which looks like:
+In all examples we use an exemplary class implementing **PriceableInterface**, which looks like this:
 
 .. code-block:: php
 
@@ -29,42 +29,48 @@ In all examples is used an exemplary class implementing **PriceableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getPrice(){
+        public function getPrice()
+        {
             return $this->price;
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setPrice($price){
+        public function setPrice($price)
+        {
             $this->price = $price;
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getPricingCalculator(){
+        public function getPricingCalculator()
+        {
            return $this->calculator;
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setPricingCalculator($calculator){
+        public function setPricingCalculator($calculator)
+        {
             $this->calculator = $calculator;
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getPricingConfiguration(){
+        public function getPricingConfiguration()
+        {
             return $this->configuration;
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setPricingConfiguration(array $configuration){
+        public function setPricingConfiguration(array $configuration)
+        {
             $this->configuration = $configuration;
         }
     }
