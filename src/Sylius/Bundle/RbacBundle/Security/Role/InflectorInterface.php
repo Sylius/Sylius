@@ -23,11 +23,4 @@ interface InflectorInterface
      * @return string
      */
     public function toRbacRole($name);
-
-    /**
-     * Get configured prefix.
-     *
-     * @return string
-     */
-    public function getPrefix();
 }

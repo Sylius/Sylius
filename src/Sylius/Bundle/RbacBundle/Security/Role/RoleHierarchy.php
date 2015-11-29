@@ -12,12 +12,14 @@
 namespace Sylius\Bundle\RbacBundle\Security\Role;
 
 use Symfony\Component\Security\Core\Role\RoleHierarchy as BaseRoleHierarchy;
+use Symfony\Component\Security\Core\Role\Role;
 use Sylius\Bundle\RbacBundle\Security\Role\Provider\HierarchyProviderInterface;
+use Sylius\Bundle\RbacBundle\Security\Role\InflectorInterface;
 
 /**
  * @author Christian Daguerre <christian@daguer.re>
  */
-class RoleHierarchy extends BaseRoleHierarchy
+class RoleHierarchy extends BaseRoleHierarchy implements RoleHierarchyInterface
 {
     /**
      * @var array
@@ -25,25 +27,38 @@ class RoleHierarchy extends BaseRoleHierarchy
     protected $map;
 
     /**
+     * @var InflectorInterface
+     */
+    protected $inflector;
+
+    /**
      * Constructor.
      *
      * @param HierarchyProviderInterface $provider
      */
-    public function __construct(HierarchyProviderInterface $provider)
+    public function __construct(HierarchyProviderInterface $provider, InflectorInterface $inflector)
     {
         $this->map = $provider->getMap();
+        $this->inflector = $inflector;
     }
 
     /**
-     * Checker the given attribute (role or permission) exists
-     * in the map.
-     *
-     * @param string $attribute Role or permission code.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function attributeExists($attribute)
     {
         return array_key_exists($attribute, $this->map);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReachableRoles(array $roles)
+    {
+        foreach ($roles as $key => $role) {
+            $roles[$key] = new Role($this->inflector->toSecurityRole($role->getRole()));
+        }
+
+        return parent::getReachableRoles($roles);
     }
 }

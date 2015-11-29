@@ -44,12 +44,4 @@ class Inflector implements InflectorInterface
 
         return str_replace('_', '.', strtolower($name));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrefix()
-    {
-        return $this->prefix;
-    }
 }

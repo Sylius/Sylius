@@ -11,15 +11,17 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSecurityVotersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Sylius\Bundle\RbacBundle\Security\Role\Inflector;
 
 /**
  * @author Christian Daguer.re <christian@daguer.re>
  */
-class VoterConfigurationPass implements CompilerPassInterface
+class VoterConfigurationPass extends AddSecurityVotersPass
 {
     /**
      * @var string
@@ -53,7 +55,13 @@ class VoterConfigurationPass implements CompilerPassInterface
 
         // Set resolved role prefix and build SecurityBundle style role hierarchy
         $container->setParameter('sylius.rbac.role_prefix', $this->rolePrefix);
-        $container->setParameter('sylius.rbac.role_hierarchy', $this->buildRoleHierarchy($container));
+        $container->setParameter('sylius.rbac.role_hierarchy.roles', $this->buildRoleHierarchy($container));
+
+        // Provide symfony role hierarchy service (used in web profiler)
+        $container->setAlias('security.role_hierarchy', 'sylius.rbac.role_hierarchy');
+
+        // Make sure voters are registered by order of priority
+        parent::process($container);
     }
 
     /**

@@ -46,7 +46,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('hierarchy_provider')->defaultValue('sylius.rbac.hierarchy_provider.fallback')->end()
+                ->scalarNode('hierarchy_provider')->defaultValue('sylius.rbac.hierarchy_provider.cached')->end()
             ->end()
         ;
 

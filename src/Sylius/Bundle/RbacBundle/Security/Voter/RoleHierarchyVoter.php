@@ -11,12 +11,7 @@
 namespace Sylius\Bundle\RbacBundle\Security\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter as BaseRoleHierarchyVoter;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Role\Role;
-use Sylius\Bundle\RbacBundle\Security\Role\RoleHierarchy;
-use Sylius\Bundle\RbacBundle\Security\Role\InflectorInterface;
-use Sylius\Component\Rbac\Model\IdentityInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Bundle\RbacBundle\Security\Role\RoleHierarchyInterface;
 
 /**
  * Bridges Sylius RBAC roles to Symfony's RoleHierarchyVoter.
@@ -26,27 +21,21 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 class RoleHierarchyVoter extends BaseRoleHierarchyVoter
 {
     /**
-     * @var RoleHierarchy
+     * @var RoleHierarchyInterface
      */
     protected $roleHierarchy;
 
     /**
-     * @var InflectorInterface
-     */
-    protected $inflector;
-
-    /**
      * Constructor.
      *
-     * @param RoleHierarchy      $roleHierarchy
-     * @param InflectorInterface $inflector
+     * @param RoleHierarchyInterface $roleHierarchy
+     * @param string                 $prefix
      */
-    public function __construct(RoleHierarchy $roleHierarchy, InflectorInterface $inflector)
+    public function __construct(RoleHierarchyInterface $roleHierarchy, $prefix)
     {
         $this->roleHierarchy = $roleHierarchy;
-        $this->inflector = $inflector;
 
-        parent::__construct($roleHierarchy, $inflector->getPrefix());
+        parent::__construct($roleHierarchy, $prefix);
     }
 
     /**
@@ -55,24 +44,5 @@ class RoleHierarchyVoter extends BaseRoleHierarchyVoter
     public function supportsAttribute($attribute)
     {
         return $this->roleHierarchy->attributeExists($attribute);
-    }
-
-    /**
-     * @param TokenInterface $token
-     *
-     * @return Role[]
-     */
-    protected function extractRoles(TokenInterface $token)
-    {
-        $identity = $token->getUser();
-        $roles = $token->getRoles();
-
-        if ($identity instanceof IdentityInterface) {
-            foreach ($identity->getAuthorizationRoles() as $role) {
-                $roles[] = new Role($this->inflector->toSecurityRole($role));
-            }
-        }
-
-        return $this->roleHierarchy->getReachableRoles($roles);
     }
 }

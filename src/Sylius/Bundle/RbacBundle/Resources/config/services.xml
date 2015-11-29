@@ -33,30 +33,31 @@
             <argument>%sylius.rbac.role_prefix%</argument>
         </service>
         <service id="sylius.rbac.hierarchy_provider.config" class="%sylius.rbac.hierarchy_provider.config.class%">
-            <argument>%sylius.rbac.role_hierarchy%</argument>
+            <argument>%sylius.rbac.role_hierarchy.roles%</argument>
         </service>
         <service id="sylius.rbac.hierarchy_provider.repository" class="%sylius.rbac.hierarchy_provider.repository.class%">
             <argument type="service" id="sylius.repository.role" />
             <argument type="service" id="sylius.repository.permission" />
             <argument type="service" id="sylius.rbac.role_inflector" />
         </service>
-        <service id="sylius.rbac.hierarchy_provider.cached" class="%sylius.rbac.hierarchy_provider.cached.class%">
-            <argument type="service" id="sylius.rbac.hierarchy_provider.repository" />
-            <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
-        </service>
         <service id="sylius.rbac.hierarchy_provider.fallback" class="%sylius.rbac.hierarchy_provider.fallback.class%">
-            <argument type="service" id="sylius.rbac.hierarchy_provider.cached" />
+            <argument type="service" id="sylius.rbac.hierarchy_provider.repository" />
             <argument type="service" id="sylius.rbac.hierarchy_provider.config" />
+        </service>
+        <service id="sylius.rbac.hierarchy_provider.cached" class="%sylius.rbac.hierarchy_provider.cached.class%">
+            <argument type="service" id="sylius.rbac.hierarchy_provider.fallback" />
+            <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
         </service>
 
         <service id="sylius.rbac.role_hierarchy" class="%sylius.rbac.role_hierarchy.class%">
             <argument type="service" id="sylius.rbac.hierarchy_provider" />
+            <argument type="service" id="sylius.rbac.role_inflector" />
         </service>
 
         <service id="sylius.rbac.role_hierarchy_voter" class="%sylius.rbac.role_hierarchy_voter.class%">
             <argument type="service" id="sylius.rbac.role_hierarchy" />
-            <argument type="service" id="sylius.rbac.role_inflector" />
-            <tag name="security.voter" />
+            <argument>%sylius.rbac.role_prefix%</argument>
+            <tag name="security.voter" priority="245"/>
         </service>
 
         <!--
