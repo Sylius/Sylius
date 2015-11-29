@@ -11,36 +11,26 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Default provider cart.
+ * Default cart provider.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartProvider implements CartProviderInterface
 {
     /**
-     * Cart context.
-     *
      * @var CartContextInterface
      */
-    protected $context;
-
-    /**
-     * Cart manager.
-     *
-     * @var ObjectManager
-     */
-    protected $manager;
+    protected $cartContext;
 
     /**
      * @var FactoryInterface
@@ -48,41 +38,31 @@ class CartProvider implements CartProviderInterface
     protected $cartFactory;
 
     /**
-     * Cart repository.
-     *
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $cartRepository;
 
     /**
-     * Event dispatcher.
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
     /**
-     * Cart.
-     *
-     * @var CartInterface
-     */
-    protected $cart;
-
-    /**
-     * Constructor.
-     *
-     * @param CartContextInterface     $context
-     * @param ObjectManager            $manager
-     * @param FactoryInterface $cartFactory
-     * @param RepositoryInterface      $repository
+     * @param CartContextInterface     $cartContext
+     * @param FactoryInterface         $cartFactory
+     * @param RepositoryInterface      $cartRepository
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(CartContextInterface $context, ObjectManager $manager, FactoryInterface $cartFactory, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(
+        CartContextInterface $cartContext,
+        FactoryInterface $cartFactory,
+        RepositoryInterface $cartRepository,
+        EventDispatcherInterface $eventDispatcher
+    )
     {
-        $this->context = $context;
-        $this->manager = $manager;
+        $this->cartContext = $cartContext;
         $this->cartFactory = $cartFactory;
-        $this->repository = $repository;
+        $this->cartRepository = $cartRepository;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -91,9 +71,7 @@ class CartProvider implements CartProviderInterface
      */
     public function hasCart()
     {
-        $this->initializeCart();
-
-        return null !== $this->cart;
+        return (bool) $this->cartContext->getCurrentCartIdentifier();
     }
 
     /**
@@ -101,16 +79,14 @@ class CartProvider implements CartProviderInterface
      */
     public function getCart()
     {
-        $this->initializeCart();
+        $cart = $this->provideCart();
 
-        if (null !== $this->cart) {
-            return $this->cart;
-        }
+        $this->eventDispatcher->dispatch(
+            SyliusCartEvents::CART_INITIALIZE,
+            new GenericEvent($cart)
+        );
 
-        $this->cart = $this->cartFactory->createNew();
-        $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, new CartEvent($this->cart));
-
-        return $this->cart;
+        return $cart;
     }
 
     /**
@@ -118,8 +94,7 @@ class CartProvider implements CartProviderInterface
      */
     public function setCart(CartInterface $cart)
     {
-        $this->cart = $cart;
-        $this->context->setCurrentCartIdentifier($cart);
+        $this->cartContext->setCurrentCartIdentifier($cart);
     }
 
     /**
@@ -127,36 +102,36 @@ class CartProvider implements CartProviderInterface
      */
     public function abandonCart()
     {
-        if (null !== $this->cart) {
-            $this->eventDispatcher->dispatch(SyliusCartEvents::CART_ABANDON, new CartEvent($this->cart));
-        }
+        $cart = $this->provideCart();
 
-        $this->cart = null;
-        $this->context->resetCurrentCartIdentifier();
-    }
+        $this->eventDispatcher->dispatch(
+            SyliusCartEvents::CART_ABANDON,
+            new GenericEvent($cart)
+        );
 
-    /**
-     * Gets cart by cart identifier.
-     *
-     * @param mixed $identifier
-     *
-     * @return CartInterface|null
-     */
-    protected function getCartByIdentifier($identifier)
-    {
-        return $this->repository->find($identifier);
+        $this->cartContext->resetCurrentCartIdentifier();
     }
 
     /**
      * Tries to initialize cart if there is data in storage.
+     * If not, returns new instance from resourceFactory
+     *
+     * @return CartInterface
      */
-    private function initializeCart()
+    private function provideCart()
     {
-        if (null === $this->cart) {
-            $cartIdentifier = $this->context->getCurrentCartIdentifier();
-            if ($cartIdentifier) {
-                $this->cart = $this->getCartByIdentifier($cartIdentifier);
+        $cartIdentifier = $this->cartContext->getCurrentCartIdentifier();
+        if ($cartIdentifier !== null) {
+            $cart = $this->cartRepository->find($cartIdentifier);
+
+            if ($cart !== null ) {
+                return $cart;
             }
         }
+
+        $cart = $this->cartFactory->createNew();
+        $this->cartContext->setCurrentCartIdentifier($cart);
+
+        return $cart;
     }
 }
