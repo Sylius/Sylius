@@ -108,7 +108,7 @@ class RepositoryHierarchyProvider implements HierarchyProviderInterface
      */
     private function addRole(RoleInterface $role)
     {
-        $name = $this->inflector->toSecurityRole($role);
+        $name = $this->inflector->toSecurityRole($role->getCode());
 
         if (isset($this->map[$name])) {
             return;
