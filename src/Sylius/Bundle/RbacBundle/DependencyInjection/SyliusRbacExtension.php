@@ -48,7 +48,6 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
 
         $container->setParameter('sylius.rbac.default_roles', $config['roles']);
         $container->setParameter('sylius.rbac.default_permissions', $config['permissions']);
-        $container->setParameter('sylius.rbac.default_permissions_hierarchy', $config['permissions_hierarchy']);
     }
 
     /**

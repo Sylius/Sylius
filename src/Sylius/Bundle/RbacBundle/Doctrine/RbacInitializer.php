@@ -24,7 +24,6 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 class RbacInitializer
 {
     private $permissions;
-    private $permissionsHierarchy;
     private $permissionManager;
     private $permissionFactory;
     private $permissionRepository;
@@ -40,7 +39,6 @@ class RbacInitializer
 
     public function __construct(
         array $permissions,
-        array $permissionsHierarchy,
         $permissionManager,
         FactoryInterface $permissionFactory,
         RepositoryInterface $permissionRepository,
@@ -50,7 +48,6 @@ class RbacInitializer
         RepositoryInterface $roleRepository
     ) {
         $this->permissions = $permissions;
-        $this->permissionsHierarchy = $permissionsHierarchy;
         $this->permissionFactory = $permissionFactory;
         $this->permissionManager = $permissionManager;
         $this->permissionRepository = $permissionRepository;
@@ -86,25 +83,39 @@ class RbacInitializer
 
         $this->permissionsByCode['root'] = $root;
 
-        foreach ($this->permissions as $code => $description) {
+        foreach ($this->permissions as $code => $details) {
             if (null === $permission = $this->permissionRepository->findOneBy(['code' => $code])) {
                 $permission = $this->permissionFactory->createNew();
                 $permission->setCode($code);
-                $permission->setDescription($description);
+                $permission->setDescription($details['description']);
                 $permission->setParent($root);
 
                 $this->permissionManager->persist($permission);
 
                 if ($output) {
-                    $output->writeln(sprintf('Adding permission "<comment>%s</comment>". (<info>%s</info>)', $description, $code));
+                    $output->writeln(sprintf(
+                        'Adding permission "<comment>%s</comment>". (<info>%s</info>)',
+                        $details['description'],
+                        $code
+                    ));
                 }
             }
 
             $this->permissionsByCode[$code] = $permission;
         }
 
-        foreach ($this->permissionsHierarchy as $code => $children) {
-            foreach ($children as $childCode) {
+        foreach ($this->permissions as $code => $permission) {
+            if (!isset($permission['child_permissions'])) {
+                continue;
+            }
+            foreach ($permission['child_permissions'] as $childCode) {
+                if (!isset($this->permissionsByCode[$childCode])) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The permission "%s" set as child permission of "%s" does not exist in the RBAC hierarchy.',
+                        $childCode,
+                        $code
+                    ));
+                }
                 $this->permissionsByCode[$code]->addChild($this->permissionsByCode[$childCode]);
             }
         }
@@ -139,7 +150,11 @@ class RbacInitializer
                 $role->setDescription($data['description']);
                 $role->setParent($root);
                 if ($output) {
-                    $output->writeln(sprintf('Adding role "<comment>%s</comment>". (<info>%s</info>)', $data['name'], $code));
+                    $output->writeln(sprintf(
+                        'Adding role "<comment>%s</comment>". (<info>%s</info>)',
+                        $data['name'],
+                        $code
+                    ));
                 }
             }
 
@@ -147,7 +162,8 @@ class RbacInitializer
                 if (!$role->hasPermission($this->permissionsByCode[$permission])) {
                     $role->addPermission($this->permissionsByCode[$permission]);
                     if ($output) {
-                        $output->writeln(sprintf('Adding role:permission <info>%s</info>:<comment>%s</comment>',
+                        $output->writeln(sprintf(
+                            'Adding role:permission <info>%s</info>:<comment>%s</comment>',
                             $role->getCode(),
                             $permission
                         ));

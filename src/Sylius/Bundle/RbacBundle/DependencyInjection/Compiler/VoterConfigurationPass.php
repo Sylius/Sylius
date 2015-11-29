@@ -70,10 +70,9 @@ class VoterConfigurationPass implements CompilerPassInterface
 
         $roles = $container->getParameter('sylius.rbac.default_roles');
         $permissions = $container->getParameter('sylius.rbac.default_permissions');
-        $permissionsHierarchy = $container->getParameter('sylius.rbac.default_permissions_hierarchy');
 
-        foreach (array_keys($permissions) as $permission) {
-            $this->addPermission($map, $permissionsHierarchy, $permission);
+        foreach (array_keys($permissions) as $code) {
+            $this->addPermission($map, $permissions, $code);
         }
 
         foreach (array_keys($roles) as $code) {
@@ -85,12 +84,12 @@ class VoterConfigurationPass implements CompilerPassInterface
 
     /**
      * @param array  &$map
-     * @param array  $hierarchy
+     * @param array  $permissions
      * @param string $code
      *
      * @return array
      */
-    private function addPermission(array &$map, array $hierarchy, $code)
+    private function addPermission(array &$map, array $permissions, $code)
     {
         if (isset($map[$code])) {
             return $map[$code];
@@ -98,9 +97,16 @@ class VoterConfigurationPass implements CompilerPassInterface
 
         $map[$code] = array();
 
-        if (isset($hierarchy[$code])) {
-            foreach ($hierarchy[$code] as $childCode) {
-                $this->addPermission($map, $hierarchy, $childCode);
+        if (isset($permissions[$code]['child_permissions'])) {
+            foreach ($permissions[$code]['child_permissions'] as $childCode) {
+                if (!isset($permissions[$childCode])) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The "%s" permission set as child permission of "%s" is not defined.',
+                        $childCode,
+                        $code
+                    ));
+                }
+                $this->addPermission($map, $permissions, $childCode);
                 $map[$code] = array_merge($map[$code], array($childCode), $map[$childCode]);
             }
         }
@@ -110,12 +116,12 @@ class VoterConfigurationPass implements CompilerPassInterface
 
     /**
      * @param array  &$map
-     * @param array  $rolesConfig
+     * @param array  $roles
      * @param string $code
      *
      * @return array
      */
-    private function addRole(array &$map, array $rolesConfig, $code)
+    private function addRole(array &$map, array $roles, $code)
     {
         $formattedCode = $this->inflector->toSecurityRole($code);
 
@@ -125,15 +131,29 @@ class VoterConfigurationPass implements CompilerPassInterface
 
         $map[$formattedCode] = array();
 
-        if (isset($rolesConfig[$code]['permissions'])) {
-            foreach ($rolesConfig[$code]['permissions'] as $permission) {
-                $map[$formattedCode] = array_merge($map[$formattedCode], array($permission), $map[$permission]);
+        if (isset($roles[$code]['permissions'])) {
+            foreach ($roles[$code]['permissions'] as $permissionCode) {
+                if (!isset($map[$permissionCode])) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The "%s" permission set on the "%s" role is not defined.',
+                        $permissionCode,
+                        $code
+                    ));
+                }
+                $map[$formattedCode] = array_merge($map[$formattedCode], array($permissionCode), $map[$permissionCode]);
             }
         }
 
-        if (isset($rolesConfig[$code]['child_roles'])) {
-            foreach ($rolesConfig[$code]['child_roles'] as $childCode) {
-                $this->addRole($map, $rolesConfig, $childCode);
+        if (isset($roles[$code]['child_roles'])) {
+            foreach ($roles[$code]['child_roles'] as $childCode) {
+                if (!isset($roles[$childCode])) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The "%s" role set as child role of "%s" is not defined.',
+                        $childCode,
+                        $code
+                    ));
+                }
+                $this->addRole($map, $roles, $childCode);
                 $formattedChildCode = $this->inflector->toSecurityRole($childCode);
                 $map[$formattedCode] = array_merge($map[$formattedCode], array($childCode), $map[$formattedChildCode]);
             }

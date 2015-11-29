@@ -68,7 +68,6 @@
 
         <service id="sylius.rbac.initializer" class="%sylius.rbac.initializer.class%">
             <argument>%sylius.rbac.default_permissions%</argument>
-            <argument>%sylius.rbac.default_permissions_hierarchy%</argument>
             <argument type="service" id="sylius.manager.permission" />
             <argument type="service" id="sylius.factory.permission" />
             <argument type="service" id="sylius.repository.permission" />
