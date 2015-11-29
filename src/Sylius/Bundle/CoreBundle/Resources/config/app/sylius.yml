@@ -465,6 +465,18 @@ sylius_rbac:
         sylius.promotion_coupon.update: Edit coupon
         sylius.promotion_coupon.delete: Delete coupon
 
+        sylius.promotion_rule.show: Show promotion rule
+        sylius.promotion_rule.index: List promotion rules
+        sylius.promotion_rule.create: Create new promotion rule
+        sylius.promotion_rule.update: Edit promotion rule
+        sylius.promotion_rule.delete: Delete promotion rule
+
+        sylius.promotion_action.show: Show promotion action
+        sylius.promotion_action.index: List promotion actions
+        sylius.promotion_action.create: Create new promotion action
+        sylius.promotion_action.update: Edit promotion action
+        sylius.promotion_action.delete: Delete promotion action
+
         sylius.locale.show: Show locale
         sylius.locale.index: List locales
         sylius.locale.create: Create locale
@@ -686,8 +698,14 @@ sylius_rbac:
             description: Manage promotions
             child_permissions: [sylius.promotion.show, sylius.promotion.index, sylius.promotion.create, sylius.promotion.update, sylius.promotion.delete]
         sylius.manage.promotion_coupon:
-            description: Manage promotion_coupons
+            description: Manage promotion coupons
             child_permissions: [sylius.promotion_coupon.show, sylius.promotion_coupon.index, sylius.promotion_coupon.create, sylius.promotion_coupon.update, sylius.promotion_coupon.delete]
+        sylius.manage.promotion_rule:
+            description: Manage promotion rules
+            child_permissions: [sylius.promotion_rule.show, sylius.promotion_rule.index, sylius.promotion_rule.create, sylius.promotion_rule.update, sylius.promotion_rule.delete]
+        sylius.manage.promotion_action:
+            description: Manage promotion actions
+            child_permissions: [sylius.promotion_action.show, sylius.promotion_action.index, sylius.promotion_action.create, sylius.promotion_action.update, sylius.promotion_action.delete]
         sylius.manage.locale:
             description: Manage locales
             child_permissions: [sylius.locale.show, sylius.locale.index, sylius.locale.create, sylius.locale.update, sylius.locale.delete]
@@ -778,7 +796,7 @@ sylius_rbac:
             child_permissions: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report]
         sylius.marketing:
             description: Manage marketing
-            child_permissions: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
+            child_permissions: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.promotion_rule, sylius.manage.promotion_action, sylius.manage.email]
         sylius.shipping:
             description: Manage shipping
             child_permissions: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
