@@ -83,7 +83,7 @@
         "ocramius/proxy-manager": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4@rc",
+        "phpspec/phpspec": "^2.4",
         "behat/behat": "~3.0",
         "behat/symfony2-extension": "~2.0",
         "behat/mink-extension": "~2.0",
