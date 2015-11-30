@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -48,22 +49,30 @@ class CartProvider implements CartProviderInterface
     protected $eventDispatcher;
 
     /**
+     * @var ObjectManager
+     */
+    protected $cartManager;
+
+    /**
      * @param CartContextInterface     $cartContext
      * @param FactoryInterface         $cartFactory
      * @param RepositoryInterface      $cartRepository
      * @param EventDispatcherInterface $eventDispatcher
+     * @param ObjectManager            $cartManager
      */
     public function __construct(
         CartContextInterface $cartContext,
         FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ObjectManager $cartManager
     )
     {
         $this->cartContext = $cartContext;
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
         $this->eventDispatcher = $eventDispatcher;
+        $this->cartManager = $cartManager;
     }
 
     /**
@@ -80,11 +89,6 @@ class CartProvider implements CartProviderInterface
     public function getCart()
     {
         $cart = $this->provideCart();
-
-        $this->eventDispatcher->dispatch(
-            SyliusCartEvents::CART_INITIALIZE,
-            new GenericEvent($cart)
-        );
 
         return $cart;
     }
@@ -130,6 +134,15 @@ class CartProvider implements CartProviderInterface
         }
 
         $cart = $this->cartFactory->createNew();
+
+        $event = new GenericEvent($cart);
+        $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, $event);
+
+        $cart = $event->getSubject();
+
+        $this->cartManager->persist($cart);
+        $this->cartManager->flush();
+
         $this->cartContext->setCurrentCartIdentifier($cart);
 
         return $cart;

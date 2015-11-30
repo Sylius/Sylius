@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Provider;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Provider\CartProvider;
@@ -32,9 +33,16 @@ class CartProviderSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ObjectManager $cartManager
     ) {
-        $this->beConstructedWith($cartContext, $cartFactory, $cartRepository, $eventDispatcher);
+        $this->beConstructedWith(
+            $cartContext,
+            $cartFactory,
+            $cartRepository,
+            $eventDispatcher,
+            $cartManager
+        );
     }
 
     function it_is_initializable()
@@ -57,8 +65,8 @@ class CartProviderSpec extends ObjectBehavior
         $cartRepository->find(3)->willReturn($cart);
         $eventDispatcher->dispatch(
             SyliusCartEvents::CART_INITIALIZE,
-            Argument::type(GenericEvent::class)
-        )->shouldBeCalled();
+            Argument::any()
+        )->shouldNotBeCalled();
 
         $cartContext->setCurrentCartIdentifier($cart)->shouldNotBeCalled();
 
@@ -70,7 +78,8 @@ class CartProviderSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher,
-        CartInterface $cart
+        CartInterface $cart,
+        ObjectManager $cartManager
     ) {
         $cartContext->getCurrentCartIdentifier()->willReturn(null);
         $cartFactory->createNew()->willReturn($cart);
@@ -80,6 +89,9 @@ class CartProviderSpec extends ObjectBehavior
             SyliusCartEvents::CART_INITIALIZE,
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
+
+        $cartManager->persist($cart)->shouldBeCalled();
+        $cartManager->flush()->shouldBeCalled();
 
         $cartContext->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
