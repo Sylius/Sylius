@@ -43,8 +43,6 @@ class RepositoryHierarchyProvider implements HierarchyProviderInterface
     protected $map;
 
     /**
-     * Constructor.
-     *
      * @param RoleRepositoryInterface       $roleRepository
      * @param PermissionRepositoryInterface $permissionRepository
      * @param InflectorInterface            $inflector
@@ -77,22 +75,20 @@ class RepositoryHierarchyProvider implements HierarchyProviderInterface
         $permissions = $this->permissionRepository->findAll();
 
         foreach ($this->sort($permissions) as $permission) {
-            $this->addPermission($permission);
+            $this->addPermissionToMap($permission);
         }
 
         foreach ($this->sort($roles) as $role) {
-            $this->addRole($role);
+            $this->addRoleToMap($role);
         }
 
         return $this->map;
     }
 
     /**
-     * Add permission to map.
-     *
      * @param PermissionInterface $permission
      */
-    private function addPermission(PermissionInterface $permission)
+    private function addPermissionToMap(PermissionInterface $permission)
     {
         $this->map[$permission->getCode()] = array();
 
@@ -102,11 +98,9 @@ class RepositoryHierarchyProvider implements HierarchyProviderInterface
     }
 
     /**
-     * Add role to map.
-     *
      * @param RoleInterface $role
      */
-    private function addRole(RoleInterface $role)
+    private function addRoleToMap(RoleInterface $role)
     {
         $name = $this->inflector->toSecurityRole($role->getCode());
 

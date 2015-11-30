@@ -28,7 +28,7 @@ class CachedHierarchyProvider implements HierarchyProviderInterface
     /**
      * @var HierarchyProviderInterface
      */
-    protected $provider;
+    protected $hierarchyProvider;
 
     /**
      * @var int
@@ -36,15 +36,13 @@ class CachedHierarchyProvider implements HierarchyProviderInterface
     protected $ttl;
 
     /**
-     * Constructor.
-     *
-     * @param HierarchyProviderInterface $provider
+     * @param HierarchyProviderInterface $hierarchyProvider
      * @param Cache                      $cache
      * @param int                        $ttl
      */
-    public function __construct(HierarchyProviderInterface $provider, Cache $cache, $ttl = self::TTL)
+    public function __construct(HierarchyProviderInterface $hierarchyProvider, Cache $cache, $ttl = self::TTL)
     {
-        $this->provider = $provider;
+        $this->hierarchyProvider = $hierarchyProvider;
         $this->cache = $cache;
         $this->ttl = $ttl;
     }
@@ -58,7 +56,7 @@ class CachedHierarchyProvider implements HierarchyProviderInterface
             return $this->cache->fetch($this->getCacheKey());
         }
 
-        $map = $this->provider->getMap();
+        $map = $this->hierarchyProvider->getMap();
         $this->cache->save($this->getCacheKey(), $map, $this->ttl);
 
         return $map;

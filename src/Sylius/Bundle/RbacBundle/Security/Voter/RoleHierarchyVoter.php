@@ -26,8 +26,6 @@ class RoleHierarchyVoter extends BaseRoleHierarchyVoter
     protected $roleHierarchy;
 
     /**
-     * Constructor.
-     *
      * @param RoleHierarchyInterface $roleHierarchy
      * @param string                 $prefix
      */

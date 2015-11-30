@@ -19,23 +19,23 @@ class FallbackHierarchyProvider implements HierarchyProviderInterface
     /**
      * @var HierarchyProviderInterface
      */
-    protected $default;
+    protected $defaultHierarchyProvider;
 
     /**
      * @var HierarchyProviderInterface
      */
-    protected $fallback;
+    protected $fallbackHierarchyProvider;
 
     /**
-     * Constructor.
-     *
-     * @param HierarchyProviderInterface $default
-     * @param HierarchyProviderInterface $fallback
+     * @param HierarchyProviderInterface $defaultHierarchyProvider
+     * @param HierarchyProviderInterface $fallbackHierarchyProvider
      */
-    public function __construct(HierarchyProviderInterface $default, HierarchyProviderInterface $fallback)
-    {
-        $this->default = $default;
-        $this->fallback = $fallback;
+    public function __construct(
+        HierarchyProviderInterface $defaultHierarchyProvider,
+        HierarchyProviderInterface $fallbackHierarchyProvider
+    ) {
+        $this->defaultHierarchyProvider = $defaultHierarchyProvider;
+        $this->fallbackHierarchyProvider = $fallbackHierarchyProvider;
     }
 
     /**
@@ -44,9 +44,9 @@ class FallbackHierarchyProvider implements HierarchyProviderInterface
     public function getMap()
     {
         try {
-            return $this->default->getMap();
+            return $this->defaultHierarchyProvider->getMap();
         } catch (\Exception $e) {
-            return $this->fallback->getMap();
+            return $this->fallbackHierarchyProvider->getMap();
         }
     }
 }

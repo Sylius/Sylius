@@ -12,8 +12,6 @@ class Inflector implements InflectorInterface
     protected $prefix;
 
     /**
-     * Constructor.
-     *
      * @param string $prefix
      */
     public function __construct($prefix = self::DEFAULT_PREFIX)

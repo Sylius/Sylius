@@ -22,8 +22,6 @@ class ArrayHierarchyProvider implements HierarchyProviderInterface
     protected $map;
 
     /**
-     * Constructor.
-     *
      * @param array $map
      */
     public function __construct(array $map)

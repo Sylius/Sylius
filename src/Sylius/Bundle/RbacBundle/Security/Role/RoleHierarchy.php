@@ -32,13 +32,12 @@ class RoleHierarchy extends BaseRoleHierarchy implements RoleHierarchyInterface
     protected $inflector;
 
     /**
-     * Constructor.
-     *
-     * @param HierarchyProviderInterface $provider
+     * @param HierarchyProviderInterface $hierarchyProvider
+     * @param InflectorInterface         $inflector
      */
-    public function __construct(HierarchyProviderInterface $provider, InflectorInterface $inflector)
+    public function __construct(HierarchyProviderInterface $hierarchyProvider, InflectorInterface $inflector)
     {
-        $this->map = $provider->getMap();
+        $this->map = $hierarchyProvider->getMap();
         $this->inflector = $inflector;
     }
 
