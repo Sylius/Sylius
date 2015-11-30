@@ -4,7 +4,20 @@
 sylius:
   emails:
     order_confirmation:
+      name: Bestelling bevestiging
       subject: Bedankt voor uw bestelling!
+
+    order_comment:
+      name: Bestelling opmerking
+      subject: Nieuwe opmerking geplaatst op bestelling #{{ order.number }}
+
+    shipment_confirmation:
+      name: Verzending bevestiging
+      subject: Uw bestelling is verzonden!
+
+    user_confirmation:
+      name: Gebruikersbevestiging
+      subject: Welkom in onze winkel!
   account:
     address:
       action:
@@ -19,12 +32,16 @@ sylius:
         no_billing: Geen standaard factuuradres
         no_shipping: Geen standaard verzendadres
         shipping: Standaard verzendadres
+      empty: U heeft geen adressen ingesteld.
       list: Al uw adressen
       update: Bewerk mijn adres
     home:
+      email: E-mail :
+      id: Klant ID :
       outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
       since: U bent klant sinds
       welcome: Welkom in uw account
+      last5orders: Uw laatste 5 bestellingen
     order:
       created_at: Geplaatst op
       details: Details van uw bestelling
@@ -32,12 +49,16 @@ sylius:
       empty: U heeft nog geen bestelling geplaatst.
       invoice: Factuur
       list: Uw bestellingen
+      number: Nummer :
+      payment_mode: Betaalmodus :
       placed_at: 'Geplaatst op %at%'
       shipment:
         pending: In behandeling
         ready: 'Gereed sinds %at%'
         returned: 'Geretourneerd op %at%'
         shipped: 'Verzonden op %at%'
+      shipment_mode: Verzendmodus :
+      state: Status :
       total: Totaal
       tracking_number: Tracking code
     title: Mijn account
@@ -71,7 +92,9 @@ sylius:
       add_product: Nieuw product
       orders: Laatste bestellingen
       products: Uw producten
+      customers: Klanten
     statistics:
+      header: Statistieken van deze maand
       orders_this_month: Aantal bestellingen
       registrations_this_month: Aantal registraties
       sales_this_month: Omzet
@@ -79,39 +102,96 @@ sylius:
   block:
     index_header: Blokken
     no_results: Er zijn geen blokken om weer te geven.
+    simple_blocks: Simpele blokken
+    string_blocks: Tekstblokken
+    imagine_blocks: Imagine blockken
+    slideshow_blocks: Slideshow blokken
     imagine:
+      create: Nieuw imagine blok
+      create_header: Aanmaken nieuw imagine blok
+      end_date: Einddatum
       id: Id
+      index: Imagine blokken
+      index_header: Imagine blokken
       label: Label
+      publishable: Gepubliceerd
+      start_date: Startdatum
       title: Titel
+      update_header: Imagine block bewerken
       updated_at: Laatst bijgewerkt
     simple:
       body: Inhoud
+      create: Nieuw simpel blok
+      create_header: Aanmaken nieuw simpel blok
+      end_date: Einddatum
       id: Id
+      index: Simpele blokken
+      index_header: Simpele blkken
       label: Label
+      publishable: Gepubliceerd
+      start_date: Startdatum
       title: Titel
+      update_header: Simple block bewerken
       updated_at: Laatst bijgewerkt
     slideshow:
       body: Inhoud
+      create: Nieuw slideshow blok
+      create_header: Aanmaken nieuw slideshow blok
+      end_date: Einddatum
       id: Id
+      index: Slideshow blokken
+      index_header: Slideshow blokken
+      publishable: Gepubliceerd
+      start_date: Startdatum
       title: Titel
+      update_header: Bewerken slideshow blok
       updated_at: Laatst bijgewerkt
     string:
       body: Inhoud
+      create: Nieuw tekstblok
+      create_header: Aanmaken nieuw tekstblok
+      end_date: Einddatum
       id: Id
+      index: Tekstblokken
+      index_header: Tekstblokken
       label: Label
+      publishable: Gepubliceerd
+      start_date: Startdatum
       title: Titel
+      update_header: Bewerken tekstblok
       updated_at: Laatst bijgewerkt
   breadcrumb:
     assortment: Assortiment
     block:
-      index: Blokken
+      imagine:
+          index: Imagine blokken
+      index:
+          Blokken
+      simple:
+          index: Simpele blokken
+      slideshow:
+          index: Slideshow blokken
+      string:
+          index: Tekstblokken
     build: Bouwen
     configuration: Configuratie
     content: Inhoud
     country:
       index: Landen
+    section:
+        customer: Klant
+    customer:
+        index: Klanten
     dashboard: Dashboard
     edit: Bewerken
+    contact_request:
+        index: Contactaanvragen
+        show: Contactaanvragen
+    contact_topic:
+        index: Contactonderwerpen
+    content: Inhoud
+    currency:
+        index: Valuta
     general_settings: Algemene instellingen
     generate: Genereren
     group:
@@ -120,6 +200,9 @@ sylius:
       index: Locaties
     locale:
       index: Locaties
+    marketing: Marketing
+    menu:
+      index: "Menu's"
     menu_node:
       index: Menu items
     new: Nieuw
@@ -127,6 +210,7 @@ sylius:
       index: Opties
     order:
       index: Bestellingen
+      adjustments: Aanpassingen
     page:
       index: "Pagina's"
     payment:
@@ -139,15 +223,25 @@ sylius:
       index: Promoties
     promotion_coupon:
       index: Coupons
+    attribute:
+        index: Attributen
+    archetype:
+        index: Sjablonen
+    redirect_route:
+        index: Redirect routes
+    report:
+        index: Rapporten
     route:
       index: Routes
     sales: Omzet
+    security_settings: Veiligheidsinstellingen
     shipment:
       index: Verzendingen
     shipping_category:
       index: Verzendcategorieën
     shipping_method:
       index: Verzendmethodes
+    support: Ondersteuning
     tax_category:
       index: Belasting Tarieven
     tax_rate:
@@ -155,7 +249,13 @@ sylius:
     taxation_settings: Belasting Instellingen
     taxonomy:
       index: Taxonomieën
+    email:
+      index: E-mails
+    channel:
+      index: Kanalen
     update: Bewerken
+    permission:
+      index: Permissies
     role:
       index: Rollen
     zone:
@@ -180,6 +280,8 @@ sylius:
     addressing:
       header: Adresgegevens
     back: Terug
+    credit_card:
+      header: Betalingdetails
     finalize:
       address:
         city: Stad
@@ -197,6 +299,8 @@ sylius:
         no_promotion: Geen promotie toegepast
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belasting toegepast
+        payment_charges: Betalingskosten
+        payment_total: Totaal betaling
         promotion_discount: Korting
         promotion_total: Korting totaal
         shipping_address: Bezorgadres
@@ -221,6 +325,8 @@ sylius:
       login: Inloggen
       new_customer: Nieuwe klant
       register: Registreren
+      guest: Nieuwe bezoeker
+      proceed_order: Verdergaan met de bestelling
     shipping:
       error: Het spijt ons, maar wij zijn niet in staat om producten te verzenden naar het door u gekozen land.
       header: Verzendmethode
@@ -239,34 +345,57 @@ sylius:
     no_results: Er zijn geen landen geconfigureerd
     show_header: Land details
     update_header: Land bewerken
-    enabled: Toegestaan
+    enabled: Geactiveerd
   email:
+    create: Nieuwe e-mail toevoegen
+    create_header: Nieuwe e-mail toevoegen
+    index_header: Email sjablonen
+    manage: Beheer e-mails
+    no_results: Er zijn geen e-mails ingesteld.
+    update_header: E-mail bewerken
     code: Code
     enabled: Actief?
+    subject: Onderwerp
     updated_at: Laatst bijgewerkt
   create: Creëer
   created_at: verwijder
   delete: verwijder
   deleted: Verwijderd
   edit: Bewerken
+  move_up: hoger
+  move_down: omlaag
   permission:
+    create: Nieuwe permissie toevoegen
+    create_header: Nieuwe permissie
     code: Code
     id: ID
     description: Omschrijving
+    index_header: Permissies
+    no_results: Er zijn geen permissies gedefinieerd.
+    update_header: Permissie bewerken
     updated_at: Laatst bijgewerkt
   role:
+    create: Nieuwe rol toevoegen
+    create_header: Nieuwe rol
     code: Code
     id: ID
     name: Naam
     description: Omschrijving
     index_header: Rollen
+    no_results: Er zijn geen rollen gedefinieerd.
+    update_header: Editing role
     updated_at: Laatst bijgewerkt
   currency:
+    create: Valuta aanmaken
+    create_header: Nieuwe valuta
     code: Code
     id: ID
     name: Naam
-    enabled: Toegestaan
+    enabled: Geactiveerd
+    index_header: Valuta
+    no_results: Er zijn geen valuta om weer te geven.
     exchange_rate: Wisselkoers
+    update_header: Valuta bewerken
     updated_at: Laatst bijgewerkt
   filter: Filter
   form:
@@ -284,19 +413,26 @@ sylius:
     login:
       email: E-mail
       password: Wachtwoord
+    menu:
+        add_menu_node: Voeg menu item toe
     option_value:
       add_value: Voeg waarde toe
     profile:
       email: E-mail
       firstName: Voornaam
       lastName: Achternaam
+    comment:
+      comment: Comment
+      notify_customer: Notify Customer?
   gallery:
     next: Volgende
     previous: Vorige
     slideshow: Slideshow
   generate: Genereer
+  go_to_dashboard: Ga naar dashboard
   group:
     create: Nieuwe groep
+    create_header: Nieuwe groep toevoegen
     id: ID
     index_header: Groepen
     name: Naam
@@ -305,9 +441,14 @@ sylius:
     update_header: Bewerk groep
   hide_deleted: Verberg verwijderd
   history:
+    header: Geschiedenis
     action: Actie
     author: Auteur
     data: Gegevens
+    logged_at: Gelogd op (versie)
+    revert: Herstellen
+    no_results: Er zijn geen gelogde events om weer te geven.
+    empty: Leeg
   homepage:
     splash:
       headline: Welkom bij Sylius
@@ -336,34 +477,59 @@ sylius:
   logo: Sylius
   manage: Beheer
   menu:
+    create: Menu aanmaken
+    create_header: Menu aanmaken
+    end_date: Einddatum
     id: ID
+    index_header: "Menu's"
+    no_results: "Er zijn geen menu's om weer te geven."
+    publishable: Gepubliceerd
+    start_date: Startdatum
     title: Titel
+    update_header: Menu bewerken
   menu_node:
+    create: Menu item aanmaken
+    create_header: Menu item aanmaken
     id: ID
     index_header: Menu items
-    parent: Ouder
+    no_results: Er zijn geen menu items om weer te geven.
+    parent: Parent
     title: Titel
+    update_header: Menu item bewerken
   meta:
+    backend_title: Sylius Dashboard
     frontend_description: Sylius is een moderne ecommerce oplossing voor PHP, gebaseerd op het Symfony2 framework.
     frontend_keywords: Sylius, ecommerce, symfony2, winkel, webwinkel, winkelwagen
     frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
   na: N/B
   newest: Nieuwste producten
-  "no": false
+  no: false
+  no_results: Geen resultaten
   product_option:
+    create: Optie aanmaken
+    create_header: Nieuw productoptie
+    index_header: Productopties
     manage: Productopties
     name: Naam
+    no_results: Er zij geen opties geconfigureerd.
+    presentation: presentatie
+    update_header: Optie bewerken
     updated_at: laatst bijgewerkt
+    values: Waarden
   order:
     billing_address: Factuuradres
     create: Nieuwe bestelling
     create_header: Nieuwe bestelling toevoegen
     created_at: Aanmaakdatum
+    details: Bestellingsdetails
     general_info: Algemene informatie
+    guest: Bezoeker
     id: ID
     index_header: Huidige bestellingen
     inventory_tracking: Voorraadbeheer
     items_total: Artikelen Totaal
+    items: Artikelen
+    channel: Kanaal
     manage: Bestellingen beheren
     no_items: Deze bestelling heeft geen artikelen
     no_results: U heeft geen nieuwe bestellingen
@@ -371,6 +537,7 @@ sylius:
     no_shipping_charges: Geen verzendkosten
     no_taxes: Geen belastingen
     number: Nummer
+    order_state: Bestellingstatus
     payment: Betaling
     payment_state: Betaalstatus
     payment_states:
@@ -389,29 +556,66 @@ sylius:
     shipping_address: Bezorgadres
     shipping_charges: Verzendkosten
     shipping_total: Verzendkosten totaal
-    state: Status
+    show_header: "Bestelling #%number%"
+    state:
+      cart_locked: Winkelmand vergrendeld
+      checkout: Checkout
+      order_confimed: Bestelling bevestigd
+      ordered: Besteld
+      shipped: Verzonden
+      abandoned: Verlaten
+      cancelled: Geanulleerd
+      returned: Geretourneerd
     tax_total: Belasting totaal
     taxes: Belastingen
     total: Totaal
     update_header: Bestelling bewerken
+    customer: Klant
     currency: Valuta
+    state: Status
+    immutable_warning: Verzonden bestellingen zijn niet meer aanpasbaar.
     promotion_coupons: Coupons
+    no_promotion: Er werden geen coupons gebruikt.order:
     adjustments:
-      label: Label
+      manage: Aanpassingen beheren
+      type: Type
       description: Omschrijving
       amount: Hoeveelheid
+      locked: Vergrendeld?
+      lock: Vergrendel
+      unlock: Ontgrendelen
+      lock_all: Vergrendel alle aanpassingen
+      unlock_all: Ontgrendel alle aanpassingen
     comment:
+      header: Bestelling opmerkingen
+      comment: Opmerking
       author: Auteur
       created_at: verwijder
+      notify: Melding
       state: Status
+      customer:
+          notified: Klant verwittigd
+          not_notified: Klant niet verwittigd
+      no_comment: Geen opmerking
   route:
+    create: Route aanmaken
+    create_header: Route aanmaken
     id: ID
     index_header: Routes
     name: Naam
+    no_results: Er zijn geen routes om weer te geven.
+    page: Pagina
     title: Titel
+    update_header: Route bewerken
+    view: Weergeven
   redirect_route:
+    create: Redirect route aanmaken
+    create_header: Redirect route aanmaken
     id: ID
+    index_header: Redirect route
+    no_results: Er zijn geen redirect routes om weer te geven.
     title: Titel
+    update_header: Redirect route bewerken
   shipment:
     ship: Verzend
     created_at: Aangemaakt op
@@ -433,12 +637,19 @@ sylius:
     update_header: Verzending bewerken
     updated_at: Laatst bijgewerkt
   channel:
-    created_at: verwijder
+    create: Kanaal aanmaken
+    created_at: Aangemaakt op
     code: Code
-    enabled: Toegestaan
+    enabled: Geactiveerd
     id: ID
+    index_header: Kanalen
+    manage: Kanalen beheren
+    create_header: Kanaal toevoegen
     name: Naam
+    url: Url
+    no_results: Er zijn geen kanalen configureerd.
     update: Bewerken
+    update_header: Kanaal bewerken
     updated_at: Laatst bijgewerkt
   order_item:
     product: Artikel
@@ -450,10 +661,17 @@ sylius:
   page:
     body: Inhoud
     create: Nieuwe pagina
+    create_header: Nieuwe pagina aanmaken
     id: ID
     index_header: "Pagina's"
+    no_results: "Er zijn geen pagina's om weer te geven."
+    no_route: Uw pagina zal niet verschijnen als er geen route is gedefinieerd
+    publishable: Gepubliceerd
+    start_date: Startdatum
+    end_date: Einddatum
     routes: Routes
     title: Titel
+    update_header: Pagina bewerken
   password: Wachtwoord
   payment:
     order: Bestelling
@@ -492,12 +710,14 @@ sylius:
     update_header: Betaalmethode bewerken
     updated_at: Laatst bijgewerkt
   product:
+    add_attribute: Attribuut toevoegen
     available_on: Beschikbaar op
     available_on_demand: Beschikbaar op aanvraag
     categorization: Categorisering
     contain_variants: Bevat Varianten
     create: Nieuw product
     create_header: Nieuw product toevoegen
+    archetype: Karakter
     description: Omschrijving
     generate_variants: Genereer varianten
     index_by_taxon_header: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
@@ -507,16 +727,22 @@ sylius:
     no_description: '<i>Geen omschrijving...</i>'
     no_images: Er zijn geen afbeeldingen voor dit product
     no_options: Er zijn geen opties voor dit product
+    no_attributes: Er zijn geen attributen voor dit product
     no_results: Er zijn geen producten om weer te geven.
     no_shipping_category: Geen verzendcategorie
     no_short_description: '<i>Geen korte omschrijving</i>'
     no_sku: '<i>Geen SKU</i>'
     no_tax_category: Geen belasting categorie
     no_taxons: Er zijn geen taxons voor dit product
+    no_taxon: Er is geen hoofdtaxon voor dit product
     options: Opties
+    variants: Varianten
     price: Retail prijs
+    attributes: Attributen
     restricted_zone: Beperkte zone
+    remove_attribute: Verwijder attribuut
     shipping_category: Verzend categorie
+    main_taxon: Hoofd taxon
     show: Bekijk details
     show_header: 'Product details <small>"<strong>%product%</strong>"</small>'
     show_in_store: toon in winkel
@@ -527,6 +753,8 @@ sylius:
       images: Afbeeldingen
       options: Opties
       product: Product
+      attributes: Attributen
+      channels: Kanalen
       pricing: Prijsstelling
     tax_category: Belasting categorie
     unavailable: Onbeschikbaar
@@ -534,7 +762,10 @@ sylius:
     updated_at: Laatst bijgewerkt
     variant_selection_method: Variant selectiemethode
     view_details: 'Bekijk %product% details.'
+    volume_price: Volume gebaseerde prijsstelling
     volume_based:
+      qty_min: Aantal min
+      qty_max: Aantal max
       price: Prijs
   product_not_available_in_zone: Niet beschikbaar in uw land
   promotion:
@@ -560,6 +791,8 @@ sylius:
     updated_at: Bijgewerkt op
     usage_limit: Gebruikslimiet
     used: Gebruikt
+    priority: Prioriteit
+    exclusive: Exclusief
   promotion_action:
     configuration: Configuratie
     type: Type
@@ -572,38 +805,76 @@ sylius:
     index: Lijst van coupons
     index_header: Coupons
     no_results: Er zijn geen coupons om weer te geven.
-    total_results:
-      Total: '%total%'
+    total_results: Totaal: %total%
     update_header: Coupon bewerken
+    expires_at: Verloopt op
   promotion_rule:
     configuration: Configuratie
     type: Type
   product_attribute:
-    name: Naam
+    add_choice: Keuze toevoegen
+    create: Nieuw productattribuut
+    create_header: Nieuw productattribuut
+    index_header: Productattributen
+    manage: Attributen beheren
+    name: naam
+    no_results: Er zijn geen attributen geconfigureerd.
+    presentation: presentatie
+    type: type
+    update_header: Attribuut bewerken
     updated_at: laatst bijgewerkt
   archetype:
-    name: Naam
+    build: Karakter opbouwen
+    build_header: Maak product op basis van karakter
+    create: Karakter aanmaken
+    create_header: Nieuw karakter
+    index_header: Productkarakters
+    code: code
+    name: naam
+    no_results: Er zijn geen karakters gedefinieerd.
+    options: opties
+    attributes: attributen
+    parent: parent
+    update_header: Karakter bewerken
     updated_at: laatst bijgewerkt
   province:
     provinces: Provincies
   remember_me: Onthoud mij?
   report:
+    create: Nieuw rapport
+    create_header: Nieuw rapport aanmaken
+    no_results: Er zijn nog geen rapporten.
+    show_header: Rapportdetails
     details: Details
+    id: id
     name: Naam
     code: Code
     description: Omschrijving
     manage: Beheer
+    update_header: Rapport bewerken
+    renderer: Renderer type
+    data_fetcher: Data fetcher type
+    index_header: Rapporten
+    no_data: Er is geen data om weer te geven.
+    no_report: Er zijn geen rapporten om weer te geven.
+  restore: Herstellen
   save_changes: Aanpassingen opslaan
   search: Zoeken
   security:
     login:
+      header: Inloggen <small>Sylius store</small>
+      info: Login met <b>"sylius@example.com"</b> als email en <b>"sylius"</b> als password. <small>Mr. Sylius Demo Guide</small>
+      no_account: Nog geen account?
+      forgot_password: Wachtwoord vergeten?
       button: Inloggen
   settings:
     general_header: Algemene instellingen
+    security_header: Veiligheidsinstellingen
     taxation_header: Belasting instellingen
   shipment_category:
     manage: Beheer verzendcategorieën
   shipping_address: Bezorgadres
+  billing_address: Factuuradres
   shipping_category:
     create: Nieuwe verzendcategorie
     create_header: Nieuwe verzendcategorie toevoegen
@@ -692,12 +963,30 @@ sylius:
   unknown: Onbekend
   customer:
     billing_address: Factuuradres
+    create: klant aanmaken
+    create_header: Nieuwe klant
     email: E-mail
+    filter:
+        all: Toon alle klanten
+        registered: Toon geregistreerde klanten
+        unconfirmed: Toon onbevestigde accounts
+    general_info: Klant "%fullName%" algemene info
     first_name: Voornaam
     id: ID
+    index_header: Klanten <small>Lijst van alle klanten</small>
     last_name: Achternaam
+    manage: klanten beheren
+    no_results: Er zijn geen klanten om weer te geven.
+    order:
+        no_results: Er zijn geen bestellingen voor deze klant.
+    orders: Klantbestellingen
+    recent_header: Recente klanten
+    creation_date: Aanmaakdatum
     shipping_address: Bezorgadres
+    show_header: Klantdetails
+    update_header: Klant bewerken
     groups: Groepen
+    no_groups: Er zijn geen groepen voor deze klant.
   user:
     create: Nieuwe gebruiker
     create_header: Nieuwe gebruiker toevoegen
@@ -709,10 +998,16 @@ sylius:
     impersonate: Inloggen als gebruiker
     manage: Gebruikers beheren
     no_results: Er zijn geen gebruikers om weer te geven.
+    oauth:
+      provider: OAuth Provider
+      identifier: Identifier
+      access_token: Access Token
+      none: Geen OAuth accounts gekoppeld.
     recent_header: Recente gebruikers
     registration_date: Aanmelddatum
     register:
       button: Registreren
+      header: Registratie <small>Winkelaccount aanmaken</small>
     show_header: Gebruikersdetails
     update_header: Gebruiker bewerken
     username: Gebruikersnaam
@@ -746,14 +1041,32 @@ sylius:
   zone_member:
     members: Leden
   contact_topic:
+    create: Contactonderwerp aanmaken
+    create_header: Nieuw contactonderwerp
     id: ID
     title: Titel
+    index_header: Contactonderwerpen
+    no_results: Er zijn geen contactonderwerpen om weer te geven.
+    update_header: Contactonderwerp bewerken
     updated_at: Laatst bijgewerkt
   contact_request:
+    create: Contactaanvraag aanmaken
+    create_header: Nieuw contactaanvraag
     id: ID
     firstName: Voornaam
     lastName: Achternaam
     email: E-mail
     message: Bericht
     topic: Onderwerp
+    index_header: Contactaanvragen
+    no_results: Er zijn geen contactaanvragen om weer te geven.
+    update_header: Contactaanvraag bewerken
     updated_at: Laatst bijgewerkt
+    show_header: Contactaanvraag details
+  gender:
+      male: Man
+      female: Vrouw
+  enable: Activeer
+  disable: Deactiveer
+  ui:
+      links: Links
