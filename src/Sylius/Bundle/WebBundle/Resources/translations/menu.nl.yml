@@ -9,8 +9,11 @@ sylius:
         blocks: Blokken
         configuration: Configuratie
         countries: Landen
+        customer: Klant
         content: Inhoud
+        channels: Kanalen
         dashboard: Dashboard
+        currencies: Valuta
         general_settings: Algemene instellingen
         groups: Groepen
         homepage: Uw winkel
@@ -24,6 +27,8 @@ sylius:
         payments: Betalingen
         products: Producten
         promotions: Promoties
+        attributes: Attributen
+        archetypes: Product karakters
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
@@ -31,17 +36,25 @@ sylius:
         stockables: Voorraad
         tax_categories: BTW-groepen
         tax_rates: BTW-tarieven
-        taxation_settings: Belasting instellingen
+        taxation_settings: BTW instellingen
         taxonomies: Categorisering
+        customers: Klanten
         zones: Zones
+        emails: E-mails
         roles: Rollen
+        permissions: Permissies
+        report: Rapporten
       sidebar:
+        api_clients: API clients
         assortment: Assortiment
         blocks: Blokken
         configuration: Configuratie
         content: Inhoud
         countries: Landen
+        channels: Kanalen
+        customer: Klant
         dashboard: Dashboard
+        currencies: Valuta
         general_settings: Algemene instellingen
         groups: Groepen
         homepage: Terug naar de voorkant
@@ -52,22 +65,35 @@ sylius:
         orders: Huidige bestellingen
         pages: "Pagina's"
         routes: Routes
+        redirects: Redirects
+        menus: "Menu's"
         payment_methods: Betaalmethoden
         payments: Betalingen
         products: Producten
         promotions: Promoties
+        report: Rapporten
+        attributes: Attributen
+        archetypes: Product karakters
         sales: Bestellingen
+        security_settings: Veiligheid instellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
         shipping_methods: Verzendmethoden
         slideshow: Slideshow
         stockables: Voorraad
-        tax_categories: Belasting categorieën
-        tax_rates: Belastingtarieven
-        taxation_settings: Belasting instellingen
+        tax_categories: BTW categorieën
+        tax_rates: BTW-tarieven
+        taxation_settings: BTW instellingen
         taxonomies: Categorisering
+        customers: Klanten
         zones: Zones
+        emails: E-mails
         roles: Rollen
+        permissions: Permissies
+        marketing: Marketing
+        support: Ondersteuning
+        contact_requests: Aanvragen
+        contact_topics: Configureer onderwerpen
   frontend:
     menu:
       account:
@@ -85,6 +111,8 @@ sylius:
         login: Inloggen
         logout: Uitloggen
         register: Registreren
+      sidebar:
+        links: Links
       social:
         facebook: Facebook
         github: GitHub
