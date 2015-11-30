@@ -1,4 +1,0 @@
-#!/bin/bash
-bin/phpspec run -f dot
-
-bin/behat --strict -f progress -p cached

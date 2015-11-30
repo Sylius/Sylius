@@ -85,7 +85,6 @@
 
         <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.factory.cart" />
             <argument type="service" id="sylius.repository.cart" />
             <argument type="service" id="event_dispatcher" />
