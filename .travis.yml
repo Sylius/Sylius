@@ -29,11 +29,6 @@ matrix:
         - php: 5.5
           services: [memcached, mongodb]
 
-    fast_finish: true
-
-    allow_failures:
-        - php: 7.0
-
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
