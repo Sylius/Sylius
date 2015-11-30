@@ -29,12 +29,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CartProviderSpec extends ObjectBehavior
 {
     function let(
-        CartContextInterface $context,
+        CartContextInterface $cartContext,
         FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->beConstructedWith($context, $cartFactory, $cartRepository, $eventDispatcher);
+        $this->beConstructedWith($cartContext, $cartFactory, $cartRepository, $eventDispatcher);
     }
 
     function it_is_initializable()
@@ -48,32 +48,31 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_looks_for_cart_by_identifier_if_any_in_storage(
-        CartContextInterface $context,
+        CartContextInterface $cartContext,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher,
         CartInterface $cart
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(3);
+        $cartContext->getCurrentCartIdentifier()->willReturn(3);
         $cartRepository->find(3)->willReturn($cart);
         $eventDispatcher->dispatch(
             SyliusCartEvents::CART_INITIALIZE,
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
 
-        $context->setCurrentCartIdentifier($cart)->shouldNotBeCalled();
+        $cartContext->setCurrentCartIdentifier($cart)->shouldNotBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }
 
     function it_creates_new_cart_if_there_is_no_identifier_in_storage(
-        CartContextInterface $context,
+        CartContextInterface $cartContext,
+        FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher,
-        CartInterface $cart,
-        FactoryInterface $cartFactory,
         CartInterface $cart
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(null);
+        $cartContext->getCurrentCartIdentifier()->willReturn(null);
         $cartFactory->createNew()->willReturn($cart);
         $cartRepository->find()->shouldNotBeCalled();
 
@@ -82,24 +81,23 @@ class CartProviderSpec extends ObjectBehavior
             Argument::type(GenericEvent::class)
         )->shouldBeCalled();
 
-        $context->setCurrentCartIdentifier($cart)->shouldBeCalled();
+        $cartContext->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }
 
     function it_creates_new_cart_if_identifier_is_wrong(
-        CartContextInterface $context,
+        CartContextInterface $cartContext,
+        FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher,
-        CartInterface $cart,
-        FactoryInterface $cartFactory,
         CartInterface $cart
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(7);
+        $cartContext->getCurrentCartIdentifier()->willReturn(7);
         $cartRepository->find(7)->shouldBeCalled()->willReturn(null);
         $cartFactory->createNew()->willReturn($cart);
 
-        $context->setCurrentCartIdentifier($cart)->shouldBeCalled();
+        $cartContext->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $eventDispatcher->dispatch(
             SyliusCartEvents::CART_INITIALIZE,
@@ -110,15 +108,15 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_resets_current_cart_identifier_in_storage_when_abandoning_cart(
-        CartContextInterface $context,
-        EventDispatcherInterface $eventDispatcher,
+        CartContextInterface $cartContext,
         RepositoryInterface $cartRepository,
+        EventDispatcherInterface $eventDispatcher,
         CartInterface $cart
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(123);
+        $cartContext->getCurrentCartIdentifier()->willReturn(123);
         $cartRepository->find(123)->willReturn($cart);
 
-        $context->resetCurrentCartIdentifier()->shouldBeCalled();
+        $cartContext->resetCurrentCartIdentifier()->shouldBeCalled();
 
         $eventDispatcher->dispatch(
             SyliusCartEvents::CART_ABANDON,
@@ -129,27 +127,26 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_sets_current_cart_identifier_when_setting_cart(
-        CartContextInterface $context,
+        CartContextInterface $cartContext,
         CartInterface $cart
-    )
-    {
-        $context->setCurrentCartIdentifier($cart)->shouldBeCalled();
+    ) {
+        $cartContext->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $this->setCart($cart);
     }
 
     function it_initializes_cart_while_validating_existence_and_if_there_is_no_identifier_in_storage(
-        CartContextInterface $context
+        CartContextInterface $cartContext
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(null);
+        $cartContext->getCurrentCartIdentifier()->willReturn(null);
 
         $this->hasCart()->shouldReturn(false);
     }
 
     function it_initializes_cart_while_validating_existence_and_if_there_is_identifier_in_storage(
-        CartContextInterface $context
+        CartContextInterface $cartContext
     ) {
-        $context->getCurrentCartIdentifier()->willReturn(666);
+        $cartContext->getCurrentCartIdentifier()->willReturn(666);
 
         $this->hasCart()->shouldReturn(true);
     }
