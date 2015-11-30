@@ -82,10 +82,13 @@ class CartProvider implements CartProviderInterface
     {
         $cart = $this->provideCart();
 
+        $this->cartContext->setCurrentCartIdentifier($cart);
+
         $this->eventDispatcher->dispatch(
             SyliusCoreEvents::PRE_CART_CHANGE,
             new GenericEvent($cart)
         );
+
 
         return $cart;
     }
@@ -121,17 +124,27 @@ class CartProvider implements CartProviderInterface
      */
     private function provideCart()
     {
+        dump('im getting cart! ....');
+
         $cartIdentifier = $this->cartContext->getCurrentCartIdentifier();
         if ($cartIdentifier !== null) {
             $cart = $this->cartRepository->find($cartIdentifier);
 
             if ($cart !== null ) {
+
+                dump('... from repository it has... ' . count($cart->getItems()) . '... items');
+
+                $this->setCart($cart);
+
                 return $cart;
             }
         }
 
+        dump('...new one');
+
         $cart = $this->cartFactory->createNew();
-        $this->cartContext->setCurrentCartIdentifier($cart);
+        $this->setCart($cart);
+//        $this->cartContext->setCurrentCartIdentifier($cart);
 
         return $cart;
     }

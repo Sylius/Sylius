@@ -119,6 +119,7 @@ class CartSubscriber implements EventSubscriberInterface
         $valid  = 0 === count($errors);
 
         if ($valid) {
+
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
 
