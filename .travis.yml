@@ -32,6 +32,8 @@ matrix:
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
+    - composer self-update
+
     - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then travis/prepare/prepare-php7-memcached; fi
     - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then travis/prepare/prepare-mongodb; fi
 
@@ -41,19 +43,19 @@ before_install:
     - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-    - composer self-update
     - composer install --no-interaction --prefer-dist --no-scripts
     - composer run-script travis-build --no-interaction
 
 before_script:
     - app/console doctrine:database:create --env=test_cached
-    - app/console doctrine:schema:create --env=test_cached
-    - app/console doctrine:phpcr:repository:init --env=test_cached
 
     - app/console cache:warmup --env=test_cached --no-debug
 
-    - app/console assetic:dump --env=test_cached --no-debug &
-    - app/console assets:install --env=test_cached --no-debug &
+    - app/console doctrine:schema:create --env=test_cached
+    - app/console doctrine:phpcr:repository:init --env=test_cached
+
+    - app/console assets:install --env=test_cached --no-debug
+    - app/console assetic:dump --env=test_cached --no-debug
 
     - php -v
     - php -i
