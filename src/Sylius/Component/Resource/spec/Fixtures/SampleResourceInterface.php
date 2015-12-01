@@ -27,4 +27,9 @@ interface SampleResourceInterface extends ResourceInterface
      * @return int
      */
     public function getRating();
+
+    /**
+     * @return string
+     */
+    public function getTitle();
 }

@@ -45,7 +45,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     public function add(ResourceInterface $resource)
     {
         $this->dm->persist($resource);
-
         $this->dm->flush();
     }
 
@@ -56,7 +55,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     {
         if (null !== $this->find($resource->getId())) {
             $this->dm->remove($resource);
-
             $this->dm->flush();
         }
     }
