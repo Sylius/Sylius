@@ -93,17 +93,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function its_total_should_accept_only_integer()
-    {
-        $this->setTotal(4498);
-        $this->getTotal()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
-    }
-
     function it_throws_exception_when_quantity_is_less_than_1()
     {
         $this
@@ -140,12 +129,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
-    }
-
-    function its_total_is_mutable()
-    {
-        $this->setTotal(5999);
-        $this->getTotal()->shouldReturn(5999);
     }
 
     function it_calculates_correct_total_based_on_quantity_and_unit_price()

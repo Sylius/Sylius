@@ -28,7 +28,5 @@ class RefreshCartListener
                 'RefreshCartListener requires event subject to be instance of "Sylius\Component\Cart\Model\CartInterface"'
             );
         }
-
-        $cart->calculateTotal();
     }
 }

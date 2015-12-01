@@ -404,6 +404,8 @@ class Order implements OrderInterface
      */
     public function getTotal()
     {
+        $this->calculateTotal();
+
         return $this->total;
     }
 

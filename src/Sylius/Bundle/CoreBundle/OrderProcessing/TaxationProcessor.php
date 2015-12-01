@@ -116,8 +116,6 @@ class TaxationProcessor implements TaxationProcessorInterface
         $taxes = $this->processTaxes($order, $zone);
 
         $this->addAdjustments($taxes, $order);
-
-        $order->calculateTotal();
     }
 
     protected function processTaxes(OrderInterface $order, $zone)
@@ -130,8 +128,6 @@ class TaxationProcessor implements TaxationProcessorInterface
             if (null === $rate) {
                 continue;
             }
-
-            $item->calculateTotal();
 
             $amount = $this->calculator->calculate($item->getTotal(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();

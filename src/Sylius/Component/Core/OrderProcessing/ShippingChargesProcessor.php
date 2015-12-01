@@ -67,7 +67,5 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
 
             $order->addAdjustment($adjustment);
         }
-
-        $order->calculateTotal();
     }
 }
