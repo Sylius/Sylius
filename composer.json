@@ -80,7 +80,8 @@
         "white-october/pagerfanta-bundle": "~1.0",
         "willdurand/hateoas-bundle": "~0.4",
         "winzou/state-machine-bundle": "~0.2",
-        "ocramius/proxy-manager": "^1.0"
+        "ocramius/proxy-manager": "^1.0",
+        "symfony/proxy-manager-bridge": "^2.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
