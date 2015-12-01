@@ -105,7 +105,6 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     public function add(ResourceInterface $resource)
     {
         $this->_em->persist($resource);
-
         $this->_em->flush();
     }
 
@@ -116,7 +115,6 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     {
         if (null !== $this->find($resource->getId())) {
             $this->_em->remove($resource);
-
             $this->_em->flush();
         }
     }

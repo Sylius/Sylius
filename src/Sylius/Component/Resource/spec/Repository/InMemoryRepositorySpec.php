@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use spec\Sylius\Component\Resource\Fixtures\SampleResourceInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\InMemoryRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -65,6 +66,12 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->findOneBy(array('id' => 2))->shouldReturn($monocle);
     }
 
+    function it_throws_existing_resource_exception_on_adding_a_resource_which_is_already_in_repository(SampleResourceInterface $bike)
+    {
+        $this->add($bike);
+        $this->shouldThrow(ExistingResourceException::class)->during('add', array($bike));
+    }
+
     function it_removes_a_resource(SampleResourceInterface $shirt)
     {
         $shirt->getId()->willReturn(5);
@@ -80,16 +87,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->shouldThrow(UnsupportedMethodException::class)->during('find', array());
     }
 
-    function it_finds_many_objects_with_parameter(SampleResourceInterface $book)
-    {
-        $book->getName()->willReturn('Book');
-
-        $this->add($book);
-
-        $this->findBy(array('name' => 'Book'))->shouldReturn(array($book));
-    }
-
-    function it_returns_all_objects_when_finding_by_an_empty_array_parameter(
+    function it_returns_all_objects_when_finding_by_an_empty_parameter_array(
         SampleResourceInterface $book,
         SampleResourceInterface $shirt
     ) {
@@ -105,10 +103,13 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->findBy(array())->shouldReturn(array($book, $shirt));
     }
 
-    function it_finds_many_objects_by_multiple_criteria_order_limit_offset(
+    function it_finds_many_objects_by_multiple_criteria_orders_a_limit_and_an_offset(
         SampleResourceInterface $firstBook,
         SampleResourceInterface $secondBook,
-        SampleResourceInterface $thirdBook
+        SampleResourceInterface $thirdBook,
+        SampleResourceInterface $fourthBook,
+        SampleResourceInterface $wrongIdBook,
+        SampleResourceInterface $wrongNameBook
     ) {
         $id = 80;
         $name = 'Book';
@@ -116,25 +117,46 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $firstBook->getId()->willReturn($id);
         $secondBook->getId()->willReturn($id);
         $thirdBook->getId()->willReturn($id);
+        $fourthBook->getId()->willReturn($id);
+        $wrongNameBook->getId()->willReturn($id);
+        $wrongIdBook->getId()->willReturn(100);
 
         $firstBook->getName()->willReturn($name);
         $secondBook->getName()->willReturn($name);
         $thirdBook->getName()->willReturn($name);
+        $fourthBook->getName()->willReturn($name);
+        $wrongIdBook->getName()->willReturn($name);
+        $wrongNameBook->getName()->willReturn('Tome');
 
         $firstBook->getRating()->willReturn(3);
         $secondBook->getRating()->willReturn(2);
-        $thirdBook->getRating()->willReturn(1);
+        $thirdBook->getRating()->willReturn(2);
+        $fourthBook->getRating()->willReturn(4);
+
+        $firstBook->getTitle()->willReturn('World War Z');
+        $secondBook->getTitle()->willReturn('World War Z');
+        $thirdBook->getTitle()->willReturn('Call of Cthulhu');
+        $fourthBook->getTitle()->willReturn('Art of War');
 
         $this->add($firstBook);
         $this->add($secondBook);
         $this->add($thirdBook);
+        $this->add($fourthBook);
+        $this->add($wrongIdBook);
+        $this->add($wrongNameBook);
 
         $this->findBy(
-            $criteria = array('name' => $name, 'id' => $id),
-            $orderBy = array('rating' => RepositoryInterface::ORDER_ASCENDING),
+            $criteria = array(
+                'name' => $name,
+                'id'   => $id,
+            ),
+            $orderBy = array(
+                'rating' => RepositoryInterface::ORDER_ASCENDING,
+                'title'  => RepositoryInterface::ORDER_DESCENDING,
+            ),
             $limit = 2,
             $offset = 1
-        )->shouldReturn(array($secondBook, $firstBook));
+        )->shouldReturn(array($secondBook, $thirdBook));
     }
 
     function it_throws_invalid_argument_exception_when_finding_one_object_with_empty_parameter_array()
@@ -159,7 +181,6 @@ class InMemoryRepositorySpec extends ObjectBehavior
     ) {
         $book->getName()->willReturn('Book');
         $secondBook->getName()->willReturn('Book');
-
 
         $this->add($book);
         $this->add($secondBook);

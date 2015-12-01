@@ -17,6 +17,7 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
@@ -64,7 +65,7 @@ class InMemoryRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
+     * @throws ExistingResourceException
      * @throws UnexpectedTypeException
      */
     public function add(ResourceInterface $resource)
@@ -74,9 +75,7 @@ class InMemoryRepository implements RepositoryInterface
         }
 
         if (in_array($resource, $this->findAll())) {
-            throw new \InvalidArgumentException(
-                sprintf('Given object is already in the repository.')
-            );
+            throw new ExistingResourceException();
         }
 
         $this->arrayObject->append($resource);
@@ -87,7 +86,7 @@ class InMemoryRepository implements RepositoryInterface
      */
     public function remove(ResourceInterface $resource)
     {
-        $newResources = array_filter($this->findAll(), function($object) use ($resource) {
+        $newResources = array_filter($this->findAll(), function ($object) use ($resource) {
             return $object !== $resource;
         });
 
@@ -139,7 +138,7 @@ class InMemoryRepository implements RepositoryInterface
      */
     public function findOneBy(array $criteria)
     {
-        if (empty($criteria)){
+        if (empty($criteria)) {
             throw new \InvalidArgumentException('The criteria array needs to be set.');
         }
 
@@ -209,25 +208,27 @@ class InMemoryRepository implements RepositoryInterface
      */
     private function applyOrder(array $resources, array $orderBy)
     {
-        $property = key($orderBy);
-        $order = $orderBy[$property];
+        $results = $resources;
 
-        $sortable = array();
-        $results = array();
+        foreach ($orderBy as $property => $order) {
+            $sortable = array();
 
-        foreach ($resources as $key => $object) {
-            $sortable[$key] = $this->accessor->getValue($object, $property);
-        }
+            foreach ($results as $key => $object) {
+                $sortable[$key] = $this->accessor->getValue($object, $property);
+            }
 
-        if (RepositoryInterface::ORDER_ASCENDING === $order) {
-            asort($sortable);
-        }
-        if (RepositoryInterface::ORDER_DESCENDING === $order) {
-            arsort($sortable);
-        }
+            if (RepositoryInterface::ORDER_ASCENDING === $order) {
+                asort($sortable);
+            }
+            if (RepositoryInterface::ORDER_DESCENDING === $order) {
+                arsort($sortable);
+            }
 
-        foreach ($sortable as $key => $object) {
-            $results[$key] = $resources[$key];
+            $results = array();
+
+            foreach ($sortable as $key => $propertyValue) {
+                $results[$key] = $resources[$key];
+            }
         }
 
         return $results;

@@ -9,23 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Resource\Exception;
+namespace spec\Sylius\Component\Resource\Repository\Exception;
 
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class UnsupportedMethodExceptionSpec extends ObjectBehavior
+class ExistingResourceExceptionSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith('methodName');
-    }
-
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Exception\UnsupportedMethodException');
+        $this->shouldHaveType('Sylius\Component\Resource\Repository\Exception\ExistingResourceException');
     }
 
     function it_extends_exception()
@@ -35,6 +30,6 @@ class UnsupportedMethodExceptionSpec extends ObjectBehavior
 
     function it_has_a_message()
     {
-        $this->getMessage()->shouldReturn('The method "methodName" is not supported.');
+        $this->getMessage()->shouldReturn('Given resource already exists in the repository.');
     }
 }

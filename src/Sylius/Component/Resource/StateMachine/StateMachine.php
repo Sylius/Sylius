@@ -21,7 +21,7 @@ use SM\StateMachine\StateMachine as BaseStateMachine;
 class StateMachine extends BaseStateMachine implements StateMachineInterface
 {
     /**
-     * @{inheritDoc}
+     * {@inheritdoc}
      */
     public function getTransitionFromState($fromState)
     {
@@ -36,7 +36,7 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritdoc}
      */
     public function getTransitionToState($toState)
     {

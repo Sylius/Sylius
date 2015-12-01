@@ -3,7 +3,6 @@
 namespace spec\Sylius\Component\Resource\Event;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
 class ResourceEventSpec extends ObjectBehavior
