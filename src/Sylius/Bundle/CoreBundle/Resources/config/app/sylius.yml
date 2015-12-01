@@ -99,23 +99,25 @@ sylius_product:
 
 
 sylius_archetype:
-    subject: Sylius\Component\Core\Model\Product
-    attribute: Sylius\Component\Product\Model\Attribute
-    option: Sylius\Component\Product\Model\Option
     resources:
-        archetype:
-            classes:
-                model: Sylius\Component\Product\Model\Archetype
+        product:
+            archetype:
+                classes:
+                    model: Sylius\Component\Product\Model\Archetype
                 translation:
-                    model: Sylius\Component\Product\Model\ArchetypeTranslation
+                    classes:
+                        model: Sylius\Component\Product\Model\ArchetypeTranslation
+            subject: Sylius\Component\Core\Model\Product
+            attribute: Sylius\Component\Product\Model\Attribute
+            option: Sylius\Component\Product\Model\Option
 
 sylius_attribute: ~
 
 sylius_variation:
     resources:
         product:
-            classes:
-                variant:
+            variant:
+                classes:
                     model: Sylius\Component\Core\Model\ProductVariant
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
                     form:
@@ -726,7 +728,7 @@ sylius_rbac:
         shipping_manager:
             name: Shipping Manager
             description: Shipping Department people
-            permissions: [sylius.shipping]
+            permissions: [sylius.shipp/ing]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         content_editor:
             name: Content Editor

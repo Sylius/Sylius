@@ -32,12 +32,12 @@ class SyliusAttributeExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
 
-        foreach ($config['classes'] as $name => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+        foreach ($config['resources'] as $resource => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$resource);
             $formDefinition->addArgument($parameters['subject']);
 
             if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$resource.'_translation');
                 $formTranslationDefinition->addArgument($parameters['subject']);
             }
         }
@@ -51,38 +51,23 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $subjects = array();
         $convertedConfig = array();
 
-        foreach ($config['classes'] as $subject => $parameters) {
-            $subjects[$subject] = $parameters;
+        foreach ($config['resources'] as $resource => $parameters) {
+            $subjects[$resource] = $parameters;
             unset($parameters['subject']);
 
-            foreach ($parameters as $resource => $classes) {
-                $convertedConfig[$subject.'_'.$resource] = $classes;
-                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
-            }
+            foreach ($parameters as $parameter => $classes) {
+                $convertedConfig[$resource.'_'.$parameter] = $classes;
+                $convertedConfig[$resource.'_'.$parameter]['subject'] = $resource;
 
-            if (!isset($config['validation_groups'][$subject]['attribute'])) {
-                $config['validation_groups'][$subject]['attribute'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['attribute_translation'])) {
-                $config['validation_groups'][$subject]['attribute_translation'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['attribute_value'])) {
-                $config['validation_groups'][$subject]['attribute_value'] = array('sylius');
+                if (!isset($classes['validation_groups'])) {
+                    $classes['validation_groups']['default'] = array('sylius');
+                }
             }
         }
 
         $container->setParameter('sylius.attribute.subjects', $subjects);
 
-        $config['classes'] = $convertedConfig;
-        $convertedConfig = array();
-
-        foreach ($config['validation_groups'] as $subject => $parameters) {
-            foreach ($parameters as $resource => $validationGroups) {
-                $convertedConfig[$subject.'_'.$resource] = $validationGroups;
-            }
-        }
-
-        $config['validation_groups'] = $convertedConfig;
+        $config['resources'] = $convertedConfig;
 
         return parent::process($config, $container);
     }

@@ -162,7 +162,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Adjustment::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('inerface')->defaultValue(AdjustmentInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(AdjustmentInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(AdjustmentController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

@@ -61,19 +61,18 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
             foreach ($parameters as $parameter => $classes) {
                 $convertedConfig[$resource.'_'.$parameter] = $classes;
                 $convertedConfig[$resource.'_'.$parameter]['subject'] = $resource;
+
+                if (!isset($classes['validation_groups'])) {
+                    $classes['validation_groups']['default'] = array('sylius');
+                }
             }
 
             $this->createSubjectServices($container, $resource);
-
-            if (!isset($parameters['validation_groups'])) {
-                $parameters['validation_groups']['default'] = array('sylius');
-            }
         }
 
         $container->setParameter('sylius.archetype.subjects', $subjects);
 
         $config['resources'] = $convertedConfig;
-
 
         return parent::process($config, $container);
     }

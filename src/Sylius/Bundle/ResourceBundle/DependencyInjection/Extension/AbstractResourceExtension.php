@@ -115,29 +115,39 @@ abstract class AbstractResourceExtension extends AbstractExtension
     protected function mapClassParameters(array $resources, ContainerBuilder $container)
     {
         foreach ($resources as $resource => $parameters) {
-            if (isset($parameters['form'])) {
-                foreach ($parameters['form'] as $formType => $formClass) {
-                    $container->setParameter(
-                        sprintf(
-                            '%s.form.type.%s%s.class',
-                            $this->applicationName,
-                            $resource,
-                            $formType === self::DEFAULT_KEY ? '' : sprintf('_%s', $formType)
-                        ),
-                        $formClass
-                    );
+            foreach ($parameters as $parameter => $classes) {
+                foreach ($classes as $service => $class) {
+                    if ('classes' === $classes) {
+                        if ('form' === $class) {
+                            if (!is_array($classes)) {
+                                $classes = array(self::DEFAULT_KEY => $classes);
+                            }
+                            foreach ($class as $formType => $formClass) {
+                                $container->setParameter(
+                                    sprintf(
+                                        '%s.form.type.%s%s.class',
+                                        $this->applicationName,
+                                        $resource,
+                                        $formType === self::DEFAULT_KEY ? '' : sprintf('_%s', $formType)
+                                    ),
+                                    $formClass
+                                );
+                            }
+                        } else {
+                            $container->setParameter(
+                                sprintf(
+                                    '%s.%s.%s.class',
+                                    $this->applicationName,
+                                    $service,
+                                    $resource
+                                ),
+                                $class
+                            );
+                        }
+                    } elseif ('translation' === $classes) {
+                        $this->mapClassParameters(array(sprintf('%s_translation', $resource) => $classes), $container);
+                    }
                 }
-                $this->mapClassParameters(array(sprintf('%s_translation', $resource) => $parameters['translation']), $container);
-
-                $container->setParameter(
-                    sprintf(
-                        '%s.%s.%s.class',
-                        $this->applicationName,
-                        $parameters['form'],
-                        $resource
-                    ),
-                    $parameters['form']
-                );
             }
         }
     }
