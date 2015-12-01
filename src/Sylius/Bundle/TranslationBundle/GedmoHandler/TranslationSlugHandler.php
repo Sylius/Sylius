@@ -12,6 +12,7 @@ namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Sluggable\Handler\SlugHandlerInterface;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
@@ -135,8 +136,14 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     public static function validate(array $options, ClassMetadata $meta)
     {
+        // Since we cannot know, whether children of this mapped superclass
+        // have or have not given association.
+        if ($meta instanceof ClassMetadataInfo && $meta->isMappedSuperclass) {
+            return;
+        }
+
         if (!$meta->isSingleValuedAssociation($options['relationField'])) {
-            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationParentRelationField']}] in class - {$meta->name}");
+            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationField']}] in class - {$meta->name}");
         }
 //      TODO Check parent relation in translatable entity is single valued
 //      (Note: don't know if that's possible here as we need the relationField class metadada)
