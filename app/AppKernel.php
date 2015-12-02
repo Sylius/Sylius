@@ -34,4 +34,13 @@ class AppKernel extends Kernel
 
         return array_merge(parent::registerBundles(), $bundles);
     }
+
+    protected function getContainerBaseClass()
+    {
+        if ('test' === $this->environment) {
+            return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+        }
+
+        return parent::getContainerBaseClass();
+    }
 }

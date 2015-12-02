@@ -23,4 +23,5 @@
 !/etc/build/.gitkeep
 
 /behat.yml
+/phpunit.xml
 /phpspec.yml
