@@ -33,13 +33,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
-     * @var FactoryInterface
-     */
-    protected $adjustmentFactory;
-
-    /**
      * Tax calculator.
      *
      * @var CalculatorInterface
