@@ -28,8 +28,8 @@ class Mapper
     {
         $mapping = array();
 
-        $mapping[$config['model']] = $config;
-        $mapping[$config['translation']['model']] = $mapping[$config['model']];
+        $mapping[$config['classes']['model']] = $config;
+        $mapping[$config['translation']['classes']['model']] = $mapping[$config['model']];
 
         if ($container->hasParameter('sylius.translation.mapping')) {
             $mapping = array_merge($mapping, $container->getParameter('sylius.translation.mapping'));

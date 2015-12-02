@@ -135,43 +135,6 @@ abstract class AbstractResourceExtension extends AbstractExtension
                 }
             }
         }
-        /*
-        foreach ($resources as $resource => $parameters) {
-            foreach ($parameters as $parameter => $classes) {
-                foreach ($classes as $service => $class) {
-                    if ('classes' === $classes) {
-                        if ('form' === $class) {
-                            if (!is_array($classes)) {
-                                $classes = array(self::DEFAULT_KEY => $classes);
-                            }
-                            foreach ($class as $formType => $formClass) {
-                                $container->setParameter(
-                                    sprintf(
-                                        '%s.form.type.%s%s.class',
-                                        $this->applicationName,
-                                        $resource,
-                                        $formType === self::DEFAULT_KEY ? '' : sprintf('_%s', $formType)
-                                    ),
-                                    $formClass
-                                );
-                            }
-                        } else {
-                            $container->setParameter(
-                                sprintf(
-                                    '%s.%s.%s.class',
-                                    $this->applicationName,
-                                    $service,
-                                    $resource
-                                ),
-                                $class
-                            );
-                        }
-                    } elseif ('translation' === $classes) {
-                        $this->mapClassParameters(array(sprintf('%s_translation', $resource) => $classes), $container);
-                    }
-                }
-            }
-        }*/
     }
 
     /**
@@ -291,7 +254,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
         $mapper = new Mapper();
 
         foreach ($config['resources'] as $resource => $parameters) {
-            if (array_key_exists('model', $parameters) && array_key_exists('translation', $parameters)) {
+            if (isset($parameters['classes']['model']) && isset($parameters['translation']['classes']['model'])) {
                 $mapper->mapTranslations($parameters, $container);
 
                 DatabaseDriverFactory::get(
