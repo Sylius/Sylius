@@ -114,6 +114,28 @@ abstract class AbstractResourceExtension extends AbstractExtension
      */
     protected function mapClassParameters(array $resources, ContainerBuilder $container)
     {
+        foreach ($resources as $resourceName => $resourceConfiguration) {
+            if (isset($resourceConfiguration['translation'])) {
+                $this->mapClassParameters(array(sprintf('%s_translation', $resourceName) => $resourceConfiguration['translation']), $container);
+            }
+
+            foreach ($resourceConfiguration['classes'] as $serviceName => $serviceClassOrClasses) {
+                if (!is_array($serviceClassOrClasses)) {
+                    $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resourceName), $serviceClassOrClasses);
+                } else {
+                    $serviceClasses = $serviceClassOrClasses;
+
+                    foreach ($serviceClasses as $serviceType => $serviceClass) {
+                        if (self::DEFAULT_KEY === $serviceType) {
+                            $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resourceName), $serviceClass);
+                        } else {
+                            $container->setParameter(sprintf('%s.%s.%s_%s.class', $this->applicationName, $serviceName, $resourceName, $serviceType), $serviceClass);
+                        }
+                    }
+                }
+            }
+        }
+        /*
         foreach ($resources as $resource => $parameters) {
             foreach ($parameters as $parameter => $classes) {
                 foreach ($classes as $service => $class) {
@@ -149,7 +171,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
                     }
                 }
             }
-        }
+        }*/
     }
 
     /**
