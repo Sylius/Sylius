@@ -11,18 +11,19 @@
 
 namespace Sylius\Component\Resource\Exception;
 
-class UnexpectedTypeException extends \InvalidArgumentException
+/**
+ * @author Jan Góralski <jan.goralski@lakion.com>
+ */
+class UnsupportedMethodException extends \Exception
 {
     /**
-     * @param mixed  $value
-     * @param string $expectedType
+     * @param string $methodName
      */
-    public function __construct($value, $expectedType)
+    public function __construct($methodName)
     {
         parent::__construct(sprintf(
-            'Expected argument of type "%s", "%s" given.',
-            $expectedType,
-            is_object($value) ? get_class($value) : gettype($value)
+            'The method "%s" is not supported.',
+            $methodName
         ));
     }
 }

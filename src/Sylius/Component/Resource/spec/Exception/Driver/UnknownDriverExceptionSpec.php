@@ -16,20 +16,25 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class InvalidDriverExceptionSpec extends ObjectBehavior
+class UnknownDriverExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('driver', 'className');
+        $this->beConstructedWith('driver');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\InvalidDriverException');
+        $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\UnknownDriverException');
     }
 
-    function it_should_extends_exception()
+    function it_extends_exception()
     {
         $this->shouldHaveType('\Exception');
+    }
+
+    function it_has_a_message()
+    {
+        $this->getMessage()->shouldReturn('Unknown driver "driver".');
     }
 }

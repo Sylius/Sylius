@@ -20,11 +20,6 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
 interface TaxonomyInterface extends TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
 {
     /**
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * @return TaxonInterface
      */
     public function getRoot();

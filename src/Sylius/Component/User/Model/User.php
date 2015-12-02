@@ -24,7 +24,7 @@ use Doctrine\Common\Collections\Collection;
 class User implements UserInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

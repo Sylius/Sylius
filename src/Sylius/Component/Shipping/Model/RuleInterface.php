@@ -11,19 +11,16 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface RuleInterface
+interface RuleInterface extends ResourceInterface
 {
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
     const TYPE_WEIGHT     = 'weight';
-
-    /**
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * @return string

@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Permission implements PermissionInterface
 {
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -90,6 +90,9 @@ class Permission implements PermissionInterface
         return $this->description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;

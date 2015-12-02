@@ -22,11 +22,6 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
 interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterface, TranslatableInterface
 {
     /**
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * @return TaxonomyInterface
      */
     public function getTaxonomy();

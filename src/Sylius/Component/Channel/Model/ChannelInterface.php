@@ -11,18 +11,14 @@
 
 namespace Sylius\Component\Channel\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ChannelInterface extends TimestampableInterface
+interface ChannelInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */

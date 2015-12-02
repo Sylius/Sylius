@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -8,22 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Attribute\Model;
+namespace spec\Sylius\Component\Resource\Fixtures;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface AttributeTranslationInterface extends ResourceInterface
+interface SampleResourceInterface extends ResourceInterface
 {
     /**
      * @return string
      */
-    public function getPresentation();
+    public function getName();
 
     /**
-     * @param string $presentation
+     * @return int
      */
-    public function setPresentation($presentation);
+    public function getRating();
+
+    /**
+     * @return string
+     */
+    public function getTitle();
 }

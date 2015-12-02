@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\Collection;
 class Customer implements CustomerInterface, GroupableInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
