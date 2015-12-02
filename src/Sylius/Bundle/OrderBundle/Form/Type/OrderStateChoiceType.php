@@ -50,7 +50,7 @@ class OrderStateChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order_state_choice';
     }

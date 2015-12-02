@@ -80,7 +80,7 @@ class OrderFilterType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order_filter';
     }

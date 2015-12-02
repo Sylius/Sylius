@@ -36,7 +36,7 @@ class HiddenType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_configuration_hidden';
     }

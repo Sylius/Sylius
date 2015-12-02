@@ -77,7 +77,7 @@ class ItemCountConfigurationType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_rule_item_count_configuration';
     }

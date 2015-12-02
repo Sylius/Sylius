@@ -51,7 +51,7 @@ class NumberOfOrdersType extends AbstractType
     /**
     * {@inheritdoc}
     */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_data_fetcher_number_of_orders';
     }

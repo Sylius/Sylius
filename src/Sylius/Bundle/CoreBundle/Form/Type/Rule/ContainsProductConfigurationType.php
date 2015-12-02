@@ -75,7 +75,7 @@ class ContainsProductConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_contains_product_configuration';
     }

@@ -81,7 +81,7 @@ class VariantChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('sylius_%s_variant_choice', $this->variableName);
     }

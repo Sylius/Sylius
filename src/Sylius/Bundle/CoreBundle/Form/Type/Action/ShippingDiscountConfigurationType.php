@@ -57,7 +57,7 @@ class ShippingDiscountConfigurationType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action_shipping_discount_configuration';
     }

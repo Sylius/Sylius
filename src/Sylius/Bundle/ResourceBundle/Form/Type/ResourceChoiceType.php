@@ -80,7 +80,7 @@ class ResourceChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return $this->name;
     }

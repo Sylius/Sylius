@@ -76,7 +76,7 @@ class OptionValueChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('sylius_%s_option_value_choice', $this->variableName);
     }

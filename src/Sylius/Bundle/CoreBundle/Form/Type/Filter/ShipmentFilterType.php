@@ -66,7 +66,7 @@ class ShipmentFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipment_filter';
     }

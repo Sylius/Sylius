@@ -80,7 +80,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_customer_loyalty_configuration';
     }

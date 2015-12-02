@@ -66,7 +66,7 @@ class PaymentFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_payment_filter';
     }

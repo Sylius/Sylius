@@ -85,7 +85,7 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action_add_product_configuration';
     }

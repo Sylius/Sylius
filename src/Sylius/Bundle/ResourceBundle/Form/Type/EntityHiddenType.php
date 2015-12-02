@@ -79,7 +79,7 @@ class EntityHiddenType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'entity_hidden';
     }

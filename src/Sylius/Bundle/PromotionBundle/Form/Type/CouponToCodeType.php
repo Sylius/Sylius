@@ -72,7 +72,7 @@ class CouponToCodeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_coupon_to_code';
     }

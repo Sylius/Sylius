@@ -73,7 +73,7 @@ class PerItemRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_per_item_rate_configuration';
     }

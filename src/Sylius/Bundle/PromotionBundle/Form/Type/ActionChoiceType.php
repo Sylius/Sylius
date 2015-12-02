@@ -41,7 +41,7 @@ class ActionChoiceType extends AbstractType
         return ChoiceType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action_choice';
     }

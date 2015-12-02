@@ -51,7 +51,7 @@ class UserRegistrationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_data_fetcher_user_registration';
     }

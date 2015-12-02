@@ -54,7 +54,7 @@ class UserChangePasswordType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_user_change_password';
     }

@@ -58,7 +58,7 @@ class SecurityRoleChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_security_role_choice';
     }

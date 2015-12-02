@@ -40,7 +40,7 @@ class LocaleType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_configuration_locale';
     }
