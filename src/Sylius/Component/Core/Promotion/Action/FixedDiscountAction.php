@@ -37,10 +37,10 @@ class FixedDiscountAction extends DiscountAction
             );
         }
 
-        $adjustment = $this->createAdjustment($promotion);
-        $adjustment->setAmount(-$configuration['amount']);
+        $adjustmentDTO = $this->createAdjustmentDTO($promotion);
+        $adjustmentDTO->amount = (-$configuration['amount']);
 
-        $subject->addAdjustment($adjustment);
+        $this->addAdjustmentTo($subject, $adjustmentDTO);
     }
 
     /**

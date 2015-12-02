@@ -395,19 +395,27 @@
         <service id="sylius.promotion_rule_checker.customer_group" class="%sylius.promotion_rule_checker.customer_group.class%">
             <tag name="sylius.promotion_rule_checker" type="customer_group" label="User Group" />
         </service>
-        <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
+        <!-- DiscountActions -->
+        <service id="sylius.promotion_action.abstract"
+                 class="Sylius\Component\Core\Promotion\Action\DiscountAction"
+                 abstract="true">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="sylius.promotion_action.fixed_discount"
+                 class="%sylius.promotion_action.fixed_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
         </service>
-        <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.originator" />
+        <service id="sylius.promotion_action.percentage_discount"
+                 class="%sylius.promotion_action.percentage_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
-        <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.originator" />
+        <service id="sylius.promotion_action.shipping_discount"
+                 class="%sylius.promotion_action.shipping_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping discount" />
         </service>
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
