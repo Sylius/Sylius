@@ -399,7 +399,6 @@
         <service id="sylius.promotion_action.abstract"
                  class="Sylius\Component\Core\Promotion\Action\DiscountAction"
                  abstract="true">
-            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <argument type="service" id="event_dispatcher" />
         </service>

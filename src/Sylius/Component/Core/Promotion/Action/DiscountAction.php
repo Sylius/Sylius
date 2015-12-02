@@ -23,7 +23,6 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -33,11 +32,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 abstract class DiscountAction implements PromotionActionInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    protected $adjustmentFactory;
-
     /**
      * @var OriginatorInterface
      */
@@ -49,16 +43,13 @@ abstract class DiscountAction implements PromotionActionInterface
     protected $eventDispatcher;
 
     /**
-     * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->adjustmentFactory = $adjustmentFactory;
         $this->originator = $originator;
         $this->eventDispatcher = $eventDispatcher;
     }
