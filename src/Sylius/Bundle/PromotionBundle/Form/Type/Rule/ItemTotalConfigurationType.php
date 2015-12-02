@@ -44,12 +44,15 @@ class ItemTotalConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 ),
             ))
-            ->add('equal', 'checkbox', array(
+            ->add('equal', 'choice', [
                 'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
-            ))
+                'choices' => [
+                    'sylius.form.rule.item_total_configuration.equal_or_more' => 'equal',
+                    'sylius.form.rule.item_total_configuration.more_than' => 'more_than',
+                    'sylius.form.rule.item_total_configuration.exactly' => 'exactly',
+                ],
+                'choices_as_values' => true,
+            ])
         ;
     }
 

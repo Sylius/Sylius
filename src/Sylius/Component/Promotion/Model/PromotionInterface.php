@@ -197,4 +197,14 @@ interface PromotionInterface extends SoftDeletableInterface, TimestampableInterf
      * @param ActionInterface $action
      */
     public function removeAction(ActionInterface $action);
+
+    /**
+     * @return int
+     */
+    public function getRepeatable();
+
+    /**
+     * @param int $repeat
+     */
+    public function setRepeatable($repeat);
 }

@@ -44,12 +44,16 @@ class ItemCountConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 ),
             ))
-            ->add('equal', 'checkbox', array(
+            ->add('equal', 'choice', [
                 'label' => 'sylius.form.rule.item_count_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
-            ))
+                'choices' => [
+                    'sylius.form.rule.item_count_configuration.equal_or_more' => 'equal',
+                    'sylius.form.rule.item_count_configuration.more_than' => 'more_than',
+                    'sylius.form.rule.item_count_configuration.exactly' => 'exactly',
+                    'sylius.form.rule.item_count_configuration.repeatable' => 'modulo',
+                ],
+                'choices_as_values' => true,
+            ])
         ;
     }
 

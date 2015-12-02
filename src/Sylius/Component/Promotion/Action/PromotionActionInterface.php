@@ -27,8 +27,6 @@ interface PromotionActionInterface
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      * @param PromotionInterface        $promotion
-     *
-     * @return mixed
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 
@@ -38,8 +36,6 @@ interface PromotionActionInterface
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      * @param PromotionInterface        $promotion
-     *
-     * @return mixed
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 

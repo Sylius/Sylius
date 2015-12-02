@@ -25,7 +25,7 @@ interface PromotionEligibilityCheckerInterface
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return Boolean
+     * @return int
      */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }

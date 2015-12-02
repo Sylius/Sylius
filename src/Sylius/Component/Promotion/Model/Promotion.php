@@ -103,6 +103,13 @@ class Promotion implements PromotionInterface
      */
     protected $deletedAt;
 
+    /**
+     * Virtual property used by promotion processors.
+     *
+     * @var int
+     */
+    protected $repeatable = 1;
+
     public function __construct()
     {
         $this->coupons = new ArrayCollection();
@@ -457,5 +464,21 @@ class Promotion implements PromotionInterface
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepeatable()
+    {
+        return $this->repeatable;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRepeatable($repeat)
+    {
+        $this->repeatable = $repeat;
     }
 }

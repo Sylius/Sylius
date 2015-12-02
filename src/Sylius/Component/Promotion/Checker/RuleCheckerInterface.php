@@ -24,7 +24,7 @@ interface RuleCheckerInterface
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      *
-     * @return Boolean
+     * @return int
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration);
 
