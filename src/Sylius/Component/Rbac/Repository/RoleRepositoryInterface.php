@@ -24,9 +24,9 @@ interface RoleRepositoryInterface extends RepositoryInterface
     /**
      * Get child roles.
      *
-     * @param RoleInterface
+     * @param $role RoleInterface
      *
-     * @return array
+     * @return RoleInterface[]
      */
     public function getChildRoles(RoleInterface $role);
 }

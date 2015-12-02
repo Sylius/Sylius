@@ -11,12 +11,10 @@
 
 namespace Sylius\Component\Rbac\Resolver;
 
-use ArrayIterator;
 use Doctrine\Common\Collections\Collection;
-use RecursiveIterator;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
-class RecursiveRoleIterator extends ArrayIterator implements RecursiveIterator
+class RecursiveRoleIterator extends \ArrayIterator implements \RecursiveIterator
 {
     public function __construct($roles)
     {

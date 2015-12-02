@@ -111,7 +111,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     abstract protected function getClassMetadataClassname();
 
     /**
-     * Get the respository service
+     * Get the repository service
      *
      * @param array $classes
      *

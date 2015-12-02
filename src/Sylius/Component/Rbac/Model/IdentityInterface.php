@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Rbac\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Identity.
  *
@@ -21,7 +23,7 @@ interface IdentityInterface
     /**
      * Get roles.
      *
-     * @return RoleInterface[]
+     * @return Collection|RoleInterface[]
      */
     public function getAuthorizationRoles();
 }

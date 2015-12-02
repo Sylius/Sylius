@@ -13,12 +13,14 @@ namespace Sylius\Component\Rbac\Authorization;
 
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Default authorization checker.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class AuthorizationChecker implements AuthorizationCheckerInterface
 {
@@ -28,29 +30,18 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
     protected $currentIdentityProvider;
 
     /**
-     * @var PermissionMapInterface
+     * @var VoterInterface
      */
-    protected $permissionMap;
-
-    /**
-     * @var RolesResolverInterface
-     */
-    protected $rolesResolver;
+    protected $voter;
 
     /**
      * @param CurrentIdentityProviderInterface $currentIdentityProvider
-     * @param PermissionMapInterface $permissionMap
-     * @param RolesResolverInterface $rolesResolver
+     * @param VoterInterface                   $voter
      */
-    public function __construct(
-        CurrentIdentityProviderInterface $currentIdentityProvider,
-        PermissionMapInterface $permissionMap,
-        RolesResolverInterface $rolesResolver
-    )
+    public function __construct(CurrentIdentityProviderInterface $currentIdentityProvider, VoterInterface $voter)
     {
         $this->currentIdentityProvider = $currentIdentityProvider;
-        $this->permissionMap = $permissionMap;
-        $this->rolesResolver = $rolesResolver;
+        $this->voter = $voter;
     }
 
     /**
@@ -59,7 +50,6 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
     public function isGranted($permissionCode)
     {
         $identity = $this->currentIdentityProvider->getIdentity();
-
         if (null === $identity) {
             return false;
         }
@@ -68,14 +58,6 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
             throw new \InvalidArgumentException('Current identity must implement "Sylius\Component\Rbac\Model\IdentityInterface".');
         }
 
-        $roles = $this->rolesResolver->getRoles($identity);
-
-        foreach ($roles as $role) {
-            if ($this->permissionMap->hasPermission($role, $permissionCode)) {
-                return true;
-            }
-        }
-
-        return false;
+        return VoterInterface::ACCESS_DENIED !== $this->voter->vote(new AnonymousToken('sylius', $identity), $identity, array($permissionCode));
     }
 }

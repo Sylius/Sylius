@@ -39,17 +39,17 @@ class CachedPermissionMapSpec extends ObjectBehavior
 
     function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)
     {
-        $map->getPermissions($role)->shouldBeCalled()->willReturn($permissions);
+        $map->getPermissions($role)->willReturn($permissions);
 
         $this->getPermissions($role)->shouldReturn($permissions);
     }
 
     function it_checks_if_permission_is_in_the_cached_array($cache, RoleInterface $role)
     {
-        $role->getCode()->shouldBeCalled()->willReturn('catalog_manager');
+        $role->getCode()->willReturn('catalog_manager');
 
-        $cache->contains('catalog_manager')->shouldBeCalled()->willReturn(true);
-        $cache->fetch('catalog_manager')->shouldBeCalled()->willReturn(array('can_eat_bananas', 'can_smash_bananas'));
+        $cache->contains('catalog_manager')->willReturn(true);
+        $cache->fetch('catalog_manager')->willReturn(array('can_eat_bananas' => true, 'can_smash_bananas' => true));
 
         $this->hasPermission($role, 'can_eat_bananas')->shouldReturn(true);
         $this->hasPermission($role, 'can_eat_oranges')->shouldReturn(false);

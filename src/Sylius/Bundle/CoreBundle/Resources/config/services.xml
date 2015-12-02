@@ -105,6 +105,8 @@
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
+        
+        <parameter key="sylius.rbac.toggleable_voter.class">Sylius\Bundle\CoreBundle\Security\ToggleableRbacVoter</parameter>
     </parameters>
 
     <services>
@@ -543,6 +545,13 @@
         <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
             <argument type="service" id="sylius.authorization_checker.default" />
             <argument type="service" id="sylius.settings.manager" />
+        </service>
+
+        <service id="sylius.rbac.voter" class="%sylius.rbac.toggleable_voter.class%" public="false">
+            <argument type="service" id="sylius.permission_map" />
+            <argument type="service" id="sylius.roles_resolver" />
+            <argument type="service" id="sylius.settings.manager" />
+            <tag name="security.voter" />
         </service>
 
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
