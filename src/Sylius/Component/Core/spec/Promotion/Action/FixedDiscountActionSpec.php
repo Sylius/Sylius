@@ -12,11 +12,14 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @mixin \Sylius\Component\Core\Promotion\Action\FixedDiscountAction
@@ -26,9 +29,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
+    function let(
+        FactoryInterface $adjustmentFactory,
+        OriginatorInterface $originator,
+        EventDispatcherInterface $eventDispatcher
+    )
     {
-        $this->beConstructedWith($adjustmentFactory, $originator);
+        $this->beConstructedWith($adjustmentFactory, $originator, $eventDispatcher);
     }
 
     function it_is_initializable()
@@ -42,23 +49,18 @@ class FixedDiscountActionSpec extends ObjectBehavior
     }
 
     function it_applies_fixed_discount_as_promotion_adjustment(
-        $adjustmentFactory,
-        $originator,
         OrderInterface $order,
-        AdjustmentInterface $adjustment,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $adjustmentFactory->createNew()->willReturn($adjustment);
-        $promotion->getDescription()->willReturn('promotion description');
+        $promotion->getDescription()->shouldBeCalled()->willReturn('promotion description');
+        $promotion->getId()->shouldBeCalled()->willReturn(123);
 
-        $adjustment->setAmount(-500)->shouldBeCalled();
-        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('promotion description')->shouldBeCalled();
-
-        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
-
-        $order->addAdjustment($adjustment)->shouldBeCalled();
         $configuration = array('amount' => 500);
+
+        $eventDispatcher->dispatch(AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
+            Argument::type(AdjustmentEvent::class)
+        )->shouldBeCalled();
 
         $this->execute($order, $configuration, $promotion);
     }

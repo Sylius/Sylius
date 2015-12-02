@@ -33,11 +33,11 @@ class ShippingDiscountAction extends DiscountAction
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        $adjustment = $this->createAdjustment($promotion);
+        $adjustmentDTO = $this->createAdjustmentDTO($promotion);
         $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setAmount(- $adjustmentAmount);
+        $adjustmentDTO->amount = (- $adjustmentAmount);
 
-        $subject->addAdjustment($adjustment);
+        $this->addAdjustmentTo($subject, $adjustmentDTO);
     }
 
     /**
