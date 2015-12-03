@@ -47,6 +47,12 @@ class ShippingMethodSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function its_code_is_mutable()
+    {
+        $this->setCode('SC2');
+        $this->getCode()->shouldReturn('SC2');
+    }
+
     function it_is_enabled_by_default()
     {
         $this->shouldBeEnabled();

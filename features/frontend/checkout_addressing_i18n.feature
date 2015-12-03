@@ -23,9 +23,9 @@ Feature: Checkout addressing in preferred language
             | United States  |
             | Germany        |
           And the following shipping methods exist:
-            | zone    | name        |
-            | Germany | DHL Express |
-            | USA     | FedEx       |
+            | code | zone    | name        |
+            | SM1  | Germany | DHL Express |
+            | SM2  | USA     | FedEx       |
           And all products are assigned to the default channel
           And there are following locales configured and assigned to the default channel:
             | code  |

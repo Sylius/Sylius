@@ -19,8 +19,8 @@ Feature: Checkout inventory
             | name  | type    | members        |
             | UK    | country | United Kingdom |
           And the following shipping methods exist:
-            | zone | name        |
-            | UK   | DHL Express |
+            | code | zone | name        |
+            | SM1  | UK   | DHL Express |
           And the following payment methods exist:
             | name        | gateway | enabled | calculator | calculator_configuration |
             | Credit Card | dummy   | yes     | fixed      | amount: 0                |

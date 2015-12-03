@@ -1070,3 +1070,4 @@ sylius:
     disable: Disable
     ui:
         links: Links
+        code:  Code
