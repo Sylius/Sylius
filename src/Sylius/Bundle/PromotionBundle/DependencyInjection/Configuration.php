@@ -56,7 +56,7 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
         $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
@@ -133,7 +133,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -141,6 +141,17 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->arrayNode('promotion_subject')
+                            ->isRequired()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->isRequired()
+                                    ->children()
+                                        ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode('promotion')
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -228,28 +239,6 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(CouponType::class)->cannotBeEmpty()->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('promotion_subject')
-                            ->isRequired()
-                            ->children()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end() // @todo: Remove.
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')

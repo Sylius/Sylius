@@ -148,14 +148,14 @@ sylius_shipping:
 
 sylius_promotion:
     resources:
+        promotion_subject:
+            classes:
+                model: %sylius.model.order.class%
         promotion:
             classes:
                 model: Sylius\Component\Core\Model\Promotion
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
                 form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
-        promotion_subject:
-            classes:
-                model: %sylius.model.order.class%
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\Coupon
