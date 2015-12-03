@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.phpcr.generic_initializer.class">Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer</parameter>
+    </parameters>
+
+    <services>
+        <!-- RoutingBundle sets up this initializer only if `use_sonata_admin` configuration option is true -->
+        <!-- See: https://github.com/symfony-cmf/RoutingBundle/pull/251 -->
+        <service id="cmf_routing.initializer" class="%sylius.phpcr.generic_initializer.class%">
+            <argument>CmfRoutingBundle</argument>
+            <argument type="collection">
+                <argument>%cmf_routing.dynamic.persistence.phpcr.route_basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer"/>
+        </service>
+    </services>
+</container>
