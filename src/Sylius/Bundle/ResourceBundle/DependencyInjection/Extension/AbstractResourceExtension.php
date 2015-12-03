@@ -86,6 +86,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
 
         if ($configure & self::CONFIGURE_VALIDATORS) {
             $this->mapValidationGroupParameters($config['resources'], $container);
+            $this->mapFormsValidationGroupParameters($config, $container);
         }
 
         if ($configure & self::CONFIGURE_FORMS) {
@@ -202,6 +203,21 @@ abstract class AbstractResourceExtension extends AbstractExtension
     }
 
     /**
+     * Remap validation group parameters for forms.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function mapFormsValidationGroupParameters(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['validation_groups'])) {
+            foreach ($config['validation_groups'] as $validationGroups => $class) {
+                $container->setParameter(sprintf('%s.validation_group.%s', $this->applicationName, $validationGroups), $validationGroups);
+            }
+        }
+    }
+
+    /**
      * Load bundle driver.
      *
      * @param array            $config
@@ -238,7 +254,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
                     $manager,
                     $driver,
                     isset($config['templates'][$resource]) ? $config['templates'][$resource] : null
-                )->load($parameters['classes']);
+                )->load($parameters);
             }
         }
     }

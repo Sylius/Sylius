@@ -70,6 +70,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
 
         }
+
         $container->setParameter('sylius.variation.variables', $variables);
 
         $config['resources'] = $convertedConfig;

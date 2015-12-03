@@ -56,11 +56,15 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
-        $this->load(array(
-            'model'      => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
-            'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
-        ));
+        $this->load(
+            array(
+                'classes' => array(
+                    'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
+                    'controller' => 'Sylius\Controller',
+                    'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
+                )
+            )
+        );
     }
 
     function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
@@ -88,10 +92,14 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
-        $this->load(array(
-            'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
-            'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
-        ));
+        $this->load(
+            array(
+                'classes' => array(
+                    'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
+                    'controller' => 'Sylius\Controller',
+                    'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
+                )
+            )
+        );
     }
 }
