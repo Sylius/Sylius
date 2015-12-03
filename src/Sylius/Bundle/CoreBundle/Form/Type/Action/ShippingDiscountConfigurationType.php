@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
-use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

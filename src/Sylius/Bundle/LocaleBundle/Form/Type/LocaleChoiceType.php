@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

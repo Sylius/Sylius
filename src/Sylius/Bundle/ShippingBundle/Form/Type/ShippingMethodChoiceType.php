@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
@@ -22,6 +21,7 @@ use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;

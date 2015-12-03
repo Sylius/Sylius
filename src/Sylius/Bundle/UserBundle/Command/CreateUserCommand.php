@@ -13,8 +13,8 @@ namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;

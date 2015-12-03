@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

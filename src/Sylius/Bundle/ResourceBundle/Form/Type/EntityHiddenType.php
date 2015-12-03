@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\LogicException;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

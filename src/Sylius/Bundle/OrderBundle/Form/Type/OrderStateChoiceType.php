@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
