@@ -8730,16 +8730,16 @@
         },
         {
             "name": "lakion/mink-debug-extension",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/MinkDebugExtension.git",
-                "reference": "e811211da7c67db9b05405d31704d3e9037cac08"
+                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/e811211da7c67db9b05405d31704d3e9037cac08",
-                "reference": "e811211da7c67db9b05405d31704d3e9037cac08",
+                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/c93dacd50d6fda9334b1f234d98240aea2cfa323",
+                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323",
                 "shasum": ""
             },
             "require": {
@@ -8782,7 +8782,7 @@
                 "debug",
                 "logging"
             ],
-            "time": "2015-09-15 13:59:32"
+            "time": "2015-12-03 09:34:37"
         },
         {
             "name": "openlss/lib-array2xml",
