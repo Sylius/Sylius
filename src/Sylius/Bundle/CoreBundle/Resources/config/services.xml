@@ -199,7 +199,7 @@
             <argument type="service" id="sylius.manager.payment" />
         </service>
         <service id="sylius.order_processing.payment_charges_processor" class="%sylius.order_processing.payment_charges_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.payment.delegating_fee_calculator" />
         </service>
         <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
@@ -218,7 +218,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.shipping_calculator" />
         </service>
 

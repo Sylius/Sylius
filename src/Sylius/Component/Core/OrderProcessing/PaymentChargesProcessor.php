@@ -11,12 +11,16 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
+use Sylius\Bundle\CoreBundle\EventListener\AdjustmentSubscriber;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Order\Model\AdjustmentDTO;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
@@ -24,9 +28,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class PaymentChargesProcessor implements PaymentChargesProcessorInterface
 {
     /**
-     * @var FactoryInterface
+     * @var EventDispatcherInterface
      */
-    protected $adjustmentFactory;
+    protected $eventDispatcher;
 
     /**
      * @var DelegatingFeeCalculatorInterface
@@ -36,12 +40,15 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param FactoryInterface $adjustmentFactory
+     * @param EventDispatcherInterface         $eventDispatcher
      * @param DelegatingFeeCalculatorInterface $feeCalculator
      */
-    public function __construct(FactoryInterface $adjustmentFactory, DelegatingFeeCalculatorInterface $feeCalculator)
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        DelegatingFeeCalculatorInterface $feeCalculator
+    )
     {
-        $this->adjustmentFactory = $adjustmentFactory;
+        $this->eventDispatcher = $eventDispatcher;
         $this->feeCalculator = $feeCalculator;
     }
 
@@ -58,29 +65,38 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     }
 
     /**
-     * @param OrderInterface   $order
+     * @param OrderInterface          $order
      * @param PaymentSubjectInterface $payment
      */
     private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentSubjectInterface $payment)
     {
         if (PaymentInterface::STATE_CANCELLED !== $payment->getState())
         {
-            $order->addAdjustment($this->prepareAdjustmentForOrder($payment));
+            $adjustmentDTO = $this->getAdjustmentDTO($payment);
+
+            $this->eventDispatcher->dispatch(
+                AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
+                new AdjustmentEvent(
+                    $order,
+                    [AdjustmentSubscriber::EVENT_ARGUMENT_DATA_KEY => $adjustmentDTO]
+                )
+            );
         }
     }
 
     /**
      * @param PaymentSubjectInterface $payment
      *
-     * @return AdjustmentInterface
+     * @return AdjustmentDTO
      */
-    private function prepareAdjustmentForOrder(PaymentSubjectInterface $payment)
+    private function getAdjustmentDTO(PaymentSubjectInterface $payment)
     {
-        $adjustment = $this->adjustmentFactory->createNew();
-        $adjustment->setType(AdjustmentInterface::PAYMENT_ADJUSTMENT);
-        $adjustment->setAmount($this->feeCalculator->calculate($payment));
-        $adjustment->setDescription($payment->getMethod()->getName());
+        $adjustmentDTO = new AdjustmentDTO();
+        $adjustmentDTO->type = AdjustmentInterface::PAYMENT_ADJUSTMENT;
+        $adjustmentDTO->amount = $this->feeCalculator->calculate($payment);
+        $adjustmentDTO->originType = get_class($payment);
+        $adjustmentDTO->description = $payment->getMethod()->getName();
 
-        return $adjustment;
+        return $adjustmentDTO;
     }
 }
