@@ -7,6 +7,6 @@ sylius:
         description:
             not_blank: Report description cannot be blank
         code:
-            not_blank: Report code cannot be blank
-            in_use: This code is already in use.
+            not_blank: Report code cannot be blank.
+            unique: This code is already in use.
             single_word: Report code should be a single word.

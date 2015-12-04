@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
@@ -53,13 +54,18 @@ class ReportTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($factory);
 
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('renderer', 'sylius_renderer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('dataFetcher', 'sylius_data_fetcher_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber'))->shouldBeCalled()->willReturn($builder);
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber'))->shouldBeCalled()->willReturn($builder);
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $renderer->getType()->willReturn('test_renderer');
         $rendererRegistry->all()->willReturn(array('test_renderer' => $renderer));

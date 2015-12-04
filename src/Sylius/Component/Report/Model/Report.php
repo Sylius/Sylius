@@ -28,17 +28,17 @@ class Report implements ReportInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
      * @var string
      */
     protected $description;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * Renderer name.
@@ -75,6 +75,22 @@ class Report implements ReportInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -102,22 +118,6 @@ class Report implements ReportInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**
