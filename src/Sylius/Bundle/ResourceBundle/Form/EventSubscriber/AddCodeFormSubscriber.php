@@ -23,6 +23,19 @@ use Symfony\Component\Intl\Exception\UnexpectedTypeException;
 class AddCodeFormSubscriber implements EventSubscriberInterface
 {
     /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @param string $type
+     */
+    public function __construct($type = 'text')
+    {
+        $this->type = $type;
+    }
+
+    /**
      * @return array
      */
     public static function getSubscribedEvents()
@@ -46,6 +59,7 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $disabled = (null !== $resource->getCode());
 
-        $form->add('code', 'text', array('label' => 'sylius.ui.code', 'disabled' => $disabled));
+
+        $form->add('code', $this->type, array('label' => 'sylius.ui.code', 'disabled' => $disabled));
     }
 }
