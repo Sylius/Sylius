@@ -15,6 +15,8 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Taxonomy extension.
@@ -42,5 +44,11 @@ class SyliusTaxonomyExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $container
+            ->getDefinition('sylius.factory.taxonomy')
+            ->addArgument(new Reference('sylius.factory.taxon'))
+            ->addArgument(new Parameter('sylius.model.taxonomy.class'))
+        ;
     }
 }
