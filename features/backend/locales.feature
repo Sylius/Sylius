@@ -7,10 +7,10 @@ Feature: Managing locales
     Background:
         Given store has default configuration
           And there are following locales configured:
-            | name                    | enabled |
-            | German (Germany)        | yes     |
-            | English (United States) | no      |
-            | French (France)         | yes     |
+            | code  | name                   | enabled |
+            | de_DE |German (Germany)        | yes     |
+            | en_US |English (United States) | no      |
+            | fr_FR |French (France)         | yes     |
           And I am logged in as administrator
 
     Scenario: Seeing index of all locales

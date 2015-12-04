@@ -13,22 +13,13 @@ namespace Sylius\Component\Locale\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface LocaleInterface extends TimestampableInterface, ToggleableInterface
+interface LocaleInterface extends CodeAwareInterface, TimestampableInterface, ToggleableInterface
 {
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * @param string|null $locale
      *
