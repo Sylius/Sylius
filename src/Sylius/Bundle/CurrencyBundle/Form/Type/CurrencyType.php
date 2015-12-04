@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius currency form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -28,12 +27,10 @@ class CurrencyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'currency', array(
-                'label' => 'sylius.form.currency.code',
-            ))
             ->add('exchangeRate', 'number', array(
                 'label' => 'sylius.form.currency.exchange_rate',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber('currency'))
         ;
     }
 

@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -25,12 +27,12 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber');
+        $this->shouldHaveType(AddCodeFormSubscriber::class);
     }
 
     function it_implements_event_subscriber_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_subscribes_to_event()
@@ -75,5 +77,37 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
     {
         $event->getData()->willReturn($object);
         $this->shouldThrow('\UnexpectedTypeException');
+    }
+
+    function it_adds_code_with_specified_type(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)
+    {
+        $this->beConstructedWith('currency');
+
+        $event->getData()->willReturn($resource);
+        $event->getForm()->willReturn($form);
+
+        $resource->getCode()->shouldBeCalled()->willReturn('Code12');
+
+        $form
+            ->add('code', 'currency', Argument::containing(true))
+            ->shouldBeCalled()
+        ;
+
+        $this->preSetData($event);
+    }
+
+    function it_adds_code_with_type_text_by_default(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)
+    {
+        $event->getData()->willReturn($resource);
+        $event->getForm()->willReturn($form);
+
+        $resource->getCode()->shouldBeCalled()->willReturn('Code12');
+
+        $form
+            ->add('code', 'text', Argument::containing(true))
+            ->shouldBeCalled()
+        ;
+
+        $this->preSetData($event);
     }
 }

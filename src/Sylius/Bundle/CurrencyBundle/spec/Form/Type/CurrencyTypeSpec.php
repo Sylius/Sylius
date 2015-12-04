@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,12 +40,12 @@ class CurrencyTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('code', 'currency', Argument::any())
+            ->add('exchangeRate', 'number', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('exchangeRate', 'number', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 

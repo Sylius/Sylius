@@ -742,7 +742,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then The code field should be disabled
+     * @Then the code field should be disabled
      */
     public function theCodeFieldShouldBeDisabled()
     {
