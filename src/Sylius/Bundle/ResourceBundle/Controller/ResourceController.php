@@ -228,7 +228,7 @@ class ResourceController extends FOSRestController
         $form     = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
+            $resource = $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {
