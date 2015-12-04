@@ -28,6 +28,16 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface as BaseTaxonomyInterface;
 class Channel extends BaseChannel implements ChannelInterface
 {
     /**
+     * @var CurrencyInterface
+     */
+    protected $defaultCurrency;
+
+    /**
+     * @var LocaleInterface
+     */
+    protected $defaultLocale;
+
+    /**
      * @var CurrencyInterface[]|Collection
      */
     protected $currencies;
@@ -64,6 +74,38 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->paymentMethods = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
         $this->taxonomies = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultCurrency()
+    {
+        return $this->defaultCurrency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultCurrency(CurrencyInterface $defaultCurrency)
+    {
+        $this->defaultCurrency = $defaultCurrency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultLocale()
+    {
+        return $this->defaultLocale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultLocale(LocaleInterface $defaultLocale)
+    {
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**

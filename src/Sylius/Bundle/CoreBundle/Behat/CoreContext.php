@@ -72,7 +72,9 @@ class CoreContext extends DefaultContext
         $channel->setName('Default');
         $channel->setUrl('http://example.com');
         $channel->addCurrency($currency);
+        $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);
+        $channel->setDefaultLocale($locale);
         $manager->persist($channel);
 
         $manager->flush();
