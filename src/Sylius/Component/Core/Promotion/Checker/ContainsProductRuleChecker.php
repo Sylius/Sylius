@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Checker\ItemCountRuleChecker;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class ContainsProductRuleChecker implements RuleCheckerInterface
+class ContainsProductRuleChecker extends ItemCountRuleChecker
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,15 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             if ($configuration['variant'] == $item->getVariant()->getId()) {
-                return !$configuration['exclude'];
+                if (!$configuration['exclude']) {
+                    if (isset($configuration['count'])) {
+                        return parent::isEligible($item, $configuration);
+                    }
+
+                    return true;
+                }
+
+                return false;
             }
         }
 
