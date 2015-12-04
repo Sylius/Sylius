@@ -85,4 +85,32 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
 
         $this->isEligible($subject, ['variant' => 1, 'exclude' => false])->shouldReturn(false);
     }
+
+    function it_returns_true_if_variant_is_included_and_count_is_set_smaller_amount_than_quantity(
+        OrderInterface $subject,
+        OrderItem $orderItem,
+        ProductVariant $variant
+    ) {
+        $subject->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->getId()->willReturn(1);
+
+        $orderItem->getPromotionSubjectCount()->willReturn(10);
+
+        $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(true);
+    }
+
+    function it_returns_false_if_variant_is_included_and_count_is_set_bigger_amount_than_quantity(
+        OrderInterface $subject,
+        OrderItem $orderItem,
+        ProductVariant $variant
+    ) {
+        $subject->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->getId()->willReturn(1);
+
+        $orderItem->getPromotionSubjectCount()->willReturn(1);
+
+        $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(false);
+    }
 }
