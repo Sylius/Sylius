@@ -7,9 +7,9 @@ Feature: Checkout percentage discount promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name              | description                                   |
-            | 3 items           | 25% Discount for orders with at least 3 items |
-            | 300 EUR           | 10% Discount for orders over 300 EUR          |
+            | code | name              | description                                   |
+            | PR1  | 3 items           | 25% Discount for orders with at least 3 items |
+            | PR2  | 300 EUR           | 10% Discount for orders over 300 EUR          |
           And promotion "3 items" has following rules defined:
             | type       | configuration        |
             | item_count | Count: 3,Equal: true |

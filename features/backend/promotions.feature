@@ -7,11 +7,11 @@ Feature: Promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name           | description                            | usage limit | used | starts     | ends       |
-            | New Year       | New Year Sale for more than 3 items    | 0           | 0    | 2013-12-31 | 2014-01-03 |
-            | Christmas      | Christmas Sale for orders over 100 EUR | 0           | 0    | 2013-12-10 | 2013-12-25 |
-            | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
-            | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
+            | code | name           | description                            | usage limit | used | starts     | ends       |
+            | P1   | New Year       | New Year Sale for more than 3 items    | 0           | 0    | 2013-12-31 | 2014-01-03 |
+            | P2   | Christmas      | Christmas Sale for orders over 100 EUR | 0           | 0    | 2013-12-10 | 2013-12-25 |
+            | P3   | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
+            | P4   | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
           And promotion "New Year" has following rules defined:
             | type       | configuration |
             | Item count | Count: 3      |
@@ -65,50 +65,54 @@ Feature: Promotions
     @javascript
     Scenario: Creating new promotion with item total rule
         Given I am on the promotion creation page
-         When I fill in "Name" with "Behat Training"
-          And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
-          And I click "Add rule"
-          And I select "Item total" from "Type"
-          And I fill in "Amount" with "5000"
-          And I press "Create"
-         Then I should see "Behat Training"
-          And I should see "Promotion has been successfully created."
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add rule"
+        And I select "Item total" from "Type"
+        And I fill in "Amount" with "5000"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created."
 
     @javascript
     Scenario: Creating new promotion with item count rule
         Given I am on the promotion creation page
-         When I fill in "Name" with "Behat Training"
-          And I fill in "Description" with "Behat Training Sale for 10 and more people"
-          And I click "Add rule"
-          And I select "Item count" from "Type"
-          And I fill in "Count" with "10"
-          And I press "Create"
-         Then I should see "Behat Training"
-          And I should see "Promotion has been successfully created."
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training Sale for 10 and more people"
+        And I click "Add rule"
+        And I select "Item count" from "Type"
+        And I fill in "Count" with "10"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created."
 
     @javascript
     Scenario: Creating new promotion with fixed discount action
         Given I am on the promotion creation page
-         When I fill in "Name" with "Behat Training"
-          And I fill in "Description" with "Behat Training 100 EUR discount on all orders"
-          And I click "Add action"
-          And I select "Fixed discount" from "Type"
-          And I fill in "Amount" with "100"
-          And I press "Create"
-         Then I should see "Behat Training"
-          And I should see "Promotion has been successfully created."
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training 100 EUR discount on all orders"
+        And I click "Add action"
+        And I select "Fixed discount" from "Type"
+        And I fill in "Amount" with "100"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created."
 
     @javascript
     Scenario: Creating new promotion with percentage discount action
         Given I am on the promotion creation page
-         When I fill in "Name" with "Sylius Training"
-          And I fill in "Description" with "Sylius Training 10% discount on all orders"
-          And I click "Add action"
-          And I select "Percentage discount" from "Type"
-          And I fill in "Percentage" with "10"
-          And I press "Create"
+         When I fill in "Code" with "P5"
+         And I fill in "Name" with "Sylius Training"
+         And I fill in "Description" with "Sylius Training 10% discount on all orders"
+         And I click "Add action"
+         And I select "Percentage discount" from "Type"
+         And I fill in "Percentage" with "10"
+         And I press "Create"
          Then I should see "Sylius Training"
-          And I should see "Promotion has been successfully created."
+         And I should see "Promotion has been successfully created."
 
     Scenario: Adding coupon manually
         Given I am on the page of promotion "Press Campaign"
@@ -121,7 +125,7 @@ Feature: Promotions
     Scenario: Added coupon appears on the list of coupons
         Given I am on the page of promotion "Press Campaign"
           And I follow "Add coupon"
-          And I fill in "Code" with "SPECIAL"
+         When I fill in "Code" with "SPECIAL"
           And I press "Create"
          When I follow "List coupons"
          Then I should see 6 coupons in the list
@@ -195,24 +199,26 @@ Feature: Promotions
     @javascript
     Scenario: Creating promotion with usage limit
         Given I am on the promotion creation page
-         When I fill in "Name" with "First 5 pay half!"
-          And I fill in "Description" with "First 5 orders get 50% discount!"
-          And I click "Add action"
-          And I select "Percentage discount" from "Type"
-          And I fill in "Percentage" with "50"
-          And I fill in "Usage limit" with "5"
-          And I press "Create"
-         Then I should see "First 5 pay half!"
-          And I should see "Promotion has been successfully created."
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "First 5 pay half!"
+        And I fill in "Description" with "First 5 orders get 50% discount!"
+        And I click "Add action"
+        And I select "Percentage discount" from "Type"
+        And I fill in "Percentage" with "50"
+        And I fill in "Usage limit" with "5"
+        And I press "Create"
+        Then I should see "First 5 pay half!"
+        And I should see "Promotion has been successfully created."
 
     Scenario: Created promotions appear in the list
         Given I am on the promotion creation page
-          And I fill in "Name" with "First 5 pay half!"
-          And I fill in "Description" with "First 5 orders get 50% discount!"
-          And I press "Create"
-         When I go to the promotion index page
-         Then I should see 5 promotions in the list
-          And I should see promotion with name "First 5 pay half!" in that list
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "First 5 pay half!"
+        And I fill in "Description" with "First 5 orders get 50% discount!"
+        And I press "Create"
+        When I go to the promotion index page
+        Then I should see 5 promotions in the list
+        And I should see promotion with name "First 5 pay half!" in that list
 
     Scenario: Accessing the promotion editing form
         Given I am on the page of promotion "New Year"
@@ -275,3 +281,35 @@ Feature: Promotions
           And I click "delete" from the confirmation modal
          Then I should see "Promotion action has been successfully deleted."
           And I should not see "Fixed discount"
+
+    Scenario: Cannot update promotion code
+         When I am editing promotion "New Year"
+         Then the code field should be disabled
+
+    Scenario: Try add promotion with existing code
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P1"
+        And I fill in "Name" with "Behat Training"
+        And I press "Create"
+        Then I should still be on the promotion creation page
+        And I should see "The promotion with given code already exists."
+
+    Scenario: Submitting invalid form without code
+        Given I am on the promotion creation page
+        When I fill in "Name" with "Behat Training"
+        And I press "Create"
+        Then I should still be on the promotion creation page
+        And I should see "Please enter promotion code."
+
+    Scenario: Cannot update coupon code
+        Given I am on the page of promotion "Press Campaign"
+        When I follow "List coupons"
+        And I click "edit" near "XD0001"
+        Then I should see disabled code field
+
+    Scenario: Try add coupon with existing code
+        Given I am on the page of promotion "Press Campaign"
+        And I follow "Add coupon"
+        When I fill in "Code" with "XD0001"
+        And I press "Create"
+        Then I should see "This coupon already exists."
