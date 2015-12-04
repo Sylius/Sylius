@@ -64,7 +64,7 @@ Feature: Shipping categories
 
     Scenario: Cannot update shipping category code
          When I am editing shipping category "Heavy"
-         Then The code field should be disabled
+         Then the code field should be disabled
 
     Scenario: Try add shipping category with existing code
         Given I am on the shipping category creation page

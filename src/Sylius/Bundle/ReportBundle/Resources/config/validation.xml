@@ -19,7 +19,7 @@
     <class name="Sylius\Component\Report\Model\Report">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
-            <option name="message">sylius.report.code.in_use</option>
+            <option name="message">sylius.report.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
         <property name="name">
