@@ -30,7 +30,9 @@ sylius:
             roles: Roles
         channel:
             taxonomies: Taxonomies
+            locale_default: Default locale
             locales: Locales
+            currency_default: Default currency
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods

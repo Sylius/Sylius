@@ -44,7 +44,9 @@ class LocaleChoiceType extends AbstractType
     {
         parent::buildForm($builder, $options);
 
-        $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+        if (true === $options['multiple']) {
+            $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+        }
     }
 
     /**

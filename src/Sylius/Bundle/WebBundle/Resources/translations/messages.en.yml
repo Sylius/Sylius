@@ -640,9 +640,11 @@ sylius:
         create: Add channel
         created_at: Created at
         code: Code
+        currency_default: Default currency
         enabled: Enabled
         id: ID
         index_header: Channels
+        locale_default: Default locale
         manage: Manage channels
         create_header: Add channel
         name: Name
