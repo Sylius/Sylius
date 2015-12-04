@@ -703,6 +703,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->pressButton('Save changes');
     }
 
+    /**
+     * @Then the code field should be disabled
+     * @Then I should see disabled code field
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
+    }
+
     private function assertRoute($route)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($route));
@@ -739,13 +748,5 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $items = $collection->findAll('css', 'div[data-form-collection="item"]');
 
         return end($items);
-    }
-
-    /**
-     * @Then the code field should be disabled
-     */
-    public function theCodeFieldShouldBeDisabled()
-    {
-        $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
     }
 }

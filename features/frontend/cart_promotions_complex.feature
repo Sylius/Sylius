@@ -7,8 +7,8 @@ Feature: Checkout promotions with multiple rules and actions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name              | description                                            |
-            | 150 EUR / 2 items | Discount for orders over 150 EUR with at least 2 items |
+            | code | name              | description                                            |
+            | P1   | 150 EUR / 2 items | Discount for orders over 150 EUR with at least 2 items |
           And promotion "150 EUR / 2 items" has following rules defined:
             | type       | configuration        |
             | Item total | Amount: 150          |

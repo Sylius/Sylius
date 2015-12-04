@@ -30,6 +30,7 @@ class LoadPromotionsData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $promotion = $this->createPromotion(
+            'PR1',
             'New Year',
             'New Year Sale for 3 and more items.',
             array($this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, array('count' => 3, 'equal' => true))),
@@ -39,6 +40,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
+            'PR2',
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
             array($this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
@@ -48,6 +50,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
+            'PR3',
             '3rd order',
             'Discount for 3rd order',
             array($this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, array('nth' => 3))),
@@ -57,6 +60,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
+            'PR4',
             'Shipping to Germany',
             'Discount for orders with shipping country Germany',
             array($this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, array('country' => $this->getReference('Sylius.Country.DE')->getId()))),
@@ -115,6 +119,7 @@ class LoadPromotionsData extends DataFixture
     /**
      * Create promotion with set of rules and actions.
      *
+     * @param string $code
      * @param string $name
      * @param string $description
      * @param array  $rules
@@ -122,12 +127,13 @@ class LoadPromotionsData extends DataFixture
      *
      * @return PromotionInterface
      */
-    protected function createPromotion($name, $description, array $rules, array $actions)
+    protected function createPromotion($code, $name, $description, array $rules, array $actions)
     {
         /** @var $promotion PromotionInterface */
         $promotion = $this->getPromotionFactory()->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);
+        $promotion->setCode($code);
 
         foreach ($rules as $rule) {
             $promotion->addRule($rule);

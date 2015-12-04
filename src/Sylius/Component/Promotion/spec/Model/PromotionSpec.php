@@ -36,6 +36,12 @@ class PromotionSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('P1');
+        $this->getCode()->shouldReturn('P1');
+    }
+
     function its_name_should_be_mutable()
     {
         $this->setName('New Year Sale');

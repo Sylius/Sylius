@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Promotion form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionType extends AbstractResourceType
@@ -61,6 +60,7 @@ class PromotionType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.actions',
                 'button_add_label' => 'sylius.promotion.add_action',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

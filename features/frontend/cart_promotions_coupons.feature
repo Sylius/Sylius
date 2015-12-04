@@ -7,9 +7,9 @@ Feature: Checkout coupon promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name                      | description            |
-            | Press campaign            | Coupon based promotion |
-            | New Year campaign         | Coupon based promotion |
+            | code | name                      | description            |
+            | P1   | Press campaign            | Coupon based promotion |
+            | P2   | New Year campaign         | Coupon based promotion |
           And promotion "Press campaign" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |

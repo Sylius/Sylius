@@ -55,7 +55,7 @@ class CouponToCodeType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'label'      => 'sylius.form.coupon.code'
+                'label'      => 'sylius.ui.code'
             ))
         ;
     }
