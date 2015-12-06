@@ -3,6 +3,6 @@ bin/phpspec run -f dot
 
 bin/behat --strict -f progress -p cached
 
-travis/prepare/prepare-javascript
+etc/travis/prepare/prepare-javascript
 
 bin/behat --strict -f progress -p javascript_cached
