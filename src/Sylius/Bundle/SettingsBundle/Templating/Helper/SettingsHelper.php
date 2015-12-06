@@ -60,6 +60,26 @@ class SettingsHelper extends Helper
     }
 
     /**
+     * Checks if settings parameter for given namespace and name exists.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasSettingsParameter($name)
+    {
+        if (false === strpos($name, '.')) {
+            throw new \InvalidArgumentException(sprintf('Parameter must be in format "namespace.name", "%s" given.', $name));
+        }
+
+        list($namespace, $name) = explode('.', $name);
+
+        $settings = $this->settingsManager->loadSettings($namespace);
+
+        return $settings->has($name);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getName()

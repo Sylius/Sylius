@@ -101,7 +101,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function loadSettings($namespace)
+    public function loadSettings($namespace, $ignoreUnknown = true)
     {
         if (isset($this->resolvedSettings[$namespace])) {
             return $this->resolvedSettings[$namespace];
@@ -118,6 +118,15 @@ class SettingsManager implements SettingsManagerInterface
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
+
+        // Remove unknown settings' parameters (e.g. From a previous version of the settings schema)
+        if (true === $ignoreUnknown) {
+            foreach ($parameters as $name => $value) {
+                if (!$settingsBuilder->isKnown($name)) {
+                    unset($parameters[$name]);
+                }
+            }
+        }
 
         $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
