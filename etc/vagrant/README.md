@@ -15,7 +15,7 @@ This configuration includes following software:
 First you need to create vagrant VM
 
 ```
-$ cd vagrant
+$ cd etc/vagrant
 $ vagrant up
 ```
 

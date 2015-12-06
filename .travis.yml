@@ -3,7 +3,7 @@ language: php
 env:
     global:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
-        - SYLIUS_BUILD_DIR=travis/build-output
+        - SYLIUS_BUILD_DIR=etc/travis/build-output
 
 cache:
     directories:
@@ -34,10 +34,10 @@ before_install:
 
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then travis/prepare/prepare-php7-memcached; fi
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then travis/prepare/prepare-mongodb; fi
+    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then etc/travis/prepare/prepare-php7-memcached; fi
+    - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then etc/travis/prepare/prepare-mongodb; fi
 
-    - cat travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - cat etc/travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
     - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
@@ -61,7 +61,7 @@ before_script:
     - php -i
 
 script:
-    - travis/run-tests default
+    - etc/travis/run-tests default
 
 before_cache:
     - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
