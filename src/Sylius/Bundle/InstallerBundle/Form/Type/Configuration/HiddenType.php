@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\InstallerBundle\Form\Type\Configuration;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,13 +21,13 @@ class HiddenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sylius_cache', 'hidden', array(
+            ->add('sylius_cache', HiddenType::class, array(
                 'data' => 'file_system',
                 'constraints' => array(
                     new Assert\NotBlank(),
                 )
             ))
-            ->add('sylius_secret', 'hidden', array(
+            ->add('sylius_secret', HiddenType::class, array(
                 'data' => uniqid(),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -35,7 +36,7 @@ class HiddenType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_configuration_hidden';
     }

@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -37,14 +40,14 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('time', 'integer', array(
+            ->add('time', IntegerType::class, array(
                 'label'       => 'sylius.form.rule.customer_loyalty_configuration.time',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
-            ->add('unit', 'choice', array(
+            ->add('unit', ChoiceType::class, array(
                 'label'       => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
                 'choices'     => array(
                     'days'   => 'sylius.form.rule.customer_loyalty_configuration.unit.days',
@@ -56,7 +59,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
                     new NotBlank(),
                 )
             ))
-            ->add('after', 'checkbox', array(
+            ->add('after', CheckboxType::class, array(
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
             ))
         ;
@@ -77,7 +80,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_customer_loyalty_configuration';
     }

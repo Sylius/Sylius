@@ -13,6 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -43,13 +44,13 @@ class OrderStateChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order_state_choice';
     }

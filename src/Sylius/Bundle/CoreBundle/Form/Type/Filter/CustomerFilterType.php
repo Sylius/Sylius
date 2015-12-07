@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,7 +25,7 @@ class CustomerFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', 'text', array(
+            ->add('query', TextType::class, array(
                 'label' => 'sylius.form.customer_filter.query',
                 'attr'  => array(
                     'placeholder' => 'sylius.form.customer_filter.query'
@@ -33,7 +34,7 @@ class CustomerFilterType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer_filter';
     }

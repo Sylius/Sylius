@@ -79,7 +79,7 @@ class CustomerGroupType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_customer_group_configuration';
     }

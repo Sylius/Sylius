@@ -56,7 +56,7 @@ class FixedDiscountConfigurationType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action_fixed_discount_configuration';
     }

@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\InstallerBundle\Form\Type\Configuration;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,7 +22,7 @@ class LocaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sylius_locale', 'locale', array(
+            ->add('sylius_locale', LocaleType::class, array(
                 'preferred_choices' => array('en', 'pl', 'es', 'de'),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -28,7 +30,7 @@ class LocaleType extends AbstractType
                 ),
                 'label' => 'sylius.form.configuration.locale.locale',
             ))
-            ->add('sylius_currency', 'choice', array(
+            ->add('sylius_currency', ChoiceType::class, array(
                 'choices' => array('EUR' => '€', 'USD' => '$'),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -38,7 +40,7 @@ class LocaleType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_configuration_locale';
     }

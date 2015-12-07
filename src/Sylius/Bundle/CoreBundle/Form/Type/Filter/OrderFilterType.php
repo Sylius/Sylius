@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class OrderFilterType extends AbstractType
@@ -20,7 +22,7 @@ class OrderFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', 'text', array(
+            ->add('number', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.number',
                 'attr'     => array(
@@ -43,14 +45,14 @@ class OrderFilterType extends AbstractType
                 ),
                 'divisor' => 1
             ))
-            ->add('createdAtFrom', 'text', array(
+            ->add('createdAtFrom', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_from',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.order_filter.created_at_from'
                 )
             ))
-            ->add('createdAtTo', 'text', array(
+            ->add('createdAtTo', TextType::class, array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_to',
                 'attr'     => array(
@@ -61,7 +63,7 @@ class OrderFilterType extends AbstractType
                 'required'    => false,
                 'empty_value' => 'sylius.form.order_filter.channel'
             ))
-            ->add('paymentState', 'choice', array(
+            ->add('paymentState', ChoiceType::class, array(
                 'required'    => false,
                 'label'       => 'sylius.form.order_filter.payment_state',
                 'empty_value' => 'sylius.form.order_filter.payment_state',
@@ -80,7 +82,7 @@ class OrderFilterType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order_filter';
     }

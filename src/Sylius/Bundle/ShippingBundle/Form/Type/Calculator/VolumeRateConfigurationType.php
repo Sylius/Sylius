@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -54,7 +55,7 @@ class VolumeRateConfigurationType extends AbstractType
                     new Type(array('type' => 'integer')),
                 ),
             ))
-            ->add('division', 'number', array(
+            ->add('division', NumberType::class, array(
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.division',
                 'constraints' => array(
                     new NotBlank(),
@@ -80,7 +81,7 @@ class VolumeRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_volume_rate';
     }

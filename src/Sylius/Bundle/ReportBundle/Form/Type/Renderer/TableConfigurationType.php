@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +28,7 @@ class TableConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('template', 'choice', array(
+            ->add('template', ChoiceType::class, array(
                 'label' => 'sylius.form.report.renderer.template',
                 'choices' => array(
                     'SyliusReportBundle:Table:default.html.twig' => 'Default',
@@ -39,7 +40,7 @@ class TableConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_renderer_table';
     }

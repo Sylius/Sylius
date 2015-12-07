@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -53,7 +54,7 @@ class ContainsProductConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 )
             ))
-            ->add('exclude', 'checkbox', array(
+            ->add('exclude', CheckboxType::class, array(
                 'label' => 'sylius.form.rule.contains_product_configuration.exclude',
             ))
         ;
@@ -74,7 +75,7 @@ class ContainsProductConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_contains_product_configuration';
     }

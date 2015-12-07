@@ -51,7 +51,7 @@ class FixedFeeCalculatorConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_fee_calculator_fixed';
     }

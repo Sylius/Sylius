@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -39,13 +40,13 @@ class GenderType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_gender';
     }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,7 +26,7 @@ class PercentFeeCalculatorConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percent', 'number', array(
+            ->add('percent', NumberType::class, array(
                 'label' => 'sylius.form.payment_method.fee_calculator.percent.percent',
             ))
         ;
@@ -34,7 +35,7 @@ class PercentFeeCalculatorConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_fee_calculator_percent';
     }

@@ -70,7 +70,7 @@ class ZoneBasedConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_price_calculator_zone_based';
     }
