@@ -37,6 +37,19 @@ class CartController extends Controller
     public function summaryAction()
     {
         $cart = $this->getCurrentCart();
+
+        // refreshing to show proper values, like after login, or changing channel
+        // @todo remove refreshing of the cart with new event system,
+        $this->getEventDispatcher()->dispatch(
+            SyliusCartEvents::CART_CHANGE,
+            new GenericEvent($cart)
+        );
+
+        $this->getEventDispatcher()->dispatch(
+            SyliusCartEvents::CART_SAVE_INITIALIZE,
+            new CartEvent($cart)
+        );
+
         $form = $this->createForm('sylius_cart', $cart);
 
         $view = $this

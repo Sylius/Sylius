@@ -12,12 +12,13 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\AdjustmentInterface;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @mixin \Sylius\Component\Core\OrderProcessing\PaymentChargesProcessor
@@ -27,9 +28,12 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class PaymentChargesProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
+    function let(
+        EventDispatcherInterface $eventDispatcher,
+        DelegatingFeeCalculatorInterface $delegatingFeeCalculator
+    )
     {
-        $this->beConstructedWith($adjustmentFactory, $delegatingFeeCalculator);
+        $this->beConstructedWith($eventDispatcher, $delegatingFeeCalculator);
     }
 
     function it_is_initializable()
@@ -43,9 +47,8 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
     }
 
     function it_applies_payment_charges(
-        $adjustmentFactory,
         $delegatingFeeCalculator,
-        AdjustmentInterface $adjustment,
+        EventDispatcherInterface $eventDispatcher,
         OrderInterface $order,
         PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod
@@ -53,20 +56,16 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments('payment')->shouldBeCalled();
         $order->getPayments()->willReturn(array($payment))->shouldBeCalled();
 
-        $order->calculateTotal()->shouldBeCalled();
-
         $payment->getState()->willReturn('new')->shouldBeCalled();
         $payment->getMethod()->willReturn($paymentMethod);
         $paymentMethod->getName()->willReturn('testPaymentMethod');
 
         $delegatingFeeCalculator->calculate($payment)->willReturn(50);
 
-        $adjustmentFactory->createNew()->willReturn($adjustment)->shouldBeCalled();
-        $adjustment->setType('payment')->shouldBeCalled();
-        $adjustment->setAmount(50)->shouldBeCalled();
-        $adjustment->setDescription('testPaymentMethod')->shouldBeCalled();
-
-        $order->addAdjustment($adjustment)->shouldBeCalled();
+        $eventDispatcher->dispatch(
+            AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
+            Argument::type(AdjustmentEvent::class)
+        );
 
         $this->applyPaymentCharges($order);
     }

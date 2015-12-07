@@ -11,14 +11,19 @@
 
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Order\Model\AdjustmentDTO;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Taxation processor.
@@ -27,13 +32,6 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {
-    /**
-     * Adjustment repository.
-     *
-     * @var FactoryInterface
-     */
-    protected $adjustmentFactory;
-
     /**
      * Tax calculator.
      *
@@ -63,26 +61,33 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected $settings;
 
     /**
+     * Event dispatcher
+     *
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor.
      *
-     * @param FactoryInterface      $adjustmentFactory
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher
      * @param Settings                 $taxationSettings
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        FactoryInterface $adjustmentFactory,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
-        Settings $taxationSettings
+        Settings $taxationSettings,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $this->adjustmentFactory = $adjustmentFactory;
         $this->calculator = $calculator;
         $this->taxRateResolver = $taxRateResolver;
         $this->zoneMatcher = $zoneMatcher;
         $this->settings = $taxationSettings;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -90,11 +95,11 @@ class TaxationProcessor implements TaxationProcessorInterface
      */
     public function applyTaxes(OrderInterface $order)
     {
-        // Remove all tax adjustments, we recalculate everything from scratch.
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+        // Taxes are applied to InventoryUnits, not order.
 
-        if ($order->getItems()->isEmpty()) {
-            return;
+        // Remove all tax adjustments, we recalculate everything from scratch.
+        foreach ($order->getInventoryUnits() as $inventoryUnit) {
+            $inventoryUnit->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
 
         $zone = null;
@@ -116,46 +121,66 @@ class TaxationProcessor implements TaxationProcessorInterface
         $taxes = $this->processTaxes($order, $zone);
 
         $this->addAdjustments($taxes, $order);
-
-        $order->calculateTotal();
     }
 
     protected function processTaxes(OrderInterface $order, $zone)
     {
         $taxes = array();
+
+        /** @var OrderItemInterface $item */
         foreach ($order->getItems() as $item) {
-            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
+
+            $product = $item->getProduct();
+            $rate = $this->taxRateResolver->resolve($product, array('zone' => $zone));
 
             // Skip this item is there is not matching tax rate.
             if (null === $rate) {
                 continue;
             }
 
-            $item->calculateTotal();
-
-            $amount = $this->calculator->calculate($item->getTotal(), $rate);
+            $amount = $this->calculator->calculate($item->getUnitPrice(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();
             $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
 
-            $taxes[$description] = array(
-                'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
-                'included' => $rate->isIncludedInPrice()
-            );
+            /** @var InventoryUnitInterface $inventoryUnit */
+            foreach ($item->getInventoryUnits() as $inventoryUnit) {
+                $taxes[] = array(
+                    'originId' => $rate->getId(),
+                    'originType' => get_class($rate),
+                    'amount' => $amount,
+                    'inventoryUnit' => $inventoryUnit,
+                    'description' => $description,
+                    'neutrality' => $rate->isIncludedInPrice(),
+                );
+            }
         }
 
         return $taxes;
     }
 
-    protected function addAdjustments(array $taxes, OrderInterface $order)
+    /**
+     * @param array $taxes
+     */
+    protected function addAdjustments(array $taxes)
     {
-        foreach ($taxes as $description => $tax) {
-            $adjustment = $this->adjustmentFactory->createNew();
-            $adjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
-            $adjustment->setAmount($tax['amount']);
-            $adjustment->setDescription($description);
-            $adjustment->setNeutral($tax['included']);
+        foreach ($taxes as $tax) {
+            $adjustmentDTO = new AdjustmentDTO();
+            $adjustmentDTO->type = AdjustmentInterface::TAX_ADJUSTMENT;
+            $adjustmentDTO->amount = $tax['amount'];
+            $adjustmentDTO->description = $tax['description'];
+            $adjustmentDTO->neutrality = $tax['neutrality'];
+            $adjustmentDTO->originId = $tax['originId'];
+            $adjustmentDTO->originType = $tax['originType'];
 
-            $order->addAdjustment($adjustment);
+            $this->eventDispatcher->dispatch(
+                AdjustmentEvent::ADJUSTMENT_ADDING_INVENTORY_UNIT,
+                new AdjustmentEvent(
+                    $tax['inventoryUnit'],
+                    [
+                        'adjustment-data' => $adjustmentDTO,
+                    ]
+                )
+            );
         }
     }
 }

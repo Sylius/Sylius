@@ -13,12 +13,13 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @mixin \Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor
@@ -27,9 +28,12 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
+    function let(
+        EventDispatcherInterface $eventDispatcher,
+        DelegatingCalculatorInterface $calculator
+    )
     {
-        $this->beConstructedWith($adjustmentFactory, $calculator);
+        $this->beConstructedWith($eventDispatcher, $calculator);
     }
 
     function it_is_initializable()
@@ -47,8 +51,6 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->willReturn(array());
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
-        $order->calculateTotal()->shouldBeCalled();
-
         $this->applyShippingCharges($order);
     }
 
@@ -58,20 +60,16 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $order->calculateTotal()->shouldBeCalled();
-
         $this->applyShippingCharges($order);
     }
 
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
-        FactoryInterface $adjustmentFactory,
         $calculator,
-        AdjustmentInterface $adjustment,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(array($shipment));
 
         $calculator->calculate($shipment)->willReturn(450);
@@ -79,14 +77,12 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $shipment->getMethod()->willReturn($shippingMethod);
         $shippingMethod->getName()->willReturn('FedEx');
 
-        $adjustment->setAmount(450)->shouldBeCalled();
-        $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('FedEx')->shouldBeCalled();
-
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $order->addAdjustment($adjustment)->shouldBeCalled();
 
-        $order->calculateTotal()->shouldBeCalled();
+        $eventDispatcher->dispatch(
+            AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
+            Argument::type(AdjustmentEvent::class)
+        )->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }

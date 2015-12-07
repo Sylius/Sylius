@@ -42,9 +42,10 @@
             <join-column name="order_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="adjustments">
-            <join-column name="order_item_id" referenced-column-name="id" nullable="true" />
+        <many-to-one field="inventoryUnit" target-entity="Sylius\Component\Inventory\Model\InventoryUnitInterface" inversed-by="adjustments">
+            <join-column name="inventory_unit_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+
     </mapped-superclass>
 
 </doctrine-mapping>

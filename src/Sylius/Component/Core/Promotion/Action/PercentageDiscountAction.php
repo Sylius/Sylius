@@ -37,11 +37,11 @@ class PercentageDiscountAction extends DiscountAction
             );
         }
 
-        $adjustment = $this->createAdjustment($promotion);
+        $adjustmentDTO = $this->createAdjustmentDTO($promotion);
         $adjustmentAmount = (int) round($subject->getPromotionSubjectTotal() * $configuration['percentage']);
-        $adjustment->setAmount(- $adjustmentAmount);
+        $adjustmentDTO->amount = (- $adjustmentAmount);
 
-        $subject->addAdjustment($adjustment);
+        $this->addAdjustmentTo($subject, $adjustmentDTO);
     }
 
     /**

@@ -38,6 +38,7 @@
         <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>
+                <cascade-remove/>
             </cascade>
         </one-to-many>
 

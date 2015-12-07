@@ -43,23 +43,33 @@
         {% endfor %}
     </tbody>
     <tfoot>
-        {% if cart.adjustmentsTotal(promotionAdjustment) %}
+        {% if cart.allAdjustmentsTotal(promotionAdjustment) %}
         <tr>
-            <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: -{{ (-1 * cart.adjustmentsTotal(promotionAdjustment))|sylius_price }}
+            <td colspan="3">
+                <p><strong>{{ 'sylius.order.promotions'|trans }}</strong></p>
+                <ul>
+                    {% for promotionAdjustment in cart.allAdjustments(promotionAdjustment) %}
+                        <li>{{ promotionAdjustment.description }} {{ promotionAdjustment.amount|sylius_price }} </li>
+                    {% else %}
+                        <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td colspan="3" style="text-align: right;">
+                <span><strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: -{{ (-1 * cart.allAdjustmentsTotal(promotionAdjustment))|sylius_price }}</span>
             </td>
         </tr>
         {% endif %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.adjustmentsTotal(shippingAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.allAdjustmentsTotal(shippingAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>
             <td colspan="4">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
-                {% for taxAdjustment in cart.adjustments(taxAdjustment) %}
+                {% for taxAdjustment in cart.allAdjustments(taxAdjustment) %}
                     <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price }} </li>
                 {% else %}
                     <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
@@ -67,7 +77,7 @@
                 </ul>
             </td>
             <td colspan="2" style="text-align: right;">
-                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.adjustmentsTotal(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.allAdjustmentsTotal(taxAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>

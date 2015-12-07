@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface
+interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
 {
     /**
      * @return int
@@ -53,12 +53,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setTotal($total);
 
     /**
-     * Calculate total based on quantity and unit price.
-     * Take adjustments into account.
-     */
-    public function calculateTotal();
-
-    /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overwritten to enable merge quantities.
      *
@@ -86,4 +80,5 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      * @param bool $immutable
      */
     public function setImmutable($immutable);
+
 }

@@ -242,7 +242,13 @@ class Order implements OrderInterface
      */
     public function getItemsTotal()
     {
-        return $this->itemsTotal;
+        $itemsTotal = 0;
+
+        foreach ($this->getItems() as $item) {
+            $itemsTotal += $item->getQuantity() * $item->getUnitPrice();
+        }
+
+        return $itemsTotal;
     }
 
     /**
@@ -257,22 +263,8 @@ class Order implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function calculateItemsTotal()
-    {
-        $itemsTotal = 0;
-
-        foreach ($this->items as $item) {
-            $item->calculateTotal();
-
-            $itemsTotal += $item->getTotal();
-        }
-
-        $this->itemsTotal = $itemsTotal;
-    }
-
-    /**
+     * It takes also adjustments added to the inventoryUnits
+     *
      * {@inheritdoc}
      */
     public function getAdjustments($type = null)
@@ -321,14 +313,14 @@ class Order implements OrderInterface
      */
     public function getAdjustmentsTotal($type = null)
     {
-        if (null === $type) {
-            return $this->adjustmentsTotal;
-        }
-
         $total = 0;
         foreach ($this->getAdjustments($type) as $adjustment) {
-            $total += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $total += $adjustment->getAmount();
+            }
         }
+
+        $this->adjustmentsTotal = $total;
 
         return $total;
     }
@@ -353,20 +345,6 @@ class Order implements OrderInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateAdjustmentsTotal()
-    {
-        $this->adjustmentsTotal = 0;
-
-        foreach ($this->adjustments as $adjustment) {
-            if (!$adjustment->isNeutral()) {
-                $this->adjustmentsTotal += $adjustment->getAmount();
-            }
-        }
     }
 
     /**
@@ -404,33 +382,20 @@ class Order implements OrderInterface
      */
     public function getTotal()
     {
-        return $this->total;
-    }
+        $itemPrices = $this->getItemsTotal();
+        $adjustmentsValue = $this->getAdjustmentsTotal();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setTotal($total)
-    {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
+        $totalValue = $itemPrices + $adjustmentsValue;
+
+        $this->itemsTotal = $itemPrices;
+        $this->adjustmentsTotal = $adjustmentsValue;
+        $this->total = $totalValue;
+
+        if ($totalValue < 0) {
+            return 0;
         }
-        $this->total = $total;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateTotal()
-    {
-        $this->calculateItemsTotal();
-        $this->calculateAdjustmentsTotal();
-
-        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
+        return $totalValue;
     }
 
     /**

@@ -199,11 +199,10 @@
             <argument type="service" id="sylius.manager.payment" />
         </service>
         <service id="sylius.order_processing.payment_charges_processor" class="%sylius.order_processing.payment_charges_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.payment.delegating_fee_calculator" />
         </service>
         <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.tax_rate_resolver" />
             <argument type="service" id="sylius.zone_matcher" />
@@ -216,9 +215,10 @@
                     <argument>sylius_taxation</argument>
                 </service>
             </argument>
+            <argument type="service" id="event_dispatcher"/>
         </service>
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.shipping_calculator" />
         </service>
 
@@ -244,8 +244,7 @@
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="processInventoryUnits" piority="-100"/>
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
         </service>
@@ -357,6 +356,11 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
+        <service id="sylius.listener.adjustment" class="Sylius\Bundle\CoreBundle\EventListener\AdjustmentSubscriber">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
@@ -391,19 +395,26 @@
         <service id="sylius.promotion_rule_checker.customer_group" class="%sylius.promotion_rule_checker.customer_group.class%">
             <tag name="sylius.promotion_rule_checker" type="customer_group" label="User Group" />
         </service>
-        <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
+        <!-- DiscountActions -->
+        <service id="sylius.promotion_action.abstract"
+                 class="Sylius\Component\Core\Promotion\Action\DiscountAction"
+                 abstract="true">
             <argument type="service" id="sylius.originator" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="sylius.promotion_action.fixed_discount"
+                 class="%sylius.promotion_action.fixed_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
         </service>
-        <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.originator" />
+        <service id="sylius.promotion_action.percentage_discount"
+                 class="%sylius.promotion_action.percentage_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
-        <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.originator" />
+        <service id="sylius.promotion_action.shipping_discount"
+                 class="%sylius.promotion_action.shipping_discount.class%"
+                 parent="sylius.promotion_action.abstract">
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping discount" />
         </service>
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
