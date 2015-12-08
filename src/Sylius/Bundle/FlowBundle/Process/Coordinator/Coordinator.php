@@ -85,7 +85,7 @@ class Coordinator implements CoordinatorInterface
         $this->context->close();
 
         if (!$this->context->isValid()) {
-            return $this->context->getProcess()->getValidator()->getResponse($step);
+            return $this->processStepResult($process, $this->context->getProcess()->getValidator()->getResponse($step));
         }
 
         return $this->redirectToStepDisplayAction($process, $step, $queryParameters);
@@ -123,11 +123,10 @@ class Coordinator implements CoordinatorInterface
             return $this->redirectToStepDisplayAction($process, $step);
         }
 
-        if (!$this->context->isValid()) {
-            return $this->context->getProcess()->getValidator()->getResponse($step);
-        }
-
-        return $this->processStepResult($process, $step->displayAction($this->context));
+        return $this->processStepResult(
+            $process,
+            $this->context->isValid() ? $step->displayAction($this->context) : $this->context->getProcess()->getValidator()->getResponse($step)
+        );
     }
 
     /**
@@ -141,11 +140,10 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->rewindHistory();
 
-        if (!$this->context->isValid()) {
-            return $this->context->getProcess()->getValidator()->getResponse($step);
-        }
-
-        return $this->processStepResult($process, $step->forwardAction($this->context));
+        return $this->processStepResult(
+            $process,
+            $this->context->isValid() ? $step->forwardAction($this->context) : $this->context->getProcess()->getValidator()->getResponse($step)
+        );
     }
 
     /**
