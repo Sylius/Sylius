@@ -18,29 +18,21 @@ use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 
 /**
- * Order item model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItem extends CartItem implements OrderItemInterface
 {
     /**
-     * Product variant.
-     *
      * @var ProductVariantInterface
      */
     protected $variant;
 
     /**
-     * Inventory units.
-     *
      * @var Collection|InventoryUnitInterface[]
      */
     protected $inventoryUnits;
 
     /**
-     * Promotions applied
-     *
      * @var Collection|BasePromotionInterface[]
      */
     protected $promotions;
@@ -75,8 +67,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function setVariant(ProductVariantInterface $variant)
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
     /**
@@ -106,8 +96,6 @@ class OrderItem extends CartItem implements OrderItemInterface
             $unit->setOrderItem($this);
             $this->inventoryUnits->add($unit);
         }
-
-        return $this;
     }
 
     /**
@@ -117,8 +105,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         $unit->setOrderItem(null);
         $this->inventoryUnits->removeElement($unit);
-
-        return $this;
     }
 
     /**
@@ -140,6 +126,14 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getPromotionSubjectCount()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
@@ -153,8 +147,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
         }
-
-        return $this;
     }
 
     /**
@@ -165,8 +157,6 @@ class OrderItem extends CartItem implements OrderItemInterface
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
         }
-
-        return $this;
     }
 
     /**
