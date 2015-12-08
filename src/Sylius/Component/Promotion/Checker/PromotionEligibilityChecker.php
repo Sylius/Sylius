@@ -23,8 +23,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Checks if promotion rules are eligible.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -97,7 +95,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionInterface        $promotion
      * @param RuleInterface             $rule
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
@@ -132,7 +130,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToDates(PromotionInterface $promotion)
     {
@@ -158,7 +156,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToUsageLimit(PromotionInterface $promotion)
     {

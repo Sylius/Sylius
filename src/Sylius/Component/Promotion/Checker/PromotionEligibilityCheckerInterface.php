@@ -15,8 +15,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Promotion eligibility checker interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionEligibilityCheckerInterface
@@ -25,7 +23,7 @@ interface PromotionEligibilityCheckerInterface
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }

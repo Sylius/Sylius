@@ -32,7 +32,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_empty_subject_as_not_eligible(PromotionCountableSubjectInterface $subject)
     {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(0);
+        $subject->getPromotionSubjectCount()->willReturn(0);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
@@ -40,7 +40,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(
         PromotionCountableSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(7);
+        $subject->getPromotionSubjectCount()->willReturn(7);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
@@ -48,7 +48,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(
         PromotionCountableSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(12);
+        $subject->getPromotionSubjectCount()->willReturn(12);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
@@ -56,10 +56,20 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(
         PromotionCountableSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(10);
+        $subject->getPromotionSubjectCount()->willReturn(10);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
         $this->isEligible($subject, array('count' => 10, 'equal' => true))->shouldReturn(true);
+    }
+
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_equal_settings(
+        PromotionCountableSubjectInterface $subject
+    ) {
+        $subject->getPromotionSubjectCount()->willReturn(5);
+
+        $this->isEligible($subject, array('count' => 5, 'equal' => 'equal'))->shouldReturn(true);
+        $this->isEligible($subject, array('count' => 5, 'equal' => 'more_than'))->shouldReturn(false);
+        $this->isEligible($subject, array('count' => 5, 'equal' => 'exactly'))->shouldReturn(true);
     }
 
     function it_should_return_item_count_configuration_form_type()
