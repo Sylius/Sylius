@@ -14,6 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Process\Builder;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
 /**
  * Process builder interface.
@@ -100,7 +101,7 @@ interface ProcessBuilderInterface
     /**
      * Validation of process, if returns false, process is suspended.
      *
-     * @param \Closure $validator
+     * @param \Closure|ProcessValidatorInterface $validator
      */
     public function validate($validator);
 
