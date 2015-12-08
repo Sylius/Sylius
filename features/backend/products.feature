@@ -111,12 +111,7 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add"
-        And I wait 2 seconds
-        And I check "T-Shirt fabric attribute"
-        And I wait 1 second
-        And I press "Add attributes"
-        And I wait 2 seconds
+        And I add "T-Shirt fabric" attribute
         And I fill in "T-Shirt fabric" with "Polyester"
         When I press "Create"
         Then I should be on the page of product "FC Barcelona tee"

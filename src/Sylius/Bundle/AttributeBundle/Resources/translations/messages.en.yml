@@ -10,7 +10,16 @@ sylius:
             type: Type
     attribute_type:
         checkbox: Checkbox
+        date: Date
         datetime: Datetime
         integer: Integer
+        options: Options
+        percent: Percent
         text: Text
+        textarea: Textarea
         title: Attribute types
+    attribute_type_options:
+        datetime:
+            format: Format
+        date:
+            format: Format

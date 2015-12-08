@@ -99,6 +99,17 @@ class AttributeSpec extends ObjectBehavior
         $this->getConfiguration()->shouldReturn(array('choices' => array('Red', 'Blue')));
     }
 
+    function it_initializes_empty_options_array_by_default()
+    {
+        $this->getOptions()->shouldReturn(array());
+    }
+
+    function its_options_are_mutable()
+    {
+        $this->setOptions(array('testOption' => 'testOptionValue'));
+        $this->getOptions()->shouldReturn(array('testOption' => 'testOptionValue'));
+    }
+
     function its_storage_type_is_mutable()
     {
         $this->setStorageType('text');

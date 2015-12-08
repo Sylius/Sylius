@@ -47,7 +47,7 @@ Feature: Product attributes
         And I should not be able to edit "Type" select
 
     Scenario: Creating new attribute
-        Given I am on the product attribute creation page with type "Text"
+        Given I am on the product attribute creation page with type "text"
         When I fill in "Internal name" with "ISBN number"
         And I fill in "Code" with "isbn"
         And I fill in "Presentation" with "ISBN"
@@ -56,6 +56,19 @@ Feature: Product attributes
         And I should see "Attribute has been successfully created."
         And I should see 3 attributes in the list
         And I should see attribute with name "ISBN number" in that list
+
+    Scenario: Creating new attribute with options
+        Given I am on the product attribute creation page with type "date"
+        When I fill in the following:
+            | Internal name | Release date |
+            | Code          | release_date |
+            | Presentation  | Released at  |
+            | Format        | d/m/Y        |
+        And I press "Create"
+        Then I should be on the product attribute index page
+        And I should see "Attribute has been successfully created."
+        And I should see 3 attributes in the list
+        And I should see attribute with name "Release date" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the product attribute index page

@@ -38,11 +38,8 @@
                 {% for attribute in product.attributes %}
                 <tr>
                     <td>{{ attribute.presentation }}</td>
-                    {% if attribute.value.timestamp is defined %}
-                        <td>{{ attribute.value|date('Y/m/d') }}</td>
-                    {% else %}
-                        <td>{{ attribute.value }}</td>
-                    {% endif %}
+                    {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
+                    {% include [attributeTemplate, 'SyliusWebBundle:Frontend/Product:_attribute.html.twig'] with {'attribute': attribute} %}
                 </tr>
                 {% endfor %}
             </tbody>

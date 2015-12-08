@@ -1,0 +1,5 @@
+{% if attribute.attribute.options['format'] is defined %}
+    <td>{{ attribute.value|date(attribute.attribute.options['format']) }}</td>
+{% else %}
+    <td>{{ attribute.value|date('d/m/Y') }}</td>
+{% endif %}

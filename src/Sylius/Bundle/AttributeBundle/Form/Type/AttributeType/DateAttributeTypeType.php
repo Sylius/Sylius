@@ -21,14 +21,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeTypeType extends AbstractType
+class DateAttributeTypeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'datetime';
+        return 'date';
     }
 
     /**
@@ -46,6 +46,6 @@ class DatetimeAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_datetime';
+        return 'sylius_attribute_type_date';
     }
 }

@@ -369,6 +369,26 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I add "([^"]*)" attribute$/
+     */
+    public function iAddAttribute($attribute)
+    {
+        $this->clickLink('Add');
+
+        $attributesModalContainer = $this->getSession()->getPage()->find('css', '#attributes-modal');
+        $addAttributesButton = $attributesModalContainer->find('css', sprintf('button:contains("%s")', 'Add attributes'));
+
+        $this->waitForModalToAppear($attributesModalContainer);
+
+        $this->getSession()->getPage()->checkField($attribute.' attribute');
+        $addAttributesButton->press();
+
+        $this->waitForModalToDisappear($attributesModalContainer);
+
+        $this->getSession()->wait(100);
+    }
+
+    /**
      * @Given /^I wait (\d+) (seconds|second)$/
      */
     public function iWait($time)
@@ -590,8 +610,8 @@ class WebContext extends DefaultContext
      */
     public function iAmOnTheProductAttributeCreationPageWithType($type)
     {
-        $this->iAmOnThePage('product attribute creation');
-        $this->iShouldSeeSelectWithOptionSelected('Type', $type);
+        $this->getSession()->visit($this->generatePageUrl('product attribute creation', array('type' => $type)));
+        $this->iShouldSeeSelectWithOptionSelected('Type', ucfirst($type));
     }
 
     /**

@@ -16,7 +16,7 @@
                 <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
                 <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
                 <div class="col-lg-10">
-                    {{ _self.formField(form, count, id) }}
+                    {{ _self.formField(form, count, id, '') }}
                 </div>
             </div>
 
@@ -25,11 +25,11 @@
     {% set count = count+1 %}
 {% endfor %}
 
-{% macro formField(item, count, id, prefix = '') %}
+{% macro formField(item, count, id, prefix) %}
     {% if item.children|length > 0 %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
-            {{ _self.formField(child, count, prefix) }}
+            {{ _self.formField(child, count, id, prefix) }}
         {% endfor %}
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}

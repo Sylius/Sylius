@@ -34,6 +34,11 @@
 
         <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.options.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeOptionsType</parameter>
+
+        <parameter key="sylius.attribute.attribute_type.date.class">Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.options.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeTypeOptionsType</parameter>
     </parameters>
 
     <services>
@@ -77,6 +82,19 @@
         </service>
         <service id="sylius.form.type.attribute_type.datetime" class="%sylius.form.type.attribute_type.datetime.class%">
             <tag name="form.type" alias="sylius_attribute_type_datetime" />
+        </service>
+        <service id="sylius.form.type.attribute_type.options.datetime" class="%sylius.form.type.attribute_type.options.datetime.class%">
+            <tag name="form.type" alias="sylius_attribute_type_options_datetime" />
+        </service>
+
+        <service id="sylius.attribute.attribute_type.date" class="%sylius.attribute.attribute_type.date.class%">
+            <tag name="sylius.attribute.attribute_type" attribute-type="date" label="Date" />
+        </service>
+        <service id="sylius.form.type.attribute_type.date" class="%sylius.form.type.attribute_type.date.class%">
+            <tag name="form.type" alias="sylius_attribute_type_date" />
+        </service>
+        <service id="sylius.form.type.attribute_type.options.date" class="%sylius.form.type.attribute_type.options.date.class%">
+            <tag name="form.type" alias="sylius_attribute_type_options_date" />
         </service>
     </services>
 

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,9 +28,9 @@ class AttributeType extends AbstractResourceType
     protected $subjectName;
 
     /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $subjectName
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param string                   $subjectName
      */
     public function __construct($dataClass, array $validationGroups, $subjectName)
     {
@@ -45,6 +45,7 @@ class AttributeType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new BuildAttributeFormListener($builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.attribute.name',
             ))

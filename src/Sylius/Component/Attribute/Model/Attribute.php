@@ -48,6 +48,11 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $configuration = array();
 
     /**
+     * @var array
+     */
+    protected $options = array();
+
+    /**
      * @var AttributeValueInterface[]|Collection
      */
     protected $values;
@@ -168,6 +173,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
     }
 
     /**

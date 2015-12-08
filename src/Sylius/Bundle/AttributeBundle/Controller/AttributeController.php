@@ -79,7 +79,9 @@ class AttributeController extends ResourceController
             $attribute = $attributeRepository->find($choice);
             $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
 
-            $forms[$attribute->getId()] = $this->get('form.factory')->createNamed('value', $attributeForm, null, array('label' => $attribute->getName()))->createView();
+            $options = array('label' => $attribute->getName());
+
+            $forms[$attribute->getId()] = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options)->createView();
         }
 
         return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));

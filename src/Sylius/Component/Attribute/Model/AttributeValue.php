@@ -63,6 +63,11 @@ class AttributeValue implements AttributeValueInterface
     protected $dateTime;
 
     /**
+     * @var \DateTime
+     */
+    protected $date;
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -243,6 +248,28 @@ class AttributeValue implements AttributeValueInterface
         );
 
         $this->dateTime = new \DateTime($dateTimeValue);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $dateValue = sprintf('%d/%d/%d',
+            $date['year'],
+            $date['month'],
+            $date['day']
+        );
+
+        $this->date = new \DateTime($dateValue);
     }
 
     /**
