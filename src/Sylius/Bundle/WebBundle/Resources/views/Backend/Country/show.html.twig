@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_country_index') }}">{{ 'sylius.breadcrumb.country.index'|trans }}</a></li>
-    <li>{{ country.code|countryName }}</li>
+    <li>{{ country.code|sylius_country_name }}</li>
 </ol>
 {% endblock %}
 
@@ -23,21 +23,25 @@
     <thead>
         <tr>
             <th>{{ 'sylius.country.name'|trans }}</th>
-            <th>{{ 'sylius.country.iso_name'|trans }}</th>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>{{ country.code|countryName }}</td>
+            <td>{{ country.code|sylius_country_name }}</td>
             <td>{{ country.code }}</td>
         </tr>
     </tbody>
 </table>
 {% if country.hasProvinces %}
+    <div class="page-header">
+        <h1>{{ 'sylius.province.provinces'|trans|raw }}</h1>
+    </div>
     <table id="provinces" class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th>{{ 'sylius.province.provinces'|trans }}</th>
+                <th>{{ 'sylius.form.province.name'|trans }}</th>
+                <th>{{ 'sylius.ui.code'|trans }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -45,6 +49,7 @@
             {% for province in country.provinces %}
                 <tr id="{{ province.id }}">
                     <td>{{ province.name }}</td>
+                    <td>{{ province.code }}</td>
                     <td>
                         <div class="pull-right">
                             {{ buttons.delete(path('sylius_backend_province_delete', {'id': province.id, 'countryId' : country.id})) }}

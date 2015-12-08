@@ -36,15 +36,17 @@ class LoadZonesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $allCountries = Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'));
+
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
             array_merge($this->euCountries, ['US'])
         );
 
-        $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
-        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
-        $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
+        $manager->persist($eu = $this->createZone('EOnion', 'EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
+        $manager->persist($this->createZone('\'Murica', 'USA', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $manager->persist($this->createZone('FunStuff', 'EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($this->createZone('RoW', 'Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();
 
@@ -71,10 +73,11 @@ class LoadZonesData extends DataFixture
      *
      * @return ZoneInterface
      */
-    protected function createZone($name, $type, array $members)
+    protected function createZone($code, $name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
         $zone = $this->getZoneFactory()->createNew();
+        $zone->setCode($code);
         $zone->setName($name);
         $zone->setType($type);
 
@@ -84,6 +87,7 @@ class LoadZonesData extends DataFixture
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
                 $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));
+                $zoneMember->setCode($this->faker->ipv4);
             }
 
             $zone->addMember($zoneMember);

@@ -151,12 +151,14 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $address->setPostcode($this->faker->postcode);
 
         /** @var CountryInterface $country */
-        $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
+        $allCountries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
+        $countries = array_slice($allCountries, 0, count($allCountries) - 5, true);
+
         $countryCode = array_rand($countries);
         $country = $this->getReference("Sylius.Country." . $countryCode);
 
         if ($province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null) {
-            $address->setProvince($province->getIsoName());
+            $address->setProvince($province->getCode());
         }
 
         $address->setCountry($countryCode);

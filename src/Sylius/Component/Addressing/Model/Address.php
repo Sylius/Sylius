@@ -22,11 +22,6 @@ class Address implements AddressInterface
     protected $id;
 
     /**
-     * @var mixed
-     */
-    protected $code;
-
-    /**
      * @var string
      */
     protected $firstName;
@@ -92,22 +87,6 @@ class Address implements AddressInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**
@@ -195,6 +174,10 @@ class Address implements AddressInterface
      */
     public function setCountry($country = null)
     {
+        if (null === $country) {
+            $this->province = null;
+        }
+
         $this->country = $country;
     }
 
@@ -211,6 +194,10 @@ class Address implements AddressInterface
      */
     public function setProvince($province = null)
     {
+        if (null === $this->country) {
+            return;
+        }
+
         $this->province = $province;
     }
 

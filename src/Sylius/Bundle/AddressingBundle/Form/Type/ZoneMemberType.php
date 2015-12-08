@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Zone member form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 abstract class ZoneMemberType extends AbstractResourceType
@@ -27,6 +26,7 @@ abstract class ZoneMemberType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('_type', 'hidden', array(
                 'data'   => $this->getName(),
                 'mapped' => false,

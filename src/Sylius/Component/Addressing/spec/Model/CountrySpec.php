@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
  * @mixin \Sylius\Component\Addressing\Model\Country
@@ -26,11 +27,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  */
 class CountrySpec extends ObjectBehavior
 {
-    function let()
-    {
-        \Locale::setDefault('en');
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Addressing\Model\Country');
@@ -46,40 +42,34 @@ class CountrySpec extends ObjectBehavior
         $this->shouldImplement(ToggleableInterface::class);
     }
 
+    function it_implements_code_aware_interface()
+    {
+        $this->shouldImplement(CodeAwareInterface::class);
+    }
+
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_a_name()
+    function it_returns_code_when_converted_to_string()
     {
-        $this->setIsoName('VE');
-        $this->getName()->shouldBeString();
-        $this->getName('es')->shouldReturn('Venezuela');
+        $this->setCode('VE');
+        $this->__toString()->shouldReturn('VE');
 
-        $this->setIsoName('US');
-        $this->getName('es')->shouldReturn('Estados Unidos');
-        $this->getName('en')->shouldReturn('United States');
+        $this->setCode('CO');
+        $this->__toString()->shouldReturn('CO');
     }
 
-    function it_returns_name_when_converted_to_string()
+    function it_has_no_code_by_default()
     {
-        $this->setIsoName('VE');
-        $this->__toString()->shouldReturn('Venezuela');
-
-        $this->setIsoName('CO');
-        $this->__toString()->shouldReturn('Colombia');
+        $this->getCode()->shouldReturn(null);
     }
 
-    function it_has_no_iso_name_by_default()
+    function its_code_is_mutable()
     {
-        $this->getIsoName()->shouldReturn(null);
-    }
-
-    function its_iso_name_is_mutable()
-    {
-        $this->setIsoName('MX');
-        $this->getIsoName()->shouldReturn('MX');
+        $this->setCode('MX');
+        $this->getCode()->shouldReturn('MX');
     }
 
     function it_initializes_provinces_collection_by_default()

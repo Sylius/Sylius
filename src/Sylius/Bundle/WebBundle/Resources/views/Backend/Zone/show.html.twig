@@ -25,6 +25,7 @@
     <thead>
         <tr>
             <th>{{ 'sylius.zone.name'|trans }}</th>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
             <th>{{ 'sylius.zone.type'|trans }}</th>
             <th>{{ 'sylius.zone.scope'|trans }}</th>
         </tr>
@@ -32,23 +33,33 @@
     <tbody>
         <tr>
             <td>{{ zone.name }}</td>
+            <td>{{ zone.code }}</td>
             <td>{{ zone.type }}</td>
             <td>{{ zone.scope }}</td>
         </tr>
     </tbody>
 </table>
 {% if zone.hasMembers %}
+    <div class="page-header">
+        <h1>{{ 'sylius.zone_member.members'|trans|raw }}</h1>
+    </div>
     <table id="members" class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th>{{ 'sylius.zone_member.members'|trans }}</th>
+                <th>{{ 'sylius.zone.name'|trans }}</th>
+                <th>{{ 'sylius.ui.code'|trans }}</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {% for member in zone.members %}
                 <tr id="{{ member.id }}">
-                    <td>{{ member.name }}</td>
+                    {% if zone.type == 'country' %}
+                        <td>{{ member.name|sylius_country_name }}</td>
+                    {% else %}
+                        <td>{{ member.name }}</td>
+                    {% endif %}
+                    <td>{{ member.code }}</td>
                     <td>
                         <div class="pull-right">
                             {{ buttons.delete(path('sylius_backend_zone_member_delete', {'zoneId': zone.id, 'id': member.id})) }}

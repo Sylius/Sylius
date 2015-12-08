@@ -106,6 +106,7 @@ class AddressingContext extends DefaultContext
         /* @var $zone ZoneInterface */
         $zone = $this->getFactory('zone')->createNew();
         $zone->setName($name);
+        $zone->setCode($name);
         $zone->setType($type);
         $zone->setScope($scope);
 
@@ -119,6 +120,7 @@ class AddressingContext extends DefaultContext
 
             call_user_func(array($member, 'set'.ucfirst($type)), $zoneable);
 
+            $member->setCode($name.'_'.$zoneable->getCode());
             $zone->addMember($member);
         }
 
@@ -139,6 +141,7 @@ class AddressingContext extends DefaultContext
         /* @var $province ProvinceInterface */
         $province = $this->getFactory('province')->createNew();
         $province->setName($name);
+        $province->setCode($name);
 
         $this->getEntityManager()->persist($province);
 

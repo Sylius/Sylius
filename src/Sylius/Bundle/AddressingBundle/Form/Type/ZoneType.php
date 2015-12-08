@@ -11,27 +11,22 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Zone form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneType extends AbstractResourceType
 {
     /**
-     * Scopes.
-     *
      * @var array
      */
     protected $scopeChoices;
 
     /**
-     * Constructor.
-     *
      * @param string   $dataClass
      * @param string[] $validationGroups
      * @param string[] $scopeChoices
@@ -52,6 +47,7 @@ class ZoneType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.zone.name',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
                 'label'            => false,

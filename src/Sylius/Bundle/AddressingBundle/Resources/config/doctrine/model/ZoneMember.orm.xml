@@ -23,6 +23,9 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
+        <field name="code" column="code" type="string" unique="true" />
+
         <many-to-one field="belongsTo" target-entity="Sylius\Component\Addressing\Model\ZoneInterface" inversed-by="members">
             <join-column name="belongs_to" referenced-column-name="id" />
         </many-to-one>

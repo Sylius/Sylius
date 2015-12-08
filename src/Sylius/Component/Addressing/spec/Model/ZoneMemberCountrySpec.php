@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -55,9 +56,9 @@ class ZoneMemberCountrySpec extends ObjectBehavior
 
     function it_returns_country_name(CountryInterface $country)
     {
-        $country->getName()->willReturn('Serbia');
+        $country->getCode()->willReturn('IE');
         $this->setCountry($country);
 
-        $this->getName()->shouldReturn('Serbia');
+        $this->getName()->shouldReturn('IE');
     }
 }

@@ -520,15 +520,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getCountryCodeByEnglishCountryName($name)
     {
         $names = Intl::getRegionBundle()->getCountryNames('en');
-        $isoCode = array_search(trim($name), $names);
+        $countryCode = array_search(trim($name), $names);
 
-        if (null === $isoCode) {
+        if (null === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
                 'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
             ));
         }
 
-        return $isoCode;
+        return $countryCode;
     }
 
     /**

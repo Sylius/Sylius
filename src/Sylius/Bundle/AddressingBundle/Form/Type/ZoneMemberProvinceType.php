@@ -14,8 +14,6 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Province zone member form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberProvinceType extends ZoneMemberType

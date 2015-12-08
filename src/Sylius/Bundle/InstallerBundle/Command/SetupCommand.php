@@ -247,12 +247,12 @@ EOT
 
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
-            if (null !== $countryRepository->findOneByIsoName($code)) {
+            if (null !== $countryRepository->findOneByCode($code)) {
                 continue;
             }
 
             $country = $countryFactory->createNew();
-            $country->setIsoName($code);
+            $country->setCode($code);
 
             $countryManager->persist($country);
         }

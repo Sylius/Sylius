@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Validator which validates if a province is valid. | No shit.
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceAddressConstraintValidator extends ConstraintValidator

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
@@ -52,11 +53,18 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('country', 'sylius_country_choice', Argument::any())
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('_type', 'hidden', Argument::any())
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

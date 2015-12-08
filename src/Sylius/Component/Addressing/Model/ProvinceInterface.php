@@ -11,12 +11,13 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface extends ResourceInterface
+interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
      * @return string
@@ -27,16 +28,6 @@ interface ProvinceInterface extends ResourceInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
 
     /**
      * @return CountryInterface

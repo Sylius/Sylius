@@ -121,6 +121,11 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Province">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.country.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.province.name.not_blank</option>
@@ -137,6 +142,11 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Zone">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.country.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.name.not_blank</option>

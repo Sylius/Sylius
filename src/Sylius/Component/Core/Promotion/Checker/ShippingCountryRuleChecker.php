@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -50,7 +51,13 @@ class ShippingCountryRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        $countryId = $this->countryRepository->findOneBy(array('code' => $address->getCountry()));
+        $country = $this->countryRepository->findOneBy(array('code' => $address->getCountry()));
+
+        if (!$country instanceof CountryInterface) {
+            return false;
+        }
+
+        $countryId = $country->getId();
 
         return $countryId === $configuration['country'];
     }

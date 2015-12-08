@@ -39,7 +39,8 @@ Feature: Zones
 
     Scenario: Creating new zone requires adding at least 1 member
         Given I am on the zone creation page
-          And I fill in "Name" with "EU"
+          And I fill in "Code" with "EU"
+          And I fill in "Name" with "European Union"
          When I press "Create"
          Then I should still be on the zone creation page
           And I should see "Please add at least 1 zone member."

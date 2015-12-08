@@ -22,6 +22,11 @@ abstract class ZoneMember implements ZoneMemberInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var ZoneInterface
      */
     protected $belongsTo;
@@ -32,6 +37,22 @@ abstract class ZoneMember implements ZoneMemberInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

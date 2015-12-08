@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Addressing\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,9 +31,25 @@ class ProvinceSpec extends ObjectBehavior
         $this->shouldImplement(ProvinceInterface::class);
     }
 
+    function it_implements_code_aware_interface()
+    {
+        $this->shouldImplement(CodeAwareInterface::class);
+    }
+
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_has_no_code_by_default()
+    {
+        $this->getCode()->shouldReturn(null);
+    }
+
+    function its_code_is_mutable()
+    {
+        $this->setCode('IE');
+        $this->getCode()->shouldReturn('IE');
     }
 
     function it_has_no_name_by_default()

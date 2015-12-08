@@ -25,7 +25,7 @@ class CountryNameExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('countryName', array($this, 'translateIsoName')),
+            new \Twig_SimpleFilter('sylius_country_name', array($this, 'translateCountryIsoCode')),
         );
     }
 
@@ -35,10 +35,12 @@ class CountryNameExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function translateIsoName($country, $locale = null)
-    {   if ($country instanceof CountryInterface) {
-            return Intl::getRegionBundle()->getCountryName($country->getIsoName(), $locale);
+    public function translateCountryIsoCode($country, $locale = null)
+    {
+        if ($country instanceof CountryInterface) {
+            return Intl::getRegionBundle()->getCountryName($country->getCode(), $locale);
         }
+
         return Intl::getRegionBundle()->getCountryName($country, $locale);
     }
 

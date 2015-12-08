@@ -41,7 +41,7 @@ Feature: Cart taxation
           And "Tax total: €0.00" should appear on the page
           But "Grand total: €100.00" should appear on the page
 
-    Scenario: Correct taxes are applied for uknown billing address
+    Scenario: Correct taxes are applied for unknown billing address
               when default tax zone is configured
         Given the default tax zone is "UK"
           And I am on the store homepage

@@ -73,7 +73,12 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         $country = $this->countryRepository->findOneBy(array('code' => $countryCode));
-        if (null !== $country->hasProvinces()) {
+
+        if (null === $country) {
+            return;
+        }
+
+        if ($country->hasProvinces()) {
             $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
                 'country' => $country,
                 'auto_initialize' => false,

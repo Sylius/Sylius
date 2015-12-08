@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,9 +28,7 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'string', array(
-                'label' => 'sylius.form.country.code',
-            ))
+            ->addEventSubscriber(new AddCodeFormSubscriber('country'))
             ->add('provinces', 'collection', array(
                 'type' => 'sylius_province',
                 'allow_add' => true,

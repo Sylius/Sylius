@@ -91,7 +91,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      * @param AddressInterface $address
      * @param ZoneInterface    $zone
      *
-     * @return Boolean
+     * @return bool
      */
     protected function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
     {
@@ -108,15 +108,14 @@ class ZoneMatcher implements ZoneMatcherInterface
      * @param AddressInterface    $address
      * @param ZoneMemberInterface $member
      *
-     * @return Boolean
+     * @return bool
      *
      * @throws \InvalidArgumentException
      */
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
-        $type = $member->getBelongsTo()->getType();
-
-        switch ($type) {
+        switch ($type = $member->getBelongsTo()->getType())
+        {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvince() && $address->getProvince() === $member->getProvince()->getCode();
 
@@ -134,7 +133,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * @param string|null $scope
      *
-     * @return array $zones
+     * @return array
      */
     protected function getZones($scope = null)
     {

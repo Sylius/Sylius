@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -25,6 +26,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
+    function let(RepositoryInterface $repository)
+    {
+        $this->beConstructedWith($repository);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator');
@@ -45,8 +51,8 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     ) {
         $this->initialize($context);
 
-        $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
-        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator(array(
             $this->createViolation('property_path')
         )));
 
@@ -55,19 +61,23 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_adds_violation_because_address_has_not_province(
+    function it_adds_violation_because_address_has_no_province(
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
+        RepositoryInterface $repository
     ) {
-        $address->getCountry()->shouldBeCalled()->willreturn($country);
-        $country->hasProvinces()->shouldBeCalled()->willreturn(true);
-        $address->getProvince()->shouldBeCalled()->willreturn(null);
+        $country->getCode()->willReturn('IE');
+        $address->getCountry()->willreturn('IE');
+        $repository->findOneBy(array('code' => 'IE'))->willReturn($country);
+
+        $country->hasProvinces()->willreturn(true);
+        $address->getProvince()->willreturn(null);
         $this->initialize($context);
 
-        $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
-        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator(array(
             $this->createViolation('other_property_path')
         )));
 

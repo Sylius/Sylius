@@ -40,6 +40,7 @@ class FormContext extends BaseFormContext
     public function fillProvinceName($position, $fake, $value)
     {
         $this->fillInField('sylius_country[provinces]['.($position - 1).'][name]', $value);
+        $this->fillInField('sylius_country[provinces]['.($position - 1).'][code]', $value);
     }
 
     /**

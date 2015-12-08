@@ -14,8 +14,6 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Country zone member form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberCountryType extends ZoneMemberType

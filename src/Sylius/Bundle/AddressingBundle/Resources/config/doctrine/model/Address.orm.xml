@@ -19,10 +19,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" nullable="true">
-            <gedmo:versioned/>
-        </field>
-
         <field name="firstName" column="first_name" type="string">
             <gedmo:versioned />
         </field>

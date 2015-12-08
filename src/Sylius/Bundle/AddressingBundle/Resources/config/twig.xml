@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.twig.extension.country_name" class="%sylius.twig.extension.country_name.class%">
-            <argument type="string" id="isoName"/>
+            <argument type="string" id="isoCode"/>
             <tag name="twig.extension"/>
         </service>
     </services>

@@ -22,7 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" nullable="true" />
+        <field name="code" column="code" type="string" unique="true" />
 
         <field name="enabled" column="enabled" type="boolean" />
 

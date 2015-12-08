@@ -11,12 +11,13 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ZoneMemberInterface extends ResourceInterface
+interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
      * @return ZoneInterface

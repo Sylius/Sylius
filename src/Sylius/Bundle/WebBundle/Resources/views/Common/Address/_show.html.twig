@@ -9,5 +9,5 @@
     {% if address.province %}
         {{ address.province }}<br/>
     {% endif %}
-    {{ address.country|countryName|upper }} {{ address.postcode }}
+    {{ address.country|sylius_country_name|upper }} {{ address.postcode }}
 </address>

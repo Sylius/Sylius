@@ -29,7 +29,7 @@ Feature: Countries and provinces
         Given I am on the dashboard page
          When I follow "Countries"
          Then I should be on the country index page
-          And I should see country with iso name "FR" in the list
+          And I should see country with code "FR" in the list
 
     Scenario: Seeing empty index of countries
         Given there are no countries
