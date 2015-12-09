@@ -237,17 +237,9 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param \DateTime $dateTime
      */
-    public function setDateTime($dateTime)
+    public function setDateTime(\DateTime $dateTime)
     {
-        $dateTimeValue = sprintf('%d/%d/%d %d:%d',
-            $dateTime['date']['year'],
-            $dateTime['date']['month'],
-            $dateTime['date']['day'],
-            $dateTime['time']['hour'],
-            $dateTime['time']['minute']
-        );
-
-        $this->dateTime = new \DateTime($dateTimeValue);
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -261,15 +253,9 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param \DateTime $date
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
-        $dateValue = sprintf('%d/%d/%d',
-            $date['year'],
-            $date['month'],
-            $date['day']
-        );
-
-        $this->date = new \DateTime($dateValue);
+        $this->date = $date;
     }
 
     /**

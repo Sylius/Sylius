@@ -13,23 +13,26 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextareaAttributeTypeType extends AbstractType
+class DateAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'textarea';
+        return 'date';
     }
 
     /**
-     * {@inheritdoc{
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -43,6 +46,6 @@ class TextareaAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_textarea';
+        return 'sylius_attribute_type_date';
     }
 }

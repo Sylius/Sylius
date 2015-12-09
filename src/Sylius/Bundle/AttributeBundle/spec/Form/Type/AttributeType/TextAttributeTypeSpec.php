@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeTypeTypeSpec extends ObjectBehavior
+class TextAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType');
     }
 
     function it_is_a_form_type()
@@ -32,11 +32,11 @@ class DateAttributeTypeTypeSpec extends ObjectBehavior
 
     function it_has_parent()
     {
-        $this->getParent()->shouldReturn('date');
+        $this->getParent()->shouldReturn('text');
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_date');
+        $this->getName()->shouldReturn('sylius_attribute_type_text');
     }
 }

@@ -18,14 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeTypeType extends AbstractType
+class TextAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'checkbox';
+        return 'text';
     }
 
     /**
@@ -43,6 +43,6 @@ class CheckboxAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_checkbox';
+        return 'sylius_attribute_type_text';
     }
 }

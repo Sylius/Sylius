@@ -41,14 +41,14 @@ class BuildAttributeFormListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'buildTypeOptions',
+            FormEvents::PRE_SET_DATA => 'addOptionsFields',
         );
     }
 
     /**
      * @param FormEvent $event
      */
-    public function buildTypeOptions(FormEvent $event)
+    public function addOptionsFields(FormEvent $event)
     {
         $attribute = $event->getData();
         $form = $event->getForm();

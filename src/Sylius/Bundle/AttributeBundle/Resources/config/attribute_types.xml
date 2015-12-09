@@ -18,27 +18,27 @@
 
     <parameters>
         <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\AttributeType\TextareaAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\AttributeType\IntegerAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\AttributeType\PercentAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeTypeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.options.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeOptionsType</parameter>
+        <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.options.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeOptionsType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.date.class">Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeTypeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.options.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeTypeOptionsType</parameter>
+        <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.options.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeOptionsType</parameter>
     </parameters>
 
     <services>

@@ -76,6 +76,7 @@ Feature: Product archetypes
         Then I should be on the product archetype index page
         And I should see "Archetype has been successfully created."
 
+    @javascript
     Scenario: Creating a product by building archetype
         Given I am on the product archetype index page
         And I click "Create product" near "T-Shirt"
@@ -90,7 +91,7 @@ Feature: Product archetypes
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And I should see "Product has been successfully created."
-        And "T-Shirt size" should appear on the page
+        And "T-Shirt fabric" should appear on the page
 
     Scenario: Updating the archetype
         Given I am editing product archetype "T-Shirt"

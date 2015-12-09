@@ -146,12 +146,7 @@ Feature: Products
         Given I am editing product "Super T-Shirt"
         When I go to "Attributes" tab
         And I delete "T-Shirt fabric" attribute
-        And I click "Add"
-        And I wait 2 seconds
-        And I check "Size attribute"
-        And I wait 1 second
-        And I press "Add attributes"
-        And I wait 5 seconds
+        And I add "Size" attribute
         And I fill in "Size" with "100"
         When I press "Save changes"
         Then I should be on the page of product "Super T-Shirt"

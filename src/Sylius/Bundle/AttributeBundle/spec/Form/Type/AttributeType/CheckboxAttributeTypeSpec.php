@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeTypeTypeSpec extends ObjectBehavior
+class CheckboxAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType');
     }
 
     function it_is_a_form_type()

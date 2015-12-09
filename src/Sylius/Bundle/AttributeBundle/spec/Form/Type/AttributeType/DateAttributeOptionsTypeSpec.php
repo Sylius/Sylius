@@ -12,31 +12,35 @@
 namespace spec\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PercentAttributeTypeTypeSpec extends ObjectBehavior
+class DateAttributeOptionsTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeOptionsType');
     }
 
-    function it_is_a_form_type()
+    function it_is_abstract_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_parent()
+    function it_builds_options_form(FormBuilderInterface $builder)
     {
-        $this->getParent()->shouldReturn('percent');
+        $builder
+            ->add('format', 'text', array('label' => 'sylius.attribute_type_options.date.format'))
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, array());
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_percent');
+        $this->getName()->shouldReturn('sylius_attribute_type_options_date');
     }
 }

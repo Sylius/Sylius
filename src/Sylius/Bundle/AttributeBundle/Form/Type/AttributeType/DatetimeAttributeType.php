@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeTypeType extends AbstractType
+class DatetimeAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}

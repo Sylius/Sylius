@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeValueFormListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,22 +29,22 @@ class AttributeValueType extends AbstractResourceType
     protected $subjectName;
 
     /**
-     * @var ServiceRegistryInterface
+     * @var EntityRepository
      */
-    protected $attributeTypeRegistry;
+    protected $attributeRepository;
 
     /**
-     * @param string                   $dataClass
-     * @param array                    $validationGroups
-     * @param string                   $subjectName
-     * @param ServiceRegistryInterface $attributeTypeRegistry
+     * @param string           $dataClass
+     * @param array            $validationGroups
+     * @param string           $subjectName
+     * @param EntityRepository $attributeRepository
      */
-    public function __construct($dataClass, array $validationGroups, $subjectName, ServiceRegistryInterface $attributeTypeRegistry)
+    public function __construct($dataClass, array $validationGroups, $subjectName, EntityRepository $attributeRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
-        $this->attributeTypeRegistry = $attributeTypeRegistry;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
@@ -57,7 +56,7 @@ class AttributeValueType extends AbstractResourceType
             ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
                 'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName),
             ))
-            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->attributeTypeRegistry, $this->subjectName))
+            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->subjectName, $this->attributeRepository))
         ;
     }
 

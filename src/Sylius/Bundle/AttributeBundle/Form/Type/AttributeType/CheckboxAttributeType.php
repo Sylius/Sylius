@@ -18,14 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class IntegerAttributeTypeType extends AbstractType
+class CheckboxAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'integer';
+        return 'checkbox';
     }
 
     /**
@@ -43,6 +43,6 @@ class IntegerAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_integer';
+        return 'sylius_attribute_type_checkbox';
     }
 }

@@ -375,6 +375,8 @@ class WebContext extends DefaultContext
     {
         $this->clickLink('Add');
 
+        $this->assertSession()->elementExists('css', '#attributes-modal');
+
         $attributesModalContainer = $this->getSession()->getPage()->find('css', '#attributes-modal');
         $addAttributesButton = $attributesModalContainer->find('css', sprintf('button:contains("%s")', 'Add attributes'));
 

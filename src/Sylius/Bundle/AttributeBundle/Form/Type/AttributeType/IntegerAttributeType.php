@@ -18,14 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeTypeType extends AbstractType
+class IntegerAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'text';
+        return 'integer';
     }
 
     /**
@@ -43,6 +43,6 @@ class TextAttributeTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_text';
+        return 'sylius_attribute_type_integer';
     }
 }

@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextareaAttributeTypeTypeSpec extends ObjectBehavior
+class PercentAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType');
     }
 
     function it_is_a_form_type()
@@ -32,11 +32,11 @@ class TextareaAttributeTypeTypeSpec extends ObjectBehavior
 
     function it_has_parent()
     {
-        $this->getParent()->shouldReturn('textarea');
+        $this->getParent()->shouldReturn('percent');
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_textarea');
+        $this->getName()->shouldReturn('sylius_attribute_type_percent');
     }
 }

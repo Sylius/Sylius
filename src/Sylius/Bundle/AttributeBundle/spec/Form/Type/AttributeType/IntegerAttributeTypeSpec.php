@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeTypeTypeSpec extends ObjectBehavior
+class IntegerAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeTypeType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType');
     }
 
     function it_is_a_form_type()
@@ -32,11 +32,11 @@ class DatetimeAttributeTypeTypeSpec extends ObjectBehavior
 
     function it_has_parent()
     {
-        $this->getParent()->shouldReturn('datetime');
+        $this->getParent()->shouldReturn('integer');
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_datetime');
+        $this->getName()->shouldReturn('sylius_attribute_type_integer');
     }
 }
