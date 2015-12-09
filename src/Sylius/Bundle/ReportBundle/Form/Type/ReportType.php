@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber;
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,30 +21,22 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Report form type.
- *
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ReportType extends AbstractResourceType
 {
     /**
-     * Renderer registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $rendererRegistry;
 
     /**
-     * DataFetcher registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $dataFetcherRegistry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $rendererRegistry
      * @param ServiceRegistryInterface $dataFetcherRegistry
      */
@@ -65,14 +58,11 @@ class ReportType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new BuildReportDataFetcherFormSubscriber($this->dataFetcherRegistry, $builder->getFormFactory()))
             ->addEventSubscriber(new BuildReportRendererFormSubscriber($this->rendererRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.report.name',
-                'required' => true,
-            ))
-            ->add('code', 'text', array(
-                'label'    => 'sylius.form.report.code',
                 'required' => true,
             ))
             ->add('description', 'textarea', array(

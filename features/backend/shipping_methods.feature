@@ -139,7 +139,7 @@ Feature: Shipping methods
 
     Scenario: Cannot update shipping method code
         When I am editing shipping method "FedEx"
-        Then The code field should be disabled
+        Then the code field should be disabled
 
     Scenario: Try add shipping method with existing code
         Given I am on the shipping method creation page

@@ -7,9 +7,9 @@ Feature: Reports
     Background:
         Given store has default configuration
           And there are following reports configured:
-            | name           | description | code             | renderer | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
-            | TableReport    | Lorem ipsum | table_report     | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
-            | BarChartReport | Lorem ipsum | bar_chart_report | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
+            | code             | name           | description | renderer | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
+            | table_report     | TableReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
+            | bar_chart_report | BarChartReport | Lorem ipsum | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
           And there are following users:
             | email          | enabled  | created at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
@@ -25,9 +25,9 @@ Feature: Reports
     Scenario: Adding new report with default options
         Given I am on the report creation page
          When I fill in the following:
+            | Code        | report1           |
             | Name        | Report1           | 
             | Description | Lorem ipsum dolor |
-            | Code        | report1           |
           And I press "Create"
          Then I should be on the page of report "Report1"
           And I should see "Report has been successfully created."
@@ -36,9 +36,9 @@ Feature: Reports
     Scenario: Adding new report with custom end date option
         Given I am on the report creation page
          When I fill in the following:
+            | Code         | report2           |
             | Name         | Report2           |
             | Description  | Lorem ipsum dolor |
-            | Code         | report2           |
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I press "Create" 
          Then I should be on the page of report "Report2"
@@ -48,9 +48,9 @@ Feature: Reports
     Scenario: Adding new report with some custom options
         Given I am on the report creation page
          When I fill in the following:
+            | Code         | report3           |
             | Name         | Report3           |
             | Description  | Lorem ipsum dolor |
-            | Code         | report3           |
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I select "month" from "Time period"
           And I press "Create" 
@@ -61,9 +61,9 @@ Feature: Reports
     Scenario: Prevent adding new report with the same code that has been used before
         Given I am on the report creation page
          When I fill in the following:
-            | Name        | Report1           | 
-            | Description | Lorem ipsum dolor |
             | Code        | table_report      |
+            | Name        | Report1           |
+            | Description | Lorem ipsum dolor |
           And I press "Create"
          Then I should still be on the report creation page
           And I should see "This code is already in use."
@@ -71,9 +71,9 @@ Feature: Reports
     Scenario: Prevent adding new report with multiple-word code
         Given I am on the report creation page
          When I fill in the following:
+            | Code        | table report      |
             | Name        | Report1           | 
             | Description | Lorem ipsum dolor |
-            | Code        | table report      |
           And I press "Create"
          Then I should still be on the report creation page
           And I should see "Report code should be a single word."
@@ -121,4 +121,16 @@ Feature: Reports
          Then I should be on the report index page
           And I should see "Report has been successfully deleted."
           And I should not see report with name "TableReport" in that list
-          
+
+    Scenario: Cannot update report code
+         When I am editing report "TableReport"
+         Then the code field should be disabled
+
+    Scenario: Try adding new report without code
+        Given I am on the report creation page
+        When I fill in the following:
+           | Name        | Report1           |
+           | Description | Lorem ipsum dolor |
+        And I press "Create"
+        Then I should still be on the report creation page
+        And I should see "Report code cannot be blank."

@@ -29,6 +29,12 @@ class ReportSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\Model\ReportInterface');
     }
 
+    public function it_has_mutable_code()
+    {
+        $this->setCode('R1');
+        $this->getCode()->shouldReturn('R1');
+    }
+
     public function it_has_name()
     {
         $this->setName('testName');

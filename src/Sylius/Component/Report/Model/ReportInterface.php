@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Report\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ReportInterface extends ResourceInterface
+interface ReportInterface extends CodeAwareInterface, ResourceInterface
 {
     /**
      * @return string

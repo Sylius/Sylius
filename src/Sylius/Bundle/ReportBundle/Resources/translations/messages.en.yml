@@ -4,7 +4,6 @@ sylius:
             name: Name
             description: Description
             data_fetcher: Data Fetcher
-            code: Code
             renderer:
                 label:  Renderer
                 template: Template
