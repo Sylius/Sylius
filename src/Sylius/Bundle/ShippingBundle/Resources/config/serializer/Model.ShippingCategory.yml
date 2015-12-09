@@ -6,24 +6,32 @@ Sylius\Component\Shipping\Model\ShippingCategory:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
-        description:
-            expose: true
-            type: string
-        createdAt:
-            expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        description:
+            expose: true
+            type: string
+            groups: [Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
     relations:
         - rel: self
           href:
-                route: sylius_api_shipping_category_show
-                parameters:
-                    id: expr(object.getId())
+            route: sylius_api_shipping_category_show
+            parameters:
+                id: expr(object.getId())
+            exclusion:
+                groups: [Detailed]

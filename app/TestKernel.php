@@ -62,4 +62,9 @@ class TestKernel extends Kernel
 
         $containerServicesPropertyReflection->setValue($container, null);
     }
+
+    protected function getContainerBaseClass()
+    {
+        return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+    }
 }
