@@ -71,3 +71,15 @@ Feature: Currency management
         When I click "Disable" near "VEF"
         Then I should see disabled currency with code "VEF" in the list
         And I should see "Currency has been successfully disabled"
+
+    Scenario: Cannot update currency code
+        When I am editing currency with code "USD"
+        Then the code field should be disabled
+
+    Scenario: Trying to create a currency with existing code
+        Given I am on the currency creation page
+        When I select "British Pound Sterling" from "Code"
+        And I fill in "Exchange rate" with "0.235654"
+        And I press "Create"
+        Then I should still be on the currency creation page
+        And I should see "Currency code must be unique."
