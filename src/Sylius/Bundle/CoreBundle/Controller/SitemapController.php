@@ -47,6 +47,9 @@ class SitemapController
     {
         $sitemap = $this->sitemapBuilder->build();
 
-        return new Response($this->sitemapRenderer->render($sitemap));
+        $response = new Response($this->sitemapRenderer->render($sitemap));
+        $response->headers->set('Content-Type', 'application/xml');
+
+        return $response;
     }
 }

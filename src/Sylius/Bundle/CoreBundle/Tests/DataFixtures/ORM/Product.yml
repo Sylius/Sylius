@@ -1,0 +1,47 @@
+Sylius\Component\Core\Model\Product:
+    product1:
+        updatedAt: 2015-10-10
+        currentLocale: en
+        currentTranslation: @productTranslation1
+        setMasterVariant: @productVariant1
+        setPrice: [20]
+        setSku: [mug1]
+    product2:
+        updatedAt: 2015-10-04
+        currentLocale: en
+        currentTranslation: @productTranslation2
+        setMasterVariant: @productVariant2
+        setPrice: [20]
+        setSku: [mug2]
+    product3:
+        updatedAt: 2015-10-05
+        currentLocale: en
+        currentTranslation: @productTranslation3
+        setMasterVariant: @productVariant3
+        setPrice: [20]
+        setSku: [mug3]
+
+Sylius\Component\Core\Model\ProductTranslation:
+    productTranslation1:
+        slug: mug-star-wars
+        locale: en
+        name: 'Star wars mug'
+        description: <paragraph(2)>
+        translatable: @product1
+    productTranslation2:
+        slug: mug-lotr
+        locale: en
+        name: 'Lotr mug'
+        description: <paragraph(2)>
+        translatable: @product2
+    productTranslation3:
+        slug: mug-breaking-bad
+        locale: en
+        name: 'Breaking bad mug'
+        description: <paragraph(2)>
+        translatable: @product3
+
+Sylius\Component\Core\Model\ProductVariant:
+    productVariant1:
+    productVariant2:
+    productVariant3:
