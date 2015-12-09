@@ -115,22 +115,22 @@ abstract class AbstractResourceExtension extends AbstractExtension
      */
     protected function mapClassParameters(array $resources, ContainerBuilder $container)
     {
-        foreach ($resources as $resourceName => $resourceConfiguration) {
-            if (isset($resourceConfiguration['translation'])) {
-                $this->mapClassParameters(array(sprintf('%s_translation', $resourceName) => $resourceConfiguration['translation']), $container);
+        foreach ($resources as $resource => $parameters) {
+            if (isset($parameters['translation'])) {
+                $this->mapClassParameters(array(sprintf('%s_translation', $resource) => $parameters['translation']), $container);
             }
 
-            foreach ($resourceConfiguration['classes'] as $serviceName => $serviceClassOrClasses) {
+            foreach ($parameters['classes'] as $serviceName => $serviceClassOrClasses) {
                 if (!is_array($serviceClassOrClasses)) {
-                    $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resourceName), $serviceClassOrClasses);
+                    $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resource), $serviceClassOrClasses);
                 } else {
                     $serviceClasses = $serviceClassOrClasses;
 
                     foreach ($serviceClasses as $serviceType => $serviceClass) {
                         if (self::DEFAULT_KEY === $serviceType) {
-                            $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resourceName), $serviceClass);
+                            $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $serviceName, $resource), $serviceClass);
                         } else {
-                            $container->setParameter(sprintf('%s.%s.%s_%s.class', $this->applicationName, $serviceName, $resourceName, $serviceType), $serviceClass);
+                            $container->setParameter(sprintf('%s.%s.%s_%s.class', $this->applicationName, $serviceName, $resource, $serviceType), $serviceClass);
                         }
                     }
                 }
@@ -272,6 +272,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
         foreach ($config['resources'] as $resource => $parameters) {
             if (isset($parameters['classes']['model']) && isset($parameters['translation']['classes']['model'])) {
                 $mapper->mapTranslations($parameters, $container);
+                $this->mapValidationGroupParameters($parameters['translation'], $container);
 
                 DatabaseDriverFactory::get(
                     $container,
