@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
@@ -71,6 +72,11 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber'))
             ->shouldBeCalled()
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->willReturn($builder)
         ;
 
         $feeCalculatorRegistry->all()->willReturn(array('test' => $feeCalculatorTest))->shouldBeCalled();

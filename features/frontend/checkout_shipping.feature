@@ -31,8 +31,8 @@ Feature: Checkout shipping
             | SM3  | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
             | SM4  | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
-            | name  | gateway | enabled | calculator | calculator_configuration |
-            | Dummy | dummy   | yes     | fixed      | amount: 0                |
+            | code | name  | gateway | enabled | calculator | calculator_configuration |
+            | PM1  | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping                                      |

@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.payment_method.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.payment_method.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('gateway', 'sylius.payment_method.gateway'|trans) }}</th>
             <th>{{ sylius_resource_sort('enabled', 'sylius.payment_method.enabled'|trans) }}</th>
@@ -19,6 +20,7 @@
     {% for payment_method in payment_methods %}
         <tr id="{{ payment_method.id }}">
             <td>{{ payment_method.id }}</td>
+            <td>{{ payment_method.code }}</td>
             <td>
                 <strong>{{ payment_method.name }}</strong>
                 <p>{{ payment_method.description }}</p>

@@ -35,6 +35,7 @@ class PaymentContext extends DefaultContext
 
             /* @var $method PaymentMethodInterface */
             $method = $factory->createNew();
+            $method->setCode(trim($data['code']));
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
             $method->setFeeCalculator($data['calculator']);

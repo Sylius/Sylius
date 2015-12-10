@@ -123,6 +123,7 @@ class CoreContext extends DefaultContext
         $paymentMethod = $this->getFactory('payment_method')->createNew();
         $paymentMethod->setName('Stripe');
         $paymentMethod->setGateway('stripe');
+        $paymentMethod->setCode('PM100');
         $manager->persist($paymentMethod);
 
         $currentOrderNumber = 1;

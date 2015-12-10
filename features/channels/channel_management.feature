@@ -20,10 +20,10 @@ Feature: Channel management
             | fr_FR |
             | de_DE |
           And the following payment methods exist:
-            | name             | gateway |
-            | Credit Card (US) | stripe  |
-            | Credit Card (EU) | adyen   |
-            | PayPal           | paypal  |
+            | code | name             | gateway |
+            | PM1  | Credit Card (US) | stripe  |
+            | PM2  | Credit Card (EU) | adyen   |
+            | PM3  | PayPal           | paypal  |
           And the following shipping methods exist:
             | code | zone | name  |
             | SM1  | USA  | FedEx |
