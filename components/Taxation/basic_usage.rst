@@ -4,8 +4,8 @@ Basic Usage
 Tax Rate
 --------
 
-Every tax rate has two identifiers, an ID and name. You can access those by calling ``->getId()`` and ``getName()``
-respectively. The name is mutable, so you can change it by calling ``->setName('EU VAT')`` on the tax rate instance.
+Every tax rate has three identifiers, an ID, code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``getName()``
+respectively. The name and code are mutable, so you can change them by calling ``->setCode('X12XW')`` and ``->setName('EU VAT')`` on the tax rate instance.
 
 Setting Tax Amount
 ~~~~~~~~~~~~~~~~~~
@@ -63,8 +63,8 @@ should be the same as name of your calculator object.
 Tax Category
 ------------
 
-Every tax category  has two identifiers, an ID and name. You can access those by calling ``->getId()`` and ``getName()``
-respectively. The name is mutable, so you can change it by calling ``->setName('Clothing')`` on the tax category instance.
+Every tax category  has three identifiers, an ID, code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``getName()``
+respectively. The code and name are mutable, so you can change them by calling ``->setCode('X12X')`` and ``->setName('Clothing')`` on the tax category instance.
 
 Tax Rate Management
 ~~~~~~~~~~~~~~~~~~~
