@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\MailerBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Email type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EmailType extends AbstractResourceType
@@ -27,9 +26,7 @@ class EmailType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.email.code',
-            ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('enabled', 'checkbox', array(
                 'required' => false,
                 'label'    => 'sylius.form.email.enabled',

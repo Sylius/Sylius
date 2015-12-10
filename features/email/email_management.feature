@@ -59,3 +59,14 @@ Feature: Managing emails
         Then I should be on the email index page
         And I should see "Email has been successfully deleted."
         And I should not see email with code "order_confirmation" in that list
+
+    Scenario: Email code is required
+        Given I am on the email creation page
+        When I fill in "Subject" with "You get a coupon!"
+        And I press "Create"
+        Then I should still be on the email creation page
+        And I should see "Please enter email code."
+
+    Scenario: Cannot update email code
+        When I am editing email with code "user_confirmation"
+        Then the code field should be disabled
