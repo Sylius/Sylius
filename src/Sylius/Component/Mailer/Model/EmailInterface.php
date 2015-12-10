@@ -11,25 +11,14 @@
 
 namespace Sylius\Component\Mailer\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * Email interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface EmailInterface extends TimestampableInterface
+interface EmailInterface extends CodeAwareInterface, TimestampableInterface
 {
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * @return bool
      */
