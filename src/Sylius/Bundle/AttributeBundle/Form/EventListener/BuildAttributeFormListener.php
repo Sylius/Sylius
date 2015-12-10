@@ -41,30 +41,30 @@ class BuildAttributeFormListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'addOptionsFields',
+            FormEvents::PRE_SET_DATA => 'addConfigurationFields',
         );
     }
 
     /**
      * @param FormEvent $event
      */
-    public function addOptionsFields(FormEvent $event)
+    public function addConfigurationFields(FormEvent $event)
     {
         $attribute = $event->getData();
         $form = $event->getForm();
 
         try {
-            $optionsForm = $this->factory->createNamed(
-                'options',
-                'sylius_attribute_type_options_'.$attribute->getType(),
+            $configurationForm = $this->factory->createNamed(
+                'configuration',
+                'sylius_attribute_type_configuration_'.$attribute->getType(),
                 null,
                 array(
                     'auto_initialize' => false,
-                    'label'           => 'sylius.attribute_type.options',
+                    'label'           => 'sylius.attribute_type.configuration',
                 )
             );
 
-            $form->add($optionsForm);
+            $form->add($configurationForm);
         } catch (InvalidArgumentException $exception) {}
     }
 }

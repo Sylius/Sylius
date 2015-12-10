@@ -17,18 +17,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeOptionsType extends AbstractType
+class DateAttributeConfigurationType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('format', 'text', array('label' => 'sylius.attribute_type_options.datetime.format'))
+            ->add('format', 'text', array('label' => 'sylius.attribute_type_configuration.date.format'))
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_attribute_type_options_datetime';
+        return 'sylius_attribute_type_configuration_date';
     }
 
 }

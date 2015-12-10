@@ -19,6 +19,7 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
@@ -41,11 +42,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      * @var array
      */
     protected $configuration = array();
-
-    /**
-     * @var array
-     */
-    protected $options = array();
 
     /**
      * @var AttributeValueInterface[]|Collection
@@ -152,22 +148,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
     }
 
     /**

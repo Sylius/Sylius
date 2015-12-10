@@ -389,6 +389,21 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I choose "([^"]*)" attribute type$/
+     */
+    public function iChooseAttributeType($type)
+    {
+        $this->assertSession()->elementExists('css', '#attribute-types-modal');
+
+        $attributeTypesModalContainer = $this->getSession()->getPage()->find('css', '#attribute-types-modal');
+        $typeButton = $attributeTypesModalContainer->find('css', 'a#'.$type);
+
+        $this->waitForModalToAppear($attributeTypesModalContainer);
+
+        $typeButton->press();
+    }
+
+    /**
      * @Given /^I wait (\d+) (seconds|second)$/
      */
     public function iWait($time)

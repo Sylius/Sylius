@@ -38,11 +38,11 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_adds_options_field_if_necessary(
+    function it_adds_configuration_field_if_necessary(
         $formFactory,
         AttributeInterface $attribute,
         Form $form,
-        Form $optionsForm,
+        Form $configurationForm,
         FormEvent $event
     ) {
         $event->getData()->willReturn($attribute);
@@ -51,18 +51,18 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
         $attribute->getType()->willReturn('datetime');
 
         $formFactory->createNamed(
-            'options',
-            'sylius_attribute_type_options_datetime',
+            'configuration',
+            'sylius_attribute_type_configuration_datetime',
             null,
             Argument::type('array')
-        )->willReturn($optionsForm);
+        )->willReturn($configurationForm);
 
-        $form->add($optionsForm)->shouldBeCalled();
+        $form->add($configurationForm)->shouldBeCalled();
 
-        $this->addOptionsFields($event);
+        $this->addConfigurationFields($event);
     }
 
-    function it_does_nothing_if_options_form_does_not_exist(
+    function it_does_nothing_if_configuration_form_does_not_exist(
         $formFactory,
         AttributeInterface $attribute,
         Form $form,
@@ -74,14 +74,14 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
         $attribute->getType()->willReturn('text');
 
         $formFactory->createNamed(
-            'options',
-            'sylius_attribute_type_options_text',
+            'configuration',
+            'sylius_attribute_type_configuration_text',
             null,
             Argument::type('array')
         )->willThrow('Symfony\Component\Form\Exception\InvalidArgumentException');
 
         $form->add(Argument::any())->shouldNotBeCalled();
 
-        $this->addOptionsFields($event);
+        $this->addConfigurationFields($event);
     }
 }

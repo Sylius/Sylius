@@ -38,8 +38,8 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | Clothing | Ropa      | es_ES  |
             | T-Shirts | Camisetas | es_ES  |
           And the following attribute translations exist:
-            | attribute      | presentation | locale |
-            | T-Shirt fabric | Material     | es_ES  |
+            | attribute      | name     | locale |
+            | T-Shirt fabric | Material | es_ES  |
           And the following option translations exist:
             | option       | presentation | locale |
             | T-Shirt size | Talla        | es_ES  |

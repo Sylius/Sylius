@@ -161,6 +161,7 @@ Feature: Products
         And I should see "Product has been successfully updated."
         And "Print" should appear on the page
 
+    @javascript
     Scenario: Selecting the categorization taxons
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab
@@ -200,6 +201,7 @@ Feature: Products
         And "Product has been successfully created." should appear on the page
         And "New" should appear on the page
 
+    @javascript
     Scenario: Selecting the main taxon of product
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab

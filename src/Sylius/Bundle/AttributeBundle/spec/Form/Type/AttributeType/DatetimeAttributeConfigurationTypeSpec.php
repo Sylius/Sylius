@@ -17,11 +17,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeAttributeOptionsTypeSpec extends ObjectBehavior
+class DatetimeAttributeConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeOptionsType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeConfigurationType');
     }
 
     function it_is_abstract_type()
@@ -29,10 +29,10 @@ class DatetimeAttributeOptionsTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_options_form(FormBuilderInterface $builder)
+    function it_builds_configuration_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('format', 'text', array('label' => 'sylius.attribute_type_options.datetime.format'))
+            ->add('format', 'text', array('label' => 'sylius.attribute_type_configuration.datetime.format'))
             ->willReturn($builder)
         ;
 
@@ -41,6 +41,6 @@ class DatetimeAttributeOptionsTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_options_datetime');
+        $this->getName()->shouldReturn('sylius_attribute_type_configuration_datetime');
     }
 }

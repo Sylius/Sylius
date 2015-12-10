@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
 {
@@ -49,15 +50,6 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      */
     public function setConfiguration(array $configuration);
 
-    /**
-     * @return array
-     */
-    public function getOptions();
-
-    /**
-     * @param array $options
-     */
-    public function setOptions(array $options);
 
     /**
      * @return AttributeValueInterface[]

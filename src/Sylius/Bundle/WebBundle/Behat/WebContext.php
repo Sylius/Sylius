@@ -50,7 +50,20 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function goToTab($tabLabel)
     {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+        $tabContainer = $this->getSession()->getPage()->find('css', sprintf('.nav-tabs li:contains("%s")', $tabLabel));
+        $tabContainer->find('css', 'a')->click();
+
+        $this->waitForTabToActivate($tabContainer);
+    }
+
+    /**
+     * @param NodeElement $tabContainer
+     */
+    protected function waitForTabToActivate($tabContainer)
+    {
+        $this->waitFor(function () use ($tabContainer) {
+            return false !== strpos($tabContainer->getAttribute('class'), 'active');
+        });
     }
 
     /**

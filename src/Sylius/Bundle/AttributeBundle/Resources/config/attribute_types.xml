@@ -34,11 +34,11 @@
 
         <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.options.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeOptionsType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeConfigurationType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.date.class">Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.options.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeOptionsType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeConfigurationType</parameter>
     </parameters>
 
     <services>
@@ -83,8 +83,8 @@
         <service id="sylius.form.type.attribute_type.datetime" class="%sylius.form.type.attribute_type.datetime.class%">
             <tag name="form.type" alias="sylius_attribute_type_datetime" />
         </service>
-        <service id="sylius.form.type.attribute_type.options.datetime" class="%sylius.form.type.attribute_type.options.datetime.class%">
-            <tag name="form.type" alias="sylius_attribute_type_options_datetime" />
+        <service id="sylius.form.type.attribute_type.configuration.datetime" class="%sylius.form.type.attribute_type.configuration.datetime.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_datetime" />
         </service>
 
         <service id="sylius.attribute.attribute_type.date" class="%sylius.attribute.attribute_type.date.class%">
@@ -93,8 +93,8 @@
         <service id="sylius.form.type.attribute_type.date" class="%sylius.form.type.attribute_type.date.class%">
             <tag name="form.type" alias="sylius_attribute_type_date" />
         </service>
-        <service id="sylius.form.type.attribute_type.options.date" class="%sylius.form.type.attribute_type.options.date.class%">
-            <tag name="form.type" alias="sylius_attribute_type_options_date" />
+        <service id="sylius.form.type.attribute_type.configuration.date" class="%sylius.form.type.attribute_type.configuration.date.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_date" />
         </service>
     </services>
 

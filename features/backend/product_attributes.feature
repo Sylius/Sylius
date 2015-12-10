@@ -34,8 +34,7 @@ Feature: Product attributes
     Scenario: Accessing attribute creation form
         Given I am on the product attribute index page
         When I click "Create"
-        And I wait 2 seconds
-        And I click "checkbox"
+        And I choose "checkbox" attribute type
         Then I should be on the product attribute creation page
         And I should see select "Type" with "Checkbox" option selected
         And I should not be able to edit "Type" select
