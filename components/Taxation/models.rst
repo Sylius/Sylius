@@ -11,6 +11,8 @@ Tax rate model holds the configuration for particular tax rate.
 +=================+====================================+
 | id              | Unique id of the tax rate          |
 +-----------------+------------------------------------+
+| code            | Unique code of the tax rate        |
++-----------------+------------------------------------+
 | category        | Tax rate category                  |
 +-----------------+------------------------------------+
 | name            | Name of the rate                   |
@@ -38,6 +40,8 @@ Tax category model holds the configuration for particular tax category.
 | Property        | Description                                            |
 +=================+========================================================+
 | id              | Unique id of the tax category                          |
++-----------------+--------------------------------------------------------+
+| code            | Unique code of the tax category                        |
 +-----------------+--------------------------------------------------------+
 | name            | Name of the category                                   |
 +-----------------+--------------------------------------------------------+
