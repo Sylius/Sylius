@@ -73,8 +73,8 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
 
         if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
-            if (isset($parameters['fields'])) {
-                $repositoryDefinition->addMethodCall('setTranslatableFields', array($parameters['fields']));
+            if (isset($parameters['translation']['fields'])) {
+                $repositoryDefinition->addMethodCall('setTranslatableFields', array($parameters['translation']['fields']));
             }
         }
 
