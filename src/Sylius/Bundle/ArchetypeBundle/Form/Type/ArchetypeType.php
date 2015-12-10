@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -50,9 +51,7 @@ class ArchetypeType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new ParentArchetypeListener($this->subject))
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.archetype.code'
-            ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_archetype_translation', $this->subject),
                 'label'    => 'sylius.form.archetype.name'

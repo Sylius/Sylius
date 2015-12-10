@@ -106,12 +106,11 @@ class ProductContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $factory = $this->getFactory('product_archetype');
+        $data = $table->getRowsHash();
 
         $archetype = $factory->createNew();
         $archetype->setName($name);
-        $archetype->setCode($name);
-
-        $data = $table->getRowsHash();
+        $archetype->setCode($data['code']);
 
         foreach (explode(',', $data['options']) as $optionName) {
             $archetype->addOption($this->findOneByName('product_option', trim($optionName)));

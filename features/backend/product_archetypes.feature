@@ -22,9 +22,11 @@ Feature: Product archetypes
             | Beverage calories     | Calories       |
             | Coffee caffeine       | Caffeine       |
           And there is archetype "T-Shirt" with following configuration:
+            | code       | Arch1                              |
             | options    | T-Shirt color, T-Shirt size        |
             | attributes | T-Shirt collection, T-Shirt fabric |
           And there is archetype "Beverage" with following configuration:
+            | code       | Arch2                              |
             | options    | Beverage size, Beverage milk       |
             | attributes | Beverage calories                  |
           And I am logged in as administrator
@@ -119,3 +121,22 @@ Feature: Product archetypes
         Then I should be on the product archetype index page
         And I should see "Archetype has been successfully deleted"
         And I should not see archetype with name "T-Shirt" in the list
+
+    Scenario: Cannot update archetype code
+         When I am editing product archetype "T-Shirt"
+         Then the code field should be disabled
+
+    Scenario: Try add archetype with existing code
+        Given I am on the product archetype creation page
+        When I fill in "Name" with "Coffee"
+        And I fill in "Code" with "Arch1"
+        And I press "Create"
+        Then I should still be on the product archetype creation page
+        And I should see "Archetype with given code already exists."
+
+    Scenario: Try create archetype without code
+        Given I am on the product archetype creation page
+        When I fill in "Name" with "Coffee"
+        And I press "Create"
+        Then I should still be on the product archetype creation page
+        And I should see "Please enter archetype code."
