@@ -91,6 +91,8 @@ Every method of payment is represented by a **PaymentMethod** instance and has t
 +============================+=================================================================+
 | id                         | Unique id of the payment method                                 |
 +----------------------------+-----------------------------------------------------------------+
+| code                       | Unique code of the payment method                               |
++----------------------------+-----------------------------------------------------------------+
 | name                       | Payment method's name                                           |
 +----------------------------+-----------------------------------------------------------------+
 | enabled                    | Indicate whether the payment method is enabled                  |
