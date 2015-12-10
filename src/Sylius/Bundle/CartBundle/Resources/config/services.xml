@@ -26,7 +26,7 @@
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartSubscriber</parameter>
         <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashSubscriber</parameter>
-        <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
+        <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\Doctrine\ORM\EventListener\RefreshCartListener</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
@@ -105,7 +105,7 @@
         </service>
 
         <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
+            <tag name="doctrine.event_listener" event="onFlush" connection="default" />
         </service>
 
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">

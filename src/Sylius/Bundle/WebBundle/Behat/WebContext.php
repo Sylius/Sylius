@@ -703,6 +703,14 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->pressButton('Save changes');
     }
 
+    /**
+     * @Then I should see :total near cart widget
+     */
+    public function iShouldSeeNearCartWidget($total)
+    {
+        $this->assertSession()->elementContains('css', 'span:contains("View cart")', $total);
+    }
+
     private function assertRoute($route)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($route));

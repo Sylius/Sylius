@@ -109,3 +109,15 @@ Feature: Checkout shipping
           And I press "Continue"
           And I click "Back"
          Then I should see "FedEx"
+
+    Scenario: Removing last item in cart after selecting shipping method
+              clears cart total
+        Given I go to the checkout start page
+          And I fill in the shipping address to United States
+          And I press "Continue"
+          And I select the "FedEx" radio button
+          And I press "Continue"
+         When I go to the cart summary page
+          And I press "delete" near "PHP Top"
+         Then I should be on the cart summary page
+          And I should see 0.00 near cart widget
