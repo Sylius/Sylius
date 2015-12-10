@@ -5,8 +5,8 @@ sylius:
             add_attributes: Add attributes
             choices: Choices
             code: Code
-            name: Internal name
-            presentation: Presentation
+            name: Name
+            translations: Translations
             type: Type
     attribute_type:
         checkbox: Checkbox

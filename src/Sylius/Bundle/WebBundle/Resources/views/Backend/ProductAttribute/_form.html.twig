@@ -1,9 +1,8 @@
 {% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
 
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.translations, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.type, {'attr': {'class': 'input-lg'}}) }}
     {% if form.options is defined %}
         {{ form_row(form.options) }}

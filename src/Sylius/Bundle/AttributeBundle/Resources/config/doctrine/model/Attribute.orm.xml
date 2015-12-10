@@ -20,7 +20,6 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
-        <field name="name" column="name" type="string" />
         <field name="type" column="type" type="string" />
         <field name="storageType" column="storage_type" type="string" />
         <field name="configuration" column="configuration" type="array" />

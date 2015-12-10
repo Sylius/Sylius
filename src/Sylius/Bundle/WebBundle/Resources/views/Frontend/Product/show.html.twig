@@ -37,7 +37,7 @@
             <tbody>
                 {% for attribute in product.attributes %}
                 <tr>
-                    <td>{{ attribute.presentation }}</td>
+                    <td>{{ attribute.name }}</td>
                     {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
                     {% include [attributeTemplate, 'SyliusWebBundle:Frontend/Product:_attribute.html.twig'] with {'attribute': attribute} %}
                 </tr>

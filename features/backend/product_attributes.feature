@@ -7,9 +7,9 @@ Feature: Product attributes
     Background:
         Given store has default configuration
         And there are following attributes:
-            | name        | type     | code        | presentation |
-            | Book author | text     | book_author | Author       |
-            | Hardcover   | checkbox | hardcover   | Hardcover?   |
+            | name        | type     | code        |
+            | Book author | text     | book_author |
+            | Hardcover   | checkbox | hardcover   |
         And I am logged in as administrator
 
     Scenario: Seeing attributes list
@@ -29,7 +29,6 @@ Feature: Product attributes
         Then I should still be on the product attribute creation page
         And I should see "Please enter attribute name"
         And I should see "Please enter attribute code"
-        And I should see "Please enter attribute presentation"
 
     @javascript
     Scenario: Accessing attribute creation form
@@ -48,9 +47,8 @@ Feature: Product attributes
 
     Scenario: Creating new attribute
         Given I am on the product attribute creation page with type "text"
-        When I fill in "Internal name" with "ISBN number"
+        When I fill in "Name" with "ISBN number"
         And I fill in "Code" with "isbn"
-        And I fill in "Presentation" with "ISBN"
         And I press "Create"
         Then I should be on the product attribute index page
         And I should see "Attribute has been successfully created."
@@ -60,15 +58,14 @@ Feature: Product attributes
     Scenario: Creating new attribute with options
         Given I am on the product attribute creation page with type "date"
         When I fill in the following:
-            | Internal name | Release date |
-            | Code          | release_date |
-            | Presentation  | Released at  |
-            | Format        | d/m/Y        |
+            | Name   | Released at  |
+            | Code   | release_date |
+            | Format | d/m/Y        |
         And I press "Create"
         Then I should be on the product attribute index page
         And I should see "Attribute has been successfully created."
         And I should see 3 attributes in the list
-        And I should see attribute with name "Release date" in that list
+        And I should see attribute with name "Released at" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the product attribute index page
@@ -77,7 +74,7 @@ Feature: Product attributes
 
     Scenario: Updating the attribute
         Given I am editing product attribute "Book author"
-        When I fill in "Internal name" with "Author"
+        When I fill in "Name" with "Author"
         And I press "Save changes"
         Then I should still be on the product attribute index page
         And I should see "Attribute has been successfully updated."

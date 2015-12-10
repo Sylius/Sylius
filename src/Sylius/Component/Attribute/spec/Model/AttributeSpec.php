@@ -66,17 +66,6 @@ class AttributeSpec extends ObjectBehavior
         $this->__toString()->shouldReturn('T-Shirt material');
     }
 
-    function it_has_no_presentation_by_default()
-    {
-        $this->getPresentation()->shouldReturn(null);
-    }
-
-    function its_presentation_is_mutable()
-    {
-        $this->setPresentation('Size');
-        $this->getPresentation()->shouldReturn('Size');
-    }
-
     function it_has_text_type_by_default()
     {
         $this->getType()->shouldReturn(TextAttributeType::TYPE);

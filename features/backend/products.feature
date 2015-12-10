@@ -11,10 +11,10 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following attributes:
-            | name               | presentation      | type     |
-            | T-Shirt fabric     | T-Shirt           | text     |
-            | T-Shirt fare trade | Faretrade product | checkbox |
-            | Size               | size              | integer  |
+            | name               | type     |
+            | T-Shirt fabric     | text     |
+            | T-Shirt fare trade | checkbox |
+            | Size               | integer  |
           And the following products exist:
             | name          | price | options                     | attributes            |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |

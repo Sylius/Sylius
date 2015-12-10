@@ -63,13 +63,6 @@ interface AttributeValueInterface extends ResourceInterface
     public function getName();
 
     /**
-     * Proxy method to access the presentation from real attribute.
-     *
-     * @return string
-     */
-    public function getPresentation();
-
-    /**
      * @return string
      */
     public function getType();

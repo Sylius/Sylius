@@ -145,16 +145,6 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
-    {
-        $this->assertAttributeIsSet();
-
-        return $this->attribute->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getType()
     {
         $this->assertAttributeIsSet();

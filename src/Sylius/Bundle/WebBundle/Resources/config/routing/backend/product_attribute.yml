@@ -9,8 +9,6 @@ sylius_backend_product_attribute_index:
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:index.html.twig
             sortable: true
-            sorting:
-                name: desc
 
 sylius_backend_product_attribute_create:
     path: /new

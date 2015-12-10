@@ -107,22 +107,6 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getName()->shouldReturn('T-Shirt material');
     }
 
-    function it_throws_exception_when_trying_to_get_presentation_without_attribute_defined()
-    {
-        $this
-            ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetPresentation()
-        ;
-    }
-
-    function it_returns_its_attribute_presentation(AttributeInterface $attribute)
-    {
-        $attribute->getPresentation()->willReturn('Material');
-        $this->setAttribute($attribute);
-
-        $this->getPresentation()->shouldReturn('Material');
-    }
-
     function it_throws_exception_when_trying_to_get_type_without_attribute_defined()
     {
         $this

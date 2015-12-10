@@ -35,11 +35,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var string
      */
-    protected $name;
-
-    /**
-     * @var string
-     */
     protected $code;
 
     /**
@@ -84,7 +79,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -100,7 +95,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -108,7 +103,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
     }
 
     /**
@@ -125,22 +120,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
     }
 
     /**

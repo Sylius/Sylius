@@ -130,7 +130,7 @@ class Configuration implements ConfigurationInterface
                                             ->end()
                                             ->arrayNode('fields')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array('presentation'))
+                                                ->defaultValue(array('name'))
                                             ->end()
                                         ->end()
                                     ->end()

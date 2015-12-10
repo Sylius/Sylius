@@ -822,7 +822,6 @@ sylius:
         manage: Manage attributes
         name: name
         no_results: There are no attributes configured.
-        presentation: presentation
         type: type
         update_header: Editing attribute
         updated_at: last update

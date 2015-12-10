@@ -188,9 +188,8 @@ class ProductContext extends DefaultContext
             $this->thereIsAttribute(
                 $attribute['name'],
                 $attribute['type'],
-                (isset($attribute['code'])) ? $attribute['code'] : null,
-                (isset($attribute['presentation'])) ? $attribute['presentation'] : null)
-            ;
+                (isset($attribute['code'])) ? $attribute['code'] : null
+            );
         }
 
         $this->getEntityManager()->flush();
@@ -200,10 +199,9 @@ class ProductContext extends DefaultContext
      * @Given /^There is attribute "([^""]*)" with type "([^""]*)"$/
      * @Given /^I created attribute "([^""]*)" with type "([^""]*)"$/
      */
-    public function thereIsAttribute($name, $type, $code = null, $presentation = null)
+    public function thereIsAttribute($name, $type, $code = null)
     {
         $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
-        $presentation = (null === $presentation) ? $name : $name;
         $storageType = (CheckboxAttributeType::TYPE === $type) ? 'boolean' : $type;
 
         $attribute = $this->getFactory('product_attribute')->createNew();
@@ -211,7 +209,6 @@ class ProductContext extends DefaultContext
         $attribute->setType($type);
         $attribute->setCode($code);
         $attribute->setStorageType($storageType);
-        $attribute->setPresentation($presentation);
 
         $manager = $this->getEntityManager();
         $manager->persist($attribute);
@@ -264,7 +261,7 @@ class ProductContext extends DefaultContext
             $attribute->setCurrentLocale($data['locale']);
             $attribute->setFallbackLocale($data['locale']);
 
-            $attribute->setPresentation($data['presentation']);
+            $attribute->setName($data['name']);
         }
 
         $manager->flush();

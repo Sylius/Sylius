@@ -46,15 +46,12 @@ class AttributeType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildAttributeFormListener($builder->getFormFactory()))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.attribute.name',
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
+                'label' => 'sylius.form.attribute.translations',
             ))
             ->add('code', 'text', array(
                 'label' => 'sylius.form.attribute.code',
-            ))
-            ->add('translations', 'a2lix_translationsForms', array(
-                'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
-                'label' => 'sylius.form.attribute.presentation',
             ))
             ->add('type', 'sylius_attribute_type_choice', array(
                 'label'    => 'sylius.form.attribute.type',

@@ -58,12 +58,6 @@ class AttributeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('code', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
