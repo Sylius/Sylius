@@ -27,7 +27,7 @@ This interface should be implemented by models representing a **Promotion**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
     You will find more information about this interface in `Sylius API PromotionInterface`_.
 
 .. _Sylius API PromotionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionInterface.html
@@ -64,8 +64,8 @@ This interface should be implemented by models representing a **Coupon**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_soft-deletable-interface`
-    and the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface`,
+    :ref:`component_resource_model_soft-deletable-interface` and the :ref:`component_resource_model_timestampable-interface`. |br|
     You will find more information about this interface in `Sylius API CouponInterface`_.
 
 .. _Sylius API CouponInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CouponInterface.html

@@ -13,6 +13,8 @@ The promotion is represented by a **Promotion** instance. It has the following p
 +================+=============================================================+
 | id             | Unique id of the promotion                                  |
 +----------------+-------------------------------------------------------------+
+| code           | Unique code of the promotion                                |
++----------------+-------------------------------------------------------------+
 | name           | Promotion's name                                            |
 +----------------+-------------------------------------------------------------+
 | description    | Promotion's description                                     |
