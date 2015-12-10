@@ -28,7 +28,7 @@ This interface should be implemented by any custom model representing a payment.
 Also it keeps all of the default :doc:`/components/Payment/payment_states`.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_timestampable-interface`
+   This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`
    and the :ref:`component_resource_model_soft-deletable-interface`. |br|
    For more detailed information go to `Sylius API PaymentInterface`_.
 
