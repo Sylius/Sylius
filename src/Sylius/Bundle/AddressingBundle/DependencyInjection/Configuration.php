@@ -11,16 +11,15 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
-use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
+use Sylius\Bundle\AddressingBundle\Factory\ZoneFactory;
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
@@ -34,10 +33,7 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
-use Sylius\Component\Addressing\Model\ZoneMemberCountry;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberProvince;
-use Sylius\Component\Addressing\Model\ZoneMemberZone;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -190,14 +186,14 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Zone::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ZoneInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ZoneController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(ZoneFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ZoneType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ZoneChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -222,7 +218,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ZoneMember::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ZoneMemberInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ZoneMemberController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')

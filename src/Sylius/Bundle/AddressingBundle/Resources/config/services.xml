@@ -18,7 +18,8 @@
 
     <parameters>
         <parameter key="sylius.form.type.zone_type_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType</parameter>
-        <parameter key="sylius.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
+
+        <parameter key="sylius.factory.zone">Sylius\Bundle\AddressingBundle\Factory\ZoneFactory</parameter>
 
         <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber</parameter>
 
@@ -29,12 +30,12 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.type.zone_member_collection" class="%sylius.form.type.zone_member_collection.class%">
-            <tag name="form.type" alias="sylius_zone_member_collection" />
-        </service>
-
         <service id="sylius.form.type.zone_type_choice" class="%sylius.form.type.zone_type_choice.class%">
             <tag name="form.type" alias="sylius_zone_type_choice" />
+        </service>
+
+        <service id="sylius.factory.zone" class="%sylius.factory.zone%">
+            <argument type="service" id="sylius.repository.zone" />
         </service>
 
         <service id="sylius.form.listener.address" class="%sylius.form.listener.address.class%">

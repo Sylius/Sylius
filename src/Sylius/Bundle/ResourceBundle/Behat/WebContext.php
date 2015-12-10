@@ -570,6 +570,29 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I am on the zone creation page for type "([^"]*)"$/
+     */
+    public function iAmOnTheZoneCreationPageForType($type)
+    {
+        $this->getSession()->visit($this->generatePageUrl('zone creation', array('type' => $type)));
+        $this->iShouldSeeSelectWithOption('Type', ucfirst($type));
+    }
+
+    /**
+     * @Then /^I should be on the zone creation page for type "([^"]*)"$/
+     * @Then /^I should still be on the zone creation page for type "([^"]*)"$/
+     */
+    public function iShouldBeOnTheZoneCreationPageForType($type)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('zone creation', array('type' => $type)));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
+    }
+
+    /**
      * @Then /^I should see select "([^"]*)" with "([^"]*)" option selected$/
      */
     public function iShouldSeeSelectWithOptionSelected($fieldName, $fieldOption)

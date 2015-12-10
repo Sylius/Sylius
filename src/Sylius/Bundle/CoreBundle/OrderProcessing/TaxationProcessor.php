@@ -21,15 +21,11 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
- * Taxation processor.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
      * @var FactoryInterface
      */
     protected $adjustmentFactory;
@@ -42,30 +38,22 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected $calculator;
 
     /**
-     * Tax rate resolver.
-     *
      * @var TaxRateResolverInterface
      */
     protected $taxRateResolver;
 
     /**
-     * Zone matcher.
-     *
      * @var ZoneMatcherInterface
      */
     protected $zoneMatcher;
 
     /**
-     * Taxation settings.
-     *
      * @var Settings
      */
     protected $settings;
 
     /**
-     * Constructor.
-     *
-     * @param FactoryInterface      $adjustmentFactory
+     * @param FactoryInterface         $adjustmentFactory
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher

@@ -1,0 +1,5 @@
+{% macro updateRoute(onClick, message, icon, button) %}
+    <a href='' class="btn btn-{{ button|default('primary') }}" onclick="{{ onClick }}">
+        <i class="glyphicon glyphicon-{{ icon|default('ok') }}"></i> {{ message|default('sylius.create')|trans }}
+    </a>
+{% endmacro %}

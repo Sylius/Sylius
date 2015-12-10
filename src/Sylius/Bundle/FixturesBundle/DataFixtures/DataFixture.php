@@ -89,11 +89,6 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         return call_user_func_array(array($this, $method), $arguments);
     }
 
-    protected function getZoneMemberFactory($zoneType)
-    {
-        return $this->get('sylius.factory.zone_member_'.$zoneType);
-    }
-
     /**
      * @return VariantGenerator
      */

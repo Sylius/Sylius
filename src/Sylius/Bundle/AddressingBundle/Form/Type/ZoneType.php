@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -43,15 +44,27 @@ class ZoneType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $zoneType = $builder->getData()->getType();
+
         $builder
             ->add('name', 'text', array(
                 'label' => 'sylius.form.zone.name',
             ))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('type', 'sylius_zone_type_choice')
-            ->add('members', 'sylius_zone_member_collection', array(
+            ->add('type', 'sylius_zone_type_choice', array(
+                'disabled' => true,
+            ))
+            ->add('members', 'collection', array(
+                'type'             => 'sylius_zone_member',
                 'label'            => false,
                 'button_add_label' => 'sylius.zone.add_member',
+                'cascade_validation' => true,
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
+                'options'          => array(
+                    'zone_type' => $zoneType,
+                ),
             ))
         ;
 
@@ -65,6 +78,16 @@ class ZoneType extends AbstractResourceType
                 ))
             ;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('options', array('zone_type' => null));
     }
 
     /**

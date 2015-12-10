@@ -14,27 +14,27 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class CountryChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    protected $countryRepository;
+    protected $repository;
 
     /**
      * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
     {
-        $this->countryRepository = $repository;
+        $this->repository = $repository;
     }
 
     /**
@@ -42,25 +42,22 @@ class CountryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options)  {
+        $choices = function (Options $options) {
             if (null === $options['enabled']) {
-                $choices = $this->countryRepository->findAll();
+                $choices = $this->repository->findAll();
             } else {
-                $choices = $this->countryRepository->findBy(array('enabled' => $options['enabled']));
+                $choices = $this->repository->findBy(array('enabled' => $options['enabled']));
             }
 
-            return new ObjectChoiceList($choices, null, array(), null, 'id');
+            return $this->getCountryCodes($choices);
         };
 
         $resolver
             ->setDefaults(array(
-                'choice_list'  => $choiceList,
-                'choice_label' => function (CountryInterface $country) {
-                    return Intl::getRegionBundle()->getCountryName($country->getCode());
-                },
-                'enabled'      => null,
-                'label'        => 'sylius.form.address.country',
-                'empty_value'  => 'sylius.form.country.select',
+                'choices'     => $choices,
+                'enabled'     => true,
+                'label'       => 'sylius.form.zone.types.country',
+                'empty_value' => 'sylius.form.country.select',
             ))
         ;
     }
@@ -79,5 +76,22 @@ class CountryChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_country_choice';
+    }
+
+    /**
+     * @param CountryInterface[] $countries
+     *
+     * @return array
+     */
+    protected function getCountryCodes(array $countries)
+    {
+        $countryCodes = array();
+
+        /* @var CountryInterface $country */
+        foreach ($countries as $country){
+            $countryCodes[$country->getCode()] = Intl::getRegionBundle()->getCountryName($country->getCode());
+        }
+
+        return $countryCodes;
     }
 }

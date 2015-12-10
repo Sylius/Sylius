@@ -25,43 +25,32 @@ Feature: Zones
           And I am on the zone index page
          Then I should see "There are no zones configured"
 
+    @javascript
     Scenario: Accessing the zone creation form
         Given I am on the dashboard page
          When I follow "Zones"
-          And I follow "Create zone"
-         Then I should be on the zone creation page
+          And I select "Country" from "form_type"
+          And I follow "Create"
+         Then I should be on the country zone creation page
 
     Scenario: Submitting invalid form
-        Given I am on the zone creation page
+        Given I am on the zone creation page for type "country"
          When I press "Create"
-         Then I should still be on the zone creation page
+         Then I should still be on the zone creation page for type "country"
           And I should see "Please enter zone name."
 
     Scenario: Creating new zone requires adding at least 1 member
-        Given I am on the zone creation page
+        Given I am on the zone creation page for type "country"
           And I fill in "Code" with "EU"
           And I fill in "Name" with "European Union"
          When I press "Create"
-         Then I should still be on the zone creation page
+         Then I should still be on the zone creation page for type "country"
           And I should see "Please add at least 1 zone member."
 
     @javascript
-    Scenario: Updating the collection form type prototype
-        Given I am on the zone creation page
-          And I click "Add member"
-          And "Country" should appear on the page
-          And I select "Province" from "Type"
-          And I click "Add member"
-          And "Province" should appear on the page
-          And I select "Zone" from "Type"
-          And I click "Add member"
-          And "Zone" should appear on the page
-
-    @javascript
     Scenario: Creating new zone built from countries
-        Given I am on the zone creation page
+        Given I am on the zone creation page for type "country"
           And I fill in "Name" with "EU"
-          And I select "Country" from "Type"
           And I select "shipping" from "Scope"
           And I add zone member "Estonia"
           And I add zone member "Germany"

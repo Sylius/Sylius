@@ -11,26 +11,50 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-abstract class ZoneMemberType extends AbstractResourceType
+class ZoneMemberType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $type = $builder->getOption('zone_type');
+
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('_type', 'hidden', array(
-                'data'   => $this->getName(),
-                'mapped' => false,
+            ->add('code', 'sylius_'.$type.'_choice', array(
+                'label' => 'sylius.form.zone.types.'.$type,
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'empty_value' => 'sylius.form.zone_member.select',
+                'data_class'  => ZoneMember::class,
+                'zone_type'   => null,
+            ))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_zone_member';
     }
 }

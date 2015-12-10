@@ -13,8 +13,9 @@ namespace Sylius\Component\Addressing\Model;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-abstract class ZoneMember implements ZoneMemberInterface
+class ZoneMember implements ZoneMemberInterface
 {
     /**
      * @var mixed

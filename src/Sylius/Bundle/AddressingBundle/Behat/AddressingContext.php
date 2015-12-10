@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 class AddressingContext extends DefaultContext
 {
@@ -86,9 +87,8 @@ class AddressingContext extends DefaultContext
             $this->thereIsZone(
                 $data['name'],
                 $data['type'],
-                explode(',', $data['members']),
-                $scope,
-                false
+                explode(', ', $data['members']),
+                $scope
             );
         }
 
@@ -111,16 +111,15 @@ class AddressingContext extends DefaultContext
         $zone->setScope($scope);
 
         foreach ($members as $memberName) {
-            $member = $this->getService('sylius.factory.zone_member_'.$type)->createNew();
             if (ZoneInterface::TYPE_ZONE === $type) {
                 $zoneable = $repository->findOneBy(array('name' => $memberName));
             } else {
                 $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
             }
 
-            call_user_func(array($member, 'set'.ucfirst($type)), $zoneable);
-
-            $member->setCode($name.'_'.$zoneable->getCode());
+            /* @var ZoneMemberInterface $member */
+            $member = $this->getFactory('zone_member')->createNew();
+            $member->setCode($zoneable->getCode());
             $zone->addMember($member);
         }
 

@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,19 +40,21 @@ class ProvinceChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            if (null === $options['country']) {
-                return new ObjectChoiceList($this->repository->findAll(), null, array(), null, 'id');
-            }
+        $choices = function (Options $options) {
+                if (null === $options['country']) {
+                    $choices = $this->repository->findAll();
+                } else {
+                    $choices = $options['country']->getProvinces();
+                }
 
-            return new ObjectChoiceList($options['country']->getProvinces(), null, array(), null, 'id');
+            return $this->getProvinceCodes($choices);
         };
 
         $resolver
             ->setDefaults(array(
-                'choice_list' => $choiceList,
+                'choices'     => $choices,
                 'country'     => null,
-                'label'       => 'sylius.form.address.province',
+                'label'       => 'sylius.form.zone.types.province',
                 'empty_value' => 'sylius.form.province.select',
             ))
         ;
@@ -72,5 +74,22 @@ class ProvinceChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_province_choice';
+    }
+
+    /**
+     * @param ProvinceInterface[] $provinces
+     *
+     * @return array
+     */
+    protected function getProvinceCodes(array $provinces)
+    {
+        $provinceCodes = array();
+
+        /* @var ProvinceInterface $province */
+        foreach ($provinces as $province) {
+            $provinceCodes[$province->getCode()] = $province->getName();
+        }
+
+        return $provinceCodes;
     }
 }

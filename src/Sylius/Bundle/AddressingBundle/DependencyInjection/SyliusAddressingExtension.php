@@ -66,6 +66,13 @@ class SyliusAddressingExtension extends AbstractResourceExtension
         ;
 
         $container
+            ->getDefinition('sylius.form.type.zone_choice')
+            ->setArguments(array(
+                new Reference('sylius.repository.zone'),
+            ))
+        ;
+
+        $container
             ->getDefinition('sylius.form.type.address')
             ->addArgument(new Reference('sylius.form.listener.address'))
         ;

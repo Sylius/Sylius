@@ -38,13 +38,13 @@ class LoadShippingData extends DataFixture
         $manager->persist($heavy);
 
         $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'SM1', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'SM1', 'United States of America', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = array('amount' => 2500);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'SM2', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'SM2', 'European Union', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('amount' => 2350);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'SM3', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'SM3', 'European Union', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
         $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'), 'SM4', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));

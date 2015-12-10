@@ -30,7 +30,7 @@ class OrderShippingListener
     /**
      * Order shipments factory.
      *
-     * @var OrderShipmentFactory
+     * @var OrderShipmentFactoryInterface
      */
     protected $shipmentFactory;
 
@@ -51,7 +51,7 @@ class OrderShippingListener
     /**
      * Constructor.
      *
-     * @param OrderShipmentFactory          $shipmentFactory
+     * @param OrderShipmentFactoryInterface     $shipmentFactory
      * @param ShipmentProcessorInterface        $shippingProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */

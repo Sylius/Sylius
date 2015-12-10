@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  * This listener adds the province field to form if needed.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
@@ -98,7 +100,11 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $country = $this->countryRepository->find($data['country']);
+        if ('' === $data['country']) {
+            return;
+        }
+
+        $country = $this->countryRepository->findOneBy(array('code' => $data['country']));
         if (null === $country) {
             return;
         }

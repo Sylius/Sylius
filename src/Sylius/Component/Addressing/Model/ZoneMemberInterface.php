@@ -28,9 +28,4 @@ interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
      * @param ZoneInterface $belongsTo
      */
     public function setBelongsTo(ZoneInterface $belongsTo = null);
-
-    /**
-     * @return string
-     */
-    public function getName();
 }

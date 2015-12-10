@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.zone.show_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.zone.show_header'|trans|raw }}</h1>
 </div>
 
 <div class="well">
@@ -55,9 +55,9 @@
             {% for member in zone.members %}
                 <tr id="{{ member.id }}">
                     {% if zone.type == 'country' %}
-                        <td>{{ member.name|sylius_country_name }}</td>
+                        <td>{{ member.code|sylius_country_name }}</td>
                     {% else %}
-                        <td>{{ member.name }}</td>
+                        <td>{{ member.code }}</td>
                     {% endif %}
                     <td>{{ member.code }}</td>
                     <td>

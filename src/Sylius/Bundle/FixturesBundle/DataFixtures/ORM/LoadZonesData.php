@@ -26,9 +26,8 @@ class LoadZonesData extends DataFixture
 {
     protected $euCountries = array(
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
-        'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
-        'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'GB',
+        'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
+        'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
     );
 
     /**
@@ -36,16 +35,14 @@ class LoadZonesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $allCountries = Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'));
-
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
             array_merge($this->euCountries, ['US'])
         );
 
-        $manager->persist($eu = $this->createZone('EOnion', 'EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
-        $manager->persist($this->createZone('\'Murica', 'USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('FunStuff', 'EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($eu = $this->createZone('EU', 'European Union', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
+        $manager->persist($this->createZone('USA', 'United States of America', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $manager->persist($this->createZone('EUSA', 'EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
         $manager->persist($this->createZone('RoW', 'Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();
@@ -67,6 +64,7 @@ class LoadZonesData extends DataFixture
     /**
      * Create a new zone instance of given type.
      *
+     * @param string $code
      * @param string $name
      * @param string $type
      * @param array  $members
@@ -81,14 +79,10 @@ class LoadZonesData extends DataFixture
         $zone->setName($name);
         $zone->setType($type);
 
-        foreach ($members as $id) {
+        foreach ($members as $memberCode) {
             /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberFactory($type)->createNew();
-
-            if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
-                $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));
-                $zoneMember->setCode($this->faker->ipv4);
-            }
+            $zoneMember = $this->getZoneMemberFactory()->createNew();
+            $zoneMember->setCode($memberCode);
 
             $zone->addMember($zoneMember);
         }
