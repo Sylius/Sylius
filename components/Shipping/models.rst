@@ -67,19 +67,21 @@ ShippingCategory
 **ShippableInterface**.
 ShippingCategory has the following properties:
 
-+---------------+------------------------------------+
-| Property      | Description                        |
-+===============+====================================+
-| id            | Unique id of the ShippingCategory  |
-+---------------+------------------------------------+
-| name          | e.g. "Regular"                     |
-+---------------+------------------------------------+
-| description   | e.g. “Regular weight items”        |
-+---------------+------------------------------------+
-| createdAt     | Creation time                      |
-+---------------+------------------------------------+
-| updatedAt     | Last update time                   |
-+---------------+------------------------------------+
++---------------+-------------------------------------+
+| Property      | Description                         |
++===============+=====================================+
+| id            | Unique id of the ShippingCategory   |
++---------------+-------------------------------------+
+| code          | Unique code of the ShippingCategory |
++---------------+-------------------------------------+
+| name          | e.g. "Regular"                      |
++---------------+-------------------------------------+
+| description   | e.g. “Regular weight items”         |
++---------------+-------------------------------------+
+| createdAt     | Creation time                       |
++---------------+-------------------------------------+
+| updatedAt     | Last update time                    |
++---------------+-------------------------------------+
 
 .. hint::
     To understand relationship between **ShippingMethod** and shippable object base on **ShippingCategory** go to
@@ -102,6 +104,8 @@ It has the following properties:
 | Property            | Description                                                             |
 +=====================+=========================================================================+
 | id                  | Unique id of the ShippingMethod                                         |
++---------------------+-------------------------------------------------------------------------+
+| code                | Unique code of the ShippingMethod                                       |
 +---------------------+-------------------------------------------------------------------------+
 | category            | e.g. "Regular"                                                          |
 +---------------------+-------------------------------------------------------------------------+
