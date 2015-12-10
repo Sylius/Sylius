@@ -90,3 +90,30 @@ Feature: Channel management
          Then I should still be on the channel index page
           And I should see "Channel has been successfully deleted"
           And I should not see channel with name "mystore.eu" in the list
+
+    Scenario: Cannot add channel without code
+        Given I am on the channel creation page
+        And I fill in "Name" with "Mobile US"
+        And I select "English (United States)" from "Locales"
+        And I select "USD" from "Currencies"
+        And I select "PayPal" from "Payment Methods"
+        And I select "FedEx" from "Shipping Methods"
+        When I press "Create"
+        Then I should still be on the channel creation page
+        And I should see "Please enter channel code."
+
+    Scenario: Cannot edit channel code
+         When I am editing channel "mystore.us"
+         Then the code field should be disabled
+
+    Scenario: Try add channel with existing code
+        Given I am on the channel creation page
+        And I fill in "Code" with "WEB-US"
+        And I fill in "Name" with "Mobile US"
+        And I select "English (United States)" from "Locales"
+        And I select "USD" from "Currencies"
+        And I select "PayPal" from "Payment Methods"
+        And I select "FedEx" from "Shipping Methods"
+        When I press "Create"
+        Then I should still be on the channel creation page
+        And I should see "Channel code has to be unique."
