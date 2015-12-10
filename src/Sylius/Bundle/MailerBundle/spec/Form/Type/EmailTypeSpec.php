@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\MailerBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,7 +40,7 @@ class EmailTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('code', 'text', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
