@@ -9,6 +9,7 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('category', 'sylius.tax_rate.category'|trans) }}</th>
             <th>{{ sylius_resource_sort('zone', 'sylius.tax_rate.zone'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.tax_rate.name'|trans) }}</th>
@@ -23,6 +24,7 @@
     {% for tax_rate in tax_rates %}
         <tr id="{{ tax_rate.id }}">
             <td>{{ tax_rate.id }}</td>
+            <td>{{ tax_rate.code }}</td>
             <td>{{ tax_rate.category }}</td>
             <td>{{ tax_rate.zone }}</td>
             <td>{{ tax_rate.name }}</td>

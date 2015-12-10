@@ -22,6 +22,11 @@ class TaxRate implements TaxRateInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var TaxCategoryInterface
      */
     protected $category;
@@ -71,6 +76,22 @@ class TaxRate implements TaxRateInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

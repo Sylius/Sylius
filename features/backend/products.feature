@@ -24,10 +24,10 @@ Feature: Products
             | Sticker       | 10.00 |                             |                        |
           And product "Super T-Shirt" is available in all variations
           And there are following tax categories:
-            | name        |
-            | Clothing    |
-            | Electronics |
-            | Print       |
+            | code | name        |
+            | TC1  | Clothing    |
+            | TC2  | Electronics |
+            | TC3  | Print       |
           And there are following taxonomies defined:
             | name     |
             | Category |

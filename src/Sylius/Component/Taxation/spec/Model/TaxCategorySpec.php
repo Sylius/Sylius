@@ -33,6 +33,12 @@ class TaxCategorySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('TC1');
+        $this->getCode()->shouldReturn('TC1');
+    }
+
     function it_should_be_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);

@@ -24,20 +24,21 @@ class TaxationContext extends DefaultContext
     public function thereAreTaxCategories(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxCategory($data['name'], false);
+            $this->thereIsTaxCategory($data['name'], $data['code'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^There is tax category "([^""]*)"$/
-     * @Given /^I created tax category "([^""]*)"$/
+     * @Given /^There is tax category "([^""]*)" with code "([^""]*)"$/
+     * @Given /^I created tax category "([^""]*)" with code "([^""]*)"$/
      */
-    public function thereIsTaxCategory($name, $flush = true)
+    public function thereIsTaxCategory($name, $code, $flush = true)
     {
         $category = $this->getFactory('tax_category')->createNew();
         $category->setName($name);
+        $category->setCode($code);
 
         $manager = $this->getEntityManager();
         $manager->persist($category);
