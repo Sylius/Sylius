@@ -12,7 +12,7 @@ EmailInterface
 This interface should be implemented by model representing a single type of Email.
 
 .. note::
-    This interface extends :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
     For more detailed information go to `Sylius API EmailInterface`_.
 
 .. _Sylius API EmailInterface: http://api.sylius.org/Sylius/Component/Mailer/Model/EmailInterface.html
