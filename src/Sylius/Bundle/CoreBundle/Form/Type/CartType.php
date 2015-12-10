@@ -58,9 +58,11 @@ class CartType extends BaseCartType
                     return;
                 }
 
-                $data->addPromotionCoupon(
-                    $this->couponFactory->createNew()
-                );
+                if ($event->getForm()->has('promotionCoupons')) {
+                    $data->addPromotionCoupon(
+                        $this->couponFactory->createNew()
+                    );
+                }
             })
         ;
     }
