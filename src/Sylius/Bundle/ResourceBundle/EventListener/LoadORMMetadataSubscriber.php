@@ -26,16 +26,14 @@ class LoadORMMetadataSubscriber implements EventSubscriber
     /**
      * @var array
      */
-    protected $classes;
+    protected $resources;
 
     /**
-     * Constructor
-     *
      * @param array $resources
      */
     public function __construct($resources)
     {
-        $this->classes = $resources;
+        $this->resources = $resources;
     }
 
     /**
@@ -67,24 +65,29 @@ class LoadORMMetadataSubscriber implements EventSubscriber
 
     private function process(ClassMetadataInfo $metadata)
     {
-        foreach ($this->classes as $application => $resources) {
-            foreach ($resources as $resource => $parameters) {
-                foreach ($parameters as $parameter => $classes) {
-                    if (isset($classes['model']) && $classes['model'] === $metadata->getName()) {
+        foreach ($this->resources as $application => $resources) {
+            foreach ($resources as $resource => $resourceParameters) {
+                $classes = $resourceParameters['classes'];
+
+                if (isset($classes['model']) && $classes['model'] === $metadata->getName()) {
+                    $metadata->isMappedSuperclass = false;
+
+                    if (isset($classes['repository'])) {
+                        $metadata->setCustomRepositoryClass($classes['repository']);
+                    }
+                }
+
+                if (isset($resourceParameters['translation'])) {
+                    $translationClasses = $resourceParameters['translation']['classes'];
+
+                    if (isset($translationClasses['model']) && $translationClasses['model'] === $metadata->getName()) {
                         $metadata->isMappedSuperclass = false;
 
-                        if (isset($classes['repository'])) {
-                            $metadata->setCustomRepositoryClass($classes['repository']);
-                        }
-                    } else if (isset($classes['translation']['model'])
-                        && $classes['translation']['model'] === $metadata->getName()
-                    ) {
-                        $metadata->isMappedSuperclass = false;
-
-                        if (isset($classes['translation']['repository'])) {
-                            $metadata->setCustomRepositoryClass($classes['translation']['repository']);
+                        if (isset($translationClasses['repository'])) {
+                            $metadata->setCustomRepositoryClass($translationClasses['repository']);
                         }
                     }
+
                 }
             }
         }

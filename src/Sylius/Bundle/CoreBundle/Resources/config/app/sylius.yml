@@ -728,7 +728,7 @@ sylius_rbac:
         shipping_manager:
             name: Shipping Manager
             description: Shipping Department people
-            permissions: [sylius.shipp/ing]
+            permissions: [sylius.shipping]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         content_editor:
             name: Content Editor

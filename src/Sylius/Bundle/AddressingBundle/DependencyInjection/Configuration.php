@@ -11,6 +11,18 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -21,24 +33,14 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberCountry;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberProvince;
 use Sylius\Component\Addressing\Model\ZoneMemberZone;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
-use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -98,7 +100,6 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(AddressType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -129,7 +130,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(CountryType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(CountryChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -160,7 +161,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProvinceType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ProvinceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -309,7 +310,6 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ZoneMemberZoneType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
