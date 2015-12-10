@@ -125,14 +125,14 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
 Shipping Category
 -----------------
 
-Every shipping category has two identifiers, an ID and name. You can access those by calling ``->getId()`` and ``->getName()``
-methods respectively. The name is mutable, so you can change it by calling ``->setName('Regular')`` on the shipping category instance.
+Every shipping category has three identifiers, an ID, code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``->getName()``
+methods respectively. The name is mutable, so you can change them by calling and ``->setName('Regular')`` on the shipping category instance.
 
 Shipping Method
 ---------------
 
-Every shipping method has two identifiers, an ID and name. You can access those by calling ``->getId()`` and ``->getName()``
-methods respectively. The name is mutable, so you can change it by calling ``->setName('FedEx')`` on the shipping method instance.
+Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->gerCode()`` and ``->getName()``
+methods respectively. The name is mutable, so you can change them by calling  ``->setName('FedEx')`` on the shipping method instance.
 
 Setting Shipping Category
 ~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -44,7 +44,6 @@ provides information about shipment state.
 
 .. _Sylius API ShipmentItemInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItemInterface.html
 
-
 ShippableInterface
 ~~~~~~~~~~~~~~~~~~
 
@@ -64,7 +63,7 @@ This interface should be implemented by model representing a shipping category a
 shipments and connect it with right shipment method.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
     For more detailed information go to `Sylius API ShippingCategoryInterface`_.
 
 .. _Sylius API ShippingCategoryInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategoryInterface.html
@@ -78,7 +77,8 @@ This interface provides default requirements for system of matching shipping met
 and allows to add a new restriction to a basic shipping method.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_timestampable-interface` and :ref:`component_shipping_model_shipping-method-translation-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
+    and :ref:`component_shipping_model_shipping-method-translation-interface`. |br|
     For more detailed information go to `Sylius API ShippingMethodInterface`_.
 
 .. _Sylius API ShippingMethodInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodInterface.html
