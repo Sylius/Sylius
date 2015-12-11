@@ -1,4 +1,4 @@
-Registry Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusRegistryBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusRegistryBundle)
+Registry Component [![Build status...](https://secure.travis-ci.org/Sylius/Registry.png?branch=master)](http://travis-ci.org/Sylius/Registry)
 ==================
 
 ...
@@ -11,7 +11,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusRegistryBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Registry/index.html).
 
 Contributing
 ------------
