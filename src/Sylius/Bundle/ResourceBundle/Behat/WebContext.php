@@ -471,6 +471,36 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then /^I should still be on the (.+) page from ([^""]*) "([^""]*)"/
+     */
+    public function iShouldBeOnThePageWithGivenParent($page, $parentType, $parentName)
+    {
+        $parent = $this->findOneByName($parentType, $parentName);
+        $this->assertSession()->addressEquals($this->generatePageUrl($page, array(sprintf('%sId',$parentType) => $parent->getId())));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
+    }
+
+    /**
+     * @Given /^I am (building|viewing|editing) ([^""]*) "([^""]*)" from ([^""]*) "([^""]*)"$/
+     */
+    public function iAmDoingSomethingWithResourceByNameFromGivenCategory($action, $type, $name, $categoryType, $categoryName)
+    {
+        $type = str_replace(' ','_', $type);
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
+
+        $root = $this->findOneByName($categoryType, $categoryName);
+        $resource = $this->findOneByName($type, $name);
+
+        $this->getSession()->visit($this->generatePageUrl(
+            sprintf('%s_%s', $type, $action), array('id' => $resource->getId(), sprintf('%sId', $categoryType) => $root->getId())
+        ));
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code

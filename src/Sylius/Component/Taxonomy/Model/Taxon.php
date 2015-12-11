@@ -27,6 +27,11 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var TaxonomyInterface
      */
     protected $taxonomy;
@@ -81,6 +86,22 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

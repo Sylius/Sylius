@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,8 +42,14 @@ class TaxonomyTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

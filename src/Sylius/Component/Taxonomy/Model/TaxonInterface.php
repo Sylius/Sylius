@@ -12,6 +12,7 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 
@@ -19,7 +20,7 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterface, TranslatableInterface
+interface TaxonInterface extends CodeAwareInterface, SoftDeletableInterface, TaxonTranslationInterface, TranslatableInterface
 {
     /**
      * @return TaxonomyInterface
