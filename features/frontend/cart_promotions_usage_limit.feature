@@ -7,9 +7,9 @@ Feature: Checkout usage limited promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name                             | description                                          | usage limit | used |
-            | 25% off over 200 EUR             | First order over 200 EUR have 25% discount!          | 1           | 0    |
-            | Free order with at least 3 items | First order with at least 3 items has 100% discount! | 1           | 1    |
+            | code | name                             | description                                          | usage limit | used |
+            | P1   | 25% off over 200 EUR             | First order over 200 EUR have 25% discount!          | 1           | 0    |
+            | P2   | Free order with at least 3 items | First order with at least 3 items has 100% discount! | 1           | 1    |
           And promotion "25% off over 200 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 200   |
