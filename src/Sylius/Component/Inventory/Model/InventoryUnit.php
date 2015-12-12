@@ -165,7 +165,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getAdjustments($type = null)
     {
@@ -179,7 +179,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function addAdjustment(AdjustmentInterface $adjustment)
     {
@@ -192,7 +192,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function removeAdjustment(AdjustmentInterface $adjustment)
     {
@@ -204,7 +204,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getAdjustmentsTotal($type = null)
     {
@@ -224,7 +224,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function removeAdjustments($type)
     {

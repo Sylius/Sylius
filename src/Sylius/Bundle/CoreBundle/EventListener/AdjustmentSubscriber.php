@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
@@ -12,22 +21,30 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/*
- * @author Piotr Walków <walkow.piotr@gmail.com>
+/**
+ * @author  Pete Ward <peter.ward@reiss.com>
+ * @author  Piotr Walków <walkowpiotr@gmail.com>
  */
 class AdjustmentSubscriber implements EventSubscriberInterface
 {
     const EVENT_ARGUMENT_DATA_KEY = 'adjustment-data';
 
-    /** @var FactoryInterface */
+    /**
+     * @var FactoryInterface
+     */
     private $adjustmentFactory;
 
-    public function __construct(
-        FactoryInterface $adjustmentFactory
-    ) {
+    /**
+     * @param FactoryInterface $adjustmentFactory
+     */
+    public function __construct(FactoryInterface $adjustmentFactory)
+    {
         $this->adjustmentFactory = $adjustmentFactory;
     }
 
+    /**
+     * @return AdjustmentEvent[]
+     */
     public static function getSubscribedEvents() {
         return [
             AdjustmentEvent::ADJUSTMENT_ADDING_ORDER => 'addAdjustmentOnOrder',
@@ -47,10 +64,7 @@ class AdjustmentSubscriber implements EventSubscriberInterface
             throw new \UnexpectedValueException();
         }
 
-        $this->setDataOnAdjustable(
-            $event->getArgument(self::EVENT_ARGUMENT_DATA_KEY),
-            $order)
-        ;
+        $this->setDataOnAdjustable($event->getArgument(self::EVENT_ARGUMENT_DATA_KEY), $order);
     }
 
     /**
@@ -65,12 +79,13 @@ class AdjustmentSubscriber implements EventSubscriberInterface
             throw new \UnexpectedValueException();
         }
 
-        $this->setDataOnAdjustable(
-            $event->getArgument('' . self::EVENT_ARGUMENT_DATA_KEY . ''),
-            $inventoryUnit)
-        ;
+        $this->setDataOnAdjustable($event->getArgument('' . self::EVENT_ARGUMENT_DATA_KEY . ''), $inventoryUnit);
     }
 
+    /**
+     * @param AdjustmentDTO       $adjustmentDTO
+     * @param AdjustableInterface $adjustable
+     */
     private function setDataOnAdjustable(AdjustmentDTO $adjustmentDTO, AdjustableInterface $adjustable)
     {
         /** @var AdjustmentInterface $adjustment */

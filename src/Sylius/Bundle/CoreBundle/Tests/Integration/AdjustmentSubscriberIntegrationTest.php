@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\CoreBundle\Tests\Integration;
 
 use Prophecy\Argument;
@@ -12,6 +21,9 @@ use Prophecy\Prophecy;
 use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\AdjustmentDTO;
 
+/**
+ * @author  Piotr Walków <walkowpiotr@gmail.com>
+ */
 class AdjustmentSubscriberIntegrationTest extends IntegrationTestCase
 {
     public function test_it_listens_to_adjustment_on_order_event()
@@ -68,5 +80,4 @@ class AdjustmentSubscriberIntegrationTest extends IntegrationTestCase
     {
         return $this->prophet->prophesize(InventoryUnitInterface::class);
     }
-
 }

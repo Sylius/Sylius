@@ -26,50 +26,36 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Taxation processor.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Tax calculator.
-     *
      * @var CalculatorInterface
      */
     protected $calculator;
 
     /**
-     * Tax rate resolver.
-     *
      * @var TaxRateResolverInterface
      */
     protected $taxRateResolver;
 
     /**
-     * Zone matcher.
-     *
      * @var ZoneMatcherInterface
      */
     protected $zoneMatcher;
 
     /**
-     * Taxation settings.
-     *
      * @var Settings
      */
     protected $settings;
 
     /**
-     * Event dispatcher
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher
