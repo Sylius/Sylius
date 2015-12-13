@@ -250,14 +250,12 @@ class Order implements OrderInterface
      */
     public function calculateItemsTotal()
     {
-        $itemsTotal = 0;
+        $this->itemsTotal = 0;
 
         foreach ($this->items as $item) {
             $item->calculateTotal();
-            $itemsTotal += $item->getTotal();
+            $this->itemsTotal += $item->getTotal();
         }
-
-        return $itemsTotal;
     }
 
     /**
@@ -371,7 +369,7 @@ class Order implements OrderInterface
         $childAdjustments = [];
 
         foreach ($this->getItems() as $item) {
-            $childAdjustments = array_merge($childAdjustments, $item->getAdjustments($type)->toArray());
+            $childAdjustments = array_merge($childAdjustments, $item->getAdjustments($type));
         }
 
         return array_merge($childAdjustments, $this->getAdjustments($type)->toArray());

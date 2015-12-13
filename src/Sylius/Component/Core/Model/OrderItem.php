@@ -82,10 +82,9 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     public function calculateTotal()
     {
-        $this->calculateAdjustmentsTotal();
+        $this->adjustmentsTotal = $this->calculateAdjustmentsTotal();
 
-        // = (unitPrice * quantity) + adjustments
-        $this->total = parent::getTotal() + $this->calculateAdjustmentsTotal();
+        $this->total = ($this->getQuantity() * $this->getUnitPrice()) + $this->adjustmentsTotal;
     }
 
     /**
@@ -104,6 +103,20 @@ class OrderItem extends CartItem implements OrderItemInterface
         }
 
         return $adjustmentsTotal;
+    }
+
+    /**
+     * @return Adjustment[]
+     */
+    public function getAdjustments()
+    {
+        $adjustments = [];
+
+        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+            $adjustments = array_merge($adjustments, $inventoryUnit->getAdjustments()->toArray());
+        }
+
+        return $adjustments;
     }
 
     /**
