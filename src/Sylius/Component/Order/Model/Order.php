@@ -436,6 +436,20 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getSubtotal()
+    {
+        $subtotal = 0;
+
+        foreach ($this->getItems() as $item) {
+            $subtotal += $item->getSubtotal();
+        }
+
+        return $subtotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculateTotal()
     {
         $this->calculateItemsTotal();

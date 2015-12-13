@@ -44,6 +44,11 @@ class OrderItem implements OrderItemInterface
     protected $total = 0;
 
     /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
+
+    /**
      * Order item is immutable?
      *
      * @var bool
@@ -119,6 +124,15 @@ class OrderItem implements OrderItemInterface
     public function getTotal()
     {
         return $this->total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubtotal()
+    {
+        // NOTE: Adjustments total only supported on Core model
+        return $this->total - $this->adjustmentsTotal;
     }
 
     /**

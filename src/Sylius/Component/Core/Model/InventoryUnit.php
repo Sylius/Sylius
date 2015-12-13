@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
  * Custom inventory unit class.
- * Can be attached to order.
+ * Can be attached to OrderItem.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -51,11 +51,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      */
     protected $adjustments;
 
-    /**
-     * @var integer
-     */
-    protected $adjustmentsTotal;
-
     public function __construct()
     {
         parent::__construct();
@@ -77,8 +72,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setOrderItem(OrderItemInterface $orderItem = null)
     {
         $this->orderItem = $orderItem;
-
-        return $this;
     }
 
     /**
@@ -95,8 +88,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShipment(BaseShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
-
-        return $this;
     }
 
     /**
@@ -113,8 +104,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShippable(ShippableInterface $shippable)
     {
         $this->setStockable($shippable);
-
-        return $this;
     }
 
     /**
@@ -175,8 +164,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * TODO: Should we have a calculateAdjustmentsTotal / getAdjustmentsTotal pattern here instead?
-     *
      * {@inheritDoc}
      */
     public function getAdjustmentsTotal($type = null)
@@ -187,16 +174,13 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
             if ($type && $type !== $adjustment->getType()) {
                 continue;
             }
-            if ($adjustment->isNeutral()) {
-                continue;
-            }
 
-            $amount += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $amount += $adjustment->getAmount();
+            }
         }
 
-        $this->adjustmentsTotal = $amount;
-
-        return $this->adjustmentsTotal;
+        return $amount;
     }
 
     /**
