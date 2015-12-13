@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Inventory\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Order\Model\AdjustmentInterface;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -44,20 +41,9 @@ class InventoryUnit implements InventoryUnitInterface
      */
     protected $updatedAt;
 
-    /**
-     * @var AdjustmentInterface[]
-     */
-    protected $adjustments;
-
-    /**
-     * @var integer
-     */
-    protected $adjustmentsTotal;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->adjustments = new ArrayCollection();
     }
 
     /**
@@ -162,81 +148,5 @@ class InventoryUnit implements InventoryUnitInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAdjustments($type = null)
-    {
-        if (null == $type) {
-            return $this->adjustments;
-        }
-
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
-            return $type === $adjustment->getType();
-        });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addAdjustment(AdjustmentInterface $adjustment)
-    {
-        if ($this->adjustments->contains($adjustment)) {
-            return;
-        }
-
-        $adjustment->setAdjustable($this);
-        $this->adjustments->add($adjustment);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeAdjustment(AdjustmentInterface $adjustment)
-    {
-        if (!$this->adjustments->contains($adjustment)) {
-            return;
-        }
-
-        $this->adjustments->removeElement($adjustment);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAdjustmentsTotal($type = null)
-    {
-        $amount = 0;
-
-        foreach ($this->adjustments as $adjustment) {
-            if ($type && $type !== $adjustment->getType()) {
-                continue;
-            }
-
-            $amount += $adjustment->getAmount();
-        }
-
-        $this->adjustmentsTotal = $amount;
-
-        return $this->adjustmentsTotal;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeAdjustments($type)
-    {
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            if ($type === $adjustment->getType() && !$adjustment->isLocked()) {
-                $this->removeAdjustment($adjustment);
-            }
-        }
-    }
-
-    public function clearAdjustments()
-    {
-        $this->adjustments->clear();
     }
 }

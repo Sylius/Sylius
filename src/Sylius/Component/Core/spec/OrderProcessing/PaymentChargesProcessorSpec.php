@@ -28,10 +28,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class PaymentChargesProcessorSpec extends ObjectBehavior
 {
-    function let(
-        EventDispatcherInterface $eventDispatcher,
-        DelegatingFeeCalculatorInterface $delegatingFeeCalculator
-    )
+    function let(EventDispatcherInterface $eventDispatcher, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
     {
         $this->beConstructedWith($eventDispatcher, $delegatingFeeCalculator);
     }
@@ -55,6 +52,8 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
     ) {
         $order->removeAdjustments('payment')->shouldBeCalled();
         $order->getPayments()->willReturn(array($payment))->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $payment->getState()->willReturn('new')->shouldBeCalled();
         $payment->getMethod()->willReturn($paymentMethod);

@@ -28,10 +28,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(
-        EventDispatcherInterface $eventDispatcher,
-        DelegatingCalculatorInterface $calculator
-    )
+    function let(EventDispatcherInterface $eventDispatcher, DelegatingCalculatorInterface $calculator)
     {
         $this->beConstructedWith($eventDispatcher, $calculator);
     }
@@ -51,6 +48,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->willReturn(array());
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
+        $order->calculateTotal()->shouldBeCalled();
+
         $this->applyShippingCharges($order);
     }
 
@@ -59,6 +58,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
@@ -78,6 +79,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $shippingMethod->getName()->willReturn('FedEx');
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $eventDispatcher->dispatch(
             AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,

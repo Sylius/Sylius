@@ -62,6 +62,7 @@ class OrderPromotionListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($order);
         $promotionProcessor->process($order)->shouldBeCalled();
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->processOrderPromotion($event);
     }

@@ -26,9 +26,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class AdjustmentSubscriberSpec extends ObjectBehavior
 {
-    function let(
-        FactoryInterface $adjustmentFactory
-    ) {
+    function let(FactoryInterface $adjustmentFactory)
+    {
         $this->beConstructedWith(
             $adjustmentFactory
         );
@@ -67,7 +66,7 @@ class AdjustmentSubscriberSpec extends ObjectBehavior
             ->addAdjustment($adjustment)
             ->shouldBeCalled();
 
-        $this->addAdjustmentOnOrder($event);
+        $this->addAdjustmentToOrder($event);
     }
 
     function it_throws_exception_on_non_order_while_adding_on_order(
@@ -77,7 +76,7 @@ class AdjustmentSubscriberSpec extends ObjectBehavior
 
         $event->getSubject()->willReturn($order);
 
-        $this->shouldThrow(\UnexpectedValueException::class)->during('addAdjustmentOnOrder',[$event]);
+        $this->shouldThrow(\UnexpectedValueException::class)->during('addAdjustmentToOrder',[$event]);
     }
 
     function it_add_adjustment_on_inventory_unit(
@@ -101,7 +100,7 @@ class AdjustmentSubscriberSpec extends ObjectBehavior
 
         $inventoryUnit->addAdjustment($adjustment)->shouldBeCalled();
 
-        $this->addAdjustmentOnInventoryUnit($event);
+        $this->addAdjustmentToInventoryUnit($event);
     }
 
     function it_throws_exception_on_non_invenory_unit_while_adding_on_inventory_unit(
@@ -111,7 +110,7 @@ class AdjustmentSubscriberSpec extends ObjectBehavior
 
         $event->getSubject()->willReturn($nonInventoryUnit);
 
-        $this->shouldThrow(\UnexpectedValueException::class)->during('addAdjustmentOnInventoryUnit',[$event]);
+        $this->shouldThrow(\UnexpectedValueException::class)->during('addAdjustmentToInventoryUnit',[$event]);
     }
 
 }

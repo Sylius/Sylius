@@ -196,6 +196,7 @@ class CoreContext extends DefaultContext
             );
         }
 
+        $order->calculateTotal();
         $order->complete();
 
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);

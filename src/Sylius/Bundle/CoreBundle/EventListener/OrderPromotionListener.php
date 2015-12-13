@@ -80,6 +80,8 @@ class OrderPromotionListener
         }
 
         $this->promotionProcessor->process($order);
+
+        $order->calculateTotal();
     }
 
     /**

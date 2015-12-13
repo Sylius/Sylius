@@ -17,6 +17,7 @@ class OrderUpdateListenerSpec extends ObjectBehavior
     function it_reculate_order_total(GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->recalculateOrderTotal($event);
     }

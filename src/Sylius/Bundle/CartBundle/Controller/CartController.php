@@ -38,8 +38,9 @@ class CartController extends Controller
     {
         $cart = $this->getCurrentCart();
 
-        // refreshing to show proper values, like after login, or changing channel
-        // @todo remove refreshing of the cart with new event system,
+        // Currently not everywhere seems to ensure these events are dispatch after customer context change
+        // (login or changing channel). This is a suitable place to ensure this for now,
+        // but a rework of cart events should be considered in future.
         $this->getEventDispatcher()->dispatch(
             SyliusCartEvents::CART_CHANGE,
             new GenericEvent($cart)

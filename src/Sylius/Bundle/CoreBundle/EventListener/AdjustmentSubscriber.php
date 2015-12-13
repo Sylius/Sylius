@@ -47,15 +47,15 @@ class AdjustmentSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents() {
         return [
-            AdjustmentEvent::ADJUSTMENT_ADDING_ORDER => 'addAdjustmentOnOrder',
-            AdjustmentEvent::ADJUSTMENT_ADDING_INVENTORY_UNIT => 'addAdjustmentOnInventoryUnit'
+            AdjustmentEvent::ADJUSTMENT_ADDING_ORDER => 'addAdjustmentToOrder',
+            AdjustmentEvent::ADJUSTMENT_ADDING_INVENTORY_UNIT => 'addAdjustmentToInventoryUnit'
         ];
     }
 
     /**
      * @param GenericEvent $event
      */
-    public function addAdjustmentOnOrder(GenericEvent $event)
+    public function addAdjustmentToOrder(GenericEvent $event)
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();
@@ -70,7 +70,7 @@ class AdjustmentSubscriber implements EventSubscriberInterface
     /**
      * @param GenericEvent $event
      */
-    public function addAdjustmentOnInventoryUnit(GenericEvent $event)
+    public function addAdjustmentToInventoryUnit(GenericEvent $event)
     {
         /** @var InventoryUnitInterface $inventoryUnit */
         $inventoryUnit = $event->getSubject();

@@ -17,12 +17,15 @@ class RefreshCartListenerSpec extends ObjectBehavior
     function it_refresh_the_cart(GenericEvent $event, CartInterface $cart)
     {
         $event->getSubject()->shouldBeCalled()->willReturn($cart);
+        $cart->calculateTotal()->shouldBeCalled();
+
         $this->refreshCart($event);
     }
 
     function it_throw_exception_if_subject_is_not_a_cart(GenericEvent $event, CartInterface $cart)
     {
         $event->getSubject()->shouldBeCalled()->willReturn(null);
+        $cart->calculateTotal()->shouldBeCalled();
 
         $this->shouldThrow('\InvalidArgumentException')->during('refreshCart', array($event));
     }

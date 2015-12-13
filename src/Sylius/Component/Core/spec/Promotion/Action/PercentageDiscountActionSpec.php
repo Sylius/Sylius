@@ -25,10 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
-    function let(
-        OriginatorInterface $originator,
-        EventDispatcherInterface $eventDispatcher
-    )
+    function let(OriginatorInterface $originator, EventDispatcherInterface $eventDispatcher)
     {
         $this->beConstructedWith($originator, $eventDispatcher);
     }
@@ -55,8 +52,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
         $eventDispatcher->dispatch(
             AdjustmentEvent::ADJUSTMENT_ADDING_ORDER, Argument::type(AdjustmentEvent::class)
-        )
-            ->shouldBeCalled();
+        )->shouldBeCalled();
 
         $this->execute($order, $configuration, $promotion);
     }

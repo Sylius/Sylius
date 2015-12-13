@@ -27,10 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(
-        OriginatorInterface $originator,
-        EventDispatcherInterface $eventDispatcher
-    )
+    function let(OriginatorInterface $originator, EventDispatcherInterface $eventDispatcher)
     {
         $this->beConstructedWith($originator, $eventDispatcher);
     }

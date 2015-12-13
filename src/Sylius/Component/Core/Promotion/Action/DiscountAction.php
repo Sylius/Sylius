@@ -46,10 +46,8 @@ abstract class DiscountAction implements PromotionActionInterface
      * @param OriginatorInterface $originator
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(
-        OriginatorInterface $originator,
-        EventDispatcherInterface $eventDispatcher
-    ) {
+    public function __construct(OriginatorInterface $originator, EventDispatcherInterface $eventDispatcher)
+    {
         $this->originator = $originator;
         $this->eventDispatcher = $eventDispatcher;
     }

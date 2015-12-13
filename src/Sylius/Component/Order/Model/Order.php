@@ -242,9 +242,20 @@ class Order implements OrderInterface
      */
     public function getItemsTotal()
     {
+        return $this->itemsTotal;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function calculateItemsTotal()
+    {
         $itemsTotal = 0;
 
         foreach ($this->getItems() as $item) {
+            // ???
+            $item->calculateTotal();
+
             $itemsTotal += $item->getQuantity() * $item->getUnitPrice();
         }
 
@@ -313,14 +324,14 @@ class Order implements OrderInterface
      */
     public function getAdjustmentsTotal($type = null)
     {
-        $total = 0;
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            if (!$adjustment->isNeutral()) {
-                $total += $adjustment->getAmount();
-            }
+        if (null === $type) {
+            return $this->adjustmentsTotal;
         }
 
-        $this->adjustmentsTotal = $total;
+        $total = 0;
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            $total += $adjustment->getAmount();
+        }
 
         return $total;
     }
@@ -345,6 +356,20 @@ class Order implements OrderInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateAdjustmentsTotal()
+    {
+        $this->adjustmentsTotal = 0;
+
+        foreach ($this->adjustments as $adjustment) {
+            if (!$adjustment->isNeutral()) {
+                $this->adjustmentsTotal += $adjustment->getAmount();
+            }
+        }
     }
 
     /**
@@ -382,20 +407,20 @@ class Order implements OrderInterface
      */
     public function getTotal()
     {
-        $itemPrices = $this->getItemsTotal();
-        $adjustmentsValue = $this->getAdjustmentsTotal();
+        return $this->total;
+    }
 
-        $totalValue = $itemPrices + $adjustmentsValue;
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateTotal()
+    {
+        $this->calculateItemsTotal();
+        $this->calculateAdjustmentsTotal();
 
-        $this->itemsTotal = $itemPrices;
-        $this->adjustmentsTotal = $adjustmentsValue;
-        $this->total = $totalValue;
+        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
-        if ($totalValue < 0) {
-            return 0;
-        }
-
-        return $totalValue;
+        return $this->total;
     }
 
     /**

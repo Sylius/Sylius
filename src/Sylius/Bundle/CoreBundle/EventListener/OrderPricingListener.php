@@ -71,5 +71,7 @@ class OrderPricingListener
             $context['quantity'] = $item->getQuantity();
             $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
         }
+
+        $order->calculateTotal();
     }
 }

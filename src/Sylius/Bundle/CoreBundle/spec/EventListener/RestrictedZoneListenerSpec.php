@@ -53,6 +53,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $cartProvider->getCart()->willReturn($cart);
 
         $cart->getItems()->willReturn(array());
+        $cart->calculateTotal()->shouldNotBeCalled();
 
         $this->handleRestrictedZone($event);
     }
@@ -67,6 +68,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $cartProvider->getCart()->shouldNotBeCalled();
 
         $cart->getItems()->willReturn(array());
+        $cart->calculateTotal()->shouldNotBeCalled();
 
         $this->handleRestrictedZone($event);
     }
@@ -92,6 +94,8 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $restrictedZoneChecker->isRestricted($product, $address)->willReturn(false);
 
         $this->handleRestrictedZone($event);
+        $cart->calculateTotal()->shouldNotBeCalled();
+
     }
 
     function it_removes_invalid_cart_items(
@@ -125,6 +129,8 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $flashBag->add('error', Argument::any())->shouldBeCalled();
 
         $translator->trans('sylius.cart.restricted_zone_removal', array('%product%' => 'invalid'), 'flashes')->shouldBeCalled();
+
+        $cart->calculateTotal()->shouldBeCalled();
 
         $cartManager->persist($cart)->shouldBeCalled();
         $cartManager->flush()->shouldBeCalled();
