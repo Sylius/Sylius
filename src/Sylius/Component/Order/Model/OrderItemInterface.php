@@ -48,11 +48,6 @@ interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
     public function getTotal();
 
     /**
-     * @param int $total
-     */
-    public function setTotal($total);
-
-    /**
      * Calculate items total based on quantity and unit price.
      */
     public function calculateTotal();

@@ -175,6 +175,8 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     }
 
     /**
+     * TODO: Should we have a calculateAdjustmentsTotal / getAdjustmentsTotal pattern here instead?
+     *
      * {@inheritDoc}
      */
     public function getAdjustmentsTotal($type = null)
@@ -183,6 +185,9 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 
         foreach ($this->adjustments as $adjustment) {
             if ($type && $type !== $adjustment->getType()) {
+                continue;
+            }
+            if ($adjustment->isNeutral()) {
                 continue;
             }
 

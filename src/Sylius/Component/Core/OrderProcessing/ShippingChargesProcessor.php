@@ -39,8 +39,6 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     protected $calculator;
 
     /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface $eventDispatcher
      * @param DelegatingCalculatorInterface $calculator
      */

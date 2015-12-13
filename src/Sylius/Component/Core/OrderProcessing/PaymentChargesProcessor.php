@@ -37,7 +37,7 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     protected $feeCalculator;
 
     /**
-     * @param EventDispatcherInterface         $eventDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      * @param DelegatingFeeCalculatorInterface $feeCalculator
      */
     public function __construct(

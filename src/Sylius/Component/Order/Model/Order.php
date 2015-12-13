@@ -246,19 +246,6 @@ class Order implements OrderInterface
     }
 
     /**
-     * TODO: SHOULD WE ALLOW THIS?
-     *
-     * {@inheritdoc}
-     */
-    public function setItemsTotal($itemsTotal)
-    {
-        if (!is_int($itemsTotal)) {
-            throw new \InvalidArgumentException('Items total must be an integer.');
-        }
-        $this->itemsTotal = $itemsTotal;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function calculateItemsTotal()
@@ -370,6 +357,42 @@ class Order implements OrderInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+    }
+
+    /**
+     * Get all adjustments (adjustments from child relations included)
+     *
+     * @param string $type
+     *
+     * @return AdjustmentInterface[]
+     */
+    public function getAllAdjustments($type = null)
+    {
+        $childAdjustments = [];
+
+        foreach ($this->getItems() as $item) {
+            $childAdjustments = array_merge($childAdjustments, $item->getAdjustments($type)->toArray());
+        }
+
+        return array_merge($childAdjustments, $this->getAdjustments($type)->toArray());
+    }
+
+    /**
+     * Get total value of adjustments (including those from child relations)
+     *
+     * @param string $type
+     *
+     * @return int
+     */
+    public function getAllAdjustmentsTotal($type = null)
+    {
+        $total = $this->getAdjustmentsTotal($type);
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getAdjustmentsTotal($type);
+        }
+
+        return $total;
     }
 
     /**

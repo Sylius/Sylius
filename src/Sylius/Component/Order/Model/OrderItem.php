@@ -132,17 +132,6 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setTotal($total)
-    {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
-        }
-        $this->total = $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function equals(OrderItemInterface $orderItem)
     {
         return $this === $orderItem;

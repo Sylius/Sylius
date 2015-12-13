@@ -48,10 +48,10 @@ class RestrictedZoneListener
 
     /**
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
-     * @param CartProviderInterface          $cartProvider
-     * @param ObjectManager                  $cartManager
-     * @param SessionInterface               $session
-     * @param TranslatorInterface            $translator
+     * @param CartProviderInterface $cartProvider
+     * @param ObjectManager $cartManager
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
      */
     public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
     {

@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author  Pete Ward <peter.ward@reiss.com>
- * @author  Piotr Walków <walkowpiotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ * @author Piotr Walków <walkowpiotr@gmail.com>
  */
 class AdjustmentEvent extends GenericEvent
 {

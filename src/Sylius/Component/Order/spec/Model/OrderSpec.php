@@ -142,17 +142,6 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
-    function its_items_total_should_accept_only_integer()
-    {
-        $this->setItemsTotal(4498);
-        $this->getItemsTotal()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(new \stdClass());
-    }
-
     function it_creates_adjustments_collection_by_default()
     {
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');

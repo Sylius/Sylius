@@ -22,8 +22,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author  Pete Ward <peter.ward@reiss.com>
- * @author  Piotr Walków <walkowpiotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ * @author Piotr Walków <walkowpiotr@gmail.com>
  */
 class AdjustmentSubscriber implements EventSubscriberInterface
 {
@@ -83,7 +83,7 @@ class AdjustmentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param AdjustmentDTO       $adjustmentDTO
+     * @param AdjustmentDTO $adjustmentDTO
      * @param AdjustableInterface $adjustable
      */
     private function setDataOnAdjustable(AdjustmentDTO $adjustmentDTO, AdjustableInterface $adjustable)
