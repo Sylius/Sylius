@@ -38,7 +38,11 @@ class ContainsProductRuleChecker extends ItemCountRuleChecker
             if ($configuration['variant'] == $item->getVariant()->getId()) {
                 if (!$configuration['exclude']) {
                     if (isset($configuration['count'])) {
-                        return parent::isEligible($item, $configuration);
+                        if (isset($configuration['equal']) && $configuration['equal']) {
+                            return $item->getQuantity() >= $configuration['count'];
+                        }
+
+                        return $item->getQuantity() > $configuration['count'];
                     }
 
                     return true;

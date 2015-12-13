@@ -94,8 +94,7 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $subject->getItems()->willReturn([$orderItem]);
         $orderItem->getVariant()->willReturn($variant);
         $variant->getId()->willReturn(1);
-
-        $orderItem->getPromotionSubjectCount()->willReturn(10);
+        $orderItem->getQuantity()->willReturn(10);
 
         $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(true);
     }
@@ -108,8 +107,7 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $subject->getItems()->willReturn([$orderItem]);
         $orderItem->getVariant()->willReturn($variant);
         $variant->getId()->willReturn(1);
-
-        $orderItem->getPromotionSubjectCount()->willReturn(1);
+        $orderItem->getQuantity()->willReturn(1);
 
         $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(false);
     }
