@@ -30,11 +30,6 @@ class Adjustment implements AdjustmentInterface
     protected $order;
 
     /**
-     * @var InventoryUnit
-     */
-    protected $inventoryUnit;
-
-    /**
      * @var string
      */
     protected $type;
@@ -104,10 +99,6 @@ class Adjustment implements AdjustmentInterface
             return $this->order;
         }
 
-        if (null !== $this->inventoryUnit) {
-            return $this->inventoryUnit;
-        }
-
         return null;
     }
 
@@ -120,10 +111,6 @@ class Adjustment implements AdjustmentInterface
 
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;
-        }
-
-        if ($adjustable instanceof InventoryUnitInterface) {
-            $this->inventoryUnit = $adjustable;
         }
     }
 
