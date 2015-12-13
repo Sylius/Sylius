@@ -79,7 +79,7 @@ class AdjustmentSubscriber implements EventSubscriberInterface
             throw new \UnexpectedValueException();
         }
 
-        $this->setDataOnAdjustable($event->getArgument('' . self::EVENT_ARGUMENT_DATA_KEY . ''), $inventoryUnit);
+        $this->setDataOnAdjustable($event->getArgument(self::EVENT_ARGUMENT_DATA_KEY), $inventoryUnit);
     }
 
     /**

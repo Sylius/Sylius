@@ -39,8 +39,6 @@ class OrderItem extends CartItem implements OrderItemInterface
 
     public function __construct()
     {
-//        parent::__construct();
-
         $this->inventoryUnits = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
@@ -77,6 +75,35 @@ class OrderItem extends CartItem implements OrderItemInterface
         return parent::equals($item) || ($item instanceof self
             && $item->getVariant() === $this->variant
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateTotal()
+    {
+        $this->calculateAdjustmentsTotal();
+
+        // = (unitPrice * quantity) + adjustments
+        $this->total = parent::getTotal() + $this->calculateAdjustmentsTotal();
+    }
+
+    /**
+     * @return int
+     */
+    public function calculateAdjustmentsTotal()
+    {
+        $adjustmentsTotal = 0;
+
+        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+            foreach ($inventoryUnit->getAdjustments() as $inventoryUnitAdjustment) {
+                if (!$inventoryUnitAdjustment->isNeutral()) {
+                    $adjustmentsTotal += $inventoryUnitAdjustment->getAmount();
+                }
+            }
+        }
+
+        return $adjustmentsTotal;
     }
 
     /**

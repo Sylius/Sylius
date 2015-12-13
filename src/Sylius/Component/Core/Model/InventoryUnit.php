@@ -17,7 +17,6 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 
-
 /**
  * Custom inventory unit class.
  * Can be attached to order.

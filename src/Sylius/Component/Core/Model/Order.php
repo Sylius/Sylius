@@ -610,83 +610,89 @@ class Order extends Cart implements OrderInterface
         return $this->promotions;
     }
 
+//    /**
+//     * Get total value with adjustments from InventoryUnits
+//     *
+//     * @return int
+//     */
+//    public function getTotal()
+//    {
+//        $total = parent::getTotal();
+//
+//        $inventoryUnitAdjustmentsTotal = 0;
+//
+//        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+//            foreach ($inventoryUnit->getAdjustments() as $inventoryUnitAdjustment) {
+//                if (!$inventoryUnitAdjustment->isNeutral()) {
+//                    $inventoryUnitAdjustmentsTotal += $inventoryUnitAdjustment->getAmount();
+//                }
+//            }
+//        }
+//
+//        $this->total = $total + $inventoryUnitAdjustmentsTotal;
+//
+//        // applying adjustmentsTotal to value calculated in parent
+//        $this->adjustmentsTotal += $inventoryUnitAdjustmentsTotal;
+//
+//        if ($total + $inventoryUnitAdjustmentsTotal < 0) {
+//            return 0;
+//        }
+//
+//        return $total + $inventoryUnitAdjustmentsTotal;
+//    }
+
+    // NICE IDEA, BUT NEEDED?
+//    /**
+//     * Get total value without adjustments from InventoryUnits
+//     *
+//     * @return int
+//     */
+//    public function getUnadjustedTotal()
+//    {
+//        return parent::getTotal();
+//    }
+
     /**
-     * Get total value with adjustments from InventoryUnits
+     * MOVE TO MODEL
+     * ORDER ITEM NEEDS SOMETHING IN CORE TO DO THIS DIFFERENTLY
      *
-     * @return int
-     */
-    public function getTotal()
-    {
-        $total = parent::getTotal();
-
-        $inventoryUnitAdjustmentsTotal = 0;
-
-        foreach ($this->getInventoryUnits() as $inventoryUnit) {
-            foreach ($inventoryUnit->getAdjustments() as $inventoryUnitAdjustment) {
-                if (!$inventoryUnitAdjustment->isNeutral()) {
-                    $inventoryUnitAdjustmentsTotal += $inventoryUnitAdjustment->getAmount();
-                }
-            }
-        }
-
-        $this->total = $total + $inventoryUnitAdjustmentsTotal;
-
-        // applying adjustmentsTotal to value calculated in parent
-        $this->adjustmentsTotal += $inventoryUnitAdjustmentsTotal;
-
-        if ($total + $inventoryUnitAdjustmentsTotal < 0) {
-            return 0;
-        }
-
-        return $total + $inventoryUnitAdjustmentsTotal;
-    }
-
-    /**
-     * Get total value without adjustments from InventoryUnits
-     *
-     * @return int
-     */
-    public function getUnadjustedTotal()
-    {
-        return parent::getTotal();
-    }
-
-    /**
      * Get all adjustments (adjustments from InventoryUnits included)
      *
      * @param string $type
      *
      * @return AdjustmentInterface[]
      */
-    public function getAllAdjustments($type = null)
-    {
-        $inventoryUnitAdjustments = [];
-
-        /** @var InventoryUnit $inventoryUnit */
-        foreach ($this->getInventoryUnits() as $inventoryUnit) {
-            $inventoryUnitAdjustments = array_merge($inventoryUnitAdjustments, $inventoryUnit->getAdjustments($type)->toArray());
-        }
-
-        return array_merge($inventoryUnitAdjustments, $this->getAdjustments($type)->toArray());
-    }
+//    public function getAllAdjustments($type = null)
+//    {
+//        $inventoryUnitAdjustments = [];
+//
+//        /** @var InventoryUnit $inventoryUnit */
+//        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+//            $inventoryUnitAdjustments = array_merge($inventoryUnitAdjustments, $inventoryUnit->getAdjustments($type)->toArray());
+//        }
+//
+//        return array_merge($inventoryUnitAdjustments, $this->getAdjustments($type)->toArray());
+//    }
 
     /**
+     * TODO: HO HUM!
+     *
      * Get total value of adjustments, even from InventoryUnits
      *
      * @param string $type
      *
      * @return int
      */
-    public function getAllAdjustmentsTotal($type = null)
-    {
-        $value = parent::getAdjustmentsTotal($type);
-
-        foreach ($this->getInventoryUnits() as $inventoryUnit) {
-            $value += $inventoryUnit->getAdjustmentsTotal($type);
-        }
-
-        $this->adjustmentsTotal = $value;
-
-        return $value;
-    }
+//    public function getAllAdjustmentsTotal($type = null)
+//    {
+//        $value = parent::getAdjustmentsTotal($type);
+//
+//        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+//            $value += $inventoryUnit->getAdjustmentsTotal($type);
+//        }
+//
+//        $this->adjustmentsTotal = $value;
+//
+//        return $value;
+//    }
 }

@@ -27,8 +27,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ShippingChargesProcessor implements ShippingChargesProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
@@ -46,10 +44,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
      * @param EventDispatcherInterface $eventDispatcher
      * @param DelegatingCalculatorInterface $calculator
      */
-    public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        DelegatingCalculatorInterface $calculator
-    )
+    public function __construct(EventDispatcherInterface $eventDispatcher, DelegatingCalculatorInterface $calculator)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->calculator = $calculator;

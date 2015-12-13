@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @author  Piotr Walków <walkowpiotr@gmail.com>
+ * @author Piotr Walków <walkowpiotr@gmail.com>
  */
 abstract class IntegrationTestCase extends WebTestCase
 {
@@ -45,7 +45,7 @@ abstract class IntegrationTestCase extends WebTestCase
     protected $client;
 
     /**
-     * @var  Prophet
+     * @var Prophet
      */
     protected $prophet;
 

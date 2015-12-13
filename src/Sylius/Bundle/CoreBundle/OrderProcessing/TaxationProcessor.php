@@ -126,8 +126,6 @@ class TaxationProcessor implements TaxationProcessorInterface
                 continue;
             }
 
-            $order->calculateTotal();
-
             $amount = $this->calculator->calculate($item->getUnitPrice(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();
             $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);

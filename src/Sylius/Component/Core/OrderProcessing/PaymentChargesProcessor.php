@@ -37,8 +37,6 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     protected $feeCalculator;
 
     /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface         $eventDispatcher
      * @param DelegatingFeeCalculatorInterface $feeCalculator
      */
@@ -65,7 +63,7 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     }
 
     /**
-     * @param OrderInterface          $order
+     * @param OrderInterface $order
      * @param PaymentSubjectInterface $payment
      */
     private function addAdjustmentIfForNotCancelled(OrderInterface $order, PaymentSubjectInterface $payment)

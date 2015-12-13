@@ -42,10 +42,8 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_an_adjustable(
-        OrderInterface $order,
-        InventoryUnitInterface $inventoryUnit
-    ) {
+    function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, InventoryUnitInterface $inventoryUnit)
+    {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
 

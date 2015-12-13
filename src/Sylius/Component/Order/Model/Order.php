@@ -50,6 +50,19 @@ class Order implements OrderInterface
     protected $adjustments;
 
     /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
+
+    /**
+     * Calculated total.
+     * Units total + Order Adjustments total.
+     *
+     * @var int
+     */
+    protected $total = 0;
+
+    /**
      * @var Collection|CommentInterface[]
      */
     protected $comments;
@@ -58,19 +71,6 @@ class Order implements OrderInterface
      * @var Collection|IdentityInterface[]
      */
     protected $identities;
-
-    /**
-     * @var int
-     */
-    protected $adjustmentsTotal = 0;
-
-    /**
-     * Calculated total.
-     * Items total + adjustments total.
-     *
-     * @var int
-     */
-    protected $total = 0;
 
     /**
      * @var \DateTime
@@ -246,23 +246,8 @@ class Order implements OrderInterface
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function calculateItemsTotal()
-    {
-        $itemsTotal = 0;
-
-        foreach ($this->getItems() as $item) {
-            // ???
-            $item->calculateTotal();
-
-            $itemsTotal += $item->getQuantity() * $item->getUnitPrice();
-        }
-
-        return $itemsTotal;
-    }
-
-    /**
+     * TODO: SHOULD WE ALLOW THIS?
+     *
      * {@inheritdoc}
      */
     public function setItemsTotal($itemsTotal)
@@ -271,6 +256,21 @@ class Order implements OrderInterface
             throw new \InvalidArgumentException('Items total must be an integer.');
         }
         $this->itemsTotal = $itemsTotal;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function calculateItemsTotal()
+    {
+        $itemsTotal = 0;
+
+        foreach ($this->getItems() as $item) {
+            $item->calculateTotal();
+            $itemsTotal += $item->getTotal();
+        }
+
+        return $itemsTotal;
     }
 
     /**
@@ -420,7 +420,9 @@ class Order implements OrderInterface
 
         $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
-        return $this->total;
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 
     /**

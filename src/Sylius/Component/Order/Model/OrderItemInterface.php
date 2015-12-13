@@ -53,6 +53,11 @@ interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
     public function setTotal($total);
 
     /**
+     * Calculate items total based on quantity and unit price.
+     */
+    public function calculateTotal();
+
+    /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overwritten to enable merge quantities.
      *
@@ -80,5 +85,4 @@ interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
      * @param bool $immutable
      */
     public function setImmutable($immutable);
-
 }

@@ -118,7 +118,15 @@ class OrderItem implements OrderItemInterface
      */
     public function getTotal()
     {
-        return $this->getQuantity() * $this->getUnitPrice();
+        return $this->total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateTotal()
+    {
+        $this->total = $this->getQuantity() * $this->getUnitPrice();
     }
 
     /**

@@ -93,9 +93,9 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
 
         $restrictedZoneChecker->isRestricted($product, $address)->willReturn(false);
 
-        $this->handleRestrictedZone($event);
         $cart->calculateTotal()->shouldNotBeCalled();
 
+        $this->handleRestrictedZone($event);
     }
 
     function it_removes_invalid_cart_items(
