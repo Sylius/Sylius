@@ -117,9 +117,7 @@ class TaxationProcessor implements TaxationProcessorInterface
 
         /** @var OrderItemInterface $item */
         foreach ($order->getItems() as $item) {
-
-            $product = $item->getProduct();
-            $rate = $this->taxRateResolver->resolve($product, array('zone' => $zone));
+            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
 
             // Skip this item is there is not matching tax rate.
             if (null === $rate) {
