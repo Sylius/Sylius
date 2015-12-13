@@ -41,12 +41,12 @@ class OrderItem implements OrderItemInterface
     /**
      * @var int
      */
-    protected $total = 0;
+    protected $adjustmentsTotal = 0;
 
     /**
      * @var int
      */
-    protected $adjustmentsTotal = 0;
+    protected $total = 0;
 
     /**
      * Order item is immutable?

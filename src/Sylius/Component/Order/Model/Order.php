@@ -252,7 +252,7 @@ class Order implements OrderInterface
     {
         $itemsTotal = 0;
 
-        foreach ($this->getItems() as $item) {
+        foreach ($this->items as $item) {
             $item->calculateTotal();
             $itemsTotal += $item->getTotal();
         }
@@ -440,7 +440,7 @@ class Order implements OrderInterface
     {
         $subtotal = 0;
 
-        foreach ($this->getItems() as $item) {
+        foreach ($this->items as $item) {
             $subtotal += $item->getSubtotal();
         }
 
