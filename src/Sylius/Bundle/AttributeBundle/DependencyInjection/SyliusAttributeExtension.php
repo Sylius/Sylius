@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Attribute extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusAttributeExtension extends AbstractResourceExtension
@@ -26,49 +26,64 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config, new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($config['resources'] as $resource => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$resource);
-            $formDefinition->addArgument($parameters['subject']);
+        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
-            if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$resource.'_translation');
-                $formTranslationDefinition->addArgument($parameters['subject']);
-            }
-        }
-    }
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function process(array $config, ContainerBuilder $container)
-    {
-        $subjects = array();
-        $convertedConfig = array();
+                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
+                $formDefinition->addArgument($subjectName);
 
-        foreach ($config['resources'] as $resource => $parameters) {
-            $subjects[$resource] = $parameters;
-            unset($parameters['subject']);
-
-            foreach ($parameters as $parameter => $classes) {
-                $convertedConfig[$resource.'_'.$parameter] = $classes;
-                $convertedConfig[$resource.'_'.$parameter]['subject'] = $resource;
-
-                if (!isset($classes['validation_groups'])) {
-                    $classes['validation_groups']['default'] = array('sylius');
+                if (isset($resourceConfig['translation'])) {
+                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
+                    $formTranslationDefinition->addArgument($subjectName);
                 }
             }
         }
 
+        $configFiles = array(
+            'services.xml',
+        );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+    }
+
+    /**
+     * Resolve resources for every subject.
+     *
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
+     */
+    private function resolveResources(array $resources, ContainerBuilder $container)
+    {
+        $subjects = array();
+
+        foreach ($resources as $subject => $parameters) {
+            $subjects[$subject] = $parameters;
+        }
+
         $container->setParameter('sylius.attribute.subjects', $subjects);
 
-        $config['resources'] = $convertedConfig;
+        $resolvedResources = array();
 
-        return parent::process($config, $container);
+        foreach ($resources as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (is_array($resourceConfig)) {
+                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                }
+            }
+        }
+
+        return $resolvedResources;
     }
 }

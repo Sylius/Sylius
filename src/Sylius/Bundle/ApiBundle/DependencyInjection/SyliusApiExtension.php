@@ -12,9 +12,11 @@
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Api extension.
@@ -23,21 +25,23 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  */
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    protected $configFiles = array(
-        'services.xml'
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = array(
+            'services.xml'
         );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
     }
 
     /**
@@ -52,13 +56,14 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
         }
 
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
+        $resourcesConfig = $config['resources'];
 
         $container->prependExtensionConfig('fos_oauth_server', array(
             'db_driver'           => 'orm',
-            'client_class'        => $config['resources']['api_client']['classes']['model'],
-            'access_token_class'  => $config['resources']['api_access_token']['classes']['model'],
-            'refresh_token_class' => $config['resources']['api_refresh_token']['classes']['model'],
-            'auth_code_class'     => $config['resources']['api_auth_code']['classes']['model'],
+            'client_class'        => $resourcesConfig['api_client']['classes']['model'],
+            'access_token_class'  => $resourcesConfig['api_access_token']['classes']['model'],
+            'refresh_token_class' => $resourcesConfig['api_refresh_token']['classes']['model'],
+            'auth_code_class'     => $resourcesConfig['api_auth_code']['classes']['model'],
 
             'service'             => array(
                 'user_provider'  => 'sylius.user_provider.name_or_email',

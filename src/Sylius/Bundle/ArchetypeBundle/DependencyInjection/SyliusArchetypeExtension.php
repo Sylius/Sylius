@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -28,68 +30,83 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
+
+                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
+                $formDefinition->addArgument($subjectName);
+
+                if (isset($resourceConfig['translation'])) {
+                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
+                    $formTranslationDefinition->addArgument($subjectName);
+                }
+            }
+        }
+
+        $configFiles = array(
+            'services.xml',
         );
 
-        foreach ($config['resources'] as $resource => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$resource);
-            $formDefinition->addArgument($parameters['subject']);
-
-            if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$resource.'_translation');
-                $formTranslationDefinition->addArgument($parameters['subject']);
-            }
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Resolve resources for every subject.
+     *
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
      */
-    public function process(array $config, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container)
     {
         $subjects = array();
-        $convertedConfig = array();
 
-        foreach ($config['resources'] as $resource => $parameters) {
-            $subjects[$resource] = $parameters;
-            unset($parameters['subject'], $parameters['attribute'], $parameters['option']);
-
-            foreach ($parameters as $parameter => $classes) {
-                $convertedConfig[$resource.'_'.$parameter] = $classes;
-                $convertedConfig[$resource.'_'.$parameter]['subject'] = $resource;
-
-                if (!isset($classes['validation_groups'])) {
-                    $classes['validation_groups']['default'] = array('sylius');
-                }
-            }
-
-            $this->createSubjectServices($container, $resource);
+        foreach ($resources as $subject => $parameters) {
+            $subjects[$subject] = $parameters;
         }
 
         $container->setParameter('sylius.archetype.subjects', $subjects);
 
-        $config['resources'] = $convertedConfig;
+        $resolvedResources = array();
 
-        return parent::process($config, $container);
+        foreach ($resources as $subjectName => $subjectConfig) {
+            $this->createPrototypeBuilder($container, $subjectName);
+
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (is_array($resourceConfig)) {
+                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                }
+            }
+        }
+
+        return $resolvedResources;
     }
 
+
     /**
-     * Create services for every subject.
+     * Create prototype builder for subject.
      *
      * @param ContainerBuilder $container
-     * @param string           $subject
+     * @param string $subjectName
      */
-    private function createSubjectServices(ContainerBuilder $container, $subject)
+    private function createPrototypeBuilder(ContainerBuilder $container, $subjectName)
     {
         $builderDefintion = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
         $builderDefintion
-            ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subject))))
+            ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subjectName))))
         ;
 
-        $container->setDefinition('sylius.builder.'.$subject.'_archetype', $builderDefintion);
+        $container->setDefinition('sylius.builder.' . $subjectName . '_archetype', $builderDefintion);
     }
 }

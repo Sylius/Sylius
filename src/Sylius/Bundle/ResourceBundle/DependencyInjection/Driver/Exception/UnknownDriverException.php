@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Exception\Driver;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class InvalidDriverException extends \Exception
+class UnknownDriverException extends \Exception
 {
-    public function __construct($driver, $className)
+    public function __construct($driver)
     {
         parent::__construct(sprintf(
-            'Driver "%s" is not supported by %s.',
-            $driver,
-            $className
+            'Unknown driver "%s".',
+            $driver
         ));
     }
 }

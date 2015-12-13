@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ArchetypeBundle\Form\EventListener;
 
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -68,7 +68,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
                         ->createQueryBuilder('o')
                         ->where('o.id != :id')
                         ->setParameter('id', $currentArchetype->getId())
-                        ;
+                    ;
                 }
             );
         }

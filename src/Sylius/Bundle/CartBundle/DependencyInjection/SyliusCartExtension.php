@@ -12,48 +12,61 @@
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Cart\Model\Cart;
+use Sylius\Component\Cart\Model\CartItem;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Carts extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class SyliusCartExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    protected $configFiles = array(
-        'services.xml',
-        'templating.xml',
-        'twig.xml',
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure($config, new Configuration(), $container);
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $configFiles = array(
+            'services.xml',
+            'templating.xml',
+            'twig.xml',
+        );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
 
+        $container->setAlias('sylius.repository.cart', 'sylius.repository.order');
+        $container->setAlias('sylius.factory.cart', 'sylius.factory.order');
+        $container->setAlias('sylius.manager.cart', 'sylius.manager.order');
+        $container->setAlias('sylius.repository.cart_item', 'sylius.repository.order_item');
+        $container->setAlias('sylius.factory.cart_item', 'sylius.factory.order_item');
+        $container->setAlias('sylius.manager.cart_item', 'sylius.manager.order_item');
+
+        $cartConfig = $config['resources']['cart'];
+        $cartItemConfig = $config['resources']['cart_item'];
+
+        $container->setParameter('sylius.controller.cart.class', $cartConfig['classes']['controller']);
+        $container->setParameter('sylius.form.type.cart.class', $cartConfig['classes']['form']['default']);
+        $container->setParameter('sylius.validation_groups.cart', $cartConfig['validation_groups']);
+        $container->setParameter('sylius.controller.cart_item.class', $cartItemConfig['classes']['controller']);
+        $container->setParameter('sylius.form.type.cart_item.class', $cartItemConfig['classes']['form']['default']);
+        $container->setParameter('sylius.validation_groups.cart_item', $cartItemConfig['validation_groups']);
+
         $definition = $container->findDefinition('sylius.context.cart');
         $definition->replaceArgument(0, new Reference($config['storage']));
-
-        $resources = $config['resources'];
-
-        $container->setParameter('sylius.controller.cart.class', $resources['cart']['classes']['controller']);
-        $container->setParameter('sylius.form.type.cart.class', $resources['cart']['classes']['form']);
-
-        $container->setParameter('sylius.controller.cart_item.class', $resources['item']['classes']['controller']);
-        $container->setParameter('sylius.form.type.cart_item.class', $resources['item']['classes']['form']);
-
-        $container->setParameter('sylius.validation_group.cart', $resources['cart']['validation_groups']);
-        $container->setParameter('sylius.validation_group.cart_item', $resources['item']['validation_groups']);
     }
 
     /**
@@ -62,21 +75,21 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
     public function prepend(ContainerBuilder $container)
     {
         if (!$container->hasExtension('sylius_order')) {
-            return;
+            throw new \RuntimeException('Please install and configure SyliusOrderBundle in order to use SyliusCartBundle.');
         }
 
         $container->prependExtensionConfig('sylius_order', array(
             'resources' => array(
-                'order_item' => array(
-                    'classes' => array(
-                        'model' => 'Sylius\Component\Cart\Model\CartItem'
-                    )
-                ),
                 'order' => array(
                     'classes' => array(
-                        'model' => 'Sylius\Component\Cart\Model\Cart'
-                    )
-                )
+                        'model' => Cart::class,
+                    ),
+                ),
+                'order_item' => array(
+                    'classes' => array(
+                        'model' => CartItem::class,
+                    ),
+                ),
             ))
         );
     }

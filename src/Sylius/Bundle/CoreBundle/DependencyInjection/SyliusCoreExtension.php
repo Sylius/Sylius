@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -55,46 +57,36 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_rbac',
     );
 
-    protected $configFiles = array(
-        'services.xml',
-        'controller.xml',
-        'form.xml',
-        'api_form.xml',
-        'templating.xml',
-        'twig.xml',
-        'reports.xml',
-        'email.xml',
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = array(
+            'services.xml',
+            'controller.xml',
+            'form.xml',
+            'api_form.xml',
+            'templating.xml',
+            'twig.xml',
+            'reports.xml',
+            'state_machine.xml',
+            'email.xml',
         );
 
-        $this->loadServiceDefinitions($container, 'state_machine.xml');
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $this->loadCheckoutConfiguration($config['checkout'], $container);
 
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
-
-        $this->addClassesToCompile(array(
-            'Symfony\Component\Config\Resource\FileResource',
-            'Symfony\Component\HttpKernel\Config\FileLocator',
-            'Symfony\Component\Config\Resource\DirectoryResource',
-            'Symfony\Bundle\AsseticBundle\Config\AsseticResource',
-            'Symfony\Bundle\AsseticBundle\Factory\Resource\FileResource',
-            'Symfony\Bundle\FrameworkBundle\Templating\TemplateReference',
-            'Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator',
-            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader'
-        ));
     }
 
     /**
@@ -111,6 +103,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         }
 
         $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
+
         foreach ($config['routing'] as $className => $routeConfig) {
             $routeClasses[$className] = array(
                 'field'  => $routeConfig['field'],

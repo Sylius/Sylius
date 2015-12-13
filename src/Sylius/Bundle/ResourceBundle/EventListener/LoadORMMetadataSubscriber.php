@@ -15,25 +15,25 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * Doctrine listener used to manipulate mappings.
- *
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadORMMetadataSubscriber implements EventSubscriber
 {
     /**
-     * @var array
+     * @var RegistryInterface
      */
-    protected $resources;
+    private $resourceRegistry;
 
     /**
-     * @param array $resources
+     * @param RegistryInterface $resourceRegistry
      */
-    public function __construct($resources)
+    public function __construct(RegistryInterface $resourceRegistry)
     {
-        $this->resources = $resources;
+        $this->resourceRegistry = $resourceRegistry;
     }
 
     /**
@@ -54,7 +54,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $this->process($metadata);
+        $this->convertToEntityIfNeeded($metadata);
 
         if (!$metadata->isMappedSuperclass) {
             $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
@@ -63,36 +63,25 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function process(ClassMetadataInfo $metadata)
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
+    private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
     {
-        foreach ($this->resources as $application => $resources) {
-            foreach ($resources as $resource => $resourceParameters) {
-                $classes = $resourceParameters['classes'];
-
-                if (isset($classes['model']) && $classes['model'] === $metadata->getName()) {
-                    $metadata->isMappedSuperclass = false;
-
-                    if (isset($classes['repository'])) {
-                        $metadata->setCustomRepositoryClass($classes['repository']);
-                    }
-                }
-
-                if (isset($resourceParameters['translation'])) {
-                    $translationClasses = $resourceParameters['translation']['classes'];
-
-                    if (isset($translationClasses['model']) && $translationClasses['model'] === $metadata->getName()) {
-                        $metadata->isMappedSuperclass = false;
-
-                        if (isset($translationClasses['repository'])) {
-                            $metadata->setCustomRepositoryClass($translationClasses['repository']);
-                        }
-                    }
-
-                }
+        foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
+            if ($resourceMetadata->hasClass('repository') && $resourceMetadata->getClass('model') === $metadata->getName()) {
+                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
+            }
+            if ($resourceMetadata->hasClass('model') && $resourceMetadata->getClass('model') === $metadata->getName()) {
+                $metadata->isMappedSuperclass = false;
             }
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     * @param $configuration
+     */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
@@ -113,6 +102,9 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach ($metadata->getAssociationMappings() as $key => $value) {
@@ -122,6 +114,11 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param $type
+     *
+     * @return bool
+     */
     private function hasRelation($type)
     {
         return in_array(

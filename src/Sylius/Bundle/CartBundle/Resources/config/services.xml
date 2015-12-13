@@ -58,29 +58,20 @@
             </call>
         </service>
 
-        <service id="sylius.context.cart" class="%sylius.context.cart.class%">
-            <argument /> <!-- Storage service name comes from config -->
-        </service>
-
-        <service id="sylius.manager.cart" alias="sylius.manager.order" />
-        <service id="sylius.manager.cart_item" alias="sylius.manager.order_item" />
-
-        <service id="sylius.repository.cart" alias="sylius.repository.order" />
-        <service id="sylius.repository.cart_item" alias="sylius.repository.order_item" />
-
-        <service id="sylius.factory.cart" alias="sylius.factory.order" />
-        <service id="sylius.factory.cart_item" alias="sylius.factory.order_item" />
-
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>
-            <argument>%sylius.validation_group.cart%</argument>
+            <argument>%sylius.validation_groups.cart%</argument>
             <tag name="form.type" alias="sylius_cart" />
         </service>
 
         <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
             <argument>%sylius.model.cart_item.class%</argument>
-            <argument>%sylius.validation_group.cart_item%</argument>
+            <argument>%sylius.validation_groups.cart_item%</argument>
             <tag name="form.type" alias="sylius_cart_item" />
+        </service>
+
+        <service id="sylius.context.cart" class="%sylius.context.cart.class%">
+            <argument /> <!-- Storage service name comes from config -->
         </service>
 
         <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">

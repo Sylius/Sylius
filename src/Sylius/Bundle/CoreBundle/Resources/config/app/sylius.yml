@@ -51,12 +51,14 @@ sylius_channel:
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
     resources:
-        item:
-            classes:
-                form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
         cart:
             classes:
-                form: Sylius\Bundle\CoreBundle\Form\Type\CartType
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CartType
+        cart_item:
+            classes:
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
 sylius_settings: ~
 
@@ -155,11 +157,13 @@ sylius_promotion:
             classes:
                 model: Sylius\Component\Core\Model\Promotion
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
-                form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\Coupon
-                form: Sylius\Bundle\CoreBundle\Form\Type\CouponType
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
 
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
@@ -764,16 +768,15 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_user:
-    templates:
-        user: SyliusWebBundle:Frontend/User
-        customer: SyliusWebBundle:Frontend/Customer
     resources:
         user:
+            templates: SyliusWebBundle:Frontend/User
             classes:
                 model: Sylius\Component\Core\Model\User
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\UserType
         customer:
+            templates: SyliusWebBundle:Frontend/Customer
             classes:
                 model: Sylius\Component\Core\Model\Customer
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController

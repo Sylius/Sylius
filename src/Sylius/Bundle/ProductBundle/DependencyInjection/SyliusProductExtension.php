@@ -11,9 +11,27 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ProductBundle\Controller\VariantController;
+use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Product\Model\Attribute;
+use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\AttributeTranslation;
+use Sylius\Component\Product\Model\AttributeTranslationInterface;
+use Sylius\Component\Product\Model\AttributeValue;
+use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\Option;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionTranslation;
+use Sylius\Component\Product\Model\OptionTranslationInterface;
+use Sylius\Component\Product\Model\OptionValue;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\Variant;
+use Sylius\Component\Product\Model\VariantInterface;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Product catalog extension.
@@ -27,12 +45,18 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS | self::CONFIGURE_TRANSLATIONS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = array(
+            'services.xml',
         );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
     }
 
     /**
@@ -62,24 +86,24 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'subject'         => $config['resources']['product']['classes']['model'],
                         'attribute'       => array(
                             'classes' => array(
-                                'model'       => 'Sylius\Component\Product\Model\Attribute',
-                                'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                                'model'       => Attribute::class,
+                                'interface'   => AttributeInterface::class,
                             ),
                             'translation' => array(
                                 'classes' => array(
-                                'model' => 'Sylius\Component\Product\Model\AttributeTranslation',
-                                ),
-                            ),
+                                    'model' => AttributeTranslation::class,
+                                    'interface' => AttributeTranslationInterface::class,
+                                )
+                            )
                         ),
                         'attribute_value' => array(
                             'classes' => array(
-                                'model' => 'Sylius\Component\Product\Model\AttributeValue',
-                                'interface' => 'Sylius\Component\Product\Model\AttributeValueInterface',
-                            ),
+                                'model'     => AttributeValue::class,
+                                'interface' => AttributeValueInterface::class,
+                            )
                         ),
                     ),
-                )
-            )
+                ))
         );
     }
 
@@ -97,35 +121,35 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             'resources' => array(
                 'product' => array(
                     'variable' => $config['resources']['product']['classes']['model'],
-                    'variant' => array(
+                    'variant'  => array(
                         'classes' => array(
-                            'model' => 'Sylius\Component\Product\Model\Variant',
-                            'interface' => 'Sylius\Component\Product\Model\VariantInterface',
-                            'controller' => 'Sylius\Bundle\ProductBundle\Controller\VariantController',
+                            'model'      => Variant::class,
+                            'interface'  => VariantInterface::class,
+                            'controller' => VariantController::class,
                             'form' => array(
-                                'default' => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType'
-                            ),
-                        ),
+                                'default' => VariantType::class
+                            )
+                        )
                     ),
-                    'option' => array(
+                    'option'       => array(
                         'classes' => array(
-                            'model' => 'Sylius\Component\Product\Model\Option',
-                            'interface' => 'Sylius\Component\Product\Model\OptionInterface',
-                            'repository' => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                            'model'       => Option::class,
+                            'interface'   => OptionInterface::class,
                         ),
                         'translation' => array(
                             'classes' => array(
-                                'model' => 'Sylius\Component\Product\Model\OptionTranslation',
-                            ),
-                        ),
+                                'model' => OptionTranslation::class,
+                                'interface' => OptionTranslationInterface::class
+                            )
+                        )
                     ),
                     'option_value' => array(
                         'classes' => array(
-                            'model' => 'Sylius\Component\Product\Model\OptionValue',
-                            'interface' => 'Sylius\Component\Product\Model\OptionValueInterface',
-                        ),
+                            'model'     => OptionValue::class,
+                            'interface' => OptionValueInterface::class,
+                        )
                     ),
-                ),
+                )
             )
         ));
     }

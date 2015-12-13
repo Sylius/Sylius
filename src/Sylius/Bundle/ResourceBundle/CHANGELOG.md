@@ -4,6 +4,8 @@ CHANGELOG
 ### v0.16.0
 
 * Introduce Factory for all resources.
+* New ``DriverInterface`` for resources.
+* Reworked all listeners to use new Registry.
 
 ### v0.10.0
 

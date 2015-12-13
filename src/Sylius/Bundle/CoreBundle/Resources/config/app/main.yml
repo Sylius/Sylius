@@ -11,7 +11,10 @@ imports:
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
-doctrine_cache: ~
+doctrine_cache:
+    providers:
+        sylius_settings: %sylius.cache%
+        sylius_rbac: %sylius.cache%
 
 knp_gaufrette:
     adapters:
