@@ -7,6 +7,7 @@ This chapter references the relevant changes done in 0.16 version.
 
 To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.15.0...master
 
+ * feature #3709 Access to app_dev.php permitted through the use of SYLIUS_APP_DEV_PERMITTED environment variable (ideal for vagrant)
  * feature #3110 [BC BREAK] Bumped minimal versions, major changes: PHP >=5.5.9, Symfony ^2.7
  * bc break #3364 [BC BREAK] Renamed setDefaultOptions to configureOptions
  * bc break #3536 [BC BREAK] Renamed label to type on adjustment
