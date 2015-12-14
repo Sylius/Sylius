@@ -45,6 +45,7 @@ class TestKernel extends Kernel
                 continue;
             }
 
+<<<<<<< HEAD
             $serviceReflection = new \ReflectionObject($service);
 
             $servicePropertiesReflections = $serviceReflection->getProperties();
@@ -53,10 +54,27 @@ class TestKernel extends Kernel
                 $defaultPropertyValue = null;
                 if (isset($servicePropertiesDefaultValues[$servicePropertyReflection->getName()])) {
                     $defaultPropertyValue = $servicePropertiesDefaultValues[$servicePropertyReflection->getName()];
-                }
+=======
+            $serviceObject = new \ReflectionObject($service);
 
+            $properties = $serviceObject->getProperties();
+            // If it has a static property it could be a singleton, therefore we should not
+            // reset it's properties
+            foreach ($properties as $property) {
+                if ($property->isStatic()) {
+                    continue 2;
+>>>>>>> Update TestKernel.php
+                }
+            }
+
+<<<<<<< HEAD
                 $servicePropertyReflection->setAccessible(true);
                 $servicePropertyReflection->setValue($service, $defaultPropertyValue);
+=======
+            foreach ($properties as $property) {
+                $property->setAccessible(true);
+                $property->setValue($service, null);
+>>>>>>> Update TestKernel.php
             }
         }
 
