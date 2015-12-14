@@ -18,6 +18,7 @@ class TestKernel extends Kernel
 
         if (!in_array($this->environment, ['test', 'test_cached'])) {
             parent::shutdown();
+
             return;
         }
 
@@ -42,13 +43,19 @@ class TestKernel extends Kernel
             }
 
             $serviceObject = new \ReflectionObject($service);
-            foreach ($serviceObject->getProperties() as $prop) {
-                $prop->setAccessible(true);
-                if ($prop->isStatic()) {
-                    continue;
-                }
 
-                $prop->setValue($service, null);
+            $properties = $serviceObject->getProperties();
+            // If it has a static property it could be a singleton, therefore we should not
+            // reset it's properties
+            foreach ($properties as $property) {
+                if ($property->isStatic()) {
+                    continue 2;
+                }
+            }
+
+            foreach ($properties as $property) {
+                $property->setAccessible(true);
+                $property->setValue($service, null);
             }
         }
         $property->setValue($container, null);
