@@ -3,7 +3,7 @@ language: php
 env:
     global:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
-        - SYLIUS_BUILD_DIR=etc/travis/build-output
+        - SYLIUS_BUILD_DIR=etc/build
 
 cache:
     directories:
@@ -32,21 +32,22 @@ matrix:
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
+    - phpenv config-rm xdebug.ini || true
+
+    - etc/travis/prepare-memcached-extension
+
+    - phpenv config-add etc/travis/before-install-php.ini
+
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then etc/travis/prepare/prepare-php7-memcached; fi
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then etc/travis/prepare/prepare-mongodb; fi
-
-    - cat etc/travis/prepare/opcache.ini >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
-    - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-    - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
+    - etc/travis/prepare-composer-doctrine-mongodb-odm
     - composer install --no-interaction --prefer-dist --no-scripts
+
     - composer run-script travis-build --no-interaction
 
 before_script:
+    - phpenv config-add etc/travis/before-install-php.ini
+
     - app/console doctrine:database:create --env=test_cached
 
     - app/console cache:warmup --env=test_cached --no-debug
@@ -61,7 +62,11 @@ before_script:
     - php -i
 
 script:
-    - etc/travis/run-tests default
+    - bin/phpspec run -f dot
+    - bin/behat --strict -f progress -p cached
+
+    - etc/travis/prepare-javascript
+    - bin/behat --strict -f progress -p javascript_cached || bin/behat --strict -f progress -p javascript_cached --rerun
 
 before_cache:
     - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
