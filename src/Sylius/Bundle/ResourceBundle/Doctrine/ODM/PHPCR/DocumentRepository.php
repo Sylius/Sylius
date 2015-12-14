@@ -83,13 +83,22 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
     {
+        $metadata = $this->getClassMetadata();
         foreach ($criteria as $property => $value) {
             if (!empty($value)) {
-                $queryBuilder
-                    ->andWhere()
-                        ->eq()
-                            ->field($this->getPropertyName($property))
-                            ->literal($value);
+                if ($property === $metadata->nodename) {
+                    $queryBuilder
+                        ->andWhere()
+                            ->eq()
+                                ->localName($this->getAlias())
+                                ->literal($value);
+                } else {
+                    $queryBuilder
+                        ->andWhere()
+                            ->eq()
+                                ->field($this->getPropertyName($property))
+                                ->literal($value);
+                }
             }
         }
     }
