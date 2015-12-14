@@ -83,11 +83,16 @@ class CustomerRepositorySpec extends ObjectBehavior
         $builder->setParameter('enabled', true)->shouldBeCalled()->willReturn($builder);
 
         // Query
-        $builder->where(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('query', '%arnaud%')->shouldBeCalled()->willReturn($builder);
+        $builder->andWhere(Argument::type('Doctrine\ORM\QueryBuilder'))->shouldBeCalled()->willReturn($builder);
+        $expr->orX(
+            Argument::type('Doctrine\ORM\Query\Expr'),
+            Argument::type('Doctrine\ORM\Query\Expr'),
+            Argument::type('Doctrine\ORM\Query\Expr'),
+            Argument::type('Doctrine\ORM\Query\Expr')
+        )->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('query0', '%arnaud%')->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('query1', '%middle%')->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('query2', '%last%')->shouldBeCalled()->willReturn($builder);
 
         // Sort
         $builder->addOrderBy('o.name', 'asc')->shouldBeCalled();
@@ -96,7 +101,7 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->createFilterPaginator(
             array(
                 'enabled' => true,
-                'query' => 'arnaud'
+                'query' => 'arnaud middle last'
             ),
             array('name' => 'asc'),
             true
