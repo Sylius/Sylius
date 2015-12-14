@@ -36,12 +36,6 @@
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
-        <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="orderItem" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
-
         <gedmo:loggable />
     </mapped-superclass>
 

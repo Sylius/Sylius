@@ -13,12 +13,11 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjectInterface
+interface OrderItemInterface extends CartItemInterface
 {
     /**
      * @return ProductInterface
@@ -34,6 +33,23 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
      * @param ProductVariantInterface $variant
      */
     public function setVariant(ProductVariantInterface $variant);
+
+    /**
+     * Returns the adjustments on it's child InventoryUnits
+     *
+     * @param string|null $type
+     *
+     * @return Adjustment[]
+     */
+    public function getAdjustments($type = null);
+
+    /**
+     * @param null $type
+     * @param bool $includeNeutral
+     *
+     * @return int
+     */
+    public function calculateAdjustmentsTotal($type = null, $includeNeutral = false);
 
     /**
      * @return Collection|InventoryUnitInterface[]

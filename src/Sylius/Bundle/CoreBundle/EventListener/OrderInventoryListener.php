@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -115,13 +116,17 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      *
-     * @return OrderInterface
+     * @return OrderItemInterface
      *
      * @throws UnexpectedTypeException
      */
     protected function getItem(GenericEvent $event)
     {
-        $item = $event->getSubject();
+        if ($event instanceof CartItemEvent) {
+            $item = $event->getItem();
+        } else {
+            $item = $event->getSubject();
+        }
 
         if (!$item instanceof OrderItemInterface) {
             throw new UnexpectedTypeException(

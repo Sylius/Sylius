@@ -41,10 +41,6 @@
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="adjustments">
             <join-column name="order_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-
-        <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="adjustments">
-            <join-column name="order_item_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

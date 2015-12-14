@@ -20,5 +20,13 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 interface PromotionProcessorInterface
 {
+    /**
+     * @param PromotionSubjectInterface $subject
+     */
+    public function revert(PromotionSubjectInterface $subject);
+
+    /**
+     * @param PromotionSubjectInterface $subject
+     */
     public function process(PromotionSubjectInterface $subject);
 }

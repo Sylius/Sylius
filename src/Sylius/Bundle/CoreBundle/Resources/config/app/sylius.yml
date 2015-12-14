@@ -192,6 +192,8 @@ sylius_order:
             model: Sylius\Component\Core\Model\OrderItem
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+        adjustment:
+            model: Sylius\Component\Core\Model\Adjustment
 
 sylius_sequence:
     generators:

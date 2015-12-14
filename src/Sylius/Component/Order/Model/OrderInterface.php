@@ -105,9 +105,11 @@ interface OrderInterface extends
     public function getTotal();
 
     /**
-     * @param integer $total
+     * Return the total of items excluding adjustments
+     *
+     * @return integer
      */
-    public function setTotal($total);
+    public function getSubtotal();
 
     /**
      * Calculate total.

@@ -15,6 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -187,6 +188,12 @@ class CoreContext extends DefaultContext
             $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
+
+            // Also add InventoryUnits for OrderItems
+            $this->getService('event_dispatcher')->dispatch(
+                SyliusCartEvents::ITEM_ADD_INITIALIZE,
+                new CartItemEvent($order, $item)
+            );
         }
 
         $order->calculateTotal();

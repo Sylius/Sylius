@@ -39,8 +39,6 @@ class OrderItem extends CartItem implements OrderItemInterface
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->inventoryUnits = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
@@ -118,52 +116,56 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectTotal()
+    public function calculateTotal()
     {
-        return $this->getTotal();
+        $this->adjustmentsTotal = $this->calculateAdjustmentsTotal();
+
+        $this->total = ($this->getQuantity() * $this->getUnitPrice()) + $this->adjustmentsTotal;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectCount()
+    public function getAdjustmentsTotal($type = null, $includeNeutral = false)
     {
-        return $this->quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotion(BasePromotionInterface $promotion)
-    {
-        return $this->promotions->contains($promotion);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addPromotion(BasePromotionInterface $promotion)
-    {
-        if (!$this->hasPromotion($promotion)) {
-            $this->promotions->add($promotion);
+        if (null === $type && !$includeNeutral) {
+            // By default the order will have calculated the 'standard' adjustments total so we just return it.
+            return $this->adjustmentsTotal;
         }
+
+        // Any non-standard requests for totals need to be calculated
+        return $this->calculateAdjustmentsTotal($type, $includeNeutral);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(BasePromotionInterface $promotion)
+    public function getAdjustments($type = null)
     {
-        if ($this->hasPromotion($promotion)) {
-            $this->promotions->removeElement($promotion);
+        $adjustments = [];
+
+        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+            $adjustments = array_merge($adjustments, $inventoryUnit->getAdjustments($type)->toArray());
         }
+
+        return $adjustments;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPromotions()
+    public function calculateAdjustmentsTotal($type = null, $includeNeutral = false)
     {
-        return $this->promotions;
+        $adjustmentsTotal = 0;
+
+        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+            foreach ($inventoryUnit->getAdjustments($type) as $inventoryUnitAdjustment) {
+                if ($includeNeutral || !$inventoryUnitAdjustment->isNeutral()) {
+                    $adjustmentsTotal += $inventoryUnitAdjustment->getAmount();
+                }
+            }
+        }
+
+        return $adjustmentsTotal;
     }
 }

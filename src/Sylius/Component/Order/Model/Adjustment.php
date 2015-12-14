@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Inventory\Model\InventoryUnit;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -25,11 +28,6 @@ class Adjustment implements AdjustmentInterface
      * @var OrderInterface
      */
     protected $order;
-
-    /**
-     * @var OrderItemInterface
-     */
-    protected $orderItem;
 
     /**
      * @var string
@@ -101,10 +99,6 @@ class Adjustment implements AdjustmentInterface
             return $this->order;
         }
 
-        if (null !== $this->orderItem) {
-            return $this->orderItem;
-        }
-
         return null;
     }
 
@@ -113,14 +107,10 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAdjustable(AdjustableInterface $adjustable = null)
     {
-        $this->order = $this->orderItem = null;
+        $this->order = null;
 
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;
-        }
-
-        if ($adjustable instanceof OrderItemInterface) {
-            $this->orderItem = $adjustable;
         }
     }
 

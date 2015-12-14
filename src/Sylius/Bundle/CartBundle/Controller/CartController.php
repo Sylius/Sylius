@@ -37,6 +37,20 @@ class CartController extends Controller
     public function summaryAction()
     {
         $cart = $this->getCurrentCart();
+
+        // Currently not everywhere seems to ensure these events are dispatched after customer context change
+        // (login or changing channel). This is a suitable place to ensure this for now,
+        // but a rework of cart events should be considered in future.
+        $this->getEventDispatcher()->dispatch(
+            SyliusCartEvents::CART_CHANGE,
+            new GenericEvent($cart)
+        );
+
+        $this->getEventDispatcher()->dispatch(
+            SyliusCartEvents::CART_SAVE_INITIALIZE,
+            new CartEvent($cart)
+        );
+
         $form = $this->createForm('sylius_cart', $cart);
 
         $view = $this

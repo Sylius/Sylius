@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
+use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Shipping\Model\ShipmentItemInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface
+interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface, AdjustableInterface
 {
     /**
      * @return null|OrderItemInterface

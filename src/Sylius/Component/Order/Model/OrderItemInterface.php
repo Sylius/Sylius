@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface
+interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
 {
     /**
      * @return int
@@ -41,20 +41,26 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setUnitPrice($unitPrice);
 
     /**
-     * Get item total.
-     *
      * @return int
      */
     public function getTotal();
 
     /**
-     * @param int $total
+     * Get the basic total of the items (excluding adjustments)
+     *
+     * @return int
      */
-    public function setTotal($total);
+    public function getSubtotal();
 
     /**
-     * Calculate total based on quantity and unit price.
-     * Take adjustments into account.
+     * @param string|null $type
+     *
+     * @return int
+     */
+    public function getAdjustmentsTotal($type = null);
+
+    /**
+     * Calculate items total based on quantity and unit price.
      */
     public function calculateTotal();
 

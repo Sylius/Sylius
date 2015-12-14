@@ -50,6 +50,19 @@ class Order implements OrderInterface
     protected $adjustments;
 
     /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
+
+    /**
+     * Calculated total.
+     * Units total + Order Adjustments total.
+     *
+     * @var int
+     */
+    protected $total = 0;
+
+    /**
      * @var Collection|CommentInterface[]
      */
     protected $comments;
@@ -58,19 +71,6 @@ class Order implements OrderInterface
      * @var Collection|IdentityInterface[]
      */
     protected $identities;
-
-    /**
-     * @var int
-     */
-    protected $adjustmentsTotal = 0;
-
-    /**
-     * Calculated total.
-     * Items total + adjustments total.
-     *
-     * @var int
-     */
-    protected $total = 0;
 
     /**
      * @var \DateTime
@@ -246,33 +246,21 @@ class Order implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setItemsTotal($itemsTotal)
-    {
-        if (!is_int($itemsTotal)) {
-            throw new \InvalidArgumentException('Items total must be an integer.');
-        }
-        $this->itemsTotal = $itemsTotal;
-    }
-
-    /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function calculateItemsTotal()
     {
-        $itemsTotal = 0;
+        $this->itemsTotal = 0;
 
         foreach ($this->items as $item) {
             $item->calculateTotal();
-
-            $itemsTotal += $item->getTotal();
+            $this->itemsTotal += $item->getTotal();
         }
-
-        $this->itemsTotal = $itemsTotal;
     }
 
     /**
+     * It takes also adjustments added to the inventoryUnits
+     *
      * {@inheritdoc}
      */
     public function getAdjustments($type = null)
@@ -370,6 +358,60 @@ class Order implements OrderInterface
     }
 
     /**
+     * Get all adjustments (adjustments from child relations included)
+     *
+     * @param string $type
+     *
+     * @return AdjustmentInterface[]
+     */
+    public function getAllAdjustments($type = null)
+    {
+        $childAdjustments = [];
+
+        foreach ($this->getItems() as $item) {
+            $childAdjustments = array_merge($childAdjustments, $item->getAdjustments($type));
+        }
+
+        return array_merge($childAdjustments, $this->getAdjustments($type)->toArray());
+    }
+
+    /**
+     * Get total value of adjustments (including those from child relations)
+     *
+     * @param string $type
+     *
+     * @return int
+     */
+    public function getAllAdjustmentsTotal($type = null)
+    {
+        $total = $this->getAdjustmentsTotal($type);
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getAdjustmentsTotal($type);
+        }
+
+        return $total;
+    }
+
+    /**
+     * @param null $type
+     *
+     * @return array
+     */
+    public function getUniqueAdjustmentDescriptions($type = null)
+    {
+        $descriptions = [];
+
+        foreach ($this->getAllAdjustments($type) as $adjustment) {
+            if (!in_array($adjustment->getDescription(), $descriptions)) {
+                $descriptions[] = $adjustment->getDescription();
+            }
+        }
+
+        return $descriptions;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getComments()
@@ -410,12 +452,15 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setTotal($total)
+    public function getSubtotal()
     {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
+        $subtotal = 0;
+
+        foreach ($this->items as $item) {
+            $subtotal += $item->getSubtotal();
         }
-        $this->total = $total;
+
+        return $subtotal;
     }
 
     /**

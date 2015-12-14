@@ -542,6 +542,7 @@ sylius:
         payment_state: Payment state
         payment_states:
             balance_due: Balance due
+        promotions: Promotions
         promotion_total: Promotion total
         recent_header: Recent orders
         shipment_state: Shipment state

@@ -11,15 +11,19 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
+use Sylius\Bundle\CoreBundle\EventListener\AdjustmentSubscriber;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\AdjustableInterface;
+use Sylius\Component\Order\Model\AdjustmentDTO;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Base discount action.
@@ -29,23 +33,23 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 abstract class DiscountAction implements PromotionActionInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    protected $adjustmentFactory;
-
-    /**
      * @var OriginatorInterface
      */
     protected $originator;
 
     /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param OriginatorInterface $originator
+     * @var EventDispatcherInterface
      */
-    public function __construct(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
+    protected $eventDispatcher;
+
+    /**
+     * @param OriginatorInterface $originator
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(OriginatorInterface $originator, EventDispatcherInterface $eventDispatcher)
     {
-        $this->adjustmentFactory = $adjustmentFactory;
         $this->originator = $originator;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -70,16 +74,33 @@ abstract class DiscountAction implements PromotionActionInterface
     /**
      * @param PromotionInterface $promotion
      *
-     * @return AdjustmentInterface
+     * @return AdjustmentDTO
      */
-    protected function createAdjustment(PromotionInterface $promotion)
+    protected function createAdjustmentDTO(PromotionInterface $promotion)
     {
-        $adjustment = $this->adjustmentFactory->createNew();
-        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT);
-        $adjustment->setDescription($promotion->getDescription());
+        $adjustmentDTO = new AdjustmentDTO();
+        $adjustmentDTO->type = AdjustmentInterface::PROMOTION_ADJUSTMENT;
+        $adjustmentDTO->description = $promotion->getDescription();
+        $adjustmentDTO->originId = $promotion->getId();
+        $adjustmentDTO->originType = get_class($promotion);
 
-        $this->originator->setOrigin($adjustment, $promotion);
+        return $adjustmentDTO;
+    }
 
-        return $adjustment;
+    /**
+     * @param AdjustableInterface $subject
+     * @param AdjustmentDTO       $adjustmentDTO
+     */
+    protected function addAdjustmentTo(AdjustableInterface $subject, AdjustmentDTO $adjustmentDTO)
+    {
+        $type = AdjustmentEvent::ADJUSTMENT_ADDING_INVENTORY_UNIT;
+
+        if ($subject instanceof OrderInterface) {
+            $type = AdjustmentEvent::ADJUSTMENT_ADDING_ORDER;
+        }
+
+        $adjustmentEvent = new AdjustmentEvent($subject, [AdjustmentSubscriber::EVENT_ARGUMENT_DATA_KEY => $adjustmentDTO]);
+
+        $this->eventDispatcher->dispatch($type, $adjustmentEvent);
     }
 }

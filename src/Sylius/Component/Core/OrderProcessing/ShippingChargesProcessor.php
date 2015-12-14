@@ -11,10 +11,13 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
+use Sylius\Bundle\CoreBundle\EventListener\AdjustmentSubscriber;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Order\Model\AdjustmentDTO;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Shipping charges processor.
@@ -24,11 +27,9 @@ use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 class ShippingChargesProcessor implements ShippingChargesProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
-     * @var FactoryInterface
+     * @var EventDispatcherInterface
      */
-    protected $adjustmentFactory;
+    protected $eventDispatcher;
 
     /**
      * Shipping charges calculator.
@@ -38,14 +39,12 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     protected $calculator;
 
     /**
-     * Constructor.
-     *
-     * @param FactoryInterface $adjustmentFactory
+     * @param EventDispatcherInterface $eventDispatcher
      * @param DelegatingCalculatorInterface $calculator
      */
-    public function __construct(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
+    public function __construct(EventDispatcherInterface $eventDispatcher, DelegatingCalculatorInterface $calculator)
     {
-        $this->adjustmentFactory = $adjustmentFactory;
+        $this->eventDispatcher = $eventDispatcher;
         $this->calculator = $calculator;
     }
 
@@ -60,14 +59,18 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
         foreach ($order->getShipments() as $shipment) {
             $shippingCharge = $this->calculator->calculate($shipment);
 
-            $adjustment = $this->adjustmentFactory->createNew();
-            $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
-            $adjustment->setAmount($shippingCharge);
-            $adjustment->setDescription($shipment->getMethod()->getName());
+            $adjustmentDTO = new AdjustmentDTO();
+            $adjustmentDTO->type = AdjustmentInterface::SHIPPING_ADJUSTMENT;
+            $adjustmentDTO->amount = $shippingCharge;
+            $adjustmentDTO->description = $shipment->getMethod()->getName();
 
-            $order->addAdjustment($adjustment);
+            $this->eventDispatcher->dispatch(
+                AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
+                new AdjustmentEvent(
+                    $order,
+                    [AdjustmentSubscriber::EVENT_ARGUMENT_DATA_KEY => $adjustmentDTO]
+                )
+            );
         }
-
-        $order->calculateTotal();
     }
 }

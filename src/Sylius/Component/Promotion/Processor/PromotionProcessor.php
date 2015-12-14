@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Promotion\Processor;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -25,11 +27,31 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  */
 class PromotionProcessor implements PromotionProcessorInterface
 {
+    /**
+     * @var PromotionRepositoryInterface
+     */
     protected $repository;
+
+    /**
+     * @var PromotionEligibilityCheckerInterface
+     */
     protected $checker;
+
+    /**
+     * @var PromotionApplicatorInterface
+     */
     protected $applicator;
+
+    /**
+     * @var Collection|PromotionInterface[]
+     */
     protected $promotions;
 
+    /**
+     * @param PromotionRepositoryInterface $repository
+     * @param PromotionEligibilityCheckerInterface $checker
+     * @param PromotionApplicatorInterface $applicator
+     */
     public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
@@ -37,12 +59,21 @@ class PromotionProcessor implements PromotionProcessorInterface
         $this->applicator = $applicator;
     }
 
-    public function process(PromotionSubjectInterface $subject)
+    /**
+     * @param PromotionSubjectInterface $subject
+     */
+    public function revert(PromotionSubjectInterface $subject)
     {
         foreach ($subject->getPromotions() as $promotion) {
             $this->applicator->revert($subject, $promotion);
         }
+    }
 
+    /**
+     * @param PromotionSubjectInterface $subject
+     */
+    public function process(PromotionSubjectInterface $subject)
+    {
         $eligiblePromotions = array();
 
         foreach ($this->getActivePromotions() as $promotion) {
@@ -51,7 +82,8 @@ class PromotionProcessor implements PromotionProcessorInterface
             }
 
             if ($promotion->isExclusive()) {
-                return $this->applicator->apply($subject, $promotion);
+                $this->applicator->apply($subject, $promotion);
+                return;
             }
 
             $eligiblePromotions[] = $promotion;
@@ -62,6 +94,9 @@ class PromotionProcessor implements PromotionProcessorInterface
         }
     }
 
+    /**
+     * @return Collection|PromotionInterface[]
+     */
     protected function getActivePromotions()
     {
         if (null === $this->promotions) {

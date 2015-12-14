@@ -19,6 +19,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class RefreshCartListener
 {
+    /**
+     * @param GenericEvent $event
+     */
     public function refreshCart(GenericEvent $event)
     {
         $cart = $event->getSubject();
