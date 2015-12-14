@@ -7,10 +7,10 @@ Feature: Checkout limited time promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name     | description                   | starts     | ends       |
-            | Decade   | 20 EUR off for this decade    | 2013-01-01 | 2023-01-01 |
-            | Too late | too late to get this discount |            | 2013-01-01 |
-            | Too soon | too soon to get this discount | 2023-01-01 |            |
+            | code | name     | description                   | starts     | ends       |
+            | P1   | Decade   | 20 EUR off for this decade    | 2013-01-01 | 2023-01-01 |
+            | P2   | Too late | too late to get this discount |            | 2013-01-01 |
+            | P3   | Too soon | too soon to get this discount | 2023-01-01 |            |
           And promotion "Decade" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 20    |

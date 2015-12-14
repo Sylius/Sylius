@@ -108,6 +108,7 @@ class PromotionContext extends DefaultContext
 
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
+            $promotion->setCode($data['code']);
 
             if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
                 $promotion->setUsageLimit((int) $data['usage limit']);

@@ -26,12 +26,12 @@ Feature: Checkout fixed discount promotions
             | Lenny   | 15    | Debian T-Shirts |
             | Ubu     | 200   | Ubuntu T-Shirts |
           And the following promotions exist:
-            | name                | description                                              |
-            | 3 items             | 15 EUR Discount for orders with at least 3 items         |
-            | 300 EUR             | 40 EUR Discount for orders over 300 EUR                  |
-            | Shipping to Germany | 40 EUR Discount for orders with shipping country Germany |
-            | Ubuntu T-Shirts     | 40 EUR Discount for Ubuntu T-Shirts                      |
-            | 3rd order           | 10 EUR Discount for 3rd order                            |
+            | code | name                | description                                              |
+            | P1   | 3 items             | 15 EUR Discount for orders with at least 3 items         |
+            | P2   | 300 EUR             | 40 EUR Discount for orders over 300 EUR                  |
+            | P3   | Shipping to Germany | 40 EUR Discount for orders with shipping country Germany |
+            | P4   | Ubuntu T-Shirts     | 40 EUR Discount for Ubuntu T-Shirts                      |
+            | P5   | 3rd order           | 10 EUR Discount for 3rd order                            |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
           And promotion "3 items" has following rules defined:

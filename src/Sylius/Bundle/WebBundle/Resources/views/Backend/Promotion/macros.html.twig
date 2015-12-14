@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('code','sylius.ui.code'|trans) }}</th>
                 <th>{{ sylius_resource_sort('name', 'sylius.promotion.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('couponBased', 'sylius.promotion.coupon_based'|trans) }}</th>
                 <th>{{ sylius_resource_sort('usageLimit', 'sylius.promotion.usage_limit'|trans) }}</th>
@@ -25,6 +26,7 @@
                 <td>
                     <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.id }}</a>
                 </td>
+                <td>{{ promotion.code }}</td>
                 <td>
                     <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.name }}</a>
                     <p class="hidden-xs">{{ promotion.description }}</p>
