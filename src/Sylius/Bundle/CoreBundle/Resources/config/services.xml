@@ -246,9 +246,9 @@
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
             <!--
                 Ensure we have the right amount of InventoryUnits for OrderItems.
-                These events need refactoring so that the units are added or removed earlier than flush
+                These events probably need refactoring/simplifying so that the units are added earlier
             -->
-            <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="processInventoryUnits" piority="-100"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
@@ -259,6 +259,15 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="onFlush" />
         </service>
+        <!--  Cart Calculation
+            It's important that finances on the cart are handled in a careful order whenever there is a change.
+              * Adjustments should be removed (tax, promotions, etc)
+              * Prices should then be recalculated
+              * Adjustments should be reapplied (tax, promotions, etc).
+            Get this order wrong and your finances could be wrong.
+
+            @todo: Consolidate event calls so that there is less duplication (i.e. dispatch cart_change inside others)
+        -->
         <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
             <argument type="service" id="sylius.price_calculator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" priority="0" />

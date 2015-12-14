@@ -189,7 +189,7 @@ class CoreContext extends DefaultContext
 
             $order->addItem($item);
 
-            // adding also inventory units into orderItem
+            // Also add InventoryUnits for OrderItems
             $this->getService('event_dispatcher')->dispatch(
                 SyliusCartEvents::ITEM_ADD_INITIALIZE,
                 new CartItemEvent($order, $item)

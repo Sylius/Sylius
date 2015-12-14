@@ -107,7 +107,7 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAdjustable(AdjustableInterface $adjustable = null)
     {
-        $this->order = $this->inventoryUnit = null;
+        $this->order = null;
 
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;

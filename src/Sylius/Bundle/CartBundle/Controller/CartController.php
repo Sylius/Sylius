@@ -38,7 +38,7 @@ class CartController extends Controller
     {
         $cart = $this->getCurrentCart();
 
-        // Currently not everywhere seems to ensure these events are dispatch after customer context change
+        // Currently not everywhere seems to ensure these events are dispatched after customer context change
         // (login or changing channel). This is a suitable place to ensure this for now,
         // but a rework of cart events should be considered in future.
         $this->getEventDispatcher()->dispatch(

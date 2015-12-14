@@ -120,10 +120,9 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-
-        return $this;
     }
 
+    // TODO: Could be moved to Adjustable Trait?
     /**
      * {@inheritDoc}
      */

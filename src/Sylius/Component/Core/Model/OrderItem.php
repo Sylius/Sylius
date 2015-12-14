@@ -80,6 +80,42 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getInventoryUnits()
+    {
+        return $this->inventoryUnits;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addInventoryUnit(InventoryUnitInterface $unit)
+    {
+        if (!$this->hasInventoryUnit($unit)) {
+            $unit->setOrderItem($this);
+            $this->inventoryUnits->add($unit);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeInventoryUnit(InventoryUnitInterface $unit)
+    {
+        $unit->setOrderItem(null);
+        $this->inventoryUnits->removeElement($unit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit)
+    {
+        return $this->inventoryUnits->contains($unit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculateTotal()
     {
         $this->adjustmentsTotal = $this->calculateAdjustmentsTotal();
@@ -118,10 +154,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     }
 
     /**
-     * @param null $type
-     * @param bool $includeNeutral
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function calculateAdjustmentsTotal($type = null, $includeNeutral = false)
     {
@@ -137,88 +170,4 @@ class OrderItem extends CartItem implements OrderItemInterface
 
         return $adjustmentsTotal;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryUnits()
-    {
-        return $this->inventoryUnits;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addInventoryUnit(InventoryUnitInterface $unit)
-    {
-        if (!$this->hasInventoryUnit($unit)) {
-            $unit->setOrderItem($this);
-            $this->inventoryUnits->add($unit);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeInventoryUnit(InventoryUnitInterface $unit)
-    {
-        $unit->setOrderItem(null);
-        $this->inventoryUnits->removeElement($unit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit)
-    {
-        return $this->inventoryUnits->contains($unit);
-    }
-
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function getPromotionSubjectTotal()
-//    {
-//        return $this->getTotal();
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function hasPromotion(BasePromotionInterface $promotion)
-//    {
-//        return $this->promotions->contains($promotion);
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function addPromotion(BasePromotionInterface $promotion)
-//    {
-//        if (!$this->hasPromotion($promotion)) {
-//            $this->promotions->add($promotion);
-//        }
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function removePromotion(BasePromotionInterface $promotion)
-//    {
-//        if ($this->hasPromotion($promotion)) {
-//            $this->promotions->removeElement($promotion);
-//        }
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function getPromotions()
-//    {
-//        return $this->promotions;
-//    }
 }
