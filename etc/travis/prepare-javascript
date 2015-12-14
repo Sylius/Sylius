@@ -17,10 +17,8 @@ fi
 # Running Selenium with ChromeDriver
 java -jar $SYLIUS_CACHE_DIR/selenium.jar -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver > $SYLIUS_BUILD_DIR/selenium.log 2>&1 &
 
-vendor/lakion/mink-debug-extension/travis/tools/wait-for-port 9515 # Chromedriver port
-vendor/lakion/mink-debug-extension/travis/tools/wait-for-port 4444 # Selenium2 port
-
 # Running webserver
 app/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug > $SYLIUS_BUILD_DIR/webserver.log 2>&1 &
 
-vendor/lakion/mink-debug-extension/travis/tools/wait-for-port 8080 # Webserver port
+# Not the best solution, but it works! :)
+sleep 3
