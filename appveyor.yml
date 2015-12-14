@@ -47,7 +47,7 @@ install:
     - IF %PHP%==1 cd ..
     - cd c:\projects\sylius
     - appveyor DownloadFile https://getcomposer.org/composer.phar
-    - copy /Y travis\appveyor\parameters.test.yml app\config\parameters.yml
+    - copy /Y etc\appveyor\parameters.test.yml app\config\parameters.yml
     - php composer.phar install --prefer-dist --no-interaction --no-progress --ansi
 
 test_script:
@@ -56,8 +56,8 @@ test_script:
     - php app\console doctrine:phpcr:repository:init --env=test
     - php app\console cache:warmup --env=test
 
-    - IF %TEST_SUITE%==phpspec travis\appveyor\suite-phpspec.cmd
-    - IF %TEST_SUITE%==1a travis\appveyor\suite-1a.cmd
-    - IF %TEST_SUITE%==1b travis\appveyor\suite-1b.cmd
-    - IF %TEST_SUITE%==2a travis\appveyor\suite-2a.cmd
-    - IF %TEST_SUITE%==2b travis\appveyor\suite-2b.cmd
+    - IF %TEST_SUITE%==phpspec etc\appveyor\suite-phpspec.cmd
+    - IF %TEST_SUITE%==1a etc\appveyor\suite-1a.cmd
+    - IF %TEST_SUITE%==1b etc\appveyor\suite-1b.cmd
+    - IF %TEST_SUITE%==2a etc\appveyor\suite-2a.cmd
+    - IF %TEST_SUITE%==2b etc\appveyor\suite-2b.cmd

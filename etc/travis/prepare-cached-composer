@@ -12,7 +12,7 @@ function main
     if is_cache_fresh "$UNIQUE_KEY"; then
         restore_composer_lock_from_cache $UNIQUE_KEY
     else
-        rebuild_cache_hook $1
+        rebuild_cache_hook $1 $UNIQUE_KEY
         store_composer_lock_in_cache $UNIQUE_KEY
     fi
 
@@ -40,14 +40,23 @@ function restore_composer_lock_from_cache
 function is_cache_fresh
 {
     if [ -f "$SYLIUS_CACHE_DIR/composer-$1.lock" ] \
-    && [ -f "$SYLIUS_CACHE_DIR/composer-$1.json.md5sum" ]; then
-        current_md5sum=`file_md5sum composer.json`
-        previous_md5sum=`cat $SYLIUS_CACHE_DIR/composer-$1.json.md5sum`
+    && [ -f "$SYLIUS_CACHE_DIR/composer-$1.json.md5sum" ] \
+    && [ -f "$SYLIUS_CACHE_DIR/composer-$1.lock.md5sum" ]; then
+        current_json_md5sum=`file_md5sum composer.json`
+        previous_json_md5sum=`cat $SYLIUS_CACHE_DIR/composer-$1.json.md5sum`
+
+        current_lock_md5sum=`file_md5sum composer.lock`
+        previous_lock_md5sum=`cat $SYLIUS_CACHE_DIR/composer-$1.lock.md5sum`
 
         echo "Found previous cache"
-        echo "Previous composer.json md5sum: $current_md5sum"
-        echo "Current composer.json md5sum: $previous_md5sum"
-        if [ $current_md5sum = $previous_md5sum ]; then
+
+        echo "Previous composer.json md5sum: $current_json_md5sum"
+        echo "Current composer.json md5sum: $previous_json_md5sum"
+
+        echo "Previous composer.lock md5sum: $current_lock_md5sum"
+        echo "Current composer.lock md5sum: $previous_lock_md5sum"
+
+        if [ $current_json_md5sum = $previous_json_md5sum ] && [ $current_lock_md5sum = $previous_lock_md5sum ]; then
             return 0
         else
             return 1
@@ -81,6 +90,8 @@ function before_hook
 # Argument 1: Dir with scripts
 function rebuild_cache_hook
 {
+    file_md5sum composer.lock > $SYLIUS_CACHE_DIR/composer-$2.lock.md5sum
+
     if [ -f "$1/2-rebuild-cache" ]; then
         echo "Executing rebuild_cache_hook"
         bash "$1/2-rebuild-cache"
