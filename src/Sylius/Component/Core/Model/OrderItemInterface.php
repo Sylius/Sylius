@@ -35,6 +35,15 @@ interface OrderItemInterface extends CartItemInterface
     public function setVariant(ProductVariantInterface $variant);
 
     /**
+     * Returns the adjustments on it's child InventoryUnits
+     *
+     * @param string|null $type
+     *
+     * @return Adjustment[]
+     */
+    public function getAdjustments($type = null);
+
+    /**
      * @param null $type
      * @param bool $includeNeutral
      *

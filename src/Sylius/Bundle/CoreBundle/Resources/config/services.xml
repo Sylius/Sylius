@@ -261,9 +261,9 @@
         </service>
         <!--  Cart Calculation
             It's important that finances on the cart are handled in a careful order whenever there is a change.
-              * Adjustments should be removed (tax, promotions, etc)
+              * First adjustments should be removed (tax, promotions, etc)
               * Prices should then be recalculated
-              * Adjustments should be reapplied (tax, promotions, etc).
+              * Finally adjustments should be reapplied (tax, promotions, etc).
             Get this order wrong and your finances could be wrong.
 
             @todo: Consolidate event calls so that there is less duplication (i.e. dispatch cart_change inside others)

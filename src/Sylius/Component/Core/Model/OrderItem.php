@@ -138,9 +138,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     }
 
     /**
-     * @param string|null $type
-     *
-     * @return Adjustment[]
+     * {@inheritdoc}
      */
     public function getAdjustments($type = null)
     {
