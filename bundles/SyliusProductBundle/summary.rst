@@ -9,20 +9,30 @@ Configuration reference
     sylius_product:
         driver: ~ # The driver used for persistence layer.
         engine: twig # Templating engine to use by default.
-        classes:
+        resources:
             product:
-                model: Sylius\Component\Product\Model\Product
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\AssortmentBundle\Form\Type\ProductType
-            product_prototype:
-                model: Sylius\Component\Product\Model\Prototype
-                controller: Sylius\Bundle\ProductBundle\Controller\PrototypeController
-                repository: ~
-                form: Sylius\Bundle\AssortmentBundle\Form\Type\PrototypeType
-        validation_groups:
-            product: [sylius] # Product validation groups.
-            product_prototype: [sylius] # Product prototype validation groups.
+                classes:
+                    model:      Sylius\Component\Product\Model\Product
+                    interface:  Sylius\Component\Product\Model\ProductInterface
+                    controller: Sylius\Bundle\ProductBundle\Controller\ProductController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\ProductBundle\Form\Type\ProductType
+                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                validation_groups:
+                    default: [ sylius ]
+                translation:
+                    classes:
+                        model:      Sylius\Component\Product\Model\ProductTranslation
+                        interface:  Sylius\Component\Product\Model\ProductTranslationInterface
+                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        repository: ~
+                        factory:    Sylius\Component\Resource\Factory\Factory
+                        form:
+                            default: Sylius\Bundle\ProductBundle\Form\Type\Product\TranslationType
+                    validation_groups:
+                        default: [ sylius ]
 Tests
 -----
 

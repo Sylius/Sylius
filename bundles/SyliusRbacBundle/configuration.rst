@@ -31,19 +31,28 @@ Configuration reference
           permissions_hierarchy:
                 app.manage_cash: [app.view_cash, app.add_cash, app.remove_cash]
 
-          classes:
+          resources:
               role:
-                  model:      Sylius\Component\Rbac\Model\Role # The role model class implementing `RoleInterface`.
-                  repository: ~ # Is set automatically if empty.
-                  controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                  form:
-                        default: Sylius\Bundle\RbacBundle\Form\Type\RoleType
+                  classes:
+                      model:      Sylius\Component\Rbac\Model\Role
+                      interface:  Sylius\Component\Rbac\Model\RoleInterface
+                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      repository: ~
+                      factory:    Sylius\Component\Resource\Factory\Factory
+                      form:
+                            default: Sylius\Bundle\RbacBundle\Form\Type\RoleType
+                            choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                  validation_groups:
+                    default: [ sylius ]
               permission:
-                  model:      Sylius\Component\Rbac\Model\Permission # The permission model class implementing `PermissionInterface`.
-                  repository: ~ # Is set automatically if empty.
-                  controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                  form:
-                        default: Sylius\Bundle\RbacBundle\Form\Type\PermissionType
-          validation_groups:
-                  role: [sylius]
-                  permission: [sylius]
+                  classes:
+                      model:      Sylius\Component\Rbac\Model\Permission
+                      interface:  Sylius\Component\Rbac\Model\PermissionInterface
+                      repository: ~
+                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      factory:    Sylius\Component\Resource\Factory\Factory
+                      form:
+                            default: Sylius\Bundle\RbacBundle\Form\Type\PermissionType
+                            choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                  validation_groups:
+                    default: [ sylius ]

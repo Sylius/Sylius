@@ -20,20 +20,24 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
                 driver: doctrine/orm
                 object_manager: default
                 templates: App:User
-                classes:
-                    model: MyApp\Entity\EntityName
-                    interface: MyApp\Entity\EntityNameInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                resources:
+                    entity_name:
+                        classes:
+                            model: MyApp\Entity\EntityName
+                            interface: MyApp\Entity\EntityNameInterface
+                            controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
             my_app.document_name:
                 driver: doctrine/mongodb-odm
                 object_manager: default
                 templates: App:User
-                classes:
-                    model: MyApp\Document\DocumentName
-                    interface: MyApp\Document\DocumentNameInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
+                resources:
+                    document:
+                        classes:
+                            model: MyApp\Document\DocumentName
+                            interface: MyApp\Document\DocumentNameInterface
+                            controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
 
 At this step, we can see what happen in the container:
 
@@ -93,17 +97,6 @@ You need to expose a semantic configuration for your bundle. The following examp
                     // Object manager used by the resource bundle, if not specified "default" will used
                     ->scalarNode('object_manager')->defaultValue('default')->end()
 
-                    // Validation groups used by the form component
-                    ->arrayNode('validation_groups')
-                        ->addDefaultsIfNotSet()
-                        ->children()
-                            ->arrayNode('MyEntity')
-                                ->prototype('scalar')->end()
-                                ->defaultValue(array('your_group'))
-                            ->end()
-                        ->end()
-                    ->end()
-
                     // Configure the template namespace used by each resource
                     ->arrayNode('templates')
                     ->addDefaultsIfNotSet()
@@ -115,30 +108,66 @@ You need to expose a semantic configuration for your bundle. The following examp
 
 
                     // The resources
-                    ->arrayNode('classes')
+                    ->arrayNode('resources')
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->arrayNode('my_entity')
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyEntity')->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->end()
-                                    ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                                    ->arrayNode('classes')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyEntity')->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->defaultValue('MyApp\MyCustomBundle\Model\MyEntityInterface')->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                             ->arrayNode('form')
+                                                ->addDefaultsIfNotSet()
+                                                ->children()
+                                                    ->scalarNode('default')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyFormType')->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array('your_group'))
+                                            ->end()
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                             ->arrayNode('my_other_entity')
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntity')->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
-                                    // you can use an array, useful when you want to register the choice form type.
-                                    ->arrayNode('form')
+                                    ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('default')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
-                                            ->scalarNode('choice')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyChoiceformType')->end()
+                                            ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntity')->end()
+                                            ->scalarNode('interface')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntityInterface')->end()
+                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->arrayNode('form')
+                                                ->addDefaultsIfNotSet()
+                                                ->children()
+                                                    ->scalarNode('default')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyFormType')->end()
+                                                    ->scalarNode('choice')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyChoiceFormType')->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array('your_group'))
+                                            ->end()
                                         ->end()
                                     ->end()
                                 ->end()
@@ -152,7 +181,7 @@ You need to expose a semantic configuration for your bundle. The following examp
         }
     }
 
-The resource bundle provide you ``AbstractResourceExtension``, your bundle extension have to extends it.
+The resource bundle provides you ``AbstractResourceExtension``, your bundle extension has to extend it.
 
 .. code-block:: php
 
@@ -230,12 +259,13 @@ You can overwrite the configuration of your bundle like that :
             my_entity: [myCustomGroup]
         templates:
             my_entity: AppBundle:Backend/MyEntity
-        classes:
+        resources:
             my_entity:
-                model: MyApp\MyOtherCustomBundle\Model
-                controller: MyApp\MyOtherCustomBundle\Entity\ModelController
-                repository: MyApp\MyOtherCustomBundle\Repository\ModelRepository
-                form: MyApp\MyOtherCustomBundle\Form\Type\FormType
+                classes:
+                    model: MyApp\MyOtherCustomBundle\Model
+                    controller: MyApp\MyOtherCustomBundle\Entity\ModelController
+                    repository: MyApp\MyOtherCustomBundle\Repository\ModelRepository
+                    form: MyApp\MyOtherCustomBundle\Form\Type\FormType
 
 .. note::
 

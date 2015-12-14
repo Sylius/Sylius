@@ -9,3 +9,4 @@ There are two main models inside the bundle, `ContactRequest` and `ContactTopic`
    :numbered:
 
    models
+   configuration

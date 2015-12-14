@@ -11,22 +11,26 @@ Configuration reference
         driver: ~
         # Enable/disable backorders.
         backorders: true
-        # Array of events for InventoryChangeListener
-        events: ~
         # Enable or disbale tracking inventory
         track_inventory: true
         # The availability checker service id.
         checker: sylius.availability_checker.default
         # The inventory operator service id.
         operator: sylius.inventory_operator.default
-        classes:
+        # Array of events for InventoryChangeListener
+        events: ~
+        resources:
             inventory_unit:
-                model: Sylius\Component\Inventory\Model\InventoryUnit
-                controller: Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController
-                repository: ~ # You can override the repository class here.
+                classes:
+                    model:      Sylius\Component\Inventory\Model\InventoryUnit
+                    interface:  Sylius\Component\Inventory\Model\InventoryUnitInterface
+                    controller: Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController
+                    repository: ~ # You can override the repository class here.
+                    factory:    Sylius\Component\Resource\Factory\Factory
             stockable:
-                model: ~ # The stockable model class.
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                classes:
+                    model: ~ # The stockable model class.
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------
