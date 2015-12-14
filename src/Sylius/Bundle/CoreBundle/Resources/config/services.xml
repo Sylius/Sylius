@@ -244,7 +244,13 @@
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
+            <!--
+                Ensure we have the right amount of InventoryUnits for OrderItems.
+                These events need refactoring so that the units are added or removed earlier than flush
+            -->
             <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="processInventoryUnits" piority="-100"/>
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
         </service>
@@ -255,9 +261,9 @@
         </service>
         <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
             <argument type="service" id="sylius.price_calculator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" priority="0" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" priority="0" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" priority="0" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
@@ -267,9 +273,12 @@
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="removeTaxes" priority="100" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="removeTaxes" priority="100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="removeTaxes" priority="100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" priority="-100" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />
@@ -296,9 +305,12 @@
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="revertOrderPromotion" priority="50" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-50" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="revertOrderPromotion" priority="50" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" priority="-50" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="revertOrderPromotion" priority="50" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" priority="-50" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />

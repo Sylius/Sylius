@@ -27,4 +27,11 @@ interface TaxationProcessorInterface
      * @param OrderInterface $order
      */
     public function applyTaxes(OrderInterface $order);
+
+    /**
+     * Remove all taxes from an order
+     *
+     * @param OrderInterface $order
+     */
+    public function removeTaxes(OrderInterface $order);
 }

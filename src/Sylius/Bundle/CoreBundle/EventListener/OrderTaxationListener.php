@@ -41,6 +41,18 @@ class OrderTaxationListener
     }
 
     /**
+     * @param GenericEvent $event
+     */
+    public function removeTaxes(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        $this->isCoreOrderOrException($order);
+
+        $this->taxationProcessor->removeTaxes($order);
+    }
+
+    /**
      * Get the order from event and run the taxation processor on it.
      *
      * @param GenericEvent $event
@@ -51,15 +63,21 @@ class OrderTaxationListener
     {
         $order = $event->getSubject();
 
+        $this->isCoreOrderOrException($order);
+
+        $this->taxationProcessor->applyTaxes($order);
+    }
+
+    /**
+     * @param $order
+     */
+    private function isCoreOrderOrException($order)
+    {
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
                 'Sylius\Component\Core\Model\OrderInterface'
             );
         }
-
-        $this->taxationProcessor->applyTaxes($order);
-
-        $order->calculateTotal();
     }
 }

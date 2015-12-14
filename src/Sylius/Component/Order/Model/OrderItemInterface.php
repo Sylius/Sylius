@@ -53,9 +53,11 @@ interface OrderItemInterface extends OrderAwareInterface, ResourceInterface
     public function getSubtotal();
 
     /**
+     * @param string|null $type
+     *
      * @return int
      */
-    public function getAdjustmentsTotal();
+    public function getAdjustmentsTotal($type = null);
 
     /**
      * Calculate items total based on quantity and unit price.

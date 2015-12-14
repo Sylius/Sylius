@@ -62,6 +62,22 @@ class OrderPromotionListener
     }
 
     /**
+     * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
+     */
+    public function revertOrderPromotion(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        $this->isCoreOrderOrException($order);
+
+        $this->promotionProcessor->revert($order);
+
+        $order->calculateTotal();
+    }
+
+    /**
      * Get the order from event and run the promotion processor on it.
      *
      * @param GenericEvent $event
@@ -72,12 +88,7 @@ class OrderPromotionListener
     {
         $order = $event->getSubject();
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
-        }
+        $this->isCoreOrderOrException($order);
 
         $this->promotionProcessor->process($order);
 
@@ -104,5 +115,18 @@ class OrderPromotionListener
         }
 
         $this->session->getBag('flashes')->add($type, $this->translator->trans($message, array(), 'flashes'));
+    }
+
+    /**
+     * @param OrderInterface $order
+     */
+    private function isCoreOrderOrException($order)
+    {
+        if (!$order instanceof OrderInterface) {
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
+            );
+        }
     }
 }

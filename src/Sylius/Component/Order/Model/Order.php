@@ -394,6 +394,24 @@ class Order implements OrderInterface
     }
 
     /**
+     * @param null $type
+     *
+     * @return array
+     */
+    public function getUniqueAdjustmentDescriptions($type = null)
+    {
+        $descriptions = [];
+
+        foreach ($this->getAllAdjustments($type) as $adjustment) {
+            if (!in_array($adjustment->getDescription(), $descriptions)) {
+                $descriptions[] = $adjustment->getDescription();
+            }
+        }
+
+        return $descriptions;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getComments()

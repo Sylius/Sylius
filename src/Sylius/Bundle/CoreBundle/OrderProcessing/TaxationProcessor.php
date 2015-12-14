@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -79,15 +80,20 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order)
+    public function removeTaxes(OrderInterface $order)
     {
-        // Taxes are applied to InventoryUnits, not order.
-
-        // Remove all tax adjustments, we recalculate everything from scratch.
         foreach ($order->getInventoryUnits() as $inventoryUnit) {
             $inventoryUnit->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
 
+        $order->calculateTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyTaxes(OrderInterface $order)
+    {
         $zone = null;
 
         if (null !== $order->getShippingAddress()) {
@@ -111,6 +117,12 @@ class TaxationProcessor implements TaxationProcessorInterface
         $order->calculateTotal();
     }
 
+    /**
+     * @param OrderInterface $order
+     * @param ZoneInterface|string $zone
+     *
+     * @return array
+     */
     protected function processTaxes(OrderInterface $order, $zone)
     {
         $taxes = array();

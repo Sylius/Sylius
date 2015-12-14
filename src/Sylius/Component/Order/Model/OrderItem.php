@@ -138,8 +138,9 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotal()
+    public function getAdjustmentsTotal($type = null)
     {
+        // Only Core version allows getting by type
         return $this->adjustmentsTotal;
     }
 

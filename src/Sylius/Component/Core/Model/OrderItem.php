@@ -88,35 +88,54 @@ class OrderItem extends CartItem implements OrderItemInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAdjustmentsTotal($type = null, $includeNeutral = false)
+    {
+        if (null === $type && !$includeNeutral) {
+            // By default the order will have calculated the 'standard' adjustments total so we just return it.
+            return $this->adjustmentsTotal;
+        }
+
+        // Any non-standard requests for totals need to be calculated
+        return $this->calculateAdjustmentsTotal($type, $includeNeutral);
+    }
+
+    /**
+     * @param string|null $type
+     *
+     * @return Adjustment[]
+     */
+    public function getAdjustments($type = null)
+    {
+        $adjustments = [];
+
+        foreach ($this->getInventoryUnits() as $inventoryUnit) {
+            $adjustments = array_merge($adjustments, $inventoryUnit->getAdjustments($type)->toArray());
+        }
+
+        return $adjustments;
+    }
+
+    /**
+     * @param null $type
+     * @param bool $includeNeutral
+     *
      * @return int
      */
-    public function calculateAdjustmentsTotal()
+    public function calculateAdjustmentsTotal($type = null, $includeNeutral = false)
     {
         $adjustmentsTotal = 0;
 
         foreach ($this->getInventoryUnits() as $inventoryUnit) {
-            foreach ($inventoryUnit->getAdjustments() as $inventoryUnitAdjustment) {
-                if (!$inventoryUnitAdjustment->isNeutral()) {
+            foreach ($inventoryUnit->getAdjustments($type) as $inventoryUnitAdjustment) {
+                if ($includeNeutral || !$inventoryUnitAdjustment->isNeutral()) {
                     $adjustmentsTotal += $inventoryUnitAdjustment->getAmount();
                 }
             }
         }
 
         return $adjustmentsTotal;
-    }
-
-    /**
-     * @return Adjustment[]
-     */
-    public function getAdjustments()
-    {
-        $adjustments = [];
-
-        foreach ($this->getInventoryUnits() as $inventoryUnit) {
-            $adjustments = array_merge($adjustments, $inventoryUnit->getAdjustments()->toArray());
-        }
-
-        return $adjustments;
     }
 
     /**

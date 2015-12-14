@@ -35,6 +35,14 @@ interface OrderItemInterface extends CartItemInterface
     public function setVariant(ProductVariantInterface $variant);
 
     /**
+     * @param null $type
+     * @param bool $includeNeutral
+     *
+     * @return int
+     */
+    public function calculateAdjustmentsTotal($type = null, $includeNeutral = false);
+
+    /**
      * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnits();
