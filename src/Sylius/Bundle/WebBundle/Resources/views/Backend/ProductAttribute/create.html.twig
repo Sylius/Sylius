@@ -25,7 +25,7 @@
 </div>
 
 {{ form_errors(form) }}
-<form action="{{ path('sylius_backend_product_attribute_create', { 'type': app.request.query.get('type') }) }}" method="post" class="form-horizontal" novalidate>
+<form action="{{ path('sylius_backend_product_attribute_create', { 'type': app.request.attributes.get('type') }) }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusWebBundle:Backend/ProductAttribute:_form.html.twig' %}
     {{ create() }}
 </form>

@@ -12,19 +12,19 @@
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\AttributeBundle\Controller\AttributeController;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Bundle\AttributeBundle\Factory\AttributeFactory;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslation;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -81,7 +81,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('interface')->defaultValue(AttributeInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(AttributeController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
+                                            ->scalarNode('factory')->defaultValue(AttributeFactory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()

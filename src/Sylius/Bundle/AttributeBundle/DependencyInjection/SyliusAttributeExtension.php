@@ -54,6 +54,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                 }
             }
 
+            if (isset($parameters['factory'])) {
+                $factoryDefinition = $container->getDefinition('sylius.factory.'.$parameters['subject'].'_attribute');
+                $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
+            }
+
             if (strpos($name, 'value')) {
                 $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$parameters['subject'].'_attribute'));
             }

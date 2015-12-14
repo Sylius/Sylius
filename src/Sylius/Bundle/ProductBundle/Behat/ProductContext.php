@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
@@ -342,5 +343,13 @@ class ProductContext extends DefaultContext
         $item = $this->assertSession()->elementExists('css', sprintf('.collection-item:contains("%s")', $attribute));
 
         $item->clickLink('Delete');
+    }
+
+    /**
+     * @Then /^I should be on the product attribute creation page for "([^"]*)" type$/
+     */
+    public function iShouldBeOnTheProductAttributeCreationPageForType($type)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', array('type' => $type)));
     }
 }

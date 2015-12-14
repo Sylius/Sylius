@@ -23,21 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 class AttributeController extends ResourceController
 {
     /**
-     * @return AttributeInterface
-     */
-    public function createNew()
-    {
-        $attribute = parent::createNew();
-
-        $type = $this->getNewAttributeType();
-        $attribute->setType($type);
-        $attributeType = $this->get('sylius.registry.attribute_type')->get($type);
-        $attribute->setStorageType($attributeType->getStorageType());
-
-        return $attribute;
-    }
-
-    /**
      * @return Response
      */
     public function renderAttributeTypesAction()
@@ -86,17 +71,5 @@ class AttributeController extends ResourceController
         }
 
         return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
-    }
-
-    /**
-     * @return string
-     */
-    private function getNewAttributeType()
-    {
-        if ($this->getRequest()->query->has('type')) {
-            return $this->getRequest()->query->get('type');
-        }
-
-        return TextAttributeType::TYPE;
     }
 }

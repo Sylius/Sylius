@@ -11,13 +11,17 @@ sylius_backend_product_attribute_index:
             sortable: true
 
 sylius_backend_product_attribute_create:
-    path: /new
+    path: /new/{type}
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_attribute:createAction
+        type: text
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:create.html.twig
             redirect: sylius_backend_product_attribute_index
+            factory:
+                method: createTyped
+                arguments: [$type]
 
 sylius_backend_product_attribute_update:
     path: /{id}/edit
