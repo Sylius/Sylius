@@ -63,7 +63,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $event->getData()->willReturn($productAttribute);
         $event->getForm()->willReturn($form);
 
-        $formFactory->createNamed('value', 'checkbox', null, array('label' => 'My name', 'auto_initialize' => false))->willReturn($valueField)->shouldBeCalled();
+        $formFactory->createNamed('value', 'checkbox', null, array('label' => 'My name', 'auto_initialize' => false, 'property_path' => 'realValue'))->willReturn($valueField)->shouldBeCalled();
 
         $form->add($valueField)->shouldBeCalled()->willReturn($form);
 
@@ -95,7 +95,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
                 'value',
                 'choice',
                 null,
-                array('label' => 'My name', 'auto_initialize' => false, 'choices' => array('red' => 'Red', 'blue' => 'Blue'))
+                array('label' => 'My name', 'auto_initialize' => false, 'property_path' => 'realValue', 'choices' => array('red' => 'Red', 'blue' => 'Blue'))
             )
             ->willReturn($valueField)
             ->shouldBeCalled()
