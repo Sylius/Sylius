@@ -237,6 +237,8 @@ class OrderItem implements OrderItemInterface
      */
     public function getTotal()
     {
+        $this->calculateTotal();
+
         return $this->total;
     }
 
@@ -245,6 +247,8 @@ class OrderItem implements OrderItemInterface
      */
     public function setTotal($total)
     {
+        throw new \RuntimeException('this method should not exists');
+
         if (!is_int($total)) {
             throw new \InvalidArgumentException('Total must be an integer.');
         }
