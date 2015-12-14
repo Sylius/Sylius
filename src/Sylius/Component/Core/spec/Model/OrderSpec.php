@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
@@ -110,7 +109,8 @@ class OrderSpec extends ObjectBehavior
     function it_should_return_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    ) {
+    )
+    {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -130,7 +130,8 @@ class OrderSpec extends ObjectBehavior
     function it_should_remove_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    ) {
+    )
+    {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -153,7 +154,8 @@ class OrderSpec extends ObjectBehavior
     function it_should_return_tax_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    ) {
+    )
+    {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -173,7 +175,8 @@ class OrderSpec extends ObjectBehavior
     function it_should_remove_tax_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    ) {
+    )
+    {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -230,7 +233,8 @@ class OrderSpec extends ObjectBehavior
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
         OrderItemInterface $item
-    ) {
+    )
+    {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
@@ -246,7 +250,8 @@ class OrderSpec extends ObjectBehavior
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
         OrderItemInterface $item
-    ) {
+    )
+    {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
@@ -256,97 +261,5 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->shouldNotBeBackorder();
-    }
-
-    function it_has_total_value_with_adjustments_on_inventory_unit_level(
-        InventoryUnitInterface $inventoryUnit,
-        OrderItemInterface $orderItem,
-        AdjustmentInterface $adjustment,
-        AdjustmentInterface $neutralAdjustment
-    ) {
-        $orderItem->getQuantity()->willReturn(1);
-        $orderItem->getUnitPrice()->willReturn(100);
-
-        $inventoryUnits = new ArrayCollection();
-        $inventoryUnits->add($inventoryUnit->getWrappedObject());
-
-        $inventoryUnit->getAdjustments()->willReturn(
-            new ArrayCollection([
-                $adjustment->getWrappedObject(),
-                $neutralAdjustment->getWrappedObject(),
-            ])
-        );
-
-        $adjustment->getAmount()->willReturn(29);
-        $adjustment->isNeutral()->willReturn(false);
-
-        $neutralAdjustment->getAmount()->willReturn(28);
-        $neutralAdjustment->isNeutral()->willReturn(true);
-
-        $orderItem->setOrder($this)->shouldBeCalled();
-        $orderItem->getInventoryUnits()->willReturn($inventoryUnits);
-
-        $this->addItem($orderItem);
-
-        $this->getTotal()->shouldReturn(129);
-    }
-
-    function it_has_never_negative_total_value(
-        InventoryUnitInterface $inventoryUnit,
-        OrderItemInterface $orderItem,
-        AdjustmentInterface $adjustment
-    )
-    {
-        $orderItem->getQuantity()->willReturn(1);
-        $orderItem->getUnitPrice()->willReturn(100);
-
-        $inventoryUnits = new ArrayCollection();
-        $inventoryUnits->add($inventoryUnit->getWrappedObject());
-
-        $inventoryUnit->getAdjustments()->willReturn(
-            new ArrayCollection([
-                $adjustment->getWrappedObject()
-            ])
-        );
-
-        $adjustment->getAmount()->willReturn(-500);
-        $adjustment->isNeutral()->willReturn(false);
-
-        $orderItem->setOrder($this)->shouldBeCalled();
-        $orderItem->getInventoryUnits()->willReturn($inventoryUnits);
-
-        $this->addItem($orderItem);
-
-        $this->getTotal()->shouldReturn(0);
-    }
-
-    function it_allows_to_get_value_without_adjustments_from_inventory_units(
-        InventoryUnitInterface $inventoryUnit,
-        OrderItemInterface $orderItem,
-        AdjustmentInterface $adjustment
-    )
-    {
-        $orderItem->getQuantity()->willReturn(1);
-        $orderItem->getUnitPrice()->willReturn(100);
-
-        $inventoryUnits = new ArrayCollection();
-        $inventoryUnits->add($inventoryUnit->getWrappedObject());
-
-        $inventoryUnit->getAdjustments()->willReturn(
-            new ArrayCollection([
-                $adjustment->getWrappedObject()
-            ])
-        );
-
-        $adjustment->getAmount()->willReturn(-500);
-        $adjustment->isNeutral()->willReturn(false);
-
-        $orderItem->setOrder($this)->shouldBeCalled();
-        $orderItem->getInventoryUnits()->willReturn($inventoryUnits);
-
-        $this->addItem($orderItem);
-
-        $this->getTotal()->shouldReturn(0);
-        $this->getUnadjustedTotal()->shouldReturn(100);
     }
 }

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 

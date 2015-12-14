@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
@@ -42,19 +41,25 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, InventoryUnitInterface $inventoryUnit)
+    function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
 
-        $this->setAdjustable($inventoryUnit);
-        $this->getAdjustable()->shouldReturn($inventoryUnit);
+        $this->setAdjustable($orderItem);
+        $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order)
+    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
+
+        $this->setAdjustable(null);
+        $this->getAdjustable()->shouldReturn(null);
+
+        $this->setAdjustable($orderItem);
+        $this->getAdjustable()->shouldReturn($orderItem);
 
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);

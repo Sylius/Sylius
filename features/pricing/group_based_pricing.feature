@@ -56,8 +56,8 @@ Feature: Group based pricing
         Given I log in with "beth@example.com" and "foo1"
          When I add product "PHP Top" to cart, with quantity "4"
          Then I should be on the cart summary page
-          And "Tax total: €23.68" should appear on the page
-          And "Grand total: €181.64" should appear on the page
+          And "Tax total: €23.69" should appear on the page
+          And "Grand total: €181.65" should appear on the page
 
     Scenario: Retail customers get the higher price than wholesalers
         Given I log in with "martha@example.com" and "bar1"
@@ -74,5 +74,5 @@ Feature: Group based pricing
             | Password | foo1             |
           And I press "Login"
          When I go to the cart summary page
-         Then "Tax total: €23.68" should appear on the page
-          And "Grand total: €181.64" should appear on the page
+         Then "Tax total: €23.69" should appear on the page
+          And "Grand total: €181.65" should appear on the page

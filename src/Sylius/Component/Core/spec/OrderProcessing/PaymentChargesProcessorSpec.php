@@ -12,13 +12,12 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Event\AdjustmentEvent;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @mixin \Sylius\Component\Core\OrderProcessing\PaymentChargesProcessor
@@ -28,9 +27,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class PaymentChargesProcessorSpec extends ObjectBehavior
 {
-    function let(EventDispatcherInterface $eventDispatcher, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
+    function let(FactoryInterface $adjustmentFactory, DelegatingFeeCalculatorInterface $delegatingFeeCalculator)
     {
-        $this->beConstructedWith($eventDispatcher, $delegatingFeeCalculator);
+        $this->beConstructedWith($adjustmentFactory, $delegatingFeeCalculator);
     }
 
     function it_is_initializable()
@@ -44,8 +43,9 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
     }
 
     function it_applies_payment_charges(
+        $adjustmentFactory,
         $delegatingFeeCalculator,
-        EventDispatcherInterface $eventDispatcher,
+        AdjustmentInterface $adjustment,
         OrderInterface $order,
         PaymentSubjectInterface $payment,
         PaymentMethodInterface $paymentMethod
@@ -61,10 +61,12 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
 
         $delegatingFeeCalculator->calculate($payment)->willReturn(50);
 
-        $eventDispatcher->dispatch(
-            AdjustmentEvent::ADJUSTMENT_ADDING_ORDER,
-            Argument::type(AdjustmentEvent::class)
-        );
+        $adjustmentFactory->createNew()->willReturn($adjustment)->shouldBeCalled();
+        $adjustment->setType('payment')->shouldBeCalled();
+        $adjustment->setAmount(50)->shouldBeCalled();
+        $adjustment->setDescription('testPaymentMethod')->shouldBeCalled();
+
+        $order->addAdjustment($adjustment)->shouldBeCalled();
 
         $this->applyPaymentCharges($order);
     }
