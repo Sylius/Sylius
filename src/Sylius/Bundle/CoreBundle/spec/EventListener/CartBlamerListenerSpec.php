@@ -41,7 +41,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         $cartProvider->getCart()->willReturn($cart);
 
         $cartManager->persist($cart)->shouldNotBeCalled();
-        $cartManager->flush($cart)->shouldNotBeCalled();
+        $cartManager->flush()->shouldNotBeCalled();
 
         $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->during('blame', array($userEvent));
     }
@@ -55,7 +55,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer($customer)->shouldBeCalled();
         $cartManager->persist($cart)->shouldBeCalled();
-        $cartManager->flush($cart)->shouldBeCalled();
+        $cartManager->flush()->shouldBeCalled();
 
         $this->blame($userEvent);
     }
