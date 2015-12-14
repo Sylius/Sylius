@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventListener;
 
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -30,17 +31,24 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
     private $customerRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    private $customerFactory;
+
+    /**
      * @var CustomerContextInterface
      */
     private $customerContext;
 
     /**
      * @param RepositoryInterface      $customerRepository
+     * @param FactoryInterface         $customerFactory
      * @param CustomerContextInterface $customerContext
      */
-    public function __construct(RepositoryInterface $customerRepository, CustomerContextInterface $customerContext)
+    public function __construct(RepositoryInterface $customerRepository, FactoryInterface $customerFactory, CustomerContextInterface $customerContext)
     {
         $this->customerRepository = $customerRepository;
+        $this->customerFactory = $customerFactory;
         $this->customerContext = $customerContext;
     }
 
@@ -103,7 +111,7 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
         }
 
         if (null === $customer) {
-            $customer = $this->customerRepository->createNew();
+            $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);
         }
 

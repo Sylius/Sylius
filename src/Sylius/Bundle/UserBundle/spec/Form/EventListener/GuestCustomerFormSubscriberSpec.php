@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -24,9 +25,9 @@ use Symfony\Component\Form\FormInterface;
  */
 class GuestCustomerFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $customerRepository, CustomerContextInterface $customerContext)
+    function let(RepositoryInterface $customerRepository, FactoryInterface $customerFactory, CustomerContextInterface $customerContext)
     {
-        $this->beConstructedWith($customerRepository, $customerContext);
+        $this->beConstructedWith($customerRepository, $customerFactory, $customerContext);
     }
 
     function it_is_initializable()
@@ -58,6 +59,7 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
 
     function it_sets_new_customer_with_passed_email_as_form_data_if_customer_with_such_email_does_not_exist(
         $customerContext,
+        $customerFactory,
         $customerRepository,
         CustomerInterface $customer,
         FormEvent $event,
@@ -69,7 +71,7 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         $customerContext->getCustomer()->willReturn(null)->shouldBeCalled();
         $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn(null)->shouldBeCalled();
 
-        $customerRepository->createNew()->willReturn($customer)->shouldBeCalled();
+        $customerFactory->createNew()->willReturn($customer)->shouldBeCalled();
         $customer->setEmail('john.doe@example.com')->shouldBeCalled();
 
         $form->setData($customer)->shouldBeCalled();
