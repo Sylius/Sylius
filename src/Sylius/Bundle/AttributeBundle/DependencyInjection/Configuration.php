@@ -54,7 +54,7 @@ class Configuration implements ConfigurationInterface
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    protected function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -86,7 +86,7 @@ class Configuration implements ConfigurationInterface
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    protected function addClassesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
