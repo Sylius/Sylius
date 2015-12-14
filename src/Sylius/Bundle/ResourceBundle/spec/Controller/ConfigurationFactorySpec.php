@@ -12,18 +12,15 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 class ConfigurationFactorySpec extends ObjectBehavior
 {
-    function let(ParametersParser $parametersParser)
+    function let()
     {
         $this->beConstructedWith(
-            $parametersParser,
             '\Sylius\Bundle\ResourceBundle\Controller\Configuration',
             array('paginate' => 10)
         );
@@ -34,10 +31,9 @@ class ConfigurationFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory');
     }
 
-    function it_should_create_configuration(ParametersParser $parametersParser)
+    function it_should_create_configuration()
     {
         $this->createConfiguration(
-            $parametersParser,
             'sylius',
             'product',
             'SyliusWebBundle:Product',

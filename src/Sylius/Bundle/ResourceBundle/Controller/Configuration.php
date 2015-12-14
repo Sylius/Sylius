@@ -24,11 +24,6 @@ use Symfony\Component\HttpFoundation\Request;
 class Configuration
 {
     /**
-     * @var ParametersParser
-     */
-    protected $parser;
-
-    /**
      * @var string
      */
     protected $bundlePrefix;
@@ -66,7 +61,6 @@ class Configuration
     protected $request;
 
     public function __construct(
-        ParametersParser $parser,
         $bundlePrefix,
         $resourceName,
         $templateNamespace,
@@ -78,7 +72,6 @@ class Configuration
         $this->templateNamespace = $templateNamespace;
         $this->templatingEngine = $templatingEngine;
         $this->settings = $settings;
-        $this->parser = $parser;
         $this->parameters = new Parameters();
     }
 
@@ -201,7 +194,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return null;
+            return;
         }
 
         return '#'.$redirect['hash'];
@@ -234,7 +227,7 @@ class Configuration
      *
      * @return array
      */
-    public function getRedirectParameters($resource = null)
+    public function getRedirectParameters()
     {
         $redirect = $this->parameters->get('redirect');
 
@@ -243,10 +236,6 @@ class Configuration
         }
 
         $parameters = $redirect['parameters'];
-
-        if (null !== $resource) {
-            $parameters = $this->parser->process($parameters, $resource);
-        }
 
         return $parameters;
     }
@@ -305,7 +294,7 @@ class Configuration
             $sorting = $this->getRequestParameter('sorting');
             foreach ($defaultSorting as $key => $value) {
                 //do not override request parameters by $defaultSorting values
-                if (!isset($sorting[$key])){
+                if (!isset($sorting[$key])) {
                     $sorting[$key] = $value;
                 }
             }

@@ -17,10 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ConfigurationSpec extends ObjectBehavior
 {
-    function let(Request $request, Parameters $parameters, ParametersParser $parser)
+    function let(Request $request, Parameters $parameters)
     {
         $this->beConstructedWith(
-            $parser,
             'sylius',
             'product',
             'SyliusWebBundle:Product',
@@ -187,7 +186,6 @@ class ConfigurationSpec extends ObjectBehavior
 
         $params = array('myParameter');
         $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
-        $parser->process($params, 'resource')->willReturn($params);
         $this->getRedirectParameters('resource')->shouldReturn($params);
     }
 

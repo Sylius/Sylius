@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Redirects helper.
@@ -49,7 +50,7 @@ class RedirectHandler
 
         return $this->redirectToRoute(
             $this->config->getRedirectRoute('show'),
-            $parameters
+            $this->resolveResourceParameters($parameters, $resource)
         );
     }
 
@@ -77,8 +78,8 @@ class RedirectHandler
     }
 
     /**
-     * @param string  $url
-     * @param integer $status
+     * @param string $url
+     * @param int    $status
      *
      * @return RedirectResponse
      */
@@ -99,5 +100,32 @@ class RedirectHandler
     public function redirectToReferer()
     {
         return $this->redirect($this->config->getRedirectReferer());
+    }
+
+    /**
+     * @param array  $parameters
+     * @param object $resource
+     *
+     * @return array
+     */
+    private function resolveResourceParameters(array $parameters, $resource)
+    {
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        if (empty($parameters)) {
+            return array('id' => $accessor->getValue($resource, 'id'));
+        }
+
+        foreach ($parameters as $key => $value) {
+            if (is_array($value)) {
+                $parameters[$key] = $this->resolveResourceParameters($value, $resource);
+            }
+
+            if (is_string($value) && 0 === strpos($value, 'resource.')) {
+                $parameters[$key] = $accessor->getValue($resource, substr($value, 9));
+            }
+        }
+
+        return $parameters;
     }
 }
