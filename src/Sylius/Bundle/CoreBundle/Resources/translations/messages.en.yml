@@ -10,6 +10,26 @@ sylius:
                 variant: Variant
             customer_group:
                 Customer group
+            shipping_discount_configuration:
+                percentage: Percentage
+        rule:
+            taxonomy_configuration:
+                taxons: Taxons
+            contains_product_configuration:
+                variants: Products
+            nth_order_configuration:
+                nth: Nth
+            customer_loyalty_configuration:
+                time: Time
+                unit:
+                    days: Days
+                    weeks: Weeks
+                    months: Months
+                    years: Years
+                    header: Unit
+                after: User created after this period
+            shipping_country_configuration:
+                country: Country
         block:
             body: Body
             id: ID

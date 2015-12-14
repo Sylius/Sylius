@@ -18,8 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Item total rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemTotalConfigurationType extends AbstractType
@@ -44,11 +42,13 @@ class ItemTotalConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                 ),
             ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
+            ->add('equal', 'choice', array(
+                'label' => 'sylius.form.rule.equal',
+                'choices' => [
+                    'equal' => 'sylius.form.rule.equality.equal_or_more',
+                    'more_than' => 'sylius.form.rule.equality.more_than',
+                    'exactly' => 'sylius.form.rule.equality.exactly',
+                ],
             ))
         ;
     }

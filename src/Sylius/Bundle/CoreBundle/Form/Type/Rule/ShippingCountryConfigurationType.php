@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipping country rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingCountryConfigurationType extends AbstractType
