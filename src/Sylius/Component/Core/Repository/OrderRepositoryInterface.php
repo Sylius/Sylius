@@ -69,4 +69,17 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return array
      */
     public function ordersBetweenDatesGroupByDate(array $configuration = array());
+
+    /**
+     * Gets number of orders for a customer
+     * before or after given date
+     *
+     * @param CustomerInterface $customer
+     * @param string            $state
+     * @param \DateTime         $date
+     * @param bool              $isAfter
+     *
+     * @return array
+     */
+    public function countByCustomerPaymentStateFromDate(CustomerInterface $customer, $state, \DateTime $date, $isAfter);
 }

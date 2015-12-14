@@ -28,7 +28,20 @@ sylius:
         nth: Nième
       shipping_country_configuration:
         country: Pays
-      type: Type
+      order_loyalty_configuration:
+        after: commande passé avant ou après période ?
+        unit:
+          days: Jours
+          weeks: Semaines
+          months: Mois
+          years: Années
+          header: unité
+          0: Unité
+        order_nth: Nombre minimum de commande
+        nth: valeur
+        up: superieur ou égal
+        down: inférieur ou égal
+        equal: superieur ou inferieur ?
     coupon:
       code: Code
       usage_limit: "Limite d'utilisation"
