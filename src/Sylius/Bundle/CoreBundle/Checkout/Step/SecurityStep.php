@@ -188,7 +188,7 @@ class SecurityStep extends CheckoutStep
     protected function saveResource($resource)
     {
         $this->getManager()->persist($resource);
-        $this->getManager()->flush($resource);
+        $this->getManager()->flush();
     }
 
     /**
