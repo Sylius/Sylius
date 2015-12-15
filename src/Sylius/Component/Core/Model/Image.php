@@ -144,7 +144,6 @@ class Image implements ImageInterface
     public function setTitle($title)
     {
         $this->title = $title;
-        return $this;
     }
 
     /**
@@ -161,7 +160,6 @@ class Image implements ImageInterface
     public function setDescription($description)
     {
         $this->description = $description;
-        return $this;
     }
 
     /**
