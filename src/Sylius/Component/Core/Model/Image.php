@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 class Image implements ImageInterface
 {
+
     /**
      * @var integer
      */
@@ -29,16 +30,31 @@ class Image implements ImageInterface
     protected $path;
 
     /**
+<<<<<<< HEAD
+=======
+     * Image title
+     *
+>>>>>>> Adding optional title and description to images
      * @var string
      */
     protected $title;
 
     /**
+<<<<<<< HEAD
+=======
+     * Image description
+     *
+>>>>>>> Adding optional title and description to images
      * @var string
      */
     protected $description;
 
     /**
+<<<<<<< HEAD
+=======
+     * Creation date
+     *
+>>>>>>> Adding optional title and description to images
      * @var \DateTime
      */
     protected $createdAt;
@@ -127,6 +143,10 @@ class Image implements ImageInterface
     public function setTitle($title)
     {
         $this->title = $title;
+<<<<<<< HEAD
+=======
+        return $this;
+>>>>>>> Adding optional title and description to images
     }
 
     /**
@@ -143,6 +163,10 @@ class Image implements ImageInterface
     public function setDescription($description)
     {
         $this->description = $description;
+<<<<<<< HEAD
+=======
+        return $this;
+>>>>>>> Adding optional title and description to images
     }
 
     /**

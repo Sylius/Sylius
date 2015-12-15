@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ImageType extends AbstractResourceType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +32,14 @@ class ImageType extends AbstractResourceType
                 ->add('description', 'textarea', array(
                     'label' => 'sylius.form.image.description',
                     'required' => false,
+        ));
+        $builder->add('title', 'text', array(
+            'label' => 'sylius.form.image.title',
+            'required' => false
+        ));
+        $builder->add('description', 'textarea', array(
+            'label' => 'sylius.form.image.description',
+            'required' => false
         ));
     }
 
