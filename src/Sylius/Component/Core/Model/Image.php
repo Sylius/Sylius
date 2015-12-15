@@ -144,9 +144,12 @@ class Image implements ImageInterface
     {
         $this->title = $title;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         return $this;
 >>>>>>> Adding optional title and description to images
+=======
+>>>>>>> Removing fluent interfaces for setTitle and setDescription
     }
 
     /**
@@ -164,9 +167,12 @@ class Image implements ImageInterface
     {
         $this->description = $description;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         return $this;
 >>>>>>> Adding optional title and description to images
+=======
+>>>>>>> Removing fluent interfaces for setTitle and setDescription
     }
 
     /**
