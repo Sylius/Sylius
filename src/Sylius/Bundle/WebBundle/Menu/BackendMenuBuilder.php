@@ -232,7 +232,7 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-plus-sign'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.new_promotion', $section)));
         }
-        if ($this->authorizationChecker->isGranted('sylius.promotion.index')) {
+        if ($this->authorizationChecker->isGranted('sylius.manage.email')) {
             $child->addChild('emails', array(
                 'route' => 'sylius_backend_email_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
