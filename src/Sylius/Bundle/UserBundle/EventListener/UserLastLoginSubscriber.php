@@ -72,6 +72,6 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     {
         $user->setLastLogin(new \DateTime());
         $this->userManager->persist($user);
-        $this->userManager->flush($user);
+        $this->userManager->flush();
     }
 }

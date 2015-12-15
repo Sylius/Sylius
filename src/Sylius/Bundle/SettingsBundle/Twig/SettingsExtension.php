@@ -41,6 +41,7 @@ class SettingsExtension extends \Twig_Extension
         return array(
              new \Twig_SimpleFunction('sylius_settings_all', array($this, 'getSettings')),
              new \Twig_SimpleFunction('sylius_settings_get', array($this, 'getSettingsParameter')),
+             new \Twig_SimpleFunction('sylius_settings_has', array($this, 'hasSettingsParameter')),
         );
     }
 
@@ -62,6 +63,18 @@ class SettingsExtension extends \Twig_Extension
     public function getSettingsParameter($name)
     {
         return $this->helper->getSettingsParameter($name);
+    }
+
+    /**
+     * Checks if settings parameter for given namespace and name exists.
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function hasSettingsParameter($name)
+    {
+        return $this->helper->hasSettingsParameter($name);
     }
 
     /**

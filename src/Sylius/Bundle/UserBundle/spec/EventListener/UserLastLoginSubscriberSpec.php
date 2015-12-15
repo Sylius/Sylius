@@ -56,7 +56,7 @@ class UserLastLoginSubscriberSpec extends ObjectBehavior
         $token->getUser()->shouldBeCalled()->willReturn($user);
 
         $userManager->persist($user)->shouldBeCalled();
-        $userManager->flush($user)->shouldBeCalled();
+        $userManager->flush()->shouldBeCalled();
 
         $this->onSecurityInteractiveLogin($event);
     }
@@ -66,7 +66,7 @@ class UserLastLoginSubscriberSpec extends ObjectBehavior
         $event->getUser()->shouldBeCalled()->willReturn($user);
 
         $userManager->persist($user)->shouldBeCalled();
-        $userManager->flush($user)->shouldBeCalled();
+        $userManager->flush()->shouldBeCalled();
 
         $this->onImplicitLogin($event);
     }

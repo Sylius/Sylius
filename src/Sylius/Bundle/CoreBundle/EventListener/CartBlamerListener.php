@@ -62,7 +62,7 @@ class CartBlamerListener
         $cart->setCustomer($customer);
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 
     /**
@@ -88,6 +88,6 @@ class CartBlamerListener
         $cart->setCustomer($user->getCustomer());
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 }

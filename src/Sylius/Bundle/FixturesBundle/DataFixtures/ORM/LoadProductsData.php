@@ -31,9 +31,9 @@ class LoadProductsData extends DataFixture
      *
      * @var integer
      */
-    private $totalVariants = 0;
+    protected $totalVariants = 0;
 
-    private  $channels = array(
+    protected $channels = array(
         'WEB-UK',
         'WEB-DE',
         'WEB-US',
@@ -308,7 +308,7 @@ class LoadProductsData extends DataFixture
      * @param string           $name
      * @param string           $value
      */
-    private function addAttribute(ProductInterface $product, $name, $value)
+    protected function addAttribute(ProductInterface $product, $name, $value)
     {
         /* @var $attribute AttributeValueInterface */
         $attribute = $this->getProductAttributeValueFactory()->createNew();
@@ -401,7 +401,7 @@ class LoadProductsData extends DataFixture
         define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
     }
 
-    private function addTranslatedFields(ProductInterface $product, $translatedNames)
+    protected function addTranslatedFields(ProductInterface $product, $translatedNames)
     {
         foreach ($translatedNames as $locale => $name) {
             $product->setCurrentLocale($locale);

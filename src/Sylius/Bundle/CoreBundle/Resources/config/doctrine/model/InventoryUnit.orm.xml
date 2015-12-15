@@ -7,7 +7,7 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\InventoryUnit" table="sylius_inventory_unit">
         <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="inventoryUnits">
-            <join-column name="order_item_id" referenced-column-name="id" nullable="false" />
+            <join-column name="order_item_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
         <field name="shippingState" column="shipping_state" type="string" nullable="false" />
