@@ -232,7 +232,11 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-plus-sign'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.new_promotion', $section)));
         }
+<<<<<<< HEAD
         if ($this->rbacAuthorizationChecker->isGranted('sylius.manage.email')) {
+=======
+        if ($this->authorizationChecker->isGranted('sylius.manage.email')) {
+>>>>>>> [Permissions] Fixed permission for emails backend menu item
             $child->addChild('emails', array(
                 'route' => 'sylius_backend_email_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
