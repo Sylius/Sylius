@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 class Image implements ImageInterface
 {
+
     /**
      * Id
      *
@@ -33,6 +34,20 @@ class Image implements ImageInterface
      * @var string
      */
     protected $path;
+
+    /**
+     * Image title
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * Image description
+     *
+     * @var string
+     */
+    protected $description;
 
     /**
      * Creation date
@@ -112,6 +127,40 @@ class Image implements ImageInterface
     {
         $this->path = $path;
 
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 

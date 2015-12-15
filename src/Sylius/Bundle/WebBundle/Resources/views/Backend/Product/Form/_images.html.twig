@@ -2,12 +2,22 @@
 
 {% macro imagePrototype() %}
 <div class="sylius-assortment-product-images-image row" id="sylius_product_masterVariant_images___name__">
-    <div class="col-md-1">
+    <div class="col-md-2">
         <span class="thumbnail"></span>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-2">
         <label for="sylius_product_masterVariant_images___name___file" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.form.choose_file'|trans }}</label>
         <input type="file" class="form-control hidden" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <label for="sylius_product_masterVariant_images___name___title" class="col-lg-2 control-label">{{ 'sylius.form.image.title'|trans }}</label>
+            <input type="text" id="sylius_product_masterVariant_images___name___title" name="sylius_product[masterVariant][images][___name___][title]" class=" form-control" >
+        </div>
+        <div class="row">
+            <label class="col-lg-2 control-label" for="sylius_product_masterVariant_images___name___description">{{ 'sylius.form.image.description'|trans }}</label>
+            <textarea id="sylius_product_masterVariant_images___name___description" name="sylius_product[masterVariant][images][___name___][description]"  class=" form-control"></textarea>
+        </div>
     </div>
     <div class="col-md-2">
         <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-product-images" data-collection-item="image"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
@@ -19,16 +29,27 @@
     <div id="sylius-assortment-product-images" data-toggle="modal-gallery" data-target="#modal-gallery" class="collection-container" data-prototype="{{ _self.imagePrototype()|e }}">
         {% for imageForm in form.masterVariant.images %}
         <div class="sylius-assortment-product-images-image row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 {% if imageForm.vars.value.path|length > 0 %}
                 <a href="{{ imageForm.vars.value.path|imagine_filter('sylius_large') }}" data-gallery="gallery">
                     <img class="img-rounded" src="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" alt="" />
                 </a>
                 {% endif %}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-2">
                 {{ form_widget(imageForm.file) }}
             </div>
+            <div class="col-md-5">
+                <div class="row">
+                    {{ form_label(imageForm.title) }}
+                    {{ form_widget(imageForm.title) }}
+                </div>
+                <div class="row">
+                    {{ form_label(imageForm.description) }}
+                    {{ form_widget(imageForm.description) }}
+                </div>
+            </div>
+            
             <div class="col-md-2">
                 <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-product-images" data-collection-item="image"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
             </div>

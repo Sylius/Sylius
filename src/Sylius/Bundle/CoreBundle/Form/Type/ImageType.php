@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ImageType extends AbstractResourceType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -23,6 +24,14 @@ class ImageType extends AbstractResourceType
     {
         $builder->add('file', 'file', array(
             'label' => 'sylius.form.image.file'
+        ));
+        $builder->add('title', 'text', array(
+            'label' => 'sylius.form.image.title',
+            'required' => false
+        ));
+        $builder->add('description', 'textarea', array(
+            'label' => 'sylius.form.image.description',
+            'required' => false
         ));
     }
 
