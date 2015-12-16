@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Extension;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -42,7 +42,7 @@ abstract class AbstractResourceExtension extends Extension
 
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
-            DriverFactory::get($metadata)->load($container, $metadata);
+            DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
                 $alias = $alias.'_translation';
@@ -54,7 +54,7 @@ abstract class AbstractResourceExtension extends Extension
 
                 $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
-                DriverFactory::get($metadata)->load($container, $metadata);
+                DriverProvider::get($metadata)->load($container, $metadata);
             }
         }
     }

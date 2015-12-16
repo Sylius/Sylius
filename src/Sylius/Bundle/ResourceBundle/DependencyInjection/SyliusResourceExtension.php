@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -52,7 +52,7 @@ class SyliusResourceExtension extends Extension
             $resources = array_merge($resources, array($alias => $resourceConfig));
             $container->setParameter('sylius.resources', $resources);
 
-            DriverFactory::get($metadata)->load($container, $metadata);
+            DriverProvider::get($metadata)->load($container, $metadata);
 
             if (isset($resourceConfig['translation'])) {
                 $alias = $alias.'_translation';
@@ -64,7 +64,7 @@ class SyliusResourceExtension extends Extension
 
                 $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
-                DriverFactory::get($metadata)->load($container, $metadata);
+                DriverProvider::get($metadata)->load($container, $metadata);
             }
         }
 

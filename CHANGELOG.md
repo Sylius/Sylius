@@ -13,6 +13,9 @@ To get the diff between two versions, go to https://github.com/Sylius/Sylius/com
  * bc break #3610 [BC BREAK] Renamed `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
  * feature #3288 [BC BREAK][Product] Removed ProductBuilder class
  * feature #3617 [BC BREAK][Resource] Created InMemoryRepository and implemented ResourceInterface
+ * bc break #3721 [BC BREAK] Change configuration tree structure for all bundles, additional ``resources`` level added to root node.
+ * bc break #3721 [BC BREAK] Validation groups are configured per resource in appropriate node.
+ * bc break #3721 [BC BREAK] Validation groups parameters renamed from ``sylius.validation_group.<name>`` to ``<sylius.validation_groups.<name>``.
 
 ## v0.15 (2015-09-08)
 

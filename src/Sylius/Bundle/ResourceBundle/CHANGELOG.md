@@ -6,6 +6,8 @@ CHANGELOG
 * Introduce Factory for all resources.
 * New ``DriverInterface`` for resources.
 * Reworked all listeners to use new Registry.
+* Configuration tree has changed slightly, added ``validation_groups``, ``form`` and ``translation`` support.
+* It generates forms for non-Sylius resources if form type classes specified in configuration.
 
 ### v0.10.0
 

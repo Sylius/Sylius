@@ -69,12 +69,15 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
     {
         foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
-            if ($resourceMetadata->hasClass('repository') && $resourceMetadata->getClass('model') === $metadata->getName()) {
+            if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
+                continue;
+            }
+
+            if ($resourceMetadata->hasClass('repository')) {
                 $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
             }
-            if ($resourceMetadata->hasClass('model') && $resourceMetadata->getClass('model') === $metadata->getName()) {
-                $metadata->isMappedSuperclass = false;
-            }
+
+            $metadata->isMappedSuperclass = false;
         }
     }
 
