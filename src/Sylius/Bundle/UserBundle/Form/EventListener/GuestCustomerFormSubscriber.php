@@ -41,8 +41,8 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
     private $customerContext;
 
     /**
-     * @param RepositoryInterface      $customerRepository
-     * @param FactoryInterface         $customerFactory
+     * @param RepositoryInterface $customerRepository
+     * @param FactoryInterface $customerFactory
      * @param CustomerContextInterface $customerContext
      */
     public function __construct(RepositoryInterface $customerRepository, FactoryInterface $customerFactory, CustomerContextInterface $customerContext)
@@ -76,12 +76,12 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param array         $rawData
+     * @param array $rawData
      * @param FormInterface $form
      *
      * @return CustomerInterface|null
      */
-    protected function getCustomerFromProperSource($rawData, FormInterface $form)
+    protected function getCustomerFromProperSource(array $rawData, FormInterface $form)
     {
         if (null !== $customer = $this->customerContext->getCustomer()) {
             $form->remove('email');
@@ -89,7 +89,7 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
             return $customer;
         }
 
-        if (!isset($rawData['email'][0])) {
+        if (!isset($rawData['email'])) {
             return null;
         }
 

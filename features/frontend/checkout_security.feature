@@ -113,4 +113,4 @@ Feature: Checkout security
     Scenario: Placing order as guest with already registered email
          When I fill in guest email with "john@example.com"
           And I press "Proceed with your order"
-         Then I should see "This email is already registered, please login or use forgotten password."
+         Then I should see "This email is already registered, please login or reset your password."
