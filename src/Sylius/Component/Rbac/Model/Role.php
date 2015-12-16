@@ -92,9 +92,6 @@ class Role implements RoleInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->children = new ArrayCollection();
