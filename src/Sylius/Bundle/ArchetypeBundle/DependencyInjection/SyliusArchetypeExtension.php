@@ -35,12 +35,12 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
         );
 
-        foreach ($config['classes'] as $name => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
+        foreach ($config['resources'] as $resource => $parameters) {
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$resource);
             $formDefinition->addArgument($parameters['subject']);
 
             if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
+                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$resource.'_translation');
                 $formTranslationDefinition->addArgument($parameters['subject']);
             }
         }
@@ -54,29 +54,25 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         $subjects = array();
         $convertedConfig = array();
 
-        foreach ($config['classes'] as $subject => $parameters) {
-            $subjects[$subject] = $parameters;
+        foreach ($config['resources'] as $resource => $parameters) {
+            $subjects[$resource] = $parameters;
             unset($parameters['subject'], $parameters['attribute'], $parameters['option']);
 
-            foreach ($parameters as $resource => $classes) {
-                $convertedConfig[$subject.'_'.$resource] = $classes;
-                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
+            foreach ($parameters as $parameter => $classes) {
+                $convertedConfig[$resource.'_'.$parameter] = $classes;
+                $convertedConfig[$resource.'_'.$parameter]['subject'] = $resource;
+
+                if (!isset($classes['validation_groups'])) {
+                    $classes['validation_groups']['default'] = array('sylius');
+                }
             }
 
-            $this->createSubjectServices($container, $subject);
-
-            if (!isset($config['validation_groups'][$subject]['archetype'])) {
-                $config['validation_groups'][$subject]['archetype'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['archetype_translation'])) {
-                $config['validation_groups'][$subject]['archetype_translation'] = array('sylius');
-            }
+            $this->createSubjectServices($container, $resource);
         }
 
         $container->setParameter('sylius.archetype.subjects', $subjects);
 
-        $config['classes'] = $convertedConfig;
-        $config['validation_groups'] = $this->buildValidationConfig($config);
+        $config['resources'] = $convertedConfig;
 
         return parent::process($config, $container);
     }
@@ -95,21 +91,5 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         ;
 
         $container->setDefinition('sylius.builder.'.$subject.'_archetype', $builderDefintion);
-    }
-
-    /**
-     * @param array $config
-     *
-     * @return array
-     */
-    private function buildValidationConfig(array $config)
-    {
-        $validationConfig = array();
-        foreach ($config['validation_groups'] as $subject => $parameters) {
-            foreach ($parameters as $resource => $validationGroups) {
-                $validationConfig[$subject . '_' . $resource] = $validationGroups;
-            }
-        }
-        return $validationConfig;
     }
 }

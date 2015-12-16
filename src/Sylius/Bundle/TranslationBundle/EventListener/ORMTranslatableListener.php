@@ -75,7 +75,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
 
         $metadata->mapOneToMany(array(
             'fieldName'     => 'translations',
-            'targetEntity'  => $this->configs[$metadata->name]['translation']['model'],
+            'targetEntity'  => $this->configs[$metadata->name]['translation']['classes']['model'],
             'mappedBy'      => 'translatable',
             'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
             'indexBy'       => 'locale',
@@ -99,7 +99,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
 
         $metadata->mapManyToOne(array(
             'fieldName'    => 'translatable' ,
-            'targetEntity' => $this->configs[$metadata->name]['model'],
+            'targetEntity' => $this->configs[$metadata->name]['classes']['model'],
             'inversedBy'   => 'translations' ,
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',

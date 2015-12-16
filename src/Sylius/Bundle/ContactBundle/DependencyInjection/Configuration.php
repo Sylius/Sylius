@@ -14,6 +14,18 @@ namespace Sylius\Bundle\ContactBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ContactBundle\Form\Type\RequestType;
+use Sylius\Bundle\ContactBundle\Form\Type\TopicType;
+use Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType;
+use Sylius\Component\Contact\Model\Request;
+use Sylius\Component\Contact\Model\RequestInterface;
+use Sylius\Component\Contact\Model\Topic;
+use Sylius\Component\Contact\Model\TopicInterface;
+use Sylius\Component\Contact\Model\TopicTranslation;
+use Sylius\Component\Contact\Model\TopicTranslationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -43,65 +55,47 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('contact_request')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('contact_topic')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('contact_topic_translation')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('contact_request')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Contact\Model\Request')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ContactBundle\Form\Type\RequestType')->end()
+                                        ->scalarNode('model')->defaultValue(Request::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(RequestInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(RequestType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -109,38 +103,63 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('contact_topic')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Contact\Model\Topic')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository')->end()
-                                ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ContactBundle\Form\Type\TopicType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType')->end()
+                                        ->scalarNode('model')->defaultValue(Topic::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(TopicInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(TopicType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue('Sylius\Component\Contact\Model\TopicTranslation')->end()
-                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                        ->scalarNode('repository')->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->arrayNode('form')
+                                        ->arrayNode('classes')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType')->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('mapping')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('fields')
-                                                ->prototype('scalar')->end()
-                                                    ->defaultValue(array('title'))
+                                                ->scalarNode('model')->defaultValue(TopicTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(TopicTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                                ->arrayNode('form')
+                                                    ->addDefaultsIfNotSet()
+                                                    ->children()
+                                                        ->scalarNode('default')->defaultValue(TopicTranslationType::class)->cannotBeEmpty()->end()
+                                                    ->end()
                                                 ->end()
                                             ->end()
+                                        ->end()
+                                        ->arrayNode('validation_groups')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->arrayNode('default')
+                                                    ->prototype('scalar')->end()
+                                                    ->defaultValue(array('sylius'))
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                        ->arrayNode('fields')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('title'))
                                         ->end()
                                     ->end()
                                 ->end()

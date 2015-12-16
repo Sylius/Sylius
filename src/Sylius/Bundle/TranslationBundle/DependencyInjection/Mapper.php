@@ -24,12 +24,15 @@ class Mapper
     /**
      * {@inheritdoc}
      */
-    public function mapTranslations(array $config, ContainerBuilder $container)
+    public function mapTranslations(array $resource, ContainerBuilder $container)
     {
         $mapping = array();
 
-        $mapping[$config['model']] = $config;
-        $mapping[$config['translation']['model']] = $mapping[$config['model']];
+
+        $mapping[$resource['classes']['model']] = $resource;
+        $mapping[$resource['translation']['classes']['model']] = $mapping[$resource['classes']['model']];
+
+
 
         if ($container->hasParameter('sylius.translation.mapping')) {
             $mapping = array_merge($mapping, $container->getParameter('sylius.translation.mapping'));

@@ -33,9 +33,9 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function getRepositoryDefinition(array $parameters)
     {
-        $reflection = new \ReflectionClass($classes['model']);
+        $reflection = new \ReflectionClass($parameters['classes']['model']);
         $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
         $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
 
@@ -43,8 +43,8 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
             ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository'
             : new Parameter('sylius.mongodb_odm.repository.class');
 
-        if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+        if (isset($parameters['classes']['repository'])) {
+            $repositoryClass = $parameters['classes']['repository'];
         }
 
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
@@ -56,7 +56,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
             $unitOfWorkDefinition,
-            $this->getClassMetadataDefinition($classes['model']),
+            $this->getClassMetadataDefinition($parameters['classes']['model']),
         ));
 
         return $definition;

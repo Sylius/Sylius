@@ -40,13 +40,14 @@ class SyliusResourceExtension extends AbstractExtension
             'twig.xml',
         ));
 
-        $classes = isset($config['resources']) ? $config['resources'] : array();
+        $resources = isset($config['resources']) ? $config['resources'] : array();
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
 
-        $this->createResourceServices($classes, $container);
+        foreach ($resources as $resource)
+        $this->createResourceServices($resources, $container);
 
-        $configClasses = array('default' => $this->getClassesFromConfig($classes));
+        $configClasses = array('default' => $this->getClassesFromConfig($resources));
 
         if ($container->hasParameter('sylius.config.classes')) {
             $configClasses = array_merge_recursive(
@@ -59,10 +60,10 @@ class SyliusResourceExtension extends AbstractExtension
     }
 
     /**
-     * @param array            $configs
+     * @param array            $resource
      * @param ContainerBuilder $container
      */
-    private function createResourceServices(array $configs, ContainerBuilder $container)
+    private function createResourceServices(array $resource, ContainerBuilder $container)
     {
         $translationsEnabled = class_exists('Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper');
 
@@ -70,7 +71,7 @@ class SyliusResourceExtension extends AbstractExtension
             $mapper = new Mapper();
         }
 
-        foreach ($configs as $name => $config) {
+        foreach ($resource as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
             $manager = isset($config['object_manager']) ? $config['object_manager'] : 'default';
 
@@ -92,7 +93,7 @@ class SyliusResourceExtension extends AbstractExtension
                     sprintf('%s_translation', $resourceName),
                     $manager,
                     $config['driver']
-                )->load($config['classes']['translation']);
+                )->load($config['translation']);
             }
         }
     }

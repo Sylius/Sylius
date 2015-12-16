@@ -34,9 +34,9 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function getRepositoryDefinition(array $parameters)
     {
-        $reflection = new \ReflectionClass($classes['model']);
+        $reflection = new \ReflectionClass($parameters['classes']['model']);
         $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
         $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
 
@@ -49,14 +49,14 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
             $repositoryClass = $this->container->getParameter($repositoryKey);
         }
 
-        if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+        if (isset($parameters['classes']['repository'])) {
+            $repositoryClass = $parameters['classes']['repository'];
         }
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model']),
+            $this->getClassMetadataDefinition($parameters['classes']['model']),
         ));
 
         return $definition;
