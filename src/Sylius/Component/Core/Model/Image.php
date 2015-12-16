@@ -15,50 +15,36 @@ class Image implements ImageInterface
 {
 
     /**
-     * Id
-     *
      * @var integer
      */
     protected $id;
 
     /**
-     * File
-     *
      * @var \SplFileInfo
      */
     protected $file;
 
     /**
-     * Path to file
-     *
      * @var string
      */
     protected $path;
 
     /**
-     * Image title
-     *
      * @var string
      */
     protected $title;
 
     /**
-     * Image description
-     *
      * @var string
      */
     protected $description;
 
     /**
-     * Creation date
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -69,9 +55,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
