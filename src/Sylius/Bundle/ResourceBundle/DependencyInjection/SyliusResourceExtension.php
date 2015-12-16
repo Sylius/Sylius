@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
-use Sylius\Bundle\TranslationBundle\SyliusTranslationBundle;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
