@@ -79,6 +79,11 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'email.xml',
         );
 
+        $env = $container->getParameter('kernel.environment');
+        if ('test' === $env || 'test_cached' === $env) {
+            $configFiles[] = 'test_services.xml';
+        }
+
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }

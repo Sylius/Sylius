@@ -74,7 +74,7 @@ Feature: Checkout security
           And I select the "Dummy" radio button
           And I press "Continue"
           And I click "Place order"
-         Then I should be on the store homepage
+         Then I should be on the checkout thank you page
           And I should see "Thank you for your order!"
 
     Scenario: Creating account without first and last name

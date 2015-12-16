@@ -63,6 +63,7 @@ class FinalizeStep extends CheckoutStep
      */
     protected function completeOrder(OrderInterface $order)
     {
+        $this->get('session')->set('sylius_order_id', $order->getId());
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 

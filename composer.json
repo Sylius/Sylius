@@ -95,6 +95,7 @@
         "lakion/mink-debug-extension": "^1.0.1",
         "lakion/api-test-case": "^1.0@dev",
         "coduo/php-matcher": "^2.1@dev",
+        "sensiolabs/behat-page-object-extension": "^2.0@dev",
         "phpunit/phpunit": "~4.1"
     },
     "replace": {

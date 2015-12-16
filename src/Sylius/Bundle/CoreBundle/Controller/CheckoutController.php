@@ -193,6 +193,19 @@ class CheckoutController extends FOSRestController
     }
 
     /**
+     * @return Response
+     */
+    public function thankYouAction()
+    {
+        $id = $this->get('session')->get('sylius_order_id');
+        $order = $this->findOrderOr404($id);
+
+        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig', array('order' => $order));
+    }
+
+    /**
+     * Get object manager.
+     *
      * @return ObjectManager
      */
     protected function getManager()
