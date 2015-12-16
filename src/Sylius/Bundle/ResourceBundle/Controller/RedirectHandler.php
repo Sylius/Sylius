@@ -11,16 +11,15 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Redirects helper.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RedirectHandler
+class RedirectHandler implements RedirectHandlerInterface
 {
     /**
      * @var RouterInterface
@@ -28,80 +27,68 @@ class RedirectHandler
     private $router;
 
     /**
-     * @var Configuration
+     * @param RouterInterface $router
      */
-    private $config;
-
-    public function __construct(Configuration $config, RouterInterface $router)
+    public function __construct(RouterInterface $router)
     {
         $this->router = $router;
-        $this->config = $config;
     }
 
     /**
-     * @param object $resource
-     *
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    public function redirectTo($resource)
+    public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource)
     {
-        $parameters = $this->config->getRedirectParameters($resource);
-
-        $routes = $this->router->getRouteCollection();
-        $route = $this->config->getRedirectRoute('show');
-
-        if (!$routes->get($route)) {
-            $route = $this->config->getRedirectRoute('index');
-        }
-
-        return $this->redirectToRoute($route, $parameters);
+        return $this->redirectToRoute(
+            $configuration,
+            $configuration->getRedirectRoute('show'),
+            $configuration->getRedirectParameters($resource)
+        );
     }
 
     /**
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    public function redirectToIndex()
+    public function redirectToIndex(RequestConfiguration $configuration, ResourceInterface $resource = null)
     {
-        return $this->redirectToRoute($this->config->getRedirectRoute('index'), $this->config->getRedirectParameters());
+        return $this->redirectToRoute(
+            $configuration,
+            $configuration->getRedirectRoute('index'),
+            $configuration->getRedirectParameters()
+        );
     }
 
     /**
-     * @param string $route
-     * @param array  $data
-     *
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    public function redirectToRoute($route, array $data = array())
+    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = array())
     {
         if ('referer' === $route) {
-            return $this->redirectToReferer();
+            return $this->redirectToReferer($configuration);
         }
 
-        return $this->redirect($this->router->generate($route, $data));
+        return $this->redirect($configuration, $this->router->generate($route, $parameters));
     }
 
     /**
-     * @param string  $url
-     * @param integer $status
-     *
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    public function redirect($url, $status = 302)
+    public function redirect(RequestConfiguration $configuration, $url, $status = 302)
     {
-        if ($this->config->isHeaderRedirection()) {
+        if ($configuration->isHeaderRedirection()) {
             return new Response('', 200, array(
-                'X-SYLIUS-LOCATION' => $url.$this->config->getRedirectHash(),
+                'X-SYLIUS-LOCATION' => $url.$configuration->getRedirectHash(),
             ));
         }
 
-        return new RedirectResponse($url.$this->config->getRedirectHash(), $status);
+        return new RedirectResponse($url.$configuration->getRedirectHash(), $status);
     }
 
     /**
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    public function redirectToReferer()
+    public function redirectToReferer(RequestConfiguration $configuration)
     {
-        return $this->redirect($this->config->getRedirectReferer());
+        return $this->redirect($configuration, $configuration->getRedirectReferer());
     }
 }

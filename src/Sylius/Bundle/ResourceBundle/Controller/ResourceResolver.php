@@ -15,52 +15,56 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Resource resolver.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResourceResolver
 {
     /**
-     * @var Configuration
+     * @var RepositoryInterface
      */
-    private $config;
+    private $repository;
 
-    public function __construct(Configuration $config)
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @param RepositoryInterface $repository
+     * @param FactoryInterface $factory
+     */
+    public function __construct(RepositoryInterface $repository, FactoryInterface $factory)
     {
-        $this->config = $config;
+        $this->repository = $repository;
+        $this->factory = $factory;
     }
 
     /**
-     * Get resources via repository based on the configuration.
-     *
-     * @param RepositoryInterface $repository
-     * @param string              $defaultMethod
-     * @param array               $defaultArguments
+     * @param RequestConfiguration $configuration
+     * @param string $defaultMethod
+     * @param array $defaultArguments
      *
      * @return mixed
      */
-    public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    public function getResource(RequestConfiguration $configuration, $defaultMethod, array $defaultArguments = array())
     {
-        $callable = array($repository, $this->config->getRepositoryMethod($defaultMethod));
-        $arguments = $this->config->getRepositoryArguments($defaultArguments);
+        $callable = array($this->repository, $configuration->getRepositoryMethod($defaultMethod));
+        $arguments = $configuration->getRepositoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }
 
     /**
-     * Create resource.
-     *
-     * @param FactoryInterface $factory
-     * @param string           $defaultMethod
-     * @param array            $defaultArguments
+     * @param RequestConfiguration $configuration
+     * @param string $defaultMethod
+     * @param array $defaultArguments
      *
      * @return mixed
      */
-    public function createResource(FactoryInterface $factory, $defaultMethod, array $defaultArguments = array())
+    public function createResource(RequestConfiguration $configuration, $defaultMethod = 'createNew', array $defaultArguments = array())
     {
-        $callable = array($factory, $this->config->getFactoryMethod($defaultMethod));
-        $arguments = $this->config->getFactoryArguments($defaultArguments);
+        $callable = array($this->factory, $configuration->getFactoryMethod($defaultMethod));
+        $arguments = $configuration->getFactoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }

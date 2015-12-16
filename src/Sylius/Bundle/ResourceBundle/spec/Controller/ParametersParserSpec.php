@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ParametersParserSpec extends ObjectBehavior
 {
@@ -26,33 +28,29 @@ class ParametersParserSpec extends ObjectBehavior
 
     function it_should_parse_parameters(Request $request)
     {
-        $request->get('criteria')->willReturn('New criteria');
-        $request->get('sorting')->willReturn('New sorting');
+        $request->get('criteria')->shouldBeCalled()->willReturn('New criteria');
+        $request->get('sorting')->shouldBeCalled()->willReturn('New sorting');
 
-        $this->parse(
+        $this->parseRequestValues(
             array(
                 'criteria' => '$criteria',
                 'sortable' => '$sorting'
             ),
             $request
-        )->shouldReturn(array(
+        )->shouldReturn(
             array(
                 'criteria' => 'New criteria',
                 'sortable' => 'New sorting',
-            ),
-            array(
-                'criteria' => 'criteria',
-                'sortable' => 'sorting',
             )
-        ));
+        );
     }
 
     function it_should_parse_complex_parameters(Request $request)
     {
-        $request->get('enable')->willReturn(true);
-        $request->get('sorting')->willReturn('New sorting');
+        $request->get('enable')->shouldBeCalled()->willReturn(true);
+        $request->get('sorting')->shouldBeCalled()->willReturn('New sorting');
 
-        $this->parse(
+        $this->parseRequestValues(
             array(
                 'criteria' => array(
                     'enable' => '$enable'
@@ -60,19 +58,13 @@ class ParametersParserSpec extends ObjectBehavior
                 'sortable' => '$sorting'
             ),
             $request
-        )->shouldReturn(array(
-                array(
-                    'criteria' => array(
-                        'enable' => true,
-                    ),
-                    'sortable' => 'New sorting',
+        )->shouldReturn(
+            array(
+                'criteria' => array(
+                    'enable' => true,
                 ),
-                array(
-                    'criteria' => array(
-                        'enable' => 'enable',
-                    ),
-                    'sortable' => 'sorting',
-                )
-            ));
+                'sortable' => 'New sorting',
+            )
+        );
     }
 }

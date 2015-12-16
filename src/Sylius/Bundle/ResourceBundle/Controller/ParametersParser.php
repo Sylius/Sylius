@@ -13,12 +13,9 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Configuration parameters parser.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ParametersParser
 {
@@ -27,6 +24,9 @@ class ParametersParser
      */
     private $expression;
 
+    /**
+     * @param ExpressionLanguage $expression
+     */
     public function __construct(ExpressionLanguage $expression)
     {
         $this->expression = $expression;
@@ -38,52 +38,20 @@ class ParametersParser
      *
      * @return array
      */
-    public function parse(array $parameters, Request $request)
+    public function parseRequestValues(array $parameters, Request $request)
     {
-        if (!isset($parameterNames)) {
-            $parameterNames = array();
-        }
-
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
-                list($parameters[$key], $parameterNames[$key]) = $this->parse($value, $request);
+                $parameters[$key] = $this->parseRequestValues($value, $request);
             }
 
             if (is_string($value) && 0 === strpos($value, '$')) {
                 $parameterName = substr($value, 1);
                 $parameters[$key] = $request->get($parameterName);
-                $parameterNames[$key] = $parameterName;
             }
 
             if (is_string($value) && 0 === strpos($value, 'expr:')) {
                 $parameters[$key] = $this->expression->evaluate(substr($value, 5));
-            }
-        }
-
-        return array($parameters, $parameterNames);
-    }
-
-    /**
-     * @param array  $parameters
-     * @param object $resource
-     *
-     * @return array
-     */
-    public function process(array &$parameters, $resource)
-    {
-        $accessor = PropertyAccess::createPropertyAccessor();
-
-        if (empty($parameters)) {
-            return array('id' => $accessor->getValue($resource, 'id'));
-        }
-
-        foreach ($parameters as $key => $value) {
-            if (is_array($value)) {
-                $parameters[$key] = $this->process($value, $resource);
-            }
-
-            if (is_string($value) && 0 === strpos($value, 'resource.')) {
-                $parameters[$key] = $accessor->getValue($resource, substr($value, 9));
             }
         }
 

@@ -1,154 +1,91 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Resource controller configuration product.
+ * @mixin \Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
-class ConfigurationSpec extends ObjectBehavior
+class RequestConfigurationSpec extends ObjectBehavior
 {
-    function let(Request $request, Parameters $parameters, ParametersParser $parser)
+    function let(MetadataInterface $metadata, Request $request, Parameters $parameters)
     {
-        $this->beConstructedWith(
-            $parser,
-            'sylius',
-            'product',
-            'SyliusWebBundle:Product',
-            'twig',
-            array(
-                'paginate' => false,
-                'default_page_size' => 10,
-                'limit' => 10,
-                'sortable' => false,
-                'sorting' => null,
-                'filterable' => false,
-                'criteria' => null,
-            )
-        );
-        $request->attributes = new ParameterBag();
-
-        $this->setRequest($request);
-        $this->setParameters($parameters);
+        $this->beConstructedWith($metadata, $request, $parameters);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration');
     }
 
-    function it_has_parameters()
+    function it_has_request(Request $request)
     {
-        $this->getParameters()->shouldHaveType(Parameters::class);
+        $this->getRequest()->shouldReturn($request);
     }
 
-    function its_parameter_is_mutable(Parameters $parameters)
+    function it_checks_if_its_a_html_request(Request $request)
     {
-        $this->setParameters($parameters);
-    }
-
-    function it_has_request()
-    {
-        $this->getRequest()->shouldHaveType('Symfony\Component\HttpFoundation\Request');
-    }
-
-    function its_request_is_mutable(Request $request)
-    {
-        $this->setRequest($request);
-    }
-
-    function it_returns_assigned_bundle_prefix()
-    {
-        $this->getBundlePrefix()->shouldReturn('sylius');
-    }
-
-    function it_returns_assigned_resource_name()
-    {
-        $this->getResourceName()->shouldReturn('product');
-    }
-
-    function it_returns_plural_resource_name()
-    {
-        $this->getPluralResourceName()->shouldReturn('products');
-    }
-
-    function it_returns_assigned_template_namespace()
-    {
-        $this->getTemplateNamespace()->shouldReturn('SyliusWebBundle:Product');
-    }
-
-    function it_returns_assigned_templating_engine()
-    {
-        $this->getTemplatingEngine()->shouldReturn('twig');
-    }
-
-    function its_api_request_when_format_is_not_html(Request $request)
-    {
-        $this->setRequest($request);
-
         $request->getRequestFormat()->willReturn('html');
-        $this->isApiRequest()->shouldReturn(false);
-
-        $request->getRequestFormat()->willReturn('xml');
-        $this->isApiRequest()->shouldReturn(true);
+        $this->isHtmlRequest()->shouldReturn(true);
 
         $request->getRequestFormat()->willReturn('json');
-        $this->isApiRequest()->shouldReturn(true);
+        $this->isHtmlRequest()->shouldReturn(false);
     }
 
-    function it_generates_service_names()
+    function it_returns_default_template_names(MetadataInterface $metadata)
     {
-        $this->getServiceName('manager')->shouldReturn('sylius.manager.product');
-        $this->getServiceName('repository')->shouldReturn('sylius.repository.product');
-        $this->getServiceName('controller')->shouldReturn('sylius.controller.product');
+        $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
+
+        $this->getDefaultTemplate('index.html')->shouldReturn('SyliusAdminBundle:Product:index.html.twig');
+        $this->getDefaultTemplate('show.html')->shouldReturn('SyliusAdminBundle:Product:show.html.twig');
+        $this->getDefaultTemplate('create.html')->shouldReturn('SyliusAdminBundle:Product:create.html.twig');
+        $this->getDefaultTemplate('update.html')->shouldReturn('SyliusAdminBundle:Product:update.html.twig');
+        $this->getDefaultTemplate('custom.html')->shouldReturn('SyliusAdminBundle:Product:custom.html.twig');
     }
 
-    function it_generates_event_names()
+    function it_takes_the_custom_template_if_specified(MetadataInterface $metadata, Parameters $parameters)
     {
-        $this->getEventName('create')->shouldReturn('sylius.product.create');
-        $this->getEventName('created')->shouldReturn('sylius.product.created');
+        $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
+        $parameters->get('template', 'SyliusAdminBundle:Product:foo.html.twig')->willReturn('AppBundle:Product:show.html.twig');
+
+        $this->getTemplate('foo.html')->shouldReturn('AppBundle:Product:show.html.twig');
     }
 
-    function it_generates_template_names()
+    function it_generates_form_type(MetadataInterface $metadata, Parameters $parameters)
     {
-        $this->getTemplateName('index.html')->shouldReturn('SyliusWebBundle:Product:index.html.twig');
-        $this->getTemplateName('show.html')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
-        $this->getTemplateName('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
-        $this->getTemplateName('update.html')->shouldReturn('SyliusWebBundle:Product:update.html.twig');
-        $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
-    }
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
 
-    function it_generates_view_template(Parameters $parameters)
-    {
-        $parameters->get('template', 'SyliusWebBundle:Product:create.html.twig')
-            ->willReturn('SyliusWebBundle:Product:create.html.twig');
-        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
-
-        $parameters->get('template', 'SyliusWebBundle:Product:create.html.twig')
-            ->willReturn('MyBundleWebBundle:Product:create.html.twig');
-        $this->getTemplate('create.html')->shouldReturn('MyBundleWebBundle:Product:create.html.twig');
-    }
-
-    function it_generates_form_type(Parameters $parameters)
-    {
         $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
         $this->getFormType()->shouldReturn('sylius_product');
 
-        $parameters->get('form', 'sylius_product')->willReturn('sylius_variant');
-        $this->getFormType()->shouldReturn('sylius_variant');
+        $parameters->get('form', 'sylius_product')->willReturn('sylius_product_pricing');
+        $this->getFormType()->shouldReturn('sylius_product_pricing');
     }
 
-    function it_generates_route_names()
+    function it_generates_route_names(MetadataInterface $metadata)
     {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
         $this->getRouteName('index')->shouldReturn('sylius_product_index');
         $this->getRouteName('show')->shouldReturn('sylius_product_show');
         $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
@@ -158,13 +95,17 @@ class ConfigurationSpec extends ObjectBehavior
     {
         $request->headers = $bag;
         $bag->get('referer')->willReturn('http://myurl.com');
+
         $parameters->get('redirect')->willReturn(array('referer' => 'http://myurl.com'));
+
         $this->getRedirectReferer()->shouldReturn('http://myurl.com');
     }
 
-    function it_generates_redirect_route(Parameters $parameters)
+    function it_generates_redirect_route(MetadataInterface $metadata, Parameters $parameters)
     {
-        $parameters->get('section')->willReturn(null);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
 
@@ -175,7 +116,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRedirectRoute('custom')->shouldReturn('myRoute');
     }
 
-    function it_returns_array_as_redirect_parameters(Parameters $parameters, ParametersParser $parser)
+    function it_returns_array_as_redirect_parameters(Parameters $parameters)
     {
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectParameters()->shouldReturn(array());
@@ -186,13 +127,12 @@ class ConfigurationSpec extends ObjectBehavior
         $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
         $this->getRedirectParameters()->shouldReturn(array('myParameter'));
 
-        $params = array('myParameter');
         $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
-        $parser->process($params, 'resource')->willReturn($params);
-        $this->getRedirectParameters('resource')->shouldReturn($params);
+
+        $this->getRedirectParameters('resource')->shouldReturn(array('myParameter'));
     }
 
-    function it_checks_limit_is_enable(Parameters $parameters)
+    function it_checks_if_limit_is_enabled(Parameters $parameters)
     {
         $parameters->get('limit', Argument::any())->willReturn(10);
         $this->isLimited()->shouldReturn(true);
@@ -201,7 +141,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isLimited()->shouldReturn(false);
     }
 
-    function it_has_limit_parameter(Parameters $parameters)
+    function it_gets_limit(Parameters $parameters)
     {
         $parameters->get('limit', false)->willReturn(true);
         $parameters->get('limit', 10)->willReturn(10);
@@ -212,7 +152,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getLimit()->shouldReturn(null);
     }
 
-    function it_checks_paginate_is_enable(Parameters $parameters)
+    function it_checks_if_pagination_is_enabled(Parameters $parameters)
     {
         $parameters->get('paginate', Argument::any())->willReturn(10);
         $this->isPaginated()->shouldReturn(true);
@@ -221,7 +161,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_has_paginate_parameter(Parameters $parameters)
+    function it_gets_pagination_max_per_page(Parameters $parameters)
     {
         $parameters->get('paginate', 10)->willReturn(20);
         $this->getPaginationMaxPerPage()->shouldReturn(20);
@@ -304,6 +244,7 @@ class ConfigurationSpec extends ObjectBehavior
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn($sorting);
         $request->get('sorting', array())->willReturn($sorting);
+
         $this->getSorting()->shouldReturn($sorting);
     }
 
@@ -390,8 +331,11 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFactoryArguments($defaultArguments)->shouldReturn('myValue');
     }
 
-    function it_has_flash_message_parameter(Parameters $parameters)
+    function it_has_flash_message_parameter(MetadataInterface $metadata, Parameters $parameters)
     {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
         $parameters->get('flash', 'sylius.product.message')->willReturn('sylius.product.message');
         $this->getFlashMessage('message')->shouldReturn('sylius.product.message');
 

@@ -19,6 +19,8 @@ use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
+ * @mixin \Sylius\Component\Resource\Metadata\Metadata
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MetadataSpec extends ObjectBehavior
@@ -125,5 +127,12 @@ class MetadataSpec extends ObjectBehavior
         $this->getServiceId('factory')->shouldReturn('app.factory.product');
         $this->getServiceId('repository')->shouldReturn('app.repository.product');
         $this->getServiceId('form.type')->shouldReturn('app.form.type.product');
+    }
+
+    function it_generates_permission_code()
+    {
+        $this->getPermissionCode('show')->shouldReturn('app.product.show');
+        $this->getPermissionCode('create')->shouldReturn('app.product.create');
+        $this->getPermissionCode('custom')->shouldReturn('app.product.custom');
     }
 }

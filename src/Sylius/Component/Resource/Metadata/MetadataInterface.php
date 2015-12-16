@@ -84,4 +84,11 @@ interface MetadataInterface
      * @return string
      */
     public function getServiceId($serviceName);
+
+    /**
+     * @param string $permissionName
+     *
+     * @return string
+     */
+    public function getPermissionCode($permissionName);
 }

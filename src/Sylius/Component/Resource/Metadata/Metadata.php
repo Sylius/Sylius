@@ -169,6 +169,14 @@ class Metadata implements MetadataInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getPermissionCode($permissionName)
+    {
+        return sprintf('%s.%s.%s', $this->applicationName, $this->name, $permissionName);
+    }
+
+    /**
      * @param string $alias
      *
      * @return array

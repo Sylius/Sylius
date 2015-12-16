@@ -24,7 +24,7 @@ class ParametersSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
     }
 
-    function its_parameters_is_mutable()
+    function its_has_mutable_parameters()
     {
         $this->replace(array());
     }
@@ -42,7 +42,7 @@ class ParametersSpec extends ObjectBehavior
         ));
     }
 
-    function it_get_parameter()
+    function it_gets_a_single_parameter_and_supports_default_value()
     {
         $this->replace(array(
             'criteria' => 'criteria',
