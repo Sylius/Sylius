@@ -7,6 +7,9 @@
     {% if form.configuration is defined %}
         {{ form_row(form.configuration) }}
     {% endif %}
+    {% if form.validation is defined %}
+        {{ form_row(form.validation) }}
+    {% endif %}
     <div id="sylius_form_choice_container">
         {% if form.choices is defined %}
             {{ form_row(form.choices) }}

@@ -70,6 +70,14 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -247,17 +255,6 @@ class AttributeValue implements AttributeValueInterface
     {
         $this->date = $date;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        $getter = 'get'.ucfirst($this->attribute->getStorageType());
-
-        return $this->$getter();
-    }
-
     /**
      * @throws \BadMethodCallException
      */

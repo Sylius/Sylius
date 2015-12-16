@@ -29,7 +29,7 @@ class AttributeController extends ResourceController
     {
         $attributeTypes = $this->get('sylius.registry.attribute_type')->all();
 
-        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeTypesModal.html.twig', array('attributeTypes' => $attributeTypes));
+        return $this->render('SyliusAttributeBundle::attributeTypesModal.html.twig', array('attributeTypes' => $attributeTypes));
     }
 
     /**
@@ -46,7 +46,7 @@ class AttributeController extends ResourceController
             )
         );
 
-        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeChoice.html.twig', array('form' => $form->createView()));
+        return $this->render('SyliusAttributeBundle::attributeChoice.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -59,8 +59,9 @@ class AttributeController extends ResourceController
         $attributeRepository = $this->get('sylius.repository.product_attribute');
         $forms = array();
 
-        foreach ($request->query->get('sylius_product_attribute_choice') as $choice) {
-            /** @var AttributeInterface $attribute */
+        $choices = ($request->query->has('sylius_product_attribute_choice')) ? $request->query->get('sylius_product_attribute_choice') : array();
+
+        foreach ($choices as $choice) {
             $attribute = $attributeRepository->find($choice);
             $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
 
@@ -70,6 +71,6 @@ class AttributeController extends ResourceController
             $forms[$attribute->getId()] = $form->createView();
         }
 
-        return $this->render('SyliusWebBundle:Backend/ProductAttribute:attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
+        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
     }
 }

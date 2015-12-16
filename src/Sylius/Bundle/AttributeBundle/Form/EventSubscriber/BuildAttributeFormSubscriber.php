@@ -9,18 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
+namespace Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeFormListener implements EventSubscriberInterface
+class BuildAttributeFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var FormFactoryInterface
@@ -53,18 +55,30 @@ class BuildAttributeFormListener implements EventSubscriberInterface
         $attribute = $event->getData();
         $form = $event->getForm();
 
+        $this->addRequiredFields($attribute, $form, 'configuration');
+        $this->addRequiredFields($attribute, $form, 'validation');
+    }
+
+    /**
+     * @param AttributeInterface $attribute
+     * @param FormInterface $form
+     * @param string $fieldsType
+     */
+    private function addRequiredFields(AttributeInterface $attribute, FormInterface $form, $fieldsType)
+    {
         try {
-            $configurationForm = $this->factory->createNamed(
-                'configuration',
-                'sylius_attribute_type_configuration_'.$attribute->getType(),
+            $requiredFields = $this->factory->createNamed(
+                $fieldsType,
+                'sylius_attribute_type_'.$fieldsType.'_'.$attribute->getType(),
                 null,
                 array(
                     'auto_initialize' => false,
-                    'label'           => 'sylius.attribute_type.configuration',
+                    'label' => 'sylius.attribute_type.'.$fieldsType,
                 )
             );
 
-            $form->add($configurationForm);
-        } catch (InvalidArgumentException $exception) {}
+            $form->add($requiredFields);
+        } catch (InvalidArgumentException $exception) {
+        }
     }
 }

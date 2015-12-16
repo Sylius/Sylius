@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
+namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -24,12 +24,18 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeValueFormListenerSpec extends ObjectBehavior
+class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory, EntityRepository $attributeRepository)
     {
         $this->beConstructedWith($formFactory, 'server', $attributeRepository);
+    }
+
+    function it_is_initialized()
+    {
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber');
     }
 
     function it_subscribes_to_pre_set_data_event()

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
+namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeFormListenerSpec extends ObjectBehavior
+class BuildAttributeFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory)
     {
@@ -30,7 +30,7 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormListener');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeFormSubscriber');
     }
 
     function it_implements_event_subscriber_interface()
@@ -38,11 +38,12 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_adds_configuration_field_if_necessary(
+    function it_adds_configuration_and_validation_field_if_necessary(
         $formFactory,
         AttributeInterface $attribute,
         Form $form,
         Form $configurationForm,
+        Form $validationForm,
         FormEvent $event
     ) {
         $event->getData()->willReturn($attribute);
@@ -57,12 +58,20 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
             Argument::type('array')
         )->willReturn($configurationForm);
 
+        $formFactory->createNamed(
+            'validation',
+            'sylius_attribute_type_validation_datetime',
+            null,
+            Argument::type('array')
+        )->willReturn($validationForm);
+
         $form->add($configurationForm)->shouldBeCalled();
+        $form->add($validationForm)->shouldBeCalled();
 
         $this->addConfigurationFields($event);
     }
 
-    function it_does_nothing_if_configuration_form_does_not_exist(
+    function it_does_nothing_if_configuration_and_validation_form_does_not_exist(
         $formFactory,
         AttributeInterface $attribute,
         Form $form,
@@ -76,6 +85,13 @@ class BuildAttributeFormListenerSpec extends ObjectBehavior
         $formFactory->createNamed(
             'configuration',
             'sylius_attribute_type_configuration_text',
+            null,
+            Argument::type('array')
+        )->willThrow('Symfony\Component\Form\Exception\InvalidArgumentException');
+
+        $formFactory->createNamed(
+            'validation',
+            'sylius_attribute_type_validation_text',
             null,
             Argument::type('array')
         )->willThrow('Symfony\Component\Form\Exception\InvalidArgumentException');

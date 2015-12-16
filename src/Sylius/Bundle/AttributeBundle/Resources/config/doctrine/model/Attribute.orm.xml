@@ -23,6 +23,7 @@
         <field name="type" column="type" type="string" />
         <field name="storageType" column="storage_type" type="string" />
         <field name="configuration" column="configuration" type="array" />
+        <field name="validation" column="validation" type="array" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

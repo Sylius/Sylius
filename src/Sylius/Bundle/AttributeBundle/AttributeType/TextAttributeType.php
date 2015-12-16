@@ -13,6 +13,9 @@ namespace Sylius\Bundle\AttributeBundle\AttributeType;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -35,5 +38,47 @@ class TextAttributeType implements AttributeTypeInterface
     public function getType()
     {
         return static::TYPE;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context)
+    {
+        $validationConfiguration = $attributeValue->getAttribute()->getValidation();
+
+        if (!isset($validationConfiguration['min']) || !isset($validationConfiguration['max'])) {
+            return;
+        }
+
+        $value = $attributeValue->getValue();
+
+        foreach ($this->getValidationErrors($context, $value, $validationConfiguration) as $error) {
+            $context
+                ->buildViolation($error->getMessage())
+                ->atPath('value')
+                ->addViolation()
+            ;
+        }
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     * @param string $value
+     * @param array $validationConfiguration
+     *
+     * @return ConstraintViolationListInterface
+     */
+    private function getValidationErrors(ExecutionContextInterface $context, $value, array $validationConfiguration)
+    {
+        $validator = $context->getValidator();
+
+        return $validator->validate(
+            $value,
+            new Length(array(
+                'min' => $validationConfiguration['min'],
+                'max' => $validationConfiguration['max']
+            ))
+        );
     }
 }

@@ -29,7 +29,7 @@ class TextAttributeType extends AbstractType
     }
 
     /**
-     * {@inheritdoc{
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {

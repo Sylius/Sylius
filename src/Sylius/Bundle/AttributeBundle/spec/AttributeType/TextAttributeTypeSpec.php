@@ -12,6 +12,14 @@
 namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -36,5 +44,36 @@ class TextAttributeTypeSpec extends ObjectBehavior
     function its_type_is_text()
     {
         $this->getType()->shouldReturn('text');
+    }
+
+    function it_checks_if_attribute_value_is_valid(
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        ConstraintViolationInterface $constraintViolation,
+        ConstraintViolationListInterface $constraintViolationList,
+        ExecutionContextInterface $context,
+        ValidatorInterface $validator
+    ) {
+        $attributeValue->getAttribute()->willReturn($attribute);
+        $attribute->getValidation()->willReturn(array('min' => 2, 'max' => 255));
+
+        $attributeValue->getValue()->willReturn('X');
+
+        $context->getValidator()->willReturn($validator);
+        $validator->validate('X', Argument::type('Symfony\Component\Validator\Constraints\Length'))->willReturn($constraintViolationList);
+
+        $constraintViolationList->rewind()->shouldBeCalled();
+        $constraintViolationList->valid()->willReturn(true, false);
+        $constraintViolationList->current()->willReturn($constraintViolation);
+        $constraintViolationList->next()->shouldBeCalled();
+
+        $constraintViolation->getMessage()->willReturn('error message');
+
+        $context->buildViolation('error message')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('value')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($attributeValue, $context);
     }
 }

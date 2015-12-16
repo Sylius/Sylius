@@ -32,7 +32,7 @@ class RegisterAttributeTypePass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.registry.attribute_type');
         $attributeTypes = array();
 
-        foreach ($container->findTaggedServiceIds('sylius.attribute.attribute_type') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.attribute.type') as $id => $attributes) {
             if (!isset($attributes[0]['attribute-type']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type` and `label` attributes.');
             }

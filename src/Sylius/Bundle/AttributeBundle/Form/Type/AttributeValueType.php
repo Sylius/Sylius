@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeValueFormListener;
+use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -56,7 +55,7 @@ class AttributeValueType extends AbstractResourceType
             ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
                 'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName),
             ))
-            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->subjectName, $this->attributeRepository))
+            ->addEventSubscriber(new BuildAttributeValueFormSubscriber($builder->getFormFactory(), $this->subjectName, $this->attributeRepository))
         ;
     }
 

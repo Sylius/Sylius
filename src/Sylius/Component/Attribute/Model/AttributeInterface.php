@@ -12,6 +12,8 @@
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -50,6 +52,15 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      */
     public function setConfiguration(array $configuration);
 
+    /**
+     * @return array
+     */
+    public function getValidation();
+
+    /**
+     * @param array $validation
+     */
+    public function setValidation(array $validation);
 
     /**
      * @return AttributeValueInterface[]

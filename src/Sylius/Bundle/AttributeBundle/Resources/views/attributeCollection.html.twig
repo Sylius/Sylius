@@ -26,7 +26,8 @@
                         </a>
                     </p>
                 {% endif %}
-                <div class="form-group">
+                {% set errors = form.children.value.vars.errors %}
+                <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
                     {% set labelId = form.vars.data.attribute.name|replace(' ', '_')|lower %}
                     <label class="col-lg-2 control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>
                     {% for field in form.children %}
@@ -43,6 +44,13 @@
     {% if data.name == 'attribute' %}
         <input type="hidden" id="{{ data.id }}" name="{{ data.full_name }}" value="{{ data.value }}" />
     {% else %}
-        <div class="col-lg-10">{{ form_widget(item, {'id': labelId}) }}</div>
+        <div class="col-lg-10">
+            {{ form_widget(item, {'id': labelId}) }}
+            {% for error in data.errors %}
+                <span class="help-block form-error">
+                {{ error.message }}
+            </span>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endmacro %}

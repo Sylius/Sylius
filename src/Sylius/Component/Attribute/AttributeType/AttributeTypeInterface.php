@@ -11,13 +11,14 @@
 
 namespace Sylius\Component\Attribute\AttributeType;
 
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 interface AttributeTypeInterface
 {
-    const DEFAULT_ATTRIBUTE_TYPE = 'text';
-
     /**
      * @return string
      */
@@ -27,4 +28,10 @@ interface AttributeTypeInterface
      * @return string
      */
     public function getType();
+
+    /**
+     * @param AttributeValueInterface $attributeValue
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context);
 }

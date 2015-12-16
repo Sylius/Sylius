@@ -36,5 +36,4 @@ class DatetimeAttributeConfigurationType extends AbstractType
     {
         return 'sylius_attribute_type_configuration_datetime';
     }
-
 }

@@ -21,6 +21,8 @@
 
         <parameter key="sylius.form.type.attribute_type_choice.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType</parameter>
         <parameter key="sylius.registry.attribute_type.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+
+        <parameter key="sylius.attribute.validator.attribute.class">Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeValueValidator</parameter>
     </parameters>
 
     <services>
@@ -35,6 +37,11 @@
         <service id="sylius.form.type.attribute_type_choice" class="%sylius.form.type.attribute_type_choice.class%">
             <argument>%sylius.attribute.attribute_types%</argument>
             <tag name="form.type" alias="sylius_attribute_type_choice" />
+        </service>
+
+        <service id="sylius.attribute.validator.attribute" class="%sylius.attribute.validator.attribute.class%">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="validator.constraint_validator" alias="attribute_value_validator" />
         </service>
     </services>
 

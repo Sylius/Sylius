@@ -57,6 +57,9 @@
     </class>
 
     <class name="Sylius\Component\Attribute\Model\AttributeValue">
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeValue">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="attribute">
             <constraint name="NotBlank">
                 <option name="message">sylius.attribute_value.attribute.not_blank</option>

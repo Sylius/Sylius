@@ -47,7 +47,7 @@ class AttributeTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormListener'))
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeFormSubscriber'))
             ->willReturn($builder)
         ;
 

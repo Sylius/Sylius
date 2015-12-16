@@ -29,7 +29,7 @@ class TextareaAttributeType extends AbstractType
     }
 
     /**
-     * {@inheritdoc{
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -385,7 +385,7 @@ class WebContext extends DefaultContext
 
         $this->waitForModalToDisappear($attributesModalContainer);
 
-        $this->getSession()->wait(100);
+        $this->getSession()->wait(300);
     }
 
     /**

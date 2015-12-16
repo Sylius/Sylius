@@ -18,8 +18,13 @@ sylius:
         text: Text
         textarea: Textarea
         title: Attribute types
+        validation: Validation
     attribute_type_configuration:
         datetime:
             format: Format
         date:
             format: Format
+    attribute_type_validation:
+        text:
+            min: Min length
+            max: Max length

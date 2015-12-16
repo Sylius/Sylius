@@ -11,10 +11,10 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following attributes:
-            | name               | type     |
-            | T-Shirt fabric     | text     |
-            | T-Shirt fare trade | checkbox |
-            | Size               | integer  |
+            | name               | type     | validation    |
+            | T-Shirt fabric     | text     | min:2,max:255 |
+            | T-Shirt fare trade | checkbox |               |
+            | Size               | integer  |               |
           And the following products exist:
             | name          | price | options                     | attributes            |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
@@ -107,15 +107,30 @@ Feature: Products
     Scenario: Creating product with string attribute
         Given I am on the product creation page
         When I fill in the following:
-            | Name        | FC Barcelona tee        |
+            | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
         And I add "T-Shirt fabric" attribute
         And I fill in "T-Shirt fabric" with "Polyester"
         When I press "Create"
-        Then I should be on the page of product "FC Barcelona tee"
+        Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created." should appear on the page
+
+    @javascript
+    Scenario: Created product does not pass validation
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And I go to "Attributes" tab
+        And I add "T-Shirt fabric" attribute
+        And I fill in "T-Shirt fabric" with "X"
+        When I press "Create"
+        Then I should still be on the product creation page
+        When I go to "Attributes" tab
+        And I should see "This value is too short. It should have 2 characters or more."
 
     Scenario: Created products appear in the list
         Given I am on the product creation page

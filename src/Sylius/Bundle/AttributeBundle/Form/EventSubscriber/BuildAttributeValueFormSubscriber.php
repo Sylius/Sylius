@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
+namespace Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeValueFormListener implements EventSubscriberInterface
+class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var FormFactoryInterface
@@ -41,8 +41,8 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
 
     /**
      * @param FormFactoryInterface $factory
-     * @param string               $subjectName
-     * @param EntityRepository     $attributesRepository
+     * @param string $subjectName
+     * @param EntityRepository $attributesRepository
      */
     public function __construct(FormFactoryInterface $factory, $subjectName, EntityRepository $attributesRepository)
     {
@@ -110,7 +110,7 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
 
     /**
      * @param string $storageType
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return mixed
      */

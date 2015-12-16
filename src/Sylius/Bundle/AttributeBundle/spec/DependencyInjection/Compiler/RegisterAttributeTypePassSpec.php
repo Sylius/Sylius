@@ -41,7 +41,7 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
                 array('attribute-type' => 'test', 'label' => 'Test attribute type'),
             ),
         );
-        $container->findTaggedServiceIds('sylius.attribute.attribute_type')->willReturn($attributeTypeServices);
+        $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
 
         $attributeTypeDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldBeCalled();
         $container->setParameter('sylius.attribute.attribute_types', array('test' => 'Test attribute type'))->shouldBeCalled();
@@ -65,7 +65,7 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
                 array('attribute_type' => 'test'),
             ),
         );
-        $container->findTaggedServiceIds('sylius.attribute.attribute_type')->willReturn($attributeTypeServices);
+        $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute_type` and `label` attributes.'));
         $attributeTypeDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldNotBeCalled();
     }

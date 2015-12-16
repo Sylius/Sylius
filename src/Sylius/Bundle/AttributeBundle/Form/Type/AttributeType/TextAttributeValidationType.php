@@ -13,29 +13,21 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PercentAttributeType extends AbstractType
+class TextAttributeValidationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        return 'percent';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'label' => false,
-        ));
+        $builder
+            ->add('min', 'number', array('label' => 'sylius.attribute_type_validation.text.min'))
+            ->add('max', 'number', array('label' => 'sylius.attribute_type_validation.text.max'))
+        ;
     }
 
     /**
@@ -43,6 +35,6 @@ class PercentAttributeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_percent';
+        return 'sylius_attribute_type_validation_text';
     }
 }

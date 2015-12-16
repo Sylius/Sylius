@@ -14,6 +14,7 @@ namespace Sylius\Component\Attribute\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -42,6 +43,11 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      * @var array
      */
     protected $configuration = array();
+
+    /**
+     * @var array
+     */
+    protected $validation = array();
 
     /**
      * @var AttributeValueInterface[]|Collection
@@ -148,6 +154,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setValidation(array $validation)
+    {
+        $this->validation = $validation;
     }
 
     /**

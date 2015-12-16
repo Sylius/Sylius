@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -53,7 +54,7 @@ class AttributeSpec extends ObjectBehavior
         $this->setName('T-Shirt collection');
         $this->getName()->shouldReturn('T-Shirt collection');
     }
-    
+
     function its_code_is_mutable()
     {
         $this->setCode('testCode');
@@ -86,6 +87,12 @@ class AttributeSpec extends ObjectBehavior
     {
         $this->setConfiguration(array('format' => 'd/m/Y'));
         $this->getConfiguration()->shouldReturn(array('format' => 'd/m/Y'));
+    }
+
+    function its_validation_options_are_mutable()
+    {
+        $this->setValidation(array('min' => 2, 'max' => 255));
+        $this->getValidation()->shouldReturn(array('min' => 2, 'max' => 255));
     }
 
     function its_storage_type_is_mutable()

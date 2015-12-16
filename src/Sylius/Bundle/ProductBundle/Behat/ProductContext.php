@@ -189,7 +189,9 @@ class ProductContext extends DefaultContext
             $this->thereIsAttribute(
                 $attribute['name'],
                 $attribute['type'],
-                (isset($attribute['code'])) ? $attribute['code'] : null
+                (isset($attribute['code'])) ? $attribute['code'] : null,
+                (isset($attribute['configuration'])) ? $attribute['configuration'] : null,
+                (isset($attribute['validation'])) ? $attribute['validation'] : null
             );
         }
 
@@ -200,7 +202,7 @@ class ProductContext extends DefaultContext
      * @Given /^There is attribute "([^""]*)" with type "([^""]*)"$/
      * @Given /^I created attribute "([^""]*)" with type "([^""]*)"$/
      */
-    public function thereIsAttribute($name, $type, $code = null)
+    public function thereIsAttribute($name, $type, $code = null, $configuration = null, $validation = null)
     {
         $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
         $storageType = (CheckboxAttributeType::TYPE === $type) ? 'boolean' : $type;
@@ -210,6 +212,13 @@ class ProductContext extends DefaultContext
         $attribute->setType($type);
         $attribute->setCode($code);
         $attribute->setStorageType($storageType);
+
+        if (null !== $configuration && '' !== $configuration) {
+            $attribute->setConfiguration($this->getConfiguration($configuration));
+        }
+        if (null !== $validation && '' !== $validation) {
+            $attribute->setValidation($this->getConfiguration($validation));
+        }
 
         $manager = $this->getEntityManager();
         $manager->persist($attribute);

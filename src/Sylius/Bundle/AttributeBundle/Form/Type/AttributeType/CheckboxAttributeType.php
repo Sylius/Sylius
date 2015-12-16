@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -29,7 +28,7 @@ class CheckboxAttributeType extends AbstractType
     }
 
     /**
-     * {@inheritdoc{
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
