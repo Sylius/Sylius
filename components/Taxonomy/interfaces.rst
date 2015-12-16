@@ -12,7 +12,8 @@ TaxonomyInterface
 The **TaxonomyInterface** gives an object a possibility to manage Taxons.
 
 .. note::
-    This interface extends the :ref:`component_translation_model_translatable-interface`,
+    This interface extends the :ref:`component_resource_model_code-aware-interface`,
+    :ref:`component_translation_model_translatable-interface`,
     the :ref:`component_taxonomy_model_taxonomy-translation-interface`
     and the :ref:`component_taxonomy_model_taxons-aware-interface`. |br|
     You will find more information about that interface in `Sylius API TaxonomyInterface`_.
@@ -28,7 +29,8 @@ The **TaxonInterface** gives an object an ability to have Taxons assigned as chi
 
 .. note::
 
-    This interface extends the :ref:`component_translation_model_translatable-interface`
+    This interface extends the :ref:`component_resource_model_code-aware-interface`,
+    :ref:`component_translation_model_translatable-interface`
     and the :ref:`component_translation_model_taxon-translation-interface`. |br|
     You will find more information about that interface in `Sylius API TaxonInterface`_.
 
