@@ -40,7 +40,7 @@ class PermissionEntityTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setNormalizers(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setNormalizer('class', Argument::type('callable'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefaults(Argument::withKey('query_builder'))->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
