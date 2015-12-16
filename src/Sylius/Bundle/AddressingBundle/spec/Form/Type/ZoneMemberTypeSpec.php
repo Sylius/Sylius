@@ -54,7 +54,7 @@ class ZoneMemberTypeSpec extends ObjectBehavior
     {
         $builder->getOption('zone_type')->willReturn('country');
         $builder
-            ->add('code', 'sylius_country_choice', Argument::any())
+            ->add('code', 'sylius_country_code_choice', Argument::any())
             ->willReturn($builder)
         ;
 

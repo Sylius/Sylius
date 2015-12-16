@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -34,7 +33,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     /**
      * @var FormFactoryInterface
      */
-    private $factory;
+    private $formFactory;
 
     /**
      * @param ObjectRepository     $countryRepository
@@ -43,7 +42,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
         $this->countryRepository = $countryRepository;
-        $this->factory = $factory;
+        $this->formFactory = $factory;
     }
 
     /**
@@ -81,7 +80,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
+            $event->getForm()->add($this->formFactory->createNamed('province', 'sylius_province_code_choice', $address->getProvince(), array(
                 'country' => $country,
                 'auto_initialize' => false,
             )));
@@ -110,7 +109,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
+            $event->getForm()->add($this->formFactory->createNamed('province', 'sylius_province_code_choice', null, array(
                 'country'  => $country,
                 'auto_initialize' => false,
             )));

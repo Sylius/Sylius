@@ -48,7 +48,6 @@
             <tr>
                 <th>{{ 'sylius.zone.name'|trans }}</th>
                 <th>{{ 'sylius.ui.code'|trans }}</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -60,11 +59,6 @@
                         <td>{{ member.code }}</td>
                     {% endif %}
                     <td>{{ member.code }}</td>
-                    <td>
-                        <div class="pull-right">
-                            {{ buttons.delete(path('sylius_backend_zone_member_delete', {'zoneId': zone.id, 'id': member.id})) }}
-                        </div>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

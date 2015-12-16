@@ -11,16 +11,14 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class CountryChoiceType extends AbstractType
 {
@@ -49,14 +47,14 @@ class CountryChoiceType extends AbstractType
                 $choices = $this->repository->findBy(array('enabled' => $options['enabled']));
             }
 
-            return $this->getCountryCodes($choices);
+            return new ArrayChoiceList($choices);
         };
 
         $resolver
             ->setDefaults(array(
-                'choices'     => $choices,
+                'choice_list' => $choices,
                 'enabled'     => true,
-                'label'       => 'sylius.form.zone.types.country',
+                'label'       => 'sylius.form.address.country',
                 'empty_value' => 'sylius.form.country.select',
             ))
         ;
@@ -76,22 +74,5 @@ class CountryChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_country_choice';
-    }
-
-    /**
-     * @param CountryInterface[] $countries
-     *
-     * @return array
-     */
-    protected function getCountryCodes(array $countries)
-    {
-        $countryCodes = array();
-
-        /* @var CountryInterface $country */
-        foreach ($countries as $country){
-            $countryCodes[$country->getCode()] = Intl::getRegionBundle()->getCountryName($country->getCode());
-        }
-
-        return $countryCodes;
     }
 }

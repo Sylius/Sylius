@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -23,9 +24,9 @@ class ZoneMemberController extends ResourceController
      */
     public function createNew()
     {
-        $request = $this->getRequest();
+        $request = $this->getConfiguration()->getRequest();
         if (null === $zoneId = $request->get('zoneId')) {
-            throw new NotFoundHttpException('No country given');
+            throw new NotFoundHttpException('No zone given.');
         }
 
         $zone = $this

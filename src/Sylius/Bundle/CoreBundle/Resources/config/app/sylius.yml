@@ -533,6 +533,8 @@ sylius_rbac:
         sylius.zone.update: Edit zone
         sylius.zone.delete: Delete zone
 
+        sylius.zone_member.delete: Delete zone member
+
         sylius.manage.api_client: Manage API clients
         sylius.api_client.show: Show API client
         sylius.api_client.index: List API clients
@@ -674,7 +676,7 @@ sylius_rbac:
         sylius.manage.shipping_category: [sylius.shipping_category.show, sylius.shipping_category.index, sylius.shipping_category.create, sylius.shipping_category.update, sylius.shipping_category.delete]
         sylius.manage.country: [sylius.country.show, sylius.country.index, sylius.country.create, sylius.country.update, sylius.country.delete]
         sylius.manage.province: [sylius.province.show, sylius.province.index, sylius.province.create, sylius.province.update, sylius.province.delete]
-        sylius.manage.zone: [sylius.zone.show, sylius.zone.index, sylius.zone.create, sylius.zone.update, sylius.zone.delete]
+        sylius.manage.zone: [sylius.zone.show, sylius.zone.index, sylius.zone.create, sylius.zone.update, sylius.zone.delete, sylius.zone_member.delete]
         sylius.manage.api_client: [sylius.api_client.show, sylius.api_client.index, sylius.api_client.create, sylius.api_client.update, sylius.api_client.delete]
         sylius.manage.static_content: [sylius.static_content.show, sylius.static_content.index, sylius.static_content.create, sylius.static_content.update, sylius.static_content.delete]
         sylius.manage.menu: [sylius.menu.show, sylius.menu.index, sylius.menu.create, sylius.menu.update, sylius.menu.delete]

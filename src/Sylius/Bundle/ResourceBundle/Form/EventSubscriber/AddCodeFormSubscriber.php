@@ -54,7 +54,7 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
         $disabled = false;
 
         if ($resource instanceof CodeAwareInterface) {
-            $disabled = (null !== $resource->getCode());
+            $disabled = null !== $resource->getCode();
         } else if (null !== $resource) {
             throw new UnexpectedTypeException($resource, CodeAwareInterface::class);
         }
@@ -62,7 +62,7 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
 
         if (!isset($resource)) {
-            $disabled = (null !== $form->getConfig()->getData()['code']);
+            $disabled = null !== $form->getConfig()->getData()['code'];
         }
 
         $form->add('code', $this->type, array('label' => 'sylius.ui.code', 'disabled' => $disabled));

@@ -27,22 +27,22 @@ Feature: Zones
 
     @javascript
     Scenario: Accessing the zone creation form
-        Given I am on the dashboard page
-         When I follow "Zones"
-          And I select "Country" from "form_type"
-          And I follow "Create"
-         Then I should be on the country zone creation page
+        Given I am on the zone index page
+        And I select "Country" from "form_type"
+        And I follow "Create"
+        Then I should be on the zone creation page for type "country"
 
     Scenario: Submitting invalid form
         Given I am on the zone creation page for type "country"
          When I press "Create"
          Then I should still be on the zone creation page for type "country"
           And I should see "Please enter zone name."
+          And I should see "Please enter zone code."
 
     Scenario: Creating new zone requires adding at least 1 member
         Given I am on the zone creation page for type "country"
-          And I fill in "Code" with "EU"
           And I fill in "Name" with "European Union"
+          And I fill in "Code" with "EU"
          When I press "Create"
          Then I should still be on the zone creation page for type "country"
           And I should see "Please add at least 1 zone member."
@@ -50,12 +50,13 @@ Feature: Zones
     @javascript
     Scenario: Creating new zone built from countries
         Given I am on the zone creation page for type "country"
-          And I fill in "Name" with "EU"
+          And I fill in "Name" with "European Union"
+          And I fill in "Code" with "EU"
           And I select "shipping" from "Scope"
           And I add zone member "Estonia"
           And I add zone member "Germany"
          When I press "Create"
-         Then I should be on the page of zone "EU"
+         Then I should be on the page of zone "European Union"
           And I should see "Zone has been successfully created."
           And "Estonia" should appear on the page
           And "Germany" should appear on the page
@@ -81,11 +82,11 @@ Feature: Zones
     Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
-          And I remove the first country
+          And I remove the first province
           And I press "Save changes"
          Then I should be on the page of zone "USA GMT-9"
           And I should see "Zone has been successfully updated."
-          And "Washington" should not appear on the page
+          And "California" should not appear on the page
 
     Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
@@ -97,12 +98,13 @@ Feature: Zones
 
     @javascript
     Scenario: Adding zone member to the existing zone
-        Given I am editing zone "Baltic states"
-         When I add zone member "Estonia"
+        Given there is country "Poland"
+          And I am editing zone "Baltic states"
+         When I add zone member "Poland"
           And I press "Save changes"
          Then I should be on the page of zone "Baltic states"
           And I should see "Zone has been successfully updated."
-          And "Estonia" should appear on the page
+          And "Poland" should appear on the page
 
     @javascript
     Scenario: Deleting zone

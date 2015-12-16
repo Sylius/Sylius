@@ -69,7 +69,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $province->getCode()->willReturn('province');
         $address->getProvince()->willReturn('province');
 
-        $factory->createNamed('province', 'sylius_province_choice', 'province', Argument::withKey('country'))
+        $factory->createNamed('province', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $this->preSetData($event);
@@ -91,7 +91,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $countryRepository->findOneBy(array('code' => 'FR'))->willReturn($country);
         $country->hasProvinces()->willReturn(true);
 
-        $factory->createNamed('province', 'sylius_province_choice', null, Argument::withKey('country'))
+        $factory->createNamed('province', 'sylius_province_code_choice', null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();

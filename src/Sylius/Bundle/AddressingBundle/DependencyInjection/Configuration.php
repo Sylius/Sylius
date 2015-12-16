@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
+use Sylius\Bundle\AddressingBundle\Controller\ZoneController;
+use Sylius\Bundle\AddressingBundle\Controller\ZoneMemberController;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactory;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -193,7 +194,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ZoneType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ZoneChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

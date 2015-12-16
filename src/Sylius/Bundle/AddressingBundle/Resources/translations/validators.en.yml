@@ -48,3 +48,7 @@ sylius:
         name:
             max_length: Zone name must not be longer than 255 characters|Zone name must not be longer than 255 characters.
             not_blank: Please enter zone name.
+    zone_member:
+        code:
+            not_blank: Please choose a zone member.
+        unique: Chosen zone member is already in this zone.

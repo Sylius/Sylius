@@ -15,14 +15,15 @@
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\Province" table="sylius_province">
         <unique-constraints>
-            <unique-constraint columns="country_id,name"/>
+            <unique-constraint columns="country_id,name" />
+            <unique-constraint columns="country_id,code" />
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" unique="true" />
+        <field name="code" column="code" type="string" />
 
         <field name="name" column="name" type="string" />
 

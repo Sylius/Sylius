@@ -68,6 +68,15 @@ Feature: Countries and provinces
           And "Łódź" should appear on the page
           And "Lubusz" should appear on the page
 
+    @javascript
+    Scenario: Editing country with duplicated province
+        Given I am editing country "France"
+        When I click "Add province"
+        And I fill in the 5th province with "Lyon"
+        And I press "Save changes"
+        Then I should see "Province name must be unique."
+        And I should see "Province code must be unique."
+
     Scenario: Created countries appear in the list
         Given I created country "Poland"
          When I go to the country index page
@@ -97,11 +106,11 @@ Feature: Countries and provinces
 
     @javascript
     Scenario: Deleting province
-        Given I am on the page of country "France"
-         When I press "delete" near "Toulouse"
-          And I click "delete" from the confirmation modal
-         Then I should still be on the page of country "France"
-          And "Toulouse" should not appear on the page
+        Given I am editing country "France"
+          And I remove the first province
+          And I press "Save changes"
+         Then I should be on the page of country "France"
+          And "Nancy" should not appear on the page
 
     Scenario: Enabling country
         Given there is a disabled country "Poland"

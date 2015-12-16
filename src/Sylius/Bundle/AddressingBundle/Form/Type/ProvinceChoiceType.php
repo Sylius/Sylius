@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,14 +48,15 @@ class ProvinceChoiceType extends AbstractType
                     $choices = $options['country']->getProvinces();
                 }
 
-            return $this->getProvinceCodes($choices);
+//          return new ObjectChoiceList($choices, null, array(), null, 'id');
+            return new ArrayChoiceList($choices);
         };
 
         $resolver
             ->setDefaults(array(
-                'choices'     => $choices,
+                'choice_list' => $choices,
                 'country'     => null,
-                'label'       => 'sylius.form.zone.types.province',
+                'label'       => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select',
             ))
         ;
@@ -74,22 +76,5 @@ class ProvinceChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_province_choice';
-    }
-
-    /**
-     * @param ProvinceInterface[] $provinces
-     *
-     * @return array
-     */
-    protected function getProvinceCodes(array $provinces)
-    {
-        $provinceCodes = array();
-
-        /* @var ProvinceInterface $province */
-        foreach ($provinces as $province) {
-            $provinceCodes[$province->getCode()] = $province->getName();
-        }
-
-        return $provinceCodes;
     }
 }

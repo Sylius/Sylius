@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -40,12 +41,11 @@ class ZoneController extends ResourceController
 
         $zones->setCurrentPage($request->get('page', 1), true, true);
         $zones->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $pluralName = $this->config->getPluralResourceName();
 
         $form = $this->createFormBuilder()
             ->add('type', 'sylius_zone_type_choice')
             ->getForm();
-
-        $pluralName = $this->config->getPluralResourceName();
 
         $view = $this
             ->view()

@@ -69,7 +69,7 @@ class AddressTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('country', 'sylius_country_choice', Argument::any())
+            ->add('country', 'sylius_country_code_choice', Argument::any())
             ->willReturn($builder)
         ;
 

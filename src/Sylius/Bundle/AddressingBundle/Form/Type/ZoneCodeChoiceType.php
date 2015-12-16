@@ -14,13 +14,12 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneChoiceType extends AbstractType
+class ZoneCodeChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -40,16 +39,11 @@ class ZoneChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = new ObjectChoiceList($this->getZones(), null, array(), null, 'code');
-
         $resolver
             ->setDefaults(array(
-                'choice_list'  => $choices,
-                'choice_label' => function (ZoneInterface $zone){
-                    return $zone->getName();
-                },
-                'label'        => 'sylius.form.zone.types.zone',
-                'empty_value'  => 'sylius.form.zone.select',
+                'choices'     => $this->getZones(),
+                'label'       => 'sylius.form.zone.types.zone',
+                'empty_value' => 'sylius.form.zone.select',
             ))
         ;
     }
@@ -67,7 +61,7 @@ class ZoneChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_zone_choice';
+        return 'sylius_zone_code_choice';
     }
 
     /**
@@ -80,7 +74,7 @@ class ZoneChoiceType extends AbstractType
 
         /* @var ZoneInterface $zone */
         foreach ($zoneObjects as $zone) {
-            $zones[$zone->getCode()] = $zone;
+            $zones[$zone->getCode()] = $zone->getName();
         }
 
         return $zones;

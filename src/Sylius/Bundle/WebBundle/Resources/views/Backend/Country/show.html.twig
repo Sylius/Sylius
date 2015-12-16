@@ -42,7 +42,6 @@
             <tr>
                 <th>{{ 'sylius.form.province.name'|trans }}</th>
                 <th>{{ 'sylius.ui.code'|trans }}</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -50,11 +49,6 @@
                 <tr id="{{ province.id }}">
                     <td>{{ province.name }}</td>
                     <td>{{ province.code }}</td>
-                    <td>
-                        <div class="pull-right">
-                            {{ buttons.delete(path('sylius_backend_province_delete', {'id': province.id, 'countryId' : country.id})) }}
-                        </div>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

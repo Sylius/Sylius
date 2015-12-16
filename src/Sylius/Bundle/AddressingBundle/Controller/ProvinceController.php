@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Province controller.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class ProvinceController extends ResourceController
@@ -43,6 +41,7 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
+        /* @var CountryInterface $country */
         if (!$country = $this->getCountryRepository()->find($countryId)) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
@@ -67,7 +66,7 @@ class ProvinceController extends ResourceController
      */
     public function createNew()
     {
-        $request = $this->getRequest();
+        $request = $this->config->getRequest();
         if (null === $countryId = $request->get('countryId')) {
             throw new NotFoundHttpException('No country given');
         }
@@ -84,8 +83,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country controller.
-     *
      * @return ResourceController
      */
     protected function getCountryController()
@@ -94,8 +91,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country repository.
-     *
      * @return ObjectRepository
      */
     protected function getCountryRepository()
@@ -104,8 +99,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Create province choice form for given country.
-     *
      * @param CountryInterface $country
      *
      * @return FormInterface

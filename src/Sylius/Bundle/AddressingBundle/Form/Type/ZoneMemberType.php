@@ -30,7 +30,7 @@ class ZoneMemberType extends AbstractResourceType
         $type = $builder->getOption('zone_type');
 
         $builder
-            ->add('code', 'sylius_'.$type.'_choice', array(
+            ->add('code', 'sylius_'.$type.'_code_choice', array(
                 'label' => 'sylius.form.zone.types.'.$type,
             ))
         ;
