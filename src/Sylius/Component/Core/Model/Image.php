@@ -31,30 +31,39 @@ class Image implements ImageInterface
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * Image title
      *
 >>>>>>> Adding optional title and description to images
+=======
+>>>>>>> Removing redundant comments
      * @var string
      */
     protected $title;
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * Image description
      *
 >>>>>>> Adding optional title and description to images
+=======
+>>>>>>> Removing redundant comments
      * @var string
      */
     protected $description;
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * Creation date
      *
 >>>>>>> Adding optional title and description to images
+=======
+>>>>>>> Removing redundant comments
      * @var \DateTime
      */
     protected $createdAt;
