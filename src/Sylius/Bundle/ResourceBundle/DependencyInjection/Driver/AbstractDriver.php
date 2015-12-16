@@ -74,7 +74,7 @@ abstract class AbstractDriver implements DriverInterface
 
         foreach ($validationGroups as $formName => $groups) {
             $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
-            $container->setParameter(sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix), $groups);
+            $container->setParameter(sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix), array_merge(array('Default'), $groups));
         }
     }
 
@@ -154,16 +154,15 @@ abstract class AbstractDriver implements DriverInterface
 
                 default:
                     $validationGroupsParameterName = sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
+                    $validationGroups = new Parameter($validationGroupsParameterName);
 
-                    if ($container->hasParameter($validationGroupsParameterName)) {
-                        $validationGroups = new Parameter($validationGroupsParameterName);
-                    } else {
+                    if (!$container->hasParameter($validationGroupsParameterName)) {
                         $validationGroups = array('Default');
                     }
 
                     $definition->setArguments(array(
                         $metadata->getClass('model'),
-                        $validationGroups,
+                        $validationGroups
                     ));
                 break;
             }

@@ -45,11 +45,11 @@ class SyliusPromotionExtension extends AbstractResourceExtension
 
         $container
             ->getDefinition('sylius.form.type.promotion_action')
-            ->addArgument(new Reference('sylius.registry.promotion_action'))
+            ->replaceArgument(1, new Reference('sylius.registry.promotion_action'))
         ;
         $container
             ->getDefinition('sylius.form.type.promotion_rule')
-            ->addArgument(new Reference('sylius.registry.promotion_rule_checker'))
+            ->replaceArgument(1, new Reference('sylius.registry.promotion_rule_checker'))
         ;
     }
 }

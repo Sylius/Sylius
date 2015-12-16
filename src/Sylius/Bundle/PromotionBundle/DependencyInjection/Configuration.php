@@ -11,32 +11,27 @@
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\PromotionBundle\Controller\CouponController;
-use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
-use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Bundle\PromotionBundle\Form\Type\ActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CouponType;
-use Sylius\Component\Promotion\Model\Promotion;
-use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\Rule;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Promotion\Model\Action;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\Coupon;
 use Sylius\Component\Promotion\Model\CouponInterface;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Sylius\Component\Promotion\Model\Promotion;
+use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\Rule;
+use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
@@ -57,77 +52,8 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addResourcesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('promotion_rule_item_total_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_item_count_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_customer_loyalty_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_shipping_country_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_taxonomy_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_contains_product_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_nth_order_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_rule_customer_group_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_action_fixed_discount_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_action_percentage_discount_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_action_add_product_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_coupon_generate_instruction')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('promotion_action_shipping_discount_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 
     /**

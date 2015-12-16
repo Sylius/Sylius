@@ -13,24 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Shipping discount action configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingDiscountConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,15 +37,9 @@ class ShippingDiscountConfigurationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_shipping_discount_configuration';

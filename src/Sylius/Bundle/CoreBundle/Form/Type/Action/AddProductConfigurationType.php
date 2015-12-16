@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -24,18 +23,15 @@ use Symfony\Component\Validator\Constraints\Type;
 class AddProductConfigurationType extends AbstractType
 {
     /**
-     * @var string[]
-     */
-    protected $validationGroups;
-
-    /**
      * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
+    /**
+     * @param ProductVariantRepositoryInterface $variantRepository
+     */
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -75,15 +71,9 @@ class AddProductConfigurationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_add_product_configuration';
