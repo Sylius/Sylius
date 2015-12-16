@@ -46,10 +46,10 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array('email' => null))->shouldBeCalled();
-        $event->getForm()->willReturn($form)->shouldBeCalled();
+        $event->getData()->willReturn(array('email' => null));
+        $event->getForm()->willReturn($form);
 
-        $customerContext->getCustomer()->willReturn($customer)->shouldBeCalled();
+        $customerContext->getCustomer()->willReturn($customer);
 
         $form->remove('email')->shouldBeCalled();
         $form->setData($customer)->shouldBeCalled();
@@ -65,13 +65,13 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array('email' => 'john.doe@example.com'))->shouldBeCalled();
-        $event->getForm()->willReturn($form)->shouldBeCalled();
+        $event->getData()->willReturn(array('email' => 'john.doe@example.com'));
+        $event->getForm()->willReturn($form);
 
-        $customerContext->getCustomer()->willReturn(null)->shouldBeCalled();
-        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn(null)->shouldBeCalled();
+        $customerContext->getCustomer()->willReturn(null);
+        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn(null);
 
-        $customerFactory->createNew()->willReturn($customer)->shouldBeCalled();
+        $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('john.doe@example.com')->shouldBeCalled();
 
         $form->setData($customer)->shouldBeCalled();
@@ -84,12 +84,12 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array())->shouldBeCalled();
-        $event->getForm()->willReturn($form)->shouldBeCalled();
+        $event->getData()->willReturn(array());
+        $event->getForm()->willReturn($form);
 
-        $customerContext->getCustomer()->willReturn(null)->shouldBeCalled();
+        $customerContext->getCustomer()->willReturn(null);
 
-        $form->setData(null)->shouldBeCalled();
+        $form->setData(null);
 
         $this->preSubmit($event);
     }
@@ -102,14 +102,14 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         UserInterface $user
     ) {
-        $event->getData()->willReturn(array('email' => 'john.doe@example.com'))->shouldBeCalled();
-        $event->getForm()->willReturn($form)->shouldBeCalled();
+        $event->getData()->willReturn(array('email' => 'john.doe@example.com'));
+        $event->getForm()->willReturn($form);
 
-        $customerContext->getCustomer()->willReturn(null)->shouldBeCalled();
-        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn($customer)->shouldBeCalled();
-        $customer->getUser()->willReturn($user)->shouldBeCalled();
+        $customerContext->getCustomer()->willReturn(null);
+        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn($customer);
+        $customer->getUser()->willReturn($user);
 
-        $form->setData(null)->shouldBeCalled();
+        $form->setData(null);
 
         $this->preSubmit($event);
     }
