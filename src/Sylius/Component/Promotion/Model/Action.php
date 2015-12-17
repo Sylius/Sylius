@@ -12,7 +12,6 @@
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Promotion\Model\FilterInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

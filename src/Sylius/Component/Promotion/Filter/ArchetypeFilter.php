@@ -17,8 +17,8 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author  Piotr Walków <walkow.piotr@gmail.com>
- * @author  Pete Ward <peter.ward@reiss.com>
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
  */
 class ArchetypeFilter extends AbstractFilter
 {

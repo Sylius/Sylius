@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Product\Model\Product;
-use Sylius\Component\Promotion\Filter\FilterInterface;
+use Sylius\Component\Promotion\Model\FilterInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\BenefitInterface;
 
@@ -297,15 +297,15 @@ class PromotionContext extends DefaultContext
         $originator = $this->getContainer()->get('sylius.originator');
 
         $discounts = explode(',', $promotionName);
+
         $totalDiscountFound = 0;
+        $discountExist = false;
 
         foreach ($discounts as $promotionName) {
-            $discountExist = false;
-
             foreach ($this->order->getItems() as $item) {
-
                 /** @var Adjustment $adjustment */
                 foreach ($item->getAdjustments('promotion') as $adjustment) {
+                    /** @var PromotionInterface $origin */
                     $origin = $originator->getOrigin($adjustment);
 
                     if ($origin && $origin->getName() == $promotionName) {

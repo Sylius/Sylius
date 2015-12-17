@@ -16,6 +16,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
 class TaxonFilter extends AbstractFilter
 {
     const OPTION_TAXON = 'taxon';
@@ -39,6 +43,9 @@ class TaxonFilter extends AbstractFilter
         return $returnedCollection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function resolveConfiguration(array $configuration)
     {
         $resolver = new OptionsResolver();

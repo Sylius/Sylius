@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -102,5 +103,4 @@ interface ActionInterface extends ResourceInterface
      * @param FilterInterface $filter
      */
     public function removeFilter(FilterInterface $filter);
-
 }

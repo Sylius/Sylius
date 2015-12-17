@@ -44,6 +44,9 @@ Feature: Checkout limited time promotions
         Given I am on the store homepage
          When I added product "Sarge" to cart, with quantity "8"
          Then I should be on the cart summary page
-# TODO: Same issue...
+# TODO: UI Tests don't work for now as Adjustments are mainly applied at the OrderItem-level
+# and this branch doesn't have a mechanism for gathering child adjustments to display
+# on the cart summary page. The Grand total indicates that it's been applied successfully.
+# A design conversation needs to be have about how these Adjustments should be collated (see other PR!)
 #          And "Promotion total: -€20.00" should appear on the page
           And "Grand total: €180.00" should appear on the page

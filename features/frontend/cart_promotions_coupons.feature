@@ -52,7 +52,10 @@ Feature: Checkout coupon promotions
           And I press "Save"
          Then I should be on the cart summary page
           And I should see "Your promotion coupon has been added to the cart"
-# TODO: Check why this isn't appearing despite total being correct
+# TODO: UI Tests don't work for now as Adjustments are mainly applied at the OrderItem-level
+# and this branch doesn't have a mechanism for gathering child adjustments to display
+# on the cart summary page. The Grand total indicates that it's been applied successfully.
+# A design conversation needs to be have about how these Adjustments should be collated (see other PR!)
 #          And "Promotion total: -€5.00" should appear on the page
           And "Grand total: €115.00" should appear on the page
 

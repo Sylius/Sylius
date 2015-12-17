@@ -6,7 +6,7 @@ Feature: Checkout usage limited promotions
 
     # TODO: This feature doesn't make any sense!!!
     # TODO: It's talking about 'usage limit' but the only test here relating to limits is item quantity
-    # TODO: and this doesn't really do what we expected and is tested on another feature.Scenario:
+    # TODO: and this doesn't really do what we expected and is tested on another feature
     # TODO: This one should be rewritten to relate to CUSTOMER USAGE
     Background:
         Given store has default configuration

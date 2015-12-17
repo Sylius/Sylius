@@ -13,8 +13,10 @@ namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Applicator\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Process all active promotions.
@@ -25,11 +27,31 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  */
 class PromotionProcessor implements PromotionProcessorInterface
 {
+    /**
+     * @var PromotionRepositoryInterface
+     */
     protected $repository;
+
+    /**
+     * @var PromotionEligibilityCheckerInterface
+     */
     protected $checker;
+
+    /**
+     * @var PromotionApplicatorInterface
+     */
     protected $applicator;
+
+    /**
+     * @var PromotionInterface[]
+     */
     protected $promotions;
 
+    /**
+     * @param PromotionRepositoryInterface $repository
+     * @param PromotionEligibilityCheckerInterface $checker
+     * @param PromotionApplicatorInterface $applicator
+     */
     public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
@@ -37,6 +59,11 @@ class PromotionProcessor implements PromotionProcessorInterface
         $this->applicator = $applicator;
     }
 
+    /**
+     * @param PromotionSubjectInterface $subject
+     *
+     * @return mixed
+     */
     public function process(PromotionSubjectInterface $subject)
     {
         foreach ($subject->getPromotions() as $promotion) {
@@ -62,6 +89,9 @@ class PromotionProcessor implements PromotionProcessorInterface
         }
     }
 
+    /**
+     * @return Collection|PromotionInterface[]
+     */
     protected function getActivePromotions()
     {
         if (null === $this->promotions) {

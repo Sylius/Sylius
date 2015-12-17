@@ -77,7 +77,7 @@
             <argument>Sylius\Component\Promotion\Benefit\PromotionBenefitInterface</argument>
         </service>
         <service id="sylius.registry.promotion_filter" class="%sylius.registry.promotion_filter.class%">
-            <argument>Sylius\Component\Promotion\Filter\FilterInterface</argument>
+            <argument>Sylius\Component\Promotion\Filter\PromotionFilterInterface</argument>
         </service>
 
         <service id="sylius.form.type.promotion_rule.collection" class="%sylius.form.type.promotion_rule.collection.class%">

@@ -11,16 +11,18 @@
 
 namespace Sylius\Component\Promotion\Applicator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Promotion\Benefit\AddProductBenefit;
 use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
-use Sylius\Component\Promotion\Filter\FilterInterface;
-use Sylius\Component\Promotion\Model\BenefitInterface;
+use Sylius\Component\Promotion\Filter\PromotionFilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * Applies all registered promotion actions to given subject.
+ *
+ * TODO: This needs to consider coupling
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author  Piotr Walków <walkow.piotr@gmail.com>
@@ -53,28 +55,35 @@ class PromotionApplicator implements PromotionApplicatorInterface
      */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        // preparing copy of order items for filtering (every action we start from clear set)
+        // Each different action for a promotion results in it's own subjects for the promotion
+        // These can be filtered down depending on how it's configured.
         $orderItems = $subject->getItems();
 
+        if (is_object($orderItems)) {
+            // Therefore we need to make sure we've got an array or PHP will pass a Collection by reference
+            // and we won't get a 'fresh' copy
+            $orderItems = $orderItems->toArray();
+        }
+
         foreach ($promotion->getActions() as $action) {
-            $filteredSubjects = $orderItems;
+            // Back to a Collection to satisfy method requirements
+            $filteredSubjects = new ArrayCollection($orderItems);
 
-            // filtering down order items for the ones that apply to benefit
+            // Filter down order items for the ones that the benefit applies to
             foreach ($action->getFilters() as $filter) {
-                /** @var FilterInterface $filterObject */
+                /** @var PromotionFilterInterface $filterObject */
                 $filterObject = $this->filterRegistry->get($filter->getType());
-
                 $filteredSubjects = $filterObject->apply($filteredSubjects, $filter->getConfiguration());
             }
 
-            // apply all of the benefits to the filtered set
+            // Apply all of the benefits to the filtered set
             foreach ($action->getBenefits() as $benefit) {
                 /** @var PromotionBenefitInterface $benefitObject */
                 $benefitObject = $this->benefitRegistry->get($benefit->getType());
 
-                /** @var  $filteredSubject */
                 foreach ($filteredSubjects as $filteredSubject) {
-                    // so far addProductBenefit works only on Order
+                    // TODO: Coupling here?
+                    // AddProductBenefit works only on Order
                     if ($benefitObject instanceof AddProductBenefit) {
                         $benefitObject->execute($subject, $benefit->getConfiguration(), $promotion);
                     } else {
@@ -94,7 +103,6 @@ class PromotionApplicator implements PromotionApplicatorInterface
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
-            /** @var BenefitInterface $benefit */
             foreach ($action->getBenefits() as $benefit) {
                 $this->benefitRegistry
                     ->get($benefit->getType())

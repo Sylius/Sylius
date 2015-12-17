@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Selectable;
  * @author Piotr Walków <walkow.piotr@gmail.com>
  * @author Pete Ward <peter.ward@reiss.com>
  */
-abstract class AbstractFilter implements FilterInterface
+abstract class AbstractFilter implements PromotionFilterInterface
 {
     /**
      * @var array
@@ -28,7 +28,7 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws UnexpectedValueException if the filter has not returned Collection or it's not Selectable
+     * @throws \UnexpectedValueException if the filter has not returned Collection or it's not Selectable
      */
     public function apply(Collection $collection, array $configuration = array())
     {

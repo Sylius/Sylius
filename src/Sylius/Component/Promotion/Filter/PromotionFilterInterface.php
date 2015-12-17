@@ -14,7 +14,11 @@ namespace Sylius\Component\Promotion\Filter;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
-interface FilterInterface
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
+interface PromotionFilterInterface
 {
     /**
      * @param Collection $collection
