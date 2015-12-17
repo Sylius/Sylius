@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -58,6 +59,7 @@ class OptionType extends AbstractResourceType
                 'label' => false,
                 'button_add_label' => 'sylius.form.option_value.add_value',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

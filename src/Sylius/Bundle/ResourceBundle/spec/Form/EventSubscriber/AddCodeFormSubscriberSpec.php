@@ -45,10 +45,10 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
 
-        $resource->getCode()->shouldBeCalled()->willReturn('Code12');
+        $resource->getCode()->willReturn(null);
 
         $form
-            ->add('code', Argument::type('string'), Argument::containing(true))
+            ->add('code', Argument::type('string'), Argument::withEntry('disabled', false))
             ->shouldBeCalled()
         ;
 
@@ -63,10 +63,10 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
 
-        $resource->getCode()->shouldBeCalled()->willReturn(null);
+        $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', Argument::type('string'), Argument::containing(false))
+            ->add('code', Argument::type('string'), Argument::withEntry('disabled', true))
             ->shouldBeCalled()
         ;
 
@@ -79,6 +79,19 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $this->shouldThrow('\UnexpectedTypeException');
     }
 
+    function it_sets_code_as_enabled_when_resource_is_null(FormEvent $event, FormInterface $form)
+    {
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn(null);
+
+        $form
+            ->add('code', 'text', Argument::withEntry('disabled', false))
+            ->shouldBeCalled()
+        ;
+
+        $this->preSetData($event);
+    }
+
     function it_adds_code_with_specified_type(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)
     {
         $this->beConstructedWith('currency');
@@ -86,10 +99,10 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
 
-        $resource->getCode()->shouldBeCalled()->willReturn('Code12');
+        $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', 'currency', Argument::containing(true))
+            ->add('code', 'currency', Argument::withEntry('disabled', true))
             ->shouldBeCalled()
         ;
 
@@ -101,10 +114,10 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
 
-        $resource->getCode()->shouldBeCalled()->willReturn('Code12');
+        $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', 'text', Argument::containing(true))
+            ->add('code', 'text', Argument::withEntry('disabled', true))
             ->shouldBeCalled()
         ;
 

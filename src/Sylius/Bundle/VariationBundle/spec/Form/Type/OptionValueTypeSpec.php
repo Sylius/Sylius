@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,6 +42,13 @@ class OptionValueTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('value', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

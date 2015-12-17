@@ -514,10 +514,20 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        foreach ($table->getRows() as $i => $value) {
+        foreach ($table->getRows() as $value) {
             $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
-            $newItem->fillField('Value', $value[0]);
+            $newItem->fillField('Value', $value[1]);
+            $newItem->fillField('Code', $value[0]);
         }
+    }
+
+     /**
+      * @When /^I add option value "([^""]*)"$/
+      */
+    public function iAddOptionValue($optionValue)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
+        $newItem->fillField('Value', $optionValue);
     }
 
     /**

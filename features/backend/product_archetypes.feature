@@ -7,13 +7,13 @@ Feature: Product archetypes
     Background:
         Given store has default configuration
           And there are following options:
-            | name             | presentation | values                     |
-            | T-Shirt color    | Color        | Red, Blue, Green           |
-            | T-Shirt size     | Size         | S, M, L                    |
-            | Bag color        | Color        | Black, Light balsamic      |
-            | Beverage size    | Size         | Tall, Grande, Venti        |
-            | Beverage milk    | Milk         | None, Whole, Skinny, Soya  |
-            | Coffee variety   | Variety      | Colombian, Ethiopian       |
+            | code | name           | presentation  | values                                            |
+            | O1   |T-Shirt color   | Color         | Red[OV1], Blue[OV2], Green[OV3]                   |
+            | O2   |T-Shirt size    | Size          | S[OV4], M[OV5], L[OV6]                            |
+            | O3   | Bag color      | Color         | Black[OV7], Light balsamic[OV8]                   |
+            | O4   |  Beverage size | Size          | Tall[OV9], Grande[OV10], Venti[OV11]              |
+            | O5   | Beverage milk  | Milk          | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
+            | O6   | Coffee variety | Variety       | Colombian[OV16], Ethiopian[OV17]                  |
           And there are following attributes:
             | name                  | presentation   | type     |
             | T-Shirt collection    | Collection     | text     |

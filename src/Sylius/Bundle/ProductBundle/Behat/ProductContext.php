@@ -145,26 +145,30 @@ class ProductContext extends DefaultContext
     public function thereAreOptions(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsOption($data['name'], $data['values'], $data['presentation'], false);
+            $this->thereIsOption($data['name'], $data['values'], $data['code'], $data['presentation'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^I created option "([^""]*)" with values "([^""]*)"$/
+     * @Given /^I created option "([^""]*)" with values "([^""]*)" and option code "([^""]*)"$/
      */
-    public function thereIsOption($name, $values, $presentation = null, $flush = true)
+    public function thereIsOption($name, $values, $optionCode, $presentation = null, $flush = true)
     {
         $optionValueFactory = $this->getFactory('product_option_value');
 
         $option = $this->getFactory('product_option')->createNew();
+        $option->setCode($optionCode);
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
-        foreach (explode(',', $values) as $value) {
+        foreach(explode(',', $values) as $valueData) {
+
+            $valueData = preg_split("[\\[|\\]]", $valueData, -1, PREG_SPLIT_NO_EMPTY);
             $optionValue = $optionValueFactory->createNew();
-            $optionValue->setValue(trim($value));
+            $optionValue->setValue(trim($valueData[0]));
+            $optionValue->setCode(trim($valueData[1]));
 
             $option->addValue($optionValue);
         }

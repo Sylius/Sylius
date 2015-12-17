@@ -13,9 +13,9 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
           And there are following options:
-            | name          | presentation | values           |
-            | T-Shirt color | Color        | Red, Blue, Green |
-            | T-Shirt size  | Size         | S, M, L          |
+            | code | name         | presentation  | values                          |
+            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
           And there are following attributes:
             | name           | presentation | type | choices |
             | T-Shirt fabric | Fabric       | text |         |

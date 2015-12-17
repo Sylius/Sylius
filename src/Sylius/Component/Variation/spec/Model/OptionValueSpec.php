@@ -35,6 +35,12 @@ class OptionValueSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('OV1');
+        $this->getCode()->shouldReturn('OV1');
+    }
+
     function it_should_not_belong_to_an_option_by_default()
     {
         $this->getOption()->shouldReturn(null);

@@ -7,9 +7,9 @@ Feature: Product options
     Background:
         Given store has default configuration
           And there are following options:
-            | name          | presentation | values           |
-            | T-Shirt color | Color        | Red, Blue, Green |
-            | T-Shirt size  | Size         | S, M, L          |
+            | code | name         | presentation  | values                          |
+            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
           And I am logged in as administrator
 
     Scenario: Seeing index of all options
@@ -40,7 +40,8 @@ Feature: Product options
 
     Scenario: Trying to create option without at least 2 values
         Given I am on the product option creation page
-        When I fill in "Internal name" with "Bag color"
+        When I fill in "Code" with "PO3"
+        And I fill in "Internal name" with "Bag color"
         And I fill in "Presentation" with "Color"
         And I press "Create"
         Then I should still be on the product option creation page
@@ -49,13 +50,14 @@ Feature: Product options
     @javascript
     Scenario: Creating option with 4 possible values
         Given I am on the product option creation page
-        When I fill in "Internal name" with "Bag color"
+        When I fill in "Code" with "PO3"
+        And I fill in "Internal name" with "Bag color"
         And I fill in "Presentation" with "Color"
         And I add following option values:
-            | Black  |
-            | White  |
-            | Brown  |
-            | Purple |
+            | OV7  | Black  |
+            | OV8  | White  |
+            | OV9  | Brown  |
+            | OV10 | Purple |
         And I press "Create"
         Then I should be on the product option index page
         And I should see "Option has been successfully created."
@@ -63,12 +65,13 @@ Feature: Product options
     @javascript
     Scenario: Values are listed after creating the option
         Given I am on the product option creation page
-        When I fill in "Internal name" with "Mug type"
+        When I fill in "Code" with "PO3"
+        And I fill in "Internal name" with "Mug type"
         And I fill in "Presentation" with "Type"
         And I add following option values:
-            | Normal mug  |
-            | Large mug   |
-            | MONSTER mug |
+            | OV7 | Normal mug  |
+            | OV8 | Large mug   |
+            | OV9 | MONSTER mug |
         And I press "Create"
         Then I should be on the product option index page
         And I should see option with value containing "Normal mug" in that list
@@ -77,15 +80,15 @@ Feature: Product options
     Scenario: Adding values to existing option
         Given I am editing product option "T-Shirt size"
         And I add following option values:
-            | XL  |
-            | XXL |
+            | OV7 | XL  |
+            | OV8 | XXL |
         And I press "Save changes"
         Then I should be on the product option index page
         And "Option has been successfully updated." should appear on the page
         And I should see option with value containing "XXL" in the list
 
     Scenario: Created options appear in the list
-        Given I created option "Hat size" with values "S, M, L"
+        Given I created option "Hat size" with values "S[VO3], M[VO4], L[V05]" and option code "PO3"
         When I go to the product option index page
         Then I should see 3 options in the list
         And I should see option with name "Hat size" in that list
@@ -105,3 +108,57 @@ Feature: Product options
         And I click "delete" from the confirmation modal
         Then I should be on the product option index page
         And I should not see option with name "T-Shirt color" in that list
+
+    Scenario: Cannot edit product option code
+         When I am editing product option "T-Shirt color"
+         Then the code field should be disabled
+
+    @javascript
+    Scenario: Try add product option without code
+        Given I am on the product option creation page
+        When I fill in "Internal name" with "Bag color"
+        And I fill in "Presentation" with "Color"
+        And I add following option values:
+            | OV7 | Black  |
+            | OV8 | White  |
+        And I press "Create"
+        Then I should still be on the product option creation page
+        And I should see "Please enter option code."
+
+    @javascript
+    Scenario: Try add product option with existing code
+        Given I am on the product option creation page
+        When I fill in "Code" with "O1"
+        And I fill in "Internal name" with "Bag color"
+        And I fill in "Presentation" with "Color"
+        And I add following option values:
+            | OV7 | Black  |
+            | OV8 | White  |
+        And I press "Create"
+        Then I should still be on the product option creation page
+        And I should see "The option with given code already exists."
+
+    @javascript
+    Scenario: Try add product option values without code
+        Given I am on the product option creation page
+        When I fill in "Code" with "O3"
+        And I fill in "Internal name" with "Bag color"
+        And I fill in "Presentation" with "Color"
+        And I add option value "Black"
+        And I add option value "White"
+        And I press "Create"
+        Then I should still be on the product option creation page
+        And I should see "Please enter option value code."
+
+    @javascript
+    Scenario: Try add product option value with existing code
+        Given I am on the product option creation page
+        When I fill in "Code" with "O3"
+        And I fill in "Internal name" with "Bag color"
+        And I fill in "Presentation" with "Color"
+        And I add following option values:
+            | OV1 | Black  |
+            | OV8 | White  |
+        And I press "Create"
+        Then I should still be on the product option creation page
+        And I should see "The option value with given code already exists."
