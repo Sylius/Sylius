@@ -19,19 +19,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Action implements ActionInterface
 {
     /**
-     * @var mixed
+     * @var int
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var array
-     */
-    protected $configuration = array();
 
     /**
      * @var PromotionInterface
@@ -60,40 +50,6 @@ class Action implements ActionInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    // TODO: TO BE REMOVED?
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    // TODO: TO BE REMOVED?
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(array $configuration)
-    {
-        $this->configuration = $configuration;
     }
 
     /**
@@ -179,5 +135,4 @@ class Action implements ActionInterface
         $this->benefits->removeElement($benefit);
         $benefit->unsetAction();
     }
-
 }

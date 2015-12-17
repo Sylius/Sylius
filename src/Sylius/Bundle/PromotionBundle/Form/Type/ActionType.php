@@ -25,41 +25,42 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ActionType extends AbstractConfigurationType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
-    {
-        $builder
-            ->add('type', 'sylius_promotion_action_choice', array(
-                'label' => 'sylius.form.action.type',
-                'attr' => array(
-                    'data-form-collection' => 'update',
-                ),
-            ))
-            ->addEventSubscriber(
-                new BuildActionFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
-            )
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults(array(
-            'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_action';
-    }
+    // TODO: To be rewritten/replaced as part of Admin UI rework
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function buildForm(FormBuilderInterface $builder, array $options = array())
+//    {
+//        $builder
+//            ->add('type', 'sylius_promotion_action_choice', array(
+//                'label' => 'sylius.form.action.type',
+//                'attr' => array(
+//                    'data-form-collection' => 'update',
+//                ),
+//            ))
+//            ->addEventSubscriber(
+//                new BuildActionFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
+//            )
+//        ;
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function configureOptions(OptionsResolver $resolver)
+//    {
+//        parent::configureOptions($resolver);
+//
+//        $resolver->setDefaults(array(
+//            'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
+//        ));
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function getName()
+//    {
+//        return 'sylius_promotion_action';
+//    }
 }

@@ -49,28 +49,6 @@ class ActionSpec extends ObjectBehavior
         $this->getFilters()->shouldBeEmpty();
     }
 
-//    function it_should_not_have_type_by_default()
-//    {
-//        $this->getType()->shouldReturn(null);
-//    }
-//
-//    function its_type_should_be_mutable()
-//    {
-//        $this->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
-//        $this->getType()->shouldReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
-//    }
-
-    function it_should_initialize_array_for_configuration_by_default()
-    {
-        $this->getConfiguration()->shouldReturn(array());
-    }
-
-    function its_configuration_should_be_mutable()
-    {
-        $this->setConfiguration(array('value' => 500));
-        $this->getConfiguration()->shouldReturn(array('value' => 500));
-    }
-
     function it_should_not_have_promotion_by_default()
     {
         $this->getPromotion()->shouldReturn(null);
@@ -109,5 +87,4 @@ class ActionSpec extends ObjectBehavior
         $this->removeBenefit($benefit)->shouldReturn(null);
         $this->hasBenefit($benefit)->shouldReturn(false);
     }
-
 }

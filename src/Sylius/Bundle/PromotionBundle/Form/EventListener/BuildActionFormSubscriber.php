@@ -22,6 +22,7 @@ use Sylius\Component\Promotion\Model\ActionInterface;
  */
 class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
 {
+    // TODO: To be rewritten/replaced as part of Admin UI rework
     /**
      * Get action configuration
      *
@@ -31,11 +32,11 @@ class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
      */
     protected function getConfiguration($action)
     {
-        if ($action instanceof ActionInterface && null !== $action->getConfiguration()) {
-            return $action->getConfiguration();
-        }
-
-        return array();
+//        if ($action instanceof ActionInterface && null !== $action->getConfiguration()) {
+//            return $action->getConfiguration();
+//        }
+//
+//        return array();
     }
 
     /**
@@ -47,14 +48,14 @@ class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
      */
     protected function getRegistryIdentifier($action)
     {
-        if ($action instanceof ActionInterface && null !== $action->getType()) {
-            return $action->getType();
-        }
-
-        if (null !== $this->registryIdentifier) {
-            return $this->registryIdentifier;
-        }
-
-        return null;
+//        if ($action instanceof ActionInterface && null !== $action->getType()) {
+//            return $action->getType();
+//        }
+//
+//        if (null !== $this->registryIdentifier) {
+//            return $this->registryIdentifier;
+//        }
+//
+//        return null;
     }
 }

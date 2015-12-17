@@ -15,40 +15,23 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * An Action is now a grouping of Benefits and Filters, multiple of which can be applied to a single Promotion.
+ *
+ * e.g.: "Get $10 off suits or dresses and free shipping when you spend > $500"
+ *
+ * There are 2 actions here:
+ *    1). $10 off suits or dresses - ($10 off is the Benefit, suits or dresses are Filters)
+ *    2). Free Shipping - (Free Shipping Benefit, no filter)
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
  */
 interface ActionInterface extends ResourceInterface
 {
-    // TODO: to be removed?
-    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
-    const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
-
     /**
      * @return mixed
      */
     public function getId();
-
-    // TODO: to be removed?
-    /**
-     * @return string
-     */
-    public function getType();
-
-    // TODO: to be removed?
-    /**
-     * @param string $type
-     */
-    public function setType($type);
-
-    /**
-     * @return array
-     */
-    public function getConfiguration();
-
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration);
 
     /**
      * @return PromotionInterface
