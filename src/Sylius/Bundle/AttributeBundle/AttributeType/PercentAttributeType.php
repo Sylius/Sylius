@@ -24,7 +24,7 @@ class PercentAttributeType implements AttributeTypeInterface
     const TYPE = 'percent';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -32,7 +32,7 @@ class PercentAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

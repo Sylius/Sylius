@@ -25,7 +25,7 @@ class TextAttributeType implements AttributeTypeInterface
     const TYPE = 'text';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -33,7 +33,7 @@ class TextAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

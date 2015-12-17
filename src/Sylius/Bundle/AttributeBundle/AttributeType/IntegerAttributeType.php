@@ -24,7 +24,7 @@ class IntegerAttributeType implements AttributeTypeInterface
     const TYPE = 'integer';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -32,7 +32,7 @@ class IntegerAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

@@ -24,7 +24,7 @@ class CheckboxAttributeType implements AttributeTypeInterface
     const TYPE = 'checkbox';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -32,7 +32,7 @@ class CheckboxAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

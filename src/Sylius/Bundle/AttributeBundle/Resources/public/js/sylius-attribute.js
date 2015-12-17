@@ -13,7 +13,7 @@
         var nextIndex = 0;
         var attributeItems = $('#attributes > div .collection-item');
 
-        if (attributeItems.length == 0) {
+        if (0 == attributeItems.length) {
             return nextIndex;
         }
 

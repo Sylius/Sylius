@@ -24,7 +24,7 @@ class TextareaAttributeType implements AttributeTypeInterface
     const TYPE = 'textarea';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -32,7 +32,7 @@ class TextareaAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

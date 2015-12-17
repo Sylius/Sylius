@@ -24,7 +24,7 @@ class DatetimeAttributeType implements AttributeTypeInterface
     const TYPE = 'datetime';
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
@@ -32,7 +32,7 @@ class DatetimeAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType()
     {

@@ -22,21 +22,22 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 class SyliusAttributeExtension extends AbstractResourceExtension
 {
     /**
-     * @var array
-     */
-    protected $configFiles = array(
-        'services.xml',
-        'attribute_types.xml',
-    );
-
-    /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $configFiles = array(
+            'services.xml',
+            'attribute_types.xml',
+        );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+
+        $config = $this->processConfiguration(new Configuration(), $config);
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
         foreach ($config['resources'] as $subjectName => $subjectConfig) {
@@ -52,24 +53,16 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                     $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
                     $formTranslationDefinition->addArgument($subjectName);
                 }
+
+                if (isset($resourceConfig['classes']['factory']) && 'attribute' === $resourceName) {
+                    $factoryDefinition = $container->getDefinition('sylius.factory.'.$subjectName.'_attribute');
+                    $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
+                }
+
+                if (false !== strpos($resourceName, 'value')) {
+                    $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$subjectName.'_attribute'));
+                }
             }
-
-            if (isset($parameters['factory'])) {
-                $factoryDefinition = $container->getDefinition('sylius.factory.'.$parameters['subject'].'_attribute');
-                $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
-            }
-
-            if (false !== strpos($name, 'value')) {
-                $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$parameters['subject'].'_attribute'));
-            }
-        }
-
-        $configFiles = array(
-            'services.xml',
-        );
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
         }
     }
 
