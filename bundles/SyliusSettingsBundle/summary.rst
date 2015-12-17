@@ -9,12 +9,14 @@ Configuration Reference
     sylius_settings:
         # The driver used for persistence layer.
         driver: ~
-        classes:
+        resources:
             parameter:
-                model: Sylius\Bundle\SettingsBundle\Model\Parameter
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\SettingsBundle\Form\Type\ParameterType
+                classes:
+                    model: Sylius\Bundle\SettingsBundle\Model\Parameter
+                    interface: Sylius\Bundle\SettingsBundle\Model\ParameterInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
 
 Tests
 -----

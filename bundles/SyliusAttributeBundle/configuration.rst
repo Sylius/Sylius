@@ -5,22 +5,41 @@ Configuration reference
 
     sylius_attribute:
           driver: ~ # The driver used for persistence layer. Currently only `doctrine/orm` is supported.
-          classes:
+          resources:
               # `subject_name` can be any name, for example `product`, `ad`, or `blog_post`
               subject_name:
                   subject: ~ # Required: The subject class implementing `AttributeSubjectInterface`.
                   attribute:
-                      model:      ~ # Required: The attribute model class implementing `AttributeInterface`.
-                      repository: ~ # Required: The repository class for the attribute.
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                      form:       Sylius\Bundle\AttributeBundle\Form\Type\AttributeType
+                      classes:
+                          model:      Sylius\Component\Attribute\Model\Attribute
+                          interface:  Sylius\Component\Attribute\Model\AttributeInterface
+                          repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository
+                          controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                          factory:    Sylius\Component\Resource\Factory\Factory
+                          form:
+                              default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeType
+                              choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                      validation_groups:
+                          default: [ sylius ]
+                      translation:
+                          classes:
+                              model:      Sylius\Component\Attribute\Model\AttributeTranslation
+                              interface:  Sylius\Component\Attribute\Model\AttributeTranslationInterface
+                              controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                              repository: ~ # Required: The repository class for the attribute translation.
+                              factory:    Sylius\Component\Resource\Factory\Factory
+                              form:
+                                  default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType
+                          validation_groups:
+                              default: [ sylius ]
                   attribute_value:
-                      model:      ~ # Required: The attribute value model class implementing `AttributeValueInterface`.
-                      repository: ~ # Required: The repository class for the attribute value.
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                      form:       Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType
-          validation_groups:
-              # `subject_name` should be same name as the name key defined for the classes section above.
-              subject_name:
-                  attribute:       [ sylius ]
-                  attribute_value: [ sylius ]
+                      classes:
+                          model:      ~ # Required: The model of the attribute value
+                          interface:  ~ # Required: The interface of the attribute value
+                          controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                          repository: ~ # Required: The repository class for the attribute value.
+                          factory:    Sylius\Component\Resource\Factory\Factory
+                          form:
+                              default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType
+                      validation_groups:
+                          default: [ sylius ]

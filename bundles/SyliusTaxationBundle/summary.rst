@@ -9,23 +9,31 @@ Configuration Reference
     sylius_taxation:
         # The driver used for persistence layer.
         driver: ~
-        classes:
+        resources:
             tax_category:
-                model: Sylius\Component\Taxation\Model\TaxCategory
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form:
-                    default: Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
-                    choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                classes:
+                    model: Sylius\Component\Taxation\Model\TaxCategory
+                    interface: Sylius\Component\Taxation\Model\TaxCategoryInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
+                        choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                validation_groups:
+                    default: [ sylius ]
             tax_rate:
-                model: Sylius\Component\Taxation\Model\TaxRate
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form:
-                    default: Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
-        validation_groups:
-            tax_category: [sylius]
-            tax_rate: [sylius]
+                classes:
+                    model: Sylius\Component\Taxation\Model\TaxRate
+                    interface: Sylius\Component\Taxation\Model\TaxRateInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
+                validation_groups:
+                    default: [ sylius ]
+
 
 Tests
 -----

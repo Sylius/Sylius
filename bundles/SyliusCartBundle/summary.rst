@@ -15,16 +15,19 @@ Configuration reference
         provider: sylius.cart_provider.default
         # The id of cart storage for default provider.
         storage: sylius.cart_storage.session
-        classes:
+        resources:
             cart:
-                controller: Sylius\Bundle\CartBundle\Controller\CartController
-                form: Sylius\Bundle\CartBundle\Form\Type\CartType
+                classes:
+                    controller: Sylius\Bundle\CartBundle\Controller\CartController
+                    form:       Sylius\Bundle\CartBundle\Form\Type\CartType
+                validation_groups:
+                    default: [ sylius ]
             item:
-                controller: Sylius\Bundle\CartBundle\Controller\CartItemController
-                form: Sylius\Bundle\CartBundle\Form\Type\CartItemType
-        validation_groups:
-            cart: [sylius]
-            item: [sylius]
+                classes:
+                    controller: Sylius\Bundle\CartBundle\Controller\CartItemController
+                    form:       Sylius\Bundle\CartBundle\Form\Type\CartItemType
+                validation_groups:
+                    default: [ sylius ]
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

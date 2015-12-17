@@ -8,12 +8,18 @@ Configuration reference
 
     sylius_report:
         driver: ~
-        classes:
+        resources:
             report:
-                model: Sylius\Component\Report\Model\Report
-                costroller: Sylius\Bundle\ReportBundle\Controller\ReportController
-                repository: ~
-                form: Sylius\Bundle\ReportBundle\Form\Type\ReportType
+                classes:
+                    model: Sylius\Component\Report\Model\Report
+                    interface: Sylius\Component\Report\Model\ReportInterface
+                    costroller: Sylius\Bundle\ReportBundle\Controller\ReportController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\ReportBundle\Form\Type\ReportType
+                validation_groups:
+                    default: [ sylius ]
 
 Tests
 -----

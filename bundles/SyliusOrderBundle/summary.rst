@@ -13,29 +13,57 @@ Configuration reference
     sylius_order:
         # The driver used for persistence layer.
         driver: ~
-        classes:
-            sellable:
-                # The class name of the entity you want to put inside orders.
-                model: ~
+        resources:
             order:
-                model: Sylius\Component\Order\Model\Order
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\OrderBundle\Form\Type\OrderType
+                classes:
+                    model:      Sylius\Component\Order\Model\Order
+                    interface:  Sylius\Component\Order\Model\OrderInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderType
+                validation_groups:
+                     default: [ sylius ]
             order_item:
-                model: Sylius\Component\Order\Model\OrderItem
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
+                classes:
+                    model:      Sylius\Component\Order\Model\OrderItem
+                    interface:  Sylius\Component\Order\Model\OrderItemInterface
+                    controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
+                validation_groups:
+                     default: [ sylius ]
+            order_identity:
+                classes:
+                    model:     Sylius\Component\Order\Model\Identity
+                    interface: Sylius\Component\Order\Model\IdentityInterface
+                    factory:   Sylius\Component\Resource\Factory\Factory
             adjustment:
-                model: Sylius\Component\Order\Model\Adjustment
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType
-        validation_groups:
-            order: [sylius] # Order validation groups.
-            order_item: [sylius]
-            adjustment: [sylius]
+                classes
+                    model:      Sylius\Component\Order\Model\Adjustment
+                    interface:  Sylius\Component\Order\Model\AdjustmentInterface
+                    controller: Sylius\Bundle\OrderBundle\Controller\AdjustmentController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType
+                validation_groups:
+                     default: [ sylius ]
+            comment:
+                classes:
+                    model:      Sylius\Component\Order\Model\Comment
+                    interface:  Sylius\Component\Order\Model\CommentInterface
+                    controller: Sylius\Bundle\OrderBundle\Controller\CommentController
+                    repository: ~
+                    factory:    Sylius\Component\Resource\Factory\Factory
+                    form:
+                        default: Sylius\Bundle\OrderBundle\Form\Type\CommentType
+                validation_groups:
+                     default: [ sylius ]
+
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------
