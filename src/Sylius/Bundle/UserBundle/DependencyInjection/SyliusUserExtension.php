@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -20,21 +22,25 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class SyliusUserExtension extends AbstractResourceExtension
 {
-    protected $configFiles = array(
-        'services.xml',
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = array(
+            'services.xml'
         );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setParameter('sylius.user.resetting.token_ttl', $config['resetting']['token']['ttl']);
         $container->setParameter('sylius.user.resetting.token_length', $config['resetting']['token']['length']);

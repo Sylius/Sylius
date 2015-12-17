@@ -14,6 +14,20 @@ namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
+use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
+use Sylius\Component\Payment\Model\CreditCard;
+use Sylius\Component\Payment\Model\CreditCardInterface;
+use Sylius\Component\Payment\Model\Payment;
+use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentMethod;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodTranslation;
+use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -47,127 +61,137 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('payment_method')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\PaymentMethod')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType')->end()
+                                        ->scalarNode('model')->defaultValue(PaymentMethod::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PaymentMethodInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(PaymentMethodType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\PaymentMethodTranslation')->end()
-                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                        ->scalarNode('repository')->end()
+                                        ->arrayNode('classes')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('model')->defaultValue(PaymentMethodTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(PaymentMethodTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                                ->arrayNode('form')
+                                                    ->addDefaultsIfNotSet()
+                                                    ->children()
+                                                        ->scalarNode('default')->defaultValue(PaymentMethodTranslationType::class)->cannotBeEmpty()->end()
+                                                        ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                    ->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                        ->arrayNode('fields')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('name', 'description'))
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('payment')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Payment::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PaymentInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType')->end()
+                                                ->scalarNode('default')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
-                                        ->arrayNode('mapping')
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('credit_card')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(CreditCard::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CreditCardInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->arrayNode('fields')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(array('name', 'description'))
-                                                ->end()
+                                                ->scalarNode('default')->defaultValue(CreditCardType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
                                 ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('payment')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\Payment')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('validation_groups')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\PaymentBundle\Form\Type\PaymentType')->end()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
-                        ->end()
-                        ->arrayNode('credit_card')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\CreditCard')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `validation_groups` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('payment_method')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('payment_method_translation')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('payment')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('credit_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
                 ->end()

@@ -24,18 +24,16 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 class LoadODMMetadataSubscriber implements EventSubscriber
 {
     /**
-     * @var array
+     * @var RegistryInterface
      */
-    protected $classes;
+    private $resourceRegistry;
 
     /**
-     * Constructor
-     *
-     * @param array $classes
+     * @param RegistryInterface $resourceRegistry
      */
-    public function __construct(array $classes)
+    public function __construct(RegistryInterface $resourceRegistry)
     {
-        $this->classes = $classes;
+        $this->resourceRegistry = $resourceRegistry;
     }
 
     /**
@@ -56,7 +54,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $this->setCustomRepositoryClasses($metadata);
+        $this->convertToDocumentIfNeeded($metadata);
 
         if (!$metadata->isMappedSuperclass) {
             $this->setAssociationMappings($metadata, $eventArgs->getDocumentManager()->getConfiguration());
@@ -65,20 +63,28 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function setCustomRepositoryClasses(ClassMetadataInfo $metadata)
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
+    private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
     {
-        foreach ($this->classes as $application => $classes) {
-            foreach ($classes as $class) {
-                if (isset($class['model']) && $class['model'] === $metadata->getName()) {
-                    $metadata->isMappedSuperclass = false;
-                    if (isset($class['repository'])) {
-                        $metadata->setCustomRepositoryClass($class['repository']);
-                    }
-                }
+        foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
+            if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
+                continue;
             }
+
+            if ($resourceMetadata->hasClass('repository')) {
+                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
+            }
+
+            $metadata->isMappedSuperclass = false;
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     * @param $configuration
+     */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
@@ -96,6 +102,9 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach ($metadata->associationMappings as $key => $value) {
@@ -105,6 +114,11 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param $type
+     *
+     * @return bool
+     */
     private function hasRelation($type)
     {
         return in_array(

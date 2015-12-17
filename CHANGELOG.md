@@ -7,12 +7,16 @@ This chapter references the relevant changes done in 0.16 version.
 
 To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.15.0...master
 
+ * feature #3709 Access to app_dev.php permitted through the use of SYLIUS_APP_DEV_PERMITTED environment variable (ideal for vagrant)
  * feature #3110 [BC BREAK] Bumped minimal versions, major changes: PHP >=5.5.9, Symfony ^2.7
  * bc break #3364 [BC BREAK] Renamed setDefaultOptions to configureOptions
  * bc break #3536 [BC BREAK] Renamed label to type on adjustment
  * bc break #3610 [BC BREAK] Renamed `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
  * feature #3288 [BC BREAK][Product] Removed ProductBuilder class
  * feature #3617 [BC BREAK][Resource] Created InMemoryRepository and implemented ResourceInterface
+ * bc break #3721 [BC BREAK] Change configuration tree structure for all bundles, additional ``resources`` level added to root node.
+ * bc break #3721 [BC BREAK] Validation groups are configured per resource in appropriate node.
+ * bc break #3721 [BC BREAK] Validation groups parameters renamed from ``sylius.validation_group.<name>`` to ``<sylius.validation_groups.<name>``.
 
 ## v0.15 (2015-09-08)
 

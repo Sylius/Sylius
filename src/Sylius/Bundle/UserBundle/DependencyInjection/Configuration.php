@@ -13,6 +13,26 @@ namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\UserBundle\Controller\CustomerController;
+use Sylius\Bundle\UserBundle\Controller\UserController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
+use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\GroupType;
+use Sylius\Component\User\Model\Customer;
+use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\UserOAuth;
+use Sylius\Component\User\Model\UserOAuthInterface;
+use Sylius\Component\User\Model\Group;
+use Sylius\Component\User\Model\GroupInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -40,13 +60,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->arrayNode('templates')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('user')->defaultValue('SyliusUserBundle:User')->end()
-                        ->scalarNode('customer')->defaultValue('SyliusUserBundle:Customer')->end()
-                    ->end()
-                ->end()
                 ->arrayNode('resetting')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -75,14 +88,12 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addValidationGroupsSection(ArrayNodeDefinition $node)
@@ -92,10 +103,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('validation_groups')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('customer')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
-                        ->end()
                         ->arrayNode('customer_profile')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius', 'sylius_customer_profile'))
@@ -112,17 +119,9 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius_customer_guest'))
                         ->end()
-                        ->arrayNode('user')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
                         ->arrayNode('user_registration')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius', 'sylius_user_registration'))
-                        ->end()
-                        ->arrayNode('group')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
                 ->end()
@@ -131,33 +130,63 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('customer')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\Customer')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\CustomerController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->scalarNode('templates')->defaultValue('SyliusUserBundle:Customer')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerType')->end()
-                                        ->scalarNode('profile')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType')->end()
-                                        ->scalarNode('registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType')->end()
-                                        ->scalarNode('simple_registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType')->end()
-                                        ->scalarNode('guest')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                        ->scalarNode('model')->defaultValue(Customer::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CustomerInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(CustomerController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(CustomerType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('profile')->defaultValue(CustomerProfileType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('registration')->defaultValue(CustomerRegistrationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('simple_registration')->defaultValue(CustomerSimpleRegistrationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('guest')->defaultValue(CustomerGuestType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
+                                        ->end()
+                                        ->arrayNode('profile')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
+                                        ->end()
+                                        ->arrayNode('registration')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_customer_profile', 'sylius_user_registration'))
+                                        ->end()
+                                        ->arrayNode('simple_registration')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_user_registration'))
+                                        ->end()
+                                        ->arrayNode('guest')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius_customer_guest'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -165,15 +194,35 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\User')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\UserController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserType')->end()
-                                        ->scalarNode('registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType')->end()
+                                        ->scalarNode('model')->defaultValue(User::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(UserInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(UserController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(UserType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('registration')->defaultValue(UserRegistrationType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                        ->arrayNode('registration')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -181,24 +230,45 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('user_oauth')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\UserOAuth')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(UserOAuth::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(UserOAuthInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('group')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\Group')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\GroupType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                        ->scalarNode('model')->defaultValue(Group::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(GroupInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(GroupType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

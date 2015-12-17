@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TranslationBundle\EventListener;
 
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
@@ -19,20 +20,22 @@ use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 abstract class AbstractTranslatableListener
 {
     /**
+     * @var RegistryInterface
+     */
+    protected $registry;
+
+    /**
      * @var LocaleProviderInterface
      */
     protected $localeProvider;
 
     /**
-     * Mapping.
-     *
-     * @var array
+     * @param RegistryInterface $registry
+     * @param LocaleProviderInterface $localeProvider
      */
-    protected $configs;
-
-    public function __construct(LocaleProviderInterface $localeProvider, array $configs)
+    public function __construct(RegistryInterface $registry, LocaleProviderInterface $localeProvider)
     {
+        $this->registry = $registry;
         $this->localeProvider = $localeProvider;
-        $this->configs = $configs;
     }
 }

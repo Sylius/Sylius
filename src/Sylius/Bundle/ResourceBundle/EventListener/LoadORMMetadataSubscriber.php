@@ -15,27 +15,25 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * Doctrine listener used to manipulate mappings.
- *
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadORMMetadataSubscriber implements EventSubscriber
 {
     /**
-     * @var array
+     * @var RegistryInterface
      */
-    protected $classes;
+    private $resourceRegistry;
 
     /**
-     * Constructor
-     *
-     * @param array $classes
+     * @param RegistryInterface $resourceRegistry
      */
-    public function __construct($classes)
+    public function __construct(RegistryInterface $resourceRegistry)
     {
-        $this->classes = $classes;
+        $this->resourceRegistry = $resourceRegistry;
     }
 
     /**
@@ -56,7 +54,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $this->process($metadata);
+        $this->convertToEntityIfNeeded($metadata);
 
         if (!$metadata->isMappedSuperclass) {
             $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
@@ -65,28 +63,28 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function process(ClassMetadataInfo $metadata)
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
+    private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
     {
-        foreach ($this->classes as $application => $classes) {
-            foreach ($classes as $class) {
-                if (isset($class['model']) && $class['model'] === $metadata->getName()) {
-                    $metadata->isMappedSuperclass = false;
-
-                    if (isset($class['repository'])) {
-                        $metadata->setCustomRepositoryClass($class['repository']);
-                    }
-                } else if (isset($class['translation']['model'])
-                    && $class['translation']['model'] === $metadata->getName()) {
-                    $metadata->isMappedSuperclass = false;
-
-                    if (isset($class['translation']['repository'])) {
-                        $metadata->setCustomRepositoryClass($class['translation']['repository']);
-                    }
-                }
+        foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
+            if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
+                continue;
             }
+
+            if ($resourceMetadata->hasClass('repository')) {
+                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
+            }
+
+            $metadata->isMappedSuperclass = false;
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     * @param $configuration
+     */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
@@ -107,6 +105,9 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param ClassMetadataInfo $metadata
+     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach ($metadata->getAssociationMappings() as $key => $value) {
@@ -116,6 +117,11 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param $type
+     *
+     * @return bool
+     */
     private function hasRelation($type)
     {
         return in_array(

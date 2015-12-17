@@ -67,15 +67,23 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     private function mapTranslatable(ClassMetadata $metadata)
     {
-        // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return.
-        if (!isset($this->configs[$metadata->name])) {
+        $className = $metadata->name;
+
+        try {
+            $resourceMetadata = $this->registry->getByClass($className);
+        } catch (\InvalidArgumentException $exception) {
             return;
         }
 
+        if (!$resourceMetadata->hasParameter('translation')) {
+            return;
+        }
+
+        $translationResourceMetadata = $this->registry->get($resourceMetadata->getAlias().'_translation');
+
         $metadata->mapOneToMany(array(
             'fieldName'     => 'translations',
-            'targetEntity'  => $this->configs[$metadata->name]['translation']['model'],
+            'targetEntity'  => $translationResourceMetadata->getClass('model'),
             'mappedBy'      => 'translatable',
             'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
             'indexBy'       => 'locale',
@@ -91,15 +99,19 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     private function mapTranslation(ClassMetadata $metadata)
     {
-        // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return.
-        if (!isset($this->configs[$metadata->name])) {
+        $className = $metadata->name;
+
+        try {
+            $resourceMetadata = $this->registry->getByClass($className);
+        } catch (\InvalidArgumentException $exception) {
             return;
         }
 
+        $translatableResourceMetadata = $this->registry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
+
         $metadata->mapManyToOne(array(
             'fieldName'    => 'translatable' ,
-            'targetEntity' => $this->configs[$metadata->name]['model'],
+            'targetEntity' => $translatableResourceMetadata->getClass('model'),
             'inversedBy'   => 'translations' ,
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',

@@ -27,13 +27,19 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'product' => array(
                 'variable' => 'Some\App\Product\Entity\Product',
                 'option' => array(
-                    'model' => 'Some\App\Product\Entity\Option',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Option',
+                    )
                 ),
                 'option_value' => array(
-                    'model' => 'Some\App\Product\Entity\OptionValue',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\OptionValue',
+                    )
                 ),
                 'variant' => array(
-                    'model' => 'Some\App\Product\Entity\Variant',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Variant',
+                    )
                 ),
             ),
         ));

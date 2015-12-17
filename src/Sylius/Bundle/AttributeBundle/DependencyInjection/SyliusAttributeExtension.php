@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Attribute extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusAttributeExtension extends AbstractResourceExtension
@@ -26,64 +26,64 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config, new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
+
+                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
+                $formDefinition->addArgument($subjectName);
+
+                if (isset($resourceConfig['translation'])) {
+                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
+                    $formTranslationDefinition->addArgument($subjectName);
+                }
+            }
+        }
+
+        $configFiles = array(
+            'services.xml',
         );
 
-        foreach ($config['classes'] as $name => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
-            $formDefinition->addArgument($parameters['subject']);
-
-            if (isset($parameters['translation'])) {
-                $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$name.'_translation');
-                $formTranslationDefinition->addArgument($parameters['subject']);
-            }
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Resolve resources for every subject.
+     *
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
      */
-    public function process(array $config, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container)
     {
         $subjects = array();
-        $convertedConfig = array();
 
-        foreach ($config['classes'] as $subject => $parameters) {
+        foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;
-            unset($parameters['subject']);
-
-            foreach ($parameters as $resource => $classes) {
-                $convertedConfig[$subject.'_'.$resource] = $classes;
-                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
-            }
-
-            if (!isset($config['validation_groups'][$subject]['attribute'])) {
-                $config['validation_groups'][$subject]['attribute'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['attribute_translation'])) {
-                $config['validation_groups'][$subject]['attribute_translation'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['attribute_value'])) {
-                $config['validation_groups'][$subject]['attribute_value'] = array('sylius');
-            }
         }
 
         $container->setParameter('sylius.attribute.subjects', $subjects);
 
-        $config['classes'] = $convertedConfig;
-        $convertedConfig = array();
+        $resolvedResources = array();
 
-        foreach ($config['validation_groups'] as $subject => $parameters) {
-            foreach ($parameters as $resource => $validationGroups) {
-                $convertedConfig[$subject.'_'.$resource] = $validationGroups;
+        foreach ($resources as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (is_array($resourceConfig)) {
+                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                }
             }
         }
 
-        $config['validation_groups'] = $convertedConfig;
-
-        return parent::process($config, $container);
+        return $resolvedResources;
     }
 }
