@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,12 +22,12 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DoctrineODMDriver extends AbstractDatabaseDriver
+class DoctrineODMDriver extends AbstractDoctrineDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDriver()
+    public function getType()
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM;
     }
@@ -33,30 +35,33 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        $reflection = new \ReflectionClass($classes['model']);
+        $modelClass = $metadata->getClass('model');
+
+        $reflection = new \ReflectionClass($modelClass);
         $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
-        $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
+        $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
         $repositoryClass = $translatable
             ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository'
             : new Parameter('sylius.mongodb_odm.repository.class');
 
-        if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+        if ($metadata->hasClass('repository')) {
+            $repositoryClass = $metadata->getClass('repository');
         }
 
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
-            ->setFactory(array(new Reference($this->getManagerServiceKey()), 'getUnitOfWork'))
-            ->setPublic(false);
+            ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getUnitOfWork'))
+            ->setPublic(false)
+        ;
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
+            new Reference($metadata->getServiceId('manager')),
             $unitOfWorkDefinition,
-            $this->getClassMetadataDefinition($classes['model']),
+            $this->getClassMetadataDefinition($modelClass),
         ));
 
         return $definition;
@@ -65,9 +70,9 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceKey()
+    protected function getManagerServiceId(MetadataInterface $metadata)
     {
-        return sprintf('doctrine_mongodb.odm.%s_document_manager', $this->managerName);
+        return sprintf('doctrine_mongodb.odm.%s_document_manager', 'default');
     }
 
     /**

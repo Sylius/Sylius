@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,12 +22,12 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DoctrinePHPCRDriver extends AbstractDatabaseDriver
+class DoctrinePHPCRDriver extends AbstractDoctrineDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDriver()
+    public function getType()
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
     }
@@ -33,29 +35,29 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata)
     {
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
-        if (isset($classes['repository'])) {
-            $repositoryClass  = $classes['repository'];
+        if ($metadata->hasClass('repository')) {
+            $repositoryClass  = $metadata->getClass('repository');
         }
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model']),
+            new Reference($metadata->getServiceId('manager')),
+            $this->getClassMetadataDefinition($metadata),
         ));
 
-        return $definition;
+        $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceKey()
+    protected function getManagerServiceId(MetadataInterface $metadata)
     {
-        return sprintf('doctrine_phpcr.odm.%s_document_manager', $this->managerName);
+        return sprintf('doctrine_phpcr.odm.%s_document_manager', 'default');
     }
 
     /**

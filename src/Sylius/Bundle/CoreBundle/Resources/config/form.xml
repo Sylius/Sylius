@@ -58,7 +58,7 @@
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.order.class%</argument>
-            <argument>%sylius.validation_group.order%</argument>
+            <argument>%sylius.validation_groups.order%</argument>
             <argument type="service" id="sylius.context.channel"/>
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
@@ -69,14 +69,14 @@
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
             <argument>%sylius.model.order.class%</argument>
-            <argument>%sylius.validation_group.order%</argument>
+            <argument>%sylius.validation_groups.order%</argument>
             <argument type="service" id="sylius.context.channel" />
             <tag name="form.type" alias="sylius_checkout_payment" />
         </service>
 
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>
-            <argument>%sylius.validation_group.cart%</argument>
+            <argument>%sylius.validation_groups.cart%</argument>
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <tag name="form.type" alias="sylius_cart" />
         </service>
@@ -130,38 +130,38 @@
 
         <!-- promotions -->
         <service id="sylius.form.type.promotion_rule.nth_order_configuration" class="%sylius.form.type.promotion_rule.nth_order_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_nth_order_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_nth_order_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_nth_order_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.customer_loyalty_configuration" class="%sylius.form.type.promotion_rule.customer_loyalty_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_customer_loyalty_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_customer_loyalty_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_customer_loyalty_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
             <argument>%sylius.model.country.class%</argument>
-            <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_shipping_country_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_taxonomy_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_taxonomy_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.contains_product_configuration" class="%sylius.form.type.promotion_rule.contains_product_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_contains_product_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_contains_product_configuration%</argument>
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.customer_group_configuration" class="%sylius.form.type.promotion_rule.customer_group_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_customer_group_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_rule_customer_group_configuration%</argument>
             <argument type="service" id="sylius.repository.group" />
             <tag name="form.type" alias="sylius_promotion_rule_customer_group_configuration" />
         </service>
         <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="%sylius.form.type.promotion_action.shipping_discount_configuration.class%">
-            <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_action_shipping_discount_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
         </service>
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
-            <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
+            <argument>%sylius.validation_groups.promotion_action_add_product_configuration%</argument>
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>

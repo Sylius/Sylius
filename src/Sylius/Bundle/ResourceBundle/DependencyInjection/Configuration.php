@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -42,8 +43,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `resources` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addResourcesSection(ArrayNodeDefinition $node)
@@ -58,27 +57,57 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('object_manager')->defaultValue('default')->end()
                             ->scalarNode('templates')->cannotBeEmpty()->end()
                             ->arrayNode('classes')
+                                ->isRequired()
+                                ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->end()
+                                    ->scalarNode('interface')->cannotBeEmpty()->end()
+                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->scalarNode('interface')->end()
-                                    ->arrayNode('translation')
+                                    ->arrayNode('form')
+                                        ->prototype('scalar')->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('validation_groups')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->arrayNode('default')
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue(array())
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('translation')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->arrayNode('classes')
+                                        ->isRequired()
+                                        ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('model')->isRequired()->end()
-                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                            ->scalarNode('repository')->end()
-                                            ->scalarNode('interface')->end()
-                                            ->arrayNode('mapping')
-                                                ->isRequired()
-                                                ->children()
-                                                    ->arrayNode('fields')
-                                                        ->prototype('scalar')
-                                                    ->end()
-                                                ->end()
+                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->arrayNode('form')
+                                                ->prototype('scalar')->end()
                                             ->end()
                                         ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array())
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('fields')
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue(array())
                                     ->end()
                                 ->end()
                             ->end()
@@ -90,8 +119,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `settings` section.
-     *
      * @param $node
      */
     private function addSettingsSection(ArrayNodeDefinition $node)

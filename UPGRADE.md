@@ -3,6 +3,11 @@ UPGRADE
 
 # From 0.15.0 to 0.16.x
 
+## Codebase upgrade:
+
+ * Change your configuration for bundles all resources are configured under ``sylius_<bundle> -> resources -> <resource>`` node
+ * Rename validation groups parameter names if you used them anywhere
+
 ## PayumBundle
 
  * Changed configuration key `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
@@ -24,9 +29,11 @@ https://github.com/Sylius/Sylius/pull/2717
 #### Database upgrade:
  * Call ``` sylius:rbac:initialize ``` to create new roles in your system
  * Execute migration script to migrate your data into the new model schema<br/>
- **The migration script migrates only default data, if you have some customizations on any of affected entities you should take care of them yourself!**
+ 
+**The migration script migrates only default data, if you have some customizations on any of affected entities you should take care of them yourself!**
 
 #### Codebase upgrade:
+
  * We no longer use FOSUserBundle
  * User provider has been changed https://github.com/Sylius/Sylius/pull/2717/files#diff-da1af97fca8a5fcb6fb7053584105ba7R6
  * Everything related to e-commerce (orders, addresses, groups and coupons) are now associated with Customer
@@ -37,7 +44,7 @@ https://github.com/Sylius/Sylius/pull/2717
  * Email no longer exist on User. It is on Customer now
  * In the checkout we depend on Customer not User
  * In templates in many places we use Customer instead of User entity now
-
+ 
 ## API client
 
 https://github.com/Sylius/Sylius/pull/2887
@@ -62,6 +69,7 @@ Related discussion https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issu
 [Removed `CountryTranslation`, using `Intl` Symfony component instead to provide translated country names based on ISO country code.](https://github.com/Sylius/Sylius/pull/3035)
 
 #### Database upgrade
+
  * Execute migration script to migrate your data into the new model schema
 
 # From 0.9.0 to 0.10.x

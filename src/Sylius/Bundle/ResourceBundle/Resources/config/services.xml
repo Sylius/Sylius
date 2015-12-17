@@ -17,6 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.resource_registry.class">Sylius\Component\Resource\Metadata\Registry</parameter>
+
         <parameter key="sylius.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
         <parameter key="sylius.phpcr_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository</parameter>
@@ -49,6 +51,8 @@
     </parameters>
 
     <services>
+        <service id="sylius.resource_registry" class="%sylius.resource_registry.class%" />
+
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
             <argument>%sylius.controller.configuration.class%</argument>
@@ -66,11 +70,11 @@
         </service>
 
         <service id="sylius.event_subscriber.load_orm_metadata" class="%sylius.event_subscriber.load_orm_metadata.class%">
-            <argument>%sylius.config.classes%</argument>
+            <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine.event_subscriber" priority="8192" />
         </service>
         <service id="sylius.event_subscriber.load_odm_metadata" class="%sylius.event_subscriber.load_odm_metadata.class%">
-            <argument>%sylius.config.classes%</argument>
+            <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
         </service>
         <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">

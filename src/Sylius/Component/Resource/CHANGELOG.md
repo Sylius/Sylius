@@ -7,4 +7,6 @@ CHANGELOG
 * ``createNew`` method removed from RepositoryInterface.
 * Introduce InMemoryRepository for object storage using the memory.
 * Extracted ``getId`` method into ResourceInterface.
-* Extended RepositoryInterface by ``add`` and ``remove`` methods
+* Extended RepositoryInterface by ``add`` and ``remove`` methods.
+* Introduce Metadata class for easier handling of resource configurations.
+* Add Registry to hold all resources in the system.

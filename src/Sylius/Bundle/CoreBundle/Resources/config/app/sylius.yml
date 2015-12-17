@@ -25,141 +25,169 @@ sylius_money:
     locale: %sylius.locale%
 
 sylius_locale:
-    classes:
+    resources:
         locale:
-            controller: Sylius\Bundle\CoreBundle\Controller\LocaleController
+            classes:
+                controller: Sylius\Bundle\CoreBundle\Controller\LocaleController
 
 sylius_currency: ~
 
 sylius_contact: ~
 
 sylius_api:
-    classes:
+    resources:
         api_user:
-            model: %sylius.model.user.class%
+            classes:
+                model: %sylius.model.user.class%
 
 sylius_channel:
-    classes:
+    resources:
         channel:
-            model: Sylius\Component\Core\Model\Channel
-            form:
-              default: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
+            classes:
+                model: Sylius\Component\Core\Model\Channel
+                form:
+                  default: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
 
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
-    classes:
-        item:
-            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+    resources:
         cart:
-            form: Sylius\Bundle\CoreBundle\Form\Type\CartType
+            classes:
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CartType
+        cart_item:
+            classes:
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
 sylius_settings: ~
 
 sylius_content:
     driver: doctrine/phpcr-odm
-    classes:
+    resources:
         static_content:
-            repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
-            form:
-                choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
+            classes:
+                repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+                form:
+                    choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
 sylius_taxonomy:
-    classes:
+    resources:
         taxonomy:
-            model: Sylius\Component\Core\Model\Taxonomy
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
+            classes:
+                model: Sylius\Component\Core\Model\Taxonomy
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
         taxon:
-            model: Sylius\Component\Core\Model\Taxon
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+            classes:
+                model: Sylius\Component\Core\Model\Taxon
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
 sylius_product:
-    classes:
+    resources:
         product:
-            model: Sylius\Component\Core\Model\Product
-            controller: Sylius\Bundle\CoreBundle\Controller\ProductController
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
-            translation:
-                model: Sylius\Component\Core\Model\ProductTranslation
+            classes:
+                model: Sylius\Component\Core\Model\Product
+                controller: Sylius\Bundle\CoreBundle\Controller\ProductController
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+            translation:
+                classes:
+                    model: Sylius\Component\Core\Model\ProductTranslation
+                    form:
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
 
 
 sylius_archetype:
-    classes:
+    resources:
         product:
+            archetype:
+                classes:
+                    model: Sylius\Component\Product\Model\Archetype
+                translation:
+                    classes:
+                        model: Sylius\Component\Product\Model\ArchetypeTranslation
             subject: Sylius\Component\Core\Model\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
-            archetype:
-                model: Sylius\Component\Product\Model\Archetype
-                translation:
-                    model: Sylius\Component\Product\Model\ArchetypeTranslation
 
 sylius_attribute: ~
 
 sylius_variation:
-    classes:
+    resources:
         product:
             variant:
-                model: Sylius\Component\Core\Model\ProductVariant
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
-                form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
+                classes:
+                    model: Sylius\Component\Core\Model\ProductVariant
+                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
+                    form:
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_taxation:
-    classes:
+    resources:
         tax_rate:
-            model: Sylius\Component\Core\Model\TaxRate
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
+            classes:
+                model: Sylius\Component\Core\Model\TaxRate
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
-    classes:
+    resources:
         shipment:
-            model: Sylius\Component\Core\Model\Shipment
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
+            classes:
+                model: Sylius\Component\Core\Model\Shipment
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
         shipment_item:
-            model: Sylius\Component\Core\Model\InventoryUnit
+            classes:
+                model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
-            model: Sylius\Component\Core\Model\ShippingMethod
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+            classes:
+                model: Sylius\Component\Core\Model\ShippingMethod
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
 sylius_promotion:
-    classes:
-        promotion:
-            model: Sylius\Component\Core\Model\Promotion
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
+    resources:
         promotion_subject:
-            model: %sylius.model.order.class%
+            classes:
+                model: %sylius.model.order.class%
+        promotion:
+            classes:
+                model: Sylius\Component\Core\Model\Promotion
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
         promotion_coupon:
-            model: Sylius\Component\Core\Model\Coupon
-            form: Sylius\Bundle\CoreBundle\Form\Type\CouponType
+            classes:
+                model: Sylius\Component\Core\Model\Coupon
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
 
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
     track_inventory: %sylius.inventory.tracking_enabled%
-    classes:
+    resources:
         inventory_unit:
-            model: Sylius\Component\Core\Model\InventoryUnit
+            classes:
+                model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
-            model: %sylius.model.product_variant.class%
+            classes:
+                model: %sylius.model.product_variant.class%
 
 sylius_payment:
-    classes:
+    resources:
         payment:
-            model: Sylius\Component\Core\Model\Payment
-            controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
+            classes:
+                model: Sylius\Component\Core\Model\Payment
+                controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
         payment_method:
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
-            form:
-                choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
+            classes:
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
+                form:
+                    choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
         dummy: Test
         offline: Offline
@@ -175,23 +203,26 @@ sylius_addressing:
         shipping: shipping
         content: content
         price: price
-    classes:
+    resources:
         address:
-            model: Sylius\Component\Core\Model\Address
+            classes:
+                model: Sylius\Component\Core\Model\Address
 
 sylius_order:
     guest_order: %sylius.order.allow_guest_order%
-    classes:
+    resources:
         order:
-            model: Sylius\Component\Core\Model\Order
-            controller: Sylius\Bundle\CoreBundle\Controller\OrderController
-            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+            classes:
+                model: Sylius\Component\Core\Model\Order
+                controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
-            model: Sylius\Component\Core\Model\OrderItem
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+            classes:
+                model: Sylius\Component\Core\Model\OrderItem
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
 
 sylius_sequence:
     generators:
@@ -204,11 +235,13 @@ sylius_pricing:
 sylius_search:
     search_form_template: 'SyliusSearchBundle::search_form.html.twig'
     engine: orm
-    classes:
-       search:
-          model: Sylius\Bundle\SearchBundle\Model\SearchIndex
-       log:
-          model: Sylius\Bundle\SearchBundle\Model\SearchLog
+    resources:
+        search:
+            classes:
+                model: Sylius\Bundle\SearchBundle\Model\SearchIndex
+        log:
+            classes:
+                model: Sylius\Bundle\SearchBundle\Model\SearchLog
     orm_indexes:
         product:
             class: %sylius.model.product.class%
@@ -287,13 +320,15 @@ sylius_mailer:
             template: SyliusWebBundle:Email:passwordReset.html.twig
 
 sylius_rbac:
-    classes:
+    resources:
         role:
-            form:
-                choice: Sylius\Bundle\RbacBundle\Form\Type\RoleEntityType
+            classes:
+                form:
+                    choice: Sylius\Bundle\RbacBundle\Form\Type\RoleEntityType
         permission:
-            form:
-                choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
+            classes:
+                form:
+                    choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
     permissions:
         sylius.manage.customer: Manage customers
         sylius.customer.show: Show customer
@@ -733,14 +768,15 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_user:
-    templates:
-        user: SyliusWebBundle:Frontend/User
-        customer: SyliusWebBundle:Frontend/Customer
-    classes:
+    resources:
         user:
-            model: Sylius\Component\Core\Model\User
-            form:
-                default: Sylius\Bundle\CoreBundle\Form\Type\UserType
+            templates: SyliusWebBundle:Frontend/User
+            classes:
+                model: Sylius\Component\Core\Model\User
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\UserType
         customer:
-            model: Sylius\Component\Core\Model\Customer
-            controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
+            templates: SyliusWebBundle:Frontend/Customer
+            classes:
+                model: Sylius\Component\Core\Model\Customer
+                controller: Sylius\Bundle\CoreBundle\Controller\CustomerController

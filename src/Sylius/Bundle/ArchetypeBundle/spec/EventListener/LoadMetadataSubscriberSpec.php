@@ -29,7 +29,9 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'attribute' => 'Some\App\Product\Entity\Attribute',
                 'option' => 'Some\App\Product\Entity\Option',
                 'archetype' => array(
-                    'model' => 'Some\App\Product\Entity\Archetype',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Archetype',
+                    ),
                 ),
             ),
         ));
