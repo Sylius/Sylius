@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -85,17 +86,22 @@ abstract class AbstractDriver implements DriverInterface
      */
     protected function addController(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        // @todo: Remove when ResourceController is reworked.
-        $configurationDefinition = new Definition(new Parameter('sylius.controller.configuration.class'));
-        $configurationDefinition
-            ->setFactory(array(new Reference('sylius.controller.configuration_factory'), 'createConfiguration'))
-            ->setArguments(array($metadata->getApplicationName(), $metadata->getName(), $metadata->getTemplatesNamespace()))
-            ->setPublic(false)
-        ;
-
         $definition = new Definition($metadata->getClass('controller'));
         $definition
-            ->setArguments(array($configurationDefinition))
+            ->setArguments(array(
+                $this->getMetdataDefinition($metadata),
+                new Reference('sylius.resource_controller.request_configuration_factory'),
+                new Reference('fos_rest.view_handler'),
+                new Reference($metadata->getServiceId('repository')),
+                new Reference($metadata->getServiceId('factory')),
+                new Reference('sylius.resource_controller.new_resource_factory'),
+                new Reference($metadata->getServiceId('manager')),
+                new Reference('sylius.resource_controller.resource_finder'),
+                new Reference('sylius.resource_controller.resources_finder'),
+                new Reference('sylius.resource_controller.form_factory'),
+                new Reference('sylius.resource_controller.redirect_handler'),
+                new Reference('sylius.resource_controller.authorization_checker'),
+            ))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
 
@@ -177,6 +183,23 @@ abstract class AbstractDriver implements DriverInterface
             );
 
         }
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     *
+     * @return Definition
+     */
+    protected function getMetdataDefinition(MetadataInterface $metadata)
+    {
+        $definition = new Definition(Metadata::class);
+        $definition
+            ->setFactory(array(new Reference('sylius.resource_registry'), 'get'))
+            ->setArguments(array($metadata->getAlias()))
+        ;
+
+        return $definition;
+
     }
 
     /**

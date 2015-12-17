@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.resource_controller.request_configuration.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration</parameter>
+        <parameter key="sylius.resource_controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
+        <parameter key="sylius.resource_controller.request_configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
+        <parameter key="sylius.resource_controller.new_resource_factory.class">Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory</parameter>
+        <parameter key="sylius.resource_controller.resource_finder.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFinder</parameter>
+        <parameter key="sylius.resource_controller.resources_finder.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesFinder</parameter>
+        <parameter key="sylius.resource_controller.form_factory.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory</parameter>
+        <parameter key="sylius.resource_controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
+        <parameter key="sylius.resource_controller.authorization_checker.class">Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker</parameter>
+    </parameters>
+
+    <services>
+        <!-- tmp -->
+        <service id="sylius.controller.parameters" class="Sylius\Bundle\ResourceBundle\Controller\Parameters" />
+        <service id="sylius.resource_controller.parameters_parser" class="%sylius.resource_controller.parameters_parser.class%">
+            <argument type="service" id="sylius.expression_language" />
+        </service>
+        <service id="sylius.resource_controller.request_configuration_factory" class="%sylius.resource_controller.request_configuration_factory.class%">
+            <argument type="service" id="sylius.resource_controller.parameters_parser" />
+            <argument>%sylius.resource_controller.request_configuration.class%</argument>
+        </service>
+        <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
+        <service id="sylius.resource_controller.resource_finder" class="%sylius.resource_controller.resource_finder.class%" />
+        <service id="sylius.resource_controller.resources_finder" class="%sylius.resource_controller.resources_finder.class%" />
+        <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">
+            <argument type="service" id="form.factory" />
+        </service>
+        <service id="sylius.resource_controller.redirect_handler" class="%sylius.resource_controller.redirect_handler.class%">
+            <argument type="service" id="router" />
+        </service>
+        <service id="sylius.resource_controller.authorization_checker" class="%sylius.resource_controller.authorization_checker.class%" />
+    </services>
+</container>

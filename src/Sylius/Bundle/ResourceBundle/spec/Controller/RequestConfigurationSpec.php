@@ -41,6 +41,16 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getRequest()->shouldReturn($request);
     }
 
+    function it_has_metadata(MetadataInterface $metadata)
+    {
+        $this->getMetadata()->shouldReturn($metadata);
+    }
+    
+    function it_has_parameters(Parameters $parameters)
+    {
+        $this->getParameters()->shouldReturn($parameters);
+    }
+
     function it_checks_if_its_a_html_request(Request $request)
     {
         $request->getRequestFormat()->willReturn('html');

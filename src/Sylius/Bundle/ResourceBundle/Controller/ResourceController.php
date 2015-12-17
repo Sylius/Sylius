@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -26,7 +27,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ResourceController
+class ResourceController extends ContainerAware
 {
     /**
      * @var MetadataInterface
@@ -230,9 +231,8 @@ class ResourceController
         $resource = $this->findOr404($configuration);
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {

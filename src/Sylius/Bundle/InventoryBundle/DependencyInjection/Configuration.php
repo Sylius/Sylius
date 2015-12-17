@@ -89,7 +89,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(InventoryUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(InventoryUnitController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(InventoryUnitFactory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()

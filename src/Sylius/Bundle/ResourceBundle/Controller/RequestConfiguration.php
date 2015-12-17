@@ -60,6 +60,22 @@ class RequestConfiguration
     }
 
     /**
+     * @return MetadataInterface
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @return Parameters
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
      * @return bool
      */
     public function isHtmlRequest()

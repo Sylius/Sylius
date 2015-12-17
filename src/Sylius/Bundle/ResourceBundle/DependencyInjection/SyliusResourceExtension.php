@@ -36,6 +36,7 @@ class SyliusResourceExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $configFiles = array(
             'services.xml',
+            'controller.xml',
             'storage.xml',
             'routing.xml',
             'twig.xml'

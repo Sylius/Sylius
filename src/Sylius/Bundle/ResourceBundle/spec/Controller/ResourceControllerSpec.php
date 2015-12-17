@@ -80,6 +80,11 @@ class ResourceControllerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
+    
+    function it_is_container_aware()
+    {
+        $this->shouldHaveType('Symfony\Component\DependencyInjection\ContainerAware');
+    }
 
     function it_throws_a_403_exception_if_user_is_unauthorized_to_view_a_single_resource(
         MetadataInterface $metadata,
@@ -568,8 +573,10 @@ class ResourceControllerSpec extends ObjectBehavior
         $resourceFinder->find($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(false);
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('GET');
+
+        $form->submit($request, true)->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
@@ -617,8 +624,11 @@ class ResourceControllerSpec extends ObjectBehavior
         $resourceFinder->find($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+        
+        $form->submit($request, true)->willReturn($form);
+
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
@@ -666,8 +676,11 @@ class ResourceControllerSpec extends ObjectBehavior
         $resourceFinder->find($configuration, $repository)->willReturn($resource);;
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('PATCH')->willReturn(true);
+        $request->getMethod()->willReturn('PATCH');
+
+        $form->submit($request, false)->willReturn($form);
+
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
@@ -708,7 +721,11 @@ class ResourceControllerSpec extends ObjectBehavior
         $resourceFinder->find($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->submit($request, true)->willReturn($form);
+
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
@@ -748,8 +765,10 @@ class ResourceControllerSpec extends ObjectBehavior
         $resourceFinder->find($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->submit($request, true)->willReturn($form);
         $form->isValid()->willReturn(true);
 
         $manager->flush()->shouldBeCalled();

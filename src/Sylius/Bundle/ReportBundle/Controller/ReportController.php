@@ -32,10 +32,12 @@ class ReportController extends ResourceController
      */
     public function renderAction(Request $request)
     {
-        $report = $this->findOr404($request);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $report = $this->findOr404($configuration);
 
         $formType = sprintf('sylius_data_fetcher_%s', $report->getDataFetcher());
-        $configurationForm = $this->get('form.factory')->createNamed(
+        $configurationForm = $this->container->get('form.factory')->createNamed(
             'configuration',
             $formType,
             $report->getDataFetcherConfiguration()
@@ -45,7 +47,7 @@ class ReportController extends ResourceController
             $configurationForm->submit($request);
         }
 
-        return $this->render($this->config->getTemplate('show.html'), array(
+        return $this->container->get('templating')->render($configuration->getTemplate('show.html'), array(
             'report' => $report,
             'form' => $configurationForm->createView(),
             'configuration' => $configurationForm->getData(),
@@ -80,7 +82,7 @@ class ReportController extends ResourceController
      */
     private function getReportRenderer()
     {
-        return $this->get('sylius.report.renderer');
+        return $this->container->get('sylius.report.renderer');
     }
 
     /**
@@ -88,7 +90,7 @@ class ReportController extends ResourceController
      */
     private function getReportDataFetcher()
     {
-        return $this->get('sylius.report.data_fetcher');
+        return $this->container->get('sylius.report.data_fetcher');
     }
 
     /**
@@ -96,6 +98,6 @@ class ReportController extends ResourceController
      */
     private function getReportRepository()
     {
-        return $this->get('sylius.repository.report');
+        return $this->container->get('sylius.repository.report');
     }
 }
