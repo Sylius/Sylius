@@ -57,5 +57,4 @@ interface FilterInterface
      * @return ActionInterface
      */
     public function getAction();
-
 }

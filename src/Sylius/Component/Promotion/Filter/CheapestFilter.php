@@ -14,6 +14,10 @@ namespace Sylius\Component\Promotion\Filter;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
 class CheapestFilter extends AbstractFilter
 {
     /**
@@ -34,6 +38,9 @@ class CheapestFilter extends AbstractFilter
         return $returnCollection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function resolveConfiguration(array $configuration)
     {
         return $configuration;

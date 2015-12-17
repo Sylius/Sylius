@@ -14,6 +14,10 @@ namespace Sylius\Component\Promotion\Filter;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
 class EveryFilter extends AbstractFilter
 {
     /**
@@ -24,6 +28,9 @@ class EveryFilter extends AbstractFilter
         return $collection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function resolveConfiguration(array $configuration)
     {
         return $configuration;

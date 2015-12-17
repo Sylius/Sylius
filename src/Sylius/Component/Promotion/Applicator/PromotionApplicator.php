@@ -11,14 +11,13 @@
 
 namespace Sylius\Component\Promotion\Applicator;
 
-use Doctrine\ORM\PersistentCollection;
 use Sylius\Component\Core\Promotion\Benefit\AddProductBenefit;
 use Sylius\Component\Promotion\Benefit\PromotionBenefitInterface;
 use Sylius\Component\Promotion\Filter\FilterInterface;
+use Sylius\Component\Promotion\Model\BenefitInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\AbstractType;
 
 /**
  * Applies all registered promotion actions to given subject.
@@ -38,12 +37,20 @@ class PromotionApplicator implements PromotionApplicatorInterface
      */
     protected $filterRegistry;
 
+    /**
+     * @param ServiceRegistryInterface $benefitRegistry
+     * @param ServiceRegistryInterface $filterRegistry
+     */
     public function __construct(ServiceRegistryInterface $benefitRegistry, ServiceRegistryInterface $filterRegistry)
     {
         $this->benefitRegistry = $benefitRegistry;
         $this->filterRegistry = $filterRegistry;
     }
 
+    /**
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface $promotion
+     */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         // preparing copy of order items for filtering (every action we start from clear set)
@@ -53,7 +60,6 @@ class PromotionApplicator implements PromotionApplicatorInterface
             $filteredSubjects = $orderItems;
 
             // filtering down order items for the ones that apply to benefit
-            /** @var \Sylius\Component\Promotion\Model\FilterInterface $filter */
             foreach ($action->getFilters() as $filter) {
                 /** @var FilterInterface $filterObject */
                 $filterObject = $this->filterRegistry->get($filter->getType());
@@ -81,9 +87,14 @@ class PromotionApplicator implements PromotionApplicatorInterface
         $subject->addPromotion($promotion);
     }
 
+    /**
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface $promotion
+     */
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
+            /** @var BenefitInterface $benefit */
             foreach ($action->getBenefits() as $benefit) {
                 $this->benefitRegistry
                     ->get($benefit->getType())

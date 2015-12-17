@@ -14,8 +14,6 @@ namespace Sylius\Bundle\PromotionBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -124,7 +122,7 @@ class PromotionContext extends DefaultContext
     {
         /** @var PromotionInterface $promotion */
         $promotion = $this->findOneByName('promotion', $promotionName);
-        $benefitRepository = $this->getRepository('promotion_benefit');
+        $benefitFactory = $this->getFactory('promotion_benefit');
 
         foreach ($table->getHash() as $benefitData) {
             $actionNumber = $this->getActionNumber($benefitData);
@@ -135,7 +133,7 @@ class PromotionContext extends DefaultContext
             $benefitType = strtolower(str_replace(' ', '_', $benefitData['type']));
 
             /** @var BenefitInterface $benefit */
-            $benefit = $benefitRepository->createNew();
+            $benefit = $benefitFactory->createNew();
             $benefit->setType($benefitType);
 
 
@@ -169,7 +167,7 @@ class PromotionContext extends DefaultContext
             $promotion->setDescription($data['description']);
             $promotion->setCode($data['code']);
 
-            if (array_key_exists('not-active', $data) && '' == $data['not-active']) {
+            if (isset($data['not-active']) && '' == $data['not-active']) {
                 $promotion->setStartsAt($this->faker->dateTime('-2 years'));
                 $promotion->setEndsAt($this->faker->dateTime('-1 year'));
             } else {
@@ -177,16 +175,16 @@ class PromotionContext extends DefaultContext
                 $promotion->setEndsAt($this->faker->dateTimeBetween('now', '+ 30 years'));
             }
 
-            if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
+            if (isset($data['usage limit']) && '' !== $data['usage limit']) {
                 $promotion->setUsageLimit((int) $data['usage limit']);
             }
-            if (array_key_exists('used', $data) && '' !== $data['used']) {
+            if (isset($data['used']) && '' !== $data['used']) {
                 $promotion->setUsed((int) $data['used']);
             }
-            if (array_key_exists('starts', $data)) {
+            if (isset($data['starts'])) {
                 $promotion->setStartsAt(new \DateTime($data['starts']));
             }
-            if (array_key_exists('ends', $data)) {
+            if (isset($data['ends'])) {
                 $promotion->setEndsAt(new \DateTime($data['ends']));
             }
 
@@ -199,14 +197,14 @@ class PromotionContext extends DefaultContext
     /**
      * @Given /^Order is shipped to "([^""]*)"$/
      */
-    public function orderIsShippedTo($countryName) {
-
+    public function orderIsShippedTo($countryName)
+    {
         $country = $this->getRepository('country')->findOneBy([
             'isoName' => $this->getCountryCodeByEnglishCountryName($countryName)
         ]);
 
         /** @var AddressInterface $address */
-        $address = $this->getRepository('address')->createNew();
+        $address = $this->getFactory('address')->createNew();
         $address->setCountry($country);
 
         $this->order->setShippingAddress($address);
@@ -232,7 +230,7 @@ class PromotionContext extends DefaultContext
      */
     public function emptyOrder()
     {
-        $this->order = $this->getContainer()->get('sylius.repository.order')->createNew();
+        $this->order = $this->getFactory('order')->createNew();
         $this->order->setCurrency('123');
     }
 
@@ -247,7 +245,7 @@ class PromotionContext extends DefaultContext
             ->findOneBy(['name' => $productName]);
 
         /** @var OrderItem $orderItem */
-        $orderItem = $this->getContainer()->get('sylius.repository.order_item')->createNew();
+        $orderItem = $this->getFactory('order_item')->createNew();
 
         $priceCalculator = $this->getContainer()->get('sylius.price_calculator');
 
@@ -289,30 +287,30 @@ class PromotionContext extends DefaultContext
     /**
      * @Then /^I should have "([^""]*)" discount equal ([^""]*)$/
      */
-    public function shouldBeADiscount($discountName, $discountValue)
+    public function shouldBeADiscount($promotionName, $discountValue)
     {
-        if (!$discountName) {
+        if (!$promotionName) {
             $this->shouldBeNoDiscount();
             return;
         }
 
-        $discounts = explode(',', $discountName);
+        $originator = $this->getContainer()->get('sylius.originator');
+
+        $discounts = explode(',', $promotionName);
         $totalDiscountFound = 0;
 
-        foreach ($discounts as $discountName) {
+        foreach ($discounts as $promotionName) {
             $discountExist = false;
 
-            /** @var Adjustment $promotion */
             foreach ($this->order->getItems() as $item) {
 
-                foreach ($item->getAdjustments('promotion') as $promotion) {
-                    var_dump($promotion->getDescription());
+                /** @var Adjustment $adjustment */
+                foreach ($item->getAdjustments('promotion') as $adjustment) {
+                    $origin = $originator->getOrigin($adjustment);
 
-                    if (
-                        $promotion->getDescription() == $discountName
-                    ) {
+                    if ($origin && $origin->getName() == $promotionName) {
                         $discountExist = true;
-                        $totalDiscountFound += $promotion->getAmount();
+                        $totalDiscountFound += $adjustment->getAmount();
                     }
                 }
             }
@@ -321,19 +319,18 @@ class PromotionContext extends DefaultContext
         if (!$discountExist) {
             throw new \Exception(
                 sprintf(
-                    'Expected discount with name: %s not found', $discountName)
+                    'Expected discount with name: %s not found', $promotionName)
             );
         }
 
         \PHPUnit_Framework_Assert::assertSame(
             $this->normalizePrice($discountValue),
             $totalDiscountFound,
-            sprintf('Promotion(s): "%s" found but discount do not match, actual discount: %s',
-                $discountName,
-                $promotion->getAmount()
+            sprintf('Promotion(s): "%s" found but discounts do not match, actual discount: %s',
+                $promotionName,
+                $totalDiscountFound
             )
         );
-
     }
 
     /**
@@ -355,8 +352,7 @@ class PromotionContext extends DefaultContext
      */
     public function orderShouldContain($basketContent)
     {
-        foreach (explode(',', $basketContent) as $product)
-        {
+        foreach (explode(',', $basketContent) as $product) {
             list($productName, $productQuantity) = explode(':', $product);
 
             $this->addProductsToOrder($productQuantity, $productName);
@@ -444,13 +440,18 @@ class PromotionContext extends DefaultContext
         return $configuration;
     }
 
+    /**
+     * @param float $price
+     *
+     * @return int
+     */
     private function normalizePrice($price)
     {
         return (int) round($price * 100);
     }
 
     /**
-     * @param $data
+     * @param array $data
      *
      * @return int
      */
@@ -458,7 +459,7 @@ class PromotionContext extends DefaultContext
     {
         $actionNumber = 1;
 
-        if (array_key_exists('actionNumber', $data)) {
+        if (isset($data['actionNumber'])) {
             $actionNumber = $data['actionNumber'];
         }
 
@@ -466,18 +467,16 @@ class PromotionContext extends DefaultContext
     }
 
     /**
-     * @param $promotion
-     * @param $actionNumber
+     * @param PromotionInterface $promotion
+     * @param int $actionNumber
      *
      * @return ActionInterface
      */
-    private function getOrCreateAction($promotion, $actionNumber)
+    private function getOrCreateAction(PromotionInterface $promotion, $actionNumber)
     {
-        $actionRepository = $this->getRepository('promotion_action');
-
         if (!$promotion->getActions()->offsetExists($actionNumber)) {
             /** @var ActionInterface $action */
-            $action = $actionRepository->createNew();
+            $action = $this->getFactory('promotion_action')->createNew();
             $promotion->getActions()->offsetSet($actionNumber, $action);
         } else {
             $action = $promotion->getActions()->offsetGet($actionNumber);

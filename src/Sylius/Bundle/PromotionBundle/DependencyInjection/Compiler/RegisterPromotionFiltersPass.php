@@ -22,6 +22,9 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RegisterPromotionFiltersPass implements CompilerPassInterface
 {
+    /**
+     * @param ContainerBuilder $container
+     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('sylius.registry.promotion_filter')) {
@@ -43,5 +46,4 @@ class RegisterPromotionFiltersPass implements CompilerPassInterface
 
         $container->setParameter('sylius.promotion_filters', $filters);
     }
-
 }

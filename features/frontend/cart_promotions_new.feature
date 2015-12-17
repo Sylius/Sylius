@@ -1,4 +1,6 @@
 @promotions
+
+# TODO: NOT SURE WHAT THIS FILE IS REPLACING?
 Feature: Checkout product promotion
     In order to handle product promotions
     As a store owner
@@ -20,10 +22,9 @@ Feature: Checkout product promotion
             | Ja25    | 25    | Jacket |
             | Dr20    | 20    | Dress  |
             | Ja15    | 15    | Jacket |
-            #adding promotions
           And the following promotions exist:
-            | name               | description     | not-active |
-            | Discount on Dress  | 50offDress      | true       |
+            | code | name               | description     | not-active |
+            | P1   | Discount on Dress  | 50offDress      | true       |
           And promotion "Discount on Dress" has following rules defined:
             | type             | configuration            |
             | Taxonomy         | Taxons: Dress,Exclude: 0 |
@@ -36,20 +37,20 @@ Feature: Checkout product promotion
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
-Scenario Outline: Somexamples should pass
-            Given I have empty order
-              And I add <basketContent> to the order
-              And I have <activePromotions> promotions activated
-             When I apply promotions
-             Then I should have <discountName> discount equal <discountValue>
-              And Total price should be <totalPrice>
+    Scenario Outline: Promotions are applied at checkout
+        Given I have empty order
+          And I add <basketContent> to the order
+          And I have <activePromotions> promotions activated
+         When I apply promotions
+         Then I should have <appliedPromotions> discount equal <discountValue>
+          And Total price should be <totalPrice>
 
         Examples:
-        | basketContent   | activePromotions    | discountName | discountValue | totalPrice |
-        | Dr500:2,Ja200:1 | "Discount on Dress" | "50offDress" | -500.00       | 700        |
-        | Dr500:1         | "Discount on Dress" | "50offDress" | -250.00       | 250        |
-        | Dr125:2,Dr20:1  | "Discount on Dress" | "50offDress" | -135.00       | 135        |
-        | Dr500:1,Ja200:1 | "Discount on Dress" | "50offDress" | -250.00       | 450        |
+            | basketContent   | activePromotions    | appliedPromotions   | discountValue | totalPrice |
+            | Dr500:2,Ja200:1 | "Discount on Dress" | "Discount on Dress" | -500.00       | 700        |
+            | Dr500:1         | "Discount on Dress" | "Discount on Dress" | -250.00       | 250        |
+            | Dr125:2,Dr20:1  | "Discount on Dress" | "Discount on Dress" | -135.00       | 135        |
+            | Dr500:1,Ja200:1 | "Discount on Dress" | "Discount on Dress" | -250.00       | 450        |
 
     Scenario: Discount should not be applied if promotion is not active
         Given I have empty order

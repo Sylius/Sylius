@@ -16,6 +16,10 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
 class PriceFilter extends AbstractFilter
 {
     const OPTION_VALUE = 'value';
@@ -37,6 +41,9 @@ class PriceFilter extends AbstractFilter
         return $collection->matching($criteria);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function resolveConfiguration(array $configuration)
     {
         $resolver = new OptionsResolver();

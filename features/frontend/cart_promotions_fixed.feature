@@ -70,27 +70,27 @@ Feature: Checkout fixed discount promotions
 #          And promotion "300 EUR" has following filters defined:
 #            | type                  | configuration |
 #            | most_expensive_filter |               |
-          And I am logged in as user "klaus@example.com"
+          And I am logged in user
 
-    Scenario Outline: Some examples should pass
+    Scenario Outline: Basic fixed discount promotions should be applied
         Given I have empty order
           And I add <basketContent> to the order
           And I have <activePromotions> promotions activated
          When I apply promotions
-         Then I should have <discountName> discount equal <discountValue>
+         Then I should have <appliedPromotions> discount equal <discountValue>
           And Total price should be <totalPrice>
 
-Examples:
-| basketContent          | activePromotions  | discountName                                       | discountValue | totalPrice |
-#| Woody:3                | "300 EUR"         | "40 dis on order"          | -40.00        | 335.00     |
-#| Sarge:8                | "300 EUR"         | ""                                                 |               | 200.00     |
-#| Sarge:3,Etch:1,Lenny:2 | "3 items"         | "15 dis on order" | -15.00        | 110.00     |
-#| Etch:8                 | "3 items"         | ""                                                 |               | 160.00     |
-#| Ubu:1                  | "Ubuntu T-Shirts" | "40 EUR Discount for Ubuntu T-Shirts"              | -40.00        | 160.00     |
-#| Lenny:1                | "Ubuntu T-Shirts" | ""                                                 |               | 15.00      |
-| Potato:4,Woody:3,Buzz:1| "300 EUR,3 items" | "40 dis on order,15 dis on order"    |  -55.00  | 1620.00     |
+        Examples:
+            | basketContent          | activePromotions  | appliedPromotions                                       | discountValue | totalPrice |
+            #| Woody:3                | "300 EUR"         | "40 dis on order"          | -40.00        | 335.00     |
+            #| Sarge:8                | "300 EUR"         | ""                                                 |               | 200.00     |
+            #| Sarge:3,Etch:1,Lenny:2 | "3 items"         | "15 dis on order" | -15.00        | 110.00     |
+            #| Etch:8                 | "3 items"         | ""                                                 |               | 160.00     |
+            #| Ubu:1                  | "Ubuntu T-Shirts" | "40 EUR Discount for Ubuntu T-Shirts"              | -40.00        | 160.00     |
+            #| Lenny:1                | "Ubuntu T-Shirts" | ""                                                 |               | 15.00      |
+            | Potato:4,Woody:3,Buzz:1| "300 EUR,3 items" | "40 dis on order,15 dis on order"    |  -55.00  | 1620.00     |
 
-    Scenario Outline: Examples with shipping to option should pass
+    Scenario Outline: Promotions based on shiping country should be applied correctly
         Given I have empty order
         And I add <basketContent> to the order
         And I have <activePromotions> promotions activated
@@ -98,10 +98,11 @@ Examples:
         When I apply promotions
         Then I should have <discountName> discount equal <discountValue>
         And Total price should be <totalPrice>
-    Examples:
-| basketContent | shippingTo | activePromotions     | discountName                                               | discountValue | totalPrice |
-| Lenny:5       | "Germany"  |"Shipping to Germany" | "40 EUR Discount for orders with shipping country Germany" | -40.00        | 35.00      |
-| Lenny:5       | "Poland"   |"Shipping to Germany" | ""                                                         |               | 75.00      |
+
+        Examples:
+            | basketContent | shippingTo | activePromotions     | discountName                                               | discountValue | totalPrice |
+            | Lenny:5       | "Germany"  |"Shipping to Germany" | "40 EUR Discount for orders with shipping country Germany" | -40.00        | 35.00      |
+            | Lenny:5       | "Poland"   |"Shipping to Germany" | ""                                                         |               | 75.00      |
 
     Scenario: Nth order promotion is applied when user have enough orders before
         Given I have "3rd order" promotions activated

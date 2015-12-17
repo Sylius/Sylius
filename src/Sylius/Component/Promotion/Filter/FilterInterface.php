@@ -12,12 +12,13 @@
 namespace Sylius\Component\Promotion\Filter;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 interface FilterInterface
 {
     /**
-     * @param Collection $arrayCollection
-     * @param array           $configuration
+     * @param Collection $collection
+     * @param array $configuration
      *
      * @return ArrayCollection
      */

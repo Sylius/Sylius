@@ -28,8 +28,7 @@ class TaxonFilter extends AbstractFilter
         $returnedCollection = new ArrayCollection();
 
         /** @var OrderItemInterface $item */
-        foreach ($collection as $item)
-        {
+        foreach ($collection as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
                 if ($taxon->getId() == $this->configuration[self::OPTION_TAXON]) {
                     $returnedCollection->add($item);

@@ -22,7 +22,7 @@ class FilterSpec extends ObjectBehavior
         $this->shouldHaveType(Filter::class);
     }
 
-    function it_is_Sylius_promotion_benefit()
+    function it_is_Sylius_promotion_filter()
     {
         $this->shouldImplement(FilterInterface::class);
     }

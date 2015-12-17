@@ -25,6 +25,11 @@ class Action implements ActionInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $type;
+
+    /**
      * @var array
      */
     protected $configuration = array();
@@ -57,22 +62,24 @@ class Action implements ActionInterface
     {
         return $this->id;
     }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function getType()
-//    {
-//        return $this->type;
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function setType($type)
-//    {
-//        $this->type = $type;
-//    }
+
+    // TODO: TO BE REMOVED?
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    // TODO: TO BE REMOVED?
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * {@inheritdoc}

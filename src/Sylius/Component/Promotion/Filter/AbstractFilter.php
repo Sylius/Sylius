@@ -14,6 +14,10 @@ namespace Sylius\Component\Promotion\Filter;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Selectable;
 
+/**
+ * @author Piotr Walków <walkow.piotr@gmail.com>
+ * @author Pete Ward <peter.ward@reiss.com>
+ */
 abstract class AbstractFilter implements FilterInterface
 {
     /**
@@ -33,9 +37,7 @@ abstract class AbstractFilter implements FilterInterface
         $filteredCollection = $this->filter($collection);
 
         // no possible way of knowing if it would be PersistentCollection or ArrayCollection
-        if ($filteredCollection instanceof Collection &&
-            $filteredCollection instanceof Selectable
-        ) {
+        if ($filteredCollection instanceof Collection && $filteredCollection instanceof Selectable) {
             return $filteredCollection;
         }
 
@@ -47,9 +49,14 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * @param Collection $collection
      *
-     * @return Collection&Selectable
+     * @return Collection
      */
     protected abstract function filter(Collection $collection);
 
+    /**
+     * @param array $configuration
+     *
+     * @return array
+     */
     protected abstract function resolveConfiguration(array $configuration);
 }

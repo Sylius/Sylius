@@ -13,12 +13,24 @@ namespace Sylius\Component\Promotion\Model;
 
 class Filter implements FilterInterface
 {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $type;
 
+    /**
+     * @var ActionInterface
+     */
     private $action;
 
+    /**
+     * @var array
+     */
     private $configuration;
 
     /**
@@ -92,5 +104,4 @@ class Filter implements FilterInterface
     {
         $this->action = null;
     }
-
 }

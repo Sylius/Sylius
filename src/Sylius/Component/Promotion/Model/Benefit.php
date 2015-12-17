@@ -13,12 +13,24 @@ namespace Sylius\Component\Promotion\Model;
 
 class Benefit implements BenefitInterface
 {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $type;
 
+    /**
+     * @var array
+     */
     private $configuration;
 
+    /**
+     * @var ActionInterface
+     */
     private $action;
 
     /**
@@ -92,6 +104,4 @@ class Benefit implements BenefitInterface
     {
         return $this->action;
     }
-
-
 }

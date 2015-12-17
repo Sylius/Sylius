@@ -124,10 +124,10 @@ class Promotion implements PromotionInterface
         return $this->id;
     }
 
-    public function setId()
-    {
-        $this->id = 123;
-    }
+//    public function setId()
+//    {
+//        $this->id = 123;
+//    }
 
     /**
      * {@inheritdoc}

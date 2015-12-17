@@ -12,7 +12,7 @@ Feature: Checkout percentage discount promotions
             | PR2  | 300 EUR           | 10% Discount for orders over 300 EUR          |            |
           And promotion "3 items" has following rules defined:
             | type       | configuration        |
-            # WARNING! This promotion works only if there are at least 3 different products!
+            # WARNING! This promotion rule works only if there are at least 3 _different_ products!
             | item_count | Count: 3,Equal: false |
           And promotion "3 items" has following benefits defined:
             | type                | configuration  |
@@ -39,30 +39,18 @@ Feature: Checkout percentage discount promotions
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
-Scenario Outline: Some examples should pass
-            Given I have empty order
-              And I add <basketContent> to the order
-              And I have <activePromotions> promotions activated
-             When I apply promotions
-             Then I should have <discountName> discount equal <discountValue>
-              And Total price should be <totalPrice>
+    Scenario Outline: Some examples should pass
+        Given I have empty order
+          And I add <basketContent> to the order
+          And I have <activePromotions> promotions activated
+         When I apply promotions
+         Then I should have <appliedPromotions> discount equal <discountValue>
+          And Total price should be <totalPrice>
 
-    Examples:
-        | basketContent           | activePromotions | discountName                 | discountValue | totalPrice |
-        | Potato:4,Buzz:1,Woody:3 | "3 items"         | "25% Discount"              | -418.75       | 1256.25    |
-        | Potato:4,Buzz:1,Woody:3 | "300 EUR"         | "10% Discount"              | -167.50       | 1507.50    |
-        | Potato:4,Buzz:1,Woody:3 | "300 EUR,3 items" | "25% Discount,10% Discount" | -586.25       | 1088.75    |
-        | Sarge:3,Etch:1,Lenny:2  | "3 items,300 EUR" | "25% Discount"              | -31.25        | 93.75      |
-#        | Etch:4                 | "3items"         | "25% Discount"               | -20.00        | 60.00      |
-#        | Sarge:8                | "3items"         | "25% Discount"               | -50.00        | 150.00     |
-
-    Scenario: Several promotions are applied when an cart fulfills
-              the rules of several promotions
-        Given I am on the store homepage
-          And I added product "Potato" to cart, with quantity "4"
-          And I added product "Buzz" to cart, with quantity "1"
-         When I add product "Woody" to cart, with quantity "3"
-         Then I should still be on the cart summary page
-#        1675 - (10 + 25)% * 1675 = 586.25
-          And "Promotion total: -€586.25" should appear on the page
-          And "Grand total: €1,088.75" should appear on the page
+        Examples:
+            | basketContent           | activePromotions  | appliedPromotions | discountValue | totalPrice |
+            | Potato:4,Buzz:1,Woody:3 | "3 items"         | "3 items"         | -418.75       | 1256.25    |
+            | Potato:4,Buzz:1,Woody:3 | "300 EUR"         | "300 EUR"         | -167.50       | 1507.50    |
+            | Potato:4,Buzz:1,Woody:3 | "300 EUR,3 items" | "300 EUR,3 items" | -586.25       | 1088.75    |
+            | Sarge:3,Etch:1,Lenny:2  | "3 items,300 EUR" | "3 items"         | -31.25        | 93.75      |
+            | Etch:4                  | "3 items"         | ""                | 0             | 80.00      |

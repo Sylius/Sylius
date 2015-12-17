@@ -18,23 +18,26 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface ActionInterface extends ResourceInterface
 {
-//    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
-//    const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
+    // TODO: to be removed?
+    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
+    const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     /**
      * @return mixed
      */
     public function getId();
 
-//    /**
-//     * @return string
-//     */
-//    public function getType();
-//
-//    /**
-//     * @param string $type
-//     */
-//    public function setType($type);
+    // TODO: to be removed?
+    /**
+     * @return string
+     */
+    public function getType();
+
+    // TODO: to be removed?
+    /**
+     * @param string $type
+     */
+    public function setType($type);
 
     /**
      * @return array
