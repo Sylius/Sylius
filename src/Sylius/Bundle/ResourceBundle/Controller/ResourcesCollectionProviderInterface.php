@@ -11,19 +11,18 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ResourceFinderInterface
+interface ResourcesCollectionProviderInterface
 {
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param RepositoryInterface $repository
      *
-     * @return null|ResourceInterface
+     * @return mixed
      */
-    public function find(RequestConfiguration $requestConfiguration, RepositoryInterface $repository);
+    public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository);
 }

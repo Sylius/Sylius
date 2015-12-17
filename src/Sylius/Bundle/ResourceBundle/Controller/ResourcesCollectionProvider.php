@@ -17,12 +17,12 @@ use Pagerfanta\Pagerfanta;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesFinder implements ResourcesFinderInterface
+class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findCollection(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
+    public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
         if (null !== $factoryMethod = $requestConfiguration->getRepositoryMethod(null)) {
             $callable = array($repository, $factoryMethod);

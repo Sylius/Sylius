@@ -68,6 +68,18 @@ class MetadataSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('product');
     }
+    
+    function it_humanizes_simple_names()
+    {
+        $this->getHumanizedName()->shouldReturn('product');
+    }
+
+    function it_humanizes_more_complex_names()
+    {
+        $this->beConstructedThrough('fromAliasAndConfiguration', array('app.product_option', array('driver' => 'doctrine/orm')));
+
+        $this->getHumanizedName()->shouldReturn('product option');
+    }
 
     function it_has_plural_resource_name()
     {

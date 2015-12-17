@@ -15,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Component\Contact\Model\Request;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -23,16 +24,16 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesFinderSpec extends ObjectBehavior
+class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesFinder');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider');
     }
     
     function it_implements_resources_finder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\ResourcesFinderInterface');
+        $this->shouldImplement(ResourcesCollectionProviderInterface::class);
     }
 
     function it_gets_all_resources_if_not_paginated_and_there_is_no_limit(
@@ -49,7 +50,7 @@ class ResourcesFinderSpec extends ObjectBehavior
         
         $repository->findAll()->willReturn(array($resource1, $resource2));
         
-        $this->findCollection($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2));
     }
 
     function it_finds_resources_by_criteria_if_not_paginated(
@@ -71,7 +72,7 @@ class ResourcesFinderSpec extends ObjectBehavior
 
         $repository->findBy(array('custom' => 'criteria'), array('name' => 'desc'), 15)->willReturn(array($resource1, $resource2, $resource3));;
 
-        $this->findCollection($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2, $resource3));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2, $resource3));
     }
 
     function it_uses_custom_method_and_arguments_if_specified(
@@ -89,7 +90,7 @@ class ResourcesFinderSpec extends ObjectBehavior
 
         $repository->findAll('foo')->willReturn(array($resource1));;
 
-        $this->findCollection($requestConfiguration, $repository)->shouldReturn(array($resource1));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1));
     }
 
     function it_creates_paginator_by_default(
@@ -116,6 +117,6 @@ class ResourcesFinderSpec extends ObjectBehavior
 
         $paginator->setCurrentPage(6)->shouldBeCalled();
 
-        $this->findCollection($requestConfiguration, $repository)->shouldReturn($paginator);
+        $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 }

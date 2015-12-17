@@ -11,18 +11,17 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ResourcesFinderInterface
+interface FlashHelperInterface
 {
     /**
      * @param RequestConfiguration $requestConfiguration
-     * @param RepositoryInterface $repository
-     *
-     * @return mixed
+     * @param string $actionName
+     * @param ResourceInterface|null $reosurce
      */
-    public function findCollection(RequestConfiguration $requestConfiguration, RepositoryInterface $repository);
+    public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null);
 }

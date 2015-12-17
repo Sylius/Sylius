@@ -16,12 +16,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceFinder implements ResourceFinderInterface
+class SingleResourceProvider implements SingleResourceProviderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function find(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
+    public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
         $criteria = array();
         $request = $requestConfiguration->getRequest();

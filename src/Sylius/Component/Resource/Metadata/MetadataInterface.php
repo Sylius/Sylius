@@ -34,6 +34,11 @@ interface MetadataInterface
     /**
      * @return string
      */
+    public function getHumanizedName();
+
+    /**
+     * @return string
+     */
     public function getPluralName();
 
     /**

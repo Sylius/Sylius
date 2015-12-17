@@ -99,6 +99,14 @@ class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
+    public function getHumanizedName()
+    {
+        return trim(strtolower(preg_replace(array('/([A-Z])/', '/[_\s]+/'), array('_$1', ' '), $this->name)));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPluralName()
     {
         return Inflector::pluralize($this->name);

@@ -47,7 +47,7 @@ class ReportController extends ResourceController
             $configurationForm->submit($request);
         }
 
-        return $this->container->get('templating')->render($configuration->getTemplate('show.html'), array(
+        return $this->container->get('templating')->renderResponse($configuration->getTemplate('show.html'), array(
             'report' => $report,
             'form' => $configurationForm->createView(),
             'configuration' => $configurationForm->getData(),
@@ -68,7 +68,7 @@ class ReportController extends ResourceController
         }
 
         if (null === $report) {
-            return $this->render('SyliusReportBundle::noDataTemplate.html.twig');
+            return $this->container->get('templating')->renderResponse('SyliusReportBundle::noDataTemplate.html.twig');
         }
 
         $configuration = $request->query->get('configuration', $configuration);

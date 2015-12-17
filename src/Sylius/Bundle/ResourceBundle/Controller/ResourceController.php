@@ -65,14 +65,14 @@ class ResourceController extends ContainerAware
     protected $manager;
 
     /**
-     * @var ResourceFinderInterface
+     * @var SingleResourceProviderInterface
      */
-    protected $resourceFinder;
+    protected $singleResourceProvider;
 
     /**
-     * @var ResourcesFinderInterface
+     * @var ResourcesCollectionProviderInterface
      */
-    protected $resourcesFinder;
+    protected $resourcesCollectionProvider;
 
     /**
      * @var ResourceFormFactoryInterface
@@ -85,10 +85,30 @@ class ResourceController extends ContainerAware
     protected $redirectHandler;
 
     /**
+     * @var FlashHelperInterface
+     */
+    protected $flashHelper;
+
+    /**
      * @var AuthorizationCheckerInterface
      */
     protected $authorizationChecker;
 
+    /**
+     * @param MetadataInterface $metadata
+     * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
+     * @param ViewHandlerInterface $viewHandler
+     * @param RepositoryInterface $repository
+     * @param FactoryInterface $factory
+     * @param NewResourceFactoryInterface $newResourceFactory
+     * @param ObjectManager $manager
+     * @param SingleResourceProviderInterface $singleResourceProvider
+     * @param ResourcesCollectionProviderInterface $resourcesFinder
+     * @param ResourceFormFactoryInterface $resourceFormFactory
+     * @param RedirectHandlerInterface $redirectHandler
+     * @param FlashHelperInterface $flashHelper
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -97,10 +117,11 @@ class ResourceController extends ContainerAware
         FactoryInterface $factory,
         NewResourceFactoryInterface $newResourceFactory,
         ObjectManager $manager,
-        ResourceFinderInterface $resourceFinder,
-        ResourcesFinderInterface $resourcesFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourcesCollectionProviderInterface $resourcesFinder,
         ResourceFormFactoryInterface $resourceFormFactory,
         RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker
     )
     {
@@ -111,10 +132,11 @@ class ResourceController extends ContainerAware
         $this->factory = $factory;
         $this->newResourceFactory = $newResourceFactory;
         $this->manager = $manager;
-        $this->resourceFinder = $resourceFinder;
-        $this->resourcesFinder = $resourcesFinder;
+        $this->singleResourceProvider = $singleResourceProvider;
+        $this->resourcesCollectionProvider = $resourcesFinder;
         $this->resourceFormFactory = $resourceFormFactory;
         $this->redirectHandler = $redirectHandler;
+        $this->flashHelper = $flashHelper;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -157,7 +179,7 @@ class ResourceController extends ContainerAware
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
-        $resources = $this->resourcesFinder->findCollection($configuration, $this->repository);
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
 
@@ -197,6 +219,8 @@ class ResourceController extends ContainerAware
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create($newResource, 201));
             }
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -239,6 +263,8 @@ class ResourceController extends ContainerAware
                 return $this->viewHandler->handle(View::create(null, 204));
             }
 
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
 
@@ -273,12 +299,18 @@ class ResourceController extends ContainerAware
 
         $this->repository->remove($resource);
 
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create(null, 204));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
     /**
      * @param RequestConfiguration $configuration
-     * @param $permission
+     * @param string $permission
      *
      * @throws AccessDeniedException
      */
@@ -294,13 +326,13 @@ class ResourceController extends ContainerAware
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return ResourceInterface
+     * @return \Sylius\Component\Resource\Model\ResourceInterface
      *
      * @throws NotFoundHttpException
      */
     protected function findOr404(RequestConfiguration $configuration)
     {
-        if (null === $resource = $this->resourceFinder->find($configuration, $this->repository)) {
+        if (null === $resource = $this->singleResourceProvider->get($configuration, $this->repository)) {
             throw new NotFoundHttpException();
         }
 

@@ -21,11 +21,12 @@
         <parameter key="sylius.resource_controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.resource_controller.request_configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
         <parameter key="sylius.resource_controller.new_resource_factory.class">Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory</parameter>
-        <parameter key="sylius.resource_controller.resource_finder.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFinder</parameter>
-        <parameter key="sylius.resource_controller.resources_finder.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesFinder</parameter>
+        <parameter key="sylius.resource_controller.single_resource_provider.class">Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider</parameter>
+        <parameter key="sylius.resource_controller.resources_collection_provider.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider</parameter>
         <parameter key="sylius.resource_controller.form_factory.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory</parameter>
         <parameter key="sylius.resource_controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
         <parameter key="sylius.resource_controller.authorization_checker.class">Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker</parameter>
+        <parameter key="sylius.resource_controller.flash_helper.class">Sylius\Bundle\ResourceBundle\Controller\FlashHelper</parameter>
     </parameters>
 
     <services>
@@ -39,8 +40,8 @@
             <argument>%sylius.resource_controller.request_configuration.class%</argument>
         </service>
         <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
-        <service id="sylius.resource_controller.resource_finder" class="%sylius.resource_controller.resource_finder.class%" />
-        <service id="sylius.resource_controller.resources_finder" class="%sylius.resource_controller.resources_finder.class%" />
+        <service id="sylius.resource_controller.single_resource_provider" class="%sylius.resource_controller.single_resource_provider.class%" />
+        <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%" />
         <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">
             <argument type="service" id="form.factory" />
         </service>
@@ -48,5 +49,9 @@
             <argument type="service" id="router" />
         </service>
         <service id="sylius.resource_controller.authorization_checker" class="%sylius.resource_controller.authorization_checker.class%" />
+        <service id="sylius.resource_controller.flash_helper" class="%sylius.resource_controller.flash_helper.class%">
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+        </service>
     </services>
 </container>

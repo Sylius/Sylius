@@ -96,10 +96,11 @@ abstract class AbstractDriver implements DriverInterface
                 new Reference($metadata->getServiceId('factory')),
                 new Reference('sylius.resource_controller.new_resource_factory'),
                 new Reference($metadata->getServiceId('manager')),
-                new Reference('sylius.resource_controller.resource_finder'),
-                new Reference('sylius.resource_controller.resources_finder'),
+                new Reference('sylius.resource_controller.single_resource_provider'),
+                new Reference('sylius.resource_controller.resources_collection_provider'),
                 new Reference('sylius.resource_controller.form_factory'),
                 new Reference('sylius.resource_controller.redirect_handler'),
+                new Reference('sylius.resource_controller.flash_helper'),
                 new Reference('sylius.resource_controller.authorization_checker'),
             ))
             ->addMethodCall('setContainer', array(new Reference('service_container')))

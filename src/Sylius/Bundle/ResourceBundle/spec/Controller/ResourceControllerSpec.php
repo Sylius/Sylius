@@ -18,14 +18,14 @@ use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceFinder;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceFinderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourcesFinderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -53,10 +53,11 @@ class ResourceControllerSpec extends ObjectBehavior
         FactoryInterface $factory,
         NewResourceFactoryInterface $newResourceFactory,
         ObjectManager $manager,
-        ResourceFinderInterface $resourceFinder,
-        ResourcesFinderInterface $resourcesFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourcesCollectionProviderInterface $resourcesCollectionProvider,
         ResourceFormFactoryInterface $resourceFormFactory,
         RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker
     )
     {
@@ -68,10 +69,11 @@ class ResourceControllerSpec extends ObjectBehavior
             $factory,
             $newResourceFactory,
             $manager,
-            $resourceFinder,
-            $resourcesFinder,
+            $singleResourceProvider,
+            $resourcesCollectionProvider,
             $resourceFormFactory,
             $redirectHandler,
+            $flashHelper,
             $authorizationChecker
         );
     }
@@ -112,14 +114,14 @@ class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder
+        SingleResourceProviderInterface $singleResourceProvider
     )
     {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn(null);
+        $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
             ->shouldThrow(new NotFoundHttpException())
@@ -133,7 +135,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ViewHandlerInterface $viewHandler,
         Request $request,
@@ -147,7 +149,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::SHOW)->willReturn('SyliusShopBundle:Product:show.html.twig');
@@ -173,7 +175,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ViewHandlerInterface $viewHandler,
         Request $request,
@@ -187,7 +189,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
 
         $configuration->isHtmlRequest()->willReturn(false);
 
@@ -223,7 +225,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourcesFinderInterface $resourcesFinder,
+        ResourcesCollectionProviderInterface $resourcesCollectionProvider,
         ResourceInterface $resource1,
         ResourceInterface $resource2,
         ViewHandlerInterface $viewHandler,
@@ -242,7 +244,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::INDEX)->willReturn('SyliusShopBundle:Product:index.html.twig');
-        $resourcesFinder->findCollection($configuration, $repository)->willReturn(array($resource1, $resource2));
+        $resourcesCollectionProvider->get($configuration, $repository)->willReturn(array($resource1, $resource2));
 
         $expectedView = View::create()
             ->setData(array(
@@ -430,6 +432,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
         RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
         Request $request,
         Response $redirectResponse
     )
@@ -453,7 +456,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
 
         $repository->add($newResource)->shouldBeCalled();
-        
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $newResource)->willReturn($redirectResponse);
 
         $this->createAction($request)->shouldReturn($redirectResponse);
@@ -470,6 +474,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $newResource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        FlashHelperInterface $flashHelper,
         Form $form,
         Request $request,
         Response $response
@@ -494,6 +499,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
 
         $repository->add($newResource)->shouldBeCalled();
+
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
         $expectedView = View::create($newResource, 201);
 
@@ -528,14 +535,14 @@ class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder
+        SingleResourceProviderInterface $singleResourceProvider
     )
     {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn(null);
+        $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
             ->shouldThrow(new NotFoundHttpException())
@@ -550,7 +557,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         ViewHandlerInterface $viewHandler,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
@@ -570,7 +577,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::UPDATE)->willReturn('SyliusShopBundle:Product:update.html.twig');
 
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(false);
@@ -601,7 +608,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         ViewHandlerInterface $viewHandler,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
@@ -621,7 +628,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::UPDATE)->willReturn('SyliusShopBundle:Product:update.html.twig');
 
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(false);
@@ -654,7 +661,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         ViewHandlerInterface $viewHandler,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
@@ -673,7 +680,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);;
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);;
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(true);
@@ -698,11 +705,12 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         ObjectManager $manager,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
         RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
         Request $request,
         Response $redirectResponse
     )
@@ -718,7 +726,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::UPDATE)->willReturn('SyliusShopBundle:Product:update.html.twig');
 
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(false);
@@ -731,6 +739,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $manager->flush()->shouldBeCalled();
 
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
 
         $this->updateAction($request)->shouldReturn($redirectResponse);
@@ -744,7 +753,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ViewHandlerInterface $viewHandler,
         ObjectManager $manager,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
@@ -762,7 +771,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(false);
@@ -806,14 +815,14 @@ class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder
+        SingleResourceProviderInterface $singleResourceProvider
     )
     {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn(null);
+        $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
             ->shouldThrow(new NotFoundHttpException())
@@ -827,9 +836,10 @@ class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
-        ResourceFinderInterface $resourceFinder,
+        SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
         Request $request,
         Response $redirectResponse
     )
@@ -841,14 +851,47 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
-        $resourceFinder->find($configuration, $repository)->willReturn($resource);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
 
         $configuration->isHtmlRequest()->willReturn(true);
         $repository->remove($resource)->shouldBeCalled();
-        
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
         
         $this->deleteAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_deletes_a_resource_and_returns_204_for_non_html_requests(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ViewHandlerInterface $viewHandler,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        Request $request,
+        Response $response
+    )
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(false);
+        $repository->remove($resource)->shouldBeCalled();
+
+        $expectedView = View::create(null, 204);
+
+        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+
+        $this->deleteAction($request)->shouldReturn($response);
     }
 
     /**
