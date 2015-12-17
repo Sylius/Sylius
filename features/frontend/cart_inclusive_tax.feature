@@ -7,10 +7,10 @@ Feature: Tax included in price
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
             | name    | type    | members        |
             | Germany | country | Germany        |

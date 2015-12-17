@@ -11,11 +11,11 @@ Feature: Checkout fixed discount promotions
             | Germany |
             | Poland  |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > Ubuntu T-Shirts |
-            | Clothing > Debian T-Shirts |
+            | Clothing[TX1] > Ubuntu T-Shirts[TX2] |
+            | Clothing[TX1] > Debian T-Shirts[TX3] |
           And the following products exist:
             | name    | price | taxons          |
             | Buzz    | 500   | Debian T-Shirts |

@@ -11,10 +11,10 @@ Feature: Taxonomies internationalization
             | en_US |
             | es_ES |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > Shirts > Long Sleeve |
+            | Clothing[TX1] > Shirts[TX2] > Long Sleeve[TX3] |
           And the following taxon translations exist:
             | taxon       | name        | locale |
             | Category    | Categoria   | es_ES  |

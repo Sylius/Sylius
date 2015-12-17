@@ -40,6 +40,17 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.taxon.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+            <option name="message">sylius.taxon.code.not_blank</option>
+            <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Sylius\Component\Taxonomy\Model\TaxonTranslation">

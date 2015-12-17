@@ -42,6 +42,12 @@ class TaxonSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('TX2');
+        $this->getCode()->shouldReturn('TX2');
+    }
+
     function it_does_not_belong_to_taxonomy_by_default()
     {
         $this->getTaxonomy()->shouldReturn(null);

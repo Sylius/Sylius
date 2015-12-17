@@ -10,10 +10,10 @@ Feature: Cart
               | email       | password | enabled |
               | bar@foo.com | foo1     | yes     |
             And there are following taxonomies defined:
-              | name     |
-              | Category |
+              | code | name     |
+              | RTX1 | Category |
             And taxonomy "Category" has following taxons:
-              | Clothing > PHP T-Shirts |
+              | Clothing[TX1] > PHP T-Shirts[TX2] |
             And the following products exist:
               | name    | price | taxons       |
               | PHP Top | 85    | PHP T-Shirts |
