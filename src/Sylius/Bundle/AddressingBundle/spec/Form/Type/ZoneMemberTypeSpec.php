@@ -52,25 +52,23 @@ class ZoneMemberTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
-        $builder->getOption('zone_type')->willReturn('country');
         $builder
-            ->add('code', 'sylius_country_code_choice', Argument::any())
+            ->add('code', 'sylius_zone_code_choice', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, array('zone_type' => 'zone'));
     }
 
     function it_configures_options(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'empty_value' => 'sylius.form.zone_member.select',
-                    'data_class'  => ZoneMember::class,
-                    'zone_type'   => 'country',
-                )
-            )
+            ->setDefaults(array(
+                'empty_value' => 'sylius.form.zone_member.select',
+                'data_class'  => ZoneMember::class,
+                'zone_type'   => 'country',
+            ))
             ->shouldBeCalled()
         ;
 

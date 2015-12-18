@@ -53,7 +53,7 @@ class Country implements CountryInterface
      */
     public function __toString()
     {
-        return $this->getCode();
+        return $this->code;
     }
 
     /**

@@ -25,14 +25,14 @@ class CountryChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $countryRepository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface $countryRepository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $countryRepository)
     {
-        $this->repository = $repository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -42,9 +42,9 @@ class CountryChoiceType extends AbstractType
     {
         $choices = function (Options $options) {
             if (null === $options['enabled']) {
-                $choices = $this->repository->findAll();
+                $choices = $this->countryRepository->findAll();
             } else {
-                $choices = $this->repository->findBy(array('enabled' => $options['enabled']));
+                $choices = $this->countryRepository->findBy(array('enabled' => $options['enabled']));
             }
 
             return new ArrayChoiceList($choices);
@@ -53,8 +53,8 @@ class CountryChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choices,
-                'enabled'     => true,
-                'label'       => 'sylius.form.address.country',
+                'enabled' => true,
+                'label' => 'sylius.form.address.country',
                 'empty_value' => 'sylius.form.country.select',
             ))
         ;

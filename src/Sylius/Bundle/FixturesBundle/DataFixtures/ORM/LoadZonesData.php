@@ -87,7 +87,7 @@ class LoadZonesData extends DataFixture
             $zone->addMember($zoneMember);
         }
 
-        $this->setReference('Sylius.Zone.'.$name, $zone);
+        $this->setReference('Sylius.Zone.'.$code, $zone);
 
         return $zone;
     }

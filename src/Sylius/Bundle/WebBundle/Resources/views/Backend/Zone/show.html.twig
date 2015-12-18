@@ -46,18 +46,12 @@
     <table id="members" class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th>{{ 'sylius.zone.name'|trans }}</th>
                 <th>{{ 'sylius.ui.code'|trans }}</th>
             </tr>
         </thead>
         <tbody>
             {% for member in zone.members %}
                 <tr id="{{ member.id }}">
-                    {% if zone.type == 'country' %}
-                        <td>{{ member.code|sylius_country_name }}</td>
-                    {% else %}
-                        <td>{{ member.code }}</td>
-                    {% endif %}
                     <td>{{ member.code }}</td>
                 </tr>
             {% endfor %}

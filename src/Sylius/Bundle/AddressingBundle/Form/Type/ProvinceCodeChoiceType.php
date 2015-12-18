@@ -29,13 +29,14 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
 
         $choices = function (Options $options) {
             if (null === $options['country']) {
-                $provinces = $this->repository->findAll();
+                $provinces = $this->provinceRepository->findAll();
             } else {
                 $provinces = $options['country']->getProvinces();
             }
 
             return $this->getProvinceCodes($provinces);
         };
+
         $resolver->setDefault('choice_list', null);
         $resolver->setDefault('choices', $choices);
     }
@@ -53,15 +54,15 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
      *
      * @return array
      */
-    protected function getProvinceCodes(array $provinces)
+    private function getProvinceCodes(array $provinces)
     {
-        $provinceCodes = array();
+        $provincesCodes = array();
 
         /* @var ProvinceInterface $province */
         foreach ($provinces as $province) {
-            $provinceCodes[$province->getCode()] = $province->getName();
+            $provincesCodes[$province->getCode()] = $province->getName();
         }
 
-        return $provinceCodes;
+        return $provincesCodes;
     }
 }

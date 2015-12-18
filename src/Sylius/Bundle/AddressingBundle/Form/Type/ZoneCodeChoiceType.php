@@ -24,14 +24,14 @@ class ZoneCodeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $zoneRepository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $zoneRepository)
     {
-        $this->repository = $repository;
+        $this->zoneRepository = $zoneRepository;
     }
 
     /**
@@ -41,8 +41,8 @@ class ZoneCodeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices'     => $this->getZones(),
-                'label'       => 'sylius.form.zone.types.zone',
+                'choices' => $this->getZoneCodes(),
+                'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',
             ))
         ;
@@ -67,9 +67,9 @@ class ZoneCodeChoiceType extends AbstractType
     /**
      * @return array
      */
-    protected function getZones()
+    private function getZoneCodes()
     {
-        $zoneObjects = $this->repository->findAll();
+        $zoneObjects = $this->zoneRepository->findAll();
         $zones = array();
 
         /* @var ZoneInterface $zone */

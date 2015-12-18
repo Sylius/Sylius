@@ -54,7 +54,7 @@ class FormContext extends BaseFormContext
     /**
      * @Given /^I remove the first (country|province)$/
      */
-    public function iRemoveTheFirstCountryMember()
+    public function iRemoveTheFirstMember()
     {
         $this->deleteCollectionItem(1);
     }

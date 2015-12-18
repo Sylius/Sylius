@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Sylius\Bundle\AddressingBundle\DependencyInjection\Compiler\RegisterZoneFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -18,6 +19,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Sylius addressing and zones management bundle.
@@ -35,6 +37,16 @@ class SyliusAddressingBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterZoneFactoryPass());
     }
 
     /**

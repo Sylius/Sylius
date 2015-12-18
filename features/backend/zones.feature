@@ -28,9 +28,9 @@ Feature: Zones
     @javascript
     Scenario: Accessing the zone creation form
         Given I am on the zone index page
-        And I select "Country" from "form_type"
-        And I follow "Create"
-        Then I should be on the zone creation page for type "country"
+          And I want to create a country zone
+         When I follow "Create"
+         Then I should be on the zone creation page for type "country"
 
     Scenario: Submitting invalid form
         Given I am on the zone creation page for type "country"
@@ -58,8 +58,8 @@ Feature: Zones
          When I press "Create"
          Then I should be on the page of zone "European Union"
           And I should see "Zone has been successfully created."
-          And "Estonia" should appear on the page
-          And "Germany" should appear on the page
+          And "EE" should appear on the page
+          And "DE" should appear on the page
           And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
@@ -88,6 +88,10 @@ Feature: Zones
           And I should see "Zone has been successfully updated."
           And "California" should not appear on the page
 
+    Scenario: Cannot edit zone code
+         When I am editing zone "USA GMT-8"
+         Then the code field should be disabled
+
     Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
@@ -104,7 +108,7 @@ Feature: Zones
           And I press "Save changes"
          Then I should be on the page of zone "Baltic states"
           And I should see "Zone has been successfully updated."
-          And "Poland" should appear on the page
+          And "PL" should appear on the page
 
     @javascript
     Scenario: Deleting zone

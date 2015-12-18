@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,14 +26,14 @@ class ProvinceChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $provinceRepository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface $provinceRepository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $provinceRepository)
     {
-        $this->repository = $repository;
+        $this->provinceRepository = $provinceRepository;
     }
 
     /**
@@ -42,24 +42,25 @@ class ProvinceChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = function (Options $options) {
-                if (null === $options['country']) {
-                    $choices = $this->repository->findAll();
-                } else {
-                    $choices = $options['country']->getProvinces();
-                }
+            if (null === $options['country']) {
+                $choices = $this->provinceRepository->findAll();
+            } else {
+                $choices = $options['country']->getProvinces();
+            }
 
-//          return new ObjectChoiceList($choices, null, array(), null, 'id');
             return new ArrayChoiceList($choices);
         };
 
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choices,
-                'country'     => null,
-                'label'       => 'sylius.form.address.province',
+                'country' => null,
+                'label' => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select',
             ))
         ;
+        $resolver->addAllowedTypes('country', 'NULL');
+        $resolver->addAllowedTypes('country', CountryInterface::class);
     }
 
     /**

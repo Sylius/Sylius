@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class ZoneMemberType extends AbstractResourceType
@@ -27,7 +27,7 @@ class ZoneMemberType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $type = $builder->getOption('zone_type');
+        $type = $options['zone_type'];
 
         $builder
             ->add('code', 'sylius_'.$type.'_code_choice', array(
@@ -44,8 +44,8 @@ class ZoneMemberType extends AbstractResourceType
         $resolver
             ->setDefaults(array(
                 'empty_value' => 'sylius.form.zone_member.select',
-                'data_class'  => ZoneMember::class,
-                'zone_type'   => null,
+                'data_class' => ZoneMember::class,
+                'zone_type' => ZoneInterface::TYPE_COUNTRY,
             ))
         ;
     }

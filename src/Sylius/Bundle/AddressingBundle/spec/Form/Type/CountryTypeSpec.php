@@ -48,11 +48,13 @@ class CountryTypeSpec extends ObjectBehavior
     {
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('provinces', 'collection', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -62,13 +64,12 @@ class CountryTypeSpec extends ObjectBehavior
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'data_class'        => 'Country',
-                    'validation_groups' => array('sylius')
-                )
-            )
-            ->shouldBeCalled();
+            ->setDefaults(array(
+                'data_class'        => 'Country',
+                'validation_groups' => array('sylius')
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

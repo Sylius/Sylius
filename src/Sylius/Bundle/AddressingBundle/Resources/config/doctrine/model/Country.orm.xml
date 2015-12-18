@@ -22,8 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" unique="true" />
-
+        <field name="code" column="code" type="string" length="2" unique="true"/>
         <field name="enabled" column="enabled" type="boolean" />
 
         <one-to-many field="provinces" target-entity="Sylius\Component\Addressing\Model\ProvinceInterface" mapped-by="country">

@@ -45,46 +45,55 @@ class AddressTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder->addEventSubscriber(Argument::type(EventSubscriberInterface::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('firstName', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('lastName', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('phoneNumber', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('company', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('country', 'sylius_country_code_choice', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('street', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('city', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('postcode', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

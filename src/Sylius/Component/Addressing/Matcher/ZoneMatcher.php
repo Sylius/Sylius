@@ -29,7 +29,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $zoneRepository;
 
     /**
      * Zone matching priorities.
@@ -43,11 +43,11 @@ class ZoneMatcher implements ZoneMatcherInterface
     );
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $zoneRepository)
     {
-        $this->repository = $repository;
+        $this->zoneRepository = $zoneRepository;
     }
 
     /**
@@ -142,10 +142,10 @@ class ZoneMatcher implements ZoneMatcherInterface
     protected function getZones($scope = null)
     {
         if (null === $scope) {
-            return $this->repository->findAll();
+            return $this->zoneRepository->findAll();
         }
 
-        return $this->repository->findBy(array('scope' => $scope));
+        return $this->zoneRepository->findBy(array('scope' => $scope));
     }
 
     /**
@@ -155,6 +155,6 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     protected function getZoneByCode($code)
     {
-        return $this->repository->findOneBy(array('code' => $code));
+        return $this->zoneRepository->findOneBy(array('code' => $code));
     }
 }

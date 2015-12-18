@@ -12,10 +12,13 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * This listener adds the province field to form if needed.
@@ -73,17 +76,14 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        /* @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(array('code' => $countryCode));
-
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->formFactory->createNamed('province', 'sylius_province_code_choice', $address->getProvince(), array(
-                'country' => $country,
-                'auto_initialize' => false,
-            )));
+            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvince()));
         }
     }
 
@@ -103,16 +103,32 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        /* @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(array('code' => $data['country']));
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->formFactory->createNamed('province', 'sylius_province_code_choice', null, array(
-                'country'  => $country,
-                'auto_initialize' => false,
-            )));
+            $event->getForm()->add($this->createProvinceCodeChoiceForm($country));
         }
+    }
+
+    /**
+     * @param CountryInterface $country
+     * @param ProvinceInterface|null $province
+     *
+     * @return FormInterface
+     */
+    private function createProvinceCodeChoiceForm(CountryInterface $country, ProvinceInterface $province = null)
+    {
+        return
+            $this
+                ->formFactory
+                    ->createNamed('province', 'sylius_province_code_choice', $province, array(
+                    'country'  => $country,
+                    'auto_initialize' => false,
+            ))
+        ;
     }
 }

@@ -98,15 +98,15 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     }
 
     /**
-     * Get zone reference by its name.
+     * Get zone reference by its code.
      *
-     * @param string $name
+     * @param string $code
      *
      * @return ZoneInterface
      */
-    protected function getZoneByName($name)
+    protected function getZoneByCode($code)
     {
-        return $this->getReference('Sylius.Zone.'.$name);
+        return $this->getReference('Sylius.Zone.'.$code);
     }
 
     /**

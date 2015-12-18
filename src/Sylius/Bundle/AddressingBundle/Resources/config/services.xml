@@ -22,8 +22,6 @@
         <parameter key="sylius.form.type.zone_code_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneCodeChoiceType</parameter>
         <parameter key="sylius.form.type.province_code_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType</parameter>
 
-        <parameter key="sylius.factory.zone">Sylius\Bundle\AddressingBundle\Factory\ZoneFactory</parameter>
-
         <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber</parameter>
 
         <parameter key="sylius.zone_matcher.class">Sylius\Component\Addressing\Matcher\ZoneMatcher</parameter>
@@ -47,10 +45,6 @@
         <service id="sylius.form.type.province_code_choice" class="%sylius.form.type.province_code_choice.class%">
             <argument type="service" id="sylius.repository.province" />
             <tag name="form.type" alias="sylius_province_code_choice" />
-        </service>
-
-        <service id="sylius.factory.zone" class="%sylius.factory.zone%">
-            <argument>Sylius\Component\Addressing\Model\Zone</argument>
         </service>
 
         <service id="sylius.form.listener.address" class="%sylius.form.listener.address.class%">

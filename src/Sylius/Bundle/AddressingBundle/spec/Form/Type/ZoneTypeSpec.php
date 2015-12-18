@@ -53,23 +53,33 @@ class ZoneTypeSpec extends ObjectBehavior
 
         $builder
             ->add('name', 'text', Argument::any())
-            ->willReturn($builder);
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
-            ->willReturn($builder);
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('type', 'sylius_zone_type_choice', Argument::any())
-            ->willReturn($builder);
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('scope', 'choice', Argument::any())
-            ->willReturn($builder);
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('members', 'collection', Argument::any())
-            ->willReturn($builder);
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }
@@ -79,14 +89,16 @@ class ZoneTypeSpec extends ObjectBehavior
         $resolver
             ->setDefaults(
                 array(
-                    "data_class" => "Zone",
+                    "data_class"        => "Zone",
                     "validation_groups" => array("sylius"),
-                )
-            )->shouldBeCalled();
+                ))
+            ->shouldBeCalled()
+        ;
 
         $resolver
-            ->setDefault('options', array('zone_type' => null))
-            ->shouldBeCalled();
+            ->setDefault('zone_type', 'country')
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

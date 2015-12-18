@@ -20,13 +20,22 @@ use Symfony\Component\Validator\Constraint;
  */
 class ShippableAddressConstraint extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'sylius.address.not_shippable';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validatedBy()
     {
         return 'sylius_shippable_address_validator';

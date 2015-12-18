@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 
@@ -28,7 +27,7 @@ class CountryChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CountryChoiceType::class);
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType');
     }
 
     function it_extends_abstract_type()

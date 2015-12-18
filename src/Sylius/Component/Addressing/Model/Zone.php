@@ -13,7 +13,6 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

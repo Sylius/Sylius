@@ -47,11 +47,13 @@ class ProvinceTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -61,13 +63,12 @@ class ProvinceTypeSpec extends ObjectBehavior
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
-                )
-            )
-            ->shouldBeCalled();
+            ->setDefaults(array(
+                'data_class'        => 'Province',
+                'validation_groups' => array('sylius')
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

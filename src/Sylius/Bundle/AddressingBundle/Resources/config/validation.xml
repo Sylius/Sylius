@@ -131,11 +131,7 @@
             <option name="groups">sylius</option>
         </constraint>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">
-                <value>code</value>
-                <value>country</value>
-            </option>
-            <option name="errorPath">code</option>
+            <option name="fields">code</option>
             <option name="message">sylius.province.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>

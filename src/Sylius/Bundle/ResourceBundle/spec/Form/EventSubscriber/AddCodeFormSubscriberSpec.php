@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -79,10 +80,12 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $this->shouldThrow('\UnexpectedTypeException');
     }
 
-    function it_sets_code_as_enabled_when_resource_is_null(FormEvent $event, FormInterface $form)
-    {
-        $event->getForm()->willReturn($form);
+    function it_sets_code_as_enabled_when_there_is_no_resource(
+        FormEvent $event,
+        FormInterface $form
+    ) {
         $event->getData()->willReturn(null);
+        $event->getForm()->willReturn($form);
 
         $form
             ->add('code', 'text', Argument::withEntry('disabled', false))

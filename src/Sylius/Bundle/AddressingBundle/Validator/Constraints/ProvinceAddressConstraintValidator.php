@@ -26,6 +26,9 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
      */
     private $countryRepository;
 
+    /**
+     * @param RepositoryInterface $countryRepository
+     */
     public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;

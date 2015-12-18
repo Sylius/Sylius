@@ -3,6 +3,13 @@ UPGRADE
 
 ## From 0.16 to 0.17.x
 
+### Addressing and SyliusAddressingBundle
+
+* Extracted ``Country`` ISO code to name translation, from model to a twig extension: ``CountryNameExtension``;
+* Removed ``Address`` relations to ``Country`` and ``Province`` objects, their unique ``code`` is used instead;
+* Removed specific ``ZoneMembers`` i.e. ``ProvinceZoneMember`` in favor of a dynamic ``ZoneMember``;
+* https://github.com/Sylius/Sylius/pull/3696
+
 ### Order and SyliusOrderBundle
 
 * Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;

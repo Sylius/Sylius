@@ -30,10 +30,11 @@ class CountryCodeChoiceType extends CountryChoiceType
 
         $choices = function (Options $options) {
             if (null === $options['enabled']) {
-                $countries = $this->repository->findAll();
+                $countries = $this->countryRepository->findAll();
             } else {
-                $countries = $this->repository->findBy(array('enabled' => $options['enabled']));
+                $countries = $this->countryRepository->findBy(array('enabled' => $options['enabled']));
             }
+
             return $this->getCountryCodes($countries);
         };
 
@@ -54,7 +55,7 @@ class CountryCodeChoiceType extends CountryChoiceType
      *
      * @return array
      */
-    protected function getCountryCodes(array $countries)
+    private function getCountryCodes(array $countries)
     {
         $countryCodes = array();
 

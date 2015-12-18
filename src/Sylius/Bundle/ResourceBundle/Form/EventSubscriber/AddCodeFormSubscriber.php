@@ -60,11 +60,6 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
         }
 
         $form = $event->getForm();
-
-        if (!isset($resource)) {
-            $disabled = null !== $form->getConfig()->getData()['code'];
-        }
-
         $form->add('code', $this->type, array('label' => 'sylius.ui.code', 'disabled' => $disabled));
     }
 }

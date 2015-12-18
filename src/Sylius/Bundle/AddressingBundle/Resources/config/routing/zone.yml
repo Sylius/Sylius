@@ -4,10 +4,10 @@
 sylius_zone_list:
     path: /
     defaults:
-        _controller: SyliusAddressingBundle:Zone:index
+        _controller: sylius.controller.zone:indexAction
 
 sylius_zone_create:
-    path: /type_{type}/create
+    path: /{type}/create
     defaults:
         _controller: sylius.controller.zone:createAction
         _factory: sylius.factory.zone
