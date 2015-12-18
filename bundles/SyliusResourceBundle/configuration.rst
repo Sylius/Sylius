@@ -20,24 +20,20 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
                 driver: doctrine/orm
                 object_manager: default
                 templates: App:User
-                resources:
-                    entity_name:
-                        classes:
-                            model: MyApp\Entity\EntityName
-                            interface: MyApp\Entity\EntityNameInterface
-                            controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                classes:
+                    model: MyApp\Entity\EntityName
+                    interface: MyApp\Entity\EntityNameInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
             my_app.document_name:
                 driver: doctrine/mongodb-odm
                 object_manager: default
                 templates: App:User
-                resources:
-                    document:
-                        classes:
-                            model: MyApp\Document\DocumentName
-                            interface: MyApp\Document\DocumentNameInterface
-                            controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
+                    classes:
+                        model: MyApp\Document\DocumentName
+                        interface: MyApp\Document\DocumentNameInterface
+                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
 
 At this step, we can see what happen in the container:
 
