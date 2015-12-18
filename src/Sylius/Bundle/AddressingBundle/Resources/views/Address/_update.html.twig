@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Address updating <small>Use this form to edit existing address</small></h1>
-<hr />
-
-<form action="{{ path('sylius_address_update', {'id': address.id}) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusAddressingBundle:Address:_form.html.twig' %}
-    {{ actions.update(path('sylius_address_show', {'id': address.id})) }}
-</form>

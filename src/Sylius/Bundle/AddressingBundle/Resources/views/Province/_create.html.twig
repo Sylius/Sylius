@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Creating province <small>Use this form to add new item to province book</small></h1>
-<hr />
-
-<form action="{{ path('sylius_province_create', {'countryId': province.country.id}) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusAddressingBundle:Province:_form.html.twig' %}
-    {{ actions.create() }}
-</form>
