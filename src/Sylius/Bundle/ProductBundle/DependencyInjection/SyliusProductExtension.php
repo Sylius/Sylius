@@ -32,6 +32,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Product catalog extension.
@@ -57,6 +59,11 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $container
+            ->getDefinition('sylius.factory.product')
+            ->addArgument(new Reference('sylius.factory.product_variant'))
+        ;
     }
 
     /**

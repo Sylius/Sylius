@@ -19,6 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,6 +27,15 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
  */
 class ProductSpec extends ObjectBehavior
 {
+    function let(VariantInterface $masterVariant)
+    {
+        $masterVariant->setMaster(true)->shouldBeCalled();
+        $masterVariant->setProduct($this)->shouldBeCalled();
+        $masterVariant->isMaster()->willReturn(true);
+
+        $this->setMasterVariant($masterVariant);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\Product');
@@ -75,8 +85,11 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxons('brand')->shouldHaveCount(1);
     }
 
-    function its_price_is_mutable()
+    function its_price_is_mutable(VariantInterface $masterVariant)
     {
+        $masterVariant->setPrice(499)->shouldBeCalled();
+        $masterVariant->getPrice()->willReturn(499);
+
         $this->setPrice(499);
         $this->getPrice()->shouldReturn(499);
     }
