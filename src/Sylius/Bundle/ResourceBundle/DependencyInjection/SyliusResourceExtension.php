@@ -54,7 +54,7 @@ class SyliusResourceExtension extends Extension
 
             DriverProvider::get($metadata)->load($container, $metadata);
 
-            if (isset($resourceConfig['translation'])) {
+            if (isset($resourceConfig['translation']) && class_exists('Sylius\Bundle\TranslationBundle\SyliusTranslationBundle')) {
                 $alias = $alias.'_translation';
                 $resourceConfig = array_merge(array('driver' => $resourceConfig['driver']), $resourceConfig['translation']);
 
