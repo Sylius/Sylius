@@ -54,6 +54,15 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="actions">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Promotion\Model\Action">
+        <property name="configuration">
+            <constraint name="Valid" />
+        </property>
     </class>
 
     <class name="Sylius\Component\Promotion\Model\Coupon">
@@ -88,19 +97,16 @@
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
-                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.amount.min</option>
-                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="usageLimit">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.usage_limit.min</option>
-                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
