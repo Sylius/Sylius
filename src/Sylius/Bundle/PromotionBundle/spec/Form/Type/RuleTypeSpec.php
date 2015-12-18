@@ -27,7 +27,7 @@ class RuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
+        $this->beConstructedWith('Rule', $checkerRegistry);
     }
 
     function it_is_initializabled()
@@ -61,10 +61,13 @@ class RuleTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Rule',
-            'validation_groups' => array('sylius'),
-        ))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Rule',
+                'validation_groups' => array('Default'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => RuleInterface::TYPE_ITEM_TOTAL))->shouldBeCalled();

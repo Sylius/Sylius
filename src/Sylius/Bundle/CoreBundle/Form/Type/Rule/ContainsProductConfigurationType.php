@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -23,16 +22,16 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class ContainsProductConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
     /**
      * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
+    /**
+     * @param ProductVariantRepositoryInterface $variantRepository
+     */
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -68,18 +67,6 @@ class ContainsProductConfigurationType extends AbstractType
             ))
             ->add('exclude', 'checkbox', array(
                 'label' => 'sylius.form.rule.contains_product_configuration.exclude',
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

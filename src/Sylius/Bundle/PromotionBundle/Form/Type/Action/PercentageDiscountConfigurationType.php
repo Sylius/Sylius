@@ -24,13 +24,6 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class PercentageDiscountConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,15 +40,9 @@ class PercentageDiscountConfigurationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_percentage_discount_configuration';
