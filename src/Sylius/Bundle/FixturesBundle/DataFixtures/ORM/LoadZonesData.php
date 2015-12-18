@@ -38,7 +38,7 @@ class LoadZonesData extends DataFixture
     {
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
-            $this->euCountries + array('US')
+            array_merge($this->euCountries, ['US'])
         );
 
         $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));

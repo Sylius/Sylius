@@ -21,10 +21,10 @@ Feature: Checkout limited time promotions
             | type           | configuration |
             | Fixed discount | Amount: 40    |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > Debian T-Shirts |
+            | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
             | name    | price | taxons          |
             | Buzz    | 500   | Debian T-Shirts |

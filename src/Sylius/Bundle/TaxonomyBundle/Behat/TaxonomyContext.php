@@ -23,19 +23,20 @@ class TaxonomyContext extends DefaultContext
     public function thereAreFollowingTaxonomies(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxonomy($data['name'], false);
+            $this->thereIsTaxonomy($data['name'], $data['code'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^I created taxonomy "([^""]*)"$/
+     * @Given /^I created taxonomy "([^""]*)" with code "([^""]*)"$/
      */
-    public function thereIsTaxonomy($name, $flush = true)
+    public function thereIsTaxonomy($name, $code, $flush = true)
     {
         $taxonomy = $this->getFactory('taxonomy')->createNew();
         $taxonomy->setName($name);
+        $taxonomy->getRoot()->setCode($code);
 
         if (null === $taxonomy->getCurrentLocale()) {
             $taxonomy->setCurrentLocale('en_US');
@@ -61,18 +62,20 @@ class TaxonomyContext extends DefaultContext
             $taxonList = explode('>', $node[0]);
             $parent = null;
 
-            foreach ($taxonList as $taxonName) {
-                $taxonName = trim($taxonName);
+            foreach ($taxonList as $taxon) {
+                $taxon = trim($taxon);
+                $taxonData = preg_split("[\\[|\\]]", $taxon, -1, PREG_SPLIT_NO_EMPTY);
 
-                if (!isset($taxons[$taxonName])) {
+                if (!isset($taxons[$taxonData[0]])) {
                     /* @var $taxon TaxonInterface */
                     $taxon = $this->getFactory('taxon')->createNew();
-                    $taxon->setName($taxonName);
+                    $taxon->setName($taxonData[0]);
+                    $taxon->setCode($taxonData[1]);
 
-                    $taxons[$taxonName] = $taxon;
+                    $taxons[$taxonData[0]] = $taxon;
                 }
 
-                $taxon = $taxons[$taxonName];
+                $taxon = $taxons[$taxonData[0]];
 
                 if (null !== $parent) {
                     $parent->addChild($taxon);

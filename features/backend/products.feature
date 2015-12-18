@@ -29,15 +29,15 @@ Feature: Products
             | TC2  | Electronics |
             | TC3  | Print       |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
-            | Special  |
+            | code | name     |
+            | RTX1 | Category |
+            | RTX2 | Special  |
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts         |
-            | Clothing > Premium T-Shirts |
+            | Clothing[TX1] > T-Shirts[TX2]         |
+            | Clothing[TX1] > Premium T-Shirts[TX3] |
           And taxonomy "Special" has following taxons:
-            | Featured |
-            | New      |
+            | Featured[TX4] |
+            | New[TX5]      |
           And product "Sticker" has main taxon "New"
           And I am logged in as administrator
 

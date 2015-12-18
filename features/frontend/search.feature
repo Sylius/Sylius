@@ -7,12 +7,13 @@ Feature: Search products
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
+
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts     |
-            | Clothing > PHP T-Shirts |
-            | Clothing > Gloves       |
+            | Clothing[TX1] > T-Shirts[TX2]     |
+            | Clothing[TX1] > PHP T-Shirts[TX3] |
+            | Clothing[TX1] > Gloves[TX4]       |
           And the following products exist:
             | name             | price | taxons       | description             |
             | Super T-Shirt    | 19.99 | T-Shirts     | super black t-shirt     |

@@ -7,12 +7,12 @@ Feature: Products
     Background:
         Given there is default currency configured
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts     |
-            | Clothing > PHP T-Shirts |
-            | Clothing > Gloves       |
+            | Clothing[TX1] > T-Shirts[TX2]     |
+            | Clothing[TX1] > PHP T-Shirts[TX3] |
+            | Clothing[TX1] > Gloves[TX4]       |
           And there are following channels configured:
             | code   | name       | currencies | locales             | url          |
             | WEB-US | mystore.us | EUR, GBP   | en_US               |              |

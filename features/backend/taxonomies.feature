@@ -7,15 +7,15 @@ Feature: taxonomies
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
-            | Brand    |
+            | code | name     |
+            | RTX1 | Category |
+            | RTX2 | Brand    |
           And taxonomy "Category" has following taxons:
-            | Electronics > Featured   |
-            | Electronics > Mac > iMac |
-            | Electronics > Mac > MBP  |
-            | Clothing > Gloves        |
-            | Clothing > Hats          |
+            | Electronics[TX1] > Featured[TX3]          |
+            | Electronics[TX1]  > Mac[TX4]  > iMac[TX5] |
+            | Electronics[TX1]  > Mac[TX4]  > MBP[TX6]  |
+            | Clothing[TX2]  > Gloves[TX7]              |
+            | Clothing[TX2]  > Hats[TX8]                |
           And I am logged in as administrator
 
     Scenario: Seeing index of all taxonomies
@@ -44,12 +44,13 @@ Feature: taxonomies
     Scenario: Creating new taxonomy
         Given I am on the taxonomy creation page
          When I fill in "Name" with "Vendor"
+          And I fill in "Code" with "RTX3"
           And I press "Create"
          Then I should be on the page of taxonomy "Vendor"
           And I should see "Taxonomy has been successfully created."
 
     Scenario: Created taxonomies appear in the list
-        Given I created taxonomy "Food"
+        Given I created taxonomy "Food" with code "RTX4"
          When I go to the taxonomy index page
          Then I should see 3 taxonomies in the list
           And I should see taxonomy with name "Food" in that list
@@ -97,6 +98,7 @@ Feature: taxonomies
         Given I am on the page of taxonomy "Category"
           And I follow "Create taxon"
          When I fill in "Name" with "Cars"
+          And I fill in "Code" with "TX9"
           And I press "Create"
          Then I should be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully created."
@@ -112,6 +114,7 @@ Feature: taxonomies
         Given I am on the page of taxonomy "Category"
         And   I follow "Create taxon"
         When  I fill in "Name" with "Electronics"
+        And I fill in "Code" with "TX9"
         And   I select "Clothing" from "Parent"
         And   I press "Create"
         Then  I should be on the page of taxonomy "Category"
@@ -122,6 +125,7 @@ Feature: taxonomies
         Given I am on the page of taxonomy "Category"
           And I follow "Create taxon"
          When I fill in "Name" with "iPods"
+          And I fill in "Code" with "TR9"
           And I select "Electronics" from "Parent"
           And I press "Create"
          Then I should be on the page of taxonomy "Category"
@@ -151,3 +155,24 @@ Feature: taxonomies
          Then I should still be on the page of taxonomy "Category"
           And "Taxon has been successfully deleted." should appear on the page
           And I should see 5 taxons in the list
+
+    Scenario: Cannot update taxon code
+        When I am editing taxon "Electronics" from taxonomy "Category"
+        Then the code field should be disabled
+
+    Scenario: Try create taxon with existing code
+        Given I am on the page of taxonomy "Category"
+        And I follow "Create taxon"
+        When I fill in "Name" with "Cars"
+        And I fill in "Code" with "TX1"
+        And I press "Create"
+        Then I should still be on the taxon creation page from taxonomy "Category"
+        And I should see "Taxon with given code already exists."
+
+    Scenario: Try create taxon without code
+        Given I am on the page of taxonomy "Category"
+        And I follow "Create taxon"
+        When I fill in "Name" with "Cars"
+        And I press "Create"
+        Then I should still be on the taxon creation page from taxonomy "Category"
+        And I should see "Please enter taxon code."

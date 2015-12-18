@@ -17,8 +17,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Installer extension.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class SyliusInstallerExtension extends Extension
@@ -31,5 +29,6 @@ class SyliusInstallerExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
+        $loader->load('requirements.xml');
     }
 }
