@@ -21,6 +21,8 @@ class StockMovementRepository extends EntityRepository implements StockMovementR
 {
     /**
      * @param int $locationId
+     *
+     * @return \Pagerfanta\Pagerfanta
      */
     public function createByLocationPaginator($locationId)
     {

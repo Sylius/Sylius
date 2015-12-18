@@ -38,17 +38,11 @@
     <services>
         <service id="sylius.form.type.stock_item" class="%sylius.form.type.stock_item.class%">
             <argument>%sylius.model.stock_item.class%</argument>
-            <argument>%sylius.validation_group.stock_item%</argument>
             <tag name="form.type" alias="sylius_stock_item" />
         </service>
         <service id="sylius.form.type.stock_location" class="%sylius.form.type.stock_location.class%">
             <argument>%sylius.model.stock_location.class%</argument>
-            <argument>%sylius.validation_group.stock_location%</argument>
             <tag name="form.type" alias="sylius_stock_location" />
-        </service>
-        <service id="sylius.form.type.stock_location_choice" class="%sylius.form.type.stock_location_choice.class%">
-            <argument>%sylius.model.stock_location.class%</argument>
-            <tag name="form.type" alias="sylius_stock_location_choice" />
         </service>
 
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
@@ -72,7 +66,7 @@
             <argument type="service" id="sylius.repository.stock_item" />
         </service>
 
-        <service id="sylius.inventory_unit_factory" class="%sylius.inventory_unit_factory.class%">
+        <service id="sylius.inventory_unit_factory" class="%sylius.factory.inventory_unit.class%">
             <argument type="service" id="sylius.repository.inventory_unit" />
         </service>
 

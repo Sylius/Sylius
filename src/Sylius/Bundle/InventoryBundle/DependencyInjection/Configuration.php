@@ -11,7 +11,11 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockItemRepository;
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockLocationRepository;
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockMovementRepository;
 use Sylius\Bundle\InventoryBundle\Form\Type\StockItemType;
+use Sylius\Bundle\InventoryBundle\Form\Type\StockLocationEntityType;
 use Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
@@ -103,7 +107,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(StockItem::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('repository')->defaultValue(StockItemRepository::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -122,11 +126,12 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(StockLocation::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('repository')->defaultValue(StockLocationRepository::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(StockLocationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(StockLocationEntityType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -141,7 +146,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(StockMovement::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('repository')->defaultValue(StockMovementRepository::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
