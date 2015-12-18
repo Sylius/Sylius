@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -34,6 +36,11 @@ class OrderPromotionListener
     protected $promotionProcessor;
 
     /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
      * @var SessionInterface
      */
     protected $session;
@@ -47,16 +54,19 @@ class OrderPromotionListener
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
+     * @param CartProviderInterface       $cartProvider
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
      */
     public function __construct(
         PromotionProcessorInterface $promotionProcessor,
+        CartProviderInterface $cartProvider,
         SessionInterface $session,
         TranslatorInterface $translator
     )
     {
         $this->promotionProcessor = $promotionProcessor;
+        $this->cartProvider = $cartProvider;
         $this->session = $session;
         $this->translator = $translator;
     }
@@ -64,13 +74,13 @@ class OrderPromotionListener
     /**
      * Get the order from event and run the promotion processor on it.
      *
-     * @param GenericEvent $event
+     * @param Event $event
      *
      * @throws UnexpectedTypeException
      */
-    public function processOrderPromotion(GenericEvent $event)
+    public function processOrderPromotion(Event $event)
     {
-        $order = $event->getSubject();
+        $order = $this->cartProvider->getCart();
 
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(

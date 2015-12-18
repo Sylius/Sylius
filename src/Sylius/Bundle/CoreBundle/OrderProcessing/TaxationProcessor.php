@@ -90,9 +90,6 @@ class TaxationProcessor implements TaxationProcessorInterface
      */
     public function applyTaxes(OrderInterface $order)
     {
-        // Remove all tax adjustments, we recalculate everything from scratch.
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
-
         if ($order->getItems()->isEmpty()) {
             return;
         }

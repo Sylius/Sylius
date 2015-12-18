@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationRemoverInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Order taxation listener.
@@ -31,35 +33,70 @@ class OrderTaxationListener
     protected $taxationProcessor;
 
     /**
+     * @var TaxationRemoverInterface
+     */
+    protected $taxationRemover;
+
+    /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
      * Constructor.
      *
      * @param TaxationProcessorInterface $taxationProcessor
+     * @param TaxationRemoverInterface $taxationRemover
+     * @param CartProviderInterface $cartProvider
      */
-    public function __construct(TaxationProcessorInterface $taxationProcessor)
-    {
+    public function __construct(
+        TaxationProcessorInterface $taxationProcessor,
+        TaxationRemoverInterface $taxationRemover,
+        CartProviderInterface $cartProvider
+    ) {
         $this->taxationProcessor = $taxationProcessor;
+        $this->taxationRemover = $taxationRemover;
+        $this->cartProvider = $cartProvider;
     }
 
     /**
      * Get the order from event and run the taxation processor on it.
      *
-     * @param GenericEvent $event
+     * @param Event $event
      *
      * @throws UnexpectedTypeException
      */
-    public function applyTaxes(GenericEvent $event)
+    public function applyTaxes(Event $event)
     {
-        $order = $event->getSubject();
+        $order = $this->cartProvider->getCart();
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
-        }
+        $this->guardAgainstNonOrder($order);
 
         $this->taxationProcessor->applyTaxes($order);
-
         $order->calculateTotal();
+    }
+
+    /**
+     * Get the order from event and run the taxation remover on it.
+     *
+     * @param Event $event
+     *
+     * @throws UnexpectedTypeException
+     */
+    public function removeTaxes(Event $event)
+    {
+        $order = $this->cartProvider->getCart();
+
+        $this->guardAgainstNonOrder($order);
+
+        $this->taxationRemover->removeTaxes($order);
+        $order->calculateTotal();
+    }
+
+    private function guardAgainstNonOrder($order)
+    {
+        if (!$order instanceof OrderInterface) {
+            throw new UnexpectedTypeException($order, OrderInterface::class);
+        }
     }
 }

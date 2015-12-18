@@ -511,6 +511,8 @@ class WebContext extends DefaultContext
             return;
         }
 
+        file_put_contents('dump.html', $this->getSession()->getPage()->getHtml());
+
         $this->assertSession()->statusCodeEquals($code);
     }
 

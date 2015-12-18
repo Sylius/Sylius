@@ -13,8 +13,10 @@ namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
+use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -115,8 +117,10 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $finite = $this->getService('sm.factory');
-        $orderRepository = $this->getRepository('order');
         $orderFactory = $this->getFactory('order');
+
+        /** @var CartProviderInterface $cartProvider */
+        $cartProvider = $this->getService('sylius.cart_provider');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
         /** @var $paymentMethod PaymentMethodInterface */
@@ -130,8 +134,10 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
 
+//            $order = $orderFactory->createNew();
+
             /* @var $order OrderInterface */
-            $order = $orderFactory->createNew();
+            $order = $cartProvider->getCart();
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
@@ -149,7 +155,7 @@ class CoreContext extends DefaultContext
 
             $this->createPayment($order, $paymentMethod);
 
-            $order->setCurrency('EUR');
+//            $order->setCurrency('EUR');
             $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
 
             $order->complete();
@@ -172,10 +178,13 @@ class CoreContext extends DefaultContext
     public function orderHasFollowingItems($number, TableNode $items)
     {
         $manager = $this->getEntityManager();
-        $orderItemRepository = $this->getRepository('order_item');
         $orderItemFactory = $this->getFactory('order_item');
+        $cartProvider = $this->getService('sylius.cart_provider');
+        $eventDispatcher = $this->getService('event_dispatcher');
 
         $order = $this->orders[$number];
+
+        $cartProvider->setCart($order);
 
         foreach ($items->getHash() as $data) {
             $product = $this->findOneByName('product', trim($data['product']));
@@ -187,13 +196,13 @@ class CoreContext extends DefaultContext
             $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
+
+            $eventDispatcher->dispatch(SyliusCoreEvents::CART_CHANGE);
         }
 
-        $order->calculateTotal();
         $order->complete();
 
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
-        $this->getService('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
 
         $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
 

@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -23,6 +22,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderChannelListener
 {
+    const EXCEPTION_MESSAGE_PATTERN = 'Expected value of type: %s, %s given';
+
     /**
      * @var ChannelContextInterface
      */
@@ -31,22 +32,29 @@ class OrderChannelListener
     /**
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct(ChannelContextInterface $channelContext)
+    public function __construct(
+        ChannelContextInterface $channelContext
+    )
     {
         $this->channelContext = $channelContext;
     }
 
     /**
      * @param GenericEvent $event
+     *
+     * @throws \UnexpectedValueException if event doesn't contain order
      */
     public function processOrderChannel(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+            throw new \UnexpectedValueException(
+                sprintf(
+                    self::EXCEPTION_MESSAGE_PATTERN,
+                    OrderInterface::class,
+                    is_object($order) ? get_class($order) : gettype($order)
+                )
             );
         }
 

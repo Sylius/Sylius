@@ -12,8 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationRemoverInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -21,35 +26,64 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderTaxationListenerSpec extends ObjectBehavior
 {
-    function let(TaxationProcessorInterface $taxationProcessor)
+    function let(
+        TaxationProcessorInterface $taxationProcessor,
+        TaxationRemoverInterface $taxationRemover,
+        CartProviderInterface $cartProvider
+    )
     {
-        $this->beConstructedWith($taxationProcessor);
+        $this->beConstructedWith($taxationProcessor, $taxationRemover, $cartProvider);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener');
+        $this->shouldHaveType(OrderTaxationListener::class);
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(
+        Event $event,
+        CartProviderInterface $cartProvider,
+        \stdClass $invalidSubject
+    )
     {
-        $event->getSubject()->willReturn($invalidSubject);
+        $cartProvider->getCart()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(UnexpectedTypeException::class)
             ->duringApplyTaxes($event)
+        ;
+
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->duringRemoveTaxes($event)
         ;
     }
 
-    function it_calls_taxation_processor_on_order(
+
+    function it_delegates_apply_taxes_to_taxation_processor(
         TaxationProcessorInterface $taxationProcessor,
-        GenericEvent $event,
-        OrderInterface $order
+        Event $event,
+        OrderInterface $order,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->willReturn($order);
+        $cartProvider->getCart()->willReturn($order);
         $taxationProcessor->applyTaxes($order)->shouldBeCalled();
         $order->calculateTotal()->shouldBeCalled();
 
         $this->applyTaxes($event);
+    }
+
+    function it_delegates_remove_taxes_to_taxation_remover(
+        TaxationRemoverInterface $taxationRemover,
+        Event $event,
+        OrderInterface $order,
+        CartProviderInterface $cartProvider
+    ) {
+        $cartProvider->getCart()->willReturn($order);
+
+        $taxationRemover->removeTaxes($order)->shouldBeCalled();
+        $order->calculateTotal()->shouldBeCalled();
+
+        $this->removeTaxes($event);
     }
 }

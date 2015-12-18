@@ -46,16 +46,6 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface');
     }
 
-    function it_removes_existing_tax_adjustments(OrderInterface $order, Collection $collection)
-    {
-        $collection->isEmpty()->willReturn(true);
-
-        $order->getItems()->willReturn($collection);
-        $order->removeAdjustments(Argument::any())->shouldBeCalled();
-
-        $this->applyTaxes($order);
-    }
-
     function it_doesnt_apply_any_taxes_if_zone_is_missing(
         OrderInterface $order,
         Collection $collection,
@@ -64,8 +54,6 @@ class TaxationProcessorSpec extends ObjectBehavior
         $collection->isEmpty()->willReturn(false);
 
         $order->getItems()->willReturn($collection);
-        $order->removeAdjustments(Argument::any())->shouldBeCalled();
-
         $order->getShippingAddress()->willReturn(null);
 
         $taxationSettings->has('default_tax_zone')->willReturn(false);

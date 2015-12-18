@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\CoreBundle\SyliusCoreEvents;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
@@ -36,6 +37,8 @@ class CartController extends Controller
      */
     public function summaryAction()
     {
+        $this->getEventDispatcher()->dispatch(SyliusCoreEvents::SHOPPER_CONTEXT_CHANGE);
+
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
@@ -73,10 +76,7 @@ class CartController extends Controller
 
             $eventDispatcher = $this->getEventDispatcher();
 
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-
-            // Update models
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+            $eventDispatcher->dispatch(SyliusCoreEvents::SHOPPER_CONTEXT_CHANGE);
 
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());

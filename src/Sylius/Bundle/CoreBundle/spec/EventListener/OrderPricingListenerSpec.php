@@ -5,6 +5,8 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -12,6 +14,7 @@ use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\GroupableInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -19,22 +22,28 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPricingListenerSpec extends ObjectBehavior
 {
-    function let(DelegatingCalculatorInterface $priceCalculator)
+    function let(
+        DelegatingCalculatorInterface $priceCalculator,
+        CartProviderInterface $cartProvider
+    )
     {
-        $this->beConstructedWith($priceCalculator);
+        $this->beConstructedWith($priceCalculator, $cartProvider);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener');
+        $this->shouldHaveType(OrderPricingListener::class);
     }
 
-    function it_should_throw_an_exception_if_its_subjet_is_not_order_interface(GenericEvent $event)
+    function it_should_throw_an_exception_if_its_subjet_is_not_order_interface(
+        Event $event,
+        CartProviderInterface $cartProvider
+    )
     {
         $wrongOrderClass = new \stdClass();
         $exception = new UnexpectedTypeException($wrongOrderClass, 'Sylius\Component\Core\Model\OrderInterface');
 
-        $event->getSubject()->shouldBeCalled()->willReturn($wrongOrderClass);
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($wrongOrderClass);
 
         $this->shouldThrow($exception)->duringRecalculatePrices($event);
     }
@@ -43,9 +52,10 @@ class OrderPricingListenerSpec extends ObjectBehavior
         GenericEvent $event,
         OrderInterface $order,
         GroupableInterface $customer,
-        ArrayCollection $groups
+        ArrayCollection $groups,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
 
         $order->getCustomer()->shouldBeCalled()->willReturn($customer);
         $order->getChannel()->shouldBeCalled()->willReturn(null);
@@ -62,9 +72,10 @@ class OrderPricingListenerSpec extends ObjectBehavior
     function it_recalculates_prices_adding_only_channels(
         GenericEvent $event,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
 
         $order->getCustomer()->shouldBeCalled()->willReturn(null);
         $order->getChannel()->shouldBeCalled()->willReturn($channel);
@@ -80,9 +91,10 @@ class OrderPricingListenerSpec extends ObjectBehavior
         OrderItemInterface $item1,
         OrderItemInterface $item2,
         DelegatingCalculatorInterface $priceCalculator,
-        PriceableInterface $variant
+        PriceableInterface $variant,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
 
         $order->getCustomer()->shouldBeCalled()->willReturn(null);
         $order->getChannel()->shouldBeCalled()->willReturn(null);
@@ -112,9 +124,10 @@ class OrderPricingListenerSpec extends ObjectBehavior
         GroupableInterface $customer,
         ArrayCollection $groups,
         ChannelInterface $channel,
-        PriceableInterface $variant
+        PriceableInterface $variant,
+        CartProviderInterface $cartProvider
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
 
         $order->getCustomer()->shouldBeCalled()->willReturn($customer);
         $order->getChannel()->shouldBeCalled()->willReturn($channel);
