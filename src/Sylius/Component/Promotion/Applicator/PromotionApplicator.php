@@ -22,7 +22,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * Applies all registered promotion actions to given subject.
  *
- * TODO: This needs to consider coupling
+ * TODO: This needs to consider coupling. It's written at the Component level, but expecting items.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author  Piotr Walków <walkow.piotr@gmail.com>
