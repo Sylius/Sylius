@@ -27,6 +27,7 @@
         <parameter key="sylius.resource_controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
         <parameter key="sylius.resource_controller.authorization_checker.class">Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker</parameter>
         <parameter key="sylius.resource_controller.flash_helper.class">Sylius\Bundle\ResourceBundle\Controller\FlashHelper</parameter>
+        <parameter key="sylius.resource_controller.event_dispatcher.class">Sylius\Bundle\ResourceBundle\Controller\EventDispatcher</parameter>
     </parameters>
 
     <services>
@@ -52,6 +53,9 @@
         <service id="sylius.resource_controller.flash_helper" class="%sylius.resource_controller.flash_helper.class%">
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+        </service>
+        <service id="sylius.resource_controller.event_dispatcher" class="%sylius.resource_controller.event_dispatcher.class%">
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

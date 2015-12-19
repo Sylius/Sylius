@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvents;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -95,6 +96,11 @@ class ResourceController extends ContainerAware
     protected $authorizationChecker;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -108,6 +114,7 @@ class ResourceController extends ContainerAware
      * @param RedirectHandlerInterface $redirectHandler
      * @param FlashHelperInterface $flashHelper
      * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         MetadataInterface $metadata,
@@ -122,7 +129,8 @@ class ResourceController extends ContainerAware
         ResourceFormFactoryInterface $resourceFormFactory,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $this->metadata = $metadata;
@@ -138,6 +146,7 @@ class ResourceController extends ContainerAware
         $this->redirectHandler = $redirectHandler;
         $this->flashHelper = $flashHelper;
         $this->authorizationChecker = $authorizationChecker;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -151,6 +160,8 @@ class ResourceController extends ContainerAware
 
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $resource = $this->findOr404($configuration);
+
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource);
 
         $view = View::create($resource);
 
@@ -214,7 +225,9 @@ class ResourceController extends ContainerAware
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource);
             $this->repository->add($newResource);
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create($newResource, 201));
@@ -257,7 +270,9 @@ class ResourceController extends ContainerAware
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
             $this->manager->flush();
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create(null, 204));
@@ -297,13 +312,62 @@ class ResourceController extends ContainerAware
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource);
         $this->repository->remove($resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle(View::create(null, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function enableAction(Request $request)
+    {
+        return $this->toggle($request, true);
+    }
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function disableAction(Request $request)
+    {
+        return $this->toggle($request, false);
+    }
+
+    /**
+     * @param Request $request
+     * @param $enabled
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function toggle(Request $request, $enabled)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
+        $resource = $this->findOr404($configuration);
+        $resource->setEnabled($enabled);
+
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
+        $this->manager->flush();
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($resource, 204));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }

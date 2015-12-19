@@ -18,14 +18,16 @@ use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvents;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -58,7 +60,8 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceFormFactoryInterface $resourceFormFactory,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $this->beConstructedWith(
@@ -74,7 +77,8 @@ class ResourceControllerSpec extends ObjectBehavior
             $resourceFormFactory,
             $redirectHandler,
             $flashHelper,
-            $authorizationChecker
+            $authorizationChecker,
+            $eventDispatcher
         );
     }
 
@@ -138,6 +142,7 @@ class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ViewHandlerInterface $viewHandler,
+        EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $response
     )
@@ -150,9 +155,11 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
-        
+
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::SHOW)->willReturn('SyliusShopBundle:Product:show.html.twig');
+
+        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create()
             ->setData(array(
@@ -178,6 +185,7 @@ class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ViewHandlerInterface $viewHandler,
+        EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $response
     )
@@ -192,6 +200,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
 
         $configuration->isHtmlRequest()->willReturn(false);
+
+        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create($resource);
 
@@ -433,6 +443,7 @@ class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $redirectResponse
     )
@@ -455,7 +466,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $newResource)->willReturn($redirectResponse);
@@ -475,6 +488,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $newResource,
         ResourceFormFactoryInterface $resourceFormFactory,
         FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
         Form $form,
         Request $request,
         Response $response
@@ -498,7 +512,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
@@ -709,6 +725,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
+        EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         Request $request,
@@ -737,7 +754,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -756,6 +775,7 @@ class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
         Form $form,
         Request $request,
         Response $response
@@ -780,7 +800,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->submit($request, true)->willReturn($form);
         $form->isValid()->willReturn(true);
 
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
 
@@ -840,6 +862,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $redirectResponse
     )
@@ -854,7 +877,10 @@ class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
 
         $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->shouldBeCalled();
         $repository->remove($resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
@@ -871,6 +897,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
+        EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $response
     )
@@ -885,7 +912,10 @@ class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
 
         $configuration->isHtmlRequest()->willReturn(false);
+
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->shouldBeCalled();
         $repository->remove($resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
 

@@ -102,6 +102,7 @@ abstract class AbstractDriver implements DriverInterface
                 new Reference('sylius.resource_controller.redirect_handler'),
                 new Reference('sylius.resource_controller.flash_helper'),
                 new Reference('sylius.resource_controller.authorization_checker'),
+                new Reference('sylius.resource_controller.event_dispatcher'),
             ))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;

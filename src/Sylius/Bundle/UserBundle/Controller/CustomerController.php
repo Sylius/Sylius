@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,13 +30,13 @@ class CustomerController extends ResourceController
      */
     public function showProfileAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $customer = $this->getCustomer();
 
-        return $this->render(
-            $this->config->getTemplate('showProfile.html'),
-            array(
-                $this->config->getResourceName() => $customer,
-            )
+        return $this->container->get('templating')->renderResponse(
+            $configuration->getTemplate('showProfile.html'),
+            array($this->metadata->getName() => $customer)
         );
     }
 
@@ -46,28 +47,30 @@ class CustomerController extends ResourceController
      */
     public function updateProfileAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $customer = $this->getCustomer();
-        $form     = $this->getForm($customer);
+        $form = $this->resourceFormFactory->create($configuration, $customer);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($customer);
+            $this->manager->flush();
 
-            if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($customer, 204));
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle(View::create($customer, 204));
             }
 
-            return $this->redirectHandler->redirectTo($customer);
+            return $this->redirectHandler->redirectToResource($configuration, $customer);
         }
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form, 400));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
-        return $this->render(
-            $this->config->getTemplate('updateProfile.html'),
+        return $this->container->get('templating')->renderResponse(
+            $configuration->getTemplate('updateProfile.html'),
             array(
-                $this->config->getResourceName() => $customer,
-                'form'                           => $form->createView(),
+                $this->metadata->getName() => $customer,
+                'form' => $form->createView(),
             )
         );
     }
@@ -78,7 +81,7 @@ class CustomerController extends ResourceController
      */
     protected function getCustomer()
     {
-        $customer = $this->get('sylius.context.customer')->getCustomer();
+        $customer = $this->container->get('sylius.context.customer')->getCustomer();
 
         if (null === $customer) {
             throw new AccessDeniedException('You have to be logged in user to access this section.');
