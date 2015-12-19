@@ -16,8 +16,6 @@ use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransfor
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityHiddenType extends AbstractType
@@ -48,12 +46,6 @@ class EntityHiddenType extends AbstractType
         $builder
             ->addViewTransformer($transformer)
             ->setAttribute('data_class', $options['data_class'])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($transformer) {
-                $event->setData($transformer->reverseTransform($event->getData()));
-            })
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($transformer) {
-                $event->setData($transformer->reverseTransform($event->getData()));
-            })
         ;
     }
 
