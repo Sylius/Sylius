@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Inventory extension.
@@ -48,6 +49,19 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
+
+        $container
+            ->getDefinition('sylius.factory.stock_item')
+            ->addArgument(new Reference('sylius.repository.stock_item'))
+            ->addArgument(new Reference('sylius.manager.stock_item'))
+            ->addArgument(new Reference('sylius.repository.stock_location'))
+            ->addArgument(new Reference('sylius.repository.stockable'))
+        ;
+
+        $container
+            ->getDefinition('sylius.factory.stock_movement')
+            ->addArgument(new Reference('sylius.repository.stock_movement'))
+        ;
 
         if (isset($config['events'])) {
             $listenerDefinition = $container->getDefinition('sylius.listener.inventory');

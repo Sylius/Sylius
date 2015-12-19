@@ -85,21 +85,10 @@
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
 
-        <service id="sylius.factory.stock_item" class="%sylius.factory.stock_item.class%">
-            <argument type="service" id="sylius.repository.stock_item" />
-            <argument type="service" id="sylius.manager.stock_item" />
-            <argument type="service" id="sylius.repository.stock_location" />
-            <argument type="service" id="sylius.repository.stockable" />
-        </service>
-
         <service id="sylius.inventory_coordinator" class="%sylius.inventory_coordinator.class%">
             <argument type="service" id="sylius.stock_location_provider" />
             <argument type="service" id="sylius.packer" />
             <argument type="service" id="sylius.factory.inventory_items" />
-        </service>
-
-        <service id="sylius.factory.stock_movement" class="%sylius.factory.stock_movement.class%">
-            <argument type="service" id="sylius.repository.stock_movement" />
         </service>
 
         <service id="sylius.factory.package" class="%sylius.factory.package.class%" />

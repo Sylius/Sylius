@@ -13,11 +13,12 @@ namespace Sylius\Component\Inventory\Factory;
 
 use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockItemFactoryInterface
+interface StockItemFactoryInterface extends FactoryInterface
 {
     /**
      * Create stock items for given item and location.
@@ -25,7 +26,7 @@ interface StockItemFactoryInterface
      * @param StockableInterface     $stockable
      * @param StockLocationInterface $location
      */
-    public function create(StockableInterface $stockable, StockLocationInterface $location);
+    public function createForLocation(StockableInterface $stockable, StockLocationInterface $location);
 
     /**
      * Create all missing stock items for stockable.

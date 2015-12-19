@@ -17,12 +17,13 @@ use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StockItemFactory implements StockItemFactoryInterface
+class StockItemFactory extends Factory implements StockItemFactoryInterface
 {
     /**
      * @var StockItemRepositoryInterface
@@ -47,18 +48,20 @@ class StockItemFactory implements StockItemFactoryInterface
     /**
      * Constructor.
      *
-     * @param StockRepositoryInterface $stockItemRepository
-     * @param ObjectManager            $stockItemManager
-     * @param RepositoryInterface      $stockLocationRepository
-     * @param RepositoryInterface      $stockableRepository
+     * @param StockItemRepositoryInterface $stockItemRepository
+     * @param ObjectManager $stockItemManager
+     * @param RepositoryInterface $stockLocationRepository
+     * @param RepositoryInterface $stockableRepository
      */
-    public function __construct(
-        StockItemRepositoryInterface $stockItemRepository,
-        ObjectManager $stockItemManager,
-        RepositoryInterface $stockLocationRepository,
-        RepositoryInterface $stockableRepository
+    public function __construct($className,
+                                StockItemRepositoryInterface $stockItemRepository,
+                                ObjectManager $stockItemManager,
+                                RepositoryInterface $stockLocationRepository,
+                                RepositoryInterface $stockableRepository
     )
     {
+        parent::__construct($className);
+
         $this->stockItemRepository = $stockItemRepository;
         $this->stockItemManager = $stockItemManager;
         $this->stockLocationRepository = $stockLocationRepository;
@@ -68,13 +71,13 @@ class StockItemFactory implements StockItemFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(StockableInterface $stockable, StockLocationInterface $location)
+    public function createForLocation(StockableInterface $stockable, StockLocationInterface $location)
     {
         if (null !== $item = $this->stockItemRepository->findByStockableAndLocation($stockable, $location)) {
             return $item;
         }
 
-        $item = $this->stockItemRepository->createNew();
+        $item = $this->createNew();
         $item->setStockable($stockable);
         $item->setLocation($location);
 

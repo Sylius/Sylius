@@ -18,14 +18,17 @@ use Sylius\Bundle\InventoryBundle\Form\Type\StockItemType;
 use Sylius\Bundle\InventoryBundle\Form\Type\StockLocationEntityType;
 use Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
+use Sylius\Component\Inventory\Factory\StockItemFactory;
+use Sylius\Component\Inventory\Factory\StockMovementFactory;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockItem;
 use Sylius\Component\Inventory\Model\StockLocation;
 use Sylius\Component\Inventory\Model\StockMovement;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -108,6 +111,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(StockItem::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('repository')->defaultValue(StockItemRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(StockItemFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -127,6 +131,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(StockLocation::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('repository')->defaultValue(StockLocationRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -147,6 +152,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(StockMovement::class)->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('repository')->defaultValue(StockMovementRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(StockMovementFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()

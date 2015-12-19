@@ -12,11 +12,12 @@
 namespace Sylius\Component\Inventory\Factory;
 
 use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockMovementFactoryInterface
+interface StockMovementFactoryInterface extends FactoryInterface
 {
     /**
      * Create stock movement for given stock item.
@@ -24,5 +25,5 @@ interface StockMovementFactoryInterface
      * @param StockItemInterface $stockItem
      * @param integer            $quantity
      */
-    public function create(StockItemInterface $stockItem, $quantity);
+    public function createForStockItem(StockItemInterface $stockItem, $quantity);
 }

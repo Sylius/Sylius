@@ -12,12 +12,14 @@
 namespace Sylius\Component\Inventory\Factory;
 
 use Sylius\Component\Inventory\Model\StockItemInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Inventory\Model\StockMovementInterface;
+use Sylius\Component\Inventory\Repository\StockMovementRepositoryInterface;
+use Sylius\Component\Resource\Factory\Factory;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StockMovementFactory implements StockMovementFactoryInterface
+class StockMovementFactory extends Factory implements StockMovementFactoryInterface
 {
     /**
      * @var StockMovementRepositoryInterface
@@ -25,25 +27,28 @@ class StockMovementFactory implements StockMovementFactoryInterface
     protected $stockMovementRepository;
 
     /**
-     * @param RepositoryInterface $stockMovementRepository
+     * @param StockMovementRepositoryInterface $stockMovementRepository
      */
-    public function __construct(
-        RepositoryInterface $stockMovementRepository
-    )
+    public function __construct($classname, StockMovementRepositoryInterface $stockMovementRepository)
     {
+        parent::__construct($classname);
+
         $this->stockMovementRepository = $stockMovementRepository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create(StockItemInterface $stockItem, $quantity)
+    public function createForStockItem(StockItemInterface $stockItem, $quantity)
     {
         if (!is_integer($quantity) || 0 === $quantity) {
             throw new \InvalidArgumentException('Invalid quantity given!');
         }
 
-        $movement = $this->stockMovementRepository->createNew();
+        /**
+         * @var $movement StockMovementInterface
+         */
+        $movement = $this->createNew();
 
         $movement->setStockItem($stockItem);
         $movement->setQuantity($quantity);

@@ -115,7 +115,6 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $finite = $this->getService('sm.factory');
-        $orderRepository = $this->getRepository('order');
         $orderFactory = $this->getFactory('order');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
@@ -172,7 +171,6 @@ class CoreContext extends DefaultContext
     public function orderHasFollowingItems($number, TableNode $items)
     {
         $manager = $this->getEntityManager();
-        $orderItemRepository = $this->getRepository('order_item');
         $orderItemFactory = $this->getFactory('order_item');
 
         $order = $this->orders[$number];
@@ -654,7 +652,7 @@ class CoreContext extends DefaultContext
 
     private function createStockLocation($address)
     {
-        $stocklocation = $this->getRepository('stock_location')->createNew();
+        $stocklocation = $this->getFactory('stock_location')->createNew();
 
         $addressData = explode(',', $address);
 
