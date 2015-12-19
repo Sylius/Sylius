@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilder;
  */
 class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType');
     }

@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
  */
 class RuleSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Model\Rule');
     }

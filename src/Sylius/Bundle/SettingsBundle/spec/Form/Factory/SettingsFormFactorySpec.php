@@ -30,7 +30,7 @@ class SettingsFormFactorySpec extends ObjectBehavior
         $this->beConstructedWith($schemaRegistry, $formFactory);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory');
     }

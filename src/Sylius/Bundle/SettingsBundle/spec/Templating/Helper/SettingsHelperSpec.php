@@ -22,7 +22,7 @@ class SettingsHelperSpec extends ObjectBehavior
         $this->beConstructedWith($settingsManager);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper');
     }

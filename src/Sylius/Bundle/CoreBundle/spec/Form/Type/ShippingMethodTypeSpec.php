@@ -22,7 +22,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType');
     }

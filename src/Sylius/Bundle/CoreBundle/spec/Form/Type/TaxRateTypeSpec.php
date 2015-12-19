@@ -20,7 +20,7 @@ class TaxRateTypeSpec extends ObjectBehavior
         $this->beConstructedWith('TaxRate', array());
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\TaxRateType');
     }

@@ -24,7 +24,7 @@ class ActionChoiceTypeSpec extends ObjectBehavior
         $this->beConstructedWith(array());
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType');
     }

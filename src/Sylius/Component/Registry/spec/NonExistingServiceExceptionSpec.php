@@ -23,7 +23,7 @@ class NonExistingServiceExceptionSpec extends ObjectBehavior
         $this->beConstructedWith('foo');
     }
 
-    function it_is_an_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Registry\NonExistingServiceException');
     }

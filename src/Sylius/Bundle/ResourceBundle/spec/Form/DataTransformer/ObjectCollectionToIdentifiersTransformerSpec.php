@@ -29,7 +29,7 @@ class ObjectCollectionToIdentifiersTransformerSpec extends ObjectBehavior
         $this->beConstructedWith($repository, 'id');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectCollectionToIdentifiersTransformer');
     }

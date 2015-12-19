@@ -28,7 +28,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         $this->beConstructedWith($couponRepository, $dispatcher);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer');
     }

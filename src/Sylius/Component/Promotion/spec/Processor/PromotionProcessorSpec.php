@@ -31,7 +31,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($repository, $checker, $applicator);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Processor\PromotionProcessor');
     }

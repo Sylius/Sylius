@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class CouponSpec extends ObjectBehavior
 {
-    public function it_should_be_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\Coupon');
     }

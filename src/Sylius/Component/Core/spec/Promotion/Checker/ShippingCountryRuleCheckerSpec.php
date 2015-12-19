@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
  */
 class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker');
     }
