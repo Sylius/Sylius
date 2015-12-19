@@ -54,7 +54,7 @@ class LoadStockLocationData extends DataFixture
      */
     protected function createLocation($code, $name)
     {
-        $stocklocation = $this->getStockLocationRepository()->createNew();
+        $stocklocation = $this->getStockLocationFactory()->createNew();
         $stocklocation->setCode($code);
         $stocklocation->setName($name);
         $stocklocation->setAddress($this->createAddress());

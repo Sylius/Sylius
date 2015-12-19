@@ -12,14 +12,15 @@
 namespace Sylius\Bundle\InventoryBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Inventory\Model\StockLocation;
 
 class StockLocationContext extends DefaultContext
 {
+
     /**
-     * @Given there are stock locations:
-     * @Given the following stock locations exist:
+     * @Given /^there are stock locations:$/
+     * @Given /^the following stock locations exist:$/
      */
     public function thereAreStockLocations(TableNode $table)
     {
@@ -37,9 +38,8 @@ class StockLocationContext extends DefaultContext
      */
     public function thereIsStockLocation($name, $code = null, $flush = true)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
-
-        $stockLocation = $this->getRepository('stock_location')->createNew();
+        /* @var $zone StockLocation */
+        $stockLocation = $this->getFactory('stock_location')->createNew();
         $stockLocation->setName(trim($name));
         if (null === $code) {
             $code = strtolower($name);
@@ -48,6 +48,7 @@ class StockLocationContext extends DefaultContext
 
         $manager = $this->getEntityManager();
         $manager->persist($stockLocation);
+
         if ($flush) {
             $manager->flush($stockLocation);
         }
