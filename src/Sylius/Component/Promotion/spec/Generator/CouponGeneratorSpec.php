@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -38,7 +39,7 @@ class CouponGeneratorSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_promotion_coupon_generator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Generator\CouponGeneratorInterface');
+        $this->shouldImplement(CouponGeneratorInterface::class);
     }
 
     function it_should_generate_coupons_according_to_instruction(

@@ -29,7 +29,7 @@ class VariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_variant_interface()
     {
-        $this->shouldImplement('Sylius\Component\Variation\Model\VariantInterface');
+        $this->shouldImplement(VariantInterface::class);
     }
 
     function it_should_not_have_id_by_default()

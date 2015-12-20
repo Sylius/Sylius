@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
@@ -32,12 +34,12 @@ class ActionCollectionTypeSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType');
+        $this->shouldHaveType(ActionCollectionType::class);
     }
 
     function it_is_configuration_collection_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
+        $this->shouldHaveType(AbstractConfigurationCollectionType::class);
     }
 
     function it_builds_prototypes(

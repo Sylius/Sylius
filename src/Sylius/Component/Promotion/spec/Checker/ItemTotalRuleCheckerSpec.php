@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
@@ -26,7 +27,7 @@ class ItemTotalRuleCheckerSpec extends ObjectBehavior
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
+use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 
 /**
  * Shipping method available for selected zone.
@@ -52,6 +53,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
      */
     public static function getTranslationClass()
     {
-        return 'Sylius\Component\Shipping\Model\ShippingMethodTranslation';
+        return ShippingMethodTranslation::class;
     }
 }

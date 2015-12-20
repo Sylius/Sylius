@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -36,7 +37,7 @@ class CurrencyHelperSpec extends ObjectBehavior
 
     function it_is_a_Twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_allows_to_convert_prices_in_different_currencies(

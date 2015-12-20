@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -30,7 +31,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
 
     function it_should_be_sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_matched(

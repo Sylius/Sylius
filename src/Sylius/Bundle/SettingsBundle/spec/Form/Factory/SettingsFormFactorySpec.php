@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Form\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Symfony\Component\Form\Form;
@@ -37,7 +38,7 @@ class SettingsFormFactorySpec extends ObjectBehavior
 
     function it_should_implement_settings_form_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface');
+        $this->shouldImplement(SettingsFormFactoryInterface::class);
     }
 
     function it_should_create_a_form_for_given_schema_namespace(

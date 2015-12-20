@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ class PaymentController extends BasePaymentController
         $logRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('Gedmo\Loggable\Entity\LogEntry')
+            ->getRepository(LogEntry::class)
         ;
 
         $view = $this

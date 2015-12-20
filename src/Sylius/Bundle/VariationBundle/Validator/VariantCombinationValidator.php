@@ -30,7 +30,7 @@ class VariantCombinationValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\Variation\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, VariantInterface::class);
         }
 
         if ($value->isMaster()) {

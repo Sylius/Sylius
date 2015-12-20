@@ -16,6 +16,7 @@ use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -38,7 +39,7 @@ class PromotionProcessorSpec extends ObjectBehavior
 
     function it_should_be_Sylius_promotion_processor()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Processor\PromotionProcessorInterface');
+        $this->shouldImplement(PromotionProcessorInterface::class);
     }
 
     function it_should_not_apply_promotions_that_are_not_eligible(

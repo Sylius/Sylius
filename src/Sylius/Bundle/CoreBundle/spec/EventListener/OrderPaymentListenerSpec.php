@@ -42,12 +42,12 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringCreateOrderPayment($event)
         ;
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringUpdateOrderPayment($event)
         ;
     }
@@ -69,7 +69,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $order->hasPayments()->willReturn(false);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringUpdateOrderPayment($event)
         ;
     }

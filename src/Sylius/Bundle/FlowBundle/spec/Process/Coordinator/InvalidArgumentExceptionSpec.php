@@ -23,6 +23,6 @@ class InvalidArgumentExceptionSpec extends ObjectBehavior
 
     function it_is_a_exception()
     {
-        $this->shouldHaveType('\Exception');
+        $this->shouldHaveType(\Exception::class);
     }
 }

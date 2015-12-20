@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -45,6 +46,6 @@ class SettingsManagerSpec extends ObjectBehavior
 
     function it_should_be_a_Sylius_settings_manager()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
+        $this->shouldImplement(SettingsManagerInterface::class);
     }
 }

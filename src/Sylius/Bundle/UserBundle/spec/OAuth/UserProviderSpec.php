@@ -12,8 +12,10 @@
 namespace spec\Sylius\Bundle\UserBundle\OAuth;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -46,12 +48,12 @@ class UserProviderSpec extends ObjectBehavior
 
     function it_implements_Hwi_oauth_aware_user_provider_interface()
     {
-        $this->shouldImplement('HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface');
+        $this->shouldImplement(OAuthAwareUserProviderInterface::class);
     }
 
     function it_implements_account_connector_interface()
     {
-        $this->shouldImplement('HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface');
+        $this->shouldImplement(AccountConnectorInterface::class);
     }
 
     function it_should_connect_oauth_account_with_given_user(

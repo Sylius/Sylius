@@ -49,7 +49,7 @@ class SettingsSpec extends ObjectBehavior
     function it_should_complain_when_trying_to_retrieve_non_existing_parameter()
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringGet('test')
         ;
     }
@@ -69,7 +69,7 @@ class SettingsSpec extends ObjectBehavior
     function it_should_complain_when_trying_to_remove_non_existing_parameter()
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringRemove('test')
         ;
     }

@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,7 +42,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     function it_should_complain_if_not_Sylius_coupon_transformed()
     {
         $this
-            ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+            ->shouldThrow(UnexpectedTypeException::class)
             ->duringTransform(new \stdClass())
         ;
     }

@@ -11,9 +11,11 @@
 
 namespace spec\Sylius\Component\Promotion\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
@@ -28,7 +30,7 @@ class PromotionSpec extends ObjectBehavior
 
     function it_should_be_Sylius_promotion()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Model\PromotionInterface');
+        $this->shouldImplement(PromotionInterface::class);
     }
 
     function it_should_not_have_id_by_default()
@@ -113,7 +115,7 @@ class PromotionSpec extends ObjectBehavior
 
     function it_should_initialize_coupons_collection_by_default()
     {
-        $this->getCoupons()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getCoupons()->shouldHaveType(Collection::class);
     }
 
     function it_should_add_coupons_properly(CouponInterface $coupon)
@@ -141,7 +143,7 @@ class PromotionSpec extends ObjectBehavior
 
     function it_should_initialize_rules_collection_by_default()
     {
-        $this->getRules()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getRules()->shouldHaveType(Collection::class);
     }
 
     function it_should_add_rules_properly(RuleInterface $rule)
@@ -169,7 +171,7 @@ class PromotionSpec extends ObjectBehavior
 
     function it_should_initialize_actions_collection_by_default()
     {
-        $this->getActions()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getActions()->shouldHaveType(Collection::class);
     }
 
     function it_should_add_actions_properly(ActionInterface $action)

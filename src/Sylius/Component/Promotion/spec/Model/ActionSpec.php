@@ -27,7 +27,7 @@ class ActionSpec extends ObjectBehavior
 
     function it_should_be_Sylius_promotion_action()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Model\ActionInterface');
+        $this->shouldImplement(ActionInterface::class);
     }
 
     function it_should_not_have_id_by_default()

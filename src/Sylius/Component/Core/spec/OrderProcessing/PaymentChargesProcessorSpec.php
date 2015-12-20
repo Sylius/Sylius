@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentChargesProcessorInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
@@ -39,7 +40,7 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
 
     function it_implements_payment_charges_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\PaymentChargesProcessorInterface');
+        $this->shouldImplement(PaymentChargesProcessorInterface::class);
     }
 
     function it_applies_payment_charges(

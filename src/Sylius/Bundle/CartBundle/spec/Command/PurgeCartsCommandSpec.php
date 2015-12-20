@@ -5,6 +5,7 @@ namespace spec\Sylius\Bundle\CartBundle\Command;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Cart\Purger\PurgerInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,7 +19,7 @@ class PurgeCartsCommandSpec extends ObjectBehavior
 
     public function it_is_a_command()
     {
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
+        $this->shouldHaveType(ContainerAwareCommand::class);
     }
 
     public function it_has_a_name()

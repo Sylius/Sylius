@@ -17,6 +17,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,7 +34,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
 
     function it_implements_data_fetcher_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function let(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
@@ -94,7 +95,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
     {
         $report = '';
         $event->getData()->willReturn($report);
-        $this->shouldThrow(new UnexpectedTypeException($report, 'Sylius\Component\Report\Model\ReportInterface'))
+        $this->shouldThrow(new UnexpectedTypeException($report, ReportInterface::class))
             ->duringPreSetData($event);
     }
 }

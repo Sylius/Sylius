@@ -48,7 +48,7 @@ class PasswordUpdaterListenerSpec extends ObjectBehavior
     {
         $user = '';
         $event->getSubject()->willReturn($user);
-        $this->shouldThrow(new UnexpectedTypeException($user, 'Sylius\Component\User\Model\UserInterface'))
+        $this->shouldThrow(new UnexpectedTypeException($user, UserInterface::class))
             ->duringGenericEventUpdater($event);
     }
 

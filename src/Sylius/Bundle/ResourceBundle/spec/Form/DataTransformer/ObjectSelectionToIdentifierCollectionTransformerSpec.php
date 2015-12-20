@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
@@ -36,7 +37,7 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
 
     function it_does_not_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringTransform('');
+        $this->shouldThrow(UnexpectedTypeException::class)->duringTransform('');
     }
 
     function it_does_transform_collection_object_value(Collection $collection)
@@ -48,12 +49,12 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
 
     function it_does_reverse_transform_empty_value()
     {
-        $this->reverseTransform('')->shouldImplement('Doctrine\Common\Collections\Collection');
+        $this->reverseTransform('')->shouldImplement(Collection::class);
     }
 
     function it_does_not_reverse_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringReverseTransform('string');
+        $this->shouldThrow(UnexpectedTypeException::class)->duringReverseTransform('string');
     }
 
     function it_does_reverse_transform_array_value(FakeEntity $entity)

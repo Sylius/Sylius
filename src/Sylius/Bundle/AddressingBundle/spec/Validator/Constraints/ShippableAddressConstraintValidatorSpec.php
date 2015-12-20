@@ -31,7 +31,7 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
+        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', array(
             '',
             $constraint
         ));

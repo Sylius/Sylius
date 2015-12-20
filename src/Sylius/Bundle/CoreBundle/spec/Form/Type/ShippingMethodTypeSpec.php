@@ -12,8 +12,10 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormRegistryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
@@ -29,11 +31,11 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_shipping_method_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType');
+        $this->shouldHaveType(ShippingMethodType::class);
     }
 }

@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Pricing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
@@ -33,7 +34,7 @@ class ChannelBasedCalculatorSpec extends ObjectBehavior
 
     function it_implements_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_calculates_subject_price_based_on_current_channel(

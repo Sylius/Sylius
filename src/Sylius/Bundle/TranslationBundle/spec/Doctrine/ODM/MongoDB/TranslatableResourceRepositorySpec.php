@@ -16,9 +16,11 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\Query\Query;
 use Doctrine\ODM\MongoDB\UnitOfWork;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';
 
@@ -52,7 +54,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
+        $this->shouldImplement(TranslatableResourceRepositoryInterface::class);
     }
 
     function it_applies_criteria_when_finding_one($queryBuilder, LocaleProviderInterface $localeProvider)
@@ -138,6 +140,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     function it_creates_Pagerfanta_paginator()
     {
-        $this->createPaginator()->shouldHaveType('Pagerfanta\Pagerfanta');
+        $this->createPaginator()->shouldHaveType(Pagerfanta::class);
     }
 }

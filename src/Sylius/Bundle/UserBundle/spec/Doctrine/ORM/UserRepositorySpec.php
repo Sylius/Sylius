@@ -18,8 +18,10 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class UserRepositorySpec extends ObjectBehavior
 {
@@ -37,7 +39,7 @@ class UserRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
+        $this->shouldHaveType(EntityRepository::class);
     }
 
     function it_create_paginator(
@@ -80,7 +82,7 @@ class UserRepositorySpec extends ObjectBehavior
             ),
             array('name' => 'asc'),
             true
-        )->shouldHaveType('Pagerfanta\Pagerfanta');
+        )->shouldHaveType(Pagerfanta::class);
     }
 
     function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
@@ -122,7 +124,7 @@ class UserRepositorySpec extends ObjectBehavior
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
-        $builder->andWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
+        $builder->andWhere(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('from', $from)->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('to', $to)->shouldBeCalled()->willReturn($builder);
         $builder->andWhere('o.status = :status')->shouldBeCalled()->willReturn($builder);

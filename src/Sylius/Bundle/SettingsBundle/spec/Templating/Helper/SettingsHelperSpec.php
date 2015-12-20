@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Symfony\Component\Templating\Helper\Helper;
 
 class SettingsHelperSpec extends ObjectBehavior
 {
@@ -29,7 +30,7 @@ class SettingsHelperSpec extends ObjectBehavior
 
     function it_should_be_a_Twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_should_return_settings_by_namespace($settingsManager, Settings $settings)

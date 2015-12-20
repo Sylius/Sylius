@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\ArchetypeBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
@@ -44,7 +45,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_a_Doctrine_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\InventoryBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Flexible inventory management for Symfony2 applications.
@@ -38,8 +40,8 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
-            'Sylius\Component\Inventory\Model\StockableInterface'     => 'sylius.model.stockable.class',
+            InventoryUnitInterface::class => 'sylius.model.inventory_unit.class',
+            StockableInterface::class     => 'sylius.model.stockable.class',
         );
     }
 

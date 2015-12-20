@@ -28,7 +28,7 @@ class ProductVariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_variant_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ProductVariantInterface');
+        $this->shouldImplement(ProductVariantInterface::class);
     }
 
     function it_extends_Sylius_product_variant_model()

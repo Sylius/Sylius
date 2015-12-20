@@ -35,7 +35,7 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
     public function isRestricted($subject, AddressInterface $address = null)
     {
         if (!$subject instanceof ProductInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
+            throw new UnexpectedTypeException($subject, ProductInterface::class);
         }
 
         if (null === $customer = $this->customerContext->getCustomer()) {

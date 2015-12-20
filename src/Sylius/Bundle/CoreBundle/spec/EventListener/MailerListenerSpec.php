@@ -37,7 +37,7 @@ class MailerListenerSpec extends ObjectBehavior
 
         $exception = new UnexpectedTypeException(
             $customerClass,
-            'Sylius\Component\Core\Model\CustomerInterface'
+            CustomerInterface::class
         );
 
         $this->shouldThrow($exception)->duringSendUserConfirmationEmail($event);

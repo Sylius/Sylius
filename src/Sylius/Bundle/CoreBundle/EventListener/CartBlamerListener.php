@@ -55,7 +55,7 @@ class CartBlamerListener
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
         $customer = $userEvent->getUser()->getCustomer();
@@ -77,7 +77,7 @@ class CartBlamerListener
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();

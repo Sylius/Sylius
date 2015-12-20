@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -18,6 +19,8 @@ use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Order\Model\Order;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
@@ -32,12 +35,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
+        $this->shouldImplement(OrderInterface::class);
     }
 
     function it_should_extend_Sylius_order_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
+        $this->shouldHaveType(Order::class);
     }
 
     function it_should_not_have_customer_defined_by_default()
@@ -75,12 +78,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_initialize_inventory_units_collection_by_default()
     {
-        $this->getInventoryUnits()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getInventoryUnits()->shouldHaveType(Collection::class);
     }
 
     function it_should_initialize_shipments_collection_by_default()
     {
-        $this->getShipments()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getShipments()->shouldHaveType(Collection::class);
     }
 
     function it_should_add_shipment_properly(ShipmentInterface $shipment)

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
@@ -33,7 +34,7 @@ class AttributeSpec extends ObjectBehavior
 
     function it_implements_Sylius_attribute_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\Model\AttributeInterface');
+        $this->shouldImplement(AttributeInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -93,7 +94,7 @@ class AttributeSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable(\DateTime $date)

@@ -13,9 +13,11 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -39,13 +41,13 @@ class AttributeTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener'))
+            ->addEventSubscriber(Argument::type(BuildAttributeFormChoicesListener::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

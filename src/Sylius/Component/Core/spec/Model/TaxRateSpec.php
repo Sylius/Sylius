@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxRate;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,12 +28,12 @@ class TaxRateSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_core_tax_rate_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\TaxRateInterface');
+        $this->shouldImplement(TaxRateInterface::class);
     }
 
     function it_should_extend_Sylius_tax_rate_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxRate');
+        $this->shouldHaveType(TaxRate::class);
     }
 
     function it_should_not_have_any_zone_defined_by_default()

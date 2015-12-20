@@ -17,8 +17,10 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class CustomerRepositorySpec extends ObjectBehavior
 {
@@ -36,7 +38,7 @@ class CustomerRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
+        $this->shouldHaveType(EntityRepository::class);
     }
 
     function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
@@ -79,14 +81,14 @@ class CustomerRepositorySpec extends ObjectBehavior
         $expr->eq(Argument::any(), Argument::any())->willReturn($expr);
 
         // enable
-        $builder->andWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
+        $builder->andWhere(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('enabled', true)->shouldBeCalled()->willReturn($builder);
 
         // Query
-        $builder->where(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere(Argument::type('Doctrine\ORM\Query\Expr'))->shouldBeCalled()->willReturn($builder);
+        $builder->where(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
+        $builder->orWhere(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
+        $builder->orWhere(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
+        $builder->orWhere(Argument::type(Expr::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('query', '%arnaud%')->shouldBeCalled()->willReturn($builder);
 
         // Sort
@@ -100,6 +102,6 @@ class CustomerRepositorySpec extends ObjectBehavior
             ),
             array('name' => 'asc'),
             true
-        )->shouldHaveType('Pagerfanta\Pagerfanta');
+        )->shouldHaveType(Pagerfanta::class);
     }
 }

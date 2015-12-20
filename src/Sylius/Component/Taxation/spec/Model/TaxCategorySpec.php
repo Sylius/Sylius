@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,7 +26,7 @@ class TaxCategorySpec extends ObjectBehavior
 
     function it_should_implement_Sylius_tax_category_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxCategoryInterface');
+        $this->shouldImplement(TaxCategoryInterface::class);
     }
 
     function it_should_not_have_id_by_default()
@@ -63,7 +64,7 @@ class TaxCategorySpec extends ObjectBehavior
 
     function it_should_initialize_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_should_not_have_last_update_date_by_default()

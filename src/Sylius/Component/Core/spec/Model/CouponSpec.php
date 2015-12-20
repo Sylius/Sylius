@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\CouponInterface;
 
 class CouponSpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ class CouponSpec extends ObjectBehavior
 
     public function it_should_be_Sylius_coupon()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\CouponInterface');
+        $this->shouldImplement(CouponInterface::class);
     }
 
     public function it_should_have_zero_per_customer_usage_limit_by_default()

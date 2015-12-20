@@ -30,7 +30,7 @@ class NonExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_an_exception()
     {
-        $this->shouldHaveType('Exception');
+        $this->shouldHaveType(\Exception::class);
     }
 
     function it_is_an_invalid_argument_exception()

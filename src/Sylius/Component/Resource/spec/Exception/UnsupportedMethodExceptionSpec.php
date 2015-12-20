@@ -30,7 +30,7 @@ class UnsupportedMethodExceptionSpec extends ObjectBehavior
 
     function it_extends_exception()
     {
-        $this->shouldHaveType('\Exception');
+        $this->shouldHaveType(\Exception::class);
     }
 
     function it_has_a_message()

@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
@@ -45,7 +46,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_handler_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface');
+        $this->shouldImplement(InventoryHandlerInterface::class);
     }
 
     function it_creates_inventory_units_via_the_factory(

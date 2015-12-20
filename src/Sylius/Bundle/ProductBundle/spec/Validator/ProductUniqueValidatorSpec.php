@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
 use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
@@ -36,7 +37,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
 
     function it_is_a_constraint_validator()
     {
-        $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldImplement(ConstraintValidator::class);
     }
 
     function it_adds_violation_if_product_with_given_property_value_already_exists(

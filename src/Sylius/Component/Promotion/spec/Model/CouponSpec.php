@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -26,7 +27,7 @@ class CouponSpec extends ObjectBehavior
 
     function it_should_be_Sylius_coupon()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Model\CouponInterface');
+        $this->shouldImplement(CouponInterface::class);
     }
 
     function it_should_not_have_id_by_default()

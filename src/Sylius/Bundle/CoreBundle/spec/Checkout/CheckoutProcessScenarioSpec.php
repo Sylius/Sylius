@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 
@@ -36,7 +37,7 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
 
     function it_implements_Sylius_process_scenario_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
+        $this->shouldImplement(ProcessScenarioInterface::class);
     }
 
     function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder)

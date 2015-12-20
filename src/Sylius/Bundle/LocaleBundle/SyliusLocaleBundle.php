@@ -13,6 +13,7 @@ namespace Sylius\Bundle\LocaleBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
@@ -36,7 +37,7 @@ class SyliusLocaleBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Locale\Model\LocaleInterface' => 'sylius.model.locale.class',
+            LocaleInterface::class => 'sylius.model.locale.class',
         );
     }
 

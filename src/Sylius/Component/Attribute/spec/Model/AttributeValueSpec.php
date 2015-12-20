@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,7 +29,7 @@ class AttributeValueSpec extends ObjectBehavior
 
     function it_implements_Sylius_subject_attribute_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\Model\AttributeValueInterface');
+        $this->shouldImplement(AttributeValueInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -99,7 +100,7 @@ class AttributeValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_name_without_attribute_defined()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetName()
         ;
     }
@@ -115,7 +116,7 @@ class AttributeValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_presentation_without_attribute_defined()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetPresentation()
         ;
     }
@@ -131,7 +132,7 @@ class AttributeValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_type_without_attribute_defined()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetType()
         ;
     }
@@ -147,7 +148,7 @@ class AttributeValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_configuration_without_attribute_defined()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetConfiguration()
         ;
     }

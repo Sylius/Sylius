@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\CoreBundle\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
@@ -29,12 +31,12 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
 
     public function it_extends_time_period()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod');
+        $this->shouldHaveType(TimePeriod::class);
     }
 
     public function it_implements_data_fetcher_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\DataFetcher\DataFetcherInterface');
+        $this->shouldImplement(DataFetcherInterface::class);
     }
 
     public function let(OrderRepositoryInterface $orderRepository)

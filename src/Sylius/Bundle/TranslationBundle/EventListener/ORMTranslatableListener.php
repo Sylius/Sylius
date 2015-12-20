@@ -51,7 +51,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             return;
         }
 
-        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
+        if ($reflection->implementsInterface(TranslatableInterface::class)) {
             $this->mapTranslatable($classMetadata);
         }
 

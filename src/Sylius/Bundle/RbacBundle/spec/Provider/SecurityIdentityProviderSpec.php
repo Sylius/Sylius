@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\RbacBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\IdentityInterface;
+use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -35,7 +36,7 @@ class SecurityIdentityProviderSpec extends ObjectBehavior
 
     function it_is_a_rbac_identity_provider()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface');
+        $this->shouldHaveType(CurrentIdentityProviderInterface::class);
     }
 
     function it_returns_null_if_user_is_not_logged_in($securityContext)

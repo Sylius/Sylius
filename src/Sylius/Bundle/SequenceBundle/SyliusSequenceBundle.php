@@ -14,6 +14,7 @@ namespace Sylius\Bundle\SequenceBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass;
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -49,7 +50,7 @@ class SyliusSequenceBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Sequence\Model\SequenceInterface' => 'sylius.model.sequence.class',
+            SequenceInterface::class => 'sylius.model.sequence.class',
         );
     }
 

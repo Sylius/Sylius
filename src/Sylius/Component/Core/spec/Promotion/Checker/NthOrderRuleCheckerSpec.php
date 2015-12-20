@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -35,7 +36,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)

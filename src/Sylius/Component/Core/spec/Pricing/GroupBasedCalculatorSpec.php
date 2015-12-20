@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Pricing;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\User\Model\GroupInterface;
 
@@ -29,7 +30,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_pricing_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_returns_default_price_if_groups_are_not_in_context(PriceableInterface $priceable)

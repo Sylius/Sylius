@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
@@ -35,7 +36,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     function it_is_a_rule_checker()
     {
-        $this->shouldBeAnInstanceOf('Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface');
+        $this->shouldBeAnInstanceOf(PromotionEligibilityCheckerInterface::class);
     }
 
     function it_recognizes_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(

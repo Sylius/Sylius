@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonSelectionTypeSpec extends ObjectBehavior
@@ -35,7 +38,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form(
@@ -69,7 +72,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_has_options(OptionsResolver $resolver)
@@ -78,7 +81,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
             'data_class'         => null,
             'multiple'           => true,
             'render_label'       => false,
-            'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+            'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
         ))->shouldBeCalled();
 
         $resolver->setNormalizers(Argument::withKey('model_transformer'))->shouldBeCalled();

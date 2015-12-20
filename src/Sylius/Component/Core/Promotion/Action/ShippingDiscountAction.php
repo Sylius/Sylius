@@ -30,7 +30,7 @@ class ShippingDiscountAction extends DiscountAction
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
         $adjustment = $this->createAdjustment($promotion);

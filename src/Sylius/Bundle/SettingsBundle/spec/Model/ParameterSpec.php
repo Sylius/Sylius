@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,7 +26,7 @@ class ParameterSpec extends ObjectBehavior
 
     function it_should_be_a_Sylius_settings_parameter()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Model\ParameterInterface');
+        $this->shouldImplement(ParameterInterface::class);
     }
 
     function it_should_not_have_id_by_default()

@@ -27,6 +27,6 @@ class RefreshCartListenerSpec extends ObjectBehavior
         $event->getSubject()->shouldBeCalled()->willReturn(null);
         $cart->calculateTotal()->shouldNotBeCalled();
 
-        $this->shouldThrow('\InvalidArgumentException')->during('refreshCart', array($event));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('refreshCart', array($event));
     }
 }

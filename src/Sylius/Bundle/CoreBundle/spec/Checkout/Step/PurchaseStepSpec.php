@@ -18,7 +18,11 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
+use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Payment;
@@ -26,6 +30,7 @@ use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -78,7 +83,7 @@ class PurchaseStepSpec extends ObjectBehavior
 
     function it_extends_checkout_step()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep');
+        $this->shouldImplement(CheckoutStep::class);
     }
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
@@ -96,7 +101,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $gateway
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Request\GetStatus'))
+            ->execute(Argument::type(GetStatus::class))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
@@ -106,7 +111,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_INITIALIZE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+                Argument::type(GenericEvent::class)
             )
             ->shouldBeCalled()
         ;
@@ -114,7 +119,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+                Argument::type(GenericEvent::class)
             )
             ->shouldBeCalled()
         ;
@@ -122,12 +127,12 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,
-                Argument::type('Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent')
+                Argument::type(PurchaseCompleteEvent::class)
             )
             ->shouldBeCalled()
         ;
 
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
+        $this->forwardAction($context)->shouldReturnAnInstanceOf(ActionResult::class);
     }
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
@@ -145,7 +150,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $gateway
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Request\GetStatus'))
+            ->execute(Argument::type(GetStatus::class))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
@@ -155,7 +160,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_INITIALIZE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+                Argument::type(GenericEvent::class)
             )
             ->shouldBeCalled()
         ;
@@ -163,7 +168,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+                Argument::type(GenericEvent::class)
             )
             ->shouldBeCalled()
         ;
@@ -171,11 +176,11 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,
-                Argument::type('Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent')
+                Argument::type(PurchaseCompleteEvent::class)
             )
             ->shouldBeCalled()
         ;
 
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
+        $this->forwardAction($context)->shouldReturnAnInstanceOf(ActionResult::class);
     }
 }

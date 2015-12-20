@@ -13,10 +13,15 @@ namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber;
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+use Sylius\Component\Report\Model\Report;
 use Sylius\Component\Report\Renderer\RendererInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,7 +35,7 @@ class ReportTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
-        $this->beConstructedWith('Sylius\Component\Report\Model\Report', array('sylius'), $rendererRegistry, $dataFetcherRegistry);
+        $this->beConstructedWith(Report::class, array('sylius'), $rendererRegistry, $dataFetcherRegistry);
     }
 
     function it_is_initializable()
@@ -40,7 +45,7 @@ class ReportTypeSpec extends ObjectBehavior
 
     function it_should_be_abstract_resource_type_object()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_build_form_with_proper_fields(
@@ -58,8 +63,8 @@ class ReportTypeSpec extends ObjectBehavior
         $builder->add('renderer', 'sylius_renderer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('dataFetcher', 'sylius_data_fetcher_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber'))->shouldBeCalled()->willReturn($builder);
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type(BuildReportRendererFormSubscriber::class))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type(BuildReportDataFetcherFormSubscriber::class))->shouldBeCalled()->willReturn($builder);
 
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
@@ -70,19 +75,19 @@ class ReportTypeSpec extends ObjectBehavior
         $renderer->getType()->willReturn('test_renderer');
         $rendererRegistry->all()->willReturn(array('test_renderer' => $renderer));
         $builder->create('rendererConfiguration', 'sylius_renderer_test_renderer')->willReturn($builder);
-        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
+        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));
 
         $dataFetcher->getType()->willReturn('test_data_fetcher');
         $dataFetcherRegistry->all()->willReturn(array('test_data_fetcher' => $dataFetcher));
         $builder->create('dataFetcherConfiguration', 'sylius_data_fetcher_test_data_fetcher')->willReturn($builder);
-        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type('Symfony\Component\Form\Form'));
+        $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));
 
         $prototypes = array(
             'renderers' => array(
-                'test_renderer' => Argument::type('Symfony\Component\Form\Form'),
+                'test_renderer' => Argument::type(Form::class),
                 ),
             'dataFetchers' => array(
-                'test_data_fetcher' => Argument::type('Symfony\Component\Form\Form'),
+                'test_data_fetcher' => Argument::type(Form::class),
                 ),
             );
         $builder->setAttribute('prototypes', $prototypes)->shouldBeCalled();

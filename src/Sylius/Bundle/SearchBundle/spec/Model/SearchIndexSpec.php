@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\SearchBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Product;
 
 /**
  * @author agounaris <agounaris@gmail.com>
@@ -31,8 +32,8 @@ class SearchIndexSpec extends ObjectBehavior
 
     function its_entity_is_mutable()
     {
-        $this->setEntity('Sylius\Component\Core\Model\Product');
-        $this->getEntity()->shouldReturn('Sylius\Component\Core\Model\Product');
+        $this->setEntity(Product::class);
+        $this->getEntity()->shouldReturn(Product::class);
     }
 
     function its_value_is_mutable()

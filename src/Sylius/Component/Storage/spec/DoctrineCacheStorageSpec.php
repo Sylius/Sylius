@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Storage;
 
 use Doctrine\Common\Cache\Cache;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Storage\StorageInterface;
 
 class DoctrineCacheStorageSpec extends ObjectBehavior
 {
@@ -28,7 +29,7 @@ class DoctrineCacheStorageSpec extends ObjectBehavior
 
     function it_implements_Sylius_storage_interface()
     {
-        $this->shouldImplement('Sylius\Component\Storage\StorageInterface');
+        $this->shouldImplement(StorageInterface::class);
     }
 
     function it_gets_default_data_if_no_record_was_found($cache)

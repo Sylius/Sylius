@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Model\GroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,7 +26,7 @@ class GroupSpec extends ObjectBehavior
 
     function it_implements_Sylius_group_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\GroupInterface');
+        $this->shouldImplement(GroupInterface::class);
     }
 
     function it_sets_name()

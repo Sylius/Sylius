@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -32,7 +33,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_should_implement_parameter_transformer_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
+        $this->shouldImplement(ParameterTransformerInterface::class);
     }
 
     function it_should_return_null_when_null_transformed()

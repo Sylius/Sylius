@@ -13,6 +13,7 @@
 namespace spec\Sylius\Component\Contact\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Contact\Model\TopicTranslationInterface;
 
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -26,7 +27,7 @@ class TopicTranslationSpec extends ObjectBehavior
 
     function it_implements_Sylius_topic_translation_interface()
     {
-        $this->shouldImplement('Sylius\Component\Contact\Model\TopicTranslationInterface');
+        $this->shouldImplement(TopicTranslationInterface::class);
     }
 
     function it_has_no_id_by_default()

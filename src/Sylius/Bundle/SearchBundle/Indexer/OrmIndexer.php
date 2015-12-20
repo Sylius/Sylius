@@ -176,7 +176,7 @@ class OrmIndexer implements IndexerInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -203,7 +203,7 @@ class OrmIndexer implements IndexerInterface
     {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->delete('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->delete(SearchIndex::class, 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())

@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
 
 class ShippingMethodSpec extends ObjectBehavior
 {
@@ -23,12 +25,12 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_core_shipping_method_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ShippingMethodInterface');
+        $this->shouldImplement(ShippingMethodInterface::class);
     }
 
     function it_should_extend_Sylius_shipping_method_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShippingMethod');
+        $this->shouldHaveType(ShippingMethod::class);
     }
 
     function it_should_not_have_any_zone_defined_by_default()

@@ -48,7 +48,7 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
         }
 
         if (!$value instanceof Collection) {
-            throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
+            throw new UnexpectedTypeException($value, Collection::class);
         }
 
         return $value->toArray();

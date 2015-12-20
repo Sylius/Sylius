@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Payment\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
@@ -34,7 +35,7 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
 
     function it_implements_delegating_fee_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface');
+        $this->shouldImplement(DelegatingFeeCalculatorInterface::class);
     }
 
     function it_delegates_calculation_to_proper_calculator(

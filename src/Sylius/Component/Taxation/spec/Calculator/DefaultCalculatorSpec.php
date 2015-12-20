@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Taxation\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
@@ -27,7 +28,7 @@ class DefaultCalculatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_tax_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxation\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price(

@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -35,7 +36,7 @@ class TableRendererSpec extends ObjectBehavior
 
     function it_should_implement_renderer_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
+        $this->shouldImplement(RendererInterface::class);
     }
 
     function it_renders_data_with_given_configuration(ReportInterface $report, Data $reportData, $templating)

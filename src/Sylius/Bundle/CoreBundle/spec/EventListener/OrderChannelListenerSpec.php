@@ -30,7 +30,7 @@ class OrderChannelListenerSpec extends ObjectBehavior
         $orderClass = new \stdClass();
         $exception = new UnexpectedTypeException(
             $orderClass,
-            'Sylius\Component\Core\Model\OrderInterface'
+            OrderInterface::class
         );
 
         $event->getSubject()->shouldBeCalled()->willReturn($orderClass);

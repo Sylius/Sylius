@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -31,6 +32,6 @@ class HasEnabledEntityValidatorSpec extends ObjectBehavior
 
     public function it_is_a_constraint_validator()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldHaveType(ConstraintValidator::class);
     }
 }

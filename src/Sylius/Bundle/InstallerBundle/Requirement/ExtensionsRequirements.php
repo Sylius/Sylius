@@ -84,7 +84,7 @@ class ExtensionsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.extensions.php_xml', array(), 'requirements'),
-                $status = class_exists('DomDocument'),
+                $status = class_exists(\DomDocument::class),
                 $on,
                 $status ? $on : $off,
                 false,

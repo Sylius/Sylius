@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Variation\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Variation\Model\OptionTranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -25,7 +26,7 @@ class OptionTranslationSpec extends ObjectBehavior
 
     function it_implement_Sylius_option_interface()
     {
-        $this->shouldImplement('Sylius\Component\Variation\Model\OptionTranslationInterface');
+        $this->shouldImplement(OptionTranslationInterface::class);
     }
 
     function it_should_not_have_id_by_default()

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -36,7 +37,7 @@ class RendererChoiceTypeSpec extends ObjectBehavior
 
     function it_should_be_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_sets_default_options(OptionsResolver $resolver)

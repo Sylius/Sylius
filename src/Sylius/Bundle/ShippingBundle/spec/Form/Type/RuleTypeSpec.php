@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,7 +37,7 @@ class RuleTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_should_build_form_with_rule_choice_field(
@@ -49,7 +51,7 @@ class RuleTypeSpec extends ObjectBehavior
 
         $builder
             ->addEventSubscriber(
-                Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber')
+                Argument::type(BuildRuleFormSubscriber::class)
             )
             ->willReturn($builder)
         ;
@@ -77,7 +79,7 @@ class RuleTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber'))
+            ->addEventSubscriber(Argument::type(BuildRuleFormSubscriber::class))
             ->willReturn($builder)
         ;
 

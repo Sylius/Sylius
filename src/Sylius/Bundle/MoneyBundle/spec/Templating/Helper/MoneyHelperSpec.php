@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,7 +31,7 @@ class MoneyHelperSpec extends ObjectBehavior
 
     function it_is_a_Twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_formats_the_integer_amounts_into_string_representation()

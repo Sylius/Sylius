@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -35,7 +36,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_should_be_Sylius_promotion_applicator()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
+        $this->shouldImplement(PromotionApplicatorInterface::class);
     }
 
     function it_should_execute_all_actions_registered(
