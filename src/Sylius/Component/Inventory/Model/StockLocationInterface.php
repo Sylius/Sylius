@@ -11,18 +11,17 @@
 
 namespace Sylius\Component\Inventory\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * Stock location interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockLocationInterface extends TimestampableInterface
+interface StockLocationInterface extends TimestampableInterface, CodeAwareInterface, ToggleableInterface
 {
-    public function getCode();
-    public function setCode($code);
-
     public function getName();
     public function setName($name);
 

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,9 +26,7 @@ class StockLocationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.stock_location.code'
-            ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
                 'label' => 'sylius.form.stock_location.name'
             ))

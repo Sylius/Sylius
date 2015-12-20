@@ -126,6 +126,16 @@ class StockLocation implements StockLocationInterface
         return $this;
     }
 
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
+    }
+
     public function isEnabled()
     {
         return $this->enabled;
@@ -133,7 +143,7 @@ class StockLocation implements StockLocationInterface
 
     public function setEnabled($enabled)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->enabled = (bool) $enabled;
 
         return $this;
     }
