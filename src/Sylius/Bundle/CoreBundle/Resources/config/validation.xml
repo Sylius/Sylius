@@ -92,4 +92,9 @@
         </constraint>
     </class>
 
+    <class name="Sylius\Component\Core\Model\StockLocation">
+        <property name="address">
+            <constraint name="Valid" />
+        </property>
+    </class>
 </constraint-mapping>

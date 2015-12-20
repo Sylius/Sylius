@@ -92,7 +92,7 @@ class StockItemFactory extends Factory implements StockItemFactoryInterface
         $stockLocations = $this->stockLocationRepository->findAll();
 
         foreach ($stockLocations as $location) {
-            $item = $this->create($stockable, $location);
+            $item = $this->createForLocation($stockable, $location);
 
             if (null === $item->getId()) {
                 $this->stockItemManager->persist($item);
@@ -110,7 +110,7 @@ class StockItemFactory extends Factory implements StockItemFactoryInterface
         $stockables = $this->stockableRepository->findAll();
 
         foreach ($stockables as $stockable) {
-            $item = $this->create($stockable, $location);
+            $item = $this->createForLocation($stockable, $location);
 
             if (null === $item->getId()) {
                 $this->stockItemManager->persist($item);
