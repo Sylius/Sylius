@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Coordinator;
 
 use Sylius\Component\Inventory\Model\InventorySubjectInterface;
+use Sylius\Component\Inventory\Packaging\PackageInterface;
 
 /**
  * This service is responsible for getting packages from all available stock locations.
@@ -23,7 +24,7 @@ interface CoordinatorInterface
     /**
      * Get all packages for given inventory subject and inventory units.
      *
-     * @param InventorySubjectInterface
+     * @param InventorySubjectInterface $subject
      *
      * @return PackageInterface[]
      */

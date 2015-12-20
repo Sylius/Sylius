@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class OrderShipmentFactory implements OrderShipmentFactoryInterface
 {
     /**
-    * Shipment repository.
+     * Shipment repository.
      *
      * @var FactoryInterface
      */

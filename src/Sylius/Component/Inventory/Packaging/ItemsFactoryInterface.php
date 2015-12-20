@@ -23,7 +23,7 @@ interface ItemsFactoryInterface
     /**
      * Get items overview.
      *
-     * @param InventorySubjectInterface
+     * @param InventorySubjectInterface $subject
      *
      * @return Items
      */

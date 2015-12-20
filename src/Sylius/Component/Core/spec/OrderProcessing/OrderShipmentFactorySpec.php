@@ -12,10 +12,13 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentFactory;
+use Sylius\Component\Inventory\Coordinator\CoordinatorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -26,14 +29,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class OrderShipmentFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $shipmentFactory)
+    function let(FactoryInterface $shipmentFactory, CoordinatorInterface $coordinatorInterface)
     {
-        $this->beConstructedWith($shipmentFactory);
+        $this->beConstructedWith($shipmentFactory, $coordinatorInterface);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\OrderShipmentFactory');
+        $this->shouldHaveType(OrderShipmentFactory::class);
     }
 
     function it_implements_Sylius_shipment_factory_interface()
@@ -45,7 +48,8 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        InventoryUnitInterface $inventoryUnit
+        InventoryUnitInterface $inventoryUnit,
+        Collection $shipments
     ) {
 
         $shipmentFactory
@@ -70,6 +74,11 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
         $order
             ->addShipment($shipment)
+            ->shouldBeCalled()
+        ;
+
+        $order
+            ->hasShipments()
             ->shouldBeCalled()
         ;
 
@@ -100,6 +109,11 @@ class OrderShipmentFactorySpec extends ObjectBehavior
                 $inventoryUnit,
                 $inventoryUnitWithoutShipment
             ))
+        ;
+
+        $order
+            ->hasShipments()
+            ->shouldBeCalled()
         ;
 
         $order

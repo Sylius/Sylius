@@ -31,9 +31,9 @@ class Coordinator implements CoordinatorInterface
     /**
      * Inventory builder.
      *
-     * @var InventoryBuilderInterface
+     * @var ItemsFactoryInterface
      */
-    protected $inventoryBuilder;
+    protected $itemsFactory;
 
     /**
      * Packer.
