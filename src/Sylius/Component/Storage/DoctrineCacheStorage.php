@@ -23,6 +23,9 @@ class DoctrineCacheStorage implements StorageInterface
      */
     protected $cache;
 
+    /**
+     * @param Cache $cache
+     */
     public function __construct(Cache $cache)
     {
         $this->cache = $cache;
