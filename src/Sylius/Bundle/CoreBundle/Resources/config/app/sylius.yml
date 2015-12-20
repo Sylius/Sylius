@@ -517,6 +517,13 @@ sylius_rbac:
         sylius.stock_item.update: Edit stock item
         sylius.stock_item.delete: Delete stock item
 
+        sylius.manage.stock_movement: Manage stock movement items
+        sylius.stock_movement.show: Show stock movement item
+        sylius.stock_movement.index: List stock movement items
+        sylius.stock_movement.create: Create stock movement item
+        sylius.stock_movement.update: Edit stock movement item
+        sylius.stock_movement.delete: Delete stock movement item
+
         sylius.manage.shipping_method: Manage shipping methods
         sylius.shipping_method.show: Show shipping method
         sylius.shipping_method.index: List shipping methods
@@ -692,6 +699,7 @@ sylius_rbac:
         sylius.manage.shipping_method: [sylius.shipping_method.show, sylius.shipping_method.index, sylius.shipping_method.create, sylius.shipping_method.update, sylius.shipping_method.delete]
         sylius.manage.stock_location: [sylius.stock_location.show, sylius.stock_location.index, sylius.stock_location.create, sylius.stock_location.update, sylius.stock_location.delete]
         sylius.manage.stock_item: [sylius.stock_item.show, sylius.stock_item.index, sylius.stock_item.create, sylius.stock_item.update, sylius.stock_item.delete]
+        sylius.manage.stock_movement: [sylius.stock_movement.show, sylius.stock_movement.index, sylius.stock_movement.create, sylius.stock_movement.update, sylius.stock_movement.delete]
         sylius.manage.shipping_category: [sylius.shipping_category.show, sylius.shipping_category.index, sylius.shipping_category.create, sylius.shipping_category.update, sylius.shipping_category.delete]
         sylius.manage.country: [sylius.country.show, sylius.country.index, sylius.country.create, sylius.country.update, sylius.country.delete]
         sylius.manage.province: [sylius.province.show, sylius.province.index, sylius.province.create, sylius.province.update, sylius.province.delete]
@@ -714,7 +722,7 @@ sylius_rbac:
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
         sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report, sylius.manage.stock_item]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
-        sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category, sylius.manage.stock_location]
+        sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category, sylius.manage.stock_location, sylius.manage.stock_movement]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.customer, sylius.manage.group]
