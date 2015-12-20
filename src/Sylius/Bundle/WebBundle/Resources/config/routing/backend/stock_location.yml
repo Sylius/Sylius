@@ -38,3 +38,19 @@ sylius_backend_stock_location_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_stock_location_index
+
+sylius_backend_stock_location_enable:
+    path: /{id}/enable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.stock_location:enableAction
+        _sylius:
+            redirect: sylius_backend_stock_location_index
+
+sylius_backend_stock_location_disable:
+    path: /{id}/disable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.stock_location:disableAction
+        _sylius:
+            redirect: sylius_backend_stock_location_index
