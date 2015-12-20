@@ -39,6 +39,8 @@ class SettingsController extends FOSRestController
     {
         $namespace = $request->get('namespace');
 
+        $this->isGrantedOr403($namespace);
+
         try {
             $settings = $this->getSettingsManager()->loadSettings($namespace);
         } catch (MissingOptionsException $e) {
@@ -63,6 +65,8 @@ class SettingsController extends FOSRestController
      */
     public function updateAction(Request $request, $namespace)
     {
+        $this->isGrantedOr403($namespace);
+
         $manager = $this->getSettingsManager();
 
         try {
@@ -103,7 +107,7 @@ class SettingsController extends FOSRestController
 
         return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), array(
             'settings' => $settings,
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -147,12 +151,11 @@ class SettingsController extends FOSRestController
         if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
             throw new AccessDeniedException();
         }
-
-        return false;
     }
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     private function isApiRequest(Request $request)
