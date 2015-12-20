@@ -43,7 +43,7 @@ class LoadStockLocationData extends DataFixture
      */
     public function getOrder()
     {
-        return 11;
+        return 55;
     }
 
     /**

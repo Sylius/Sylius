@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -65,7 +66,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function increase(StockableInterface $stockable, $quantity)
+    public function increase(StockItemInterface $stockable, $quantity)
     {
         if ($quantity < 0) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
@@ -81,7 +82,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function hold(StockableInterface $stockable, $quantity)
+    public function hold(StockItemInterface $stockable, $quantity)
     {
         if ($quantity < 0) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
@@ -97,7 +98,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function release(StockableInterface $stockable, $quantity)
+    public function release(StockItemInterface $stockable, $quantity)
     {
         if ($quantity < 0) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');

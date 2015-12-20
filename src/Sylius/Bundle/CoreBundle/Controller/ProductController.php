@@ -218,7 +218,7 @@ class ProductController extends BaseProductController
 
             if (null === $stockItem) {
                 $stockItem = $this->get('sylius.factory.stock_item')
-                    ->create($variant, $data['location'])
+                    ->createForLocation($variant, $data['location'])
                 ;
             }
 
