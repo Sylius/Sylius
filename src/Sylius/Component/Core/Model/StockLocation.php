@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Inventory\Model\StockLocation as BaseStockLocation;
 
 /**
@@ -26,6 +27,22 @@ class StockLocation extends BaseStockLocation implements StockLocationInterface
      * @var AddressInterface
      */
     protected $address;
+
+    /**
+     * Shipments.
+     *
+     * @var ShipmentInterface[]
+     */
+    protected $shipments;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->shipments = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

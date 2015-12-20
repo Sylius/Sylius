@@ -41,13 +41,6 @@ class StockLocation implements StockLocationInterface
     protected $enabled = true;
 
     /**
-     * Shipments.
-     *
-     * @var ShipmentInterface[]
-     */
-    protected $shipments;
-
-    /**
      * Stock items.
      *
      * @var StockItemInterface[]
@@ -80,7 +73,6 @@ class StockLocation implements StockLocationInterface
      */
     public function __construct()
     {
-        $this->shipments = new ArrayCollection();
         $this->stockItems = new ArrayCollection();
         $this->stockMovements = new ArrayCollection();
         $this->createdAt = new \DateTime();
