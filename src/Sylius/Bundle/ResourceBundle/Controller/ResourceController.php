@@ -22,6 +22,7 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -368,6 +369,54 @@ class ResourceController extends ContainerAware
         }
 
         $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function moveUpAction(Request $request)
+    {
+        return $this->move($request, 1);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function moveDownAction(Request $request)
+    {
+        return $this->move($request, -1);
+    }
+
+    /**
+     * @param Request $request
+     * @param integer $movement
+     *
+     * @return RedirectResponse
+     */
+    protected function move(Request $request, $movement)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $resource = $this->findOr404($configuration);
+
+        $position = $configuration->getSortablePosition();
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue(
+            $resource,
+            $position,
+            $accessor->getValue($resource, $position) + $movement
+        );
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($resource, 204));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
