@@ -11,8 +11,11 @@
 
 namespace spec\Sylius\Component\Inventory\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItem;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockMovementInterface;
 
@@ -23,12 +26,12 @@ class StockItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Model\StockItem');
+        $this->shouldHaveType(StockItem::class);
     }
 
     function it_implements_Sylius_channel_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Model\StockItemInterface');
+        $this->shouldImplement(StockItemInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -82,7 +85,7 @@ class StockItemSpec extends ObjectBehavior
 
     function its_stock_movements_is_collection()
     {
-        $this->getStockMovements()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+        $this->getStockMovements()->shouldHaveType(ArrayCollection::class);
     }
 
     function it_has_no_stock_movements_by_default()

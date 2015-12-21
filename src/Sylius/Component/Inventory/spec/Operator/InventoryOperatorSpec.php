@@ -17,6 +17,7 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperator;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -37,7 +38,7 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InventoryOperator');
+        $this->shouldHaveType(InventoryOperator::class);
     }
 
     function it_implements_Sylius_inventory_operator_interface()
