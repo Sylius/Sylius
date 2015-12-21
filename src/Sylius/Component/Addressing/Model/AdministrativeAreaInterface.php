@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
+interface AdministrativeAreaInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
      * @return string

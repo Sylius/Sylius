@@ -21,16 +21,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ProvinceTypeSpec extends ObjectBehavior
+class AdministrativeAreaTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Province', array('sylius'));
+        $this->beConstructedWith('AdministrativeArea', array('sylius'));
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType');
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\AdministrativeAreaType');
     }
 
     function it_is_a_form_type()
@@ -40,7 +40,7 @@ class ProvinceTypeSpec extends ObjectBehavior
 
     function it_has_a_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_province');
+        $this->getName()->shouldReturn('sylius_administrative_area');
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
@@ -64,8 +64,8 @@ class ProvinceTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Province',
-                'validation_groups' => array('sylius')
+                    'data_class' => 'AdministrativeArea',
+                    'validation_groups' => array('sylius')
             ))
             ->shouldBeCalled()
         ;

@@ -12,16 +12,15 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ProvinceAddressConstraintSpec extends ObjectBehavior
+class AdministrativeAreaAddressConstraintSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint');
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\AdministrativeAreaAddressConstraint');
     }
 
     function it_has_targets()
@@ -31,6 +30,6 @@ class ProvinceAddressConstraintSpec extends ObjectBehavior
 
     function it_is_validated_by()
     {
-        $this->validatedBy()->shouldReturn('sylius_province_address_validator');
+        $this->validatedBy()->shouldReturn('sylius_administrative_area_address_validator');
     }
 }

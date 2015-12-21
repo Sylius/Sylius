@@ -14,18 +14,18 @@
             var $this = $(this);
 
             $this.on('change', function() {
-                var provinceContainer = $('div.province-container');
+                var administrativeAreaContainer = $('div.administrative_area-container');
 
-                $.get(provinceContainer.attr('data-url'), {countryId: $this.val()}, function (response) {
+                $.get(administrativeAreaContainer.attr('data-url'), {countryId: $this.val()}, function (response) {
                     if (!response.content) {
-                        provinceContainer.fadeOut('slow', function () {
-                            provinceContainer.html('');
+                        administrativeAreaContainer.fadeOut('slow', function () {
+                            administrativeAreaContainer.html('');
                         });
                     } else {
-                        provinceContainer.fadeOut('slow', function () {
+                        administrativeAreaContainer.fadeOut('slow', function () {
                             $('select.select2').select2();
-                            provinceContainer.html(response.content.replace('name="sylius_address_province"', 'name="sylius_address[province]"'));
-                            provinceContainer.fadeIn();
+                            administrativeAreaContainer.html(response.content.replace('name="sylius_address_administrative_area"', 'name="sylius_address[administrative_area]"'));
+                            administrativeAreaContainer.fadeIn();
                         });
                     }
                 });
@@ -33,7 +33,7 @@
             });
         });
 
-        if($.trim($('div.province-container').text()) === '') {
+        if($.trim($('div.administrative_area-container').text()) === '') {
             $("select.country-select").trigger("change");
         }
     });

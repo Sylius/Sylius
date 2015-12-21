@@ -569,15 +569,15 @@ class CoreContext extends DefaultContext
     {
         $addressData = $this->processAddress($string);
 
-        list($firstname, $lastname) = explode(' ', $addressData[0]);
+        list($firstName, $lastName) = explode(' ', $addressData[0]);
 
         /* @var $address AddressInterface */
         $address = $this->getFactory('address')->createNew();
-        $address->setFirstname(trim($firstname));
-        $address->setLastname(trim($lastname));
-        $address->setStreet($addressData[1]);
+        $address->setFirstname(trim($firstName));
+        $address->setLastname(trim($lastName));
+        $address->setFirstAddressLine($addressData[1]);
         $address->setPostcode($addressData[2]);
-        $address->setCity($addressData[3]);
+        $address->setLocality($addressData[3]);
         $address->setCountry($this->getCountryCodeByEnglishCountryName($addressData[4]));
         return $address;
     }

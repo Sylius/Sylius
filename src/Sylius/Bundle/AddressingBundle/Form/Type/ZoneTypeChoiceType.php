@@ -27,7 +27,7 @@ class ZoneTypeChoiceType extends AbstractType
      */
     protected $choices = array(
         ZoneInterface::TYPE_COUNTRY => 'sylius.form.zone.types.country',
-        ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
+        ZoneInterface::TYPE_ADMINISTRATIVE_AREA => 'sylius.form.zone.types.administrative_area',
         ZoneInterface::TYPE_ZONE => 'sylius.form.zone.types.zone',
     );
 

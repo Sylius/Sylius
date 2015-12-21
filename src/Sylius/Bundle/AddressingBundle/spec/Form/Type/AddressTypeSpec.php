@@ -44,7 +44,8 @@ class AddressTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
-        $builder->addEventSubscriber(Argument::type(EventSubscriberInterface::class))
+        $builder
+            ->addEventSubscriber(Argument::type(EventSubscriberInterface::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -68,7 +69,7 @@ class AddressTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('company', 'text', Argument::any())
+            ->add('organization', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -80,13 +81,25 @@ class AddressTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('street', 'text', Argument::any())
+            ->add('locality', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('city', 'text', Argument::any())
+            ->add('dependentLocality', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('firstAddressLine', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('secondAddressLine', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

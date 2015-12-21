@@ -1,9 +1,9 @@
 sylius:
     address:
-        city:
-            max_length: City must not be longer than 255 characters|City must not be longer than 255 characters.
-            min_length: City must be at least 2 characters long|City must be at least 2 characters long.
-            not_blank: Please enter city.
+        locality:
+            max_length: Locality must not be longer than 255 characters|Locality must not be longer than 255 characters.
+            min_length: Locality must be at least 2 characters long|Locality must be at least 2 characters long.
+            not_blank: Please enter locality.
         country:
             not_blank: Please select country.
             disabled: Chosen country is disabled. Please choose a different one.
@@ -19,26 +19,24 @@ sylius:
             max_length: Postcode must not be longer than 255 characters|Postcode must not be longer than 255 characters.
             min_length: Postcode must be at least 2 characters long|Postcode must be at least 2 characters long.
             not_blank: Please enter postcode.
-        province:
-            valid: Please select proper province.
-        street:
-            max_length: Street must not be longer than 255 characters|Street must not be longer than 255 characters.
-            min_length: Street must be at least 2 characters long|Street must be at least 2 characters long.
-            not_blank: Please enter street.
+        administrative_area:
+            valid: Please select proper administrative area.
+        first_address_line:
+            not_blank: Please enter address.
         not_shippable: This address is not a valid shipping destination.
     country:
         code:
             not_blank: Please enter country ISO code.
             unique: Country ISO code must be unique.
-    province:
+    administrative_area:
         code:
-            not_blank: Please enter province code.
-            unique: Province code must be unique.
+            not_blank: Please enter administrative area code.
+            unique: Administrative area code must be unique.
         name:
-            max_length: Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.
-            min_length: Province name must be at least 2 characters long|Province name must be at least 2 characters long.
-            not_blank: Please enter province name.
-            unique: Province name must be unique.
+            max_length: Administrative area name must not be longer than 255 characters|Administrative area name must not be longer than 255 characters.
+            min_length: Administrative area name must be at least 2 characters long|Administrative area name must be at least 2 characters long.
+            not_blank: Please enter administrative area name.
+            unique: Administrative area name must be unique.
     zone:
         code:
             not_blank: Please enter zone code.

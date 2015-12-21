@@ -19,7 +19,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ProvinceAddressConstraintValidator extends ConstraintValidator
+class AdministrativeAreaAddressConstraintValidator extends ConstraintValidator
 {
     /**
      * @var RepositoryInterface
@@ -41,7 +41,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     {
         if (!$value instanceof AddressInterface) {
             throw new \InvalidArgumentException(
-                'ProvinceAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"'
+                'AdministrativeAreaAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"'
             );
         }
 
@@ -53,7 +53,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             }
         }
 
-        if (!$this->isProvinceValid($value)) {
+        if (!$this->isAdministrativeAreaValid($value)) {
             $this->context->addViolation($constraint->message);
         }
     }
@@ -63,22 +63,22 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
      *
      * @return bool
      */
-    protected function isProvinceValid(AddressInterface $address)
+    protected function isAdministrativeAreaValid(AddressInterface $address)
     {
         $countryCode = $address->getCountry();
         if (null === $country = $this->countryRepository->findOneBy(array('code' => $countryCode))) {
             return true;
         }
 
-        if (!$country->hasProvinces()) {
+        if (!$country->hasAdministrativeAreas()) {
             return true;
         }
 
-        if (null === $address->getProvince()) {
+        if (null === $address->getAdministrativeArea()) {
             return false;
         }
 
-        if ($country->hasProvince($address->getProvince())) {
+        if ($country->hasAdministrativeArea($address->getAdministrativeArea())) {
             return true;
         }
 

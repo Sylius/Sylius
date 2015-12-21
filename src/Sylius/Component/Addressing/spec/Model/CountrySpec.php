@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 
@@ -70,51 +70,51 @@ class CountrySpec extends ObjectBehavior
         $this->getCode()->shouldReturn('MX');
     }
 
-    function it_initializes_provinces_collection_by_default()
+    function it_initializes_administrative_areas_collection_by_default()
     {
-        $this->getProvinces()->shouldHaveType(Collection::class);
+        $this->getAdministrativeAreas()->shouldHaveType(Collection::class);
     }
 
-    function it_has_no_provinces_by_default()
+    function it_has_no_administrative_areas_by_default()
     {
-        $this->hasProvinces()->shouldReturn(false);
+        $this->hasAdministrativeAreas()->shouldReturn(false);
     }
 
-    function its_provinces_are_mutable(Collection $provinces)
+    function its_administrative_areas_are_mutable(Collection $administrativeAreas)
     {
-        $this->setProvinces($provinces);
-        $this->getProvinces()->shouldReturn($provinces);
+        $this->setAdministrativeAreas($administrativeAreas);
+        $this->getAdministrativeAreas()->shouldReturn($administrativeAreas);
     }
 
-    function it_adds_province(ProvinceInterface $province)
+    function it_adds_administrative_area(AdministrativeAreaInterface $administrativeArea)
     {
-        $this->addProvince($province);
-        $this->hasProvince($province)->shouldReturn(true);
+        $this->addAdministrativeArea($administrativeArea);
+        $this->hasAdministrativeArea($administrativeArea)->shouldReturn(true);
     }
 
-    function it_removes_province(ProvinceInterface $province)
+    function it_removes_administrative_area(AdministrativeAreaInterface $administrativeArea)
     {
-        $this->addProvince($province);
-        $this->hasProvince($province)->shouldReturn(true);
+        $this->addAdministrativeArea($administrativeArea);
+        $this->hasAdministrativeArea($administrativeArea)->shouldReturn(true);
 
-        $this->removeProvince($province);
-        $this->hasProvince($province)->shouldReturn(false);
+        $this->removeAdministrativeArea($administrativeArea);
+        $this->hasAdministrativeArea($administrativeArea)->shouldReturn(false);
     }
 
-    function it_sets_country_on_added_province(ProvinceInterface $province)
+    function it_sets_country_on_added_administrative_area(AdministrativeAreaInterface $administrativeArea)
     {
-        $province->setCountry($this)->shouldBeCalled();
-        $this->addProvince($province);
+        $administrativeArea->setCountry($this)->shouldBeCalled();
+        $this->addAdministrativeArea($administrativeArea);
     }
 
-    function it_unsets_country_on_removed_province(ProvinceInterface $province)
+    function it_unsets_country_on_removed_administrative_area(AdministrativeAreaInterface $administrativeArea)
     {
-        $this->addProvince($province);
-        $this->hasProvince($province)->shouldReturn(true);
+        $this->addAdministrativeArea($administrativeArea);
+        $this->hasAdministrativeArea($administrativeArea)->shouldReturn(true);
 
-        $province->setCountry(null)->shouldBeCalled();
+        $administrativeArea->setCountry(null)->shouldBeCalled();
 
-        $this->removeProvince($province);
+        $this->removeAdministrativeArea($administrativeArea);
     }
 
     function it_is_enabled_by_default()
@@ -144,8 +144,5 @@ class CountrySpec extends ObjectBehavior
 
         $this->setEnabled(true);
         $this->isEnabled()->shouldReturn(true);
-
-        $this->setEnabled(false);
-        $this->isEnabled()->shouldReturn(false);
     }
 }

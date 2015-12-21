@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class ProvinceController extends ResourceController
+class AdministrativeAreaController extends ResourceController
 {
     /**
      * Renders the province select field.
@@ -46,13 +46,13 @@ class ProvinceController extends ResourceController
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
-        if (!$country->hasProvinces()) {
+        if (!$country->hasAdministrativeAreas()) {
             return new JsonResponse(array('content' => false));
         }
 
-        $form = $this->createProvinceChoiceForm($country);
+        $form = $this->createAdministrativeAreaChoiceForm($country);
 
-        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
+        $content = $this->renderView($this->getConfiguration()->getTemplate('_administrativeAreaChoiceForm.html'), array(
             'form' => $form->createView(),
         ));
 
@@ -68,7 +68,7 @@ class ProvinceController extends ResourceController
     {
         $request = $this->config->getRequest();
         if (null === $countryId = $request->get('countryId')) {
-            throw new NotFoundHttpException('No country given');
+            throw new NotFoundHttpException('No country given.');
         }
 
         $country = $this
@@ -76,10 +76,10 @@ class ProvinceController extends ResourceController
             ->findOr404($request, array('id' => $countryId))
         ;
 
-        $province = parent::createNew();
-        $province->setCountry($country);
+        $administrativeArea = parent::createNew();
+        $administrativeArea->setCountry($country);
 
-        return $province;
+        return $administrativeArea;
     }
 
     /**
@@ -103,12 +103,12 @@ class ProvinceController extends ResourceController
      *
      * @return FormInterface
      */
-    protected function createProvinceChoiceForm(CountryInterface $country)
+    protected function createAdministrativeAreaChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
+        return $this->get('form.factory')->createNamed('sylius_address_administrative_area', 'sylius_administrative_area_choice', null, array(
             'country'     => $country,
-            'label'       => 'sylius.form.address.province',
-            'empty_value' => 'sylius.form.province.select',
+            'label'       => 'sylius.form.address.administrative_area',
+            'empty_value' => 'sylius.form.administrative_area.select',
         ));
     }
 }

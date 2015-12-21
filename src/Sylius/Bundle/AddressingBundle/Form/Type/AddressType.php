@@ -55,19 +55,25 @@ class AddressType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.address.phone_number',
             ))
-            ->add('company', 'text', array(
+            ->add('organization', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.address.company',
+                'label'    => 'sylius.form.address.organization',
             ))
             ->add('country', 'sylius_country_code_choice', array(
                 'label' => 'sylius.form.address.country',
                 'enabled' => true,
             ))
-            ->add('street', 'text', array(
-                'label' => 'sylius.form.address.street',
+            ->add('locality', 'text', array(
+                'label' => 'sylius.form.address.locality',
             ))
-            ->add('city', 'text', array(
-                'label' => 'sylius.form.address.city',
+            ->add('dependentLocality', 'text', array(
+                'label' => 'sylius.form.address.dependent_locality',
+            ))
+            ->add('firstAddressLine', 'text', array(
+                'label' => 'sylius.form.address.address',
+            ))
+            ->add('secondAddressLine', 'text', array(
+                'label' => false,
             ))
             ->add('postcode', 'text', array(
                 'label' => 'sylius.form.address.postcode',

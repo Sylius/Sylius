@@ -120,9 +120,9 @@ sylius_backend_country:
     resource: @SyliusWebBundle/Resources/config/routing/backend/country.yml
     prefix: /countries
 
-sylius_backend_province:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/province.yml
-    prefix: /provinces
+sylius_backend_administrative_area:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/administrative_area.yml
+    prefix: /administrative-areas
 
 sylius_backend_zone:
     resource: @SyliusWebBundle/Resources/config/routing/backend/zone.yml

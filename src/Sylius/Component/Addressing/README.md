@@ -5,9 +5,9 @@ Addresses management is a common task for almost every ecommerce project.
 This component provides basic models and services for handling addresses in
 your PHP application.
 
-Countries can contain multiple provinces (states).
+Countries can contain multiple administrative areas.
 
-This component supports very flexible zones system, which allows you to group countries and provinces into geographical areas.
+This component supports very flexible zones system, which allows you to group countries and administrative areas into geographical areas.
 Every address can be matched against all defined zones, which is useful for tax or shipping systems.
 
 Sylius

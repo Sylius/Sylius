@@ -37,7 +37,7 @@ class ProvinceChoiceTypeSpec extends ObjectBehavior
 
     function it_has_a_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_province_choice');
+        $this->getName()->shouldReturn('sylius_administrative_area_choice');
     }
 
     function it_has_a_parent_type()

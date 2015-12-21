@@ -19,13 +19,13 @@ use Sylius\Bundle\ResourceBundle\Behat\FormContext as BaseFormContext;
 class FormContext extends BaseFormContext
 {
     /**
-     * @Given /^I remove all the provinces$/
+     * @Given /^I remove all the administrative areas$/
      */
-    public function iRemoveAProvince()
+    public function iRemoveAllAdministrativeAreas()
     {
         $items = count($this->getSession()->getPage()->findAll(
             'xpath',
-            '//div[@id="sylius_country_provinces"]//div[@data-form-collection="item"]'
+            '//div[@id="sylius_country_administrative_areas"]//div[@data-form-collection="item"]'
         ));
 
         while (0 !== $items) {
@@ -35,12 +35,12 @@ class FormContext extends BaseFormContext
     }
 
     /**
-     * @Given /^I fill in the (\d+)(st|nd|th) province with "([^""]*)"$/
+     * @Given /^I fill in the (\d+)(st|nd|th) administrative area with "([^""]*)"$/
      */
-    public function fillProvinceName($position, $fake, $value)
+    public function fillAdministrativeAreaName($position, $fake, $value)
     {
-        $this->fillInField('sylius_country[provinces]['.($position - 1).'][name]', $value);
-        $this->fillInField('sylius_country[provinces]['.($position - 1).'][code]', $value);
+        $this->fillInField('sylius_country[administrativeAreas]['.($position - 1).'][name]', $value);
+        $this->fillInField('sylius_country[administrativeAreas]['.($position - 1).'][code]', $value);
     }
 
     /**
@@ -52,7 +52,7 @@ class FormContext extends BaseFormContext
     }
 
     /**
-     * @Given /^I remove the first (country|province)$/
+     * @Given /^I remove the first (country|administrative area)$/
      */
     public function iRemoveTheFirstMember()
     {

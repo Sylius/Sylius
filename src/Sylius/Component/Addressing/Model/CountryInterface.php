@@ -24,34 +24,34 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeAwareInterface
 {
     /**
-     * @return Collection|ProvinceInterface[]
+     * @return Collection|AdministrativeAreaInterface[]
      */
-    public function getProvinces();
+    public function getAdministrativeAreas();
 
     /**
-     * @param Collection $provinces
+     * @param Collection $administrativeArea
      */
-    public function setProvinces(Collection $provinces);
+    public function setAdministrativeAreas(Collection $administrativeArea);
 
     /**
      * @return bool
      */
-    public function hasProvinces();
+    public function hasAdministrativeAreas();
 
     /**
-     * @param ProvinceInterface $province
+     * @param AdministrativeAreaInterface $administrativeArea
      */
-    public function addProvince(ProvinceInterface $province);
+    public function addAdministrativeArea(AdministrativeAreaInterface $administrativeArea);
 
     /**
-     * @param ProvinceInterface $province
+     * @param AdministrativeAreaInterface $administrativeArea
      */
-    public function removeProvince(ProvinceInterface $province);
+    public function removeAdministrativeArea(AdministrativeAreaInterface $administrativeArea);
 
     /**
-     * @param ProvinceInterface $province
+     * @param AdministrativeAreaInterface $administrativeArea
      *
      * @return bool
      */
-    public function hasProvince(ProvinceInterface $province);
+    public function hasAdministrativeArea(AdministrativeAreaInterface $administrativeArea);
 }

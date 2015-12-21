@@ -1,20 +1,21 @@
 sylius:
     form:
         address:
-            city: City
-            company: Company
+            address: Address
+            administrative_area: Administrative area
             country: Country
+            dependent_locality: Dependent locality
             first_name: First name
             last_name: Last name
+            locality: Locality
+            organization: Organization
             phone_number: Phone number
             postcode: Postcode
-            street: Street
-            province: Province
         country:
             name: Name
-            provinces: Provinces
+            administrative_areas: Administrative areas
             select: Select
-        province:
+        administrative_area:
             name: Name
             select: Select
         zone:
@@ -23,7 +24,7 @@ sylius:
             type: Type
             types:
                 country: Country
-                province: Province
+                administrative_area: Administrative area
                 zone: Zone
             scope: Scope
             select: Select

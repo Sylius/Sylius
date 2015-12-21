@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Addressing\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -88,77 +88,81 @@ class AddressSpec extends ObjectBehavior
         $this->getCountry()->shouldReturn('IE');
     }
 
-    function it_allows_to_unset_the_country()
+    function it_nullifies_the_administrative_area_when_erasing_the_country()
     {
         $this->setCountry('IE');
-        $this->getCountry()->shouldReturn('IE');
+        $this->setAdministrativeArea('DUB');
 
         $this->setCountry(null);
-        $this->getCountry()->shouldReturn(null);
+        $this->getAdministrativeArea()->shouldReturn(null);
     }
 
-    function it_unsets_the_province_when_erasing_the_country()
+    function it_has_no_administrative_area_by_default()
+    {
+        $this->getAdministrativeArea()->shouldReturn(null);
+    }
+
+    function its_administrative_area_is_mutable()
     {
         $this->setCountry('IE');
-        $this->setProvince('DU');
 
-        $this->setCountry(null);
-
-        $this->getCountry()->shouldReturn(null);
-        $this->getProvince()->shouldReturn(null);
+        $this->setAdministrativeArea('DUB');
+        $this->getAdministrativeArea()->shouldReturn('DUB');
     }
 
-    function it_has_no_province_by_default()
+    function it_has_no_organization_by_default()
     {
-        $this->getProvince()->shouldReturn(null);
+        $this->getOrganization()->shouldReturn(null);
     }
 
-    function it_ignores_province_when_there_is_no_country()
+    function its_organization_is_mutable()
     {
-        $this->setCountry(null);
-        $this->setProvince('DU');
-        $this->getProvince()->shouldReturn(null);
+        $this->setOrganization('Foo Ltd.');
+        $this->getOrganization()->shouldReturn('Foo Ltd.');
     }
 
-    function its_province_is_mutable()
+    function it_has_no_locality_by_default()
     {
-        $this->setCountry("IE");
-
-        $this->setProvince('DU');
-        $this->getProvince()->shouldReturn('DU');
+        $this->getLocality()->shouldReturn(null);
     }
 
-    function it_has_no_company_by_default()
+    function its_locality_is_mutable()
     {
-        $this->getCompany()->shouldReturn(null);
+        $this->setLocality('Dublin');
+        $this->getLocality()->shouldReturn('Dublin');
     }
 
-    function its_company_is_mutable()
+    function it_has_no_dependent_locality_by_default()
     {
-        $this->setCompany('Foo Ltd.');
-        $this->getCompany()->shouldReturn('Foo Ltd.');
+        $this->getDependentLocality()->shouldReturn(null);
     }
 
-    function it_has_no_street_by_default()
+    function its_dependent_locality_is_mutable()
     {
-        $this->getStreet()->shouldReturn(null);
+        $this->setDependentLocality('Temple Bar');
+        $this->getDependentLocality()->shouldReturn('Temple Bar');
     }
 
-    function its_street_is_mutable()
+    function it_has_no_first_address_line_by_default()
     {
-        $this->setStreet('Foo Street 3/44');
-        $this->getStreet()->shouldReturn('Foo Street 3/44');
+        $this->getFirstAddressLine()->shouldReturn(null);
     }
 
-    function it_has_no_city_by_default()
+    function its_first_address_line_is_mutable()
     {
-        $this->getCity()->shouldReturn(null);
+        $this->setFirstAddressLine('Blakley Street');
+        $this->getFirstAddressLine()->shouldReturn('Blakley Street');
     }
 
-    function its_city_is_mutable()
+    function it_has_no_second_address_line_by_default()
     {
-        $this->setCity('New York');
-        $this->getCity()->shouldReturn('New York');
+        $this->getSecondAddressLine()->shouldReturn(null);
+    }
+
+    function its_second_address_line_is_mutable()
+    {
+        $this->setSecondAddressLine('3/16A');
+        $this->getSecondAddressLine()->shouldReturn('3/16A');
     }
 
     function it_has_no_postcode_by_default()

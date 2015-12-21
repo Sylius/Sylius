@@ -112,21 +112,21 @@ class LoadCountriesData extends DataFixture
     }
 
     /**
-     * Adds all US states as provinces to given country.
+     * Adds all US states as administrative areas to given country.
      *
      * @param CountryInterface $country
      */
     protected function addUsStates(CountryInterface $country)
     {
-        $provinceFactory = $this->getProvinceFactory();
+        $administrativeAreaFactory = $this->getAdministrativeAreaFactory();
 
-        foreach ($this->states as $provinceCode => $name) {
-            $province = $provinceFactory->createNew();
-            $province->setName($name);
-            $province->setCode($provinceCode);
-            $country->addProvince($province);
+        foreach ($this->states as $stateCode => $stateName) {
+            $administrativeArea = $administrativeAreaFactory->createNew();
+            $administrativeArea->setName($stateName);
+            $administrativeArea->setCode($stateCode);
+            $country->addAdministrativeArea($administrativeArea);
 
-            $this->setReference('Sylius.Province.'.$provinceCode, $province);
+            $this->setReference('Sylius.AdministrativeArea.'.$stateCode, $administrativeArea);
         }
     }
 }

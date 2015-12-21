@@ -52,12 +52,12 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
-    public function getCompany();
+    public function getOrganization();
 
     /**
-     * @param string $company
+     * @param string $organization
      */
-    public function setCompany($company);
+    public function setOrganization($organization);
 
     /**
      * @return string
@@ -72,32 +72,52 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
-    public function getProvince();
+    public function getAdministrativeArea();
 
     /**
-     * @param string $province
+     * @param string $administrativeAreaCode
      */
-    public function setProvince($province = null);
-
-    /**
-     * @return string
-     */
-    public function getStreet();
-
-    /**
-     * @param string $street
-     */
-    public function setStreet($street);
+    public function setAdministrativeArea($administrativeAreaCode = null);
 
     /**
      * @return string
      */
-    public function getCity();
+    public function getLocality();
 
     /**
-     * @param string $city
+     * @param string $locality
      */
-    public function setCity($city);
+    public function setLocality($locality);
+
+    /**
+     * @return string
+     */
+    public function getDependentLocality();
+
+    /**
+     * @param string $dependentLocality
+     */
+    public function setDependentLocality($dependentLocality);
+
+    /**
+     * @return string
+     */
+    public function getFirstAddressLine();
+
+    /**
+     * @param string $firstAddressLine
+     */
+    public function setFirstAddressLine($firstAddressLine);
+
+    /**
+     * @return string
+     */
+    public function getSecondAddressLine();
+
+    /**
+     * @param string $secondAddressLine
+     */
+    public function setSecondAddressLine($secondAddressLine);
 
     /**
      * @return string

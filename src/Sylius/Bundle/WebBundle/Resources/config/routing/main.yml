@@ -8,12 +8,12 @@ sylius_backend:
     resource: @SyliusWebBundle/Resources/config/routing/backend/main.yml
     prefix: /administration
 
-sylius_province_choice_form:
-    path: /province/choice-form
+sylius_administrative_area_choice_form:
+    path: /administrative-area/choice-form
     defaults:
-        _controller: sylius.controller.province:choiceFormAction
+        _controller: sylius.controller.administrativeArea:choiceFormAction
         _sylius:
-            template: SyliusAddressingBundle:Province:_provinceChoiceForm.html.twig
+            template: SyliusAddressingBundle:AdministrativeArea:_administrativeAreaChoiceForm.html.twig
 
 sylius_partial:
     resource: @SyliusWebBundle/Resources/config/routing/partial/main.yml

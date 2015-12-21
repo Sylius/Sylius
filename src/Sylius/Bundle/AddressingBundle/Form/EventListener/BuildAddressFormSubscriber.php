@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * This listener adds the province field to form if needed.
+ * This listener adds the administrative area field to form if needed.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -40,12 +40,12 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectRepository     $countryRepository
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $formFactory)
     {
         $this->countryRepository = $countryRepository;
-        $this->formFactory = $factory;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -60,7 +60,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Removes or adds a province field based on the country set.
+     * Removes or adds an administrative area field based on the country set.
      *
      * @param FormEvent $event
      */
@@ -82,13 +82,13 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvince()));
+        if ($country->hasAdministrativeAreas()) {
+            $event->getForm()->add($this->createAdministrativeAreaCodeChoiceForm($country, $address->getAdministrativeArea()));
         }
     }
 
     /**
-     * Removes or adds a province field based on the country set on submitted form.
+     * Removes or adds an administrative area field based on the country set on submitted form.
      *
      * @param FormEvent $event
      */
@@ -109,23 +109,23 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country));
+        if ($country->hasAdministrativeAreas()) {
+            $event->getForm()->add($this->createAdministrativeAreaCodeChoiceForm($country));
         }
     }
 
     /**
      * @param CountryInterface $country
-     * @param ProvinceInterface|null $province
+     * @param AdministrativeAreaInterface|null $administrativeArea
      *
      * @return FormInterface
      */
-    private function createProvinceCodeChoiceForm(CountryInterface $country, ProvinceInterface $province = null)
+    private function createAdministrativeAreaCodeChoiceForm(CountryInterface $country, AdministrativeAreaInterface $administrativeArea = null)
     {
         return
             $this
                 ->formFactory
-                    ->createNamed('province', 'sylius_province_code_choice', $province, array(
+                    ->createNamed('administrative_area', 'sylius_administrative_area_code_choice', $administrativeArea, array(
                     'country'  => $country,
                     'auto_initialize' => false,
             ))

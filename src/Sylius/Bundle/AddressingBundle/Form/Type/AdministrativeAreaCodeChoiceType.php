@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceCodeChoiceType extends ProvinceChoiceType
+class AdministrativeAreaCodeChoiceType extends AdministrativeAreaChoiceType
 {
     /**
      * {@inheritdoc}
@@ -29,12 +29,12 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
 
         $choices = function (Options $options) {
             if (null === $options['country']) {
-                $provinces = $this->provinceRepository->findAll();
+                $administrativeAreas = $this->administrativeAreaRepository->findAll();
             } else {
-                $provinces = $options['country']->getProvinces();
+                $administrativeAreas = $options['country']->getAdministrativeAreas();
             }
 
-            return $this->getProvinceCodes($provinces);
+            return $this->getAdministrativeAreasCodes($administrativeAreas);
         };
 
         $resolver->setDefault('choice_list', null);
@@ -46,23 +46,23 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
      */
     public function getName()
     {
-        return 'sylius_province_code_choice';
+        return 'sylius_administrative_area_code_choice';
     }
 
     /**
-     * @param ProvinceInterface[] $provinces
+     * @param AdministrativeAreaInterface[] $administrativeAreas
      *
      * @return array
      */
-    private function getProvinceCodes(array $provinces)
+    private function getAdministrativeAreasCodes(array $administrativeAreas)
     {
-        $provincesCodes = array();
+        $areasCodes = array();
 
-        /* @var ProvinceInterface $province */
-        foreach ($provinces as $province) {
-            $provincesCodes[$province->getCode()] = $province->getName();
+        /** @var AdministrativeAreaInterface $area */
+        foreach ($administrativeAreas as $area) {
+            $areasCodes[$area->getCode()] = $area->getName();
         }
 
-        return $provincesCodes;
+        return $areasCodes;
     }
 }

@@ -1,0 +1,24 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_administrative_area_create:
+    path: /create
+    defaults:
+        _controller: sylius.controller.administrative_area:createAction
+        _redirect: sylius_country_list
+
+sylius_administrative_area_update:
+    path: /{id}/update
+    defaults:
+        _controller: sylius.controller.administrative_area:updateAction
+        _redirect: sylius_country_list
+
+sylius_administrative_area_delete:
+    path: /{id}/delete
+    defaults:
+        _controller: sylius.controller.administrative_area:deleteAction
+
+sylius_administrative_area_choice_form:
+    path: /choice-form
+    defaults:
+        _controller: sylius.controller.administrative_area:choiceFormAction

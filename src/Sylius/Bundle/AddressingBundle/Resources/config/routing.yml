@@ -9,9 +9,9 @@ sylius_country:
     prefix: /countries
     resource: @SyliusAddressingBundle/Resources/config/routing/country.yml
 
-sylius_province:
-    prefix: /countries/{countryId}/provinces
-    resource: @SyliusAddressingBundle/Resources/config/routing/province.yml
+sylius_administrative_areas:
+    prefix: /countries/{countryId}/administrative-areas
+    resource: @SyliusAddressingBundle/Resources/config/routing/administrative_area.yml
 
 sylius_zone:
     prefix: /zones

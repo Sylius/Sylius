@@ -25,17 +25,23 @@
         <field name="lastName" column="last_name" type="string">
             <gedmo:versioned />
         </field>
-
         <field name="phoneNumber" column="phone_number" type="string" nullable="true">
             <gedmo:versioned />
         </field>
-        <field name="street" column="street" type="string">
+        <field name="organization" column="organization" type="string" nullable="true">
             <gedmo:versioned />
         </field>
-        <field name="company" column="company" type="string" nullable="true">
+
+        <field name="locality" column="locality" type="string">
             <gedmo:versioned />
         </field>
-        <field name="city" column="city" type="string">
+        <field name="dependentLocality" column="dependent_locality" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
+        <field name="firstAddressLine" column="first_address_line" type="string">
+            <gedmo:versioned />
+        </field>
+        <field name="secondAddressLine" column="second_address_line" type="string" nullable="true">
             <gedmo:versioned />
         </field>
         <field name="postcode" column="postcode" type="string">
@@ -52,7 +58,7 @@
         <field name="country" column="country_code" type="string">
             <gedmo:versioned />
         </field>
-        <field name="province" column="province_code" type="string" nullable="true">
+        <field name="administrativeArea" column="administrative_area_code" type="string" nullable="true">
             <gedmo:versioned />
         </field>
 

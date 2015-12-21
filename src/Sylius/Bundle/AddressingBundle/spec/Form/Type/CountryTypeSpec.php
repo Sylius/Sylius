@@ -53,7 +53,7 @@ class CountryTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('provinces', 'collection', Argument::any())
+            ->add('administrativeAreas', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

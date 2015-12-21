@@ -64,14 +64,14 @@ sylius:
         title: My account
     add_to_cart: Add to cart
     address:
-        city: City
-        company: Company
+        locality: Locality
+        organization: Organization
         country: Country
         firstname: First name
         lastname: Last name
         postcode: Postcode
-        province: Province
-        street: Street
+        administrative_area: Administrative area
+        address: Address
     alert:
         error: Error
         info: Information
@@ -289,7 +289,7 @@ sylius:
                 firstname: First name
                 lastname: Last name
                 postcode: Postcode
-                province: Province
+                administrative_area: Administrative area
                 street: Street
             header: Order summary
             order:
@@ -335,7 +335,7 @@ sylius:
         message: Do you want to delete this item?
         title: Confirmation
     country:
-        add_province: Add province
+        add_administrative_area: Add administrative area
         create: Create country
         create_header: New country
         id: ID
@@ -841,8 +841,8 @@ sylius:
         parent: parent
         update_header: Editing archetype
         updated_at: last update
-    province:
-        provinces: Provinces
+    administrative_area:
+        administrative_areas: Administrative areas
     remember_me: Remember me?
     report:
         create: Create report

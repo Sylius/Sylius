@@ -13,35 +13,35 @@
     $(document).ready(function() {
         $('select[name$="[country]"]').on('change', function(event) {
             var $select = $(event.currentTarget);
-            var $provinceContainer = $select.closest('div.form-group').next('div.province-container');
-            var provinceName = $select.attr('name').replace('country', 'province');
+            var $administrativeAreaContainer = $select.closest('div.form-group').next('div.administrative-area-container');
+            var administrativeAreaName = $select.attr('name').replace('country', 'administrative_area');
 
             if ('' === $select.val()) {
-                $provinceContainer.fadeOut('slow', function () {
-                    $provinceContainer.html('');
+                $administrativeAreaContainer.fadeOut('slow', function () {
+                    $administrativeAreaContainer.html('');
                 });
                 return;
             }
 
-            $.get($provinceContainer.attr('data-url'), {countryId: $(this).val()}, function (response) {
+            $.get($administrativeAreaContainer.attr('data-url'), {countryId: $(this).val()}, function (response) {
                 if (!response.content) {
-                    $provinceContainer.fadeOut('slow', function () {
-                        $provinceContainer.html('');
+                    $administrativeAreaContainer.fadeOut('slow', function () {
+                        $administrativeAreaContainer.html('');
                     });
                 } else {
-                    $provinceContainer.fadeOut('slow', function () {
-                        $provinceContainer.html(response.content.replace(
-                            'name="sylius_address_province"',
-                            'name="' + provinceName + '"'
+                    $administrativeAreaContainer.fadeOut('slow', function () {
+                        $administrativeAreaContainer.html(response.content.replace(
+                            'name="sylius_address_administrative_area"',
+                            'name="' + administrativeAreaName + '"'
                         ));
 
-                        $provinceContainer.fadeIn();
+                        $administrativeAreaContainer.fadeIn();
                     });
                 }
             });
         });
 
-        if('' === $.trim($('div.province-container').text())) {
+        if('' === $.trim($('div.administrative-area-container').text())) {
             $('select.country-select').trigger('change');
         }
 

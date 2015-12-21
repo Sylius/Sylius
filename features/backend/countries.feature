@@ -1,13 +1,13 @@
 @addressing
-Feature: Countries and provinces
+Feature: Countries and administrative areas
     In order to create tax and shipping zones
     As a store owner
-    I want to be able to manage countries and their provinces
+    I want to be able to manage countries and their administrative areas
 
     Background:
         Given store has default configuration
           And there are following countries:
-            | name    | provinces                       |
+            | name    | administrative areas            |
             | France  | Lyon, Toulouse, Rennes, Nancy   |
             | China   |                                 |
             | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
@@ -56,26 +56,26 @@ Feature: Countries and provinces
           And I should not see name "Germany" as available choice
 
     @javascript
-    Scenario: Creating new country with provinces
+    Scenario: Creating new country with administrative areas
         Given I am on the country creation page
          When I select "Poland" from "Name"
-          And I click "Add province"
-          And I click "Add province"
-          And I fill in the 1st province with "Lubusz"
-          And I fill in the 2nd province with "Łódź"
+          And I click "Add administrative area"
+          And I click "Add administrative area"
+          And I fill in the 1st administrative area with "Lubusz"
+          And I fill in the 2nd administrative area with "Łódź"
           And I press "Create"
          Then I should see "Country has been successfully created."
           And "Łódź" should appear on the page
           And "Lubusz" should appear on the page
 
     @javascript
-    Scenario: Editing country with duplicated province
+    Scenario: Editing country with duplicated administrative area
         Given I am editing country "France"
-         When I click "Add province"
-          And I fill in the 5th province with "Lyon"
+         When I click "Add administrative area"
+          And I fill in the 5th administrative area with "Lyon"
           And I press "Save changes"
-         Then I should see "Province name must be unique."
-          And I should see "Province code must be unique."
+         Then I should see "Administrative area name must be unique."
+          And I should see "Administrative area code must be unique."
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
@@ -102,16 +102,16 @@ Feature: Countries and provinces
          When I click "China"
          Then I should be on the page of country "China"
 
-    Scenario: Provinces are listed on country page
+    Scenario: Administrative areas are listed on country page
         Given I am on the country index page
          When I click "France"
          Then I should be on the page of country "France"
-          And I should see 4 provinces in the list
+          And I should see 4 administrative areas in the list
 
     @javascript
-    Scenario: Deleting province
+    Scenario: Deleting administrative area
         Given I am editing country "France"
-         When I remove the first province
+         When I remove the first administrative area
           And I press "Save changes"
          Then I should be on the page of country "France"
           And "Nancy" should not appear on the page

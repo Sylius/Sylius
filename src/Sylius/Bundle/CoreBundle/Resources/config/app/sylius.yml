@@ -519,12 +519,12 @@ sylius_rbac:
         sylius.country.update: Edit country
         sylius.country.delete: Delete country
 
-        sylius.manage.province: Manage provinces
-        sylius.province.show: Show province
-        sylius.province.index: List provinces
-        sylius.province.create: Create province
-        sylius.province.update: Edit province
-        sylius.province.delete: Delete province
+        sylius.manage.administrative_area: Manage administrative areas
+        sylius.administrative_area.show: Show administrative area
+        sylius.administrative_area.index: List administrative areas
+        sylius.administrative_area.create: Create administrative area
+        sylius.administrative_area.update: Edit administrative area
+        sylius.administrative_area.delete: Delete administrative area
 
         sylius.manage.zone: Manage zones
         sylius.zone.show: Show zone
@@ -673,7 +673,7 @@ sylius_rbac:
         sylius.manage.shipping_method: [sylius.shipping_method.show, sylius.shipping_method.index, sylius.shipping_method.create, sylius.shipping_method.update, sylius.shipping_method.delete]
         sylius.manage.shipping_category: [sylius.shipping_category.show, sylius.shipping_category.index, sylius.shipping_category.create, sylius.shipping_category.update, sylius.shipping_category.delete]
         sylius.manage.country: [sylius.country.show, sylius.country.index, sylius.country.create, sylius.country.update, sylius.country.delete]
-        sylius.manage.province: [sylius.province.show, sylius.province.index, sylius.province.create, sylius.province.update, sylius.province.delete]
+        sylius.manage.administrative_area: [sylius.administrative_area.show, sylius.administrative_area.index, sylius.administrative_area.create, sylius.administrative_area.update, sylius.administrative_area.delete]
         sylius.manage.zone: [sylius.zone.show, sylius.zone.index, sylius.zone.create, sylius.zone.update, sylius.zone.delete]
         sylius.manage.api_client: [sylius.api_client.show, sylius.api_client.index, sylius.api_client.create, sylius.api_client.update, sylius.api_client.delete]
         sylius.manage.static_content: [sylius.static_content.show, sylius.static_content.index, sylius.static_content.create, sylius.static_content.update, sylius.static_content.delete]
@@ -707,7 +707,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.administrative_area, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager

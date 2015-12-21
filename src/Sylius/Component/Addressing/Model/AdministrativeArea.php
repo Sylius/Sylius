@@ -14,7 +14,7 @@ namespace Sylius\Component\Addressing\Model;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class Province implements ProvinceInterface
+class AdministrativeArea implements AdministrativeAreaInterface
 {
     /**
      * @var mixed
