@@ -26,6 +26,26 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class SetupCommand extends AbstractInstallCommand
 {
     /**
+     * @var string
+     */
+    protected $defaultCountries = 'US';
+
+    /**
+     * @var string
+     */
+    protected $defaultLocales = 'en_US';
+
+    /**
+     * @var string
+     */
+    protected $defaultCurrencies = 'USD';
+
+    /**
+     * @var string
+     */
+    protected $defaultChannels = 'DEFAULT';
+
+    /**
      * @var array
      */
     private $currencies = array();
@@ -307,7 +327,7 @@ EOT
             $output,
             'On which channels are you going to sell your goods?',
             'Please enter a list of channels, separated by commas or just hit ENTER to use "DEFAULT". For example "WEB-UK, WEB-DE, MOBILE".',
-            'DEFAULT'
+            $this->defaultChannels
         );
     }
 
@@ -324,7 +344,7 @@ EOT
             $output,
             'In which currency your customers can buy goods?',
             'Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".',
-            'USD'
+            $this->defaultCurrencies
         );
     }
 
@@ -341,7 +361,7 @@ EOT
             $output,
             'In which language your customers can browse the store?',
             'Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".',
-            'en_US'
+            $this->defaultLocales
         );
     }
 
@@ -358,7 +378,7 @@ EOT
             $output,
             'To which countries you are going to sell your goods?',
             'Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".',
-            'US'
+            $this->defaultCountries
         );
     }
 
