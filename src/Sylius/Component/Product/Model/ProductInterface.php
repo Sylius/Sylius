@@ -41,4 +41,16 @@ interface ProductInterface extends
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
+
+    /**
+     * @return \DateTime
+     */
+    public function getAvailableUntil();
+
+    /**
+     * @param null|\DateTime $availableUntil
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null);
+
+
 }

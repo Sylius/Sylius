@@ -714,6 +714,7 @@ sylius:
     product:
         add_attribute: Add attribute
         available_on: Available on
+        available_until: Available until
         available_on_demand: Available on demand
         categorization: Categorization
         contain_variants: Contain Variants

@@ -41,6 +41,11 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $availableOn;
 
     /**
+     * @var \DateTime
+     */
+    protected $availableUntil;
+
+    /**
      * @var Collection|BaseAttributeValueInterface[]
      */
     protected $attributes;
@@ -189,7 +194,7 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     public function isAvailable()
     {
-        return new \DateTime() >= $this->availableOn;
+        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
     }
 
     /**
@@ -206,6 +211,22 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableUntil()
+    {
+        return $this->availableUntil;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null)
+    {
+        $this->availableUntil = $availableUntil;
     }
 
     /**
