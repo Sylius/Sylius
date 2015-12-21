@@ -321,7 +321,7 @@ class ProductController extends BaseProductController
     )
     {
         $results->setCurrentPage($page, true, true);
-        $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $results->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate($template))

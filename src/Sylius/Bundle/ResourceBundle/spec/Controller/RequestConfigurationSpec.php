@@ -14,12 +14,13 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin \Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration
+ * @mixin RequestConfiguration
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
@@ -360,5 +361,31 @@ class RequestConfigurationSpec extends ObjectBehavior
 
         $parameters->get('sortable_position', 'position')->willReturn('myPosition');
         $this->getSortablePosition()->shouldReturn('myPosition');
+    }
+    
+    function it_generates_permission_name(MetadataInterface $metadata, Parameters $parameters)
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        
+        $parameters->has('permission')->willReturn(false);
+
+        $this->getPermission('index')->shouldReturn('sylius.product.index');
+    }
+
+    function it_takes_permission_name_from_parameters_if_provider(Parameters $parameters)
+    {
+        $parameters->has('permission')->willReturn(true);
+        $parameters->get('permission')->willReturn('app.sales_order.view_pricing');
+
+        $this->getPermission('index')->shouldReturn('app.sales_order.view_pricing');
+    }
+
+    function it_returns_false_if_permission_is_set_as_false_in_parameters(Parameters $parameters)
+    {
+        $parameters->has('permission')->willReturn(true);
+        $parameters->get('permission')->willReturn(false);
+
+        $this->getPermission('index')->shouldReturn(false);
     }
 }

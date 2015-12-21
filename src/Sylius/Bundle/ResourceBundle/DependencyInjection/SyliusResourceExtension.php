@@ -46,6 +46,14 @@ class SyliusResourceExtension extends Extension
             $loader->load($configFile);
         }
 
+        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
+
+        if (class_exists('Sylius\Bundle\RbacBundle\SyliusRbacBundle')) {
+            $loader->load('rbac.xml');
+
+            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
+        }
+
         foreach ($config['resources'] as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 

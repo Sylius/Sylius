@@ -399,12 +399,17 @@ class RequestConfiguration
     }
 
     /**
-     * @param null $default
-     * @return mixed|null
+     * @param $name
+     *
+     * @return bool|string
      */
-    public function getPermission($default = null)
+    public function getPermission($name)
     {
-        return $this->parameters->get('permission', $default);
+        if (!$this->parameters->has('permission')) {
+            return sprintf('%s.%s.%s', $this->metadata->getApplicationName(), $this->metadata->getName(), $name);
+        }
+
+        return $this->parameters->get('permission');
     }
 
     /**
