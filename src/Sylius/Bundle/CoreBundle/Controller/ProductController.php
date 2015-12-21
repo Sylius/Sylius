@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Gedmo\Loggable\Entity\LogEntry;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductController;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
@@ -160,7 +161,7 @@ class ProductController extends BaseProductController
         /** @var $product ProductInterface */
         $product = $this->findOr404($request);
 
-        $repository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
         $variants = array();
         foreach ($product->getVariants() as $variant) {

@@ -16,6 +16,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -54,7 +55,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
+            ProductVariantImageInterface::class => 'sylius.model.product_variant_image.class',
         );
     }
 

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
 class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
 {
@@ -150,6 +151,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
      */
     public static function getTranslationClass()
     {
-        return 'Sylius\Component\Taxonomy\Model\TaxonTranslation';
+        return TaxonTranslation::class;
     }
 }

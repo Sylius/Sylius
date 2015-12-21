@@ -56,7 +56,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
         $data = $form->getData();
 
         if (!$data instanceof CustomerInterface) {
-            throw new UnexpectedTypeException($data, 'Sylius\Component\User\Model\CustomerInterface');
+            throw new UnexpectedTypeException($data, CustomerInterface::class);
         }
 
         // if email is not filled in, go on

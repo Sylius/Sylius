@@ -11,8 +11,10 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
 
@@ -27,7 +29,7 @@ class CustomerSpec extends ObjectBehavior
 
     function it_implements_user_component_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\CustomerInterface');
+        $this->shouldImplement(CustomerInterface::class);
     }
 
     function it_has_no_shipping_address_by_default()
@@ -42,7 +44,7 @@ class CustomerSpec extends ObjectBehavior
 
     function its_addresses_is_collection()
     {
-        $this->getAddresses()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+        $this->getAddresses()->shouldHaveType(ArrayCollection::class);
     }
 
     function it_has_no_addresses_by_default()

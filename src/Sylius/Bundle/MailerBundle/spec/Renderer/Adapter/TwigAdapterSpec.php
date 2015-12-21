@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -33,7 +34,7 @@ class TwigAdapterSpec extends ObjectBehavior
 
     function it_is_an_adapter()
     {
-        $this->shouldHaveType('Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter');
+        $this->shouldHaveType(AbstractAdapter::class);
     }
 
     function it_renders_an_email(
@@ -56,7 +57,7 @@ class TwigAdapterSpec extends ObjectBehavior
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type('Sylius\Component\Mailer\Event\EmailRenderEvent')
+            Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
@@ -78,7 +79,7 @@ class TwigAdapterSpec extends ObjectBehavior
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type('Sylius\Component\Mailer\Event\EmailRenderEvent')
+            Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);

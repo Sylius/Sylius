@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use Gedmo\Loggable\Entity\LogEntry;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
@@ -335,7 +336,7 @@ class ResourceController extends FOSRestController
     {
         $resource   = $this->findOr404($request);
         $em         = $this->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository = $em->getRepository(LogEntry::class);
         $repository->revert($resource, $version);
 
         $this->domainManager->update($resource, 'revert');

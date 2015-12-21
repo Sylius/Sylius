@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -25,7 +26,7 @@ class SyliusMoneyTransformerSpec extends ObjectBehavior
 
     function it_extends_money_to_localized_string_transformer_class()
     {
-        $this->shouldHaveType('Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer');
+        $this->shouldHaveType(MoneyToLocalizedStringTransformer::class);
     }
 
     function it_returns_null_if_empty_string_given()

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\ArchetypeTranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -25,7 +26,7 @@ class ArchetypeTranslationSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_archetype_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\ArchetypeTranslationInterface');
+        $this->shouldImplement(ArchetypeTranslationInterface::class);
     }
 
     function it_has_no_id_by_default()

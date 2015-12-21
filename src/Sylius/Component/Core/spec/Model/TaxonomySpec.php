@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 class TaxonomySpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_is_Sylius_Taxonomy()
     {
-        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonomyInterface');
+        $this->shouldImplement(TaxonomyInterface::class);
     }
 
     function it_should_not_path_defined_by_default()

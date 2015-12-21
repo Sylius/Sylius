@@ -39,7 +39,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($object);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringSetCustomer($event)
         ;
     }

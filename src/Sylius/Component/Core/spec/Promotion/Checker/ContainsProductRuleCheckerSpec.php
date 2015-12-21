@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -25,12 +27,12 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initialibable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker');
+        $this->shouldHaveType(ContainsProductRuleChecker::class);
     }
 
     function it_is_sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_throws_exception_on_invalid_subject(PromotionSubjectInterface $subject)

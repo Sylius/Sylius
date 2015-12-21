@@ -32,7 +32,7 @@ class TaxonQuerySpec extends ObjectBehavior
 
     public function it_has_a_taxon()
     {
-        $this->getTaxon()->shouldBeAnInstanceOf('Sylius\Component\Core\Model\Taxon');
+        $this->getTaxon()->shouldBeAnInstanceOf(Taxon::class);
     }
 
     public function it_has_some_applied_filters()

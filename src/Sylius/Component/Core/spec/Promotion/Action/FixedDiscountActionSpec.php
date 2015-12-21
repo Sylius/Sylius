@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
+use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -38,7 +39,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
     function it_implements_Sylius_promotion_action_interface()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
+        $this->shouldImplement(PromotionActionInterface::class);
     }
 
     function it_applies_fixed_discount_as_promotion_adjustment(

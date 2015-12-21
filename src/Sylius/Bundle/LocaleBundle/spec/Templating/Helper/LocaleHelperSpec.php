@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\LocaleBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -32,7 +33,7 @@ class LocaleHelperSpec extends ObjectBehavior
 
     function it_is_a_helper()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_has_locale($localeContext)

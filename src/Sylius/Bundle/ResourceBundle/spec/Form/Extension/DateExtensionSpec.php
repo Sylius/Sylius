@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,7 +27,7 @@ class DateExtensionSpec extends ObjectBehavior
 
     function it_should_extends_abstract_type_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
+        $this->shouldHaveType(AbstractTypeExtension::class);
     }
 
     function it_should_build_the_view_by_default(FormView $view, FormInterface $form)

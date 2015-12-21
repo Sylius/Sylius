@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Resource\Metadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,7 +28,7 @@ class RegistrySpec extends ObjectBehavior
     
     function it_implements_registry_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Metadata\RegistryInterface');
+        $this->shouldImplement(RegistryInterface::class);
     }
     
     function it_returns_all_resources_metadata(MetadataInterface $metadata1, MetadataInterface $metadata2)

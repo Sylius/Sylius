@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Symfony\Component\Form\FormTypeInterface;
 
 class ProductVariantTypeSpec extends ObjectBehavior
 {
@@ -20,18 +22,18 @@ class ProductVariantTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Variant', array(), 'product');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_variant_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariationBundle\Form\Type\VariantType');
+        $this->shouldHaveType(VariantType::class);
     }
 }

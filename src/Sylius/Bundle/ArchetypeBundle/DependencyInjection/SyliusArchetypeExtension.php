@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Archetype\Builder\ArchetypeBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -102,7 +103,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     private function createPrototypeBuilder(ContainerBuilder $container, $subjectName)
     {
-        $builderDefintion = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
+        $builderDefintion = new Definition(ArchetypeBuilder::class);
         $builderDefintion
             ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subjectName))))
         ;

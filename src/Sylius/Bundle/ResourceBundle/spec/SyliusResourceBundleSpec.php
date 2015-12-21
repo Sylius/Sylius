@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sylius resource bundle spec.
@@ -27,6 +28,6 @@ class SyliusResourceBundleSpec extends ObjectBehavior
 
     function it_is_a_bundle()
     {
-        $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
+        $this->shouldHaveType(Bundle::class);
     }
 }

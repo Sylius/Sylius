@@ -27,7 +27,7 @@ class CustomerSpec extends ObjectBehavior
 
     function it_implements_customer_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\CustomerInterface');
+        $this->shouldImplement(CustomerInterface::class);
     }
 
     function it_implements_user_aware_interface()

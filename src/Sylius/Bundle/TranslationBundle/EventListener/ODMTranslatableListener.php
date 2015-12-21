@@ -17,6 +17,8 @@ use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -90,11 +92,11 @@ class ODMTranslatableListener implements EventSubscriber
             return;
         }
 
-        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
+        if ($reflection->implementsInterface(TranslatableInterface::class)) {
             $this->mapTranslatable($classMetadata);
         }
 
-        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
+        if ($reflection->implementsInterface(TranslationInterface::class)) {
             $this->mapTranslation($classMetadata);
         }
     }

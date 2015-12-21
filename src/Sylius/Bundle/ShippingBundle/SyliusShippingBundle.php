@@ -15,6 +15,11 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Sylius\Component\Shipping\Model\RuleInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -55,11 +60,11 @@ class SyliusShippingBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Shipping\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
-            'Sylius\Component\Shipping\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
-            'Sylius\Component\Shipping\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
-            'Sylius\Component\Shipping\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
-            'Sylius\Component\Shipping\Model\RuleInterface'             => 'sylius.model.shipping_method_rule.class',
+            ShipmentInterface::class         => 'sylius.model.shipment.class',
+            ShipmentItemInterface::class     => 'sylius.model.shipment_item.class',
+            ShippingCategoryInterface::class => 'sylius.model.shipping_category.class',
+            ShippingMethodInterface::class   => 'sylius.model.shipping_method.class',
+            RuleInterface::class             => 'sylius.model.shipping_method_rule.class',
         );
     }
 

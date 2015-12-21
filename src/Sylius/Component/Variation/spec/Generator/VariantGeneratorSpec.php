@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Variation\Generator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValue;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -37,14 +38,14 @@ class VariantGeneratorSpec extends ObjectBehavior
 
     function it_is_a_Sylius_variant_generator()
     {
-        $this->shouldImplement('Sylius\Component\Variation\Generator\VariantGeneratorInterface');
+        $this->shouldImplement(VariantGeneratorInterface::class);
     }
 
     function it_cannot_generate_variants_for_an_object_without_options(VariableInterface $variable)
     {
         $variable->hasOptions()->willReturn(false);
 
-        $this->shouldThrow('InvalidArgumentException')->duringGenerate($variable);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringGenerate($variable);
     }
 
     function it_generates_variants_for_every_value_of_an_objects_single_option(

@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -39,13 +43,13 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
     {
         $reflection = new \ReflectionClass($metadata->getClass('model'));
 
-        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatableInterface = TranslatableInterface::class;
         $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
         $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         $repositoryClass = $translatable
-            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository'
-            : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository'
+            ? TranslatableResourceRepository::class
+            : EntityRepository::class
         ;
 
         if ($container->hasParameter($repositoryClassParameterName)) {
@@ -64,7 +68,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
-            $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
+            $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
             $translationConfig = $metadata->getParameter('translation');
 
             if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {

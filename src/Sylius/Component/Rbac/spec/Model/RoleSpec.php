@@ -11,8 +11,10 @@
 
 namespace spec\Sylius\Component\Rbac\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,7 +28,7 @@ class RoleSpec extends ObjectBehavior
 
     function it_implements_Sylius_Rbac_role_interface()
     {
-        $this->shouldImplement('Sylius\Component\Rbac\Model\RoleInterface');
+        $this->shouldImplement(RoleInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -58,7 +60,7 @@ class RoleSpec extends ObjectBehavior
 
     function it_does_not_have_any_permissions_by_default()
     {
-        $this->getPermissions()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+        $this->getPermissions()->shouldHaveType(ArrayCollection::class);
     }
 
     function it_can_have_specific_permissions(PermissionInterface $permission)

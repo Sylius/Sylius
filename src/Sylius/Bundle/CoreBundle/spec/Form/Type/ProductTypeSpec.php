@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -23,7 +25,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\Core\Model\Product', array('sylius'), $canonicalizer);
+        $this->beConstructedWith(Product::class, array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()
@@ -33,7 +35,7 @@ class ProductTypeSpec extends ObjectBehavior
 
     function it_extends_product_type_from_product_bundle()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductType');
+        $this->shouldHaveType(ProductType::class);
     }
 
     function it_bulids_form(FormBuilderInterface $builder)

@@ -11,6 +11,7 @@
 namespace spec\Sylius\Component\User\Canonicalizer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -24,7 +25,7 @@ class CanonicalizerSpec extends ObjectBehavior
 
     function it_implements_canonicalizer_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Canonicalizer\CanonicalizerInterface');
+        $this->shouldImplement(CanonicalizerInterface::class);
     }
 
     function it_converts_strings_to_lower_case()

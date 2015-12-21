@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process\Builder;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProcessBuilderSpec extends ObjectBehavior
@@ -28,6 +29,6 @@ class ProcessBuilderSpec extends ObjectBehavior
 
     function it_is_process_builder()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface');
+        $this->shouldImplement(ProcessBuilderInterface::class);
     }
 }

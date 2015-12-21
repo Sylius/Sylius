@@ -4,6 +4,7 @@ namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Validator\Constraint;
 
 class InStockSpec extends ObjectBehavior
 {
@@ -14,7 +15,7 @@ class InStockSpec extends ObjectBehavior
 
     function it_is_a_contraint()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\Constraint');
+        $this->shouldHaveType(Constraint::class);
     }
 
     function it_has_validator()

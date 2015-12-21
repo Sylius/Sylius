@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -40,11 +42,11 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
         $modelClass = $metadata->getClass('model');
 
         $reflection = new \ReflectionClass($modelClass);
-        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatableInterface = TranslatableInterface::class;
         $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
         $repositoryClass = $translatable
-            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository'
+            ? TranslatableResourceRepository::class
             : new Parameter('sylius.mongodb_odm.repository.class');
 
         if ($metadata->hasClass('repository')) {

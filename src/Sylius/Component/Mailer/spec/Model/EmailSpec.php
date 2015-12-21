@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Mailer\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Mailer\Model\EmailInterface;
 
 class EmailSpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ class EmailSpec extends ObjectBehavior
 
     function it_implements_Sylius_email_interface()
     {
-        $this->shouldImplement('Sylius\Component\Mailer\Model\EmailInterface');
+        $this->shouldImplement(EmailInterface::class);
     }
 
     function it_does_not_have_id_by_default()
@@ -80,7 +81,7 @@ class EmailSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_does_not_have_last_update_date_by_default()

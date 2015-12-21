@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Configuration;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
@@ -53,7 +54,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
     function it_is_a_controller()
     {
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
+        $this->shouldHaveType(Controller::class);
     }
 
     function it_gets_form_from_class_name(

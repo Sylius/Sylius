@@ -58,7 +58,7 @@ class ImageUploadListener
         if (!$subject instanceof TaxonInterface) {
             throw new UnexpectedTypeException(
                 $subject,
-                'Sylius\Component\Taxonomy\Model\TaxonInterface'
+                TaxonInterface::class
             );
         }
 

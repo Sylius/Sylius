@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
@@ -26,7 +27,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
 

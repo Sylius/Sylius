@@ -24,7 +24,7 @@ class SettingsExtensionSpec extends ObjectBehavior
         $this->beConstructedWith($helper);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Twig\SettingsExtension');
     }

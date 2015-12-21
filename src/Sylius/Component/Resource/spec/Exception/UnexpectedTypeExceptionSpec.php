@@ -18,7 +18,7 @@ class UnexpectedTypeExceptionSpec extends ObjectBehavior
 
     function it_extends_invalid_argument_exception()
     {
-        $this->shouldHaveType('\InvalidArgumentException');
+        $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
     function it_has_a_message()

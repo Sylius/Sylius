@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
 
 /**
@@ -35,7 +36,7 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_implements_Sylius_taxonomy_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonomyInterface');
+        $this->shouldImplement(TaxonomyInterface::class);
     }
 
     function it_has_no_id_by_default()

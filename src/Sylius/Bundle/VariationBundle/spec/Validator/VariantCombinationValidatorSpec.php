@@ -17,6 +17,7 @@ use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 class VariantCombinationValidatorSpec extends ObjectBehavior
@@ -33,7 +34,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
 
     function it_is_a_constraint_validator()
     {
-        $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldImplement(ConstraintValidator::class);
     }
 
     function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)

@@ -16,9 +16,11 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 require_once __DIR__.'/../../../../ResourceBundle/spec/Fixture/Entity/TranslatableFoo.php';
 
@@ -73,7 +75,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
+        $this->shouldImplement(TranslatableResourceRepositoryInterface::class);
     }
 
     public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
@@ -262,7 +264,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
     {
         $this
             ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
+            ->shouldHaveType(Pagerfanta::class)
         ;
     }
 

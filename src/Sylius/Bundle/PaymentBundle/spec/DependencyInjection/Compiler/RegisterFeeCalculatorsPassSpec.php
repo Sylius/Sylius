@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -28,7 +29,7 @@ class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
 
     function it_implements_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes_with_given_container(ContainerBuilder $container, Definition $feeCalculatorDefinition)

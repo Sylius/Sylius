@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Mailer\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -57,7 +58,7 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_email_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Mailer\Provider\EmailProviderInterface');
+        $this->shouldImplement(EmailProviderInterface::class);
     }
 
     function it_looks_for_an_email_via_repository(RepositoryInterface $repository, EmailInterface $email)

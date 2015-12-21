@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 class ChannelSpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ class ChannelSpec extends ObjectBehavior
 
     function it_implements_Sylius_channel_interface()
     {
-        $this->shouldImplement('Sylius\Component\Channel\Model\ChannelInterface');
+        $this->shouldImplement(ChannelInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -76,7 +77,7 @@ class ChannelSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable(\DateTime $date)

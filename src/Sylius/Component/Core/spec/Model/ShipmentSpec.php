@@ -13,22 +13,24 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\Shipment;
 
 class ShipmentSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\Shipment');
     }
 
     function it_should_implement_Sylius_core_shipment_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ShipmentInterface');
+        $this->shouldImplement(ShipmentInterface::class);
     }
 
     function it_should_extend_Sylius_shipment_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\Shipment');
+        $this->shouldHaveType(Shipment::class);
     }
 
     function it_should_not_belong_to_an_order_by_default()

@@ -25,7 +25,7 @@ class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 
     function it_is_an_exception()
     {
-        $this->shouldHaveType('Exception');
+        $this->shouldHaveType(\Exception::class);
     }
 
     function it_is_a_invalid_argument_exception()

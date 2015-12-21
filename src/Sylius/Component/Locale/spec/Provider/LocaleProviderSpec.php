@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Locale\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -37,7 +38,7 @@ class LocaleProviderSpec extends ObjectBehavior
 
     function it_is_Sylius_locale_provider()
     {
-        $this->shouldImplement('Sylius\Component\Locale\Provider\LocaleProviderInterface');
+        $this->shouldImplement(LocaleProviderInterface::class);
     }
 
     function it_returns_available_locales_codes(
