@@ -80,7 +80,6 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                             ->arrayNode('translation')
-                                ->addDefaultsIfNotSet()
                                 ->children()
                                     ->arrayNode('classes')
                                         ->isRequired()
