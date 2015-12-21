@@ -23,6 +23,7 @@ class ImageType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', 'file', array(
+<<<<<<< HEAD
                     'label' => 'sylius.form.image.file',
                 ))
                 ->add('title', 'text', array(
@@ -40,6 +41,17 @@ class ImageType extends AbstractResourceType
         $builder->add('description', 'textarea', array(
             'label' => 'sylius.form.image.description',
             'required' => false
+=======
+                    'label' => 'sylius.form.image.file'
+                ))
+                ->add('title', 'text', array(
+                    'label' => 'sylius.form.image.title',
+                    'required' => false
+                ))
+                ->add('description', 'textarea', array(
+                    'label' => 'sylius.form.image.description',
+                    'required' => false
+>>>>>>> Using fluent setter
         ));
     }
 
