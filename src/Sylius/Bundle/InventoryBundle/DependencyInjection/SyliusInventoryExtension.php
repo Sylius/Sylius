@@ -55,13 +55,11 @@ class SyliusInventoryExtension extends AbstractResourceExtension
             ->addArgument(new Reference('sylius.repository.stock_item'))
             ->addArgument(new Reference('sylius.manager.stock_item'))
             ->addArgument(new Reference('sylius.repository.stock_location'))
-            ->addArgument(new Reference('sylius.repository.stockable'))
-        ;
+            ->addArgument(new Reference('sylius.repository.stockable'));
 
         $container
             ->getDefinition('sylius.factory.stock_movement')
-            ->addArgument(new Reference('sylius.repository.stock_movement'))
-        ;
+            ->addArgument(new Reference('sylius.repository.stock_movement'));
 
         if (isset($config['events'])) {
             $listenerDefinition = $container->getDefinition('sylius.listener.inventory');

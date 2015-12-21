@@ -17,7 +17,6 @@ use Sylius\Component\Inventory\Model\StockLocation;
 
 class StockLocationContext extends DefaultContext
 {
-
     /**
      * @Given /^there are stock locations:$/
      * @Given /^the following stock locations exist:$/
@@ -50,7 +49,7 @@ class StockLocationContext extends DefaultContext
         $manager->persist($stockLocation);
 
         if ($flush) {
-            $manager->flush($stockLocation);
+            $manager->flush();
         }
 
         return $stockLocation;

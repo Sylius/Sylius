@@ -27,9 +27,8 @@ class StockItemType extends AbstractResourceType
         $builder
             ->add('availableOnDemand', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.stock_item.available_on_demand',
-            ))
-        ;
+                'label' => 'sylius.form.stock_item.available_on_demand',
+            ));
     }
 
     /**

@@ -31,8 +31,7 @@ class StockLocationRepository extends EntityRepository implements StockLocationR
             ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 
     /**

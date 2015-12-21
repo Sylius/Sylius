@@ -54,7 +54,7 @@ class InventoryExtension extends \Twig_Extension
      *
      * @param StockableInterface $stockable
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
@@ -66,9 +66,9 @@ class InventoryExtension extends \Twig_Extension
      * stockable and quantity.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {

@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\InventoryBundle\Behat;
 
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Inventory\Model\StockItem;
-use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 
 class StockItemContext extends DefaultContext
 {

@@ -28,13 +28,12 @@ class StockLocationType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
-                'label' => 'sylius.form.stock_location.name'
+                'label' => 'sylius.form.stock_location.name',
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
-                'label'    => 'sylius.form.stock_location.enabled',
-            ))
-        ;
+                'label' => 'sylius.form.stock_location.enabled',
+            ));
     }
 
     /**

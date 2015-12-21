@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\InventoryBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
 
 /**
@@ -31,8 +31,7 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
             ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 
     /**
@@ -45,8 +44,7 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
             ->where($this->getPropertyName('stockable').' = :stockable')
             ->setParameter('stockable', $stockable)
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 
     /**
@@ -62,13 +60,14 @@ class StockItemRepository extends EntityRepository implements StockItemRepositor
 
     /**
      * @param int $locationId
+     *
+     * @return \Pagerfanta\Pagerfanta
      */
     public function createByLocationPaginator($locationId)
     {
         $queryBuilder = $this->getQueryBuilder()
             ->andWhere($this->getPropertyName('location').' = :location')
-            ->setParameter('location', $locationId)
-        ;
+            ->setParameter('location', $locationId);
 
         return $this->getPaginator($queryBuilder);
     }

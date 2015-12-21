@@ -30,8 +30,7 @@ class StockMovementRepository extends EntityRepository implements StockMovementR
             ->leftJoin($this->getPropertyName('stockItem'), 'stockItem')
             ->addSelect('stockItem')
             ->andWhere('stockItem.location = :location')
-            ->setParameter('location', $locationId)
-        ;
+            ->setParameter('location', $locationId);
 
         return $this->getPaginator($queryBuilder);
     }
