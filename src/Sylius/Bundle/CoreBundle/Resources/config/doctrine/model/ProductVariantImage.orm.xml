@@ -17,11 +17,15 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariantImage" table="sylius_product_variant_image">
+<<<<<<< HEAD
         <field name="title" column="title" type="string" nullable="true" />
         <field name="description" column="description" type="text" nullable="true" />
         <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface" inversed-by="images" />
+=======
+>>>>>>> Changed order of fields
         <field name="title" column="title" type="string" nullable="true" />
         <field name="description" column="description" type="text" nullable="true" />
+        <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface" inversed-by="images" />
     </mapped-superclass>
 
 </doctrine-mapping>
