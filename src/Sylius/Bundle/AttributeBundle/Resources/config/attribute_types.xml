@@ -19,7 +19,7 @@
     <parameters>
         <parameter key="sylius.attribute.attribute_type.text.class">Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.validation.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeValidationType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\AttributeType\TextareaAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType</parameter>
@@ -35,11 +35,11 @@
 
         <parameter key="sylius.attribute.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\AttributeType\DatetimeAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.configuration.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeConfigurationType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DatetimeAttributeConfigurationType</parameter>
 
         <parameter key="sylius.attribute.attribute_type.date.class">Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType</parameter>
-        <parameter key="sylius.form.type.attribute_type.configuration.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeConfigurationType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType</parameter>
     </parameters>
 
     <services>
@@ -49,8 +49,8 @@
         <service id="sylius.form.type.attribute_type.text" class="%sylius.form.type.attribute_type.text.class%">
             <tag name="form.type" alias="sylius_attribute_type_text" />
         </service>
-        <service id="sylius.form.type.attribute_type.validation.text" class="%sylius.form.type.attribute_type.validation.text.class%">
-            <tag name="form.type" alias="sylius_attribute_type_validation_text" />
+        <service id="sylius.form.type.attribute_type.configuration.text" class="%sylius.form.type.attribute_type.configuration.text.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_text" />
         </service>
 
         <service id="sylius.attribute.attribute_type.textarea" class="%sylius.attribute.attribute_type.textarea.class%">

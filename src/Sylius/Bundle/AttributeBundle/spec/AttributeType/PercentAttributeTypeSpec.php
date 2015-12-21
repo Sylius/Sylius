@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -25,7 +26,7 @@ class PercentAttributeTypeSpec extends ObjectBehavior
 
     function it_implements_attribute_type_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\AttributeType\AttributeTypeInterface');
+        $this->shouldImplement(AttributeTypeInterface::class);
     }
 
     function its_storage_type_is_text()

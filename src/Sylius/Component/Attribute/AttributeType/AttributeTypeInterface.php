@@ -32,6 +32,7 @@ interface AttributeTypeInterface
     /**
      * @param AttributeValueInterface $attributeValue
      * @param ExecutionContextInterface $context
+     * @param array $configuration
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context);
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration);
 }

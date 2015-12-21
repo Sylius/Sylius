@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -28,13 +29,13 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
 
     function it_implements_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_processes_with_given_container(ContainerBuilder $container, Definition $attributeTypeDefinition)
+    function it_processes_with_given_container(ContainerBuilder $container, Definition $attributeTypeRegistryDefinition)
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
-        $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeDefinition);
+        $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
 
         $attributeTypeServices = array(
             'sylius.form.type.attribute_type.test' => array(
@@ -43,7 +44,7 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
         );
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
 
-        $attributeTypeDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldBeCalled();
+        $attributeTypeRegistryDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldBeCalled();
         $container->setParameter('sylius.attribute.attribute_types', array('test' => 'Test attribute type'))->shouldBeCalled();
 
         $this->process($container);
@@ -55,7 +56,7 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
         $container->getDefinition('sylius.registry.attribute_type')->shouldNotBeCalled();
     }
 
-    function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $attributeTypeDefinition)
+    function it_throws_exception_if_any_attribute_type_has_improper_attributes(ContainerBuilder $container, Definition $attributeTypeDefinition)
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeDefinition);

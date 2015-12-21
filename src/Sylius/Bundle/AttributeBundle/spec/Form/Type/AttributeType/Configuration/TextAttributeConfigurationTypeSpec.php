@@ -12,21 +12,22 @@
 namespace spec\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeValidationTypeSpec extends ObjectBehavior
+class TextAttributeConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeValidationType');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType');
     }
 
     function it_is_abstract_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_validations_form(FormBuilderInterface $formBuilder)
@@ -46,7 +47,7 @@ class TextAttributeValidationTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_validation_text');
+        $this->getName()->shouldReturn('sylius_attribute_type_configuration_text');
     }
 
 }

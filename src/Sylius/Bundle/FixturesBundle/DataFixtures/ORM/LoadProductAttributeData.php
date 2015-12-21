@@ -80,20 +80,13 @@ class LoadProductAttributeData extends DataFixture
     protected function createAttribute($name, $code, $type, array $presentationTranslations)
     {
         /* @var $attribute AttributeInterface */
-        $attribute = $this->getProductAttributeFactory()->createNew();
-
-        /** @var ServiceRegistryInterface $attributeTypeRegistry */
-        $attributeTypeRegistry = $this->get('sylius.registry.attribute_type');
-
-        $attribute->setName($name);
+        $attribute = $this->getProductAttributeFactory()->createTyped($type);
         $attribute->setCode($code);
-        $attribute->setType($type);
-        $attribute->setStorageType($attributeTypeRegistry->get($type)->getStorageType());
 
         foreach ($presentationTranslations as $locale => $presentation) {
             $attribute->setCurrentLocale($locale);
             $attribute->setFallbackLocale($locale);
-            $attribute->setPresentation($presentation);
+            $attribute->setName($name);
         }
 
         $this->setReference('Sylius.Attribute.'.$name, $attribute);

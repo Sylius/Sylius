@@ -32,22 +32,17 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var string
      */
-    protected $type = TextAttributeType::TYPE;
+    protected $code;
 
     /**
      * @var string
      */
-    protected $code;
+    protected $type = TextAttributeType::TYPE;
 
     /**
      * @var array
      */
     protected $configuration = array();
-
-    /**
-     * @var array
-     */
-    protected $validation = array();
 
     /**
      * @var AttributeValueInterface[]|Collection
@@ -95,22 +90,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return $this->translate()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->translate()->setName($name);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCode()
     {
         return $this->code;
@@ -122,6 +101,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->translate()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->translate()->setName($name);
     }
 
     /**
@@ -154,22 +149,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidation()
-    {
-        return $this->validation;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setValidation(array $validation)
-    {
-        $this->validation = $validation;
     }
 
     /**

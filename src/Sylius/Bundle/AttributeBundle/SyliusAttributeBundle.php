@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle;
 
+use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeFactoryPass;
 use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeTypePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -40,6 +41,7 @@ class SyliusAttributeBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterAttributeTypePass());
+        $container->addCompilerPass(new RegisterAttributeFactoryPass());
     }
 
     /**

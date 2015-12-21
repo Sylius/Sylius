@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Product\Model\Attribute;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -54,10 +57,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                     $formTranslationDefinition->addArgument($subjectName);
                 }
 
-                if (isset($resourceConfig['classes']['factory']) && 'attribute' === $resourceName) {
-                    $factoryDefinition = $container->getDefinition('sylius.factory.'.$subjectName.'_attribute');
-                    $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
-                }
+//                if (isset($resourceConfig['classes']['factory']) && 'attribute' === $resourceName) {
+//                    $container->setDefinition()
+//                    $factoryDefinition = $container->getDefinition('sylius.factory.'.$subjectName.'_attribute');
+//                    $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
+//                }
 
                 if (false !== strpos($resourceName, 'value')) {
                     $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$subjectName.'_attribute'));

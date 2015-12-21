@@ -11,27 +11,16 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
+interface AttributeInterface extends CodeAwareInterface, TimestampableInterface, AttributeTranslationInterface
 {
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * @return string
      */
@@ -51,16 +40,6 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
-
-    /**
-     * @return array
-     */
-    public function getValidation();
-
-    /**
-     * @param array $validation
-     */
-    public function setValidation(array $validation);
 
     /**
      * @return AttributeValueInterface[]

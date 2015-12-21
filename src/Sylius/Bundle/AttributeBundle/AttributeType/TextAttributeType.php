@@ -43,17 +43,15 @@ class TextAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context)
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
     {
-        $validationConfiguration = $attributeValue->getAttribute()->getValidation();
-
-        if (!isset($validationConfiguration['min']) || !isset($validationConfiguration['max'])) {
+        if (!isset($configuration['min']) || !isset($configuration['max'])) {
             return;
         }
 
         $value = $attributeValue->getValue();
 
-        foreach ($this->getValidationErrors($context, $value, $validationConfiguration) as $error) {
+        foreach ($this->getValidationErrors($context, $value, $configuration) as $error) {
             $context
                 ->buildViolation($error->getMessage())
                 ->atPath('value')
@@ -77,7 +75,7 @@ class TextAttributeType implements AttributeTypeInterface
             $value,
             new Length(array(
                 'min' => $validationConfiguration['min'],
-                'max' => $validationConfiguration['max']
+                'max' => $validationConfiguration['max'],
             ))
         );
     }

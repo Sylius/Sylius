@@ -122,20 +122,4 @@ class AttributeValueSpec extends ObjectBehavior
 
         $this->getType()->shouldReturn('choice');
     }
-
-    function it_throws_exception_when_trying_to_get_configuration_without_attribute_defined()
-    {
-        $this
-            ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetConfiguration()
-        ;
-    }
-
-    function it_returns_its_attribute_configuration(AttributeInterface $attribute)
-    {
-        $attribute->getConfiguration()->willReturn(array('choices' => array('Red')));
-        $this->setAttribute($attribute);
-
-        $this->getConfiguration()->shouldReturn(array('choices' => array('Red')));
-    }
 }

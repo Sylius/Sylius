@@ -19,7 +19,7 @@
     <class name="Sylius\Component\Attribute\Model\Attribute">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
-            <option name="message">sylius.attribute.code.in_use</option>
+            <option name="message">sylius.attribute.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
         <property name="code">
@@ -57,7 +57,7 @@
     </class>
 
     <class name="Sylius\Component\Attribute\Model\AttributeValue">
-        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeValue">
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue">
             <option name="groups">sylius</option>
         </constraint>
         <property name="attribute">

@@ -55,25 +55,14 @@ class BuildAttributeFormSubscriber implements EventSubscriberInterface
         $attribute = $event->getData();
         $form = $event->getForm();
 
-        $this->addRequiredFields($attribute, $form, 'configuration');
-        $this->addRequiredFields($attribute, $form, 'validation');
-    }
-
-    /**
-     * @param AttributeInterface $attribute
-     * @param FormInterface $form
-     * @param string $fieldsType
-     */
-    private function addRequiredFields(AttributeInterface $attribute, FormInterface $form, $fieldsType)
-    {
         try {
             $requiredFields = $this->factory->createNamed(
-                $fieldsType,
-                'sylius_attribute_type_'.$fieldsType.'_'.$attribute->getType(),
+                'configuration',
+                'sylius_attribute_type_configuration_'.$attribute->getType(),
                 null,
                 array(
                     'auto_initialize' => false,
-                    'label' => 'sylius.attribute_type.'.$fieldsType,
+                    'label' => 'sylius.attribute_type.configuration',
                 )
             );
 

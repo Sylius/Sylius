@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -33,7 +34,7 @@ class TextAttributeTypeSpec extends ObjectBehavior
 
     function it_implements_attribute_type_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\AttributeType\AttributeTypeInterface');
+        $this->shouldImplement(AttributeTypeInterface::class);
     }
 
     function its_storage_type_is_text()
@@ -56,7 +57,6 @@ class TextAttributeTypeSpec extends ObjectBehavior
         ValidatorInterface $validator
     ) {
         $attributeValue->getAttribute()->willReturn($attribute);
-        $attribute->getValidation()->willReturn(array('min' => 2, 'max' => 255));
 
         $attributeValue->getValue()->willReturn('X');
 
@@ -74,6 +74,6 @@ class TextAttributeTypeSpec extends ObjectBehavior
         $constraintViolationBuilder->atPath('value')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
-        $this->validate($attributeValue, $context);
+        $this->validate($attributeValue, $context, array('min' => 2, 'max' => 255));
     }
 }

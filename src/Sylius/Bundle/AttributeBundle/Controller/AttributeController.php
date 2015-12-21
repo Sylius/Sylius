@@ -25,11 +25,16 @@ class AttributeController extends ResourceController
     /**
      * @return Response
      */
-    public function renderAttributeTypesAction()
+    public function getAttributeTypesAction($template)
     {
-        $attributeTypes = $this->get('sylius.registry.attribute_type')->all();
+        $view = $this
+            ->view()
+            ->setTemplate($template)
+            ->setTemplateVar($this->config->getPluralResourceName())
+            ->setData(array('attributeTypes' => $this->get('sylius.registry.attribute_type')->all()))
+        ;
 
-        return $this->render('SyliusAttributeBundle::attributeTypesModal.html.twig', array('attributeTypes' => $attributeTypes));
+        return $this->handleView($view);
     }
 
     /**
@@ -54,15 +59,15 @@ class AttributeController extends ResourceController
      *
      * @return Response
      */
-    public function renderAttributeTypesFormsAction(Request $request)
+    public function renderAttributeValueFormsAction(Request $request)
     {
         $attributeRepository = $this->get('sylius.repository.product_attribute');
         $forms = array();
 
         $choices = ($request->query->has('sylius_product_attribute_choice')) ? $request->query->get('sylius_product_attribute_choice') : array();
 
-        foreach ($choices as $choice) {
-            $attribute = $attributeRepository->find($choice);
+        $attributes = $attributeRepository->findBy(array('id' => $choices));
+        foreach ($attributes as $attribute) {
             $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
 
             $options = array('label' => $attribute->getName());

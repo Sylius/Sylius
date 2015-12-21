@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
+namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeValidationType extends AbstractType
+class DateAttributeConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,8 +25,7 @@ class TextAttributeValidationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', 'number', array('label' => 'sylius.attribute_type_validation.text.min'))
-            ->add('max', 'number', array('label' => 'sylius.attribute_type_validation.text.max'))
+            ->add('format', 'text', array('label' => 'sylius.attribute_type_configuration.date.format'))
         ;
     }
 
@@ -35,6 +34,6 @@ class TextAttributeValidationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_attribute_type_validation_text';
+        return 'sylius_attribute_type_configuration_date';
     }
 }

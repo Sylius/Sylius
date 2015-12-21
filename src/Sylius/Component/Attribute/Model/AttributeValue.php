@@ -136,8 +136,8 @@ class AttributeValue implements AttributeValueInterface
     {
         $this->assertAttributeIsSet();
 
-        $setter = 'set'.ucfirst($this->attribute->getStorageType());
-        $this->$setter($value);
+        $property = $this->attribute->getStorageType();
+        $this->$property = $value;
     }
 
     /**

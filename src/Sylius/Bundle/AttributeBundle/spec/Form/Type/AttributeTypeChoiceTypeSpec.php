@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -31,7 +32,7 @@ class AttributeTypeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_configures_proper_options(OptionsResolver $resolver)

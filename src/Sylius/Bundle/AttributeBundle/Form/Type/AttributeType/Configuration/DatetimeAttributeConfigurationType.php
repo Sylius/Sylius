@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
+namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

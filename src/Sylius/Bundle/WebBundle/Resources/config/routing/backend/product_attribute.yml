@@ -41,11 +41,12 @@ sylius_backend_product_attribute_delete:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_attribute_index
 
-sylius_backend_product_attribute_types:
+sylius_backend_get_attribute_types:
     path: /attribute-types
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_attribute:renderAttributeTypesAction
+        _controller: sylius.controller.product_attribute:getAttributeTypesAction
+        template: SyliusAttributeBundle::attributeTypes.html.twig
 
 sylius_backend_product_attributes:
     path: /attributes
@@ -53,8 +54,8 @@ sylius_backend_product_attributes:
     defaults:
         _controller: sylius.controller.product_attribute:renderAttributesAction
 
-sylius_backend_product_attribute_forms:
+sylius_backend_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_attribute:renderAttributeTypesFormsAction
+        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction

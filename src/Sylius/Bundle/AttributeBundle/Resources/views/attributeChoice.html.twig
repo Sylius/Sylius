@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{ 'sylius.attribute_type.title'|trans }}</h4>
             </div>
             <div class="modal-body">
-                <form action="{{ path('sylius_backend_product_attribute_forms') }}" method="GET" id="attributeChoice">
+                <form action="{{ path('sylius_backend_render_attribute_forms') }}" method="GET" id="attributeChoice">
                     <div class="list-group row">
                         {% for attributeField in form %}
                             {% if attributeField.vars.name != '_token' %}

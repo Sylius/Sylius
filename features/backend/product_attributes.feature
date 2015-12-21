@@ -41,7 +41,7 @@ Feature: Product attributes
 
     Scenario: Accessing attribute creation form without type specified
         Given I am on the product attribute creation page
-        And I should see select "Type" with "Text" option selected
+        Then I should see select "Type" with "Text" option selected
         And I should not be able to edit "Type" select
 
     Scenario: Creating new attribute

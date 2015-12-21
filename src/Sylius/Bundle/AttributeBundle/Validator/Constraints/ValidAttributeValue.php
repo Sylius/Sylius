@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValue extends Constraint
+class ValidAttributeValue extends Constraint
 {
     /**
      * {@inheritdoc}
@@ -31,6 +31,6 @@ class AttributeValue extends Constraint
      */
     public function validatedBy()
     {
-        return 'attribute_value_validator';
+        return 'sylius_valid_attribute_value_validator';
     }
 }

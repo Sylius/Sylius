@@ -13,11 +13,9 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,7 +26,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory, EntityRepository $attributeRepository)
+    function let(FormFactoryInterface $formFactory, RepositoryInterface $attributeRepository)
     {
         $this->beConstructedWith($formFactory, 'server', $attributeRepository);
     }

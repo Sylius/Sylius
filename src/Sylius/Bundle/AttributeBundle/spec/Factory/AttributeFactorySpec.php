@@ -17,6 +17,8 @@ use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
@@ -24,9 +26,9 @@ use Sylius\Component\Translation\Provider\LocaleProviderInterface;
  */
 class AttributeFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, LocaleProviderInterface $localeProvider, ServiceRegistryInterface $attributeTypesRegistry)
+    function let(TranslatableFactory $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
-        $this->beConstructedWith($factory, $localeProvider, $attributeTypesRegistry);
+        $this->beConstructedWith($factory, $attributeTypesRegistry);
     }
 
     function it_is_initializable()
@@ -34,19 +36,14 @@ class AttributeFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Factory\AttributeFactory');
     }
 
-    function it_is_translatable_factory()
+    function it_implements_translatable_factory_interface()
     {
-        $this->shouldHaveType('Sylius\Component\Translation\Factory\TranslatableFactory');
+        $this->shouldImplement(TranslatableFactoryInterface::class);
     }
 
-    function it_creates_new_attribute($attributeTypesRegistry, $factory, $localeProvider, Attribute $attribute, AttributeTypeInterface $attributeType)
+    function it_creates_new_attribute($attributeTypesRegistry, $factory, Attribute $attribute, AttributeTypeInterface $attributeType)
     {
         $factory->createNew()->willReturn($attribute);
-        $localeProvider->getCurrentLocale()->willReturn('en_US');
-        $localeProvider->getFallbackLocale()->willReturn('en_US');
-
-        $attribute->setCurrentLocale('en_US')->shouldBeCalled();
-        $attribute->setFallbackLocale('en_US')->shouldBeCalled();
 
         $attributeType->getStorageType()->willReturn('text');
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
@@ -57,14 +54,9 @@ class AttributeFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($attribute);
     }
 
-    function it_creates_typed_attribute($attributeTypesRegistry, $factory, $localeProvider, Attribute $typedAttribute, AttributeTypeInterface $attributeType)
+    function it_creates_typed_attribute($attributeTypesRegistry, $factory, Attribute $typedAttribute, AttributeTypeInterface $attributeType)
     {
         $factory->createNew()->willReturn($typedAttribute);
-        $localeProvider->getCurrentLocale()->willReturn('en_US');
-        $localeProvider->getFallbackLocale()->willReturn('en_US');
-
-        $typedAttribute->setCurrentLocale('en_US')->shouldBeCalled();
-        $typedAttribute->setFallbackLocale('en_US')->shouldBeCalled();
 
         $attributeType->getStorageType()->willReturn('datetime');
         $attributeTypesRegistry->get('datetime')->willReturn($attributeType);

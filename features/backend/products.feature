@@ -11,7 +11,7 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following attributes:
-            | name               | type     | validation    |
+            | name               | type     | configuration |
             | T-Shirt fabric     | text     | min:2,max:255 |
             | T-Shirt fare trade | checkbox |               |
             | Size               | integer  |               |
@@ -159,11 +159,11 @@ Feature: Products
     @javascript
     Scenario: Modifying product attributes
         Given I am editing product "Super T-Shirt"
-        When I go to "Attributes" tab
-        And I delete "T-Shirt fabric" attribute
+        And I go to "Attributes" tab
+        When I delete "T-Shirt fabric" attribute
         And I add "Size" attribute
         And I fill in "Size" with "100"
-        When I press "Save changes"
+        And I press "Save changes"
         Then I should be on the page of product "Super T-Shirt"
         And I should see "100"
         And I should not see "Wool"

@@ -17,11 +17,11 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValueSpec extends ObjectBehavior
+class ValidAttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeValue');
+        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue');
     }
     
     function it_is_constraint()
@@ -36,6 +36,6 @@ class AttributeValueSpec extends ObjectBehavior
 
     function it_is_validated_by_specific_validator()
     {
-        $this->validatedBy()->shouldReturn('attribute_value_validator');
+        $this->validatedBy()->shouldReturn('sylius_valid_attribute_value_validator');
     }
 }

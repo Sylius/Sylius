@@ -42,8 +42,5 @@ class DatetimeAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context)
-    {
-        return new ConstraintViolationList();
-    }
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration) { }
 }

@@ -384,8 +384,6 @@ class WebContext extends DefaultContext
         $addAttributesButton->press();
 
         $this->waitForModalToDisappear($attributesModalContainer);
-
-        $this->getSession()->wait(300);
     }
 
     /**

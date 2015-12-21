@@ -11,9 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,7 +26,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     /**
      * @var FormFactoryInterface
      */
-    protected $factory;
+    protected $formFactory;
 
     /**
      * @var string
@@ -35,20 +34,20 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     protected $subjectName;
 
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
-    protected $attributesRepository;
+    protected $attributeRepository;
 
     /**
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface $formFactory
      * @param string $subjectName
-     * @param EntityRepository $attributesRepository
+     * @param RepositoryInterface $attributeRepository
      */
-    public function __construct(FormFactoryInterface $factory, $subjectName, EntityRepository $attributesRepository)
+    public function __construct(FormFactoryInterface $formFactory, $subjectName, RepositoryInterface $attributeRepository)
     {
-        $this->factory = $factory;
+        $this->formFactory = $formFactory;
         $this->subjectName = $subjectName;
-        $this->attributesRepository = $attributesRepository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
@@ -72,7 +71,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
         $options = array('label' => false, 'auto_initialize' => false);
 
         if (null === $attributeValue) {
-            $form->add($this->factory->createNamed('value', 'sylius_attribute_type_text', null, $options));
+            $form->add($this->formFactory->createNamed('value', 'sylius_attribute_type_text', null, $options));
 
             return;
         }
@@ -81,7 +80,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
         $options['label'] = $attribute->getName();
 
         $form
-            ->add($this->factory->createNamed('value', 'sylius_attribute_type_'.$attribute->getType(), $attributeValue->getValue(), $options))
+            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$attribute->getType(), $attributeValue->getValue(), $options))
         ;
     }
 
@@ -93,18 +92,18 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
         $attributeValue = $event->getData();
         $form = $event->getForm();
 
-        if (empty($attributeValue) || !array_key_exists('value', $attributeValue)) {
+        if (empty($attributeValue) || !isset($attributeValue['value'])) {
             return;
         }
 
-        $attribute = $this->attributesRepository->find($attributeValue['attribute']);
+        $attribute = $this->attributeRepository->find($attributeValue['attribute']);
         $type = $attribute->getType();
         $storageType = $attribute->getStorageType();
 
         $options = array('auto_initialize' => false);
 
         $form
-            ->add($this->factory->createNamed('value', 'sylius_attribute_type_'.$type, $this->provideAttributeValue($storageType, $attributeValue['value']), $options))
+            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$type, $this->provideAttributeValue($storageType, $attributeValue['value']), $options))
         ;
     }
 

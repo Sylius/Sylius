@@ -13,7 +13,8 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
+use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -47,18 +48,17 @@ class AttributeTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeFormSubscriber'))
+            ->addEventSubscriber(Argument::type(BuildAttributeFormSubscriber::class))
+            ->willReturn($builder)
+        ;
+        
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('code', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

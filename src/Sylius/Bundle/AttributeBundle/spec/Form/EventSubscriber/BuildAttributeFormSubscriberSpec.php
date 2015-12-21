@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -35,7 +36,7 @@ class BuildAttributeFormSubscriberSpec extends ObjectBehavior
 
     function it_implements_event_subscriber_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_adds_configuration_and_validation_field_if_necessary(
@@ -43,7 +44,6 @@ class BuildAttributeFormSubscriberSpec extends ObjectBehavior
         AttributeInterface $attribute,
         Form $form,
         Form $configurationForm,
-        Form $validationForm,
         FormEvent $event
     ) {
         $event->getData()->willReturn($attribute);
@@ -57,16 +57,6 @@ class BuildAttributeFormSubscriberSpec extends ObjectBehavior
             null,
             Argument::type('array')
         )->willReturn($configurationForm);
-
-        $formFactory->createNamed(
-            'validation',
-            'sylius_attribute_type_validation_datetime',
-            null,
-            Argument::type('array')
-        )->willReturn($validationForm);
-
-        $form->add($configurationForm)->shouldBeCalled();
-        $form->add($validationForm)->shouldBeCalled();
 
         $this->addConfigurationFields($event);
     }
@@ -85,13 +75,6 @@ class BuildAttributeFormSubscriberSpec extends ObjectBehavior
         $formFactory->createNamed(
             'configuration',
             'sylius_attribute_type_configuration_text',
-            null,
-            Argument::type('array')
-        )->willThrow('Symfony\Component\Form\Exception\InvalidArgumentException');
-
-        $formFactory->createNamed(
-            'validation',
-            'sylius_attribute_type_validation_text',
             null,
             Argument::type('array')
         )->willThrow('Symfony\Component\Form\Exception\InvalidArgumentException');

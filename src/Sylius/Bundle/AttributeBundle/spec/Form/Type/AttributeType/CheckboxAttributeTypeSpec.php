@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +28,7 @@ class CheckboxAttributeTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_has_parent()

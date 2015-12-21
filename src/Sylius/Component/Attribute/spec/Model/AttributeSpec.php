@@ -44,6 +44,12 @@ class AttributeSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function its_code_is_mutable()
+    {
+        $this->setCode('testCode');
+        $this->getCode()->shouldReturn('testCode');
+    }
+
     function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
@@ -53,12 +59,6 @@ class AttributeSpec extends ObjectBehavior
     {
         $this->setName('T-Shirt collection');
         $this->getName()->shouldReturn('T-Shirt collection');
-    }
-
-    function its_code_is_mutable()
-    {
-        $this->setCode('testCode');
-        $this->getCode()->shouldReturn('testCode');
     }
 
     function it_returns_name_when_converted_to_string()
@@ -87,12 +87,6 @@ class AttributeSpec extends ObjectBehavior
     {
         $this->setConfiguration(array('format' => 'd/m/Y'));
         $this->getConfiguration()->shouldReturn(array('format' => 'd/m/Y'));
-    }
-
-    function its_validation_options_are_mutable()
-    {
-        $this->setValidation(array('min' => 2, 'max' => 255));
-        $this->getValidation()->shouldReturn(array('min' => 2, 'max' => 255));
     }
 
     function its_storage_type_is_mutable()
