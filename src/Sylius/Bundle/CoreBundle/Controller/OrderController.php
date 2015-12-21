@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Gedmo\Loggable\Entity\LogEntry;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -31,28 +32,26 @@ class OrderController extends ResourceController
      */
     public function indexByCustomerAction(Request $request, $id)
     {
-        $customer = $this->get('sylius.repository.customer')->findForDetailsPage($id);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $customer = $this->container->get('sylius.repository.customer')->findForDetailsPage($id);
 
         if (!$customer) {
             throw new NotFoundHttpException('Requested customer does not exist.');
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByCustomerPaginator($customer, $this->config->getSorting())
-        ;
+        $paginator = $this->repository->createByCustomerPaginator($customer, $configuration->getSorting());
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
-        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
         // Fetch and cache deleted orders
-        $entityManager = $this->get('doctrine.orm.entity_manager');
+        $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->getFilters()->disable('softdeleteable');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
             'customer' => $customer,
             'orders'   => $paginator
         ));
@@ -67,16 +66,17 @@ class OrderController extends ResourceController
      */
     public function releaseInventoryAction(Request $request)
     {
-        $order = $this->findOr404($request);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $order = $this->findOr404($configuration);
 
-        $this->get('sm.factory')
+        $this->container->get('sm.factory')
             ->get($order, OrderTransitions::GRAPH)
             ->apply(OrderTransitions::SYLIUS_RELEASE)
         ;
 
-        $this->domainManager->update($order);
+        $this->manager->flush();
 
-        return $this->redirectHandler->redirectToReferer();
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /**
@@ -90,8 +90,9 @@ class OrderController extends ResourceController
      */
     public function historyAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         /** @var $order OrderInterface */
-        $order = $this->findOr404($request);
+        $order = $this->findOr404($configuration);
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
@@ -100,9 +101,8 @@ class OrderController extends ResourceController
             $items[] = $repository->getLogEntries($item);
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('history.html'))
             ->setData(array(
                 'order' => $order,
                 'logs'  => array(
@@ -114,6 +114,6 @@ class OrderController extends ResourceController
             ))
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($view);
     }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use FOS\RestBundle\View\View;
+use Gedmo\Loggable\Entity\LogEntry;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductController;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
