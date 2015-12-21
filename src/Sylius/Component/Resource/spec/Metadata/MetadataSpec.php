@@ -13,6 +13,10 @@ namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Component\Product\Model\Product;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,10 +31,10 @@ class MetadataSpec extends ObjectBehavior
                 'driver' => 'doctrine/orm',
                 'templates' => 'SyliusProductBundle:Product',
                 'classes' => array(
-                    'model' => 'Sylius\Component\Product\Model\Product',
+                    'model' => Product::class,
                     'form' => array(
-                        'default' => 'Sylius\Bundle\ProductBundle\Form\Type\ProductType',
-                        'choice' => 'Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType',
+                        'default' => ProductType::class,
+                        'choice' => ResourceChoiceType::class,
                         'autocomplete' => 'Sylius\Bundle\ResourceBundle\Type\ResourceAutocompleteType'
                     )
                 )
@@ -45,7 +49,7 @@ class MetadataSpec extends ObjectBehavior
     
     function it_implements_metadata_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Metadata\MetadataInterface');
+        $this->shouldImplement(MetadataInterface::class);
     }
 
     function it_has_alias()
@@ -99,7 +103,7 @@ class MetadataSpec extends ObjectBehavior
 
     function it_has_access_to_specific_classes()
     {
-        $this->getClass('model')->shouldReturn('Sylius\Component\Product\Model\Product');
+        $this->getClass('model')->shouldReturn(Product::class);
     }
 
     function it_throws_an_exception_when_class_does_not_exist()

@@ -28,7 +28,7 @@ class OrderItemSpec extends ObjectBehavior
 
     function it_implements_Sylius_order_item_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\OrderItemInterface');
+        $this->shouldImplement(OrderItemInterface::class);
     }
 
     function it_implements_Sylius_adjustable_interface()

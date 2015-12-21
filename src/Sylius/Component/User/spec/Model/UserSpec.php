@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  *
@@ -27,7 +28,7 @@ class UserSpec extends ObjectBehavior
 
     function it_implements_user_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
+        $this->shouldImplement(UserInterface::class);
     }
 
     function it_has_no_password_requested_at_date_by_default()

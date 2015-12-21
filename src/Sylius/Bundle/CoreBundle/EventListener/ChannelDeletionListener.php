@@ -48,7 +48,7 @@ class ChannelDeletionListener
         if (!$channel instanceof ChannelInterface) {
             throw new UnexpectedTypeException(
                 $channel,
-                'Sylius\Component\Channel\Model\ChannelInterface'
+                ChannelInterface::class
             );
         }
 

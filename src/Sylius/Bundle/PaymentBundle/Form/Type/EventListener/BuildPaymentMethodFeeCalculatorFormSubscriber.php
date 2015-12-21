@@ -70,7 +70,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
         }
 
         if (!$paymentMethod instanceof PaymentMethodInterface) {
-            throw new UnexpectedTypeException($paymentMethod, 'Sylius\Component\Payment\Model\PaymentMethodInterface');
+            throw new UnexpectedTypeException($paymentMethod, PaymentMethodInterface::class);
         }
 
         $this->addConfigurationFields($event->getForm(), $paymentMethod->getFeeCalculator(), $paymentMethod->getFeeCalculatorConfiguration());

@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\VariantInterface;
 
 /**
@@ -37,7 +38,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\ProductInterface');
+        $this->shouldImplement(ProductInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -91,7 +92,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_initializes_availability_date_by_default()
     {
-        $this->getAvailableOn()->shouldHaveType('DateTime');
+        $this->getAvailableOn()->shouldHaveType(\DateTime::class);
     }
 
     function it_is_available_by_default()
@@ -233,7 +234,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable()

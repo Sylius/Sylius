@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\RbacBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -31,7 +32,7 @@ class RbacHelperSpec extends ObjectBehavior
 
     function it_is_a_Twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_uses_authorization_checker_to_verify_permissions($authorizationChecker)

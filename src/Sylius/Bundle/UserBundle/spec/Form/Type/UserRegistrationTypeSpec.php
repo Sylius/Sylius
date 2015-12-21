@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\User;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,7 +25,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\User', array('sylius'), $canonicalizer);
+        $this->beConstructedWith(User::class, array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()
@@ -33,7 +35,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
 
     function it_extends_abstract_resource_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_has_name()

@@ -414,7 +414,7 @@ class Order extends Cart implements OrderInterface
         }
 
         if (!$coupon instanceof BaseCouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         if (!$this->hasPromotionCoupon($coupon)) {
@@ -434,7 +434,7 @@ class Order extends Cart implements OrderInterface
         }
 
         if (!$coupon instanceof BaseCouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         if ($this->hasPromotionCoupon($coupon)) {

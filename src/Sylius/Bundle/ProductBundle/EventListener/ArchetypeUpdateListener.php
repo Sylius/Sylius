@@ -60,7 +60,7 @@ class ArchetypeUpdateListener
         $archetype = $event->getSubject();
 
         if (!$archetype instanceof ArchetypeInterface) {
-            throw new UnexpectedTypeException($archetype, 'Sylius\Component\Archetype\Model\ArchetypeInterface');
+            throw new UnexpectedTypeException($archetype, ArchetypeInterface::class);
         }
 
         $products = $this->productRepository->findBy(array('archetype' => $archetype));

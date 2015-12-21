@@ -15,6 +15,7 @@ use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
@@ -36,7 +37,7 @@ class ImageUploaderSpec extends ObjectBehavior
 
     function it_is_Sylius_image_uploader()
     {
-        $this->shouldImplement('Sylius\Component\Core\Uploader\ImageUploaderInterface');
+        $this->shouldImplement(ImageUploaderInterface::class);
     }
 
     function it_uploads_image($filesystem, $image)

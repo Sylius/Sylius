@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -39,12 +41,12 @@ class BuildActionFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber');
+        $this->shouldHaveType(BuildActionFormSubscriber::class);
     }
 
     function it_is_configuration_subscriber()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber');
+        $this->shouldImplement(AbstractConfigurationSubscriber::class);
     }
 
     function it_subscribes_evetns()

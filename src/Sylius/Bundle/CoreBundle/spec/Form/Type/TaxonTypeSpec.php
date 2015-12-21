@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
+use Symfony\Component\Form\FormTypeInterface;
 
 class TaxonTypeSpec extends ObjectBehavior
 {
@@ -20,18 +22,18 @@ class TaxonTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Taxon', array());
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\TaxonType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_taxon_base_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType');
+        $this->shouldHaveType(TaxonType::class);
     }
 }

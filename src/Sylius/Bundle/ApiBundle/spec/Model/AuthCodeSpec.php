@@ -2,6 +2,7 @@
 
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
+use FOS\OAuthServerBundle\Entity\AuthCode;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,6 +15,6 @@ class AuthCodeSpec extends ObjectBehavior
 
     function it_is_a_auth_code()
     {
-        $this->shouldHaveType('FOS\OAuthServerBundle\Entity\AuthCode');
+        $this->shouldHaveType(AuthCode::class);
     }
 }

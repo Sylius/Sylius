@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ChannelBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
  * Channels bundle.
@@ -37,7 +38,7 @@ class SyliusChannelBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Channel\Model\ChannelInterface' => 'sylius.model.channel.class',
+            ChannelInterface::class => 'sylius.model.channel.class',
         );
     }
 

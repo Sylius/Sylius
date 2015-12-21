@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 
 /**
@@ -24,7 +25,7 @@ class ConfigurationFactorySpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             $parametersParser,
-            '\Sylius\Bundle\ResourceBundle\Controller\Configuration',
+            Configuration::class,
             array('paginate' => 10)
         );
     }
@@ -43,6 +44,6 @@ class ConfigurationFactorySpec extends ObjectBehavior
             'SyliusWebBundle:Product',
             'twig',
             array('paginate' => 10)
-        )->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        )->shouldHaveType(Configuration::class);
     }
 }

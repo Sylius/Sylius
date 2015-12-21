@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Locale\Context;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Storage\StorageInterface;
 
 /**
@@ -34,7 +35,7 @@ class LocaleContextSpec extends ObjectBehavior
 
     function it_is_Sylius_locale_context()
     {
-        $this->shouldImplement('Sylius\Component\Locale\Context\LocaleContextInterface');
+        $this->shouldImplement(LocaleContextInterface::class);
     }
 
     function it_gets_default_locale()

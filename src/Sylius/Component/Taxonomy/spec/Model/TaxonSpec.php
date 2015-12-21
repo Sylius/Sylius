@@ -34,7 +34,7 @@ class TaxonSpec extends ObjectBehavior
 
     function it_implements_Sylius_taxon_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonInterface');
+        $this->shouldImplement(TaxonInterface::class);
     }
 
     function it_has_no_id_by_default()

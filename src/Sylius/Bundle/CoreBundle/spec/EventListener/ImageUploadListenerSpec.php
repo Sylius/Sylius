@@ -66,7 +66,7 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($uploader);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringUploadProductImage($event)
         ;
     }

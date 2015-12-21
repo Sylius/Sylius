@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Component\Core\Model\Taxon;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,7 +30,7 @@ class ProductType extends BaseProductType
         $builder
             ->add('taxons', 'entity', array(
                 'multiple' => true,
-                'class' => 'Sylius\Component\Core\Model\Taxon'
+                'class' => Taxon::class
             ))
             ->add('price', 'sylius_money', array(
                 'property_path' => 'masterVariant.price'

@@ -4,7 +4,9 @@ namespace spec\Sylius\Bundle\ApiBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use FOS\OAuthServerBundle\Entity\ClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
+use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -23,12 +25,12 @@ class ClientManagerSpec extends ObjectBehavior
 
     function it_extends_fos_oauth_server_client_manager()
     {
-        $this->shouldHaveType('FOS\OAuthServerBundle\Entity\ClientManager');
+        $this->shouldHaveType(ClientManager::class);
     }
 
     function it_implements_fos_oauth_server_client_manager_interface()
     {
-        $this->shouldImplement('FOS\OAuthServerBundle\Model\ClientManagerInterface');
+        $this->shouldImplement(ClientManagerInterface::class);
     }
 
     function it_finds_client_by_public_id(ClientInterface $client, $repository)

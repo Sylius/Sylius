@@ -13,6 +13,7 @@ namespace Sylius\Bundle\MailerBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Mailer\Model\EmailInterface;
 
 /**
  * Mailer and e-mails management.
@@ -37,7 +38,7 @@ class SyliusMailerBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Mailer\Model\EmailInterface' => 'sylius.model.email.class',
+            EmailInterface::class => 'sylius.model.email.class',
         );
     }
 

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -37,7 +38,7 @@ class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 
     function it_is_a_compiler_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_should_resolve_entities(ContainerBuilder $container, Definition $resolverDefinition)

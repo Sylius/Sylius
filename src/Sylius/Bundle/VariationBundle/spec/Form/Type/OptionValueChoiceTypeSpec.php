@@ -4,6 +4,8 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Variation\Model\OptionInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OptionValueChoiceTypeSpec extends ObjectBehavior
@@ -20,7 +22,7 @@ class OptionValueChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_options(OptionsResolver $resolver)
@@ -32,7 +34,7 @@ class OptionValueChoiceTypeSpec extends ObjectBehavior
         ))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->addAllowedTypes(array(
-            'option' => 'Sylius\Component\Variation\Model\OptionInterface'
+            'option' => OptionInterface::class
         ))->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);

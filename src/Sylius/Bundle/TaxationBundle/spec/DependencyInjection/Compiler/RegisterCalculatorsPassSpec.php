@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -26,7 +27,7 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
 
     function it_is_a_compiler_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator)

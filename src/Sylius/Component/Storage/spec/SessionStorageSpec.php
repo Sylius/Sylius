@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Storage;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionStorageSpec extends ObjectBehavior
@@ -28,7 +29,7 @@ class SessionStorageSpec extends ObjectBehavior
 
     function it_implements_Sylius_storage_interface()
     {
-        $this->shouldImplement('Sylius\Component\Storage\StorageInterface');
+        $this->shouldImplement(StorageInterface::class);
     }
 
     function it_gets_default_data_if_session_was_not_started($session)

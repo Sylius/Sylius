@@ -19,6 +19,7 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Currency\Context\CurrencyContext as SyliusCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
@@ -45,7 +46,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_extends_Sylius_currency_context()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Context\CurrencyContext');
+        $this->shouldHaveType(SyliusCurrencyContext::class);
     }
 
     function it_gets_default_currency()

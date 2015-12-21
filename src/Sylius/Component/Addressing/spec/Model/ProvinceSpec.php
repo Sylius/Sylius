@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,7 +27,7 @@ class ProvinceSpec extends ObjectBehavior
 
     function it_implements_Sylius_country_province_interface()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Model\ProvinceInterface');
+        $this->shouldImplement(ProvinceInterface::class);
     }
 
     function it_has_no_id_by_default()

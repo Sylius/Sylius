@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\SearchBundle\Indexer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Kernel\Kernel;
+use Sylius\Bundle\SearchBundle\Indexer\IndexerInterface;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -36,6 +37,6 @@ class ElasticsearchIndexerSpec extends ObjectBehavior
 
     function it_implements_the_indexer_interface_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SearchBundle\Indexer\IndexerInterface');
+        $this->shouldImplement(IndexerInterface::class);
     }
 }

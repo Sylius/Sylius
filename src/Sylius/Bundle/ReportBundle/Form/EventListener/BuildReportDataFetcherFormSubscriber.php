@@ -63,7 +63,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
         }
 
         if (!$report instanceof ReportInterface) {
-            throw new UnexpectedTypeException($report, 'Sylius\Component\Report\Model\ReportInterface');
+            throw new UnexpectedTypeException($report, ReportInterface::class);
         }
 
         $this->addConfigurationFields($event->getForm(), $report->getDataFetcher(), $report->getDataFetcherConfiguration());

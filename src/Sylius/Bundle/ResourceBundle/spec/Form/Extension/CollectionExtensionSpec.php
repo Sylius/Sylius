@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -26,7 +27,7 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_extends_abstract_type_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
+        $this->shouldHaveType(AbstractTypeExtension::class);
     }
 
     function it_should_have_collection_as_extended_type()

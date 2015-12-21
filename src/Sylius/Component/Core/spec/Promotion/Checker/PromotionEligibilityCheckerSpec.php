@@ -30,7 +30,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->beConstructedWith($subjectRepository, $registry, $dispatcher);
     }
 
-    public function it_should_be_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker');
     }

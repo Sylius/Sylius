@@ -50,7 +50,7 @@ class MailerListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                'Sylius\Component\Core\Model\CustomerInterface'
+                CustomerInterface::class
             );
         }
 

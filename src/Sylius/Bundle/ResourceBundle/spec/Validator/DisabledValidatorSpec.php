@@ -6,6 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Validator\Constraints;
 use Sylius\Component\Resource\Model\ToggleableInterface;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
@@ -27,7 +28,7 @@ class DisabledValidatorSpec extends ObjectBehavior
 
     function it_is_constraint_validator()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\ConstraintValidatorInterface');
+        $this->shouldHaveType(ConstraintValidatorInterface::class);
     }
 
     function it_does_not_apply_to_null_values(ExecutionContextInterface $context, Constraints\Disabled $constraint)
@@ -44,7 +45,7 @@ class DisabledValidatorSpec extends ObjectBehavior
     ) {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->shouldThrow('\InvalidArgumentException')->duringValidate($subject, $constraint);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringValidate($subject, $constraint);
     }
 
     function it_adds_violation_if_subject_is_enabled(

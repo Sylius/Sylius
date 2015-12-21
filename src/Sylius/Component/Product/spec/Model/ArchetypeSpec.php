@@ -28,7 +28,7 @@ class ArchetypeSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_archetype_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\ArchetypeInterface');
+        $this->shouldImplement(ArchetypeInterface::class);
     }
 
     function it_has_no_id_by_default()

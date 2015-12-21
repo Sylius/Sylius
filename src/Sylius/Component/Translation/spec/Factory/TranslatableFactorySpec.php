@@ -13,12 +13,13 @@ namespace spec\Sylius\Component\Translation\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use spec\Sylius\Component\Translation\Fixtures\SampleNonTranslatableResource;
 use spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';
 require_once __DIR__.'/../Fixtures/SampleNonTranslatableResource.php';
@@ -42,7 +43,7 @@ class TranslatableFactorySpec extends ObjectBehavior
     
     function it_implements_translatable_factory_interface()
     {
-        $this->shouldImplement('Sylius\Component\Translation\Factory\TranslatableFactoryInterface');
+        $this->shouldImplement(TranslatableFactoryInterface::class);
     }
 
     function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, SampleNonTranslatableResource $resource)

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,7 +32,7 @@ class PaymentMethodSpec extends ObjectBehavior
 
     function it_implements_sylius_payment_method_interface()
     {
-        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentMethodInterface');
+        $this->shouldImplement(PaymentMethodInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -108,7 +109,7 @@ class PaymentMethodSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_has_no_last_update_date_by_default()

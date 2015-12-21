@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CartBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 
 /**
  * Flexible shopping cart system for Symfony2 ecommerce applications.
@@ -45,8 +47,8 @@ class SyliusCartBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Cart\Model\CartInterface'     => 'sylius.model.cart.class',
-            'Sylius\Component\Cart\Model\CartItemInterface' => 'sylius.model.cart_item.class',
+            CartInterface::class     => 'sylius.model.cart.class',
+            CartItemInterface::class => 'sylius.model.cart_item.class',
         );
     }
 

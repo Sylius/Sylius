@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Currency\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -30,7 +31,7 @@ class CurrencyConverterSpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_converter_interface()
     {
-        $this->shouldImplement('Sylius\Component\Currency\Converter\CurrencyConverterInterface');
+        $this->shouldImplement(CurrencyConverterInterface::class);
     }
 
     function it_converts_to_any_currency(CurrencyInterface $currency, $currencyRepository)

@@ -45,7 +45,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
 
         foreach ($shipments as $shipment) {
             if (!$shipment instanceof ShipmentInterface) {
-                throw new UnexpectedTypeException($shipment, 'Sylius\Component\Shipping\Model\ShipmentInterface');
+                throw new UnexpectedTypeException($shipment, ShipmentInterface::class);
             }
 
             $this->factory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition, true);

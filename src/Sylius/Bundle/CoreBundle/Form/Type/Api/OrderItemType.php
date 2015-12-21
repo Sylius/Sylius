@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
+use Sylius\Component\Core\Model\ProductVariant;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -30,7 +31,7 @@ class OrderItemType extends BaseOrderItemType
 
         $builder
             ->add('variant', 'entity_hidden', array(
-                'data_class' => 'Sylius\Component\Core\Model\ProductVariant'
+                'data_class' => ProductVariant::class
             ))
         ;
     }

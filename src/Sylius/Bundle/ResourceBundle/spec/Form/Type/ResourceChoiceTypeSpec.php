@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResourceChoiceTypeSpec extends ObjectBehavior
@@ -35,7 +36,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_parent_type_for_orm_driver()

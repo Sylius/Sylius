@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Templating\Helper\Helper;
 
 class CartHelperSpec extends ObjectBehavior
 {
@@ -37,7 +38,7 @@ class CartHelperSpec extends ObjectBehavior
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)

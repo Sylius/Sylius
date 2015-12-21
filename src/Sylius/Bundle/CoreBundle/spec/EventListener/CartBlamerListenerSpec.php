@@ -19,6 +19,7 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /*
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -43,7 +44,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         $cartManager->persist($cart)->shouldNotBeCalled();
         $cartManager->flush()->shouldNotBeCalled();
 
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->during('blame', array($userEvent));
+        $this->shouldThrow(UnexpectedTypeException::class)->during('blame', array($userEvent));
     }
 
     function it_blames_cart_on_user($cartManager, $cartProvider, OrderInterface $cart, UserEvent $userEvent, UserInterface $user, CustomerInterface $customer)

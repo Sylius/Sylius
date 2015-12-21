@@ -14,8 +14,10 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,7 +36,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_delegating_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface');
+        $this->shouldImplement(DelegatingCalculatorInterface::class);
     }
 
     function it_should_complain_if_shipment_has_no_method_defined(ShipmentInterface $shipment)
@@ -42,7 +44,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $shipment->getMethod()->willReturn(null);
 
         $this
-            ->shouldThrow('Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException')
+            ->shouldThrow(UndefinedShippingMethodException::class)
             ->duringCalculate($shipment)
         ;
     }

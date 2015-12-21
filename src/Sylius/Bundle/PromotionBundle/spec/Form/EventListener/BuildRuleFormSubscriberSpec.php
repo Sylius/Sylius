@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -40,12 +42,12 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber');
+        $this->shouldHaveType(BuildRuleFormSubscriber::class);
     }
 
     function it_is_configuration_subscriber()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber');
+        $this->shouldImplement(AbstractConfigurationSubscriber::class);
     }
 
     function it_subscribes_evetns()

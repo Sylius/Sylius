@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Currency\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 class CurrencySpec extends ObjectBehavior
 {
@@ -22,12 +24,12 @@ class CurrencySpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_interface()
     {
-        $this->shouldImplement('Sylius\Component\Currency\Model\CurrencyInterface');
+        $this->shouldImplement(CurrencyInterface::class);
     }
 
     function it_implements_Sylius_toggleable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -91,7 +93,7 @@ class CurrencySpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable()

@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
@@ -39,7 +40,7 @@ class ParentArchetypeListenerSpec extends ObjectBehavior
 
     function it_implements_event_subscriber_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_is_subscribed_to_pre_set_data_form_event()
@@ -50,7 +51,7 @@ class ParentArchetypeListenerSpec extends ObjectBehavior
     function it_throws_exception_if_add_event_subscriber_parameter_is_not_an_instance_of_archetype_interface(FormEvent $event)
     {
         $event->getData()->willReturn('badObject');
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Archetype\Model\ArchetypeInterface'))
+        $this->shouldThrow(new UnexpectedTypeException('badObject', ArchetypeInterface::class))
              ->during('preSetData', array($event))
         ;
     }

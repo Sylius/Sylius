@@ -36,7 +36,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
 
     function it_is_a_calculator()
     {
-        $this->shouldImplement('Sylius\Component\Taxation\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_should_delegate_calculation_to_a_correct_calculator(

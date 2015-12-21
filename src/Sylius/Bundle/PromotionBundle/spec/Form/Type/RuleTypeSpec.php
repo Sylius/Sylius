@@ -13,6 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -32,12 +35,12 @@ class RuleTypeSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleType');
+        $this->shouldHaveType(RuleType::class);
     }
 
     function it_is_configuration_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType');
+        $this->shouldHaveType(AbstractConfigurationType::class);
     }
 
     function it_builds_form(
@@ -51,7 +54,7 @@ class RuleTypeSpec extends ObjectBehavior
 
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber')
+            Argument::type(BuildRuleFormSubscriber::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(

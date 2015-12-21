@@ -14,6 +14,7 @@ namespace Sylius\Bundle\SearchBundle\Behat;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Bundle\SearchBundle\Command\IndexCommand;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\DomCrawler\Crawler;
@@ -62,7 +63,7 @@ class SearchContext extends DefaultContext
         $queryBuilder = $em->createQueryBuilder();
         $query = $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
             ->getQuery()
@@ -90,7 +91,7 @@ class SearchContext extends DefaultContext
         $queryBuilder = $em->createQueryBuilder();
         $query = $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
             ->getQuery()

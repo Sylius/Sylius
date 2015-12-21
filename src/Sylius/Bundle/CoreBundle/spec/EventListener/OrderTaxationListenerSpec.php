@@ -36,7 +36,7 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringApplyTaxes($event)
         ;
     }

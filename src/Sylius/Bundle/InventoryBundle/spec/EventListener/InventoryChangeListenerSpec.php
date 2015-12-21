@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\InventoryBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -33,7 +34,7 @@ class InventoryChangeListenerSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_change_listener_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface');
+        $this->shouldImplement(InventoryChangeListenerInterface::class);
     }
 
     function it_fills_backorders_on_inventory_change(

@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\ZoneMember;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -26,8 +28,8 @@ class ZoneMemberProvinceSpec extends ObjectBehavior
 
     function it_implements_Sylius_zone_member_interface()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMember');
-        $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneMemberInterface');
+        $this->shouldHaveType(ZoneMember::class);
+        $this->shouldImplement(ZoneMemberInterface::class);
     }
 
     function it_has_no_id_by_default()

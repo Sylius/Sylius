@@ -17,6 +17,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -43,7 +44,7 @@ class TaxationProcessorSpec extends ObjectBehavior
 
     function it_implements_Sylius_taxation_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface');
+        $this->shouldImplement(TaxationProcessorInterface::class);
     }
 
     function it_removes_existing_tax_adjustments(OrderInterface $order, Collection $collection)

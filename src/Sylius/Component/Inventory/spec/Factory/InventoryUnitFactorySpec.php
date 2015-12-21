@@ -12,8 +12,11 @@
 namespace spec\Sylius\Component\Inventory\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
+use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -23,7 +26,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Sylius\Component\Inventory\Model\InventoryUnit');
+        $this->beConstructedWith(InventoryUnit::class);
     }
 
     function it_is_initializable()
@@ -33,18 +36,18 @@ class InventoryUnitFactorySpec extends ObjectBehavior
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Factory\Factory');
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_implements_inventory_unit_factory_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface');
+        $this->shouldImplement(InventoryUnitFactoryInterface::class);
     }
 
     function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('createForStockable', array($stockable, -2))
         ;
     }

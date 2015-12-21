@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Cart\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Model\Order;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,12 +27,12 @@ class CartSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_interface()
     {
-        $this->shouldImplement('Sylius\Component\Cart\Model\CartInterface');
+        $this->shouldImplement(CartInterface::class);
     }
 
     function it_extends_Sylius_order()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
+        $this->shouldHaveType(Order::class);
     }
 
     function it_is_not_expired_by_default()

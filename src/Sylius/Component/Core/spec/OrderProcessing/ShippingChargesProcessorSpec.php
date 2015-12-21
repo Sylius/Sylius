@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -39,7 +40,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_charges_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface');
+        $this->shouldImplement(ShippingChargesProcessorInterface::class);
     }
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order)

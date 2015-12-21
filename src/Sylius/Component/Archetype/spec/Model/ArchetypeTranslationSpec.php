@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Archetype\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Archetype\Model\ArchetypeTranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -26,7 +27,7 @@ class ArchetypeTranslationSpec extends ObjectBehavior
 
     function it_is_an_Archetype()
     {
-        $this->shouldImplement('Sylius\Component\Archetype\Model\ArchetypeTranslationInterface');
+        $this->shouldImplement(ArchetypeTranslationInterface::class);
     }
 
     function it_has_no_id_by_default()

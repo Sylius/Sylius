@@ -99,7 +99,7 @@ class PaymentMethodChoiceType extends ResourceChoiceType
             $method = $choiceView->data;
 
             if (!$method instanceof PaymentMethodInterface) {
-                throw new UnexpectedTypeException($method, 'Sylius\Component\Payment\Model\PaymentMethodInterface');
+                throw new UnexpectedTypeException($method, PaymentMethodInterface::class);
             }
 
             $feeCalculator = $this->feeCalculatorRegistry->get($method->getFeeCalculator());
