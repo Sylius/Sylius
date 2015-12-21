@@ -25,7 +25,7 @@ interface QuantifierInterface
      *
      * @param StockableInterface $stockable
      *
-     * @return integer
+     * @return int
      */
     public function getTotalOnHand(StockableInterface $stockable);
 
@@ -34,7 +34,7 @@ interface QuantifierInterface
      *
      * @param StockableInterface $stockable
      *
-     * @return integer
+     * @return int
      */
     public function getTotalOnHold(StockableInterface $stockable);
 }

@@ -11,8 +11,9 @@
 
 namespace Sylius\Component\Inventory\Repository;
 
-use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,7 +28,7 @@ interface StockItemRepositoryInterface extends RepositoryInterface
      *
      * @param StockableInterface $stockable
      *
-     * @return integer
+     * @return int
      */
     public function countOnHandByStockable(StockableInterface $stockable);
 
@@ -36,7 +37,7 @@ interface StockItemRepositoryInterface extends RepositoryInterface
      *
      * @param StockableInterface $stockable
      *
-     * @return integer
+     * @return int
      */
     public function countOnHoldByStockable(StockableInterface $stockable);
 
@@ -48,12 +49,12 @@ interface StockItemRepositoryInterface extends RepositoryInterface
      *
      * @return null|StockItemInterface
      */
-    public function findByStockableAndLocation(StockableInterface $stockable, StockLocationInterface $location);
+    public function findByStockableAndLocation(StockableInterface $stockable, StockLocationInterface $stockLocation);
 
     /**
      * Create paginator for given location.
      *
-     * @param integer $locationId
+     * @param int $locationId
      *
      * @return PagerfantaInterface
      */

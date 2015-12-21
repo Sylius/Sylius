@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c); Paweł Jędrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -61,22 +61,22 @@ interface StockItemInterface extends TimestampableInterface
     public function hasStockMovement(StockMovementInterface $movement);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getOnHold();
 
     /**
-     * @param integer
+     * @param int
      */
     public function setOnHold($onHold);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getOnHand();
 
     /**
-     * @param integer $onHand
+     * @param int $onHand
      */
     public function setOnHand($onHand);
 

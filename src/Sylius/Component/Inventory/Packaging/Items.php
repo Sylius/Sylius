@@ -43,7 +43,7 @@ class Items
 
         foreach ($this->inventoryUnits as $unit) {
             if (!$unit instanceof InventoryUnitInterface) {
-                throw new \InvalidArgumentException(sprintf('Expected instance of "Sylius\Component\Inventory\Model\InventoryUnitInterface", "%s" given.', is_object($splitter) ? get_class($splitter) : gettype($splitter)));
+                throw new \InvalidArgumentException(sprintf('Expected instance of "Sylius\Component\Inventory\Model\InventoryUnitInterface", "%s" given.', is_object($unit) ? get_class($unit) : gettype($unit)));
             }
 
             $stockable = $unit->getStockable();
@@ -75,11 +75,11 @@ class Items
     public function getInventoryUnitForPacking(StockableInterface $stockable)
     {
         if (0 === $this->getRemaining($stockable)) {
-            return null;
+            return;
         }
 
         $id = spl_object_hash($stockable);
-        $this->remaining[$id]--;
+        --$this->remaining[$id];
 
         return array_pop($this->items[$id]['units']);
     }

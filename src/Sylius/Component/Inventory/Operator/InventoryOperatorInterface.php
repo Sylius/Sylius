@@ -28,7 +28,7 @@ interface InventoryOperatorInterface
      * Increase stock on hand for given stockable by quantity.
      *
      * @param StockItemInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      */
     public function increase(StockItemInterface $stockable, $quantity);
 
@@ -36,7 +36,7 @@ interface InventoryOperatorInterface
      * Hold stock for given stockable by quantity.
      *
      * @param StockItemInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      */
     public function hold(StockItemInterface $stockable, $quantity);
 
@@ -44,7 +44,7 @@ interface InventoryOperatorInterface
      * Release stock for given stockable by quantity.
      *
      * @param StockItemInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      */
     public function release(StockItemInterface $stockable, $quantity);
 

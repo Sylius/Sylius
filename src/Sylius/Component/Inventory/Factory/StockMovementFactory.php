@@ -46,7 +46,7 @@ class StockMovementFactory extends Factory implements StockMovementFactoryInterf
         }
 
         /**
-         * @var $movement StockMovementInterface
+         * @var StockMovementInterface
          */
         $movement = $this->createNew();
 

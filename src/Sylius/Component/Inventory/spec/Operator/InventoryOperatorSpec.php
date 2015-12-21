@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -29,7 +30,8 @@ class InventoryOperatorSpec extends ObjectBehavior
         BackordersHandlerInterface $backordersHandler,
         AvailabilityCheckerInterface $availabilityChecker,
         EventDispatcher $eventDispatcher
-    ) {
+    )
+    {
         $this->beConstructedWith($backordersHandler, $availabilityChecker, $eventDispatcher);
     }
 
@@ -43,12 +45,12 @@ class InventoryOperatorSpec extends ObjectBehavior
         $this->shouldImplement(InventoryOperatorInterface::class);
     }
 
-    function it_increases_stockable_on_hand(StockableInterface $stockable)
+    function it_increases_stockable_on_hand(StockItemInterface $stockItem)
     {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(2);
-        $stockable->setOnHand(7)->shouldBeCalled();
+        $stockItem->getOnHand()->shouldBeCalled()->willReturn(2);
+        $stockItem->setOnHand(7)->shouldBeCalled();
 
-        $this->increase($stockable, 5);
+        $this->increase($stockItem, 5);
     }
 
     function it_decreases_stockable_on_hand_by_count_of_sold_units(
@@ -57,7 +59,8 @@ class InventoryOperatorSpec extends ObjectBehavior
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2
-    ) {
+    )
+    {
         $inventoryUnit1->getStockable()->willReturn($stockable);
         $inventoryUnit2->getStockable()->willReturn($stockable);
 
@@ -80,7 +83,8 @@ class InventoryOperatorSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3
-    ) {
+    )
+    {
         $inventoryUnit1->getStockable()->willReturn($stockable);
         $inventoryUnit2->getStockable()->willReturn($stockable);
         $inventoryUnit3->getStockable()->willReturn($stockable);

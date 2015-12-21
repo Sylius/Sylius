@@ -13,7 +13,6 @@ namespace Sylius\Component\Inventory\Quantifier;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * Default implementation of quantifier, which uses stock item repository to count items.
@@ -40,7 +39,7 @@ class Quantifier implements QuantifierInterface
      */
     public function getTotalOnHand(StockableInterface $stockable)
     {
-        return $this->stockItemRepository->countOnHandStockable($stockable);
+        return $this->stockItemRepository->countOnHandByStockable($stockable);
     }
 
     /**

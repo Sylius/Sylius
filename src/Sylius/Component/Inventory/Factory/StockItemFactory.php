@@ -11,11 +11,9 @@
 
 namespace Sylius\Component\Inventory\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Inventory\Model\StockItemInterface;
-use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -49,17 +47,16 @@ class StockItemFactory extends Factory implements StockItemFactoryInterface
      * Constructor.
      *
      * @param StockItemRepositoryInterface $stockItemRepository
-     * @param ObjectManager $stockItemManager
-     * @param RepositoryInterface $stockLocationRepository
-     * @param RepositoryInterface $stockableRepository
+     * @param ObjectManager                $stockItemManager
+     * @param RepositoryInterface          $stockLocationRepository
+     * @param RepositoryInterface          $stockableRepository
      */
     public function __construct($className,
                                 StockItemRepositoryInterface $stockItemRepository,
                                 ObjectManager $stockItemManager,
                                 RepositoryInterface $stockLocationRepository,
                                 RepositoryInterface $stockableRepository
-    )
-    {
+    ) {
         parent::__construct($className);
 
         $this->stockItemRepository = $stockItemRepository;

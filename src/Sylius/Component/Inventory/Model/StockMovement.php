@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Inventory\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Stock movement model.
  *
@@ -42,13 +40,6 @@ class StockMovement implements StockMovementInterface
      */
     protected $createdAt;
 
-    /**
-     * Last update time.
-     *
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -76,8 +67,6 @@ class StockMovement implements StockMovementInterface
     public function setStockItem(StockItemInterface $stockItem)
     {
         $this->stockItem = $stockItem;
-
-        return $this;
     }
 
     /**
@@ -94,8 +83,6 @@ class StockMovement implements StockMovementInterface
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
-
-        return $this;
     }
 
     /**
@@ -112,7 +99,5 @@ class StockMovement implements StockMovementInterface
     public function setCreatedAt(\DateTime $createAt)
     {
         $this->createdAt = $createAt;
-
-        return $this;
     }
 }

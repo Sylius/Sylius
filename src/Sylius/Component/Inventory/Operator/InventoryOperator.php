@@ -14,7 +14,6 @@ namespace Sylius\Component\Inventory\Operator;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

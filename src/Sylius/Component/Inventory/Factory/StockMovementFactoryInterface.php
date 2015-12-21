@@ -23,7 +23,7 @@ interface StockMovementFactoryInterface extends FactoryInterface
      * Create stock movement for given stock item.
      *
      * @param StockItemInterface $stockItem
-     * @param integer            $quantity
+     * @param int                $quantity
      */
     public function createForStockItem(StockItemInterface $stockItem, $quantity);
 }

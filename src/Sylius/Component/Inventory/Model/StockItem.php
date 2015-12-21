@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Stock item model.
@@ -21,64 +22,46 @@ use Doctrine\Common\Collections\ArrayCollection;
 class StockItem implements StockItemInterface
 {
     /**
-     * Stock item id.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Stockable object.
-     *
      * @var StockableInterface
      */
     protected $stockable;
 
     /**
-     * Stock location.
-     *
      * @var StockLocationInterface
      */
     protected $location;
 
     /**
-     * On hand quantity.
-     *
      * @var int
      */
     protected $onHand = 0;
 
     /**
-     * On hold quantity.
-     *
      * @var int
      */
     protected $onHold = 0;
 
     /**
-     * Stock movements.
-     *
-     * @var StockMovementInterface[]
+     * @var Collection|StockMovementInterface[]
      */
     protected $stockMovements;
 
     /**
-     * Available on demand?
-     *
      * @var bool
      */
     protected $availableOnDemand = false;
 
     /**
-     * Creation time.
-     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Last update time.
-     *
      * @var \DateTime
      */
     protected $updatedAt;
@@ -113,21 +96,33 @@ class StockItem implements StockItemInterface
         $this->stockable = $stockable;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLocation()
     {
         return $this->location;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setLocation(StockLocationInterface $location)
     {
         $this->location = $location;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStockMovements()
     {
         return $this->stockMovements;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addStockMovement(StockMovementInterface $movement)
     {
         if (!$this->hasStockMovement($movement)) {
@@ -135,6 +130,9 @@ class StockItem implements StockItemInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeStockMovement(StockMovementInterface $movement)
     {
         if ($this->hasStockMovement($movement)) {
@@ -142,36 +140,57 @@ class StockItem implements StockItemInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasStockMovement(StockMovementInterface $movement)
     {
         return $this->stockMovements->contains($movement);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOnHand()
     {
         return $this->onHand;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOnHand($onHand)
     {
         $this->onHand = $onHand;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOnHold()
     {
         return $this->onHold;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOnHold($onHold)
     {
         $this->onHold = $onHold;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isAvailableOnDemand()
     {
         return $this->availableOnDemand;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAvailableOnDemand($availableOnDemand)
     {
         $this->availableOnDemand = (bool) $availableOnDemand;

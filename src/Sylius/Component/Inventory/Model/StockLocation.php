@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Stock location.
@@ -41,16 +42,12 @@ class StockLocation implements StockLocationInterface
     protected $enabled = true;
 
     /**
-     * Stock items.
-     *
-     * @var StockItemInterface[]
+     * @var Collection|StockItemInterface[]
      */
     protected $stockItems;
 
     /**
-     * Stock movements.
-     *
-     * @var StockMovementInterface[]
+     * @var Collection|StockMovementInterface[]
      */
     protected $stockMovements;
 
@@ -102,8 +99,6 @@ class StockLocation implements StockLocationInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function getCode()
@@ -114,8 +109,6 @@ class StockLocation implements StockLocationInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     public function enable()
@@ -136,61 +129,75 @@ class StockLocation implements StockLocationInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (bool) $enabled;
-
-        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStockItems()
     {
         return $this->stockItems;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addStockItem(StockItemInterface $item)
     {
         if (!$this->hasStockItem($item)) {
             $this->stockItems->add($item);
         }
-
-        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeStockItem(StockItemInterface $item)
     {
         if ($this->hasStockItem($item)) {
             $this->stockItems->removeElement($item);
         }
-
-        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasStockItem(StockItemInterface $item)
     {
         return $this->stockItems->contains($item);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStockMovements()
     {
         return $this->stockMovements;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addStockMovement(StockMovementInterface $movement)
     {
         if (!$this->hasStockMovement($movement)) {
             $this->stockMovements->add($movement);
         }
-
-        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeStockMovement(StockMovementInterface $movement)
     {
         if ($this->hasStockMovement($movement)) {
             $this->stockMovements->removeElement($movement);
         }
-
-        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasStockMovement(StockMovementInterface $movement)
     {
         return $this->stockMovements->contains($movement);
@@ -210,8 +217,6 @@ class StockLocation implements StockLocationInterface
     public function setCreatedAt(\DateTime $createAt)
     {
         $this->createdAt = $createAt;
-
-        return $this;
     }
 
     /**
@@ -228,7 +233,5 @@ class StockLocation implements StockLocationInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

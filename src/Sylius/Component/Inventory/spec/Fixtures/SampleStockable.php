@@ -19,7 +19,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 class SampleStockable implements StockableInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSku()
     {
@@ -27,7 +27,7 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getInventoryName()
     {
@@ -35,7 +35,7 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isInStock()
     {
@@ -43,7 +43,7 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isAvailableOnDemand()
     {
@@ -51,7 +51,7 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getOnHold()
     {
@@ -59,14 +59,14 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setOnHold($onHold)
     {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getOnHand()
     {
@@ -74,7 +74,7 @@ class SampleStockable implements StockableInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setOnHand($onHand)
     {

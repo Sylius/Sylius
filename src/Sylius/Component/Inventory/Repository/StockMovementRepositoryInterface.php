@@ -23,7 +23,7 @@ interface StockMovementRepositoryInterface extends RepositoryInterface
     /**
      * Create paginator for given location.
      *
-     * @param integer $locationId
+     * @param int $locationId
      *
      * @return PagerfantaInterface
      */

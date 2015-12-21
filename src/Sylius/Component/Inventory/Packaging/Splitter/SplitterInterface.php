@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Inventory\Packaging\Splitter;
 
+use Sylius\Component\Inventory\Packaging\PackageInterface;
+
 /**
  * Splitter services can create several separate packages from a single location.
  *

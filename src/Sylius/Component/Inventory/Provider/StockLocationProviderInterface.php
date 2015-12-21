@@ -24,7 +24,7 @@ interface StockLocationProviderInterface
     /**
      * Get all available stock locations.
      *
-     * @param InventorySubjectInterface
+     * @param InventorySubjectInterface $subject
      *
      * @return StockLocationInterface[]
      */

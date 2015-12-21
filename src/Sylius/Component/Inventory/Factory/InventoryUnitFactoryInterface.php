@@ -26,7 +26,7 @@ interface InventoryUnitFactoryInterface extends FactoryInterface
      * Create a specific amount of inventory units for given stockable object.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int                $quantity
      * @param string             $state
      */
     public function createForStockable(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD);

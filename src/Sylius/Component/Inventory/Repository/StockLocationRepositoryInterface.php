@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Repository;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -33,7 +34,7 @@ interface StockLocationRepositoryInterface extends RepositoryInterface
      *
      * @param StockableInterface $stockable
      *
-     * @return integer
+     * @return int
      */
     public function countBackorderableByStockable(StockableInterface $stockable);
 }

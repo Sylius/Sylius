@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Inventory\Factory;
 
-use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**

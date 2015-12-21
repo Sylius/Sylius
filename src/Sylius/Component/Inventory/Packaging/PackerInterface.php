@@ -23,8 +23,8 @@ interface PackerInterface
     /**
      * Obtain a collection of packages with given set of inventory units for particular location.
      *
-     * @param StockLocationInterface   $stockLocation
-     * @param Items                    $items
+     * @param StockLocationInterface $stockLocation
+     * @param Items                  $items
      *
      * @return PackageInterface[]
      */

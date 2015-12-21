@@ -11,9 +11,7 @@
 
 namespace Sylius\Component\Inventory\Packaging;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Package representing a collection of inventory units from particular location.
@@ -25,8 +23,12 @@ interface PackageInterface
     public function getStockLocation();
 
     public function isEmpty();
+
     public function getInventoryUnits();
+
     public function addInventoryUnit(InventoryUnitInterface $unit);
+
     public function removeInventoryUnit(InventoryUnitInterface $unit);
+
     public function hasInventoryUnit(InventoryUnitInterface $unit);
 }

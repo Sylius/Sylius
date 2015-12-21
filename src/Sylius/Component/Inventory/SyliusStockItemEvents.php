@@ -13,15 +13,15 @@ namespace Sylius\Component\Inventory;
 
 class SyliusStockItemEvents
 {
-    const PRE_INCREASE  = 'sylius.stock_item.pre_increase';
+    const PRE_INCREASE = 'sylius.stock_item.pre_increase';
     const POST_INCREASE = 'sylius.stock_item.post_increase';
 
-    const PRE_DECREASE  = 'sylius.stock_item.pre_decrease';
+    const PRE_DECREASE = 'sylius.stock_item.pre_decrease';
     const POST_DECREASE = 'sylius.stock_item.post_decrease';
 
-    const PRE_HOLD      = 'sylius.stock_item.pre_hold';
-    const POST_HOLD     = 'sylius.stock_item.post_hold';
+    const PRE_HOLD = 'sylius.stock_item.pre_hold';
+    const POST_HOLD = 'sylius.stock_item.post_hold';
 
-    const PRE_RELEASE   = 'sylius.stock_item.pre_release';
-    const POST_RELEASE  = 'sylius.stock_item.post_release';
+    const PRE_RELEASE = 'sylius.stock_item.pre_release';
+    const POST_RELEASE = 'sylius.stock_item.post_release';
 }

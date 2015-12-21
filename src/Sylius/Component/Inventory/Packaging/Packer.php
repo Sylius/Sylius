@@ -11,9 +11,7 @@
 
 namespace Sylius\Component\Inventory\Packaging;
 
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockLocationInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Packaging\Splitter\SplitterInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
 
@@ -49,7 +47,7 @@ class Packer implements PackerInterface
         $this->packageFactory = $packageFactory;
         $this->stockItemRepository = $stockItemRepository;
 
-        foreach ($splitters as $splitters) {
+        foreach ($splitters as $splitter) {
             if (!$splitter instanceof SplitterInterface) {
                 throw new \InvalidArgumentException(sprintf('Expected instance of "Sylius\Component\Inventory\Packaging\Splitter\SplitterInterface", "%s" given.', is_object($splitter) ? get_class($splitter) : gettype($splitter)));
             }
@@ -63,6 +61,7 @@ class Packer implements PackerInterface
      */
     public function pack(StockLocationInterface $stockLocation, Items $items)
     {
+        /** @var PackageInterface $package */
         $package = $this->packageFactory->create($stockLocation);
 
         foreach ($items->getStockables() as $stockable) {
@@ -80,7 +79,7 @@ class Packer implements PackerInterface
 
             $remaining = $items->getRemaining($stockable);
 
-            for ($i = 0; $i < $remaining; $i++) {
+            for ($i = 0; $i < $remaining; ++$i) {
                 $unit = $items->getInventoryUnitForPacking($stockable);
 
                 if (null === $unit) {
