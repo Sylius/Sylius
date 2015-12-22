@@ -33,7 +33,7 @@ interface InventoryUnitInterface extends TimestampableInterface
     public function getStockable();
 
     /**
-     * @param $stockable StockableInterface
+     * @param StockableInterface $stockable
      */
     public function setStockable(StockableInterface $stockable);
 

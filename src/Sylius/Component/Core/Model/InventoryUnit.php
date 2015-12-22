@@ -24,22 +24,16 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 {
     /**
-     * Order item.
-     *
      * @var OrderItemInterface
      */
     protected $orderItem;
 
     /**
-     * Shipment
-     *
      * @var BaseShipmentInterface
      */
     protected $shipment;
 
     /**
-     * Shipping state.
-     *
      * @var string ShipmentInterface::STATE_*
      */
     protected $shippingState = ShipmentInterface::STATE_CHECKOUT;

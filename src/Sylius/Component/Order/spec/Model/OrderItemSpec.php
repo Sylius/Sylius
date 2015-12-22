@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
