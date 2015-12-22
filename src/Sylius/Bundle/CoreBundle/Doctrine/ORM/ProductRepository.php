@@ -13,14 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ArchetypeInterface;
 
 /**
- * Product repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -32,7 +32,7 @@ class ProductRepository extends BaseProductRepository
      * @param TaxonInterface $taxon
      * @param array          $criteria
      *
-     * @return \Pagerfanta\Pagerfanta
+     * @return Pagerfanta
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array())
     {
@@ -46,6 +46,27 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight())
+        ;
+
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * @param ArchetypeInterface $archetype
+     * @param array $criteria
+     *
+     * @return Pagerfanta
+     */
+    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder
+            ->innerJoin('product.archetype', 'archetype')
+            ->addSelect('archetype')
+            ->andWhere('archetype = :archetype')
+            ->setParameter('archetype', $archetype)
         ;
 
         $this->applyCriteria($queryBuilder, $criteria);

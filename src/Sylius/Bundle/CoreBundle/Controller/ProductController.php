@@ -15,6 +15,7 @@ use Gedmo\Loggable\Entity\LogEntry;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductController;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
+use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -112,6 +113,54 @@ class ProductController extends BaseProductController
         ;
 
         return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
+    }
+
+    /**
+     * @param Request $request
+     * @param string $code
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function indexByArchetypeCodeAction(Request $request, $code)
+    {
+        $archetype = $this->get('sylius.repository.product_archetype')->findOneByCode($code);
+
+        if (null === $archetype) {
+            throw new NotFoundHttpException('Requested archetype does not exist.');
+        }
+
+        $paginator = $this
+            ->get('sylius.repository.product')
+            ->createByProductArchetypePaginator($archetype)
+        ;
+
+        return $this->renderArchetypeResults($archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function indexByArchetypeIdAction(Request $request, $id)
+    {
+        $archetype = $this->get('sylius.repository.product_archetype')->find($id);
+
+        if (null === $archetype) {
+            throw new NotFoundHttpException('Requested archetype does not exist.');
+        }
+
+        $paginator = $this
+            ->get('sylius.repository.product')
+            ->createByProductArchetypePaginator($archetype)
+        ;
+
+        return $this->renderArchetypeResults($archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
     }
 
 
@@ -279,6 +328,35 @@ class ProductController extends BaseProductController
                 'searchTerm' => $searchTerm,
                 'searchParam' => $searchParam,
                 'requestMethod' => $requestMethod
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param ArchetypeInterface $archetype
+     * @param Pagerfanta $results
+     * @param string $template
+     * @param int $page
+     *
+     * @return Response
+     */
+    private function renderArchetypeResults(
+        ArchetypeInterface $archetype,
+        Pagerfanta $results,
+        $template,
+        $page
+    ){
+        $results->setCurrentPage($page, true, true);
+        $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate($template))
+            ->setData(array(
+                'archetype' => $archetype,
+                'products' => $results
             ))
         ;
 
