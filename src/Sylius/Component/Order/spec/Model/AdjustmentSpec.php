@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,7 +52,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
+    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem, OrderItemUnitInterface $orderItemUnit)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -61,6 +62,12 @@ class AdjustmentSpec extends ObjectBehavior
 
         $this->setAdjustable($orderItem);
         $this->getAdjustable()->shouldReturn($orderItem);
+
+        $this->setAdjustable(null);
+        $this->getAdjustable()->shouldReturn(null);
+
+        $this->setAdjustable($orderItemUnit);
+        $this->getAdjustable()->shouldReturn($orderItemUnit);
 
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);

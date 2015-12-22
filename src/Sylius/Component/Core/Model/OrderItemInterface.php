@@ -56,4 +56,26 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
      * @return bool
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * @return Collection|OrderItemUnitInterface[]
+     */
+    public function getItemUnits();
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function addItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function removeItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     *
+     * @return bool
+     */
+    public function hasItemUnit(OrderItemUnitInterface $itemUnit);
 }

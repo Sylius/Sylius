@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Model for order line items.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItem implements OrderItemInterface
@@ -69,6 +67,7 @@ class OrderItem implements OrderItemInterface
     public function __construct()
     {
         $this->adjustments = new ArrayCollection();
+        $this->itemUnits = new ArrayCollection();
     }
 
     /**

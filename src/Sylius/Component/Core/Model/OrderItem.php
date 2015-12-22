@@ -37,6 +37,11 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     protected $promotions;
 
+    /**
+     * @var Collection|OrderItemUnitInterface[]
+     */
+    protected $itemUnits;
+
     public function __construct()
     {
         parent::__construct();
@@ -165,5 +170,41 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemUnits()
+    {
+        return $this->itemUnits;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        if (!$this->hasItemUnit($itemUnit)) {
+            $itemUnit->setOrderItem($this);
+            $this->itemUnits->add($itemUnit);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        $itemUnit->setOrderItem(null);
+        $this->itemUnits->removeElement($itemUnit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        return $this->itemUnits->contains($itemUnit);
     }
 }
