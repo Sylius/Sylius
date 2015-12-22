@@ -73,18 +73,15 @@ class TemplatePathsCacheWarmer extends CacheWarmer
         /** @var TemplateReferenceInterface $template */
         foreach ($this->finder->findAllTemplates() as $template) {
             $this->themeContext->clear();
-            
-            $templates[$template->getLogicalName()] = $this->locator->locate($template);
 
             foreach ($themes as $theme) {
                 $this->themeContext->setTheme($theme);
 
                 $path = $this->locator->locate($template);
-
-                if ($path !== $templates[$template->getLogicalName()]) {
-                    $templates[$template->getLogicalName() . "|" . $theme->getLogicalName()] = $path;
-                }
+                $templates[$template->getLogicalName() . "|" . $theme->getLogicalName()] = $path;
             }
+
+            $templates[$template->getLogicalName()] = $this->locator->locate($template);
         }
 
         $this->writeCacheFile($cacheDir . '/templates.php', sprintf('<?php return %s;', var_export($templates, true)));

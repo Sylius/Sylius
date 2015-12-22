@@ -153,6 +153,7 @@
         "sylius/taxation-bundle": "self.version",
         "sylius/taxonomy": "self.version",
         "sylius/taxonomy-bundle": "self.version",
+        "sylius/theme-bundle": "self.version",
         "sylius/translation": "self.version",
         "sylius/translation-bundle": "self.version",
         "sylius/user": "self.version",
