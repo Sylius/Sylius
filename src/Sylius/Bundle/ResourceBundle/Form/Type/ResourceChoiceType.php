@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
