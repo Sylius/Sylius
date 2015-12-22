@@ -52,7 +52,7 @@ class SecurityController extends Controller
      */
     public function logoutAction(Request $request)
     {
-        throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
+        throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
     }
 
     /**
