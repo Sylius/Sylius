@@ -13,7 +13,7 @@ namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -29,7 +29,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      * @param array $sorting
      * @param bool  $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {

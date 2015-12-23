@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ShipmentRepository extends EntityRepository
@@ -20,7 +20,7 @@ class ShipmentRepository extends EntityRepository
      * @param array $criteria
      * @param array $sorting
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
