@@ -24,17 +24,17 @@ class Adjustment implements AdjustmentInterface
     /**
      * @var OrderInterface
      */
-    protected $order;
+    protected $order = null;
 
     /**
      * @var OrderItemInterface
      */
-    protected $orderItem;
+    protected $orderItem = null;
 
     /**
      * @var OrderItemUnitInterface
      */
-    protected $orderItemUnit;
+    protected $orderItemUnit = null;
 
     /**
      * @var string

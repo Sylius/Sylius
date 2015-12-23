@@ -76,12 +76,6 @@ class InventoryHandler implements InventoryHandlerInterface
                 $item->removeInventoryUnit($unit);
             }
         }
-
-        foreach ($item->getInventoryUnits() as $unit) {
-            if ($unit->getStockable() !== $item->getVariant()) {
-                $unit->setStockable($item->getVariant());
-            }
-        }
     }
 
     /**

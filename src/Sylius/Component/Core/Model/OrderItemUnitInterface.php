@@ -20,13 +20,4 @@ use Sylius\Component\Shipping\Model\ShipmentItemInterface;
  */
 interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, BaseInventoryUnitInterface, ShipmentItemInterface
 {
-    /**
-     * @return OrderItemInterface
-     */
-    public function getOrderItem();
-
-    /**
-     * @param null|OrderItemInterface $orderItem
-     */
-    public function setOrderItem(OrderItemInterface $orderItem = null);
 }

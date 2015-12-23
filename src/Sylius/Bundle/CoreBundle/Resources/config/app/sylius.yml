@@ -220,6 +220,9 @@ sylius_order:
                 model: Sylius\Component\Core\Model\OrderItem
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+        order_item_unit:
+            classes:
+                model: Sylius\Component\Core\Model\OrderItemUnit
 
 sylius_sequence:
     generators:
