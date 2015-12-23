@@ -7,7 +7,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Validator\Constraints;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @mixin \Sylius\Bundle\ResourceBundle\Validator\EnabledValidator
