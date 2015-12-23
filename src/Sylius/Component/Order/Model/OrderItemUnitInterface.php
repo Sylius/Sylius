@@ -17,7 +17,7 @@ namespace Sylius\Component\Order\Model;
 interface OrderItemUnitInterface extends AdjustableInterface
 {
     /**
-     * @return integer
+     * @return mixed
      */
     public function getId();
 
@@ -26,8 +26,15 @@ interface OrderItemUnitInterface extends AdjustableInterface
      */
     public function getTotal();
 
+    public function calculateTotal();
+
     /**
-     * @param int $total
+     * @return OrderItemInterface
      */
-    public function setTotal($total);
+    public function getOrderItem();
+
+    /**
+     * @param null|OrderItemInterface $orderItem
+     */
+    public function setOrderItem(OrderItemInterface $orderItem = null);
 }

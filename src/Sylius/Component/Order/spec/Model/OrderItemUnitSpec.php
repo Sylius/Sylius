@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
@@ -42,5 +43,27 @@ class OrderItemUnitSpec extends ObjectBehavior
 
         $this->removeAdjustment($adjustment);
         $this->hasAdjustment($adjustment)->shouldReturn(false);
+    }
+
+    function it_calculates_its_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, OrderItemInterface $orderItem)
+    {
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $adjustment1->getAmount()->willReturn(100);
+        $adjustment2->getAmount()->willReturn(50);
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $this->setOrderItem($orderItem);
+        $orderItem->getUnitPrice()->willReturn(1000);
+
+        $this->calculateTotal();
+
+        $this->getTotal()->shouldReturn(1150);
     }
 }

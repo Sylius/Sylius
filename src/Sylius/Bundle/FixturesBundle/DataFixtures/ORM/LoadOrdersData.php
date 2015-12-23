@@ -121,7 +121,7 @@ class LoadOrdersData extends DataFixture
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
         $shipment->setState($this->getShipmentState());
 
-        foreach ($order->getInventoryUnits() as $item) {
+        foreach ($order->getItemUnits() as $item) {
             $shipment->addItem($item);
         }
 

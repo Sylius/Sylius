@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -86,4 +87,26 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      * @param bool $immutable
      */
     public function setImmutable($immutable);
+
+    /**
+     * @return Collection|OrderItemUnitInterface[]
+     */
+    public function getItemUnits();
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     *
+     * @return bool
+     */
+    public function hasItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function addItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function removeItemUnit(OrderItemUnitInterface $itemUnit);
 }

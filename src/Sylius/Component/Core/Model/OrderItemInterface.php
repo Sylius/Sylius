@@ -43,6 +43,13 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
 
     /**
      * @param InventoryUnitInterface $unit
+     *
+     * @return bool
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * @param InventoryUnitInterface $unit
      */
     public function addInventoryUnit(InventoryUnitInterface $unit);
 
@@ -50,33 +57,4 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
      * @param InventoryUnitInterface $unit
      */
     public function removeInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @param InventoryUnitInterface $unit
-     *
-     * @return bool
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @return Collection|OrderItemUnitInterface[]
-     */
-    public function getItemUnits();
-
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     */
-    public function addItemUnit(OrderItemUnitInterface $itemUnit);
-
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     */
-    public function removeItemUnit(OrderItemUnitInterface $itemUnit);
-
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     *
-     * @return bool
-     */
-    public function hasItemUnit(OrderItemUnitInterface $itemUnit);
 }

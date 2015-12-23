@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 {
     /**
-     * @var string
+     * @var string InventoryUnitInterface::STATE_*
      */
     protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
 
@@ -36,11 +36,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
      * @var string BaseShipmentInterface::STATE_*
      */
     protected $shippingState = BaseShipmentInterface::STATE_CHECKOUT;
-
-    /**
-     * @var OrderItemInterface
-     */
-    protected $orderItem;
 
     /**
      * @var \DateTime
@@ -162,22 +157,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderItem()
-    {
-        return $this->orderItem;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOrderItem(OrderItemInterface $orderItem = null)
-    {
-        $this->orderItem = $orderItem;
     }
 
     /**

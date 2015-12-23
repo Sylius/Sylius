@@ -37,12 +37,6 @@
             <gedmo:versioned />
         </many-to-many>
 
-        <one-to-many field="itemUnits" target-entity="Sylius\Component\Core\Model\OrderItemUnit" mapped-by="orderItem" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
-
         <gedmo:loggable />
     </mapped-superclass>
 
