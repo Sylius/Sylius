@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\InstallerBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\ProgressHelper;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -90,16 +90,16 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      * @param int $length
      *
-     * @return ProgressHelper
+     * @return ProgressBar
      */
     protected function createProgressBar(OutputInterface $output, $length = 10)
     {
-        $progress = $this->getHelper('progress');
+        $progress = new ProgressBar($output);
         $progress->setBarCharacter('<info>|</info>');
         $progress->setEmptyBarCharacter(' ');
         $progress->setProgressCharacter('|');
 
-        $progress->start($output, $length);
+        $progress->start($length);
 
         return $progress;
     }
