@@ -30,7 +30,7 @@
 
     <services>
         <service id="sylius.authorization_identity_provider.security" class="%sylius.authorization_identity_provider.security.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
         </service>
         <service id="sylius.authorization_checker.default" class="%sylius.authorization_checker.default.class%">
             <argument type="service" id="sylius.authorization_identity_provider" />

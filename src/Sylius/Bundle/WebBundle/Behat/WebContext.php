@@ -493,7 +493,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmNotAuthenticated()
     {
-        $this->getSecurityContext()->setToken(null);
+        $this->getTokenStorage()->setToken(null);
         $this->getContainer()->get('session')->invalidate();
     }
 

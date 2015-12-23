@@ -342,7 +342,7 @@ class WebContext extends DefaultContext
      */
     public function iShouldBeLoggedIn()
     {
-        if (!$this->getSecurityContext()->isGranted('ROLE_USER')) {
+        if (!$this->getAuthorizationChecker()->isGranted('ROLE_USER')) {
             throw new AuthenticationException('User is not authenticated.');
         }
     }
@@ -352,7 +352,7 @@ class WebContext extends DefaultContext
      */
     public function iShouldNotBeLoggedIn()
     {
-        if ($this->getSecurityContext()->isGranted('ROLE_USER')) {
+        if ($this->getAuthorizationChecker()->isGranted('ROLE_USER')) {
             throw new AuthenticationException('User was not expected to be logged in, but he is.');
         }
     }

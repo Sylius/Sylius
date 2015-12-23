@@ -18,12 +18,13 @@ use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -67,37 +68,46 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $channelContext;
 
     /**
+     * @var TokenStorageInterface
+     */
+    protected $tokenStorage;
+
+    /**
      * Constructor.
      *
-     * @param FactoryInterface          $factory
-     * @param SecurityContextInterface  $securityContext
-     * @param TranslatorInterface       $translator
-     * @param EventDispatcherInterface  $eventDispatcher
+     * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
-     * @param RepositoryInterface       $taxonomyRepository
-     * @param CartProviderInterface     $cartProvider
-     * @param CurrencyHelper            $currencyHelper
+     * @param RepositoryInterface $taxonomyRepository
+     * @param CartProviderInterface $cartProvider
+     * @param CurrencyHelper $currencyHelper
+     * @param ChannelContextInterface $channelContext
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
+        FactoryInterface $factory,
         AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
+        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker,
         CurrencyProviderInterface $currencyProvider,
-        RepositoryInterface       $taxonomyRepository,
-        CartProviderInterface     $cartProvider,
-        CurrencyHelper            $currencyHelper,
-        ChannelContextInterface   $channelContext
+        RepositoryInterface $taxonomyRepository,
+        CartProviderInterface $cartProvider,
+        CurrencyHelper $currencyHelper,
+        ChannelContextInterface $channelContext,
+        TokenStorageInterface $tokenStorage
     ) {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->currencyHelper = $currencyHelper;
         $this->channelContext = $channelContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -133,7 +143,7 @@ class FrontendMenuBuilder extends MenuBuilder
             '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)/', $route)) {
@@ -168,18 +178,18 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
+        if ($this->authorizationChecker->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
                 'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
             );
 
-            if ($this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
+            if ($this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
                 $routeParams = array_merge($routeParams, array(
                     'route' => 'sylius_switch_user_return',
                     'routeParameters' => array(
-                        'username' => $this->securityContext->getToken()->getUsername(),
+                        'username' => $this->tokenStorage->getToken()->getUsername(),
                         '_switch_user' => '_exit'
                     )
                 ));

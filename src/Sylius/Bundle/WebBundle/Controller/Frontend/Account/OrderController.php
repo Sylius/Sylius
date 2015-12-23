@@ -140,7 +140,7 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The order does not exist.');
         }
 
-        if (!$this->get('security.context')->isGranted('ROLE_ADMINISTRATION_ACCESS')
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMINISTRATION_ACCESS')
             && (!$this->getCustomer() || $this->getCustomer()->getId() !== $order->getCustomer()->getId())
         ) {
             throw new AccessDeniedException();

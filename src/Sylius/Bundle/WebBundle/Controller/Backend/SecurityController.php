@@ -35,7 +35,7 @@ class SecurityController extends BaseSecurityController
      */
     public function exitUserSwitchAction($username)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             throw new AccessDeniedException();
         }
 

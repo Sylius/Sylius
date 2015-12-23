@@ -26,7 +26,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
@@ -252,7 +253,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getUser()
     {
-        $token = $this->getSecurityContext()->getToken();
+        $token = $this->getTokenStorage()->getToken();
 
         if (null === $token) {
             throw new \Exception('No token found in security context.');
@@ -262,11 +263,19 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @return SecurityContextInterface
+     * @return TokenStorageInterface
      */
-    protected function getSecurityContext()
+    protected function getTokenStorage()
     {
-        return $this->getContainer()->get('security.context');
+        return $this->getContainer()->get('security.token_storage');
+    }
+
+    /**
+     * @return AuthorizationCheckerInterface
+     */
+    protected function getAuthorizationChecker()
+    {
+        return $this->getContainer()->get('security.authorization_checker');
     }
 
     /**

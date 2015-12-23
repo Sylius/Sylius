@@ -14,7 +14,8 @@ namespace Sylius\Bundle\UserBundle\Context;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -22,16 +23,23 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class CustomerContext implements CustomerContextInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    private $securityContext;
+    private $tokenStorage;
 
     /**
-     * @param SecurityContextInterface $securityContext
+     * @var AuthorizationCheckerInterface
      */
-    public function __construct(SecurityContextInterface $securityContext)
+    private $authorizationChecker;
+
+    /**
+     * @param TokenStorageInterface $tokenStorage
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
+    public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -41,10 +49,12 @@ class CustomerContext implements CustomerContextInterface
      */
     public function getCustomer()
     {
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')
-            && $this->securityContext->getToken()->getUser() instanceof UserInterface
-        ) {
-            return $this->securityContext->getToken()->getUser()->getCustomer();
+        if (null === $token = $this->tokenStorage->getToken()) {
+            return null;
+        }
+
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') && $token->getUser() instanceof UserInterface) {
+            return $token->getUser()->getCustomer();
         }
 
         return null;

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\UserBundle\Security\Authentication;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Extracts Security Errors from Request
@@ -48,13 +48,13 @@ class AuthenticationUtils
         $session = $request->getSession();
         $authenticationException = null;
 
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $authenticationException = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } elseif ($session !== null && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $authenticationException = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $authenticationException = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+        } elseif ($session !== null && $session->has(Security::AUTHENTICATION_ERROR)) {
+            $authenticationException = $session->get(Security::AUTHENTICATION_ERROR);
 
             if ($clearSession) {
-                $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+                $session->remove(Security::AUTHENTICATION_ERROR);
             }
         }
 
@@ -68,7 +68,7 @@ class AuthenticationUtils
     {
         $session = $this->getRequest()->getSession();
 
-        return null === $session ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+        return null === $session ? '' : $session->get(Security::LAST_USERNAME);
     }
 
     /**

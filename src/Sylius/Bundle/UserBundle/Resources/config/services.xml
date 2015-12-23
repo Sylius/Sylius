@@ -60,7 +60,8 @@
     <services>
         <!-- Customer context -->
         <service id="sylius.context.customer" class="%sylius.context.customer.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
 
         <!-- Controllers -->
@@ -98,7 +99,7 @@
             <argument type="service" id="service_container" />
         </service>
         <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
@@ -143,7 +144,7 @@
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
         </service>

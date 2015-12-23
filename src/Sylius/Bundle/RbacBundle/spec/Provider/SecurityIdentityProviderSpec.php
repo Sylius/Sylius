@@ -15,8 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -24,9 +24,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class SecurityIdentityProviderSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext)
+    function let(TokenStorageInterface $tokenStorage)
     {
-        $this->beConstructedWith($securityContext);
+        $this->beConstructedWith($tokenStorage);
     }
 
     function it_is_initializable()
@@ -39,39 +39,39 @@ class SecurityIdentityProviderSpec extends ObjectBehavior
         $this->shouldHaveType(CurrentIdentityProviderInterface::class);
     }
 
-    function it_returns_null_if_user_is_not_logged_in($securityContext)
+    function it_returns_null_if_user_is_not_logged_in($tokenStorage)
     {
-        $securityContext->getToken()->shouldBeCalled()->willReturn(null);
+        $tokenStorage->getToken()->shouldBeCalled()->willReturn(null);
 
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_null_if_token_exists_but_still_no_authenticated_user($securityContext, TokenInterface $token)
+    function it_returns_null_if_token_exists_but_still_no_authenticated_user($tokenStorage, TokenInterface $token)
     {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $tokenStorage->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn(null);
 
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_null_if_token_exists_but_its_an_anonymous_user($securityContext, AnonymousToken $token)
+    function it_returns_null_if_token_exists_but_its_an_anonymous_user($tokenStorage, AnonymousToken $token)
     {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $tokenStorage->getToken()->shouldBeCalled()->willReturn($token);
 
         $this->getIdentity()->shouldReturn(null);
     }
 
-    function it_returns_the_authenticated_user($securityContext, TokenInterface $token, IdentityInterface $user)
+    function it_returns_the_authenticated_user($tokenStorage, TokenInterface $token, IdentityInterface $user)
     {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $tokenStorage->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
 
         $this->getIdentity()->shouldReturn($user);
     }
 
-    function it_throws_exception_if_user_does_not_implement_identity_interface($securityContext, TokenInterface $token, UserInterface $user)
+    function it_throws_exception_if_user_does_not_implement_identity_interface($tokenStorage, TokenInterface $token, UserInterface $user)
     {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $tokenStorage->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
 
         $this

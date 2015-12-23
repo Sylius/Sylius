@@ -218,7 +218,7 @@ class CheckoutController extends FOSRestController
     protected function isUserLoggedIn()
     {
         try {
-            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            return $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
