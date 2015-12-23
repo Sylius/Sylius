@@ -15,10 +15,10 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -76,9 +76,9 @@ class OrderSpec extends ObjectBehavior
         $this->getBillingAddress()->shouldReturn($address);
     }
 
-    function it_should_initialize_inventory_units_collection_by_default()
+    function it_should_initialize_item_units_collection_by_default()
     {
-        $this->getInventoryUnits()->shouldHaveType(Collection::class);
+        $this->getItemUnits()->shouldHaveType(Collection::class);
     }
 
     function it_should_initialize_shipments_collection_by_default()
@@ -236,7 +236,7 @@ class OrderSpec extends ObjectBehavior
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
-        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+        $item->getItemUnits()->willReturn(array($unit1, $unit2));
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);
@@ -252,7 +252,7 @@ class OrderSpec extends ObjectBehavior
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
-        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+        $item->getItemUnits()->willReturn(array($unit1, $unit2));
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);

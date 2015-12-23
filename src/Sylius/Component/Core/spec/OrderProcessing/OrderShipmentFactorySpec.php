@@ -13,10 +13,10 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -41,11 +41,11 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         $this->shouldImplement(OrderShipmentFactoryInterface::class);
     }
 
-    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
+    function it_creates_a_single_shipment_and_assigns_all_item_units_to_it(
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        InventoryUnitInterface $inventoryUnit
+        OrderItemUnitInterface $itemUnit
     ) {
 
         $shipmentFactory
@@ -60,12 +60,12 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ;
 
         $order
-            ->getInventoryUnits()
-            ->willReturn(array($inventoryUnit))
+            ->getItemUnits()
+            ->willReturn(array($itemUnit))
         ;
 
         $shipment
-            ->addItem($inventoryUnit)
+            ->addItem($itemUnit)
             ->shouldBeCalled()
         ;
 
@@ -77,12 +77,12 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         $this->createForOrder($order);
     }
 
-    function it_adds_new_inventory_units_to_existing_shipment(
+    function it_adds_new_item_units_to_existing_shipment(
         OrderInterface $order,
         ShipmentInterface $shipment,
         ArrayCollection $shipments,
-        InventoryUnitInterface $inventoryUnit,
-        InventoryUnitInterface $inventoryUnitWithoutShipment
+        OrderItemUnitInterface $itemUnit,
+        OrderItemUnitInterface $itemUnitWithoutShipment
     ) {
         $shipments
             ->first()
@@ -96,16 +96,16 @@ class OrderShipmentFactorySpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $inventoryUnit
+        $itemUnit
             ->getShipment()
             ->willReturn($shipment)
         ;
 
         $order
-            ->getInventoryUnits()
+            ->getItemUnits()
             ->willReturn(array(
-                $inventoryUnit,
-                $inventoryUnitWithoutShipment
+                $itemUnit,
+                $itemUnitWithoutShipment
             ))
         ;
 
@@ -116,12 +116,12 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ;
 
         $shipment
-            ->addItem($inventoryUnitWithoutShipment)
+            ->addItem($itemUnitWithoutShipment)
             ->shouldBeCalled()
         ;
 
         $shipment
-            ->addItem($inventoryUnit)
+            ->addItem($itemUnit)
             ->shouldNotBeCalled()
         ;
 
