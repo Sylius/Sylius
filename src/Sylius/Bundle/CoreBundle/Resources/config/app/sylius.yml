@@ -113,7 +113,11 @@ sylius_archetype:
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
 
-sylius_attribute: ~
+sylius_attribute:
+    classes:
+        product:
+            attribute:
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAttributeRepository
 
 sylius_variation:
     resources:
