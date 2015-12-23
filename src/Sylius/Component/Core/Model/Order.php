@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
@@ -254,13 +255,13 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnits()
+    public function getItemUnits()
     {
         $units = new ArrayCollection();
 
         /** @var $item OrderItem */
         foreach ($this->getItems() as $item) {
-            foreach ($item->getInventoryUnits() as $unit) {
+            foreach ($item->getItemUnits() as $unit) {
                 $units->add($unit);
             }
         }
@@ -271,9 +272,9 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnitsByVariant(ProductVariantInterface $variant)
+    public function getItemUnitsByVariant(ProductVariantInterface $variant)
     {
-        return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
+        return $this->getItemUnits()->filter(function (OrderItemUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
     }
@@ -527,7 +528,7 @@ class Order extends Cart implements OrderInterface
      */
     public function isBackorder()
     {
-        foreach ($this->getInventoryUnits() as $unit) {
+        foreach ($this->getItemUnits() as $unit) {
             if (InventoryUnitInterface::STATE_BACKORDERED === $unit->getInventoryState()) {
                 return true;
             }

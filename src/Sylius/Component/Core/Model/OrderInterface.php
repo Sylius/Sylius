@@ -106,18 +106,18 @@ interface OrderInterface extends
     /**
      * Get all inventory units.
      *
-     * @return Collection|InventoryUnitInterface[]
+     * @return Collection|OrderItemUnitInterface[]
      */
-    public function getInventoryUnits();
+    public function getItemUnits();
 
     /**
      * Get all inventory units by the product variant.
      *
      * @param ProductVariantInterface $variant
      *
-     * @return Collection|InventoryUnitInterface[]
+     * @return Collection|OrderItemUnitInterface[]
      */
-    public function getInventoryUnitsByVariant(ProductVariantInterface $variant);
+    public function getItemUnitsByVariant(ProductVariantInterface $variant);
 
     /**
      * Get all shipments associated with this order.

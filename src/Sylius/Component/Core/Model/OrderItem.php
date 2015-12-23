@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 
@@ -26,11 +27,6 @@ class OrderItem extends CartItem implements OrderItemInterface
      * @var ProductVariantInterface
      */
     protected $variant;
-
-    /**
-     * @var Collection|InventoryUnitInterface[]
-     */
-    protected $inventoryUnits;
 
     /**
      * @var Collection|BasePromotionInterface[]
@@ -97,10 +93,7 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     public function addInventoryUnit(InventoryUnitInterface $unit)
     {
-        if (!$this->hasInventoryUnit($unit)) {
-            $unit->setOrderItem($this);
-            $this->inventoryUnits->add($unit);
-        }
+        $this->addItemUnit($unit);
     }
 
     /**
@@ -108,8 +101,7 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     public function removeInventoryUnit(InventoryUnitInterface $unit)
     {
-        $unit->setOrderItem(null);
-        $this->inventoryUnits->removeElement($unit);
+        $this->removeItemUnit($unit);
     }
 
     /**
@@ -117,7 +109,7 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit)
     {
-        return $this->inventoryUnits->contains($unit);
+        return $this->hasItemUnit($unit);
     }
 
     /**
