@@ -37,7 +37,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         parent::__construct();
 
-        $this->inventoryUnits = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
 
@@ -80,7 +79,7 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     public function getInventoryUnits()
     {
-        return $this->inventoryUnits;
+        return $this->itemUnits;
     }
 
     /**

@@ -17,8 +17,6 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Factory\Factory;
 
 /**
- * Default inventory operator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnitFactory extends Factory implements InventoryUnitFactoryInterface
@@ -26,7 +24,7 @@ class InventoryUnitFactory extends Factory implements InventoryUnitFactoryInterf
     /**
      * {@inheritdoc}
      */
-    public function createForStockable(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD)
+    public function createForStockable($quantity, $state = InventoryUnitInterface::STATE_SOLD)
     {
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
