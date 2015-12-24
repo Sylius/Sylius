@@ -27,16 +27,16 @@ class VariantFactory implements VariantFactoryInterface
     /**
      * @var RepositoryInterface
      */
-    private $promotionRepository;
+    private $productRepository;
 
     /**
      * @param FactoryInterface $factory
-     * @param RepositoryInterface $promotionRepository
+     * @param RepositoryInterface $productRepository
      */
-    public function __construct(FactoryInterface $factory, RepositoryInterface $promotionRepository)
+    public function __construct(FactoryInterface $factory, RepositoryInterface $productRepository)
     {
         $this->factory = $factory;
-        $this->promotionRepository = $promotionRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -50,14 +50,14 @@ class VariantFactory implements VariantFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForProduct($promotionId)
+    public function createForProduct($productId)
     {
-        if (null === $promotion = $this->promotionRepository->find($promotionId)) {
-            throw new \InvalidArgumentException(sprintf('Product with id "%s" does not exist.', $promotionId));
+        if (null === $product = $this->productRepository->find($productId)) {
+            throw new \InvalidArgumentException(sprintf('Product with id "%s" does not exist.', $productId));
         }
 
         $coupon = $this->factory->createNew();
-        $coupon->setProduct($promotion);
+        $coupon->setProduct($product);
 
         return $coupon;
     }

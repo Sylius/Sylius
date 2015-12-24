@@ -19,9 +19,6 @@
     <parameters>
         <parameter key="sylius.context.cart.class">Sylius\Component\Cart\Context\CartContext</parameter>
 
-        <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
-        <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
-
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartSubscriber</parameter>
@@ -31,45 +28,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.cart" class="%sylius.controller.cart.class%">
-            <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
-                    <argument>sylius</argument>
-                    <argument>cart</argument>
-                    <argument>SyliusCartBundle:Cart</argument>
-                </service>
-            </argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.controller.cart_item" class="%sylius.controller.cart_item.class%">
-            <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
-                    <argument>sylius</argument>
-                    <argument>cart_item</argument>
-                    <argument>SyliusCartBundle:CartItem</argument>
-                </service>
-            </argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
-            <argument>%sylius.model.cart.class%</argument>
-            <argument>%sylius.validation_groups.cart%</argument>
-            <tag name="form.type" alias="sylius_cart" />
-        </service>
-
-        <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
-            <argument>%sylius.model.cart_item.class%</argument>
-            <argument>%sylius.validation_groups.cart_item%</argument>
-            <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
-            <tag name="form.type" alias="sylius_cart_item" />
-        </service>
-
         <service id="sylius.context.cart" class="%sylius.context.cart.class%">
             <argument /> <!-- Storage service name comes from config -->
         </service>

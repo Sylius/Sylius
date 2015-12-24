@@ -31,9 +31,18 @@ class NewResourceFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface');
     }
 
+    function it_calls_create_new_by_default_if_no_custom_method_configured(RequestConfiguration $requestConfiguration, FactoryInterface $factory)
+    {
+        $requestConfiguration->getFactoryMethod()->willReturn(null);
+
+        $factory->createNew()->shouldBeCalled()->willReturn(array('foo', 'bar'));
+
+        $this->create($requestConfiguration, $factory)->shouldReturn(array('foo', 'bar'));
+    }
+
     function it_calls_proper_factory_methods_based_on_configuration(RequestConfiguration $requestConfiguration, FactoryInterface $factory)
     {
-        $requestConfiguration->getFactoryMethod('createNew')->willReturn('createNew');
+        $requestConfiguration->getFactoryMethod()->willReturn('createNew');
         $requestConfiguration->getFactoryArguments()->willReturn(array('00032'));
 
         $factory->createNew('00032')->shouldBeCalled()->willReturn(array('foo', 'bar'));

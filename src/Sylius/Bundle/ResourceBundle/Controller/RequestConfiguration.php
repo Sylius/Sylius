@@ -313,47 +313,67 @@ class RequestConfiguration
     }
 
     /**
-     * @param $default
-     * @return mixed|null
+     * @return string|null
      */
-    public function getRepositoryMethod($default)
+    public function getRepositoryMethod()
     {
-        $repository = $this->parameters->get('repository', array('method' => $default));
+        if (!$this->parameters->has('repository')) {
+            return null;
+        }
+
+        $repository = $this->parameters->get('repository');
 
         return is_array($repository) ? $repository['method'] : $repository;
     }
 
     /**
-     * @param array $default
      * @return array
      */
-    public function getRepositoryArguments(array $default = array())
+    public function getRepositoryArguments()
     {
-        $repository = $this->parameters->get('repository', array());
+        if (!$this->parameters->has('repository')) {
+            return array();
+        }
 
-        return isset($repository['arguments']) ? $repository['arguments'] : $default;
+        $repository = $this->parameters->get('repository');
+
+        if (!isset($repository['arguments'])) {
+            return array();
+        }
+
+        return is_array($repository['arguments']) ? $repository['arguments'] : array($repository['arguments']);
     }
 
     /**
-     * @param $default
-     * @return mixed|null
+     * @return string|null
      */
-    public function getFactoryMethod($default)
+    public function getFactoryMethod()
     {
-        $factory = $this->parameters->get('factory', array('method' => $default));
+        if (!$this->parameters->has('factory')) {
+            return null;
+        }
+
+        $factory = $this->parameters->get('factory');
 
         return is_array($factory) ? $factory['method'] : $factory;
     }
 
     /**
-     * @param array $default
      * @return array
      */
-    public function getFactoryArguments(array $default = array())
+    public function getFactoryArguments()
     {
-        $factory = $this->parameters->get('factory', array());
+        if (!$this->parameters->has('factory')) {
+            return array();
+        }
 
-        return isset($factory['arguments']) ? $factory['arguments'] : $default;
+        $factory = $this->parameters->get('factory');
+
+        if (!isset($factory['arguments'])) {
+            return array();
+        }
+
+        return is_array($factory['arguments']) ? $factory['arguments'] : array($factory['arguments']);
     }
 
     /**

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,6 +59,8 @@ class CustomerController extends ResourceController
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create($customer, 204));
             }
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $customer);
 
             return $this->redirectHandler->redirectToResource($configuration, $customer);
         }

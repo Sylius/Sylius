@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class VariantFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, RepositoryInterface $promotionRepository)
+    function let(FactoryInterface $factory, RepositoryInterface $productRepository)
     {
-        $this->beConstructedWith($factory, $promotionRepository);
+        $this->beConstructedWith($factory, $productRepository);
     }
 
     function it_is_initializable()
@@ -39,21 +39,21 @@ class VariantFactorySpec extends ObjectBehavior
         $this->shouldImplement(FactoryInterface::class);
     }
     
-    function it_implements_coupon_factory_interface()
+    function it_implements_variant_factory_interface()
     {
         $this->shouldImplement(VariantFactoryInterface::class);
     }
 
-    function it_creates_new_coupon(FactoryInterface $factory, VariantInterface $coupon)
+    function it_creates_new_variant(FactoryInterface $factory, VariantInterface $variant)
     {
-        $factory->createNew()->willReturn($coupon);
+        $factory->createNew()->willReturn($variant);
         
-        $this->createNew()->shouldReturn($coupon);
+        $this->createNew()->shouldReturn($variant);
     }
     
-    function it_throws_an_exception_when_promotion_is_not_found(RepositoryInterface $promotionRepository)
+    function it_throws_an_exception_when_product_is_not_found(RepositoryInterface $productRepository)
     {
-        $promotionRepository->find(15)->willReturn(null);
+        $productRepository->find(15)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -61,17 +61,17 @@ class VariantFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_a_coupon_and_assigns_a_promotion_to_id(
+    function it_creates_a_variant_and_assigns_a_product_to_id(
         FactoryInterface $factory,
-        RepositoryInterface $promotionRepository,
-        ProductInterface $promotion,
-        VariantInterface $coupon
+        RepositoryInterface $productRepository,
+        ProductInterface $product,
+        VariantInterface $variant
     )
     {
-        $factory->createNew()->willReturn($coupon);
-        $promotionRepository->find(13)->willReturn($promotion);
-        $coupon->setProduct($promotion)->shouldBeCalled();
+        $factory->createNew()->willReturn($variant);
+        $productRepository->find(13)->willReturn($product);
+        $variant->setProduct($product)->shouldBeCalled();
 
-        $this->createForProduct(13)->shouldReturn($coupon);
+        $this->createForProduct(13)->shouldReturn($variant);
     }
 }

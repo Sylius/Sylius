@@ -24,7 +24,11 @@ class NewResourceFactory implements NewResourceFactoryInterface
      */
     public function create(RequestConfiguration $requestConfiguration, FactoryInterface $factory)
     {
-        $callable = array($factory, $requestConfiguration->getFactoryMethod('createNew'));
+        if (null === $method = $requestConfiguration->getFactoryMethod()) {
+            return $factory->createNew();
+        }
+
+        $callable = array($factory, $method);
         $arguments = $requestConfiguration->getFactoryArguments();
 
         return call_user_func_array($callable, $arguments);

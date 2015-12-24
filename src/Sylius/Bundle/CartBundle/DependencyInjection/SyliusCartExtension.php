@@ -35,6 +35,8 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
         $configFiles = array(
             'services.xml',
             'templating.xml',
@@ -47,23 +49,6 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
-
-        $container->setAlias('sylius.repository.cart', 'sylius.repository.order');
-        $container->setAlias('sylius.factory.cart', 'sylius.factory.order');
-        $container->setAlias('sylius.manager.cart', 'sylius.manager.order');
-        $container->setAlias('sylius.repository.cart_item', 'sylius.repository.order_item');
-        $container->setAlias('sylius.factory.cart_item', 'sylius.factory.order_item');
-        $container->setAlias('sylius.manager.cart_item', 'sylius.manager.order_item');
-
-        $cartConfig = $config['resources']['cart'];
-        $cartItemConfig = $config['resources']['cart_item'];
-
-        $container->setParameter('sylius.controller.cart.class', $cartConfig['classes']['controller']);
-        $container->setParameter('sylius.form.type.cart.class', $cartConfig['classes']['form']['default']);
-        $container->setParameter('sylius.validation_groups.cart', $cartConfig['validation_groups']);
-        $container->setParameter('sylius.controller.cart_item.class', $cartItemConfig['classes']['controller']);
-        $container->setParameter('sylius.form.type.cart_item.class', $cartItemConfig['classes']['form']['default']);
-        $container->setParameter('sylius.validation_groups.cart_item', $cartItemConfig['validation_groups']);
 
         $definition = $container->findDefinition('sylius.context.cart');
         $definition->replaceArgument(0, new Reference($config['storage']));

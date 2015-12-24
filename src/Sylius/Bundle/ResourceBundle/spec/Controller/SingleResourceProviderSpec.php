@@ -42,6 +42,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         RepositoryInterface $repository
     )
     {
+        $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
         $requestAttributes->has('id')->willReturn(true);
@@ -60,6 +61,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         ResourceInterface $resource
     )
     {
+        $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
         $requestAttributes->has('id')->willReturn(true);
@@ -67,6 +69,19 @@ class SingleResourceProviderSpec extends ObjectBehavior
 
         $repository->findOneBy(array('id' => 3))->willReturn($resource);
 
+        $this->get($requestConfiguration, $repository)->shouldReturn($resource);
+    }
+
+    function it_uses_a_custom_method_if_configured(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        ResourceInterface $resource
+    ) {
+        $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
+        $requestConfiguration->getRepositoryArguments()->willReturn(array('foo'));
+
+        $repository->findAll('foo')->willReturn($resource);
+       
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 }

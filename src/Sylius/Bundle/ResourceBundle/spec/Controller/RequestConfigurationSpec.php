@@ -300,46 +300,80 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_repository_method_parameter(Parameters $parameters)
     {
-        $parameters->get('repository', array('method' => 'myDefaultMethod'))
-            ->willReturn(array('method' => 'myDefaultMethod'));
-        $this->getRepositoryMethod('myDefaultMethod')->shouldReturn('myDefaultMethod');
+        $parameters
+            ->has('repository')
+            ->willReturn(false)
+        ;
 
-        $parameters->get('repository', array('method' => 'myDefaultMethod'))
-            ->willReturn('myMethod');
-        $this->getRepositoryMethod('myDefaultMethod')->shouldReturn('myMethod');
+        $this->getRepositoryMethod()->shouldReturn(null);
+
+        $parameters
+            ->has('repository')
+            ->willReturn(true)
+        ;
+        $parameters
+            ->get('repository')
+            ->willReturn(array('method' => 'findAllEnabled'))
+        ;
+
+        $this->getRepositoryMethod()->shouldReturn('findAllEnabled');
     }
 
     function it_has_repository_arguments_parameter(Parameters $parameters)
     {
-        $defaultArguments = array('arguments' => 'value');
-        $parameters->get('repository', array())->willReturn($defaultArguments);
-        $this->getRepositoryArguments($defaultArguments)->shouldReturn('value');
+        $parameters->has('repository')->willReturn(false);
+        $this->getRepositoryArguments()->shouldReturn(array());
 
-        $arguments = array('arguments' => 'myValue');
-        $parameters->get('repository', array())->willReturn($arguments);
-        $this->getRepositoryArguments($defaultArguments)->shouldReturn('myValue');
+        $repositoryConfiguration = array('arguments' => 'value');
+        $parameters->has('repository')->willReturn(true);
+        $parameters->get('repository')->willReturn($repositoryConfiguration);
+
+        $this->getRepositoryArguments()->shouldReturn(array('value'));
+
+        $repositoryConfiguration = array('arguments' => array('foo, bar'));
+        $parameters->has('repository')->willReturn(true);
+        $parameters->get('repository')->willReturn($repositoryConfiguration);
+
+        $this->getRepositoryArguments()->shouldReturn(array('foo, bar'));
     }
 
     function it_has_factory_method_parameter(Parameters $parameters)
     {
-        $parameters->get('factory', array('method' => 'myDefaultMethod'))
-            ->willReturn(array('method' => 'myDefaultMethod'));
-        $this->getFactoryMethod('myDefaultMethod')->shouldReturn('myDefaultMethod');
+        $parameters
+            ->has('factory')
+            ->willReturn(false)
+        ;
 
-        $parameters->get('factory', array('method' => 'myDefaultMethod'))
-            ->willReturn('myMethod');
-        $this->getFactoryMethod('myDefaultMethod')->shouldReturn('myMethod');
+        $this->getFactoryMethod()->shouldReturn(null);
+
+        $parameters
+            ->has('factory')
+            ->willReturn(true)
+        ;
+        $parameters
+            ->get('factory')
+            ->willReturn(array('method' => 'createForPromotion'))
+        ;
+
+        $this->getFactoryMethod()->shouldReturn('createForPromotion');
     }
 
     function it_has_factory_arguments_parameter(Parameters $parameters)
     {
-        $defaultArguments = array('arguments' => 'value');
-        $parameters->get('factory', array())->willReturn($defaultArguments);
-        $this->getFactoryArguments($defaultArguments)->shouldReturn('value');
+        $parameters->has('factory')->willReturn(false);
+        $this->getFactoryArguments()->shouldReturn(array());
 
-        $arguments = array('arguments' => 'myValue');
-        $parameters->get('factory', array())->willReturn($arguments);
-        $this->getFactoryArguments($defaultArguments)->shouldReturn('myValue');
+        $factoryConfiguration = array('arguments' => 'value');
+        $parameters->has('factory')->willReturn(true);
+        $parameters->get('factory')->willReturn($factoryConfiguration);
+
+        $this->getFactoryArguments()->shouldReturn(array('value'));
+
+        $factoryConfiguration = array('arguments' => array('foo, bar'));
+        $parameters->has('factory')->willReturn(true);
+        $parameters->get('factory')->willReturn($factoryConfiguration);
+
+        $this->getFactoryArguments()->shouldReturn(array('foo, bar'));
     }
 
     function it_has_flash_message_parameter(MetadataInterface $metadata, Parameters $parameters)
