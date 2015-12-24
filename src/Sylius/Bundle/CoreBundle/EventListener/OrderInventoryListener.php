@@ -73,8 +73,8 @@ class OrderInventoryListener
         );
 
         if (null !== $state) {
-            foreach ($orderItem->getInventoryUnits() as $inventoryUnit) {
-                $inventoryUnit->setInventoryState($state);
+            foreach ($orderItem->getItemUnits() as $itemUnit) {
+                $itemUnit->setInventoryState($state);
             }
         }
     }

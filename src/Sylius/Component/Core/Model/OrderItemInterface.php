@@ -35,26 +35,4 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
      * @param ProductVariantInterface $variant
      */
     public function setVariant(ProductVariantInterface $variant);
-
-    /**
-     * @return Collection|InventoryUnitInterface[]
-     */
-    public function getInventoryUnits();
-
-    /**
-     * @param InventoryUnitInterface $unit
-     *
-     * @return bool
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @param InventoryUnitInterface $unit
-     */
-    public function addInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @param InventoryUnitInterface $unit
-     */
-    public function removeInventoryUnit(InventoryUnitInterface $unit);
 }
