@@ -77,38 +77,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnits()
-    {
-        return $this->itemUnits;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addInventoryUnit(InventoryUnitInterface $unit)
-    {
-        $this->addItemUnit($unit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeInventoryUnit(InventoryUnitInterface $unit)
-    {
-        $this->removeItemUnit($unit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit)
-    {
-        return $this->hasItemUnit($unit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPromotionSubjectTotal()
     {
         return $this->getTotal();

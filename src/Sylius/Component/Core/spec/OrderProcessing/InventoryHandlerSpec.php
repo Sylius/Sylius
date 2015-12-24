@@ -61,7 +61,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $item->getInventoryUnits()->willReturn(new ArrayCollection());
+        $item->getItemUnits()->willReturn(new ArrayCollection());
         $orderItemUnitFactory->createNew()->willReturn($unit1, $unit2);
 
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
@@ -80,14 +80,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2
     ) {
-        $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1)));
+        $item->getItemUnits()->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1)));
         $unit1->getStockable()->willReturn($variant);
         $unit2->getStockable()->willReturn($variant);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $item->getInventoryUnits()->willReturn(new ArrayCollection());
+        $item->getItemUnits()->willReturn(new ArrayCollection());
         $orderItemUnitFactory->createNew()->willReturn($unit2);
 
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldNotBeCalled();
@@ -114,7 +114,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
+        $item->getItemUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
 
         $stateMachineFactory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_HOLD)->willReturn(false);
@@ -144,7 +144,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
+        $item->getItemUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
 
         $stateMachineFactory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_RELEASE)->willReturn(false);
@@ -174,7 +174,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $item->getItemUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
 
         $stateMachineFactory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_SELL)->willReturn(true);
