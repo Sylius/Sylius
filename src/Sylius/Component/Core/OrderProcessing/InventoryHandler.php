@@ -12,13 +12,14 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
-use SM\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInteraface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,39 +28,33 @@ use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 class InventoryHandler implements InventoryHandlerInterface
 {
     /**
-     * Inventory operator.
-     *
      * @var InventoryOperatorInterface
      */
     protected $inventoryOperator;
 
     /**
-     * Inventory unit factory.
-     *
-     * @var InventoryUnitFactoryInterface
-     */
-    protected $inventoryUnitFactory;
-
-    /**
      * @var FactoryInterface
      */
-    protected $factory;
+    protected $orderItemUnitFactory;
 
     /**
-     * Constructor.
-     *
-     * @param InventoryOperatorInterface    $inventoryOperator
-     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
-     * @param FactoryInterface              $factory
+     * @var StateMachineFactoryInteraface
+     */
+    protected $stateMachineFactory;
+
+    /**
+     * @param InventoryOperatorInterface $inventoryOperator
+     * @param FactoryInterface $orderItemUnitFactory
+     * @param StateMachineFactoryInteraface $stateMachineFactory
      */
     public function __construct(
         InventoryOperatorInterface $inventoryOperator,
-        InventoryUnitFactoryInterface $inventoryUnitFactory,
-        FactoryInterface $factory
+        FactoryInterface $orderItemUnitFactory,
+        StateMachineFactoryInteraface $stateMachineFactory
     ) {
         $this->inventoryOperator    = $inventoryOperator;
-        $this->inventoryUnitFactory = $inventoryUnitFactory;
-        $this->factory              = $factory;
+        $this->orderItemUnitFactory = $orderItemUnitFactory;
+        $this->stateMachineFactory  = $stateMachineFactory;
     }
 
     /**
@@ -112,7 +107,7 @@ class InventoryHandler implements InventoryHandlerInterface
             $quantity = 0;
 
             foreach ($units as $unit) {
-                $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+                $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
                 if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
                     if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
                         $quantity++;
@@ -126,12 +121,23 @@ class InventoryHandler implements InventoryHandlerInterface
         }
     }
 
+    /**
+     * @param OrderItemInterface $item
+     * @param int $quantity
+     * @param string $state
+     */
     protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
     {
-        $units = $this->inventoryUnitFactory->createForStockable($item->getVariant(), $quantity, $state);
+        if ($quantity < 1) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        }
 
-        foreach ($units as $unit) {
-            $item->addInventoryUnit($unit);
+        for ($i = 0; $i < $quantity; $i++) {
+            /** @var OrderItemUnitInterface $orderItemUnit */
+            $orderItemUnit = $this->orderItemUnitFactory->createNew();
+            $orderItemUnit->setInventoryState($state);
+
+            $item->addItemUnit($orderItemUnit);
         }
     }
 
@@ -148,7 +154,7 @@ class InventoryHandler implements InventoryHandlerInterface
         $quantity = 0;
 
         foreach ($units as $unit) {
-            $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+            $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
                 $quantity++;

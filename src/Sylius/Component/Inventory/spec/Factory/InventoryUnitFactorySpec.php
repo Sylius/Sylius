@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Factory\Factory;
 
 /**
@@ -43,16 +42,16 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         $this->shouldImplement(InventoryUnitFactoryInterface::class);
     }
 
-    function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
+    function it_throws_exception_if_given_quantity_is_less_than_1()
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForStockable', array($stockable, -2))
+            ->during('createForStockable', array(-2))
         ;
     }
 
-    function it_creates_specified_amount_of_inventory_units(StockableInterface $stockable)
+    function it_creates_specified_amount_of_inventory_units()
     {
-        $this->createForStockable($stockable, 3, InventoryUnitInterface::STATE_BACKORDERED)->shouldHaveCount(3);
+        $this->createForStockable(3, InventoryUnitInterface::STATE_BACKORDERED)->shouldHaveCount(3);
     }
 }

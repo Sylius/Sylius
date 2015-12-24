@@ -47,6 +47,13 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
      */
     protected $updatedAt;
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createdAt = new \DateTime();
+    }
+
     /**
      * {@inheritdoc}
      */

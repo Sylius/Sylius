@@ -172,7 +172,6 @@ class CoreContext extends DefaultContext
     public function orderHasFollowingItems($number, TableNode $items)
     {
         $manager = $this->getEntityManager();
-        $orderItemRepository = $this->getRepository('order_item');
         $orderItemFactory = $this->getFactory('order_item');
 
         $order = $this->orders[$number];
