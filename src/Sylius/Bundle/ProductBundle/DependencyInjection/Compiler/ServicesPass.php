@@ -31,11 +31,7 @@ class ServicesPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $factoryDefinition = new Definition(Factory::class);
-        $factoryDefinition->setArguments(
-            array(
-                new Parameter('sylius.model.product.class')
-            )
-        );
+        $factoryDefinition->addArgument(new Parameter('sylius.model.product.class'));
 
         $translatableFactoryDefinition = $container->getDefinition('sylius.factory.product');
         $productFactoryClass = $translatableFactoryDefinition->getClass();

@@ -30,6 +30,17 @@ sylius_backend_product_create:
             template: SyliusWebBundle:Backend/Product:create.html.twig
             redirect: sylius_backend_product_show
 
+sylius_backend_product_create_from_archetype:
+    path: /new-from-archetype
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            factory:
+                method: createFromArchetype
+                arguments: $archetype
+            template: SyliusWebBundle:Backend/Product:create.html.twig
+
 sylius_backend_product_update:
     path: /{id}/edit
     methods: [GET, PUT, POST]
