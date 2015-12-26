@@ -72,6 +72,7 @@ sylius_backend_tax_category:
     resource: |
        alias: sylius.tax_category
        section: backend
+       except: ['show']
        templates: SyliusWebBundle:Backend/TaxCategory
     type: sylius.resource
 

@@ -437,6 +437,102 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
+    function it_excludes_specific_routes_if_configured(
+        RegistryInterface $resourceRegistry,
+        MetadataInterface $metadata,
+        RouteFactoryInterface $routeFactory,
+        RouteCollection $routeCollection,
+        Route $indexRoute,
+        Route $createRoute,
+        Route $updateRoute
+    ) {
+        $resourceRegistry->get('sylius.product')->willReturn($metadata);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        $metadata->getPluralName()->willReturn('products');
+        $metadata->getServiceId('controller')->willReturn('sylius.controller.product');
+
+        $routeFactory->createRouteCollection()->willReturn($routeCollection);
+
+        $configuration =
+<<<EOT
+alias: sylius.product
+except: ['show', 'delete']
+EOT;
+
+        $indexDefaults = array(
+            '_controller' => 'sylius.controller.product:indexAction'
+        );
+        $routeFactory->createRoute('/products/', $indexDefaults, array(), array(), '', array(), array('GET'))->willReturn($indexRoute);
+        $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
+
+        $createDefaults = array(
+            '_controller' => 'sylius.controller.product:createAction'
+        );
+        $routeFactory->createRoute('/products/new', $createDefaults, array(), array(), '', array(), array('GET', 'POST'))->willReturn($createRoute);
+        $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
+
+        $updateDefaults = array(
+            '_controller' => 'sylius.controller.product:updateAction'
+        );
+        $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, array(), array(), '', array(), array('GET', 'PUT', 'PATCH'))->willReturn($updateRoute);
+        $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
+
+        $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
+    }
+
+    function it_includes_only_specific_routes_if_configured(
+        RegistryInterface $resourceRegistry,
+        MetadataInterface $metadata,
+        RouteFactoryInterface $routeFactory,
+        RouteCollection $routeCollection,
+        Route $indexRoute,
+        Route $createRoute
+    ) {
+        $resourceRegistry->get('sylius.product')->willReturn($metadata);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        $metadata->getPluralName()->willReturn('products');
+        $metadata->getServiceId('controller')->willReturn('sylius.controller.product');
+
+        $routeFactory->createRouteCollection()->willReturn($routeCollection);
+
+        $configuration =
+<<<EOT
+alias: sylius.product
+only: ['create', 'index']
+EOT;
+
+        $indexDefaults = array(
+            '_controller' => 'sylius.controller.product:indexAction'
+        );
+        $routeFactory->createRoute('/products/', $indexDefaults, array(), array(), '', array(), array('GET'))->willReturn($indexRoute);
+        $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
+
+        $createDefaults = array(
+            '_controller' => 'sylius.controller.product:createAction'
+        );
+        $routeFactory->createRoute('/products/new', $createDefaults, array(), array(), '', array(), array('GET', 'POST'))->willReturn($createRoute);
+        $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
+
+        $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
+    }
+
+    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured(
+    ) {
+        $configuration =
+<<<EOT
+alias: sylius.product
+except: ['show', 'delete']
+only: ['create']
+EOT;
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('load', array($configuration, 'sylius.resource'))
+        ;
+    }
+
     function it_supports_sylius_resource_type()
     {
         $this->supports('sylius.product', 'sylius.resource')->shouldReturn(true);

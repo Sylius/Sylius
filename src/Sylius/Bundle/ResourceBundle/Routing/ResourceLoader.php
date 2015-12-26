@@ -49,25 +49,49 @@ class ResourceLoader implements LoaderInterface
     public function load($resource, $type = null)
     {
         $configuration = Yaml::parse($resource);
+
+        if (isset($configuration['only']) && isset($configuration['except'])) {
+            throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
+        }
+
+        $routesToGenerate = array('show', 'index', 'create', 'update', 'delete');
+
+        if (isset($configuration['only'])) {
+            $routesToGenerate = $configuration['only'];
+        }
+        if (isset($configuration['except'])) {
+            $routesToGenerate = array_diff($routesToGenerate, $configuration['except']);
+        }
+
         $metadata = $this->resourceRegistry->get($configuration['alias']);
         $routes = $this->routeFactory->createRouteCollection();
 
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
 
-        $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', array('GET'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
+        if (in_array('index', $routesToGenerate)) {
+            $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', array('GET'));
+            $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
+        }
 
-        $createRoute = $this->createRoute($metadata, $configuration, $rootPath.'new', 'create', array('GET', 'POST'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
+        if (in_array('create', $routesToGenerate)) {
+            $createRoute = $this->createRoute($metadata, $configuration, $rootPath . 'new', 'create', array('GET', 'POST'));
+            $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
+        }
 
-        $updateRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}/edit', 'update', array('GET', 'PUT', 'PATCH'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
+        if (in_array('update', $routesToGenerate)) {
+            $updateRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}/edit', 'update', array('GET', 'PUT', 'PATCH'));
+            $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
+        }
 
-        $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', array('GET'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
+        if (in_array('show', $routesToGenerate)) {
+            $showRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'show', array('GET'));
+            $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
+        }
 
-        $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'delete', array('DELETE'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
+        if (in_array('delete', $routesToGenerate)) {
+            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', array('DELETE'));
+            $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
+        }
 
         return $routes;
     }
