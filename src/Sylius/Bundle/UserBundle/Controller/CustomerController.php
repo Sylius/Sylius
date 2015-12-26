@@ -54,7 +54,9 @@ class CustomerController extends ResourceController
         $form = $this->resourceFormFactory->create($configuration, $customer);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $customer);
             $this->manager->flush();
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $customer);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create($customer, 204));

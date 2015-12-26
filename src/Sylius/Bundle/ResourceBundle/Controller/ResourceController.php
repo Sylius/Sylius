@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvents;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -162,7 +161,7 @@ class ResourceController extends ContainerAware
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $resource = $this->findOr404($configuration);
 
-        $this->eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
 
         $view = View::create($resource);
 
@@ -226,9 +225,9 @@ class ResourceController extends ContainerAware
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource);
+            $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
             $this->repository->add($newResource);
-            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource);
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create($newResource, 201));
@@ -271,9 +270,9 @@ class ResourceController extends ContainerAware
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
+            $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
             $this->manager->flush();
-            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(View::create(null, 204));
@@ -313,9 +312,9 @@ class ResourceController extends ContainerAware
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
-        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
         $this->repository->remove($resource);
-        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle(View::create(null, 204));
@@ -360,9 +359,9 @@ class ResourceController extends ContainerAware
         $resource = $this->findOr404($configuration);
         $resource->setEnabled($enabled);
 
-        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
         $this->manager->flush();
-        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle(View::create($resource, 204));

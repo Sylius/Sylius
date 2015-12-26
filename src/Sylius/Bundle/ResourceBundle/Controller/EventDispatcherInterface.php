@@ -24,4 +24,18 @@ interface EventDispatcherInterface
      * @param ResourceInterface $resource
      */
     public function dispatch($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+
+    /**
+     * @param string $eventName
+     * @param RequestConfiguration $requestConfiguration
+     * @param ResourceInterface $resource
+     */
+    public function dispatchPreEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+
+    /**
+     * @param string $eventName
+     * @param RequestConfiguration $requestConfiguration
+     * @param ResourceInterface $resource
+     */
+    public function dispatchPostEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
 }

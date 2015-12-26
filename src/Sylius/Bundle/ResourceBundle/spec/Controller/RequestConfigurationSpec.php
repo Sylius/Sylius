@@ -422,4 +422,11 @@ class RequestConfigurationSpec extends ObjectBehavior
 
         $this->getPermission('index')->shouldReturn(false);
     }
+    
+    function it_has_event_name(Parameters $parameters)
+    {
+        $parameters->get('event')->willReturn('foo');
+        
+        $this->getEvent()->shouldReturn('foo');
+    }
 }

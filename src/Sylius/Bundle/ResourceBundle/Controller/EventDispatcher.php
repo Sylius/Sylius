@@ -38,8 +38,31 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function dispatch($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
     {
+        $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
 
         $this->eventDispatcher->dispatch(sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dispatchPreEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    {
+        $eventName = $requestConfiguration->getEvent() ?: $eventName;
+        $metadata = $requestConfiguration->getMetadata();
+
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dispatchPostEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    {
+        $eventName = $requestConfiguration->getEvent() ?: $eventName;
+        $metadata = $requestConfiguration->getMetadata();
+
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.post_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
     }
 }

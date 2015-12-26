@@ -27,7 +27,6 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvents;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -159,7 +158,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::SHOW)->willReturn('SyliusShopBundle:Product:show.html.twig');
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create()
             ->setData(array(
@@ -201,7 +200,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create($resource);
 
@@ -466,9 +465,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $newResource)->willReturn($redirectResponse);
@@ -512,9 +511,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
@@ -754,9 +753,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -800,9 +799,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->submit($request, true)->willReturn($form);
         $form->isValid()->willReturn(true);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
 
@@ -878,9 +877,9 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
         $repository->remove($resource)->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
@@ -913,9 +912,9 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
         $repository->remove($resource)->shouldBeCalled();
-        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
 

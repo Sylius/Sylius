@@ -410,12 +410,11 @@ class RequestConfiguration
     }
 
     /**
-     * @param null $default
-     * @return mixed|null
+     * @return string|null
      */
-    public function getEvent($default = null)
+    public function getEvent()
     {
-        return $this->parameters->get('event', $default);
+        return $this->parameters->get('event');
     }
 
     /**
