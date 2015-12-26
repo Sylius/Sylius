@@ -54,9 +54,6 @@ class ResourceLoader implements LoaderInterface
 
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
 
-        $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', array('GET'));
-        $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
-
         $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', array('GET'));
         $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
 
@@ -65,6 +62,9 @@ class ResourceLoader implements LoaderInterface
 
         $updateRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}/edit', 'update', array('GET', 'PUT', 'PATCH'));
         $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
+
+        $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', array('GET'));
+        $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
 
         $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'delete', array('DELETE'));
         $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
@@ -116,6 +116,9 @@ class ResourceLoader implements LoaderInterface
         }
         if (isset($configuration['section'])) {
             $defaults['_sylius']['section'] = $configuration['section'];
+        }
+        if (isset($configuration['templates']) && in_array($actionName, array('show', 'index', 'create', 'update'))) {
+            $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
         }
 
         return $this->routeFactory->createRoute($path, $defaults, array(), array(), '', array(), $methods);

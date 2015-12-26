@@ -72,6 +72,7 @@ sylius_backend_tax_category:
     resource: |
        alias: sylius.tax_category
        section: backend
+       templates: SyliusWebBundle:Backend/TaxCategory
     type: sylius.resource
 
 sylius_backend_tax_rate:

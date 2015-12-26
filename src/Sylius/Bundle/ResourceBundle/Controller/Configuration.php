@@ -169,7 +169,9 @@ class Configuration
 
     public function getRouteName($name)
     {
-        return sprintf('%s_%s_%s', $this->bundlePrefix, $this->resourceName, $name);
+        $sectionPrefix = $this->getSection() ? $this->getSection().'_' : '';
+
+        return sprintf('%s_%s%s_%s', $this->bundlePrefix, $sectionPrefix, $this->resourceName, $name);
     }
 
     public function getRedirectRoute($name)
@@ -397,5 +399,10 @@ class Configuration
         }
 
         return (bool) $redirect['header'];
+    }
+
+    private function getSection()
+    {
+        return $this->parameters->get('section');
     }
 }
