@@ -55,19 +55,19 @@ class ResourceLoader implements LoaderInterface
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
 
         $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', array('GET'));
-        $routes->add($this->getRouteName($metadata, 'show'), $showRoute);
+        $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
 
         $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', array('GET'));
-        $routes->add($this->getRouteName($metadata, 'index'), $indexRoute);
+        $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
 
         $createRoute = $this->createRoute($metadata, $configuration, $rootPath.'new', 'create', array('GET', 'POST'));
-        $routes->add($this->getRouteName($metadata, 'create'), $createRoute);
+        $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
 
         $updateRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}/edit', 'update', array('GET', 'PUT', 'PATCH'));
-        $routes->add($this->getRouteName($metadata, 'update'), $updateRoute);
+        $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
 
         $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'delete', array('DELETE'));
-        $routes->add($this->getRouteName($metadata, 'delete'), $deleteRoute);
+        $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
 
         return $routes;
     }
@@ -114,18 +114,24 @@ class ResourceLoader implements LoaderInterface
         if (isset($configuration['form']) && in_array($actionName, array('create', 'update'))) {
             $defaults['_sylius']['form'] = $configuration['form'];
         }
+        if (isset($configuration['section'])) {
+            $defaults['_sylius']['section'] = $configuration['section'];
+        }
 
         return $this->routeFactory->createRoute($path, $defaults, array(), array(), '', array(), $methods);
     }
 
     /**
      * @param MetadataInterface $metadata
+     * @param array $configuration
      * @param string $actionName
      *
      * @return string
      */
-    private function getRouteName(MetadataInterface $metadata, $actionName)
+    private function getRouteName(MetadataInterface $metadata, array $configuration, $actionName)
     {
-        return sprintf('%s_%s_%s', $metadata->getApplicationName(), $metadata->getName(), $actionName);
+        $sectionPrefix = isset($configuration['section']) ? $configuration['section'].'_' : '';
+
+        return sprintf('%s_%s%s_%s', $metadata->getApplicationName(), $sectionPrefix, $metadata->getName(), $actionName);
     }
 }
