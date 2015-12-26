@@ -144,6 +144,9 @@ class ResourceLoader implements LoaderInterface
         if (isset($configuration['templates']) && in_array($actionName, array('show', 'index', 'create', 'update'))) {
             $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
         }
+        if (isset($configuration['redirect']) && in_array($actionName, array('create', 'update'))) {
+            $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
+        }
 
         return $this->routeFactory->createRoute($path, $defaults, array(), array(), '', array(), $methods);
     }
