@@ -17,10 +17,18 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.routing.route_factory.class">Sylius\Bundle\ResourceBundle\Routing\RouteFactory</parameter>
+        <parameter key="sylius.routing.loader.resource.class">Sylius\Bundle\ResourceBundle\Routing\ResourceLoader</parameter>
         <parameter key="sylius.routing.loader.api.class">Sylius\Bundle\ResourceBundle\Routing\ApiLoader</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.routing.route_factory" class="%sylius.routing.route_factory.class%" />
+        <service id="sylius.routing.loader.resource" class="%sylius.routing.loader.resource.class%">
+            <argument type="service" id="sylius.resource_registry" />
+            <argument type="service" id="sylius.routing.route_factory" />
+            <tag name="routing.loader" />
+        </service>
         <service id="sylius.routing.loader.api" class="%sylius.routing.loader.api.class%">
             <tag name="routing.loader" />
         </service>

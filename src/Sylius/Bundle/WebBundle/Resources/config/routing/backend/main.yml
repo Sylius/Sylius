@@ -69,8 +69,10 @@ sylius_backend_promotion_action:
     prefix: /promotion-actions
 
 sylius_backend_tax_category:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/tax_category.yml
-    prefix: /tax-categories
+    resource: |
+       alias: sylius.tax_category
+       section: backend
+    type: sylius.resource
 
 sylius_backend_tax_rate:
     resource: @SyliusWebBundle/Resources/config/routing/backend/tax_rate.yml
