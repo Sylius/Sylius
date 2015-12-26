@@ -1,5 +1,5 @@
-Updating existing resource
-==========================
+Updating Resources
+==================
 
 To display an edit form of a particular resource, change it or update it via API, you should use the **updateAction** action of your **app.controller.user** service.
 
@@ -22,7 +22,7 @@ If found it will create the ``app_user`` form, and set the existing user as data
 
 As a response, it will render the ``App:User:update.html.twig`` template with form view as the ``form`` variable and the existing User as the ``user`` variable.
 
-Submitting the form
+Submitting the Form
 -------------------
 
 You can use exactly the same route to handle the submit of the form and update the user.
@@ -37,7 +37,7 @@ Then, by default it redirects to ``app_user_show`` to display the updated user, 
 
 When validation fails, it will simply render the form again.
 
-Changing the template
+Changing the Template
 ---------------------
 
 Just like for other actions, you can customize the template.
@@ -54,8 +54,8 @@ Just like for other actions, you can customize the template.
             _sylius:
                 template: App:Backend/User:update.html.twig
 
-Using different form
---------------------
+Using Custom Form
+-----------------
 
 Same way like for **createAction** you can override the default form.
 
@@ -72,7 +72,7 @@ Same way like for **createAction** you can override the default form.
                 template: App:Backend/User:update.html.twig
                 form: app_user_custom
 
-Overriding the criteria
+Overriding the Criteria
 -----------------------
 
 By default, the **updateAction** will look for the resource by id. You can easily change that criteria.
@@ -89,7 +89,7 @@ By default, the **updateAction** will look for the resource by id. You can easil
             _sylius:
                 criteria: { username: $username }
 
-Custom redirect after success
+Custom Redirect After Success
 -----------------------------
 
 By default the controller will try to get the id of resource and redirect to the "show" route. To change that, use the following configuration.

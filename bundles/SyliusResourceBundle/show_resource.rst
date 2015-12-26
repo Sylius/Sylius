@@ -1,13 +1,11 @@
-Getting a single resource
+Getting a Single Resource
 =========================
 
-.. note::
+Your newly created controller service supports basic CRUD operations and is configurable via routing.
 
-    ResourceController class is built using FOSRestBundle, thus it's format agnostic, and can serve resources in many formats, like html, json or xml.
+The simplest action is **showAction**. It is used to display a single resource. To use it, the only thing you need to do is register a proper route.
 
-Your newly created controller service has a few basic crud actions and is configurable via routing, which allows you to do some really tedious tasks - easily.
-
-The most basic action is **showAction**. It is used to display a single resource. To use it, the only thing you need to do is register a proper route.
+Let's assume that you have a ``app.user`` resource registered. To display a single user, define the following routing:
 
 .. code-block:: yaml
 
@@ -25,7 +23,7 @@ If the requested user resource does not exist, it will throw a 404 exception.
 When a user is found, the default template will be rendered - ``App:User:show.html.twig`` (like you configured it in `config.yml`) with the User result as the ``user`` variable.
 That's the most basic usage of the simple ``showAction`` action.
 
-Using a custom template
+Using a Custom Template
 -----------------------
 
 Okay, but what if you want now to display same User resource, but with a different representation?
@@ -42,10 +40,9 @@ Okay, but what if you want now to display same User resource, but with a differe
             _sylius:
                 template: App:Backend/User:show.html.twig
 
-Nothing more to do here, when you go to ``/backend/users/3``, the controller will try to find the user and render it using the custom template you specified under the route configuration.
-Simple, isn't it?
+Nothing more to do here, when you go to ``/backend/users/3``, the controller will try to find the user and render it using the custom template you specified under the route configuration. Simple, isn't it?
 
-Overriding default criteria
+Overriding Default Criteria
 ---------------------------
 
 Displaying the user by id can be boring... and let's say we do not want to allow viewing disabled users? There is a solution for that!
@@ -67,7 +64,7 @@ Displaying the user by id can be boring... and let's say we do not want to allow
 With this configuration, the controller will look for a user with the given username and exclude disabled users.
 Internally, it simply uses the ``$repository->findOneBy(array $criteria)`` method to look for the resource.
 
-Using custom repository methods
+Using Custom Repository Methods
 -------------------------------
 
 By default, resource repository uses **findOneBy(array $criteria)**, but in some cases it's not enough - for example - you want to do proper joins or use a custom query.

@@ -8,19 +8,19 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/resource-bundle"
+    $ composer require sylius/resource-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/resource-bundle"
+    $ php composer.phar require sylius/resource-bundle
 
-Adding required bundles to the kernel
+Adding Required Bundles to The Kernel
 -------------------------------------
 
-You just need to enable proper bundles inside the kernel.
+You need to enable the bundle and its dependencies in the kernel:
 
 .. code-block:: php
 
@@ -39,16 +39,4 @@ You just need to enable proper bundles inside the kernel.
         );
     }
 
-To benefit from bundle services, you have to first register your bundle class as a *resource*.
-
-You also need to enable HTTP method parameter override, by calling the following method on the **Request** object.
-
-.. code-block:: php
-
-    <?php
-
-    // web/app{_dev|_test}.php
-
-    use Symfony\Component\HttpFoundation\Request;
-
-    Request::enableHttpMethodParameterOverride();
+That's it! Now you can configure your first resource.

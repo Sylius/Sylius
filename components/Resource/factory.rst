@@ -1,5 +1,6 @@
 Factory Interface
 =================
+
 .. _component_resource_factory_factory-interface:
 
 FactoryInterface
