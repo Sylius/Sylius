@@ -63,6 +63,8 @@ class ResourceLoader implements LoaderInterface
             $routesToGenerate = array_diff($routesToGenerate, $configuration['except']);
         }
 
+        $isApi = $type === 'sylius.resource_api';
+
         $metadata = $this->resourceRegistry->get($configuration['alias']);
         $routes = $this->routeFactory->createRouteCollection();
 
@@ -74,12 +76,12 @@ class ResourceLoader implements LoaderInterface
         }
 
         if (in_array('create', $routesToGenerate)) {
-            $createRoute = $this->createRoute($metadata, $configuration, $rootPath . 'new', 'create', array('GET', 'POST'));
+            $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath . 'new', 'create', $isApi ? array('POST') : array('GET', 'POST'));
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
         }
 
         if (in_array('update', $routesToGenerate)) {
-            $updateRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}/edit', 'update', array('GET', 'PUT', 'PATCH'));
+            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . '{id}' : $rootPath . '{id}/edit', 'update', $isApi ? array('PUT', 'PATCH') : array('GET', 'PUT', 'PATCH'));
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
         }
 
@@ -101,7 +103,7 @@ class ResourceLoader implements LoaderInterface
      */
     public function supports($resource, $type = null)
     {
-        return 'sylius.resource' === $type;
+        return 'sylius.resource' === $type || 'sylius.resource_api' === $type;
     }
 
     /**

@@ -597,9 +597,67 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
+    function it_generates_api_routing_based_on_resource_configuration(
+        RegistryInterface $resourceRegistry,
+        MetadataInterface $metadata,
+        RouteFactoryInterface $routeFactory,
+        RouteCollection $routeCollection,
+        Route $showRoute,
+        Route $indexRoute,
+        Route $createRoute,
+        Route $updateRoute,
+        Route $deleteRoute
+    ) {
+        $resourceRegistry->get('sylius.product')->willReturn($metadata);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        $metadata->getPluralName()->willReturn('products');
+        $metadata->getServiceId('controller')->willReturn('sylius.controller.product');
+
+        $routeFactory->createRouteCollection()->willReturn($routeCollection);
+
+        $configuration =
+<<<EOT
+alias: sylius.product
+EOT;
+
+        $showDefaults = array(
+            '_controller' => 'sylius.controller.product:showAction'
+        );
+        $routeFactory->createRoute('/products/{id}', $showDefaults, array(), array(), '', array(), array('GET'))->willReturn($showRoute);
+        $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
+
+        $indexDefaults = array(
+            '_controller' => 'sylius.controller.product:indexAction'
+        );
+        $routeFactory->createRoute('/products/', $indexDefaults, array(), array(), '', array(), array('GET'))->willReturn($indexRoute);
+        $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
+
+        $createDefaults = array(
+            '_controller' => 'sylius.controller.product:createAction'
+        );
+        $routeFactory->createRoute('/products/', $createDefaults, array(), array(), '', array(), array('POST'))->willReturn($createRoute);
+        $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
+
+        $updateDefaults = array(
+            '_controller' => 'sylius.controller.product:updateAction'
+        );
+        $routeFactory->createRoute('/products/{id}', $updateDefaults, array(), array(), '', array(), array('PUT', 'PATCH'))->willReturn($updateRoute);
+        $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
+
+        $deleteDefaults = array(
+            '_controller' => 'sylius.controller.product:deleteAction'
+        );
+        $routeFactory->createRoute('/products/{id}', $deleteDefaults, array(), array(), '', array(), array('DELETE'))->willReturn($deleteRoute);
+        $routeCollection->add('sylius_product_delete', $deleteRoute)->shouldBeCalled();
+
+        $this->load($configuration, 'sylius.resource_api')->shouldReturn($routeCollection);
+    }
+
     function it_supports_sylius_resource_type()
     {
         $this->supports('sylius.product', 'sylius.resource')->shouldReturn(true);
+        $this->supports('sylius.product', 'sylius.resource_api')->shouldReturn(true);
         $this->supports('sylius.product', 'abc')->shouldReturn(false);
     }
 }
