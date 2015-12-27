@@ -40,7 +40,6 @@ abstract class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = array(
-            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
             new \Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
@@ -107,7 +106,7 @@ abstract class Kernel extends BaseKernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Payum\Bundle\PayumBundle\PayumBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
-            new \JMS\TranslationBundle\JMSTranslationBundle(),
+            new \JMS\ResourceBundle\JMSResourceBundle(),
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),

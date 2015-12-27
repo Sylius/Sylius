@@ -13,10 +13,10 @@ namespace Sylius\Bundle\ContactBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 use Sylius\Bundle\ContactBundle\Form\Type\RequestType;
 use Sylius\Bundle\ContactBundle\Form\Type\TopicType;
 use Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType;
@@ -109,7 +109,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Topic::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(TopicInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(TranslatableRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()

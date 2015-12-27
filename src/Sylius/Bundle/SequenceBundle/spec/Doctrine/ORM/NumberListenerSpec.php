@@ -17,7 +17,7 @@ use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\Sequence;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
@@ -58,7 +58,7 @@ class NumberListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         SequenceSubjectInterface $entity,
         GeneratorInterface $generator,
-        EntityRepository $sequenceRepository,
+        Repository $sequenceRepository,
         Sequence $sequence,
         $registry,
         $eventDispatcher

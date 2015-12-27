@@ -18,10 +18,10 @@ use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Variation\Model\Option;
 use Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeType;
 use Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeTranslationType;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -81,7 +81,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->defaultValue(Archetype::class)->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->defaultValue(ArchetypeInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->defaultValue(TranslatableRepository::class)->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()

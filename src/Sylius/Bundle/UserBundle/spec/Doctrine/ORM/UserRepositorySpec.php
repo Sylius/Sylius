@@ -21,7 +21,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 
 class UserRepositorySpec extends ObjectBehavior
 {
@@ -39,7 +39,7 @@ class UserRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
     }
 
     function it_create_paginator(

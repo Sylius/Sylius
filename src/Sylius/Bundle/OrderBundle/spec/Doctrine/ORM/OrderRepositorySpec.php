@@ -10,7 +10,7 @@ use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 class OrderRepositorySpec extends ObjectBehavior
@@ -27,7 +27,7 @@ class OrderRepositorySpec extends ObjectBehavior
 
     function it_is_repository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
         $this->shouldImplement(OrderRepositoryInterface::class);
     }
 

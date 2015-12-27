@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
 
@@ -20,7 +20,7 @@ use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RoleRepository extends EntityRepository implements RoleRepositoryInterface
+class RoleRepository extends Repository implements RoleRepositoryInterface
 {
     /**
      * {@inheritdoc}

@@ -20,7 +20,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 
 class CustomerRepositorySpec extends ObjectBehavior
 {
@@ -38,7 +38,7 @@ class CustomerRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
     }
 
     function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)

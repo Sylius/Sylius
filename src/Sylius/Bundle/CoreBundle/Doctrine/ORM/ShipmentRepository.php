@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 
-class ShipmentRepository extends EntityRepository
+class ShipmentRepository extends Repository
 {
     /**
      * @param array $criteria

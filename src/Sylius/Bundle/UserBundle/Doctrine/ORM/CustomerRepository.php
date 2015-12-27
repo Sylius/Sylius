@@ -12,13 +12,13 @@
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerRepository extends EntityRepository
+class CustomerRepository extends Repository
 {
     /**
      * Get the customer's data for the details page.

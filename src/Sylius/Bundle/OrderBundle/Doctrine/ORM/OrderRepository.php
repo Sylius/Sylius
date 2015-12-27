@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
@@ -19,7 +19,7 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderRepository extends EntityRepository implements OrderRepositoryInterface
+class OrderRepository extends Repository implements OrderRepositoryInterface
 {
     /**
      * {@inheritdoc}

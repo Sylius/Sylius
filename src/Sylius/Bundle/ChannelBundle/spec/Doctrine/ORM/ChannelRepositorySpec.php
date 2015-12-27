@@ -19,7 +19,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
@@ -39,7 +39,7 @@ class ChannelRepositorySpec extends ObjectBehavior
 
     function it_is_arepository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
         $this->shouldImplement(ChannelRepositoryInterface::class);
     }
 

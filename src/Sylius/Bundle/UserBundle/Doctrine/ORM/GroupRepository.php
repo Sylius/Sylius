@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 
 /**
  * UserGroup rule configuration form type.
  *
  * @author Antonio Perić <antonio@locastic.com>
  */
-class GroupRepository extends EntityRepository
+class GroupRepository extends Repository
 {
     public function getFormQueryBuilder()
     {

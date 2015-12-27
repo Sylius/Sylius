@@ -14,7 +14,7 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
