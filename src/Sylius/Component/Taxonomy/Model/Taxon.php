@@ -77,7 +77,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
      */
     public function __toString()
     {
-        return $this->translate()->__toString();
+        return (string) $this->translate()->__toString();
     }
 
     /**
