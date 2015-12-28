@@ -48,6 +48,4 @@ interface AdjustableInterface
     public function removeAdjustments($type);
 
     public function clearAdjustments();
-
-    public function calculateAdjustmentsTotal();
 }

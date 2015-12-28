@@ -11,11 +11,10 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * Interface for order line item model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface
@@ -41,22 +40,9 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setUnitPrice($unitPrice);
 
     /**
-     * Get item total.
-     *
      * @return int
      */
     public function getTotal();
-
-    /**
-     * @param int $total
-     */
-    public function setTotal($total);
-
-    /**
-     * Calculate total based on quantity and unit price.
-     * Take adjustments into account.
-     */
-    public function calculateTotal();
 
     /**
      * Checks whether the item given as argument corresponds to
@@ -86,4 +72,26 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      * @param bool $immutable
      */
     public function setImmutable($immutable);
+
+    /**
+     * @return Collection|OrderItemUnitInterface[]
+     */
+    public function getItemUnits();
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     *
+     * @return bool
+     */
+    public function hasItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function addItemUnit(OrderItemUnitInterface $itemUnit);
+
+    /**
+     * @param OrderItemUnitInterface $itemUnit
+     */
+    public function removeItemUnit(OrderItemUnitInterface $itemUnit);
 }

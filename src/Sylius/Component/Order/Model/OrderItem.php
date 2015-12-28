@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Model for order line items.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItem implements OrderItemInterface
@@ -42,6 +40,21 @@ class OrderItem implements OrderItemInterface
     protected $unitPrice = 0;
 
     /**
+     * @var int
+     */
+    protected $total = 0;
+
+    /**
+     * @var bool
+     */
+    protected $immutable = false;
+
+    /**
+     * @var Collection|OrderItemUnitInterface[]
+     */
+    protected $itemUnits;
+
+    /**
      * @var Collection|AdjustmentInterface[]
      */
     protected $adjustments;
@@ -51,24 +64,10 @@ class OrderItem implements OrderItemInterface
      */
     protected $adjustmentsTotal = 0;
 
-    /**
-     * @var int
-     */
-    protected $total = 0;
-
-    /**
-     * Order item is immutable?
-     *
-     * @var bool
-     */
-    protected $immutable = false;
-
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->adjustments = new ArrayCollection();
+        $this->itemUnits = new ArrayCollection();
     }
 
     /**
@@ -131,104 +130,11 @@ class OrderItem implements OrderItemInterface
         if (!is_int($unitPrice)) {
             throw new \InvalidArgumentException('Unit price must be an integer.');
         }
+
         $this->unitPrice = $unitPrice;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdjustments($type = null)
-    {
-        if (null === $type) {
-            return $this->adjustments;
-        }
-
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
-            return $type === $adjustment->getType();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAdjustment(AdjustmentInterface $adjustment)
-    {
-        if (!$this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable($this);
-            $this->adjustments->add($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAdjustment(AdjustmentInterface $adjustment)
-    {
-        if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAdjustment(AdjustmentInterface $adjustment)
-    {
-        return $this->adjustments->contains($adjustment);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdjustmentsTotal($type = null)
-    {
-        if (null === $type) {
-            return $this->adjustmentsTotal;
-        }
-
-        $total = 0;
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            $total += $adjustment->getAmount();
-        }
-
-        return $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAdjustments($type)
-    {
-        foreach ($this->getAdjustments($type) as $adjustment) {
-            if ($adjustment->isLocked()) {
-                continue;
-            }
-
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearAdjustments()
-    {
-        return $this->adjustments->clear();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateAdjustmentsTotal()
-    {
-        $this->adjustmentsTotal = 0;
-
-        foreach ($this->adjustments as $adjustment) {
-            if (!$adjustment->isNeutral()) {
-                $this->adjustmentsTotal += $adjustment->getAmount();
-            }
+        foreach ($this->itemUnits as $unitPrice) {
+            $unitPrice->calculateTotal();
         }
     }
 
@@ -238,31 +144,6 @@ class OrderItem implements OrderItemInterface
     public function getTotal()
     {
         return $this->total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTotal($total)
-    {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
-        }
-        $this->total = $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateTotal()
-    {
-        $this->calculateAdjustmentsTotal();
-
-        $this->total = ($this->quantity * $this->unitPrice) + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
     }
 
     /**
@@ -301,5 +182,159 @@ class OrderItem implements OrderItemInterface
     public function setImmutable($immutable)
     {
         $this->immutable = (bool) $immutable;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemUnits()
+    {
+        return $this->itemUnits;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        if (!$this->hasItemUnit($itemUnit)) {
+            $itemUnit->setOrderItem($this);
+            $this->itemUnits->add($itemUnit);
+
+            $this->calculateTotal();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        $itemUnit->setOrderItem(null);
+        $this->itemUnits->removeElement($itemUnit);
+
+        $this->calculateTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasItemUnit(OrderItemUnitInterface $itemUnit)
+    {
+        return $this->itemUnits->contains($itemUnit);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustments($type = null)
+    {
+        if (null === $type) {
+            return $this->adjustments;
+        }
+
+        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
+            return $type === $adjustment->getType();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAdjustment(AdjustmentInterface $adjustment)
+    {
+        if (!$this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable($this);
+            $this->adjustments->add($adjustment);
+
+            $this->calculateTotal();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustment(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable(null);
+            $this->adjustments->removeElement($adjustment);
+
+            $this->calculateTotal();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAdjustment(AdjustmentInterface $adjustment)
+    {
+        return $this->adjustments->contains($adjustment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustmentsTotal($type = null)
+    {
+        if (null === $type) {
+            return $this->adjustmentsTotal;
+        }
+
+        $total = 0;
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            $total += $adjustment->getAmount();
+        }
+
+        return $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustments($type)
+    {
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            if ($adjustment->isLocked()) {
+                continue;
+            }
+
+            $this->removeAdjustment($adjustment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAdjustments()
+    {
+        $this->adjustments->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function calculateAdjustmentsTotal()
+    {
+        $this->adjustmentsTotal = 0;
+
+        foreach ($this->adjustments as $adjustment) {
+            if (!$adjustment->isNeutral()) {
+                $this->adjustmentsTotal += $adjustment->getAmount();
+            }
+        }
+    }
+
+    protected function calculateTotal()
+    {
+        $this->calculateAdjustmentsTotal();
+
+        $this->total = $this->adjustmentsTotal;
+        foreach ($this->itemUnits as $unit) {
+            $this->total += $unit->getTotal();
+        }
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 }

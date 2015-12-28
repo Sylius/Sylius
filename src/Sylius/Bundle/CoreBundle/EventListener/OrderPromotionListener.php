@@ -20,15 +20,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Order promotion listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderPromotionListener
 {
     /**
-     * Order promotion processor.
-     *
      * @var PromotionProcessorInterface
      */
     protected $promotionProcessor;
@@ -44,8 +40,6 @@ class OrderPromotionListener
     protected $translator;
 
     /**
-     * Constructor.
-     *
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
@@ -80,8 +74,6 @@ class OrderPromotionListener
         }
 
         $this->promotionProcessor->process($order);
-
-        $order->calculateTotal();
     }
 
     /**

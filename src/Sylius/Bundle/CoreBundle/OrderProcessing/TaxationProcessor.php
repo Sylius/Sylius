@@ -21,55 +21,41 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
- * Taxation processor.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Adjustment repository.
-     *
      * @var FactoryInterface
      */
     protected $adjustmentFactory;
 
     /**
-     * Tax calculator.
-     *
      * @var CalculatorInterface
      */
     protected $calculator;
 
     /**
-     * Tax rate resolver.
-     *
      * @var TaxRateResolverInterface
      */
     protected $taxRateResolver;
 
     /**
-     * Zone matcher.
-     *
      * @var ZoneMatcherInterface
      */
     protected $zoneMatcher;
 
     /**
-     * Taxation settings.
-     *
      * @var Settings
      */
     protected $settings;
 
     /**
-     * Constructor.
-     *
-     * @param FactoryInterface      $adjustmentFactory
-     * @param CalculatorInterface      $calculator
+     * @param FactoryInterface $adjustmentFactory
+     * @param CalculatorInterface $calculator
      * @param TaxRateResolverInterface $taxRateResolver
-     * @param ZoneMatcherInterface     $zoneMatcher
-     * @param Settings                 $taxationSettings
+     * @param ZoneMatcherInterface $zoneMatcher
+     * @param Settings $taxationSettings
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
@@ -116,10 +102,14 @@ class TaxationProcessor implements TaxationProcessorInterface
         $taxes = $this->processTaxes($order, $zone);
 
         $this->addAdjustments($taxes, $order);
-
-        $order->calculateTotal();
     }
 
+    /**
+     * @param OrderInterface $order
+     * @param $zone
+     *
+     * @return array
+     */
     protected function processTaxes(OrderInterface $order, $zone)
     {
         $taxes = array();
@@ -130,8 +120,6 @@ class TaxationProcessor implements TaxationProcessorInterface
             if (null === $rate) {
                 continue;
             }
-
-            $item->calculateTotal();
 
             $amount = $this->calculator->calculate($item->getTotal(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();
@@ -146,6 +134,10 @@ class TaxationProcessor implements TaxationProcessorInterface
         return $taxes;
     }
 
+    /**
+     * @param array $taxes
+     * @param OrderInterface $order
+     */
     protected function addAdjustments(array $taxes, OrderInterface $order)
     {
         foreach ($taxes as $description => $tax) {

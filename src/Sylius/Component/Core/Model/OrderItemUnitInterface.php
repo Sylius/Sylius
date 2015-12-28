@@ -12,22 +12,12 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
- * Inventory unit interface.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface
+interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, BaseInventoryUnitInterface, ShipmentItemInterface
 {
-    /**
-     * @return null|OrderItemInterface
-     */
-    public function getOrderItem();
-
-    /**
-     * @param null|OrderItemInterface $orderItem
-     */
-    public function setOrderItem(OrderItemInterface $orderItem = null);
 }

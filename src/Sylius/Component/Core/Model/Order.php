@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
@@ -22,108 +23,76 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
- * Order entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Order extends Cart implements OrderInterface
 {
     /**
-     * Customer.
-     *
      * @var BaseCustomerInterface
      */
     protected $customer;
 
     /**
-     * Channel.
-     *
      * @var ChannelInterface
      */
     protected $channel;
 
     /**
-     * Order shipping address.
-     *
      * @var AddressInterface
      */
     protected $shippingAddress;
 
     /**
-     * Order billing address.
-     *
      * @var AddressInterface
      */
     protected $billingAddress;
 
     /**
-     * Payments for this order.
-     *
      * @var Collection|BasePaymentInterface[]
      */
     protected $payments;
 
     /**
-     * Shipments for this order.
-     *
      * @var Collection|ShipmentInterface[]
      */
     protected $shipments;
 
     /**
-     * Currency ISO code.
-     *
      * @var string
      */
     protected $currency;
 
     /**
-     * Exchange rate at the time of order completion.
-     *
      * @var float
      */
     protected $exchangeRate = 1.0;
 
     /**
-     * Promotion coupons.
-     *
      * @var Collection|BaseCouponInterface[]
      */
     protected $promotionCoupons;
 
     /**
-     * Order checkout state.
-     *
      * @var string
      */
     protected $checkoutState = OrderInterface::STATE_CART;
 
     /**
-     * Order payment state.
-     *
      * @var string
      */
     protected $paymentState = BasePaymentInterface::STATE_NEW;
 
     /**
-     * Order shipping state.
-     * It depends on the status of all order shipments.
-     *
      * @var string
      */
     protected $shippingState = OrderShippingStates::CHECKOUT;
 
     /**
-     * Promotions applied
-     *
      * @var Collection|BasePromotionInterface[]
      */
     protected $promotions;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -254,13 +223,13 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnits()
+    public function getItemUnits()
     {
         $units = new ArrayCollection();
 
         /** @var $item OrderItem */
         foreach ($this->getItems() as $item) {
-            foreach ($item->getInventoryUnits() as $unit) {
+            foreach ($item->getItemUnits() as $unit) {
                 $units->add($unit);
             }
         }
@@ -271,9 +240,9 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnitsByVariant(ProductVariantInterface $variant)
+    public function getItemUnitsByVariant(ProductVariantInterface $variant)
     {
-        return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
+        return $this->getItemUnits()->filter(function (OrderItemUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
     }
@@ -527,7 +496,7 @@ class Order extends Cart implements OrderInterface
      */
     public function isBackorder()
     {
-        foreach ($this->getInventoryUnits() as $unit) {
+        foreach ($this->getItemUnits() as $unit) {
             if (InventoryUnitInterface::STATE_BACKORDERED === $unit->getInventoryState()) {
                 return true;
             }

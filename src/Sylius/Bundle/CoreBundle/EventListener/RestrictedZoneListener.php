@@ -57,8 +57,6 @@ class RestrictedZoneListener
         }
 
         if ($removed) {
-            $cart->calculateTotal();
-
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
         }
