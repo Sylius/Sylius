@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
-use FOS\RestBundle\View\ViewHandlerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -177,7 +176,7 @@ class ResourceController extends ContainerAware
             ;
         }
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -206,7 +205,7 @@ class ResourceController extends ContainerAware
             ;
         }
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -232,7 +231,7 @@ class ResourceController extends ContainerAware
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle(View::create($newResource, 201));
+                return $this->viewHandler->handle($configuration, View::create($newResource, 201));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
@@ -241,7 +240,7 @@ class ResourceController extends ContainerAware
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         $view = View::create()
@@ -254,7 +253,7 @@ class ResourceController extends ContainerAware
             ->setTemplate($configuration->getTemplate(ResourceActions::CREATE))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -279,7 +278,7 @@ class ResourceController extends ContainerAware
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle(View::create(null, 204));
+                return $this->viewHandler->handle($configuration, View::create(null, 204));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -288,7 +287,7 @@ class ResourceController extends ContainerAware
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         $view = View::create()
@@ -301,7 +300,7 @@ class ResourceController extends ContainerAware
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -321,7 +320,7 @@ class ResourceController extends ContainerAware
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create(null, 204));
+            return $this->viewHandler->handle($configuration, View::create(null, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
@@ -368,7 +367,7 @@ class ResourceController extends ContainerAware
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($resource, 204));
+            return $this->viewHandler->handle($configuration, View::create($resource, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
@@ -416,7 +415,7 @@ class ResourceController extends ContainerAware
         );
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($resource, 204));
+            return $this->viewHandler->handle($configuration, View::create($resource, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);

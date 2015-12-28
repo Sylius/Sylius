@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
-use FOS\RestBundle\View\ViewHandlerInterface;
 use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
@@ -24,9 +23,11 @@ use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -40,7 +41,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @mixin \Sylius\Bundle\ResourceBundle\Controller\ResourceController
+ * @mixin ResourceController
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -170,7 +171,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:show.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
         
         $this->showAction($request)->shouldReturn($response);
     }
@@ -204,7 +205,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create($resource);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->showAction($request)->shouldReturn($response);
     }
@@ -265,7 +266,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:index.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->indexAction($request)->shouldReturn($response);
     }
@@ -333,7 +334,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:create.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->createAction($request)->shouldReturn($response);
     }
@@ -383,7 +384,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:create.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->createAction($request)->shouldReturn($response);
     }
@@ -423,7 +424,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create($form, 400);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->createAction($request)->shouldReturn($response);
     }
@@ -521,7 +522,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create($newResource, 201);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->createAction($request)->shouldReturn($response);
     }
@@ -613,7 +614,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:update.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
     }
@@ -666,7 +667,7 @@ class ResourceControllerSpec extends ObjectBehavior
             ->setTemplate('SyliusShopBundle:Product:update.html.twig')
         ;
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
     }
@@ -710,7 +711,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create($form, 400);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
     }
@@ -809,7 +810,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create(null, 204);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
     }
@@ -922,7 +923,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create(null, 204);
 
-        $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->deleteAction($request)->shouldReturn($response);
     }

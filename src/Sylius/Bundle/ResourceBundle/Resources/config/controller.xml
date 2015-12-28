@@ -29,6 +29,7 @@
         <parameter key="sylius.resource_controller.flash_helper.class">Sylius\Bundle\ResourceBundle\Controller\FlashHelper</parameter>
         <parameter key="sylius.resource_controller.event_dispatcher.class">Sylius\Bundle\ResourceBundle\Controller\EventDispatcher</parameter>
         <parameter key="sylius.resource_controller.pagerfanta_representation_factory.class">Hateoas\Representation\Factory\PagerfantaFactory</parameter>
+        <parameter key="sylius.resource_controller.view_handler.class">Sylius\Bundle\ResourceBundle\Controller\ViewHandler</parameter>
     </parameters>
 
     <services>
@@ -60,6 +61,9 @@
         </service>
         <service id="sylius.resource_controller.event_dispatcher" class="%sylius.resource_controller.event_dispatcher.class%">
             <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="sylius.resource_controller.view_handler" class="%sylius.resource_controller.view_handler.class%">
+            <argument type="service" id="fos_rest.view_handler" />
         </service>
     </services>
 </container>
