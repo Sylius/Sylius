@@ -171,6 +171,15 @@ a.create-ui-toggle {
     background-repeat: no-repeat !important;
     cursor: pointer;
 }
+
+/* Specific rules */
+.crossed {
+     text-decoration: line-through;
+ }
+.label-originalprice {
+     margin-right: 0.3em;
+ }
+
 .create-ui-toolbar-wrapper a {
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }

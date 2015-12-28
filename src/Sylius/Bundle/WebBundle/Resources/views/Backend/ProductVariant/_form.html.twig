@@ -18,6 +18,7 @@
             </div>
         </div>
         {{ form_row(form.price) }}
+        {{ form_row(form.originalPrice) }}
         {{ form_row(form.pricingCalculator) }}
         {% if form.pricingConfiguration is defined %}
             {% if form.pricingCalculator.vars.value == 'volume_based' %}

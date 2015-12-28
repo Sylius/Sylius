@@ -32,3 +32,10 @@
 </div>
 
 {% endmacro %}
+
+{% macro sylius_display_price_with_original(variant) %}
+    {% if (variant.isReduced) %}
+        <span class='label label-success crossed'>{{ variant.originalPrice|sylius_price }}</span>
+    {% endif %}
+    <span class='label label-success'>{{ variant.price|sylius_price }}</span>
+{% endmacro %}
