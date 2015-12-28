@@ -1,0 +1,15 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "name": {
+                "errors": [
+                    "Please enter shipping category name."
+                ]
+            },
+            "description": [],
+            "code": []
+        }
+    }
+}

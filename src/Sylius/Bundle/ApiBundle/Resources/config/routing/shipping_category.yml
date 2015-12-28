@@ -7,6 +7,7 @@ sylius_api_shipping_category_index:
     defaults:
         _controller: sylius.controller.shipping_category:indexAction
         _sylius:
+            serialization_groups: [Default]
             paginate: $limit
             sortable: true
             sorting:
@@ -35,3 +36,5 @@ sylius_api_shipping_category_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipping_category:showAction
+        _sylius:
+            serialization_groups: [Detailed]
