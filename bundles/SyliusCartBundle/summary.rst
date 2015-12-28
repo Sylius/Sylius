@@ -22,7 +22,7 @@ Configuration reference
                     form:       Sylius\Bundle\CartBundle\Form\Type\CartType
                 validation_groups:
                     default: [ sylius ]
-            item:
+            cart_item:
                 classes:
                     controller: Sylius\Bundle\CartBundle\Controller\CartItemController
                     form:       Sylius\Bundle\CartBundle\Form\Type\CartItemType
