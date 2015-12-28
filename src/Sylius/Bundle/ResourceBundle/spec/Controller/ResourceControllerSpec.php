@@ -421,7 +421,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(false);
 
-        $expectedView = View::create($form);
+        $expectedView = View::create($form, 400);
 
         $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
@@ -708,7 +708,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
-        $expectedView = View::create($form);
+        $expectedView = View::create($form, 400);
 
         $viewHandler->handle(Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 

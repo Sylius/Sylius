@@ -11,14 +11,29 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
+    /**
+     * @var PagerfantaFactory
+     */
+    private $pagerfantaRepresentationFactory;
+
+    /**
+     * @param PagerfantaFactory $pagerfantaRepresentationFactory
+     */
+    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory)
+    {
+        $this->pagerfantaRepresentationFactory = $pagerfantaRepresentationFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,10 +53,17 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
             return $repository->findBy($requestConfiguration->getCriteria(), $requestConfiguration->getSorting(), $requestConfiguration->getLimit());
         }
 
+        $request = $requestConfiguration->getRequest();
+
         /** @var Pagerfanta $paginator */
         $paginator = $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
+        $paginator->setCurrentPage($request->query->get('page', 1));
 
-        $paginator->setCurrentPage($requestConfiguration->getRequest()->query->get('page', 1));
+        if (!$requestConfiguration->isHtmlRequest()) {
+            $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
+
+            return $this->pagerfantaRepresentationFactory->createRepresentation($paginator, $route);
+        }
 
         return $paginator;
     }

@@ -37,6 +37,8 @@ class ResourceFormFactory implements ResourceFormFactoryInterface
      */
     public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
     {
-        return $this->formFactory->create($requestConfiguration->getFormType(), $resource);
+        $options = $requestConfiguration->isHtmlRequest() ? array() : array('csrf_protection' => false);
+
+        return $this->formFactory->create($requestConfiguration->getFormType(), $resource, $options);
     }
 }

@@ -241,7 +241,7 @@ class ResourceController extends ContainerAware
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form));
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
         $view = View::create()
@@ -288,7 +288,7 @@ class ResourceController extends ContainerAware
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form));
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
         $view = View::create()

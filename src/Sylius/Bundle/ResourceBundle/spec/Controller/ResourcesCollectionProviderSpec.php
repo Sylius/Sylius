@@ -11,10 +11,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
+use Hateoas\Representation\PaginatedRepresentation;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Component\Contact\Model\Request;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -22,10 +26,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
+ * @mixin ResourcesCollectionProvider
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
+    function let(PagerfantaFactory $pagerfantaRepresentationFactory)
+    {
+        $this->beConstructedWith($pagerfantaRepresentationFactory);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider');
@@ -43,6 +54,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $resource2
     )
     {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
@@ -61,6 +73,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $resource3
     )
     {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
@@ -81,6 +94,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $resource1
     )
     {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments(array())->willReturn(array('foo'));
 
@@ -102,6 +116,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     )
     {
 
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
@@ -118,5 +133,41 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $paginator->setCurrentPage(6)->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
+    }
+
+    function it_creates_a_pagniated_respresentation_for_pagerfanta_for_non_html_requests(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        Pagerfanta $paginator,
+        Request $request,
+        ParameterBag $queryParameters,
+        ParameterBag $requestAttributes,
+        PagerfantaFactory $pagerfantaRepresentationFactory,
+        PaginatedRepresentation $paginatedRepresentation
+    )
+    {
+        $requestConfiguration->isHtmlRequest()->willReturn(false);
+        $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
+
+        $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->isLimited()->willReturn(false);
+        $requestConfiguration->getCriteria()->willReturn(array());
+        $requestConfiguration->getSorting()->willReturn(array());
+
+        $repository->createPaginator(array(), array())->willReturn($paginator);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->query = $queryParameters;
+        $queryParameters->get('page', 1)->willReturn(6);
+        $queryParameters->all()->willReturn(array('foo' => 2, 'bar' => 15));
+        $request->attributes = $requestAttributes;
+        $requestAttributes->get('_route')->willReturn('sylius_product_index');
+        $requestAttributes->get('_route_params')->willReturn(array('slug' => 'foo-bar'));
+
+        $paginator->setCurrentPage(6)->shouldBeCalled();
+
+        $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
     }
 }

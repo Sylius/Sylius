@@ -28,6 +28,7 @@
         <parameter key="sylius.resource_controller.authorization_checker.disabled.class">Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker</parameter>
         <parameter key="sylius.resource_controller.flash_helper.class">Sylius\Bundle\ResourceBundle\Controller\FlashHelper</parameter>
         <parameter key="sylius.resource_controller.event_dispatcher.class">Sylius\Bundle\ResourceBundle\Controller\EventDispatcher</parameter>
+        <parameter key="sylius.resource_controller.pagerfanta_representation_factory.class">Hateoas\Representation\Factory\PagerfantaFactory</parameter>
     </parameters>
 
     <services>
@@ -42,7 +43,10 @@
         </service>
         <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
         <service id="sylius.resource_controller.single_resource_provider" class="%sylius.resource_controller.single_resource_provider.class%" />
-        <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%" />
+        <service id="sylius.resource_controller.pagerfanta_representation_factory" class="%sylius.resource_controller.pagerfanta_representation_factory.class%" />
+        <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%">
+            <argument type="service" id="sylius.resource_controller.pagerfanta_representation_factory" />
+        </service>
         <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">
             <argument type="service" id="form.factory" />
         </service>
