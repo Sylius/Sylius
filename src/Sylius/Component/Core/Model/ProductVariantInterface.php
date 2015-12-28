@@ -117,4 +117,23 @@ interface ProductVariantInterface extends
      * @param float $depth
      */
     public function setDepth($depth);
+
+    /**
+     * Get original price.
+     *
+     * @return integer
+     */
+    public function getOriginalPrice();
+
+    /**
+     * Set original price.
+     *
+     * @param integer $originalPrice
+     */
+    public function setOriginalPrice($originalPrice);
+
+    /**
+     * @return bool
+     */
+    public function isPriceReduced();
 }

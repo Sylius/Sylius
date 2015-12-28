@@ -34,7 +34,7 @@
 {% endmacro %}
 
 {% macro sylius_display_price_with_original(variant) %}
-    {% if (variant.isReduced) %}
+    {% if (variant.isPriceReduced) %}
         <span class='label label-success crossed'>{{ variant.originalPrice|sylius_price }}</span>
     {% endif %}
     <span class='label label-success'>{{ sylius_calculate_price(variant)|sylius_price }}</span>

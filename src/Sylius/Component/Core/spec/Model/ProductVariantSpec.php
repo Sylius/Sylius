@@ -73,12 +73,13 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_original_price_should_accept_only_integer()
     {
-        $this->setOriginalPrice(310)->getOriginalPrice()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetOriginalPrice(3.1 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetOriginalPrice('310');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetOriginalPrice(round(3.1 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetOriginalPrice(array(310));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetOriginalPrice(new \stdClass());
+        $this->setOriginalPrice(310);
+        $this->getOriginalPrice()->shouldReturn(310);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(array(310));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
     function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)

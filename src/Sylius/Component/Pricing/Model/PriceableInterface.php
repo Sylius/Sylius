@@ -33,20 +33,6 @@ interface PriceableInterface
     public function setPrice($price);
 
     /**
-     * Get original price.
-     *
-     * @return integer
-     */
-    public function getOriginalPrice();
-
-    /**
-     * Set original price.
-     *
-     * @param integer $originalPrice
-     */
-    public function setOriginalPrice($originalPrice);
-
-    /**
      * Get the name of pricing calculator.
      *
      * @return string
