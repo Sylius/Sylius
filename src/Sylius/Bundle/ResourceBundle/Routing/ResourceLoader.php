@@ -125,8 +125,8 @@ class ResourceLoader implements LoaderInterface
     /**
      * @param MetadataInterface $metadata
      * @param array $configuration
+     * @param string $path
      * @param string $actionName
-     * @param array $default
      * @param array $methods
      *
      * @return Route

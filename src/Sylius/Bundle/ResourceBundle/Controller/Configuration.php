@@ -401,6 +401,9 @@ class Configuration
         return (bool) $redirect['header'];
     }
 
+    /**
+     * @return string|null
+     */
     private function getSection()
     {
         return $this->parameters->get('section');

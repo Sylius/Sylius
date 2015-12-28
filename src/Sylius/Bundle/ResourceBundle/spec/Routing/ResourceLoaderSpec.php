@@ -518,8 +518,8 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured(
-    ) {
+    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured()
+    {
         $configuration =
 <<<EOT
 alias: sylius.product
