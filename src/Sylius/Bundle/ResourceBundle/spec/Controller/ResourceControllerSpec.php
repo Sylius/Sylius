@@ -464,6 +464,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->handleRequest($request)->shouldBeCalled();
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($newResource);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
@@ -510,6 +511,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->handleRequest($request)->shouldBeCalled();
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($newResource);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
         $repository->add($newResource)->shouldBeCalled();
@@ -752,6 +754,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
@@ -798,6 +801,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $form->submit($request, true)->willReturn($form);
         $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();

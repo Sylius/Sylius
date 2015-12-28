@@ -225,6 +225,8 @@ class ResourceController extends ContainerAware
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newResource = $form->getData();
+
             $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
             $this->repository->add($newResource);
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
@@ -270,6 +272,8 @@ class ResourceController extends ContainerAware
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $resource = $form->getData();
+
             $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
             $this->manager->flush();
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
