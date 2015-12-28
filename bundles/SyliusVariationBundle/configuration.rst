@@ -5,7 +5,7 @@ Configuration reference
 
     sylius_variation:
         driver: ~ # The driver used for persistence layer. Currently only `doctrine/orm` is supported.
-        classes:
+        resources:
             # `variation_name` can be any name, for example `product`, `ad`, or `blog_post`
             variation_name:
                 variable: ~ # Required: The variable model class implementing `VariableInterface`
