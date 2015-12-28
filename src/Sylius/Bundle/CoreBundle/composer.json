@@ -63,7 +63,9 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1",
         "fzaninotto/faker": "~1.2",
-        "symfony/form": "^2.7"
+        "symfony/form": "^2.7",
+        "lakion/api-test-case": "^1.0@dev",
+        "coduo/php-matcher": "^2.1@dev"
     },
     "suggest": {
         "sylius/web-bundle":      "Provides default web interface",
