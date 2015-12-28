@@ -94,26 +94,9 @@ interface OrderInterface extends
     public function getItemsTotal();
 
     /**
-     * Calculate items total based on the items
-     * unit prices and quantities.
-     */
-    public function calculateItemsTotal();
-
-    /**
      * @return integer
      */
     public function getTotal();
-
-    /**
-     * @param integer $total
-     */
-    public function setTotal($total);
-
-    /**
-     * Calculate total.
-     * Items total + Adjustments total.
-     */
-    public function calculateTotal();
 
     /**
      * Alias of {@link countItems()}.

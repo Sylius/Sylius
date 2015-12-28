@@ -145,26 +145,11 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
-    function its_items_total_should_accept_only_integer()
-    {
-        $this->setItemsTotal(4498);
-        $this->getItemsTotal()->shouldBeInteger();
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(44.98 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal('4498');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(round(44.98 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(array(4498));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(new \stdClass());
-    }
-
     function it_calculates_correct_items_total(
         OrderItemInterface $item1,
         OrderItemInterface $item2,
         OrderItemInterface $item3
     ) {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-        $item3->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
         $item3->getTotal()->willReturn(250);
@@ -181,8 +166,6 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item2);
         $this->addItem($item3);
 
-        $this->calculateItemsTotal();
-
         $this->getItemsTotal()->shouldReturn(75249);
     }
 
@@ -194,6 +177,7 @@ class OrderSpec extends ObjectBehavior
     function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->isNeutral()->willReturn(true);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
         $this->addAdjustment($adjustment);
@@ -205,6 +189,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
         $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->isNeutral()->willReturn(true);
         $this->addAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(true);
@@ -239,8 +224,6 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment2);
         $this->addAdjustment($adjustment3);
 
-        $this->calculateAdjustmentsTotal();
-
         $this->getAdjustmentsTotal()->shouldReturn(6930);
     }
 
@@ -249,22 +232,8 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function its_total_should_accept_only_integer()
-    {
-        $this->setTotal(4498);
-        $this->getTotal()->shouldBeInteger();
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(44.98 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal('4498');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(array(4498));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(new \stdClass());
-    }
-
     function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -287,16 +256,11 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment1);
         $this->addAdjustment($adjustment2);
 
-        $this->calculateTotal();
-
         $this->getTotal()->shouldReturn(80000);
     }
 
     function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -319,15 +283,11 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment1);
         $this->addAdjustment($adjustment2);
 
-        $this->calculateTotal();
-
         $this->getTotal()->shouldReturn(70000);
     }
 
     function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
     {
-        $item->calculateTotal()->shouldBeCalled();
-
         $item->getTotal()->willReturn(45000);
 
         $item->equals(Argument::any())->willReturn(false);
@@ -341,8 +301,6 @@ class OrderSpec extends ObjectBehavior
 
         $this->addItem($item);
         $this->addAdjustment($adjustment);
-
-        $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(0);
     }
@@ -366,6 +324,7 @@ class OrderSpec extends ObjectBehavior
     function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface $item2)
     {
         $item1->setOrder($this)->shouldBeCalled();
+        $item1->getTotal()->willReturn(1000);
         $item1->merge($item2, false)->shouldBeCalled();
 
         $item1->equals($item2)->willReturn(true);

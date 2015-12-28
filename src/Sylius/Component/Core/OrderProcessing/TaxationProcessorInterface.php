@@ -22,8 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface TaxationProcessorInterface
 {
     /**
-     * Apply taxes to given order.
-     *
      * @param OrderInterface $order
      */
     public function applyTaxes(OrderInterface $order);

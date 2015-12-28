@@ -115,9 +115,13 @@ class OrderSpec extends ObjectBehavior
     ) {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
 
         $taxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $taxAdjustment->isNeutral()->willReturn(false);
+        $taxAdjustment->getAmount()->willReturn(444);
 
         $this->addAdjustment($shippingAdjustment);
         $this->addAdjustment($taxAdjustment);
@@ -135,9 +139,13 @@ class OrderSpec extends ObjectBehavior
     ) {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
 
         $taxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $taxAdjustment->isNeutral()->willReturn(false);
+        $taxAdjustment->getAmount()->willReturn(444);
 
         $this->addAdjustment($shippingAdjustment);
         $this->addAdjustment($taxAdjustment);
@@ -158,9 +166,13 @@ class OrderSpec extends ObjectBehavior
     ) {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
 
         $taxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $taxAdjustment->isNeutral()->willReturn(false);
+        $taxAdjustment->getAmount()->willReturn(444);
 
         $this->addAdjustment($shippingAdjustment);
         $this->addAdjustment($taxAdjustment);
@@ -178,9 +190,13 @@ class OrderSpec extends ObjectBehavior
     ) {
         $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
 
         $taxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $taxAdjustment->isNeutral()->willReturn(false);
+        $taxAdjustment->getAmount()->willReturn(444);
 
         $this->addAdjustment($shippingAdjustment);
         $this->addAdjustment($taxAdjustment);
@@ -237,6 +253,7 @@ class OrderSpec extends ObjectBehavior
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
         $item->getItemUnits()->willReturn(array($unit1, $unit2));
+        $item->getTotal()->willReturn(1000);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);
@@ -253,6 +270,7 @@ class OrderSpec extends ObjectBehavior
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
         $item->getItemUnits()->willReturn(array($unit1, $unit2));
+        $item->getTotal()->willReturn(1000);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);

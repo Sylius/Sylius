@@ -65,13 +65,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->total;
     }
 
-    public function calculateTotal()
-    {
-        $this->calculateAdjustmentsTotal();
-
-        $this->total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -86,6 +79,10 @@ class OrderItemUnit implements OrderItemUnitInterface
     public function setOrderItem(OrderItemInterface $orderItem = null)
     {
         $this->orderItem = $orderItem;
+
+        if (null !== $orderItem) {
+            $this->calculateTotal();
+        }
     }
     /**
      * {@inheritdoc}
@@ -109,6 +106,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
+
+            $this->calculateTotal();
         }
     }
 
@@ -120,6 +119,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
+
+            $this->calculateTotal();
         }
     }
 
@@ -170,12 +171,20 @@ class OrderItemUnit implements OrderItemUnitInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
+        $this->calculateTotal();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateAdjustmentsTotal()
+    public function calculateTotal()
+    {
+        $this->calculateAdjustmentsTotal();
+
+        $this->total = $this->adjustmentsTotal;
+        if (null !== $this->orderItem) {
+            $this->total += $this->orderItem->getUnitPrice();
+        }
+    }
+
+    protected function calculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
 
