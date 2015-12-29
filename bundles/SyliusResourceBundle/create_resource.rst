@@ -1,5 +1,5 @@
-Creating new resource
-=====================
+Creating Resources
+==================
 
 To display a form, handle submit or create a new resource via API, you should use **createAction** of your **app.controller.user** service.
 
@@ -22,26 +22,7 @@ Then it will try to create an ``app_user`` form, and set the newly created user 
 
 As a response, it will render the ``App:User:create.html.twig`` template with form view as the ``form`` variable.
 
-Declaring your form as a service
---------------------------------
-
-As said previously, you need to declare your form as a service. Its name must be contructed with the following pattern ``application_resource`` (Example: ``sylius_product``).
-(see the **Configuration** chapter to see how configure your resources and your application name)
-
-.. code-block:: xml
-
-    <parameters>
-        <!-- If you use the basic configuration this paramter is not available in the container. You need to add it manually. -->
-        <parameter key="app.form.type.user.class">App\Bundle\Form\UserType</parameter>
-    </parameters>
-
-    <services>
-        <service id="app.form.type.user" class="%app.form.type.user.class%">
-            <tag name="form.type" alias="app_user" />
-        </service>
-    </services>
-
-Submitting the form
+Submitting the Form
 -------------------
 
 You can use exactly the same route to handle the submit of the form and create the user.
@@ -55,7 +36,7 @@ Then, by default it redirects to ``app_user_show`` to display the created user, 
 
 When validation fails, it will render the form just like previously with the errors to display.
 
-Changing the template
+Changing the Template
 ---------------------
 
 Just like for the **show** and **index** actions, you can customize the template per route.
@@ -72,8 +53,8 @@ Just like for the **show** and **index** actions, you can customize the template
             _sylius:
                 template: App:Backend/User:create.html.twig
 
-Using different form
---------------------
+Using Custom Form
+-----------------
 
 You can also use custom form type on per route basis. By default it generates the form type name following the simple convention ``bundle prefix + _ + resource logical name``.
 Below you can see the usage for specifying a custom form.
@@ -105,11 +86,11 @@ or use directly a class.
                 template: App:Backend/User:create.html.twig
                 form: App\Bundle\Form\UserType
 
-Using custom factory method
+Using Custom Factory Method
 ---------------------------
 
 By default, ``ResourceController`` will use the ``createNew`` method with no arguments to create a new instance of your object. However, this behavior can be modified.
-To use different method of your repository, you can simply configure the ``factory`` option.
+To use different method of your factory, you can simply configure the ``factory`` option.
 
 .. code-block:: yaml
 
@@ -139,9 +120,9 @@ Additionally, if you want to provide your custom method with arguments from the 
                     method: createNewWithGroups
                     arguments: [$groupId]
 
-With this configuration, ``$repository->createNewWithGroups($request->get('groupId'))`` will be called to create new resource within ``createAction``.
+With this configuration, ``$factory->createNewWithGroups($request->get('groupId'))`` will be called to create new resource within ``createAction``.
 
-Custom redirect after success
+Custom Redirect After Success
 -----------------------------
 
 By default the controller will try to get the id of the newly created resource and redirect to the "show" route. You can easily change that.
@@ -192,3 +173,27 @@ In addition to the request parameters, you can access some of the newly created 
                     parameters: { email: resource.email }
 
 With this configuration, the ``email`` parameter for route ``app_user_show`` will be obtained from your newly created user.
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_group_user_add:
+        path: /{groupName}/users/add
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                template: :User:addToGroup.html.twig
+                form: app_new_user
+                factory:
+                    method: createForGroup
+                    arguments: [$groupName]
+                criteria:
+                    group.name: $groupName
+                redirect:
+                    route: app_profile_show
+                    parameters: { username: resource.username }
