@@ -33,6 +33,8 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,7 +91,12 @@ class ResourceControllerSpec extends ObjectBehavior
     
     function it_is_container_aware()
     {
-        $this->shouldHaveType('Symfony\Component\DependencyInjection\ContainerAware');
+        $this->shouldHaveType(ContainerAware::class);
+    }
+
+    function it_extends_base_Symfony_controller()
+    {
+        $this->shouldHaveType(Controller::class);
     }
 
     function it_throws_a_403_exception_if_user_is_unauthorized_to_view_a_single_resource(
