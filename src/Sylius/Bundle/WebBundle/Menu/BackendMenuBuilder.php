@@ -378,14 +378,14 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.configuration', $section)))
         ;
 
-        if ($this->authorizationChecker->isGranted('sylius.settings.general')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_general')) {
             $child->addChild('general_settings', array(
                 'route'           => 'sylius_backend_general_settings',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-info-sign'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
         }
 
-        if ($this->authorizationChecker->isGranted('sylius.settings.security')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_security')) {
             $child->addChild('security_settings', array(
                 'route'           => 'sylius_backend_security_settings',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
@@ -420,7 +420,7 @@ class BackendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.currencies', $section)));
         }
 
-        if ($this->authorizationChecker->isGranted('sylius.settings.taxation')) {
+        if ($this->authorizationChecker->isGranted('sylius.settings.sylius_taxation')) {
             $child->addChild('taxation_settings', array(
                 'route'           => 'sylius_backend_taxation_settings',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
