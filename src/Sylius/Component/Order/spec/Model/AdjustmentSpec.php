@@ -106,6 +106,25 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(399);
     }
 
+    function it_recalculates_adjustments_on_adjustable_entity_on_amount_change(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit
+    ) {
+        $this->setAdjustable($order);
+        $this->setAmount(200);
+        $order->recalculateAdjustmentsTotal()->shouldBeCalled();
+
+        $this->setAdjustable($orderItem);
+        $this->setAmount(300);
+        $orderItem->recalculateAdjustmentsTotal()->shouldBeCalled();
+
+        $this->setAdjustable($orderItemUnit);
+        $this->setAmount(400);
+        $orderItemUnit->recalculateAdjustmentsTotal()->shouldBeCalled();
+
+    }
+
     function its_amount_should_accept_only_integer()
     {
         $this->setAmount(4498);

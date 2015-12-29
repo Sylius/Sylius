@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class OrderItemUnit implements OrderItemUnitInterface
 {
@@ -44,9 +45,12 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     protected $adjustmentsTotal = 0;
 
-    public function __construct()
+    public function __construct(OrderItemInterface $orderItem)
     {
         $this->adjustments = new ArrayCollection();
+        $this->orderItem = $orderItem;
+        $this->recalculateTotal();
+        $this->orderItem->addUnit($this);
     }
 
     /**
@@ -65,11 +69,16 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->total;
     }
 
-    public function calculateTotal()
+    /**
+     * {@inheritdoc}
+     */
+    public function recalculateTotal()
     {
-        $this->calculateAdjustmentsTotal();
-
         $this->total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 
     /**
@@ -80,13 +89,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->orderItem;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setOrderItem(OrderItemInterface $orderItem = null)
-    {
-        $this->orderItem = $orderItem;
-    }
     /**
      * {@inheritdoc}
      */
@@ -109,6 +111,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
+            $this->addToAdjustmentsTotal($adjustment);
+            $this->orderItem->recalculateUnitsTotal();
         }
     }
 
@@ -120,6 +124,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
+            $this->subtractFromAdjustmentsTotal($adjustment);
+            $this->orderItem->recalculateUnitsTotal();
         }
     }
 
@@ -170,12 +176,30 @@ class OrderItemUnit implements OrderItemUnitInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
+        $this->recalculateAdjustmentsTotal();
+        $this->orderItem->recalculateUnitsTotal();
+    }
+
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+            $this->recalculateTotal();
+        }
+    }
+
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal -= $adjustment->getAmount();
+            $this->recalculateTotal();
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function calculateAdjustmentsTotal()
+    public function recalculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
 
@@ -184,5 +208,7 @@ class OrderItemUnit implements OrderItemUnitInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+
+        $this->recalculateTotal();
     }
 }

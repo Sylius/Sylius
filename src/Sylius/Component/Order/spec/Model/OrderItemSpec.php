@@ -11,14 +11,17 @@
 
 namespace spec\Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class OrderItemSpec extends ObjectBehavior
 {
@@ -27,14 +30,14 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
     }
 
-    function it_implements_Sylius_order_item_interface()
+    function it_implements_sylius_order_item_interface()
     {
         $this->shouldImplement(OrderItemInterface::class);
     }
 
-    function it_implements_Sylius_adjustable_interface()
+    function it_implements_sylius_adjustable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
+        $this->shouldImplement(AdjustableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -81,6 +84,7 @@ class OrderItemSpec extends ObjectBehavior
     function its_unit_price_should_accept_only_integer()
     {
         $this->setUnitPrice(4498);
+        $this->getUnitPrice()->shouldReturn(4498);
         $this->getUnitPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
@@ -94,32 +98,71 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function its_total_should_accept_only_integer()
-    {
-        $this->setTotal(4498);
-        $this->getTotal()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
-    }
-
     function it_throws_exception_when_quantity_is_less_than_1()
     {
         $this
             ->shouldThrow(new \OutOfRangeException('Quantity must be greater than 0.'))
-            ->duringSetQuantity(-5)
+            ->duringSetQuantity(0)
         ;
     }
 
     function it_initializes_adjustments_collection_by_default()
     {
-        $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getAdjustments()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_and_removes_units(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2)
+    {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(0);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(0);
+        $this->getUnits()->shouldHaveType(Collection::class);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+        $this->hasUnit($orderItemUnit1)->shouldReturn(true);
+        $this->hasUnit($orderItemUnit2)->shouldReturn(true);
+
+        $this->removeUnit($orderItemUnit1);
+        $this->hasUnit($orderItemUnit1)->shouldReturn(false);
+        $this->hasUnit($orderItemUnit2)->shouldReturn(true);
+    }
+
+    function it_adds_only_unit_that_is_assigned_to_it(OrderItemUnitInterface $orderItemUnit1, OrderItemInterface $orderItem)
+    {
+        $this
+            ->shouldThrow(new \LogicException('This order item unit is assigned to a different order item.'))
+            ->duringAddUnit($orderItemUnit1)
+        ;
+
+        $orderItemUnit1->getOrderItem()->willReturn($orderItem);
+        $this
+            ->shouldThrow(new \LogicException('This order item unit is assigned to a different order item.'))
+            ->duringAddUnit($orderItemUnit1)
+        ;
+    }
+
+    function it_recalculates_units_total_on_unit_price_change(
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(0, 100);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(0, 100);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+
+        $orderItemUnit1->recalculateTotal()->shouldBeCalled();
+        $orderItemUnit2->recalculateTotal()->shouldBeCalled();
+        $this->setUnitPrice(100);
     }
 
     function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
+        $adjustment->isNeutral()->willReturn(true);
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
@@ -129,88 +172,286 @@ class OrderItemSpec extends ObjectBehavior
 
     function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
     {
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-
+        $adjustment->isNeutral()->willReturn(true);
         $adjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($adjustment);
 
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+        $this->addAdjustment($adjustment);
         $this->hasAdjustment($adjustment)->shouldReturn(true);
 
         $adjustment->setAdjustable(null)->shouldBeCalled();
         $adjustment->isLocked()->willReturn(false);
-        $this->removeAdjustment($adjustment);
 
+        $this->removeAdjustment($adjustment);
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    function its_total_is_mutable()
-    {
-        $this->setTotal(5999);
-        $this->getTotal()->shouldReturn(5999);
-    }
-
-    function it_calculates_correct_total_based_on_quantity_and_unit_price()
-    {
-        $this->setQuantity(13);
-        $this->setUnitPrice(1499);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(19487);
-    }
-
-    function it_calculates_correct_total_based_on_adjustments(AdjustmentInterface $adjustment)
-    {
-        $this->setQuantity(13);
-        $this->setUnitPrice(1499);
-
-        $adjustment->isNeutral()->willReturn(false);
-        $adjustment->getAmount()->willReturn(-1000);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
-
-        $this->addAdjustment($adjustment);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(18487);
-    }
-
-    function it_ignores_neutral_adjustments_when_calculating_total(
-        AdjustmentInterface $adjustment,
-        AdjustmentInterface $neutralAdjustment
+    function it_has_correct_total_based_on_unit_items(
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
     ) {
-        $this->setQuantity(13);
-        $this->setUnitPrice(1499);
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(1499);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(1499);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+        $this->getTotal()->shouldReturn(2998);
+    }
+
+    function it_has_correct_total_after_unit_item_remove(
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(2000);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(1000);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+        $this->getTotal()->shouldReturn(3000);
+
+        $this->removeUnit($orderItemUnit2);
+        $this->getTotal()->shouldReturn(2000);
+    }
+
+    function it_has_correct_total_after_negative_adjustment_add(
+        AdjustmentInterface $adjustment,
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(1499);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(1499);
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1000);
         $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
         $this->addAdjustment($adjustment);
-
-        $neutralAdjustment->isNeutral()->willReturn(true);
-        $neutralAdjustment->getAmount()->willReturn(2499);
-        $neutralAdjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($neutralAdjustment);
-
-        $this->calculateTotal();
-
-        $this->getTotal()->shouldReturn(18487);
+        $this->getTotal()->shouldReturn(1998);
     }
 
-    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(AdjustmentInterface $adjustment)
+    function it_has_correct_total_after_adjustment_add_and_remove(AdjustmentInterface $adjustment)
     {
-        $this->setQuantity(1);
-        $this->setUnitPrice(1500);
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->getAmount()->willReturn(200);
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment);
+        $this->getTotal()->shouldReturn(200);
+
+        $adjustment->setAdjustable(null)->shouldBeCalled();
+        $adjustment->isLocked()->willReturn(false);
+
+        $this->removeAdjustment($adjustment);
+        $this->getTotal()->shouldReturn(0);
+    }
+
+    function it_has_correct_total_after_neutral_adjustment_add_and_remove(AdjustmentInterface $adjustment)
+    {
+        $adjustment->isNeutral()->willReturn(true);
+        $adjustment->getAmount()->willReturn(200);
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment);
+        $this->getTotal()->shouldReturn(0);
+
+        $adjustment->setAdjustable(null)->shouldBeCalled();
+        $adjustment->isLocked()->willReturn(false);
+
+        $this->removeAdjustment($adjustment);
+        $this->getTotal()->shouldReturn(0);
+    }
+
+    function it_has_correct_total_after_adjustments_clear(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->getAmount()->willReturn(200);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->getAmount()->willReturn(300);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+        $this->getTotal()->shouldReturn(500);
+
+        $this->clearAdjustments();
+        $this->getTotal()->shouldReturn(0);
+    }
+
+    function it_has_0_total_when_adjustment_decreases_total_under_0(
+        AdjustmentInterface $adjustment,
+        OrderItemUnitInterface $orderItemUnit1
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(1499);
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-2000);
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
+        $this->addUnit($orderItemUnit1);
         $this->addAdjustment($adjustment);
+        $this->getTotal()->shouldReturn(0);
+    }
 
-        $this->calculateTotal();
+    function it_has_correct_total_after_unit_price_change(
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(0, 100);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(0, 100);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+
+        $orderItemUnit1->recalculateTotal()->shouldBeCalled();
+        $orderItemUnit2->recalculateTotal()->shouldBeCalled();
+        $this->setUnitPrice(100);
+        $this->getTotal()->shouldReturn(200);
+    }
+
+    function it_has_correct_total_after_order_item_unit_total_change(
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(0);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(0, 100);
+
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
 
         $this->getTotal()->shouldReturn(0);
+        $this->recalculateUnitsTotal();
+        $this->getTotal()->shouldReturn(100);
+    }
+
+    function it_has_correct_total_after_adjustment_amount_change(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
+        $adjustment1->getAmount()->willReturn(100);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->getAmount()->willReturn(500, 300);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $this->getTotal()->shouldReturn(600);
+        $this->recalculateAdjustmentsTotal();
+        $this->getTotal()->shouldReturn(400);
+    }
+
+    function it_returns_correct_adjustments_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
+        $adjustment1->getAmount()->willReturn(100);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->getAmount()->willReturn(500);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $this->getAdjustmentsTotal()->shouldReturn(600);
+    }
+
+    function it_returns_correct_adjustments_total_by_type(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3
+    ) {
+        $adjustment1->getType()->willReturn('tax');
+        $adjustment1->getAmount()->willReturn(200);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->getType()->willReturn('tax');
+        $adjustment2->getAmount()->willReturn(-50);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $adjustment3->getType()->willReturn('promotion');
+        $adjustment3->getAmount()->willReturn(-1000);
+        $adjustment3->isNeutral()->willReturn(false);
+        $adjustment3->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+        $this->addAdjustment($adjustment3);
+
+        $this->getAdjustmentsTotal('tax')->shouldReturn(150);
+        $this->getAdjustmentsTotal('promotion')->shouldReturn(-1000);
+        $this->getAdjustmentsTotal('any')->shouldReturn(0);
+    }
+
+    function it_returns_correct_adjustments_total_recursively(
+        AdjustmentInterface $adjustment1,
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $adjustment1->getAmount()->willReturn(200);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(500);
+        $orderItemUnit1->getAdjustmentsTotal(null)->willReturn(150);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(300);
+        $orderItemUnit2->getAdjustmentsTotal(null)->willReturn(100);
+
+        $this->addAdjustment($adjustment1);
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+
+        $this->getAdjustmentsTotalRecursively()->shouldReturn(450);
+    }
+
+    function it_returns_correct_adjustments_total_by_type_recursively(
+        AdjustmentInterface $adjustment1,
+        OrderItemUnitInterface $orderItemUnit1,
+        OrderItemUnitInterface $orderItemUnit2
+    ) {
+        $adjustment1->getType()->willReturn('tax');
+        $adjustment1->getAmount()->willReturn(200);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+
+        $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit1->getTotal()->willReturn(500);
+        $orderItemUnit1->getAdjustmentsTotal('tax')->willReturn(150);
+        $orderItemUnit1->getAdjustmentsTotal('promotion')->willReturn(30);
+        $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
+        $orderItemUnit2->getTotal()->willReturn(300);
+        $orderItemUnit2->getAdjustmentsTotal('tax')->willReturn(100);
+        $orderItemUnit2->getAdjustmentsTotal('promotion')->willReturn(0);
+
+        $this->addAdjustment($adjustment1);
+        $this->addUnit($orderItemUnit1);
+        $this->addUnit($orderItemUnit2);
+
+        $this->getAdjustmentsTotalRecursively('tax')->shouldReturn(450);
+        $this->getAdjustmentsTotalRecursively('promotion')->shouldReturn(30);
     }
 
     function it_ignores_merging_same_items()
@@ -246,7 +487,7 @@ class OrderItemSpec extends ObjectBehavior
         $item->equals($this)->willReturn(false);
 
         $this
-            ->shouldThrow(new \RuntimeException('Given item cannot be merged.'))
+            ->shouldThrow(new \LogicException('Given item cannot be merged.'))
             ->duringMerge($item);
     }
 

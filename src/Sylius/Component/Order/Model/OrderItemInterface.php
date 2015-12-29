@@ -49,15 +49,9 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function getTotal();
 
     /**
-     * @param int $total
+     * Recalculate totals. Should be used after every unit change.
      */
-    public function setTotal($total);
-
-    /**
-     * Calculate total based on quantity and unit price.
-     * Take adjustments into account.
-     */
-    public function calculateTotal();
+    public function recalculateUnitsTotal();
 
     /**
      * Checks whether the item given as argument corresponds to

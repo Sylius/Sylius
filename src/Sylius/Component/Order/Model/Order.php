@@ -269,8 +269,6 @@ class Order implements OrderInterface
         $itemsTotal = 0;
 
         foreach ($this->items as $item) {
-            $item->calculateTotal();
-
             $itemsTotal += $item->getTotal();
         }
 
@@ -332,7 +330,7 @@ class Order implements OrderInterface
     public function calculateTotal()
     {
         $this->calculateItemsTotal();
-        $this->calculateAdjustmentsTotal();
+        $this->recalculateAdjustmentsTotal();
 
         $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
@@ -569,7 +567,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function calculateAdjustmentsTotal()
+    public function recalculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
 
