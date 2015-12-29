@@ -68,7 +68,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder
             ->leftJoin('o.adjustments', 'adjustment')
             ->leftJoin('o.customer', 'customer')
-            ->leftJoin('item.itemUnits', 'itemUnit')
+            ->leftJoin('item.units', 'itemUnit')
             ->leftJoin('o.shipments', 'shipment')
             ->leftJoin('shipment.method', 'shippingMethod')
             ->leftJoin('o.payments', 'payments')

@@ -62,13 +62,13 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function processInventoryUnits(OrderItemInterface $item)
     {
-        $nbUnits = $item->getItemUnits()->count();
+        $nbUnits = $item->getUnits()->count();
 
         if ($item->getQuantity() > $nbUnits) {
             $this->createInventoryUnits($item, $item->getQuantity() - $nbUnits);
         } elseif ($item->getQuantity() < $nbUnits) {
-            foreach ($item->getItemUnits()->slice(0, $nbUnits - $item->getQuantity()) as $unit) {
-                $item->removeItemUnit($unit);
+            foreach ($item->getUnits()->slice(0, $nbUnits - $item->getQuantity()) as $unit) {
+                $item->removeUnit($unit);
             }
         }
     }
@@ -79,7 +79,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function holdInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getItemUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
+            $quantity = $this->applyTransition($item->getUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
             $this->inventoryOperator->hold($item->getVariant(), $quantity);
         }
@@ -91,7 +91,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function releaseInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getItemUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
+            $quantity = $this->applyTransition($item->getUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
         }
@@ -103,7 +103,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function updateInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $units = $item->getItemUnits();
+            $units = $item->getUnits();
             $quantity = 0;
 
             foreach ($units as $unit) {
@@ -133,11 +133,10 @@ class InventoryHandler implements InventoryHandlerInterface
         }
 
         for ($i = 0; $i < $quantity; $i++) {
-            /** @var OrderItemUnitInterface $orderItemUnit */
-            $orderItemUnit = $this->orderItemUnitFactory->createNew();
-            $orderItemUnit->setInventoryState($state);
+            $unit = $this->orderItemUnitFactory->createNew();
+            $unit->setInventoryState($state);
 
-            $item->addItemUnit($orderItemUnit);
+            $item->addUnit($unit);
         }
     }
 

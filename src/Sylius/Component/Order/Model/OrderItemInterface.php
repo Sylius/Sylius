@@ -91,22 +91,22 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     /**
      * @return Collection|OrderItemUnitInterface[]
      */
-    public function getItemUnits();
+    public function getUnits();
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      *
      * @return bool
      */
-    public function hasItemUnit(OrderItemUnitInterface $itemUnit);
+    public function hasUnit(OrderItemUnitInterface $itemUnit);
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      */
-    public function addItemUnit(OrderItemUnitInterface $itemUnit);
+    public function addUnit(OrderItemUnitInterface $itemUnit);
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      */
-    public function removeItemUnit(OrderItemUnitInterface $itemUnit);
+    public function removeUnit(OrderItemUnitInterface $itemUnit);
 }
