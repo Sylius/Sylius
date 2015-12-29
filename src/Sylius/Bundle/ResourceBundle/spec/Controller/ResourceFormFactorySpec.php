@@ -14,7 +14,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -35,7 +37,7 @@ class ResourceFormFactorySpec extends ObjectBehavior
     
     function it_implements_resource_form_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface');
+        $this->shouldImplement(ResourceFormFactoryInterface::class);
     }
 
     function it_creates_appropriate_form_based_on_configuration(
@@ -62,6 +64,20 @@ class ResourceFormFactorySpec extends ObjectBehavior
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
         $formFactory->createNamed('', 'sylius_product_api', $resource, array('csrf_protection' => false))->willReturn($form);
+
+        $this->create($requestConfiguration, $resource)->shouldReturn($form);
+    }
+
+    function it_creates_the_object_if_form_is_a_class_name(
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource,
+        FormFactoryInterface $formFactory,
+        FormInterface $form
+    )
+    {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getFormType()->willReturn(TextType::class);
+        $formFactory->create(Argument::type(TextType::class), $resource)->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
