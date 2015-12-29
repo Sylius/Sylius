@@ -35,6 +35,9 @@ class SingleResourceProvider implements SingleResourceProviderInterface
         if ($request->attributes->has('id')) {
             $criteria = array('id' => $request->attributes->get('id'));
         }
+        if ($request->attributes->has('slug')) {
+            $criteria = array('slug' => $request->attributes->get('slug'));
+        }
 
         return $repository->findOneBy($criteria);
     }

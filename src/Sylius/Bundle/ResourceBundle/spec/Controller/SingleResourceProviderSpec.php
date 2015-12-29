@@ -46,6 +46,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
         $requestAttributes->has('id')->willReturn(true);
+        $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(5);
         
         $repository->findOneBy(array('id' => 5))->willReturn(null);
@@ -65,9 +66,30 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
         $requestAttributes->has('id')->willReturn(true);
+        $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(3);
 
         $repository->findOneBy(array('id' => 3))->willReturn($resource);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($resource);
+    }
+
+    function it_can_find_specific_resource_with_slug_by_default(
+        RequestConfiguration $requestConfiguration,
+        Request $request,
+        ParameterBag $requestAttributes,
+        RepositoryInterface $repository,
+        ResourceInterface $resource
+    )
+    {
+        $requestConfiguration->getRepositoryMethod()->willReturn(null);
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->attributes = $requestAttributes;
+        $requestAttributes->has('id')->willReturn(false);
+        $requestAttributes->has('slug')->willReturn(true);
+        $requestAttributes->get('slug')->willReturn('the-most-awesome-hat');
+
+        $repository->findOneBy(array('slug' => 'the-most-awesome-hat'))->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
