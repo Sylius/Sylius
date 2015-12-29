@@ -91,10 +91,11 @@ class OrderItemUnitSpec extends ObjectBehavior
     function it_can_be_sold_or_backorderded()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-        $this->isSold()->shouldReturn(true);
+        $this->shouldBeSold();
 
         $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->isBackordered()->shouldReturn(true);
+        $this->shouldBeBackordered();
+        $this->shouldNotBeSold();
     }
 
     function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
