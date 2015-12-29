@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -39,9 +40,16 @@ class RedirectHandler implements RedirectHandlerInterface
      */
     public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource)
     {
+        $routes = $this->router->getRouteCollection();
+        $redirectRouteName = $configuration->getRedirectRoute(ResourceActions::SHOW);
+
+        if (null === $routes->get($redirectRouteName)) {
+            $redirectRouteName = $configuration->getRedirectRoute(ResourceActions::INDEX);
+        }
+
         return $this->redirectToRoute(
             $configuration,
-            $configuration->getRedirectRoute('show'),
+            $redirectRouteName,
             $configuration->getRedirectParameters($resource)
         );
     }

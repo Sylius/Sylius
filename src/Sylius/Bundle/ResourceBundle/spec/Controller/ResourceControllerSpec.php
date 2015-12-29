@@ -932,6 +932,8 @@ class ResourceControllerSpec extends ObjectBehavior
 
             // Need to unwrap phpspec's Collaborators to ensure proper comparison.
             $this->unwrapViewData($expectedView);
+            $this->nullifyDates($value);
+            $this->nullifyDates($expectedView);
 
             return
                 $expectedView->getStatusCode() === $value->getStatusCode() &&
@@ -975,5 +977,15 @@ class ResourceControllerSpec extends ObjectBehavior
         }
 
         return $value;
+    }
+
+    /**
+     * @param View $view
+     */
+    private function nullifyDates(View $view)
+    {
+        $headers = $view->getHeaders();
+        unset($headers['date']);
+        $view->setHeaders($headers);
     }
 }

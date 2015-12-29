@@ -92,14 +92,20 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getFormType()->shouldReturn('sylius_product_pricing');
     }
 
-    function it_generates_route_names(MetadataInterface $metadata)
+    function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters)
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
+        $parameters->get('section')->willReturn(null);
 
         $this->getRouteName('index')->shouldReturn('sylius_product_index');
         $this->getRouteName('show')->shouldReturn('sylius_product_show');
         $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
+
+        $parameters->get('section')->willReturn('admin');
+        $this->getRouteName('index')->shouldReturn('sylius_admin_product_index');
+        $this->getRouteName('show')->shouldReturn('sylius_admin_product_show');
+        $this->getRouteName('custom')->shouldReturn('sylius_admin_product_custom');
     }
 
     function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag)
@@ -116,9 +122,26 @@ class RequestConfigurationSpec extends ObjectBehavior
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
+        $parameters->get('section')->willReturn(null);
 
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
+
+        $parameters->get('redirect')->willReturn(array('route' => 'myRoute'));
+        $this->getRedirectRoute('show')->shouldReturn('myRoute');
+
+        $parameters->get('redirect')->willReturn('myRoute');
+        $this->getRedirectRoute('custom')->shouldReturn('myRoute');
+    }
+
+    function it_takes_section_into_account_when_generating_redirect_route(MetadataInterface $metadata, Parameters $parameters)
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        $parameters->get('section')->willReturn('admin');
+
+        $parameters->get('redirect')->willReturn(null);
+        $this->getRedirectRoute('index')->shouldReturn('sylius_admin_product_index');
 
         $parameters->get('redirect')->willReturn(array('route' => 'myRoute'));
         $this->getRedirectRoute('show')->shouldReturn('myRoute');
@@ -428,5 +451,14 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('event')->willReturn('foo');
         
         $this->getEvent()->shouldReturn('foo');
+    }
+
+    function it_has_section(Parameters $parameters)
+    {
+        $parameters->get('section')->willReturn(null);
+        $this->getSection()->shouldReturn(null);
+
+        $parameters->get('section')->willReturn('admin');
+        $this->getSection()->shouldReturn('admin');
     }
 }

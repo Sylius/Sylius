@@ -76,6 +76,14 @@ class RequestConfiguration
     }
 
     /**
+     * @return string|null
+     */
+    public function getSection()
+    {
+        return $this->parameters->get('section');
+    }
+
+    /**
      * @return bool
      */
     public function isHtmlRequest()
@@ -121,7 +129,9 @@ class RequestConfiguration
      */
     public function getRouteName($name)
     {
-        return sprintf('%s_%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName(), $name);
+        $sectionPrefix = $this->getSection() ? $this->getSection().'_' : '';
+
+        return sprintf('%s_%s%s_%s', $this->metadata->getApplicationName(), $sectionPrefix, $this->metadata->getName(), $name);
     }
 
     /**
@@ -474,13 +484,5 @@ class RequestConfiguration
         }
 
         return $parameters;
-    }
-
-    /**
-     * @return string|null
-     */
-    private function getSection()
-    {
-        return $this->parameters->get('section');
     }
 }
