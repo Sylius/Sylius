@@ -183,7 +183,10 @@ abstract class AbstractDriver implements DriverInterface
                 sprintf('%s.form.type.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix),
                 $definition
             );
+        }
 
+        if (!$container->hasDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()))) {
+            $this->addDefaultForm($container, $metadata);
         }
     }
 
@@ -215,4 +218,12 @@ abstract class AbstractDriver implements DriverInterface
      * @param MetadataInterface $metadata
      */
     abstract protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata);
+
+    /**
+     * @param ContainerBuilder $container
+     * @param MetadataInterface $metadata
+     */
+    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+    }
 }

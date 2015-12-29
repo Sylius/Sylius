@@ -56,6 +56,10 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
         foreach ($fields as $fieldName) {
             $options = array();
 
+            if (in_array($fieldName, array('createdAt', 'updatedAt', 'deletedAt'))) {
+                continue;
+            }
+
             if (Type::DATETIME === $classMetadata->getTypeOfField($fieldName)) {
                 $options = array('widget' => 'single_text');
             }

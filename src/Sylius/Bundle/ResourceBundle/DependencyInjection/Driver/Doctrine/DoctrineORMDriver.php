@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -79,6 +81,26 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         }
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
+        $defaultFormBuilderDefinition->setArguments(array(new Reference($metadata->getServiceId('manager'))));
+
+        $definition = new Definition(DefaultResourceType::class);
+        $definition
+            ->setArguments(array(
+                $this->getMetdataDefinition($metadata),
+                $defaultFormBuilderDefinition
+            ))
+            ->addTag('form.type', array('alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())))
+        ;
+
+        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
     }
 
     /**
