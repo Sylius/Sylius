@@ -49,10 +49,10 @@
             <cascade>
                 <cascade-all/>
             </cascade>
-            <join-column name="customer_id" referenced-column-name="id" nullable="false" />
+            <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </one-to-one>
 
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\User\Model\UserOAuthInterface" mapped-by="user">
+        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\User\Model\UserOAuthInterface" mapped-by="user" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
