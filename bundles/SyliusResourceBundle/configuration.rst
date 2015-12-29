@@ -14,7 +14,6 @@ In your ``app/config/config.yml`` add:
     sylius_resource:
         resources:
             app.book:
-                driver: doctrine/orm
                 classes:
                     model: AppBundle\Entity\Book
 

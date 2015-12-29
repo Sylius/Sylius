@@ -28,3 +28,4 @@ Another idea was to not limit ourselves to a single persistence backend. ``Resou
    create_resource
    update_resource
    delete_resource
+   reference
