@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,18 +22,21 @@ use Symfony\Component\HttpFoundation\Response;
 class AttributeController extends ResourceController
 {
     /**
+     * @param Request $request
+     *
      * @return Response
      */
-    public function getAttributeTypesAction($template)
+    public function getAttributeTypesAction(Request $request, $template)
     {
-        $view = $this
-            ->view()
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $view = View::create()
             ->setTemplate($template)
-            ->setTemplateVar($this->config->getPluralResourceName())
+            ->setTemplateVar($this->metadata->getPluralName())
             ->setData(array('attributeTypes' => $this->get('sylius.registry.attribute_type')->all()))
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
