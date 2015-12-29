@@ -12,20 +12,27 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderItemUnitSpec extends ObjectBehavior
 {
+    function let(OrderItemInterface $orderItem)
+    {
+        $orderItem->getUnitPrice()->willReturn(1000);
+        $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
+        $this->beConstructedWith($orderItem);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\OrderItemUnit');
@@ -34,6 +41,16 @@ class OrderItemUnitSpec extends ObjectBehavior
     function it_implements_order_item_unit_interface()
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
+    }
+
+    function it_implements_inventory_unit_interface()
+    {
+        $this->shouldImplement(InventoryUnitInterface::class);
+    }
+
+    function it_implements_shipment_item_interface()
+    {
+        $this->shouldImplement(ShipmentItemInterface::class);
     }
 
     function it_is_order_item_unit()
@@ -53,12 +70,6 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    function its_order_item_is_mutable(OrderItemInterface $orderItem)
-    {
-        $this->setOrderItem($orderItem);
-        $this->getOrderItem()->shouldReturn($orderItem);
-    }
-
     function its_created_at_is_mutable(\DateTime $createdAt)
     {
         $this->setCreatedAt($createdAt);
@@ -74,7 +85,6 @@ class OrderItemUnitSpec extends ObjectBehavior
     function it_stockable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
     {
         $orderItem->getVariant()->willReturn($variant);
-        $this->setOrderItem($orderItem);
 
         $this->getStockable()->shouldReturn($variant);
     }
@@ -83,7 +93,6 @@ class OrderItemUnitSpec extends ObjectBehavior
     {
         $variant->getSku()->willReturn('test_sku');
         $orderItem->getVariant()->willReturn($variant);
-        $this->setOrderItem($orderItem);
 
         $this->getSku()->shouldReturn('test_sku');
     }
@@ -101,7 +110,6 @@ class OrderItemUnitSpec extends ObjectBehavior
     function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
     {
         $orderItem->getVariant()->willReturn($variant);
-        $this->setOrderItem($orderItem);
 
         $this->getShippable()->shouldReturn($variant);
     }
@@ -111,5 +119,4 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
         $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
     }
-
 }

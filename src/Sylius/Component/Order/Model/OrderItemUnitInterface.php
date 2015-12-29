@@ -26,15 +26,13 @@ interface OrderItemUnitInterface extends AdjustableInterface
      */
     public function getTotal();
 
-    public function calculateTotal();
+    /**
+     * Recalculates total. Should be used after every unit price change.
+     */
+    public function recalculateTotal();
 
     /**
      * @return OrderItemInterface
      */
     public function getOrderItem();
-
-    /**
-     * @param null|OrderItemInterface $orderItem
-     */
-    public function setOrderItem(OrderItemInterface $orderItem = null);
 }
