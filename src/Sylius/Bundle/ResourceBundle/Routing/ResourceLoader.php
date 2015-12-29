@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Routing;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -48,18 +49,22 @@ class ResourceLoader implements LoaderInterface
      */
     public function load($resource, $type = null)
     {
-        $configuration = Yaml::parse($resource);
+        $processor = new Processor();
+        $configurationDefinition = new Configuration();
 
-        if (isset($configuration['only']) && isset($configuration['except'])) {
+        $configuration = Yaml::parse($resource);
+        $configuration = $processor->processConfiguration($configurationDefinition, array('routing' => $configuration));
+
+        if (!empty($configuration['only']) && !empty($configuration['except'])) {
             throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
         }
 
         $routesToGenerate = array('show', 'index', 'create', 'update', 'delete');
 
-        if (isset($configuration['only'])) {
+        if (!empty($configuration['only'])) {
             $routesToGenerate = $configuration['only'];
         }
-        if (isset($configuration['except'])) {
+        if (!empty($configuration['except'])) {
             $routesToGenerate = array_diff($routesToGenerate, $configuration['except']);
         }
 

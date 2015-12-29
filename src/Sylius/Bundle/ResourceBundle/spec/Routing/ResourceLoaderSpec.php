@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Routing\ResourceLoader;
 use Sylius\Bundle\ResourceBundle\Routing\RouteFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -41,6 +42,20 @@ class ResourceLoaderSpec extends ObjectBehavior
     function it_is_a_Symfony_routing_loader()
     {
         $this->shouldImplement(LoaderInterface::class);
+    }
+
+    function it_processes_configuration_and_throws_exception_if_invalid()
+    {
+        $configuration =
+<<<EOT
+foo: bar
+only: string
+EOT;
+
+        $this
+            ->shouldThrow(InvalidConfigurationException::class)
+            ->during('load', array($configuration, 'sylius.resource'))
+        ;
     }
 
     function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry) 
