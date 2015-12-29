@@ -69,12 +69,19 @@ sylius_backend_promotion_action:
     prefix: /promotion-actions
 
 sylius_backend_tax_category:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/tax_category.yml
-    prefix: /tax-categories
+    resource: |
+       alias: sylius.tax_category
+       section: backend
+       except: ['show']
+       templates: SyliusWebBundle:Backend/TaxCategory
+    type: sylius.resource
 
 sylius_backend_tax_rate:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/tax_rate.yml
-    prefix: /tax-rates
+    resource: |
+       alias: sylius.tax_rate
+       section: backend
+       templates: SyliusWebBundle:Backend/TaxRate
+    type: sylius.resource
 
 sylius_backend_shipping_category:
     resource: @SyliusWebBundle/Resources/config/routing/backend/shipping_category.yml
@@ -89,8 +96,13 @@ sylius_backend_shipment:
     prefix: /shipments
 
 sylius_backend_email:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/email.yml
-    prefix: /emails
+    resource: |
+       alias: sylius.email
+       section: backend
+       except: ['show']
+       templates: SyliusWebBundle:Backend/Email
+       redirect: update
+    type: sylius.resource
 
 sylius_backend_payment_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment_method.yml

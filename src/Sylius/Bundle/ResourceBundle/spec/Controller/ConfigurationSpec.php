@@ -164,6 +164,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_generates_redirect_route(Parameters $parameters)
     {
+        $parameters->get('section')->willReturn(null);
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
 

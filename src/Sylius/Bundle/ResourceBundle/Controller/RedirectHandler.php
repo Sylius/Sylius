@@ -47,10 +47,14 @@ class RedirectHandler
     {
         $parameters = $this->config->getRedirectParameters($resource);
 
-        return $this->redirectToRoute(
-            $this->config->getRedirectRoute('show'),
-            $parameters
-        );
+        $routes = $this->router->getRouteCollection();
+        $route = $this->config->getRedirectRoute('show');
+
+        if (!$routes->get($route)) {
+            $route = $this->config->getRedirectRoute('index');
+        }
+
+        return $this->redirectToRoute($route, $parameters);
     }
 
     /**
