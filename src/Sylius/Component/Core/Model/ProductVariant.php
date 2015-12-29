@@ -39,8 +39,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $price;
 
     /**
-     * The variant original price.
-     *
      * @var int
      */
     protected $originalPrice;

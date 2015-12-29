@@ -119,16 +119,12 @@ interface ProductVariantInterface extends
     public function setDepth($depth);
 
     /**
-     * Get original price.
-     *
-     * @return integer
+     * @return int
      */
     public function getOriginalPrice();
 
     /**
-     * Set original price.
-     *
-     * @param integer $originalPrice
+     * @param int $originalPrice
      */
     public function setOriginalPrice($originalPrice);
 
