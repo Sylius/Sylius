@@ -120,3 +120,28 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
                 template: App:User:top3.html.twig
 
 That action will return the top 3 users by score, as the ``users`` variable.
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_index:
+        path: /{groupName}/users
+        methods: [GET]
+        defaults:
+            _controller: app.controller.user:indexAction
+            _sylius:
+                template: :Group:users.html.twig
+                repository:
+                    method: createPaginatorByGroupName
+                    arguments: [$groupName]
+                criteria:
+                    enabled: true
+                    group.name: $groupName
+                paginate: false # Or: 50
+                limit: 100 # Or: false
+                serialization_groups: [Custom, Details]
+                serialization_version: 1.0.2

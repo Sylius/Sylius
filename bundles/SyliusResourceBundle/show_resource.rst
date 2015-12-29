@@ -85,3 +85,26 @@ Creating yet another action to change the method called could be a solution but 
                     arguments: [$username]
 
 Internally, it simply uses the ``$repository->findOneWithFriends($username)`` method, where ``username`` is taken from the current request.
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_show:
+        path: /users/{username}
+        methods: [GET]
+        defaults:
+            _controller: app.controller.user:showAction
+            _sylius:
+                template: :User:profile.html.twig
+                repository:
+                    method: findOneWithFriends
+                    arguments: [$username]
+                criteria:
+                    enabled: true
+                    groupId: $groupId
+                serialization_groups: [Custom, Details]
+                serialization_version: 1.0.2

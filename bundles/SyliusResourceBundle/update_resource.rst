@@ -121,3 +121,28 @@ You can also perform more complex redirects, with parameters. For example...
                 redirect:
                     route: app_competition_show
                     parameters: { id: $competitionId }
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_update:
+        path: /users/{username}/edit
+        methods: [GET, PUT, PATCH]
+        defaults:
+            _controller: app.controller.user:updateAction
+            _sylius:
+                template: :User:editProfile.html.twig
+                form: app_user_profile
+                repository:
+                    method: findCurrentUserByUsername
+                    arguments: [$username, expr:service('app.context.user')]
+                criteria:
+                    enabled: true
+                    groupId: $groupId
+                redirect:
+                    route: app_profile_show
+                    parameters: { username: resource.username }

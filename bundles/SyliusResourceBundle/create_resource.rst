@@ -173,3 +173,27 @@ In addition to the request parameters, you can access some of the newly created 
                     parameters: { email: resource.email }
 
 With this configuration, the ``email`` parameter for route ``app_user_show`` will be obtained from your newly created user.
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_group_user_add:
+        path: /{groupName}/users/add
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                template: :User:addToGroup.html.twig
+                form: app_new_user
+                factory:
+                    method: createForGroup
+                    arguments: [$groupName]
+                criteria:
+                    group.name: $groupName
+                redirect:
+                    route: app_profile_show
+                    parameters: { username: resource.username }

@@ -71,3 +71,26 @@ By default the controller will try to get the id of the resource and redirect to
                 redirect:
                     route: app_competition_show
                     parameters: { id: $competitionId }
+
+Configuration Reference
+-----------------------
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_group_user_remove:
+        path: /{groupName}/users/{id}/remove
+        methods: [DELETE]
+        defaults:
+            _controller: app.controller.user:deleteAction
+            _sylius:
+                repository:
+                    method: findByGroupNameAndId
+                    arguments: [$groupName, $id]
+                criteria:
+                    group.name: $groupName
+                    id: $id
+                redirect:
+                    route: app_group_show
+                    parameters: { groupName: $groupName }
