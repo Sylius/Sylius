@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -21,7 +22,13 @@ interface FlashHelperInterface
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param string $actionName
-     * @param ResourceInterface|null $reosurce
+     * @param ResourceInterface|null $resource
      */
     public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null);
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
+     * @param ResourceControllerEvent $event
+     */
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event);
 }

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\EventDispatcher;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface as ControllerEventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -22,6 +23,8 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
+ * @mixin EventDispatcher
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EventDispatcherSpec extends ObjectBehavior
@@ -55,7 +58,7 @@ class EventDispatcherSpec extends ObjectBehavior
 
         $eventDispatcher->dispatch('sylius.product.show', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatch(ResourceActions::SHOW, $requestConfiguration, $resource);
+        $this->dispatch(ResourceActions::SHOW, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_dispatches_appriopriate_custom_event_for_a_resource(
@@ -72,7 +75,7 @@ class EventDispatcherSpec extends ObjectBehavior
 
         $eventDispatcher->dispatch('sylius.product.register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource);
+        $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_dispatches_appriopriate_pre_event_for_a_resource(
@@ -140,6 +143,6 @@ class EventDispatcherSpec extends ObjectBehavior
 
         $eventDispatcher->dispatch('sylius.product.post_register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
+        $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 }

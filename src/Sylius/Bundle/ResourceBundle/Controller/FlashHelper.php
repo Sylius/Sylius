@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -56,6 +57,15 @@ class FlashHelper implements FlashHelperInterface
         }
 
         $this->session->getBag('flashes')->add('success', $translatedMessage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
+    {
+        $translatedMessage = $this->translator->trans($event->getMessage(), $event->getMessageParameters(), 'flashes');
+        $this->session->getBag('flashes')->add($event->getMessageType(), $translatedMessage);
     }
 
     /**

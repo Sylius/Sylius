@@ -40,8 +40,11 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
+        $event = $this->getEvent($resource);
 
-        $this->eventDispatcher->dispatch(sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
+
+        return $event;
     }
 
     /**
@@ -51,8 +54,11 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
+        $event = $this->getEvent($resource);
 
-        $this->eventDispatcher->dispatch(sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
+
+        return $event;
     }
 
     /**
@@ -62,7 +68,20 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
+        $event = $this->getEvent($resource);
 
-        $this->eventDispatcher->dispatch(sprintf('%s.%s.post_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), new ResourceControllerEvent($resource));
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.post_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
+
+        return $event;
+    }
+
+    /**
+     * @param ResourceInterface $resource
+     *
+     * @return ResourceControllerEvent
+     */
+    private function getEvent(ResourceInterface $resource)
+    {
+        return new ResourceControllerEvent($resource);
     }
 }
