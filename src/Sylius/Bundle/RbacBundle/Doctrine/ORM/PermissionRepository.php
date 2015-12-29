@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
 
@@ -20,7 +20,7 @@ use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionRepository extends EntityRepository implements PermissionRepositoryInterface
+class PermissionRepository extends Repository implements PermissionRepositoryInterface
 {
     /**
      * {@inheritdoc}

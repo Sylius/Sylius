@@ -12,7 +12,7 @@
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Resource\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

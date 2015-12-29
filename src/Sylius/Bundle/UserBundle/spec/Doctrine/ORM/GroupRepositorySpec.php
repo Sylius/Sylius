@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 
 class GroupRepositorySpec extends ObjectBehavior
 {
@@ -32,7 +32,7 @@ class GroupRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
     }
 
     function it_has_a_form_query_buidler($em, QueryBuilder $builder)

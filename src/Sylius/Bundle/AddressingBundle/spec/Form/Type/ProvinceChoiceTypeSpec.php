@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormTypeInterface;
  */
 class ProvinceChoiceTypeSpec extends ObjectBehavior
 {
-    function let(EntityRepository $entityRepository)
+    function let(Repository $entityRepository)
     {
         $this->beConstructedWith($entityRepository);
     }

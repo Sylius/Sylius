@@ -11,15 +11,13 @@
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 
 /**
- * Default product repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductRepository extends TranslatableResourceRepository
+class ProductRepository extends TranslatableRepository
 {
     /**
      * {@inheritdoc}

@@ -14,13 +14,13 @@ namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SearchIndexRepository extends EntityRepository
+class SearchIndexRepository extends Repository
 {
     /**
      * @var EntityManager

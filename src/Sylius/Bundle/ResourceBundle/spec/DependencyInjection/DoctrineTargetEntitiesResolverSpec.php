@@ -16,10 +16,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
+require_once __DIR__.'/../Fixture/Entity/Foo.php';
+
 /**
- * Doctrine target entities resolver spec.
- * It adds proper method calls to doctrine listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior

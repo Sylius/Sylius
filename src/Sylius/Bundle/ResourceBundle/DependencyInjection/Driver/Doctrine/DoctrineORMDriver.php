@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -48,8 +48,8 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
 
         $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         $repositoryClass = $translatable
-            ? TranslatableResourceRepository::class
-            : EntityRepository::class
+            ? TranslatableRepository::class
+            : Repository::class
         ;
 
         if ($container->hasParameter($repositoryClassParameterName)) {
@@ -68,7 +68,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
-            $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
+            $translatableRepositoryInterface = TranslatableRepositoryInterface::class;
             $translationConfig = $metadata->getParameter('translation');
 
             if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {

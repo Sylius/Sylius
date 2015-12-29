@@ -16,7 +16,8 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 class PaymentMethodRepositorySpec extends ObjectBehavior
 {
@@ -27,13 +28,17 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
+        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository');
     }
 
-    function it_is_a_repository()
+    function it_is_a_translatable_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
-        $this->shouldImplement('Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface');
+        $this->shouldHaveType(TranslatableRepository::class);
+    }
+
+    function it_is_a_payment_method_repository()
+    {
+        $this->shouldImplement(PaymentMethodRepositoryInterface::class);
     }
 
     function it_creates_query_builder_for_enable_status($em, QueryBuilder $builder)

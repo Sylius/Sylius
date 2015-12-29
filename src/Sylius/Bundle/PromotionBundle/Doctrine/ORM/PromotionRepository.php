@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
+class PromotionRepository extends Repository implements PromotionRepositoryInterface
 {
     /**
      * {@inheritdoc}

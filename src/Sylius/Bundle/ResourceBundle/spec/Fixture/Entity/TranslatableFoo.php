@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Entity;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Resource\Model\AbstractTranslatable;
 
 /**
  * Foo translatable entity.

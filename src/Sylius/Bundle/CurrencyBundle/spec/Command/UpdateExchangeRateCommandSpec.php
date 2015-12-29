@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Command;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Currency\Importer\ImporterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
@@ -72,7 +72,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,
-        EntityRepository $repository,
+        Repository $repository,
         ImporterInterface $importer,
         CurrencyInterface $currency
     ) {

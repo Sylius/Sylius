@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
@@ -27,7 +27,7 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldHaveType(Repository::class);
         $this->shouldImplement(PaymentMethodRepositoryInterface::class);
     }
 

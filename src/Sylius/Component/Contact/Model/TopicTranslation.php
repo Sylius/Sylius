@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Contact\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * Contact topic translation model.

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -22,7 +22,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserRepository extends EntityRepository implements UserRepositoryInterface
+class UserRepository extends Repository implements UserRepositoryInterface
 {
     /**
      * @param array $criteria

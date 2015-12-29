@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\Repository;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
@@ -19,7 +19,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
+class ChannelRepository extends Repository implements ChannelRepositoryInterface
 {
     /**
      * {@inheritDoc}

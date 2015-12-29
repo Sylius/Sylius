@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
@@ -20,7 +20,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TaxonRepository extends TranslatableResourceRepository implements TaxonRepositoryInterface
+class TaxonRepository extends TranslatableRepository implements TaxonRepositoryInterface
 {
     public function getTaxonsAsList(TaxonomyInterface $taxonomy)
     {

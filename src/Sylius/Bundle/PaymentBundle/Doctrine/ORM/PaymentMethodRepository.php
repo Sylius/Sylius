@@ -12,13 +12,13 @@
 
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Repository\TranslatableRepository;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PaymentMethodRepository extends TranslatableResourceRepository implements PaymentMethodRepositoryInterface
+class PaymentMethodRepository extends TranslatableRepository implements PaymentMethodRepositoryInterface
 {
     /**
      * {@inheritdoc}

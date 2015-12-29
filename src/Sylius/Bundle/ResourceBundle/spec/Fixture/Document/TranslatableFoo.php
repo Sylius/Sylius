@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Document;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Resource\Model\AbstractTranslatable;
 
 /**
  * Foo translatable document.

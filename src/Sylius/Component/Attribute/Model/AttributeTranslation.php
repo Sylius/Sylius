@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
