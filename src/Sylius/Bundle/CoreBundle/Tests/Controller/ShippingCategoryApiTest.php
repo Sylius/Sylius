@@ -50,7 +50,7 @@ EOT;
         ], $data);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/new_shipping_category_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shipping_category/create_response', Response::HTTP_CREATED);
     }
 
     public function testGetShippingCategoriesListAccessDeniedResponse()
@@ -71,7 +71,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/get_shipping_categories_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/index_response', Response::HTTP_OK);
     }
 
     public function testGetShippingCategoryAccessDeniedResponse()
@@ -106,7 +106,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/show_response', Response::HTTP_OK);
     }
 
     public function testFullUpdateShippingCategoryAccessDeniedResponse()
@@ -141,7 +141,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/validation_fail_response', Response::HTTP_BAD_REQUEST);
+        $this->assertResponse($response, 'shipping_category/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
     public function testFullUpdateShippingCategoryResponse()
@@ -171,7 +171,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/updated_shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
     }
 
     public function testPartialUpdateShippingCategoryWhichDoesNotExistResponse()
@@ -214,7 +214,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/updated_shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
     }
 
     public function testDeleteShippingCategoryWhichDoesNotExistResponse()
