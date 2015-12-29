@@ -114,6 +114,6 @@ class OrderController extends ResourceController
             ))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

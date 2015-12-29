@@ -43,7 +43,7 @@ class LocaleController extends ResourceController
         if (!$configuration->isHtmlRequest()) {
             $view = View::create(array('locale' => $locale));
 
-            return $this->viewHandler->handle($view);
+            return $this->viewHandler->handle($configuration, $view);
         }
 
         return $this->redirectHandler->redirect($configuration, $request->headers->get('referer') ?: '/');

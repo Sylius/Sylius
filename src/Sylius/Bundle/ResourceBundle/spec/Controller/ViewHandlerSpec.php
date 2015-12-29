@@ -52,7 +52,7 @@ class ViewHandlerSpec extends ObjectBehavior
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $view = View::create();
 
-        $restViewHandler->handle($view)->willReturn($response);
+        $restViewHandler->handle($configuration, $view)->willReturn($response);
 
         $this->handle($requestConfiguration, $view)->shouldReturn($response);
     }
@@ -73,7 +73,7 @@ class ViewHandlerSpec extends ObjectBehavior
         $restViewHandler->setExclusionStrategyGroups(array('Detailed'))->shouldBeCalled();
         $restViewHandler->setExclusionStrategyVersion('2.0.0')->shouldBeCalled();
 
-        $restViewHandler->handle($view)->willReturn($response);
+        $restViewHandler->handle($configuration, $view)->willReturn($response);
 
         $this->handle($requestConfiguration, $view)->shouldReturn($response);
     }

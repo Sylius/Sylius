@@ -76,7 +76,7 @@ class SearchController extends ResourceController
             ))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -115,6 +115,6 @@ class SearchController extends ResourceController
             ))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

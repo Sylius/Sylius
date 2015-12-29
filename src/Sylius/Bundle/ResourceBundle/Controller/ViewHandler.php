@@ -47,6 +47,6 @@ class ViewHandler implements ViewHandlerInterface
             $view->getSerializationContext()->enableMaxDepthChecks();
         }
 
-        return $this->restViewHandler->handle($view);
+        return $this->restViewHandler->handle($configuration, $view);
     }
 }

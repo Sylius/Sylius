@@ -197,7 +197,7 @@ class ProductController extends ResourceController
             ->setData($product)
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -248,7 +248,7 @@ class ProductController extends ResourceController
             ))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -338,7 +338,7 @@ class ProductController extends ResourceController
             ))
         ;
 
-        return $this->viewHandler->handle($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
