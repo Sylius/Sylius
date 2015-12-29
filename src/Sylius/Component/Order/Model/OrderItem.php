@@ -52,7 +52,7 @@ class OrderItem implements OrderItemInterface
     /**
      * @var Collection|OrderItemUnitInterface[]
      */
-    protected $itemUnits;
+    protected $units;
 
     /**
      * @var Collection|AdjustmentInterface[]
@@ -67,7 +67,7 @@ class OrderItem implements OrderItemInterface
     public function __construct()
     {
         $this->adjustments = new ArrayCollection();
-        $this->itemUnits = new ArrayCollection();
+        $this->units = new ArrayCollection();
     }
 
     /**
@@ -207,37 +207,39 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemUnits()
+    public function getUnits()
     {
-        return $this->itemUnits;
+        return $this->units;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addItemUnit(OrderItemUnitInterface $itemUnit)
+    public function addUnit(OrderItemUnitInterface $unit)
     {
-        if (!$this->hasItemUnit($itemUnit)) {
-            $itemUnit->setOrderItem($this);
-            $this->itemUnits->add($itemUnit);
+        if (!$this->hasUnit($unit)) {
+            $unit->setOrderItem($this);
+            $this->units->add($unit);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItemUnit(OrderItemUnitInterface $itemUnit)
+    public function removeUnit(OrderItemUnitInterface $unit)
     {
-        $itemUnit->setOrderItem(null);
-        $this->itemUnits->removeElement($itemUnit);
+        if ($this->hasUnit($unit)) {
+            $unit->setOrderItem(null);
+            $this->units->removeElement($unit);
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasItemUnit(OrderItemUnitInterface $itemUnit)
+    public function hasUnit(OrderItemUnitInterface $unit)
     {
-        return $this->itemUnits->contains($itemUnit);
+        return $this->units->contains($unit);
     }
     /**
      * {@inheritdoc}

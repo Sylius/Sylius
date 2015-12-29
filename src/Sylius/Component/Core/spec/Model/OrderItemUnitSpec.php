@@ -14,6 +14,8 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -68,4 +70,45 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->setUpdatedAt($updatedAt);
         $this->getUpdatedAt()->shouldReturn($updatedAt);
     }
+
+    function it_stockable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    {
+        $orderItem->getVariant()->willReturn($variant);
+        $this->setOrderItem($orderItem);
+
+        $this->getStockable()->shouldReturn($variant);
+    }
+
+    function its_sku_is_order_item_variant_sku(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    {
+        $variant->getSku()->willReturn('test_sku');
+        $orderItem->getVariant()->willReturn($variant);
+        $this->setOrderItem($orderItem);
+
+        $this->getSku()->shouldReturn('test_sku');
+    }
+
+    function it_can_be_sold_or_backorderded()
+    {
+        $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+        $this->isSold()->shouldReturn(true);
+
+        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
+        $this->isBackordered()->shouldReturn(true);
+    }
+
+    function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    {
+        $orderItem->getVariant()->willReturn($variant);
+        $this->setOrderItem($orderItem);
+
+        $this->getShippable()->shouldReturn($variant);
+    }
+
+    function its_shipping_state_is_mutable()
+    {
+        $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
+        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
+    }
+
 }

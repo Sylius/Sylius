@@ -260,6 +260,21 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(new \stdClass());
     }
 
+    function it_has_total_quantity(OrderItemInterface $orderItem1, OrderItemInterface $orderItem2)
+    {
+        $orderItem1->getQuantity()->willReturn(10);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+
+        $orderItem2->getQuantity()->willReturn(30);
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $orderItem2->equals($orderItem1)->willReturn(false);
+
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $this->getTotalQuantity()->shouldReturn(40);
+    }
+
     function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->calculateTotal()->shouldBeCalled();
