@@ -35,6 +35,9 @@
         <field name="price" column="price" type="integer">
             <gedmo:versioned />
         </field>
+        <field name="originalPrice" column="original_price" type="integer" nullable="true">
+            <gedmo:versioned />
+        </field>
         <field name="pricingCalculator" column="pricing_calculator" type="string">
             <gedmo:versioned/>
         </field>
