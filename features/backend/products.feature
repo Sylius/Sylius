@@ -11,17 +11,16 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following attributes:
-            | name               | presentation      | type     | choices   |
-            | T-Shirt fabric     | T-Shirt           | text     |           |
-            | T-Shirt fare trade | Faretrade product | checkbox |           |
-            | Color              | color             | choice   | red, blue |
-            | Size               | size              | number   |           |
+            | name               | type     | configuration |
+            | T-Shirt fabric     | text     | min:2,max:255 |
+            | T-Shirt fare trade | checkbox |               |
+            | Size               | integer  |               |
           And the following products exist:
-            | name          | price | options                     | attributes             |
-            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
-            | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
-            | Mug           | 5.99  |                             |                        |
-            | Sticker       | 10.00 |                             |                        |
+            | name          | price | options                     | attributes            |
+            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
+            | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric:Cotton |
+            | Mug           | 5.99  |                             |                       |
+            | Sticker       | 10.00 |                             |                       |
           And product "Super T-Shirt" is available in all variations
           And there are following tax categories:
             | code | name        |
@@ -112,28 +111,26 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add"
-        And I select "T-Shirt fabric" from "Attribute"
-        And I fill in "Value" with "Cotton"
-        And I press "Create"
-        Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
-        And I should see "Cotton"
-
-    @javascript
-    Scenario: Creating product with number attribute
-        Given I am on the product creation page
-        When I fill in the following:
-            | Name        | Manchester United tee   |
-            | Description | Interesting description |
-            | Price       | 59.99                   |
-        And go to "Attributes" tab
-        And I click "Add"
-        And I select "Color" from "Attribute"
-        And I fill in "Value" with "12"
+        And I add "T-Shirt fabric" attribute
+        And I fill in "T-Shirt fabric" with "Polyester"
         When I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created." should appear on the page
+
+    @javascript
+    Scenario: Created product does not pass validation
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And I go to "Attributes" tab
+        And I add "T-Shirt fabric" attribute
+        And I fill in "T-Shirt fabric" with "X"
+        When I press "Create"
+        Then I should still be on the product creation page
+        When I go to "Attributes" tab
+        And I should see "This value is too short. It should have 2 characters or more."
 
     Scenario: Created products appear in the list
         Given I am on the product creation page
@@ -159,6 +156,18 @@ Feature: Products
         Then I should be on the page of product "Big Sticker"
         And I should see "Product has been successfully updated."
 
+    @javascript
+    Scenario: Modifying product attributes
+        Given I am editing product "Super T-Shirt"
+        And I go to "Attributes" tab
+        When I delete "T-Shirt fabric" attribute
+        And I add "Size" attribute
+        And I fill in "Size" with "100"
+        And I press "Save changes"
+        Then I should be on the page of product "Super T-Shirt"
+        And I should see "100"
+        And I should not see "Wool"
+
     Scenario: Selecting the product tax category
         Given I am editing product "Sticker"
         When I select "Print" from "Tax category"
@@ -167,6 +176,7 @@ Feature: Products
         And I should see "Product has been successfully updated."
         And "Print" should appear on the page
 
+    @javascript
     Scenario: Selecting the categorization taxons
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab
@@ -206,6 +216,7 @@ Feature: Products
         And "Product has been successfully created." should appear on the page
         And "New" should appear on the page
 
+    @javascript
     Scenario: Selecting the main taxon of product
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab

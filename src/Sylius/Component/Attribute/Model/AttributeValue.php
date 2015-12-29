@@ -12,9 +12,8 @@
 namespace Sylius\Component\Attribute\Model;
 
 /**
- * Attribute to subject relation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValue implements AttributeValueInterface
 {
@@ -39,11 +38,41 @@ class AttributeValue implements AttributeValueInterface
     protected $value;
 
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
+     * @var bool
+     */
+    protected $boolean;
+
+    /**
+     * @var int
+     */
+    protected $integer;
+
+    /**
+     * @var float
+     */
+    protected $float;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dateTime;
+
+    /**
+     * @var \DateTime
+     */
+    protected $date;
+
+    /**
      * {@inheritdoc}
      */
     public function __toString()
     {
-        return $this->value;
+        return $this->getValue();
     }
 
     /**
@@ -91,18 +120,13 @@ class AttributeValue implements AttributeValueInterface
      */
     public function getValue()
     {
-        if ($this->attribute && AttributeTypes::CHECKBOX === $this->attribute->getType()) {
-            return (Boolean) $this->value;
+        if (null === $this->attribute) {
+            return null;
         }
 
-        if ($this->attribute && AttributeTypes::CHOICE === $this->attribute->getType()) {
-            $configuration = $this->getConfiguration();
-            if (isset($configuration['choices'][$this->value])) {
-                return $configuration['choices'][$this->value];
-            }
-        }
+        $getter = 'get'.ucfirst($this->attribute->getStorageType());
 
-        return $this->value;
+        return $this->$getter();
     }
 
     /**
@@ -110,7 +134,10 @@ class AttributeValue implements AttributeValueInterface
      */
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->assertAttributeIsSet();
+
+        $property = $this->attribute->getStorageType();
+        $this->$property = $value;
     }
 
     /**
@@ -126,16 +153,6 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
-    {
-        $this->assertAttributeIsSet();
-
-        return $this->attribute->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getType()
     {
         $this->assertAttributeIsSet();
@@ -144,15 +161,100 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return boolean
      */
-    public function getConfiguration()
+    public function getBoolean()
     {
-        $this->assertAttributeIsSet();
-
-        return $this->attribute->getConfiguration();
+        return $this->boolean;
     }
 
+    /**
+     * @param boolean $boolean
+     */
+    public function setBoolean($boolean)
+    {
+        $this->boolean = $boolean;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInteger()
+    {
+        return $this->integer;
+    }
+
+    /**
+     * @param int $integer
+     */
+    public function setInteger($integer)
+    {
+        $this->integer = $integer;
+    }
+
+    /**
+     * @return float
+     */
+    public function getFloat()
+    {
+        return $this->float;
+    }
+
+    /**
+     * @param float $float
+     */
+    public function setFloat($float)
+    {
+        $this->float = $float;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setDateTime(\DateTime $dateTime)
+    {
+        $this->dateTime = $dateTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+    }
     /**
      * @throws \BadMethodCallException
      */

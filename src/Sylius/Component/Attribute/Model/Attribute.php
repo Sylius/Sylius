@@ -13,11 +13,14 @@ namespace Sylius\Component\Attribute\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
@@ -29,12 +32,12 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var string
      */
-    protected $type = AttributeTypes::TEXT;
+    protected $code;
 
     /**
      * @var string
      */
-    protected $name;
+    protected $type = TextAttributeType::TYPE;
 
     /**
      * @var array
@@ -45,6 +48,11 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      * @var AttributeValueInterface[]|Collection
      */
     protected $values;
+
+    /**
+     * @var string
+     */
+    protected $storageType;
 
     /**
      * @var \DateTime
@@ -68,7 +76,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -82,9 +90,25 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -92,23 +116,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
+        $this->translate()->setName($name);
     }
 
     /**
@@ -149,6 +157,22 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * @param string $storageType
+     */
+    public function setStorageType($storageType)
+    {
+        $this->storageType = $storageType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStorageType()
+    {
+        return $this->storageType;
     }
 
     /**

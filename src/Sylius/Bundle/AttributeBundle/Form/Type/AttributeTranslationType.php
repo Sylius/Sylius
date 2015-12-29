@@ -15,23 +15,16 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Attribute Translation type.
-
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AttributeTranslationType extends AbstractResourceType
 {
     /**
-     * Subject name.
-     *
      * @var string
      */
     protected $subjectName;
 
     /**
-     * Constructor.
-     *
      * @param string $dataClass
      * @param array  $validationGroups
      * @param string $subjectName
@@ -49,8 +42,8 @@ class AttributeTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('presentation', 'text', array(
-                'label' => 'sylius.form.attribute.presentation',
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.attribute.name',
             ))
         ;
     }
