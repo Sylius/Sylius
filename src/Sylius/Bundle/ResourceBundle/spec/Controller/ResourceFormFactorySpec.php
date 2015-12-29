@@ -47,12 +47,12 @@ class ResourceFormFactorySpec extends ObjectBehavior
     {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn('sylius_product_pricing');
-        $formFactory->create('sylius_product_pricing', $resource, array())->willReturn($form);
+        $formFactory->create('sylius_product_pricing', $resource)->willReturn($form);
         
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
 
-    function it_disables_csrf_protection_for_non_html_requests(
+    function it_creates_form_without_root_name_and_disables_csrf_protection_for_non_html_requests(
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
@@ -61,7 +61,7 @@ class ResourceFormFactorySpec extends ObjectBehavior
     {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
-        $formFactory->create('sylius_product_api', $resource, array('csrf_protection' => false))->willReturn($form);
+        $formFactory->createNamed('', 'sylius_product_api', $resource, array('csrf_protection' => false))->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }

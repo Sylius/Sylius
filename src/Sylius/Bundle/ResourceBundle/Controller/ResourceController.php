@@ -221,9 +221,8 @@ class ResourceController extends ContainerAware
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
         $form = $this->resourceFormFactory->create($configuration, $newResource);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $newResource = $form->getData();
 
             $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
@@ -278,7 +277,7 @@ class ResourceController extends ContainerAware
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, 204));
+                return $this->viewHandler->handle($configuration, View::create($resource, 204));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);

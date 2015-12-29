@@ -320,8 +320,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(false);
+        $request->isMethod('POST')->willReturn(false);
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
@@ -369,8 +368,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
@@ -418,8 +417,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
         $form->isValid()->willReturn(false);
 
         $expectedView = View::create($form, 400);
@@ -462,8 +461,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -509,8 +508,8 @@ class ResourceControllerSpec extends ObjectBehavior
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
-        $form->handleRequest($request)->shouldBeCalled();
-        $form->isSubmitted()->willReturn(true);
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -683,7 +682,6 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         Form $form,
-        FormView $formView,
         Request $request,
         Response $response
     )
@@ -693,10 +691,9 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isHtmlRequest()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
-
-        $configuration->isHtmlRequest()->willReturn(false);
 
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);;
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
@@ -705,12 +702,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $request->getMethod()->willReturn('PATCH');
 
         $form->submit($request, false)->willReturn($form);
-
         $form->isValid()->willReturn(false);
-        $form->createView()->willReturn($formView);
 
         $expectedView = View::create($form, 400);
-
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
@@ -789,10 +783,9 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isHtmlRequest()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
-
-        $configuration->isHtmlRequest()->willReturn(false);
 
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
@@ -808,8 +801,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
-        $expectedView = View::create(null, 204);
-
+        $expectedView = View::create($resource, 204);
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
