@@ -34,6 +34,7 @@ class SearchController extends ResourceController
     public function indexAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         /**
          * when using elastic search if you want to setup multiple indexes and control
          * them separately you can do so by adding the index service with a setter
@@ -86,6 +87,7 @@ class SearchController extends ResourceController
      */
     public function formAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $filters = array();
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
