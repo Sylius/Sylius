@@ -71,6 +71,12 @@ class InventoryHandler implements InventoryHandlerInterface
                 $item->removeUnit($unit);
             }
         }
+
+        foreach ($item->getUnits() as $unit) {
+            if ($unit->getStockable() !== $item->getVariant()) {
+                $unit->setStockable($item->getVariant());
+            }
+        }
     }
 
     /**
@@ -129,7 +135,7 @@ class InventoryHandler implements InventoryHandlerInterface
     protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
     {
         if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         for ($i = 0; $i < $quantity; $i++) {

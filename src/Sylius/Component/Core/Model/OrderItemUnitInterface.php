@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Inventory\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, BaseInventoryUnitInterface, ShipmentItemInterface
+interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, InventoryUnitInterface, ShipmentItemInterface
 {
 }

@@ -110,12 +110,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_add_shipment_properly(ShipmentInterface $shipment)
     {
-        $this->hasShipment($shipment)->shouldReturn(false);
+        $this->shouldNotHaveShipment($shipment);
 
         $shipment->setOrder($this)->shouldBeCalled();
         $this->addShipment($shipment);
 
-        $this->hasShipment($shipment)->shouldReturn(true);
+        $this->shouldHaveShipment($shipment);
     }
 
     function it_should_remove_shipment_properly(ShipmentInterface $shipment)
@@ -123,12 +123,12 @@ class OrderSpec extends ObjectBehavior
         $shipment->setOrder($this)->shouldBeCalled();
         $this->addShipment($shipment);
 
-        $this->hasShipment($shipment)->shouldReturn(true);
+        $this->shouldHaveShipment($shipment);
 
         $shipment->setOrder(null)->shouldBeCalled();
         $this->removeShipment($shipment);
 
-        $this->hasShipment($shipment)->shouldReturn(false);
+        $this->shouldNotHaveShipment($shipment);
     }
 
     function it_should_return_shipping_adjustments(
@@ -289,10 +289,10 @@ class OrderSpec extends ObjectBehavior
         $payment->setOrder(null)->shouldBeCalled();
 
         $this->addPayment($payment);
-        $this->hasPayment($payment)->shouldReturn(true);
+        $this->shouldHavePayment($payment);
 
         $this->removePayment($payment);
-        $this->hasPayment($payment)->shouldReturn(false);
+        $this->shouldNotHavePayment($payment);
     }
 
     function it_returns_last_payment(PaymentInterface $payment1, PaymentInterface $payment2)
@@ -314,19 +314,19 @@ class OrderSpec extends ObjectBehavior
         $shipment->setOrder(null)->shouldBeCalled();
 
         $this->addShipment($shipment);
-        $this->hasShipment($shipment)->shouldReturn(true);
+        $this->shouldHaveShipment($shipment);
 
         $this->removeShipment($shipment);
-        $this->hasShipment($shipment)->shouldReturn(false);
+        $this->shouldNotHaveShipment($shipment);
     }
 
     function it_adds_and_removes_promotion_coupons(CouponInterface $coupon)
     {
         $this->addPromotionCoupon($coupon);
-        $this->hasPromotionCoupon($coupon)->shouldReturn(true);
+        $this->shouldHavePromotionCoupon($coupon);
 
         $this->removePromotionCoupon($coupon);
-        $this->hasPromotionCoupon($coupon)->shouldReturn(false);
+        $this->shouldNotHavePromotionCoupon($coupon);
     }
 
     function it_count_promotions_subjects(OrderItemInterface $item1, OrderItemInterface $item2)
@@ -340,9 +340,9 @@ class OrderSpec extends ObjectBehavior
     function it_adds_and_removes_promotions(PromotionInterface $promotion)
     {
         $this->addPromotion($promotion);
-        $this->hasPromotion($promotion)->shouldReturn(true);
+        $this->shouldHavePromotion($promotion);
 
         $this->removePromotion($promotion);
-        $this->hasPromotion($promotion)->shouldReturn(false);
+        $this->shouldNotHavePromotion($promotion);
     }
 }
