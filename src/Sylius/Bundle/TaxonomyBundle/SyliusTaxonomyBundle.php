@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\TaxonomyBundle;
 
+use Sylius\Bundle\TaxonomyBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Flexible categorization system.
