@@ -437,7 +437,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_redirects_to_newly_created_resource(
+    function it_does_not_create_the_resource_and_redirects_to_index_for_html_requests_stopped_via_events(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -452,6 +452,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
     )
@@ -475,7 +476,62 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $repository->add($newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+
+        $redirectHandler->redirectToIndex($configuration, $newResource)->willReturn($redirectResponse);
+
+        $this->createAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_redirects_to_newly_created_resource(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ViewHandlerInterface $viewHandler,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
+        RepositoryInterface $repository,
+        ResourceInterface $newResource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        Form $form,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    )
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::CREATE)->willReturn('SyliusShopBundle:Product:create.html.twig');
+
+        $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
+        $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($newResource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+        
         $repository->add($newResource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
 
@@ -498,6 +554,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceFormFactoryInterface $resourceFormFactory,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         Request $request,
         Response $response
@@ -522,7 +579,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
         $repository->add($newResource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
 
@@ -533,6 +592,57 @@ class ResourceControllerSpec extends ObjectBehavior
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->createAction($request)->shouldReturn($response);
+    }
+
+    function it_does_not_create_the_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
+        RepositoryInterface $repository,
+        ResourceInterface $newResource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        Form $form,
+        Request $request,
+        ResourceControllerEvent $event
+    )
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(false);
+        $configuration->getTemplate(ResourceActions::CREATE)->willReturn('SyliusShopBundle:Product:create.html.twig');
+
+        $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
+        $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $request->isMethod('POST')->willReturn(true);
+        $form->submit($request)->willReturn($form);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($newResource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+        $event->getMessage()->willReturn('You cannot add a new product right now.');
+        $event->getErrorCode()->willReturn(500);
+
+        $repository->add($newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(new HttpException(500, 'You cannot add a new product right now.'))
+            ->during('createAction', array($request))
+        ;
     }
 
     function it_throws_a_403_exception_if_user_is_unauthorized_to_edit_a_single_resource(
@@ -719,6 +829,60 @@ class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($response);
     }
 
+    function it_does_not_update_the_resource_and_redirects_to_resource_for_html_request_if_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        Form $form,
+        EventDispatcherInterface $eventDispatcher,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    )
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->submit($request, true)->willReturn($form);
+
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $manager->flush()->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+
+        $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->updateAction($request)->shouldReturn($redirectResponse);
+    }
+
     function it_redirects_to_updated_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -733,6 +897,7 @@ class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
+        ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
     )
@@ -760,7 +925,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
         $manager->flush()->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
@@ -782,6 +949,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
         EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         Request $request,
         Response $response
@@ -806,7 +974,9 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
         $manager->flush()->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
@@ -814,6 +984,56 @@ class ResourceControllerSpec extends ObjectBehavior
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
+    }
+
+    function it_does_not_update_the_resource_throws_a_http_exception_for_non_html_requests_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ViewHandlerInterface $viewHandler,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Form $form,
+        Request $request
+    )
+    {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isHtmlRequest()->willReturn(false);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->submit($request, true)->willReturn($form);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+        $event->getMessage()->willReturn('Cannot update this channel.');
+        $event->getErrorCode()->willReturn(500);
+
+        $manager->flush()->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(new HttpException(500, 'Cannot update this channel.'))
+            ->during('updateAction', array($request))
+        ;
     }
 
     function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
