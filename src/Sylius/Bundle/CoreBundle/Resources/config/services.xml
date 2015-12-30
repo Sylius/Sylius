@@ -105,6 +105,8 @@
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
+
+        <parameter key="sylius.modifier.order_item_quantity.class">Sylius\Bundle\CoreBundle\Modifier\OrderItemQuantityModifier</parameter>
     </parameters>
 
     <services>
@@ -553,6 +555,10 @@
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
+        </service>
+
+        <service id="sylius.modifier.order_item_quantity" class="%sylius.modifier.order_item_quantity.class%">
+            <argument type="service" id="sylius.factory.order_item_unit" />
         </service>
     </services>
 
