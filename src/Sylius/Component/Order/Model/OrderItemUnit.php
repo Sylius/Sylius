@@ -26,11 +26,6 @@ class OrderItemUnit implements OrderItemUnitInterface
     protected $id;
 
     /**
-     * @var int
-     */
-    protected $total = 0;
-
-    /**
      * @var OrderItemInterface
      */
     protected $orderItem;
@@ -49,7 +44,6 @@ class OrderItemUnit implements OrderItemUnitInterface
     {
         $this->adjustments = new ArrayCollection();
         $this->orderItem = $orderItem;
-        $this->recalculateTotal();
         $this->orderItem->addUnit($this);
     }
 
@@ -66,19 +60,13 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     public function getTotal()
     {
-        return $this->total;
-    }
+        $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function recalculateTotal()
-    {
-        $this->total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
+        if ($total < 0) {
+            return 0;
         }
+
+        return $total;
     }
 
     /**
@@ -184,7 +172,6 @@ class OrderItemUnit implements OrderItemUnitInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal += $adjustment->getAmount();
-            $this->recalculateTotal();
         }
     }
 
@@ -192,7 +179,6 @@ class OrderItemUnit implements OrderItemUnitInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();
-            $this->recalculateTotal();
         }
     }
 
@@ -208,7 +194,5 @@ class OrderItemUnit implements OrderItemUnitInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
-
-        $this->recalculateTotal();
     }
 }

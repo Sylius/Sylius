@@ -157,7 +157,7 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(1000);
     }
 
-    function it_recalculates_its_total_properly_after_order_item_unit_price_change(
+    function it_has_proper_total_after_order_item_unit_price_change(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         OrderItemInterface $orderItem
@@ -177,7 +177,6 @@ class OrderItemUnitSpec extends ObjectBehavior
 
         $orderItem->getUnitPrice()->willReturn(500);
 
-        $this->recalculateTotal();
         $this->getTotal()->shouldReturn(650);
     }
 

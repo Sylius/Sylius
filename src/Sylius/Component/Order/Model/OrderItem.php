@@ -138,7 +138,7 @@ class OrderItem implements OrderItemInterface
         }
 
         $this->unitPrice = $unitPrice;
-        $this->recalculateUnits();
+        $this->recalculateUnitsTotal();
     }
 
     /**
@@ -185,21 +185,6 @@ class OrderItem implements OrderItemInterface
         $this->unitsTotal = 0;
 
         foreach ($this->units as $unit) {
-            $this->unitsTotal += $unit->getTotal();
-        }
-
-        $this->recalculateTotal();
-    }
-
-    /**
-     *  Recalculates all units' total together with units total update.
-     */
-    protected function recalculateUnits()
-    {
-        $this->unitsTotal = 0;
-
-        foreach ($this->units as $unit) {
-            $unit->recalculateTotal();
             $this->unitsTotal += $unit->getTotal();
         }
 
