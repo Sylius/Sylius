@@ -237,6 +237,19 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function removeUnitByIndex($index)
+    {
+        if (null === $unit = $this->units->get($index)) {
+            return;
+        }
+
+        $unit->setOrderItem(null);
+        $this->units->remove($index);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasUnit(OrderItemUnitInterface $unit)
     {
         return $this->units->contains($unit);
