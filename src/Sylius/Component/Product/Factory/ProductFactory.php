@@ -1,11 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Component\Product\Factory;
 
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
 
+/**
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
+ */
 class ProductFactory implements FactoryInterface
 {
     /**
@@ -14,26 +24,18 @@ class ProductFactory implements FactoryInterface
     private $variantFactory;
 
     /**
-     * @var LocaleProviderInterface
-     */
-    private $localeProvider;
-
-    /**
      * @var FactoryInterface
      */
     private $translatableFactory;
 
     /**
      * @param FactoryInterface $translatableResourceFactory
-     * @param LocaleProviderInterface $localeProvider
      * @param FactoryInterface $variantFactory
      */
     public function __construct(
         FactoryInterface $translatableResourceFactory,
-        LocaleProviderInterface $localeProvider,
         FactoryInterface $variantFactory
     ) {
-        $this->localeProvider = $localeProvider;
         $this->translatableFactory = $translatableResourceFactory;
         $this->variantFactory = $variantFactory;
     }
