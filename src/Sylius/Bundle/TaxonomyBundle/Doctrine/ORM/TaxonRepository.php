@@ -11,21 +11,21 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
-class TaxonRepository extends TranslatableResourceRepository implements TaxonRepositoryInterface
+class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function findChildren(TaxonInterface $taxon)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->gt('o.left', ':left'))
             ->andWhere($queryBuilder->expr()->lt('o.right', ':right'))
@@ -41,12 +41,30 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
      */
     public function findOneByPermalink($permalink)
     {
-        return $this->getQueryBuilder()
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->where('translation.permalink = :permalink')
             ->setParameter('permalink', $permalink)
             ->orderBy('o.left')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByName($name)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
@@ -54,7 +72,7 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
      */
     public function findRootNodes()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName('parent')))
         ;

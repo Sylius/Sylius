@@ -15,14 +15,15 @@ use Sylius\Bundle\ProductBundle\Doctrine\ORM\VariantRepository as BaseVariantRep
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
- * Product variant repository.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class ProductVariantRepository extends BaseVariantRepository implements ProductVariantRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getFormQueryBuilder()
     {
-        return $this->getCollectionQueryBuilder();
+        return $this->createQueryBuilder('o');
     }
 }

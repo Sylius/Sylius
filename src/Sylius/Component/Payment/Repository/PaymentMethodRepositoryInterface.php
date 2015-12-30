@@ -40,3 +40,4 @@ interface PaymentMethodRepositoryInterface
      */
     public function findOneByName($name);
 }
+

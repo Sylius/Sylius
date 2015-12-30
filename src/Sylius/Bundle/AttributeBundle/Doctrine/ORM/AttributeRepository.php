@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
+namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Product\Repository\VariantRepositoryInterface;
+use Sylius\Component\Attribute\Repository\AttributeRepositoryInterface;
 
 /**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class VariantRepository extends EntityRepository implements VariantRepositoryInterface
+class AttributeRepository extends EntityRepository implements AttributeRepositoryInterface
 {
     /**
      * {@inheritdoc}

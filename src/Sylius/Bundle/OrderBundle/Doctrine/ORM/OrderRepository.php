@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
- * Order repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
@@ -26,11 +24,13 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function findRecentOrders($amount = 10)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
 
         $this->_em->getFilters()->disable('softdeleteable');
 
         return $queryBuilder
+            ->leftJoin('o.items', 'item')
+            ->addSelect('item')
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->setMaxResults($amount)
             ->orderBy('o.completedAt', 'desc')
@@ -50,17 +50,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->setParameter('number', $number)
             ->getQuery()
             ->getSingleScalarResult() > 0
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->leftJoin('o.items', 'item')
-            ->addSelect('item')
         ;
     }
 }

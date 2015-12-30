@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
+namespace Sylius\Bundle\AddressingBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Product\Repository\VariantRepositoryInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 /**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class VariantRepository extends EntityRepository implements VariantRepositoryInterface
+class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -25,9 +25,9 @@ class VariantRepository extends EntityRepository implements VariantRepositoryInt
     public function findOneByName($name)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->addSelect('members')
+            ->leftJoin('o.members', 'members')
+            ->where('o.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
             ->getOneOrNullResult()
