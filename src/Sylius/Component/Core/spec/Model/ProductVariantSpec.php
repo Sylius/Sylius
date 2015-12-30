@@ -74,8 +74,6 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_original_price_should_accept_only_integer()
     {
-        $this->setOriginalPrice(310);
-        $this->getOriginalPrice()->shouldReturn(310);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
