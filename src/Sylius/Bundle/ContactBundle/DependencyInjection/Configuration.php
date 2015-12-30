@@ -15,9 +15,9 @@ use Sylius\Bundle\ContactBundle\Form\Type\RequestType;
 use Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType;
 use Sylius\Bundle\ContactBundle\Form\Type\TopicType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Contact\Model\Request;
 use Sylius\Component\Contact\Model\RequestInterface;
 use Sylius\Component\Contact\Model\Topic;
@@ -111,7 +111,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Topic::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(TopicInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
