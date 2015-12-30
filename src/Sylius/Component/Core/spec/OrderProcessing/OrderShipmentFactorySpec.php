@@ -14,9 +14,9 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
