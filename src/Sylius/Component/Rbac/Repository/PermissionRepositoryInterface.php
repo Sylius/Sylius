@@ -15,15 +15,11 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Permission repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PermissionRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Get child permissions.
-     *
      * @param PermissionInterface
      *
      * @return array

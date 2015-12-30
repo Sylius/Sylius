@@ -15,15 +15,11 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Role repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface RoleRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Get child roles.
-     *
      * @param RoleInterface
      *
      * @return array

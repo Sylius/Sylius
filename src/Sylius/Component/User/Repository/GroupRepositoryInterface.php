@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Repository;
+namespace Sylius\Component\User\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ProductVariantRepositoryInterface extends RepositoryInterface
+interface GroupRepositoryInterface extends RepositoryInterface
 {
     /**
      * @return QueryBuilder

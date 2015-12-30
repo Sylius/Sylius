@@ -17,6 +17,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface as BasePr
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
 {

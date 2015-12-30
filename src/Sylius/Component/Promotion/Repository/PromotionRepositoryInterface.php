@@ -16,16 +16,19 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Promotion repository interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Finds all active promotions.
-     *
      * @return Collection|PromotionInterface[]
      */
     public function findActive();
+
+    /**
+     * @param string $name
+     *
+     * @return PromotionInterface|null
+     */
+    public function findOneByName($name);
 }
