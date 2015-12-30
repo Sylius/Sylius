@@ -224,12 +224,13 @@ class ProductController extends BaseProductController
         $helper   = $this->get('sylius.templating.helper.currency');
         foreach ($products as $product) {
             $results[] = array(
-                'id'        => $product->getMasterVariant()->getId(),
-                'name'      => $product->getName(),
-                'image'     => $product->getImage()->getPath(),
-                'price'     => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
-                'raw_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
-                'desc'      => $product->getShortDescription(),
+                'id'             => $product->getMasterVariant()->getId(),
+                'name'           => $product->getName(),
+                'image'          => $product->getImage()->getPath(),
+                'price'          => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
+                'original_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getOriginalPrice()),
+                'raw_price'      => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
+                'desc'           => $product->getShortDescription(),
             );
         }
 

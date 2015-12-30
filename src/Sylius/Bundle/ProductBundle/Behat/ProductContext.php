@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -183,44 +185,39 @@ class ProductContext extends DefaultContext
      */
     public function thereAreAttributes(TableNode $table)
     {
-        foreach ($table->getHash() as $data) {
-            $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
-            $additionalData = array(
-                'type'         => isset($data['type']) ? $data['type'] : 'text',
-                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
+        foreach ($table->getHash() as $attribute) {
+            $this->thereIsAttribute(
+                $attribute['name'],
+                $attribute['type'],
+                (isset($attribute['code'])) ? $attribute['code'] : null,
+                (isset($attribute['configuration'])) ? $attribute['configuration'] : null
             );
-            if ($choices) {
-                $additionalData['configuration'] = array('choices' => $choices);
-            }
-            $this->thereIsAttribute($data['name'], $additionalData);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^There is attribute "([^""]*)"$/
-     * @Given /^I created attribute "([^""]*)"$/
+     * @Given /^There is attribute "([^""]*)" with type "([^""]*)"$/
+     * @Given /^I created attribute "([^""]*)" with type "([^""]*)"$/
      */
-    public function thereIsAttribute($name, $additionalData = array(), $flush = true)
+    public function thereIsAttribute($name, $type, $code = null, $configuration = null)
     {
-        $additionalData = array_merge(array(
-            'presentation' => $name,
-            'type' => 'text'
-        ), $additionalData);
+        $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
+        $storageType = (CheckboxAttributeType::TYPE === $type) ? 'boolean' : $type;
 
         $attribute = $this->getFactory('product_attribute')->createNew();
         $attribute->setName($name);
+        $attribute->setType($type);
+        $attribute->setCode($code);
+        $attribute->setStorageType($storageType);
 
-        foreach ($additionalData as $key => $value) {
-            $attribute->{'set'.\ucfirst($key)}($value);
+        if (null !== $configuration && '' !== $configuration) {
+            $attribute->setConfiguration($this->getConfiguration($configuration));
         }
 
         $manager = $this->getEntityManager();
         $manager->persist($attribute);
-        if ($flush) {
-            $manager->flush();
-        }
 
         return $attribute;
     }
@@ -270,7 +267,7 @@ class ProductContext extends DefaultContext
             $attribute->setCurrentLocale($data['locale']);
             $attribute->setFallbackLocale($data['locale']);
 
-            $attribute->setPresentation($data['presentation']);
+            $attribute->setName($data['name']);
         }
 
         $manager->flush();
@@ -341,5 +338,23 @@ class ProductContext extends DefaultContext
         $mainTaxon = $this->findOneByName('taxon', $mainTaxonName);
         $product->setMainTaxon($mainTaxon);
         $manager->flush($product);
+    }
+
+    /**
+     * @Given /^I delete "([^""]*)" attribute$/
+     */
+    public function iDeleteAttribute($attribute)
+    {
+        $item = $this->assertSession()->elementExists('css', sprintf('.collection-item:contains("%s")', $attribute));
+
+        $item->clickLink('Delete');
+    }
+
+    /**
+     * @Then /^I should be on the product attribute creation page for "([^"]*)" type$/
+     */
+    public function iShouldBeOnTheProductAttributeCreationPageForType($type)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', array('type' => $type)));
     }
 }

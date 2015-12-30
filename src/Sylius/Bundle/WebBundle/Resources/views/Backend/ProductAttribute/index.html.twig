@@ -14,7 +14,9 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_attribute_create'), 'sylius.product_attribute.create'|trans) }}
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#attribute-types-modal">
+            <i class="glyphicon glyphicon-plus-sign"></i><span>{{ 'sylius.create'|trans }}</span>
+        </a>
         {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
     </div>
     <h1><i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.product_attribute.index_header'|trans|raw }}</h1>
@@ -24,4 +26,5 @@
 {{ list(product_attributes) }}
 {{ pagination(product_attributes) }}
 
+{% render(url('sylius_backend_get_attribute_types')) %}
 {% endblock %}

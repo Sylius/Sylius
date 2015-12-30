@@ -1,0 +1,56 @@
+{% block collection_widget -%}
+    {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% spaceless %}
+        {{ error(form.vars.errors) }}
+
+        {% for child in form %}
+            {{ _self.collectionItem(child, allow_delete, button_delete_label, loop.index0) }}
+        {% endfor %}
+
+    {% endspaceless %}
+{%- endblock collection_widget %}
+
+{% macro collectionItem(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-collection="item"
+             data-form-collection-index="{{ index }}"
+             class="collection-item">
+            <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
+                {% if allow_delete %}
+                    <p class="text-right">
+                        <a href="#" data-form-collection="delete" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-remove collection-button-remove"></i>
+                            {{ button_delete_label|trans }}
+                        </a>
+                    </p>
+                {% endif %}
+                {% set errors = form.children.value.vars.errors %}
+                <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+                    {% set labelId = form.vars.data.attribute.name|replace(' ', '_')|lower %}
+                    <label class="col-lg-2 control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>
+                    {% for field in form.children %}
+                        {{ _self.attributeItemField(field, labelId) }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro attributeItemField(item, labelId) %}
+    {% set data = item.vars %}
+    {% if data.name == 'attribute' %}
+        <input type="hidden" id="{{ data.id }}" name="{{ data.full_name }}" value="{{ data.value }}" />
+    {% else %}
+        <div class="col-lg-10">
+            {{ form_widget(item, {'id': labelId}) }}
+            {% for error in data.errors %}
+                <span class="help-block form-error">
+                {{ error.message }}
+            </span>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

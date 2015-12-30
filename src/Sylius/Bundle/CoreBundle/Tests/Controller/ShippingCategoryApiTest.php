@@ -50,7 +50,7 @@ EOT;
         ], $data);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/new_shipping_category_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shipping_category/create_response', Response::HTTP_CREATED);
     }
 
     public function testGetShippingCategoriesListAccessDeniedResponse()
@@ -71,7 +71,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/get_shipping_categories_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/index_response', Response::HTTP_OK);
     }
 
     public function testGetShippingCategoryAccessDeniedResponse()
@@ -106,7 +106,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/show_response', Response::HTTP_OK);
     }
 
     public function testFullUpdateShippingCategoryAccessDeniedResponse()
@@ -141,7 +141,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/validation_fail_response', Response::HTTP_BAD_REQUEST);
+        $this->assertResponse($response, 'shipping_category/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
     public function testFullUpdateShippingCategoryResponse()
@@ -149,10 +149,18 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
+        $data =
+<<<EOT
+        {
+            "name": "Light",
+            "description": "Light weight items"
+        }
+EOT;
+
         $this->client->request('PUT', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
-        ], '{"name": "Light", "description": "Light weight items"}');
+        ], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -163,7 +171,7 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/updated_shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
     }
 
     public function testPartialUpdateShippingCategoryWhichDoesNotExistResponse()
@@ -184,10 +192,18 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
+        $data =
+<<<EOT
+        {
+            "name": "Light",
+            "description": "Light weight items"
+        }
+EOT;
+
         $this->client->request('PATCH', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
-        ], '{"name": "Light", "description": "Light weight items"}');
+        ], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -198,6 +214,41 @@ EOT;
         ]);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shipping_category/updated_shipping_category_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
+    }
+
+    public function testDeleteShippingCategoryWhichDoesNotExistResponse()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('DELETE', '/api/shipping-categories/-1', [], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function testDeleteShippingCategoryResponse()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
+
+        $this->client->request('DELETE', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'CONTENT_TYPE' => 'application/json',
+        ], []);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 }

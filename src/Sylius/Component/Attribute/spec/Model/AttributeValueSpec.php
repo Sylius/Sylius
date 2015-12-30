@@ -14,11 +14,11 @@ namespace spec\Sylius\Component\Attribute\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValueSpec extends ObjectBehavior
 {
@@ -73,26 +73,20 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(null);
     }
 
-    function its_value_is_mutable()
+    function its_value_is_mutable_based_on_attribute_storage_type(AttributeInterface $attribute)
     {
+        $attribute->getStorageType()->willReturn('text');
+        $this->setAttribute($attribute);
+
         $this->setValue('XXL');
         $this->getValue()->shouldReturn('XXL');
     }
 
-    function it_converts_value_to_Boolean_if_attribute_has_checkbox_type(AttributeInterface $attribute)
+    function it_returns_its_value_when_converted_to_string(AttributeInterface $attribute)
     {
-        $attribute->getType()->willReturn(AttributeTypes::CHECKBOX);
+        $attribute->getStorageType()->willReturn('text');
         $this->setAttribute($attribute);
 
-        $this->setValue('1');
-        $this->getValue()->shouldReturn(true);
-
-        $this->setValue(0);
-        $this->getValue()->shouldReturn(false);
-    }
-
-    function it_returns_its_value_when_converted_to_string()
-    {
         $this->setValue('S');
         $this->__toString()->shouldReturn('S');
     }
@@ -113,22 +107,6 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getName()->shouldReturn('T-Shirt material');
     }
 
-    function it_throws_exception_when_trying_to_get_presentation_without_attribute_defined()
-    {
-        $this
-            ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetPresentation()
-        ;
-    }
-
-    function it_returns_its_attribute_presentation(AttributeInterface $attribute)
-    {
-        $attribute->getPresentation()->willReturn('Material');
-        $this->setAttribute($attribute);
-
-        $this->getPresentation()->shouldReturn('Material');
-    }
-
     function it_throws_exception_when_trying_to_get_type_without_attribute_defined()
     {
         $this
@@ -143,21 +121,5 @@ class AttributeValueSpec extends ObjectBehavior
         $this->setAttribute($attribute);
 
         $this->getType()->shouldReturn('choice');
-    }
-
-    function it_throws_exception_when_trying_to_get_configuration_without_attribute_defined()
-    {
-        $this
-            ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetConfiguration()
-        ;
-    }
-
-    function it_returns_its_attribute_configuration(AttributeInterface $attribute)
-    {
-        $attribute->getConfiguration()->willReturn(array('choices' => array('Red')));
-        $this->setAttribute($attribute);
-
-        $this->getConfiguration()->shouldReturn(array('choices' => array('Red')));
     }
 }

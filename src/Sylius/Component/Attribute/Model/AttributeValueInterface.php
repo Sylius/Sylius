@@ -18,6 +18,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface AttributeValueInterface extends ResourceInterface
 {
+    const STORAGE_TEXT = 'text';
+    const STORAGE_BOOLEAN = 'boolean';
+    const STORAGE_DATE = 'date';
+    const STORAGE_DATETIME = 'datetime';
+    const STORAGE_INTEGER = 'integer';
+    const STORAGE_FLOAT = 'float';
+
     /**
      * @return AttributeSubjectInterface
      */
@@ -56,19 +63,7 @@ interface AttributeValueInterface extends ResourceInterface
     public function getName();
 
     /**
-     * Proxy method to access the presentation from real attribute.
-     *
-     * @return string
-     */
-    public function getPresentation();
-
-    /**
      * @return string
      */
     public function getType();
-
-    /**
-     * @return array
-     */
-    public function getConfiguration();
 }

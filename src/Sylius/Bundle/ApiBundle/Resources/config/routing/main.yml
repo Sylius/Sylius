@@ -82,8 +82,10 @@ sylius_api_payment:
     prefix: /payments
 
 sylius_api_channel:
-    resource: @SyliusApiBundle/Resources/config/routing/channel.yml
-    prefix: /channels
+    resource: |
+        alias: sylius.channel
+        section: api
+    type: sylius.resource_api
 
 sylius_api_country:
     resource: @SyliusApiBundle/Resources/config/routing/country.yml

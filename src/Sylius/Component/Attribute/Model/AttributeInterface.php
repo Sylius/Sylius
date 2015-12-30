@@ -11,24 +11,16 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
+interface AttributeInterface extends CodeAwareInterface, TimestampableInterface, AttributeTranslationInterface
 {
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @param string $name
-     */
-    public function setName($name);
-
     /**
      * @return string
      */
@@ -53,4 +45,14 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      * @return AttributeValueInterface[]
      */
     public function getValues();
+
+    /**
+     * @return string
+     */
+    public function getStorageType();
+
+    /**
+     * @param string $storageType
+     */
+    public function setStorageType($storageType);
 }

@@ -6,19 +6,19 @@ Feature: Product attributes
 
     Background:
         Given store has default configuration
-          And there are following attributes:
-            | name               | presentation   |
-            | T-Shirt collection | Collection     |
-            | T-Shirt fabric     | T-Shirt fabric |
-          And I am logged in as administrator
+        And there are following attributes:
+            | name        | type     | code        |
+            | Book author | text     | book_author |
+            | Hardcover   | checkbox | hardcover   |
+        And I am logged in as administrator
 
-    Scenario: Seeing index of all attributes
+    Scenario: Seeing attributes list
         Given I am on the dashboard page
         When I follow "Configure attributes"
         Then I should be on the product attribute index page
         And I should see 2 attributes in the list
 
-    Scenario: Seeing empty index of attributes
+    Scenario: Seeing empty list of attributes
         Given there are no product attributes
         When I am on the product attribute index page
         Then I should see "There are no attributes configured"
@@ -28,99 +28,74 @@ Feature: Product attributes
         When I press "Create"
         Then I should still be on the product attribute creation page
         And I should see "Please enter attribute name"
-        And I should see "Please enter attribute presentation"
+        And I should see "Please enter attribute code"
+
+    @javascript
+    Scenario: Accessing attribute creation form
+        Given I am on the product attribute index page
+        When I click "Create"
+        And I choose "checkbox" attribute type
+        Then I should be on the product attribute creation page for "checkbox" type
+        And I should see select "Type" with "Checkbox" option selected
+        And I should not be able to edit "Type" select
+
+    Scenario: Accessing attribute creation form without type specified
+        Given I am on the product attribute creation page
+        Then I should see select "Type" with "Text" option selected
+        And I should not be able to edit "Type" select
 
     Scenario: Creating new attribute
-        Given I am on the product attribute creation page
-        When I fill in "Internal name" with "Book author"
-        And I fill in "Presentation" with "Author"
+        Given I am on the product attribute creation page with type "text"
+        When I fill in "Name" with "ISBN number"
+        And I fill in "Code" with "isbn"
         And I press "Create"
         Then I should be on the product attribute index page
         And I should see "Attribute has been successfully created."
         And I should see 3 attributes in the list
-        And I should see attribute with name "Book author" in that list
+        And I should see attribute with name "ISBN number" in that list
+
+    Scenario: Creating new attribute with configuration
+        Given I am on the product attribute creation page with type "date"
+        When I fill in the following:
+            | Name   | Released at  |
+            | Code   | release_date |
+            | Format | d/m/Y        |
+        And I press "Create"
+        Then I should be on the product attribute index page
+        And I should see "Attribute has been successfully created."
+        And I should see 3 attributes in the list
+        And I should see attribute with name "Released at" in that list
+
+     Scenario: Creating new attribute with validation options
+         Given I am on the product attribute creation page with type "text"
+         When I fill in the following:
+            | Name       | Music genre |
+            | Code       | music_genre |
+            | Min length | 2           |
+            | Max length | 255         |
+         And I press "Create"
+         Then I should be on the product attribute index page
+         And I should see "Attribute has been successfully created."
+         And I should see 3 attributes in the list
+         And I should see attribute with name "Music genre" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the product attribute index page
-        When I click "edit" near "T-Shirt collection"
-        Then I should be editing product attribute "T-Shirt collection"
+        When I click "edit" near "Book author"
+        Then I should be editing product attribute "Book author"
 
     Scenario: Updating the attribute
-        Given I am editing product attribute "T-Shirt collection"
-        When I fill in "Internal name" with "T-Shirt edition"
+        Given I am editing product attribute "Book author"
+        When I fill in "Name" with "Author"
         And I press "Save changes"
         Then I should still be on the product attribute index page
         And I should see "Attribute has been successfully updated."
 
     @javascript
-    Scenario: Deleted attribute disappears from the list
+    Scenario: Deleting attribute from the list
         Given I am on the product attribute index page
-        When I click "delete" near "T-Shirt fabric"
+        When I click "delete" near "Book author"
         And I click "delete" from the confirmation modal
         Then I should still be on the product attribute index page
         And I should see "Attribute has been successfully deleted."
-        And I should not see attribute with name "T-Shirt fabric" in that list
-
-    Scenario: Creating string attribute by default
-        Given I am on the product attribute creation page
-        When I fill in "Internal name" with "Book author"
-        And I fill in "Presentation" with "Author"
-        And I press "Create"
-        Then I should still be on the product attribute index page
-        And I should see "Attribute has been successfully created."
-        And product attribute with following data should be created:
-            | name | Book author |
-            | type | text        |
-
-    Scenario Outline: Creating new attribute for type
-        Given I am on the product attribute creation page
-        When I fill in "Internal name" with "Book author"
-        And I fill in "Presentation" with "Author"
-        And I select "<label>" from "Type"
-        And I press "Create"
-        Then I should still be on the product attribute index page
-        And I should see "Attribute has been successfully created."
-        And product attribute with following data should be created:
-            | name         | Book author |
-            | presentation | Author      |
-            | type         | <value>     |
-
-        Examples:
-            | label    | value    |
-            | Checkbox | checkbox |
-            | Text     | text     |
-            | Choice   | choice   |
-            | Number   | number   |
-
-    @javascript
-    Scenario: Create new choice attribute with many choices
-        Given I am on the product attribute creation page
-        When I fill in "Internal name" with "Book author"
-        And I fill in "Presentation" with "Author"
-        And I select "Choice" from "Type"
-        And I add choice "J.R.R Tolken"
-        And I add choice "Jaroslaw Grzedowicz"
-        And I press "Create"
-        Then product attribute with following data should be created:
-            | name                   | Book author                      |
-            | presentation           | Author                           |
-            | type                   | choice                           |
-            | configuration[choices] | J.R.R Tolken,Jaroslaw Grzedowicz |
-        And I should see "Attribute has been successfully created."
-
-    @javascript
-    Scenario: Remove choice attribute choice
-        Given I am on the product attribute creation page
-        When I fill in "Internal name" with "Book author"
-        And I fill in "Presentation" with "Author"
-        And I select "Choice" from "Type"
-        And I add choice "J.R.R Tolken"
-        And I add choice "Jaroslaw Grzedowicz"
-        And I remove first choice
-        And I press "Create"
-        Then product attribute with following data should be created:
-            | name                   | Book author         |
-            | presentation           | Author              |
-            | type                   | choice              |
-            | configuration[choices] | Jaroslaw Grzedowicz |
-        And I should see "Attribute has been successfully created."
+        And I should not see attribute with name "Book author" in that list

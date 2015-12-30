@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
 class RedirectHandlerSpec extends ObjectBehavior
@@ -23,8 +25,11 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RedirectHandler');
     }
 
-    function it_redirects_to_resource($config, $router)
+    function it_redirects_to_resource($config, RouterInterface $router, RouteCollection $routes, Route $route)
     {
+        $router->getRouteCollection()->willReturn($routes);
+        $routes->get('my_route')->willReturn($route);
+
         $config->getRedirectParameters('resource')->willReturn(array());
         $config->getRedirectRoute('show')->willReturn('my_route');
         $router->generate('my_route', array())->willReturn('http://myurl.com');
@@ -34,7 +39,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectTo('resource')->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirecst_to_index($config, $router)
+    function it_redirects_to_index($config, $router)
     {
         $config->getRedirectRoute('index')->willReturn('my_route');
         $config->getRedirectParameters()->willReturn(array());

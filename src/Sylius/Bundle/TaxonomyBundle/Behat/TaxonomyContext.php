@@ -35,8 +35,8 @@ class TaxonomyContext extends DefaultContext
     public function thereIsTaxonomy($name, $code, $flush = true)
     {
         $taxonomy = $this->getFactory('taxonomy')->createNew();
-        $taxonomy->setName($name);
         $taxonomy->getRoot()->setCode($code);
+        $taxonomy->setName($name);
 
         if (null === $taxonomy->getCurrentLocale()) {
             $taxonomy->setCurrentLocale('en_US');

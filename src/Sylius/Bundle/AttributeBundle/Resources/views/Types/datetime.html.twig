@@ -1,0 +1,5 @@
+{% if attribute.attribute.configuration['format'] is defined %}
+    <td>{{ attribute.value|date(attribute.attribute.configuration['format']) }}</td>
+{% else %}
+    <td>{{ attribute.value|date }}</td>
+{% endif %}
