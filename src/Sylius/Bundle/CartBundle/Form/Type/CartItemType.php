@@ -12,16 +12,31 @@
 namespace Sylius\Bundle\CartBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Cart item type.
- * It includes only quantity form field by default.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartItemType extends AbstractResourceType
 {
+    /**
+     * @var DataMapperInterface
+     */
+    protected $orderItemQuantityDataMapper;
+
+    /**
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param DataMapperInterface $orderItemQuantityDataMapper
+     */
+    public function __construct($dataClass, array $validationGroups = array(), DataMapperInterface $orderItemQuantityDataMapper)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->orderItemQuantityDataMapper = $orderItemQuantityDataMapper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +47,7 @@ class CartItemType extends AbstractResourceType
                 'attr' => array('min' => 1),
                 'data' => 1,
             ))
+            ->setDataMapper($this->orderItemQuantityDataMapper);
         ;
     }
 

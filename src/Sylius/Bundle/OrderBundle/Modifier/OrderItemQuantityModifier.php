@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Modifier;
+namespace Sylius\Bundle\OrderBundle\Modifier;
 
 use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
