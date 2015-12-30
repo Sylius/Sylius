@@ -16,16 +16,15 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 class TaxonomyFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $taxonFactory, FactoryInterface $factory, LocaleProviderInterface $localeProvider)
+    function let(TranslatableFactoryInterface $translatableFactory, FactoryInterface $taxonFactory)
     {
-        $this->beConstructedWith($factory, $localeProvider, $taxonFactory, 'Sylius\Component\Taxonomy\Model\Taxonomy');
+        $this->beConstructedWith($translatableFactory, $taxonFactory);
     }
 
     function it_is_initializable()
@@ -36,5 +35,19 @@ class TaxonomyFactorySpec extends ObjectBehavior
     function it_implements_factory_interface()
     {
         $this->shouldImplement(FactoryInterface::class);
+    }
+    
+    function it_creates_new_taxonomy_with_root(
+        TaxonInterface $taxon,
+        TaxonomyInterface $taxonomy,
+        FactoryInterface $taxonFactory,
+        TranslatableFactoryInterface $translatableFactory
+    ) {
+        $taxonFactory->createNew()->shouldBeCalled()->willReturn($taxon);
+        
+        $translatableFactory->createNew()->shouldBeCalled()->willReturn($taxonomy);
+        $taxonomy->setRoot($taxon)->shouldBeCalled();
+        
+        $this->createNew()->shouldReturn($taxonomy);
     }
 }
