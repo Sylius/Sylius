@@ -41,6 +41,11 @@ class ProductVariantSpec extends ObjectBehavior
         $this->getPrice()->shouldReturn(null);
     }
 
+    function it_should_not_have_original_price_by_default()
+    {
+        $this->getOriginalPrice()->shouldReturn(null);
+    }
+
     function it_initializes_image_collection_by_default()
     {
         $this->getImages()->shouldHaveType('Doctrine\Common\Collections\Collection');
@@ -51,6 +56,12 @@ class ProductVariantSpec extends ObjectBehavior
         $this->setPrice(499)->getPrice()->shouldReturn(499);
     }
 
+    function its_original_price_should_be_mutable()
+    {
+        $this->setOriginalPrice(399);
+        $this->getOriginalPrice()->shouldReturn(399);
+    }
+
     function its_price_should_accept_only_integer()
     {
         $this->setPrice(410)->getPrice()->shouldBeInteger();
@@ -59,6 +70,15 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(array(410));
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
+    }
+
+    function its_original_price_should_accept_only_integer()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(array(310));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
     function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)

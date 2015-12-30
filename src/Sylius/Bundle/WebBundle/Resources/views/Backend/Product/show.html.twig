@@ -149,6 +149,10 @@
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
                 </tr>
+                <tr>
+                    <td>{{ 'sylius.product.original_price'|trans }}</td>
+                    <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
+                </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
                 <tr>
                     <td>{{ 'sylius.product.volume_price'|trans }}</td>

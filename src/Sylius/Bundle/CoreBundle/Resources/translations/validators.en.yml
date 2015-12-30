@@ -10,6 +10,8 @@ sylius:
         price:
             min: Price must not be negative.
             not_blank: Please enter the price.
+        original_price:
+            min: Original price must not be negative.
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
