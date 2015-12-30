@@ -58,7 +58,8 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_original_price_should_be_mutable()
     {
-        $this->setOriginalPrice(399)->getOriginalPrice()->shouldReturn(399);
+        $this->setOriginalPrice(399);
+        $this->getOriginalPrice()->shouldReturn(399);
     }
 
     function its_price_should_accept_only_integer()

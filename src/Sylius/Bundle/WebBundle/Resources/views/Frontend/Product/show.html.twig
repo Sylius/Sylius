@@ -1,7 +1,7 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
 {% set form = sylius_cart_form({'product': product}) %}
-{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price_with_original %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price %}
 
 {% block content %}
 <div class="row">
@@ -80,7 +80,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            {{ sylius_display_price_with_original(variant) }}
+                            {{ sylius_display_price(variant) }}
                         </td>
                         <td>
                         {% if sylius_inventory_is_available(variant) %}
@@ -101,7 +101,7 @@
         {% else %}
             <h4>
                 <span class="pull-right">
-                   {{ sylius_display_price_with_original(product.masterVariant) }}
+                   {{ sylius_display_price(product.masterVariant) }}
                 </span>
                 {{ 'sylius.variant.price'|trans }}
             </h4>

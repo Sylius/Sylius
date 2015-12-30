@@ -195,8 +195,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             throw new \InvalidArgumentException('Original price must be an integer.');
         }
         $this->originalPrice = $originalPrice;
-
-        return $this;
     }
 
     /**
