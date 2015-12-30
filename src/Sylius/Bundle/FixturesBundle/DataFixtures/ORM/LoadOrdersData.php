@@ -69,7 +69,6 @@ class LoadOrdersData extends DataFixture
 
             $this->dispatchEvents($order);
 
-            $order->calculateTotal();
             $order->complete();
 
             $paymentState = PaymentInterface::STATE_COMPLETED;

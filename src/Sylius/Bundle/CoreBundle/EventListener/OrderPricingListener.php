@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order pricing listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderPricingListener
@@ -29,8 +27,6 @@ class OrderPricingListener
     private $priceCalculator;
 
     /**
-     * Constructor.
-     *
      * @param DelegatingCalculatorInterface $priceCalculator
      */
     public function __construct(DelegatingCalculatorInterface $priceCalculator)
@@ -39,8 +35,6 @@ class OrderPricingListener
     }
 
     /**
-     * Recalculate the order unit prices.
-     *
      * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException
@@ -71,7 +65,5 @@ class OrderPricingListener
             $context['quantity'] = $item->getQuantity();
             $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
         }
-
-        $order->calculateTotal();
     }
 }

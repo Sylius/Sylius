@@ -47,6 +47,9 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
      */
     protected $updatedAt;
 
+    /**
+     * @param OrderItemInterface $orderItem
+     */
     public function __construct(OrderItemInterface $orderItem)
     {
         parent::__construct($orderItem);
@@ -60,22 +63,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function getStockable()
     {
         return $this->orderItem->getVariant();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStockable(StockableInterface $stockable)
-    {
-        $this->orderItem->setVariant($stockable);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSku()
-    {
-        return $this->orderItem->getVariant()->getSku();
     }
 
     /**
@@ -140,14 +127,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function getShippable()
     {
         return $this->orderItem->getVariant();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippable(ShippableInterface $shippable)
-    {
-        $this->orderItem->setVariant($shippable);
     }
 
     /**

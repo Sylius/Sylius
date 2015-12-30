@@ -238,8 +238,6 @@
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
         </service>

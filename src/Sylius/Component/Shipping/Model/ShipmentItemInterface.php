@@ -35,11 +35,6 @@ interface ShipmentItemInterface extends TimestampableInterface, ResourceInterfac
     public function getShippable();
 
     /**
-     * @param ShippableInterface $shippable
-     */
-    public function setShippable(ShippableInterface $shippable);
-
-    /**
      * @return string
      */
     public function getShippingState();

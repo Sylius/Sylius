@@ -50,48 +50,6 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->shouldImplement(InventoryHandlerInterface::class);
     }
 
-    function it_creates_inventory_units_via_the_factory(
-        $orderItemUnitFactory,
-        OrderItemInterface $item,
-        ProductVariantInterface $variant,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2
-    ) {
-        $item->getVariant()->willReturn($variant);
-        $item->getQuantity()->willReturn(2);
-
-        $item->getUnits()->willReturn(new ArrayCollection());
-        $orderItemUnitFactory->createForItem($item)->willReturn($unit1, $unit2);
-
-        $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-        $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-
-        $this->processInventoryUnits($item);
-    }
-
-    function it_creates_only_missing_inventory_units_via_the_factory(
-        $orderItemUnitFactory,
-        OrderItemInterface $item,
-        ProductVariantInterface $variant,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2
-    ) {
-        $item->getUnits()->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1)));
-        $unit1->getStockable()->willReturn($variant);
-        $unit2->getStockable()->willReturn($variant);
-
-        $item->getVariant()->willReturn($variant);
-        $item->getQuantity()->willReturn(2);
-
-        $item->getUnits()->willReturn(new ArrayCollection());
-        $orderItemUnitFactory->createForItem($item)->willReturn($unit2);
-
-        $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldNotBeCalled();
-        $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-
-        $this->processInventoryUnits($item);
-    }
-
     function it_holds_the_variant_stock_via_inventory_operator(
         $inventoryOperator,
         $stateMachineFactory,

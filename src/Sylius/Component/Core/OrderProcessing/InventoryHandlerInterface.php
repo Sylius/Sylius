@@ -28,29 +28,16 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 interface InventoryHandlerInterface
 {
     /**
-     * Processes inventory units.
-     *
-     * @param OrderItemInterface $order
-     */
-    public function processInventoryUnits(OrderItemInterface $order);
-
-    /**
-     * Put inventory on hold.
-     *
      * @param OrderInterface $order
      */
     public function holdInventory(OrderInterface $order);
 
     /**
-     * Release inventory.
-     *
      * @param OrderInterface $order
      */
     public function releaseInventory(OrderInterface $order);
 
     /**
-     * Update the inventory state accordingly.
-     *
      * @param OrderInterface $order
      */
     public function updateInventory(OrderInterface $order);
