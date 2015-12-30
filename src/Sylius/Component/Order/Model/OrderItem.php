@@ -220,6 +220,8 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasUnit($unit)) {
             $unit->setOrderItem($this);
             $this->units->add($unit);
+
+            $this->quantity++;
         }
     }
 
@@ -231,6 +233,8 @@ class OrderItem implements OrderItemInterface
         if ($this->hasUnit($unit)) {
             $unit->setOrderItem(null);
             $this->units->removeElement($unit);
+
+            $this->quantity--;
         }
     }
 
@@ -245,6 +249,8 @@ class OrderItem implements OrderItemInterface
 
         $unit->setOrderItem(null);
         $this->units->remove($index);
+
+        $this->quantity--;
     }
 
     /**
