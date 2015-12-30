@@ -28,15 +28,17 @@ use Sylius\Bundle\ContentBundle\Form\Type\StringBlockType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute;
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+use Sylius\Bundle\ContentBundle\Document\ActionBlock;
+use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
+use Sylius\Bundle\ContentBundle\Document\SimpleBlock;
+use Sylius\Bundle\ContentBundle\Document\SlideshowBlock;
+use Sylius\Bundle\ContentBundle\Document\StringBlock;
+use Sylius\Bundle\ContentBundle\Document\MenuBlock;
+use Sylius\Bundle\ContentBundle\Document\ReferenceBlock;
+use Sylius\Bundle\ContentBundle\Document\Menu;
+use Sylius\Bundle\ContentBundle\Document\MenuNode;
+use Sylius\Bundle\ContentBundle\Document\Route;
+use Sylius\Bundle\ContentBundle\Document\RedirectRoute;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -170,7 +172,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(SimpleBlock::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(MenuBlock::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
@@ -230,7 +232,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(SimpleBlock::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ReferenceBlock::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
