@@ -155,8 +155,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
 
-        $orderItemUnit1->recalculateTotal()->shouldBeCalled();
-        $orderItemUnit2->recalculateTotal()->shouldBeCalled();
         $this->setUnitPrice(100);
     }
 
@@ -317,8 +315,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
 
-        $orderItemUnit1->recalculateTotal()->shouldBeCalled();
-        $orderItemUnit2->recalculateTotal()->shouldBeCalled();
         $this->setUnitPrice(100);
         $this->getTotal()->shouldReturn(200);
     }
