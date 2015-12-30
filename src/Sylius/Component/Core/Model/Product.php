@@ -81,7 +81,6 @@ class Product extends BaseProduct implements ProductInterface
     {
         parent::__construct();
 
-        $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
 
