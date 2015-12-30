@@ -109,11 +109,4 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      * @param OrderItemUnitInterface $itemUnit
      */
     public function removeUnit(OrderItemUnitInterface $itemUnit);
-
-    /**
-     * @param int $index
-     *
-     * @return mixed
-     */
-    public function removeUnitByIndex($index);
 }

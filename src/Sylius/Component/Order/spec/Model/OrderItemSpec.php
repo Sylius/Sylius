@@ -271,26 +271,4 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldNotHaveUnit($unit1);
         $this->shouldHaveUnit($unit2);
     }
-
-    function it_can_removes_its_units_by_index(OrderItemUnitInterface $unit1, OrderItemUnitInterface $unit2)
-    {
-        $this->addUnit($unit1);
-        $this->addUnit($unit2);
-
-        $this->shouldHaveUnit($unit1);
-        $this->shouldHaveUnit($unit2);
-
-        $this->removeUnitByIndex(0);
-
-        $this->shouldNotHaveUnit($unit1);
-        $this->shouldHaveUnit($unit2);
-    }
-
-    function it_does_nothing_if_there_is_no_unit_to_remove_on_given_index(OrderItemUnitInterface $unit)
-    {
-        $this->addUnit($unit);
-        $this->removeUnitByIndex(2);
-
-        $this->shouldHaveUnit($unit);
-    }
 }

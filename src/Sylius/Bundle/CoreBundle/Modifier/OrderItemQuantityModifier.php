@@ -37,26 +37,23 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      */
     public function modify(OrderItemInterface $orderItem, $targetQuantity)
     {
-        if ($targetQuantity === $itemQuantity = $orderItem->getQuantity()) {
-            return;
-        }
+        $itemQuantity = $orderItem->getQuantity();
 
         if ($targetQuantity > $itemQuantity) {
             $this->increaseUnitsNumber($orderItem, $targetQuantity - $itemQuantity);
-
-            return;
+        } else if ($targetQuantity < $itemQuantity) {
+            $this->decreaseUnitsNumber($orderItem, $itemQuantity - $targetQuantity);
         }
 
-        $this->decreaseUnitsNumber($orderItem, $itemQuantity, $targetQuantity);
     }
 
     /**
      * @param OrderItemInterface $orderItem
-     * @param int $targetUnitsNumber
+     * @param int $increaseBy
      */
-    private function increaseUnitsNumber(OrderItemInterface $orderItem, $targetUnitsNumber)
+    private function increaseUnitsNumber(OrderItemInterface $orderItem, $increaseBy)
     {
-        for ($i = 0; $i < $targetUnitsNumber; $i++) {
+        for ($i = 0; $i < $increaseBy; $i++) {
             $unit = $this->orderItemUnitFactory->createNew();
             $orderItem->addUnit($unit);
         }
@@ -64,13 +61,16 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 
     /**
      * @param OrderItemInterface $orderItem
-     * @param int $itemQuantity
-     * @param int $targetQuantity
+     * @param int $decreaseBy
      */
-    private function decreaseUnitsNumber(OrderItemInterface $orderItem, $itemQuantity, $targetQuantity)
+    private function decreaseUnitsNumber(OrderItemInterface $orderItem, $decreaseBy)
     {
-        for ($i = $itemQuantity-1; $i >= $targetQuantity; $i--) {
-            $orderItem->removeUnitByIndex($i);
+        foreach ($orderItem->getUnits() as $unit) {
+            if (0 >= $decreaseBy--) {
+                break;
+            }
+
+            $orderItem->removeUnit($unit);
         }
     }
 }

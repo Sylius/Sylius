@@ -220,6 +220,8 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasUnit($unit)) {
             $unit->setOrderItem($this);
             $this->units->add($unit);
+
+            $this->quantity++;
         }
     }
 
@@ -231,20 +233,9 @@ class OrderItem implements OrderItemInterface
         if ($this->hasUnit($unit)) {
             $unit->setOrderItem(null);
             $this->units->removeElement($unit);
-        }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeUnitByIndex($index)
-    {
-        if (null === $unit = $this->units->get($index)) {
-            return;
+            $this->quantity--;
         }
-
-        $unit->setOrderItem(null);
-        $this->units->remove($index);
     }
 
     /**
@@ -254,6 +245,7 @@ class OrderItem implements OrderItemInterface
     {
         return $this->units->contains($unit);
     }
+
     /**
      * {@inheritdoc}
      */

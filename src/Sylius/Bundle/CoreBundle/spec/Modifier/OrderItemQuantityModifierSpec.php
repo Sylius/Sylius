@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Modifier;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Modifier\OrderItemQuantityModifierInterface;
@@ -54,14 +55,27 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_removes_units_if_target_quantity_is_greater_than_current($orderItemUnitFactory, OrderItemInterface $orderItem)
-    {
+    function it_removes_units_if_target_quantity_is_greater_than_current(
+        Collection $orderItemUnits,
+        \Iterator $iterator,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        OrderItemUnitInterface $unit3,
+        OrderItemUnitInterface $unit4
+    ) {
         $orderItem->getQuantity()->willReturn(5);
+        $orderItem->getUnits()->willReturn($orderItemUnits);
 
-        $orderItemUnitFactory->createNew()->shouldNotBeCalled();
+        $orderItemUnits->count()->willReturn(4);
+        $orderItemUnits->getIterator()->willReturn($iterator);
+        $iterator->rewind()->shouldBeCalled();
+        $iterator->valid()->willReturn(true, true, true, true, false);
+        $iterator->current()->willReturn($unit1, $unit2, $unit3, $unit4);
+        $iterator->next()->shouldBeCalled();
 
-        $orderItem->removeUnitByIndex(4)->shouldBeCalled();
-        $orderItem->removeUnitByIndex(3)->shouldBeCalled();
+        $orderItem->removeUnit($unit1)->shouldBeCalled();
+        $orderItem->removeUnit($unit2)->shouldBeCalled();
 
         $this->modify($orderItem, 3);
     }
@@ -72,6 +86,6 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
 
         $orderItemUnitFactory->createNew()->shouldNotBeCalled();
         $orderItem->addUnit(Argument::any())->shouldNotBeCalled();
-        $orderItem->removeUnitByIndex(Argument::any())->shouldNotBeCalled();
+        $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
     }
 }
