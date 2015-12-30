@@ -23,6 +23,10 @@
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
         <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
+
+        <parameter key="sylius.modifier.order_item_quantity.class">Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifier</parameter>
+        <parameter key="sylius.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
+        <parameter key="sylius.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
     </parameters>
 
     <services>
@@ -38,6 +42,17 @@
 
         <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+        </service>
+
+        <service id="sylius.modifier.order_item_quantity" class="%sylius.modifier.order_item_quantity.class%">
+            <argument type="service" id="sylius.factory.order_item_unit" />
+        </service>
+        <service id="sylius.data_mapper.property_path" class="%sylius.data_mapper.property_path.class%">
+            <argument type="service" id="property_accessor" />
+        </service>
+        <service id="sylius.data_mapper.order_item_quantity" class="%sylius.data_mapper.order_item_quantity.class%">
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
+            <argument type="service" id="sylius.data_mapper.property_path" />
         </service>
     </services>
 </container>
