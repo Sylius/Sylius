@@ -23,6 +23,10 @@
             <gedmo:versioned />
         </field>
 
+        <field name="availableUntil" column="available_until" type="datetime" nullable="true">
+            <gedmo:versioned />
+        </field>
+
         <many-to-one field="archetype" target-entity="Sylius\Component\Product\Model\ArchetypeInterface">
             <join-column name="archetype_id" referenced-column-name="id" nullable="true" />
         </many-to-one>

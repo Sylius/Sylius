@@ -77,6 +77,12 @@
                     <td>{{ 'sylius.product.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>
+                {% if product.availableUntil %}
+                <tr>
+                    <td>{{ 'sylius.product.available_until'|trans }}</td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
