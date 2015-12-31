@@ -51,6 +51,4 @@ interface ProductInterface extends
      * @param null|\DateTime $availableUntil
      */
     public function setAvailableUntil(\DateTime $availableUntil = null);
-
-
 }

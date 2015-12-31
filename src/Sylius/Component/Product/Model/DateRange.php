@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -13,7 +14,7 @@ namespace Sylius\Component\Product\Model;
 /**
  * @author Krzysztof Wędrowicz <krzysztof@wedrowicz.me>
  */
-class DateRange
+final class DateRange
 {
     /**
      * @var \DateTime
@@ -29,7 +30,7 @@ class DateRange
      * @param \DateTime $start
      * @param \DateTime $end
      */
-    public function __construct(\DateTime $start = null,\DateTime $end = null)
+    public function __construct(\DateTime $start = null, \DateTime $end = null)
     {
         $this->start = $start;
         $this->end = $end;
@@ -54,7 +55,7 @@ class DateRange
     /**
      * @param \DateTime $start
      */
-    public function setStart($start)
+    public function setStart(\DateTime $start = null)
     {
         $this->start = $start;
     }
@@ -62,7 +63,7 @@ class DateRange
     /**
      * @param \DateTime $end
      */
-    public function setEnd($end)
+    public function setEnd(\DateTime $end = null)
     {
         $this->end = $end;
     }
