@@ -129,6 +129,8 @@ class TranslationSlugHandler implements SlugHandlerInterface
                 }
             }
         }
+
+        $slug = $this->deleteUnnecessaryParentSlug($slug);
     }
 
     /**
@@ -154,7 +156,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
-        $slug = $this->transliterate($slug, $config['separator'], $object);
+        $slug = $this->transliterate($slug);
 
         if (!$this->isInsert) {
             $wrapped = AbstractWrapper::wrap($object, $this->om);
@@ -190,21 +192,16 @@ class TranslationSlugHandler implements SlugHandlerInterface
      * by collection of parent slugs.
      *
      * @param string $text
-     * @param string $separator
-     * @param object $object
      *
      * @return string
      */
-    public function transliterate($text, $separator, $object)
+    public function transliterate($text)
     {
         if (!empty($this->parentSlug)) {
-            $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
-        } else {
-            // if no parentSlug, apply our prefix
-            $text = $this->prefix.$text;
+            return $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
         }
 
-        return $text;
+        return $this->prefix.$text;
     }
 
     /**
@@ -213,5 +210,15 @@ class TranslationSlugHandler implements SlugHandlerInterface
     public function handlesUrlization()
     {
         return false;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return string
+     */
+    private function deleteUnnecessaryParentSlug($slug)
+    {
+        return preg_replace('/^' . preg_quote($this->parentSlug.$this->usedPathSeparator, '/') . '/', '', $slug);
     }
 }
