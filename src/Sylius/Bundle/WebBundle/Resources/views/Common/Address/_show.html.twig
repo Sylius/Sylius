@@ -1,13 +1,20 @@
-<address>
-    <strong>{{ address.firstName }} {{ address.lastName }}</strong><br/>
+<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <strong itemprop="name">{{ address.firstName }} {{ address.lastName }}</strong><br/>
     {% if address.company %}
         {{ address.company }}<br/>
     {% endif %}
-    {{ address.phoneNumber }}<br/>
-    {{ address.street }}<br/>
-    {{ address.city }}<br/>
+    <span itemprop="streetAddress">{{ address.street }}</span><br/>
+    <span itemprop="addressLocality">{{ address.city }}</span><br/>
     {% if address.province %}
-        {{ address.province }}<br/>
+        <span itemprop="addressRegion">{{ address.province }}</span><br/>
     {% endif %}
-    {{ address.country|upper }} {{ address.postcode }}
-</address>
+    <span>
+        <span itemprop="addressCountry">{{ address.country.isoName|upper }}</span>
+        <span itemprop="postalCode">{{ address.postcode }}</span>
+        <em>({{ address.country.name }})</em>
+    </span>
+    <br/>
+    {% if address.phoneNumber %}
+        <span itemprop="telephone">{{ address.phoneNumber }}</span><br/>
+    {% endif %}
+</div>
