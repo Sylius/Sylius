@@ -39,11 +39,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
@@ -64,49 +59,8 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addResourcesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('shipping_rule_item_count_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('shipping_calculator_flat_rate_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('shipping_calculator_per_item_rate_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('shipping_calculator_flexible_rate_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('shipping_calculator_weight_rate_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                            ->arrayNode('shipping_calculator_volume_rate_configuration')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 
     /**
