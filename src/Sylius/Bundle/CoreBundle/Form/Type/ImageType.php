@@ -16,13 +16,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ImageType extends AbstractResourceType
 {
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', 'file', array(
+<<<<<<< HEAD
 <<<<<<< HEAD
                     'label' => 'sylius.form.image.file',
                 ))
@@ -43,15 +43,22 @@ class ImageType extends AbstractResourceType
             'required' => false
 =======
                     'label' => 'sylius.form.image.file'
+=======
+                    'label' => 'sylius.form.image.file',
+>>>>>>> Updating indent
                 ))
                 ->add('title', 'text', array(
                     'label' => 'sylius.form.image.title',
-                    'required' => false
+                    'required' => false,
                 ))
                 ->add('description', 'textarea', array(
                     'label' => 'sylius.form.image.description',
+<<<<<<< HEAD
                     'required' => false
 >>>>>>> Using fluent setter
+=======
+                    'required' => false,
+>>>>>>> Updating indent
         ));
     }
 
