@@ -17,8 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Sylius orders system extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusOrderExtension extends AbstractResourceExtension
@@ -41,5 +39,10 @@ class SyliusOrderExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $orderItemQuantityDataMapper = $container->getDefinition('sylius.data_mapper.order_item_quantity');
+        $orderItemType = $container->getDefinition('sylius.form.type.order_item');
+
+        $orderItemType->addArgument($orderItemQuantityDataMapper);
     }
 }

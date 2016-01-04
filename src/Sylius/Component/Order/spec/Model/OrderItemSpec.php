@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -61,9 +62,9 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_has_quantity_equal_to_1_by_default()
+    function it_has_quantity_equal_to_0_by_default()
     {
-        $this->getQuantity()->shouldReturn(1);
+        $this->getQuantity()->shouldReturn(0);
     }
 
     function its_quantity_is_mutable()
@@ -215,7 +216,7 @@ class OrderItemSpec extends ObjectBehavior
     function it_ignores_merging_same_items()
     {
         $this->merge($this);
-        $this->getQuantity()->shouldReturn(1);
+        $this->getQuantity()->shouldReturn(0);
     }
 
     function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)
@@ -247,5 +248,49 @@ class OrderItemSpec extends ObjectBehavior
         $this
             ->shouldThrow(new \RuntimeException('Given item cannot be merged.'))
             ->duringMerge($item);
+    }
+
+    function it_can_be_immutable()
+    {
+        $this->setImmutable(true);
+        $this->isImmutable()->shouldReturn(true);
+    }
+
+    function it_adds_and_removes_units(OrderItemUnitInterface $unit1, OrderItemUnitInterface $unit2)
+    {
+        $this->getUnits()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $this->shouldHaveUnit($unit1);
+        $this->shouldHaveUnit($unit2);
+
+        $this->removeUnit($unit1);
+
+        $this->shouldNotHaveUnit($unit1);
+        $this->shouldHaveUnit($unit2);
+    }
+
+    function it_can_removes_its_units_by_index(OrderItemUnitInterface $unit1, OrderItemUnitInterface $unit2)
+    {
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $this->shouldHaveUnit($unit1);
+        $this->shouldHaveUnit($unit2);
+
+        $this->removeUnitByIndex(0);
+
+        $this->shouldNotHaveUnit($unit1);
+        $this->shouldHaveUnit($unit2);
+    }
+
+    function it_does_nothing_if_there_is_no_unit_to_remove_on_given_index(OrderItemUnitInterface $unit)
+    {
+        $this->addUnit($unit);
+        $this->removeUnitByIndex(2);
+
+        $this->shouldHaveUnit($unit);
     }
 }
