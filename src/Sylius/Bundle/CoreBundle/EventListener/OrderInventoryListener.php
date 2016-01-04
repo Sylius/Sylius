@@ -11,32 +11,26 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Order inventory processing listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderInventoryListener
 {
     /**
-     * Inventory handler.
-     *
      * @var InventoryHandlerInterface
      */
     protected $inventoryHandler;
 
     /**
-     * Constructor.
-     *
      * @param InventoryHandlerInterface $inventoryHandler
      */
     public function __construct(InventoryHandlerInterface $inventoryHandler)
@@ -63,9 +57,7 @@ class OrderInventoryListener
      */
     public function processInventoryUnits(GenericEvent $event)
     {
-        $this->inventoryHandler->processInventoryUnits(
-            $this->getItem($event)
-        );
+        $this->inventoryHandler->processInventoryUnits($this->getItem($event));
     }
 
     public function resolveInventoryState(GenericEvent $event)
@@ -81,15 +73,13 @@ class OrderInventoryListener
         );
 
         if (null !== $state) {
-            foreach ($orderItem->getInventoryUnits() as $inventoryUnit) {
-                $inventoryUnit->setInventoryState($state);
+            foreach ($orderItem->getUnits() as $itemUnit) {
+                $itemUnit->setInventoryState($state);
             }
         }
     }
 
     /**
-     * Gets order from event.
-     *
      * @param GenericEvent $event
      *
      * @return OrderInterface
@@ -111,8 +101,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Gets order from event.
-     *
      * @param GenericEvent $event
      *
      * @return OrderInterface

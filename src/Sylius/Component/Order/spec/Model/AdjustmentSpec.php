@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,7 +52,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
+    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem, OrderItemUnitInterface $orderItemUnit)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -61,6 +62,12 @@ class AdjustmentSpec extends ObjectBehavior
 
         $this->setAdjustable($orderItem);
         $this->getAdjustable()->shouldReturn($orderItem);
+
+        $this->setAdjustable(null);
+        $this->getAdjustable()->shouldReturn(null);
+
+        $this->setAdjustable($orderItemUnit);
+        $this->getAdjustable()->shouldReturn($orderItemUnit);
 
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
@@ -97,6 +104,25 @@ class AdjustmentSpec extends ObjectBehavior
     {
         $this->setAmount(399);
         $this->getAmount()->shouldReturn(399);
+    }
+
+    function it_recalculates_adjustments_on_adjustable_entity_on_amount_change(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit
+    ) {
+        $this->setAdjustable($order);
+        $this->setAmount(200);
+        $order->recalculateAdjustmentsTotal()->shouldBeCalled();
+
+        $this->setAdjustable($orderItem);
+        $this->setAmount(300);
+        $orderItem->recalculateAdjustmentsTotal()->shouldBeCalled();
+
+        $this->setAdjustable($orderItemUnit);
+        $this->setAmount(400);
+        $orderItemUnit->recalculateAdjustmentsTotal()->shouldBeCalled();
+
     }
 
     function its_amount_should_accept_only_integer()

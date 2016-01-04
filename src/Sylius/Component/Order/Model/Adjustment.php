@@ -24,12 +24,17 @@ class Adjustment implements AdjustmentInterface
     /**
      * @var OrderInterface
      */
-    protected $order;
+    protected $order = null;
 
     /**
      * @var OrderItemInterface
      */
-    protected $orderItem;
+    protected $orderItem = null;
+
+    /**
+     * @var OrderItemUnitInterface
+     */
+    protected $orderItemUnit = null;
 
     /**
      * @var string
@@ -105,6 +110,10 @@ class Adjustment implements AdjustmentInterface
             return $this->orderItem;
         }
 
+        if (null !== $this->orderItemUnit) {
+            return $this->orderItemUnit;
+        }
+
         return null;
     }
 
@@ -113,7 +122,7 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAdjustable(AdjustableInterface $adjustable = null)
     {
-        $this->order = $this->orderItem = null;
+        $this->order = $this->orderItem = $this->orderItemUnit = null;
 
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;
@@ -121,6 +130,10 @@ class Adjustment implements AdjustmentInterface
 
         if ($adjustable instanceof OrderItemInterface) {
             $this->orderItem = $adjustable;
+        }
+
+        if ($adjustable instanceof OrderItemUnitInterface) {
+            $this->orderItemUnit = $adjustable;
         }
     }
 
@@ -174,6 +187,18 @@ class Adjustment implements AdjustmentInterface
         }
 
         $this->amount = $amount;
+        $this->recalculateAdjustable();
+    }
+
+    protected function recalculateAdjustable()
+    {
+        if (null !== $this->order) {
+            $this->order->recalculateAdjustmentsTotal();
+        } elseif (null !== $this->orderItem) {
+            $this->orderItem->recalculateAdjustmentsTotal();
+        } elseif (null !== $this->orderItemUnit) {
+            $this->orderItemUnit->recalculateAdjustmentsTotal();
+        }
     }
 
     /**

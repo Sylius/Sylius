@@ -259,7 +259,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for unit in order.inventoryUnits %}
+                {% for unit in order.itemUnits %}
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ unit.stockable.sku }}</td>

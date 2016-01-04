@@ -161,10 +161,6 @@ class OrderSpec extends ObjectBehavior
         OrderItemInterface $item2,
         OrderItemInterface $item3
     ) {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-        $item3->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
         $item3->getTotal()->willReturn(250);
@@ -239,7 +235,7 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment2);
         $this->addAdjustment($adjustment3);
 
-        $this->calculateAdjustmentsTotal();
+        $this->recalculateAdjustmentsTotal();
 
         $this->getAdjustmentsTotal()->shouldReturn(6930);
     }
@@ -260,11 +256,23 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(new \stdClass());
     }
 
+    function it_has_total_quantity(OrderItemInterface $orderItem1, OrderItemInterface $orderItem2)
+    {
+        $orderItem1->getQuantity()->willReturn(10);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+
+        $orderItem2->getQuantity()->willReturn(30);
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $orderItem2->equals($orderItem1)->willReturn(false);
+
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $this->getTotalQuantity()->shouldReturn(40);
+    }
+
     function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -294,9 +302,6 @@ class OrderSpec extends ObjectBehavior
 
     function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
-        $item1->calculateTotal()->shouldBeCalled();
-        $item2->calculateTotal()->shouldBeCalled();
-
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -326,8 +331,6 @@ class OrderSpec extends ObjectBehavior
 
     function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
     {
-        $item->calculateTotal()->shouldBeCalled();
-
         $item->getTotal()->willReturn(45000);
 
         $item->equals(Argument::any())->willReturn(false);
