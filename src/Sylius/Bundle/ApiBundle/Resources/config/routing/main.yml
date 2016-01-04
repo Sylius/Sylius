@@ -103,6 +103,10 @@ sylius_api_user:
     resource: @SyliusApiBundle/Resources/config/routing/user.yml
     prefix: /users
 
+sylius_api_customer:
+    resource: @SyliusApiBundle/Resources/config/routing/customer.yml
+    prefix: /customers
+
 sylius_api_setting:
     resource: @SyliusApiBundle/Resources/config/routing/setting.yml
     prefix: /settings
