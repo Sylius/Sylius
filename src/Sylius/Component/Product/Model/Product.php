@@ -280,10 +280,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByName($attributeName)
+    public function hasAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode) {
                 return true;
             }
         }
@@ -294,10 +294,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeByName($attributeName)
+    public function getAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode) {
                 return $attribute;
             }
         }

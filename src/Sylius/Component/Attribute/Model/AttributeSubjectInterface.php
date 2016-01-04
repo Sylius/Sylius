@@ -49,16 +49,16 @@ interface AttributeSubjectInterface
     public function hasAttribute(AttributeValueInterface $attribute);
 
     /**
-     * @param string $attributeName
+     * @param string $attributeCode
      *
      * @return bool
      */
-    public function hasAttributeByName($attributeName);
+    public function hasAttributeByCode($attributeCode);
 
     /**
-     * @param string $attributeName
+     * @param string $attributeCode
      *
      * @return AttributeValueInterface
      */
-    public function getAttributeByName($attributeName);
+    public function getAttributeByCode($attributeCode);
 }
