@@ -64,6 +64,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('sequence')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

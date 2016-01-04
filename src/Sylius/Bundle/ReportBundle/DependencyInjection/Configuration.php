@@ -64,6 +64,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('report')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

@@ -57,7 +57,7 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
-        return sprintf('doctrine_phpcr.odm.%s_document_manager', 'default');
+        return sprintf('doctrine_phpcr.odm.%s_document_manager', $this->getObjectManagerName($metadata));
     }
 
     /**
