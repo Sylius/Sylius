@@ -22,7 +22,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.templating.helper.restricted_zone" class="%sylius.templating.helper.restricted_zone.class%">
+        <service id="sylius.templating.helper.restricted_zone" class="%sylius.templating.helper.restricted_zone.class%" lazy="true">
             <argument type="service" id="sylius.checker.restricted_zone" />
             <tag name="templating.helper" alias="sylius_restricted_zone" />
         </service>
