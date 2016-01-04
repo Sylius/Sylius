@@ -1,61 +1,113 @@
 UPGRADE
 =======
 
-# From 0.15.0 to 0.16.x
+## From 0.15.0 to 0.16.x
 
-## Codebase upgrade:
+### General
 
- * Change your configuration for bundles all resources are configured under ``sylius_<bundle> -> resources -> <resource>`` node
- * Rename validation groups parameter names if you used them anywhere
+ * Configuration structure for all bundles has changed:
+  
+Before:
 
-## PayumBundle
+```yml
+sylius_taxation:
+    validation_groups:
+        tax_category: [sylius, custom]
+    classes:
+        tax_category:
+            model: AppBundle\Entity\TaxCategory
+            form: AppBundle\Form\Type\TaxCategoryType
+```
 
- * Changed configuration key `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
+After:
+
+```yml
+sylius_taxation:
+    resources:
+        tax_category:
+            classes:
+                model: AppBundle\Entity\TaxCategory
+                form:
+                    default: AppBundle\Form\Type\TaxCategoryType
+            validation_groups:
+                default: [sylius, custom]
+```
  
-## Resource
+ * Validation groups parameters have been renamed:
+ 
+Before:
 
- * RepositoryInterface now has two additional methods `add` and `remove`
+```
+%sylius.validation_group.product%
+```
 
-# From 0.14.0 to 0.15.x
+After:
 
-## Multi Channel support
+```
+%sylius.validation_group**s**.product%
+```
+
+### Attribute and SyliusAttributeBundle
+
+ * Attribute system has been reworked and now every ``type`` is represented by ``AttributeTypeInterface`` instance;
+ * https://github.com/Sylius/Sylius/pull/3608.
+ 
+### SyliusPayumBundle 
+
+ * Changed configuration key `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`;
+ * ``PaymentConfig`` renamed to ``GatewayConfig``;
+
+### Resource & SyliusResourceBundle
+
+ * ``RepositoryInterface`` now has two additional methods `add` and `remove`;
+ * Added ``InMemoryRepository`` which stores resources in memory;
+ * Added ``DriverInterface`` which replaced previously used abstractions;
+ * Reworked ``AbstractResourceExtension`` to be much simpler.
+
+## From 0.14.0 to 0.15.x
+
+### General
+
+ * We no longer use FOSUserBundle;
+ * User provider has been changed https://github.com/Sylius/Sylius/pull/2717/files#diff-da1af97fca8a5fcb6fb7053584105ba7R6;
+ * Everything related to e-commerce (orders, addresses, groups and coupons) are now associated with Customer;
+ * Everything related to system account remains on User entity;
+ * Email no longer exist on Order;
+ * All order are associated with Customer (even guest orders - during guest checkout Customer is created based on email);
+ * User must have associated Customer;
+ * Email no longer exist on User. It is on Customer now;
+ * In the checkout we depend on Customer not User;
+ * In templates in many places we use Customer instead of User entity now.
+
+### Channel & SyliusChannelBundle 
 
 https://github.com/Sylius/Sylius/pull/2752
 
-## UserBundle
+### User & SyliusUserBundle
 
 https://github.com/Sylius/Sylius/pull/2717
 
-#### Database upgrade:
- * Call ``` sylius:rbac:initialize ``` to create new roles in your system
- * Execute migration script to migrate your data into the new model schema<br/>
+### Database
+
+ * Call ``` sylius:rbac:initialize ``` to create new roles in your system;
+ * Execute migration script to migrate your data into the new model schema.
  
 **The migration script migrates only default data, if you have some customizations on any of affected entities you should take care of them yourself!**
-
-#### Codebase upgrade:
-
- * We no longer use FOSUserBundle
- * User provider has been changed https://github.com/Sylius/Sylius/pull/2717/files#diff-da1af97fca8a5fcb6fb7053584105ba7R6
- * Everything related to e-commerce (orders, addresses, groups and coupons) are now associated with Customer
- * Everything related to system account remains on User entity
- * Email no longer exist on Order
- * All order are associated with Customer (even guest orders - during guest checkout Customer is created based on email)
- * User must have associated Customer
- * Email no longer exist on User. It is on Customer now
- * In the checkout we depend on Customer not User
- * In templates in many places we use Customer instead of User entity now
  
-## API client
+### API Client
 
 https://github.com/Sylius/Sylius/pull/2887
 
-#### Codebase upgrade:
+### SyliusApiBundle 
 
-When you create server client in Sylius, it's public id was a combination of Client internal id and it's random id. E.g.
+When you create server client in Sylius, it's public id was a combination of Client internal id and it's random id. For example:
+
 ```
 client_id: 1_mpO5ZJ35hx
 ```
+
 now it is simply random id, so it will be changed to:
+
 ```
 client_id: mpO5ZJ35hx
 ```
@@ -64,15 +116,11 @@ client_id: mpO5ZJ35hx
 
 Related discussion https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/328.
 
-## Translating country names using Symfony's Intl component
+### Addressing 
 
-[Removed `CountryTranslation`, using `Intl` Symfony component instead to provide translated country names based on ISO country code.](https://github.com/Sylius/Sylius/pull/3035)
+* Removed `CountryTranslation`, using `Intl` Symfony component instead to provide translated country names based on ISO country code. https://github.com/Sylius/Sylius/pull/3035
 
-#### Database upgrade
-
- * Execute migration script to migrate your data into the new model schema
-
-# From 0.9.0 to 0.10.x
+## From 0.9.0 to 0.10.x
 
 Version 0.10.x includes the new Sylius e-commerce components. 
 All classes without Symfony dependency have been moved to separate ``Sylius\Component`` namespace.
