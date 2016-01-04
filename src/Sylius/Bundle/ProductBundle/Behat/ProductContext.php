@@ -361,4 +361,25 @@ class ProductContext extends DefaultContext
     {
         $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', array('type' => $type)));
     }
+
+    /**
+     * @Given /^There is (enabled|disabled) product named "([^""]*)"$/
+     */
+    public function thereIsProduct($enabled, $name)
+    {
+        $product = $this->getRepository('product')->findOneBy(array('name' => $name));
+
+        if (null === $product) {
+            $product = $this->getRepository('product')->createNew();
+            $product->setName($name);
+            $product->setPrice(0);
+            $product->setDescription('Lorem ipsum');
+        }
+
+        $product->setEnabled('enabled' === $enabled);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($product);
+        $manager->flush();
+    }
 }

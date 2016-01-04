@@ -67,6 +67,7 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
+        <field name="enabled" column="enabled" type="boolean" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />

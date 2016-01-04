@@ -17,6 +17,11 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if product.enabled %}
+        {{ buttons.disable(path('sylius_backend_product_disable', {'id': product.id})) }}
+    {% else %}
+        {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
+    {% endif %}
     {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
@@ -150,6 +155,10 @@
                 <tr>
                     <td>{{ 'sylius.product.stock'|trans }}</td>
                     <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
