@@ -15,18 +15,12 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType');
@@ -43,15 +37,6 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
         $builder->add('equal', 'checkbox', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
-    }
-
-    function it_has_options(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'validation_groups' => array('sylius')
-        ))->shouldBeCalled();
-
-        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

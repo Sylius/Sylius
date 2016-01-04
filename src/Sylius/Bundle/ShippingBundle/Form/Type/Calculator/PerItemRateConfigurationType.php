@@ -18,29 +18,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Per item rate calculator configuration form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PerItemRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -65,7 +46,6 @@ class PerItemRateConfigurationType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

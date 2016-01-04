@@ -22,11 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class WeightRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType');
@@ -49,7 +44,6 @@ class WeightRateConfigurationTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('sylius'),
             'data_class' => null,
         ))->shouldBeCalled();
 
