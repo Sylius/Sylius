@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Model;
 
 class Image implements ImageInterface
 {
-
     /**
      * @var integer
      */
