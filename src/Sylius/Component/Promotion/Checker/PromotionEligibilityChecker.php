@@ -56,26 +56,26 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         if (!$this->isEligibleToDates($promotion)) {
-            return false;
+            return 0;
         }
 
         if (!$this->isEligibleToUsageLimit($promotion)) {
-            return false;
+            return 0;
         }
 
-        $eligible = true;
-        $eligibleRules = false;
+        $eligible = 1;
+        $eligibleRules = 0;
         if ($promotion->hasRules()) {
             foreach ($promotion->getRules() as $rule) {
                 try {
                     if (!$this->isEligibleToRule($subject, $promotion, $rule)) {
-                        return false;
+                        return 0;
                     }
 
-                    $eligibleRules = true;
+                    ++$eligibleRules;
                 } catch (UnsupportedTypeException $exception) {
-                    if (!$eligibleRules) {
-                        $eligible = false;
+                    if (0 === $eligibleRules) {
+                        $eligible = 0;
                     }
 
                     continue;
@@ -97,18 +97,17 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionInterface        $promotion
      * @param RuleInterface             $rule
      *
-     * @return Boolean
+     * @return int
      */
     protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
         $checker = $this->registry->get($rule->getType());
-
-        if ($checker->isEligible($subject, $rule->getConfiguration())) {
-            return true;
+        if ($eligible = $checker->isEligible($subject, $rule->getConfiguration())) {
+            return $eligible;
         }
 
         if (!$promotion->isCouponBased()) {
-            return false;
+            return $eligible;
         }
 
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
@@ -124,7 +123,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
-        return false;
+        return $eligible;
     }
 
     /**
@@ -132,22 +131,16 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToDates(PromotionInterface $promotion)
     {
-        $now = new \DateTime();
-
         if (null !== $startsAt = $promotion->getStartsAt()) {
-            if ($now < $startsAt) {
-                return false;
-            }
+            return new \DateTime() > $startsAt;
         }
 
         if (null !== $endsAt = $promotion->getEndsAt()) {
-            if ($now > $endsAt) {
-                return false;
-            }
+            return new \DateTime() < $endsAt;
         }
 
         return true;
@@ -158,14 +151,12 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToUsageLimit(PromotionInterface $promotion)
     {
         if (null !== $usageLimit = $promotion->getUsageLimit()) {
-            if ($promotion->getUsed() >= $usageLimit) {
-                return false;
-            }
+            return $usageLimit > $promotion->getUsed();
         }
 
         return true;
@@ -177,26 +168,26 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return bool
+     * @return int
      */
     protected function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        $eligible = false;
+        $eligible = 0;
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
-                $eligible = true;
+                $eligible = 1;
             }
         } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
-                    $eligible = true;
+                    $eligible = 1;
 
                     break;
                 }
             }
         } else {
-            return false;
+            return 0;
         }
 
         if ($eligible) {

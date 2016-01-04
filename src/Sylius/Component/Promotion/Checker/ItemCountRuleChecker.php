@@ -15,9 +15,10 @@ use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if subject item count exceeds (or at least equal) to the configured count.
+ * Checks if subject item count is: equal, exactly same, more than or "modulo", compared to the configured count.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
@@ -27,14 +28,40 @@ class ItemCountRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof PromotionCountableSubjectInterface) {
-            return false;
+            return 0;
         }
 
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectCount() >= $configuration['count'];
+        if (!isset($configuration['equal'])) {
+            $configuration['equal'] = 'equal';
+        } elseif (is_bool($configuration['equal'])) {
+            $configuration['equal'] = $configuration['equal'] ? 'equal' : 'more_than';
         }
 
-        return $subject->getPromotionSubjectCount() > $configuration['count'];
+        $quantity = (int) $subject->getPromotionSubjectCount();
+        switch ($configuration['equal']) {
+            default;
+            case 'equal':
+                $result = $quantity >= $configuration['count'];
+
+                break;
+
+            case 'more_than':
+                $result = $quantity > $configuration['count'];
+
+                break;
+
+            case 'exactly':
+                $result = $quantity === $configuration['count'];
+
+                break;
+
+            case 'modulo':
+                $result = (int) floor($quantity / $configuration['count']);
+
+                break;
+        }
+
+        return (int) $result;
     }
 
     /**
