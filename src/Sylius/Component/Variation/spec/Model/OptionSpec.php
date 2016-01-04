@@ -42,6 +42,12 @@ class OptionSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_has_mutable_code()
+    {
+        $this->setCode('O1');
+        $this->getCode()->shouldReturn('O1');
+    }
+
     function it_should_not_have_name_by_default()
     {
         $this->getName()->shouldReturn(null);

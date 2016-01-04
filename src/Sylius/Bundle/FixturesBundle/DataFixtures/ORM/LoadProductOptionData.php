@@ -31,32 +31,55 @@ class LoadProductOptionData extends DataFixture
     {
         // T-Shirt size option.
         $option = $this->createOption(
+            'O1',
             'T-Shirt size',
             array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
-            array('S', 'M', 'L', 'XL', 'XXL')
+            array(
+                'OV1' => 'S',
+                'OV2' => 'M',
+                'OV3' => 'L',
+                'OV4' => 'XL',
+                'OV5' => 'XXL',
+            )
         );
         $manager->persist($option);
 
         // T-Shirt color option.
         $option = $this->createOption(
+            'O2',
             'T-Shirt color',
             array($this->defaultLocale => 'Color'),
-            array('Red', 'Blue', 'Green')
+            array(
+                'OV6' => 'Red',
+                'OV7' => 'Blue',
+                'OV8' => 'Green',
+            )
         );
         $manager->persist($option);
 
         // Sticker size option.
         $option = $this->createOption(
+            'O3',
             'Sticker size',
             array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
-            array('3"', '5"', '7"'));
+            array(
+                'OV9' => '3"',
+                'OV10' => '5"',
+                'OV11' => '7"',
+            )
+        );
         $manager->persist($option);
 
         // Mug type option.
         $option = $this->createOption(
+            'O4',
             'Mug type',
             array($this->defaultLocale => 'Type', 'es_ES' => 'Tipo'),
-            array('Medium mug', 'Double mug', 'MONSTER mug')
+            array(
+                'OV12' => 'Medium mug',
+                'OV13' => 'Double mug',
+                'OV14' => 'MONSTER mug',
+            )
         );
         $manager->persist($option);
 
@@ -72,19 +95,19 @@ class LoadProductOptionData extends DataFixture
     }
 
     /**
-     * Create an option.
-     *
+     * @param string $optionCode
      * @param string $name
-     * @param array  $presentationTranslation
-     * @param array  $values
+     * @param array $presentationTranslation
+     * @param array $valuesData
      *
      * @return OptionInterface
      */
-    protected function createOption($name, array $presentationTranslation, array $values)
+    protected function createOption($optionCode, $name, array $presentationTranslation, array $valuesData)
     {
         /* @var $option OptionInterface */
         $option = $this->getProductOptionFactory()->createNew();
         $option->setName($name);
+        $option->setCode($optionCode);
 
         foreach ($presentationTranslation as $locale => $presentation) {
             $option->setCurrentLocale($locale);
@@ -92,12 +115,13 @@ class LoadProductOptionData extends DataFixture
         }
         $option->setCurrentLocale($this->defaultLocale);
 
-        foreach ($values as $text) {
+        foreach ($valuesData as $code => $value) {
             /* @var $value OptionValueInterface */
-            $value = $this->getProductOptionValueFactory()->createNew();
-            $value->setValue($text);
+            $optionValue = $this->getProductOptionValueFactory()->createNew();
+            $optionValue->setValue($value);
+            $optionValue->setCode($code);
 
-            $option->addValue($value);
+            $option->addValue($optionValue);
         }
 
         $this->setReference('Sylius.Option.'.$name, $option);

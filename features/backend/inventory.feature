@@ -7,9 +7,9 @@ Feature: Inventory tracking
     Background:
         Given store has default configuration
           And there are following options:
-            | name          | presentation | values           |
-            | T-Shirt color | Color        | Red, Blue, Green |
-            | T-Shirt size  | Size         | S, M, L          |
+            | code | name         | presentation  | values                          |
+            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
           And the following products exist:
             | name           | price | options                     |
             | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color |

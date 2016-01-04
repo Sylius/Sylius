@@ -27,6 +27,11 @@ class Option extends AbstractTranslatable implements OptionInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * Internal name.
      *
      * @var string
@@ -76,6 +81,22 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
