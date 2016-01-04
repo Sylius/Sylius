@@ -1,36 +1,128 @@
-CHANGELOG
-=========
+# Change Log
 
-## v0.16 (2015-xx-xx)
+## [Unreleased](https://github.com/Sylius/Sylius/tree/HEAD)
 
-This chapter references the relevant changes done in 0.16 version.
+[Full Changelog](https://github.com/Sylius/Sylius/compare/v0.15.0...HEAD)
 
-To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.15.0...master
+**Implemented enhancements:**
 
- * feature #3709 Access to app_dev.php permitted through the use of SYLIUS_APP_DEV_PERMITTED environment variable (ideal for vagrant)
- * feature #3110 [BC BREAK] Bumped minimal versions, major changes: PHP >=5.5.9, Symfony ^2.7
- * bc break #3364 [BC BREAK] Renamed setDefaultOptions to configureOptions
- * bc break #3536 [BC BREAK] Renamed label to type on adjustment
- * bc break #3610 [BC BREAK] Renamed `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`
- * feature #3288 [BC BREAK][Product] Removed ProductBuilder class
- * feature #3617 [BC BREAK][Resource] Created InMemoryRepository and implemented ResourceInterface
- * bc break #3721 [BC BREAK] Change configuration tree structure for all bundles, additional ``resources`` level added to root node.
- * bc break #3721 [BC BREAK] Validation groups are configured per resource in appropriate node.
- * bc break #3721 [BC BREAK] Validation groups parameters renamed from ``sylius.validation_group.<name>`` to ``<sylius.validation_groups.<name>``.
+- Support for Doctrine ORM \>=2.5 [\#3726](https://github.com/Sylius/Sylius/pull/3726) ([pamil](https://github.com/pamil))
+- Rework SyliusResourceBundle drivers [\#3721](https://github.com/Sylius/Sylius/pull/3721) ([pjedrzejewski](https://github.com/pjedrzejewski))
+- \#3671 add defaultLocale and defaultCurrency to Channel model [\#3681](https://github.com/Sylius/Sylius/pull/3681) ([axelvnk](https://github.com/axelvnk))
+- Stateless cart provider [\#3637](https://github.com/Sylius/Sylius/pull/3637) ([PWalkow](https://github.com/PWalkow))
+- \[WIP\]\[Shipping\] Change the Shipping calculator interface [\#3622](https://github.com/Sylius/Sylius/pull/3622) ([tuka217](https://github.com/tuka217))
+- Group Taxons by Taxonomy for sylius\_taxon\_choice form [\#3615](https://github.com/Sylius/Sylius/pull/3615) ([pjedrzejewski](https://github.com/pjedrzejewski))
+- Added CMF role allowing to preview unpublished content in frontend [\#3602](https://github.com/Sylius/Sylius/pull/3602) ([cdaguerre](https://github.com/cdaguerre))
+- Add usage of Symfony Polyfill components [\#3594](https://github.com/Sylius/Sylius/pull/3594) ([stloyd](https://github.com/stloyd))
+- \[Shipping\] Remove class Claculator, all calculators implement CalculatorInterface [\#3586](https://github.com/Sylius/Sylius/pull/3586) ([tuka217](https://github.com/tuka217))
+- \[Shipping\] Rework the Shipping component to use ServiceRegistry [\#3585](https://github.com/Sylius/Sylius/pull/3585) ([tuka217](https://github.com/tuka217))
+- \[Behat\] \[Travis\] ~5 times faster tests suites [\#3576](https://github.com/Sylius/Sylius/pull/3576) ([pamil](https://github.com/pamil))
 
-## v0.15 (2015-09-08)
+**Fixed bugs:**
 
-This chapter references the relevant changes done in 0.15 version.
+- \[PaymentBundle\] Configuration file has wrong permissions [\#3695](https://github.com/Sylius/Sylius/issues/3695)
+- \[Channel\] Doctrine ORM 2.5 dependency [\#3655](https://github.com/Sylius/Sylius/issues/3655)
+- Doctrine Metadata Cache [\#3621](https://github.com/Sylius/Sylius/issues/3621)
+- Sylius\Component\Core\Model\VariantImage used, but not defined [\#3598](https://github.com/Sylius/Sylius/issues/3598)
+- \[User\]\[RFC\] User component requires mb\_string extension [\#3590](https://github.com/Sylius/Sylius/issues/3590)
 
-To get the diff between two versions, go to https://github.com/Sylius/Sylius/compare/v0.14.0...v0.15.0
+**Closed issues:**
 
- * bug #3196 [ResourceBundle] Enable max depth check on API serialization
- * feature #3094 [BC BREAK][Locale] Translations based on Intl component, can be enabled or disabled
- * feature #3074 [BC BREAK][Addressing] Countries management - enabling & disabling
- * feature #2999 [BC BREAK][Payment] Remove fluent interfaces from PaymentMethod
- * feature #2887 [BC BREAK][ApiBundle] Change API client public id to be simply random id
- * feature #2717 [BC BREAK] Added SyliusUserBundle together with Customer-User split
- * feature #2752 [BC BREAK] Multi channel support
- * feature #3585 [BC BREAK] [Shipping]  `CalculatorRegistry` was deleted and replaced by `ServiceRegistry`,`RuleCheckerRegistry` was deleted and replaced by `ServiceRegistry`
- * feature #3586 [BC BREAK] [Shipping] Remove class Calculator, all calculator implement CalculatorInterface
- * feature #3622 [BC BREAK] [Shipping] change CalculatorInterface
+- \[SettingsBundle\] Static content form field return null from db while displaying form [\#3679](https://github.com/Sylius/Sylius/issues/3679)
+- \[ResourceBundle\] update action in resource controller do not check for stopped events [\#3676](https://github.com/Sylius/Sylius/issues/3676)
+- \[RFC\] \[ChannelBundle\] Channel should have a defaultLocale field [\#3671](https://github.com/Sylius/Sylius/issues/3671)
+- Can not install Sylius Standard Edition [\#3665](https://github.com/Sylius/Sylius/issues/3665)
+- Cannot login to demo [\#3657](https://github.com/Sylius/Sylius/issues/3657)
+- \[ProductVariant\] Missing sylius.factory.product\_variant service in standalone install [\#3647](https://github.com/Sylius/Sylius/issues/3647)
+- mailerbundle adapter should have attachment functionality [\#3645](https://github.com/Sylius/Sylius/issues/3645)
+- Cant install the standard edition fails on dependancies  [\#3644](https://github.com/Sylius/Sylius/issues/3644)
+- \[ResourceBundle\] subtree split out of date. [\#3636](https://github.com/Sylius/Sylius/issues/3636)
+- restricted zone implemented wrongly [\#3620](https://github.com/Sylius/Sylius/issues/3620)
+- Composer dependency fails for doctrine/phpcr-odm [\#3595](https://github.com/Sylius/Sylius/issues/3595)
+- Trying to overwrite the product wont recognize original mapping  [\#3593](https://github.com/Sylius/Sylius/issues/3593)
+- \[FlowBundle\] Error in readme [\#3587](https://github.com/Sylius/Sylius/issues/3587)
+
+**Merged pull requests:**
+
+- \[PaymentBundle\] Fix file permission [\#3735](https://github.com/Sylius/Sylius/pull/3735) ([artursvonda](https://github.com/artursvonda))
+- TestKernel restores default values on services' properties [\#3733](https://github.com/Sylius/Sylius/pull/3733) ([pamil](https://github.com/pamil))
+- Updated .gitignore - removed deploy related ones, updated build directory [\#3725](https://github.com/Sylius/Sylius/pull/3725) ([pamil](https://github.com/pamil))
+- \[Permissions\] Fixed permission for emails back-end menu item [\#3724](https://github.com/Sylius/Sylius/pull/3724) ([starspire](https://github.com/starspire))
+- \[CMF Integration\] StaticContent/show template can be used with both ContentController and ResourceController [\#3722](https://github.com/Sylius/Sylius/pull/3722) ([pamil](https://github.com/pamil))
+- Update TestKernel.php [\#3719](https://github.com/Sylius/Sylius/pull/3719) ([gonzalovilaseca](https://github.com/gonzalovilaseca))
+- Avoid flushing only a single resource when not required [\#3718](https://github.com/Sylius/Sylius/pull/3718) ([peteward](https://github.com/peteward))
+- \[Behat\] Renamed build path [\#3716](https://github.com/Sylius/Sylius/pull/3716) ([pamil](https://github.com/pamil))
+- \[BugFix\]\[PHPCR\] Fix criteria "name" for DocumentRepository [\#3714](https://github.com/Sylius/Sylius/pull/3714) ([steffenbrem](https://github.com/steffenbrem))
+- \[Travis\] Etc directory + bunch of fixes [\#3711](https://github.com/Sylius/Sylius/pull/3711) ([pamil](https://github.com/pamil))
+- Permit access to app\_dev.php through system environment variable  [\#3709](https://github.com/Sylius/Sylius/pull/3709) ([peteward](https://github.com/peteward))
+- \[Registry\] Update README.md [\#3706](https://github.com/Sylius/Sylius/pull/3706) ([afurculita](https://github.com/afurculita))
+- CoreBundle: checker for promotion coupons added [\#3704](https://github.com/Sylius/Sylius/pull/3704) ([PWalkow](https://github.com/PWalkow))
+- \[Archetype\] Introduce code for archetype [\#3702](https://github.com/Sylius/Sylius/pull/3702) ([tuka217](https://github.com/tuka217))
+- \[Channel\] Introduce code for channel [\#3700](https://github.com/Sylius/Sylius/pull/3700) ([tuka217](https://github.com/tuka217))
+- \[Mailer\] Introduce code to Mailer [\#3699](https://github.com/Sylius/Sylius/pull/3699) ([tuka217](https://github.com/tuka217))
+- \[Composer\] Using stable doctrine/phpcr-odm [\#3694](https://github.com/Sylius/Sylius/pull/3694) ([pamil](https://github.com/pamil))
+- \[Promotion\] Introduce code for Promotion [\#3692](https://github.com/Sylius/Sylius/pull/3692) ([tuka217](https://github.com/tuka217))
+- Updated PHPDoc to allow ProcessValidatorInterface instances to be passed [\#3691](https://github.com/Sylius/Sylius/pull/3691) ([fred-jan](https://github.com/fred-jan))
+- Responses generated by ProcessValidators now get processed. [\#3690](https://github.com/Sylius/Sylius/pull/3690) ([fred-jan](https://github.com/fred-jan))
+- Fix password reset forms [\#3686](https://github.com/Sylius/Sylius/pull/3686) ([inssein](https://github.com/inssein))
+- \[Channel\] Revert Doctrine ORM 2.5 dependency to 2.4 [\#3684](https://github.com/Sylius/Sylius/pull/3684) ([axelvnk](https://github.com/axelvnk))
+- \[Report\] Introduce immutable code for Report [\#3678](https://github.com/Sylius/Sylius/pull/3678) ([tuka217](https://github.com/tuka217))
+- Update action refreshes the resource when updated [\#3677](https://github.com/Sylius/Sylius/pull/3677) ([aleherse](https://github.com/aleherse))
+- \[Currency\] Introduce immutable code for Currency [\#3675](https://github.com/Sylius/Sylius/pull/3675) ([tuka217](https://github.com/tuka217))
+- \[Locale\]Add immutable code [\#3674](https://github.com/Sylius/Sylius/pull/3674) ([tuka217](https://github.com/tuka217))
+- \[Promotion\] Allow to set required amount of items when using "contains product" rule [\#3673](https://github.com/Sylius/Sylius/pull/3673) ([stloyd](https://github.com/stloyd))
+- \[Travis\] Improved waiting for port while executing JS scenarios [\#3669](https://github.com/Sylius/Sylius/pull/3669) ([pamil](https://github.com/pamil))
+- \[Taxation\]\[TaxationBundle\] Add immutable code to Taxation entities [\#3667](https://github.com/Sylius/Sylius/pull/3667) ([tuka217](https://github.com/tuka217))
+- \[Payment\]\[PaymentBundle\] Add immutable code to Payment entities [\#3666](https://github.com/Sylius/Sylius/pull/3666) ([tuka217](https://github.com/tuka217))
+- \[WebBundle\] Fixed showing static content by route sylius\_static\_content\_show [\#3664](https://github.com/Sylius/Sylius/pull/3664) ([pamil](https://github.com/pamil))
+- \[Composer\] Added explicit dependency symfony/proxy-manager-bridge [\#3660](https://github.com/Sylius/Sylius/pull/3660) ([pamil](https://github.com/pamil))
+- \[Translation\] Fixed how TranslationSlugHandler works, if slug is set on mapped superclass [\#3659](https://github.com/Sylius/Sylius/pull/3659) ([pamil](https://github.com/pamil))
+- \[Travis\] \[Composer\] Set PHP7 as required to pass, removed @rc from phpspec/phpspec [\#3653](https://github.com/Sylius/Sylius/pull/3653) ([pamil](https://github.com/pamil))
+- \[Cart\] Fixed and polished CartProviderSpec on PHP7 [\#3651](https://github.com/Sylius/Sylius/pull/3651) ([pamil](https://github.com/pamil))
+- \[DB\] Allow orders to be deleted directly through DB with correct onDelete=CASCADEs [\#3648](https://github.com/Sylius/Sylius/pull/3648) ([peteward](https://github.com/peteward))
+- \[Travis\] Javascript suites on every PHP version, lazy cache:warmup [\#3643](https://github.com/Sylius/Sylius/pull/3643) ([pamil](https://github.com/pamil))
+- Fix filter form cancel route for backend payment [\#3640](https://github.com/Sylius/Sylius/pull/3640) ([diimpp](https://github.com/diimpp))
+- \[Shipping\]\[ShippingBundle\] Add immutable code to Shipping entities [\#3639](https://github.com/Sylius/Sylius/pull/3639) ([tuka217](https://github.com/tuka217))
+- \[Security\] Fix remaining ROLE\_SYLIUS\_ADMIN [\#3638](https://github.com/Sylius/Sylius/pull/3638) ([psyray](https://github.com/psyray))
+- \[FlowBundle\] Fix version so we can use this bundle with Symfony 2.8 too [\#3635](https://github.com/Sylius/Sylius/pull/3635) ([tristanbes](https://github.com/tristanbes))
+- \[Travis\] OPCache optimizations [\#3634](https://github.com/Sylius/Sylius/pull/3634) ([pamil](https://github.com/pamil))
+- \[Product\] Remove ProductBuilder class [\#3633](https://github.com/Sylius/Sylius/pull/3633) ([NeverResponse](https://github.com/NeverResponse))
+- Remove deployment configurations from Sylius/Sylius [\#3631](https://github.com/Sylius/Sylius/pull/3631) ([tuka217](https://github.com/tuka217))
+- \[Promotion\] Made scenarios for product promotions more specific [\#3630](https://github.com/Sylius/Sylius/pull/3630) ([pamil](https://github.com/pamil))
+- \[Product\] Fixed ProductBuilderSpec on PHP7 [\#3628](https://github.com/Sylius/Sylius/pull/3628) ([pamil](https://github.com/pamil))
+- \[Resource\] Fixed issue with mapping inheritance and mapped superclass \(Gedmo\) [\#3627](https://github.com/Sylius/Sylius/pull/3627) ([pamil](https://github.com/pamil))
+- Made sure every defined spec gets checked [\#3626](https://github.com/Sylius/Sylius/pull/3626) ([NeverResponse](https://github.com/NeverResponse))
+- \[Behat\] Drastically reduced memory usage [\#3625](https://github.com/Sylius/Sylius/pull/3625) ([pamil](https://github.com/pamil))
+- Bumping symfony/symfony to 2.7.7 due to security issues [\#3619](https://github.com/Sylius/Sylius/pull/3619) ([pamil](https://github.com/pamil))
+- \[Resource\] Created InMemoryRepository and implemented ResourceInterface [\#3617](https://github.com/Sylius/Sylius/pull/3617) ([NeverResponse](https://github.com/NeverResponse))
+- Throwing correct exception if step is unknown [\#3614](https://github.com/Sylius/Sylius/pull/3614) ([tenitski](https://github.com/tenitski))
+- Introduce Factory for all resources [\#3613](https://github.com/Sylius/Sylius/pull/3613) ([pjedrzejewski](https://github.com/pjedrzejewski))
+- \[Payum\] Renamed payment\_config configuration key to gateway\_config [\#3610](https://github.com/Sylius/Sylius/pull/3610) ([pamil](https://github.com/pamil))
+- \[Composer\] Updated phpspec requirement from 2.4@alpha to 2.4@rc [\#3609](https://github.com/Sylius/Sylius/pull/3609) ([pamil](https://github.com/pamil))
+- \[Report\] Replace private variable declarations with protected ones [\#3607](https://github.com/Sylius/Sylius/pull/3607) ([pamil](https://github.com/pamil))
+- \[Core\] Removed unused file and parameter defined in it [\#3606](https://github.com/Sylius/Sylius/pull/3606) ([pamil](https://github.com/pamil))
+- \[Behat\] Missing security suite added, ordered alphabetically [\#3605](https://github.com/Sylius/Sylius/pull/3605) ([pamil](https://github.com/pamil))
+- \[Behat\] \[Travis\] Investigating failing JS builds [\#3604](https://github.com/Sylius/Sylius/pull/3604) ([pamil](https://github.com/pamil))
+- Removed ROLE\_SYLIUS\_ADMIN [\#3601](https://github.com/Sylius/Sylius/pull/3601) ([cdaguerre](https://github.com/cdaguerre))
+- \[Core\] Fixed user switch role [\#3600](https://github.com/Sylius/Sylius/pull/3600) ([cdaguerre](https://github.com/cdaguerre))
+- \[Core\] Removed duplicate block permission definitions [\#3599](https://github.com/Sylius/Sylius/pull/3599) ([cdaguerre](https://github.com/cdaguerre))
+- \[Travis\] Composer-related performance optimzations [\#3596](https://github.com/Sylius/Sylius/pull/3596) ([pamil](https://github.com/pamil))
+- \[Product\] Quick fix for duplicated product slugs after \#3576 [\#3592](https://github.com/Sylius/Sylius/pull/3592) ([pamil](https://github.com/pamil))
+- Fix issue when promotion couldn't be "restored" [\#3589](https://github.com/Sylius/Sylius/pull/3589) ([stloyd](https://github.com/stloyd))
+- Fix SyliusFlowBundle readme bug with completing step [\#3588](https://github.com/Sylius/Sylius/pull/3588) ([pjedrzejewski](https://github.com/pjedrzejewski))
+- Change payment method description field to text doctrine type [\#3584](https://github.com/Sylius/Sylius/pull/3584) ([pjedrzejewski](https://github.com/pjedrzejewski))
+- WebBundle: using form variables that are available, not extra params [\#3583](https://github.com/Sylius/Sylius/pull/3583) ([PWalkow](https://github.com/PWalkow))
+- \[Core\] Removed FOS UserBundle dependency [\#3582](https://github.com/Sylius/Sylius/pull/3582) ([NeverResponse](https://github.com/NeverResponse))
+- \[Resource\] Bundle resources can not be translated if they were not intended to [\#3581](https://github.com/Sylius/Sylius/pull/3581) ([cdaguerre](https://github.com/cdaguerre))
+- \[Core\]\[Channel\] Make hard coded channel resolver class a configurable parameter [\#3580](https://github.com/Sylius/Sylius/pull/3580) ([cdaguerre](https://github.com/cdaguerre))
+- \[PayumBundle\] Added payment total to Paypal Express Checkout request [\#3577](https://github.com/Sylius/Sylius/pull/3577) ([GSadee](https://github.com/GSadee))
+- \[WebBundle\] Form theming fix for when no label is explicitly specified  [\#3574](https://github.com/Sylius/Sylius/pull/3574) ([peteward](https://github.com/peteward))
+- Cleaned up Sylius dependencies [\#3572](https://github.com/Sylius/Sylius/pull/3572) ([NeverResponse](https://github.com/NeverResponse))
+- \[Payment\] Updated composer dependencies [\#3568](https://github.com/Sylius/Sylius/pull/3568) ([NeverResponse](https://github.com/NeverResponse))
+- \[FixturesBundle\] Fixed problem with not existing payment method [\#3563](https://github.com/Sylius/Sylius/pull/3563) ([GSadee](https://github.com/GSadee))
+- \[CoreBundle\] Set proper cascade behaviour on one-to-many product references [\#3561](https://github.com/Sylius/Sylius/pull/3561) ([Infernosquad](https://github.com/Infernosquad))
+- \[FixturesBundle\] Reverted loading fakers with the available locales [\#3560](https://github.com/Sylius/Sylius/pull/3560) ([GSadee](https://github.com/GSadee))
+
+
+
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
