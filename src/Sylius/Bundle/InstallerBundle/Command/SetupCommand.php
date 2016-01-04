@@ -109,6 +109,7 @@ EOT
 
         $userManager->persist($user);
         $userManager->flush();
+        $output->writeln('Administrator account successfully registered.');
     }
 
     /**
