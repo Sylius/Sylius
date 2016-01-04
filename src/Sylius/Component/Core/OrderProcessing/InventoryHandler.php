@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
 /**
@@ -90,9 +91,11 @@ class InventoryHandler implements InventoryHandlerInterface
     public function holdInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
+            $stockItemsMap = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
-            $this->inventoryOperator->hold($item->getVariant(), $quantity);
+            foreach ($stockItemsMap as $data) {
+                $this->inventoryOperator->hold($data['stockItem'], $data['quantity']);
+            }
         }
     }
 
@@ -102,9 +105,11 @@ class InventoryHandler implements InventoryHandlerInterface
     public function releaseInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
+            $stockItemsMap = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 
-            $this->inventoryOperator->release($item->getVariant(), $quantity);
+            foreach ($stockItemsMap as $data) {
+                $this->inventoryOperator->release($data['stockItem'], $data['quantity']);
+            }
         }
     }
 
@@ -147,20 +152,26 @@ class InventoryHandler implements InventoryHandlerInterface
      * @param Collection $units
      * @param string     $transition
      *
-     * @return int
+     * @return array
      */
     protected function applyTransition(Collection $units, $transition)
     {
-        $quantity = 0;
+        $map = [];
 
         foreach ($units as $unit) {
             $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
-                $quantity++;
+                $stockItem = $unit->getStockItem();
+
+                if (array_key_exists($stockItem->getId(), $map)) {
+                    $map[$stockItem->getId()]['quantity'] = $map[$stockItem->getId()]['quantity'] + 1;
+                } else {
+                    $map[$stockItem->getId()] = ['stockItem' => $stockItem, 'quantity' => 1];
+                }
             }
         }
 
-        return $quantity;
+        return $map;
     }
 }

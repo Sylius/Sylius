@@ -75,6 +75,17 @@ sylius_backend_product_history:
                 method: findForDetailsPage
                 arguments: [$id]
 
+sylius_backend_product_stock:
+    path: /{id}/stock
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:stockAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:stock.html.twig
+            method: findForStockPage
+            arguments: [$id]
+            redirect: sylius_backend_product_stock
+
 sylius_backend_product_show:
     path: /{id}
     methods: [GET]

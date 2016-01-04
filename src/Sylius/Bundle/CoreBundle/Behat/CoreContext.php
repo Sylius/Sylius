@@ -115,7 +115,6 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $finite = $this->getService('sm.factory');
-        $orderRepository = $this->getRepository('order');
         $orderFactory = $this->getFactory('order');
         $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
 
@@ -140,7 +139,7 @@ class CoreContext extends DefaultContext
             $order->setCustomer($customer);
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
-                $order->addShipment($this->createShipment($data['shipment']));
+                $order->addShipment($this->createShipment($data['shipment'], $data['address']));
             }
 
             $order->setNumber(str_pad($currentOrderNumber, 9, 0, STR_PAD_LEFT));
@@ -172,7 +171,6 @@ class CoreContext extends DefaultContext
     public function orderHasFollowingItems($number, TableNode $items)
     {
         $manager = $this->getEntityManager();
-        $orderItemRepository = $this->getRepository('order_item');
         $orderItemFactory = $this->getFactory('order_item');
 
         $order = $this->orders[$number];
@@ -622,13 +620,14 @@ class CoreContext extends DefaultContext
     /**
      * Create an shipment instance from string.
      *
-     * @param string $string
+     * @param string $shipment
+     * @param string $address
      *
      * @return ShipmentInterface
      */
-    private function createShipment($string)
+    private function createShipment($shipment, $address)
     {
-        $shipmentData = explode(',', $string);
+        $shipmentData = explode(',', $shipment);
         $shipmentData = array_map('trim', $shipmentData);
 
         /* @var $shippingMethod ShippingMethodInterface */
@@ -644,7 +643,28 @@ class CoreContext extends DefaultContext
             $shipment->setTracking($shipmentData[2]);
         }
 
+        $shipment->setStockLocation(
+            $this->createStockLocation($address)
+        );
+
         return $shipment;
+    }
+
+    private function createStockLocation($address)
+    {
+        $stocklocation = $this->getFactory('stock_location')->createNew();
+
+        $addressData = explode(',', $address);
+
+        $stocklocation->setCode($address[3]);
+        $stocklocation->setName($address[3].' Warehouse');
+        $stocklocation->setAddress(
+            $this->createAddress($address)
+        );
+
+        $this->getEntityManager()->persist($stocklocation);
+
+        return $stocklocation;
     }
 
     /**
@@ -779,7 +799,7 @@ class CoreContext extends DefaultContext
     /**
      * @param ProductInterface $product
      */
-    private function generateProductVariations($product)
+    private function generateProductVariations(ProductInterface $product)
     {
         $this->getService('sylius.generator.product_variant')->generate($product);
 

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
@@ -31,7 +32,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Factory\InventoryUnitFactory');
+        $this->shouldHaveType(InventoryUnitFactory::class);
     }
 
     function it_is_a_factory()

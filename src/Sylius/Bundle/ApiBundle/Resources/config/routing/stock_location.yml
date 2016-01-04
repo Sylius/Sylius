@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_stock_location_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.stock_location:indexAction
+
+sylius_api_stock_location_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.stock_location:createAction
+
+sylius_api_stock_location_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.stock_location:updateAction
+
+sylius_api_stock_location_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.stock_location:deleteAction
+
+sylius_api_stock_location_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.stock_location:showAction

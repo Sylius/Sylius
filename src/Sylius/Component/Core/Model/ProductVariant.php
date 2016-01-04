@@ -86,6 +86,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $availableOnDemand = true;
 
     /**
+     * Stock items.
+     *
+     * @var Collection|StockItemInterface[]
+     */
+    protected $stockItems;
+
+    /**
      * Images.
      *
      * @var Collection|ProductVariantImageInterface[]
@@ -127,6 +134,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         parent::__construct();
 
+        $this->stockItems = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 
@@ -310,14 +318,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryName()
-    {
-        return $this->getProduct()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isAvailableOnDemand()
     {
         return $this->availableOnDemand;
@@ -328,9 +328,23 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (bool)$availableOnDemand;
+        $this->availableOnDemand = $availableOnDemand;
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function getInventoryName()
+    {
+        return $this->__toString();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockItems()
+    {
+        return $this->stockItems;
     }
 
     /**

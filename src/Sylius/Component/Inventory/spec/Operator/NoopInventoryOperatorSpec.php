@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
+use Sylius\Component\Inventory\Operator\NoopInventoryOperator;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
@@ -21,7 +22,7 @@ class NoopInventoryOperatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\NoopInventoryOperator');
+        $this->shouldHaveType(NoopInventoryOperator::class);
     }
 
     function it_implements_Sylius_inventory_operator_interface()

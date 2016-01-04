@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandler;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -31,7 +32,7 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
+        $this->shouldHaveType(BackordersHandler::class);
    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()

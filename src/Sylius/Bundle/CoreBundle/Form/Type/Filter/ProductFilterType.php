@@ -23,6 +23,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductFilterType extends AbstractType
 {
     /**
+     * FQCN taxon model class name.
+     *
+     * @var string
+     */
+    protected $taxonClass;
+
+    /**
+     * @param string $taxonClass FQCN taxon model class name
+     */
+    public function __construct($taxonClass)
+    {
+        $this->taxonClass = $taxonClass;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -41,6 +56,17 @@ class ProductFilterType extends AbstractType
                 'attr'     => array(
                     'placeholder' => 'sylius.form.product_filter.sku'
                 )
+            ))
+            ->add('channels', 'sylius_channel_choice', array(
+                'required'    => false,
+                'multiple'    => true,
+                'empty_value' => 'sylius.form.product_filter.channels.empty_value',
+            ))
+            ->add('categories', 'entity', array(
+                'required'    => false,
+                'multiple'    => true,
+                'class'       => $this->taxonClass,
+                'empty_value' => 'sylius.form.product_filter.categories.empty_value',
             ))
         ;
     }
