@@ -65,9 +65,9 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_has_quantity_equal_to_1_by_default()
+    function it_has_quantity_equal_to_0_by_default()
     {
-        $this->getQuantity()->shouldReturn(1);
+        $this->getQuantity()->shouldReturn(0);
     }
 
     function its_quantity_is_mutable()
@@ -453,7 +453,7 @@ class OrderItemSpec extends ObjectBehavior
     function it_ignores_merging_same_items()
     {
         $this->merge($this);
-        $this->getQuantity()->shouldReturn(1);
+        $this->getQuantity()->shouldReturn(0);
     }
 
     function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)

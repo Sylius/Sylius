@@ -33,7 +33,7 @@ class OrderItem implements OrderItemInterface
     /**
      * @var int
      */
-    protected $quantity = 1;
+    protected $quantity = 0;
 
     /**
      * @var int

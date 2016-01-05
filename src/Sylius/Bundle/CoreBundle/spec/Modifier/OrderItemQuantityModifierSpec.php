@@ -15,16 +15,16 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderItemQuantityModifierSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $orderItemUnitFactory)
+    function let(OrderItemUnitFactoryInterface $orderItemUnitFactory)
     {
         $this->beConstructedWith($orderItemUnitFactory);
     }
@@ -47,7 +47,7 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
     ) {
         $orderItem->getQuantity()->willReturn(1);
 
-        $orderItemUnitFactory->createNew()->willReturn($unit1, $unit2);
+        $orderItemUnitFactory->createForItem($orderItem)->willReturn($unit1, $unit2);
 
         $orderItem->addUnit($unit1)->shouldBeCalled();
         $orderItem->addUnit($unit2)->shouldBeCalled();
@@ -84,7 +84,7 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
     {
         $orderItem->getQuantity()->willReturn(3);
 
-        $orderItemUnitFactory->createNew()->shouldNotBeCalled();
+        $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
         $orderItem->addUnit(Argument::any())->shouldNotBeCalled();
         $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
     }

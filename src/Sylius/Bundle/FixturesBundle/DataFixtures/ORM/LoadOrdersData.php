@@ -31,6 +31,7 @@ class LoadOrdersData extends DataFixture
     {
         $orderFactory = $this->getOrderFactory();
         $orderItemFactory = $this->getOrderItemFactory();
+        $orderItemQuantityModifier = $this->get('sylius.modifier.order_item_quantity');
 
         $channels = array(
             'WEB-UK',
@@ -53,7 +54,8 @@ class LoadOrdersData extends DataFixture
                 $item = $orderItemFactory->createNew();
                 $item->setVariant($variant);
                 $item->setUnitPrice($variant->getPrice());
-                $item->setQuantity(rand(1, 5));
+
+                $orderItemQuantityModifier->modify($item, rand(1, 5));
 
                 $order->addItem($item);
             }

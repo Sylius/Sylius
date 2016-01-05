@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Modifier;
 
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {
     /**
-     * @var FactoryInterface
+     * @var OrderItemUnitFactoryInterface
      */
     private $orderItemUnitFactory;
 
     /**
-     * @param FactoryInterface $orderItemUnitFactory
+     * @param OrderItemUnitFactoryInterface $orderItemUnitFactory
      */
-    public function __construct(FactoryInterface $orderItemUnitFactory)
+    public function __construct(OrderItemUnitFactoryInterface $orderItemUnitFactory)
     {
         $this->orderItemUnitFactory = $orderItemUnitFactory;
     }
@@ -54,7 +54,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
     private function increaseUnitsNumber(OrderItemInterface $orderItem, $increaseBy)
     {
         for ($i = 0; $i < $increaseBy; $i++) {
-            $unit = $this->orderItemUnitFactory->createNew();
+            $unit = $this->orderItemUnitFactory->createForItem($orderItem);
             $orderItem->addUnit($unit);
         }
     }

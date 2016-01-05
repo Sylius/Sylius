@@ -28,7 +28,10 @@ class CartItemType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer', array('attr' => array('min' => 1)))
+            ->add('quantity', 'integer', array(
+                'attr' => array('min' => 1),
+                'data' => 1,
+            ))
         ;
     }
 

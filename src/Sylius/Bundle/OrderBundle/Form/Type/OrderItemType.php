@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Order item type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItemType extends AbstractResourceType
@@ -28,7 +26,8 @@ class OrderItemType extends AbstractResourceType
     {
         $builder
             ->add('quantity', 'integer', array(
-                'label' => 'sylius.form.order_item.quantity'
+                'label' => 'sylius.form.order_item.quantity',
+                'data' => 1,
             ))
             ->add('unitPrice', 'sylius_money', array(
                 'label'   => 'sylius.form.order_item.unit_price'

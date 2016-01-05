@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
@@ -155,7 +156,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(OrderItemUnit::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderItemUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(OrderItemUnitFactory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()
