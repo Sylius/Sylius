@@ -41,7 +41,7 @@ In order for an object class to represent the option type it has to implement th
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_timestampable-interface`
+    This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
     and the :ref:`component_variation_model_option-translation-interface`. |br|
     You will find more information about this interface in `Sylius API OptionInterface`_.
 
@@ -69,6 +69,7 @@ If you need to store a value of an **Option** you will have to create an object 
 
 .. note::
 
+     This interface extends :ref:`component_resource_model_code-aware-interface`. |br|
     You will find more information about that interface in `Sylius API OptionValueInterface`_.
 
 .. _Sylius API OptionValueInterface: http://api.sylius.org/Sylius/Component/Variation/Model/OptionValueInterface.html
