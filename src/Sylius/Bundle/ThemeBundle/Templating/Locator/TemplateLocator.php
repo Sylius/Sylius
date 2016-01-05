@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
@@ -23,8 +22,13 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplateLocator implements FileLocatorInterface
+final class TemplateLocator implements FileLocatorInterface
 {
+    /**
+     * @var FileLocatorInterface
+     */
+    private $templateLocator;
+
     /**
      * @var ThemeContextInterface
      */
@@ -33,37 +37,21 @@ class TemplateLocator implements FileLocatorInterface
     /**
      * @var ResourceLocatorInterface
      */
-    private $bundleResourceLocator;
+    private $resourceLocator;
 
     /**
-     * @var ResourceLocatorInterface
-     */
-    private $applicationResourceLocator;
-
-    /**
-     * @var array
-     */
-    private $cache;
-
-    /**
+     * @param FileLocatorInterface $templateLocator
      * @param ThemeContextInterface $themeContext
-     * @param ResourceLocatorInterface $bundleResourceLocator
-     * @param ResourceLocatorInterface $applicationResourceLocator
-     * @param string $cacheDir The cache path
+     * @param ResourceLocatorInterface $resourceLocator
      */
     public function __construct(
+        FileLocatorInterface $templateLocator,
         ThemeContextInterface $themeContext,
-        ResourceLocatorInterface $bundleResourceLocator,
-        ResourceLocatorInterface $applicationResourceLocator,
-        $cacheDir = null
+        ResourceLocatorInterface $resourceLocator
     ) {
+        $this->templateLocator = $templateLocator;
         $this->themeContext = $themeContext;
-        $this->bundleResourceLocator = $bundleResourceLocator;
-        $this->applicationResourceLocator = $applicationResourceLocator;
-
-        if (null !== $cacheDir && is_file($cache = $cacheDir . '/templates.php')) {
-            $this->cache = require $cache;
-        }
+        $this->resourceLocator = $resourceLocator;
     }
 
     /**
@@ -76,93 +64,14 @@ class TemplateLocator implements FileLocatorInterface
         }
 
         $themes = $this->themeContext->getThemeHierarchy();
-
-        $templatePath = $this->locateTemplateUsingThemes($template, $themes);
-
-        if (null === $templatePath) {
-            throw new \InvalidArgumentException(
-                sprintf('Unable to find template "%s" (using themes: %s).', $template, join(', ', $themes))
-            );
-        }
-
-        return $templatePath;
-    }
-
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface[] $themes
-     *
-     * @return null|string
-     */
-    protected function locateTemplateUsingThemes(TemplateReferenceInterface $template, array $themes)
-    {
-        foreach (array_merge($themes, [null]) as $theme) {
-            $result = $this->getCache($template, $theme);
-            if (null !== $result) {
-                return $result;
+        foreach ($themes as $theme) {
+            try {
+                return $this->resourceLocator->locateResource($template->getPath(), $theme);
+            } catch (ResourceNotFoundException $exception) {
+                // Ignore if resource cannot be found in given theme.
             }
         }
 
-        if (0 === strpos($template->getPath(), '@')) {
-            return $this->locateBundleTemplateUsingThemes($template, $themes);
-        }
-
-        return $this->locateAppTemplateUsingThemes($template, $themes);
-    }
-
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface[] $themes
-     *
-     * @return null|string
-     */
-    protected function locateBundleTemplateUsingThemes(TemplateReferenceInterface $template, array $themes)
-    {
-        $cacheKey = $this->getCacheKey($template, $this->themeContext->getTheme());
-
-        return $this->cache[$cacheKey] = $this->bundleResourceLocator->locateResource($template->getPath(), $themes);
-    }
-
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface[] $themes
-     *
-     * @return null|string
-     */
-    protected function locateAppTemplateUsingThemes(TemplateReferenceInterface $template, array $themes = [])
-    {
-        $cacheKey = $this->getCacheKey($template, $this->themeContext->getTheme());
-
-        return $this->cache[$cacheKey] = $this->applicationResourceLocator->locateResource($template->getPath(), $themes);
-    }
-
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface|null $theme
-     *
-     * @return string
-     */
-    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme = null)
-    {
-        $key = $template->getLogicalName();
-
-        if (null !== $theme) {
-            $key .= '|' . $theme->getSlug();
-        }
-
-        return $key;
-    }
-
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface|null $theme
-     *
-     * @return null
-     */
-    private function getCache(TemplateReferenceInterface $template, ThemeInterface $theme = null)
-    {
-        $key = $this->getCacheKey($template, $theme);
-
-        return isset($this->cache[$key]) ? $this->cache[$key] : null;
+        return $this->templateLocator->locate($template, $currentPath, $first);
     }
 }

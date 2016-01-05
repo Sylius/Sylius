@@ -11,17 +11,19 @@
 
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class BundleResourceLocator implements ResourceLocatorInterface
+final class BundleResourceLocator implements ResourceLocatorInterface
 {
     /**
-     * @var PathCheckerInterface
+     * @var Filesystem
      */
-    private $pathChecker;
+    private $filesystem;
 
     /**
      * @var KernelInterface
@@ -29,70 +31,74 @@ class BundleResourceLocator implements ResourceLocatorInterface
     private $kernel;
 
     /**
-     * @var array
-     */
-    private $parameters;
-
-    /**
-     * @var array
-     */
-    private $paths = [
-        '%theme_path%/%bundle_name%/%override_path%',
-        '%app_path%/Resources/%bundle_name%/%override_path%',
-        '%bundle_path%/Resources/%override_path%',
-    ];
-
-    /**
-     * @param PathCheckerInterface $pathChecker
+     * @param Filesystem $filesystem
      * @param KernelInterface $kernel
-     * @param string $appDir
      */
-    public function __construct(PathCheckerInterface $pathChecker, KernelInterface $kernel, $appDir)
+    public function __construct(Filesystem $filesystem, KernelInterface $kernel)
     {
-        $this->pathChecker = $pathChecker;
+        $this->filesystem = $filesystem;
         $this->kernel = $kernel;
-        $this->parameters = [
-            "%app_path%" => $appDir,
-        ];
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $resourcePath Eg. "@AcmeBundle/Resources/views/template.html.twig"
      */
-    public function locateResource($resourceName, array $themes = [])
+    public function locateResource($resourcePath, ThemeInterface $theme)
     {
-        if (false !== strpos($resourceName, '..')) {
-            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $resourceName));
-        }
+        $this->assertResourcePathIsValid($resourcePath);
 
-        $bundleName = substr($resourceName, 1);
-        $resourcePath = '';
-        if (false !== strpos($bundleName, '/')) {
-            list($bundleName, $resourcePath) = explode('/', $bundleName, 2);
-        }
-        if (0 !== strpos($resourcePath, 'Resources')) {
-            throw new \RuntimeException('Template files have to be in Resources.');
-        }
+        $bundleName = $this->getBundleNameFromResourcePath($resourcePath);
+        $resourceName = $this->getResourceNameFromResourcePath($resourcePath);
 
         $bundles = $this->kernel->getBundle($bundleName, false);
-
-        $parameters = array_merge(
-            $this->parameters,
-            ['%override_path%' => substr($resourcePath, strlen('Resources/'))]
-        );
-
         foreach ($bundles as $bundle) {
-            $parameters = array_merge($parameters, [
-                '%bundle_name%' => $bundle->getName(),
-                '%bundle_path%' => $bundle->getPath(),
-            ]);
+            $path = sprintf('%s/%s/%s', $theme->getPath(), $bundle->getName(), $resourceName);
 
-            $checkedPath = $this->pathChecker->processPaths($this->paths, $parameters, $themes);
-            if (null !== $checkedPath) {
-                return $checkedPath;
+            if ($this->filesystem->exists($path)) {
+                return $path;
             }
         }
 
-        return null;
+        throw new ResourceNotFoundException($resourcePath, $theme);
+    }
+
+    /**
+     * @param string $resourcePath
+     */
+    private function assertResourcePathIsValid($resourcePath)
+    {
+        if ('@' !== substr($resourcePath, 0, 1)) {
+            throw new \InvalidArgumentException(sprintf('Bundle resource path (given "%s") should start with an "@".', $resourcePath));
+        }
+
+        if (false !== strpos($resourcePath, '..')) {
+            throw new \InvalidArgumentException(sprintf('File name "%s" contains invalid characters (..).', $resourcePath));
+        }
+
+        if (false === strpos($resourcePath, 'Resources/')) {
+            throw new \InvalidArgumentException(sprintf('Resource path "%s" should be in bundles\' "Resources/" directory.', $resourcePath));
+        }
+    }
+
+    /**
+     * @param string $resourcePath
+     *
+     * @return string
+     */
+    private function getBundleNameFromResourcePath($resourcePath)
+    {
+        return substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
+    }
+
+    /**
+     * @param string $resourcePath
+     *
+     * @return string
+     */
+    private function getResourceNameFromResourcePath($resourcePath)
+    {
+        return substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));
     }
 }

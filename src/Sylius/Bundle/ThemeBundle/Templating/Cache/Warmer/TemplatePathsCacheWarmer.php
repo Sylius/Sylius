@@ -21,7 +21,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatePathsCacheWarmer extends CacheWarmer
+final class TemplatePathsCacheWarmer extends CacheWarmer
 {
     /**
      * @var TemplateFinderInterface
@@ -34,31 +34,15 @@ class TemplatePathsCacheWarmer extends CacheWarmer
     private $locator;
 
     /**
-     * @var ThemeRepositoryInterface
-     */
-    private $themeRepository;
-
-    /**
-     * @var ThemeContextInterface
-     */
-    private $themeContext;
-
-    /**
      * @param TemplateFinderInterface $finder
      * @param FileLocatorInterface $locator
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeContextInterface $themeContext
      */
     public function __construct(
         TemplateFinderInterface $finder,
-        FileLocatorInterface $locator,
-        ThemeRepositoryInterface $themeRepository,
-        ThemeContextInterface $themeContext
+        FileLocatorInterface $locator
     ) {
         $this->finder = $finder;
         $this->locator = $locator;
-        $this->themeRepository = $themeRepository;
-        $this->themeContext = $themeContext;
     }
 
     /**
@@ -68,18 +52,8 @@ class TemplatePathsCacheWarmer extends CacheWarmer
     {
         $templates = [];
 
-        $themes = $this->themeRepository->findAll();
-
         /** @var TemplateReferenceInterface $template */
         foreach ($this->finder->findAllTemplates() as $template) {
-            foreach ($themes as $theme) {
-                // TODO
-                $this->themeContext->setTheme($theme);
-
-                $path = $this->locator->locate($template);
-                $templates[$template->getLogicalName() . "|" . $theme->getSlug()] = $path;
-            }
-
             $templates[$template->getLogicalName()] = $this->locator->locate($template);
         }
 

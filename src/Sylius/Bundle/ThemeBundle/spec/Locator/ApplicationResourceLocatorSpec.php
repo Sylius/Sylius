@@ -11,22 +11,24 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator;
-use Sylius\Bundle\ThemeBundle\Locator\PathCheckerInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @mixin ApplicationResourceLocator
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ApplicationResourceLocatorSpec extends FixtureAwareObjectBehavior
+class ApplicationResourceLocatorSpec extends ObjectBehavior
 {
-    function let(PathCheckerInterface $pathChecker)
+    function let(Filesystem $filesystem)
     {
-        $this->beConstructedWith($pathChecker, "/app");
+        $this->beConstructedWith($filesystem);
     }
 
     function it_is_initializable()
@@ -39,10 +41,22 @@ class ApplicationResourceLocatorSpec extends FixtureAwareObjectBehavior
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
 
-    function it_locates_resource(PathCheckerInterface $pathChecker)
+    function it_locates_application_resource(Filesystem $filesystem, ThemeInterface $theme)
     {
-        $pathChecker->processPaths(Argument::type('array'), Argument::type('array'), [])->shouldBeCalled()->willReturn("/app/resource");
+        $theme->getPath()->willReturn('/theme/path');
 
-        $this->locateResource("resource", [])->shouldReturn("/app/resource");
+        $filesystem->exists('/theme/path/resource')->willReturn(true);
+
+        $this->locateResource('resource', $theme)->shouldReturn('/theme/path/resource');
+    }
+
+    function it_throws_an_exception_if_resource_can_not_be_located(Filesystem $filesystem, ThemeInterface $theme)
+    {
+        $theme->getSlug()->willReturn('theme/slug');
+        $theme->getPath()->willReturn('/theme/path');
+
+        $filesystem->exists('/theme/path/resource')->willReturn(false);
+
+        $this->shouldThrow(ResourceNotFoundException::class)->during('locateResource', ['resource', $theme]);
     }
 }

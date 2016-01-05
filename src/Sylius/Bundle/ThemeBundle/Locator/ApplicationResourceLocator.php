@@ -11,51 +11,37 @@
 
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Symfony\Component\Filesystem\Filesystem;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ApplicationResourceLocator implements ResourceLocatorInterface
+final class ApplicationResourceLocator implements ResourceLocatorInterface
 {
     /**
-     * @var PathCheckerInterface
+     * @var Filesystem
      */
-    private $pathChecker;
+    private $filesystem;
 
     /**
-     * @var array
+     * @param Filesystem $filesystem
      */
-    private $parameters;
-
-    /**
-     * @var array
-     */
-    private $paths = [
-        '%theme_path%/%override_path%',
-        '%app_path%/Resources/%override_path%',
-    ];
-
-    /**
-     * @param string $appDir
-     * @param PathCheckerInterface $pathChecker
-     */
-    public function __construct(PathCheckerInterface $pathChecker, $appDir)
+    public function __construct(Filesystem $filesystem)
     {
-        $this->pathChecker = $pathChecker;
-        $this->parameters = [
-            "%app_path%" => $appDir,
-        ];
+        $this->filesystem = $filesystem;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function locateResource($resourceName, array $themes = [])
+    public function locateResource($resourceName, ThemeInterface $theme)
     {
-        $parameters = array_merge(
-            $this->parameters,
-            ['%override_path%' => $resourceName]
-        );
+        $path = sprintf('%s/%s', $theme->getPath(), $resourceName);
+        if (!$this->filesystem->exists($path)) {
+            throw new ResourceNotFoundException($resourceName, $theme);
+        }
 
-        return $this->pathChecker->processPaths($this->paths, $parameters, $themes);
+        return $path;
     }
 }

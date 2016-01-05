@@ -11,11 +11,13 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Locator\BundleResourceLocator;
-use Sylius\Bundle\ThemeBundle\Locator\PathCheckerInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -24,11 +26,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class BundleResourceLocatorSpec extends FixtureAwareObjectBehavior
+class BundleResourceLocatorSpec extends ObjectBehavior
 {
-    function let(PathCheckerInterface $pathChecker, KernelInterface $kernel)
+    function let(Filesystem $filesystem, KernelInterface $kernel)
     {
-        $this->beConstructedWith($pathChecker, $kernel, "/app");
+        $this->beConstructedWith($filesystem, $kernel);
     }
 
     function it_is_initializable()
@@ -41,15 +43,59 @@ class BundleResourceLocatorSpec extends FixtureAwareObjectBehavior
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
 
-    function it_locates_resource(PathCheckerInterface $pathChecker, KernelInterface $kernel, BundleInterface $bundle)
+    function it_locates_bundle_resource(
+        Filesystem $filesystem,
+        KernelInterface $kernel,
+        ThemeInterface $theme,
+        BundleInterface $childBundle,
+        BundleInterface $parentBundle
+    ) {
+        $kernel->getBundle('ParentBundle', false)->willReturn([$childBundle, $parentBundle]);
+
+        $childBundle->getName()->willReturn('ChildBundle');
+        $parentBundle->getName()->willReturn('ParentBundle');
+
+        $theme->getPath()->willReturn('/theme/path');
+
+        $filesystem->exists('/theme/path/ChildBundle/views/index.html.twig')->shouldBeCalled()->willReturn(false);
+        $filesystem->exists('/theme/path/ParentBundle/views/index.html.twig')->shouldBeCalled()->willReturn(true);
+
+        $this->locateResource('@ParentBundle/Resources/views/index.html.twig', $theme)->shouldReturn('/theme/path/ParentBundle/views/index.html.twig');
+    }
+
+    function it_throws_an_exception_if_resource_can_not_be_located(
+        Filesystem $filesystem,
+        KernelInterface $kernel,
+        ThemeInterface $theme,
+        BundleInterface $childBundle,
+        BundleInterface $parentBundle
+    ) {
+        $kernel->getBundle('ParentBundle', false)->willReturn([$childBundle, $parentBundle]);
+
+        $childBundle->getName()->willReturn('ChildBundle');
+        $parentBundle->getName()->willReturn('ParentBundle');
+
+        $theme->getSlug()->willReturn('theme/slug');
+        $theme->getPath()->willReturn('/theme/path');
+
+        $filesystem->exists('/theme/path/ChildBundle/views/index.html.twig')->shouldBeCalled()->willReturn(false);
+        $filesystem->exists('/theme/path/ParentBundle/views/index.html.twig')->shouldBeCalled()->willReturn(false);
+
+        $this->shouldThrow(ResourceNotFoundException::class)->during('locateResource', ['@ParentBundle/Resources/views/index.html.twig', $theme]);
+    }
+
+    function it_throws_an_exception_if_resource_path_does_not_start_with_an_asperand(ThemeInterface $theme)
     {
-        $bundle->getName()->willReturn("Bundle");
-        $bundle->getPath()->willReturn("/app/bundle");
+        $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['ParentBundle/Resources/views/index.html.twig', $theme]);
+    }
 
-        $kernel->getBundle("Bundle", false)->willReturn([$bundle]);
+    function it_throws_an_exception_if_resource_path_contains_two_dots_in_a_row(ThemeInterface $theme)
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/Resources/views/../views/index.html.twig', $theme]);
+    }
 
-        $pathChecker->processPaths(Argument::type('array'), Argument::type('array'), [])->shouldBeCalled()->willReturn("/app/bundle/resource");
-
-        $this->locateResource("@Bundle/Resources/resource", [])->shouldReturn("/app/bundle/resource");
+    function it_throws_an_exception_if_resource_path_does_not_contain_resources_dir(ThemeInterface $theme)
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/views/Resources.index.html.twig', $theme]);
     }
 }

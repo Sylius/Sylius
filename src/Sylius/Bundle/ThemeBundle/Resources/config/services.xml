@@ -27,13 +27,13 @@
         <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
         <parameter key="sylius.theme.asset.assets_installer.class">Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller</parameter>
         <parameter key="sylius.theme.asset.path_resolver.class">Sylius\Bundle\ThemeBundle\Asset\PathResolver</parameter>
-        <parameter key="sylius.theme.path_checker.class">Sylius\Bundle\ThemeBundle\Locator\PathChecker</parameter>
+        <parameter key="sylius.theme.locator.resource.class">Sylius\Bundle\ThemeBundle\Locator\ResourceLocator</parameter>
         <parameter key="sylius.theme.locator.application_resource.class">Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator</parameter>
         <parameter key="sylius.theme.locator.bundle_resource.class">Sylius\Bundle\ThemeBundle\Locator\BundleResourceLocator</parameter>
         <parameter key="sylius.theme.translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
+        <parameter key="sylius.theme.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
 
         <!-- Overrided services -->
-        <parameter key="sylius.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
         <parameter key="sylius.templating.cache_warmer.template_paths.class">Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer</parameter>
         <parameter key="sylius.assets.path_package.class">Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage</parameter>
     </parameters>
@@ -82,17 +82,18 @@
 
         <service id="sylius.theme.asset.path_resolver" class="%sylius.theme.asset.path_resolver.class%" public="false" />
 
-        <service id="sylius.theme.path_checker" class="%sylius.theme.path_checker.class%" public="false" />
+        <service id="sylius.theme.locator.resource" class="%sylius.theme.locator.resource.class%" public="false">
+            <argument type="service" id="sylius.theme.locator.application_resource" />
+            <argument type="service" id="sylius.theme.locator.bundle_resource" />
+        </service>
 
         <service id="sylius.theme.locator.application_resource" class="%sylius.theme.locator.application_resource.class%">
-            <argument type="service" id="sylius.theme.path_checker" />
-            <argument>%kernel.root_dir%</argument>
+            <argument type="service" id="filesystem" />
         </service>
 
         <service id="sylius.theme.locator.bundle_resource" class="%sylius.theme.locator.bundle_resource.class%">
-            <argument type="service" id="sylius.theme.path_checker" />
+            <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
-            <argument>%kernel.root_dir%</argument>
         </service>
 
         <service id="sylius.theme.translator" class="%sylius.theme.translator.class%" decorates="translator">
@@ -100,14 +101,14 @@
             <argument type="service" id="sylius.theme.context" />
         </service>
 
-        <!-- Overrided services -->
-        <service id="templating.locator" class="%sylius.templating.locator.class%" public="false">
+        <service id="sylius.theme.templating.locator" class="%sylius.theme.templating.locator.class%" decorates="templating.locator" public="false">
+            <argument type="service" id="sylius.theme.templating.locator.inner" />
             <argument type="service" id="sylius.theme.context" />
-            <argument type="service" id="sylius.theme.locator.bundle_resource" />
-            <argument type="service" id="sylius.theme.locator.application_resource" />
+            <argument type="service" id="sylius.theme.locator.resource" />
             <argument>%kernel.cache_dir%</argument>
         </service>
 
+        <!-- Overrided services -->
         <service id="templating.cache_warmer.template_paths" class="%sylius.templating.cache_warmer.template_paths.class%" public="false">
             <tag name="kernel.cache_warmer" priority="20" />
             <argument type="service" id="templating.finder" />

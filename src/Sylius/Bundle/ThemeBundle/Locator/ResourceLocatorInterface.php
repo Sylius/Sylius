@@ -20,9 +20,11 @@ interface ResourceLocatorInterface
 {
     /**
      * @param string $resourceName
-     * @param ThemeInterface[] $themes
+     * @param ThemeInterface $theme
      *
-     * @return string|null
+     * @return string
+     *
+     * @throw ResourceNotFoundException
      */
-    public function locateResource($resourceName, array $themes = []);
+    public function locateResource($resourceName, ThemeInterface $theme);
 }
