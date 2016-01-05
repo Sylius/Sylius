@@ -41,7 +41,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope": "^1.1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-        "jms/serializer-bundle": "~0.13",
+        "jms/serializer-bundle": "^0.13|^1.0",
         "jms/translation-bundle": "~1.1",
         "knplabs/knp-gaufrette-bundle": "~0.1",
         "knplabs/knp-menu-bundle": "~1.1",
@@ -78,7 +78,7 @@
         "twig/extensions": "~1.0",
         "twig/twig": "~1.11",
         "white-october/pagerfanta-bundle": "~1.0",
-        "willdurand/hateoas-bundle": "~0.4",
+        "willdurand/hateoas-bundle": "^0.4|^1.0",
         "winzou/state-machine-bundle": "~0.2",
         "ocramius/proxy-manager": "^1.0",
         "symfony/proxy-manager-bridge": "^2.7"
