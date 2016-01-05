@@ -63,8 +63,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
         $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
 
-        $attribute->getName()->willReturn('test');
-        $subject->getAttributeByName('test')->shouldBeCalled()->willReturn(null);
+        $attribute->getCode()->willReturn('test');
+        $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn(null);
 
         $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
@@ -87,8 +87,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
         $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
 
-        $attribute->getName()->willReturn('test');
-        $subject->getAttributeByName('test')->shouldBeCalled()->willReturn($attributeValue);
+        $attribute->getCode()->willReturn('test');
+        $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValueFactory->createNew()->shouldNotBeCalled();
         $attributeValue->setAttribute($attribute)->shouldNotBeCalled();
