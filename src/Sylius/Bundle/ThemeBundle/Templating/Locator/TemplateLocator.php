@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
@@ -27,14 +26,14 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 class TemplateLocator implements FileLocatorInterface
 {
     /**
-     * @var ThemeRepositoryInterface
-     */
-    private $themeRepository;
-
-    /**
      * @var ThemeContextInterface
      */
     private $themeContext;
+
+    /**
+     * @var ThemeHierarchyProvider
+     */
+    private $themeHierarchyProvider;
 
     /**
      * @var ResourceLocatorInterface
@@ -52,21 +51,21 @@ class TemplateLocator implements FileLocatorInterface
     private $cache;
 
     /**
-     * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
+     * @param ThemeHierarchyProvider $themeHierarchyProvider
      * @param ResourceLocatorInterface $bundleResourceLocator
      * @param ResourceLocatorInterface $applicationResourceLocator
      * @param string $cacheDir The cache path
      */
     public function __construct(
-        ThemeRepositoryInterface $themeRepository,
         ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ResourceLocatorInterface $bundleResourceLocator,
         ResourceLocatorInterface $applicationResourceLocator,
         $cacheDir = null
     ) {
-        $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
         $this->bundleResourceLocator = $bundleResourceLocator;
         $this->applicationResourceLocator = $applicationResourceLocator;
 
@@ -76,16 +75,7 @@ class TemplateLocator implements FileLocatorInterface
     }
 
     /**
-     * Returns a full path for a given file.
-     *
-     * @param TemplateReferenceInterface $template A template
-     * @param string $currentPath Unused
-     * @param bool $first Unused
-     *
-     * @return string The full path for the file
-     *
-     * @throws \InvalidArgumentException When the template is not an instance of TemplateReferenceInterface
-     * @throws \InvalidArgumentException When the template file can not be found
+     * {@inheritdoc}
      */
     public function locate($template, $currentPath = null, $first = true)
     {
@@ -93,7 +83,7 @@ class TemplateLocator implements FileLocatorInterface
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
 
-        $themes = $this->themeContext->getThemes();
+        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
 
         $templatePath = $this->locateTemplateUsingThemes($template, $themes);
 
@@ -165,7 +155,7 @@ class TemplateLocator implements FileLocatorInterface
         $key = $template->getLogicalName();
 
         if (null !== $theme) {
-            $key .= '|' . $theme->getLogicalName();
+            $key .= '|' . $theme->getSlug();
         }
 
         return $key;

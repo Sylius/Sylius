@@ -12,56 +12,53 @@
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Resource\Repository\InMemoryRepository;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeRepository implements ThemeRepositoryInterface
+final class ThemeRepository extends InMemoryRepository implements ThemeRepositoryInterface
 {
     /**
-     * @var ThemeInterface[]
-     */
-    private $themes = [];
-
-    /**
-     * @param ThemeInterface[] $themes (as objects or as serialized objects)
+     * @param array|ThemeInterface[] $themes Can be an array of serialized themes
      */
     public function __construct(array $themes = [])
     {
+        parent::__construct(ThemeInterface::class);
+
         foreach ($themes as $theme) {
             if (!$theme instanceof ThemeInterface) {
                 $theme = unserialize($theme);
             }
 
-            $this->themes[$theme->getLogicalName()] = $theme;
+            $this->add($theme);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function find($id)
     {
-        return $this->themes;
+        return $this->findOneBySlug($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findByLogicalName($logicalName)
+    public function findOneBySlug($slug)
     {
-        return isset($this->themes[$logicalName]) ? $this->themes[$logicalName] : null;
+        return $this->findOneBy(['slug' => $slug]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findByPath($path)
+    public function findOneByPath($path)
     {
-        $path = realpath($path);
-
-        foreach ($this->themes as $theme) {
-            if (false !== strpos($path, $theme->getPath())) {
+        /** @var ThemeInterface $theme */
+        foreach ($this->findAll() as $theme) {
+            if (0 === strpos($path, $theme->getPath())) {
                 return $theme;
             }
         }

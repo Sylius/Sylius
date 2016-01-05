@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Resolver;
+namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -17,12 +17,12 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeDependenciesResolver implements ThemeDependenciesResolverInterface
+final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
 {
     /**
      * @var ThemeRepositoryInterface
      */
-    protected $themeRepository;
+    private $themeRepository;
 
     /**
      * @param ThemeRepositoryInterface $themeRepository
@@ -35,22 +35,22 @@ class ThemeDependenciesResolver implements ThemeDependenciesResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getDependencies(ThemeInterface $theme)
+    public function getThemeHierarchy(ThemeInterface $theme)
     {
         $parents = [];
-        $parentsNames = $theme->getParentsNames();
-        foreach ($parentsNames as $parentName) {
-            $parent = $this->themeRepository->findByLogicalName($parentName);
+        $parentsSlugs = $theme->getParentsSlugs();
+        foreach ($parentsSlugs as $parentName) {
+            $parent = $this->themeRepository->findOneBySlug($parentName);
 
             if (null === $parent) {
                 throw new \InvalidArgumentException(sprintf(
-                    'Theme "%s" not found (required by theme "%s")!', $parentName, $theme->getLogicalName()
+                    'Theme "%s" not found (required by theme "%s")!', $parentName, $theme->getSlug()
                 ), 0);
             }
 
-            $parents = array_merge($parents, [$parent], $this->getDependencies($parent));
+            $parents = array_merge($parents, $this->getThemeHierarchy($parent));
         }
 
-        return $parents;
+        return array_merge([$theme], $parents);
     }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Collector;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,9 +25,14 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 class ThemeDataCollector implements DataCollectorInterface, \Serializable
 {
     /**
+     * @var ThemeInterface
+     */
+    private $usedTheme;
+
+    /**
      * @var ThemeInterface[]
      */
-    private $usedThemes;
+    private $themeHierarchy;
 
     /**
      * @var ThemeInterface[]
@@ -44,21 +50,36 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     private $themeContext;
 
     /**
+     * @var ThemeHierarchyProviderInterface
+     */
+    private $themeHierarchyProvider;
+
+    /**
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
+     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
      */
-    public function __construct(ThemeRepositoryInterface $themeRepository, ThemeContextInterface $themeContext)
-    {
+    public function __construct(
+        ThemeRepositoryInterface $themeRepository,
+        ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider
+    ) {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
     }
 
     /**
      * @return ThemeInterface[]
      */
-    public function getUsedThemes()
+    public function getUsedTheme()
     {
-        return $this->usedThemes;
+        return $this->usedTheme;
+    }
+
+    public function getThemeHierarchy()
+    {
+        return $this->themeHierarchy;
     }
 
     /**
@@ -74,7 +95,8 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->usedThemes = $this->themeContext->getThemes();
+        $this->usedTheme = $this->themeContext->getTheme();
+        $this->themeHierarchy = $this->themeHierarchyProvider->getThemeHierarchy($this->usedTheme);
         $this->allThemes = $this->themeRepository->findAll();
     }
 
@@ -83,7 +105,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize([$this->usedThemes, $this->allThemes]);
+        return serialize([$this->usedTheme, $this->themeHierarchy, $this->allThemes]);
     }
 
     /**
@@ -91,7 +113,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->usedThemes, $this->allThemes) = unserialize($serialized);
+        list($this->usedTheme, $this->themeHierarchy, $this->allThemes) = unserialize($serialized);
     }
 
     /**

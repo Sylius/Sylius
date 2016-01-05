@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator;
 use Sylius\Bundle\ThemeBundle\Locator\PathCheckerInterface;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 
 /**
@@ -35,7 +36,7 @@ class ApplicationResourceLocatorSpec extends FixtureAwareObjectBehavior
 
     function it_implements_resource_locator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface');
+        $this->shouldImplement(ResourceLocatorInterface::class);
     }
 
     function it_locates_resource(PathCheckerInterface $pathChecker)

@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Resolver;
+namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeDependenciesResolverInterface
+interface ThemeHierarchyProviderInterface
 {
     /**
      * @param ThemeInterface $theme
@@ -25,5 +25,5 @@ interface ThemeDependenciesResolverInterface
      *
      * @throws \InvalidArgumentException If dependencies could not be resolved.
      */
-    public function getDependencies(ThemeInterface $theme);
+    public function getThemeHierarchy(ThemeInterface $theme);
 }

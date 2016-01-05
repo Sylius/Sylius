@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @mixin Theme
@@ -28,38 +30,51 @@ class ThemeSpec extends ObjectBehavior
 
     function it_implements_theme_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Model\ThemeInterface');
+        $this->shouldImplement(ThemeInterface::class);
+    }
+
+    function it_implements_resource_interface()
+    {
+        $this->shouldImplement(ResourceInterface::class);
+    }
+
+    function its_id_is_slug()
+    {
+        $this->getId()->shouldReturn(null);
+
+        $this->setSlug('slug');
+        $this->getId()->shouldReturn('slug');
     }
 
     function it_has_name()
     {
+        $this->getName()->shouldReturn(null);
+
         $this->setName("Foo Bar");
         $this->getName()->shouldReturn("Foo Bar");
     }
 
-    function it_has_logical_name()
+    function it_has_slug()
     {
-        $this->setLogicalName("foo/bar");
-        $this->getLogicalName()->shouldReturn("foo/bar");
-    }
+        $this->getSlug()->shouldReturn(null);
 
-    function it_has_description()
-    {
-        $this->setDescription("Lorem ipsum.");
-        $this->getDescription()->shouldReturn("Lorem ipsum.");
+        $this->setSlug("foo/bar");
+        $this->getSlug()->shouldReturn("foo/bar");
     }
 
     function it_has_path()
     {
+        $this->getPath()->shouldReturn(null);
+
         $this->setPath("/foo/bar");
         $this->getPath()->shouldReturn("/foo/bar");
     }
 
-    function it_has_hash_code()
+    function it_has_description()
     {
-        $logicalName = "hash/this";
-        $this->setLogicalName($logicalName);
+        $this->getDescription()->shouldReturn(null);
 
-        $this->getHashCode()->shouldReturn(md5($logicalName));
+        $this->setDescription("Lorem ipsum.");
+        $this->getDescription()->shouldReturn("Lorem ipsum.");
     }
 }

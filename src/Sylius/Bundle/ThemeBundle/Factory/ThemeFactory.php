@@ -31,6 +31,11 @@ class ThemeFactory implements ThemeFactoryInterface
     private $propertyAccessor;
 
     /**
+     * @var OptionsResolver
+     */
+    private $optionsResolver;
+
+    /**
      * @param string $themeClassName
      * @param PropertyAccessorInterface $propertyAccessor
      */
@@ -43,14 +48,10 @@ class ThemeFactory implements ThemeFactoryInterface
         $this->optionsResolver
             ->setRequired([
                 'name',
-                'logical_name',
+                'slug',
             ])
-            ->setDefined([
-                'description',
-            ])
-            ->setDefaults([
-                'parents' => [],
-            ])
+            ->setDefined('description')
+            ->setDefault('parents', [])
             ->setAllowedTypes('parents', 'array')
         ;
     }
@@ -65,11 +66,8 @@ class ThemeFactory implements ThemeFactoryInterface
 
         $themeData = $this->optionsResolver->resolve($themeData);
 
-        foreach ($themeData as $attributeKey => $attributeValue)
-        {
-            $attributeKey = $this->normalizeAttributeKey($attributeKey);
-
-            $this->propertyAccessor->setValue($theme, $attributeKey, $attributeValue);
+        foreach ($themeData as $attributeKey => $attributeValue) {
+            $this->propertyAccessor->setValue($theme, $this->normalizeAttributeKey($attributeKey), $attributeValue);
         }
 
         return $theme;
@@ -80,10 +78,10 @@ class ThemeFactory implements ThemeFactoryInterface
      *
      * @return string
      */
-    protected function normalizeAttributeKey($attributeKey)
+    private function normalizeAttributeKey($attributeKey)
     {
         if ('parents' === $attributeKey) {
-            $attributeKey = 'parentsNames';
+            $attributeKey = 'parentsSlugs';
         }
 
         return $attributeKey;

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Asset;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Asset\PathResolver;
+use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
@@ -29,12 +30,12 @@ class PathResolverSpec extends ObjectBehavior
 
     function it_implements_path_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface');
+        $this->shouldImplement(PathResolverInterface::class);
     }
 
     function it_returns_modified_path_if_its_referencing_bundle_asset(ThemeInterface $theme)
     {
-        $theme->getLogicalName()->shouldBeCalled()->willReturn("sylius/test-theme");
+        $theme->getSlug()->shouldBeCalled()->willReturn("sylius/test-theme");
 
         $this->resolve('bundles/asset.min.js', $theme)->shouldReturn('bundles/_theme/sylius/test-theme/asset.min.js');
     }

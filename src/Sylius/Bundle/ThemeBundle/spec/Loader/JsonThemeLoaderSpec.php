@@ -15,6 +15,7 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\JsonThemeLoader;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 /**
  * @mixin JsonThemeLoader
@@ -35,14 +36,14 @@ class JsonThemeLoaderSpec extends FixtureAwareObjectBehavior
 
     function it_implements_loader_interface()
     {
-        $this->shouldImplement('Symfony\Component\Config\Loader\LoaderInterface');
+        $this->shouldImplement(LoaderInterface::class);
     }
 
     function it_loads_valid_theme_file(ThemeFactoryInterface $themeFactory, ThemeInterface $theme)
     {
         $themeFactory->createFromArray([
             "name" => "Sample Theme",
-            "logical_name" => "sylius/sample-theme",
+            "slug" => "sylius/sample-theme",
             "description" => "Lorem ipsum dolor sit amet.",
         ])->shouldBeCalled()->willReturn($theme);
 

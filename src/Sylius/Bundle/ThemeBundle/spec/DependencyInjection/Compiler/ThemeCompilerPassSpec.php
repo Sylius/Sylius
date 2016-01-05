@@ -17,6 +17,7 @@ use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -34,7 +35,7 @@ class ThemeCompilerPassSpec extends ObjectBehavior
 
     function it_implements_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_adds_themes_to_theme_repository(

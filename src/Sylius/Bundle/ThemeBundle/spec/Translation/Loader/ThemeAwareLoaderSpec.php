@@ -14,35 +14,36 @@ namespace spec\Sylius\Bundle\ThemeBundle\Translation\Loader;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Loader\Loader;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\MessageCatalogueInterface;
 
 /**
- * @mixin Loader
+ * @mixin ThemeAwareLoader
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LoaderSpec extends FixtureAwareObjectBehavior
+class ThemeAwareLoaderSpec extends FixtureAwareObjectBehavior
 {
-    function let(LoaderInterface $loader, Collection $resourcesToThemes, ThemeInterface $theme)
+    function let(LoaderInterface $loader, ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)
     {
-        $theme->getLogicalName()->willReturn("sylius/sample-theme");
+        $theme->getSlug()->willReturn("sylius/sample-theme");
 
-        $resourcesToThemes->get(realpath($this->getThemeTranslationResourcePath()))->willReturn($theme);
-        $resourcesToThemes->get(realpath($this->getVanillaTranslationResourcePath()))->willReturn(null);
+        $themeRepository->findOneByPath(realpath($this->getThemeTranslationResourcePath()))->willReturn($theme);
+        $themeRepository->findOneByPath(realpath($this->getVanillaTranslationResourcePath()))->willReturn(null);
 
-        $this->beConstructedWith($loader, $resourcesToThemes);
+        $this->beConstructedWith($loader, $themeRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Loader\Loader');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader');
     }
 
     function it_implements_translation_loader_interface()
     {
-        $this->shouldImplement('Symfony\Component\Translation\Loader\LoaderInterface');
+        $this->shouldImplement(LoaderInterface::class);
     }
 
     function it_does_not_change_anything_if_given_file_is_not_included_in_any_theme(
@@ -54,7 +55,7 @@ class LoaderSpec extends FixtureAwareObjectBehavior
         $this->load($this->getVanillaTranslationResourcePath(), 'en', 'messages')->shouldReturn($messageCatalogue);
     }
 
-    function it_adds_theme_logical_name_to_keys_if_given_file_is_included_in_theme(
+    function it_adds_theme_slug_to_keys_if_given_file_is_included_in_theme(
         LoaderInterface $loader,
         MessageCatalogueInterface $messageCatalogue
     ) {

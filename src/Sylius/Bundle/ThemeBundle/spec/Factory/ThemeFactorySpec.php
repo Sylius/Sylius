@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -37,19 +38,19 @@ class ThemeFactorySpec extends ObjectBehavior
 
     function it_implements_theme_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface');
+        $this->shouldImplement(ThemeFactoryInterface::class);
     }
 
     function it_creates_theme_from_valid_array($themeClassName, PropertyAccessorInterface $propertyAccessor)
     {
         $data = [
             'name' => 'Foo bar',
-            'logical_name' => 'foo/bar',
+            'slug' => 'foo/bar',
         ];
 
         $propertyAccessor->setValue(Argument::any(), 'name', 'Foo bar')->shouldBeCalled();
-        $propertyAccessor->setValue(Argument::any(), 'logical_name', 'foo/bar')->shouldBeCalled();
-        $propertyAccessor->setValue(Argument::any(), 'parentsNames', [])->shouldBeCalled();
+        $propertyAccessor->setValue(Argument::any(), 'slug', 'foo/bar')->shouldBeCalled();
+        $propertyAccessor->setValue(Argument::any(), 'parentsSlugs', [])->shouldBeCalled();
 
         $this->createFromArray($data)->shouldHaveType($themeClassName);
     }

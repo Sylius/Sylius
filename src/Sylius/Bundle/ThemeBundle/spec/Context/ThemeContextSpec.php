@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\ThemeBundle\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContext;
+use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
 
 /**
  * @mixin ThemeContext
@@ -24,11 +24,6 @@ use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
  */
 class ThemeContextSpec extends ObjectBehavior
 {
-    function let(ThemeDependenciesResolverInterface $themeDependenciesResolver)
-    {
-        $this->beConstructedWith($themeDependenciesResolver);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Context\ThemeContext');
@@ -36,48 +31,14 @@ class ThemeContextSpec extends ObjectBehavior
 
     function it_implements_theme_context_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface');
+        $this->shouldImplement(ThemeContextInterface::class);
     }
 
-    function it_has_themes(ThemeDependenciesResolverInterface $themeDependenciesResolver, ThemeInterface $theme)
+    function it_has_theme(ThemeInterface $theme)
     {
-        $theme->getLogicalName()->willReturn("foo/bar1");
-
-        $themeDependenciesResolver->getDependencies($theme)->shouldBeCalled()->willReturn([]);
-
         $this->getTheme()->shouldReturn(null);
-        $this->getThemes()->shouldHaveCount(0);
 
         $this->setTheme($theme);
-
         $this->getTheme()->shouldReturn($theme);
-        $this->getThemes()->shouldHaveCount(1);
-
-        $this->clear();
-
-        $this->getTheme()->shouldReturn(null);
-        $this->getThemes()->shouldHaveCount(0);
-    }
-
-    function it_adds_theme_parents_to_context_while_setting_theme(
-        ThemeDependenciesResolverInterface $themeDependenciesResolver,
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme
-    ) {
-        $firstTheme->getLogicalName()->willReturn("foo/bar1");
-        $firstTheme->getParentsNames()->willReturn(["foo/bar2"]);
-
-        $secondTheme->getLogicalName()->willReturn("foo/bar2");
-        $secondTheme->getParentsNames()->willReturn([]);
-
-        $themeDependenciesResolver->getDependencies($firstTheme)->shouldBeCalled()->willReturn([$secondTheme]);
-
-        $this->setTheme($firstTheme);
-
-        $this->getThemes()->shouldHaveCount(2);
-        $this->getThemes()->shouldReturn([
-            $firstTheme,
-            $secondTheme,
-        ]);
     }
 }

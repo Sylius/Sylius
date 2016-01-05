@@ -12,10 +12,12 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator;
+use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -26,12 +28,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class TemplateLocatorSpec extends FixtureAwareObjectBehavior
 {
     function let(
-        ThemeRepositoryInterface $themeRepository,
         ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ResourceLocatorInterface $bundleResourceLocator,
         ResourceLocatorInterface $applicationResourceLocator
     ) {
-        $this->beConstructedWith($themeRepository, $themeContext, $bundleResourceLocator, $applicationResourceLocator);
+        $this->beConstructedWith($themeContext, $themeHierarchyProvider, $bundleResourceLocator, $applicationResourceLocator);
     }
 
     function it_is_initializable()
@@ -41,7 +43,7 @@ class TemplateLocatorSpec extends FixtureAwareObjectBehavior
 
     function it_implements_file_locator_interface()
     {
-        $this->shouldImplement('Symfony\Component\Config\FileLocatorInterface');
+        $this->shouldImplement(FileLocatorInterface::class);
     }
 
     /**

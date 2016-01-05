@@ -51,6 +51,6 @@ class RequestListener
             return;
         }
 
-        $this->themeContext->setTheme($this->themeRepository->findByLogicalName('sylius/first-test-theme'));
+        $this->themeContext->setTheme($this->themeRepository->findOneBySlug('sylius/first-test-theme'));
     }
 }

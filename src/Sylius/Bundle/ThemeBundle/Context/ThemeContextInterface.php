@@ -24,19 +24,7 @@ interface ThemeContextInterface
     public function setTheme(ThemeInterface $theme);
 
     /**
-     * @return ThemeInterface
+     * @return ThemeInterface|null
      */
     public function getTheme();
-
-    /**
-     * Returns themes sorted by priority descending.
-     *
-     * @return ThemeInterface[]
-     */
-    public function getThemes();
-
-    /**
-     * Removes all themes found in context.
-     */
-    public function clear();
 }

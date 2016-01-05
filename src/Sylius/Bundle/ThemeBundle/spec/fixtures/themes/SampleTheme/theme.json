@@ -1,5 +1,5 @@
 {
   "name": "Sample Theme",
-  "logical_name": "sylius/sample-theme",
+  "slug": "sylius/sample-theme",
   "description": "Lorem ipsum dolor sit amet."
 }

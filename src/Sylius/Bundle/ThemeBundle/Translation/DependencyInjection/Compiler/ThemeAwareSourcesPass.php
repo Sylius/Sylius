@@ -12,21 +12,34 @@
 namespace Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
 use SplFileInfo;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader;
 use Symfony\Component\Config\Resource\DirectoryResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Finder\Finder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeTranslationCompilerPass implements CompilerPassInterface
+final class ThemeAwareSourcesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
+    {
+        $this->addThemeAwareTranslationSources($container);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function addThemeAwareTranslationSources(ContainerBuilder $container)
     {
         $dirs = $this->findTranslationsDirs($container);
 
@@ -47,8 +60,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
             ->filter(function (SplFileInfo $file) {
                 return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
             })
-            ->in($dirs)
-        ;
+            ->in($dirs);
 
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
@@ -57,7 +69,7 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
                 $files[$locale] = [];
             }
 
-            $files[$locale][] = (string) $file;
+            $files[$locale][] = (string)$file;
         }
 
         $options = array_merge_recursive(
@@ -75,9 +87,8 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
      */
     private function findTranslationsDirs(ContainerBuilder $container)
     {
-        /** @var ThemeRepositoryInterface $themeRepository */
-        $themeRepository = $container->get('sylius.theme.repository');
-        $themes = $themeRepository->findAll();
+        /** @var ThemeInterface[] $themes */
+        $themes = $container->get('sylius.theme.repository')->findAll();
 
         $dirs = [];
         foreach ($themes as $theme) {

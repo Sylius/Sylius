@@ -11,11 +11,18 @@
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeInterface
+interface ThemeInterface extends ResourceInterface
 {
+    /**
+     * @return string
+     */
+    public function getName();
+    
     /**
      * @param string $name
      */
@@ -24,27 +31,17 @@ interface ThemeInterface
     /**
      * @return string
      */
-    public function getName();
-
+    public function getSlug();
+    
     /**
-     * @param string $logicalName
+     * @param string $slug
      */
-    public function setLogicalName($logicalName);
-
-    /**
-     * @return string
-     */
-    public function getLogicalName();
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description);
+    public function setSlug($slug);
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getPath();
 
     /**
      * @param string $path
@@ -54,20 +51,20 @@ interface ThemeInterface
     /**
      * @return string
      */
-    public function getPath();
+    public function getDescription();
 
     /**
-     * @param string[] $parentsNames
+     * @param string $description
      */
-    public function setParentsNames(array $parentsNames);
+    public function setDescription($description);
 
     /**
-     * @return string[]
+     * @return array
      */
-    public function getParentsNames();
+    public function getParentsSlugs();
 
     /**
-     * @return string
+     * @param array $parentsSlugs
      */
-    public function getHashCode();
+    public function setParentsSlugs(array $parentsSlugs);
 }

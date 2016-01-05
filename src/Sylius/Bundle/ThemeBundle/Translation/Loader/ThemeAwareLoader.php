@@ -13,31 +13,32 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Loader;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class Loader implements LoaderInterface
+final class ThemeAwareLoader implements LoaderInterface
 {
     /**
      * @var LoaderInterface
      */
-    protected $loader;
+    private $loader;
 
     /**
-     * @var Collection|ThemeInterface[]|null[]
+     * @var ThemeRepositoryInterface
      */
-    protected $resourcesToThemes;
+    private $themeRepository;
 
     /**
      * @param LoaderInterface $loader
-     * @param Collection $resourcesToThemes
+     * @param ThemeRepositoryInterface $themeRepository
      */
-    public function __construct(LoaderInterface $loader, Collection $resourcesToThemes)
+    public function __construct(LoaderInterface $loader, ThemeRepositoryInterface $themeRepository)
     {
         $this->loader = $loader;
-        $this->resourcesToThemes = $resourcesToThemes;
+        $this->themeRepository = $themeRepository;
     }
 
     /**
@@ -47,12 +48,13 @@ class Loader implements LoaderInterface
     {
         $messageCatalogue = $this->loader->load($resource, $locale, $domain);
 
-        if (null !== $theme = $this->resourcesToThemes->get(realpath($resource))) {
+        $theme = $this->themeRepository->findOneByPath($resource);
+        if (null !== $theme) {
             $messages = $messageCatalogue->all($domain);
 
             foreach ($messages as $key => $value) {
                 unset($messages[$key]);
-                $messages[$key . '|' . $theme->getLogicalName()] = $value;
+                $messages[$key . '|' . $theme->getSlug()] = $value;
             }
 
             $messageCatalogue->replace($messages, $domain);

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Resolver\ThemeDependenciesResolverInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -43,9 +43,9 @@ class AssetsInstaller implements AssetsInstallerInterface
     protected $themeRepository;
 
     /**
-     * @var ThemeDependenciesResolverInterface
+     * @var ThemeHierarchyProviderInterface
      */
-    protected $themeDependenciesResolver;
+    protected $themeHierarchyProvider;
 
     /**
      * @var PathResolverInterface
@@ -56,20 +56,20 @@ class AssetsInstaller implements AssetsInstallerInterface
      * @param Filesystem $filesystem
      * @param KernelInterface $kernel
      * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeDependenciesResolverInterface $themeDependenciesResolver
+     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
      * @param PathResolverInterface $pathResolver
      */
     public function __construct(
         Filesystem $filesystem,
         KernelInterface $kernel,
         ThemeRepositoryInterface $themeRepository,
-        ThemeDependenciesResolverInterface $themeDependenciesResolver,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         PathResolverInterface $pathResolver
     ) {
         $this->filesystem = $filesystem;
         $this->kernel = $kernel;
         $this->themeRepository = $themeRepository;
-        $this->themeDependenciesResolver = $themeDependenciesResolver;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
         $this->pathResolver = $pathResolver;
     }
 
@@ -110,7 +110,7 @@ class AssetsInstaller implements AssetsInstallerInterface
         foreach ($this->themeRepository->findAll() as $theme) {
             $themes = array_merge(
                 [$theme],
-                $this->themeDependenciesResolver->getDependencies($theme)
+                $this->themeHierarchyProvider->getThemeHierarchy($theme)
             );
 
             foreach ($this->findAssetsPaths($bundle, $themes) as $originDir) {
@@ -251,8 +251,8 @@ class AssetsInstaller implements AssetsInstallerInterface
     }
 
     /**
-     * @param $origin
-     * @param $target
+     * @param string $origin
+     * @param string $target
      */
     private function doSymlinkAsset($origin, $target)
     {
@@ -264,8 +264,8 @@ class AssetsInstaller implements AssetsInstallerInterface
     }
 
     /**
-     * @param $origin
-     * @param $target
+     * @param string $origin
+     * @param string $target
      */
     private function doCopyAsset($origin, $target)
     {

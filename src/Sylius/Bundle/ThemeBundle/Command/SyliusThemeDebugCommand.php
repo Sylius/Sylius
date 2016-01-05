@@ -49,10 +49,10 @@ class SyliusThemeDebugCommand extends ContainerAwareCommand
         $output->writeln("<question>Succesfully loaded themes:</question>");
 
         $table = new Table($output);
-        $table->setHeaders(['Name', 'Logical name', 'Path']);
+        $table->setHeaders(['Name', 'Slug', 'Path']);
 
         foreach ($themes as $theme) {
-            $table->addRow([$theme->getName(), $theme->getLogicalName(), $theme->getPath()]);
+            $table->addRow([$theme->getName(), $theme->getSlug(), $theme->getPath()]);
         }
 
         $table->setStyle("borderless");

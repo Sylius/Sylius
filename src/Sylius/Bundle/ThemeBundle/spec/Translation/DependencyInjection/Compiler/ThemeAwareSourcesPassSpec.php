@@ -15,25 +15,26 @@ use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeTranslationCompilerPass;
+use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * @mixin ThemeTranslationCompilerPass
+ * @mixin ThemeAwareSourcesPass
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeTranslationCompilerPassSpec extends FixtureAwareObjectBehavior
+class ThemeAwareSourcesPassSpec extends FixtureAwareObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeTranslationCompilerPass');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass');
     }
 
     function it_implements_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_does_nothing_if_there_is_no_theme(ContainerBuilder $containerBuilder, ThemeRepositoryInterface $themeRepository)

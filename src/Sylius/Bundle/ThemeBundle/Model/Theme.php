@@ -19,39 +19,34 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $logicalName;
+    protected $slug;
 
     /**
      * @var string
      */
-    private $description;
+    protected $path;
 
     /**
      * @var string
      */
-    private $path;
+    protected $description;
 
     /**
-     * @var string[]
+     * @var array
      */
-    private $parentsNames = [];
-
-    public function __toString()
-    {
-        return $this->getLogicalName();
-    }
+    protected $parentsSlugs;
 
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function getId()
     {
-        $this->name = $name;
+        return $this->getSlug();
     }
 
     /**
@@ -65,41 +60,25 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setLogicalName($logicalName)
+    public function setName($name)
     {
-        $this->logicalName = $logicalName;
+        $this->name = $name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLogicalName()
+    public function getSlug()
     {
-        return $this->logicalName;
+        return $this->slug;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setSlug($slug)
     {
-        $this->description = $description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
+        $this->slug = $slug;
     }
 
     /**
@@ -113,24 +92,40 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setParentsNames(array $parentsNames)
+    public function setPath($path)
     {
-        $this->parentsNames = $parentsNames;
+        $this->path = $path;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParentsNames()
+    public function getDescription()
     {
-        return $this->parentsNames;
+        return $this->description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHashCode()
+    public function setDescription($description)
     {
-        return md5($this->logicalName);
+        $this->description = $description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParentsSlugs()
+    {
+        return $this->parentsSlugs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setParentsSlugs(array $parentsSlugs)
+    {
+        $this->parentsSlugs = $parentsSlugs;
     }
 }

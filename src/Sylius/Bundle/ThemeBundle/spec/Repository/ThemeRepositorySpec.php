@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Repository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepository;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * @mixin ThemeRepository
@@ -29,34 +30,34 @@ class ThemeRepositorySpec extends ObjectBehavior
 
     function it_implements_theme_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface');
+        $this->shouldImplement(ThemeRepositoryInterface::class);
     }
     
     function it_returns_themes(ThemeInterface $theme)
     {
-        $theme->getLogicalName()->shouldBeCalled()->willReturn("foo/bar");
+        $theme->getSlug()->willReturn("foo/bar");
 
         $this->beConstructedWith([$theme]);
         
-        $this->findAll()->shouldReturn(["foo/bar" => $theme]);
+        $this->findAll()->shouldReturn([$theme]);
     }
 
-    function it_returns_theme_by_its_logical_name(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
+    function it_returns_theme_by_its_slug(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
+        $firstTheme->getSlug()->willReturn("foo/bar1");
+        $secondTheme->getSlug()->willReturn("foo/bar2");
+
         $this->beConstructedWith([$firstTheme, $secondTheme]);
 
-        $firstTheme->getLogicalName()->willReturn("foo/bar1");
-        $secondTheme->getLogicalName()->willReturn("foo/bar2");
-
-        $this->findByLogicalName("foo/bar2")->shouldReturn($secondTheme);
+        $this->findOneBySlug("foo/bar2")->shouldReturn($secondTheme);
     }
 
-    function it_returns_null_if_theme_with_given_logical_name_is_not_found(ThemeInterface $theme)
+    function it_returns_null_if_theme_with_given_slug_is_not_found(ThemeInterface $theme)
     {
+        $theme->getSlug()->willReturn("foo/bar");
+
         $this->beConstructedWith([$theme]);
 
-        $theme->getLogicalName()->willReturn("foo/bar");
-
-        $this->findByLogicalName("blah/blah")->shouldReturn(null);
+        $this->findOneBySlug("blah/blah")->shouldReturn(null);
     }
 }

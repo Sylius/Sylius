@@ -16,6 +16,7 @@ use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
+use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
@@ -42,7 +43,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
 
     function it_implements_package_interface_interface()
     {
-        $this->shouldImplement('Symfony\Component\Asset\PackageInterface');
+        $this->shouldImplement(PackageInterface::class);
     }
 
     function it_returns_vanilla_url_if_there_are_no_active_themes(ThemeContextInterface $themeContext, VersionStrategyInterface $versionStrategy)

@@ -5,16 +5,16 @@
         <div class="sf-toolbar-icon">
             <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
                 {# fake image span #}<span style="width: 0; height: 28px; vertical-align: middle;"></span>
-                <span class="sf-toolbar-status">{{ collector.usedThemes|length }}</span> themes
+                <span class="sf-toolbar-status">{{ collector.themeHierarchy|length }}</span> themes
             </a>
         </div>
         <div class="sf-toolbar-info">
             <div class="sf-toolbar-info-piece">
                 <b>Sorted by priority</b>
                 <ul>
-                    {% for theme in collector.usedThemes %}
+                    {% for theme in collector.themeHierarchy %}
                         <li>
-                            {{ theme.name }} <small>({{ theme.logicalName }})</small>
+                            {{ theme.name }} <small>({{ theme.slug }})</small>
                         </li>
                     {% endfor %}
                 </ul>
@@ -28,14 +28,14 @@
         <span class="icon"></span>
         <strong>Themes</strong>
         <span class="count">
-            <span>{{ collector.usedThemes|length }}</span>
+            <span>{{ collector.themeHierarchy|length }}</span>
         </span>
     </span>
 {% endblock %}
 
 {% block panel %}
-    <h2>Used themes ({{ collector.usedThemes|length }})</h2>
-    {% set themes = collector.usedThemes %}
+    <h2>Theme hierarchy({{ collector.themeHierarchy|length }})</h2>
+    {% set themes = collector.themeHierarchy %}
     {{ block('table') }}
 
     <h2>All themes ({{ collector.allThemes|length }})</h2>
@@ -47,14 +47,14 @@
     <table>
         <tr>
             <th>Name</th>
-            <th>Logical name</th>
+            <th>Slug</th>
             <th>Path</th>
             <th>Description</th>
         </tr>
         {% for theme in themes %}
             <tr>
                 <td>{{ theme.name }}</td>
-                <td>{{ theme.logicalName }}</td>
+                <td>{{ theme.slug }}</td>
                 <td>{{ theme.path }}</td>
                 <td>{{ theme.description }}</td>
             </tr>
