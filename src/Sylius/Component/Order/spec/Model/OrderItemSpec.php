@@ -492,20 +492,4 @@ class OrderItemSpec extends ObjectBehavior
         $this->setImmutable(true);
         $this->isImmutable()->shouldReturn(true);
     }
-
-    function it_adds_and_removes_units(OrderItemUnitInterface $unit1, OrderItemUnitInterface $unit2)
-    {
-        $this->getUnits()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
-
-        $this->addUnit($unit1);
-        $this->addUnit($unit2);
-
-        $this->shouldHaveUnit($unit1);
-        $this->shouldHaveUnit($unit2);
-
-        $this->removeUnit($unit1);
-
-        $this->shouldNotHaveUnit($unit1);
-        $this->shouldHaveUnit($unit2);
-    }
 }

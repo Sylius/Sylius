@@ -40,6 +40,9 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     protected $adjustmentsTotal = 0;
 
+    /**
+     * @param OrderItemInterface $orderItem
+     */
     public function __construct(OrderItemInterface $orderItem)
     {
         $this->adjustments = new ArrayCollection();
@@ -168,20 +171,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->orderItem->recalculateUnitsTotal();
     }
 
-    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
-    {
-        if (!$adjustment->isNeutral()) {
-            $this->adjustmentsTotal += $adjustment->getAmount();
-        }
-    }
-
-    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
-    {
-        if (!$adjustment->isNeutral()) {
-            $this->adjustmentsTotal -= $adjustment->getAmount();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -193,6 +182,26 @@ class OrderItemUnit implements OrderItemUnitInterface
             if (!$adjustment->isNeutral()) {
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
+        }
+    }
+
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+        }
+    }
+
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal -= $adjustment->getAmount();
         }
     }
 }
