@@ -137,6 +137,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
             return new \DateTime($dateTimeValue);
         }
 
+        if (AttributeValueInterface::STORAGE_BOOLEAN === $storageType) {
+            return ('1' === $value) ? true : false;
+        }
+
         return $value;
     }
 }
