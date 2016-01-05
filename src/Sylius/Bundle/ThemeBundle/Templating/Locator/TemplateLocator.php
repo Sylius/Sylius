@@ -31,11 +31,6 @@ class TemplateLocator implements FileLocatorInterface
     private $themeContext;
 
     /**
-     * @var ThemeHierarchyProvider
-     */
-    private $themeHierarchyProvider;
-
-    /**
      * @var ResourceLocatorInterface
      */
     private $bundleResourceLocator;
@@ -52,20 +47,17 @@ class TemplateLocator implements FileLocatorInterface
 
     /**
      * @param ThemeContextInterface $themeContext
-     * @param ThemeHierarchyProvider $themeHierarchyProvider
      * @param ResourceLocatorInterface $bundleResourceLocator
      * @param ResourceLocatorInterface $applicationResourceLocator
      * @param string $cacheDir The cache path
      */
     public function __construct(
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ResourceLocatorInterface $bundleResourceLocator,
         ResourceLocatorInterface $applicationResourceLocator,
         $cacheDir = null
     ) {
         $this->themeContext = $themeContext;
-        $this->themeHierarchyProvider = $themeHierarchyProvider;
         $this->bundleResourceLocator = $bundleResourceLocator;
         $this->applicationResourceLocator = $applicationResourceLocator;
 
@@ -83,7 +75,7 @@ class TemplateLocator implements FileLocatorInterface
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
 
-        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $themes = $this->themeContext->getThemeHierarchy();
 
         $templatePath = $this->locateTemplateUsingThemes($template, $themes);
 

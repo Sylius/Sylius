@@ -5,7 +5,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Translation;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Translator;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
@@ -22,12 +21,11 @@ class TranslatorSpec extends ObjectBehavior
 {
     function let(
         TranslatorInterface $translator,
-        ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider
+        ThemeContextInterface $themeContext
     ) {
         $translator->implement(TranslatorBagInterface::class);
 
-        $this->beConstructedWith($translator, $themeContext, $themeHierarchyProvider);
+        $this->beConstructedWith($translator, $themeContext);
     }
 
     function it_is_initializable()
@@ -67,12 +65,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_translates_id_using_theme_translations(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->trans('id|theme/slug', Argument::cetera())->willReturn('Theme translation');
         $translator->trans('id', Argument::cetera())->shouldNotBeCalled();
@@ -83,12 +79,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_translates_id_using_default_translations(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->trans('id|theme/slug', Argument::cetera())->willReturn('id|theme/slug');
         $translator->trans('id', Argument::cetera())->willReturn('Default translation');
@@ -99,12 +93,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_returns_id_if_there_is_no_given_translation(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->trans('id|theme/slug', Argument::cetera())->willReturn('id|theme/slug');
         $translator->trans('id', Argument::cetera())->willReturn('id');
@@ -115,12 +107,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_choice_translates_id_using_theme_translations(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('Theme translation');
         $translator->transChoice('id', 42, Argument::cetera())->shouldNotBeCalled();
@@ -131,12 +121,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_choice_translates_id_using_default_translations(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('id|theme/slug');
         $translator->transChoice('id', 42, Argument::cetera())->willReturn('Default translation');
@@ -147,12 +135,10 @@ class TranslatorSpec extends ObjectBehavior
     function it_returns_id_if_there_is_no_given_choice_translation(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
     ) {
         $theme->getSlug()->willReturn('theme/slug');
-        $themeContext->getTheme()->willReturn($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+        $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
         $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('id|theme/slug');
         $translator->transChoice('id', 42, Argument::cetera())->willReturn('id');

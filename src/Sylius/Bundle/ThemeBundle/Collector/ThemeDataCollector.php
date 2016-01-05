@@ -50,23 +50,15 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     private $themeContext;
 
     /**
-     * @var ThemeHierarchyProviderInterface
-     */
-    private $themeHierarchyProvider;
-
-    /**
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
-     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
      */
     public function __construct(
         ThemeRepositoryInterface $themeRepository,
-        ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider
+        ThemeContextInterface $themeContext
     ) {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
-        $this->themeHierarchyProvider = $themeHierarchyProvider;
     }
 
     /**
@@ -96,7 +88,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->usedTheme = $this->themeContext->getTheme();
-        $this->themeHierarchy = $this->themeHierarchyProvider->getThemeHierarchy($this->usedTheme);
+        $this->themeHierarchy = $this->themeContext->getThemeHierarchy();
         $this->allThemes = $this->themeRepository->findAll();
     }
 

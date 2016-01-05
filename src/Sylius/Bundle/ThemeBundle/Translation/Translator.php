@@ -33,17 +33,11 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
     private $themeContext;
 
     /**
-     * @var ThemeHierarchyProviderInterface
-     */
-    private $themeHierarchyProvider;
-
-    /**
      * {@inheritdoc}
      */
     public function __construct(
         TranslatorInterface $translator,
-        ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider
+        ThemeContextInterface $themeContext
     ) {
         if (!$translator instanceof TranslatorBagInterface) {
             throw new \InvalidArgumentException(sprintf(
@@ -54,7 +48,6 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
 
         $this->translator = $translator;
         $this->themeContext = $themeContext;
-        $this->themeHierarchyProvider = $themeHierarchyProvider;
     }
 
     /**
@@ -145,7 +138,7 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
      */
     private function getPossibleIds($id)
     {
-        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $themes = $this->themeContext->getThemeHierarchy();
 
         foreach ($themes as $theme) {
             yield $id . "|" . $theme->getSlug();

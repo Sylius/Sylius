@@ -29,11 +29,10 @@ class TemplateLocatorSpec extends FixtureAwareObjectBehavior
 {
     function let(
         ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ResourceLocatorInterface $bundleResourceLocator,
         ResourceLocatorInterface $applicationResourceLocator
     ) {
-        $this->beConstructedWith($themeContext, $themeHierarchyProvider, $bundleResourceLocator, $applicationResourceLocator);
+        $this->beConstructedWith($themeContext, $bundleResourceLocator, $applicationResourceLocator);
     }
 
     function it_is_initializable()

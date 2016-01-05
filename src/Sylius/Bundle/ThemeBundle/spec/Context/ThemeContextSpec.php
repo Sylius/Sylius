@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
@@ -24,6 +25,11 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  */
 class ThemeContextSpec extends ObjectBehavior
 {
+    function let(ThemeHierarchyProviderInterface $themeHierarchyProvider)
+    {
+        $this->beConstructedWith($themeHierarchyProvider);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Context\ThemeContext');
@@ -40,5 +46,23 @@ class ThemeContextSpec extends ObjectBehavior
 
         $this->setTheme($theme);
         $this->getTheme()->shouldReturn($theme);
+    }
+
+    function it_proxies_getting_theme_hierarchy_if_there_is_current_theme(
+        ThemeHierarchyProviderInterface $themeHierarchyProvider,
+        ThemeInterface $theme
+    ) {
+        $this->setTheme($theme);
+        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
+
+        $this->getThemeHierarchy()->shouldReturn([$theme]);
+    }
+
+    function it_returns_an_empty_array_as_theme_hierarchy_if_there_is_no_current_theme(
+        ThemeHierarchyProviderInterface $themeHierarchyProvider
+    ) {
+        $themeHierarchyProvider->getThemeHierarchy(Argument::any())->shouldNotBeCalled();
+
+        $this->getThemeHierarchy()->shouldReturn([]);
     }
 }

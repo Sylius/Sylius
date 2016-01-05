@@ -98,13 +98,11 @@
         <service id="sylius.theme.translator" class="%sylius.theme.translator.class%" decorates="translator">
             <argument type="service" id="sylius.theme.translator.inner" />
             <argument type="service" id="sylius.theme.context" />
-            <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
         <!-- Overrided services -->
         <service id="templating.locator" class="%sylius.templating.locator.class%" public="false">
             <argument type="service" id="sylius.theme.context" />
-            <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.locator.bundle_resource" />
             <argument type="service" id="sylius.theme.locator.application_resource" />
             <argument>%kernel.cache_dir%</argument>

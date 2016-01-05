@@ -108,10 +108,7 @@ class AssetsInstaller implements AssetsInstallerInterface
         }
 
         foreach ($this->themeRepository->findAll() as $theme) {
-            $themes = array_merge(
-                [$theme],
-                $this->themeHierarchyProvider->getThemeHierarchy($theme)
-            );
+            $themes = $this->themeHierarchyProvider->getThemeHierarchy($theme);
 
             foreach ($this->findAssetsPaths($bundle, $themes) as $originDir) {
                 $effectiveSymlinkMask = min(

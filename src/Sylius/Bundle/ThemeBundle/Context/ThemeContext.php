@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Context;
 
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
@@ -19,9 +20,22 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 final class ThemeContext implements ThemeContextInterface
 {
     /**
+     * @var ThemeHierarchyProviderInterface
+     */
+    private $themeHierarchyProvider;
+
+    /**
      * @var ThemeInterface
      */
     private $theme;
+
+    /**
+     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
+     */
+    public function __construct(ThemeHierarchyProviderInterface $themeHierarchyProvider)
+    {
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
+    }
 
     /**
      * {@inheritdoc}
@@ -37,5 +51,13 @@ final class ThemeContext implements ThemeContextInterface
     public function getTheme()
     {
         return $this->theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeHierarchy()
+    {
+        return null !== $this->theme ? $this->themeHierarchyProvider->getThemeHierarchy($this->theme) : [];
     }
 }
