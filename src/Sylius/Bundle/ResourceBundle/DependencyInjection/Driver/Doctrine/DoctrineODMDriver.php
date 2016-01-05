@@ -74,7 +74,7 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
      */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
-        return sprintf('doctrine_mongodb.odm.%s_document_manager', 'default');
+        return sprintf('doctrine_mongodb.odm.%s_document_manager', $this->getObjectManagerName($metadata));
     }
 
     /**

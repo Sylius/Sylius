@@ -65,6 +65,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('locale')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

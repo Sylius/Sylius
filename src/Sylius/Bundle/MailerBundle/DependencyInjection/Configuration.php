@@ -68,6 +68,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('email')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

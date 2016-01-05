@@ -56,6 +56,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('product_variant_image')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

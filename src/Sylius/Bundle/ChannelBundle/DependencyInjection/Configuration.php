@@ -64,6 +64,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('channel')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

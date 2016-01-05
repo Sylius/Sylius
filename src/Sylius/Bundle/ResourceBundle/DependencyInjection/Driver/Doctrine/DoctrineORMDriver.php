@@ -86,7 +86,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
-        return sprintf('doctrine.orm.%s_entity_manager', 'default');
+        return sprintf('doctrine.orm.%s_entity_manager', $this->getObjectManagerName($metadata));
     }
 
     /**

@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('currency')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
