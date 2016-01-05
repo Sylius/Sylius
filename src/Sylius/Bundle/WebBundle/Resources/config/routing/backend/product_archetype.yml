@@ -30,6 +30,26 @@ sylius_backend_product_archetype_update:
             template: SyliusWebBundle:Backend/ProductArchetype:update.html.twig
             redirect: sylius_backend_product_archetype_index
 
+sylius_backend_product_archetype_id_product_index:
+    path: /{id}/products
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexByArchetypeIdAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductArchetype:productIndex.html.twig
+            paginate: 30
+    requirements:
+        id: \d+
+
+sylius_backend_product_archetype_code_product_index:
+    path: /{code}/products
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexByArchetypeCodeAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductArchetype:productIndex.html.twig
+            paginate: 30
+
 sylius_backend_product_archetype_delete:
     path: /{id}
     methods: [DELETE]
