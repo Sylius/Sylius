@@ -45,6 +45,8 @@ Every variant option is represented by **Option** instance and has the following
 +==============+=============================================+
 | id           | Unique id of the Option                     |
 +--------------+---------------------------------------------+
+| code         | Unique code of the Option                   |
++--------------+---------------------------------------------+
 | name         | Internal name                               |
 +--------------+---------------------------------------------+
 | presentation | Name displayed to user                      |
@@ -96,6 +98,8 @@ Every variant option value is represented by **OptionValue** instance and has th
 | Property     | Description                                 |
 +==============+=============================================+
 | id           | Unique id of the OptionValue                |
++--------------+---------------------------------------------+
+| code         | Unique code of the OptionValue              |
 +--------------+---------------------------------------------+
 | value        | Option internal value                       |
 +--------------+---------------------------------------------+
