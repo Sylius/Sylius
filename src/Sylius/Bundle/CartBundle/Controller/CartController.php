@@ -69,7 +69,6 @@ class CartController extends Controller
 
         if ($form->handleRequest($request)->isValid()) {
             $event = new CartEvent($cart);
-            $event->isFresh(true);
 
             $eventDispatcher = $this->getEventDispatcher();
 

@@ -65,7 +65,6 @@ class CartItemController extends Controller
         }
 
         $event = new CartItemEvent($cart, $item);
-        $event->isFresh(true);
 
         // Update models
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);
@@ -120,7 +119,6 @@ class CartItemController extends Controller
         }
 
         $event = new CartItemEvent($cart, $item);
-        $event->isFresh(true);
 
         // Update models
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_INITIALIZE, $event);
