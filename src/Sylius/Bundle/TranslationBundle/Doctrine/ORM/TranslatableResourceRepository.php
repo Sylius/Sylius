@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**

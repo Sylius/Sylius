@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

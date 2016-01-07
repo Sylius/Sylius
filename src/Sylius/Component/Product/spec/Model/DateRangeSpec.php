@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
-use Faker\Provider\tr_TR\DateTime;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

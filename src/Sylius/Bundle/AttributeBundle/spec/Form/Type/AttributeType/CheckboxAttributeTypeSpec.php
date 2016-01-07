@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

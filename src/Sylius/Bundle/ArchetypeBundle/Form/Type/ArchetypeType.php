@@ -13,9 +13,6 @@ namespace Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 

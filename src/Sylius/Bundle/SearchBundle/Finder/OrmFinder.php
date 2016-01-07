@@ -29,6 +29,11 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
  */
 class OrmFinder extends AbstractFinder
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
     public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger, ChannelContextInterface $channelContext)
     {
         $this->searchRepository  = $searchRepository;

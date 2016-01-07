@@ -12,7 +12,6 @@
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
-use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

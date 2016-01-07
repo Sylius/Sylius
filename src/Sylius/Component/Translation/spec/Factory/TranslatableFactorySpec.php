@@ -18,7 +18,6 @@ use spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';

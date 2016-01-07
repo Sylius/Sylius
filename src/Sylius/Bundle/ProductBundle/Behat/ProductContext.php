@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;

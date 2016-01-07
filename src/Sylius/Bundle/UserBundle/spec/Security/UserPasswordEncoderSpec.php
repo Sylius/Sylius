@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\UserBundle\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;

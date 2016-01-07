@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;

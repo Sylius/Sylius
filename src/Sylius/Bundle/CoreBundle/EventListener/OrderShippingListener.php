@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentFactory;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;

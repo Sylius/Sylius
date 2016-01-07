@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\Routing;
 
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

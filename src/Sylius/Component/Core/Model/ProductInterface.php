@@ -147,7 +147,7 @@ interface ProductInterface extends
     public function getImage();
 
     /**
-     * @return BaseTaxonInterface
+     * @return TaxonInterface
      */
     public function getMainTaxon();
 

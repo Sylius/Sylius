@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 class TaxonomySpec extends ObjectBehavior
 {

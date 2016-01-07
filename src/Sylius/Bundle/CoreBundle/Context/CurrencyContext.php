@@ -27,7 +27,7 @@ class CurrencyContext extends BaseCurrencyContext
 {
     const STORAGE_KEY = '_sylius_currency_%s';
 
-    protected $securityContext;
+    protected $customerContext;
     protected $settingsManager;
     protected $customerManager;
     protected $channelContext;
