@@ -4,6 +4,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 class VolumeRateCalculatorSpec extends ObjectBehavior
@@ -15,7 +16,7 @@ class VolumeRateCalculatorSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_returns_volume_rate_type()

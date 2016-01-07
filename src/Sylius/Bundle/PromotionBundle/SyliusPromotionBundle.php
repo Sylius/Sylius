@@ -15,6 +15,11 @@ use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotion
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -51,11 +56,11 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Promotion\Model\PromotionInterface'        => 'sylius.model.promotion.class',
-            'Sylius\Component\Promotion\Model\CouponInterface'           => 'sylius.model.promotion_coupon.class',
-            'Sylius\Component\Promotion\Model\RuleInterface'             => 'sylius.model.promotion_rule.class',
-            'Sylius\Component\Promotion\Model\ActionInterface'           => 'sylius.model.promotion_action.class',
-            'Sylius\Component\Promotion\Model\PromotionSubjectInterface' => 'sylius.model.promotion_subject.class',
+            PromotionInterface::class        => 'sylius.model.promotion.class',
+            CouponInterface::class           => 'sylius.model.promotion_coupon.class',
+            RuleInterface::class             => 'sylius.model.promotion_rule.class',
+            ActionInterface::class           => 'sylius.model.promotion_action.class',
+            PromotionSubjectInterface::class => 'sylius.model.promotion_subject.class',
         );
     }
 

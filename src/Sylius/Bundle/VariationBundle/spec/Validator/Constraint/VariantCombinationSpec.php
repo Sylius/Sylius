@@ -26,7 +26,7 @@ class VariantCombinationSpec extends ObjectBehavior
 
     function it_is_a_validation_constraint()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\Constraint');
+        $this->shouldHaveType(Constraint::class);
     }
 
     function it_is_class_constraint()

@@ -2,6 +2,9 @@ Sylius\Component\Variation\Model\OptionValue:
     exclusion_policy: ALL
     xml_root_name: option-value
     properties:
+        code:
+            expose: true
+            type: string
         value:
             expose: true
             type: string

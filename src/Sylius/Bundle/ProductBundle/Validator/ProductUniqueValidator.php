@@ -48,7 +48,7 @@ class ProductUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof ProductInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\Product\Model\ProductInterface');
+            throw new UnexpectedTypeException($value, ProductInterface::class);
         }
 
         $product = $value;

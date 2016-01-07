@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -23,7 +24,7 @@ class RegisterRenderersPassSpec extends ObjectBehavior
 {
     function it_should_implement_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)

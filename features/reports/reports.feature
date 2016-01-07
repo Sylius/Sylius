@@ -31,7 +31,7 @@ Feature: Reports
           And I press "Create"
          Then I should be on the page of report "Report1"
           And I should see "Report has been successfully created."
-          And I should see "There is no data to display"
+          And I should see 1 result in the list
 
     Scenario: Adding new report with custom end date option
         Given I am on the report creation page
@@ -39,8 +39,11 @@ Feature: Reports
             | Code         | report2           |
             | Name         | Report2           |
             | Description  | Lorem ipsum dolor |
+          And I select "2010" from "sylius_report_dataFetcherConfiguration_start_year"
+          And I select "2010" from "sylius_report_dataFetcherConfiguration_end_year"
+          And I select "1" from "sylius_report_dataFetcherConfiguration_start_day"
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
-          And I press "Create" 
+          And I press "Create"
          Then I should be on the page of report "Report2"
           And I should see "Report has been successfully created."
           And I should see 2 results in the list
@@ -51,6 +54,9 @@ Feature: Reports
             | Code         | report3           |
             | Name         | Report3           |
             | Description  | Lorem ipsum dolor |
+          And I select "2010" from "sylius_report_dataFetcherConfiguration_start_year"
+          And I select "2010" from "sylius_report_dataFetcherConfiguration_end_year"
+          And I select "1" from "sylius_report_dataFetcherConfiguration_start_day"
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I select "month" from "Time period"
           And I press "Create" 

@@ -46,7 +46,7 @@ class UserAutoLoginListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                'Sylius\Component\User\Model\CustomerInterface'
+                CustomerInterface::class
             );
         }
 

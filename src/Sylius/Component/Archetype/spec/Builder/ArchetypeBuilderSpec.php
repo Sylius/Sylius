@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Archetype\Builder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -38,7 +39,7 @@ class ArchetypeBuilderSpec extends ObjectBehavior
 
     function it_is_an_Archetype_Builder()
     {
-        $this->shouldImplement('Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface');
+        $this->shouldImplement(ArchetypeBuilderInterface::class);
     }
 
     function it_does_not_build_the_subject_if_it_has_no_archetype(ArchetypeSubjectInterface $subject)
@@ -62,8 +63,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
         $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
 
-        $attribute->getName()->willReturn('test');
-        $subject->getAttributeByName('test')->shouldBeCalled()->willReturn(null);
+        $attribute->getCode()->willReturn('test');
+        $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn(null);
 
         $attributeValueFactory->createNew()->shouldBeCalled()->willReturn($attributeValue);
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
@@ -86,8 +87,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
         $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
 
-        $attribute->getName()->willReturn('test');
-        $subject->getAttributeByName('test')->shouldBeCalled()->willReturn($attributeValue);
+        $attribute->getCode()->willReturn('test');
+        $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn($attributeValue);
 
         $attributeValueFactory->createNew()->shouldNotBeCalled();
         $attributeValue->setAttribute($attribute)->shouldNotBeCalled();

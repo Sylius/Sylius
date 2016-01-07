@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
+use Elastica\Query;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
@@ -85,7 +86,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
 
         );
 
-        $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType('\Elastica\Query');
+        $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType(Query::class);
     }
 
     function it_compiles_a_taxon_elasticsearch_query()
@@ -126,7 +127,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
 
         );
 
-        $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType('\Elastica\Query');
+        $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType(Query::class);
     }
 
 }

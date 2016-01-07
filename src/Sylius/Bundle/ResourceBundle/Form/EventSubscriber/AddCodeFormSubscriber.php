@@ -51,15 +51,15 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $resource = $event->getData();
+        $disabled = false;
 
-        if (!$resource instanceof CodeAwareInterface) {
+        if ($resource instanceof CodeAwareInterface) {
+            $disabled = (null !== $resource->getCode());
+        } else if (null !== $resource) {
             throw new UnexpectedTypeException($resource, CodeAwareInterface::class);
         }
 
         $form = $event->getForm();
-        $disabled = (null !== $resource->getCode());
-
-
         $form->add('code', $this->type, array('label' => 'sylius.ui.code', 'disabled' => $disabled));
     }
 }

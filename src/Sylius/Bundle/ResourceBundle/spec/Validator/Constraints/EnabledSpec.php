@@ -19,7 +19,7 @@ class EnabledSpec extends ObjectBehavior
 
     function it_is_constraint()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\Constraint');
+        $this->shouldHaveType(Constraint::class);
     }
 
     function it_is_a_property_constraint()

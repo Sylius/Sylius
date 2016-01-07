@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -28,7 +29,7 @@ class RegisterGeneratorsPassSpec extends ObjectBehavior
 
     public function it_is_a_coplier_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     public function it_processes_the_calculators_services(ContainerBuilder $container, Definition $registry)

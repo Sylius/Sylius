@@ -34,7 +34,7 @@ class CheckoutAddressingListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringSetCustomerAddressing($event)
         ;
     }

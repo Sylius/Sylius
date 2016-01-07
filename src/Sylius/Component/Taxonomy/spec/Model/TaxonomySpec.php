@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
 
 /**
@@ -36,7 +36,7 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_implements_Sylius_taxonomy_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonomyInterface');
+        $this->shouldImplement(TaxonomyInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -44,7 +44,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_calls_translation_to_string(TaxonomyTranslation $translation, Taxon $root)
+    function it_calls_translation_to_string(TaxonomyTranslation $translation, TaxonInterface $root)
     {
         $this->setRoot($root);
 
@@ -69,14 +69,14 @@ class TaxonomySpec extends ObjectBehavior
         $this->getRoot()->shouldReturn($taxon);
     }
 
-    function it_is_unnamed_by_default(Taxon $root)
+    function it_is_unnamed_by_default(TaxonInterface $root)
     {
         $this->setRoot($root);
 
         $this->getName()->shouldReturn(null);
     }
 
-    function it_delegates_current_and_fallback_locale_to_root_taxon(Taxon $taxon)
+    function it_delegates_current_and_fallback_locale_to_root_taxon(TaxonInterface $taxon)
     {
         $taxon->setCurrentLocale('en_US')->shouldBeCalled();
         $taxon->setFallbackLocale('en_US')->shouldBeCalled();
@@ -88,7 +88,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->setFallbackLocale('en_US');
     }
 
-    function its_name_is_mutable(Taxon $taxon)
+    function its_name_is_mutable(TaxonInterface $taxon)
     {
         $taxon->setName(null)->shouldBeCalled();
         $taxon->setName('Brand')->shouldBeCalled();
@@ -102,7 +102,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->getName()->shouldReturn('Brand');
     }
 
-    function it_also_sets_name_on_the_root_taxon(Taxon $taxon)
+    function it_also_sets_name_on_the_root_taxon(TaxonInterface $taxon)
     {
         $taxon->setName(null)->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
@@ -116,6 +116,17 @@ class TaxonomySpec extends ObjectBehavior
         $this->setRoot($taxon);
 
         $this->setName('Category');
+    }
+
+    function it_sets_code_for_root_taxon(TaxonInterface $taxon)
+    {
+        $this->setRoot($taxon);
+
+        $taxon->setCode('RTX2')->shouldBeCalled();
+        $taxon->getCode()->shouldBeCalled()->willReturn('RTX2');
+
+        $this->setCode('RTX2');
+        $this->getCode()->shouldReturn('RTX2');
     }
 
     function it_delegates_the_hasTaxon_method_to_root_taxon(TaxonInterface $root, TaxonInterface $taxon)
@@ -145,7 +156,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->removeTaxon($taxon);
     }
 
-    function it_also_sets_translation_on_root_taxon(Taxon $taxon, TaxonomyTranslation $translation)
+    function it_also_sets_translation_on_root_taxon(TaxonInterface $taxon, TaxonomyTranslation $translation)
     {
         $translation->getName()->willReturn('New');
         $translation->getLocale()->shouldBeCalled();

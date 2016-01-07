@@ -63,6 +63,7 @@ before_script:
 
 script:
     - bin/phpspec run -f dot
+    - bin/phpunit
     - bin/behat --strict -f progress -p cached
 
     - etc/travis/prepare-javascript

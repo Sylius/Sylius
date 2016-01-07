@@ -37,7 +37,7 @@
 
         <service id="sylius.settings.cache" alias="doctrine_cache.providers.sylius_settings" />
 
-        <service id="sylius.settings.manager" class="%sylius.settings.manager.class%">
+        <service id="sylius.settings.manager" class="%sylius.settings.manager.class%" lazy="true">
             <argument type="service" id="sylius.settings.schema_registry" />
             <argument type="service" id="sylius.manager.parameter" />
             <argument type="service" id="sylius.repository.parameter" />

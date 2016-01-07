@@ -30,7 +30,7 @@ class ContainsProductRuleChecker extends ItemCountRuleChecker
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
         /* @var $item OrderItemInterface */

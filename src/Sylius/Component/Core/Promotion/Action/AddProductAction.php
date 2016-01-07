@@ -59,7 +59,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
         $promotionItem = $this->createItem($configuration);
@@ -85,7 +85,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
         $promotionItem = $this->createItem($configuration);

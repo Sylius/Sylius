@@ -12,13 +12,14 @@
 namespace spec\Sylius\Component\Shipping\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
+use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -37,7 +38,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_eligibility_checker_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface');
+        $this->shouldImplement(ShippingMethodEligibilityCheckerInterface::class);
     }
 
     function it_returns_true_if_all_checkers_approve_shipping_method(

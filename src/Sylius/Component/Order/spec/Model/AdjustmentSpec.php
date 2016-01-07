@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
@@ -28,7 +29,7 @@ class AdjustmentSpec extends ObjectBehavior
 
     function it_implements_Sylius_adjustment_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\AdjustmentInterface');
+        $this->shouldImplement(AdjustmentInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -102,11 +103,11 @@ class AdjustmentSpec extends ObjectBehavior
     {
         $this->setAmount(4498);
         $this->getAmount()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(44.98 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount('4498');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(round(44.98 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(new \stdClass());
     }
 
     function it_is_not_neutral_by_default()

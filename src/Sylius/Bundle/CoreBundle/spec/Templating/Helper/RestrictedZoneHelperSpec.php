@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 class RestrictedZoneHelperSpec extends ObjectBehavior
 {
@@ -29,7 +30,7 @@ class RestrictedZoneHelperSpec extends ObjectBehavior
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_uses_restricted_zone_checker(

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Shipping\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
@@ -26,7 +27,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
 
     function it_is_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_empty_subject_as_not_eligible(ShippingSubjectInterface $subject)

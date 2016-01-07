@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\InstallerBundle\Command;
 
 use PhpSpec\ObjectBehavior;
@@ -12,7 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CommandExecutorSpec extends ObjectBehavior
 {
-
     function let(InputInterface $input, OutputInterface $output, Application $application)
     {
         $this->beConstructedWith($input, $output, $application);
@@ -25,18 +33,31 @@ class CommandExecutorSpec extends ObjectBehavior
 
     function it_should_preserve_the_current_value_of_interactive_option(InputInterface $input, Application $application)
     {
-        $input->hasOption('no-interaction')
-            ->willReturn(true);
-        $input->getOption('no-interaction')
-            ->willReturn(false);
-        $input->hasOption('env')
-            ->willReturn(true);
-        $input->getOption('env')
-            ->willReturn('dev');
-        $input->hasOption('verbose')
-            ->willReturn(true);
-        $input->getOption('verbose')
-            ->willReturn(true);
+        $input
+            ->hasOption('no-interaction')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('no-interaction')
+            ->willReturn(false)
+        ;
+        $input
+            ->hasOption('env')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('env')
+            ->willReturn('dev')
+        ;
+        $input
+            ->hasOption('verbose')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('verbose')
+            ->willReturn(true)
+        ;
+
         $arrayInput = new ArrayInput(
             array(
                 'command' => 'command',
@@ -45,6 +66,7 @@ class CommandExecutorSpec extends ObjectBehavior
                 '--verbose' => true,
             )
         );
+
         $application->setAutoExit(false)->shouldBeCalled();
         $application->run($arrayInput, new NullOutput())->willReturn(0);
 
@@ -53,18 +75,31 @@ class CommandExecutorSpec extends ObjectBehavior
 
     function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application)
     {
-        $input->hasOption('no-interaction')
-            ->willReturn(true);
-        $input->getOption('no-interaction')
-            ->willReturn(false);
-        $input->hasOption('env')
-            ->willReturn(true);
-        $input->getOption('env')
-            ->willReturn('dev');
-        $input->hasOption('verbose')
-            ->willReturn(true);
-        $input->getOption('verbose')
-            ->willReturn(true);
+        $input
+            ->hasOption('no-interaction')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('no-interaction')
+            ->willReturn(false)
+        ;
+        $input
+            ->hasOption('env')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('env')
+            ->willReturn('dev')
+        ;
+        $input
+            ->hasOption('verbose')
+            ->willReturn(true)
+        ;
+        $input
+            ->getOption('verbose')
+            ->willReturn(true)
+        ;
+
         $arrayInput = new ArrayInput(
             array(
                 'command' => 'command',
@@ -74,6 +109,7 @@ class CommandExecutorSpec extends ObjectBehavior
                 '--verbose' => true,
             )
         );
+
         $application->setAutoExit(false)->shouldBeCalled();
         $application->run($arrayInput, new NullOutput())->willReturn(0);
 

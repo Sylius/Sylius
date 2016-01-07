@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -89,7 +90,7 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($resolverDefinition);
 
-        $container->hasParameter('Sylius\Component\Resource\Repository\RepositoryInterface')
+        $container->hasParameter(RepositoryInterface::class)
             ->shouldBeCalled()
             ->willReturn(false);
 
@@ -100,11 +101,11 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                RepositoryInterface::class, 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
+            RepositoryInterface::class => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
         ));
     }
 }

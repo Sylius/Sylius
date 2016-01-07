@@ -59,7 +59,7 @@ class UserAutoLoginListenerSpec extends ObjectBehavior
     {
         $customer = '';
         $event->getSubject()->willReturn($customer);
-        $this->shouldThrow(new UnexpectedTypeException($customer, 'Sylius\Component\User\Model\CustomerInterface'))
+        $this->shouldThrow(new UnexpectedTypeException($customer, CustomerInterface::class))
             ->duringLogin($event);
     }
 }

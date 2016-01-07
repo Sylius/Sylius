@@ -56,7 +56,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['archetype']['model'] !== $metadata->getName()) {
+            if ($class['archetype']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
@@ -142,7 +142,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $parentMapping = array(
             'fieldName'    => 'parent',
             'type'         => ClassMetadataInfo::MANY_TO_ONE,
-            'targetEntity' => $class['archetype']['model'],
+            'targetEntity' => $class['archetype']['classes']['model'],
             'joinColumn'   => array(
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
+use Sylius\Component\Core\Model\ProductVariant;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -51,7 +52,7 @@ class OrderItemType extends BaseOrderItemType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
-            'variant_data_class' => 'Sylius\Component\Core\Model\ProductVariant',
+            'variant_data_class' => ProductVariant::class,
         ));
     }
 }

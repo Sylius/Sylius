@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 {
@@ -38,7 +39,7 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 
     function it_does_not_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringTransform('');
+        $this->shouldThrow(UnexpectedTypeException::class)->duringTransform('');
     }
 
     function it_does_transform_collection_with_objects_value(
@@ -65,12 +66,12 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 
     function it_does_reverse_transform_empty_value()
     {
-        $this->reverseTransform('')->shouldImplement('Doctrine\Common\Collections\Collection');
+        $this->reverseTransform('')->shouldImplement(Collection::class);
     }
 
     function it_does_not_reverse_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+        $this->shouldThrow(UnexpectedTypeException::class)
             ->duringReverseTransform('string');
     }
 

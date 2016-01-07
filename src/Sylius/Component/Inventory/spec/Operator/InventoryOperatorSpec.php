@@ -16,6 +16,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -39,7 +40,7 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
+        $this->shouldImplement(InventoryOperatorInterface::class);
     }
 
     function it_increases_stockable_on_hand(StockableInterface $stockable)

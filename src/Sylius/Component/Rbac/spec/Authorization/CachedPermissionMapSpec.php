@@ -34,7 +34,7 @@ class CachedPermissionMapSpec extends ObjectBehavior
 
     function it_is_a_permission_map()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
+        $this->shouldHaveType(PermissionMapInterface::class);
     }
 
     function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)

@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
 class ProcessValidatorSpec extends ObjectBehavior
 {
@@ -30,7 +31,7 @@ class ProcessValidatorSpec extends ObjectBehavior
 
     function it_is_process_validator()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface');
+        $this->shouldImplement(ProcessValidatorInterface::class);
     }
 
     function its_step_name_is_mutable()

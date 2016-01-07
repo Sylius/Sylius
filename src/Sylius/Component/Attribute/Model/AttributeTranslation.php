@@ -26,7 +26,7 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     /**
      * @var string
      */
-    protected $presentation;
+    protected $name;
 
     /**
      * {@inheritdoc}
@@ -39,16 +39,16 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
+    public function getName()
     {
-        return $this->presentation;
+        return $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPresentation($presentation)
+    public function setName($name)
     {
-        $this->presentation = $presentation;
+        $this->name = $name;
     }
 }

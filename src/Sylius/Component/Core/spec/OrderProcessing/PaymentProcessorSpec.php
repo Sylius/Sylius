@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -36,7 +37,7 @@ class PaymentProcessorSpec extends ObjectBehavior
 
     function it_implements_payment_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface');
+        $this->shouldImplement(PaymentProcessorInterface::class);
     }
 
     function it_creates_payment(

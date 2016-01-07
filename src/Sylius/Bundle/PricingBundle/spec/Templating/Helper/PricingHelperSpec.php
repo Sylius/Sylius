@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PricingBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,6 +32,6 @@ class PricingHelperSpec extends ObjectBehavior
 
     function it_is_a_templating_helper()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 }

@@ -16,8 +16,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 require_once __DIR__.'/../../Fixture/Entity/Foo.php';
 
@@ -60,7 +62,7 @@ class EntityRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
+        $this->shouldImplement(RepositoryInterface::class);
     }
 
     function it_returns_null_if_resource_not_found($queryBuilder, $query)
@@ -186,7 +188,7 @@ class EntityRepositorySpec extends ObjectBehavior
     {
         $this
             ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
+            ->shouldHaveType(Pagerfanta::class)
         ;
     }
 }

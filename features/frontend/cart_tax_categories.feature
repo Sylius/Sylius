@@ -7,11 +7,11 @@ Feature: Tax categories
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
-            | Food > Fruits |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
+            | Food[TX3]  > Fruits[TX4]  |
           And the following zones are defined:
             | name  | type    | members        |
             | UK      | country | United Kingdom |

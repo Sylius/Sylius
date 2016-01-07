@@ -16,6 +16,7 @@ use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Doctrine\ODM\PHPCR\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 
 class StaticContentRepositorySpec extends ObjectBehavior
 {
@@ -33,7 +34,7 @@ class StaticContentRepositorySpec extends ObjectBehavior
 
     function it_is_a_document_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository');
+        $this->shouldHaveType(DocumentRepository::class);
     }
 
     function it_find_by_id($dm)

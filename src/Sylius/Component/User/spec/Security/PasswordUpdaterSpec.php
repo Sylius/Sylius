@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\User\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 /**
@@ -33,7 +34,7 @@ class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_implements_password_updater_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Security\PasswordUpdaterInterface');
+        $this->shouldImplement(PasswordUpdaterInterface::class);
     }
 
     function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, CredentialsHolderInterface $user)

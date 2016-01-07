@@ -43,7 +43,7 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('now', Argument::type('\DateTime'))->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('now', Argument::type(\DateTime::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);

@@ -11,23 +11,20 @@
 
 namespace Sylius\Component\Variation\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface extends ResourceInterface
+interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
-     * Get option.
-     *
      * @return OptionInterface
      */
     public function getOption();
 
     /**
-     * Set option.
-     *
      * @param OptionInterface $option
      */
     public function setOption(OptionInterface $option = null);

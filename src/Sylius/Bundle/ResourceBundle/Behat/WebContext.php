@@ -252,6 +252,14 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then /^I should see "([^"]*)" in "([^"]*)" field$/
+     */
+    public function iShouldSeeInField($value, $field)
+    {
+        $this->assertSession()->fieldValueEquals($field, $value);
+    }
+
+    /**
      * For example: I should see product with name "Wine X" in that list.
      *
      * @Then /^I should see (?:(?!enabled|disabled)[\w\s]+) with ((?:(?![\w\s]+ containing))[\w\s]+) "([^""]*)" in (?:that|the) list$/
@@ -369,6 +377,39 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I add "([^"]*)" attribute$/
+     */
+    public function iAddAttribute($attribute)
+    {
+        $this->clickLink('Add');
+
+        $attributesModalContainer = $this->getSession()->getPage()->find('css', '#attributes-modal');
+        $addAttributesButton = $attributesModalContainer->find('css', sprintf('button:contains("%s")', 'Add attributes'));
+
+        $this->waitForModalToAppear($attributesModalContainer);
+
+        $this->getSession()->getPage()->checkField($attribute.' attribute');
+        $addAttributesButton->press();
+
+        $this->waitForModalToDisappear($attributesModalContainer);
+    }
+
+    /**
+     * @Given /^I choose "([^"]*)" attribute type$/
+     */
+    public function iChooseAttributeType($type)
+    {
+        $this->assertSession()->elementExists('css', '#attribute-types-modal');
+
+        $attributeTypesModalContainer = $this->getSession()->getPage()->find('css', '#attribute-types-modal');
+        $typeButton = $attributeTypesModalContainer->find('css', 'a#'.$type);
+
+        $this->waitForModalToAppear($attributeTypesModalContainer);
+
+        $typeButton->press();
+    }
+
+    /**
      * @Given /^I wait (\d+) (seconds|second)$/
      */
     public function iWait($time)
@@ -471,6 +512,45 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then /^I should still be on the (.+) page from ([^""]*) "([^""]*)"/
+     */
+    public function iShouldBeOnThePageWithGivenParent($page, $parentType, $parentName)
+    {
+        $parent = $this->findOneByName($parentType, $parentName);
+        $this->assertSession()->addressEquals($this->generatePageUrl($page, array(sprintf('%sId',$parentType) => $parent->getId())));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
+    }
+
+    /**
+     * @Given /^I am (building|viewing|editing) ([^""]*) "([^""]*)" from ([^""]*) "([^""]*)"$/
+     */
+    public function iAmDoingSomethingWithResourceByNameFromGivenCategory($action, $type, $name, $categoryType, $categoryName)
+    {
+        $type = str_replace(' ','_', $type);
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
+
+        $root = $this->findOneByName($categoryType, $categoryName);
+        $resource = $this->findOneByName($type, $name);
+
+        $this->getSession()->visit($this->generatePageUrl(
+            sprintf('%s_%s', $type, $action), array('id' => $resource->getId(), sprintf('%sId', $categoryType) => $root->getId())
+        ));
+    }
+
+    /**
+     * @Then /^I should see select "([^"]*)" with "([^"]*)" option selected$/
+     */
+    public function iShouldSeeSelectWithOptionSelected($fieldName, $fieldOption)
+    {
+        $this->assertSession()->fieldExists(ucfirst($fieldName));
+        $this->assertSession()->fieldValueEquals($fieldName, $fieldOption);
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code
@@ -544,5 +624,36 @@ class WebContext extends DefaultContext
         $this->waitFor(function () use ($modalContainer) {
             return false === strpos($modalContainer->getAttribute('class'), 'in');
         });
+    }
+
+    /**
+     * @Given /^I am on the product attribute creation page with type "([^"]*)"$/
+     */
+    public function iAmOnTheProductAttributeCreationPageWithType($type)
+    {
+        $this->getSession()->visit($this->generatePageUrl('product attribute creation', array('type' => $type)));
+        $this->iShouldSeeSelectWithOptionSelected('Type', ucfirst($type));
+    }
+
+    /**
+     * @Given /^I should not be able to edit "([^"]*)" (field|select)$/
+     */
+    public function iShouldNotBeAbleToEditSelect($name, $fieldType)
+    {
+        $select = $this->assertSession()->fieldExists($name);
+        if (null === $select->getAttribute('disabled')) {
+            throw new \Exception(sprintf('"%s" %s should be disabled', $name, $fieldType));
+        }
+    }
+
+    /**
+     * @Given /^permalink of taxon "([^"]*)" in "([^"]*)" taxonomy has been changed to "([^"]*)"$/
+     */
+    public function permalinkOfTaxonInTaxonomyHasBeenChangedTo($taxon, $taxonomy, $newPermalink)
+    {
+        $this->iAmOnTheResourcePage('taxonomy', 'name', $taxonomy);
+        $this->iClickNear('edit', $taxon);
+        $this->fillField('Permalink', $newPermalink);
+        $this->pressButton('Save changes');
     }
 }

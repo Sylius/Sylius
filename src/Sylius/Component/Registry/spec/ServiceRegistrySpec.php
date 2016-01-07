@@ -22,7 +22,7 @@ class ServiceRegistrySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Symfony\Component\Routing\RouterInterface');
+        $this->beConstructedWith(RouterInterface::class);
     }
 
     function it_is_initializable()

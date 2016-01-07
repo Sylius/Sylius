@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Variation\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Variation\Model\OptionInterface;
+use Sylius\Component\Variation\Model\OptionValueInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,12 +27,18 @@ class OptionValueSpec extends ObjectBehavior
 
     function it_is_a_Sylius_product_option_value()
     {
-        $this->shouldImplement('Sylius\Component\Variation\Model\OptionValueInterface');
+        $this->shouldImplement(OptionValueInterface::class);
     }
 
     function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_has_mutable_code()
+    {
+        $this->setCode('OV1');
+        $this->getCode()->shouldReturn('OV1');
     }
 
     function it_should_not_belong_to_an_option_by_default()
@@ -74,7 +81,7 @@ class OptionValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_name_without_option_being_assigned()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetName()
         ;
     }
@@ -90,7 +97,7 @@ class OptionValueSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_get_presentation_without_option_being_assigned()
     {
         $this
-            ->shouldThrow('BadMethodCallException')
+            ->shouldThrow(\BadMethodCallException::class)
             ->duringGetPresentation()
         ;
     }

@@ -46,11 +46,24 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^go to "([^""]*)" tab$/
+     * @Given /^(?:|I )go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
     {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+        $tabContainer = $this->getSession()->getPage()->find('css', sprintf('.nav-tabs li:contains("%s")', $tabLabel));
+        $tabContainer->find('css', 'a')->click();
+
+        $this->waitForTabToActivate($tabContainer);
+    }
+
+    /**
+     * @param NodeElement $tabContainer
+     */
+    protected function waitForTabToActivate($tabContainer)
+    {
+        $this->waitFor(function () use ($tabContainer) {
+            return false !== strpos($tabContainer->getAttribute('class'), 'active');
+        });
     }
 
     /**
@@ -501,10 +514,20 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        foreach ($table->getRows() as $i => $value) {
+        foreach ($table->getRows() as $value) {
             $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
-            $newItem->fillField('Value', $value[0]);
+            $newItem->fillField('Value', $value[1]);
+            $newItem->fillField('Code', $value[0]);
         }
+    }
+
+     /**
+      * @When /^I add option value "([^""]*)"$/
+      */
+    public function iAddOptionValue($optionValue)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
+        $newItem->fillField('Value', $optionValue);
     }
 
     /**

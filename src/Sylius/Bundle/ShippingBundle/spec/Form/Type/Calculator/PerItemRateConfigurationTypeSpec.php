@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,11 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PerItemRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType');
@@ -33,7 +29,7 @@ class PerItemRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
@@ -47,7 +43,6 @@ class PerItemRateConfigurationTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(array(
             'data_class' => null,
-            'validation_groups' => array('sylius')
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);

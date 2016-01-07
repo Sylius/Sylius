@@ -60,7 +60,7 @@ class CouponToCodeTransformer implements DataTransformerInterface
         }
 
         if (!$coupon instanceof CouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         return $coupon->getCode();

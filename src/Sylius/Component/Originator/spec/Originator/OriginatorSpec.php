@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Originator\Model\OriginAwareInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class OriginatorSpec extends ObjectBehavior
@@ -24,26 +25,26 @@ class OriginatorSpec extends ObjectBehavior
         $this->beConstructedWith($manager);
     }
 
-    public function it_should_be_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Originator\Originator\Originator');
     }
 
     public function it_should_be_Sylius_originator()
     {
-        $this->shouldImplement('Sylius\Component\Originator\Originator\OriginatorInterface');
+        $this->shouldImplement(OriginatorInterface::class);
     }
 
     public function it_throws_exception_if_origin_is_not_an_object(OriginAwareInterface $originAware)
     {
-        $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, 'umpirsky');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOrigin($originAware, 'umpirsky');
     }
 
     public function it_throws_exception_if_origin_has_no_id(OriginAwareInterface $originAware, FakeEntity $entity)
     {
         $entity->getId(null)->willReturn(null);
 
-        $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, $entity);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOrigin($originAware, $entity);
     }
 
     public function it_sets_origin(OriginAwareInterface $originAware, FakeEntity $entity)

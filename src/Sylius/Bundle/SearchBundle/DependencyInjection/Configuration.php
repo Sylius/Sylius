@@ -11,10 +11,16 @@
 
 namespace Sylius\Bundle\SearchBundle\DependencyInjection;
 
+use Sylius\Bundle\SearchBundle\Controller\SearchController;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
+use Sylius\Bundle\SearchBundle\Model\SearchIndexInterface;
+use Sylius\Bundle\SearchBundle\Model\SearchLog;
+use Sylius\Bundle\SearchBundle\Model\SearchLogInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -190,7 +196,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->scalarNode('custom_accessor')->defaultValue('Symfony\Component\PropertyAccess\PropertyAccessor')->end()
+                ->scalarNode('custom_accessor')->defaultValue(PropertyAccessor::class)->end()
             ->end()
         ;
     }
@@ -202,27 +208,41 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('search')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchIndex')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('driver')->defaultValue('doctrine/orm')->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(SearchIndex::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(SearchIndexInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(SearchController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('log')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchLog')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('driver')->defaultValue('doctrine/orm')->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(SearchLog::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(SearchLogInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(SearchController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

@@ -17,6 +17,11 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if product.enabled %}
+        {{ buttons.disable(path('sylius_backend_product_disable', {'id': product.id})) }}
+    {% else %}
+        {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
+    {% endif %}
     {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
@@ -77,6 +82,12 @@
                     <td>{{ 'sylius.product.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>
+                {% if product.availableUntil %}
+                <tr>
+                    <td>{{ 'sylius.product.available_until'|trans }}</td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
@@ -146,8 +157,16 @@
                     <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.original_price'|trans }}</td>
+                    <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
                 </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
                 <tr>
@@ -198,7 +217,11 @@
                 {% for attribute in product.attributes %}
                 <tr>
                     <td><strong>{{ attribute.name }}</strong></td>
-                    <td>{{ attribute.value }}</td>
+                    {% if attribute.value.timestamp is defined %}
+                        <td>{{ attribute.value|date('Y/m/d H:i:s') }}</td>
+                    {% else %}
+                        <td>{{ attribute.value }}</td>
+                    {% endif %}
                 </tr>
                 {% else %}
                 <tr>

@@ -43,7 +43,7 @@ class OrderShippingListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringProcessOrderShippingCharges($event)
         ;
     }

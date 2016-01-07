@@ -5,6 +5,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
@@ -33,7 +34,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
     {
         $repository->findOneBy(array('id' => 6))->shouldBeCalled()->willReturn(null);
 
-        $this->shouldThrow('Symfony\Component\Form\Exception\TransformationFailedException')->during('reverseTransform', array(6));
+        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', array(6));
     }
 
     function it_reverses_identifier_in_entity(ObjectRepository $repository, FakeEntity $entity)

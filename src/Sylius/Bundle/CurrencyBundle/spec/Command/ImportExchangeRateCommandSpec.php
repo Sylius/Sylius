@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Currency\Importer\ImporterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,7 +29,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
 
     function it_is_a_command()
     {
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
+        $this->shouldHaveType(ContainerAwareCommand::class);
     }
 
     function it_has_a_name()

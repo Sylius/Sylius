@@ -18,29 +18,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Volume rate calculator configuration form.
- *
  * @author Antonio Peric <antonio@locastic.com>
  */
 class VolumeRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -72,7 +53,6 @@ class VolumeRateConfigurationType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

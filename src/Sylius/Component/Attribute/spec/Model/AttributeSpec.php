@@ -12,7 +12,10 @@
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Attribute\Model\AttributeTypes;
+use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
+use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,12 +36,18 @@ class AttributeSpec extends ObjectBehavior
 
     function it_implements_Sylius_attribute_interface()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\Model\AttributeInterface');
+        $this->shouldImplement(AttributeInterface::class);
     }
 
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function its_code_is_mutable()
+    {
+        $this->setCode('testCode');
+        $this->getCode()->shouldReturn('testCode');
     }
 
     function it_has_no_name_by_default()
@@ -58,26 +67,15 @@ class AttributeSpec extends ObjectBehavior
         $this->__toString()->shouldReturn('T-Shirt material');
     }
 
-    function it_has_no_presentation_by_default()
-    {
-        $this->getPresentation()->shouldReturn(null);
-    }
-
-    function its_presentation_is_mutable()
-    {
-        $this->setPresentation('Size');
-        $this->getPresentation()->shouldReturn('Size');
-    }
-
     function it_has_text_type_by_default()
     {
-        $this->getType()->shouldReturn(AttributeTypes::TEXT);
+        $this->getType()->shouldReturn(TextAttributeType::TYPE);
     }
 
     function its_type_is_mutable()
     {
-        $this->setType(AttributeTypes::CHECKBOX);
-        $this->getType()->shouldReturn(AttributeTypes::CHECKBOX);
+        $this->setType(CheckboxAttributeType::TYPE);
+        $this->getType()->shouldReturn(CheckboxAttributeType::TYPE);
     }
 
     function it_initializes_empty_configuration_array_by_default()
@@ -87,13 +85,19 @@ class AttributeSpec extends ObjectBehavior
 
     function its_configuration_is_mutable()
     {
-        $this->setConfiguration(array('choices' => array('Red', 'Blue')));
-        $this->getConfiguration()->shouldReturn(array('choices' => array('Red', 'Blue')));
+        $this->setConfiguration(array('format' => 'd/m/Y'));
+        $this->getConfiguration()->shouldReturn(array('format' => 'd/m/Y'));
+    }
+
+    function its_storage_type_is_mutable()
+    {
+        $this->setStorageType('text');
+        $this->getStorageType()->shouldReturn('text');
     }
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable(\DateTime $date)

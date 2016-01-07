@@ -18,6 +18,7 @@
 
     <mapped-superclass name="Sylius\Component\Product\Model\Variant" table="sylius_product_variant">
         <field name="availableOn" column="available_on" type="datetime" nullable="true" />
+        <field name="availableUntil" column="available_until" type="datetime" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

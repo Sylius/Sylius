@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process\Context;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
@@ -33,7 +34,7 @@ class ProcessContextSpec extends ObjectBehavior
 
     function it_is_a_process_context()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
+        $this->shouldImplement(ProcessContextInterface::class);
     }
 
     function it_initializes(

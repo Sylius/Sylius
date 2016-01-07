@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Reloader;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -32,7 +33,7 @@ class UserReloaderSpec extends ObjectBehavior
 
     function it_implements_user_reloader_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface');
+        $this->shouldImplement(UserReloaderInterface::class);
     }
 
     function it_reloads_user($objectManager, UserInterface $user)

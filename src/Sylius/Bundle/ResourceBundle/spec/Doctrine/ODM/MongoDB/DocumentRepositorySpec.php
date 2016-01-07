@@ -15,7 +15,9 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\UnitOfWork;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @require Doctrine\ODM\MongoDB\DocumentManager
@@ -47,14 +49,14 @@ class DocumentRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
+        $this->shouldImplement(RepositoryInterface::class);
     }
 
     function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
+            ->shouldHaveType(Pagerfanta::class)
         ;
     }
 }

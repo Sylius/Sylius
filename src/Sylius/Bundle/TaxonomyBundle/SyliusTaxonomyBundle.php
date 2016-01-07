@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\TaxonomyBundle;
 
+use Sylius\Bundle\TaxonomyBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Flexible categorization system.
@@ -39,8 +43,8 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Taxonomy\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
-            'Sylius\Component\Taxonomy\Model\TaxonInterface'    => 'sylius.model.taxon.class',
+            TaxonomyInterface::class => 'sylius.model.taxonomy.class',
+            TaxonInterface::class    => 'sylius.model.taxon.class',
         );
     }
 

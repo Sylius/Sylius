@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Contact\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Contact\Model\TopicInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -32,7 +33,7 @@ class TopicSpec extends ObjectBehavior
 
     function it_implements_Sylius_contact_topic_interface()
     {
-        $this->shouldImplement('Sylius\Component\Contact\Model\TopicInterface');
+        $this->shouldImplement(TopicInterface::class);
     }
 
     function it_has_no_id_by_default()

@@ -46,7 +46,7 @@ class OrderChannelListener
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+                OrderInterface::class
             );
         }
 

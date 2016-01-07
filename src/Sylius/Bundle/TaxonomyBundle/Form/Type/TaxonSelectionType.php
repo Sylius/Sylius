@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -85,7 +86,7 @@ class TaxonSelectionType extends AbstractType
                 'data_class'         => null,
                 'multiple'           => true,
                 'render_label'       => false,
-                'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+                'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
             ))
         ;
 
@@ -98,7 +99,7 @@ class TaxonSelectionType extends AbstractType
                     );
                 } else {
                     if (!isset($value['class'])) {
-                        $value['class'] = 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
+                        $value['class'] = TaxonSelectionToCollectionTransformer::class;
                     }
                     if (!isset($value['save_objects'])) {
                         $value['save_objects'] = true;

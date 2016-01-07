@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -36,7 +37,7 @@ class MethodsResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_methods_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Resolver\MethodsResolverInterface');
+        $this->shouldImplement(MethodsResolverInterface::class);
     }
 
     function it_returns_all_methods_eligible_for_given_subject(

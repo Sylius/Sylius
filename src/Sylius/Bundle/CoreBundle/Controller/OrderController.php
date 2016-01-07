@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -92,7 +93,7 @@ class OrderController extends ResourceController
         /** @var $order OrderInterface */
         $order = $this->findOr404($request);
 
-        $repository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
         $items = array();
         foreach ($order->getItems() as $item) {

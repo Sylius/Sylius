@@ -28,7 +28,7 @@ class ShipmentSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipment_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentInterface');
+        $this->shouldImplement(ShipmentInterface::class);
     }
 
     function it_has_no_id_by_default()

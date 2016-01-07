@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Variation\SetBuilder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -21,19 +22,19 @@ class CartesianSetBuilderSpec extends ObjectBehavior
 {
     function it_is_a_set_builder()
     {
-        $this->shouldImplement('Sylius\Component\Variation\SetBuilder\SetBuilderInterface');
+        $this->shouldImplement(SetBuilderInterface::class);
     }
 
     function it_requires_an_array_of_set_tuples_to_build_from()
     {
         $tupleSetNotInArray = array('a', 'b', 'c');
 
-        $this->shouldThrow('InvalidArgumentException')->duringBuild($tupleSetNotInArray, Argument::any());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringBuild($tupleSetNotInArray, Argument::any());
     }
 
     function it_requires_at_least_one_set_tuple()
     {
-        $this->shouldThrow('InvalidArgumentException')->duringBuild(array(), Argument::any());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringBuild(array(), Argument::any());
     }
 
     function it_returns_the_same_set_as_the_Cartesian_product_when_only_one_was_given()

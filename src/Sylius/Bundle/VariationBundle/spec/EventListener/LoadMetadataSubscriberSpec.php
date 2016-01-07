@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
@@ -27,13 +28,19 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'product' => array(
                 'variable' => 'Some\App\Product\Entity\Product',
                 'option' => array(
-                    'model' => 'Some\App\Product\Entity\Option',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Option',
+                    )
                 ),
                 'option_value' => array(
-                    'model' => 'Some\App\Product\Entity\OptionValue',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\OptionValue',
+                    )
                 ),
                 'variant' => array(
-                    'model' => 'Some\App\Product\Entity\Variant',
+                    'classes' => array(
+                        'model' => 'Some\App\Product\Entity\Variant',
+                    )
                 ),
             ),
         ));
@@ -46,7 +53,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_a_Doctrine_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()

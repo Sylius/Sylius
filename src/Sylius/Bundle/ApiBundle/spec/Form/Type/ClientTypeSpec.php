@@ -4,6 +4,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ClientTypeSpec extends ObjectBehavior
@@ -20,7 +21,7 @@ class ClientTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)

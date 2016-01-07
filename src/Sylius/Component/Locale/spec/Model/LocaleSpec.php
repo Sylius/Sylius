@@ -12,6 +12,9 @@
 namespace spec\Sylius\Component\Locale\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @mixin \Sylius\Component\Locale\Model\Locale
@@ -32,17 +35,17 @@ class LocaleSpec extends ObjectBehavior
 
     function it_implements_Sylius_locale_interface()
     {
-        $this->shouldImplement('Sylius\Component\Locale\Model\LocaleInterface');
+        $this->shouldImplement(LocaleInterface::class);
     }
 
     function it_is_toggleable()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_is_timestampable()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
+        $this->shouldImplement(TimestampableInterface::class);
     }
 
     function it_does_not_have_id_by_default()
@@ -115,7 +118,7 @@ class LocaleSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_does_not_have_last_update_date_by_default()

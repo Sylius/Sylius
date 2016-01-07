@@ -2,6 +2,8 @@
 
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
+use FOS\OAuthServerBundle\Entity\Client;
+use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,12 +16,12 @@ class ClientSpec extends ObjectBehavior
 
     function it_extends_fos_oauth_server_client_manager()
     {
-        $this->shouldHaveType('FOS\OAuthServerBundle\Entity\Client');
+        $this->shouldHaveType(Client::class);
     }
 
     function it_implements_fos_oauth_server_client_manager_interface()
     {
-        $this->shouldImplement('FOS\OAuthServerBundle\Model\ClientInterface');
+        $this->shouldImplement(ClientInterface::class);
     }
 
     function it_returns_random_id_as_public_id()

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -24,22 +23,15 @@ use Symfony\Component\Validator\Constraints\Type;
 class CustomerGroupType extends AbstractType
 {
     /**
-     * @var string[]
-     */
-    protected $validationGroups;
-
-    /**
      * @var GroupRepository
      */
     protected $groupRepository;
 
     /**
-     * @param string[]        $validationGroups
      * @param GroupRepository $groupRepository
      */
-    public function __construct(array $validationGroups, GroupRepository $groupRepository)
+    public function __construct(GroupRepository $groupRepository)
     {
-        $this->validationGroups = $validationGroups;
         $this->groupRepository = $groupRepository;
     }
 
@@ -60,18 +52,6 @@ class CustomerGroupType extends AbstractType
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 ),
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

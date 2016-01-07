@@ -15,30 +15,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipping country rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingCountryConfigurationType extends AbstractType
 {
     /**
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
      * @var string
      */
-    protected $dataClass;
+    protected $countryClass;
 
     /**
-     * @param string $dataClass        Class of Country model
-     * @param array  $validationGroups Array of validation groups
+     * @param string $countryClass
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($countryClass)
     {
-        $this->validationGroups = $validationGroups;
-        $this->dataClass        = $dataClass;
+        $this->countryClass = $countryClass;
     }
 
     /**
@@ -50,7 +41,7 @@ class ShippingCountryConfigurationType extends AbstractType
             ->add('country', 'sylius_entity_to_identifier', array(
                 'label'       => 'sylius.form.rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
-                'class'       => $this->dataClass,
+                'class'       => $this->countryClass,
                 'identifier'  => 'id',
             ))
         ;

@@ -7,20 +7,20 @@ Feature: Product archetypes
     Background:
         Given store has default configuration
           And there are following options:
-            | name             | presentation | values                     |
-            | T-Shirt color    | Color        | Red, Blue, Green           |
-            | T-Shirt size     | Size         | S, M, L                    |
-            | Bag color        | Color        | Black, Light balsamic      |
-            | Beverage size    | Size         | Tall, Grande, Venti        |
-            | Beverage milk    | Milk         | None, Whole, Skinny, Soya  |
-            | Coffee variety   | Variety      | Colombian, Ethiopian       |
+            | code | name           | presentation  | values                                            |
+            | O1   |T-Shirt color   | Color         | Red[OV1], Blue[OV2], Green[OV3]                   |
+            | O2   |T-Shirt size    | Size          | S[OV4], M[OV5], L[OV6]                            |
+            | O3   | Bag color      | Color         | Black[OV7], Light balsamic[OV8]                   |
+            | O4   |  Beverage size | Size          | Tall[OV9], Grande[OV10], Venti[OV11]              |
+            | O5   | Beverage milk  | Milk          | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
+            | O6   | Coffee variety | Variety       | Colombian[OV16], Ethiopian[OV17]                  |
           And there are following attributes:
-            | name                  | presentation   |
-            | T-Shirt collection    | Collection     |
-            | T-Shirt fabric        | T-Shirt fabric |
-            | Bag material          | Material       |
-            | Beverage calories     | Calories       |
-            | Coffee caffeine       | Caffeine       |
+            | name                  | presentation   | type     |
+            | T-Shirt collection    | Collection     | text     |
+            | T-Shirt fabric        | T-Shirt fabric | text     |
+            | Bag material          | Material       | text     |
+            | Beverage calories     | Calories       | integer  |
+            | Coffee caffeine       | Caffeine       | checkbox |
           And there is archetype "T-Shirt" with following configuration:
             | code       | Arch1                              |
             | options    | T-Shirt color, T-Shirt size        |
@@ -76,6 +76,7 @@ Feature: Product archetypes
         Then I should be on the product archetype index page
         And I should see "Archetype has been successfully created."
 
+    @javascript
     Scenario: Creating a product by building archetype
         Given I am on the product archetype index page
         And I click "Create product" near "T-Shirt"
@@ -83,12 +84,14 @@ Feature: Product archetypes
             | Name               | Manchester United tee   |
             | Description        | Interesting description |
             | Price              | 59.99                   |
+        And I go to "Attributes" tab
+        And I fill in the following:
             | T-Shirt fabric     | Cotton 100%             |
             | T-Shirt collection | Champions League '11    |
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And I should see "Product has been successfully created."
-        And "T-Shirt size" should appear on the page
+        And "T-Shirt fabric" should appear on the page
 
     Scenario: Updating the archetype
         Given I am editing product archetype "T-Shirt"

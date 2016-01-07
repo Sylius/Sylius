@@ -13,7 +13,9 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @mixin \Sylius\Component\Addressing\Model\Country
@@ -36,12 +38,12 @@ class CountrySpec extends ObjectBehavior
 
     function it_implements_Sylius_country_interface()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Model\CountryInterface');
+        $this->shouldImplement(CountryInterface::class);
     }
 
     function it_is_toggleable()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -82,7 +84,7 @@ class CountrySpec extends ObjectBehavior
 
     function it_initializes_provinces_collection_by_default()
     {
-        $this->getProvinces()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getProvinces()->shouldHaveType(Collection::class);
     }
 
     function it_has_no_provinces_by_default()

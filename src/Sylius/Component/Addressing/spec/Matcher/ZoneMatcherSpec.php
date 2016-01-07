@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Addressing\Matcher;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -39,7 +40,7 @@ class ZoneMatcherSpec extends ObjectBehavior
 
     function it_is_Sylius_zone_matcher()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Matcher\ZoneMatcherInterface');
+        $this->shouldImplement(ZoneMatcherInterface::class);
     }
 
     function it_returns_null_if_there_are_no_zones($repository, AddressInterface $address)

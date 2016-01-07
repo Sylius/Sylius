@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Creating tax category <small>Use the form below to create new taxation category</small></h1>
-<hr />
-
-<form action="{{ path('sylius_tax_category_create') }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusTaxationBundle:TaxCategory:_form.html.twig' %}
-    {{ actions.create(path('sylius_tax_category_index')) }}
-</form>

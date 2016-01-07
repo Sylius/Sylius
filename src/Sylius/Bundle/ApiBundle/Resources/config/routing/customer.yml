@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_customer_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:showAction

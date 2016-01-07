@@ -17,6 +17,7 @@ use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 
@@ -37,7 +38,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipment_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Processor\ShipmentProcessorInterface');
+        $this->shouldImplement(ShipmentProcessorInterface::class);
     }
 
     function it_updates_shipment_states(

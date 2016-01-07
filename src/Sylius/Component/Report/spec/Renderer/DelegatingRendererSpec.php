@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
+use Sylius\Component\Report\Renderer\DelegatingRendererInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
 
 /**
@@ -35,7 +36,7 @@ class DelegatingRendererSpec extends ObjectBehavior
 
     public function it_implements_delegating_renderer_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\Renderer\DelegatingRendererInterface');
+        $this->shouldImplement(DelegatingRendererInterface::class);
     }
 
     public function it_delegates_renderer_to_report(

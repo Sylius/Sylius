@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
+use Symfony\Component\Form\FormTypeInterface;
 
 class OrderTypeSpec extends ObjectBehavior
 {
@@ -20,18 +22,18 @@ class OrderTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Order', array('sylius'));
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\OrderType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_order_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderType');
+        $this->shouldHaveType(OrderType::class);
     }
 }

@@ -13,13 +13,16 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
 use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormRegistryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -44,7 +47,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
@@ -52,12 +55,12 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $calculatorRegistry->all()->willReturn(array());
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber'))
+            ->addEventSubscriber(Argument::type(BuildShippingMethodFormSubscriber::class))
             ->willReturn($builder)
         ;
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
@@ -94,12 +97,12 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber'))
+            ->addEventSubscriber(Argument::type(BuildShippingMethodFormSubscriber::class))
             ->willReturn($builder)
         ;
 
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber'))
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 

@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,7 +32,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_implements_form_data_transformer_interface()
     {
-        $this->shouldImplement('Symfony\Component\Form\DataTransformerInterface');
+        $this->shouldImplement(DataTransformerInterface::class);
     }
 
     function it_returns_empty_string_if_array_is_empty()
@@ -41,7 +43,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
     function it_throws_exception_if_not_array_transformed()
     {
         $this
-            ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+            ->shouldThrow(UnexpectedTypeException::class)
             ->duringTransform('foo')
         ;
     }
@@ -49,7 +51,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
     function it_throws_exception_if_not_string_reverse_transformed()
     {
         $this
-            ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+            ->shouldThrow(UnexpectedTypeException::class)
             ->duringTransform(false)
         ;
     }

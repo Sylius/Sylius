@@ -103,7 +103,7 @@ class OrderShippingListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($order, OrderInterface::class);
         }
 
         return $order;

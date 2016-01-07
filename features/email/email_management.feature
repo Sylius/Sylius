@@ -50,8 +50,7 @@ Feature: Managing emails
         And I click "edit" near "order_confirmation"
         When I fill in "Subject" with "A great purchase!"
         And I press "Save changes"
-        Then I should be on the email index page
-        And I should see "Email has been successfully updated."
+        Then I should see "Email has been successfully updated."
 
     Scenario: Deleting email from list
         Given I am on the email index page

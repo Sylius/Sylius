@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,7 +33,7 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_form($currencyContext, FormBuilderInterface $builder)

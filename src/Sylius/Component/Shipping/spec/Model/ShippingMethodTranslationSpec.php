@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -26,7 +27,7 @@ class ShippingMethodTranslationSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface');
+        $this->shouldImplement(ShippingMethodTranslationInterface::class);
     }
 
     function it_has_no_id_by_default()

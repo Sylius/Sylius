@@ -61,7 +61,7 @@ class ArchetypeBuilder implements ArchetypeBuilderInterface
     private function createAndAssignAttributes(ArchetypeInterface $archetype, AttributeSubjectInterface $subject)
     {
         foreach ($archetype->getAttributes() as $attribute) {
-            if (null === $subject->getAttributeByName($attribute->getName())) {
+            if (null === $subject->getAttributeByCode($attribute->getCode())) {
                 /** @var AttributeValueInterface $attributeValue */
                 $attributeValue = $this->attributeValueFactory->createNew();
                 $attributeValue->setAttribute($attribute);

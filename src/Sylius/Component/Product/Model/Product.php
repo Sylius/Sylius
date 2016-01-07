@@ -41,6 +41,11 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $availableOn;
 
     /**
+     * @var \DateTime
+     */
+    protected $availableUntil;
+
+    /**
      * @var Collection|BaseAttributeValueInterface[]
      */
     protected $attributes;
@@ -70,6 +75,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     protected $deletedAt;
 
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -89,7 +99,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @return null|ArchetypeInterface
+     * {@inheritdoc}
      */
     public function getArchetype()
     {
@@ -97,7 +107,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|ArchetypeInterface $archetype
+     * @param null|BaseArchetypeInterface $archetype
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -189,7 +199,7 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     public function isAvailable()
     {
-        return new \DateTime() >= $this->availableOn;
+        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
     }
 
     /**
@@ -206,6 +216,22 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableUntil()
+    {
+        return $this->availableUntil;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null)
+    {
+        $this->availableUntil = $availableUntil;
     }
 
     /**
@@ -259,10 +285,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByName($attributeName)
+    public function hasAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode) {
                 return true;
             }
         }
@@ -273,10 +299,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeByName($attributeName)
+    public function getAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode) {
                 return $attribute;
             }
         }
@@ -493,5 +519,37 @@ class Product extends AbstractTranslatable implements ProductInterface
                 $variant->setDeletedAt(null);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }

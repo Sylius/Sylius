@@ -34,7 +34,7 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippingMethodInterface');
+        $this->shouldImplement(ShippingMethodInterface::class);
     }
 
     function it_implements_Sylius_toogleable_interface()

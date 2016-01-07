@@ -13,6 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -27,17 +30,17 @@ class RuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
+        $this->beConstructedWith('Rule', $checkerRegistry);
     }
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleType');
+        $this->shouldHaveType(RuleType::class);
     }
 
     function it_is_configuration_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType');
+        $this->shouldHaveType(AbstractConfigurationType::class);
     }
 
     function it_builds_form(
@@ -51,7 +54,7 @@ class RuleTypeSpec extends ObjectBehavior
 
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber')
+            Argument::type(BuildRuleFormSubscriber::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
@@ -61,10 +64,13 @@ class RuleTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Rule',
-            'validation_groups' => array('sylius'),
-        ))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Rule',
+                'validation_groups' => array('Default'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => RuleInterface::TYPE_ITEM_TOTAL))->shouldBeCalled();

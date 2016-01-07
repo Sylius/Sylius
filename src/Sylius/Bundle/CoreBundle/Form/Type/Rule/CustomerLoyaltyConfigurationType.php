@@ -18,19 +18,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Nth order rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class CustomerLoyaltyConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -58,18 +49,6 @@ class CustomerLoyaltyConfigurationType extends AbstractType
             ))
             ->add('after', 'checkbox', array(
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

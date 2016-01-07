@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
@@ -91,7 +92,7 @@ class OrmFinder extends AbstractFinder
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags, u.entity')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
         $indexedItems = $queryBuilder->getQuery()->getResult();
@@ -343,7 +344,7 @@ class OrmFinder extends AbstractFinder
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId IN (:ids)')
             ->andWhere('u.entity = :model')
             ->setParameter('ids', $ids)

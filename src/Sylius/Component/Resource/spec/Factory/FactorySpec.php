@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Resource\Factory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use spec\Sylius\Component\Resource\Fixtures\SampleResource;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 require_once __DIR__.'/../Fixtures/SampleResource.php';
 
@@ -36,7 +37,7 @@ class FactorySpec extends ObjectBehavior
 
     function it_implements_factory_interface()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Factory\FactoryInterface');
+        $this->shouldHaveType(FactoryInterface::class);
     }
 
     function it_creates_a_new_instance_of_a_resource()

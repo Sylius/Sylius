@@ -44,7 +44,7 @@ class CustomerAwareListener
         }
 
         if (!$resource instanceof CustomerAwareInterface) {
-            throw new UnexpectedTypeException($resource, 'Sylius\Component\User\Model\CustomerAwareInterface');
+            throw new UnexpectedTypeException($resource, CustomerAwareInterface::class);
         }
 
         if (null === $customer = $this->customerContext->getCustomer()) {

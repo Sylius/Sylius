@@ -30,9 +30,13 @@ class UserRegistrationType extends AbstractType
         $builder
             ->add('start', 'date', array(
                 'label' => 'sylius.form.report.user_registration.start',
+                'years' => range(date('Y')-100, date('Y')),
+                'data'  => new \DateTime(),
             ))
             ->add('end', 'date', array(
                 'label' => 'sylius.form.report.user_registration.end',
+                'years' => range(date('Y')-100, date('Y')),
+                'data'  => new \DateTime(),
             ))
             ->add('period', 'choice', array(
                 'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),

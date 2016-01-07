@@ -24,7 +24,7 @@
 
         "a2lix/translation-form-bundle": "~2.0",
         "hwi/oauth-bundle": "~0.3",
-        "jms/serializer-bundle": "~0.13",
+        "jms/serializer-bundle": "^0.13|^1.0",
         "jms/translation-bundle": "1.1.*",
         "knplabs/knp-gaufrette-bundle": "~0.1",
         "mathiasverraes/money": "~1.2",
@@ -63,7 +63,9 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1",
         "fzaninotto/faker": "~1.2",
-        "symfony/form": "^2.7"
+        "symfony/form": "^2.7",
+        "lakion/api-test-case": "^1.0@dev",
+        "coduo/php-matcher": "^2.1@dev"
     },
     "suggest": {
         "sylius/web-bundle":      "Provides default web interface",
