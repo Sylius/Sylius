@@ -44,7 +44,6 @@ class AttributeValueTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         FormFactoryInterface $formFactory
     ) {
-        $builder->getFormFactory()->willReturn($formFactory);
         $builder->add('attribute', 'sylius_server_attribute_choice', Argument::any())->willReturn($builder);
 
         $builder

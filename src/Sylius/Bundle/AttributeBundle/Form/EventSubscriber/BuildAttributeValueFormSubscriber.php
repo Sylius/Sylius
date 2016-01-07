@@ -17,7 +17,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -26,29 +25,15 @@ use Symfony\Component\Form\FormInterface;
 class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var FormFactoryInterface
-     */
-    protected $formFactory;
-
-    /**
-     * @var string
-     */
-    protected $subjectName;
-
-    /**
      * @var RepositoryInterface
      */
     protected $attributeRepository;
 
     /**
-     * @param FormFactoryInterface $formFactory
-     * @param string $subjectName
      * @param RepositoryInterface $attributeRepository
      */
-    public function __construct(FormFactoryInterface $formFactory, $subjectName, RepositoryInterface $attributeRepository)
+    public function __construct(RepositoryInterface $attributeRepository)
     {
-        $this->formFactory = $formFactory;
-        $this->subjectName = $subjectName;
         $this->attributeRepository = $attributeRepository;
     }
 
@@ -71,15 +56,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
         $attributeValue = $event->getData();
 
         if (null === $attributeValue || null === $attributeValue->getAttribute()) {
-            throw new \InvalidArgumentException(sprintf(
-                'Cannot create an attribute value form without passing instance of "%s" with attribute defined as data.',
-                AttributeValueInterface::class
-            ));
+            return;
         }
 
-        $form = $event->getForm();
-
-        $this->addValueField($form, $attributeValue->getAttribute(), $attributeValue->getValue());
+        $this->addValueField($event->getForm(), $attributeValue->getAttribute());
     }
 
     /**
@@ -104,14 +84,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
      * @param FormInterface $form
      * @param AttributeInterface $attribute
      */
-    private function addValueField(FormInterface $form, AttributeInterface $attribute, $data = null)
+    private function addValueField(FormInterface $form, AttributeInterface $attribute)
     {
-        $type = $attribute->getType();
-
         $options = array('auto_initialize' => false, 'label' => $attribute->getName());
 
-        $form
-            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$type, $data, $options))
-        ;
+        $form->add('value', 'sylius_attribute_type_'.$attribute->getType(), $options);
     }
 }

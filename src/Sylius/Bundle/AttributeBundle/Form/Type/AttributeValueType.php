@@ -55,7 +55,7 @@ class AttributeValueType extends AbstractResourceType
             ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
                 'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName),
             ))
-            ->addEventSubscriber(new BuildAttributeValueFormSubscriber($builder->getFormFactory(), $this->subjectName, $this->attributeRepository))
+            ->addEventSubscriber(new BuildAttributeValueFormSubscriber($this->attributeRepository))
         ;
     }
 
