@@ -5,6 +5,7 @@ imports:
     - { resource: config.yml }
 
 parameters:
+    sylius.twig.show_exceptions: true
     sylius.order.allow_guest_order: true
 
 framework:

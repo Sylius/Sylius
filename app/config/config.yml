@@ -7,6 +7,9 @@ imports:
     - { resource: migrations.yml }    
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
 
+parameters:
+    sylius.twig.show_exceptions: %kernel.debug%
+
 framework:
     translator:      { fallback: %sylius.locale% }
     secret:          %sylius.secret%
