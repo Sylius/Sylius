@@ -72,12 +72,6 @@ class InventoryHandler implements InventoryHandlerInterface
                 $item->removeUnit($unit);
             }
         }
-
-        foreach ($item->getUnits() as $unit) {
-            if ($unit->getStockable() !== $item->getVariant()) {
-                $unit->setStockable($item->getVariant());
-            }
-        }
     }
 
     /**
@@ -142,8 +136,6 @@ class InventoryHandler implements InventoryHandlerInterface
         for ($i = 0; $i < $quantity; $i++) {
             $unit = $this->orderItemUnitFactory->createForItem($item);
             $unit->setInventoryState($state);
-
-            $item->addUnit($unit);
         }
     }
 

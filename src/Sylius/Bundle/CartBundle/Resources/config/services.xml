@@ -87,6 +87,7 @@
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
             <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.modifier.order_item_quantity" />
         </service>
 
         <service id="sylius.listener.cart_flash" class="%sylius.listener.cart_flash.class%">

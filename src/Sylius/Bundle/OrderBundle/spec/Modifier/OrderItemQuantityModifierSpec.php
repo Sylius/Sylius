@@ -41,16 +41,11 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_adds_proper_number_of_order_item_units_to_order_item(
         $orderItemUnitFactory,
-        OrderItemInterface $orderItem,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2
+        OrderItemInterface $orderItem
     ) {
         $orderItem->getQuantity()->willReturn(1);
 
-        $orderItemUnitFactory->createForItem($orderItem)->willReturn($unit1, $unit2);
-
-        $orderItem->addUnit($unit1)->shouldBeCalled();
-        $orderItem->addUnit($unit2)->shouldBeCalled();
+        $orderItemUnitFactory->createForItem($orderItem)->shouldBeCalledTimes(2);
 
         $this->modify($orderItem, 3);
     }
@@ -64,7 +59,7 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitInterface $unit3,
         OrderItemUnitInterface $unit4
     ) {
-        $orderItem->getQuantity()->willReturn(5);
+        $orderItem->getQuantity()->willReturn(4);
         $orderItem->getUnits()->willReturn($orderItemUnits);
 
         $orderItemUnits->count()->willReturn(4);
@@ -75,7 +70,6 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
         $iterator->next()->shouldBeCalled();
 
         $orderItem->removeUnit($unit1)->shouldBeCalled();
-        $orderItem->removeUnit($unit2)->shouldBeCalled();
 
         $this->modify($orderItem, 3);
     }
@@ -87,5 +81,29 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
         $orderItem->addUnit(Argument::any())->shouldNotBeCalled();
         $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
+
+        $this->modify($orderItem, 3);
+    }
+
+    function it_does_nothing_if_target_quantity_is_0($orderItemUnitFactory, OrderItemInterface $orderItem)
+    {
+        $orderItem->getQuantity()->willReturn(3);
+
+        $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
+        $orderItem->addUnit(Argument::any())->shouldNotBeCalled();
+        $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
+
+        $this->modify($orderItem, 0);
+    }
+
+    function it_does_nothing_if_target_quantity_is_below_0($orderItemUnitFactory, OrderItemInterface $orderItem)
+    {
+        $orderItem->getQuantity()->willReturn(3);
+
+        $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
+        $orderItem->addUnit(Argument::any())->shouldNotBeCalled();
+        $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
+
+        $this->modify($orderItem, -10);
     }
 }

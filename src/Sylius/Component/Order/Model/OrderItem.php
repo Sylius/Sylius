@@ -127,6 +127,10 @@ class OrderItem implements OrderItemInterface
 
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
+
+        if (null !== $this->order) {
+            $this->order->calculateItemsTotal();
+        }
     }
 
     /**
@@ -190,20 +194,6 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true)
-    {
-        if ($throwOnInvalid && !$orderItem->equals($this)) {
-            throw new \LogicException('Given item cannot be merged.');
-        }
-
-        if ($this !== $orderItem) {
-            $this->quantity += $orderItem->getQuantity();
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isImmutable()
     {
         return $this->immutable;
@@ -240,6 +230,10 @@ class OrderItem implements OrderItemInterface
             $this->quantity++;
             $this->unitsTotal += $unit->getTotal();
             $this->recalculateTotal();
+
+            if (null !== $this->order) {
+                $this->order->calculateItemsTotal();
+            }
         }
     }
 
@@ -254,6 +248,10 @@ class OrderItem implements OrderItemInterface
             $this->quantity--;
             $this->unitsTotal -= $unit->getTotal();
             $this->recalculateTotal();
+
+            if (null !== $this->order) {
+                $this->order->calculateItemsTotal();
+            }
         }
     }
 

@@ -38,13 +38,15 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
     public function modify(OrderItemInterface $orderItem, $targetQuantity)
     {
         $itemQuantity = $orderItem->getQuantity();
-
-        if ($targetQuantity > $itemQuantity) {
-            $this->increaseUnitsNumber($orderItem, $targetQuantity - $itemQuantity);
-        } else if ($targetQuantity < $itemQuantity) {
-            $this->decreaseUnitsNumber($orderItem, $itemQuantity - $targetQuantity);
+        if (0 >= $targetQuantity || $itemQuantity === $targetQuantity) {
+            return;
         }
 
+        if ($targetQuantity < $itemQuantity) {
+            $this->decreaseUnitsNumber($orderItem, $itemQuantity - $targetQuantity);
+        } else if ($targetQuantity > $itemQuantity) {
+            $this->increaseUnitsNumber($orderItem, $targetQuantity - $itemQuantity);
+        }
     }
 
     /**
@@ -54,8 +56,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
     private function increaseUnitsNumber(OrderItemInterface $orderItem, $increaseBy)
     {
         for ($i = 0; $i < $increaseBy; $i++) {
-            $unit = $this->orderItemUnitFactory->createForItem($orderItem);
-            $orderItem->addUnit($unit);
+            $this->orderItemUnitFactory->createForItem($orderItem);
         }
     }
 

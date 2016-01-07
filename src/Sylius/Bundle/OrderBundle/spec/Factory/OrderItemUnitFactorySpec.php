@@ -16,6 +16,7 @@ use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -39,7 +40,7 @@ class OrderItemUnitFactorySpec extends ObjectBehavior
 
     function it_throws_exception_while_trying_create_order_item_unit_without_order_item()
     {
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnsupportedMethodException')->during('createNew');
+        $this->shouldThrow(UnsupportedMethodException::class)->during('createNew');
     }
 
     function it_creates_new_order_item_unit_with_given_order_item(OrderItemInterface $orderItem, OrderItemUnitInterface $orderItemUnit)

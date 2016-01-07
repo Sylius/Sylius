@@ -66,9 +66,6 @@ class InventoryHandlerSpec extends ObjectBehavior
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
         $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
 
-        $item->addUnit($unit1)->shouldBeCalled();
-        $item->addUnit($unit2)->shouldBeCalled();
-
         $this->processInventoryUnits($item);
     }
 
@@ -91,9 +88,6 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldNotBeCalled();
         $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-
-        $item->addUnit($unit1)->shouldNotBeCalled();
-        $item->addUnit($unit2)->shouldBeCalled();
 
         $this->processInventoryUnits($item);
     }

@@ -387,23 +387,6 @@ class OrderSpec extends ObjectBehavior
         $this->shouldBeEmpty();
     }
 
-    function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface $item2)
-    {
-        $item1->setOrder($this)->shouldBeCalled();
-        $item1->merge($item2, false)->shouldBeCalled();
-        $item1->getTotal()->willReturn(1000);
-
-        $item2->getTotal()->willReturn(1000);
-
-        $item1->equals($item2)->willReturn(true);
-        $item2->equals($item1)->willReturn(true);
-
-        $this->addItem($item1);
-        $this->addItem($item2);
-
-        $this->countItems()->shouldReturn(1);
-    }
-
     function it_should_be_able_to_clear_items(OrderItemInterface $item)
     {
         $this->shouldBeEmpty();

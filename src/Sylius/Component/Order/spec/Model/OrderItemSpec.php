@@ -30,7 +30,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
     }
 
-    function it_implements_sylius_order_item_interface()
+    function it_implements_Sylius_order_item_interface()
     {
         $this->shouldImplement(OrderItemInterface::class);
     }
@@ -434,67 +434,6 @@ class OrderItemSpec extends ObjectBehavior
 
         $this->getAdjustmentsTotalRecursively('tax')->shouldReturn(450);
         $this->getAdjustmentsTotalRecursively('promotion')->shouldReturn(30);
-    }
-
-    function it_ignores_merging_same_items()
-    {
-        $this->merge($this);
-        $this->getQuantity()->shouldReturn(0);
-    }
-
-    function it_merges_an_equal_item_by_summing_quantities(
-        OrderItemInterface $item,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
-        OrderItemUnitInterface $unit3
-    ) {
-        $unit1->getTotal()->willReturn(100);
-        $unit2->getTotal()->willReturn(100);
-        $unit3->getTotal()->willReturn(100);
-        $unit1->getOrderItem()->willReturn($this);
-        $unit2->getOrderItem()->willReturn($this);
-        $unit3->getOrderItem()->willReturn($this);
-        $this->addUnit($unit1);
-        $this->addUnit($unit2);
-        $this->addUnit($unit3);
-
-        $item->getQuantity()->willReturn(7);
-        $item->equals($this)->willReturn(true);
-
-        $this->merge($item);
-        $this->getQuantity()->shouldReturn(10);
-    }
-
-    function it_merges_a_known_equal_item_without_calling_equals(
-        OrderItemInterface $item,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
-        OrderItemUnitInterface $unit3
-    ) {
-        $unit1->getTotal()->willReturn(100);
-        $unit2->getTotal()->willReturn(100);
-        $unit3->getTotal()->willReturn(100);
-        $unit1->getOrderItem()->willReturn($this);
-        $unit2->getOrderItem()->willReturn($this);
-        $unit3->getOrderItem()->willReturn($this);
-        $this->addUnit($unit1);
-        $this->addUnit($unit2);
-        $this->addUnit($unit3);
-
-        $item->getQuantity()->willReturn(7);
-        $item->equals($this)->shouldNotBeCalled();
-
-        $this->merge($item, false);
-        $this->getQuantity()->shouldReturn(10);
-    }
-
-    function it_throws_exception_when_merging_unequal_item(OrderItemInterface $item)
-    {
-        $item->equals($this)->willReturn(false);
-
-        $this
-            ->shouldThrow(new \LogicException('Given item cannot be merged.'))
-            ->duringMerge($item);
     }
 
     function it_can_be_immutable()

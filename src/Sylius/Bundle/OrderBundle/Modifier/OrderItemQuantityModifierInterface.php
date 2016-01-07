@@ -20,7 +20,7 @@ interface OrderItemQuantityModifierInterface
 {
     /**
      * @param OrderItemInterface $orderItem
-     * @param int $quantity
+     * @param int $targetQuantity
      */
-    public function modify(OrderItemInterface $orderItem, $quantity);
+    public function modify(OrderItemInterface $orderItem, $targetQuantity);
 }

@@ -211,16 +211,9 @@ class Order implements OrderInterface
             return;
         }
 
-        foreach ($this->items as $existingItem) {
-            if ($item->equals($existingItem)) {
-                $existingItem->merge($item, false);
-
-                return;
-            }
-        }
-
         $item->setOrder($this);
-        $this->itemsTotal += $item->getTotal();
+        $itemTotal = $item->getTotal();
+        $this->itemsTotal = $this->itemsTotal + $itemTotal;
         $this->items->add($item);
 
         $this->calculateTotal();
@@ -261,13 +254,12 @@ class Order implements OrderInterface
      */
     public function calculateItemsTotal()
     {
-        $itemsTotal = 0;
-
+        $this->itemsTotal = 0;
         foreach ($this->items as $item) {
-            $itemsTotal += $item->getTotal();
+            $this->itemsTotal += $item->getTotal();
         }
 
-        $this->itemsTotal = $itemsTotal;
+        $this->calculateTotal();
     }
 
     /**

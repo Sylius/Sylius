@@ -366,14 +366,12 @@ class Order extends Cart implements OrderInterface
     public function addPromotionCoupon(BaseCouponInterface $coupon = null)
     {
         if (null === $coupon) {
-            return $this;
+            return;
         }
 
         if (!$this->hasPromotionCoupon($coupon)) {
             $this->promotionCoupons->add($coupon);
         }
-
-        return $this;
     }
 
     /**
@@ -382,14 +380,12 @@ class Order extends Cart implements OrderInterface
     public function removePromotionCoupon(BaseCouponInterface $coupon = null)
     {
         if (null === $coupon) {
-            return $this;
+            return;
         }
 
         if ($this->hasPromotionCoupon($coupon)) {
             $this->promotionCoupons->removeElement($coupon);
         }
-
-        return $this;
     }
 
     /**

@@ -44,8 +44,7 @@ class CartItemType extends AbstractResourceType
     {
         $builder
             ->add('quantity', 'integer', array(
-                'attr' => array('min' => 1),
-                'data' => 1,
+                'attr' => array('min' => 1)
             ))
             ->setDataMapper($this->orderItemQuantityDataMapper);
         ;

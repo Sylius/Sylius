@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CartBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -26,9 +27,10 @@ class CartHelperSpec extends ObjectBehavior
     function let(
         CartProviderInterface $cartProvider,
         FactoryInterface $itemFactory,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
-        $this->beConstructedWith($cartProvider, $itemFactory, $formFactory);
+        $this->beConstructedWith($cartProvider, $itemFactory, $formFactory, $orderItemQuantityModifier);
     }
 
     function it_is_initializable()
@@ -49,13 +51,16 @@ class CartHelperSpec extends ObjectBehavior
     }
 
     function its_getItemFormView_returns_a_form_view_of_cart_item_form(
-        $itemFactory,
         $formFactory,
+        $itemFactory,
+        $orderItemQuantityModifier,
+        CartItemInterface $item,
         FormInterface $form,
-        FormView $formView,
-        CartItemInterface $item
+        FormView $formView
     ) {
         $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
+        $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
+
         $formFactory->create('sylius_cart_item', $item, array())->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
 
@@ -65,11 +70,14 @@ class CartHelperSpec extends ObjectBehavior
     function its_getItemFormView_uses_given_options_when_creating_form(
         $itemFactory,
         $formFactory,
+        $orderItemQuantityModifier,
         FormInterface $form,
         FormView $formView,
         CartItemInterface $item
     ) {
         $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
+        $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
+
         $formFactory->create('sylius_cart_item', $item, array('foo' => 'bar'))->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
 

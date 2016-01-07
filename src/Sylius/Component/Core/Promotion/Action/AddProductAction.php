@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Bundle\CoreBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;

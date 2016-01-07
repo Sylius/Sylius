@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;

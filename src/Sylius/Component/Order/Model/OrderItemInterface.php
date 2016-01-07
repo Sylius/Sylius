@@ -59,15 +59,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function equals(OrderItemInterface $orderItem);
 
     /**
-     * Merge the item given as argument corresponding to
-     * the same cart item.
-     *
-     * @param OrderItemInterface $orderItem
-     * @param bool               $throwOnInvalid
-     */
-    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true);
-
-    /**
      * @return bool
      */
     public function isImmutable();

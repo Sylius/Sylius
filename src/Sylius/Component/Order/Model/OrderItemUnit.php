@@ -99,12 +99,14 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     public function addAdjustment(AdjustmentInterface $adjustment)
     {
-        if (!$this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable($this);
-            $this->adjustments->add($adjustment);
-            $this->addToAdjustmentsTotal($adjustment);
-            $this->orderItem->recalculateUnitsTotal();
+        if ($this->hasAdjustment($adjustment)) {
+            return;
         }
+
+        $adjustment->setAdjustable($this);
+        $this->adjustments->add($adjustment);
+        $this->addToAdjustmentsTotal($adjustment);
+        $this->orderItem->recalculateUnitsTotal();
     }
 
     /**
@@ -112,12 +114,14 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     public function removeAdjustment(AdjustmentInterface $adjustment)
     {
-        if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
-            $this->subtractFromAdjustmentsTotal($adjustment);
-            $this->orderItem->recalculateUnitsTotal();
+        if ($adjustment->isLocked() || !$this->hasAdjustment($adjustment)) {
+            return;
         }
+
+        $adjustment->setAdjustable(null);
+        $this->adjustments->removeElement($adjustment);
+        $this->subtractFromAdjustmentsTotal($adjustment);
+        $this->orderItem->recalculateUnitsTotal();
     }
 
     /**
