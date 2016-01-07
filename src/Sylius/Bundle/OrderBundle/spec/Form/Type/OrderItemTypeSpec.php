@@ -43,16 +43,19 @@ class OrderItemTypeSpec extends ObjectBehavior
         $builder
             ->add('quantity', 'integer', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
             ->add('unitPrice', 'sylius_money', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
             ->setDataMapper($orderItemQuantityDataMapper)
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $this->buildForm($builder, array());
