@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b6aa6e0846f12faf113ba1a9903cc4aa",
-    "content-hash": "b81e9194013fa0e6ab47a4c301961997",
+    "hash": "eb0409b1d15349faff42fed341e94d02",
+    "content-hash": "5e910423e8450b829c86c6b338ae68f7",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -6034,12 +6034,12 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v2.3.22",
+            "version": "v3.0.34",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "98bdda791e7c2dfb5fd55781e69a4b00e4f751a6"
+                "reference": "587f3cd08bf8856cfc888b255f34f18b85930657"
             },
             "dist": {
                 "type": "zip",
