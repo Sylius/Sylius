@@ -70,12 +70,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->getQuantity()->shouldReturn(0);
     }
 
-    function its_quantity_is_mutable()
-    {
-        $this->setQuantity(8);
-        $this->getQuantity()->shouldReturn(8);
-    }
-
     function it_has_unit_price_equal_to_0_by_default()
     {
         $this->getUnitPrice()->shouldReturn(0);
@@ -96,14 +90,6 @@ class OrderItemSpec extends ObjectBehavior
     function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
-    }
-
-    function it_throws_exception_when_quantity_is_less_than_1()
-    {
-        $this
-            ->shouldThrow(new \OutOfRangeException('Quantity must be greater than 0.'))
-            ->duringSetQuantity(0)
-        ;
     }
 
     function it_initializes_adjustments_collection_by_default()
@@ -456,9 +442,21 @@ class OrderItemSpec extends ObjectBehavior
         $this->getQuantity()->shouldReturn(0);
     }
 
-    function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)
-    {
-        $this->setQuantity(3);
+    function it_merges_an_equal_item_by_summing_quantities(
+        OrderItemInterface $item,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        OrderItemUnitInterface $unit3
+    ) {
+        $unit1->getTotal()->willReturn(100);
+        $unit2->getTotal()->willReturn(100);
+        $unit3->getTotal()->willReturn(100);
+        $unit1->getOrderItem()->willReturn($this);
+        $unit2->getOrderItem()->willReturn($this);
+        $unit3->getOrderItem()->willReturn($this);
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+        $this->addUnit($unit3);
 
         $item->getQuantity()->willReturn(7);
         $item->equals($this)->willReturn(true);
@@ -467,9 +465,21 @@ class OrderItemSpec extends ObjectBehavior
         $this->getQuantity()->shouldReturn(10);
     }
 
-    function it_merges_a_known_equal_item_without_calling_equals(OrderItemInterface $item)
-    {
-        $this->setQuantity(3);
+    function it_merges_a_known_equal_item_without_calling_equals(
+        OrderItemInterface $item,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        OrderItemUnitInterface $unit3
+    ) {
+        $unit1->getTotal()->willReturn(100);
+        $unit2->getTotal()->willReturn(100);
+        $unit3->getTotal()->willReturn(100);
+        $unit1->getOrderItem()->willReturn($this);
+        $unit2->getOrderItem()->willReturn($this);
+        $unit3->getOrderItem()->willReturn($this);
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+        $this->addUnit($unit3);
 
         $item->getQuantity()->willReturn(7);
         $item->equals($this)->shouldNotBeCalled();

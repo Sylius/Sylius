@@ -27,11 +27,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function getQuantity();
 
     /**
-     * @param int $quantity
-     */
-    public function setQuantity($quantity);
-
-    /**
      * @return int
      */
     public function getUnitPrice();

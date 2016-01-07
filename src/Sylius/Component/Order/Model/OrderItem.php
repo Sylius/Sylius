@@ -95,18 +95,6 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
-    {
-        if (1 > $quantity) {
-            throw new \OutOfRangeException('Quantity must be greater than 0.');
-        }
-
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOrder()
     {
         return $this->order;
@@ -152,7 +140,7 @@ class OrderItem implements OrderItemInterface
     /**
      *  Recalculates total after units total or adjustments total change.
      */
-    protected function recalculateTotal()
+    public function recalculateTotal()
     {
         $this->total = $this->unitsTotal + $this->adjustmentsTotal;
 
