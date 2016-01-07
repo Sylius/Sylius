@@ -146,6 +146,10 @@ class OrderItem implements OrderItemInterface
 
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
+
+        if (null !== $this->order) {
+            $this->order->calculateItemsTotal();
+        }
     }
 
     /**

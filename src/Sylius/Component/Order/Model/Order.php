@@ -437,7 +437,7 @@ class Order implements OrderInterface
         }
 
         $total = 0;
-        foreach ($this->getAdjustments($type) as $adjustment) {
+        foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
             $total += $adjustment->getAmount();
         }
 
