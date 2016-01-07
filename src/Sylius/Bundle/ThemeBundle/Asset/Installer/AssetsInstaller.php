@@ -125,9 +125,9 @@ class AssetsInstaller implements AssetsInstallerInterface
      * @param ThemeInterface $theme
      * @param string $originDir
      * @param string $targetDir
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
-     * @return integer
+     * @return int
      */
     protected function installThemedBundleAssets(ThemeInterface $theme, $originDir, $targetDir, $symlinkMask)
     {
@@ -159,9 +159,9 @@ class AssetsInstaller implements AssetsInstallerInterface
     /**
      * @param string $originDir
      * @param string $targetDir
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
-     * @return integer
+     * @return int
      */
     protected function installVanillaBundleAssets($originDir, $targetDir, $symlinkMask)
     {
@@ -171,9 +171,9 @@ class AssetsInstaller implements AssetsInstallerInterface
     /**
      * @param string $origin
      * @param string $target
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
-     * @return integer
+     * @return int
      */
     protected function installAsset($origin, $target, $symlinkMask)
     {
@@ -208,7 +208,7 @@ class AssetsInstaller implements AssetsInstallerInterface
     /**
      * @param string $origin
      * @param string $target
-     * @param boolean $symlink
+     * @param bool $symlink
      *
      * @throws IOException When failed to make symbolic link, if requested.
      */
@@ -250,6 +250,8 @@ class AssetsInstaller implements AssetsInstallerInterface
     /**
      * @param string $origin
      * @param string $target
+     *
+     * @throws IOException If symbolic link is broken
      */
     private function doSymlinkAsset($origin, $target)
     {

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle;
 
-use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass;
+use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareLoaderDecoratorPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemesTranslationsSourcesPass;
@@ -30,7 +30,7 @@ class SyliusThemeBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ThemeCompilerPass());
+        $container->addCompilerPass(new ThemeRepositoryPass());
         $container->addCompilerPass(new ThemeAwareSourcesPass());
         $container->addCompilerPass(new ThemeAwareLoaderDecoratorPass());
     }

@@ -40,17 +40,30 @@ final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
         $parents = [];
         $parentsSlugs = $theme->getParentsSlugs();
         foreach ($parentsSlugs as $parentName) {
-            $parent = $this->themeRepository->findOneBySlug($parentName);
-
-            if (null === $parent) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Theme "%s" not found (required by theme "%s")!', $parentName, $theme->getSlug()
-                ), 0);
-            }
-
-            $parents = array_merge($parents, $this->getThemeHierarchy($parent));
+            $parents = array_merge(
+                $parents,
+                $this->getThemeHierarchy($this->getTheme($parentName))
+            );
         }
 
         return array_merge([$theme], $parents);
+    }
+
+    /**
+     * @param string $themeName
+     *
+     * @return ThemeInterface
+     *
+     * @throws \InvalidArgumentException If theme is not found
+     */
+    private function getTheme($themeName)
+    {
+        $theme = $this->themeRepository->findOneBySlug($themeName);
+
+        if (null === $theme) {
+            throw new \InvalidArgumentException(sprintf('Theme "%s" not found!', $themeName));
+        }
+
+        return $theme;
     }
 }

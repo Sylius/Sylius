@@ -15,7 +15,9 @@ use SplFileInfo;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader;
+use Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinderInterface;
 use Symfony\Component\Config\Resource\DirectoryResource;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -41,68 +43,71 @@ final class ThemeAwareSourcesPass implements CompilerPassInterface
      */
     private function addThemeAwareTranslationSources(ContainerBuilder $container)
     {
-        $dirs = $this->findTranslationsDirs($container);
+        $files = $this->getTranslationFiles($container);
 
-        if (empty($dirs)) {
+        if (empty($files)) {
             return;
         }
 
+        $groupedFiles = $this->groupFilesByLocale($files);
+
         $translator = $container->findDefinition('translator.default');
-
-        // Register translation resources
-        foreach ($dirs as $dir) {
-            $container->addResource(new DirectoryResource($dir));
-        }
-
-        $files = [];
-        $finder = Finder::create()
-            ->files()
-            ->filter(function (SplFileInfo $file) {
-                return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
-            })
-            ->in($dirs);
-
-        /** @var SplFileInfo $file */
-        foreach ($finder as $file) {
-            $locale = explode('.', $file->getBasename(), 3)[1];
-            if (!isset($files[$locale])) {
-                $files[$locale] = [];
-            }
-
-            $files[$locale][] = (string)$file;
-        }
 
         $options = array_merge_recursive(
             $translator->getArgument(3),
-            ['resource_files' => $files]
+            ['resource_files' => $groupedFiles]
         );
 
         $translator->replaceArgument(3, $options);
+
+        $this->addContainerResources($container, $files);
+    }
+
+    private function getTranslationFiles(ContainerBuilder $container)
+    {
+        /** @var TranslationFilesFinderInterface $translationFilesFinder */
+        $translationFilesFinder = $container->get('sylius.theme.translation.files_finder');
+        $themes = $container->get('sylius.theme.repository')->findAll();
+
+        $files = [];
+        foreach ($themes as $theme) {
+            $files = array_merge(
+                $files,
+                $translationFilesFinder->findTranslationFiles($theme)
+            );
+        }
+
+        return $files;
     }
 
     /**
      * @param ContainerBuilder $container
+     * @param array $files
+     */
+    private function addContainerResources(ContainerBuilder $container, $files)
+    {
+        foreach ($files as $file) {
+            $container->addResource(new FileResource($file));
+        }
+    }
+
+    /**
+     * @param array $files
      *
      * @return array
      */
-    private function findTranslationsDirs(ContainerBuilder $container)
+    private function groupFilesByLocale($files)
     {
-        /** @var ThemeInterface[] $themes */
-        $themes = $container->get('sylius.theme.repository')->findAll();
-
-        $dirs = [];
-        foreach ($themes as $theme) {
-            foreach ($container->getParameter('kernel.bundles') as $bundle => $class) {
-                if (is_dir($dir = $theme->getPath() . '/' . $bundle . '/translations')) {
-                    $dirs[] = $dir;
-                }
+        $groupedFiles = [];
+        foreach ($files as $file) {
+            $locale = explode('.', basename($file), 3)[1];
+            if (!isset($groupedFiles[$locale])) {
+                $groupedFiles[$locale] = [];
             }
 
-            if (is_dir($dir = $theme->getPath() . '/translations')) {
-                $dirs[] = $dir;
-            }
+            $groupedFiles[$locale][] = $file;
         }
 
-        return $dirs;
+        return $groupedFiles;
     }
 }

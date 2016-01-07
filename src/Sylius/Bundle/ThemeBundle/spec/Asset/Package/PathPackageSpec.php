@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Asset\Package;
 
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage;
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
@@ -24,16 +24,14 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PathPackageSpec extends FixtureAwareObjectBehavior
+class PathPackageSpec extends ObjectBehavior
 {
     function let(
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $pathResolver
     ) {
-        chdir($this->getBasePath());
-
-        $this->beConstructedWith($this->getBasePath(), $versionStrategy, $themeContext, $pathResolver);
+        $this->beConstructedWith('/', $versionStrategy, $themeContext, $pathResolver);
     }
 
     function it_is_initializable()
@@ -53,7 +51,7 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
         $themeContext->getTheme()->shouldBeCalled()->willReturn(null);
         $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
 
-        $this->getUrl($path)->shouldReturn($this->getBasePath() . $path);
+        $this->getUrl($path)->shouldReturn('/' . $path);
     }
 
     function it_returns_modified_url_if_there_is_active_theme(
@@ -70,14 +68,6 @@ class PathPackageSpec extends FixtureAwareObjectBehavior
         $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themeAssetPath);
         $versionStrategy->applyVersion($themeAssetPath)->shouldBeCalled()->willReturn($themeAssetPath);
 
-        $this->getUrl($path)->shouldReturn($this->getBasePath() . $themeAssetPath);
-    }
-
-    /**
-     * @return string
-     */
-    private function getBasePath()
-    {
-        return $this->getFixturePath('web') . '/';
+        $this->getUrl($path)->shouldReturn('/' . $themeAssetPath);
     }
 }

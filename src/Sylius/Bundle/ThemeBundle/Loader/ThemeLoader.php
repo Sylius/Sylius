@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Filesystem\Filesystem;
+use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 use Symfony\Component\Config\Loader\Loader;
 
 /**
@@ -22,15 +24,22 @@ use Symfony\Component\Config\Loader\Loader;
 abstract class ThemeLoader extends Loader
 {
     /**
+     * @var FilesystemInterface
+     */
+    private $filesystem;
+
+    /**
      * @var ThemeFactoryInterface
      */
     private $themeFactory;
 
     /**
+     * @param FilesystemInterface $filesystem
      * @param ThemeFactoryInterface $themeFactory
      */
-    public function __construct(ThemeFactoryInterface $themeFactory)
+    public function __construct(FilesystemInterface $filesystem, ThemeFactoryInterface $themeFactory)
     {
+        $this->filesystem = $filesystem;
         $this->themeFactory = $themeFactory;
     }
 
@@ -39,14 +48,14 @@ abstract class ThemeLoader extends Loader
      */
     public function load($resource, $type = null)
     {
-        if (!file_exists($resource)) {
+        if (!$this->filesystem->exists($resource)) {
             throw new \InvalidArgumentException(sprintf('Given theme metadata file "%s" does not exists!', $resource));
         }
 
-        $themeData = $this->transformResourceContentsToArray(file_get_contents($resource));
+        $themeData = $this->transformResourceContentsToArray($this->filesystem->getFileContents($resource));
 
         $theme = $this->themeFactory->createFromArray($themeData);
-        $theme->setPath(realpath(dirname($resource)));
+        $theme->setPath(substr($resource, 0, strrpos($resource, '/')));
 
         return $theme;
     }

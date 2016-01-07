@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RequestListener
+final class RequestListener
 {
     /**
      * @var ThemeRepositoryInterface

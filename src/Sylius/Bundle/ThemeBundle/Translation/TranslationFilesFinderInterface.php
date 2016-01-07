@@ -9,22 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Locator;
+namespace Sylius\Bundle\ThemeBundle\Translation;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ResourceLocatorInterface
+interface TranslationFilesFinderInterface
 {
     /**
-     * @param string $resourceName
      * @param ThemeInterface $theme
      *
-     * @return string
-     *
-     * @throws ResourceNotFoundException
+     * @return array Paths to translation files
      */
-    public function locateResource($resourceName, ThemeInterface $theme);
+    public function findTranslationFiles(ThemeInterface $theme);
 }

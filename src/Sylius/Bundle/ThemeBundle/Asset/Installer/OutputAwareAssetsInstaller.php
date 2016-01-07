@@ -69,7 +69,7 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     private function hasOutput()
     {
@@ -77,8 +77,8 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
     }
 
     /**
-     * @param integer $symlinkMask
-     * @param integer $effectiveSymlinkMask
+     * @param int $symlinkMask
+     * @param int $effectiveSymlinkMask
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
     }
 
     /**
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
      * @return string
      */

@@ -62,13 +62,16 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * @return ThemeInterface[]
+     * @return ThemeInterface
      */
     public function getUsedTheme()
     {
         return $this->usedTheme;
     }
 
+    /**
+     * @return ThemeInterface[]
+     */
     public function getThemeHierarchy()
     {
         return $this->themeHierarchy;

@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass;
+use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -22,15 +22,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * @mixin ThemeCompilerPass
+ * @mixin ThemeRepositoryPass
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeCompilerPassSpec extends ObjectBehavior
+class ThemeRepositoryPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass');
     }
 
     function it_implements_compiler_pass_interface()

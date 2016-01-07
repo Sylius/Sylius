@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
-use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -26,23 +27,31 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
     /**
      * @var TemplateFinderInterface
      */
-    private $finder;
+    private $templateFinder;
 
     /**
-     * @var FileLocatorInterface
+     * @var ResourceLocatorInterface
      */
-    private $locator;
+    private $resourceLocator;
 
     /**
-     * @param TemplateFinderInterface $finder
-     * @param FileLocatorInterface $locator
+     * @var ThemeRepositoryInterface
+     */
+    private $themeRepository;
+
+    /**
+     * @param TemplateFinderInterface $templateFinder
+     * @param ResourceLocatorInterface $resourceLocator
+     * @param ThemeRepositoryInterface $themeRepository
      */
     public function __construct(
-        TemplateFinderInterface $finder,
-        FileLocatorInterface $locator
+        TemplateFinderInterface $templateFinder,
+        ResourceLocatorInterface $resourceLocator,
+        ThemeRepositoryInterface $themeRepository
     ) {
-        $this->finder = $finder;
-        $this->locator = $locator;
+        $this->templateFinder = $templateFinder;
+        $this->resourceLocator = $resourceLocator;
+        $this->themeRepository = $themeRepository;
     }
 
     /**
@@ -50,14 +59,20 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
      */
     public function warmUp($cacheDir)
     {
-        $templates = [];
+        $templates = $this->templateFinder->findAllTemplates();
 
-        /** @var TemplateReferenceInterface $template */
-        foreach ($this->finder->findAllTemplates() as $template) {
-            $templates[$template->getLogicalName()] = $this->locator->locate($template);
+        $templatesLocations = [];
+
+        /** @var ThemeInterface $theme */
+        foreach ($this->themeRepository->findAll() as $theme) {
+            /** @var TemplateReferenceInterface $template */
+            foreach ($templates as $template) {
+
+                $templatesLocations[$template->getLogicalName() . "|" . $theme->getSlug()] = $this->resourceLocator->locateResource($template->getPath(), $theme);
+            }
         }
 
-        $this->writeCacheFile($cacheDir . '/templates.php', sprintf('<?php return %s;', var_export($templates, true)));
+        $this->writeCacheFile($cacheDir . '/templates_themes.php', sprintf('<?php return %s;', var_export($templatesLocations, true)));
     }
 
     /**

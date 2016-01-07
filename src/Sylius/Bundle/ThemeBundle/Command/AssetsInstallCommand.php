@@ -69,6 +69,9 @@ class AssetsInstallCommand extends ContainerAwareCommand
         $assetsInstaller->installAssets($input->getArgument('target'), $symlinkMask);
     }
 
+    /**
+     * @return string
+     */
     private function getHelpMessage()
     {
         return <<<EOT

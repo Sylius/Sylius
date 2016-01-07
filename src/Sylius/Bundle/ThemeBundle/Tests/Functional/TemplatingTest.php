@@ -27,7 +27,7 @@ class TemplatingTest extends ThemeBundleTestCase
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/template/' . $templateName);
-        $this->assertEquals($contents, $crawler->text());
+        $this->assertEquals($contents, trim($crawler->text()));
     }
 
     /**
@@ -55,7 +55,7 @@ class TemplatingTest extends ThemeBundleTestCase
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/template/' . $templateName);
-        $this->assertEquals($contents, $crawler->text());
+        $this->assertEquals($contents, trim($crawler->text()));
     }
 
     /**

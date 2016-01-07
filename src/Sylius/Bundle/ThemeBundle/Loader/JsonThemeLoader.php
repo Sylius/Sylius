@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Loader;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class JsonThemeLoader extends ThemeLoader
+final class JsonThemeLoader extends ThemeLoader
 {
     /**
      * {@inheritdoc}

@@ -47,18 +47,18 @@ interface AssetsInstallerInterface
 
     /**
      * @param string $targetDir
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
-     * @return integer Effective symlink mask (lowest value received from installBundleAssets() method)
+     * @return int Effective symlink mask (lowest value received from installBundleAssets() method)
      */
     public function installAssets($targetDir, $symlinkMask);
 
     /**
      * @param BundleInterface $bundle
      * @param string $targetDir
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      *
-     * @return integer Effective symlink mask (lowest value received from installDirAssets() method)
+     * @return int Effective symlink mask (lowest value received from installDirAssets() method)
      */
     public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask);
 }

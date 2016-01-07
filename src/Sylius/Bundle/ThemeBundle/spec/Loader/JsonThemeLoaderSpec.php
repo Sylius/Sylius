@@ -11,10 +11,11 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 use Sylius\Bundle\ThemeBundle\Loader\JsonThemeLoader;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 /**
@@ -22,11 +23,11 @@ use Symfony\Component\Config\Loader\LoaderInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class JsonThemeLoaderSpec extends FixtureAwareObjectBehavior
+class JsonThemeLoaderSpec extends ObjectBehavior
 {
-    function let(ThemeFactoryInterface $themeFactory)
+    function let(FilesystemInterface $filesystem, ThemeFactoryInterface $themeFactory)
     {
-        $this->beConstructedWith($themeFactory);
+        $this->beConstructedWith($filesystem, $themeFactory);
     }
 
     function it_is_initializable()
@@ -39,29 +40,28 @@ class JsonThemeLoaderSpec extends FixtureAwareObjectBehavior
         $this->shouldImplement(LoaderInterface::class);
     }
 
-    function it_loads_valid_theme_file(ThemeFactoryInterface $themeFactory, ThemeInterface $theme)
+    function it_loads_valid_theme_file(FilesystemInterface $filesystem, ThemeFactoryInterface $themeFactory, ThemeInterface $theme)
     {
+        $filesystem->exists('/themes/SampleTheme/theme.json')->willReturn(true);
+        $filesystem->getFileContents('/themes/SampleTheme/theme.json')->willReturn(
+            '{ "name": "Sample Theme", "slug": "sylius/sample-theme", "description": "Lorem ipsum dolor sit amet." }'
+        );
+
         $themeFactory->createFromArray([
             "name" => "Sample Theme",
             "slug" => "sylius/sample-theme",
             "description" => "Lorem ipsum dolor sit amet.",
-        ])->shouldBeCalled()->willReturn($theme);
+        ])->willReturn($theme);
 
-        $theme->setPath(realpath(dirname($this->getValidThemeFilePath())))->shouldBeCalled();
+        $theme->setPath('/themes/SampleTheme')->shouldBeCalled();
 
-        $this->load($this->getValidThemeFilePath())->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\ThemeInterface');
+        $this->load('/themes/SampleTheme/theme.json')->shouldReturn($theme);
     }
 
-    function it_throws_exception_if_given_file_does_not_exist()
+    function it_throws_exception_if_given_file_does_not_exist(FilesystemInterface $filesystem)
     {
+        $filesystem->exists('/non/existent/path/60861204')->willReturn(false);
+
         $this->shouldThrow('\InvalidArgumentException')->duringLoad('/non/existent/path/60861204');
-    }
-
-    /**
-     * @return string
-     */
-    private function getValidThemeFilePath()
-    {
-        return $this->getFixturePath('themes/SampleTheme/theme.json');
     }
 }

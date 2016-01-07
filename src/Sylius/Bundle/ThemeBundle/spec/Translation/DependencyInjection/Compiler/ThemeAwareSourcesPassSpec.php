@@ -11,11 +11,13 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
+use Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinderInterface;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,7 +27,7 @@ use Symfony\Component\DependencyInjection\Definition;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeAwareSourcesPassSpec extends FixtureAwareObjectBehavior
+class ThemeAwareSourcesPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -37,10 +39,15 @@ class ThemeAwareSourcesPassSpec extends FixtureAwareObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_does_nothing_if_there_is_no_theme(ContainerBuilder $containerBuilder, ThemeRepositoryInterface $themeRepository)
-    {
-        $containerBuilder->get("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepository);
-        $themeRepository->findAll()->shouldBeCalled()->willReturn([]);
+    function it_does_nothing_if_there_is_no_theme(
+        ContainerBuilder $containerBuilder,
+        ThemeRepositoryInterface $themeRepository,
+        TranslationFilesFinderInterface $translationFilesFinder
+    ) {
+        $containerBuilder->get('sylius.theme.repository')->willReturn($themeRepository);
+        $themeRepository->findAll()->willReturn([]);
+
+        $containerBuilder->get('sylius.theme.translation.files_finder')->willReturn($translationFilesFinder);
 
         $this->process($containerBuilder);
     }
@@ -48,53 +55,47 @@ class ThemeAwareSourcesPassSpec extends FixtureAwareObjectBehavior
     function it_finds_translation_files_and_adds_them_to_translator(
         ContainerBuilder $containerBuilder,
         ThemeRepositoryInterface $themeRepository,
-        ThemeInterface $firstTheme, ThemeInterface $secondTheme,
+        TranslationFilesFinderInterface $translationFilesFinder,
+        ThemeInterface $firstTheme,
+        ThemeInterface $secondTheme,
         Definition $translatorDefinition
     ) {
-        $containerBuilder->get("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepository);
-        $themeRepository->findAll()->shouldBeCalled()->willReturn([$firstTheme, $secondTheme]);
+        $containerBuilder->get('sylius.theme.repository')->willReturn($themeRepository);
+        $themeRepository->findAll()->willReturn([$firstTheme, $secondTheme]);
+        
+        $containerBuilder->get('sylius.theme.translation.files_finder')->willReturn($translationFilesFinder);
+        $translationFilesFinder->findTranslationFiles($firstTheme)->willReturn([
+            '/theme1/SampleBundle/translations/messages.en.yml',
+            '/theme1/translations/messages.pl.yml',
+        ]);
+        $translationFilesFinder->findTranslationFiles($secondTheme)->willReturn([
+            '/theme2/translations/messages.en.yml',
+        ]);
 
-        $firstTheme->getPath()->shouldBeCalled()->willReturn($this->getFirstThemePath());
-        $secondTheme->getPath()->shouldBeCalled()->willReturn($this->getSecondThemePath());
+        $containerBuilder->findDefinition('translator.default')->willReturn($translatorDefinition);
 
-        $containerBuilder->getParameter('kernel.bundles')->shouldBeCalled()->willReturn(["SampleBundle" => "/Foo/Bar"]);
-        $containerBuilder->addResource(Argument::type('Symfony\Component\Config\Resource\DirectoryResource'))->shouldBeCalled();
-        $containerBuilder->findDefinition('translator.default')->shouldBeCalled()->willReturn($translatorDefinition);
-
-        $translatorDefinition->getArgument(3)->shouldBeCalled()->willReturn([
-            "resource_files" => [
-                "en" => [
-                    "/lorem/ipsum/messages.en.yml",
-                ]
-            ]
+        $translatorDefinition->getArgument(3)->willReturn([
+            'resource_files' => [
+                'en' => [
+                    '/lorem/ipsum/messages.en.yml',
+                ],
+            ],
         ]);
         $translatorDefinition->replaceArgument(3, [
-            "resource_files" => [
-                "en" => [
-                    "/lorem/ipsum/messages.en.yml",
-                    $this->getFirstThemePath() . '/SampleBundle/translations/messages.en.yml',
-                    $this->getFirstThemePath() . '/translations/messages.en.yml',
-                    $this->getSecondThemePath() . '/translations/messages.en.yml',
-                ]
+            'resource_files' => [
+                'en' => [
+                    '/lorem/ipsum/messages.en.yml',
+                    '/theme1/SampleBundle/translations/messages.en.yml',
+                    '/theme2/translations/messages.en.yml',
+                ],
+                'pl' => [
+                    '/theme1/translations/messages.pl.yml',
+                ],
             ]
         ])->shouldBeCalled();
 
+        $containerBuilder->addResource(Argument::type(FileResource::class))->shouldBeCalledTimes(3);
+
         $this->process($containerBuilder);
-    }
-
-    /**
-     * @return string
-     */
-    private function getFirstThemePath()
-    {
-        return $this->getFixturePath('themes/SampleTheme');
-    }
-
-    /**
-     * @return string
-     */
-    private function getSecondThemePath()
-    {
-        return $this->getFixturePath('themes/SecondSampleTheme');
     }
 }

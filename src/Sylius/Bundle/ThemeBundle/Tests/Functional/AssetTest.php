@@ -21,7 +21,7 @@ class AssetTest extends ThemeBundleTestCase
     /**
      * @dataProvider getSymlinkMasks
      *
-     * @param integer $symlinkMask
+     * @param int $symlinkMask
      */
     public function testAssets($symlinkMask)
     {
@@ -39,11 +39,15 @@ class AssetTest extends ThemeBundleTestCase
         $crawler = $client->request('GET', '/template/:Asset:assetsTest.txt.twig');
         $lines = explode("\n", $crawler->text());
         foreach ($lines as $line) {
+            if (empty($line)) {
+                continue;
+            }
+
             list($expectedText, $assetFile) = explode(": ", $line);
 
             $contents = file_get_contents($webDirectory . $assetFile);
 
-            $this->assertEquals($expectedText, $contents);
+            $this->assertEquals($expectedText, trim($contents));
         }
     }
 

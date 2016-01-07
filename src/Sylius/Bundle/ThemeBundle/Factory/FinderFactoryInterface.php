@@ -9,14 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle;
+namespace Sylius\Bundle\ThemeBundle\Factory;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TestBundle extends Bundle
+interface FinderFactoryInterface
 {
-
+    /**
+     * @return Finder
+     */
+    public function create();
 }

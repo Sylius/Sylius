@@ -11,8 +11,7 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Loader;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ThemeBundle\PhpSpec\FixtureAwareObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader;
@@ -24,15 +23,10 @@ use Symfony\Component\Translation\MessageCatalogueInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeAwareLoaderSpec extends FixtureAwareObjectBehavior
+class ThemeAwareLoaderSpec extends ObjectBehavior
 {
-    function let(LoaderInterface $loader, ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)
+    function let(LoaderInterface $loader, ThemeRepositoryInterface $themeRepository)
     {
-        $theme->getSlug()->willReturn("sylius/sample-theme");
-
-        $themeRepository->findOneByPath(realpath($this->getThemeTranslationResourcePath()))->willReturn($theme);
-        $themeRepository->findOneByPath(realpath($this->getVanillaTranslationResourcePath()))->willReturn(null);
-
         $this->beConstructedWith($loader, $themeRepository);
     }
 
@@ -48,41 +42,30 @@ class ThemeAwareLoaderSpec extends FixtureAwareObjectBehavior
 
     function it_does_not_change_anything_if_given_file_is_not_included_in_any_theme(
         LoaderInterface $loader,
+        ThemeRepositoryInterface $themeRepository,
         MessageCatalogueInterface $messageCatalogue
     ) {
-        $loader->load($this->getVanillaTranslationResourcePath(), 'en', 'messages')->shouldBeCalled()->willReturn($messageCatalogue);
+        $loader->load('/theme/resource.en.xml', 'en', 'messages')->willReturn($messageCatalogue);
 
-        $this->load($this->getVanillaTranslationResourcePath(), 'en', 'messages')->shouldReturn($messageCatalogue);
+        $themeRepository->findOneByPath('/theme/resource.en.xml')->shouldBeCalled()->willReturn(null);
+
+        $this->load('/theme/resource.en.xml', 'en', 'messages')->shouldReturn($messageCatalogue);
     }
 
     function it_adds_theme_slug_to_keys_if_given_file_is_included_in_theme(
         LoaderInterface $loader,
-        MessageCatalogueInterface $messageCatalogue
+        ThemeRepositoryInterface $themeRepository,
+        MessageCatalogueInterface $messageCatalogue,
+        ThemeInterface $theme
     ) {
-        $loader->load($this->getThemeTranslationResourcePath(), 'en', 'messages')->shouldBeCalled()->willReturn($messageCatalogue);
+        $loader->load('/theme/resource.en.xml', 'en', 'messages')->willReturn($messageCatalogue);
+    
+        $themeRepository->findOneByPath('/theme/resource.en.xml')->willReturn($theme);
+        $theme->getSlug()->willReturn('sylius/sample-theme');
 
-        $messagesBefore = ["key" => "value"];
-        $messagesAfter = ["key|sylius/sample-theme" => "value"];
+        $messageCatalogue->all('messages')->willReturn(['key' => 'value']);
+        $messageCatalogue->replace(['key|sylius/sample-theme' => 'value'], 'messages')->shouldBeCalled();
 
-        $messageCatalogue->all('messages')->shouldBeCalled()->willReturn($messagesBefore);
-        $messageCatalogue->replace($messagesAfter, 'messages')->shouldBeCalled();
-
-        $this->load($this->getThemeTranslationResourcePath(), 'en', 'messages')->shouldReturn($messageCatalogue);
-    }
-
-    /**
-     * @return string
-     */
-    private function getThemeTranslationResourcePath()
-    {
-        return $this->getFixturePath('themes/SampleTheme/translations/messages.en.yml');
-    }
-
-    /**
-     * @return string
-     */
-    private function getVanillaTranslationResourcePath()
-    {
-        return $this->getFixturePath('app/translations/messages.en.yml');
+        $this->load('/theme/resource.en.xml', 'en', 'messages')->shouldReturn($messageCatalogue);
     }
 }

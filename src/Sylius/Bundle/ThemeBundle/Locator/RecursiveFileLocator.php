@@ -12,24 +12,32 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RecursiveFileLocator implements FileLocatorInterface
+final class RecursiveFileLocator implements FileLocatorInterface
 {
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     /**
      * @var array
      */
-    protected $paths;
+    private $paths;
 
     /**
+     * @param Filesystem $filesystem
      * @param string|array $paths A path or an array of paths where to look for resources
      */
-    public function __construct($paths = [])
+    public function __construct(Filesystem $filesystem, $paths = [])
     {
+        $this->filesystem = $filesystem;
         $this->paths = (array) $paths;
     }
 
@@ -42,8 +50,8 @@ class RecursiveFileLocator implements FileLocatorInterface
             throw new \InvalidArgumentException('An empty file name is not valid to be located.');
         }
 
-        if ($this->isAbsolutePath($name)) {
-            if (!file_exists($name)) {
+        if ($this->filesystem->isAbsolutePath($name)) {
+            if (!$this->filesystem->exists($name)) {
                 throw new \InvalidArgumentException(sprintf('The file "%s" does not exist.', $name));
             }
 
@@ -81,25 +89,5 @@ class RecursiveFileLocator implements FileLocatorInterface
         }
 
         return array_values(array_unique($filepaths));
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return boolean
-     */
-    private function isAbsolutePath($path)
-    {
-        if ($path[0] === '/' || $path[0] === '\\'
-            || (strlen($path) > 3 && ctype_alpha($path[0])
-                && $path[1] === ':'
-                && ($path[2] === '\\' || $path[2] === '/')
-            )
-            || null !== parse_url($path, PHP_URL_SCHEME)
-        ) {
-            return true;
-        }
-
-        return false;
     }
 }

@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeCompilerPass implements CompilerPassInterface
+class ThemeRepositoryPass implements CompilerPassInterface
 {
     /**
      * Adds serialized themes to theme repository.
