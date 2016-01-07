@@ -11,24 +11,24 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\spec\Fixture\ParameterFixture;
 use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ObjectToIdentifierTransformerSpec extends ObjectBehavior
+class ResourceToIdentifierTransformerSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $repository)
+    function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository, 'name');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ResourceToIdentifierTransformer');
     }
 
     function it_should_implement_parameter_transformer_interface()

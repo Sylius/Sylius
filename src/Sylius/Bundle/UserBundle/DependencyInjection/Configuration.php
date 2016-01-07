@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\CustomerController;
 use Sylius\Bundle\UserBundle\Controller\UserController;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType;
@@ -225,6 +226,7 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(GroupType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

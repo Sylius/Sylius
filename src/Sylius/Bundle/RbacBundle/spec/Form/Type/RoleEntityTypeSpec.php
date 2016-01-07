@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RoleEntityTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(MetadataInterface $metadata)
     {
-        $this->beConstructedWith('Role', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'name');
+        $this->beConstructedWith($metadata);
     }
 
     function it_is_initializable()
@@ -37,8 +38,9 @@ class RoleEntityTypeSpec extends ObjectBehavior
         $this->shouldHaveType(ResourceChoiceType::class);
     }
 
-    function it_has_options(OptionsResolver $resolver)
+    function it_has_options(OptionsResolver $resolver, $metadata)
     {
+        $metadata->getDriver()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
         $resolver->setDefaults(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setNormalizer('class', Argument::type('callable'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefaults(Argument::withKey('query_builder'))->shouldBeCalled()->willReturn($resolver);

@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Settings;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
-use Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer;
+use Sylius\Bundle\SettingsBundle\Transformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,14 +24,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 class TaxationSettingsSchema implements SchemaInterface
 {
     /**
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     private $zoneRepository;
 
     /**
-     * @param ObjectRepository $zoneRepository
+     * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(ObjectRepository $zoneRepository)
+    public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
     }
@@ -46,9 +46,9 @@ class TaxationSettingsSchema implements SchemaInterface
                 'default_tax_zone' => null,
             ])
             ->setAllowedTypes('default_tax_zone', ['null', ZoneInterface::class])
-            ->setTransformer('default_tax_zone', new ObjectToIdentifierTransformer($this->zoneRepository))
             ->setDefault('default_tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('default_tax_calculation_strategy', 'string')
+            ->setTransformer('default_tax_zone', new ResourceToIdentifierTransformer($this->zoneRepository))
         ;
     }
 

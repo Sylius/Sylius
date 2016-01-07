@@ -15,20 +15,18 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @author Anna Walasek <anna.walasek@lakion.com>
+ */
 class ResourceChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(MetadataInterface $metadata)
     {
-        $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
-    }
-
-    function it_throws_unknown_driver_exception_when_constructing_with_invalid_driver()
-    {
-        $this->shouldThrow(UnknownDriverException::class)
-            ->during('__construct', ['CountryModel', 'badDriver', 'sylius_country_choice']);
+        $this->beConstructedWith($metadata);
     }
 
     function it_is_initializable()
@@ -36,8 +34,19 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType');
     }
 
-    function it_has_a_valid_name()
+    function it_throws_unknown_driver_exception_when_constructing_with_invalid_driver($metadata)
     {
+        $metadata->getClass('model')->willReturn('CountryModel');
+        $metadata->getDriver()->willReturn('badDriver');
+
+        $this->shouldThrow(UnknownDriverException::class)->during('getParent');
+    }
+
+    function it_has_a_valid_name($metadata)
+    {
+        $metadata->getName()->willReturn('country');
+        $metadata->getApplicationName()->willReturn('sylius');
+
         $this->getName()->shouldReturn('sylius_country_choice');
     }
 
@@ -46,45 +55,43 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_has_a_parent_type_for_orm_driver()
+    function it_has_a_parent_type_for_orm_driver($metadata)
     {
-        $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
+        $metadata->getDriver()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+        $this->beConstructedWith($metadata);
 
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_has_a_parent_type_for_mongodb_odm_driver()
+    function it_has_a_parent_type_for_mongodb_odm_driver($metadata)
     {
-        $this->beConstructedWith(
-            'CountryModel',
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-            'sylius_country_choice'
-        );
+        $metadata->getDriver()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM);
+        $this->beConstructedWith($metadata);
 
         $this->getParent()->shouldReturn('document');
     }
 
-    function it_has_a_parent_type_for_phpcr_odm_driver()
+    function it_has_a_parent_type_for_phpcr_odm_driver($metadata)
     {
-        $this->beConstructedWith(
-            'CountryModel',
-            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
-            'sylius_country_choice'
-        );
+        $metadata->getDriver()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM);
+        $this->beConstructedWith($metadata);
 
         $this->getParent()->shouldReturn('phpcr_document');
     }
 
-    function it_defines_resource_options(OptionsResolver $resolver)
+    function it_defines_resource_options(OptionsResolver $resolver, $metadata)
     {
+        $metadata->getDriver()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
         $resolver
             ->setDefaults([
                 'class' => null,
             ])
+            ->shouldBeCalled()
             ->willReturn($resolver)
         ;
         $resolver
             ->setNormalizer('class', Argument::type('callable'))
+            ->shouldBeCalled()
             ->willReturn($resolver)
         ;
 

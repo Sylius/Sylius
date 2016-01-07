@@ -151,11 +151,14 @@ abstract class AbstractDriver implements DriverInterface
             $definition = new Definition($formClass);
 
             switch ($formName) {
-                case 'choice':
+                case ('choice' === $formName || 'autocomplete' === $formName):
+                    $definition->addArgument($this->getMetadataDefinition($metadata));
+                break;
+
+                case ('to_identifier' === $formName || 'from_identifier' === $formName || 'to_hidden_identifier' === $formName):
                     $definition->setArguments([
-                        $metadata->getClass('model'),
-                        $metadata->getDriver(),
-                        $alias,
+                        new Reference($metadata->getServiceId('repository')),
+                        $this->getMetadataDefinition($metadata),
                     ]);
                 break;
 

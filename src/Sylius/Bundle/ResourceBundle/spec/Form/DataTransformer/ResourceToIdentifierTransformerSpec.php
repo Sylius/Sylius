@@ -11,17 +11,17 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
-class ObjectToIdentifierTransformerSpec extends ObjectBehavior
+class ResourceToIdentifierTransformerSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $repository)
+    function let(RepositoryInterface $repository)
     {
         $repository->getClassName()->willReturn('spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer\FakeEntity');
         $this->beConstructedWith($repository, 'id');
@@ -29,24 +29,24 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer');
     }
 
-    function it_does_not_transform_null_value(ObjectRepository $repository)
+    function it_does_not_transform_null_value(RepositoryInterface $repository)
     {
         $repository->findOneBy(Argument::any())->shouldNotBeCalled();
 
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_throws_an_exception_on_non_existing_entity(ObjectRepository $repository)
+    function it_throws_an_exception_on_non_existing_entity(RepositoryInterface $repository)
     {
         $repository->findOneBy(['id' => 6])->shouldBeCalled()->willReturn(null);
 
         $this->shouldThrow(TransformationFailedException::class)->during('transform', [6]);
     }
 
-    function it_transforms_identifier_to_entity(ObjectRepository $repository, FakeEntity $entity)
+    function it_transforms_identifier_to_entity(RepositoryInterface $repository, FakeEntity $entity)
     {
         $repository->findOneBy(['id' => 5])->shouldBeCalled()->willReturn($entity);
 

@@ -12,6 +12,21 @@ Feature: Promotions
             | P2   | Christmas      | Christmas Sale for orders over 100 EUR | 0           | 0    | 2013-12-10 | 2013-12-25 |
             | P3   | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
             | P4   | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
+        And there are following groups:
+            | name                |
+            | Wholesale Customers |
+            | Retail Customers    |
+            | Administrators      |
+            | Sales               |
+        And there are following countries:
+            | name    | provinces                       |
+            | France  | Lyon, Toulouse, Rennes, Nancy   |
+            | China   |                                 |
+            | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
+        And the following products exist:
+            | name    | price |
+            | Mug     | 5.99  |
+            | Sticker | 10.00 |
         And promotion "New Year" has following rules defined:
             | type          | configuration |
             | Cart quantity | Count: 3      |
@@ -313,3 +328,72 @@ Feature: Promotions
         When I fill in "Code" with "XD0001"
         And I press "Create"
         Then I should see "This coupon already exists"
+
+    @javascript
+    Scenario: Creating new promotion with Shipping Country rule
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add rule"
+        And I select "Shipping country" from "Type"
+        And I select "France" from "Country"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created"
+
+    @javascript
+    Scenario: Creating new promotion with User Group rule
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add rule"
+        And I select "User Group" from "Type"
+        And I select "Sales" from "Customer group"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created"
+
+    @javascript
+    Scenario: Creating new promotion with Contains Product rule
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add rule"
+        And I select "Contains Product" from "Type"
+        And I select "Sticker" from "Variant"
+        And I fill in "Count" with "12"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created"
+
+    @javascript
+    Scenario: Creating new promotion with Add Product action
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add action"
+        And I select "Add product" from "Type"
+        And I select "Sticker" from "Variant"
+        And I fill in "Quantity" with "12"
+        And I fill in "Unit price" with "5"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created"
+
+    @javascript
+    Scenario: Creating new promotion with Taxonomy rule
+        Given I am on the promotion creation page
+        When I fill in "Code" with "P5"
+        And I fill in "Name" with "Behat Training"
+        And I fill in "Description" with "Behat Training discount for orders over 5000 EUR"
+        And I click "Add rule"
+        And I select "Taxonomy" from "Type"
+        And I select "Shirts" from "Category"
+        And I select "New" from "Special"
+        And I press "Create"
+        Then I should see "Behat Training"
+        And I should see "Promotion has been successfully created"

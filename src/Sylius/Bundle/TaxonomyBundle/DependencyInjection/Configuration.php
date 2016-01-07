@@ -16,8 +16,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Taxonomy\Factory\TaxonFactory;
-use Sylius\Component\Taxonomy\Factory\TaxonomyFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;

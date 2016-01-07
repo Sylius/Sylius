@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -21,10 +21,10 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ObjectToIdentifierTransformer implements DataTransformerInterface
+class ResourceToIdentifierTransformer implements DataTransformerInterface
 {
     /**
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $repository;
 
@@ -34,10 +34,10 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
     protected $identifier;
 
     /**
-     * @param ObjectRepository $repository
-     * @param string           $identifier
+     * @param RepositoryInterface $repository
+     * @param string $identifier
      */
-    public function __construct(ObjectRepository $repository, $identifier = 'id')
+    public function __construct(RepositoryInterface $repository, $identifier = 'id')
     {
         $this->repository = $repository;
         $this->identifier = $identifier;

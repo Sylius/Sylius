@@ -13,43 +13,27 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
+ * @author Anna Walasek <anna.walasek@gmail.com>
  */
 class ResourceChoiceType extends AbstractType
 {
     /**
-     * @var string
+     * @var MetadataInterface
      */
-    protected $className;
+    protected $metadata;
 
     /**
-     * @var string
+     * @param MetadataInterface $metadata
      */
-    protected $parent;
-
-    /**
-     * Form name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @param string $className
-     * @param string $driver
-     * @param string $name
-     *
-     * @throws UnknownDriverException
-     */
-    public function __construct($className, $driver, $name)
+    public function __construct(MetadataInterface $metadata)
     {
-        $this->className = $className;
-        $this->name = $name;
-        $this->parent = $this->getFormTypeForDriver($driver);
+        $this->metadata = $metadata;
     }
 
     /**
@@ -62,7 +46,7 @@ class ResourceChoiceType extends AbstractType
                 'class' => null,
             ])
             ->setNormalizer('class', function () {
-                return $this->className;
+                return $this->metadata->getClass('model');
             })
         ;
     }
@@ -72,7 +56,7 @@ class ResourceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return $this->parent;
+        return $this->getFormTypeForDriver($this->metadata->getDriver());
     }
 
     /**
@@ -80,7 +64,7 @@ class ResourceChoiceType extends AbstractType
      */
     public function getName()
     {
-        return $this->name;
+        return sprintf('%s_%s_choice', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 
     /**

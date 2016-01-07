@@ -41,13 +41,10 @@ class CustomerGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('groups', 'sylius_entity_to_identifier', [
+            ->add('groups', 'sylius_group_from_identifier', [
                 'label' => 'sylius.form.action.customer_group',
                 'property' => 'name',
                 'class' => $this->groupRepository->getClassName(),
-                'query_builder' => function () {
-                    return $this->groupRepository->getFormQueryBuilder();
-                },
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
