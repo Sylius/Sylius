@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-class ObjectSelectionToIdentifierCollectionTransformer implements DataTransformerInterface
+class ResourceSelectionToIdentifierCollectionTransformer implements DataTransformerInterface
 {
     /**
      * @var object[]
