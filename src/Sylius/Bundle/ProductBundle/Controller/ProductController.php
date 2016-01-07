@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**

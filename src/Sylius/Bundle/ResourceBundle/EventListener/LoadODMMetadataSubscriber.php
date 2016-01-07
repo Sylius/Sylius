@@ -15,6 +15,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * Doctrine listener used to manipulate mappings.

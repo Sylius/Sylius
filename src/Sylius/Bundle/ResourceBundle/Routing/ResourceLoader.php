@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Yaml\Yaml;
 
 /**

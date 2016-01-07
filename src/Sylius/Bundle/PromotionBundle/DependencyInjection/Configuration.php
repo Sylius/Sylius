@@ -17,6 +17,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\CouponType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Promotion\Model\Action;
 use Sylius\Component\Promotion\Model\ActionInterface;

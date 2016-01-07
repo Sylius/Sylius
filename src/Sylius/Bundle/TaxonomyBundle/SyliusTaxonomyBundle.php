@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TaxonomyBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TaxonomyBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 

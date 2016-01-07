@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;

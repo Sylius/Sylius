@@ -18,6 +18,7 @@ use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
