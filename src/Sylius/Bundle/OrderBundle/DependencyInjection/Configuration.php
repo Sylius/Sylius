@@ -157,6 +157,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(OrderItemUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(OrderItemUnitFactory::class)->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

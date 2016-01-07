@@ -452,6 +452,19 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getAdjustmentsRecursively($type = null)
+    {
+        $adjustments = $this->getAdjustments($type)->toArray();
+        foreach ($this->items as $item) {
+            $adjustments = array_merge($adjustments, $item->getAdjustmentsRecursively($type));
+        }
+
+        return $adjustments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAdjustment(AdjustmentInterface $adjustment)
     {
         if (!$this->hasAdjustment($adjustment)) {
@@ -491,7 +504,7 @@ class Order implements OrderInterface
         }
 
         $total = 0;
-        foreach ($this->getAdjustments($type) as $adjustment) {
+        foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
             $total += $adjustment->getAmount();
         }
 

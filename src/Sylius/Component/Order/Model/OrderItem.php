@@ -146,6 +146,10 @@ class OrderItem implements OrderItemInterface
 
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
+
+        if (null !== $this->order) {
+            $this->order->calculateItemsTotal();
+        }
     }
 
     /**
@@ -275,6 +279,19 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getAdjustmentsRecursively($type = null)
+    {
+        $adjustments = $this->getAdjustments($type)->toArray();
+        foreach ($this->units as $unit) {
+            $adjustments = array_merge($adjustments, $unit->getAdjustments($type)->toArray());
+        }
+
+        return $adjustments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAdjustment(AdjustmentInterface $adjustment)
     {
         if (!$this->hasAdjustment($adjustment)) {
@@ -345,6 +362,17 @@ class OrderItem implements OrderItemInterface
             }
 
             $this->removeAdjustment($adjustment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustmentsRecursively($type = null)
+    {
+        $this->removeAdjustments($type);
+        foreach ($this->units as $unit) {
+            $unit->removeAdjustments($type);
         }
     }
 

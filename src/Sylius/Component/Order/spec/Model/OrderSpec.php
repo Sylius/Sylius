@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustableInterface;
@@ -199,6 +200,32 @@ class OrderSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
+    }
+
+    function it_returns_adjustments_recursively(
+        AdjustmentInterface $orderAdjustment,
+        AdjustmentInterface $itemAdjustment1,
+        AdjustmentInterface $itemAdjustment2,
+        OrderItemInterface $item1,
+        OrderItemInterface $item2
+    ) {
+        $item1->setOrder($this)->shouldBeCalled();
+        $item1->getTotal()->willReturn(100);
+        $item1->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment1));
+
+        $item2->setOrder($this)->shouldBeCalled();
+        $item2->getTotal()->willReturn(100);
+        $item2->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment2));
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+
+        $orderAdjustment->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment->isNeutral()->willReturn(true);
+
+        $this->addAdjustment($orderAdjustment);
+
+        $this->getAdjustmentsRecursively()->shouldReturn(array($orderAdjustment, $itemAdjustment1, $itemAdjustment2));
     }
 
     function it_has_adjustments_total_equal_to_0_by_default()

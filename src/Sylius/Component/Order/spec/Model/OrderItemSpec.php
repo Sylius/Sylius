@@ -105,6 +105,36 @@ class OrderItemSpec extends ObjectBehavior
         $this->getAdjustments()->shouldHaveType(Collection::class);
     }
 
+    function it_returns_adjustments_recursively(
+        AdjustmentInterface $itemAdjustment,
+        AdjustmentInterface $unitAdjustment1,
+        AdjustmentInterface $unitAdjustment2,
+        Collection $unitAdjustments1,
+        Collection $unitAdjustments2,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2
+    ) {
+        $unit1->getOrderItem()->willReturn($this);
+        $unit1->getTotal()->willReturn(100);
+        $unit1->getAdjustments(null)->willReturn($unitAdjustments1);
+        $unitAdjustments1->toArray()->willReturn(array($unitAdjustment1));
+
+        $unit2->getOrderItem()->willReturn($this);
+        $unit2->getTotal()->willReturn(100);
+        $unit2->getAdjustments(null)->willReturn($unitAdjustments2);
+        $unitAdjustments2->toArray()->willReturn(array($unitAdjustment2));
+
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $itemAdjustment->setAdjustable($this)->shouldBeCalled();
+        $itemAdjustment->isNeutral()->willReturn(true);
+
+        $this->addAdjustment($itemAdjustment);
+
+        $this->getAdjustmentsRecursively()->shouldReturn(array($itemAdjustment, $unitAdjustment1, $unitAdjustment2));
+    }
+
     function it_adds_and_removes_units(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2)
     {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());

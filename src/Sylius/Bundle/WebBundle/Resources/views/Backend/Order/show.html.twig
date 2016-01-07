@@ -130,9 +130,9 @@
         <tr class="taxes">
             <td colspan="2">
                 <h5>{{ 'sylius.order.taxes'|trans }}</h5>
-                {% if not order.adjustments(taxAdjustment).isEmpty() %}
+                {% if not order.getAdjustmentsRecursively(taxAdjustment).isEmpty() %}
                     <ul class="list-unstyled">
-                        {% for taxAdjustment in order.adjustments(taxAdjustment) %}
+                        {% for taxAdjustment in order.getAdjustmentsRecursively(taxAdjustment) %}
                             <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
                         {% endfor %}
                     </ul>
