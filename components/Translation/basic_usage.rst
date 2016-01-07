@@ -26,7 +26,7 @@ First let's create a class which will keep our translatable properties:
        /**
         * @return string
         */
-       public getTitle()
+       public function getTitle()
        {
            return $this->title;
        }
@@ -34,7 +34,7 @@ First let's create a class which will keep our translatable properties:
        /**
         * @param string $title
         */
-       public setTitle($title)
+       public function setTitle($title)
        {
            $this->title = $title;
        }
@@ -60,7 +60,7 @@ Now the following class will be actually capable of translating the **title**:
        /**
         * @return string
         */
-       public getTitle()
+       public function getTitle()
        {
            return $this->translate()->getTitle();
        }
@@ -68,7 +68,7 @@ Now the following class will be actually capable of translating the **title**:
        /**
         * @param string $title
         */
-       public setTitle($title)
+       public function setTitle($title)
        {
            $this->translate()->setTitle($title);
        }
