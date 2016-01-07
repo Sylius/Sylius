@@ -16,7 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\RbacBundle\Form\EventSubscriber\AddParentFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

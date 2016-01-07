@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Product\Model\AttributeInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * Default product attributes to play with Sylius.

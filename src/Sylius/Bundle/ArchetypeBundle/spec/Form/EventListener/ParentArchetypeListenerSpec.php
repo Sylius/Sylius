@@ -11,15 +11,11 @@
 
 namespace spec\Sylius\Bundle\ArchetypeBundle\Form\EventListener;
 
-use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 

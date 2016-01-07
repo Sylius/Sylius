@@ -11,11 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Variable;
 
 /**
  * Adds all resources to the registry.

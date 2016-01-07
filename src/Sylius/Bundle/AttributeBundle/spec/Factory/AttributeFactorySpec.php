@@ -14,12 +14,9 @@ namespace spec\Sylius\Bundle\AttributeBundle\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\Attribute;
-use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

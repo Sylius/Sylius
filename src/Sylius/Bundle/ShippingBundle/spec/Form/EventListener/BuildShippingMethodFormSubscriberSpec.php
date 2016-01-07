@@ -16,7 +16,6 @@ use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

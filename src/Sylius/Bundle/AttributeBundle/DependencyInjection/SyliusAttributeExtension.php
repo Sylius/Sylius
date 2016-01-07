@@ -12,9 +12,6 @@
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Product\Model\Attribute;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;

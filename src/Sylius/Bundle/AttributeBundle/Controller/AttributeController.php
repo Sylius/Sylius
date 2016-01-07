@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Controller;
 
-use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
