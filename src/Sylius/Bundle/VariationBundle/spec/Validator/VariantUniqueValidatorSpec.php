@@ -17,7 +17,7 @@ use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantUnique;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

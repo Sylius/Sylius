@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -35,9 +35,9 @@ abstract class MenuBuilder
     /**
      * Security context.
      *
-     * @var SecurityContextInterface
+     * @var AuthorizationCheckerInterface
      */
-    protected $securityContext;
+    protected $authorizationChecker;
 
     /**
      * Translator instance.
@@ -59,31 +59,31 @@ abstract class MenuBuilder
     protected $eventDispatcher;
 
     /**
-     * @var AuthorizationCheckerInterface
+     * @var RbacAuthorizationCheckerInterface
      */
-    protected $authorizationChecker;
+    protected $rbacAuthorizationChecker;
 
     /**
      * Constructor.
      *
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      */
     public function __construct(
         FactoryInterface $factory,
-        SecurityContextInterface $securityContext,
+        AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
-        AuthorizationCheckerInterface $authorizationChecker
+        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
         $this->factory = $factory;
-        $this->securityContext = $securityContext;
+        $this->authorizationChecker = $authorizationChecker;
         $this->translator = $translator;
         $this->eventDispatcher = $eventDispatcher;
-        $this->authorizationChecker = $authorizationChecker;
+        $this->rbacAuthorizationChecker = $rbacAuthorizationChecker;
     }
 
     /**

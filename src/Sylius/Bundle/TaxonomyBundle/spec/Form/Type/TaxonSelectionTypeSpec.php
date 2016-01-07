@@ -84,7 +84,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
             'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
         ))->shouldBeCalled();
 
-        $resolver->setNormalizers(Argument::withKey('model_transformer'))->shouldBeCalled();
+        $resolver->setNormalizer('model_transformer', Argument::type('callable'))->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

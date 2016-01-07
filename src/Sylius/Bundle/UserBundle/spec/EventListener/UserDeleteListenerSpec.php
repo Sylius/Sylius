@@ -17,8 +17,8 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * User delete listener spec.
@@ -29,9 +29,9 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class UserDeleteListenerSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext, SessionInterface $session, FlashBagInterface $flashBag)
+    function let(TokenStorageInterface $tokenStorage, SessionInterface $session, FlashBagInterface $flashBag)
     {
-        $this->beConstructedWith($securityContext, $session);
+        $this->beConstructedWith($tokenStorage, $session);
         $session->getBag('flashes')->willReturn($flashBag);
     }
 
@@ -40,12 +40,12 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserDeleteListener');
     }
 
-    function it_deletes_user_if_it_is_different_than_currently_loggged_one(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedUser, $flashBag, $securityContext, TokenInterface $tokenInterface)
+    function it_deletes_user_if_it_is_different_than_currently_loggged_one(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedUser, $flashBag, $tokenStorage, TokenInterface $tokenInterface)
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
-        $securityContext->getToken()->willReturn($tokenInterface);
+        $tokenStorage->getToken()->willReturn($tokenInterface);
         $currentlyLoggedUser->getId()->willReturn(1);
         $tokenInterface->getUser()->willReturn($currentlyLoggedUser);
 
@@ -54,12 +54,12 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $this->deleteUser($event);
     }
 
-    function it_deletes_user_if_no_user_is_logged_in(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $securityContext, TokenInterface $tokenInterface)
+    function it_deletes_user_if_no_user_is_logged_in(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $tokenStorage, TokenInterface $tokenInterface)
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
-        $securityContext->getToken()->willReturn($tokenInterface);
+        $tokenStorage->getToken()->willReturn($tokenInterface);
         $tokenInterface->getUser()->willReturn(null);
 
         $event->stopPropagation()->shouldNotBeCalled();
@@ -67,23 +67,23 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $this->deleteUser($event);
     }
 
-    function it_deletes_user_if_there_is_no_token(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $securityContext)
+    function it_deletes_user_if_there_is_no_token(ResourceEvent $event, UserInterface $userToBeDeleted, $flashBag, $tokenStorage)
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
-        $securityContext->getToken()->willReturn(null);
+        $tokenStorage->getToken()->willReturn(null);
 
         $event->stopPropagation()->shouldNotBeCalled();
         $flashBag->add('error', Argument::any())->shouldNotBeCalled();
         $this->deleteUser($event);
     }
 
-    function it_does_not_allow_to_delete_currently_logged_user(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $securityContext, $flashBag, TokenInterface $token)
+    function it_does_not_allow_to_delete_currently_logged_user(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $tokenStorage, $flashBag, TokenInterface $token)
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
-        $securityContext->getToken()->willReturn($token);
+        $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
 

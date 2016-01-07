@@ -14,7 +14,7 @@ namespace Sylius\Bundle\RbacBundle\Provider;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -22,16 +22,16 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class SecurityIdentityProvider implements CurrentIdentityProviderInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    private $securityContext;
+    private $tokenStorage;
 
     /**
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(SecurityContextInterface $securityContext)
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -39,7 +39,7 @@ class SecurityIdentityProvider implements CurrentIdentityProviderInterface
      */
     public function getIdentity()
     {
-        if (null === $token = $this->securityContext->getToken()) {
+        if (null === $token = $this->tokenStorage->getToken()) {
             return;
         }
 

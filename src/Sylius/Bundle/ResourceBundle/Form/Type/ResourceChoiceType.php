@@ -61,11 +61,9 @@ class ResourceChoiceType extends AbstractType
             ->setDefaults(array(
                 'class' => null,
             ))
-            ->setNormalizers(array(
-                'class' => function () {
-                    return $this->className;
-                },
-            ))
+            ->setNormalizer('class', function () {
+                return $this->className;
+            })
         ;
     }
 

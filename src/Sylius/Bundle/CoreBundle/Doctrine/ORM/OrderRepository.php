@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -26,7 +26,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * @param CustomerInterface $customer
      * @param array         $sorting
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createByCustomerPaginator(CustomerInterface $customer, array $sorting = array())
     {
@@ -115,7 +115,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * @param array   $sorting
      * @param Boolean $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
@@ -220,7 +220,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * @param array   $sorting
      * @param Boolean $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createCheckoutsPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {

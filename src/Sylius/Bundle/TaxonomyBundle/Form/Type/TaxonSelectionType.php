@@ -90,25 +90,23 @@ class TaxonSelectionType extends AbstractType
             ))
         ;
 
-        $resolver->setNormalizers(array(
-            'model_transformer' => function (Options $options, $value) {
-                if (!is_array($value)) {
-                    $value = array(
-                        'class'        => $value,
-                        'save_objects' => true,
-                    );
-                } else {
-                    if (!isset($value['class'])) {
-                        $value['class'] = TaxonSelectionToCollectionTransformer::class;
-                    }
-                    if (!isset($value['save_objects'])) {
-                        $value['save_objects'] = true;
-                    }
+        $resolver->setNormalizer('model_transformer', function (Options $options, $value) {
+            if (!is_array($value)) {
+                $value = array(
+                    'class'        => $value,
+                    'save_objects' => true,
+                );
+            } else {
+                if (!isset($value['class'])) {
+                    $value['class'] = TaxonSelectionToCollectionTransformer::class;
                 }
+                if (!isset($value['save_objects'])) {
+                    $value['save_objects'] = true;
+                }
+            }
 
-                return $value;
-            },
-        ));
+            return $value;
+        });
     }
 
     /**

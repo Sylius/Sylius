@@ -122,7 +122,7 @@ class SettingsManager implements SettingsManagerInterface
         // Remove unknown settings' parameters (e.g. From a previous version of the settings schema)
         if (true === $ignoreUnknown) {
             foreach ($parameters as $name => $value) {
-                if (!$settingsBuilder->isKnown($name)) {
+                if (!$settingsBuilder->isDefined($name)) {
                     unset($parameters[$name]);
                 }
             }

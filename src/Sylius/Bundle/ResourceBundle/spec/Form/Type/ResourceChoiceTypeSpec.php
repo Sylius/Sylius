@@ -84,7 +84,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
             ->willReturn($resolver)
         ;
         $resolver
-            ->setNormalizers(Argument::any())
+            ->setNormalizer('class', Argument::type('callable'))
             ->willReturn($resolver)
         ;
 
