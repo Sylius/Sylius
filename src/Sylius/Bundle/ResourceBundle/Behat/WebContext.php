@@ -380,7 +380,7 @@ class WebContext extends DefaultContext
 
         $this->waitForModalToAppear($attributesModalContainer);
 
-        $this->getSession()->getPage()->checkField($attribute.' attribute');
+        $this->getSession()->getPage()->checkField($attribute);
         $addAttributesButton->press();
 
         $this->waitForModalToDisappear($attributesModalContainer);

@@ -3,23 +3,16 @@
          data-form-collection-index="{{ count }}"
          class="collection-item">
         <div class="collection-box">
-
-            <p class="text-right">
-                <a href="#" data-form-collection="delete" class="btn btn-danger">
+            {% set id = form.vars.id|replace(' ', '_')|lower %}
+            <label class="control-label required" for="{{ id }}">{{ form.vars.label }}</label>
+            <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
+            <div class="row">
+                <div class="col-xs-10">{{ _self.formField(form, count, id, '') }}</div>
+                <a href="#" data-form-collection="delete" class="btn btn-danger col-xs-2">
                     <i class="glyphicon glyphicon-remove collection-button-remove"></i>
                     {{ 'sylius.delete'|trans }}
                 </a>
-            </p>
-
-            <div class="form-group">
-                {% set id = form.vars.id|replace(' ', '_')|lower %}
-                <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
-                <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
-                <div class="col-lg-10">
-                    {{ _self.formField(form, count, id, '') }}
-                </div>
             </div>
-
         </div>
     </div>
     {% set count = count+1 %}

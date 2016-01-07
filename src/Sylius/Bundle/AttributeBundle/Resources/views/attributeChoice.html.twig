@@ -7,17 +7,19 @@
             </div>
             <div class="modal-body">
                 <form action="{{ path('sylius_backend_render_attribute_forms') }}" method="GET" id="attributeChoice">
+                    {{ form_row(form._token) }}
                     <div class="list-group row">
-                        {% for attributeField in form %}
-                            {% if attributeField.vars.name != '_token' %}
-                            <a oldhref class="list-group-item col-xs-12 col-md-6">
-                                {{ attributeField.vars.label }} {{ form_widget(attributeField, { 'id': attributeField.vars.label~' attribute' }) }}
-                            </a>
-                            {% endif %}
+                        {% for attributeField in form if not attributeField.rendered %}
+                            <label for="{{ attributeField.vars.id }}" class="list-group-item col-xs-12 col-md-6">
+                                {{ form_widget(attributeField) }}
+                                <span class="col-xs-11 pull-right">{{ attributeField.vars.label }}</span>
+                            </label>
                         {% endfor %}
                     </div>
+                    <br>
                     <button type="submit" class="btn btn-success">
-                        <i class="icon-plus"></i><span>{{ 'sylius.form.attribute.add_attributes'|trans }}</span>
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        {{ 'sylius.form.attribute.add_attributes'|trans }}
                     </button>
                 </form>
             </div>
