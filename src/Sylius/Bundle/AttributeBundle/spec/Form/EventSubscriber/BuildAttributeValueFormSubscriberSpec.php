@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
+use Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -40,56 +42,60 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
     {
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'preSetData', 'form.pre_bind' => 'preSubmit'));
     }
-
-    function it_is_triggered_pre_set_data_to_build_form_for_new_product_attribute(
-        $formFactory,
-        Form $form,
-        Form $valueField,
-        FormEvent $event
-    ) {
+    
+    function it_throws_an_exception_on_pre_set_data_event_when_attribute_value_is_undefined(FormEvent $event)
+    {
         $event->getData()->willReturn(null);
-        $event->getForm()->willReturn($form);
 
-        $formFactory->createNamed('value', 'sylius_attribute_type_text', null, Argument::type('array'))->willReturn($valueField);
-        $form->add($valueField)->shouldBeCalled()->willReturn($form);
-
-        $this->preSetData($event);
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('preSetData', array($event))
+        ;
     }
 
-    function it_is_triggered_pre_set_data_to_add_fields_base_on_product_attribute(
+    function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute(
         $formFactory,
-        AttributeInterface $productAttribute,
-        AttributeValueInterface $productAttributeValue,
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue,
         Form $form,
         Form $valueField,
         FormEvent $event
     ) {
-        $event->getData()->willReturn($productAttributeValue);
+        $event->getData()->willReturn($attributeValue);
         $event->getForm()->willReturn($form);
 
-        $productAttributeValue->getAttribute()->willReturn($productAttribute);
-        $productAttribute->getType()->willReturn('text');
-        $productAttribute->getName()->willReturn('Test');
+        $attributeValue->getAttribute()->willReturn($attribute);
+        $attributeValue->getValue()->willReturn(true);
+        $attribute->getType()->willReturn(CheckboxAttributeType::TYPE);
+        $attribute->getName()->willReturn('Is promoted?');
 
-        $productAttributeValue->getValue()->willReturn('Test');
-
-        $formFactory->createNamed('value', 'sylius_attribute_type_text', 'Test', Argument::type('array'))->willReturn($valueField);
+        $formFactory->createNamed('value', 'sylius_attribute_type_checkbox', true, Argument::type('array'))->willReturn($valueField);
 
         $form->add($valueField)->shouldBeCalled();
 
         $this->preSetData($event);
     }
 
-    function it_is_triggered_pre_submit_to_add_proper_typed_form_field(
+    function it_throws_an_exception_on_pre_submit_event_when_attribute_id_is_undefined(FormEvent $event)
+    {
+        $event->getData()->willReturn(array());
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('preSubmit', array($event))
+        ;
+    }
+
+    function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute_id(
         $attributeRepository,
         $formFactory,
-        AttributeInterface $productAttribute,
+        AttributeInterface $attribute,
         Form $form,
         Form $valueField,
         FormEvent $event
     ) {
         $event->getData()->willReturn(array(
-            'attribute' => 1,
+            'attribute' => 6,
             'value' => array(
                 'year'  => 2010,
                 'month' => 01,
@@ -98,11 +104,12 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         ));
         $event->getForm()->willReturn($form);
 
-        $attributeRepository->find(1)->willReturn($productAttribute);
-        $productAttribute->getType()->willReturn('date');
-        $productAttribute->getStorageType()->willReturn('date');
+        $attributeRepository->find(6)->willReturn($attribute);
+        $attribute->getName()->willReturn('Release Date');
+        $attribute->getType()->willReturn(DateAttributeType::TYPE);
+        $attribute->getStorageType()->willReturn(AttributeValueInterface::STORAGE_DATE);
 
-        $formFactory->createNamed('value', 'sylius_attribute_type_date', Argument::type('\DateTime'), Argument::type('array'))->willReturn($valueField);
+        $formFactory->createNamed('value', 'sylius_attribute_type_date', null, Argument::type('array'))->willReturn($valueField);
         $form->add($valueField)->shouldBeCalled();
 
         $this->preSubmit($event);

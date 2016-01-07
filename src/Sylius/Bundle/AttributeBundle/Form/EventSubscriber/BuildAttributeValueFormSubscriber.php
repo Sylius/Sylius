@@ -11,12 +11,14 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -67,21 +69,17 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $attributeValue = $event->getData();
-        $form = $event->getForm();
-        $options = array('label' => false, 'auto_initialize' => false);
 
-        if (null === $attributeValue) {
-            $form->add($this->formFactory->createNamed('value', 'sylius_attribute_type_text', null, $options));
-
-            return;
+        if (null === $attributeValue || null === $attributeValue->getAttribute()) {
+            throw new \InvalidArgumentException(sprintf(
+                'Cannot create an attribute value form without passing instance of "%s" with attribute defined as data.',
+                AttributeValueInterface::class
+            ));
         }
 
-        $attribute = $attributeValue->getAttribute();
-        $options['label'] = $attribute->getName();
+        $form = $event->getForm();
 
-        $form
-            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$attribute->getType(), $attributeValue->getValue(), $options))
-        ;
+        $this->addValueField($form, $attributeValue->getAttribute(), $attributeValue->getValue());
     }
 
     /**
@@ -90,57 +88,30 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         $attributeValue = $event->getData();
-        $form = $event->getForm();
 
-        if (empty($attributeValue) || !isset($attributeValue['value'])) {
-            return;
+        if (!isset($attributeValue['value']) || !isset($attributeValue['attribute'])) {
+            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without "attribute" and "value" keys in data.');
         }
 
+        $form = $event->getForm();
         $attribute = $this->attributeRepository->find($attributeValue['attribute']);
-        $type = $attribute->getType();
-        $storageType = $attribute->getStorageType();
 
-        $options = array('auto_initialize' => false);
+        $this->addValueField($form, $attribute);
 
-        $form
-            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$type, $this->provideAttributeValue($storageType, $attributeValue['value']), $options))
-        ;
     }
 
     /**
-     * @param string $storageType
-     * @param mixed $value
-     *
-     * @return mixed
+     * @param FormInterface $form
+     * @param AttributeInterface $attribute
      */
-    private function provideAttributeValue($storageType, $value)
+    private function addValueField(FormInterface $form, AttributeInterface $attribute, $data = null)
     {
-        if (AttributeValueInterface::STORAGE_DATE === $storageType) {
-            $dateValue = sprintf('%d/%d/%d',
-                $value['year'],
-                $value['month'],
-                $value['day']
-            );
+        $type = $attribute->getType();
 
-            return new \DateTime($dateValue);
-        }
+        $options = array('auto_initialize' => false, 'label' => $attribute->getName());
 
-        if (AttributeValueInterface::STORAGE_DATETIME === $storageType) {
-            $dateTimeValue = sprintf('%d/%d/%d %d:%d',
-                $value['date']['year'],
-                $value['date']['month'],
-                $value['date']['day'],
-                $value['time']['hour'],
-                $value['time']['minute']
-            );
-
-            return new \DateTime($dateTimeValue);
-        }
-
-        if (AttributeValueInterface::STORAGE_BOOLEAN === $storageType) {
-            return ('1' === $value) ? true : false;
-        }
-
-        return $value;
+        $form
+            ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$type, $data, $options))
+        ;
     }
 }
