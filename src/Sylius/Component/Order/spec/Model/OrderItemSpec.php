@@ -84,7 +84,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice([4498]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(new \stdClass());
     }
 
@@ -100,7 +100,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal([4498]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
     }
 

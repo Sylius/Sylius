@@ -23,7 +23,7 @@ class PaymentGatewayChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('offline' => 'Offline'));
+        $this->beConstructedWith(['offline' => 'Offline']);
     }
 
     function it_is_initializable()
@@ -38,9 +38,9 @@ class PaymentGatewayChoiceTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array('offline' => 'Offline'),
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'choices' => ['offline' => 'Offline'],
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

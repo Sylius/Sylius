@@ -66,7 +66,7 @@ class Payment implements PaymentInterface, PaymentSubjectInterface
     /**
      * @var array
      */
-    protected $details = array();
+    protected $details = [];
 
     /**
      * Constructor.

@@ -38,7 +38,7 @@ class PurchaseListener
 
     public function abandonCart(PurchaseCompleteEvent $event)
     {
-        if (in_array($event->getSubject()->getState(), array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
+        if (in_array($event->getSubject()->getState(), [PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED])) {
             $this->cartProvider->abandonCart();
 
             return;
@@ -87,7 +87,7 @@ class PurchaseListener
 
         $this->session->getBag('flashes')->add(
             $type,
-            $this->translator->trans($message, array(), 'flashes')
+            $this->translator->trans($message, [], 'flashes')
         );
     }
 }

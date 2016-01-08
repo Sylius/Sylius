@@ -22,9 +22,9 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $dataFetchers = array(
+        $dataFetchers = [
             'user_registration' => 'User Registration',
-        );
+        ];
         $this->beConstructedWith($dataFetchers);
     }
     
@@ -50,11 +50,11 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
 
     function it_defines_data_fetcher_choices(OptionsResolver $resolver)
     {
-        $dataFetchers = array(
+        $dataFetchers = [
             'user_registration' => 'User Registration',
-        );
+        ];
 
-        $resolver->setDefaults(array('choices' => $dataFetchers))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => $dataFetchers])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

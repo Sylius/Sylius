@@ -43,15 +43,15 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getPresentation()->shouldBeCalled()->willReturn(null);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', array(
+        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
             'label'         => 'option_name',
             'option'        => $option,
             'property_path' => '[0]'
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'options' => array($option)
-        ));
+        $this->buildForm($builder, [
+            'options' => [$option]
+        ]);
     }
 
     function it_builds_a_form_using_option_name_as_label_if_presentation_is_empty(
@@ -63,22 +63,22 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getName()->shouldNotBeCalled();
 
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', array(
+        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
             'label'         => 'option_presentation',
             'option'        => $option,
             'property_path' => '[0]'
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'options' => array($option)
-        ));
+        $this->buildForm($builder, [
+            'options' => [$option]
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'options' => null
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

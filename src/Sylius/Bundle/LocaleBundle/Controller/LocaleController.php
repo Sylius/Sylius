@@ -41,7 +41,7 @@ class LocaleController extends ResourceController
         if ($this->config->isApiRequest()) {
             $view = $this
                 ->view()
-                ->setData(array('locale' => $locale))
+                ->setData(['locale' => $locale])
             ;
 
             return $this->handleView($view);

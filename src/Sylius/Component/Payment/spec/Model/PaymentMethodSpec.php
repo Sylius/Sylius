@@ -127,7 +127,7 @@ class PaymentMethodSpec extends ObjectBehavior
 
     function its_fee_calculator_configuration_is_mutable()
     {
-        $this->setFeeCalculatorConfiguration(array('amount' => 10));
-        $this->getFeeCalculatorConfiguration()->shouldReturn(array('amount' => 10));
+        $this->setFeeCalculatorConfiguration(['amount' => 10]);
+        $this->getFeeCalculatorConfiguration()->shouldReturn(['amount' => 10]);
     }
 }

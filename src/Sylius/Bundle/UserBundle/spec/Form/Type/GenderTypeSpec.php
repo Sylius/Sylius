@@ -31,13 +31,13 @@ class GenderTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
+        $resolver->setDefaults([
+            'choices' => [
                 CustomerInterface::UNKNOWN_GENDER  => ' ',
                 CustomerInterface::MALE_GENDER => 'sylius.gender.male',
                 CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
-            )
-        ))->shouldBeCalled();
+            ]
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

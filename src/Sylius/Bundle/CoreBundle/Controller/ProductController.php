@@ -69,7 +69,7 @@ class ProductController extends BaseProductController
          */
         $finder = $this->get('sylius_search.finder')
             ->setFacetGroup('categories_set')
-            ->find(new TaxonQuery($taxon, $request->query->get('filters', array())));
+            ->find(new TaxonQuery($taxon, $request->query->get('filters', [])));
 
         $config = $this->container->getParameter("sylius_search.config");
 
@@ -212,17 +212,17 @@ class ProductController extends BaseProductController
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
-        $variants = array();
+        $variants = [];
         foreach ($product->getVariants() as $variant) {
             $variants[] = $repository->getLogEntries($variant);
         }
 
-        $attributes = array();
+        $attributes = [];
         foreach ($product->getAttributes() as $attribute) {
             $attributes[] = $repository->getLogEntries($attribute);
         }
 
-        $options = array();
+        $options = [];
         if (empty($variants)) {
             foreach ($product->getOptions() as $option) {
                 $options[] = $repository->getLogEntries($option);
@@ -232,15 +232,15 @@ class ProductController extends BaseProductController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
+            ->setData([
                 'product' => $product,
-                'logs'    => array(
+                'logs'    => [
                     'product'    => $repository->getLogEntries($product),
                     'variants'   => $variants,
                     'attributes' => $attributes,
                     'options'    => $options,
-                ),
-            ))
+                ],
+            ])
         ;
 
         return $this->handleView($view);
@@ -255,9 +255,9 @@ class ProductController extends BaseProductController
      */
     public function filterFormAction(Request $request)
     {
-        return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
+        return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', [
             'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
-        ));
+        ]);
     }
 
     // @todo refactor this when PRs about API & search get merged
@@ -268,11 +268,11 @@ class ProductController extends BaseProductController
         }
 
         /** @var $products ProductInterface[] */
-        $results  = array();
+        $results  = [];
         $products = $this->get('sylius.repository.product')->createFilterPaginator($request->query->get('criteria'));
         $helper   = $this->get('sylius.templating.helper.currency');
         foreach ($products as $product) {
-            $results[] = array(
+            $results[] = [
                 'id'             => $product->getMasterVariant()->getId(),
                 'name'           => $product->getName(),
                 'image'          => $product->getImage()->getPath(),
@@ -280,7 +280,7 @@ class ProductController extends BaseProductController
                 'original_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getOriginalPrice()),
                 'raw_price'      => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
                 'desc'           => $product->getShortDescription(),
-            );
+            ];
         }
 
         return new JsonResponse($results);
@@ -292,7 +292,7 @@ class ProductController extends BaseProductController
      *
      * @return null|ProductInterface
      */
-    public function findOr404(Request $request, array $criteria = array())
+    public function findOr404(Request $request, array $criteria = [])
     {
         if ($request->attributes->has('_sylius_entity')) {
             return $request->attributes->get('_sylius_entity');
@@ -319,7 +319,7 @@ class ProductController extends BaseProductController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate($template))
-            ->setData(array(
+            ->setData([
                 'taxon'    => $taxon,
                 'products' => $results,
                 'facets'   => $facets,
@@ -328,7 +328,7 @@ class ProductController extends BaseProductController
                 'searchTerm' => $searchTerm,
                 'searchParam' => $searchParam,
                 'requestMethod' => $requestMethod
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -354,10 +354,10 @@ class ProductController extends BaseProductController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate($template))
-            ->setData(array(
+            ->setData([
                 'archetype' => $archetype,
                 'products' => $results
-            ))
+            ])
         ;
 
         return $this->handleView($view);

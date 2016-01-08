@@ -35,14 +35,14 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
 
     function it_returns_default_price_if_groups_are_not_in_context(PriceableInterface $priceable)
     {
-        $configuration = array(
+        $configuration = [
             42 => 4999,
             17 => 4599,
             95 => 4400
-        );
+        ];
 
         $priceable->getPrice()->shouldBeCalled()->willReturn(5500);
-        $context = array();
+        $context = [];
 
         $this->calculate($priceable, $configuration, $context)->shouldReturn(5500);
     }
@@ -51,13 +51,13 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         PriceableInterface $priceable,
         GroupInterface $group
     ) {
-        $configuration = array(
+        $configuration = [
             42 => 4999,
             17 => 4599,
             95 => 4400
-        );
+        ];
 
-        $context = array('groups' => array($group));
+        $context = ['groups' => [$group]];
         $group->getId()->shouldBeCalled()->willReturn(22);
         $priceable->getPrice()->shouldBeCalled()->willReturn(3500);
 
@@ -68,13 +68,13 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         PriceableInterface $priceable,
         GroupInterface $group
     ) {
-        $configuration = array(
+        $configuration = [
             42 => 4999,
             17 => 4599,
             95 => 4400
-        );
+        ];
 
-        $context = array('groups' => array($group));
+        $context = ['groups' => [$group]];
         $group->getId()->shouldBeCalled()->willReturn(17);
 
         $this->calculate($priceable, $configuration, $context)->shouldReturn(4599);
@@ -85,13 +85,13 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         GroupInterface $group1,
         GroupInterface $group2
     ) {
-        $configuration = array(
+        $configuration = [
             42 => 4999,
             17 => 4599,
             95 => 4400
-        );
+        ];
 
-        $context = array('groups' => array($group1, $group2));
+        $context = ['groups' => [$group1, $group2]];
         $group1->getId()->shouldBeCalled()->willReturn(17);
         $group2->getId()->shouldBeCalled()->willReturn(95);
 

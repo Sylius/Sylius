@@ -41,7 +41,7 @@ class ChannelBasedCalculator implements CalculatorInterface
      *
      * @return integer
      */
-    public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
+    public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {
         $currentChannel = $this->channelContext->getChannel();
         $calculatorConfiguration = $subject->getPricingConfiguration();

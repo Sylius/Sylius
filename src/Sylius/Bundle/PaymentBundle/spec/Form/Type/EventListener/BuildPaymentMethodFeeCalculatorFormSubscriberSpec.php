@@ -54,7 +54,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form)->shouldBeCalled();
 
         $paymentMethod->getFeeCalculator()->willReturn('test');
-        $paymentMethod->getFeeCalculatorConfiguration()->willReturn(array('amount' => 100));
+        $paymentMethod->getFeeCalculatorConfiguration()->willReturn(['amount' => 100]);
 
         $feeCalculatorRegistry->get('test')->willReturn($feeCalculator)->shouldBeCalled();
         $feeCalculator->getType()->willReturn('test');
@@ -63,8 +63,8 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
             ->createNamed(
                 'feeCalculatorConfiguration',
                 'sylius_fee_calculator_test',
-                array('amount' => 100),
-                array('auto_initialize' => false)
+                ['amount' => 100],
+                ['auto_initialize' => false]
             )
             ->willReturn($configurationForm)
             ->shouldBeCalled()
@@ -86,7 +86,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
     {
         $event->getData()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', PaymentMethodInterface::class))->during('preSetData', array($event));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', PaymentMethodInterface::class))->during('preSetData', [$event]);
     }
 
     function it_is_triggered_pre_bind(
@@ -98,11 +98,11 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         PaymentMethodInterface $paymentMethod
     ) {
-        $event->getData()->willReturn(array('feeCalculator' => 'test'))->shouldBeCalled();
+        $event->getData()->willReturn(['feeCalculator' => 'test'])->shouldBeCalled();
         $event->getForm()->willReturn($form)->shouldBeCalled();
 
         $paymentMethod->getFeeCalculator()->willReturn('test');
-        $paymentMethod->getFeeCalculatorConfiguration()->willReturn(array());
+        $paymentMethod->getFeeCalculatorConfiguration()->willReturn([]);
 
         $feeCalculatorRegistry->get('test')->willReturn($feeCalculator)->shouldBeCalled();
         $feeCalculator->getType()->willReturn('test');
@@ -111,8 +111,8 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
             ->createNamed(
                 'feeCalculatorConfiguration',
                 'sylius_fee_calculator_test',
-                array(),
-                array('auto_initialize' => false)
+                [],
+                ['auto_initialize' => false]
             )
             ->willReturn($configurationForm)
             ->shouldBeCalled()
@@ -125,11 +125,11 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
 
     function it_does_not_process_if_event_data_is_empty_or_has_no_fee_calculator_field_while_pre_bind(FormEvent $event)
     {
-        $event->getData()->willReturn(array())->shouldBeCalled();
+        $event->getData()->willReturn([])->shouldBeCalled();
 
         $this->preBind($event)->shouldReturn(null);
 
-        $event->getData()->willReturn(array('badKeys' => ''))->shouldBeCalled();
+        $event->getData()->willReturn(['badKeys' => ''])->shouldBeCalled();
 
         $this->preBind($event)->shouldReturn(null);
     }

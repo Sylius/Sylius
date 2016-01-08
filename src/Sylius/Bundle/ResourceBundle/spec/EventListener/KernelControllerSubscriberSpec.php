@@ -41,7 +41,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     {
         $resourceController->getConfiguration()->willReturn($configuration);
 
-        $event->getController()->willReturn(array($resourceController));
+        $event->getController()->willReturn([$resourceController]);
         $event->getRequest()->willReturn($request);
 
         $request->attributes = $parameterBag;
@@ -50,14 +50,14 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith(
             $parametersParser,
             $parameters,
-            array(
+            [
                 'paginate' => false,
                 'limit' => false,
                 'sortable' => false,
                 'sorting' => null,
                 'filterable' => false,
                 'criteria' => null,
-            )
+            ]
         );
     }
 
@@ -73,9 +73,9 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_events()
     {
-        $this::getSubscribedEvents(array(
-            'kernel.controller' => array('onKernelController', 0)
-        ));
+        $this::getSubscribedEvents([
+            'kernel.controller' => ['onKernelController', 0]
+        ]);
     }
 
     function it_should_parse_empty_request(
@@ -88,27 +88,27 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     ) {
         $headerBag->has('Accept')->willReturn(false);
 
-        $parameterBag->get('_sylius', array())->willReturn(array());
+        $parameterBag->get('_sylius', [])->willReturn([]);
 
-        $request->get('criteria')->willReturn(array('product' => 10));
+        $request->get('criteria')->willReturn(['product' => 10]);
         $request->get('paginate')->willReturn(10);
 
         $parametersParser->parse(
-            array(
+            [
                 'paginate' => false,
                 'limit' => false,
                 'sortable' => false,
                 'filterable' => false,
                 'sorting' => null,
                 'criteria' => null,
-            ),
+            ],
             $request
-        )->willReturn(array(array(), array()));
+        )->willReturn([[], []]);
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
-        $parameterBag->get('_route_params', array())->willReturn(array());
+        $parameterBag->get('_route_params', [])->willReturn([]);
 
         $this->onKernelController($event);
     }
@@ -123,33 +123,33 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     ) {
         $headerBag->has('Accept')->willReturn(false);
 
-        $parameterBag->get('_sylius', array())->willReturn(array(
+        $parameterBag->get('_sylius', [])->willReturn([
             'paginate' => 20,
             'filterable' => true,
             'sorting' => '$sorting',
             'sortable' => true,
             'criteria' => '$c'
-        ));
+        ]);
 
-        $request->get('criteria')->willReturn(array('product' => 10));
+        $request->get('criteria')->willReturn(['product' => 10]);
         $request->get('paginate')->willReturn(10);
 
         $parametersParser->parse(
-            array(
+            [
                 'paginate' => 20,
                 'limit' => false,
                 'sortable' => true,
                 'sorting' => '$sorting',
                 'filterable' => true,
                 'criteria' => '$c',
-            ),
+            ],
             $request
-        )->willReturn(array(array(), array()));
+        )->willReturn([[], []]);
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
-        $parameterBag->get('_route_params', array())->willReturn(array());
+        $parameterBag->get('_route_params', [])->willReturn([]);
 
         $this->onKernelController($event);
     }
@@ -165,35 +165,35 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $headerBag->has('Accept')->willReturn(true);
         $headerBag->get('Accept')->willReturn('Accept: application/json; version=1.0.1; groups=Default,Details');
 
-        $parameterBag->get('_sylius', array())->willReturn(array(
+        $parameterBag->get('_sylius', [])->willReturn([
             'paginate' => 20,
             'filterable' => true,
             'sorting' => '$sorting',
             'sortable' => true,
             'criteria' => '$c'
-        ));
+        ]);
 
-        $request->get('criteria')->willReturn(array('product' => 10));
+        $request->get('criteria')->willReturn(['product' => 10]);
         $request->get('paginate')->willReturn(10);
 
         $parametersParser->parse(
-            array(
+            [
                 'serialization_version' => '1.0.1',
-                'serialization_groups' => array('Default', 'Details'),
+                'serialization_groups' => ['Default', 'Details'],
                 'paginate' => 20,
                 'limit' => false,
                 'sortable' => true,
                 'sorting' => '$sorting',
                 'filterable' => true,
                 'criteria' => '$c',
-            ),
+            ],
             $request
-        )->willReturn(array(array(), array()));
+        )->willReturn([[], []]);
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
-        $parameterBag->get('_route_params', array())->willReturn(array());
+        $parameterBag->get('_route_params', [])->willReturn([]);
 
         $this->onKernelController($event);
     }

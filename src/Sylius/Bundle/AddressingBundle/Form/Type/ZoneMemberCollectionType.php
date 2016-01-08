@@ -30,7 +30,7 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $prototypes = $this->buildPrototypes($builder, $options);
 
@@ -66,11 +66,11 @@ class ZoneMemberCollectionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'allow_add'    => true,
             'allow_delete' => true,
             'by_reference' => false,
-        ));
+        ]);
     }
 
     /**
@@ -99,13 +99,13 @@ class ZoneMemberCollectionType extends AbstractType
      */
     protected function buildPrototypes(FormBuilderInterface $builder, array $options)
     {
-        $types = array(
+        $types = [
             'sylius_zone_member_country',
             'sylius_zone_member_province',
             'sylius_zone_member_zone',
-        );
+        ];
 
-        $prototypes = array();
+        $prototypes = [];
         foreach ($types as $type) {
             $prototypes[$type] = $builder->create($options['prototype_name'], $type, $options['options'])->getForm();
         }

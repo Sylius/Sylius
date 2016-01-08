@@ -28,10 +28,10 @@ class SyliusInventoryBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        );
+        ];
     }
 
     /**
@@ -39,10 +39,10 @@ class SyliusInventoryBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             InventoryUnitInterface::class => 'sylius.model.inventory_unit.class',
             StockableInterface::class     => 'sylius.model.stockable.class',
-        );
+        ];
     }
 
     /**

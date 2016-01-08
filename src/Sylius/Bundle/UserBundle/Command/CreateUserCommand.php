@@ -36,13 +36,13 @@ class CreateUserCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:user:create')
             ->setDescription('Creates a new user account.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('password', InputArgument::REQUIRED, 'Password'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'RBAC roles'),
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
                 new InputOption('disabled', null, InputOption::VALUE_NONE, 'Set the user as a disabled user'),
-            ))
+            ])
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command creates a new user account.
 EOT
@@ -136,7 +136,7 @@ EOT
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled, array $roles, array $securityRoles = array('ROLE_USER'))
+    protected function createUser($email, $password, $enabled, array $roles, array $securityRoles = ['ROLE_USER'])
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
@@ -158,7 +158,7 @@ EOT
         $roleRepository = $this->getContainer()->get('sylius.repository.role');
         foreach ($roles as $code) {
             /** @var RoleInterface $role */
-            $role = $roleRepository->findOneBy(array('code' => $code));
+            $role = $roleRepository->findOneBy(['code' => $code]);
 
             if (null === $role) {
                 throw new \InvalidArgumentException(

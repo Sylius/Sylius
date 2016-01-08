@@ -25,13 +25,13 @@ class DataSpec extends ObjectBehavior
 
     public function it_has_label_ifnromation()
     {
-        $this->setLabels(array());
-        $this->getLabels()->shouldReturn(array());
+        $this->setLabels([]);
+        $this->getLabels()->shouldReturn([]);
     }
 
     public function it_has_data()
     {
-        $this->setData(array());
-        $this->getData()->shouldReturn(array());
+        $this->setData([]);
+        $this->getData()->shouldReturn([]);
     }
 }

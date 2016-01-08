@@ -41,16 +41,16 @@ class DefaultFormFactory
             throw new \RuntimeException('The default form factory does not support entity classes with multiple primary keys.');
         }
 
-        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, array('csrf_protection' => false));
+        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, ['csrf_protection' => false]);
 
         foreach ($this->getFieldsFromMetadata($metadata) as $field => $type) {
-            $options = array();
+            $options = [];
 
-            if (in_array($type, array('date', 'datetime'))) {
-                $options = array('widget' => 'single_text');
+            if (in_array($type, ['date', 'datetime'])) {
+                $options = ['widget' => 'single_text'];
             }
             if ('relation' === $type) {
-                $options = array('property' => 'id');
+                $options = ['property' => 'id'];
             }
 
             $builder->add($field, null, $options);
@@ -75,7 +75,7 @@ class DefaultFormFactory
             $fields = array_diff($fields, $metadata->getIdentifier());
         }
 
-        $fieldsMapping = array();
+        $fieldsMapping = [];
 
         foreach ($fields as $field) {
             $fieldsMapping[$field] = $metadata->getTypeOfField($field);

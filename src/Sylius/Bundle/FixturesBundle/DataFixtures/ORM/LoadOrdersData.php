@@ -32,12 +32,12 @@ class LoadOrdersData extends DataFixture
         $orderFactory = $this->getOrderFactory();
         $orderItemFactory = $this->getOrderItemFactory();
 
-        $channels = array(
+        $channels = [
             'WEB-UK',
             'WEB-DE',
             'WEB-US',
             'MOBILE',
-        );
+        ];
 
         for ($i = 1; $i <= 50; $i++) {
             /* @var $order OrderInterface */
@@ -60,7 +60,7 @@ class LoadOrdersData extends DataFixture
 
             $this->createShipment($order);
 
-            $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
+            $order->setCurrency($this->faker->randomElement(['EUR', 'USD', 'GBP']));
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
@@ -138,7 +138,7 @@ class LoadOrdersData extends DataFixture
 
     protected function getPaymentState()
     {
-        return array_rand(array_flip(array(
+        return array_rand(array_flip([
             PaymentInterface::STATE_COMPLETED,
             PaymentInterface::STATE_FAILED,
             PaymentInterface::STATE_NEW,
@@ -148,12 +148,12 @@ class LoadOrdersData extends DataFixture
             PaymentInterface::STATE_CANCELLED,
             PaymentInterface::STATE_REFUNDED,
             PaymentInterface::STATE_UNKNOWN,
-        )));
+        ]));
     }
 
     protected function getShipmentState()
     {
-        return array_rand(array_flip(array(
+        return array_rand(array_flip([
             ShipmentInterface::STATE_PENDING,
             ShipmentInterface::STATE_ONHOLD,
             ShipmentInterface::STATE_CHECKOUT,
@@ -162,6 +162,6 @@ class LoadOrdersData extends DataFixture
             ShipmentInterface::STATE_BACKORDERED,
             ShipmentInterface::STATE_RETURNED,
             ShipmentInterface::STATE_CANCELLED,
-        )));
+        ]));
     }
 }

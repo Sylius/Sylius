@@ -32,7 +32,7 @@ class RegisterCalculatorsPass implements CompilerPassInterface
         }
 
         $calculatorRegistry = $container->getDefinition('sylius.registry.tax_calculator');
-        $calculators = array();
+        $calculators = [];
 
         foreach ($container->findTaggedServiceIds('sylius.tax_calculator') as $id => $attributes) {
             if (!isset($attributes[0]['calculator'])) {
@@ -42,7 +42,7 @@ class RegisterCalculatorsPass implements CompilerPassInterface
             $name = $attributes[0]['calculator'];
             $calculators[$name] = $name;
 
-            $calculatorRegistry->addMethodCall('register', array($name, new Reference($id)));
+            $calculatorRegistry->addMethodCall('register', [$name, new Reference($id)]);
         }
 
         $container->setParameter('sylius.tax_calculators', $calculators);

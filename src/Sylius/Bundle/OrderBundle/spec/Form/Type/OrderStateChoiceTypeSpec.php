@@ -22,8 +22,8 @@ class OrderStateChoiceTypeSpec extends ObjectBehavior
 
     function it_has_option(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
+        $resolver->setDefaults([
+            'choices' => [
                 OrderInterface::STATE_CART        => 'sylius.order.state.checkout',
                 OrderInterface::STATE_CART_LOCKED => 'sylius.order.state.cart_locked',
                 OrderInterface::STATE_PENDING     => 'sylius.order.state.ordered',
@@ -32,8 +32,8 @@ class OrderStateChoiceTypeSpec extends ObjectBehavior
                 OrderInterface::STATE_ABANDONED   => 'sylius.order.state.abandoned',
                 OrderInterface::STATE_CANCELLED   => 'sylius.order.state.cancelled',
                 OrderInterface::STATE_RETURNED    => 'sylius.order.state.returned',
-            )
-        ))->shouldBeCalled();
+            ]
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

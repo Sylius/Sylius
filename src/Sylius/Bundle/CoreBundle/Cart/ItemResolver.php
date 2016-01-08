@@ -117,7 +117,7 @@ class ItemResolver implements ItemResolverInterface
         $id = $this->resolveItemIdentifier($data);
 
         $channel = $this->channelContext->getChannel();
-        if (!$product = $this->productRepository->findOneBy(array('id' => $id, 'channels' => $channel))) {
+        if (!$product = $this->productRepository->findOneBy(['id' => $id, 'channels' => $channel])) {
             throw new ItemResolvingException('Requested product was not found.');
         }
 
@@ -126,7 +126,7 @@ class ItemResolver implements ItemResolverInterface
         }
 
         // We use forms to easily set the quantity and pick variant but you can do here whatever is required to create the item.
-        $form = $this->formFactory->create('sylius_cart_item', $item, array('product' => $product));
+        $form = $this->formFactory->create('sylius_cart_item', $item, ['product' => $product]);
         $form->submit($data);
 
         // If our product has no variants, we simply set the master variant of it.
@@ -144,7 +144,7 @@ class ItemResolver implements ItemResolverInterface
         $cart = $this->cartProvider->getCart();
         $quantity = $item->getQuantity();
 
-        $context = array('quantity' => $quantity);
+        $context = ['quantity' => $quantity];
 
         if (null !== $customer = $cart->getCustomer()) {
             $context['groups'] = $customer->getGroups()->toArray();

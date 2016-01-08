@@ -79,7 +79,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
         $customer->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $product->getRestrictedZone()->shouldBeCalled()->willReturn($zone);
-        $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn(array());
+        $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn([]);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
@@ -95,7 +95,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $customerContext->getCustomer()->shouldBeCalled()->willReturn($customer);
         $customer->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $product->getRestrictedZone()->shouldBeCalled()->willReturn($zone);
-        $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn(array($zone));
+        $zoneMatcher->matchAll($address)->shouldBeCalled()->willReturn([$zone]);
 
         $this->isRestricted($product)->shouldReturn(true);
     }

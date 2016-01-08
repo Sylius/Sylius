@@ -40,19 +40,19 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      *
      * @var FormTypeInterface[]
      */
-    protected $typeMap = array();
+    protected $typeMap = [];
 
     /**
      * Stores an array of types with the Data Class as the key.
      *
      * @var array
      */
-    protected $classMap = array();
+    protected $classMap = [];
 
     public function __construct(
         FormFactoryInterface $factory,
         array $prototypes,
-        array $options = array(),
+        array $options = [],
         $allowAdd = false,
         $allowDelete = false
     ) {
@@ -81,7 +81,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
     {
         $data = $event->getData();
         if (null === $data) {
-            $data = array();
+            $data = [];
         }
 
         if (!is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
@@ -109,7 +109,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
     {
         $data = $event->getData();
         if (null === $data || '' === $data) {
-            $data = array();
+            $data = [];
         }
 
         if (!is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
@@ -169,10 +169,10 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      */
     private function createFormField(FormInterface $form, $type, $name)
     {
-        $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
+        $form->add($this->factory->createNamed($name, $type, null, array_replace([
             'property_path'   => '['.$name.']',
             'auto_initialize' => false,
-        ), $this->options)));
+        ], $this->options)));
     }
 
     /**

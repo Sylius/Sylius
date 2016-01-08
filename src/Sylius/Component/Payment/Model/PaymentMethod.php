@@ -62,7 +62,7 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     /**
      * @var array
      */
-    protected $feeCalculatorConfiguration = array();
+    protected $feeCalculatorConfiguration = [];
 
     /**
      * @var \DateTime

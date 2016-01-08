@@ -28,27 +28,27 @@ class FlexibleRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_item_cost', 'sylius_money', array(
+            ->add('first_item_cost', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_item_cost',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('additional_item_cost', 'sylius_money', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('additional_item_cost', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_cost',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('additional_item_limit', 'integer', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('additional_item_limit', 'integer', [
                 'required' => false,
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_limit',
-                'constraints' => array(
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
+                'constraints' => [
+                    new Type(['type' => 'integer']),
+                ],
+            ])
         ;
     }
 
@@ -58,9 +58,9 @@ class FlexibleRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-            ))
+            ])
         ;
     }
 

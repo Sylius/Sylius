@@ -27,9 +27,9 @@ class SyliusMailerBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -37,9 +37,9 @@ class SyliusMailerBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             EmailInterface::class => 'sylius.model.email.class',
-        );
+        ];
     }
 
     /**

@@ -55,7 +55,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      *
      * @var array
      */
-    protected $pricingConfiguration = array();
+    protected $pricingConfiguration = [];
 
     /**
      * On hold.

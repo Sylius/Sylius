@@ -64,17 +64,17 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                         case ResourceBundleInterface::MAPPING_XML:
                         case ResourceBundleInterface::MAPPING_YAML:
                             $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
-                                array($this->getConfigFilesPath() => $this->getModelNamespace()),
-                                array(sprintf('%s.object_manager', $this->getBundlePrefix())),
+                                [$this->getConfigFilesPath() => $this->getModelNamespace()],
+                                [sprintf('%s.object_manager', $this->getBundlePrefix())],
                                 sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                             ));
                             break;
 
                         case ResourceBundleInterface::MAPPING_ANNOTATION:
                             $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
-                                array($this->getModelNamespace()),
-                                array($this->getConfigFilesPath()),
-                                array(sprintf('%s.object_manager', $this->getBundlePrefix())),
+                                [$this->getModelNamespace()],
+                                [$this->getConfigFilesPath()],
+                                [sprintf('%s.object_manager', $this->getBundlePrefix())],
                                 sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                             ));
 
@@ -102,7 +102,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     protected function getModelInterfaces()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -152,7 +152,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
         $compilerPassMethod = sprintf('create%sMappingDriver', ucfirst($this->mappingFormat));
 
-        return array($mappingsPassClassname, $compilerPassMethod);
+        return [$mappingsPassClassname, $compilerPassMethod];
     }
 
     /**

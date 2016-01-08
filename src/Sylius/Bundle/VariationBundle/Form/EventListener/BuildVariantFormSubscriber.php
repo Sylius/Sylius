@@ -48,7 +48,7 @@ class BuildVariantFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'preSetData');
+        return [FormEvents::PRE_SET_DATA => 'preSetData'];
     }
 
     /**
@@ -70,10 +70,10 @@ class BuildVariantFormSubscriber implements EventSubscriberInterface
 
         // If the object has options, lets add this configuration field.
         if ($variable->hasOptions()) {
-            $form->add($this->factory->createNamed('options', sprintf('sylius_%s_option_value_collection', $this->variableName), $variant->getOptions(), array(
+            $form->add($this->factory->createNamed('options', sprintf('sylius_%s_option_value_collection', $this->variableName), $variant->getOptions(), [
                 'options' => $variable->getOptions(),
                 'auto_initialize' => false,
-            )));
+            ]));
         }
     }
 }

@@ -57,7 +57,7 @@ class EmailProvider implements EmailProviderInterface
      */
     public function getEmail($code)
     {
-        $email = $this->emailRepository->findOneBy(array('code' => $code));
+        $email = $this->emailRepository->findOneBy(['code' => $code]);
 
         if (null === $email) {
             $email = $this->getEmailFromConfiguration($code);

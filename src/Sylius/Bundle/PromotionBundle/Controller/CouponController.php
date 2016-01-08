@@ -38,7 +38,7 @@ class CouponController extends ResourceController
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404($request, array('id' => $promotionId))
+            ->findOr404($request, ['id' => $promotionId])
         ;
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction');
@@ -57,10 +57,10 @@ class CouponController extends ResourceController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('generate.html'))
-            ->setData(array(
+            ->setData([
                 'promotion' => $promotion,
                 'form'      => $form->createView()
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -78,7 +78,7 @@ class CouponController extends ResourceController
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404($request, array('id' => $promotionId))
+            ->findOr404($request, ['id' => $promotionId])
         ;
 
         $coupon = parent::createNew();

@@ -44,7 +44,7 @@ class ResourceEvent extends GenericEvent
      *
      * @var array
      */
-    protected $messageParameters = array();
+    protected $messageParameters = [];
 
     /**
      * ErrorCode
@@ -60,7 +60,7 @@ class ResourceEvent extends GenericEvent
      * @param string $type
      * @param array  $parameters
      */
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = array(), $errorCode = 500)
+    public function stop($message, $type = self::TYPE_ERROR, $parameters = [], $errorCode = 500)
     {
         $this->messageType = $type;
         $this->message = $message;

@@ -29,13 +29,13 @@ class OptionValueChoiceTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'option'
-        ))->shouldBeCalled()->willReturn($resolver);
+        ])->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->addAllowedTypes(array(
+        $resolver->addAllowedTypes([
             'option' => OptionInterface::class
-        ))->shouldBeCalled()->willReturn($resolver);
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

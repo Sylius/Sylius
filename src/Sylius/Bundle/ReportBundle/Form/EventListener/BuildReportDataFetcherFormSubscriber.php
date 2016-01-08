@@ -48,10 +48,10 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT => 'preBind',
-        );
+        ];
     }
 
     public function preSetData(FormEvent $event)
@@ -87,7 +87,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
      * @param string        $dataFetcherType
      * @param array         $config
      */
-    protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = array())
+    protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = [])
     {
         $dataFetcher = $this->dataFecherRegistry->get($dataFetcherType);
         $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
@@ -97,7 +97,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
                 'dataFetcherConfiguration',
                 $formType,
                 $config,
-                array('auto_initialize' => false)
+                ['auto_initialize' => false]
             );
         } catch (\InvalidArgumentException $e) {
             return;

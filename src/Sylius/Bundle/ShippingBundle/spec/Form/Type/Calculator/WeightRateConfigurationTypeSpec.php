@@ -38,14 +38,14 @@ class WeightRateConfigurationTypeSpec extends ObjectBehavior
         $builder->add('variable', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
         $builder->add('division', 'number', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

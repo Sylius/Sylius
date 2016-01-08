@@ -31,7 +31,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $feeCalculatorRegistry)
     {
-        $this->beConstructedWith('PaymentMethod', array('sylius'), $feeCalculatorRegistry);
+        $this->beConstructedWith('PaymentMethod', ['sylius'], $feeCalculatorRegistry);
     }
 
     function it_is_a_form_type()
@@ -81,24 +81,24 @@ class PaymentMethodTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $feeCalculatorRegistry->all()->willReturn(array('test' => $feeCalculatorTest))->shouldBeCalled();
+        $feeCalculatorRegistry->all()->willReturn(['test' => $feeCalculatorTest])->shouldBeCalled();
 
         $feeCalculatorTest->getType()->willReturn('test')->shouldBeCalled();
         $builder->create('feeCalculatorConfiguration', 'sylius_fee_calculator_test')->willReturn($builder)->shouldBeCalled();
         $builder->getForm()->willReturn($form)->shouldBeCalled();
 
-        $builder->setAttribute('feeCalculatorsConfigurations', array('test' => $form))->willReturn($builder)->shouldBeCalled();
+        $builder->setAttribute('feeCalculatorsConfigurations', ['test' => $form])->willReturn($builder)->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class'        => 'PaymentMethod',
-                'validation_groups' => array('sylius'),
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

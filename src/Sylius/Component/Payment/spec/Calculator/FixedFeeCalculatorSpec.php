@@ -32,7 +32,7 @@ class FixedFeeCalculatorSpec extends ObjectBehavior
 
     function it_calculates_fee(PaymentSubjectInterface $payment)
     {
-        $this->calculate($payment, array('amount' => 15))->shouldReturn(15);
+        $this->calculate($payment, ['amount' => 15])->shouldReturn(15);
     }
 
     function it_has_type()

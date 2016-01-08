@@ -53,7 +53,7 @@ class UsernameProviderSpec extends ObjectBehavior
     {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
-        $userRepository->findOneBy(array('usernameCanonical' => 'testuser'))->willReturn($user);
+        $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn($user);
 
         $this->loadUserByUsername('testUser')->shouldReturn($user);
     }

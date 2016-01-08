@@ -40,9 +40,9 @@ class ResourceResolver
      *
      * @return mixed
      */
-    public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = [])
     {
-        $callable = array($repository, $this->config->getRepositoryMethod($defaultMethod));
+        $callable = [$repository, $this->config->getRepositoryMethod($defaultMethod)];
         $arguments = $this->config->getRepositoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
@@ -57,9 +57,9 @@ class ResourceResolver
      *
      * @return mixed
      */
-    public function createResource(FactoryInterface $factory, $defaultMethod, array $defaultArguments = array())
+    public function createResource(FactoryInterface $factory, $defaultMethod, array $defaultArguments = [])
     {
-        $callable = array($factory, $this->config->getFactoryMethod($defaultMethod));
+        $callable = [$factory, $this->config->getFactoryMethod($defaultMethod)];
         $arguments = $this->config->getFactoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);

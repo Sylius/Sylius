@@ -42,10 +42,10 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT   => 'preSubmit'
-        ));
+        ]);
     }
 
     function it_adds_configuration_field_on_pre_set_data(
@@ -63,7 +63,7 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 
         $shippingMethod->getId()->shouldBeCalled()->willreturn(12);
         $shippingMethod->getCalculator()->shouldBeCalled()->willreturn('calculator_type');
-        $shippingMethod->getConfiguration()->shouldBeCalled()->willreturn(array());
+        $shippingMethod->getConfiguration()->shouldBeCalled()->willreturn([]);
 
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
         $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
@@ -73,8 +73,8 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $factory->createNamed(
             'configuration',
             'sylius_shipping_calculator_calculator_type',
-            array(),
-            array('auto_initialize' => false)
+            [],
+            ['auto_initialize' => false]
         )->shouldBeCalled()->willReturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();
@@ -91,7 +91,7 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         FormInterface $formConfiguration,
         CalculatorInterface $calculator
     ) {
-        $event->getData()->shouldBeCalled()->willReturn(array('calculator' => 'calculator_type'));
+        $event->getData()->shouldBeCalled()->willReturn(['calculator' => 'calculator_type']);
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
@@ -102,8 +102,8 @@ class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $factory->createNamed(
             'configuration',
             'sylius_shipping_calculator_calculator_type',
-            array(),
-            array('auto_initialize' => false)
+            [],
+            ['auto_initialize' => false]
         )->shouldBeCalled()->willReturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();

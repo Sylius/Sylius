@@ -22,7 +22,7 @@ class TaxonQuerySpec extends ObjectBehavior
 
     function let(Taxon $taxon)
     {
-        $this->beConstructedWith($taxon, array('test'));
+        $this->beConstructedWith($taxon, ['test']);
     }
 
     function it_is_initializable()
@@ -37,7 +37,7 @@ class TaxonQuerySpec extends ObjectBehavior
 
     public function it_has_some_applied_filters()
     {
-        $this->getAppliedFilters()->shouldReturn(array('test'));
+        $this->getAppliedFilters()->shouldReturn(['test']);
     }
 
 } 

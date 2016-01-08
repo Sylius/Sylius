@@ -27,16 +27,16 @@ class PageType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array(
+            ->add('id', 'text', [
                 'label' => 'sylius.form.page.id'
-            ))
-            ->add('title', 'text', array(
+            ])
+            ->add('title', 'text', [
                 'label' => 'sylius.form.page.title'
-            ))
-            ->add('body', 'textarea', array(
+            ])
+            ->add('body', 'textarea', [
                 'required' => false,
                 'label'    => 'sylius.form.page.body',
-            ))
+            ])
         ;
 
     }

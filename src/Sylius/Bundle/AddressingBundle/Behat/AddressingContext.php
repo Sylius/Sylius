@@ -26,7 +26,7 @@ class AddressingContext extends DefaultContext
     public function thereAreCountries(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
+            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : [];
 
             $enabled = isset($data['enabled']) ? 'no' !== $data['enabled'] : true;
 
@@ -54,7 +54,7 @@ class AddressingContext extends DefaultContext
         $isoName = $this->getCountryCodeByEnglishCountryName($name);
 
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(['isoName' => $isoName])) {
             $country = $this->getFactory('country')->createNew();
             $country->setIsoName(trim($isoName));
             $country->setEnabled($enabled);
@@ -99,7 +99,7 @@ class AddressingContext extends DefaultContext
      * @Given /^I created zone "([^"]*)"$/
      * @Given /^there is zone "([^"]*)"$/
      */
-    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $scope = null, $flush = true)
+    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = [], $scope = null, $flush = true)
     {
         $repository = $this->getRepository('zone');
 
@@ -112,12 +112,12 @@ class AddressingContext extends DefaultContext
         foreach ($members as $memberName) {
             $member = $this->getService('sylius.factory.zone_member_'.$type)->createNew();
             if (ZoneInterface::TYPE_ZONE === $type) {
-                $zoneable = $repository->findOneBy(array('name' => $memberName));
+                $zoneable = $repository->findOneBy(['name' => $memberName]);
             } else {
-                $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
+                $zoneable = call_user_func([$this, 'thereIs'.ucfirst($type)], $memberName);
             }
 
-            call_user_func(array($member, 'set'.ucfirst($type)), $zoneable);
+            call_user_func([$member, 'set'.ucfirst($type)], $zoneable);
 
             $zone->addMember($member);
         }
@@ -153,7 +153,7 @@ class AddressingContext extends DefaultContext
         $isoName = $this->getCountryCodeByEnglishCountryName($name);
 
         /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('isoName' => $isoName));
+        $country = $this->getRepository("country")->findOneBy(['isoName' => $isoName]);
         $country->setEnabled(false);
 
         $manager = $this->getEntityManager();

@@ -26,9 +26,9 @@ class ZoneMemberProvinceType extends ZoneMemberType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('province', 'sylius_province_choice', array(
+            ->add('province', 'sylius_province_choice', [
                 'label' => 'sylius.form.zone_member_province.province',
-            ))
+            ])
         ;
 
         parent::buildForm($builder, $options);

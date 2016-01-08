@@ -22,7 +22,7 @@ class FeeCalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array());
+        $this->beConstructedWith([]);
     }
 
     function it_is_initializable()
@@ -37,7 +37,7 @@ class FeeCalculatorChoiceTypeSpec extends ObjectBehavior
 
     function it_sets_default_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('choices' => array()))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => []])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

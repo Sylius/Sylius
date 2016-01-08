@@ -25,7 +25,7 @@ class CountryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Country', array('sylius'));
+        $this->beConstructedWith('Country', ['sylius']);
     }
 
     function it_is_initializable()
@@ -55,17 +55,17 @@ class CountryTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
-                array(
+                [
                     'data_class'        => 'Country',
-                    'validation_groups' => array('sylius')
-                )
+                    'validation_groups' => ['sylius']
+                ]
             )
             ->shouldBeCalled();
 

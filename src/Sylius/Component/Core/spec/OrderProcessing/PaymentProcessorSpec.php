@@ -45,7 +45,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment
     ) {
-        $order->getPayments()->willReturn(array())->shouldBeCalled();
+        $order->getPayments()->willReturn([])->shouldBeCalled();
 
         $order->getCurrency()->willReturn('EUR')->shouldBeCalled();
         $order->getTotal()->willReturn(100)->shouldBeCalled();
@@ -67,7 +67,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment
     ) {
         $existingPayment->getState()->willReturn('new');
-        $order->getPayments()->willReturn(array($existingPayment))->shouldBeCalled();
+        $order->getPayments()->willReturn([$existingPayment])->shouldBeCalled();
 
         $existingPayment->setState('cancelled')->shouldBeCalled();
         $paymentManager->flush()->shouldBeCalled();

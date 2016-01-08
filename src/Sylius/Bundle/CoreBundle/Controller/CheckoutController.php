@@ -102,14 +102,14 @@ class CheckoutController extends FOSRestController
         $form = $this->createCheckoutShippingForm($order);
 
         if ($request->isMethod('GET')) {
-            $shipments = array();
+            $shipments = [];
             $form->submit($request);
 
             foreach ($order->getShipments() as $key => $shipment) {
-                $shipments[] = array(
+                $shipments[] = [
                     'shipment' => $shipment,
                     'methods'  => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
-                );
+                ];
             }
 
             return $this->handleView($this->view($shipments));
@@ -141,10 +141,10 @@ class CheckoutController extends FOSRestController
         if ($request->isMethod('GET')) {
             $form->submit($request);
 
-            $paymentInfo = array(
+            $paymentInfo = [
                 'payment' => $order->getLastPayment(),
                 'methods' => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
-            );
+            ];
 
             return $this->handleView($this->view($paymentInfo));
         }
@@ -271,14 +271,14 @@ class CheckoutController extends FOSRestController
     {
         $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
 
-        return $this->createApiForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array(
+        return $this->createApiForm('sylius_checkout_shipping', $order, [
+            'criteria' => [
                 'zone' => !empty($zones) ? array_map(function ($zone) {
                     return $zone->getId();
                 }, $zones) : null,
                 'enabled' => true,
-            )
-        ));
+            ]
+        ]);
     }
 
     private function createCheckoutPaymentForm(OrderInterface $order)
@@ -286,8 +286,8 @@ class CheckoutController extends FOSRestController
         return $this->createApiForm('sylius_checkout_payment', $order);
     }
 
-    private function createApiForm($type, $value = null, array $options = array())
+    private function createApiForm($type, $value = null, array $options = [])
     {
-        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, array('csrf_protection' => false)));
+        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, ['csrf_protection' => false]));
     }
 }

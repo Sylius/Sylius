@@ -35,7 +35,7 @@ class StandardCalculatorSpec extends ObjectBehavior
     {
         $priceable->getPrice()->willReturn(1299);
 
-        $this->calculate($priceable, array())->shouldReturn(1299);
+        $this->calculate($priceable, [])->shouldReturn(1299);
     }
 
     function it_has_valid_type()

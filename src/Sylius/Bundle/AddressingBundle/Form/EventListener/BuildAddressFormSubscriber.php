@@ -53,10 +53,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+        ];
     }
 
     /**
@@ -77,10 +77,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
+            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), [
                 'country' => $country,
                 'auto_initialize' => false,
-            )));
+            ]));
         }
     }
 
@@ -102,10 +102,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
+            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, [
                 'country'  => $country,
                 'auto_initialize' => false,
-            )));
+            ]));
         }
     }
 }

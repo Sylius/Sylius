@@ -48,14 +48,14 @@ class MethodsResolverSpec extends ObjectBehavior
         ShippingMethodInterface $method2,
         ShippingMethodInterface $method3
     ) {
-        $methods = array($method1, $method2, $method3);
-        $methodRepository->findBy(array())->shouldBeCalled()->willReturn($methods);
+        $methods = [$method1, $method2, $method3];
+        $methodRepository->findBy([])->shouldBeCalled()->willReturn($methods);
 
         $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(true);
         $eligibilityChecker->isEligible($subject, $method2)->shouldBeCalled()->willReturn(true);
         $eligibilityChecker->isEligible($subject, $method3)->shouldBeCalled()->willReturn(false);
 
-        $this->getSupportedMethods($subject)->shouldReturn(array($method1, $method2));
+        $this->getSupportedMethods($subject)->shouldReturn([$method1, $method2]);
     }
 
     function it_filters_the_methods_pool_by_given_criteria(
@@ -66,13 +66,13 @@ class MethodsResolverSpec extends ObjectBehavior
         ShippingMethodInterface $method2,
         ShippingMethodInterface $method3
     ) {
-        $methods = array($method1, $method3);
-        $methodRepository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn($methods);
+        $methods = [$method1, $method3];
+        $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);
 
         $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(false);
         $eligibilityChecker->isEligible($subject, $method2)->shouldNotBeCalled();
         $eligibilityChecker->isEligible($subject, $method3)->shouldBeCalled()->willReturn(true);
 
-        $this->getSupportedMethods($subject, array('enabled' => true))->shouldReturn(array($method3));
+        $this->getSupportedMethods($subject, ['enabled' => true])->shouldReturn([$method3]);
     }
 }

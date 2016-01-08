@@ -57,14 +57,14 @@ class VariantChoiceType extends AbstractType
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'multiple'    => false,
                 'expanded'    => true,
                 'choice_list' => $choiceList,
-            ))
-            ->setRequired(array(
+            ])
+            ->setRequired([
                 'variable',
-            ))
+            ])
             ->setAllowedTypes('variable', VariableInterface::class)
         ;
     }

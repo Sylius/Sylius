@@ -41,9 +41,9 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
-        );
+        ];
     }
 
     /**
@@ -63,7 +63,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
         if (!isset($rawData['email']) || empty($rawData['email'])) {
             return;
         }
-        $existingCustomer = $this->customerRepository->findOneBy(array('email' => $rawData['email']));
+        $existingCustomer = $this->customerRepository->findOneBy(['email' => $rawData['email']]);
         if (null === $existingCustomer || null !== $existingCustomer->getUser()) {
             return;
         }

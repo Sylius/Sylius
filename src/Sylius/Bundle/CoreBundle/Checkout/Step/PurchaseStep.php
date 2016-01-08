@@ -39,7 +39,7 @@ class PurchaseStep extends CheckoutStep
             $payment->getMethod()->getGateway(),
             $payment,
             $context->getProcess()->getForwardRoute(),
-            array('stepName' => $this->getName())
+            ['stepName' => $this->getName()]
         );
 
         return new RedirectResponse($captureToken->getTargetUrl());

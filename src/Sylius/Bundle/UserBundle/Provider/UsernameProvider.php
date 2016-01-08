@@ -21,6 +21,6 @@ class UsernameProvider extends AbstractUserProvider
      */
     protected function findUser($username)
     {
-        return $this->userRepository->findOneBy(array('usernameCanonical' => $username));
+        return $this->userRepository->findOneBy(['usernameCanonical' => $username]);
     }
 }

@@ -38,10 +38,10 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_currency', array($this, 'convertAmount')),
-            new \Twig_SimpleFilter('sylius_price', array($this, 'convertAndFormatAmount')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_currency', [$this, 'convertAmount']),
+            new \Twig_SimpleFilter('sylius_price', [$this, 'convertAndFormatAmount']),
+        ];
     }
 
     /**

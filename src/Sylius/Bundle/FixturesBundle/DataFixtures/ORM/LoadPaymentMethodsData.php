@@ -27,12 +27,12 @@ class LoadPaymentMethodsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createPaymentMethod('PM1', 'Dummy', 'dummy', 'fixed', array('amount' => 0)));
-        $manager->persist($this->createPaymentMethod('PM2', 'PaypalExpressCheckout', 'paypal_express_checkout', 'fixed', array('amount' => 1000)));
-        $manager->persist($this->createPaymentMethod('PM3', 'Be2bill', 'be2bill_direct', 'fixed', array('amount' => 100)));
-        $manager->persist($this->createPaymentMethod('PM4', 'Be2billOffsite', 'be2bill_offsite', 'percent', array('percent' => 7)));
-        $manager->persist($this->createPaymentMethod('PM5', 'StripeCheckout', 'stripe_checkout', 'percent', array('percent' => 5)));
-        $manager->persist($this->createPaymentMethod('PM6', 'Offline', 'offline', 'fixed', array('amount' => 500)));
+        $manager->persist($this->createPaymentMethod('PM1', 'Dummy', 'dummy', 'fixed', ['amount' => 0]));
+        $manager->persist($this->createPaymentMethod('PM2', 'PaypalExpressCheckout', 'paypal_express_checkout', 'fixed', ['amount' => 1000]));
+        $manager->persist($this->createPaymentMethod('PM3', 'Be2bill', 'be2bill_direct', 'fixed', ['amount' => 100]));
+        $manager->persist($this->createPaymentMethod('PM4', 'Be2billOffsite', 'be2bill_offsite', 'percent', ['percent' => 7]));
+        $manager->persist($this->createPaymentMethod('PM5', 'StripeCheckout', 'stripe_checkout', 'percent', ['percent' => 5]));
+        $manager->persist($this->createPaymentMethod('PM6', 'Offline', 'offline', 'fixed', ['amount' => 500]));
 
         $manager->flush();
     }
@@ -61,10 +61,10 @@ class LoadPaymentMethodsData extends DataFixture
         /* @var $method PaymentMethodInterface */
         $method = $this->getPaymentMethodFactory()->createNew();
 
-        $translatedNames = array(
+        $translatedNames = [
             $this->defaultLocale => sprintf($name),
             'es_ES' => sprintf($this->fakers['es_ES']->word),
-        );
+        ];
         $this->addTranslatedFields($method, $translatedNames);
 
         $method->setGateway($gateway);

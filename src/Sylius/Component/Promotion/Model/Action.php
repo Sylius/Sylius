@@ -29,7 +29,7 @@ class Action implements ActionInterface
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var PromotionInterface

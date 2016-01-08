@@ -46,10 +46,10 @@ class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ActionInterface $actionModel
     ) {
-        $configuration = array();
+        $configuration = [];
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn(array($actionModel));
+        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
@@ -67,10 +67,10 @@ class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ActionInterface $actionModel
     ) {
-        $configuration = array();
+        $configuration = [];
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn(array($actionModel));
+        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 

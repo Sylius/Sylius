@@ -36,10 +36,10 @@ EOT
             return 1;
         }
 
-        $commands = array(
+        $commands = [
             'assets:install',
             'assetic:dump',
-        );
+        ];
 
         $this->runCommands($commands, $input, $output);
     }

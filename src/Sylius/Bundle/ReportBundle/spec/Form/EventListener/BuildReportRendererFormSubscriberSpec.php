@@ -53,7 +53,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         Form $field)
     {
         $report->getRenderer()->willReturn('test_renderer');
-        $report->getRendererConfiguration()->willReturn(array());
+        $report->getRendererConfiguration()->willReturn([]);
 
         $event->getData()->willReturn($report);
         $event->getForm()->willReturn($form);
@@ -75,7 +75,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-        $data = array('renderer' => 'test_renderer');
+        $data = ['renderer' => 'test_renderer'];
 
         $event->getData()->willReturn($data);
         $event->getForm()->willReturn($form);

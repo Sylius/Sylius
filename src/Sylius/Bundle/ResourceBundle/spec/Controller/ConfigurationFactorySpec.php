@@ -26,7 +26,7 @@ class ConfigurationFactorySpec extends ObjectBehavior
         $this->beConstructedWith(
             $parametersParser,
             Configuration::class,
-            array('paginate' => 10)
+            ['paginate' => 10]
         );
     }
 
@@ -43,7 +43,7 @@ class ConfigurationFactorySpec extends ObjectBehavior
             'product',
             'SyliusWebBundle:Product',
             'twig',
-            array('paginate' => 10)
+            ['paginate' => 10]
         )->shouldHaveType(Configuration::class);
     }
 }

@@ -38,7 +38,7 @@ class SalesTotalDataFetcher extends TimePeriod
     /**
      * {@inheritdoc}
      */
-    protected function getData(array $configuration = array())
+    protected function getData(array $configuration = [])
     {
         return $this->orderRepository->revenueBetweenDatesGroupByDate($configuration);
     }

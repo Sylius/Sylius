@@ -24,12 +24,12 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadZonesData extends DataFixture
 {
-    protected $euCountries = array(
+    protected $euCountries = [
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
         'GB',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -42,8 +42,8 @@ class LoadZonesData extends DataFixture
         );
 
         $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
-        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, ['US']));
+        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, ['EU', 'USA']));
         $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();

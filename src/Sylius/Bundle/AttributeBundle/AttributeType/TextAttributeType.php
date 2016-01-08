@@ -73,10 +73,10 @@ class TextAttributeType implements AttributeTypeInterface
 
         return $validator->validate(
             $value,
-            new Length(array(
+            new Length([
                 'min' => $validationConfiguration['min'],
                 'max' => $validationConfiguration['max'],
-            ))
+            ])
         );
     }
 }

@@ -39,11 +39,11 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @var array
      */
-    protected $priorities = array(
+    protected $priorities = [
         ZoneInterface::TYPE_PROVINCE,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
-    );
+    ];
 
     /**
      * Constructor.
@@ -60,7 +60,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function match(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
         foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
@@ -82,7 +82,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function matchAll(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
         foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
@@ -154,6 +154,6 @@ class ZoneMatcher implements ZoneMatcherInterface
             return $this->repository->findAll();
         }
 
-        return $this->repository->findBy(array('scope' => $scope));
+        return $this->repository->findBy(['scope' => $scope]);
     }
 }

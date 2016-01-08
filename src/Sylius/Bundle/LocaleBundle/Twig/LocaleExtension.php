@@ -36,9 +36,9 @@ class LocaleExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('sylius_locale', array($this, 'getCurrentLocale')),
-        );
+        return [
+            new \Twig_SimpleFunction('sylius_locale', [$this, 'getCurrentLocale']),
+        ];
     }
 
     /**

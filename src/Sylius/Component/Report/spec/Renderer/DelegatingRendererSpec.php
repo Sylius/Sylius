@@ -46,7 +46,7 @@ class DelegatingRendererSpec extends ObjectBehavior
         Data $data)
     {
         $subject->getRenderer()->willReturn('default_renderer');
-        $subject->getRendererConfiguration()->willReturn(array());
+        $subject->getRendererConfiguration()->willReturn([]);
 
         $serviceRegistryInterface->get('default_renderer')->willReturn($renderer);
         $renderer->render($subject, $data)->shouldBeCalled();

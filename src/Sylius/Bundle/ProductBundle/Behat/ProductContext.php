@@ -318,11 +318,11 @@ class ProductContext extends DefaultContext
     {
         $calculatorConfiguration = $this->getConfiguration($data['calculator configuration']);
 
-        $finalCalculatorConfiguration = array();
+        $finalCalculatorConfiguration = [];
         $channelRepository = $this->getRepository('channel');
 
         foreach ($calculatorConfiguration as $channelCode => $price) {
-            $channel = $channelRepository->findOneBy(array('code' => $channelCode));
+            $channel = $channelRepository->findOneBy(['code' => $channelCode]);
 
             $finalCalculatorConfiguration[$channel->getId()] = (int)round($price * 100);
         }
@@ -358,7 +358,7 @@ class ProductContext extends DefaultContext
      */
     public function iShouldBeOnTheProductAttributeCreationPageForType($type)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', array('type' => $type)));
+        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', ['type' => $type]));
     }
 
     /**
@@ -366,7 +366,7 @@ class ProductContext extends DefaultContext
      */
     public function thereIsProduct($enabled, $name)
     {
-        $product = $this->getRepository('product')->findOneBy(array('name' => $name));
+        $product = $this->getRepository('product')->findOneBy(['name' => $name]);
 
         if (null === $product) {
             $product = $this->getRepository('product')->createNew();

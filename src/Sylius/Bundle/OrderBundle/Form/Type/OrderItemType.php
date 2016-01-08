@@ -27,12 +27,12 @@ class OrderItemType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer', array(
+            ->add('quantity', 'integer', [
                 'label' => 'sylius.form.order_item.quantity'
-            ))
-            ->add('unitPrice', 'sylius_money', array(
+            ])
+            ->add('unitPrice', 'sylius_money', [
                 'label'   => 'sylius.form.order_item.unit_price'
-            ))
+            ])
         ;
     }
 

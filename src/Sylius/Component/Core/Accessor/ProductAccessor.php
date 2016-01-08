@@ -34,7 +34,7 @@ class ProductAccessor extends PropertyAccessor
         try {
             return parent::getValue($product, $propertyPath);
         } catch (Exception\NoSuchPropertyException $e) {
-            $tags = array();
+            $tags = [];
             if (!$product instanceof ProductInterface) {
                 return $tags;
             }

@@ -49,21 +49,21 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         FormInterface $form,
         $registry
     ) {
-        $registry->all()->willReturn(array('configuration_kind' => ''));
+        $registry->all()->willReturn(['configuration_kind' => '']);
 
-        $builder->create('name', 'sylius_promotion_rule', array('configuration_type' => 'configuration_kind'))
+        $builder->create('name', 'sylius_promotion_rule', ['configuration_type' => 'configuration_kind'])
             ->willReturn($prototype);
 
         $prototype->getForm()->willReturn($form);
 
-        $builder->setAttribute('prototypes', array('configuration_kind' => $form))->shouldBeCalled();
+        $builder->setAttribute('prototypes', ['configuration_kind' => $form])->shouldBeCalled();
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'registry' => $registry,
             'prototype_name' => 'name',
             'type' => 'sylius_promotion_rule',
-            'options' => array(),
-        ));
+            'options' => [],
+        ]);
     }
 
     function it_builds_view(
@@ -73,22 +73,22 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         FormInterface $prototype
     ) {
         $form->getConfig()->willReturn($config);
-        $config->getAttribute('prototypes')->willReturn(array('configuration_kind' => $prototype));
+        $config->getAttribute('prototypes')->willReturn(['configuration_kind' => $prototype]);
 
         $prototype->createView($view)->shouldBeCalled();
 
-        $this->buildView($view, $form, array());
+        $this->buildView($view, $form, []);
     }
 
     function it_should_have_default_option(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'type' => 'sylius_promotion_rule',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ))->shouldBeCalled()
+            ])->shouldBeCalled()
         ;
         $this->configureOptions($resolver);
     }

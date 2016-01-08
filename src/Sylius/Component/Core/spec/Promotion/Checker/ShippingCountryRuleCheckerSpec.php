@@ -36,7 +36,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
     {
         $subject->getShippingAddress()->shouldBeCalled()->willReturn(null);
 
-        $this->isEligible($subject, array())->shouldReturn(false);
+        $this->isEligible($subject, [])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_country_does_not_match(
@@ -48,7 +48,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $country->getId()->shouldBeCalled()->willReturn(2);
 
-        $this->isEligible($subject, array('country' => 1))->shouldReturn(false);
+        $this->isEligible($subject, ['country' => 1])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_country_match(
@@ -60,6 +60,6 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $country->getId()->shouldBeCalled()->willReturn(1);
 
-        $this->isEligible($subject, array('country' => 1))->shouldReturn(true);
+        $this->isEligible($subject, ['country' => 1])->shouldReturn(true);
     }
 }

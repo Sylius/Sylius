@@ -236,7 +236,7 @@ class OrderSpec extends ObjectBehavior
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
-        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+        $item->getInventoryUnits()->willReturn([$unit1, $unit2]);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);
@@ -252,7 +252,7 @@ class OrderSpec extends ObjectBehavior
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
-        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+        $item->getInventoryUnits()->willReturn([$unit1, $unit2]);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);

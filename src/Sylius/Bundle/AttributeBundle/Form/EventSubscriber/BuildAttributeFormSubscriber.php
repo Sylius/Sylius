@@ -40,9 +40,9 @@ class BuildAttributeFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'addConfigurationFields',
-        );
+        ];
     }
 
     /**
@@ -58,10 +58,10 @@ class BuildAttributeFormSubscriber implements EventSubscriberInterface
                 'configuration',
                 'sylius_attribute_type_configuration_'.$attribute->getType(),
                 null,
-                array(
+                [
                     'auto_initialize' => false,
                     'label' => 'sylius.attribute_type.configuration',
-                )
+                ]
             );
 
             $form->add($requiredFields);

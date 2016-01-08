@@ -31,7 +31,7 @@ class A2lixTranslationLocaleProviderSpec extends ObjectBehavior
 
     function it_returns_list_of_locales(LocaleProviderInterface $syliusLocaleProvider)
     {
-        $listOfLocales = array('en_US', 'pl_PL');
+        $listOfLocales = ['en_US', 'pl_PL'];
 
         $syliusLocaleProvider->getAvailableLocales()->shouldBeCalled()->willReturn($listOfLocales);
 
@@ -49,6 +49,6 @@ class A2lixTranslationLocaleProviderSpec extends ObjectBehavior
     {
         $syliusLocaleContext->getDefaultLocale()->shouldBeCalled()->willReturn('pl_PL');
 
-        $this->getRequiredLocales()->shouldReturn(array('pl_PL'));
+        $this->getRequiredLocales()->shouldReturn(['pl_PL']);
     }
 }

@@ -48,7 +48,7 @@ class AddProductActionSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
+        $configuration = ['variant' => 500, 'quantity' => 2, 'price' => 0];
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
@@ -58,7 +58,7 @@ class AddProductActionSpec extends ObjectBehavior
         $item->setQuantity($configuration['quantity'])->willReturn($item);
         $item->setImmutable(true)->shouldBeCalled();
 
-        $order->getItems()->willReturn(array());
+        $order->getItems()->willReturn([]);
 
         $order->addItem($item)->shouldBeCalled();
 
@@ -73,7 +73,7 @@ class AddProductActionSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
+        $configuration = ['variant' => 500, 'quantity' => 2, 'price' => 1];
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
@@ -83,7 +83,7 @@ class AddProductActionSpec extends ObjectBehavior
         $item->setQuantity($configuration['quantity'])->willReturn($item);
         $item->equals($item)->willReturn(true);
 
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $order->addItem($item)->shouldNotBeCalled();
 
@@ -98,7 +98,7 @@ class AddProductActionSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
+        $configuration = ['variant' => 500, 'quantity' => 3, 'price' => 2];
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
@@ -109,7 +109,7 @@ class AddProductActionSpec extends ObjectBehavior
         $item->equals($item)->willReturn(true);
         $item->setImmutable(true)->shouldBeCalled();
 
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $order->removeItem($item)->shouldBeCalled();
 

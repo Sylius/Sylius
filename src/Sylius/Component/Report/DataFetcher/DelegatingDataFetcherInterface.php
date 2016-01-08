@@ -28,5 +28,5 @@ interface DelegatingDataFetcherInterface
      *
      * @return array
      */
-    public function fetch(ReportInterface $report, array $configuration = array());
+    public function fetch(ReportInterface $report, array $configuration = []);
 }

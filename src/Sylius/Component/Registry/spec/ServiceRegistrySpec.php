@@ -37,7 +37,7 @@ class ServiceRegistrySpec extends ObjectBehavior
 
     function it_initializes_services_array_by_default()
     {
-        $this->all()->shouldReturn(array());
+        $this->all()->shouldReturn([]);
     }
 
     function it_registers_service_with_given_type(RouterInterface $router)

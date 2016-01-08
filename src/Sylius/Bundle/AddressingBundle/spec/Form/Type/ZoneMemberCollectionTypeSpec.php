@@ -38,11 +38,11 @@ class ZoneMemberCollectionTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'allow_add'    => true,
             'allow_delete' => true,
             'by_reference' => false,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

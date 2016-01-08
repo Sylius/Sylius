@@ -57,17 +57,17 @@ class DateExtension extends AbstractTypeExtension
             return $value;
         };
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'format' => $format,
             'language' => \Locale::getDefault(),
             'leading_zero' => false,
-        ));
+        ]);
 
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'placeholder',
             'language',
             'leading_zero',
-        ));
+        ]);
 
         $resolver->setAllowedTypes('placeholder', 'string');
         $resolver->setAllowedTypes('language', 'string');

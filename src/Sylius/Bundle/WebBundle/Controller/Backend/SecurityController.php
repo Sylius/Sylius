@@ -39,12 +39,12 @@ class SecurityController extends BaseSecurityController
             throw new AccessDeniedException();
         }
 
-        $user = $this->get('sylius.repository.user')->findOneBy(array('usernameCanonical' => $username));
+        $user = $this->get('sylius.repository.user')->findOneBy(['usernameCanonical' => $username]);
 
         if (!$user) {
             throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));
         }
 
-        return $this->redirect($this->generateUrl('sylius_backend_customer_show', array('id' => $user->getCustomer()->getId())));
+        return $this->redirect($this->generateUrl('sylius_backend_customer_show', ['id' => $user->getCustomer()->getId()]));
     }
 }

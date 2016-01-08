@@ -19,7 +19,7 @@ class SyliusRequirementsSpec extends ObjectBehavior
 {
     function let(RequirementCollection $requirementCollection)
     {
-        $this->beConstructedWith(array($requirementCollection));
+        $this->beConstructedWith([$requirementCollection]);
     }
 
     function it_is_a_iterator_aggregate()

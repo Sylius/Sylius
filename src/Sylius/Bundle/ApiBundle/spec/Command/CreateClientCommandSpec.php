@@ -43,11 +43,11 @@ class CreateClientCommandSpec extends ObjectBehavior
         $container->get('fos_oauth_server.client_manager.default')->willReturn($clientManager);
         $clientManager->createClient()->willReturn($client);
 
-        $input->getOption('redirect-uri')->willReturn(array('redirect-uri'));
-        $input->getOption('grant-type')->willReturn(array('grant-type'));
+        $input->getOption('redirect-uri')->willReturn(['redirect-uri']);
+        $input->getOption('grant-type')->willReturn(['grant-type']);
 
-        $client->setRedirectUris(array('redirect-uri'))->shouldBeCalled();
-        $client->setAllowedGrantTypes(array('grant-type'))->shouldBeCalled();
+        $client->setRedirectUris(['redirect-uri'])->shouldBeCalled();
+        $client->setAllowedGrantTypes(['grant-type'])->shouldBeCalled();
 
         $clientManager->updateClient($client)->shouldBeCalled();
 

@@ -56,11 +56,11 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
 
         $input->hasOption('all')->shouldBeCalled()->willreturn(false);
         $container->get('sylius.currency_provider')->shouldBeCalled()->willreturn($currencyProvider);
-        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willreturn(array($currency));
+        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willreturn([$currency]);
 
         $input->getArgument('importer')->shouldBeCalled()->willreturn('importer');
         $container->get('sylius.currency_importer.importer')->shouldBeCalled()->willreturn($importer);
-        $importer->import(array($currency))->shouldBeCalled();
+        $importer->import([$currency])->shouldBeCalled();
 
         $output->writeln('Saving updated exchange rates.')->shouldBeCalled();
 
@@ -85,11 +85,11 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
 
         $input->hasOption('all')->shouldBeCalled()->willreturn(true);
         $container->get('sylius.repository.currency')->shouldBeCalled()->willreturn($repository);
-        $repository->findAll()->shouldBeCalled()->willreturn(array($currency));
+        $repository->findAll()->shouldBeCalled()->willreturn([$currency]);
 
         $input->getArgument('importer')->shouldBeCalled()->willreturn('importer');
         $container->get('sylius.currency_importer.importer')->shouldBeCalled()->willreturn($importer);
-        $importer->import(array($currency))->shouldBeCalled();
+        $importer->import([$currency])->shouldBeCalled();
 
         $output->writeln('Saving updated exchange rates.')->shouldBeCalled();
 

@@ -43,9 +43,9 @@ class PricingExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('sylius_calculate_price', array($this, 'calculatePrice'), array('is_safe' => array('html'))),
-        );
+        return [
+            new \Twig_SimpleFunction('sylius_calculate_price', [$this, 'calculatePrice'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**
@@ -56,7 +56,7 @@ class PricingExtension extends \Twig_Extension
      *
      * @return integer
      */
-    public function calculatePrice(PriceableInterface $priceable, array $context = array())
+    public function calculatePrice(PriceableInterface $priceable, array $context = [])
     {
         return $this->helper->calculatePrice($priceable, $context);
     }

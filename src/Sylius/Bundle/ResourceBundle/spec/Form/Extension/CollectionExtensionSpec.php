@@ -37,15 +37,15 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_have_default_option(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'button_add_label',
             'button_delete_label',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'button_add_label' => 'form.collection.add',
             'button_delete_label' => 'form.collection.delete',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

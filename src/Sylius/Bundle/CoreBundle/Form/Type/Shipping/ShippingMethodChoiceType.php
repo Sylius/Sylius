@@ -40,7 +40,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
             }
 
             if ($options['channel']) {
-                $filteredMethods = array();
+                $filteredMethods = [];
                 foreach($methods as $method) {
                     if ($options['channel']->hasShippingMethod($method)) {
                         $filteredMethods[] = $method;
@@ -50,15 +50,15 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 $methods = $filteredMethods;
             }
 
-            return new ObjectChoiceList($methods, null, array(), null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-                'criteria'    => array(),
+                'criteria'    => [],
                 'channel'     => null
-            ))
+            ])
             ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }

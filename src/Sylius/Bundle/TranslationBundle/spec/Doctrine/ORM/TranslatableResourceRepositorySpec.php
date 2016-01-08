@@ -80,14 +80,14 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
@@ -146,14 +146,14 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
     {
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
@@ -212,13 +212,13 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
     {
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
-            'baz' => array('foo', 'bar'),
-        );
+        $criteria = [
+            'baz' => ['foo', 'bar'],
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
@@ -270,6 +270,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_has_fluent_interface(LocaleProviderInterface $localeProvider)
     {
-        $this->setTranslatableFields(array('name'))->shouldReturn($this);
+        $this->setTranslatableFields(['name'])->shouldReturn($this);
     }
 }

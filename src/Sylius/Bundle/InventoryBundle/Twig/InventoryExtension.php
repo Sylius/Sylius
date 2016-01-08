@@ -43,10 +43,10 @@ class InventoryExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-             new \Twig_SimpleFunction('sylius_inventory_is_available', array($this, 'isStockAvailable')),
-             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', array($this, 'isStockSufficient')),
-        );
+        return [
+             new \Twig_SimpleFunction('sylius_inventory_is_available', [$this, 'isStockAvailable']),
+             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [$this, 'isStockSufficient']),
+        ];
     }
 
     /**

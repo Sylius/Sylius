@@ -18,10 +18,10 @@ interface ImporterInterface
     /**
      * @param array $options
      */
-    public function configure(array $options = array());
+    public function configure(array $options = []);
 
     /**
      * @param CurrencyInterface[] $managedCurrencies
      */
-    public function import(array $managedCurrencies = array());
+    public function import(array $managedCurrencies = []);
 }

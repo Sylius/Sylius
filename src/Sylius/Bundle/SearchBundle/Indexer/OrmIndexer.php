@@ -106,7 +106,7 @@ class OrmIndexer implements IndexerInterface
             $this->createIndex($index['class'], $index['mappings']);
         }
 
-        $index = new Index('fulltext_search_idx', array('value'), false, false, array('fulltext'));
+        $index = new Index('fulltext_search_idx', ['value'], false, false, ['fulltext']);
         $sm->createIndex($index, 'sylius_search_index');
 
         return $this;

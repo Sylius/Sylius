@@ -77,11 +77,11 @@ class SecurityStep extends CheckoutStep
      */
     protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm, FormInterface $guestForm = null)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
             'context'           => $context,
             'registration_form' => $registrationForm->createView(),
             'guest_form'        => null !== $guestForm ? $guestForm->createView() : null,
-        ));
+        ]);
     }
 
     /**
@@ -125,7 +125,7 @@ class SecurityStep extends CheckoutStep
      */
     protected function overrideSecurityTargetPath()
     {
-        $this->get('session')->set('_security.main.target_path', $this->generateUrl('sylius_checkout_security', array(), true));
+        $this->get('session')->set('_security.main.target_path', $this->generateUrl('sylius_checkout_security', [], true));
     }
 
     /**

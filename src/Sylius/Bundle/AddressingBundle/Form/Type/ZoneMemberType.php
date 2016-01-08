@@ -27,10 +27,10 @@ abstract class ZoneMemberType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('_type', 'hidden', array(
+            ->add('_type', 'hidden', [
                 'data'   => $this->getName(),
                 'mapped' => false,
-            ))
+            ])
         ;
     }
 }

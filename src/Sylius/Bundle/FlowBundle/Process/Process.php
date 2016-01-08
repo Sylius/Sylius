@@ -34,14 +34,14 @@ class Process implements ProcessInterface
      *
      * @var StepInterface[]
      */
-    protected $steps = array();
+    protected $steps = [];
 
     /**
      * Ordered steps.
      *
      * @var StepInterface[]
      */
-    protected $orderedSteps = array();
+    protected $orderedSteps = [];
 
     /**
      * @var ProcessValidatorInterface
@@ -60,7 +60,7 @@ class Process implements ProcessInterface
      *
      * @var array
      */
-    protected $displayRouteParams = array();
+    protected $displayRouteParams = [];
 
     /**
      * Forward action route.
@@ -74,7 +74,7 @@ class Process implements ProcessInterface
      *
      * @var array
      */
-    protected $forwardRouteParams = array();
+    protected $forwardRouteParams = [];
 
     /**
      * Redirect route.
@@ -88,7 +88,7 @@ class Process implements ProcessInterface
      *
      * @var array
      */
-    protected $redirectParams = array();
+    protected $redirectParams = [];
 
     /**
      * {@inheritdoc}

@@ -47,13 +47,13 @@ class TwigAdapterSpec extends ObjectBehavior
     ) {
         $this->setEventDispatcher($dispatcher);
 
-        $twig->mergeGlobals(array())->shouldBeCalled()->willReturn(array());
+        $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
 
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
         $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
 
-        $template->renderBlock('subject', array())->shouldBeCalled();
-        $template->renderBlock('body', array())->shouldBeCalled();
+        $template->renderBlock('subject', [])->shouldBeCalled();
+        $template->renderBlock('body', [])->shouldBeCalled();
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
@@ -62,7 +62,7 @@ class TwigAdapterSpec extends ObjectBehavior
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
-        $this->render($email, array())->shouldReturn($renderedEmail);
+        $this->render($email, [])->shouldReturn($renderedEmail);
     }
 
     function it_creates_and_renders_an_email(
@@ -84,6 +84,6 @@ class TwigAdapterSpec extends ObjectBehavior
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
-        $this->render($email, array())->shouldReturn($renderedEmail);
+        $this->render($email, [])->shouldReturn($renderedEmail);
     }
 }

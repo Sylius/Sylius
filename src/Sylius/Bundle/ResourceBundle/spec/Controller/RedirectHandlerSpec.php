@@ -30,9 +30,9 @@ class RedirectHandlerSpec extends ObjectBehavior
         $router->getRouteCollection()->willReturn($routes);
         $routes->get('my_route')->willReturn($route);
 
-        $config->getRedirectParameters('resource')->willReturn(array());
+        $config->getRedirectParameters('resource')->willReturn([]);
         $config->getRedirectRoute('show')->willReturn('my_route');
-        $router->generate('my_route', array())->willReturn('http://myurl.com');
+        $router->generate('my_route', [])->willReturn('http://myurl.com');
         $config->getRedirectHash()->willReturn(null);
         $config->isHeaderRedirection()->willReturn(false);
 
@@ -42,8 +42,8 @@ class RedirectHandlerSpec extends ObjectBehavior
     function it_redirects_to_index($config, $router)
     {
         $config->getRedirectRoute('index')->willReturn('my_route');
-        $config->getRedirectParameters()->willReturn(array());
-        $router->generate('my_route', array())->willReturn('http://myurl.com');
+        $config->getRedirectParameters()->willReturn([]);
+        $router->generate('my_route', [])->willReturn('http://myurl.com');
         $config->getRedirectHash()->willReturn(null);
         $config->isHeaderRedirection()->willReturn(false);
 
@@ -52,9 +52,9 @@ class RedirectHandlerSpec extends ObjectBehavior
 
     function it_redirects_to_route($router)
     {
-        $router->generate('my_route', array('my_parameter' => 'value'))->willReturn('http://myurl.com');
+        $router->generate('my_route', ['my_parameter' => 'value'])->willReturn('http://myurl.com');
 
-        $this->redirectToRoute('my_route', array('my_parameter' => 'value'))
+        $this->redirectToRoute('my_route', ['my_parameter' => 'value'])
             ->shouldHaveType(RedirectResponse::class);
     }
 

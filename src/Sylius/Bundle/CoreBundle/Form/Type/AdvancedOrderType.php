@@ -25,9 +25,9 @@ class AdvancedOrderType extends OrderType
         $builder
             ->add('currency', 'sylius_currency_choice')
             ->add('state', 'sylius_order_state_choice')
-            ->add('product', 'hidden', array(
+            ->add('product', 'hidden', [
                 'mapped'  => false,
-            ))
+            ])
         ;
     }
 

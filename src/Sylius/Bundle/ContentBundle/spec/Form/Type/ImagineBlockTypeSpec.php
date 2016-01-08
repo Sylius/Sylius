@@ -23,7 +23,7 @@ class ImagineBlockTypeSpec extends ObjectBehavior
 {
     function let(FilterConfiguration $filterConfiguration)
     {
-        $this->beConstructedWith('My\Resource\Model', array('validation_group'), $filterConfiguration);
+        $this->beConstructedWith('My\Resource\Model', ['validation_group'], $filterConfiguration);
     }
 
     function it_is_initializable()
@@ -33,7 +33,7 @@ class ImagineBlockTypeSpec extends ObjectBehavior
 
     function it_builds_a_form($filterConfiguration, FormBuilderInterface $builder)
     {
-        $filterConfiguration->all()->shouldBeCalled()->willReturn(array('filter' => ''));
+        $filterConfiguration->all()->shouldBeCalled()->willReturn(['filter' => '']);
 
         $builder->add('parentDocument', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
         $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);

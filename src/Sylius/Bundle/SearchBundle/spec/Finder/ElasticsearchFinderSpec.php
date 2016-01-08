@@ -50,82 +50,82 @@ class ElasticsearchFinderSpec extends ObjectBehavior
 
     function it_compiles_a_fulltext_elasticsearch_query()
     {
-        $config = array(
-            'filters' => array(
-                'facets' => array(
-                    'taxons'  => array(
+        $config = [
+            'filters' => [
+                'facets' => [
+                    'taxons'  => [
                         'display_name' => 'Basic categories',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'price'   => array(
+                        'values'       => [],
+                    ],
+                    'price'   => [
                         'display_name' => 'Available prices',
                         'type'         => 'range',
                         'value'        => null,
-                        'values'       => array(
-                            array('from' => 0, 'to' => 2000),
-                            array('from' => 2001, 'to' => 5000),
-                            array('from' => 5001, 'to' => 10000),
-                        ),
-                    ),
-                    'made_of' => array(
+                        'values'       => [
+                            ['from' => 0, 'to' => 2000],
+                            ['from' => 2001, 'to' => 5000],
+                            ['from' => 5001, 'to' => 10000],
+                        ],
+                    ],
+                    'made_of' => [
                         'display_name' => 'Material',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'color'   => array(
+                        'values'       => [],
+                    ],
+                    'color'   => [
                         'display_name' => 'Available colors',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                )
-            )
+                        'values'       => [],
+                    ],
+                ]
+            ]
 
-        );
+        ];
 
         $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType(Query::class);
     }
 
     function it_compiles_a_taxon_elasticsearch_query()
     {
-        $config = array(
-            'filters' => array(
-                'facets' => array(
-                    'taxons'  => array(
+        $config = [
+            'filters' => [
+                'facets' => [
+                    'taxons'  => [
                         'display_name' => 'Basic categories',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'price'   => array(
+                        'values'       => [],
+                    ],
+                    'price'   => [
                         'display_name' => 'Available prices',
                         'type'         => 'range',
                         'value'        => null,
-                        'values'       => array(
-                            array('from' => 0, 'to' => 2000),
-                            array('from' => 2001, 'to' => 5000),
-                            array('from' => 5001, 'to' => 10000),
-                        ),
-                    ),
-                    'made_of' => array(
+                        'values'       => [
+                            ['from' => 0, 'to' => 2000],
+                            ['from' => 2001, 'to' => 5000],
+                            ['from' => 5001, 'to' => 10000],
+                        ],
+                    ],
+                    'made_of' => [
                         'display_name' => 'Material',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'color'   => array(
+                        'values'       => [],
+                    ],
+                    'color'   => [
                         'display_name' => 'Available colors',
                         'type'         => 'terms',
                         'value'        => null,
-                        'values'       => array(),
-                    ),
-                )
-            )
+                        'values'       => [],
+                    ],
+                ]
+            ]
 
-        );
+        ];
 
         $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType(Query::class);
     }

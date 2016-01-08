@@ -264,7 +264,7 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function getGroupNames()
     {
-        $names = array();
+        $names = [];
         foreach ($this->getGroups() as $group) {
             $names[] = $group->getName();
         }

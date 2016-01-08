@@ -55,10 +55,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+        ];
     }
 
     /**
@@ -68,7 +68,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $attributeValue = $event->getData();
         $form = $event->getForm();
-        $options = array('label' => false, 'auto_initialize' => false);
+        $options = ['label' => false, 'auto_initialize' => false];
 
         if (null === $attributeValue) {
             $form->add($this->formFactory->createNamed('value', 'sylius_attribute_type_text', null, $options));
@@ -100,7 +100,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
         $type = $attribute->getType();
         $storageType = $attribute->getStorageType();
 
-        $options = array('auto_initialize' => false);
+        $options = ['auto_initialize' => false];
 
         $form
             ->add($this->formFactory->createNamed('value', 'sylius_attribute_type_'.$type, $this->provideAttributeValue($storageType, $attributeValue['value']), $options))

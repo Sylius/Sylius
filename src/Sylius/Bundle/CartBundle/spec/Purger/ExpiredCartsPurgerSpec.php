@@ -22,7 +22,7 @@ class ExpiredCartsPurgerSpec extends ObjectBehavior
 
     function it_purge_cart($manager, $repository, CartInterface $cart)
     {
-        $repository->findExpiredCarts()->shouldBeCalled()->willReturn(array($cart));
+        $repository->findExpiredCarts()->shouldBeCalled()->willReturn([$cart]);
         $manager->remove($cart)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 

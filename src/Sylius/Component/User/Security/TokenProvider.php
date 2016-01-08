@@ -74,7 +74,7 @@ class TokenProvider implements TokenProviderInterface
     {
         $this->manager->getFilters()->disable('softdeleteable');
 
-        $isUsed = null !== $this->repository->findOneBy(array('confirmationToken' => $token));
+        $isUsed = null !== $this->repository->findOneBy(['confirmationToken' => $token]);
 
         $this->manager->getFilters()->enable('softdeleteable');
 

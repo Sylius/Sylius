@@ -28,27 +28,27 @@ class WeightRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fixed', 'sylius_money', array(
+            ->add('fixed', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.fixed',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('variable', 'sylius_money', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('variable', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('division', 'number', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('division', 'number', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.division',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 
@@ -58,9 +58,9 @@ class WeightRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-            ))
+            ])
         ;
     }
 

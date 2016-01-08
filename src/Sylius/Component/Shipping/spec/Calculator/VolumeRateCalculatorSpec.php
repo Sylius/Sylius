@@ -28,13 +28,13 @@ class VolumeRateCalculatorSpec extends ObjectBehavior
     {
         $subject->getShippingVolume()->willReturn(100);
 
-        $this->calculate($subject, array('amount' => 500, 'division' => 2))->shouldReturn(500 * 100/2);
+        $this->calculate($subject, ['amount' => 500, 'division' => 2])->shouldReturn(500 * 100/2);
     }
 
     function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
     {
         $subject->getShippingVolume()->willReturn(100);
 
-        $this->calculate($subject, array('amount' => 500, 'division' => 2))->shouldBeInteger();
+        $this->calculate($subject, ['amount' => 500, 'division' => 2])->shouldBeInteger();
     }
 }

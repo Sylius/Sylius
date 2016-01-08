@@ -44,19 +44,19 @@ class CountryChoiceType extends AbstractType
             if (null === $options['enabled']) {
                 $choices = $this->countryRepository->findAll();
             } else {
-                $choices = $this->countryRepository->findBy(array('enabled' => $options['enabled']));
+                $choices = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
             }
 
-            return new ObjectChoiceList($choices, null, array(), null, 'id');
+            return new ObjectChoiceList($choices, null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
                 'enabled'     => null,
                 'label'       => 'sylius.form.address.country',
                 'empty_value' => 'sylius.form.country.select',
-            ))
+            ])
         ;
     }
 

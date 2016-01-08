@@ -62,6 +62,6 @@ class CurrencyConverter implements CurrencyConverterInterface
             return $this->cache[$code];
         }
 
-        return $this->cache[$code] = $this->currencyRepository->findOneBy(array('code' => $code));
+        return $this->cache[$code] = $this->currencyRepository->findOneBy(['code' => $code]);
     }
 }

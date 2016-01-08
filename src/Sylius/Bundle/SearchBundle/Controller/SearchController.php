@@ -64,7 +64,7 @@ class SearchController extends ResourceController
         $view = $this
             ->view()
             ->setTemplate('SyliusSearchBundle::index.html.twig')
-            ->setData(array(
+            ->setData([
                 'results' => $paginator,
                 'facets' => $finder->getFacets(),
                 'facetTags' => $searchConfig['filters']['facets'],
@@ -72,7 +72,7 @@ class SearchController extends ResourceController
                 'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -85,16 +85,16 @@ class SearchController extends ResourceController
      */
     public function formAction(Request $request)
     {
-        $filters = array();
+        $filters = [];
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->get('sylius.repository.taxonomy')
-                ->findOneBy(array(
+                ->findOneBy([
                     'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
-                ))
+                ])
             ;
 
-            $filters = array();
+            $filters = [];
             if ($taxonomy) {
                 foreach ($taxonomy->getTaxons() as $taxon) {
                     $filters[] = $taxon->getName();
@@ -107,12 +107,12 @@ class SearchController extends ResourceController
         $view = $this
             ->view()
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
-            ->setData(array(
+            ->setData([
                 'filters' => $filters,
                 'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ))
+            ])
         ;
 
         return $this->handleView($view);

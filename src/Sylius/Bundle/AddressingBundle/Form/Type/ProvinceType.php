@@ -27,9 +27,9 @@ class ProvinceType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.province.name',
-            ))
+            ])
         ;
     }
 

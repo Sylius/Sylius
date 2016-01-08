@@ -39,7 +39,7 @@ abstract class Kernel extends BaseKernel
      */
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
             new \Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
@@ -118,7 +118,7 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
-        );
+        ];
 
         return $bundles;
     }

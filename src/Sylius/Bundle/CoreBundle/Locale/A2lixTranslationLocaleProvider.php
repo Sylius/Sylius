@@ -54,6 +54,6 @@ class A2lixTranslationLocaleProvider implements A2lixLocaleProviderInterface
      */
     public function getRequiredLocales()
     {
-        return array($this->syliusLocaleContext->getDefaultLocale());
+        return [$this->syliusLocaleContext->getDefaultLocale()];
     }
 }

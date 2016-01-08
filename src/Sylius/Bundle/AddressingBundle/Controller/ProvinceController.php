@@ -48,18 +48,18 @@ class ProvinceController extends ResourceController
         }
 
         if (!$country->hasProvinces()) {
-            return new JsonResponse(array('content' => false));
+            return new JsonResponse(['content' => false]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
+        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), [
             'form' => $form->createView(),
-        ));
+        ]);
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'content' => $content,
-        ));
+        ]);
     }
 
     /**
@@ -74,7 +74,7 @@ class ProvinceController extends ResourceController
 
         $country = $this
             ->getCountryController()
-            ->findOr404($request, array('id' => $countryId))
+            ->findOr404($request, ['id' => $countryId])
         ;
 
         $province = parent::createNew();
@@ -112,10 +112,10 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, [
             'country'     => $country,
             'label'       => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
-        ));
+        ]);
     }
 }

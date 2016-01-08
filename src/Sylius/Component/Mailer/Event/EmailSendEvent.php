@@ -49,7 +49,7 @@ class EmailSendEvent extends Event
         $message,
         EmailInterface $email,
         array $data,
-        array $recipients = array()
+        array $recipients = []
     ) {
         $this->message = $message;
         $this->email = $email;

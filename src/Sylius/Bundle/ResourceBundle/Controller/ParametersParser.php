@@ -41,7 +41,7 @@ class ParametersParser
     public function parse(array $parameters, Request $request)
     {
         if (!isset($parameterNames)) {
-            $parameterNames = array();
+            $parameterNames = [];
         }
 
         foreach ($parameters as $key => $value) {
@@ -60,7 +60,7 @@ class ParametersParser
             }
         }
 
-        return array($parameters, $parameterNames);
+        return [$parameters, $parameterNames];
     }
 
     /**
@@ -74,7 +74,7 @@ class ParametersParser
         $accessor = PropertyAccess::createPropertyAccessor();
 
         if (empty($parameters)) {
-            return array('id' => $accessor->getValue($resource, 'id'));
+            return ['id' => $accessor->getValue($resource, 'id')];
         }
 
         foreach ($parameters as $key => $value) {

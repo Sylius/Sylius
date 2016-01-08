@@ -52,10 +52,10 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT   => 'preBind',
-        );
+        ];
     }
 
     /**
@@ -95,7 +95,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
      * @param string        $feeCalculatorType
      * @param array         $data
      */
-    private function addConfigurationFields(FormInterface $form, $feeCalculatorType, $data = array())
+    private function addConfigurationFields(FormInterface $form, $feeCalculatorType, $data = [])
     {
         $feeCalculator = $this->feeCalculatorRegistry->get($feeCalculatorType);
         $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());
@@ -105,7 +105,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriber implements EventSubscriberIn
                 'feeCalculatorConfiguration',
                 $formType,
                 $data,
-                array('auto_initialize' => false)
+                ['auto_initialize' => false]
             );
         } catch (\InvalidArgumentException $exception) {
             return;

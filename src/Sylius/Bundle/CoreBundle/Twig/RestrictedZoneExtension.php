@@ -36,9 +36,9 @@ class RestrictedZoneExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('sylius_is_restricted', array($this, 'isRestricted')),
-        );
+        return [
+            new \Twig_SimpleFunction('sylius_is_restricted', [$this, 'isRestricted']),
+        ];
     }
 
     /**

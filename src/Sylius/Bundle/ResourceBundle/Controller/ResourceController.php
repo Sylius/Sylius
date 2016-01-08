@@ -139,7 +139,7 @@ class ResourceController extends FOSRestController
             $resources = $this->resourceResolver->getResource(
                 $repository,
                 'createPaginator',
-                array($criteria, $sorting)
+                [$criteria, $sorting]
             );
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -157,7 +157,7 @@ class ResourceController extends FOSRestController
             $resources = $this->resourceResolver->getResource(
                 $repository,
                 'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
+                [$criteria, $sorting, $this->config->getLimit()]
             );
         }
 
@@ -208,10 +208,10 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('create.html'))
-            ->setData(array(
+            ->setData([
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -229,7 +229,7 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $resource = $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
@@ -254,10 +254,10 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('update.html'))
-            ->setData(array(
+            ->setData([
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -410,7 +410,7 @@ class ResourceController extends FOSRestController
      *
      * @return FormInterface
      */
-    public function getForm($resource = null, array $options = array())
+    public function getForm($resource = null, array $options = [])
     {
         $type = $this->config->getFormType();
 
@@ -424,7 +424,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, array_merge($options, array('csrf_protection' => false)));
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, array_merge($options, ['csrf_protection' => false]));
         }
 
         return $this->createForm($type, $resource, $options);
@@ -438,14 +438,14 @@ class ResourceController extends FOSRestController
      *
      * @throws NotFoundHttpException
      */
-    public function findOr404(Request $request, array $criteria = array())
+    public function findOr404(Request $request, array $criteria = [])
     {
         if ($request->attributes->has('slug') || $request->query->has('slug')) {
-            $default = array('slug' => $request->get('slug'));
+            $default = ['slug' => $request->get('slug')];
         } elseif ($request->attributes->has('id') || $request->query->has('id')) {
-            $default = array('id' => $request->get('id'));
+            $default = ['id' => $request->get('id')];
         } else {
-            $default = array();
+            $default = [];
         }
 
         $criteria = array_merge($default, $criteria);
@@ -453,7 +453,7 @@ class ResourceController extends FOSRestController
         if (!$resource = $this->resourceResolver->getResource(
             $this->getRepository(),
             'findOneBy',
-            array($this->config->getCriteria($criteria)))
+            [$this->config->getCriteria($criteria)])
         ) {
             throw new NotFoundHttpException(
                 sprintf(

@@ -56,7 +56,7 @@ class Configuration
     /**
      * @var array
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * Current request.
@@ -241,7 +241,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['parameters'])) {
-            $redirect = array('parameters' => array());
+            $redirect = ['parameters' => []];
         }
 
         $parameters = $redirect['parameters'];
@@ -283,9 +283,9 @@ class Configuration
         return (bool) $this->parameters->get('filterable', $this->settings['filterable']);
     }
 
-    public function getCriteria(array $criteria = array())
+    public function getCriteria(array $criteria = [])
     {
-        $defaultCriteria = array_merge($this->parameters->get('criteria', array()), $criteria);
+        $defaultCriteria = array_merge($this->parameters->get('criteria', []), $criteria);
 
         if ($this->isFilterable()) {
             return $this->getRequestParameter('criteria', $defaultCriteria);
@@ -299,9 +299,9 @@ class Configuration
         return (bool) $this->parameters->get('sortable', $this->settings['sortable']);
     }
 
-    public function getSorting(array $sorting = array())
+    public function getSorting(array $sorting = [])
     {
-        $defaultSorting = array_merge($this->parameters->get('sorting', array()), $sorting);
+        $defaultSorting = array_merge($this->parameters->get('sorting', []), $sorting);
 
         if ($this->isSortable()) {
             $sorting = $this->getRequestParameter('sorting');
@@ -318,38 +318,38 @@ class Configuration
         return $defaultSorting;
     }
 
-    public function getRequestParameter($parameter, $defaults = array())
+    public function getRequestParameter($parameter, $defaults = [])
     {
         return array_replace_recursive(
             $defaults,
-            $this->request->get($parameter, array())
+            $this->request->get($parameter, [])
         );
     }
 
     public function getRepositoryMethod($default)
     {
-        $repository = $this->parameters->get('repository', array('method' => $default));
+        $repository = $this->parameters->get('repository', ['method' => $default]);
 
         return is_array($repository) ? $repository['method'] : $repository;
     }
 
-    public function getRepositoryArguments(array $default = array())
+    public function getRepositoryArguments(array $default = [])
     {
-        $repository = $this->parameters->get('repository', array());
+        $repository = $this->parameters->get('repository', []);
 
         return isset($repository['arguments']) ? $repository['arguments'] : $default;
     }
 
     public function getFactoryMethod($default)
     {
-        $factory = $this->parameters->get('factory', array('method' => $default));
+        $factory = $this->parameters->get('factory', ['method' => $default]);
 
         return is_array($factory) ? $factory['method'] : $factory;
     }
 
-    public function getFactoryArguments(array $default = array())
+    public function getFactoryArguments(array $default = [])
     {
-        $factory = $this->parameters->get('factory', array());
+        $factory = $this->parameters->get('factory', []);
 
         return isset($factory['arguments']) ? $factory['arguments'] : $default;
     }
@@ -368,7 +368,7 @@ class Configuration
 
     public function getSerializationGroups()
     {
-        return $this->parameters->get('serialization_groups', array());
+        return $this->parameters->get('serialization_groups', []);
     }
 
     public function getSerializationVersion()

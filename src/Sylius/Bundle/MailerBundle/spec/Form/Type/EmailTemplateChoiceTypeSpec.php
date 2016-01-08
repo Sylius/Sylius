@@ -19,9 +19,9 @@ class EmailTemplateChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
+        $this->beConstructedWith([
             'template' => 'my_template'
-        ));
+        ]);
     }
 
     function it_is_initializable()
@@ -31,9 +31,9 @@ class EmailTemplateChoiceTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array('my_template' => 'template'),
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'choices' => ['my_template' => 'template'],
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

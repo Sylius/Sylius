@@ -37,7 +37,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_returns_empty_string_if_array_is_empty()
     {
-        $this->transform(array())->shouldReturn('');
+        $this->transform([])->shouldReturn('');
     }
 
     function it_throws_exception_if_not_array_transformed()
@@ -58,11 +58,11 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_transforms_array_into_string()
     {
-        $this->transform(array('foo', 'bar', 'yo'))->shouldReturn('foo, bar, yo');
+        $this->transform(['foo', 'bar', 'yo'])->shouldReturn('foo, bar, yo');
     }
 
     function it_returns_empty_array_if_blanks_string_reverse_transformed()
     {
-        $this->reverseTransform('')->shouldReturn(array());
+        $this->reverseTransform('')->shouldReturn([]);
     }
 }

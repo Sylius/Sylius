@@ -27,28 +27,28 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('time', 'integer', array(
+            ->add('time', 'integer', [
                 'label'       => 'sylius.form.rule.customer_loyalty_configuration.time',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('unit', 'choice', array(
+                    new Type(['type' => 'numeric']),
+                ]
+            ])
+            ->add('unit', 'choice', [
                 'label'       => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
-                'choices'     => array(
+                'choices'     => [
                     'days'   => 'sylius.form.rule.customer_loyalty_configuration.unit.days',
                     'weeks'  => 'sylius.form.rule.customer_loyalty_configuration.unit.weeks',
                     'months' => 'sylius.form.rule.customer_loyalty_configuration.unit.months',
                     'years'  => 'sylius.form.rule.customer_loyalty_configuration.unit.years',
-                ),
-                'constraints' => array(
+                ],
+                'constraints' => [
                     new NotBlank(),
-                )
-            ))
-            ->add('after', 'checkbox', array(
+                ]
+            ])
+            ->add('after', 'checkbox', [
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
-            ))
+            ])
         ;
     }
 

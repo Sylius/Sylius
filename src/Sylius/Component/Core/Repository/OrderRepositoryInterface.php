@@ -58,7 +58,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return array
      */
-    public function revenueBetweenDatesGroupByDate(array $configuration = array());
+    public function revenueBetweenDatesGroupByDate(array $configuration = []);
 
     /**
      * Gets number of orders group by date
@@ -68,5 +68,5 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return array
      */
-    public function ordersBetweenDatesGroupByDate(array $configuration = array());
+    public function ordersBetweenDatesGroupByDate(array $configuration = []);
 }

@@ -43,15 +43,15 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
-            ))
-            ->add('user', 'sylius_user_registration', array(
+            ])
+            ->add('user', 'sylius_user_registration', [
                 'label' => false,
-            ))
+            ])
             ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
             ->addEventSubscriber(new UserRegistrationFormListener())
             ->setDataLocked(false)
@@ -63,11 +63,11 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
             'cascade_validation' => true,
-        ));
+        ]);
     }
 
     /**

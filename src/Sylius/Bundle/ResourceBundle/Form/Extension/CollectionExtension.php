@@ -40,15 +40,15 @@ class CollectionExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'button_add_label',
             'button_delete_label',
-        ));
+        ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'button_add_label' => 'form.collection.add',
             'button_delete_label' => 'form.collection.delete',
-        ));
+        ]);
     }
 
     /**

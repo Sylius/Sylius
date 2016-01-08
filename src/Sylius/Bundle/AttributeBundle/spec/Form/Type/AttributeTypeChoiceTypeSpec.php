@@ -22,7 +22,7 @@ class AttributeTypeChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('test' => 'Test attribute type'));
+        $this->beConstructedWith(['test' => 'Test attribute type']);
     }
 
     function it_is_initializable()
@@ -37,7 +37,7 @@ class AttributeTypeChoiceTypeSpec extends ObjectBehavior
 
     function it_configures_proper_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('choices' => array('test' => 'Test attribute type')))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => ['test' => 'Test attribute type']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

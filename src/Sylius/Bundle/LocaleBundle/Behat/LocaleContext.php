@@ -37,7 +37,7 @@ class LocaleContext extends DefaultContext
         $code = $this->getLocaleCodeByEnglishLocaleName($name);
 
         /* @var $locale LocaleInterface */
-        if (null === $locale = $this->getRepository('locale')->findOneBy(array('code' => $code))) {
+        if (null === $locale = $this->getRepository('locale')->findOneBy(['code' => $code])) {
             $locale = $this->getFactory('locale')->createNew();
             $locale->setCode(trim($code));
             $locale->setEnabled($enabled);

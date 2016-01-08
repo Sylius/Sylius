@@ -23,9 +23,9 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
+        $this->beConstructedWith([
             'key' => 'role'
-        ));
+        ]);
     }
 
     function it_is_initializable()
@@ -40,13 +40,13 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
+        $resolver->setDefaults([
+            'choices' => [
                 'key' => 'role'
-            ),
+            ],
             'multiple' => true,
             'expanded' => true
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

@@ -43,7 +43,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     {
         $subject->getCustomer()->willReturn(null);
 
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_zero(
@@ -55,7 +55,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
         $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(0);
 
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
@@ -67,7 +67,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
         $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(5);
 
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
@@ -79,7 +79,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
         $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(12);
 
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
@@ -91,6 +91,6 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
         $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(9);
 
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(true);
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(true);
     }
 }

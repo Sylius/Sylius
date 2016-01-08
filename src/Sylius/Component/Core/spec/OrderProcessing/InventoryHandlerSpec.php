@@ -60,7 +60,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getQuantity()->willReturn(2);
 
         $item->getInventoryUnits()->willReturn(new ArrayCollection());
-        $inventoryUnitFactory->createForStockable($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->willReturn(array($unit1, $unit2));
+        $inventoryUnitFactory->createForStockable($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->willReturn([$unit1, $unit2]);
 
         $item->addInventoryUnit($unit1)->shouldBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();
@@ -75,14 +75,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
     ) {
-        $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1)));
+        $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection([$unit1]));
         $unit1->getStockable()->willReturn($variant);
         $unit2->getStockable()->willReturn($variant);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $inventoryUnitFactory->createForStockable($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->willReturn(array($unit2));
+        $inventoryUnitFactory->createForStockable($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->willReturn([$unit2]);
 
         $item->addInventoryUnit($unit1)->shouldNotBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();
@@ -101,11 +101,11 @@ class InventoryHandlerSpec extends ObjectBehavior
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
     ) {
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
+        $item->getInventoryUnits()->willReturn(new ArrayCollection([$unit1, $unit2]));
 
         $factory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_HOLD)->willReturn(false);
@@ -131,11 +131,11 @@ class InventoryHandlerSpec extends ObjectBehavior
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
     ) {
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
+        $item->getInventoryUnits()->willReturn(new ArrayCollection([$unit1, $unit2]));
 
         $factory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_RELEASE)->willReturn(false);
@@ -161,11 +161,11 @@ class InventoryHandlerSpec extends ObjectBehavior
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
     ) {
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
-        $item->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $item->getInventoryUnits()->shouldBeCalled()->willReturn([$unit1, $unit2]);
 
         $factory->get($unit1, InventoryUnitTransitions::GRAPH)->willReturn($sm1);
         $sm1->can(InventoryUnitTransitions::SYLIUS_SELL)->willReturn(true);
@@ -177,7 +177,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $sm2->can(InventoryUnitTransitions::SYLIUS_RELEASE)->willReturn(false);
         $sm2->apply(InventoryUnitTransitions::SYLIUS_SELL)->shouldBeCalled();
 
-        $inventoryOperator->decrease(array($unit1, $unit2))->shouldBeCalled();
+        $inventoryOperator->decrease([$unit1, $unit2])->shouldBeCalled();
         $inventoryOperator->release($variant, 1)->shouldBeCalled();
 
         $this->updateInventory($order);

@@ -38,9 +38,9 @@ class MoneyExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_money', array($this, 'formatAmount')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_money', [$this, 'formatAmount']),
+        ];
     }
 
     /**

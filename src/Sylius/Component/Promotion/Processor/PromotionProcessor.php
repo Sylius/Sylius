@@ -43,7 +43,7 @@ class PromotionProcessor implements PromotionProcessorInterface
             $this->applicator->revert($subject, $promotion);
         }
 
-        $eligiblePromotions = array();
+        $eligiblePromotions = [];
 
         foreach ($this->getActivePromotions() as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {

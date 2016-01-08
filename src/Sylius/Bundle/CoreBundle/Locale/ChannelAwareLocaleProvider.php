@@ -66,7 +66,7 @@ class ChannelAwareLocaleProvider implements LocaleProviderInterface
      */
     protected function getEnabledLocalesCodes()
     {
-        $localesCodes = array();
+        $localesCodes = [];
 
         /** @var LocaleInterface[] $locales */
         $locales = $this->channelContext->getChannel()->getLocales();

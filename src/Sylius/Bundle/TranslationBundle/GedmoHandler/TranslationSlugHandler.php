@@ -116,7 +116,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
         $wrapped = AbstractWrapper::wrap($relation, $this->om);
         if ($parent = $wrapped->getPropertyValue($options['relationParentRelationField'])) {
 
-            $translation = call_user_func_array(array($parent,$options['translate']), array($locale));
+            $translation = call_user_func_array([$parent,$options['translate']], [$locale]);
 
             $this->parentSlug = $translation->{$options['parentFieldMethod']}();
 

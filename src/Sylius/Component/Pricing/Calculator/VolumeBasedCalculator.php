@@ -47,7 +47,7 @@ class VolumeBasedCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
+    public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {
         $quantity = array_key_exists('quantity', $context) ? $context['quantity'] : 1;
 

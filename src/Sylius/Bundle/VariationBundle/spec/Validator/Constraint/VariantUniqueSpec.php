@@ -21,7 +21,7 @@ class VariantUniqueSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('property' => 'sku'));
+        $this->beConstructedWith(['property' => 'sku']);
     }
 
     function it_is_initializable()

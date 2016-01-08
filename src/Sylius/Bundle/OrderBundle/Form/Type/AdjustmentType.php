@@ -27,16 +27,16 @@ class AdjustmentType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'text', array(
+            ->add('type', 'text', [
                 'label' => 'sylius.form.adjustment.type'
-            ))
-            ->add('description', 'text', array(
+            ])
+            ->add('description', 'text', [
                 'label'    => 'sylius.form.adjustment.description',
                 'required' => false,
-            ))
-            ->add('amount', 'sylius_money', array(
+            ])
+            ->add('amount', 'sylius_money', [
                 'label'   => 'sylius.form.adjustment.amount'
-            ))
+            ])
         ;
     }
 

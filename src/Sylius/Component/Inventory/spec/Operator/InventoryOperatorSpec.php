@@ -62,7 +62,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $inventoryUnit2->getStockable()->willReturn($stockable);
 
         $availabilityChecker->isStockSufficient($stockable, 2)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2))->shouldBeCalled();
+        $backordersHandler->processBackorders([$inventoryUnit1, $inventoryUnit2])->shouldBeCalled();
 
         $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
@@ -70,7 +70,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
         $stockable->setOnHand(5)->shouldBeCalled();
 
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2));
+        $this->decrease([$inventoryUnit1, $inventoryUnit2]);
     }
 
     function it_decreases_stockable_on_hand_and_ignores_backordered_units(
@@ -86,7 +86,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $inventoryUnit3->getStockable()->willReturn($stockable);
 
         $availabilityChecker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))->shouldBeCalled();
+        $backordersHandler->processBackorders([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3])->shouldBeCalled();
 
         $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
@@ -95,6 +95,6 @@ class InventoryOperatorSpec extends ObjectBehavior
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
+        $this->decrease([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3]);
     }
 }

@@ -24,7 +24,7 @@ class OrderItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('OrderItem', array('sylius'));
+        $this->beConstructedWith('OrderItem', ['sylius']);
     }
 
     function it_is_initializable()
@@ -49,16 +49,16 @@ class OrderItemTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class'        => 'OrderItem',
-                'validation_groups' => array('sylius'),
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

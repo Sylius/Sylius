@@ -26,10 +26,10 @@ class PermissionEntityType extends ResourceChoiceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'query_builder' => function (EntityRepository $repository) {
                 return $repository->createQueryBuilder('o')->orderBy('o.left', 'asc');
             },
-        ));
+        ]);
     }
 }

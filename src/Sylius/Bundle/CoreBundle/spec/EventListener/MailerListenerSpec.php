@@ -106,7 +106,7 @@ class MailerListenerSpec extends ObjectBehavior
         $user->isEnabled()->shouldBeCalled()->willReturn(true);
 
         $emailSender
-            ->send(Emails::USER_CONFIRMATION, array('fulanito@sylius.com'), array('user' => $user))
+            ->send(Emails::USER_CONFIRMATION, ['fulanito@sylius.com'], ['user' => $user])
             ->shouldBeCalled()
         ;
 
@@ -161,8 +161,8 @@ class MailerListenerSpec extends ObjectBehavior
         $emailSender
             ->send(
                 Emails::ORDER_COMMENT,
-                array('fulanito@sylius.com'),
-                array('order' => $order, 'comment' => $comment)
+                ['fulanito@sylius.com'],
+                ['order' => $order, 'comment' => $comment]
             )
             ->shouldBeCalled();
 

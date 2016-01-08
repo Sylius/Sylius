@@ -55,7 +55,7 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
-        $generatedCoupons = array();
+        $generatedCoupons = [];
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
@@ -97,7 +97,7 @@ class CouponGenerator implements CouponGeneratorInterface
     {
         $this->manager->getFilters()->disable('softdeleteable');
 
-        $isUsed = null !== $this->repository->findOneBy(array('code' => $code));
+        $isUsed = null !== $this->repository->findOneBy(['code' => $code]);
 
         $this->manager->getFilters()->enable('softdeleteable');
 

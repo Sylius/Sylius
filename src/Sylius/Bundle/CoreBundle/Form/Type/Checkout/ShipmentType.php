@@ -44,7 +44,7 @@ class ShipmentType extends AbstractType
         $criteria = $options['criteria'];
         $channel  = $options['channel'];
 
-        $notBlank = new NotBlank(array('groups' => array('sylius')));
+        $notBlank = new NotBlank(['groups' => ['sylius']]);
         $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
 
         $builder
@@ -52,15 +52,15 @@ class ShipmentType extends AbstractType
                 $form = $event->getForm();
                 $shipment = $event->getData();
 
-                $form->add('method', 'sylius_shipping_method_choice', array(
+                $form->add('method', 'sylius_shipping_method_choice', [
                     'label'       => 'sylius.form.checkout.shipping_method',
                     'subject'     => $shipment,
                     'criteria'    => $criteria,
                     'expanded'    => true,
-                    'constraints' => array(
+                    'constraints' => [
                         $notBlank
-                    )
-                ));
+                    ]
+                ]);
             });
         ;
     }
@@ -71,13 +71,13 @@ class ShipmentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => $this->dataClass
-            ))
-            ->setDefined(array(
+            ])
+            ->setDefined([
                 'criteria',
                 'channel'
-            ))
+            ])
             ->setAllowedTypes('criteria', 'array')
             ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;

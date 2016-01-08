@@ -25,7 +25,7 @@ class ZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Zone', array('sylius'), array('shipping', 'pricing'));
+        $this->beConstructedWith('Zone', ['sylius'], ['shipping', 'pricing']);
     }
 
     function it_is_initializable()
@@ -65,17 +65,17 @@ class ZoneTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
-                array(
+                [
                     'data_class'        => 'Zone',
-                    'validation_groups' => array('sylius')
-                )
+                    'validation_groups' => ['sylius']
+                ]
             )
             ->shouldBeCalled()
         ;

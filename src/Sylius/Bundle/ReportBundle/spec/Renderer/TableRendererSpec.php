@@ -41,22 +41,22 @@ class TableRendererSpec extends ObjectBehavior
 
     function it_renders_data_with_given_configuration(ReportInterface $report, Data $reportData, $templating)
     {
-        $reportData->getLabels()->willReturn(array('month', 'user_total'));
-        $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
+        $reportData->getLabels()->willReturn(['month', 'user_total']);
+        $reportData->getData()->willReturn(['month1' => '50', 'month2' => '40']);
 
-        $renderData = array(
+        $renderData = [
             'report' => $report,
-            'values' => array('month1' => '50', 'month2' => '40'),
-            'labels' => array('month', 'user_total'),
-            'fields' => array('month1', 'month2'),
-        );
+            'values' => ['month1' => '50', 'month2' => '40'],
+            'labels' => ['month', 'user_total'],
+            'fields' => ['month1', 'month2'],
+        ];
 
-        $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Table:default.html.twig'));
+        $report->getRendererConfiguration()->willReturn(['template' => 'SyliusReportBundle:Table:default.html.twig']);
 
-        $templating->render('SyliusReportBundle:Table:default.html.twig', array(
+        $templating->render('SyliusReportBundle:Table:default.html.twig', [
             'data' => $renderData,
-            'configuration' => array('template' => 'SyliusReportBundle:Table:default.html.twig'),
-        ))->willReturn('<div>Table Report</div>');
+            'configuration' => ['template' => 'SyliusReportBundle:Table:default.html.twig'],
+        ])->willReturn('<div>Table Report</div>');
 
         $this->render($report, $reportData)->shouldReturn('<div>Table Report</div>');
     }

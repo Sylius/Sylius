@@ -21,7 +21,7 @@ class ProductUniqueSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('property' => 'name'));
+        $this->beConstructedWith(['property' => 'name']);
     }
 
     function it_is_initializable()

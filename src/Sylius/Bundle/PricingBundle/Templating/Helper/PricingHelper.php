@@ -47,7 +47,7 @@ class PricingHelper extends Helper
      *
      * @return integer
      */
-    public function calculatePrice(PriceableInterface $priceable, array $context = array())
+    public function calculatePrice(PriceableInterface $priceable, array $context = [])
     {
         return $this->priceCalculator->calculate($priceable, $context);
     }

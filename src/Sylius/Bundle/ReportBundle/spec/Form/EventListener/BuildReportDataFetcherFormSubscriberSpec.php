@@ -53,7 +53,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         Form $field)
     {
         $report->getDataFetcher()->willReturn('test_data_fetcher');
-        $report->getDataFetcherConfiguration()->willReturn(array());
+        $report->getDataFetcherConfiguration()->willReturn([]);
 
         $event->getData()->willReturn($report);
         $event->getForm()->willReturn($form);
@@ -75,7 +75,7 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-        $data = array('dataFetcher' => 'test_data_fetcher');
+        $data = ['dataFetcher' => 'test_data_fetcher'];
 
         $event->getData()->willReturn($data);
         $event->getForm()->willReturn($form);

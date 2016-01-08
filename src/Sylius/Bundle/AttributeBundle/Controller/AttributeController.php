@@ -29,7 +29,7 @@ class AttributeController extends ResourceController
             ->view()
             ->setTemplate($template)
             ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData(array('attributeTypes' => $this->get('sylius.registry.attribute_type')->all()))
+            ->setData(['attributeTypes' => $this->get('sylius.registry.attribute_type')->all()])
         ;
 
         return $this->handleView($view);
@@ -43,13 +43,13 @@ class AttributeController extends ResourceController
         $form = $this->get('form.factory')->create(
             'sylius_product_attribute_choice',
             null,
-            array(
+            [
                 'expanded' => true,
                 'multiple' => true,
-            )
+            ]
         );
 
-        return $this->render('SyliusAttributeBundle::attributeChoice.html.twig', array('form' => $form->createView()));
+        return $this->render('SyliusAttributeBundle::attributeChoice.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -60,20 +60,20 @@ class AttributeController extends ResourceController
     public function renderAttributeValueFormsAction(Request $request)
     {
         $attributeRepository = $this->get('sylius.repository.product_attribute');
-        $forms = array();
+        $forms = [];
 
-        $choices = ($request->query->has('sylius_product_attribute_choice')) ? $request->query->get('sylius_product_attribute_choice') : array();
+        $choices = ($request->query->has('sylius_product_attribute_choice')) ? $request->query->get('sylius_product_attribute_choice') : [];
 
-        $attributes = $attributeRepository->findBy(array('id' => $choices));
+        $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
             $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
 
-            $options = array('label' => $attribute->getName());
+            $options = ['label' => $attribute->getName()];
 
             $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
             $forms[$attribute->getId()] = $form->createView();
         }
 
-        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
+        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', ['forms' => $forms, 'count' => $request->query->get('count')]);
     }
 }

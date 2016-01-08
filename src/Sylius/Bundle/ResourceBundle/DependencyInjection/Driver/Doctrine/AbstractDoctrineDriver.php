@@ -33,8 +33,8 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     {
         $definition = new Definition($this->getClassMetadataClassname());
         $definition
-            ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'))
-            ->setArguments(array($metadata->getClass('model')))
+            ->setFactory([new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'])
+            ->setArguments([$metadata->getClass('model')])
             ->setPublic(false)
         ;
 

@@ -35,7 +35,7 @@ class ResizeZoneMemberCollectionListenerSpec extends ObjectBehavior
         $formConfig->getDataClass()->willReturn('Class');
         $type->getName()->willReturn();
 
-        $this->beConstructedWith($factory, array($form));
+        $this->beConstructedWith($factory, [$form]);
     }
 
     function it_is_initializable()

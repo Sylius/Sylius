@@ -26,11 +26,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusPricingExtension extends Extension
 {
-    protected $configFiles = array(
+    protected $configFiles = [
         'services.xml',
         'templating.xml',
         'twig.xml',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -45,12 +45,12 @@ class SyliusPricingExtension extends Extension
 
             $definition = new Definition($class);
             $definition
-                ->setArguments(array(
+                ->setArguments([
                     $formType,
                     new Reference('sylius.registry.price_calculator'),
                     new Reference('sylius.form.subscriber.priceable')
-                ))
-                ->addTag('form.type_extension', array('alias' => $formType))
+                ])
+                ->addTag('form.type_extension', ['alias' => $formType])
             ;
 
             $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);

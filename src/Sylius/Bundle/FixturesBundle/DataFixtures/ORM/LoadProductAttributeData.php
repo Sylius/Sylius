@@ -28,31 +28,31 @@ class LoadProductAttributeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $attribute = $this->createAttribute('T-Shirt brand', 't_shirt_brand', 'text', array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'));
+        $attribute = $this->createAttribute('T-Shirt brand', 't_shirt_brand', 'text', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt collection', 't_shirt_collection', 'text', array($this->defaultLocale => 'Collection', 'es_ES' => 'Coleccion'));
+        $attribute = $this->createAttribute('T-Shirt collection', 't_shirt_collection', 'text', [$this->defaultLocale => 'Collection', 'es_ES' => 'Coleccion']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt material', 't_shirt_material', 'text', array($this->defaultLocale => 'Made of', 'es_ES' => 'Material'));
+        $attribute = $this->createAttribute('T-Shirt material', 't_shirt_material', 'text', [$this->defaultLocale => 'Made of', 'es_ES' => 'Material']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker resolution', 'sticker_resolution', 'text', array($this->defaultLocale => 'Print resolution', 'es_ES' => 'Resolucion'));
+        $attribute = $this->createAttribute('Sticker resolution', 'sticker_resolution', 'text', [$this->defaultLocale => 'Print resolution', 'es_ES' => 'Resolucion']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker paper', 'sticker_paper', 'text', array($this->defaultLocale => 'Paper', 'es_ES' => 'Papel'));
+        $attribute = $this->createAttribute('Sticker paper', 'sticker_paper', 'text', [$this->defaultLocale => 'Paper', 'es_ES' => 'Papel']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Mug material', 'mug_material', 'text', array($this->defaultLocale => 'Material', 'es_ES' => 'Material'));
+        $attribute = $this->createAttribute('Mug material', 'mug_material', 'text', [$this->defaultLocale => 'Material', 'es_ES' => 'Material']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book author', 'book_author', 'text', array($this->defaultLocale => 'Author', 'es_ES' => 'Autor'));
+        $attribute = $this->createAttribute('Book author', 'book_author', 'text', [$this->defaultLocale => 'Author', 'es_ES' => 'Autor']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book ISBN', 'book_isbn', 'text', array($this->defaultLocale => 'ISBN', 'es_ES' => 'ISBN'));
+        $attribute = $this->createAttribute('Book ISBN', 'book_isbn', 'text', [$this->defaultLocale => 'ISBN', 'es_ES' => 'ISBN']);
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book pages', 'book_pages', 'integer', array($this->defaultLocale => 'Number of pages', 'es_ES' => 'Numero de paginas'));
+        $attribute = $this->createAttribute('Book pages', 'book_pages', 'integer', [$this->defaultLocale => 'Number of pages', 'es_ES' => 'Numero de paginas']);
         $manager->persist($attribute);
 
         $manager->flush();

@@ -22,9 +22,9 @@ class SyliusPayumBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -32,9 +32,9 @@ class SyliusPayumBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             TokenInterface::class => 'sylius.model.payment_security_token.class',
-        );
+        ];
     }
 
     /**

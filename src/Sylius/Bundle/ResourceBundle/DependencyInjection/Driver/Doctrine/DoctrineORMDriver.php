@@ -61,10 +61,10 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         }
 
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
-        ));
+        ]);
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
@@ -73,7 +73,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
 
             if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
                 if (isset($translationConfig['fields'])) {
-                    $definition->addMethodCall('setTranslatableFields', array($translationConfig['fields']));
+                    $definition->addMethodCall('setTranslatableFields', [$translationConfig['fields']]);
                 }
             }
         }

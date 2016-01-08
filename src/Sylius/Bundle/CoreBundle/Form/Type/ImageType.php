@@ -21,9 +21,9 @@ class ImageType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', 'file', array(
+        $builder->add('file', 'file', [
             'label' => 'sylius.form.image.file'
-        ));
+        ]);
     }
 
     /**

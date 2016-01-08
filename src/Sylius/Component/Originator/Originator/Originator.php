@@ -55,9 +55,9 @@ class Originator implements OriginatorInterface
 
         return $this->manager
             ->getRepository($originAware->getOriginType())
-            ->findOneBy(array(
+            ->findOneBy([
                 $this->identifier => $originAware->getOriginId()
-            ))
+            ])
         ;
     }
 
