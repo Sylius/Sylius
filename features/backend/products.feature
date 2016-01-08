@@ -132,6 +132,25 @@ Feature: Products
         And "Product has been successfully created." should appear on the page
 
     @javascript
+    Scenario: Creating product with multiple attributes
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And go to "Attributes" tab
+        And I add following attributes:
+            | T-Shirt fabric     |
+            | T-Shirt fare trade |
+        And I fill in "T-Shirt fabric" with "Polyester"
+        And I check "T-Shirt fare trade"
+        When I press "Create"
+        Then I should be on the page of product "FC Barcelona tee"
+        And "Product has been successfully created." should appear on the page
+        And I should see "T-Shirt fabric"
+        And I should see "T-Shirt fare trade"
+
+    @javascript
     Scenario: Created product does not pass validation
         Given I am on the product creation page
         When I fill in the following:

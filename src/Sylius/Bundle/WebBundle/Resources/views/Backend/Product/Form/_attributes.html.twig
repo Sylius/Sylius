@@ -4,7 +4,7 @@
     <div data-form-type="collection" {{ block('widget_container_attributes') }}>
         <div class="form-group">
         <div>
-            <div data-form-collection="list" class="row collection-list">
+            <div data-form-collection="list" class="row collection-list" data-length="{{ form.attributes|length }}">
                 {{ form_row(form.attributes, { 'label': false }) }}
             </div>
         </div>
