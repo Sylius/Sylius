@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentFactory;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -33,7 +34,7 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\OrderShipmentFactory');
+        $this->shouldHaveType(OrderShipmentFactory::class);
     }
 
     function it_implements_Sylius_shipment_factory_interface()

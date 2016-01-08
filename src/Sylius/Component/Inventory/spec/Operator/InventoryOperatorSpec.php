@@ -15,7 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperator;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -35,7 +37,7 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InventoryOperator');
+        $this->shouldHaveType(InventoryOperator::class);
     }
 
     function it_implements_Sylius_inventory_operator_interface()
@@ -43,12 +45,12 @@ class InventoryOperatorSpec extends ObjectBehavior
         $this->shouldImplement(InventoryOperatorInterface::class);
     }
 
-    function it_increases_stockable_on_hand(StockableInterface $stockable)
+    function it_increases_stock_item_on_hand(StockItemInterface $stockItem)
     {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(2);
-        $stockable->setOnHand(7)->shouldBeCalled();
+        $stockItem->getOnHand()->shouldBeCalled()->willReturn(2);
+        $stockItem->setOnHand(7)->shouldBeCalled();
 
-        $this->increase($stockable, 5);
+        $this->increase($stockItem, 5);
     }
 
     function it_decreases_stockable_on_hand_by_count_of_sold_units(

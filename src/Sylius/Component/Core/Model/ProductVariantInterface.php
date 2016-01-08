@@ -37,7 +37,7 @@ interface ProductVariantInterface extends
 
     /**
      * Get variant main image if any.
-     * Fall-back on product master variant
+     * Fall-back on product master variant.
      *
      * @return ImageInterface
      */

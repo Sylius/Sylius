@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Checker\AvailabilityChecker;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
@@ -28,7 +29,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Checker\AvailabilityChecker');
+        $this->shouldHaveType(AvailabilityChecker::class);
     }
 
     function it_implements_Sylius_inventory_availability_checker_interface()
@@ -181,9 +182,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockSufficient($stockable, 3)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_sufficient_if_variant_was_deleted(
-        FakeStockableInterface $stockable
-    ) {
+    function it_recognizes_stockable_as_not_sufficient_if_variant_was_deleted(FakeStockableInterface $stockable) {
         $this->beConstructedWith(false);
 
         $stockable->isDeleted()->willReturn(true);

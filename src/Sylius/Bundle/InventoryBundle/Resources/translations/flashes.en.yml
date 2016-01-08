@@ -4,3 +4,10 @@ sylius:
         sell: Inventory unit fulfilled.
         return: Inventory unit returned.
         transition_fail: The action couldn't be performed given the current state of unit
+
+    stock_location:
+        create: The stock location has been successfully created.
+        delete: The stock location has been successfully deleted.
+        disable: The stock location has been successfully disabled.
+        enable: The stock location has been successfully enabled.
+        update: The stock location has been successfully updated.

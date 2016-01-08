@@ -23,6 +23,7 @@
         <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
         <parameter key="sylius.backorders_handler.class">Sylius\Component\Inventory\Operator\BackordersHandler</parameter>
         <parameter key="sylius.listener.inventory.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
+        <parameter key="sylius.listener.stock_item.class">Sylius\Bundle\InventoryBundle\EventListener\StockItemListener</parameter>
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
     </parameters>
 
@@ -45,6 +46,12 @@
 
         <service id="sylius.listener.inventory" class="%sylius.listener.inventory.class%">
             <argument type="service" id="sylius.backorders_handler" />
+        </service>
+
+        <service id="sylius.listener.stock_item" class="%sylius.listener.stock_item.class%">
+            <argument type="service" id="sylius.factory.stock_item" />
+            <tag name="kernel.event_listener" event="sylius.stockable.post_create" method="createAllForStockable" />
+            <tag name="kernel.event_listener" event="sylius.stock_location.post_create" method="createAllForLocation" />
         </service>
 
         <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">

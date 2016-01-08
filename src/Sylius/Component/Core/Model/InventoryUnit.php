@@ -31,7 +31,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     protected $orderItem;
 
     /**
-     * Shipment
+     * Shipment.
      *
      * @var BaseShipmentInterface
      */
