@@ -42,19 +42,19 @@ class ProvinceChoiceType extends AbstractType
     {
         $choiceList = function (Options $options) {
             if (null === $options['country']) {
-                return new ObjectChoiceList($this->repository->findAll(), null, array(), null, 'id');
+                return new ObjectChoiceList($this->repository->findAll(), null, [], null, 'id');
             }
 
-            return new ObjectChoiceList($options['country']->getProvinces(), null, array(), null, 'id');
+            return new ObjectChoiceList($options['country']->getProvinces(), null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
                 'country'     => null,
                 'label'       => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select',
-            ))
+            ])
         ;
     }
 

@@ -43,9 +43,9 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -74,28 +74,28 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapAttributes(ClassMetadataInfo $metadata, array $class, $subject)
     {
-        $attributeMapping = array(
+        $attributeMapping = [
             'fieldName'    => 'attributes',
             'type'         => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['attribute'],
-            'joinTable'    => array(
+            'joinTable'    => [
                 'name' => sprintf('sylius_%s_archetype_attribute', $subject),
-                'joinColumns'   => array(array(
+                'joinColumns'   => [[
                     'name'                 => 'archetype_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
+                ]],
+                'inverseJoinColumns'   => [[
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                ]]
+            ],
+        ];
 
         $metadata->mapManyToMany($attributeMapping);
     }
@@ -107,28 +107,28 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapOptions(ClassMetadataInfo $metadata, array $class, $subject)
     {
-        $optionMapping = array(
+        $optionMapping = [
             'fieldName'    => 'options',
             'type'         => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['option'],
-            'joinTable'    => array(
+            'joinTable'    => [
                 'name' => sprintf('sylius_%s_archetype_option', $subject),
-                'joinColumns'   => array(array(
+                'joinColumns'   => [[
                     'name'                 => sprintf('%s_archetype_id', $subject),
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
+                ]],
+                'inverseJoinColumns'   => [[
                     'name'                 => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                ]]
+            ],
+        ];
 
         $metadata->mapManyToMany($optionMapping);
     }
@@ -139,17 +139,17 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapParent(ClassMetadataInfo $metadata, array $class)
     {
-        $parentMapping = array(
+        $parentMapping = [
             'fieldName'    => 'parent',
             'type'         => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => $class['archetype']['classes']['model'],
-            'joinColumn'   => array(
+            'joinColumn'   => [
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
                 'onDelete'             => 'SET NULL'
-            ),
-        );
+            ],
+        ];
 
         $metadata->mapManyToOne($parentMapping);
     }

@@ -36,7 +36,7 @@ class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
             return $rule->getConfiguration();
         }
 
-        return array();
+        return [];
     }
 
     /**

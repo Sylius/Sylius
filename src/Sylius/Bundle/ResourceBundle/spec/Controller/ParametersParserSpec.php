@@ -30,21 +30,21 @@ class ParametersParserSpec extends ObjectBehavior
         $request->get('sorting')->willReturn('New sorting');
 
         $this->parse(
-            array(
+            [
                 'criteria' => '$criteria',
                 'sortable' => '$sorting'
-            ),
+            ],
             $request
-        )->shouldReturn(array(
-            array(
+        )->shouldReturn([
+            [
                 'criteria' => 'New criteria',
                 'sortable' => 'New sorting',
-            ),
-            array(
+            ],
+            [
                 'criteria' => 'criteria',
                 'sortable' => 'sorting',
-            )
-        ));
+            ]
+        ]);
     }
 
     function it_should_parse_complex_parameters(Request $request)
@@ -53,26 +53,26 @@ class ParametersParserSpec extends ObjectBehavior
         $request->get('sorting')->willReturn('New sorting');
 
         $this->parse(
-            array(
-                'criteria' => array(
+            [
+                'criteria' => [
                     'enable' => '$enable'
-                ),
+                ],
                 'sortable' => '$sorting'
-            ),
+            ],
             $request
-        )->shouldReturn(array(
-                array(
-                    'criteria' => array(
+        )->shouldReturn([
+                [
+                    'criteria' => [
                         'enable' => true,
-                    ),
+                    ],
                     'sortable' => 'New sorting',
-                ),
-                array(
-                    'criteria' => array(
+                ],
+                [
+                    'criteria' => [
                         'enable' => 'enable',
-                    ),
+                    ],
                     'sortable' => 'sorting',
-                )
-            ));
+                ]
+        ]);
     }
 }

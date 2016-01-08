@@ -35,7 +35,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
     {
         $subject->getCustomer()->willReturn(null);
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_customer_is_created_after_configured(
@@ -45,7 +45,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime());
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_customer_is_created_before_configured(
@@ -55,7 +55,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(true);
     }
 
     function it_should_recognize_subject_as_eligible_if_customer_is_created_after_configured(
@@ -65,7 +65,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->shouldBeCalled()->willReturn($customer);
         $customer->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days', 'after' => true])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_customer_is_created_before_configured(
@@ -75,6 +75,6 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime());
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(true);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days', 'after' => true])->shouldReturn(true);
     }
 }

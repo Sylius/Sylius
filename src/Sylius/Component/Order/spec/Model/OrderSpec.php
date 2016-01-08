@@ -152,7 +152,7 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(44.98 * 100);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal('4498');
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(round(44.98 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal([4498]);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(new \stdClass());
     }
 
@@ -256,7 +256,7 @@ class OrderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(44.98 * 100);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal('4498');
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal([4498]);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(new \stdClass());
     }
 

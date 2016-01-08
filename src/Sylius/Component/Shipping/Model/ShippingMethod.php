@@ -56,7 +56,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var Collection|RuleInterface[]
@@ -292,11 +292,11 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
      */
     public static function getCategoryRequirementLabels()
     {
-        return array(
+        return [
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
-        );
+        ];
     }
 
     public function enable()

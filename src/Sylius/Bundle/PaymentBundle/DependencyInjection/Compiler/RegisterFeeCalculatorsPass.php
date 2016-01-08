@@ -26,7 +26,7 @@ class RegisterFeeCalculatorsPass implements CompilerPassInterface
      *
      * @var array
      */
-    private $calculators = array();
+    private $calculators = [];
 
     /**
      * @var Definition
@@ -66,6 +66,6 @@ class RegisterFeeCalculatorsPass implements CompilerPassInterface
         $name = $attributes[0]['calculator'];
         $this->calculators[$name] = $attributes[0]['label'];
 
-        $this->registry->addMethodCall('register', array($name, new Reference($id)));
+        $this->registry->addMethodCall('register', [$name, new Reference($id)]);
     }
 }

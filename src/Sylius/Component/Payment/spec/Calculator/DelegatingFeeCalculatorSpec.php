@@ -47,11 +47,11 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
         $payment->getMethod()->willReturn($paymentMethod)->shouldBeCalled();
 
         $paymentMethod->getFeeCalculator()->willReturn('fee_calculator')->shouldBeCalled();
-        $paymentMethod->getFeeCalculatorConfiguration()->willReturn(array('amount' => 150))->shouldBeCalled();
+        $paymentMethod->getFeeCalculatorConfiguration()->willReturn(['amount' => 150])->shouldBeCalled();
 
         $serviceRegistry->get('fee_calculator')->willReturn($feeCalculator)->shouldBeCalled();
 
-        $feeCalculator->calculate($payment, array('amount' => 150))->willReturn(150)->shouldBeCalled();
+        $feeCalculator->calculate($payment, ['amount' => 150])->willReturn(150)->shouldBeCalled();
 
         $this->calculate($payment)->shouldReturn(150);
     }
@@ -60,6 +60,6 @@ class DelegatingFeeCalculatorSpec extends ObjectBehavior
     {
         $payment->getMethod()->willReturn(null);
 
-        $this->shouldThrow(new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured."))->during("calculate", array($payment));
+        $this->shouldThrow(new \InvalidArgumentException("Cannot calculate fee for payment without payment method configured."))->during("calculate", [$payment]);
     }
 }

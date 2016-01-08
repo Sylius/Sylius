@@ -58,9 +58,9 @@ class SyliusVariationExtension extends AbstractResourceExtension
             }
         }
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -77,7 +77,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $variables = array();
+        $variables = [];
 
         foreach ($resources as $variable => $parameters) {
             $variables[$variable] = $parameters;
@@ -85,7 +85,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.variation.variables', $variables);
 
-        $resolvedResources = array();
+        $resolvedResources = [];
 
         foreach ($resources as $variableName => $variableConfig) {
             foreach ($variableConfig as $resourceName => $resourceConfig) {
@@ -111,32 +111,32 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $variantChoiceFormType = new Definition(VariantChoiceType::class);
         $variantChoiceFormType
-            ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => sprintf('sylius_%s_choice', $variantAlias)))
+            ->setArguments([$variable])
+            ->addTag('form.type', ['alias' => sprintf('sylius_%s_choice', $variantAlias)])
         ;
 
         $container->setDefinition('sylius.form.type.'.$variantAlias.'_choice', $variantChoiceFormType);
 
         $variantMatchFormType = new Definition(VariantMatchType::class);
         $variantMatchFormType
-            ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => sprintf('sylius_%s_match', $variantAlias)))
+            ->setArguments([$variable])
+            ->addTag('form.type', ['alias' => sprintf('sylius_%s_match', $variantAlias)])
         ;
 
         $container->setDefinition('sylius.form.type.'.$variantAlias.'_match', $variantMatchFormType);
 
         $optionValueChoiceFormType = new Definition(OptionValueChoiceType::class);
         $optionValueChoiceFormType
-            ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionValueAlias.'_choice'))
+            ->setArguments([$variable])
+            ->addTag('form.type', ['alias' => 'sylius_'.$optionValueAlias.'_choice'])
         ;
 
         $container->setDefinition('sylius.form.type.'.$optionValueAlias.'_choice', $optionValueChoiceFormType);
 
         $optionValueCollectionFormType = new Definition(OptionValueCollectionType::class);
         $optionValueCollectionFormType
-            ->setArguments(array($variable))
-            ->addTag('form.type', array('alias' => 'sylius_'.$optionValueAlias.'_collection'))
+            ->setArguments([$variable])
+            ->addTag('form.type', ['alias' => 'sylius_'.$optionValueAlias.'_collection'])
         ;
 
         $container->setDefinition('sylius.form.type.'.$optionValueAlias.'_collection', $optionValueCollectionFormType);

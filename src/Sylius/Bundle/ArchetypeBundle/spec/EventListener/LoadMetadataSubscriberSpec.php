@@ -24,18 +24,18 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'product' => array(
+        $this->beConstructedWith([
+            'product' => [
                 'subject' => 'Some\App\Product\Entity\Product',
                 'attribute' => 'Some\App\Product\Entity\Attribute',
                 'option' => 'Some\App\Product\Entity\Option',
-                'archetype' => array(
-                    'classes' => array(
+                'archetype' => [
+                    'classes' => [
                         'model' => 'Some\App\Product\Entity\Archetype',
-                    ),
-                ),
-            ),
-        ));
+                    ],
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
@@ -50,7 +50,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
-        $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
+        $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
     function it_does_not_add_mapping_if_the_class_is_not_configured_to_be_an_archetype(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
@@ -70,63 +70,63 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Archetype');
 
-        $attributeMapping = array(
+        $attributeMapping = [
             'fieldName'    => 'attributes',
             'type'         => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\Attribute',
-            'joinTable'    => array(
+            'joinTable'    => [
                 'name' => 'sylius_product_archetype_attribute',
-                'joinColumns'   => array(array(
+                'joinColumns'   => [[
                     'name'                 => 'archetype_id', // or `product_archetype_id` ?
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
+                ]],
+                'inverseJoinColumns'   => [[
                     'name'                 => 'attribute_id', // or `product_attribute_id` ?
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                ]]
+            ],
+        ];
 
-        $optionMapping = array(
+        $optionMapping = [
             'fieldName'    => 'options',
             'type'         => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\Option',
-            'joinTable'    => array(
+            'joinTable'    => [
                 'name' => 'sylius_product_archetype_option',
-                'joinColumns'   => array(array(
+                'joinColumns'   => [[
                     'name'                 => 'product_archetype_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
+                ]],
+                'inverseJoinColumns'   => [[
                     'name'                 => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
                     'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                ]]
+            ],
+        ];
 
-        $parentMapping = array(
+        $parentMapping = [
             'fieldName'    => 'parent',
             'type'         => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => 'Some\App\Product\Entity\Archetype',
-            'joinColumn'   => array(
+            'joinColumn'   => [
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
                 'onDelete'             => 'SET NULL'
-            ),
-        );
+            ],
+        ];
 
         $metadata->mapManyToMany($attributeMapping)->shouldBeCalled();
         $metadata->mapManyToMany($optionMapping)->shouldBeCalled();

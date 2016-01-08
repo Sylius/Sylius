@@ -29,7 +29,7 @@ interface CalculatorInterface
      *
      * @return integer
      */
-    public function calculate(PriceableInterface $subject, array $configuration, array $context = array());
+    public function calculate(PriceableInterface $subject, array $configuration, array $context = []);
 
     /**
      * Get calculator type.

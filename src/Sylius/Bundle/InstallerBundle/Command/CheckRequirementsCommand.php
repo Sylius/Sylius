@@ -31,10 +31,10 @@ EOT
         $fulfilled = true;
         $requirements = $this->get('sylius.requirements');
 
-        $headers = array('Requirement', 'Status');
+        $headers = ['Requirement', 'Status'];
 
         foreach ($requirements as $collection) {
-            $rows = array();
+            $rows = [];
 
             foreach ($collection as $requirement) {
                 $label = $requirement->getLabel();
@@ -51,10 +51,10 @@ EOT
                         $status = '<comment>WARNING!</comment>';
                     }
 
-                    $help[] = array($label, $comment);
+                    $help[] = [$label, $comment];
                 }
 
-                $rows[] = array($label, $status);
+                $rows[] = [$label, $status];
             }
 
             if ($input->getOption('verbose') || !$fulfilled) {
@@ -64,7 +64,7 @@ EOT
         }
 
         if (!empty($help)) {
-            $headers = array('Issue', 'Recommendation');
+            $headers = ['Issue', 'Recommendation'];
             $this->renderTable($headers, $help, $output);
         }
 

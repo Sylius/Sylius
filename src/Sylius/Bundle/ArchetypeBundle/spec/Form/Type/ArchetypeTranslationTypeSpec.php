@@ -11,7 +11,7 @@ class ArchetypeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ArchetypeTranslation', array('sylius'), 'subject');
+        $this->beConstructedWith('ArchetypeTranslation', ['sylius'], 'subject');
     }
 
     function it_is_initializable()
@@ -28,7 +28,7 @@ class ArchetypeTranslationTypeSpec extends ObjectBehavior
     {
         $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

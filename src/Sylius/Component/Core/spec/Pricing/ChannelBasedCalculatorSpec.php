@@ -45,9 +45,9 @@ class ChannelBasedCalculatorSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $channel->getId()->willReturn(1);
 
-        $subject->getPricingConfiguration()->willReturn(array(1 => 1400));
+        $subject->getPricingConfiguration()->willReturn([1 => 1400]);
 
-        $this->calculate($subject, array(), array())->shouldReturn(1400);
+        $this->calculate($subject, [], [])->shouldReturn(1400);
     }
 
     function it_returns_defaul_price_if_current_channel_price_is_not_configured(
@@ -58,10 +58,10 @@ class ChannelBasedCalculatorSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $channel->getId()->willReturn(1);
 
-        $subject->getPricingConfiguration()->willReturn(array(2 => 1400));
+        $subject->getPricingConfiguration()->willReturn([2 => 1400]);
         $subject->getPrice()->willReturn(2000);
 
-        $this->calculate($subject, array(), array())->shouldReturn(2000);
+        $this->calculate($subject, [], [])->shouldReturn(2000);
     }
 
     function it_has_type()

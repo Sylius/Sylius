@@ -31,7 +31,7 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
     /**
      * @var array
      */
-    protected $translatableFields = array();
+    protected $translatableFields = [];
 
     /**
      * {@inheritdoc}

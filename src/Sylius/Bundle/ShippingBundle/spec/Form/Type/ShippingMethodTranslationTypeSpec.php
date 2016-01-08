@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let() {
-        $this->beConstructedWith('ShippingMethodTranslation', array('sylius'));
+        $this->beConstructedWith('ShippingMethodTranslation', ['sylius']);
     }
 
     function it_is_a_form_type()
@@ -39,16 +39,16 @@ class ShippingMethodTranslationTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class'        => 'ShippingMethodTranslation',
-                'validation_groups' => array('sylius'),
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

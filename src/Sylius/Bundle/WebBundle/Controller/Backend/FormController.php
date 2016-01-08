@@ -30,9 +30,9 @@ class FormController extends Controller
      */
     public function showAction($type, $template)
     {
-        return $this->render($template, array(
+        return $this->render($template, [
             'form' => $this->createForm($type)->createView()
-        ));
+        ]);
     }
 
     /**
@@ -51,8 +51,8 @@ class FormController extends Controller
 
         $form->handleRequest($request);
 
-        return $this->render($template, array(
+        return $this->render($template, [
             'form' => $form->createView()
-        ));
+        ]);
     }
 }

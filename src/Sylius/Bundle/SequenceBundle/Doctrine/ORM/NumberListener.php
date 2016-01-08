@@ -55,12 +55,12 @@ class NumberListener
     /**
      * @var SequenceSubjectInterface[]
      */
-    protected $entitiesEnabled = array();
+    protected $entitiesEnabled = [];
 
     /**
      * @var array
      */
-    protected $sequences = array();
+    protected $sequences = [];
 
     /**
      * @var bool
@@ -145,7 +145,7 @@ class NumberListener
 
         $sequence = $em
             ->getRepository($this->sequenceClass)
-            ->findOneBy(array('type' => $type))
+            ->findOneBy(['type' => $type])
         ;
 
         if (null === $sequence) {

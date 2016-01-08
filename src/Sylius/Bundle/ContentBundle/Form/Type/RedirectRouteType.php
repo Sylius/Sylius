@@ -24,23 +24,23 @@ class RedirectRouteType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('id', 'text', array(
+            ->add('id', 'text', [
                 'label' => 'sylius.form.redirect_route.id'
-            ))
-            ->add('name', 'text', array(
+            ])
+            ->add('name', 'text', [
                 'label' => 'sylius.form.redirect_route.name'
-            ))
-            ->add('routeName', 'text', array(
+            ])
+            ->add('routeName', 'text', [
                 'label'    => 'sylius.form.redirect_route.route_name',
                 'required' => false,
-            ))
-            ->add('uri', 'url', array(
+            ])
+            ->add('uri', 'url', [
                 'label'    => 'sylius.form.redirect_route.uri',
                 'required' => false,
-            ))
+            ])
         ;
 
     }

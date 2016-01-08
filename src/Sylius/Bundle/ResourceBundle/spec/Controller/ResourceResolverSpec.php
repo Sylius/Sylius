@@ -29,11 +29,11 @@ class ResourceResolverSpec extends ObjectBehavior
         $configuration
     ) {
         $configuration->getRepositoryMethod('findBy')->willReturn('findAll');
-        $configuration->getRepositoryArguments(array())->willReturn(array(5));
+        $configuration->getRepositoryArguments([])->willReturn([5]);
 
-        $repository->findAll(5)->willReturn(array('foo', 'bar'));
+        $repository->findAll(5)->willReturn(['foo', 'bar']);
 
-        $this->getResource($repository, 'findBy')->shouldReturn(array('foo', 'bar'));
+        $this->getResource($repository, 'findBy')->shouldReturn(['foo', 'bar']);
     }
 
     function it_calls_proper_method_with_arguments_based_on_configuration_when_creating_resource(
@@ -41,10 +41,10 @@ class ResourceResolverSpec extends ObjectBehavior
         $configuration
     ) {
         $configuration->getFactoryMethod('createNew')->willReturn('createNew');
-        $configuration->getFactoryArguments(array())->willReturn(array());
+        $configuration->getFactoryArguments([])->willReturn([]);
 
-        $factory->createNew()->willReturn(array('foo', 'bar'));
+        $factory->createNew()->willReturn(['foo', 'bar']);
 
-        $this->createResource($factory, 'createNew')->shouldReturn(array('foo', 'bar'));
+        $this->createResource($factory, 'createNew')->shouldReturn(['foo', 'bar']);
     }
 }

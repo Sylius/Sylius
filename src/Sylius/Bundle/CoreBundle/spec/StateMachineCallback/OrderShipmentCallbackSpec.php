@@ -41,7 +41,7 @@ class OrderShipmentCallbackSpec extends ObjectBehavior
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
     ) {
-        $order->getShipments()->willReturn(array($shipment));
+        $order->getShipments()->willReturn([$shipment]);
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm1);
         $factory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($sm2);
@@ -60,7 +60,7 @@ class OrderShipmentCallbackSpec extends ObjectBehavior
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
     ) {
-        $order->getShipments()->willReturn(array($shipment));
+        $order->getShipments()->willReturn([$shipment]);
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm1);
         $factory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($sm2);

@@ -45,9 +45,9 @@ class PermissionMapSpec extends ObjectBehavior
         PermissionInterface $permission1,
         PermissionInterface $permission2
     ) {
-        $permissionResolver->getPermissions($role)->shouldBeCalled()->willReturn(array($permission1, $permission2));
+        $permissionResolver->getPermissions($role)->shouldBeCalled()->willReturn([$permission1, $permission2]);
 
-        $this->getPermissions($role)->shouldReturn(array($permission1, $permission2));
+        $this->getPermissions($role)->shouldReturn([$permission1, $permission2]);
     }
 
     function it_checks_if_role_has_permission_with_given_code(

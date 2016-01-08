@@ -29,7 +29,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     /**
      * @var array
      */
-    private $bundles = array(
+    private $bundles = [
         'sylius_addressing',
         'sylius_api',
         'sylius_attribute',
@@ -55,7 +55,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_variation',
         'sylius_translation',
         'sylius_rbac',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -67,7 +67,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'controller.xml',
             'form.xml',
@@ -77,7 +77,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'reports.xml',
             'state_machine.xml',
             'email.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -98,17 +98,17 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         foreach ($container->getExtensions() as $name => $extension) {
             if (in_array($name, $this->bundles)) {
-                $container->prependExtensionConfig($name, array('driver' => $config['driver']));
+                $container->prependExtensionConfig($name, ['driver' => $config['driver']]);
             }
         }
 
-        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
+        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = [];
 
         foreach ($config['routing'] as $className => $routeConfig) {
-            $routeClasses[$className] = array(
+            $routeClasses[$className] = [
                 'field'  => $routeConfig['field'],
                 'prefix' => $routeConfig['prefix'],
-            );
+            ];
             $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
             $repositoryByClasses[$className] = $routeConfig['defaults']['repository'];
             $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];

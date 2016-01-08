@@ -24,7 +24,7 @@ class TaxonSelectionToIdentifierCollectionTransformer implements DataTransformer
     public function transform($value)
     {
         if (null === $value) {
-            return array();
+            return [];
         }
 
         if (!$value instanceof Collection) {

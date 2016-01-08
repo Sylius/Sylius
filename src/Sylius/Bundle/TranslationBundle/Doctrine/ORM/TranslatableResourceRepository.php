@@ -22,7 +22,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     /**
      * @var array
      */
-    protected $translatableFields = array();
+    protected $translatableFields = [];
 
     /**
      * {@inheritdoc}

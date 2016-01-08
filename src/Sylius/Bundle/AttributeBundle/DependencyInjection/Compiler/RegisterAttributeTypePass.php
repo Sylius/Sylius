@@ -30,7 +30,7 @@ class RegisterAttributeTypePass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.attribute_type');
-        $attributeTypes = array();
+        $attributeTypes = [];
 
         foreach ($container->findTaggedServiceIds('sylius.attribute.type') as $id => $attributes) {
             if (!isset($attributes[0]['attribute-type']) || !isset($attributes[0]['label'])) {
@@ -39,7 +39,7 @@ class RegisterAttributeTypePass implements CompilerPassInterface
 
             $name = $attributes[0]['attribute-type'];
             $attributeTypes[$name] = $attributes[0]['label'];
-            $registry->addMethodCall('register', array($name, new Reference($id)));
+            $registry->addMethodCall('register', [$name, new Reference($id)]);
         }
 
         $container->setParameter('sylius.attribute.attribute_types', $attributeTypes);

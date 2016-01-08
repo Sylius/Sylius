@@ -40,10 +40,10 @@ class UserLastLoginSubscriberSpec extends ObjectBehavior
 
     function it_subscriber_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
             UserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
-        ));
+        ]);
     }
 
     function it_updates_user_last_login_on_security_interactive_login(

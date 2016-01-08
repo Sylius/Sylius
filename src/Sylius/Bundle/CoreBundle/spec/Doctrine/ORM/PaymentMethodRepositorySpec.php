@@ -46,12 +46,12 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $builder->andWhere('method IN (:methods)')->shouldBeCalled()->willReturn($builder);
 
         $channel->getPaymentMethods()->shouldBeCalled()->willReturn($paymentMethods);
-        $paymentMethods->toArray()->shouldBeCalled()->willReturn(array($paymentMethod));
-        $builder->setParameter('methods', array($paymentMethod))->shouldBeCalled()->willReturn($builder);
+        $paymentMethods->toArray()->shouldBeCalled()->willReturn([$paymentMethod]);
+        $builder->setParameter('methods', [$paymentMethod])->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
+        $this->getQueryBuidlerForChoiceType([
             'channel' => $channel,
             'disabled' => true,
-        ))->shouldReturn($builder);
+        ])->shouldReturn($builder);
     }
 }

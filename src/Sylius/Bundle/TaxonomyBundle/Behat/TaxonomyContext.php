@@ -56,7 +56,7 @@ class TaxonomyContext extends DefaultContext
         $taxonomy = $this->findOneByName('taxonomy', $taxonomyName);
         $manager = $this->getEntityManager();
 
-        $taxons = array();
+        $taxons = [];
 
         foreach ($taxonsTable->getRows() as $node) {
             $taxonList = explode('>', $node[0]);

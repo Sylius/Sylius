@@ -28,20 +28,20 @@ class ProductFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.product_filter.name',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.product_filter.name'
-                )
-            ))
-            ->add('sku', 'text', array(
+                ]
+            ])
+            ->add('sku', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.product_filter.sku',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.product_filter.sku'
-                )
-            ))
+                ]
+            ])
         ;
     }
 
@@ -51,9 +51,9 @@ class ProductFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null
-            ))
+            ])
         ;
     }
 

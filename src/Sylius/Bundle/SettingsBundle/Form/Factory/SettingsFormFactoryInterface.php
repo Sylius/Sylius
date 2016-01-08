@@ -25,5 +25,5 @@ interface SettingsFormFactoryInterface
      *
      * @return FormInterface
      */
-    public function create($namespace, $data = null, array $options = array());
+    public function create($namespace, $data = null, array $options = []);
 }

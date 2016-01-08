@@ -40,7 +40,7 @@ class ExpressionLanguage extends BaseExpressionLanguage implements ContainerAwar
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expression, $values = array())
+    public function evaluate($expression, $values = [])
     {
         $values['container'] = $this->container;
 

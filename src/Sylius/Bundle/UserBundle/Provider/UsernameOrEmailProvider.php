@@ -25,6 +25,6 @@ class UsernameOrEmailProvider extends AbstractUserProvider
             return $this->userRepository->findOneByEmail($usernameOrEmail);
         }
 
-        return $this->userRepository->findOneBy(array('usernameCanonical' => $usernameOrEmail));
+        return $this->userRepository->findOneBy(['usernameCanonical' => $usernameOrEmail]);
     }
 }

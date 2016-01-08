@@ -54,15 +54,15 @@ class ValidAttributeValueValidatorSpec extends ObjectBehavior
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
         $attributeValue->getAttribute()->willReturn($attribute);
-        $attribute->getConfiguration()->willReturn(array('min' => 2, 'max' => 255));
+        $attribute->getConfiguration()->willReturn(['min' => 2, 'max' => 255]);
 
-        $attributeType->validate($attributeValue, Argument::any('Symfony\Component\Validator\Context\ExecutionContextInterface'), array('min' => 2, 'max' => 255))->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::any('Symfony\Component\Validator\Context\ExecutionContextInterface'), ['min' => 2, 'max' => 255])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }
 
     function it_throws_exception_if_validated_value_is_not_attribute_value(\DateTime $badObject, ValidAttributeValue $attributeValueConstraint)
     {
-        $this->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))->during('validate', array($badObject, $attributeValueConstraint));
+        $this->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))->during('validate', [$badObject, $attributeValueConstraint]);
     }
 }

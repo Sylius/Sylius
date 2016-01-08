@@ -80,13 +80,13 @@ class AttributeSpec extends ObjectBehavior
 
     function it_initializes_empty_configuration_array_by_default()
     {
-        $this->getConfiguration()->shouldReturn(array());
+        $this->getConfiguration()->shouldReturn([]);
     }
 
     function its_configuration_is_mutable()
     {
-        $this->setConfiguration(array('format' => 'd/m/Y'));
-        $this->getConfiguration()->shouldReturn(array('format' => 'd/m/Y'));
+        $this->setConfiguration(['format' => 'd/m/Y']);
+        $this->getConfiguration()->shouldReturn(['format' => 'd/m/Y']);
     }
 
     function its_storage_type_is_mutable()

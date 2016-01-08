@@ -38,7 +38,7 @@ class Rule implements RuleInterface
 
     public function __construct()
     {
-        $this->configuration = array();
+        $this->configuration = [];
     }
 
     /**

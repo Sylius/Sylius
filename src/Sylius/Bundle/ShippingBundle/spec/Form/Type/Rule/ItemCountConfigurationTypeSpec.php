@@ -36,7 +36,7 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
         $builder->add('count', 'integer', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
         $builder->add('equal', 'checkbox', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

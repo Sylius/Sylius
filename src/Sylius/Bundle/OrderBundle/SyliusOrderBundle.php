@@ -31,9 +31,9 @@ class SyliusOrderBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -41,14 +41,14 @@ class SyliusOrderBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             AdjustmentInterface::class => 'sylius.model.adjustment.class',
             CommentInterface::class    => 'sylius.model.comment.class',
             OrderInterface::class      => 'sylius.model.order.class',
             OrderItemInterface::class  => 'sylius.model.order_item.class',
             IdentityInterface::class   => 'sylius.model.order_identity.class',
 
-        );
+        ];
     }
 
     /**

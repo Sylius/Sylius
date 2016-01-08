@@ -27,12 +27,12 @@ class LoadGroupsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createGroup('Administrators', array('ROLE_ADMINISTRATION_ACCESS')));
+        $manager->persist($this->createGroup('Administrators', ['ROLE_ADMINISTRATION_ACCESS']));
         $manager->persist($this->createGroup('Wholesale Customers'));
         $manager->persist($this->createGroup('Retail Customers'));
         $manager->persist($this->createGroup('Sales'));
         $manager->persist($this->createGroup('Suppliers'));
-        $manager->persist($this->createGroup('API', array('ROLE_API')));
+        $manager->persist($this->createGroup('API', ['ROLE_API']));
 
         $manager->flush();
     }
@@ -51,7 +51,7 @@ class LoadGroupsData extends DataFixture
      *
      * @return GroupInterface
      */
-    protected function createGroup($name, array $roles = array())
+    protected function createGroup($name, array $roles = [])
     {
         /* @var $group GroupInterface */
         $group = $this->getGroupFactory()->createNew();

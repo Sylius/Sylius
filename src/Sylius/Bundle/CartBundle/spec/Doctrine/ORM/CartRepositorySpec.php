@@ -47,8 +47,8 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getResult()->shouldBeCalled()->willReturn(array($cart));
+        $query->getResult()->shouldBeCalled()->willReturn([$cart]);
 
-        $this->findExpiredCarts()->shouldReturn(array($cart));
+        $this->findExpiredCarts()->shouldReturn([$cart]);
     }
 }

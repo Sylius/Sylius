@@ -125,13 +125,13 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_initializes_array_for_configuration_by_default()
     {
-        $this->getConfiguration()->shouldReturn(array());
+        $this->getConfiguration()->shouldReturn([]);
     }
 
     function its_configuration_is_mutable()
     {
-        $this->setConfiguration(array('charge' => 5));
-        $this->getConfiguration()->shouldReturn(array('charge' => 5));
+        $this->setConfiguration(['charge' => 5]);
+        $this->getConfiguration()->shouldReturn(['charge' => 5]);
     }
 
     function it_initializes_creation_date_by_default()

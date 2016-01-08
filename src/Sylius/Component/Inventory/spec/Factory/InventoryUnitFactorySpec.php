@@ -47,7 +47,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForStockable', array($stockable, -2))
+            ->during('createForStockable', [$stockable, -2])
         ;
     }
 

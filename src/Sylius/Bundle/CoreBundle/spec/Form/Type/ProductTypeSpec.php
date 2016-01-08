@@ -25,7 +25,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith(Product::class, array('sylius'), $canonicalizer);
+        $this->beConstructedWith(Product::class, ['sylius'], $canonicalizer);
     }
 
     function it_is_initializable()
@@ -95,6 +95,6 @@ class ProductTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

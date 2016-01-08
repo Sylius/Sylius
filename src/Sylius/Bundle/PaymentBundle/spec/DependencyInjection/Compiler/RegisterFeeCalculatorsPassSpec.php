@@ -37,15 +37,15 @@ class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.payment.fee_calculator')->willReturn(true)->shouldBeCalled();
         $container->getDefinition('sylius.registry.payment.fee_calculator')->willReturn($feeCalculatorDefinition)->shouldBeCalled();
 
-        $feeCalculatorServices = array(
-            'sylius.form.type.fee_calculator.test' => array(
-                array('calculator' => 'test', 'label' => 'Test fee calculator'),
-            ),
-        );
+        $feeCalculatorServices = [
+            'sylius.form.type.fee_calculator.test' => [
+                ['calculator' => 'test', 'label' => 'Test fee calculator'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.payment.fee_calculator')->willReturn($feeCalculatorServices);
 
-        $feeCalculatorDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.fee_calculator.test')))->shouldBeCalled();
-        $container->setParameter('sylius.payment.fee_calculators', array('test' => 'Test fee calculator'))->shouldBeCalled();
+        $feeCalculatorDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.fee_calculator.test')])->shouldBeCalled();
+        $container->setParameter('sylius.payment.fee_calculators', ['test' => 'Test fee calculator'])->shouldBeCalled();
 
         $this->process($container);
     }
@@ -63,13 +63,13 @@ class RegisterFeeCalculatorsPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.payment.fee_calculator')->willReturn(true)->shouldBeCalled();
         $container->getDefinition('sylius.registry.payment.fee_calculator')->willReturn($feeCalculatorDefinition)->shouldBeCalled();
 
-        $feeCalculatorServices = array(
-            'sylius.form.type.fee_calculator.test' => array(
-                array('calculator' => 'test'),
-            ),
-        );
+        $feeCalculatorServices = [
+            'sylius.form.type.fee_calculator.test' => [
+                ['calculator' => 'test'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.payment.fee_calculator')->willReturn($feeCalculatorServices);
 
-        $this->shouldThrow(new \InvalidArgumentException('Tagged fee calculators needs to have `fee_calculator` and `label` attributes.'))->during('process', array($container));
+        $this->shouldThrow(new \InvalidArgumentException('Tagged fee calculators needs to have `fee_calculator` and `label` attributes.'))->during('process', [$container]);
     }
 }

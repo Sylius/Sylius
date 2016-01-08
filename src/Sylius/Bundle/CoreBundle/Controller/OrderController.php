@@ -52,10 +52,10 @@ class OrderController extends ResourceController
         $paginator->getNbResults();
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', [
             'customer' => $customer,
             'orders'   => $paginator
-        ));
+        ]);
     }
 
     /**
@@ -95,7 +95,7 @@ class OrderController extends ResourceController
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
-        $items = array();
+        $items = [];
         foreach ($order->getItems() as $item) {
             $items[] = $repository->getLogEntries($item);
         }
@@ -103,15 +103,15 @@ class OrderController extends ResourceController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
+            ->setData([
                 'order' => $order,
-                'logs'  => array(
+                'logs'  => [
                     'order'            => $repository->getLogEntries($order),
                     'order_items'      => $items,
                     'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
                     'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ),
-            ))
+                ],
+            ])
         ;
 
         return $this->handleView($view);

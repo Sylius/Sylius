@@ -21,14 +21,14 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
  */
 class LoadLocalesData extends DataFixture
 {
-    protected $locales = array(
+    protected $locales = [
         'en_US' => true,
         'en_GB' => true,
         'es_ES' => true,
         'de_DE' => true,
         'it_IT' => false,
         'pl_PL' => true,
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class LoadLocalesData extends DataFixture
     {
         $localeFactory = $this->getLocaleFactory();
 
-        $locales = array_merge($this->locales, array($this->defaultLocale => true));
+        $locales = array_merge($this->locales, [$this->defaultLocale => true]);
 
         foreach ($locales as $code => $enabled) {
             $locale = $localeFactory->createNew();

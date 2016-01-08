@@ -41,15 +41,15 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
         $currencyContext->getCurrency()->willReturn('USD')->shouldBeCalled();
 
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
                 'currency' => 'USD',
-            ))
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_name()

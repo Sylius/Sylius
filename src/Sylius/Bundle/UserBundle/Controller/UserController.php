@@ -43,7 +43,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
         $form = $this->createResourceForm($formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleChangePassword($user, $changePassword->getNewPassword());
         }
 
@@ -53,9 +53,9 @@ class UserController extends ResourceController
 
         return $this->render(
             $this->config->getTemplate('changePassword.html'),
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
@@ -86,7 +86,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
         $form = $this->createResourceForm($formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleResetPassword($user, $changePassword->getPassword());
         }
 
@@ -96,10 +96,10 @@ class UserController extends ResourceController
 
         return $this->render(
             $this->config->getTemplate('resetPassword.html'),
-            array(
+            [
                 'form' => $form->createView(),
                 'user' => $user,
-            )
+            ]
         );
     }
 
@@ -109,7 +109,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
         $form = $this->createResourceForm($formType, $passwordReset);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);
@@ -129,22 +129,22 @@ class UserController extends ResourceController
 
         return $this->render(
             $this->config->getTemplate('requestPasswordReset.html'),
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
     protected function addFlash($type, $message)
     {
         $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
+        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     protected function createResourceForm($type, $resource)
     {
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, ['csrf_protection' => false]);
         }
 
         return $this->createForm($type, $resource);
@@ -254,7 +254,7 @@ class UserController extends ResourceController
      */
     protected function findUserByToken($token)
     {
-        $user = $this->getRepository()->findOneBy(array('confirmationToken' => $token));
+        $user = $this->getRepository()->findOneBy(['confirmationToken' => $token]);
         if (null === $user) {
             throw new NotFoundHttpException('This token does not exist');
         }

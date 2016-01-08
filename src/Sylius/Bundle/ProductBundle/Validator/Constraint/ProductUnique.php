@@ -30,7 +30,7 @@ class ProductUnique extends Constraint
      */
     public function getRequiredOptions()
     {
-        return array('property');
+        return ['property'];
     }
 
     /**

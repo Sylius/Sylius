@@ -27,10 +27,10 @@ class SyliusCurrencyBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        );
+        ];
     }
 
     /**
@@ -38,9 +38,9 @@ class SyliusCurrencyBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             CurrencyInterface::class => 'sylius.model.currency.class',
-        );
+        ];
     }
 
     /**

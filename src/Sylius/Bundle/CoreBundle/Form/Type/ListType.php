@@ -36,7 +36,7 @@ class ListType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('delimiter' => ', '));
+        $resolver->setDefaults(['delimiter' => ', ']);
     }
 
     /**

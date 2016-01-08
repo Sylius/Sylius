@@ -30,11 +30,11 @@ abstract class TimePeriod implements DataFetcherInterface
      */
     public static function getPeriodChoices()
     {
-        return array(
+        return [
             self::PERIOD_DAY    => 'Daily',
             self::PERIOD_MONTH  => 'Monthly',
             self::PERIOD_YEAR   => 'Yearly',
-        );
+        ];
     }
 
     /**
@@ -50,13 +50,13 @@ abstract class TimePeriod implements DataFetcherInterface
 
         switch ($configuration['period']) {
             case self::PERIOD_DAY:
-                $this->setExtraConfiguration($configuration, 'P1D', '%a', 'Y-m-d', array('date'));
+                $this->setExtraConfiguration($configuration, 'P1D', '%a', 'Y-m-d', ['date']);
                 break;
             case self::PERIOD_MONTH:
-                $this->setExtraConfiguration($configuration, 'P1M', '%m', 'F Y', array('month', 'year'));
+                $this->setExtraConfiguration($configuration, 'P1M', '%m', 'F Y', ['month', 'year']);
                 break;
             case self::PERIOD_YEAR:
-                $this->setExtraConfiguration($configuration, 'P1Y', '%y', 'Y', array('year'));
+                $this->setExtraConfiguration($configuration, 'P1Y', '%y', 'Y', ['year']);
                 break;
             default:
                 throw new \InvalidArgumentException('Wrong data fetcher period');
@@ -71,7 +71,7 @@ abstract class TimePeriod implements DataFetcherInterface
         $labels = array_keys($rawData[0]);
         $data->setLabels($labels);
 
-        $fetched = array();
+        $fetched = [];
 
         if ($configuration['empty_records']) {
             $fetched = $this->fillEmptyRecords($fetched, $configuration);
@@ -94,7 +94,7 @@ abstract class TimePeriod implements DataFetcherInterface
      *
      * @return array
      */
-    abstract protected function getData(array $configuration = array());
+    abstract protected function getData(array $configuration = []);
 
     /**
      * @param array  $configuration

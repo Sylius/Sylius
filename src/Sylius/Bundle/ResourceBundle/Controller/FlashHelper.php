@@ -51,7 +51,7 @@ class FlashHelper
      *
      * @return mixed
      */
-    public function setFlash($type, $eventName, $params = array())
+    public function setFlash($type, $eventName, $params = [])
     {
         /** @var FlashBag $flashBag */
         $flashBag = $this->session->getBag('flashes');
@@ -66,7 +66,7 @@ class FlashHelper
      *
      * @return string
      */
-    private function generateFlashMessage($eventName, $params = array())
+    private function generateFlashMessage($eventName, $params = [])
     {
         if (false === strpos($eventName, 'sylius.')) {
             $message = $this->config->getFlashMessage($eventName);
@@ -88,10 +88,10 @@ class FlashHelper
      *
      * @return string
      */
-    private function translateFlashMessage($message, $params = array())
+    private function translateFlashMessage($message, $params = [])
     {
         $resource = ucfirst(str_replace('_', ' ', $this->config->getResourceName()));
 
-        return $this->translator->trans($message, array_merge(array('%resource%' => $resource), $params), 'flashes');
+        return $this->translator->trans($message, array_merge(['%resource%' => $resource], $params), 'flashes');
     }
 }

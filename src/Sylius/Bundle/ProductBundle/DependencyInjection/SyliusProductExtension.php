@@ -50,9 +50,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -80,30 +80,30 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             return;
         }
 
-        $container->prependExtensionConfig('sylius_attribute', array(
-                'resources' => array(
-                    'product' => array(
+        $container->prependExtensionConfig('sylius_attribute', [
+                'resources' => [
+                    'product' => [
                         'subject'         => $config['resources']['product']['classes']['model'],
-                        'attribute'       => array(
-                            'classes' => array(
+                        'attribute'       => [
+                            'classes' => [
                                 'model'       => Attribute::class,
                                 'interface'   => AttributeInterface::class,
-                            ),
-                            'translation' => array(
-                                'classes' => array(
+                            ],
+                            'translation' => [
+                                'classes' => [
                                     'model' => AttributeTranslation::class,
                                     'interface' => AttributeTranslationInterface::class,
-                                )
-                            )
-                        ),
-                        'attribute_value' => array(
-                            'classes' => array(
+                                ]
+                            ]
+                        ],
+                        'attribute_value' => [
+                            'classes' => [
                                 'model'     => AttributeValue::class,
                                 'interface' => AttributeValueInterface::class,
-                            )
-                        ),
-                    ),
-                ))
+                            ]
+                        ],
+                    ],
+                ]]
         );
     }
 
@@ -117,40 +117,40 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             return;
         }
 
-        $container->prependExtensionConfig('sylius_variation', array(
-            'resources' => array(
-                'product' => array(
+        $container->prependExtensionConfig('sylius_variation', [
+            'resources' => [
+                'product' => [
                     'variable' => $config['resources']['product']['classes']['model'],
-                    'variant'  => array(
-                        'classes' => array(
+                    'variant'  => [
+                        'classes' => [
                             'model'      => Variant::class,
                             'interface'  => VariantInterface::class,
                             'controller' => VariantController::class,
-                            'form' => array(
+                            'form' => [
                                 'default' => VariantType::class
-                            )
-                        )
-                    ),
-                    'option'       => array(
-                        'classes' => array(
+                            ]
+                        ]
+                    ],
+                    'option'       => [
+                        'classes' => [
                             'model'       => Option::class,
                             'interface'   => OptionInterface::class,
-                        ),
-                        'translation' => array(
-                            'classes' => array(
+                        ],
+                        'translation' => [
+                            'classes' => [
                                 'model' => OptionTranslation::class,
                                 'interface' => OptionTranslationInterface::class
-                            )
-                        )
-                    ),
-                    'option_value' => array(
-                        'classes' => array(
+                            ]
+                        ]
+                    ],
+                    'option_value' => [
+                        'classes' => [
                             'model'     => OptionValue::class,
                             'interface' => OptionValueInterface::class,
-                        )
-                    ),
-                )
-            )
-        ));
+                        ]
+                    ],
+                ]
+            ]
+        ]);
     }
 }

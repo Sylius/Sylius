@@ -59,7 +59,7 @@ class SettingsManager implements SettingsManagerInterface
      *
      * @var Settings[]
      */
-    protected $resolvedSettings = array();
+    protected $resolvedSettings = [];
 
     /**
      * @var ValidatorInterface
@@ -159,8 +159,8 @@ class SettingsManager implements SettingsManagerInterface
             $this->resolvedSettings[$namespace]->setParameters($transformedParameters);
         }
 
-        $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
-        $persistedParametersMap = array();
+        $persistedParameters = $this->parameterRepository->findBy(['namespace' => $namespace]);
+        $persistedParametersMap = [];
 
         foreach ($persistedParameters as $parameter) {
             $persistedParametersMap[$parameter->getName()] = $parameter;
@@ -202,9 +202,9 @@ class SettingsManager implements SettingsManagerInterface
      */
     private function getParameters($namespace)
     {
-        $parameters = array();
+        $parameters = [];
 
-        foreach ($this->parameterRepository->findBy(array('namespace' => $namespace)) as $parameter) {
+        foreach ($this->parameterRepository->findBy(['namespace' => $namespace]) as $parameter) {
             $parameters[$parameter->getName()] = $parameter->getValue();
         }
 

@@ -27,9 +27,9 @@ class UserRegistrationFormListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::SUBMIT => 'submit',
-        );
+        ];
     }
 
     /**

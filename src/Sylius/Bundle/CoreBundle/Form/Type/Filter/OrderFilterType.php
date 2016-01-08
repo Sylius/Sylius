@@ -20,52 +20,52 @@ class OrderFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', 'text', array(
+            ->add('number', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.number',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.order_filter.number'
-                )
-            ))
-            ->add('totalFrom', 'sylius_money', array(
+                ]
+            ])
+            ->add('totalFrom', 'sylius_money', [
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.total_from',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.order_filter.total_from'
-                ),
+                ],
                 'divisor' => 1
-            ))
-            ->add('totalTo', 'sylius_money', array(
+            ])
+            ->add('totalTo', 'sylius_money', [
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.total_to',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.order_filter.total_to'
-                ),
+                ],
                 'divisor' => 1
-            ))
-            ->add('createdAtFrom', 'text', array(
+            ])
+            ->add('createdAtFrom', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_from',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.order_filter.created_at_from'
-                )
-            ))
-            ->add('createdAtTo', 'text', array(
+                ]
+            ])
+            ->add('createdAtTo', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_to',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.order_filter.created_at_to'
-                )
-            ))
-            ->add('channel', 'sylius_channel_choice', array(
+                ]
+            ])
+            ->add('channel', 'sylius_channel_choice', [
                 'required'    => false,
                 'empty_value' => 'sylius.form.order_filter.channel'
-            ))
-            ->add('paymentState', 'choice', array(
+            ])
+            ->add('paymentState', 'choice', [
                 'required'    => false,
                 'label'       => 'sylius.form.order_filter.payment_state',
                 'empty_value' => 'sylius.form.order_filter.payment_state',
-                'choices'     => array(
+                'choices'     => [
                     PaymentInterface::STATE_NEW        => 'sylius.payment.state.new',
                     PaymentInterface::STATE_PENDING    => 'sylius.payment.state.pending',
                     PaymentInterface::STATE_PROCESSING => 'sylius.payment.state.processing',
@@ -75,8 +75,8 @@ class OrderFilterType extends AbstractType
                     PaymentInterface::STATE_VOID       => 'sylius.payment.state.void',
                     PaymentInterface::STATE_REFUNDED   => 'sylius.payment.state.refunded',
                     PaymentInterface::STATE_UNKNOWN    => 'sylius.payment.state.unknown',
-                ),
-            ))
+                ],
+            ])
         ;
     }
 

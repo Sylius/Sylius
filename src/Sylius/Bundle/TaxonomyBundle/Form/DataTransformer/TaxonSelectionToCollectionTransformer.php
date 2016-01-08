@@ -30,9 +30,9 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
      */
     public function transform($value)
     {
-        $taxons = array();
+        $taxons = [];
         foreach ($this->objects as $taxonomy) {
-            $taxons[$taxonomy->getId()] = array();
+            $taxons[$taxonomy->getId()] = [];
         }
 
         if (null === $value) {

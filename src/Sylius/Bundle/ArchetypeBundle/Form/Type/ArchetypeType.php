@@ -49,20 +49,20 @@ class ArchetypeType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new ParentArchetypeListener($this->subject))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => sprintf('sylius_%s_archetype_translation', $this->subject),
                 'label'    => 'sylius.form.archetype.name'
-            ))
-            ->add('attributes', sprintf('sylius_%s_attribute_choice', $this->subject), array(
+            ])
+            ->add('attributes', sprintf('sylius_%s_attribute_choice', $this->subject), [
                 'required' => false,
                 'multiple' => true,
                 'label'    => 'sylius.form.archetype.attributes'
-            ))
-            ->add('options', sprintf('sylius_%s_option_choice', $this->subject), array(
+            ])
+            ->add('options', sprintf('sylius_%s_option_choice', $this->subject), [
                 'required' => false,
                 'multiple' => true,
                 'label'    => 'sylius.form.archetype.options'
-            ))
+            ])
         ;
     }
 

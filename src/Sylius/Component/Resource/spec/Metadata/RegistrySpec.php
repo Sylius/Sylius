@@ -39,14 +39,14 @@ class RegistrySpec extends ObjectBehavior
         $this->add($metadata1);
         $this->add($metadata2);
        
-        $this->getAll()->shouldReturn(array('app.product' => $metadata1, 'app.order' => $metadata2));
+        $this->getAll()->shouldReturn(['app.product' => $metadata1, 'app.order' => $metadata2]);
     }
 
     function it_throws_an_exception_if_resource_is_not_registered()
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('get', array('foo.bar'))
+            ->during('get', ['foo.bar'])
         ;
     }
 
@@ -63,7 +63,7 @@ class RegistrySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getByClass', array('App\Model\OrderItem'))
+            ->during('getByClass', ['App\Model\OrderItem'])
         ;
     }
 
@@ -83,12 +83,12 @@ class RegistrySpec extends ObjectBehavior
 
     function it_adds_metadata_from_configuration_array()
     {
-        $this->addFromAliasAndConfiguration('app.product', array(
+        $this->addFromAliasAndConfiguration('app.product', [
             'driver' => 'doctrine/orm',
-            'classes' => array(
+            'classes' => [
                 'model' => 'App\Model\Product'
-            )
-        ));
+            ]
+        ]);
         
         $this->get('app.product')->shouldHaveType(MetadataInterface::class);
         $this->getByClass('App\Model\Product')->shouldHaveType(MetadataInterface::class);

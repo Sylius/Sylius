@@ -20,7 +20,7 @@ class VariantChoiceListSpec extends ObjectBehavior
 {
     function let(VariableInterface $variable, VariantInterface $variant)
     {
-        $variable->getVariants()->shouldBeCalled()->willReturn(array($variant));
+        $variable->getVariants()->shouldBeCalled()->willReturn([$variant]);
 
         $this->beConstructedWith($variable);
     }

@@ -37,7 +37,7 @@ class GatewayConfig implements GatewayConfigInterface
 
     public function __construct()
     {
-        $this->config = array();
+        $this->config = [];
     }
 
     /**

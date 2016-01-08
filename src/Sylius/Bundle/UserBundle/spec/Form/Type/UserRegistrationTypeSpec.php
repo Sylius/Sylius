@@ -25,7 +25,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith(User::class, array('sylius'), $canonicalizer);
+        $this->beConstructedWith(User::class, ['sylius'], $canonicalizer);
     }
 
     function it_is_initializable()
@@ -47,6 +47,6 @@ class UserRegistrationTypeSpec extends ObjectBehavior
     {
         $builder->add('plainPassword', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

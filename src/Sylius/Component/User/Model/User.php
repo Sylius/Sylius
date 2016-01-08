@@ -108,7 +108,7 @@ class User implements UserInterface
      *
      * @var array
      */
-    protected $roles = array(UserInterface::DEFAULT_ROLE);
+    protected $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
      * @var Collection
@@ -391,7 +391,7 @@ class User implements UserInterface
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
+        $this->roles = [];
 
         foreach ($roles as $role) {
             $this->addRole($role);
@@ -576,7 +576,7 @@ class User implements UserInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -584,7 +584,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id,
-        ));
+        ]);
     }
 
     /**

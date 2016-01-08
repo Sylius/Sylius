@@ -60,7 +60,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
         RoleInterface $role2
     ) {
         $currentIdentityProvider->getIdentity()->shouldBeCalled()->willReturn($identity);
-        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
+        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn([$role1, $role2]);
 
         $permissionMap->hasPermission($role1, 'can_close_store')->shouldBeCalled()->willReturn(false);
         $permissionMap->hasPermission($role2, 'can_close_store')->shouldBeCalled()->willReturn(false);
@@ -78,7 +78,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
         RoleInterface $role2
     ) {
         $currentIdentityProvider->getIdentity()->shouldBeCalled()->willReturn($identity);
-        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn(array($role1, $role2));
+        $rolesResolver->getRoles($identity)->shouldBeCalled()->willReturn([$role1, $role2]);
 
         $permissionMap->hasPermission($role1, 'can_open_store')->shouldBeCalled()->willReturn(false);
         $permissionMap->hasPermission($role2, 'can_open_store')->shouldBeCalled()->willReturn(true);

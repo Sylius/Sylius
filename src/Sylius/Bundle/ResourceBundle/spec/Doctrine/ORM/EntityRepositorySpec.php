@@ -80,10 +80,10 @@ class EntityRepositorySpec extends ObjectBehavior
 
     function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
@@ -116,10 +116,10 @@ class EntityRepositorySpec extends ObjectBehavior
 
     function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
     {
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
@@ -152,9 +152,9 @@ class EntityRepositorySpec extends ObjectBehavior
 
     function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
     {
-        $criteria = array(
-            'baz' => array('foo', 'bar'),
-        );
+        $criteria = [
+            'baz' => ['foo', 'bar'],
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder

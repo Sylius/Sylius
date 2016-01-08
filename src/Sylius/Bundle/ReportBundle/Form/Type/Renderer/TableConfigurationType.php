@@ -27,12 +27,12 @@ class TableConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('template', 'choice', array(
+            ->add('template', 'choice', [
                 'label' => 'sylius.form.report.renderer.template',
-                'choices' => array(
+                'choices' => [
                     'SyliusReportBundle:Table:default.html.twig' => 'Default',
-                ),
-            ))
+                ],
+            ])
         ;
     }
 

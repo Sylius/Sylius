@@ -188,9 +188,9 @@ abstract class FormContext extends RawMinkContext
         $escaper = new Escaper();
 
         if (null !== $container) {
-            $field = $container->find('named', array(
+            $field = $container->find('named', [
                 'field', $escaper->escapeLiteral($locator),
-            ));
+            ]);
         } else {
             $field = $this->getSession()->getPage()->findField($locator);
         }

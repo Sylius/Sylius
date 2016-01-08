@@ -20,7 +20,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('standard' => 'Standard'));
+        $this->beConstructedWith(['standard' => 'Standard']);
     }
 
     function it_is_initializable()
@@ -35,9 +35,9 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array('standard' => 'Standard')
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'choices' => ['standard' => 'Standard']
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

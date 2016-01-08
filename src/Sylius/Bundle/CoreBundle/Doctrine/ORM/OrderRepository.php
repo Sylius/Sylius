@@ -28,7 +28,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return Pagerfanta
      */
-    public function createByCustomerPaginator(CustomerInterface $customer, array $sorting = array())
+    public function createByCustomerPaginator(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilderByCustomer($customer, $sorting);
 
@@ -43,7 +43,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return array
      */
-    public function findByCustomer(CustomerInterface $customer, array $sorting = array())
+    public function findByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilderByCustomer($customer, $sorting);
 
@@ -117,7 +117,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder
@@ -175,7 +175,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -222,7 +222,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return Pagerfanta
      */
-    public function createCheckoutsPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createCheckoutsPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
@@ -252,7 +252,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -320,7 +320,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function revenueBetweenDatesGroupByDate(array $configuration = array())
+    public function revenueBetweenDatesGroupByDate(array $configuration = [])
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {
@@ -346,7 +346,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function ordersBetweenDatesGroupByDate(array $configuration = array())
+    public function ordersBetweenDatesGroupByDate(array $configuration = [])
     {
         $groupBy = '';
 
@@ -418,7 +418,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = array())
+    protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 

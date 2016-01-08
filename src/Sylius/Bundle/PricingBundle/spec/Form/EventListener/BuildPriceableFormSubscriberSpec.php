@@ -62,9 +62,9 @@ class BuildPriceableFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('bar')->willReturn($calculator);
 
         $priceable->getPricingCalculator()->willReturn('bar');
-        $priceable->getPricingConfiguration()->willReturn(array());
+        $priceable->getPricingConfiguration()->willReturn([]);
 
-        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->willReturn($field);
+        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', [], Argument::any())->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);

@@ -98,10 +98,10 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->findOneBy(array(
+        $oauth = $this->oauthRepository->findOneBy([
             'provider'   => $response->getResourceOwner()->getName(),
             'identifier' => $response->getUsername(),
-        ));
+        ]);
 
         if ($oauth instanceof UserOAuthInterface) {
             return $oauth->getUser();

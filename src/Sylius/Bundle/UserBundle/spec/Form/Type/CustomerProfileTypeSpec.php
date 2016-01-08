@@ -20,7 +20,7 @@ class CustomerProfileTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Customer', array('sylius'));
+        $this->beConstructedWith('Customer', ['sylius']);
     }
 
     function it_is_initializable()

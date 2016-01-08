@@ -42,7 +42,7 @@ class AddParentFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData'));
+        $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
     function it_add_parent_if_it_is_not_set_and_resource_has_not_id(FormEvent $event, FormInterface $form, RoleInterface $role)

@@ -39,7 +39,7 @@ class PermissionMap implements PermissionMapInterface
      *
      * @var array
      */
-    private $permissions = array();
+    private $permissions = [];
 
     /**
      * @param PermissionProviderInterface $permissionProvider

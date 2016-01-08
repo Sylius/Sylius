@@ -80,7 +80,7 @@ class Role implements RoleInterface
     /**
      * @var array
      */
-    protected $securityRoles = array();
+    protected $securityRoles = [];
 
     /**
      * @var \DateTime

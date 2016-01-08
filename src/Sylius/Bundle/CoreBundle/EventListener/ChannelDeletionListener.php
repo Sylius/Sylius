@@ -52,7 +52,7 @@ class ChannelDeletionListener
             );
         }
 
-        $results = $this->channelRepository->findBy(array('enabled' => true));
+        $results = $this->channelRepository->findBy(['enabled' => true]);
 
         if (!$results || (count($results) === 1 && current($results) === $channel)) {
             $event->stop('error.at_least_one');

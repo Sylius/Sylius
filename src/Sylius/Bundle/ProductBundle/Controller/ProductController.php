@@ -36,7 +36,7 @@ class ProductController extends ResourceController
             return $product;
         }
 
-        $archetype = $this->getArchetypeRepository()->findOneBy(array('code' => $code));
+        $archetype = $this->getArchetypeRepository()->findOneBy(['code' => $code]);
 
         if (!$archetype) {
             throw new NotFoundHttpException(sprintf('Requested archetype does not exist!'));

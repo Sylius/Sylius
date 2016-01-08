@@ -43,9 +43,9 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -64,7 +64,7 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             ProductInterface::class              => 'sylius.model.product.class',
             ProductTranslationInterface::class   => 'sylius.model.product_translation.class',
             AttributeInterface::class            => 'sylius.model.product_attribute.class',
@@ -74,7 +74,7 @@ class SyliusProductBundle extends AbstractResourceBundle
             OptionInterface::class               => 'sylius.model.product_option.class',
             OptionValueInterface::class          => 'sylius.model.product_option_value.class',
             ArchetypeInterface::class            => 'sylius.model.product_archetype.class',
-        );
+        ];
     }
 
     /**

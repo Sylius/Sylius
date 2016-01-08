@@ -27,27 +27,27 @@ class CreditCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', array(
+            ->add('type', 'choice', [
                 'label'    => 'sylius.form.credit_card.type',
                 'expanded' => true,
-              ))
-              ->add('cardholderName', 'text', array(
+            ])
+              ->add('cardholderName', 'text', [
                 'label' => 'sylius.form.credit_card.cardholder_name',
-              ))
-              ->add('number', 'text', array(
+              ])
+              ->add('number', 'text', [
                   'label' => 'sylius.form.credit_card.number',
-              ))
-              ->add('securityCode', 'text', array(
+              ])
+              ->add('securityCode', 'text', [
                   'label' => 'sylius.form.credit_card.security_code',
-              ))
-              ->add('expiryMonth', 'choice', array(
+              ])
+              ->add('expiryMonth', 'choice', [
                   'label'   => 'sylius.form.credit_card.expiry_month',
                   'choices' => $this->getMonthChoices(),
-              ))
-              ->add('expiryYear', 'choice', array(
+              ])
+              ->add('expiryYear', 'choice', [
                   'label'   => 'sylius.form.credit_card.expiry_year',
                   'choices' =>  $this->getViableYears(),
-              ))
+              ])
         ;
     }
 
@@ -66,7 +66,7 @@ class CreditCardType extends AbstractResourceType
      */
     private function getViableYears()
     {
-        $yearChoices = array();
+        $yearChoices = [];
         $currentYear = (int) date("Y");
 
         for ($i = 0; $i <= 20; $i++) {
@@ -83,7 +83,7 @@ class CreditCardType extends AbstractResourceType
      */
     private function getMonthChoices()
     {
-        $monthChoices = array();
+        $monthChoices = [];
 
         foreach (range(1, 12) as $month) {
             $monthChoices[$month] = str_pad($month, 2, 0, STR_PAD_LEFT);

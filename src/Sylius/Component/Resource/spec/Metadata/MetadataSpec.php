@@ -25,21 +25,21 @@ class MetadataSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromAliasAndConfiguration', array(
+        $this->beConstructedThrough('fromAliasAndConfiguration', [
             'app.product',
-            array(
+            [
                 'driver' => 'doctrine/orm',
                 'templates' => 'SyliusProductBundle:Product',
-                'classes' => array(
+                'classes' => [
                     'model' => Product::class,
-                    'form' => array(
+                    'form' => [
                         'default' => ProductType::class,
                         'choice' => ResourceChoiceType::class,
                         'autocomplete' => 'Sylius\Bundle\ResourceBundle\Type\ResourceAutocompleteType'
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
     }
 
     function it_is_initializable()
@@ -97,7 +97,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getParameter', array('foo'))
+            ->during('getParameter', ['foo'])
         ;
     }
 
@@ -110,7 +110,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getClass', array('foo'))
+            ->during('getClass', ['foo'])
         ;
     }
 

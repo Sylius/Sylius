@@ -41,14 +41,14 @@ class ParentArchetypeListenerSpec extends ObjectBehavior
 
     function it_is_subscribed_to_pre_set_data_form_event()
     {
-        $this->getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData'));
+        $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
     function it_throws_exception_if_add_event_subscriber_parameter_is_not_an_instance_of_archetype_interface(FormEvent $event)
     {
         $event->getData()->willReturn('badObject');
         $this->shouldThrow(new UnexpectedTypeException('badObject', ArchetypeInterface::class))
-             ->during('preSetData', array($event))
+             ->during('preSetData', [$event])
         ;
     }
 }

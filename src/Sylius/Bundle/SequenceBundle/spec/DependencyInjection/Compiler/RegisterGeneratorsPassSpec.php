@@ -37,7 +37,7 @@ class RegisterGeneratorsPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.number_generator')->shouldBeCalled()->willReturn(true);
         $container->getDefinition('sylius.registry.number_generator')->shouldBeCalled()->willReturn($registry);
 
-        $container->getParameter('sylius.sequence.generators')->shouldBeCalled()->willReturn(array('generator'));
+        $container->getParameter('sylius.sequence.generators')->shouldBeCalled()->willReturn(['generator']);
 
         $registry->addMethodCall('register', Argument::type('array'))->shouldBeCalled();
 

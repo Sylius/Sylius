@@ -57,20 +57,20 @@ class PaymentMethodType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_payment_method_translation',
                 'label' => 'sylius.form.payment_method.name'
-            ))
-            ->add('gateway', 'sylius_payment_gateway_choice', array(
+            ])
+            ->add('gateway', 'sylius_payment_gateway_choice', [
                 'label' => 'sylius.form.payment_method.gateway',
-            ))
-            ->add('enabled', 'checkbox', array(
+            ])
+            ->add('enabled', 'checkbox', [
                 'required' => false,
                 'label'    => 'sylius.form.payment_method.enabled',
-            ))
-            ->add('feeCalculator', 'sylius_fee_calculator_choice', array(
+            ])
+            ->add('feeCalculator', 'sylius_fee_calculator_choice', [
                 'label' => 'sylius.form.payment.fee_calculator',
-            ))
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new BuildPaymentMethodFeeCalculatorFormSubscriber($this->feeCalculatorRegistry, $builder->getFormFactory()))
         ;
@@ -83,7 +83,7 @@ class PaymentMethodType extends AbstractResourceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['feeCalculatorsConfigurations'] = array();
+        $view->vars['feeCalculatorsConfigurations'] = [];
 
         foreach ($form->getConfig()->getAttribute('feeCalculatorsConfigurations') as $type => $feeCalculatorConfiguration) {
             $view->vars['feeCalculatorsConfigurations'][$type] = $feeCalculatorConfiguration->createView($view);
@@ -95,7 +95,7 @@ class PaymentMethodType extends AbstractResourceType
      */
     private function setBuilderFeeCalculatorsConfigurationsAttribute(FormBuilderInterface $builder)
     {
-        $feeCalculatorsConfigurations = array();
+        $feeCalculatorsConfigurations = [];
 
         foreach ($this->feeCalculatorRegistry->all() as $type => $feeCalculator) {
             $formType = sprintf('sylius_fee_calculator_%s', $feeCalculator->getType());

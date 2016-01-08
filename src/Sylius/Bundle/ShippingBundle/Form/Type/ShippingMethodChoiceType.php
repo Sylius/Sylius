@@ -87,17 +87,17 @@ class ShippingMethodChoiceType extends AbstractType
                 $methods = $this->repository->findBy($options['criteria']);
             }
 
-            return new ObjectChoiceList($methods, null, array(), null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-                'criteria'    => array(),
-            ))
-            ->setDefined(array(
+                'criteria'    => [],
+            ])
+            ->setDefined([
                 'subject',
-            ))
+            ])
             ->setAllowedTypes('subject', ShippingSubjectInterface::class)
             ->setAllowedTypes('criteria', 'array')
         ;
@@ -113,7 +113,7 @@ class ShippingMethodChoiceType extends AbstractType
         }
 
         $subject = $options['subject'];
-        $shippingCosts = array();
+        $shippingCosts = [];
 
         foreach ($view->vars['choices'] as $choiceView) {
             $method = $choiceView->data;

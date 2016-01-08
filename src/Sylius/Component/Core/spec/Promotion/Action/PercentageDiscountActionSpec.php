@@ -59,7 +59,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
-        $configuration = array('percentage' => 0.25);
+        $configuration = ['percentage' => 0.25];
 
         $this->execute($order, $configuration, $promotion);
     }

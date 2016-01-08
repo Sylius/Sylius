@@ -45,11 +45,11 @@ class ReportController extends ResourceController
             $configurationForm->submit($request);
         }
 
-        return $this->render($this->config->getTemplate('show.html'), array(
+        return $this->render($this->config->getTemplate('show.html'), [
             'report' => $report,
             'form' => $configurationForm->createView(),
             'configuration' => $configurationForm->getData(),
-        ));
+        ]);
     }
 
     /**
@@ -59,10 +59,10 @@ class ReportController extends ResourceController
      *
      * @return Response
      */
-    public function embedAction(Request $request, $report, array $configuration = array())
+    public function embedAction(Request $request, $report, array $configuration = [])
     {
         if (!$report instanceof ReportInterface) {
-            $report = $this->getReportRepository()->findOneBy(array('code' => $report));
+            $report = $this->getReportRepository()->findOneBy(['code' => $report]);
         }
 
         if (null === $report) {

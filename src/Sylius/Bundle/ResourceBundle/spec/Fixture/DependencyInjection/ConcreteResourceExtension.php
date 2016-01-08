@@ -18,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
  */
 class ConcreteResourceExtension extends AbstractResourceExtension
 {
-    protected $configFiles = array();
+    protected $configFiles = [];
 
     protected $configDirectory = '/';
 }

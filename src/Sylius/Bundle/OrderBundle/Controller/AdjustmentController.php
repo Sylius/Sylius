@@ -62,7 +62,7 @@ class AdjustmentController extends ResourceController
     public function createNew()
     {
         if (null === $orderId = $this->getRequest()->get('orderId')) {
-            return new JsonResponse(array('error' => 'Missing order id.'), 400);
+            return new JsonResponse(['error' => 'Missing order id.'], 400);
         }
 
         if (!$order = $this->getOrderRepository()->find($orderId)) {

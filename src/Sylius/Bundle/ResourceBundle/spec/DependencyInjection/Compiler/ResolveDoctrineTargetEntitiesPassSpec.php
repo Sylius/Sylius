@@ -26,7 +26,7 @@ class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('sylius_resource', array());
+        $this->beConstructedWith('sylius_resource', []);
     }
 
     function it_is_initializable()

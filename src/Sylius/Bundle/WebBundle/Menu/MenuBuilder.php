@@ -104,7 +104,7 @@ abstract class MenuBuilder
      *
      * @return string
      */
-    protected function translate($label, $parameters = array())
+    protected function translate($label, $parameters = [])
     {
         return $this->translator->trans(/** @Ignore */ $label, $parameters, 'menu');
     }

@@ -122,7 +122,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
                 $parameters = $value;
             } else {
                 $command = $value;
-                $parameters = array();
+                $parameters = [];
             }
 
             $this->commandExecutor->runCommand($command, $parameters);
@@ -148,7 +148,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    protected function askHidden(OutputInterface $output, $question, array $constraints = array())
+    protected function askHidden(OutputInterface $output, $question, array $constraints = [])
     {
         return $this->proceedAskRequest($output, $question, $constraints, null, true);
     }
@@ -161,7 +161,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    protected function ask(OutputInterface $output, $question, array $constraints = array(), $default = null)
+    protected function ask(OutputInterface $output, $question, array $constraints = [], $default = null)
     {
         return $this->proceedAskRequest($output, $question, $constraints, $default);
     }
@@ -172,7 +172,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return boolean
      */
-    protected function validate($value, array $constraints = array())
+    protected function validate($value, array $constraints = [])
     {
         return $this->get('validator')->validateValue($value, $constraints);
     }
@@ -197,7 +197,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    private function proceedAskRequest(OutputInterface $output, $question, array $constraints = array(), $default = null, $hidden = false)
+    private function proceedAskRequest(OutputInterface $output, $question, array $constraints = [], $default = null, $hidden = false)
     {
         do {
             $value = $this->getAnswerFromDialog($output, $question, $default, $hidden);

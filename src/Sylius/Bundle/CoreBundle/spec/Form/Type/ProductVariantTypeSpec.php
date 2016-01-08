@@ -19,7 +19,7 @@ class ProductVariantTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Variant', array(), 'product');
+        $this->beConstructedWith('Variant', [], 'product');
     }
 
     function it_is_initializable()

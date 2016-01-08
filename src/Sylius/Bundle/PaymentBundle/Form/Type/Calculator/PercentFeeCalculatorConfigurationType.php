@@ -25,9 +25,9 @@ class PercentFeeCalculatorConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percent', 'number', array(
+            ->add('percent', 'number', [
                 'label' => 'sylius.form.payment_method.fee_calculator.percent.percent',
-            ))
+            ])
         ;
     }
 

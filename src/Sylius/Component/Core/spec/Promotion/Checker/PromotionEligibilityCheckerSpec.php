@@ -45,7 +45,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -54,7 +54,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $subjectRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(2);
 
@@ -71,7 +71,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -80,7 +80,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $subjectRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(0);
 
@@ -97,7 +97,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -106,7 +106,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
@@ -121,7 +121,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $coupon->getPerCustomerUsageLimit()->willReturn(0);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -130,7 +130,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }

@@ -44,10 +44,10 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         }
 
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
-        ));
+        ]);
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }

@@ -53,7 +53,7 @@ class OrmFinderSpec extends ObjectBehavior
 
     function it_calculates_the_new_facets()
     {
-        $idsFromOtherFacets = array(
+        $idsFromOtherFacets = [
             0 => 89,
             1 => 67,
             2 => 30,
@@ -63,42 +63,42 @@ class OrmFinderSpec extends ObjectBehavior
             6 => 1,
             7 => 42,
             8 => 117,
-        );
+        ];
 
-        $ormFacets = array(
-            'taxons'  => array(
+        $ormFacets = [
+            'taxons'  => [
                 'display_name' => 'Basic categories',
                 'type'         => 'terms',
                 'value'        => null,
-                'values'       => array(),
-            ),
-            'price'   => array(
+                'values'       => [],
+            ],
+            'price'   => [
                 'display_name' => 'Available prices',
                 'type'         => 'range',
                 'value'        => null,
-                'values'       => array(
-                    array('from' => 0, 'to' => 2000),
-                    array('from' => 2001, 'to' => 5000),
-                    array('from' => 5001, 'to' => 10000),
-                ),
-            ),
-            'made_of' => array(
+                'values'       => [
+                    ['from' => 0, 'to' => 2000],
+                    ['from' => 2001, 'to' => 5000],
+                    ['from' => 5001, 'to' => 10000],
+                ],
+            ],
+            'made_of' => [
                 'display_name' => 'Material',
                 'type'         => 'terms',
                 'value'        => null,
-                'values'       => array(),
-            ),
-            'color'   => array(
+                'values'       => [],
+            ],
+            'color'   => [
                 'display_name' => 'Available colors',
                 'type'         => 'terms',
                 'value'        => null,
-                'values'       => array(),
-            ),
-        );
+                'values'       => [],
+            ],
+        ];
 
         $givenFacetName = 'taxons';
 
-        $result = array(
+        $result = [
             89  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:705;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
             67  => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"T-Shirts";i:1;s:9:"SuperTees";}s:5:"price";i:2840;s:7:"made_of";a:1:{i:0;s:9:"Polyester";}s:5:"color";a:3:{i:0;s:3:"Red";i:1;s:4:"Blue";i:2;s:5:"Green";}}',
             30  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:3905;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
@@ -108,7 +108,7 @@ class OrmFinderSpec extends ObjectBehavior
             1   => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:449;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
             42  => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"Stickers";i:1;s:11:"Stickypicky";}s:5:"price";i:8330;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
             117 => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:4188;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-        );
+        ];
 
         $this->buildFacet($idsFromOtherFacets, $ormFacets, $givenFacetName, $result)->shouldHaveCount(6);
 
@@ -117,7 +117,7 @@ class OrmFinderSpec extends ObjectBehavior
     public function it_performs_a_fulltext_query(
         EntityManagerInterface $entityManager,
         AbstractQuery $query,
-        $result = array()
+        $result = []
     )
     {
         $entityManager->createQuery(Argument::any())->shouldBeCalled()->willReturn($query);

@@ -71,7 +71,7 @@ class RedirectHandler
      *
      * @return RedirectResponse
      */
-    public function redirectToRoute($route, array $data = array())
+    public function redirectToRoute($route, array $data = [])
     {
         if ('referer' === $route) {
             return $this->redirectToReferer();
@@ -89,9 +89,9 @@ class RedirectHandler
     public function redirect($url, $status = 302)
     {
         if ($this->config->isHeaderRedirection()) {
-            return new Response('', 200, array(
+            return new Response('', 200, [
                 'X-SYLIUS-LOCATION' => $url.$this->config->getRedirectHash(),
-            ));
+            ]);
         }
 
         return new RedirectResponse($url.$this->config->getRedirectHash(), $status);

@@ -18,7 +18,7 @@ class TopicTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array('label' => 'sylius.form.contact_topic.title'));
+            ->add('title', 'text', ['label' => 'sylius.form.contact_topic.title']);
     }
 
     /**

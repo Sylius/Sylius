@@ -45,10 +45,10 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
 
     function it_subsribesto_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT   => 'preSubmit'
-        ));
+        ]);
     }
 
     function it_adds_or_removes_provinces_on_pre_set_data(
@@ -86,9 +86,9 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         CountryInterface $country
     ) {
         $event->getForm()->shouldBeCalled()->willReturn($form);
-        $event->getData()->shouldBeCalled()->willReturn(array(
+        $event->getData()->shouldBeCalled()->willReturn([
             'country' => 'France'
-        ));
+        ]);
 
         $countryRepository->find('France')->shouldBeCalled()->willReturn($country);
         $country->hasProvinces()->willReturn(true);

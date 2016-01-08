@@ -53,7 +53,7 @@ class SwiftMailerAdapter extends AbstractAdapter
     ) {
         $message = \Swift_Message::newInstance()
             ->setSubject($renderedEmail->getSubject())
-            ->setFrom(array($senderAddress => $senderName))
+            ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients);
 
         $message->setBody($renderedEmail->getBody(), 'text/html');

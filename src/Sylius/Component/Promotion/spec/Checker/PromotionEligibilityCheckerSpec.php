@@ -51,16 +51,16 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn(array($rule));
+        $promotion->getRules()->willReturn([$rule]);
         $promotion->isCouponBased()->willReturn(false);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn(array());
+        $rule->getConfiguration()->willReturn([]);
 
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, array())->willReturn(true);
+        $checker->isEligible($subject, [])->willReturn(true);
 
-        $subject->getPromotionCoupons()->willReturn(array());
+        $subject->getPromotionCoupons()->willReturn([]);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
@@ -77,14 +77,14 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn(array($rule));
+        $promotion->getRules()->willReturn([$rule]);
         $promotion->isCouponBased()->willReturn(false);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn(array());
+        $rule->getConfiguration()->willReturn([]);
 
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, array())->willReturn(false);
+        $checker->isEligible($subject, [])->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
@@ -102,16 +102,16 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn(array($rule));
+        $promotion->getRules()->willReturn([$rule]);
         $promotion->isCouponBased()->willReturn(true);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn(array());
+        $rule->getConfiguration()->willReturn([]);
 
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, array())->willReturn(false);
+        $checker->isEligible($subject, [])->willReturn(false);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
         $coupon->getPromotion()->willReturn($promotion);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
@@ -135,7 +135,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         CouponInterface $coupon
     ) {
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
@@ -163,13 +163,13 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $coupon->getPromotion()->willReturn($promotion);
 
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn(array($rule));
+        $promotion->getRules()->willReturn([$rule]);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn(array());
+        $rule->getConfiguration()->willReturn([]);
 
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, array())->willReturn(false);
+        $checker->isEligible($subject, [])->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
@@ -180,7 +180,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         CouponInterface $coupon
     ) {
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);

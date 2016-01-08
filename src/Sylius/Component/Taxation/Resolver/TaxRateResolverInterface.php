@@ -25,5 +25,5 @@ interface TaxRateResolverInterface
      *
      * @return null|TaxRateInterface
      */
-    public function resolve(TaxableInterface $taxable, array $criteria = array());
+    public function resolve(TaxableInterface $taxable, array $criteria = []);
 }

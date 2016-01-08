@@ -82,7 +82,7 @@ class CartHelper extends Helper
      *
      * @return FormView
      */
-    public function getItemFormView(array $options = array())
+    public function getItemFormView(array $options = [])
     {
         $form = $this->formFactory->create('sylius_cart_item', $this->cartItemFactory->createNew(), $options);
 

@@ -122,9 +122,9 @@ class TaxationProcessor implements TaxationProcessorInterface
 
     protected function processTaxes(OrderInterface $order, $zone)
     {
-        $taxes = array();
+        $taxes = [];
         foreach ($order->getItems() as $item) {
-            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
+            $rate = $this->taxRateResolver->resolve($item->getProduct(), ['zone' => $zone]);
 
             // Skip this item is there is not matching tax rate.
             if (null === $rate) {
@@ -137,10 +137,10 @@ class TaxationProcessor implements TaxationProcessorInterface
             $taxAmount = $rate->getAmountAsPercentage();
             $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
 
-            $taxes[$description] = array(
+            $taxes[$description] = [
                 'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
                 'included' => $rate->isIncludedInPrice()
-            );
+            ];
         }
 
         return $taxes;

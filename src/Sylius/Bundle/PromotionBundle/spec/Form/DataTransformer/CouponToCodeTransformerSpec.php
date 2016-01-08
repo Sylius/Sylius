@@ -62,7 +62,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     function it_should_return_null_if_coupon_not_found_on_reverse_transform($couponRepository)
     {
         $couponRepository
-            ->findOneBy(array('code' => 'FREEIPHONE5'))
+            ->findOneBy(['code' => 'FREEIPHONE5'])
             ->shouldBeCalled()
             ->willReturn(null)
         ;
@@ -75,7 +75,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         CouponInterface $coupon
     ) {
         $couponRepository
-            ->findOneBy(array('code' => 'FREEIPHONE5'))
+            ->findOneBy(['code' => 'FREEIPHONE5'])
             ->shouldBeCalled()
             ->willReturn($coupon)
         ;

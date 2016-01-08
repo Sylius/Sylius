@@ -51,11 +51,11 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
             FormEvents::PRE_SUBMIT => 'preSubmit',
-        );
+        ];
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
      * @param string        $registryIdentifier
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = array())
+    protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = [])
     {
         $model = $this->registry->get($registryIdentifier);
 
@@ -113,10 +113,10 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
             'configuration',
             $model->getConfigurationFormType(),
             $data,
-            array(
+            [
                 'auto_initialize' => false,
                 'label' => false,
-            )
+            ]
         );
 
         $form->add($configurationField);

@@ -50,7 +50,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateShipmentStates(array($shipment), 'transition');
+        $this->updateShipmentStates([$shipment], 'transition');
     }
 
     function it_updates_item_states(
@@ -62,6 +62,6 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateItemStates(array($item), 'transition');
+        $this->updateItemStates([$item], 'transition');
     }
 }

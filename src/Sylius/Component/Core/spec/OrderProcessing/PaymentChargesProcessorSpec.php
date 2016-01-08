@@ -52,7 +52,7 @@ class PaymentChargesProcessorSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod
     ) {
         $order->removeAdjustments('payment')->shouldBeCalled();
-        $order->getPayments()->willReturn(array($payment))->shouldBeCalled();
+        $order->getPayments()->willReturn([$payment])->shouldBeCalled();
 
         $order->calculateTotal()->shouldBeCalled();
 

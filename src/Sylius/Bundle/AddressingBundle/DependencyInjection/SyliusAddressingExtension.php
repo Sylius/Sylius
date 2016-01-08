@@ -36,9 +36,9 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -48,16 +48,16 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $container
             ->getDefinition('sylius.form.type.province_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.province'),
-            ))
+            ])
         ;
 
         $container
             ->getDefinition('sylius.form.type.country_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.country'),
-            ))
+            ])
         ;
 
         $container

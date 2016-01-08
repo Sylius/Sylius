@@ -36,7 +36,7 @@ class ShipmentStatesCallbackSpec extends ObjectBehavior
         OrderInterface $order
     ) {
         $order->isBackorder()->willReturn(true);
-        $order->getShipments()->willReturn(array($shipment));
+        $order->getShipments()->willReturn([$shipment]);
 
         $this->updateOrderShipmentStates($order, 'backorder');
     }
@@ -46,7 +46,7 @@ class ShipmentStatesCallbackSpec extends ObjectBehavior
         OrderInterface $order
     ) {
         $order->isBackorder()->willReturn(false);
-        $order->getShipments()->willReturn(array($shipment));
+        $order->getShipments()->willReturn([$shipment]);
 
         $this->updateOrderShipmentStates($order, 'foo');
     }

@@ -45,12 +45,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var array
      */
-    protected $actions = array(
+    protected $actions = [
         'viewing'  => 'show',
         'creation' => 'create',
         'editing'  => 'update',
         'building' => 'build',
-    );
+    ];
 
     /**
      * @var KernelInterface
@@ -94,7 +94,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function findOneByName($type, $name)
     {
-        return $this->findOneBy($type, array('name' => trim($name)));
+        return $this->findOneBy($type, ['name' => trim($name)]);
     }
 
     /**
@@ -176,7 +176,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getConfiguration($configurationString)
     {
-        $configuration = array();
+        $configuration = [];
         $list = explode(',', $configurationString);
 
         foreach ($list as $parameter) {
@@ -187,15 +187,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                 case 'country':
                     $isoName = $this->getCountryCodeByEnglishCountryName(trim($value));
 
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))->getId();
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(['isoName' => $isoName])->getId();
                     break;
 
                 case 'taxons':
-                    $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
+                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneBy(['name' => trim($value)])->getId()]);
                     break;
 
                 case 'variant':
-                    $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
+                    $configuration[$key] = $this->getRepository('product')->findOneBy(['name' => trim($value)])->getMasterVariant()->getId();
                     break;
 
                 case 'amount':
@@ -221,7 +221,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @return string
      */
-    protected function generatePageUrl($page, array $parameters = array())
+    protected function generatePageUrl($page, array $parameters = [])
     {
         if (is_object($page)) {
             return $this->generateUrl($page, $parameters);
@@ -285,7 +285,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @return string
      */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
+    protected function generateUrl($route, array $parameters = [], $absolute = false)
     {
         return $this->locatePath($this->getRouter()->generate($route, $parameters, $absolute));
     }
@@ -425,7 +425,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
 
-        $foundRows = array();
+        $foundRows = [];
 
         /** @var NodeElement[] $rows */
         $rows = $table->findAll('css', 'tr');
@@ -476,7 +476,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
     {
-        $replacedFields = array();
+        $replacedFields = [];
         foreach ($fields as $columnName => $expectedValue) {
             $columnIndex = $this->getColumnIndex($table, $columnName);
 

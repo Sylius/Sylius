@@ -30,9 +30,9 @@ class OrderItemType extends BaseOrderItemType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('variant', 'entity_hidden', array(
+            ->add('variant', 'entity_hidden', [
                 'data_class' => ProductVariant::class
-            ))
+            ])
         ;
     }
 

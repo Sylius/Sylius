@@ -25,7 +25,7 @@ class ZoneMemberProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ZoneMember', array('sylius'));
+        $this->beConstructedWith('ZoneMember', ['sylius']);
     }
 
     function it_is_initializable()
@@ -60,17 +60,17 @@ class ZoneMemberProvinceTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
-                array(
+                [
                     'data_class'        => 'ZoneMember',
-                    'validation_groups' => array('sylius')
-                )
+                    'validation_groups' => ['sylius']
+                ]
             )
             ->shouldBeCalled();
 

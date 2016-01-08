@@ -40,6 +40,6 @@ class TableConfigurationTypeSpec extends ObjectBehavior
     {
         $builder->add('template', 'choice', Argument::any())->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

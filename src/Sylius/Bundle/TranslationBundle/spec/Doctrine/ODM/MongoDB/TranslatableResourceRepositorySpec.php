@@ -62,14 +62,14 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
 
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
@@ -89,14 +89,14 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
 
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
+        $criteria = [
             'foo' => 'bar',
             'bar' => 'baz',
-        );
+        ];
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
@@ -116,13 +116,13 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $localeProvider->getCurrentLocale()->willReturn('en_US');
         $this->setLocaleProvider($localeProvider);
 
-        $translatableFields = array('foo');
+        $translatableFields = ['foo'];
 
         $this->setTranslatableFields($translatableFields);
 
-        $criteria = array(
-            'baz' => array('foo', 'bar'),
-        );
+        $criteria = [
+            'baz' => ['foo', 'bar'],
+        ];
 
         foreach ($criteria as $property => $value) {
             $queryBuilder->field($property)->willReturn($queryBuilder);

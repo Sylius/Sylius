@@ -42,14 +42,14 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
         OptionsResolver $resolver,
         Currency $currency
     ) {
-        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn(array($currency));
+        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn([$currency]);
         $currency->getCode()->shouldBeCalled()->willReturn('EUR');
         $currency->getName()->shouldBeCalled()->willReturn('Euro');
 
         $resolver
-            ->setDefaults(array(
-                'choices' => array('EUR' => 'EUR - Euro'),
-            ))
+            ->setDefaults([
+                'choices' => ['EUR' => 'EUR - Euro'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

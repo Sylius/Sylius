@@ -45,7 +45,7 @@ class TaxRateResolverSpec extends ObjectBehavior
         TaxRateInterface $taxRate
     ) {
         $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(array('category' => $taxCategory))->shouldBeCalled()->willReturn($taxRate);
+        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn($taxRate);
 
         $this->resolve($taxable)->shouldReturn($taxRate);
     }
@@ -56,7 +56,7 @@ class TaxRateResolverSpec extends ObjectBehavior
         TaxCategoryInterface $taxCategory
     ) {
         $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(array('category' => $taxCategory))->shouldBeCalled()->willReturn(null);
+        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn(null);
 
         $this->resolve($taxable)->shouldReturn(null);
     }

@@ -51,7 +51,7 @@ class ArrayToStringTransformer implements DataTransformerInterface
     public function reverseTransform($string)
     {
         if (empty($string)) {
-            return array();
+            return [];
         }
 
         if (!is_string($string)) {

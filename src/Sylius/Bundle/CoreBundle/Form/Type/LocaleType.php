@@ -34,7 +34,7 @@ class LocaleType extends AbstractResourceType
      *
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $localeRepository)
+    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -50,9 +50,9 @@ class LocaleType extends AbstractResourceType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
                 // Adding dynamically created code field
-                $nameOptions = array(
+                $nameOptions = [
                     'label' => 'sylius.form.locale.name',
-                );
+                ];
 
                 $locale = $event->getData();
                 if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {

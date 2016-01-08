@@ -48,42 +48,42 @@ class UserLoginSpec extends ObjectBehavior
 
     function it_throws_exception_and_does_not_log_user_in_when_user_is_disabled($tokenStorage, $userChecker, $eventDispatcher, UserInterface $user)
     {
-        $user->getRoles()->willReturn(array('ROLE_TEST'));
+        $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->willThrow(DisabledException::class);
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
         $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
 
-        $this->shouldThrow(DisabledException::class)->during('login', array($user));
+        $this->shouldThrow(DisabledException::class)->during('login', [$user]);
     }
 
     function it_throws_exception_and_does_not_log_user_in_when_user_account_status_is_invalid($tokenStorage, $userChecker, $eventDispatcher, UserInterface $user)
     {
-        $user->getRoles()->willReturn(array('ROLE_TEST'));
+        $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->willThrow(CredentialsExpiredException::class);
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
         $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
 
-        $this->shouldThrow(CredentialsExpiredException::class)->during('login', array($user));
+        $this->shouldThrow(CredentialsExpiredException::class)->during('login', [$user]);
     }
 
     function it_throws_exception_and_does_not_log_user_in_when_user_has_no_roles($tokenStorage, $userChecker, $eventDispatcher, UserInterface $user)
     {
-        $user->getRoles()->willReturn(array());
+        $user->getRoles()->willReturn([]);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->shouldBeCalled();
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
         $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
 
-        $this->shouldThrow(AuthenticationException::class)->during('login', array($user));
+        $this->shouldThrow(AuthenticationException::class)->during('login', [$user]);
     }
 
     function it_logs_user_in($tokenStorage, $userChecker, $eventDispatcher, UserInterface $user)
     {
-        $user->getRoles()->willReturn(array('ROLE_TEST'));
+        $user->getRoles()->willReturn(['ROLE_TEST']);
 
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->shouldBeCalled();

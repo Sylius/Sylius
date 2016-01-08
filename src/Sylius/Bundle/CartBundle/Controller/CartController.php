@@ -42,10 +42,10 @@ class CartController extends Controller
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('summary.html'))
-            ->setData(array(
+            ->setData([
                 'cart' => $cart,
                 'form' => $form->createView()
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -86,10 +86,10 @@ class CartController extends Controller
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('summary.html'))
-            ->setData(array(
+            ->setData([
                 'cart' => $cart,
                 'form' => $form->createView()
-            ))
+            ])
         ;
 
         return $this->handleView($view);

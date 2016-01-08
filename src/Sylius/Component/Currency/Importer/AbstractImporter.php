@@ -32,7 +32,7 @@ abstract class AbstractImporter implements ImporterInterface
      * @param FactoryInterface $factory
      * @param array               $options
      */
-    public function __construct(ObjectManager $manager, FactoryInterface $factory, array $options = array())
+    public function __construct(ObjectManager $manager, FactoryInterface $factory, array $options = [])
     {
         $this->manager = $manager;
         $this->factory = $factory;

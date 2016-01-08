@@ -58,10 +58,10 @@ class InsufficientStockExceptionListenerSpec extends ObjectBehavior
 
         $translator->trans(
             'sylius.checkout.out_of_stock',
-            array(
+            [
                 '%quantity%' => '30',
                 '%name%'     => 'Inventory Name',
-            ),
+            ],
             'flashes'
         )->shouldBeCalled()->willReturn('message translated');
 

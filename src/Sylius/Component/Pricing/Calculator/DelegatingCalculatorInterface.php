@@ -28,5 +28,5 @@ interface DelegatingCalculatorInterface
      *
      * @return integer
      */
-    public function calculate(PriceableInterface $subject, array $context = array());
+    public function calculate(PriceableInterface $subject, array $context = []);
 }

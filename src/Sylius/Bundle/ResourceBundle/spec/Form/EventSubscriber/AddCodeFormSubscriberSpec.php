@@ -37,7 +37,7 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData'));
+        $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
     function it_sets_code_as_enabled_when_resource_is_new(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)

@@ -26,28 +26,28 @@ class ParametersSpec extends ObjectBehavior
 
     function its_parameters_is_mutable()
     {
-        $this->replace(array());
+        $this->replace([]);
     }
 
     function it_has_parameters()
     {
-        $this->replace(array(
+        $this->replace([
             'criteria' => 'criteria',
             'paginate' => 'paginate'
-        ));
+        ]);
 
-        $this->all()->shouldReturn(array(
+        $this->all()->shouldReturn([
             'criteria' => 'criteria',
             'paginate' => 'paginate'
-        ));
+        ]);
     }
 
     function it_get_parameter()
     {
-        $this->replace(array(
+        $this->replace([
             'criteria' => 'criteria',
             'paginate' => 'paginate'
-        ));
+        ]);
 
         $this->get('criteria')->shouldReturn('criteria');
         $this->get('sorting')->shouldReturn(null);

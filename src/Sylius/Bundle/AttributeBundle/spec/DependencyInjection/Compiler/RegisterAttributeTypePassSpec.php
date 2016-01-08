@@ -37,15 +37,15 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
 
-        $attributeTypeServices = array(
-            'sylius.form.type.attribute_type.test' => array(
-                array('attribute-type' => 'test', 'label' => 'Test attribute type'),
-            ),
-        );
+        $attributeTypeServices = [
+            'sylius.form.type.attribute_type.test' => [
+                ['attribute-type' => 'test', 'label' => 'Test attribute type'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
 
-        $attributeTypeRegistryDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldBeCalled();
-        $container->setParameter('sylius.attribute.attribute_types', array('test' => 'Test attribute type'))->shouldBeCalled();
+        $attributeTypeRegistryDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])->shouldBeCalled();
+        $container->setParameter('sylius.attribute.attribute_types', ['test' => 'Test attribute type'])->shouldBeCalled();
 
         $this->process($container);
     }
@@ -61,13 +61,13 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeDefinition);
 
-        $attributeTypeServices = array(
-            'sylius.form.type.attribute_type.test' => array(
-                array('attribute_type' => 'test'),
-            ),
-        );
+        $attributeTypeServices = [
+            'sylius.form.type.attribute_type.test' => [
+                ['attribute_type' => 'test'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute_type` and `label` attributes.'));
-        $attributeTypeDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.attribute_type.test')))->shouldNotBeCalled();
+        $attributeTypeDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])->shouldNotBeCalled();
     }
 }

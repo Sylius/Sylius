@@ -32,10 +32,10 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', array(
+        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [
             '',
             $constraint
-        ));
+        ]);
     }
 
     function it_does_not_add_violation_because_a_violation_exists(
@@ -46,9 +46,9 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
-        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
+        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator([
             $this->createViolation('property_path')
-        )));
+        ]));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
@@ -67,9 +67,9 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
-        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
+        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator([
             $this->createViolation('other_property_path')
-        )));
+        ]));
 
         $context->addViolation(Argument::any())->shouldBeCalled();
 
@@ -78,6 +78,6 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
     private function createViolation($propertyPath)
     {
-        return new ConstraintViolation('message', 'template', array(), 'root', $propertyPath, 'invalidValue');
+        return new ConstraintViolation('message', 'template', [], 'root', $propertyPath, 'invalidValue');
     }
 }

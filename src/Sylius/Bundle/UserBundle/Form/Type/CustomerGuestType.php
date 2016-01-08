@@ -42,12 +42,12 @@ class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
-            ))
+            ])
             ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
             ->setDataLocked(false)
         ;

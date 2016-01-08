@@ -28,21 +28,21 @@ class OrderType extends BaseOrderType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', 'sylius_customer_choice', array(
-                'constraints' => array(
+            ->add('user', 'sylius_customer_choice', [
+                'constraints' => [
                     new NotBlank()
-                )
-            ))
-            ->add('currency', 'sylius_currency_code_choice', array(
-                'constraints' => array(
+                ]
+            ])
+            ->add('currency', 'sylius_currency_code_choice', [
+                'constraints' => [
                     new NotBlank()
-                )
-            ))
-            ->add('channel', 'sylius_channel_choice', array(
-                'constraints' => array(
+                ]
+            ])
+            ->add('channel', 'sylius_channel_choice', [
+                'constraints' => [
                     new NotBlank()
-                )
-            ))
+                ]
+            ])
         ;
     }
 

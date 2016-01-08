@@ -38,14 +38,14 @@ class SyliusFlowExtension extends Extension
 
         $container->setAlias('sylius.process_storage', $config['storage']);
 
-        $configurations = array(
+        $configurations = [
             'builders',
             'validators',
             'contexts',
             'controllers',
             'coordinators',
             'storages',
-        );
+        ];
 
         foreach ($configurations as $basename) {
             $loader->load(sprintf('%s.xml', $basename));

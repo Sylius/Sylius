@@ -78,7 +78,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
 
     public function __call($method, $arguments)
     {
-        $matches = array();
+        $matches = [];
         if (preg_match('/^get(.*)Repository$/', $method, $matches)) {
             return $this->get('sylius.repository.'.$matches[1]);
         }
@@ -86,7 +86,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
             return $this->get('sylius.factory.'.$matches[1]);
         }
 
-        return call_user_func_array(array($this, $method), $arguments);
+        return call_user_func_array([$this, $method], $arguments);
     }
 
     protected function getZoneMemberFactory($zoneType)

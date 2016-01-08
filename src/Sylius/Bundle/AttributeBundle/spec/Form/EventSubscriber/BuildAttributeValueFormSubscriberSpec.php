@@ -38,7 +38,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_pre_set_data_event()
     {
-        self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'preSetData', 'form.pre_bind' => 'preSubmit'));
+        self::getSubscribedEvents()->shouldReturn(['form.pre_set_data' => 'preSetData', 'form.pre_bind' => 'preSubmit']);
     }
 
     function it_is_triggered_pre_set_data_to_build_form_for_new_product_attribute(
@@ -88,14 +88,14 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         Form $valueField,
         FormEvent $event
     ) {
-        $event->getData()->willReturn(array(
+        $event->getData()->willReturn([
             'attribute' => 1,
-            'value' => array(
+            'value' => [
                 'year'  => 2010,
                 'month' => 01,
                 'day'   => 01,
-            ),
-        ));
+            ],
+        ]);
         $event->getForm()->willReturn($form);
 
         $attributeRepository->find(1)->willReturn($productAttribute);

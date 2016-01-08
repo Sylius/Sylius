@@ -76,11 +76,11 @@ class UserRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
 
         $this->createFilterPaginator(
-            array(
+            [
                 'enabled' => true,
                 'query' => 'arnaud'
-            ),
-            array('name' => 'asc'),
+            ],
+            ['name' => 'asc'],
             true
         )->shouldHaveType(Pagerfanta::class);
     }

@@ -27,26 +27,26 @@ class EmailProviderSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, RepositoryInterface $repository)
     {
-        $emails = array(
-            'user_confirmation' => array(
+        $emails = [
+            'user_confirmation' => [
                 'enabled'  => false,
                 'subject'  => 'Hello test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
+                'sender'   => [
                     'name'    => 'John Doe',
                     'address' => 'john@doe.com'
-                )
-            ),
-            'order_cancelled' => array(
+                ]
+            ],
+            'order_cancelled' => [
                 'enabled'  => false,
                 'subject'  => 'Hi test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
+                'sender'   => [
                     'name'    => 'Rick Doe',
                     'address' => 'john@doe.com'
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $this->beConstructedWith($factory, $repository, $emails);
     }
@@ -63,7 +63,7 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_looks_for_an_email_via_repository(RepositoryInterface $repository, EmailInterface $email)
     {
-        $repository->findOneBy(array('code' => 'user_confirmation'))->willReturn($email);
+        $repository->findOneBy(['code' => 'user_confirmation'])->willReturn($email);
 
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
@@ -74,7 +74,7 @@ class EmailProviderSpec extends ObjectBehavior
         EmailInterface $email
     )
     {
-        $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['code' => 'user_confirmation'])->shouldBeCalled()->willReturn(null);
         $factory->createNew()->shouldBeCalled()->willReturn($email);
 
         $email->setCode('user_confirmation')->shouldBeCalled();
@@ -89,7 +89,7 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_complains_if_email_does_not_exist($repository)
     {
-        $repository->findOneBy(array('code' => 'foo'))->willReturn(null);
+        $repository->findOneBy(['code' => 'foo'])->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Email with code "foo" does not exist!'))

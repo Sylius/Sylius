@@ -49,12 +49,12 @@ class OrderPricingListenerSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled()->willReturn($customer);
         $order->getChannel()->shouldBeCalled()->willReturn(null);
-        $order->getItems()->shouldBeCalled()->willReturn(array());
+        $order->getItems()->shouldBeCalled()->willReturn([]);
         $order->calculateTotal()->shouldBeCalled();
 
         $customer->getGroups()->shouldBeCalled()->willReturn($groups);
 
-        $groups->toArray()->shouldBeCalled()->willReturn(array('group1', 'group2'));
+        $groups->toArray()->shouldBeCalled()->willReturn(['group1', 'group2']);
 
         $this->recalculatePrices($event);
     }
@@ -68,7 +68,7 @@ class OrderPricingListenerSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled()->willReturn(null);
         $order->getChannel()->shouldBeCalled()->willReturn($channel);
-        $order->getItems()->shouldBeCalled()->willReturn(array());
+        $order->getItems()->shouldBeCalled()->willReturn([]);
         $order->calculateTotal()->shouldBeCalled();
 
         $this->recalculatePrices($event);
@@ -86,7 +86,7 @@ class OrderPricingListenerSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled()->willReturn(null);
         $order->getChannel()->shouldBeCalled()->willReturn(null);
-        $order->getItems()->shouldBeCalled()->willReturn(array($item1, $item2));
+        $order->getItems()->shouldBeCalled()->willReturn([$item1, $item2]);
         $order->calculateTotal()->shouldBeCalled();
 
         $item1->isImmutable()->shouldBeCalled()->willReturn(true);
@@ -99,7 +99,7 @@ class OrderPricingListenerSpec extends ObjectBehavior
         $item2->setUnitPrice(10)->shouldBeCalled();
         $item2->getVariant()->shouldBeCalled()->willReturn($variant);
 
-        $priceCalculator->calculate($variant, array('quantity' => 5))->shouldBeCalled()->willReturn(10);
+        $priceCalculator->calculate($variant, ['quantity' => 5])->shouldBeCalled()->willReturn(10);
 
         $this->recalculatePrices($event);
     }
@@ -118,12 +118,12 @@ class OrderPricingListenerSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled()->willReturn($customer);
         $order->getChannel()->shouldBeCalled()->willReturn($channel);
-        $order->getItems()->shouldBeCalled()->willReturn(array($item));
+        $order->getItems()->shouldBeCalled()->willReturn([$item]);
         $order->calculateTotal()->shouldBeCalled();
 
         $customer->getGroups()->shouldBeCalled()->willReturn($groups);
 
-        $groups->toArray()->shouldBeCalled()->willReturn(array('group1', 'group2'));
+        $groups->toArray()->shouldBeCalled()->willReturn(['group1', 'group2']);
 
         $item->isImmutable()->shouldBeCalled()->willReturn(false);
         $item->getQuantity()->shouldBeCalled()->willReturn(5);
@@ -132,12 +132,12 @@ class OrderPricingListenerSpec extends ObjectBehavior
 
         $priceCalculator->calculate(
             $variant,
-            array(
+            [
                 'customer' => $customer,
-                'groups' => array('group1', 'group2'),
-                'channel' => array($channel),
+                'groups' => ['group1', 'group2'],
+                'channel' => [$channel],
                 'quantity' => 5
-            )
+            ]
         )->shouldBeCalled()->willReturn(10);
 
         $this->recalculatePrices($event);

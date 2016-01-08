@@ -44,7 +44,7 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
     public function transform($value)
     {
         if (null === $value) {
-            return array();
+            return [];
         }
 
         if (!$value instanceof Collection) {

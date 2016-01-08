@@ -59,18 +59,18 @@ class CommandExecutorSpec extends ObjectBehavior
         ;
 
         $arrayInput = new ArrayInput(
-            array(
+            [
                 'command' => 'command',
                 '--no-debug' => true,
                 '--env' => 'dev',
                 '--verbose' => true,
-            )
+            ]
         );
 
         $application->setAutoExit(false)->shouldBeCalled();
         $application->run($arrayInput, new NullOutput())->willReturn(0);
 
-        $this->runCommand('command', array());
+        $this->runCommand('command', []);
     }
 
     function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application)
@@ -101,18 +101,18 @@ class CommandExecutorSpec extends ObjectBehavior
         ;
 
         $arrayInput = new ArrayInput(
-            array(
+            [
                 'command' => 'command',
                 '--no-debug' => true,
                 '--env' => 'dev',
                 '--no-interaction' => true,
                 '--verbose' => true,
-            )
+            ]
         );
 
         $application->setAutoExit(false)->shouldBeCalled();
         $application->run($arrayInput, new NullOutput())->willReturn(0);
 
-        $this->runCommand('command', array('--no-interaction' => true));
+        $this->runCommand('command', ['--no-interaction' => true]);
     }
 }

@@ -58,9 +58,9 @@ class ResourceChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'class' => null,
-            ))
+            ])
             ->setNormalizer('class', function () {
                 return $this->className;
             })

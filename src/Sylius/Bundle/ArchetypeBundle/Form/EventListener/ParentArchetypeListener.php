@@ -41,7 +41,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'preSetData');
+        return [FormEvents::PRE_SET_DATA => 'preSetData'];
     }
 
     /**
@@ -55,14 +55,14 @@ class ParentArchetypeListener implements EventSubscriberInterface
         }
 
         $form = $event->getForm();
-        $parentOptions = array(
+        $parentOptions = [
             'required' => false,
             'label' => 'sylius.form.archetype.parent',
             'property' => 'name'
-        );
+        ];
 
         if (null != $currentArchetype->getId()) {
-            $parentOptions = array(
+            $parentOptions = [
                 'query_builder' => function (RepositoryInterface $repository) use ($currentArchetype) {
                     return $repository
                         ->createQueryBuilder('o')
@@ -70,7 +70,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
                         ->setParameter('id', $currentArchetype->getId())
                     ;
                 }
-            );
+            ];
         }
 
         $form->add('parent', sprintf('sylius_%s_archetype_choice', $this->subject), $parentOptions);

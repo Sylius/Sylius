@@ -28,8 +28,8 @@ class ShippingMethodType extends BaseShippingMethodType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('zone', 'sylius_zone_choice', array(
+        $builder->add('zone', 'sylius_zone_choice', [
                 'label' => 'sylius.form.shipping_method.zone'
-            ));
+        ]);
     }
 }

@@ -41,9 +41,9 @@ class AddParentFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-        );
+        ];
     }
 
     /**
@@ -69,7 +69,7 @@ class AddParentFormSubscriber implements EventSubscriberInterface
         $form->add(
             'parent',
             sprintf('sylius_%s_choice', $this->type),
-            array('label' => sprintf('sylius.form.%s.parent', $this->type))
+            ['label' => sprintf('sylius.form.%s.parent', $this->type)]
         );
     }
 }

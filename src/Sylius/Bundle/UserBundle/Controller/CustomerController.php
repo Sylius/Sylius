@@ -33,9 +33,9 @@ class CustomerController extends ResourceController
 
         return $this->render(
             $this->config->getTemplate('showProfile.html'),
-            array(
+            [
                 $this->config->getResourceName() => $customer,
-            )
+            ]
         );
     }
 
@@ -49,7 +49,7 @@ class CustomerController extends ResourceController
         $customer = $this->getCustomer();
         $form     = $this->getForm($customer);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($customer);
 
             if ($this->config->isApiRequest()) {
@@ -65,10 +65,10 @@ class CustomerController extends ResourceController
 
         return $this->render(
             $this->config->getTemplate('updateProfile.html'),
-            array(
+            [
                 $this->config->getResourceName() => $customer,
                 'form'                           => $form->createView(),
-            )
+            ]
         );
     }
 

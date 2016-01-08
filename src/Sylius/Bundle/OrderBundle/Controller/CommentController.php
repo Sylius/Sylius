@@ -41,7 +41,7 @@ class CommentController extends ResourceController
 
             $this->domainManager->create($resource);
 
-            return $this->redirect($this->generateUrl('sylius_backend_order_show', array('id' => $order->getId())));
+            return $this->redirect($this->generateUrl('sylius_backend_order_show', ['id' => $order->getId()]));
         }
 
         $config = $this->getConfiguration();
@@ -52,10 +52,10 @@ class CommentController extends ResourceController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('create.html'))
-            ->setData(array(
+            ->setData([
                 $config->getResourceName() => $resource,
                 'form'                     => $form->createView()
-            ))
+            ])
         ;
 
         return $this->handleView($view);

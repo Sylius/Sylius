@@ -61,8 +61,8 @@ class TokenProviderSpec extends ObjectBehavior
         $filter->disable('softdeleteable')->shouldBeCalled();
         $filter->enable('softdeleteable')->shouldBeCalled();
 
-        $repository->findOneBy(array('confirmationToken' => 'tesToken1234'))->willReturn($user);
-        $repository->findOneBy(array('confirmationToken' => 'tesToken1235'))->willReturn(null);
+        $repository->findOneBy(['confirmationToken' => 'tesToken1234'])->willReturn($user);
+        $repository->findOneBy(['confirmationToken' => 'tesToken1235'])->willReturn(null);
 
         $generator->generate(12)->shouldBeCalled()->willReturn('tesToken1234', 'tesToken1235');
 

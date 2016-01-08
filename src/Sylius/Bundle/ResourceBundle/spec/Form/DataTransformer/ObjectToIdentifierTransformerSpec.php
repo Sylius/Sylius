@@ -32,14 +32,14 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_throws_an_exception_on_non_existing_entity(ObjectRepository $repository)
     {
-        $repository->findOneBy(array('id' => 6))->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['id' => 6])->shouldBeCalled()->willReturn(null);
 
-        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', array(6));
+        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [6]);
     }
 
     function it_reverses_identifier_in_entity(ObjectRepository $repository, FakeEntity $entity)
     {
-        $repository->findOneBy(array('id' => 5))->shouldBeCalled()->willReturn($entity);
+        $repository->findOneBy(['id' => 5])->shouldBeCalled()->willReturn($entity);
 
         $this->reverseTransform(5)->shouldReturn($entity);
     }

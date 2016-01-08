@@ -24,7 +24,7 @@ class ProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Province', array('sylius'));
+        $this->beConstructedWith('Province', ['sylius']);
     }
 
     function it_is_initializable()
@@ -49,17 +49,17 @@ class ProvinceTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
-                array(
+                [
                     'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
-                )
+                    'validation_groups' => ['sylius']
+                ]
             )
             ->shouldBeCalled();
 

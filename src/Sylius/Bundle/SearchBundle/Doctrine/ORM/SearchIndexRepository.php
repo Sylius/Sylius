@@ -63,7 +63,7 @@ class SearchIndexRepository extends EntityRepository
             ->setParameter('taxonName', $taxonName)
         ;
 
-        $filteredIds = array();
+        $filteredIds = [];
         foreach ($queryBuilder->getQuery()->getArrayResult() as $product) {
             $filteredIds[$productClassName][] = $product['id'];
         }
@@ -85,7 +85,7 @@ class SearchIndexRepository extends EntityRepository
             ->setParameter('channel', $channel->getId())
         ;
 
-        $filteredIds = array();
+        $filteredIds = [];
         foreach ($queryBuilder->getQuery()->getArrayResult() as $product) {
             $filteredIds[$productClassName][] = $product['id'];
         }
@@ -98,9 +98,9 @@ class SearchIndexRepository extends EntityRepository
      *
      * @return array
      */
-    public function hydrateSearchResults($resultSetFromFulltextSearch = array())
+    public function hydrateSearchResults($resultSetFromFulltextSearch = [])
     {
-        $results = array();
+        $results = [];
         foreach ($resultSetFromFulltextSearch as $model => $ids) {
             $queryBuilder = $this->em->createQueryBuilder();
             $queryBuilder
@@ -125,7 +125,7 @@ class SearchIndexRepository extends EntityRepository
      */
     public function getProductsByIds(array $ids)
     {
-        return $this->productRepository->findBy(array('id' => $ids));
+        return $this->productRepository->findBy(['id' => $ids]);
     }
 
     /**

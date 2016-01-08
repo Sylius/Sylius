@@ -29,7 +29,7 @@ class UserRegistrationDataFetcher extends TimePeriod
     /**
      * {@inheritdoc}
      */
-    protected function getData(array $configuration = array())
+    protected function getData(array $configuration = [])
     {
         return $this->userRepository->getRegistrationStatistic($configuration);
     }

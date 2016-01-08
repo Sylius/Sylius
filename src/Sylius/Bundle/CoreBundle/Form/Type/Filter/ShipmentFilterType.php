@@ -27,38 +27,38 @@ class ShipmentFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', 'text', array(
+            ->add('number', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.number',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.shipment_filter.number'
-                )
-            ))
-            ->add('shippingAddress', 'text', array(
+                ]
+            ])
+            ->add('shippingAddress', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.shipping_address',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.shipment_filter.shipping_address'
-                )
-            ))
-            ->add('createdAtFrom', 'text', array(
+                ]
+            ])
+            ->add('createdAtFrom', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.created_at_from',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.shipment_filter.created_at_from'
-                )
-            ))
-            ->add('createdAtTo', 'text', array(
+                ]
+            ])
+            ->add('createdAtTo', 'text', [
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.created_at_to',
-                'attr'     => array(
+                'attr'     => [
                     'placeholder' => 'sylius.form.shipment_filter.created_at_to'
-                )
-            ))
-            ->add('channel', 'sylius_channel_choice', array(
+                ]
+            ])
+            ->add('channel', 'sylius_channel_choice', [
                 'required'    => false,
                 'empty_value' => 'sylius.form.shipment_filter.channel'
-            ))
+            ])
         ;
     }
 

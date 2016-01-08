@@ -42,16 +42,16 @@ class RouteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_route()
     {
-        $defaults = array(
+        $defaults = [
             '_controller' => 'sylius.controller.product:showAction'
-        );
+        ];
 
-        $requirements = array(
+        $requirements = [
             'format' => 'xml|json'
-        );
+        ];
 
-        $expectedRoute = new Route('/products', $defaults, $requirements, array(), 'test.com', array('https'), array('GET', 'POST'), 'condition');
+        $expectedRoute = new Route('/products', $defaults, $requirements, [], 'test.com', ['https'], ['GET', 'POST'], 'condition');
 
-        $this->createRoute('/products', $defaults, $requirements, array(), 'test.com', array('https'), array('GET', 'POST'), 'condition')->shouldBeLike($expectedRoute);
+        $this->createRoute('/products', $defaults, $requirements, [], 'test.com', ['https'], ['GET', 'POST'], 'condition')->shouldBeLike($expectedRoute);
     }
 }

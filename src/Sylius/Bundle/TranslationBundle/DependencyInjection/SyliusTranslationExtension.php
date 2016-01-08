@@ -31,9 +31,9 @@ class SyliusTranslationExtension extends AbstractResourceExtension
         $config = $processor->processConfiguration(new Configuration(), $config);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);

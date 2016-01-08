@@ -26,9 +26,9 @@ class ZoneMemberCountryType extends ZoneMemberType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_country_choice', array(
+            ->add('country', 'sylius_country_choice', [
                 'label'    => 'sylius.form.zone_member_country.country',
-            ))
+            ])
         ;
 
         parent::buildForm($builder, $options);

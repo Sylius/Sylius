@@ -34,7 +34,7 @@ class PercentFeeCalculatorSpec extends ObjectBehavior
     {
         $payment->getAmount()->willReturn(1000);
 
-        $this->calculate($payment, array('percent' => 20))->shouldReturn(200);
+        $this->calculate($payment, ['percent' => 20])->shouldReturn(200);
     }
 
     function it_has_type()

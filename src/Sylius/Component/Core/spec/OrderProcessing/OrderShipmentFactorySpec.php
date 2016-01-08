@@ -61,7 +61,7 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
         $order
             ->getInventoryUnits()
-            ->willReturn(array($inventoryUnit))
+            ->willReturn([$inventoryUnit])
         ;
 
         $shipment
@@ -103,10 +103,10 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
         $order
             ->getInventoryUnits()
-            ->willReturn(array(
+            ->willReturn([
                 $inventoryUnit,
                 $inventoryUnitWithoutShipment
-            ))
+            ])
         ;
 
         $order

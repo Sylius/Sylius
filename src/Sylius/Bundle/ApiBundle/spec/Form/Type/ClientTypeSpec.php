@@ -11,7 +11,7 @@ class ClientTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Client', array('sylius'));
+        $this->beConstructedWith('Client', ['sylius']);
     }
 
     function it_is_initializable()
@@ -28,7 +28,7 @@ class ClientTypeSpec extends ObjectBehavior
     {
         $builder->add('secret', 'text', Argument::type('array'))->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

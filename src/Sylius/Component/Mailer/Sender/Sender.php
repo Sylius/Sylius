@@ -66,7 +66,7 @@ class Sender implements SenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send($code, array $recipients, array $data = array())
+    public function send($code, array $recipients, array $data = [])
     {
         $email = $this->provider->getEmail($code);
 

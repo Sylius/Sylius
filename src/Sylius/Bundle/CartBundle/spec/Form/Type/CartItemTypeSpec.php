@@ -24,7 +24,7 @@ class CartItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CartItem', array('sylius'));
+        $this->beConstructedWith('CartItem', ['sylius']);
     }
 
     function it_is_initializable()
@@ -45,16 +45,16 @@ class CartItemTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class'        => 'CartItem',
-                'validation_groups' => array('sylius'),
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 
