@@ -24,6 +24,9 @@ class ImageType extends AbstractResourceType
         $builder->add('file', 'file', array(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
                     'label' => 'sylius.form.image.file',
                 ))
                 ->add('title', 'text', array(
@@ -33,6 +36,7 @@ class ImageType extends AbstractResourceType
                 ->add('description', 'textarea', array(
                     'label' => 'sylius.form.image.description',
                     'required' => false,
+<<<<<<< HEAD
         ));
         $builder->add('title', 'text', array(
             'label' => 'sylius.form.image.title',
@@ -59,6 +63,8 @@ class ImageType extends AbstractResourceType
 =======
                     'required' => false,
 >>>>>>> Updating indent
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
         ));
     }
 

@@ -31,17 +31,21 @@ class Image implements ImageInterface
     /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * Image title
      *
 >>>>>>> Adding optional title and description to images
 =======
 >>>>>>> Removing redundant comments
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
      * @var string
      */
     protected $title;
 
     /**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -50,11 +54,14 @@ class Image implements ImageInterface
 >>>>>>> Adding optional title and description to images
 =======
 >>>>>>> Removing redundant comments
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
      * @var string
      */
     protected $description;
 
     /**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -63,6 +70,8 @@ class Image implements ImageInterface
 >>>>>>> Adding optional title and description to images
 =======
 >>>>>>> Removing redundant comments
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
      * @var \DateTime
      */
     protected $createdAt;
@@ -153,11 +162,14 @@ class Image implements ImageInterface
         $this->title = $title;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         return $this;
 >>>>>>> Adding optional title and description to images
 =======
 >>>>>>> Removing fluent interfaces for setTitle and setDescription
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
     }
 
     /**
@@ -176,11 +188,14 @@ class Image implements ImageInterface
         $this->description = $description;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         return $this;
 >>>>>>> Adding optional title and description to images
 =======
 >>>>>>> Removing fluent interfaces for setTitle and setDescription
+=======
+>>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
     }
 
     /**
