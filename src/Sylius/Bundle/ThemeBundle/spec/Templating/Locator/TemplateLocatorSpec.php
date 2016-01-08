@@ -13,12 +13,11 @@ namespace spec\Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator;
-use Symfony\Component\Config\FileLocatorInterface;
+use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
@@ -28,12 +27,9 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  */
 class TemplateLocatorSpec extends ObjectBehavior
 {
-    function let(
-        FileLocatorInterface $templateLocator,
-        ThemeContextInterface $themeContext,
-        ResourceLocatorInterface $resourceLocator
-    ) {
-        $this->beConstructedWith($templateLocator, $themeContext, $resourceLocator);
+    function let(ResourceLocatorInterface $resourceLocator)
+    {
+        $this->beConstructedWith($resourceLocator);
     }
 
     function it_is_initializable()
@@ -41,62 +37,32 @@ class TemplateLocatorSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator');
     }
 
-    function it_implements_file_locator_interface()
+    function it_implements_template_locator_interface()
     {
-        $this->shouldImplement(FileLocatorInterface::class);
+        $this->shouldImplement(TemplateLocatorInterface::class);
     }
 
-    function it_throws_an_exception_if_located_thing_is_not_an_instance_of_template_reference_interface()
-    {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('locate', ['not an instance']);
-    }
-
-    function it_returns_first_possible_theme_resource(
-        ThemeContextInterface $themeContext,
-        ResourceLocatorInterface $resourceLocator,
-        TemplateReferenceInterface $template,
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme
-    ) {
-        $template->getPath()->willReturn('template/path');
-
-        $themeContext->getThemeHierarchy()->willReturn([$firstTheme, $secondTheme]);
-
-        $resourceLocator->locateResource('template/path', $firstTheme)->willThrow(ResourceNotFoundException::class);
-        $resourceLocator->locateResource('template/path', $secondTheme)->willReturn('/second/theme/template/path');
-        
-        $this->locate($template)->shouldReturn('/second/theme/template/path');
-    }
-
-    function it_falls_back_to_decorated_template_locator_if_themed_tempaltes_can_not_be_found(
-        FileLocatorInterface $templateLocator,
-        ThemeContextInterface $themeContext,
+    function it_proxies_locating_template_to_resource_locator(
         ResourceLocatorInterface $resourceLocator,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
     ) {
-        $template->getPath()->willReturn('template/path');
+        $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
 
-        $themeContext->getThemeHierarchy()->willReturn([$theme]);
+        $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willReturn('/acme/index.html.twig');
 
-        $resourceLocator->locateResource('template/path', $theme)->willThrow(ResourceNotFoundException::class);
-
-        $templateLocator->locate($template, Argument::cetera())->willReturn('/app/template/path');
-
-        $this->locate($template)->shouldReturn('/app/template/path');
+        $this->locateTemplate($template, $theme)->shouldReturn('/acme/index.html.twig');
     }
 
-    function it_falls_back_to_decorated_template_locator_if_there_are_no_themes_active(
-        FileLocatorInterface $templateLocator,
-        ThemeContextInterface $themeContext,
-        TemplateReferenceInterface $template
+    function it_does_not_catch_exceptions_throwed_while_locating_template_to_resource_locator_even(
+        ResourceLocatorInterface $resourceLocator,
+        TemplateReferenceInterface $template,
+        ThemeInterface $theme
     ) {
-        $template->getPath()->willReturn('template/path');
+        $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
 
-        $themeContext->getThemeHierarchy()->willReturn([]);
+        $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willThrow(ResourceNotFoundException::class);
 
-        $templateLocator->locate($template, Argument::cetera())->willReturn('/app/template/path');
-
-        $this->locate($template)->shouldReturn('/app/template/path');
+        $this->shouldThrow(ResourceNotFoundException::class)->during('locateTemplate', [$template, $theme]);
     }
 }

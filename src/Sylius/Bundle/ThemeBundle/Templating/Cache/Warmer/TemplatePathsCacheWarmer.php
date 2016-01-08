@@ -11,18 +11,19 @@
 
 namespace Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
-use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
+use Doctrine\Common\Cache\Cache;
+use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
+use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TemplatePathsCacheWarmer extends CacheWarmer
+final class TemplatePathsCacheWarmer implements CacheWarmerInterface
 {
     /**
      * @var TemplateFinderInterface
@@ -30,9 +31,9 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
     private $templateFinder;
 
     /**
-     * @var ResourceLocatorInterface
+     * @var TemplateLocatorInterface
      */
-    private $resourceLocator;
+    private $templateLocator;
 
     /**
      * @var ThemeRepositoryInterface
@@ -40,18 +41,26 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
     private $themeRepository;
 
     /**
+     * @var Cache
+     */
+    private $cache;
+
+    /**
      * @param TemplateFinderInterface $templateFinder
-     * @param ResourceLocatorInterface $resourceLocator
+     * @param TemplateLocatorInterface $templateLocator
      * @param ThemeRepositoryInterface $themeRepository
+     * @param Cache $cache
      */
     public function __construct(
         TemplateFinderInterface $templateFinder,
-        ResourceLocatorInterface $resourceLocator,
-        ThemeRepositoryInterface $themeRepository
+        TemplateLocatorInterface $templateLocator,
+        ThemeRepositoryInterface $themeRepository,
+        Cache $cache
     ) {
         $this->templateFinder = $templateFinder;
-        $this->resourceLocator = $resourceLocator;
+        $this->templateLocator = $templateLocator;
         $this->themeRepository = $themeRepository;
+        $this->cache = $cache;
     }
 
     /**
@@ -61,18 +70,10 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
     {
         $templates = $this->templateFinder->findAllTemplates();
 
-        $templatesLocations = [];
-
-        /** @var ThemeInterface $theme */
-        foreach ($this->themeRepository->findAll() as $theme) {
-            /** @var TemplateReferenceInterface $template */
-            foreach ($templates as $template) {
-
-                $templatesLocations[$template->getLogicalName() . "|" . $theme->getSlug()] = $this->resourceLocator->locateResource($template->getPath(), $theme);
-            }
+        /** @var TemplateReferenceInterface $template */
+        foreach ($templates as $template) {
+            $this->warmUpTemplate($template);
         }
-
-        $this->writeCacheFile($cacheDir . '/templates_themes.php', sprintf('<?php return %s;', var_export($templatesLocations, true)));
     }
 
     /**
@@ -81,5 +82,42 @@ final class TemplatePathsCacheWarmer extends CacheWarmer
     public function isOptional()
     {
         return true;
+    }
+
+    /**
+     * @param TemplateReferenceInterface $template
+     */
+    private function warmUpTemplate(TemplateReferenceInterface $template)
+    {
+        /** @var ThemeInterface $theme */
+        foreach ($this->themeRepository->findAll() as $theme) {
+            $this->warmUpThemeTemplate($template, $theme);
+        }
+    }
+
+    /**
+     * @param TemplateReferenceInterface $template
+     * @param ThemeInterface $theme
+     */
+    private function warmUpThemeTemplate(TemplateReferenceInterface $template, ThemeInterface $theme)
+    {
+        try {
+            $location = $this->templateLocator->locateTemplate($template, $theme);
+        } catch (ResourceNotFoundException $exception) {
+            $location = null;
+        }
+
+        $this->cache->save($this->getCacheKey($template, $theme), $location);
+    }
+
+    /**
+     * @param TemplateReferenceInterface $template
+     * @param ThemeInterface $theme
+     *
+     * @return string
+     */
+    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme)
+    {
+        return $template->getLogicalName() . '|' . $theme->getSlug();
     }
 }
