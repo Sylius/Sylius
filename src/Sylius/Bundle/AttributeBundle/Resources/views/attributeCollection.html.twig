@@ -18,21 +18,23 @@
              data-form-collection-index="{{ index }}"
              class="collection-item">
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
-                {% if allow_delete %}
-                    <p class="text-right">
-                        <a href="#" data-form-collection="delete" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-remove collection-button-remove"></i>
-                            {{ button_delete_label|trans }}
-                        </a>
-                    </p>
-                {% endif %}
                 {% set errors = form.children.value.vars.errors %}
-                <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+                <div class="{% if errors|length > 0 %} has-error{% endif %}">
                     {% set labelId = form.vars.data.attribute.name|replace(' ', '_')|lower %}
-                    <label class="col-lg-2 control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>
-                    {% for field in form.children %}
-                        {{ _self.attributeItemField(field, labelId) }}
-                    {% endfor %}
+                    <label class="control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>
+                    <div class="row">
+                        <div class="col-xs-10">
+                        {% for field in form.children %}
+                            {{ _self.attributeItemField(field, labelId) }}
+                        {% endfor %}
+                        </div>
+                        {% if allow_delete %}
+                            <a href="#" data-form-collection="delete" class="btn btn-danger col-xs-2">
+                                <i class="glyphicon glyphicon-remove collection-button-remove"></i>
+                                {{ button_delete_label|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +46,7 @@
     {% if data.name == 'attribute' %}
         <input type="hidden" id="{{ data.id }}" name="{{ data.full_name }}" value="{{ data.value }}" />
     {% else %}
-        <div class="col-lg-10">
+        <div>
             {{ form_widget(item, {'id': labelId}) }}
             {% for error in data.errors %}
                 <span class="help-block form-error">
