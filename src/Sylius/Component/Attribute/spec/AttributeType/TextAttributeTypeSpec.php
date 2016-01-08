@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
+namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -29,7 +30,7 @@ class TextAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType');
+        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\TextAttributeType');
     }
 
     function it_implements_attribute_type_interface()
@@ -61,7 +62,7 @@ class TextAttributeTypeSpec extends ObjectBehavior
         $attributeValue->getValue()->willReturn('X');
 
         $context->getValidator()->willReturn($validator);
-        $validator->validate('X', Argument::type('Symfony\Component\Validator\Constraints\Length'))->willReturn($constraintViolationList);
+        $validator->validate('X', Argument::type(Length::class))->willReturn($constraintViolationList);
 
         $constraintViolationList->rewind()->shouldBeCalled();
         $constraintViolationList->valid()->willReturn(true, false);

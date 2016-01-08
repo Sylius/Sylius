@@ -13,7 +13,7 @@ namespace Sylius\Component\Attribute\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**

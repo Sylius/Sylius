@@ -29,8 +29,8 @@
         "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
-        "doctrine/orm": "~2.2",
+        "phpspec/phpspec": "^2.4",
+        "doctrine/orm": "^2.4.8,<2.5",
         "symfony/form": "^2.7",
         "symfony/validator": "^2.7"
     },

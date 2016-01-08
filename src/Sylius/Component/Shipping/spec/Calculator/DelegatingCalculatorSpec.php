@@ -12,12 +12,12 @@
 namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

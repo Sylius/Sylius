@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
+namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -17,11 +17,11 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeTypeSpec extends ObjectBehavior
+class DatetimeAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType');
+        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\DatetimeAttributeType');
     }
 
     function it_implements_attribute_type_interface()
@@ -29,13 +29,13 @@ class CheckboxAttributeTypeSpec extends ObjectBehavior
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_boolean()
+    function its_storage_type_is_text()
     {
-        $this->getStorageType()->shouldReturn('boolean');
+        $this->getStorageType()->shouldReturn('datetime');
     }
 
-    function its_type_is_checkbox()
+    function its_type_is_text()
     {
-        $this->getType()->shouldReturn('checkbox');
+        $this->getType()->shouldReturn('datetime');
     }
 }

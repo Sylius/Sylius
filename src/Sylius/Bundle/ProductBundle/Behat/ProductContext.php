@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Core\Model\ProductInterface;
 

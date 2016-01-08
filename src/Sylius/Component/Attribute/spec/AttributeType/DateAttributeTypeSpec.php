@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
+namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -17,11 +17,11 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PercentAttributeTypeSpec extends ObjectBehavior
+class DateAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\AttributeType\PercentAttributeType');
+        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\DateAttributeType');
     }
 
     function it_implements_attribute_type_interface()
@@ -31,11 +31,11 @@ class PercentAttributeTypeSpec extends ObjectBehavior
 
     function its_storage_type_is_text()
     {
-        $this->getStorageType()->shouldReturn('float');
+        $this->getStorageType()->shouldReturn('date');
     }
 
     function its_type_is_text()
     {
-        $this->getType()->shouldReturn('percent');
+        $this->getType()->shouldReturn('date');
     }
 }

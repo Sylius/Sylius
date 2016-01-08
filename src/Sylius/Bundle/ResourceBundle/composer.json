@@ -35,10 +35,10 @@
         "willdurand/hateoas-bundle": "^0.4|^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "akeneo/phpspec-skip-example-extension": "~1.2",
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/orm": "~2.4",
+        "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
         "sylius/rbac-bundle": "0.16.*",
         "sylius/translation-bundle": "0.16.*",
@@ -46,7 +46,7 @@
     },
     "suggest": {
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/orm": "~2.4",
+        "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
         "sylius/rbac-bundle": "0.16.*",
         "sylius/translation-bundle": "0.16.*"

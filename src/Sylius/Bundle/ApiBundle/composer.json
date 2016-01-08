@@ -27,7 +27,7 @@
         "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~3.7",
         "sylius/fixtures-bundle": "0.16.*",
         "symfony/form": "^2.7",

@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
-use Sylius\Bundle\AttributeBundle\AttributeType\DateAttributeType;
 use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
+use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
