@@ -19,14 +19,9 @@
 !/bin/sylius-cs-fixer
 /vendor
 
-<<<<<<< HEAD
 /etc/build/*
 !/etc/build/.gitkeep
 
 /behat.yml
 /phpunit.xml
 /phpspec.yml
-=======
-etc/build/*
-!etc/build/.gitkeep
->>>>>>> Updated .gitignore - removed deploy related ones, renamed travis/build-output to etc/build
