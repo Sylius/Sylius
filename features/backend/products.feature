@@ -118,6 +118,39 @@ Feature: Products
         And "Product has been successfully created." should appear on the page
 
     @javascript
+    Scenario: Creating product with checkbox attribute
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And go to "Attributes" tab
+        And I add "T-Shirt fare trade" attribute
+        And I check "T-Shirt fare trade"
+        When I press "Create"
+        Then I should be on the page of product "Manchester United tee"
+        And "Product has been successfully created." should appear on the page
+
+    @javascript
+    Scenario: Creating product with multiple attributes
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And go to "Attributes" tab
+        And I add following attributes:
+            | T-Shirt fabric     |
+            | T-Shirt fare trade |
+        And I fill in "T-Shirt fabric" with "Polyester"
+        And I check "T-Shirt fare trade"
+        When I press "Create"
+        Then I should be on the page of product "FC Barcelona tee"
+        And "Product has been successfully created." should appear on the page
+        And I should see "T-Shirt fabric"
+        And I should see "T-Shirt fare trade"
+
+    @javascript
     Scenario: Created product does not pass validation
         Given I am on the product creation page
         When I fill in the following:
@@ -161,11 +194,11 @@ Feature: Products
         Given I am editing product "Super T-Shirt"
         And I go to "Attributes" tab
         When I delete "T-Shirt fabric" attribute
-        And I add "Size" attribute
-        And I fill in "Size" with "100"
+        And I add "T-Shirt fare trade" attribute
+        And I check "T-Shirt fare trade"
         And I press "Save changes"
         Then I should be on the page of product "Super T-Shirt"
-        And I should see "100"
+        And I should see "T-Shirt fare trade"
         And I should not see "Wool"
 
     Scenario: Selecting the product tax category

@@ -9,21 +9,13 @@
 (function ($) {
     'use strict';
 
-    function calculateNextIndex() {
-        var nextIndex = 0;
-        var attributeItems = $('#attributes > div .collection-item');
+    function increaseAttributesNumber() {
+        var currentIndex = parseInt(getNextIndex());
+        $('#attributes .collection-list').attr('data-length', currentIndex+1);
+    }
 
-        if (0 == attributeItems.length) {
-            return nextIndex;
-        }
-
-        $.each(attributeItems, function() {
-            if ($(this).attr('data-form-collection-index') > nextIndex) {
-                nextIndex = $(this).attr('data-form-collection-index');
-            }
-        });
-
-        return parseInt(nextIndex)+1;
+    function getNextIndex() {
+        return $('#attributes .collection-list').attr('data-length');
     }
 
     function modifyModalOnItemDelete() {
@@ -64,13 +56,14 @@
             $.ajax({
                 type: 'GET',
                 url: form.attr('action'),
-                data: form.serialize()+'&count='+calculateNextIndex(),
+                data: form.serialize()+'&count='+getNextIndex(),
                 dataType: 'html'
             }).done(function(data){
                 var finalData = modifyAttributeForms($(data));
                 $('#attributes .collection-list').append(finalData);
                 $('#attributes-modal').modal('hide');
                 modifyModalOnItemDelete();
+                increaseAttributesNumber();
             });
         });
     }

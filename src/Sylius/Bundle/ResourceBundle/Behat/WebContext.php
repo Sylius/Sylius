@@ -377,21 +377,49 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I add following attributes:$/
+     */
+    public function iAddFollowingAttributes(TableNode $attributes)
+    {
+        $pickedAttributes = array();
+        foreach ($attributes->getRows() as $attribute) {
+            $pickedAttributes[] = $attribute[0];
+        }
+
+        $this->addAttributes($pickedAttributes);
+    }
+
+    /**
      * @Given /^I add "([^"]*)" attribute$/
      */
     public function iAddAttribute($attribute)
+    {
+        $this->addAttributes(array($attribute));
+    }
+
+    /**
+     * @param array $attributes
+     */
+    private function addAttributes(array $attributes)
     {
         $this->clickLink('Add');
 
         $attributesModalContainer = $this->getSession()->getPage()->find('css', '#attributes-modal');
         $addAttributesButton = $attributesModalContainer->find('css', sprintf('button:contains("%s")', 'Add attributes'));
 
+        $this->getSession()->wait(200);
+
         $this->waitForModalToAppear($attributesModalContainer);
 
-        $this->getSession()->getPage()->checkField($attribute.' attribute');
+        foreach ($attributes as $attribute) {
+            $this->getSession()->getPage()->checkField($attribute.' attribute');
+        }
+
         $addAttributesButton->press();
 
         $this->waitForModalToDisappear($attributesModalContainer);
+
+        $this->getSession()->wait(200);
     }
 
     /**

@@ -12,7 +12,7 @@
             </p>
 
             <div class="form-group">
-                {% set id = form.vars.id|replace(' ', '_')|lower %}
+                {% set id = form.vars.label|replace(' ', '_')|lower %}
                 <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
                 <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
                 <div class="col-lg-10">
