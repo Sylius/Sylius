@@ -399,9 +399,6 @@ sylius:
         updated_at: Last update
     filter: Filter
     form:
-        image:
-            title: Title
-            description: Description
         cart:
             coupon: If you have a promotion coupon, enter it here
         choose_file: Choose file
