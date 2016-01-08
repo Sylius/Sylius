@@ -16,17 +16,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ImageType extends AbstractResourceType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', 'file', array(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
                     'label' => 'sylius.form.image.file',
                 ))
                 ->add('title', 'text', array(
@@ -36,35 +32,6 @@ class ImageType extends AbstractResourceType
                 ->add('description', 'textarea', array(
                     'label' => 'sylius.form.image.description',
                     'required' => false,
-<<<<<<< HEAD
-        ));
-        $builder->add('title', 'text', array(
-            'label' => 'sylius.form.image.title',
-            'required' => false
-        ));
-        $builder->add('description', 'textarea', array(
-            'label' => 'sylius.form.image.description',
-            'required' => false
-=======
-                    'label' => 'sylius.form.image.file'
-=======
-                    'label' => 'sylius.form.image.file',
->>>>>>> Updating indent
-                ))
-                ->add('title', 'text', array(
-                    'label' => 'sylius.form.image.title',
-                    'required' => false,
-                ))
-                ->add('description', 'textarea', array(
-                    'label' => 'sylius.form.image.description',
-<<<<<<< HEAD
-                    'required' => false
->>>>>>> Using fluent setter
-=======
-                    'required' => false,
->>>>>>> Updating indent
-=======
->>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
         ));
     }
 

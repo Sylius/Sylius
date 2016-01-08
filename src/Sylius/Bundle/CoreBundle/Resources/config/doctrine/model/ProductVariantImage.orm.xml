@@ -17,15 +17,6 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariantImage" table="sylius_product_variant_image">
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <field name="title" column="title" type="string" nullable="true" />
-        <field name="description" column="description" type="text" nullable="true" />
-        <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface" inversed-by="images" />
-=======
->>>>>>> Changed order of fields
-=======
->>>>>>> b09caede5f8599be4ef08d8e55e932155a234d17
         <field name="title" column="title" type="string" nullable="true" />
         <field name="description" column="description" type="text" nullable="true" />
         <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface" inversed-by="images" />

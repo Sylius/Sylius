@@ -55,14 +55,9 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
 
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
-<<<<<<< HEAD:src/Sylius/Bundle/ResourceBundle/DependencyInjection/Driver/Doctrine/DoctrineODMDriver.php
             ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getUnitOfWork'))
             ->setPublic(false)
         ;
-=======
-            ->setFactory(array(new Reference($this->getManagerServiceKey()), 'getUnitOfWork'))
-            ->setPublic(false);
->>>>>>> 2.7 Definition deprecation fix:src/Sylius/Bundle/ResourceBundle/DependencyInjection/Driver/DoctrineODMDriver.php
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
