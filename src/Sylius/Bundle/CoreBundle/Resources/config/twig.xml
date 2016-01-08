@@ -25,11 +25,6 @@
             <argument type="service" id="sylius.templating.helper.restricted_zone" />
             <tag name="twig.extension" />
         </service>
-
-        <service id="twig.controller.exception" class="%twig.controller.exception.class%">
-            <argument type="service" id="twig" />
-            <argument>%sylius.twig.show_exceptions%</argument>
-        </service>
     </services>
 
 </container>
