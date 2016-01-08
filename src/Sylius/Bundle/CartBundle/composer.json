@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": "^5.5.9|^7.0",
 
         "sylius/cart": "0.16.*",
         "sylius/order-bundle": "0.16.*",

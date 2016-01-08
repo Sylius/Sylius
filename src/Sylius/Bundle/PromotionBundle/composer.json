@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": "^5.5.9|^7.0",
 
         "jms/translation-bundle": "1.1.*",
         "stof/doctrine-extensions-bundle": "~1.1",
