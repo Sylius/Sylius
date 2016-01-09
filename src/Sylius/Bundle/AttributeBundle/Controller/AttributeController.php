@@ -23,6 +23,7 @@ class AttributeController extends ResourceController
 {
     /**
      * @param Request $request
+     * @param string $template
      *
      * @return Response
      */

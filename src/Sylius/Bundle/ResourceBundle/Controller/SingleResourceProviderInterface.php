@@ -23,7 +23,7 @@ interface SingleResourceProviderInterface
      * @param RequestConfiguration $requestConfiguration
      * @param RepositoryInterface $repository
      *
-     * @return null|ResourceInterface
+     * @return ResourceInterface|null
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository);
 }

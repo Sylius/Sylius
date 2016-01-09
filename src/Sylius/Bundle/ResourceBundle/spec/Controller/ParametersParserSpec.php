@@ -28,8 +28,8 @@ class ParametersParserSpec extends ObjectBehavior
 
     function it_should_parse_parameters(Request $request)
     {
-        $request->get('criteria')->shouldBeCalled()->willReturn('New criteria');
-        $request->get('sorting')->shouldBeCalled()->willReturn('New sorting');
+        $request->get('criteria')->willReturn('New criteria');
+        $request->get('sorting')->willReturn('New sorting');
 
         $this->parseRequestValues(
             array(
@@ -47,8 +47,8 @@ class ParametersParserSpec extends ObjectBehavior
 
     function it_should_parse_complex_parameters(Request $request)
     {
-        $request->get('enable')->shouldBeCalled()->willReturn(true);
-        $request->get('sorting')->shouldBeCalled()->willReturn('New sorting');
+        $request->get('enable')->willReturn(true);
+        $request->get('sorting')->willReturn('New sorting');
 
         $this->parseRequestValues(
             array(

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 /**
@@ -27,7 +28,7 @@ class DisabledAuthorizationCheckerSpec extends ObjectBehavior
 
     function it_implements_resource_controller_authorization_checker_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface');
+        $this->shouldImplement(AuthorizationCheckerInterface::class);
     }
     
     function it_always_returns_true(RequestConfiguration $requestConfiguration)

@@ -14,11 +14,16 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * @mixin RequestConfigurationFactory
+ *
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -26,10 +31,7 @@ class RequestConfigurationFactorySpec extends ObjectBehavior
 {
     function let(ParametersParser $parametersParser)
     {
-        $this->beConstructedWith(
-            $parametersParser,
-            '\Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration'
-        );
+        $this->beConstructedWith($parametersParser, RequestConfiguration::class);
     }
 
     function it_is_initializable()
@@ -39,7 +41,7 @@ class RequestConfigurationFactorySpec extends ObjectBehavior
 
     function it_implements_request_configuration_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface');
+        $this->shouldImplement(RequestConfigurationFactoryInterface::class);
     }
 
     function it_creates_configuration_from_resource_metadata_and_request(
@@ -61,6 +63,6 @@ class RequestConfigurationFactorySpec extends ObjectBehavior
         $attributesBag->get('_sylius', array())->shouldBeCalled()->willReturn($configuration);
         $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
 
-        $this->create($metadata, $request)->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration');
+        $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);
     }
 }

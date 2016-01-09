@@ -39,7 +39,7 @@ class RbacAuthorizationChecker implements AuthorizationCheckerInterface
      */
     public function isGranted(RequestConfiguration $requestConfiguration, $permission)
     {
-        if (!$requestConfiguration->getPermission($permission)) {
+        if (!$requestConfiguration->hasPermission()) {
             return true;
         }
 

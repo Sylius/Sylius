@@ -323,21 +323,11 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_repository_method_parameter(Parameters $parameters)
     {
-        $parameters
-            ->has('repository')
-            ->willReturn(false)
-        ;
-
+        $parameters->has('repository')->willReturn(false);
         $this->getRepositoryMethod()->shouldReturn(null);
 
-        $parameters
-            ->has('repository')
-            ->willReturn(true)
-        ;
-        $parameters
-            ->get('repository')
-            ->willReturn(array('method' => 'findAllEnabled'))
-        ;
+        $parameters->has('repository')->willReturn(true);
+        $parameters->get('repository')->willReturn(array('method' => 'findAllEnabled'));
 
         $this->getRepositoryMethod()->shouldReturn('findAllEnabled');
     }
@@ -362,21 +352,11 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_factory_method_parameter(Parameters $parameters)
     {
-        $parameters
-            ->has('factory')
-            ->willReturn(false)
-        ;
-
+        $parameters->has('factory')->willReturn(false);
         $this->getFactoryMethod()->shouldReturn(null);
 
-        $parameters
-            ->has('factory')
-            ->willReturn(true)
-        ;
-        $parameters
-            ->get('factory')
-            ->willReturn(array('method' => 'createForPromotion'))
-        ;
+        $parameters->has('factory')->willReturn(true);
+        $parameters->get('factory')->willReturn(array('method' => 'createForPromotion'));
 
         $this->getFactoryMethod()->shouldReturn('createForPromotion');
     }
@@ -420,6 +400,20 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getSortablePosition()->shouldReturn('myPosition');
     }
     
+    function it_has_permission_unless_defined_as_false_in_parameters(Parameters $parameters)
+    {
+        $parameters->has('permission')->willReturn(false);
+        $this->shouldHavePermission();
+
+        $parameters->has('permission')->willReturn(true);
+        $parameters->get('permission')->willReturn('custom_permission');
+        $this->shouldHavePermission();
+
+        $parameters->has('permission')->willReturn(true);
+        $parameters->get('permission')->willReturn(false);
+        $this->shouldNotHavePermission();
+    }
+    
     function it_generates_permission_name(MetadataInterface $metadata, Parameters $parameters)
     {
         $metadata->getApplicationName()->willReturn('sylius');
@@ -430,7 +424,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getPermission('index')->shouldReturn('sylius.product.index');
     }
 
-    function it_takes_permission_name_from_parameters_if_provider(Parameters $parameters)
+    function it_takes_permission_name_from_parameters_if_provided(Parameters $parameters)
     {
         $parameters->has('permission')->willReturn(true);
         $parameters->get('permission')->willReturn('app.sales_order.view_pricing');
@@ -438,18 +432,20 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getPermission('index')->shouldReturn('app.sales_order.view_pricing');
     }
 
-    function it_returns_false_if_permission_is_set_as_false_in_parameters(Parameters $parameters)
+    function it_throws_an_exception_when_permission_is_set_as_false_in_parameters_but_still_trying_to_get_it(Parameters $parameters)
     {
         $parameters->has('permission')->willReturn(true);
         $parameters->get('permission')->willReturn(false);
 
-        $this->getPermission('index')->shouldReturn(false);
+        $this
+            ->shouldThrow(\LogicException::class)
+            ->during('getPermission', array('index'))
+        ;
     }
     
     function it_has_event_name(Parameters $parameters)
     {
         $parameters->get('event')->willReturn('foo');
-        
         $this->getEvent()->shouldReturn('foo');
     }
 

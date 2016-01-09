@@ -45,14 +45,14 @@ class ResourceControllerEventSpec extends ObjectBehavior
         $this->isStopped()->shouldReturn(true);
     }
 
-    function it_has_not_message_type_by_default()
+    function it_has_no_message_type_by_default()
     {
         $this->getMessageType()->shouldReturn('');
     }
 
     function its_message_type_is_mutable()
     {
-        $this->setMessageType(ResourceEvent::TYPE_SUCCESS)->shouldReturn($this);
+        $this->setMessageType(ResourceEvent::TYPE_SUCCESS);
         $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
     }
 
@@ -63,19 +63,18 @@ class ResourceControllerEventSpec extends ObjectBehavior
 
     function its_message_is_mutable()
     {
-        $this->setMessage('message')->shouldReturn($this);
+        $this->setMessage('message');
         $this->getMessage()->shouldReturn('message');
     }
 
-    function it_has_not_message_parameter_by_default()
+    function it_has_empty_message_parameters_by_default()
     {
         $this->getMessageParameters()->shouldReturn(array());
     }
 
     function its_message_parameter_is_mutable()
     {
-        $this->setMessageParameters(array('parameters'))->shouldReturn($this);
+        $this->setMessageParameters(array('parameters'));
         $this->getMessageParameters()->shouldReturn(array('parameters'));
     }
-
 }

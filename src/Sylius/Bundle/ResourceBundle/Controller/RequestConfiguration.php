@@ -266,6 +266,7 @@ class RequestConfiguration
 
     /**
      * @param array $criteria
+     *
      * @return array
      */
     public function getCriteria(array $criteria = array())
@@ -312,6 +313,7 @@ class RequestConfiguration
     /**
      * @param $parameter
      * @param array $defaults
+     *
      * @return array
      */
     public function getRequestParameter($parameter, $defaults = array())
@@ -428,12 +430,30 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @return bool
+     */
+    public function hasPermission()
+    {
+        if (!$this->parameters->has('permission')) {
+            return true;
+        }
+
+        return false !== $this->parameters->get('permission');
+    }
+
+    /**
+     * @param string $name
      *
-     * @return bool|string
+     * @return string
+     *
+     * @throws \LogicException
      */
     public function getPermission($name)
     {
+        if (!$this->hasPermission()) {
+            throw new \LogicException('Current action does not require any authorization.');
+        }
+
         if (!$this->parameters->has('permission')) {
             return sprintf('%s.%s.%s', $this->metadata->getApplicationName(), $this->metadata->getName(), $name);
         }

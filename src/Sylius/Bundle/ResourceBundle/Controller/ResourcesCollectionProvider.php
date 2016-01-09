@@ -39,10 +39,10 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
-        if (null !== $factoryMethod = $requestConfiguration->getRepositoryMethod(null)) {
-            $callable = array($repository, $factoryMethod);
+        if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
+            $callable = array($repository, $repositoryMethod);
 
-            return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments(array()));
+            return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
         }
 
         if (!$requestConfiguration->isPaginated() && !$requestConfiguration->isLimited()) {

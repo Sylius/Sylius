@@ -24,7 +24,7 @@ class ParametersSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
     }
 
-    function its_has_mutable_parameters()
+    function it_has_mutable_parameters()
     {
         $this->replace(array());
     }

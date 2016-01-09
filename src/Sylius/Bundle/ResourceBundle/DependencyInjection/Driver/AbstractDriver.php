@@ -211,6 +211,12 @@ abstract class AbstractDriver implements DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
+    abstract protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata);
+
+    /**
+     * @param ContainerBuilder $container
+     * @param MetadataInterface $metadata
+     */
     abstract protected function addManager(ContainerBuilder $container, MetadataInterface $metadata);
 
     /**
@@ -218,12 +224,4 @@ abstract class AbstractDriver implements DriverInterface
      * @param MetadataInterface $metadata
      */
     abstract protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata);
-
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-    }
 }

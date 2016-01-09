@@ -35,21 +35,20 @@ class ServicesPass implements CompilerPassInterface
 
         $translatableFactoryDefinition = $container->getDefinition('sylius.factory.product');
         $productFactoryClass = $translatableFactoryDefinition->getClass();
+
         $translatableFactoryDefinition->setClass(TranslatableFactory::class);
-        $translatableFactoryDefinition->setArguments(
-            array(
-                $factoryDefinition,
-                new Reference('sylius.translation.locale_provider')
-            )
-        );
+        $translatableFactoryDefinition->setArguments(array(
+            $factoryDefinition,
+            new Reference('sylius.translation.locale_provider')
+        ));
 
         $decoratedProductFactoryDefinition = new Definition($productFactoryClass);
-        $decoratedProductFactoryDefinition->setArguments(
-            array(
-                $translatableFactoryDefinition,
-                new Reference('sylius.factory.product_variant')
-            )
-        );
+        $decoratedProductFactoryDefinition->setArguments(array(
+            $translatableFactoryDefinition,
+            new Reference('sylius.repository.product_archetype'),
+            new Reference('sylius.builder.product_archetype'),
+            new Reference('sylius.factory.product_variant')
+        ));
 
         $container->setDefinition('sylius.factory.product', $decoratedProductFactoryDefinition);
 

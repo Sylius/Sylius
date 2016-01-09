@@ -50,8 +50,8 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     function it_gets_all_resources_if_not_paginated_and_there_is_no_limit(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
-        ResourceInterface $resource1,
-        ResourceInterface $resource2
+        ResourceInterface $firstResource,
+        ResourceInterface $secondResource
     )
     {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
@@ -60,17 +60,17 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(false);
         
-        $repository->findAll()->willReturn(array($resource1, $resource2));
+        $repository->findAll()->willReturn(array($firstResource, $secondResource));
         
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource, $secondResource));
     }
 
     function it_finds_resources_by_criteria_if_not_paginated(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
-        ResourceInterface $resource1,
-        ResourceInterface $resource2,
-        ResourceInterface $resource3
+        ResourceInterface $firstResource,
+        ResourceInterface $secondResource,
+        ResourceInterface $thirdResource
     )
     {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
@@ -83,28 +83,28 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->getCriteria()->willReturn(array('custom' => 'criteria'));
         $requestConfiguration->getSorting()->willReturn(array('name' => 'desc'));
 
-        $repository->findBy(array('custom' => 'criteria'), array('name' => 'desc'), 15)->willReturn(array($resource1, $resource2, $resource3));;
+        $repository->findBy(array('custom' => 'criteria'), array('name' => 'desc'), 15)->willReturn(array($firstResource, $secondResource, $thirdResource));
 
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1, $resource2, $resource3));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource, $secondResource, $thirdResource));
     }
 
     function it_uses_custom_method_and_arguments_if_specified(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
-        ResourceInterface $resource1
+        ResourceInterface $firstResource
     )
     {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
-        $requestConfiguration->getRepositoryMethod(null)->willReturn('findAll');
-        $requestConfiguration->getRepositoryArguments(array())->willReturn(array('foo'));
+        $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
+        $requestConfiguration->getRepositoryArguments()->willReturn(array('foo'));
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(true);
         $requestConfiguration->getLimit()->willReturn(15);
 
-        $repository->findAll('foo')->willReturn(array($resource1));;
+        $repository->findAll('foo')->willReturn(array($firstResource));
 
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($resource1));
+        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource));
     }
 
     function it_creates_paginator_by_default(
@@ -117,7 +117,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     {
 
         $requestConfiguration->isHtmlRequest()->willReturn(true);
-        $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
+        $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
         $requestConfiguration->isLimited()->willReturn(false);
@@ -147,7 +147,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     )
     {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
-        $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
+        $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
         $requestConfiguration->isLimited()->willReturn(false);

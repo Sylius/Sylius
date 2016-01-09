@@ -37,9 +37,9 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
         $this->shouldImplement(AuthorizationCheckerInterface::class);
     }
 
-    function it_grants_access_if_permission_is_set_to_false(RequestConfiguration $requestConfiguration)
+    function it_grants_access_if_permission_is_not_required(RequestConfiguration $requestConfiguration)
     {
-        $requestConfiguration->getPermission('sylius.product.foo')->willReturn(false);
+        $requestConfiguration->hasPermission()->willReturn(false);
         $this->isGranted($requestConfiguration, 'sylius.product.foo')->shouldReturn(true);
     }
 
@@ -48,6 +48,7 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     )
     {
+        $requestConfiguration->hasPermission()->willReturn(true);
         $requestConfiguration->getPermission('sylius.product.foo')->willReturn('sylius.product.foo');
         $rbacAuthorizationChecker->isGranted('sylius.product.foo')->willReturn(false);
         $this->isGranted($requestConfiguration, 'sylius.product.foo')->shouldReturn(false);

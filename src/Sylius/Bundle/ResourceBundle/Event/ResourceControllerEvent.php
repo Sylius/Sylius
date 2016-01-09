@@ -24,29 +24,21 @@ class ResourceControllerEvent extends GenericEvent
     const TYPE_SUCCESS = 'success';
 
     /**
-     * Message type
-     *
      * @var string
      */
     protected $messageType = '';
 
     /**
-     * Message
-     *
      * @var string
      */
     protected $message = '';
 
     /**
-     * Message parameters
-     *
      * @var array
      */
     protected $messageParameters = array();
 
     /**
-     * ErrorCode
-     *
      * @var integer
      */
     protected $errorCode = 500;
@@ -98,8 +90,6 @@ class ResourceControllerEvent extends GenericEvent
     public function setMessageType($messageType)
     {
         $this->messageType = $messageType;
-
-        return $this;
     }
 
     /**
@@ -122,8 +112,6 @@ class ResourceControllerEvent extends GenericEvent
     public function setMessage($message)
     {
         $this->message = $message;
-
-        return $this;
     }
 
     /**
@@ -146,8 +134,6 @@ class ResourceControllerEvent extends GenericEvent
     public function setMessageParameters(array $messageParameters)
     {
         $this->messageParameters = $messageParameters;
-
-        return $this;
     }
 
     /**
@@ -170,7 +156,5 @@ class ResourceControllerEvent extends GenericEvent
     public function setErrorCode($errorCode)
     {
         $this->errorCode = $errorCode;
-
-        return $this;
     }
 }
