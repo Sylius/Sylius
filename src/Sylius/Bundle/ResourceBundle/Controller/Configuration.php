@@ -154,7 +154,21 @@ class Configuration
 
     public function getTemplateName($name)
     {
-        return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);
+        //For BC, prefer usage $this->config->getTemplate('index') instead of $this->config->getTemplate('index.html')
+        if (preg_match('/^(\S+)\.(\S+)$/', $name, $m)) {
+            $name = $m[1];
+            $format = $m[2];
+        } else {
+            $format = null;
+        }
+
+        return sprintf(
+            '%s:%s.%s.%s',
+            $this->templateNamespace ?: ':',
+            $name,
+            $format ?: $this->request->getRequestFormat(),
+            $this->templatingEngine
+        );
     }
 
     public function getTemplate($name)

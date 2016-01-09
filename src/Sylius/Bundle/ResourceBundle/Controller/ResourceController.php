@@ -113,7 +113,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('show.html'))
+            ->setTemplate($this->config->getTemplate('show'))
             ->setTemplateVar($this->config->getResourceName())
             ->setData($this->findOr404($request))
         ;
@@ -163,7 +163,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
+            ->setTemplate($this->config->getTemplate('index'))
             ->setTemplateVar($this->config->getPluralResourceName())
             ->setData($resources)
         ;
@@ -207,7 +207,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('create.html'))
+            ->setTemplate($this->config->getTemplate('create'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
@@ -253,7 +253,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('update.html'))
+            ->setTemplate($this->config->getTemplate('update'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
