@@ -461,6 +461,10 @@ class ResourceController extends Controller
      */
     protected function isGrantedOr403(RequestConfiguration $configuration, $permission)
     {
+        if (!$configuration->hasPermission()) {
+            return;
+        }
+
         $permission = $configuration->getPermission($permission);
 
         if (!$this->authorizationChecker->isGranted($configuration, $permission)) {

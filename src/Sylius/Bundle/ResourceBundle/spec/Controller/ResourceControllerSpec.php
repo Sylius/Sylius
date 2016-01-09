@@ -109,6 +109,7 @@ class ResourceControllerSpec extends ObjectBehavior
     )
     {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(false);
@@ -130,6 +131,7 @@ class ResourceControllerSpec extends ObjectBehavior
     )
     {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
@@ -158,6 +160,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
@@ -200,6 +203,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.show')->willReturn(true);
@@ -224,6 +228,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::INDEX)->willReturn('sylius.product.index');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.index')->willReturn(false);
@@ -252,6 +257,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getPluralName()->willReturn('products');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::INDEX)->willReturn('sylius.product.index');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.index')->willReturn(true);
@@ -283,6 +289,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(false);
@@ -312,6 +319,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -359,6 +367,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -407,6 +416,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -451,6 +461,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -503,6 +514,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -552,6 +564,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -602,6 +615,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
@@ -640,6 +654,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(false);
@@ -660,6 +675,7 @@ class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
@@ -690,6 +706,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
@@ -740,6 +757,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
@@ -791,6 +809,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
         $configuration->isHtmlRequest()->willReturn(false);
 
@@ -833,6 +852,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
@@ -886,6 +906,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
@@ -938,6 +959,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
         $configuration->isHtmlRequest()->willReturn(false);
 
@@ -985,6 +1007,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
         $configuration->isHtmlRequest()->willReturn(false);
 
@@ -1022,6 +1045,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(false);
@@ -1042,6 +1066,7 @@ class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider
     ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
@@ -1072,6 +1097,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
@@ -1110,6 +1136,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
@@ -1148,6 +1175,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
@@ -1185,6 +1213,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
