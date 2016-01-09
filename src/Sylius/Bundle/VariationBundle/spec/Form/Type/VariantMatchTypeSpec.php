@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;

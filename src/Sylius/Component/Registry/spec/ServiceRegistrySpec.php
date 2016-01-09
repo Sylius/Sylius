@@ -11,9 +11,13 @@
 
 namespace spec\Sylius\Component\Registry;
 
+require_once __DIR__.'/Fixture/SampleServiceInterface.php';
+
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Routing\RouteCompilerInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Sylius\Component\Registry\ExistingServiceException;
+use Sylius\Component\Registry\NonExistingServiceException;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -22,7 +26,7 @@ class ServiceRegistrySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(RouterInterface::class);
+        $this->beConstructedWith(SampleServiceInterface::class);
     }
 
     function it_is_initializable()
@@ -32,7 +36,7 @@ class ServiceRegistrySpec extends ObjectBehavior
 
     function it_implements_service_registry_interface()
     {
-        $this->shouldImplement('Sylius\Component\Registry\ServiceRegistryInterface');
+        $this->shouldImplement(ServiceRegistryInterface::class);
     }
 
     function it_initializes_services_array_by_default()
@@ -40,53 +44,53 @@ class ServiceRegistrySpec extends ObjectBehavior
         $this->all()->shouldReturn(array());
     }
 
-    function it_registers_service_with_given_type(RouterInterface $router)
+    function it_registers_service_with_given_type(SampleServiceInterface $service)
     {
         $this->has('test')->shouldReturn(false);
-        $this->register('test', $router);
+        $this->register('test', $service);
 
         $this->has('test')->shouldReturn(true);
-        $this->get('test')->shouldReturn($router);
+        $this->get('test')->shouldReturn($service);
     }
 
-    function it_throws_exception_when_trying_to_register_service_with_taken_type(RouterInterface $router)
+    function it_throws_exception_when_trying_to_register_service_with_taken_type(SampleServiceInterface $service)
     {
-        $this->register('test', $router);
+        $this->register('test', $service);
 
         $this
-            ->shouldThrow('Sylius\Component\Registry\ExistingServiceException')
-            ->duringRegister('test', $router)
+            ->shouldThrow(ExistingServiceException::class)
+            ->duringRegister('test', $service)
         ;
     }
 
     function it_throws_exception_when_trying_to_register_service_without_required_interface(
-        RouteCompilerInterface $compiler
+        \stdClass $service
     ) {
         $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringRegister('test', $compiler)
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->duringRegister('test', $service)
         ;
     }
 
-    function it_unregisters_service_with_given_type(RouterInterface $router)
+    function it_unregisters_service_with_given_type(SampleServiceInterface $service)
     {
-        $this->register('foo', $router);
+        $this->register('foo', $service);
         $this->has('foo')->shouldReturn(true);
 
         $this->unregister('foo');
         $this->has('foo')->shouldReturn(false);
     }
 
-    function it_retrieves_registered_service_by_type(RouterInterface $router)
+    function it_retrieves_registered_service_by_type(SampleServiceInterface $service)
     {
-        $this->register('test', $router);
-        $this->get('test')->shouldReturn($router);
+        $this->register('test', $service);
+        $this->get('test')->shouldReturn($service);
     }
 
     function it_throws_exception_if_trying_to_get_service_of_non_existing_type()
     {
         $this
-            ->shouldThrow('Sylius\Component\Registry\NonExistingServiceException')
+            ->shouldThrow(NonExistingServiceException::class)
             ->duringGet('foo')
         ;
     }

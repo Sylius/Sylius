@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Factory;
+namespace Sylius\Component\Attribute\Factory;
 
 use Sylius\Component\Product\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
-use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeFactory implements TranslatableFactoryInterface
+class AttributeFactory implements AttributeFactoryInterface
 {
     /**
-     * @var TranslatableFactory
+     * @var FactoryInterface
      */
-    private $translatableFactory;
+    private $factory;
 
     /**
      * @var ServiceRegistryInterface
@@ -32,12 +31,12 @@ class AttributeFactory implements TranslatableFactoryInterface
     private $attributeTypesRegistry;
 
     /**
-     * @param TranslatableFactory $translatableFactory
+     * @param FactoryInterface $factory
      * @param ServiceRegistryInterface $attributeTypesRegistry
      */
-    public function __construct(TranslatableFactory $translatableFactory, ServiceRegistryInterface $attributeTypesRegistry)
+    public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
-        $this->translatableFactory = $translatableFactory;
+        $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
     }
 
@@ -48,7 +47,7 @@ class AttributeFactory implements TranslatableFactoryInterface
      */
     public function createTyped($type)
     {
-        $attribute = $this->translatableFactory->createNew();
+        $attribute = $this->factory->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($this->attributeTypesRegistry->get($type)->getStorageType());
 
@@ -60,7 +59,7 @@ class AttributeFactory implements TranslatableFactoryInterface
      */
     public function createNew()
     {
-        $attribute = $this->translatableFactory->createNew();
+        $attribute = $this->factory->createNew();
         $attribute->setStorageType($this->attributeTypesRegistry->get($attribute->getType())->getStorageType());
 
         return $attribute;
