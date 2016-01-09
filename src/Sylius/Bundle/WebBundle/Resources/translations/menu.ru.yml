@@ -5,16 +5,28 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API клиенты
+        archetypes: Прототипы продуктов
         assortment: Ассортимент
+        attributes: Настройка атрибутов
         blocks: Блоки
+        channels: Каналы
         configuration: Настройки
+        contact_requests: Запросы контактов
+        contact_topics: Настройки обращений
         countries: Страны
+        currencies: Валюты
+        customer: Клиент
+        customers: Клиенты
         content: Контент
         dashboard: Приборная панель
+        emails: Emails
         general_settings: Общие настройки
         groups: Группы
         homepage: Ваш магазин
         locales: Языки
+        marketing: Маркетинг
+        menus: Элементы меню
         new_order: Создать заказ
         new_promotion: Создать рекламную акцию
         options: Настройка опций
@@ -22,13 +34,19 @@ sylius:
         pages: Страницы
         payment_methods: Методы оплаты
         payments: Платежи
+        permissions: Права доступа
         products: Товары
         promotions: Рекламные акции
+        report: Отчеты
+        routes: Маршруты
         sales: Заказы
+        security_settings: Настройки безопасности
         shipments: Посылки
         shipping_categories: Категории доставки
         shipping_methods: Методы доставки
+        slideshow: Слайд-шоу
         stockables: Уровень запасов
+        support: Поддержка
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
@@ -36,16 +54,28 @@ sylius:
         zones: Зоны
         roles: Роли
       sidebar:
+        api_clients: API клиенты
+        archetypes: Прототипы продуктов
         assortment: Ассортимент
+        attributes: Настройка атрибутов
         blocks: Блоки
+        channels: Каналы
         configuration: Настройки
+        contact_requests: Запросы контактов
+        contact_topics: Настройки обращений
         content: Контент
         countries: Страны
+        currencies: Валюты
+        customer: Клиент
+        customers: Клиенты
         dashboard: Приборная панель
+        emails: Emails
         general_settings: Общие настройки
         groups: Группы
         homepage: Вернуться к магазину
         locales: Языки
+        marketing: Маркетинг
+        menus: Элементы меню
         new_order: Создать заказ
         new_promotion: Создать рекламную акцию
         options: Настройка опций
@@ -54,14 +84,19 @@ sylius:
         routes: Маршруты
         payment_methods: Методы оплаты
         payments: Платежи
+        permissions: Права доступа
         products: Товары
         promotions: Рекламные акции
+        redirects: Перенаправления
+        report: Отчеты
         sales: Заказы
+        security_settings: Настройки безопасности
         shipments: Посылки
         shipping_categories: Категории доставки
         shipping_methods: Способы доставки
         slideshow: Слайд-шоу
         stockables: Уровень запасов
+        support: Поддержка
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
@@ -85,6 +120,8 @@ sylius:
         login: Вход
         logout: Выход
         register: Регистрация
+      sidebar:
+          links: Ссылкиьу
       social:
         facebook: Facebook
         github: GitHub
