@@ -1,0 +1,44 @@
+{
+    "name": "sylius/grid",
+    "type": "library",
+    "description": "PHP library to handle building grid of objects with fields and filters support.",
+    "keywords": ["shop", "ecommerce", "resource", "api", "sylius", "doctrine", "grid", "admin"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "sylius/resource": "0.17.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Grid\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Grid\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.17-dev"
+        }
+    }
+}

@@ -53,8 +53,7 @@ EOT;
 
         $this
             ->shouldThrow(InvalidConfigurationException::class)
-            ->during('load', [$configuration, 'sylius.resource'])
-        ;
+            ->during('load', [$configuration, 'sylius.resource']);
     }
 
     function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry)
@@ -68,8 +67,7 @@ EOT;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('load', [$configuration, 'sylius.resource'])
-        ;
+            ->during('load', [$configuration, 'sylius.resource']);
     }
 
     function it_generates_routing_based_on_resource_configuration(
@@ -82,7 +80,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -139,7 +138,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product_option')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product_option');
@@ -196,7 +196,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -254,7 +255,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -318,7 +320,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -391,7 +394,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -459,7 +463,8 @@ EOT;
         Route $indexRoute,
         Route $createRoute,
         Route $updateRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -502,7 +507,8 @@ EOT;
         RouteCollection $routeCollection,
         Route $indexRoute,
         Route $createRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -543,8 +549,7 @@ EOT;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('load', [$configuration, 'sylius.resource'])
-        ;
+            ->during('load', [$configuration, 'sylius.resource']);
     }
 
     function it_generates_routing_with_custom_redirect_if_specified(
@@ -637,24 +642,36 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
+            '_sylius' => [
+                'serialization_groups' => ['Default', 'Detailed']
+            ]
         ];
         $routeFactory->createRoute('/products/{id}', $showDefaults, [], [], '', [], ['GET'])->willReturn($showRoute);
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
+            '_sylius' => [
+                'serialization_groups' => ['Default']
+            ]
         ];
         $routeFactory->createRoute('/products/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
+            '_sylius' => [
+                'serialization_groups' => ['Default', 'Detailed']
+            ]
         ];
         $routeFactory->createRoute('/products/', $createDefaults, [], [], '', [], ['POST'])->willReturn($createRoute);
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
+            '_sylius' => [
+                'serialization_groups' => ['Default', 'Detailed']
+            ]
         ];
         $routeFactory->createRoute('/products/{id}', $updateDefaults, [], [], '', [], ['PUT', 'PATCH'])->willReturn($updateRoute);
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
@@ -668,6 +685,48 @@ EOT;
         $this->load($configuration, 'sylius.resource_api')->shouldReturn($routeCollection);
     }
 
+    function it_configures_grid_for_index_action_if_specified(
+        RegistryInterface $resourceRegistry,
+        MetadataInterface $metadata,
+        RouteFactoryInterface $routeFactory,
+        RouteCollection $routeCollection,
+        Route $indexRoute,
+        Route $createRoute
+    )
+    {
+        $resourceRegistry->get('sylius.product')->willReturn($metadata);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+        $metadata->getPluralName()->willReturn('products');
+        $metadata->getServiceId('controller')->willReturn('sylius.controller.product');
+
+        $routeFactory->createRouteCollection()->willReturn($routeCollection);
+
+        $configuration =
+<<<EOT
+alias: sylius.product
+only: ['create', 'index']
+grid: sylius_admin_product
+EOT;
+
+        $indexDefaults = array(
+            '_controller' => 'sylius.controller.product:indexAction',
+            '_sylius' => array(
+                'grid' => 'sylius_admin_product',
+            )
+        );
+        $routeFactory->createRoute('/products/', $indexDefaults, array(), array(), '', array(), array('GET'))->willReturn($indexRoute);
+        $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
+
+        $createDefaults = array(
+            '_controller' => 'sylius.controller.product:createAction'
+        );
+        $routeFactory->createRoute('/products/new', $createDefaults, array(), array(), '', array(), array('GET', 'POST'))->willReturn($createRoute);
+        $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
+
+        $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
+    }
+
     function it_generates_routing_with_custom_variables(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
@@ -678,7 +737,8 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    )
+    {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');

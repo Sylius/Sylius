@@ -83,6 +83,45 @@ EOT;
         $this->assertResponse($response, 'shipping_category/index_response', Response::HTTP_OK);
     }
 
+    public function testGetShippingCategoriesSortedListResponse()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/shipping_categories.yml');
+
+        $this->client->request('GET', '/api/shipping-categories/', ['sorting' => ['name' => 'asc']], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'shipping_category/sorted_index_response', Response::HTTP_OK);
+    }
+
+    public function testGetShippingCategoriesFilteredListByNameResponse()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/shipping_categories_for_filtering.yml');
+
+        $this->client->request('GET', '/api/shipping-categories/', ['criteria' => ['name' => 'heavy']], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'shipping_category/filtered_by_name_index_response', Response::HTTP_OK);
+    }
+
+    public function testGetShippingCategoriesFilteredListByCodeResponse()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/shipping_categories_for_filtering.yml');
+
+        $this->client->request('GET', '/api/shipping-categories/', ['criteria' => ['code' => 'SC1']], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'shipping_category/filtered_by_code_index_response', Response::HTTP_OK);
+    }
+
     public function testGetShippingCategoryAccessDeniedResponse()
     {
         $this->client->request('GET', '/api/shipping-categories/1');

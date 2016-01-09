@@ -1,0 +1,38 @@
+{
+    "name": "sylius/grid-bundle",
+    "type": "symfony-bundle",
+    "description": "Amazing grids with support of filters and custom fields integrated into Symfony.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "grid", "admin", "crud"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource-bundle": "0.14.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\GridBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
+        }
+    }
+}

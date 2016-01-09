@@ -58,8 +58,11 @@ sylius_api_tax_rate:
     prefix: /tax-rates
 
 sylius_api_shipping_category:
-    resource: @SyliusApiBundle/Resources/config/routing/shipping_category.yml
-    prefix: /shipping-categories
+    resource: |
+        alias: sylius.shipping_category
+        section: api
+        grid: sylius_admin_shipping_category
+    type: sylius.resource_api
 
 sylius_api_shipping_method:
     resource: @SyliusApiBundle/Resources/config/routing/shipping_method.yml

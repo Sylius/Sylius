@@ -47,6 +47,8 @@
         <service id="sylius.resource_controller.pagerfanta_representation_factory" class="%sylius.resource_controller.pagerfanta_representation_factory.class%" />
         <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%">
             <argument type="service" id="sylius.resource_controller.pagerfanta_representation_factory" />
+            <argument type="service" id="sylius.grid.provider" />
+            <argument type="service" id="sylius.grid.view_factory" />
         </service>
         <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">
             <argument type="service" id="form.factory" />

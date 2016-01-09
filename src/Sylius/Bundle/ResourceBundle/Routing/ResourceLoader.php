@@ -77,27 +77,27 @@ class ResourceLoader implements LoaderInterface
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
 
         if (in_array('index', $routesToGenerate)) {
-            $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', ['GET']);
+            $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
         }
 
         if (in_array('create', $routesToGenerate)) {
-            $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath.'new', 'create', $isApi ? ['POST'] : ['GET', 'POST']);
+            $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath . 'new', 'create', $isApi ? ['POST'] : ['GET', 'POST'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
         }
 
         if (in_array('update', $routesToGenerate)) {
-            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath.'{id}' : $rootPath.'{id}/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH']);
+            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . '{id}' : $rootPath . '{id}/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
         }
 
         if (in_array('show', $routesToGenerate)) {
-            $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', ['GET']);
+            $showRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'show', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
         }
 
         if (in_array('delete', $routesToGenerate)) {
-            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'delete', ['DELETE']);
+            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', array('DELETE'), $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
         }
 
@@ -137,12 +137,21 @@ class ResourceLoader implements LoaderInterface
      *
      * @return Route
      */
-    private function createRoute(MetadataInterface $metadata, array $configuration, $path, $actionName, array $methods)
+    private function createRoute(MetadataInterface $metadata, array $configuration, $path, $actionName, array $methods, $isApi = false)
     {
         $defaults = [
             '_controller' => $metadata->getServiceId('controller').sprintf(':%sAction', $actionName),
         ];
 
+        if ($isApi && 'index' === $actionName) {
+            $defaults['_sylius']['serialization_groups'] = ['Default'];
+        }
+        if ($isApi && in_array($actionName, ['show', 'create', 'update'])) {
+            $defaults['_sylius']['serialization_groups'] = ['Default', 'Detailed'];
+        }
+        if (isset($configuration['grid']) && 'index' === $actionName) {
+            $defaults['_sylius']['grid'] = $configuration['grid'];
+        }
         if (isset($configuration['form']) && in_array($actionName, ['create', 'update'])) {
             $defaults['_sylius']['form'] = $configuration['form'];
         }

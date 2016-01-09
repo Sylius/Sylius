@@ -822,3 +822,18 @@ sylius_review:
             reviewer:
                 classes:
                     model: %sylius.model.customer.class%
+
+sylius_grid:
+    grids:
+        sylius_admin_shipping_category:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.shipping_category.class%
+            sorting:
+                name: desc
+            filters:
+                name:
+                    type: string
+                code:
+                    type: string

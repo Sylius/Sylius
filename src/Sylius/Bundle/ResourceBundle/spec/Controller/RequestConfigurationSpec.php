@@ -473,10 +473,34 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('section')->willReturn('admin');
         $this->getSection()->shouldReturn('admin');
     }
-    
+
     function it_has_vars(Parameters $parameters)
     {
         $parameters->get('vars', [])->willReturn(['foo' => 'bar']);
         $this->getVars()->shouldReturn(['foo' => 'bar']);
+    }
+
+    function it_does_not_have_grid_unless_defined_as_in_parameters(Parameters $parameters)
+    {
+        $parameters->has('grid')->willReturn(false);
+        $this->shouldNotHaveGrid();
+
+        $parameters->has('grid')->willReturn(true);
+        $this->shouldHaveGrid();
+
+        $parameters->has('grid')->willReturn(true);
+        $parameters->get('grid')->willReturn('sylius_admin_tax_category');
+        
+        $this->getGrid()->shouldReturn('sylius_admin_tax_category');
+    }
+
+    function it_throws_an_exception_when_trying_to_retrieve_undefined_grid(Parameters $parameters)
+    {
+        $parameters->has('grid')->willReturn(false);
+
+        $this
+            ->shouldThrow(\LogicException::class)
+            ->during('getGrid')
+        ;
     }
 }

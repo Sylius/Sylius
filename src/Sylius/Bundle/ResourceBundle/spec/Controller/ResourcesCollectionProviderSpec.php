@@ -20,6 +20,11 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
+use Sylius\Component\Grid\Definition\Grid;
+use Sylius\Component\Grid\Parameters;
+use Sylius\Component\Grid\Provider\GridProviderInterface;
+use Sylius\Component\Grid\View\GridView;
+use Sylius\Component\Grid\View\GridViewFactoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -32,9 +37,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
-    function let(PagerfantaFactory $pagerfantaRepresentationFactory)
+    function let(PagerfantaFactory $pagerfantaRepresentationFactory, GridProviderInterface $gridProvider, GridViewFactoryInterface $gridViewFactory)
     {
-        $this->beConstructedWith($pagerfantaRepresentationFactory);
+        $this->beConstructedWith($pagerfantaRepresentationFactory, $gridProvider, $gridViewFactory);
     }
 
     function it_is_initializable()
@@ -53,6 +58,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $firstResource,
         ResourceInterface $secondResource
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
@@ -71,6 +77,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $secondResource,
         ResourceInterface $thirdResource
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
@@ -91,6 +98,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $firstResource
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
@@ -111,6 +119,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $queryParameters
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
@@ -142,6 +151,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         PagerfantaFactory $pagerfantaRepresentationFactory,
         PaginatedRepresentation $paginatedRepresentation
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
@@ -176,6 +186,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $queryParameters
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
@@ -207,6 +218,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         PagerfantaFactory $pagerfantaRepresentationFactory,
         PaginatedRepresentation $paginatedRepresentation
     ) {
+        $requestConfiguration->hasGrid()->willReturn(false);
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
@@ -226,6 +238,48 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $request->attributes = $requestAttributes;
         $requestAttributes->get('_route')->willReturn('sylius_product_index');
         $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
+
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(6)->shouldBeCalled();
+
+        $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
+    }
+
+    function it_creates_a_grid_view_if_needed(
+        Grid $grid,
+        GridProviderInterface $gridProvider,
+        GridView $gridView,
+        GridViewFactoryInterface $gridViewFactory,
+        Pagerfanta $paginator,
+        PagerfantaFactory $pagerfantaRepresentationFactory,
+        PaginatedRepresentation $paginatedRepresentation,
+        ParameterBag $queryParameters,
+        ParameterBag $requestAttributes,
+        RepositoryInterface $repository,
+        Request $request,
+        RequestConfiguration $requestConfiguration
+    )
+    {
+        $requestConfiguration->hasGrid()->willReturn(true);
+        $requestConfiguration->getGrid()->willReturn('sylius_admin_product');
+        $requestConfiguration->isHtmlRequest()->willReturn(false);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+
+        $request->query = $queryParameters;
+        $queryParameters->get('page', 1)->willReturn(6);
+        $queryParameters->all()->willReturn(array('foo' => 2, 'bar' => 15));
+
+        $request->attributes = $requestAttributes;
+        $requestAttributes->get('_route')->willReturn('sylius_product_index');
+        $requestAttributes->get('_route_params')->willReturn(array('slug' => 'foo-bar'));
+
+        $gridProvider->get('sylius_admin_product')->willReturn($grid);
+        $gridViewFactory->create($grid, Argument::type(Parameters::class))->willReturn($gridView);
+        $gridView->getData()->willReturn($paginator);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
         $paginator->setCurrentPage(6)->shouldBeCalled();
