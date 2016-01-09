@@ -3,6 +3,222 @@ UPGRADE
 
 ## From 0.16 to 0.17.x
 
+### Resource and SyliusResourceBundle 
+
+ * ResourceController has been rewritten from scratch but should maintain 100% of previous functionality;
+ * ``$this->config`` is no longer available and you should create it manually in every action;
+ 
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        return $this->render($this->config->getTemplate('custom.html'));
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        
+        return $this->render($configuration->getTemplate('custom.html'));
+    }
+}
+```
+
+ * Custom view handler has been introduced and ResourceController no longer extends FOSRestController:
+ 
+Before:
+ 
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        return $this->handleView($this->view(null, 204));
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        
+        return $this->viewHandler->handle($configuration, View::create(null, 204));
+    }
+}
+```
+
+ * DomainManager has been replaced with standard manager and also repository is injected into the controller;
+ 
+Before:
+ 
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+        
+        $this->domainManager->create($book);
+        $this->domainManager->update($book);
+        $this->domainManager->delete($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+        
+        $this->repository->add($book);
+        $this->manager->flush();
+        $this->repository->remove($book);
+    }
+}
+```
+
+ * ``getForm()`` has been removed in favor of properly injected service;
+ 
+Before:
+ 
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+        
+        $form = $this->getForm($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        
+        // ...
+        
+        $form = $this->resourceFormFactory->create($configuration, $book);
+    }
+}
+```
+
+ * Events are no longer dispatched by the removed "DomainManager". 
+ 
+Before:
+ 
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $this->domainManager->create($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+       
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $book);
+        $this->repository->add($book);
+        $event = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $book);
+    }
+}
+```
+
 ### Addressing and SyliusAddressingBundle
 
 * Extracted ``Country`` ISO code to name translation, from model to a twig extension: ``CountryNameExtension``;
