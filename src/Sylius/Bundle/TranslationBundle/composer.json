@@ -28,9 +28,9 @@
         "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "akeneo/phpspec-skip-example-extension": "~1.2",
-        "doctrine/orm": "~2.2",
+        "doctrine/orm": "^2.4.8,<2.5",
         "symfony/form": "^2.7",
         "symfony/validator": "^2.7"
     },

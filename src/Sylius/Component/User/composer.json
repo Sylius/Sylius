@@ -30,14 +30,14 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "doctrine/orm": "~2.3",
+        "doctrine/orm": "^2.4.8,<2.5",
         "sylius/resource": "0.16.*",
         "sylius/storage": "0.16.*",
         "symfony/security": "^2.7",
         "symfony/polyfill-mbstring": "~1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "^2.4"
     },
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"

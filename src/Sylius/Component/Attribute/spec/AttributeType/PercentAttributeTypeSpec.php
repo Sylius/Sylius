@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\AttributeType;
+namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -17,11 +17,11 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextareaAttributeTypeSpec extends ObjectBehavior
+class PercentAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\AttributeType\TextareaAttributeType');
+        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\PercentAttributeType');
     }
 
     function it_implements_attribute_type_interface()
@@ -31,11 +31,11 @@ class TextareaAttributeTypeSpec extends ObjectBehavior
 
     function its_storage_type_is_text()
     {
-        $this->getStorageType()->shouldReturn('text');
+        $this->getStorageType()->shouldReturn('float');
     }
 
     function its_type_is_text()
     {
-        $this->getType()->shouldReturn('textarea');
+        $this->getType()->shouldReturn('percent');
     }
 }

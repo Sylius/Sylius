@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AttributeBundle\AttributeType\CheckboxAttributeType;
-use Sylius\Bundle\AttributeBundle\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 
 /**

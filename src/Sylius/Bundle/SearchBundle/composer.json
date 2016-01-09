@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "doctrine/orm": "~2.3",
+        "doctrine/orm": "^2.4.8,<2.5",
         "friendsofsymfony/elastica-bundle": "~3.0.2",
         "sylius/channel": "0.16.*",
         "sylius/product-bundle": "0.16.*",
@@ -32,7 +32,7 @@
         "twig/twig": "~1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "sylius/taxonomy": "0.16.*"
     },
     "config": {

@@ -51,7 +51,7 @@
         "sylius/variation": "0.16.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "symfony/property-access": "^2.7"
     },
     "config": {

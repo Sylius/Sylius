@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\AttributeBundle\Factory\AttributeFactory;
+use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

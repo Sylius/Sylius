@@ -9,25 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\AttributeType;
+namespace Sylius\Component\Attribute\AttributeType;
 
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeType implements AttributeTypeInterface
+class DatetimeAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'date';
+    const TYPE = 'datetime';
 
     /**
      * {@inheritdoc}
      */
     public function getStorageType()
     {
-        return AttributeValueInterface::STORAGE_DATE;
+        return AttributeValueInterface::STORAGE_DATETIME;
     }
 
     /**

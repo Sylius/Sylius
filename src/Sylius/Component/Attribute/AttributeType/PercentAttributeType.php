@@ -9,25 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\AttributeType;
+namespace Sylius\Component\Attribute\AttributeType;
 
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeType implements AttributeTypeInterface
+class PercentAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'checkbox';
+    const TYPE = 'percent';
 
     /**
      * {@inheritdoc}
      */
     public function getStorageType()
     {
-        return AttributeValueInterface::STORAGE_BOOLEAN;
+        return AttributeValueInterface::STORAGE_FLOAT;
     }
 
     /**

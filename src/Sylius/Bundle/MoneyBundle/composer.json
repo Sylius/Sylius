@@ -27,7 +27,7 @@
         "symfony/intl": "^2.7"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.7",
         "twig/twig": "~1.0"
     },

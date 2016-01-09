@@ -35,12 +35,14 @@
         "php": "^5.5.9|^7.0",
 
         "sylius/user": "0.16.*",
+        "sylius/cart": "0.16.*",
         "sylius/resource-bundle": "0.16.*",
         "sylius/mailer-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "symfony/framework-bundle": "^2.7.5",
+        "hwi/oauth-bundle": "~0.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.7"
     },
     "config": {

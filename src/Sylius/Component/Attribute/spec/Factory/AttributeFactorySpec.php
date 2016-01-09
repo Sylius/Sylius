@@ -9,33 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\Factory;
+namespace spec\Sylius\Component\Attribute\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
-use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeFactorySpec extends ObjectBehavior
 {
-    function let(TranslatableFactory $factory, ServiceRegistryInterface $attributeTypesRegistry)
+    function let(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
         $this->beConstructedWith($factory, $attributeTypesRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Factory\AttributeFactory');
+        $this->shouldHaveType('Sylius\Component\Attribute\Factory\AttributeFactory');
     }
 
-    function it_implements_translatable_factory_interface()
+    function it_implements_attribute_factory_interface()
     {
-        $this->shouldImplement(TranslatableFactoryInterface::class);
+        $this->shouldImplement(AttributeFactoryInterface::class);
     }
 
     function it_creates_new_attribute($attributeTypesRegistry, $factory, Attribute $attribute, AttributeTypeInterface $attributeType)

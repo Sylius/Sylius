@@ -61,7 +61,7 @@
         "winzou/state-machine-bundle": "~0.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "^2.4",
         "fzaninotto/faker": "~1.2",
         "symfony/form": "^2.7",
         "lakion/api-test-case": "^1.0@dev",

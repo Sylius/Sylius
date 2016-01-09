@@ -23,10 +23,11 @@
         "php": "^5.5.9|^7.0",
 
         "sylius/resource": "0.16.*",
+        "sylius/registry": "0.16.*",
         "symfony/intl": "^2.7"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "^2.4"
     },
     "config": {
         "bin-dir": "bin"
