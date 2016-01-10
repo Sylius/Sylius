@@ -13,7 +13,6 @@ namespace Sylius\Bundle\SearchBundle\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PostFlushEventArgs;
 use FOS\ElasticaBundle\Persister\ObjectPersister;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -49,7 +48,7 @@ class ElasticaProductListener implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'postFlush',
+            'onFlush',
             'postPersist',
             'postUpdate',
             'postRemove',
@@ -80,10 +79,7 @@ class ElasticaProductListener implements EventSubscriber
         $this->update($eventArgs->getObject());
     }
 
-    /**
-     * @param PostFlushEventArgs $args
-     */
-    public function postFlush(PostFlushEventArgs $args)
+    public function onFlush()
     {
         if (!empty($this->scheduledForUpdate)) {
             $this->objectPersister->replaceMany($this->scheduledForUpdate);
