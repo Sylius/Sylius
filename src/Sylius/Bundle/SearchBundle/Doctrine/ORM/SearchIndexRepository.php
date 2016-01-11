@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -23,7 +23,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 class SearchIndexRepository extends EntityRepository
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $em;
 
@@ -33,10 +33,10 @@ class SearchIndexRepository extends EntityRepository
     private $productRepository;
 
     /**
-     * @param EntityManager     $em
+     * @param EntityManagerInterface $em
      * @param ProductRepository $productRepository
      */
-    public function __construct(EntityManager $em, ProductRepository $productRepository)
+    public function __construct(EntityManagerInterface $em, ProductRepository $productRepository)
     {
         $this->em = $em;
         $this->productRepository = $productRepository;

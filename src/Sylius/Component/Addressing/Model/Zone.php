@@ -95,7 +95,8 @@ class Zone implements ZoneInterface
      */
     public function setType($type)
     {
-        if (!in_array($type, self::getTypes())) {
+        $type = strtolower($type);
+        if (!in_array($type, self::getTypes(), true)) {
             throw new \InvalidArgumentException('Wrong zone type supplied.');
         }
 
