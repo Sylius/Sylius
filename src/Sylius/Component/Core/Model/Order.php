@@ -471,6 +471,18 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getPromotionSubjectQuantity()
+    {
+        $sum = 0;
+        foreach($this->items as $item){
+            $sum += $item->getQuantity();
+        }
+        return $sum;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrency()
     {
         return $this->currency;

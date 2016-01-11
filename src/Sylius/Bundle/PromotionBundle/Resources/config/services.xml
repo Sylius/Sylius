@@ -21,6 +21,8 @@
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.items_quantity.class">Sylius\Component\Promotion\Checker\ItemsQuantityRuleChecker</parameter>
+
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
 
         <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
@@ -58,6 +60,9 @@
         </service>
         <service id="sylius.promotion_rule_checker.item_count" class="%sylius.promotion_rule_checker.item_count.class%">
             <tag name="sylius.promotion_rule_checker" type="item_count" label="Item count" />
+        </service>
+        <service id="sylius.promotion_rule_checker.items_quantity" class="%sylius.promotion_rule_checker.items_quantity.class%">
+            <tag name="sylius.promotion_rule_checker" type="items_quantity" label="Items quantity" />
         </service>
 
         <service id="sylius.promotion_applicator" class="%sylius.promotion_applicator.class%">

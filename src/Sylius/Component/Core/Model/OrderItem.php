@@ -134,6 +134,14 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getPromotionSubjectQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
