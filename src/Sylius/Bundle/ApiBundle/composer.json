@@ -31,7 +31,7 @@
         "phpunit/phpunit": "~3.7",
         "sylius/fixtures-bundle": "0.16.*",
         "symfony/form": "^2.7",
-        "twig/twig": "~1.0"
+        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"

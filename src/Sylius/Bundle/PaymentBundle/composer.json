@@ -22,15 +22,13 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/payment": "0.16.*",
         "sylius/resource-bundle": "0.16.*",
         "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "doctrine/orm": "^2.4.8,<2.5",
-        "symfony/form": "^2.7"
+        "doctrine/orm": "^2.4.8,<2.5"
     },
     "config": {
         "bin-dir": "bin"

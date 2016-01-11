@@ -23,6 +23,7 @@
         "php": "^5.5.9|^7.0",
 
         "doctrine/doctrine-bundle": "~1.3",
+        "stof/doctrine-extensions-bundle": "~1.1",
         "friendsofsymfony/rest-bundle": "~1.5",
         "jms/serializer-bundle": "^0.13|^1.0",
         "sylius/resource": "0.16.*",
@@ -37,9 +38,11 @@
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "akeneo/phpspec-skip-example-extension": "~1.2",
-        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.4.8,<2.5",
-        "doctrine/phpcr-bundle": "~1.1",
+        "jackalope/jackalope": "^1.2",
+        "jackalope/jackalope-doctrine-dbal": "^1.2",
+        "doctrine/phpcr-odm": "^1.3",
         "sylius/rbac-bundle": "0.16.*",
         "sylius/translation-bundle": "0.16.*",
         "twig/twig": "~1.11"

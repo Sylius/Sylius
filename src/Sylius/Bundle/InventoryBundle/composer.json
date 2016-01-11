@@ -22,15 +22,14 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/inventory": "0.16.*",
         "sylius/resource-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "symfony/framework-bundle": "^2.7.5",
+        "symfony/validator": "^2.7.5"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "symfony/form": "^2.7",
-        "twig/twig": "~1.0"
+        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
