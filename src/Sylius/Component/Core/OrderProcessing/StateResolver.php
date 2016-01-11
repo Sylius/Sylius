@@ -37,12 +37,17 @@ class StateResolver implements StateResolverInterface
             foreach ($payments as $payment) {
                 if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
                     $completedPaymentTotal += $payment->getAmount();
+                } elseif (PaymentInterface::STATE_REFUNDED == $payment->getState()) {
+                    $completedPaymentTotal -= $payment->getAmount();
+                    $paymentState = PaymentInterface::STATE_PARTIALLY_REFUNDED;
                 }
             }
 
             if ($completedPaymentTotal >= $order->getTotal()) {
                 // Payment is completed if we have received full amount.
                 $paymentState = PaymentInterface::STATE_COMPLETED;
+            } elseif ($completedPaymentTotal <= 0 && $paymentState === PaymentInterface::STATE_PARTIALLY_REFUNDED) {
+                $paymentState = PaymentInterface::STATE_REFUNDED;
             } else {
                 // Payment is processing if one of the payment is.
                 if ($payments->exists(function ($key, $payment) {
