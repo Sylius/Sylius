@@ -30,6 +30,7 @@
         "sylius/storage": "0.16.*",
         "symfony/expression-language": "^2.7",
         "symfony/form": "^2.7",
+        "symfony/validator": "^2.7",
         "symfony/framework-bundle": "^2.7.5",
         "symfony/twig-bundle": "^2.7",
         "white-october/pagerfanta-bundle": "^1.0",

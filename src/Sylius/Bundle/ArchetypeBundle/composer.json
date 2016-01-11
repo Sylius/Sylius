@@ -32,7 +32,7 @@
         "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.7",
         "symfony/validator": "^2.7",
-        "doctrine/orm": "^2.4.8,<2.5",
+        "doctrine/orm": "^2.4.8,<2.5"
     },
     "config": {
         "bin-dir": "bin"

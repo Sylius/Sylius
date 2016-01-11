@@ -24,6 +24,7 @@
 
         "sylius/resource": "0.16.*",
         "sylius/translation": "0.16.*",
+        "sylius/registry": "0.16.*",
         "symfony/validator": "^2.7.7"
     },
     "require-dev": {
