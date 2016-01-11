@@ -26,13 +26,16 @@ class StockItemListener
      */
     private $stockItemFactory;
 
+    /**
+     * @param StockItemFactoryInterface $stockItemFactory
+     */
     public function __construct(StockItemFactoryInterface $stockItemFactory)
     {
         $this->stockItemFactory = $stockItemFactory;
     }
 
     /**
-     * {@inheritdoc}
+     * @param GenericEvent $event
      */
     public function createAllForStockable(GenericEvent $event)
     {
@@ -40,7 +43,7 @@ class StockItemListener
     }
 
     /**
-     * {@inheritdoc}
+     * @param GenericEvent $event
      */
     public function createAllForLocation(GenericEvent $event)
     {

@@ -22,7 +22,7 @@
                     <td>{{ stock_item.onHold }}</td>
                     <td>{{ stock_item.updatedAt|date }}</td>
                     <td>
-                        {#{{ buttons.show(path('sylius_backend_product_stock', {'id': stock_item.stockable.product.id}), 'Overview / Change'|trans) }}#}
+                        {{ buttons.show(path('sylius_backend_product_stock', {'id': stock_item.stockable.product.id}), 'Overview / Change'|trans) }}
                     </td>
                 </tr>
             {% endfor %}

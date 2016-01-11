@@ -10,7 +10,7 @@ sylius_backend_stock_movement_index:
             template: SyliusWebBundle:Backend/StockMovement:index.html.twig
             repository:
                 method: createByLocationPaginator
-                arguments: [$locationId]
+                arguments: [$locationId, $sorting]
             sortable: true
             sorting:
                 createdAt: desc

@@ -1,0 +1,22 @@
+<form method="post" action="{{ path('sylius_backend_product_stock', {'id': product.id}) }}">
+    {% set size = form.children.variant is defined ? 4 : 8 %}
+    <fieldset>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_row(form.quantity) }}
+            </div>
+            <div class="col-md-{{ size }}">
+                {{ form_row(form.location) }}
+            </div>
+            {% if form.children.variant is defined %}
+                <div class="col-md-4">
+                    {{ form_row(form.variant) }}
+                </div>
+            {% endif %}
+            {{ form_row(form._token) }}
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Modify stock"/>
+    </div>
+</form>

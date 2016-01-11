@@ -35,23 +35,24 @@ interface InventoryOperatorInterface
     /**
      * Hold stock for given stockable by quantity.
      *
-     * @param StockItemInterface $stockable
+     * @param StockItemInterface $stockItem
      * @param int                $quantity
      */
-    public function hold(StockItemInterface $stockable, $quantity);
+    public function hold(StockItemInterface $stockItem, $quantity);
 
     /**
      * Release stock for given stockable by quantity.
      *
-     * @param StockItemInterface $stockable
+     * @param StockItemInterface $stockItem
      * @param int                $quantity
      */
-    public function release(StockItemInterface $stockable, $quantity);
+    public function release(StockItemInterface $stockItem, $quantity);
 
     /**
      * Decrease stock by count of given inventory units.
      *
-     * @param StockableInterface[]|Collection $inventoryUnits
+     * @param StockItemInterface $stockItem
+     * @param int                $quantity
      */
-    public function decrease($inventoryUnits);
+    public function decrease(StockItemInterface $stockItem, $quantity);
 }

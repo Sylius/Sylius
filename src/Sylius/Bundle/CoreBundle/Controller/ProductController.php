@@ -17,6 +17,7 @@ use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductContr
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Product controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductController extends BaseProductController
@@ -241,6 +240,61 @@ class ProductController extends BaseProductController
                     'options'    => $options,
                 ),
             ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    public function stockAction(Request $request)
+    {
+        // TODO Consider using an special permission
+        //$this->isGrantedOr403('stock');
+
+        /** @var ProductInterface $product */
+        $product = $this->findOr404($request);
+
+        $form = $this->createForm('sylius_stock_movement', null, ['product' => $product]);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $data = $form->getData();
+
+            $quantity = $data['quantity'];
+
+            /** @var ProductVariantInterface $variant */
+            if (!isset($data['variant'])) {
+                $variant = $product->getMasterVariant();
+            } else {
+                $variant = $data['variant'];
+            }
+
+            $stockItem = $this->get('sylius.repository.stock_item')
+                ->findByStockableAndLocation($variant, $data['location']);
+
+            if (null === $stockItem) {
+                $stockItem = $this->get('sylius.factory.stock_item')
+                    ->createForLocation($variant, $data['location']);
+            }
+
+            $operator = $this->get('sylius.inventory_operator');
+
+            if ($quantity > 0) {
+                $operator->increase($stockItem, $quantity);
+            } else {
+                $operator->decrease($stockItem, -1 * $quantity);
+            }
+
+            $this->domainManager->update($product);
+
+            return $this->redirectHandler->redirectTo($product);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('stock.html.twig'))
+            ->setData([
+                'product'  => $product,
+                'form'     => $form->createView()
+            ])
         ;
 
         return $this->handleView($view);

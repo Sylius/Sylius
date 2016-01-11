@@ -22,6 +22,11 @@ interface StockableInterface extends StockItemsAwareInterface
     public function getSku();
 
     /**
+     * @param string $sku
+     */
+    public function setSku($sku);
+
+    /**
      * @return string
      */
     public function getInventoryName();
@@ -38,6 +43,11 @@ interface StockableInterface extends StockItemsAwareInterface
      * @return bool
      */
     public function isAvailableOnDemand();
+
+    /**
+     * @param $bool
+     */
+    public function setAvailableOnDemand($bool);
 
     /**
      * @return int

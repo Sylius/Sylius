@@ -143,6 +143,29 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * Get the product data for the stock page.
+     *
+     * @param integer $id
+     *
+     * @return null|ProductInterface
+     */
+    public function findForStockPage($id)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        return $this->getQueryBuilder()
+            ->addSelect('stockItem')
+            ->addSelect('stockLocation')
+            ->leftJoin('variant.stockItems', 'stockItem')
+            ->leftJoin('stockItem.stockLocation', 'stockLocation')
+            ->andWhere('product.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * Get the product data for the details page.
      *
      * @param int $id

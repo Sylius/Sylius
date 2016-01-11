@@ -177,6 +177,10 @@ sylius_inventory:
                 model: Sylius\Component\Core\Model\StockLocation
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\StockLocationType
+        stock_movement:
+            classes:
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\StockMovementType
         stockable:
             classes:
                 model: %sylius.model.product_variant.class%

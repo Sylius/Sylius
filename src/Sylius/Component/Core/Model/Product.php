@@ -101,8 +101,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setSku($sku)
     {
         $this->getMasterVariant()->setSku($sku);
-
-        return $this;
     }
 
     /**

@@ -110,7 +110,6 @@ sylius:
             depth: Depth
             height: Height
             images: Images
-            on_hand: Current stock
             price: Price
             original_price: Original price
             sku: SKU

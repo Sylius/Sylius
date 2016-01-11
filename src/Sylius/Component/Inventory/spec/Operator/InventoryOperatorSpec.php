@@ -13,8 +13,6 @@ namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperator;
@@ -53,50 +51,11 @@ class InventoryOperatorSpec extends ObjectBehavior
         $this->increase($stockItem, 5);
     }
 
-    function it_decreases_stockable_on_hand_by_count_of_sold_units(
-        $availabilityChecker,
-        $backordersHandler,
-        StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2
-    ) {
-        $inventoryUnit1->getStockable()->willReturn($stockable);
-        $inventoryUnit2->getStockable()->willReturn($stockable);
+    function it_decreases_stock_item_on_hand(StockItemInterface $stockItem)
+    {
+        $stockItem->getOnHand()->shouldBeCalled()->willReturn(5);
+        $stockItem->setOnHand(3)->shouldBeCalled();
 
-        $availabilityChecker->isStockSufficient($stockable, 2)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2))->shouldBeCalled();
-
-        $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
-        $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
-
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
-        $stockable->setOnHand(5)->shouldBeCalled();
-
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2));
-    }
-
-    function it_decreases_stockable_on_hand_and_ignores_backordered_units(
-        $availabilityChecker,
-        $backordersHandler,
-        StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2,
-        InventoryUnitInterface $inventoryUnit3
-    ) {
-        $inventoryUnit1->getStockable()->willReturn($stockable);
-        $inventoryUnit2->getStockable()->willReturn($stockable);
-        $inventoryUnit3->getStockable()->willReturn($stockable);
-
-        $availabilityChecker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))->shouldBeCalled();
-
-        $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
-        $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
-        $inventoryUnit3->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
-
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
-        $stockable->setOnHand(0)->shouldBeCalled();
-
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
+        $this->decrease($stockItem, 2);
     }
 }

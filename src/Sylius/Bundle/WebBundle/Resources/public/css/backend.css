@@ -169,6 +169,7 @@ form.form-signin .btn-success:hover {
 .table > tfoot > tr > td {
     border-color: #EEE;
 }
+.table > tbody > tr > .th,
 .table > thead > tr > th {
     vertical-align: middle;
     border-bottom-width: 1px;
@@ -625,4 +626,12 @@ form.form-signin .btn-success:hover {
 
 .content-block-overview i {
     font-size: 24px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
 }

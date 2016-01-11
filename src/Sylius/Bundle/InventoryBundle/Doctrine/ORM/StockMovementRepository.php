@@ -24,13 +24,22 @@ class StockMovementRepository extends EntityRepository implements StockMovementR
      *
      * @return \Pagerfanta\Pagerfanta
      */
-    public function createByLocationPaginator($locationId)
+    public function createByLocationPaginator($locationId, $sorting = array())
     {
         $queryBuilder = $this->getQueryBuilder()
             ->leftJoin($this->getPropertyName('stockItem'), 'stockItem')
             ->addSelect('stockItem')
             ->andWhere('stockItem.stockLocation = :stockLocation')
             ->setParameter('stockLocation', $locationId);
+
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = array();
+            }
+            $sorting['createdAt'] = 'desc';
+        }
+
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
