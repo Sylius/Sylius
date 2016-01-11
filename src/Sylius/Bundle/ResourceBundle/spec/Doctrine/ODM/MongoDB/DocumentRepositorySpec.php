@@ -21,6 +21,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @require Doctrine\ODM\MongoDB\DocumentManager
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */

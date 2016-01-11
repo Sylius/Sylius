@@ -39,7 +39,6 @@
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "akeneo/phpspec-skip-example-extension": "~1.2",
-        "mongofill/mongofill": "dev-master",
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.4.8,<2.5",
         "jackalope/jackalope": "^1.2",
