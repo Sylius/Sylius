@@ -6,7 +6,8 @@ php:
   - 7.0
 
 before_script:
-    - if [[ $TRAVIS_PHP_VERSION == "7.0" ]]; then echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
+    - echo "memory_limit=2048M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - phpenv config-rm xdebug.ini || true
     - composer install --no-interaction --prefer-source --ignore-platform-reqs
 
 script: bin/phpspec run -fpretty --verbose

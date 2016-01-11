@@ -30,6 +30,7 @@
         "sylius/storage": "0.16.*",
         "symfony/expression-language": "^2.7",
         "symfony/form": "^2.7",
+        "symfony/validator": "^2.7",
         "symfony/framework-bundle": "^2.7.5",
         "symfony/twig-bundle": "^2.7",
         "white-october/pagerfanta-bundle": "^1.0",
@@ -38,6 +39,7 @@
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "akeneo/phpspec-skip-example-extension": "~1.2",
+        "mongofill/mongofill": "dev-master",
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.4.8,<2.5",
         "jackalope/jackalope": "^1.2",
