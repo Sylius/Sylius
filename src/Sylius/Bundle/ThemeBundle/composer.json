@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "phpunit/phpunit": "^2.7",
+        "phpunit/phpunit": "^4.1",
         "twig/twig": "^1.0"
     },
     "config": {
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

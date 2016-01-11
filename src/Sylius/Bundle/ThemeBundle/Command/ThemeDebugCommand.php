@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusThemeDebugCommand extends ContainerAwareCommand
+class ThemeDebugCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -41,12 +41,12 @@ class SyliusThemeDebugCommand extends ContainerAwareCommand
         /** @var ThemeInterface[] $themes */
         $themes = $this->getContainer()->get('sylius.theme.repository')->findAll();
 
-        if (empty($themes)) {
-            $output->writeln("<error>There are no themes.</error>");
+        if (0 === count($themes)) {
+            $output->writeln('<error>There are no themes.</error>');
             return;
         }
 
-        $output->writeln("<question>Succesfully loaded themes:</question>");
+        $output->writeln('<question>Succesfully loaded themes:</question>');
 
         $table = new Table($output);
         $table->setHeaders(['Name', 'Slug', 'Path']);
@@ -55,7 +55,7 @@ class SyliusThemeDebugCommand extends ContainerAwareCommand
             $table->addRow([$theme->getName(), $theme->getSlug(), $theme->getPath()]);
         }
 
-        $table->setStyle("borderless");
+        $table->setStyle('borderless');
         $table->render();
     }
 }

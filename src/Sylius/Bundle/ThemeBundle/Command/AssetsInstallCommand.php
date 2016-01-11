@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command that places bundle web assets into a given directory.
+ * Command that places themes web assets into a given directory.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -33,13 +33,13 @@ class AssetsInstallCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('assets:install')
+            ->setName('sylius:assets:install')
             ->setDefinition([
                 new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
             ])
             ->addOption('symlink', null, InputOption::VALUE_NONE, 'Symlinks the assets instead of copying it')
             ->addOption('relative', null, InputOption::VALUE_NONE, 'Make relative symlinks')
-            ->setDescription('Installs bundles web assets under a public web directory')
+            ->setDescription('Installs themes web assets under a public web directory')
             ->setHelp($this->getHelpMessage())
         ;
     }
@@ -75,16 +75,15 @@ class AssetsInstallCommand extends ContainerAwareCommand
     private function getHelpMessage()
     {
         return <<<EOT
-The <info>%command.name%</info> command installs bundle assets into a given
+The <info>%command.name%</info> command installs theme assets into a given
 directory (e.g. the <comment>web</comment> directory).
 
   <info>php %command.full_name% web</info>
 
-A "bundles" directory will be created inside the target directory and the
-"Resources/public" directory of each bundle will be copied into it.
+A "themes" directory will be created inside the target directory.
 
-To create a symlink to each bundle instead of copying its assets, use the
-<info>--symlink</info> option (will fall back to hard copies when symbolic links aren't possible:
+To create a symlink to each theme instead of copying its assets, use the
+<info>--symlink</info> option (will fall back to hard copies when symbolic links aren't possible):
 
   <info>php %command.full_name% web --symlink</info>
 

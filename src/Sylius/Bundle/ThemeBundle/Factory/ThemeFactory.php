@@ -18,7 +18,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeFactory implements ThemeFactoryInterface
+final class ThemeFactory implements ThemeFactoryInterface
 {
     /**
      * @var string

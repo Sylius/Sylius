@@ -15,6 +15,7 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
+ * @author Fabien Potencier <fabien@symfony.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface FilesystemInterface
