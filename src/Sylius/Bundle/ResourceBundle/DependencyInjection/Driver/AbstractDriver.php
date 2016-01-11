@@ -155,11 +155,12 @@ abstract class AbstractDriver implements DriverInterface
 
                 default:
                     $validationGroupsParameterName = sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
-                    $validationGroups = new Parameter($validationGroupsParameterName);
 
                     if (!$container->hasParameter($validationGroupsParameterName)) {
-                        $validationGroups = array('Default');
+                        $container->setParameter($validationGroupsParameterName, array('Default'));
                     }
+
+                    $validationGroups = new Parameter($validationGroupsParameterName);
 
                     $definition->setArguments(array(
                         $metadata->getClass('model'),
