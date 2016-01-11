@@ -77,4 +77,11 @@ class ThemeSpec extends ObjectBehavior
         $this->setDescription("Lorem ipsum.");
         $this->getDescription()->shouldReturn("Lorem ipsum.");
     }
+
+    function it_has_code_based_on_md5ed_slug()
+    {
+        $this->setSlug('slug');
+
+        $this->getCode()->shouldReturn(substr(md5('slug'), 0, 8));
+    }
 }

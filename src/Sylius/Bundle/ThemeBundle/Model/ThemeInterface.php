@@ -67,4 +67,11 @@ interface ThemeInterface extends ResourceInterface
      * @param array $parentsSlugs
      */
     public function setParentsSlugs(array $parentsSlugs);
+
+    /**
+     * Should match /^[a-zA-Z0-9-_]{6,32}$/
+     *
+     * @return string
+     */
+    public function getCode();
 }

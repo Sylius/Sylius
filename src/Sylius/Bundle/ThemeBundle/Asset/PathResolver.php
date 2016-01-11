@@ -23,6 +23,6 @@ final class PathResolver implements PathResolverInterface
      */
     public function resolve($path, ThemeInterface $theme)
     {
-        return str_replace('bundles/', 'bundles/_theme/' . $theme->getSlug() . '/', $path);
+        return str_replace('bundles/', 'bundles/_' . $theme->getCode() . '/', $path);
     }
 }

@@ -42,6 +42,11 @@ class Theme implements ThemeInterface
     protected $parentsSlugs;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -79,6 +84,7 @@ class Theme implements ThemeInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        $this->code = substr(md5($slug), 0, 8);
     }
 
     /**
@@ -127,5 +133,13 @@ class Theme implements ThemeInterface
     public function setParentsSlugs(array $parentsSlugs)
     {
         $this->parentsSlugs = $parentsSlugs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }
