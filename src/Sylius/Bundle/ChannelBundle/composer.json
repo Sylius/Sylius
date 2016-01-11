@@ -29,7 +29,7 @@
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.7",
-        "twig/twig": "~1.0"
+        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"

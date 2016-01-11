@@ -29,8 +29,9 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
+        "doctrine/orm": "^2.4.8,<2.5",
         "symfony/form": "^2.7",
-        "twig/twig": "~1.0"
+        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
