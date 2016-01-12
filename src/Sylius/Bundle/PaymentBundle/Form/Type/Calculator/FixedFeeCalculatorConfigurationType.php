@@ -21,29 +21,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 class FixedFeeCalculatorConfigurationType extends AbstractType
 {
     /**
-     * @var CurrencyContext
-     */
-    private $currencyContext;
-
-    /**
-     * Constructor.
-     *
-     * @param CurrencyContext $currencyContext
-     */
-    public function __construct(CurrencyContext $currencyContext)
-    {
-        $this->currencyContext = $currencyContext;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('amount', 'sylius_money', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
-                'currency' => $this->currencyContext->getCurrency(),
+                'label' => 'sylius.form.payment_method.fee_calculator.fixed.amount',
             ))
         ;
     }
