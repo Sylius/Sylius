@@ -40,6 +40,9 @@ before_install:
 
     - composer self-update
 
+    # Add Github OAuth token to Composer config if that variable exists
+    - if [[ ! -z "$GITHUB_OAUTH_TOKEN" ]]; then composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1; fi
+
     - etc/travis/prepare-composer-doctrine-mongodb-odm
     - composer install --no-interaction --prefer-dist --no-scripts
 
@@ -58,8 +61,10 @@ before_script:
     - app/console assets:install --env=test_cached --no-debug
     - app/console assetic:dump --env=test_cached --no-debug
 
+    # Debug informations, PHP version & PHP configuration
+    # Its needed to remove the line with secret ariable, as it is listed in _SERVER variables
     - php -v
-    - php -i
+    - php -i | grep -v GITHUB_OAUTH_TOKEN
 
 script:
     - bin/phpspec run -f dot
