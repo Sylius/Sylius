@@ -61,3 +61,11 @@ It will ask you to implement the management of :ref:`component_attribute_model_a
    For more detailed information go to `Sylius API AttributeSubjectInterface`_.
 
 .. _Sylius API AttributeSubjectInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeSubjectInterface.html
+
+.. _component_attribute_model_attribute-type-interface:
+
+AttributeTypeInterface
+~~~~~~~~~~~~~~~~~~
+
+This interface should be implemented by models
+used for describing a product's attribute type.

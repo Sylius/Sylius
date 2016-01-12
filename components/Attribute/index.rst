@@ -12,4 +12,3 @@ and attach them to any object by implementing a simple interface.
    basic_usage
    models
    interfaces
-   attribute_types
