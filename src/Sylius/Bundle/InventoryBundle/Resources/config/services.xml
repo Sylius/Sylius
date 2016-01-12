@@ -31,6 +31,14 @@
         <parameter key="sylius.stock_location_provider.class">Sylius\Component\Inventory\Provider\StockLocationProvider</parameter>
         <!-- Validators -->
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
+        <!-- Quantifier -->
+        <parameter key="sylius.inventory.quantifier.class">Sylius\Component\Inventory\Quantifier\Quantifier</parameter>
+        <!-- Coordinator -->
+        <parameter key="sylius.inventory_coordinator.class">Sylius\Component\Inventory\Coordinator\Coordinator</parameter>
+        <!-- Packer -->
+        <parameter key="sylius.inventory.packer.class">Sylius\Component\Inventory\Packaging\Packer</parameter>
+        <parameter key="sylius.factory.package.class">Sylius\Component\Inventory\Packaging\PackageFactory</parameter>
+        <parameter key="sylius.factory.inventory_items.class">Sylius\Component\Inventory\Packaging\ItemsFactory</parameter>
     </parameters>
 
     <services>
@@ -78,6 +86,26 @@
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
-    </services>
 
+        <!-- Quantifier -->
+        <service id="sylius.inventory.quantifier" class="%sylius.inventory.quantifier.class%">
+            <argument type="service" id="sylius.repository.stock_item" />
+        </service>
+
+        <!-- Coordinator -->
+        <service id="sylius.inventory_coordinator" class="%sylius.inventory_coordinator.class%">
+            <argument type="service" id="sylius.stock_location_provider" />
+            <argument type="service" id="sylius.inventory.packer" />
+            <argument type="service" id="sylius.factory.inventory_items" />
+        </service>
+
+        <!-- Packer -->
+        <service id="sylius.factory.package" class="%sylius.factory.package.class%" />
+        <service id="sylius.factory.inventory_items" class="%sylius.factory.inventory_items.class%" />
+
+        <service id="sylius.inventory.packer" class="%sylius.inventory.packer.class%">
+            <argument type="service" id="sylius.factory.package" />
+            <argument type="service" id="sylius.repository.stock_item" />
+        </service>
+    </services>
 </container>
