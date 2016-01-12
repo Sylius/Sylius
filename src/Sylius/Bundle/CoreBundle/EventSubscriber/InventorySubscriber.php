@@ -14,6 +14,9 @@ class InventorySubscriber implements EventSubscriberInterface
         return array(
             SyliusStockItemEvents::POST_INCREASE => array(
                 array('syncVariantStockInfo', 0),
+            ),
+            SyliusStockItemEvents::POST_DECREASE => array(
+                array('syncVariantStockInfo', 0),
             )
         );
     }
