@@ -16,8 +16,8 @@ use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -56,7 +56,7 @@ class ValidAttributeValueValidatorSpec extends ObjectBehavior
         $attributeValue->getAttribute()->willReturn($attribute);
         $attribute->getConfiguration()->willReturn(array('min' => 2, 'max' => 255));
 
-        $attributeType->validate($attributeValue, Argument::any('Symfony\Component\Validator\Context\ExecutionContextInterface'), array('min' => 2, 'max' => 255))->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), array('min' => 2, 'max' => 255))->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }
