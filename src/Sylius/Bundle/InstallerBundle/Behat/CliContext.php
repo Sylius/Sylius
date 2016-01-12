@@ -18,7 +18,6 @@ use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
@@ -53,13 +52,13 @@ class CliContext extends DefaultContext
         'surname' => ' Surname',
         'e-mail' => ' test@email.com',
         'password' => ' pswd',
-        'confirmation' => ' pswd'
+        'confirmation' => ' pswd',
     );
 
     /**
      * @When /^I run a command "([^"]+)"$/
      */
-    public function iRunACommand($name, $parameters = array())
+    public function iRunACommand($name)
     {
         $this->application = new Application($this->getKernel());
         $this->application->add(new SetupCommand());
@@ -67,7 +66,7 @@ class CliContext extends DefaultContext
         $this->command = $this->application->find($name);
         $this->tester = new CommandTester($this->command);
 
-        $this->iExecuteCommandWithInputChoices($name, $parameters);
+        $this->iExecuteCommandWithInputChoices($name);
     }
 
     /**
@@ -83,7 +82,39 @@ class CliContext extends DefaultContext
      */
     public function iDoNotProvideCurrency()
     {
-        $this->inputChoices['currency'] = "";
+        $this->inputChoices['currency'] = '';
+    }
+
+    /**
+     * @Given I do not provide a name
+     */
+    public function iDoNotProvideName()
+    {
+        array_splice($this->inputChoices, 1, 0, '');
+    }
+
+    /**
+     * @Given I do not provide a surname
+     */
+    public function iDoNotProvideSurname()
+    {
+        array_splice($this->inputChoices, 2, 0, '');
+    }
+
+    /**
+     * @Given I do not provide an email
+     */
+    public function iDoNotProvideEmail()
+    {
+        array_splice($this->inputChoices, 3, 0, '');
+    }
+
+    /**
+     * @Given I do not provide a correct email
+     */
+    public function iDoNotProvideCorrectEmail()
+    {
+        array_splice($this->inputChoices, 3, 0, 'email');
     }
 
     /**
@@ -99,15 +130,16 @@ class CliContext extends DefaultContext
      */
     public function iProvideFullAdministratorData()
     {
-        $this->inputChoices['name'] = "AdminName";
-        $this->inputChoices['surname'] = "AdminSurname";
-        $this->inputChoices['e-mail'] = "test@admin.com";
-        $this->inputChoices['password'] = "pswd1$";
+        $this->inputChoices['name'] = 'AdminName';
+        $this->inputChoices['surname'] = 'AdminSurname';
+        $this->inputChoices['e-mail'] = 'test@admin.com';
+        $this->inputChoices['password'] = 'pswd1$';
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
     }
 
     /**
-     * @param $input
+     * @param string $input
+     *
      * @return resource
      */
     protected function getInputStream($input)
@@ -119,9 +151,12 @@ class CliContext extends DefaultContext
         return $stream;
     }
 
-    private function iExecuteCommandWithInputChoices($name, $parameters = array())
+    /**
+     * @param string $name
+     */
+    private function iExecuteCommandWithInputChoices($name)
     {
-        $fullParameters = array_merge(array('command' => $name), $parameters);
+        $fullParameters = array_merge(array('command' => $name));
         $this->dialog = $this->command->getHelper('dialog');
         $inputString = join("\n", $this->inputChoices);
         $this->dialog->setInputStream($this->getInputStream($inputString."\n"));

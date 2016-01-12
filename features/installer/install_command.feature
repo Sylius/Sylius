@@ -15,7 +15,7 @@ Feature: Sylius Install Feature
     Then I should see output "Adding US Dollar"
 
   Scenario: Choosing non-default currency
-    Given I provide currency 'GBP'
+    Given I provide currency "GBP"
     When I run a command "sylius:install:setup"
     Then I should see output "Adding British Pound Sterling"
 
@@ -23,3 +23,23 @@ Feature: Sylius Install Feature
     Given I provide full administrator data
     When I run a command "sylius:install:setup"
     Then I should see output "Administrator account successfully registered."
+
+  Scenario: Trying to register administrator account without name
+    Given I do not provide a name
+    When I run a command "sylius:install:setup"
+    Then I should see output "Your firstname: This value should not be blank"
+
+  Scenario: Trying to register administrator account without surname
+    Given I do not provide a surname
+    When I run a command "sylius:install:setup"
+    Then I should see output "Lastname: This value should not be blank"
+
+  Scenario: Trying to register administrator account without email
+    Given I do not provide an email
+    When I run a command "sylius:install:setup"
+    Then I should see output "E-Mail: This value should not be blank"
+
+  Scenario: Trying to register administrator account with an incorrect email
+    Given I do not provide a correct email
+    When I run a command "sylius:install:setup"
+    Then I should see output "E-Mail: This value is not a valid email address."

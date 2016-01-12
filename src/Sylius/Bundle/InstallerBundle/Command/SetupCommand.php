@@ -11,18 +11,16 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Intl\Exception\MethodNotImplementedException;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\Currency;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
 class SetupCommand extends AbstractInstallCommand
 {
     /**
@@ -140,6 +138,7 @@ EOT
 
         if (null !== $existingCurrency = $currencyRepository->findOneByCode($code)) {
             $this->currency = $existingCurrency;
+
             return;
         }
 
