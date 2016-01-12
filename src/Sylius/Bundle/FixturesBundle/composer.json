@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/core-bundle": "0.16.*"
+        "sylius/core-bundle": "0.17.*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
@@ -37,7 +37,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

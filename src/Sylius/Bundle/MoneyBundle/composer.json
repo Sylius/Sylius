@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource-bundle": "0.16.*",
+        "sylius/resource-bundle": "0.17.*",
         "symfony/framework-bundle": "^2.7.5",
         "symfony/intl": "^2.7"
     },
@@ -43,7 +43,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

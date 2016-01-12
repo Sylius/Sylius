@@ -109,7 +109,6 @@
         "sylius/cart-bundle": "self.version",
         "sylius/contact": "self.version",
         "sylius/contact-bundle": "self.version",
-        "sylius/content": "self.version",
         "sylius/content-bundle": "self.version",
         "sylius/core": "self.version",
         "sylius/core-bundle": "self.version",
@@ -141,7 +140,6 @@
         "sylius/report-bundle": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
-        "sylius/search": "self.version",
         "sylius/search-bundle": "self.version",
         "sylius/sequence": "self.version",
         "sylius/sequence-bundle": "self.version",
@@ -197,7 +195,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         },
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"

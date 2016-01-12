@@ -22,10 +22,10 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/archetype": "0.16.*",
-        "sylius/attribute-bundle": "0.16.*",
-        "sylius/resource-bundle": "0.16.*",
-        "sylius/variation-bundle": "0.16.*",
+        "sylius/archetype": "0.17.*",
+        "sylius/attribute-bundle": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "sylius/variation-bundle": "0.17.*",
         "symfony/framework-bundle": "^2.7.5"
     },
     "require-dev": {
@@ -46,7 +46,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }
