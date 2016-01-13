@@ -113,6 +113,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             'fieldName'    => 'translatable' ,
             'targetEntity' => $translatableResourceMetadata->getClass('model'),
             'inversedBy'   => 'translations' ,
+            'cascade'      => array('persist', 'merge', 'remove'),
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
                 'referencedColumnName' => 'id',
