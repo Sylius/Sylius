@@ -122,19 +122,24 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAdjustable(AdjustableInterface $adjustable = null)
     {
+        $this->assertNotLocked();
+
+        $currentAdjustable = $this->getAdjustable();
+        if ($currentAdjustable === $adjustable) {
+            return;
+        }
+
         $this->order = $this->orderItem = $this->orderItemUnit = null;
-
-        if ($adjustable instanceof OrderInterface) {
-            $this->order = $adjustable;
+        if (null !== $currentAdjustable) {
+            $currentAdjustable->removeAdjustment($this);
         }
 
-        if ($adjustable instanceof OrderItemInterface) {
-            $this->orderItem = $adjustable;
+        if (null === $adjustable) {
+            return;
         }
 
-        if ($adjustable instanceof OrderItemUnitInterface) {
-            $this->orderItemUnit = $adjustable;
-        }
+        $this->assignAdjustable($adjustable);
+        $adjustable->addAdjustment($this);
     }
 
     /**
@@ -187,17 +192,8 @@ class Adjustment implements AdjustmentInterface
         }
 
         $this->amount = $amount;
-        $this->recalculateAdjustable();
-    }
-
-    protected function recalculateAdjustable()
-    {
-        if (null !== $this->order) {
-            $this->order->recalculateAdjustmentsTotal();
-        } elseif (null !== $this->orderItem) {
-            $this->orderItem->recalculateAdjustmentsTotal();
-        } elseif (null !== $this->orderItemUnit) {
-            $this->orderItemUnit->recalculateAdjustmentsTotal();
+        if (!$this->isNeutral()) {
+            $this->recalculateAdjustable();
         }
     }
 
@@ -214,7 +210,12 @@ class Adjustment implements AdjustmentInterface
      */
     public function setNeutral($neutral)
     {
-        $this->neutral = (bool) $neutral;
+        $neutral = (bool) $neutral;
+
+        if ($this->neutral !== $neutral) {
+            $this->neutral = $neutral;
+            $this->recalculateAdjustable();
+        }
     }
 
     /**
@@ -239,8 +240,6 @@ class Adjustment implements AdjustmentInterface
     public function unlock()
     {
         $this->locked = false;
-
-        return $this;
     }
 
     /**
@@ -321,5 +320,41 @@ class Adjustment implements AdjustmentInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    private function recalculateAdjustable()
+    {
+        $adjustable = $this->getAdjustable();
+        if (null !== $adjustable) {
+            $adjustable->recalculateAdjustmentsTotal();
+        }
+    }
+
+    /**
+     * @param AdjustableInterface $adjustable
+     *
+     * @throws \InvalidArgumentException when adjustable class is not supported
+     */
+    private function assignAdjustable(AdjustableInterface $adjustable)
+    {
+        if ($adjustable instanceof OrderInterface) {
+            $this->order = $adjustable;
+        } elseif ($adjustable instanceof OrderItemInterface) {
+            $this->orderItem = $adjustable;
+        } elseif ($adjustable instanceof OrderItemUnitInterface) {
+            $this->orderItemUnit = $adjustable;
+        } else {
+            throw new \InvalidArgumentException('Given adjustable object class is not supported.');
+        }
+    }
+
+    /**
+     * @throws \LogicException when adjustment is locked
+     */
+    private function assertNotLocked()
+    {
+        if ($this->isLocked()) {
+            throw new \LogicException('Adjustment is locked and cannot be modified.');
+        }
     }
 }

@@ -103,10 +103,10 @@ class OrderItemUnit implements OrderItemUnitInterface
             return;
         }
 
-        $adjustment->setAdjustable($this);
         $this->adjustments->add($adjustment);
         $this->addToAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
+        $adjustment->setAdjustable($this);
     }
 
     /**
@@ -118,10 +118,10 @@ class OrderItemUnit implements OrderItemUnitInterface
             return;
         }
 
-        $adjustment->setAdjustable(null);
         $this->adjustments->removeElement($adjustment);
         $this->subtractFromAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
+        $adjustment->setAdjustable(null);
     }
 
     /**
