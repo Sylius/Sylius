@@ -14,11 +14,11 @@
     <tbody>
     {% for metadata in metadatas %}
         <tr>
-            <td><a href="{{ path('sylius_backend_metadata_show', { 'id': metadata.id }) }}">{{ metadata.id }}</a></td>
+            <td><a href="{{ path('sylius_backend_metadata_container_show', { 'id': metadata_container.id }) }}">{{ metadata_container.id }}</a></td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_metadata_customize', { 'id': metadata.id })) }}
-                {{ buttons.delete(path('sylius_backend_metadata_delete', { 'id': metadata.id })) }}
+                {{ buttons.edit(path('sylius_backend_metadata_container_customize', { 'id': metadata_container.id })) }}
+                {{ buttons.delete(path('sylius_backend_metadata_container_delete', { 'id': metadata_container.id })) }}
                 </div>
             </td>
         </tr>

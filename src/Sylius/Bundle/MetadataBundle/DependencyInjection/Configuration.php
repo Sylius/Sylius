@@ -11,7 +11,13 @@
 
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
+use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
+use Sylius\Component\Metadata\Factory\MetadataContainerFactory;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -40,8 +46,7 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -49,95 +54,43 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
-        $node
+        $resourcesBuilder = $node
+            ->fixXmlConfig('resource')
             ->children()
-                ->arrayNode('validation_groups')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('metadata')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('page_metadata')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('twitter_summary_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('twitter_summary_large_image_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('twitter_player_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('twitter_app_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
+        ;
+
+        $resourcesBuilder
+            ->arrayNode('metadata_container')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->variableNode('options')->end()
+                    ->arrayNode('classes')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('model')->defaultValue(MetadataContainer::class)->cannotBeEmpty()->end()
+                            ->scalarNode('interface')->defaultValue(MetadataContainerInterface::class)->cannotBeEmpty()->end()
+                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                            ->scalarNode('factory')->defaultValue(MetadataContainerFactory::class)->end()
+                            ->arrayNode('form')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('default')->defaultValue(MetadataContainerType::class)->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
-                ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('metadata')
+                    ->arrayNode('validation_groups')
                         ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\MetadataBundle\Model\RootMetadata')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('page_metadata')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\Custom\PageMetadata')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MetadataBundle\Form\Type\Custom\PageMetadataType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('twitter_summary_card')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\Twitter\SummaryCard')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MetadataBundle\Form\Type\Twitter\SummaryCardType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('twitter_summary_large_image_card')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\Twitter\SummaryLargeImageCard')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MetadataBundle\Form\Type\Twitter\SummaryLargeImageCardType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('twitter_player_card')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\Twitter\PlayerCard')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MetadataBundle\Form\Type\Twitter\PlayerCardType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('twitter_app_card')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Metadata\Model\Twitter\AppCard')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MetadataBundle\Form\Type\Twitter\AppCardType')->end()
+                        ->children()
+                            ->arrayNode('default')
+                                ->prototype('scalar')->end()
+                                ->defaultValue(array('sylius'))
                             ->end()
                         ->end()
                     ->end()

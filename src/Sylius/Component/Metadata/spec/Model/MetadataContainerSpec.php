@@ -12,24 +12,25 @@
 namespace spec\Sylius\Component\Metadata\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Metadata\Model\MetadataContainer;
 use Sylius\Component\Metadata\Model\MetadataInterface;
-use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 
 /**
- * @mixin \Sylius\Component\Metadata\Model\RootMetadata
+ * @mixin MetadataContainer
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RootMetadataSpec extends ObjectBehavior
+class MetadataContainerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Metadata\Model\RootMetadata');
+        $this->shouldHaveType('Sylius\Component\Metadata\Model\MetadataContainer');
     }
 
-    function it_implements_Root_Metadata_interface()
+    function it_implements_metadata_container_interface()
     {
-        $this->shouldImplement('Sylius\Component\Metadata\Model\RootMetadataInterface');
+        $this->shouldImplement(MetadataContainerInterface::class);
     }
 
     function it_has_id()

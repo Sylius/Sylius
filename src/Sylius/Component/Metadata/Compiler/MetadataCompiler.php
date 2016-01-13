@@ -16,7 +16,7 @@ use Sylius\Component\Metadata\Model\MetadataInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataCompiler implements MetadataCompilerInterface
+final class MetadataCompiler implements MetadataCompilerInterface
 {
     /**
      * {@inheritdoc}

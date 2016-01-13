@@ -7,11 +7,11 @@ Feature: Metadata management
   Background:
     Given store has default configuration
     And there are following options:
-      | name          | presentation | values           |
-      | T-Shirt color | Color        | Red, Blue, Green |
+      | code | name          | presentation | values                    |
+      | TSC  | T-Shirt color | Color        | Red[R], Blue[B], Green[G] |
     And the following products exist:
-      | name           | price | options       |
-      | Super T-Shirt  | 19.99 | T-Shirt color |
+      | code | name           | price | options       |
+      | STS  | Super T-Shirt  | 19.99 | T-Shirt color |
     And product "Super T-Shirt" is available in all variations
     And I am logged in as administrator
 

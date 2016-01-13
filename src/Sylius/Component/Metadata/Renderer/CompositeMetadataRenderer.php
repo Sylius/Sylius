@@ -16,21 +16,21 @@ use Sylius\Component\Metadata\Model\MetadataInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeMetadataRenderer implements MetadataRendererInterface
+final class CompositeMetadataRenderer implements MetadataRendererInterface
 {
     /**
      * @var MetadataRendererInterface[]
      */
-    protected $renderers = [];
+    private $renderers;
 
     /**
      * @param MetadataRendererInterface[] $renderers
      */
     public function __construct(array $renderers = [])
     {
-        foreach ($renderers as $renderer) {
-            $this->addRenderer($renderer);
-        }
+        $this->assertRenderersHaveCorrectType($renderers);
+
+        $this->renderers = $renderers;
     }
 
     /**
@@ -65,10 +65,19 @@ class CompositeMetadataRenderer implements MetadataRendererInterface
     }
 
     /**
-     * @param MetadataRendererInterface $renderer
+     * @param MetadataRendererInterface[] $renderers
      */
-    public function addRenderer(MetadataRendererInterface $renderer)
+    private function assertRenderersHaveCorrectType(array $renderers)
     {
-        $this->renderers[] = $renderer;
+        foreach ($renderers as $renderer) {
+            if ($renderer instanceof MetadataRendererInterface) {
+                continue;
+            }
+
+            throw new \InvalidArgumentException(sprintf(
+                'Metadata renderer should have type "%s"',
+                MetadataRendererInterface::class
+            ));
+        }
     }
 }

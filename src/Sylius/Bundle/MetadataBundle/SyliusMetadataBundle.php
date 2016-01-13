@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\DynamicFormsChoicesMapCompilerPass;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataHierarchyProviderCompilerPass;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -51,7 +52,7 @@ class SyliusMetadataBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return [
-            'Sylius\Component\Metadata\Model\RootMetadataInterface' => 'sylius.model.metadata.class',
+            MetadataContainerInterface::class => 'sylius.model.metadata_container.class',
         ];
     }
 

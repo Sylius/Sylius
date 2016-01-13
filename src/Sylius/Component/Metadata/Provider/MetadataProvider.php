@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Metadata\Compiler\MetadataCompilerInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
-use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -25,7 +25,7 @@ final class MetadataProvider implements MetadataProviderInterface
     /**
      * @var ObjectRepository
      */
-    private $rootMetadataRepository;
+    private $metadataContainerRepository;
 
     /**
      * @var MetadataCompilerInterface
@@ -38,17 +38,16 @@ final class MetadataProvider implements MetadataProviderInterface
     private $metadataHierarchyProvider;
 
     /**
-     * @param ObjectRepository $rootMetadataRepository
+     * @param ObjectRepository $metadataContainerRepository
      * @param MetadataCompilerInterface $metadataCompiler
      * @param MetadataHierarchyProviderInterface $metadataHierarchyProvider
      */
     public function __construct(
-        ObjectRepository $rootMetadataRepository,
+        ObjectRepository $metadataContainerRepository,
         MetadataCompilerInterface $metadataCompiler,
         MetadataHierarchyProviderInterface $metadataHierarchyProvider
-    )
-    {
-        $this->rootMetadataRepository = $rootMetadataRepository;
+    ) {
+        $this->metadataContainerRepository = $metadataContainerRepository;
         $this->metadataCompiler = $metadataCompiler;
         $this->metadataHierarchyProvider = $metadataHierarchyProvider;
     }
@@ -56,28 +55,28 @@ final class MetadataProvider implements MetadataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getMetadataBySubject(MetadataSubjectInterface $metadataSubject)
+    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject)
     {
         $identifiers = $this->metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject);
 
         $parents = [];
         $baseMetadata = null;
         foreach ($identifiers as $identifier) {
-            /** @var RootMetadataInterface $rootMetadata */
+            /** @var MetadataContainerInterface $metadataContainer */
             // TODO: Use find($identifier) after Resource refactoring (PR #2255)
-            $rootMetadata = $this->rootMetadataRepository->findOneBy(['id' => $identifier]);
+            $metadataContainer = $this->metadataContainerRepository->findOneBy(['id' => $identifier]);
 
-            if (null === $rootMetadata) {
+            if (null === $metadataContainer) {
                 continue;
             }
 
             if (null === $baseMetadata) {
-                $baseMetadata = $rootMetadata->getMetadata();
+                $baseMetadata = $metadataContainer->getMetadata();
 
                 continue;
             }
 
-            $parents[] = $rootMetadata->getMetadata();
+            $parents[] = $metadataContainer->getMetadata();
         }
 
         if (null === $baseMetadata) {

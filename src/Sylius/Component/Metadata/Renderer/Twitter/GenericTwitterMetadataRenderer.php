@@ -19,12 +19,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class GenericTwitterMetadataRenderer implements MetadataRendererInterface
+final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
 {
     /**
      * @var string[]
      */
-    protected $keysToNames = [
+    private $keysToNames = [
         'type' => 'twitter:card',
         'site' => 'twitter:site',
         'siteId' => 'twitter:site:id',
@@ -52,7 +52,7 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
     /**
      * @var OptionsResolver
      */
-    protected $optionsResolver;
+    private $optionsResolver;
 
     /**
      * @param OptionsResolver $optionsResolver
@@ -67,7 +67,7 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
      */
     public function render(MetadataInterface $metadata, array $options = [])
     {
-        return join("\n", $this->renderProperties(
+        return implode("\n", $this->renderProperties(
             $metadata,
             $this->optionsResolver->resolve($options)
         ));
@@ -85,7 +85,7 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
      * @param MetadataInterface $metadata
      * @param string $propertyKey
      */
-    protected function ensurePropertyIsKnown(MetadataInterface $metadata, $propertyKey)
+    private function ensurePropertyIsKnown(MetadataInterface $metadata, $propertyKey)
     {
         if (!isset($this->keysToNames[$propertyKey])) {
             throw new \InvalidArgumentException(sprintf(
@@ -102,7 +102,7 @@ class GenericTwitterMetadataRenderer implements MetadataRendererInterface
      *
      * @return array
      */
-    protected function renderProperties(MetadataInterface $metadata, array $options)
+    private function renderProperties(MetadataInterface $metadata, array $options)
     {
         $properties = array_replace_recursive(
             $options['defaults'],

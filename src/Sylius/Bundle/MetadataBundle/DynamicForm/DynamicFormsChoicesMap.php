@@ -14,21 +14,21 @@ namespace Sylius\Bundle\MetadataBundle\DynamicForm;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class DynamicFormsChoicesMap implements DynamicFormsChoicesMapInterface
+final class DynamicFormsChoicesMap implements DynamicFormsChoicesMapInterface
 {
     /**
      * Maps data class to form name.
      *
      * @var string[]
      */
-    protected $forms;
+    private $forms;
 
     /**
      * Maps form name to label.
      *
      * @var string[]
      */
-    protected $labels;
+    private $labels;
 
     /**
      * {@inheritdoc}

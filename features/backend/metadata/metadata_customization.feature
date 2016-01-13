@@ -17,7 +17,7 @@ Feature: Metadata customization
     When I fill in "Title" with "Lorem ipsum"
     And I fill in "Keywords" with "sylius, ecommerce"
     And I press "Save changes"
-    Then I should be on the page of metadata with id "FOO-BAR"
+    Then I should be on the page of metadata container with id "FOO-BAR"
     And I should see the following metadata:
       | Title       | Lorem ipsum       |
       | Keywords    | sylius, ecommerce |
@@ -44,7 +44,7 @@ Feature: Metadata customization
     And I select "Player" from "Twitter Card"
     And I fill in "Site" with "@sylius"
     And I press "Save changes"
-    Then I should be on the page of metadata with id "TWEET-IT"
+    Then I should be on the page of metadata container with id "TWEET-IT"
     And I should see the following metadata:
       | Title         | Lorem ipsum |
       | Twitter.Site  | @sylius     |
@@ -57,7 +57,7 @@ Feature: Metadata customization
     And I fill in "Site" with "@sylius"
     And I deselect "Twitter Card"
     And I press "Save changes"
-    Then I should be on the page of metadata with id "DEFAULT"
+    Then I should be on the page of metadata container with id "DEFAULT"
     And I should see the following metadata:
       | Title   | Lorem ipsum |
       | Twitter | <empty>     |
@@ -70,6 +70,6 @@ Feature: Metadata customization
     And I am customizing metadata with identifier "YOLO-616"
     When I deselect "Twitter Card"
     And I press "Save changes"
-    Then I should be on the page of metadata with id "YOLO-616"
+    Then I should be on the page of metadata container with id "YOLO-616"
     And I should see the following metadata:
       | Twitter | <empty>     |

@@ -24,5 +24,5 @@ interface MetadataProviderInterface
      *
      * @return MetadataInterface|null
      */
-    public function getMetadataBySubject(MetadataSubjectInterface $metadataSubject);
+    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject);
 }

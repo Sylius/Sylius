@@ -57,7 +57,7 @@ class PageMetadataType extends AbstractResourceType
                 'select' => [
                     'label' => 'sylius.metadata.page.twitter',
                     'required' => false,
-                    'placeholder' => 'sylius.metadata.twitter.type.none',
+                    'placeholder' => 'sylius.metadata.type.none',
                 ],
             ]
         );

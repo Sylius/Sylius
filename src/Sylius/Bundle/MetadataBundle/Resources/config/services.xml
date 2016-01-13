@@ -31,12 +31,6 @@
         <parameter key="sylius.metadata.provider.processed.class">Sylius\Component\Metadata\Provider\ProcessedMetadataProvider</parameter>
 
         <parameter key="sylius.metadata.hierarchy_provider.class">Sylius\Component\Metadata\HierarchyProvider\CompositeMetadataHierarchyProvider</parameter>
-
-        <parameter key="sylius.metadata.dynamic_form_choice_builder.class">Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormBuilder</parameter>
-        <parameter key="sylius.metadata.dynamic_forms_choices_map.class">Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormsChoicesMap</parameter>
-        <parameter key="sylius.metadata.form.type.dynamic_form_choice.class">Sylius\Bundle\MetadataBundle\DynamicForm\Type\DynamicFormChoiceType</parameter>
-
-        <parameter key="sylius.form.type.twitter_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\TwitterCardType</parameter>
     </parameters>
 
     <services>
@@ -64,7 +58,7 @@
         </service>
 
         <service id="sylius.metadata.renderer.custom_page" class="%sylius.metadata.renderer.custom_page.class%" public="false">
-            <argument type="service" id="sylius.metadata.renderer" />
+            <argument type="service" id="sylius.metadata.renderer.twitter" />
             <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
             <argument type="service" id="property_accessor" />
             <tag name="sylius.metadata_renderer" />
@@ -76,7 +70,7 @@
         </service>
 
         <service id="sylius.metadata.provider" class="%sylius.metadata.provider.class%" public="false">
-            <argument type="service" id="sylius.repository.metadata" />
+            <argument type="service" id="sylius.repository.metadata_container" />
             <argument type="service" id="sylius.metadata.compiler" />
             <argument type="service" id="sylius.metadata.hierarchy_provider" />
         </service>
@@ -88,59 +82,6 @@
 
         <service id="sylius.metadata.hierarchy_provider" class="%sylius.metadata.hierarchy_provider.class%">
             <argument type="collection" /> <!-- Metadata hierarchy provider array -->
-        </service>
-
-        <service id="sylius.metadata.dynamic_form_choice_builder" class="%sylius.metadata.dynamic_form_choice_builder.class%" public="false">
-            <argument type="service" id="sylius.metadata.dynamic_forms_choices_map" />
-            <argument type="service" id="property_accessor" />
-        </service>
-
-        <service id="sylius.metadata.dynamic_forms_choices_map" class="%sylius.metadata.dynamic_forms_choices_map.class%" public="false">
-            <argument type="collection" />
-        </service>
-
-        <service id="sylius.metadata.form.type.dynamic_form_choice" class="%sylius.metadata.form.type.dynamic_form_choice.class%">
-            <argument type="service" id="sylius.metadata.dynamic_forms_choices_map" />
-            <tag name="form.type" alias="sylius_dynamic_form" />
-        </service>
-
-        <service id="sylius.form.type.page_metadata" class="%sylius.form.type.page_metadata.class%">
-            <argument>%sylius.model.page_metadata.class%</argument>
-            <argument>%sylius.validation_group.page_metadata%</argument>
-            <argument type="service" id="sylius.metadata.dynamic_form_choice_builder" />
-            <tag name="form.type" alias="sylius_page_metadata" />
-        </service>
-
-        <service id="sylius.form.type.twitter_card" class="%sylius.form.type.twitter_card.class%">
-            <tag name="form.type" alias="sylius_twitter_card" />
-        </service>
-
-        <service id="sylius.form.type.twitter_summary_card" class="%sylius.form.type.twitter_summary_card.class%">
-            <argument>%sylius.model.twitter_summary_card.class%</argument>
-            <argument>%sylius.validation_group.twitter_summary_card%</argument>
-            <tag name="form.type" alias="sylius_twitter_summary_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.summary_card" class="%sylius.model.twitter_summary_card.class%" />
-        </service>
-
-        <service id="sylius.form.type.twitter_summary_large_image_card" class="%sylius.form.type.twitter_summary_large_image_card.class%">
-            <argument>%sylius.model.twitter_summary_large_image_card.class%</argument>
-            <argument>%sylius.validation_group.twitter_summary_large_image_card%</argument>
-            <tag name="form.type" alias="sylius_twitter_summary_large_image_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.summary_large_image_card" class="%sylius.model.twitter_summary_large_image_card.class%" />
-        </service>
-
-        <service id="sylius.form.type.twitter_player_card" class="%sylius.form.type.twitter_player_card.class%">
-            <argument>%sylius.model.twitter_player_card.class%</argument>
-            <argument>%sylius.validation_group.twitter_player_card%</argument>
-            <tag name="form.type" alias="sylius_twitter_player_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.player_card" class="%sylius.model.twitter_player_card.class%" />
-        </service>
-
-        <service id="sylius.form.type.twitter_app_card" class="%sylius.form.type.twitter_app_card.class%">
-            <argument>%sylius.model.twitter_app_card.class%</argument>
-            <argument>%sylius.validation_group.twitter_app_card%</argument>
-            <tag name="form.type" alias="sylius_twitter_app_card" />
-            <tag name="sylius.metadata.dynamic_form_choice" group="twitter" label="sylius.metadata.twitter.type.app_card" class="%sylius.model.twitter_app_card.class%" />
         </service>
     </services>
 

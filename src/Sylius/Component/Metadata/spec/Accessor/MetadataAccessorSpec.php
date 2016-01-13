@@ -47,7 +47,7 @@ class MetadataAccessorSpec extends ObjectBehavior
     ) {
         $propertyAccessor->getValue($metadata, 'property.path[0]')->shouldBeCalled()->willReturn('property value');
 
-        $metadataProvider->getMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn($metadata);
+        $metadataProvider->findMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn($metadata);
 
         $this->getProperty($metadataSubject, 'property.path[0]');
     }

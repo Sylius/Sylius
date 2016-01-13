@@ -14,7 +14,7 @@ namespace Sylius\Component\Metadata\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RootMetadata implements RootMetadataInterface
+class MetadataContainer implements MetadataContainerInterface
 {
     /**
      * @var string

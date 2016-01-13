@@ -23,7 +23,7 @@ abstract class AbstractMetadata implements MetadataInterface
      */
     public function merge(MetadataInterface $metadata)
     {
-        if (!$metadata instanceof self || !$this instanceof $metadata) {
+        if (!$metadata instanceof $this || !$this instanceof $metadata) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'You can only merge instances of the same classes. Tried to merge "%s" with "%s".',

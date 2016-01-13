@@ -16,21 +16,21 @@ use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeMetadataHierarchyProvider implements MetadataHierarchyProviderInterface
+final class CompositeMetadataHierarchyProvider implements MetadataHierarchyProviderInterface
 {
     /**
      * @var MetadataHierarchyProviderInterface[]
      */
-    protected $providers = [];
+    private $providers;
 
     /**
      * @param MetadataHierarchyProviderInterface[] $providers
      */
     public function __construct(array $providers = [])
     {
-        foreach ($providers as $provider) {
-            $this->addProvider($provider);
-        }
+        $this->assertProvidersHaveCorrectType($providers);
+
+        $this->providers = $providers;
     }
 
     /**
@@ -59,10 +59,19 @@ class CompositeMetadataHierarchyProvider implements MetadataHierarchyProviderInt
     }
 
     /**
-     * @param MetadataHierarchyProviderInterface $provider
+     * @param MetadataHierarchyProviderInterface[] $providers
      */
-    protected function addProvider(MetadataHierarchyProviderInterface $provider)
+    private function assertProvidersHaveCorrectType(array $providers)
     {
-        $this->providers[] = $provider;
+        foreach ($providers as $provider) {
+            if ($provider instanceof MetadataHierarchyProviderInterface) {
+                continue;
+            }
+
+            throw new \InvalidArgumentException(sprintf(
+                'Metadata hierarchy provider should have type "%s"',
+                MetadataHierarchyProviderInterface::class
+            ));
+        }
     }
 }

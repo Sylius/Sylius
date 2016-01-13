@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\MetadataBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RootMetadataFormType extends AbstractResourceType
+class MetadataContainerType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -35,6 +35,6 @@ class RootMetadataFormType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_metadata';
+        return 'sylius_metadata_container';
     }
 }

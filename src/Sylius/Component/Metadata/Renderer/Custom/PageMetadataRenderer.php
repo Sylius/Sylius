@@ -11,22 +11,22 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PageMetadataRenderer implements MetadataRendererInterface
+final class PageMetadataRenderer implements MetadataRendererInterface
 {
     /**
      * @var callable[]
      */
-    protected $subrenderers = [];
+    private $subrenderers = [];
 
     /**
      * @var MetadataRendererInterface
      */
-    protected $universalRenderer;
+    private $twitterRenderer;
 
     /**
      * @var OptionsResolver
      */
-    protected $optionsResolver;
+    private $optionsResolver;
 
     /**
      * @var PropertyAccessorInterface
@@ -34,13 +34,13 @@ class PageMetadataRenderer implements MetadataRendererInterface
     private $propertyAccessor;
 
     /**
-     * @param MetadataRendererInterface $universalRenderer
+     * @param MetadataRendererInterface $twitterRenderer
      * @param OptionsResolver $optionsResolver
      * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver, PropertyAccessorInterface $propertyAccessor)
+    public function __construct(MetadataRendererInterface $twitterRenderer, OptionsResolver $optionsResolver, PropertyAccessorInterface $propertyAccessor)
     {
-        $this->universalRenderer = $universalRenderer;
+        $this->twitterRenderer = $twitterRenderer;
         $this->optionsResolver = $this->configureOptionsResolver($optionsResolver);
         $this->propertyAccessor = $propertyAccessor;
 
@@ -52,7 +52,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      */
     public function render(MetadataInterface $metadata, array $options = [])
     {
-        return join("\n", $this->renderProperties(
+        return implode("\n", $this->renderProperties(
             $metadata,
             $this->optionsResolver->resolve($options)
         ));
@@ -72,7 +72,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      *
      * @return string
      */
-    protected function renderProperty($propertyKey, $propertyValue)
+    private function renderProperty($propertyKey, $propertyValue)
     {
         return $this->subrenderers[$propertyKey]($propertyValue, $propertyKey);
     }
@@ -81,7 +81,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      * @param string|string[] $propertyKeys
      * @param callable $subrenderer
      */
-    protected function addSubrenderer($propertyKeys, callable $subrenderer)
+    private function addSubrenderer($propertyKeys, callable $subrenderer)
     {
         if (!is_array($propertyKeys)) {
             $propertyKeys = [$propertyKeys];
@@ -98,7 +98,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      *
      * @throws \InvalidArgumentException If given property is unknown
      */
-    protected function ensurePropertyIsKnown(MetadataInterface $metadata, $propertyKey)
+    private function ensurePropertyIsKnown(MetadataInterface $metadata, $propertyKey)
     {
         if (!isset($this->subrenderers[$propertyKey])) {
             throw new \InvalidArgumentException(sprintf(
@@ -115,7 +115,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      *
      * @return array
      */
-    protected function renderProperties(MetadataInterface $metadata, array $options)
+    private function renderProperties(MetadataInterface $metadata, array $options)
     {
         $this->setDefaultValuesOnMetadata($metadata, $options['defaults']);
 
@@ -153,7 +153,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
         return $optionsResolver;
     }
 
-    protected function declareSubrenderers()
+    private function declareSubrenderers()
     {
         $this->addSubrenderer('title', function ($value) {
             return sprintf('<title>%s</title>', $value);
@@ -172,7 +172,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
         });
 
         $this->addSubrenderer('twitter', function ($value) {
-            return $this->universalRenderer->render($value);
+            return $this->twitterRenderer->render($value);
         });
     }
 
@@ -182,7 +182,7 @@ class PageMetadataRenderer implements MetadataRendererInterface
      *
      * @return MetadataInterface
      */
-    protected function setDefaultValuesOnMetadata(MetadataInterface $metadata, array $defaultValues)
+    private function setDefaultValuesOnMetadata(MetadataInterface $metadata, array $defaultValues)
     {
         foreach ($defaultValues as $propertyPath => $value) {
             if (null !== $this->propertyAccessor->getValue($metadata, $propertyPath)) {

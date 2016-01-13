@@ -3,13 +3,13 @@
 namespace Sylius\Bundle\MetadataBundle\Model;
 
 use Sylius\Component\Metadata\Model\MetadataInterface;
-use Sylius\Component\Metadata\Model\RootMetadata as BaseRootMetadata;
-use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\MetadataContainer as BaseMetadataContainer;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RootMetadata extends BaseRootMetadata implements RootMetadataInterface
+class MetadataContainer extends BaseMetadataContainer implements MetadataContainerInterface
 {
     /**
      * @var MetadataInterface

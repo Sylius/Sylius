@@ -1,17 +1,17 @@
 sylius:
     metadata:
+        type:
+            none: " - NONE - "
+            twitter_summary_card: Summary
+            twitter_summary_large_image_card: Summary with large image
+            twitter_player_card: Player
+            twitter_app_card: Application
         page:
             title: Title
             description: Description
             keywords: Keywords
             twitter: Twitter Card
         twitter:
-            type:
-                none: " - NO CARD - "
-                app_card: Application
-                player_card: Player
-                summary_card: Summary
-                summary_large_image_card: Summary with large image
             title: Title
             description: Description
             site: Site

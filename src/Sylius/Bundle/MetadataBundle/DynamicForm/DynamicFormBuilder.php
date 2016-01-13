@@ -20,17 +20,17 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class DynamicFormBuilder implements DynamicFormBuilderInterface
+final class DynamicFormBuilder implements DynamicFormBuilderInterface
 {
     /**
      * @var DynamicFormsChoicesMapInterface
      */
-    protected $dynamicFormsChildrenMap;
+    private $dynamicFormsChildrenMap;
 
     /**
      * @var PropertyAccessorInterface
      */
-    protected $propertyAccessor;
+    private $propertyAccessor;
 
     /**
      * @param DynamicFormsChoicesMapInterface $dynamicFormsChildrenMap

@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Metadata\Model\Custom\PageMetadata;
 use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
-use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Sylius\Component\Metadata\Model\Twitter\AppCard;
 use Sylius\Component\Metadata\Model\Twitter\CardInterface;
 use Sylius\Component\Metadata\Model\Twitter\PlayerCard;
@@ -53,7 +53,7 @@ class MetadataContext extends DefaultContext
      */
     public function iAmCustomizingMetadata($identifier = 'FooBar')
     {
-        $this->getSession()->visit($this->generateUrl('sylius_backend_metadata_customize', ['id' => $identifier]));
+        $this->getSession()->visit($this->generateUrl('sylius_backend_metadata_container_customize', ['id' => $identifier]));
     }
 
     /**
@@ -182,8 +182,8 @@ class MetadataContext extends DefaultContext
      */
     public function thereIsTheFollowingMetadata($metadataName, TableNode $table)
     {
-        /** @var RootMetadataInterface $metadata */
-        $metadata = $this->getRepository('metadata')->createNew();
+        /** @var MetadataContainerInterface $metadata */
+        $metadata = $this->getFactory('metadata_container')->createNew();
 
         $pageMetadata = new PageMetadata();
 
@@ -263,7 +263,7 @@ class MetadataContext extends DefaultContext
      */
     public function iDeselectSelectField($fieldName)
     {
-        $this->getSession()->getPage()->selectFieldOption($fieldName, "");
+        $this->selectOption($fieldName, "");
     }
 
     /**
@@ -290,6 +290,10 @@ class MetadataContext extends DefaultContext
     private function isItMetadataCustomizationPage(ElementInterface $element, $regexp)
     {
         $header = $element->find('css', '.page-header h1');
+
+        if (null === $header) {
+            return false;
+        }
 
         if (false === strpos($header->getText(), "Customizing metadata")) {
             return false;
@@ -349,7 +353,7 @@ class MetadataContext extends DefaultContext
      *
      * @return CardInterface
      */
-    protected function getTwitterCardFromString($value)
+    protected function createTwitterCardFromString($value)
     {
         switch (strtolower($value)) {
             case 'summary':
@@ -382,7 +386,7 @@ class MetadataContext extends DefaultContext
     protected function createNewMetadataObjectIfNeeded(PageMetadataInterface $pageMetadata, $key, $value)
     {
         if ('twitter.card' === strtolower($key)) {
-            $pageMetadata->setTwitter($this->getTwitterCardFromString($value));
+            $pageMetadata->setTwitter($this->createTwitterCardFromString($value));
 
             return true;
         }

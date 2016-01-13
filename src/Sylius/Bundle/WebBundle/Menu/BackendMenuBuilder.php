@@ -401,7 +401,7 @@ class BackendMenuBuilder extends MenuBuilder
 
         if ($this->rbacAuthorizationChecker->isGranted('sylius.metadata.index')) {
             $child->addChild('metadatas', array(
-                'route'           => 'sylius_backend_metadata_index',
+                'route'           => 'sylius_backend_metadata_container_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-file'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.metadatas', $section)));
         }

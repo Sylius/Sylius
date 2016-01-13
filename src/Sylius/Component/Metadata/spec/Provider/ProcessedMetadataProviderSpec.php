@@ -21,7 +21,7 @@ use Sylius\Component\Metadata\Compiler\MetadataCompilerInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
-use Sylius\Component\Metadata\Model\RootMetadataInterface;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 
 /**
  * @mixin \Sylius\Component\Metadata\Provider\ProcessedMetadataProvider
@@ -52,11 +52,11 @@ class ProcessedMetadataProviderSpec extends ObjectBehavior
         MetadataInterface $processedMetadata,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataProvider->getMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn($providedMetadata);
+        $metadataProvider->findMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn($providedMetadata);
 
         $metadataProcessor->process($providedMetadata, ['subject' => $metadataSubject])->shouldBeCalled()->willReturn($processedMetadata);
 
-        $this->getMetadataBySubject($metadataSubject)->shouldReturn($processedMetadata);
+        $this->findMetadataBySubject($metadataSubject)->shouldReturn($processedMetadata);
     }
 
     function it_does_not_process_returned_metadata_if_null(
@@ -64,10 +64,10 @@ class ProcessedMetadataProviderSpec extends ObjectBehavior
         MetadataProcessorInterface $metadataProcessor,
         MetadataSubjectInterface $metadataSubject
     ) {
-        $metadataProvider->getMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn(null);
+        $metadataProvider->findMetadataBySubject($metadataSubject)->shouldBeCalled()->willReturn(null);
 
         $metadataProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
-        $this->getMetadataBySubject($metadataSubject)->shouldReturn(null);
+        $this->findMetadataBySubject($metadataSubject)->shouldReturn(null);
     }
 }

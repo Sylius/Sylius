@@ -35,9 +35,9 @@ class MetadataProvider implements MetadataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getMetadataBySubject(MetadataSubjectInterface $metadataSubject)
+    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject)
     {
-        $metadata = $this->metadataProvider->getMetadataBySubject($metadataSubject);
+        $metadata = $this->metadataProvider->findMetadataBySubject($metadataSubject);
         if (null !== $metadata) {
             return $metadata;
         }

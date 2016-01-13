@@ -14,7 +14,7 @@ namespace Sylius\Component\Metadata\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface RootMetadataInterface
+interface MetadataContainerInterface
 {
     /**
      * @return string

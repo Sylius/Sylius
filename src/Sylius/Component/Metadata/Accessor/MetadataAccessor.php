@@ -18,17 +18,17 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataAccessor implements MetadataAccessorInterface
+final class MetadataAccessor implements MetadataAccessorInterface
 {
     /**
      * @var MetadataProviderInterface
      */
-    protected $metadataProvider;
+    private $metadataProvider;
 
     /**
      * @var PropertyAccessorInterface
      */
-    protected $propertyAccessor;
+    private $propertyAccessor;
 
     /**
      * @param MetadataProviderInterface $metadataProvider
@@ -45,7 +45,7 @@ class MetadataAccessor implements MetadataAccessorInterface
      */
     public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null)
     {
-        $metadata = $this->metadataProvider->getMetadataBySubject($metadataSubject);
+        $metadata = $this->metadataProvider->findMetadataBySubject($metadataSubject);
 
         if (null === $propertyPath) {
             return $metadata;

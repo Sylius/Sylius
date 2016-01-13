@@ -21,17 +21,17 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_metadata_index') }}">{{ 'sylius.breadcrumb.metadata.index'|trans }}</a></li>
-    <li>{{ metadata.id }}</li>
+    <li><a href="{{ path('sylius_backend_metadata_container_index') }}">{{ 'sylius.breadcrumb.metadata.index'|trans }}</a></li>
+    <li>{{ metadata_container.id }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_metadata_index'), 'sylius.metadata.manage'|trans) }}
-        {{ buttons.edit(path('sylius_backend_metadata_customize', { 'id': metadata.id })) }}
-        {{ buttons.delete(path('sylius_backend_metadata_delete', { 'id': metadata.id }), null, false, false) }}
+        {{ buttons.manage(path('sylius_backend_metadata_container_index'), 'sylius.metadata.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_metadata_container_customize', { 'id': metadata_container.id })) }}
+        {{ buttons.delete(path('sylius_backend_metadata_container_delete', { 'id': metadata_container.id }), null, false, false) }}
     </div>
     <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.metadata.show_header'|trans|raw }}</h1>
 </div>
@@ -45,8 +45,8 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ metadata.id }}</td>
-            <td>{{ _self.dataAsList(metadata.metadata.toArray()) }}</td>
+            <td>{{ metadata_container.id }}</td>
+            <td>{{ _self.dataAsList(metadata_container.metadata.toArray()) }}</td>
         </tr>
     </tbody>
 </table>
