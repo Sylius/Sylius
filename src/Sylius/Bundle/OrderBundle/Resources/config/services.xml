@@ -28,6 +28,7 @@
         <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
 
         <parameter key="sylius.aggregator.adjustments.class">Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregator</parameter>
+        <parameter key="sylius.twig.extension.aggregate_adjustments.class">Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension</parameter>
     </parameters>
 
     <services>
@@ -53,5 +54,9 @@
         </service>
 
         <service id="sylius.aggregator.adjustments" class="%sylius.aggregator.adjustments.class%" />
+        <service id="sylius.twig.extension.aggregate_adjustments" class="%sylius.twig.extension.aggregate_adjustments.class%" public="false">
+            <argument type="service" id="sylius.aggregator.adjustments" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>
