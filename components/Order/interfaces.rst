@@ -49,6 +49,20 @@ This interface should be implemented by model representing a single OrderItem.
 .. _Sylius API OrderItemInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemInterface.html
 
 
+.. _component_order_model_order-item-unit-interface:
+
+OrderItemUnitInterface
+~~~~~~~~~~~~~~~~~~~~~~
+
+This interface should be implemented by model representing a single OrderItemUnit.
+
+.. note::
+This interface extends the :ref:`component_order_model_adjustable-interface`, |br|
+    For more detailed information go to `Sylius API OrderItemUnitInterface`_.
+
+.. _Sylius API OrderItemUnitInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemUnitInterface.html
+
+
 .. _component_order_model_adjustment-interface:
 
 AdjustmentInterface
