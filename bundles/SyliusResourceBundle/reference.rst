@@ -18,6 +18,8 @@ Configuration Reference
                         choice: ~
                         foo: ~
                         bar: ~
+                options:
+                    object_manager: default
                 validation_groups:
                     default: [sylius]
                 translation:
