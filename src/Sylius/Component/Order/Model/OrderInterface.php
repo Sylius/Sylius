@@ -86,7 +86,7 @@ interface OrderInterface extends
      */
     public function getItemsTotal();
 
-    public function calculateItemsTotal();
+    public function recalculateItemsTotal();
 
     /**
      * @return int
@@ -97,7 +97,7 @@ interface OrderInterface extends
      * Calculate total.
      * Items total + Adjustments total.
      */
-    public function calculateTotal();
+    public function recalculateTotal();
 
     /**
      * Alias of {@link countItems()}.
