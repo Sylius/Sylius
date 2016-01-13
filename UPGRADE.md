@@ -5,9 +5,8 @@ UPGRADE
 
 ### Order and SyliusOrderBundle
 
-* Introduced ``OrderItemUnit``, which represents every single unit in ``Order``
-* Removed ``InventoryUnit``, as it's replaced by ``OrderItemUnit``, which can be used both as ``InventoryUnit`` and ``ShipmentItem``
-* Replace each usage of ``InventoryUnit`` with ``OrderItemUnit``
+* Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;
+* Replaced ``InventoryUnit`` with ``OrderItemUnit`` in the core. This entity will be used as ``InventoryUnit`` and ``ShipmentItem``;
 
 ## From 0.15.0 to 0.16.x
 
