@@ -26,6 +26,8 @@
         <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifier</parameter>
         <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
         <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
+
+        <parameter key="sylius.aggregator.adjustments.class">Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregator</parameter>
     </parameters>
 
     <services>
@@ -49,5 +51,7 @@
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="sylius.form.data_mapper.property_path" />
         </service>
+
+        <service id="sylius.aggregator.adjustments" class="%sylius.aggregator.adjustments.class%" />
     </services>
 </container>
