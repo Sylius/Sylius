@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Product\Model\Variant;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,7 +25,7 @@ class ProductVariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\ProductVariant');
+        $this->shouldHaveType(ProductVariant::class);
     }
 
     function it_implements_Sylius_product_variant_interface()
@@ -33,7 +35,7 @@ class ProductVariantSpec extends ObjectBehavior
 
     function it_extends_Sylius_product_variant_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
+        $this->shouldHaveType(Variant::class);
     }
 
     function it_should_not_have_price_by_default()
@@ -53,7 +55,8 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_price_should_be_mutable()
     {
-        $this->setPrice(499)->getPrice()->shouldReturn(499);
+        $this->setPrice(499);
+        $this->getPrice()->shouldReturn(499);
     }
 
     function its_original_price_should_be_mutable()
@@ -64,7 +67,8 @@ class ProductVariantSpec extends ObjectBehavior
 
     function its_price_should_accept_only_integer()
     {
-        $this->setPrice(410)->getPrice()->shouldBeInteger();
+        $this->setPrice(410);
+        $this->getPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));

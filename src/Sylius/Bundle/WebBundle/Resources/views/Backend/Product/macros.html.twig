@@ -96,6 +96,7 @@
                 {% if product.deleted %}
                     {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
                 {% else %}
+                {{ buttons.show(path('sylius_backend_product_stock', {'id': product.id}), 'sylius.product.stock'|trans) }}
                 {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
                 {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
                 {% endif %}

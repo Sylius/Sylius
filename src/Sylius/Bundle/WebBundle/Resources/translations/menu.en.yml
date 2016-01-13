@@ -47,6 +47,7 @@ sylius:
                 shipping_methods: Shipping methods
                 slideshow: Slideshow
                 stockables: Inventory levels
+                stock_locations: Stock locations
                 support: Support
                 taxation_settings: Taxation settings
                 taxonomies: Categorization
@@ -97,6 +98,7 @@ sylius:
                 shipping_methods: Shipping methods
                 slideshow: Slideshow
                 stockables: Inventory levels
+                stock_locations: Stock locations
                 support: Support
                 tax_categories: Taxation categories
                 tax_rates: Tax rates

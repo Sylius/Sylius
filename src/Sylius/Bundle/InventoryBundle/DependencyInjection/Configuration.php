@@ -11,12 +11,25 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController;
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockItemRepository;
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockLocationRepository;
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockMovementRepository;
+use Sylius\Bundle\InventoryBundle\Form\Type\StockItemType;
+use Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType;
+use Sylius\Bundle\InventoryBundle\Form\Type\StockMovementType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
+use Sylius\Component\Inventory\Factory\StockItemFactory;
+use Sylius\Component\Inventory\Factory\StockMovementFactory;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockItem;
+use Sylius\Component\Inventory\Model\StockLocation;
+use Sylius\Component\Inventory\Model\StockMovement;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -92,6 +105,15 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('factory')->defaultValue(InventoryUnitFactory::class)->end()
                                     ->end()
                                 ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('stockable')
@@ -104,6 +126,97 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_item')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(StockItem::class)->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                        ->scalarNode('repository')->defaultValue(StockItemRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(StockItemFactory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(StockItemType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_location')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(StockLocation::class)->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                        ->scalarNode('repository')->defaultValue(StockLocationRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(StockLocationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('stock_movement')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(StockMovement::class)->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                        ->scalarNode('repository')->defaultValue(StockMovementRepository::class)->end()
+                                        ->scalarNode('factory')->defaultValue(StockMovementFactory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(StockMovementType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

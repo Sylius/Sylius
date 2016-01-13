@@ -1,0 +1,11 @@
+sylius:
+  stock_location:
+    code:
+      not_blank: Please enter a code.
+      unique: This code is already used.
+      max_length: The code cannot be longer than {{ limit }} characters.
+      min_length: The code must be at least {{ limit }} characters long.
+    name:
+      not_blank: Please enter a name.
+      max_length: The name cannot be longer than {{ limit }} characters.
+      min_length: The name must be at least {{ limit }} characters long.

@@ -19,14 +19,38 @@
 
     <parameters>
         <parameter key="sylius.availability_checker.default.class">Sylius\Component\Inventory\Checker\AvailabilityChecker</parameter>
-        <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
-        <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
+        <!-- Operators -->
         <parameter key="sylius.backorders_handler.class">Sylius\Component\Inventory\Operator\BackordersHandler</parameter>
+        <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
+        <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
+        <!-- Listeners -->
         <parameter key="sylius.listener.inventory.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
+        <parameter key="sylius.listener.stock_item.class">Sylius\Bundle\InventoryBundle\EventListener\StockItemListener</parameter>
+        <parameter key="sylius.listener.stock_movement.class">Sylius\Bundle\InventoryBundle\EventListener\StockMovementListener</parameter>
+        <!-- Providers -->
+        <parameter key="sylius.stock_location_provider.class">Sylius\Component\Inventory\Provider\StockLocationProvider</parameter>
+        <!-- Validators -->
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
+        <!-- Quantifier -->
+        <parameter key="sylius.inventory.quantifier.class">Sylius\Component\Inventory\Quantifier\Quantifier</parameter>
+        <!-- Coordinator -->
+        <parameter key="sylius.inventory_coordinator.class">Sylius\Component\Inventory\Coordinator\Coordinator</parameter>
+        <!-- Packer -->
+        <parameter key="sylius.inventory.packer.class">Sylius\Component\Inventory\Packaging\Packer</parameter>
+        <parameter key="sylius.factory.package.class">Sylius\Component\Inventory\Packaging\PackageFactory</parameter>
+        <parameter key="sylius.factory.inventory_items.class">Sylius\Component\Inventory\Packaging\ItemsFactory</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
+            <argument>%sylius.backorders%</argument>
+        </service>
+
+        <!-- Operators -->
+        <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
+            <argument type="service" id="sylius.repository.inventory_unit" />
+        </service>
+
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
             <argument type="service" id="sylius.backorders_handler" />
             <argument type="service" id="sylius.availability_checker" />
@@ -35,22 +59,53 @@
 
         <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
 
-        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
-            <argument>%sylius.backorders%</argument>
-        </service>
-
-        <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
-            <argument type="service" id="sylius.repository.inventory_unit" />
-        </service>
-
+        <!-- Listeners -->
         <service id="sylius.listener.inventory" class="%sylius.listener.inventory.class%">
             <argument type="service" id="sylius.backorders_handler" />
         </service>
 
+        <service id="sylius.listener.stock_item" class="%sylius.listener.stock_item.class%">
+            <argument type="service" id="sylius.factory.stock_item" />
+            <tag name="kernel.event_listener" event="sylius.stockable.post_create" method="createAllForStockable" />
+            <tag name="kernel.event_listener" event="sylius.stock_location.post_create" method="createAllForLocation" />
+        </service>
+
+        <service id="sylius.listener.stock_movement" class="%sylius.listener.stock_movement.class%">
+            <argument type="service" id="sylius.factory.stock_movement" />
+            <tag name="kernel.event_listener" event="sylius.stock_item.post_increase" method="createStockMovememt" />
+            <tag name="kernel.event_listener" event="sylius.stock_item.post_decrease" method="createStockMovememt" />
+        </service>
+
+        <!-- Providers -->
+        <service id="sylius.stock_location_provider" class="%sylius.stock_location_provider.class%">
+            <argument type="service" id="sylius.repository.stock_location" />
+        </service>
+
+        <!-- Validators -->
         <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
-    </services>
 
+        <!-- Quantifier -->
+        <service id="sylius.inventory.quantifier" class="%sylius.inventory.quantifier.class%">
+            <argument type="service" id="sylius.repository.stock_item" />
+        </service>
+
+        <!-- Coordinator -->
+        <service id="sylius.inventory_coordinator" class="%sylius.inventory_coordinator.class%">
+            <argument type="service" id="sylius.stock_location_provider" />
+            <argument type="service" id="sylius.inventory.packer" />
+            <argument type="service" id="sylius.factory.inventory_items" />
+        </service>
+
+        <!-- Packer -->
+        <service id="sylius.factory.package" class="%sylius.factory.package.class%" />
+        <service id="sylius.factory.inventory_items" class="%sylius.factory.inventory_items.class%" />
+
+        <service id="sylius.inventory.packer" class="%sylius.inventory.packer.class%">
+            <argument type="service" id="sylius.factory.package" />
+            <argument type="service" id="sylius.repository.stock_item" />
+        </service>
+    </services>
 </container>

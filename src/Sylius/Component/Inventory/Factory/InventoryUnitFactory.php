@@ -34,7 +34,7 @@ class InventoryUnitFactory extends Factory implements InventoryUnitFactoryInterf
 
         $units = new ArrayCollection();
 
-        for ($i = 0; $i < $quantity; $i++) {
+        for ($i = 0; $i < $quantity; ++$i) {
             $inventoryUnit = $this->createNew();
             $inventoryUnit->setStockable($stockable);
             $inventoryUnit->setInventoryState($state);

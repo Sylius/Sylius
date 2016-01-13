@@ -15,6 +15,9 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
+use Sylius\Component\Inventory\Model\StockMovementInterface;
 
 /**
  * Flexible inventory management for Symfony2 applications.
@@ -30,7 +33,6 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
         );
     }
 
@@ -42,6 +44,9 @@ class SyliusInventoryBundle extends AbstractResourceBundle
         return array(
             InventoryUnitInterface::class => 'sylius.model.inventory_unit.class',
             StockableInterface::class     => 'sylius.model.stockable.class',
+            StockItemInterface::class     => 'sylius.model.stock_item.class',
+            StockLocationInterface::class => 'sylius.model.stock_location.class',
+            StockMovementInterface::class => 'sylius.model.stock_movement.class',
         );
     }
 

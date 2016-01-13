@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
@@ -22,7 +23,7 @@ class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
+        $this->shouldHaveType(InventoryUnit::class);
     }
 
     function it_implements_Sylius_inventory_unit_interface()
