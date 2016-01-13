@@ -1,6 +1,14 @@
 UPGRADE
 =======
 
+## From 0.16 to 0.17.x
+
+### Order and SyliusOrderBundle
+
+* Introduced ``OrderItemUnit``, which represents every single unit in ``Order``
+* Removed ``InventoryUnit``, as it's replaced by ``OrderItemUnit``, which can be used both as ``InventoryUnit`` and ``ShipmentItem``
+* Replace each usage of ``InventoryUnit`` with ``OrderItemUnit``
+
 ## From 0.15.0 to 0.16.x
 
 ### General
