@@ -63,10 +63,10 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
         $definition->setArguments(array(
             new Reference($metadata->getServiceId('manager')),
             $unitOfWorkDefinition,
-            $this->getClassMetadataDefinition($modelClass),
+            $this->getClassMetadataDefinition($metadata),
         ));
 
-        return $definition;
+        $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
 
     /**
