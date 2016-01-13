@@ -37,7 +37,7 @@ class Order implements OrderInterface
     /**
      * @var string
      */
-    protected $details;
+    protected $additionalInformation;
 
     /**
      * @var Collection|OrderItemInterface[]
@@ -583,16 +583,16 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDetails()
+    public function getAdditionalInformation()
     {
-        return $this->details;
+        return $this->additionalInformation;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDetails($details)
+    public function setAdditionalInformation($information)
     {
-        $this->details = $details;
+        $this->additionalInformation = $information;
     }
 }

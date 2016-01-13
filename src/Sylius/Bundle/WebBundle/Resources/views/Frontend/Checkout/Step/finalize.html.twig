@@ -131,10 +131,10 @@
     </tfoot>
 </table>
 
-{% if order.details is not empty %}
-    <div id="sylius-order-details" class="well well-sm">
-        <strong>{{ 'sylius.checkout.finalize.order.details'|trans }}</strong>:
-        {{ order.details }}
+{% if order.additionalInformation is not empty %}
+    <div id="sylius-order-additional-information" class="well well-sm">
+        <strong>{{ 'sylius.checkout.finalize.order.additional_information'|trans }}</strong>:
+        {{ order.additionalInformation }}
     </div>
 {% endif %}
 

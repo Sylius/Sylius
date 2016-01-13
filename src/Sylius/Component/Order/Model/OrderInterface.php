@@ -163,10 +163,10 @@ interface OrderInterface extends
     /**
      * @return string
      */
-    public function getDetails();
+    public function getAdditionalInformation();
 
     /**
-     * @param string $details
+     * @param string $information
      */
-    public function setDetails($details);
+    public function setAdditionalInformation($information);
 }

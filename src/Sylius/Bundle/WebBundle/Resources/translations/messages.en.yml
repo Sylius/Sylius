@@ -309,7 +309,7 @@ sylius:
                 tax_total: Tax total
                 taxes: Taxes
                 total: Total
-                details: Details
+                additional_information: Additional information
             order_item:
                 quantity: Qty
                 total: Total
@@ -523,6 +523,7 @@ sylius:
         create_header: New order
         created_at: Creation time
         details: Order details
+        additional_information: Additional information
         general_info: General info
         guest: Guest customer
         id: ID

@@ -18,9 +18,7 @@ class Version20160112125003 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX fulltext_search_idx ON sylius_search_index');
-        $this->addSql('CREATE INDEX fulltext_search_idx ON sylius_search_index (item_id)');
-        $this->addSql('ALTER TABLE sylius_order ADD details VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_order ADD additional_information VARCHAR(255) DEFAULT NULL');
     }
 
     /**
@@ -31,8 +29,6 @@ class Version20160112125003 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_order DROP details');
-        $this->addSql('DROP INDEX fulltext_search_idx ON sylius_search_index');
-        $this->addSql('CREATE FULLTEXT INDEX fulltext_search_idx ON sylius_search_index (value)');
+        $this->addSql('ALTER TABLE sylius_order DROP additional_information');
     }
 }
