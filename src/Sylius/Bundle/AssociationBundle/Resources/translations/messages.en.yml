@@ -1,4 +1,3 @@
----
 sylius:
     form:
         product_association:

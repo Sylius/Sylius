@@ -20,7 +20,6 @@ use Prophecy\Argument;
  */
 class AssociationTypeSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Association\Model\AssociationType');

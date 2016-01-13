@@ -51,6 +51,11 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
+            ->add('associations', 'collection', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
             ->add('options', 'sylius_product_option_choice', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)

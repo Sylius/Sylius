@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Association\Model\AssociationInterface as BaseAssociationInterface;
+
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

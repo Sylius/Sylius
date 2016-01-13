@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Product entity form type.
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class ProductEntityType extends AbstractType
@@ -26,6 +24,9 @@ class ProductEntityType extends AbstractType
      */
     private $className;
 
+    /**
+     * @param string $className
+     */
     public function __construct($className)
     {
         $this->className = $className;

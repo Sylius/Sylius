@@ -11,4 +11,3 @@ script: bin/phpspec run -fpretty --verbose
 notifications:
   email: "travis-ci@sylius.org"
   irc:   "irc.freenode.org#sylius-dev"
-

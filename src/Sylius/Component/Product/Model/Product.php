@@ -84,6 +84,11 @@ class Product extends AbstractTranslatable implements ProductInterface
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -491,10 +496,5 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function getAssociations()
     {
         return $this->associations->toArray();
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
     }
 }

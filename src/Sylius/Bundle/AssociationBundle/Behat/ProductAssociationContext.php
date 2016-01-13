@@ -43,13 +43,8 @@ class ProductAssociationContext extends DefaultContext
      */
     public function iShouldBeAbleToAddAssociationsToEveryProduct($typeName)
     {
-        $associatedProduct = $this
-            ->getRepository('Product')
-            ->createQueryBuilder('p')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult()
-       ;
+        $associatedProduct = $this->getRepository('Product')->findOneBy([]);
+
         $associationType = $this->getRepository('ProductAssociationType')->findOneBy(array('name' => $typeName));
         if (!$associationType instanceof AssociationTypeInterface) {
             throw new \InvalidArgumentException(sprintf('Association Type %s does not exists and it should', $typeName));

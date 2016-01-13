@@ -40,7 +40,6 @@ class ProductType extends AbstractResourceType
                 'by_reference' => false
             ))
             ->add('associations', 'collection', array(
-                'required'     => false,
                 'type'         => 'sylius_product_association',
                 'allow_add'    => true,
                 'allow_delete' => true,

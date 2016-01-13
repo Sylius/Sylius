@@ -18,15 +18,17 @@ namespace Sylius\Component\Association\Model;
 interface AssociationTypeInterface
 {
     /**
+     * @return int
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getName();
+
     /**
      * @param string $name
      */
     public function setName($name);
-    /**
-     * @return int
-     */
-    public function getId();
 }

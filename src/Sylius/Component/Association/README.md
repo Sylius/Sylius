@@ -1,5 +1,5 @@
-Archetype Component
-===================
+Association Component
+=====================
 
 The Sylius Association component efficiently manage product association for crosssell or upsell.
 
@@ -46,5 +46,5 @@ License can be found [here](https://github.com/Sylius/Association/blob/master/LI
 Authors
 -------
 
-The component was originally created by [Adam Elsodaney](http://archfizz.com).
+The component was originally created by [Łukasz Chruściel](lukasz.chrusciel@lakion.com), based on [Leszek Parabucki](leszek.prabucki@gmail.com) work.
 See the list of [contributors](https://github.com/Sylius/Association/contributors).
