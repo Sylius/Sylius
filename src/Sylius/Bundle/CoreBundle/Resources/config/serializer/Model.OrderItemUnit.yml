@@ -1,6 +1,6 @@
-Sylius\Component\Core\Model\InventoryUnit:
+Sylius\Component\Core\Model\OrderItemUnit:
     exclusion_policy: ALL
-    xml_root_name: inventory-unit
+    xml_root_name: order-item-unit
     relations:
         - rel: order
           href:

@@ -9,20 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
-
-use Sylius\Component\Inventory\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+namespace Sylius\Component\Order\Model;
 
 /**
- * Inventory unit interface.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface
+interface OrderItemUnitInterface extends AdjustableInterface
 {
     /**
-     * @return null|OrderItemInterface
+     * @return mixed
+     */
+    public function getId();
+
+    /**
+     * @return int
+     */
+    public function getTotal();
+
+    public function calculateTotal();
+
+    /**
+     * @return OrderItemInterface
      */
     public function getOrderItem();
 

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 
 /**
@@ -34,26 +35,4 @@ interface OrderItemInterface extends CartItemInterface, PromotionCountableSubjec
      * @param ProductVariantInterface $variant
      */
     public function setVariant(ProductVariantInterface $variant);
-
-    /**
-     * @return Collection|InventoryUnitInterface[]
-     */
-    public function getInventoryUnits();
-
-    /**
-     * @param InventoryUnitInterface $unit
-     */
-    public function addInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @param InventoryUnitInterface $unit
-     */
-    public function removeInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * @param InventoryUnitInterface $unit
-     *
-     * @return bool
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit);
 }

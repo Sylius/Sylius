@@ -42,6 +42,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="units" target-entity="Sylius\Component\Order\Model\OrderItemUnitInterface" mapped-by="orderItem" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 

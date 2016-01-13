@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -247,5 +248,27 @@ class OrderItemSpec extends ObjectBehavior
         $this
             ->shouldThrow(new \RuntimeException('Given item cannot be merged.'))
             ->duringMerge($item);
+    }
+
+    function it_can_be_immutable()
+    {
+        $this->setImmutable(true);
+        $this->isImmutable()->shouldReturn(true);
+    }
+
+    function it_adds_and_removes_units(OrderItemUnitInterface $unit1, OrderItemUnitInterface $unit2)
+    {
+        $this->getUnits()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $this->hasUnit($unit1)->shouldReturn(true);
+        $this->hasUnit($unit2)->shouldReturn(true);
+
+        $this->removeUnit($unit1);
+
+        $this->hasUnit($unit1)->shouldReturn(false);
+        $this->hasUnit($unit2)->shouldReturn(true);
     }
 }

@@ -1,6 +1,13 @@
 UPGRADE
 =======
 
+## From 0.16 to 0.17.x
+
+### Order and SyliusOrderBundle
+
+* Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;
+* Replaced ``InventoryUnit`` with ``OrderItemUnit`` in the core. This entity will be used as ``InventoryUnit`` and ``ShipmentItem``;
+
 ## From 0.15.0 to 0.16.x
 
 ### General

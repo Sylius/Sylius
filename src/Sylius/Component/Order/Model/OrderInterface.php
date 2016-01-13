@@ -38,7 +38,7 @@ interface OrderInterface extends
     const STATE_RETURNED    = 'returned';
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isCompleted();
 
@@ -65,7 +65,7 @@ interface OrderInterface extends
     public function setItems(Collection $items);
 
     /**
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -75,8 +75,6 @@ interface OrderInterface extends
     public function addItem(OrderItemInterface $item);
 
     /**
-     * Remove item from order.
-     *
      * @param OrderItemInterface $item
      */
     public function removeItem(OrderItemInterface $item);
@@ -84,28 +82,24 @@ interface OrderInterface extends
     /**
      * @param OrderItemInterface $item
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasItem(OrderItemInterface $item);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
-    /**
-     * Calculate items total based on the items
-     * unit prices and quantities.
-     */
     public function calculateItemsTotal();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -123,18 +117,15 @@ interface OrderInterface extends
     public function getTotalItems();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEmpty();
 
-    /**
-     * Clears all items in cart.
-     */
     public function clearItems();
 
     /**

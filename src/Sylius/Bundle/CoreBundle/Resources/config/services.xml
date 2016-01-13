@@ -187,7 +187,7 @@
         <!-- order processing -->
         <service id="sylius.order_processing.inventory_handler" class="%sylius.order_processing.inventory_handler.class%">
             <argument type="service" id="sylius.inventory_operator" />
-            <argument type="service" id="sylius.factory.inventory_unit" />
+            <argument type="service" id="sylius.factory.order_item_unit" />
             <argument type="service" id="sm.factory" />
         </service>
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
