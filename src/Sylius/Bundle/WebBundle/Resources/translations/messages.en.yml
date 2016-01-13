@@ -309,6 +309,7 @@ sylius:
                 tax_total: Tax total
                 taxes: Taxes
                 total: Total
+                details: Details
             order_item:
                 quantity: Qty
                 total: Total

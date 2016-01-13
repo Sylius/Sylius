@@ -35,6 +35,11 @@ class Order implements OrderInterface
     protected $number;
 
     /**
+     * @var string
+     */
+    protected $details;
+
+    /**
      * @var Collection|OrderItemInterface[]
      */
     protected $items;
@@ -477,6 +482,7 @@ class Order implements OrderInterface
             $this->identities->removeElement($identity);
         }
     }
+
     /**
      * {@inheritdoc}
      */
@@ -572,5 +578,21 @@ class Order implements OrderInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDetails($details)
+    {
+        $this->details = $details;
     }
 }

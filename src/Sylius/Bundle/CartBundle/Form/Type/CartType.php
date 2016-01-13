@@ -31,6 +31,7 @@ class CartType extends AbstractResourceType
             ->add('items', 'collection', array(
                 'type' => 'sylius_cart_item',
             ))
+            ->add('details')
         ;
     }
 

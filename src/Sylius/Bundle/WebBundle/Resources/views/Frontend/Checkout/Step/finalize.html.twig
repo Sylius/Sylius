@@ -131,6 +131,13 @@
     </tfoot>
 </table>
 
+{% if order.details is not empty %}
+    <div id="sylius-order-details" class="well well-sm">
+        <strong>{{ 'sylius.checkout.finalize.order.details'|trans }}</strong>:
+        {{ order.details }}
+    </div>
+{% endif %}
+
 <div class="form-horizontal">
     <div class="form-actions">
         {% if context.previousStep is not null %}

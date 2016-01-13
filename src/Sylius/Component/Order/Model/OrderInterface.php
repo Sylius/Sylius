@@ -159,4 +159,14 @@ interface OrderInterface extends
      * @return Collection|IdentityInterface[]
      */
     public function getIdentities();
+
+    /**
+     * @return string
+     */
+    public function getDetails();
+
+    /**
+     * @param string $details
+     */
+    public function setDetails($details);
 }
