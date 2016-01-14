@@ -60,11 +60,6 @@ interface OrderInterface extends
     public function getItems();
 
     /**
-     * @param Collection|OrderItemInterface[] $items
-     */
-    public function setItems(Collection $items);
-
-    /**
      * @return int
      */
     public function countItems();

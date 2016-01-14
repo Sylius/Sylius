@@ -105,7 +105,26 @@ class OrderItem implements OrderItemInterface
      */
     public function setOrder(OrderInterface $order = null)
     {
+        $currentOrder = $this->getOrder();
+        if ($currentOrder === $order) {
+            return;
+        }
+
+        $this->order = null;
+
+        if (null !== $currentOrder) {
+            $currentOrder->removeItem($this);
+        }
+
+        if (null === $order) {
+            return;
+        }
+
         $this->order = $order;
+
+        if (!$order->hasItem($this)) {
+            $order->addItem($this);
+        }
     }
 
     /**

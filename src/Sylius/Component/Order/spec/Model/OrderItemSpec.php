@@ -65,6 +65,14 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
+    function it_does_not_set_order_if_it_is_already_set(OrderInterface $order)
+    {
+        $this->setOrder($order);
+        $this->setOrder($order);
+
+        $order->addItem($this)->shouldBeCalledTimes(1);
+    }
+
     function it_has_quantity_equal_to_0_by_default()
     {
         $this->getQuantity()->shouldReturn(0);

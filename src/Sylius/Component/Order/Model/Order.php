@@ -181,17 +181,11 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems(Collection $items)
-    {
-        $this->items = $items;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clearItems()
     {
         $this->items->clear();
+
+        $this->calculateItemsTotal();
     }
 
     /**
@@ -211,10 +205,10 @@ class Order implements OrderInterface
             return;
         }
 
-        $item->setOrder($this);
         $itemTotal = $item->getTotal();
         $this->itemsTotal = $this->itemsTotal + $itemTotal;
         $this->items->add($item);
+        $item->setOrder($this);
 
         $this->calculateTotal();
     }
