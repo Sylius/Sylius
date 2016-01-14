@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 class ShippingMethodSpec extends ObjectBehavior
 {
@@ -42,5 +43,11 @@ class ShippingMethodSpec extends ObjectBehavior
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);
+    }
+
+    function its_tax_category_is_mutable(TaxCategoryInterface $category)
+    {
+        $this->setTaxCategory($category);
+        $this->getTaxCategory()->shouldReturn($category);
     }
 }
