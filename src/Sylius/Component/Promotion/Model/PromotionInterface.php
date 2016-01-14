@@ -16,11 +16,12 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface extends CodeAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
+interface PromotionInterface extends CodeAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface, ToggleableInterface
 {
     /**
      * @return string

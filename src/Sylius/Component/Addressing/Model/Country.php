@@ -13,6 +13,7 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -22,6 +23,8 @@ use Symfony\Component\Intl\Intl;
  */
 class Country implements CountryInterface
 {
+    use ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -38,11 +41,6 @@ class Country implements CountryInterface
      * @var Collection|ProvinceInterface[]
      */
     protected $provinces;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
 
     public function __construct()
     {
@@ -143,35 +141,4 @@ class Country implements CountryInterface
         return $this->provinces->contains($province);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enable()
-    {
-        $this->enabled = true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function disable()
-    {
-        $this->enabled = false;
-    }
 }

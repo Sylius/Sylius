@@ -226,6 +226,10 @@ class Coupon implements CouponInterface
             return false;
         }
 
+        if (!$this->promotion->isEnabled()) {
+            return false;
+        }
+
         return true;
     }
 }
